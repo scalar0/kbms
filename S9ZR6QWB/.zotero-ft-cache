@@ -1,0 +1,2440 @@
+Introduction to Geometric Control Theory
+Ugo Boscain, Dario Prandi, Mario Sigalotti
+February 16, 2022
+
+
+2
+
+
+Contents
+1 Introduction 7 1.0.1 The controlled pendulum . . . . . . . . . . . . . . . . . . . . . . . 10 1.0.2 A vehicle sliding on the ice, controlled by two fans . . . . . . . . . 12
+2 Manifolds, Vector fields, Brackets 17 2.1 Smooth differentiable manifolds . . . . . . . . . . . . . . . . . . . . . . . 17 2.2 Curves, tangent vectors . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20 2.3 Vector fields, flows, rectification . . . . . . . . . . . . . . . . . . . . . . . 22 2.3.1 Nonautonomous vector fields . . . . . . . . . . . . . . . . . . . . . 25 2.4 Lie Brackets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27 2.5 The Frobenius Theorem . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+3 Nonlinear controllability 31 3.1 Control systems as families of vector fields . . . . . . . . . . . . . . . . . 32 3.1.1 Affine control systems . . . . . . . . . . . . . . . . . . . . . . . . 33 3.2 The Krener Theorem: local accessibility . . . . . . . . . . . . . . . . . . 33 3.3 Symmetric systems . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35 3.4 Compatible vector fields . . . . . . . . . . . . . . . . . . . . . . . . . . . 36 3.4.1 Convexification . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37 3.4.2 Affine systems with recurrent drift . . . . . . . . . . . . . . . . . 40 3.4.3 Affine systems with non-recurrent drift . . . . . . . . . . . . . . . 43 3.5 Orbits and necessary conditions for controllability . . . . . . . . . . . . . 44
+4 Introduction to Optimal Control 47 4.1 The different steps to solve an optimal control problem . . . . . . . . . . 49 4.2 Existence of solutions for Optimal Control Problems: the Filippov test . 50 4.3 First order conditions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54 4.3.1 Why Lagrange multipliers appear in constrained problems . . . . 55
+5 The Pontryagin Maximum Principle (PMP): Formulation and Use 57 5.1 Statement of the Pontryagin Maximum Principle . . . . . . . . . . . . . 57 5.2 Use of the Pontryagin Maximum Principle . . . . . . . . . . . . . . . . . 59 5.2.1 Extremal and Optimal syntheses . . . . . . . . . . . . . . . . . . 61
+
+
+4 CONTENTS
+6 Proof of the PMP for Control Affine Systems with Quadratic Cost 63 6.1 Statement of the PMP for control affine systems with quadratic cost . . . 64 6.2 Proof of the Pontryagin Maximum Principle . . . . . . . . . . . . . . . . 65 6.2.1 Notation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66 6.2.2 The variation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67 6.2.3 The crucial step . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68 6.2.4 The Hamiltonian form . . . . . . . . . . . . . . . . . . . . . . . . 70
+7 Sub-Riemannian Geometry 75 7.1 Energy, length and existence of optimal trajectories . . . . . . . . . . . . 76 7.2 Minimizers . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 81
+8 Time-optimal Control on the Plane 85 8.1 Time optimal problems for linear systems . . . . . . . . . . . . . . . . . . 90
+Bibliographie 91
+
+
+CONTENTS 5
+Notation
+• The state space (a smooth differentiable manifold) is usually indicated with M. Points on M are usually indicated with q. Such q become x where we are fixing a system of coordinates.
+• Curves on M are usually indicated with γ or with q(·). The presence of the “(·)” is to avoid confusion between q (a point on the manifold) and q(·) (a curve).
+• Vector fields are usually indicated with a capital letter as F , X or V . The flow at time t of a vector field F is indicated with the exponential notation etF .
+• A control system is usually indicated as q ̇(t) = F (q(t), u(t)). Here u(·) : [0, ∞) → U is the control. Wen we write simply u we usually mean a fixed value of the control u ∈ U.
+
+
+6 CONTENTS
+
+
+Chapter 1
+Introduction
+Consider a dynamical system on a smooth connected manifold M of dimension n.
+{ q ̇(t) = F (q(t))
+q(0) = qin (1.1)
+The reader not used to the language of manifold can think of M as Rn or a smooth hypersurface embedded in Rn+1. We are going to give the formal definition of manifold in Chapter 2. The function F is called a vector field, and when it is sufficiently regular (as, for instance, when F is smooth), the problem (1.1) admits a unique local solution. Such a solution is a smooth curve q(·) : I → M, where I is an open interval of R (here for simplicity we assume that I = R). Hence, we can say that the set of points that can be reached from qin in positive time with solutions of (1.1), that is
+{q ̄ ∈ M | ∃ T ≥ 0 s.t. q(T ) = q ̄},
+is a one dimensional object (actually, it is a one dimensional manifold).
+qin
+q(t)
+Assume now that F depends on an m-dimensional parameter u = (u1, . . . , um) belonging to a subset of U of Rm. Here, we assume m < n, since this is the most common situation in practice and for clarity of presentation. Then, (1.1) becomes
+{ q ̇(t) = F (q(t), u), u ∈ U ⊂ Rm,
+q(0) = qin. (1.2)
+
+
+8 Chap. 1 – Introduction
+Since for every choice of u we have local existence and uniqueness of trajectories (that we denote by q(t; u)) we can expect that under suitable assumptions on U and on the dependence on u of F , the set of points that can be reached from qin with solutions of (1.2), that is {q ̄ ∈ M | ∃ T ≥ 0, u ∈ U s.t. q(T ; u) = q ̄},
+is an m + 1 dimensional object.
+q(t; u)
+qin
+We now let the parameter u to depend on time. Then, (1.2) becomes
+{ q ̇(t) = F (q(t), u(t)), u : [0, ∞) → U ⊂ Rm
+q(0) = qin (1.3)
+If we assume that u(·) has a reasonable dependence on time (e.g., Ll∞oc) then, for every fixed u(·) the problem (1.3) has still local existence and uniqueness of solutions. Such a solution (that we denote by q(t, u(·))) is a locally Lipschitz curve. We can finally formulate the main question.
+Q1 How large is the set of points that can be reached from qin by varying u(·)?
+R(qin) := {q ̄ ∈ Rn | ∃ T ≥ 0, u(·) : [0, T ] → U, s.t. q(T ; u(·)) = q ̄}.
+In particular is it possible to reach every point of M?
+Equation (1.3) is called a control system and question Q1 is the main question to which the theory of controllability (developed in Chapter 3) tries to answer. The function u(·) is called the control. The set R(qin) is called the reachable set starting from qin. The control usually models an external action on the dynamical system. For instance if F describes a mechanical system, u(·) could represent an external force. If F describes a quantum molecule u(·) could represent an external electric field. Of course, since u(·) varies on a (usually infinite-dimensional) functional space, one can expect that the set of points that can be reached from qin is quite large. However, as we will see this question is highly non-trivial.
+
+
+9
+qin
+q(t; u(·))
+Actually, although we are allowed to let the control u(·) to vary as a function of the time t, the equation q ̇(t) = F (q(t), u(t)) is a strong constraint on the admissible curves (i.e., locally Lipschitz curves for which there exists a control u(·) satisfying q ̇(t) = F (q(t), u(t)) for almost every t). Indeed, such a constraint is acting on the velocity: at almost every t we have that q ̇(t) belongs to the set F(q(t)) where F(q) := {F (q, v) | v ∈ U} is the set of admissible velocities at the point q, which is a subset of the TqM, the tangent space at q of M. The constraint q ̇(t) ∈ F(q(t))
+is called non-holonomic (in contrast with holonomic constraints, that are constraints on the position of the type q(t) ∈ N where N is a subset of M). The case in which there are no constraints is the case in which F(q) = TqM for every q ∈ M. In this case the control system is said to be a trivial control system and every trajectory in the chosen functional class (e.g. locally Lipschitz) is admissible. If for instance M = Rn, a trivial constraint is obtained with m = n, U = Rn, F (q, u) = u.
+Once the controllability question has been settled by proving that it is possible to steer qin to a point qfi, then one could try to find the most efficient way of doing it. For instance, one could try to go from qin to qfi in the shortest possible time or by minimizing the energy fed to the system via the controls. Such type of problems are usually modeled as the problem of minimizing an integral cost. More precisely, one would like to answer to the following question.
+Q2 Find a solution the following problem
+ 
+
+q ̇(t) = F (q(t), u(t)), u : [0, ∞) → U ⊂ Rm
+∫T
+0 L(q(t), u(t)) dt → min
+q(0) = qin, q(T ) = qfi.
+(1.4)
+Here, L is a sufficiently regular function from M × Rm to R, and the final time T > 0 could be fixed or free. Notice that the problem of minimizing the time corresponds to the choice L(q, u) = 1 for all q ∈ M and u ∈ U. Problem (1.4), is referred to as an optimal control problem. The study of these problems is the main subject of Chapters 4-8.
+
+
+10 Chap. 1 – Introduction
+Observe that if M = Rn and the control system is trivial then problem (1.4) is a standard problem of calculus of variations:
+ 
+
+q ̇(t) = u(t), u : [0, ∞) → Rn
+∫T
+0 L(q(t), u(t)) dt → min
+q(0) = qin, q(T ) = qfi
+(1.5)
+More in general on a manifold, a problem of optimal control with a trivial control system (i.e., a problem of calculus of variations on a manifold) is
+{ ∫T
+0 L(q(t), q ̇(t)) dt → min
+q(0) = qin, q(T ) = qfi
+(1.6)
+A problem of optimal control can thus be seen as a problem of calculus of variations subject to non-holonomic constraints, since we have in addition the constraint q ̇(t) = F (q(t), u(t)).
+It is interesting to notice that there are classical subjects of differential geometry that can be reduced to a problem of optimal control. For instance the problem of finding the geodesics in a Riemannian manifold can be formulated as an optimal control problem. An important generalization of Riemannian geometry (called sub-Riemannian geometry) is presented in Chapter 7.
+There are many other questions that are treated in control theory that will not be treated in these lectures. For instance once that the controllability question has been solved and we know that the point qfi is reacheable from qin one would like to have an explicit expression of a control function steering qin to qfi. This is usually called the motion planning question.
+Another typical question that one would like to solve is the question of stabilizability. Consider the control system (1.3) and assume that there exists an equilibrium point, i.e., (qin, u0) ∈ M × U such that F (qin, u0)=0. Does it exist a function K : M → U , with K(qin) = u0, such that the dynamical system
+q(t) = F (q(t), K(q(t))), (1.7)
+is asymptotically stable at qin? For this question one usually looks for a regular enough function K to avoid problems of existence and uniqueness of solutions of (1.7). The function K is called a feedback control.
+We continue this introduction by providing two examples.
+1.0.1 The controlled pendulum
+Consider a stiff arm of length l with attached a mass m, turning in a vertical plane around an horizontal axis. Assume moreover that the latter is equipped with an engine
+
+
+11
+delivering a variable couple which we can choose arbitrarily at every time, but which is bounded. That is, we are acting with on the mass with a (time-dependent) force
+u(·) : [0, ∞) → [−umax, umax],
+that is our control. The geometric position of the system is described by an angle θ ∈ S1, the unit circle. The dynamics of the system is obtained from the second Newton law in the curvilinear coordinate lθ:
+mlθ ̈(t) = −mg sin θ(t) + u(t), (1.8)
+where g the acceleration due to gravity.
+l
+θ(t)
+u(t)
+mg mg sin θ(t)
+m
+Although the constants which intervene in this problem play a dominant role in practice, we shall suppose for simplicity that m = l = g = 1. The dynamics of the arm is thus reduced to
+θ ̈(t) = − sin θ(t) + u(t). (1.9)
+To recast this second order differential equation as a first order system (as in (1.3)),
+we introduce a new variable ω(t) = θ ̇(t). Equation (1.9) then becomes
+{ θ ̇(t) = ω,
+ω ̇ (t) = − sin θ(t) + u(t). (1.10)
+The above equation has the form (1.3) with M = S1 × R, q = (θ, ω) and
+F (q, u) =
+(ω
+− sin(θ) + u
+)
+.
+
+
+12 Chap. 1 – Introduction
+When u ≡ 0, the points (0, 0) and (π, 0) are respectively the point of stable and unstable equilibrioum of the pendulum. The controllability question, when starting from the configuration of stable equilib
+rium qin = (0, 0), is then: “for every value qfi = (θ ̄, ω ̄) is it possible to find a time T and control u(·) : [0, T ] → [−umax, umax] such that the solution of (1.10), that at time zero is
+in qin = (0, 0), reaches qfi = (θ ̄, ω ̄) at time T ? The answer to this question is yes. However, as one can immagine, its proof is not completely trivial. It will be given in Chapter (3) and it will use following two facts:
+• when u = 0 almost every trajectory is periodic (this is a consequence of conservation of energy which implies that every trajectory should stay in a level sets of H =
+1
+2 ω2 − cos(θ))
+θ
+−π π
+H =1
+H =0
+H ∈ (0, 1)
+H>1
+ω
+• evolving for time s with the control u(t) ≡ umax and then for time s with the control u(t) ≡ −umax is not the same than doing the evolution in opposite order. In this case, we say that the two vector fields F (q, umax) and F (q, −umax) do not commute.
+An example of optimal control question on this system is: “find the control steering (0, 0),
+to (θ ̄, ω ̄) in minimum time”. Such a question is complicated. It can be solved with the techniques developed in Chapter 8, however the details will not be given in these notes.
+1.0.2 A vehicle sliding on the ice, controlled by two fans
+To illustrate why the presence of noncommuting dynamics is crucial in the controllabilitiy problem, we consider another example which is particularly intuitive.
+
+
+13
+Consider a vehicle sliding on the ice. The state space of the vehicle is R2 × S1: the coordinates (x, y) in R2 identify the center of mass of the vehicle; the coordinate θ ∈ S1 identifies the orientation of the vehicle. We control the vehicle by two fans (of which we
+y θ
+x
+can reverse the direction or rotation) that we will place on the vehicle in two different configurations as indicated in the following figure:
+Orthogonal fans Parallel fans
+The reader should imagine that in the orthogonal configuration the two fans are paced one over the other. To simplify, we assume that the mass of the vehicle is negligible, so that using the fans allows to control directly the velocity of the vehicle rather than its acceleration. It is not hard to treat the more realistic case of the control on the acceleration. Let us now write the two control system and study their controllability.
+Orthogonal fans.
+u1 (t)
+θ
+x
+y
+u2 (t)
+In this configuration, up to constants that we can fix to 1, the dynamics is
+
+
+x ̇ y ̇ θ ̇
+
+ = u1(t)F1 + u2(t)F2, where F1 =
+
+
+cos(θ) sin(θ) 0
+
+ , and F2 =
+
+
+− sin(θ) cos(θ) 0
+
+.
+Since θ ̇ is always zero, it is evident that with this configuration one cannot induce a rotation of the vehicle rotate. Hence, from (x0, y0, θ0) one can reach only (and actually
+
+
+14 Chap. 1 – Introduction
+all) configurations of the form (x ̄, y ̄, θ0). That is, the reachable set is a plane in R2 × S1.
+Parallel fans.
+u2
+θ
+x
+y u1
+In this configuration, up to constants that we can fix to 1, if u1(·) is the control making the two fans rotate in the same direction and u2(·) is the control making the two fans rotating in the opposite direction the dynamics is
+
+
+x ̇ y ̇ θ ̇
+
+ = u1(t)X1 + u2(t)X2, where X1 =
+
+
+cos θ sin θ 0
+
+ , and X2 =
+
+
+0 0 1
+
+.
+In this case, starting from (x0, y0, θ0) it is possible to reach any configuration (x ̄, y ̄, θ ̄). Actually, if φ is the angle between the x-axis and the straight line connecting (x0, y0) to (x ̄, y ̄) it is possible to attain the desired final configuration by using a piecewise constant
+control composed of exactly 3 pieces (here by simplicity we assume θ0 ≤ φ ≤ θ ̄):
+1. We let u1 = 0 and u2 = 1 for a time t1 = φ − θ0.
+2. Then, u1 = 1 and u2 = 0 for a time t2 that equals the (Euclidean) distance between (x0, y0) and (x ̄, y ̄).
+3. Finally, we let u1 = 0 and u2 = 1 for a time t3 = θ ̄ − φ.
+(x0, y0)
+θ0
+φ − θ0
+(x ̄, y ̄)
+θ ̄ − φ
+
+
+15
+What is the main difference between the vector fields for the orthogonal configuration (F1 and F2), and those for the parallel configuration (X1 and X2)? The point is that the two vector fields F1 and F2 generate two translations which commute, while the vector fields X1 and X2 generate a translation and a rotation which do not commute.
+It is exactly the non-commutativity of X1 and X2 that permits to approximate directions that are not directly admissible in the control system. In particular, the direction corresponding to a movement orthogonal to the wheels:
+
+
+− sin(θ) cos(θ) 0
+
+
+The concept of commutativity/non-commutativity of dynamics will be discussed in detail in Chapter 3.
+Remark 1.1. Notice that the previous analysis stays the same whether the the controls are taken in the (relatively small) class of piecewise constant controls or in the (much larger) class of Ll∞oc (or even in the larger possible class, that is the class of Ll1oc controls). Actually, as it will be made clear in Chapter 3, the controllability analysis is not very sensitive to the regularity of the controls, and for this reason is usually done in the simple class of piecewise constant controls.
+Notice that the problem of controlling in the “parallel configuration” is exactly the problem of controlling a tracked vehicle as the one in the following picture.
+
+
+16 Chap. 1 – Introduction
+
+
+Chapter 2
+Manifolds, Vector fields, Brackets
+In this chapter we introduce the mathematical framework that we will use in the next chapters. We are going to develop the theory of control on smooth1 differentiable manifolds since in many applications the state space is not Rn, (think for instance to the example of the vehicle sliding on the ice of the previous chapter where the state space is R2 × S1).
+This chapter should not be used for a systematic study of differential geometry. To this purpose there are many excellent books as for instance the first chapter of [DoCarmo] or [Arnold] or [Lee]. The reader that is familiar with the concepts of smooth manifold, vector fields (including time-dependent vector fields), flows, etc. can jump directly to the next chapter.
+2.1 Smooth differentiable manifolds
+Differentiable manifolds are object that locally “look like” Rn but possibly not globally. Example that one meets very often are
+• in dimension n = 1: R, the circle S1, an open interval (−ε, ε);
+• in dimension n = 2: R2, a smooth surface in R3 (e.g., the sphere S2), the Klein bottle
+{(x, y) ∈ [−π, π] × [−π, π] | (x, −π) ∼ (x, π) and (−π, y) ∼ (π, −y)}.
+• in dimension n = 3: R3, the sphere S3.
+Differentiable manifolds can always be seen as the generalization of regular surface embedded in R3. For instance a manifold of dimension n embedded in RN , (N ≥ n) can be
+1i.e., C∞
+
+
+18 Chap. 2 – Manifolds, Vector fields, Brackets
+−π
+y
+x π
+−π
+π
+defined as the zero of function F ∈ C∞(RN , RN−n) whose differential is of maximal rank.
+{q ∈ RN | F (q) = 0, F ∈ C∞(RN , RN−n), ∂F
+∂q of maximal rank where F (q) = 0}.
+For instance a circle S1 can be embedded in R3 as the set of zeros of the function
+F (x, y, z) =
+( x2 + y2 − 1 z
+)
+z
+y
+x
+However, it is much more instructive to think to differentiable manifolds of dimension n not as “regular” subset of RN , but as geometric objects that can be locally treated as Rn via a system of charts. We refer to Figure 2.1.
+Definition 2.1. A smooth differentiable manifold of dimension n is a pair (M, {(Ua, φa)}a∈A) where M is a set and for every a ∈ A we have the following: Ua is a subset of M and φa is one to one map to an open subset φa(Ua) of Rn;
+1. M = ⋃
+a∈A Ua;
+2. if for any pairs a, b ∈ A we have Ua ∩ Ub = W 6= ∅ then: 2.1. φa(W ) and φb(W ) are open sets in Rn;
+2.2. the map φa ◦ φ−1
+b : φb(W ) → φa(W ) is C∞.
+3. the family {(Ua, φa)}a∈A is maximal with respect to the previous conditions
+
+
+2.1 Smooth differentiable manifolds 19
+M
+φa
+φa(W )
+φb(W )
+φa ◦ φ−1
+b
+Ua Ub
+φb
+W
+Figure 2.1: Definition of a smooth manifold
+Remark 2.2. Condition 3. is included since one usually needs the maximal freedom of changing charts. Condition 2.1 is important since we have not required that M is a topological space. Actually it is easy to verify that it is a consequence of the definition with W ⊂ M open in M if and only if φa(W ∩ Ua) is open in Rn for every a ∈ A. To avoid pathological situations we will also make the additional requirements that i) different points have disjoint neighborhoods (i.e., that the topological structure given to M is Hausdorff ); ii) conditions 1. and 2. can be realized with the set A finite or countable (i.e., that the topological structure given to M is second countable);
+Often we will speak about system of coordinates (x1, . . . , xn) in M, meaning that we are fixing a chart (φa, Ua) and we are describing φa(Ua) ⊂ Rn with coordinates (x1, . . . , xn).
+Since a differentiable manifold can be locally treated as Rn, one could be tempted to assume that it is possible to essentially work as in Rn. However it is important to take into account that there are plenty of properties that changes when changing system of coordinates. For instance a curve that in a system of coordinates is a straight line can become an arc of circle in another system of coordinates. Moreover, the global topology can play an important role. For instance a vector field (see Definition 2.9 below) on a
+
+
+20 Chap. 2 – Manifolds, Vector fields, Brackets
+two dimensional sphere is obliged to have some zeros (thing that is not true on a two dimensional torus or on the plane). See for instance [Arnold]. In general, we will say that a property on a manifold is intrinsic if it does not depends on the choice of the system of coordinates. For instance the property of a curve (se Definition 2.14) to be closed is an intrinsic property. The property of a curve to have zero second order coefficient in his Taylor polynomial is not intrinsic.
+2.2 Curves, tangent vectors
+Definition 2.3. Let M and N be two differentiable manifolds. A map f : M → N is continuous (resp. smooth, piecewise smooth, Lipschitz) if it is continuous (resp. smooth, piecewise smooth, Lipschitz) chart by chart.
+Definition 2.4. Let M be a smooth differentiable manifold and I an interval of R. A curve on M is a continuous map γ : I ∋ t 7→ M.
+Once a system of coordinates is fixed, a curve γ is thus represented by an n-tuple (γ1, . . . , γn) : I → Rn, where each γi : I → R is a continuous function.
+Given a smooth curve γ : (−ε, ε) → M we can compute2
+γ ̇ (0) = dγ
+dt
+∣ ∣ ∣
+∣t=0
+= lhi→m0
+γ(h) − γ(0)
+h in coordinates.
+Obviously the quantity limh→0 γ(h)−γ(0)
+h has no meaning without fixing coordinates since
+M has no instrinsic vector space structure, and thus we are not allowed to sum points. Actually, it is not difficult to see that the above quantity changes when we change coordinate system. We are then going to define the tangent vector to a smooth curve as an operator on smooth functions. Let us denote the set of smooth functions from M to R as C∞(M).
+Definition 2.5. Let γ : (−ε, ε) → M be a smooth curve. The tangent vector γ ̇ (0) to the curve γ at t = 0 is the operator from C∞(M) to R given by
+γ ̇ (0)f = d(f ◦ γ)
+dt
+∣ ∣ ∣
+∣t=0
+. (2.1)
+In coordinates, if q is represented by x := (x1, . . . xn) and γ is represented by (γ1, . . . , γn), we can compute (2.1) via the chain rule, obtaining3
+d(f (γ1(t), . . . , γn(t))) dt
+∣ ∣ ∣
+∣t=0
+=
+∑n
+i=1
+∂if (x)γ ̇ i(0) =
+( ∑n
+i=1
+γ ̇ i(0)∂i
+∣ ∣ ∣x
+)
+f.
+2To be precise if (U, φ) is a system of coordinates such that γ(0) ∈ U the expression γ ̇ (0) in coordinates means d
+dt (γ ◦ φ)∣
+∣t=0. To lighten the notation, we will however often identify geometric object with their
+expression in coordinates, specifying it if there is possibility of confusion.
+3here we use the notation ∂i
+∣ ∣
+∣x instead of ∂xi or ∂
+∂xi
+to stress that the point x is fixed.
+
+
+2.2 Curves, tangent vectors 21
+Tq M
+x2
+x1
+∂2
+x1
+∂2 ∂1
+q ∂1 x2
+M
+Ua
+φa
+Figure 2.2: Coordinates in the tangent space.
+Hence, γ ̇ (0) is represented by the first order operator from C∞(M) → R
+∑n
+i=1
+γ ̇ i(0)∂i
+∣ ∣
+∣x.
+Definition 2.6. A tangent vector at a point q ∈ M is the tangent vector at t = 0 to some smooth curve γ : (−ε, ε) → M such that γ(0) = q. The set of all tangent vectors at q is the tangent space of M at q, and is denoted by TqM.
+In coordinates, a general tangent vector v ∈ TqM is thus represented by
+∑n
+i=1
+vi∂i
+∣ ∣
+∣x, (2.2)
+hence by a n−tuple (v1, . . . , vn) ∈ Rn. Notice that ∂i
+∣ ∣
+∣x is the coordinate representation
+of the tangent vector at q of the “coordinate curve”
+xi(·) : t 7→ (0, . . ., t, . . . , 0)
+↑
+position i (2.3)
+It then follows immediately that TqM has the structure of an n-dimensional vector space,
+whose canonical basis in the system of coordinates (x1, . . . , xn) is given by (∂1, . . . , ∂n)
+∣ ∣ ∣x
+(see Figure 2.2).
+
+
+22 Chap. 2 – Manifolds, Vector fields, Brackets
+γ(·)
+γ(0)
+γ ̇ (0)
+M
+Figure 2.3: Tangent vector to a curve.
+Definition 2.7. The tangent bundle to M is the set of all tangent spaces to M i.e.,
+TM = ∐
+q∈M
+Tq M .
+It is not difficult to prove that T M has the structure of a smooth differentiable manifold of dimension 2n with charts on T M induced by those of M.
+Remark 2.8. The point of view of representing a tangent vector to smooth curve as operator on functions is not in contrast with the intuitive representation of a tangent vector to a curve on a surface embedded in R3 as an “arrow” on the corresponding tangent plane (see Figure (2.3)). As operator on functions such arrow represents the direction along which we compute the directional derivative. If our manifold is Rn, v is a tangent vector at a point q and f ∈ C∞(Rn) then
+vf = d
+dt
+∣ ∣
+∣t=0f (q + tv) = v · grad f (q).
+Here, the “dot” represents the standard scalar product in Rn and “grad” is the standard gradient, i.e., grad f (q) = (∂x1f (q), . . . , ∂xnf (q)).
+2.3 Vector fields, flows, rectification
+A vector field is a smooth assignation of a tangent vector at each tangent space of a manifold (see Figure (2.4)).
+Definition 2.9. A vector field is a smooth map X : M ∋ q → TqM. Since, for every q ∈ M, X(q) is an operator from C∞(M) to R, we can then interpret X as an operator from C∞(M ) to C∞(M ).
+In this definition, “smooth” means that the map M ∋ q 7→ (q, X(q)) ∈ T M is smooth as map between two differentiable manifolds. One can easily check that that this concept
+
+
+2.3 Vector fields, flows, rectification 23
+M
+Figure 2.4: A vector field.
+of smoothness is equivalent to the fact that for every f ∈ C∞(M) the function Xf is smooth. The set of all vector fields on M is indicated with Vec(M). One immediately verify that Vec(M) has the structure of vector space. For a fixed system of coordinates, a vector fields is represented by an expression as (2.2) but with coefficients smoothly depending on the point:
+X(x) =
+∑n
+i=1
+Xi(x)∂i
+∣ ∣
+∣x =
+∑n
+i=1
+Xi(x)∂xi
+Definition 2.10. A first order operator on functions is a smooth map Y : C∞(M) → C∞(M) that in a system of coordinates can be written as
+Y (x) =
+n ∑
+i=1
+Yi(x)∂xi (2.4)
+Notice that the property of a map of being a first order operator on functions is invariant by change of coordinates. Clearly vector fields are in one to one correspondence with first order operators on functions. Actually on one side a vector field in coordinates has exactly an expression of the form (2.4); on the other side a first order operator of functions is a vector fields since it is a smooth map that to x associate a linear combination of the tangent vectors to the coordinate curves.
+To a vector field X is associated a dynamical system
+q ̇(t) = X(q(t)). (2.5)
+A solution q(·) of (2.5) is called an integral curve of X. We have the following.
+
+
+24 Chap. 2 – Manifolds, Vector fields, Brackets
+Theorem 2.11 (see for instance [Arnold]). Let X be a vector field on M and q0 ∈ M. Then the problem (called Cauchy problem)
+{ q ̇(t) = X(q(t))
+q(0) = q0 (2.6)
+has local existence and uniqueness of solutions. If we indicate the solution of (2.6) as q(t; q0) then the map (t, q0) 7→ q(t; q0) is smooth around (0, q0).
+Remark 2.12. In (2.6) we have fixed the initial time at 0. There is no loss of generality
+in this choice. Actually if q ̃(t; q0) is solution of q ̃ ̇(t) = X(q ̃(t)) with q ̃(t0) = q0, we have q ̃(t, q0) = q(t − t0, q0). This is due to the fact that the vector field X is autonomous, meaning that it does not depend explicitly on time.
+Definition 2.13. The map φt : M ∋ q0 7→ q(t; q0) ∈ M is called the flow of X.
+Notice that φ0 : M → M is the identity map. However, in general it may happen that it does not exist t > 0 such that the map φt is defined in the whole manifold. Consider for instance M = R and the vector field X(x) = x2. The solution of the equation x ̇ = x2 with x(0) = x0 is
+φt(x0) = x0
+1 − t x0
+, t< 1
+x0
+.
+Hence, for t > 0, φt(x0) is defined only for x0 < 1/t. In particular, φt is never defined on the whole manifold M = R if t > 0.
+Definition 2.14. A vector field X is said to be complete if for every q0 ∈ M the solution q(·; q0) of (2.6) exists for every positive and negative time.
+Notice that even constant vector fields are possibly non complete as for example a constant vector fields on the unit disc in R2. Examples of complete vector fields are:
+• vector fields on compact manifolds,
+• vector fields on Rn that are sublinear i.e., for which there exists c1, c2 ≥ 0 such that ‖X(x)‖ ≤ c1 + c2‖x‖ (here ‖ · ‖ is the standard norm in Rn).
+We have then the following.
+Theorem 2.15 (see for instance [Arnold]). If X is complete then φt is defined on the whole M and it is a diffeomorphism.
+It is immediate to verify the following properties of the flow of a complete vector field (for every t, t1, t2 ∈ R):
+φ0 = id, (2.7)
+φt2 ◦ φt1 = φt1+t2 , (2.8)
+φt−1 = φ−t. (2.9)
+
+
+2.3 Vector fields, flows, rectification 25
+That is, {φt}t∈R is a one parameter subgroup of the group of diffeomorphisms of M. Moreover, by construction we have4
+∂φt
+∂t = X ◦ φt. (2.10)
+Because properties (2.7)–(2.10) look like those of the exponential function, usually the flow of a vector field X is denoted by etX , although one should always remember that this is not an exponential (we cannot compute the exponential of a vector). However, for linear vector fields on Rn, i.e. X(x) = Ax where A ∈ Rn×n, x ∈ Rn we have
+etX x = etAx.
+Here, on the left hand side we used our notation for the flow of a vector field and on the right hand side we used the standard exponential of matrices. Notice that, in general, etX1 ◦ etX2 is not equal to et(X1+X2) even for linear vector fields on Rn. A very important property of vector fields is the fact that, in a neighborhood of a point in which they are not zero, they can be rectified.
+Theorem 2.16 (see for instance [Arnold]). Let X be a vector field on M such that X(q) 6= 0 for some q ∈ M. Then there exists a system of coordinates (x1, . . . , xn) around q such that X = ∂x1.
+2.3.1 Nonautonomous vector fields
+In control theory one needs to work with vector fields that smoothly depends on a control which depends (usually in a Ll∞oc way) on time. Namely, we consider dynamical systems of the form
+q ̇ = F (q(t), u(t)) (2.11)
+where
+H. q ∈ M (a smooth connected manifold of dimension n), U is a subset of Rm, F : M × U ∋ (q, t) 7→ F (q, u) ∈ TqM is smooth and u(·) : R → U is a Ll∞oc function.
+Once u(·) is fixed, if we define Xt(q) := F (q, u(t)) we obtain a dynamical system with a non-autonomous vector field
+q ̇(t) = Xt(q(t)). (2.12)
+It is then necessary to extend a bit the theory of vector fields to non-autonomous vector fields that are regular in q, but not necessarily in t.
+4here we mean ∂φt(q)
+∂t = X(φt(q)) for every q ∈ M .
+
+
+26 Chap. 2 – Manifolds, Vector fields, Brackets
+Definition 2.17. A nonautonomous vector field is family of vector fields {Xt}t∈R such that the map X(q, t) = Xt(q) satisfies the following properties
+(C1) the map t 7→ X(q, t) is measurable, for every fixed q ∈ M,
+(C2) the map q 7→ X(q, t) is smooth, for every fixed t ∈ R,
+(C3) for every system of coordinates defined in an open set Ω ⊂ M and every compact K ⊂ Ω and compact interval I ⊂ R there exists C, L > 0 such that for all (x, t), (y, t) ∈ K × I
+‖X(x, t)‖ ≤ C, ‖X(x, t) − X(y, t)‖ ≤ L‖x − y‖.
+Remark 2.18. For non-autonomous vector fields of the form (2.11) under hypothesis H., one verifies easily that (C1)-(C3) are satisfied.
+The local existence and uniqueness of integral curves of a nonautonomous vector field is guaranteed by the following theorem (see for instance [Bre-Pic]).
+Theorem 2.19 (Carath ́eodory theorem). Assume that the nonautonomous vector field {Xt}t∈R satisfies (C1)-(C3). Then the Cauchy problem
+{
+q ̇(t) = Xt(q(t)) (for almost every t)
+q(t0) = q0
+(2.13)
+has local existence and uniqueness of solutions. If we denote the solution of (2.13) by q(t; t0, q0), then the map (t, q0) 7→ q(t; t0, q0) is locally Lipschitz with respect to t and smooth with respect to q0.
+The flow of a non-autonomous vector fields is defined similarly to the autonomous case, but it depends on the initial time as well
+φt0,t : M ∋ q0 7→ q(t; t0, q0)
+The non-autonomous vector field is Xt is said to be complete, if for all t0 ∈ R and q0 ∈ M the solution q(·; t0, q0) to (2.13) is defined for every positive and negative time. For every t0, t ∈ R the flow of a complete non-autonomous vector field is a diffeomorphism. However its dependence on t is only locally Lipschitz. For the flow of a complete non-autonomous vector fields properties (2.7)–(2.10) becomes
+φt0,t0 = id, ∀ t0 ∈ R
+φt2,t3 ◦ φt1,t2 = φt1,t3 , ∀ t1, t2, t3 ∈ R,
+(φt1,t2)−1 = φt2,t1 , ∀ t1, t2 ∈ R,
+∂φt0,t
+∂t = Xt ◦ φt0,t ∀ t0, t ∈ R,
+Since the flow φt0,t of a non-autonomous vector field depends both on t0 and t, it is not convenient to use the exponential notation.
+
+
+2.4 Lie Brackets 27
+2.4 Lie Brackets
+Definition 2.20. Let X and Y be two vector fields on M. Their Lie brackets is the operator from C∞(M) to C∞(M) defined as
+[X, Y ] = X ◦ Y − Y ◦ X
+Notice that in coordinates
+[X, Y ]f = (
+∑n
+i=1
+Xi(x)∂xi )(
+n ∑
+j=1
+Yj(x)∂xj f ) − (
+n ∑
+i=1
+Yi(x)∂xi )(
+∑n
+j=1
+Xj(x)∂xj f )
+=
+∑n
+i,j=1
+(
+Xi(x)∂xiYj(x) − Yi(x)∂xiXj(x)
+)
+∂xj f (2.14)
+In matrix notation
+[X, Y ] = ∂Y
+∂x X − ∂X
+∂x Y.
+In this formula vector fields are thought as column vectors and ∂X
+∂x and ∂Y
+∂x are the matrix
+of partial derivatives of the components of X and Y . More precisely
+X=
+
+ 
+X... 1
+Xn
+
+
+ , ∂X
+∂x =
+
+ 
+∂x1 X1 . . . ∂xn X1
+... . . . ...
+∂x1 Xn . . . ∂xn Xn
+
+
+.
+Similar expressions hold for Y . From the expression (2.14) it follows that [X, Y ] is a first order operator on function and hence it is a vector field. Notice that X ◦ Y − Y ◦ X is a vector field while X ◦ Y is not since this is a second order operator. One immediately verifies the following properties of the Lie bracket:
+• bilinearity: for every λ1, λ2 ∈ R,
+[X, λ1Y1 + λ2Y2] = λ1[X, Y1] + λ2[X, Y2],
+[λ1X1 + λ2X2, Y ] = λ1[X1, Y ] + λ2[X2, Y ];
+• antisymmetry: [Y, X] = −[X, Y ];
+• Jacobi identity: [X, [Y, Z]] + [Z, [X, Y ]] + [Y, [Z, X]] = 0.
+A vector space V endowed with an operation V × V → V that is bilinear, antisymmetric and satisfying the Jacobi identity is said to be a Lie algebra. It follows that (Vec(M), [·, ·]) is a Lie algebra.
+
+
+28 Chap. 2 – Manifolds, Vector fields, Brackets
+x + t2[X, Y ](x0) + O(t3)
+etY
+e−tX
+e−tY
+etX
+x0
+Figure 2.5: Geometric meaning of the Lie bracket.
+Remark 2.21. As a consequence of the antisymmetry of the Lie bracket, we have [X, X] = 0. Notice moreover that the value of [X, Y ] at a point q does not depend only on the values of X and Y at q, but also on their first order expansion at q. However, if at q0 we have X(q0) = Y (q0) = 0, it follows from the definition that [X, Y ](q0) = 0.
+Example Given two linear vector fields Ax and Bx, where A, B ∈ Rn×n, we have that [Ax, Bx] = BAx − ABx = −[A, B]x.
+The following lemma clarifies the geometric meaning of the Lie bracket: [X, Y ] is a measure of the lack of commutation of the flows associated with X and Y . We refer to Figure 2.5.
+Lemma 2.22. For every x ∈ M we have
+e−tY ◦ e−tX ◦ etY ◦ etX (x) = x + t2[X, Y ](x) + O(t3) (in coordinates) (2.15)
+for t that tends to zero.
+Notice that in this expression make sense only in coordinates, since in a manifold we do not have the right of summing points
+Proof. It is enough to compute for each flow the Taylor expansion at order 3. We have
+etX (x) = x + tX(x) + t2
+2
+∂X
+∂x X(x) + O(t3),
+and
+etY ◦ etX (x) = x + t(X(x) + Y (x)) + t2
+2
+∂X
+∂x X(x) + t2 ∂Y
+∂x X(x) + t2
+2
+∂Y
+∂x Y (x) + O(t3).
+Then
+e−tX ◦ etY ◦ etX (x) = x + tY (x) + t2[X, Y ](x) + t2
+2
+∂Y
+∂x Y (x) + O(t3).
+
+
+2.4 Lie Brackets 29
+At the next step the result follows.
+Remark 2.23. The previous lemma says in particular that if [X, Y ](q) 6∈ Vect(X(q), Y (q)), then it is possible, by alternating between the dynamics of X and Y , to attain points that cannot be reached with the flow of linear combinations of X and Y (cf. the example in Section 1.0.2).This is the starting idea behind the conditions for controllability that we are going to study in the next chapter.
+For instance for the vehicle driven by two fan in the parallel configuration
+u2
+θ
+x
+y u1
+The dynamics is
+
+
+x ̇ y ̇ θ ̇
+
+ = u1(t)X1 + u2(t)X2 where X1 =
+
+
+cos θ sin θ 0
+
+ , X2 =
+
+
+0 0 1
+
+.
+The Lie bracket between X1 and X2 is
+[X1, X2] = ∂X2
+∂x X1 − ∂X1
+∂x X2 = 0 −
+
+
+0 0 − sin θ 0 0 cos θ 00 0
+
+
+
+
+0 0 1
+
+=
+
+
+sin θ − cos θ 0
+
+
+i.e. it is the non admissible direction that we can approximate.
+Notice that to be able to approximate [X, Y ] one needs to switch among X, Y , −X, −Y .
+An important corollary of the previous lemma is the following.
+Corollary 2.24. Let X and Y be two complete vector fields. Then their flows etX and etY commute for every t ∈ R if and only if their Lie bracket [X, Y ](q) = 0 for every q ∈ M.
+Remark 2.25. From Formula (2.15) it follows that an alternative definition of Lie brackets is
+[X, Y ](q) = d
+dt
+∣ ∣ ∣
+∣t=0
+e−√tY ◦ e−√tX ◦ e
+√tY ◦ e
+√tX (q).
+In other words the Lie bracket [X, Y ](q) is the tangent vector at t = 0 to the curve
+e−√tY ◦ e−√tX ◦ e√tY ◦ e√tX (q).
+
+
+30 Chap. 2 – Manifolds, Vector fields, Brackets
+q
+e
+√tY
+e−
+√tX
+e−
+√tY
+e
+√tX
+2.5 The Frobenius Theorem
+Let M be a smooth manifold of dimension n Let F = {X1, . . . , Xh}, (h < n) be a family of vector fields defined on an open set Ω that are linearly independent at each point.
+Definition 2.26. An immersed submanifold5 H of Ω of dimension h is said to be an integral submanifold of F if TqH =Span{X1(q), . . . , Xn(q)} for every q ∈ H. F is said to be completely integrable if through each point of M there exists an integral manifold of F
+Ω
+Definition 2.27. F is said to be involutive if [Xi, Xj](q) = ∑
+k cikj(q)Xk(q) for every
+q∈Ω
+Theorem 2.28. F is completely integrable iff it is involutive
+In control theory we usually work with distributions that are maximally non-integrable.
+5H ⊂ M is an immersed submanifold if the immersion map H ∋ q 7→ q ∈ M is an immersion i.e., rank(Dqi) is maximal ∀ q ∈ H
+
+
+Chapter 3
+Nonlinear controllability
+In this chapter we study the controllability of the following non-linear system
+q ̇ = F (q, u(t)). (3.1)
+Here we assume that the state of the system q belongs to M, a smooth connected manifold of dimension n, U ⊂ Rm is the set of control values and u(·) : [0, ∞[→ U is the control. For the development of the theory it is not necessary to assume any structure on U. For example U could be a finite set of points, a polytope or the full Rm. We assume that F is a smooth1 function of its arguments and that u(·) is regular enough in such a way that equation (3.1) with the initial condition q(0) = qin ∈ M has local existence and uniqueness of solutions. For instance we can assume that u(·) is a Ll1oc or a Ll∞oc function of the time. However, as it will be clear later, all conditions for controllability that we will get are actually sufficient conditions that are valid in the smaller class of piecewise constant controls.
+Remark 3.1. For simplicity of notation in the following we also assume that for every u(·) a solution of (3.1) exists in [0, ∞[. However this hypothesis is not necessary for the validity of the theorems that we are going to prove.
+Denote by q(t; qin, u(·)) the solution at time t of (3.1) starting from qin at t = 0 and corresponding to a control function u(·). We recall the definitions of the reachable (or attainable) sets starting from qin:
+• the reachable set from qin at time τ ≥ 0 is
+R(τ, qin) = {q ̄ ∈ M | ∃ u(·) : [0, τ ] → U, q(τ ; qin, u(·)) = q ̄};
+• the reachable set from qin within time τ ≥ 0 is
+R(≤ τ, qin) = ∪t∈[0,τ]R(t, qin);
+1i.e., C∞
+
+
+32 Chap. 3 – Nonlinear controllability
+• the reachable set from qin is
+R(qin) = ∪t∈[0,+∞[R(t, qin).
+Given the control system (3.1), the purpose of the controllability theory is to characterize when these sets coincide with the entire state space.
+Definition 3.2. The system (3.1) is said to be
+• controllable if for every qin ∈ M , R(qin) = M ;
+• small-time controllable if for every qin ∈ M and τ > 0, we have R(≤ τ, qin) = M;
+• small-time locally controllable at qin if qin belongs to the interior of R(≤ τ, qin) for every τ > 0.
+3.1 Control systems as families of vector fields
+In the following it will be useful to think to the system (3.1) as a family of vector fields parameterized by u ∈ U (i.e., by constant controls). In other words we will often consider instead of the control system (3.1), the family of vector fields
+F = {F (·, v) | v ∈ U}.
+All vector fields of the family F are considered smooth and complete, i.e., for every F ∈ F , qin ∈ M, the equation q ̇ = F (q) with initial condition q(0) = qin admits a solution in ] − ∞, ∞[.
+Definition 3.3. Let F be a family of vector fields. We call Lie(F ) the smallest sub-algebra of Vec(M) containing F . Namely, Lie(F ) is the span of all vector fields of F and of their iterated Lie brackets of any order:
+Lie(F ) = span{f1, [f1, f2], [f1, [f2, f3]], [f1, [f2, [f3, f4]]], . . . | f1, f2, . . . ∈ F }.
+Definition 3.4. We say that the family F is Lie bracket generating at a point q if the dimension of Lieq(F ) := {f (q) | f ∈ Lie(F )} is equal to n. We say that the family F is Lie bracket generating if this condition is verified for every q ∈ M.
+Remark 3.5. Notice that in general Lie(F ) is an infinite-dimensional space, while Lieq(F ) is a subspace of M.
+Exercise 1. Let F = {f1, . . . , fm} and let A be an invertible m × m matrix. Define
+fi′ = ∑
+j Aijfj and F ′ = {f1′, . . . , f ′m}. Prove that F is Lie bracket generating if and only
+if F ′ is.
+
+
+3.2 The Krener Theorem: local accessibility 33
+3.1.1 Affine control systems
+An affine control system is a system of the form
+q ̇ = f0(q) +
+∑ m
+i=1
+ui(t)fi(q), (3.2)
+where f0, f1, . . . , fm belong to Vec(M) and u(·) = (u1(·), . . . , um(·)) : [0, ∞[→ U ⊂ Rm is the control. In an affine control system it is also assumed that U contains a neighborhood of the origin in Rm. The vector fields f0 is called drift.
+Exercise 2. Let F be the family of vector fields associated with (3.2).
+• Prove that if {f0, f1, . . . , fm} is Lie bracket generating then F is Lie bracket generating as well.
+• Prove that if {f1, . . . , fm} is Lie bracket generating then F is Lie bracket generating as well.
+3.2 The Krener Theorem: local accessibility
+The fact that a control system is Lie bracket generating does not permit in general to conclude that it is controllable. Consider for instance the control system on the plane
+( x ̇ 1 x ̇ 2
+)
+=
+(1
+0
+)
++ u(t)
+(0
+1
+)
+,
+where u(·) : [0, ∞[→ [−1, 1]. It is Lie bracket generating (since the corresponding family F contains the vector fields {(1, 1), (1, −1)}, however starting from the origin one cannot reach any point whose first coordinate is negative. This is essentially due to the fact that the family F contains two vector fields but not their opposite (cf. Remark 2.23). The Lie bracket generating condition permits to say that a system is locally accessible in the following sense.
+Theorem 3.6 (Krener). If F is Lie bracket generating at qin, then for every τ > 0, qin belongs to the closure of the interior of R(≤ τ, qin).
+The conclusion of the Krener Theorem can be equivalently reformulated in the following way:
+• for every τ > 0, the set R(≤ τ, qin) has nonempty interior,
+• qin is a density point of such an interior.
+
+
+34 Chap. 3 – Nonlinear controllability
+qin
+admissible
+qin qin
+qin qin
+non-admissible
+Figure 3.1: Admissible and non-admissible reachable sets when the system is Lie bracket generating at qin.
+Krener’s theorem says in particular that the trajectories starting from a point at which the system is Lie bracket generating can reach (in an arbitrarily small time) a set having nonempty interior. Figure 3.1 shows what one can expect/non-expect from R(≤ τ, qin), τ > 0.
+Proof of Theorem 3.6. First notice that if F is Lie bracket generating at a point, then the same property holds true in a neighborhood of that point. (If n vector fields are linearly independent at a point, then they are linearly independent in a neighborhood of that point.) There exists f ∈ F such that f (qin) 6= 0, otherwise Lieqin(F ) = {0}. If n = 1 the conclusion follows. If n > 1 and all vector fields of F are tangent to the curve t 7→ etf (qin), 0 < t < ε, then from Lemma 2.22 it follows that Lieetf(qin)(F ) is also tangent to that curve and hence its dimension is less than 2. This contradicts the Lie bracket generating assumption. As a consequence, there exist g ∈ F and 0 < t ̄ < ε such that f and g are linearly independent
+in a neighborhood of q1 = et ̄f (qin) (see Figure 3.2). Hence (t, s) 7→ esg ◦etf (qin), 0 < s < ε′,
+t ̄− ε′ < t < t ̄+ ε′ has as image a surface of dimension 2. If n = 2 the conlcusion follows. Otherwise we iterate the same argument and we conclude by recurrence on n.
+Remark 3.7. Notice that for this proof we have only used piecewise constant controls. In the following we will denote by RF (qin) the set of points reachable from qin using piecewise
+
+
+3.3 Symmetric systems 35
+q1
+qin
+etf qin
+esg q1
+f
+g
+Figure 3.2: Proof of Krener’s theorem.
+constant controls. The notation is used to stress that the set depends only on the set of admissible vector fields, and not by their parameterization v 7→ F (·, v).
+Remark 3.8. From the proof of the Krener theorem it follows that R(≤ τ, qin), τ > 0, contains an open set Ω having qin in its closure whose points can be reached by trajectories of the type etnfn ◦ . . . ◦ et1f1qin where t1, . . . , tn > 0 and f1, . . . , fn ∈ F , i.e., by trajectories corresponding to piecewise constant controls made by n pieces. Notice that the vector fields f1, . . . , fn could be repeated. For instance if F = {f, g} is a Lie bracket generating family and we are in dimension 3, we could have for instance f1 = f, f2 = g, f3 = f .
+3.3 Symmetric systems
+Definition 3.9. A family of vector fields F is said to be symmetric if f ∈ F implies −f ∈ F .
+When the family F is Lie bracket generating and symmetric one obtain that the system is controllable. This is the conclusion of the celebrated Chow–Rashevskii theorem.
+Theorem 3.10 (Chow–Rashevskii). If F is Lie bracket generating and symmetric, then for every qin ∈ M we have R(qin) = M .
+Proof. Step 1. Fix qin ∈ M and let us show that RF (qin) contains a neighborhood of qin. Since F is Lie bracket generating, R(qin) contains a nonempty open set Ω whose points can be reached by trajectories corresponding to piecewise controls made by n pieces. Fix t1, . . . , tn > 0 and f1, . . . , fn ∈ F such that q ̄in := etnfn ◦ . . . ◦ et1f1qin ∈ Ω. Since F is symmetric, −f1, . . . , −fn ∈ F and we have that
+e−t1f1 ◦ . . . ◦ e−tnfn(Ω) ⊂ RF (qin).
+In particular RF (qin) contains the set
+V = e−t1f1 ◦ . . . ◦ e−tnfn (Ω).
+
+
+36 Chap. 3 – Nonlinear controllability
+Now, since Ω is open and e−t1f1 ◦ . . . ◦ e−tnfn is a diffeomorphism, we have that V is open. Moreover V contains qin since q ̄in ∈ Ω and e−t1f1 ◦ . . . ◦ e−tnfnq ̄in = qin. It follows that, for every qin, RF (qin) contains a neighborhood of qin. Step 2. Let us show that RF (qin) is open. If q ̄ ∈ RF (qin), then RF (q ̄) ⊂ RF (qin). It follows that int(RF (q ̄)) ⊂ int(RF (qin)). But from Step 1 we have that q ̄ ∈ int(RF (q ̄)). Hence q ̄ ∈ int(RF (qin)). Step 3. From the fact that F is symmetric, it follows that q ̄ ∈ RF (qin) if and only if qin ∈ RF (q ̄). Let us consider the equivalence classes M/ ∼ where ∼ is the equivalence relation q ̄ ∼ qin if and only if q ̄ ∈ RF (qin).
+Such equivalence classes are open and disjoint. Since M is connected, it follows that there is only one class. Hence, for every qin we have RF (qin) = R(qin) = M .
+Remark 3.11. Notice that in Step 1 of the proof of Chow–Rashevskii theorem, since the times can be rendered arbitrarily small, we have proved that the system is small-time locally controllable in a neighborhood of every point qin. Also, we have proved that every point of a neighborhood of qin can be reached with trajectories made by 2n pieces.
+Remark 3.12. Notice that the Chow–Rashevskii theorem can be used in more general situations than those fixed by the hypotheses stated here. For instance
+• to get controllability it is sufficient that the family F contains a symmetric family of Lie bracket generating vector fields;
+• if one can prove that F is symmetric and Lie bracket generating in a connected open set Ω of M then one get the system is controllable in Ω.
+3.4 Compatible vector fields
+When a family of vector fields is Lie bracket generating but is not symmetric, in general it is not easy to understand if the system is controllable or not. A technique to study the controllability is the one of compatible vector fields.
+Definition 3.13. A vector field g is said to be compatible with the family F if for every qin ∈ M , every qin ∈ M , and every t ≥ 0, the point etg(qin) is contained in the closure of R(qin).
+A family of vector fields G is said to be compatible with F if every element of G is compatible with F .
+The main result of the theory of compatible vector fields is the following.
+Theorem 3.14. If F is a Lie bracket generating family of vector fields, G is compatible with F , and F ∪ G is controllable, then F is controllable as well.
+
+
+3.4 Compatible vector fields 37
+This theorem should be used in the following way: one collects a family G of vector fields g that added to the family F do not change the closure of the reachable set and such that it is easy to prove the controllability of the family F ∪ G. The main ingredient to prove Theorem 3.14 is the following corollary of the Krener theorem.
+Corollary 3.15. If F is Lie bracket generating and R(qin) is dense in M for some qin, then R(qin) = M .
+Proof. Consider the system
+q ̇ = −F (q, u(t)), q ∈ M, u(·) : [0, ∞[→ U ⊂ Rm, (3.3)
+which is obtained from (3.1) by reversing the time. Let F − be the family of vector fields associated with (3.3). Since F is Lie bracket generating, then F − is Lie bracket generating as well. Let q ̄ ∈ M and R−(q ̄) be the reachable set for (3.3) starting from q ̄. Thanks to Krener’s theorem, R−(q ̄) contains a nonempty open set. In particular it has nonempty intersection with R(qin) (being R(qin) dense). See Figure 3.3. This means that q ̄ ∈ R(qin). Indeed from qin one can reach a point q1 ∈ R(qin)∩R−(q ̄) (since q1 ∈ R(qin)) and from q1 one can reach q ̄ (since q1 is reachable from q ̄ for the system with reverted time). Being q ̄ arbitrary we have that R(qin) = M.
+Proof of Theorem 3.14. First notice that, since G is compatible with F , then RF∪G(qin) is contained in the closure of RF (qin). Indeed, every point of RF∪G(qin) is of the type etkgk ◦ et1g1(qin) with g1, . . . , gk ∈ F ∪ G and t1, . . . , tk ≥ 0. For k = 1 the conclusion follows by definition of compatible vector fields, while the case k > 1 follows by an easy induction argument. Hence RF (qin) is dense. Since the system is Lie bracket generating, the conclusion follows from Corollary 3.15.
+Next we present some important applications of the technique based on compatible vector fields.
+3.4.1 Convexification
+A very useful application of the theory of compatible vector fields is based on the following result stating that a convex combination of vector fields of F is compatible with F . It formalize the intuition that if one commutes quickly between the dynamics of two vector fields f and g, and one stays the same time on each dynamics, then the corresponding trajectory is close the trajectory of f+g
+2 starting from the same point.
+
+
+38 Chap. 3 – Nonlinear controllability
+qin
+R−(q ̄)
+q ̄
+q1
+R(qin)
+Figure 3.3: Proof of Corollary 3.15.
+Lemma 3.16. For every λ1, . . . , λk ≥ 0 and f1, . . . , fk ∈ F , the vector field λ1f1 + · · · + λkfk is compatible with F .
+The lemma can be deuced from the following averaging result, taking piecewise constant controls un with values in the canonical basis of Rk, switching faster and faster as n → ∞.
+Proposition 3.17 (Averaging). Let f1, . . . , fk ∈ Vec(M) and T > 0. Consider a bounded sequence (un)n in L∞([0, T ], Rk). Let u ∈ L∞([0, T ], Rk) and q0 ∈ M be such that the solution t 7→ q(t; q0, u) of
+q ̇ =
+k ∑
+i=1
+ui(t)fi(q), q(0) = q0,
+is defined on the entire interval [0, T ]. Assume that
+∫t
+0
+un(s)ds n→∞
+−→
+∫t
+0
+u(s)ds for all t ∈ [0, T ]. (3.4)
+Then q(t; q0, un) → q(t; q0, u) as n → ∞, uniformly with respect to t ∈ [0, T ].
+Proof. Given a compact coordinate chart Ω around q0 and denoting by L > 0 a constant such that fi is L-Lipschitz continuous on Ω for every i = 1, . . . , k, we have that, in
+
+
+3.4 Compatible vector fields 39
+coordinates,
+‖q(t; q0, un) − q0‖ ≤ LKt,
+where K = supn∈N ‖un‖L∞[0,T ]. Up to splitting the curve t 7→ q(t; q0, u) in a finite number of pieces, it is enough to prove the proposition in the case where t 7→ q(t; q0, u) and each t 7→ q(t; q0, un), n ∈ N, stay in Ω. Then q(t) := q(t; q0, u) and, for n large enough, qn(t) := q(t; q0, un), can be written in coordinates as
+q(t) = q0 +
+k ∑
+i=1
+∫t
+0
+ui(s)f (q(s))ds, qn(t) = q0 +
+k ∑
+i=1
+∫t
+0
+uin(s)f (qn(s))ds.
+Then, for every t ∈ [0, T ],
+‖qn(t) − q(t)‖ ≤
+k ∑
+i=1
+∥ ∥ ∥ ∥
+∫t
+0
+uin(s)(f (qn(s)) − f (q(s)))ds
+∥ ∥ ∥ ∥
++
+k ∑
+i=1
+∥ ∥ ∥ ∥
+∫t
+0
+(uin(s) − ui(s))f (q(s))ds
+∥ ∥ ∥ ∥
+≤ mKL
+∫t
+0
+‖qn(s) − q(s)‖ds
++
+k ∑
+i=1
+∥ ∥ ∥ ∥
+∫t
+0
+(d
+ds
+∫s
+0
+(uin(τ ) − ui(τ ))dτ
+)
+f (q(s))ds
+∥ ∥ ∥
+∥.
+Integrating by parts and thanks to (3.4), we have that, for every i = 1, . . . , k,
+∫t
+0
+(d
+ds
+∫s
+0
+(uin(τ ) − ui(τ ))dτ
+)
+f (q(s))ds n→∞
+−→ 0 uniformly w.r.t. t ∈ [0, T ].
+(Notice that the convergence in (3.4) is uniform with respect to t ∈ [0, T ] because {‖un‖∞ | n ∈ N} is bounded.) Hence, for every ε > 0 and for n large enough, denoting ξn(t) = ‖qn(t) − q(t)‖, we have
+ξn(t) ≤ mKL
+∫t
+0
+ξn(s)ds + ε.
+Define then c = mKL and wn(t) = e−ct ∫ t
+0 ξn(s)ds. Then
+d
+dt wn(t) ≤ e−ctε,
+yielding, by integration, that wn(t) ≤ 1−e−ct
+c ε, hence
+∫t
+0
+ξn(s)ds ≤ ect − 1
+c ε ≤ ecT − 1
+c ε.
+
+
+40 Chap. 3 – Nonlinear controllability
+V
+qin q ̄in
+et∗f q ̄in
+Figure 3.4: Definition of recurrent vector field.
+Since the functions ξn(·) are nonnegative and uniformly Lipschitz continuous with respect to n, we deduce that ξn(t) → 0 as n → ∞, uniformly with respect to t ∈ [0, T ].
+From Lemma 3.16, using the theory of compatible vector fields, one get immediately a useful corollary of Theorem 3.10.
+Corollary 3.18. If F is Lie bracket generating and its convex hull in the space Vec(M ) is symmetric, then for every qin ∈ M we have RF (qin) = M .
+Other applications of Lemma 3.16 are given later.
+3.4.2 Affine systems with recurrent drift
+In this section we apply the theory of compatible vector fields to affine control systems (cf. Section 3.1.1) that are Lie bracket generating and having a drift f0 which is recurrent. We refer to Figure 3.4.
+Definition 3.19 (Recurrent vector field). A vector field f is said to be recurrent if for every point qin ∈ M, every neighborhood V of qin and every time t > 0, there exist q ̄in ∈ V and t∗ > t such that et∗f (q ̄in) ∈ V .
+Notice that if the trajectories of f are periodic (possibly with period depending on the trajectory), then f is recurrent.
+
+
+3.4 Compatible vector fields 41
+integral curve of f
+W
+e−tf W
+e−tf qin
+et∗f e−tf W ⊂ R(qin)
+qin
+Figure 3.5: Proof of Lemma 3.20.
+Lemma 3.20. Let F be a Lie bracket generating family of vector fields and f ∈ F . If f is recurrent then −f is compatible with F .
+Proof. We have to prove that for every qin and for every t > 0, e−tf qin can be obtained as limit of points belonging to the reachable set R(qin) = RF (qin). We refer to Figure 3.5. By Krener theorem (thanks to the fact that F is Lie-bracket generating), there exists an arbitrarily small open set W ⊂ R(qin) such that qin ∈ W . Now since e−tf is a diffeomorphism this implies that e−tf qin ∈ e−tf W . Since f is recurrent, there exists t∗ > t such that
+et∗f e−tf W ∩ e−tf W 6= ∅,
+or equivalently
+e(t∗−t)f W ∩ e−tf W 6= ∅.
+But since t∗ − t > 0 and W ⊂ R(qin) we have that e(t∗−t)f W ⊂ R(qin). It follows that
+R(qin) ∩ e−tf W 6= ∅.
+Hence, since W was arbitrarily small, in any neighborhood of e−tf qin there are points of R(qin). In other words e−tf qin ∈ R(qin).
+As a consequence of the previous lemma we have the following.
+
+
+42 Chap. 3 – Nonlinear controllability
+Theorem 3.21. Consider the control system
+q ̇ = f0(q) +
+m ∑
+i=1
+ui(t)fi(q), (u1(·), . . . , um(·)) : [0, ∞[→ U ⊂ Rm. (3.6)
+Assume that (i) 0 belongs to the interior of U, (ii) the control system (3.6) is Lie bracket generating, (iii) f0 is recurrent. Then the system is controllable.
+Proof. Let F = {f0 + ∑m
+i=1 fi | (u1, . . . , um) ∈ U } be the family of vector fields associated
+to 3.6. Notice that f0 ∈ F since 0 belongs to U. Lemma 3.20 and Theorem 3.14 state
+the equivalence between the controllability of F and Fˆ := F ∪ {−f0}. The family Fˆ is not symmetric in general, but its convexification contains a symmetric set (see Figure ??. The conclusion follows from Corollary 3.18 (cf. also Remark 3.12).
+By using Lemma 3.16 in the proof of Theorem 3.21 it is clear that hypothesis i) can be weakened. More precisely one gets
+Corollary 3.22. Consider the control system
+q ̇ = f0(q) +
+∑ m
+i=1
+uifi(q), (u1(·), . . . , um(·)) : [0, ∞[→ U ⊂ Rm. (3.8)
+Assume that (i) 0 belongs to the interior of the convex hull of U, (ii) the control system (3.8) is Lie bracket generating, (iii) f0 is recurrent. Then the system is controllable.
+Example. Consider the control system on the sphere S2 = {x ∈ R3 | x21 +x22 +x23 = 1} given by x ̇ = f0(x) + uf1(x), u(·) : [0, ∞[→ (−1, 1), x ∈ S2,
+where
+f0(x) =
+
+
+−x2
+x1
+0
+
+ , f1(x) =
+
+
+0 −x3 x2
+
+.
+The flows of f0 and f1 are rotations around the axes (0, 0, 1)T and (1, 0, 0)T , respectively. This system is controllable since
+• the Lie bracket between f0 and f1 is given by
+[f0, f1](x) =
+
+
+−x3 0
+x1
+
+,
+
+
+3.4 Compatible vector fields 43
+V (q) f0 − f1
+f0 + f1
+f0
+−f0
+f1
+Figure 3.6: For a control system of the type f0 + u(t)f1 with u(·) taking values in [−1, 1], the picture represent the convexification of the set V (q) = {f0(q) + uf1(q) | u ∈ [−1, 1]} ∪ {−f0(q)} at a given point q. Notice that although V (q) does not contain a symmetric set, its convexification does. For more general control systems as those of Corollary 3.6 the situation is exactly the same.
+and hence the system is Lie bracket generating (for every x ∈ S2, dim(span{f0, f1, f2}(x) = 2);
+• the trajectories of f0 are periodic and hence f0 is recurrent.
+3.4.3 Affine systems with non-recurrent drift
+When the drift is not recurrent one can still obtain that the system is controllable if the controls are unbounded and if it is not necessary to use the drift to get a Lie algebra of full dimension at every point. More precisely we have the following.
+Proposition 3.23 (Strong bracket generating). Consider the control system
+q ̇ = f0(q) +
+∑ m
+i=1
+uifi(q), (u1(·), . . . , um(·)) : [0, ∞[→ Rm. (3.10)
+If {f1, . . . , fm} is Lie bracket generating then (3.10) is controllable.
+Remark 3.24. For an affine control system as (3.10), the condition that {f1, . . . , fm} is Lie bracket generating is called the strong bracket generating condition.
+Proof. First notice that as a consequence of Exercise 2, being {f1, . . . , fm} Lie bracket generating, then (3.10) is Lie bracket generating as well. Let F be the family of vector fields associated with (3.10). In the following we are going to prove that for every
+(v1, . . . , vm) ∈ Rm the vector field ∑m
+i=1 vifi is compatible with F . Once this is done, the
+
+
+44 Chap. 3 – Nonlinear controllability
+controllability of (3.10) follows, since the family F ∪ {∑m
+i=1 vifi, vi ∈ R, i = 1, . . . , m} contains a symmetric and Lie bracket generating sub-family (Remark 3.12).
+To show that ∑m
+i=1 vifi is compatible with F for every v1, . . . , vm ∈ R, remark that
+∑ m
+i=1
+vifi = nli→m∞
+1 n
+(
+f0 +
+m ∑
+i=1
+(nvi)fi
+)
+(3.11)
+and that 1
+n (f0 + ∑m
+i=1(nvi)fi) is compatible with F since a trajectory of (3.10) corre
+sponding to controls u ̃i(·), i = 1, . . . , m, is a time-reparameterisation of a trajectory of
+q ̇ = 1
+n
+(
+f0(q) +
+∑ m
+i=1
+uifi(q)
+)
+corresponding to controls nu ̃i(·), i = 1, . . . , m. The conclusion follows from the fact that if a vector field is the uniform limit on all compacts of a sequence of compatible vector fields, then it is compatible as well (from the continuity of solutions of ODEs with respect to the vector field).
+The use of Lemma 3.16 permits to weaken a bit the hypothesis that the controls take values in Rm. More precisely one gets.
+Corollary 3.25. Consider the control system
+q ̇ = f0(q) +
+m ∑
+i=1
+uifi(q), (u1(·), . . . , um(·)) : [0, ∞[→ U ⊂ Rm. (3.13)
+If the convex hull of U is Rm and if {f1, . . . , fm} is Lie bracket generating then (3.13) is controllable.
+3.5 Orbits and necessary conditions for controllability
+We have seen in the previous sections several sufficient conditions for the controllability of a nonlinear system. In this section we discuss some necessary conditions that are consequence of a very deep theorem of geometric nature, the so-called orbit theorem. This theorem permits to conclude that, beside pathological cases, Lieq(F ) measures precisely the dimension of the set of directions that can be used starting from a point. We define the orbit of the family F starting from a point qin ∈ M as the set
+O(qin) = {etkfk ◦ · · · ◦ et1f1(qin) | k ∈ N, t1, . . . , tk ∈ R, f1, . . . , fk ∈ F }.
+
+
+3.5 Orbits and necessary conditions for controllability 45
+Remark 3.26. O(qin) can be interpreted as the reachable set, starting from qin, of the family −F ∪ F , using only piecewise constant controls.
+We have the following result
+Theorem 3.27 (Orbit theorem). For every qin ∈ M, the set O(qin) has the structure of an immersed sub-manifold of M. In particular it has the same dimension at every point. Moreover if q ∈ O(qin) then Lieq(F ) ⊆ TqO(qin). The two spaces Lieq(F ) and TqO(qin) coincide if one of the following two conditions is verified:
+• every element of F is an analytic vector field;
+• the dimension of Lieq(F ) is constant with respect to q ∈ O(qin).
+From the fact that Lieq(F ) ⊆ TqO(qin) it follows that every element of F is tangent to O(qin). As a consequence we have the following.
+Lemma 3.28. For every qin ∈ R we have that R(qin) ⊆ O(qin).
+This result wouldn’t be so obvious without the orbit theorem since R(qin) is the set of
+points that one can reach using L∞ controls (and not only piecewise constant ones). The following corollary gives some consequence of the Orbit theorem on the controllability of nonlinear systems.
+Corollary 3.29. If F is not Lie bracket generating and either every vector field of F is analytic or the dimension of Lieq(F ) is constant with respect to q ∈ O(qin), then F is not controllable.
+
+
+46 Chap. 3 – Nonlinear controllability
+
+
+Chapter 4
+Introduction to Optimal Control
+Consider the nonlinear control system
+q ̇ = f (q, u(t)). (4.1)
+Here q ∈ M (a smooth connected manifold of dimension n, e.g., Rn) is the state of the system, U ⊂ Rm is the set of control values and u(·) : [0, ∞[→ U is the control. We assume that f is a smooth1 function of its arguments and that u(·) is regular enough in such a way that equation (4.1) with the initial condition q(0) = qin ∈ M has local existence and uniqueness of solutions (e.g., it is measurable and essentially bounded). Let us denote by R(τ, qin) and by R(qin) the reachable set in time τ and the reachable set (cf. Chapter 3). A typical problem that one meets in control theory is to find the “best” trajectory for a given criterium going from one initial point qin to a final “target” T ⊂ M. When T = {qfi}, i.e., a single point, then the final condition is completely fixed. When T = M the final condition is completely free. All intermediate situations are possible. Example 1 Consider a cart of mass M on which we act with an external force u(t) such that |u(t)| ≤ Fmax, where Fmax > 0. The corresponding dynamics has the form Mx ̈ = u(t). Setting x1 = x and x2 = x ̇ the control system becomes.
+x ̇ 1 = x2
+x ̇ 2 = u
+M , |u| ≤ Fmax
+Find the trajectory joining (x1, x2) = (0, 0) to (x1, x2) = (a, 0) in minimum time. Notice that for this problem, initial and final points are fixed, but the final time is free. The
+criterium can be written in integral form since T = ∫ T
+0 1 dt.
+0x
+u(t)
+M
+1i.e., C∞
+
+
+48 Chap. 4 – Introduction to Optimal Control
+Example 2 Consider the robot E = M6:
+x ̇ = u1(t) cos(θ)
+y ̇ = u1(t) sin(θ)
+θ ̇ = u2(t), u1, u2 ∈ L∞([0, T ], R) (4.2)
+Find the trajectory joining (x, y, θ) = (0, 0, 0) to (x, y, θ) = (x ̄, y ̄, θ ̄) minimizing an
+“energy-like cost” ∫ T
+0 (u21 + u22) dt. Notice that for this problem the final time and the
+initial and final points are fixed. A variant of this problem is to start from the point (x, y, θ) = (0, 0, 0) and to reach (x, y) = (x ̄, y ̄) with any orientation and minimizing the same criterium.
+Example 3 Consider an harmonic oscillator of mass M = 1 and elastic constant k = 1, on which we act with an external force u(t) such that |u(t)| ≤ 1. The corresponding dynamics has the form x ̈ = −x + u(t). Setting x1 = x and x2 = x ̇ the control system becomes,
+x ̇ 1 = x2
+x ̇ 2 = −x1 + u(t), |u(t)| ≤ 1
+Find the trajectory starting from (x1, x2) = (0, 0) and maximizing x21(1) (i.e. minimizing
+−x21(1)). Notice that for this problem the final time and the initial point are fixed, but the final point is not. Moreover the cost is not in integral form (it only depends on the final position).
+k=1
+x
+u(t)
+M =1
+0
+All these problems can be written in the following form
+
+
+4.1 The different steps to solve an optimal control problem 49
+Optimal Control Problem (OCP)
+q ̇(t) = f (q(t), u(t)),
+q(0) = qin, q(T ) ∈ T ,
+∫T
+0
+f 0(q(t), u(t)) dt + φ(q(T )) → min,
+here T > 0 can be fixed or free.
+Here • M is a smooth n-dimensional connected manifold, U ⊂ Rm, • T is a smooth submanifold of M, • f, f 0 are smooth functions of their arguments, • u(·) ∈ L∞([0, T ], U),
+• q(·) : [0, T ] → M, belongs to the set of Lipschitz curves.
+Notice that for the problem OCP to make sense it is not necessary to assume that one can prove controllability of the system. Often in applications one cannot guarantee that the following condition is satisfied:
+Condition: T ∩ R(qin) 6= ∅ if T is free or T ∩ RT (qin) 6= ∅ if T is fixed.
+In this case usually one take T = M and as φ something that represent the distance between the point where one arrives and the desired target.
+4.1 The different steps to solve an optimal control problem
+The steps to determine a solution to the minimization problem OCP are similar to finding the minimum of a smooth function f 0 : R → R.
+0. Find conditions which guarantee the existence of solutions. We recall that among smooth functions f 0 : R → R, it is easy to find examples not admitting a minimum (e.g., the function x 7→ e−x and the function x 7→ x do not have minima). This step is crucial. If it is skipped, first-order conditions may give a wrong candidate for optimality (see below for details) and numerical optimization schemes may either not converge or converge towards a solution which is not a minimum. For optimal control problems, there exist several existence tests, but they are not always applicable or easy to use. In Sec. 4.2, we present the Filippov test.
+1. Apply first-order necessary conditions. For a smooth function f 0 : R → R, this means that if x ̄ is a minimum then d
+dx f 0(x ̄) = 0. This condition gives candidates
+
+
+50 Chap. 4 – Introduction to Optimal Control
+for minima, i.e., identifies local minima, local maxima, and saddles. Note that if one does not verify a priori existence of minima, first-order conditions could
+give wrong candidates. Think for instance to the function x 7→ (x2 + 1/2)e−x2. This function has a single local minimum, obtained at x = 0, whose value is 1/2, which is well identified by first-order conditions. However its infimum is zero (for x → ±∞, the function tends to zero). For optimal control problems, first-order necessary conditions should be given in an infinite-dimensional space (a space of curves) and they are expressed by the Pontryagin Maximum Principle, which is presented in Sec. 5.1. Note that the condition that the system reaches exactly the target is a constraint leading to the appearance of Lagrange multipliers (normal and abnormal). This point is discussed in details in Sec. 4.3.1.
+2. Apply second-order conditions. For instance, for a smooth function f 0 : R → R, among the points for which we have d
+dx f 0(x ̄) = 0, a necessary condition to have
+a minimum is d2
+dx2 f 0(x ̄) ≥ 0. This step is generally used to reduce further the can
+didates for optimality. For optimal control problems, there are several second-order conditions as higher-order Pontryagin Maximum Principles or Legendre–Clebsch conditions (see for instance [Agr-Sa,Bo-Pi,Sc-Le]). In some cases, this step is difficult and it could be more convenient to go directly to the next one.
+3. Selection of the best solution among all candidates. Among the set of candidates for optimality identified in step 1 and (possibly) further reduced in step 2, one should select the best one. This step is often done by hand if the previous steps have identified a finite number of candidates for optimality. For optimal control problems, one often ends up with infinitely many candidates for optimality and this step is generally very difficult.
+There are of course specific examples for which the solution is particularly simple. This is the case of convex problems, for which only first-order conditions should be applied, since the existence step is automatic and first-order conditions are both necessary and sufficient for optimality.
+4.2 Existence of solutions for Optimal Control Problems: the Filippov test
+The existence theory for optimal control is difficult and, unfortunately, there is no general procedure that can be applied in any situation. In this section, we present the most important technique, the Filippov test that allows to tackle several types of problems. We emphasize that it is fundamental to verify the existence of optimal controls before applying first-order conditions (i.e., the Pontryagin Maximum Principle). Otherwise, as discussed in the finite-dimensional case, it may occur that the Pontryagin Maximum Principle has solutions, but none of them is optimal.
+
+
+4.2 Existence of solutions for Optimal Control Problems: the Filippov test51
+To fix the ideas, let us consider the problem OCP with without final cost (φ = 0 ) and T fixed. In order to tackle the existence problem, we define a new variable q0 obtained as the value of the cost during the time-evolution, that is,
+q0(t) =
+∫t
+0
+f 0(q(s), u(s)) ds,
+and we denote qˆ = (q0, q). The dynamics of the new state qˆ in R × M are given by
+q ̇ˆ(t) =
+( q ̇0(t) q ̇(t)
+)
+=
+( f 0(q(t), u(t)) f (q(t), u(t))
+)
+=: fˆ(q(t), u(t)),
+qˆ(0) = (0, qin), qˆ(T ) ∈ R × T .
+This control system is called the augmented system. The minimization problem in in
+tegral form, min ∫ T
+0 f 0(q(t), u(t)) dt, becomes a problem of minimization of one of the
+coordinates at the final time, i.e., min q0(T ).
+We denote by RˆT (0, qin) the reachable set in time T for the augmented system, starting from (0, qin). The key observation on which optimal control is based is expressed by the following proposition.
+Proposition 4.0. If q(·) is an optimal trajectory for problem OCP, then qˆ(T ) ∈ ∂RˆT (0, qin).
+Proof. By contradiction, if qˆ(T ) = (q0(T ), q(T )) ∈ intRˆT (0, qin) then there exists a trajectory reaching a point (α, q(T )) with α < q0(T ), i.e., arriving at the same point in M, but with a smaller cost. See Fig. 4.1.
+When RˆT (0, qin)∩(R×T ) is nonempty and compact, an optimal trajectory for problem OCP exists, as it can be deduced at once by taking any converging subsequence of a minimizing sequence. Hence we have the following.
+Proposition 4.1. If RˆT (0, qin) is compact, T is closed, and RˆT (0, qin) ∩ (R × T ) is nonempty, then there exists a solution to problem OCP.
+Hence the compactness of RˆT (0, qin) is a key point. A sufficient condition for compactness of the reachable set is given by the following theorem (see, e.g., [?]).
+Theorem 4.2 (Filippov). Fix T > 0. Consider the control system q ̇(t) = f (q(t), u(t)), q ∈ M, u(·) ∈ L∞([0, T ], U), where M is a n-dimensional smooth connected manifold and U ⊂ Rm. Fix an initial condition qin ∈ M. Assume the following conditions:
+• the set U is compact,
+• the set F(q) =
+{
+f (q, u) | u ∈ U
+}
+is convex for every q ∈ M,
+
+
+52 Chap. 4 – Introduction to Optimal Control
+q0
+Tq
+qin
+RˆT (0, qin)
+∂Rˆ T (0, qin)
+non-optimal trajectory
+optimal trajectory
+Figure 4.1: The reachable set of the augmented system
+• for every u ∈ L∞([0, T ], U), the solution of q ̇(t) = f (q(t), u(t)), q(0) = qin, is defined on the whole interval [0, T ].
+Then the sets RT (qin) and R≤T (qin) are compact.
+Here
+R≤T (qin) := {q ̄ ∈ M | ∃ T ′ ∈ [0, T ]
+and an admissible trajectory q : [0, T ′] → M
+such that q(0) = qin, q(T ′) = q ̄}.
+Remark 1. The conclusion of Filippov’s theorem may fail to hold if we drop the convexity assumption on the set F(q) of admissible velocities, as illustrated by the following exam
+ple. Take M = R2, U = {1, 2}, and f (q, u) = Auq with A1 = ( −1 1
+−1 0
+) and A2 = ( −1 −1
+1 0 ). Notice that the corresponding control system satisfies all the assumptions of Th. 4.2 except for the convexity of F(q). Pick qin = (1, 0) and any T > 0. Then qT := e−T qin is in the closure of RT (qin), since we can end up arbitrarily close to qT at time T by applying a control that switches fast enough between 1 and 2. On the other hand, if q ̇(t) = f (q(t), u(t)) at time t and q(t) has a nonzero vertical component, then d
+dt ‖q(t)‖ > −‖q(t)‖. Since
+every trajectory of the control system starting at qin necessarily leaves the horizontal axis, its final point at time T has norm larger than e−T . Consequently qT 6∈ RT (qin). This proves that RT (qin) is not closed, hence the conclusion of Th. 4.2 does not hold.
+Note that the third hypothesis of Th. 4.2 is automatically satisfied when M is compact. By applying this theorem to the augmented system for problem OCP, one obtains:
+Proposition 4.3. Fix T > 0. Assume that
+
+
+4.2 Existence of solutions for Optimal Control Problems: the Filippov test53
+• T is closed and RT (qin) ∩ T 6= ∅,
+• the set U is compact,
+• the set Fˆ (q) =
+{( f 0(q, u) f (q, u)
+)
+|u∈U
+}
+is convex for every q ∈ M,
+• for every u(·) ∈ L∞([0, T ], U) the solution of q ̇(t) = f (q(t), u(t)), q(0) = qin, is defined on the whole interval [0, T ].
+Then there exists a solution to problem OCP.
+The idea of reducing the problem of existence of an optimal control to the compactness of the reachable set of the augmented system can be used for more general problems. For
+instance, if we add a terminal cost φ(q(T )) to the cost ∫ T
+0 f 0(q(t), u(t)) dt, where φ is a
+smooth function (as for instance in the general formulation given in Sec. 5.1), we get a similar result adding to f 0(q(t), u(t)) the directional derivative of φ along f (q(t), u(t)), that is, replacing f 0(q(t), u(t)) by f 0(q(t), u(t)) + 〈dφ(q(t)), f (q(t), u(t))〉. Here dφ(q(t)) denotes the differential of φ evaluated at q(t) and we recall that 〈·, ·〉 is the duality product between covectors of T ∗M and vectors of T M (see Section 5.1 for the definition of T ∗M) We leave the details as an exercise. When the final time is free, it is more difficult to get the existence of optimal trajectories. However, the compactness of R≤T (qin) in the Filippov theorem can be used to find conditions for the existence of optimal controls in minimum time. We state this result in the case where M is compact and we leave its proof as an exercise. Note that the problem of minimizing time can be written in the form of problem OCP with T free and f 0 = 1.
+Proposition 4.4. Consider problem OCP with T free, f 0 = 1, and M compact. Assume that
+• T is closed and R(qin) ∩ T 6= ∅,
+• the set U is compact,
+• the set F(q) = {f (q, u) | u ∈ U} is convex for every q ∈ M.
+Then there exists a solution to the problem.
+Example. Consider the time evolution of the wave function of a N-level closed quantum system. In this case, the dynamics are governed by the Schro ̈dinger equation (in units where ħ = 1)
+iψ ̇(t) =
+(
+H0 +
+∑ m
+j=1
+uj (t)Hj
+)
+ψ(t), (4.3)
+
+
+54 Chap. 4 – Introduction to Optimal Control
+where ψ, the wave function, belongs to the unit sphere in CN and H0, . . . , Hm are N × N Hermitian matrices. The control parameters uj(t) ∈ R are the components of the control u(·). This control problem has the form q ̇ = f (q, u(t)) where M = S2N−1 ⊂ CN , q = ψ,
+and f (ψ, u) = −i(H0 + ∑m
+j ujHj)ψ. Consider now the problem of steering an initial state
+ψin to a final state ψfi in minimum time with U = [−1, 1]m. We assume the controllability
+of the system. Since U and M = S2n−1 are compact and {(H0 + ∑m
+j=1 ujHj)ψ | u ∈ U }
+is convex for every ψ ∈ M, we deduce the existence of an optimal solution. In this case, note that the convexity of U leads to the one of the set of admissible velocities at each point.
+4.3 First order conditions
+For a smooth real-valued function of one variable f 0 : R → R, first-order optimality
+conditions are obtained from the observation that, at points where df0
+dx 6= 0, the function
+f 0 is well approximated by its first-order Taylor series and hence cannot be optimal since it behaves locally as an affine (non-constant) function. In this way, one obtains the necessary condition: If x ̄ is minimal for f 0 then df0
+dx (x ̄) = 0. First-order conditions in
+optimal control are derived in the same way. We have to require that for a small control variation, there is no cost variation at first order. More precisely, if J(u(·)) is the value of the cost for a reference admissible control u(·)
+(for instance J(u(·)) = ∫ T
+0 f 0(q(t), u(t)) dt + d(T , q(T ))), and v(·) is another admissible
+control, one would like to consider a condition of the form
+∂J(u(·) + hv(·)) ∂h
+∣ ∣ ∣
+∣h=0
+= 0. (4.4)
+But difficulties may arise for the following reasons. We work in an infinite-dimensional space (the space of controls) and hence condition (4.4) should be required for infinitely many v(·). It may very well happen that if u(·) and v(·) are admissible controls then u(·) + hv(·) is not admissible for every h close to 0. Think, for instance, to the case in which m = 1 and U = [a, b]. If u(t) ≡ b is the reference control, then u(t) + hv(t) is not admissible for any non-zero perturbation v(·) when hv(t) is strictly positive. Hence, one should be very careful in choosing the admissible variations in order to fulfill the control restrictions. Moreover one should restrict only to control variations for which the corresponding trajectory reaches the target. More precisely, if q ̃(·) is the trajectory corresponding to the control u ̃(·) := u(·) + hv(·), one should add the condition
+q ̃(T ) ∈ T , (4.5)
+with T either free or constrained to be the fixed final time depending on the problem under study. Condition (4.5) should be considered as a constraint for the minimization problem, which results in the use of Lagrange multipliers (normal and abnormal).
+
+
+4.3 First order conditions 55
+The occurrence of Lagrange multipliers in optimal control is therefore not due to the fact that the optimization takes place in an infinite-dimensional space, but is rather a general feature of constrained minimization problems, as explained in Sec. 4.3.1.
+4.3.1 Why Lagrange multipliers appear in constrained problems
+We first recall how to find the minimum of a function of n variables f 0(x), where x = (x1, . . . , xn), under the constraint f (x) = 0, with the method of Lagrange multipliers. Here f 0 and f are two smooth functions Rn → R. We have two cases. • If x ̄ is a point such that f (x ̄) = 0 with ∇f (x ̄) 6= 0, then the implicit function theorem guarantees that {x | f (x) = 0} is a smooth hypersurface in a neighborhood of x ̄. In this case, a necessary condition for f 0 to have a minimum at x ̄ is that the level set of f 0 (i.e., the set on which f 0 takes a constant value) is not transversal to the set {x | f (x) = 0} at x ̄. See Figure 4.2. More precisely, this means that
+∃λ ∈ R such that ∇f 0(x ̄) = λ∇f (x ̄). (4.6)
+This statement can be proved by assuming, for instance, that ∂xnf (x ̄) 6= 0. The set {x | f (x) = 0} can then be expressed locally around x ̄ as xn = g(x1, . . . , xn−1). The requirement that
+∂xif (x1, . . . , xn−1, g(x1, . . . , xn−1)) ≡ 0,
+i = 1, . . . , n − 1,
+∂xi f 0(x1, . . . , xn−1, g(x1, . . . , xn−1))|x=x ̄ = 0,
+i = 1, . . . , n − 1,
+provides immediately condition (4.6) with λ = ∂xnf0(x ̄)
+∂xn f (x ̄) .
+Notice that λ could be equal to zero. This case corresponds to the situation in which f 0 has a critical point at x ̄ even in absence of the constraint. • If x ̄ is a point such that f (x ̄) = 0 with ∇f (x ̄) = 0 then the set {x | f (x) = 0} could be very complicated in a neighborhood of x ̄ (typical examples are a single point, two crossing curves, . . . but it could be any closed set). In general the value of f 0 at these points cannot be compared with neighboring points by requiring that a certain derivative is zero (think for instance to the case in which {x | f (x) = 0} is an isolated point). However, they are candidates to optimality. As an illustrative example, consider the case where n = 2, f 0(x1, x2) = x21 + (x2 − 1/4)2, and f (x1, x2) = (x21 + x22)(x21 + x22 − 1). The point x ̄ is an isolated point for which f (x ̄) = 0 and ∇f (x ̄) = 0.
+These results can be rewritten in the following form.
+
+
+56 Chap. 4 – Introduction to Optimal Control
+f 0 =const
+x ̄
+f =0
+Figure 4.2: Intersection of the set f (x) = 0 (solid line) with the level set of f 0 (dashed line). The two gradients ∇f (x) and ∇f 0(x) are parallel at x = x ̄.
+Theorem 4.5 (Lagrange multiplier rule in Rn). Let f 0 and f be two smooth functions from Rn to R. If f 0 has a minimum at x ̄ on the set {x | f (x) = 0}, then there exists
+( ̄λ,  ̄λ0) ∈ R2 \ {(0, 0)} such that, setting Λ(x, λ, λ0) = λf (x) + λ0f 0(x), we have
+∇xΛ(x ̄,  ̄λ,  ̄λ0) = 0, ∇λΛ(x ̄,  ̄λ,  ̄λ0) = 0. (4.7)
+To show that this statement is equivalent to what we just discussed, we observe that the second equality in (4.7) gives the constraint f (x ̄) = 0. For the first equation, we have
+two cases. If  ̄λ0 6= 0 then we can normalize  ̄λ0 = −1 and we get  ̄λ∇xf (x ̄) − ∇xf 0(x ̄) = 0,
+i.e., Eq. (4.6) with the change of notation λ →  ̄λ. If  ̄λ0 = 0 then  ̄λ 6= 0 and we get ∇xf (x ̄) = 0, that is, the second case studied above.
+The quantities  ̄λ and  ̄λ0 are respectively called Lagrange multiplier and abnormal
+Lagrange multiplier. If (x ̄,  ̄λ0,  ̄λ) is a solution of Eq. (4.7) with  ̄λ0 6= 0 (resp.,  ̄λ0 = 0) then x ̄ is called a normal extremal (resp., abnormal extremal). An abnormal extremal is a candidate for optimality and occurs, in particular, when we cannot guarantee (at first order) that the set {x | f (x) = 0} is a smooth curve. Abnormal extremals are candidates for optimality regardless of cost f 0. Note that if x ̄ is such that ∇xf (x ̄) = 0 and ∇xf 0(x ̄) = 0 then x ̄ is both normal and abnormal. This is the case in which x ̄ satisfies the first-order condition for optimality even without the constraint, but we cannot guarantee that the constraint is a smooth curve. In the (infinite-dimensional) case of an optimal control problem, normal and abnormal Lagrange multipliers appear in a very similar way. We are going to see this in the next chapter.
+
+
+Chapter 5
+The Pontryagin Maximum Principle
+(PMP): Formulation and Use
+5.1 Statement of the Pontryagin Maximum Principle
+In this chapter, we state the first-order necessary conditions for optimal control problems, namely the Pontryagin Maximum Principle (PMP for short). The basic idea is to define a new object (the pre-Hamiltonian, see Eq. (6.6) below) which allows to formulate the Langrange multiplier conditions in a simple and direct way.
+Notation Given a smooth manifold M we indicate its tangent space at a point q ∈ M as TqM. The set of all tanget spaces is called the tangent bundle and it is indicated as TM.
+A covector is a linear p : TqM → R. The set of all covectors acting on vectors in TqM is indicated as Tq∗M (the contangent space at q ∈ M). The set of all cotangent spaces is
+called the cotangent bundle and it is indicated as T ∗M. The action of p ∈ Tq∗M, on v ∈ TqM is indicated with the symbol (called the duality product)
+〈p, v〉.
+When M = Rn or we are working in coordinates, we write
+v=
+
+ 
+v...1
+vn
+
+
+ , p = (p1, . . . , pn), 〈p v〉 = p · v = p1v1 + . . . + pnvn.
+Theorem 5.1. Consider the optimal control problem
+ 
+
+q ̇(t) = f (q(t), u(t)),
+q(0) = qin, q(T ) ∈ T ,
+∫T
+0 f 0(q(t), u(t)) dt + φ(q(T )) −→ min,
+(5.1)
+where
+
+
+5C8hap. 5 – The Pontryagin Maximum Principle (PMP): Formulation and Use
+• M is a smooth connected manifold of dimension n, U ⊂ Rm,
+• T is a (non-empty) smooth submanifold of M. It can be reduced to a point (fixed terminal point) or coincide with M (free terminal point),
+• f , f 0 are smooth,
+• u(·) ∈ L∞([0, T ], U),
+• q : [0, T ] → M belongs to the set of Lipschitz continuous curves.
+Define the function (called pre-Hamiltonian)
+H(q, p, u, p0) = 〈p, f (q, u)〉 + p0f 0(q, u), (5.2)
+with
+(q, p, u, p0) ∈ T ∗M × U × R.
+If the pair (q, u) : [0, T ] → M ×U is optimal, then there exists a never vanishing Lipschitz continuous pair (p, p0) : [0, T ] ∋ t 7→ (p(t), p0) ∈ Tq∗(t)M × R where p0 ≤ 0 is a constant and such that for almost every (a.e.) t ∈ [0, T ] we have
+i) q ̇(t) = ∂H
+∂p (q(t), p(t), u(t), p0) (Hamiltonian equation for q);
+ii) p ̇(t) = −∂H
+∂q (q(t), p(t), u(t), p0) (Hamiltonian equation for p);
+iii) the quantity HM (q(t), p(t), p0) := maxv∈U H(q(t), p(t), v, p0) is well-defined and
+H(q(t), p(t), u(t), p0) = HM (q(t), p(t), p0)
+which corresponds to the maximization condition.
+Moreover,
+iv) there exists a constant c ≥ 0 such that HM (q(t), p(t), p0) = c on [0, T ], with c = 0 if the final time is free (value of the Hamiltonian);
+v) for every v ∈ Tq(T )T , we have 〈p(T ), v〉 = p0〈dφ(q(T )), v〉 (transversality condition), where dφ is the differential of the function φ.
+Some comments are in order. • The covector p is called adjoint state in control theory. The quantities p(·) and p0 play the role of Lagrange multipliers for the constrained optimization problem. We point out the similarity between the expressions of H and of Λ in Th. 4.5 (with the change of notation and p → λ). • A trajectory q(·) for which there exist p(·), u(·) and p0 such that (q(·), p(·), u(·), p0) satisfies all the conditions given by the PMP is called an extremal trajectory and the
+
+
+5.2 Use of the Pontryagin Maximum Principle 59
+4-uple (q(·), p(·), u(·), p0) an extremal or, equivalently, an extremal lift of q(·). Such an extremal is called normal if p0 6= 0 and abnormal if p0 = 0. It may happen that an extremal trajectory q(·) admits both a normal extremal lift (q(·), p1(·), u(·), p0) and an abnormal one (q(·), p2(·), u(·), 0). In this case, we say that the extremal trajectory q(·) is a non-strict abnormal trajectory. Note that (as in the finite-dimensional case) abnormal trajectories are candidates for optimality regardless of the cost. In the finite-dimensional case they correspond to singularities of the constrain function, while here they correspond to singularities of the functional associating with a control v(·) the endpoint at time T of the solution of q ̇(t) = f (q(t), v(t)), q(0) = qin. • The PMP is only a necessary condition for optimality. It may very well happen that an extremal trajectory is not optimal. The PMP can therefore provide several candidates for optimality, only some of which are optimal (or even none of them if the step of existence has not been verified, see Sec. 4.2). • Since the equation for p(·) at point ii) of the PMP is linear, if (q(·), p(·), u(·), p0) is an extremal, then for every α > 0, (q(·), αp(·), u(·), αp0) is an extremal as well. As a consequence, some useful normalizations are possible. A typical normalization for normal extremals is to require p0 = −1
+2 but other choices are also possible.
+• When there is no final cost (φ = 0), the transversality condition v) simplifies to:
+〈p(T ), Tq(T )T 〉 = 0. (5.3)
+When the final point is fixed (T = {qfi}), Tq(T )T is a zero-dimensional manifold and hence condition (5.3) is empty. When the final point is free (T = M) the transversality condition simplifies to p(T ) = p0dφ(q(T )). In local coordinates, we recover that p(T ) is proportional to the gradient of φ evaluated at the point q(T ). Notice that, since (p(T ), p0) 6= 0, in this case one necessarily has p0 6= 0.
+5.2 Use of the Pontryagin Maximum Principle
+The application of the PMP is not so straightforward. Indeed, there are many conditions to satisfy and all of them are coupled. This section is aimed at describing how to use it in practice. The following points should be followed first for normal extremals (p0 < 0) and then for abnormal extremals (p0 = 0). In the first case, p0 can be normalized to −1/2 since p0 is defined up to a multiplicative positive factor. In the different steps, several difficulties (that are briefly mentioned) may arise. Most of them should be solved case by case, since they can be of different nature depending on the problem under study.
+Step 1. Use the maximization condition iii) to express, when possible, the control as a function of the state and of the covector, i.e., u = w(q, p). Note that if we have m controls (e.g., if U is an open subset of Rm ) then the first-order maximality conditions give m equations for m unknowns. When the maximization condition
+
+
+6C0hap. 5 – The Pontryagin Maximum Principle (PMP): Formulation and Use
+permits to express u as a function of q and p, we say that the control is regular, otherwise the control is said to be singular. In T ∗M, we may have regions where the control is regular and regions where it is singular. For singular controls, finer techniques have to be used to derive the expression of the control. This point is discussed in the examples.
+Step 2. Insert the control found in the previous step into the Hamiltonian equations i) and ii):
+{q ̇(t) = ∂H
+∂p (q(t), p(t), w(q(t), p(t)), p0)
+p ̇(t) = − ∂H
+∂q (q(t), p(t), w(q(t), p(t)), p0). (5.4)
+In case the previous step provides a smooth w(·, ·), this is a well-defined set of 2n equations for 2n unknown. Note, however, that the boundary conditions are given in a non-standard form since we know q(0) but not p(0). Instead of p(0), we have a partial information on q(T ) and p(T ) depending on the dimension of T (see the next step to understand how these final conditions are shared between q(T ) and p(T )). We then solve Eq. (5.4) for fixed q(0) = qin and any p(0) = pin ∈ Tq∗inM . Let us denote the solution as
+q(t; pin, p0), p(t; pin, p0). (5.5)
+We stress that when w(·, ·) is not regular enough, solutions to the Cauchy problem (5.4) with q(0) = qin and p(0) = pin may fail to exist or to be unique.
+Step 3. Find pin such that
+q(T ; pin, p0) ∈ T . (5.6)
+Note that if T is reduced to a point and T is fixed, we get n equations for n unknown (the components of pin). If T is free then an additional equation is needed. This condition is given by the relation iv) in the PMP. If T is a k-dimensional submanifold of M (k ≤ n) then Eq. (5.6) provides only n − k equations and the remaining ones correspond to the transversality condition v) of the PMP.
+Step 4. If Eq. (5.6) (together with the transversality condition and condition iv) of the PMP if T is free) has a unique solution pin and if we have verified a priori the existence step, then the optimal control problem is solved. Unfortunately, in general there is no reason for Eq. (5.6) to provide a unique solution. Indeed, the PMP is only a necessary condition for optimality. If several solutions are found, one should choose among them the best one by a direct comparison of the value of the cost. This is, in general, a non-trivial step, complicated by the difficulty of solving explicitly Eq. (5.6). For this reason, several techniques have been developed to select the extremals. Among others, we mention the sufficient conditions for optimality given by Hamilton–Jacobi–Bellman theory and synthesis theory. We refer to [Bo-Pi20] for a discussion.
+
+
+5.2 Use of the Pontryagin Maximum Principle 61
+5.2.1 Extremal and Optimal syntheses
+Often in application is interesting to solve an optimal control problem with fixed initial condition qin and any final condition qfi. Assume for simplicity that T is free. Let us assume that there is existence of optimal solutions for the problem (5.1) for every qfi ∈ M. The collection of all extremal trajectories starting from qin obtained in step 2 plus the condition that HM = 0:
+Γ = {q(·; pin, p0) | pin ∈ Tq∗inM, p0 ∈ {0, 1/2}, HM (qin, pin, p0) = 0},
+is called an extremal synthesis. Notice that for a trajectory to be in Γ is not required to satisfy v) of the Pontryagin maximum principle since T is reduced to a point. Moreover we are not requiring that q(T ; pin, p0) = qfi. A choice in Γ of one optimal trajectory for every qfi ∈ M is called an optimal synthesis.
+Γopt = {qqfi(·) | qqfi ∈ M and qqfi(·) is a solution of (5.1) with final condition q(T ) = qfi}.
+Notice that in general an extremal synthesis contains many more trajectories than an optimal synthesis. Actually to obtain Γopt from Γ one should do in the following way. For every qfi one should consider all trajectories arriving at that point and eliminate all non-optimal ones. If there are several optimal trajectories arriving to that point, one should select only one of those. The concepts of extremal and optimal synthesis will be clarified in the examples.
+
+
+6C2hap. 5 – The Pontryagin Maximum Principle (PMP): Formulation and Use
+
+
+Chapter 6
+Proof of the PMP for Control Affine
+Systems with Quadratic Cost
+In this chapter we give the proof of the Pontryagin Maximum Principle for a very important class of nonlinear optimal control problems, namely control affine systems with quadratic cost.
+Problem OCP-AQ
+q ̇ = F0(q) +
+m ∑
+i=1
+ui(t)Fi(q), (6.3)
+q(0) = qin, q(T ) = qfi,
+∫T
+0
+m ∑
+i=1
+ui(t)2 dt → min (6.4)
+Here • T > 0 is fixed, • M is a smooth n-dimensional connected manifold, • Fi, i = 0, 1, . . . , m are smooth vector fields, • u(·) := (u1(·), . . . , um(·)) ∈ L∞([0, T ], Rm), • q(·) : [0, T ] → M, belongs to the set of Lipschitz curves.
+This problem is important since the control affine form (6.3) models most of the systems that one can find in applications and a cost of the type (6.4) represents the energy given by the controls to the systems. In OCP-AQ it is very important that controls take values in R and that T is fixed. For simplicity we have decided to fix that T is a single point, but the generalization to the case in which T is a smooth submanifold of M is not hard..
+
+
+6C4hap. 6 – Proof of the PMP for Control Affine Systems with Quadratic Cost
+Definition 6.0. When F0 = 0 the problem OCP-AQ is called sub-Riemannian.
+We will study in more detail the sub-Riemannian problem in Chapter (7). In this chapter we do not assume that a solution to OCP-AQ exists. We only look for first order optimality conditions to recover the Pontryagin Maximum Principle in this case. The problem of existence of optimal solutions for OCP-AQ is hard since the control u(·) = (u1(·), . . . , um(·)) takes values in Rm which is non compact and hence we cannot apply the Filippov theorem. We will study the existence problem for the sub-Riemannian case in the next chapter.
+6.1 Statement of the PMP for control affine systems with quadratic cost
+We prove the following.
+Theorem 6.1 (Pontryagin Maximum Principle for OCP-AQ). Define the function (called pre-Hamiltonian)
+H(q, p, u, p0) = 〈p, F0(q) +
+∑ m
+i=1
+uiFi(q)〉 + p0
+m ∑
+i=1
+ui2, (6.6)
+with
+(q, p, u, p0) ∈ T ∗M × Rm × R.
+If the pair (q, u) : [0, T ] → M ×Rm is optimal for OCP-AQ, then there exists a never vanishing Lipschitz continuous pair (p, p0) : [0, T ] ∋ t 7→ (p(t), p0) ∈ Tq∗(t)M × R where p0 ≤ 0 is a constant and such that for almost every (a.e.) t ∈ [0, T ] we have
+i) q ̇(t) = ∂H
+∂p (q(t), p(t), u(t), p0) (Hamiltonian equation for q);
+ii) p ̇(t) = −∂H
+∂q (q(t), p(t), u(t), p0) (Hamiltonian equation for p);
+iii) ∂H
+∂u (x(t), p(t), p0, u(t)) = 0 (maximization condition);
+iv) there exists a constant c ≥ 0 such that H(q(t), p(t), u(t), p0) = c on [0, T ],
+Theorem 6.1 is exatly Theorem 5.1 written for the problem OCP-AQ. Actually conditions i) and ii) of the two theorems are identical. The maximization condition iii) of Theorem 5.1 applied to an Hamiltonian quadratic in u with negative coefficient in front of the quadratic part coincide with iii) of Theorem 6.1. Condition iv) of Theorem 5.1 is the same as condition iv) of Theorem 6.1 for T fixed. Condition v) is empty since T coincide with a point.
+
+
+6.2 Proof of the Pontryagin Maximum Principle 65
+6.2 Proof of the Pontryagin Maximum Principle
+To avoid difficulties we will however assume that the control system (6.3) is complete starting from qin in time T , namely we will assume that
+Assumption For every u(·) = (u1(·), . . . , um(·)) ∈ L∞([0, T ], Rm) the solution of (6.3) with q(0) = qin exists in [0, T ].
+The idea of the proof is the following. We add a new variable q0(t) = ∫ t
+0
+∑m
+i=1 u(s)2 ds
+and we consider the dynamics for qˆ = (q0, q)T :
+qˆ ̇(t) =
+( q ̇0(t) q ̇(t)
+)
+=
+( ∑m
+i=1 ui(t)2
+F0(q(t)) + ∑m
+i=1 ui(t)Fi(q(t))
+)
+. (6.7)
+We define the end-point mapping as the map that to a control associates the end point of the corresponding trajectory starting from qin:
+L∞([0, T ], Rm) ∋ u(.) End
+7−→
+( q0(T ) q(T )
+)
+∈ R × M.
+Assume for a moment that End is Fr ́echet differentiable. On an optimal control u ̃(.) this map cannot be a surjection (i.e. its differential cannot be invertible). Otherwise the image of a ball in L∞([0, T ], R) around the optimal control u ̃(.), would contain an open set in R × M and one could reach the same final point q(T ) with a smaller cost (see the following picture and cf. Section s-existence). Then it should exists a covector pˆT := (p0, pT ) 6= 0 which annihilate Im(Du ̃(·)(End)).
+〈pˆT , Im(Du ̃(·)(End))〉 = 0 (6.8)
+This is the main idea that permit to prove Theorem 6.1.
+q0
+non-optimal trajectory
+qin qfi
+q
+q0
+R(T, qin)
+pˆT
+candidate optimal trajectory
+qin qfi
+R(T, qin)
+q
+To avoid the difficulties of making the differential of a map on an infinite dimensional space, in the following we will make only variations in a finite dimensional set of controls. Moreover the condition (6.8) will be “transported back” the initial point. This permits to get an equation for the covector.
+
+
+6C6hap. 6 – Proof of the PMP for Control Affine Systems with Quadratic Cost
+6.2.1 Notation
+In the following, for simplicity of notation, we assume that the control system is complete. If it is not complete, the proof can be made similarly. We use the following notation.
+• We set fu(q) := F0(q) + ∑m
+i=1 uiFi(q)
+• We call u ̃(.) the optimal control and q ̃(.) the optimal trajectory starting from qin.
+• We call φt the optimal flow i.e. the flow associated to the differential equation q ̇ = fu ̃(t)(q). Notice that
+-) q ̃(t) = φt(qin), but in general φt(q ̄) is not an optimal trajectory for q ̄ 6= qin.
+-) d
+dt φt = fu ̃(t) ◦ φt.
+-) Since the control system is complete, φt is a diffeomorphism.
+• Let Φ : M → M be a diffeomorphism (i.e. a smooth math which is invertible together with its inverse). Its differential, indicated as Φ∗(q) or Φ∗|q or ∂Φ
+∂q , at a
+point q ∈ M is the map
+TqM ∋ v 7→ Φ∗(q)v ∈ TΦ(q)M,
+defined by
+Φ∗(q)v = ∂
+∂t
+∣ ∣ ∣
+∣t=0
+Φ(γ(t)),
+where γ is a smooth curve such that γ(0) = q and γ ̇ (0) = v.
+• Given a linear operator A on TqM we define the adjoint A∗ of A as the linear operator acting on Tq∗M defined by
+〈A∗p, v〉 = 〈p, Av〉 for every v ∈ TqM.
+In coordinates using our convention of representing vectors as column vectors and covectors s row vectors (cf. Section 5.1) we have that 〈p, v〉 = p v and p(Av) = 〈p, Av〉 = 〈A∗p, v〉 = (pA)v meaning that A∗ is represented by the same matrix as A but acting on the left.1
+The codifferential of Φ indicated as Φ∗(q) or Φ∗|q at a point q ∈ M is the map
+TΦ∗(q)M ∋ p 7→ Φ∗(q)p ∈ Tq∗M,
+1if we were using the convention of representing co-vectors as column vectors as well then 〈p, v〉 = pT v and
+pT (Av) = 〈p, Av〉 = 〈A∗p, v〉 = (AT p)T v = (pT A)v
+meaning that A∗ would be represented by its trasposition (acting on the right as A).
+
+
+6.2 Proof of the Pontryagin Maximum Principle 67
+defined by duality
+〈Φ∗(q)p, v〉q = 〈p, Φ∗(q)v〉Φ(q), v ∈ TqM, p ∈ TΦ∗(q)M.
+In this formula we have indicated at which point the duality product between vectors and covectors is calculated. Alternatively (since Φ is invertible and hence Φ∗(q) and Φ∗(q) are invertible as well) we can define
+〈Φ∗−1(q)p, Φ∗(q)v〉Φ(q) = 〈p, v〉q, v ∈ TqM, p ∈ Tq∗M.
+Notice that when M = Rn or we are working in coordinates then with our convention
+Φ(x) =
+
+ 
+Φ1(x)
+...
+Φn(x)
+
+
+,
+Φ∗(x) =
+
+ 
+∂Φ1
+∂x1 . . . ∂Φ1
+∂xn
+... . . . ...
+∂Φn
+∂x1 . . . ∂Φn
+∂xn
+
+
+,
+Φ∗(x) =
+
+ 
+∂Φ1
+∂x1 . . . ∂Φ1
+∂xn
+... . . . ...
+∂Φn
+∂x1 . . . ∂Φn
+∂xn
+
+
+ acting on the left,
+Φ∗−1(x) =
+
+ 
+∂Φ1
+∂x1 . . . ∂Φ1
+∂xn
+... . . . ...
+∂Φn
+∂x1 . . . ∂Φn
+∂xn
+
+ 
+−1
+acting on the left.
+6.2.2 The variation
+Let q(.) be the trajectory starting from qin and corresponding to a control u(.) = u ̃(.)+v(.). Let us define
+r(t) = φt−1(q(t)).
+This is the trajectory corresponding to the control u(.) brought back with the optimal flow. Notice that r(0) = q(0) = qin. Moreover if v(.) ≡ 0 then r(.) ≡ qin.
+
+
+6C8hap. 6 – Proof of the PMP for Control Affine Systems with Quadratic Cost
+φt
+qin
+q ̃(.)
+r(.)
+qfi
+q(.)
+Let us look for an equation for r(t). Differentiating q(t) = φt(r(t)), we get
+q ̇(t) = d
+dt φt
+∣ ∣
+∣r(t) + ∂φt
+∂q
+∣ ∣
+∣r(t)r ̇(t) = fu ̃(t)(φt(r(t))) + ∂φt
+∂q
+∣ ∣
+∣r(t)r ̇(t)
+Now q ̇(t) = fu(t)(q(t)) = fu(t)(φt(r(t))). Hence
+r ̇(t) =
+[ ∂φt ∂q
+∣ ∣
+∣r(t)
+]−1 (
+fu(t)(φt(r(t))) − fu ̃(t)(φt(r(t)))
+)
+=
+[ ∂φt ∂q
+∣ ∣
+∣r(t)
+]−1 m ∑
+i=1
+vi(t)Fi(φt(r(t))) =: gv(t)(r(t)). (6.9)
+Notice that if we set v ≡ 0 in the Cauchy problem
+{ r ̇ = gv(t)(r) r(0) = qin
+then gv ≡ 0 and r(.) ≡ qin. Notice moreover that gsv = sgv, for every s ∈ R.
+6.2.3 The crucial step
+Fix v(.) and consider the map
+s 7→
+( q0(T, u ̃(.) + sv(.)) r(T, u ̃(.) + sv(.))
+)
+starting from
+(0
+qin
+)
+Lemma 6.2. If (q ̃(.), u ̃(.)) is a solution to the problem P-AQ then there exists pˆ ∈ R∗ × Tq∗inM , pˆ 6= 0, such that
+〈pˆ,
+(∂q0(T, u ̃(.) + sv(.)) ∂s
+∣ ∣
+∣s=0, ∂r(T, u ̃(.) + sv(.))
+∂s
+∣ ∣
+∣s=0
+)T 〉 = 0 for every v(.). (6.10)
+
+
+6.2 Proof of the Pontryagin Maximum Principle 69
+Proof.
+⊲ By contradiction there exists n + 1 variations η0(.), η1(.), . . . , ηn(.) such that
+( ∂q0(T,u ̃(.)+sη0(.)) ∂s
+∣
+∣s=0
+∂ r(T ,u ̃(.)+sη0 (.)) ∂s
+∣
+∣s=0
+)
+,...,
+( ∂q0(T,u ̃(.)+sηn(.)) ∂s
+∣
+∣s=0
+∂ r(T ,u ̃(.)+sηn (.)) ∂s
+∣
+∣s=0
+)
+(6.11)
+are linearly independent. It follows that the map
+(s0, . . . , sn) 7→
+( q0(T, u ̃(.) + ∑n
+j=0 sjηj (.))
+r(T, u ̃(.) + ∑n
+j=0 sjηj (.))
+)
+(6.12)
+is a local diffeomorphism in a neighborhood of the origin of Rn+1 (indeed the vectors (6.11) are the components of the differential of the map (6.12)).
+Let us prove that this is not possible. First notice that that image of the origin through the
+map (6.12) is, ( q0(T, u ̃(.))
+r(T, u ̃(.))
+)
+=
+( q0(T, u ̃(.))
+qin
+)
+.
+Now if (6.12) were a local diffeomorphism there would exist v ̃(.) such that
+q0(T, u ̃(.) + v ̃(.)) < q0(T, u ̃(.))
+q(T, u ̃(.) + v ̃(.)) = φT (r(T, u ̃(.) + v ̃(.))) = φT (r(T, u ̃(.)) = φT (qin) = qin,
+and (q ̃(.), u ̃(.)) would not be optimal.
+q
+non-optimal trajectory candidate optimal trajectory
+pˆ =: (p0, pin)
+q0 q0
+qin qin
+q
+Setting pˆ = (p0, pin) in (6.10), we have that
+p0 ∂q0(T, u ̃(.) + sv(.))
+∂s
+∣ ∣
+∣s=0 + 〈pin, ∂r(T, u ̃(.) + sv(.))
+∂s
+∣ ∣
+∣s=0〉 = 0 for every v(.) (6.13)
+
+
+7C0hap. 6 – Proof of the PMP for Control Affine Systems with Quadratic Cost
+Let us compute the different terms in the sum.
+∂q0(T, u ̃(.) + sv(.)) ∂s
+∣ ∣
+∣s=0 = ∂
+∂s
+∣ ∣
+∣s=0
+∫T
+0
+(u ̃(t) + sv(t))(u ̃(t) + sv(t)) dt
+=2
+∫T
+0
+m ∑
+i=1
+u ̃i(t)vi(t) dt
+∂r(T, u ̃(.) + sv(.)) ∂s
+∣ ∣
+∣s=0 = ∂
+∂s
+∣ ∣
+∣s=0
+∫T
+0
+gsv(t)(r(t, u ̃(.) + sv(.))) dt
+=
+∫T
+0
+gv(t)(r(t, u ̃(.))) dt =
+∫T
+0
+∑ m
+i=1
+vi(t)φt−∗1(qin)Fi(q ̃(t)) dt
+where we have used the notation φt∗ in place of ∂φt
+∂q , the fact that r(t, u ̃(.)) = qin and that φt(r(t, u ̃(.))) = q ̃(t). From (6.13) it follows that
+∫T
+0
+∑ m
+i=1
+vi(t)
+(
+2p0u ̃i(t) + 〈pin, φt−∗1(qin)Fi(q ̃(t))〉
+)
+dt = 0.
+Now 〈pin, φt−∗1(qin)Fi(q ̃(t))〉 = 〈(φt−1)∗pin, Fi(q ̃(t))〉. Hence defining p(t) := (φt−1)∗pin we obtain ∫ T
+0
+∑ m
+i=1
+vi(t)
+(
+2p0u ̃i(t) + 〈p(t), Fi(q ̃(t))〉
+)
+dt = 0.
+Finally, using the arbitrarity of v(·) we get
+2p0u ̃i(t) + 〈p(t), Fi(q ̃(t))〉 = 0, for almost every t ∈ [0, T ]
+Hence we have proven the following (here we remove the “tilde” from the q ̃(.) and u ̃(.)).
+Proposition 6.3. If (q(.), u(.)) is a solution to the problem OCP-AQ then there exists R∗ × TqinM ∋ (p0, pin) 6= (0, 0) such that
+2p0ui(t) + 〈p(t), Fi(q(t))〉 = 0, for almost every t ∈ [0, T ], (6.15)
+where p(t) := (φt−1)∗pin and φt is the flow corresponding to the optimal control u(.).
+6.2.4 The Hamiltonian form
+It remains to show that Proposition 6.3 is equivalent to the Pontryagin Maximum Principle (Theorem (6.1)).
+
+
+6.2 Proof of the Pontryagin Maximum Principle 71
+• equation i) of Theorem 6.1 is equivalent to q ̇(t) = F0(q(t)) + ∑m
+i=1 ui(t)Fi(q(t)). Such an equation is our starting point in problem OCP-AQ.
+• equation iii) of Theorem 6.1 gives immediately equation (6.15).
+• it remains to show that p(t) := (φt−1)∗pin is the solution of ii) of Theorem 6.1. This is the content of the rest of this section.
+We have the following
+Lemma 6.4. Consider the control system
+z ̇ = F(z(t), u(t)) (6.16)
+where
+• N is a smooth manifold, U ⊂ Rm, • F is a smooth function of its arguments, • u(·) ∈ L∞([0, T ], U),
+• z(·) : [0, T ] → N, belongs to the set of Lipschitz curves.
+Fix a control u(·), an initial condition z(0) = zin, and λin ∈ Tz∗inN .
+Define λ(t) = (Φt−1)∗λin ∈ Tz∗(t)N where Φt is the flow of (6.16). Then the pair (z(·), λ(·)) is solution of the Hamiltonian system
+{ z ̇ = ∂H
+∂λ (z, λ, u(t))
+λ ̇ = − ∂H
+∂q (z, λ, u(t)), (6.17)
+where H(z, λ, u) := 〈λ, F(z, u)〉.
+Remark 6.5. This Lemma tells us the following important fact. If z(·) is solution of a differential equation on a manifold N , we fix λin ∈ Tz∗inN and we make evolving λin
+on T ∗N according to the evolution of z(·) i.e., λ(t) = (Φt−1)∗λin ∈ Tz∗(t)N then the pair (z(·), λ(·)) is solution of the simplest possible Hamiltonain system, namely the one having the time-dependent Hamiltonian H(z, λ, u(t)) := 〈λ, F(z, u(t))〉.
+Remark 6.6. We stated Lemma 6.16 for a control system. However in that lemma the control does not play any role and the lemma could be stated for a general time dependent ODE of the type z ̇ = F(z, t) with suitable regularity conditions.
+Let us first apply this Lemma to the augmented system (6.7) for the candidate optimal solution (q(t), u(t)), Namely we set
+N =R×M
+z=
+( q0
+q
+)
+F(z, u) =
+( ∑m
+i=1 ui2
+F0(q) + ∑m
+i=1 uiFi(q)
+)
+
+
+7C2hap. 6 – Proof of the PMP for Control Affine Systems with Quadratic Cost
+for a fixed initial condition zin =
+(0
+qin
+)
+. Let now fix TzinN ∋ λin = (p0, pin) ∈ R∗×Tq∗inM
+and let us write the equation satisfied by
+λ(t) = (Φt−1)∗λin ∈ Tz∗(t)N.
+Notice that since the “zero” component of F is decoupled from the others, we have that
+(Φt−1)∗ =
+(⋆ 0
+0 (φt−1)∗
+)
+where ⋆ is something that is not necessary to compute now. Hence λ(t) = (⋆p0, p(t)) where p(t) = (φt−1)∗pin. The Hamiltonian is
+H(z, λ, u) = 〈λ, F(z, u)〉 = 〈p, F0(q) +
+∑ m
+i=1
+uiFi(q)〉 + p0
+m ∑
+i=1
+ui2 = H(q, p, u)
+and the Hamiltonian equations (6.17) become
+q ̇0 = ∂H
+∂p0 =
+∑ m
+i=1
+ui2(t) (6.18)
+q ̇ = ∂H
+∂p (6.19)
+p ̇0 = − ∂H
+∂q0 = 0 (6.20)
+p ̇ = −∂H
+∂q (6.21)
+Equations (6.21) is the desired equation ii) of Theorem (6.1). Equations (6.18) and (6.19) tell something that we already knew, Equation (6.18) says that ⋆ is actually the identity.
+Proof of Lemma 6.4
+Let us fix a system of coordinates and use matrix notation. Let us write the differential of the flow of F as
+A(t, z) := Φt∗ = ∂Φt
+∂z then λ(t) = (Φt−1)∗λin = λinA−1(t, z).
+The operator A satisfies the famous equation of variations
+∂
+∂t A(t, z) = ∂F
+∂z
+∣ ∣
+∣Φt(z)A(t, z) (6.22)
+i.e., the differential evolves with the linearized equation. Notice that this equation can be solved only together with z ̇ = F(z, u(t))
+
+
+6.2 Proof of the Pontryagin Maximum Principle 73
+The proof of the equation of variation is immediate in the smooth case. Actually
+∂
+∂t A(t, z) = ∂
+∂t
+∂Φt
+∂z = ∂
+∂z
+∂Φt
+∂t = ∂
+∂z F(Φt(z), u(t)) = ∂F
+∂z
+∣ ∣
+∣Φt(z)
+∂Φt
+∂z = ∂F
+∂z
+∣ ∣
+∣Φt(z)A(t, z).
+For the L∞ case see for instance [Bressan-Piccoli]. Now starting from (6.22) let us look for en equation for A(t, z)−1. We have
+AA−1 = id ⇒ A ̇ A−1 + AA ̇ −1 = 0 ⇒ A ̇ −1 = −A−1A ̇ A−1
+Hence
+λ ̇ = d
+dt
+(λinA−1) = λinA ̇ −1 = −λinA−1A ̇ A−1 = − λinA−1
+} {{ } λ
+∂F ∂z
+∣ ∣
+∣Φt(z)AA−1
+= −λ ∂F
+∂z
+∣ ∣
+∣Φt(z) = − ∂H
+∂z (z, λ, u(t))
+(recall that H(z, λ, u) := 〈λ, F(z, u)〉).
+
+
+7C4hap. 6 – Proof of the PMP for Control Affine Systems with Quadratic Cost
+
+
+Chapter 7
+Sub-Riemannian Geometry
+A very important type of optimal control problems is the so called sub-Riemannian problem. It has been already introduced at the beginning of Chapter 6 as an OCP-AQ without drift.
+It is a problem that is linear in the control, with controls taking values in Rm. The cost is quadratic, depends only on the controls and the final time is fixed. Why it is called sub-Riemannian is explained in Remark (7.5).
+Sub-Riemannian Problem
+q ̇ =
+∑ m
+i=1
+ui(t)Fi(q), (7.2)
+q(0) = qin, q(T ) ∈ T ,
+∫T
+0
+m ∑
+i=1
+ui(t)2 dt → min
+Here • T > 0 is fixed, • M is a smooth n-dimensional connected manifold, • T is a (non-empty) smooth submanifold of M. It can be reduced to a point (fixed terminal point) or coincide with M (free terminal point), • Fi, i = 1, . . . , m are smooth vector fields, • u(·) := (u1(·), . . . , um(·)) ∈ L∞([0, T ], Rm), • q(·) : [0, T ] → M, belongs to the set of Lipschitz curves.
+
+
+76 Chap. 7 – Sub-Riemannian Geometry
+7.1 Energy, length and existence of optimal trajectories
+Let us start to to discuss a crucial property of the dynamics (7.2)
+Lemma 7.0. Let q(.) : [0, T ] → Rn, T > 0, be an admissible trajectory corresponding
+to controls ui(·), i = 1, . . . , m. Let τ : [0, T ̄] → [0, T ], be a Lipschitz function such that
+d
+dt τ (t) > 0 a.e. on [0, T ̄]. Set q ̄(·) = q(τ (·)) (this trajectory defined on [0, T ̄] is called a
+Lipschitz reparametrization of q(·)). Then q ̄(.) is an admissible trajectory (on [0, T ̄]) and corresponds to controls ui(τ (·))τ ̇ (·), i = 1, . . . , m.
+Proof. We have
+q ̄ ̇(t) = d
+dtq(τ (t)) = q ̇(τ (t))τ ̇ (t) =
+( m ∑
+i=1
+ui(τ (t))Fi(q(τ (t))
+)
+τ ̇ (t) =
+∑ m
+i=1
+(
+ui(τ (t))τ ̇ (t)
+)
+Fi(q ̄(t)).
+As a consequence for a sub-Riemannian problem we have that for every qin ∈ M and T > 0, we have that R(qin, T ) = R(qin). Recall that a sufficient condition to have R(qin) = M is that for every q ∈ M we have dim(Lieq{F1, . . . Fm}) = n. Actually, with a little bit more work, one can prove the following.
+Lemma 7.1. Let q(.) : [0, T ] → Rn, T > 0, be an admissible trajectory corresponding to
+controls ui(·), i = 1 . . . , m. Let L = ∫ T
+0
+√∑m
+i=1 ui(t)2. Then q(.) is a Lipschitz reparameterization of an admissible trajectory, defined on [0, T ] as well, corresponding to controls
+u ̄i(·), i = 1 . . . , m satisfying √∑m
+i=1 ui(t)2 = L/T , a.e. on [0, T ]. Alternatively, q(.) is a Lipschitz reparameterization of an admissible trajectory defined on [0, L], corresponding
+to controls satisfying √∑m
+i=1 ui(t)2 = 1, a.e. on [0, L].
+Admissible trajectories for which the corresponding controls satisfies ∑m
+i=1 ui(t)2 = 1 a.e. are said to be parametrized by arclength. In other words Lemma 7.1 tells that every admissible trajectory is a Lipschitz reparametrisation of a trajectory parameterized by arclength. Now, for the control system (7.2), consider the two costs:
+E(u(·)) =
+∫T
+0
+∑ m
+i=1
+ui(t)2dt, (energy) (7.3)
+L(u(·)) =
+∫T
+0
+√ √
+√ √
+∑ m
+i=1
+ui(t)2dt (length) (7.4)
+with the conditions
+T > 0, q(0) = qin and q(T ) ∈ T , qin ∈/ T . (7.5)
+
+
+7.1 Energy, length and existence of optimal trajectories 77
+Here qin ∈ M and T (a smooth submanifold of M) are fixed. Why these costs are called energy and length is explained in Remark (7.5).
+Proposition 7.2. Consider the optimal control problems (7.2), (7.5) and either (7.3) (energy) or (7.4) (lenght). We have the following.
+A. Let q(.) : [0, T ] → Rn be an admissible trajectory corresponding to controls ui(·), i = 1, . . . , m and q ̄(·) = q(τ (·)) a Lipschitz reparametrization of q(·) as in Lemma
+7.0. Let u ̄(·) = u(τ (·))τ ̇ (·) defined on [0, T ̄] be the controls corresponding to q ̄(·). We have
+L(u(·)) =
+∫T
+0
+√ √
+√ √
+∑ m
+i=1
+ui(t)2dt =
+∫ T ̄
+0
+√ √
+√ √
+m ∑
+i=1
+u ̄i(t)2dt = L(u ̄(·)).
+Namely the cost L is invariant by Lipschitz reparametrizations of the trajectory.
+B. If T is not fixed, then there is no existence of minimizers for the cost E.
+C. Minimizers of E, with T fixed, satisfies ∑m
+i=1 ui(t)2 =const, for almost every t ∈
+[0, T ].
+D. Minimizers of E with T fixed are minimizers of L,
+E. Minimizers of L defined on [0, T ] and parameterized in such that ∑m
+i=1 ui(t)2 =const
+a.e. are minimizers of E with final time fixed to T .
+Proof. To prove A, simply notice that
+L(u ̄(·)) =
+∫ T ̄
+0
+√ √
+√ √
+∑ m
+i=1
+u ̄i(t)2dt =
+∫ T ̄
+0
+√ √
+√ √
+∑ m
+i=1
+ui(τ (t))2τ ̇ (t)2dt =
+∫T
+0
+√ √
+√ √
+∑ m
+i=1
+ui(s)2ds,
+where in the last equality we made the change of variable s = τ (t). To prove B assume by contradiction that q(·), defined in [0, T0], and corresponding to controls ui(·), i = 1, . . . , m is a minimizer of E for T free. Let c ∈ (0, 1). The trajectory corresponding to controls u ̄i(·) = ui(c ·)c is a reparameterization of q(·) reaching the final
+point at time T ̄ = T0/c. Its cost is
+E(u ̄(·)) =
+∫ T0/c
+0
+m ∑
+i=1
+ui(ct)2c2dt = cE(u(·)) < E(u(·)).
+Contradiction.
+
+
+78 Chap. 7 – Sub-Riemannian Geometry
+To prove C, D, E, we are going to use the Cauchy-Schwarz inequality (f, g)2 ≤ ‖f ‖2‖g‖2 (with equality holding if and only if f and g are proportional) which holds in any Hilbert space.1 In particular this holds in L2([0, T ], R). Namely
+(∫ T
+0
+f (t)g(t) dt
+)2 ≤
+∫T
+0
+f (t)2 dt
+∫T
+0
+g(t)2 dt (with equality holding iff f is a.e. proportional to g).
+Now let f (t) = √∑m
+i=1 ui(t)2 and g = 1, t ∈ [0, T ]. Notice that f ∈ L∞([0, T ], R) ⊂
+L2([0, T ], R). We have
+L(u(·))2 ≤ E(u(·))T (with equality holding iff ∑m
+i=1 ui(t)2 is a.e. constant).
+To prove C let u(·) be a minimizer of E defined on [0, T ]. By contradiction assume that
+∑m
+i=1 ui(t)2 is not a.e. constant. Then L(u(·))2 < E(u(·))T . Let qR(·) be an admissible
+trajectory defined on [0, T ] corresponding to controls satisfying ∑m
+i=1 ui(t)2=const a.e.,
+of which q(·) is a reparametrization as in Lemma 7.1. For this trajectory we have
+E(uR(·))T = L(uR(·))2 = L(u(·))2 < E(u(·))T,
+contradicting the fact that u(·) is a minimizer of E.
+To prove D let u(·) be the minimizer of E defined on [0, T ]. By C we have ∑m
+i=1 ui(t)2 =const.
+By contradiction assume that u(·) is not a minimizer of L. Then there exists u ̄(·) going
+from qin to T such that L(u ̄(·)) < L(u(·)). We can assume that ∑m
+i=1 u ̄i(t)2 =const. Then
+E(u ̄(·))T = L(u ̄(·))2 < L(u(·))2 = E(u(·))T,
+contradicting the fact that u(·) is a minimizer of E.
+To prove E, let u(·) be a minimizer of L parameterized in such that ∑m
+i=1 ui(t)2 =const.
+By contradiction assume that u(·) is not a minimizer of E. Then there exists u ̄(·) going from qin to T in time T such that E(u ̄(·)) < E(u(·)). We have
+L(u ̄(·))2 ≤ E(u ̄(·))T < E(u(·))T = L(u(·))2
+contradicting the fact that u(·) is a minimizer of L.
+Proposition 7.3. For the control system (7.2), the two optimal control problems:
+P1. minimize E with the boundary conditions (7.5) and T fixed in such a way that
+∑m
+i=1 ui(t)2 = 1 a.e.,
+P2. minimizing time with the same boundary conditions and the constraint on the con
+trols ∑m
+i=1 ui(t)2 ≤ 1,
+1This inequality simply tells that the scalar product of two vectors is less or equal to the product of the norm of the two vectors (with equality holding iff the two vectors are collinear).
+
+
+7.1 Energy, length and existence of optimal trajectories 79
+are equivalent.
+Proof. Since ∑m
+i=1 ui(t)2 = 1 a.e. we have ∫ T
+0 (∑m
+i=1 ui(t)2)dt = T. Hence P1. is equivalent
+to the problem of minimizing T with the constraint on the controls ∑m
+i=1 ui(t)2 = 1. To
+conclude the proof, let us show that a trajectory corresponding to controls for which the condition
+∑ m
+i=1
+ui(t)2 = 1 a.e. (7.6)
+is not satisfied cannot be optimal for [P2]. Actually if (7.6) is not satisfied then L =
+∫T 0
+√u1(t)2 + u2(t)2 < T and an arc length reparameterization of the trajectory reaches the target in time exactly L.
+Let us now go back to the problem of existence of optimal trajectories for the subRiemannian problem. Thanks to Proposition 7.3, the sub-Riemannian problem with T fixed in such a way that trajectories are parametrized by arclength can be equivalently recast as a time-optimal control problem with controls in the convex and compact set U = {(u1, . . . , um) ∈ Rm | u21 + . . . u2m ≤ 1}. We can then apply Proposition 4.4 and deduce the existence of an optimal trajectory for the sub-Riemannian problem. Of course nothing changes if T is fixed differently. We have then
+Proposition 7.4. Fix T > 0 and consider the optimal control problems (7.2), (7.5) and either (7.3) (energy) or (7.4) (length). Assume that
+• for every u(·) ∈ L∞([0, T ], U), the solution of (7.2), with q(0) = qin is defined on the whole interval [0, T ].
+• T is closed and R(qin) ∩ T 6= ∅.
+Then these two optimal control problems admit a solution.
+Remark 7.5. The name sub-Riemannian for the problem that we are considering in this chapter comes from the following argument. Consider the very simple case in which m = n, M = Rn, T = {qfi} and
+F1 =
+
+   
+1
+...0
+0
+
+   
+, . . . , Fn =
+
+   
+0...
+0 1
+
+   
+.
+In this case the sub-Riemannian problem consist in minimizing
+∫T
+0
+n ∑
+i=1
+ui(t)2dt =
+∫T
+0
+n ∑
+i=1
+x ̇ i(t)2dt =
+∫T
+0
+‖x ̇ (t)‖2dt,
+
+
+80 Chap. 7 – Sub-Riemannian Geometry
+where ‖ · ‖ is the standard Euclidean norm in Rn. We have seen that minimizing
+∫T 0
+∑m
+i=1 ui(t)2dt is equivalent to minimize ∫ T
+0
+√∑m
+i=1 ui(t)2dt up to parameterizing tra
+jectories with constant velocity and fixing T (cf. Proposition 7.2 D. and E.). Hence the sub-Riemannian problem is equivalent to minimize
+∫T
+0
+√ √
+√ √
+∑n
+i=1
+ui(t)2dt =
+∫T
+0
+√ √
+√ √
+n ∑
+i=1
+x ̇ i(t)2dt =
+∫T
+0
+‖x ̇ (t)‖dt.
+i.e., in finding the curve with shortest Euclidean length joining qin in qfi. Notice that the vectors F1, . . . , Fn play the role of an orthonormal frame for the Euclidean structure (the have norm 1 and they are mutually orthogonal). When we are on a general manifold M, we have m = n, and F1, . . . Fn are (in general non constant) linearly independent vector fields, the cost
+∫T
+0
+√ √
+√ √
+∑n
+i=1
+ui(t)2dt
+is the length of the curve for the Riemannian metric for which F1, . . . Fn is an orthonormal frame. 2 Notice that in both Euclidean and Riemannian case, we have a control for every direction and hence all Lipschitz curves are admissible. In other words the equation
+q ̇ = ∑n
+i=1 ui(t)Fi(q) should be considered as a definition of the controls rather than a
+constraint on the possible dynamics. In the case in which m < n or more in general when span{F1(q), . . . , Fn(q)} is not of
+dimension n, the equation q ̇ = ∑m
+i=1 ui(t)Fi(q) is a constraint on the possible dynamics
+and for this reason the corresponding problem is called sub-Riemannian. In the case m < n and F1(q), . . . , Fm(q) linearly independent we can think to a sub-Riemannian problem as a Riemannian problem in which the orthonormal frame is made by less vectors of the dimension of the space.
+By what explained here is it then clear why the cost ∫ T
+0
+√∑n
+i=1 ui(t)2dt is called length.
+The cost ∫ T
+0
+∑n
+i=1 ui(t)2dt is called energy since it is often used to model the energy
+injected to the system via the controls.
+2A Riemannian metric can be thought as a scalar product depending on the point assigned on each tangent space of a manifold. Equivalently it can be thought as the assignement of a pointdependent orthonormal frame. Notice that not all Riemannian problems can be written in the form
+q ̇ = ∑n
+i=1 ui(t)Fi(q), ∫ T
+0
+√∑n
+i=1 ui(t)2dt → min (with fixed initial and final conditions). Actually the
+existence of an orthonormal frames is just local. However it is possible to prove that every Riemannian
+problem can be written in the form q ̇ = ∑m
+i=1 ui(t)Fi(q), ∫ T
+0
+√∑m
+i=1 ui(t)2dt → min (with fixed initial
+and final conditions) if m is sufficiently large. See [Agr-Ba-Bo].
+
+
+7.2 Minimizers 81
+7.2 Minimizers
+Let us now apply the Pontryagin Maximum Principle to a sub-Riemannian problem to get information on minimizers. For a sub-Riemannian problem the Pontryagin maximum Principle (Theorem 5.1) becomes as follow.3
+Theorem 7.6 (Pontryagin Maximum Principle for a sub-Riemannian problem). Define the function (called pre-Hamiltonian)
+H(q, p, u, p0) = 〈p,
+m ∑
+i=1
+uiFi(q)〉 + p0
+∑ m
+i=1
+ui2, (7.8)
+with
+(q, p, u, p0) ∈ T ∗M × Rm × R.
+If the pair (q, u) : [0, T ] → M × Rm is optimal for the sub-Riemannian problem, then there exists a never vanishing Lipschitz continuous pair (p, p0) : [0, T ] ∋ t 7→ (p(t), p0) ∈ Tq∗(t)M × R where p0 ≤ 0 is a constant and such that for almost every (a.e.) t ∈ [0, T ] we have
+i) q ̇(t) = ∂H
+∂p (q(t), p(t), u(t), p0) (Hamiltonian equation for q);
+ii) p ̇(t) = −∂H
+∂q (q(t), p(t), u(t), p0) (Hamiltonian equation for p);
+iii) ∂H
+∂u (x(t), p(t), p0, u(t)) = 0 (maximization condition);
+iv) there exists a constant c ≥ 0 such that H(q(t), p(t), u(t), p0) = c on [0, T ],
+v) for every v ∈ Tq(T )T , we have 〈p(T ), v〉 = 0 (transversality condition).
+We are going to apply the steps illustrated in Section 5.2.
+Step 1. Use the maximization condition iii) to express, when possible, the control as a function of the state and of the covector. Condition iii) on (7.8) gives the following.
+• for abnormal extremals (p0 = 0) we obtain
+〈p(t), Fi(q(t)〉 = 0, i = 1, . . . , m, t ∈ [0, T ] (7.9)
+This condition does not permit to obtain the controls as function of the state and of the covector. Hence, for the sub-Riemannian problem, abnormal extremals
+3or equivalently Theorem 6.1 with F0 = 0 and the adding of transversality conditions since now the final point is constrained to belong to a smooth submanifold T .
+
+
+82 Chap. 7 – Sub-Riemannian Geometry
+corresponds to singular controls. To obtain the controls one should derive with respect to time equation (7.9).
+Consider for instance the case m = n and F1, . . . , Fn linearly independent at each point. In this case the condition (7.9) gives p ≡ 0 which is impossible since p0=0. this is the reason why in the Riemannian case there are no abnormal extremals (cf. remark 7.5) .
+As another example, consider the case in which n = 3, m = 2 and F1, F2, [F1, F2] linearly independent at each point. This is called the 3D contact sub-Riemannian case (cf. [Agr-Ba-Bo]).
+If we differentiate with respect to time (7.9) for i = 1, 2 we get a.e.:
+u2(t)〈p(t), [F1, F2](q(t))〉 = 0,
+u1(t)〈p(t), [F1, F2](q(t))〉 = 0.
+These equations, together with p(t) 6= 0 for every t and
+〈p(t), F1(q(t))〉 = 0, (7.10)
+〈p(t), F2(q(t))〉 = 0, (7.11)
+imply u1(t) = u2(t) = 0 for a.e. t. Hence in the 3D contact case the only possible abnormal trajectory is the trivial trajectory q(t) ≡ qin. Non-trivial abnormal extremals appear if we do not require that F1, F2, [F1, F2] are linearly independent at each point or if the difference between n ad m is big enough.
+• for normal extremals (p0 6= 0) we can normalize p0 = −1
+2 and we obtain
+ui(t) = 〈p(t), Fi(q(t))〉, i = 1, . . . , m, t ∈ [0, T ]. (7.12)
+This condition expresses the control as function of the state and of the covector. More explicitly with the notations of Section 5.2 we obtain
+u = w(q, p) := (〈p, F1(q)〉, . . . , 〈p, Fm(q)〉).
+Hence for the sub-Riemannian problem normal extremals corresponds to regular controls.
+Step 2. Insert the control found in the previous step into the Hamiltonian equations i) and ii). 4 To this purpose it is useful to introduce the maximized Hamiltonian, i.e. the pre-Hamiltonian computed on the controls obtained with the maximization condition.
+HM (q, p) := H(q, p, w(q, p), −1
+2) = 〈p,
+m ∑
+i=1
+wi(q, p)Fi(q)〉 − 1
+2
+∑ m
+i=1
+wi(q, p)2
+=1
+2
+∑ m
+i=1
+wi(q, p)2 = 1
+2
+∑ m
+i=1
+〈p, Fi(q)〉2. (7.13)
+4We are going to develop this step for normal extremals only . For abnormal extremals the problem could be complicated and will be treated case by case in the examples.
+
+
+7.2 Minimizers 83
+Notice that HM (q(t), p(t)) = 1
+2
+∑m
+i=1 wi(q(t), p(t))2 = 1
+2
+∑m
+i=1 ui(t)2. This quantity is
+constant and equal to 1
+2 if trajectories are parameterized by arclength. A usefull fact is
+that
+∂HM
+∂p (q, p) = ∂
+∂p H(q, p, w(q, p), −1
+2)
+= ∂H
+∂p (q, p, w(q, p), −1
+2) + ∂H
+∂u (q, p, w(q, p), −1
+2)∂w
+∂p (q, p)
+= ∂H
+∂p (q, p, w(q, p), −1
+2 ).
+where we used the fact that ∂H
+∂u (q, p, w(q, p), − 1
+2) = 0. Similarly
+∂HM
+∂q (q, p) = ∂H
+∂q (q, p, w(q, p), −1
+2 ).
+Hence the Hamiltonian equations i) and ii) can be written with the maximized Hamiltonian in which the control is not present anymore.
+{ q ̇ = ∂HM
+∂p (q, p)
+p ̇ = − ∂HM
+∂q (q, p). (7.14)
+These equations must be solved for fixed q(0) = qin and any p(0) = pin ∈ Tq∗inM . If the final time is fixed in such a way that trajectories are parametrized by arclength, then it is convenient to normalize pin in such a way that
+HM (qin, pin) = 1
+2.
+Remark 7.7. Notice that the set {pin ∈ TqinM | HM (qin, pin) = 1
+2} is a ellipsoid if
+dim(span{F1(qin), . . . Fm(qin)}) = n or a cylinder with ellipsoidal base otherwise.
+The next steps are treated as a general OCP. If in the previous step we found q(T ; pin, p0) and p(T ; pin, p0) we have now to look for pin and p0 such that
+{ q(T ; pin, p0) ∈ T
+〈p(T ; pin, p0), TqinT 〉 = 0. (7.15)
+where the last condition is empty if T is a single point. If we can guarantee existence of optimal trajectories, and we are lucky because (7.15) provides a uniques pair (p0, pin) then if we have found the optimal solution. This however is not the general situation.
+
+
+84 Chap. 7 – Sub-Riemannian Geometry
+
+
+Chapter 8
+Time-optimal Control on the Plane
+In this Chapter we are going to study an important class of optimal control problems namely minimum time problems for control affine systems on the plane with bounded controls.
+Problem Min-T-2D
+x ̇ = F (x) + u(t)G(x), (8.3)
+x(0) = xin, x(T ) = xfi (8.4)
+T → min
+Here • T ≥ 0 is free, • F, G, are smooth vector fields on R2, • u(·) ∈ L∞([0, T ], [−1, 1]), • x(·) : [0, T ] → R2, belongs to the set of Lipschitz curves.
+Notation In this chapter since we are working in R2, we represent covectors as row vectors and we indicate the duality product between covectors and vectors with a dot. Namely 〈p, v〉 = p · v (here p ∈ Tx∗R2 = R∗2 and v ∈ TxR2 = R2 and x is the point on the plane where v and p are applied). To avoid complicated notations, we assume in this chapter that for every u(·) ∈ L∞([0, T ], [−1, 1]) the solution of (8.15) with x(0) = xin exists for any time.
+In this case the pre-Hamiltonian (6.6) is
+H(x, p, u, p0) = p · F (x) + u p · G(x) + p0 (8.5)
+with
+(x, p, u, p0) ∈ R2 × R∗2 × [−1, 1] × R.
+
+
+86 Chap. 8 – Time-optimal Control on the Plane
+and the Pontryagin Maximum Principle (Theorem 5.1) tells the following.
+Theorem 8.0. If the pair (x, u) : [0, T ] → R2 × [−1, 1] is optimal, then there exists a never vanishing Lipschitz continuous pair (p, p0) : [0, T ] ∋ t 7→ (p(t), p0) ∈ R∗2 × R where p0 ≤ 0 is a constant and such that for almost every t ∈ [0, T ] we have
+p ̇(t) = −p(t) ·
+(∂F
+∂x + u(t) ∂G
+∂x
+)
+(x(t)), (Hamiltonian equation for p) (8.6)
+u(t) p(t) · G(x(t)) = max
+v∈[−1,1] v p(t) · G(x(t)) (maximization condition). (8.7)
+p(t) · F (x(t)) + u(t) p(t) · G(x(t)) + p0 = 0 (zero value of the Hamiltonain) (8.8)
+Equation (8.8) comes from the fact that T is free. A simple and important property is the following.
+Lemma 8.1. For the problem Min-T-2D we have p(t) 6= 0 for every t.
+Proof. Actually if p(t) = 0 for a time t then from (8.6) we would get p(t) ≡ 0. Then from (8.8) we would get p0 = 0 which is impossible.
+For this kind of problems, instead of normalizing p0 could be useful to normalize p(0) for instance setting ‖p(0‖ = 1. We are going to apply the steps illustrated in Section 5.2.
+Step 1. Use the maximization condition iii) to express, when possible, the control as a function of the state and of the covector. To this purpose it is useful the following.
+Definition 8.2. (switching function) Let (x(·), p(·), u(·), p0) : [0, T ] → R2 × R∗2 × [−1, 1] × R be an extremal. The corresponding switching function is φ(·) := p(·) · G(x(·)) : [0, T ] → R.
+Equation (8.7) gives the following.
+Lemma 8.3. Consider an extremal and let φ(·) the corresponding switching function. If φ(·) has only isolated zeros then u(t) = sgn(φ(t)) on [0, T ].
+Definition 8.4. (bang-bang extremal) An extremal satisfying the hypotheses of Lemma 8.3 is called a bang-bang extremal. The times at which u(·) changes sign are called switching times.
+Clearly bang-bang extremals are regular extremals. However there are situations in which the Pontryagin Maximum Principle does not permit to obtain directly the value of the control as for instance when φ(t) ≡ 0.
+Definition 8.5. (singular extremal) An extremal for which the corresponding switching function is identically zero on some interval [t1, t2] ⊂ [0, T ] is called singular on [t1, t2].
+
+
+87
+To obtain information concerning the control for singular extremals let us observe that φ(·) is a Lipschitz function and hence we can differentiate it a.e. In this way we obtain the following.
+Lemma 8.6. We have
+φ ̇(t) = p(t) · [F, G](x(t)).
+hence φ(·) is of class C1.
+Proof. Using the Pontryagin Maximum principle we have for almost every t,
+φ ̇(t) = d
+dt(p(t) · G(x(t))) = p ̇(t) · G(x(t)) + p(t) · G ̇ (x(t))
+= −p(t)( ∂F
+∂x + u(t) ∂G
+∂x )(x(t)) · G(x(t)) + p(t) · ∂G
+∂x (x(t))(F + u(t)G)(x(t))
+= p(t) · [F, G](x(t)). (8.9)
+Let us introduce the following two functions of which we are are interested to the set of zeros.
+∆A(x) := det(F (x), G(x)) = F1(x)G2(x) − F2(x)G1(x), (8.10)
+∆B(x) := det(G(x), [F, G](x)) = G1(x)[F, G]2(x) − G2(x)[F, G]1(x). (8.11)
+The set of zeros ∆−1
+A (0), ∆−1
+B (0), of these two functions, are respectively the set of points where F and G are parallel and the set of points where G is parallel to [F, G]. Using Lemma 8.6, the next Lemma gives information on where singular extremals could be.
+Lemma 8.7. Let (x(·), p(·), u(·), p0) : [0, T ] → R2 × R∗2 × [−1, 1] × R be an extremal. which is singular on [t1, t2] ⊂ [0, T ]. Then x([t1, t2]) ⊂ ∆−1
+B (0).
+Proof. Since φ(t) = p(t) · G(x(t)) ≡ 0 and φ ̇(t) = p(t) · [F, G](x(t)) ≡ 0, it follows that G is parallel to [F, G] along x(.) on [t1, t2].
+The next Lemma provides the value of the control for a singular extremal.
+Lemma 8.8. Let (x(·), p(·), u(·), p0) : [0, T ] → R2 × R∗2 × [−1, 1] × R be an extremal. which is singular on [t1, t2] ⊂ [0, T ]. Assume that ∇∆B(x(t)) · G(x(t)) 6= 0 on [t1, t2]. Then on [t1, t2] it correponds to the control u(t) = φ(x(t)) where
+φ(x) = −∇∆B(x) · F (x)
+∇∆B(x) · G(x) . (8.12)
+
+
+88 Chap. 8 – Time-optimal Control on the Plane
+Proof. On [t1, t2] we have a.e. x ̇ (t) = F (x(t)) + u(t)G(x(t)) and ∆B(x(t)) = 0. Differentiating this last equation we obtain for a.e.t ∈ [t1, t2],
+0= d
+dt ∆B(x(t)) = ∇∆B · (F (x(t)) + u(t)G(x(t))).
+This means that at the point x(t) we have to use control φ(x(t)), where φ is given nby given by (8.12).
+En example of switching function with the corresponding controls is provided in the following picture.
+φ( t)
+t
+bang(u=−1)
+bang (u=+1) singular (u=φ ) bang (u=+1)
+Step 2. Insert the control found in the previous step into the Hamiltonian equations (8.15) and (8.6). This step in general is more complicated than in the sub-Riemannian case. The reason is that the previous step provided the control as a function of the state and of the covector that in general is not smooth. The construction of the extremals is in general complicated. However one can obtain additional information using the function the sets ∆−1
+A (0), ∆−1
+B (0). We are going to prove
+that on each connected component of R2 \ (∆−1
+A (0) ∪ ∆−1
+B (0)), every extremal trajectory is bang-bang with at most one switching. Moreover, at a switching time, the value of the control switches from −1 to +1 if −∆−1
+B (0) \ ∆−1
+A (0) > 0 and from +1 to −1 if
+−∆−1
+B (0) \ ∆−1
+A (0) < 0. To prove this result first we need the following.
+Lemma 8.9. Let x ∈/ ∆−1
+A (0)∪∆−1
+B (0). Then F (x), G(x) form a basis of R2 and we define the scalar functions fS, gS to be the coefficients of the linear combination: [F, G](x) = fS(x)F (x) + gS(x)G(x). We have
+fS(x) = − ∆B(x)
+∆A(x) . (8.13)
+
+
+89
+∆Β(0)
+−1
+∆ (0)
+Α
+−1
++1
+−1
+sing.
+f<0 (+1 −1)
+f>0 (−1 +1)
+f>0 (−1 +1)
+f<0 (+1 −1)
+Possible commutations dans les composantes connexes de R2 \ (∆−1
+A (0) ∪ ∆−1
+B (0)) en relation avec the sign of fS (in the picture indicated as f ). In the picture there is also en exemple of extremal trajectory which is singular in a sub-interval.
+Proof. We have:
+∆B(x) = Det(G(x), [F, G](x)) = Det(G(x), fS(x)F (x) + gS(x)G(x))
+= fS(x)Det(G(x), F (x)) = −fS(x)∆A(x).
+Theorem 8.10. Let Ω ∈ R2 be a connected component of R2 \ (∆−1
+A (0) ∪ ∆−1
+B (0)). Let
+[t1, t2] ⊂ [0, T ] and (x(·), p(·), u(·), p0) : [0, T ] → R2 ×R∗2 ×[−1, 1]×R be an extremal such that x([t1, t2]) ⊂ Ω. Then x(·)|[t1,t2] is bang-bang with at most one switching. Moreover if fS > 0 (resp. fS < 0) in Ω then x(·)|[t1,t2] corresponds to control +1, −1 or has a −1 → +1 switching (resp. has a +1 → −1 switching).
+Proof. Assume fS > 0 in Ω, the opposite case being similar. Let t ̄ be such that φ(t ̄) =
+p(t ̄) · G(x(t ̄)) = 0. Then:
+φ ̇(t ̄) = p(t ̄) · [F, G](x(t ̄)) = p(t ̄) · (fSF + gSG)(x(t ̄)) = fS(x(t ̄)) p(t ̄) · F (x(t ̄)).
+Now from (8.8) of the Pontryagin Maximum Principle we have that p(t) · F (x(t)) + u(t) p(t) · G(x(t)) + p0 = 0 with p0 ≤ 0. Hence at t ̄ we have p(t) · F (x(t)) ≥ 0. Actually p(t) · F (x(t)) 6= 0 otherwise F and G are parallel at x(t ̄) which is not possible since
+∆A(x(t ̄)) 6= 0. Hence φ ̇(x(t ̄)) > 0. This proves that φ has at most one zero with positive derivative at the switching time and gives the desired conclusion.
+The next steps are treated as a general OCP. If in the previous step we found x(T ; pin, p0) and p(T ; pin, p0) we have now to look for pin and p0 such that
+x(T ; pin, p0) = xfi (8.14)
+
+
+90 Chap. 8 – Time-optimal Control on the Plane
+The main difficulty for this class of problems is that in general for each pin could correspond more than one trajectory x(T ; pin, p0). This is due to the non-smoothness of the dynamical system given by the Pontryagin maximum Principle.
+8.1 Time optimal problems for linear systems
+All these problems are easily solved for linear systems, i.e. for the problem
+x ̇ = Ax + u(t)Bx, (8.15)
+x(0) = xin, x(T ) = xfi (8.16)
+T → min
+Here A ∈ R2×2, B ∈ R2 and u(·) ∈ L∞([0, T ], [−1, 1]). In this case we have to assume that the matrix [B, AB] is full rank otherwise the problem is trivial. For these kind of problems one immediately verify:
+• there is existence of optimal trajectories.
+• ∆−1
+B (0) = ∅ hence there are no singular trajectories.
+• The equation (8.6) for p(·) involve neither u(·) nor x(·):
+p ̇(t) = −p(t)A. (8.17)
+Hence for every pin one solves (8.17), find u(t) =sign(p(t) · B), and find x(T ; pin, p0). Notice that x(T ; pin, p0) is piecewise smooth since the zeros of p(·) cannot accumulate. In this case for every (pin, p0) there is a unique x(T ; pin, p0). The problem is solved looking for all pin for which q(T ; pin, p0) = xfin and taking the one arriving at the smallest T .
+
+
+Bibliographie
+[Agr-Sa] A. Agrachev, Y. Sachkov, Control Theory from the Geometric Viewpoint, vol. 87 of Encyclopaedia of Mathematical Sciences. Control Theory and Optimization, II. Springer, Berlin (2004)
+[Agr-Ba-Bo] A. Agrachev, D. Barilari, U. Boscain. A comprehensive introduction to sub-Riemannian geometry. Cambridge Studies in Advanced Mathematics, 181. Cambridge University Press, Cambridge, 2020.
+[Rou-Bo] F. Bonnans, P. Rouchon, Commande et optimisation de syst`emes dynamiques.
+Les E ́dition de L’E ́cole Polytechnique 2005.
+[Arnold] V.I. Arnol’d, Ordinary differential equations. Translated from the third Russian edition by Roger Cooke. Springer Textbook. Springer-Verlag, Berlin, 1992.
+[Bre-Pic] A. Bressan, B. Piccoli, Introduction to the mathematical theory of control. AIMS Series on Applied Mathematics, 2. American Institute of Mathematical Sciences (AIMS), Springfield, MO, 2007.
+[Bo-Pi] U. Boscain, B. Piccoli, Optimal Synthesis for Control Systems on 2-D Manifolds, Springer, SMAI, Vol.43, 2004.
+[Bo-Pi20] Boscain, B. Piccoli, Synthesis theory in optimal control in Encyclopedia of Systems and Control, Springer. 2020 (second edition).
+[DoCarmo] M.P. do Carmo, Riemannian geometry. Translated from the second Portuguese edition by Francis Flaherty. Mathematics: Theory & Applications. Birkhauser Boston, Inc., Boston, MA, 1992.
+[Jurd] V. Jurdjevic, Geometric Control Theory, vol. 52 of Cambridge Studies in Advanced Mathematics. Cambridge University Press, Cambridge, 1997.
+[Khal] H.K. Khalil, Nonlinear Systems, 3rd Edition, Pearson, 2001.
+
+
+92 Chap. 8 – Time-optimal Control on the Plane
+[Lee] J.M. Lee, Introduction to smooth manifolds. Second edition. Graduate Texts in Mathematics, 218. Springer, New York, 2013.
+[Lee-Mark] Lee, E.B., Markus, L.: Foundations of optimal control theory, John Wiley, New York, 1967.
+[Sc-Le] H. Schaettler and U. Ledzewicz, Geometric optimal control, vol. 38 of Interdisciplinary Applied Mathematics (Springer, New York, 2012).
+[So] E. D. Sontag, Mathematical Control Theory: Deterministic Finite Dimensional Systems, no. 6 in Texts in Applied Mathematics, Springer-Verlag, New York/Heidelberg/Berlin, 2 ed., 1998.

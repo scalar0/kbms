@@ -1,0 +1,4932 @@
+Chapitre 1
+El ́ements de th ́eorie g ́eom ́etrique
+de la mesure
+Dans ce chapitre, on consid`ere ⌦ ⇢ RN un ouvert et on de ́signe par B(⌦) la tribu Bore ́lienne sur ⌦.
+1.1 Les mesures de Radon
+D ́efinition 1.1.1. On dit que μ : B(⌦) ! [0, +1] est une mesure Bore ́lienne positive si
+(i) μ(;) = 0 ; (ii) pour toute suite {Bj}j2N de Bore ́liens deux `a deux disjoints,
+μ
+0
+@
+1 [
+j=0
+B
+j
+1
+A=
+1 X
+j=0
+μ(Bj ).
+Si de plus μ(K) < 1 pour tout compact K ⇢ ⌦, on dit que μ est une mesure de Radon positive.
+On notera par la suite LN la mesure de Lebesgue dans RN qui est une mesure de Radon positive. Les mesures de Radon positives jouissent de proprie ́t ́es de re ́gularite ́ permettant d’approcher la mesure d’un Bor ́elien par la mesure d’ouverts ou de ferm ́es.
+Proposition 1.1.2. Soit μ une mesure de Radon positive sur ⌦. Alors, pour tout Bor ́elien A ⇢ ⌦
+μ(A) = sup{μ(K) : K ⇢ A, K compact},
+= inf{μ(U ) : A ⇢ U ⇢ ⌦, U ouvert}.
+D ́emonstration. Commen ̧cons par montrer l’approximation inte ́rieure par un compact. On suppose tout d’abord que μ(A) < 1 et on pose ⌫(B) := μ(A \ B) pour tout Bore ́lien B ⇢ RN , ce qui
+d ́efinit une mesure Bor ́elienne finie sur RN . On consid`ere la famille
+F :=
+n
+B ⇢ RN Bor ́elien : pour tout " > 0, il existe
+un ferme ́ C ⇢ B tel que ⌫(B \ C) < "
+o .
+La famille F contient  ́evidemment les ensembles ferme ́s.
+7
+
+
+8 CHAPITRE 1. ELE ́MENTS DE THE ́ORIE GE ́OME ́TRIQUE DE LA MESURE
+Montrons que F est stable par union et intersection d ́enombrable. Soit donc {Bn}n2N une famille d’e ́le ́ments de F. Pour tout " > 0 et tout n 2 N, il existe un ensemble ferme ́ Cn ⇢ Bn tel que
+⌫(Bn \ Cn) < "
+2
+n+1 .
+L’ensemble C := T
+n Cn est ferme ́ et
+⌫
+1 \
+n=0
+B
+n
+!
+\C
+!
+=⌫
+1 \
+n=0
+B
+n
+!
+\
+1 \
+n=0
+C
+n
+!!
+⌫
+1 [
+n=0
+(Bn \ Cn)
+!
+
+1 X
+n=0
+⌫(Bn \ Cn) < ",
+ce qui montre que T
+n Bn 2 F . Par ailleurs, on a
+lim
+m!1
+⌫
+1 [
+n=0
+B
+n
+!
+\
+m [
+n=0
+C
+n
+!!
+=μ
+1 [
+n=0
+B
+n
+!
+\
+1 [
+n=0
+C
+n
+!!
+⌫
+1 [
+n=0
+(Bn \ Cn)
+!
+
+1 X
+n=0
+⌫(Bn \ Cn) < ".
+Pour m asssez grand, on a donc en posant C0 := Sm
+n=0 Cn
+⌫
+1 [
+n=0
+B
+n \ C0
+!
+< ",
+ce qui montre, C0  ́etant ferme ́, que S
+n Bn 2 F .
+Comme tout ouvert de RN peut s’ ́ecrire comme une union de ́nombrable d’ensembles ferme ́s, on
+en de ́duit que F contient tous les ouverts de RN . Posons `a pr ́esent
+G := {B 2 F : cB 2 F }
+de sorte que RN 2 G et G est stable par union de ́nombrable. Par cons ́equent, G est une tribu. Comme les ouverts sont contenus dans G, on en de ́duit que G contient la tribu Bor ́elienne. Par cons ́equent, pour tout B ⇢ RN Bor ́elien et tout " > 0 il existe un ensemble ferme ́ C ⇢ B tel que ⌫(B\C) < ". En particulier, pour B = A, on obtient un ferme ́ C ⇢ A tel que μ(A\C) < ". Pour tout n 2 N, on pose Kn := C \ B(0, n) qui est un compact inclu dans A. Comme μ(C)  μ(A) < 1), on a limn μ(C \ Kn) = 0. Pour n assez grand, on obtient donc un compact Kn ⇢ A tel que μ(A \ Kn) < ".
+Si μ(A) = 1, on de ́compose A = S
+j(A \ Cj) o`u Cj = {x 2 RN : j  |x| < j + 1}. Comme μ est
+une mesure de Radon, μ(A \ Cj) < 1 pour tout j 2 N. Par ce qui a e ́t ́e montr ́e pre ́ce ́demment, il existe un compact Kj ⇢ A \ Cj tel que μ(Kj) μ(A \ Cj) 2 j. Par convergence monotone,
+lim
+n!1
+μ
+0
+@
+n [
+j=0
+K
+j
+1
+A=μ
+0
+@[
+j2N
+K
+j
+1
+A=
+X
+j2N
+μ(Kj )
+X
+j2N
+(μ(A \ Cj) 2 j) = 1 = μ(A).
+Comme Sn
+j=0 Kj est compact, on obtient ainsi l’approximation inte ́rieure par des compacts.
+Montrons maintenant l’approximation par l’ext ́erieur `a l’aide d’ouverts. Soit {!n}n2N une suite
+exhaustive d’ouverts relativement compacts dans ⌦ tels que !n ⇢ !n+1 et S
+n !n = ⌦. L’ensemble !
+n \ A  ́etant un Bor ́elien de mesure finie (car μ est finie sur les compacts), l’ ́etape pre ́ce ́dente montre l’existence d’un ferm ́e Cn ⇢ !n \ A tel que μ((!n \ A) \ Cn) < "/2n. Posons Un = !n \ Cn
+qui est un ouvert avec !n \ A ⇢ Un et tel que μ(Un \ A) < "/2n. Si on pose U := S
+n Un qui est un ouvert, on obtient que A ⇢ U et μ(U \ A) 
+P
+n μ(Un \ A) < ".
+
+
+1.1. LES MESURES DE RADON 9
+Une cons ́equence imm ́ediate du r ́esultat pr ́ec ́edent concerne la densite ́ des fonctions continues `a support compact.
+Corollaire 1.1.3. Soit μ une mesure de Radon positive sur un ouvert ⌦ de RN . Alors l’espace
+Cc(⌦; Rd) est dense dans L1
+μ(⌦; Rd).
+Soit une mesure de Radon positive sur un ouvert ⌦ ⇢ RN . On rappelle que le support de est donne ́ par Supp( ) := {x 2 ⌦ : (B%(x)) > 0 pour tout % > 0}.
+Lemme 1.1.4. L’ensemble Supp( ) est ferm ́e dans ⌦ et (⌦ \ Supp( )) = 0.
+D ́emonstration. Si x 62 Supp( ), alors il existe % > 0 tel que B%(x) ⇢ ⌦ et (B%(x)) = 0. Si y 2 B%(x) alors il existe R > 0 tel que BR(y) ⇢ B%(x) de sorte que (BR(y))  (B%(x)) = 0. Par cons ́equent B%(x) ⇢ ⌦ \ Supp( ), ce qui montre que ⌦ \ Supp( ) est ouvert et donc que Supp( ) est ferme ́ dans ⌦. Par ailleurs, soit K un compact contenu dans ⌦ \ Supp( ). Par compacite ́, il existe un nombre fini de points x1, . . . , xm 2 K et r1, . . . , rm 2 (0, dist(K, @⌦)) tels que
+K⇢
+m [
+i=1
+B
+ri (xi), (Bri (xi)) = 0 pour tout 1  i  m.
+Par cons ́equent, (K) 
+P
+m
+i=1 (Bri (xi)) = 0. Par passage au supremum parmi tous les compacts K ⇢ ⌦ \ Supp( ), on en d ́eduit que (⌦ \ Supp( )) = 0.
+D ́efinition 1.1.5. On dit que μ : B(⌦) ! Rd est une mesure de Radon vectorielle si
+(i) μ(;) = 0 ;
+(ii) pour toute suite {Bj}j2N de Bor ́eliens deux `a deux disjoints, la se ́rie vectorielle P
+j μ(Bj ) converge et sa somme est donne ́e par
+1 X
+j=0
+μ(Bj) = μ
+0
+@
+1 [
+j=0
+B
+j
+1
+A.
+En notant | · | la norme Euclidienne sur Rd, on d ́efinit, pour tout B 2 B(⌦), la variation de μ par
+|μ|(B) = sup
+8<
+:
+1 X
+j=0
+|μ(Bj)| : Bj 2 B(⌦), Bi \ Bj = ; pour tout i 6= j, B =
+[
+j2N
+B
+j
+9=
+;.
+Remarque 1.1.6. Soit μ = (μ1, . . . , μd) une mesure de Radon vectorielle ou` μ1, . . . , μd sont des mesures de Radon r ́eelles. Alors on a
+|μ| 
+Xd
+i=1
+|μi|.
+Proposition 1.1.7. Soit μ une mesure de Radon vectorielle, alors |μ| est une mesure positive
+finie qui satisfait
+|μ(B)|  |μ|(B) pour tout B 2 B(⌦).
+
+
+10 CHAPITRE 1. ELE ́MENTS DE THE ́ORIE GE ́OME ́TRIQUE DE LA MESURE
+D ́emonstration. Par de ́finition de |μ|, on a bien l’in ́egalite ́ |μ(B)|  |μ|(B) pour tout B 2 B(⌦). Montrons tout d’abord que |μ| est une mesure Bor ́elienne. Il est clair que |μ|(;) = 0. Soit
+{An}n2N une suite de Bor ́eliens deux `a deux disjoints contenus dans ⌦ et posons A := S
+n An.
+Si {Bj}j2N d ́esigne une partition Bore ́lienne de A, alors pour tout j 2 N, {An \ Bj}n2N est une
+partition Bor ́elienne de Bj et il vient que μ(Bj) = P
+n μ(Aj \ Bn) et donc
+1 X
+j=0
+|μ(Bj)| 
+1 X
+j=0
+1 X
+n=0
+|μ(An \ Bj)| =
+1 X
+n=0
+1 X
+j=0
+|μ(An \ Bj)| 
+1 X
+n=0
+|μ|(An).
+Par passage au supremum parmi toutes les partitions Bor ́eliennes {Bj}j2N de A, il vient
+|μ|(A) 
+1 X
+n=0
+|μ|(An).
+Pour montrer l’autre ine ́galite ́, pour tout n 2 N et tout " > 0, soit {En
+j }j2N une partition Bore ́lienne de An telle que
+|μ|(An) 
+1 X
+j=0
+|μ(En
+j )| + 2 n".
+Comme {En
+j }(j,n)2N2 est une partition Bore ́lienne de A, il vient
+|μ|(A)
+1 X
+j,n=0
+|μ(En
+j )| =
+1 X
+n=0
+|μ|(An) 2"
+et l’ine ́galite ́ vient par passage `a la limite quand " ! 0.
+Pour e ́tablir que |μ| est une mesure finie, il su t de conside ́rer le cas d = 1. Supposons qu’il existe A 2 B(⌦) tel que |μ|(A) = 1, on peut alors trouver une partition Bore ́lienne {An}n2N de A telle que
+1 X
+n=0
+|μ(An)| 2(|μ(A)| + 1).
+Soient E1 = S
+μ(An) 0 An et E2 = S
+μ(Xn)<0 An de sorte que A = E1 [ E2, E1 \ E2 = ;, μ(E1) 0, μ(E2)  0 et |μ(E1)| + |μ(E2)| 2(|μ(A)| + 1). Il existe donc i0 = 1 ou 2 tel que |μ(Ei0 )| |μ(A)| + 1 et on pose E = Ei0 , F = A \ E. On a donc |μ|(E) |μ(E)| > 1, |μ|(F ) |μ(F )| = |μ(A) μ(E)| |μ(E)| |μ(A)| > 1. Comme 1 = |μ|(A) = |μ|(E)+|μ|(F ), il vient que |μ|(E) = 1 ou |μ|(F ) = 1. Supposons sans restreindre la g ́en ́eralite ́ que |μ|(F ) = 1 et posons Y0 = E. On reproduit l’argument pre ́ce ́dent avec F au lieu de A. On construit alors par r ́ecurrence une suite {Yj}j2N de Bor ́eliens deux `a deux disjoints tels que |μ(Yj)| > 1 pour tout j 2 N ce qui montre que la s ́erie de terme g ́en ́eral {μ(Yj)}j2N ne peut pas eˆtre convergente. On aboutit donc `a une contradiction qui montre bien que |μ|(A) < 1 pour tout A 2 B(⌦).
+Un exemple typique de mesure vectorielle est celui des mesures `a densite ́.
+D ́efinition 1.1.8. Soit une mesure de Radon positive sur ⌦ et f 2 L1 (⌦; Rd). On de ́finit la mesure de Radon vectorielle μ := f par
+μ(A) =
+Z
+A
+f d pour tout A 2 B(⌦).
+On montre e↵ectivement que f est une mesure de Radon vectorielle par convergence domine ́e. Le re ́sultat suivant d ́etermine la mesure variation d’une mesure `a densite ́.
+
+
+1.1. LES MESURES DE RADON 11
+Proposition 1.1.9. Soit μ = f la mesure vectorielle d ́efinie pr ́ec ́edemment. Alors, la mesure
+variation de μ est donn ́ee par |μ| = |f | , i.e.
+|μ|(A) =
+Z
+A
+|f | d pour tout A 2 B(⌦).
+D ́emonstration. L’in ́egalit ́e |μ|  |f | est imme ́diate. Pour montrer l’ine ́galit ́e oppose ́e, on consid`ere un sous-ensemble D = {zk}k2N d ́enombrable et dense dans la sphe`re SN 1 = {x 2 RN : |x| = 1}.
+Soient A 2 B(⌦), " > 0 et k 2 N, on de ́finit les ensembles Bor ́eliens
+A
+k = {x 2 A : f (x) · zk (1 ")|f (x)|}
+de sorte que A = S
+k Ak. On pose ensuite
+B0 = A0, Bk = Ak \
+k[1
+j=0
+A
+j pour tout k 1,
+de sorte que Bk 2 B(⌦) pour tout k 2 N et les ensembles {Bk}k2N sont deux `a deux disjoints.
+Comme S
+k Bk = S
+k Ak = A, il vient que
+(1 ")
+Z
+A
+|f | d =
+X
+k2N
+(1 ")
+Z
+Bk
+|f | d 
+X
+k2N
+Z
+Bk
+z
+k ·f d
+=
+X
+k2N
+z
+k · μ(Bk) 
+X
+k2N
+|μ(Bk)|  |μ|(A),
+ce qui conclut la preuve du r ́esultat.
+Si d = 1, on parle aussi de mesure de Radon re ́elle. On pose alors
+μ
+± := |μ| ± μ
+2
+qui d ́efinissent des mesures positives finies qui satisfont
+μ = μ+ μ , |μ| = μ+ + μ .
+L’int ́egration d’une fonction Bor ́elienne |μ|-int ́egrable f : ⌦ ! R par rapport `a μ est alors d ́efinie par Z
+⌦
+f dμ :=
+Z
+⌦
+f dμ+
+Z
+⌦
+f dμ .
+Si d 2 et μ = (μ1, . . . , μd) est une mesure de Radon vectorielle, on d ́efinit l’inte ́grale Z
+⌦
+f dμ :=
+✓Z
+⌦
+f dμ1, . . . ,
+Z
+⌦
+f dμd
+◆ .
+On a toujours l’in ́egalit ́e Z
+⌦
+f dμ 
+Z
+⌦
+|f | d|μ|.
+Si ' : ⌦ ! Rd est une fonction vectorielle Bore ́lienne |μ|-inte ́grable, on notera
+Z
+⌦
+' · dμ :=
+Xd
+i=1
+Z
+⌦
+'
+i dμi
+et on montre que Z
+⌦
+' · dμ 
+Z
+⌦
+|'| d|μ|.
+
+
+12 CHAPITRE 1. ELE ́MENTS DE THE ́ORIE GE ́OME ́TRIQUE DE LA MESURE
+1.2 Les mesures de Radon par dualit ́e
+On d ́esigne par Cc(⌦) l’ensemble des fonctions continues `a support compact inclus dans ⌦. Toute mesure de Radon positive μ d ́efinit une forme line ́aire sur Cc(⌦). En e↵et, l’int ́egrale Z
+⌦
+f dμ
+est bien d ́efinie puisque, en notant K = Supp(f ) le support (compact) de f , on a Z
+K
+|f | dμ  μ(K) max
+K
+|f | < 1.
+Par cons ́equent, l’application
+L : f 7!
+Z
+⌦
+f dμ
+d ́efinit une forme lin ́eaire positive Cc(⌦), i.e.,
+L(↵f + g) = ↵L(f ) + L(g) pour tout f, g 2 Cc(⌦) et tout ↵, 2 R, (1.2.1)
+L(f ) 0 pour tout f 2 Cc(⌦) avec f 0. (1.2.2)
+Nous allons en fait montrer que toute forme lin ́eaire positive sur l’espace Cc(⌦) peut eˆtre repr ́esente ́e de fa ̧con unique par une telle mesure.
+Th ́eor`eme 1.2.1 (Th ́eor`eme de repr ́esentation de Riesz). Soit L : Cc(⌦) ! R une forme
+lin ́eaire positive (i.e. qui satisfait (1.2.1) et (1.2.2)). Il existe une unique mesure de Radon positive
+μ sur ⌦ telle que
+L(f ) =
+Z
+⌦
+f dμ pour tout f 2 Cc(⌦). (1.2.3)
+Dans la preuve de l’existence, nous utiliserons le r ́esultat suivant. Le cas n = 1 correspond au Lemme d’Urysohn.
+Lemme 1.2.2 (Partition de l’unit ́e). Soient V1, . . . , Vn des ouverts de RN et K un compact tel
+que K ⇢
+S
+n
+i=1 Vi. Alors, pour tout i = 1, . . . , n, il existe des fonctions fi 2 Cc(RN ; [0, 1]) telles que
+Supp(fi) ⇢ Vi et
+P
+n
+i=1 fi = 1 sur K.
+D ́emonstration. Pour tout x 2 K, il existe i 2 {1, . . . , n} et une boule ouverte Bx centr ́ee en x et telle que Bx ⇢ Vi. Par conse ́quent, K ⇢
+S
+x2K Bx, et comme K est compact, on peut extraire un sous recouvrement fini K ⇢
+S
+p
+j=1 Bxj . On de ́finit Ki comme l’union des boules ferm ́ees Bxj qui sont contenues dans Vi. Alors Ki est un compact contenu dans Vi et K ⇢
+S
+n
+i=1 Ki. Soit Ui un ouvert born ́e tel que Ki ⇢ Ui ⇢ U i ⇢ Vi, on pose alors
+f
+i(x) := dist(x, RN \ Ui)
+dist(x, K) + Pn
+j=1 dist(x, RN \ Uj) pour tout x 2 RN ,
+qui satisfait bien les propri ́et ́es souhait ́ees.
+Pour tout ouvert V ⇢ ⌦, on d ́efinit
+μ
+⇤(V ) := sup{L(f ) : f 2 Cc(⌦; [0, 1]), Supp(f ) ⇢ V }. (1.2.4)
+Si U ⇢ V , alors μ⇤(U )  μ⇤(V ) de sorte que l’on peut e ́tendre μ⇤ `a n’importe quel ensemble A ⇢ ⌦ en posant
+μ
+⇤(A) := inf{μ⇤(V ) : A ⇢ V ⇢ ⌦ ouvert}.
+La propri ́et ́e de croissance de μ⇤ reste vraie au sens ou` μ⇤(A)  μ⇤(B) pour tout A ⇢ B.
+
+
+1.2. LES MESURES DE RADON PAR DUALITE ́ 13
+Lemme 1.2.3. Pour tout compact K ⇢ ⌦, on a
+μ
+⇤(K) = inf{L(g) : g 2 Cc(⌦; [0, 1]), g = 1 sur K}.
+En particulier, μ⇤(K) < 1. De plus, pour tout ouvert U ⇢ ⌦,
+μ
+⇤(U ) = sup{μ⇤(K) : K ⇢ U, K compact}.
+D ́emonstration. Soient K ⇢ ⌦ un compact et g 2 Cc(⌦; [0, 1]) telle que g = 1 sur K. Pour tout 0 < t < 1, l’ensemble Vt := {g > t}, qui est ouvert, satisfait K ⇢ Vt et f  t 1g pour tout f 2 Cc(⌦; [0, 1]) avec Supp(f ) ⇢ Vt. Par conse ́quent, la croissance de L montre que
+μ
+⇤(K)  μ⇤(Vt) = sup{L(f ) : f 2 Cc(⌦; [0, 1]) tel que Supp(f ) ⇢ Vt}  t 1L(g) < 1.
+En faisant tendre t ! 1 , on obtient μ(K)  L(g) et donc, par passage `a l’infimum en g,
+μ
+⇤(K)  inf{L(g) : g 2 Cc(⌦; [0, 1]), g = 1 sur K}.
+L’autre in ́egalit ́e se montre en conside ́rant un ouvert arbitraire U ⇢ ⌦ contenant K. Si f 2 Cc(⌦; [0, 1]) est une fonction telle que Supp(f ) ⇢ U et f = 1 sur K, il vient par de ́finition de μ⇤ sur les ouverts que
+inf{L(g) : g 2 Cc(⌦; [0, 1]), g = 1 sur K}  L(f )  μ⇤(U ),
+puis, par passage `a l’infimum par rapport `a U , que
+inf{L(g) : g 2 Cc(⌦; [0, 1]), g = 1 sur K}  μ⇤(K).
+Pour  ́etablir la propri ́ete ́ de r ́egularite ́ inte ́rieure sur les ouverts, conside ́rons un ouvert U ⇢ ⌦. Alors, par de ́finition de μ⇤ sur les ouverts, pour tout ↵ < μ⇤(U ), il existe une fonction f 2 Cc(⌦; [0, 1]) telle que Supp(f ) ⇢ U et ↵ < L(f ). Soit K = Supp(f ) et g 2 Cc(⌦; [0, 1]) telle que g = 1 sur K. Comme f  g sur ⌦, on a L(f )  L(g), puis par passage `a l’infimum par rapport `a g, on obtient que L(f )  μ⇤(K). Ceci montre l’existence d’un compact K ⇢ U tel que ↵ < μ⇤(K).
+A ce stade, nous avons d ́efini une fonction d’ensembles μ⇤ : P(⌦) ! [0, +1] qui est finie sur les compacts, qui satisfait, par d ́efinition, la proprie ́t ́e de re ́gularite ́ ext ́erieure
+μ
+⇤(A) = inf{μ⇤(V ) : A ⇢ V ⇢ ⌦ ouvert} pour tout A 2 P(⌦) (1.2.5)
+et la propri ́et ́e de r ́egularit ́e int ́erieure
+μ
+⇤(U ) = sup{μ⇤(K) : K ⇢ U, K compact} pour tout ouvert U ⇢ ⌦. (1.2.6)
+Lemme 1.2.4. La fonction d’ensemble μ⇤ est une mesure exte ́rieure.
+D ́emonstration. On a e ́videmment que μ⇤(;) = 0 et μ⇤ est une fonction croissante d’ensemble, i.e. si A ⇢ B, alors μ⇤(A)  μ⇤(B). Il s’agit `a pr ́esent de montrer que μ⇤ est d ́enombrablement sous-additive, i.e., pour toute suite {An}n2N de sous-ensembles de ⌦, on a
+μ
+⇤
+1 [
+n=1
+A
+n
+!
+
+1 X
+n=1
+μ
+⇤(An).
+Montrons d’abord que si V1 et V2 sont des ouverts de ⌦,
+μ
+⇤(V1 [ V2)  μ⇤(V1) + μ⇤(V2). (1.2.7)
+
+
+14 CHAPITRE 1. ELE ́MENTS DE THE ́ORIE GE ́OME ́TRIQUE DE LA MESURE
+Soit g 2 Cc(⌦; [0, 1]) avec Supp(g) ⇢ V1 [V2. Soient f1 et f2 2 Cc(⌦; [0, 1]) telles que Supp(f1) ⇢ V1, Supp(f2) ⇢ V2 et f1 + f2 = 1 sur Supp(g). Par conse ́quent, pour i = 1, 2, fig 2 Cc(⌦; [0, 1]), Supp(fi) ⇢ Vi et g = f1g + f2g de sorte que, par lin ́earite ́ de L et la de ́finition de μ⇤,
+L(g) = L(f1g) + L(f2g)  μ⇤(V1) + μ⇤(V2).
+Par passage au supremum en g, on obtient μ⇤(V1 [ V2)  μ⇤(V1) + μ⇤(V2). Si μ(An) = 1 pour un certain n 2 N, alors le re ́sultat suit. Sinon, si μ(An) < 1 pour tout n, alors quelque soit " > 0 il existe un ouvert Vn tel que An ⇢ Vn et μ⇤(Vn) < μ⇤(An) + 2 n".
+On de ́finit V := S1
+n=1 Vn et on conside`re f 2 Cc(⌦; [0, 1]) avec Supp(f ) ⇢ V . Comme Supp(f ) est
+compact, il existe p 2 N tel que Supp(f ) ⇢
+S
+p
+n=1 Vn. En ite ́rant (1.2.7), il vient
+L(f )  μ⇤
+p [
+n=1
+V
+n
+!
+
+p X
+n=1
+μ
+⇤(Vn) 
+1 X
+n=1
+μ
+⇤(En) + 2".
+Comme cette in ́egalit ́e est satisfaite quelque soit f 2 Cc(⌦; [0, 1]) avec Supp(f ) ⇢ V , et S1
+n=1 An ⇢
+V , on en d ́eduit que
+μ
+⇤
+1 [
+n=1
+A
+n
+!
+ μ⇤(V ) 
+1 X
+n=1
+μ
+⇤(An) + 2",
+ce qui montre la d ́enombrable sous-additivit ́e, le parame`tre " > 0 e ́tant arbitraire.
+D’apr`es le th ́eor`eme de Carath ́eodory (voir le th ́eor`eme 3.1.3), la classe A des ensembles μ⇤mesurables, i.e., l’ensemble des parties A ⇢ ⌦ qui satisfont
+μ
+⇤(E) = μ⇤(E \ A) + μ⇤(E \ A) pour tout E ⇢ ⌦,
+est une tribu sur ⌦, et la restriction μ := μ⇤|A de μ⇤ `a cette tribu est une mesure. De plus, pour tout A, B ⇢ ⌦ avec dist(A, B) > 0, on a
+μ
+⇤(A [ B) = μ⇤(A) + μ⇤(B).
+En e↵et, par sous-additivit ́e de μ⇤, il su t de montrer que μ⇤(A[B) μ⇤(A)+μ⇤(B). Soit W ⇢ ⌦ un ouvert tel que A [ B ⇢ W . Comme dist(A, B) > 0, il existe des ouverts U et V tels que A ⇢ U , B ⇢ V , U [ V ⇢ W et U \ V = ;. Par de ́finition de μ⇤ sur les ouverts, on a
+μ
+⇤(W ) μ⇤(U [ V ) μ⇤(U ) + μ⇤(V ) μ⇤(A) + μ⇤(B).
+Par passage `a l’infimum parmi tous les ouverts W A [ B, on obtient le re ́sultat voulu. Une application imm ́ediate de la Proposition 3.1.4 montre que B(⌦) ⇢ A. Par conse ́quent, la restriction de μ `a B(⌦) est une mesure Bor ́elienne. Comme par le Lemme 1.2.3, on a μ(K) = μ⇤(K) < 1 (puisque les compacts sont Bor ́eliens), on en de ́duit que μ est une mesure de Radon positive.
+Nous sommes `a pr ́esent en mesure de conclure la preuve du th ́eor`eme de repr ́esentation de Riesz.
+D ́emonstration du the ́ore`me 1.2.1. Il reste a`  ́etablir la proprie ́t ́e de repr ́esentation (1.2.3). Soit f 2 Cc(⌦), par line ́arite ́ de L, il su t d’ ́etablir que
+L(f ) 
+Z
+⌦
+f dμ. (1.2.8)
+Soit K := Supp(f ) et [a, b] un intervalle compact de R qui contient f (K). Pour tout " > 0, il existe
+y0, y1, . . . , yn 2 R tels que y0 < a = y1 < · · · < yn = b et max1in(yi yi 1) < ". On de ́finit, pour tout i 2 {1, . . . , n}
+B
+i := f 1(]yi 1, yi]) \ K.
+
+
+1.2. LES MESURES DE RADON PAR DUALITE ́ 15
+Comme f est continue, les ensembles Bi constituent une partition Bor ́elienne de K. D’apr`es la propri ́et ́e de r ́egularit ́e ext ́erieure (1.2.5), il existe un ouvert Vi contenant Bi tel que μ(Vi)  μ(Bi) + "/n. Par ailleurs, l’ouvert Wi = f 1(]yi ", yi + "[) contenant Bi, on obtient en posant U
+i = Vi \ Wi un ouvert contenant Bi et satisfaisant
+μ(Ui)  μ(Bi) + "
+n , sup
+Ui
+f  yi + " pour tout i = 1, . . . , n.
+Comme {Ui}1in est un recouvrement ouvert du compact K, on peut trouver une partition de l’unit ́e subordonn ́ee `a ce recouvrement, i.e. des fonctions hi 2 Cc(⌦; [0, 1]) telles que Supp(hi) ⇢ Ui
+et Pn
+i=1 hi = 1 sur K. Par cons ́equent, f = Pn
+i=1 hif et 0  hif  (yi + ")hi dans ⌦, puis par lin ́earite ́ et croissance de L, il vient
+L(f ) =
+Xn
+i=1
+L(hif ) 
+Xn
+i=1
+(yi + ")L(hi) =
+Xn
+i=1
+(|a| + yi + ")L(hi) |a|
+Xn
+i=1
+L(hi).
+Comme Pn
+i=1 hi 2 Cc(⌦; [0, 1]) est telle que Pn
+i=1 hi = 1 sur K, le Lemme 1.2.3 montre que
+Xn
+i=1
+L(hi) = L
+Xn
+i=1
+h
+i
+!
+μ(K ).
+Par ailleurs, la d ́efinition de μ⇤ sur les ouverts (et donc de μ) montre L(hi)  μ(Ui)  μ(Bi) + "/n, de sorte que
+L(f ) 
+Xn
+i=1
+(|a| + yi + ")
+⇣
+μ(Bi) + "
+n
+⌘
+|a|μ(K ).
+Comme {B1, . . . , Bn} est une partition de K, on en de ́duit que
+L(f ) 
+Xn
+i=1
+y
+iμ(Bi) + "(|a| + |b| + " + μ(K))
+
+Xn
+i=1
+y
+i 1μ(Bi) + "(|a| + |b| + " + 2μ(K))
+
+Xn
+i=1
+Z
+Bi
+f dμ + "(|a| + |b| + " + 2μ(K))
+=
+Z
+⌦
+f dμ + "(|a| + |b| + " + 2μ(K)),
+ce qui prouve (1.2.8), le param`etre " > 0 e ́tant arbitraire.
+Etablissons enfin l’unicit ́e. Soient μ1 et μ2 deux mesures de Radon positives satisfaisant la conclusion du th ́eor`eme de repr ́esentation de Riesz. Par les proprie ́t ́es de re ́gularite ́ (1.2.5) et (1.2.6), il su t d’ ́etablir que μ1(K) = μ2(K) pour tout compact K ⇢ ⌦. Soit " > 0 et K ⇢ ⌦ un compact. D’apr`es (1.2.5), il existe un ouvert V contenant K tel que μ2(V ) < μ2(K) + ". Par le Lemme d’Urysohn, on peut trouver une fonction f 2 Cc(⌦; [0, 1]) telle que f = 1 sur K et Supp(f ) ⇢ V d’ou` K  f  V . Il vient alors
+μ1(K) =
+Z
+⌦
+K dμ1 
+Z
+⌦
+f dμ1 = L(f ) =
+Z
+⌦
+f dμ2 
+Z
+⌦
+V dμ2 = μ2(V ) < μ2(K) + ".
+Donc μ1(K)  μ2(K) et en  ́echangeant les rˆoles de μ1 et μ2 on en d ́eduit que cette ine ́galit ́e et une  ́egalit ́e.
+
+
+16 CHAPITRE 1. ELE ́MENTS DE THE ́ORIE GE ́OME ́TRIQUE DE LA MESURE
+Pour  ́etendre ce r ́esultat `a des formes lin ́eaires non signe ́es, il est ne ́cessaire d’imposer une propri ́et ́e de continuit ́e. L’espace Cc(⌦; Rd) n’e ́tant pas un Banach, il convient de le fermer pour la topologie de la norme uniforme sur ⌦. On d ́efinit alors
+C0(⌦; Rd) = Cc(⌦; Rd)k·k1
+qui est alors un espace de Banach s ́eparable. Par ailleurs une fonction f 2 C0(⌦; Rd) si et seulement
+si f : ⌦ ! Rd est continue et pour tout " > 0 il existe un compact K" ⇢ ⌦ tel que |f | < " sur ⌦ \ K" (f tend vers 0 sur le bord de ⌦).
+D ́efinition 1.2.5. L’espace des mesures de Radon borne ́es sur ⌦, not ́e M(⌦; Rd), est le dual
+topologique de l’espace de Banach C0(⌦; Rd).
+Grˆace au th ́eor`eme de repr ́esentation de Riesz (the ́ore`me 1.2.1), on peut caracte ́riser l’espace des mesures de Radon born ́ees.
+Th ́eor`eme 1.2.6. Pour tout L 2 M(⌦; Rd), il existe une unique mesure de Radon vectorielle μ
+sur ⌦ telle que
+L(f ) =
+Z
+⌦
+f · dμ :=
+Xd
+j=1
+Z
+⌦
+f
+j dμj pour tout f 2 C0(⌦; Rd).
+De plus, en notant |μ| la mesure variation de μ, on a
+kLkM(⌦;Rd) = |μ|(⌦).
+Commen ̧cons par  ́etablir que toute forme line ́aire continue sur C0(⌦) = C0(⌦; R) (pour d = 1) peut s’e ́crire comme la di↵e ́rence entre deux formes lin ́eaires positives.
+Lemme 1.2.7. Pour tout L 2 M(⌦), il existe des formes line ́aires continues positives L+ et L
+sur C0(⌦) telles que
+L(f ) = L+(f ) L (f ) pour tout f 2 C0(⌦).
+D ́emonstration. D ́efinissons le cˆone C+ := {f 2 C0(⌦) : f 0 sur ⌦} et pour tout f 2 C+,
+L+(f ) := sup{L(g) : g 2 C+, g  f }.
+Etape 1 : L+ est positive et finie sur C+. Soit f 2 C+, comme 0 2 C+, on a L+(f ) 0.
+Soit maintenant g 2 C+ telle que 0  g  f . Par continuite ́ de L, on a L(g)  kLkM(⌦)kgk1  kLkM(⌦)kf k1, et par passage au sup en g, on obtient que 0  L+(f )  kLkM(⌦)kf k1 < 1.
+Etape 2 : L+ est additive sur C+. Soient f1 et f2 2 C+ et g 2 C+ telles que 0  g  f1 + f2. On de ́compose g comme g = min(f1, g) + max(g f1, 0), ou` min(f1, g)  f1 et max(g f1, 0)  f2. Comme min(f1, g) et max(g f1, 0) 2 C+, alors
+L(g) = L(min(f1, g)) + L(max(g f1, 0))  L+(f1) + L+(f2),
+puis par passage au supremum en g,
+L+(f1 + f2)  L+(f1) + L+(f2).
+Pour montrer l’autre in ́egalit ́e, on se donne un " > 0 . Par d ́efinition de L+, il existe g1 et g2 2 C+ tels que 0  gi  fi et L+(fi)  L(gi) + " pour i = 1, 2. Comme 0  g1 + g2  f1 + f2, il s’ensuit que L+(f1 + f2) L(g1 + g2) = L(g1) + L(g2) L+(f1) + L+(f2) 2",
+
+
+1.2. LES MESURES DE RADON PAR DUALITE ́ 17
+et le r ́esultat suit par passage `a la limite quand " ! 0.
+Etape 3 : D ́efinition et additivite ́ de L+ sur C0(⌦). Soit f 2 C0(⌦), on d ́ecompose f comme
+la di↵ ́erence entre sa partie positive et ne ́gative f = f + f avec f ± 2 C+. On pose alors L+(f ) := L+(f +) L+(f ). Si f et g 2 C0(⌦), alors (f + g)+ (f + g) = f + f + g+ g de sorte que (f + g)+ + f + g = (f + g) + f + + g+. D’ou`, par additivit ́e de L+ sur C+,
+L+((f + g)+) + L+(f ) + L+(g ) = L+((f + g) ) + L+(f +) + L+(g+),
+et donc L+(f + g) = L+(f ) + L+(g). En particulier, comme ( f )± = f ⌥, alors L+( f ) = L+(f ).
+Etape 4 : L+ est continue sur C0(⌦). Soit f 2 C0(⌦). Comme L+ est positive, alors L+(|f | ± f ) 0, donc par additivit ́e de L+ sur C0(⌦), L+(|f |) ±L+(f ), i.e., |L+(f )|  L+(|f |). Soient maintenant f1 et f2 2 C0(⌦), alors les  ́etapes 3 et 1 impliquent que,
+|L+(f1) L+(f2)| = |L+(f1 f2)|  L+(|f1 f2|)  kLkM(⌦)kf1 f2k1.
+Etape 5 : L+ est une forme lin ́eaire sur C0(⌦). L’additivit ́e de L+ montre que pour tout n 2 N,
+L+(nf ) = nL+(f ). Comme L+( f ) = L+(f ), l’identit ́e pr ́ec ́edente a en fait lieu pour n 2 Z.
+Si r = p/q 2 Q avec p, q 2 Z et q 6= 0, alors pL+(f ) = L+(pf ) = L+(qrf ) = qL+(rf ), d’o`u
+L+(rf ) = rL+(f ). La continuit ́e de L+ et la densite ́ Q dans R implique que L+(↵f ) = ↵L+(f )
+pour tout ↵ 2 R.
+Etape 6 : L est une forme line ́aire continue positive sur C0(⌦). On de ́finit L := L+ L.
+Alors L est clairement une forme line ́aire continue sur C0(⌦). De plus, par de ́finition de L+, L+(f ) L(f ) pour tout f 2 C+, ce qui montre que L est e ́galement positive.
+D ́emonstration du the ́ore`me 1.2.6. Si d = 1, d’apre`s le Lemme 1.2.7, on peut de ́composer L 2 M(⌦) comme L = L+ L ou` L± sont des formes lin ́eaires continues positives sur C0(⌦). D’apre`s le the ́ore`me de repr ́esentation de Riesz, il existe deux mesures de Radon positives μ± telles que
+L
+±(f ) =
+Z
+⌦
+f dμ± pour tout f 2 Cc(⌦).
+De plus, par d ́efinition de μ± sur les ouverts (voir (1.2.4)) et par d ́efinition de la norme dans M(⌦), on a
+μ
+±(⌦) = sup
+f 2Cc(⌦;[0,1])
+L
+±(f )  kL±kM(⌦) < 1,
+ce qui montre que μ± sont des mesures finies. Par conse ́quent, en posant μ := μ+ μ , μ de ́finit une mesure de re ́elle telle que
+L(f ) =
+Z
+⌦
+f dμ pour tout f 2 Cc(⌦).
+Cette in ́egalit ́e peut ˆetre  ́etendue `a toute fonction f 2 C0(⌦) par densit ́e de Cc(⌦) dans C0(⌦), par continuite ́ de L et par convergence domine ́e. Si d 2, on applique l’argument pre ́ce ́dent aux formes lin ́eaires continues f 2 C0(⌦) 7! Lj(f ) := L(f ej), pour tout 1  j  d, ou` ej de ́signe le j-ie`me vecteur de la base canonique de Rd. On
+montre alors l’existence de mesures de Radon re ́elles μj sur ⌦ telles que Lj(f ) = R
+⌦ f dμj pour
+tout f 2 C0(⌦). On pose alors μ = (μ1, . . . , μd) qui de ́finit une mesure de Radon vectorielle et qui satisfait, pour tout f 2 C0(⌦; Rd)
+L(f ) = L
+0
+@
+Xd
+j=1
+f
+j ej
+1
+A=
+d X
+j=1
+L(fjej) =
+Xd
+j=1
+L
+j (fj ) =
+d X
+j=1
+Z
+⌦
+f
+j dμj =
+Z
+⌦
+f · dμ.
+
+
+18 CHAPITRE 1. ELE ́MENTS DE THE ́ORIE GE ́OME ́TRIQUE DE LA MESURE
+Si f 2 C0(⌦; Rd) est telle que kf k1  1, alors on a
+|L(f )| 
+Z
+⌦
+|f | d|μ|  |μ|(⌦),
+puis par passage au supremum par rapport `a f , kLkM(⌦;Rd)  |μ|(⌦). R ́eciproquement, soit {Bi}i2N une partition Bor ́elienne de ⌦. On pose
+f :=
+X
+i2N, |μ(Bi)|>0
+μ(Bi) |μ(Bi)|
+Bi .
+Comme |μ| est une mesure finie et |f |  1, on en de ́duit que f 2 L1
+|μ|(⌦; Rd). Par densit ́e de
+Cc(⌦; Rd) dans L1
+|μ|(⌦; Rd), pour tout " > 0, il existe une fonction g 2 Cc(⌦; Rd) telle que |g|  1
+et R
+⌦ |f g| d|μ|  ". Par cons ́equent
+kLkM(⌦;Rd)
+Z
+⌦
+g · dμ
+Z
+⌦
+f · dμ " =
+X
+i2N
+|μ(Bi)| ".
+Par passage au supremum parmi toutes les partitions Bore ́liennes de ⌦, il vient
+kLkM(⌦;Rd) |μ|(⌦) ",
+ce qui implique, " > 0 e ́tant arbitraire, que kLkM(⌦;Rd) |μ|(⌦).
+Concernant l’unicite ́, soient μ1 et μ2 deux mesures vectorielles telles que Z
+⌦
+f dμ1 =
+Z
+⌦
+f dμ2 pour tout f 2 Cc(⌦).
+On pose := |μ1| + |μ2| et on conside`re un Bore ́lien A ⇢ ⌦. Par densite ́ de Cc(⌦) dans L1 (⌦), pour tout " > 0 il existe une fonction f" 2 Cc(⌦) telle que Z
+⌦
+|f" A| d  ".
+On en d ́eduit alors que Z
+⌦
+|f" A| d|μ1|  " et
+Z
+⌦
+|f" A| d|μ2|  ".
+Par passage `a la limite dans Z
+⌦
+f
+" dμ1 =
+Z
+⌦
+f
+" dμ2
+quand " ! 0, on en d ́eduit que μ1(A) = μ2(A).
+1.3 Convergence de mesures
+Le the ́ore`me de repr ́esentation de Riesz permet d’identifier le dual topologique de C0(⌦; Rd), note ́
+M(⌦; Rd), `a l’ensemble des mesures de Radon vectorielles que nous appelerons dore ́navant l’espace
+des mesures de Radon born ́ees. On d ́efinit  ́egalement l’espace des mesures de Radon, Mloc(⌦; Rd),
+comme l’ensemble des applications μ : B(⌦) ! Rd telles que μ 2 M(!; Rd) pour tout ouvert born ́e ! tel que ! ⇢ ⌦. Une variante du th ́eor`eme de repr ́esentation de Riesz montre qu’on peut identifier l’espace Mloc(⌦; Rd) aux distributions vectorielles d’ordre 0.
+En tant qu’espace dual, on peut conside ́rer la topologie faible* sur M(⌦; Rd).
+
+
+1.3. CONVERGENCE DE MESURES 19
+D ́efinition 1.3.1. (i) Une suite {μn}n2N ⇢ M(⌦; Rd) converge faible* vers μ 2 M(⌦; Rd) si Z
+⌦
+' · dμn !
+Z
+⌦
+' · dμ pour tout ' 2 C0(⌦; Rd).
+(ii) Une suite {μn}n2N ⇢ Mloc(⌦; Rd) converge localement faible* vers μ 2 Mloc(⌦; Rd) si Z
+⌦
+' · dμn !
+Z
+⌦
+' · dμ pour tout ' 2 Cc(⌦; Rd).
+La norme  ́etant faible* semi-continue infe ́rieurement, il vient que si μn * μ faible* dans M(⌦; Rd), alors pour tout ouvert U ⇢ ⌦,
+|μ|(U )  lim inf
+n!1
+|μn|(U ).
+L’espace C0(⌦; Rd)  ́etant s ́eparable, le re ́sultat suivant provient d’une application imme ́diate du th ́eor`eme de Banach-Alaoglu.
+Th ́eor`eme 1.3.2. Soit {μn}n2N une suite born ́ee d’e ́le ́ments de M(⌦; Rd). Alors, il existe une
+sous-suite {μnk }k2N et μ 2 M(⌦; Rd) telles que μnk * μ faible* dans M(⌦; Rd).
+Un exemple typique d’application du the ́ore`me de compacit ́e pr ́ece ́dent concerne les suites {fn}n2N born ́ee dans L1 (⌦; Rd), o`u est une mesure de Radon positive. L’espace L1 (⌦; Rd) e ́tant
+non r ́eflexif, on ne peut pas en g ́en ́eral extraire de sous-suite faiblement convergente dans L1 (⌦; Rd).
+N ́eanmoins on peut d ́efinir la suite de mesures de Radon borne ́es μn = fn 2 M(⌦; Rd). Comme
+|μn|(⌦) =
+Z
+⌦
+|fn| d  C,
+la suite {μn}n2N est born ́ee dans M(⌦; Rd) de sorte qu’on peut extraire une sous-suite faible*
+convergente dans M(⌦; Rd) vers une limite μ 2 M(⌦; Rd). En ge ́ne ́ral, μ n’est pas absolument continue par rapport `a .
+Pour les suites de mesures positives, nous avons les conditions suivantes de semi continuite ́ le long d’ouverts ou de compacts.
+Proposition 1.3.3. Si {μn}n2N est une suite de mesures de Radon positives dans ⌦ qui converge
+localement faible* dans Mloc(⌦) vers une mesure de Radon positive μ, alors
+μ(U )  lim inf
+n!1
+μ
+n(U ) pour tout ouvert U ⇢ ⌦,
+lim sup
+n!1
+μ
+n(K)  μ(K) pour tout compact K ⇢ ⌦,
+et
+lim
+n!1
+μ
+n(E) = μ(E) pour tout Bore ́lien born ́e E tel que E ⇢ ⌦ et μ(@E) = 0.
+D ́emonstration. Soit U ⇢ ⌦ un ouvert et C un sous ensemble compact de U . On consid`ere une fonction 2 Cc(⌦) telle que 0   1, = 1 sur C et = 0 sur ⌦ \ U . Alors
+lim inf
+n!1
+μ
+n(U ) lim
+n!1
+Z
+⌦
+dμn =
+Z
+⌦
+dμ μ(C).
+Le r ́esultat s’obtient par passage au supremum parmi tous les compacts C ⇢ U et par re ́gularite ́ inte ́rieure de .
+
+
+20 CHAPITRE 1. ELE ́MENTS DE THE ́ORIE GE ́OME ́TRIQUE DE LA MESURE
+Si K ⇢ ⌦ est compact, par r ́egularite ́ exte ́rieure de μ, pour tout " > 0 il existe un ouvert V ⇢ ⌦ tel que K ⇢ V et μ(V )  μ(K) + ". On peut trouver une fonction ' 2 Cc(⌦) telle que 0  '  1, ' = 1 sur K et ' = 0 sur ⌦ \ V . Par conse ́quent
+lim sup
+n!1
+μ
+n(K)  lim
+n!1
+Z
+⌦
+' dμn =
+Z
+⌦
+' dμ  μ(V )  μ(K) + ".
+On obtient le r ́esultat en faisant tendre " ! 0.
+Si E ⇢ ⌦ est un Bor ́elien born ́e tel que E ⇢ ⌦ et μ(@E) = 0, alors
+μ(E) = μ(E ̊)  lim inf
+n!1
+μ
+n(E ̊)  lim inf
+n!1
+μ
+n(E)  lim sup
+n!1
+μ
+n(E)  lim inf
+n!1
+μ
+n(E)  μ(E) = μ(E),
+ce qui conclut la preuve de la proposition.
+Dans le cas d’une suite de mesures vectorielles, nous avons un analogue au dernier point de la Proposition 1.3.3.
+Proposition 1.3.4. Soit {μn}n2N ⇢ M(⌦; Rd) telle que μn * μ faible* dans M(⌦; Rd) et |μn| *
+faible* dans M(⌦) ou` μ 2 M(⌦; Rd) et 2 M(⌦) est une mesure positive. Alors |μ| et si
+E est un Bore ́lien born ́e tel que E ⇢ ⌦ et (@E) = 0, alors
+μ
+n(E) ! μ(E).
+D ́emonstration. Soit U un ouvert born ́e tel que U ⇢ ⌦. Pour t > 0 petit, on pose Ut := {x 2 U : dist(x, @U ) > t} de sorte que U t ⇢ U . Par semi-continuite ́ infe ́rieure de la variation, il vient, pour tout t > 0, |μ|(Ut)  lim inf
+n!1
+|μn|(Ut)  (U t)  (U ).
+Par passage `a la limite quand t ! 0, il vient que |μ|(U )  (U ). Par r ́egularite ́ exte ́rieure des mesures de Radon positives |μ| et , on en de ́duit que |μ|  . On e ́crit
+μ
+n = (μn,1, . . . , μn,d), μ = (μ1, . . . , μd)
+et, pour tout 1  i  d, μn,i = μ+
+n,i μn,i avec |μn,i| = μ+
+n,i + μn,i. Quitte a` extraire une soussuite, il existe une mesure de Radon positive ⌫i 2 M(⌦) telle que μ+
+n,i * ⌫i faible* dans M(⌦). De plus, comme |μn| μ+
+n,i, il vient par passage `a la limite que ⌫i. En particulier, comme ⌫
+i(@E)  (@E) = 0, on en de ́duit de la Proposition (1.3.3) que
+μ+
+n,i(E) ! ⌫i(E). (1.3.1)
+De mˆeme, comme μn,i = μ+
+n,i μn,i * ⌫i μi faible* dans M(⌦) et |μn| μn,i, on en de ́duit que ⌫
+i μi ce qui implique que
+μ
+n,i(E) ! ⌫i(E) μi(E). (1.3.2)
+Le re ́sultat suit en faisant la di↵ ́erence entre (1.3.1) et (1.3.2).
+Un outil important pour approcher les fonctions, distributions ou mesures est la convolution.
+D ́efinition 1.3.5. Soit μ 2 M(⌦; Rd) et f : RN ! R une fonction continue borne ́e. On de ́finit la convolution de μ et f par la fonction
+μ ⇤ f (x) :=
+Z
+⌦
+f (x y) dμ(y).
+
+
+1.3. CONVERGENCE DE MESURES 21
+Une application importante est celle ou` f = ⌘" est une famille de noyaux de convolution de la forme
+⌘
+"(x) = 1
+"
+N⌘
+⇣x
+"
+⌘
+, x 2 RN ,
+ou` ⌘ 2 C1
+c (RN ) est une fonction positive, paire qui satisfait Supp(⌘) ⇢ B1(0) et R
+RN ⌘(y) dy = 1.
+Proposition 1.3.6. Soit ⌦ ⇢ RN un ouvert et μ 2 M(⌦; Rd). Pour " > 0, on de ́finit
+μ ⇤ ⌘"(x) =
+Z
+⌦
+⌘
+"(x y) dμ(y) = " N
+Z
+⌦
+⌘
+✓x y "
+◆
+dμ(y)
+pour x 2 ⌦" := {z 2 ⌦ : dist(z, @⌦) > "}. Alors
+(a) μ ⇤ ⌘" 2 C1(⌦"; Rd) et @↵(μ ⇤ ⌘") = μ ⇤ (@↵⌘") pour tout ↵ 2 NN ;
+(b) La mesure μ" := (μ ⇤ ⌘")LN convergence localement faible* vers μ dans Mloc(⌦; Rd) et
+|μ"|(A) =
+Z
+A
+|μ ⇤ ⌘"|(x) dx  |μ|(A + B"(0))
+pour tout Bore ́lien A ⇢ ⌦".
+D ́emonstration. (a) On calcule la limite du taux d’accroissement par passage `a la limite sous le signe int ́egrale et convergence domin ́ee, puis on raisonne par re ́currence sur ↵. (b) Soient ' 2 Cc(⌦) et " > 0 assez petit tel que Supp(') ⇢ ⌦". A l’aide du the ́ore`me de Fubini et de la parit ́e de ⌘, on a
+Z
+⌦
+(μ ⇤ ⌘")(x)'(x) dx =
+Z
+⌦
+✓Z
+⌦
+⌘
+"(x y) dμ(y)
+◆
+'(x) dx
+=
+Z
+⌦
+✓Z
+⌦
+⌘
+"(y x)'(x) dx
+◆
+dμ(y)
+=
+Z
+⌦
+' ⇤ ⌘" dμ.
+Comme ' est continue `a support compact, ' ⇤ ⌘" ! ' uniform ́ement sur ⌦ et donc, du fait que |μ| est une mesure finie,
+lim
+"!0
+Z
+⌦
+(μ ⇤ ⌘")(x)'(x) dx = lim
+"!0
+Z
+⌦
+' ⇤ ⌘" dμ =
+Z
+⌦
+' dμ,
+ce qui montre μ" * μ localement faible* dans Mloc(⌦; Rd). De plus, comme μ" est une mesure absolument continue par rapport `a la mesure de Lebesgue, on a de nouveau par le the ́ore`me de Fubini
+|μ"|(A) =
+Z
+A
+|μ ⇤ ⌘"|(x) dx 
+Z
+A
+Z
+⌦
+⌘
+"(x y) d|μ|(y) dx
+
+Z
+⌦
+Z
+A
+⌘
+"(x y) dx d|μ|(y) 
+Z
+A+B" (0)
+Z
+A
+⌘
+"(x y) dx d|μ|(y)  |μ|(A + B"(0)).
+
+
+22 CHAPITRE 1. ELE ́MENTS DE THE ́ORIE GE ́OME ́TRIQUE DE LA MESURE
+1.4 Di↵ ́erentiation de mesures
+Dans la suite, nous allons conside ́rer des familles F de boules ferm ́ees dans RN . Une telle famille
+F est un recouvrement de A ⇢ RN si pour tout x 2 A, il existe une boule B 2 F centr ́ee en x. Nous dirons que F est un recouvrement fin de A si, pour tout x 2 A et tout > 0, il existe une boule B 2 F centr ́ee en x telle que diam(B)  .
+On admet le r ́esultat suivant (voir [1, Theorem 2.17]).
+Th ́eor`eme 1.4.1 (de recouvrement de Besicovitch). Il existe un entier ⇠ = ⇠(N ) 2 N qui ne
+d ́epend que de la dimension N avec la propri ́ete ́ suivante : soit A ⇢ RN un ensemble born ́e et F
+un recrouvrement de A par des boules ferm ́ees et tel que
+sup{diam(B), B 2 F} < 1.
+Alors, il existe ⇠ sous-familles F1, . . . , F⇠ de F telles que, pour tout j 2 {1, . . . , ⇠}, Fj est une
+famille d ́enombrable de boules deux `a deux disjointes et
+A⇢
+⇠ [
+j=1
+[
+B2Fj
+B.
+Un corollaire du re ́sultat pr ́ec ́edent concerne les recouvrement d’un ensemble par une union d ́enombrable compos ́ee de boules ferme ́es deux `a deux disjointes `a un ensemble de mesure μ pre`s, ou` μ est une mesure de Radon arbitraire.
+Corollaire 1.4.2. Soit A ⇢ RN un ensemble Bore ́lien borne ́ et F un recouvrement fin de A. Alors,
+pour toute mesure de Radon positive μ sur RN , il existe une sous famille Gμ ⇢ F d ́enombrable
+disjointe telle que
+μ
+0
+@A \
+[
+B2Gμ
+B
+1
+A = 0.
+D ́emonstration. Soit ⇠ 2 N donn ́e par le th ́eor`eme 1.4.1 et = 1 1/(2⇠). En posant A0 = A, il existe ⇠ sous-familles F1, . . . , F⇠ telles que, pour tout j 2 {1, . . . , ⇠}, Fj est une famille d ́enombrable compose ́e de boules ferm ́ees deux `a deux disjointes et
+A0 ⇢
+⇠ [
+j=1
+[
+B2Fj
+B.
+En particulier, il existe i 2 {1, . . . , ⇠} tel que
+μ A0 \
+[
+B2Fi
+B
+! 1
+⇠ μ(A).
+Comme μ(A0) < 1, on peut donc trouver une sous famille finie G1 ⇢ F1 qui satisfait
+μ A0 \
+[
+B2G1
+B
+! 1
+2⇠ μ(A0).
+On pose alors A1 := A0 \
+S
+B2G1 B et on applique le meˆme argument au recouvrement fin de A1
+donn ́e par
+F 0 :=
+(
+B
+0 2 F : B0 \
+[
+B2G1
+B=;
+)
+
+
+1.4. DIFFE ́RENTIATION DE MESURES 23
+dont on extrait une sous-famille finie disjointe G2 telle que
+μ A1 \
+[
+B2G2
+B
+! 1
+2⇠ μ(A1).
+En particulier, G1 [ G2 est e ́galement finie et disjointe et, en posant A2 := A1 \
+S
+B2G2 B, on a
+μ(A2)  μ(A1).
+Par r ́ecurrence, on construit pour tout k 2 N un ensemble Ak+1 ⇢ Ak telle que μ(Ak+1) 
+μ(Ak) et une famille finie disjointe Gk+1 telle que Sk+1
+j=1 Gj est disjointe et
+A
+k+1 = Ak \
+[
+B2Gk+1
+B = ··· = A\
+[
+B2
+Sk+1
+i=1 Gi
+B.
+En particulier, comme μ(Ak) ! 0 et la famille de ́nombrable et disjointe G = S1
+k=1 Gk satisfait
+A\
+[
+B2G
+B⇢
+1 \
+k=1
+A
+k,
+on obtient e↵ectivement que μ(A \
+S
+B2G B) = 0.
+Si et μ sont deux mesures de Radon positives sur ⌦, on de ́finit pour x 2 Supp( )
+D+μ(x) := lim sup
+%!0
+μ(B%(x))
+(B%(x)) , D μ(x) := lim inf
+%!0
+μ(B%(x))
+(B%(x)) .
+Lemme 1.4.3. Pour tout % > 0, la fonction x 2 ⌦ 7! (B%(x)) est semi-continue inf ́erieurement.
+Pour tout x 2 ⌦, la fonction % 7! (B%(x)) est continue `a gauche.
+D ́emonstration. Soit xk ! x, fk := B%(xk) et f = B%(x). Alors on a
+lim inf
+k!1
+f
+k(y) f (y) pour tout y 2 RN .
+Cette ine ́galite ́ est imme ́diate si y 62 B%(x). Si en revanche y 2 B%(x), alors |x y| < %, ce qui implique que |xk y| < % pour k assez grand. Par cons ́equent, le Lemme de Fatou implique que
+lim inf
+k!1
+Z
+RN
+f
+kd
+Z
+RN
+fd ,
+ce qui montre e↵ectivement que
+lim inf
+k!1
+(B%(xk)) (B%(x)).
+Soit %k % %, alors la suite d’ensembles {B%k (x)}k2N est croissante au sens de l’inclusion et
+S
+k B%k (x) = B%(x). Par convergence monotone, on obtient alors que (B%k (x)) ! (B%(x).
+Le Lemme 1.4.3 montre que les fonctions D±μ sont Bore ́liennes sur ⌦. De plus comme les boules ouvertes peuvent eˆtre approche ́es par l’inte ́rieur par des boules ferme ́es, les densit ́es D±μ ne changent pas si l’on remplace les boules ouvertes par des boules ferme ́es.
+Proposition 1.4.4. Soient et μ deux mesures de Radon positives sur ⌦ et t 0. Pour tout
+Bor ́elien A ⇢ Supp( ), on a les deux implications suivantes :
+D μ(x)  t 8 x 2 A =) μ(A)  t (A); (1.4.1)
+D+μ(x) t 8 x 2 A =) μ(A) t (A). (1.4.2)
+
+
+24 CHAPITRE 1. ELE ́MENTS DE THE ́ORIE GE ́OME ́TRIQUE DE LA MESURE
+D ́emonstration. Montrons (1.4.1). Soit U un ouvert contenant A et " > 0. Pour tout x 2 A et tout > 0, il existe %(x) 2 (0, ) tel que B%(x)(x) ⇢ U et
+μ(B%(x)(x))  (t + ") (B%(x)(x)).
+On de ́finit F" := B%(x) : x 2 A, B%(x) ⇢ U, μ(B%(x))  (t + ") (B%(x)) .
+Par hypothe`se, F" est un recouvrement fin de A. Le the ́ore`me de recouvrement de Besicovitch montre alors l’existence sur sous-famille de ́nombrable et disjointe F0
+" := {Bi}i2N ⇢ F" telle que
+μ A\
+[
+i2N
+B
+i
+!
+= 0.
+Par cons ́equent,
+μ(A) =
+1 X
+i=0
+μ(Bi)  (t + ")
+1 X
+i=0
+(Bi) = (t + ")
+[
+i2N
+B
+i
+!
+ (t + ") (U ).
+Par passage `a l’infimum parmi tous les ouverts U contenant A et en faisant tendre " ! 0, on en de ́duit que μ(A)  t (A). La preuve de (1.4.2) est similaire.
+Th ́eor`eme 1.4.5 (Di↵ ́erentiation de Besicovitch). Soit une mesure de Radon positive sur
+⌦ et μ 2 M(⌦; Rd). Alors pour -presque tout x 2 Supp( ), la limite
+f (x) := lim
+%!0
+μ(B%(x)) (B%(x))
+existe dans Rd. De plus la d ́ecomposition de Radon-Nikod ́ym de μ est donn ́ee par
+μ = f + μs,
+ou` μs = μ E et E est l’ensemble -n ́egligeable
+E = (⌦ \ Supp( )) [
+⇢
+x 2 ⌦ : lim
+%!0
+|μ|(B%(x))
+(B%(x)) = 1 .
+D ́emonstration. En raisonnant sur chacune des composantes de μ et en d ́ecomposant chacune des composantes en la di↵ ́erence entre la partie positive et n ́egative, on peut supposer sans restreindre la ge ́ne ́ralite ́ que μ est une mesure positive finie. D’apr`es la Proposition 1.4.4,
+({D+μ = 1})  ({D+μ t}) 
+1
+t μ({D+μ t}) 
+1
+t μ(⌦) ! 0 quand t ! 1,
+de sorte que 0  D μ  D+μ < 1 -p.p. x 2 ⌦. Par conse ́quent, (E) = 0. On pose F := ⌦ \ E et nous allons montrer que D+μ = D μ -p.p. dans ⌦. Pour ce faire, on d ́efinit pour tout Bore ́lien A ⇢ ⌦,
+⌫
+±(A) =
+Z
+A
+D
+±μ(x) d (x).
+Pour tout Bor ́elien A ⇢ F , tout t > 1 et tout n 2 Z, on introduit
+A
+n = {x 2 A : D+μ(x) 2 (tn, tn+1]}
+
+
+1.4. DIFFE ́RENTIATION DE MESURES 25
+de sorte que S
+n An = A \ {D+μ > 0}. D’apre`s la Proposition 1.4.4,
+⌫+(An)  tn+1 (An)  tμ(An),
+puis en sommant pour n 2 Z, on obtient que ⌫+(A)  tμ(A). Par passage `a la limite quand t ! 1,
+il vient ⌫+(A)  μ(A) et on montre de meˆme que μ(A)  ⌫ (A) en utilisant le fait que, par la Proposition 1.4.4, on a μ({D μ = 0}) = 0. Par conse ́quent
+⌫+ = ⌫ = μ F,
+ce qui montre que f := D+μ = D μ -p.p. dans ⌦ et que μ F = f .
+Corollaire 1.4.6 (Points de Lebesgue). Soit une mesure de Radon positive sur un ouvert
+⌦ ⇢ RN et f 2 L1 (⌦; Rd). Alors, pour -presque tout x 2 ⌦, on a
+lim
+%!0
+1
+(B%(x))
+Z
+B% (x)
+|f (y) f (x)| d (y) = 0.
+D ́emonstration. On applique le th ́eor`eme de di↵e ́rentiation de Besicovitch `a la mesure μ = |f q| ou` q 2 Q, ce qui montre l’existence d’un ensemble Bor ́elien Eq -n ́egligeable (et donc aussi μn ́egligeable) tel que pour tout x 2 ⌦ \ Eq,
+lim
+%!0
+1
+(B%(x))
+Z
+B% (x)
+|f (y) q| d (y) = |f (x) q|.
+On pose E := S
+q2Q Eq qui est un Bore ́lien -n ́egligeable de ⌦. Pour tout x 2 ⌦ \ E et tout q 2 Q, on a alors
+lim sup
+%!0
+1
+(B%(x))
+Z
+B% (x)
+|f (y) f (x)| d (y)  lim
+%!0
+1
+(B%(x))
+Z
+B% (x)
+|f (y) q| d (y) + |f (x) q|
+ 2|f (x) q|.
+Par densite ́ de Q dans R, on peut faire tendre q ! f (x), ce qui implique le r ́esultat.
+Corollaire 1.4.7 (D ́ecomposition polaire d’une mesure vectorielle). Soit μ 2 M(⌦; Rd).
+Alors il existe une fonction f 2 L1
+|μ|(⌦; Rd) telle que
+μ = f |μ|, |f (x)| = 1 |μ|-presque pour tout x 2 ⌦.
+D ́emonstration. On applique le th ́eore`me de di↵e ́rentiation de Besicovitch `a la mesure = |μ|. Dans ce cas, E = ⌦ \ Supp(|μ|) et comme |μ(E)|  |μ|(E) = 0, on en d ́eduit que μ = f |μ| ou`, pour |μ|-presque tout x 2 ⌦,
+f (x) := lim
+%!0
+μ(B%(x))
+|μ|(B%(x)) .
+Comme |μ(B%(x))|  |μ|(B%(x)), on a toujours l’ine ́galite ́ |f (x)|  1 pour |μ|-presque tout x 2 ⌦. Par ailleurs, d’apr`es la Proposition 1.1.9, on a |μ| = |f ||μ| ce qui implique que Z
+⌦
+(1 |f |) d|μ| = 0.
+On en d ́eduit alors que |f | = 1 |μ|-p.p. dans ⌦.
+
+
+Chapitre 2
+Fonctions `a variation born ́ee
+2.1 D ́efinition et exemples
+De ́finition 2.1.1. Soit ⌦ ⇢ RN un ouvert. L’espace BV (⌦) des fonctions `a variation borne ́e
+dans ⌦ est l’ensemble des fonctions f 2 L1(⌦) telles qu’il existe une mesure de Radon borne ́e μ 2 M(⌦; RN ) satisfaisant
+Z
+⌦
+u div' dx =
+Z
+⌦
+' · dμ pour tout ' 2 C1
+c (⌦; RN ).
+En d’autres termes, la d ́eriv ́ee distributionnelle Du de u peut ˆetre repre ́sente ́e par une mesure de Radon born ́ee. On identifiera syste ́matiquement Du et μ et on  ́ecrira que Du 2 M(⌦; RN ). La variation totale de u est alors donn ́ee par
+|Du|(⌦) = sup
+⇢Z
+⌦
+u div' dx : ' 2 C1
+c (⌦; RN ), |'|  1 .
+De manie`re g ́en ́erale, on peut de ́finir la variation totale de toute fonction u 2 L1(⌦) par
+T V (u, ⌦) := sup
+⇢Z
+⌦
+u div' dx : ' 2 C1
+c (⌦; RN ), |'|  1 ,
+cette quantite ́ pouvant  ́eventuellement eˆtre infinie. Une application imme ́diate du the ́ore`me de repr ́esentation de Riesz montre alors qu’une fonction u 2 L1(⌦) appartient `a BV (⌦) si et seulement si T V (u, ⌦) < 1.
+On v ́erifie ais ́ement le r ́esultat suivant.
+Proposition 2.1.2. L’espace BV (⌦) a une structure d’espace de Banach lorsqu’on le munit de la
+norme
+kukBV (⌦) := kukL1(⌦) + |Du|(⌦).
+Exemple 2.1.3. (i) L’espace de Sobolev W 1,1(⌦) est contenu dans BV (⌦). De plus, si u 2 W 1,1(⌦), alors Du = ruLN et
+|Du|(⌦) =
+Z
+⌦
+|ru| dx,
+ou` ru 2 L1(⌦; RN ) est la de ́rive ́e faible de u. En e↵et, pour tout ' 2 C1
+c (⌦; RN ), on a par
+d ́efinition de W 1,1(⌦) que Z
+⌦
+u div' dx =
+Z
+⌦
+' · ru dx
+27
+
+
+28 CHAPITRE 2. FONCTIONS A` VARIATION BORNE ́E
+de sorte que Du = ruLN . Une application directe de la Proposition 1.1.9 montre alors que
+|Du| = |ru|LN .
+(ii) L’inclusion de W 1,1(⌦) dans BV (⌦) est stricte. En e↵et, si N = 1 et ⌦ = ( 1, 1), on consid`ere la fonction caract ́eristique u = (0,1) 2 L1( 1, 1) \ W 1,1( 1, 1). Or, le calcul de sa d ́eriv ́ee distributionnelle montre que
+Du = 0 2 M( 1, 1)
+et donc que u 2 BV ( 1, 1).
+L’exemple pr ́ece ́dent est un cas particulier d’ensemble de p ́erim`etre fini que nous  ́etudierons en d ́etail au chapitre 4. Un troisi`eme exemple de fonction `a variation born ́ee concerne les fonctions ayant des singularit ́es concentre ́es sur un ensemble di↵us de type Cantor. Pour voir cela, nous allons e ́tudier le cas de fonctions d’une seule variable.
+Exemple 2.1.4. Soit u : [a, b] ! R une fonction croissante et int ́egrable. Alors, u 2 BV (a, b) et |Du|((a, b))  u(b) u(a).
+En e↵et, quitte a` e ́tendre u par u(a) sur ( 1, a) et u(b) sur (b, +1), on peut supposer que u est croissante (et localement int ́egrable) sur R. Soit ⌘" un noyau re ́gularisant, on pose u" := u ⇤ ⌘"
+de sorte que u" est C1 et croissante sur R. D’une part, on a Z
+b
+a
+u
+0
+" dx = u"(b) u"(a) =
+Z
+R
+[u(b s) u(a s)]⌘"(s) ds  u(b) u(a).
+D’autre part, pour tout ' 2 C1
+c (a, b) avec |'|  1 et tout " > 0 assez petit Z
+b
+a
+u
+"'0 dx =
+Z
+b
+a
+u
+0
+"' dx 
+Z
+b
+a
+u
+0
+" dx,
+ce qui montre que Z b
+a
+u
+"'0 dx  u(b) u(a).
+Par passage `a la limite quand " ! 0, on obtient que Z
+b
+a
+u'0 dx  u(b) u(a),
+puis, par passage au supremum parmi toutes les fonctions test, il vient |Du|((a, b))  u(b) u(a). Un exemple important est celui de la fonction de Cantor-Vitali (encore connue sous le nom de l’escalier du diable) repr ́esente un dernier exemple de fonction BV . Il s’agit d’une fonction continue croissante dont la de ́rive ́ ponctuelle s’annule L1-presque partout (en fait en dehors de l’ensemble triadique de Cantor). Dans cet exemple, la d ́erive ́e distributionnelle est une mesure di↵use concentr ́ee sur l’ensemble triadique de Cantor qui s’ave`re eˆtre un ensemble de dimension de Hausdor↵ ln 2/ ln 3 2 (0, 1).
+La variation totale jouit d’une propri ́ete ́ de semicontinuit ́e infe ́rieure.
+Proposition 2.1.5. Soit {uk}k2N une suite dans L1(⌦) et u 2 L1(⌦) telles que uk ! u dans
+L1(⌦). Alors
+T V (u, ⌦)  lim inf
+k!1
+T V (uk, ⌦).
+D ́emonstration. Pour toute fonction test ' 2 C1
+c (⌦; RN ) telle que |'|  1, on a
+Z
+⌦
+u div' dx = lim
+k!1
+Z
+⌦
+u
+k div' dx  lim inf
+k!1
+T V (uk, ⌦).
+Par passage au supremum parmi toutes les fonctions tests, on obtient le re ́sultat escompte ́.
+
+
+2.2. APPROXIMATION PAR DES FONCTIONS RE ́GULIE`RES 29
+2.2 Approximation par des fonctions r ́eguli`eres
+La topologie forte de BV est une topologie trop restrictive pour esp ́erer avoir la densite ́ des fonctions lisses dans cet espace. En e↵et si {uk}k2N est une suite de fonctions re ́guli`eres qui approche dans BV (⌦) une fonction u 2 BV (⌦) \ W 1,1(⌦), alors {uk}k2N est de Cauchy dans BV (⌦) et donc  ́egalement dans W 1,1(⌦). Par comple ́tude de W 1,1(⌦) on aurait alors que uk ! v dans W 1,1(⌦) puis, par unicite ́ de la limite (au sens des distributions) u = v 2 W 1,1(⌦) ce qui est absurde.
+Il convient alors d’a↵aiblir le mode d’approximation. C’est l’objet du r ́esultat suivant qui sera central dans la suite de ce cours.
+The ́or`eme 2.2.1 (Anzellotti-Giaquinta). Soit ⌦ ⇢ RN un ouvert et soit u 2 BV (⌦). Alors il
+existe une suite {uk}k2N de fonctions dans C1(⌦) \ BV (⌦) telle que
+1. uk ! u fortement dans L1(⌦) ;
+2. Duk * Du faible* dans M(⌦; RN ) ;
+3. |Duk|(⌦) ! |Du|(⌦).
+D ́emonstration. On commence par le cas ou` ⌦ = RN . On conside`re un noyau re ́gularisant ⌘"k
+et on pose uk := u ⇤ ⌘"k 2 C1(RN ). On sait par les proprie ́te ́s classiques de la convolution que u
+k 2 C1(RN ), uk ! u dans L1(RN ) et, par semicontinuite ́ inf ́erieure de la variation totale,
+|Du|(RN )  lim inf
+k!1
+T V (uk, RN ).
+Par ailleurs, comme pour tout ' 2 C1
+c (RN ; RN ), on a Z
+RN
+u
+k div' dx =
+Z
+RN
+(u ⇤ ⌘"k ) div' dx =
+Z
+RN
+u[(div') ⇤ ⌘"k ] dx
+=
+Z
+RN
+u div(' ⇤ ⌘"k ) dx =
+Z
+RN
+' ⇤ ⌘"k · dDu =
+Z
+RN
+' · (Du ⇤ ⌘"k ) dx,
+alors ruk = (Du) ⇤ ⌘"k . D’apr`es la Proposition 1.3.6, Duk * Du localement faiblement dans Mloc(RN ; RN ) et
+T V (uk, RN )  |Du|(RN ).
+Ceci implique que {Duk}k2N est borne ́e dans M(RN ; RN ), en particulier uk 2 BV (RN ), ce qui
+montre que Duk * Du faible* dans M(RN ; RN ) ainsi que
+lim sup
+k!1
+|Duk|(RN )  |Du|(RN ),
+ce qui conclut la preuve du th ́eor`eme dans le cas de tout l’espace.
+Cas d’un ouvert ge ́ne ́ral. Soient k 1 et {⌦i}i 1 une suite croissante d’ouverts borne ́s tels que ⌦
+i ⇢ ⌦i+1, S
+i ⌦i = ⌦ et |Du|(⌦ \ ⌦1)  1/4k, on pose
+A1 := ⌦2, Ai := ⌦i+1 \ ⌦i 1 pour tout i 2.
+On a alors que Ai est ouvert pour tout i 1 et ⌦ = S
+i Ai. Comme ce recouvrement de Ai est localement fini, on peut consid ́erer une partition de l’unit ́e ✓i 2 C1
+c (Ai) telle que 0  ✓i  1 et
+P
+1
+i=1 ✓i = 1 sur ⌦. Pour tout i 1, on choisit "i > 0 assez petit de sorte que Supp((✓iu) ⇤ ⌘"i ) ⇢ Ai et
+Z
+⌦
+|(✓iu) ⇤ ⌘"i ✓iu| dx 
+1
+k2i (2.2.1)
+Z
+⌦
+|(ur✓i) ⇤ ⌘"i ur✓i| dx 
+1
+k2i+1 . (2.2.2)
+
+
+30 CHAPITRE 2. FONCTIONS A` VARIATION BORNE ́E
+On pose alors
+u
+k :=
+X 1
+i=1
+(✓iu) ⇤ ⌘"i
+ce qui d ́efinit une fonction C1(⌦) du fait que la somme est localement finie. D’une part, comme
+u = P1
+i=1 ✓iu, on a d’apr`es (2.2.1) Z
+⌦
+|uk u| dx 
+1 X
+i=1
+Z
+⌦
+|(✓iu) ⇤ ⌘"i ✓iu| dx 
+1 X
+i=1
+1
+k2i = 1
+k ! 0,
+ce qui montre que uk ! u dans L1(⌦) et, en particulier, par semicontinuite ́ infe ́rieure de la variation totale, que |Du|(⌦)  lim inf
+k!1
+T V (uk, ⌦).
+On montre maintenant l’autre in ́egalite ́. Pour tout ' 2 C1
+c (⌦; RN ) telle que |'|  1, Z
+⌦
+u
+k div' dx =
+1 X
+i=1
+Z
+⌦
+(✓iu) ⇤ ⌘"i div' dx
+=
+1 X
+i=1
+Z
+⌦
+✓
+iu[(div') ⇤ ⌘"i ] dx
+=
+1 X
+i=1
+Z
+⌦
+✓
+iu div(' ⇤ ⌘"i ) dx
+=
+1 X
+i=2
+Z
+⌦
+u div(✓i(' ⇤ ⌘"i )) dx
+1 X
+i=1
+Z
+⌦
+ur✓i · (' ⇤ ⌘"i ) dx
++
+Z
+⌦
+u div(✓1(' ⇤ ⌘"1 )) dx. (2.2.3)
+Comme ✓1(' ⇤ ⌘"1 ) 2 C1
+c (⌦; RN ) satisfait |✓1(' ⇤ ⌘"1 )|  1, alors
+Z
+⌦
+u div(✓1(' ⇤ ⌘"1 )) dx  |Du|(⌦). (2.2.4)
+D’autre par, pour i 2, on a ✓i(' ⇤ ⌘"i ) 2 C1
+c (⌦; RN ), |✓i(' ⇤ ⌘"i )|  1 et Supp(✓i(' ⇤ ⌘"i )) ⇢ Ai. Par cons ́equent, Z
+⌦
+u div(✓i(' ⇤ ⌘"i )) dx  |Du|(Ai)  |Du|(⌦i+1) |Du|(⌦i 1),
+puis, en sommant pour i 2,
+1 X
+i=2
+Z
+⌦
+u div(✓i(' ⇤ ⌘"i )) dx  2|Du|(⌦ \ ⌦1) 
+1
+2k . (2.2.5)
+Enfin, en utilisant le fait que P
+i 1 r✓i = 1, il vient
+1 X
+i=1
+Z
+⌦
+ur✓i · (' ⇤ ⌘"i ) dx =
+1 X
+i=1
+Z
+⌦
+[(ur✓i) ⇤ ⌘"i · ' ur✓i · '] dx
+
+1 X
+i=1
+Z
+⌦
+|(ur✓i) ⇤ ⌘"i ) ur✓i| dx
+
+1 X
+i=1
+1
+k2i+1 = 1
+2k , (2.2.6)
+
+
+2.3. THE ́ORE`MES D’INJECTION 31
+ou` l’on a utilis ́e (2.2.2) dans la dernie`re ine ́galite ́. En regroupant (2.2.3)–(2.2.6), on obtient que
+Z
+⌦
+u
+k div' dx  |Du|(⌦) + 1
+k.
+Par passage au supremum parmi toutes les fonctions test ', on en de ́duit que
+T V (uk, ⌦)  |Du|(⌦) + 1
+k < 1,
+ce qui montre, `a la fois que uk 2 BV (⌦) avec |Duk|(⌦) = T V (uk, ⌦)  |Du|(⌦)+ 1
+k . En particulier,
+la suite {Duk}k2N est born ́ee dans M(⌦; RN ) et donc Duk * Du faible* dans M(⌦; RN ). Enfin, on a bien que lim supk |Duk|(⌦)  |Du|(⌦), ce qui conclut la preuve du the ́ore`me.
+Notons que la suite approximante n’est pas re ́guli`ere jusque sur le bord. Si toutefois le bord est r ́egulier, le r ́esultat peut ˆetre ame ́liorer tout comme dans les espaces de Sobolev.
+The ́or`eme 2.2.2. Soit ⌦ ⇢ RN un ouvert born ́e de de frontie`re Lipschitz et soit u 2 BV (⌦).
+Alors il existe une suite {uk}k2N de fonctions dans C1(⌦) telle que
+1. uk ! u fortement dans L1(⌦) ;
+2. Duk * Du faible* dans M(⌦; RN ) ;
+3. |Duk|(⌦) ! |Du|(⌦).
+D ́emonstration. D’apr`es le Th ́eor`eme d’Anzellotti-Giaquinta, il existe une suite une suite {vk}k2N de fonctions dans C1(⌦) \ BV (⌦) ⇢ W 1,1(⌦) telle que vk ! u fortement dans L1(⌦), Dvk * Du faible* dans M(⌦; RN ) et |Dvk|(⌦) ! |Du|(⌦). L’ouvert ⌦ e ́tant Lipschitzien, l’espace C1(⌦) est
+dense dans W 1,1(⌦). Pour tout k 1, il existe donc une fonction uk 2 C1(⌦) telle que
+kuk vkkW 1,1(⌦) 
+1
+k.
+En particulier, uk ! u dans L1(⌦) et comme ||Duk|(⌦) |Dvk|(⌦)|  1
+k ! 0, on en d ́eduit
+que |Duk|(⌦) ! |Du|(⌦). Enfin, comme la suite {ruk}k2N est born ́ee dans L1(⌦; RN ), on a
+Duk = rukLN * Du faible* dans M(⌦; RN ).
+2.3 Th ́eor`emes d’injection
+Tout comme dans les espaces de Sobolev, les fonctions `a variation born ́ee posse`dent de meilleures propri ́et ́es d’inte ́grabilite ́.
+The ́or`eme 2.3.1 (Injection de Sobolev dans RN ). Il existe une constante N > 0, qui ne
+d ́epend que de la dimension, telle que pour tout u 2 BV (RN ),
+kuk L
+N
+N 1 (RN )  N |Du|(RN ).
+D ́emonstration. Soit u" := u ⇤ ⌘" 2 C1(RN ) \ BV (RN ) ⇢ W 1,1(RN ). D’apr`es le th ́eor`eme d’injec
+tion de Sobolev pour l’espace W 1,1(RN ), il existe une constante N > 0 telle que
+ku"k L
+N
+N 1 (RN )  N kru"kL1(RN ).
+Comme u" ! u dans L1(RN ), il existe une sous-suite telle que u" ! u LN -p.p. dans RN . Par
+ailleurs, comme ru" = (Du) ⇤ ⌘", la Proposition 1.3.6 montre que R
+RN |ru"| dx  |Du|(RN ). Par
+passage `a la limite quand " ! 0 et en utilisant le Lemme de Fatou, on obtient que
+kuk L
+N
+N 1 (RN )  lim inf
+"!0 ku"k
+L
+N
+N 1 (RN )  N lim inf
+"!0 kru"kL1(RN )  N |Du|(RN ),
+ce qui termine la preuve du r ́esultat.
+
+
+32 CHAPITRE 2. FONCTIONS A` VARIATION BORNE ́E
+Sur un domaine borne ́, nous avons le re ́sultat suivant.
+The ́or`eme 2.3.2 (Injection de Sobolev dans un domaine borne ́). Soit ⌦ ⇢ RN un ouvert
+born ́e de fronti`ere Lipschitz. Il existe une constante C > 0, qui ne de ́pend que de la dimension N
+et de ⌦, telle que pour tout u 2 BV (⌦),
+kuk L
+N
+N 1 (⌦)  CkukBV (⌦).
+D ́emonstration. Soit {uk}k2N une suite dans C1(⌦) \ BV (⌦) ⇢ W 1,1(⌦) telle que uk ! u dans L1(⌦) et |Duk|(⌦) ! |Du|(⌦). Quitte `a extraire une sous-suite, on peut e ́galement supposer que u
+k ! u LN -p.p. dans ⌦. D’apr`es le the ́ore`me d’injection de Sobolev pour l’espace W 1,1(⌦), il existe une constante C > 0, qui ne d ́epend que de N et ⌦, telle que
+kuk k L
+N
+N 1 (⌦)  CkukkW 1,1(⌦).
+Par passage `a la limite quand k ! 1 et en utilisant le Lemme de Fatou, on obtient que
+kuk L
+N
+N 1 (⌦)  lim inf
+k!1
+kuk k L
+N
+N 1 (⌦)  C lim inf
+k!1
+kukkW 1,1(⌦) = CkukBV (⌦),
+ce qui termine la preuve du r ́esultat.
+Nous avons  ́egalement un analogue du the ́ore`me de compacite ́.
+The ́or`eme 2.3.3 (Rellich). Soit ⌦ ⇢ RN un ouvert borne ́ de fronti`ere Lipschitz. Pour tout
+1  p < N/(N 1), l’injection BV (⌦) ⇢ Lp(⌦) est compacte. En particulier, de toute suite borne ́e
+{uk}k2N dans BV (⌦), on peut extraire une sous-suite {ukj }j2N telle que ukj ! u fortement dans
+L1(⌦) et Dukj * Du faible* dans M(⌦; RN ) avec u 2 BV (⌦).
+D ́emonstration. Soit {uk}k2N une suite borne ́e dans BV (⌦). D’apre`s le th ́eor`eme d’approximation d’Anzellotti-Giaquinta, pour tout k 2 N, il existe une fonction vk 2 C1(⌦) \ BV (⌦) telle que
+kuk vkkL1(⌦) + ||Duk|(⌦) |Dvk|(⌦)| 
+1
+k.
+En particulier, la suite {vk}k2N est born ́ee dans W 1,1(⌦) et le the ́ore`me de Rellich (pour W 1,1(⌦)) montre l’existence d’une sous-suite {vkj }j2N qui converge dans L1(⌦) vers une fonction u 2 L1(⌦).
+Il vient alors que ukj ! u dans L1(⌦) et comme {Dukj }j2N est born ́ee dans M(⌦; RN ), alors
+Dukj * Du faible* dans M(⌦; RN ) avec u 2 BV (⌦). Comme, d’apre`s le the ́ore`me 2.3.2, la suite {ukj }j2N est  ́egalement borne ́e dans LN/(N 1)(⌦), on en de ́duit que ukj ! u dans Lp(⌦) pour tout 1  p < N/(N 1).
+L’ ́etude de probl`emes variationnels repose tr`es souvent sur des ine ́galite ́s de type Poincar ́e permettant de contrˆoler les valeurs d’une fonction lorsqu’on contrˆole son gradient. En voici maintenant une version dans BV .
+The ́or`eme 2.3.4 (In ́egalit ́e de Sobolev-Poincar ́e-Wirtinger). Soit ⌦ ⇢ RN un ouvert born ́e
+connexe de fronti`ere Lipschitz. Il existe une constante C⌦ > 0 (qui ne de ́pend que de la dimension
+et ⌦) telle que pour tout u 2 BV (⌦),
+ku u⌦k L
+N
+N 1 (⌦)  C⌦|Du|(⌦),
+ou` u⌦ := LN (⌦) 1 R
+⌦ u(x) dx d ́esigne la moyenne de u sur ⌦.
+
+
+2.4. APPLICATIONS 33
+D ́emonstration. Montrons d’abord qu’il existe une constante C⌦ > 0 (qui ne d ́epend que de la dimension et ⌦) telle que pour tout u 2 BV (⌦),
+ku u⌦kL1(⌦)  C⌦|Du|(⌦),
+On raisonne par contradiction en supposant qu’il existe une suite {uk}k2N dans BV (⌦) telle que Z
+⌦
+u
+k dx = 0,
+Z
+⌦
+|uk| dx = 1, |Duk|(⌦) 
+1
+k.
+D’apr`es le the ́ore`me de Rellich, quitte `a extraire une sous-suite, on peut supposer qu’il existe une fonction u 2 BV (⌦) telle que uk ! u dans L1(⌦). De plus, les proprie ́t ́es pr ́ec ́edentes montrent que Z
+⌦
+u dx = 0,
+Z
+⌦
+|u| dx = 1, |Du|(⌦) = 0.
+On en de ́duit, ⌦ e ́tant connexe, que u ⌘ c est constante sur ⌦ et par la proprie ́te ́ de la moyenne, que c = 0, ce qui contredit le fait que kukL1(⌦) = 1. D’apr`es le th ́eor`eme 2.3.2 ainsi que le cas pre ́ce ́dent, il vient
+ku u⌦k L
+N
+N 1 (⌦)  Cku u⌦kBV (⌦)  C(C⌦ + 1)|Du|(⌦),
+ce qui termine la preuve du th ́eor`eme.
+2.4 Applications
+2.4.1 Le mod`ele de Rudin-Osher-Fatemi
+Un probl`eme classique en traitement d’image concerne le de ́bruitage d’une image au moyen de sa r ́egularisation par variation totale. On suppose qu’une image est donne ́e par une fonction g 2 L2(⌦) d ́efinie sur un ouvert born ́e ⌦ de R2. On cherche `a r ́egulariser l’image en pe ́nalisant les trop grandes variations. Pour ce faire on introduit le proble`me variationnel suivant, dit de Rudin-Osher-Fatemi :
+↵ := inf
+u2BV (⌦)
+⇢
+|Du|(⌦) + 2
+Z
+⌦
+|u g|2 dx ,
+ou` > 0 est un terme de p ́enalisation. Montrons que ce probl`eme est bien pos ́e. Pour ce faire on consid`ere une suite minimisante {uk}k2N dans BV (⌦) telle que
+|Duk|(⌦) + 2
+Z
+⌦
+|uk g|2 dx ! ↵.
+Notons que ↵ 2 [0, +1) car en choisissant le comp ́etiteur u = 0, on obtient que
+0↵ 2
+Z
+⌦
+|g|2 dx < 1.
+Par cons ́equent, la suite {uk}k2N est born ́ee dans BV (⌦) \ L2(⌦). On peut donc extraire une soussuite (toujours note ́e {uk}k2N) telle que uk * u⇤ faiblement dans L2(⌦) et Duk * Du⇤ faible* dans M(⌦; R2) avec u⇤ 2 BV (⌦) \ L2(⌦). Par semicontinuit ́e infe ́rieure de la norme L2(⌦) (pour
+
+
+34 CHAPITRE 2. FONCTIONS A` VARIATION BORNE ́E
+la convergence faible de L2(⌦)) ainsi que la semicontinuite ́ infe ́rieure de la variation totale, on obtient que
+↵  |Du⇤|(⌦) + 2
+Z
+⌦
+|u⇤ g|2 dx  lim inf
+k!1
+⇢
+|Duk|(⌦) + 2
+Z
+⌦
+|uk g|2 dx = ↵,
+ce qui montre que u⇤ est un minimiseur de la fonctionnelle de Rudin-Osher-Fatemi. Ce probl`eme peut eˆtre  ́egalement interpre ́t ́e comme un mode`le simplifi ́e scalaire de fluide de Bingham plastique, parfois connu sous le nom de probl`eme de Mosolov sans viscosite ́.
+2.4.2 Elasto-plasticit ́e parfaite
+Un mod`ele simplifie ́ d’ ́elasto-plasticite ́ parfaite consiste `a d ́eterminer un champ de contrainte : ⌦ ! R2 ainsi qu’un d ́eplacement scalaire u : ⌦ ! R, de ́finis sur un ouvert borne ́ ⌦ ⇢ R2, tels que, en notant p := ru le vecteur des d ́eformations permanentes (ou plastiques), (u, , p) minimise la fonctionnelle d’ ́energie
+J(v, ⌧, q) := 1
+2
+Z
+⌦
+|v|2 dx + 1
+2
+Z
+⌦
+|⌧ |2 dx +
+Z
+⌦
+|q| dx
+Z
+⌦
+f v dx
+parmi tous les triplets (v, ⌧, q) 2 W 1,1(⌦) ⇥ L2(⌦; R2) ⇥ L1(⌦; R2) qui satisfont la condition rv = ⌧ + q dans ⌦. Le premier terme repr ́esente l’e ́nergie cin ́etique en r ́egime stationnaire, le deuxie`me est l’e ́nergie  ́elastique, le troisie`me est l’e ́nergie de dissipation plastique et enfin le quatrie`me n’est autre que le travail des e↵orts ext ́erieurs dans lequel on suppose que f 2 L2(⌦). On pose
+↵ := inf
+n
+J (v, ⌧, q) : (v, ⌧, q) 2 W 1,1(⌦) ⇥ L2(⌦; R2) ⇥ L1(⌦; R2), rv = ⌧ + q dans ⌦
+o
+et on consid`ere une suite minimisante {(uk, k, pk)}k2N telle que
+J (uk, k, pk) ! ↵.
+Remarquons que 1
+2 kf k2
+L2(⌦)  ↵  J (0, 0, 0) de sorte que {uk}k2N est born ́ee dans L2(⌦), { k}k2N
+est born ́ee dans L2(⌦; R2) et {pk}k2N est borne ́e dans L1(⌦; R2). Quitte `a extraire une sous-suite, on peut supposer que 8><
+>:
+u
+k * u faiblement dans L2(⌦), k * faiblement dans L2(⌦; R2), p
+k * p faible* dans M(⌦; R2),
+ou` (u, , p) 2 L2(⌦) ⇥ L2(⌦; R2) ⇥ M(⌦; R2). De plus en utilisant que ruk = k + pk, on en de ́duit
+que rukL2 * L2 + p faible* dans M(⌦; R2), ce qui montre que u 2 BV (⌦) avec Du = L2 + p. De plus, par semicontinuite ́ inf ́erieure de la variation totale
+lim inf
+k!1
+J (uk, k, pk) J ̃(u, , p),
+ou` l’on a pos ́e
+J ̃(v, ⌧, q) := 1
+2
+Z
+⌦
+|v|2 dx + 1
+2
+Z
+⌦
+|⌧ |2 dx + |q|(⌦)
+Z
+⌦
+f v dx
+pour tout (v, ⌧, q) 2 BV (⌦) ⇥ L2(⌦; R2) ⇥ M(⌦; R2) tels que Dv = ⌧ L2 + q dans ⌦. Montrons que
+(u, , p) minimise la fonctionnelle J ̃.
+
+
+2.4. APPLICATIONS 35
+Soit (v, ⌧, q) 2 BV (⌦) ⇥ L2(⌦; R2) ⇥ M(⌦; R2) tel que Dv = ⌧ L2 + q dans ⌦. En adaptant la preuve du th ́eor`eme d’Anzellotti-Giaquinta (exercice), on montre l’existence d’une suite {vk}k2N dans C1(⌦) \ BV (⌦) telle que vk ! v fortement dans L2(⌦), Dvk * Dv faible* dans M(⌦; R2)
+et |Dvk ⌧ L2|(⌦) ! |Dv ⌧ L2|(⌦). On pose alors qk := Dvk ⌧ 2 L1(⌦; R2) de sorte que
+J (vk, ⌧k, qk) ! J ̃(v, ⌧, q).
+Par cons ́equent,
+J ̃(u, , p)  lim inf
+k!1
+J (uk, k, pk) = ↵  lim sup
+k!1
+J (vk, ⌧k, qk)  J ̃(v, ⌧, q),
+ce qui montre e↵ectivement que (u, , p) minimise l’ ́energie, dite relaxe ́e, J ̃.
+
+
+Chapitre 3
+Mesures de Hausdor↵
+3.1 Les mesures ext ́erieures
+Dans cette section, on de ́signe par X un ensemble et par P(X) l’ensemble des parties de X.
+D ́efinition 3.1.1. Une application μ⇤ : P(X) ! [0, +1] est appele ́e mesure exte ́rieure si elle ve ́rifie (i) μ⇤(;) = 0 ; (ii) Pour tout A, B 2 P(X), on a μ⇤(A)  μ⇤(B) ; (iii) Pour toute suite {An}n2N de P(X), on a
+μ
+⇤
+1 [
+n=0
+A
+n
+!
+
+1 X
+n=0
+μ
+⇤(An).
+Si une mesure sur la tribu triviale P(X) est toujours une mesure exte ́rieure, la r ́eciproque n’est pas forc ́ement vraie. Toutefois il est possible de restreindre μ⇤ `a une tribu sur laquelle μ⇤ est une mesure.
+D ́efinition 3.1.2. Un ensemble A 2 P(X) est dit μ⇤-mesurable si pour tout E 2 P(X), on a
+μ
+⇤(E) = μ⇤(E \ A) + μ⇤(E \ A).
+Par la sous-additivit ́e d’une mesure exte ́rieure, pour ve ́rifier qu’un ensemble A est μ⇤-mesurable, il su t de montrer que
+μ
+⇤(E) μ⇤(E \ A) + μ⇤(E \ A)
+pour tout E 2 P(X) tel que μ⇤(E) < 1. De plus, par de ́finition, on a que tout ensemble A ⇢ X tel que μ⇤(A) = 0 est μ⇤-mesurable.
+Th ́eor`eme 3.1.3. (de Carath ́eodory) Soit μ⇤ une mesure exte ́rieure sur un ensemble X. Alors
+la classe A des ensembles μ⇤-mesurables est une tribu et la restriction de μ⇤ `a A est une mesure.
+D ́emonstration. Montrons tout d’abord que A est une tribu. Clairement, on a ; 2 A car μ⇤(;) = 0. Par ailleurs A est stable par passage au comple ́mentaire puisque E \(X \A) = E \A et E \(X \A) = E \ A. Il reste donc `a montrer que A est stable par union de ́nombrable.
+37
+
+
+38 CHAPITRE 3. MESURES DE HAUSDORFF
+V ́erifions d’abord que A est stable par r ́eunion et intersection finie (ce qui fera de A une alge`bre). Si A1 et A2 sont μ⇤-mesurables, par sous-additivite ́ de μ⇤, on a pour tout E 2 P(X),
+μ
+⇤(E) = μ⇤(E \ A1) + μ⇤(E \ A1)
+= μ⇤(E \ A1) + μ⇤((E \ A1) \ A2) + μ⇤((E \ A1) \ A2)
+= μ⇤(E \ A1) + μ⇤(E \ A2 \ A1) + μ⇤(E \ (A1 [ A2))
+μ
+⇤(E \ (A1 [ A2)) + μ⇤(E \ (A1 [ A2)),
+ce qui montre que A1 [ A2 2 A. Par passage au comple ́mentaire, on en d ́eduit que A1 \ A2 2 A, puis que A1 \ A2 2 A.
+Soit maintenant {An}n2N une suite d’e ́le ́ments de A, posons A = S
+n An et montrons que A 2 A. On de ́finit A00 = A0 puis A0
+n = An\
+S
+m<n Am pour tout n 1 ; A  ́etant une alg`ebre, on obtient ainsi une suite {A0
+n}n2N d’ensembles dans A disjoints deux `a deux et de r ́eunion S
+n A0
+n=S
+n An = A.
+Posons Bn = S
+kn A0
+k 2 A, on obtient alors pour tout E 2 P(X)
+μ
+⇤(E \ Bn+1) = μ⇤(E \ Bn+1 \ Bn) + μ⇤(E \ Bn+1 \ Bn)
+= μ⇤(E \ Bn) + μ⇤(E \ A0
+n+1),
+car les A0
+n sont deux `a deux disjoints. Ceci e ́tablit par r ́ecurrence que pour tout n 2 N,
+μ
+⇤(E \ Bn) =
+Xn
+k=0
+μ
+⇤(E \ A0
+k). (3.1.1)
+Les ensembles Bn  ́etant μ⇤-mesurables, on a
+μ
+⇤(E) = μ⇤(E \ Bn) + μ⇤(E \ Bn)
+ce qui implique, par (3.1.1) et croissance de μ⇤ (Bn ⇢ A), que
+μ
+⇤(E)
+Xn
+k=0
+μ
+⇤(E \ A0
+k) + μ⇤(E \ A).
+Par passage `a la limite quand n ! 1 et sous-additivite ́ de la mesure ext ́erieure μ⇤, il vient
+μ
+⇤(E)
+1 X
+k=0
+μ
+⇤(E \ A0
+k) + μ⇤(E \ A) μ⇤(E \ A) + μ⇤(E \ A), (3.1.2)
+ce qui montre que A 2 A et donc que A est une tribu. Si les An sont disjoints deux `a deux, alors A0
+n = An pour tout n 2 N. En prenant E = A dans (3.1.2), on obtient
+1 X
+k=0
+μ
+⇤(Ak) = μ⇤(A),
+ce qui montre que μ⇤ est une mesure sur A.
+Si a` pre ́sent (X, d) est un espace me ́trique (que l’on peut donc munir de la tribu Bor ́elienne, B(X), engendr ́ee par les ouverts), le re ́sultat suivant donne un crit`ere assurant la μ⇤-mesurabilit ́e des ensembles Bor ́eliens de X.
+Proposition 3.1.4. Si, pour tout A, B ⇢ X avec dist(A, B) > 0, on a
+μ
+⇤(A [ B) = μ⇤(A) + μ⇤(B), (3.1.3)
+alors B(X) ⇢ A.
+
+
+3.1. LES MESURES EXTE ́RIEURES 39
+D ́emonstration. Puisque la tribu Bor ́elienne B(X) est aussi engendre ́e par les ferme ́s, il su t de montrer que tous les ferm ́es de X sont μ⇤-mesurables. Soit E ⇢ X tel que μ⇤(E) < 1. On pose pour tout n 1,
+C
+n=
+⇢
+x 2 X : dist(x, C) 
+1
+n.
+Comme dist(E \ Cn, E \ C) 1/n > 0, l’hypothe`se montre que
+μ
+⇤(E \ Cn) + μ⇤(E \ C) = μ⇤((E \ Cn) [ (E \ C))  μ⇤(E). (3.1.4)
+Posons
+R
+k :=
+⇢
+x2E: 1
+k + 1 < dist(x, C) 
+1
+k.
+Comme dist(Ri, Rj) > 0 de`s que |j i| 2, on a
+X m
+k=1
+μ
+⇤(R2k) = μ⇤
+m [
+i=1
+R2k
+!
+ μ⇤(E) < 1,
+et
+X m
+k=1
+μ
+⇤(R2k+1) = μ⇤
+m [
+i=1
+R2k+1
+!
+ μ⇤(E) < 1,
+pour tout m 1, d’ou` P1
+k=1 μ⇤(Rk)  2μ⇤(E) < 1. Comme C est ferm ́e, on a E \ C = (E \ Cn) [
+S
+k n Rk, et donc, par sous-additivit ́e de μ⇤,
+μ
+⇤(E \ Cn)  μ⇤(E \ C)  μ⇤(E \ Cn) +
+X
+kn
+μ
+⇤ (Rk ),
+puis par passage `a la limite quand n ! 1, μ⇤(E \ Cn) ! μ⇤(E \ C). Enfin, en faisant tendre n ! 1 dans (3.1.4), il vient
+μ
+⇤(E) μ⇤(E \ C) + μ⇤(E \ C)
+ce qu’il fallait d ́emontrer.
+Exemple 3.1.5. Soit Qr(x) = {y 2 RN : maxi |xi yi| < r} le cube ouvert centr ́e en x et de cˆot ́e
+2r. Pour tout A ⇢ RN , on pose
+LN (A) := inf
+(
+1 X
+i=0
+(2ri)N : A ⇢
+1 [
+i=0
+Q
+ri (xi)
+)
+.
+On montre facilement que LN est une mesure ext ́erieure. De plus comme tous les cubes Qi = Q
+ri (xi) peuvent ˆetre subdivis ́es en une union finie disjointe de plus petits cubes de cˆote ́s arbitrairement petits, on en de ́duit que la proprie ́t ́e (3.1.3) est v ́erifie ́e. Ceci montre que (la restriction `a B(RN ) de) LN est une mesure Bore ́lienne. Comme elle est de plus finie sur les compacts, LN est une mesure de Radon positive, appele ́e mesure de Lebesgue.
+
+
+40 CHAPITRE 3. MESURES DE HAUSDORFF
+3.2 D ́efinition et propri ́et ́es des mesures de Hausdor↵
+D ́efinition 3.2.1. (i) Soient A ⇢ RN , 0  s < 1 et > 0. On de ́finit
+Hs(A) := inf
+(X
+i2I
+!
+s
+✓ diam(Ai) 2
+◆
+s
+: I ⇢ N, A ⇢
+[
+i2I
+A
+i, diam(Ai) 
+)
+,
+ou`
+!
+s := ⇡s/2
+(
+s
+2 + 1)
+et (t) := R 1
+0 e xxt 1 dx est la fonction Gamma d’Euler.
+(ii) Pour A ⇢ RN et s 0, on pose
+Hs(A) := sup
+>0
+Hs(A) = lim
+!0 Hs(A).
+On appelle Hs la mesure de Hausdor↵ s-dimensionnelle sur RN .
+Remarque 3.2.2. (i) La limite d ́efinissant Hs(A) existe et est donn ́ee par le supremum car si 1  2, alors Hs
+1 (A) Hs
+2 (A).
+(ii) Si s = k 2 N, La constante de renormalisation !k coı ̈ncide avec le volume de la boule unit ́e
+dans Rk, i.e.
+!
+k = Lk({x 2 Rk : x2
+1 + · · · + x2
+k  1}).
+(iii) Comme diam(A) = diam(A), on peut supposer que les ensembles Ai sont ferm ́es dans la d ́efinition de Hs(A).
+Th ́eor`eme 3.2.3. Pour tout 0  s < 1 et tout > 0, Hs et Hs sont des mesures exte ́rieures. De
+plus, la restriction de Hs est `a B(RN ) est une mesure Bore ́lienne.
+D ́emonstration. Si A ⇢ B, on a clairement que Hs(A)  Hs(B) puis, par passage `a la limite quand ! 0, on en d ́eduit que Hs(A)  Hs(B). Soit maintenant {An}n2N une suite de parties de RN . Pour tout " > 0 et n 2 N, il existe In ⇢ N et un recouvrement {Bn
+i }i2In de An tel que diam(Bn
+i )  et
+Hs(An)
+X
+i2In
+!
+s
+✓ diam(Bn
+i)
+2
+◆
+s
+2
+n 1".
+Comme S
+n An ⇢
+S
+n,i Bn
+i , il vient
+Hs
+1 [
+n=0
+A
+n
+!
+
+1 X
+n=0
+X
+i2In
+!
+s
+✓ diam(Bn
+i)
+2
+◆
+s
+
+1 X
+n=0
+Hs(An) + "
+et la sous-additivit ́e
+Hs
+1 [
+n=0
+A
+n
+!
+
+1 X
+n=0
+Hs(An)
+de Hs suit par passage `a la limite quand " ! 0. Par suite, Hs est e ́galement sous-additive par passage au supremum en dans l’in ́egalit ́e pre ́ce ́dente.
+Pour montrer que Hs est une mesure de Borel, en vertu de la Proposition 3.1.4, il su t de montrer que Hs(A [ B) Hs(A) + Hs(B) pour tout A, B ⇢ RN tels que dist(A, B) > 0. Soient
+0 < < dist(A, B)/4, I ⇢ N et {Ci}i2I une recouvrement de A [ B avec diam(Ci)  . On de ́finit
+
+
+3.2. DE ́FINITION ET PROPRIE ́TE ́S DES MESURES DE HAUSDORFF 41
+I
+A := {i 2 I : Ci \ A 6= ;} et IB := {j 2 I : Cj \ B 6= ;} de sorte que A ⇢
+S
+i2IA Ci, B ⇢
+S
+j2IB Cj
+et Ci \ Cj = ; si i 2 IA et j 2 IB. Alors
+X
+i2I
+!
+s
+✓ diam(Ci) 2
+◆
+sX
+i2IA
+!
+s
+✓ diam(Ci) 2
+◆
+s
++
+X
+j2IB
+!
+s
+✓ diam(Cj) 2
+◆
+s
+Hs(A) + Hs(B).
+Par passage `a l’infimum sur tous les recouvrements {Ck}i2I de A [ B dans le membre de gauche, il vient Hs(A [ B) Hs(A) + Hs(B),
+puis, par passage `a la limite quand ! 0,
+Hs(A [ B) Hs(A) + Hs(B).
+L’autre in ́egalit ́e est une conse ́quence imm ́ediate de la sous-additivite ́ de la mesure ext ́erieure Hs. Une application imm ́ediate de la Proposition 3.1.4 montre que Hs est une mesure de Borel.
+Montrons `a pr ́esent des proprit ́es basiques des mesures de Hausdor↵.
+Proposition 3.2.4. (i) H0 est la mesure de comptage dans RN ;
+(ii) H1 = L1 dans B(R) ;
+(iii) Hs( A) = sHs(A) pour tout > 0 et tout A ⇢ RN ;
+(iv) Hs(L(A)) = Hs(A) pour toute isome ́trie a ne L : RN ! Rd et tout A ⇢ RN ;
+(v) Si f : RN ! Rd est une fonction Lipschitzienne, alors
+Hs(f (A))  [Lip(f )]sHs(A) pour tout A ⇢ RN ;
+(vi) Si t > s et A ⇢ RN , alors
+Ht(A) > 0 =) Hs(A) = 1.
+D ́emonstration. (i) Si {a} est un singleton, pour tout > 0, on a a 2 B /2(a) de sorte que H0({a})  !0( /2)0 = 1 et donc, en faisant tendre ! 0, H0({a})  1. Si I ⇢ I et {Ai}i2I est un recouvrement de {a} par des ensembles de diame`tre plus petit que , alors il existe i0 2 I tel que a 2 Ai0 , d’ou`
+!0
+X
+i2I
+✓ diam(Ai) 2
+◆0
+!0
+✓ diam(Ai0 ) 2
+◆0
+= 1.
+Par passage `a l’infimum parmi tous les recouvrements, il vient H0({a}) H0({a}) 1. Par
+cons ́equent, H0({a}) = 1. Si A = {a1, . . . , ak} est un ensemble fini, H0(A) = Pk
+i=1 H0({ai}) =
+k = #(A) et, si A est un ensemble infini H0(A) = 1 = #(A).
+(ii) Soit A ⇢ R un ensemble Bor ́elien et A ⇢
+S
+1
+i=0]ai, bi[, pour tout > 0 on peut de ́composer chacun des intervalles [ai, bi] en une union finie de sous intervalles d’inte ́rieurs disjoints et de
+diam`etre plus petit que , i.e. [ai, bi] = S
+j2Ii [↵j
+i, j
+i ] avec j
+i ↵j
+i  . Par cons ́equent,
+H1(A)  !1
+1 X
+i=0
+X
+j2Ii
+diam([↵j
+i, j
+i ])
+2=
+1 X
+i=0
+(bi ai),
+ou` l’on a utilis ́e le fait que !1 = 2. Par passage `a l’infimum parmi tous les recouvrements (]ai, bi[)i2N, on obtient, par de ́finition de la mesure de Lebesgue, que H1(A)  L1(A), puis, par passage `a la limite quand ! 0, H1(A)  L1(A)
+
+
+42 CHAPITRE 3. MESURES DE HAUSDORFF
+Pour montrer l’autre ine ́galite ́, conside ́rons I ⇢ N et un recouvrement {Ai}i2I de A avec diam(Ai)  , on pose si = inf Ai et ti = sup Ai de sorte que Ai ⇢ [si, ti] et ti si = diam(Ai)  . Par de ́finition de la mesure de Lebesgue, on a donc que
+L1(A) 
+X
+i2I
+(ti si) = !1
+X
+i2I
+diam(Ai)
+2,
+puis, par passage `a l’infimum par rapport `a tous les recouvrements (Ai)i2I , il vient
+L1(A)  H1(A)  H1(A).
+(iii) Si I ⇢ N et {Ai}i2I est un recouvrement de A avec diam(Ai)  , alors { Ai}i2I est un recouvrement de A avec diam( Ai)  , d’ou`
+Hs ( A)  s
+X
+i2I
+!
+s
+✓ diam(Ai) 2
+◆
+s
+puis, par passage `a l’infimum parmi tous les recouvrements {Ai}i2I de A,
+Hs ( A)  sHs(A)  sHs(A).
+Par passage `a la limite quand ! 0, on obtient Hs( A)  sHs(A). Pour montrer l’autre ine ́galite ́, on note simplement que Hs(A) = Hs( 1( A))  sHs( A).
+(iv) Si L : RN ! Rd est une isom ́etrie line ́aire, I ⇢ N et {Ai}i2I est un recouvrement de A avec diam(Ai)  , alors {L(Ai)}i2I est un recouvrement de L(A) avec diam(L(Ai)) = diam(Ai)  . Par cons ́equent,
+Hs(L(A)) 
+X
+i2I
+!
+s
+✓ diam(L(Ai)) 2
+◆
+s
+=
+X
+i2I
+!
+s
+✓ diam(Ai) 2
+◆
+s
+puis, par passage `a l’infimum parmi tous les recouvrements {Ai}i2I de A et passage au supremum en , on obtient Hs(L(A))  Hs(A).
+Comme L 1 : L(RN ) ! RN est une isom ́etrie line ́aire, il vient
+Hs(A) = Hs(L 1(L(A)))  Hs(L(A)),
+ce qui montre l’autre ine ́galite ́.
+(v) Si f : RN ! Rd est une fonction Lipschtzienne, I ⇢ N et {Ai}i2I est un recouvrement de A avec diam(Ai)  , alors {f (Ai)}i2I est un recouvrement de f (A) avec diam(f (Ai))  Lip(f )diam(Ai)  Lip(f ) . Par cons ́equent,
+Hs
+Lip(f) (f (A)) 
+X
+i2I
+!
+s
+✓ diam(f (Ai)) 2
+◆
+s
+ [Lip(f )]s
+X
+i2I
+!
+s
+✓ diam(Ai) 2
+◆
+s
+puis, par passage `a l’infimum parmi tous les recouvrements {Ai}i2I de A et passage au supremum en , on obtient Hs(f (A))  [Lip(f )]sHs(A).
+
+
+3.2. DE ́FINITION ET PROPRIE ́TE ́S DES MESURES DE HAUSDORFF 43
+(vi) est une cons ́equence du fait que, par de ́finition de la mesure de Hausdor↵, pour tout > 0, on a
+Ht (A) 
+!
+t
+!
+s
+✓
+2
+◆
+ts
+Hs(A) 
+!
+t
+!
+s
+✓
+2
+◆
+ts
+Hs(A).
+Par passage `a la limite quand ! 0, on en de ́duit que si Hs(A) < 1, alors Ht(A) = 0.
+D ́efinition 3.2.5. La dimension de Hausdor↵ d’un ensemble A ⇢ RN est de ́finie par
+dimH(A) := inf{s 0 : Hs(A) = 0}.
+Par d ́efinition de la dimension de Hausdor↵, on a que Hs(A) = 0 pour tout s > dimH(A) et, d’apr`es la Proposition 3.2.4(v), il vient que Hs(A) = 1 pour tout s < dimH(A).
+Un outil tre`s utile concerne les densite ́s s-dimensionnelles d’une mesure de Radon positive.
+D ́efinition 3.2.6. Soit μ une mesure de Radon positive finie sur un ouvert ⌦ ⇢ RN . On de ́finit les densite ́s s-dimensionnelles infe ́rieures et supe ́rieures en x 2 ⌦ par
+⇥
+s,⇤(μ, x) := lim inf
+%!0
+μ(B%(x)) !
+s%s , ⇥⇤
+s(μ, x) := lim sup
+%!0
+μ(B%(x)) !
+s%s .
+Si ⇥s,⇤(μ, x) = ⇥⇤
+s(μ, x) on notera ⇥s(μ, x) la valeur commune.
+Proposition 3.2.7. Soit μ une mesure de Radon positive finie sur un ouvert ⌦ ⇢ RN , t > 0 et
+A ⇢ ⌦ un Bor ́elien. Si ⇥⇤
+s(μ, x) t pour tout x 2 A, alors
+μ tHs A.
+De plus, si E ⇢ ⌦ est un Bore ́lien tel que Hs(E) < 1, alors
+lim
+%!0
+Hs(E \ B%(x)) %
+s = 0 pour Hs-presque tout x 2 ⌦ \ E.
+D ́emonstration. Soient U un ouvert contenant A, t0 < t et > 0. Par de ́finition de la lim sup, pour tout x 2 A et tout 0 < " < , il existe %x 2 (0, "/2) tel que B%x (x) ⇢ U et
+μ(B%x (x)) t0!s%s
+x.
+Soit F la famille des boules ferm ́ees B contenues dans U et telles que diam(B)  et μ(B) t
+0!s(diam(B)/2)s. Il s’agit d’un recouvrement (fin) de A et le the ́ore`me de recouvrement de Besicovitch montre alors l’existence de ⇠ sous-familles F1, . . . , F⇠ telles que chacunes des sous familles
+Fi = {Bk
+i }k2N est de ́nombrable et disjointe et
+A⇢
+⇠ [
+i=1
+[
+B2Fi
+B.
+Par cons ́equent, par de ́finition de la mesure de Hausdor↵, il vient
+Hs(A) 
+⇠ X
+i=1
+1 X
+k=0
+!
+s
+diam(Bk
+i)
+2
+!
+s
+
+1 t
+0
+⇠ X
+i=1
+1 X
+k=0
+μ(Bk
+i) 
+⇠ t
+0 μ(U ).
+Par passage `a la limite quand ! 0 et t0 ! t, on en de ́duit que Hs(A)  ⇠
+t μ(U ) < 1.
+
+
+44 CHAPITRE 3. MESURES DE HAUSDORFF
+D’apr`es le Corollaire 1.4.2, comme F est un recouvrement fin de A, il existe une sous-famille {Bj}j2N de F d ́enombrable et disjointe telle
+Hs
+0
+@A \
+[
+j2N
+B
+j
+1
+A = 0.
+Par cons ́equent, comme Hs est une mesure ext ́erieure et Hs  Hs, il vient
+Hs(A) 
+1 X
+j=0
+!
+s
+✓ diam(Bj) 2
+◆
+s
+
+1 t
+0
+1 X
+j=0
+μ(Bj) 
+1 t
+0 μ(U ).
+Par passage `a la limite quand ! 0 et t0 ! t, puis passage `a l’infimum parmi tous les ouverts U contenant A, obtient que Hs(A)  t 1μ(A). On peut r ́ep ́eter le mˆeme argument en rempla ̧cant A par n’importe quel sous ensemble Bore ́lien de A et e ́tablir ainsi que μ tHs A.
+Si E ⇢ ⌦ est un Bor ́elien tel que Hs(E) < 1, on applique ce r ́esultat `a la mesure finie μ = Hs E avec A = An = {x 2 ⌦ \ E : ⇥⇤
+s(μ, x) > 1/n} et t = 1/n. On obtient alors que 0 = μ(An)
+1
+n Hs(An). Comme S
+n An = {x 2 ⌦ \ E : ⇥⇤
+s(μ, x) > 0}, on en d ́eduit que Hs({x 2 ⌦ \ E : ⇥
+⇤
+s(μ, x) > 0}) = 0.
+3.3 Mesure de volume et mesure de surface
+3.3.1 Mesure de volume
+Nous allons `a pr ́esent montrer que la mesure de Hausdor↵ N -dimensionnelle dans RN coı ̈ncide avec la mesure de Lebesgue LN . La d ́emonstration repose sur l’ine ́galit ́e isodiam ́etrique qui stipule que le plus grand volume parmi tous les sous ensembles de diam`etre d est !N (d/2)N , i.e. le volume de la boule. Remarquons que cette ine ́galite ́ n’est pas compl`etement e ́vidente car, comme le montre l’exemple d’un triangle  ́equilat ́eral, il n’est pas vrai qu’un ensemble quelconque est contenu dans une boule de mˆeme diam`etre.
+Proposition 3.3.1 (In ́egalit ́e isodiam ́etrique). Pour tout ensemble LN -mesurable A ⇢ RN ,
+on a
+LN (A)  !N
+✓ diam(A) 2
+◆
+N
+.
+D ́emonstration. La preuve repose sur le principe de syme ́trisation de Steiner. Pour tout ⇠ 2 RN
+avec |⇠| = 1, on note ⇧⇠ l’hyperplan orthogonal `a ⇠. Si B ⇢ RN est un ensemble LN -mesurable,
+B
+⇠
+y := {t 2 R : y + t⇠ 2 B}
+d ́esigne la section de B dans la direction ⇠ passant par le point y. D’apr`es le th ́eor`eme de Fubini, l’application y 7! L1(B⇠
+y) est LN 1-mesurable dans ⇧⇠. Par conse ́quent l’ensemble
+S
+⇠(B) := {y + t⇠ : y 2 ⇧⇠, |t|  L1(B⇠
+y )/2}
+est toujours LN -mesurable. De plus, une nouvelle utilisation du the ́ore`me de Fubini montre que LN (S⇠(B)) = LN (B). Par ailleurs, si B est syme ́trique par rapport `a ⇧⌫ avec ⌫ · ⇠ = 0, alors S⇠(B) conserve cette propri ́et ́e. Pour voir cela, notons la syme ́trie par rapport `a ⇧⌫, i.e. (x) = x 2(x · ⌫)⌫, qui satisfait 2 = id. Alors, on a que
+(y + B⇠
+y⇠) = (y) + B⇠
+(y)⇠.
+
+
+3.3. MESURE DE VOLUME ET MESURE DE SURFACE 45
+En e↵et, si x 2 (y + B⇠
+y⇠), alors il existe t 2 B⇠
+y tel que x = (y + t⇠) = (y) + t⇠ car ⇠ · ⌫ = 0. Comme y + t⇠ 2 B et (B) = B, on en d ́eduit que (y) + t⇠ = x = (y + t⇠) 2 B, ce qui montre que t 2 B⇠
+(y) et donc que x 2 (y) + B⇠
+(y)⇠. Pour montrer l’autre inclusion, on utilise l’inclusion pr ́ec ́edente pour obtenir que
+( (y) + B⇠
+(y)⇠) ⇢ 2(y) + B⇠
+2(y)⇠) = y + B⇠
+y⇠,
+soit, en appliquant `a l’inclusion pr ́ec ́edente, (y) + B⇠
+(y)⇠ ⇢ (y + B⇠
+y⇠). Soit x 2 S⇠(B), alors
+x = y + t⇠ avec y 2 ⇧⇠ et |t|  L1(B⇠
+y)/2. En utilisant la Proposition 3.2.4 (ii) et (iv), on en d ́eduit que
+L1(B⇠
+y) = H1(B⇠
+y) = H1(y + B⇠
+y⇠) = H1( (y + B⇠
+y ⇠ ))
+= H1( (y) + B⇠
+(y)⇠) = H1(B⇠
+(y)) = L1(B⇠
+(y)).
+Par conse ́quent, (x) = (y) + t⇠ avec (y) 2 ⇧⇠ et 2|t|  L1(B⇠
+y) = L1(B⇠
+(y)), ce qui montre que (x) 2 S⇠(B) et donc que S⇠(B) est sym ́etrique par rapport `a ⇧⌫. Montrons `a pr ́esent que la sym ́etrisation diminue le diame`tre. Pour ce faire, pour tout " > 0, on consid`ere x et x0 2 S⇠(B) tels que
+diam(S⇠(B))  |x x0| + ".
+Soient y = x (x · ⇠)⇠ et y0 = x0 (x0 · ⇠)⇠ 2 ⇧⇠ et posons
+r := inf{t : y + t⇠ 2 B}, s := sup{t : y + t⇠ 2 B},
+et
+r
+0 := inf{t : y0 + t⇠ 2 B}, s0 := sup{t : y0 + t⇠ 2 B}.
+Supposons, sans restreindre la g ́en ́eralit ́e que s0 r s r0. Alors
+s
+0r 1
+2 (s0 r) + 1
+2 (s r0) = 1
+2 (s r) + 1
+2 (s0 r0) 1
+2 L1(B⇠
+y) + 1
+2 L1(B⇠
+y0 ).
+Comme |x · ⇠|  1
+2 L1(B⇠
+y) et |x0 · ⇠|  1
+2 L1(B⇠
+y0 ), il vient
+s
+0 r |x · ⇠| + |x0 · ⇠| |x · ⇠ x0 · ⇠|.
+Par cons ́equent, comme y + r⇠ et y0 + s0⇠ 2 B,
+(diam(S⇠(B)) ")2  |x x0|2 = |y y0|2 + |x · ⇠ x0 · ⇠|2
+ |y y0|2 + (s0 r)2 = |(y + r⇠) (y0 + s0⇠)|2  (diam(B))2 = (diam(B))2,
+ce qui montre e↵ectivement que diam(S⇠(B))  diam(B).
+Nous sommes `a pr ́esent en mesure de montrer l’ine ́galite ́ isodiame ́trique. Si diam(A) = 1, il n’y a rien `a montrer. Sinon, on conside`re une base orthonorme ́e {e1, . . . , eN } de RN . On de ́finit A1 = Se1 (A), A2 = Se2 (A1), . . . , AN = SeN (AN 1) et on pose A⇤ = AN . Par construction, LN (A⇤) = LN (A), diam(A⇤)  diam(A) et A⇤ est syme ́trique par rapport `a ⇧ek pour tout k = 1, . . . , N . Par cons ́equent, si x 2 A⇤, alors x 2 A⇤ de sorte que A⇤ ⇢ Bdiam(A⇤)/2(0), soit
+LN (A) = LN (A⇤)  LN (Bdiam(A⇤)/2(0)) = !N
+✓ diam(A⇤) 2
+◆
+N
+ !N
+✓ diam(A) 2
+◆
+N
+,
+ce qui conclut la preuve de l’in ́egalit ́e.
+
+
+46 CHAPITRE 3. MESURES DE HAUSDORFF
+L’ine ́galit ́e isodiam ́etrique permet montrer que la mesure de Hausdor↵ N -dimensionnelle coı ̈ncide avec la mesure de Lebesgue dans RN , ge ́ne ́ralisant ainsi la Proposition 3.2.4 (ii).
+Th ́eor`eme 3.3.2. HN = LN dans B(RN ).
+D ́emonstration. Soit A 2 B(RN ). Pour tout > 0 il existe I ⇢ N et un recouvrement {Ai}i2I tel que diam(Ai)  et
+!
+N
+X
+i2I
+✓ diam(Ai) 2
+◆
+N
+ HN (A) +  HN (A) + .
+Rappelons que, sans restreindre la ge ́ne ́ralit ́e, on peut supposer que les Ai sont ferm ́es. Comme A⇢
+S
+i Ai, on obtient grˆace `a l’in ́egalite ́ isodiam ́etrique que
+LN (A) 
+X
+i2I
+LN (Ai)  !N
+X
+i2I
+✓ diam(Ai) 2
+◆
+N
+ HN (A) + .
+On obtient que LN (A)  HN (A) par passage `a la limite quand ! 0. Pour montrer l’autre ine ́galite ́, on commence par  ́etablir que HN est une mesure de Radon.
+Pour ce faire, on remarque que si Q est un cube de RN , alors diam(Q) = pN LN (Q)1/N . Soit donc {Qi}i2N un recouvrement de A par des cubes. Si > 0, quitte `a subdiviser chaque cubes Qi en plus petits cubes, on peut supposer que diam(Qi)  . Par d ́efinition de la mesure de Hausdor↵, il vient
+HN (A)  !N
+1 X
+i=1
+✓ diam(Qi) 2
+◆
+N
+= !N
+pN
+2
+!
+N 1 X
+i=0
+LN (Qi).
+Par passage `a l’infimum parmi tous les recouvrements {Qi}i2N de A et par passage `a la limite quand ! 0, il vient HN (A)  CN LN (A), ce qui montre e↵ectivement que HN est finie sur les compacts et donc que HN est une mesure de Radon. Soit U un ouvert contenant A et > 0. Pour tout x 2 A, il existe %x 2 (0, /2) tel que B%(x) ⇢ U pour tout %  %x de sorte que F = {B%(x)}x2A, 0<%%x forme un recouvrement fin de A. D’apr`es le th ́eor`eme de recouvrement de Besicovitch (Corollaire 1.4.2), il existe une famille de ́nombrable {Bk}k2N ⇢ F de boules ferm ́ees deux `a deux disjointes, de diame`tre plus petit que et contenues dans U telles que
+HN A \
+1 [
+k=0
+B
+k
+!
+= 0.
+Par -sous additivit ́e de HN il vient
+HN (A) 
+1 X
+k=0
+HN (Bk) 
+1 X
+k=0
+!
+N %N
+k=
+1 X
+k=0
+LN (Bk) = LN
+1 [
+k=0
+B
+k
+!
+ LN (U ).
+Par re ́gularite ́ ext ́erieure de la mesure de Lebesgue et passage `a la limite quand ! 0, il vient HN (A)  LN (A).
+Remarque 3.3.3. Le r ́esultat pr ́ec ́edent montre que, pour tout s < N , la mesure de Hausdor↵ Hs n’est jamais une mesure de Radon dans RN
+
+
+3.3. MESURE DE VOLUME ET MESURE DE SURFACE 47
+3.3.2 Mesure de surface et formule de l’aire
+Nous nous int ́eressons `a pre ́sent `a l’interpre ́tation de la mesure de Hausdor↵ Hk pour k 2 N avec 1  k  N 1. La formule de l’aire va nous permettre de montrer que Hk coı ̈ncide avec la mesure de volume sur les sous-varie ́t ́es de dimension k dans RN . On rappelle la de ́finition des
+sous-varie ́t ́es de RN .
+D ́efinition 3.3.4. Un sous ensemble M ⇢ RN est une sous-vari ́et ́e de RN de dimension k et de
+classe C1 si, pour tout x0 2 M , il existe un voisinage V de x0 dans RN , un voisinage U de 0 dans Rk
+et une fonction f : U ! V de classe C1 et injective telle que f (0) = x0, rf (0) est une application lin ́eaire injective de Rk dans RN et f est un hom ́eomorphisme de U sur M \ V . On appelera f un
+param ́etrisation locale de M en x0.
+Remarque 3.3.5. Notons qu’une application line ́aire L : Rk ! RN (avec k  N ) est injective si et seulement det(LT L) > 0. En particulier, comme le de ́terminant est une application continue, on peut supposer dans la d ́efinition pr ́ec ́edente que rf (x) est injective pour tout x 2 U , quitte a` diminuer l’ouvert U . De mˆeme, quitte `a r ́eduire encore l’ouvert U , on peut  ́egalement supposer que la fonction x 7! rf (x) est born ́ee sur U de sorte que, par le the ́ore`me des accroissements finis, la fonction f est Lipschitzienne sur U .
+Th ́eor`eme 3.3.6 (Formule de l’aire). Soient U ⇢ Rk et f : U ! RN (avec k  N ) une fonction
+Lipschitzienne, de classe C1 et injective telle que, pour tout x 2 U , rf (x) est une application
+lin ́eaire injective de Rk dans RN . Alors pour tout ensemble Bor ́elien E ⇢ U , on a
+Hk(f (E)) =
+Z
+E
+q
+det(rf (x)T rf (x)) dx.
+D ́emonstration. Etape 1. Commen ̧cons par  ́etablir que f (E) est Hk-mesurable. Par re ́gularit ́e int ́erieure de la mesure de Lebesgue, il existe une suite de compacts Ki ⇢ E telle que Lk(E \ Ki) ! 0. Par cons ́equent, f  ́etant de classe C1, il vient
+Hk f (E) \
+1 [
+i=0
+f (Ki)
+!
+ Hk f E \
+1 [
+i=0
+K
+i
+!!
+ [Lip(f )]kLk E \
+1 [
+i=0
+K
+i
+!
+= 0.
+Comme f est continue et Ki compact, f (Ki) ⇢ RN est compact et S
+i f (Ki) 2 B(RN ). Par cons ́equent f (E) est Hk-mesurable comme union d’un ensemble Bor ́elien et d’un ensemble de mesure Hk nulle.
+Etape 2. Supposons d’abord que f = L est une application line ́aire injective. On utilise la d ́ecomposition polaire pour d ́ecomposer L = O S ou` S : Rk ! Rk est une application lin ́eaire
+inversible, sym ́etrique, de ́finie positive et O : Rk ! RN est une application orthogonale. En
+e↵et, l’application lin ́eaire LT L : Rk ! Rk est inversible (car injective), sym ́etrique et de ́finie positive. Par le th ́eor`eme de de ́composition spectrale, il existe une base orthonorme ́e {e1, . . . , ek} de Rk et des r ́eels 1, . . . , k > 0 tels que (LT L)ei = iei pour tout i = 1, . . . , k, de sorte que L
+T L = Pk
+i=1 iei ⌦ ei. On pose alors
+S :=
+k X
+i=1
+p
+iei ⌦ ei
+qui d ́efinit une application lin ́eaire S : Rk ! Rk inversible, syme ́trique et d ́efinie positive. Posons
+alors O := L S 1 et vi := O(ei) = p1
+i L(ei) 2 RN . Par construction, {v1, . . . , vk} forme un
+syst`eme orthonorme ́ de RN ce qui montre que O est une application orthogonale.
+
+
+48 CHAPITRE 3. MESURES DE HAUSDORFF
+On d ́efinit la mesure de Radon positive ⌫(E) := Hk(L(E)) pour tout Bor ́elien E ⇢ U . Comme ⌫(E)  [Lip(L)]kLk(E), on en d ́eduit que ⌫ est absolument continue par rapport `a la mesure de Lebesgue Lk et le th ́eor`eme de di↵e ́rentiation de Besicovitch montre que ⌫ = Lk ou`
+(x) = lim
+%!0
+⌫(B%(x)) !
+k%k pour Lk-presque tout x 2 U.
+Or ⌫(B%(x)) = Hk(L(x) + %L(B1)) = %kHk(L(B1))
+d’ou` (x) = Hk(L(B1))/!k est constante. Montrons `a pre ́sent que  = pdet(LT L). En utilisant la de ́composition polaire et le fait que O est une rotation (en particulier une isom ́etrie),
+ = Hk(O S(E))
+Lk(E) = Hk(S(E))
+Lk(E) = Lk(S(E))
+Lk (E )
+car S(E) ⇢ Rk et Hk = Lk sur Rk. En choisissant en particulier
+E = Q = {x 2 Rk : 0  x · ei  1 pour tout 1  i  k}
+(le cube unite ́ de Rk orient ́e suivant la base {e1, . . . , ek}), on a que
+S(Q) = {y 2 Rk : 0  y · ei 
+p
+i pour tout 1  i  k}
+et donc Lk(S(Q)) = Qk
+i=1
+p
+i = det(S) = pdet(LT L) ce qui conclut la preuve de la formule de l’aire dans le cas line ́aire.
+Etape 3. Consid ́erons enfin le cas ge ́ne ́ral d’une fonction f : U ! RN de classe C1 injective telle que rf (x) est injective pour tout x 2 U . Pour simplifier les notations, on pose J
+f := pdet(rf T rf ). Soit K un compact tel que K ⇢ U . Comme f est de classe C1 sur U , pour tout " > 0, il existe > 0 tel que si x, y et z 2 K satisfont |x y|  et |x z|  , alors
+|Jf (x) Jf (y)|  ", |f (x) f (y) rf (z)(y x)|  "|rf (z)(x y)|.
+En e↵et, la premi`ere condition r ́esulte de l’uniforme continuite ́ de Jf sur le compact K. La deuxi`eme condition se d ́emontre par l’absurde sur supposant l’existence de "0 > 0 et de trois suites {xn}n2N, {yn}n2N et {zn}n2N dans K telles que |xn yn|  1/n ! 0, |xn zn|  1/n ! 0 et o(|xn yn|) = |f (xn) f (yn) rf (zn)(xn yn)| > "0|rf (zn)(yn xn)|. On a en particulier que xn 6= yn pour tout n 2 N. De plus, quitte `a extraire une sous-suite (car K est compact), on peut supposer que x
+n ! x, yn ! y, zn ! z (avec x = y = z) et vn = (xn yn)/|xn yn| ! v avec |v| = 1. D’ou o(1) "0|rf (zn)(vn)| puis par passage `a la limite 0 = "0|rf (x)(v)|. Par conse ́quent, v 2 SN 1 appartient au noyau de rf (x), ce qui est impossible par injectivite de rf (x). En particulier, pour " < 1, on a
+|f (x) f (y)| |rf (z)(x y)| |f (x) f (y) rf (z)(y x)| (1 ")|rf (z)(y x)|
+et
+|f (x) f (x)|  |rf (z)(x y)| + |f (x) f (y) rf (z)(y x)|  (1 + ")|rf (z)(y x)|.
+Soit K = Sm
+i=1 Ai une partition Bor ́elienne de K telle que diam(Ai)  . On fixe zi 2 Ai et on
+pose Li := rf (zi). Par hypoth`ese Li : Rk ! RN est une application lin ́eaire injective et pour tout x, y 2 Ai,
+(1 ")|Li(x y)|  |f (x) f (y)|  (1 + ")|Li(x y)|,
+
+
+3.3. MESURE DE VOLUME ET MESURE DE SURFACE 49
+ce qui montre que
+LipLi(Ai)(f |Ai L 1
+i )  1 + ", Lipf(Ai)(Li (f |Ai ) 1) 
+1
+1 ".
+En utilisant le fait que f est injective, on en de ́duit que f (E \ K) = Sm
+i=1 f (E \ Ai) d’ou`
+Hk(f (E \ K)) =
+X m
+i=1
+Hk(f (E \ Ai)) =
+m X
+i=1
+Hk((f L 1
+i )(Li(E \ Ai)))
+ (1 + ")k
+m X
+i=1
+Hk(Li(E \ Ai)) = (1 + ")k
+X m
+i=1
+Z
+E\Ai
+J
+f (zi) dx
+ (1 + ")k
+X m
+i=1
+Z
+E\Ai
+J
+f (x) dx + "(1 + ")kLk(K)
+= (1 + ")k
+Z
+E\K
+J
+f (x) dx + "(1 + ")kLk(K).
+De meˆme,
+Z
+E\K
+J
+f (x) dx =
+X m
+i=1
+Z
+E\Ai
+J
+f (x) dx 
+m X
+i=1
+Z
+E\Ai
+J
+f (zi) dx + "Lk(K)
+=
+m X
+i=1
+Hk(Li(E \ Ai)) + "Lk(K) =
+X m
+i=1
+Hk((Li (f |Ai ) 1)f (E \ Ai)) + "Lk(K)
+
+1
+(1 ")k
+X m
+i=1
+Hk(f (E \ Ai)) + "Lk(K) = 1
+(1 ")k Hk(f (E \ K)) + "Lk(K).
+Par passage `a la limite quand " ! 0, on obtient
+Hk(f (E \ K)) =
+Z
+E\K
+J
+f (x) dx,
+puis, en choisissant W = Kn ou` Kn une suite croissante de compacts tels que S
+n Kn = U et en passant `a la limite quand n ! 1, on en de ́duit que
+Hk(f (E)) =
+Z
+E
+J
+f (x) dx,
+ce qui conclut la preuve de la formule de l’aire.
+Remarque 3.3.7. (i) Si k = 1, la formule de l’aire permet de retrouver la formule du calcul de la longueur d’une courbe
+H1(f (E)) =
+Z
+E
+|f 0(t)| dt.
+(ii) Si k = N 1 et f (x) = (x, a(x)) o`u a : RN 1 ! R est une fonction de classe C1, la formule de l’aire permet de retrouver la formule de l’aire du graphe de a
+HN 1({(x, a(x)) : x 2 E}) =
+Z
+E
+p1 + |ra(x)|2 dx.
+Cette formule (de mˆeme que la formule de l’aire en ge ́ne ́ral) reste vraie pour des fonctions a seulement Lipschitziennes en utilisant le the ́ore`me de Rademacher qui stipule qu’une fonction Lipschtzienne est di↵ ́erentiable presque partout.
+
+
+50 CHAPITRE 3. MESURES DE HAUSDORFF
+On rappelle la d ́efinition d’espace tangent `a une sous-vari ́ete ́ ainsi qu’une caracte ́risation en terme de param ́etrisation locale.
+D ́efinition 3.3.8. Soit M une sous-varie ́t ́e de RN de dimension k et de classe C1. Pour tout x0 2 M , l’espace tangent `a M en x0, not ́e Tx0 M , est de ́fini par
+T
+x0 M :=
+n
+v 2 RN : il existe un intervalle ouvert I contenant 0 et
+2 C1(I; RN ) tels que (I) ⇢ M, (0) = x0, 0(0) = v
+o .
+Proposition 3.3.9. Soit M une sous-vari ́et ́e de RN de dimension k et de classe C1. Alors, pour
+tout x0 2 M , Tx0 M est un sous-espace vectoriel de RN de dimension k et si f d ́esigne une
+param ́etrisation locale de M en x0 = f (0), alors
+T
+x0 M = rf (0)(Rk).
+D ́emonstration. Soit U un voisinage ouvert de 0 dans Rk, V un voisinage ouvert de x0 dans RN
+et f : U ! V une fonction de classe C1, injective telle que f (0) = x0, rf (0) est une application lin ́eaire injective et f : U ! V \ M est un hom ́eomorphisme. On commence par montrer qu’il existe un ouvert W contenant x0 dans RN et un C1-di↵ ́eomorphisme ' : W ! RN tels que
+'(M \ W ) = '(W ) \ (Rk ⇥ {0}). (3.3.1)
+En e↵et, pour tout (x, y) 2 U ⇥ RN k, on pose g(x, y) = f (x) + (0, y) ce qui de ́finit une fonction
+de classe C1 sur U ⇥ RN k. De plus, g(0, 0) = x0 et rg(x, y)(h1, h2) = rf (x)(h1) + (0, h2) pour
+tout (x, y) 2 U ⇥ RN k et tout h = (h1, h2) 2 Rk ⇥ RN k. En particulier rf (0)  ́etant injective, on
+obtient que l’application line ́aire rg(0, 0) : RN ! RN est injective et donc bijective. Le the ́ore`me
+d’inversion locale montre alors que g est un C1-di↵e ́omorphisme local au voisinage de (0, 0). En particulier, il existe donc un ouvert U 0 ⇢ U contenant 0 dans Rk, un ouvert V 0 contenant 0 dans
+R
+N k un ouvert W contenant x0 dans RN et un C1-di↵ ́eomorphisme ' : W ! U 0 ⇥ V 0 tels que
+'(f (x) + (0, y)) = (x, y) pour tout (x, y) 2 U 0 ⇥ V 0.
+En particulier, en prenant y = 0, on obtient que '(f (U 0)) = (U 0 ⇥ V 0) \ (Rk ⇥ {0}), ce qui montre e↵ectivement (3.3.1).
+Montrons maintenant que Tx0 M est un sous espace vectoriel de dimension k dans RN . Si v 2 T
+x0 M , il existe un intervalle ouvert I contenant 0 et 2 C1(I; RN ) tels que (I) ⇢ M , (0) = x0 et 0(0) = v. Quitte `a restreindre l’intervalle I, on peut supposer que (I) ⇢ W . On peut alors de ́finir  ̃(t) = '( (t)) pour tout t 2 I de sorte que  ̃ est de classe C1 sur I. Comme (t) 2 M \W pour tout t 2 I, alors  ̃(t) 2 '(W ) \ (Rk ⇥ {0}) et donc  ̃0(0) = r'( (0))( 0(0)) = r'(x0)(v) 2 Rk ⇥ {0}.
+On en de ́duit que v 2 (r'(x0)) 1(Rk ⇥ {0}), soit Tx0 M ⇢ (r'(x0)) 1(Rk ⇥ {0}).
+Pour montrer l’autre inclusion, fixons un e ́le ́ment w 2 Rk ⇥ {0}. Comme '(W ) est ouvert contenant '(x0), il existe " > 0 tel que '(x0) + tw 2 '(W ) pour tout t 2 ( ", "). On de ́finit alors
+: ( ", ") ! RN
+t 7! ' 1('(x0) + tw)
+qui est une fonction de classe C1. Comme '(x0) + tw 2 '(W ) \ (Rk ⇥ {0}) pour tout t 2 ( ", ")
+et '(M \ W ) = '(W ) \ [Rk ⇥ {0}], on en de ́duit que (t) 2 M \ W pour tout t 2 ( ", "). De
+plus (0) = x0. Par de ́finition de l’espace tangent, on doit avoir que 0(0) = r(' 1)('(x0))(w) = (r'(x0)) 1(w) 2 Tx0 M . On a donc bien e ́tabli que r'(x0) 1(Rk ⇥ {0}) ⇢ Tx0 M .
+
+
+3.3. MESURE DE VOLUME ET MESURE DE SURFACE 51
+Comme Tx0 M = (r'(x0)) 1(Rk ⇥ {0}) et r'(x0) est une application lin ́eaire inversible de RN
+dans RN , on en d ́eduit que Tx0 M est un sous-espace vectoriel de dimension k dans RN .
+Montrons enfin la caract ́erisation en terme de parame ́trisation locale. Soit v 2 Rk, comme U est
+un ouvert de Rk contenant 0, il existe " > 0 tel que tv 2 U pour tout t 2 ( ", "). On de ́finit alors
+: ( ", ") ! RN
+t 7! f (tv).
+Comme f (U ) = M \ V , on en d ́eduit que (t) 2 M pour tout t 2 ( ", "). De plus, la fonction est de classe C1 et satisfait (0) = f (0) = x0. Par de ́finition de l’espace tangent, on a 0(0) = rf (0)(v) 2 Tx0 M , ce qui montre que Im(rf (0)) ⇢ Tx0 M . On sait de ́j`a que Tx0 M est un sous espace vectoriel de dimension k dans RN . Comme, par ailleurs, rf (0) : Rk ! RN est une application lin ́eaire injective, on en d ́eduit que Im(rf (0)) est un sous-espace vectoriel de dimension k dans
+R
+N . On a donc montre ́ que Tx0 M = Im(rf (0)).
+Il est possible de caract ́eriser l’espace tangent en terme de limite faible* de mesure.
+Proposition 3.3.10. Soit M une sous-varie ́te ́ de classe C1 de RN de dimension k. Pour tout
+x0 2 M , la famille de mesures {μx0,%}%>0 d ́efinie par
+Z
+RN
+' dμx0,% := 1
+%
+k
+Z
+M
+'
+✓ x x0 %
+◆
+dHk(x) pour tout ' 2 Cc(RN ),
+converge localement faible* dans Mloc(RN ) vers la mesure Hk Tx0 M .
+D ́emonstration. Soit x0 2 M , U un voisinage ouvert de 0, V un voisinage ouvert de x0 dans RN
+et f : U ! V une fonction de classe C1, injective telle que f (0) = x0, rf (0) est une application lin ́eaire injective et f : U ! V \ M est un home ́omorphisme. Pour tout ' 2 Cc(RN ), on conside`re % > 0 assez petit de sorte que x0 + % Supp(') ⇢ V , d’ou` Z
+RN
+' dμx0,% = 1
+%
+k
+Z
+M
+'
+✓ x x0 %
+◆
+dHk(x) = 1
+%
+k
+Z
+f (U )
+'
+✓ x x0 %
+◆
+dHk(x).
+D’apr`es la formule de l’aire et la formule de changement de variable, on obtient en posant Jf :=
+pdet(rf T rf ) Z
+RN
+' dμx0,% = 1
+%
+k
+Z
+U
+'
+✓ f (y) f (0) %
+◆ J
+f (y) dy =
+Z
+Rk
+1U (%z)'
+✓ f (%z) f (0) %
+◆ J
+f (%z) dz.
+Comme U est ouvert, ' est continue et f est de classe C1, il vient pour tout z 2 Rk,
+u
+%(z) := 1U (%z)'
+✓ f (%z) f (0) %
+◆ J
+f (%z) ! '(rf (0)(z))Jf (0).
+Afin de passer `a la limite sous le signe int ́egral, il convient de montrer que u% satisfait la proprie ́t ́e de domination. Par injectivit ́e de rf (0), on a que
+m = min
+w2SN 1 |rf (0)(w)| > 0.
+La di↵ ́erentiabilite ́ de f en 0 montre que pour tout " 2 (0, m/2), il existe r0 > 0 tel que pour tout
+y 2 Br0
+|f (y) f (0)| |rf (0)(y)| "|y| (m ")|y|
+m
+2 |y|.
+
+
+52 CHAPITRE 3. MESURES DE HAUSDORFF
+Par ailleurs, l’injectivit ́e de f montre que
+"0 := inf
+y2U \Br0
+|f (y) f (0)| > 0
+de sorte que, pour tout y 2 U ,
+|f (y) f (0)| |y| ou` := min
+⇢m
+2 , "0
+diam(U ) .
+Soit R > 0 tel que Supp(') ⇢ BR. Alors, Supp(u%) ⇢ BR/ et donc |u%|  k'k1kJf k11BR/ . Nous sommes alors en mesure d’appliquer le th ́eor`eme de la convergence domin ́ee qui implique que Z
+RN
+' dμx0,% !
+Z
+Rk
+'(rf (0)(z))Jf (0) dz =
+Z
+rf (0)(Rk)
+'(x) dHk(x) =
+Z
+Tx0 M
+' dHk,
+ou` l’on a de nouveau utilis ́e la formule de l’aire applique ́e `a l’application lin ́eaire z 7! rf (0)(z).
+3.4 Ensembles rectifiables
+Nous allons `a pr ́esent introduire la notion d’ensemble rectifiable qui g ́en ́eralise celle de sousvarie ́te ́ et sur laquelle il est toujours possible de de ́finir un plan tangent au sens de la mesure.
+D ́efinition 3.4.1. Un sous ensemble M de RN est (d ́enombrablement) Hk-rectifiable s’il existe un
+ensemble exceptionnel Z ⇢ RN tel que Hk(Z) = 0 et des sous-vari ́ete ́s Mi de RN de dimension k
+et de classe C1 tels que
+M⇢
+[
+i2N
+M
+i [ Z.
+D ́efinition 3.4.2. Soit M ⇢ RN un ensemble Hk-rectifiable tel que Hk(M \ K) < 1 pour tout
+compact K ⇢ RN et x0 2 M . Pour tout % > 0, on de ́finit la mesure μx0,% par
+Z
+RN
+' dμx0,% := 1
+%
+k
+Z
+M
+'
+✓ x x0 %
+◆
+dHk(x) pour tout ' 2 Cc(RN ).
+On dit que M admet un espace tangent approche ́ en x0 s’il existe un sous-espace vectoriel ⇡x0 de
+R
+N de dimension k, tel que μx0,% * Hk ⇡x0 localement faible* dans Mloc(RN ).
+Th ́eor`eme 3.4.3. Soit M ⇢ RN un ensemble Hk-rectifiable tel que Hk(M \ K) < 1 pour tout
+compact K ⇢ RN . Alors, M admet un espace tangent approch ́e en Hk-presque tout x 2 M et
+lim
+%!0
+Hk(M \ B%(x)) !
+k%k = 1 Hk-p.p. tout x 2 M.
+D ́emonstration du the ́ore`me 3.4.3. Sans restreindre la g ́en ́eralite ́, on suppose que Hk(M ) < 1. On e ́crit M sous la forme M ⇢
+S
+i2N Mi [ Z, ou` Hk(Z) = 0 et, pour tout i 2 N, Mi est une
+sous-varie ́t ́e de RN , de dimension k et de classe C1. On sait d ́ej`a d’apre`s la Proposition 3.3.10 que
+pour tout i 2 N, tout x0 2 Mi et pour tout ' 2 Cc(RN ),
+1 %
+k
+Z
+Mi
+'
+✓ x x0 %
+◆
+dHk(x) !
+Z
+Tx0 Mi
+' dHk,
+
+
+3.4. ENSEMBLES RECTIFIABLES 53
+On sait par ailleurs d’apr`es la Proposition 3.2.7 que pour tout i 2 N, il existe un ensemble Zi ⇢ RN (ind ́ependant de ') tel que Hk(Zi) = 0 et, pour tout x0 2 (M \ Mi) \ Zi,
+Hk(B%(x0) \ (M 4Mi)) %
+k !0
+et donc, en particulier pour tout ' 2 Cc(RN ),
+1 %
+k
+Z
+M 4Mi
+'
+✓ x x0 %
+◆
+dHk(x) ! 0.
+Par cons ́equent, pour tout x0 2 (M \ Mi) \ Zi, on a
+Z
+RN
+' dμx0,% = 1
+%
+k
+Z
+M
+'
+✓ x x0 %
+◆
+dHk(x) !
+Z
+Tx0 Mi
+' dHk.
+Soit donc Z⇤ := Z [
+S
+i Zi qui satisfait Hk(Z⇤) = 0. On a donc montre ́ que pour tout x0 2 M \Z⇤,
+il existe un sous-espace vectoriel ⇡x0 de RN de dimension k tel que μx0,% * Hk ⇡x0 localement
+faible* dans Mloc(RN ). Comme en particulier Hk(⇡x0 \ @B1) = 0, on en de ́duit que
+Hk(B%(x0) \ M ) %
+k = μx0,%(B1) ! Hk(⇡x0 \ B1) = !k,
+ce qui conclut la preuve du r ́esultat.
+La proposition suivante  ́etablit une proprie ́t ́e de localite ́ de l’espace tangent approch ́e.
+Proposition 3.4.4. Soient M1 et M2 deux ensembles Hk-rectifiables tels que Hk(M1 \ K) < 1
+et Hk(M2 \ K) < 1 pour tout compact K ⇢ RN . Alors, pour Hk-presque tout x 2 M1 \ M2,
+T
+xM1 = TxM2.
+D ́emonstration. On suppose sans restreindre la ge ́ne ́ralit ́e que HN 1(M1) < 1 et HN 1(M2) < 1. D’apr`es la Proposition 3.2.7, pour Hk-presque tout x 2 M1 \ M2, on a
+lim
+%!0
+Hk((M14M2) \ B%(x)) %
+k = 0.
+Par cons ́equent, pour tout ' 2 Cc(RN ), si Supp(') ⇢ BR, on a
+1 %
+k
+Z
+M1
+'
+✓ x x0 %
+◆
+dHk 1
+%
+k
+Z
+M2
+'
+✓ x x0 %
+◆
+dHk  k'k1
+Hk((M14M2) \ B%R(x0)) %
+k ! 0.
+Comme TxM1 existe Hk-p.p. tout x 2 M1 et TxM2 existe Hk-p.p. tout x 2 M2, on en de ́duit que T
+xM1 = TxM2 Hk-p.p. tout x 2 M1 \ M2.
+
+
+Chapitre 4
+Ensembles de p ́erim`etre fini
+4.1 D ́efinition et propri ́et ́es
+De ́finition 4.1.1. Soit ⌦ ⇢ RN un ouvert. Un ensemble Lebesgue mesurable E ⇢ RN est de
+p ́erim`etre fini dans ⌦ si D E 2 M(⌦; RN ). On d ́efinit alors le p ́erim`etre de E dans ⌦ par
+P (E, ⌦) := |D E|(⌦) = sup
+⇢Z
+E
+div' dx : ' 2 C1
+c (⌦; RN ), |'|  1 .
+Exemple 4.1.2. Si E ⇢ RN est un ouvert born ́e de frontie`re de classe C1 (par morceaux), alors
+E est de p ́erim`etre fini dans ⌦ et D E = ⌫EHN 1 (@E \ ⌦) o`u ⌫E de ́signe la normale unitaire ext ́erieure `a E. En e↵et, si ' 2 C1
+c (⌦; RN ), en utilisant la formule de la divergence, il vient Z
+E
+div' dx =
+Z
+@E\⌦
+' · ⌫E dHN 1,
+ce qui montre bien que D E = ⌫EHN 1 (@E \ ⌦). Par ailleurs, une application imme ́diate de la Proposition 1.1.9 montre que |D E| = HN 1 (@E \ ⌦) si bien que
+P (E, ⌦) = |D E|(⌦) = HN 1(@E \ ⌦).
+En appliquant l’injection de Sobolev (the ́ore`me 2.3.1) aux fonctions caracte ́ristiques d’ensembles de pe ́rime`tre fini on obtient la fameuse ine ́galite ́ isop ́erim ́etrique.
+The ́or`eme 4.1.3 (In ́egalit ́e isop ́erim ́etrique). Il existe une constante N > 0 qui ne de ́pend
+que de la dimension telle que pour tout ensemble E de p ́erime`tre fini dans RN avec LN (E) < 1,
+LN (E) N 1
+N  N P (E, RN ).
+Le r ́esultat suivant de compacit ́e est une cons ́equence imme ́diate du the ́ore`me de Rellich pour les fonctions BV .
+The ́or`eme 4.1.4 (Rellich). Soit ⌦ ⇢ RN un ouvert born ́e. De toute suite {Ek}k2N d’ensembles
+de p ́erim`etre fini dans ⌦ telle que
+sup
+k2N
+LN (Ek) + P (Ek, ⌦) < 1,
+on peut extraire une sous-suite {Ekj }j2N telle que Ekj ! E fortement dans L1(⌦) et D Ekj *
+D
+E faible* dans M(⌦; RN ), ou` E est un ensemble de pe ́rime`tre fini dans ⌦ tel que LN (E) < 1.
+55
+
+
+56 CHAPITRE 4. ENSEMBLES DE PE ́RIME`TRE FINI
+D ́emonstration. Si uk = Ek , le the ́ore`me 2.3.3 montre que Ekj ! u dans L1
+loc(⌦) (en donc
+aussi LN -presque partout quitte `a extraire une sous-suite) et Duk * Du faible* dans M(⌦; RN ). Par cons ́equent, u(x) 2 {0, 1} pour LN -presque tout x 2 ⌦ et donc, il existe un ensemble E mesurable tel que u = E. D’apr`es le Lemme de Fatou, il vient LN (E) < 1. Comme par ailleurs P (E, ⌦) < 1, on en d ́eduit que u = E 2 BV (⌦). Il reste `a montrer la convergence dans tout L1(⌦). Pour ce faire, pour tout " > 0, il existe un compact K ⇢ ⌦ tel que LN (⌦ \ K)  ". On conside`re alors un ouvert borne ́ et Lipschitzien ! tel que K ⇢ ! ⇢ ! ⇢ ⌦. Alors, on a
+Z
+⌦
+| Ek E | dx 
+Z
+!
+| Ek E| dx + 2LN (⌦ \ !) 
+Z
+!
+| Ek E| dx + 2".
+Par passage `a la limite quand k ! 1 puis " ! 0, on obtient bien que Ek ! E dans L1(⌦).
+Un cas particulier de l’in ́egalit ́e de Sobolev-Poincare ́-Wirtinger dans BV est le cas ou` ⌦ = B%(x0) et u est la fonction caracte ́ristique d’un ensemble de p ́erim`etre fini. On obtient une version localise ́e de l’in ́egalit ́e isop ́erim ́etrique.
+The ́or`eme 4.1.5 (In ́egalit ́e isop ́erim ́etrique relative). Il existe une constante CN > 0, ne
+d ́ependant que de la dimension, telle que pour tout ensemble E de pe ́rime`tre fini dans RN , pour
+tout x0 2 RN et tout % > 0,
+min{LN (B%(x0) \ E), LN (B%(x0) \ E)}
+N1
+N  CN P (E, B%(x0)).
+D ́emonstration. Si E est un ensemble de p ́erim`etre fini dans RN , alors u := E 2 BV (B%(x0)). Posons v(y) := u(x0 + ⇢y) pour y 2 B1 de sorte que v 2 BV (B1). D’apre`s l’ine ́galit ́e de SobolevPoincar ́e-Wirtinger, il existe une constante dimensionnelle CN > 0 telle que
+kv vB1 k L
+N
+N 1 (B1)  CN |Dv|(B1).
+Par changement de variable, il vient
+ku uB%(x0)k
+L
+N
+N 1 (B%(x0))  CN |Du|(B%(x0)),
+ou encore
+LN (B%(x0) \ E) N 1
+N
+✓
+LN (B%(x0) \ E) LN (B%(x0))
+◆
++ LN (B%(x0) \ E) N 1
+N
+✓
+LN (B%(x0) \ E) LN (B%(x0))
+◆
+ CN P (E, B%(x0)).
+Si LN (B%(x0) \ E)  LN (B%(x0) \ E), alors LN (B%(x0) \ E) 1
+2 LN (B%(x0)) et il vient
+C
+N P (E, B%(x0)) LN (B%(x0) \ E) N 1
+N
+✓
+LN (B%(x0) \ E) LN (B%(x0))
+◆
+1
+2 LN (B%(x0) \ E) N 1
+N.
+L’autre cas se d ́emontre de mani`ere analogue.
+
+
+4.2. APPLICATIONS 57
+4.2 Applications
+4.2.1 Le probl`eme isop ́erim ́etrique
+Le probl`eme isope ́rime ́trique consiste `a minimiser le pe ́rime`tre d’un ensemble `a volume prescrit. Soient ⌦ ⇢ RN un ouvert borne ́ et 0 < m  LN (⌦), on cherche `a re ́soudre le proble`me de minimisation ↵ := inf P (E, ⌦) : E ⇢ ⌦ mesurable tel que LN (E) = m .
+En choisissant r > 0 tel que LN (⌦ \ Br) = m, on a alors que
+0  ↵  P (⌦ \ Br, ⌦) = P (Br, ⌦) = HN 1(⌦ \ @Br) < 1.
+Par la m ́ethode directe du calcul des variations, si {Ek}k2N est une suite minimisante, le the ́ore`me de Rellich montre qu’`a extraction d’une sous-suite pre`s, on a Ek ! E dans L1(⌦) ou` E ⇢ ⌦ est un ensemble de p ́erim`etre fini dans ⌦ satisfaisant LN (E) = m et P (E, ⌦) = ↵.
+Si ⌦ = RN , il est possible de montrer que le proble`me de minimisation pre ́ce ́dent admet toujours des solutions donn ́ees par les boules de volume m.
+4.2.2 Le probl`eme de Cheeger
+Un autre exemple d’application est le probl`eme de Cheeger. Soient p > 0, N 2 et ⌦ ⇢ RN un ouvert born ́e. Le p-probl`eme de Cheeger dans ⌦ est le proble`me variationnel suivant :
+C
+p(⌦) := inf
+⇢ P (E, RN )
+LN (E)p : E ⇢ ⌦ ,
+avec la convention P (E,RN )
+LN (E)p = 1 si LN (E) = 0. Toute solution de ce probl`eme de minimisation est appel ́e un p-ensemble de Cheeger. Notons tout d’abord que Cp(⌦) < 1, ce qui se ve ́rifie en prenant E = B une boule contenue dans ⌦.
+Si p < (N 1)/N , alors Cp(⌦) = 0. En e↵et, si B" ⇢ ⌦ est une boule de rayon " > 0, alors
+C
+p(⌦) 
+P (B", RN )
+LN (B")p = "N 1 Np P (B, RN )
+LN (B)p ! 0
+quand " ! 0. Par cons ́equent, s’il existait un ensemble E ⇢ ⌦ (de pe ́rime`tre fini dans RN ) tel que
+0 = Cp(⌦) = P (E, RN )
+LN (E)p ,
+alors P (E, RN ) = |D E|(RN ) = 0 et donc E serait constant sur RN . Si E = 1, on aurait alors
+que E = RN ce qui est impossible puisque E ⇢ ⌦ et ⌦ est borne ́. Si en revanche E = 0, alors LN (E) = 0 ce qui est  ́egalement impossible. Ceci montre qu’un p-ensemble de Cheeger ne peut pas exister quand p < (N 1)/N .
+Supposons maintenant que p (N 1)/N . Si E ⇢ ⌦, en utilisant l’in ́egalite ́ isope ́rime ́trique, on obtient que
+LN (E)p  LN (E) N 1
+N LN (⌦)p N 1
+N  N P (E, RN )LN (⌦)p N 1
+N,
+ou` N > 0 est une constante dimensionnelle, ce qui montre que
+C
+p(⌦) LN (⌦) N 1
+Np
+N
+> 0.
+
+
+58 CHAPITRE 4. ENSEMBLES DE PE ́RIME`TRE FINI
+Consid ́erons alors une suite minimisante {Ek}k2N tels que Ek ⇢ ⌦ pour tout k 2 N et
+P (Ek, RN )
+LN (Ek)p ! Cp(⌦).
+Comme ⌦ est borne ́, on a LN (Ek)  LN (⌦), et P (Ek, RN )  (Cp(⌦) + 1)LN (Ek)p  (Cp(⌦) +
+1)LN (⌦)p pour k assez grand. On en de ́duit que { Ek }k2N est born ́ee dans BV (RN ). D’apre`s le th ́eor`eme de Rellich, quitte `a extraire une sous-suite, on peut supposer que Ek ! E dans
+L1
+loc(RN ) o`u E 2 BV (RN ). Comme Ek ⇢ ⌦, alors LN (Ek \ ⌦) = 0 pour tout k 2 N puis, par passage `a la limite quand k ! 1, on obtient que LN (E \ ⌦) = 0. Par conse ́quent, on peut modifier E sur un ensemble de LN -mesure nulle pre`s (et donc sans changer sa mesure de Lebesgue ni son p ́erim`etre) pour assurer que E ⇢ ⌦. De plus, on a LN (Ek) ! LN (E) et, par semicontinuit ́e infe ́rieure du pe ́rime`tre P (E, RN )  lim infk P (Ek, RN ). Par cons ́equent,
+C
+p(⌦) 
+P (E, RN )
+LN (E)p  lim inf
+k!1
+P (Ek, RN )
+LN (Ek)p = Cp(⌦),
+ce qui montre que E est un p-ensemble de Cheeger. Si p = N/(N 1), il est possible de montrer que toutes les boules contenues dans ⌦ sont les seuls p-ensembles de Cheeger.
+4.3 Formule de la co-aire
+La formule de la co-aire permet de reconstruire l’inte ́grale R
+⌦ |ru| dx pour une fonction (r ́egulie`re)
+u `a partir de la mesure de ses ensembles de niveau. Nous donnons ici une version “faible” pour les fonctions `a variation borne ́e pour calculer la variation totale |Du|(⌦) d’une fonction u 2 BV (⌦) ou` la mesure des ensembles de niveau est remplace ́e par le pe ́rime`tre des ensembles {u > t}.
+The ́or`eme 4.3.1 (Fleming-Rishel). Soit ⌦ ⇢ RN un ouvert et u 2 BV (⌦). Alors les ensembles
+{u > t} sont de pe ́rime`tre fini dans ⌦ pour L1-presque tout t 2 R et, pour tout Bore ́lien A ⇢ ⌦,
+|Du|(A) =
+Z
+R
+|D {u>t}|(A) dt, (4.3.1)
+Du(A) =
+Z
+R
+D
+{u>t}(A) dt. (4.3.2)
+D ́emonstration. On pose Et := {u > t}. Quitte a` modifier u sur un ensemble de mesure LN nulle, on peut supposer que u est une fonction Bore ́lienne sur ⌦, ce qui fait de {u > t} un Bor ́elien de ⌦. Il vient alors que les fonctions (x, t) 7! u(x) t et (x, t) 7! {u>t}(x) sont Bor ́eliennes sur ⌦ ⇥ R.
+D’apr`es le th ́eor`eme de Fubini, pour tout ' 2 C1
+c (⌦; RN ) avec |'|  1, la fonction
+t 7!
+Z
+⌦
+Et (x) div'(x) dx
+est alors Bor ́elienne sur R. Si D est un ensemble de ́nombrable dense dans C1
+c (⌦; RN ), on en d ́eduit que
+t 7! P (Et, ⌦) = sup
+'2D, |'|1
+⇢Z
+⌦
+Et (x) div'(x) dx
+est Bore ́lienne sur R.
+Etape 1. Pour tout x 2 ⌦, on a
+u(x) =
+Z
+R+
+Et (x) dt
+Z
+R
+(1 Et (x)) dt.
+
+
+4.3. FORMULE DE LA CO-AIRE 59
+Par cons ́equent, pour tout ' 2 C1
+c (⌦; RN ) avec |'|  1, on obtient que Z
+⌦
+u(x) div'(x) dx =
+Z
+R
+Z
+⌦
+Et (x) div'(x) dx dt 
+Z
+R
+P (Et, ⌦) dt. (4.3.3)
+Par passage au supremum parmi toutes les fonctions test ', il vient
+|Du|(⌦) 
+Z
+R
+P (Et, ⌦) dt.
+Etape 2. Pour montrer l’autre ine ́galit ́e, on suppose d’abord que u est une fonction a ne et continue par morceaux. Il existe alors une partition de RN en N -simplexes A1, . . . , Am d’inte ́rieurs deux `a deux disjoints et des fonctions a nes x 7! fi(x) := ai · x + bi telles que
+u(x) = fi(x) pour tout x 2 Ai.
+On a alors d’une part que Z
+⌦
+|ru| dx =
+X m
+i=1
+LN (Ai \ ⌦)|ai|.
+D’autre part, notant alors ei := ai/|ai|, la formule changement de variable donne
+Z
+R
+HN 1(⌦ \ {u = t}) dt =
+X m
+i=1
+Z
+R
+HN 1(Ai \ ⌦ \ {u = t}) dt
+=
+Z
+R
+HN 1({x 2 Ai \ ⌦ : ai · x + bi = t}) dt
+= |ai|
+Z
+R
+HN 1({x 2 Ai \ ⌦ : ei · x = s}) ds,
+puis, en vertu du the ́ore`me de Fubini, Z
+R
+HN 1(⌦ \ {u = t}) dt = |ai|LN (Ai \ ⌦),
+ce qui montre que Z
+⌦
+|ru| dx =
+Z
+R
+HN 1(⌦ \ {u = t}) dt.
+L’ensemble {u > t}  ́etant un ouvert `a frontie`re polyhe ́drique, on a |D {u>t}|(⌦) = HN 1(⌦ \ {u = t}) et donc Z
+⌦
+|ru| dx =
+Z
+R
+|D {u>t}|(⌦) dt.
+On suppose maintenant que u 2 W 1,1(⌦). Si U est un ouvert born ́e tel que U ⇢ ⌦, on approche u par une suite {uj}j2N de fonctions continues a nes par morceaux dans W 1,1(U ). On a alors que pour tout j 2 N, Z
+U
+|ruj| dx =
+Z
+R
+|D {uj>t}|(U ) dt.
+Comme Z
+R
+Z
+⌦
+| {uj>t} {u>t}| dx dt =
+Z
+R
+LN ({u > t}4{uj > t}) dt =
+Z
+⌦
+|uj u| dx ! 0,
+
+
+60 CHAPITRE 4. ENSEMBLES DE PE ́RIME`TRE FINI
+on en de ́duit que, pour une sous-suite et pour tout L1-presque tout t 2 R, on a {uj>t} ! {u>t}
+dans L1(⌦). Par passage `a la limite quand j ! 1, en utilisant la semi-continuit ́e infe ́rieure du p ́erim`etre et le Lemme de Fatou, on obtient que Z
+R
+P ({u > t}, U ) dt 
+Z
+R
+lim inf
+j!1
+P ({uj > t}, U ) dt
+ lim inf
+j!1
+Z
+R
+P ({uj > t}, U ) dt
+= lim
+j!1
+Z
+U
+|ruj| dx =
+Z
+U
+|ru| dx.
+Enfin, en consid ́erant une suite croissante {Un}n2N d’ouverts born ́es tels que U n ⇢ Un+1 et S
+n Un =
+⌦, on obtient par convergence monotone quand n ! 1 Z
+R
+P ({u > t}, ⌦) dt 
+Z
+⌦
+|ru| dx.
+Enfin, si u 2 BV (⌦), on conside`re une suite {uk}k2N ⇢ C1(⌦) \ BV (⌦) ⇢ W 1,1(⌦) telle que u
+k ! u dans L1(⌦) et |Duk|(⌦) ! |Du|(⌦). Par le mˆeme raisonnement que pre ́c ́edemment, on a Z
+R
+P ({u > t}, ⌦) dt 
+Z
+R
+lim inf
+k!1
+P ({uk > t}, ⌦) dt
+ lim inf
+k!1
+Z
+R
+P ({uk > t}, ⌦) dt
+= lim
+k!1
+Z
+⌦
+|ruk| dx = |Du|(⌦).
+Cette deuxi`eme ine ́galite ́ montre que, si u 2 BV (⌦), alors P (Et, ⌦) < 1 pour L1-presque tout t 2 R, et donc que {u > t} est de p ́erim`etre fini dans ⌦ pour L1-presque tout t 2 R.
+Etape 3. Si A ⇢ ⌦ est un Bore ́lien, par r ́egularite ́ exte ́rieure, pour tout " > 0 il existe un ouvert U A tel que |Du|(U \ A)  ". En reprenant la de ́monstration pr ́ec ́edente, on obtient que Z
+R
+|D {u>t}|(A) dt 
+Z
+R
+|D {u>t}|(U ) dt = |Du|(U )  |Du|(A) + "
+puis, en faisant tendre " ! 0, que Z
+R
+|D {u>t}|(A) dt  |Du|(A).
+Comme
+A 2 B(⌦) 7! |Du|(A)
+Z
+R
+|D {u>t}|(A) dt
+est une mesure positive et de masse totale nulle, il vient finalement que Z
+R
+|D {u>t}|(A) dt = |Du|(A),
+ce qui  ́etablit (4.3.1). Enfin, (4.3.3) implique que Z
+⌦
+' · dDu =
+Z
+⌦
+u div' dx =
+Z
+R
+Z
+⌦
+Et div' dx dt =
+Z
+R
+✓Z
+⌦
+' · dD Et
+◆
+dt
+pour tout ' 2 C1
+c (⌦; RN ) ce qui montre (4.3.2).
+
+
+4.4. FRONTIE`RE RE ́DUITE 61
+Un cas particulier important concerne le cas o`u u(x) = |x| qui est une fonction appartenant `a BV (BR) pour tout R > 0 dont la d ́erive ́e distributionnelle est donn ́ee par la fonction ru(x) = x/|x|. Donc ce cas, les ensembles de sur-niveau de u sont donne ́s par
+{u > r} = RN \ Br.
+Comme ces ensembles sont r ́eguliers, pour tout r < R et tout Bor ́elien A ⇢ BR, on a
+|D {u>r}|(A) = HN 1(@Br \ A) = rN 1HN 1(SN 1 \ (A/r)).
+Une application imm ́ediate de la formule de la co-aire donne alors que pour tout Bore ́lien born ́e A ⇢ RN ,
+LN (A) =
+Z
+R+
+HN 1(@Br \ A) dr =
+Z
+R+
+Z
+@Br
+A(x) dHN 1(x) dr
+=
+Z
+R+
+Z
+SN 1
+A(ry)rN 1 dHN 1(y) dr.
+Par approximation, si g : RN ! R+ est une fonction Bore ́lienne, on a Z
+RN
+g(x) dx =
+Z
+R+
+Z
+@Br
+g(x) dHN 1(x) dr =
+Z
+R+
+Z
+SN 1
+g(ry)rN 1 dHN 1(y) dr,
+ce qui correspond `a la formule de changement de variables en coordonne ́es polaires en dimension quelconque.
+4.4 Fronti`ere r ́eduite
+Nous allons montrer que tout ensemble de pe ́rime`tre fini posse`de une structure similaire `a un ensemble r ́egulier au sens ou` sa de ́riv ́ee distributionnelle est concentre ́e sur un sous-ensemble d ́enombrablement HN 1-rectifiable sur lequel il est possible de de ́finir une normale approche ́e.
+Dans la suite de cette section, ⌦ ⇢ RN est un ouvert et E est un ensemble de p ́erime`tre fini dans ⌦.
+De ́finition 4.4.1. La fronti`ere r ́eduite @⇤E est l’ensemble des points x0 2 ⌦ \ Supp(|D E|) tels
+que la limite
+lim
+%!0
+D
+E (B% (x0 ))
+|D E|(B%(x0)) =: ⌫E(x0)
+existe et satisfait |⌫E(x0)| = 1. La fonction ⌫E : @⇤E ! SN 1 s’appelle la normale ext ́erieure
+g ́en ́eralise ́e.
+Remarque 4.4.2. (i) D’apr`es le Corollaire 1.4.7 sur la de ́composition polaire d’une mesure vectorielle, on a |D E|(⌦ \ @⇤E) = 0,
+autrement dit, D E est concentr ́ee sur @⇤E, et
+D
+E = ⌫E|D E|.
+(ii) Comme Supp(|D E|) ⇢ @E, on en de ́duit que @⇤E ⇢ @E. (iii) Comme les fonctions x 7! D E(B%(x)) et x 7! |D E|(B%(x)) sont Bore ́liennes sur ⌦, on en de ́duit que @⇤E est un Bor ́elien de ⌦ et que la fonction ⌫E : @⇤E ! SN 1 est Bore ́lienne.
+
+
+62 CHAPITRE 4. ENSEMBLES DE PE ́RIME`TRE FINI
+Lemme 4.4.3. Il existe des constantes A1, . . . , A5 > 0 telles que pour tout x0 2 @⇤E,
+(i) lim inf
+%!0
+LN (B%(x0) \ E) %
+N > A1,
+(ii) lim inf
+%!0
+LN (B%(x0) \ E) %
+N > A2,
+(iii) lim inf
+%!0
+|D E|(B%(x0)) %
+N 1 > A3,
+(iv) lim sup
+%!0
+|D E|(B%(x0)) %
+N 1  A4,
+(v) lim sup
+%!0
+|D E\B%(x0)|(RN )
+%
+N 1  A5.
+D ́emonstration. Etape 1. Soit x0 2 @⇤E, on pose := dist(x0, @⌦). On commence par montrer que pour L1-presque tout % 2 (0, ),
+|D E\B%(x0)|(RN )  |D E|(B%(x0)) + HN 1(E \ @B%(x0)). (4.4.1)
+Soit ' 2 C1
+c (RN ; RN ) et g(t) = [0,%)(t) de sorte que B%(x0)(y) = g(|y x0|). On re ́gularise la fonction caracte ́ristique en posant
+g
+"(t) =
+8><
+>:
+1 si 0  t  %,
+%+" t
+" si %  t  % + ", 0 si t % + ",
+de sorte que
+g
+0
+"(t) =
+8><
+>:
+0 si 0  t < %,
+1
+" si % < t < % + ", 0 si t > % + ".
+On pose alors h"(y) = g"(|y x0|) qui de ́finit une fonction Lipschitzienne et satisfait
+rh"(y) =
+(
+0 si 0  |y x0| < % ou |y x0| > % + ",
+1
+"
+y x0
+|y x0| si % < |y x0| < % + ".
+Par cons ́equent, comme h"' est Lipschtzienne et Supp(h"') ⇢ ⌦, on a Z
+⌦
+h
+"' · dD E =
+Z
+E
+div(h"') dy =
+Z
+E
+h
+"div' dy 1
+"
+Z
+E\{y2⌦:%<|y x0|<%+"}
+'(y) ·
+y x0
+|y x0|
+dy.
+D’apr`es la formule de la co-aire et le the ́ore`me de di↵e ́rentiation de Besicovitch, on a pour L1presque tout % > 0
+1 "
+Z
+E\{y2⌦:%<|y x0|<%+"}
+'(y) ·
+y x0
+|y x0|
+dy = 1
+"
+Z
+%+"
+%
+Z
+E\@Br (x0)
+'(y) ·
+y x0
+|y x0|
+dHN 1(y) dr
+!
+Z
+E \@ B% (x0 )
+'(y) ·
+y x0
+|y x0|
+dHN 1(y).
+Par passage `a la limite quand " ! 0, on en de ́duit que Z
+E \B% (x0 )
+div' dy =
+Z
+B% (x0 )
+' · dD E +
+Z
+E \@ B% (x0 )
+'(y) ·
+y x0
+|y x0|
+dHN 1(y). (4.4.2)
+
+
+4.4. FRONTIE`RE RE ́DUITE 63
+Par passage au supremum par rapport `a ' 2 C1
+c (RN ; RN ) tels que |'|  1, on en d ́eduit (4.4.1).
+Etape 2. Dans (4.4.2), on choisit ' = ⌫E(x0) dans B%(x0). On obtient alors
+⌫
+E(x0) · D E(B%(x0)) =
+Z
+E \@ B% (x0 )
+⌫
+E(x0) · ⌫(y) dHN 1(y).
+Comme x0 2 @⇤E,
+lim
+%!0 ⌫E (x0) ·
+D
+E (B% (x0 ))
+|D E|(B%(x0)) = |⌫E(x0)|2 = 1.
+Il existe donc %0 = %0(x0) 2 (0, ) tel que pour L1-presque tout % < %0, |⌫E(x0) · D E(B%(x0))|
+1
+2 |D E|(B%(x0)) de sorte que
+|D E|(B%(x0))  2HN 1(E \ @B%(x0))
+puis, en reportant dans (4.4.1),
+|D E\B%(x0)|(RN )  3HN 1(E \ @B%(x0)).
+Comme HN 1(E\@B%(x0))  HN 1(@B%(x0)) = %N 1HN 1(@B1(0)), les deux dernie`res ine ́galit ́es donnent (iv) et (v).
+Etape 3. D’apr`es la formule de la co-aire, on a
+g(%) :=
+Z
+%
+0
+HN 1(@Br(x0) \ E) dr = LN (E \ B%(x0)) < 1,
+et en vertu du the ́ore`me de di↵ ́erentiation de Besicovitch, pour L1-presque tout % > 0,
+g
+0(%) = HN 1(@B%(x0) \ E).
+D’apr`es l’in ́egalit ́e isop ́erim ́etrique,
+g(%) N 1
+N = LN (E \ B%(x0)) N 1
+N
+ N |D E\B%(x0)|(RN )
+ 3 N HN 1(E \ @B%(x0))
+= 3 N g0(%).
+Par cons ́equent, 1
+3
+N
+ g(%) 1 N
+N g0(%) = N [g(%) 1
+N ]0
+de sorte que g(%) 1
+N%
+3N N
+.
+On en d ́eduit que pour L1-presque tout % 2 (0, %0)
+LN (E \ B%(x0)) = g(%) %N
+(3N N )N ,
+ce qui  ́etablit (i). Comme pour tout ' 2 C1
+c (⌦; RN )
+0=
+Z
+⌦
+div' dy =
+Z
+E
+div' dy +
+Z
+⌦\E
+div' dy,
+
+
+64 CHAPITRE 4. ENSEMBLES DE PE ́RIME`TRE FINI
+on en d ́eduit que D E = D ⌦\E et de que P (⌦ \ E, ⌦) = P (E, ⌦) < 1, ce qui montre que ⌦ \ E est un ensemble de p ́erim`etre fini dans ⌦. Comme @⇤(⌦ \ E) = @⇤E, l’argument pre ́ce ́dent appliqu ́e `a ⌦ \ E montre alors la validit ́e de (ii). L’ine ́galit ́e isop ́erime ́trique relative montre ensuite que
+lim inf
+%!0
+|D E|(B%(x0)) %
+N 1 C min
+⇢
+lim inf
+%!0
+LN (E \ B%(x0)) %
+N , lim inf
+%!0
+LN (B%(x0) \ E) %
+N
+N1 N
+C min{A1, A2}
+N1
+N,
+ce qui implique (iii).
+Le r ́esultat suivant permet de montrer que HN 1 @⇤E est une mesure absolument continue par rapport `a |D E|.
+Lemme 4.4.4. Il existe une constante cN > 0 telle que pour tout Bor ́elien A ⇢ ⌦,
+HN 1(A \ @⇤E)  cN |D E|(A).
+D ́emonstration. On utilise un argument de recouvrement. Par re ́gularite ́ ext ́erieure de |D E|, pour tout " > 0, il existe un ouvert U ⇢ ⌦ contenant A tel que
+|D E|(U )  |D E|(A) + ".
+D’apr`es le Lemme 4.4.3-(iii), pour tout x 2 A \ @⇤E et tout > 0, il existe %x 2 (0, ) tel que B
+%x (x) ⇢ U et |D E|(B%x (x)) > A3%N 1. On pose
+F := {B%(x) : x 2 A \ @⇤E, 0 < % < , B%(x) ⇢ U, |D E|(B%(x)) > A3%N 1},
+ce qui de ́finit un recouvrement de A \ @⇤E. D’apre`s le the ́ore`me de recouvrement de Besicovitch, il existe ⇠ sous-recouvrements d ́enombrables disjoints F1, . . . , F⇠ tels que
+A⇢
+⇠ [
+i=1
+[
+B2Fi
+B.
+En particulier,
+HN 1
+2 (A \ @⇤E)  !N 1
+⇠ X
+i=1
+X
+B2Fi
+✓ diam(B) 2
+◆
+N1
+= !N 1
+A3
+⇠ X
+i=1
+X
+B2Fi
+|D E|(B)
+
+!
+N1
+A3
+⇠ X
+i=1
+|D E|(U )
+
+⇠!N 1
+A3
+(|D E|(A) + ").
+La conclusion suit par passage `a la limite quand " ! 0 et ! 0.
+Nous allons `a pr ́esent am ́eliorer le r ́esultat pre ́ce ́dent en montrant qu’en fait |D E| = HN 1 @⇤E.
+
+
+4.4. FRONTIE`RE RE ́DUITE 65
+The ́or`eme 4.4.5 (De Giorgi - 1). Soit x0 2 @⇤E, on pose Ex0,% := (E x0)/% et
+H
+±(x0) := {y 2 RN : ±⌫E(x0) · (y x0) > 0}.
+Alors
+Ex0,% ! H (0) dans L1
+loc(RN ).
+De plus,
+(i) lim
+%!0
+LN (B%(x0) \ E \ H+(x0)) %
+N = 0;
+(ii) lim
+%!0
+LN (B%(x0) \ E \ H (x0)) %
+N = 0;
+(iii) lim
+%!0
+|D E|(B%(x0)) !
+N 1%N 1 = 1.
+D ́emonstration. On suppose pour simplifier que x0 = 0, ⌫E(0) = eN = (0, . . . , 0, 1) et on pose E
+% := E0,%, H± := H±(0), H0 = e?
+N.
+Soit R > 0. Pour tout ' 2 C1
+c (BR; RN ) avec |'|  1, on a Z
+E%
+div'(x) dx = 1
+%
+N
+Z
+E
+div'
+✓y
+%
+◆
+dy = 1
+%
+N1
+Z
+E
+div'%(y) dy 
+|D E|(BR%)
+%
+N 1  CR
+d’apr`es le Lemme 4.4.3-(iv), ou` l’on a pose ́ '% := '( ·
+%) 2 C1
+c (BR%; RN ). Par conse ́quent, P (E%, BR)  C
+R, ce qui montre que la suite { E% }%>0 est borne ́e dans BV (BR) pour tout R < 1. En utilisant le th ́eor`eme de Rellich et un principe d’extraction diagonal, il existe une sous-suite et un ensemble de p ́erim`etre localement fini F ⇢ RN tels que E%j ! F dans L1
+loc(RN ) et D E%j * D F localement
+faible* dans Mloc(RN ; RN ). Quitte `a extraire une nouvelle sous-suite, on peut e ́galement supposer
+que |D E%j | * localement faible* dans Mloc(RN ) ou` est une mesure de Radon positive sur
+R
+N.
+Pour tout R > 0, on a
+|D E%j |(BR) = |D E |(BR%j )
+%
+N1 j
+, D E%j (BR) = D E (BR%j )
+%
+N1 j
+, (4.4.3)
+de sorte que
+e
+N = ⌫E(0) = lim
+j!1
+D
+E (BR%j )
+|D E|(BR%j ) = lim
+j!1
+D
+E%j (BR)
+|D E%j |(BR) .
+Si on choisit R > 0 tel que (@BR) = 0 (ce qui est satisfait sauf pour un ensemble de ́nombrable de rayons R), d’apr`es la Proposition 1.3.4, on a D E%j (BR) ! D F (BR). Par ailleurs, la semicontinuit ́e infe ́rieure de la variation totale assure que
+|D F |(BR)  lim inf
+j!1
+|D E%j |(BR)
+ lim sup
+j!1
+|D E%j |(BR)
+= lim
+j!1
+e
+N · D E%j (BR)
+= eN · D F (BR)  |D F |(BR), (4.4.4)
+ce qui montre que |D F |(BR) = eN · D F (BR) = R
+BR (eN · ⌫F ) d|D F |. Comme 1 + eN · ⌫F 0,
+|⌫F | = 1 et |eN | = 1 |D F |-p.p. dans RN , on en de ́duit que
+⌫
+F = eN |D F |-p.p. dans RN .
+
+
+66 CHAPITRE 4. ENSEMBLES DE PE ́RIME`TRE FINI
+En particulier, du fait que D F = eN |D F |, il vient que Di F = 0 dans D0(RN ) pour tout 1  i  N 1, ce qui montre que la fonction F ne de ́pend que de la variable xN . Comme de plus D
+N F = |D F |  0 dans D0(RN ), on en de ́duit que F est en fait une fonction de ́croissante de
+la variable xN . Comme F est une fonction caracte ́ristique, il existe une constante a 2 R telle que
+F = {x 2 RN : xN < a}.
+Si a < 0, alors B|a| \ F = ; et donc
+0 = LN (B|a| \ F ) = lim
+j!1
+LN (B|a| \ E%j ) = lim
+j!1
+LN (B|a|%j \ E)
+%
+N j
+,
+ce qui rentre en contradiction avec le Lemme (4.4.3)-(i). Par conse ́quent a 0 et un argument analogue montre que a  0, soit a = 0. Il vient alors que F = H et comme la limite est ind ́ependante de la sous-suite extraite, il n’y a pas besoin d’extraire de sous-suite.
+Comme E% ! H dans L1
+loc(RN ), on a alors
+lim
+%!0
+LN (B% \ E \ H+) %
+N = lim
+%!0 LN (B1 \ E% \ H+) = LN (B1 \ H \ H+) = 0.
+De meˆme
+lim
+%!0
+LN (B% \ E \ H ) %
+N = lim
+%!0 LN (B1 \ E% \ H ) = LN (B1 \ H \ H ) = 0.
+Enfin, on utilise (4.4.4) et il vient que
+lim
+%!0
+|D E|(BR%)
+%
+N 1 = lim
+%!0 |D E% |(BR) = |D H |(BR) = HN 1(H0 \ BR) = !N 1RN 1,
+ce qui conclut la preuve du th ́eor`eme.
+Nous allons `a pr ́esent montrer un re ́sultat de structure des ensembles de p ́erim`etre fini. Celui-ci repose sur le r ́esultat suivant que nous admettons (voir [2, Theorem 6.5-1]).
+The ́or`eme 4.4.6 (Extension de Whitney). Soient K ⇢ RN un compact et f : K ! R,
+d : K ! RN des fonctions continues. On suppose que
+⇢( ) := sup
+⇢
+|f (y) f (x) d(x) · (y x)|
+|y x|
+: x, y 2 K, 0 < |x y| < ! 0
+quand ! 0. Alors il existe une fonction f ̃ : RN ! R de classe C1 telle que
+f ̃ = f, rf ̃ = d sur K.
+The ́or`eme 4.4.7 (De Giorgi - 2). Soit E ⇢ RN un ensemble de pe ́rime`tre fini dans ⌦. Alors
+(i) la frontie`re r ́eduite @⇤E est un ensemble de ́nombrablement HN 1-rectifiable ;
+(ii) Tx(@⇤E) = ⌫E(x)? pour HN 1-presque tout x 2 @⇤E ;
+(iii) |D E| = HN 1 @⇤E, D E = ⌫EHN 1 @⇤E ;
+D ́emonstration. D’apr`es le th ́eor`eme 4.4.5, on a pour tout x 2 @⇤E,
+lim
+%!0
+LN (B%(x) \ E \ H+(x)) %
+N = 0, lim
+%!0
+LN (B%(x) \ E \ H (x)) %
+N = 0. (4.4.5)
+
+
+4.4. FRONTIE`RE RE ́DUITE 67
+D’apr`es le th ́eor`eme d’Egoro↵, il existe des ensembles Bore ́liens deux `a deux disjoints {Fi}i2N tels que
+|D E| @⇤E \
+[
+i2N
+F
+i
+!
+=0
+et les convergences (4.4.5) sont uniformes pour x 2 Fi. D’apr`es le th ́eor`eme de Lusin, pour tout i 2 N, il existe des ensembles compacts deux `a deux disjoints {Gj
+i }j2N tels que
+|D E|
+0
+@Fi \
+[
+j2N
+G
+j i
+1
+A=0
+et ⌫E |Gj
+i est continue sur Gj
+i . On re ́indexe les ensembles {Gj
+i }i,j2N en une famille de compacts {Kj}j2N deux `a deux disjoints tels que
+@
+⇤E =
+[
+j2N
+K
+j [ Z, |D E|(Z) = 0,
+les convergences (4.4.5) sont uniformes dans Kj et ⌫E|Kj est continue sur Kj. D’apre`s le Lemme
+4.4.4, on a HN 1(Z) = 0.
+Pour tout j 2 N et > 0, on d ́efinit la quantite ́
+⇢
+j( ) := sup
+⇢
+|⌫E(x) · (y x)|
+|y x|
+: x, y 2 Kj, 0 < |x y| < .
+Montrons que ⇢j( ) ! 0 quand ! 0. Soit " 2 (0, 1), il existe alors 2 (0, 1) tel que pour z 2 Kj et tout % < 2 ,
+LN (B%(z) \ E \ H+(z)) < "N
+2
+N+2 !N %N , LN (B%(z) \ E \ H (z)) >
+✓1
+2
+"
+N
+2
+N +2
+◆ !
+N %N . (4.4.6)
+Soient x, y 2 Kj tels que 0 < |x y| < . Supposons que ⌫E(x) · (y x) > "|x y|. Alors, du fait que " < 1, on a
+B
+"|x y|(y) ⇢ H+(x) \ B2|x y|(x). (4.4.7)
+En e↵et, si z 2 B"|x y|(y), alors |z x|  |z y| + |y x| < (1 + ")|x y| < 2|x y| et donc z 2 B2|x y|(x). De plus
+⌫
+E(x) · (z x) = ⌫E(x) · (y x) + ⌫E(x) · (z y) > "|x y| |z y| > 0,
+soit z 2 H+(x). Par cons ́equent, en prenant z = x et % = 2|x y| < 2 dans (4.4.6), on a
+LN (B2|x y|(x) \ E \ H+(x)) < "N
+2
+N+2 !N (2|x y|)N = "N !N
+4 |x y|N ,
+et en prenant z = y et % = "|x y| < 2 dans (4.4.6), il vient
+LN (E \B"|x y|(y)) LN (E \B"|x y|(y)\H (y))
+✓1
+2
+"
+N
+2
+N +2
+◆ !
+N ("|x y|)N > "N !N
+4 |x y|N .
+On obtient alors une contradiction en appliquant la mesure LN E `a l’inclusion (4.4.7). De manie`re analogue, on aboutit `a une contradiction si ⌫E(x) · (y x) < "|x y|. Par conse ́quent, le seul cas possible est |⌫E(x) · (y x)|  "|x y| et on obtient alors que ⇢j( )  ".
+
+
+68 CHAPITRE 4. ENSEMBLES DE PE ́RIME`TRE FINI
+Montrons que, pour tout j 2 N, il existe une hypersurface Mj de classe C1 telle que Kj ⇢ Mj, ce qui d ́emontrera la rectifiabilit ́e de @⇤E. Du fait que ⇢j( ) ! 0 quand ! 0, le th ́eor`eme d’extension de Whitney montre alors l’existence d’une fonction fj 2 C1(RN ) telle que fj = 0 et rfj = ⌫E sur K
+j. Soit alors
+M
+j=
+⇢
+x 2 RN : fj(x) = 0, |rfj(x)|
+1
+2.
+D’apr`es le th ́eor`eme des fonctions implicites, Mj est une hypersurface de classe C1. De plus Kj ⇢ Mj puisque fj = 0 et |rfj| = |⌫E| = 1 1
+2 sur Kj. On a donc e ́tabli la rectifiabilite ́ de @⇤E. De plus,
+comme TxMj = (rfj(x))? pour tout x 2 Mj, il vient par localit ́e de l’espace tangent approche ́ que
+T
+x(@⇤E) = TxMj = (rfj(x))? = ⌫E(x)? pour HN 1-presque tout x 2 @⇤E \ Kj,
+ce qui montre que Tx(@⇤E) = ⌫E(x)? pour HN 1-presque tout x 2 @⇤E.
+Enfin, d’apr`es le th ́eor`eme 3.4.3 et le the ́ore`me 4.4.5, pour HN 1-presque tout x 2 @⇤E, on a
+lim
+%!0
+HN 1(@⇤E \ B%(x)) !
+N 1%N 1 = lim
+%!0
+|D E|(B%(x)) !
+N 1%N 1 = 1
+ce qui implique que
+lim
+%!0
+HN 1(@⇤E \ B%(x))
+|D E|(B%(x)) = 1.
+Comme HN 1 @⇤E est absolument continue par rapport `a |D E|, le the ́ore`me de di↵e ́rentiation de Besicovitch montre que HN 1 @⇤E = |D E|, puis D E = ⌫E|D E| = ⌫EHN 1 @⇤E.
+4.5 Fronti`ere essentielle
+Si E ⇢ RN est un ensemble mesurable, on sait d’apr`es le th ́eor`eme des points de Lebesgue, que pour LN -presque tout x 2 E,
+lim
+%!0
+LN (B%(x) \ E) !
+N %N = 1
+et pour LN -presque tout x 2 ⌦ \ E,
+lim
+%!0
+LN (B%(x) \ E) !
+N %N = 0.
+De ́finition 4.5.1. Soit ⌦ ⇢ RN un ouvert et E ⇢ RN un ensemble mesurable. La fronti`ere essentielle de E, not ́ee @⇤E, est l’ensemble des points x0 2 ⌦ tels que
+lim sup
+%!0
+LN (B%(x0) \ E) !
+N %N > 0 et lim sup
+%!0
+LN (B%(x0) \ E) !
+N %N > 0.
+Lemme 4.5.2. L’ensemble @⇤E est un Bore ́lien de ⌦. Si de plus E est de pe ́rime`tre fini dans ⌦,
+alors @⇤E ⇢ @⇤E et HN 1(@⇤E \ @⇤E) = 0.
+D ́emonstration. Pour tout % > 0, les fonctions
+x 7!
+LN (B%(x) \ E) !
+N %N , x 7!
+LN (B%(x) \ E) !
+N %N
+
+
+4.5. FRONTIE`RE ESSENTIELLE 69
+sont Bor ́eliennes. Par continuit ́e par rapport `a %, on en de ́duit que les fonctions
+x 7! lim sup
+%!0
+LN (B%(x) \ E) !
+N %N , x 7! lim sup
+%!0
+LN (B%(x) \ E) !
+N %N
+sont  ́egalement Bor ́eliennes. Ceci montre que @⇤E est un ensemble Bore ́lien. Si E est de pe ́rime`tre fini dans ⌦, les items (i) et (ii) du Lemme 4.4.3 montrent que @⇤E ⇢ @⇤E. De plus, comme HN 1(@⇤E) = |D E|(⌦) < 1, la Proposition 3.2.7 montre que pour HN 1presque tout x 62 @⇤E
+lim
+%!0
+|D E|(B%(x)) %
+N 1 = lim
+%!0
+HN 1(@⇤E \ B%(x)) %
+N 1 = 0.
+Par cons ́equent, en notant
+↵(%) := LN (B%(x) \ E)
+!
+N %N ,
+l’in ́egalit ́e isope ́rime ́trique relative implique que pour HN 1-presque tout x 62 @⇤E,
+lim
+%!0 min{↵(%), 1 ↵(%)} = 0.
+La fonction ↵  ́etant continue, il vient soit ↵(%) ! 0 soit ↵(%) ! 1. On a donc montr ́e qu’il existe un ensemble HN 1-n ́egligeable Z ⇢ ⌦ tel que ⌦ \ @⇤E ⇢ (⌦ \ @⇤E) [ Z, autrement dit HN 1(@⇤E \ @⇤E) = 0.
+Pour finir ce chapitre, notons que les notions de fronti`eres r ́eduites et essentielles permettent de montrer une formule de Gauss-Green ge ́ne ́ralis ́ee pour les ensembles de p ́erim`etre fini.
+The ́or`eme 4.5.3. Soit ⌦ ⇢ RN un ouvert et E un ensemble de pe ́rime`tre fini dans ⌦. Pour toute
+fonction ' 2 C1
+c (⌦; RN ), on a Z
+E
+div' dx =
+Z
+@⇤E
+' · ⌫E dHN 1 =
+Z
+@⇤ E
+' · ⌫E dHN 1.
+D ́emonstration. Par d ́efinition de la d ́erive ́e distributionnelle et d’apre`s le th ́eor`eme de De Giorgi, th ́eor`eme 4.4.7, on a Z
+E
+div' dx =
+Z
+⌦
+' · dD E =
+Z
+@⇤E
+' · ⌫E dHN 1 =
+Z
+@⇤ E
+' · ⌫E dHN 1,
+le dernie`re  ́egalit ́e  ́etant une cons ́equence du fait que HN 1(@⇤E \ @⇤E) = 0.
+
+
+Chapitre 5
+Propri ́et ́es fines des fonctions a`
+variation born ́ee
+Dans ce chapitre, ⌦ ⇢ RN d ́esigne un ouvert et u 2 BV (⌦).
+5.1 Di↵ ́erentiabilit ́e approch ́ee
+D’apr`es le th ́eor`eme de di↵e ́rentiation de Besicovitch, on peut de ́composer la mesure Du en
+Du = Dau + Dsu
+ou` Dau est une mesure absolument continue par rapport `a la mesure de Lebesgue LN et Dsu est  ́etrang`ere par rapport `a LN . Le the ́ore`me de Radon-Nikodym donne l’existence d’une densit ́e ru 2 L1(⌦; RN ), appel ́ee gradient approche ́, telle que
+D
+au = ruLN .
+De plus, le th ́eor`eme de di↵ ́erentiation de Besicovitch montre que
+ru(x) = lim
+%!0
+Du(B%(x)) !
+N %N pour LN -presque tout x 2 ⌦.
+Le re ́sultat suivant caract ́erise le gradient approch ́e d’une fonction BV .
+Th ́eor`eme 5.1.1 (Calderon-Zygmund). Pour LN -presque tout x 2 ⌦, on a
+lim
+%!0
+1 %
+N
+Z
+B% (x)
+|u(y) u(x) ru(x) · (y x)|
+% dy = 0.
+D ́emonstration. Soit x 2 ⌦ tel que
+(a) lim
+%!0
+1 %
+N
+Z
+B% (x)
+|u(y) u(x)| dy = 0;
+(b) lim
+%!0
+1 %
+N
+Z
+B% (x)
+|ru(y) ru(x)| dy = 0;
+(c) lim
+%!0
+|Dsu|(B%(x)) %
+N = 0.
+71
+
+
+72 CHAPITRE 5. PROPRIE ́TE ́S FINES DES FONCTIONS A` VARIATION BORNE ́E
+D’apr`es le th ́eor`eme des points de Lebesgue et comme les mesures |Dsu| et LN sont e ́trange`res, il s’av`ere que LN -presque tous les points x 2 ⌦ satisfont ces proprie ́t ́es. Supposons sans restreindre la ge ́ne ́ralite ́ que x = 0. Soit "0 > 0 assez petit de sorte que B"0 (0) ⇢ ⌦. Pour " < "0 et y 2 ⌦" := {z 2 ⌦ : dist(z, @⌦) > "}, on consid`ere la convolution u"(y) := (u ⇤ ⌘")(y). D’apr`es le th ́eor`eme fondamental de l’analyse, on a
+u
+"(y) = u"(0) +
+Z1
+0
+ru"(ty) · y dt
+= u"(0) + ru"(0) · y +
+Z1
+0
+[ru"(ty) ru"(0)] · y dt.
+Pour % < "0, on multiplie cette  ́egalite ́ par ' 2 C1
+c (B%(0)) avec |'|  1 et on obtient d’apre`s le th ́eor`eme de Fubini et la formule de changement de variables Z
+B% (0)
+'(y)[u"(y) u"(0) ru"(0) · y] dy
+=
+Z1
+0
+1 s
+N +1
+Z
+Bs% (0)
+'
+⇣y
+s
+⌘
+[ru"(y) ru"(0)] · y dy ds. (5.1.1)
+Par suite, on a pour tout s 2 (0, 1),
+g
+"(s) :=
+Z
+Bs% (0)
+'
+⇣y
+s
+⌘
+ru"(y) · y dy =
+Z
+Bs% (0)
+div
+⇣ '
+⇣y
+s
+⌘ y
+⌘ u
+"(y) dy
+!
+Z
+Bs% (0)
+div
+⇣ '
+⇣y
+s
+⌘ y
+⌘
+u(y) dy =
+Z
+Bs% (0)
+'
+⇣y
+s
+⌘
+y · dDu(y)
+=
+Z
+Bs% (0)
+'
+⇣y
+s
+⌘
+y · ru(y) dy +
+Z
+Bs% (0)
+'
+⇣y
+s
+⌘
+y · dDsu(y).
+De plus, d’apr`es les propri ́et ́es de la convolution de mesure, on a pour tout s 2 (0, 1),
+g
+"(s) s
+N+1 
+% s
+N
+Z
+Bs% (0)
+|ru"(y)| dy
+
+% s
+N
+Z
+Bs% (0)
+Z
+B" (y )
+⌘
+"(y z) d|Du|(z) dy
+
+% s
+N
+Z
+Bs%+" (0)
+Z
+Bs% (0)\B" (z )
+⌘
+"(y z) dy d|Du|(z)
+ C min{(s%)N , "N }
+"
+N sN |Du|(Bs%+"(0))
+ C min{(s%)N , "N }
+"
+N sN (s% + ")N  C,
+ou` on a utilis ́e (b) et (c) dans l’avant dernie`re ine ́galite ́. Par convergence domine ́e, il vient alors que
+Z1
+0
+1 s
+N +1
+Z
+Bs% (0)
+'
+⇣y
+s
+⌘
+ru"(y) · y dy ds
+!
+Z1
+0
+1 s
+N +1
+Z
+Bs% (0)
+'
+⇣y
+s
+⌘
+ru(y) · y dy ds +
+Z1
+0
+1 s
+N +1
+Z
+Bs% (0)
+'
+⇣y
+s
+⌘
+y · dDsu(y) ds. (5.1.2)
+
+
+5.1. DIFFE ́RENTIABILITE ́ APPROCHE ́E 73
+Par ailleurs, comme 0 est un point de Lebesgue de u et ru, on en d ́eduit que u"(0) ! u(0) et ru"(0) ! ru(0). Par passage `a la limite quand " ! 0 dans (5.1.1) et en utilisant (5.1.2) ainsi que (a) et (b), on en d ́eduit que
+Z
+B% (0)
+'(y)[u(y) u(0) ru(0) · y] dy
+
+Z1
+0
+1 s
+N +1
+Z
+Bs% (0)
+'
+⇣y
+s
+⌘
+[ru(y) ru(0)] · y dy ds +
+Z1
+0
+1 s
+N +1
+Z
+Bs% (0)
+'
+⇣y
+s
+⌘
+y · dDsu(y) dt
+ C%
+Z1
+0
+1 s
+N
+Z
+Bs% (0)
+|ru(y) ru(0)| dy ds + C%
+Z1
+0
+|Dsu|(Bs%(0)) s
+N ds.
+En passant au supremum parmi toutes les fonctions ', il vient
+1 %
+N +1
+Z
+B% (0)
+|u(y) u(0) ru(0) · y| dy
+C
+Z1
+0
+1 (s%)N
+Z
+Bs% (0)
+|ru(y) ru(0)| dy ds + C
+Z1
+0
+|Dsu|(Bs%(0))
+(s%)N ds.
+Par passage `a la limite quand % ! 0, on obtient bien la propri ́ete ́ souhait ́ee.
+La proposition suivante traduit une propri ́ete ́ de localit ́e du gradient approch ́e.
+Proposition 5.1.2. Soient u et v 2 BV (⌦). Alors
+ru = rv LN -p.p. sur {u = v}.
+D ́emonstration. Soit x0 2 {u = v} un point de Lebesgue de u et v tel que u(x0) = v(x0),
+lim
+%!0
+1 %
+N
+Z
+B% (x0 )
+|u(y) u(x0) ru(x0) · (y x0)|
+% dy = 0,
+lim
+%!0
+1 %
+N
+Z
+B% (x0 )
+|v(y) v(x0) rv(x0) · (y x0)|
+% dy = 0
+et
+lim
+%!0
+LN ({u = v} \ B%(x0)) !
+N %N = 1.
+Notons que LN -presque tous les points x0 2 {u = v} satisfont ces proprie ́t ́es. Pour z 2 B1, posons
+u
+%(z) := u(x0 + %z) u(x0)
+% , v%(z) := v(x0 + %z) v(x0)
+%
+de sorte que u%(z) ! ru(x0) · z et v%(z) ! rv(x0) · z dans L1(B1; RN ). En particulier, u%(z) v
+%(z) ! ru(x0) · z rv(x0) · z en mesure dans B1 et donc, pour tout " > 0, on a
+LN ({z 2 B1 : |ru(x0) · z rv(x0) · z| "})  lim sup
+%!0
+LN ({|u% v%| "/4} \ B1)
+ lim sup
+%!0
+LN ({u 6= v} \ B%(x0)) %
+N = 0.
+On en de ́duit que ru(x0) · z = rv(x0) · z pour LN -presque tout z 2 B1, soit ru(x0) = rv(x0).
+
+
+74 CHAPITRE 5. PROPRIE ́TE ́S FINES DES FONCTIONS A` VARIATION BORNE ́E
+5.2 Continuit ́e approch ́ee
+On souhaite d ́esormais aller plus loin dans la compre ́hension de la structure du gradient d’une fonction BV .
+D ́efinition 5.2.1. On de ́finit les limites approximatives supe ́rieures u+(x) et infe ́rieures u (x) en
+x 2 ⌦ par
+u+(x) := inf
+⇢
+t 2 R : lim
+%!0
+LN ({u > t} \ B%(x)) %
+N =0 ,
+u (x) := sup
+⇢
+t 2 R : lim
+%!0
+LN ({u < t} \ B%(x)) %
+N =0 .
+Remarquons que si t > u+(x), alors
+lim
+%!0
+LN ({u > t} \ B%(x)) %
+N = 0,
+et si t < u (x), on a
+lim
+%!0
+LN ({u < t} \ B%(x)) %
+N = 0.
+Lemme 5.2.2. Les fonctions u± sont Bor ́eliennes sur ⌦.
+D ́emonstration. En constatant que u = ( u)+, il su t de montrer que u+ est Bore ́lienne. On remarque d’abord que u+(x) < s si et seulement s’il existe un t 2 Q avec t < s tel que
+lim
+%!0
+LN ({u > t} \ B%(x)) %
+N = 0.
+Par cons ́equent
+{u+ < s} =
+[
+t2Q, t<s
+⇢
+x 2 ⌦ : lim
+%!0
+LN ({u > t} \ B%(x)) %
+N =0 .
+Comme l’application x 7! LN ({u > t} \ B%(x)) est Bore ́lienne et % 7! LN ({u > t} \ B%(x)) est continue, on en de ́duit que
+x 7! lim
+%!0
+LN ({u > t} \ B%(x)) %
+N = lim
+%!0,%2Q+
+LN ({u > t} \ B%(x)) %
+N
+est Bore ́lienne, ce qui montre que {u+ < s} est un Bore ́lien de ⌦, et donc que u+ est une fonction Bor ́elienne sur ⌦.
+On a toujours l’in ́egalit ́e u (x)  u+(x). Si u (x) = u+(x), on notera u ̃(x) la valeur commune et on dira que x est un point de continuit ́e approch ́e pour u. Dans ce cas, u ̃(x) satisfait pour tout " > 0,
+lim
+%!0
+LN (B%(x) \ {|u u ̃(x)| > "}) %
+N = 0.
+En particulier, si x est un point de Lebesgue de u, alors x est un point de continuite ́ approche ́ car
+LN (B%(x) \ {|u u ̃(x)| > "}) %
+N
+1 "%N
+Z
+B% (x)
+|u(y) u ̃(x)| dy ! 0.
+
+
+5.2. CONTINUITE ́ APPROCHE ́E 75
+On d ́eduit du th ́eor`eme des points de Lebesgue que u(x) = u ̃(x) pour LN -presque tout x 2 ⌦. Autrement dit, en notant
+S
+u := {x 2 ⌦ : u (x) < u+(x)}
+l’ensemble singulier de u, on a LN (Su) = 0.
+Th ́eor`eme 5.2.3. L’ensemble Su est Bore ́lien, d ́enombrablement HN 1-rectifiable et -fini pour la
+mesure HN 1. De plus, il existe une fonction Bor ́elienne ⌫u : Su ! SN 1 telle que pour L1-presque
+tout t 2 R,
+⌫
+u = ⌫{u>t} HN 1-presque partout sur Su \ @⇤{u > t}.
+D ́emonstration. Les fonctions u±  ́etant Bor ́eliennes, on obtient imm ́ediatement que Su est Bore ́lien. D’apr`es la formule de la co-aire, les ensembles {u > t} sont de p ́erim`etre fini pour L1-presque pour tout t 2 R. Par ailleurs, les ensembles {u = t} e ́tant deux `a deux disjoints, on a  ́egalement que
+LN ({u = t}) = 0 pour L1-presque tout t 2 R. Par conse ́quent, il existe un ensemble D de ́nombrable
+et dense dans R tel que {u > t} est de p ́erim`etre fini et LN ({u = t}) = 0 pour tout t 2 D.
+Si x 2 Ju, il existe alors t 2 D tel que u (x) < t < u+(x). Par de ́finition des limites approximatives sup ́erieures et inf ́erieures, on a
+lim sup
+%!0
+LN ({u > t} \ B%(x)) %
+N > 0, lim sup
+%!0
+LN ({u  t} \ B%(x)) %
+N > 0,
+d’ou` x 2 @⇤{u > t}. On en d ́eduit alors que
+S
+u⇢
+[
+t2D
+@
+⇤{u > t},
+ce qui montre que Su est d ́enombrablement HN 1-rectifiable. Par ailleurs, comme pour tout t 2 D,
+HN 1(@⇤{u > t}) = HN 1(@⇤{u > t}) = |D {u>t}|(⌦) < 1,
+on en de ́duit que Su est -fini pour la mesure HN 1. De plus, comme pour t 2 D, on a HN 1(@⇤{u >
+t} \ @⇤{u > t}) = 0, l’ensemble Z := S
+t2D(@⇤{u > t} \ @⇤{u > t}) ⇢ ⌦ est un Bore ́lien HN 1n ́egligeable tel que
+S
+u⇢
+[
+t2D
+@
+⇤{u > t} [ Z.
+Montrons que si s, t 2 D avec s < t, on a
+⌫
+{u>s}(x) = ⌫{u>t}(x) pour tout x 2 @⇤{u > s} \ @⇤{u > t}.
+Soit donc x0 2 @⇤{u > s} \ @⇤{u > t}. D’apre`s le th ́eor`eme de De Giorgi (the ́ore`mes 4.4.5 et 4.4.7) les normales approch ́ees ⌫{u>s}(x0) et ⌫{u>t}(x0) sont bien de ́finies. On de ́finit les demi-espaces
+H
+±
+s := {x 2 RN : ±⌫{u>s}(x0) · (x x0) > 0}, H±
+t := {x 2 RN : ±⌫{u>t}(x0) · (x x0) > 0}.
+Comme {u > t} ⇢ {u > s}, le th ́eor`eme 4.4.5 montre que
+LN (B1 \ Ht \ H+
+s ) = lim
+%!0
+LN (B%(x0) \ {u > t} \ H+
+s)
+%
+N  lim
+%!0
+LN (B%(x0) \ {u > s} \ H+
+s)
+%
+N =0
+et
+LN (B1 \ Hs \ Ht ) = lim
+%!0
+LN (B%(x0) \ {u > s} \ Ht ) %
+N  lim
+%!0
+LN (B%(x0) \ {u > t} \ Ht ) %
+N = 0.
+
+
+76 CHAPITRE 5. PROPRIE ́TE ́S FINES DES FONCTIONS A` VARIATION BORNE ́E
+Il vient alors que H±
+t = H±
+s et donc que ⌫{u>s}(x0) = ⌫{u>t}(x0). On a donc montr ́e que pour
+tout x 2 Su \ Z, il existe un vecteur unitaire ⌫u(x) 2 SN 1 tel que ⌫u(x) = ⌫{u>t}(x) si t 2 D et x 2 Su \ @⇤{u > t}.
+Si t 62 D et {u > t} est de p ́erim`etre fini dans ⌦, on peut trouver t1 et t2 2 D tels que t1 < t < t2. En raisonnant comme pr ́ec ́edemment, on montre que pour tout x 2 @⇤{u > t1}\@⇤{u > t}\@⇤{u > t2}, on a
+⌫
+{u>t}(x) = ⌫{u>t1}(x) = ⌫{u>t2}(x) = ⌫u(x).
+On obtient ainsi une application Bor ́elienne ⌫u : Su ! SN 1 telle que pour L1-presque tout t 2 R, ⌫
+u = ⌫{u>t} HN 1-p.p. sur Su \ @⇤{u > t}.
+Montrons `a pr ́esent que les fonctions Bore ́liennes u± sont essentiellement finies.
+Proposition 5.2.4. Pour HN 1-presque tout x 2 ⌦, on a
+1 < u (x)  u+(x) < +1.
+D ́emonstration. Etape 1. Montrons que HN 1({u = +1}) = HN 1({u+ = 1}) = 0. Comme u+ = ( u) , il su t de ve ́rifier que HN 1({u = +1}) = 0. Soient U ⇢ RN un ouvert borne ́ tel que U ⇢ ⌦ et V un ouvert tel que U ⇢ V ⇢ V ⇢ ⌦. Soit
+⇣ 2 C1
+c (RN ) une fonction telle que 0  '  1 dans RN , ' = 1 sur U et Supp(') ⇢ V . On pose
+v := 'u 2 BV (RN ) qui est donc `a support compact K, avec v± = u± sur U . Soient Et = {x 2 RN : v(x) > t} et Ft := {x 2 RN : v (x) > t}. Comme LN (Sv) = 0, on en
+de ́duit que v = v LN -p.p. dans RN si bien que Et et Ft di↵e`rent d’un ensemble LN -ne ́gligeable.
+Par cons ́equent, on a P (Ft, RN ) = P (Et, RN ) et par la formule de la co-aire,
+Z
+R
+P (Ft, RN ) dt = |Dv|(RN ) < 1,
+ce qui montre que
+lim inf
+t!+1
+P (Ft, RN ) = 0.
+Comme v est `a support compact K, il existe d > 0 tel que pour tout % > d, tout x 2 RN et tout t > 0,
+LN (B%(x) \ Ft) !
+N %N 
+LN (K) !
+N %N 
+1
+8.
+Par ailleurs, si v (x) > t, il vient par de ́finition de v (x) que
+lim
+%!0
+LN (B%(x) \ Ft) !
+N %N = lim
+%!0
+LN (B%(x) \ Et) !
+N %N = 1.
+Par continuit ́e de la fonction % 7! LN (B%(x)\Ft)
+!N %N , il existe %(x) 2 (0, d) tel que
+LN (B%(x)(x) \ Ft) = 1
+4 !N %(x)N
+et l’ine ́galite ́ isop ́erim ́etrique relative montre alors que
+C
+N |D Ft |(B%(x)(x))
+⇣ !N 4
+⌘
+N1
+N %(x)N 1.
+
+
+5.2. CONTINUITE ́ APPROCHE ́E 77
+La famille F = {B%(x)(x)}x2Ft forme un recouvrement de Ft et le the ́ore`me de recouvrement de Besicovitch montre l’existence de ⇠ sous-familles F1, . . . , F⇠ d ́enombrables et disjointes telles que
+F
+t⇢
+⇠ [
+i=1
+[
+B2Fi
+B.
+Par cons ́equent,
+HN 1
+2d (Ft) 
+⇠ X
+i=1
+X
+B2Fi
+!
+N1
+✓ diam(B) 2
+◆
+N1
+c
+⇠ X
+i=1
+X
+B2Fi
+|D Ft |(B)  c|D Ft |(RN ) = c P (Ft, RN ) ! 0
+quand t ! +1, d’o`u HN 1
+2d ({v = +1}) = 0. Pour tout " > 0 il existe donc un recouvrement
+{Ai}i2N de {v = +1} tel que diam(Ai)  2d pour tout i 2 N et
+!
+N1
+1 X
+i=0
+✓ diam(Ai) 2
+◆
+N1
+ ".
+L’in ́egalit ́e pr ́ec ́edente implique que diam(Ai)  2( "
+!N 1 ) 1
+N 1 = (") de sorte que HN 1
+(") ({v =
++1})  " et donc HN 1({v = +1}) = 0 par passage `a la limite quand " ! 0. Comme v = u dans U , on en d ́eduit que HN 1(U \ {u = +1}) = 0. En conside ́rant une suite croissante
+d’ouverts {Un}n2N telle que U n ⇢ Un+1 et S
+n Un = ⌦, on en d ́eduit par passage `a la limite quand
+n ! 1 que HN 1({u = +1}) = 0.
+Etape 2. Montrons que u+ u < 1 HN 1-p.p. dans ⌦. Comme Su est -fini pour la mesure HN 1 on peut appliquer le the ́ore`me de Fubini `a la mesure produit HN 1 ⌦ L1 sur Su ⇥ R qui implique que
+(HN 1 ⌦ L1)({(x, t) 2 Su ⇥ R : u (x) < t < u+(x)}
+=
+Z
+Su
+(u+ u ) dHN 1 =
+Z
+R
+HN 1({x 2 Su : u (x) < t < u+(x)}) dt.
+Or si u (x) < t < u+(x), alors x 2 @⇤{u > t} et donc, d’apr`es la formule de la co-aire, Z
+Su
+(u+ u ) dHN 1 
+Z
+R
+HN 1(@⇤{u > t}) dt =
+Z
+R
+|D {u>t}|(⌦) dt = |Du|(⌦) < 1,
+ce qui montre e↵ectivement que u+ u < 1 HN 1-p.p. dans ⌦.
+Etape 3. On a u+ = (u+ u ) + u < +1 HN 1-p.p. dans ⌦ et u = (u+ u ) + u+ > 1 HN 1-p.p. dans ⌦.
+On d ́ecompose `a pr ́esent la partie singulie`re Dsu en
+D
+su = Dju + Dcu,
+ou` Dju := Dsu Su est la partie saut de Du et Dcu := Dsu (⌦ \ Su) est la partie Cantor de Du. Remarquons que, du fait que LN (Su) = 0, alors Dju = Du Su.
+
+
+78 CHAPITRE 5. PROPRIE ́TE ́S FINES DES FONCTIONS A` VARIATION BORNE ́E
+Th ́eor`eme 5.2.5. La partie saut Dju de Du est absolument continue par rapport `a HN 1 et on
+a la repre ́sentation
+D
+j u = (u+ u )⌫uHN 1 Su.
+De plus la partie Cantor Dcu est  ́etrange`re par rapport `a HN 1, i.e.
+HN 1(A) < 1 =) |Dcu|(A) = 0
+pour tout Bore ́lien A ⇢ ⌦.
+D ́emonstration. Pour tout t 2 R, on notera pour simplifier Et := {u > t} = {x 2 ⌦ : u(x) > t}. On remarque d’abord que si x 2 Su, alors
+(u (x), u+(x)) ⇢ {t 2 R : x 2 @⇤Et} ⇢ [u (x), u+(x)]
+de sorte que L1({t 2 R : x 2 @⇤Et}) = u+(x) u (x). D’apre`s la formule de la co-aire dans BV et le the ́or`eme de Fubini, il vient pour tout Bore ́lien A ⇢ ⌦,
+D
+ju(A) = Du(A \ Su) =
+Z
+R
+D
+Et (A \ Su) dt
+=
+Z
+R
+✓Z
+@⇤ Et \A\Su
+⌫
+Et dHN 1
+◆
+dt
+=
+Z
+R
+✓Z
+@⇤ Et \A\Su
+⌫
+u dHN 1
+◆
+dt
+=
+Z
+A\Su
+✓Z
+R
+{t2R: x2@⇤Et} dt
+◆ ⌫
+u dHN 1
+=
+Z
+A\Su
+(u+ u )⌫u dHN 1,
+ce qui montre e↵ectivement que Dju = (u+ u )⌫uHN 1 Su.
+Si A ⇢ ⌦ est un Bor ́elien tel que HN 1(A) < 1, on a en particulier que LN (A) = 0 et donc
+|Dcu|(A) = |Du|(A \ Su) =
+Z
+R
+HN 1(@⇤Et \ A \ Su) dt.
+Or, si x 2 @⇤Et \ A \ Su, alors u ̃(x) = t. En e↵et, si t > u ̃(x) = u+(x), on aurait alors que
+lim
+%!0
+LN ({u > t} \ B%(x)) %
+N = 0,
+ce qui contredirait le fait que x 2 @⇤Et. Par cons ́equent, t  u ̃(x) et on montre de mˆeme que t = u ̃(x). Par cons ́equent,
+@
+⇤Et \ A \ Su ⇢ {u ̃ = t}
+et comme les ensembles {u ̃ = t} sont deux `a deux disjoints et la mesure HN 1 A est finie, on en de ́duit que HN 1(A \ {u ̃ = t}) > 0
+pour au plus une quantit ́e de ́nombrable de t 2 R. En particulier HN 1(@⇤Et \ A \ Su)  HN 1(A \
+{u ̃ = t}) = 0 pour L1-presque tout t 2 R, ce qui montre bien que |Dcu|(A) = 0.
+
+
+5.2. CONTINUITE ́ APPROCHE ́E 79
+La de ́nomination de partie Cantor provient de l’exemple de la fonction de Cantor-Vitali u : [0, 1] ! R. Il s’agit d’une fonction continue et croissante sur [0, 1] qui satisfait u(0) = 0, u(1) = 1
+et u0 = 0 L1-p.p. sur (0, 1). D’apr`es l’exemple 2.1.4, il s’agit d’une fonction `a variation borne ́e dans l’intervalle (0, 1) telle que |Du|((0, 1))  1, dont nous allons montrer que la de ́rive ́ee distributionnelle est purement de type Cantor. En e↵et, cette fonction  ́etant continue, on a que Su = ; de sorte que la partie saut Dju = 0. Montrons par ailleurs que la partie absolument continue Dau = 0. Pour ce faire, on conside`re la fonction auxiliaire v : [0, 1] ! R d ́efinie par
+v(x) = Du((0, x)) pour tout x 2 [0, 1].
+Comme u est croissante et born ́ee, la mesure Du est positive et finie, ce qui montre que v est une fonction croissante et born ́ee. Par ailleurs, pour toute fonction test ' 2 C1
+c ((0, 1)), le th ́eor`eme de Fubini montre que
+Z1
+0
+v(x)'0(x) dx =
+Z1
+0
+✓Z x
+0
+dDu(y)
+◆
+dx =
+Z1
+0
+✓Z 1
+y
+'
+0(x) dx
+◆
+dDu(y) =
+Z1
+0
+'(y) dDu(y).
+On en de ́duit que Dv = Du et comme u(0) = 0 = v(0), il vient que u = v. Par conse ́quent, comme u
+0(x) = 0 pour L1-presque tout x 2 (0, 1), on en d ́eduit que pour L1-presque tout x 2 (0, 1),
+0 = lim
+h!0+
+u(x + h) u(x)
+h = lim
+h!0+
+v(x + h) v(x)
+h = lim
+h!0+
+Du([x, x + h))
+h = ru(x)
+ce qui montre que Dau = 0. On en de ́duit que Du = Dcu. Par ailleurs, si Du = 0 on aurait que u est constant sur [0, 1] ce qui n’est pas possible puisque u(0) = 0 et u(1) = 1. On peut en fait montrer que Dcu est une mesure port ́ee par la mesure de Hausdor↵ Hs C ou` C ⇢ [0, 1] est l’ensemble triadique de Cantor et s = ln 2
+ln 3 est sa dimension de Hausdor↵.
+Th ́eor`eme 5.2.6 (Chain rule). Soit u 2 BV (⌦) et 2 C1(R) une fonction Lipschitzienne telle
+que (0) = 0 si LN (⌦) = 1. Alors v = u 2 BV (⌦) et
+D
+jv = ( (u+) (u ))⌫uHN 1 Su, rv = 0(u)ru, Dcv = 0(u ̃)Dcu.
+D ́emonstration. D’apr`es le th ́eor`eme d’approximation d’Anzellotti-Giaquinta, il existe une suite {uk}k2N dans C1(⌦)\BV (⌦) telle que uk ! u dans L1(⌦) et |Duk|(⌦) ! |Du|(⌦). En particulier, v
+k := uk est de classe C1 sur ⌦ et rvk = 0(uk)ruk. Comme (0) = 0 si LN (⌦) = 1, on obtient que vk et v 2 L1(⌦). En notant L > 0 la constante de Lipschitz de , on obtient que
+|rvk|  L|ruk|. Comme Z
+⌦
+|vk v| dx =
+Z
+⌦
+| (uk) (u)| dx  L
+Z
+⌦
+|uk u| dx ! 0,
+on en de ́duit que vk ! v dans L1(⌦). Par semicontinuite ́ infe ́rieure de la variation totale, il vient
+T V (v, ⌦)  lim inf
+k!1
+T V (vk, ⌦) = lim inf
+k!1
+Z
+⌦
+|rvk|  L lim inf
+k!1
+Z
+⌦
+|ruk| dx = L|Du|(⌦),
+ce qui montre, du fait que T V (v, ⌦) < 1, que v 2 BV (⌦).
+Comme toute fonction 2 C1(R) peut s’e ́crire comme la di↵ ́erence de deux fonctions Lipschitz
+1, 2 2 C1(R) avec 0
+i 1 pour i = 1, 2 1, on ne restreint pas la g ́en ́eralite ́ en supposant de`s le
+d ́epart que 2 C1(R) satisfait 0 1. Comme est continue et strictement croissante, on a que
+v+ = (u+), v = (u ), Sv = Su, ⌫u = ⌫v.
+1. Il su t de poser 2(t) := (1 + k 0k1)t et 1 := + 2
+
+
+80 CHAPITRE 5. PROPRIE ́TE ́S FINES DES FONCTIONS A` VARIATION BORNE ́E
+Par cons ́equent,
+D
+j v = Dv Sv = (v+ v )⌫vHN 1 Sv = ( (u+) (u ))⌫u HN 1 Su,
+ce qui d ́emontre la repr ́esentation de la partie saut. Soit A ⇢ ⌦ un Bor ́elien, d’apr`es la formule de la co-aire dans BV , on a
+Dv(A \ Sv) = Dv(A \ Su) =
+Z
+R
+D
+{v>t}(A \ Su) dt
+=
+Z
+R
+D
+{u> 1(t)}(A \ Su) dt
+=
+Z
+R
+D
+{u>s}(A \ Su) 0(s) ds
+=
+Z
+R
+Z
+@⇤ {u>s}\A\Su
+0(s)⌫{u>s}(x) dHN 1(x) ds.
+Nous avons d ́ej`a vu que si x 2 @⇤{u > s} \ Su, alors u ̃(x) = s, par cons ́equent
+Dv(A \ Sv) =
+Z
+R
+Z
+@⇤ {u>s}\A\Su
+0(u ̃(x))⌫{u>s}(x) dHN 1(x) ds
+=
+Z
+R
+Z
+A\Su
+0(u ̃(x)) dD Es (x) ds
+=
+Z
+A\Su
+0(u ̃) dDu,
+ou` nous avons de nouveau applique ́ la formule de la co-aire dans la dernie`re e ́galite ́. Comme Dv (⌦ \ Sv) = Dav + Dcv et Du (⌦ \ Su) = Dau + Dcu, il vient
+D
+av + Dcv = 0(u ̃)Dau + 0(u ̃)Dcu.
+Enfin, comme les mesures Dav 0(u ̃)Dau et Dcv 0(u ̃)Dcu sont  ́etrang`eres (la premie`re e ́tant absolument continue par rapport `a LN et la deuxie`me e ́tant singuli`ere par rapport `a LN ), on en d ́eduit finalement que Dav = 0(u ̃)Dau et Dcv = 0(u ̃)Dcu.
+
+
+Chapitre 6
+Fonctions spe ́ciales a` variation
+borne ́e
+6.1 Definition et caract ́erisation
+D ́efinition 6.1.1. L’espace SBV (⌦) des fonctions sp ́eciales `a variation borne ́e dans un ouvert
+⌦ ⇢ RN est de ́fini comme  ́etant l’ensemble des fonctions u 2 BV (⌦) telles que Dcu = 0.
+Autrement dit, si u 2 SBV (⌦), la partie singulie`re du gradient de u est purement de type saut et
+Du = ruLN + (u+ u )⌫uHN 1 Su.
+Il s’agit d’un sous-espace strict de BV (⌦).
+Exemple 6.1.2. (i) W 1,1(⌦) ⇢ SBV (⌦) car si u 2 W 1,1(⌦), Du = ruLN et donc, en particulier D
+cu = 0. (ii) Si E ⇢ ⌦ est un ensemble mesurable tel que LN (E) + P (E, ⌦) < 1, alors E 2 SBV (⌦) car D E = ⌫EHN 1 @⇤E. Par conse ́quent, comme @⇤E = S E , on en d ́eduit que D E = D
+E S E =: Dj
+E et donc Dc
+E = 0. (iii) Crack tip. En dimension N = 2, la fonction de ́finie en coordonne ́es polaire par
+u(r, ✓) := pr sin
+✓✓
+2
+◆
+, 0  r < 1, ✓ 2 ( ⇡, ⇡)
+appartient `a SBV (B1) avec Su = ( 1, 0) ⇥ {0}. (iv) En dimension N = 1, la fonction de Cantor-Vitali u (qui est une fonction dans BV (0, 1) puisque croissante) n’appartient pas `a SBV (0, 1) car on a d ́ej`a vu que Du = Dcu 6= 0.
+Nous allons commencer par donner une caracte ́risation de cet espace. Pour ce faire, pour toute fonction Lipschtzienne 2 C1(R) on introduit la notation
+k k⇤ := sup{| (t) (s)| : s, t 2 R}.
+De plus, on v ́erifie aise ́ment que pour tout s, t 2 R avec s 6= t,
+sup
+2X
+| (s) (t)|
+k k⇤
+= 1,
+ou` X := { 2 C1(R) : 0 2 Cc(R), non constante}.
+81
+
+
+82 CHAPITRE 6. FONCTIONS SPE ́CIALES A` VARIATION BORNE ́E
+Proposition 6.1.3 (Caract ́erisation de SBV ). Soit ⌦ ⇢ RN un ouvert born ́e et u 2 BV (⌦).
+Supposons qu’il existe une fonction a 2 L1(⌦; RN ) et une mesure positive finie μ sur ⌦ telle que
+pour toute fonction Lipschitzienne 2 C1(R)
+|D (u) 0(u)aLN |  k k⇤μ. (6.1.1)
+Alors u 2 SBV (⌦), a = ru LN -p.p. dans ⌦ et μ HN 1 Su.
+R ́eciproquement si u 2 SBV (⌦) et HN 1(Su) < 1, alors (6.1.1) est satisfait avec a = ru et
+μ = HN 1 Su.
+D ́emonstration. On montre d’abord la condition ne ́cessaire. Si u 2 SBV (⌦) et 2 C1(R) est une fonction Lipschitz, le th ́eor`eme 5.2.6 montre que (u) 2 SBV (⌦) avec
+D (u) = 0(u)ruLN + ( (u+) (u ))⌫uHN 1 Su
+et donc
+|D (u) 0(u)ruLN |  k k⇤HN 1 Su,
+ce qui montre bien (6.1.1) avec a = ru et μ = HN 1 Su.
+Pour la condition su sante, on conside`re x0 2 ⌦ un point de Lebesgue de a et u, qui est aussi un point de di↵ ́erentiabilit ́e approch ́e de u et tel que la limite
+lim
+%!0
+μ(B%(x0)) %
+N
+existe et est finie. D’apr`es le the ́ore`me de di↵ ́erentiation de Besicovitch et le the ́ore`me de CalderonZygmund, LN -presque tous les points x0 2 ⌦ satisfont ces proprie ́t ́es. On pose u0(y) = ru(x0) · y et on conside`re une fonction 2 C1
+c (R) telle que (t) = t si
+t 2 u0(B1) et une fonction test ' 2 C1
+c (B1). Pour tout % > 0 tel que B%(x0) ⇢ ⌦, on pose alors
+%(t) :=
+✓ t u(x0) %
+◆
+, '%(x) = '
+✓ x x0 %
+◆ .
+On note tout d’abord que
+k %k⇤μ(B%(x0)) %
+N 1 = % k k⇤μ(B%(x0))
+%
+N ! 0.
+En changeant de variable, on obtient d’une part Z
+⌦
+%(u)r'% dx = 1
+%
+Z
+⌦
+✓ u(x) u(x0) %
+◆
+r'
+✓ x x0 %
+◆
+dx
+= %N 1
+Z
+B1
+(u%(y))r'(y) dy, (6.1.2)
+ou` u%(y) = [u(x0 + %y) u(x0)]/%. D’autre part, Z
+⌦
+%(u)r'% dx =
+Z
+⌦
+'
+% dD %(u)
+=
+Z
+⌦
+'
+% d[D %(u) a 0
+%(u)LN ]
+Z
+⌦
+'
+%a 0
+%(u) dx
+= o(%N 1) %N 1
+Z
+B1
+'(y)a(x0 + %y) 0(u%(y)) dy (6.1.3)
+
+
+6.1. DEFINITION ET CARACTE ́RISATION 83
+car Z
+⌦
+'
+% d[D %(u) a 0
+%(u)LN ]  k'k1k %k⇤μ(B%(x0)) = o(%N 1).
+En regroupant (6.1.2) et (6.1.3), il vient Z
+B1
+(u%(y))r'(y) dy = o(1)
+Z
+B1
+'(y)a(x0 + %y) 0(u%(y)) dy.
+D’apr`es le choix du point x0, on obtient par passage `a la limite quand % ! 0 que Z
+B1
+(u0(y))r'(y) dy =
+Z
+B1
+'(y)a(x0) 0(u0(y)) dy,
+puis, suite `a une inte ́gration par partie dans le membre de gauche de la pre ́c ́edente in ́egalit ́e r[ (u0(y))] = a(x0) 0(u0(y)) pour LN -presque tout y 2 B1. Comme est l’identit ́e sur u0(B1), il vient que ru(x0) = a(x0). D’apr`es le th ́eor`eme 5.2.6, Da (u) = 0(u)ruLN et donc pour toute fonction Lipschitz 2 C1(R), on a |Ds (u)|  k k⇤μ. (6.1.4)
+En particulier, une nouvelle utilisation du th ́eor`eme 5.2.6 montre que
+| 0(u ̃)Dcu| = |Dc (u)| = |Ds (u)| (⌦ \ Su)  k k⇤μ (⌦ \ Su).
+En choisissant 1
+" (t) = sin(t/") et 2
+" (t) = cos(t/"), on obtient en utilisant que | cos t| + | sin t| 1
+|Dcu|  4"μ (⌦ \ Su),
+puis que |Dcu| = 0 en faisant tendre " ! 0. On a donc bien montr ́e que u 2 SBV (⌦). D’apr`es (6.1.4) et le th ́eor`eme 5.2.6,
+| (u+) (u )|HN 1 Su = |Ds (u)| Su  k k⇤μ Su.
+Soit X := { 2 C1(R) : 0 2 Cc(R), non constante} qui est un sous-espace se ́parable de
+W 1,1(R) car la d ́erive ́ d’une fonction 2 X appartient `a Cc(R) qui est lui mˆeme s ́eparable. On consid`ere alors un sous-ensemble D de ́nombrable dense dans X. D’apr`es le the ́ore`me de di↵ ́erentiation de Besicovitch et le fait que Su est rectifiable (voir the ́ore`me 3.4.3), pour tout 2 D, il existe un ensemble Z ⇢ Su Bore ́lien HN 1-ne ́gligeable tel que
+| (u+(x0)) (u (x0))|  k k⇤ lim sup
+%!0
+μ(B%(x0)) !
+N 1%N 1 pour tout x0 2 Su \ Z .
+En posant Z = S
+2D Z qui reste un Bore ́lien HN 1-n ́egligeable, l’in ́egalite ́ pr ́ec ́edente reste vraie pour tout x0 2 Su \ Z et pour tout 2 D. Comme
+1 = sup
+2X
+| (u+(x0)) (u (x0))|
+k k⇤
+= sup
+2D
+| (u+(x0)) (u (x0))|
+k k⇤
+,
+on en de ́duit que
+lim sup
+%!0
+μ(B%(x0)) !
+N 1%N 1 1 pour tout x0 2 Su \ Z.
+La Proposition 3.2.7 montre alors que μ μ (Su \ Z) HN 1 (Su \ Z) = HN 1 Su, ce qui conclut la preuve du re ́sultat.
+
+
+84 CHAPITRE 6. FONCTIONS SPE ́CIALES A` VARIATION BORNE ́E
+Nous allons nous int ́eresser `a des proprie ́t ́es de fermeture de cet espace. Notons que si {uk}k2N est une suite de fonctions dans SBV (⌦) telles que supk kukkBV (⌦) < 1, alors, quitte `a extraire une
+sous-suite uk ! u dans L1(⌦) avec u 2 BV (⌦), mais en g ́en ́eral, u 62 SBV (⌦). Par exemple, en dimension N = 1, la fonction de Cantor-Vitali est la limite (uniforme) dans (0, 1) d’une suite {uk}k2N de fonctions Lipschitziennes croissantes sur (0, 1). En particulier uk 2 SBV (⌦) et kukkBV (⌦)  uk(1) uk(0) = 1, mais u 62 SBV (0, 1) car Du = Dcu 6= 0.
+Nous allons montrer un re ́sultat de compacit ́e “faible” dans l’espace SBV .
+Th ́eor`eme 6.1.4 (Ambrosio). Soit ⌦ ⇢ RN un ouvert born ́e et {uk}k2N une suite dans SBV (⌦)
+telle que
+sup
+k2N
+kukk1 + krukk2 + HN 1(Suk ) < 1.
+Alors, il existe une sous-suite {ukj }j2N et une fonction u 2 SBV (⌦) telles que
+8><
+>:
+u
+kj * u faible* dans L1(⌦),
+rukj * ru faiblement dans L2(⌦; RN ),
+HN 1(Su)  lim infj HN 1(Sukj ).
+D ́emonstration. D’apr`es les d ́efinitions des limites approximatives, on a clairement que |u±
+k| 
+kukk1 de sorte que
+|Duk|(⌦) =
+Z
+⌦
+|ruk| dx +
+Z
+Suk
+|u+
+k uk | dHN 1 
+q
+LN (⌦)krukk2 + 2kukk1HN 1(Suk )  C.
+D’apr`es les hypoth`eses (on rappelle que ⌦ est borne ́), la suite {uk}k2N est born ́ee dans BV (⌦) \ L
+1(⌦), la suite {ruk}k2N est born ́ee dans L2(⌦; RN ) et la suite de mesures {HN 1 Suk }k2N est born ́ee dans M(⌦). On peut donc extraire une sous-suite, toujours not ́ee {uk}k2N pour simplifier, telle que 8><
+>:
+u
+k * u faible* dans L1(⌦), ruk * a faiblement dans L2(⌦; RN ), HN 1 Suk * μ faible* dans M(⌦),
+ou` u 2 BV (⌦), a 2 L2(⌦; RN ) et μ 2 M(⌦) est une mesure positive. De plus, par injection
+compacte de Rellich on a  ́egalement que uk ! u fortement dans L1
+loc(⌦). En utilisant de nouveau la borne L1(⌦) sur {uk}k2N on en d ́eduit que uk ! u fortement dans Lp(⌦) pour tout 1  p < 1. Soit 2 C1(R) une fonction Lipschitzienne. En particulier, D (uk) * D (u) faible* dans
+M(⌦; RN ). Comme 0(uk) ! 0(u) fortement dans L2(⌦) et 0 est une fonction borne ́e, on en
+de ́duit que 0(uk)ruk * 0(u)a faiblement dans L2(⌦; RN ). Par ailleurs, comme en vertu du th ́eor`eme 5.2.6, on a
+D (uk) = 0(uk)rukLN + ( (u+
+k ) (uk ))⌫uk HN 1 Suk ,
+il vient
+|D (uk) 0(uk)rukLN |  k k⇤HN 1 Suk ,
+puis par semicontinuit ́e inf ́erieure de la variation totale
+|D (u) 0(u)aLN |  k k⇤μ.
+Par application du th ́eor`eme 6.1.3, on en de ́duit que a = ru, HN 1 Su  μ et, en particulier,
+HN 1(Su)  μ(⌦)  lim inf
+k!1
+HN 1(Suk ),
+ce qui conclut la preuve du th ́eor`eme de compacite ́.
+
+
+6.2. LE PROBLE`ME DE MUMFORD-SHAH 85
+6.2 Le probl`eme de Mumford-Shah
+On consid`ere une image donn ́ee par un niveau de gris g : ⌦ ! [0, 1], ⌦ ⇢ R2 est un ouvert born ́e, que l’on cherche `a segmenter, i.e., trouver une bonne approximation des contours. Un proble`me variationnel propos ́e par Mumford-Shah consiste `a d ́eterminer un ensemble K ⇢ ⌦ (correspondant aux contours) de longueur minimale et une fonction u : ⌦ \ K ! R “proche” de g et “re ́gulie`re” en dehors de K. On consid`ere alors le proble`me de minimisation suivant :
+inf
+(Z
+⌦\K
+|ru|2 dx + H1(K) +
+Z
+⌦
+|u g|2 dx
+)
+,
+ou` l’infimum est pris parmi tous les ensembles ferm ́es K ⇢ ⌦ et toutes les fonctions u 2 H1(⌦ \ K). Une formulation faible, propos ́ee par Ambrosio et De Giorgi, consiste `a assimiler K `a l’ensemble des sauts de u. Le probl`eme peut alors se reformuler dans le cadre des fonctions `a variation born ́ee
+↵ := inf
+u2BV (⌦)
+⇢Z
+⌦
+|ru|2 dx + H1(Su) +
+Z
+⌦
+|u g|2 dx .
+Il s’ave`re que l’espace BV (⌦) est trop grand car on peut montrer, par exemple en dimension 1, que toute fonction g 2 L1(⌦) peut ˆetre approch ́ee dans L2(⌦) par une suite de fonctions {uk}k2N dans BV (⌦) telles que ruk = 0 et HN 1(Suk ) = 0 pour tout k 2 N, de sorte que ↵ = 0.
+C’est pr ́ecis ́ement pour cette raison que l’espace SBV (⌦) a  ́ete ́ introduit par Ambrosio et De Giorgi. On d ́efinit alors la fonctionnelle de Mumford-Shah
+F (u) :=
+Z
+⌦
+|ru|2 dx + HN 1(Su) +
+Z
+⌦
+|u g|2 dx, u 2 SBV (⌦)
+ou` ⌦ ⇢ RN est un ouvert borne ́ et g 2 L1(⌦). Nous allons montrer qu’il existe une fonction u 2 SBV (⌦) telle que F (u)  F (v) pour tout v 2 SBV (⌦).
+Notons I := inf{F (v) : v 2 SBV (⌦)},
+de sorte que 0  I  F (0) 
+R
+⌦ |g|2 dx. On consid`ere une suite minimisante {uk}k2N dans SBV (⌦)
+telle que F (uk) ! I. On note M := kgk1 et on pose (t) = min(max(t, M ), M ) qui est une fonction 1-Lipschitz, croissante et borne ́. On re ́gularise ensuite en posant " := ⇤ ⌘" qui est une fonction croissante, born ́ee, de classe C1 et 1-Lipschtzienne. Comme " ! ponctuellement sur R, on en d ́eduit que "(uk) ! (uk) LN -p.p. dans ⌦, puis que "(uk) ! (uk) dans L1(⌦) quand " ! 0, par convergence domin ́ee. De plus, |D "(uk)|(⌦)  |Duk|(⌦), ce qui montre que la suite {D "(uk)}">0 est borne ́e dans M(⌦; RN ) et donc que D "(uk) * D (uk) faible* dans M(⌦; RN ). Il vient alors que vk := (uk) 2 BV (⌦) puis, par semicontinuite ́ inf ́erieure de la variation totale, on a aussi que |Dvk|  |Duk|. La fonction  ́etant 1-Lipschitz, on a que Svk ⇢ Suk . Par conse ́quent,
+|Dcvk| = |Dsvk| (⌦ \ Svk )  |Dsuk| (⌦ \ Svk ) = |Dj uk| (Suk \ Svk ).
+Comme d’apr`es le th ́eor`eme 5.2.3, l’ensemble Suk \ Svk est -fini par rapport `a la mesure HN 1, le th ́eor`eme 5.2.5 montre que |Dcvk| = 0 et donc que vk 2 SBV (⌦). Par construction kvkk1  M . De plus, par la propri ́et ́e de localit ́e du gradient approche ́, on a
+(
+rvk = ruk LN -p.p. sur {uk = vk}, rvk = 0 LN -p.p. sur {vk = M } [ {vk = M },
+
+
+86 CHAPITRE 6. FONCTIONS SPE ́CIALES A` VARIATION BORNE ́E
+de sorte que |rvk|  |ruk|. Par conse ́quent, en utilisant e ́galement le fait que est 1-Lipschitz, on en de ́duit que
+I  F (vk)  F (uk) ! I,
+et donc {vk}k2N est une nouvelle suite minimisante. Comme I < 1, on en de ́duit que
+sup
+k2N
+kvkk1 + krvkk2 + HN 1(Svk ) < 1
+et le the ́or`eme de compacit ́e d’Ambrosio montre l’existence d’une sous-suite {vkj }j2N et une fonction u 2 SBV (⌦) telles que
+8><
+>:
+v
+kj * u faible* dans L1(⌦), rvkj * ru faiblement dans L2(⌦; RN ), HN 1(Su)  lim infj HN 1(Svkj ).
+Par cons ́equent I  F (u)  lim inf
+j!1
+F (vkj ) = I,
+ce qui montre e↵ectivement que F (u) = I et donc que u est une solution du proble`me de minimisation de Mumford-Shah.

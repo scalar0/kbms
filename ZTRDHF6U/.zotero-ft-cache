@@ -1,0 +1,1286 @@
+Principes des communications sans fils
+ST2 SCOC
+
+
+EQUIPE ENSEIGNANTS
+Cours magistraux
+Jacques ANTOINE Modulations, codage, bilans de liaison
+Andrea COZZA Antennes, propagation
+Salah-Eddine ELAYOUBI Trafic
+Travaux dirigés
+François JOUVIE Mohammed SERHIR
+Sahar HOTEIT Armelle WAUTIER
+Dominique PICARD
+
+
+COMMUNICATIONS SANS FILS
+station
+de base stations de base
+centre de contrôle/routage
+
+
+COMMUNICATIONS SANS FILS
+station
+de base stations de base
+TRAFIC
+• Dimensionnement de l’accès aux ressources • Modèles de trafic (lois d’Erlang)
+
+
+COMMUNICATIONS SANS FILS
+station
+de base stations de base
+MODULATIONS & PROPAGATION
+• efficacité spectrale (débit information / bande passante) • qualité du service (taux d’erreur binaire) • modélisation du canal & bilans de liaison (puissances de signal & bruit)
+
+
+COMMUNICATIONS SANS FILS
+station
+de base stations de base
+ANTENNES • rayonnement & directivité • diversité d’antenne et fading
+
+
+OBJECTIFS DU COURS
+7
+o Introduire les principes de base des télécommunications
+o Interaction entre trois disciplines
+• antennes & propagation (dimension physique)
+• modulations et codage (signal)
+• trafic (accès)
+o Approche transversale en vue de l’EI
+• applications concrètes
+• multiples scénarios
+
+
+DÉROULÉ DU COURS
+MODULATIONS
+& PROPAG.
+ANTENNES
+TRAFIC
+C1. INTRO, RAYONNEMENT
+C2. DIRECTIVITÉ
+C3. PROPAGATION
+TD1. BILAN DE LIAISON
+C4. RÉSEAUX D’ANTENNES
+TD2. ANTENNES DIRECTIVES
+C5. MODULATIONS
+TD3. BILANS DE LIAISON & MODULATIONS
+C6. MILIEUX COMPLEXES
+TD4. RÉSEAUX D’ANTENNES
+C7. TRAFIC
+TD5. FADING & DIVERSITÉ D’ANTENNE
+C8. TRAFIC
+TD6. TRAFIC
+Examen final unique
++ QCM mi parcours
+
+
+POUR ALLER PLUS LOIN
+X. Lagrange, et al., Réseaux GSM-DCS, éditions Hermes
+J.D. Kraus et al., Antennas for all applications, McGraw-Hill, 2001
+K.L. Du et al., Wireless Communication Systems: From RF
+Subsystems to 4G Enabling Technologies, Cambridge University
+Press, 2010
+S. R. Saunder et al., Antennas and Propagation for Wireless
+Communication Systems, Wiley & Sons, 2007
+9
+
+
+POURQUOI S’INTERESSER AUX ANTENNES?
+10
+• “I do not think that the wireless waves I have discovered will have any
+practical application”. H. Hertz, 1890.
+• G. Marconi dépose un brevet portant sur les communications sans fil en 1896.
+
+
+LES ANTENNES COMME TRANSDUCTEURS
+Une antenne est un dispositif permettant de convertir de l’énergie électrique/électromagnétique appliquée à son entrée en une onde électromagnétique se propageant librement dans l’espace, sans besoin de structures de guidage (câbles), et vice-versa.
+11
+
+
+LES ANTENNES COMME TRANSDUCTEURS
+I
+V
+L’antenne impose des conditions aux limites à la fin de la ligne, décrites par son impédance d’entrée Zin
+volume contenant les sources de courants
+Le champ rayonné à l’extérieur du volume des sources peut se décrire simplement grâce au diagramme de rayonnement de l’antenne
+Zin
+ligne de transmission
+générateur de signal
+rayonnement EM
+antenne
+12
+
+
+DANS LES COMMUNICATIONS SANS FILS...
+Télédiffusion Communications satellitaires
+Réseaux cellulaires
+LAN sans fil (wireless)
+13
+
+
+... MAIS AUSSI DANS LA TÉLÉDÉTECTION , ...
+14
+
+
+... ET LA MÉTROLOGIE
+15
+
+
+STRUCTURE DES COURS D’ANTENNES
+o Cours magistraux (4)
+• rayonnement par une antenne (concepts & définitions)
+• applications en espace libre (directivité)
+• milieux complexes (fading)
+o Travaux dirigés (3) : analyses & applications
+• rayonnement directif
+• antenne secteur pour la couverture d’une cellule
+• antennes & propagation multi-trajet
+16
+
+
+Rayonnement par une antenne
+• approximation de champ lointain • diagramme de rayonnement • modèles de réception
+
+
+NOTATIONS
+ζ impédance d’onde λ longueur d’onde
+ε permittivité diélectrique S vecteur de Poynting
+μ permeabilité magnétique U densité de puissance
+k nombre d’onde, constante de propagation D directivité d’une antenne
+η rendement de rayonnement G gain d’une antenne
+ηa rendement d’ouverture he hauteur effective
+θ angle d’élévation Ae aire effective
+φ angle d’azimuth α, α∘ angle -3 dB en radian/degrés
+18
+
+
+COORDONNÉES SPHÉRIQUES
+Les vecteurs unitaires
+dépendent de la position
+dans ce cas, contrairement
+au cas Cartesien
+• θ: angle d’élévation (par rapport à l’axe z, ou axe polaire)
+• φ : angle d’azimuth (par rapport à l’axe x)
+• Le plan xy est aussi appelé plan azimuthal
+• NB: les vecteurs θመ et φො ne sont pas définis sur l’axe z
+ˆ
+ˆ
+rˆ
+19
+
+
+NOTATION COMPLEXE (PHASORS)
+• Télécommunications utilisant souvent des signaux à bande étroite.
+• Analyse basée sur leur réponse à régime harmonique
+• Réponse linéaire, notation complexe : uniquement amplitude et phase
+• Exemple: champ électrique (vectoriel)
+L’analyse en régime harmonique implique que ∂ / ∂t → jω
+champ électrique en notation complexe
+vecteur (unitaire) de
+polarisation module
+amplitude complexe
+phase
+20
+E t = 2 pෝ E cos ωt + ∠E = 2 Re pෝ E ej∠Eejωt
+E = pෝE = pෝ E ej∠E
+
+
+EQUATIONS DE MAXWELL-HEAVISIDE
+21
+∇ × E = −jωμ H
+∇ × H = jωε E + J
+∇⋅E=ρ
+ε
+∇⋅H=0
+• Maxwell-Faraday
+• Maxwell-Ampère
+• Théorème de Gauss
+• incontournables dans l ’étude du rayonnement ...
+• ... mais non nécessaires pour dimensionner une antenne
+• nous aurons néanmoins besoin d’introduire l’intégrale de
+rayonnement afin de comprendre comment :
+ justifier l’approximation de champ lointain
+ modéliser le rayonnement d’une antenne
+ décrire la propagation d’une onde en espace libre
+
+
+y
+z
+x
+V
+volume des sources
+Grâce aux équations de
+Maxwell, on peut prédire le
+champ électro-magnétique
+(EM) rayonné par une
+distribution de (densité de)
+courant J r .
+L’intégrale de rayonnement
+relie le champ EM rayonné au courant par le biais de la fonction de
+dyadique de Green G r − r′ , qui agit comme une fonction de
+transfert entre chaque source infinitésimale J(r′)dr′ et le champ
+E r dr′ qu’elle génère.
+observateur
+RAYONNEMENT PAR UNE SOURCE
+22
+E r = −jωμ න
+V
+dr′ G r − r′ ⋅ J(r′)
+r
+r′
+r − r′
+J(r)
+
+
+θ
+φ
+Eθ
+Hφ
+Er
+x
+y
+z
+Il
+• dipôle Hertzien, ou élémentaire, comme exemple de source
+• dimensions infinitesimales, l ≪ λ
+• courant I constant sur l
+• orienté le long de z, donc polarisé
+RAYONNEMENT PAR UN DIPOLE HERTZIEN
+23
+Er = −Il jωμ 2j
+kr + 2
+kr 2 cos θ e−jkr
+4πr
+Eθ = Il jωμ 1 − j
+kr − 1
+kr 2 sin θ e−jkr
+4πr
+Hφ = Il jωμ
+ζ 1− j
+kr sin θ e−jkr
+4πr
+
+
+RAYONNEMENT PAR UN DIPOLE HERTZIEN
+kr = 1 kr = 2 kr = 3 kr = 5 kr = 100
+distance depuis le dipôle
+• la distribution angulaire du module du champ électrique évolue en s’éloignant du dipôle • mais ralentie significativement pour r > λ • il s’agit d’un transitoire spatial • à grande distance, la distance agit uniquement comme un facteur d’atténuation
+24
+
+
+• champs E et H orthogonaux et transversaux à la direction de propagation (onde TEM)
+• leurs amplitudes sont reliées par l’impédance d’onde du milieu ζ
+ζ = μ/ε
+• ces caractéristiques sont similaires à celles d’une onde plane, où
+E = ζ H × rƸ
+Pour kr ≫ 1 (champ lointain)
+H
+E
+x
+y
+z
+RAYONNEMENT PAR UN DIPOLE HERTZIEN
+25
+rƸ
+θመ
+φො
+θ const.
+φ const.
+Er ≃ 0 Eθ ≃ Iljωμ sin θ e−jkr
+4πr Hφ ≃ Il jk sin θ e−jkr
+4πr
+
+
+RAYONNEMENT PAR UN DIPOLE HERTZIEN
+Le champ EM peut être factorisé en deux fonctions
+26
+E r ≃ g r F θ, φ
+• g r , ou fonction scalaire de Green, décrit l’atténuation du champ avec
+la distance
+et correspond à une onde sphérique.
+• F(θ, φ) décrit la distribution angulaire du champ. Pour le dipôle Hertzien
+g r = e−jkr
+4πr
+F θ, φ = Il jωμ θ෡ sin θ
+
+
+ONDE SPHÉRIQUE
+• Une onde sphérique se propage de façon radiale depuis sont centre
+Une onde sphérique, et en générale tout front d’onde dans un milieu homogène sans pertes, peut être approché localement par une onde plane (plan tangent)
+27
+• son front d’onde est identifié par tous les points ayant le même déphasage kr
+• le term kr correspond au retard de propagation τ = r/c, avec kr = ωτ
+• le terme 1/4πr représente l’atténuation de propagation
+E r = Eo
+e−jkr
+4πr
+E H
+k = krƸ
+
+
+ONDE (LOCALEMENT) PLANE
+Fronts d’onde avec déphasage grandissant
+• fronts d’onde identifiés par les points ayant la même phase
+• plans orthogonaux à la direction de propagation
+• champs E et H contenus dans ces plans
+Une onde plane a une extension transversale infinie, et donc une énergie aussi infinie. Elles n’existent donc pas en pratique. Mais elles sont très utiles en tant qu’approximation locale de fronts d’ondes réels.
+k
+H
+E
+28
+Le front d’onde planaire approximant le front sphérique s’écrit
+pour un direction de propagation k = k rƸ
+k ⋅ r = constant
+E r = Eo e−j k⋅r
+
+
+RAYONNEMENT EN CHAMP LOINTAIN
+29
+• approximation planaire importante dans les modèles de
+propagation utilisés en télécommunications
+• récepteur typiquement à grande distance de l’émetteur
+• attention au caractère local de l’approximation onde plane
+
+
+RAYONNEMENT EN CHAMP LOINTAIN
+• l’approx. de Fraunhofer est intuitive : pour un observateur à une
+distance grande par rapport à la largeur de la source, les vecteurs
+r et r − r′ sont presque parallèles.
+• leurs modules diffèrent par la projection du vecteur r′ et le
+vecteur unitaire rƸ.
+rˆ
+volume des sources
+Dans le cas où
+il est possible d’utiliser l’approximation paraxiale (Fraunhofer)
+30
+• kr ≫ 1 • r ≫ max r′
+r′ ⋅ rƸ
+r
+r′
+r − r′
+r − r′ = r2 + r′2 − 2 r ⋅ r′ ≃ r − r′ ⋅ rƸ
+
+
+dépendant uniquement de la distance de l’observateur
+Cette approx. est acceptable uniquement à très grande distance. Une distance minimale rff = 2W2/λ est souvent considérée comme suffisante,
+mais elle correspond à une erreur de phase de π/8: non négligeable!
+RAYONNEMENT EN CHAMP LOINTAIN
+31
+g r − r′ = e−jk r−r′
+4π r − r′ ≃ e−jkr
+4πr ejkr′⋅rƸ
+dépendant uniquement de la direction d’observation
+E r ≃ jωμ g r rƸ × rƸ × න
+V
+dr′ J r′ ejkr′⋅rƸ
+L’onde sphérique observée en r et générée par une source en r′ peut alors se simplifier
+
+
+RAYONNEMENT EN CHAMP LOINTAIN
+De la même façon que le dipôle Hertzien, le rayonnement en champ lointain de toute source peut se décrire par un modèle simple, caractérisé par
+• la factorisation en fonctions dépendant de la direction et de la distance
+• une distribution angulaire définie par la distrib. de courant de la source
+• une propagation en onde sphérique et localement plane
+• un champ EM transversal à la direction de propagation (opérateur rƸ × rƸ ×)
+E r = g(r)F rƸ
+F rƸ = jωμ rƸ × rƸ × න
+V
+dr′ J r′ ejkr′⋅ rƸ
+E r = ζH r × rƸ
+32
+rƸ
+v
+−rƸ × rƸ × v = v⊥ ⇓
+v⊥ = v − rƸ (v ⋅ rƸ)
+
+
+0
+zone de Fraunhofer ou de champ lointain
+(propagation spherique)
+zone de Rayleigh
+(maintien de la distribution de champ sur la source)
+zone de Fresnel
+(transition spatiale entre la distribution de champ sur la source vers le champ lointain)
+W
+ZONES DE RAYONNEMENT
+La distance rff = 2 W2/λ n’est raisonnable que pour W ≫ λ
+33
+rff = 2W2
+λ
+W2
+2λ
+∼λ
+W (radian)
+
+
+DIRECTIVITÉ D’UNE ANTENNE
+34
+U r = D rƸ Uiso r ⇒ E r 2 = ζ Pi
+4 πr2 ηD(rƸ )
+• La densité de puissance (active) rayonnée par une antenne s’écrit
+• qui est comparée à celle d’une source isotrope
+• On dit alors qu’une antenne est directive si elle rayonne plus fortement d’une source isotrope, mesurée par la directivité
+• Cette définition est utile pour calculer le champ rayonné par une antenne de directivité D(rƸ), rendement η, alimentée par une puissance Pi
+U r = Re { E × H∗ ⋅ rƸ} = E(r) 2
+ζ [W/m2]
+D rƸ = D(θ, φ) = U r
+Uiso
+Uiso r = Prad
+4πr2 où Prad = ර dS U(r)
+
+
+DIRECTIVITÉ D’UNE ANTENNE
+• la directivité couvre 4π stéradians et demande une représentation polaire 3D
+• il est habituel de considérer des coupes orthogonales afin d’en simplifier la visualisation
+• il est alors possible de définir plusieurs paramètres décrivant les caractéristiques de rayonnement d’une antenne
+35
+
+
+DIRECTIVITÉ D’UNE ANTENNE
+lobe principal main lobe
+lobes sécondaires
+side lobes
+niveau des lobes sécondaires
+side-lobe level (SLL)
+minima ou zéros
+nulls
+largeur du lobe principal à -3 dB
+half-power beamwidth (HPBW)
+largeur entre minima
+first-null beamwidth (FNBW)
+lobe arrière
+back lobe
+36
+
+
+• lobe principal contenant pratiquement toute la puissance rayonnée
+• approx.: elle est uniformément distribuée dans le lobe principal (aire bleue)
+• la définition de directivité donne alors
+DIRECTIVITÉ D’UNE ANTENNE
+37
+αH αV
+antenne
+Dmax = Umax
+Uiso
+≃ Prad/αHαVr2
+Prad/4πr2 Dmax ≃ 4π
+αVαH
+= 41253
+α ∘V α ∘H
+Umax
+θ
+3 dB
+αH
+
+
+Pav
+Pref Pacc
+Prad
+Ploss
+EFFICACITÉ & GAIN D’ANTENNE
+• le rendement de rayonnement mesure la fraction de puissance en
+entrée effectivement rayonnée par l’antenne
+• il permet de définir le gain d’antenne, basé sur la puissance d’entrée
+(simple à mesurer) au lieu de cellde définir le gain e rayonnée (difficile
+à estimer).
+38
+G rƸ = U(r)
+ൗ
+Pacc
+4πr2
+= ηD(rƸ)
+rendement de rayonnement
+η = Prad
+Prad + Ploss
+
+
+La tension à circuit ouvert Vo est reliée au champ E incident via l’hauteur effective he rƸ
+où he rƸ est proportionnelle au diagramme de rayonnement F(rƸ)
+ANTENNE EN RÉCEPTION
+La valeur maximale de la puissance moyenne fournie par l’antenne (ou puissance disponible) est
+antenne en réception charge
+En alternative, la puissance disponible peut s’exprimer en fonction de la dentité de puissance incidente Uinc, via l’aire effective Ae de l’antenne
+qui est reliée au gain de l’antenne
+39
+Uinc = Einc 2
+ζ
+Einc
+Vo
+Vo rƸ = Einc ⋅ he(rƸ)
+Zant Pav ZL
+Pav = Vo 2
+4 Rant
+= Einc ⋅ he 2
+4 Rant
+Pav = AeUinc
+Ae rƸ = λ2
+4π D(rƸ)
+
+
+Si alignement et adaptations idéales
+Po
+Pi
+= Gt(θt, φt)Gr(θr, φr)
+4πR / λ 2 1 − Γt 2 1 − Γr 2 pƸt ⋅ pƸr∗ 2
+EQUATION DE FRIIS (DES TELECOMMUNICATIONS)
+R
+Pi Po
+“pertes” de propagation impédance non
+adaptée
+polarisations non adaptées
+Gt Gr
+La transmission de puissance entre deux antennes (en champ lointain) en espace libre est modélisée par l’équation de Friis
+où Lpest le facteur de perte de propagation,
+et les gains Gt et Gr indiquent le gain maximal de chaque antenne
+40
+pertes par mauvais alignement
+Po
+Pi
+= GtGr
+4πR / λ 2 = GtGr
+Lp
+
+
+POINTS IMPORTANTS
+o rayonnement en champ lointain
+• ondes sphériques, planes
+• diagramme de rayonnement
+o directivité & gain d’antenne
+• termes descriptifs
+• relation entre directivité et largeur du lobe principal
+o modèles de réception
+• avec et sans information de phase
+o équation de Friis
+41
+
+
+Antennes pour communications en
+espace libre
+• structures 1D et 2D • antennes omni-directionnelles, directives • principes de dimensionnement
+
+
+OBJECTIFS
+• dimensionner le rayonnement d’antennes en fonction
+des applications
+• introduire des outils simplifiés type “recettes de cuisine”
+• approche centrée autour du diagramme de rayonnement
+• omni-directionnel
+• directif
+• deux typologies d’antennes
+• linéaires (1D)
+• à ouverture (2D)
+43
+
+
+ANTENNES LINÉAIRES
+Example: pour un courant constant I z = I0
+i.e., maximum radiation for θmax = π/2
+44
+F rƸ = jωμ I0l θመ sin θ sinc π l
+λ cos θ
+θ
+θመ
+rƸ
+I(z)
+l
+zƸ
+• L’intégrale de rayonnement devient
+où Iሚ est la transformée de Fourier de la
+distribution de courant I(z)
+F rƸ = jωμ rƸ × rƸ × න
+V
+dr′ J r′ ejkr′⋅ rƸ
+= jωμ rƸ × rƸ × න
+l
+dz zƸ I z ejkzcosθ
+= jωμ θመ sin θ Iሚ(k cos θ)
+• symétrie de révolution
+• variation uniquement dans les coupes verticales
+
+
+• La fonction
+décrit la distribution angulaire du rayonnement de l’antenne
+• le choix (dimensionnement) de la longueur l repose sur plusieurs
+critères, dont la largeur (angle -3 dB) du lobe principal a une
+importance particulière
+• changer le type de distribution de courant a un impact fort surtout
+sur le niveau des lobes secondaires
+ANTENNES LINÉAIRES
+45
+sin θ sinc π l
+λ cos θ
+l / λ = 0.5 l / λ = 2
+
+
+DISTRIBUTION vs. DIAGRAMME DE RAYONNEMENT
+46
+où
+u=l
+2 k rƸ ⋅ rƸ ′
+et rƸ′ la direction d’intégration du courant (antennes 1D) ou du champ d’ouverture (antennes 2D).
+Par exemple, pour un courant le long de zƸ, rƸ ′= zƸ donc
+u=l
+2 k cosθ = π l
+λ cos θ
+Transformée de Fourier pour différents types de fonction
+
+
+DIMENSIONNEMENT SIMPLIFIÉ 1D
+• Approximation: on s’intéresse uniquement à assurer un lobe
+principal avec une largeur de α∘V degrés à -3 dB
+• Il suffit alors de chercher dans le tableau précédent l’expression de
+cet angle (half-power beamwidth)
+• Exemple: si le courant est constant sur le fil
+• la longueur de l’antenne se trouve donc par
+• NB: ces expressions de la largeur du lobe principal sont précises pour α∘V < 60∘, où sin αV/2 ≃ αV/2
+47
+α∘V ≃ 50.8 λ/l
+l / λ ≃ 50.8/α∘V
+
+
+Par analogie au cas du dipôle Hertzien, une antenne peut être
+décrite par son hauteur effective he:
+courant d’entrée
+RÉCEPTION: HAUTEUR EFFECTIVE
+48
+he ොr = F ොr
+−jωμIo
+E r = −jωμ g r Iol(−θመ) sin θ
+E r = g r F rƸ = −jωμ g r Iohe(rƸ)
+dipôle Hertzien
+antenne générique
+Io
+I(z)
+
+
+ANTENNES DIPOLAIRES
+half-wavelength dipole folded half-wavelength dipole
+bow-tie antenna
+49
+Yagi-Uda antennas
+
+
+ANTENNES MONOPOLAIRES
+λ/4 monopole over ground plane sleeve monopole
+normal-mode helical antenna
+Inverted-F and meander monopoles
+50
+
+
+ANTENNES FILAIRES ET DISPOSITIFS PORTABLES
+Les dispositifs portables nécessitent d’antennes isotropes miniature!
+51
+
+
+Système antennaire périphérique de l’iPhone 4
+La miniaturisation n’est pas la seule contrainte. Le rayonnement vers l’utilisateur (si présent) doit aussi être minimisé, afin de réduire les risques pour la santé et les gaspillages d’énergie.
+52
+ANTENNES FILAIRES ET DISPOSITIFS PORTABLES
+
+
+ISOTROPIE
+• un dispositif mobile ne doit pas être directif (non isotrope)
+• et le plus petit possible, idéalement avec l < 0.25 λ
+• pour un dipôle court le long de z on trouverait
+où Iҧ est le courant moyen le long du dipôle
+• Une telle antenne serait-elle isotrope?
+• La réception serait assurée pour toute orientation vers l’émetteur?
+53
+F rƸ = jωμ rƸ × rƸ × න
+l
+dz zƸ I z ejkzcosθ
+≃ jωμ θመsin θ Iҧl ⇒ ∼ dipôle Hertzien
+
+
+ISOTROPIE
+54
+• chacun de ces deux dipôles présente un zéro de rayonnement le long de leur axes (x et y) • on pourrait les combiner afin de combler leur zéros respectifs
+
+
+ISOTROPIE
+55
+Combinaison linéaire avec courants d’alimentation en phase
+• Le rayonnement est
+équivalent à celui d’un dipôle
+à 45°
+• Ceci arrive car la somme des
+champs rayonnés par les
+deux dipôles s’annule
+localement
+• Il reste donc toujours un zéro
+de rayonnement le long de
+son axe
+
+
+ISOTROPIE
+56
+Combinaison linéaire avec courants d’alimentation en quadrature (90°)
+• Si un déphasage de 90° est
+appliqué, le module de la
+somme ne peut plus
+s’annuler
+• le rayonnement est alors plus
+uniforme
+
+
+ISOTROPIE
+57
+Combinaison linéaire avec courants d’alimentation en quadrature (90°)
+Les méandres ne servent pas uniquement à réduire les dimensions de l’antennes, mais aussi à assurer sont isotropie: • deux polarisations croisées • quadrature de phase
+
+
+ANTENNES PATCH
+receding feed pour un patch
+Les antennes patch sont des structures métalliques basées sur des cavités resonnantes, avec des ouvertures latérales permettant le rayonnement de l’énergie EM. Pour un patch rectangulaire uniquement deux cotés rayonnent.
+MCV Microwave
+Elles ont une directivité modérée (rayonnemnt sur un demi espace), mais elles ont l’avantage de pouvoir être facilement intégrées dans des circuits imprimés (faible coût). 58
+côtés rayonnants
+λg/2
+
+
+ANTENNES TYPE PATCH POUR APPL. MOBILES
+Amphenol
+Chen et al. (2010)
+Guo et al. (2004)
+59
+
+
+RAYONNEMENT DIRECTIF
+60
+• besoin: concentrer la puissance rayonnée dans un faisceau étroit,
+idéalement centré sur un unique récepteur (l’opposé de la télédiffusion!)
+• les antennes filaires 1D ont une directivité uniquement dans une
+direction (passant par leur axe) et une isotropie dans le plan azimutal
+• il est nécessaire d’utiliser des antennes 2D afin de contrôler la directivité
+simultanément dans deux coupes transversales
+liaison Hertzienne (radio link) à grande
+distance entre deux tours de communication
+
+
+ANTENNES À OUVERTURE (2D)
+• antennes générant des distributions de champ EM sur une
+surface, dont les dimensions dépassent typiquement la longueur
+d’onde
+• cette distribution de champ remplace la distribution de courant des
+antennes filaires
+• fonctionnement analogue à celui d’une lentille en optique
+structures dérivées d’un guide d’onde (cornet)
+structures utilisant des réflécteurs métalliques (parabole)
+sources primaires
+ouverture rayonnante
+réflecteur métallique
+guide
+d’onde transition
+61
+
+
+ANTENNES CORNET (GUIDE D’ONDE)
+Vivaldi
+cornet pyramidal
+horn reflector
+AT&T long-distance towers
+62
+
+
+ANTENNES PARABOLIQUES (RÉFLECTEUR)
+63
+sources primaires (actives)
+
+
+ANTENNES À OUVERTURE
+Le diagramme de rayonnement d’une ouverture illuminée par un
+champ EA r′ s’écrit
+64
+F rƸ = −2jk rƸ × nො × න
+A
+dr′ EA r′ e+jk r′⋅rƸ = −2jk rƸ × nො × E෨A(kx, ky)
+où nො est la normale à la surface de l’ouverture
+y
+A
+x z
+nො
+φ
+θ
+θመ
+φො rƸ
+Hypothèse:
+EA x, y = pƸ EA(x, y)
+
+
+ANTENNES À OUVERTURE
+65
+yx
+z
+θመ
+rƸ1
+pƸ
+pƸ cos θ
+θመ
+rƸ2
+nො ≡ zƸ
+θ
+En première approximation, le rayonnement dans le lobe principal
+reproduit la polarisation au niveau de l’ouverture.
+Pour une source avec polarisation
+linéaire pƸ
+Pour tout rƸ dans le lobe principal rƸ ≃
+nො, donc
+−rƸ × nො × pƸ ≃ −rƸ × rƸ × pƸ = pƸ⊥(rƸ)
+Compte tenu du fait que pƸ ⊥ nො
+pƸ⊥ rƸ ≃ 1
+donc
+F rƸ = −2jk rƸ × nො × pƸ E෨A kx, ky
+F rƸ ≃ 2jkE෨A kx, ky
+
+
+ANTENNES À OUVERTURE
+66
+• Pour une distribution séparable (surtout ouvertures rectangulaires)
+• la variation angulaire dans la coupe horizontale (φ = 0)
+dépend uniquement de la distribution du champ le long de x; un
+résultat similaire se trouve pour la coupe verticale
+• passage d’un problème 2D à deux problèmes 1D : analogue au
+cas filaire. Dimensionnement simplifié possible aussi dans ce cas.
+EA x, y ≃ Ex x Ey y
+E෨A(kx, ky) ≃ න
+A
+dr′ Ex x Ey y e+j(kxx+kyy) = E෨x kx E෨y(ky)
+où kx = k rƸ ⋅ xො = k sin θ cos φ ky = k rƸ ⋅ yො = k sin θ sin φ
+F θ ∝ E෨A kx, ky = E෨x k sin θ E෨y(0)
+
+
+DIMENSIONNEMENT SIMPLIFIÉ 2D
+• Considérez une antenne à ouverture rectangulaire, de côtés a et b
+• son lobe principal aura des angles -3 dB: αV et αH, définis sur la
+coupe verticale et horizontale
+67
+αH ∝ λ
+a
+αV ∝ λ
+b
+a
+b
+ouverture
+• pour une excitation uniforme de l’ouverture, le tableau vers p. 46
+indique
+• donc une directivité maximale (pic du lobe principal)
+α∘V ≃ 50.8 λ
+b et α∘H ≃ 50.8 λ
+a
+Dmax ≃ 4π
+ΔΩ ≃ 41253
+α∘Vα∘H ≃ 16 ab
+λ2
+
+
+ANTENNES À OUVERTURE
+68
+b = 3λ
+b = 3λ
+Illustration de la relation inverse
+entre largeur du lobe et
+dimensions de l’ouverture
+
+
+OUVERTURES DE FORME ARBITRAIRE
+69
+• Plus en général
+où A est l’aire géométrique de l’ouverture et ηa le rendement
+d’ouverture (aperture efficiency). Ae est l’aire effective (cf. p. 39).
+• ηa ∈ 0,1 , indique si l’ouverture est illuminée efficacement: ηa = 1
+uniquement pour une distribution uniforme. Si la distribution
+diminue vers les bords, ηa < 1 indique qu’une partie de l’ouverture
+contribue moins au rayonnement
+• pour une parabole circulaire de diamètre D , ηa ∈ 0.5,0.8 ,
+α∘ > 70 λ/D
+• NB: il n’est plus possible, en général, de factoriser la distribution de
+champ sur l’ouverture.
+Dmax ≃ 4π Ae
+λ2 = 4π A
+λ2 ηa
+
+
+IL N’Y A PAS QUE LA DIRECTIVITÉ ...
+Directivity (dBi)
+Δf/fc (%)
+40
+3
+10
+20
+0
+1 5 10 20
+horns
+parabolic reflectors
+patches
+λ/2 dipoles
+50
+planar reflectors
+70
+
+
+POINTS IMPORTANTS
+o antennes filaires 1D
+• omni-directionnelles en azimuth, directivité dans les coupes verticales
+• relation entre distribution de courant et diagramme de rayonnement
+• tableau pour transformée Fourier
+• relation inverse entre dimensions géométriques et largeur du lobe principal
+o antennes à ouverture 2D
+• faisceaux directifs pour transmission point à point
+• relation inverse entre dimensions géométriques et largeur du lobe principal
+• deux degrés de liberté, angle de couverture variable
+71
+
+
+Réseaux d’antennes
+• interférence & directivité • facteur de réseau
+
+
+SOURCES MULTIPLES
+73
+
+
+SOURCES MULTIPLES
+• possible de créer de la directivité à partir de sources simples
+• excitation retardée (déphasage): contrôle de la direction du
+lobe principal
+74
+
+
+F rƸ = jωμ rƸ × rƸ × න
+Vo
+dr′′ Jo r′′ ejkr′′⋅ rƸ ෍
+n=1
+N
+ejkrn⋅ rƸ = Fo rƸ Ψ(rƸ)
+• En présence de N sources
+facteur de réseau (interférence)
+FACTEUR DE RÉSEAU
+75
+J1(r)
+r1
+J2(r)
+J3(r)
+r2
+r3
+V1
+rƸ
+V2
+V3
+F rƸ = jωμ rƸ × rƸ × නdr′ J r′ ejkr′⋅ rƸ
+= jωμ rƸ × rƸ × ෍
+n=1
+N
+න
+Vn
+dr′ Jn r′ ejkr′⋅ rƸ
+• Hyp: sources identiques: Jn r = Jo r − rn , avec diagramme Fo rƸ
+• passage à un repère local pour chaque intégrale r′ = r′′ + rn
+diagramme de rayonnement d’une seule source (dans l’origine)
+
+
+FACTEUR DE RÉSEAU
+76
+• le facteur de réseau modélise
+uniquement les effets d’interférence dus
+aux différences de marche (retards)
+• implicite: à lui seul, le facteur
+correspond au rayonnement de sources
+isotropes (sources ponctuelles)
+• ces sources n’ont pas de polarisation,
+elles représentent un champ scalaire
+• il faudra le multiplier par diagramme de
+rayonnement Fo(r) des sources
+effectives afin de retrouver le
+diagramme de rayonnement effectif
+(incluant la polarisation)
+sources isotropes (ondes
+sphériques) Ψ(rƸ)
+
+
+Ψ rƸ = ෍
+n=1
+N
+wn ejk rn⋅rƸ
+Un forme plus générale de facteur de réseau
+où l’excitation de chaque antenne est pondérée par un coéfficient wi ∈ C
+Il existe un grand nombre de topologies de réseaux. Ils se différencient par
+• la disposition des antennes: sur une ligne droite, cercle, etc. • le nombre de dimensions (linéaire, planaire) • la distance entre sources (uniforme ou pas) • la coexistence d’antennes differentes • l’orientation des axes des antennas (surfaces conformées)
+FACTEUR DE RÉSEAU
+77
+
+
+RÉSEAUX LINÉAIRES (UNIFORM LINEAR ARRAYS)
+• sources déployées sur l’axe z • distance d constante, ou
+• excitations identiques, wi = 1, ∀i • il en résulte
+où ξ = kd cos θ représente la différence de phase, due à la différence de marche, entre les champs rayonnés par deux sources adjacentes.
+Ψ ξ = sin Nξ/2
+sin ξ/2
+d
+z
+θ
+w2 = 1
+w1 = 1
+wN = 1
+78
+rƸ
+rn = zƸ n d
+Ψ rƸ = ෍
+n=0
+N−1
+ejkrn⋅ rƸ = ෍
+n=0
+N−1
+ejnkd cos θ
+=෍
+n=0
+N−1
+ejξ n = 1 − ejNξ
+1 − ejξ
+
+
+FACTEUR DE RÉSEAU
+79
+
+
+RÉSEAUX LINÉAIRES
+80
+
+
+RÉSEAUX LINÉAIRES
+81
+
+
+DIMENSIONNEMENT D’UN RÉSEAU BROADSIDE
+82
+• réseau co-axial de 4 dipôles
+• aucun déphasage (rayonnement latéral)
+• on souhaite un lobe principal avec un angle à -3 dB α∘V = 30°
+• dimensionner la distance d entre dipôles
+rayonnement latéral (plan azimuthal)
+d
+α∘V
+
+
+DIMENSIONNEMENT D’UN RÉSEAU BROADSIDE
+83
+4. la condition 2. donne alors
+F θo ± αV / 2
+F(θo) = 1/ 2
+Ψ kd sin αV / 2
+4 =1
+2 cos(αV/2) = 0.732 ⇒ kd sin αV / 2 = 0.2168 π ⇒ d ≃ 0.42 λ
+1. max. rayonnement pour θo = π
+2
+2. condition - 3 dB:
+3. factorisation F θ = Fo θ Ψ(θ)
+= cos(αV/2) Ψ kd sin αV / 2
+Ψ 0 = cos(αV/2) Ψ kd sin αV / 2
+4
+Fo θo ± αV / 2
+Fo(θo)
+Ψ θo ± αV / 2
+Ψ(θo) =
+= sin(π/2 ± αV/2)
+sin(π/2)
+Ψ ξ(θo ± αV / 2)
+Ψ(ξ(θo))
+
+
+DIPÔLE SUR PLAN MÉTALLIQUE
+84
+dipôle parallèle au plan
+plan métallique infini
+dipôle image
+d
+d +
+- w1 = −1 w2 = 1
+2d
+modèle équivalent
+(valable uniquement dans le demi espace de droite)
+• l’onde réfléchie par un plan métallique apparaît comme générée par une source image (fictive) • les conditions aux limites métalliques imposent un changement de signe dans le courant de l’image • cette configuration est donc équivalente à un réseau de deux dipôles
+
+
+ANTENNES DE STATION DE BASE
+85
+Technique largement utilisée
+dans les antennes relais des
+réseaux cellulaires
+
+
+POINTS IMPORTANTS
+o directivité à partir de sources isotropes (interférence)
+o facteur de réseau
+• fonction scalaire
+• indépendant du diagramme des antennes
+86
+
+
+Milieux complexes (urbain / indoor)
+• propagation multi-trajet • interférence et fading • diversité d’antenne
+
+
+DES SCENARIOS TRÈS VARIABLES
+88
+
+
+PROPAGATION DANS UN MILIEU COMPLEXE
+base station
+89
+
+
+ANTENNES ET MILIEUX COMPLEXES
+• les règles de dimensionnement vues pour l’espace libre ne sont
+plus suffisantes
+• le but ici n’est pas d’ étudier la propagation des ondes afin
+d’établir des bilans de liaisons
+• plutôt, comprendre le rôle joué par les antennes dans le contrôle
+des effets négatifs liés à la propagation (fading)
+• trois cas seront étudiés
+réflexion sur sol & faisceaux Hertziens: dimensionner la directivité
+fading par deux ondes et récepteur portable : diversité d’antennes
+propagation multi-trajet aléatoire : diversité d’antennes
+90
+
+
+
+FADING DE RÉFLEXION (TWO-WAVE FADING)
+B2 = A2d + Ar2 + 2 AdAr cos Δφ
+1 − |Γ| ≤ B
+Ad
+≤ 1 + |Γ|
+91
+Ad
+Représentation dans le plan complexe
+Ar e jΔφ
+Δφ
+ψ
+Γ Ad
+• réflexion sur sol; coefficient de réflexion Γ
+• déphasage Δφ entre les ondes: différence de marche
+Ad e jωt
+Ar e j(ωt+Δφ)
+Δφ = 2π Δd/λ
+Γ
+sol
+• module B du signal reçu: résultant de l’interférence entre les deux ondes
+• variation potentiellement importante par rapport au cas espace libre, Ad
+dépendant de la réflectivité du sol
+B
+
+
+
+RÉFLECTIVITÉ DU SOL
+92
+pƸv
+pƸh
+
+k
+k
+
+
+FADING DE RÉFLEXION
+Plane Earth Loss (PEL)
+93
+Ad (espace libre)
+B (interférence)
+fading
+• incidence rasante
+• sol réfléchissant Γ ≃ −1 indépendamment de la polarisation
+• atténuation en d−4 à grande distance
+
+
+
+FADING ET DIRECTIVITÉ
+95
+sol
+Gt Gr
+sol
+Gt′ Gr′
+• une antenne plus directive réduit la puissance réfléchie par le sol, avec A′r / A′d < Ar / Ad
+• le gain doit être dimensionné afin d’assurer une puissance
+reçue suffisante, pour le pire cas d’interférence destructive
+Ad ∝ Gt 0 Gr(0)
+Ar ∝ Gt θ Γ Gr θ
+θθ
+θθ
+
+
+
+LE CAS D’UN RÉCEPTEUR PORTABLE
+96
+station de base
+bâtiment
+
+bâtiment
+utilisateur (antenne isotrope)
+• récepteur portable ≡ isotropie
+• impossible d’exploiter la directivité afin de réduire le fading
+• les contribution de deux ondes peuvent s’annuler
+k1
+k2
+Γ
+
+
+LE CAS D’UN RÉCEPTEUR PORTABLE
+97
+station de base
+
+bâtiment
+• scène illuminée par le lobe principale ⇒ ondes d’intensité similaire
+• polarisation horizontale: indép. de la direction ⇒ problème scalaire
+• réflexion sur l’immeuble, Γ ≃ −1
+distribution du champ incident
+
+
+LE CAS D’UN RÉCEPTEUR PORTABLE
+98
+k2
+x1 k1
+x1
+• récepteur à la position x1
+• rappel équation onde plane: E(r) = Eoe−jkinc⋅r
+• signal reçu:
+où φ = k(R2 − R1) est la différence de phase due à la diff. de marche
+• |E2/E1| potentiellement ≃ 1, possibilité d’un fading important, sans
+aucun mécanisme pour le réduire
+|Vo x1 | = |he ⋅ pƸ E1 x1 + E2 x1 |
+∝ |E1 x1 + E2 x1 | = Eo |1 + Γe−jφ|
+
+
+
+• changement de position : récepteur en x2
+• signal reçu
+où d = dxො est le vecteur déplacement entre les deux positions
+• si une antenne en x1 subit un fading fort (φ ≃ 0), la situation pourrait
+s’améliorer en x2 (déphasage différent)
+LE CAS D’UN RÉCEPTEUR PORTABLE
+99
+k2
+x1 x2
+d
+k1
+x1 x2
+d
+|Vo x2 | ∝ |E1 x2 + E2 x2 | = Eo |1 + Γe−jφe−j k2−k1 ⋅d |
+
+
+
+DIVERSITÉ D’ANTENNE
+• diversité de position: récepteur doté d’au moins deux antennes
+• à chaque position, il est probable qu’au moins un parmi les signaux reçus soit suffisamment fort pour assurer une bonne transmission
+• la notion de diversité peut être implémentée selon différents mécanismes:
+position, polarisation, fréquence, direction.
+100
+
+deuxième antenne à distance λ/4
+30° 60°
+k1 k2
+première antenne
+
+
+DIVERSITÉ D’ANTENNE
+Station de base utilisant des dipoles à double polarisation (B.Q. Wu et al. 2009)
+Antennes log-periodiques avec polarisations orthogonales 101
+Huawei
+
+Router avec diversité de position (deux bandes wifi)

@@ -1,0 +1,1387 @@
+Universit ́e Paris-Saclay – M2 Optimisation
+Convex analysis and optimization
+Part II.1: Fixed point algorithms
+jean-christophe@pesquet.eu, emilie.chouzenoux@inria.fr Center for Visual Computing – OPIS Inria group CentraleSup ́elec
+
+
+2/18
+A first answer
+Fixed point theorem (E. Picard, 1856-1941) Let H be a Hilbert space. If T : H ! H is such that
+T is a strict contraction, i.e. there exists ⇢ 2 [0, 1[ such that
+8(x, x0) 2 H2 kTx Tx0k  ⇢kx x0k.
+Then T has a unique fixed point xb. The sequence (xn)n2N defined as (8n 2 N) xn+1 = Txn with x0 2 H, converges to xb.
+Proof: For every n 2 N and m 2 N \ {0},
+kxn+m xnk =
+m X
+`=1
+xn+` xn+` 1 
+m X
+`=1
+kxn+` xn+` 1k.
+For every ` 2 {1, . . . , m},
+kxn+` xn+` 1k = kTxn+` 1 Txn+` 2k
+ ⇢kxn+` 1 xn+` 2k  · · ·  ⇢n+` 1kx1 x0k.
+Then kxn+m xnk  (1 ⇢) 1(1 ⇢m)⇢nkx1 x0k.
+Therefore (xn)n2N is a Cauchy sequence and it converges to some xb 2 H.
+
+
+2/18
+A first answer
+Fixed point theorem (E. Picard, 1856-1941) Let H be a Hilbert space. If T : H ! H is such that
+T is a strict contraction, i.e. there exists ⇢ 2 [0, 1[ such that
+8(x, x0) 2 H2 kTx Tx0k  ⇢kx x0k.
+Then T has a unique fixed point xb. The sequence (xn)n2N defined as (8n 2 N) xn+1 = Txn with x0 2 H, converges to xb.
+Proof: Since T is continuous, xn ! xb ) T xb = xb. This shows that there exists a fixed point of T . In addition, let x be a fixed point of T , for every n 2 N,
+kxn+1 xk = kTxn T xk
+ ⇢kxn xk.
+Consequently, kxn xk  ⇢nkx0 xk. Hence, we have proved that (xn)n2N converges linearly to x and there exists a unique fixed point.
+
+
+3/18
+Objective of this course
+I Extend this theorem to more general operators I not necessarily strictly contractive
+I possibly dependent on the iteration number n
+I built from composition of simpler operators ( splitting techniques ).
+I Apply this to solve minimization problems. How to relate T to the objective function f ?
+
+
+5/18
+Fixed point algorithms: convergence
+Let H be a Hilbert space. Let (xn)n2N be a sequence in H and xb 2 H.
+I (xn)n2N converges strongly to xb if
+lim
+n!+1 kxn xbk = 0.
+It is denoted by xn ! xb.
+I (xn)n2N converges weakly to xb if
+(8y 2 H) lim
+n!+1 hy | xn xbi = 0.
+It is denoted by xn * xb.
+Remark: In a finite dimensional Hilbert space, strong and weak convergences are equivalent.
+
+
+6/18
+Fixed point algorithms: convergence
+Let (xn)n2N be a sequence of H. (xn)n2N converges weakly if and only if
+I (xn)n2N is bounded
+and
+I (xn)n2N possesses at most one sequential cluster point in the weak topology.
+I xb is a sequential cluster point of (xn)n2N in the weak topology if there exists a subsequence (xnk )k2N of (xn)n2N that converges weakly to xb.
+
+
+6/18
+Fixed point algorithms: convergence
+Let (xn)n2N be a sequence of H. (xn)n2N converges weakly if and only if
+I (xn)n2N is bounded
+and
+I (xn)n2N possesses at most one sequential cluster point in the weak topology.
+Illustration:
+x0 x1 x2 x3 x4 x5 . . . 1 -1 1 -1 1 -1 . . .
+! (xn)n2N is bounded but it has 2 sequential cluster points: 1 and 1.
+! (xn)n2N does not converge.
+
+
+7/18
+Fixed point algorithms: convergence
+Opial’s lemma Let D be a nonempty subset of H. Let (xn)n2N be a sequence in H. (xn)n2N weakly converges to a point in D if
+I for every x 2 D, (kxn xk)n2N converges
+and
+I every weak sequential cluster point of (xn)n2N lies in D.
+
+
+7/18
+Fixed point algorithms: convergence
+Proof:
+Let x 2 D. Since (kxn xk)n2N converges, then (kxn xk)n2N and thus (xn)n2N are bounded. We assume that (xnk )k2N and (xn`)`2N are such that xnk * xb and
+xn` * xb0 where (xb, xb0) 2 D2. For every n 2 N,
+2 ⌦xn | xb0 xb↵ = kxn xbk2 kxn xb0k2 kxbk2 + kxb0k2.
+Because (kxn xbk)n2N and (kxn xb0k)n2N converge, there exists
+↵ 2 R such that hxn | xb0 xbi ! ↵ and thus
+hxnk | xb0 xbi ! hxb | xb0 xbi = ↵. Similarly, hxb0 | xb0 xbi = ↵.
+Consequently, kxb0 xbk2 = 0 ) xb = xb0.
+
+
+8/18
+Fixed point algorithms: Feje ́r-monotone sequence
+Let D be a nonempty subset of a Hilbert space H. Let (xn)n2N be a sequence in H. (xn)n2N is Fej ́er-monotone with respect to D if
+(8x 2 D)(8n 2 N) kxn+1 xk  kxn xk.
+Let D ⇢ H. Let (xn)n2N be Fej ́er-monotone with respect to D then
+I for every x 2 D, (kxn xk)n2N converges ,
+I (xn)n2N is bounded.
+
+
+9/18
+Fixed point algorithms: Feje ́r-monotone sequence
+Fej ́er-monotone convergence Let D be a nonempty subset of a Hilbert space H. Let (xn)n2N be a sequence in H. (xn)n2N converges weakly to a point in D if
+I (xn)n2N is Fej ́er-monotone with respect to D
+and
+I every weak sequential cluster point of (xn)n2N lies in D.
+Lemma Let C be a nonempty closed convex subset of H. If (xn)n2N denotes a sequence in C that weakly converges to xb then xb 2 C .
+
+
+9/18
+Fixed point algorithms: Feje ́r-monotone sequence
+Lemma Let C be a nonempty closed convex subset of H. If (xn)n2N denotes a sequence in C that weakly converges to xb then xb 2 C .
+Proof:
+Let PC be the projection onto C .
+Since (8n 2 N) xn 2 C , we have
+hxn PC (xb) | xb PC (xb)i  0.
+By using xn * xb, it results that kxb PC (xb)k2 = 0, and thus xb = PC (xb) 2 C .
+
+
+10/18
+Nonexpansive operator: definition
+Let C be a nonempty set of a Hilbert space H. Let T : C ! H. The set of fixed points of T is
+FixT = {x 2 C | x = Tx}.
+Let C ⇢ H be a nonempty set. Let T : C ! H. T is a nonexpansive operator if 8(x, y ) 2 C 2 kTx Ty k  kx y k .
+Let C be a nonempty closed convex subset of a Hilbert space H. Let T : C ! H be nonexpansive. Then FixT is a closed convex set.
+
+
+10/18
+Nonexpansive operator: definition
+Let C be a nonempty closed convex subset of a Hilbert space H. Let T : C ! H be nonexpansive. Then FixT is a closed convex set.
+Proof: Closedness: Let (xn)n2N is a sequence of FixT ⇢ C converging to x 2 H. Since T is continuous, x 2 C and (Txn)n2N = (xn)n2N converges to Tx = x. Thus x 2 FixT .
+
+
+10/18
+Nonexpansive operator: definition
+Let C be a nonempty closed convex subset of a Hilbert space H. Let T : C ! H be nonexpansive. Then FixT is a closed convex set.
+Proof: Convexity: Let (x, y ) 2 (FixT )2 and let ↵ 2]0, 1[. We have ↵x + (1 ↵)y 2 C and
+kT (↵x + (1 ↵)y ) ↵x (1 ↵)y k2
+= k↵(T (↵x + (1 ↵)y ) x) + (1 ↵)(T (↵x + (1 ↵)y ) y )k2
+= ↵2kT (↵x + (1 ↵)y ) xk2 + (1 ↵)2kT (↵x + (1 ↵)y ) y k2
++ 2↵(1 ↵) hT (↵x + (1 ↵)y ) x | T (↵x + (1 ↵)y ) y i
+= ↵2kT (↵x + (1 ↵)y ) xk2 + (1 ↵)2kT (↵x + (1 ↵)y ) y k2
+↵(1 ↵)(kT (↵x + (1 ↵)y ) x T (↵x + (1 ↵)y ) + y k2
+kT (↵x + (1 ↵)y ) xk2 kT (↵x + (1 ↵)y ) y k2)
+= ↵kT (↵x + (1 ↵)y ) xk2 + (1 ↵)kT (↵x + (1 ↵)y ) y k2 ↵(1 ↵)kx y k2.
+
+
+10/18
+Nonexpansive operator: definition
+Let C be a nonempty closed convex subset of a Hilbert space H. Let T : C ! H be nonexpansive. Then FixT is a closed convex set.
+Proof: Convexity: Let (x, y ) 2 (FixT )2 and let ↵ 2]0, 1[. We have
+kT (↵x + (1 ↵)y ) ↵x (1 ↵)y k2
+= ↵kT (↵x + (1 ↵)y ) xk2 + (1 ↵)kT (↵x + (1 ↵)y ) y k2 ↵(1 ↵)kx y k2.
+Since Tx = x, Ty = y and T is nonexpansive,
+kT (↵x + (1 ↵)y ) ↵x (1 ↵)y k2
+= ↵kT (↵x + (1 ↵)y ) Txk2 + (1 ↵)kT (↵x + (1 ↵)y ) Ty k2 ↵(1 ↵)kx y k2
+ ↵k↵x + (1 ↵)y xk2 + (1 ↵)k↵x + (1 ↵)y y k2 ↵(1 ↵)kx y k2
+= (↵(1 ↵)2 + (1 ↵)↵2 ↵(1 ↵))kx y k2 = 0.
+Hence T (↵x + (1 ↵)y ) = ↵x + (1 ↵)y , ↵x + (1 ↵)y 2 FixT .
+
+
+11/18
+Nonexpansive operator: fixed point algorithm
+Demiclosedness principle
+Let C be a nonempty closed convex subset of a Hilbert space H. Let T : C ! H be a nonexpansive operator. If (xn)n2N is a sequence in C that converges weakly to xb and if Txn xn ! 0 then xb 2 FixT .
+Proof: xn * xb ) xb 2 C and T xb defined. For every n 2 N,
+kxn T xbk2 = kxn xbk2 + kxb T xbk2 + 2 hxn xb | xb T xbi
+kxn T xbk2 = kxn Txnk2 + kTxn T xbk2 + 2 hxn Txn | Txn T xbi
+) kxb T xbk2 = kxn Txnk2 + kTxn T xbk2 kxn xbk2
++ 2 hxn Txn | Txn T xbi 2 hxn xb | xb T xbi
+
+
+11/18
+Nonexpansive operator: fixed point algorithm
+Demiclosedness principle
+Let C be a nonempty closed convex subset of a Hilbert space H. Let T : C ! H be a nonexpansive operator. If (xn)n2N is a sequence in C that converges weakly to xb and if Txn xn ! 0 then xb 2 FixT .
+Proof:
+kxb T xbk2 =kxn Txnk2 + kTxn T xbk2 kxn xbk2
++ 2 hxn Txn | Txn T xbi 2 hxn xb | xb T xbi .
+Since T is nonexpansive, by using the Cauchy-Schwarz inequality,
+kxb T xbk2  kxn Txnk2 + 2kxn TxnkkTxn T xbk 2 hxn xb | xb T xbi
+ kxn Txnk2 + 2kxn Txnkkxn xbk 2 hxn xb | xb T xbi .
+xn * xb ) (xn)n2N bounded. The result follows by taking the limit.
+
+
+12/18
+Nonexpansive operator: fixed point algorithm
+Let C be a nonempty closed convex subset of a Hilbert space H. Let T : C ! C be a nonexpansive operator such that FixT 6= ?. Let x0 2 C ,
+(8n 2 N) xn+1 = Txn.
+If xn Txn ! 0 , then (xn)n2N converges weakly to a point in FixT .
+Exercise :
+Prove this result by showing that (xn)n2N is Fej ́er-monotone with respect to FixT .
+
+
+12/18
+Nonexpansive operator: fixed point algorithm
+Let C be a nonempty closed convex subset of a Hilbert space H. Let T : C ! C be a nonexpansive operator such that FixT 6= ?. Let x0 2 C ,
+(8n 2 N) xn+1 = Txn.
+If xn Txn ! 0 , then (xn)n2N converges weakly to a point in FixT .
+Answer : For every n 2 N and y 2 FixT ,
+kxn+1 y k = kTxn Ty k  kxn y k.
+(xn)n2N is Fej ́er-monotone with respect to FixT . Let (xnk )k2N be a subsequence of (xn)n2N such that xnk * xb where xb 2 H.
+By assumption xnk Txnk ! 0 and thus, according to the demiclosedness principle, xb 2 FixT . This shows the weak convergence of (xn)n2N.
+
+
+13/18
+Fixed point algorithms: Feje ́r-monotone sequence
+Краснос ́eльский-Mann algorithm Let C be a nonempty closed convex subset of a Hilbert space H. Let T : C ! C be a nonexpansive operator such that FixT 6= ?. Let ( n)n2N be a sequence in [0, 1] such that X
+n2N
+n(1 n) = +1.
+Let x0 2 C and (8n 2 N) xn+1 = xn + n(Txn xn). Then,
+I (xn)n2N is Fej ́er-monotone with respect to FixT .
+I (Txn xn)n2N converges strongly to 0.
+I (xn)n2N converges weakly to a point in FixT .
+Typical choice: (8n 2 N) n = 2]0, 1[.
+
+
+14/18
+Fixed point algorithms: Feje ́r-monotone sequence
+Proof : For every n 2 N, by convex combination, xn 2 C .
+Fej ́er-monotonicity with respect to FixT : (8x 2 FixT )(8n 2 N)
+kxn+1 x k2
+=kxn + n(Txn xn) x k2
+=k(1 n)(xn x) + n(Txn x)k2
+=(1 n)2kxn x k2 + 2nkTxn x k2 2 n(1 n) hx xn | Txn x i
+=(1 n)kxn xk2 + nkTxn x k2 n(1 n)kTxn x + x xnk2
+=(1 n)kxn x k2 + nkTxn Tx k2 n(1 n)kTxn xnk2
+(1 n)kxn x k2 + nkxn x k2 n(1 n)kTxn xnk2
+kxn xk2.
+
+
+14/18
+Fixed point algorithms: Feje ́r-monotone sequence
+Proof : We want to prove that Txn xn ! 0. We deduce from kxn+1 xk2  kxn xk2 n(1 n)kTxn xnk2 that
+(8N 2 N)
+N X
+n=0
+n(1 n)kTxn xnk2  kx0 x k2 kxN+1 x k2
+)
+X
+n2N
+n(1 n)kTxn xnk2  kx0 x k2
+)
++X1
+k =n
+k (1 k )kTxk xk k2 ! 0
+) kinfn kTxk xk k2
++X1
+k =n
+k (1 k ) ! 0.
+The assumptions on the sequence ( n)n2N lead to lim infn!+1 kTxn xnk = 0.
+
+
+14/18
+Fixed point algorithms: Feje ́r-monotone sequence
+Proof : Let (xnk )k2N be a subsequence of (xn)n2N such that xnk * xb. According to the demiclosedness principle, Txnk xnk ! 0 yields xb 2 FixT . The weak convergence of (xn)n2N to xb results from the Fej ́er-monotonicity of (xn)n2N with respect to FixT .
+
+
+15/18
+↵-averaged operator: definition
+Let C ⇢ H be a nonempty set of a Hilbert space H. Let A : C ! H and let ↵ 2]0, 1[.
+A is an ↵-averaged operator if there exists a nonexpansive operator R : C ! H such that
+A = (1 ↵)Id + ↵R.
+Remark : When ↵ = 1/2, we say that A is firmly nonexpansive .
+
+
+16/18
+Fixed point algorithms: ↵-averaged operator
+Let T : H ! H be an ↵-averaged operator with ↵ 2]0, 1[ such that FixT 6= ?.
+Let ( n)n2N be a sequence in [0, 1/↵] such that X
+n2N
+n(1 ↵ n) = +1.
+Let x0 2 H and (8n 2 N) xn+1 = xn + n(Txn xn). The following properties are satisfied:
+I (xn)n2N is Fej ́er-monotone with respect to FixT .
+I (Txn xn)n2N converges strongly to 0.
+I (xn)n2N converges weakly to a point in FixT .
+Remark: since ↵ < 1, one can choose (8n 2 N) n = 1, that is
+(8n 2 N) xn+1 = Txn.
+
+
+17/18
+Fixed point algorithms: ↵-averaged operator
+Proof : Since T is ↵-averaged, there exists a nonexpansive operator R such that T = (1 ↵)Id + ↵R. Let (8n 2 N) μn = ↵ n 2 [0, 1]. X
+n2N
+n(1 ↵ n) = +1 ,
+X
+n2N
+μn(1 μn) = +1.
+The iterations can be written as
+(8n 2 N) xn+1 = xn + n(Txn xn)
+= xn + μn(Rxn xn).
+Moreover, for every x 2 H,
+x 2 FixT , x = (1 ↵)x + ↵Rx , x 2 FixR,
+that is FixR = FixT . + Krasnosel’skii-Mann algorithm.
+
+
+18/18
+Exercise
+Let H be a Hilbert space. Let m 2 N, m 2. For every i 2 {1, . . . , m}, let
+Ti : H ! H be a nonexpansive operator. Assume that Tm
+i=1 FixTi 6= ?.
+Let (!i )1im 2 ]0, +1[m be such that Pm
+i=1 !i = 1, and let
+T = Pm
+i=1 !i Ti .
+1. Show that, for every i 2 {1, . . . , m} and for every (x, y ) 2 H ⇥ FixTi ,
+hTi x x | x y i 
+1
+2 kTi x xk2.
+2. Deduce that FixT = Tm
+i=1 FixTi .
+3. In the following, we assume that, for every i 2 {1, . . . , m}, Ti is ↵i -averaged with ↵i 2]0, 1[. Show that T is ↵-averaged where ↵ is a constant to be precised. 4. Study the convergence of the iteration
+(8n 2 N) xn+1 = (1 n)xn + n
+m X
+i =1
+!i Ti xn
+where x0 2 H and n 2 ]0, +1[.
+
+
+14/18
+Fixed point algorithms: Feje ́r-monotone sequence
+Proof : The assumptions on ( n)n2N lead to lim infn!+1 kTxn xnk = 0. Moreover, as T is a nonexpansive operator
+kTxn+1 xn+1k = kTxn+1 Txn + (1 n)(Txn xn)k
+ kTxn+1 Txnk + (1 n)kTxn xnk
+ kxn+1 xnk + (1 n)kTxn xnk
+= nkTxn xnk + (1 n)kTxn xnk
+= kTxn xnk.
+Consequently, (kTxn xnk)n2N converges and
+Txn xn ! 0.
+
+
+Universit ́e Paris-Saclay – M2 Optimisation
+Convex analysis and optimization
+Part II.2: Nonexpansive operators
+jean-christophe@pesquet.eu Center for Visual Computing – OPIS Inria group CentraleSupe ́lec
+
+
+2/18
+Nonexpansive operator: definition
+Let H be a Hilbert space and let C be a nonempty subset of H. Let A : C → H and ν ∈ ]0, +∞[
+ν−1A is nonexpansive if (∀(x, y ) ∈ C 2) ∥Ax − Ay ∥ ≤ ν ∥x − y ∥.
+ν−1A is nonexpansive ⇔ A is ν-Lipschitzian .
+Lipschitz
+Nonexpansive
+
+
+3/18
+Nonexpansive operator: definition
+Let H be a real Hilbert space. Let A : C → H .
+A is firmly nonexpansive if
+(∀x ∈ C )(∀y ∈ C ) ∥Ax − Ay ∥2 ≤ ⟨Ax − Ay | x − y ⟩ .
+
+
+3/18
+Nonexpansive operator: definition
+Let H be a real Hilbert space and let C be a nonempty subset of H. Let A : C → H .
+A is firmly nonexpansive if
+(∀(x, y ) ∈ C 2) ∥Ax − Ay ∥2 + ∥(Id − A)x − (Id − A)y ∥2 ≤ ∥x − y ∥2 .
+Proof: For every (x, y ) ∈ C 2,
+∥Ax − Ay ∥2 + ∥(Id − A)x − (Id − A)y ∥2 ≤ ∥x − y ∥2
+⇔∥Ax − Ay ∥2 + ∥x − y ∥2 − 2 ⟨x − y | Ax − Ay ⟩ + ∥Ax − Ay ∥2 ≤ ∥x − y ∥2
+⇔∥Ax − Ay ∥2 ≤ ⟨x − y | Ax − Ay ⟩ .
+
+
+3/18
+Nonexpansive operator: definition
+Let H be a real Hilbert space and let C be a nonempty subset of H. Let A : C → H . A is firmly nonexpansive if
+(∀(x, y ) ∈ C 2) ∥Ax − Ay ∥2 + ∥(Id − A)x − (Id − A)y ∥2 ≤ ∥x − y ∥2 .
+! A is firmly nonexpansive ⇔ Id − A is firmly nonexpansive.
+! A is firmly nonexpansive ⇔ 2A − Id
+} {{ }
+Reflection of A
+is nonexpansive.
+Proof: For every (x, y ) ∈ C 2,
+∥(2A − Id)x − (2A − Id)y ∥2 ≤ ∥x − y ∥2
+⇔ 4∥Ax − Ay ∥2 − 4 ⟨Ax − Ay | x − y ⟩ + ∥x − y ∥2 ≤ ∥x − y ∥2
+⇔ ∥Ax − Ay ∥2 ≤ ⟨Ax − Ay | x − y ⟩ .
+
+
+3/18
+Nonexpansive operator: definition
+Let H be a real Hilbert space and let C be a nonempty subset of H. Let A : C → H .
+A is firmly nonexpansive if
+(∀(x, y ) ∈ C 2) ∥Ax − Ay ∥2 + ∥(Id − A)x − (Id − A)y ∥2 ≤ ∥x − y ∥2 .
+A is firmly nonexpansive ⇒ A is nonexpansive.
+Lipschitz
+Nonexpansive
+Firmly nonexpansive
+
+
+4/18
+Nonexpansive operator: definition
+Let H be a real Hilbert space and let C be a nonempty subset of H. Let A : C → H and β ∈ ]0, +∞[. A is β-cocoercive if βA is firmly nonexpansive, i.e.,
+(∀x ∈ C )(∀y ∈ C ) β∥Ax − Ay ∥2 ≤ ⟨x − y | Ax − Ay ⟩ .
+! Let H and G be two real Hilbert spaces, L ∈ B(H, G) nonzero, and A : G → G. A is β-cocoercive ⇒ L∗AL is ∥L∥−2β-cocoercive. Proof: For every (x, y ) ∈ H2,
+⟨L∗ALx − L∗ALy | x − y ⟩ = ⟨ALx − ALy | Lx − Ly ⟩
+≥ β∥ALx − ALy ∥2
+Furthermore, ∥L∗ALx − L∗ALy ∥2 ≤ ∥L∥2∥ALx − ALy ∥2. Then ⟨L∗ALx − L∗ALy | x − y ⟩ ≥ β∥L∗ALx − L∗ALy ∥2/∥L∥2.
+
+
+4/18
+Nonexpansive operator: definition
+Let H be a real Hilbert space and let C be a nonempty subset of H. Let A : C → H and β ∈ ]0, +∞[. A is β-cocoercive if βA is firmly nonexpansive, i.e.,
+(∀x ∈ C )(∀y ∈ C ) β∥Ax − Ay ∥2 ≤ ⟨x − y | Ax − Ay ⟩ .
+! Let H and G be two real Hilbert spaces, L ∈ B(H, G) nonzero, and A : G → G. A is β-cocoercive ⇒ L∗AL is ∥L∥−2β-cocoercive.
+! A is β-cocoercive ⇒ A is β−1-Lipschitzian.
+
+
+4/18
+Nonexpansive operator: definition
+Let H be a real Hilbert space and let C be a nonempty subset of H. Let A : C → H and β ∈ ]0, +∞[. A is β-cocoercive if βA is firmly nonexpansive, i.e.,
+(∀x ∈ C )(∀y ∈ C ) β∥Ax − Ay ∥2 ≤ ⟨x − y | Ax − Ay ⟩ .
+Lipschitz
+Nonexpansive
+Firmly nonexpansive
+Cocoercive
+
+
+5/18
+Nonexpansive operator: definition
+Let H be a real Hilbert space and let C be a nonempty subset of H. Let A : C → H and let α ∈]0, 1[. A is α-averaged if there exists a nonexpansive operator R : C → H such that A = (1 − α)Id + αR .
+
+
+5/18
+Nonexpansive operator: definition
+Let H be a real Hilbert space and let C be a nonempty subset of H. Let A : C → H and let α ∈]0, 1[. A is α-averaged if
+(∀(x, y ) ∈ C 2) ∥Ax − Ay ∥2 + 1 − α
+α ∥(Id − A)x − (Id − A)y ∥2 ≤ ∥x − y ∥2.
+Proof: For every (x, y ) ∈ C 2,
+∥Ax − Ay ∥2 + 1 − α
+α ∥(Id − A)x − (Id − A)y ∥2 ≤ ∥x − y ∥2
+⇔ α∥Ax − Ay ∥2 + (1 − α)(∥Ax − Ay ∥2 − 2 ⟨x − y | Ax − Ay ⟩ + ∥x − y ∥2)
+≤ α∥x − y ∥2
+⇔ ∥Ax − Ay ∥2 − 2(1 − α) ⟨x − y | Ax − Ay ⟩ + (1 − 2α)∥x − y ∥2 ≤ 0
+⇔ ∥Ax − Ay − (1 − α)(x − y )∥2 ≤ α2∥x − y ∥2
+⇔ R = A − (1 − α)Id
+α nonexpansive.
+
+
+5/18
+Nonexpansive operator: definition
+Let H be a real Hilbert space and let C be a nonempty subset of H. Let A : C → H and let α ∈]0, 1[. A is α-averaged if
+(∀(x, y ) ∈ C 2) ∥Ax − Ay ∥2 + 1 − α
+α ∥(Id − A)x − (Id − A)y ∥2 ≤ ∥x − y ∥2.
+! A is α-averaged ⇒ A is nonexpansive.
+! A is 1
+2 -averaged ⇔ A is firmly nonexpansive.
+! A is α-averaged ⇒ A is α′-averaged for every α′ ∈ [α, 1[.
+! Let λ ∈]0, 1/α[. A is α-averaged ⇒ (1 − λ)Id + λA is λα-averaged. Proof: If A is α-averaged, there exists a nonexpansive operator R such that A = (1 − α)Id + αR. We have thus
+(1 − λ)Id + λA =(1 − λ)Id + λ((1 − α)Id + αR)
+=(1 − λα)Id + λαR.
+
+
+5/18
+Nonexpansive operator: definition
+Let H be a real Hilbert space and let C be a nonempty subset of H. Let A : C → H and let α ∈]0, 1[. A is α-averaged if
+(∀(x, y ) ∈ C 2) ∥Ax − Ay ∥2 + 1 − α
+α ∥(Id − A)x − (Id − A)y ∥2 ≤ ∥x − y ∥2.
+! Let (ωi )1≤i≤n ∈]0, 1]n be such that ∑n
+i=1 ωi = 1 and let
+(αi )1≤i≤n ∈]0, 1[n. If, for every i ∈ {1, . . . , n}, Ai : C → H is
+αi -averaged, then ∑n
+i=1 ωi Ai is α-averaged with α = ∑m
+i=1 ωi αi .
+! Let (αi )1≤i≤n ∈]0, 1[n . If, for every i ∈ {1, . . . , n}, Ai : C → C is αi -averaged, then A1 · · · An is α-averaged with
+α= 1
+1 + 1/(∑n
+i =1
+αi
+1−αi ) .
+
+
+6/18
+Nonexpansive operator: recap
+Lipschitz
+Nonexpansive
+−averaged
+Cocoercive
+Firmly
+nonexpansive
+α
+
+
+7/18
+Nonexpansive operator: main property
+Let H be a real Hilbert space and let C be a nonempty subset of H. Let A : C → H. Let β ∈ ]0, +∞[ and γ ∈]0, 2β[. If A is β-cocoercive, then Id − γA is γ/(2β)-averaged.
+Proof : A β-cocoercive ⇔ βA firmly nonexpansive. There exists a nonexpansive operator R : C → H such that βA = (Id + R)/2. Thus
+Id − γA =
+(
+1− γ
+2β
+)
+Id + γ
+2β (−R).
+(−R) being nonexpansive, Id − γA is γ/(2β)-averaged.
+
+
+8/18
+Nonexpansive operators What is their use ?
+
+
+9/18
+Descent lemma
+Let H be a real Hilbert space, f : H → R and ν ∈ ]0, +∞[. If f is Fre ́chet differentiable and its gradient is ν-Lipschitzian, then
+(∀(x, y ) ∈ H2) f (y ) ≤ f (x) + ⟨y − x | ∇f (x)⟩ + ν
+2 ∥y − x∥2.
+Proof : For every (x, y ) ∈ H2 and t ∈ R, let φ(t) = f (x + t(y − x)). φ is differentiable and φ′(t) = ⟨y − x | ∇f (x + t(y − x))⟩. We have then
+φ(1) − φ(0) =
+∫1
+0
+φ′ (t )dt
+⇔ f (y ) − f (x) − ⟨y − x | ∇f (x)⟩ =
+∫1
+0
+⟨y − x | ∇f (x + t(y − x)) − ∇f (x)⟩ dt.
+In addition, according to the Cauchy-Schwarz inequality,
+⟨y − x | ∇f (x + t(y − x)) − ∇f (x)⟩
+≤ ∥y − x∥∥∇f (x + t(y − x)) − ∇f (x)∥ ≤ tν∥y − x∥2.
+This leads to
+(∀(x, y ) ∈ H2) f (y ) ≤ f (x) + ⟨y − x | ∇f (x)⟩ + ν
+2 ∥y − x∥2.
+
+
+10/18
+Reminders on conjugation
+Let H be a Hilbert space and f : H → ]−∞, +∞]. The conjugate of f is the function f ∗ : H → [−∞, +∞] such that
+(∀u ∈ H) f ∗(u) = sup
+x ∈H
+( ⟨x | u⟩ − f (x)) .
+! Property: Let Γ0(H) be the class of proper lower-semicontinuous
+convex functions from H to ]−∞, +∞]. If f ∈ Γ0(H), then f ∗ ∈ Γ0(H).
+
+
+10/18
+Reminders on conjugation
+Let H be a Hilbert space and f : H → ]−∞, +∞]. The conjugate of f is the function f ∗ : H → [−∞, +∞] such that
+(∀u ∈ H) f ∗(u) = sup
+x ∈H
+( ⟨x | u⟩ − f (x)) .
+Fenchel-Young inequality : If f is proper, then
+1. (∀(x, u) ∈ H2) f (x) + f ∗(u) ≥ ⟨x | u⟩
+2. (∀(x, u) ∈ H2) u ∈ ∂f (x) ⇔ f (x) + f ∗(u) = ⟨x | u⟩.
+
+
+11/18
+Baillon-Haddad theorem
+Let H be a real Hilbert space, f ∈ Γ0(H) and ν ∈ ]0, +∞[. If f is Fre ́chet differentiable, then ∇f ν-Lipschitzian ⇔ ∇f ν−1-cocoercive.
+Proof : Assume that ∇f is ν-Lipschitzian. According to Fenchel-Young inequality, for every (x, y , z) ∈ H3,
+f ∗(∇f (y )) ≥ ⟨z | ∇f (y )⟩ − f (z).
+From the descent lemma,
+f ∗(∇f (y )) ≥ ⟨z | ∇f (y ) − ∇f (x)⟩ + ⟨x | ∇f (x)⟩ − f (x) − ν
+2 ∥z − x∥2.
+Moreover, using again the Fenchel-Young result,
+⟨x | ∇f (x)⟩ − f (x) = f ∗(∇f (x)).
+Thus,
+f ∗(∇f (y )) ≥ ⟨z | ∇f (y ) − ∇f (x)⟩ + f ∗(∇f (x)) − ν
+2 ∥z − x∥2
+
+
+11/18
+Baillon-Haddad theorem
+Let H be a real Hilbert space, f ∈ Γ0(H) and ν ∈ ]0, +∞[. If f is Fre ́chet differentiable, then ∇f ν-Lipschitzian ⇔ ∇f ν−1-cocoercive.
+Proof : Thus,
+f ∗(∇f (y )) ≥ ⟨z | ∇f (y ) − ∇f (x)⟩ + f ∗(∇f (x)) − ν
+2 ∥z − x∥2
+= f ∗(∇f (x)) + ⟨x | ∇f (y ) − ∇f (x)⟩ + ⟨z − x | ∇f (y ) − ∇f (x)⟩ − ν
+2 ∥z − x∥2.
+Taking the supremum with respect to z yields
+f ∗(∇f (y )) ≥ f ∗(∇f (x)) + ⟨x | ∇f (y ) − ∇f (x)⟩
++ (ν∥ · ∥2/2)∗(∇f (y ) − ∇f (x))
+= f ∗(∇f (x)) + ⟨x | ∇f (y ) − ∇f (x)⟩ + 1
+2ν ∥∇f (y ) − ∇f (x)∥2.
+Consequently,
+f ∗(∇f (y )) ≥ f ∗(∇f (x)) + ⟨x | ∇f (y ) − ∇f (x)⟩ + 1
+2ν ∥∇f (y ) − ∇f (x)∥2.
+
+
+11/18
+Baillon-Haddad theorem
+Let H be a real Hilbert space, f ∈ Γ0(H) and ν ∈ ]0, +∞[. If f is Fre ́chet differentiable, then ∇f ν-Lipschitzian ⇔ ∇f ν−1-cocoercive.
+Proof : For every (x, y ) ∈ H2,
+f ∗(∇f (y )) ≥ f ∗(∇f (x)) + ⟨x | ∇f (y ) − ∇f (x)⟩ + 1
+2ν ∥∇f (y ) − ∇f (x)∥2
+and symmetrically
+f ∗(∇f (x)) ≥ f ∗(∇f (y )) + ⟨y | ∇f (x) − ∇f (y )⟩ + 1
+2ν ∥∇f (x) − ∇f (y )∥2.
+By summing, we finally obtain
+− ⟨y − x | ∇f (y ) − ∇f (x)⟩ + 1
+ν ∥∇f (x) − ∇f (y )∥2 ≤ 0,
+which shows that ∇f is 1/ν-cocoercive.
+
+
+12/18
+Nonexpansive operator: example
+Baillon-Haddad theorem Let H be a real Hilbert space, f ∈ Γ0(H) and ν ∈ ]0, +∞[. If f is Fre ́chet differentiable, then ∇f ν-Lipschitzian ⇔ ∇f ν−1-cocoercive.
+Let H be a Hilbert space, f ∈ Γ0(H), ν ∈ ]0, +∞[ and γ ∈]0, 2/ν[. f Fre ́chet differentiable and ∇f ν-Lipschitzian ⇒ Id − γ∇f
+} {{ }
+gradient descent
+operator
+is γν/2
+averaged.
+
+
+13/18
+Resolvent: definition
+Let H be a Hilbert space. Let A : H → 2H. The revolvent of A is JA = (Id + A)−1.
+Let H be a Hilbert space. Let A : H → 2H and γ ∈ ]0, +∞[. The Yosida approximation of A of index γ is
+γA = 1
+γ (Id − JγA).
+
+
+14/18
+Proximity operator: definition
+Let H be a Hilbert space. Let f ∈ Γ0(H) and γ ∈ ]0, +∞[. For every x ∈ H, there exists a unique p ∈ H such that
+f (p) + 1
+2γ ∥p − x∥2 = inf
+y∈H f (y ) + 1
+2γ ∥y − x∥2 .
+Let H be a Hilbert space. Let f ∈ Γ0(H).
+! The Moreau envelope of f of parameter γ ∈ ]0, +∞[ is
+γf : H → R : x .→ inf
+y∈H f (y ) + 1
+2γ ∥y − x∥2.
+! The proximity operator of f is
+proxf : H → H : x .→ argmin
+y ∈H
+f (y ) + 1
+2 ∥y − x∥2.
+
+
+14/18
+Proximity operator: definition
+Let H be a Hilbert space. Let f ∈ Γ0(H).
+! The Moreau envelope of f of parameter γ ∈ ]0, +∞[ is
+γf : H → R : x .→ inf
+y∈H f (y ) + 1
+2γ ∥y − x∥2.
+! The proximity operator of f is
+proxf : H → H : x .→ argmin
+y ∈H
+f (y ) + 1
+2 ∥y − x∥2.
+x
+f (x) γ f (x)
+x
+proxf (x)
+x
+
+
+14/18
+Proximity operator: definition
+Let H be a Hilbert space. Let f ∈ Γ0(H).
+! The Moreau envelope of f of parameter γ ∈ ]0, +∞[ is
+γf : H → R : x .→ inf
+y∈H f (y ) + 1
+2γ ∥y − x∥2.
+! The proximity operator of f is
+proxf : H → H : x .→ argmin
+y ∈H
+f (y ) + 1
+2 ∥y − x∥2.
+Remark: For every x ∈ H,
+γf (x) ≤ f (x).
+
+
+15/18
+Proximity operator: definition
+Let H be a Hilbert space and f ∈ Γ0(H).
+proxf = J∂f .
+Proof: By using Fermat’s rule, for every x ∈ H,
+p = arg min f + 1
+2 ∥ · −x∥2 ⇔ 0 ∈ ∂
+(
+f +1
+2 ∥ · −x∥2)
+(p)
+⇔ 0 ∈ ∂f (p) + p − x
+⇔ x ∈ (Id + ∂f )(p)
+⇔ p = (Id + ∂f )−1(x).
+
+
+16/18
+Proximity operator: properties
+Let H be a Hilbert space, f ∈ Γ0(H) and (x, p) ∈ H2.
+p = proxf x ⇔ (∀y ∈ H) ⟨y − p | x − p⟩ + f (p) ≤ f (y ).
+Let H be a Hilbert space and f ∈ Γ0(H). Then proxf is firmly nonexpansive .
+
+
+16/18
+Proximity operator: properties
+Let H be a Hilbert space, f ∈ Γ0(H) and γ ∈ ]0, +∞[. γf is differentiable and ∇ γf is γ−1-Lipschitzian
+(∀x ∈ H) ∇ γf
+}{{}
+Moreau
+envelope
+= γ−1(Id − proxγf ) = γ∂f
+}{{}
+Yosida
+approximation
+.
+
+
+16/18
+Proximity operator: properties
+Lemma Let H be a real Hilbert space and let g : H → R. Assume that there exists G : H → H continuous such that, for every x ∈ H, G (x) ∈ ∂g (x). Then g is Fre ́chet differentiable on H and ∇g = G .
+Proof: For every (x, y ) ∈ H2,
+g (x + y ) ≥ g (x) + ⟨G (x) | y ⟩
+g (x) ≥ g (x + y ) − ⟨G (x + y ) | y ⟩
+Then
+0 ≤ g (x + y ) − g (x) − ⟨G (x) | y ⟩
+≤ ⟨G (x + y ) − G (x) | y ⟩ ≤ ∥G (x + y ) − G (x)∥∥y ∥.
+We deduce that
+yli→m0 y ̸=0
+g (x + y ) − g (x) − ⟨G (x) | y ⟩
+∥y ∥ = 0.
+
+
+16/18
+Proximity operator: properties
+Let H be a Hilbert space, f ∈ Γ0(H) and γ ∈ ]0, +∞[. γf is differentiable and ∇ γf is γ−1-Lipschitzian
+(∀x ∈ H) ∇ γf
+}{{}
+Moreau
+envelope
+= γ−1(Id − proxγf ) = γ∂f
+}{{}
+Yosida
+approximation
+.
+Proof: Since proxγf is firmly nonexpansive, Id − proxγf is also firmly nonexpansive. It is thus nonexpansive and γ−1(Id − proxγf ) is γ−1-Lipschitzian.
+
+
+16/18
+Proximity operator: properties
+Let H be a Hilbert space, f ∈ Γ0(H) and γ ∈ ]0, +∞[. γf is differentiable and ∇ γf is γ−1-Lipschitzian
+(∀x ∈ H) ∇}{γ{f}
+Moreau
+envelope
+= γ−1(Id − proxγf ) = γ∂f
+}{{}
+Yosida
+approximation
+.
+Proof: Let (x, y , q) ∈ H3 and let px = proxγf x. We have
+γf (q) ≥ γf (px ) + ⟨q − px | x − px ⟩
+= γf (px ) + ⟨q − y + y − x + x − px | x − px ⟩
+= γf (px ) + ∥x − px ∥2 + ⟨y − x | x − px ⟩ + ⟨q − y | x − px ⟩ .
+We know that γ f (x) = infp∈H f (p) + 1
+2γ ∥p − x∥2 = f (px ) + 1
+2γ ∥px − x∥2. Hence
+γf (q)
+≥ γ γf (x) + ⟨y − x | x − px ⟩ + 1
+2 ∥x − px ∥2 + ⟨q − y | x − px ⟩ .
+
+
+16/18
+Proximity operator: properties
+Let H be a Hilbert space, f ∈ Γ0(H) and γ ∈ ]0, +∞[. γf is differentiable and ∇ γf is γ−1-Lipschitzian
+(∀x ∈ H) ∇}{γ{f}
+Moreau
+envelope
+= γ−1(Id − proxγf ) = γ∂f
+}{{}
+Yosida
+approximation
+.
+Proof: Let (x, y , q) ∈ H3 and let px = proxγf x. We have
+γf (q) ≥ γf (px ) + ⟨q − px | x − px ⟩ = γf (px ) + ⟨q − y + y − x + x − px | x − px ⟩
+= γf (px ) + ∥x − px ∥2 + ⟨y − x | x − px ⟩ + ⟨q − y | x − px ⟩ .
+We know that γ f (x) = infp∈H f (p) + 1
+2γ ∥p − x∥2 = f (px ) + 1
+2γ ∥px − x∥2. Hence
+γf (q) + 1
+2 ∥q − y ∥2
+≥ γ γf (x) + ⟨y − x | x − px ⟩ + 1
+2 ∥x − px ∥2 + ⟨q − y | x − px ⟩ + 1
+2 ∥q − y ∥2.
+
+
+16/18
+Proximity operator: properties
+Proof: Let (x, y , q) ∈ H3 and let px = proxγf x. We have
+γf (q) ≥ γf (px ) + ⟨q − px | x − px ⟩ = γf (px ) + ⟨q − y + y − x + x − px | x − px ⟩
+= γf (px ) + ∥x − px ∥2 + ⟨y − x | x − px ⟩ + ⟨q − y | x − px ⟩ .
+We know that γ f (x) = infp∈H f (p) + 1
+2γ ∥p − x∥2 = f (px ) + 1
+2γ ∥px − x∥2. Hence
+γf (q) + 1
+2 ∥q − y ∥2
+≥ γ γf (x) + ⟨y − x | x − px ⟩ + 1
+2 ∥x − px ∥2 + ⟨q − y | x − px ⟩ + 1
+2 ∥q − y ∥2.
+Since γ f (y ) = infq∈H f (q) + 1
+2γ ∥q − y ∥2,
+γ γf (y ) ≥ γ γf (x) + ⟨y − x | x − px ⟩ + 1
+2 ∥x − px ∥2
++ qi∈nfH ⟨q − y | x − px ⟩ + 1
+2 ∥q − y ∥2
+} {{ } −1
+2 ∥x −px ∥2
+.
+
+
+16/18
+Proximity operator: properties
+Proof: Since γf (y ) = infq∈H f (q) + 1
+2γ ∥q − y ∥2,
+γ γf (y ) ≥ γ γf (x) + ⟨y − x | x − px ⟩ + 1
+2 ∥x − px ∥2
++ inf
+q∈H ⟨q − y | x − px ⟩ + 1
+2 ∥q − y ∥2
+} {{ } −1
+2 ∥x −px ∥2
+.
+Consequently
+γf (y ) ≥ γf (x) + 1
+γ ⟨x − px | y − x⟩ ,
+which shows that γ−1(x − px ) ∈ ∂ γf (x). Since γ−1(Id − proxγf ) is continuous, we deduce that γf is Fre ́chet
+differentiable and ∇ γf = γ−1(Id − proxγf ).
+
+
+16/18
+Proximity operator: properties
+Let H be a Hilbert space, f ∈ Γ0(H) and γ ∈ ]0, +∞[. γf is differentiable and ∇ γf is γ−1-Lipschitzian
+(∀x ∈ H) ∇ γf
+}{{}
+Moreau
+envelope
+= γ−1(Id − proxγf ) = γ∂f
+}{{}
+Yosida
+approximation
+.
+Interpretation: γf is a convex smooth lower approximation to f .
+
+
+17/18
+Projection
+Projection : Let H be a Hilbert space. Let C be a nonempty closed convex subset of H.
+(∀x ∈ H) proxιC (x) = argmin
+y ∈C
+1
+2 ∥y − x∥2 = PC (x).
+x
+PC (x)
+C
+
+
+17/18
+Projection
+Projection : Let H be a Hilbert space. Let C be a nonempty closed convex subset of H.
+(∀x ∈ H) proxιC (x) = argmin
+y ∈C
+1
+2 ∥y − x∥2 = PC (x).
+Remark :
+! p = PC (x) ⇔ p = J∂ιC x ⇔ x − p ∈ ∂ιC (p) = NC (p)
+⇔ p ∈ C and (∀y ∈ C ) ⟨y − p | x − p⟩ ≤ 0 .
+Particular case: if C is a vector space: p = PC (x) ⇔
+{
+x − p ∈ C⊥
+p ∈ C.
+! γ ιC = (2γ)−1d 2
+C where dC distance to the convex set C is defined by dC : x .→ infy∈C ∥y − x∥ = ∥x − PC x∥. We have then
+∇d 2
+C = ∇( 1
+2 ιC ) = 2(Id − PC ).
+
+
+18/18
+Exercise
+For every i ∈ {1, . . . , m}, let Ai : H → H and let βi ∈ ]0, +∞[.
+1. Let (ωi )1≤i≤m ∈ ]0, +∞[m be such that ∑m
+i=1 ωi = 1. Show that, for
+every (x, y ) ∈ H2,
+∥ ∥ ∥
+m ∑
+i =1
+√ωi βi (Ai x − Ai y )
+∥ ∥ ∥
+2
+≤
+m ∑
+i =1
+βi ∥Ai x − Ai y ∥2.
+2. Assume that, for every i ∈ {1, . . . , m}, Ai is βi -cocoercive.
+Show that ∑m
+i=1 Ai is β-cocoercice with β = (∑m
+i =1 β−1
+i )−1.
+
+
+Universit ́e Paris-Saclay – M2 Optimisation
+Convex analysis and optimization
+Part II.3: Forward-backward algorithm
+jean-christophe@pesquet.eu, emilie.chouzenoux@inria.fr Center for Visual Computing – OPIS Inria group CentraleSupe ́lec
+
+
+2/17
+Fixed points
+In the following, H is a real Hilbert space.
+Let (ν, γ) ∈ ]0, +∞[2. Let f ∈ Γ0(H). Let g ∈ Γ0(H) be Fre ́chet differentiable with a ν-Lipschitzian gradient. Let T = proxγf ◦ (Id − γ∇g ).
+1. FixT = Argmin(f + g ).
+2. If γ ∈]0, 2/ν[, then T is δ−1-averaged with δ = 2 − γν/2 ∈]1, 2[.
+Proof: For every x ∈ H,
+x ∈ FixT
+⇔ x = proxγf (x − γ∇g (x))
+⇔ (Id − γ∇g )x ∈ (Id + γ∂f )x
+⇔ 0 ∈ ∇g (x) + ∂f (x).
+Consequently, FixT = zer (∇g + ∂f ) = zer (∂(g + f )) = Argmin(f + g ).
+
+
+2/17
+Fixed points
+Let (ν, γ) ∈ ]0, +∞[2. Let f ∈ Γ0(H). Let g ∈ Γ0(H) be Fre ́chet differentiable with a ν-Lipschitzian gradient. Let T = proxγf ◦ (Id − γ∇g ).
+1. FixT = Argmin(f + g ).
+2. If γ ∈]0, 2/ν[, then T is δ−1-averaged with δ = 2 − γν/2 ∈]1, 2[.
+Proof: proxγf is α1 = 1/2-averaged. γ ∈]0, 2/ν[ ⇒ Id − γ∇g is α2 = γν/2-averaged. It follows that T is α-averaged with
+α= 1
+1 + 1/( α1
+1−α1 + α2
+1−α2 ) = α1 + α2 − 2α1α2
+1 − α1α2
+=
+1
+2 + γν
+2 − 21
+2
+γν 2
+1− 1
+2
+γν 2
+⇔ α−1 = δ.
+
+
+3/17
+Forward-Backward with fixed step-size
+Let f ∈ Γ0(H). Let g ∈ Γ0(H) be Fre ́chet differentiable with a ν-Lipschitzian gradient where ν ∈ ]0, +∞[. Let γ ∈]0, 2/ν[ and δ = 2 − γν/2 ∈]1, 2[.
+Let (λn)n∈N be a sequence in [0, δ] such that ∑
+n∈N λn(δ − λn) = +∞. We assume that Argmin(f + g ) ̸= ∅. Let x0 ∈ H and
+(∀n ∈ N)
+{
+yn = xn − γ∇g (xn)
+xn+1 = xn + λn(proxγf yn − xn).
+Then, (xn)n∈N converges weakly to a minimizer x of f + g .
+Exercice: Prove this result.
+
+
+3/17
+Forward-Backward with fixed step-size
+Proof: Let T = proxγf ◦ (Id − γ∇g ). For every n ∈ N,
+xn+1 = xn + λn(Txn − xn).
+T is δ−1-averaged and FixT = Argmin(f + g ). The FB algorithm is thus have an instance of the generalized form of KM iteration.
+
+
+3/17
+Forward-Backward with fixed step-size
+Let f ∈ Γ0(H). Let g ∈ Γ0(H) be Fre ́chet differentiable with a ν-Lipschitzian gradient where ν ∈ ]0, +∞[. Let γ ∈]0, 2/ν[ and δ = 2 − γν/2 ∈]1, 2[.
+Let (λn)n∈N be a sequence in [0, δ] such that ∑
+n∈N λn(δ − λn) = +∞. We assume that Argmin(f + g ) ̸= ∅. Let x0 ∈ H and
+(∀n ∈ N)
+{
+yn = xn − γ∇g (xn)
+xn+1 = xn + λn(proxγf yn − xn).
+Then, (xn)n∈N converges weakly to a minimizer x of f + g . In addition, if T = proxγf ◦ (Id − γ∇g ), then
+(∀n ∈ N) ⟨Txn − x | xn − Txn⟩ ≥ γ ⟨Txn − x | ∇g (xn) − ∇g (x)⟩ .
+
+
+3/17
+Forward-Backward with fixed step-size
+Proof: Let y = x − γ∇g (x). Since proxγf is firmly nonexpansive, for every n ∈ N,
+〈proxγf yn − proxγf y | yn − y 〉 ≥ ∥proxγf yn − proxγf y ∥2
+⇔ 〈proxγf yn − proxγf y | (Id − proxγf )yn − (Id − proxγf )y 〉 ≥ 0
+⇔ ⟨Txn − Tx | yn − Txn − y + Tx⟩ ≥ 0
+⇔ ⟨Txn − x | xn − γ∇g (xn) − Txn − x + γ∇g (x) + x⟩ ≥ 0
+⇔ ⟨Txn − x | xn − Txn⟩ ≥ γ ⟨Txn − x | ∇g (xn) − ∇g (x)⟩ .
+
+
+3/17
+Forward-Backward with fixed step-size
+Let f ∈ Γ0(H). Let g ∈ Γ0(H) be Fre ́chet differentiable with a ν-Lipschitzian gradient where ν ∈ ]0, +∞[. Let γ ∈]0, 2/ν[ and δ = 2 − γν/2 ∈]1, 2[.
+Let (λn)n∈N be a sequence in [0, δ] such that ∑
+n∈N λn(δ − λn) = +∞. We assume that Argmin(f + g ) ̸= ∅. Let x0 ∈ H and
+(∀n ∈ N)
+{
+yn = xn − γ∇g (xn)
+xn+1 = xn + λn(proxγf yn − xn).
+Then, (xn)n∈N converges weakly to a minimizer x of f + g . In addition, (∇g (xn))n∈N converges strongly to ∇g (x).
+
+
+3/17
+Forward-Backward with fixed step-size
+Proof: Since T is nonexpansive, for every n ∈ N,
+∥xn − x∥∥xn − Txn∥ ≥ ∥Txn − Tx∥∥xn − Txn∥
+= ∥Txn − x∥∥xn − Txn∥
+≥ ⟨Txn − x | xn − Txn⟩
+≥ γ ⟨Txn − x | ∇g (xn) − ∇g (x)⟩
+= γ ⟨Txn − xn | ∇g (xn) − ∇g (x)⟩ + γ ⟨xn − x | ∇g (xn) − ∇g (x)⟩ .
+By using the cocoercivity of ∇g ,
+∥xn − x∥∥xn − Txn∥ ≥ −γ∥Txn − xn∥∥∇g (xn) − ∇g (x)∥ + γν−1∥∇g (xn) − ∇g (x)∥2
+≥ −γν∥Txn − xn∥∥xn − x∥ + γν−1∥∇g (xn) − ∇g (x)∥2.
+This yields
+γν−1∥∇g (xn) − ∇g (x)∥2 ≤ (1 + γν)∥xn − x∥∥xn − Txn∥.
+
+
+3/17
+Forward-Backward with fixed step-size
+Proof: This yields
+γν−1∥∇g (xn) − ∇g (x)∥2 ≤ (1 + γν)∥xn − x∥∥xn − Txn∥.
+Since xn ⇀ x, (xn)n∈N is bounded and so is (∥xn − x∥)n∈N. In addition xn − Txn → 0. Therefore ∇g (xn) → ∇g (x).
+
+
+4/17
+Some lemmas
+Three point inequality
+Let (ν, γ) ∈ ]0, +∞[2. Let f ∈ Γ0(H). Let g ∈ Γ0(H) be differentiable with a ν-Lipschitzian gradient. Let h = f + g . Let (x, z) ∈ H2 and let p = proxγf (x − γ∇g (x)). Then
+h(p) ≤ h(z) + 1
+γ ⟨x − p | x − z⟩ −
+(1
+γ−ν
+2
+)
+∥x − p∥2.
+Proof: According to the descent lemma,
+g (p) ≤ g (x) + ⟨∇g (x) | p − x⟩ + ν
+2 ∥p − x∥2
+and, by the tangent inequality,
+g (z) ≥ g (x) + ⟨∇g (x) | z − x ⟩ .
+We have thus
+g (p) ≤ g (z) − ⟨∇g (x) | z − p⟩ + ν
+2 ∥p − x∥2.
+
+
+4/17
+Some lemmas
+Proof: We have thus
+g (p) ≤ g (z) − ⟨∇g (x) | z − p⟩ + ν
+2 ∥p − x∥2.
+In addition
+p = proxγf (x − γ∇g (x))
+⇔ x − γ∇g (x) − p ∈ γ∂f (p) ⇔ x−p
+γ − ∇g (x) ∈ ∂f (p).
+We deduce that
+f (z) ≥ f (p) +
+〈x − p
+γ − ∇g (x) | z − p
+〉
+.
+
+
+4/17
+Some lemmas
+Proof: We have thus
+{
+g (p) ≤ g (z) − ⟨∇g (x) | z − p⟩ + ν
+2 ∥p − x∥2
+f (z) ≥ f (p) + 1
+γ ⟨x − p | z − p⟩ − ⟨∇g (x) | z − p⟩
+⇒ h(p) ≤ h(z) − 1
+γ ⟨x − p | z − p⟩ + ν
+2 ∥p − x∥2
+⇔ h(p) ≤ h(z) + 1
+γ ⟨x − p | p − x + x − z⟩ + ν
+2 ∥p − x∥2
+⇔ h(p) ≤ h(z) + 1
+γ ⟨x − p | x − z⟩ +
+(ν
+2−1
+γ
+)
+∥p − x∥2.
+
+
+5/17
+Some lemmas
+Let h ∈ Γ0(H). Then, h is weakly lower-semicontinuous .
+Proof: h ∈ Γ0(H) if and only if its epigraph
+epi h = {(x, η) ∈ H × R ∣∣ h(x) ≤ η}
+is nonempty closed and convex. Let (xn, ηn)n∈N be a sequence of epih such that (xn, ηn) ⇀ (x, η). Since epih is closed and convex, (x, η) ∈ epi h. This shows that epi h is weakly closed, that is h is weakly lower semicontinuous.
+
+
+5/17
+Some lemmas
+Let h ∈ Γ0(H). Then, h is weakly lower-semicontinuous .
+Let h ∈ Γ0(H) be such that inf h > −∞. Let (xn)n∈N be a sequence in H which is a minimizing sequence , i.e. limn→+∞ h(xn) = inf h. If xn ⇀ x, then x ∈ Argminh.
+Proof: Since h is weakly lower-semicontinuous,
+inf h = lim
+n→+∞ h(xn) = lim inf
+n→+∞ h(xn) ≥ h(x).
+Then h(x) = inf h.
+
+
+6/17
+Forward-Backward with varying stepsize
+Let f ∈ Γ0(H). Let g ∈ Γ0(H) be differentiable with a ν-Lipschitzian gradient where ν ∈ ]0, +∞[. Let (γn)n∈N in [γ, γ] where 0 < γ < γ < 2/ν and let (λn)n∈N be a sequence in [λ, 1] with 0 < λ ≤ 1. We assume that Argmin(f + g ) ̸= ∅. Let x0 ∈ dom f and
+(∀n ∈ N)
+⎧⎪⎨
+⎪⎩
+yn = xn − γn∇g (xn)
+pn = proxγnf yn
+xn+1 = xn + λn(pn − xn).
+Then,
+1. (xn)n∈N is Feje ́r-monotone sequence with respect to Argmin(f + g ).
+2. If ̂x ∈ Argmin(f + g ), then ∑
+n∈N ∥∇g (xn) − ∇g (̂x )∥2 < +∞.
+3. ∑
+n∈N ∥xn+1 − xn∥2 < +∞.
+
+
+6/17
+Forward-Backward with varying stepsize
+Proof: Let ̂x ∈ Argmin(f + g ). For every n ∈ N, since proxγnf is firmly nonexpansive,
+∥pn − ̂x∥2 = ∥proxγnf (xn − γn∇g (xn)) − proxγnf (̂x − γn∇g (̂x))∥2
+≤ ∥xn − γn∇g (xn) − ̂x + γn∇g (̂x )∥2
+− ∥xn − γn∇g (xn) − pn − ̂x + γn∇g (̂x) + ̂x∥2
+= ∥xn − ̂x∥2 − 2γn ⟨xn − ̂x | ∇g (xn) − ∇g (̂x )⟩ + γ2
+n∥∇g (xn) − ∇g (̂x )∥2
+− ∥xn − γn∇g (xn) − pn + γn∇g (̂x )∥2.
+By using the ν−1-cocoercity of ∇g ,
+∥pn − ̂x ∥2 ≤ ∥xn − ̂x∥2 − γn(2ν−1 − γn)∥∇g (xn) − ∇g (̂x )∥2
+− ∥xn − γn∇g (xn) − pn + γn∇g (̂x)∥2.
+
+
+6/17
+Forward-Backward with varying stepsize
+By using the ν−1-cocoercity of ∇g ,
+∥pn − ̂x ∥2 ≤ ∥xn − ̂x∥2 − γn(2ν−1 − γn)∥∇g (xn) − ∇g (̂x )∥2
+− ∥xn − γn∇g (xn) − pn + γn∇g (̂x)∥2.
+We deduce that
+∥xn+1 − ̂x∥2 = ∥(1 − λn)xn + λnpn − ̂x∥2
+≤ (1 − λn)∥xn − ̂x∥2 + λn∥pn − ̂x ∥2
+≤ ∥xn − ̂x∥2 − λnγn(2ν−1 − γn)∥∇g (xn) − ∇g (̂x )∥2
+− λn∥xn − γn∇g (xn) − pn + γn∇g (̂x)∥2.
+Since γn ∈]0, 2/ν[,
+∥xn+1 − ̂x∥ ≤ ∥xn − ̂x∥
+λnγn(2ν−1 − γn)∥∇g (xn) − ∇g (̂x )∥2 ≤ ∥xn − ̂x∥2 − ∥xn+1 − ̂x∥2
+λn∥xn − γn∇g (xn) − pn + γn∇ng (̂x )∥2 ≤ ∥xn − ̂x ∥2 − ∥xn+1 − ̂x∥2.
+
+
+6/17
+Forward-Backward with varying stepsize
+Since γn ∈]0, 2/ν[,
+∥xn+1 − ̂x∥ ≤ ∥xn − ̂x∥
+λnγn(2ν−1 − γn)∥∇g (xn) − ∇g (̂x )∥2 ≤ ∥xn − ̂x∥2 − ∥xn+1 − ̂x∥2
+λn∥xn − γn∇g (xn) − pn + γn∇ng (̂x )∥2 ≤ ∥xn − ̂x ∥2 − ∥xn+1 − ̂x∥2.
+This implies that (xn)n∈N is Feje ́r-monotone sequence with respect to Argmin(f + g ) and
+λγ(2ν−1 − γ)
+∑
+n∈N
+∥∇g (xn) − ∇g (̂x )∥2
+≤
+∑
+n∈N
+λnγn(2ν−1 − γn)∥∇g (xn) − ∇g (̂x )∥2 ≤ ∥x0 − ̂x∥2
+λ
+∑
+n∈N
+∥xn − γn∇g (xn) − pn + γn∇g (̂x)∥2 ≤ ∥x0 − ̂x∥2.
+
+
+6/17
+Forward-Backward with varying stepsize
+This implies that (xn)n∈N is Feje ́r-monotone sequence with respect to Argmin(f + g ) and
+λγ(2ν−1 − γ)
+∑
+n∈N
+∥∇g (xn) − ∇g (̂x )∥2
+≤
+∑
+n∈N
+λnγn(2ν−1 − γn)∥∇g (xn) − ∇g (̂x )∥2 ≤ ∥x0 − ̂x∥2
+λ
+∑
+n∈N
+∥xn − γn∇g (xn) − pn + γn∇g (̂x)∥2 ≤ ∥x0 − ̂x∥2.
+Consequently, (∇g (xn) − ∇g (̂x ))n∈N ∈ l2H(N) ⇒
+(γn(∇g (xn) − ∇g (̂x)))
+n∈N ∈ l2H(N) and
+(xn − γn∇g (xn) − pn + γn∇g (̂x ))n∈N ∈ l2H(N) ⇒ (xn − pn)n∈N ∈ l2H(N). Since (∀n ∈ N) ∥xn+1 − xn∥ = λn∥xn − pn∥ ≤ ∥xn − pn∥, (xn+1 − xn)n∈N ∈ l2H(N).
+
+
+6/17
+Forward-Backward with varying stepsize
+Let f ∈ Γ0(H). Let g ∈ Γ0(H) be differentiable with a ν-Lipschitzian gradient where ν ∈ ]0, +∞[. Let (γn)n∈N in [γ, γ] where 0 < γ < γ < 2/ν and let (λn)n∈N be a sequence in [λ, 1] with 0 < λ ≤ 1. We assume that Argmin(f + g ) ̸= ∅. Let x0 ∈ dom f and
+(∀n ∈ N)
+⎧⎪⎨
+⎪⎩
+yn = xn − γn∇g (xn)
+pn = proxγnf yn
+xn+1 = xn + λn(pn − xn).
+Then,
+1. (xn)n∈N is Feje ́r-monotone sequence with respect to Argmin(f + g ).
+2. If ̂x ∈ Argmin(f + g ), then ∑
+n∈N ∥∇g (xn) − ∇g (̂x )∥2 < +∞.
+3. ∑
+n∈N ∥xn+1 − xn∥2 < +∞.
+4. (f (xn) + g (xn))n∈N is a decaying sequence.
+5. ∑
+n∈N((f + g )(xn) − inf(f + g ))2 < +∞.
+
+
+6/17
+Forward-Backward with varying stepsize
+According to the 3 point inequality, for every z ∈ H and n ∈ N,
+(f + g )(pn) ≤ (f + g )(z) + 1
+γn
+⟨xn − pn | xn − z⟩ −
+(1
+γn
+−ν
+2
+)
+∥xn − pn∥2.
+Setting z = xn yields
+(f + g )(pn) ≤ (f + g )(xn) −
+(1
+γn
+−ν
+2
+)
+∥xn − pn∥2.
+Since γn ∈]0, 2/ν[, (f + g )(pn) ≤ (f + g )(xn). In addition, by convexity,
+(f + g )(xn+1) = (f + g )((1 − λn)xn + λnpn)
+≤ (1 − λn)(f + g )(xn) + λn(f + g )(pn).
+Thus (f + g )(xn+1) ≤ (f + g )(xn). Besides, 0 ≤ λn((f + g )(xn) − (f + g )(pn)) ≤ (f + g )(xn) − (f + g )(xn+1).
+
+
+6/17
+Forward-Backward with varying stepsize
+Besides, 0 ≤ λn((f + g )(xn) − (f + g )(pn)) ≤ (f + g )(xn) − (f + g )(xn+1). This yields
+λ
+∑
+n∈N
+((f + g )(xn) − (f + g )(pn)) ≤ (f + g )(x0) − inf (f + g ) < +∞.
+This shows that ((f + g )(xn) − (f + g )(pn))n∈N ∈ l1(N) ⊂ l2(N).
+
+
+6/17
+Forward-Backward with varying stepsize
+Now, set z = ̂x ∈ Argmin(f + g ) in the 3 point inequality. For every n ∈ N,
+(f + g )(pn) ≤ inf(f + g ) + 1
+γn
+⟨xn − pn | xn − ̂x ⟩ −
+(1
+γn
+−ν
+2
+)
+∥xn − pn∥2.
+By using Cauchy-Schwarz inequality, this leads to
+0 ≤ (f + g )(pn) − inf(f + g ) ≤ 1
+γn
+∥xn − pn∥∥xn − ̂x∥.
+Since (xn)n∈N is Feje ́r monotone with respect to Argmin(f + g ),
+0 ≤ (f + g )(pn) − inf(f + g ) ≤ 1
+γ ∥xn − pn∥∥x0 − ̂x ∥.
+As we have proved that (∥xn − pn∥)n∈N ∈ l2(N), ((f + g )(pn) − inf(f + g ))n∈N ∈ l2(N). Knowing that ((f + g )(xn) − (f + g )(pn))n∈N ∈ l2(N), we conclude that ((f + g )(xn) − inf(f + g ))n∈N ∈ l2(N).
+
+
+6/17
+Forward-Backward with varying stepsize
+Let f ∈ Γ0(H). Let g ∈ Γ0(H) be differentiable with a ν-Lipschitzian gradient where ν ∈ ]0, +∞[. Let (γn)n∈N in [γ, γ] where 0 < γ < γ < 2/ν and let (λn)n∈N be a sequence in [λ, 1] with 0 < λ ≤ 1. We assume that Argmin(f + g ) ̸= ∅. Let x0 ∈ dom f and
+(∀n ∈ N)
+⎧⎪⎨
+⎪⎩
+yn = xn − γn∇g (xn)
+pn = proxγnf yn
+xn+1 = xn + λn(pn − xn).
+Then,
+1. (xn)n∈N is Feje ́r-monotone sequence with respect to Argmin(f + g ).
+2. If ̂x ∈ Argmin(f + g ), then ∑
+n∈N ∥∇g (xn) − ∇g (̂x )∥2 < +∞.
+3. ∑
+n∈N ∥xn+1 − xn∥2 < +∞.
+4. (f (xn) + g (xn))n∈N is a decaying sequence.
+5. ∑
+n∈N((f + g )(xn) − inf(f + g ))2 < +∞. 6. (xn)n∈N converges weakly to a minimizer of f + g .
+
+
+6/17
+Forward-Backward with varying stepsize
+Since ((f + g )(xn) − inf(f + g ))n∈N ∈ l2(N), (xn)n∈N is a minimizing sequence. Let (xnk )k∈N be a subsequence of (xn)n∈N converging weakly to x ∈ H. It is also a minimizing subsequence and, since f + g ∈ Γ0(H), x ∈ Argmin(f + g ).
+Thus, every weak sequential cluster point of (xn)n∈ N belongs to Argmin(f + g ).
+It follows from the monotone convergence theorem that (xn)n∈N converges weakly to a point in Argmin(f + g ).
+
+
+7/17
+Forward-Backward with varying stepsize
+Let f ∈ Γ0(H) be strongly convex . Let g ∈ Γ0(H) be differentiable with a ν-Lipschitzian gradient where ν ∈ ]0, +∞[. Let (γn)n∈N in [γ, γ] where 0 < γ < γ < 2/ν and let (λn)n∈N be a sequence in [λ, 1] with 0 < λ ≤ 1. Let x0 ∈ H and
+(∀n ∈ N)
+⎧⎪⎨
+⎪⎩
+yn = xn − γn∇g (xn)
+pn = proxγnf yn
+xn+1 = xn + λn(pn − xn).
+Then, (xn)n∈N converges linearly to the unique minimizer of f + g .
+
+
+7/17
+Forward-Backward with varying stepsize
+Proof: If f is strongly convex, there exists η ∈ ]0, +∞[ and l ∈ Γ0(H) such that
+f =l+ η
+2 ∥ · ∥2.
+This implies that f + g is strictly convex and coercive, hence has a unique minimizer ̂x. In addition, for every x ∈ H and γ ∈ ]0, +∞[,
+proxγf x = prox γl
+1+γη
+(x
+1 + γη
+) .
+For every n ∈ N,
+∥pn − ̂x∥2
+=∥proxγnf (xn − γn∇g (xn)) − proxγnf (̂x − γn∇g (̂x ))∥2
+≤1
+(1 + γnη)2 ∥xn − γn∇g (xn) − ̂x + γn∇g (̂x))∥2
+≤1
+(1 + γnη)2 (∥xn − ̂x∥2 − γn(2ν−1 − γn)∥∇g (xn) − ∇g (̂x))∥2)
+≤1
+(1 + γnη)2 ∥xn − ̂x ∥2.
+
+
+7/17
+Forward-Backward with varying stepsize
+Proof: Therefore, for every n ∈ N,
+∥pn − ̂x ∥ ≤ 1
+1 + γη ∥xn − ̂x ∥
+and
+∥xn+1 − ̂x∥ ≤ (1 − λn)∥xn − ̂x∥ + λn∥pn − ̂x∥
+≤
+(
+1 − λn
+γη
+1 + γη
+)
+∥xn − ̂x∥
+≤ χ∥xn − ̂x∥
+with
+0 ≤ χ = 1 − λ γη
+1 + γη < 1.
+We deduce that, for every n ∈ N, ∥xn − ̂x∥ ≤ χn∥x0 − ̂x ∥.
+
+
+8/17
+Forward-Backward with varying stepsize
+Let f ∈ Γ0(H). Let g ∈ Γ0(H) be differentiable with a ν-Lipschitzian gradient where ν ∈ ]0, +∞[. Let (γn)n∈N in [γ, γ] where 0 < γ < γ ≤ 1/ν. We assume that Argmin(f + g ) ̸= ∅. Let x0 ∈ H and
+(∀n ∈ N)
+{
+yn = xn − γn∇g (xn)
+xn+1 = proxγnf yn
+Then, there exists M ∈ [0, +∞[ such that, for every n ∈ N \ {0},
+(f + g )(xn) − inf(f + g ) ≤ M
+n.
+
+
+8/17
+Forward-Backward with varying stepsize
+Setting z = ̂x ∈ Argmin(f + g ) in the 3 point inequality yields, for every n ∈ N,
+(f +g )(xn+1) ≤ inf(f +g )+ 1
+γn
+⟨xn − xn+1 | xn − ̂x ⟩−
+(1
+γn
+−ν
+2
+)
+∥xn −xn+1 ∥2 .
+Since γn ∈]0, 1/ν], γn−1 − ν/2 ≥ γn−1/2 and
+(f + g )(xn+1) − inf(f + g )
+≤− 1
+2γn
+(−2 ⟨xn − xn+1 | xn − ̂x⟩ + ∥xn − xn+1∥2)
+=− 1
+2γn
+(∥xn − xn+1 − xn + ̂x∥2 − ∥xn − ̂x∥2)
+≤1
+2γ (∥xn − ̂x∥2 − ∥xn+1 − ̂x ∥2).

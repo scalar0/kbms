@@ -1,0 +1,3872 @@
+EN1800 Numerical Methods
+Ronan Vicquelin, Aymeric Vié
+2021-2022
+
+
+2
+
+
+Contents
+I Numerical Methods 7
+1 Introduction 9
+1.1 Course objectives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9 1.2 Course references . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10 1.3 Examples of differential equations . . . . . . . . . . . . . . . . . . . . . . . . . . . 11 1.4 Classification of differential equations . . . . . . . . . . . . . . . . . . . . . . . . . 12
+2 Finite Differences 15
+2.1 Principle of finite differences . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15 2.2 Finite difference approximations of fi′ . . . . . . . . . . . . . . . . . . . . . . . . . 16 2.3 Finite difference approximations of fi′′ . . . . . . . . . . . . . . . . . . . . . . . . . 18 2.4 Optimal Difference Formula with Fixed Stencil . . . . . . . . . . . . . . . . . . . . 20 2.5 Accuracy analysis with the modified wavenumber . . . . . . . . . . . . . . . . . . . 22 2.6 Padé schemes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+3 Ordinary Differential Equations 27
+3.1 Forward Euler method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27 3.2 Stability analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29 3.3 Accuracy analysis with the amplification factor σ . . . . . . . . . . . . . . . . . . . 32 3.4 Backward Euler Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33 3.5 Trapezoidal method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34 3.6 Linearization of implicit methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36 3.7 Stiffness . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37 3.8 Towards Higher-Order Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38 3.9 Runge-Kutta Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38 3.10 Multi-step methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+4 Elliptic Partial Differential Equations 51
+4.1 Numerical resolution of Elliptic PDEs . . . . . . . . . . . . . . . . . . . . . . . . . 51 4.2 2D Laplace/Poisson equation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54 4.3 Direct vs Iterative methods to solve Ax = b . . . . . . . . . . . . . . . . . . . . . . 59 4.4 Basic iterative methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62 4.5 Over-relaxation methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67 4.6 Matrix splitting interpreted as a Richardson method . . . . . . . . . . . . . . . . . . 73 4.7 Towards Krylov methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74 4.8 Comparison of methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
+3
+
+
+4 CONTENTS
+5 Hyperbolic and Parabolic Partial Differential Equations 81 5.1 Examples of Hyperbolic and Parabolic PDEs . . . . . . . . . . . . . . . . . . . . . 81 5.2 Convergence of numerical schemes: The Lax theorem . . . . . . . . . . . . . . . . . 82 5.3 Stability Analysis of discrete PDE . . . . . . . . . . . . . . . . . . . . . . . . . . . 84 5.4 Characterization of numerical errors . . . . . . . . . . . . . . . . . . . . . . . . . . 98 5.5 Lax Wendroff and Lax-Friedrichs schemes . . . . . . . . . . . . . . . . . . . . . . . 103 5.6 Consistent and stable discretisations . . . . . . . . . . . . . . . . . . . . . . . . . . 104
+6 Implicit methods for multidimensional parabolic equations 109 6.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 109 6.2 Implicit methods applied to the unsteady heat equation . . . . . . . . . . . . . . . . 110 6.3 ADI method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 113 6.4 Generalization . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 116
+7 Numerical resolution of incompressible fluids 119 7.1 Fundamental equations for fluid dynamics . . . . . . . . . . . . . . . . . . . . . . . 119 7.2 Incompressible flows . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 121 7.3 Solution methods for incompressible Navier-Stokes equations . . . . . . . . . . . . 122
+II Exercises 125
+8 Introduction to Python 127 8.1 Definition and plotting of a function . . . . . . . . . . . . . . . . . . . . . . . . . . 127 8.2 Evaluation of the integral of a function . . . . . . . . . . . . . . . . . . . . . . . . . 127 8.3 Root-finding algorithms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 128
+9 Finite differences 129 9.1 First order derivatives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 129 9.2 Second order derivatives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 130
+10 Ordinary Differential Equations 131 10.1 A first simple example of ODE . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 131 10.2 Harmonic oscillator . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 132 10.3 Evolution of a population . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 133
+11 Elliptic equations 135 11.1 Poisson’s equation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 135 11.2 Laplace equation: treatment of boundary conditiions . . . . . . . . . . . . . . . . . 136 11.3 Poisson’s equation with SOR and conjugate gradient methods . . . . . . . . . . . . . 137 11.4 Multi-block resolution . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 138
+12 Hyperbolic and parabolic equations: explicit methods 141 12.1 1D Unsteady diffusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 141 12.2 1D advection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 142 12.3 Thin boundary layer in the presence of pressure gradient . . . . . . . . . . . . . . . 142
+13 Hyperbolic and parabolic equations: numerical errors 145 13.1 Order of convergence of numerical schemes . . . . . . . . . . . . . . . . . . . . . . 145 13.2 Analysis of numerical dispersion and diffusion . . . . . . . . . . . . . . . . . . . . 145
+
+
+CONTENTS 5
+14 Implicit methods for parabolic equations 147 14.1 Implicit method applied to 1D Unsteady diffusion . . . . . . . . . . . . . . . . . . . 147 14.2 Implicit methods to reach steady state solution . . . . . . . . . . . . . . . . . . . . . 148
+15 Navier-Stokes equations 149
+A Eigenvalues of Tridiagonal Matrices 151 A.1 Recurrence Relation for the Determinant of a Tridiagonal Matrix . . . . . . . . . . . 151 A.2 Solving the Corresponding Characteristic Equation . . . . . . . . . . . . . . . . . . 152 A.3 Determination of the Eigenvalues of the Tridiagonal Matrix . . . . . . . . . . . . . . 153
+
+
+6 CONTENTS
+
+
+Part I
+Numerical Methods
+7
+
+
+
+
+Chapter 1
+Introduction
+Contents
+1.1 Course objectives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+1.2 Course references . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+1.3 Examples of differential equations . . . . . . . . . . . . . . . . . . . . . . . 11
+1.4 Classification of differential equations . . . . . . . . . . . . . . . . . . . . . 12
+1.1 Course objectives
+Numerical simulations of physical phenomena have become inevitable. On the one hand, benefiting from computational resources in the 21st century, simulations are common practice. On the other hand, due to the increasing complexity and transdisciplinarity of practical engineering systems, no analytical solutions are available and the cost of experimental investigations becomes prohibitive. Therefore, engineers in charge of the design of such systems have no choice but to rely on numerical simulations. The course objectives are:
+1. Understanding standard numerical methods
+2. Applying these methods in workshops
+3. Critical analysis of simulations results
+Combining their skills in computer science, heat transfer, fluid mechanics, mathematical analysis and numerical methods, the students will write their own programs from a blank page and answer several practical engineering problems such as:
+1. Find the optimal residence time in a BioReactor.
+2. Identify the value and location of the maximum temperature of a heated structure.
+3. Control pollutant dispersion or flame flash-back.
+4. Predict of recirculation length backwards a facing step
+5. ...
+9
+
+
+10 CHAPTER 1. INTRODUCTION
+On completion of the course, students will be able to: spontaneously solve a simple problem with a small script to implement a numerical resolution; formalize a physical problem into equations and identify their mathematical nature; discretize a set of differential equations; analyze the accuracy and stability of a numerical method; derive an adapted numerical method in terms of accuracy and efficiency to solve the problem; ensure the validity of the results though hypotheses checking and numerical errors characterization; have a critical interpretation of the physical results; solve problems found in engineering applications.
+1.2 Course references
+The theoretical contents of the course are based on a number of reference books listed below. Books which cover more advanced topics are also given.
+Donea, J. and Huerta, A (2003). Finite Elements Methods for Flow Problems. Wiley.
+Ferziger, J. H. and Peric, M. (2002) Computational Methods for Fluid Dynamics. Springer.
+Hairer, E. and Wanner, G. (2000). Solving Ordinary Differential Equations I. Spinger; 2nd Edition.
+Hairer, E. and Wanner, G. (2000). Solving Ordinary Differential Equations II. Spinger; 2nd Edition.
+Hundsdorfer, W. and Verwer, J. (2003). Numerical Solution of Time-Dependent AdvectionDiffusion-Reaction Equations. Springer.
+Hirsch, C. (2007) Numerical computation of internal & external flows (2nd Edition). ButterworthHeinemann, Oxford.
+Leveque, R. J. (2002) Finite Volume Methods for Hyperbolic Problems. Cambridge Texts in Applied Mathematics.
+Moin, P. (2010) Fundamentals of Engineering Numerical Analysis. Cambridge University Press; 2nd Edition.
+Press, W. H., Teukolsky, S. A., Vetterling, W. T. and Flannery, B. P. (2007) Numerical Recipes. The Art of Scientific Computing. Cambridge University Press; 3rd Edition.
+Schäfer, M (2006). Computational Engineering. Introduction to Numerical Methods. Springer.
+van der Vorst, H. A. (2003) Iterative Krylov Methods for Large Linear Systems. Cambridge University Press.
+
+
+1.3. EXAMPLES OF DIFFERENTIAL EQUATIONS 11
+Saad, Y. (2003). Iterative Methods for Sparse Linear Systems. Society for Industrial and Applied Mathematics.
+Toro, E. F. (2009) Riemann Solvers And Numerical Methods for Fluid Dynamics: A Practical Introduction. Springer.
+1.3 Examples of differential equations
+The mathematical expression of physical phenomena such as transfer of mass, momentum and energy yield partial derivative equations (PDEs). Several examples are listed below. Laplace equation:
+∂2T
+∂x2 + ∂2T
+∂y2 = 0 (1.1)
+Poisson equation:
+∂2T
+∂x2 + ∂2T
+∂y2 = S (1.2)
+Unsteady heat equation:
+∂T
+∂t = λ
+ρcp
+( ∂2T
+∂x2 + ∂2T
+∂y2
+)
+(1.3)
+Stokes problem:
+∂u
+∂t = μ∂2u
+∂y2 (1.4)
+Transport/Advection:
+∂Yk
+∂t + v0
+∂Yk
+∂x = 0 (1.5)
+Wave equation:
+∂2u
+∂t − a2 ∂2u
+∂x2 = 0 (1.6)
+Ordinary differential equation:
+dYk
+dt = ω ̇ k
+ρ (1.7)
+Conservation equations for reactive multi-species gases:
+
+         
+         
+∂
+∂tρ + ∂
+∂xi
+ρui = 0
+∂
+∂t ρuj + ∂
+∂xi
+ρuiuj = − ∂
+∂xj
+P+ ∂
+∂xj
+τij + ρgj
+∂
+∂t (ρE) + ∂
+∂xi
+(ρuiE) = − ∂
+∂xi
+(P ui) + ∂
+∂xi
+(τij uj ) + ρgj uj − ∂
+∂xj
+qj + Q
+∂
+∂t ρYk + ∂
+∂xi
+ρYkui = − ∂
+∂xi
+ρYkVk,i + ω ̇ k
+(1.8)
+
+
+12 CHAPTER 1. INTRODUCTION
+where ρ is the density, uj the j-th component of the velocity, E the energy (sensible and kinetic) and Yk the mass fraction of species k.
+τij = μ
+( ∂ui ∂xj
++ ∂uj
+∂xi
+)
+−2
+3 μ ∂uk
+∂xk
+δij (1.9)
+qj = −λ ∂T
+∂xj
++
+N
+∑
+k=1
+ρhkVk,j (1.10)
+YkVk,j = −D∇Xk (1.11)
+General form of conservation equations:
+∂U
+∂t + ∇F (U , ∇U ) = S (1.12)
+Temperature equation:
+ρcp
+∂T
+∂t + ρcpuj
+∂ ∂xj
+T = ∂ρ
+∂t + uj
+∂P ∂xj
++ σij
+∂ui ∂xj
++ Q − ∂qi
+∂xi
+−
+N
+∑
+k=1
+hkω ̇ k +
+N
+∑
+k=1
+ρYk Vk,j
+∂hk ∂xj
++ Radiation
+(1.13)
+1.4 Classification of differential equations
+1.4.1 Classification of 1st order PDE
+TODO, see slides
+1.4.2 Classification of 2nd order PDE
+TODO, see slides
+1.4.3 Consistency of terminology for first and second order PDE’s :
+Example 1
+Let us consider a first order PDE system with two unknown fields (u, v) defined by the matrix A as
+A=
+[1 1 −1 1
+]
+This corresponds to the following equations
+
+ 
+ 
+∂u
+∂x + ∂v
+∂y = 0
+∂v
+∂y − ∂u
+∂x = 0
+(1.14)
+Following the classification of 1st-order PDE’s, eigenvalues of the matrix A must be determined. Here, the pair of eigenvalues is (1 + i, 1 − i) are both complex, denoting an elliptic system of 1st-order PDE’s. However, the previous system can be transformed into two 2nd-order PDE as
+∆u = ∂2u
+∂x2 + ∂2u
+∂y2 = 0
+∆v = ∂2v
+∂x2 + ∂2v
+∂y2 = 0
+(1.15)
+
+
+1.4. CLASSIFICATION OF DIFFERENTIAL EQUATIONS 13
+The system becomes a set of uncoupled Laplace equations, which correspond to elliptic 2nd-order PDE’s. Both 1st-order and 2nd-order classification of partial derivative equations are indeed consistent.
+Example 2
+The set of equations governing acoustic waves in fluids is obtained by linearizing the Euler equations around a mean state of the flow at rest. The density ρ, the velocity u and the pressure p are written as
+ρ = ρ0 + ρ1 u = u0 + u1 p = p0 + p1
+, (1.16)
+where ρ0, u0 = 0 and p0 are the uniform conditions of the flow at rest. u1, ρ1 and p1 are small perturbations such that ρ1 ρ0 and p1 p0. The resulting set of linearized Euler equations is
+∂ρ1
+∂t + ρo
+∂u1
+∂x = 0 (1.17)
+ρ0
+∂u1
+∂t = − ∂p1
+∂x = −c2 ∂ρ1
+∂x , (1.18)
+where c =
+( ∂p ∂ρ
+∣ ∣ ∣
+∣s
+)1/2
+is the speed of sound. Both equations can be put into the canonical form of
+a 1st-order PDE as
+∂ ∂t
+[ρ1 u1
+]
++
+[ 0 ρ0
+c2
+ρ0 0
+]
+} {{ }
+A
+∂ ∂x
+[ρ1 u1
+]
+= 0 (1.19)
+(1.20)
+The eigenvalues of the matrix A are (c, −c), both are real numbers. The PDE is then hyperbolic. Eliminating the velocity perturbation u1, one can also express a 2nd-order PDE for the density perturbation:
+∂2ρ1
+∂t2 − c2 ∂2ρ1
+∂x2 = 0 (1.21)
+This is the classical wave equation which is an hyperbolic 2nd-order PDE.
+1.4.4 Discretisation of PDE
+In general, PDE or systems of PDE do not have analytical solutions. In such cases, the only way to get the solution is to use approximations of the solution and the PDE system. The methods to approximate the solutions depend on the way the solution will be represented. There are three main types of approximations in the literature:
+• Finite differences: the solution is evaluated at specific points in the domain.
+• Finite Volumes: the solution is decomposed into a finite sum of control volumes.
+• Finite Elements: this method is based on the variational formulation of the PDE system. The solution is represented into a set of basis functions
+
+
+
+
+Chapter 2
+Finite Differences
+Contents
+2.1 Principle of finite differences . . . . . . . . . . . . . . . . . . . . . . . . . . 15 2.2 Finite difference approximations of f ′
+i . . . . . . . . . . . . . . . . . . . . . 16 2.3 Finite difference approximations of f ′′
+i . . . . . . . . . . . . . . . . . . . . . 18 2.4 Optimal Difference Formula with Fixed Stencil . . . . . . . . . . . . . . . . 20 2.5 Accuracy analysis with the modified wavenumber . . . . . . . . . . . . . . . 22 2.6 Padé schemes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+2.1 Principle of finite differences
+In PDEs, the equations involve partial derivatives of functions such as ∂f
+∂x , ∂2f
+∂x2 . The discretized version of the PDE will then introduce discrete approximations of derivatives. In the finite difference approach, such approximations are built from the knowledge of the function values on a set of points on a structured mesh as depicted in Fig. 2.1. Numerical schemes based on finite differences
+xi
+xi 1 xi+1
+fi
+fi 1 fi+1
+Figure 2.1 : Continuous function approximated by its discrete values fi, fi+1, ... on the mesh composed of points xi, xi+1....
+approximate the function derivatives from the fi = f (xi) values. This is done by combining Taylor series written as different points. The Taylor series expressed around xi to estimate f (xi+1) is given by
+f (xi+1) = f (xi) + f ′(xi)(xi+1 − xi) + f ′′(x) 1
+2 (xi+1 − xi)2 + f ′′′(xi) 1
+6 (xi+1 − xi)3 + ... (2.1)
+15
+
+
+16 CHAPTER 2. FINITE DIFFERENCES
+If one considers a uniform mesh with step size h = xi+1 − xi, the Taylor series becomes:
+fi+1 = fi + hfi′ + h2
+2 fi′′ + h3
+6 fi′′′ + ... (2.2)
+Such expression highlight the link between point values fi and its derivatives fi′, fi′′ at the same location. This relationship is the key ingredient in an approach such as finite differences to approximate
+numerically the derivatives ∂f
+∂x, ∂2f
+∂x2 involved in ODEs and PDEs.
+2.2 Finite difference approximations of fi′
+If one is interested in an approximation of the first derivative f ′(x), the aforementioned Taylor series gives
+f ′(xi) = fi′ = fi+1 − fi
+h −h
+2 fi′′ − h2
+6 fi′′′ + ...
+} {{ }
+ε=O(h)
+(2.3)
+The first term on the right hand side is the numerical approximation of fi′ from fi and fi+1. The remaining terms constitute the truncation error ε and quantifies the difference between the real value f ′(xi) and its numerical estimation. In the present example, this truncation error is dominated by the leading term for small values of h and one can write this asymptotic behavior as ε = O(h). This Big O notation indicates that for small values of h, the ratio ε/h is bounded, i.e. there exists a constant C such that ε ≤ Ch.
+In the general case where the truncation error is given by ε = O(hα), the obtained numerical approximation is said to be of α-order accuracy. High-order accurate formulas are interesting since, as h decreases, the difference between the real value of the derivative and its numerical approximation decreases as Chα, which yield small numerical errors as α increases. In the present example in Eq. (2.3), the obtained formula is then 1st-order accurate and gives us an initial finite difference formula highlighted below
+fi′ = fi+1 − fi
+h + O(h) (2.4)
+1st-order Forward Difference Formula
+Another formula can be obtained by writing the Taylor series around xi to evaluate f (xi−1):
+fi−1 = fi − hfi′ + h2
+2 fi′′ − h3
+6 fi′′′ + ... (2.5)
+This yield the so-called 1st-order backward approximation of f ′(x):
+fi′ = fi − fi−1
+h + O(h) (2.6)
+1st-order Backward Difference Formula
+
+
+2.2. FINITE DIFFERENCE APPROXIMATIONS OF FI′ 17
+A higher order approximation can be achieved by combining the two aforementioned Taylor series formulas,
+fi+1 = fi + hfi′ + h2
+2 fi′′ + h3
+6 fi′′′ + ...
+fi−1 = fi − hfi′ + h2
+2 fi′′ − h3
+6 fi′′′ + ...,
+and by subtracting them, one gets
+fi+1 + fi−1 = 2hfi′ + h3
+3 fi′′′ + ..., (2.7)
+or
+fi′ = fi+1 − fi−1
+2h − h2
+6 fi′′′ + ... (2.8)
+The following second-order difference formula is obtained
+fi′ = fi+1 − fi−1
+2h + O(h2) (2.9)
+2nd-order Centered Difference Formula
+The formula is centered because computing fi′ requires the knowledge of neighbouring points on
+both sides (i − 1) and (i + 1). This formula is also a 2h-stencil or 2∆-stencil where ∆ is another common notation for the mesh cell size. The stencil denotes the pattern of points used to approximate the quantity of interest. In 1D problems as investigated so far, the stencil outlines the spatial extension of the formula which depends on the considered points in the approximations. The forward and backward formula, in Eqs. (2.4) and (2.6) respectively, are 1∆-stencil formulas.
+By further combining Taylor series around xi expressed at different points, it is possible to achieve finite difference formula of higher-order accuracy. Following such an approach, higher-order accurate formula will then rely on larger stencil.
+Exercise 1
+Demonstrate that the following centered formula is fourth-order accurate :
+fi′ = fi−2 − 8fi−1 + 8fi+1 − fi+2
+12h + O(h4) (2.10)
+The treatment for boundary conditions is slightly particular, since, with the aforementioned approaches, points are only available at the inner side of the boundary. One is then compelled to choose either a:
+• Lower-order formula with the same stencil
+• Forward or Backward formula with a larger stencil to keep the same order of accuracy
+The former approach will typically be retained by considering that the reduced accuracy at he boundaries will have a negligible impact on the global performance of the numerical scheme.
+
+
+18 CHAPTER 2. FINITE DIFFERENCES
+2.3 Finite difference approximations of fi′′
+An approximation of the second order derivate f ′′(xi) is obtained by summing both Taylor series in xi+1 and xi−1:
+fi′′ = fi+1 − 2fi + fi−1
+h2 + h2
+12 fi′′′ + ..., (2.11)
+which then yields a centered second-order formula highlighted below.
+fi′′ = fi+1 − 2fi + fi−1
+h2 + O(h2) (2.12)
+2nd-order Centered Difference Formula
+Similarly to formulas for the first-order derivative fi′, formulas of higher-order accuracy are built for
+fi′′ by involving more points. The opposite is not true: Obtaining a formula with a larger stencil does not necessarily gives a higher accuracy (see exercise below). More points does not imply higher order!
+Exercise 2
+Let us consider an approximation of the second-order derivative fi′′ following a centered for
+mula based on f ′:
+fi′′ = fi′+1 − fi′−1
+2h + O(?) (2.13)
+Depending on the approximations chosen for fi′+1 and fi′−1, the final formula gives a different order of accuracy. Determine it for both choices detailed below.
+1. a. 1st-order forward difference formula for fi′+1 and 1st-order backward difference for
+mula for fi′−1
+2. b. 2nd-order centered difference formula for both fi′+1 and fi′−1,
+Solution 2
+For both methods, the first centered formula based on f ′ gives
+fi′′ = fi′+1 − fi′−1
+2h + O(h2) = fi′+1 − fi′−1
+2h − h2
+6 f (IV )
+i + O(h4) (2.14)
+Method a Two different formulas are used for fi′+1 and fi′−1:
+1st-order forward difference formula: fi′+1 = fi+2 − fi+1
+h −h
+2 fi′′+1 + O(h2)
+1st-order backward difference formula: fi′−1 = fi−1 − fi−2
+h −h
+2 fi′′−1 + O(h2)
+Injecting both expressions in the formula for fi′′ gives
+fi′′ = fi+2 − fi+1 − fi−1 + fi−2
+2h2 +
+(−h
+2 (fi′′+1 + fi′′−1) + O(h2) 2h
+)
+
+
+2.3. FINITE DIFFERENCE APPROXIMATIONS OF FI′′ 19
+In the last term, one can write
+fi′′+1 = fi′′ + O(h)
+fi′′−1 = fi′′ + O(h),
+therefore the last term can be expressed as
+1
+4h [−2hfi′′ + O(h)] = − 1
+2 fi′′ + O(h) = O(1)
+Method a. then results in an inconsistant formula! Despite using correct difference formula, the undesired accumulation of truncation errors here give a useless formula although a larger stencil has been used.
+fi′′ = fi+2 − fi+1 − fi−1 + fi−2
+2h2 + O(1)
+} {{ }
+inconsistant!
+Method b This time centered formula are used for both first-order derivatives:
+fi′+1 = fi+2 − fi
+2h − h2
+6 fi′′+′ 1 + O(h4) (2.15)
+fi′−1 = fi − fi−2
+2h − h2
+6 fi′′−′ 1 + O(h4) (2.16)
+Injecting both expressions in the formula for fi′′ gives
+fi′′ = fi+2 − 2fi + fi−2
+4h2 − h2
+12h (fi′′+′ 1 − fi′′−′ 1) + O(h3) − h2
+6 f (IV )
+i + O(h4) (2.17)
+Writing
+fi′′+′ 1 = fi′′′ + hf (IV )
+i + O(h2) (2.18)
+fi′′−′ 1 = fi′′′ − hf (IV )
+i + O(h2), (2.19)
+one gets
+fi′′ = fi+2 − 2fi + fi−2
+4h2 − h
+12 (2hf (IV )
+i − O(h2)) − h2
+6 f (IV )
+i + O(h3)
+= fi+2 − 2fi + fi−2
+4h2 − h2
+3 f (IV )
+i + O(h3)
+Finally, the difference formula obtained through method b. is
+fi′′ = fi′+2 − 2fi′ + fi−2
+4h2 + O(h2) , (2.20)
+which, despite having a larger stencil than Eq. (2.12), is still second-order accurate.
+
+
+20 CHAPTER 2. FINITE DIFFERENCES
+2.4 Optimal Difference Formula with Fixed Stencil
+2.4.1 General principle
+Using the Taylor series, a method is here presented to determine an optimal difference formula for a fixed stencil, i.e when fixing the points considered in the difference formula. The derivative at point xj is approximated using points xk from the interval j − l ≤ k ≤ j + q. Hence, we have l points on the left and q points on the right. Expressing the approximated derivative as a weighted sum of fk, the purpose is to determine the weighted coefficients ak to achieve the highest order accuracy:
+fj′ +
+q
+∑
+k=−l
+akfj+k = O(h?) (2.21)
+Once ak coefficients are determined as well as the order α, one can write the obtained optimal formula
+fj′ = −
+q
+∑
+k=−l
+akfj+k + O(hα) (2.22)
+General Difference Formula
+Deriving for each point xkk the Taylor series around xj gives the following general expression:
+fj′ +
+q
+∑
+k=−l
+akfj+k =
+(q
+∑
+k=−l
+ak
+)
+fj +
+(
+1+
+q
+∑
+k=−l
+kak
+h 1!
+)
+fj′ +
+(q
+∑
+k=−l
+k2ak
+h2
+2!
+)
+fj′′
++
+(q
+∑
+k=−l
+k3ak
+h3
+3!
+)
+fj′′′ + ... (2.23)
+Cancelling the right-hand-side terms enables us to determine the weighting coefficients. As more and more first terms on the right hand side are nullified, the leading term becomes of higher and higher order. The number of terms to set to zero is set to provide enough equations to determine the ak factors. Considering more points in the difference formula will then automatically increase the desired order accuracy by following this methodology. The problem becomes the determination ak such that equation (2.21) produces the highest possible order. The equation (2.23) is usually summed up in a Taylor table for the sake of clarity. One such Taylor table is presented in Tab. 2.1 where each term from the left-hand-side of Eq. (2.22) is developed in terms of derivatives in xj: fj, fj′, fj′′, ...
+Table 2.1 : Taylor table representation of a general difference formula
+fj fj′ fj′′ · · · f (n)
+j ···
+fj′ 0 1 0 · · · 0 · · · fj 1 0 0 · · · 0 · · ·
+· · · ... ... ... · · · ... · · · a1fj+1 a1 a1h a1 h2
+2! · · · a1 hn
+n! · · ·
+· · · ... ... ... · · · ... · · · akfj+k ak kak h1
+1! kak h2
+2! · · · kak hn
+n! · · ·
+· · · ... ... ... · · · ... · · ·
+
+
+2.4. OPTIMAL DIFFERENCE FORMULA WITH FIXED STENCIL 21
+2.4.2 Example
+An example is detailed for the first-order derivative by determining an optimal forward difference formula using two neighbouring points (l = 0 and q = 2):
+fj′ +
+2
+∑
+k=0
+akfj+k = O(?) (2.24)
+The corresponding Taylor table is given in Tab. 2.2.
+Table 2.2 : Taylor table for the 2∆ forward formula
+fj fj′ fj′′ fj′′′
+fj′ 0 1 0 0 a0fj a0 0 0 0 a1fj+1 a1 a1h a1 h2
+2 a1 h3
+6
+a2fj+2 a2 a22h a22h2 4
+3 a2h3
+Hence, injecting Taylor series in the formula gives
+fj′ +
+2
+∑
+k=0
+akfj+k = (a0 + a1 + a2)fj + (a1h + 2a2h)fj′ + (a1
+h2
+2 + 2a2h2)fj′′
++(a1
+h3
+6 +4
+3 a2h3)fj′′′ + ... (2.25)
+Cancelling the three first terms on the right hand side of the equation enables us to fix the through weighting coefficients a0, a1 and a2 through a linear system:
+
+
+
+a0 + a1 + a2 = 0 a1h + 2a2h = 1 a1 h2
+2 + 2a2h2 = 0
+→
+
+
+
+a1 = −4h
+a2 = 1
+2h
+a3 = 3
+2h
+(2.26)
+Putting back these results into the formula for fj′ without forgetting to estimate the truncation error term to determine the order of accuracy finally gives
+fj′ = −3fj + 4fj+1 − fj+2
+2h + h2
+3 + ... (2.27)
+The obtained formula is therefore second order.
+fj′ = −3fj + 4fj+1 − fj+2
+2h + O(h2) (2.28)
+2nd-order Forward Difference Formula
+The same methodology can be applied to derive optimal finite difference formula for the secondorder derivative fj′′.
+Exercise 3
+Determine a centered fourth-order difference formula for fj′′ on a 4∆-stencil.
+
+
+22 CHAPTER 2. FINITE DIFFERENCES
+2.5 Accuracy analysis with the modified wavenumber
+2.5.1 Principle
+The order accuracy is not the only metric to appreciate differences between different numerical schemes, here difference formulas. Besides, order accuracy only gives insight in the numerical approximation behavior for small values of the cell size h. The approach detailed here studies the impact of the numerical discretization on a specific kind of functions: f (x) = eikx. The relevance of limiting our study to this family of functions comes from the discrete-time Fourier transform that will not be detailed here.
+When considering the harmonic function f (x) = eikx of wavenumber k and wavelength λ = 2π
+k,
+the numerical approximation will not impact similarly the large and well-resolved wavelengths and the small and coarsely captured wavelengths. Quantifying thoroughly this effect is the modified wavenumber analysis. The principle is the following one. The derivative of the considered continuous function is well known:
+f (x) = eikx ⇒ f ′(x) = ikeikx = ik f (k) (2.29)
+Thus, evaluated at the point xj, the exact derivative is easily determined
+fj′ = ikfj (2.30)
+The retained difference formula will give a different result because of the numerical error. Nonetheless, the obtained approximation can always be put in the form
+fj′ = ik′fj, (2.31)
+where k′ is the modified wavenumber. The modified wavenumber analysis consists then in comparing k and k′ for different reference wavenumber values k. This is usually represented in plots of hk′ = f (hk). When both wavenumbers are identical, the approximation is perfect for all wavelengths and there is no numerical error. This case is only met when using spectral schemes, not detailed here, where Eq. (2.30) is enforced through discrete Fourier transforms. In general and for the difference formulas seen before, k and k′ are different.
+2.5.2 Examples of modified wavenumber analysis
+First-order derivative approximations
+Let us determine the modified wavenumber k′ associated to the 2nd-order centered difference formula for fj′:
+fi′ = fi+1 − fi−1
+2h .
+With the considered harmonic function f (x) = eikx, one finds that fj = eikxj = eikjh since, without loss of generality, xj = jh. The difference formula then becomes
+fj′ = eik(j+1)h − eik(j−1)h
+2h = eikjh
+} {{ }
+fj
+eikh − e−ikh
+2h (2.32)
+Hence,
+fj′ = ifj
+sin(hk)
+h = ik′fj, (2.33)
+where the modified wavenumber of the considered scheme is given by
+hk′ = sin(hk) (2.34)
+
+
+2.5. ACCURACY ANALYSIS WITH THE MODIFIED WAVENUMBER 23
+0.0 0.5 1.0 1.5 2.0 2.5 3.0
+hk
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+hk′
+Ideal 2nd Centered
+(a)
+0.0 0.5 1.0 1.5 2.0 2.5 3.0 hk
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+hk′
+Ideal 2nd Centered 4th Centered 4th Pade
+(b)
+Figure 2.2 : Plots of modified wavenumbers. a) 2nd-order centered formula from Eq. (2.9) compared to ideal curve. b) Comparison between ideal curve, 2nd-order centered formula from Eq. (2.9), 4th-order centered formula from Eq. (2.10) and 4th-order Padé formula
+The comparison of both wavenumbers is shown in Fig. 2.2 a). The abscissa axis range from 0 to π. Infinitely long wavelengths correspond to k = 0, while, following the Shannon criterion, the smallest wavelength captured on the discretized mesh is λ = 2h that corresponds to hk = π. The figure shows that the investigated 2nd-order centered difference formula is accurate for small wavenumbers as expected given that the difference formula becomes more and more accurate as more points are retained in one wavelength. One can demonstrate that the departure of the hk′ wavenumber curve from the ideal one is directly linked to the order accuracy of the scheme. Figure 2.2 b) compares the modified wavenumbers of different approximations for fj′. The modified wavenumber analysis enables us to clearly compare in quantitative terms several schemes of different or same orders. While being of the same order as the centered difference formula in Eq. (2.10), the presented Padé scheme captures much more accurately the harmonic function on a coarse mesh. This highlights that the order of accuracy is certainly not the pinnacle metric.
+Exercise 4
+Show that the modified wavenumber associated to the 4th-order centered formula from Eq. (2.10)
+is given by
+hk′ = 3 sin(hk)
+2 + cos(hk) (2.35)
+Second-order derivative approximations
+Difference formula for fj′′ are also characterized in terms of modified wavenumbers. The secondorder derivative of the continuous harmonic function is
+f ′′(x) = −k2f (x) ⇒ f ′′j = −k2fj (2.36)
+Correspondingly, the numerical approximation introduces a modified wavenumber k′ fulfilling
+f ′′j = −k′2fj (2.37)
+Different difference formulas are compared in Fig. 2.3. While of same order, the 4∆ centered formula of second order is seen to be quite inaccurate compared to the classical second order approximation given in Eq. (2.12).
+
+
+24 CHAPTER 2. FINITE DIFFERENCES
+0.0 0.5 1.0 1.5 2.0 2.5 3.0
+hk
+0
+2
+4
+6
+8
+h2k′2
+Ideal 2nd Centered (2h) 2nd Centered (4h) 4th Centered
+Figure 2.3 : Comparison of modified wavenumbers for different approximations of f ′′
+j : 2nd-order centered formula from Eq. (2.12), 2nd-order centered formula from Eq. (2.20) with a larger stencil, and the 4th-order centered formula derived in a previous exercise
+Exercise 5
+• Determine the modified wavenumber for the 2nd-order centered formula in Eq. (2.12)
+• Same for the 4∆ 2nd-order formula in Eq. (2.20)
+• Same for 4th-order centered formula derived in a previous exercise
+2.6 Padé schemes
+TODO
+
+
+2.6. PADÉ SCHEMES 25
+Cheat Sheet: Finite Difference Formulas
+• Finite difference formula for fj′ = df
+dx
+∣ ∣
+∣xj
+◦ 1st-order Forward Difference Formula
+fi′ = fi+1 − fi
+∆x
+◦ 1st-order Backward Difference Formula
+fi′ = fi − fi−1
+∆x
+◦ 2nd-order Centered Difference Formula
+fi′ = fi+1 − fi−1
+2∆x
+◦ 2nd-order Forward Difference Formula
+fj′ = −3fj + 4fj+1 − fj+2
+2∆x
+◦ 2nd-order Backward Difference Formula
+fj′ = 3fj − 4fj−1 + fj−2
+2∆x
+◦ 4th-order Centered Difference Formula
+fi′ = fi−2 − 8fi−1 + 8fi+1 − fi+2
+12∆x
+• Finite difference formula for fj′′ = d2f
+dx2
+∣ ∣
+∣xj
+◦ 2nd-order Centered Difference Formula
+fi′′ = fi+1 − 2fi + fi−1
+∆x2
+◦ 4th-order Centered Difference Formula
+fi′′ = −fi+2 + 16fi+1 − 30fi + 16fi−1 − ji−2
+12∆x2
+
+
+
+
+Chapter 3
+Ordinary Differential Equations
+Contents
+3.1 Forward Euler method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27 3.2 Stability analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29 3.3 Accuracy analysis with the amplification factor σ . . . . . . . . . . . . . . . 32 3.4 Backward Euler Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33 3.5 Trapezoidal method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34 3.6 Linearization of implicit methods . . . . . . . . . . . . . . . . . . . . . . . . 36 3.7 Stiffness . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37 3.8 Towards Higher-Order Methods . . . . . . . . . . . . . . . . . . . . . . . . 38 3.9 Runge-Kutta Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38 3.10 Multi-step methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+We consider the following general initial value problem:
+
+
+
+dY
+dt = F (Y , t) with Y = (y1, ..., ym)T ; F = (f 1, ..., f m)T
+Y (t = 0) = Y 0,
+(3.1)
+each yp and F p, p ∈ J1, mK being regular functions. The scalar version of this system of equations reads:
+
+
+
+dy
+dt = f (y, t)
+y(t = 0) = y0.
+(3.2)
+To solve such problems, a common way is to use time-marching methods. This class of methods consists in solving for y(t) step-by-step, as:
+• for a given yn = y(tn), find yn+1 = y(tn+1),
+• repeat the process until the desired time t is reached.
+3.1 Forward Euler method
+In order to estimate the update yn+1 from a given state yn = y(tn), one can use a Taylor series expansion:
+yn+1 = yn + hy′n + h2
+2 y′n′ + h3
+6 y′n′′ + ... , (3.3)
+27
+
+
+28 CHAPTER 3. ORDINARY DIFFERENTIAL EQUATIONS
+with h = tn+1 − tn a constant time-step and y′n = dy
+dt
+∣ ∣
+∣t=tn
+= f (yn, tn). Therefore, the first-order
+truncation of Eq (3.3) yields
+yn+1 = yn + hy′n + O(h2). (3.4)
+This defines the Forward Euler method, also simply known as the Euler methods.
+yn+1 = yn + hf (yn, tn) (3.5)
+Forward Euler Method
+This method is second-order accurate locally, which means it is second-order accurate over one step. Alternatively to a local error accuracy,
+εloc = ‖ynum(tn+1) − yexact(tn)‖, (3.6)
+one usually prefers to determine the global error accuracy after a finite time T as
+εglob = ‖ynum(t = T ) − yexact(t = T )‖. (3.7)
+For a fixed time T , decreasing the time-step h increases the number K of time-steps to be computed, as T = Kh. Thus, εloc and εglob differ from each other because of cumulative errors in the global accuracy. It can be shown that, while the Forward Euler method is second-order accurate locally, it is first-order accurate locally.
+Demonstration
+Decomposing the solution at time T , one gets
+y(T = Kh) = yK = (yK − yK−1) + (yK−1 − yK−2) + ... + (y1 − y0) + y0 (3.8)
+=
+K −1
+∑
+n=0
+(yn+1 − yn) + y0 (3.9)
+=
+K −1
+∑
+n=0
+[
+hf (yn, tn) + h2
+2 y′n′ + ...
+]
++ y0 (3.10)
+= y0 +
+K −1
+∑
+n=0
+hf (yn, tn)
+} {{ }
+Forward Euler
++ h2
+2
+K −1
+∑
+n=0
+y′n′ + ...
+} {{ }
+Numerical Error
+. (3.11)
+For a fixed time T , as h decreases, the number of steps K = T /h increases. The term ∑K−1
+n=0 y′n′ is then expected to increase. This effect is quantified precisely by using a discrete
+version of the Mean value theorem which states that there is a value E ∈ [0, T ] such that
+K−1
+∑
+n=0
+y′n′ = Ky′′′(E). (3.12)
+
+
+3.2. STABILITY ANALYSIS 29
+Therefore,
+yK = y0 + h
+K −1
+∑
+n=0
+f (yn, tn) + h2
+2 Ky′n′′(E) + ... (3.13)
+= y0 + h
+K −1
+∑
+n=0
+f (yn, tn)
+} {{ }
+Forward Euler
++ hT
+2 y′n′′(E) + ...
+} {{ }
+Error: O(h)
+(3.14)
+The Forward Euler method is then indeed first-order accurate globally.
+More generally, one can demonstrate similarly that if a time-marching method is (α + 1)-order accurate locally, then it is α-order accurate globally.
+Remark
+The global error being a more practical metric of accuracy, if not mentioned, global error is the one that is meant when speaking of order accuracy.
+3.2 Stability analysis
+Two families of methods are distinguished to solve ODEs: implicit and explicit methods.
+Explicit Methods: The update for explicit methods can be expressed as:
+yn+1 = known R.H.S. (3.15)
+For explicit methods, the formula explicitly gives the computation of yn+1 to be implemented. Forward Euler is an explicit integration method.
+Implicit Methods: On the contrary, for implicit methods, no explicit formula is available to compute yn+1. For instance, the right-hand-side in the update formula might contain f (yn+1, tn+1) which depends on the value to determine itself. Implicit methods then imply an algebraic equation to be solved with a root finding algorithm. They are then more expansive than explicit methods but implicit numerical schemes are usually characterized by a desired enhanced numerical stability.
+Numerical Stability: Numerical stability is defined as follows:
+If y(t), continuous solution of (3.2), is bounded for t ≤ t0, the numerical scheme is stable if the discrete numerical solution also remains bounded for n ≤ n0.
+Definition of numerical stability
+Stability and accuracy are different concepts. One can derive an accurate time-marching method to solve the initial value problem but, if it is not stable, the computed iterates will quickly diverge from the exact solution, which makes the method useless. Consequently, a numerical method should be accurate but it definitely must be stable. Three types of schemes can be found:
+• Unconditionally stable: the numerical solution remains bounded whatever the numerical parameters (h, ...),
+
+
+30 CHAPTER 3. ORDINARY DIFFERENTIAL EQUATIONS
+• Unstable: the numerical solution diverges whatever the parameters. Such numerical methods are then useless,
+• Conditionally stable: the numerical solution remains bounded for specific values/ranges of parameters.
+Stability Analysis: The stability analysis of a numerical method can be performed by studying the numerical stability of the method when applied to the following scalar and linear ODE :
+y′ = λy. (3.16)
+Demonstration
+Using a first-order Taylor expansion, one gets:
+dY
+dt = F (Y , t) = F (Y 0, t0) + ∂F
+∂t
+∣ ∣ ∣
+∣t0,Y 0
+(t − t0) + ∂F
+∂Y
+∣ ∣ ∣
+∣t0,Y 0
+} {{ }
+J0
+(Y − Y 0), (3.17)
+where vecJ0 is the JAcobian matrix of the r.h.s. function at the considered instant. The departure of the state vector Y from its initial value is then given by
+d(Y − Y0)
+dt = J 0(Y − Y0)
+} {{ }
+critical
++ F (t0, Y0) + ∂F
+∂t
+∣ ∣ ∣
+∣t0,Y 0
+(t − t0)
+} {{ }
+non-critical
+. (3.18)
+Only the first term on the right -hand side is critical regarding stability. If the Jacobian matrix J 0 is diagonalizable,
+J0 = P
+
+ 
+λ1 0
+...
+0 λm
+
+
+ P −1, (3.19)
+one can introduce the following change of variables
+U = P −1(y − y0). (3.20)
+Th original system of non-linear ODEs is then transformed after linearization into a set of
+uncoupled scalar ODEs:
+dUi
+dt = λiUi. (3.21)
+Then, studying a method stability through equation (3.16) for any value of λ allows to generalize the result to any operator F in equation (3.1), as long as its Jacobian matrix is diagonalizable. Remark
+If the Jacobian matrix is not diagonalizable, the same conclusion stands with Jordan decomposition.
+The general stability characterization of a numerical scheme then considers equation (3.16), with a complex number λ. For this simple case, the exact solution is known and is given by:
+y(t) = y0eλt. (3.22)
+
+
+3.2. STABILITY ANALYSIS 31
+6 5 4 3 2 1 0 1 2 R3e(λh)
+3
+2
+1
+0
+1
+2
+3
+Im(λh)
+Stable region Unstable region
+Figure 3.1 : Stability region of the exact solution
+This solution remains bounded as long as the following condition is satisfied:
+Re(λ) ≤ 0, (3.23)
+where Re(λ) is the real part of the complex number. The corresponding stability region in the complex plane (Re(λh), Im(λh)) is the half-space shown in gray in Fig. 3.1.
+Stability of the Forward Euler method: The Forward Euler method,
+yn+1 = yn + hf (yn, tn),
+applied to the ODE
+y′ = λy (3.24)
+gives the following updating formula for yn+1:
+yn+1 = yn + hλyn (3.25) = (1 + hλ)yn. (3.26)
+Introducing the amplification factor,
+σ = (1 + hλ), (3.27)
+the updating formula reads yn+1 = σyn. (3.28)
+One has yn = y0σn, (3.29)
+which is bounded if and only if |σ| ≤ 1. (3.30)
+Decomposing λ as λ = λR + iλI , one gets:
+|σ|2 = (1 + hλR)2 + (hλI )2 (3.31)
+
+
+32 CHAPTER 3. ORDINARY DIFFERENTIAL EQUATIONS
+=(λh)
+Re(λh)
+Stable Region
+Unstable Region
+-1
+Figure 3.2 : Stability region of the Forward Euler Method
+Condition σ ≤ 1 corresponds then to the disc of radius 1 and center (-1, 0) which is shown in Fig. 3.2. The forward Euler method is then conditionally stable: depending on the problem, the time step h must be small enough to secure the stability of the numerical method i.e. |σ| ≤ 1. For large time steps, the method diverges. Summing up the properties of the first time-marching method seen so far, we have
+• 1st-order accurate globally
+• Conditionally stable (see Fig. 3.2)
+- If the eigenvalue λ is real and negative (λ ∈ R−) =⇒ Stable if h ≤ 2
+|λ|
+- If the eigenvalue λ is purely imaginary (λ ∈ iR) =⇒ Unstable
+Properties of the Forward Euler Method
+3.3 Accuracy analysis with the amplification factor σ
+Each numerical scheme is characterized by a different amplication factor formula. The knowledge of σ can also determine the accuracy of the scheme which is explained in this section. Considering the linear scalar ODE, y′ = λy, the exact solution at time tn+1 from a given state tn is known:
+yexact
+n+1 = yneλh. (3.32)
+For the same ODE, the numerically predicted value is given by the amplification factor:
+yn+1 = σyn. (3.33)
+Then,
+yexact
+n+1 − yn+1 = yn
+(eλh − σ) . (3.34)
+
+
+3.4. BACKWARD EULER METHOD 33
+A power series expansion yields:
+eλh = 1 + λh + (λh)2
+2 + (λh)3
+6 + ... =
++∞
+∑
+k=0
+μk(λh)k, (3.35)
+and one can write similarly
+σ(λh) =
++∞
+∑
+k=0
+νk(λh)k, (3.36)
+which, for the example of Forward Euler Method, reads σ = 1 + λh. Then the accuracy can be evaluated from:
+yexact
+n+1 − yn+1 = yn
++∞
+∑
+k=0
+(μk − νk)(λh)k (3.37)
+The method is of order α (globally) if μk = νk for k = 0, ..., α
+Accuracy analysis from σ
+The fact that the forward Euler method global order is 1 is retrieved.
+3.4 Backward Euler Method
+The formula of the Backward Euler Method is given below
+yn+1 = yn + hf (yn+1, tn+1). (3.38)
+Backward Euler Method
+Since the right-hand-side depends on the value yn+1 itself, the defined numerical method is implicit.
+3.4.1 Accuracy Analysis:
+Let us characterize the method accuracy by following two different methods. Both will show the Backward Euler Method is 1st-order accurate (globally).
+Method 1: Taylor series The Taylor series expansion around tn+1 reads
+yn = yn+1 − hy′n+1 + h2
+2 y′n′+1 + ... (3.39)
+= yn+1 − hf (yn+1, tn+1) + h2
+2 y′n′+1 + ... (3.40)
+(3.41)
+Hence
+yn+1 = yn + hf (yn+1, tn+1) − h2
+2 y′n′+1 + ...
+} {{ }
+O(h2 )
+, (3.42)
+The backward Euler method is second-order locally and then first-order globally.
+
+
+34 CHAPTER 3. ORDINARY DIFFERENTIAL EQUATIONS
+Method 2: Amplification factor Following Sec. 3.3, let us now compute the amplification factor of the method. For the particular ODE, y′ = λy, one finds that
+yn+1 = yn + λhyn+1 (3.43)
+yn+1 = 1
+1 − λh yn. (3.44)
+Then,
+σ= 1
+1 − λh = 1 + λh
+} {{ }
+1st -order
++(λh)2 + ... (3.45)
+Only the first two terms match the Taylor series expansion of the exponential in Eq. 3.35, the backward Euler method is then first-order accurate globally.
+3.4.2 Stability Analysis:
+We consider equation y′ = λy with Re(λ) ≤ 0. The stability condition reads
+|σ|2 ≤ 1, (3.46)
+which gives 1
+|σ|2 ≥ 1 (3.47)
+and eventually
+(1 − λRh)2 + (λI h)2 ≥ 1. (3.48)
+This region is the complementary region of the disc of center (1, 0) and radius 1. The stability constraint is therefore always fulfilled in the half-space λR < 0. The Backwork Euler Method is then always stable.
+The backward Euler Method is a 1st-order implicit method which is inconditionnaly stable
+Properties of the Backward Euler Method
+Remark
+• The advantage of implicit methods is their enhanced stability.
+• Actually, there exist implicit methods with a limited stablity: they are not used, since the additional cost they suffer is not worth it.
+• Stability and accuracy are two different concepts characterizing numerical schemes. Stability does not imply accuracy, and vice-versa.
+3.5 Trapezoidal method
+From equation (3.2), one can write:
+y(t) = yn +
+∫t
+tn
+f (y, τ )dτ, (3.49)
+
+
+3.5. TRAPEZOIDAL METHOD 35
+in particular,
+y(tn+1) = yn +
+∫ tn+1
+tn
+f (y, τ )dτ. (3.50)
+This formula is always valid and can be estimated with different quadrature rule. When using the trapezoidal quadrature rule, one obtains the Trapezoidal ODE method:
+yn+1 = yn + h
+2
+(
+f (yn, tn) + f (yn+1, tn+1)
+)
+(3.51)
+Trapezoidal Method
+According to the time-marching formula, the Trapezoidal method is implicit.
+Amplification Factor: The amplification factor is evaluated through equation (3.16), which yields
+yn+1 = yn + hλ
+2
+(yn + yn+1
+) (3.52)
+(
+1 − hλ
+2
+)
+=
+(
+1 + hλ
+2
+)
+yn, (3.53)
+hence
+yn+1 = σyn (3.54)
+with the amplification factor
+σ = 1 + λh
+2
+1 − λh
+2
+(3.55)
+Accuracy Analysis: Using Taylor series expansion:
+σ=
+(
+1 + λh
+2
+)
+(
+1 + λh
+2+
+( λh 2
+)2
++
+( λh 2
+)3
++ ...
+)
+(3.56)
+= 1 + λh + (λh)2
+2
+} {{ }
+2nd -order
++ (λh)3
+4 + ... (3.57)
+The Trapezoidal method is 2nd-order accurate (globaly).
+Stability Analysis: Stability condition is expressed through the amplification factor σ as:
+|σ|2 ≤ 1, (3.58)
+hence
+∣ ∣ ∣ ∣
+1 + λh
+2
+∣ ∣ ∣ ∣
+≤
+∣ ∣ ∣ ∣
+1 − λh
+2
+∣ ∣ ∣ ∣
+(3.59)
+which is always true for Re(λ) ≤ 0. The Trapezoidal Method is thus inconditionally stable.
+
+
+36 CHAPTER 3. ORDINARY DIFFERENTIAL EQUATIONS
+• Implicit,
+• 2nd-order accurate,
+• Inconditionally stable.
+Properties of the Trapezoidal Method
+Remark
+• Solving the implicit formula of the Trapezoidal method is as costly as the Backward Euler method.
+• Trapezoidal Method is ill-behaved for Re(λh) → +∞, i.e. h → +∞, which corresponds to σ → −1 and results in an oscillatory behavior.
+• When applied to parabolic PDE, this method is called the Crank-Nicholson Method.
+3.6 Linearization of implicit methods
+Solving algebraic equations (e.g. with Newton Solvers) appearing in implicit methods is expensive, especially when dealing with vectorial systems. A common practice is to linearize the right-handside function in order to replace the algebraic equations by a linear system of equations. Solving the system is then much less expensive. As long as the linearization is valid for moderate (casedependent) h values, the linearized numerical scheme keeps the same accuracy and stability properties.
+Example : Let’s consider the trapezoidal method on a scalar ODE
+yn+1 = yn + h
+2
+(
+f (yn, tn) + f (yn+1, tn+1)
+)
+(3.60)
+f (yn+1, tn+1) is linearized without losing the order of accuracy.
+f (yn+1, tn+1) = f (yn, tn+1) + ∂f
+∂y
+∣ ∣ ∣
+∣yn ,tn+1
+(yn+1 − yn) + 1
+2
+∂2f ∂y2
+∣ ∣ ∣
+∣yn ,tn+1
+(yn+1 − yn)2 + ... (3.61)
+where yn+1 − yn = O(h). (3.62)
+Substituing (3.61) into (3.60) yields
+yn+1 = yn + h
+2
+[
+f (yn, tn) + ∂f
+∂y
+∣ ∣ ∣
+∣yn ,tn+1
+(yn+1 − yn) + f (yn, tn+1)
+]
++ O(h3) (3.63)
+hence
+yn+1 = yn + h
+2
+f (yn, tn) + f (yn, tn+1)
+1− h
+2
+∂f ∂y
+∣ ∣
+∣yn ,tn+1
++ O(h3) (3.64)
+This method is then explicit and offers the same accuracy and stability as its corresponding implicit method as long as Taylor series (3.61) remains valid.
+Remark
+In the case of a non-linear system of ODEs, the linearization involves the Jacobian matrix J = ∂F
+∂Y
+∣
+∣Y n,tn+1
+and the denominator in Eq. (3.64) becomes (1 − h
+2 J ) which requires to solve a linear system.
+
+
+3.7. STIFFNESS 37
+3.7 Stiffness
+A specific phenomenon is taking place in vectorial systems: Stiffness. The ODE reads
+dY
+dt = F (Y , t) (3.65)
+Stability is studied by considering a linear system, which in the case of a systems of ODEs, involves a matrix:
+Y ′ = AY , (3.66)
+Let’s illustrate the phenomenon with the Forward Euler Method given here by
+Y n+1 = Y n + hAY n, (3.67)
+i.e.
+Y n = (Id + hA)n Y 0. (3.68)
+This remains bounded as long as the eigenvalues αi of matrix (Id + hA) verify the condition ∀ i ∈ J1, mK, |αi| ≤ 1. Note that the αi values are related to the eigenvalues (λi)i∈J1,mK of matrix A:
+αi = 1 + hλi. (3.69)
+Therefore, the stability constraint must be verified by all eigenvalues as
+|1 + hλi| ≤ 1, ∀ i ∈ J1, mK (3.70)
+The eigenvalues fo the largest magnitude yields the most stringent constraint. The spectral radius, defined as |λ|max, determines then the stability. If all eigenvalues are real, one finds that the con
+dition h ≤ 2
+|λ|max enforces stability in the forward Euler method. While the fast dynamics of y(t)
+is controlled by |λ|max, the presence of larger time scales (hence smaller eigenvalues) provides additional slower dynamic characteristics to y(t). The issue is when |λ|min is very small compared to |λ|max: capturing the slow transient whose time scale is determined by |λ|min while the spectral radius imposes tiny time steps for the sake of stability makes the computation unaffordable. When such characteristics are met, the system is said to be stiff.
+A system is stiff when the eigenvalues λi of operator A are such that:
+|λmax|
+|λmin| 1 (3.71)
+Definition of Stiffness
+• Explicit Methods: stiffness can become quickly overwhelming because of the competition between the necessity of tiny time steps compared to the long-term dynamics to capture =⇒ The necessary amount of iterations is unaffordable and explicit methods cannot handle stiff problems.
+• Implicit Methods are the only way in such circumstances. However, if h is too large, the method becomes inaccurate. Accuracy control is then required =⇒ time-step adaption and dedicated solvers are needed.
+
+
+38 CHAPTER 3. ORDINARY DIFFERENTIAL EQUATIONS
+3.8 Towards Higher-Order Methods
+Let’s recall the Forward Euler Method:
+yn+1 = yn + h y′n
+}{{}
+f (yn,tn)
++O(h2)
+Expanding the Taylor series to higher order terms yields seems a straightforward approach to derive a higher-order numerical method:
+yn+1 = yn + hy′n + h2
+2 y′n′ + h3
+6 y′n′′ + ... (3.72)
+with
+y′n = f (yn, tn) (3.73)
+y′n′ = dy′
+dt
+∣ ∣ ∣
+∣tn
+= df
+dt =
+(∂f
+∂t + ∂f
+∂y
+∂y ∂t
+)
+t=tn
+=
+(∂f
+∂t + ∂f
+∂y f
+)
+t=tn
+(3.74)
+y′n′′ = dy′′
+dt
+∣ ∣ ∣
+∣tn
+=
+( ∂y′′
+∂t + ∂y′′
+∂y
+∂y ∂t
+)
+t=tn
+(3.75)
+=
+(
+∂2f
+∂t2 + 2f ∂f
+∂y
+∂f
+∂t + ∂f
+∂t
+∂f
+∂y + f
+(∂f ∂y
+)2
++ f2 ∂2f
+∂y2
+)
+t=tn
+(3.76)
+y(n4) = ... (3.77)
+Such developments get rapidly impractical. Which solutions are viable then? Two categories of methods are distinguished
+• One-step methods, also known as Runge-Kutta methods. Higher accuracy is achieved by evaluating f (y, t) at several points between tn and tn+1 = tn + h. → several sub-steps are computed
+• Multi-step methods:
+Use knowledge of previous steps yn−1, yn−2, ...; f (yn−1), f (yn−2), ...
+3.9 Runge-Kutta Methods
+Runge-Kutta methods are denoted as RK-s where s is the number of stages in the numerical scheme that are carried out to determine the value yn+1. The 1st-order explicit RK1 method is noting else than the Forward Euler method. Explicit RK2, RK3 and RK4 methods are presented in this section.
+3.9.1 Standard RK2 method
+Integrating dy
+dt between instants tn and tn+1 gives the following exact estimation of yn+1:
+yn+1 = yn +
+∫ tn+1
+tn
+f (y(τ ), τ )dτ
+Approximating the integral by the trapezoidal rule previously enabled to derive the Trapezoidal method. Another quadrature rule is here considered: the mid-point rule, which yields
+yn+1 ≈ yn + h f (y(t), t)|t=tn+1/2 (3.78)
+yn+1 = yn + hf (yn+1/2, tn+1/2) (3.79)
+
+
+3.9. RUNGE-KUTTA METHODS 39
+However, the value yn+1/2 is not known and must be determined to close the formula. Let us estimate yn+1/2 with Forward Euler:
+yn+1/2 ≈ y∗n+1/2 = yn + h
+2 f (yn, tn) (3.80)
+The obtained method is the standard explicit 2-stage RK Method which is defined by
+y∗n+1/2 = yn + h
+2 f (yn, tn) (3.81)
+yn+1 = yn + hf (y∗n+1/2, tn+1/2) (3.82)
+Standard RK2 method
+Stability and accuracy analyses of standard RK2
+• Amplification factor:
+Considering the y′ = λy ODE, we can express the amplification factor, from:
+y∗n+1/2 = yn + h
+2 λyn =
+(
+1 + hλ
+2
+)
+yn (3.83)
+yn+1 = yn + hλy∗n+1/2 = yn + (hλ + h2λ2
+2 )yn = σyn (3.84)
+Hence
+σ = 1 + hλ + h2λ2
+2 . (3.85)
+• Accuracy: this corresponds to 2nd-order (global) accuracy.
+• Stability: the stability condition writes
+|σ| < 1, (3.86)
+hence ∣
+∣ ∣ ∣
+1 + hλ + (hλ)2
+2
+∣ ∣ ∣ ∣
+< 1 (3.87)
+The corresponding stability region is shown in Fig. 3.3. The RK2 method is then conditionally stable with a stadium-shaped stabiliy region. The region has a larger vertical extent than the Forward Euler method. When the λ is real and negative the stability constraint is the same as the Euler method.
+• Explicit, 2nd-order accurate,
+• Conditionally stable
+- λ ∈ R−: same stability region as Forward Euler
+- λ ∈ iR: unstable, yet with a smaller growth rate than Forward Euler.
+Properties of RK2 method
+
+
+40 CHAPTER 3. ORDINARY DIFFERENTIAL EQUATIONS
+−3 −2 −1 0 1 2
+−2
+−1
+0
+1
+2
+Euler
+RK2
+Figure 3.3 : Stability region of the 2-stage Runge-Kutta Method
+3.9.2 Family of 2-stage explicit Runge-Kutta Methods
+Before discussing the general formalism of RK methods, let us highlight that their exist infinite variants of RK-s schemes which is illustrated here for RK2. A general 2-stage explicit Runge-Kutta method is built from the knowledge of f (y, t) in two points in the interval between tn and tn+1. Let’s then write a general explicit RK2 scheme as
+yn+1 = yn + γ1hk1 + γ2hk2, (3.88)
+where
+k1 = f (yn, tn) (3.89) k2 = f (yn + βhk1, tn + αh) (3.90)
+Let us determine α, β, γ1, γ2 that provide the highest accuracy order for yn+1 We have seen that
+yn+1 = yn + hy′n + h2
+2 y′n′ + ... (3.91)
+= yn + hf (yn, tn) + h2
+2
+(∂f
+∂t + ∂f
+∂y f
+)
+t=tn
++ ... (3.92)
+which is to be matched up to the 3rd term by the considered RK method in Eq. (3.88). Using Taylor series, the general RK2 method writes:
+yn+1 = yn + γ1hf (yn, tn) + γ2hf (yn + βhk1, tn + αh) (3.93)
+yn+1 = yn + γ1hf (yn, tn) + γ2h
+[
+f (yn, tn) + βhk1
+∂f ∂y
+∣ ∣ ∣
+∣tn
++ αh ∂f
+∂t tn
++ ...
+]
+(3.94)
+Then
+yn+1 = yn + h(γ1 + γ2)f (yn, tn) + γ2βh2f (yn, tn) ∂f
+∂y
+∣ ∣ ∣
+∣tn
++ γ2αh2 ∂f
+∂t
+∣ ∣ ∣
+∣tn
++ ... (3.95)
+
+
+3.9. RUNGE-KUTTA METHODS 41
+Matching the terms in Eq. (3.91) results in the following conditions for the coefficients in an explicit
+RK2 method:
+
+    
+    
+γ1 + γ2 = 1
+γ2α = 1
+2
+γ2β = 1
+2
+(3.96)
+Hence a family of 2nd-order accurate RK methods:
+
+    
+    
+β=α
+γ1 = 1 − 1
+2α
+γ2 = 1
+2α
+(3.97)
+where α is a free parameter. In particular, the standard RK2 method described in the previous section is retrieved for α = 1
+2 . This specific choice of α also corresponds to the Runge method, which is then another name of the so-called standard RK2.
+3.9.3 General explicit Runge-Kutta Method
+The general form of s-stage explicit Runge-Kutta schemes is:
+
+         
+         
+k1 = f (t0, yn) k2 = f (t0 + c2h, yn + ha21k1) k3 = f (t0 + c3h, yn + h(a31k1 + a32k2))
+...
+ks = f (t0 + csh, yn + h(as1k1 + ... + as,s−1ks−1)) yn+1 = yn + h(b1k1 + ... + bsks)
+(3.98)
+Corresponding coefficients are usually represented in a Butcher’s table:
+0
+c2 a21
+c3 a31 a32
+... ... . . .
+cs as1 as2 ... as,s−1
+b1 b2 ... bs−1 bs
+As for 2-stage RK family, there is no unicity of kth-order RK methods.
+Remark
+In addition to constraining the order accuracy, it is typically desired that intermediate values of f , kj, remain 1st-order approximation of f (y(t), t), which requires:
+i−1
+∑
+j=1
+aij = ci (3.99)
+
+
+42 CHAPTER 3. ORDINARY DIFFERENTIAL EQUATIONS
+3.9.4 Usual explicit Runge-Kutta Methods
+Common explicit RK2, RK3 and RK4 methods are listed below with their Butcher tables and corresponding updating formulas:
+The method is 2nd-order accurate.
+Butcher Tableau:
+0
+1/2 1/2 01
+Scheme formulation:
+
+   
+   
+k1 = f (tn, yn)
+k2 = f
+(
+tn + h
+2 , yn + hk1
+2
+)
+yn+1 = yn + hk2
+RK2 (Runge)
+The method is 3rd-order accurate.
+Butcher Tableau:
+0
+1/3 1/3 2/3 0 2/3 1/4 0 3/4
+Scheme formulation:
+
+         
+         
+k1 = f (tn, yn)
+k2 = f
+(
+tn + h
+3 , yn + hk1
+3
+)
+k3 = f
+(
+tn + 2h
+3 , yn + 2hk2
+3
+)
+yn+1 = yn + h
+4 k1 + 3h
+4 k3
+RK3 (Heun)
+The method is 3rd-order accurate.
+Butcher Tableau:
+0
+1/2 1/2 1 −1 2 1/6 2/3 1/6
+Scheme formulation:
+
+       
+       
+k1 = f (tn, yn)
+k2 = f
+(
+tn + h
+2 , yn + hk1
+2
+)
+k3 = f (tn + h, yn − hk1 + 2hk2)
+yn+1 = yn + h
+6 k1 + 2h
+3 k2 + h
+6 k3
+RK3 (Kutta)
+
+
+3.9. RUNGE-KUTTA METHODS 43
+The method is 4th-order accurate.
+Butcher Tableau:
+0
+1/2 1/2 1/2 0 1/2 1001 1/6 1/3 1/3 1/6
+Scheme formulation:
+
+            
+            
+k1 = f (tn, yn)
+k2 = f
+(
+tn + h
+2 , yn + hk1
+2
+)
+k3 = f
+(
+tn + h
+2 , yn + hk2
+2
+)
+k4 = f (tn + h, yn + hk3)
+yn+1 = yn + h
+6 k1 + h
+3 k2 + h
+3 k3 + h
+6 k4
+RK4 (Classical)
+The method is 4th-order accurate.
+Butcher Tableau:
+0
+1/3 1/3 2/3 −1/3 1 1 1 −1 1 1/8 3/8 3/8 1/8
+Scheme formulation:
+
+            
+            
+k1 = f (tn, yn)
+k2 = f
+(
+tn + h
+3 , yn + hk1
+3
+)
+k3 = f
+(
+tn + 2h
+3 , yn − hk1
+3 + hk2
+)
+k4 = f (tn + h, yn + hk1 − hk2 + hk3)
+yn+1 = yn + h
+8 k1 + 3h
+8 k2 + 3h
+8 k3 + h
+8 k4
+RK4 (3/8-Rule)
+Remark
+• The order accuracy of RK2, RK3 and RK4 methods can wrongly lead us to believe that explicit s-stage Runge-Kutta method are sth-order accurate. In fact, for order accuracy n ≥ 5, explicit RK methods require s > n stages.
+• As mentioned before, an infinity of possible s-stage RK exist. Some specific RK are preferred thanks to:
+◦ desired properties (e.g. Strong Stability Preserving, Total Variation Diminishing)
+◦ storage savings
+
+
+44 CHAPTER 3. ORDINARY DIFFERENTIAL EQUATIONS
+3.9.5 Stability of explicit Runge-Kutta Methods
+One can show that all s-stage explicit RK Methods have the following amplification factor:
+σ=
+s
+∑
+j=0
+(hλ)j
+j! (3.100)
+Hence, for all:
+• 2-stage RK, σ = 1 + hλ + (hλ)2
+2
+• 3-stage RK, σ = 1 + hλ + (hλ)2
+2 + (hλ)3
+6
+• 4-stage RK, σ = 1 + hλ + (hλ)2
+2 + (hλ)3
+6 + (hλ)4
+24
+For a given number of stages, RK methods have then the same stability properties. The stability region in the complex plane is shown in Fig. 3.4. The RK3 and RK4 methods are characterized by a larger stability domain. Specifically, notice that RK3 and RK4 stability regions include one part of the imaginary axes, which makes them very useful when purely imaginary complex eigenvalues are present in the ODE system. So far, the Backward Euler and Trapezoidal methods were the only methods able to remain stable in such circumstances (Forward Euler and RK2 methods are unstable) but they were implicit. RK3 and RK4 are then widely used explicit methods.
+4 2 0 2 Re(λh)
+3
+2
+1
+0
+1
+2
+3
+Im(λh)
+Euler
+RK2
+RK3
+RK4
+−2. 79
+−2. 51
+2. 83
+1. 73
+Figure 3.4 : Stability regions of Runge-Kutta schemes of orders ranging from 1 to 4. Grey areas indicate stable regions.
+Remark
+Implicit RK methods can also be built (see Hairer’s books). Yet, not all of them are inconditionnaly stable.
+
+
+3.10. MULTI-STEP METHODS 45
+3.10 Multi-step methods
+Contrary to RK methods which feature several evaluations between tn and tn+1, multi-step methods consider previous steps data such as yn−1, fn−1, ...
+Remark
+Since the updating formula of multi-step methods uses values such as yn−1, they cannot be applied for the first integration step because only y0 is known then, and there is no knowledge of y−1. Multistep methods require then a specific initialization process using other formulas.
+3.10.1 Adams Methods
+The derivation of Adams methods starts from the integrated ODE expression between instants tn and tn+1,
+yn+1 = yn +
+∫ tn+1
+tn
+f
+(τ, y(τ ))dτ.
+The function f (t, y(t)) in the integral is then approximated as polynomial which interpolates the previous values fn, fn−1, ... to build an explicit formula. Explicit Adams methods are called AdamsBashforth methods. The first-order Adams-Bashforth consider scheme considers f (t, y(t)) ≈ fn, which yields the Forward Euler method.
+The second-order Adams-Bashforth The second-order Adams-Bashforth method is then built by considering f (t, y(t)) as polynomial of degree 1. The linear approximation is deduced from previous data at tn−1:
+f
+(t, y(t)) = αt + β (3.101)
+= fn − fn−1
+tn − tn−1
+(t − tn−1) + fn−1. (3.102)
+Hence, the previous integral is written as
+∫ tn+1
+tn
+f
+(τ, y(τ ))dτ =
+[ fn − fn−1 h
+(t − tn−1)2
+2 + fn−1t
+]tn+1
+tn
+(3.103)
+=3
+2 hfn − 1
+2 hfn−1, (3.104)
+which defines the updating formula for the second-order Adams-Bashforth method.
+yn+1 = yn + 3
+2 hfn − 1
+2 hfn−1 (3.105)
+2nd-order Adams-Bashforth method
+• Accuracy: The 2nd-order Adams-Bashforth method can also be derived from the Taylor series of y(t):
+yn+1 = yn + h y′n
+}{{}
+fn
++ h2
+2 y′n′
+}{{} fn −fn−1
+h +O(h)
++ h3
+6 y′n′′ + ... (3.106)
+= yn + 3
+2 hfn − 1
+2 hfn−1
+} {{ }
+2nd-order Adams-Bashforth
++ O(h3)
+} {{ }
+Local truncation error
+(3.107)
+
+
+46 CHAPTER 3. ORDINARY DIFFERENTIAL EQUATIONS
+Hence, the so-called 2nd-order Adams-Bashforth is indeed 2nd-order accurate globally.
+• Stability: Considering y′ = λy in a multi-step method such as the 2nd-order Adams-Bashforth gives the following second-order difference equation
+yn+1 −
+(
+1 + 3hλ
+2
+)
+yn + hλ
+2 yn−1 = 0 (3.108)
+This recurrence equation does not result in yn+1 = σyn with a single amplification factor anymore. Instead, solving the quadratic characteristic equation
+σ2 −
+(
+1 + 3hλ
+2
+)
+σ + hλ
+2 = 0, (3.109)
+gives
+yn = c1σ1n + c2σ2n, (3.110)
+if the characteristic equation has two distinct roots σ1 and σ2:
+σ1,2 = 1
+2
+[
+1
+2+3
+2 hλ ±
+√
+1 + hλ + 9
+4 (hλ)2
+]
+, (3.111)
+that are complex numbers in general for complex hλ. The numerical method is stable if |σ1| ≤ 1 and |σ2| ≤ 1. The stability region is shown in Fig. 3.5 along with Adams-Bashforth methods or order 1 and 3. It is seen that the stability domain is reduced as the order-accuracy increases.
+Figure 3.5 : Stability region (within each colored curve) of the 1st(blue), 2nd(red) and 3rd(green) AdamsBashforth methods.
+Generalization of Adams method: Increasing the degree of the polynomial approximating f (t, y(t)) gives higher-order Adams-Bashforth methods.
+Exercise 6
+Decomposing the solution at time T , one gets Considering a quadratic polynomial for f (t, y(t)) which interpolates the values fn, fn−1 and fn−2, demonstrate that the 3rd-order Adams-Bashforth
+
+
+3.10. MULTI-STEP METHODS 47
+formula is given by:
+yn+1 = yn + h
+( 23
+12 fn − 4
+3 fn−1 + 5
+12 fn−1
+)
+(3.112)
+Remark
+Implicit Adams methods, called Adams-Moulton, are derived by including fn+1 in the interpolated values by the polynomial approximating f (t, y(t)).
+3.10.2 Leap-Frog
+Integrating the ODE between the instants tn−1 and tn+1,
+yn+1 = yn−1 +
+∫ tn+1
+tn−1
+f
+(τ, y(τ ))dτ, (3.113)
+yields a new set of numerical methods. Using the mid-point quadrature rule,
+∫ tn+1
+tn−1
+f
+(τ, y(τ ))dτ ≈ 2hfn, (3.114)
+gives the updating formula for the Leap-Frog method, also known as the mid-point rule method.
+yn+1 = yn−1 + 2hfn (3.115)
+Leap-Frog or Mid-point Rule method
+Only the Leap-Frog method is detailed here. Other methods of higher-order accuracy are obtained similarly to the Adams methods by increasing the degree of the interpolating polynomial f (τ, y(τ )). The obtained formulas are called Nyström methods when explicit and Milne-Simpson methods when implicit. Because of their very small stability region (even implicit methods), these numerical schemes are of little practical interest.
+• Accuracy: The Leap-Frog formula is also obtained with the 2nd-order differential formula
+y′n = yn+1 − yn−1
+2h + O(h2) (3.116)
+injected in the Taylor sries of y(t), yielding
+yn+1 = yn−1 + 2hfn + mathcalO(h3). (3.117)
+The Leap-Frog method is then 2nd-order accurate.
+• Stability: considering y′ = λy, the updating formula becomes yn = c1σ1n + c2σ2n with σ1, σ2 roots of the characteristic equation
+σ2 − 2hλσ − 1 = 0. (3.118)
+It is then stable for |σ1| ≤ 1 and |σ2| ≤ 1. Let us consider the image of the unit circle σ = eiθ by hλ = f (σ). hλ = σ2 − 1
+2σ = eiθ − e−iθ
+2 = i sin(θ) (3.119)
+
+
+48 CHAPTER 3. ORDINARY DIFFERENTIAL EQUATIONS
+with θ ∈ [0, 2π]. The image of the disc σ ∈ D(0, 1) is then the segment hλ ∈ [−i, i]. The [−i, i] segment is then the stability region of the Leap-Frog method. The Leap-Frog method is then only stable on the imaginary axes. The usage of this scheme is then limited but is useful in specific conditions such as centered schemes used for advection, which will be described later in hyperbolic PDEs.
+3.10.3 Backward differentiation formula
+BDF methods are a family of implicit multistep methods defined by writing:
+y′n+1 = fn+1, (3.120)
+and using backward difference formula for yn+1.
+• BDF1 (1st-order accurate):
+yn+1 − yn = hfn+1
+( ≡ Backward Euler) (3.121)
+• BDF2 (2nd-order accurate):
+3
+2 yn+1 − 2yn + 1
+2 yn−1 = hfn+1 (3.122)
+• BDF3 (3rd-order accurate) :
+11
+6 yn+1 − 3yn + 3
+2 yn−1 + 1
+3 yn−2 = hfn+1 (3.123)
+• BDF4 ...
+BDF methods
+BDF7 formula and other formula of higher-order are unstable and then useless. Only the BDF1 method, a.k.a the Backward-Euler method, is unconditionally stable. The other methods, BDF2BDF6, are only conditionally stable with an interesting large stability region, which is what has made these methods popular. There is in fact no multistep methods of high-order that is unconditionally stable. This is stated by the 2ndBarrier of Dahlquist: unconditionally stable linear multistep methods are necessarily of order ≤ 2. Therefore, Backward-Euler and Trapezoïdal methods are the only unconditionally stable multi-step methods.
+Remark
+A similar procedure for explicit schemes, using backward difference formula for y′n = fn, is useless:
+• Obtained lower-order methods are already known methods: Forward Euler, Leap-Frog.
+• Higher-orders always yield unstable schemes.
+
+
+3.10. MULTI-STEP METHODS 49
+Cheat Sheet: numerical schemes for Ordinary Differential Equations
+• Basic one-step methods
+◦ Forward Euler Method
+yn+1 = yn + hf (yn, tn)
+◦ Backward Euler Method
+yn+1 = yn + hf (yn+1, tn+1)
+◦ Trapezoidal Method
+yn+1 = yn + h
+2
+(
+f (yn, tn) + f (yn+1, tn+1)
+)
+• Higher-oder Runge-Kutta methods
+◦ Standard RK2 method
+y∗n+1/2 = yn + h
+2 f (yn, tn)
+yn+1 = yn + hf (y∗n+1/2, tn+1/2)
+◦ RK3 (Heun) method
+y∗n = yn + h
+3 f (tn, yn)
+y∗n∗ = yn + 2h
+3f
+(
+tn + h
+3 , y∗n
+)
+yn+1 = yn + h
+4 f (tn, yn) + 3h
+4f
+(
+tn + 2h
+3 , y∗n∗
+)
+• Higher-oder Multi-step methods
+◦ Second-order Adams-Bashforth method
+yn+1 = yn + 3
+2 hfn − 1
+2 hfn−1
+◦ Leap-Frog or Mid-point Rule method
+yn+1 = yn−1 + 2hfn
+◦ BDF2 3
+2 yn+1 − 2yn + 1
+2 yn−1 = hfn+1
+
+
+
+
+Chapter 4
+Elliptic Partial Differential Equations
+Contents
+4.1 Numerical resolution of Elliptic PDEs . . . . . . . . . . . . . . . . . . . . . 51 4.2 2D Laplace/Poisson equation . . . . . . . . . . . . . . . . . . . . . . . . . . 54 4.3 Direct vs Iterative methods to solve Ax = b . . . . . . . . . . . . . . . . . . . 59 4.4 Basic iterative methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62 4.5 Over-relaxation methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67 4.6 Matrix splitting interpreted as a Richardson method . . . . . . . . . . . . . 73 4.7 Towards Krylov methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74 4.8 Comparison of methods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
+4.1 Numerical resolution of Elliptic PDEs
+In elliptic problems, the solution at one point physically depends on all other points, and reciprocally. Consequently, the construction of an equivalent approach as time-marching methods used to solve ODEs is not possible. This will be different for parabolic and hyperbolic problems studied in next chapters. The solution field governed by an elliptic PDE must then be solved as a whole. Additionally, the nature of elliptic problems require boundary conditions at all boundaries of the considered computational domain .
+4.1.1 Linear Elliptic PDEs
+Laplace and Poisson equations are examples of linear elliptic partial derivative equations1. They are encountered in the steady heat equation with constant properties,
+∆T = 0 or ∆T = S, (4.1)
+or in fluid mechanics in Stokes flows, where the viscous effects dominate (for very small Reynolds number), yielding for each component of the velocity field:
+∆ui = 0 (4.2)
+Given the properties of elliptic PDEs, the discretized PDE system involves linear equations which makes the solution at one point coupled to all the others. The continuous PDE is then expressed as a linear system:
+1The linear property of a partial derivative equation characterizes the homogeneous PDE
+51
+
+
+52 CHAPTER 4. ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS
+Linear system: Ax = b where x gathers all unknowns in a single vector (4.3)
+Discretized Elliptic PDE
+The coupling between all points is determined by the matrix A. Solving numerically elliptic systems is all about solving a large linear system. The fact that the system is large is a significant source of difficulty to carry out the numerical resolution. Let’s consider for example a threedimensional problem discretized with 100 points in each direction. The resulting mesh results in n = 100 × 100 × 100 = 106 unknowns. Consequently, the linear system Ax = b involves a 106 × 106 matrix!!
+4.1.2 Non-linear Elliptic PDE
+In several cases, the elliptic PDE is not linear. Steady heat equation with variable properties where the thermal conductivity depends on temperature, λ(T ), is one example:
+∂ ∂xj
+(
+λ(T ) ∂T
+∂xj
+)
+= P. (4.4)
+The steady incompressible Navier-Stokes equations are another example,
+ρuj
+∂ui ∂xj
+= ρgi − ∂p
+∂xi
++ μ ∂2ui
+∂xi∂xj
+, (4.5)
+where the non-linear convective terms make the PDE non-linear. Discretizing such PDEs result in solving a non-linear vectorial function
+F (x) = 0, (4.6)
+where x is the vector of unknowns. Solving F (x) = 0 is done by using one of two following iterative methods:
+• Newton’s methods. Truncation of the Taylor series to the first-order term leads to the Newton method,
+xk+1 = xk − J (xk)−1F (xk), (4.7)
+where J = ∂F
+∂x is the Jacobian matrix of the function F . Upon correct conditions, the
+sequence of xk converges to the searched solution. This classical Newton formula is usually improved (trust region, damping methods, ..) to yield a larger convergence region around the solution. Similarly to a linear elliptic PDE, the linearized equation obtained by the Newton’s method requires the resolution of the linear system J (xk)(xk+1 − xk) = −F (xk).
+• Fixed point method or Picard iterations. The fixed point iterations, xk+1 = f (xk), is an iterative methods to find the fixed point, x = f (x), of a function. Our investigated equation, F (x) = 0, is easily turned into a fixed-point problem by considering the equivalent formula, x = x + F (x) = G(x). Applying the fixed-point method to G gives following iterative formula,
+xk+1 = xk + F (xk), (4.8)
+which makes it a straightforwardly solved linear system for xk+1. In this simple fixed point method, the evaluations of F (x) are computed from the old iterate. When the sequence of iterates converges, xk will ultimately reach the root of F (x). Picard iterations is a similar
+
+
+4.1. NUMERICAL RESOLUTION OF ELLIPTIC PDES 53
+approach which considers that the non-linear equation F (x) = 0 can be written as quasilinear one:
+A(x)x = b(x) (4.9)
+The Picard iterations then solve the sequence,
+A(xk)xk+1 = b(xk) ⇒ xk+1 = A(xk)−1b(xk), (4.10)
+which is identical as the fixed-point iterations for the function A(x)−1b(x). Carrying out Picard iterations introduces outer iterations that surround the numerical resolution of a linear system. For example, the aforementioned steady heat equation with variable properties is iteratively solved by setting a frozen field of thermal conductivity λold = λ(T old), solving the obtained linear PDE
+∂ ∂xj
+(
+λold ∂T
+∂xj
+)
+= P, (4.11)
+and updating the frozen thermal conductivity with T old = T new. Similarly, the linear PDE considered by Picard iterations to solve the steady incompressible Navier-Stokes equations is
+ρujold
+∂ui ∂xj
+= ρgi − ∂p
+∂xi
++ μ ∂2ui
+∂xi∂xj
+. (4.12)
+The distinction between Newton and Picard iterations is not about the detailed algorithm since Newton iterates can also be regarded as a sequence of a fixed-point method. The difference is mainly about how the linearization of the PDE is carried. While derived rigorously from Taylor series in Newton’s method, it is achieved somehow manually in Picard iterations by manipulating the terms which are the sources of the non-linearity. When the non-linearity arises from a complexification of a linear-variant of the PDE, Picard iterations are most often preferred because the algorithm used for the linear PDE is simply extended with outer iterations. This is the case in both examples that have been considered in this section. Whatever the method, all of them eventually require solving linear systems, which once again highlights the key role of numerical resolution of large Ax = b systems.
+4.1.3 Boundary conditions
+Elliptic PDEs require boundary conditions at all boundaries to determine a unique field φ. Three kinds of boundary conditions are typically considered:
+• Dirichlet boundary conditions where the boundary values are fixed (not necessarily uniformly)
+φ = a (4.13)
+• Neumann boundary conditions where the normal derivative is fixed (not necessarily uniformly)
+∂φ
+∂n = b (4.14)
+• Robin or mixed boundary conditions where a linear combination of Dirichlet and Neumann conditions is imposed
+αφ + β ∂φ
+∂n = c (4.15)
+
+
+54 CHAPTER 4. ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS
+n
+Computational Domain
+T ext
+In heat transfer problem, a common case where mixed boundary conditions are encountered is when a heat transfer coefficient h is provided. The normal component of the boundary heat flux φ is then given by
+φ · n = −λ ∂T
+∂n = h(T − T ext), (4.16)
+t which relates both T and ∂T
+∂n in a linear relationship.
+4.2 2D Laplace/Poisson equation
+This will be our running example to illustrate the numerical resolution of a linear elliptic PDE.
+4.2.1 Discretization
+The system of equations is made of the two-dimensional Poisson equation and boundary conditions
+
+
+
+∂2φ
+∂x2 + ∂2φ
+∂y2 = f (x, y)
++ Boundary Conditions
+(4.17)
+Using finite differences, the system is solved on a 2D structured mesh, shown in Fig. 4.2. Each point
+xi
+yj i, j
+Figure 4.1 : Two-dimensional structured mesh
+is identified by a unique pair of indexes (i, j) and its coordinates are (xi, yj). Assuming a uniform discretization in x and y directions, ∆x = ∆y = h, the second-order derivatives in the Poisson equations are approximated with difference formula. Using 2nd-order centered difference formula
+∂2φ ∂x2
+∣ ∣ ∣
+∣x,y
+= φi+1,j − 2φi,j + φi−1,j
+h2 + O(h2) (4.18)
+∂2φ ∂y2
+∣ ∣ ∣
+∣x,y
+= φi,j+1 − 2φi,j + φi,j−1
+h2 + O(h2), (4.19)
+yields a 2nd-order accurate discretization of the PDE:
+φi+1,j − 2φi,j + φi−1,j
+h2 + φi,j+1 − 2φi,j + φi,j−1
+h2 = fij + O(h2). (4.20)
+In the previous equation, fij = f (xi, yj). A linear systems of equations is obtained by writing for each point in the domain
+
+
+4.2. 2D LAPLACE/POISSON EQUATION 55
+φi+1,j + φi−1,j − 4φi,j + φi,j+1 + φi,j−1 = h2fij (4.21)
+Discretized Poisson equation
+This formula is obtained with a specific 2D stencil. Other difference formulas yield different ones. 2D stencils are generally plotted to be distinguished from each other. The one used is depicted below
+i, j
+Figure 4.2 : 2D stencil corresponding to the 2nd-order centered difference formula applied to the Poisson/Laplace equation.
+4.2.2 Boundary conditions
+Boundary conditions must also be discretized if necesary.
+4.2.2.1 Dirichlet boundary conditions
+If φij are known at all boundaries, the other φij values are computed by solving the previous equation the inside the domain, i.e. for
+{1 ≤ i ≤ N −1
+1 ≤ j ≤ M − 1 , (4.22)
+where there are N + 1 points in the x-direction and M + 1 in the y-direction in total as shown in Fig. 4.3. The total number of unknown is then given by n = (N − 1) × (M − 1). A natural choice
+N +1
+M +1
+unknowns
+points
+points
+Figure 4.3 : Unknown values in problems with Dirichlet conditions at all boundaries.
+in a problem with Dirichlet boundary conditions is to consider fixed φij values as parameters which
+
+
+56 CHAPTER 4. ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS
+are moved on the right-hand side of the linear system. Hence, on the left boundary, for i = 1,
+φ2,j + φ0,j
+}{{}
+fixed
+−4φ1,j + φ1,j+1 + φ1,j−1 = h2fij (4.23)
+⇒ φ2,j − 4φ1,j + φ1,j+1 + φ1,j−1 = h2fij − φ0,j
+}{{}
+moved to RHS
+, (4.24)
+while at the lower-left corner, for i = 1 and j = 1,
+φ2,1 − 4φ1,1 + φ1,2 = h2f11 − φ0,1 − φ1,0 (4.25)
+Adopting such an implementation of Dirichlet boundary conditions is not practical. Indeed, when accounting for other possible boundary conditions, boudary values of φij remain unknown variables and one would have then first to determine the number of unknown specific to the problem depending on where Dirrichlet conditions are applied. In order to easily implement any kind of boundary conditions, all boundary values are considered unknown. If a Dirichlet condition is applied at the left boundary for example, one adds the following set of equations φ0,j = φj0, where φj0 the the imposed values at the boundary.
+4.2.2.2 Other boundary conditions
+Neumann boundary condition. Here, we consider the example of a Neumann boundary condition on the left boundary of the computational domain:
+∂φ ∂x
+∣ ∣ ∣
+∣x=0
+= g(y) (4.26)
+The values φ0,j are unknowns which are determined by discretizing the derivative in the boundary condition. Two difference formula are considered:
+• 1st-order accurate approximation
+∂φ ∂x
+∣ ∣ ∣
+∣x=0
+= φ1,j − φ0,j
+h = gj (4.27)
+φ0,j = −hgj + φ1,j (4.28)
+• 2nd-order accurate approximation
+∂φ ∂x
+∣ ∣ ∣
+∣x=0
+= −3φ0,j + 4φ1,j − φ2,j
+2h = gj (4.29)
+φ0,j = − 2
+3 hgj + 4
+3 φ1,j − 1
+3 φ2,j (4.30)
+Mixed boundary conditions. Mixed boundary conditions are treated similarly by discretizing the boundary condition.
+Exercise 7
+Considering a Robin boundary condition applied to the left boundary,
+−λ dT
+dx = hext(T ext − T ), (4.31)
+determine the 1st- and 2nd-order approximation of the boundary condition resulting in equations
+
+
+4.2. 2D LAPLACE/POISSON EQUATION 57
+for φ0,j. The expression will be written in terms of the Biot number based on the cell size ∆x:
+Bi = hext∆x
+λ . (4.32)
+4.2.3 Characteristics of the obtained linear system
+Concatenating the unknowns φij, including the boundary values, gives a long vector of size (N + 1) × (M + 1):
+x = (φ0,0, φ1,0, ..., φn,0, φ1,1, ..., φi,j , φi+1,j , ...)T (4.33)
+The nth component of the vector x corresponds to a unique pair (i, j). The discretized Poisson equation and boundary conditions,
+{φi+1,j + φi−1,j − 4φi,j + φi,j+1 + φi,j−1 = h2fij
++Boundary Conditions, (4.34)
+generate a large linear system Ax = b. The matrix A is sparse, i.e many of its entries are null. It looks like this where dots indicate non-zero values. It is also banded with a M bandwidth. The RHS
+A=
+M-banded
+i+1,j + i 1,j 4 i,j + i,j+1 + i,j 1
+nt(ih,j) line of Ax :
+vector b is determined by the Poisson source term and the boundary conditions,
+b = [h2fij & BC’s]
+Eigenvalues of A. The eigenvalues of the linear system matrix will determine a lot the behavior of the numerical methods that will be introduced later. They are here given for a case where homogeneous Dirichlet conditions (φ = 0) are applied on all boundaries. Apart from the domain boundaries, they are then n = (N − 1) × (M − 1) unknowns. The n × n matrix A is then characterized by (N − 1) × (M − 1) eigenvalues given below:
+λpAq = −4 + 2 cos( pπ
+N ) + 2 cos( qπ
+M ) (4.35)
+= −4
+(
+sin2( pπ
+2N ) + sin2( qπ
+2M )
+)
+) with
+{1 ≤ p ≤ N − 1 1≤q≤M −1
+Eigenvalues of A (Homogeneous BC’s)
+
+
+58 CHAPTER 4. ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS
+Demonstration
+Let’s demonstrate that Φ = φi,j = exp(I(kxxi + kyyj)) are eigenvectors of the matrix A involved in a Poisson 2D problem with homogeneous Dirichlet boundary conditions. Setting x, the vector of unknowns, from the field denoted by φi,j, the nth line, associated to the (i, j) pair, of the matrix-vector product Ax is
+(Ax)i,j = φi+1,j + φi−1,j − 4φi,j + φi,j+1 + φi,j−1 (4.36)
+= (φi+1,j − 2φi,j + φi+1,j ) + (φi,j+1 − 2φi,j + φi,j−1) (4.37)
+Let’s recall the modified wave number of 2nd-order centered formula for fj′′:
+fj′′ = fj+1 − 2fj + fj+1
+h2 = −k′2h2fj with k′2h2 = 2(1 − cos(hk)) (4.38)
+Hence,
+(Ax)i,j = −k′x2h2φi,j − k′yh2φi,j (4.39)
+= (−k′xh2 − k′yh2)
+} {{ }
+Eigenvalue for Φ
+φi,j (4.40)
+Therefore,
+AΦ = (−4 + 2cos(kxh) + 2cos(kyh))
+} {{ }
+Eigenvalue λA of A
+Φ. (4.41)
+The boundary conditions demand φ = 0 for x = 0, x = Lx, y = 0 and y = Ly, which only allow specific wavenumbers kx and ky:
+
+  
+  
+kx = pπ
+Lx
+= pπ
+N h for 1 ≤ p ≤ N − 1
+ky = qπ
+Ly
+= qπ
+M h for 1 ≤ q ≤ M − 1
+φi,j = sin ( pπ
+N i) sin ( qπ
+M j)
+(4.42)
+The eigenvalue of A for homogeneous Dirichlet boundary conditions are then the ones given in Eq. (4.35)
+Condition number of A. The condition number of a matrix is the ratio of the maximum and minimum eigenvalue magnitudes. All numerical methods are strongly penalized by very large condition numbers K(A), i.e when the system is ill-conditioned. For Laplace equation with homogeneous Dirichlet conditions and with N = M ,
+λpq = −4
+[
+sin2 ( pπ
+2N
+)
++ sin2 ( qπ
+2N
+)]
+, (4.43)
+and then
+|λ|min = |λ|p=1,q=1 = 8 sin2 ( π
+2N
+)
+∼ 2π2
+N 2 since N 1 (4.44)
+|λ|max = 8 (4.45)
+
+
+4.3. DIRECT VS ITERATIVE METHODS TO SOLVE AX = B 59
+The condition number of the matrix A is therefore
+K (A)
+} {{ }
+Condition number
+= |λ|max
+|λ|min
+= 4N 2
+π2 ∼ n, (4.46)
+where n is the total number of unknowns in the 2D problem. Here appears the difficulty to achieve fast convergence with the different methods that will be detailed in the following sections: They are all penalized with ill-conditioned systems. Steady heat equation becomes more and more illconditioned as the number of points increases. Hence, many studies have been carried out to accelerate the simple iterative methods.
+4.3 Direct vs Iterative methods to solve Ax = b
+It was shown in Sec. 4.1 that the numerical resolution of elliptic PDEs turns out to handle a large linear system Ax = b. Two kinds of approaches can be considered:
+• Direct resolution with Gauss pivoting and LU factorization.
+• Iterative methods.
+4.3.1 Direct resolution
+When considering a large n × n matrix A as the one obtained in a discretized elliptic PDE, the direct resolution issues several limitations:
+• Storage: Given the number of unknowns, the memory footprint to store the full matrix is tremendous. For a 2D problem with N = 1, 000, M = 1, 000, the total number of points is n ≈ 106. The number of entries in the matrix A is then n2 = 1012. Accounting for 8 bytes to store one double-precision float number, the matrix storage would demands 8 TB!
+• Performance: Gauss elimination and LU factorization are characterized by an algorithmic complexity O(n3). For a 2D problem with N = M , we have O(N 6), which quickly becomes unafforadle. The previous result is valid for a full and plain matrix. For a banded matrix of bandwidth B, the complexity is O(nB2). In the 2D Laplace equation, it was shown that B = N , implying an algorithmic complexity O(N 4) which remains expansive computationally.
+• Miscellaneous Gauss elimination and LU factorization become inaccurate with large roundoff errors with a matrix of large condition number. Additionally, parallelizing the direct resolution of a linear system is difficult to implement.
+Direct methods like iterative methods benefit from on-going improvements to increase their computational efficiency. The limitations of direct methods are too hard to overcome when the matrix is dense. However, when the matrix is sparse, like here, several remedies exist thanks to a compact storage, such as CSR (Compressed Sparse Row format). Parallel libraries such as MUMPS and SuperLU have become quite popular, showing that efficient parallelization is possible.
+All this said, iterative approaches are usually and historically preferred for large matrices. Furthermore, their implementation allows matrix-free algorithms where the matrix A is not even stored.
+
+
+60 CHAPTER 4. ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS
+4.3.2 Iterative methods
+Also known as relaxation methods, the principle of iterative methods is to build a sequence of solution fields that tends to x∗, the solution of original linear system Ax∗ = b:
+xn −−−−−→
+n→+∞ x∗. (4.47)
+The benefits of iterative methods are:
+• Storage: The implementation does not require the storage of matrix A.
+• Accuracy: The linear system Ax = b is an discrete approximation of the continuous PDE. There is no need then to find the solution x∗ with exact accuracy. Given the remaining numerical truncation error, this over-resolution is time-consuming and unnecessary.
+• Convergence speed: If the convergence speed of the iterative method is high enough, it will rapidly outperform direct methods.
+Matrix splitting. The first general idea to derive an iterative method to solve the linear system is matrix splitting. The matrix A is split into two others as
+A = A1 − A2 with any choice of A1 and A2 (4.48)
+Matrix Splitting
+The linear system is equivalently written as
+A1x = A2x + b. (4.49)
+The iterative method associated to a retained matrix splitting is then derived by evaluating the lefthand side at the (k + 1)th iterate and the right-hand side at the kth iterate. The iterative formula is then
+A1xk+1 = A2xk + b, (4.50)
+or
+xk+1 = A1−1A2xk + A1−1b (4.51)
+Iterative method from matrix splitting
+The iterations are initiated with an initial guess x0. The classical choice is x0 = 0. Such an iterative procedure is only interesting if i) the matrix A1 can easily be inversed compared to the A; ii) And if the the convergence of the derived method is fast. The convergence properties are characterized by monitoring the evolution of the error and residual of the method, two key quantities that are now defined. The error at iteration k is the difference between the exact solution and the current iterate:
+εk = x∗ − xk (4.52)
+
+
+4.3. DIRECT VS ITERATIVE METHODS TO SOLVE AX = B 61
+The evolution of the error can be determined from the retained matrix splitting as,
+A1x∗ = A2x∗ + b A1xk+1 = A2xk + b
+}
+−−−−−−→
+Subtracting A1εk+1 = A2εk (4.53)
+Then,
+εk+1 = (A1−1A2
+) εk = Gεk , (4.54)
+where G = A1−1A2 is the gain matrix. The error decrease rate is then entirely controlled by the chosen matrix splitting. That is why some iterative methods are much more interesting than others. The residual of the iterative method at iteration k is defined as
+rk = b − Axk, (4.55)
+and denotes how far the iterate is from the solution b − Ax∗ = 0. The residual and error are related as
+rk = Ax∗ − Axk = Aεk. (4.56)
+Hence, when the error of the iterative method decreases, so is the residual, and reciprocally. Given that the error cannot be computed without knowing first the searched solution x∗, the convergence of the iterates is monitored in practice by considering the norm of the residual: ‖rk‖.
+Convergence Convergence is achieved if εk −−−−→
+k→∞ 0, implying that the residual also tends to
+zero. This is controlled by the spectral radius ρ(G) of the gain matrix:
+The iterative method based on the chosen matrix splitting converges if
+ρ(G) = ρ(A1−1A2) < 1 (4.57)
+Convergence condition
+where the spectral radius is the maximum eigenvalue amplitude: ρ(G) = |λiG|max.
+Demonstration
+The average rate of error reduction is defined as
+∆εn
+d=ef
+( ‖εn‖ ‖ε0‖
+)1/n
+(4.58)
+Since after each iteration εn = Gεn−1, the error at iteration n is a power function of the gain
+matrix: εn = Gnε0, and
+∆εn =
+( ‖Gnε0‖ ‖ε0‖
+)1/n
+≤ ‖Gn‖1/n (4.59)
+Since the spectral radius obeys the following property,
+‖Gn‖1/n −−−−→
+n→∞ ρ(G), (4.60)
+
+
+62 CHAPTER 4. ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS
+it yields that ∆εn ≤ ρ(G) for n 1.Therefore,
+‖εn‖ ≤ ρ(G)n ‖ε0‖ (4.61)
+The iterative method converges, i.e. the error εn tends to zero, if the spectral radius of the gain matrix is strictly lower than unity.
+The previous demonstration outlines that the rate of convergence is also determined by ρ(G) for the chosen splitting A1, A2.
+Exercise 8
+Starting the iterative process with x0 and the corresponding error ε0, determine the number of
+iterations n to decrease the error norm by a factor 10m.
+Solution 8
+One wishes ‖εn‖ ≤ 10−m ‖ε0‖. This condition is fulfilled if ρ(G)n ≤ 10−m according to the above demonstration. Therefore,
+n ≥ −m
+log10(ρ(G)) (4.62)
+4.4 Basic iterative methods
+The matrix splitting should yield an easily inverse matrix A1 and result with a gain matrix of small spectral radius. The first attempts such as choosing A1 as the identity matrix or the diagonal part of A result in the Richardson and Jacobi methods, respectively. The Gauss-Seidel method is obtained by considering the diagonal and lower triangular parts of A. These first methods are the most basic ones and have been derived during the 19th century before any computer were ever built. They were then used until the mid-20th century by carrying out the calculations manually.
+Different parts of the matrix A are defined as
+A=
+
+  
+. . . −F D
+−E . . .
+
+  
+= D − E − F , (4.63)
+where D is the diagonal part of A, E its upper triangular part and F its lower triangular part:
+Di,j =
+{Ai,j if i = j
+0 otherwise , Ei,j =
+{Ai,j if i < j
+0 otherwise , Fi,j =
+{Ai,j if i > j
+0 otherwise (4.64)
+4.4.1 Richardson method
+The simplest method, yet unstable for Laplace equation.
+Let’s recall the iterative process associated to a matrix splitting :
+A1xk+1 = A2xk + b (4.65)
+The simplest choice for an easily inversable matrix is the identity matrix: A1 = I. Then, A2 = I − A, and the Richardson method is given by
+
+
+4.4. BASIC ITERATIVE METHODS 63
+xk+1 = (I − A)xk + b (4.66)
+Richardson method
+The iterative method converges if the corresponding gain matrix GR = I − A is characterized by a spectral radius smaller than unity: ρ(GR) < 1. In fact, the Richardson methods turns out to be a fixed-point method applied to F (x) = b − Ax. Indeed, the fixed-point iterations are then, xk+1 = xk + F (xk) = (I − A)xk + b.
+Application to the 2D Poisson problem. Let’s consider the Richardson method, i.e. the fixed point method, applied to the discretized elliptic PDE seen in Sec. 4.2. The nth linear equation corresponding a pait (i, j) of 2D point indexes is given by
+φi+1,j + φi−1,j − 4φi,j + φi,j+1 + φi,j−1 = h2fi,j + BC′s
+} {{ } bi,j
+(4.67)
+The corresponding fixed-point iterations are then
+φk+1
+i,j = φik,j + [bi,j − (φik+1,j + φik−1,j − 4φik,j + φik,j+1 + φik,j−1)] (4.68)
+φk+1
+i,j = −φik+1,j − φik−1,j + 5φik,j − φik,j+1 − φik,j−1 + bi,j (4.69)
+As one can observe that the matrix A does not need to be stored to carry out the desired iterations. The stability of the method is deduced by first determining the eigenvalues of the gain matrix. Such analysis and the following ones are carried out for homogeneous Dirichlet conditions, which yield analytical results. The eigenvalues of the Richardson gain matrix GR are
+λ(GR) = λ(I − A) = 1 − λnAm where 1 ≤ n, m ≤ N − 1 (4.70)
+=1+4
+[
+sin2( nπ
+2N ) + sin2( mπ
+2N )
+]
+. (4.71)
+The corresponding spectral radius is then
+ρ(GR) ≈ |λ|max = 5 > 1 , (4.72)
+and we can deduce that the Richardson method is unstable when applied to the steady heat equation.
+4.4.2 Jacobi method
+A simple method, stable but slow when applied to Laplace equation
+In the Jacobi method, the matrix splitting is carried out with the diagonal part of A: A1 = D and A2 = D − A = E + F . This choice yields a latrix A1 that is easily inversed since
+D−1
+i,j =
+{1/Ai,j if i = j
+0 otherwise (4.73)
+The corresponding iterative method reads
+Dxk+1 = (D − A)xk + b (4.74)
+xk+1 = D−1(D − A)xk + D−1b, (4.75)
+yielding the Jacobi iterative method:
+
+
+64 CHAPTER 4. ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS
+xk+1 = (I − D−1A)xk + D−1b (4.76)
+Jacobi method (Generic)
+The corresponding gain matrix is then GJ = (I − D−1A).
+Application to the 2D Poisson problem. Following the Jacobi method, its application to any linear system, and here specifically to the discretized Poisson equation, consists in first identifying the diagonal term in each linear equation,
+φi+1,j + φi−1,j −4φi,j
+} {{ }
+Diagonal term
++φi,j+1 + φi,j−1 = bi,j , (4.77)
+and leaving it on the left-hand side evaluated at the new iterate k + 1: Jacobi:
+−4φk+1
+i,j
+} {{ }
+diagonal term on LHS
+= −(φik+1,j + φik−1,j + φik,j+1 + φik,j−1) + bi,j . (4.78)
+The Jacobi method applied to the 2D poisson problem then reads
+φk+1
+i,j = 1
+4 (φik+1,j + φik−1,j + φik,j+1 + φik,j−1) − 1
+4 bi,j (4.79)
+Jacobi method (2D Poisson)
+Once again, the matrix A does not need to be stored. With homogeneous Dirichlet boundary conditions, the diagonal entries of A are equal to −4. The gain matrix of the Jacobi method is then
+GJ = I − D−1A = I + 1
+4 A. (4.80)
+The corresponding eigenvalues are
+λ(GJ ) = 1 + 1
+4 λnAm (4.81)
+λ(GJ ) = 1
+2 [cos( nπ
+N ) + cos( mπ
+M )] for 1 ≤ n, m ≤ N − 1, M − 1 (4.82)
+For each eigenvalue, |λ(GJ )| < 1, hence
+|ρ(GJ )| < 1 , (4.83)
+showing that the Jacobi method converges when applied to the Poisson problem. The rate of convergence is controlled by ρ(GJ ) = |λ|max:
+|λ|max = |λ11| = 1
+2 [cos( π
+N ) + cos( π
+M )] (4.84)
+
+
+4.4. BASIC ITERATIVE METHODS 65
+If N 1 and M ,
+|λ|max ' 1
+2 (1 − π2
+2M 2 + 1 − π2
+2N 2 + ...) (4.85)
+|λ|max = 1 − π2
+4( 1
+M2 + 1
+N 2 ) −−−−→
+k→∞ 1 (4.86)
+The spectral radius tends to one as the N increases. The Jacobi method converges then very slowly when applied to practical cases. However, this method is a starting point for more advanced iterative schemes.
+4.4.3 Gauss-Seidel methods
+An improvement of the Jacobi method
+4.4.3.1 Standard Gauss-Seidel
+Let’s have a look at the implementation of the Jacobi method:
+Loop i=1 ,N - 1 Loop j=1 , M - 1
+φk+1
+i,j = 1
+4 (φik+1,j + φik,j+1 + φik−1,j + φik,j−1
+} {{ }
+already available at k+1
+)− 1
+4 bi,j
+While looping for increasing indexes i and j, we notice that the values φk+1
+i−1,j and φk+1
+i,j−1 have already been computed when updating φk+1
+i,j . If these values are used as soon as they are available instead of waiting for the next iteration step, one can expect to accelerate the convergence of the sequence. This results in the Gauss-Seidel method which, for the 2D Poisson problem, is written as
+φk+1
+i,j = 1
+4 (φk+1
+i−1,j + φk+1
+i,j−1 + φik+1,j + φik,j+1) − 1
+4 bi,j (4.87)
+Gauss-Seidel method (2D Poisson)
+The corresponding generic Gauss-Seidel method consists in choosing the splitting A1 = D − E, the lower triangular and diagonal parts of A, and A2 = A1 − A = F , the upper part of A. Hence,
+xk+1 = (D − E)−1F xk + (D − E)−1b, (4.88)
+Gauss-Seidel method (Generic)
+and the gain matrix of the Gauss-Seidel method is GGS = (D − E)−1F
+Convergence in 2D Poisson problem With homogeneous Dirichlet conditions, one can show that the eigenvalues GGS are related the the ones of the Jacobi gain matrix:
+λ(GGS) = [λ(GJ )]2 (4.89)
+
+
+66 CHAPTER 4. ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS
+Then, for 1 ≤ n, m ≤ N − 1, M − 1, we have
+λ(GGS) = 1
+4
+[
+cos( nπ
+N ) + cos( mπ
+M)
+]2
+(4.90)
+Therefore, the Gauss-Seidel method converges when applied to the 2D Poisson problem. Regarding its rate of convergence, it is twice faster than Jacobi to reach the same error threshold. However, similarly to the Jacobi method, it remains penalized for large N , M values as the spectral radius of the gain matrix gets closer to unity.
+4.4.3.2 Backward Gauss-Seidel
+An alternative iterative method can be built: The backward Gauss-Seidel method is derived by considering loops of decreasing values of i and j,
+Loop i = N - 1, 1 Loop j = M - 1, 1
+φk+1
+i,j = 1
+4 (φik+1,j + φik,j+1 + φik−1,j + φik,j−1) − 1
+4 bi,j
+This time, the values φk+1
+i+1,j and φk+1
+i,j+1 are the ones that are already available and the backward Gauss-Seidel reads
+φk+1
+i,j = 1
+4 (φk+1
+i+1,j + φk+1
+i,j+1 + φik−1,j + φik,j−1) − 1
+4 bi,j (4.91)
+Backward Gauss-Seidel method (2D Poisson)
+The generic Backward Gauss-Seidel corresponds to the splitting A1 = D − F , the diagonal and upper triangular part of A, and A2 = A1 − A = E, the lower part of A:
+xk+1 = (D − F )−1Exk + (D − F )−1b, (4.92)
+Backward Gauss-Seidel method (Generic)
+The properties of the Backward Gauss-Seidel are identical to the regular Gauss-Seidel method.
+4.4.3.3 Symmetric Gauss-Seidel
+For a better repartition of numerical errors, one can alternate standard and backward Gauss-Seidel methods as
+(D − E)xk+ 1
+2 = F xk + b (4.93)
+(D − F )xk+1 = Exk+ 1
+2 + b (4.94)
+Symmeric Gauss-Seidel method
+
+
+4.5. OVER-RELAXATION METHODS 67
+This results with the gain matrix
+GSGS = (D − F )−1E(D − E)−1F (4.95)
+The better repartition of numerical error thanks to the alternation in sweep directions achieves a convergence rate that is twice faster compared to the standard Gauss-Seidel method. However, since the cost per iteration is also twice larger, the global computational efficiency is identical to the standard method. The method remains nonetheless interesting as a preconditioning technique (this concept will be addressed in the next sections) because it leaves the preconditioned system symmetric, in opposition to standard Gauss-Seidel.
+4.5 Over-relaxation methods
+Jacobi (1850) and Gauss-Seidel (1874) methods date from the 19th century, when computers did not exist and calculations where performed by hand. Over-relaxation methods were developed on the 1950s with the general goal of accelerating convergence by minimizing the spectral radius
+ρ(A1−1A2).
+The principle of over-relaxation is to enhance the correction ∆xk = xk+1 − xk determined by a retained approach. This correction is then amplified by a factor ω:
+∆xk = ω∆xk, (4.96)
+where ∆xk = xk+1 − xk and xk+1 is the updated iterated returned by the unaccelerated iterative method. ω is called the over-relaxation coefficient if ω > 1 or the under-relaxation coefficient if ω < 1, respectively. The over-relaxation of an iterative methods can then be written as
+xk+1 = ωxk+1 + (1 − ω)xk, (4.97)
+Over-Relaxation formula
+where ω is a free parameter to optimize. For the previous methods detailed before (Richardson, Jacobi, Gauss-Seidel), only the over-relaxation of the Gauss-Seidel method, named Successive OverRelaxation (SOR), results in a significant enhancement. Optimal over-relaxation of the Richardson and Jacobi methods actually yield back to the original Jacobi method.
+4.5.1 Richardson over-relaxation
+The basic Richardson method is
+xk+1 = (I − A)xk + b, (4.98)
+which is unstable when applied to the 2D Poisson problem. The over-relaxed version, yield a modified Richardson method, given by
+xk+1 = ω[(I − A)xk + b] + (1 − ω)xk (4.99)
+or
+
+
+68 CHAPTER 4. ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS
+xk+1 = (I − ωA)xk + bω, (4.100)
+Over-relaxed Richardson
+which corresponds to the gain matrix GR(ω) = I − ωA. The corresponding eigenvalues are then given by
+λR(ω) = 1 − ωλnAm (4.101)
+2D Poisson problem. In this specific problem wiht homogeneous Dirichlet conditions, one finds
+λR(ω) = 1 + 4ω
+(
+sin2( nπ
+2N ) + sin2( mπ
+2M )
+)
+. (4.102)
+The relaxation scheme is clearly unstable for any ω > 0. ω must then be negative and the iterations is carried out backwards. The magnitude of ω remains limited, since convergence requires |λR(ω)| < 1, therefore
+ω < 0 and |ω| ≤ 1
+4 (4.103)
+The modified Richardson method performs then backward iterations with a relaxation coefficient smaller than 1 in magnitude. The method is then under-relaxed to enforce stability. The optimal choice minimizes all eigenvalues |λR(ω)| = |1 − ωλnAm| to determine the minimal spectral radius
+yielding the highest convergence rate. The optimal relaxation coefficient is then |ω| = 1
+4 . This
+results in nothing else but the Jacobi method applied to the same Poisson problem!
+Remark
+The negative sign of ω is due to the forward iterations being always unstable with the standard Richardson method. The correct direction of iterations could have been obtained with a different starting point
+• for the matrix splitting conventional definition. Defining A = A1 + A2, with A1 = −I and A2 = I + A would have given
+−A1xk+1 = A2xk − b (4.104)
+xk+1 = −A1−1A2xk + A1−1b (4.105)
+xk+1 = (I + A)xk − b (4.106)
+(4.107)
+• or for the conventional fixed-point method that also defined the Richardson method. Considering instead
+Ax − b = 0 ⇒ x = x + (Ax − b), (4.108)
+would have given similarly
+xk+1 = (I + A)xk − b (4.109)
+
+
+4.5. OVER-RELAXATION METHODS 69
+Nevertheless, without under-relaxation the correctly oriented Richardson method remains unstable in the 2D Poisson problem.
+4.5.2 Jacobi Over-relaxation
+The standard Jacobi method is written as:
+xk+1 = (I − D−1A)xk + D−1b (4.110)
+and its over-relaxed variant reads
+xk+1 = ω[(I − D−1A)xk + D−1b] + (1 − ω)xk (4.111)
+(4.112)
+or
+xk+1 = (I − ωD−1A)xk + ωD−1b (4.113)
+Over-relaxed Jacobi
+where the corresponding gain matrix can be expressed from the Jacobi gain matrix: GJ (ω) = ωGJ + (1 − ω)I.
+Stability. The eigen values of the gain matrix are And for the stability analysis:
+λJ (ω) = ωλJ + (1 − ω). (4.114)
+The spectral radius of the gain matrix is then bounded as
+ρ(GJ (ω)) ≤ |1 − ω| + ω|λJ |. (4.115)
+Requiring ρ(GJ (ω)) < 1 gives the following range of possible values for the over-relaxation factor ω:
+0≤ω≤ 2
+1 + ρ(GJ ) (4.116)
+Optimality. The optimal value ω is obtained by minimizing the method’s specral radius. Let’s consider a particular case where the eigenvalues of the considered linear system yields positive and negative value for the corresponding gain matrix of the standard Jacobi method. This condition is met for example in the Poisson problem. Let’s denote by λJmin the lowest negative eigenvalue and
+by λJmax the highest positive eigenvalue. One can then bound the eigenvalues of the over-relaxed Jacobi method as
+ωλJmin + (1 − ω) ≤ λJ (ω) ≤ ωλJmax + 1 − ω. (4.117)
+
+
+70 CHAPTER 4. ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS
+⇢(GJ (!))
+!
+1
+1 Jmin
+1
+1 Jmax
+BA
+Op#mal value
+1
+0
+Figure 4.4 : Determination of optimal over-relaxation coefficient for the Jacobi method
+Since those bounds are actually reached, the spectral radius of the over-relaxed method is
+ρ(GJ (ω)) = Max(|λJmax − 1)ω + 1|
+} {{ }
+A
+, |(−λJmin)ω − 1|
+} {{ }
+B
+) (4.118)
+The two curves corresponding to terms A and B are plotted as function of ω in Fig. 4.4. The optimal value corresponds to the equality of both terms A and B:
+−1 + ωopt(1 − λJmin) = 1 − ωopt(1 − λJmax (4.119)
+Therefore,
+ωopt = 2
+2 − (λJmin + λJmax) (4.120)
+2D Poisson problem. In this configuration with homogeneous boundary conditions, λJmax = −λJmin =
+cos
+(π
+M
+)
+. Therefore, Example: 2d heat equation
+ωopt = 1 (4.121)
+The optimal over-relaxed Jacobi method is the original method itself!
+4.5.3 Gauss-Seidel Over-relaxation, a.k.a Successive Over-Relaxation (SOR)
+This method is also known as Successive Over-Relaxation (SOR) and will present a considerable benefit compared to the two previous attempts with Richardson and Jacobi methods. For GaussSeidel method, we have:
+xk+1 = (D − E)−1F xk + (D − E)−1b,
+which can alternatively be written as
+(D − E)xk+1 = F xk + b
+
+
+4.5. OVER-RELAXATION METHODS 71
+or
+Dxk+1 = Exk+1
+} {{ }
+Known values
++F xk + b (4.122)
+The latter expression highlight the new components of xk+1 being computed on the left-hand side and the already known ones used on the right-hand side. The over-relaxation of the Gauss-Seidel method is given by
+xk+1 = ωxk+1 + (1 − ω)xk (4.123)
+with Dxk+1 = Exk+1 + F xk + b (4.124)
+Pay attention to the last expression where the right-hand side is evaluated with the known components of the over-relaxed solution xk+1 and not xk+1. Then,
+Dxk+1 = ω(Exk+1 + F xk + b) + (1 − ω)Dxk, (4.125)
+and the SOR method is obtained by solving the linear system:
+(D − ωE)xk+1 = [(1 − ω)D + ωF ]xk + ωb. (4.126)
+SOR (Generic)
+The matrix on the left-had side D − ωE is triangular and yields a costless linear system to solve through forward substitution. The corresponding gain matrix is
+GSOR(ω) = (D − ωE)−1[(1 − ω)D + ωF ] (4.127)
+GSOR(ω) = I − ω(D − ωE)−1A. (4.128)
+The SOR method corresponds to the following matrix splitting:
+A = ω−1(D − ωE)
+} {{ }
+A1
+− ω−1[ωF + (1 − ω)D]
+} {{ }
+A2
+(4.129)
+One can demonstrate the following necessary stability condition:
+0 ≤ ω < 2 (4.130)
+To accelerate convergence through over-relaxation (ω > 1), the range of practical interest is 1 < ω < 2.
+2D Poisson problem Let’s recall the standard Gauss-Seidel formula applied to the 2D Poisson problem:
+φk+1
+ij = 1
+4 (φk+1
+i−1,j + φik+1,j + φik,j+1 + φk+1
+i,j−1) − 1
+4 bi,j (4.131)
+The SOR formula follows from
+
+
+
+φk+1
+i,j = 1
+4 (φk+1
+i−1,j + φik+1,j + φik,j+1 + φk+1
+i,j−1) − 1
+4 bi,j
+φk+1
+i,j = (1 − ω)φik,j + ωφk+1
+i,j
+(4.132)
+or
+
+
+72 CHAPTER 4. ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS
+φk+1
+i,j = (1 − ω)φik,j + ω
+[1
+4 (φk+1
+i−1,j + φik+1,j + φik,j+1 + φk+1
+i,j−1) − 1
+4 bi,j
+]
+(4.133)
+SOR (2D Poisson)
+When applying SOR to the studied 2D Poisson problem, the eigenvalues of the SOR gain matrix are known:
+λSOR(ω) = 1 − ω + ωλSOR(ω) 1
+2 λJ (4.134)
+⇒ λSOR(ω)1/2 = 1
+2 (ωλJ ±
+√
+ω2λ2J + 4(1 − ω)), (4.135)
+where λJ are the eigenvalues of the Jacobi gain matrix applied to the same problem.
+Optimality (Poisson problem) . The optimal value of the over-relaxation coefficient is obtained
+by minimizing the spectral radius ρ(GSOR) = |λSOR(ω)|max. Since there is no solution to dρ(GSOR )
+dω = 0, there is no local minimum and a the global one must be determined as illustrated in Fig. 4.5. The optimal point can be shown to be
+!
+Op#mal value
+⇢(GSOR)
+12
+1
+0
+Figure 4.5 : Determination of optimal over-relaxation coefficient for the SOR method
+ωopt = 2
+1 + √1 − ρ(GJ )2 , (4.136)
+where ρ(GJ ) is the spectral radius of the Jacobi method. Selecting the optimal over-relaxation coefficient, the SOR method is much faster then the Jacobi and Gauss-Seidel methods. For the studied Poisson problem and N = M , a more practical formula can be obtained,
+ρ(GJ ) = cos
+(π
+N
+)
+→ ωopt = 2
+1 + sin
+(π
+N
+) (4.137)
+For N 1, the following useful approximation is used
+ωopt ≈ 2
+(
+1− π
+N + π2
+N2 + ···
+)
+(4.138)
+The optimal value is then slightly lower than 2. For the general linear systems, there is no formula for ωopt, which must then be roughly estimated by trying different values.
+
+
+4.6. MATRIX SPLITTING INTERPRETED AS A RICHARDSON METHOD 73
+Remark
+• A backward SOR can also be derived. It shares the same properties as the standard SOR method.
+• Based on the symmetric Gauss-Seidel method, a Symetric SOR (SSOR) can be obtained as well. Similarly to the symmetric Gauss-Seidel method, its convergence rate is twice faster but, with a twofold cost per step, the global computational efficiency remains the same. The SSOR is nonetheless appreciated for its better error balancing and is a good symmetric preconditioning method.
+4.6 Matrix splitting interpreted as a Richardson method
+In this section, all matrix splitting methods considered so far are shown to be simply linked to the Richardson method.
+4.6.1 Preconditioning
+When the linear system Ax = b is ill-conditioned, i.e. when the condition number κ(A) = |λA
+max |
+|λA
+min| )
+is large, all numerical methods (direct or iterative) are penalized. A very common practice is then to precondition the system, which consists in applying a linear change of variables.
+Right preconditioning
+The linear system is transformed as
+Ax = b → AK−1Kx = b, (4.139)
+where K is the preconditioning matrix. Setting,
+{A ̃ = AK−1
+y = Kx (4.140)
+yields the modified linear system:
+ ̃Ay = b (4.141)
+and x = K−1y (4.142)
+Given the latter equation which determines x, the preconditioning matrix must be yield a linear system, Kx = y, that is cheaply solved. Additionally, the retained matrix K must of course
+solve the initial problem, meaning that the condition number of the new system  ̃Ay = b must be significantly reduced.
+Left preconditioning
+Alternatively, right preconditioning can be replaced by or combined with left preconditioning that considers
+Ax = b → K−1Ax = K−1b (4.143)
+Setting,
+{A ̃ = K−1A
+ ̃b = K−1b (4.144)
+
+
+74 CHAPTER 4. ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS
+yields a new linear system:
+A ̃ x = b ̃ (4.145)
+4.6.2 Matrix splitting
+All the methods seen so far can be expressed as a matrix splitting, A = A1 −A2, yielding a common iterative process A1xk+1 = A2xk + b. These iterations can be written as
+xk+1 = A1−1A2xk + A1−1b (4.146)
+xk+1 = A1−1(A1 − A)xk + A1−1b (4.147)
+xk+1 = (I − A1−1A)xk + A1−1b (4.148)
+This expression is nothing else than the Richardson method, xk+1 = (I −  ̃A)xk + b ̃, applied to the
+preconditioned system  ̃Ax = b ̃ : A1−1A = A1−1b. Therefore, all previous methods are identical to a Richardson iterative method applied to the preconditioned with the preconditioning matrix K = A1.
+Each matrix splitting method is then equivalently identified as a specific preconditionner with different choices for K:
+• Jacobi preconditioner : K = D • Gauss-Seidel preconditioner : K = D − E • Symmetric Gauss-Seidel preconditioner : K = (D − E)D−1(D − F ) • SOR preconditioner : K = D − ωE • SSOR preconditioner : K = (D − ωE)D−1(D − ωF )
+Since the Richardson method is identical to the simple fixed point method applied to the linear system, every methods considered so far are preconditioned fixed point method. To progress further, one must improve the underlying Richardson method.
+4.7 Towards Krylov methods
+4.7.1 Residuals in the Richardson method and Krylov subspaces
+Given the conclusion in the previous section, once A is preconditioned, the only method at our disposal is the Richardson method,
+xk+1 = (I − A)xk + b
+In terms of the iteration residual, rk = b − Axk, one can write
+xk+1 = xk + rk
+Multiplying by −A and adding b yields the following evolution of the residuals in the Richardson method:
+rk+1 = (I − A)rk. (4.149)
+Hence,
+∥
+∥rk+1∥
+∥ ≤ ‖I − A‖ ∥
+∥rk ∥
+∥ . (4.150)
+
+
+4.7. TOWARDS KRYLOV METHODS 75
+The iterative method converges to the solution, i.e. rk → 0, if
+‖I − A‖ ≤ 1 (4.151)
+All the methods seen so far (=preconditioned Richardson) have modified A so that ‖I − A‖ < 1 is satisfied. This restriction to have all eigenvalues contained in the unit ball must be elevated to progress further. Let’s first notice that the Richardson residuals can be expressed as powers A multiplied by the initial residual r0:
+rk+1 = (I − A)rk → rk+1 = (I − A)k+1r0 = Pk+1(A)r0 , (4.152)
+where Pk+1(A) is a particular polynomial fo degree k + 1. The iterate xk can also be written as a function of a polynomial Qk(A) :
+xk+1 = r0 + r1 + r2 + ... + rk (4.153)
+xk+1 =
+k
+∑
+j+0
+(I − A)jr0 = Qk(A)r0 (4.154)
+The Richardson method writes then each iterate xk+1 as a specific linear combination of vectors r0,
+Ar0, · · · , Akr0. The iterate xk+1 is then an element of the vectorial subspace of dimension k + 1 generated or spanned by those vectors:
+xk+1 ∈ span{r0, Ar0, · · · , Akr0} de=f. Kk+1(A, r0) , (4.155)
+where the defined vectorial space Kk+1(A, r0) is called the (k+1)-dimensional Krylov subspace. In conclusion of this section, the simple Richardson method yields particular successive estimates xk that lie in Krylov subspace of increasing dimension.
+4.7.2 Improving the Richardson method
+4.7.2.1 Damping properties Richardson
+To understand how A’s eigenvalues impact the residual convergence, let’s express r0 on the eigenvectors wj bases of A:
+r0 =
+n
+∑
+j=1
+γjwj, (4.156)
+with the weights γj. Then,
+rk = P k(A)r0 =
+n
+∑
+j=1
+γjPk(λjA)wj (4.157)
+The decrease in residual rk is then linked to the decrease of initial r0 components due to the damping
+of each eigenvalue by the polynomial Pk(λjA). The improvement of the fixed-point method, that is the Richardson method, is to build another method with better damping properties for Pk.
+4.7.2.2 First improving step: Modified Richardson
+Let’s introduce an iteration relaxation parameter αk:
+xk+1 = xk + αkrk (4.158)
+rk+1 = (I − αkA)rk (4.159)
+
+
+76 CHAPTER 4. ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS
+The obtained formula is a modified Richardson method where the simple Richardson method is retrieved with αk = 1. The residual can still be expressed as a polynomial of A,
+rk+1 = Pk+1(A)r0 with Pk(A) =
+k
+∏
+j=1
+(I − αjA), (4.160)
+and the iterate xk+1 still lies in the Krylov subspace Kk+1(A, r0). By introducing additional degrees of freedom αj, the convergence of the method does not require ‖I − A‖ < 1 anymore. The obtained polynomial Pk(A) is much more general and corresponds to a family of polynomials with real roots. Nevertheless, the coefficients αk remain to be determined. The next step is then to determining an optimal set of coefficients.
+4.7.2.3 Generalization idea: Krylov methods
+The simple and modified Richardson method always yield an iterate xk+1 ∈ Kk+1(A, r0). Let’s keep this rule and then propose a general method where xk+1 is now expressed from an arbitrary polynomial of degree k as
+xk+1 = Qk(A)r0 (4.161)
+Assuming without loss of generality that 0 = 0 → r0 = b, the corresponding residual is given by
+rk+1 = b − Axk+1 = (I − AQk(A))r0 = P ̃k+1(A)r0 (4.162)
+where P ̃k+1 is a general polynomial of degree k + 1 fulfilling P ̃k+1(0) = 1. This general method combined with an optimal choice of xk+1 in the Krylov subspace Kk+1(A, r0) results in a socalled Krylov iterative method. Each choice of an optimality condition yields a different Krylov method. The most classical ones are: Conjugate Gradient, GMRES and Bi-CGStab. When carrying out n iterations of the Krylov method where n is the total number of unknowns, the vectorial Krylov subspace then spans the whole Rn space and the method becomes exact, yielding the exact solution x∗. In practice though, such methods are interrupted at an iteration k much sooner than n, making them placed in the family of iterative methods.
+4.7.3 Conjugate Gradient method
+The conjugate gradient method is the one of the best known iterative method to solve a symmetric positive definite linear system, which makes it one of the preferred method to solve elliptic PDEs such as Poisson equations 2. The method is built upon a specific criterion of optimality where the residual rk = b − Axk is set orthogonal to the current Krylov subspace Kk(A, r0) such that the
+error norm ‖xk − x∗‖A based on the positive matrix A is minimized. The obtained iterative formula is given below:
+2In fact, it is the opposite matrix −A that is symmetric definite positive in the Poisson problem
+
+
+4.8. COMPARISON OF METHODS 77
+Compute r0 = b − Ax0, p0 = r0.
+For k = 0, 1, · · · , until convergence DO:
+αk = 〈rk, rk〉/〈Apk, pk〉
+xk+1 = xk + αkpk
+rk+1 = rk − αkApk
+βk = 〈rk+1, rk+1〉/〈rk, rk〉
+pk+1 = rk+1 + βkpk
+End
+Conjugate Gradient
+Let us remember that Krylov methods were derived in this section with the initial desire to make the simple Richardson method more efficient. It was assumed that the linear system was the original one or a preconditioned one. As for Richardson, Krylov methods are strongly impacted by preconditioning which makes them even more efficient. It has been shown that the preconditioned Richardson yielded the Jacobi, Gauss-Seidel ad SOR methods. Since the conjugate gradient methods tackles symmetric systems, the preconditioned system must remain symmetric, which invites to use symmetric preconditionners. The Jacobi or symmetric Gauss-Seidel preconditionner enable to improve further the convergence rate of the conjugate gradient method. The general implementation of the preconditionned conjugate gradient method follows:
+Choose preconditioning matrix K
+Compute r0 = b − Ax0, z0 = K−1r0 and p0 = z0.
+For k = 0, 1, · · · , until convergence DO:
+αk = 〈rk, zk〉/〈Apk, pk〉
+xk+1 = xk + αkpk
+rk+1 = rk − αkApk
+zk+1 = K−1rk+1
+βk = 〈rk+1, zk+1〉/〈rk, zk〉
+pk+1 = zk+1 + βkpk
+End
+Preconditioned Conjugate Gradient
+4.8 Comparison of methods
+Solving a linear system of n unknowns, the different iterative methods require different number of iterations to reduce the initial error by several orders of magnitude. Their algorithmic complexity in shown in Tab. 4.8. One can clearly see the significant benefit by considering successively the SOR and Conjugate gradient methods. The multigrid method has not been detailed here and the readers
+
+
+78 CHAPTER 4. ELLIPTIC PARTIAL DIFFERENTIAL EQUATIONS
+are forwarded to reference textbooks for details. Such methods are the most efficient on structured meshes and yield an unbeaten linear complexity.
+Methods Complexity Jacobi O(n2) Gauss-Seidel O(n2) SOR O(n3/2) Preconditioned Conjugate Gradient O(n5/4) Multigrid O(n3/2)
+Table 4.1 : Comparison of iterative methods
+
+
+4.8. COMPARISON OF METHODS 79
+Cheat Sheet: Iterative methods to solve the 2D Poisson equation
+Solving the linear system obtained by using 2nd-order centered difference formula for
+∂2φ
+∂x2 + ∂2φ
+∂y2 = f (x, y),
+yields the linear system
+φi+1,j + φi−1,j − 4φi,j + φi,j+1 + φi,j−1 = h2fij .
+• Jacobi method
+φk+1
+i,j = 1
+4 (φik+1,j + φik−1,j + φik,j+1 + φik,j−1) − 1
+4 h2fi,j
+• Gauss-Seidel method
+φk+1
+i,j = 1
+4 (φk+1
+i−1,j + φk+1
+i,j−1 + φik+1,j + φik,j+1) − 1
+4 h2fi,j
+• SOR method
+φk+1
+i,j = (1 − ω)φik,j + ω
+[1
+4 (φk+1
+i−1,j + φik+1,j + φik,j+1 + φk+1
+i,j−1) − 1
+4 h2fi,j
+]
+with ωopt ≈ 2
+(
+1− π
+N + π2
+N2 + ···
+)
+
+
+
+
+Chapter 5
+Hyperbolic and Parabolic Partial
+Differential Equations
+Contents
+5.1 Examples of Hyperbolic and Parabolic PDEs . . . . . . . . . . . . . . . . . 81
+5.2 Convergence of numerical schemes: The Lax theorem . . . . . . . . . . . . . 82
+5.3 Stability Analysis of discrete PDE . . . . . . . . . . . . . . . . . . . . . . . . 84
+5.4 Characterization of numerical errors . . . . . . . . . . . . . . . . . . . . . . 98
+5.5 Lax Wendroff and Lax-Friedrichs schemes . . . . . . . . . . . . . . . . . . . 103
+5.6 Consistent and stable discretisations . . . . . . . . . . . . . . . . . . . . . . 104
+Compared to Elliptic PDEs, hyperbolic and parabolic PDEs have the advantage of not requiring to couple all points in the domain for their resolution. Given the propagative nature of both parabolic and hyperbolic PDEs, they have a “time”-like direction. From that statement, it is natural to consider a step-by-step approach. Numerical resolutions of parabolic and hyperbolic PDEs will then rely on Time Marching methods. Most of the numerical methods for Parabolic and Elliptic PDEs use different methods of discretization for time-direction and space-directions. The “global” numerical method and its properties is then a consequence of the properties of both spatial and time discretizations.
+5.1 Examples of Hyperbolic and Parabolic PDEs
+5.1.1 Parabolic PDEs
+Parabolic PDEs share the following properties:
+• they feature one preferred direction, along which they imply an infinite propagation of information,
+• they require both initial conditions and boundary conditions for other.
+Example :
+• 1D unsteady heat equation:
+∂T
+∂t = a∂2T
+∂x2 (5.1)
+81
+
+
+82 CHAPTER 5. HYPERBOLIC AND PARABOLIC PARTIAL DIFFERENTIAL EQUATIONS
+• 2D unsteady heat equation:
+∂T
+∂t = a
+( ∂2T
+∂x2 + ∂2T
+∂y2
+)
+(5.2)
+• 3D unsteady heat equation:
+∂T
+∂t = a
+( ∂2T
+∂x2 + ∂2T
+∂y2 + ∂2T
+∂z2
+)
+(5.3)
+• 1D advection-diffusion equation:
+∂Yk
+∂t + c ∂Yk
+∂x = D ∂2Yk
+∂x2 (5.4)
+Remark
+The presence of a time variable is not mandatory. A purely spatial example of elliptic equation
+is:
+u∂T
+∂x = a
+( ∂2T
+∂x2 + ∂2T
+∂y2
+)
+, (5.5)
+which reduces, under the physical assumption ∂2T
+∂x2 1 to the purely spatial parabolic equation:
+u∂T
+∂x = a∂2T
+∂y2 . (5.6)
+In this parabolic equation, the particular direction is x.
+5.1.2 Hyperbolic PDEs
+For hyperbolic PDEs:
+• at least one propagation direction appears,
+• propagation speeds are finite,
+• Initial condition and boundary conditions are required on other directions (then, they are not mandatory everywhere).
+Example :
+∂u
+∂t + c∂u
+∂x = 0 1D advection equation (5.7)
+∂u
+∂t + c1
+∂u
+∂x + c2
+∂u
+∂y = 0 2D advection equation (5.8)
+c1
+∂u
+∂x + c2
+∂u
+∂y = 0 2D steady advection (5.9)
+5.2 Convergence of numerical schemes: The Lax theorem
+When deriving a finite-difference approximation of a PDE, the objective is to ensure that the numerical solution will converge to the exact solution as the time and space increments tend to zero. The definition of convergence is the following:
+
+
+5.2. CONVERGENCE OF NUMERICAL SCHEMES: THE LAX THEOREM 83
+A Finite difference approximation P∆t,∆xv = f is said to be convergent with
+respect to the PDE P u = f if, for a given initial condition vi0 that tends to
+u(t = 0, xi) as ∆x tends to 0, the solution vin tends to the solution u(tn, xi) as ∆t and ∆x tend to 0.
+Convergence
+In order to get convergence, several ingredients are required. The first ingredient is the consistency, which ensures that the error between the finite difference approximation and the exact PDE tends to zero as space and time increments tend to zero:
+Considering the PDE P u = f , where P is the partial derivative operator, a finite difference scheme P∆t,∆xv = f is consistent with P u = f if for any smooth function φ(t, x):
+‖P φ − P∆t,∆xφ‖ = O(∆xp) + O(∆tq) (5.10)
+where p, q > 0 are the order of consistency in space and time respectively.
+Consistency
+Example : If we consider a first order approximation of the advection equation using forward Euler and upwind differencing for space derivative, we get:
+∂u
+∂t + a∂u
+∂x = 0 → un+1
+j − un
+j
+∆t + a un
+j − un
+j−1
+∆x = 0 (5.11)
+Lookign at the truncation error made by finite difference approximation of time and space derivatives, we obtain:
+un+1
+j = un
+j + ∂u
+∂t
+∣ ∣ ∣ ∣
+n
+j
+∆t + O(∆t2) → ∂u
+∂t
+∣ ∣ ∣ ∣
+n
+J
+= un+1
+j − un
+j
+∆t + O(∆t) (5.12)
+un
+j−1 = un
+j − ∂u
+∂x
+∣ ∣ ∣ ∣
+n
+j
+∆x + O(∆x2) → ∂u
+∂x
+∣ ∣ ∣ ∣
+n
+J
+= un
+j − un
+j−1
+∆t + O(∆x) (5.13)
+Looking at the difference between the exact PDE and its approximation, we finally get:
+‖P u − P∆t,∆xu‖ = O(∆t) + O(∆x) (5.14)
+Then this scheme is consistent of first order in time and space with the advection equation.
+The second ingredient is the stability, which ensures that the solution remains bounded for any time increment (methods to demonstrate stability of a numerical approximation are presented in Section 5.3):
+A finite difference scheme P∆t,∆xv = f is said to be stable if P −1
+∆t,∆x is uni
+formly bounded, i.e., if it exists a strictly positive constant C such that for n ≥ 0:
+∥ ∥
+∥P −1
+∆t,∆x
+∥ ∥
+∥≤C ≤∞
+Stability
+
+
+84 CHAPTER 5. HYPERBOLIC AND PARABOLIC PARTIAL DIFFERENTIAL EQUATIONS
+Then, if consistency and stability are satisfied, the Lax theorem states the convergence of the numerical approximation:
+If a finite difference approximation P∆t,∆xv = f is consistent at order p in time and order q in space with the PDE P u = f , and is stable, the finite difference approximation is convergent at order p in time and order q in space.
+Lax theorem
+Demonstration
+To demonstrate convergence, we look at the difference between the numerical solution u and the exact solution v:
+u − v = P −1
+∆t,∆xP∆t,∆xu − P −1
+∆t,∆x(P∆t,∆xv)
+= P −1
+∆t,∆x(P∆t,∆xu − P u) − P −1
+∆t,∆x(P∆t,∆xv − P u)
+= P −1
+∆t,∆x(P∆t,∆xu − P u) − P −1
+∆t,∆x(f − f )
+Taking the norm of the difference, we get:
+‖u − v‖ =
+∥ ∥
+∥P −1
+∆t,∆x(P∆t,∆xu − P u)
+∥ ∥ ∥
+≤
+∥ ∥
+∥P −1
+∆t,∆x
+∥ ∥
+∥ ‖P∆t,∆xu − P u‖
+Using stability (
+∥ ∥
+∥P −1
+∆t,∆x
+∥ ∥
+∥ ≤ C ≤ ∞) and consistency (‖P φ − P∆t,∆xφ‖ = O(∆xp) +
+O(∆tq)) , we finally get:
+‖u − v‖ ≤ C (O(∆xp) + O(∆tq))
+‖u − v‖ →
+∆t,∆x→0 0
+Example : Let us consider the numerical solution of the 1D linear advection equation:
+∂u
+∂t + c∂u
+∂x = 0
+• the use of Forward Euler for the time part and Upwind scheme for the spatial part is consistent with the original equation at order 1 in time and space. Furthermore, as it will be demonstrated later in this chapter, this combination is also stable. As a consequence of Lax theorem, this scheme is thus convergent, as seen in Fig. 5.1.
+• If we replaced the scheme for the spatial part by a centered scheme, we obtain an unstable scheme. Even if the resulting scheme is consistent at order 1 in time and 2 in space with the advection equation, it cannot converge to the exact solution as seen in Fig. 5.2.
+5.3 Stability Analysis of discrete PDE
+To achieve convergence, stability is mandatory and is thus an essential step in the derivation of a convergent (and thus useful) finite difference approximation of a PDE. There are several ways to analyse and demonstrate stability. Before presenting them, we first introduce two important numerical parameters: the Fourier number and the Courant-Friedrichs-Levy or CFL number. The Fourier Number is related to diffusion equations and reads:
+
+
+5.3. STABILITY ANALYSIS OF DISCRETE PDE 85
+0.0 0.2 0.4 0.6 0.8 1.0 x
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+u
+Nx=50 Nx=100 Nx=1000 exact
+Figure 5.1 : Solution of the 1d linear advection equation using Forward Euler+Upwind after one revolution: exact solution (black), and numerical solutions using 50 (red), 100 (green) and 1000 (blue) points.
+0.0 0.2 0.4 0.6 0.8 1.0 x
+1.0
+0.5
+0.0
+0.5
+1.0
+1.5
+u
+initial ite=1 ite=100 ite=200
+Figure 5.2 : Solution of the 1d linear advection equation using Forward Euler+Centered: initial solution (black), and numerical solutions after 1 (red), 100 (green) and 200 (blue) iterations.
+Fo = a∆t
+∆x2 .
+Fourier Number
+
+
+86 CHAPTER 5. HYPERBOLIC AND PARABOLIC PARTIAL DIFFERENTIAL EQUATIONS
+where a is the diffusion coefficient. It can be interpreted as the ratio of the time step ∆t and the characteristic propagation time of information through a mesh cell (∆x2/a). The CFL number is related to advection equations and reads
+C = |u| ∆t
+∆x .
+CFL Number
+where u is the advection velocity. It can be interpreted as the ratio of time step ∆t and the propagation time of information through a mesh cell (∆x/u).
+5.3.1 Fourier space analysis
+To analyse the stability of a numerical scheme, the Fourier transform is very useful as it gives insight on the spectral properties on the scheme. The Fourier transform can either be used on the continuous equation or on the discrete data obtained by discretization. In the following, we first look at the exact solution of a reference advection-diffusion equation, and we then look its discrete counterpart.
+5.3.1.1 Behaviour of the exact solution
+Let us consider the advection-diffusion equation of a scalar u:
+∂u
+∂t + a∂u
+∂x = d2 ∂2u
+∂x2 (5.15)
+If we take the fourier transform uˆ(k, t) = ∫ ∞
+−∞ u(x, t)e−ikxdx, we get:
+duˆ
+dt = (−dk2 − iak)uˆ(k, t) (5.16)
+This equation is a first order equation, which solution is:
+uˆ(k, t) = e−dk2t−iaktuˆ0 = σ(k)uˆ0 (5.17)
+where σ(k) is the amplification factor of the exact solution. Now, let us consider a unique mode as an initial condition uˆ(k, 0) = σ(k − β), where β is the wave number of the initial mode, which corresponds to u(x, t) = 1
+2π eiβx. The solution then writes:
+uˆ(k, t) = e−dβ2t−iaβtuˆ0 (5.18)
+Going back to the physical space, we can get the following possible behaviour:
+• pure advection for d = 0: u(x, t) = eiβ(x−at)
+2π , for which the initial mode travels at constant velocity with no gain or loss, see Fig. 5.3.
+• pure diffusion for a = 0: u(x, t) = eiβx
+2π e−dβ2t, for which the initial mode is stationary and decaying in time, see Fig. 5.4.
+These two references behaviours are used to be compared with the analytical ones.
+
+
+5.3. STABILITY ANALYSIS OF DISCRETE PDE 87
+0.0 0.2 0.4 0.6 0.8 1.0 x
+1.00
+0.75
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+1.00
+u
+initial final
+Figure 5.3 : Exact solution of the 1d linear advection equation for an initial sinusoidal perturbation.
+0.0 0.2 0.4 0.6 0.8 1.0 x
+1.00
+0.75
+0.50
+0.25
+0.00
+0.25
+0.50
+0.75
+1.00
+u
+initial final
+Figure 5.4 : Exact solution of the 1d linear diffusion equation for an initial sinusoidal perturbation.
+5.3.1.2 Behavior of the numerical solution
+In the same spirit as in the previous section, we will use Fourier transform to analyze the solution. This time, since numerical solution is in form of discrete data, the discrete Fourier transform will be used1:
+uˆn(k) =
+Nx −1
+∑
+j=0
+ujne−ij∆xk∆x (5.19)
+Let us consider that a discretisation in time and space of a linear equation leads to a linear system to be solved:
+∑
+l
+alun+1
+j+l = ∑ l
+blujn+l (5.20)
+1Here i refers to the imaginary number.
+
+
+88 CHAPTER 5. HYPERBOLIC AND PARABOLIC PARTIAL DIFFERENTIAL EQUATIONS
+where l belongs to the stencil of the scheme. Applying the Discrete Fourier Transform leads to:
+[ ∑
+l
+aleikl∆x
+]
+uˆn+1
+j=
+[ ∑
+l
+bleikl∆x
+]
+uˆjn(k) (5.21)
+uˆn+1
+uˆn =
+∑
+l bleihl∆x
+∑
+l aleihl∆x = σ∗(k) (5.22)
+σ?(k) is the amplification factor of the numerical scheme. At this point, it is worth noticing that this amplification factor will be different from the exact solution, and comparing exact and numerical ones will give access to the numerical error made by the scheme. This parameter is also used to investigate the stability of the scheme.
+Example : Discretizing the pure advection equation with forward Euler+upwind leads to the following scheme:
+un+1
+j = un
+j − C(un
+j − un
+j−1) (5.23)
+In this case, l is equal to 0 (local point j) or −1 (upwind point j − 1). The coefficient are then a0 = 1, b0 = 1 − C, and b−1 = C.
+5.3.1.3 Von Neumann Stability Analysis
+A first way to evaluate the stability of a numerical method is to study its response to a unique harmonic perturbation, and to check whether it amplifies or damp the perturbation allows to discriminate between unstable and stable. This method is the so-called Von Neumann stability analysis method.
+Consider a unique harmonic mode:
+ujn = exp (iβxj) = exp(iβj∆x), (5.24)
+Then, by computing the amplification factor σ as:
+σ∗ = un+1
+j
+ujn
+, (5.25)
+the stability of the numerical method is guaranteed as long as |σ∗| ≤ 1, the method being unstable otherwise. Note that the existence of σ∗ is a consequence of the linearity of the discretized PDE.
+Von Neumann stability analysis
+Example : Consider the Forward Euler - Centered Difference Scheme (5.6.1.1) for the heat equation (5.144) with
+un
+j = exp(iβj∆x). (5.26)
+This yields
+φn+1
+j = φn
+j + Foφn
+j (exp(iβ∆x) − 2 + exp(−iβ∆x)) φn+1
+j = φn
+j (1 + 2 Fo (cos(β∆x) − 1))
+} {{ }
+σ
+. (5.27)
+
+
+5.3. STABILITY ANALYSIS OF DISCRETE PDE 89
+Stability condition expresses here as
+−1 ≤ 1 + 2 Fo (cos(β∆x) − 1) ≤ 1, (5.28)
+−2 ≤ 2 Fo (cos(β∆x) − 1)
+} {{ }
+≤0
+≤ 0, (5.29)
+0 ≤ Fo ≤ 1
+1 − cos(β∆x) . (5.30)
+The left-hand-side condition being always verified, the stability condition reads
+Fo ≤ 1
+1 − cos(β∆x) . (5.31)
+In the worst case, cos(β∆x) = −1. Hence the stability condition for Forward Euler – 2nd-order FD space with 1D Heat equation:
+Fo ≤ 1
+2 (5.32)
+In what follows, it will be clear that such a restriction on the time step
+(
+∆t ≤ ∆x2
+2a
+)
+, and similar ones when
+using explicit methods to solve parabolic PDEs, is penalizing and must be elevated.
+Exercise 9
+Characterize the stability of the discretization of the advection equation using Forward Euler and:
+• 1st-order upwind,
+• 1st-order downwind,
+• 2nd-order centered.
+Solution 9
+1st-order upwind: Recalling equation (5.7) and assuming c > 0, we get:
+un+1
+j = ujn − C (ujn − ujn−1
+) , (5.33)
+with
+ujn = eiβj∆x, (5.34)
+one gets
+un+1
+j = ujn
+(1 − C + Ce−iβ∆x)
+} {{ }
+σ
+(5.35)
+σ = 1 − C (1 − e−iβ∆x) = 1 − 2iC sin
+( β∆x 2
+)
+e− iβ∆x
+2 (5.36)
+σ=
+(
+1 − 2C sin2
+( β∆x 2
+))
+− iC sin(β∆x) (5.37)
+
+
+90 CHAPTER 5. HYPERBOLIC AND PARABOLIC PARTIAL DIFFERENTIAL EQUATIONS
+|σ|2 =
+(
+1 − 2C sin2
+( β∆x 2
+))2
++ C2 sin2(β∆x) (5.38)
+= 1 − 4C sin2
+( β∆x 2
+)
++ 4C2 sin4
+( β∆x 2
+)
++ C2 sin2 (β∆x) (5.39)
+= 1 − 4C sin2
+( β∆x 2
+)
++ 4C2 sin4
+( β∆x 2
+)
++ 4C2 sin2
+( β∆x 2
+)
+cos2
+( β∆x 2
+)
+(5.40)
+= 1 − 4C sin2
+( β∆x 2
+)
++ 4C2 sin4
+( β∆x 2
+)
++ 4C2 sin2
+( β∆x 2
+)(
+1 − sin2
+( β∆x 2
+))
+(5.41)
+= 1 − 4C sin2
+( β∆x 2
+)
++ 4C2 sin2
+( β∆x 2
+)
+(5.42)
+Therefore, the stability condition |σ|2 ≤ 1 can be expressed as:
+C2 − C ≤ 0, (5.43)
+C(C − 1) ≤ 0. (5.44)
+Eventually, the stability condition for Forward Euler – 1st-order Upwind scheme is:
+C ≤ 1 (5.45)
+This stability limit is known as the Courant-Friedrich-Lewy, or CFL-condition.
+1st-order downwind:
+un+1
+j = ujn − C (ujn+1 − ujn
+) (5.46)
+The Von-Neumann analysis reads
+un+1
+j = ujn
+(1 − Ceiβ∆x + C) , (5.47)
+σ = 1 − C (eiβ∆x − 1) = 1 − 2iCe iβ∆x
+2 sin
+( β∆x 2
+)
+(5.48)
+σ = 1 + 2C sin2
+( β∆x 2
+)
+− 2iC sin
+( β∆x 2
+)
+cos
+( β∆x 2
+)
+(5.49)
+|σ|2 = 1 + 4C2 sin4
+( β∆x 2
+)
++ 4C sin2
+( β∆x 2
+)
++ 4C2 sin2
+( β∆x 2
+)
+cos2
+( β∆x 2
+)
+(5.50)
+|σ|2 = 1 + 4C sin2
+( β∆x 2
+)
++ 4C2 sin2
+( β∆x 2
+)
+> 1 (5.51)
+Forward Euler – 1st-order downwind is then an unstable scheme.
+2nd-order centered:
+un+1
+j = ujn − C
+2
+(ujn+1 − ujn−1
+) (5.52)
+
+
+5.3. STABILITY ANALYSIS OF DISCRETE PDE 91
+un+1
+j = ujn
+(
+1− C
+2
+(eiβ∆x − e−iβ∆x)
+)
+(5.53)
+σ = 1 − iC sin
+( β∆x 2
+)
+(5.54)
+σ2 = 1 + C sin2
+( β∆x 2
+)
+≥ 1 (5.55)
+Forward Euler – 2nd-order centered is then an unstable scheme.
+5.3.1.4 Stability Analysis using the Modified Wavenumber
+This method is similar to Von-Neumann. It also assumes periodic Boundary Conditions. Modified wavenumber analysis is also used for FD. The main difference with Von Neumann analysis is that it is based on the semi-discrete scheme, i.e. the time-like dimension is not discretized.
+Considering the following semi-discretisation in space:
+duj (t)
+dt + ∑
+l
+bluj+l(t) = 0,
+the spatially-discretized solution being sought as uj(t) = ψ(t)eiβj∆x, the spectral semi-discrete equation becomes a linear ODE:
+dψ(t)
+dt =
+( ∑
+l
+bleiβl∆x
+)
+ψ(t) = λψ(t)
+Then, the stability of the numerical scheme will first depend on the real part of λ: if Re(λ) > 0, the scheme is unstable. If Re(λ) ≤ 0, the stability of the full scheme will depend on the choice of the ODE solver, as seen in Section 3.2.
+Modified wave number analysis
+Example: 1D Heat Equation : The following problem is considered here:
+∂φ
+∂t = a∂2φ
+∂x2 . (5.56)
+With a 2nd-order centered scheme, one gets:
+dφj
+dt = a
+∆x2 (φj+1 − 2φj + φj−1) (5.57)
+with
+φj = ψ(t)eiβj∆x (5.58)
+Then,
+dφj
+dt = a
+∆x2
+(
+e+iβ∆x − 2 + e−iβ∆x)
+φj (5.59)
+dψ
+dt = − 2a
+∆x2 (1 − cos (β∆x)) ψ(t) = −aβ′2ψ(t) (5.60)
+where
+β′2∆x2 = 2 (1 − cos (β∆x)) (5.61)
+is the modified wavenumber seen in FD lectures. The previously found eigenvalues λ = 2a
+∆x2 cos(β∆x)−1 are
+retrieved using β′. Each space-discretization scheme yields a different β′, already known. The corresponding
+eigenvalues are λ = −aβ′2 , they are then all real negative numbers for the 1D heat equation.
+
+
+92 CHAPTER 5. HYPERBOLIC AND PARABOLIC PARTIAL DIFFERENTIAL EQUATIONS
+• Euler Stability with centered 2nd-order: In this case, eigenvalues are given by
+λ = 2a
+∆x2 (cos (k∆x) − 1) . (5.62)
+Hence the following limitation:
+∆t ≤ 2
+|λ| ≤ ∆x2
+2a (5.63)
+and eventually, one retrieves
+Fo ≤ 1
+2 . (5.64)
+• Euler Stability with centered 4th-order:
+φn+1
+i = φn
+i + Fo
+12 (−φn
+i−2 + 15φn
+i−1 − 30φn
+i + 16φn
+i+1 − φn
+i+2) (5.65)
+We have seen that the 4th-order for ∂2φ
+∂x2 gives
+k′2∆x2 = 1
+6 cos (2k∆x) − 8
+3 cos (k∆x) + 5
+2 (5.66)
+then
+∆t ≤ 2
+|λ| = 2
+a ∆x2
+∣
+∣1
+6 cos(2k∆x − 8
+3 cos (k∆x) + 5
+2 )∣
+∣
+(5.67)
+The worst case corresponds to k∆x = π, i.e. a∆t
+∆x2 ≤ 2
+1
+6+8
+3+5
+2
+=3
+8 Eventually, the Fourier condition
+reads:
+Fo ≤ 3
+8 (5.68)
+Example: 1D Advection Equation : Consider the following problem:
+∂u
+∂t = −c ∂u
+∂x , (5.69)
+with
+uj = ψ(t)eikxj . (5.70)
+This gives
+dψ
+dt = −ickψ(t) (5.71)
+The eigenvalues are then λ = ick′ for 1D advection, with k′ the modified wavenumber of ∂u
+∂x
+• Centered 2nd-order scheme: For this scheme,
+k′∆x = sin(k∆x) (5.72)
+λ = − ic
+∆x sin(k∆x) (5.73)
+For a Centered 2nd-order scheme space-discretization, one retrieves the unstability of Euler, RK2 and AB2, the stability of LeapFrog for C ≤ 1 and of RK4 for C ≤ 2.83.
+• Centered 4th-order scheme: In this case, the space discretization reads:
+∂u ∂x
+∣ ∣ ∣ ∣i
+= ui−2 − 8ui−1 + 8ui+1 − ui+2
+12h . (5.74)
+This yields
+k′∆x = 4
+3 sin(k∆x) − 1
+6 sin(2k∆x) (5.75)
+and λ = −ick′ (5.76)
+
+
+5.3. STABILITY ANALYSIS OF DISCRETE PDE 93
+Let us find k′
+max to characterize the stability, using X = k∆x:
+dk′
+dX = 1
+∆x
+(4
+3 cos(X) − 1
+3 cos(2X)
+)
+= 0 (5.77)
+4 cos(X) = cos(2X) = 2 cos2(X) − 1 (5.78)
+setting Y = cos(X) gives
+2Y 2 − 4Y − 1 = 0, (5.79)
+which, since |Y | ≤ 1, reduces to one solution:
+Y =1− 1
+2
+√6. (5.80)
+Eventually,
+X = arccos(Y ) ≈ 1.8 (5.81)
+and
+k′
+max = k′(X) = 1.372
+h (5.82)
+This yields
+|λ|max = 1.372
+∆x (5.83)
+RK3: C ≤ 1.26
+RK4: C ≤ 2.06 (5.84)
+• Padé scheme (4th-order): Padé scheme consists in computing the approximate derivatives ∂u
+∂x
+∣
+∣j by solving equation:
+∂u ∂x
+∣ ∣ ∣
+∣j+1
++ 4 ∂u
+∂x
+∣ ∣ ∣ ∣j
++ ∂u
+∂x
+∣ ∣ ∣
+∣j−1
+=3
+∆x (uj+1 − uj−1) . (5.85)
+This yields
+k′∆x = 3 sin(k∆x)
+2 + cos(k∆x) , (5.86)
+and
+λ = −ick′. (5.87)
+λ is then pure imaginary. One can now evaluate kmax using
+dk′
+dx = 0 = 3
+∆x
+[cos(x) (2 + cos(x)) + sin2(x)]
+(2 + cos(x))2 , (5.88)
+with X = k∆x. The maximum is then obtained for:
+cos(X) = − 1
+2 , (5.89)
+which corresponds to
+X = 2π
+3 , (5.90)
+and
+k′
+max =
+√3
+h (5.91)
+Eventually, one finds for RK3 and RK4 time integration:
+Padé - RK3: ∆t ≤
+√3
+|λ|max
+C ≤ 1.0
+Padé - RK4: ∆t ≤ 2.83
+|λ|max
+C ≤ 1.66
+(5.92)
+
+
+94 CHAPTER 5. HYPERBOLIC AND PARABOLIC PARTIAL DIFFERENTIAL EQUATIONS
+Example: 1D Advection-Diffusion Equation : Recall the 1D formulation of an Advection-Diffusion Problem:
+∂u
+∂t + c∂u
+∂x = ν ∂2u
+∂x2 . (5.93)
+The corresponding modified wavenumber equation reads
+duj
+dt = −ick′
+1uj − νk′2
+2 uj . (5.94)
+Using a cenetered 2nd-order scheme for both terms:
+λ = − 2ν
+∆x2 (1 − cos(k∆x)) − ic sin(k∆x)
+∆x . (5.95)
+Considering Forward-Euler stability condition, one finds:
+C2 ≤ 2Fo ≤ 1 (5.96)
+Thus, adding diffusion makes Forward-Euler stable. This is the principle of artificial diffusion, which will be discussed later on.
+5.3.1.5 Limitations to Fourier-space Analysis
+The Fourier space analysis suffers the following limitations:
+• it is restricted to linear PDE with fixed coeffs,
+• it can only be performed on uniform meshes,
+• the use of Fourier modes assumes the periodic Boundary Conditions. Some counter-examples exist that show the impact of Boundary Conditions treatment on stability.
+5.3.2 Stability Analysis of the semi-discrete PDE
+It is also possible to investigate the stability of a numerical scheme without the use of a Fourier space analysis, but by directly looking the linear system generated by the scheme. Before actually tackling the stability analysis, a quick mathematical preamble is necessary.
+For a (N − 1) × (N − 1) tridiagonal matrix
+M=
+
+    
+bc 0
+a ... ...
+... ... c
+0 ab
+
+    
+, (5.97)
+denoted by B[a, b, c], the eigenvalues are
+λj = b + 2√ac cos
+(jπ N
+)
+for 1 ≤ j ≤ N − 1 (5.98)
+Eigenvalues of a tridiagonal matrix
+For the demonstration, see Appendix A.1.
+
+
+5.3. STABILITY ANALYSIS OF DISCRETE PDE 95
+5.3.2.1 Method of Lines (MOL)
+The semi-discrete PDE, as known as MOL, is obtained by discretizing along all directions except for the time-like variable:
+Pu = 0 ⇒ d
+dt uj(t) + P∆xuj(t) = 0 (5.99)
+The PDE is then turned into a set of ODEs. Any ODE method can then be applied. The MOL enables us to use what we have learnt on ODE numerical methods. This gives a good insight on the most appropriate methods to chose to resolve the PDE given a spatial discretization. However, not all discretized PDE can be interpreted using MOL (e.g. Lax Wendroff, to be described later).
+Method of Lines (MOL)
+Example: 1D Heat Equation : Consider the following Cauchy Problem for a physical domain Ω = [0, L] :
+
+   
+   
+∂φ
+∂t = a∂2φ
+∂x2 for (x, t) ∈ Ω × R+
+φ(0, t) = φ(L, t) = 0 for t ∈ R+
+φ(x, 0) = g(x) for x ∈ Ω
+(5.100)
+Let (xj)j=0..N be a uniform mesh of N + 1 points, with x0 = 0 and xN = L. Using a 2nd-order centered formula for space discretization, one gets:
+dφj
+dt = a
+( φj+1 − 2φi + φj−1 ∆x2
+)
+for j = 1, ..., N − 1. (5.101)
+This yields a system of N − 1 ODEs:
+d dt
+
+ 
+φ1
+...
+φN −1
+
+
+=A
+
+ 
+φ1
+...
+φN −1
+
+
+ , (5.102)
+where
+A= a
+∆x2
+
+      
+−2 1 0
+1 ... ...
+... ... 1
+0 1 −2
+
+      
+=a
+∆x2 B[1, −2, 1]. (5.103)
+The system can then be solved using RK, multi-step or other ODE methods. The stability of the ODE method is determined by the eigenvalues of A:
+λj = a
+∆x2
+(
+−2 + 2 cos
+( jπ N
+))
+with 1 ≤ j ≤ N − 1 (5.104)
+Thus, all λj are real negative numbers. Let us study the stability for different choices of ODE numerical methods.
+1. Forward Euler: the method reads
+φn+1
+j = φn
+j + Fo (φn
+j+1 − 2φn
+j + φn
+j−1
+) , (5.105)
+
+
+96 CHAPTER 5. HYPERBOLIC AND PARABOLIC PARTIAL DIFFERENTIAL EQUATIONS
+which is stable if ∆t ≤ 2
+|λj| for all j ∈ {1..N − 1}. Hence
+∆t ≤ 2
+|λ|max, , and (5.106)
+|λ|max ≈ 4a
+∆x2 , i.e. (5.107)
+∆t ≤ ∆x2
+2a , and eventually (5.108)
+Fo ≤ 1
+2 , (5.109)
+which is in agreement with the previously found stability limit.
+2. RK2: this two-stage method reads:
+
+ 
+ 
+φn+1/2
+j = φn
+j + Fo
+2
+(φn
+j+1 − 2φn
+j + φn
+j−1
+)
+φn+1
+j = φn
+j + Fo
+(
+φn+1/2
+j+1 − 2φn+1/2
+j + φn+1/2
+j−1
+) (5.110)
+The stability condition then writes:
+∆t ≤ 2
+|λ|max
+, (5.111)
+hence again
+Fo ≤ 1
+2 . (5.112)
+3. Backward Euler: as an implicit method, it is unconditionnaly stable
+4. Cranck-Nicolson: also known as trapezoidal – unconditionnaly stable
+5. RK4: For this method, one finds:
+∆t ≤ 2.78
+|λ|max
+, (5.113)
+which gives Fo ≤ 0.70 . (5.114)
+Example: 1D Advection Equation : Consider the following Cauchy Problem for a physical domain Ω = [0, L]
+:
+
+  
+  
+∂u
+∂t + c∂u
+∂x = 0 for (x, t) ∈ Ω × R+
+u(0, t) = 0 for t ∈ R+ (set on left side only)
+u(x, 0) = g(x) for x ∈ Ω
+(5.115)
+Let (xi)i=0..N be a uniform mesh of N + 1 points, with x0 = 0 and xN = L. Using a 2nd-order centered formula for space discretization, one gets:
+dui
+dt = −c
+( ui+1 − ui−1
+2∆x
+)
+for i = 1, ..., N − 1. (5.116)
+This yields a system of N − 1 ODEs2:
+d dt
+
+ 
+u1
+...
+uN −1
+
+
+=− c
+2∆x B[−1, 0, 1]
+
+ 
+u1
+...
+uN −1
+
+
+ . (5.117)
+Again, the system can then be solved using RK, multi-step or other ODE methods. The stability of the ODE method is determined by the eigenvalues of (− c
+2∆x B[−1, 0, 1]):
+λj = − ic
+∆x cos
+( πj N
+)
+for 1 ≤ j ≤ N (5.118)
+Here, all λj are pure imaginary. For this reason, every ODE method that does not include a part of imaginary axes in its stability domain is doomed to fail.
+2In reality, a 1st-order upwind discretization has to be used at the right-side boundary.
+
+
+5.3. STABILITY ANALYSIS OF DISCRETE PDE 97
+Example : Forward Euler, RK2, AB2 will fail.
+1. Leap Frog: The update is computed as:
+un+1
+i = un−1
+i −C
+2 (un
+i+1 − un
+i−1) (5.119)
+The stability condition writes:
+∆t ≤ 1
+|λ|max
+with |λ|max = c
+∆x (5.120)
+C ≤ 1 (5.121)
+2. RK3: the stability condition can be proved to be:
+∆t ≤
+√3
+|λ|max
+(5.122)
+The CFL condition is thus:
+C ≤ √3 . (5.123)
+3. RK4: the stability condition reads:
+∆t ≤ 2.83
+|λ|max
+, (5.124)
+which yields the following CFL condition:
+C ≤ 2.83 . (5.125)
+5.3.3 Stability of Multidimensionnal Problems
+Multidimensionnal problems can be tackled using generalizations of the 1D methods studied previously, using multidimensionnal Fourier modes: eikxxj , eikyy` , eikzzp In the following, results for different equations and discretizations are condensed.
+Heat Equation: The 2D version of this PDE reads:
+∂φ
+∂t = a
+( ∂2φ
+∂x2 + ∂2φ
+∂y2
+)
+(5.126)
+Using a Forward-Euler + centered 2nd-order space discretization, the stability condition on the Fourier number is:
+Fo2D ≤ 1
+4 (5.127)
+The 3D heat equation is given by:
+∂φ
+∂t = a
+( ∂2φ
+∂x2 + ∂2φ
+∂y2 + ∂2φ
+∂z2
+)
+(5.128)
+The same discretization (Forward-Euler + centered 2nd-order space) would yield:
+Fo3D ≤ 1
+6 (5.129)
+
+
+98 CHAPTER 5. HYPERBOLIC AND PARABOLIC PARTIAL DIFFERENTIAL EQUATIONS
+Advection Equation: The 2D version of this PDE reads:
+∂φ
+∂t + c1
+∂φ
+∂x + c2
+∂φ
+∂y = 0 (5.130)
+The stability condition corresponding to a Forward-Euler + 1st-order upwind discretization in each direction gives the following CFL condition:
+C1 + C2 ≤ 1, (5.131)
+where
+Cd = |cd|∆t
+∆x . (5.132)
+For a 3D formulation, which reads:
+∂φ
+∂t + c1
+∂φ
+∂x + c2
+∂φ
+∂y + c3
+∂φ
+∂z = 0, (5.133)
+one obtains the 3D CFL criterion: C1 + C2 + C3 ≤ 1. (5.134)
+5.4 Characterization of numerical errors
+5.4.1 Numerical diffusion and dispersion
+Using a convergent scheme, the exact solution is retrieved when time and space step tend to zero under the appropriate stability condition. If convergence is not fully achieved, a numerical error is made, and it is important to characterize which type of influence this error has on the numerical solution. To analyse this error, the strategy consists in comparing exact and numerical solutions, by looking the amplification factor σ.
+Numerical diffusion means that the loss of amplitude compared to the exact solution, meaning that the rate of decay is not matched:
+|σ∗(k)|
+|σ(k)| 6= 1
+Numerical dispersion means that the propagation speed is not matched, i.e, the solution is travelling slower or faster:
+arg(σ∗(k))
+arg(σ(k)) 6= 1
+In general, diffusion and dispersion depend on wave number k.
+Numerical diffusion and dispersion
+5.4.1.1 Application to the 1D linear advection equation
+In the case of the advection equation, the solution is a pure propagation at a fixed velocity without diffusion of the solution
+uˆ(k, t) = e−iaktuˆ0 (5.135)
+
+
+5.4. CHARACTERIZATION OF NUMERICAL ERRORS 99
+Figure 5.5 : Diffusion and Dispersion errors of the Euler+Upwind scheme applied to the advection equation
+at different CFL numbers for a final time tf = ∆x
+a.
+In order to compare the results of different schemes at different CFL numbers, and thus different time steps, it is required to fix the final time at which the comparison is performed. Here, we arbitrarily
+choose tf = ∆x
+a , which is the time required to cross a cell at CF L = 1. At this final time, we get:
+uˆ(k, tf ) = e−iak ∆x
+a uˆ(k, 0) ⇒ uˆ(k, tf ) = e−iθuˆ(k, 0) (5.136)
+where θ = k∆x is the node wave number. Here we get the exact amplication factor, which presents no diffusion (|e−iθ| = 1)and no dispersion (arg(e−iθ = −θ). Now, let us consider the discretised solution of the advection equation using the Euler+Upwind scheme. Using the Discrete Fourier Transform, we get for one iteration, i.e. one time step:
+uˆn+1 = (1 − C)uˆn + Ce−iθuˆn
+and then, for multiple time steps:
+uˆn+l = (1 − C + Ce−iθ)luˆn
+We thus get for the amplification factor after l time steps:
+⇒ σ(θ) = (1 − C + Ce−iθ)l = (1 − C(1 − cosθ) − iCsinθ)l
+Taking the norm and the argument of the amplification factor, we get the diffusion and dispersion properties of this scheme, plotted in Fig. 5.5. We first see that the diffusion and dispersion errors clearly depend on the frequency of interest. Here the error of Euler+Upwind scheme is increasing together with the frequency of interest. We can clearly see that the CFL number has a great impact on the diffusion and dispersion errors. The influence of theses numerical errors on the solution is shown in Fig. 5.6, where the initial solution consists in a pure sinusoidal mode u(t = 0, x) = sin(ωx), where ω = 4π. The solution is plotted at the same final time tf = 0.5 at which initial and final solution must overlap. The numerical diffusion is clearly highlighter by the loss of amplitude of the sinusoidal wave. The dispersion is also highlighted by the space shift of the numerical solution, showing here a lower propagation speed than the expected one. This is coherent with Fig. 5.5, which shows a dispersion error below 1 for C = 0.25, i.e. a lower propagation speed.
+
+
+100 CHAPTER 5. HYPERBOLIC AND PARABOLIC PARTIAL DIFFERENTIAL EQUATIONS
+0.0 0.5 1.0
+1.0
+0.5
+0.0
+0.5
+1.0
+u
+= 0.06
+0.0 0.5 1.0
+= 0.13
+0.0 0.5 1.0
+= 0.28
+0.0 0.5 1.0 x
+1.0
+0.5
+0.0
+0.5
+1.0
+u/max(u)
+0.0 0.5 1.0 x
+0.0 0.5 1.0 x
+Figure 5.6 : Numerical solution of the Euler+Upwind scheme applied to the advection equation for an initial sinusoidal wave at C = 0.25. Final solution u (upper part) and final solution normalized by its maximum value (lower part), with different normalized wave numbers θ = 0.01π (left), 0.13π (center) and 0.28π (right).

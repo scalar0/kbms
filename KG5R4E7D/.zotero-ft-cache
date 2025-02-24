@@ -1,0 +1,2130 @@
+ANTENNAS AND
+PROPAGATION
+FOR WIRELESS COMMUNICATION SYSTEMS
+Second Edition
+SIMON R. SAUNDERS,
+UNIVERSITY OF SURREY, GUILDFORD, UK
+ALEJANDRO ARAGO ́ N-ZAVALA,
+TECNOLO ́ GICO dE MONTERREY, CAMPUS QUERE ́ TARO, MEXICO
+
+
+Copyright ß 2007 John Wiley & Sons Ltd, The Atrium, Southern Gate, Chichester, West Sussex, PO19 8SQ, England Telephone (þ44) 1243 779777
+Email (for orders and customer service enquiries): cs-books@wiley.co.uk Visit our Home Page on www.wiley.com
+All Rights Reserved. No part of this publication may be reproduced, stored in a retrieval system or transmitted in any form or by any means, electronic, mechanical, photocopying, recording, scanning or otherwise, except under the terms of the Copyright, Designs and Patents Act 1988 or under the terms of a licence issued by the Copyright Licensing Agency Ltd, 90 Tottenham Court Road, London W1T 4LP, UK, without the permission in writing of the Publisher. Requests to the Publisher should be addressed to the Permissions Department, John Wiley & Sons Ltd, The Atrium, Southern Gate, Chichester, West Sussex PO19 8SQ, England, or emailed to permreq@wiley.co.uk, or faxed to (þ44) 1243 770571.
+This publication is designed to provide accurate and authoritative information in regard to the subject matter covered. It is sold on the understanding that the Publisher is not engaged in rendering professional services. If professional advice or other expert assistance is required, the services of a competent professional should be sought.
+Designations used by companies to distinguish their products are often claimed as trademarks. All brand names and product names used in this book are trade names, service marks, trademarks or registered trademarks of their respective owners. The Publisher is not associated with any product or vendor mentioned in this book.
+Other Wiley Editorial Offices
+John Wiley & Sons Inc., 111 River Street, Hoboken, NJ 07030, USA
+Jossey-Bass, 989 Market Street, San Francisco, CA 94103-1741, USA
+Wiley-VCH Verlag GmbH, Boschstr. 12, D-69469 Weinheim, Germany
+John Wiley & Sons Australia Ltd, 42 McDougall Street, Milton, Queensland 4064, Australia
+John Wiley & Sons (Asia) Pte Ltd, 2 Clementi Loop #02-01, Jin Xing Distripark, Singapore 129809
+John Wiley & Sons Canada Ltd, 6045 Freemont Blvd, Mississauga, ONT, L5R 4J3, Canada
+Wiley also publishes its books in a variety of electronic formats. Some content that appears in print may not be available in electronic books.
+Anniversary Logo Design: Richard J. Pacifico
+British Library Cataloguing in Publication Data
+A catalogue record for this book is available from the British Library
+ISBN 978-0-470-84879-1
+Typeset in 10/12 Times by Thomson Digital. Printed and bound in Great Britain by Antony Rowe Ltd, Chippenham, Wiltshire. This book is printed on acid-free paper responsibly manufactured from sustainable forestry in which at least two trees are planted for each one used for paper production.
+
+
+In memory of my father. For Luke, Emily and Gra ́ nne.
+Simon Saunders
+To Laura, you are my inspiration and my true love. To Coco ́, Maxi and Fimbie.
+Alejandro Arago ́n-Zavala
+
+
+Contents
+Preface to the First Edition xix
+Preface to the Second Edition xxi
+1. Introduction: The Wireless Communication Channel 1
+1.1 INTRODUCTION 1 1.2 CONCEPT OF A WIRELESS CHANNEL 2 1.3 THE ELECTROMAGNETIC SPECTRUM 4 1.4 HISTORY 5 1.5 SYSTEM TYPES 7 1.6 AIMS OF CELLULAR SYSTEMS 8 1.7 CELLULAR NETWORKS 9 1.8 THE CELLULAR CONCEPT 9 1.9 TRAFFIC 13 1.10 MULTIPLE ACCESS SCHEMES AND DUPLEXING 17 1.10.1 Frequency Division Multiple Access 17 1.10.2 Time Division Multiple Access 18 1.10.3 Code Division Multiple Access 18 1.11 AVAILABLE DATA RATES 19 1.12 STRUCTURE OF THIS BOOK 20 1.13 CONCLUSION 22 REFERENCES 22 PROBLEMS 23
+2. Properties of Electromagnetic Waves 25
+2.1 INTRODUCTION 25 2.2 MAXWELL’S EQUATIONS 25 2.3 PLANE WAVE PROPERTIES 26 2.3.1 Field Relationships 27 2.3.2 Wave Impedance 27
+
+
+2.3.3 Poynting Vector 28 2.3.4 Phase Velocity 28 2.3.5 Lossy Media 28 2.4 POLARISATION 32 2.4.1 Polarisation States 32 2.4.2 Mathematical Representation of Polarisation 32 2.4.3 Random Polarisation 33 2.5 CONCLUSION 34 REFERENCES 34 PROBLEMS 34
+3. Propagation Mechanisms 37
+3.1 INTRODUCTION 37 3.2 REFLECTION, REFRACTION AND TRANSMISSION 37 3.2.1 Lossless Media 37 3.2.2 Lossy Media 41 3.2.3 Typical Reflection and Transmission Coefficients 42 3.3 ROUGH SURFACE SCATTERING 45 3.4 GEOMETRICAL OPTICS 47 3.4.1 Principles 47 3.4.2 Formulation 49 3.5 DIFFRACTION 50 3.5.1 Principle 50 3.5.2 Single Knife-Edge Diffraction 51 3.5.3 Other Diffracting Obstacles: Geometrical Theory of Diffraction 54 3.6 CONCLUSION 59 REFERENCES 59 PROBLEMS 59
+4. Antenna Fundamentals 61
+4.1 INTRODUCTION 61 4.2 PRINCIPLES 61 4.2.1 What is an Antenna? 61 4.2.2 Necessary Conditions for Radiation 62 4.2.3 Near-Field and Far-Field Regions 62 4.2.4 Far-Field Radiation from Wires 63 4.3 ANTENNA PARAMETERS 65 4.3.1 Radiation Pattern 65 4.3.2 Directivity 67 4.3.3 Radiation Resistance and Efficiency 67 4.3.4 Power Gain 68 4.3.5 Bandwidth 70 4.3.6 Reciprocity 70 4.3.7 Receiving Antenna Aperture 71 4.3.8 Beamwidth and Directivity 71 4.3.9 The Friis Formula: Antennas in Free Space 71 4.3.10 Polarisation Matching 72
+viii Contents
+
+
+4.4 PRACTICAL DIPOLES 73 4.4.1 Dipole Structure 73 4.4.2 Current Distribution 74 4.4.3 Radiation Pattern 74 4.4.4 Input Impedance 77 4.5 ANTENNA ARRAYS 77 4.5.1 Introduction 77 4.5.2 Linear and Planar Arrays 77 4.5.3 The Uniform Linear Array 77 4.5.4 Parasitic Elements: Uda–Yagi Antennas 78 4.5.5 Reflector Antennas 79 4.5.6 Monopole Antennas 80 4.5.7 Corner Reflectors 80 4.5.8 Parabolic Reflector Antennas 81 4.6 HORN ANTENNAS 82 4.7 LOOP ANTENNAS 83 4.8 HELICAL ANTENNAS 83 4.9 PATCH ANTENNAS 84 4.10 CONCLUSION 85 REFERENCES 85 PROBLEMS 86
+5. Basic Propagation Models 89
+5.1 INTRODUCTION 89 5.2 DEFINITION OF PATH LOSS 89 5.3 A BRIEF NOTE ON DECIBELS 92 5.4 NOISE MODELLING 93 5.5 FREE SPACE LOSS 97 5.6 PLANE EARTH LOSS 98 5.7 LINK BUDGETS 101 5.8 CONCLUSION 103 REFERENCE 103 PROBLEMS 103
+6. Terrestrial Fixed Links 105
+6.1 INTRODUCTION 105 6.2 PATH PROFILES 105 6.3 TROPOSPHERIC REFRACTION 108 6.3.1 Fundamentals 108 6.3.2 Time Variability 111 6.3.3 Ducting and Multipath 111 6.4 OBSTRUCTION LOSS 113 6.5 APPROXIMATE MULTIPLE KNIFE-EDGE DIFFRACTION 115 6.5.1 The Deygout Method 115 6.5.2 The Causebrook Correction 116 6.5.3 The Giovanelli Method 117
+Contents ix
+
+
+6.5.4 Test Cases 117 6.6 THE MULTIPLE-EDGE DIFFRACTION INTEGRAL 121 6.6.1 Slope-UTD Multiple-Edge Diffraction Model 122 6.6.2 Test Case: Comparison of Multiple Models 126 6.7 DIFFRACTION OVER OBJECTS OF FINITE SIZE 127 6.8 OTHER METHODS FOR PREDICTING TERRAIN DIFFRACTION 129 6.8.1 The Integral Equation Model 129 6.8.2 The Parabolic Equation Method 131 6.9 INFLUENCE OF CLUTTER 134 6.10 CONCLUSION 135 REFERENCES 135 PROBLEMS 137
+7. Satellite Fixed Links 139
+7.1 INTRODUCTION 139 7.2 TROPOSPHERIC EFFECTS 140 7.2.1 Attenuation 140 7.2.2 Rain Attenuation 141 7.2.3 Gaseous Absorption 146 7.2.4 Tropospheric Refraction 148 7.2.5 Tropospheric Scintillation 148 7.2.6 Depolarisation 151 7.2.7 Sky Noise 153 7.3 IONOSPHERIC EFFECTS 155 7.3.1 Faraday Rotation 158 7.3.2 Group Delay 159 7.3.3 Dispersion 159 7.3.4 Ionospheric Scintillation 160 7.3.5 Summary of Ionospheric Effects 160 7.4 SATELLITE EARTH STATION ANTENNAS 160 7.5 CONCLUSION 161 REFERENCES 161 PROBLEMS 162
+8. Macrocells 163
+8.1 INTRODUCTION 163 8.2 DEFINITION OF PARAMETERS 163 8.3 EMPIRICAL PATH LOSS MODELS 164 8.3.1 Clutter Factor Models 165 8.3.2 The Okumura–Hata Model 167 8.3.3 The COST 231–Hata Model 169 8.3.4 The Lee Model 169 8.3.5 The Ibrahim and Parsons Model 170 8.3.6 Environment Categories 171 8.4 PHYSICAL MODELS 172 8.4.1 The Allsebrook and Parsons Model 172
+x Contents
+
+
+8.4.2 The Ikegami Model 173 8.4.3 Rooftop Diffraction 174 8.4.4 The Flat Edge Model 175 8.4.5 The Walfisch–Bertoni Model 178 8.4.6 COST 231/Walfisch–Ikegami Model 180 8.5 ITU-R MODELS 181 8.5.1 ITU-R Recommendation P.1411 181 8.5.2 ITU-R Recommendation P.1546 182 8.6 COMPARISON OF MODELS 182 8.7 COMPUTERISED PLANNING TOOLS 183 8.8 CONCLUSION 183 REFERENCES 183 PROBLEMS 185
+9. Shadowing 187
+9.1 INTRODUCTION 187 9.2 STATISTICAL CHARACTERISATION 187 9.3 PHYSICAL BASIS FOR SHADOWING 189 9.4 IMPACT ON COVERAGE 189 9.4.1 Edge of Cell 189 9.4.2 Whole Cell 192 9.5 LOCATION VARIABILITY 195 9.6 CORRELATED SHADOWING 196 9.6.1 Serial Correlation 197 9.6.2 Site-to-Site Correlation 199 9.7 CONCLUSION 205 REFERENCES 205 PROBLEMS 206
+10. Narrowband Fast Fading 209
+10.1 INTRODUCTION 209 10.2 BASEBAND CHANNEL REPRESENTATION 209 10.3 THE AWGN CHANNEL 210 10.4 THE NARROWBAND FADING CHANNEL 213 10.5 WHEN DOES FADING OCCUR IN PRACTICE? 214 10.6 THE RAYLEIGH DISTRIBUTION 215 10.7 DISTRIBUTION OF THE SNR FOR A RAYLEIGH CHANNEL 218 10.8 THE RICE DISTRIBUTION 221 10.9 THE NAKAGAMI- m DISTRIBUTION 226 10.10 OTHER FADING DISTRIBUTIONS 227 10.11 SECOND-ORDER FAST-FADING STATISTICS 227 10.11.1 The Doppler Effect 228 10.11.2 The Classical Doppler Spectrum 230 10.12 AUTOCORRELATION FUNCTION 236 10.13 NARROWBAND MOBILE RADIO CHANNEL SIMULATIONS 238 10.14 CONCLUSION 239
+Contents xi
+
+
+REFERENCES 239 PROBLEMS 240
+11. Wideband Fast Fading 241
+11.1 INTRODUCTION 241 11.2 EFFECT OF WIDEBAND FADING 242 11.3 WIDEBAND CHANNEL MODEL 245 11.4 WIDEBAND CHANNEL PARAMETERS 246 11.5 FREQUENCY DOMAIN EFFECTS 251 11.6 THE BELLO FUNCTIONS 252 11.7 WIDEBAND FADING IN FIXED LINKS 253 11.8 OVERCOMING WIDEBAND CHANNEL IMPAIRMENTS 254 11.9 CONCLUSION 254 REFERENCES 255 PROBLEMS 255
+12. Microcells 257
+12.1 INTRODUCTION 257 12.2 EMPIRICAL MODELS 257 12.2.1 Dual-Slope Model 257 12.2.2 The Lee Microcell Model 259 12.2.3 The Har–Xia-Bertoni Model 260 12.3 PHYSICAL MODELS 262 12.4 LINE-OF-SIGHT MODELS 264 12.4.1 Two-Ray Model 264 12.4.2 Street Canyon Models 265 12.4.3 ITU-R P.1411 Street Canyon Model 267 12.4.4 Random Waveguide Model 268 12.5 NON-LINE-OF-SIGHT MODELS 270 12.5.1 Propagation Mechanisms and Cell Planning Considerations 270 12.5.2 Recursive Model 273 12.5.3 ITU-R P.1411 Non-Line-of-Sight Model 274 12.5.4 Site-Specific Ray Models 275 12.6 DISCUSSION 276 12.7 MICROCELL SHADOWING 277 12.8 NARROWBAND FADING 277 12.9 WIDEBAND EFFECTS 277 12.10 CONCLUSION 278 REFERENCES 279 PROBLEMS 280
+13. Picocells 283
+13.1 INTRODUCTION 283 13.2 EMPIRICAL MODELS OF PROPAGATION WITHIN BUILDINGS 283 13.2.1 Wall and Floor Factor Models 283
+xii Contents
+
+
+13.2.2 COST231 Multi-Wall Model 285 13.2.3 Ericsson Model 286 13.2.4 Empirical Models for Wireless Lan 286 13.2.5 Measurement-Based Prediction 288 13.3 PHYSICAL MODELS OF INDOOR PROPAGATION WITHIN BUILDINGS 288 13.3.1 Ray-Tracing Models for Picocells 289 13.3.2 Reduced-Complexity UTD Indoor Model 289 13.3.3 Propagation Between Floors 291 13.3.4 Propagation on Single Floors 292 13.4 MODELS OF PROPAGATION INTO BUILDINGS 293 13.4.1 Introduction 293 13.4.2 Measured Behaviour 294 13.4.3 COST231 Line-of-Sight Model 294 13.4.4 Floor Gain Models 295 13.4.5 COST231 Non-line-of-Sight Model 296 13.4.6 Propagation Mechanisms 297 13.5 CONSTITUTIVE PARAMETERS OF BUILDING MATERIALS FOR PHYSICAL MODELS 299 13.6 SHADOWING 300 13.7 MULTIPATH EFFECTS 300 13.8 ULTRA-WIDEBAND INDOOR PROPAGATION 302 13.9 PROPAGATION IN TUNNELS AND OTHER ENCLOSED SPACES 304 13.9.1 Measured Behaviour 304 13.9.2 Models of Tunnel Propagation 304 13.10 DISCUSSION 309 13.11 DISTRIBUTION SYSTEMS FOR INDOOR AND ENCLOSED SPACE APPLICATIONS 309 13.11.1 Distributed Antenna Systems – General Considerations 310 13.11.2 Passive Distributed Antenna Systems 311 13.11.3 Active Distributed Antenna Systems 313 13.11.4 Hybrid Systems 314 13.11.5 Radiating Cables 315 13.11.6 Repeaters 319 13.11.7 Digital Distribution 320 13.11.8 Selecting the Most Appropriate Distribution System 321 13.12 INDOOR LINK BUDGETS 321 13.13 CONCLUSION 325 REFERENCES 326 PROBLEMS 328
+14. Megacells 331
+14.1 INTRODUCTION 331 14.2 SHADOWING AND FAST FADING 332 14.2.1 Introduction 332
+Contents xiii
+
+
+14.2.2 Local Shadowing Effects 333 14.2.3 Local Multipath Effects 334 14.3 EMPIRICAL NARROWBAND MODELS 336 14.4 STATISTICAL MODELS 337 14.4.1 Loo Model 339 14.4.2 Corazza Model 341 14.4.3 Lutz Model 341 14.5 SHADOWING STATISTICS 345 14.6 PHYSICAL-STATISTICAL MODELS FOR BUILT-UP AREAS 345 14.6.1 Building Height Distribution 348 14.6.2 Time-Share of Shadowing 349 14.6.3 Time Series Model 350 14.7 WIDEBAND MODELS 353 14.8 MULTI-SATELLITE CORRELATIONS 354 14.9 OVERALL MOBILE SATELLITE CHANNEL MODEL 356 14.10 CONCLUSION 357 REFERENCES 357 PROBLEMS 359
+15. Antennas for Mobile Systems 361
+15.1 INTRODUCTION 361 15.2 MOBILE TERMINAL ANTENNAS 361 15.2.1 Performance Requirements 361 15.2.2 Small Antenna Fundamentals 362 15.2.3 Dipoles 364 15.2.4 Helical Antennas 366 15.2.5 Inverted-F Antennas 366 15.2.6 Patches 368 15.2.7 Mean Effective Gain (MEG) 368 15.2.8 Human Body Interactions and Specific Absorption Rate (SAR) 370 15.2.9 Mobile Satellite Antennas 374 15.3 BASE STATION ANTENNAS 376 15.3.1 Performance Requirements in Macrocells 376 15.3.2 Macrocell Antenna Design 377 15.3.3 Macrocell Antenna Diversity 380 15.3.4 Microcell Antennas 381 15.3.5 Picocell Antennas 382 15.3.6 Antennas for Wireless Lan 385 15.4 CONCLUSION 386 REFERENCES 386 PROBLEMS 388
+16. Overcoming Narrowband Fading via Diversity 391
+16.1 INTRODUCTION 391 16.2 CRITERIA FOR USEFUL BRANCHES 392
+xiv Contents
+
+
+16.3 SPACE DIVERSITY 393 16.3.1 General Model 393 16.3.2 Mobile Station Space Diversity 395 16.3.3 Handset Diversity Antennas 397 16.3.4 Base Station Space Diversity 397 16.4 POLARISATION DIVERSITY 399 16.4.1 Base Station Polarisation Diversity 399 16.4.2 Mobile Station Polarisation Diversity 400 16.5 TIME DIVERSITY 402 16.6 FREQUENCY DIVERSITY 403 16.7 COMBINING METHODS 403 16.7.1 Selection Combining 403 16.7.2 Switched Combining 405 16.7.3 Equal-Gain Combining 406 16.7.4 Maximum Ratio Combining 407 16.7.5 Comparison of Combining Methods 408 16.8 DIVERSITY FOR MICROWAVE LINKS 409 16.9 MACRODIVERSITY 410 16.10 TRANSMIT DIVERSITY 410 16.11 CONCLUSION 411 REFERENCES 411 PROBLEMS 412
+17. Overcoming Wideband Fading 413
+17.1 INTRODUCTION 413 17.2 SYSTEM MODELLING 413 17.2.1 Continuous-Time System Model 413 17.2.2 Discrete-Time System Model 414 17.2.3 First Nyquist Criterion 415 17.3 LINEAR EQUALISERS 416 17.3.1 Linear Equaliser Structure 416 17.3.2 Zero-Forcing Equaliser 417 17.3.3 Least Mean Square Equaliser 418 17.4 ADAPTIVE EQUALISERS 419 17.4.1 Direct Matrix Inversion 420 17.4.2 LMS Algorithm 421 17.4.3 Other Convergence Algorithms 421 17.5 NON-LINEAR EQUALISERS 422 17.5.1 Decision Feedback 423 17.5.2 Maximum Likelihood Sequence Estimator 423 17.5.3 Viterbi Equalisation 424 17.6 RAKE RECEIVERS 427 17.7 OFDM RECEIVERS 430 17.8 CONCLUSION 435 REFERENCES 435 PROBLEMS 436
+Contents xv
+
+
+18. Adaptive Antennas 437
+18.1 INTRODUCTION 437 18.2 BASIC CONCEPTS 437 18.3 ADAPTIVE ANTENNA APPLICATIONS 438 18.3.1 Example of Adaptive Antenna Processing 438 18.3.2 Spatial Filtering for Interference Reduction 440 18.3.3 Space Division Multiple Access 441 18.3.4 Multiple-Input Multiple-Output Systems 441 18.4 OPTIMUM COMBINING 443 18.4.1 Formulation 443 18.4.2 Steering Vector for Uniform Linear Array 445 18.4.3 Steering Vector for Arbitrary Element Positions 446 18.4.4 Optimum Combiner in a Free Space Environment 447 18.4.5 Optimum Combiner in a Fading Environment 449 18.4.6 Implementation of Adaptive Antennas 450 18.4.7 Adaptive Antenna Channel Parameters 450 18.5 MULTIPLE-INPUT MULTIPLE-OUTPUT SYSTEMS 453 18.5.1 MIMO Signal Model 453 18.5.2 MIMO Channel Capacity 455 18.5.3 Trade-Off Between Diversity and Capacity for MIMO 458 18.5.4 Particular STC Schemes 459 18.5.5 MIMO Channel Modelling 460 18.5.6 MIMO Channel Models for Specific Systems 462 18.5.7 Impact of Antennas on MIMO Performance 464 18.6 ADAPTIVE ANTENNAS IN A PRACTICAL SYSTEM 465 18.7 CONCLUSION 466 REFERENCES 466 PROBLEMS 468
+19. Channel Measurements for Mobile Systems 469
+19.1 INTRODUCTION 469 19.2 APPLICATIONS FOR CHANNEL MEASUREMENTS 469 19.2.1 Tuning Empirical Path Loss Models 469 19.2.2 Creating Synthetic Channel Models 470 19.2.3 Existing Coverage 471 19.2.4 Design Survey 471 19.3 IMPACT OF MEASUREMENT INACCURACIES 471 19.4 SIGNAL SAMPLING ISSUES 473 19.4.1 Estimators of the Local Mean 473 19.4.2 Sampling Rate 476 19.5 MEASUREMENT SYSTEMS 479 19.5.1 Narrowband Channel Sounding 479 19.5.2 Wideband Channel Measurement Techniques 480 19.5.3 Other Measurements 481 19.6 EQUIPMENT CALIBRATION AND VALIDATION 481 19.6.1 General 481 19.6.2 Transmitters 482
+xvi Contents
+
+
+19.6.3 Receivers 482 19.6.4 Passive Elements 483 19.7 OUTDOOR MEASUREMENTS 484 19.7.1 General 484 19.7.2 Measurement Campaign Plan 484 19.7.3 Navigation 484 19.7.4 Size and Shape of Area for Averaging 486 19.7.5 Outdoor Testing Guidelines 488 19.8 INDOOR MEASUREMENTS 488 19.8.1 General 488 19.8.2 Navigation 489 19.8.3 Selection of Walk Routes 490 19.8.4 Equipment 491 19.8.5 Documentation 493 19.9 CONCLUSION 493 REFERENCES 493 PROBLEMS 494
+20. Future Developments in the Wireless Communication Channel 497
+20.1 INTRODUCTION 497 20.2 HIGH-RESOLUTION DATA 497 20.3 ANALYTICAL FORMULATIONS 498 20.4 PHYSICAL-STATISTICAL CHANNEL MODELLING 498 20.5 MULTIDIMENSIONAL CHANNEL MODELS 498 20.6 REAL-TIME CHANNEL PREDICTIONS 498 20.7 INTELLIGENT ANTENNAS 499 20.8 DISTRIBUTED AND AD-HOC CELL ARCHITECTURES 499 20.9 CONCLUSION 500 REFERENCES 500
+Appendix A Statistics, Probability and Stochastic Processes 501
+A.1 INTRODUCTION 501 A.2 SINGLE RANDOM VARIABLES 501 A.3 MULTIPLE RANDOM VARIABLES 502 A.4 GAUSSIAN DISTRIBUTION AND CENTRAL LIMIT THEOREM 503 A.5 RANDOM PROCESSES 503 REFERENCES 504
+Appendix B Tables and Data 505
+B.1 NORMAL (GAUSSIAN) DISTRIBUTION 505 B.2 ERROR FUNCTION 507 B.3 FRESNEL INTEGRALS 508 B.4 GAMMA FUNCTION 508 B.5 BESSEL FUNCTION 511 REFERENCE 511
+Abbreviations 513
+Index 517
+Contents xvii
+
+
+Preface to the First Edition
+This book has grown out of my teaching and research at the University of Surrey and out of my previous experiences in companies such as Philips, Ascom and Motorola. It is primarily intended for use by students in master’s level and enhanced final-year undergraduate courses who are specialising in communication systems and wish to understand the principles and current practices of the wireless communication channel, including both antenna and propagation aspects. I have therefore included examples and problems in each chapter to reinforce the material described and to show how they are applied in specific situations. Additionally, much of the material has been used as parts of short courses run for many of the leading industrial companies in the field, so I hope that it may also be of interest to those who have a professional interest in the subject. Although there are several excellent books which cover portions of this material and which go deeper in some areas, my main motivation has been to create a book which covers the range of disciplines, from electromagnetics to statistics, which are necessary in order to understand the implications of the wireless channel on system performance. I have also attempted to bring together reference material which is useful in this field into a single, accessible volume, including a few previously unpublished research results. For those who are intending to use this material as part of a course, a set of presentation slides, containing most of the figures from the book, is available free of charge from the World Wide Web at the following URL: ftp://ftp.wiley.co.uk/pub/books/saunders. These slides also include several of the figures in colour, which was not possible within the book in the interest of keeping the costs within reach of most students. For updated information concerning the contents of the book, related sites and software, see http://www.simonsaunders.com/apbook I have deliberately avoided working directly with Maxwell’s equations, although a verbal statement of their implications is included. This is because very few of the practical problems at the level of systems in this field require these equations for their solution. It is nevertheless important that the material is underpinned by basic physical principles, and this is the purpose of the first five chapters of the book. Nevertheless, I have not avoided the use of mathematics where it is actually useful in illustrating concepts, or in providing practical means of analysis or simulation. Each chapter includes a list of references; wherever possible I have referred to journal articles and books, as these are most easily and widely available, but some more recent works only exist in conference proceedings.
+
+
+The following notation is used throughout the text:
+Scalar variables are denoted by Times Roman italics, such as x and y. Physical vector quantities (i.e. those having magnitude and direction in three-dimensional physical space) are denoted by Times Roman boldface, such as E and H. Unit vectors additionally have a circumflex, such as xˆ and yˆ. Column vectors are denoted by lower case sans serif boldface, such as x and r, whereas matrix quantities are denoted by upper case sans serif boldface, such as X and R. The time or ensemble average of a random variable x is denoted by E[x]. The logarithm to base 10 is written log, whereas the natural logarithm is ln. Units are in square brackets, e.g. [metres]. References are written in the form [firstauthor, year]. Important new terms are usually introduced in italics. Equation numbers are given in round parentheses, e.g. (1.27)
+Sincere acknowledgements are due to Mike Wilkins and Kheder Hanna of Jaybeam for providing most of the photographs of antennas and radiation patterns; to Nicholas Hollman of Cellnet for photographs of cellular masts and antenna installations; to Felipe Catedra for the GTD microcell predictions of FASPRO, to Kevin Kelly of Nortel for the scattering maps; to Heinz Mathis and Doug Pulley for providing constructive comments in the final days of production; to Mark Weller, Anthony Weller and David Pearson of Cellular Design Services for providing real-world problems, measurement data and an ideal environment in which the bulk of the work for the book was completed. I would particularly like to thank my colleagues, research assistants and students at the Centre for Communication Systems Research at the University of Surrey for providing time to complete this book and for many useful comments on the material. I apologise in advance for any errors which may have occurred in this text, and I would be grateful to receive any comments, or suggestions about improvements for further editions.
+Simon R. Saunders apbook@simonsaunders.com
+Oughterard, Guildford and Ash, August 1998-June 1999
+xx Preface to the First Edition
+
+
+Preface to the Second Edition
+Since the publication of the first edition of this book in 1999, much has changed in the wireless world. Third-generation cellular systems based on wideband CDMA have been widely deployed and are allowing high-rate applications such as video calling and music streaming to be accessed over wide areas. Wireless LAN systems, based mainly on Wi–Fi protocols and increasingly using MIMO antenna systems, have allowed access to very high data rates, particularly in indoor environments, and also increasingly in urban areas. Fixed wireless access to provide broadband services over the wide area is enjoying a resurgence of interest following the creation of the WiMax family of standards. Broadcasting is delivering increased numbers of channels, richness of content and interactivity via digitisation of both video and audio. The pace of change has increased as a result of factors such as increasing deregulation of the radio spectrum, new technologies such as software radio and greater convergence of fixed and mobile services via multimode devices for concurrent computing and communications. Despite these changes, the fundamental importance of antennas and propagation has continued undiminished. All wireless systems are subject to the variations imposed by the wireless channel, and a good understanding of these variations is needed to answer basic questions such as ‘‘How far does it go?’’ ‘‘How fast can I transmit data?’’ and ‘‘How many users can I support?’’ This book aims to equip the reader with the knowledge and understanding needed to answer these questions for a very wide range of wireless systems. The first edition of the book reached a larger audience than originally expected, including adoptions by many course tutors and by many seeking a primer in the field without being expert practitioners. At the same time many helpful comments were received, leading to the changes which have been incorporated in this revised edition. Most significantly, many people commented that the title of the book suggested that more weight should be given to antenna topics; this has been addressed via Chapters 4 and 14, devoted to the fundamentals of antennas and to their applications in mobile systems. Chapter 19 has also been added, giving practical details of channel measurement techniques for mobile systems. Throughout the book, enhancements and corrections have been made to reflect the current practice and to address specific comments from readers. In addition to the acknowledgements of the first edition, I am particularly grateful to my co-author, Dr. Alejandro Arago ́n -Zavala of Tecnolo ́gico de Monterrey, Campus Quere ́taro in Mexico, who did most of the hard work on the updates to allow this second edition to be produced in a reasonably timely fashion despite my efforts to the contrary. Thanks are also
+
+
+due to many friends, colleagues, customers and suppliers for continued insights into the real world of wireless systems. Particular thanks for contributions and comments in this edition to Tim Brown, Abdus Owadally, Dave Draffin, Steve Leach, Stavros Stavrou, Rodney Vaughan, Jørgen Bach Andersen and Constantine Balanis. Lastly to Sarah Hinton at Wiley for patience above and beyond the call of duty. Updates and further information regarding this book, including presentation slides, are available from the following web site: http://www.simonsaunders.com/apbook In addition, a solutions manual is available to lecturers at http://www.wiley.com/go/saunders. Comments and suggestions are gratefully received via email to: apbook@simonsaunders.com
+Simon R. Saunders
+xxii Preface to the Second Edition
+
+
+1 Introduction: The Wireless
+Communication Channel
+‘I think the primary function of radio is that people want company.’ Elise Nordling
+1.1 INTRODUCTION
+Figure 1.1 shows a few of the many interactions between electromagnetic waves, the antennas which launch and receive them and the environment through which they propagate. All of these effects must be accounted for, in order to understand and analyse the performance of wireless communication systems. This chapter sets these effects in context by first introducing the concept of the wireless communication channel, which includes all of the antenna and propagation effects within it. Some systems which utilise this channel are then described, in order to give an appreciation of how they are affected by, and take advantage of, the effects within the channel.
+Antennas and Propagation for Wireless Communication Systems Second Edition Simon R. Saunders and Alejandro Arag ́on-Zavala ß 2007 John Wiley & Sons, Ltd
+Figure 1.1: The wireless propagation landscape
+
+
+1.2 CONCEPT OF A WIRELESS CHANNEL
+An understanding of the wireless channel is an essential part of the understanding of the operation, design and analysis of any wireless system, whether it be for cellular mobile phones, for radio paging or for mobile satellite systems. But what exactly is meant by a channel?
+The architecture of a generic communication system is illustrated in Figure 1.2. This was originally described by Claude Shannon of Bell Laboratories in his classic 1948 paper
+‘A Mathematical Theory of Communication’ [Shannon, 48]. An information source (e.g. a person speaking, a video camera or a computer sending data) attempts to send information to a destination (a person listening, a video monitor or a computer receiving data). The data is converted into a signal suitable for sending by the transmitter and is then sent through the channel. The channel itself modifies the signal in ways which may be more or less unpredictable to the receiver, so the receiver must be designed to overcome these modifications and hence to deliver the information to its final destination with as few errors or distortions as possible. This representation applies to all types of communication system, whether wireless or otherwise. In the wireless channel specifically, the noise sources can be subdivided into multiplicative and additive effects, as shown in Figure 1.3. The additive noise arises from the noise generated within the receiver itself, such as thermal and shot noise in passive and active components and also from external sources such as atmospheric effects, cosmic radiation and interference from other transmitters and electrical appliances. Some of these interferences may be intentionally introduced, but must be carefully controlled, such as when channels are reused in order to maximise the capacity of a cellular radio system.
+Source Transmitter
+Noise source
+Receiver Destination
+The channel
+Figure 1.2: Architecture of a generic communication system
+x+
+Multiplicative noise
+Additive noise
+Figure 1.3: Two types of noise in the wireless communication channel
+2 Antennas and Propagation for Wireless Communication Systems
+
+
+The multiplicative noise arises from the various processes encountered by transmitted waves on their way from the transmitter antenna to the receiver antenna. Here are some of them:
+The directional characteristics of both the transmitter and receiver antennas; reflection (from the smooth surfaces of walls and hills); absorption (by walls, trees and by the atmosphere); scattering (from rough surfaces such as the sea, rough ground and the leaves and branches of trees); diffraction (from edges, such as building rooftops and hilltops); refraction (due to atmospheric layers and layered or graded materials).
+It is conventional to further subdivide the multiplicative processes in the channel into three types of fading: path loss, shadowing (or slow fading) and fast fading (or multipath fading), which appear as time-varying processes between the antennas, as shown in Figure 1.4. All of these processes vary as the relative positions of the transmitter and receiver change and as any contributing objects or materials between the antennas are moved.
+An example of the three fading processes is illustrated in Figure 1.5, which shows a simulated, but nevertheless realistic, signal received by a mobile receiver moving away from a transmitting base station. The path loss leads to an overall decrease in signal strength as the distance between the transmitter and the receiver increases. The physical processes which cause it are the outward spreading of waves from the transmit antenna and the obstructing effects of trees, buildings and hills. A typical system may involve variations in path loss of around 150 dB over its designed coverage area. Superimposed on the path loss is the shadowing, which changes more rapidly, with significant variations over distances of hundreds of metres and generally involving variations up to around 20 dB. Shadowing arises due to the varying nature of the particular obstructions between the base and the mobile, such as particular tall buildings or dense woods. Fast fading involves variations on the scale of a halfwavelength (50 cm at 300 MHz, 17 cm at 900 MHz) and frequently introduces variations as large as 35–40 dB. It results from the constructive and destructive interference between multiple waves reaching the mobile from the base station. Each of these variations will be examined in depth in the chapters to come, within the context of both fixed and mobile systems. The path loss will be described in basic concept in
+x+
+Fast Fading
+Additive Noise
+x
+Shadowing
+x
+Path Loss
+x
+Transmit Antenna
+x
+Receive Antenna
+Fading processes
+Figure 1.4: Contributions to noise in the wireless channel
+Introduction: The Wireless Communication Channel 3
+
+
+Chapter 5 and examined in detail in Chapters 6, 7 and 8 in the context of fixed terrestrial links, fixed satellite links and terrestrial macrocell mobile links, respectively. Shadowing will be examined in Chapter 9, while fast fading comes in two varieties, narrowband and wideband, investigated in Chapters 10 and 11, respectively.
+1.3 THE ELECTROMAGNETIC SPECTRUM
+The basic resource exploited in wireless communication systems is the electromagnetic spectrum, illustrated in Figure 1.6. Practical radio communication takes place at frequencies from around 3 kHz [kilohertz] to 300 GHz [gigahertz], which corresponds to wavelengths in free space from 100 km to 1 mm.
+0 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000
+−70
+−60
+−50
+−40
+−30
+−20
+−10
+0
+10
+20
+Distance Between Transmitter and Receiver
+Overall Signal Strength [dB]
+0 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000
+−30
+−25
+−20
+−15
+−10
+−5
+0
+Distance Between Transmitter and Receiver
+Path Loss [−dB]
+0 1000 2000 3000 4000 5000 6000 7000 8000 900010000
+−25
+−20
+−15
+−10
+−5
+0
+5
+10
+15
+20
+Distance Between Transmitter and Receiver
+Shadowing [dB]
+0 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000
+−40
+−35
+−30
+−25
+−20
+−15
+−10
+−5
+0
+5
+10
+Distance Between Transmitter and Receiver
+Fast Fading [dB]
+Total Signal Path loss
+Shadowing
+Fast fading
+Figure 1.5: The three scales of mobile signal variation
+4 Antennas and Propagation for Wireless Communication Systems
+
+
+Table 1.1 defines two conventional ways of dividing the spectrum into frequency bands . The frequencies chosen for new systems have tended to increase over the years as the demand for wireless communication has increased; this is because enormous bandwidths are available at the higher frequencies. This shift has created challenges in the technology needed to support reliable communications, but it does have the advantage that antenna structures can be smaller in absolute size to support a given level of performance. This book will be concerned only with communication at VHF frequencies and above, where the wavelength is typically small compared with the size of macroscopic obstructions such as hills, buildings and trees. As the size of obstructions relative to a wavelength increases, their obstructing effects also tend to increase, reducing the range for systems operated at higher frequencies.
+1.4 HISTORY
+Some of the key milestones in the development of wireless communications are listed in Table 1.2. Mobile communication has existed for over a hundred years, but it is only in the last
+Band: VLF LF MF HF VHF UHF SHF EHF
+3 kHz 30 kHz 300 kHz 3 MHz 30 MHz 300 MHz 3 GHz 30 GHz 300 GHz
+100 km 10 km 1 km 100 m 10 m 1 m 10 cm 1 cm 1 mm
+Frequency
+Free-space wavelength
+Figure 1.6: The electromagnetic spectrum
+Table 1.1: Naming conventions for frequency bands
+Frequency Band name Frequency range Band name range [GHz]
+Very low frequency 3–30 kHz L band 1–2 Low frequency (long wave) 30–300 kHz S band 2–4 Medium frequency (medium wave) 0.3–3.0 MHz C band 4–8 High frequency (short wave) 3–30 MHz X band 8–12 Very high frequency 30–300 MHz Ku band 12–18 Ultra high frequency 0.3–3.0 GHz K band 18–26 Super high frequency (centimetre wave) 3–30 GHz Ka band 26–40 Extra high frequency (millimetre wave) 30–300 GHz V band 40–75 W band 75–111
+Introduction: The Wireless Communication Channel 5
+
+
+two decades that the technology has advanced to the point where communication to every location on the Earth’s surface has become practical. Communication over fixed links has been practical for rather longer, with terrestrial fixed links routinely providing telephone services since the late 1940s, and satellite links being used for intercontinental communication since the 1960s. The cellular mobile communications industry has recently been one of the fastest growing industries of all time, with the number of users increasing incredibly rapidly. As well as stimulating financial investment in such systems, this has also given rise to a large number of technical challenges, many of which rely on an in-depth understanding of the characteristics of the wireless channel for their solution. As these techniques develop, different questions
+Table 1.2: Key milestones in the development of wireless communication
+1873 Maxwell predicts the existence of electromagnetic waves 1888 Hertz demonstrates radio waves 1895 Marconi sends first wireless signals a distance of over a mile 1897 Marconi demonstrates mobile wireless communication to ships 1898 Marconi experiments with a land ‘mobile’ system – the apparatus is the size of a bus with a 7 m antenna 1916 The British Navy uses Marconi’s wireless apparatus in the Battle of Jutland to track and engage the enemy fleet 1924 US police first use mobile communications 1927 First commercial phone service between London and New York is established using long wave radio 1945 Arthur C. Clarke proposes geostationary communication satellites 1957 Soviet Union launches Sputnik 1 communication satellite 1962 The world’s first active communications satellite ‘Telstar’ is launched 1969 Bell Laboratories in the US invent the cellular concept 1978 The world’s first cellular phone system is installed in Chicago 1979 NTT cellular system (Japan) 1988 JTACS cellular system (Japan) 1981 NMT (Scandinavia) 1983 AMPS cellular frequencies allocated (US) 1985 TACS (Europe) 1991 USDC (US) 1991 GSM cellular system deployed (Europe) 1993 DECT & DCS launched (Europe) 1993 Nokia engineering student Riku Pihkonen sends the world’s first SMS text message 1993 PHS cordless system (Japan) 1995 IS95 CDMA (US) 1998 Iridium global satellite system launched 1999 Bluetooth short-range wireless data standard agreed 1999 GPRS launched to provide fast data communication capabilities (Europe) 2000 UK government runs the world’s most lucrative spectrum auction as bandwidth for 3G networks is licensed for £22.5 billion 2001 First third-generation cellular mobile network is deployed (Japan) 2002 Private WLAN networks are becoming more popular (US) 2003 WCDMA third-generation cellular mobile systems deployed (Europe) 2004 First mobile phone viruses found 2006 GSM subscriptions reach two billion worldwide. The second billion took just 30 months.
+6 Antennas and Propagation for Wireless Communication Systems
+
+
+concerning the channel behaviour are asked, ensuring continuous research and development in this field. Chapter 20 contains some predictions relating to the future of antennas and propagation. For a broader insight into the future development of wireless communications in general, see [Webb, 07].
+1.5 SYSTEM TYPES
+Figure 1.7 shows the six types of wireless communication system which are specifically treated in this book. The principles covered will also apply to many other types of system.
+Satellite fixed links (chapter 7): These are typically created between fixed earth stations with large dish antennas and geostationary earth-orbiting satellites. The propagation effects are largely due to the Earth’s atmosphere, including meteorological effects such as rain. Usually operated in the SHF and EHF bands. Terrestrial fixed links (chapter 6): Used for creating high data rate links between points on the Earth, for services such as telephone and data networks, plus interconnections between base stations in cellular systems. Also used for covering wide areas in urban and suburban environments for telephone and data services to residential and commercial buildings. Meteorological effects are again significant, together with the obstructing effects of hills, trees and buildings. Frequencies from VHF through to EHF are common. Megacells (chapter 14): These are provided by satellite systems (or by high-altitude platforms such as stratospheric balloons) to mobile users, allowing coverage of very wide areas with reasonably low user densities. A single satellite in a low earth orbit would typically cover a region of 1000 km in diameter. The propagation effects are dominated by objects close to the user, but atmospheric effects also play a role at higher frequencies. Most systems operate at L and S bands to provide voice and low-rate data services, but
+Figure 1.7: Wireless communication system types
+Introduction: The Wireless Communication Channel 7
+
+
+systems operating as high as Ka band can be deployed to provide Internet access at high data rates over limited areas. Macrocells (chapter 8): Designed to provide mobile and broadcast services (including both voice and data), particularly outdoors, to rural, suburban and urban environments with medium traffic densities. Base station antenna heights are greater than the surrounding buildings, providing a cell radius from around 1 km to many tens of kilometres. Mostly operated at VHF and UHF. May also be used to provide fixed broadband access to buildings at high data rates, typically at UHF and low SHF frequencies. Microcells (chapter 12): Designed for high traffic densities in urban and suburban areas to users both outdoors and within buildings. Base station antennas are lower than nearby building rooftops, so coverage area is defined by street layout. Cell length up to around 500 m. Again mostly operated at VHF and UHF, but services as high as 60 GHz have been studied. Picocells (chapter 13): Very high traffic density or high data rate applications in indoor environments. Users may be both mobile and fixed; fixed users are exemplified by wireless local area networks between computers. Coverage is defined by the shape and characteristics of rooms, and service quality is dictated by the presence of furniture and people.
+Used together, these six system types provide networks capable of delivering an enormous range of service to locations anywhere on the Earth.
+1.6 AIMS OF CELLULAR SYSTEMS
+The complexity of systems that allow wide area coverage, particularly cellular systems, influences the parameters of the channel which have the most significance. These systems have three key aims:
+Coverage and mobility: The system must be available at all locations where users wish to use it. In the early development of a new system, this implies outdoor coverage over a wide area. As the system is developed and users become more demanding, the depth of coverage must be extended to include increasing numbers of indoor locations. In order to operate with a single device between different systems, the systems must provide mobility with respect to the allocation of resources and support of interworking between different standards. Capacity: As the number of users in a mobile system grows, the demands placed on the resources available from the allocated spectrum grow proportionately. These demands are exacerbated by increasing use of high data rate services. This necessitates the assignment of increasing numbers of channels and thus dense reuse of channels between cells in order to minimise problems with blocked or dropped calls. If a call is blocked, users are refused access to the network because there are no available channels. If a call is dropped, it may be interrupted because the user moves into a cell with no free channels. Dropped calls can also arise from inadequate coverage. Quality: In a mature network, the emphasis is on ensuring that the services provided to the users are of high quality – this includes the perceived speech quality in a voice system and the bit error rate (BER), throughput, latency and jitter in a data system.
+Subsequent chapters will show that path loss and shadowing dominate in establishing good coverage and capacity, while quality is particularly determined by the fast-fading effects.
+8 Antennas and Propagation for Wireless Communication Systems
+
+
+1.7 CELLULAR NETWORKS
+Figure 1.8 shows the key elements of a standard cellular network. The terminology used is taken from GSM, the digital cellular standard originating in Europe, but a similar set of elements exists in many systems. The central hub of the network is the mobile switching centre (MSC), often simply called the switch. This provides connection between the cellular network and the public switched telephone network (PSTN) and also between cellular subscribers. Details of the subscribers for whom this network is the home network are held on a database called the home location register (HLR), whereas the details of subscribers who
+have entered the network from elsewhere are on the visitor location register (VLR). These details include authentication and billing details, plus the current location and status of the subscriber. The coverage area of the network is handled by a large number of base stations. The base station subsystem (BSS) is composed of a base station controller (BSC) which handles the logical functionality, plus one or several base transceiver stations (BTS) which contain the actual RF and baseband parts of the BSS. The BTSs communicate over the air interface (AI) with the mobile stations (MS). The AI includes all of the channel effects as well as the modulation, demodulation and channel allocation procedures within the MS and BTS. A single BSS may handle 50 calls, and an MSC may handle some 100 BSSs.
+1.8 THE CELLULAR CONCEPT
+Each BTS, generically known as a base station (BS), must be designed to cover, as completely as possible, a designated area or cell (Figure 1.9). The power loss involved in transmission between the base and the mobile is the path loss and depends particularly on antenna height, carrier frequency and distance. A very approximate model of the path loss is given by
+PR
+PT
+1⁄41
+L 1⁄4 k hmh2
+b
+r4 f 2 ð1:1Þ
+PSTN MSC
+HLR VLR
+BSC BTS
+BSS
+BSC BTS
+BSS
+MS
+AI
+Figure 1.8: Elements of a standard cellular system, using GSM terminology
+Introduction: The Wireless Communication Channel 9
+
+
+where PR is the power received at the mobile input terminals [W]; PT is the base station transmit power [W]; hm and hb are the mobile and base station antenna heights, respectively [m]; r is the horizontal distance between the base station and the mobile [m]; f is the carrier frequency [Hz] and k is some constant of proportionality. The quantity L is the path loss and depends mainly on the characteristics of the path between the base station and the mobile rather than on the equipment in the system. The precise dependencies are functions of the environment type (urban, rural, etc.) At higher frequencies the range for a given path loss is reduced, so more cells are required to cover a given area. To increase the cell radius for a given transmit power, the key variable under the designer’s control is the antenna height: this must be large enough to clear surrounding clutter (trees, buildings, etc.), but not so high as to cause excessive interference to distant co-channel cells. It must also be chosen with due regard for the environment and local planning regulations. Natural terrain features and buildings can be used to increase the effective antenna height to increase coverage or to control the limits of coverage by acting as shielding obstructions. When multiple cells and multiple users are served by a system, the system designer must allocate the available channels (which may be frequencies, time slots or other separable resources) to the cells in such a way as to minimise the interaction between the cells. One approach would be to allocate completely distinct channels to every cell, but this would limit the total number of cells possible in a system according to the spectrum which the designer has available. Instead, the key idea of cellular systems is that it is possible to serve an unlimited number of subscribers, distributed over an unlimited area, using only a limited number of channels, by efficient channel reuse. A set of cells, each of which operates on a different channel (or group of channels), is grouped together to form a cluster. The cluster is then repeated as many times as necessary to cover a very wide area. Figure 1.10 illustrates the use of a seven-cell cluster. The use of hexagonal areas to represent the cells is highly idealised, but it helps in establishing basic concepts. It also correctly represents the situation when path loss is treated as a function of distance only, within a uniform environment. In this case, the hexagons represent the areas within which a given base station transmitter produces the highest power at a mobile receiver. The smaller the cluster size, therefore, the more efficiently the available channels are used. The allowable cluster size, and hence the spectral efficiency of the system, is limited by the level of interference the system can stand for acceptable quality. This level is determined by the smallest ratio between the wanted and interfering signals which can be tolerated for reasonable quality communication in the system. These levels depend on the types of
+Figure 1.9: Basic geometry of cell coverage
+10 Antennas and Propagation for Wireless Communication Systems
+
+
+modulation, coding and synchronisation schemes employed within the base station and the mobile. The ratio is called the threshold carrier-to-interference power ratio (C/I or CIR). Figure 1.11 illustrates a group of co-channel cells, in this case the set labelled 3 in Figure 1.10. There will be other co-channel cells spread over a wider area than illustrated, but those shown here represent the first tier, which are the nearest and hence most significant interferers. Each cell has a radius R and the centres of adjacent cells are separated by a distance D, the reuse distance.
+cluster
+7
+3
+1
+62
+5 4
+Coverage area ‘tiled’ with seven-cell clusters
+7
+3
+1
+62
+5 4
+7
+3
+1
+62
+5 4
+7
+3
+1
+62
+5 4
+7
+3
+1
+62
+5 4
+7
+3
+1
+62
+5 4
+7
+3
+1
+62
+5 4
+7
+3
+1
+62
+5 4
+Seven-cell
+Figure 1.10: Cellular reuse concept
+3
+3
+3
+3
+3
+3
+3
+R
+D
+Figure 1.11: A group of co-channel cells
+Introduction: The Wireless Communication Channel 11
+
+
+Considering the central cell in Figure 1.11 as the wanted cell and the other six as the interferers, the path loss model from (1.1) suggests that a mobile located at the edge of the wanted cell experiences a C/I of
+C
+I
+1 R4
+X6
+k1⁄41
+1
+D4 1⁄4 1
+6
+D
+R
+4
+ð1:2Þ
+This assumes that the distances between the interferers and the mobile are all approximately equal and that all the base stations have the same heights and transmit powers. The geometry of hexagons sets the relationship between the cluster size and the reuse distance as:
+D
+R 1⁄4 ffiffiffiffiffiffi
+3N
+p ð1:3Þ
+where N is the cluster size. Hence, taking (1.2) and (1.3) together, the cluster size and the required C/I are related by
+C
+I 1⁄41
+6 ð3NÞ2 ð1:4Þ
+For example, if the system can achieve acceptable quality provided the C/I is at least 18 dB, then the required cluster size is
+N1⁄4
+ffiffiffiffiffiffiffiffiffiffiffiffi
+2 3
+C
+I
+r
+1⁄4
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi
+2
+3 1018=10
+r
+1⁄4 6:5 ð1:5Þ
+Hence a cluster size of N 1⁄4 7 would suffice. Not all cluster sizes are possible, due to the restrictions of the hexagonal geometry. Possible values include 3, 4, 7, 12, 13, 19 and 27. The smaller the value of C/I, the smaller the allowed cluster size. Hence the available channels can be reused on a denser basis, serving more users and producing an increased capacity. Had the dependence on r in (1.1) been slower (i.e. the path loss exponent was less than 4), the required cluster size would have been greater than 7, so the path loss characteristics have a direct impact on the system capacity. Practical path loss models in various cell types are examined in depth in Chapters 8, 12–14. Note this is only an approximate analysis. In practice, other considerations such as the effect of terrain height variations require that the cluster size is different from the theoretical value, or is varied in different parts of the system in order to suit the characteristics of the local environment. One way to reduce cluster size, and hence increase capacity, is to use sectorisation. The group of channels available at each cell is split into say three subgroups, each of which is confined in coverage to one-third of the cell area by the use of directional antennas, as shown in Figure 1.12. Chapters 4 and 15 will describe how this directionality is achieved. Interference now comes from only 2, rather than 6, of the first-tier interfering sites, reducing interference by a factor of 3 and allowing cluster size to be increased by a factor of 30:5 1⁄4 1:7 in theory. Sectorisation has three disadvantages:
+12 Antennas and Propagation for Wireless Communication Systems
+
+
+More base station equipment is needed, especially in the radio frequency (RF) domain. Mobiles have to change channels more often, resulting in an increased signalling load on the system. The available pool of channels has to be reduced by a factor 3 for a mobile at any particular location; this reduces the trunking efficiency (Section 1.9).
+Despite these issues, sectorisation is used very widely in modern cellular systems, particularly in areas needing high traffic density. More than three sectors can be used to further improve the interference reduction; the ultimate is to have very narrow-beam antennas which track the position of the mobile, and these are examined in Chapter 18. As the mobile moves through the system coverage area, it crosses cell boundaries and thus has to change channels. This process is handover or handoff and it must be performed quickly and accurately. Modern fast-switching frequency synthesisers and digital signal processing have allowed this process to be performed with no significant impact on call quality. The handover process needs to be carefully controlled: if handover occurs as soon as a new base station becomes stronger than the previous one, then ‘chatter’ or very rapid switching between the two BSs will occur, especially when the mobile moves along a cell boundary. An element of hysteresis is therefore introduced into the handover algorithm: the handover occurs only when the new BS is stronger than the old one by at least some handover margin. If this margin is too large, however, the mobile may move far into the coverage area of a new cell, causing interference to other users and itself suffering from poor signal quality. The optimum handover margin is set crucially by the level of shadowing in the system, as this determines the variation of signal level along the cell boundaries (Chapter 9). Handover accuracy is usually improved by mobile-assisted handover, also known as MAHO, in which the mobile monitors both the current cell and several neighbouring cells, and sends signal strength and quality reports back to the current serving BS.
+1.9 TRAFFIC
+The number of channels which would be required to guarantee service to every user in the system is impractically large. It can, however, be reduced by observing that, in most cases, the number of users needing channels simultaneously is considerably smaller than the total number of users. The concept of trunking can then be applied: a common pool of channels is created and is shared among all the users in a cell. Channels are allocated to particular users when they request one at the start of a call. At the end of the call, the channel is returned to the pool. This means there will be times when a user requests a channel and none is left in the pool: the call is then blocked. The probability of blocking for which a system is designed is the grade of service. Traffic is measured in erlangs: one erlang (E) is equivalent to one user
+Omni cell Sectored cell
+Figure 1.12: Sectorisation of an omnidirectional cell into three sectors
+Introduction: The Wireless Communication Channel 13
+
+
+making a call for 100% of the time. A typical cellular voice user generates around 2–30 mE of traffic during the busiest hour of the system, that is, a typical user is active for around 0.2–3.0% of the time during the busy-hour. These figures tend to increase for indoor environments, fluctuating around 50–60 mE. The traffic per user Au is required if the traffic per cell is to be computed. Therefore, a user traffic profile is often described, in which an average mobile phone user makes l calls of duration H during the busy-hour. l is known as the call request rate and H is the holding time. Hence, the average traffic per user is
+Au 1⁄4 lH ð1:6Þ
+For U users in the cell, the total carried traffic A is given by:
+A 1⁄4 UAu ð1:7Þ
+To predict the number of channels needed to support a given number of users to a certain grade of service, it is usual to apply the Erlang-B formula:
+Prðblocking occursÞ 1⁄4 AC=C!
+C X
+k1⁄40
+Ak
+k!
+ð1:8Þ
+where A is the total offered traffic in erlangs and C is the total number of channels available. This formula is plotted in Figure 1.13. The Erlang-B formula is idealised in that it makes particular assumptions about the call request rate and holding time, but it provides a useful starting point for estimating the number of channels required. In summary, capacity for a cellular system can be dimensioned if blocking, number of channels and offered traffic can be estimated. A network is often dimensioned for busy-hour operation, as network congestion limits the number of available resources. Example 1.1 illustrates how this capacity dimensioning is performed in practice.
+Blocking probability
+10–1 100 101 102
+10–3
+10–2
+10–1
+100
+Traffic intensity (erlangs)
+1 2 3 4 10 15 20
+2530 405060708090
+100
+Figure 1.13: Erlang-B graph: each curve is marked with the number of channels
+14 Antennas and Propagation for Wireless Communication Systems
+
+
+Example 1.1
+A cellular operator is interested in providing GSM coverage at 900 MHz in an international airport. Surveys show that approximately 650 000 passengers make use of the airport every year, of which it is believed that around 80% are mobile phone users. The airport layout is shown in Figure1.14.
+The following assumptions apply for this airport:
+(a) Busy-hour traffic takes about 25% of the total daily traffic. (b) The traffic in the airport is distributed in the following proportions: 70% is carried in the terminal building, 20% in the pier and 10% in the car park. (c) Each airport user makes an average of three phone calls of 2 min of duration during the busy-hour. (d) Three cells are required for this system: one in the terminal, one in the car park and the other one in the pier. (e) This operator has a market penetration in the airport of 28%.
+Determine the required number of channels per cell, if only 2% of the users attempting to make a phone call are to be blocked when no free channels are available.
+Solution
+The busy-hour number of mobile phone users needs to be calculated. If 650 000 passengers per year use the airport, then:
+650 000 passengers Year
+1 year
+365 days 1781 passengers=day
+As only 80% of the passengers use a mobile phone, the cellular operator with 28% of market penetration carries
+1781 0:8 0:28 399 mobile phone users=day
+Pier
+Car park
+Terminal building
+Figure 1.14: Airport layout for example 1.1
+Introduction: The Wireless Communication Channel 15
+
+
+This number represents only the number of mobile phone users per day for this cellular operator. As capacity needs to be dimensioned on a per busy-hour basis:
+399 mobile phone users
+Day 0:25 100 Mobile phone users
+Busy-hour
+Next, it is necessary to split this number of users per cell. As the terminal takes 70% of the traffic, the car park only 10% and the pier, 20%, then:
+Uterminal 1⁄4 100 mobile phone users
+busy-hour 0:7 1⁄4 70 mobile users
+Upier 1⁄4 100 mobile phone users
+busy-hour 0:2 1⁄4 20 mobile users
+Ucar park 1⁄4 100 mobile phone users
+busy-hour 0:1 1⁄4 10 mobile users
+The offered traffic per cell must now be estimated. For this, an average traffic profile per user has been given, from which an average traffic per user can be computed. Given that a mobile user makes three phone calls of 2 min of duration during the busy-hour, the traffic per user is
+Au 1⁄4 lH 1⁄4 3 calls
+hour 2 min 1 hour
+60 min 1⁄4 100 mE=user
+Given this number of users per cell, and the traffic per user, it is now possible to compute the total traffic per cell:
+Aterminal 1⁄4 70 users
+cell 100 mE
+user 1⁄4 7 Erlangs
+Apier 1⁄4 20 users
+cell 100 mE
+user 1⁄4 2 Erlangs
+Acar park 1⁄4 10 users
+cell 100 mE
+user 1⁄4 1 Erlang
+With a 2% blocking probability, an estimate of the required number of channels per cell is possible, as the traffic per cell is available. Referring to the Erlang-B graph in Figure 1.13:
+Cterminal 13 channels
+Cpier 6 channels
+Ccar park 4 channels
+Note that it is necessary to round to the next highest integer in all cases, to guarantee a minimum number of channels to provide the required traffic A. It is also worth noting that the Erlang-B formula can be applied only on a per-cell basis, as Eq. (1.8) is not linear.
+16 Antennas and Propagation for Wireless Communication Systems
+
+
+1.10 MULTIPLE ACCESS SCHEMES AND DUPLEXING
+Given a portion of the frequency spectrum, multiple users may be assigned channels within that portion according to various techniques, known as multiple access schemes. The three most common schemes are examined here. The duplexing scheme is also examined, whereby simultaneous two-way communication is enabled from the user’s point of view. The multiple access schemes are
+frequency division multiple access (FDMA) time division multiple access (TDMA) code division multiple access (CDMA).
+Chapters 17 and 18 will introduce two further multiple access schemes, orthogonal frequency division multiple access (OFDMA) and space division multiple access (SDMA). The duplexing schemes described here are
+frequency division duplex (FDD) time division duplex (TDD).
+1.10.1 Frequency Division Multiple Access
+Figure 1.15 illustrates a system using FDMA and FDD. The total bandwidth available to the system operator is divided into two sub-bands and each of these is further divided into a number of frequency channels. Each mobile user is allocated a pair of channels, separated by the duplex spacing, one in the uplink sub-band, for transmitting to the base station, the other in the downlink sub-band, for reception from the base station.
+This scheme has the following features:
+Transmission and reception are simultaneous and continuous, so RF duplexers are needed at the mobile to isolate the two signal paths, which increase cost. The carrier bandwidth is relatively narrow, so equalisers are not usually needed (Chapter 17). The baseband signal processing has low complexity. Little signalling overhead is required. Tight RF filtering is needed to avoid adjacent channel interference. Guard bands are needed between adjacent carriers and especially between the sub-bands.
+FDMA is the most common access scheme for systems based on analogue modulation techniques such as frequency modulation (FM), but it is less commonly used in modern digital systems.
+Frequency
+123 N
+... 1 2 3 N
+...
+Uplink sub-band
+Downlink sub-band
+Guard band
+Duplex spacing
+Figure 1.15: Frequency division multiple access used with FDD
+Introduction: The Wireless Communication Channel 17
+
+
+1.10.2 Time Division Multiple Access
+The scheme illustrated in Figure 1.16 combines TDMA and FDD, requiring two frequencies to provide duplex operation, just as in FDMA. Time is divided into frames and each frame is further divided into a number of slots (four in this case). Mobiles are allocated a pair of time slots, one at the uplink frequency and the other at the downlink frequency, chosen so that they do not coincide in time. The mobile transmits and receives bursts, whose duration is slightly less than the time slot to avoid overlap and hence interference between users. This scheme has several features:
+Transmission and reception are never simultaneous at the mobile, so duplexers are not required. Some bits are wasted due to burst start and stop bits and due to the guard time needed between bursts. The wide channel bandwidth needed to accommodate several users usually leads to a need for equalisation (Chapter 17). The time between slots is available for handover monitoring and channel changing. The receiver must resynchronise on each burst individually. Different bit rates can be flexibly allocated to users by allocating multiple time slots together.
+TDMA can also be used with TDD, by allocating half the slots to the uplink and half to the downlink, avoiding the need for frequency switching between transmission and reception and permitting the uplink channel to be estimated from the downlink, even in the presence of frequency-dependent fading (Chapter 11).
+1.10.3 Code Division Multiple Access
+In CDMA or spread spectrum systems, each user occupies a bandwidth much wider than is needed to accommodate their data rate. In the form usually used for cellular mobile systems, this is achieved by multiplying the source of data by a spreading code at a much higher rate, the chip rate, thereby increasing the transmitted signal bandwidth (Figure 1.17). At the receiver, the reverse process is performed to extract the original signal, known as despreading. This is direct sequence spread spectrum, described in more detail in Chapter 17. When this is applied to multiple access, the users are each given different codes, and the codes are specially
+1234
+3412
+1
+3
+Frame
+Burst
+f1
+f2
+Time Frequency
+Downlink
+Uplink
+Figure 1.16: Time division multiple access used with FDD
+18 Antennas and Propagation for Wireless Communication Systems
+
+
+chosen to produce low multiple access interference following the despreading process. The duplex method is usually FDD. Here are some of its features:
+Increasing the number of users increases interference gradually, so there is no specific limit to the number of users, provided that codes with low mutual interference properties are chosen. Instead, system performance degrades progressively for all users. The high bandwidth leads to a requirement for an equaliser-like structure, a Rake receiver (Chapter 17). This allows multipath diversity gain to be obtained (Chapter 16). The power of all users must be equal at the base station to allow the despreading process to work effectively, so some complex power control is required. The baseband processing may be complex compared with FDMA and TDMA, but this is less important with modern silicon integration densities.
+CDMA is increasingly being applied in modern cellular mobile systems, placing increasing emphasis on the need for characterisation of wideband channel effects (Chapter 11).
+1.11 AVAILABLE DATA RATES
+The access schemes introduced in the previous section allow multiple users to access portions of the available system bandwidth. Another relevant consideration, particularly for multimedia and data services, is the data rate available to each user. This is sometimes loosely referred to as the ‘bandwidth’, but in fact the user data rate is not a simple function of the bandwidth occupied, being influenced by three important elements:
+the spectrum efficiency of the modulation scheme employed; the error correction and detection schemes in use; the channel quality.
+The modulation scheme efficiency for digital signals is measured as a ratio of the data rate transmitted over the air to the bandwidth occupied and is thus typically measured in bits per second per Hertz [bit s 1 Hz 1 or bps Hz 1]. For example, the simple binary phase shift keying (BPSK) scheme analysed in Chapter 10 achieves a spectral efficiency of 1 bit s 1 Hz 1, whereas a quaternary phase shift keying (QPSK) scheme signals two binary bit in the same period as a single BPSK bit and thus achieves twice the channel data rate in the same bandwidth, i.e. 2 bit s 1 Hz 1 [Proakis, 89]. This process can be continued almost indefinitely, with sixty-four level quadrature amplitude modulation (64-QAM), for example, achieving 6 bit s 1 Hz 1. The price for this increased bit rate, however, is an increased
+Data
+source x
+Spreading code 1
+2
+3
+4
+... N
+Code
+Frequency
+User signal spectrum
+Transmitted signal spectrum
+Users
+Figure 1.17: Code division multiple access
+Introduction: The Wireless Communication Channel 19
+
+
+sensitivity to noise and interference, so that more errors are caused and the useful error-free data rate may actually be reduced by signalling faster. In order to increase the robustness of the modulation scheme, error correction and detection schemes are applied. At a basic level, this is achieved by adding extra checksum bits at the transmitter, which allow the receiver to detect whether some bits have been received in error and to correct at least some of those errors. This process of ‘forward error correction’ (FEC) adds redundancy according to some coding rate, so every user data bit is represented in the transmission by multiple coded data bits. This ratio is the coding rate of the coder. For example, if there are two coded bits for every one data bit, the coding rate 1⁄4 1/2. Thus the user data rate is the channel data rate multiplied by the coding rate. Selection of the most appropriate FEC scheme involves a trade-off between acceptable error rates and the transmission rate. When errors are detected by the coding scheme and cannot be corrected by FEC, it is common for the receiver to request retransmission of the suspect part of the transmitted data. Such automatic repeat request or ARQ schemes can produce very reliable data transmission, at the expense of further reduced user data rates. The actual user data rate achieved depends directly on the channel quality. The upper limit for the useful data rate, or channel capacity C [bit s 1] achieved in a channel of bandwidth B [Hz] at a signal power to noise power ratio S/N was predicted by [Shannon, 48] as:
+C 1⁄4 log2 1 þ S
+N ð1:9Þ
+This implies that, for an ideal system, the bit error rate can be reduced to zero by the application of appropriate coding schemes, provided the user data rate is less than the channel capacity. Shannon did not, however, provide any constructive techniques for creating such codes and the five decades following his original paper saw researchers expending very significant effort on constructing codes which approached ever closer to this limit. The practical impact of this effort is illustrated by the increasing user data rate available from real-world systems in Figure 1.18, which appears to double approximately every 18 months, the same as the rate predicted by Moore’s law for the increase in integrated circuit complexity [Cherry, 04]. One of the developments which has allowed such high data rates was the development of turbo codes in 1993, a form of FEC which allows the attainment of performance virtually at the Shannon capacity, albeit at the expense of high decoder complexity [Berrou, 93]. The fact that user data rates have actually continued to increase even beyond this limit may seem mysterious, but arises directly from a detailed understanding of the characteristics of both antennas and the propagation channel. See Chapter 18 for further details of the MIMO techniques which permit this – but the reader is advised to study the intervening chapters to gain the best possible appreciation of these!
+1.12 STRUCTURE OF THIS BOOK
+The preceding sections have given an indication of the significance and effect of antennas and propagation in wireless communication systems. Following on from this introduction, the book is loosely structured into five major sections. The first section is concerned with the key features of radio wave propagation and antennas which are common to all wireless communication systems. Chapter 2 examines the
+20 Antennas and Propagation for Wireless Communication Systems
+
+
+fundamental properties of electromagnetic waves travelling in uniform media. These are developed in Chapter 3 in order to describe the basic mechanisms of propagation which occur when waves encounter boundaries between different media. Chapter 4 then shows how such waves can be launched and received using antennas, which have certain key requirements and properties and for which there are a number of generic types. Starting a new section, Chapter 5 introduces the concept of a propagation model, together with the basic techniques for analysing communication systems; these must be understood in order to predict system performance. The theory in Chapter 5 and the first section is then used to analyse two practical types of fixed communication system – terrestrial fixed links in Chapter 6 and satellite fixed links in Chapter 7. The next section (Chapters 8–11) examines propagation and channel effects in macrocell mobile systems. Chapter 8 describes the path loss models which establish the basic range and interference levels from such systems. Chapter 9 describes the shadowing effects which cause statistical variations relative to these levels and which determine the percentage of locations in a given area at which the system is available. Chapter 10 explains the mechanisms and statistical characterisation of the narrowband fast-fading effects in macrocells, which affect the quality of individual links between mobiles and macrocell base stations. These are generalised to wideband systems in Chapter 11. The macrocell concepts are then broadened in the next section to microcells, picocells and megacells in Chapters 12–14, respectively, including all the major differences in propagation and antennas for such cells.
+Figure 1.18: Edholm’s law of bandwidth (Reproduced by permission of IEEE, ß 2004 IEEE)
+Introduction: The Wireless Communication Channel 21
+
+
+Chapters 15–19 inclusive establish methods which the system and equipment designer can use to overcome many of the limitations of the wireless channel. Chapter 15 first explains the antennas in use for mobile systems. This chapter also covers other specifics of antennas such as health and safety considerations, and specific requirements for mobile applications. Chapter 16 explains how diversity provides a means of overcoming narrowband fast fading using multiple antennas. Chapter 17 then provides a similar treatment for overcoming wideband fading, using equalisation, Rake receivers and OFDM. Chapter 18 then indicates the potential of adaptive antenna systems for overcoming co-channel interference effects and hence for increasing the capacity of wireless systems, in terms of both user density and data rates. Chapter 19 highlights essential practical issues to consider when performing mobile radio channel measurements, which affect the accuracy of both radio wave propagation predictions and system designs. Finally, Chapter 20 gives some indications of the developments expected in the research, development and usage of wireless channels in the future.
+1.13 CONCLUSION
+This chapter has described a wide range of wireless communication systems, each with differing applications, technologies and requirements. All of them are unified by their reliance on the characteristics of the wireless communication channel, incorporating both antennas and propagation, to accurately and efficiently deliver information from source to destination. For further details of these systems, texts such as [Molisch, 05], [Parsons, 00] and [Maral, 02] are recommended. The rest of this book will detail the principles and applied practical techniques needed to understand, predict and evaluate the channel effects which have impact on these systems.
+REFERENCES
+[Berrou, 93] C. Berrou, A. Glavieux and P. Thitimajshima, Near Shannon Limit errorcorrecting coding and decoding: Turbo-codes, IEEE International Communications Conference, 1064–1070, 1993.
+[Cherry, 04] S. Cherry, Edholm’s Law of Bandwidth, IEEE Spectrum, July 2004, 58–60. [Maral, 02] G. Maral and M. Bousquet, Satellite communications systems: systems, techniques and technology, John Wiley & Sons, Ltd, Chichester, ISBN 0-47149654-5, 2002. [Molisch, 05] A. Molisch, Wireless communications, John Wiley & Sons, Ltd, Chichester, ISBN 0-470-84888-X, 2005. [Parsons, 00] J. D. Parsons, The mobile radio propagation channel, John Wiley & Sons, Ltd, Chichester, ISBN 0-471-98857-X, 2000. [Proakis, 89] J. G. Proakis, Digital communications, 2nd edn, McGraw-Hill, New York, ISBN 0-07-100269-3, 1989. [Shannon, 48] C. Shannon, A mathematical theory of communication, Bell system technical journal, 27, 379–423 and 623–56, 1948. Reprinted in Claude Elwood Shannon: collected papers, edited by N.J.A. Sloane and A.D. Wyner, IEEE Press, New York, 1993, ISBN 0-78-0304349. [Webb, 07] W. Webb (editor), Wireless communications: The Future, John Wiley & Sons, Ltd, Chichester, ISBN 0-470-03312-6, 2007.
+22 Antennas and Propagation for Wireless Communication Systems
+
+
+PROBLEMS
+1.1 A cellular operator has created a system for 900 MHz which covers the desired service area with 500 cells and a base station antenna height of 15 m. The operator is given a new frequency allocation at 1800 MHz. How many cells would be needed at the new frequency using the same antenna heights and transmit powers? How much higher would the antennas need to be to produce the same range as the 900 MHz system? 1.2 What is the ratio of the cluster sizes needed for two systems with a 9 dB C/I requirement and a 19 dB C/I requirement? 1.3 A certain cell has 4000 users, who generate an average of 2 mE of busy-hour traffic each. How many channels are needed to serve these users with no more than 2% blocking probability? How many users can be served, with the same number of channels and grade of service, if the cell is divided into three sectors? 1.4 A leading cellular operator wants to provide cellular coverage in one of the busiest international airports in the world. The cellular operator’s research indicates that around 31 650 potential mobile users per month during the high season pass through the airport for domestic and international flights. Radio measurements have shown that sufficient coverage is provided with three cells: one in the main terminal building, one in the international flights building and one in the domestic flights building, as shown in Figure 1.19. Clipboard research shows that mobile users at this airport make two phone calls of 3 min of duration on average.
+(a) Determine the number of required channels to deploy at each base station per cell, if the system is to be dimensioned for a maximum blocking of 2% for an Erlang-B system. Assume that the main terminal carries the 60% of the total traffic and each other building carries only 20%. Approximately 25% of the daily traffic is carried during the busy-hour. (b) What is the total traffic that is carried at this airport? (c) Suggest a method for making a more efficient use of the radio spectrum if the traffic is variable in the three cells, as this traffic tends to be bursty.
+Main terminal building
+International flights building
+Domestic flights building
+Figure 1.19: International airport scenario for Problem 1.4
+Introduction: The Wireless Communication Channel 23
+
+
+2 Properties of Electromagnetic
+Waves
+‘I have no picture of this electromagnetic field that is in any sense accurate. . . I see some kind of vague, shadowy, wiggling lines. . . So if you have some difficulty in making such a picture, you should not be worried that your difficulty is unusual’. Richard P. Feynman, Nobel Prize Laureate in Physics
+2.1 INTRODUCTION
+Some of the key properties of electromagnetic waves travelling in free space and in other uniform media are introduced in this chapter. They establish the basic parameters and relationships which are used as standard background when considering problems in antennas and propagation in later chapters. This chapter does not aim to provide rigorous or complete derivations of these relationships; for a fuller treatment see books such as, [Kraus, 98] or [Hayt, 01]. It does, however, aim to show that any uniform medium can be specified by a small set of descriptive parameters and that the behaviour of waves in such media may easily be calculated.
+2.2 MAXWELL’S EQUATIONS
+The existence of propagating electromagnetic waves can be predicted as a direct consequence of Maxwell’s equations [Maxwell, 1865]. These equations specify the relationships between the variations of the vector electric field E and the vector magnetic field H in time and space within a medium. The E field strength is measured in volts per metre and is generated by either a time-varying magnetic field or a free charge. The H field is measured in amperes per metre and is generated by either a time-varying electric field or a current. Maxwell’s four equations can be summarised in words as
+An electric field is produced by a time-varying magnetic field
+A magnetic field is produced by a time-varying electric field or by a current
+Electric field lines may either start and end on charges; or are continuous
+Magnetic field lines are continuous
+ð2:1Þ
+The first two equations, Maxwell’s curl equations, contain constants of proportionality which dictate the strengths of the fields. These are the permeability of the medium in henrys per
+Antennas and Propagation for Wireless Communication Systems Second Edition Simon R. Saunders and Alejandro Arag ́on-Zavala ß 2007 John Wiley & Sons, Ltd
+
+
+metre and the permittivity of the medium " in farads per metre. They are normally expressed relative to the values in free space:
+1⁄4 0 r ð2:2Þ " 1⁄4 "0"r ð2:3Þ
+where 0 and "0 are the values in free space, given by
+0 1⁄4 4 10 7 H m 1 ð2:4Þ
+"0 1⁄4 8:854 10 12 10 9
+36 F m 1 ð2:5Þ
+and r; "r are the relative values (i.e. r 1⁄4 "r 1⁄4 1 in free space). Free space strictly indicates a vacuum, but the same values can be used as good approximations in dry air at typical temperatures and pressures.
+2.3 PLANE WAVE PROPERTIES
+Many solutions to Maxwell’s equations exist and all of these solutions represent fields which could actually be produced in practice. However, they can all be represented as a sum of plane waves, which represent the simplest possible time varying solution. Figure 2.1 shows a plane wave, propagating parallel to the z-axis at time t 1⁄4 0.
+The electric and magnetic fields are perpendicular to each other and to the direction of propagation of the wave; the direction of propagation is along the z axis; the vector in this direction is the propagation vector or Poynting vector. The two fields are in phase at any point in time or in space. Their magnitude is constant in the xy plane, and a surface of constant phase (a wavefront) forms a plane parallel to the xy plane, hence the term plane wave. The oscillating electric field produces a magnetic field, which itself oscillates to recreate an electric field and so on, in accordance with Maxwell’s curl equations. This interplay between the two fields stores energy and hence carries power along the Poynting vector. Variation, or modulation, of the properties of the wave (amplitude, frequency or phase) then allows information to be carried in the wave between its source and destination, which is the central aim of a wireless communication system.
+x
+y
+z
+Ex
+Hy
+Motion (Propagation/Poynting vector)
+E0
+H0
+Wave front
+l
+Figure 2.1: A plane wave propagating through space at a single moment in time
+26 Antennas and Propagation for Wireless Communication Systems
+
+
+2.3.1 Field Relationships
+The electric field can be written as
+E 1⁄4 E0 cosð!t kzÞ^x ð2:6Þ
+where E0 is the field amplitude [V m 1], ! 1⁄4 2 f is the angular frequency in radians for a frequency f [Hz], t is the elapsed time [s], k is the wavenumber [m 1], z is distance along the z-axis (m) and ^x is a unit vector in the positive x direction. The wavenumber represents the rate of change of the phase of the field with distance; that is, the phase of the wave changes by kr radians over a distance of r metres. The distance over which the phase of the wave changes by 2 radians is the wavelength l. Thus
+k1⁄42
+l ð2:7Þ
+Similarly, the magnetic field vector H can be written as
+H 1⁄4 H0 cosð!t kzÞ^y ð2:8Þ
+where H0 is the magnetic field amplitude and ^y is a unit vector in the positive y direction. In both Eqs. (2.6) and (2.8), it has been assumed that the medium in which the wave travels is lossless, so the wave amplitude stays constant with distance. Notice that the wave varies sinusoidally in both time and distance. It is often convenient to represent the phase and amplitude of the wave using complex quantities, so Eqs. (2.6) and (2.8) become
+E 1⁄4 E0 exp1⁄2jð!t kzÞ ^x ð2:9Þ
+and
+H 1⁄4 H0 exp1⁄2jð!t kzÞ ^y ð2:10Þ
+The real quantities may then be retrieved by taking the real parts of Eqs. (2.9) and (2.10). Complex notation will be applied throughout this book.
+2.3.2 Wave Impedance
+Equations (2.6) and (2.8) satisfy Maxwell’s equations, provided the ratio of the field amplitudes is a constant for a given medium,
+jEj
+jHj 1⁄4 Ex
+Hy
+1⁄4 E0
+H0
+1⁄4
+ffiffiffi
+"
+r
+1⁄4 Z ð2:11Þ
+where Z is called the wave impedance and has units of ohms. In free space, r 1⁄4 "r 1⁄4 1 and the wave impedance becomes
+Z 1⁄4 Z0 1⁄4
+ffiffiffiffiffi
+0
+"0
+r ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi
+4 10 7 36
+10 9
+r
+1⁄4 120 377 ð2:12Þ
+Properties of Electromagnetic Waves 27
+
+
+Thus, in free space or any uniform medium, it is sufficient to specify a single field quantity together with Z in order to specify the total field for a plane wave.
+2.3.3 Poynting Vector
+The Poynting vector S, measured in watts per square metre, describes the magnitude and direction of the power flow carried by the wave per square metre of area parallel to the xy plane, i.e. the power density of the wave. Its instantaneous value is given by
+S 1⁄4 E H ð2:13Þ
+Usually, only the time average of the power flow over one period is of concern,
+Sav 1⁄4 1
+2 E0H0^z ð2:14Þ
+The direction vector in Eq. (2.14) emphasises that E, H and Sav form a right-hand set, i.e. Sav is in the direction of movement of a right-handed corkscrew, turned from the E direction to the H direction.
+2.3.4 Phase Velocity
+The velocity of a point of constant phase on the wave, the phase velocity v at which wave fronts advance in the S direction, is given by
+v1⁄4!
+k 1⁄4 ffi1ffiffiffi"ffiffi
+p ð2:15Þ
+Hence the wavelength l is given by
+l1⁄4v
+f ð2:16Þ
+This book is concerned entirely with frequencies from around 30 MHz to 300 GHz, i.e. free space wavelengths from 10 m to 1 mm. In free space the phase velocity becomes
+v 1⁄4 c 1⁄4 ffiffi1ffiffiffiffiffiffiffi
+0"0
+p 3 108 m s 1 ð2:17Þ
+Note that light is an example of an electromagnetic wave, so c is the speed of light in free space.
+2.3.5 Lossy Media
+So far only lossless media have been considered. When the medium has significant conductivity, the amplitude of the wave diminishes with distance travelled through the medium
+28 Antennas and Propagation for Wireless Communication Systems
+
+
+as energy is removed from the wave and converted to heat, so Eqs. (2.9) and (2.10) are then replaced by
+E 1⁄4 E0 exp1⁄2jð!t kzÞ az ^x ð2:18Þ
+and
+H 1⁄4 H0 exp1⁄2jð!t kzÞ az ^y ð2:19Þ
+The constant a is known as the attenuation constant, with units of per metre [m 1], which depends on the permeability and permittivity of the medium, the frequency of the wave and the conductivity of the medium, , measured in siemens per metre or perohm-metre [ m] 1. Together , and " are known as the constitutive parameters of the medium. In consequence, the field strength (both electric and magnetic) diminishes exponentially as the wave travels through the medium as shown in Figure 2.2. The distance through which the wave travels before its field strength reduces to e 1 1⁄4 0:368 1⁄4 36:8% of its initial value is its skin depth , which is given by
+1⁄41
+a ð2:20Þ
+0 0.5 1 1.5 2 2.5 3 3.5 4 4.5 5
+0
+0.2
+0.4
+0.6
+0.8
+1
+1.2
+Distance along propagation vector [skin depths]
+|E|
+E0
+E0 /e
+Figure 2.2: Field attenuation in lossy medium
+Properties of Electromagnetic Waves 29
+
+
+Thus the amplitude of the electric field strength at a point z compared with its value at z 1⁄4 0 is given by
+EðzÞ 1⁄4 Eð0Þe z= ð2:21Þ
+Table 2.1 gives expressions for a and k which apply in both lossless and lossy media. Note that the expressions may be simplified depending on the relative values of and !". If dominates, the material is a good conductor; if is very small, the material is a good insulator or good dielectric.
+Example 2.1
+A linearly polarised plane wave at 900 MHz travels in the positive z direction in a medium with constitutive parameters r 1⁄4 1; "r 1⁄4 3 and 1⁄4 0:01 S m 1. The electric field magnitude at z 1⁄4 0 is 1 V m 1. Calculate:
+(a) the wave impedance; (b) the magnitude of the magnetic field at z 1⁄4 0; (c) the average power available in a 0.5 m2 area perpendicular to the direction of propagation at z 1⁄4 0; (d) the time taken for the wave to travel through 10 cm; (e) the distance travelled by the wave before its field strength drops to one tenth of its value at z 1⁄4 0.
+Table 2.1: Attenuation constant, wave number, wave impedance, wavelength and phase velocity for plane waves in lossy media (after [Balanis, 89])
+Good dielectric n 1⁄4 ck=! (insulator) Good conductor in all cases Exact expression ð =!"Þ2 1 ð =!"Þ2 1
+Attenuation constant
+a [m 1] !
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi " 2
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi
+1 þ !"
+2
+r
+1
+"#
+v u u t 2
+ffiffiffi
+"
+r ffiffiffiffiffiffiffiffiffi
+! 2
+r
+Wave number k [m 1] !
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi " 2
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi
+1 þ !"
+2
+r
+þ1
+"#
+v u u t ! ffiffiffiffi"ffiffi
+p ffiffiffiffiffiffiffiffiffi
+! 2
+r
+Wave impedance Z[ ]
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi
+j!
+þ j!"
+r ffiffiffi
+"
+r ffi!ffiffiffiffiffi
+2
+r
+ð1 þ jÞ
+Wavelength l [m]
+2 k
+2
+! ffiffiffiffi"ffiffi
+p2
+ffiffiffiffiffiffiffiffiffi 2 !
+s
+Phase velocity v [m s 1]
+! k
+ffi1ffiffiffi"ffiffi
+p
+ffiffiffiffiffiffi 2!
+s
+30 Antennas and Propagation for Wireless Communication Systems
+
+
+Solution
+Referring to Table 2.1,
+!" 1⁄4 0:01
+2 900 106 3 10 9
+36
+0:07 1
+so the material can clearly be regarded as a good insulator.
+(a) For an insulator, the wave impedance is given by
+Z
+ffiffiffi
+"
+r 1⁄4
+ffiffiffiffiffiffiffiffi
+0
+"r "0
+r
+1⁄4 Zffi"0ffiffirffi
+p 3p7ffi3ffi7ffi 218
+(b) From Eq. (2.11) the magnetic field amplitude is given by
+H1⁄4E
+Z1⁄4 1
+218 4:6 mA m 1
+(c) The available average power is the magnitude of the time-average Poynting vector multiplied by the collection area, i.e.
+P 1⁄4 SA 1⁄4 EH
+2 A 1⁄4 1 0:005
+2 0:5 1⁄4 1:25 mW
+(d) The time taken to travel a given distance is simply the distance divided by the phase velocity
+t1⁄4d
+v 1⁄4 d ffiffiffiffi"ffiffi
+p 1⁄4 d ffiffiffiffiffiffiffiffiffiffiffiffiffi
+0 "r "0
+p 1⁄4d
+c
+ffi"ffiffirffi
+p 0:1 3 108
+pffi3ffiffi 0:6 ns
+(e) Rearranging Eq. (2.21) yields
+z 1⁄4 ln EðzÞ
+Eð0Þ
+where
+1⁄41
+a
+2 ffi"ffiffi
+r
+1⁄42
+Z
+and from Table 2.1 the approximation holds for good insulators. Thus
+z1⁄4 2
+Z ln EðzÞ
+Eð0Þ 1⁄4 2
+0:01 218 ln 1
+10 1⁄4 2:11 m
+Properties of Electromagnetic Waves 31
+
+
+2.4 POLARISATION
+2.4.1 Polarisation States
+The alignment of the electric field vector of a plane wave relative to the direction of propagation defines the polarisation of the wave. In Figure 2.1 the electric field is parallel to the x axis, so this wave is x polarised. This wave could be generated by a straight wire antenna parallel to the x axis. An entirely distinct y-polarised plane wave could be generated with the same direction of propagation and recovered independently of the other wave using pairs of transmit and receive antennas with perpendicular polarisation. This principle is sometimes used in satellite communications to provide two independent communication channels on the same earth satellite link. If the wave is generated by a vertical wire antenna (H field horizontal), then the wave is said to be vertically polarised; a wire antenna parallel to the ground (E field horizontal) primarily generates waves that are horizontally polarised.
+The waves described so far have been linearly polarised, since the electric field vector has a single direction along the whole of the propagation axis. If two plane waves of equal amplitude and orthogonal polarisation are combined with a 90 phase difference, the resulting wave will be circularly polarised (CP), in that the motion of the electric field vector will describe a circle centred on the propagation vector. The field vector will rotate by 360 for every wavelength travelled. Circularly polarised waves are most commonly used in satellite communications, since they can be generated and received using antennas which are oriented in any direction around their axis without loss of power. They may be generated as either right-hand circularly polarised (RHCP) or left-hand circularly polarised (LHCP); RHCP describes a wave with the electric field vector rotating clockwise when looking in the direction of propagation. In the most general case, the component waves could be of unequal amplitudes or at a phase angle other than 90 . The result is an elliptically polarised wave, where the electric field vector still rotates at the same rate but varies in amplitude with time, thereby describing an ellipse. In this case, the wave is characterised by the ratio between the maximum and minimum values of the instantaneous electric field, known as the axial ratio, AR,
+AR 1⁄4 Emaj
+Emin
+ð2:22Þ
+AR is defined to be positive for left-hand polarisation and negative for right-hand polarisation. These various polarisation states are illustrated in Figure 2.3.
+2.4.2 Mathematical Representation of Polarisation
+All of the polarisation states illustrated in Figure 2.3 can be represented by a compound electric field vector E composed of x and y linearly polarised plane waves with amplitudes Ex and Ey,
+E 1⁄4 Ex^x þ Ey^y ð2:23Þ
+The relative values of Ex and Ey for the six polarisation states in Figure 2.3 are as shown in Table 2.2, assuming that the peak amplitude of the wave is E0 in all cases and where the
+32 Antennas and Propagation for Wireless Communication Systems
+
+
+complex constant a depends upon the axial ratio. The axial ratio is given in terms of Ex and Ey as follows [Siwiak, 1998]:
+AR 1⁄4
+1 þ Ey
+Ex
+cos1⁄2argðEyÞ argðExÞ
+2
+Ey
+Ex
+sin1⁄2argðEyÞ argðExÞ
+2
+6664
+3
+7775
+1
+ð2:24Þ
+The exponent in Eq. (2.24) is chosen such that AR 1:
+2.4.3 Random Polarisation
+The polarisation states considered in the previous section involved the sum of two linearly polarised waves whose amplitudes were constant. These waves are said to be completely polarised, in that they have a definite polarisation state which is fixed for all time. In some cases, however, the values of Ex and Ey may vary with time in a random fashion. This could
+x
+y
+Direction of propagation (z-axis) is out of the page
+x
+y
+x
+y
+x
+y
+x
+y
+x
+y
+Major
+Minor
+Linear
+Circular
+Elliptical
+x-polarised y-polarised
+Right hand
+Left hand
+Right hand
+Left hand
+Figure 2.3 Possible polarisation states for a z-directed plane wave
+Table 2.2: Relative electric field values for the polarisation states illustrated in Figure 2.3
+Polarisation State Ex Ey
+Linear x E0=p2 0
+Linear y 0 E0=p2
+Right-hand circular E0=p2 jE0=p2
+Left-hand circular E0=p2 jE0=p2
+Right-hand elliptical aE0=p2 jE0=p2
+Left-hand elliptical aE0=p2 jE0=p2
+Properties of Electromagnetic Waves 33
+
+
+happen if the fields were created by modulating random noise onto a carrier wave of a given frequency. If the resultant fields are completely uncorrelated, then the wave is said to be completely unpolarised, and the following condition holds:
+E1⁄2ExEy 1⁄4 0 ð2:25Þ
+where E[.] indicates the time-averaged value of the quantity in brackets, or its expectation; see Appendix A for a definition of correlation. In the most general case, when Ex and Ey are partially correlated, the wave can be expressed as the sum of an unpolarised wave and a completely polarised wave. It is then said to be partially polarised.
+2.5 CONCLUSION
+Propagation of waves in uniform media can conveniently be described by considering the properties of plane waves, whose interactions with the medium are entirely specified by their frequency and polarisation and by the constitutive parameters of the medium. Not all waves are plane, but all waves can be described by a sum of plane waves with appropriate amplitude, phase, polarisation and Poynting vector. Later chapters will show how the characteristics of propagation and antennas in a wireless communication system can be described in terms of the behaviour of plane waves in random media.
+REFERENCES
+[Balanis, 89] C. A. Balanis, Advanced engineering electromagnetics, John Wiley & Sons, Inc., New York, ISBN 0-471-62194-3, 1989. [Hayt, 01] W. H. Hayt Jr and J. Buck, Engineering electromagnetics, 6th edn, McGraw-Hill, New York, ISBN 0-07-230424-3, 2001. [Kraus, 98] J. D. Kraus and K. Carver, Electromagnetics, McGraw-Hill, New York, ISBN 0-07-289969-7, 1998.
+[Maxwell, 1865] J. Clerk Maxwell, A dynamical theory of the electromagnetic field, Scientific Papers, 1865, reprinted by Dover, New York, 1952.
+[Siwiak, 98] K. Siwiak, Radiowave propagation and antennas for personal communications, 2nd edn, Artech House, Norwood MA, ISBN 0–89006-975-1, 1998.
+PROBLEMS
+2.1 Prove Eq. (2.14). 2.2 How far must a plane wave of frequency 60 GHz travel in order for the phase of the wave to be retarded by 180 in a lossless medium with r 1⁄4 1 (a non-magnetic medium) and "r 1⁄4 3:5?
+2.3 What is the average power density carried in a plane wave with electric field amplitude 10 V m 1? What electric and magnetic field strengths are produced when the same power density is carried by a plane wave in a lossless non-magnetic medium with "r 1⁄4 4:0?
+34 Antennas and Propagation for Wireless Communication Systems
+
+
+2.4 By what proportion is a 400 MHz plane wave reduced after travelling 1.5 m through a non-magnetic material with constants 1⁄4 1000, "r 1⁄4 10? 2.5 A plane wave travels through free space and has an average Poynting vector of magnitude 10 W m 2. What is the peak electric field strength? 2.6 Calculate the distance required for the electric field of a 5 GHz propagating plane wave to diminish to 13.5% (e 2) given "r 1⁄4 3, r 1⁄4 2 and 1⁄4 100? 2.7 Repeat Example 2.1(e) for the case when 1⁄4 10. Compare your answer with the 2.11 m found in Example 2.1(e), and use this to explain why the surfaces of copper conductors in high-frequency circuits are often gold-plated. 2.8 Compare the attenuation of a plane wave travelling 1 m through a non-magnetic medium with 1⁄4 10 4S m 1 and "r 1⁄4 3 at 100 MHz, 1 GHz and 10 GHz. 2.9 Describe, in your own words, the physical meaning of Maxwell’s equations and why they are important for wireless communications. 2.10 A vertically polarised plane wave at 1900 MHz travels in the positive z direction in a medium with constitutive parameters r 1⁄4 1, "r 1⁄4 3 and 1⁄4 10 S m 1. The electric field magnitude at z 1⁄4 0 is 1.5 V m 1. Calculate: (a) the wave impedance; (b) the magnitude of the magnetic field at z 1⁄4 0; (c) the average power available in a 1.3 m2 area perpendicular to the direction of propagation at z 1⁄4 0; (d) the time taken for the wave to travel through 15 cm; (e) the distance travelled by the wave before its field strength drops to one fifth of its value at z 1⁄4 0.
+Properties of Electromagnetic Waves 35
+
+
+3 Propagation Mechanisms
+‘Wireless is all very well but I’d rather send a message by a boy on a pony’! Lord Kelvin
+3.1 INTRODUCTION
+In Chapter 2, the media in which waves were propagating consisted of regions within which the constitutive parameters did not vary in space, being infinite in extent in all directions. In practice, however, we must consider the boundaries between media (between air and the ground, between buildings and the air, from Earth to space, etc.). These boundary effects give rise to changes in the amplitude, phase and direction of propagating waves. Almost all these effects can be understood in terms of combinations of simple mechanisms operating on plane waves. These propagation mechanisms are now described and will later be used to analyse wave propagation in the real world.
+3.2 REFLECTION, REFRACTION AND TRANSMISSION
+3.2.1 Lossless Media
+Figure 3.1 shows a plane wave incident onto a plane boundary between two media with different permeabilities and permittivities. Both media are assumed lossless for the moment. The electric field vector may be in any direction perpendicular to the propagation vector. The propagation vector is at an angle i to the surface normal at the point of incidence. If Maxwell’s equations are solved for this situation, the result is that two new waves are produced, each with the same frequency as the incident wave. Both the waves have their Poynting vectors in the plane which contains both the incident propagation vector and the normal to the surface (i.e. normal to the plane of the paper in Figure 3.1). This is called the scattering plane. The first wave propagates within medium 1 but moves away from the boundary. It makes an angle r to the normal and is called the reflected wave. The second wave travels into medium 2, making an angle t to the surface normal. This is the transmitted wave, which results from the mechanism of refraction. When analysing reflection and refraction, it is convenient to work in terms of rays; in a homogeneous medium rays are drawn parallel to the Poynting vector of the wave at the point of incidence. They are always perpendicular to the wave fronts. The angle of the reflected ray is related to the incidence angle as follows:
+i 1⁄4 r ð3:1Þ
+Equation (3.1) is Snell’s law of reflection, which may be used to find the point of reflection given by any pair of source (transmitter) and field (receiver) points as shown in Figure 3.2.
+Antennas and Propagation for Wireless Communication Systems Second Edition Simon R. Saunders and Alejandro Arag ́on-Zavala ß 2007 John Wiley & Sons, Ltd
+
+
+This law is one consequence of a deeper truth, Fermat’s principle, which states that every ray path represents an extremum (maximum or minimum) of the total electrical length kd of the ray, usually a minimum. In Figure 3.2, the actual ray path is simply the path which minimises the distance (d1 þ d2 ), because the wave number is the same for the whole ray. Fermat’s principle can also be used to find the path of the refracted ray. In this case, the wave number in the two media is different, so the quantity which is minimised is (k1d1þ k2dt ), where dt is the distance from the point of reflection to the field point in medium 2. The result is Eq. (3.2) Snell’s law of refraction,
+sin i sin t
+1⁄4 k2
+k1
+ð3:2Þ
+Equation (3.2) is consistent with the observation that the phase velocity of the wave in the medium with higher permittivity and permeability (the denser medium) is reduced, causing the
+Surface normal
+Point of incidence
+Wave fronts
+Rays (propagation vector)
+The scattering plane is the plane of the paper
+Medium 1 Medium 2
+i
+rt
+Incident wave
+Reflected wave
+Transmitted (refracted) wave
+1, 1 2, 2
+Ei||
+Er||
+Et||
+Ei⊥
+Er⊥
+Et ⊥
+Figure 3.1: Plane wave incident onto a plane boundary
+}
+Source point
+Field point
+Potential reflection points
+Potential ray paths Actual ray path
+d1
+d2
+Figure 3.2: Finding the point of reflection using Snell’s law
+38 Antennas and Propagation for Wireless Communication Systems
+
+
+transmitted wave to bend towards the surface normal.1 This change in velocity can be expressed in terms of the refractive index, n, which is the ratio of the free space phase velocity, c, to the phase velocity in the medium,
+n1⁄4c
+v 1⁄4 ck
+! ð3:3Þ
+Thus Snell’s law of refraction can be expressed as
+sin i sin t
+1⁄4 n2
+n1
+ð3:4Þ
+Note that the frequency of the wave is unchanged following reflection and transmission; instead, the ratio v=l 1⁄4 f is maintained everywhere. For example, a wave within a dense medium will have a smaller phase velocity and longer wavelength than that in free space. In addition to the change of direction in accordance with Eqs. (3.2) and (3.4), the interaction between the wave and the boundary also causes the energy in the incident wave to be split between the reflected and transmitted waves. The amplitudes of the reflected and transmitted waves are given relative to the incident wave amplitude by the Fresnel [fra - nel] reflection and transmission coefficients, which arise from the solution of Maxwell’s equations at the boundary. These express the ratio of the transmitted and reflected electric fields to the incident electric field. The coefficients are different for cases when the electric field is parallel and normal to the scattering plane which are denoted by subscripts || and ?, respectively. The reflection coefficients are denoted by R and the transmission coefficients by T. The coefficients depend on the impedances of the media and on the angles,
+Rjj 1⁄4 Erjj
+Eijj
+1⁄4 Z1 cos i Z2 cos t
+Z2 cos t þ Z1 cos i
+R? 1⁄4 Er?
+Ei?
+1⁄4 Z2 cos i Z1 cos t
+Z2 cos i þ Z1 cos t
+ð3:5Þ
+Tjj 1⁄4 Etjj
+Eijj
+1⁄4 2Z2 cos i
+Z2 cos t þ Z1 cos i
+T? 1⁄4 Et?
+Ei?
+1⁄4 2Z2 cos i
+Z2 cos i þ Z1 cos t
+ð3:6Þ
+where Z1 and Z2 are the wave impedances of medium 1 and medium 2, respectively and the E fields are defined in the directions shown in Figure 3.1. The total reflected electric field is therefore given by
+Er 1⁄4 Erjjajj þ Er?a? 1⁄4 EijjRjjajj þ Ei?R?a? ð3:7Þ
+where a|| and a? are unit vectors parallel and normal to the scattering plane, respectively, and the incident electric field is permitted to take any polarisation state expressed as
+Ei 1⁄4 Eijjajj þ Ei?a? ð3:8Þ
+1Imagine a person walking across a beach into the sea at an angle, with the sea to their left. Their left leg gets wet first and slows down, causing their direction to shift more directly into the sea, closer to the normal to the sea edge. In this analogy the sea represents the denser medium and the beach is the less dense.
+Propagation Mechanisms 39
+
+
+Equation (3.7) is sometimes represented in matrix form to make calculations involving mixed polarisation easier,
+Er 1⁄4 REi ð3:9Þ
+where
+Er 1⁄4 Erjj
+Er? ; R 1⁄4 Rjj 0
+0 R?
+and Ei 1⁄4 Eijj
+Ei? ð3:10Þ
+Similarly, the total transmitted field is given by
+Et 1⁄4 TEi ð3:11Þ
+where
+Et 1⁄4 Etjj
+Et? ; T 1⁄4 Tjj 0
+0 T?
+and Ei 1⁄4 Eijj
+Ei? ð3:12Þ
+It is often useful to express the Fresnel coefficients in terms of i only, avoiding the need to calculate t: for dielectric materials with 1 1⁄4 2 1⁄4 0 and 1 1⁄4 2, Snell’s law of refraction implies that
+Rjj 1⁄4
+Z1 cos i Z2
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi
+1 Z2
+Z1
+2
+sin2 i
+s
+Z2
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi
+1 Z2
+Z1
+2
+sin2 i
+s
+þ Z1 cos i
+ð3:13Þ
+R? 1⁄4
+Z2 cos i Z1
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi
+1 Z2
+Z1
+2
+sin2 i
+s
+Z2 cos i þ Z1
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi
+1 Z2
+Z1
+2
+sin2 i
+s ð3:14Þ
+Tjj 1⁄4 2Z2 cos i
+Z2
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi
+1 Z2
+Z1
+2
+sin2 i
+s
+þ Z1 cos i
+ð3:15Þ
+T? 1⁄4 2Z2 cos i
+Z2 cos i þ Z1
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi
+1 Z2
+Z1
+2
+sin2 i
+s ð3:16Þ
+Other useful relationships can be deduced by considering the conservation of energy at the point of incidence: since the power in the incident wave is divided between the reflected and transmitted waves, the following relationships hold:
+jTjjj2 1⁄4 1 jRjjj2 and jT?j2 1⁄4 1 jR?j2 ð3:17Þ
+40 Antennas and Propagation for Wireless Communication Systems
+
+
+3.2.2 Lossy Media
+In lossy media, Snell’s law of refraction no longer holds in its standard form (3.4), because the phase velocity of the transmitted wave (and the attenuation constant) depends on the incidence angle as well as on the constitutive parameters. If a wave is incident from a dielectric onto a conductor, increasing the conductivity causes the refraction angle t to decrease towards zero whereas the attenuation constant increases, so the penetration of the wave into the conductor decreases. See [Balanis, 89] for more details. Snell’s law of reflection still holds in lossy media, however and the Fresnel coefficients can still be applied as in Eqs. (3.5) and (3.6) using the correct values of the wave impedance from Table 2.1, i.e.
+Z1⁄4
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi j!
+þ j!"
+s
+ð3:18Þ
+Example 3.1
+A linearly polarised plane wave in free space with an electric field amplitude 30 V m 1 is incident onto the plane boundary of a lossless non-magnetic medium with "r 1⁄4 2 from an incidence angle of 30 . The electric field is parallel to the plane of incidence. Calculate:
+(a) the angle of reflection; (b) the angle of refraction; (c) the amplitude of the transmitted electric and magnetic fields; (d) the amplitude of the reflected electric field.
+Solution
+(a) Since both the wave and the boundary are plane, Snell’s law of reflection (3.1) applies, and the angle of reflection is therefore 30 . (b) Rearranging Eq. (3.4) yields
+t 1⁄4 sin 1 n1
+n2
+sin i
+1⁄4 sin 1
+ffiffiffiffiffiffiffiffiffiffiffiffi
+r1 "r1
+p
+ffiffiffiffiffiffiffiffiffiffiffiffi
+r2 "r2
+p sin i
+1⁄4 sin 1 p1ffi2ffiffi sin 30
+1⁄4 20:7
+Propagation Mechanisms 41
+
+
+(c) The incident wave is parallel polarised with respect to the plane of polarisation, so the expression for Tjj in (3.6) is applied, with
+Z1 1⁄4 Z0 1⁄4 377 and Z2 1⁄4 Zffi"ffi0ffirffi2ffiffi
+p 1⁄4 3p7ffi2ffi7ffi
+Hence Z1
+Z2
+1⁄4 pffi2ffiffi, and (3.6) yields
+Tjj 1⁄4 2 cos i
+cos t þ Z1
+Z2 cos i
+1⁄4 2 cos 30
+cos 20:7 þ pffi2ffiffi cos 30 0:80
+So Et 1⁄4 EiTjj 1⁄4 0:80 30 1⁄4 24:0 V m 1 From Eq. (2.11) the magnetic field amplitude is
+Ht 1⁄4 Et
+Z2
+1⁄4 24pffi2ffiffi
+377 0:09 A m 1
+(d) The amplitude of the electric field is
+Er 1⁄4 RjjEi 1⁄4
+Z1
+Z2 cos i cos t
+cos t þ Z1
+Z2 cos i
+Ei 8:54 30
+1⁄4 256:2 V m 1
+The negative sign indicates that the field undergoes a 180 phase change on reflection.
+3.2.3 Typical Reflection and Transmission Coefficients
+Representative values for the constitutive parameters of various non-magnetic materials are given in Table 3.1. The magnitudes of the Fresnel coefficients for two of these materials are shown in Figures 3.3 and 3.4 for a wave propagating in free space and impinging onto dry and wet ground, respectively. In the case of reflection from the ground, the || parts represent vertical
+Table 3.1: Typical constitutive parameters, from [ITU, 527]
+Surface Conductivity, [S m 1] Relative dielectric constant, "r
+Dry ground 0.001 4–7 Average ground 0.005 15 Wet ground 0.02 25–30 Sea water 5 81 Fresh water 0.01 81
+42 Antennas and Propagation for Wireless Communication Systems
+
+
+polarisation and the ? parts are horizontally polarised. Notice that in both cases the vertically polarised reflection goes to zero at one angle. Waves of random polarisation incident at this angle will be reflected to have a purely horizontal component, illustrating that the polarisation state is not preserved following reflection or transmission. The angle is called the Brewster angle, B 1⁄4 i, and is given by
+B 1⁄4 tan 1 n2
+n1
+ð3:19Þ
+Figures 3.3 and 3.4 also show that, as the angle of incidence goes closer to 90 , the reflection coefficient approaches 1 in all cases, independent of polarization, while the transmission coefficient drops to zero. This situation is known as grazing incidence and is closely approximated in practice when a transmitter antenna is low in height compared with the distance to the receiver. This is most apparent in Figure 3.5, where Figure 3.3 has been redrawn assuming that the conductivity of the ground is zero, so the coefficients always take real values. For angles of incidence greater than the Brewster angle, both R|| and R? are negative, so the reflected wave undergoes a 180 phase change. If the incident wave has components with both
+0 10 20 30 40 50 60 70 80 90
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+Dry ground
+Angle of incidence [deg]
+Magnitude of reflection / transmission coefficient
+R R T T
+Figure 3.3: Reflection and transmission coefficients for dry ground at 100 MHz with "r 1⁄4 7; 1⁄4 0:001 S m 1
+Propagation Mechanisms 43
+
+
+polarisations, as in circular or elliptical polarisation, this phase change causes a reversal of the sense of rotation. Reversal occurs together with a differential change in the amplitudes of the two component linear polarisations, which also changes the axial ratio. These changes are summarised in Table 3.2. The impact of circular polarisation can also be computed via co-polar and cross-polar reflection coefficients as follows:
+Rco 1⁄4 1
+2 ðRjj þ R?Þ and Rcx 1⁄4 1
+2 ðRjj R?Þ ð3:20Þ
+0 10 20 30 40 50 60 70 80 90
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+Wet ground
+Angle of incidence [deg]
+Magnitude of reflection/transmission coefficient
+R R T T
+Figure 3.4: Reflection and transmission coefficients for wet ground at 100 MHz with "r 1⁄4 30; 1⁄4 0:02 S m 1
+Table 3.2: Change of polarisation state on reflection
+Reflected polarisation
+Incident polarisation i < B i > B
+Right-hand circular Left-hand elliptical Right-hand elliptical Left-hand circular Right-hand elliptical Left-hand elliptical Right-hand elliptical Left-hand elliptical Right-hand elliptical (AR changed) (AR changed) Left-hand elliptical Right-hand elliptical Left-hand elliptical (AR changed) (AR changed)
+44 Antennas and Propagation for Wireless Communication Systems
+
+
+When the conductivity of the medium is large, the R|| component never quite goes to zero but there is still a clearly defined minimum known as the pseudo-Brewster angle (Figure 3.6).
+3.3 ROUGH SURFACE SCATTERING
+The reflection processes discussed so far have been applicable to smooth surfaces only; this is termed specular reflection. When the surface is made progressively rougher, the reflected wave becomes scattered from a large number of positions on the surface, broadening the scattered energy (Figure 3.7). This reduces the energy in the specular direction and increases the energy radiated in other directions. The degree of scattering depends on the angle of incidence and on the roughness of the surface in comparison to the wavelength. The apparent roughness of the surface is reduced as the incidence angle comes closer to grazing incidence ð i 1⁄4 90 Þ and as the wavelength is made larger2. If a surface is to be considered smooth, then waves reflected from the surface must be only very slightly shifted in phase with respect to each other. If there is a height difference h between two points on the surface, then waves reflected from those points will have a relative
+0 10 20 30 40 50 60 70 80 90
+−1
+−0.8
+−0.6
+−0.4
+−0.2
+0
+0.2
+0.4
+0.6
+Reflection/transmission coefficient
+Angle of incidence [deg]
+R R T T
+Figure 3.5: Reflection and transmission coefficients for dry ground of zero conductivity
+2Try looking along the surface of a sheet of blank white paper towards a light: you will observe a bright reflection from the paper. This reflection is not apparent at normal viewing angles because the surface roughness of the paper is large compared with the wavelength of light.
+Propagation Mechanisms 45
+
+
+phase difference of
+1⁄4 4 h cos i
+l ð3:21Þ
+A reasonable criterion for considering a surface smooth is if this phase shift is less than 90 , which leads to the Rayleigh criterion,
+h< l
+8 cos i
+ð3:22Þ
+This is illustrated in Figure 3.8. For accurate work, it is suggested that surfaces should only be considered smooth if the roughness is less than one-quarter of the value indicated by the
+0 10 20 30 40 50 60 70 80 90
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+Angle of incidence [deg]
+Magnitude of R||
+s=1
+s = 0.1
+s = 0.01
+s = 0.001
+Figure 3.6: Pseudo-Brewster angle: R|| never goes to zero ð"r1 1⁄4 1; "r2 1⁄4 5Þ
+S p e cula r d irec tion
+S m ooth R ough R ougher
+ii
+Figure 3.7: The effect of surface roughness on reflection
+46 Antennas and Propagation for Wireless Communication Systems
+
+
+Rayleigh criterion (i.e. phase difference less than =8). Note that surfaces of any roughness may be considered smooth for i 1⁄4 90 , since all the reflected rays arrive with the same phase shift. When the surface is rough, the reduction in the amplitude of the specular component may be accounted for by multiplying the corresponding value of R by a roughness factor f, which depends on the angle of incidence and on the standard deviation of the surface height s. One formulation for this factor is [Beckmann, 63],
+f ð sÞ 1⁄4 exp 1
+2
+4 s cos l
+2
+"#
+ð3:23Þ
+This is plotted in Figure 3.9. The effective reflection coefficient is then Rrough 1⁄4 Rf ð sÞ
+3.4 GEOMETRICAL OPTICS
+3.4.1 Principles
+This chapter has described ways in which the interactions between plane waves and infinite plane surfaces can be calculated with high accuracy, provided that the constitutive parameters are known. In practice, however, these conditions are rarely fulfilled and approximations must be made. For example, Figure 3.10 represents a real propagation situation in which it is desired to calculate the field at a field point (i.e. receiver) within a building, illuminated from a source point (transmitter) on top of another building. The transmitter radiates spherical waves, in which the wavefronts are spheres centred on the source point and radiating outwards in all directions. The surfaces are finite in extent and
+0 10 20 30 40 50 60 70 80 90
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+Surface roughness (wavelengths)
+Angle of incidence [deg]
+Rough surfaces
+Smooth surfaces
+Figure 3.8: Rayleigh criterion for surface roughness: surfaces above the curve cannot be accurately modelled using the Fresnel reflection coefficients alone
+Propagation Mechanisms 47
+
+
+0 10 20 30 40 50 60 70 80 90
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+Angle of incidence [deg]
+Roughness factor
+0.05
+0.01
+0.1
+0.2
+0.5
+Figure 3.9: Roughness factor f ð sÞ for several values of ( s=l)
+T
+R
+Source point
+Field point
+Rays Wavefronts
+Figure 3.10: Combination of propagation mechanisms in the real environment: different shading indicates materials with potentially different constitutive parameters
+48 Antennas and Propagation for Wireless Communication Systems
+
+
+involve boundaries between media with differing constitutive parameters. Finally, the surface of the ground is curved. Despite these complications, geometrical optics represents a simple way to find an approximate value for the field at the receiver using the plane wave propagation mechanisms described in this chapter. The following steps are involved:
+1. Calculate all possible ray paths between the source and field points which are consistent with Snell’s laws of reflection and refraction (ray tracing). 2. Calculate the Fresnel reflection and transmission coefficients at each of the points of reflection and transmission as if the incident waves were plane and the boundaries were plane and infinite (see for example, the reflection points labelled R and the transmission points labelled T in Figure 3.10). 3. For each ray path, correct the amplitude to account for wavefront curvature from the source and due to the curvature of any boundaries. 4. Sum all ray paths, paying due regard to both amplitude and phase.
+Step 1 is, in principle, a straightforward procedure, but requires a large amount of computational effort in order to identify all possible rays. Much effort has been devoted to creating efficient techniques for performing ray tracing and they typically rely on tracing only the strongest rays and on techniques taken from the study of computer graphics [Ca ́tedra, 99]. The strongest rays are usually those involving the fewest interactions on their journey from source to field points. Step 2 relies on the waves being locally plane at the points of interaction and on the surfaces with given constitutive parameters being reasonably large. This is the central assumption of geometrical optics and requires that the wavelength is short in comparison with all of the following lengths:
+distance between the source and the first interactions along each ray path; distance between individual interactions; dimensions of any of the individual materials.
+Step 3 similarly requires that the curvature of any of the boundaries is not too large compared with the wavelength. Despite these limitations, geometrical optics is useful for solving a large number of highfrequency problems in both antennas and propagation with reasonable accuracy.
+3.4.2 Formulation
+Following the procedure outlined in Section 3.4.1, the total geometrical optics field is given by
+E 1⁄4 E0A0e jk0r0 þ N Xr
+i1⁄41
+REiAie jkiri þ N Xt
+j1⁄41
+TEjAje jkjrj ð3:24Þ
+where
+Nr; Nt are the total numbers of reflected and transmitted rays which have been traced from the source point to the field point, respectively.
+Propagation Mechanisms 49
+
+
+rn is the distance along the nth ray. ki is the wave number associated with the medium in which the ith ray propagates.
+Ai is the spreading factor for the ith ray.
+Ei; j is the incident field immediately adjacent to the corresponding transmission or reflection point.
+The spreading factor depends on the distances to the source and field points and on the curvature of the reflection or transmission boundary. For spherical waves and plane boundaries, Ai / 1=ri, whereas for plane waves and plane boundaries, Ai does not vary with distance. Parameters with a subscript 0 account for the direct ray from source to field point, if unobstructed. Equation (3.24) only shows contributions from rays which have been reflected or transmitted once, but it can easily be extended to multiple interactions along a ray by simply multiplying the appropriate coefficients together. See [Balanis, 89] and [James 80] for more details.
+3.5 DIFFRACTION
+3.5.1 Principle
+The geometrical optics field described in Section 3.4 is a very useful description, accurate for many problems where the path from transmitter to receiver is not blocked. However, such a description leads to entirely incorrect predictions when considering fields in the shadow region behind an obstruction, since it predicts that no field whatsoever exists in the shadow region as shown in Figure 3.11. This suggests that there is an infinitely sharp transition from the shadow region to the illuminated region outside. In practice, however, shadows are never completely sharp, and some energy does propagate into the shadow region. This effect is diffraction and can most easily be understood by using Huygen’s principle.
+1. Each element of a wavefront at a point in time may be regarded as the centre of a secondary disturbance, which gives rise to spherical wavelets. 2. The position of the wavefront at any later time is the envelope of all such wavelets.
+Shadow Region
+Rays Wavefronts
+Perfectly absorbing obstruction
+Figure 3.11: Geometrical optics incorrectly predicts zero field in the shadow region
+50 Antennas and Propagation for Wireless Communication Systems
+
+
+Figure 3.12 shows how a number of secondary sources on a spherical wavefront give rise to wavelets whose envelope is another spherical wavefront of larger radius.
+3.5.2 Single Knife-Edge Diffraction
+We now use Huygen’s principle to predict diffraction of a plane wave over an absorbing plane or knife-edge. This is a wide screen which allows no energy to pass through it. Figure 3.13 shows how plane wavefronts impinging on the edge from the left become curved by the edge so that, deep inside the geometrical shadow region, rays appear to emerge from a point close to the edge, filling in the shadow region with diffracted rays. The same effect can be viewed in nature following diffraction of water waves around a coastline (Figure 3.14). Huygen’s principle may be applied in a mathematical form to predict the actual field strength which is diffracted by the knife-edge. The contributions from an infinite number of secondary sources in the region above the edge are summed, paying due regard to their relative amplitudes and phases.
+Main Source
+Secondary Sources
+1st wavefront 2nd wavefront
+wavelets
+= envelope of all wavelets from 1st wavefront
+Figure 3.12: Huygen’s principle for a spherical source
+Shadow region
+Wavefronts
+Absorbing screen
+Incident wave
+Knife-edge
+Figure 3.13: Huygen’s principle for knife-edge diffraction
+Propagation Mechanisms 51
+
+
+The final result can be expressed as a propagation loss, which expresses the reduction in the field strength due to the knife-edge diffraction process in decibels, in terms of a diffraction parameter, v,
+LkeðvÞ 1⁄4 20 log Ed
+Ei
+1⁄4 20 log jFðvÞj ð3:25Þ
+where Ed is the diffracted field, Ei is the incident field and
+FðvÞ 1⁄4 1 þ j
+2
+ð1
+v
+exp j t2
+2 dt ð3:26Þ
+An alternative form is
+jFðvÞj 1⁄4 1
+2
+1
+2 þ C2ðvÞ CðvÞ þ S2ðvÞ SðvÞ ð3:27Þ
+where CðvÞ and SðvÞ are the Fresnel cosine and sine integrals, which can be evaluated using the methods given in Appendix B. Notice how the integration limits in Eq. (3.26) indicate the nature of the summation of secondary sources from the top of the knife-edge, with parameter v, up to infinity. The eventual result Lke is illustrated in Figure 3.15. It can be numerically evaluated using standard routines for calculating Fresnel integrals (Appendix B), or approximated for v > 1 (i.e. well within the shadow region) with accuracy better than 1 dB,
+LkeðvÞ 20 log 1
+vpffi2ffiffi 20 log 0:225
+v ð3:28Þ
+Another significant value is Lke(0) 1⁄4 6 dB, i.e. the received power is reduced by a factor of 4 when the knife-edge is situated exactly on the direct path between the transmitter and the
+Figure 3.14: Knife-edge diffraction of waves on the sea surface
+52 Antennas and Propagation for Wireless Communication Systems
+
+
+receiver. The parameter v can be expressed in terms of the geometrical parameters defined in Figure 3.16 as
+v 1⁄4 h0
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi
+2ðd01 þ d02Þ ld01d02
+s
+1⁄4a
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi
+2d01d02
+lðd01 þ d02Þ
+s
+ð3:29Þ
+where h0 is the excess height of the edge above the straight line from source to field points. For many practical cases, d1; d2 h, so the diffraction parameter v can be approximated in terms of the distances measured along the ground rather than along the direct wave,
+vh
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi 2ðd1 þ d2Þ ld1d2
+s
+1⁄4a
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi 2d1d2
+lðd1 þ d2Þ
+s
+ð3:30Þ
+Figure 3.15: Knife-edge diffraction attenuation: (——) exact (– –) large v approximation
+h
+h'
+d1 '
+d2 '
+d1 d2
+Edge
+=+
+Transmitter
+Receiver
+Figure 3.16: Knife-edge diffraction parameters
+Propagation Mechanisms 53
+
+
+Another useful way to consider knife-edge diffraction is in terms of the obstruction of Fresnel zones around the direct ray as illustrated in Figure 3.17. The nth Fresnel zone is the region inside an ellipsoid defined by the locus of points where the distance (a þ b) is larger than the direct path between transmitter and receiver (d1 þ d2) by n half-wavelengths. Hence the radius of the nth zone rn is given by applying the condition
+a þ b 1⁄4 d1 þ d2 þ nl
+2 ð3:31Þ
+If we assume that rn d1 and rn d2, then to a good approximation
+rn
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi nld1d2 d1 þ d2
+s
+ð3:32Þ
+The Fresnel zones can be thought of as containing the main propagating energy in the wave. Contributions within the first zone are all in phase, so any absorbing obstructions which do not enter this zone will have little effect on the received signal. The Fresnel zone clearance (h=rn) can be expressed in terms of the diffraction parameter v as follows:
+vh
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi 2ðd1 þ d2Þ ld1d2
+s
+1⁄4h
+rn
+ffi2ffiffiffinffi
+p ð3:33Þ
+When the obstruction occupies 0.6 times the first Fresnel zone, the v parameter is then approximately 0.8. Referring to Figure 3.15, the obstruction loss is then 0 dB. This clearance is often used as a criterion to decide whether an object is to be treated as a significant obstruction. Thus, the shaded region in Figure 3.18 can be considered as a ‘forbidden’ region; if this region is kept clear then the total path attenuation will be practically the same as in the unobstructed case. Figure 3.19 is an example of the field around an absorbing knife-edge.
+3.5.3 Other Diffracting Obstacles: Geometrical Theory of Diffraction
+In many situations, diffraction over obstructions, such as hills and buildings, may be treated as if those obstructions were absorbing knife-edges. There are other cases, however, when it is necessary to account for the structure of the obstruction in a more specific way, including its shape and the materials of which it is built. One approach is to extend geometrical optics to
+rn
+d1 d2
+Transmitter Receiver
+ab
+n=1 n=2 n=3
+Figure 3.17: Fresnel zones
+54 Antennas and Propagation for Wireless Communication Systems
+
+
+include diffraction, producing a formulation similar to Section 3.4. This results in the geometrical theory of diffraction (GTD). GTD was first devised by Joseph Keller in the 1950s [Keller, 62]. In the past, GTD has been applied mainly to the analysis of small shapes, such as antennas, or for calculating the radar cross-sections of complex objects. More recently, it has been successfully applied to the modelling of terrain [Luebbers, 84] and of buildings. The central idea of GTD is that an extended version of Fermat’s principle may be used to predict the existence of diffracted rays, which may then be treated with the ease of any
+r1
+Transmitter Receiver
+n=1
+0.6 r1
+‘Forbidden’ region
+First Fresnel zone
+Figure 3.18: 0.6 times first Fresnel zone clearance defines significant obstructions
+Figure 3.19: Single knife-edge attenuation: the transmitter is at ( 10,5), the top of the edge is at (0,10), the colour indicates the attenuation in decibels and the black line represents the shadow boundary
+Propagation Mechanisms 55
+
+
+other ray in geometrical optics. Figure 3.20 shows a ray obliquely incident upon the edge of an obstacle at an angle 0 to the edge. Fermat’s principle for edge diffraction predicts that a cone of diffracted rays will be produced, where the cone has semi-angle 0. This contrasts with reflected and transmitted rays, where only a single ray is produced at each interaction. In the simpler case of normal incidence, 0 1⁄4 =2 and the cone reduces to a disc. Once the diffracting point is determined, the diffracted field is given by
+Ed 1⁄4 DEiAd ð3:34Þ
+where
+Ed 1⁄4 Edjj
+Ed? ; D 1⁄4 Djj 0
+0 D?
+and Ei 1⁄4 Eijj
+Ei? ð3:35Þ
+Here Eijj and Ei? are measured parallel and perpendicular to the plane of incidence, which contains the incident ray and the diffracting edge, while Edjj and Ed? are measured parallel and perpendicular to the plane of diffraction, which contains the diffracting edge and the diffracted ray. By analogy with Eq. (3.24), Ad is a spreading factor which depends on the distances to the source and field points and on the curvature of the diffracting edge. In place of the Fresnel reflection and transmission coefficients used earlier, we now have coefficients Djj and D?. These are the diffraction coefficients, which describe the characteristics of the diffracting obstacle at the point of diffraction, assuming the frequency is high enough that the diffraction characteristics can be determined with regard to local characteristics only, rather than by those of the entire obstacle. Terms such as Eq. (3.34) can now be
+0
+Cone of diffracted rays
+Incident ray
+Diffraction point
+0
+Figure 3.20: Generation of edge-diffracted rays from a wedge according to GTD
+56 Antennas and Propagation for Wireless Communication Systems
+
+
+added to the geometrical optics field of Eq. (3.24), yielding a field which has the proper behaviour within the shadow region. GTD also provides a simple explanation for the fluctuations in the single knife-edge diffraction (Figure 3.15) for negative v: it arises from constructive and destructive interferences between the direct ray and the diffracted ray. The diffraction coefficients are determined from one of a number of canonical problems. These are diffraction problems for simple scattering objects, such as a half-plane [Volakis, 86], a wedge or a cone, which have been solved using exact methods for solving Maxwell’s equations for plane waves incident on these objects. The resulting solutions are reduced, via asymptotic assumptions, to terms which correspond to a ray description of the field. As with geometrical optics, these assumptions are only valid if the obstacle dimensions are large compared to a wavelength and if the spatial variation of the scattered field is not too rapid. Keller’s original formulation of GTD, though simple, had the disadvantage that it did not predict the field correctly for field points in a Fresnel-zone-like region close to the shadow boundary – the transition region. GTD was therefore extended to the uniform GTD (UTD) which applies at all points in space [Kouyoumjian, 74]. Consider the wedge diffraction situation as shown in Figure 3.21. The case shown is perpendicular polarisation (?). For parallel polarisation (||), replace Ei and Ed in the figure with Hi and Hd, respectively, and Hi and Hd in the figure with Ei and Ed, respectively. Assuming the wedge to be a perfect conductor, the UTD diffraction coefficient for the case when the incident wave is normal to the diffracting edge is then as follows [Kouyoumjian, 74]. Note that the UTD diffraction coefficient is polarisation dependent, in contrast to the simpler theory presented in Section 3.5.2.
+D?;jj 1⁄4 1
+n ffiffiffiffiffiffiffiffiffi
+8 jk
+p
+cot þ i
+2n F1⁄2kraþð iÞ þ cot
+i
+2n F1⁄2kra ð iÞ
+cot þ r
+2n F1⁄2kraþð rÞ þ cot
+r
+2n F1⁄2kra ð rÞ
+2
+6664
+3
+7775 ð3:36Þ
+where
+i;r 1⁄4 0; 0 ; 0 2 ; n 1⁄4 2 b ð3:37Þ
+0
+Shadow boundary
+Ei
+Hi
+Ed
+Hd
+ri r
+Reflection boundary
+Region 1
+Region 2
+Region 3
+Figure 3.21: Geometry for wedge diffraction coefficient
+Propagation Mechanisms 57
+
+
+The function FðxÞ is an alternative definition of the Fresnel integral,
+FðxÞ 1⁄4 2jpffixffiffiejx
+ð1
+t1⁄4pffixffi
+ejt2 dt ð3:38Þ
+where a are the integers which most nearly satisfy
+2 na 1⁄4 ð3:39Þ
+The spreading factor Ad in Eq. (3.34) is given by
+Ad 1⁄4 1=pffirffi for plane cylindrical wave incidence
+ffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffiffi
+ri=rðr þ riÞ
+p for spherical wave incidence ð3:40Þ
+Keller’s GTD diffraction coefficient takes exactly the same form, but with the Fresnel integrals replaced by 1, since this is a reasonable approximation outside of the transition regions. The total field at any point in space is thus given by
+Et 1⁄4 EiðA0 þ U rRAr þ DAdÞ ð3:41Þ
+where A0, Ar and Ad are appropriate spreading factors and Ur 1⁄4 1 when a reflection exists and Ur 1⁄4 0 otherwise. The total field around a 0 wedge (i.e. a conducting half-plane) is illustrated in Figure 3.22. The influence of the three regions marked in Figure 3.21 is clearly
+0 50 100 150 200 250 300 350
+−20
+−15
+−10
+−5
+0
+5
+10
+Angle of Incidence, φ0 , [deg]
+Field [dB]
+Region (1) Region (2) Region (3)
+Figure 3.22: UTD solution for total field around a conducting half-plane. Here 0 1⁄4 90 ; r 1⁄4 10l and the polarisation is parallel
+58 Antennas and Propagation for Wireless Communication Systems
+
+
+visible. In region 1, the visible region, the field is the sum of the direct ray and the diffracted ray, plus a ray reflected from the surface. Since the wedge is perfectly conducting, the reflected wave has the same amplitude as the incident ray and complete cancellation of the two fields occurs at intervals, since the diffracted ray has negligibly small amplitude by comparison. In region 2, there is no reflection point on the wedge which can obey Snell’s law, so no reflection exists, and the diffraction is still very small, so the field is nearly at its free space value. In region 3, the shadow region, only the diffracted ray is present, and it diminishes in amplitude in a similar way to the simple knife-edge approximation (compared with Figure 3.15). UTD will be applied to practical propagation problems in Chapters 12 and 13.
+3.6 CONCLUSION
+All of the major propagation mechanisms have been introduced in this chapter, namely, reflection, refraction or transmission, scattering and diffraction. These complement the basic effects of attenuation and phase velocity which were introduced in Chapter 2 and provide a basis for practical prediction of wireless communication system performance in the rest of this book. Combinations of these mechanisms will be seen later to account for all of the observed effects in the wireless channel.
+REFERENCES
+[Balanis, 89] C. A. Balanis, Advanced engineering electromagnetics, John Wiley & Sons, Inc., New York, ISBN 0-471-62194-3, 1989. [Beckmann, 63] P. Beckmann and A. Spizzichino, The scattering of electromagnetic waves from rough surfaces, Macmillan, New York, ISBN 0-63010-108, 1963. [Ca ́tedra, 99] M. F. Ca ́tedra and J. Pe ́rez-Arriaga, Cell planning for wireless communications, Artech House, ISBN 0-89006-601-9, 1999. [ITU, 527] International Telecommunication Union, ITU-R Recommendation 527-3: Electrical characteristics of the surface of the earth, Geneva, 1992. [James, 80] G. L. James, geometrical theory of diffraction for electromagnetic waves, Peter Peregrinus, London, ISBN 0-906048-34-6, 1980. [Keller, 62] J. B. Keller, Geometrical theory of diffraction, Journal of the Optical Society of America, 52 (2), 116–130, 1962. [Kouyoumjian, 74] R. G. Kouyoumjian and P. H. Pathak, A uniform geometrical theory of diffraction for an edge in a perfectly conducting surface, Proceedings of IEEE, 62, 1448–1461, 1974. [Luebbers, 84] R. J. Luebbers, Finite conductivity uniform GTD versus knife edge diffraction in prediction of propagation path loss, IEEE Transactions on Antennas and Propagation, 32 (1), 70–76, 1984. [Volakis, 86] J. L. Volakis, A uniform geometrical theory of diffraction for an imperfectly conducting half-plane, IEEE Transactions on Antennas and Propagation, 34 (2), 172–180, 1986.
+PROBLEMS
+3.1 Prove Eqs. (3.13) and (3.15).
+Propagation Mechanisms 59
+
+
+3.2 Repeat Example 3.1 for the case of perpendicular polarisation and for the case where the polarisation is at 45 to the scattering plane. 3.3 Prove the expression for the Brewster angle (3.19). 3.4 When the angle of incidence of a plane wave onto a plane boundary between media is equal to the Brewster angle, all of the energy in the incident wave becomes transmitted into the second medium. At what incidence angle (the critical angle) does all of the energy in the incident wave become reflected? 3.5 Prove expressions (3.21) and (3.22) for the Rayleigh criterion. 3.6 Polaroid sunglasses reduce glare from road surfaces by permitting only one polarisation to be transmitted. Using the Fresnel reflection coefficients, explain whether vertical or horizontal polarisation should be transmitted. 3.7 A plane wave at 900 MHz is incident from free space onto a material with relative dielectric constant of 4. What are the phase velocity and wavelength of the refracted wave? 3.8 A transmitter and a receiver separated by 10 km operate at 400 MHz and are at the same height above the Earth. Relative to the transmitter, how much lower must an absorbing diffracting obstacle situated at the centre of the path be for negligible diffraction loss? Calculate the diffraction loss produced when the obstacle is increased to 10 m above the transmitter height. 3.9 Use Keller’s GTD to repeat Problem 3.7, for both horizontal and vertical polarisations, assuming a conducting knife-edge in place of the absorbing knife-edge. 3.10 A microwave link is to be deployed in an urban area at 17 GHz. The transmitter antenna is to be located on a rooftop at 15 m. The receiver antenna is to be installed at 5 m above ground level. Determine the maximum height of a building at the centre of the path if transmitter and receiver antennas are separated by 5 km. 3.11 Determine the surface height variation required to consider a surface rough if a 900 MHz wave is incident on the surface at 30 to the normal. 3.12 Repeat problem 3.10 for the case when the radiowave is at a frequency of 60 GHz. Explain your answer.
+60 Antennas and Propagation for Wireless Communication Systems
+
+
+4 Antenna Fundamentals
+‘I do not think that the wireless waves I have discovered will have any practical application’. Heinrich R. Hertz
+4.1 INTRODUCTION
+Chapters 2 and 3 described how waves interact with materials in various ways. This chapter introduces the antennas responsible for generating and receiving these waves. It looks at the fundamental behaviour and parameters which characterise an antenna as a component within an overall wireless communication system, together with a description of the key types of antenna. More details of practical antennas based on these structures will be given in later chapters, particularly Chapter 15.
+4.2 PRINCIPLES
+4.2.1 What is an Antenna?
+Most fundamentally, an antenna is a way of converting the guided waves present in a waveguide, feeder cable or transmission line into radiating waves travelling in free space, or vice versa. Figure 4.1 shows how the fields trapped in the transmission line travel in one dimension towards the antenna, which converts them into radiating waves, carrying power away from the transmitter in three dimensions into free space. The art of antenna design is to ensure this process takes place as efficiently as possible, with the antenna radiating as much power from the transmitter into useful directions, particularly the direction of the intended receiver, as can practically be achieved.
+Antennas and Propagation for Wireless Communication Systems Second Edition Simon R. Saunders and Alejandro Arag ́on-Zavala ß 2007 John Wiley & Sons, Ltd
+Transmitter
+Guided 1D waves
+Transition region (antenna)
+Free space 3D waves
+Figure 4.1: The antenna as a transition region between guided and propagating waves
+
+
+4.2.2 Necessary Conditions for Radiation
+A question then arises as to what distinguishes the current in an antenna from the current in a guided wave structure. As Figure 4.2(a) shows, and as a direct consequence of Maxwell’s equations, a group of charges in uniform motion (or stationary charges) do not produce radiation. In Figure 4.2(b)–(d), however, radiation does occur, because the velocity of the charges is changing in time. In Figure 4.2(b) the charges are reaching the end of the wire and reversing direction, producing radiation. In Figure 4.2(c) the speed of the charges remains constant, but their direction is changing, thereby creating radiation. Finally, in Figure 4.2(d), the charges are oscillating in periodic motion, causing a continuous stream of radiation. This is the usual practical case, where the periodic motion is excited by a sinusoidal transmitter. Antennas can therefore be seen as devices which cause charges to be accelerated in ways which produce radiation with desired characteristics. Similarly, rapid changes of direction in structures which are designed to guide waves may produce undesired radiation, as is the case when a printed circuit track carrying high-frequency currents changes direction over a short distance.
+4.2.3 Near-Field and Far-Field Regions
+Close to an antenna, the field patterns change very rapidly with distance and include both radiating energy and reactive energy, which oscillates towards and away from the antenna, appearing as a reactance which only stores, but does not dissipate, energy. Further away, the reactive fields are negligible and only the radiating energy is present, resulting in a variation of power with direction which is independent of distance (Figure 4.3). These regions are conventionally divided at a radius R given by
+R 1⁄4 2L2
+l ð4:1Þ
+where L is the diameter of the antenna or of the smallest sphere which completely encloses the antenna [m] and l is the wavelength [m]. Within that radius is the near-field or Fresnel region,
++++
++++
+No radiation
++++
++++
+Radiation
++ + +
+Radiation
++++
++++
+Radiation
+(a)
+(b)
+(c)
+(d)
+Figure 4.2: Only accelerating charges produce radiation
+62 Antennas and Propagation for Wireless Communication Systems
+
+
+while beyond it lies the far-field or Fraunhofer region. Within the far-field region the wave fronts appear very closely as spherical waves, so that only the power radiated in a particular direction is of importance, rather than the particular shape of the antenna. Measurements of the power radiated from an antenna have either to be made well within the far field, or else special account has to be taken of the reactive fields. In siting an antenna, it is particularly important to keep other objects out of the near field, as they will couple with the currents in the antenna and change them, which in turn may greatly alter the designed radiation and impedance characteristics.
+4.2.4 Far-Field Radiation from Wires
+Many antenna types are composed only of wires with currents flowing on them. In this section, and in more detail in Section 4.4, we illustrate how the radiation from an antenna in the far field may be calculated from a knowledge of the current distribution on the wires. In Figure 4.4, an appropriate coordinate system is defined. It is usually most convenient to work in spherical coordinates (r; ; ) rather than Cartesian coordinates, with the antenna
+2L2
+L
+Far-field region
+Near-field region
+Radiating fields Reactive fields
+R=
+Figure 4.3: Definition of field regions
+x
+z
+y
+r
+r
+ˆ
+ˆˆ
+Figure 4.4: Coordinate system for antenna calculations
+Antenna Fundamentals 63
+
+
+under analysis placed at or near the origin. Often the z-axis is taken to be the vertical direction
+and the x–y plane is horizontal, in which case denotes the azimuth angle. Here ^r; ^and ^ are unit vectors in the directions of increase of the respective coordinates. The simplest wire antenna is a Hertzian dipole or infinitesimal dipole, which is a piece of straight wire whose length L and diameter are both very much less than one wavelength, carrying a current I(0) which is uniform along its length, surrounded by free space. If this dipole is placed along the z-axis at the origin, then, in accordance with Maxwell’s equations, it radiates fields which are given as follows. Note that a phase term ej!t has been dropped from these equations for simplicity, and all of the fields are actually varying sinusoidally in time.
+E 1⁄4 jZ0
+kIð0ÞLe jkr
+4 r 1þ 1
+jkr
+1
+ðkrÞ2
+"#
+sin
+Er 1⁄4 Z0
+Ið0ÞLe jkr
+2 r2 1 þ 1
+jkr cos
+H 1⁄4 j kIð0ÞLe jkr
+4 r 1þ 1
+jkr sin
+Hr 1⁄4 0; H 1⁄4 0; E 1⁄4 0
+ð4:2Þ
+In the far field, the terms in r2 and higher and can be neglected, so the fields are given by
+E 1⁄4 jZ0
+kIð0ÞLe jkr
+4 r sin
+H 1⁄4 j kIð0ÞLe jkr
+4 r sin
+Er 1⁄4 0; E 1⁄4 0; Hr 1⁄4 0; H 1⁄4 0
+ð4:3Þ
+The following points are important to note from Eq. (4.3):
+The only non-zero fields are E and H . Hence the total electric and magnetic fields are transverse to each other everywhere and the antenna produces pure linear polarisation in the direction. The ratio E =H 1⁄4 Z0, so the fields are in phase and the wave impedance is 120 ohms, just as for the plane waves in free space of Chapter 2. The field is inversely proportional to r. The directions of E, H and r form a right-handed set, so the Poynting vector is in the r-direction and carries power away from the origin in all directions. The fields are all zero at 1⁄4 0 and , but reach a maximum at 1⁄4 =2, i.e. in the x–y plane.
+These points justify the assumptions of geometrical optics which were introduced in Chapter 3: the waves are locally plane in the far field, and differ from plane waves only in that their amplitude is inversely proportional to the distance from the antenna. Another way of saying
+64 Antennas and Propagation for Wireless Communication Systems
+
+
+the same thing is that the wave fronts are actually spherical, but that a small section of the wave fronts is indistinguishable from a plane wave if observed sufficiently far from the antenna.
+4.3 ANTENNA PARAMETERS
+4.3.1 Radiation Pattern
+The radiation pattern of an antenna is a plot of the far-field radiation from the antenna. More specifically, it is a plot of the power radiated from an antenna per unit solid angle, or its radiation intensity U [watts per unit solid angle]. This is arrived at by simply multiplying the power density at a given distance by the square of the distance r, where the power density S [watts per square metre] is given by the magnitude of the time-averaged Poynting vector:
+U 1⁄4 r2S ð4:4Þ
+This has the effect of removing the effect of distance and of ensuring that the radiation pattern is the same at all distances from the antenna, provided that r is within the far field. The simplest example is an idealised antenna which radiates equally in all directions, an isotropic antenna. If the total power radiated by the antenna is P, then the power is spread over a sphere of radius r, so the power density at this distance and in any direction is
+S1⁄4 P
+area 1⁄4 P
+4 r2 ð4:5Þ
+The radiation intensity is then
+U 1⁄4 r2S 1⁄4 P
+4 ð4:6Þ
+which is clearly independent of r. In the case of the infinitesimal dipole, the time-averaged Poynting vector is given by
+Sav 1⁄4 1
+2 E H ^r ð4:7Þ
+Hence, using Eq. (4.3), the radiation pattern is
+U 1⁄4 r2 1
+2
+jE j2
+Z0
+1⁄4 Z0
+2
+KIð0ÞL 4
+2
+sin2 ð4:8Þ
+Radiation patterns are usually plotted by normalising the radiation intensity by its maximum value and plotting the result. This maximum value is at 1⁄4 =2. Equation (4.8) then yields
+U
+Umax
+1⁄4
+Z0 2
+KIð0ÞL 4
+2
+sin2
+Z0 2
+KIð0ÞL 4
+2 1⁄4 sin2 ð4:9Þ
+Antenna Fundamentals 65
+
+
+This pattern is plotted as a surface in Figure 4.5 with a cutaway portion to reveal the detail. A radiation pattern plot for a generic directional antenna is shown in Figure 4.6, illustrating the main lobe, which includes the direction of maximum radiation (sometimes called the boresight direction), a back lobe of radiation diametrically opposite the main lobe and several side lobes separated by nulls where no radiation occurs. The Hertzian dipole has nulls along the z-axis. Some common parameters used to compare radiation patterns are defined as follows:
+The half-power beamwidth (HPBW), or commonly the beamwidth, is the angle subtended by the half-power points of the main lobe. The pattern of the Hertzian dipole falls by onehalf at 1⁄4 =4 and 1⁄4 3 =4, so its half-power beamwidth is =2 1⁄4 90 . The front-back ratio is the ratio between the peak amplitudes of the main and back lobes, usually expressed in decibels. The sidelobe level is the amplitude of the biggest sidelobe, usually expressed in decibels relative to the peak of the main lobe.
+Figure 4.5: Radiation pattern of a Hertzian dipole. The section from 1⁄4 0 to 1⁄4 =2 has been cut away to reveal detail. The units are linear radiation intensity
+Figure 4.6: Radiation pattern of a generic antenna
+66 Antennas and Propagation for Wireless Communication Systems
+
+
+Two special cases of radiation patterns are often referred to. The first is the isotropic antenna, a hypothetical antenna which radiates power equally in all directions. This cannot be achieved in practice, but acts as a useful point of comparison. More practical is the omnidirectional antenna, whose radiation pattern is constant in, say, the horizontal plane but may vary vertically. The Hertzian dipole is thus clearly omnidirectional in the x–y plane as illustrated in Figure 4.5.
+4.3.2 Directivity
+The directivity D of an antenna, a function of direction, is defined by
+Dð ; Þ 1⁄4 Radiation intensity of antenna in direction ð ; Þ
+Mean radiation intensity in all directions 1⁄4 Radiation intensity of antenna in direction ð ; Þ
+Radiation intensity of isotropic antenna radiating the same total power
+ð4:10Þ
+Sometimes directivity is specified without referring to a direction. In this case the term ‘directivity’ implies the maximum value of Dð ; Þ 1⁄4 Dmax. It is also common to express the directivity in decibels. The use of the isotropic antenna as a reference in the second line of Eq. (4.10) is then emphasised by giving the directivity units of dBi:
+D1⁄2dBi 1⁄4 10 log D ð4:11Þ
+In the case of the Hertzian dipole, the directivity can be shown to be D 1⁄4 3=2, or approximately 1.8 dBi [Kraus, 01].
+4.3.3 Radiation Resistance and Efficiency
+The equivalent circuit of a transmitter and its associated antenna is shown in Figure 4.7. The resistive part of the antenna impedance is split into two parts, a radiation resistance Rr and a loss resistance Rl. The power dissipated in the radiation resistance is the power actually radiated by the antenna, and the loss resistance is power lost within the antenna itself. This may be due to losses in either the conducting or the dielectric parts of the antenna.
+Rl
+Rr
+Xa
+Xs
+Rs
+Transmitter Antenna
+Antenna terminals
+Figure 4.7: Equivalent circuit of transmitting antenna
+Antenna Fundamentals 67
+
+
+Although only the radiated power normally serves a useful purpose, it is useful to define the radiation efficiency e of the antenna as
+e 1⁄4 Power radiated
+Power accepted by antenna 1⁄4 Rr
+Rr þ Rl
+ð4:12Þ
+An antenna with high radiation efficiency therefore has high associated radiation resistance compared with the losses. The antenna is said to be resonant if its input reactance Xa 1⁄4 0. If the source impedance, Zs 1⁄4 Rs þ jXs, and the total antenna impedance, Za 1⁄4 Rr þ Rl þ jXa, are complex conjugates, i.e. Zs 1⁄4 Za then the source is matched to the antenna and a maximum of the source power is delivered to the antenna. If the match is not ideal, then the degree of mismatch can be measured using the reeflction coefficient r, defined by
+r 1⁄4 Vr
+Vi
+1⁄4 Za Zs
+Za þ Zs
+ð4:13Þ
+where Vr and Vi are the amplitudes of the waves reflected from the antenna to the transmitter and incident from the transmitter onto the antenna terminals, respectively. Note that this definition of r is exactly analogous to the reflection coefficient R defined in Chapter 3, but is here applied to the guided waves in the transmission line of the antenna rather than to waves propagating in other media. It is also common to measure the mismatch via the voltage standing wave ratio (VSWR), with an optimum value of 1:
+VSWR 1⁄4 1 þ jrj
+1 jrj ð4:14Þ
+It is common to design antennas to a standard input impedance of either 50 or 75 .
+4.3.4 Power Gain
+The power gain G, or simply the gain, of an antenna is the ratio of its radiation intensity to that of an isotropic antenna radiating the same total power as accepted by the real antenna. When antenna manufacturers specify simply the gain of an antenna they are usually referring to the maximum value of G. From the definition of efficiency (4.12), the directivity and the power gain are then related by
+Gð ; Þ 1⁄4 eDð ; Þ ð4:15Þ
+Gain may be expressed in decibels to emphasise the use of the isotropic antenna as reference, but see Eq. (4.31) for alternative units. Although the gain is, in principle, a function of both and together, it is common for manufacturers to specify patterns in terms of the gain in only two orthogonal planes, usually called cuts. In such cases the gain in any other direction may be estimated by assuming that the pattern is separable into the product of functions G and G which are functions of only and , respectively. Thus
+Gð ; Þ G ð ÞG ð Þ ð4:16Þ
+Figure 4.8 shows a practical example.
+68 Antennas and Propagation for Wireless Communication Systems
+
+
+−40
+−30
+−20
+−10
+0
+10
+20 −30 30
+−60 60
+−90 90
+−120 120
+−150 150
+0
+−40
+−30
+−20
+−10
+0
+10
+20 −30 30
+−60 60
+−90 90
+−120 120
+−150 150
+0
+−30 30
+−60 60
+−90 90
+0
+Pattern for φ = θ
+(a)
+(b)
+(c)
+Figure 4.8: Composite pattern calculation for a typical cellular base station antenna: (a) azimuthal pattern, 0 < < 2 ; 1⁄4 =2; (b) elevation pattern 1⁄4 0;0 < < 2 ; and (c) composite pattern in the plane 1⁄4 from Eq. (4.16) (reproduced by permission of Jaybeam Wireless)
+Antenna Fundamentals 69
+
+
+4.3.5 Bandwidth
+The bandwidth of an antenna expresses its ability to operate over a wide frequency range. It is often defined as the range over which the power gain is maintained to within 3 dB of its maximum value, or the range over which the VSWR is no greater than 2:1, whichever is smaller. The bandwidth is usually given as a percentage of the nominal operating frequency. The radiation pattern of an antenna may change dramatically outside its specified operating bandwidth.
+4.3.6 Reciprocity
+So far we have considered antennas only as transmitting devices. In order to consider their behaviour in receive mode, we use a very important principle: the reciprocity theorem. Applied throughout the rest of this book, the theorem is illustrated in Figure 4.9 and it states: If a voltage is applied to the terminals of an antenna A and the current measured at the terminals of another antenna B then an equal current will be obtained at the terminals of antenna A if the same voltage is applied to the terminals of antenna B.
+Thus, in Figure 4.9, if Va 1⁄4 Vb then the reciprocity theorem states that Ia 1⁄4 Ib and can be
+extended to show that Va
+Ia
+1⁄4 Vb
+Ib
+:
+A necessary consequence of this theorem is that the antenna gain must be the same whether used for receiving or transmitting, so all of the gain and pattern characteristics derived so far are fully applicable in receive mode. The reciprocity theorem holds very generally, for any linear time-invariant medium. There are some cases when transmission through the ionosphere with very high powers can contravene the assumption of linearity,1 but these cases are unlikely in the context of practical
+Antenna A
+Antenna B
+Energy flow
+Va
+Ib
+Antenna A
+Antenna B
+Energy flow
+Ia
+Vb
+Figure 4.9: The reciprocity theorem
+1This occurs because the wave energy causes ionisation of atoms in the ionosphere, so that the constitutive parameters of the medium change with the power in the wave. Chapter 7 gives more details of ionospheric propagation effects.
+70 Antennas and Propagation for Wireless Communication Systems
+
+
+transmission systems operated at VHF or above. Note how the reciprocity theorem does not state that the current distribution on the two antennas will be the same when receiving or transmitting, or that the way in which the field changes with respect to time or space at the two antennas will be the same.
+4.3.7 Receiving Antenna Aperture
+If an antenna is used to receive a wave with a power density S [W m 2], it will produce a power in its terminating impedance (usually a receiver input impedance) of Pr watts. The constant of proportionality between Pr and S is Ae, the effective aperture of the antenna in square metres:
+Pr 1⁄4 AeS ð4:17Þ
+For some antennas, such as horn or dish antennas, the aperture has an obvious physical interpretation, being almost the same as the physical area of the antenna, but the concept is just as valid for all antennas. The effective aperture may often be very much larger than the physical area, especially in the case of wire antennas. Note, however, that the effective aperture will reduce as the efficiency of an antenna decreases. The antenna gain G is related to the effective aperture as follows [Balanis, 97]:
+G1⁄44
+l2 Ae ð4:18Þ
+4.3.8 Beamwidth and Directivity
+The directivity of an antenna increases as its beamwidth is made smaller, as the energy radiated is concentrated into a smaller solid angle. For large antennas, with a single major
+lobe, the half-power beamwidths of the antenna in the ^and ^ directions may be related to its directivity by the following approximate formula:
+D 41; 000
+HP HP
+ð4:19Þ
+where HP and HP are the half-power beamwidths in degrees.
+4.3.9 The Friis Formula: Antennas in Free Space
+Assume that antenna A and antenna B in Figure 4.9 are arranged such that their directions of maximum gain are aligned, their polarisations are matched and they are separated by a distance r, great enough that the antennas are in each other’s far-field regions. If the power input to antenna A is Pt, then the power density incident on antenna B in accordance with (4.5) is
+S 1⁄4 PtGa
+4 r2 ð4:20Þ
+Antenna Fundamentals 71
+
+
+where Ga is the maximum gain of antenna A. Applying Eq. (4.17), the received power at the terminals of antenna B is then
+Pr 1⁄4 PtGaAeb
+4 r2 ð4:21Þ
+where Aeb is the effective aperture of antenna B. If Eq. (4.18) is substituted for Aeb, then the received and transmitted powers are related as follows:
+Pr
+Pt
+1⁄4 GaGb
+l 4r
+2
+ð4:22Þ
+This is the Friis transmission formula and its consequences for the range of wireless communication systems will be thoroughly explored in later chapters. If this same derivation is applied, but with B transmitting and A receiving, then exactly the same result is obtained as in (4.22), in accordance with the reciprocity theorem. The Friis formula exhibits an inverse square law, where the received power diminishes with the square of the distance between the antennas. In practical free space conditions, the received power may be less than that predicted by (4.22) if the polarisation states of the antennas are not matched or if the source and load impedances do not match the antenna impedances.
+4.3.10 Polarisation Matching
+The Friis formula (4.22) must be modified in the general case to account for the mismatch between the polarisation state of the incoming wave and that of the receiving antennas. In Chapter 2 it was shown that the polarisation state of a plane wave could be expressed in terms of the relative amplitudes of the orthogonal components of the electric field:
+E 1⁄4 E0ðE ^þ E ^Þ 1⁄4 E0pw ð4:23Þ
+where E0 is the electric field amplitude and pw is the polarisation vector of the wave. For example, circular polarisation can be described by
+pw 1⁄4
+^pffi2ffijffi ^ for right-hand circular polarisation
+^pþffi2ffijffi ^ for left-hand circular polarisation
+8>>><
+>>>:
+ð4:24Þ
+Similarly, the polarisation state of an antenna can be written in the same way, with pa denoting the polarisation vector of the far field produced by an antenna in a given direction. By applying reciprocity, it is clear that the polarisation response of the antenna is the same when used in receive mode. The polarisation mismatch loss is the ratio between the power received
+72 Antennas and Propagation for Wireless Communication Systems
+
+
+by the antenna and the power which would be received by an antenna perfectly matched to the incident wave [Stutzman, 81]:
+L 1⁄4 Preceived
+Pmatched
+1⁄4 pw pa
+jpwj jpaj
+2
+ð4:25Þ
+where . denotes the vector dot product. The Friis formula (4.22) must be multiplied by this formula whenever pa 61⁄4 pw. In free space, the polarisation state of the received wave is the same as that of the transmitter antenna. In more complicated media, which may involve polarisation-sensitive phenomena such as reflection, refraction and diffraction, the wave polarisation is modified during propagation in accordance with the principles in Chapter 3.
+4.4 PRACTICAL DIPOLES
+4.4.1 Dipole Structure
+In Section 4.2.4, the Hertzian dipole was assumed to have a uniform current distribution. In this section the current distribution of dipoles of varying lengths is examined and shown to modify the radiation pattern. If a length of two-wire transmission line is fed from a source at one end and left opencircuit at the other, then a wave is reflected from the far end of the line. This returns along the line, interfering with the forward wave. The resulting interference produces a standing wave pattern on the line, with peaks and troughs at fixed points on the line (upper half of Figure 4.10). The current is zero at the open-circuit end and varies sinusoidally, with zeros of current spaced half a wavelength apart. The current flows in opposite directions in the two wires, so the radiation from the two elements is almost exactly cancelled, yielding no far-field radiation.
+Lobe
+Null
+I(0)
+L2
+λ/2
+Figure 4.10: From transmission line to dipole
+Antenna Fundamentals 73
+
+
+If a short section of length L/2 at the end of the transmission line is bent outwards, it forms a dipole perpendicular to the original line and of length L (lower half of Figure 4.10). The currents on the bent section are now in the same direction, and radiation occurs. Although this radiation does change the current distribution slightly, the general shape of the current distribution remains the same and a sinusoidal approximation may be used to analyse the resulting radiation pattern. Some qualitative results may be deduced before the full analysis:
+As the dipole is rotationally symmetric around its axis, it must be omnidirectional, whatever the current distribution. In a plane through the transmission line and perpendicular to the plane of the page in Figure 4.10, the distance from the arms of the dipole to all points is equal. Hence the radiation contributions from all parts of the dipole will add in phase and a lobe will always be produced. The current always points directly towards or away from all points on the axis of the dipole, so no radiation is produced and a null appears at all such points.
+For the Hertzian dipole, the radiated field was proportional to the dipole length in Eq. (4.8). It is desirable to increase the overall field of the antenna by increasing its directivity. Two steps are required in order to calculate the radiated field of a longer dipole; first an expression for the current distribution is determined (Section 4.4.2), then the effects of short sections ( l) of the dipole are summed in the far field as if they were individual Hertzian dipoles to determine the total field (Section 4.4.3).
+4.4.2 Current Distribution
+The uniform transmission line illustrated in Figure 4.10 has a sinusoidal current distribution before it is bent. An exact calculation of the current distribution on a dipole must account for the variation in capacitance and inductance along the line as well as the effect of the radiation away from the dipole. However, the current distribution on the dipole may initially be assumed unchanged from the transmission line case. Standard transmission line theory then gives
+IðzÞ 1⁄4 Ið0Þ sin k L
+2 jzj ð4:26Þ
+where I(0) is the current at the feed point, assuming that the dipole is aligned with the z-axis and centred on the origin. This distribution is shown in Figure 4.11 for various dipole lengths. It turns out that these results are exact if the wire forming the dipole is infinitesimally thin, and they are good approximations if the wire thickness is small compared with its length.
+4.4.3 Radiation Pattern
+The current distributions of Figure 4.11 can be used to calculate the corresponding dipole radiation patterns by summing the small field contributions dE , dEr and dH from a series of
+74 Antennas and Propagation for Wireless Communication Systems
+
+
+Hertzian dipoles of length dL, with current contributions set by their position on the dipole in accordance with Eq. (4.26) and their radiation by Eq. (4.3). Thus the far-field contribution from a Hertzian dipole located on the z-axis at position z is
+dE 1⁄4 jZ0
+kIðzÞe jkr
+4 r ejkz cos sin dL
+dEr 1⁄4 0; dHr 1⁄4 0; dH 1⁄4 0
+dH 1⁄4 j kIðzÞe jkr
+4 r ejkz cos sin dL
+ð4:27Þ
+where the ejkz cos phase term accounts for the extra path length associated with an element at z compared with one at the origin.
+The total E field is therefore
+E1⁄4
+Lð=2
+L=2
+dE 1⁄4 jZ0
+ke jkr
+4 r sin
+Lð=2
+L=2
+IðzÞejkz cos dz ð4:28Þ
+The result of these calculations is
+E 1⁄4 jZ0Ið0Þe jkr
+2r
+cos kL
+2 cos cos kL
+l
+sin ð4:29Þ
+–0.5 0 0.5
+0
+0.5
+1
+–1 0 1
+–1
+–0.5
+0
+0.5
+1
+–5 0 5
+0
+0.5
+1
+–0.5 0 0.5
+0
+0.5
+1
+L = 0.01 L = 0.5
+L = L = 1.5
+Figure 4.11: Dipole current distribution for various lengths; y-axis is the current normalised to the feed-point current, I(0)
+Antenna Fundamentals 75
+
+
+This pattern is omnidirectional with nulls along the z-axis, just as for the Hertzian dipole. A similar calculation can be performed for H , but it is simpler to use the relation established in Section 4.2.4.
+E
+H 1⁄4 Z0 ð4:30Þ
+Equation (4.29) is plotted in Figure 4.12 for the same dipole lengths as Figure 4.11. In the case of L 1⁄4 0:01l the radiation pattern is essentially identical to the Hertzian dipole: despite the current distribution being non-uniform, the radiation contributions are so closely located that they sum as if the current was indeed constant along the dipole length. As the length increases through 0:5l to l, the HPBW increases through 78 to 47 . Above around L 1⁄4 1:2l, however, the pattern becomes multilobed, which is rarely useful in practice. Note also that the magnitude of the field is itself strongly dependent upon the
+0.0001
+0.0002
+0.0003
+0.0004
+0.0005
+30
+210
+60
+240
+90
+270
+120
+300
+150
+330
+180 0
+0.2
+0.4
+0.6
+0.8
+1
+30
+210
+60
+240
+90
+270
+120
+300
+150
+330
+180 0
+0.4
+0.8
+1.2
+1.6
+2
+30
+210
+60
+240
+90
+270
+120
+300
+150
+330
+180 0
+0.2
+0.4
+0.6
+0.8
+1
+1.2
+1.4
+30
+210
+60
+240
+90
+270
+120
+300
+150
+330
+180 0
+L = 0.01 l
+L = l L = 1.5 l
+L = 0.5 l
+Figure 4.12: Pattern factors for dipoles of various lengths
+76 Antennas and Propagation for Wireless Communication Systems
+
+
+antenna length. The most common length is the half-wave dipole (L 1⁄4 0:5l), which has significant directivity, high efficiency and relatively compact size. The directivity of the half-wave dipole is 1.64 or 2.15 dBi. As the half-wave dipole is an easily controlled, realisable antenna, whereas the isotropic antenna is not, it is common for antenna manufacturers to measure and quote antenna gains and directivities referenced to the half-wave dipole, in which case a suffix ‘d’ is used. Thus
+0 dBd 1⁄4 2:15 dBi ð4:31Þ
+The above analysis of the dipole illustrates one general means of analysing antennas: first the current distribution is determined, and then contributions from infinitesimal elements are summed to find the radiation pattern. The first step is usually the most complicated, as simple approximations like the transmission line analogy above cannot always be used. Specific methods are beyond the scope of this book; see [Balanis, 97] for more details.
+4.4.4 Input Impedance
+A thin, lossless dipole, exactly half a wavelength long, has an input impedance Za 1⁄4 73 þ j42:5 . It is desirable to make it exactly resonant, which is usually achieved in practice by reducing its length to around 0:48l, depending slightly on the exact conductor radius and on the size of the feed gap. This also reduces the radiation resistance.
+4.5 ANTENNA ARRAYS
+4.5.1 Introduction
+The maximum directivity available from a single dipole was shown in Figure 4.12 to be limited to that which can be achieved with a dipole a little over one wavelength. In some applications this may not be sufficient. One approach to improving on this is to combine arrays of dipoles, or of other antenna elements, where the amplitude and phase with which each element is fed may be different. The fields produced by the elements then combine with different phases in the far field, and the radiation pattern is changed. This also allows the radiation pattern to be tailored according to the particular application, or varied to allow beam scanning without any physical antenna motion. If the amplitude and phase weights are controlled electronically, then the beam can be scanned very rapidly to track changes in the communication channel. This is the topic of Chapter 18.
+4.5.2 Linear and Planar Arrays
+Arrays may be linear or planar, as shown in Figure 4.13. A linear array allows beam steering in one dimension, permitting directivity to be obtained in a single plane, hence an omnidirectional pattern can be synthesised. A planar array has two dimensions of control, permitting a narrow pencil beam to be produced.
+4.5.3 The Uniform Linear Array
+The simplest array type is the uniform linear array, which is a linear array with equal interelement spacing and a progressive phase shift across the array. In this case the field
+Antenna Fundamentals 77
+
+
+pattern of the total array is equivalent to the pattern of the individual elements multiplied by an array factor, whose normalised value is
+Fa 1⁄4 sinðnc=2Þ
+ðnc=2Þ where c 1⁄4 2 d
+l cos þ a ð4:32Þ
+Here n is the number of elements, d is the interelement spacing and a is the phase shift between adjacent elements. The weight applied to the ith element is then ai 1⁄4 ejði 1Þa. The peak gain is 20 log n dB greater than that for a single element, so in principle the gain may be increased to any desired level. The weights may be created by splitting the signal through a phasing network, consisting of lengths of transmission line of increasing length for each element. Figure 4.14 shows the radiation pattern which can be obtained from a 10-element uniform linear array.
+4.5.4 Parasitic Elements: Uda–Yagi Antennas
+Another array-based approach to enhancing the directivity of dipole antennas is to use parasitic elements. Parasitic elements are mounted close to the driven dipole and are not connected directly to the source. Instead, the radiation field of the driven element induces currents in the parasitics, causing them to radiate in turn. If the length and position of the parasitic elements are chosen appropriately, then the radiation from the parasitics and the driven element add constructively in one direction, producing an increase in directivity. The classic form of such an antenna is the Uda–Yagi, or simply Yagi antenna, illustrated in Figure 4.15 and widely used as a television reception antenna. Typically, the driven element is made a little shorter than l=2, to permit a good match to 50 . Elements in the radiation direction, called directors, are made a little shorter than the driver element, and an element very close to l=2 is placed behind and called the reeflctor . Increasing the number of directors increases the gain, although the improvement diminishes
+a1
+a2
+a3
+a4
+a5
+a6
+Linear array
+1D beam control
+Planar array
+2D beam control
+Individual antenna elements
+Transmitter or receiver
+Weights
+Figure 4.13: Array types: Each array element transmits a signal which is a version of the same signal, apart from a weighting coefficient ai
+78 Antennas and Propagation for Wireless Communication Systems
+
+
+according to how far the director is from the driven element. A 4-director Yagi can have a gain of up to around 12 dBi.
+4.5.5 Reflector Antennas
+Reflector antennas rely on the application of image theory, which may be described as follows. If an antenna carrying a current is placed adjacent to a perfectly conducting plane, the ground plane, then the combined system has the same fields above the plane as if an image
+0.2
+0.4
+0.6
+0.8
+1
+30
+210
+60
+240
+90
+270
+120
+300
+150
+330
+180 0
+Figure 4.14: Array factor for a 10-element uniform linear array: a 1⁄4 0 and d 1⁄4 l=2
+Driven element
+Reflector Directors
+Maximum radiation
+Figure 4.15: The Uda–Yagi antenna
+Antenna Fundamentals 79
+
+
+of the antenna were present below the plane. The image carries a current of equal magnitude to the real antenna but in the opposite direction and is located an equal distance from the plane as the real antenna but on the other side, as shown in Figure 4.16. This statement is a consequence of Snell’s law of reflection, given the Fresnel reflection coefficients for a perfect conductor, as described in Chapter 3.
+4.5.6 Monopole Antennas
+The monopole antenna results from applying image theory to the dipole. If a conducting plane is placed below a single element of length L=2 carrying a current, then the combined system acts essentially identically to a dipole of length L except that the radiation takes place only in the space above the plane, so the directivity is doubled and the radiation resistance is halved (Figure 4.17). The quarter-wave monopole (L=2 1⁄4 l=4) thus approximates the half-wave dipole and is a very useful configuration in practice for mobile antennas, where the conducting plane is the car body or handset case.
+4.5.7 Corner Reflectors
+The monopole principle can be extended by using two reflectors. This results in multiple images and a correspondingly increased gain. This is known as the corner reflector antenna.
+Figure 4.16: Illustrating image theory
+L/2
+Figure 4.17: Image theory applied to the monopole antenna
+80 Antennas and Propagation for Wireless Communication Systems
+
+
+In Figure 4.18 the gain is up to 12 dBi. Variations on this type of antenna are often used in cellular base station sites.
+4.5.8 Parabolic Reflector Antennas
+The parabolic (dish) antenna Figure 4.19 extends the reflector antenna concept to curved reflectors. In this case the number of images is effectively infinite and the locations of the images are such as to produce a parallel beam from the reflector, provided that the driven element is placed at the focus of the parabola. The antenna then acts like an infinite uniform array and the array factor can therefore be found from Eq. (4.32) by setting a 1⁄4 0; nd 1⁄4 D, where D is the diameter of the dish, and letting n ! 1. This yields
+P 1⁄4 sin D cos
+l
+D cos
+l ð4:33Þ
++
++
+
+
+0.5
+Reflector
+Driven element
+Images
+Figure 4.18: The corner reflector antenna
+Images
+Driven element
+Parabolic reflector
+Figure 4.19: A parabolic reflector (dish) antenna
+Antenna Fundamentals 81
+
+
+The result is shown in Figure 4.20 for various values of D. The gain can be increased essentially arbitrarily by enlarging the size of the dish; this makes it appropriate for longrange communications applications, such as satellite systems.
+In general, the gain of a parabolic dish antenna is given by
+G1⁄4 D
+l
+2
+ð4:34Þ
+where is the antenna efficiency as a fraction, D is the diameter of the dish [m] and l is the wavelength [m]. The efficiency is dependent on the material and accuracy of the dish construction and the details of the feed system.
+4.6 HORN ANTENNAS
+The horn antenna is a natural evolution of the idea that any antenna represents a region of transition between guided and propagating waves (Figure 4.1). Horn antennas are highly suitable for frequencies (typically several gigahertz and above) where waveguides are the standard feed method, as they consist essentially of a waveguide whose end walls are flared outwards to form a megaphone-like structure (Figure 4.21). In the case illustrated, the aperture is maintained as a rectangle, but circular and elliptical versions are also possible. The dimensions of the aperture are chosen to select an appropriate resonant mode, giving rise to a controlled field distribution over the aperture. The best patterns (narrow main lobe, low side lobes) are produced by making the length of the horn large compared to the aperture
+D= D=2
+D=4 D=8
+Figure 4.20: Array factors for parabolic dish antennas of various diameters
+Figure 4.21: The rectangular horn antenna
+82 Antennas and Propagation for Wireless Communication Systems

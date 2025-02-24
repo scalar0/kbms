@@ -1,0 +1,2085 @@
+Mécanique
+des Milieux Continus
+Sujets de TD
+GUILLAUME PUEL
+CENTRALESUPÉLEC
+2023–2024 1EL5000
+
+
+© 2023 – G. PUEL
+Style LATEX inspiré de http://www.latextemplates.com
+Août 2023
+
+
+Table des matières
+1 Déformations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+1.1 Déformations de grilles 1 1.2 Cisaillement d’un tube cylindrique 3 1.3 Torsion d’un joint hémisphérique 4 1.4 Grande flexion d’une poutre 4
+2 Contraintes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+2.1 Torsion d’un arbre de section triangulaire 6 2.2 Champ de contraintes dans une poutre 7 2.3 Essai brésilien 7 2.4 Contraintes sous un bâtiment 9
+3 Critères de résistance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+3.1 Barrage poids 12 3.2 Essai de cisaillement d’un joint de colle 13 3.3 Torsion d’un arbre de transmission cylindrique 15 3.4 Allègement d’un élément de structure 17
+4 Comportement des matériaux . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+4.1 Tassement d’une couche de sol 20 4.2 Résistance d’un tunnel 22 4.3 Compression d’un barreau libre ou contraint 23 4.4 Coin soumis à l’écoulement d’un fluide visqueux 24
+4.5 Étude mécanique d’une tige de bambou 25
+
+
+4.6 Dilatomètre différentiel 27 4.7 Récipient en pyrex chauffé 29 4.8 Rupture de l’AquaDom de Berlin 30
+5 Élasticité infinitésimale . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33 5.1 Rigidité d’une liaison élastique 33 5.2 Poutre rectangulaire soumise à une contrainte de cisaillement 35 5.3 Planète soumise à l’action de son propre champ de pesanteur 36 5.4 Frettage 37 5.5 Liaison collée 41 5.6 Retrait thermique du propergol dans un booster de fusée 43 5.7 Essai de dépression hydrostatique 46 5.8 Dislocation vis 49 5.9 Bilame thermomécanique 51
+6 Approximation des poutres . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53 6.1 Microscope à force atomique 53 6.2 Grue de déménagement 54 6.3 Déformée d’un manche de guitare et barre de réglage 55 6.4 Pilier avec contreventement 57 6.5 Clé démonte-roue 58 6.6 Déformation d’une aile d’avion 59 6.7 Optimisation d’une poutre console 60 6.8 Essai de Iosipescu 62 6.9 Tenue mécanique d’un booster de fusée 64 6.10 Pont à haubans 65 6.11 Pilier de téléphérique 67 6.12 Lampadaire à deux bras 69
+
+
+1. Déformations
+1.1 Déformations de grilles
+Une possibilité courante de mesure de champs de déformations sur la surface d’un solide consiste à utiliser des grilles de pas bien calibrés, qui permettent alors de visualiser directement les effets de la transformation géométrique appliquée. Le but des deux exemples qui suivent est de confronter les champs de déformation obtenus par le calcul à la visualisation des grilles déformées.
+Cas 1 – Extension-distorsion
+On considère un cube de côté L, pour lequel une particule matérielle est caractérisée dans la configuration initiale par le vecteur position suivant :
+p = p1i1 + p2i2 + p3i3, pi ∈ [−L/2, L/2]
+où (i1, i2, i3) est la base cartésienne associée aux arêtes du cube, et (p1, p2, p3) le système de cordonnées
+cartésiennes associé, centré sur le centre du cube. On suppose que les six faces du cube sont recouvertes chacune d’une grille carrée, de pas L/10.
+
+
+2 Chapitre 1. Déformations
+On déforme le cube de façon à ce que le placement d’une particule matérielle dans la configuration actuelle s’écrive comme :
+x = x1i1 + x2i2 + x3i3 = f(p,t) = (p1 + α(t)p1 p2)i1 + (p2 + α(t)p1 p2)i2 + p3i3
+où α(t) est une fonction scalaire du temps.
+1. À l’aide de la figure ci-dessus qui représente la grille déformée (en rouge) de la face de coordonnée x3 = L/2 et le champ de déplacement associé (en bleu), interpréter physiquement le placement proposé.
+2. Calculer le tenseur gradient F de la transformation. Interpréter physiquement ce dernier à l’aide de la figure ci-dessus. 3. En déduire l’expression du tenseur des déformations de Green-Lagrange E. Donner l’interprétation physique de chacun des termes de ce dernier. On pourra s’aider des figures ci-dessous, obtenues pour
+L = 1 m et α(t) = 0,2 m−1.
+4. Que devient E si l’on fait l’hypothèse que L|α(t)| ≪ 1, ∀t ? Comparer l’expression obtenue avec celle du tenseur des petites déformations, calculé dans le cadre de l’hypothèse des petites perturbations comme :
+
+ε(x,t) = 1
+2
+(Dxu(x,t) + Dxu(x,t)T)
+à partir du champ de déplacement u(x,t) = α(t)x1x2(i1 + i2).
+Cas 2 – Expansion radiale
+On considère un cylindre de hauteur L et de rayon R, pour lequel une particule matérielle est caractérisée dans la configuration initiale par le vecteur position suivant :
+p = prir(pθ ) + pziz, pr ∈ [0, R], pθ ∈ [0, 2π[, pz ∈ [−L/2, L/2]
+où (ir(pθ ), iθ (pθ ), iz) est la base cylindrique associée au cylindre, et (pr, pθ , pz) le système de cordonnées
+cylindriques associé. On suppose que les faces du cylindre sont recouvertes de grilles de pas constants.
+
+
+1.2 Cisaillement d’un tube cylindrique 3
+On déforme le cylindre de façon à ce que le placement d’une particule matérielle dans la configuration actuelle s’écrive comme :
+x = rir(θ ) + ziz = f(p,t) = (pr + α(t)pr2
+)ir(pθ ) + pziz, avec θ = pθ
+où α(t) est une fonction scalaire du temps.
+1. À l’aide des figures ci-dessus qui représentent les grilles déformées (en rouge) et les champs de déplacements associés (en bleu), interpréter physiquement le placement proposé. 2. Calculer le tenseur gradient F de la transformation. Interpréter physiquement ce dernier à l’aide des figures ci-dessus. 3. En déduire l’expression du tenseur des déformations de Green-Lagrange E. Donner l’interprétation physique de chacun des termes de ce dernier. On pourra s’aider des figures ci-dessous, obtenues pour
+R = 0,5 m et α(t) = 0,15 m−1.
+4. Que devient E si l’on fait l’hypothèse que R|α(t)| ≪ 1, ∀t ? Comparer l’expression obtenue avec celle du tenseur des petites déformations, calculé dans le cadre de l’hypothèse des petites perturbations comme :
+
+ε(x,t) = 1
+2
+(Dxu(x,t) + Dxu(x,t)T)
+à partir du champ de déplacement u(x,t) = α(t)r2ir(θ ).
+1.2 Cisaillement d’un tube cylindrique
+On considère un tube creux qui, dans sa configuration initiale, a la forme d’un cylindre de révolution de rayons Ri et Re, et de hauteur H. Compte tenu de la géométrie, on utilise comme paramétrage les coordonnées
+cylindriques (pr, pθ , pz) associées à la base (ir(pθ ), iθ (pθ ), iz), où iz correspond à l’axe du cylindre ; une
+particule matérielle est donc caractérisée dans la configuration initiale par le vecteur position suivant :
+p = prir(pθ ) + pziz
+On déforme le tube de façon à ce que le placement d’une particule matérielle dans la configuration actuelle s’écrit comme :
+x = rir(θ ) + ziz = f(p,t) = prir(pθ ) + (pz + u(pr,t))iz
+où le déplacement axial s’écrit : u(pr,t) = c(t)(pr − Ri), ∀pr ∈ [Ri, Re], ∀t.
+1. Interpréter physiquement le placement proposé. 2. Montrer que le tenseur gradient de la transformation s’écrit comme :
+F(p,t) = I + c(t)iz ⊗ ir(pθ )
+3. En déduire l’expression du tenseur des déformations de Green-Lagrange E. Donner l’interprétation physique de chacun des termes de ce dernier. 4. Que devient E si l’on fait l’hypothèse que |c(t)| ≪ 1, ∀t ?
+
+
+4 Chapitre 1. Déformations
+On suppose que le tube est en fait une colle qui occupe l’espace situé entre deux objets cylindriques de rayons respectifs Ri = 30 mm et Re = 31 mm, et que cette colle rompt dès que la déformation locale selon
+une direction dépasse 10%.
+5. Pour quelle valeur du déplacement axial u(Re) y a-t-il rupture ?
+1.3 Torsion d’un joint hémisphérique
+On s’intéresse à la déformation d’un joint élastique collé entre deux calottes concentriques de forme hémisphérique, et de rayons respectifs R1 < R2 : dans sa configuration initiale, non déformée, le joint occupe
+donc le domaine :
+Ω0 = {p = prer(pθ , pφ )|R1 ≤ pr ≤ R2, 0 ≤ pθ ≤ π/2, 0 ≤ pφ < 2π}
+où (r, θ , φ ) est un système de coordonnées sphériques, de base associée (er, eθ , eφ ), comme représenté
+ci-dessous.
+On suppose alors que la calotte interne (de rayon R1) est fixe, tandis que l’externe (de rayon R2) tourne
+autour de l’axe iz (qui est la normale à la section plane des hémisphères) : ceci implique que les particules du
+joint se retrouvent alors dans une configuration actuelle à laquelle on associe le vecteur position :
+x = rer(θ , φ ) = f(p) = prer
+(pθ , pφ + α(pr)), ∀pr ∈ [R1, R2], ∀pθ ∈ [0, π/2], ∀pφ ∈ [0, 2π[
+où α(pr) est une fonction scalaire donnée.
+1. Interpréter physiquement le mouvement des particules du joint. 2. Montrer que :
+R = er
+(pθ , pφ +α(pr))⊗er(pθ , pφ )+eθ
+(pθ , pφ +α(pr))⊗eθ (pθ , pφ )+eφ
+(pφ +α(pr))⊗eφ (pφ )
+est un tenseur de rotation, qui vérifie notamment RTR = I. 3. Montrer que le gradient F de la transformation peut s’écrire comme :
+F(p) = R(p)(I + prα′(pr) sin θ eφ (pφ ) ⊗ er(pθ , pφ )), ∀p ∈ Ω0
+Quelle est l’interprétation physique de ce résultat ? 4. En déduire l’expression du tenseur des déformations de Green-Lagrange E. Donner l’interprétation physique de chacun des termes de ce dernier. 5. Que devient E si l’on fait l’hypothèse que R2|α′(pr)| ≪ 1, ∀pr ∈ [R1, R2] ?
+1.4 Grande flexion d’une poutre
+On considère une poutre verticale de longueur L et d’épaisseur 2h dont le mouvement est selon un plan de base cartésienne (i1, i2) ; on suppose alors que toute l’étude peut se faire de façon bidimensionnelle dans
+ce plan, en repérant la position initiale d’une particule comme :
+p = p1i1 + p2i2, ∀p1 ∈ [−h, h], ∀p2 ∈ [0, L]
+On considère une position courbée générique de la poutre, donnée à un instant t par le placement :
+x = f(p,t) = xG(p2,t) + p1ir
+(θ (p2,t)), ∀p1 ∈ [−h, h], ∀p2 ∈ [0, L]
+où xG(p2,t) et θ (p2,t) sont deux fonctions connues a priori, et (ir(θ ), iθ (θ )) est une base polaire du plan.
+
+
+1.4 Grande flexion d’une poutre 5
+1. Quelle est l’interprétation physique de ce mouvement générique ? En particulier, vis-à-vis de la poutre étudiée, à quoi correspondent les points G (de placements associés xG(p2,t)), et la direction
+ir
+(θ (p2,t) ?
+2. Calculer le tenseur des déformations de Green-Lagrange E en fonction de xG(p2,t) et de θ (p2,t),
+ainsi que de leurs dérivées. 3. Que vaut la déformation 〈Ei1 , i1
+〉 ? Quelle est l’interprétation physique de ce résultat ?
+On considère désormais une position particulière de la poutre, indépendante du temps, et caractérisée par :
+xG(p2) = L
+π
+(
+− i1 + ir
+(θ (p2))
+)
+, avec θ (p2) = π p2
+L
+En outre, la poutre étudiée est de longueur L = 2 m, et d’épaisseur 2h = 40 cm.
+4. Décrire la forme prise par la poutre dans ce cas particulier. 5. Donner l’expression de la déformation 〈Ei2 , i2
+〉. Où se trouvent les valeurs extrêmes de cette déformation ? Comment se justifient-elles physiquement ? 6. Que vaut la distorsion 〈Ei1 , i2
+〉 ? Quelle est l’interprétation physique de ce résultat ? 7. Que devient la distorsion 〈Ei1 , i2
+〉 si le placement s’écrit désormais x = xG(p2) + p1ir
+(1, 1θ (p2)) ?
+On considère de nouveau le cas d’un déplacement générique de la forme :
+u(p,t) = f(p,t) − p = xG(p2,t) + p1ir
+(θ (p2,t)) − p1i1 − p2i2
+= uG(p2,t) + p1
+(ir
+(θ (p2,t)) − i1
+), ∀p1 ∈ [−h, h], ∀p2 ∈ [0, L]
+où uG(p2,t) = xG(p2,t) − p2i2 est le déplacement à l’instant t du point G de coordonnée p2, et on suppose
+maintenant que l’on peut se placer dans le cadre de l’hypothèse des petites perturbations.
+8. Calculer le tenseur des petites déformations
+
+ε(x,t). Interpréter physiquement les composantes.
+
+
+2. Contraintes
+2.1 Torsion d’un arbre de section triangulaire
+On considère un prisme droit Ωt , d’axe i3 et de hauteur H, qui présente une base en forme de triangle
+équilatéral de côté 2√3a. On associe à cette géométrie la base cartésienne (i1, i2, i3), où i1 est orienté selon
+une hauteur du triangle équilatéral, comme représenté sur la figure ci-dessous.
+En outre, on établit les équations cartésiennes des trois frontières latérales (Σ1, Σ2 et Σ3) du prisme, qui
+sont libres d’efforts :
+x1 − √3x2 + 2a = 0, ∀x ∈ Σ1, x1 + √3x2 + 2a = 0, ∀x ∈ Σ2, x1 − a = 0 ∀x ∈ Σ3
+On suppose par ailleurs que les surfaces Σ0 et ΣH aux extrémités du prisme (en x3 = 0 et x3 = H respective
+ment) sont soumises aux densités surfaciques d’efforts suivantes :
+fS0 = −k(x1 − a)x2i1 − k
+2
+(x12 + 2ax1 − x22
+)i2, ∀x ∈ Σ0
+fSH = k(x1 − a)x2i1 + k
+2
+(x12 + 2ax1 − x22
+)i2, ∀x ∈ ΣH
+où k est une constante connue. Enfin, on néglige les effets d’inertie et l’action de la pesanteur.
+On se propose, dans ce qui suit, de vérifier que le tenseur des contraintes suivant peut être solution du problème considéré :
+
+σ(x) = 2k(x1 − a)x2i1 ⊗S i3 + k(x12 + 2ax1 − x22
+)i2 ⊗S i3, ∀x ∈ Ωt
+où a ⊗S b = (a ⊗ b + b ⊗ a)/2, ∀a, b.
+
+
+2.2 Champ de contraintes dans une poutre 7
+1. Montrer que le tenseur des contraintes proposé vérifie l’équation d’équilibre local en tout point de l’intérieur du domaine. 2. Montrer que le tenseur des contraintes proposé vérifie l’ensemble des conditions aux limites sur les différentes frontières du domaine.
+En pratique, cet état de contraintes est obtenu à l’aide d’une machine d’essai, qui permet de piloter les résultantes et les moments des efforts surfaciques qui sont appliqués sur les deux extrémités du prisme.
+3. Montrer que la résultante des efforts appliqués sur la section x3 = 0 est nulle.
+4. Calculer le moment, exprimé en un point à choisir, des efforts appliqués sur la section x3 = 0.
+2.2 Champ de contraintes dans une poutre
+On considère un domaine Ωt de forme parallélépipédique, de directions associées aux vecteurs d’une
+base cartésienne (i1, i2, i3) et de dimensions longitudinale L et transverses 2c ; on suppose que cette poutre
+subit des sollicitations extérieures de telle façon qu’elle présente un champ de contraintes de la forme :
+
+σ(x) = p
+I
+(2
+3 x23 − x12x2 − 2c2
+5 x2
+)
+i1 ⊗ i1 + p
+I
+(
+c2x2 − x23
+3 −2
+3 c3
+)
+i2 ⊗ i2 + 2 p
+I
+(x22 − c2) x1i1 ⊗S i2
+avec p une constante connue et I = 4
+3 c3, et où les coordonnées (x1, x2, x3) associées à la base cartésienne
+vérifient 0 ≤ x1 ≤ L et −c ≤ x2, x3 ≤ c.
+1. Calculer dddiiivvvx
+
+σ(x), ∀x ∈ Ωt . Déduire de l’équation d’équilibre local quelles hypothèses ont été adoptées
+dans la modélisation. 2. Calculer le vecteur contrainte sur les faces x2 = c et x2 = −c. Que représente p ?
+3. On suppose que l’on coupe, par la pensée, la poutre Ωt selon une section d’abscisse x10 fixée ; calcu
+ler, à l’aide de l’expression de
+
+σ(x), la résultante et le moment exprimé au centre de la section (de
+coordonnées x1 = x10 et x2 = 0 = x3) de l’action mécanique de la partie {x ∈ Ωt |x1 > x10} sur la partie
+{x ∈ Ωt |x1 < x10}. Montrer que cette résultante et ce moment permettent de vérifier l’équilibre statique
+du tronçon {x ∈ Ωt |x1 < x10}.
+On suppose désormais que c ≪ L dans ce qui suit, et que l’on se place loin des extrémités x1 = 0 et
+x1 = L de la poutre.
+4. Compte tenu de ces hypothèses, donner l’expression approchée du tenseur des contraintes (qui ne se réduit alors qu’à une seule composante). Comment interpréter physiquement ce dernier ? 5. On suppose que la poutre considérée est une bonne approximation d’une aile d’avion d’envergure L = 20 m et de demi-épaisseur c = 1 m, où le phénomène de portance se traduit par :
+p = Czρa
+V2
+2
+avec Cz = 0, 8, V = 200 m/s et ρa = 1 kg/m3. Que vaut la contrainte longitudinale maximale σ11max ?
+2.3 Essai brésilien
+On considère un cylindre de révolution Ωt d’axe iz, de hauteur H et de diamètre D, soumis à un essai
+de compression diamétrale (ou essai « brésilien »), qui consiste à exercer à l’aide d’une machine d’essai deux actions de type glisseurs, se traduisant par des résultantes opposées, de norme P, et orientées selon un diamètre du cylindre, comme représenté sur la figure ci-dessous. On suppose en outre que l’on peut négliger les effets d’inertie et l’action de la pesanteur.
+
+
+8 Chapitre 2. Contraintes
+On se propose, dans ce qui suit, de vérifier que le tenseur des contraintes suivant peut être solution du problème considéré :
+
+σ(x) = k cos θ1
+r1 ir1 (θ1) ⊗ ir1 (θ1) + k cos θ2
+r2 ir2 (θ2) ⊗ ir2 (θ2) − k
+D (I − iz ⊗ iz), ∀x ∈ Ωt
+où k est une constante à déterminer, et (ir1 (θ1), iθ1 (θ1), iz
+) et (ir2 (θ2), iθ2 (θ2), iz
+) sont deux bases cylindriques associées aux points d’application des glisseurs, auxquelles on associe respectivement les coordonnées (r1, θ1, z) et (r2, θ2, z).
+1. Montrer que, pour une base cylindrique (ir(θ ), iθ (θ ), iz) quelconque, de coordonnées associées (r, θ , z),
+on a : dddiiivvvx
+( cos θ
+r ir(θ ) ⊗ ir(θ )
+)
+= 0, ∀x
+En déduire que dddiiivvvx
+
+σ(x) = 0, ∀x ∈ Ωt .
+2. Montrer que, en tout point de la surface latérale (sauf aux points d’application des glisseurs), on a :
+
+σn = 0, où n est la normale sortante unitaire en tout point de la surface latérale. 3. En coupant par la pensée le domaine Ωt selon un plan horizontal passant par l’axe du cylindre, et en
+isolant par exemple la moitié inférieure du domaine, déterminer l’expression de k en fonction de la
+charge P exercée. On utilisera pour cela qu’une primitive de 1
+(1 + x2)2 est x
+2(1 + x2) + arctan x
+2.
+4. Donner l’expression, en fonction de H, D et P, du vecteur contrainte au niveau d’un plan de coupure vertical passant par l’axe du cylindre. Interpréter physiquement le résultat.
+L’essai brésilien est couramment utilisé sur les chantiers pour déterminer la résistance à la traction du béton, qui est faible si on la compare avec celle d’autres matériaux couramment utilisés dans l’industrie. On suppose que l’on a mesuré une charge à la rupture Pmax = 20 kN pour une éprouvette cylindrique de diamètre
+et hauteur égaux : H = D = 10 cm. La rupture se fait alors selon le plan vertical évoqué dans la question précédente.
+5. Évaluer la résistance à la traction du béton mesurée à l’aide de l’essai brésilien. Quel est l’intérêt de ce dernier plutôt que d’effectuer un essai de traction « classique » sur l’éprouvette cylindrique ?
+
+
+2.4 Contraintes sous un bâtiment 9
+Les figures ci-dessous montrent les résultats d’une simulation numérique de l’essai brésilien, dans l’hypothèse d’une modélisation plane. Les comparaisons portent sur les composantes σ11, σ22 et σ12 (dans
+la base cartésienne (i1, i2) centrée sur l’éprouvette) des champs de contraintes numériques et analytiques.
+2.4 Contraintes sous un bâtiment
+On souhaite étudier le champ de contraintes au sein d’un sol soumis à la présence d’un bâtiment en surface. Pour simplifier l’étude, on considère que les dimensions du sol sont infinies ; le domaine que ce dernier occupe est ainsi Ω = {x = x1i1 + x2i2 + x3i3|x2 ≥ 0}, i2 étant défini comme le vecteur vertical unitaire
+descendant. La seule frontière à considérer est alors la surface Σ0 du sol en x2 = 0. On introduit en outre
+(ir(θ ), iθ (θ ), iz) la base cylindrique associée aux coordonnées (r, θ , z), centrée en (x1 = 0, x2 = 0) et telle
+que iz = i3 est horizontal.
+Partie 1 – Bâtiment de dimensions infinies
+Dans un premier temps, on suppose que le bâtiment a une emprise de dimensions infinies sur la surface du sol, comme représenté sur la figure ci-dessous. Ceci revient à considérer que la surface Σ0 se décompose
+en deux parties de dimensions infinies :
+— la partie Σ0− = {x = x1i1 + x3i3|x1 ≤ 0} est soumise à l’action du bâtiment, que l’on modélise comme
+une densité surfacique d’efforts constante fS = p0i2 ;
+— la partie Σ0+ = {x = x1i1 + x3i3|x1 ≥ 0} est une surface libre d’efforts. Le problème est statique et l’action de la pesanteur est négligée.
+
+
+10 Chapitre 2. Contraintes
+Dans cette partie, on se propose de vérifier que le tenseur des contraintes suivant peut être solution du problème considéré :
+
+σ(x) =(2αθ − β sin(2θ ))ir(θ ) ⊗ ir(θ ) + (2αθ + β sin(2θ ))iθ (θ ) ⊗ iθ (θ )
+−
+(α + β cos(2θ ))(ir(θ ) ⊗ iθ (θ ) + iθ (θ ) ⊗ ir(θ ))
+où α et β sont des constantes que l’on déterminera plus bas.
+1. Le champ de contraintes proposé vérifie-t-il l’équation d’équilibre local qui doit être satisfaite en tout point du domaine Ω ? 2. Déterminer les constantes α et β qui permettent au champ des contraintes proposé de vérifier les conditions sur les frontières Σ0+ et Σ0−.
+3. Montrer que l’on peut réécrire le champ de contraintes proposé dans la base cartésienne (i1, i2) comme :
+
+σ(x) = − p0
+2π
+(2θ + sin(2θ ))i1 ⊗ i1 − p0
+2π
+(2θ − sin(2θ ))i2 ⊗ i2 − p0
+2π
+(1 − cos(2θ ))(i1 ⊗ i2 + i2 ⊗ i1)
+Partie 2 – Bâtiment de longueur finie
+Dans cette partie, on considère désormais que le bâtiment a une emprise de longueur finie selon i1 et
+égale à B, comme représenté sur la figure ci-dessous. Ceci revient alors à considérer que la surface Σ0 se
+décompose en trois parties : — la partie Σ0− = {x = x1i1 + x3i3|x1 ≤ −B} est une surface libre d’efforts ;
+— la partie Σb0 = {x = x1i1 + x3i3| − B ≤ x1 ≤ 0} est soumise à l’action du bâtiment, que l’on modélise
+comme une densité surfacique d’efforts constante fS = p0i2 ;
+— la partie Σ0+ = {x = x1i1 + x3i3|x1 ≥ 0} est, comme avant, une surface libre d’efforts.
+Par ailleurs, comme dans la partie 1, le problème est statique et l’action de la pesanteur est négligée.
+En introduisant les deux bases cylindriques (ir1 (θ1), iθ1 (θ1), iz
+) et (ir2 (θ2), iθ2 (θ2), iz
+) liées aux deux extrémités du bâtiment, auxquelles on associe respectivement les coordonnées (r1, θ1, z) et (r2, θ2, z) (comme
+représenté sur la figure ci-dessus), il est alors possible de montrer que le champ de contraintes associé à cette situation peut s’écrire dans la base cartésienne (i1, i2) comme :
+
+σ(x) = p0
+2π
+(2(θ2 − θ1) + sin(2θ2) − sin(2θ1))i1 ⊗ i1 + p0
+2π
+(2(θ2 − θ1) − sin(2θ2) + sin(2θ1))i2 ⊗ i2
+− p0
+2π
+( cos(2θ2) − cos(2θ1))(i1 ⊗ i2 + i2 ⊗ i1)
+
+
+2.4 Contraintes sous un bâtiment 11
+On s’intéresse dans ce qui suit à l’état de contraintes le long de la médiatrice à l’emprise du bâtiment, définie comme la droite x1 = −B/2. On suppose par ailleurs que la résistance du sol est caractérisée par la
+contrainte σ0 = |σ11 − σ22|.
+4. À quel endroit la contrainte σ0 est-elle maximale le long de la médiatrice à l’emprise du bâtiment ?
+Les figures ci-dessous montrent les résultats d’une simulation numérique du problème, dans l’hypothèse d’une modélisation plane d’un sol de dimensions finies. Les comparaisons portent sur les composantes σ11,
+σ22 et σ12 (dans la base cartésienne (i1, i2)) des champs de contraintes numériques et analytiques.
+
+
+3. Critères de résistance
+3.1 Barrage poids
+On s’intéresse au dimensionnement d’un barrage poids Ωt en béton, en forme de prisme d’axe i3 et de
+base triangulaire représentée sur la figure ci-dessous.
+Plus précisément, on se restreint à une étude dans le plan (i1, i2), en considérant une section triangulaire
+de ce barrage, de hauteur H, et dont : — la paroi amont (soumise à la pression hydrostatique de l’eau du réservoir, de masse volumique
+ρe = 1000 kg/m3) est verticale, c’est-à-dire d’équation x1 = 0 ;
+— la paroi aval (qui est un bord libre) est inclinée, d’équation x1 = αx2.
+En outre, le barrage, de masse volumique ρb = 2200 kg/m3, est soumis à l’action de la pesanteur.
+Dans ces conditions, on se propose de vérifier que le tenseur des contraintes suivant peut être solution du problème considéré :
+
+σ(x) = b1x2i1 ⊗ i1 + (a2x1 + b2x2)i2 ⊗ i2 − 2(ρbg + b2)x1i1 ⊗S i2, ∀x ∈ Ωt
+où g est l’accélération de la pesanteur, et :
+b1 = −ρeg, a2 = ρbg
+α − 2ρeg
+α3 , b2 = −ρbg + ρeg
+α2
+
+
+3.2 Essai de cisaillement d’un joint de colle 13
+1. Montrer que le tenseur des contraintes proposé vérifie l’équation d’équilibre local en tout point du domaine Ωt .
+2. Montrer que le tenseur des contraintes proposé vérifie la condition de bord libre en tout point de la paroi aval. 3. Montrer que le tenseur des contraintes proposé vérifie la condition de pression hydrostatique (exercée par l’eau) en tout point de la paroi amont. 4. Pour résister aux efforts exercés, le béton dont est constitué le barrage doit vérifier un critère de contrainte normale maximale, de résistance à la traction σr = 2 MPa. En admettant que la contrainte
+normale maximale est à rechercher au niveau de la paroi amont (x1 = 0), dimensionner le barrage en
+précisant quelle doit être sa hauteur H maximale selon que le réservoir est vide (ρe = 0) ou plein, pour
+α = 1, puis pour α = √3/3.
+Les figures ci-dessous montrent les résultats d’une simulation numérique du barrage soumis à la pression hydrostatique de l’eau, pour laquelle on a imposé un déplacement nul des points de la face inférieure (x2 = H),
+dans le cas où H = 300 m et α = √3/3. Les comparaisons portent sur les composantes σ11, σ22 et σ12 (dans
+la base cartésienne (i1, i2) des champs de contraintes numériques et analytiques, ainsi que sur l’évolution de
+la contrainte principale majeure le long de la paroi amont (x1 = 0).
+5. Commenter les figures ci-dessus. Que penser de la hauteur déterminée dans la question 4 ?
+3.2 Essai de cisaillement d’un joint de colle
+On s’intéresse ici à une expérience dont le but est de déterminer la résistance mécanique d’une colle servant de liaison entre deux pièces ; pour cela, un « joint » de colle est placé entre deux poutres droites qui sont soumises à un essai de type traction à l’aide d’une machine d’essai. Le joint de colle, assimilé à un domaine parallélépipédique de dimensions 2l × e × b, est représenté par Ωt = {x = x1i1 + x2i2 + x3i3| − l ≤ x1 ≤ l, −e/2 ≤ x2 ≤ e/2, −b/2 ≤ x3 ≤ b/2}. Les seules actions exercées
+sur ce domaine le sont au niveau des bords Σe− = {x ∈ ∂ Ωt |x2 = −e/2} et Σe+ = {x ∈ ∂ Ωt |x2 = e/2}.
+On suppose en outre que l’on peut négliger l’action de la pesanteur et les effets d’inertie (l’essai étant quasi-statique).
+
+
+14 Chapitre 3. Critères de résistance
+Instron - http ://www.instron.us/en-us/our-company/press-room/blog/2014/september/how-to-test-lap-shear-specimens
+On se propose, dans ce qui suit, de vérifier que le champ des contraintes suivant peut être solution du problème considéré :
+
+σ(x) = x2 d2φ
+dx12
+(x1) i2 ⊗ i2 + 2
+(F
+2bl − dφ
+dx1 (x1)
+)
+i1 ⊗S i2, ∀x ∈ Ω
+où la fonction φ (x1) sera précisée plus loin.
+1. Montrer que le champ des contraintes proposé vérifie l’équation d’équilibre local en tout point du domaine Ω. 2. Que doit vérifier la fonction φ pour que le champ des contraintes proposé respecte les conditions aux limites sur les frontières Σl− = {x ∈ ∂ Ωt |x1 = −l} et Σl+ = {x ∈ ∂ Ωt |x1 = l} ?
+3. Calculer la résultante sur la frontière Σe+ = {x ∈ ∂ Ωt |x2 = e/2} des efforts surfaciques associés au
+champ des contraintes proposé, en fonction des données du problème, et de φ (l) et φ (−l). 4. Calculer le moment sur la frontière Σe+ = {x ∈ ∂ Ωt |x2 = e/2}, exprimé au point I, défini par
+xI = e/2 i2, des efforts surfaciques associés au champ des contraintes proposé, en fonction des données
+du problème, et de φ (l) et φ (−l). Indication : utiliser une intégration par parties.
+Dans le cas où les poutres qui sont reliées par le joint de colle sont considérées comme indéformables, il est possible d’établir que :
+φ (x1) = F
+2bl(kl cosh(kl) − sinh(kl))
+(l sinh(kx1) − sinh(kl)x1
+)
+où k = 2
+e
+√6(1 + νc) avec νc = 0, 37, et les fonctions cosh et sinh sont classiquement définies comme :
+cosh x1 = ex1 + e−x1
+2 , et sinh x1 = ex1 − e−x1
+2
+5. Interpréter les résultantes et moments des actions extérieures s’exerçant sur le joint de colle. 6. Que vaut e−kl dans le cas d’un joint de colle de dimensions 2l = 20 mm et e = 1 mm ? Comparer alors le champ des contraintes
+
+σ proposé avec un champ de cisaillement homogène dans tout le joint de
+colle :
+
+σ0 = 2 F
+2bl i1 ⊗S i2 : interpréter physiquement les différences.
+On suppose que la colle rompt selon un critère de contrainte normale maximale, de résistance à la traction associée σr que l’on cherche à déterminer.
+7. En supposant que cette contrainte normale maximale se trouve en x1 = l et x2 = e/2, donner son
+expression en fonction de F. Que vaut σr dans le cas d’un joint de colle de dimensions 2l = 20 mm,
+e = 1 mm et b = 1 cm, pour une rupture correspondant à une force exercée par la machine Fmax = 2 kN ?
+Comparer à ce que l’on aurait obtenu en supposant un cisaillement homogène dans tout le joint de
+colle :
+
+σ0 = 2 F
+2bl i1 ⊗S i2.
+
+
+3.3 Torsion d’un arbre de transmission cylindrique 15
+3.3 Torsion d’un arbre de transmission cylindrique
+On considère un arbre de transmission Ωt , dont la géométrie est un cylindre de révolution, d’axe iz, de
+longueur L et de rayon a. La fonction de ce type de composant est de pouvoir transmettre un couple selon l’axe du cylindre, entre deux pièces en rotation : les seules actions mécaniques exercées le sont donc au niveau des faces extrêmes du cylindre, en z = 0 et z = L. On suppose en outre que l’on peut négliger les effets d’inertie et l’action de la pesanteur.
+On se propose, dans ce qui suit, de vérifier que le tenseur des contraintes suivant peut être solution du problème considéré :
+
+σ(x) = 2kriθ (θ ) ⊗S iz, ∀x ∈ Ωt
+où k est une constante à déterminer, et (ir(θ ), iθ (θ ), iz) est la base cylindrique associée à l’arbre, de coordon
+nées (r, θ , z).
+1. Montrer que le tenseur des contraintes proposé vérifie les équations et conditions aux limites du problème. 2. Déterminer la résultante et le moment, exprimé en un point à choisir, du vecteur contrainte calculé sur la face extrême en z = L, en fonction de k et de ce que l’on appelle l’« inertie polaire de section » Iz,
+définie par :
+Iz(z) =
+∫
+S(z)
+r2 dS
+où S(z) est la section d’altitude z de l’arbre. 3. On souhaite dimensionner l’arbre de façon à ce que le matériau constitutif de ce dernier reste dans le domaine élastique ; dans le cas où il s’agit d’un acier, de limite d’élasticité σ0 = 120 MPa, calculer,
+à l’aide du critère de von Mises, le rayon minimal qui permette à l’arbre de transmettre un couple C = 3000 Nm selon son axe.
+On considère désormais un arbre creux, de même longueur, de rayon externe a, et d’épaisseur e ≪ a. 4. Quelles sont les équations et/ou conditions aux limites à ajouter ou à modifier par rapport au cas de l’étude d’un arbre plein ? Le champ de contraintes proposé plus haut peut-il encore être solution de ce problème ? 5. Calculer le rayon minimal à adopter dans le cas d’un arbre creux d’épaisseur e = 2,5 mm et d’un couple transmissible C = 3000 Nm, si l’on adopte le même matériau que précédemment (critère de von Mises avec une limite d’élasticité σ0 = 120 MPa). Conclure vis-à-vis de la problématique de réduction
+de poids présente dans le domaine des transports. 6. Afin de réduire encore plus le poids de l’arbre de transmission, on peut remplacer l’acier par un matériau composite à fibres longues. Comment faut-il orienter ces fibres pour optimiser la conception ?
+Dans toute la suite, on revient au cas d’un arbre plein, pour s’intéresser à l’influence d’un défaut sur la résistance de l’arbre : une entaille de rayon b qui est orientée axialement le long de l’arbre. Pour cela, on introduit un nouveau système de coordonnées cylindriques (ρ, θ , z), de base associée (iρ (θ ), iθ (θ ), iz),
+comme représenté sur la figure ci-dessous.
+
+
+16 Chapitre 3. Critères de résistance
+Avec ceci, Ωt = {x = ρiρ (θ ) + ziz|ρ ≥ b, (ρ cos θ − a)2 + ρ2 sin2 θ ≤ a2, et 0 ≤ z ≤ L} constitue le
+domaine correspondant à l’arbre entaillé. On identifie en outre : — la surface de l’entaille Σb = {x = ρiρ (θ ) + ziz|ρ = b, ρ ≤ 2a cos θ , et 0 ≤ z ≤ L} ;
+— la surface latérale de l’arbre Σa = {x = ρiρ (θ ) + ziz|ρ ≥ b, ρ = 2a cos θ , et 0 ≤ z ≤ L}. Enfin, on suppose, comme précédemment, que les seules actions mécaniques exercées le sont au niveau des faces extrêmes de l’arbre (z = 0 et z = L), et que l’on peut négliger les effets d’inertie et l’action de la pesanteur.
+On se propose alors, dans ce qui suit, de vérifier que le tenseur des contraintes suivant peut être solution du problème considéré :
+
+σ(x) = 2k
+(∂φ
+∂ ρ iρ (θ ) +
+(
+ρ+ 1
+ρ
+∂φ ∂θ
+)
+iθ (θ )
+)
+⊗S iz, ∀x ∈ Ωt
+où φ(ρ, θ ) = −a
+(
+ρ + b2
+ρ
+)
+sin θ , et k est, comme avant, une constante à déterminer.
+7. Montrer que le tenseur des contraintes proposé vérifie les équations et conditions aux limites du problème. On pourra, pour cela, utiliser :
+∆xφ(ρ, θ , z) = ∂ 2φ
+∂ ρ2 (ρ, θ , z) + 1
+ρ
+∂φ
+∂ ρ (ρ, θ , z) + 1
+ρ2
+∂ 2φ
+∂ θ 2 (ρ, θ , z)
+et le fait que, avec cette géométrie, la normale n sortante de Σa s’exprime simplement comme :
+n = iρ (2θ ) = cos θ iρ (θ ) + sin θ iθ (θ )
+8. Montrer qu’il est possible d’exprimer le couple de torsion C exercé sur la face z = L selon l’axe de l’arbre comme :
+C = kJ
+où J remplace l’inertie polaire de la section Iz que l’on a calculée précédemment. On ne cherchera pas
+à faire le calcul de J.
+
+
+3.4 Allègement d’un élément de structure 17
+Les figures ci-dessus montrent les résultats d’une simulation numérique de l’arbre entaillé, pour laquelle on a imposé un déplacement nul des points de la face inférieure (z = 0), et appliqué une densité d’efforts surfacique sur la face supérieure (z = L) de façon à obtenir une résultante nulle et un moment C > 0 selon l’axe iz. Les comparaisons portent sur les composantes σρz = 〈
+
+σiz , iρ
+〉 et σθz = 〈
+
+σiz , iθ
+〉 des champs de contraintes numériques et analytiques, au niveau de deux sections de coordonnées z = L/2 et z = L/100 respectivement.
+9. Commenter les figures ci-dessus. Comment expliquer les (faibles) différences entres les champs de contraintes numériques et analytiques ? 10. Pour le champ numérique comme pour le champ analytique, la contrainte de von Mises est maximale en (ρ = b, θ = 0). Pour un rayon a et une valeur de k supposés connus, comparer les contraintes de von Mises maximales obtenues dans les cas de l’arbre plein sans défaut et de l’arbre entaillé, quand b → 0 : quelle est la valeur du facteur de concentration de contrainte ?
+3.4 Allègement d’un élément de structure
+On s’intéresse ici à la problématique de l’allègement des éléments utilisés dans le domaine de la construction métallique ; plus précisément, on considère les possibilités de modification de la partie centrale d’une poutre profilée en forme de « I », appelée « âme » et représentée sur l’image ci-dessous. Pour cela, ce problème se décompose en deux parties successives : — l’étude de l’âme dans sa configuration originale, assimilable à une plaque sans défaut ; — l’étude de l’âme dans une configuration allégée en matière, assimilable à une plaque trouée.
+Partie 1 – Âme originale
+On assimile dans cette partie l’âme de la poutre à une plaque plane, d’épaisseur h et de côtés L, occupant le domaine Ω = {x = x1e1 + x2e2 + x3e3| − L/2 ≤ x1 ≤ L/2, −L/2 ≤ x2 ≤ L/2, −h/2 ≤ x3 ≤ h/2}, où
+(e1, e2, e3) constitue une base cartésienne, comme représenté sur la figure ci-dessous.
+Le matériau constitutif de la plaque est supposé avoir un comportement élastique linéaire, homogène et isotrope (module de Young E et coefficient de Poisson ν). Les déformations et les déplacements sont supposés rester faibles (hypothèse des petites perturbations). Le problème est statique et l’action de la pesanteur est négligée devant les autres efforts mis en jeu. On suppose enfin que la plaque est soumise à un chargement tel que le tenseur des contraintes à l’intérieur de celle-ci s’écrit comme (avec τ0 une constante) :
+
+σ(x) = τ0(e1 ⊗ e2 + e2 ⊗ e1), ∀x ∈ Ω
+
+
+18 Chapitre 3. Critères de résistance
+1. Le champ de contraintes proposé vérifie-t-il l’équation d’équilibre local qui doit être satisfaite en tout point de la plaque ? En outre, quelles sont les conditions aux limites du problème sur chaque frontière de la plaque pour que le champ proposé en soit la solution ? 2. Calculer la résultante des efforts surfaciques appliqués sur la face x1 = L/2, ainsi que son moment,
+exprimé au centre (x1 = 0, x2 = 0, x3 = 0) de la plaque. Décrire comment la poutre en « I » est ainsi
+sollicitée.
+Afin de compléter l’analyse du champ des contraintes, on introduit la base vectorielle (i1, i2, i3) telle que :
+i1 =
+√2
+2 e1 +
+√2
+2 e2, i2 = −
+√2
+2 e1 +
+√2
+2 e2, i3 = e3
+3. Exprimer le tenseur des contraintes dans la base (i1, i2, i3). Interpréter physiquement les composantes
+obtenues. Indication : On pourra exprimer les vecteurs e1 et e2 en fonction de i1 et i2.
+4. On suppose que le matériau constitutif de l’âme est sensible à la traction, et cède selon un critère de clivage, de limite associée σm. Quelle valeur limite ne doit pas dépasser τ0 pour éviter la rupture ?
+Partie 2 – Âme ajourée
+Pour des raisons d’allègement de la structure, on cherche à déterminer l’impact de trous circulaires dans l’âme de la poutre, comme représenté sur l’image ci-dessous.
+Nous allons ainsi nous intéresser à l’impact d’un trou circulaire, de diamètre d, sur le champ de contraintes de l’âme encore une fois assimilée à une plaque d’épaisseur h et de côtés L, qui correspond ainsi au domaine
+Ω = {x = x1e1 + x2e2 + x3e3|x12 + x22 ≥ d2/4, −L/2 ≤ x1 ≤ L/2, −L/2 ≤ x2 ≤ L/2, −h/2 ≤ x3 ≤ h/2},
+où (e1, e2, e3) constitue une base cartésienne, comme représenté sur la figure ci-dessous. Cette plaque est
+soumise aux chargements suivants : — une densité d’efforts surfacique fS = αe1 en x1 = L/2 ;
+— une densité d’efforts surfacique fS = −αe1 en x1 = −L/2 ;
+— une densité d’efforts surfacique fS = αe2 en x2 = L/2 ;
+— une densité d’efforts surfacique fS = −αe2 en x2 = −L/2 ; où α > 0 est une constante donnée. Les autres frontières de la plaque sont supposées libres d’efforts.
+
+
+3.4 Allègement d’un élément de structure 19
+Par ailleurs, le matériau constitutif de la plaque est supposé avoir un comportement élastique linéaire, isotrope et homogène (module de Young E et coefficient de Poisson ν). Nous nous plaçons en hypothèses des petites perturbations et l’action de la pesanteur est négligée. Le problème est supposé statique. On définit la base cylindrique (er(θ ), eθ (θ ), ez = e3
+) telle que er(θ ) = cos θ e1 + sin θ e2 et eθ (θ ) = − sin θ e1 + cos θ e2,
+et les coordonnées cylindriques (r, θ , z) associées au trou. Dans toute la suite, on cherche un champ de contraintes sous la forme suivante :
+
+σfc = α
+(
+1− d2
+4r2
+)
+er(θ ) ⊗ er(θ ) + α
+(
+1+ d2
+4r2
+)
+eθ (θ ) ⊗ eθ (θ )
+5. Montrer que le champ des contraintes
+
+σ f c proposé vérifie l’équation d’équilibre local en tout point du
+domaine. 6. Montrer que le champ des contraintes
+
+σ f c proposé vérifie les conditions aux limites prévues en tout
+point des faces latérales (x1 = ±L/2 et x2 = ±L/2), à condition de supposer que les dimensions de
+la plaque sont très grandes, donc en considérant que r → ∞. En outre, le champ des contraintes
+
+σfc
+proposé vérifie-t-il les conditions aux limites imposées sur les autres frontières du domaine ? 7. Calculer le coefficient de concentration de contraintes, défini comme le maximum de K(r) = σθθ (r)/α.
+Commenter le résultat (on pourra, pour cela, décrire en particulier à quel type de sollicitation sont soumis les deux éléments de surface au bord du trou, représentés sur la figure ci-dessus).
+
+
+4. Comportement des matériaux
+4.1 Tassement d’une couche de sol
+On souhaite étudier le tassement d’une couche de sol Ω sous l’effet de la pesanteur. On considère donc une fraction parallélépipédique de ce dernier, prise selon les trois directions d’une base cartésienne (i1, i2, i3),
+où i3 est vertical (vers le haut) et unitaire, et à laquelle on associe les coordonnées cartésiennes (x1, x2, x3),
+comme représenté ci-dessous.
+Tandis que, en x3 = 0, le sol est en contact avec un massif rocheux supposé fixe et indéformable, la
+surface en x3 = H est libre d’efforts. On suppose que l’on peut négliger les effets d’inertie, et que l’on peut
+se placer dans le cadre de l’hypothèse des petites perturbations.
+Dans un premier temps, la couche de sol est supposée homogène, de masse volumique ρ, et son comportement est élastique linéaire isotrope, de paramètres de Lamé associés (λ , μ). On recherche alors la solution en déplacement sous la forme :
+u(x) = u3(x3)i3, ∀x ∈ Ω
+1. À l’aide de l’équation d’équilibre local et de la relation de comportement, déterminer l’équation différentielle que vérifie u3 à l’intérieur du domaine Ω.
+2. Écrire les conditions aux limites en x3 = 0 et en x3 = H. En déduire u3.
+3. On suppose qu’une bonne approximation de la résistance du sol peut être fournie par le critère de von Mises, de seuil associé σe. À quelle profondeur ce critère sera-t-il atteint en premier ?
+
+
+4.1 Tassement d’une couche de sol 21
+Le sol étudié est maintenant constitué de deux couches homogènes différentes, d’épaisseur H/2 et de masses volumiques respectives ρ1 et ρ2, et de comportement élastique linéaire isotrope, de paramètres de
+Lamé respectifs (λ1, μ1) et (λ2, μ2), comme représenté ci-dessous.
+4. Quelles équations et conditions aux limites supplémentaires faut-il considérer pour résoudre ce nouveau problème ? On ne cherchera pas à résoudre ce dernier.
+Les figures ci-dessous montrent les résultats d’une simulation numérique du tassement de deux couches de sol : l’une souple (entre x3 = 0 et x3 = H/2), l’autre beaucoup plus rigide (entre x3 = H/2 et x3 = H). Les
+comparaisons portent sur les composantes σ11, σ22 et σ33 (dans la base cartésienne (i1, i2, i3)) des champs de
+contraintes numériques et analytiques dans une section verticale, ainsi que sur la composante verticale u3 du
+déplacement.
+5. Commenter les figures ci-dessus. Analyser notamment les différents champs à l’interface entre les deux couches de sol (en x3 = H/2).
+
+
+22 Chapitre 4. Comportement des matériaux
+4.2 Résistance d’un tunnel
+On souhaite étudier la tenue mécanique d’un tunnel excavé dans un massif soumis à un champ de contraintes initiales
+
+σ0 ; cette étude est faite en quatre parties :
+1. étude des contraintes dans le sol avant excavation du tunnel ; 2. définition d’un problème auxiliaire pour l’étude du tunnel après excavation ; 3. étude des critères de rupture au voisinage du tunnel dans le cas de contraintes initiales isotropes ; 4. étude des critères de rupture au voisinage du tunnel dans le cas de contraintes initiales orthotropes.
+Le tunnel est supposé rectiligne et invariant dans la direction iz horizontale, et de section circulaire de
+rayon R dans le plan (ix, iy), où iy est vertical, vers le haut. L’action de la pesanteur est négligée dans tout
+le problème, ainsi que la pression de l’air dans le tunnel excavé. L’ensemble des quantités sont supposées constantes en fonction du temps (hypothèse quasi-statique). Dans un repère centré sur l’axe du tunnel, le vecteur position x s’exprime alors comme :
+x = xix + yiy + ziz = rir(θ ) + ziz, r = √
+x2 + y2
+où r, θ et z sont les coordonnées cylindriques usuelles (x = r cos θ et y = r sin θ ).
+Le sol est supposé de comportement élastique linéaire, isotrope, où λ et μ sont les deux paramètres de Lamé, supposés constants dans le milieu. On se place en outre dans l’hypothèse des petites perturbations. Les critères de rupture considérés sont : — un critère de clivage, de contrainte normale maximale admissible σr ;
+— un critère de Tresca, de contrainte de cisaillement maximale admissible τc.
+Partie 1 – Contraintes initiales
+Le champ de contraintes initiales dans le sol (c’est-à-dire sans tunnel) est supposé uniforme - il est constant en tout point de l’espace - et donné par :
+
+σ0 = σhI + (σv − σh)iy ⊗ iy, avec σv ≤ σh < 0
+1. Donner les directions principales et les contraintes principales associées à ce tenseur des contraintes. 2. Sur quelles facettes de normale n le cisaillement atteint sa norme maximale τmax ? Exprimer cette
+dernière en fonction de σv et σh.
+3. Donner les critères sur σv et σh pour que ce champ de contraintes satisfasse l’ensemble des critères de
+rupture.
+Partie 2 – Problème auxiliaire
+Nous considérons dans cette partie un problème auxiliaire d’élasticité linéaire isotrope (dans le cadre de l’hypothèse des petites perturbations) dans la partie excavée du sol (c’est-à-dire le domaine r > R) : on suppose ici que les contraintes initiales sont nulles (
+
+σ0 = 0) et qu’une pression (algébrique) uniforme p0 est
+imposée sur les bords du tunnel en r = R :
+fS = −p0n
+
+
+4.3 Compression d’un barreau libre ou contraint 23
+avec n la normale extérieure au domaine de sol. On suppose en outre que le déplacement est de la forme :
+u(x) = α R2
+r ir(θ ), ∀r ≥ R
+où α est une constante qui sera déterminée plus bas.
+4. Donner, sans les résoudre, l’ensemble des équations et conditions aux limites associées à ce problème auxiliaire, dans le cadre de l’élasticité linéaire isotrope. 5. Calculer le tenseur des petites déformations
+
+ε.
+6. Calculer le tenseur des contraintes associé
+
+σ.
+7. Vérifier que
+
+σ satisfait l’ensemble des équations et conditions aux limites, et exprimer pour cela α en fonction de p0 et des paramètres de Lamé.
+Partie 3 – Critères de rupture au voisinage du tunnel dans le cas isotrope
+On revient au problème initial du tunnel excavé dans le domaine de sol, et on se place dans le cas de contraintes initiales supposées isotropes : σv = σh.
+8. Exprimer p0 en fonction de σv pour que :
+
+σt =
+
+σ0 +
+
+σ
+soit une solution statiquement admissible dans le sol après excavation du tunnel. (On s’assurera pour cela que
+
+σt satisfait l’ensemble des équations et conditions aux limites).
+9. Determiner les lieux où la contrainte normale et la norme de la contrainte de cisaillement sont maximales, et donner un critère sur σv en fonction de σr et τc.
+10. En déduire l’orientation possible des fissures au voisinage de la paroi du tunnel.
+11. On suppose σv = −ρgH avec ρ = 2500 kg/m3 et g = 10 m/s2, ainsi que R = 10 m, μ = 15 GPa,
+σr = 0 MPa, et τc = 1,5 MPa. En déduire le déplacement maximum et la profondeur maximale H à
+laquelle un tunnel peut être creusé sans rupture du massif de sol.
+Partie 4 – Critères de rupture au voisinage du tunnel dans le cas orthotrope
+On étudie ici de nouveau le problème du tunnel excavé, mais dans le cas de contraintes initiales supposées orthotropes : σv ̸= σh. Kirsch a proposé en 1898 un champ de contraintes satisfaisant l’équation d’équilibre
+local pour r > R ; cette solution s’exprime comme :
+
+σK = − σ∞
+2
+((
+1 − R2
+r2
+)
+−
+(
+1 − 4 R2
+r2 + 3 R4
+r4
+)
+cos 2θ
+)
+ir ⊗ ir − σ∞
+(
+1 + 2 R2
+r2 − 3 R4
+r4
+)
+sin 2θ ir ⊗s iθ
+− σ∞
+2
+((
+1 + R2
+r2
+)
++
+(
+1 + 3 R4
+r4
+)
+cos 2θ
+)
+iθ ⊗ iθ
+12. Montrer que cette solution permet de retrouver un coefficient de concentration de contrainte de 3 au voisinage d’un trou circulaire de rayon R. (On ne cherchera pas à démontrer que ce champ de contrainte vérifie l’équation d’équilibre local en tout point du domaine, ni les équations de compatibilité). 13. Montrer que, pour r ≫ R, on a :
+
+σK ≈ −σ∞iy ⊗ iy
+On pourra pour cela partir de iy = sin θ ir + cos θ iθ et développer.
+14. Déduire de tout ce qui précède la valeur de σ∞ en fonction de σv et σh de façon à déterminer une
+solution admissible pour un tunnel excavé dans le cas où σv ̸= σh.
+15. Dans le cas où σr = 0, en déduire une condition entre σv et σh pour que le critère de contrainte normale
+ne soit jamais atteint. 16. En reprenant les valeurs numériques précédentes et en supposant que σv = 2σh, donner la nouvelle
+valeur maximale de H à laquelle un tunnel peut être creusé sans rupture du massif de sol.
+4.3 Compression d’un barreau libre ou contraint
+On considère un barreau parallélépipédique Ω orienté selon les trois axes d’une base cartésienne (i1, i2, i3),
+où i3 est vertical (vers le haut) et unitaire. De longueur L et de section carrée de côté a, il repose sur sa face
+
+
+24 Chapitre 4. Comportement des matériaux
+inférieure (en x3 = 0) sur un plan horizontal fixe et indéformable, sur lequel il peut glisser sans frottement,
+tandis qu’il est soumis sur sa face supérieure (en x3 = L) à une pression p uniforme et connue.
+On suppose que le matériau constitutif de ce barreau est élastique linéaire isotrope et homogène, de module de Young E et de coefficient de Poisson ν. En outre, on considère que l’on peut négliger les effets d’inertie et l’action de la pesanteur, et que l’on peut se placer dans le cadre de l’hypothèse des petites perturbations. On souhaite alors étudier trois configurations différentes concernant les faces latérales de ce barreau : a) le barreau est libre au niveau de ces dernières ; b) le barreau est inséré au sein d’un massif fixe et indéformable, dont les dimensions correspondent parfaitement aux dimensions transverses du barreau, le contact ainsi obtenu étant supposé glissant et sans frottement ; c) seules les faces x1 = −a/2 et x1 = a/2 du barreau sont assujetties à glisser sans frottement contre
+deux plaques verticales fixes et indéformables.
+1. Pour chaque configuration, préciser les conditions aux limites au niveau des six faces du barreau. 2. Montrer que, quelle que soit la configuration étudiée, un tenseur des contraintes constant dans le barreau peut être solution du problème. 3. Résoudre le problème associé à chaque configuration. En déduire à chaque fois la rigidité K en compression du barreau, définie comme :
+K = pa2
+∣ ∣
+〈u(x3=L) , i3
+〉∣ ∣
+dans le cas où L = 20 cm, a = 1 cm, et un acier de propriétés E = 200 GPa et ν = 0, 3. Interpréter physiquement les résultats.
+On s’intéresse de plus près à la configuration b), pour laquelle le barreau est inséré au sein d’un massif fixe et indéformable, mais dont les dimensions sont désormais légèrement plus grandes que les longueurs des côtés du barreau : on suppose alors que le jeu au niveau de chaque paroi est j = 0,01 mm.
+4. Pour quelle pression sur la face supérieure les parois du barreau rentrent-elles en contact avec le massif ? Tracer l’évolution du déplacement ∣
+∣
+〈u(x3=L) , i3
+〉∣
+∣ de la face supérieure en fonction de la pression appliquée.
+4.4 Coin soumis à l’écoulement d’un fluide visqueux
+On s’intéresse ici à un « coin » permettant de séparer l’écoulement d’un fluide visqueux en deux parties selon deux directions perpendiculaires, et essentiellement constitué d’un solide dont l’arête vive en angle droit permet cette séparation. On considère que le coin est de dimension radiale infinie, et occupe ainsi le domaine Ω = {x = rir(θ ) + ziz|r ≥ 0, 0 ≤ θ ≤ π/2, 0 ≤ z ≤ H}, où (ir(θ ), iθ (θ ), iz) est la base cylindrique
+associée aux coordonnées (r, θ , z). Les frontières à considérer pour ce solide Ω sont ainsi : — la face inférieure Σ0 = {x = rir(θ )|r ≥ 0, 0 ≤ θ ≤ π/2} ;
+— la face supérieure ΣH = {x = rir(θ ) + Hiz|r ≥ 0, 0 ≤ θ ≤ π/2} ;
+— la première face latérale Σ1 = {x = ri1 + ziz|r ≥ 0, 0 ≤ z ≤ H} ;
+— la seconde face latérale Σ2 = {x = ri2 + ziz|r ≥ 0, 0 ≤ z ≤ H} ;
+où (i1 = ir(0), i2 = ir(π/2), i3 = iz) est une base cartésienne. La géométrie est représentée sur la figure
+ci-dessous.
+
+
+4.5 Étude mécanique d’une tige de bambou 25
+Tandis que le solide Ω est supposé pouvoir glisser sans frottement au niveau de sa face inférieure Σ0 sur
+un support supposé fixé et indéformable, on suppose que : — la face supérieure ΣH n’est soumise à aucun effort (bord libre) ;
+— la première face latérale Σ1 est soumise à l’action du fluide visqueux, représentée en tout point par une
+densité surfacique d’efforts fS1 = τ0i1 + p0i2 ;
+— la second face latérale Σ2 est soumise à l’action du fluide visqueux, représentée en tout point par une
+densité surfacique d’efforts fS2 = p0i1 + τ0i2 ;
+où p0 et τ0 sont supposés constants et connus. Enfin, le matériau constitutif du coin est supposé avoir un
+comportement élastique linéaire, homogène et isotrope (module de Young E et coefficient de Poisson ν). Les déformations et les déplacements sont supposés rester faibles (ce qui permet de se placer dans le cadre de l’hypothèse des petites perturbations). Le problème est statique et l’action de la pesanteur est négligée devant les autres efforts mis en jeu.
+1. Écrire, sans les résoudre, l’ensemble des équations et conditions aux limites que vérifient le champ de déplacement u et le champ des contraintes
+
+σ à l’intérieur et sur les frontières du domaine Ω.
+Dans toute la suite de cette partie, on cherche un champ de contraintes sous la forme suivante :
+
+σ f c = (α −β sin(2θ ))ir(θ )⊗ir(θ )+(α +β sin(2θ ))iθ (θ )⊗iθ (θ )−β cos(2θ )(ir(θ )⊗iθ (θ )+iθ (θ )⊗ir(θ ))
+où α et β sont des constantes que l’on déterminera plus bas.
+2. Déterminer les constantes α et β qui permettent au champ des contraintes
+
+σ f c proposé de vérifier les
+conditions sur les frontières Σ0, ΣH , Σ1 et Σ2.
+3. Le champ de contraintes
+
+σ f c proposé vérifie-t-il l’équation d’équilibre local qui doit être satisfaite en
+tout point du solide Ω ?
+Dans ce qui suit, on cherche à vérifier si l’on peut associer au champ de contraintes
+
+σ f c proposé un
+champ de déplacement de la forme :
+u f c(x) = ur(r, θ )ir(θ ) + uθ (r, θ )iθ (θ ) + uz(z)iz
+4. Écrire le tenseur des petites déformations
+
+ε f c associé au tenseur des contraintes
+
+σ f c proposé. En
+déduire les équations différentielles que doivent vérifier les composantes ur, uθ et uz du champ de
+déplacement u f c.
+5. Déterminer l’expression de la composante uz(z). Interpréter physiquement cette dernière.
+6. Montrer que les expressions suivantes, où A, B et C sont des constantes arbitraires, permettent de vérifier les équations différentielles établies à la question 4 :
+ur(r, θ ) = −
+(1−ν
+E p0 + 1 + ν
+E τ0 sin(2θ )
+)
+r + A cos θ + B sin θ
+uθ (r, θ ) =
+(
+C− 1+ν
+E τ0 cos(2θ )
+)
+r − A sin θ + B cos θ
+7. À quel type de déplacement correspondent les constantes A, B et C ? Conclure sur la possible validité des champs
+
+σ f c et u f c proposés.
+4.5 Étude mécanique d’une tige de bambou
+Les performances mécaniques des bambous sont étonnantes. En effet, leur résistance longitudinale est proche de la résistance à la traction de l’acier. Cependant, lorsqu’ils sont soumis à la flexion, les bambous présentent des modes de rupture très différents d’un tube en acier. La rupture des tubes d’acier est principalement causée par le flambage de la section transversale alors qu’une rupture longitudinale est couramment observée sur les bambous. Ce comportement est attribué à la faible résistance du bambou lorsqu’il est cisaillé le long de ses fibres longitudinales. Un modèle approché de l’état de contrainte à l’intérieur d’une tige de bambou est le sujet du présent problème afin de comprendre ce comportement.
+
+
+26 Chapitre 4. Comportement des matériaux
+Vue schématique d’une tige de bambou 1.
+Des études préliminaires 2 ont montré que les nœuds des tiges de bambou ne jouent aucun rôle significatif sur leur rigidité et leur résistance. Ainsi, la tige peut être modélisée comme un cylindre creux de longueur L le long de l’axe iz avec une section circulaire de rayon moyen R et d’épaisseur h ≪ R. Le domaine Ω associé
+est donc Ω = {ziz + rir(θ )|0 ≤ z ≤ L; R − h/2 ≤ r ≤ R + h/2; 0 ≤ θ < 2π}, où (ir(θ ), iθ (θ ), iz) est la base
+cylindrique associée au domaine cylindrique, de coordonnées (r, θ , z). La tige est supposée encastrée sur un bâti fixe à son extrémité inférieure (en z = 0). La résultante de la densité surfacique d’efforts appliquée en z = L est notée Fiy et le moment associé à la même extrémité
+est supposé nul (où (ix, iy, iz) est une base orthogonale directe, telle que ir(θ ) = cos θ ix + sin θ iy ainsi que
+iθ (θ ) = − sin θ ix + cos θ iy : on a ainsi x = r cos θ et y = r sin θ ). On suppose que la pression sur les surfaces
+latérales intérieure et extérieure de la section est négligeable. Aucune force de volume n’est prise en compte. Les forces inertielles sont négligées. Bien qu’elles soient toutes deux discutables en pratique, les deux hypothèses suivantes sont faites : — toutes les transformations sont supposées infiniment petites ; — le bambou est supposé avoir un comportement élastique linéaire, homogène et isotrope. La résistance au cisaillement le long des fibres longitudinales est de 10 MPa et la résistance au cisaillement à 45 degrés par rapport à l’orientation des fibres est de 80 MPa. Le module de Young équivalent est de 20 GPa et le coefficient de Poisson de 0, 4. Le rayon moyen est R = 5 cm et l’épaisseur h = 5 mm (données issues de la Réf. 1).
+Partie 1 – Champ de contraintes admissible
+Nous supposons que le tenseur des contraintes dans la tige de bambou s’écrit :
+
+σ = αr
+π hR3
+((z − L) sin θ iz ⊗ iz + 2r cos θ iz ⊗s iθ
+)
+1. Montrer que le tenseur des contraintes satisfait l’équation d’équilibre local. 2. Montrer que le tenseur des contraintes satisfait les conditions aux limites en efforts et exprimer α en fonction de la force appliquée F (on supposera h ≪ R pour simplifier l’expression). 3. Donner l’expression complète du tenseur des petites déformations en fonction de F, R, h, E, ν, z, r et θ . 4. Donner les directions principales et les contraintes principales dans les deux cas suivants : i) pour θ = 0 et z = L/2 ; et ii) pour θ = ±π/2 et z = 0. 5. Donner la charge maximale pour deux tiges de bambou de longueurs respectives 0,3 m et 3 m.
+Partie 2 – Déplacement élastique
+Nous cherchons un champ de déplacement ayant la forme suivante dans la tige de bambou :
+u= a
+2π R3
+(
+z(z − 2L)r sin θ iz − z2(z − 3L)
+3 iy + η(z − L)((R2 − r2) sin θ ir + (r2 + R2) cos θ iθ
+)
+)
+1. Gangwar Mechanics of Materials DOI : 10.1016/j.mechmat.2019.01.009 2. Wood Science and Technology 49(2), March 2015, DOI : 10.1007/s00226-014-0694-4
+
+
+4.6 Dilatomètre différentiel 27
+où a et η sont des coefficients constants.
+6. Donner le champ de déplacement en z = 0 et indiquer s’il satisfait ou non les conditions d’encastrement. 7. Donner l’expression complète du tenseur des petites déformations (en fonction de a, η, L, R, z, r et θ ). 8. Montrer que la partie plane du tenseur des petites déformations à toute section transversale de coordonnée z est isotrope.
+(Conseil : montrer que εxx = εyy et εxy = 0 ou, de façon équivalente, que εrr = εθθ et εrθ = 0.)
+9. Montrer que εrz ≪ εθz pour h ≪ R et exprimer η en fonction de ν pour un matériau élastique linéaire
+isotrope.
+(Conseil : comparer avec le tenseur des petites déformations obtenu à la question 3 de la partie 1.)
+10. Exprimer a en fonction de F, E, L et h (en supposant que h ≪ R). 11. Calculer la déflexion maximale d’une tige de bambou de 3 m lorsqu’elle atteint sa charge maximale. Commenter l’hypothèse de transformations infiniment petites.
+4.6 Dilatomètre différentiel
+Un dilatomètre est un dispositif permettant de mesurer le coefficient de dilatation thermique d’un matériau. On souhaite étudier ici en deux temps le principe d’un tel appareil : — tout d’abord, on s’intéresse à la déformation d’un barreau soumis simultanément à un chargement thermique et à un chargement mécanique donnés ; — dans un deuxième temps, on étudie le fonctionnement d’un dilatomètre dit « différentiel ».
+Partie 1 – Barreau soumis à un chargement thermomécanique
+On considère un barreau parallélépipédique Ω orienté selon les trois axes d’une base cartésienne (i1, i2, i3),
+où i3 est vertical (vers le haut) et unitaire. De longueur L selon i3, et de section carrée de côté a dans le plan
+(i1, i2), ce barreau repose sur sa face inférieure (en x3 = 0) sur un plan horizontal fixe et indéformable, sur
+lequel il peut glisser sans frottement, tandis qu’il est soumis sur sa face supérieure (en x3 = L) à une densité
+surfacique de force f0i3 uniforme et connue. Simultanément, le barreau est chauffé de façon uniforme de
+façon à ce que sa température s’élève d’une variation ∆T > 0 constante sur tout le barreau. On suppose que le matériau constitutif du barreau est élastique linéaire, homogène et isotrope, de module de Young E, de coefficient de Poisson ν et de coefficient de dilatation thermique α. Enfin, on considère que l’on peut négliger les effets d’inertie et l’action de la pesanteur, et que l’on peut se placer dans le cadre de l’hypothèse des petites déformations.
+1. Donner, sans les résoudre, l’ensemble des équations et conditions aux limites que vérifient le champ de déplacement u et le champ des contraintes
+
+σ à l’intérieur et sur les frontières de Ω.
+On se propose alors de chercher le champ des contraintes sous la forme suivante :
+
+σ f c(x) =
+
+σ0, ∀x ∈ Ω,
+où
+
+σ0 est un tenseur dont les composantes dans (i1, i2, i3) sont des constantes qui seront à déterminer plus bas.
+2. Quelles composantes du tenseur
+
+σ f c doivent être nulles pour que ce dernier soit admissible ?
+3. Le tenseur
+
+σ f c vérifie-t-il l’équation d’équilibre local ? Expliciter la (les) composante(s) non nulle(s)
+de
+
+σ f c, en fonction de f0.
+4. Calculer le tenseur des petites déformations
+
+ε f c associé au tenseur
+
+σ f c et à la variation de température
+∆T . Interpréter physiquement ses composantes.
+On cherche maintenant le champ de déplacement associé au tenseur
+
+ε f c sous la forme :
+u f c(x) = u1(x1, x2, x3)i1 + u2(x1, x2, x3)i2 + u3(x3)i3, ∀x ∈ Ω
+5. Déterminer l’expression de u3(x3) en fonction des données du problème. Pour quelle valeur de f0
+a-t-on u3(L) = 0 ?
+6. Écrire les équations différentielles vérifiées par u1(x1, x2, x3) et u2(x1, x2, x3). En déduire que :
+u1(x1, x2, x3) = (α∆T − ν f0/E)x1 − Ax2 + B1
+u2(x1, x2, x3) = (α∆T − ν f0/E)x2 + Ax1 + B2
+
+
+28 Chapitre 4. Comportement des matériaux
+où A, B1 et B2 sont des constantes arbitraires. Interpréter physiquement ces dernières.
+Partie 2 – Étude d’un dilatomètre différentiel
+Le principe d’un dilatomètre différentiel consiste à utiliser deux barreaux Ω et Ωr de dimensions
+identiques (longueur L selon i3, et section carrée de côté a dans le plan (i1, i2)) et chauffés uniformément de
+façon à obtenir la même variation de température ∆T > 0 constante sur les deux barreaux :
+— le premier, constitué du matériau dont on cherche à mesurer le coefficient de dilatation thermique, de propriétés (E, ν, α) ; — le second, dit de référence, constitué d’un matériau de propriétés calibrées (Er, νr, αr).
+Les deux barreaux sont posés en x3 = 0 sur le même plan horizontal fixe et indéformable, et sont reliés en
+x3 = L par une plaque supposée indéformable, assujettie à se déplacer selon i3 uniquement ; on peut alors
+considérer que les deux barreaux ont le même allongement u3(L). En outre, on négligera le poids de la
+plaque devant les autres actions appliquées sur elle.
+7. En écrivant l’équilibre en résultante de la plaque soumise aux actions des deux barreaux, et en utilisant les résultats de la partie 1, donner l’expression de u3(L) en fonction des données du problème. En
+déduire l’expression de α en fonction, notamment, de la mesure de u3(L).
+8. Déterminer les expressions des champs de contraintes dans les deux barreaux, en fonction notamment des caractéristiques du matériau étudié qui sont supposées connues désormais, et celles du matériau de référence. 9. En supposant que la résistance du matériau constitutif du barreau testé vérifie un critère de Tresca, de contrainte associée τe = σe/2, quelle est la variation maximale de température ∆Tmax qu’il est possible
+d’appliquer sans entraîner la rupture du barreau ?
+Partie 3 – Analyse de résultats de simulations numériques
+On considère ici le cas d’un dilatomètre différentiel, pour lequel les deux barreaux sont placés l’un contre l’autre selon l’une de leurs faces verticales, afin de gagner en encombrement. La figure ci-dessous montre les déformées (amplifiées) des deux barreaux, selon le plan (i1, i3), ainsi que la valeur absolue de la composante
+horizontale |u1| du champ de déplacement dans les deux barreaux.
+10. Analyser l’évolution spatiale de la composante horizontale (en valeur absolue) |u1| du champ de
+déplacement, notamment près de l’extrémité supérieure des barreaux (en x3 = L), et près des faces
+latérales (de normales ±i1) ; l’échelle de couleurs de gauche correspond au barreau de gauche, l’échelle
+de droite à celui de droite.
+
+
+4.7 Récipient en pyrex chauffé 29
+Les figures ci-dessous présentent respectivement les composantes σ11 (à gauche) et σ33 (à droite) des
+champs de contraintes obtenus dans les deux barreaux (en MPa).
+11. Analyser l’évolution des champs σ11 et σ33 obtenus dans chaque barreau ; on commentera notamment
+les valeurs obtenues au voisinage des faces latérales des barreaux (de normales ±i1).
+4.7 Récipient en pyrex chauffé
+On considère un récipient Ω de forme sphérique, de rayons intérieur Ri et extérieur Re, qui est complète
+ment rempli d’eau que l’on porte à ébullition ; on lui associe un système de coordonnées sphériques (r, θ , φ ), de base (er(θ , φ ), eθ (θ , φ ), eφ (φ )). Ce récipient est en pyrex, que l’on modélise comme un matériau élas
+tique linéaire, isotrope et homogène, de module de Young E = 70 GPa, de coefficient de Poisson ν = 0, 3, et
+de coefficient de dilatation thermique α = 3,3 × 10−6 K−1, tous trois supposés constants dans la plage de températures considérée.
+On s’intéresse dans un premier temps au problème de thermique associé à la conduction de la chaleur au sein du récipient. Ce dernier est ainsi soumis à une différence de température entre ses parois, vu que la surface intérieure (de rayon Ri) est en contact avec l’eau qui est uniformément à la température Ti = 373 K,
+et vu que la surface extérieure (de rayon Re) est en contact avec l’air ambiant, à la température Te = 293 K.
+
+
+30 Chapitre 4. Comportement des matériaux
+1. En supposant que le problème de thermique est stationnaire et sans source de chaleur, écrire les équations et conditions vérifiées par le champ de température à l’intérieur et sur la frontière du domaine Ω. 2. En considérant que le champ de température est à symétrie sphérique (T (x) = T (r) seulement), montrer que ce dernier peut s’écrire comme :
+T (r) = a
+r + b, ∀r ∈ [Ri, Re]
+où a et b sont deux constantes à déterminer. On pourra utiliser le fait que, avec une hypothèse de
+symétrie sphérique, on a : ∆xT = 1
+r2
+(r2T ′(r))′, où •′ = d•
+dr .
+3. Déterminer l’expression de a et b en fonction de Ti et Te.
+Maintenant que l’on connaît le champ de température au sein du récipient, on s’intéresse désormais au problème de thermoélasticité associé, où la température de référence est la température ambiante Te. On
+suppose que l’on peut négliger la pression de l’eau sur la paroi interne du récipient. On considère en outre que l’action de la pesanteur et les effets d’inertie peuvent être négligés, et que l’on peut se placer dans le cadre de l’hypothèse des petites perturbations.
+4. Écrire les équations et les conditions aux limites que doivent vérifier le champ de déplacement u et le champ des contraintes
+
+σ à l’intérieur et sur la frontière du domaine Ω.
+Dans toute la suite, compte tenu de la symétrie sphérique du problème, on cherche alors une solution en déplacement sous la forme :
+u f d(x) = u(r)er(θ , φ), ∀x ∈ Ω
+5. Calculer le tenseur des petites déformations
+
+ε f d, puis le tenseur des contraintes
+
+σ f d associés au champ
+de déplacement proposé. 6. Montrer à l’aide de l’équation d’équilibre local que u vérifie :
+(1
+r2
+(r2u(r))′
+)′
+= α 1+ν
+1 − ν T ′(r), ∀r ∈ [Ri, Re]
+7. Sachant que la solution générale (c’est-à-dire sans second membre) de l’équation précédente est
+u(r) = cr + d
+r2 , donner l’expression des deux constantes c et d en fonction des caractéristiques géomé
+triques du récipient, et de ∆T = Ti − Te.
+Le pyrex est un matériau fragile, qui rompt dès que la contrainte normale maximale est supérieure à une contrainte seuil σr = 70 MPa.
+8. Vérifier qu’un récipient de dimensions Ri = 50 mm et Re = 55 mm peut effectivement résister.
+4.8 Rupture de l’AquaDom de Berlin
+On s’intéresse ici à l’AquaDom de Berlin, qui était un gigantesque aquarium tropical de forme cylindrique présent dans le lobby d’un hôtel de la ville, et qui s’est brisé soudainement dans la nuit du 15 au 16 décembre 2022. La paroi de l’aquarium peut être modélisée de façon simplifiée comme un domaine cylindrique Ω = {x = rir(θ ) + ziz|Ri ≤ r ≤ Re, 0 ≤ θ < 2π, 0 ≤ z ≤ H}, qui peut glisser sans frottement contre deux
+supports indéformables et fixes selon les plans respectifs Σ0 = {x = rir(θ )|Ri ≤ r ≤ Re, 0 ≤ θ < 2π} et
+ΣH = {x = rir(θ ) + Hiz|Ri ≤ r ≤ Re, 0 ≤ θ < 2π}.
+
+
+4.8 Rupture de l’AquaDom de Berlin 31
+Par ailleurs, on suppose que l’on peut négliger l’action de la pesanteur et les effets d’inertie d’une part, et que l’on peut se placer dans le cadre de l’hypothèse des petites perturbations d’autre part. Pour tout le problème (à l’exception de la question 8), on considère également que l’aquarium est vide, et donc que les faces Σi = {x = Riir(θ ) + ziz|0 ≤ θ < 2π, 0 ≤ z ≤ H} et Σe = {x = Reir(θ ) + ziz|0 ≤ θ < 2π, 0 ≤ z ≤ H}
+sont libres d’effort.
+Enfin, la paroi de l’aquarium Ω est constituée de polyméthacrylate de méthyle (ou PMMA), qui est un matériau polymère, de comportement (thermo)élastique linéaire, homogène et isotrope, de module de Young E, coefficient de Poisson ν et coefficient de dilatation thermique α, de telle sorte que :
+
+ε(x) = 1 + ν
+E
+
+σ(x) − ν
+E
+( tr
+
+σ(x))I + α(T (r) − Tre f
+)I
+où T (r) est le champ de température au sein de la paroi de l’aquarium Ω, et Tre f est une température de
+référence, homogène dans toute la paroi. La nuit où l’AquaDom a rompu ayant été particulièrement froide, on s’intéresse à la déformation de la paroi quand elle est soumise à des températures différentes sur ses faces latérales, respectivement Ti = Tre f sur la face interne Σi et Te = Tre f − τ (avec τ > 0 homogène) sur la face
+externe Σe.
+1. Donner, sans les résoudre, l’ensemble des équations satisfaites par les champs des contraintes
+
+σ, des petites déformations
+
+ε et de déplacement u à l’intérieur et sur les frontières du domaine Ω
+Dans ce qui suit, on cherche un champ de contrantes de la forme :
+
+σ f c(x) =
+(
+A + B − F(r)
+r2
+)
+ir(θ ) ⊗ ir(θ ) +
+(
+A − B − F(r)
+r2 − 1
+r
+dF
+dr (r)
+)
+iθ (θ ) ⊗ iθ (θ ) + σzz(r)iz ⊗ iz
+où A et B sont deux constantes, et F(r) et σzz(r) sont deux fonctions de r, que l’on ne cherchera pas à
+expliciter dans un premier temps.
+2. Le champ de contraintes
+
+σ f c proposé vérifie-t-il l’équation d’équilibre local qui doit être satisfaite en
+tout point du solide Ω ?
+
+
+32 Chapitre 4. Comportement des matériaux
+3. Quelle(s) relation(s) doivent vérifier les constantes A, B et la fonction F pour permettre au champ des contraintes
+
+σ f c proposé de vérifier les conditions sur les frontières Σ0, ΣH , Σi et Σe ? À ce stade, on ne
+cherchera pas à simplifier cette (ces) relation(s).
+Dans ce qui suit, on cherche à vérifier si l’on peut associer au champ de contraintes
+
+σ f c proposé un
+champ de déplacement de la forme :
+u f c(x) = ur(r)ir(θ ) + uz(z)iz
+4. Écrire le tenseur des petites déformations
+
+ε f c associé au tenseur des contraintes
+
+σ f c proposé. En
+déduire les équations que doivent vérifier les composantes ur et uz du champ de déplacement u f c.
+5. Montrer que l’hypothèse d’une composante axiale du déplacement u f c ne dépendant que de l’altitude
+z implique nécessairement que d2uz
+dz2 (z) = 0, ∀z ∈ [0, H]. En déduire l’expression finale de uz(z) et
+l’expression de σzz(r) en fonction de A, dF
+dr (r) et T (r) − Tre f .
+6. Montrer que la relation suivante permet de vérifier l’ensemble des équations établies à la question 4 :
+dF
+dr (r) = Eα
+1 − ν r(T (r) − Tre f
+)
+Conclure sur la possible validité des champs
+
+σ f c et u f c proposés.
+L’épaisseur de la paroi de l’aquarium étant petite par rapport à ses rayons, le champ de contraintes proposé précédemment peut s’approximer comme suit :
+
+σ(x) = Eατ
+1−ν
+Ri e
+(
+(ρ − e
+2Ri
+)iθ (θ ) ⊗ iθ (θ ) + (ρ − ν e
+2Ri
+)iz ⊗ iz
+)
+où e = Re − Ri est l’épaisseur de la paroi de l’aquarium, telle que e/Ri ≪ 1, et ρ = r/Ri − 1 ≪ 1. Par ailleurs,
+on suppose que le matériau sort du domaine élastique dès lors que la contrainte de Tresca est supérieure à une valeur limite σe/2, où σe = 100 MPa est la limite d’élasticité en traction du PMMA.
+7. Tracer l’évolution dans la paroi des composantes du tenseur des contraintes
+
+σ dans le cas où Ri = 5,3 m,
+e = 20 cm, E = 3,2 GPa, ν = 0, 35, α = 7 × 10−5 K−1 et τ = 35 K, qui correspondent aux conditions de l’AquaDom la nuit de la rupture. Le matériau de la paroi reste-t-il dans le domaine élastique ?
+On souhaite enfin étudier l’effet de la pression de l’eau sur la face interne Σi de la paroi de l’aquarium.
+Pour cela, on connaît l’expression du champ des contraintes
+
+σh dans le cas d’un cylindre de paroi mince de
+rayons Ri et Re = Ri + e avec e/Ri ≪ 1, dans le cas où ce cylindre n’est soumis qu’à la pression hydrostatique
+de l’eau sur sa face interne, et reste donc à la température de référence Tre f :
+
+σh(x) ≈ ρeg Ri
+e
+(
+(H − z)iθ (θ ) ⊗ iθ (θ ) + H
+6 iz ⊗ iz
+)
+où ρe = 1000 kg/m3, g = 9,81 m/s2 et H = 16 m.
+8. Comment prendre en compte l’effet de la pression de l’eau dans l’évaluation de la contrainte de Tresca effectuée dans la question 7 ?
+L’étude proposée ici est bien sûr simplifiée et ne permet pas de conclure sur la cause exacte de la rupture de l’AquaDom de Berlin en décembre 2022.
+
+
+5. Élasticité infinitésimale
+5.1 Rigidité d’une liaison élastique
+On considère une liaison élastique, consistant en un matériau déformable inséré entre deux pièces cylindriques indéformables. Le problème étudié est donc celui d’un cylindre de révolution Ω creux, de rayons ri < re et de longueur L selon son axe iz, et dont la surface latérale extérieure (r = re) est collée sur
+un support cylindrique de même rayon, fixe et indéformable, tandis que sa surface latérale intérieure (r = ri)
+est collée sur un cylindre indéformable de même rayon, dont on impose le mouvement d’ensemble comme ud = uzdiz. En outre, les faces extrêmes (en z = 0 et z = L) sont supposées libres d’efforts.
+Enfin, le matériau constitutif est élastique linéaire isotrope, et homogène, de paramètres de Lamé (λ , μ) ; on estime que l’on peut négliger les effets d’inertie et l’action de la pesanteur, et se placer dans le cadre de l’hypothèse des petites perturbations.
+1. Écrire les équations et les conditions aux limites que doivent vérifier le champ de déplacement u et le champ des contraintes
+
+σ à l’intérieur et sur la frontière du domaine Ω.
+Dans toute la suite, on cherche alors une solution en déplacement sous la forme :
+u f d(x) = uz(r)iz, ∀x ∈ Ω
+où l’on a choisi d’adopter un système de coordonnées cylindriques (r, θ , z) lié au cylindre, de base associée (ir(θ ), iθ (θ ), iz).
+
+
+34 Chapitre 5. Élasticité infinitésimale
+2. Calculer le tenseur des petites déformations
+
+ε f d et le tenseur des contraintes
+
+σ f d associés au champ de
+déplacement proposé. 3. Déduire de l’équation d’équilibre local l’équation différentielle vérifiée par uz(r) à l’intérieur du
+domaine Ω. 4. Sachant que la solution générale de l’équation précédente est uz(r) = A ln r + B, donner l’expression
+des deux constantes A et B en fonction des caractéristiques géométriques du cylindre Ω. 5. Calculer le vecteur contrainte sur les faces extrêmes z = 0 et z = L. Peut-on considérer que la solution proposée est valide, loin de ces extrémités ?
+Les figures ci-dessous montrent les résultats d’une simulation numérique de la liaison élastique, à l’aide d’une modélisation axisymétrique. Les comparaisons portent sur la composante σrz (dans la base cylindrique
+(ir, iθ , iz)) des champs de contraintes numériques et analytiques dans une section diamétrale (à θ constant),
+ainsi que sur la composante verticale uz du déplacement.
+6. Commenter les figures ci-dessus. Confirment-elles la conclusion de la question 5 ? 7. Donner l’expression de la rigidité K de la liaison élastique, définie comme :
+K = ∥Re∥
+|uzd |
+où Re est la résultante de l’action du cylindre mobile sur le cylindre Ω, au niveau de la surface latérale intérieure de Ω. Dans le cas où re = 5 cm, ri = 3 cm, L = 10 cm et μ = 0,25 MPa, la simulation
+numérique donne K = 294 N/mm : commenter.
+
+
+5.2 Poutre rectangulaire soumise à une contrainte de cisaillement 35
+5.2 Poutre rectangulaire soumise à une contrainte de cisaillement
+On considère une poutre de longueur L et de section rectangulaire, de dimensions 2h × 2b, de telle sorte que le domaine associé peut s’écrire comme :
+Ω = {x = x1i1 + x2i2 + x3i3|0 ≤ x1 ≤ L, −h ≤ x2 ≤ h, −b ≤ x3 ≤ b}
+où l’on a associé à la géométrie de la poutre la base cartésienne (i1, i2, i3), de coordonnées (x1, x2, x3).
+Tandis que sa section en x1 = 0 est encastrée sur un bâti fixe et indéformable, la poutre est sollicitée en
+cisaillement à son autre extrémité (c’est-à-dire sur sa section en x1 = L) par une densité surfacique d’efforts :
+fS(x) = τ(x2)i2, où τ est une fonction connue, qui vérifie τ(±h) = 0. Par ailleurs, toutes les surfaces latérales
+de la poutre (en x2 = ±h et en x3 = ±b) sont libres d’efforts.
+On considère en outre que le matériau constitutif de la poutre est élastique linéaire, isotrope et homogène, de module de Young E et de coefficient de Poisson ν. On suppose enfin que l’action de la pesanteur et les effets d’inertie peuvent être négligés, que le caractère plan du problème et du chargement permet de se placer en contraintes planes, et que l’on peut adopter le cadre de l’hypothèse des petites perturbations.
+1. Écrire les équations et les conditions aux limites que doivent vérifier le champ de déplacement u et le champ des contraintes
+
+σ à l’intérieur et sur la frontière du domaine Ω.
+Dans toute la suite, compte tenu de l’hypothèse de contraintes planes, on cherche une solution en contrainte sous la forme :
+
+σ f c(x) = σ11(x1, x2)i1 ⊗ i1 + 2σ12(x1, x2)i1 ⊗S i2, ∀x ∈ Ω
+2. Montrer, en écrivant l’équation d’équilibre local, et en utilisant certaines conditions aux limites du problème, que :
+σ12(x1, x2) = τ(x2), et σ11(x1, x2) = τ′(x2)(L − x1), ∀x1 ∈ [0, L], ∀x2 ∈ [−h, h]
+3. Calculer le tenseur
+
+ε f c des petites déformations, en fonction de τ et de sa dérivée.
+4. En déduire que les deux premières composantes du champ de déplacement peuvent s’écrire comme :
+〈u(x), i1
+〉 = τ′(x2)
+E
+(
+Lx1 − x12
+2
+)
++
+〈u(x1=0) , i1
+〉, ∀x1 ∈ [0, L], ∀x2 ∈ [−h, h]
+〈u(x), i2
+〉 = 〈u(x2=0) , i2
+〉− ν
+E
+(τ(x2) − τ(0))(L − x1), ∀x1 ∈ [0, L], ∀x2 ∈ [−h, h]
+et que l’on a également :
+(2 + ν)τ(x2) = τ′′(x2)
+(
+Lx1 − x12
+2
+)
++E
+(〈 ∂ u
+∂ x2 (x1 = 0, x2), i1
+〉
++
+〈 ∂u
+∂ x1 (x1, x2 = 0), i2
+〉)
+− ντ(0)
+5. Montrer, par un argument de variables séparées, que, nécessairement, τ′′(x2) = a, où a est une constante.
+On suppose alors que la densité surfacique d’efforts appliquée en x1 = L vérifie effectivement cette
+condition nécessaire. 6. En déduire l’expression finale du champ des contraintes au sein de la poutre.
+On suppose dans toute la suite que h ≪ L. En outre, le matériau constitutif de la poutre est ductile, avec une limite d’élasticité en traction σ0 = 200 MPa.
+7. Comparer les ordres de grandeur de σ11 et σ12. En adoptant un critère de von Mises, en déduire la
+zone où le matériau va atteindre en premier sa limité d’élasticité. Quelle est alors la valeur maximale correspondante τ(0) du chargement de cisaillement, quand L = 5 m et h = 50 cm ? 8. Proposer la conception d’une pièce allégée, de forme optimisée pour supporter le chargement appliqué.
+9. Dans le cas où le chargement de cisaillement est tel que τ(x2) = τ0 cos ( πx2
+2h
+), que doit vérifier la
+constante τ0 pour que la solution en contrainte étudiée dans ce problème soit encore une solution
+pertinente ?
+
+
+36 Chapitre 5. Élasticité infinitésimale
+5.3 Planète soumise à l’action de son propre champ de pesanteur
+On considère une planète que l’on suppose assimilable à une boule parfaite Ω de rayon R, soumise à la seule action de sa gravité, qui se traduit sous la forme d’un champ d’accélération de la pesanteur qui s’écrit comme :
+g(x) = −g0 r
+R er(θ , φ ), ∀x ∈ Ω
+où g0 est une constante connue, et (er(θ , φ ), eθ (θ , φ ), eφ (φ )) est une base sphérique associée à la boule, de
+coordonnées (r, θ , φ ) ; on notera en particulier les relations suivantes entre les vecteurs de cette base :
+∂ er
+∂ θ (θ , φ ) = eθ (θ , φ ), et ∂ er
+∂ φ (θ , φ ) = sin θ eφ (φ )
+Par ailleurs, le matériau constitutif est supposé élastique linéaire isotrope, et homogène, de module de Young E, de coefficient de Poisson ν et de masse volumique ρ. Enfin, on considère que l’on peut négliger les effets d’inertie et que l’on peut se placer dans le cadre de l’hypothèse des petites perturbations.
+1. Écrire les équations et conditions aux limites que doivent vérifier le champ de déplacement u et le champ des contraintes
+
+σ à l’intérieur et sur la frontière du domaine Ω.
+Dans toute la suite, on cherche alors une solution en déplacement sous la forme :
+u f d(x) = ur(r)er(θ , φ ), ∀x ∈ Ω
+2. Justifier la forme retenue pour le déplacement. 3. Calculer le tenseur des petites déformations
+
+ε f d associé au champ de déplacement proposé ; pour
+cela, on pourra notamment utiliser la formule suivante pour le tenseur gradient d’un vecteur w en coordonnées sphériques :
+Dxw = ∂ w
+∂ r ⊗ er + ∂ w
+∂ θ ⊗ eθ
+r + ∂w
+∂ φ ⊗ eφ
+r sin θ 4. Calculer le tenseur des contraintes
+
+σ f d associé à
+
+ε f d. Quelles sont les contraintes et les directions
+principales liées à
+
+σfd ?
+5. Déduire de l’équation d’équilibre local l’équation différentielle vérifiée par ur ; pour cela, on pourra
+utiliser la formule suivante pour la divergence d’un tenseur d’ordre deux A en coordonnées sphériques :
+dddiiivvvxA = ∂ A
+∂ r er + ∂ A
+∂θ
+eθ
+r + ∂A
+∂φ
+eφ
+r sin θ 6. Montrer alors que ur vérifie l’équation suivante :
+d dr
+(1
+r2
+d dr
+(r2 ur (r))
+)
+= −γr, ∀r ∈]0, R[
+où γ est une constante à déterminer. 7. En déduire ur en fonction des caractéristiques du problème, en remarquant que le déplacement doit
+rester fini en tout point du domaine Ω. 8. Calculer la composante radiale εrr du tenseur des petites déformations, et montrer qu’une partie de la
+planète est en compression radiale, tandis que l’autre est en extension radiale.
+9. Évaluer le résultat dans le cas de la Terre, avec R = 6400 km, g0 = 9,81 m/s2, ν = 0, 3, et ρ =
+5000 kg/m3. Critiquer l’utilisation de cette modélisation dans ce cas.
+
+
+5.4 Frettage 37
+5.4 Frettage
+On s’intéresse ici à l’assemblage de deux pièces cylindriques de sections circulaires (typiquement, un arbre et un moyeu), obtenu par « frettage » : dans leurs états initiaux (non déformés), la pièce extérieure creuse (le moyeu) est de rayon intérieur légèrement plus petit que le rayon extérieur de la pièce intérieure (l’arbre), ce qui crée une pression de contact au moment de l’assemblage, et garantit l’adhésion entre les deux pièces, ainsi que la possibilité de transmettre un mouvement et des couples.
+Dans la suite, on étudie successivement la réalisation pratique de cet assemblage, ainsi que son état final après association de ces deux pièces ; en revanche, on ne s’intéressera pas à la problématique de transmission de couples permise par cet assemblage. Dans tout le problème, on suppose que l’on peut négliger les effets d’inertie et l’action de la pesanteur, et que l’on peut se placer dans le cadre de l’hypothèse des petites perturbations. Le matériau constitutif des deux pièces est de comportement thermoélastique linéaire isotrope et homogène, de module de Young E, de coefficient de Poisson ν et de coefficient de dilatation thermique α. Enfin, on se placera dans le système de coordonnées cylindriques (r, θ , z) associé à la base (ir(θ ), iθ (θ ), iz), où iz est l’axe commun des deux
+cylindres.
+Réalisation pratique
+Une technique communément utilisée pour assembler ces deux pièces de rayons incompatibles est de chauffer suffisamment le moyeu pour que le rayon intérieur de ce dernier devienne plus grand que le rayon (extérieur) de l’arbre. Dans leurs états initiaux (non déformés), on note respectivement Ri et Re les rayons intérieur et extérieur
+du moyeu, et on pose que le rayon extérieur de l’arbre est R′e = Ri + s/2 où s > 0 est appelé le serrage
+diamétral. On chauffe alors uniformément le moyeu de sorte que ce dernier voie son champ de température augmenter de ∆T uniforme ; on suppose par ailleurs que le moyeu est simplement posé en z = 0 sur un support fixe et indéformable sur lequel il peut glisser librement.
+1. Écrire l’ensemble des équations et conditions aux limites du problème. 2. Vérifier que le tenseur des contraintes
+
+σ = 0 est solution du problème. En déduire l’expression du champ de déplacement.
+3. On suppose que le serrage proportionnel, défini comme le rapport s/(2Ri), est égal à 10−3. Quelle
+évolution de température ∆T minimale faut-il imposer au moyeu pour que ce dernier puisse être
+assemblé avec l’arbre (qui, lui, reste à température ambiante), sachant que α = 10−5 K−1 ?
+Cylindre plein soumis à une pression externe
+Avant de considérer simultanément les deux pièces après assemblage, on commence par s’intéresser spécifiquement à l’arbre Ωa qui, lors du frettage, subit alors une pression P0 à son interface avec le moyeu. À
+ce stade, on suppose que cette pression de contact P0 est uniforme et connue. Par ailleurs, on considère que
+les faces aux deux extrémités z = 0 et z = Ha de l’arbre sont libres d’efforts.
+
+
+38 Chapitre 5. Élasticité infinitésimale
+4. Écrire l’ensemble des équations et conditions aux limites que vérifient le champ de déplacement u a et le tenseur des contraintes
+
+σ a à l’intérieur et sur la frontière extérieure de l’arbre.
+On se propose alors de chercher le champ de contraintes sous la forme suivante :
+
+σ f c(x) = σrrir(θ ) ⊗ ir(θ ) + σθθ iθ (θ ) ⊗ iθ (θ ) + σzziz ⊗ iz, ∀x ∈ Ωa
+où les composantes σrr, σθθ et σzz sont supposées constantes.
+5. À l’aide de l’équation d’équilibre local et des conditions aux limites établies précédemment, déterminer les valeurs des composantes σrr, σθθ et σzz.
+6. Vérifier qu’il est possible de déterminer un champ de déplacement u f c associé au tenseur des
+contraintes précédent.
+Cylindre creux soumis à une pression interne
+On s’intéresse maintenant au moyeu Ωm après assemblage avec l’arbre et retour à température ambiante :
+il est alors soumis sur sa frontière intérieure à la pression de contact P0 évoquée dans la partie précédente.
+Par ailleurs, on suppose que les deux faces z = 0 et z = Hm du moyeu sont libres d’efforts.
+7. Écrire l’ensemble des équations et conditions aux limites que vérifient le champ de déplacement u m et le tenseur des contraintes
+
+σ m à l’intérieur et sur les frontières du moyeu.
+On se propose alors de chercher le champ de déplacement sous la forme suivante :
+u f d(x) = ur(r)ir(θ ) + uz(z)iz, ∀x ∈ Ωm
+8. Justifier la forme retenue pour le champ de déplacement. 9. Calculer le tenseur des déformations
+
+ε f d et le tenseur des contraintes
+
+σ f d associés au champ de
+déplacement proposé. 10. Déduire de l’équation d’équilibre local les équations différentielles vérifiées par ur(r) et uz(z) à
+l’intérieur du domaine Ωm.
+11. Sachant que les deux solutions générales des équations précédentes sont :
+ur(r) = Ar + B
+r , ∀r ∈ [Ri, Re], et u′z(z) = C, ∀z ∈ [0, Hm]
+écrire le système d’équations permettant de déterminer A, B et C en fonction des caractéristiques du problème. 12. Vérifier que la solution en contrainte du problème peut s’écrire comme :
+
+σ(x) = P0Ri2
+Re2 − Ri2
+(
+1−
+( Re
+r
+)2)
+ir(θ ) ⊗ ir(θ ) + P0Ri2
+Re2 − Ri2
+(
+1+
+( Re
+r
+)2)
+iθ (θ ) ⊗ iθ (θ ), ∀x ∈ Ωm
+Pourquoi le tenseur des contraintes ne dépend-il pas des caractéristiques du matériau ?
+Simulation numérique des cylindres sous pression
+Les figures ci-dessous montrent les résultats d’une simulation numérique des cylindres sous pression, à l’aide d’une modélisation axisymétrique et pour une pression P0 = 50 MPa identique pour les deux cylindres :
+celui sous pression interne en haut, celui sous pression externe en bas. Les comparaisons portent sur les composantes σrr et σθθ (dans la base cylindrique (ir, iθ , iz)) des champs de contraintes numériques et
+analytiques dans une section diamétrale (à θ constant).
+
+
+5.4 Frettage 39
+13. Commenter les figures ci-dessus.
+La figure ci-dessous montre l’estimation, à l’aide de la simulation numérique, des rayons (en mm) des deux cylindres après déformation pour différentes valeurs de pression imposée P0, et dans le cas où Ri = 5 cm,
+Re = 8 cm et s/(2Ri) = 10−3.
+14. Que peut-on dire de la dépendance des rayons après déformation en fonction de P0 ? En déduire une
+méthode pour déterminer la pression de contact obtenue dans le cas de l’assemblage entre le moyeu Ωm et l’arbre Ωa.
+État après assemblage
+On s’intéresse maintenant aux deux pièces une fois frettées, en cherchant à déterminer analytiquement les champs de déplacement u a et u m et de contraintes
+
+σ a et
+
+σ m respectivement associés à l’arbre et au moyeu. Afin de pouvoir utiliser les résultats des parties précédentes, on suppose que l’on peut négliger le frottement entre les deux pièces, ainsi que les effets de coin qui pourraient résulter de la différence de longueur entre les deux pièces.
+
+
+40 Chapitre 5. Élasticité infinitésimale
+15. Écrire l’ensemble des équations et conditions aux limites que vérifient les champs de déplacement u a et u m et les tenseurs des contraintes
+
+σ a et
+
+σ m à l’intérieur des deux pièces, et sur leurs frontières extérieures ainsi que communes. 16. Compte tenu des résultats des parties précédentes, déterminer les tenseurs des petites déformations
+
+εa
+et
+
+ε m respectivement dans l’arbre et le moyeu. 17. Calculer le rayon extérieur de l’arbre déformé, ainsi que le rayon intérieur du moyeu déformé. 18. Montrer que l’égalité de ces deux rayons implique que :
+P0 = Es
+4Ri
+(
+1 − Ri2
+Re2
+)
+Comparer avec les conclusions de la question 14, dans le cas où les pièces sont en acier (module de
+Young E = 200 GPa), et Ri = 5 cm, Re = 8 cm et s/(2Ri) = 10−3.
+19. Sachant que le seuil d’élasticité de l’acier est σ0 = 150 MPa, vérifier à l’aide du critère de Tresca si les
+pièces restent dans leur domaine élastique.
+Les figures ci-dessous montrent les résultats d’une simulation numérique des cylindres assemblés par frettage, à l’aide d’une modélisation axisymétrique qui tient du compte du contact, et dans le cas où l’arbres est plus long que le moyeu (Ha > Hm). La première permet de visualiser sur une coupe de la géométrie 3D la
+contrainte de Tresca dans l’assemblage ainsi que le seuil correspondant à la limite d’élasticité de l’acier. Les suivantes montrent les composantes σrr et σθθ (dans la base cylindrique (ir, iθ , iz)) des champs de contraintes
+numériques et analytiques, dans une demi-section diamétrale (θ constant, z > Ha/2).
+
+
+5.5 Liaison collée 41
+20. Analyser les similitudes et les différences entre les champs de contraintes analytique et numérique. En particulier, retrouve-t-on la valeur de P0 déterminée dans les questions précédentes ?
+5.5 Liaison collée
+On s’intéresse au comportement mécanique d’un joint de colle placé entre une pièce mobile Ωr et un
+support fixe Ω0. On se place pour cela dans un repère cylindrique (O, ir (θ ) , iθ (θ ) , iz), défini classiquement
+par rapport au repère cartésien (O, ix, iy, iz) sur la figure ci-dessous.
+Vue axiale de la liaison collée (à gauche). Vue 3D de l’ensemble Ωr − Ωc (à droite).
+La pièce rigide et mobile Ωr = {x = rir (θ ) + ziz | 0 ≤ r ≤ Ri, π/2 ≤ θ ≤ 3π/2, −H ≤ z ≤ H}, supposé
+indéformable, est en rotation autour d’un axe fixe passant par l’origine O, et porté par iz. On appelle φ l’angle,
+
+
+42 Chapitre 5. Élasticité infinitésimale
+supposé très petit et connu, de la rotation de Ωr autour de l’axe iz de la liaison. Le joint de colle occupe
+le domaine Ωc = {x = rir (θ ) + ziz | Ri ≤ r ≤ Re, π/2 ≤ θ ≤ 3π/2, −H ≤ z ≤ H}. Le matériau associé est
+supposé homogène, linéaire élastique isotrope, de module de Young Ec et de coefficient de Poisson νc. On
+appelle les différentes parties de la frontière ∂ Ωc du domaine Ωc comme suit : — Σe = {x = Reir (θ ) + ziz | π/2 ≤ θ ≤ 3π/2, −H ≤ z ≤ H} ;
+— Σi = {x = Riir (θ ) + ziz | π/2 ≤ θ ≤ 3π/2, −H ≤ z ≤ H} ;
+— Σ+H = {x = rir (θ ) + Hiz | Ri ≤ r ≤ Re, π/2 ≤ θ ≤ 3π/2} ;
+— Σ−H = {x = rir (θ ) − Hiz | Ri ≤ r ≤ Re, π/2 ≤ θ ≤ 3π/2} ;
+— Σπ/2 = {x = riy + ziz | Ri ≤ r ≤ Re, −H ≤ z ≤ H} ;
+— Σ3π/2 = {x = −riy + ziz | Ri ≤ r ≤ Re, −H ≤ z ≤ H}.
+Le matériau adhère parfaitement au support Ωr sur Σi (en r = Ri) et au bâti fixe Ω0 sur Σe (en r = Re).
+Les autres surfaces sont supposées libres d’effort. Enfin, on suppose que l’on peut négliger les effets de pesanteur et d’inertie, et que l’on peut adopter l’hypothèse des petites perturbations.
+1. Justifier que, pour la petite rotation correspondant à notre problème, le champ de déplacement dans le support rigide Ωr peut s’écrire comme : uΩr (r, θ , z) = rφiθ (θ ).
+2. Écrire, sans les résoudre, toutes les équations du problème à l’intérieur de Ωc et sur sa frontière ∂ Ωc.
+Dans la suite, on considère le champ de déplacement suivant dans Ωc : u f d (r, θ , z) = uθ (r) iθ (θ ).
+3. Justifier la forme du champ de déplacement proposée. 4. Écrire le tenseur des petites déformations
+
+ε f d associé à ce champ. 5. Écrire le tenseur des contraintes
+
+σ f d associé à
+
+ε f d. Déduire de l’équation d’équilibre local l’équation
+différentielle que doit vérifier uθ (r).
+6. Vérifier que la solution uθ (r) peut s’écrire sous la forme :
+uθ (r) = ar + b
+r.
+Déterminer les constantes a et b, et la forme définitive de
+
+σfd.
+7. Examiner les conditions aux limites sur les frontières Σ±H , Σπ/2 et Σ3π/2. La forme proposée u f d
+est-elle la solution exacte du problème ?
+Les figures ci-dessous permettent de comparer la composante rθ de
+
+σ f d avec la composante rθ du champ
+
+σh obtenu par simulation numérique. On suppose que ce calcul est effectué avec assez de précision pour que
+l’on puisse considérer que le champ de contraintes
+
+σh est confondu avec la solution exacte du problème.
+Comparaison de la composante rθ (en MPa) pour les champs
+
+σ f d (lignes d’isovaleurs) et
+
+σh (graphe de surface).
+
+
+5.6 Retrait thermique du propergol dans un booster de fusée 43
+Comparaison le long de la ligne θ = π de la composante rθ (en MPa) pour les champs
+
+σ f d (en rouge) et
+
+σh
+(en bleu), en fonction de r.
+8. Que pensez-vous du champ de contraintes
+
+σ f d obtenu analytiquement ? Peut-on invoquer le principe de
+Saint-Venant ? Pourquoi semble-t-il correct d’utiliser dans la suite le champ
+
+σ f d pour estimer l’action
+du joint de colle sur le support Ωr ?
+9. Calculer la résultante, Rc, et le moment (exprimé au point O), MOc, des efforts exercés par le joint de
+colle Ωc sur Ωr. Déterminer la rigidité en torsion Kc = ∥MOc∥
+|φ| du joint de colle.
+10. La colle obéit à un critère de von Mises, de contrainte associée σe. Déterminer les points de Ωc puis la
+valeur critique de l’angle de torsion φe pour lesquelles ce critère est atteint en premier.
+5.6 Retrait thermique du propergol dans un booster de fusée
+Dans le cas des moteurs de fusée dits « à propulsion solide », des enveloppes cylindriques, appelées « boosters », contiennent un matériau réactif (le propergol) sous forme solide, qui, une fois la combustion débutée, permet de créer une poussée importante. On cherche à quantifier ici les contraintes qui s’établissent au sein du propergol solide lors de son élaboration, une fois que celui-ci a été placé à l’intérieur de l’enveloppe métallique du booster. En effet, le propergol, qui se présente initialement sous la forme d’une pâte liquide, est introduit avec un réticulant et des catalyseurs de polymérisation dans le booster, puis « cuit » pendant dix jours à 50 ◦C de façon à le rendre solide. L’ensemble revient ensuite lentement à température ambiante : le propergol présentant un coefficient de dilatation thermique beaucoup plus important que celui de l’enveloppe métallique en acier, des contraintes se créent en son sein lors de ce phénomène de « retrait » thermique.
+
+
+44 Chapitre 5. Élasticité infinitésimale
+On suppose que le propergol occupe, à la fin de la cuisson, un domaine cylindrique creux, de hauteur H = 25 m, et de rayons extérieur Re et intérieur Ri ; en introduisant une base cylindrique (ir(θ ), iθ (θ ), iz
+), de coordonnées associées (r, θ , z), le domaine concerné se paramètre donc comme :
+Ω = {x = rir(θ ) + ziz|Ri ≤ r ≤ Re, 0 ≤ z ≤ H}
+Le propergol est alors considéré comme un matériau élastique linéaire, homogène et isotrope, de module de Young E = 2 MPa, de coefficient de Poisson ν = 0, 49, et de coefficient de dilatation thermique (isotrope)
+α = 10−4 K−1. On suppose en outre que, lors du refroidissement, qui est d’amplitude thermique ∆T < 0 constante dans tout le domaine, on peut dire que : — le propergol reste parfaitement collé en r = Re avec l’enveloppe métallique du booster, que l’on
+considère comme fixe et indéformable (vu, notamment, que le coefficient de dilatation thermique de l’acier constituant l’enveloppe est dix fois plus petit que α) ; — en z = 0 et en z = H, le propergol est assujetti à glisser sans frottement contre l’enveloppe du booster, fixe et indéformable (le contact ne pouvant être rompu) ; — le propergol n’est soumis à aucune action sur sa surface intérieure, en r = Ri. Enfin, on suppose que l’on peut négliger l’action de la pesanteur et les effets d’inertie, et que l’on peut adopter l’hypothèse des petites perturbations.
+1. Écrire, sans les résoudre, l’ensemble des équations et conditions aux limites que vérifient le champ de déplacement u et le champ des contraintes
+
+σ à l’intérieur et sur les frontières de Ω.
+On se propose alors de chercher le champ de déplacement sous la forme suivante :
+u f d(x) =
+(
+Ar + B
+r
+)
+ir(θ ), ∀x ∈ Ω
+où A et B sont des constantes qui seront à déterminer plus bas.
+2. Interpréter physiquement le champ de déplacement proposé. En considérant les conditions sur les frontières du domaine, quelle doit être l’expression de B en fonction de A ? 3. Calculer, en fonction de A notamment, le tenseur des petites déformations
+
+ε f d associé au champ de
+déplacement proposé. Interpréter physiquement ses composantes. 4. Calculer le tenseur des contraintes
+
+σ f d associé au champ de déplacement proposé, et pour le refroidis
+sement ∆T imposé. 5. Montrer que le champ des contraintes
+
+σ f d vérifie l’équation d’équilibre local en tout point du domaine
+Ω.
+6. Déterminer l’expression de A en fonction de la géométrie et des propriétés mécaniques du propergol, ainsi que du refroidissement ∆T . 7. En déduire l’expression finale du tenseur des contraintes au sein du propergol. Justifier pourquoi cet état de contraintes est qualifié de « traction triaxiale ».
+On suppose que le propergol rompt selon un critère de contrainte normale maximale, de résistance à la traction associée σr = 0,25 MPa.
+8. Pour quelle amplitude thermique ∆T le propergol risque-t-il de rompre ? Évaluer la température en dessous de laquelle il ne faut pas descendre dans le cas d’un booster d’Ariane 5, pour lequel on a Re = 1,5 m et Ri = 0,5 m.
+Dans la suite, on souhaite ne plus négliger le coefficient de dilatation thermique de l’enveloppe métallique du booster, de forme cylindrique d’épaisseur e = 1 cm, et étudier, par simulation numérique, le retrait thermique du propergol quand l’enveloppe se déforme également. Tout d’abord, les figures ci-dessous présentent les composantes des champs des contraintes dans le propergol et dans l’acier, au voisinage du point (r = Re, z = H) d’une tranche à θ fixé de la géométrie cylindrique ; seules les composantes non nulles
+sont représentées.
+
+
+5.6 Retrait thermique du propergol dans un booster de fusée 45
+9. Quelles conditions sont vérifiées par les différentes composantes des contraintes sur les frontières r = Re + e, z = H + e, r = Re et z = H ? À quoi ces conditions correspondent-elles physiquement ?
+Par ailleurs, les figures ci-dessous présentent l’évolution des composantes radiales ur = 〈u, ir
+〉 et axiales uz = 〈u, iz
+〉 des champs de déplacement dans le propergol et dans l’acier, ainsi que la géométrie déformée (facteur d’amplification : 10). On visualise ici une portion supérieure de l’ensemble (z ≥ 20 m), pour une tranche à θ fixé.
+10. Quelles sont les principales similarités et différences observées par rapport au champ de déplacement déterminé de façon analytique dans les questions 2 à 8 ? Commenter.
+
+
+46 Chapitre 5. Élasticité infinitésimale
+Enfin, on s’intéresse plus précisément à l’évolution des contraintes dans l’épaisseur de l’enveloppe métallique du booster. Pour cela, les figures ci-dessus permettent de comparer de façon quantitative l’évolution des composantes des contraintes dans les deux matériaux, selon une ligne à z < H fixé (au-dessus), et selon une ligne à r < Re fixé (en-dessous) ; seules les composantes non nulles sont représentées.
+11. Comment évoluent les différentes composantes des contraintes dans l’épaisseur de l’enveloppe métallique (distinguer les deux cas : z fixé et r fixé) ? À quelle forme de modèle ces évolutions vous font-elles penser ? Commenter.
+5.7 Essai de dépression hydrostatique
+On s’intéresse ici à un essai de caractérisation mécanique très utilisé dans le cas de matériaux (quasi) incompressibles, et qui consiste à solliciter en extension selon leur épaisseur des « lames » de matériau extrêmement minces, comme représenté sur la figure ci-dessous. Cet essai permet alors d’obtenir la ruine du matériau par l’apparition de vides en son sein, ce qui correspond au phénomène dit de cavitation. Par souci de simplification, on considère dans tout ce qui suit un problème plan avec une hypothèse de déformations planes. Le domaine considéré est de forme rectangulaire de dimensions L × e (avec e ≪ L), et est représenté par Ω = {x = x1i1 + x2i2| − L/2 ≤ x1 ≤ L/2, −e/2 ≤ x2 ≤ e/2}, où (i1, i2) est une base cartésienne du plan
+d’étude. Ses faces supérieure et inférieure sont supposées parfaitement collées aux dispositifs de chargement de la machine d’essai, de sorte qu’on peut supposer que : — les points de la face supérieure Σ2+ = {x = x1i1 + e/2 i2| − L/2 ≤ x1 ≤ L/2} sont contraints à un
+déplacement u+
+d = αe/2 i2 ;
+
+
+5.7 Essai de dépression hydrostatique 47
+— les points de la face inférieure Σ2− = {x = x1i1 − e/2 i2| − L/2 ≤ x1 ≤ L/2} sont contraints à un
+déplacement u−
+d = −αe/2 i2 ;
+où α > 0 est une constante supposée connue.
+Par ailleurs, les deux faces latérales définies comme Σ1+ = {x = L/2 i1 + x2i2| − e/2 ≤ x2 ≤ e/2} et
+Σ1− = {x = −L/2 i1 + x2i2| − e/2 ≤ x2 ≤ e/2} sont libres d’efforts. Enfin, on suppose que l’on peut se placer
+dans le cadre de l’hypothèses des petites perturbations, et que l’on peut négliger l’action de la pesanteur et les effets d’inertie (l’essai étant quasi-statique).
+Partie 1 – Cas d’un matériau compressible
+On considère dans cette partie que le comportement du matériau testé est élastique linéaire, homogène et isotrope, de paramètres de Lamé λ et μ.
+1. Écrire les équations et les conditions aux limites que doivent vérifier le champ de déplacement u et le champ des contraintes
+
+σ à l’intérieur et sur les frontières du domaine Ω.
+Dans toute la suite de cette partie, on cherche une solution en déplacement sous la forme :
+u f d(x) =
+(
+x22 − e2
+4
+)
+f (x1)i1 + αx2i2
+où la fonction f (x1) sera à déterminer plus bas.
+2. Interpréter physiquement le champ de déplacement u f d proposé.
+3. Calculer le tenseur des petites déformations
+
+ε f d et le tenseur des contraintes
+
+σ f d associés au champ de
+déplacement u f d proposé. Que représente α ?
+4. Le champ des contraintes
+
+σ f d vérifie-t-il les équations et conditions aux limites mentionnées dans la
+question 1 ?
+Afin de construire une solution approchée du problème, on suppose que la faible épaisseur de la « lame » testée (e ≪ L) implique qu’il est suffisant d’avoir :
+1
+e
+∫ e/2
+−e/2 dddiiivvvx
+
+σ f d dx2 = 0
+5. Déduire de la relation précédente l’équation différentielle vérifiée par la fonction f (x1).
+Une solution générale de l’équation différentielle établie dans la question 5 est :
+f (x1) = A sinh(κx1) + B cosh(κx1), avec κ = 2
+e
+√ 3μ λ + 2μ
+où A et B sont deux constantes. On rappelle que les fonctions cosh et sinh sont définies comme :
+cosh x = ex + e−x
+2 , et sinh x = ex − e−x
+2
+et que cosh′ = sinh et sinh′ = cosh.
+
+
+48 Chapitre 5. Élasticité infinitésimale
+6. Montrer que B = 0. 7. Que vaut A pour que les résultantes respectives du vecteur contrainte
+
+σ f dn soient nulles sur les faces
+latérales Σ1+ et Σ1− ?
+La page suivante montre une comparaison entre la simulation numérique de l’essai de dépression hydrostatique, considérée comme la solution de référence, et la solution analytique établie dans cette partie. Les trois figures du haut présentent les composantes diagonales du tenseur des contraintes sur l’ensemble du domaine (pour lequel e/L = 1/40), tandis que les trois figures du bas présentent un zoom du domaine au
+voisinage de la face latérale Σ1+. À chaque fois, la solution numérique est représentée en surface colorée,
+tandis que la solution analytique est visible sous la forme de lignes d’isovaleurs. Les échelles de couleurs utilisées pour les deux représentations sont les mêmes.
+8. Quelles différences constatez-vous entre le champ de contraintes analytique et le champ correspondant obtenu numériquement ? Que pensez-vous de la solution analytique ?
+
+
+5.8 Dislocation vis 49
+Partie 2 – Cas d’un matériau incompressible
+La solution analytique obtenue dans la partie précédente peut être simplifiée dans le cas limite d’un matériau (de comportement élastique linéaire, homogène et isotrope) parfaitement incompressible, qui correspond à un coefficient de Poisson égal à 1/2 :
+u(x) = − 3
+2 αx1
+(2
+e
+)2 (
+(e
+2
+)2 − x22
+)
+i1 + αx2i2
+
+ε(x) = − 3
+2α
+(2
+e
+)2 (
+(e
+2
+)2 − x22
+)
+i1 ⊗ i1 + αi2 ⊗ i2 + 3
+2α
+(2
+e
+)2
+x1x2(i1 ⊗ i2 + i2 ⊗ i1)
+
+σ(x) = Eα
+2
+(2
+e
+)2 (
+(L
+2
+)2 − x12
+)
+(i1 ⊗ i1 + i2 ⊗ i2 + i3 ⊗ i3)
+où i3 = i1 ∧ i2, et le tenseur des contraintes
+
+σ a été obtenu après notamment un développement limité lié à l’incompressibilité du matériau. Ces expressions peuvent être utilisées dans tout ce qui suit sans démonstration. L’objectif de l’essai consiste alors à mesurer la contrainte à partir de laquelle le phénomène de cavitation apparaît dans l’éprouvette. On suppose que le matériau constitutif rompt selon un critère de rupture par clivage, associé à un seuil σ0.
+9. Montrer que la solution proposée correspond bien à une transformation sans variation de volume du domaine Ω. 10. Justifier la dénomination d’essai de dépression hydrostatique. Où se trouve la contrainte normale maximale et que vaut-elle ? 11. Calculer la résultante du vecteur contrainte sur la face supérieure Σ2+, pour une longueur L selon la
+direction i3. Comment évaluer la résistance à la cavitation du matériau à partir de la mesure de la force
+exercée par la machine et de la déformation imposée α ?
+5.8 Dislocation vis
+On s’intéresse ici au champ de contrainte élastique généré par une dislocation vis, défaut linéaire particulier dans l’empilement atomique d’un matériau cristallin, qui permet, par le déplacement qu’il génère dans son voisinage, la déformation plastique de ce dernier. Dans tout le problème, on considérera que ce phénomène peut s’étudier de façon équivalente à l’aide d’un domaine en forme de cylindre creux et fendu au niveau du plan de coordonnée θ = π : Ω = {x = rir(θ ) + ziz|Ri ≤ r ≤ Re, −π < θ < π, −L/2 ≤ z ≤ L/2},
+où (ir(θ ), iθ (θ ), iz) est une base cylindrique associée au cylindre.
+Sur les deux faces de la fente, en regard l’une de l’autre, on suppose que : — pour les points de la surface Σ+ = {x = rir(π) + ziz|Ri ≤ r ≤ Re, −L/2 ≤ z ≤ L/2}, la composante
+axiale du déplacement est fixée et telle que : 〈u|θ=π− , iz
+〉 = ud/2, où ud est une constante supposée
+connue ; — pour les points de la surface Σ− = {x = rir(−π) + ziz|Ri ≤ r ≤ Re, −L/2 ≤ z ≤ L/2}, la composante
+axiale du déplacement est fixée et telle que : 〈u|θ=−π+ , iz
+〉 = −ud/2 ;
+— les composantes radiales et orthoradiales du vecteur contrainte pour les points de ces surfaces Σ− et
+Σ+ sont nulles.
+Par ailleurs, les autres surfaces de la frontière du domaine Ω sont libres d’efforts :
+
+
+50 Chapitre 5. Élasticité infinitésimale
+— Σi = {x = Riir(θ ) + ziz| − π < θ < π, −L/2 ≤ z ≤ L/2} ;
+— Σe = {x = Reir(θ ) + ziz| − π < θ < π, −L/2 ≤ z ≤ L/2} ;
+— ΣL/2 = {x = rir(θ ) + L/2 iz|Ri ≤ r ≤ Re, −π < θ < π} ;
+— Σ−L/2 = {x = rir(θ ) − L/2 iz|Ri ≤ r ≤ Re, −π < θ < π}.
+Enfin, on suppose que l’on peut se placer dans le cadre de l’hypothèses des petites perturbations, que l’on peut négliger l’action de la pesanteur et les effets d’inertie, et que le matériau étudié est de comportement élastique linéaire, homogène et isotrope, de paramètres de Lamé λ et μ.
+1. Écrire les équations et les conditions aux limites que doivent vérifier le champ de déplacement u et le champ des contraintes
+
+σ à l’intérieur et sur les frontières du domaine Ω.
+Dans toute la suite, on cherche une solution en déplacement sous la forme :
+u f d(x) = arziθ (θ ) + bθ iz
+où a et b sont deux constantes, à déterminer plus bas.
+2. Interpréter physiquement le champ de déplacement u f d proposé. Que doit valoir b ?
+3. Calculer le tenseur des petites déformations
+
+ε f d et le tenseur des contraintes
+
+σ f d associés au champ de
+déplacement u f d proposé.
+4. Le champ des contraintes
+
+σ f d satisfait-il l’équation d’équilibre local en tout point du domaine Ω ?
+5. Le champ des contraintes
+
+σ f d vérifie-t-il les conditions aux limites mentionnées dans la question 1 ?
+Conclure.
+Compte tenu des résultats des questions précédentes, on s’intéresse dans ce qui suit au calcul de la résultante RL/2 et du moment ML/2 (exprimé au centre géométrique de la surface) associés au vecteur
+contrainte défini sur la surface ΣL/2.
+6. Que vaut RL/2 ?
+7. Calculer a pour que l’on ait ML/2 = 0. Que peut-on dire de la solution associée à cette valeur
+particulière de a ?
+
+
+5.9 Bilame thermomécanique 51
+La figure ci-dessus montre une comparaison entre la contrainte σθz obtenue par simulation numérique, et
+considérée comme la solution de référence, et la contrainte analytique établie précédemment. Pour chacune des coupes représentées, la contrainte σθz numérique est visible en surface colorée, tandis que la contrainte
+σθz analytique est représentée sous la forme de lignes d’isovaleurs. Les échelles de couleurs utilisées pour
+les deux représentations sont les mêmes.
+8. Quelles différences et similarités constatez-vous entre la contrainte analytique et la contrainte obtenue numériquement ? Comment pouvez-vous les justifier ? 9. Pourquoi le modèle analytique n’est-il pas satisfaisant quand Ri → 0 ? Si l’on fait l’hypothèse que le
+modèle cesse d’être valide dès que εθz > 10%, quel doit être l’ordre de grandeur de Ri dans le cas le
+plus défavorable, en supposant que Ri ≪ Re ?
+5.9 Bilame thermomécanique
+Nous nous intéressons ici à la déformation d’un bilame sous chargement thermique, de forme parallépipédique de longueur L, de largueur l et d’épaisseur 2e lorsqu’il est à la température T0. Ce solide
+est constitué de deux domaines élastiques isotropes Ω+ = {0 ≤ x ≤ L, 0 ≤ y ≤ e, −l/2 ≤ z < l/2} et Ω− = {0 ≤ x ≤ L, −e ≤ y ≤ 0, −l/2 ≤ z ≤ l/2} de modules de Young respectifs E+ et E−, de coefficients de Poisson respectifs ν+ et ν−, et de coefficients de dilatation thermique respectifs α+ et α−. On remarquera la similarité des configurations pour Ω+ et Ω− : les expressions pourront donc être abrégées en utilisant la notation raccourcie a± pour décrire à la fois la quantité a+ et la quantité a−.
+On note (u+,
+
+ε+,
+
+σ+) (respectivement (u−,
+
+ε−,
+
+σ−)) les champs de déplacements, petites déformations (totales) et contraintes dans le domaine Ω+ (respectivement Ω−). Les conditions aux limites du problème sont les suivantes : — les surfaces y = ±e et x = L sont libres d’effort ; — on suppose un collage parfait entre Ω+ et Ω− le long de l’interface Σ en y = 0 ; — des conditions de glissement sans frottement sur des parois infiniment rigides et fixes sont imposées sur les surfaces z = ±l/2 et x = 0 ; — on supposera par ailleurs que le point à l’origine du système de coordonnées cartésiennes (x, y, z) reste immobile dans la transformation. On négligera l’action de la pesanteur, ainsi que les forces d’inertie. Nous ferons l’hypothèse des petites perturbations. Enfin, cette structure est chauffée sur tout son volume à la température uniforme T = T0 + τ,
+où T0 est la température de référence pour laquelle le bilame n’est pas déformé.
+1. Donner, sans les résoudre, l’ensemble des équations satisfaites par les champs des contraintes
+
+σ±, des petites déformations
+
+ε± et de déplacement u± à l’intérieur et sur les frontières des domaines Ω±. 2. Dans le cas où les deux matériaux sont identiques (α+ = α− = α, E+ = E− = E, ν+ = ν− = ν), montrer que :
+
+σ=
+
+σ+ =
+
+σ− = −Eατ iz ⊗ iz,
+
+ε=
+
+ε+ =
+
+ε− = (1 + ν)ατ (I − iz ⊗ iz)
+et en déduire les champs de déplacement u± associés.
+
+
+52 Chapitre 5. Élasticité infinitésimale
+Nous supposons dans toute la suite que les deux coefficients de dilatation thermique sont différents (α+ ̸= α−), que les deux modules de Young sont égaux (E+ = E− = E) et que les deux coefficients de Poisson s’annulent (ν+ = ν− = 0, impliquant λ = 0 et μ = E/2). Nous cherchons un champ de déplacement de la forme (respectivement dans Ω+ et Ω−) :
+u±(x, y, z) = (ax − bxy)ix +
+( bx2
+2 + c±y
+)
+iy
+où a, b, c+ et c− sont quatre constantes que l’on déterminera plus bas.
+3. Montrer que les champs proposés satisfont les conditions aux limites cinématiques imposées. 4. Donner les champs des petites déformations totales
+
+ε± associés à ces déplacements. 5. Donner les champs des petites déformations thermiques à la température T et en déduire les tenseurs des contraintes
+
+σ± à la température T en tout point. 6. Montrer que ces champs de contraintes satisfont les équations d’équilibre locales dans Ω±. 7. Vérifier si les conditions aux limites en z = ±l/2 et x = 0 sont satisfaites. 8. Donner le vecteur contrainte sur les frontières y = ±e et en déduire une relation entre c±, α± et τ. 9. Donner le vecteur contrainte en x = L et vérifier si les conditions aux limites sont satisfaites.
+On cherche à présent une solution approchée au sens de Saint-Venant.
+10. Calculer la résultante des efforts induits par le champ de déplacement proposé sur la face x = L et en déduire une expression de a en fonction de α+, α− et τ. 11. Calculer la composante suivant iz du moment par rapport au point de coordonnées (x = L, y = 0, z = 0)
+des efforts induits par ce champ de déplacement sur la face x = L et en déduire une expression de b en fonction de α+, α− et τ. 12. Donner le déplacement en (x = L, y = 0, z = 0) en fonction de α+, α−, e, et τ. 13. Tracer l’évolution de la contrainte σxx en fonction de y dans le cas où α+ > α− et commenter.
+
+
+6. Approximation des poutres
+6.1 Microscope à force atomique
+On considère un microscope à force atomique (AFM) dont la fonction est de mesurer la topographie d’une surface à l’échelle nanométrique ; pour cela, un microlevier à l’extrémité duquel se trouve une pointe pyramidale balaye la surface de l’échantillon qui interagit avec la pointe. On mesure alors la déflexion du microlevier en envoyant, au niveau de son extrémité libre, un faisceau qui est réfléchi par la surface supérieure du microlevier vers un capteur. On suppose que ce microlevier est assimilable à une poutre droite, d’axe i3 horizontal, qui est encastrée
+en s = 0 à un bâti fixe et indéformable. À son autre extrémité, en s = L, l’échantillon exerce une action sur la pointe de la poutre, que l’on suppose assimilable à un moment nul en s = L, et à une résultante RL = F(d)i1,
+qui dépend de la distance d verticale entre la poutre non déformée et la surface de l’échantillon : F(d) est positive quand l’interaction pointe-échantillon est répulsive, et négative dans le cas contraire.
+Dans un premier temps, on suppose que l’échantillon est indéformable, et que l’on peut négliger le poids propre de la poutre. Cette dernière est en nitrure de silicium Si3N4, de module de Young E = 200 GPa, de
+masse volumique ρ = 3200 kg/m3, et de limite d’élasticité σe = 500 MPa. Sa longueur est L = 200 μm, et sa
+section, rectangulaire, est de hauteur h = 800 nm et de largeur b = 40 μm. 1. Déterminer l’expression de la résultante des efforts intérieurs au niveau d’une section d’abscisse s ∈ [0, L] et décrire sa (ou ses) composante(s). En déduire l’expression de la résultante de l’action du bâti sur la poutre, en s = 0. 2. Déterminer l’expression du moment des efforts intérieurs au niveau d’une section d’abscisse s ∈ [0, L] et décrire sa (ou ses) composante(s). En déduire l’expression du moment de l’action du bâti sur la poutre, exprimé au centre de la section d’abscisse s = 0.
+
+
+54 Chapitre 6. Approximation des poutres
+3. Établir l’expression de la contrainte normale le long de la poutre. En quel point est-elle maximale ? Quelle est la force Fmax maximale admissible pour éviter la plastification du microlevier ?
+Dans la suite, on suppose que la cinématique de la poutre vérifie l’hypothèse d’Euler-Bernoulli, et qu’une force F = 100 nN est appliquée sur la pointe du micro-levier.
+4. Calculer l’évolution du déplacement transverse uGΣ le long de la poutre.
+5. Calculer la rigidité en flexion k du microlevier, définie comme le rapport de la force |F| sur le déplacement transverse ∥uGΣ(L)∥ de l’extrémité de la ligne moyenne.
+6. Déduire de la question 4 l’expression de la rotation de la section d’abscisse s = L, qui est mesurée par le capteur recevant le faisceau laser réfléchi. Pourquoi est-ce à cet endroit de la poutre que la mesure est la plus précise ? 7. La force F, que l’on a considérée comme une force ponctuelle en s = L jusqu’ici, est en fait exercée par la pointe pyramidale sur la face inférieure de la poutre, et de façon homogène sur toute la base de cette pointe, qui est de longueur a = 5 μm entre les sections d’abscisses s = L − a et s = L. Calculer l’erreur commise sur la rotation de la section s = L quand on considère la force F comme ponctuelle. 8. On tient compte désormais ici de l’effet du poids propre de la poutre, dirigé selon −i1. Évaluer la
+rotation de la section d’abscisse s = L soumise à cet effet seulement (c’est-à-dire sans interaction avec l’échantillon). Comparer avec la rotation obtenue à la question 6.
+On considère désormais que l’échantillon n’est pas indéformable, mais présente une rigidité k′, qui est supposée en traction-compression selon la direction verticale i1. Pour une position de mesure donnée
+au-dessus de l’échantillon, on fait alors varier la distance d pour mesurer la relation F(d).
+9. Quelle est alors la rigidité effective ke f f qu’il faut prendre en compte lors de la mesure par l’AFM ?
+6.2 Grue de déménagement
+On considère une grue de déménagement, de type monte-meubles, qui sert à monter ou descendre des charges depuis la façade d’un immeuble. On suppose qu’elle est assimilable à une poutre droite Ω d’axe e tel que 〈e, iz
+〉 = cos α, α ∈ [0, π/2], où iz est vertical, orienté vers le haut, et 〈e, iy
+〉 = sin α, où iy est
+horizontal, et contenu dans le plan (e, iz). Cette poutre est de longueur L, et de section d’aire A et de tenseur
+d’inertie J = Je ⊗ e + I(eχ1 ⊗ eχ1 + eχ2 ⊗ eχ2 ), où eχ2 = ix = iy ∧ iz.
+Cette poutre est encastrée au point O (en s = 0) avec le support Ω0 de la grue, supposé fixe et indéformable,
+tandis qu’elle est encastrée au point P (en s = L) avec un plateau ΩP indéformable. Ce plateau horizontal,
+dont la masse est négligée, permet de transporter une charge Ωm de masse m et de centre d’inertie Cm tel que
+xCm = xP + lxix + lyiy + lziz. On suppose que les seules actions s’exerçant sur la poutre Ω sont :
+— l’action du plateau ΩP sur Ω, de résultante RL et de moment ML, exprimé en xP ;
+— l’action du support Ω0 de la grue sur Ω, de résultante R0 et de moment M0, exprimé en xO.
+
+
+6.3 Déformée d’un manche de guitare et barre de réglage 55
+On suppose également que la poutre Ω vérifie l’hypothèse d’Euler-Bernoulli, et que l’on peut ignorer son gauchissement. En outre, le matériau constitutif est linéaire élastique, homogène et isotrope, avec un module de Young égal à E et un module de cisaillement égal à μ. Enfin, on négligera les effets d’inertie de sorte que le problème à résoudre sera statique.
+1. Déterminer l’expression de la résultante RL et du moment ML en fonction de lx, ly et m.
+2. Déterminer l’expression de la résultante des efforts intérieurs au niveau d’une section d’abscisse s ∈ [0, L]. Préciser l’effort normal et l’effort tranchant. Pour quelles valeurs de α ces efforts s’annulentils ? 3. Déterminer l’expression du moment des efforts intérieurs au niveau d’une section d’abscisse s ∈ [0, L]. Préciser le moment de torsion et le moment de flexion. Pour quelles valeurs de lx, ly et α ces moments
+s’annulent-ils ? 4. Déterminer l’expression du déplacement longitudinal uGe le long de la poutre.
+5. Déterminer l’expression de la rotation de torsion θe le long de la poutre.
+6. Déterminer l’expression du déplacement transverse uGΣ le long de la poutre.
+7. En déduire l’expression du déplacement d’un point M arbitraire de la poutre, de coordonnées (s, χ1, χ2)
+selon le repère (O, e, eχ1 , eχ2 ). 8. Établir l’expression de la contrainte normale le long de la poutre. Au niveau de quelle section se trouve la valeur maximale de cette contrainte ? 9. En supposant que l’on peut négliger le cisaillement associé à la flexion, établir l’expression de la contrainte tangentielle le long de la poutre. Comment évolue-t-elle selon les sections ? 10. On souhaite dimensionner la liaison entre la poutre Ω et le support Ω0 ; pour cela, on suppose que,
+pour qu’il n’y ait pas de rupture, la contrainte de von Mises doit être inférieure à σr. Si l’on suppose
+que le plateau ΩP est de forme carrée et que la charge est placée à un coin (lx = ly), quelle doit être la
+valeur maximale de lx pour une masse m donnée de la charge ?
+6.3 Déformée d’un manche de guitare et barre de réglage
+Sous l’effet de la tension des cordes, le manche d’une guitare a tendance à se déformer. Nous allons dans ce problème chercher à modéliser ce manche (partie située entre la caisse et le sillet) sous l’action des six cordes, mais aussi étudier un dispositif qui permet de compenser cet effet : la barre de réglage, qui a fait son apparition dans les années 1920. Pour cela, on considère ce manche comme une poutre droite d’axe i1,
+de longueur L, de section rectangulaire (largeur b et épaisseur h). Il est encastré à un bâti fixe (la caisse) en x1 = 0.
+Par ailleurs, on néglige les effets d’inertie et de la pesanteur. Enfin, on suppose que le manche est constitué d’un matériau dont le comportement est élastique linéaire, homogène et isotrope, de module de Young E et de module de cisaillement μ, et qu’on peut se placer dans le cadre de l’hypothèse des petites perturbations ainsi que de l’hypothèse d’Euler-Bernoulli.
+Dans la première partie du problème, nous ne tenons pas compte de la barre de réglage. Chaque corde (i)1≤i≤6 exerce sur la tête de manche, à son point d’attache, une force ponctuelle Fi = −Fi cos α i1 + Fi sin α i2
+(où Fi > 0) en xi = (L + li)i1 + h/2 i2 + zii3, où (li, h/2, zi)1≤i≤6 représente, dans la base (i1, i2, i3), la position
+
+
+56 Chapitre 6. Approximation des poutres
+des cordes régulièrement disposées sur la tête de manche. En particulier, l’angle α est donné par le fait que la corde est maintenue d’un côté par le sillet et de l’autre par le chevalet qui est surélevé par rapport au plan du manche. On peut considérer en première approximation qu’il est identique pour chaque corde. Par ailleurs, l’intensité de chaque force (Fi) est déterminée par le diamètre de la corde d’une part et la tension à exercer
+pour accorder la corde à la bonne fréquence d’autre part, et varie en fonction des modèles de guitare et des types de corde. Pour résumer, l’action conjointe des six cordes sur le manche se traduit par une résultante des efforts Fc et d’un moment Mc au centre de la section du sillet (x = L), donnés ci-dessous :
+Fc = −Fc cos α i1 + Fc sin α i2, et Mc = Mc1i1 + Mc2i2 + Mc3i3
+Gauche : Vue axiale au niveau du sillet de la section x1 = L. Droite : Vue de côté et modèle de poutre adopté
+pour le manche.
+1. Sans pousser le calcul jusqu’au bout, et en supposant que l’action de chaque corde sur le sillet peut être négligée devant son action sur la tête de manche, expliquer la méthodologie qui permettrait de connaître les composantes de la force résultante Fc et du moment Mc.
+2. Calculer la résultante R et le moment M des efforts intérieurs le long de la poutre. Quelles sollicitations la poutre subit-elle ? 3. Calculer la contrainte normale dans le manche. Où celle-ci est-elle maximale ? En considérant que celle-ci ne doit pas dépasser une valeur σe, quelle relation doit être vérifiée par l’épaisseur critique hc
+du manche ? S’agit-il d’une valeur maximale ou minimale ? 4. Calculer le déplacement axial uG1 du manche.
+5. Pourquoi peut-on négliger la flexion dans le plan (i1, i3) ? Calculer la déformée transverse uG2 du
+manche. Où la distance entre les cordes et le manche est-elle la plus importante ?
+Outre les problèmes de tenue mécanique étudiés à la Q.3, il est très inconfortable de jouer si le manche se creuse trop : les cordes sont trop éloignées du manche. On ajoute donc la barre de réglage afin de contrebalancer l’action des cordes. Cette barre traverse le manche sur toute sa longueur et s’appuie d’une part sur le bâti et d’autre part sur l’extrémité (x1 = L) du manche où elle applique une force résultante Fb = Fbi1
+(Fb > 0) et un moment Mb = −Fbdi3. La résultante R et le moment M des efforts intérieurs engendrés par
+Fb et Mb s’expriment alors comme :
+R (x1) = Fb, et M (x1) = Mb
+6. Calculer ubG1 et ubG2, les déplacements axial et transverse du manche, induits par l’effet de la barre de
+réglage uniquement.
+7. Que vaut alors la flèche utGot2 prenant en compte à la fois l’action des cordes et de la barre de réglage ?
+On veut encadrer celle-ci par deux valeurs : dmax pour le confort du guitariste et dmin pour éviter que
+les cordes ne heurtent le manche lorsqu’elles vibrent. En déduire un encadrement de Fb.
+8. Sans tenir compte de la barre de réglage, calculer l’angle de torsion θe du manche. Expliquer pourquoi
+certains modèles de guitare cumulent deux barres de réglage disposées parallèlement. 9. Pour une meilleure prise en main, certains guitaristes ont historiquement raboté leur manche, et donc diminué son épaisseur h. Cela modifie essentiellement deux grandeurs : l’inertie géométrique du manche et une nouvelle position de l’axe neutre qui modifie donc d. Comment cela modifie-t-il la correction apportée par la barre de réglage ?
+
+
+6.4 Pilier avec contreventement 57
+6.4 Pilier avec contreventement
+Dans le domaine du génie civil, un dispositif de contreventement permet de distribuer des charges entre plusieurs poutres plutôt que sur une seule. On considère ici un ensemble composé :
+— d’un pilier principal Ω, assimilable à une poutre d’axe vertical iy et de longueur L1 + L2, avec une
+section circulaire de rayon R ; cette poutre est liée à un bâti fixe et indéformable Ω0 par l’intermédiaire
+d’une articulation de centre B ; — une poutre de soutien (ou contreventement) Ωc, d’axe e tel que 〈e, iy
+〉 = cos α ̸= 1 et de longueur l, avec une section circulaire de rayon Rc ; cette poutre est reliée à Ω0 par l’intermédiaire d’une
+articulation de centre A, et au pilier principal Ω par l’intermédiaire d’une liaison sphérique de centre C (en y = L1).
+On suppose que l’action de la pesanteur peut être négligée : les seules actions extérieures appliquées sur le système sont une force imposée F = −Fix (avec F > 0) sur l’extrémité du pilier principal (y = L1 + L2) et
+les actions de liaison exercées par le bâti fixe Ω0. Par ailleurs, on suppose que les effets d’inertie peuvent
+être négligés.
+Enfin, dans ce qui suit, on considère que le problème est plan, de plan associé à la base cartésienne (ix, iy),
+et on définit par conséquent : — la résultante de l’action du bâti Ω0 sur la poutre de soutien Ωc par l’intermédiaire de l’articulation de
+centre A : RlA = RAxix + RAyiy ;
+— la résultante de l’action du bâti Ω0 sur le pilier Ω par l’intermédiaire de l’articulation de centre B :
+RlB = RBxix + RByiy ;
+— la résultante de l’action de la poutre de soutien Ωc sur le pilier Ω par l’intermédiaire de la liaison
+sphérique de centre C : RlC = RCxix + RCyiy.
+On suppose en outre que les moments des actions de liaison sont nuls aux centres respectifs de ces trois liaisons.
+1. En écrivant l’équilibre global de la poutre de soutien Ωc, montrer que cette dernière est soumise à de
+la traction-compression seulement. En déduire la direction de la résultante RlA.
+2. Déterminer alors l’ensemble des composantes des résultantes RlA, RlB et RlC.
+3. Déterminer, pour le pilier principal Ω, l’expression de la résultante des efforts intérieurs au niveau d’une section de coordonnée y ∈ [0, L1[ puis y ∈]L1, L1 + L2].
+4. Déterminer, pour le pilier principal Ω, l’expression du moment des efforts intérieurs au niveau d’une section de coordonnée y ∈ [0, L1[ puis y ∈]L1, L1 + L2].
+5. Tracer les diagrammes des efforts intérieurs le long du pilier principal Ω. 6. Calculer la contrainte normale σyy le long du pilier principal Ω. Où doit se trouver le point C pour que
+cette contrainte soit la plus faible possible ?
+
+
+58 Chapitre 6. Approximation des poutres
+6.5 Clé démonte-roue
+Les clés démonte-roue peuvent être en forme de L ou de X. La forme communément trouvée dans les coffres de voiture est une tige métallique en forme de L avec une douille à l’extrémité coudée (pour serrer la vis) et une pointe de levier (destinée à enlever les enjoliveurs de roue) à l’autre extrémité. Idéalement, les vis devraient être serrées à l’aide d’une clé dynamométrique. Les clés démonte-roue sont beaucoup moins chères parce qu’elles n’ont pas la capacité de mesurer ou de limiter l’action appliquée. Ainsi, il peut être important de caractériser l’action mécanique et le comportement d’une clé démonte-roue pour éviter par exemple un couple de serrage inégal entre les différentes vis de roue.
+Plus précisément, nous souhaitons relier la force appliquée par un utilisateur sur le côté libre (le côté le plus long de la forme en L) au moment appliqué à une vis au niveau de la douille (située à l’extrémité de la partie la plus courte de la forme en L). Cette situation est représentée sur la figure ci-dessous où différentes vues de la clé démonte-roue dans la base cartésienne (ix, iy, iz) sont présentées.
+On adopte les hypothèses de modélisation suivantes : — l’action de la pesanteur est négligée par rapport aux autres actions mécaniques en jeu ; — le système est composé de deux poutres : — la première Ω 1 , de longueur a, et de ligne moyenne orientée selon e = iy (y ∈ [0, a]), est supposée
+encastrée en y = 0 avec la vis, supposée indéformable et fixe, et avec une deuxième poutre en y = a;
+— la seconde Ω 2 , de longueur b, et de ligne moyenne orientée selon e = ix (x ∈ [0, b]), est encastrée
+avec la première poutre en x = 0 ; — l’action du manipulateur se traduit, au niveau de la section de coordonnée x = b, par un moment nul (exprimé au centre de cette section), et une résultante F, qui se trouve dans le plan (ix, iz) avec une
+inclinaison α par rapport à l’axe ix ;
+— les deux poutres ont une section circulaire de diamètre d ; — le matériau constitutif de la clé est supposé élastique linéaire, homogène et isotrope, de module de Young E et coefficient de Poisson ν.
+1. Ecrire l’équilibre global de la clé complète en résultante et en moment. En déduire les expressions de la résultante et du moment (exprimé au centre de la section) de l’action de la vis (fixe) sur la poutre Ω 1 , en y = 0. Pour quelle valeur de α le moment exercé en y = 0 sur la vis est-il maximal (en norme) ? 2. Donner les expressions de la résultante et du moment des efforts intérieurs au niveau d’une section de la poutre Ω 2 , de coordonnée x ∈]0, b[. Interpréter physiquement les différentes composantes.
+
+
+6.6 Déformation d’une aile d’avion 59
+3. Donner les expressions du déplacement longitudinal u 2
+Ge et de la rotation de torsion θe2 le long de la
+poutre Ω 2 , en supposant qu’ils sont connus en x = 0 et valent respectivement uGe0 et θe0 . 4. Donner l’expression du déplacement transverse u 2
+Σ le long de la poutre Ω 2 , en supposant qu’il est
+connu en x = 0 et vaut uΣ0 ; de même, la rotation de la section d’abscisse x = 0 est supposée connue et
+valoir θθθΣ0 .
+5. En écrivant l’équilibre global de la poutre Ω 2 , déterminer la résultante R2 et le moment M2 (au centre
+de la section associée) de l’action de la poutre Ω 1 sur la poutre Ω 2 , en x = 0. 6. Donner les expressions de la résultante et du moment des efforts intérieurs au niveau d’une section de la poutre Ω 1 , de coordonnée y ∈]0, a[, en fonction notamment de R2 et M2. Interpréter physiquement
+les différentes composantes. 7. Pour la valeur de l’angle α déterminée dans la question 1, où la contrainte normale σee est-elle
+maximale ? Donner sa valeur en fonction des données du problème.
+6.6 Déformation d’une aile d’avion
+On considère une aile d’avion assimilable à une poutre droite Ω d’axe ix horizontal, et de section
+rectangulaire de largeur b selon iz horizontal, et de hauteur h selon iy vertical (orienté vers le haut).
+Cette poutre se décompose en trois tronçons Ω1, Ω2 et Ω3 d’abscisses respectives [0, L1], [L1, L1 + L2] et
+[L1 + L2, L1 + L2 + L3], et est soumise à : — l’action du fuselage Ω0 de l’avion, supposé fixe et indéformable, sur lequel l’aile Ω est encastrée, au
+niveau de la section d’abscisse x = 0 ; — l’action du train d’atterrissage Ωt , que l’on suppose indéformable, et qui joue alors le rôle d’un appui
+(non glissant) par rapport au bâti ; — l’action du réacteur Ωr assimilable à une résultante Rr = −mrgiy et un moment nul exprimé au centre
+de la section d’abscisse x = L1 + L2 ; qui sont les seules actions s’exerçant sur l’aile Ω. On supposera en outre que le problème est plan, et que l’hypothèse d’Euler-Bernoulli peut être adoptée.
+1. Écrire les équations d’équilibre global (statique) de l’aile complète. En supposant que les liaisons avec le bâti sont parfaites, en déduire toutes les inconnues de liaison que l’on peut déterminer. Combien reste-t-il d’inconnues de liaison hyperstatiques ? 2. Déterminer l’expression de la résultante et du moment des efforts intérieurs au niveau d’une section d’abscisse x ∈]L1 + L2, L1 + L2 + L3].
+3. Déterminer l’expression de la résultante et du moment des efforts intérieurs au niveau d’une section d’abscisse x ∈]L1, L1 + L2[.
+4. Déterminer l’expression de la résultante et du moment des efforts intérieurs au niveau d’une section d’abscisse x ∈]0, L1[, en fonction de la (les) inconnue(s) hyperstatique(s) notamment.
+Afin de déterminer intégralement les efforts intérieurs, on s’intéresse dans ce qui suit à la déformée de l’aile.
+5. Montrer que le déplacement longitudinal uGx est nul le long de l’aile.
+6. Déterminer le déplacement transverse uGy de la ligne moyenne du tronçon Ω1.
+
+
+60 Chapitre 6. Approximation des poutres
+7. En déduire l’expression finale de la résultante et du moment des efforts intérieurs au niveau d’une section d’abscisse x ∈]0, L1[. Tracer l’évolution de la résultante et du moment des efforts intérieurs le
+long de l’aile complète. 8. Établir l’expression de la contrainte normale le long de l’aile. Au niveau de quelle section se trouve la valeur maximale de cette contrainte ? Comment évolue-t-elle en fonction des longueurs des tronçons
+Ω1, Ω2 et Ω3 ?
+9. Préciser comment déterminer le déplacement transverse uGy de l’ensemble de l’aile.
+On suppose désormais que l’aile est remplie de carburant, et qu’il n’est donc plus possible de négliger l’action de la pesanteur. Dans un souci de simplification, ceci revient à considérer que l’aile présente une masse volumique ρ homogène dans tout le volume.
+10. Que valent alors la résultante et le moment des efforts intérieurs au niveau d’une section d’abscisse x ∈]0, L1[∪]L1, L1 + L2[∪]L1 + L2, L1 + L2 + L3[ ? Tracer l’évolution de la résultante et du moment des
+efforts intérieurs le long de l’aile complète.
+On suppose enfin que le train d’atterrissage n’est pas indéformable, mais peut être assimilé à un ressort de raideur kt , de telle sorte que l’action du bâti sur l’aile est de moment nul, exprimé au centre de la section
+d’abscisse x = L1, et de résultante Rt = −kt uGy(L1)iy.
+11. Préciser, sans donner le détail des calculs associés, comment résoudre le problème dans ce cadre.
+6.7 Optimisation d’une poutre console
+L’objectif de ce problème est d’étudier plusieurs possibilités d’amélioration d’une structure simple en porte-à-faux, en modifiant sa géométrie ou en lui adjoignant des éléments de renfort.
+Situation de référence
+On s’intéresse ici au cas qui servira de référence par rapport aux différentes possibilités d’amélioration étudiées, à savoir une poutre droite d’axe ix horizontal, de longueur L et de section rectangulaire de dimensions
+h × b selon iy et iz respectivement ((ix, iy, iz) constituant une base cartésienne), et parfaitement encastrée en
+x = 0 sur un bâti Ω0 fixe et indéformable. Cette poutre est soumise à une action sur sa section d’abscisse
+x = L, qui se traduit par une force F = −Fiy (avec F > 0) et un moment nul (exprimé au centre de la section),
+comme représenté sur la figure ci-dessous.
+On suppose par ailleurs que l’on peut négliger l’action de la pesanteur et les effets d’inertie ; on se place en outre dans l’hypothèse des petites perturbations et on considère l’hypothèse d’Euler-Bernoulli. Enfin, le matériau constitutif est supposé élastique linéaire, isotrope et homogène, de module de Young E.
+1. Déterminer la résultante R0 et le moment M0 (exprimé au centre de la section) de l’action du bâti
+fixe Ω0 sur la poutre, au niveau de la section d’abscisse x = 0. Justifier le fait que l’on peut faire
+l’hypothèse d’un problème plan. 2. Déterminer les expressions de la résultante R(x) et du moment M(x) des efforts intérieurs au niveau d’une section d’abscisse x de la poutre. 3. Tracer les diagrammes des efforts intérieurs le long de la poutre. 4. Établir l’expression de la contrainte normale σxx(x, y) le long de la poutre. Au niveau de quelle section
+se trouve la valeur maximale de cette contrainte ? 5. Déterminer le déplacement transverse uGy(x) = 〈uGΣ(x), iy
+〉 le long de la poutre. En déduire la rigidité
+à la flexion de la poutre, définie comme Kf = ∥F∥
+∣
+∣uGy(L)∣
+∣
+.
+
+
+6.7 Optimisation d’une poutre console 61
+Optimisation de géométrie
+On cherche dans un premier temps à modifier la forme de la section de façon à minimiser la contrainte maximale et/ou maximiser la rigidité en flexion de la poutre. Trois géométries de sections seront comparées : — une section rectangulaire creuse : hauteur h, largeur b, épaisseur e (constante) ; — une section circulaire creuse : rayon extérieur R, rayon intérieur R − e où e est une épaisseur constante ; — une section en « I » : hauteur h, largeur b, épaisseur e constante. Dans les trois cas, on suppose que, pour des raisons d’encombrement, les dimensions latérales de la section ne peuvent pas excéder L/10 selon iy et L/20 selon iz.
+6. Calculer le moment d’inertie de section I autour de iz pour les trois géométries proposées, en supposant
+que e ≪ b et e ≪ h. 7. Préciser le(s) meilleur(s) choix de géométrie de section du point de vue de la contrainte maximale dans la poutre, à longueur L et épaisseur e fixées. 8. Faire de même du point de vue de la rigidité à la flexion de la poutre.
+Dans un second temps, on souhaite étudier la possibilité d’avoir une section de taille variable le long de la poutre. Afin de simplifier l’étude, on considère seulement le cas d’une section rectangulaire pleine, où la hauteur est désormais une fonction de la coordonnée le long de la ligne moyenne : h(x).
+9. Que doit vérifier h(x) de façon à ce que la contrainte maximale dans chaque section soit égale à une même valeur σ0 > 0 constante fixée ?
+10. Déterminer le déplacement transverse uGy(x) le long de la poutre. En déduire la rigidité à la flexion de
+la poutre dans le cas où la contrainte « visée » est σ0 = 6FL/b3. Conclure sur la pertinence de cette
+solution.
+Optimisation d’architecture : solution 1
+Dans cette partie, on cherche à améliorer la structure en remplaçant l’encastrement au niveau de la section en x = 0 par deux appuis proches l’un de l’autre : l’un au niveau de la section de coordonnée x = 0, et l’autre au niveau de la section de coordonnée l (avec 0 < l < L). Le premier appui en x = 0 est bilatéral afin de maintenir le contact de la poutre avec le bâti Ω0, mais il a les mêmes propriétés que l’autre appui (en termes
+d’action transmissible notamment).
+Comme dans la situation de référence, les seules actions extérieures appliquées sur la poutre sont l’action en x = L, représentée par une force imposée F = −Fiy et un moment nul au centre de la section, et les actions
+de liaison exercées par le bâti fixe Ω0 au niveau des deux appuis, supposés parfaits. Le matériau constitutif
+est toujours de comportement élastique linéaire, homogène et isotrope, de module de Young E. Par ailleurs, on suppose que les effets d’inertie peuvent être négligés, et que l’on peut adopter l’hypothèse des petites perturbations, ainsi que l’hypothèse d’Euler-Bernoulli.
+11. Déterminer les résultantes RA, RB et moments MA, MB (aux centres de section) des actions de liaison
+au niveau des deux appuis en x = 0 et x = l respectivement. 12. Déterminer l’expression de la résultante des efforts intérieurs au niveau d’une section de coordonnée x ∈ [0, l[ puis x ∈]l, L].
+13. Déterminer l’expression du moment des efforts intérieurs au niveau d’une section de coordonnée x ∈ [0, l[ puis x ∈]l, L].
+14. Tracer les diagrammes des efforts intérieurs le long de la poutre. 15. Calculer la contrainte normale σxx(x, y) le long de la poutre. Où est-elle maximale et que vaut-elle
+dans ce cas ? 16. Calculer le déplacement transverse uGy(x) d’une section de coordonnée x ∈ [0, l], puis x ∈ [l, L]. Que
+vaut-il en x = L ?
+
+
+62 Chapitre 6. Approximation des poutres
+17. Comparer les résultats précédents avec ceux obtenus dans la situation de référence dans le cas où l = L/10. Conclure sur la pertinence de cette solution.
+Optimisation d’architecture : solution 2
+Dans cette partie, on cherche à améliorer la structure en ajoutant un tirant au niveau de l’extrémité en x = L. Ce dernier est assimilable à une poutre Ωt d’axe e tel que 〈e, ix
+〉 = cos α (avec 0 < α < π/2), de longueur Lt = L/ cos α et de section circulaire de rayon R ; ce tirant est relié au bâti Ω0 par l’intermédiaire
+d’un appui de type articulation au niveau de sa section de coordonnée s = 0, et à la poutre au niveau de sa section de coordonnée s = Lt par l’intermédiaire d’une liaison sphérique en x = L. Par ailleurs, pour des
+raisons de simplicité, l’encastrement de la poutre en x = 0 est remplacé par un appui de type articulation. Par similitude avec la situation de référence, les actions extérieures à l’ensemble sont alors :
+— l’action du bâti Ω0 sur la poutre, de résultante R0 et moment M0 (exprimé au centre de la section
+x = 0) ; — une action connue modélisée comme une résultante F = −Fiy et un moment nul (exprimé au centre de
+la section x = L) ; — l’action du bâti Ω0 sur le tirant Ωt , de résultante Rt et moment Mt (exprimé au centre de la section
+s = 0).
+Les deux poutres sont constituées du même matériau de comportement élastique linéaire, homogène et isotrope, de module de Young E. Par ailleurs, on suppose que les effets d’inertie peuvent être négligés et que l’on peut adopter l’hypothèse des petites perturbations ainsi que l’hypothèse d’Euler-Bernoulli. Enfin, les liaisons sont supposées parfaites.
+18. En écrivant l’équilibre du tirant Ωt dans son ensemble, montrer que ce dernier est soumis à de la
+traction-compression seulement. 19. Déduire de la question précédente l’ensemble des actions de liaison du problème. 20. Déterminer, pour la poutre, les expressions de la résultante et du moment des efforts intérieurs pour une section de coordonnée x. 21. Tracer les diagrammes des efforts intérieurs le long de la poutre. 22. Calculer la contrainte normale σxx le long de la poutre. Que constate-t-on ?
+23. Calculer le déplacement transverse uGy(x) le long de la poutre ? Que vaut-il en x = L ?
+24. Comparer les résultats précédents avec ceux obtenus dans la situation de référence. Conclure sur la pertinence de cette solution.
+6.8 Essai de Iosipescu
+On souhaite étudier ici l’essai de Iosipescu, qui est un essai de caractérisation mécanique permettant d’évaluer la résistance en cisaillement d’un matériau à l’aide d’un dispositif exerçant des efforts tranchants spécifiques sur une éprouvette allongée, comme représenté sur la figure ci-dessous.
+
+
+6.8 Essai de Iosipescu 63
+https ://www.zwickroell.com
+On considère que l’éprouvette peut être assimilée à une poutre droite d’axe ix, de longueur L et de section
+rectangulaire (hauteur h selon iy et largeur b selon iz). On suppose que l’essai de Iosipescu peut alors se
+représenter par les actions et conditions suivantes, illustrées sur la figure ci-dessous : — la section d’abscisse x = 0 est soumise à une action de résultante F1 = −F1iy connue et de moment
+nul (exprimé au centre de la section) ; — au niveau de la section d’abscisse x = l (avec 0 < l < L/2), la poutre est en appui (de type articulation) par rapport au bâti supposé fixe et indéformable ; par ailleurs, on notera respectivement Rl et Ml la
+résultante et le moment (exprimé au centre de la section) de l’action exercée par le bâti sur la poutre au niveau de la section d’abscisse x = l ; — la section d’abscisse x = L − l est soumise à une action de résultante F2 = −F2iy connue et de moment
+nul (exprimé au centre de la section) ; — au niveau de la section d’abscisse x = L, la poutre est en appui (de type articulation) par rapport au bâti supposé fixe et indéformable ; par ailleurs, on notera respectivement RL et ML la résultante et le
+moment (exprimé au centre de la section) de l’action exercée par le bâti sur la poutre au niveau de la section d’abscisse x = L.
+Afin d’obtenir la sollicitation souhaitée, les deux actions exercées par la machine d’essai doivent alors vérifier :
+F1 = F(L − 2l)
+2l > 0, et F2 = FL
+2l > 0
+où F > 0 est mesurée par la machine, et donc connue. En outre, on suppose que l’action de la pesanteur peut être négligée, et que l’essai est suffisamment lent pour qu’on puisse se placer dans un cadre statique. De plus, on peut adopter l’hypothèse d’un problème plan, lié à (ix, iy). Enfin, le matériau constitutif de l’éprouvette
+est élastique linéaire, isotrope et homogène (de module de Young E) et on considère que l’on peut adopter l’hypothèse des petites perturbations et l’hypothèse d’Euler-Bernoulli.
+1. En faisant l’hypothèse d’appuis parfaits au niveau des sections d’abscisses x = l et x = L, écrire les équations d’équilibre de la poutre complète. Montrer alors que 〈Rl , iy
+〉 = F2 et que 〈RL , iy
+〉 = F1.
+Quel est le degré d’hyperstatisme du problème ? 2. Déterminer l’expression de la résultante des efforts intérieurs pour une section d’abscisse x ∈]0, l[, x ∈]l, L − l[ et x ∈]L − l, L[ respectivement. 3. Déterminer l’expression du moment des efforts intérieurs pour une section d’absicisse x ∈]0, l[, x ∈]l, L − l[ et x ∈]L − l, L[ respectivement.
+
+
+64 Chapitre 6. Approximation des poutres
+4. Déterminer l’expression du déplacement longitudinal uGx = 〈uG , ix
+〉 le long de la poutre. En déduire la valeur de(s) l’éventuelle(s) inconnue(s) hyperstatique(s). 5. Expliquer comment déterminer le déplacement transverse uGy = 〈uG , iy
+〉 le long de la poutre, sans détailler les calculs, mais en précisant les conditions aux limites et de raccord au niveau des sections d’abscisses x = 0, x = l, x = L − l et x = L. 6. Tracer le diagramme de l’effort tranchant 〈R, iy
+〉 et du moment fléchissant 〈M, iz
+〉 le long de la poutre. Que peut-on dire des efforts intérieurs au niveau de la section d’abscisse x = L/2 ? Conclure sur l’intérêt de l’essai de Iosipescu.
+6.9 Tenue mécanique d’un booster de fusée
+Dans le cas des moteurs de fusée dits « à propulsion solide », des enveloppes cylindriques, appelées « boosters », contiennent un matériau réactif (le propergol) sous forme solide, qui, une fois la combustion débutée, permet de créer une poussée importante. On s’intéresse ici aux déformations et contraintes au sein de l’enveloppe métallique du booster pour différents cas d’usage. On considère que cette dernière peut se modéliser comme une poutre droite Ωb d’axe e (abscisse associée s), de longueur H = 25 m et de section
+cylindrique creuse, d’aire A et de tenseur d’inertie J = I(e ⊗ e + I), où I est le tenseur identité.
+Cette poutre est soumise à différentes actions, qui seront à considérer dans les deux parties qui suivent : — l’action du propergol sur les parois internes de l’enveloppe, que l’on déterminera plus bas ; — les actions de liaison correspondant aux deux dispositifs de fixation du booster sur le lanceur. On suppose par ailleurs que l’on peut négliger l’action de la pesanteur sur l’enveloppe elle-même, ainsi que l’action de la tuyère située au niveau de l’extrémité en s = 0 ; en outre, on ne considérera pas les effets d’inertie. Enfin, on suppose que le matériau constitutif de l’enveloppe est de l’acier, de comportement élastique linéaire, homogène et isotrope, de module de Young Eb. On se place en outre dans le cadre de l’hypothèse
+des petites perturbations et de l’hypothèse d’Euler-Bernoulli.
+1. Montrer que l’action du propergol sur la poutre peut se modéliser comme une densité linéique de moment nulle tout le long de la poutre (cL(s) = 0, ∀s ∈ [0, H]) et une densité linéique d’effort
+fL(s) = −mpg/H iz, ∀s ∈ [0, H], où mp désigne la masse totale de propergol contenue dans le booster,
+définie comme mp = ρpπ(Re2 − Ri2)H, où :
+— ρp = 1500 kg/m3 est la masse volumique du propergol ;
+— Re = 1,5 m et Ri = 0,5 m sont les rayons extérieur et intérieur du domaine cylindrique occupé
+par le propergol.
+Partie 1 – Étude du booster en position horizontale
+Dans un premier temps, on considère le booster Ωb en position horizontale (e = ix, vecteur unitaire
+horizontal, et s = x), et reposant sur un support, supposé fixe et indéformable, par l’intermédiaire de deux liaisons qui peuvent être assimilées à des appuis (non glissants), en x = h = H/5 et x = H respectivement. Afin de simplifier l’étude, on fait l’hypothèse qu’il n’y a pas de traction ou de compression dans la poutre, ce qui revient à supposer que les appuis n’exercent aucun effort selon l’axe de la poutre, et donc que :
+
+
+6.10 Pont à haubans 65
+— l’action de liaison au niveau de la section x = h peut s’exprimer comme une résultante Rl
+h = RI
+hiz
+inconnue, et un moment nul (exprimé au centre de la section) ; — l’action de liaison au niveau de la section x = H peut s’exprimer comme une résultante RlH = RIH iz
+inconnue, et un moment nul (exprimé au centre de la section). En outre, le booster Ωb est soumis à l’action du propergol.
+2. En exprimant l’équilibre global de la poutre complète, déterminer les actions de liaison RI
+h et RIH .
+3. Donner l’expression du moment des efforts intérieurs au niveau d’une section d’abscisse x de la poutre Ωb, en séparant les cas 0 < x < h et h < x < H.
+4. Tracer les diagrammes des efforts intérieurs le long de la poutre. 5. Donner l’expression de la contrainte normale le long de la poutre. Où est-elle maximale ? Que pensezvous de sa valeur dans le cas d’une enveloppe cylindrique de rayon intérieur R = 1,5 m et d’épaisseur e = 1 cm, sachant que la limite d’élasticité de l’acier considéré est σe = 100 MPa ?
+Partie 2 – Étude du booster en position verticale
+Dans un deuxième temps, on considère le booster Ωb en position verticale (e = iz, et s = z), et accroché
+au lanceur, supposé fixe, grâce à deux liaisons qui peuvent être assimilées à des appuis (non glissants), en z = h = H/5 et z = H respectivement. Afin de simplifier l’étude, on fait l’hypothèse qu’il n’y a pas de flexion dans la poutre, ce qui revient à supposer que les appuis n’exercent aucun effort perpendiculairement à la poutre, et donc que : — l’action de liaison au niveau de la section z = h peut s’exprimer comme une résultante Rl
+h = RII
+h iz
+inconnue, et un moment nul (exprimé au centre de la section) ; — l’action de liaison au niveau de la section z = H peut s’exprimer comme une résultante RlH = RIHI iz
+inconnue, et un moment nul (exprimé au centre de la section). En outre, le booster Ωb est soumis, comme précédemment, à l’action du propergol.
+6. En exprimant l’équilibre global de la poutre complète, donner une relation vérifiée par RII
+h et RIHI . En
+déduire, en fonction de RII
+h ou RIHI , l’expression de la résultante des efforts intérieurs au niveau d’une
+section d’altitude z de la poutre Ωb, en séparant les cas 0 < z < h et h < z < H.
+7. Déterminer le déplacement longitudinal uGz(z) = 〈uG(z), iz
+〉, pour une section d’altitude z ∈ [0, h], puis pour une section d’altitude z ∈ [h, H]. 8. Déduire de la question précédente les expressions de RII
+h et RIHI , puis l’expression de la contrainte
+normale le long de la poutre. Où est-elle maximale ? Que pensez-vous de sa valeur dans le cas d’une enveloppe cylindrique de rayon intérieur R = 1,5 m et d’épaisseur e = 1 cm ?
+6.10 Pont à haubans
+Nous étudions le problème 2D d’un assemblage de deux poutres connectées de façon rigide qui soutiennent un pont. Comme montré sur le schéma ci-dessous, la poutre Ω1 est horizontale (axe suivant ix), en
+appui simple à l’une de ses extrémités x = 0, et reposant sur un appui glissant à l’autre extrémité A (xA = L).
+En dehors de ses extrémités, Ω1 est seulement soumise à une densité d’efforts linéique verticale fl1 = − fl1iy.
+L’appui simple en O est bilatéral afin de maintenir le contact de la poutre avec son support, mais il a les
+
+
+66 Chapitre 6. Approximation des poutres
+mêmes propriétés qu’un appui simple unilatéral. On suppose que les deux appuis simple et glissant sont des liaisons parfaites. La poutre Ω2 fait un angle de 45 degrés avec Ω1. Elle est aussi connectée à l’appui glissant en A et
+encastrée avec Ω1. L’autre extrémité B est libre d’efforts. Ω2 soutient le tablier d’un pont par l’intermédiaire
+de haubans. Ainsi, en dehors de ses extrémités, elle est seulement soumise à une densité d’efforts linéiques
+fl2 = √2 fl2 (ix − iy) /2 représentant la charge transmise par les haubans. Étant donné leur direction, fl2 est
+perpendiculaire à l’axe de la poutre. On note e = √2 (ix + iy) /2 l’axe de la poutre et eχ1 = √2 (−ix + iy) /2
+la direction transverse dans le plan du montage. Les deux poutres ont les mêmes caractéristiques : longueur L, section d’aire A, inertie transverse Iz,
+masse volumique ρ, module de Young E. On suppose qu’elles sont minces, en accord avec l’hypothèse d’Euler-Bernoulli. On note s l’abscise parcourant de façon continue les axes des poutres de telle sorte que 0 < s = x < L pour Ω1 et L < s < 2L pour Ω2. Afin de résoudre le problème, nous utiliserons le principe de superposition et résoudrons d’abord le problème prenant en compte uniquement fl1, puis indépendemment fl2.
+Partie 1 – Influence de fl1 seule
+1. En tenant compte des propriétés mécaniques des deux appuis et le cadre bidimensionnel du problème, donner les résultantes et moments associés exercés par les appuis sur l’assemblage de poutres en O, RO et MO, et en A, RA et MA.
+2. Donner l’expression de la résultante R et du moment associé M des efforts intérieurs, sur Ω1 et sur Ω2.
+Interpréter leurs composantes. 3. En tenant compte des propriétés cinématiques des deux appuis, exprimer les fonctions du champ de déplacement uGy et θz pour Ω1. Que vaut θz (L) ?
+4. Exprimer les fonctions du champ de déplacement uGy et θz pour Ω2. Que vaut le déplacement à
+l’extrémité B ?
+Partie 2 – Influence de fl2 seule
+Dans ce cas, nous donnons les résultantes et moments associés appliqués par les appuis :
+RO = −
+√2
+2 L fl2ix − L
+2 fl2iy RA = L
+2
+(1 + √2)
+fl2iy MO = MA = 0
+De plus, nous donnons par anticipation le déplacement transverse uGy pour Ω1 :
+uGy (s) = fl2
+12E Iz
+L
+(L2 − s2) s θz (s) = fl2
+12E Iz
+L
+(L2 − 3s2) pour 0 < s < L
+5. Exprimer la résultante R et le moment associé M des efforts intérieurs, pour Ω1 et Ω2. Interpréter
+leurs composantes. 6. En tenant compte des propriétés cinématiques des appuis, donner la (les) composante(s) manquante(s) du champ de déplacement uG et θ pour Ω1. Que vaut uGx (L) ?
+7. Exprimer uG et θ pour Ω2. Que vaut le déplacement à l’extrémité B ?
+
+
+6.11 Pilier de téléphérique 67
+Partie 3 – Synthèse
+Nous voulons comparer l’intérêt de ce montage au cas d’une seule poutre horizontale de longueur
+(1 + √2)
+L, avec une densité d’efforts uniforme fl = − fl1iy sur toute la longueur. Cela correspond à la
+même longueur de tablier que dans l’assemblage étudié, mais sans le système de hauban avec la poutre Ω2,
+et aux mêmes appuis que précédemment en O et A. Dans ce dernier cas, la contrainte normale maximale
+vaut : σeaeltmax = fl1L2ymax
+Iz
+.
+8. Exprimer la contrainte normale σee du système complet étudié précédemment, en tenant compte de
+l’influence à la fois de fl1 et de fl2, où fl2 = √2 fl1. Conclure sur l’efficacité de l’assemblage avec
+deux poutres, en considérant également le choix des matériaux (par exemple, béton pour le tablier du pont, et acier pour notre assemblage).
+6.11 Pilier de téléphérique
+Les téléphériques sont de loin le moyen de transport le plus efficace lorsqu’il est question d’un fort dénivelé. Ils sont ainsi fréquemment utilisés pour relier les villages et installations de sports d’hiver aux vallées. Le composant structurel principal est le pilier représenté sur la figure ci-dessous.
+On considère ici un modèle simplifié comme représenté sur la figure ci-dessous et composé : — d’un bloc de béton Ω0, jouant le rôle d’un bâti fixe et indéformable ;
+— d’un pilier principal Ω1, assimilable à une poutre d’axe e1, de longueur L1 et de section carrée de
+dimension l1 ; cette poutre est encastrée sur le bloc de béton Ω0 avec un angle α = 75◦ ;
+— d’un déport Ω2, assimilable à une poutre d’axe e2, de longueur L2 et de section carrée de dimension
+l2 ; cette poutre est encastrée sur le pilier Ω1 avec un angle β = 90◦ ;
+
+
+68 Chapitre 6. Approximation des poutres
+— d’un balancier Ωb, assimilable à un solide indéformable appliquant sur l’extrémité s2 = L2 du déport
+Ω2 une force Rb et un moment Mb (exprimé au centre de la section). À des fins de simplification, on
+considèrera une force selon e1 (Rb = −Re1, avec R connu) et un moment autour de e2 (Mb = Me2,
+avec M connu).
+On introduit en outre le système de coordonnées cartésiennes (x, y, z) où z est selon la normale au plan xy (entrante dans la figure).
+On suppose que l’on peut négliger l’action de la pesanteur sur le pilier principal Ω1 et le déport Ω2, les
+seules actions à considérer sur le système étant la résultante Rb et le moment Mb exercés par le balancier
+d’une part, et la résultante R0 et le moment M0 (exprimé au centre de la section encastrée) exercés par le
+bloc de béton Ω0 d’autre part. Le pilier principal Ω1 et le déport Ω2 sont tous deux constitués d’un matériau
+élastique linéaire, homogène et isotrope, de modules de Young respectifs E1 et E2. Il est supposé en outre
+que les effets d’inertie peuvent être négligés et que l’on peut adopter l’hypothèse des petites perturbations et l’hypothèse d’Euler-Bernoulli.
+1. Écrire l’équilibre du système complet Ω1–Ω2 et déterminer son degré d’hyperstatisme.
+2. Déterminer l’expression de la résultante des efforts intérieurs pour une section de coordonnée s2 du
+déport Ω2 et pour une section de coordonnée s1 du pilier principal Ω1. Expliciter les composantes
+d’effort normal et d’effort tranchant. 3. Déterminer l’expression du moment des efforts intérieurs pour une section de coordonnée s2 du déport
+Ω2. Expliciter les composantes de moment de torsion et de moment de flexion.
+4. Déterminer l’expression du moment des efforts intérieurs pour une section de coordonnée s1 du pilier
+principal Ω1. Expliciter les composantes de moment de torsion et de moment de flexion.
+5. Déterminer l’expression du déplacement complet uΩ1 pour le pilier principal Ω1.
+6. Sans développer les calculs, expliquer comment le déplacement complet uΩ2 peut être déterminé pour le déport Ω2.
+Pour rendre la modélisation plus réaliste, au lieu de la résultante Rb et du moment Mb, on considère
+maintenant l’effet d’une charge ponctuelle Fb, représentant l’action du poids de la cabine et de ses passagers
+(pour différentes positions) sur le balancier Ωb, comme représenté sur la figure ci-dessous.
+On assimile le balancier Ωb à un solide indéformable et on néglige l’action de la pesanteur sur lui. lb est
+la longueur du balancier, xb est le point au niveau duquel le balancier est fixé sur le déport Ω2, et xF est le
+point au niveau duquel la force Fb est appliquée.
+
+
+6.12 Lampadaire à deux bras 69
+7. Commenter l’influence de la distance d = ∥xb − xF ∥ sur les efforts intérieurs dans le pilier principal
+Ω1. Justifiez vos commentaires à l’aide des équations trouvées précédemment.
+8. On considère maintenant l’action de la pesanteur sur le système complet, pour la configuration d = ∥xb − xF ∥ = 0. En utilisant le principe de superposition, montrer comment les efforts intérieurs
+sont modifiés. Les calculs détaillés ne sont pas demandés. 9. Finalement, sans faire de calculs, comment prendre en compte dans l’étude un balancier Ωb qui soit
+déformable et élastique ?
+6.12 Lampadaire à deux bras
+L’éclairage des voies publiques est généralement assuré par des lampadaires spécifiques. La conception de ces structures est capitale à la fois pour émettre suffisamment de lumière et pour garantir que la structure ne s’effondrera pas sous la charge afin d’éviter les accidents et l’interruption du trafic.
+On considère ici un modèle simplifié 2D d’un lampadaire asymétrique (aussi bien en termes de longueurs de bras que de poids des lampes), comme représenté sur la figure ci-dessus, et composé de : — un pilier principal Ω, assimilable à une poutre d’axe iy vertical, de longueur L et de section circulaire
+de rayon R ; cette poutre est encastrée sur le sol Ω0, supposé fixe et indéformable, au niveau de sa
+section d’altitude y = 0 ; — un support à deux bras Ω∗, assimilable à une poutre d’ace ix horizontal, de longueur L∗ = L1 + L2 et
+de section carrée de côté h ; cette poutre est encastrée sur l’extrémité supérieure (en y = L) du pilier principal Ω, au niveau de sa section d’abscisse x = 0, de telle sorte qu’on puisse considérer que Ω∗ est constituée de deux « demi-poutres » Ω1 et Ω2, de lignes moyennes de coordonnées respectives
+x ∈ [−L1, 0] et x ∈ [0, L2], et encastrées l’une à la suite de l’autre.
+Le système de coordonnées cartésiennes (x, y, z) utilisé est associé à la base (ix, iy, iz), où iz est le vecteur
+unitaire normal (sortant) au plan d’étude.
+Par ailleurs, on suppose que l’on peut négliger l’action de la pesanteur sur le pilier principal Ω et le support à deux bras Ω∗ : les seules actions à considérer sont donc : — l’action de la première lampe sur le support à deux bras Ω∗ au niveau de sa section d’abscisse x = −L1,
+de résultante F1 = −F1iy (avec F1 > 0 représentant le poids de la lampe) et de moment (exprimé au
+centre de la section) nul ;
+
+
+70 Chapitre 6. Approximation des poutres
+— l’action de la seconde lampe sur le support à deux bras Ω∗ au niveau de sa section d’abscisse x = L2,
+de résultante F2 = −F2iy (avec F2 > 0 représentant le poids de la lampe) et de moment (exprimé au
+centre de la section) nul ; — l’action du sol sur le pilier principal Ω au niveau de sa section d’altitude y = 0, de résultante F0 et de
+moment (exprimé au centre de la section) M0.
+Enfin, le pilier principal Ω et le support à deux bras Ω∗ sont tous deux constitués d’un même matériau élastique linéaire, homogène et isotrope, de module de Young E. Il est de plus supposé que l’on peut négliger les effets d’inertie et que l’on peut adopter l’hypothèse des petites perturbations et l’hypothèse d’Euler-Bernoulli.
+1. Écrire les équations d’équilibre du système complet Ω–Ω∗ et déterminer son degré d’hyperstatisme. 2. Déterminer l’expression de la résultante R(y) et du moment M(y) des efforts intérieurs pour une section d’altitude y ∈ [0, L] du pilier principal Ω. Expliciter les composantes d’efforts normal et tranchant, de moments de torsion et de flexion. 3. Déterminer l’expression de la résultante R∗(x) et du moment M∗(x) des efforts intérieurs pour une section d’abscisse x ∈ [−L1, 0[, puis x ∈]0, L2] du support à deux bras Ω∗. Expliciter les composantes
+d’efforts normal et tranchant, de moments de torsion et de flexion. 4. Tracer le diagramme des efforts intérieurs le long du support à deux bras Ω∗. Où se situe la contrainte normale maximale dans le cas où F1L1 > F2L2, et que vaut-elle ?
+5. Déterminer l’expression du déplacement complet uΩ pour le pilier principal Ω. 6. Donner les conditions de raccord cinématique que doivent vérifier les déplacements du pilier principal Ω et du support à deux bras Ω∗, au niveau de leur encastrement.
+7. Déterminer l’expression du déplacement complet uΩ∗ pour le support à deux bras Ω∗.
+On considère maintenant que le lampadaire est soumis à l’action du vent. Cette dernière est modélisée comme une densité de force linéique fL(y) = − f0yix, avec f0 > 0 constant, afin de tenir compte de la variation
+de vitesse de vent en fonction de l’altitude.
+8. Expliciter les nouvelles composantes d’efforts normal et tranchant, de moments de torsion et de flexion le long du pilier principal Ω dans le cas de l’action du vent, et tracer le diagramme des efforts intérieurs associé.

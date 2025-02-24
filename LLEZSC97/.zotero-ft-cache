@@ -1,0 +1,3890 @@
+Distributions, analyse de Fourier,
+e ́quations aux de ́rive ́es partielles
+F. Golse
+Octobre 2012
+
+
+ii
+
+
+Table des matie`res
+I Distributions 1
+1 Fonctions C∞ `a support compact 3 1.1 Calcul diff ́erentiel : rappels et notations . . . . . . . . . . . . . . 3 1.2 Fonctions de classe C∞ `a support compact . . . . . . . . . . . . 6 1.3 R ́egularisation des fonctions . . . . . . . . . . . . . . . . . . . . . 11 1.3.1 Convolution des fonctions . . . . . . . . . . . . . . . . . . 11 1.3.2 Re ́gularisation par convolution . . . . . . . . . . . . . . . 21 1.4 Partitions de l’unit ́e . . . . . . . . . . . . . . . . . . . . . . . . . 24 1.5 Appendice : In ́egalit ́es de H ̈older et de Minkowski . . . . . . . . . 28 1.6 Exercices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33
+2 E.D.P. d’ordre un 35 2.1 L’ ́equation de transport . . . . . . . . . . . . . . . . . . . . . . . 35 2.2 Equations de transport `a coefficients variables . . . . . . . . . . . 38 2.3 E.D.P. non lin ́eaires d’ordre un . . . . . . . . . . . . . . . . . . . 45 2.4 Exercices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+3 Calcul des distributions 53 3.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53 3.2 Les distributions : d ́efinitions et exemples . . . . . . . . . . . . . 55 3.2.1 Notion de distribution . . . . . . . . . . . . . . . . . . . . 55 3.2.2 Distributions positives . . . . . . . . . . . . . . . . . . . . 60 3.2.3 Remarques sur la de ́finition des distributions . . . . . . . 63 3.3 Convergence des suites de distributions . . . . . . . . . . . . . . . 66 3.4 Op ́erations sur les distributions . . . . . . . . . . . . . . . . . . . 72 3.4.1 De ́rivation des distributions . . . . . . . . . . . . . . . . . 72 3.4.2 Multiplication par une fonction de classe C∞ . . . . . . . 78 3.4.3 Localisation et recollement des distributions . . . . . . . . 80 3.4.4 Changement de variables dans les distributions . . . . . . 82 3.4.5 De ́rivation/Int ́egration sous le crochet de dualit ́e . . . . . 84 3.4.6 Produit de distributions . . . . . . . . . . . . . . . . . . . 88 3.5 La formule des sauts et ses variantes . . . . . . . . . . . . . . . . 89 3.5.1 Formule des sauts en dimension N = 1 . . . . . . . . . . . 89 3.5.2 Formule de Green-Riemann : rappels . . . . . . . . . . . . 91
+iii
+
+
+iv TABLE DES MATIE`RES
+3.5.3 Formule de Green(-Ostrogradsky) . . . . . . . . . . . . . 93 3.5.4 Formule des sauts en dimension quelconque . . . . . . . . 96 3.6 Distributions homoge`nes . . . . . . . . . . . . . . . . . . . . . . . 102 3.7 Exercices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 113
+4 Support et convolution des distributions 115 4.1 Les distributions a` support compact . . . . . . . . . . . . . . . . 116 4.1.1 Support d’une distribution . . . . . . . . . . . . . . . . . 116 4.1.2 Distributions `a support compact . . . . . . . . . . . . . . 119 4.1.3 Structure des distributions a` support dans un singleton . 121 4.2 Convolution Cc∞ ? D′ . . . . . . . . . . . . . . . . . . . . . . . . . 127 4.3 Op ́erations sur les distributions (suite) . . . . . . . . . . . . . . . 133 4.3.1 Produit tensoriel de deux distributions . . . . . . . . . . . 133 4.3.2 Composition d’une distribution et d’une application C∞ . 136 4.4 Produit de convolution des distributions . . . . . . . . . . . . . . 139 4.5 Exercices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 146
+5 Transformation de Fourier 149 5.1 La classe de Schwartz S(RN ) . . . . . . . . . . . . . . . . . . . . 150 5.2 La transformation de Fourier sur S . . . . . . . . . . . . . . . . . 154 5.3 Les distributions temp ́er ́ees . . . . . . . . . . . . . . . . . . . . . 161 5.4 La transformation de Fourier sur S′ . . . . . . . . . . . . . . . . 166 5.5 Transformation de Fourier partielle . . . . . . . . . . . . . . . . . 176 5.6 Transformation de Fourier et s ́eries de Fourier . . . . . . . . . . . 178 5.7 Espaces de Sobolev . . . . . . . . . . . . . . . . . . . . . . . . . . 183 5.8 Exercices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 190
+6 Appendice 193 6.1 Rappels de topologie . . . . . . . . . . . . . . . . . . . . . . . . . 193 6.2 Inte ́gration sur les surfaces . . . . . . . . . . . . . . . . . . . . . . 196 6.2.1 Int ́egrales curvilignes : rappels . . . . . . . . . . . . . . . 196 6.2.2 Ele ́ment d’aire sur une surface ; int ́egrale de surface . . . . 199 6.3 Inte ́gration sur une hypersurface de RN . . . . . . . . . . . . . . 204 6.3.1 Exercices . . . . . . . . . . . . . . . . . . . . . . . . . . . 208 6.4 Quelques proprie ́te ́s de la fonction Γ . . . . . . . . . . . . . . . . 209
+II Applications aux EDP 215
+7 Op ́erateurs diff ́erentiels 217 7.1 Op ́erateurs diff ́erentiels : exemples . . . . . . . . . . . . . . . . . 218 7.2 Solutions e ́l ́ementaires . . . . . . . . . . . . . . . . . . . . . . . . 226 7.2.1 Solution  ́el ́ementaire du laplacien . . . . . . . . . . . . . . 226 7.2.2 Solution  ́el ́ementaire du d’Alembertien . . . . . . . . . . . 231 7.2.3 Solution  ́el ́ementaire de l’ope ́rateur de la chaleur . . . . . 235 7.2.4 Solution  ́el ́ementaire de l’ope ́rateur de Schro ̈dinger . . . . 237
+
+
+TABLE DES MATIE`RES v
+7.3 Le proble`me de Cauchy au sens des distributions . . . . . . . . . 241 7.3.1 Le cas des  ́equations diff ́erentielles ordinaires . . . . . . . 242 7.3.2 Le cas des EDP . . . . . . . . . . . . . . . . . . . . . . . . 245 7.4 Exercices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 250
+8 Equations de Laplace et de Poisson 253 8.1 Origines du mod`ele . . . . . . . . . . . . . . . . . . . . . . . . . . 253 8.2 Fonctions harmoniques . . . . . . . . . . . . . . . . . . . . . . . . 256 8.3 L’ ́equation de Poisson dans l’espace euclidien . . . . . . . . . . . 265 8.4 Probl`emes aux limites pour le laplacien . . . . . . . . . . . . . . 269 8.5 Exercices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 271
+9 Equation de la chaleur 275 9.1 Origines du mod`ele . . . . . . . . . . . . . . . . . . . . . . . . . . 275 9.2 Probl`eme de Cauchy et  ́equation de la chaleur . . . . . . . . . . . 277 9.3 Propri ́et ́es qualitatives . . . . . . . . . . . . . . . . . . . . . . . . 285 9.3.1 Bornes sur la solution du probl`eme de Cauchy . . . . . . 286 9.3.2 Effet r ́egularisant . . . . . . . . . . . . . . . . . . . . . . . 289 9.3.3 Irre ́versibilit ́e . . . . . . . . . . . . . . . . . . . . . . . . . 291 9.3.4 Vitesse infinie de propagation . . . . . . . . . . . . . . . . 293 9.4 Equation des milieux poreux . . . . . . . . . . . . . . . . . . . . 295 9.4.1 Origine de l’ ́equation des milieux poreux . . . . . . . . . . 295 9.4.2 Solutions auto-similaires. . . . . . . . . . . . . . . . . . . 297 9.5 Solution de l’ ́equation de Hopf apre`s les chocs . . . . . . . . . . . 300 9.5.1 La transformation de Cole-Hopf . . . . . . . . . . . . . . . 303 9.5.2 La formule de Lax-Oleinik . . . . . . . . . . . . . . . . . . 308 9.5.3 Appendice . . . . . . . . . . . . . . . . . . . . . . . . . . . 315 9.6 Exercices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 317
+10 Equation de Schr ̈odinger 321 10.1 Origines du mod`ele . . . . . . . . . . . . . . . . . . . . . . . . . . 321 10.2 Probl`eme de Cauchy et  ́equation de Schro ̈dinger . . . . . . . . . 325 10.3 Effets dispersifs . . . . . . . . . . . . . . . . . . . . . . . . . . . . 331 10.4 Transformation de Wigner . . . . . . . . . . . . . . . . . . . . . . 335 10.4.1 La transformation de Wigner . . . . . . . . . . . . . . . . 335 10.4.2 Limite semi-classique . . . . . . . . . . . . . . . . . . . . . 338 10.4.3 Interpr ́etation physique . . . . . . . . . . . . . . . . . . . 340 10.5 Exercices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 343
+11 Equation des ondes 347 11.1 Origines du mod`ele . . . . . . . . . . . . . . . . . . . . . . . . . . 347 11.2 Le proble`me de Cauchy . . . . . . . . . . . . . . . . . . . . . . . 353 11.2.1 Formulation au sens des distributions . . . . . . . . . . . 353 11.2.2 Solution  ́el ́ementaire dans le futur . . . . . . . . . . . . . 355 11.2.3 Existence et unicit ́e de la solution . . . . . . . . . . . . . 358 11.3 Solution e ́le ́mentaire dans le futur . . . . . . . . . . . . . . . . . . 361
+
+
+vi TABLE DES MATIE`RES
+11.3.1 Le cas g ́en ́eral en dimension N ≥ 2. . . . . . . . . . . . . 362 11.3.2 Le cas de la dimension N = 1 . . . . . . . . . . . . . . . . 366 11.3.3 Le cas de la dimension N = 3 : moyennes sph ́eriques . . . 368 11.3.4 Le cas de la dimension N = 2 : me ́thode de descente . . . 371 11.4 Propri ́et ́es qualitatives de l’ ́equation des ondes . . . . . . . . . . 374 11.4.1 Conservation de l’e ́nergie . . . . . . . . . . . . . . . . . . 374 11.4.2 Propagation `a vitesse finie . . . . . . . . . . . . . . . . . . 375 11.4.3 Principe de Huygens . . . . . . . . . . . . . . . . . . . . . 378 11.5 Equation des ondes et transformation de Radon . . . . . . . . . . 380 11.5.1 La transformation de Radon . . . . . . . . . . . . . . . . 380 11.5.2 Transformation de Radon et  ́equation des ondes . . . . . 384 11.5.3 Transformation de Radon et scanner . . . . . . . . . . . . 386 11.6 Exercices. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 389
+Bibliographie 393
+
+
+Premi`ere partie
+Distributions
+1
+
+
+
+
+Chapitre 1
+Fonctions C∞ a` support
+compact
+Ce chapitre rassemble plusieurs r ́esultats pre ́liminaires indispensables pour d ́evelopper la th ́eorie des distributions. Apre`s quelques rappels de calcul diffe ́rentiel — principalement destin ́es `a fixer les notations — on  ́etudiera plus particuli`erement les fonctions de classe C∞ sur un ouvert de RN et `a support compact, ainsi que leurs premi`eres applications en Analyse — notamment a` la localisation et la r ́egularisation des fonctions.
+1.1 Calcul diff ́erentiel : rappels et notations
+Soient Ω ouvert de RN et une application f : Ω → Rn ou Cn d ́efinie par
+f (x) = (f1(x1, . . . , xN ), . . . , fn(x1, . . . , xN )) .
+Rappelons que l’application f est de classe Cp sur Ω — ce que l’on note f ∈ Cp(Ω, Rn) ou f ∈ Cp(Ω, Cn) — si toutes les d ́eriv ́ees partielles d’ordre infe ́rieur ou  ́egal `a p des fonctions f1, . . . , fn sont continues sur Ω. L’espace Cp(Ω, R) ou Cp(Ω, C) selon le contexte — est note ́ Cp(Ω). De fa ̧con plus g ́en ́erale, pour U ⊂ RN , on notera Cp(U, Rn) (resp. Cp(U, Cn)) l’ensemble des restrictions `a U d’applications de classe Cp sur un ouvert de RN contenant U et `a valeurs dans Rn (resp. Cn).
+Lemme 1.1.1 (Schwarz) Soit Ω ouvert de RN . Si φ ∈ C2(Ω), alors, pour tous k < l = 1, . . . , N , on a
+∂2φ ∂ xk ∂ xl
+= ∂2φ
+∂xl∂xk
+sur Ω .
+Nous utiliserons syst ́ematiquement les notations suivantes pour les d ́eriv ́ees partielles d’une fonction f de classe C1 sur Ω, ouvert de RN :
+∂kf (x) ou ∂xk f (x) de ́signe la d ́eriv ́ee partielle ∂f
+∂xk
+(x)
+3
+
+
+4 CHAPITRE 1. FONCTIONS C∞ A` SUPPORT COMPACT
+pour tout k = 1, . . . , N , ainsi que
+∇f (x) ou ∇xf (x) =
+
+ 
+∂x1 f (x)
+...
+∂xN f (x)
+
+
+.
+Rappelons  ́egalement que, pour tout champ de vecteurs de classe C1
+V : Ω ⊂ RN → RN ou` Ω est un ouvert de RN ,
+on note
+div V (x) ou divx V (x) =
+N
+∑
+k=1
+∂xk Vk(x) .
+Passons au cas des d ́eriv ́ees partielles d’ordre sup ́erieur. On nomme “multi-indice” tout  ́el ́ement α = (α1, . . . , αN ) ∈ NN . A tout multi-indice α ∈ NN on associe sa longueur
+|α| = α1 + . . . + αN .
+Pour chaque multi-indice α ∈ NN , on note les d ́eriv ́ees partielles it ́er ́ees d’une fonction f de classe C∞ sur Ω comme suit :
+∂αf (x) ou ∂α
+x f (x) de ́signe ∂|α|f
+∂ xα1
+1 . . . ∂xαN
+N
+(x) ,
+c’est-`a-dire que
+∂αf (x) ou ∂α
+x f (x) = ∂xα11 . . . ∂xαNN f (x) .
+Par analogie, pour tout x ∈ RN et tout α ∈ NN , on note
+xα = xα1
+1 . . . xαN
+N.
+Notons encore, pour tout α ∈ NN et tout β ∈ NN
+β ≤ α si et seulement si βk ≤ αk pour k = 1, . . . , N .
+On posera alors
+(α
+β
+)
+= α!
+(α − β)!β!
+ou`
+α! = α1! . . . αN ! .
+Avec ces notations, on peut  ́ecrire tr`es simplement
+(a) la formule du binˆome :
+(x + y)α =
+∑
+β≤α
+(α
+β
+)
+xα−β yβ ;
+
+
+1.1. CALCUL DIFFE ́RENTIEL : RAPPELS ET NOTATIONS 5
+(b) la formule du multinˆome :
+(x1 + . . . + xN )k =
+∑
+|a|=k
+k!
+α! xα ,
+(c) et la formule de Leibnitz : pour f, g ∈ Cp(Ω) et |α| ≤ p
+∂α(f g) =
+∑
+β≤α
+(α
+β
+)
+∂α−β f ∂β g
+Rappelons une derni`ere notation que nous utiliserons fr ́equemment par la suite : le laplacien d’une fonction de classe C2 sur un ouvert de RN est
+∆f ou ∆xf (x) = div(∇f (x)) =
+N
+∑
+k=1
+∂2
+xk f (x) .
+Nous allons maintenant passer en revue (sans d ́emonstration) plusieurs e ́nonce ́s classiques du calcul diff ́erentiel. Commen ̧cons par la formule de d ́erivation des applications compose ́es. On rappelle que, pour tout Ω ⊂ RN ouvert et tout f ∈ C1(Ω, Rn), on a
+(f ′(x) · ξ)k =
+N
+∑
+l=1
+∂xl fk(x)ξl , x ∈ Ω , ξ ∈ RN , 1 ≤ k ≤ n .
+Ainsi, f ′ est une application continue de Ω dans l’espace L(RN , Rn) des applications lin ́eaires de RN dans Rn. De plus, la matrice de f ′(x) dans les bases canoniques de RN et Rn est, pour tout x ∈ Ω,
+(∂xl fk(x)) 1≤k≤n
+1≤j≤N
+c’est-`a-dire la matrice `a n lignes et N colonnes, dont l’ ́el ́ement situ ́e `a la k-i`eme ligne et la l-i`eme colonne est ∂xl fk(x).
+Th ́eor`eme 1.1.2 (D ́erivation des applications compos ́ees) Soient U ouvert de Rl et V ouvert de Rm. Soient f ∈ C1(U ; Rm) et g ∈ C1(V ; Rn) telles que f (U ) ⊂ V . Alors g ◦ f ∈ C1(U ; Rn) et on a
+(g ◦ f )′(x) = g′(f (x)) · f ′(x) pour tout x ∈ U .
+(La notation · d ́esigne la composition d’application line ́aires de Rl dans Rm et de Rm dans Rn.)
+Les matrices de (g ◦ f )′(x), de g′(f (x)) et de f ′(x) dans les bases canoniques de Rl, Rm et Rn sont donc reli ́ees, pour tout x ∈ U , par la formule
+(∂xk (g ◦ f )i(x)) 1≤i≤n
+1≤k≤l
+= (∂xj gi(f (x))) 1≤i≤n
+1≤j≤m
+· (∂xk fj (x)) 1≤j≤m
+1≤k≤l
+
+
+6 CHAPITRE 1. FONCTIONS C∞ A` SUPPORT COMPACT
+ou` · d ́esigne le produit de matrices a` n lignes et m colonnes par les matrices `a m lignes et l colonnes.
+Rappelons enfin la formule de Taylor avec reste int ́egral :
+(a) pour φ fonction de classe Cp+1 sur un intervalle ouvert I ⊂ R :
+φ(b) =
+p
+∑
+k=0
+(b − a)k
+k! φ(k)(a) +
+∫b
+a
+(b − t)p
+p! φ(p+1)(t)dt
+pour tous a, b ∈ I ;
+(b) pour une fonction f de classe Cp+1 sur un ouvert Ω ⊂ RN :
+f (b) =
+∑
+|α|≤p
+(b − a)α
+α! ∂αf (a)
++ (p + 1)
+∑
+|α|=p+1
+(b − a)α α!
+∫1
+0
+(1 − t)p∂αf (a + t(b − a))dt ,
+pour tous a, b ∈ Ω tels que le segment [a, b] ⊂ Ω.
+Pour d ́emontrer cette derni`ere formule, on se ram`ene au cas `a une variable en posant φ(t) = f (a + t(b − a)) ,
+et on v ́erifie que
+φ(k)(t) =
+∑
+|α|=k
+k!
+α! ∂αf (a + t(b − a))(b − a)α .
+1.2 Fonctions de classe C∞ a` support compact
+Rappelons la de ́finition du support d’une fonction :
+D ́efinition 1.2.1 Soit une fonction φ d ́efinie sur un espace topologique X et `a valeurs dans R ou C. Le support de la fonction φ est
+supp(φ) = {x ∈ X | φ(x) 6= 0} .
+Les fonctions de classe C∞ `a support compact jouent, en Analyse, plusieurs rˆoles distincts,  ́egalement importants : a) elles servent `a localiser les fonctions sans en de ́grader les hypoth`eses de r ́egularit ́e 1 ; b) elles servent `a approcher les fonctions localement int ́egrables par des fonctions de classe C∞ ;
+1. Sauf l’analyticite ́, car, d’apre`s le principe des z ́eros isol ́es, il n’existe pas de fonction analytique `a support compact dans un ouvert de C qui ne soit pas identiquement nulle — cf. [6], The ́or`eme V.1.16, ou [9], chapitre X, The ́or`eme 6.1.3.
+
+
+1.2. FONCTIONS DE CLASSE C∞ A` SUPPORT COMPACT 7
+−3 −2 −1 0 1 2 3
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+−0.3 −0.2 −0.1 0.0 0.1 0.2 0.3
+0.000
+0.005
+0.010
+0.015
+0.020
+0.025
+0.030
+0.035
+0.040
+Figure 1.1 – A gauche : graphe de la fonction E. A droite : zoom sur la re ́gion du graphe correspondant `a x = 0.
+c) enfin, c’est `a partir des fonctions de classe C∞ `a support compact et par un proc ́ed ́e de dualit ́e que l’on va e ́tendre le calcul diff ́erentiel des fonctions aux distributions, qui sont des objets plus g ́en ́eraux que les fonctions.
+Commen ̧cons par construire des exemples de fonctions de classe C∞ `a support compact sur la droite re ́elle. Consid ́erons la fonction
+E : R → R d ́efinie par E(x) = e1/x si x < 0 et E(x) = 0 si x ≥ 0 .
+Il est clair que E est de classe C∞ sur R∗ ; d’autre part, on montre que
+E(n)(x) = Pn
+(1 x
+) e1/x pour tout x < 0,
+ou` Pn est la suite de polynˆomes d ́efinis par la relation de r ́ecurrence
+P0(X) = 1 ,
+Pn+1(X) = −X2(P ′
+n(X) + Pn(X)) , n ≥ 0 .
+On en d ́eduit que
+E(n)(x) → 0 lorsque x → 0− pour tout n ≥ 0
+et donc que E ∈ C∞(R). D’autre part, le support de E est R−. A partir de la fonction E, on construit tr`es simplement une fonction F de classe C∞ sur R et `a support dans un segment [a, b], ou` a < b sont deux r ́eels quelconques : il suffit de poser
+F (x) = E(a − x)E(x − b) pour tout x ∈ R
+c’est-`a-dire
+F (x) = e− b−a
+(b−x)(x−a) si x ∈]a, b[ ,
+F (x) = 0 si x ∈] − ∞, a] ∪ [b, +∞[ .
+
+
+8 CHAPITRE 1. FONCTIONS C∞ A` SUPPORT COMPACT
+−2.0 −1.5 −1.0 −0.5 0.0 0.5 1.0 1.5 2.0
+0.00
+0.02
+0.04
+0.06
+0.08
+0.10
+0.12
+0.14
+Figure 1.2 – Graphe de la fonction F pour a = −1 et b = +1.
+Il est clair que F ∈ C∞(R) et que supp(F ) = [a, b]. On construit de meˆme un exemple de fonction de classe C∞ sur RN et `a support compact, en posant
+G(x) =
+N
+∏
+k=1
+E(ak − xk)E(xk − bk) pour tout x = (x1, . . . , xN ) ∈ RN . (1.1)
+A nouveau, on v ́erifie sans peine que G ∈ C∞(RN ) (par exemple en constatant que G admet des de ́riv ́ees partielles continues a` tout ordre et en tout point de RN ) et que supp(G) = [a1, b1] × . . . × [aN , bN ]. On obtient encore un autre exemple de fonction de classe C∞ `a support compact sur RN en posant
+H(x) = E(|x|2 − 1) ,
+c’est-`a-dire H(x) = 0 si |x| ≥ 1 ,
+H(x) = e
+1
+|x|2−1 si |x| < 1 .
+Dans toute la suite, nous de ́signerons syst ́ematiquement par |x| la norme euclidienne de x ∈ RN , c’est-`a-dire
+|x| =
+√ √ √ √
+N
+∑
+k=1
+x2
+k.
+La fonction H est de classe C∞ sur RN comme compos ́ee de la fonction E et de la fonction RN 3 x 7→ |x|2 − 1 ∈ R, toutes deux de classe C∞ ; d’autre part, supp(H) = B(0, 1) = {x ∈ RN | |x| ≤ 1} .
+
+
+1.2. FONCTIONS DE CLASSE C∞ A` SUPPORT COMPACT 9
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+Z
+−2.0
+−1.5
+−1.0
+−0.5
+0.0
+0.5
+1.0
+1.5
+2.0 X
+−2.0 −1.5 −1.0 −0.5 0.0 0.5 1.0 1.5 2.0
+Y
+Figure 1.3 – Cas N = 2, a1 = a2 = −1 et b1 = b2 = +1. Graphe de la fonction (x, y) 7→ 500G(x, y).
+
+
+10 CHAPITRE 1. FONCTIONS C∞ A` SUPPORT COMPACT
+−2.0 −1.5 −1.0 −0.5 0.0 0.5 1.0 1.5 2.0
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0
+Figure 1.4 – Graphe de la fonction I pour a = −1 et b = +1.
+Un autre exemple important de fonction de classe C∞ dans R est la fonction I donn ́ee par
+I(x) =
+∫x
+−∞
+F (z)dz
+∫∞
+−∞
+F (z)dz
+ou` F est la fonction d ́efinie ci-dessus. Remarquons que la fonction continue F v ́erifie
+F > 0 sur ]a, b[ de sorte que
+∫∞
+−∞
+F (z)dz > 0 .
+La fonction I ∈ C∞(R) satisfait donc les conditions suivantes :
+0 ≤ I ≤ 1, I∣
+∣]−∞,a] = 0 , I∣
+∣[b,+∞[ = 1 ,
+ou` a < b sont les deux r ́eels apparaissant dans la construction de F ci-dessus.
+A partir de la fonction I, en supposant que les parame`tres a, b > 0, on construit tr`es simplement un exemple de fonction J ∈ C∞(RN ) telle que
+supp(J) ⊂ B(0,
+√
+b) , J∣
+∣B(0,√a) = 1 , 0 ≤ J ≤ 1 .
+Il suffit en effet de poser J(x) = 1 − I(|x|2) .
+Notation 1.2.2 Etant donn ́e Ω ⊂ RN ouvert, on notera Cck(Ω) — resp. Cc∞(Ω),
+Cc(Ω) — l’ensemble des fonctions de classe Ck — resp. de classe C∞, resp. continues — sur Ω `a valeurs dans R ou C et dont le support est un compact inclus dans Ω.
+
+
+1.3. RE ́GULARISATION DES FONCTIONS 11
+1.3 R ́egularisation des fonctions
+Le proc ́ed ́e le plus courant de r ́egularisation pour des fonctions localement int ́egrables sur RN utilise la notion de produit de convolution par une suite r ́egularisante.
+1.3.1 Convolution des fonctions
+Le produit de convolution est une op ́eration classique dans le cas des fonctions, que nous ge ́ne ́raliserons ult ́erieurement au cas des distributions. Rappelons quelques re ́sultats de base sur cette op ́eration.
+D ́efinition 1.3.1 (Convolution des fonctions) Deux fonctions f et g d ́efinies p.p. et mesurables sur RN sont dites convolables si, pour presque tout x ∈ RN , la fonction y 7→ f (x − y)g(y) est int ́egrable sur RN .
+On d ́efinit alors le produit de convolution de f et de g par la formule
+f ? g(x) :=
+∫
+RN
+f (x − y)g(y)dy p.p. en x ∈ RN .
+Donnons quelques exemples de fonctions convolables. L’in ́egalit ́e de Hausdorff-Young (Th ́eor`eme 1.3.10 ci-dessous) montrera que, pour tous p, q ∈ [1, ∞],
+f ∈ Lp(RN ) et g ∈ Lq(RN ) avec 1
+p+1
+q ≥ 1 ⇒ f et g sont convolables.
+Un exemple essentiellement trivial est le cas ou` f ∈ L1
+loc(RN ) tandis que
+φ ∈ Cc(RN ) : dans ce cas, on v ́erifie sans peine que f et φ sont convolables. En effet, notons K le support de φ, ici suppose ́ compact, et
+{x} − K = {x − z | z ∈ K} .
+Evidemment, {x} − K est compact pour tout x ∈ RN , et on remarque que l’on a φ(x − y)f (y) = 0 pour y ∈/ {x} − K. Donc
+∫
+RN
+|φ(x − y)f (y)|dy =
+∫
+{x}−K
+|φ(x − y)f (y)|dy
+≤ sup
+z∈K
+|φ(z)|
+∫
+{x}−K
+|f (y)|dy < ∞ ,
+ce qui montre que la fonction
+y 7→ φ(x − y)f (y) est int ́egrable pour tout x ∈ RN .
+Commen ̧cons par l’observation suivante :
+
+
+12 CHAPITRE 1. FONCTIONS C∞ A` SUPPORT COMPACT
+Proposition 1.3.2 (Commutativit ́e de la convolution) Soient deux fonctions f et g mesurables sur RN et convolables ; alors
+f ? g(x) = g ? f (x) p.p. en x ∈ RN .
+D ́emonstration. Par hypoth`ese, les fonctions f et g sont convolables, c’est`a-dire qu’il existe un ensemble N ⊂ RN de mesure nulle tel que, pour tout x ∈ RN \ N , la fonction
+Hx : y 7→ f (x − y)g(y) est int ́egrable sur RN .
+Pour x ∈ RN \ N quelconque, le changement de variables y 7→ z = x − y de jacobien (−1)N , qui pre ́serve donc la mesure de Lebesgue sur RN (cf. [6], chapitre III.3.2, ou [9], chapitre IV, The ́ore`me 3.0.5), transforme la fonction Hx int ́egrable sur RN en la fonction
+Kx : z 7→ Kx(z) := Hx(x − z) = g(x − z)f (z)
+qui est donc int ́egrable sur RN , et v ́erifie, pour tout x ∈ RN \ N ,
+f ? g(x) =
+∫
+RN
+Hx(y)dy =
+∫
+RN
+Kx(z)dz = g ? f (x) .
+Remarque. La d ́efinition du produit de convolution peut paraıˆtre myst ́erieuse a priori. Elle est pourtant tr`es naturelle `a bien des  ́egards : par exemple, le produit de convolution intervient dans la th ́eorie des probabilit ́es pour calculer la loi d’une somme de variables ale ́atoires r ́eelles inde ́pendantes — voir [13], Proposition 4.10.5. Voici une autre fac ̧on intuitive de se repre ́senter le produit de convolution. Supposons que φ ∈ Cc(RN ) ve ́rifie
+φ ≥ 0 sur RN , et
+∫
+RN
+φ(z)dz = 1 .
+Autrement dit, φ est une densite ́ de probabilit ́e sur RN — voir [13], D ́efinition 4.2.7. La formule
+φ ? f (x) =
+∫
+RN
+f (x − z)φ(z)dz
+s’interpr`ete alors comme la moyenne ou l’esp ́erance — cf. S. Me ́le ́ard, ibid., D ́efinition 3.3.1, p. 48 — des translat ́ees de la fonction f — c’est `a dire des fonctions de la forme
+x 7→ f (x − z)
+pour la probabilit ́e de densit ́e φ. Ce proc ́ed ́e, consistant `a effectuer des translations sur le graphe d’une fonction, puis `a prendre le “graphe moyen” va  ́evidemment r ́egulariser, ou ce qui revient au mˆeme, flouter les “asp ́erit ́es” du graphe. Pensons par exemple au
+
+
+1.3. RE ́GULARISATION DES FONCTIONS 13
+cas ou` f est la fonction caract ́eristique d’un segment de R : on s’attend `a ce qu’apr`es convolution par une fonction φ comme ci-dessus, les discontinuit ́es de f aux bornes du segment soient  ́elimin ́ees
+Le produit de convolution de deux fonctions est une op ́eration non locale : il est important de savoir comment cette op ́eration agit sur les supports des deux fonctions dont on calcule le produit de convolution. Avant cela, il faut d ́efinir la notion de support d’un  ́el ́ement de L1
+loc sur RN .
+D ́efinition 1.3.3 Soit f ∈ L1
+loc(RN ) `a valeurs dans R ou C. Le support de la fonction f est
+supp(f ) =
+⋂
+Ω∈O(f )
+(RN \ Ω) ,
+ou` O(f ) = {Ω ouvert de RN | f = 0 p.p. sur Ω} .
+En effet, la de ́finition usuelle du support d’une fonction — que nous avons rappel ́ee dans la D ́efinition 1.2.1 — ne convient plus dans le cas de fonctions d ́efinies presque partout. Consid ́erons par exemple f = 1Q la fonction indicatrice des rationnels ; comme Q est dense dans R, on a
+{x ∈ R | 1Q(x) 6= 0} = Q = R .
+Mais comme 1Q(x) = 0 p.p. en x ∈ R, on a R ∈ O(1Q), de sorte que supp(1Q) = ∅, en consid ́erant 1Q comme  ́ele ́ment de L1
+loc(R) — rappelons que 1Q est (un repr ́esentant de la classe d’e ́quivalence de) l’ ́el ́ement 0 de l’espace vectoriel L1
+loc(R).
+Proposition 1.3.4 (Majoration du support de f ? g) Soient f et g deux fonctions mesurables de ́finies p.p. sur RN et convolables. Alors
+supp(f ? g) ⊂ supp(f ) + supp(g) ,
+avec la notation
+A + B = {a + b | a ∈ A et b ∈ B} .
+D ́emonstration. Soit N sous-ensemble de RN de mesure nulle tel que, pour tout x ∈ RN \ N , la fonction d ́efinie p.p. sur RN
+Hx : y 7→ f (x − y)g(y)
+soit int ́egrable sur RN . Nous allons montrer que
+x ∈ RN \ (N ∪ supp(f ) + supp(g)) ⇒ Hx(y) 6= 0 p.p. en y ∈ RN .
+Notons
+Nf = {z ∈ RN \ supp(f ) | f (z) 6= 0} ,
+Ng = {z ∈ RN \ supp(g) | g(z) 6= 0} ,
+
+
+14 CHAPITRE 1. FONCTIONS C∞ A` SUPPORT COMPACT
+qui sont de mesure nulle dans RN . Soit x ∈ RN \ (N ∪ supp(f ) + supp(g)) ; alors, pour tout y ∈ RN , on a (a) ou bien x − y ∈/ supp(f ), (b) ou bien y ∈/ supp(g). Donc, si Hx(y) 6= 0, alors • ou bien on est dans le cas (a) et alors x − y ∈ Nf , • ou bien on est dans le cas (b) et alors y ∈ Ng. Autrement dit
+{y ∈ RN | Hx(y) 6= 0} ⊂ ({x} − Nf ) ∪ Ng
+qui est de mesure nulle dans RN comme r ́eunion de deux ensembles de mesure nulle. On vient donc de montrer que
+pour tout x ∈ RN \ (N ∪ supp(f ) + supp(g)) , Hx(y) = 0 p.p. en y ∈ RN .
+Donc pour tout x ∈ RN \ (N ∪ supp(f ) + supp(g)) on a
+f ? g(x) =
+∫
+RN
+Hx(y)dy = 0 .
+Par cons ́equent, la fonction f ? g d ́efinie p.p. sur RN est nulle p.p. sur l’ouvert
+RN \ supp(f ) + supp(g)
+ce qui implique l’inclusion
+supp(f ? g) ⊂ supp(f ) + supp(g) .
+Remarque 1.3.5 Soient f et g, deux fonctions mesurables d ́efinies p.p. sur RN et convolables. Si l’une de ces deux fonctions est a` support compact, alors
+supp(f ? g) ⊂ supp(f ) + supp(g) .
+En effet, dans ce cas,
+supp(f ) + supp(g) = supp(f ) + supp(g) ,
+comme le montre le lemme suivant
+Lemme 1.3.6 Soient A ⊂ RN compact et B ⊂ RN ferm ́e. Alors A + B est ferm ́e dans RN .
+D ́emonstration. En effet, soit une suite (zn)n≥1 de points de A+B convergeant vers z dans RN . Il s’agit de montrer que z ∈ A + B. Comme zn ∈ A + B, il existe, pour tout n ≥ 1, des points xn ∈ A et yn ∈ B tels que zn = xn + yn. Comme A est compact dans RN , il existe une sous-suite (xnk )k≥1 de la suite (xn)n≥1 qui converge vers une limite que l’on notera x ∈ A.
+
+
+1.3. RE ́GULARISATION DES FONCTIONS 15
+Alors ynk = znk − xnk → z − x =: y lorsque nk → ∞ .
+Comme B est ferme ́, y ∈ B. Par cons ́equent
+z = x + y avec x ∈ A et y ∈ B
+d’ou` z ∈ A + B.
+On sait que le produit usuel de fonctions `a valeurs re ́elles ou complexes h ́erite des propri ́et ́es de re ́gularit ́e de l’ensemble de ses facteurs. Ainsi, pour f, g ∈ Ck(Ω), le produit f g : x 7→ f (x)g(x) est de classe Ck sur Ω. Par comparaison, le produit de convolution a ceci de remarquable qu’il h ́erite de la re ́gularite ́ d’un seul de ses facteurs. En voici une premi`ere manifestation.
+Proposition 1.3.7 (Continuit ́e de la convolution Cc ? L1
+loc) Pour toute fonc
+tion φ ∈ Cc(RN ) et f ∈ L1
+loc(RN ), la fonction φ ? f est continue sur RN .
+D ́emonstration. En effet, soient x0 ∈ RN et η > 0 ; on va montrer que, pour toute suite (xn)n≥1 telle que
+xn ∈ B(0, η) pour tout n ≥ 1 et xn → x0 pour n → ∞ ,
+on a
+φ ? f (xn) → φ ? f (x0) pour n → ∞ ,
+ce qui  ́etablira la continuit ́e de φ ? f en x0. Notons K = supp(φ) et posons
+K ̃η = {a − b | |a| ≤ η et b ∈ K} ;
+ ́evidemment K ̃η est compact par construction comme image de B(0, η) × K qui est compact par l’application continue (a, b) 7→ a − b. On d ́efinit alors
+Fn(y) = φ(xn − y)f (y)
+et on remarque que Fn(y) = 0 pour y ∈/ K ̃η,
+car φ est `a support dans K et xn ∈ B(0, η). Comme f est mesurable et φ continue, Fn est mesurable pour tout n ≥ 0 et Fn(y) → φ(x0 − y)f (y) p.p. en y ∈ RN lorsque n → ∞. Enfin |Fn(y)| ≤ C|f (y)| p.p. en y ∈ K ̃η
+en notant C = sup
+z∈RN
+|φ(z)| = max
+z∈K |φ(z)| < ∞ .
+Par convergence domine ́e, on conclut que
+φ ? f (xn) =
+∫
+RN
+Fn(y)dy →
+∫
+RN
+φ(x0 − y)f (y)dy = φ ? f (x0)
+
+
+16 CHAPITRE 1. FONCTIONS C∞ A` SUPPORT COMPACT
+lorsque n → ∞.
+Le re ́sultat ci-dessous va encore plus loin et permet de deviner l’inte ́reˆt de la notion de produit de convolution pour la r ́egularisation des fonctions.
+Proposition 1.3.8 (R ́egularit ́e de la convolution Cc∞ ? L1
+loc) Pour toute fonc
+tion φ ∈ Cc∞(RN ) et tout f ∈ L1
+loc(RN ), le produit de convolution φ ? f appar
+tient `a C∞(RN ), et on a
+∂α(φ ? f ) = (∂αφ) ? f , pour tout α ∈ NN .
+De meˆme
+φ ∈ Cm
+c (RN ) et f ∈ L1
+loc(RN ) ⇒ φ ? f ∈ Cm(RN ) .
+D ́emonstration. Pour x0 ∈ RN et η > 0, on consid`ere la fonction mesurable
+F : B(x0, η) × K ̃η 3 (x, y) 7→ φ(x − y)f (y) ∈ R ,
+ou` on rappelle que
+K ̃η = {a − b | |a| ≤ η et b ∈ K} ,
+avec K = supp(φ) comme ci-dessus. Pour presque tout y ∈ K ̃η, la fonction x 7→ F (x, y) est de classe C∞ sur B(x0, η), et, pour tout multi-indice α ∈ NN , on a
+|∂α
+x F (x, y)| = |∂αφ(x − y)f (y)| ≤ Cα|f (y)|
+pour tout (x, y) ∈ B(x0, η)×(K ̃η \N ), o`u N est un ensemble n ́egligeable  ́eventuel sur lequel la fonction localement int ́egrable f n’est pas d ́efinie, et ou`
+Cα = sup
+z∈RN
+|∂αφ(z)| = max
+z∈K |∂αφ(z)| < ∞ .
+Comme la fonction f est localement int ́egrable, sa restriction au compact K ̃η est int ́egrable et on d ́eduit du th ́eor`eme de d ́erivation sous le signe somme 2 que la fonction
+x 7→
+∫
+K ̃ η
+F (x, y)dy = φ ? f (x)
+2. The ́ore`me de de ́rivation sous le signe somme. Soit U ouvert de Rn et soit une fonction f : U × RN → C v ́erifiant (a) pour tout x ∈ U , la fonction y 7→ f (x, y) est sommable sur RN ; (b) il existe N ⊂ RN n ́egligeable dans RN et une fonction F : RN → R+ sommable tels que, pour tout y ∈ RN \ N , la fonction x 7→ f (x, y) soit de classe C1 sur U et que l’on ait
+|∂xk f (x, y)| ≤ F (y) pour tout (x, y) ∈ U × (RN \ N ) et tout k = 1, . . . , n.
+Alors la fonction
+x 7→
+∫
+RN
+f (x, y)dy
+est de classe C1 sur U et on a
+∂xk
+∫
+RN
+f (x, y)dy =
+∫
+RN
+∂xk f (x, y)dy pour tout x ∈ U et tout k = 1, . . . , n.
+Pour une de ́monstration, cf. [6], chapitre IV.1.2, ou [9], chapitre VII, The ́ore`me 2.0.9.
+
+
+1.3. RE ́GULARISATION DES FONCTIONS 17
+admet des d ́eriv ́ees partielles de tous ordres sur B(x0, η), avec
+∂α(φ ? f ) = (∂αφ) ? f sur B(x0, η) .
+En particulier, φ ? f est de classe C∞ sur B(x0, η), d’ou` la proposition, puisque x0 et η > 0 sont arbitraires.
+Avant de passer `a l’ ́etude du proc ́ed ́e de r ́egularisation proprement dit, nous concluons cette section avec quelques r ́esultats compl ́ementaires sur la convolution des fonctions. D’abord, il s’agit d’un produit associatif, ce qui permet de d ́efinir par r ́ecurrence le produit de convolution d’un nombre arbitraire n de fonctions dont n − 1 sont continues `a support compact dans RN et la derni`ere localement int ́egrable.
+Proposition 1.3.9 (Associativit ́e de la convolution) Soient deux fonctions f, g ∈ Cc(RN ) et h ∈ L1
+loc(RN ). Alors
+f ? (g ? h) = (f ? g) ? h .
+D ́emonstration. Tout d’abord, chaque membre de cette e ́galite ́ a bien un sens. En effet, au membre de gauche, g?h ∈ C(RN ) d’apre`s la Proposition 1.3.7. C’est donc une fonction localement int ́egrable, de sorte que f ? (g ? h) est bien d ́efini puisque f ∈ Cc(RN ). Au membre de droite, f ? g est une fonction continue `a support compact d’apr`es la Proposition 1.3.7 et la majoration du support de la Proposition 1.3.4 : alors, (f ? g) ? h est bien d ́efinie puisque h ∈ L1
+loc(RN ). On a
+f ? (g ? h)(x) =
+∫
+RN
+f (x − y)
+(∫
+RN
+g(y − z)h(z)dz
+)
+dy
+=
+∫
+{x}−A
+f (x − y)
+( ∫
+{y}−B
+g(y − z)h(z)dz
+)
+dy
+=
+∫
+RN
+f (x − y)
+( ∫
+{x}−(A+B)
+g(y − z)h(z)dz
+)
+dy
+ou` A = supp(f ) et B = supp(g) sont tous deux compacts, et ou` on note
+E − F = {u − v | u ∈ E et v ∈ F } ,
+de sorte que
+{y} − B ⊂ {x} − (A + B) puisque y ∈ {x} − A .
+Posons alors
+H(z) = 1{x}−(A+B)(z)h(z) , z ∈ RN .
+Comme {x} − (A + B) est compact, la fonction H est int ́egrable. Donc
+f ? (g ? h)(x) =
+∫
+RN
+f (x − y)
+(∫
+RN
+g(y − z)H(z)dz
+)
+dy
+=
+∫
+RN
+H (z )
+(∫
+RN
+f (x − y)g(y − z)dy
+)
+dz
+
+
+18 CHAPITRE 1. FONCTIONS C∞ A` SUPPORT COMPACT
+d’apr`es le th ́eor`eme de Fubini appliqu ́e `a la fonction
+(y, z) 7→ f (x − y)g(y − z)H(z)
+qui est sommable sur R2. Faisons ensuite le changement de variables y − z = w :
+f ? (g ? h)(x) =
+∫
+RN
+H (z )
+(∫
+RN
+f (x − z − w)g(w)dw
+)
+dz
+=
+∫
+RN
+H(z)(f ? g)(x − z)dz
+=
+∫
+{x}−(A+B)
+h(z)(f ? g)(x − z)dz =
+∫
+RN
+h(z)(f ? g)(x − z)dz .
+(En effet la majoration du support d’un produit de convolution donn ́ee dans la Proposition 1.3.4 montre que f ? g(x − z) = 0 si z ∈/ {x} − (A + B), d’o`u on tire la derni`ere  ́egalit ́e.) Comme la derni`ere int ́egrale vaut pr ́ecis ́ement (f ? g) ? h(x), le re ́sultat est d ́emontre ́.
+Rappelons enfin l’ine ́galite ́ suivante, qui est l’outil fondamental permettant d’estimer un produit de convolution dans les espaces Lp de Lebesgue.
+Th ́eor`eme 1.3.10 (In ́egalit ́e de Hausdorff-Young) Soient p, q, r ∈ [1, ∞] tels que
+1
+p+1
+q =1+ 1
+r , avec la convention 1/∞ = 0 ,
+et soient f ∈ Lp(RN ) et g ∈ Lq(RN ). Alors f et g sont convolables sur RN et f ? g ∈ Lr(RN ). De plus, f ? g v ́erifie l’ine ́galite ́
+‖f ? g‖Lr(RN ) ≤ ‖f ‖Lp(RN )‖g‖Lq(RN ) .
+D ́emonstration. Distinguons 4 cas. 1er cas : supposons que 1
+p+1
+q = 1, de sorte que
+1
+r=1
+p+1
+q − 1 = 0 , d’ou` r = ∞ .
+Pour tout x ∈ RN , la fonction
+y 7→ f (x − y) appartient `a Lp(RN ) .
+Donc, pour tout x ∈ RN , l’application
+y 7→ f (x − y)g(y) appartient `a L1(RN )
+d’apr`es l’in ́egalit ́e de H ̈older — cf. dans l’Appendice de ce chapitre, Th ́eor`eme 1.5.1 — ce qui montre que f et g sont convolables, et que, pour tout x ∈ RN ,
+
+
+1.3. RE ́GULARISATION DES FONCTIONS 19
+l’on a
+|f ? g(x)| =
+∣ ∣ ∣ ∣
+∫
+RN
+f (x − y)g(y)dy
+∣ ∣ ∣ ∣
+≤
+∫
+RN
+|f (x − y)||g(y)|dy
+≤ ‖f (x − ·)‖Lp(RN )‖g‖Lq(RN ) = ‖f ‖Lp(RN )‖g‖Lq(RN ) ,
+d’ou`
+‖f ? g‖L∞(RN ) ≤ ‖f ‖Lp(RN )‖g‖Lq(RN ) .
+2`eme cas : supposons que p = q = 1, de sorte que r = 1 puisque
+1
+r=1
+p+1
+q −1 = 1.
+Soient f, g ∈ L1(RN ) ; alors la fonction
+(X, Y ) 7→ f (X)g(Y ) appartient `a L1(RN × RN ) .
+Effectuons le changement de variables
+X = x − y , Y = y , de jacobien D(X, Y )
+D(x, y) =
+∣ ∣ ∣ ∣
+1 −1 01
+∣ ∣ ∣ ∣
+= 1.
+Alors la fonction (x, y) 7→ f (x − y)g(y) appartient  ́egalement `a L1(RN × RN ). D’apr`es le th ́eor`eme de Fubini, la fonction
+y 7→ f (x − y)g(y) appartient `a L1(RN ) p.p. en x ∈ RN
+de sorte que f et g sont convolables. De plus
+∫
+RN
+∣ ∣ ∣ ∣
+∫
+RN
+f (x − y)g(y)dy
+∣ ∣ ∣ ∣
+dx ≤
+∫
+RN
+∫
+RN
+|f (x − y)||g(y)|dydx
+=
+∫
+RN
+∫
+RN
+|f (X)||g(Y )|dXdY
+= ‖f ‖L1(RN )‖g‖L1(RN ) .
+3`eme cas : supposons que p = 1 et 1 < q = r < ∞. D’apr`es le 2e`me cas, la fonction
+y 7→ |f (x − y)|1/q|g(y)| appartient `a Lq(RN ) p.p. en x ∈ RN ,
+tandis que la fonction
+y 7→ |f (x − y)]1−1/q appartient `a Lq′ (RN ) pour tout x ∈ RN ,
+en notant q′ = q
+q−1 . D’apr`es l’in ́egalit ́e de H ̈older, la fonction
+y 7→ |f (x − y)||g(y)| = |f (x − y)]1−1/q|f (x − y)|1/q|g(y)|
+
+
+20 CHAPITRE 1. FONCTIONS C∞ A` SUPPORT COMPACT
+appartient donc `a L1(RN ) pour presque tout x ∈ RN , de sorte que f et g sont convolables, et on a
+(∫
+RN
+|f (x − y)|1/q|g(y)||f (x − y)]1−1/qdy
+)q
+≤
+∫
+RN
+|f (x − y)||g(y)|qdy
+(∫
+RN
+|f (x − y)]q′(1−1/q)dy
+)q/q′
+= |f | ? |g|q(x)‖f ‖q−1
+L1(RN ) .
+En appliquant l’ine ́galite ́ de Hausdorff-Young dans le cas d ́ej`a  ́etabli o`u p = q = r = 1 au produit de convolution |f | ? |g|p, on trouve donc que
+‖f ? g‖q
+Lq(RN ) =
+∫
+RN
+∣ ∣ ∣ ∣
+∫
+RN
+f (x − y)g(y)dy
+∣ ∣ ∣ ∣
+q
+dx
+≤ ‖f ‖q−1
+L1(RN )
+∫
+RN
+|f | ? |g|q(x)dx
+= ‖f ‖q−1
+L1(RN )‖f ‖L1(RN )‖g‖q
+Lq(RN ) = ‖f ‖q
+L1(RN )‖g‖q
+Lq(RN ) .
+4`eme cas : supposons enfin que 1 < p, q, r < ∞ v ́erifient
+1+ 1
+r=1
+p+1
+q.
+D’apr`es le 2`eme cas, la fonction
+y 7→ |f (x − y)|p/r|g(y)|q/r appartient `a Lr(RN ) p.p. en x ∈ RN ,
+tandis que
+y 7→ |f (x − y)|1−p/r appartient `a Lrp/r−p(RN ) pour tout x ∈ RN ,
+y 7→ |g(y)|1−q/r appartient `a Lrq/r−q(RN ) .
+Remarquons en effet que
+1
+r=1
+p+
+(1
+q −1
+)
+<1
+p,
+de sorte que 1 < p < r , et de mˆeme 1 < q < r .
+Appliquons l’in ́egalit ́e de H ̈older `a trois termes — cf. Appendice de ce chapitre, Corollaire 1.5.2 — avec n = 3, p1 = r, p2 = rp
+r−p et p3 = rq
+r−q , de sorte que
+1
+p1
++1
+p2
++1
+p3
+=1
+r+
+(1
+p−1
+r
+)
++
+(1
+q−1
+r
+)
+=1
+p+1
+q−1
+r = 1.
+On en d ́eduit que la fonction
+y 7→ |f (x − y)||g(y)| = |f (x − y)|1−p/r|f (x − y)|p/r|g(y)|q/r|g(y)|1−q/r
+
+
+1.3. RE ́GULARISATION DES FONCTIONS 21
+appartient `a L1(RN ) p.p. en x ∈ RN , de sorte que f et g sont convolables, et que
+(∫
+RN
+|f (x − y)|p/r|g(y)|q/r|f (x − y)|1−p/r|g(y)|1−q/rdy
+)r
+≤ (|f |p ? |g|q(x)) ‖f ‖r−p
+Lp(RN )‖g‖r−q
+Lq(RN ) .
+Appliquant l’in ́egalit ́e de Hausdorff-Young dans le cas de ́j`a e ́tabli ou` p = q = r = 1 au produit de convolution |f |p ? |g|q, on trouve finalement que
+‖f ? g‖r
+Lr(RN )=
+∫
+RN
+(∫
+RN
+|f (x − y)|p/r|g(y)|q/r|f (x − y)|1−p/r|g(y)|1−q/rdy
+)r
+dx
+≤ ‖f ‖r−p
+Lp(RN )‖g‖r−q
+Lq (RN )
+∫
+RN
+|f |p ? |g|q(x)dx
+≤ ‖f ‖r−p
+Lp(RN )‖g‖r−q
+Lq(RN )‖f ‖p
+Lp(RN )‖g‖q
+Lq (RN )
+= ‖f ‖r
+Lp(RN )‖g‖r
+Lq (RN )
+ce qui conclut la de ́monstration.
+Remarque 1.3.11 Si f ∈ Lp(RN ) et g ∈ Lp′ (RN ) avec 1
+p+ 1
+p′ = 1 (en conve
+nant que 1/∞ = 0), alors f ? g ∈ L∞(RN ) d’apr`es l’ine ́galite ́ de HausdorffYoung. En fait, on a un re ́sultat plus pre ́cis : la fonction f ? g est uniforme ́ment continue et borne ́e sur RN . Voir Exercice 4.
+1.3.2 R ́egularisation par convolution
+Pr ́esentons d’abord la notion de suite r ́egularisante.
+D ́efinition 1.3.12 (Suites r ́egularisantes) On appelle suite re ́gularisante (ou approximation de l’identit ́e) une famille (ζ )0< < 0 de fonctions de ́finies sur RN v ́erifiant les proprie ́te ́s suivantes : pour tout ∈]0, 0[
+ζ ∈ C∞(RN ) , supp(ζ ) ⊂ B(0, r ) , ζ ≥ 0 , et
+∫
+RN
+ζ (x)dx = 1 ,
+ou` on a suppose ́ que r → 0 lorsque → 0+ .
+Voici comment construire un exemple de suite r ́egularisante. On part de la fonction H d ́efinie comme dans la section pr ́ec ́edente. Remarquons que H ≥ 0 sur RN et que H > 0 sur B(0, 1), de sorte que
+∫
+RN
+H(x)dx > 0 .
+On d ́efinit une fonction ζ en posant
+ζ(x) = H(x)
+∫
+RN
+H (z )dz
+pour tout x ∈ RN .
+
+
+22 CHAPITRE 1. FONCTIONS C∞ A` SUPPORT COMPACT
+Il est clair que ζ ∈ C∞(RN ) et que supp(ζ) = B(0, 1) (puisque H ∈ C∞(RN ) et supp(H) = B(0, 1)) ; de plus, on a ζ ≥ 0 et
+∫
+RN
+ζ(x)dx = 1 .
+Posons alors, pour tout > 0
+ζ (x) = 1
+Nζ
+(x)
+;
+on v ́erifie facilement que (ζ ) >0 est une suite r ́egularisante sur RN , avec r = .
+Voici une premie`re application de la notion de suite re ́gularisante.
+Th ́eor`eme 1.3.13 (Densit ́e de Cc∞(RN ) dans Cc(RN )) Soit f ∈ Cc(RN ), et soit (ζ )0< < 0 suite r ́egularisante. Alors
+ζ ? f ∈ C∞
+c (RN ) et ζ ? f → f uniform ́ement sur RN
+lorsque → 0+.
+D ́emonstration. Supposons que supp(f ) ⊂ B(0, R) ; alors
+supp(ζ ? f ) ⊂ B(0, R) + B(0, r ) ⊂ B(0, R + r ) pour tout ∈]0, 0[ ,
+d’apr`es la Proposition 1.3.4. D’autre part, d’apre`s la Proposition 1.3.8, la fonction ζ ? f ∈ C∞(RN ) pour tout ∈]0, 0[. Enfin, en utilisant la commutativite ́ du produit de convolution (cf. Proposition 1.3.2), on a
+ζ ? f (x) − f (x) =
+∫
+RN
+ζ (y)f (x − y)dy − f (x)
+=
+∫
+RN
+ζ (y)(f (x − y) − f (x))dy
+car ∫
+RN
+ζ (y)dy = 1 .
+Par cons ́equent, comme ζ ≥ 0 est `a support dans B(0, r )
+|ζ ? f (x) − f (x)| ≤
+∫
+RN
+ζ (y)|f (x − y) − f (x)|dy
+≤ sup
+|y|≤r
+|f (x − y) − f (x)|
+∫
+B(0,r )
+ζ (y)dy
+= sup
+|y|≤r
+|f (x − y) − f (x)| .
+
+
+1.3. RE ́GULARISATION DES FONCTIONS 23
+Or f est continue `a support compact, et donc uniform ́ement continue sur RN : par cons ́equent, comme r → 0 lorsque → 0+,
+sup
+x∈RN ,|y|≤r
+|f (x − y) − f (x)| → 0 lorsque → 0+.
+On en d ́eduit alors que
+sup
+x∈RN
+|ζ ? f (x) − f (x)| → 0 lorsque → 0+.
+Th ́eor`eme 1.3.14 (Densit ́e de Cc∞(RN ) dans Lp(RN )) Soit f ∈ Lp(RN ) avec 1 ≤ p < ∞. Alors a) pour toute suite r ́egularisante (ζ )0< < 0 , on a
+‖f − ζ ? f ‖Lp(RN ) → 0 lorsque → 0+ ;
+b) pour tout η > 0, il existe une fonction fη ∈ Cc∞(RN ) telle que
+‖f − fη‖Lp(RN ) ≤ η .
+Comme nous l’avons rappel ́e plus haut, l’ensemble des fonctions continues sur RN `a support compact est dense dans Lp(RN ) pour 1 ≤ p < ∞. Mais pour p = ∞, ce n’est pas le cas : Cc(RN ) n’est pas dense dans L∞(RN ) (puisque la limite uniforme d’une suite de fonctions continues est une fonction continue). Donc, en particulier, Cc∞(RN ) n’est pas dense dans L∞(RN ).
+D ́emonstration. Par densit ́e de Cc(RN ) dans Lp(RN ),  ́etant donn ́e η > 0, il existe φ ∈ Cc(RN ) telle que
+‖f − φ‖Lp(RN ) < 1
+2η .
+Puis, d’apr`es le Th ́eor`eme 1.3.13, si (ζ )0< < 0 est une suite r ́egularisante
+sup
+x∈RN
+|ζ ? φ(x) − φ(x)| → 0 lorsque → 0+ .
+Or supp(φ) est compact ; soit donc R > 0 tel que supp(φ) ⊂ B(0, R) de sorte que supp(ζ ? φ) ⊂ B(0, R) + B(0, r ) = B(0, R + r ) ,
+d’apr`es la Proposition 1.3.4 et le Lemme 1.3.6. Alors, grˆace `a l’in ́egalit ́e de H ̈older (voir Appendice de ce chapitre, Th ́eor`eme 1.5.1)
+‖ζ ? φ − φ‖Lp(RN ) ≤ sup
+x∈RN
+|ζ ? φ(x) − φ(x)||B(0, R + sup
+0< < 0
+r
+0 )|1/p → 0
+lorsque → 0+. Pour de ́montrer le b), on choisit > 0 assez petit pour que
+‖ζ ? φ − φ‖Lp(RN ) < 1
+2η
+
+
+24 CHAPITRE 1. FONCTIONS C∞ A` SUPPORT COMPACT
+et on pose fη = ζ ? φ : ainsi
+‖f − fη‖Lp(RN ) ≤ ‖f − φ‖Lp(RN ) + ‖φ − ζ ? φ‖Lp(RN ) < η .
+D’autre part
+ζ ? φ ∈ C∞(RN ) est `a support dans B(0, R + sup
+0< < 0
+r
+0) ,
+ce qui  ́etablit le b). Pour de ́montrer le a), on  ́ecrit que
+‖f − f ? ζ ‖Lp(RN )
+≤ ‖f − φ‖Lp(RN ) + ‖φ − ζ ? φ‖Lp(RN ) + ‖ζ ? φ − ζ ? f ‖Lp(RN )
+≤ (1 + ‖ζ ‖L1(RN ))‖f − φ‖Lp(RN ) + ‖φ − ζ ? φ‖Lp(RN )
+= η + ‖φ − ζ ? φ‖Lp(RN )
+d’apr`es l’in ́egalit ́e de Hausdorff-Young (Th ́eor`eme 1.3.10). Or on a vu que
+‖φ − ζ ? φ‖Lp(RN ) → 0 , lorsque → 0+ .
+Prenant la limite supe ́rieure de chaque membre de cette in ́egalit ́e pour → 0+, on trouve que
+lim
+→0+ ‖f − f ? ζ ‖Lp(RN ) ≤ η
+et comme ceci vaut pour tout η > 0, il s’ensuit que le membre de gauche de cette in ́egalit ́e, qui est un nombre ind ́ependant de η, est nul, ce qui  ́etablit le a).
+1.4 Partitions de l’unite ́
+Dans de nombreuses situations, il est tr`es important de pouvoir  ́etudier certaines propri ́et ́es de r ́egularit ́e d’une fonction (ou meˆme, comme on le verra plus loin, d’une distribution) apr`es l’avoir localise ́e dans une partie de l’espace. Encore faut-il que le processus de localisation ne modifie pas la r ́egularit ́e de la fonction en question. Pour ce faire, il faut donc disposer de fonctions `a support compact dans un ouvert Ω de RN et valant identiquement 1 sur un compact de Ω. Voici un premier r ́esultat dans ce sens.
+Lemme 1.4.1 (Fonctions plateaux) Soient Ω ouvert de RN et K compact inclus dans Ω. Il existe une fonction φ de classe C∞ sur RN v ́erifiant
+0 ≤ φ ≤ 1 , supp(φ) compact ⊂ Ω , et φ = 1 sur un voisinage de K.
+
+
+1.4. PARTITIONS DE L’UNITE ́ 25
+D ́emonstration. Pour tout x ∈ K, il existe rx > 0 tel que B(x, rx) ⊂ Ω. Notons alors χx la fonction de classe C∞ sur RN d ́efinie par
+χx(y) = 2eH
+(y − x
+rx
+)
+, y ∈ RN ,
+ou` H est la fonction d ́efinie `a la section 1.2, de sorte que
+supp(χx) = B(x, rx) , χx > 0 sur B(x, rx) , et χx(x) = 2 .
+D ́efinissons alors l’ouvert
+Ux = {y ∈ Ω | χx(y) > 1} , x ∈ K .
+Evidemment (Ux)x∈K est un recouvrement ouvert de K puisque x ∈ Ux. Il existe donc x1, . . . , xn ∈ K tels que
+K ⊂ Ux1 ∪ . . . ∪ Uxn .
+La fonction
+f=
+n
+∑
+j=1
+χxj
+v ́erifie
+f ∈ C∞(RN ) , supp(f ) ⊂ B(x1, rx1 ) ∪ . . . ∪ B(xn, rxn ) compact ⊂ Ω ,
+et f > 1 sur V = Ux1 ∪ . . . ∪ Uxn
+qui est un voisinage ouvert de K. Consid ́erons maintenant la fonction I de la section 1.2 avec a = 0 et b = 1, de sorte que
+I ∈ C∞(R) , I′ ≥ 0 , I∣
+∣R− = 0 , I∣
+∣[1,∞[ = 1 .
+La fonction φ = I ◦ f r ́epond `a la question.
+N.B. Avec le choix de χx fait dans la d ́emonstration ci-dessus,
+Ux = B(x, αrx) ou` α > 0 est tel que 2e · e1/(α2−1) = 1 .
+Voici une premie`re application de ce r ́esultat.
+Th ́eor`eme 1.4.2 (Densit ́e de Cc∞(Ω) dans Lp(Ω)) Soient Ω ouvert de RN ,
+p ∈ [1, ∞[ et f ∈ Lp(Ω). Pour tout η > 0, il existe fη ∈ Cc∞(Ω) telle que
+‖f − fη‖Lp(Ω) < η .
+
+
+26 CHAPITRE 1. FONCTIONS C∞ A` SUPPORT COMPACT
+Pour de ́montrer ce re ́sultat, on prolonge f par 0 en dehors de Ω, puis on applique le Th ́eor`eme 1.3.14, ce qui fournit une fonction G ∈ Cc∞(RN ) approchant
+le prolongement de f dans Lp(RN ). Toutefois, la fonction G ainsi obtenue n’est en g ́en ́eral pas `a support dans Ω. L’id ́ee consiste `a tronquer G en la multipliant par une fonction de Cc∞(Ω) valant 1 sur un compact de Ω bien choisi, comme dans le Lemme 1.4.1.
+D ́emonstration. Soit F ∈ Lp(RN ) de ́finie par
+F (x) = f (x) si x ∈ Ω , F (x) = 0 si x ∈/ Ω .
+D’apr`es le Th ́eor`eme 1.3.14, il existe G ∈ Cc∞(RN ) telle que
+‖F − G‖Lp(RN ) < 1
+2η .
+Pour tout n ≥ 1, on consid`ere
+Kn = {x ∈ Ω | dist(x, ∂Ω) ≥ 1/n et |x| ≤ n} ,
+qui est compact car ferm ́e borne ́ dans RN . D’apr`es le Lemme 1.4.1, pour tout n ≥ 1, il existe φn ∈ C∞(RN ) telle que
+supp(φn) ⊂ Ω , φn
+∣
+∣Kn = 1 , 0 ≤ φn ≤ 1 .
+Evidemment
+1Kn ≤ φn ≤ 1Ω .
+Pour tout n ≥ 1, on d ́efinit Gn = φnG. Par construction de Kn,
+1Kn (x) ↑ 1Ω(x) pour tout x ∈ RN quand n → ∞,
+de sorte que
+φn(x) → 1Ω(x) pour tout x ∈ Ω quand n → ∞.
+Comme G ∈ Lp(RN ) et que
+|G(x) − Gn(x)|p(x) ≤ |G(x)|p pour tout x ∈ Ω,
+on en d ́eduit par convergence domin ́ee que
+‖Gn − G‖p
+Lp(Ω) =
+∫
+Ω
+|Gn(x) − G(x)|pdx → 0 quand n → ∞.
+Il existe donc n1 > 1 tel que
+‖Gn1 − G‖Lp(Ω) < 1
+2η .
+Posons alors
+fη = Gn1
+∣
+∣Ω .
+
+
+1.4. PARTITIONS DE L’UNITE ́ 27
+Par construction, la fonction Gn1 ∈ C∞(RN ) est `a support compact dans Ω, de sorte que fη ∈ Cc∞(Ω). De plus, d’apr`es ce qui pr ́ec`ede,
+‖f − fη‖Lp(Ω) = ‖F − Gn1 ‖Lp(Ω)
+≤ ‖F − G‖Lp(Ω) + ‖G − Gn1 ‖Lp(Ω)
+≤ ‖F − G‖Lp(RN ) + ‖G − Gn1 ‖Lp(Ω) < η ,
+d’ou` le r ́esultat annonc ́e.
+Un autre proble`me se posant fr ́equemment consiste `a “passer du local au global”, c’est-`a-dire `a d ́eduire certaines proprie ́t ́es de re ́gularite ́ globale d’une fonction (ou, comme on le verra, d’une distribution) a` partir de propri ́et ́es locales de cette fonction. Pour ce faire, on se servira de la notion de “partition de l’unit ́e”.
+Th ́eor`eme 1.4.3 (Partitions de l’unit ́e) Soient K ⊂ RN compact, et des ouverts de RN not ́es Ω1, . . . , Ωn tels que
+K ⊂ Ω1 ∪ . . . ∪ Ωn .
+Alors il existe des fonctions φ1, . . . , φn de classe C∞ sur RN telles que
+0 ≤ φk ≤ 1 et supp(φk) compact ⊂ Ωk pour k = 1, . . . , n,
+v ́erifiant
+n
+∑
+k=1
+φk = 1 sur un voisinage de K .
+D ́emonstration.
+Etape 1. Montrons qu’il existe K1, . . . , Kn compacts tels que
+Kj ⊂ Ωj , j = 1, . . . , n , et K ⊂
+n
+⋃
+j=1
+Kj .
+En effet, pour tout x ∈ K, il existe k(x) ∈ {1, . . . , n} et rx > 0 tels que la boule ferm ́ee B(x, rx) ⊂ Ωk(x). Evidemment (B(x, rx))x∈K est un recouvrement ouvert du compact K. Il existe donc x1, . . . , xm ∈ K tels que
+K ⊂ B(x1, rx1 ) ∪ . . . ∪ B(xm, rxm ) .
+Pour tout j = 1, . . . , m, notons
+Aj = {l = 1, . . . , m | k(xl) = j} ,
+et posons
+Kj =
+⋃
+l∈Aj
+B(xl, rxl ) ⊂ Ωj , j = 1, . . . , n .
+
+
+28 CHAPITRE 1. FONCTIONS C∞ A` SUPPORT COMPACT
+Etape 2. En appliquant le Lemme 1.4.1, on construit, pour tout j = 1, . . . , n, une fonction ψj ∈ C∞(RN ) telle que
+supp(ψj) compact ⊂ Ωj , ψj ≥ 0 , ψj = 1 sur Vj voisinage ouvert de Kj .
+Alors n
+∑
+j=1
+ψj > 0 sur V = V1 ∪ . . . ∪ Vn voisinage ouvert de K.
+Toujours d’apr`es le Lemme 1.4.1, soit θ ∈ C∞(RN ) ve ́rifiant
+supp(θ) compact ⊂ V , θ = 1 au voisinage de K , et 0 ≤ θ ≤ 1 .
+Ainsi
+1−θ+
+n
+∑
+k=1
+ψk > 0 sur RN .
+En effet
+1 − θ(x) +
+n
+∑
+k=1
+ψk(x) ≥
+n
+∑
+k=1
+ψk(x) > 0 si x ∈ V ,
+1 − θ(x) +
+n
+∑
+k=1
+ψk(x) ≥ 1 − θ(x) = 1 si x ∈/ V .
+Posons alors
+φj = ψj
+1 − θ + ∑n
+k=1 ψk
+, j = 1, . . . , n .
+Par construction, φj ∈ C∞(RN ) et v ́erifie
+φj ≥ 0 , et supp(φj) compact ⊂ Ωj .
+Enfin, on a
+n
+∑
+j=1
+φj(x) = 1 en tout point ou` θ(x) = 1
+c’est-`a-dire sur un voisinage de K.
+1.5 Appendice : In ́egalite ́s de Ho ̈lder et de Min
+kowski
+Th ́eor`eme 1.5.1 (In ́egalit ́e de H ̈older) Soient X ⊂ RN mesurable, ainsi que deux re ́els p, q ∈ [1, ∞] tels que
+1
+p+1
+q = 1 , avec la convention 1/∞ = 0 .
+
+
+1.5. APPENDICE : INE ́GALITE ́S DE HO ̈LDER ET DE MINKOWSKI 29
+Soient f ∈ Lp(X) et g ∈ Lq(X). Alors le produit f g ∈ L1(X) et on a
+∫
+X
+|f (x)g(x)|dx ≤
+(∫
+X
+|f (x)|pdx
+)1/p (∫
+X
+|g(x)|q dx
+)1/q
+si p, q < ∞ ,
+tandis que
+∫
+X
+|f (x)g(x)|dx ≤ supess
+x∈X
+|g(x)|
+∫
+X
+|f (x)|dx si p = 1 et q = ∞ .
+Rappelons la notion de borne sup ́erieure essentielle : pour toute fonction h mesurable de X dans [0, +∞],
+supess
+x∈X
+h(x) := min{λ ∈ R | h−1(]λ, +∞]) de mesure nulle.} .
+Notons M = supess
+x∈X
+h(x) ; la borne infe ́rieure au membre de droite de l’ ́egalit ́e
+ci-dessus est bien atteinte, puisque
+h−1(]M, +∞]) =
+⋃
+n≥1
+h−1(]M + 1
+n , +∞])
+et que le membre de droite est un ensemble de mesure nulle comme r ́eunion d ́enombrable d’ensembles de mesure nulle. Notant N l’ensemble de mesure nulle
+N = h−1(]M, +∞]) ,
+la de ́finition mˆeme de M = supessx∈X h(x) entraˆıne que
+M = sup
+x∈X \N
+h(x) .
+D’autre part, si A ⊂ X est un ensemble de mesure nulle, alors
+supess
+x∈X
+h(x) ≤ sup
+x∈X \A
+h(x) .
+D ́emonstration. Si p = 1, alors q = ∞ et l’ine ́galite ́ est triviale. En effet, il existe un ensemble de mesure nulle N tel que
+‖g‖L∞(RN ) = sup
+x∈X \N
+|g(x)| .
+Alors
+∫
+X
+|f (x)g(x)|dx =
+∫
+X \N
+|f (x)g(x)|dx
+≤ sup
+x∈X \N
+|g(x)|
+∫
+X \N
+|f (x)|dx
+= sup
+x∈X \N
+|g(x)|
+∫
+X
+|f (x)|dx = ‖g‖L∞(X)‖f ‖L1(X) .
+
+
+30 CHAPITRE 1. FONCTIONS C∞ A` SUPPORT COMPACT
+Supposons maintenant que p, q ∈]1, ∞[. Si
+(∫
+X
+|f (x)|pdx
+)1/p (∫
+X
+|g(x)|q dx
+)1/q
+= 0,
+alors l’une des deux fonctions f ou g est nulle p.p. sur X, de sorte que
+∫
+X
+|f (x)g(x)|dx = 0 .
+L’in ́egalit ́e de H ̈older est donc trivialement v ́erifi ́ee dans ce cas. On supposera donc que
+(∫
+X
+|f (x)|pdx
+)1/p (∫
+X
+|g(x)|q dx
+)1/q
+6= 0 .
+Posons alors
+F (x) = |f (x)|
+(∫
+X
+|f (x)|pdx
+)1/p et G(x) = |g(x)|
+(∫
+X
+|g(x)|q dx
+)1/q .
+Par concavit ́e de la fonction z 7→ ln z, on a
+1
+p ln a + 1
+q ln b ≤ ln
+(a
+p+b
+q
+)
+pour tous a, b > 0, de sorte que
+a1/pb1/q ≤ a
+p+b
+q
+pour tous a, b ∈ R+. Appliquons cette in ́egalit ́e avec a = F (x)p et b = G(x)q :
+F (x)G(x) ≤ 1
+p F (x)p + 1
+q G(x)q , p.p. en x ∈ X .
+Int ́egrant les deux membres de cette in ́egalit ́e sur X, on aboutit `a
+∫
+X
+F (x)G(x)dx ≤ 1
+p+1
+q =1
+car ∫
+X
+F (x)pdx =
+∫
+X
+G(x)qdx = 1
+par d ́efinition des fonctions F et G. On en d ́eduit le r ́esultat annonc ́e puisque
+∫
+X
+F (x)G(x)dx = 1
+(∫
+X
+|f (x)|pdx
+)1/p (∫
+X
+|g(x)|q dx
+)1/q
+∫
+X
+|f (x)g(x)|dx .
+L’in ́egalit ́e de H ̈older se g ́en ́eralise  ́evidemment au produit d’un nombre quelconque de fonctions.
+
+
+1.5. APPENDICE : INE ́GALITE ́S DE HO ̈LDER ET DE MINKOWSKI 31
+Corollaire 1.5.2 (In ́egalit ́e de H ̈older pour un produit de n fonctions) Soient X ⊂ RN mesurable, un entier n ≥ 2 ainsi que des re ́els p1, . . . , pn ∈]1, ∞[ tels que
+1
+p1
++...+ 1
+pn
+= 1.
+Soient fj ∈ Lpj (X) pour j = 1, . . . , n. Alors f1 . . . fn ∈ L1(X) et on a
+∫
+X
+|f1(x) . . . fn(x)|dx ≤
+n
+∏
+j=1
+(∫
+X
+|fj (x)|pj dx
+)1/pj
+.
+D ́emonstration. Appliquer l’in ́egalit ́e de H ̈older du Th ́eor`eme 1.5.1 en posant f = f1 et g = f2 . . . fn, puis proce ́der par r ́ecurrence sur n.
+Voici une premie`re application tr`es importante de l’in ́egalit ́e de H ̈older qui n’est rien d’autre que l’ine ́galite ́ triangulaire dans Lp(X).
+Th ́eor`eme 1.5.3 (In ́egalit ́e de Minkowski) Soient X ⊂ RN mesurable, ainsi que p ∈ [1, ∞[. Alors, pour tous f, g ∈ Lp(X), on a
+(∫
+X
+|f (x) + g(x)|pdx
+)1/p
+≤
+(∫
+X
+|f (x)|pdx
+)1/p
++
+(∫
+X
+|g(x)|pdx
+)1/p
+si p < ∞ ,
+tandis que
+supess
+x∈X
+|f (x) + g(x)| ≤ supess
+x∈X
+|f (x)| + supess
+x∈X
+|g(x)| si p = ∞ .
+D ́emonstration. Le cas p = 1 est trivial. Pour 1 < p < ∞, e ́crivons que
+|f (x) + g(x)| ≤ |f (x)| + |g(x)| , pour presque tout x ∈ X
+de sorte que
+∫
+X
+|f (x)+g(x)|pdx ≤
+∫
+X
+|f (x)||f (x)+g(x)|p−1dx+
+∫
+X
+|g(x)||f (x)+g(x)|p−1dx .
+Appliquons l’ine ́galite ́ de H ̈older, en notant p′ = p
+p−1 , de sorte que 1
+p+ 1
+p′ = 1. On a
+∫
+X
+|f (x)||f (x) + g(x)|p−1dx
+≤
+(∫
+X
+|f (x)|pdx
+)1/p (∫
+X
+|f (x) + g(x)|(p−1)p′ dx
+)1/p′
+=
+(∫
+X
+|f (x)|pdx
+)1/p (∫
+X
+|f (x) + g(x)|pdx
+)1−1/p
+.
+
+
+32 CHAPITRE 1. FONCTIONS C∞ A` SUPPORT COMPACT
+De meˆme
+∫
+X
+|g(x)||f (x)+g(x)|p−1dx ≤
+(∫
+X
+|g(x)|pdx
+)1/p (∫
+X
+|f (x) + g(x)|pdx
+)1−1/p
+.
+En additionnant membre `a membre ces deux in ́egalit ́es, on trouve que
+∫
+X
+|f (x) + g(x)|pdx
+≤
+(
+(∫
+X
+|f (x)|pdx
+)1/p
++
+(∫
+X
+|g(x)|pdx
+)1/p)
+(∫
+X
+|f (x) + g(x)|pdx
+)1−1/p
+.
+Si ∫
+X
+|f (x) + g(x)|pdx = 0
+l’in ́egalit ́e annonc ́ee est  ́evidemment vraie. Sinon, on divise chaque membre de l’in ́egalit ́e ci-dessus par
+(∫
+X
+|f (x) + g(x)|pdx
+)1−1/p
+6= 0
+ce qui donne l’in ́egalit ́e annonc ́ee. Passons enfin au cas p = ∞ : il existe A et B ⊂ RN de mesure nulle tels que
+supess
+x∈X
+|f (x)| = sup
+x∈X \A
+|f (x)| ,
+supess
+x∈X
+|g(x)| = sup
+x∈X \B
+|g(x)| .
+Alors A ∪ B est de mesure nulle et, pour tout x ∈ X \ (A ∪ B)
+|f (x) + g(x)| ≤ |f (x)| + |g(x)| ≤ sup
+x∈X \A
+|f (x)| + sup
+x∈X \B
+|g(x)| .
+En passant au sup sur X \ (A ∪ B), on trouve que
+supess
+x∈X
+|f (x) + g(x)| ≤ sup
+x∈X \(A∪B )
+|f (x) + g(x)|
+≤ sup
+x∈X \A
+|f (x)| + sup
+x∈X \B
+|g(x)|
+= supess
+x∈X
+|f (x)| + supess
+x∈X
+|g(x)| .
+Rappelons enfin que, pour tout X ⊂ RN mesurable et toute fonction f mesurable sur X, on note
+‖f ‖Lp(X) =
+(∫
+X
+|f (x)|pdx
+)1/p
+si 1 ≤ p < ∞ ,
+‖f ‖L∞(X) = supess
+x∈X
+|f (x)| si p = ∞ .
+
+
+1.6. EXERCICES 33
+1.6 Exercices
+Exercice 1.
+D ́emontrer les formules du binoˆme, du multinˆome et de Leibnitz.
+Exercice 2.
+Montrer que la fonction χ d ́efinie sur RN par
+χ(x) = e− |x|2
+1−|x|2 si |x| < 1 , χ(x) = 0 si |x| ≥ 1
+est de classe C∞ sur RN .
+Exercice 3.
+a) Soit f ∈ C∞(R) telle que f (0) = 0. Montrer que la fonction x 7→ f(x)
+x se
+prolonge en une fonction de classe C∞ sur R.
+b) Soit n ≥ 1 entier. Donner une condition ne ́cessaire et suffisante portant sur f ∈ C∞(R) pour que la fonction x 7→ f(x)
+xn se prolonge en une fonction de classe
+C∞ sur R.
+Exercice 4.
+Soient f ∈ Lp(RN ) et g ∈ Lq(RN ) avec p, q ∈ [1, ∞] tels que 1
+p+1
+q = 1.
+Montrer que f ? g est uniforme ́ment continue et born ́ee sur RN . (On pourra utiliser le fait que Cc(RN ) est dense dans Lp(RN ) pour p ∈ [1, ∞[, et qu’une fonction continue sur un compact est uniform ́ement continue.)
+Exercice 5.
+Soit A ⊂ RN mesurable et de mesure de Lebesgue |A| > 0. Montrer que
+A − A = {x − y | x, y ∈ A}
+est un voisinage de 0. (Indication : on pourra consid ́erer la fonction f ?f ̃, ou` f est la fonction indicatrice de A et f ̃(x) = f (−x).)
+Exercice 6.
+Soit (an)n≥0 une suite quelconque de nombres re ́els, et soit χ, une fonction de classe C∞ sur R telle que
+χ
+∣
+∣[−1,1] = 1 , supp(χ) ⊂ [−2, 2] .
+a) Montrer qu’il existe une suite ( n)n≥0 de r ́eels positifs tendant vers 0 telle que la s ́erie
+f (x) =
+∑
+n≥0
+an
+xn
+n! χ
+(x
+n
+)
+d ́efinisse une fonction f de classe C∞ sur R.
+
+
+34 CHAPITRE 1. FONCTIONS C∞ A` SUPPORT COMPACT
+b) En d ́eduire le
+Th ́eor`eme de Borel. Pour toute suite (an)n≥0 de nombres re ́els, il existe une fonction f ∈ C∞(R) telle que
+f (n)(0) = an , pour tout n ∈ N .
+Exercice 7.
+Soient Ω ouvert de RN et K compact de RN inclus dans Ω. On notera dans la suite de cet exercice F = RN \ Ω.
+a) On note dist(K, F ) = inf{|x − y| | x ∈ K et y ∈ F } .
+Montrer que dist(K, F ) > 0.
+b) Montrer que la borne infe ́rieure du a) est atteinte, c’est-a`-dire qu’il existe x ∈ K et y ∈ F tels que dist(K, F ) = |x − y|.
+c) Dans la suite de cet exercice, on notera η = dist(K, F ). Pour tout > 0, on pose K = {x ∈ RN | dist(x, K) ≤ } .
+Montrer que, pour tout ∈]0, η[, l’ensemble K est un compact de RN inclus dans Ω.
+d) Soit χ ∈ C∞(RN ) telle que
+0 ≤ χ ≤ 1 , supp(χ) ⊂ B(0, 1) ,
+∫
+RN
+χ(x)dx = 1 .
+Pour tout > 0, on pose χ (x) = −N χ(x/ ), et, pour tout x ∈ RN ,
+f (x) =
+∫
+K
+χ (x − y)dy .
+Montrer que f ∈ C∞(RN ) ve ́rifie
+supp(f ) ⊂ K2 , 0 ≤ f ≤ 1 , f ∣
+∣K = 1 ,
+et enfin que, pour tout multi-indice α ∈ NN , la famille de nombres r ́eels
+|α| sup x∈RN
+|∂αf (x)|
+reste born ́ee lorsque → 0.
+En d ́eduire une autre preuve du Lemme 1.4.1.
+
+
+Chapitre 2
+E.D.P. d’ordre un
+Les  ́equations aux d ́eriv ́ees partielles constituent le champ d’application le plus important de la th ́eorie des distributions. Elles en ont d’ailleurs e ́te ́, historiquement, la motivation premi`ere. La th ́eorie des  ́equations aux d ́eriv ́ees partielles d’ordre un se ram`ene, dans une certaine mesure, `a celle des syste`mes d’ ́equations diff ́erentielles ordinaires. C’est donc par l’ ́etude de ces  ́equations que nous commencerons, et nous verrons sur plusieurs exemples qu’il est naturel d’avoir a` consid ́erer des solutions d’ ́equations aux d ́eriv ́ees partielles qui ne soient pas forc ́ement diff ́erentiables. Cette constatation fait sentir la n ́ecessit ́e de ge ́ne ́raliser les notions usuelles du calcul diffe ́rentiel.
+2.1 L’ ́equation de transport
+L’ ́equation de transport est le prototype des  ́equations aux de ́rive ́es partielles lin ́eaires du premier ordre. Elle s’ ́ecrit
+∂tf + v · ∇xf = 0
+ou` l’inconnue f : (t, x) 7→ f (t, x) est une fonction a` valeurs re ́elles de classe C1 d ́efinie sur R × RN , et ou` v ∈ RN est un vecteur donn ́e. Il s’agit d’un mode`le intervenant dans diverses branches de la physique (th ́eorie cin ́etique des gaz ou des plasmas, optique g ́eom ́etrique, neutronique. . .) L’inconnue f (t, x) d ́esignera, selon le contexte, une densit ́e d’ ́energie ou de nombre de particules au point x `a l’instant t, dont le vecteur v est la vitesse de propagation. La notation ∇xf d ́esignera tout au long de ce chapitre le gradient de f par rapport aux variables x = (x1, . . . , xN ) :
+∇xf (t, x) =
+
+ 
+∂x1 f (t, x)
+...
+∂xN f (t, x)
+
+ 
+35
+
+
+36 CHAPITRE 2. E.D.P. D’ORDRE UN
+de sorte que
+v · ∇xf (t, x) =
+N
+∑
+k=1
+vk∂xk f (t, x) .
+Soit y ∈ RN ; posons, pour tout t ∈ R, γ(t) = y + tv ; alors γ est une application de classe C1 de R dans RN v ́erifiant
+dγ
+dt (t) = v .
+D ́efinition 2.1.1 L’ensemble {(t, γ(t)) | t ∈ R} est une droite de R × RN , appel ́ee “courbe caracte ́ristique issue de y pour l’ope ́rateur de transport ∂t +v ·∇x”.
+Soit f ∈ C1(R+ × RN ) solution de l’ ́equation de transport. L’application t 7→ f (t, γ(t)) est de classe C1 sur R+ (comme compos ́ee des applications f et t 7→ (t, γ(t)), toutes deux de classe C1), et on a
+d
+dt f (t, γ(t)) = ∂tf (t, γ(t)) +
+N
+∑
+k=1
+∂xk f (t, γ(t)) dγk
+dt (t)
+= ∂tf (t, γ(t)) +
+N
+∑
+k=1
+vk∂xk f (t, γ(t))
+= (∂tf + v · ∇xf )(t, γ(t)) = 0
+Ainsi, toute solution de classe C1 de l’e ́quation de transport reste constante le long de chaque courbe caracte ́ristique.
+Th ́eor`eme 2.1.2 Soit f in ∈ C1(RN ). Le proble`me de Cauchy d’inconnue f
+∂tf (t, x) + v · ∇xf (t, x) = 0 , x ∈ RN , t > 0 ,
+f (0, x) = f in(x) , x ∈ RN ,
+admet une unique solution f ∈ C1(R+ × RN ), donn ́ee par la formule
+f (t, x) = f in(x − tv) pour tout (t, x) ∈ R+ × RN .
+Cette formule explicite pour la solution de l’ ́equation de transport en justifie le nom : le graphe de la donn ́ee initiale f in est en effet transport ́e par la translation de vecteur tv. D ́emonstration. Si f est une solution de classe C1 de l’e ́quation de transport, elle est constante le long des courbes caract ́eristiques, donc
+f (t, y + tv) = f (0, y) = f in(y) , pour tout t > 0 , y ∈ RN .
+En posant y + tv = x, on trouve donc que
+f (t, x) = f in(x − tv) pour tout t > 0 , x ∈ RN .
+
+
+2.1. L’E ́QUATION DE TRANSPORT 37
+Figure 2.1 – Le graphe de la donne ́e initiale f in est translat ́e de t0v pour fournir le graphe de la fonction x 7→ f (t0, x).
+R ́eciproquement, pour f in ∈ C1(RN ), l’application (t, x) 7→ f in(x − tv) est de classe C1 sur R×RN (comme compos ́ee des applications f in et (t, x) 7→ x−tv qui sont toutes deux de classe C1). D’autre part on a
+∇x(f in(x − tv)) = (∇f in)(x − tv) ,
+tandis que
+∂t(f in(x − tv)) = −
+N
+∑
+i=1
+vi(∂xi f in)(x − tv)
+= −v · (∇f in)(x − tv) = −v · ∇x(f in(x − tv)) ,
+ce qui montre que la fonction f : (t, x) 7→ f in(x − tv) est bien une solution de l’ ́equation de transport. Mˆeme si f in n’est pas d ́erivable, la formule
+f (t, x) = f in(x − tv)
+garde un sens, et on souhaiterait pouvoir dire qu’elle d ́efinit encore une solution de l’e ́quation de transport. Exemple : pour N = 1, prendre f in en escalier, par exemple
+f in(x) = 1 si x ≤ 0 , f (x) = 0 si x > 0
+La solution de l’e ́quation de transport mode ́lise alors une onde de choc se propageant `a la vitesse v.
+
+
+38 CHAPITRE 2. E.D.P. D’ORDRE UN
+Figure 2.2 – Solution de l’e ́quation de transport pr ́esentant une discontinuit ́e de premie`re esp`ece (saut).
+Pour l’analyse des  ́equations aux d ́eriv ́ees partielles, il est donc souvent tr`es naturel de devoir “d ́eriver des fonctions non d ́erivables”. Le bon cadre pour cela, comme on le verra dans la suite de ce cours, est la th ́eorie des distributions.
+2.2 Equations de transport `a coefficients variables
+Dans de nombreuses situations, la vitesse de propagation v n’est pas constante, mais peut varier avec la position ou mˆeme avec le temps. (Pensons par exemple `a la propagation de la lumi`ere dans un milieu d’indice variable : la vitesse de la lumie`re est inversement proportionnelle `a l’indice du milieu, et les rayons lumineux sont alors courb ́es.) On va donc e ́tudier l’ ́equation de transport
+∂tf (t, x) + V (t, x) · ∇xf (t, x) = 0 , 0 < t < T , x ∈ RN ,
+ou` V : [0, T ] × RN → RN est un champ de vecteurs admettant des d ́eriv ́ees partielles d’ordre 1 par rapport aux variables xj pour j = 1, . . . , N et ve ́rifiant les hypothe`ses suivantes :
+(H1) V et ∇xV sont continues sur [0, T ] × RN ,
+
+
+2.2. EQUATIONS DE TRANSPORT A` COEFFICIENTS VARIABLES 39
+et il existe κ > 0 tel que
+(H2) |V (t, x)| ≤ κ(1 + |x|) , pour tout (t, x) ∈ [0, T ] × RN .
+La notation ∇xV d ́esigne, pour le champ de vecteurs V , la matrice
+∇xV (t, x) =
+
+ 
+∂x1 V1(t, x) . . . ∂xN V1(t, x)
+... ...
+∂x1 VN (t, x) . . . ∂xN VN (t, x)
+
+
+.
+Autrement dit, le j-`eme vecteur colonne de la matrice ∇xV est ∂xj V , d ́eriv ́ee partielle du champ de vecteurs V par rapport `a la j-i`eme coordonne ́e de x, ce qui se traduit encore par la formule
+(∇xV (t, x))ij = ∂xj Vi(t, x) , i, j = 1, . . . , N .
+Comme le champ de vecteurs v ́erifie l’hypoth`ese (H1), le th ́eor`eme de CauchyLipschitz entraıˆne l’existence locale d’une unique courbe int ́egrale de V passant par le point x `a l’instant t. (Voir [17], Th ́eor`eme 2.1.)
+D ́efinition 2.2.1 Soit γ la courbe inte ́grale de V passant par x `a l’instant t, c’est-`a-dire la solution de
+dγ
+ds (s) = V (s, γ(s)) ,
+γ(t) = x .
+On appellera la courbe de R × RN param ́etr ́ee par s et d ́efinie par
+s 7→ (s, γ(s))
+“courbe caracte ́ristique de l’ope ́rateur ∂t + V · ∇x passant par x `a l’instant t”.
+On veut exploiter la notion de courbe caract ́eristique pour l’op ́erateur de transport `a coefficients variables ∂t + V (t, x) · ∇x afin d’aboutir `a une formule semi-explicite pour les solutions de l’ ́equation
+∂tf (t, x) + V (t, x) · ∇xf (t, x) = 0 ,
+comme dans le cas ou` V = Const.  ́etudi ́e plus haut. Pour ce faire, on aura besoin de quelques propri ́et ́es fondamentales de ces courbes caract ́eristiques, r ́esum ́ees dans la proposition suivante. (Dans le cas ou` V = Const. ces propri ́et ́es sont v ́erifi ́ees trivialement car l’e ́quation diff ́erentielle donnant les courbes caract ́eristiques est r ́esolue de mani`ere explicite.)
+Proposition 2.2.2 (Flot caract ́eristique) Supposons que le champ de vecteurs V satisfait aux hypothe`ses (H1)-(H2).
+
+
+40 CHAPITRE 2. E.D.P. D’ORDRE UN
+Alors, pour tout (t, x) ∈ [0, T ] × RN , la courbe inte ́grale s 7→ γ(s) de V passant par x `a l’instant t est de ́finie pour tout s ∈ [0, T ]. Dans toute la suite, on notera s 7→ X(s, t, x) cette courbe inte ́grale, c’est-a`-dire la solution de
+∂sX(s, t, x) = V (s, X(s, t, x)) ,
+X(t, t, x) = x .
+L’application X : [0, T ] × [0, T ] × RN → RN ainsi d ́efinie, appel ́ee flot caract ́eristique de l’ope ́rateur ∂t + V · ∇x, v ́erifie les propri ́et ́es suivantes :
+(a) pour tous t1, t2, t3 ∈ [0, T ] et x ∈ R3
+X(t3, t2, X(t2, t1, x)) = X(t3, t1, x) ;
+(b) pour tout j = 1, . . . , N , les de ́rive ́es partielles secondes ∂s∂xj X(s, t, x) et ∂xj ∂sX(s, t, x) existent pour tout (s, t, x) ∈]0, T [×]0, T [×RN et se prolongent en des fonctions continues sur [0, T ] × [0, T ] × RN ; de plus, pour tout j = 1, . . . , N , on a
+∂s∂xj X(s, t, x) = ∂xj ∂sX(s, t, x) pour tout (s, t, x) ∈ [0, T ] × [0, T ] × RN ;
+(c) pour tous s, t ∈ [0, T ] l’application
+X(s, t, ·) : x 7→ X(s, t, x)
+est un C1-diff ́eomorphisme de RN sur lui-meˆme pre ́servant l’orientation ;
+(d) le flot X appartient `a C1([0, T ] × [0, T ] × RN ; RN ).
+Avant de donner la de ́monstration de cette proposition, expliquons le roˆle de l’hypoth`ese (H2). Consid ́erons le cas ou` N = 1 et ou` V (t, x) = x2 : cet exemple ne ve ́rifie  ́evidemment pas (H2). Alors le flot caract ́eristique X de ∂t + x2∂x
+v ́erifie
+∂sX(s, t, x) = X(s, t, x)2 ,
+X(t, t, x) = x .
+Cette e ́quation diff ́erentielle s’inte`gre explicitement : on trouve que
+X(s, t, x) = x
+1 − (s − t)x .
+Ainsi, lorsque x > 0, la fonction X(s, t, x) n’est d ́efinie que pour s < t + 1
+x,
+tandis que, pour x < 0, elle n’est d ́efinie que pour s > t − 1
+x . Donc l’application (s, x) 7→ X(s, t, x) n’est d ́efinie sur aucun voisinage de (t, x) de la forme [a, b]×R. Autrement dit, l’hypothe`se (H2) sert `a d ́efinir le flot X de fac ̧on globale — c’est`a-dire pour tout t tel que le champ V (t, ·) soit d ́efini et de classe C1. D ́emonstration. Soit (t, x) ∈ [0, T ] × RN et soit γ la solution maximale du
+probl`eme de Cauchy
+dγ
+ds (s) = V (s, γ(s)) ,
+γ(t) = x .
+
+
+2.2. EQUATIONS DE TRANSPORT A` COEFFICIENTS VARIABLES 41
+On notera I ⊂ [0, T ] l’intervalle de d ́efinition de γ, qui est e ́videmment un voisinage de t. D’apr`es l’hypoth`ese (H2), pour tous s, t ∈ [0, T ] et tout x ∈ RN
+|γ(s)| ≤ |x| +
+∣ ∣ ∣ ∣
+∫s
+t
+|V (τ, γ(τ ))|dτ
+∣ ∣ ∣ ∣
+≤ |x| + κT + κ
+∣ ∣ ∣ ∣
+∫s
+t
+|γ(τ )|dτ
+∣ ∣ ∣ ∣
+.
+L’in ́egalit ́e de Gronwall 1 implique alors que
+|γ(s)| ≤ (|x| + κT )eκ|s−t| ≤ (|x| + κT )eκT pour tout s ∈ I .
+Supposons que I 6= [0, T ] : d’apr`es le “lemme des bouts” (voir [17], Proposition 4.2), on aurait
+|γ(s)| → +∞ pour s → inf(I)+ ou pour s → sup(I)− .
+Or ceci est exclu par l’in ́egalit ́e pr ́ec ́edente : donc la solution maximale γ est d ́efinie sur I = [0, T ].
+(a) Remarquons que, pour tous t1, t2 ∈ [0, T ] et tout x ∈ RN , les applications
+t3 7→ X(t3, t2, X(t2, t1, x)) et t3 7→ X(t3, t1, x)
+sont deux courbes int ́egrales de V passant par X(t2, t1, x) pour t3 = t2. Par unicit ́e dans le th ́eor`eme de Cauchy-Lipschitz, elles coı ̈ncident donc sur leur intervalle maximal de d ́efinition, c’est a` dire pour tout t3 ∈ [0, T ], d’ou` l’ ́egalit ́e annonc ́ee.
+1. Ine ́galite ́ de Gronwall. Soient A, B > 0 et φ : R+ → R+ continue telle que
+φ(t) ≤ A + B
+∫t
+0
+φ(s)ds , pour tout t ≥ 0.
+Alors φ(t) ≤ AeBt , pour tout t ≥ 0.
+De ́monstration. La fonction ψ d ́efinie par
+ψ(t) = A + B
+∫t
+0
+φ(s)ds , pour tout t ≥ 0
+est de classe C1 sur R+ et `a valeurs dans [A, +∞[ puisque φ est continue et positive ou nulle sur R+. L’hypothe`se faite sur φ s’e ́crit
+ψ′(t)
+ψ(t) = Bφ(t)
+A+B∫t
+0 φ(s)ds ≤ B , t ≥ 0 .
+En inte ́grant sur [0, t] chaque membre de cette in ́egalite ́, on trouve que
+ln ψ(t) − ln ψ(0) = ln ψ(t) − ln A ≤ Bt
+d’ou` φ(t) ≤ ψ(t) ≤ AeBt , pour tout t ≥ 0.
+
+
+42 CHAPITRE 2. E.D.P. D’ORDRE UN
+(b) D’apre`s le th ́eor`eme de d ́erivation des solutions d’ ́equations diff ́erentielles par rapport `a la condition initiale (cf. [17] Th ́eor`eme 2.2, et Proposition 5.6), pour tout instant initial t ∈ [0, T ] fix ́e l’application (s, x) 7→ X(s, t, x) admet une d ́eriv ́ee partielle ∂xj X(s, t, x) pour tout (s, x) ∈ [0, T ]×RN et tout j = 1, . . . , N . De plus, cette d ́eriv ́ee partielle est l’unique solution d ́efinie pour tout s ∈ [0, T ] de l’ ́equation diffe ́rentielle lin ́eaire
+∂s∂xj X(s, t, x) = ∇xV (s, X(s, t, x))∂xj X(s, t, x) ,
+∂xj X(t, t, x) = ej
+ou` ej est le j-i`eme vecteur de la base canonique de RN . Enfin la d ́eriv ́ee partielle (s, x) 7→ ∂xj X(s, t, x) est continue sur [0, T ] × RN pour tout j = 1, . . . , N . On d ́eduit alors de l’ ́equation diff ́erentielle lin ́eaire ci-dessus que, pour tout j = 1, . . . , N , la d ́eriv ́ee partielle seconde
+(s, x) 7→ ∂s∂xj X(s, t, x) est continue sur [0, T ] × RN .
+D’apr`es (H1) l’application partielle V (s, ·) est de classe C1 sur RN , ainsi que l’application X(s, t, ·), dont on a vu qu’elle admet des de ́rive ́es partielles ∂xj X(s, t, ·) continues sur RN pour tout j = 1, . . . , N . Ainsi le membre de droite de l’ ́equation
+∂sX(s, t, x) = V (s, X(s, t, x)) , (s, x) ∈]0, T [×RN .
+est-il de classe C1 en la variable x et le th ́eor`eme de de ́rivation des fonctions compos ́ees entraıˆne que, pour tout j = 1, . . . , N ,
+∂xj ∂sX(s, t, x) = ∇xV (s, X(s, t, x))∂xj X(s, t, x) = ∂s∂xj X(s, t, x)
+pour tout (s, x) ∈ [0, T ]×RN — la deuxie`me  ́egalit ́e ci-dessus  ́etant pr ́ecis ́ement l’ ́equation diff ́erentielle lin ́eaire v ́erifi ́ee par la d ́eriv ́ee partielle ∂xj X.
+(c) D’apre`s le (b), pour tous s, t ∈ [0, T ], l’application X(s, t, ·) admet des d ́eriv ́ees partielles par rapport a` toutes les variables xj pour j = 1, . . . , N , et ces d ́eriv ́ees partielles sont continues en tout point x ∈ RN : donc l’application X(s, t, ·) est de classe C1 sur RN . Appliquons d’autre part le (a) avec t3 = t1 = s et t2 = t, puis avec t3 = t1 = t et t2 = s : on en d ́eduit que
+X(s, t, ·) est une bijection de RN sur RN d’inverse X(s, t, ·)−1 = X(t, s, ·) .
+Comme la bijection X(s, t, ·) et son inverse X(t, s, ·) sont de classe C1 sur RN , c’est un C1-diff ́eomorphisme de RN sur lui-meˆme. Consid ́erons enfin le d ́eterminant jacobien
+J(s, t, x) = de ́t(∇xX(s, t, x)) .
+Le point (b) entraıˆne que l’application s 7→ J(s, t, x) est continue de [0, T ] dans R ; d’autre part J(t, t, x) = 1 et J(s, t, x) 6= 0 pour tout s ∈ [0, T ], car c’est
+
+
+2.2. EQUATIONS DE TRANSPORT A` COEFFICIENTS VARIABLES 43
+le d ́eterminant jacobien du diff ́eomorphisme X(s, t, ·). Le th ́eor`eme des valeurs interm ́ediaires implique alors que J(s, t, x) > 0 pour tout s ∈ [0, T ], ce qui  ́equivaut `a dire que le diff ́eomorphisme X(s, t, ·) pr ́eserve l’orientation de RN .
+(d) D’apr`es le (b), l’application (s, t, x) 7→ X(s, t, x) admet des de ́rive ́es partielles continues par rapport aux variables xj pour tout j = 1, . . . , N et tout (s, t, x) ∈ [0, T ] × [0, T ] × RN , ainsi  ́evidemment que par rapport `a la variable s puisque, par de ́finition, ∂sX(s, t, x) = V (s, X(s, t, x)). Montrons que X admet aussi une d ́eriv ́ee partielle continue par rapport a` la variable t. Pour (s, x) ∈ [0, T ] × RN fix ́e, le point X(s, t, x) est l’unique solution y(t) de l’ ́equation
+F (t, y(t)) = 0
+ou` on a pos ́e
+F (t, y) = X(t, s, y) − x .
+L’application F : [0, T ] × RN 7→ RN est de classe C1, et, pour tout temps t ∈ [0, T ], la matrice ∇yF (t, y) = ∇xX(t, s, y) est inversible — en effet, on a d ́ej`a vu que d ́et(∇yF (t, y)) = J(t, s, y) 6= 0. D’apre`s le th ́eor`eme des fonctions implicites (voir [17], Th ́eor`eme 1.4), la solution t 7→ y(t) est donc d ́erivable et on a dy
+dt (t) = −∇yF (t, y(t))−1∂tF (t, y(t))
+= −∇xX(t, s, X(s, t, x))−1V (t, X(t, s, X(s, t, x)))
+= −∇xX(t, s, X(s, t, x))−1V (t, x) .
+Cette derni`ere formule montre que l’application ∂tX est  ́egalement continue sur [0, T ] × [0, T ] × RN . Comme l’application X admet des d ́eriv ́ees partielles continues en tout point de [0, T ] × [0, T ] × RN , elle y est de classe C1.
+Expliquons maintenant comment on r ́esout le probl`eme de Cauchy pour une  ́equation de transport `a coefficients variables graˆce `a la connaissance de son flot caract ́eristique. Ainsi, le Th ́eor`eme 2.2.3 ci-dessous se sp ́ecialise en Th ́eor`eme 2.1.2 lorsque V = Const.
+Th ́eor`eme 2.2.3 Soit V un champ de vecteurs v ́erifiant les hypoth`eses (H1) et (H2), et soit f in ∈ C1(RN ). Alors le proble`me de Cauchy pour l’e ́quation de transport
+∂tf (t, x) + V (t, x) · ∇xf (t, x) = 0 , 0 < t < T , x ∈ RN ,
+f (0, x) = f in(x) , x ∈ RN ,
+admet une unique solution f ∈ C1([0, T ] × RN ). Cette solution f est donne ́e par la formule
+f (t, x) = f in(X(0, t, x))
+ou` X est le flot caracte ́ristique du champ V — c’est-`a-dire que s 7→ X(s, t, x) est la courbe int ́egrale du champ V passant par x `a l’instant t.
+
+
+44 CHAPITRE 2. E.D.P. D’ORDRE UN
+D ́emonstration. Commen ̧cons par l’unicit ́e, et pour cela, proc ́edons par condition n ́ecessaire. Soient donc f ∈ C1([0, T ]×RN ) et z ∈ RN fix ́es ; on va consid ́erer la fonction φ : s 7→ φ(s) = f (s, X(s, 0, z)). Cette fonction est de classe C1 sur [0, T ] comme compos ́ee de f et de l’application
+s 7→ (s, X(s, 0, z))
+qui est de classe C1 d’apr`es la Proposition 2.2.2 (d). Calculons sa d ́eriv ́ee
+dφ
+ds (s) = ∂tf (s, X(s, 0, z)) + ∇xf (s, X(s, 0, z)) · ∂sX(s, 0, z)
+= ∂tf (s, X(s, 0, z)) + V (s, X(s, 0, z)) · ∇xf (s, X(s, 0, z)) .
+Par conse ́quent, si f est solution de l’ ́equation de transport
+∂tf (t, x) + V (t, x) · ∇xf (t, x) = 0 , 0 < t < T , x ∈ RN ,
+on a dφ
+ds (s) = 0 pour tout s ∈]0, T [ ,
+de sorte que la fonction φ est constante sur l’intervalle [0, T ]. En particulier, pour tout s ∈ [0, T ],
+φ(s) = f (s, X(s, 0, z)) = f (0, X(0, 0, z)) = f (0, z) = φ(0) = f in(z) .
+Faisons le changement de variables x = X(s, 0, z) ce qui, d’apr`es la Proposition 2.2.2 (a)-(c)  ́equivaut `a z = X(0, s, x). On trouve alors que
+f (s, x) = f in(X(0, s, x)) pour tout (s, x) ∈ [0, T ] × RN .
+R ́eciproquement, montrons que la formule
+f (t, x) = f in(X(0, t, x))
+d ́efinit une fonction de classe C1 sur [0, T ] × RN , qui est solution du proble`me de Cauchy pour l’ ́equation de transport. D’abord, f ∈ C1([0, T ] × RN ) comme compos ́ee de f in qui est de classe C1 sur RN , et de l’application (t, x) 7→ X(0, t, x), de classe C1 sur [0, T ] × RN d’apr`es la Proposition 2.2.2 (d). D’autre part, f (0, x) = f in(X(0, 0, x)) = f in(x) pour tout x ∈ RN .
+Enfin
+∂tf (t, x) = ∇f in(X(0, t, x)) · ∂tX(0, t, x) ,
+∂xj f (t, x) = ∇f in(X(0, t, x)) · ∂xj X(0, t, x) ,
+de sorte que
+∂tf (t, x) + V (t, x) · ∇xf (t, x)
+= ∇f in(X(0, t, x)) ·
+
+∂tX(0, t, x) +
+N
+∑
+j=1
+Vj(t, x)∂xj X(0, t, x)
+
+.
+Le re ́sultat annonc ́e d ́ecoule alors du lemme suivant.
+
+
+2.3. E.D.P. NON LINE ́AIRES D’ORDRE UN 45
+Lemme 2.2.4 Le flot caracte ́ristique X v ́erifie
+∂tX(0, t, x) +
+N
+∑
+j=1
+Vj(t, x)∂xj X(0, t, x) = 0
+pour tout (t, x) ∈ [0, T ] × RN .
+D ́emonstration. Partons de la relation (a) de la Proposition 2.2.2 :
+X(t3, t2, X(t2, t1, x)) = X(t3, t1, x)
+pour tous t1, t2, t3 ∈ [0, T ] et tout x ∈ RN . D ́erivons chaque membre de cette  ́egalit ́e par rapport `a t2 : comme le flot caract ́eristique X est de classe C1 sur [0, T ] × [0, T ] × RN , le the ́ore`me de d ́erivation des fonctions compos ́ees entraıˆne que 2
+∂tX(t3, t2, X(t2, t1, x)) +
+N
+∑
+j=1
+∂xj X(t3, t2, X(t2, t1, x))∂sXj(t2, t1, x) = 0 ,
+ou encore
+∂tX(t3, t2, X(t2, t1, x)) +
+N
+∑
+j=1
+∂xj X(t3, t2, X(t2, t1, x))Vj(t2, X(t2, t1, x)) = 0 .
+Posant t3 = 0 et t2 = t1 = t, on aboutit `a la relation annonce ́e. A nouveau, remarquons que la formule
+f (t, x) = f in(X(0, t, x))
+garde un sens mˆeme si f in n’est pas d ́erivable, et on aimerait pouvoir dire qu’elle d ́efinit une solution en un sens g ́en ́eralis ́e de l’ ́equation de transport
+∂tf (t, x) + V (t, x) · ∇xf (t, x) = 0 .
+Toutefois, pour donner un sens `a un tel  ́enonc ́e, on devra avoir recours `a la th ́eorie des distributions, pr ́esent ́ee dans la suite de ce cours.
+2.3 Equations aux de ́rive ́es partielles non line ́
+aires d’ordre un : e ́tude d’un exemple
+L’ ́equation de Hopf —  ́egalement appel ́ee  ́equation de Burgers sans viscosite ́ — intervient dans diff ́erents contextes, comme par exemple la dynamique des
+2. Dans tout ce qui suit
+∂sX d ́esigne la de ́rive ́e de X par rapport a` sa premie`re variable,
+∂tX d ́esigne la de ́rive ́e de X par rapport a` sa seconde variable.
+
+
+46 CHAPITRE 2. E.D.P. D’ORDRE UN
+gaz sans pression, ou encore en tant que mod`ele (propos ́e par Ya. B. Zeldovich) pour l’ ́evolution `a grande  ́echelle d’amas de galaxies. L’ ́equation de Hopf, d’inconnue u ≡ u(t, x) ∈ R, s’e ́crit
+∂tu(t, x) + u(t, x)∂xu(t, x) = 0 , t > 0 , x ∈ R .
+Autrement dit, u est la solution d’une  ́equation de transport dont la vitesse de propagation au point x et `a l’instant t est la valeur u(t, x) de l’inconnue. Cette  ́equation est non line ́aire `a cause de la pr ́esence du terme u∂xu qui est quadratique en u. Appliquons `a cette e ́quation la m ́ethode des caract ́eristiques. Supposons donc que u est une solution de l’e ́quation de Hopf de classe C1 sur [0, T [×R. Soit X ≡ X(s, t, x) le flot caract ́eristique de l’op ́erateur de transport ∂t + u(t, x)∂x, c’est-`a-dire que
+∂sX(s, t, x) = u(s, X(s, t, x)) , 0 < s < T ,
+X(t, t, x) = x .
+(L’existence et l’unicite ́ locales de X d ́ecoulent du the ́ore`me de Cauchy-Lipschitz puisque u est de classe C1.) Alors la fonction s 7→ u(s, X(s, t, z)) est de classe C1 comme compose ́e de fonctions de classe C1 et on a
+d
+ds u(s, X(s, t, z)) = (∂tu + u∂xu)(s, X(s, t, z)) = 0 .
+La fonction s 7→ u(s, X(s, t, z)) est donc constante sur [0, T [, de sorte que
+u(s, X(s, t, z)) = u(t, X(t, t, z)) = u(t, z) , 0 < s < T .
+Injectons cette information dans l’e ́quation diff ́erentielle v ́erifi ́ee par le flot X :
+∂sX(s, t, z) = u(s, X(s, t, x)) = u(t, z) , 0 < s < T ,
+X(t, t, z) = z ,
+de sorte que
+X(s, t, z) = z + (s − t)u(t, z) , 0 ≤ s < T .
+En particulier
+X(s, 0, z) = z + su(0, z) , 0 ≤ s < T .
+Cette formule montre que le flot caract ́eristique X ≡ X(s, t, z) se prolonge a` tout R × R × R en une application de classe C1. Ecrivant `a nouveau que la solution u est constante le long des courbes caract ́eristiques de l’op ́erateur de transport ∂t + u∂x, on trouve donc que
+u(s, z + su(0, z)) = u(0, z) , 0 ≤ s < T , z ∈ R .
+En se basant sur cette  ́egalit ́e, on aboutit au r ́esultat suivant :
+
+
+2.3. E.D.P. NON LINE ́AIRES D’ORDRE UN 47
+Th ́eor`eme 2.3.1 Soit uin ∈ C1(R), borne ́e sur R ainsi que sa de ́rive ́e (uin)′. (a) Le proble`me de Cauchy pour l’ ́equation de Hopf
+∂tu(t, x) + u(t, x)∂xu(t, x) = 0 , t > 0 , x ∈ R
+u(0, x) = uin(x) , x ∈ R ,
+admet une unique solution de classe C1 sur [0, T [×R, ou`
+T= 1
+supz∈R(max(0, −(uin)′(z)))
+avec la convention 1/0 = +∞. Cette solution est d ́efinie par la relation implicite
+u(t, z + tuin(z)) = uin(z) , (t, z) ∈ [0, T [×R .
+(b) Si u ∈ C1(R+ × R) est solution de l’e ́quation de Hopf sur R+ × R, alors la
+donne ́e initiale z 7→ u(0, z) est croissante sur R.
+D ́emonstration. (a) Pour s ≥ 0, posons
+φs(z) = z + suin(z) , z ∈ R .
+La fonction φs est de classe C1 sur RN et
+φ′
+s(z) = 1 + s(uin)′(z) > 0 pour tout (s, z) ∈ [0, T [×R ,
+par d ́efinition de T . Comme uin(z) = O(1) pour |z| → +∞,
+φs(z) → ±∞ pour z → ±∞ .
+Par cons ́equent φs est une bijection croissante de R sur lui-mˆeme pour tout s ∈ [0, T [, de classe C1 ainsi que sa r ́eciproque φs−1. Enfin, en appliquant le the ́or`eme des fonctions implicites (voir [17], Th ́eor`eme 1.4) `a l’ ́equation
+F (t, z) := z + tuin(z) − x = 0
+dont l’unique solution est z = φ−1
+t (x), on v ́erifie que l’application
+Φ : (t, x) 7→ Φ(t, x) = φ−1
+t (x)
+est de classe C1 sur [0, T [×R, avec
+∂tΦ(t, x) = − uin(Φ(t, x))
+1 + t(uin)′(Φ(t, x)) ,
+∂xΦ(t, x) = + 1
+1 + t(uin)′(Φ(t, x)) .
+Donc la fonction
+u(t, x) = uin(Φ(t, x))
+
+
+48 CHAPITRE 2. E.D.P. D’ORDRE UN
+Figure 2.3 – Apparition d’une onde de choc dans la solution de l’e ́quation de Hopf. Le graphe de la donn ́ee initiale uin est transport ́e par les caract ́eristiques. Or les caracte ́ristiques issues de P et Q se coupent `a l’instant T . Le graphe de uin transport ́e par le flot caract ́eristique cesse donc, en temps fini, d’ˆetre le graphe d’une fonction. La figure montre l’ ́evolution d’une donn ́ee initiale dont le graphe est une courbe croissante puis d ́ecroissante. A l’instant t1, le graphe de uin transport ́e par le flot caract ́eristique est encore le graphe d’une fonction — pr ́ecis ́ement de x 7→ u(t, x). En revanche, `a l’instant t2, le graphe de uin transport ́e par le flot caract ́eristique n’est plus le graphe d’une fonction.
+
+
+2.3. E.D.P. NON LINE ́AIRES D’ORDRE UN 49
+est de classe C1 sur [0, T [×R comme compose ́e de fonctions de classe C1. Enfin
+∂tu(t, x) = (uin)′(Φ(t, x))∂tΦ(t, x) = − (uin)′(Φ(t, x))uin(Φ(t, x))
+1 + t(uin)′(Φ(t, x)) ,
+∂xu(t, x) = (uin)′(Φ(t, x))∂xΦ(t, x) = + (uin)′(Φ(t, x))
+1 + t(uin)′(Φ(t, x)) ,
+de sorte que
+∂tu(t, x) + uin(Φ(t, x))∂xu(t, x) = 0 .
+Comme uin(Φ(t, x)) = u(t, x), on en de ́duit que u est bien solution de l’e ́quation de Hopf (la condition initiale e ́tant  ́evidente, puisque Φ(0, x) = φ−1
+0 (x) = x.) L’unicit ́e provient de l’application de la me ́thode des caracte ́ristiques rappel ́ee avant l’e ́nonc ́e du th ́eor`eme. En effet, toute solution de l’ ́equation de Hopf de classe C1 sur [0, T [×R v ́erifie
+u(t, z + tu(0, z)) = u(0, z) , (t, z) ∈ [0, T [×R ,
+c’est-`a-dire
+u(t, φt(z)) = uin(z) , (t, z) ∈ [0, T [×R .
+En faisant le changement de variables φt(z) = x, c’est-`a-dire
+z = φ−1
+t (z) = Φ(t, x) ,
+on trouve que
+u(t, x) = uin(Φ(t, x)) , (t, z) ∈ [0, T [×R .
+(b) Si u est solution de classe C1 de l’e ́quation de Hopf sur R+ × R, elle v ́erifie la relation
+u(s, z + su(0, z)) = u(0, z) , pour tout (s, z) ∈ R+ × R ,
+d’apr`es la m ́ethode des caract ́eristiques. Supposons que z 7→ u(0, z) n’est pas croissante sur R : il existe donc z1 < z2 tel que u(0, z1) > u(0, z2). D ́efinissons
+s∗ = z2 − z1
+u(0, z1) − u(0, z2) > 0 .
+Alors
+z1 + s∗u(0, z1) = z2 + s∗u(0, z2)
+de sorte que
+u(0, z1) = u(s∗, z1 + s∗u(0, z1)) = u(s∗, z2 + s∗u(0, z2)) = u(0, z2) .
+On aboutit ainsi `a une contradiction, ce qui infirme l’hypothe`se de d ́epart, `a savoir que z 7→ u(0, z) n’est pas croissante sur R.
+
+
+50 CHAPITRE 2. E.D.P. D’ORDRE UN
+Ce r ́esultat montre que, pour une  ́equation de transport non lin ́eaire, il se peut (a) que le flot caracte ́ristique soit d ́efini globalement, (b) que la donn ́ee initiale soit globalement de classe C1, et pourtant que la solution ne soit pas d ́efinie et de classe C1 globalement, c’est-`a-dire pour tout (t, x) ∈ R+ × R.
+Ce type de comportement est caracte ́ristique des  ́equations diff ́erentielles non lin ́eaire, aux d ́eriv ́ees partielles ou non. Nous avons d ́ej`a e ́voque ́ plus haut l’exemple de l’ ́equation de Riccati
+dy
+dt = y2 , y(0) = yin ,
+dont la solution
+y(t) = yin
+1 − tyin
+n’est pas d ́efinie globalement, c’est-a`-dire pour tout t ∈ R, si yin 6= 0. L’exemple de l’ ́equation de Hopf pre ́sent ́e ci-dessus est tout `a fait analogue au cas de l’ ́equation de Riccati. Toutefois, il est possible de prolonger la solution locale de classe C1 de l’ ́equation de Hopf apr`es le temps T donn ́e dans le Th ́eor`eme 2.3.1, en une fonction qui n’est plus de classe C1, qui admet en ge ́ne ́ral des discontinuit ́es de premi`ere esp`ece, mais qui est pourtant solution de l’ ́equation de Hopf en un sens g ́en ́eralis ́e. Ce ph ́enom`ene d’apparition de singularite ́s dans des solutions d’ ́equations aux d ́eriv ́ees partielles est une nouvelle motivation pour d ́evelopper le formalisme des distributions.
+2.4 Exercices
+Exercice 1. Appliquer la me ́thode des caract ́eristiques pour r ́esoudre le probl`eme de Cauchy
+∂tf (t, x) + v · ∇xf (t, x) + a(t, x)f (t, x) = 0 , x ∈ RN , t > 0 ,
+f (0, x) = f in(x) , x ∈ RN ,
+ou` a ∈ C1(R+ × RN ). Exercice 2. Mˆeme question pour le probl`eme avec second membre
+∂tf (t, x) + v · ∇xf (t, x) + a(t, x)f (t, x) = S(t, x) , x ∈ RN , t > 0 ,
+f (0, x) = f in(x) , x ∈ RN ,
+ou` a et S ∈ C1(R+ × RN ). Exercice 3. Soient λ > 0, a et S ∈ C1(RN ). Supposons qu’il existe M > 0 tel que
+a(x) ≥ 0 et |S(x)| + |∇S(x)| + |∇a(x)| ≤ M pour tout x ∈ RN .
+
+
+2.4. EXERCICES 51
+Montrer que l’ ́equation de transport stationnaire
+λf (x) + v · ∇xf (x) + a(x)f (x) = S(x) , x ∈ RN ,
+admet une unique solution born ́ee f de classe C1 sur RN , et que cette solution est donne ́e par la formule
+f (x) =
+∫ +∞
+0
+e−λt−∫ t
+0 a(x−sv)ds S(x − tv)dt .
+Exercice 4. Soit f ∈ C2(R) telle que f ′′(U ) ≥ a > 0 pour tout U ∈ R. Consid ́erons le probl`eme de Cauchy
+∂tv + f (∂xv) = 0 ,
+v
+∣
+∣t=0 = vin ,
+ou` vin ∈ C2(R) est borne ́e sur R ainsi que ses deux premie`res d ́eriv ́ees. 1) Quelle est l’ ́equation satisfaite par ∂xv ? 2) En d ́eduire un re ́sultat d’existence et unicite ́ locale pour le probl`eme de Cauchy v ́erifi ́e par v.
+
+
+52 CHAPITRE 2. E.D.P. D’ORDRE UN
+
+
+Chapitre 3
+Calcul des distributions
+3.1 Introduction
+Comme nous l’avons montr ́e dans le chapitre pr ́ec ́edent, il est naturel d’avoir `a conside ́rer des solutions d’ ́equations aux d ́eriv ́ees partielles en un sens suffisamment g ́en ́eralis ́e pour n’eˆtre meˆme pas forc ́ement diff ́erentiables. La th ́eorie des distributions r ́epond pr ́ecis ́ement `a cette exigence. Mais avant d’entrer dans le vif du sujet et de d ́evelopper en de ́tail les notions de base de cette th ́eorie, nous allons pr ́esenter une mani`ere naturelle d’ ́ecrire qu’une fonction non n ́ecessairement diff ́erentiable est solution d’une e ́quation aux d ́eriv ́ees partielles. Consid ́erons par exemple le cas de l’ ́equation de transport en dimension
+N =1:
+∂tu + c∂xu = 0 , x ∈ R , t > 0 ,
+u
+∣
+∣t=0 = uin ,
+ou` la fonction inconnue est (t, x) 7→ u(t, x), et o`u la vitesse est c ∈ R. Supposons dans un premier temps que uin ∈ C2(R), de sorte qu’il existe une unique solution u ∈ C1(R+ × R) au probl`eme ci-dessus, donne ́e par la formule
+u(t, x) = uin(x − ct) , x ∈ R , t ≥ 0 .
+Dire que la fonction u ∈ C1(R+ ×R) v ́erifie l’e ́quation aux d ́eriv ́ees partielles
+(A) ∂tu + c∂xu = 0 sur R∗
++×R
+c’est dire que la fonction (t, x) 7→ ∂tu(t, x) + c∂xu(t, x) ve ́rifie
+(B)
+∫∫
+R∗
++ ×R
+(∂tu(t, x) + c∂xu(t, x)) φ(t, x)dtdx = 0
+pour toute fonction φ ∈ Cc∞(R∗+ × R), ou encore, de fa ̧con  ́equivalente, que
+(C )
+∫∫
+R∗
++ ×R
+u(t, x) (∂tφ(t, x) + c∂xφ(t, x)) dtdx = 0
+53
+
+
+54 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+pour toute fonction φ ∈ Cc∞(R∗+ × R). Les conditions (B) et (C) sont  ́evidemment e ́quivalentes : pour tout entier n ≥ 1 tel que supp(φ) ⊂]1/n, n[×] − n, n[, on a
+∫∫
+R∗
++ ×R
+(∂tu(t, x) + c∂xu(t, x)) φ(t, x)dtdx
+=
+∫∫
+]1/n,n[×]−n,n[
+(∂tu(t, x) + c∂xu(t, x)) φ(t, x)dtdx
+=
+∫n
+−n
+[
+u(t, x)φ(t, x)
+]t=n
+t=1/n
+dx + c
+∫n
+1/n
+[
+u(t, x)φ(t, x)
+]x=n
+x=−n
+dt
+−
+∫∫
+R∗
++ ×R
+u(t, x) (∂tφ(t, x) + c∂xφ(t, x)) dtdx
+en appliquant le th ́eor`eme de Fubini et en int ́egrant par parties en t puis en x. Comme φ est identiquement nulle sur le bord du pav ́e ]1/n, n[×] − n, n[, les deux premi`eres int ́egrales au membre de droite sont nulles et
+∫∫
+R∗
++ ×R
+(∂tu(t, x) + c∂xu(t, x)) φ(t, x)dtdx
+=−
+∫∫
+R∗
++ ×R
+u(t, x) (∂tφ(t, x) + c∂xφ(t, x)) dtdx
+d’ou` l’ ́equivalence entre les conditions (B) et (C). Que la condition (A) implique (B) est trivial. R ́eciproquement, comme u est de classe C1, la condition (B) implique que, pour tout entier n ≥ 1, la restriction
+(∂tu + c∂xu)∣
+∣[1/n,n]×[−n,n] ∈ C([1/n, n] × [−n, n])
+d ́efinit un  ́el ́ement de l’espace de Hilbert L2([1/n, n]×[−n, n]) qui est orthogonal au sous-espace dense Cc∞(]1/n, n[×]−n, n[) — voir Th ́eor`eme 1.4.2. Cet  ́el ́ement est donc nul :
+∂tu + c∂xu = 0 p.p. en (t, x) ∈ [1/n, n] × [−n, n]
+et comme ∂tu + c∂xu est continue sur R+ × R et que n est arbitraire, on en d ́eduit que l’annulation ci-dessus a lieu partout sur R+ × R, c’est-`a-dire que u v ́erifie la condition (A) ci-dessus. Parmi les trois conditions (A), (B) et (C) ci-dessus, la condition (C) est la seule qui ne fasse pas intervenir explicitement les d ́eriv ́ees partielles de u — ce n’est que pour montrer l’ ́equivalence entre cette condition (C) et les deux autres conditions (A) et (B) que l’on a besoin de savoir que u est de classe C1. Cette observation sugg`ere de ge ́ne ́raliser la notion de solution de l’ ́equation de transport comme suit : on dira qu’une fonction u continue, ou meˆme seulement
+
+
+3.2. LES DISTRIBUTIONS : DE ́FINITIONS ET EXEMPLES 55
+localement int ́egrable — et en tout cas pas forc ́ement de classe C1 — sur R∗+ ×R est “solution g ́en ́eralis ́ee” de l’e ́quation de transport
+∂tu + c∂xu = 0 sur R∗
++×R
+si cette fonction u v ́erifie la condition (C) ci-dessus pour toute fonction φ dans Cc∞(R∗+ × R).
+La fonction φ ∈ Cc∞(R∗+×R) arbitraire dans la formulation (C) de l’ ́equation de transport est habituellement nomm ́ee “fonction test” — c’est pourquoi on a pris l’habitude d’appeler Cc∞(Ω) l’espace des fonctions test. Cette formulation sugg`ere fortement que l’objet math ́ematique rempla ̧cant, pour une fonction continue (ou meˆme seulement localement int ́egrable) u quelconque, et en tout cas pas forc ́ement diff ́erentiable, le membre de gauche de l’ ́equation de transport, c’est-`a-dire la fonction
+∂tu + c∂xu ,
+est la forme lin ́eaire
+φ 7→ −
+∫
+R∗
++ ×R
+u(t, x) (∂tφ(t, x) + c∂xφ(t, x)) dtdx
+sur le R- (ou C-) espace vectoriel Cc∞(R∗+ × R). Ceci est  ́evidemment `a rap
+procher de la notion de d ́eriv ́ee faible dans L2 pr ́esent ́ee dans [1], chapitre 4.2.2 — la diff ́erence essentielle  ́etant qu’on ne demande pas que la forme lin ́eaire ci-dessus soit continue sur L2, et donc repr ́esentable par une fonction de L2 d’apr`es le th ́eor`eme de repr ́esentation de Riesz (cf. [6], Th ́eor`eme II.2.11, ou [9], chapitre VIII, The ́ore`me 2.2.1 et 2.2.5) Cette me ́thode s’applique  ́evidemment `a toutes les  ́equations aux d ́erive ́es partielles lin ́eaires : l’id ́ee consiste `a faire porter toutes les d ́eriv ́ees partielles sur la fonction test en inte ́grant par parties autant de fois que n ́ecessaire. La th ́eorie des distributions consiste pre ́cise ́ment `a formaliser l’ide ́e que nous venons de pr ́esenter sur l’exemple tr`es simple de l’ ́equation de transport
+3.2 Les distributions : de ́finitions et exemples
+3.2.1 Notion de distribution
+Commen ̧cons par de ́finir ce que sont les distributions.
+D ́efinition 3.2.1 (Notion de distribution) Soient N ≥ 1 entier et Ω un ouvert de RN . Une distribution T sur Ω est une forme R - (ou C-) lin ́eaire sur Cc∞(Ω) `a valeurs re ́elles (ou complexes) ve ́rifiant la proprie ́te ́ de continuit ́e suivante :
+pour tout compact K ⊂ Ω, il existe CK > 0 et pK ∈ N tels que, pour toute fonction test φ ∈ Cc∞(Ω) avec supp(φ) ⊂ K,
+|〈T, φ〉| ≤ C max
+|α|≤p
+sup
+x∈K
+|∂αφ(x)| .
+
+
+56 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+Lorsque pK peut-ˆetre choisi inde ́pendemment de K dans la condition de continuit ́e ci-dessus, c’est-`a-dire lorsqu’il existe un entier p ∈ N tel que pK ≤ p pour tout compact K ⊂ Ω, on dit que T est une distribution d’ordre ≤ p sur Ω. Dans ce cas, on appelle “ordre de la distribution T ” le plus petit entier p positif ou nul tel que T soit une distribution d’ordre ≤ p.
+On note toujours D′(Ω) l’espace vectoriel (sur R ou C) des distributions sur Ω (`a valeurs respectivement re ́elles ou complexes ) — et souvent D(Ω) = Cc∞(Ω).
+Exemple 3.2.2 (Fonctions localement int ́egrables) A toute fonction f de L1
+loc(Ω), on associe la forme line ́aire d ́efinie par
+Tf : φ 7→
+∫
+Ω
+f (x)φ(x)dx ,
+pour toute fonction test φ ∈ Cc∞(Ω).
+Observons que, pour tout compact K ⊂ Ω et pour toute fonction φ ∈ C∞(Ω) `a support dans K, on a
+|〈Tf , φ〉| ≤ CK sup
+x∈K
+|φ(x)| , avec CK =
+∫
+K
+|f (x)|dx .
+Donc Tf est une distribution d’ordre 0 sur Ω.
+Proposition 3.2.3 (Plongement de L1
+loc(Ω) dans D′(Ω)) L’application line ́aire
+L1
+loc(Ω) 3 f 7→ Tf ∈ D′(Ω) est injective.
+Convention. Dor ́enavant, nous identifierons donc toute fonction f localement int ́egrable sur Ω avec la distribution Tf qu’elle d ́efinit sur Ω. D ́emonstration. Supposons que f ∈ L1
+loc(Ω) appartient au noyau de cette application lin ́eaire, c’est-`a-dire que
+∫
+Ω
+f (x)φ(x)dx = 0 pour tout φ ∈ C∞
+c (Ω) .
+Etape 1 : Soit x0 ∈ Ω et r > 0 tel que B(x0, 2r) ⊂ Ω ; montrons que f = 0 p.p. sur B(x0, r). En effet, soit F ∈ L1(RN ) d ́efinie par
+F (x) = 1B(x0,2r)(x)f (x) p.p. en x ∈ Ω , F (x) = 0 si x ∈/ Ω .
+Soit d’autre part ζ ∈ C∞(RN ) telle que
+ζ ≥ 0 , supp(ζ) ⊂ B(0, 1) ,
+∫
+RN
+ζ(x)dx = 1 .
+
+
+3.2. LES DISTRIBUTIONS : DE ́FINITIONS ET EXEMPLES 57
+On sait qu’alors la famille de fonctions ζ d ́efinies par
+ζ (x) = 1
+Nζ
+(x)
+, x ∈ RN ,
+index ́ee par ∈]0, r[ est une suite re ́gularisante. D’apr`es le Th ́eor`eme 1.3.14 a),
+ζ ? F → F dans L1(RN ) lorsque → 0.
+D’autre part, pour tout x ∈ B(x0, r),
+ζ ? F (x) =
+∫
+RN
+F (y)ζ (x − y)dy
+=
+∫
+B (x0 ,2r)
+f (y)ζ (x − y)dy =
+∫
+Ω
+f (y)ζ (x − y)dy = 0
+d’apr`es l’hypoth`ese faite sur f , car la fonction y 7→ ζ (x − y) est de classe C∞ `a support dans B(x0, 2r). En effet, si ζ (x − y) 6= 0, c’est que |x − y| < r, or comme |x − x0| ≤ r, il s’ensuit que |y − x0| < 2r. Par cons ́equent F = 0 p.p. sur B(x0, r) ; de plus par de ́finition, f = F p.p. sur B(x0, 2r). Donc f = 0 p.p. sur B(x0, r).
+Etape 2 : Soit maintenant, pour tout entier n ≥ 1, l’ensemble
+Kn = {x ∈ Ω | |x| ≤ n et dist(x, ∂Ω) ≥ 1/n} ,
+qui est compact (car ferme ́ borne ́) dans Ω. Evidemment
+Kn ⊂
+⋃
+x∈Kn
+B(x, 1
+2n )
+de sorte que, par compacit ́e de Kn, il existe un nombre fini de points x1, . . . , xk de Kn tels que
+Kn ⊂ B(x1, 1
+2n ) ∪ . . . ∪ B(xk, 1
+2n ) .
+Or d’apre`s l’ ́etape 1, f = 0 p.p. sur B(xj, 1
+2n ) pour j = 1, . . . , k, ce qui implique que f = 0 p.p. sur Kn. Comme Ω est la r ́eunion d ́enombrable des Kn pour n ∈ N∗ et que f = 0 p.p. sur Kn, l’ensemble
+{x ∈ Ω | f (x) 6= 0} =
+⋃
+n≥1
+{x ∈ Kn | f (x) 6= 0}
+est de mesure nulle comme re ́union d ́enombrable d’ensembles de mesure nulle. Autrement dit, f = 0 p.p. sur Ω comme annonce ́.
+Mais il existe aussi des distributions qui ne sont pas de la forme Tf avec f ∈ L1
+loc. En voici plusieurs exemples.
+
+
+58 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+Exemple 3.2.4 (Masse de Dirac) A tout point x0 ∈ Ω ouvert de RN , on associe la forme lin ́eaire de ́finie par
+〈δx0 , φ〉 = φ(x0) , pour toute fonction test φ ∈ C∞
+c (Ω) .
+Evidemment, pour tout compact K ⊂ Ω et toute fonction test φ ∈ C∞(Ω) `a support dans K, on a
+|〈δx0 , φ〉| ≤ sup
+x∈K
+|φ(x)| .
+Donc δx0 est une distribution d’ordre 0 sur Ω.
+Exemple 3.2.5 (Mesure de surface et distributions de simple couche) Soit Σ hypersurface de RN de classe C∞, et dσ l’ ́el ́ement de surface sur Σ cf. Appendice, section 6.2 pour une pr ́esentation de cet objet. Etant donn ́ee f ∈ C(Σ), on appelle “distribution de simple couche de densit ́e f port ́ee par Σ” la forme line ́aire
+C∞
+c (RN ) 3 φ 7→
+∫
+Σ
+φf dσ .
+C’est une distribution d’ordre 0. Dans le cas particulier ou` f = 1, on appelle habituellement la distribution de simple couche correspondante la “mesure de surface porte ́e par RN ”. (Voir plus loin, dans la section 3.2.2, une justification de cette terminologie.)
+Voici maintenant des exemples de distributions d’ordre strictement positif.
+Exemple 3.2.6 A tout point x0 ∈ R, on associe la forme line ́aire d ́efinie par
+〈δ(m)
+x0 , φ〉 = (−1)mφ(m)(x0) , pour toute fonction test φ ∈ C∞
+c (R) .
+A nouveau, pour tout compact K ⊂ R et toute fonction test φ ∈ C∞(R) `a support dans K, on a
+|〈δ(m)
+x0 , φ〉| ≤ sup
+x∈K
+|φ(m)(x)| ,
+et on v ́erifie que δ(m)
+x0 est une distribution d’ordre m sur R.
+Exemple 3.2.7 (Valeur principale de 1/x) La fonction x 7→ 1/x n’est pas localement int ́egrable sur R. Mais on d ́efinit la distribution “valeur principale” de 1/x par la formule
+〈
+vp 1
+x,φ
+〉
+= lim
+→0+
+∫
+|x|>
+φ(x)
+x dx =
+∫∞
+0
+φ(x) − φ(−x)
+x dx .
+L’id ́ee motivant la notion de valeur principale — due `a Cauchy — est la suivante : la troncature sym ́etrique dans l’int ́egrale consiste `a y retirer un terme du type
+∫
+−
+φ(x)
+x dx = φ(0)
+∫
+−
+dx
+x + O( )
+
+
+3.2. LES DISTRIBUTIONS : DE ́FINITIONS ET EXEMPLES 59
+et `a consid ́erer que le premier terme au membre de droite est nul car la fonction 1/x est impaire. Evidemment le calcul ci-dessus est purement formel puisque ni x 7→ φ(x)/x, ni x 7→ 1/x ne sont int ́egrables sur [− , ].
+Pour tout R > 1 et toute fonction test φ ∈ C∞(R) `a support dans [−R, R],
+on a
+〈
+vp 1
+x,φ
+〉
+=
+∫1
+0
+φ(x) − φ(−x)
+x dx +
+∫R
+1
+φ(x) − φ(−x)
+x dx
+Alors, d’apr`es le th ́eor`eme des accroissements finis,
+∣ ∣ ∣ ∣
+∫1
+0
+φ(x) − φ(−x)
+x dx
+∣ ∣ ∣ ∣
+≤ 2 sup
+|x|≤1
+|φ′(x)| ,
+tandis que
+∣ ∣ ∣ ∣ ∣
+∫R
+1
+φ(x) − φ(−x)
+x dx
+∣ ∣ ∣ ∣ ∣
+≤ 2 ln R sup
+|x|≤R
+|φ(x)| .
+Par cons ́equent
+∣ ∣ ∣ ∣
+〈
+vp 1
+x,φ
+〉∣ ∣ ∣ ∣
+≤ 2 sup
+|x|≤R
+|φ′(x)| + 2 ln R sup
+|x|≤R
+|φ(x)|
+≤ 2(1 + ln R) sup
+|x|≤R
+max(|φ(x)|, |φ′(x)|) .
+A partir de l`a, on montre sans difficult ́e que vp 1
+x est une distribution d’ordre 1 sur R.
+Revenons sur ce que nous avons appel ́e la “propri ́et ́e de continuit ́e” des distributions. Pour pouvoir en parler pr ́ecise ́ment, il faudrait commencer par d ́efinir la topologie de l’espace Cc∞(Ω). Il s’agit l`a d’une question assez d ́elicate sur le plan technique et qui d ́epasse le cadre de notre cours. En revanche il est tr`es facile de raisonner avec des suites convergentes de fonctions test.
+D ́efinition 3.2.8 (Convergence des suites de fonctions test) Soient Ω un ouvert de RN , une suite (φn)n≥1 d’ ́el ́ements de Cc∞(Ω), et une fonction test
+φ ∈ Cc∞(Ω). On dit que φn → φ dans Cc∞(Ω) lorsque n → ∞
+si et seulement si (a) il existe un compact K ⊂ Ω tel que
+supp(φn) ⊂ K pour tout n ≥ 1 ;
+(b) pour tout multi-indice α ∈ NN ,
+∂αφn → ∂αφ uniform ́ement sur Ω lorsque n → ∞.
+
+
+60 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+Cette notion de convergence, qui est tr`es forte — en particulier du fait que tous les termes de la suite (φn)n≥1 doivent ˆetre `a support dans le mˆeme compact K — est bien adapte ́e `a la propri ́et ́e de continuit ́e des distributions, comme le montre l’ ́enonc ́e suivant.
+Proposition 3.2.9 (Continuit ́e s ́equentielle des distributions) Soient Ω ouvert de RN et T ∈ D′(Ω). Alors, pour toute suite (φn)n≥1 de fonctions test appartenant `a Cc∞(Ω) et telle que
+φn → φ dans Cc∞(Ω) lorsque n → ∞,
+on a
+〈T, φn〉 → 〈T, φ〉 lorsque n → ∞.
+D ́emonstration. Puisque φn → φ dans Cc∞(Ω) lorsque n → ∞, il existe un compact K ⊂ Ω contenant supp(φn) pour tout n ≥ 1, ainsi que supp(φ). Au compact K ainsi d ́efini, la propri ́et ́e de continuite ́ des distributions associe un entier pK ≥ 0 et une constante CK > 0 telle que
+|〈T, ψ〉| ≤ CK max
+|α|≤pK
+sup
+x∈K
+|∂αψ(x)|
+pour toute fonction test ψ ∈ C∞(Ω) `a support dans K. Appliquons cela `a la fonction test ψ = φn − φ :
+|〈T, φn〉 − 〈T, φ〉| ≤ CK max
+|α|≤pK
+sup
+x∈K
+|∂αφn(x) − ∂αφ(x)| .
+Le membre de droite de cette ine ́galite ́ converge vers 0 puisque
+∂αφn → ∂αφ uniform ́ement sur K lorsque n → ∞.
+On en conclut que
+〈T, φn〉 → 〈T, φ〉 lorsque n → ∞.
+3.2.2 Distributions positives
+Bien qu’on ne puisse pas parler de la valeur d’une distribution en un point de l’ouvert ou` elle est d ́efinie, il existe une notion naturelle de positivite ́ pour une distribution.
+D ́efinition 3.2.10 (Distributions positives) Soient Ω ouvert de RN et T une distribution sur Ω. On dit que T est une distribution positive, ce que l’on note T ≥ 0, si
+〈T, φ〉 ≥ 0 pour tout φ ∈ Cc∞(Ω) telle que φ ≥ 0 sur Ω.
+Les distributions positives v ́erifient la propri ́et ́e remarquable suivante.
+
+
+3.2. LES DISTRIBUTIONS : DE ́FINITIONS ET EXEMPLES 61
+Th ́eor`eme 3.2.11 (Ordre des distributions positives) Toute distribution positive sur un ouvert de RN est d’ordre 0.
+D ́emonstration. Soit donc T ∈ D′(Ω) telle que T ≥ 0, ou` Ω est un ouvert de RN .
+Soit K ⊂ Ω compact. D’apre`s le Lemme 1.4.1, il existe χ ∈ C∞(Ω) telle que
+χ = 1 au voisinage de K , supp(χ) compact ⊂ Ω , 0 ≤ χ ≤ 1 .
+Pour tout φ ∈ Cc∞(Ω) telle que supp(φ) ⊂ K, on a
+φ = χφ , de sorte que 〈T, φ〉 = 〈T, χφ〉 .
+Evidemment, comme χ ≥ 0 sur Ω, on a
+−χ(x) sup
+y∈K
+|φ(y)| ≤ χ(x)φ(x) ≤ χ(x) sup
+y∈K
+|φ(y)| pour tout x ∈ Ω .
+Comme T ≥ 0
+〈
+T, χ
+(
+sup
+y∈K
+|φ(y)| − φ
+)〉
+≥ 0 et
+〈
+T, χ
+(
+φ + sup
+y∈K
+|φ(y)|
+)〉
+≥0
+d’ou`
+|〈T, χφ〉| ≤ CK sup
+y∈K
+|φ(y)| , avec CK = 〈T, χ〉 .
+Ceci signifie pr ́ecis ́ement que T est d’ordre 0. Une conse ́quence importante de ce th ́eor`eme est le fait que toute distribution positive s’identifie `a une mesure de Radon positive (cf. [9], chapitre V.5.1.)
+Corollaire 3.2.12 Toute distribution positive sur Ω ouvert de RN se prolonge de manie`re unique en une mesure de Radon positive sur Ω, c’est-`a-dire en une forme lin ́eaire positive sur Cc(Ω).
+D ́emonstration. Soit T distribution positive sur Ω. On a vu dans la d ́emonstration du th ́eor`eme pr ́ec ́edent que, pour tout compact K ⊂ Ω, il existe LK ≥ 0 tel que, pour tout φ ∈ Cc∞(Ω) `a support dans K, l’on ait
+|〈T, φ〉| ≤ CK sup
+y∈K
+|φ(y)| .
+Notons C0
+K (Ω) (resp. C∞
+K (Ω)) l’ensemble des fonctions continues (resp. de
+classe C∞) sur Ω `a valeurs r ́eelles et `a support dans K. L’espace vectoriel C0
+K (Ω) est muni de la norme de la convergence uniforme
+‖f ‖K := sup
+y∈K
+|f (y)| ,
+et d’apre`s le Th ́eor`eme 6.1.1, la restriction TK := T ∣
+∣C∞
+K (Ω) admet un seul pro
+longement continu `a l’adh ́erence C∞
+K (Ω) de C∞
+K (Ω) dans C0
+K (Ω), not ́e TK .
+
+
+62 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+Pour tout n ∈ N∗, on d ́efinit le compact
+Kn = {x ∈ Ω | dist(x, ∂Ω) ≥ 1/n et |x| ≤ n} .
+Par construction, C∞
+Km (Ω) ⊂ C∞
+Kn (Ω) d`es que n ≥ m ≥ 1, et TKm est la restric
+tion `a C∞
+Km (Ω) de TKn pour tout n > m ≥ 1. Evidemment, pour tout compact K ⊂ Ω, il existe n ≥ 1 tel que K ⊂ Kn. D’apr`es le Th ́eor`eme 1.3.13
+Cc(Ω) =
+⋃
+n≥1
+C∞
+Kn (Ω) ,
+et on d ́efinit la forme lin ́eaire T sur Cc(Ω) en posant 〈T , f 〉 = 〈TKn , f 〉 pour tout n ≥ 1 tel que f ∈ C∞
+Kn (Ω). Par construction, la forme lin ́eaire T est un prolongement de T (autrement dit, elle coı ̈ncide avec T sur le sous-espace Cc∞(Ω) de Cc(Ω)). Ce prolongement est positif. Soit en effet un compact K ⊂ Ω et f ∈ Cc(Ω) `a support dans K ; supposons que f ≥ 0 sur Ω et montrons que 〈T , f 〉 ≥ 0. Choisissons n ≥ 1 tel que K ⊂ Kn. Soit (ζ ) >0 suite r ́egularisante de RN telle que supp(ζ ) ⊂ B(0, ). Pour tout < 1/2n, la fonction f ? ζ (ou` l’on identifie f `a son prolongement par 0 au compl ́ementaire de Ω) ve ́rifie
+f ? ζ ≥ 0 , et f ? ζ ∈ C∞
+K2n (Ω) ,
+et de plus f ? ζ → f uniform ́ement sur Ω. Ainsi
+f ∈ C∞
+K2n (Ω) et 〈T , f 〉 = li→m0〈T, f ? ζ 〉 ≥ 0 .
+D ́emontrons enfin l’unicit ́e du prolongement positif T . Soit S forme lin ́eaire positive sur Cc(Ω). Pour tout compact K ⊂ Ω, il existe φ ∈ Cc(Ω) telle que 0 ≤ φ ≤ 1 sur Ω et φ∣
+∣K = 1 ; posons LK = 〈S, φ〉 ≥ 0.
+Alors, pour toute fonction f ∈ Cc(Ω) `a support dans K, on a
+− sup
+y∈Ω
+|f (y)|φ sup
+y∈Ω
+|f |φ sur Ω ,
+de sorte que, par positivit ́e de la forme line ́aire S, on a
+|〈S, f 〉| ≤ LK sup
+y∈Ω
+|f (y)| .
+Supposons que S coı ̈ncide avec T sur Cc∞(Ω). Alors, pour tout n ≥ 1, la
+forme lin ́eaire S coı ̈ncide avec TKn sur C∞
+Kn (Ω), puisque ces deux formes lin ́eaires continues pour la topologie de la convergence uniforme coı ̈ncident avec T sur C∞
+Kn (Ω). Autrement dit S et T coı ̈ncident avec C∞
+Kn (Ω) pour tout n ≥ 1, ce qui montre que S = T .
+Ainsi, bien qu’a priori une distribution positive sur Ω soit d ́efinie comme forme lin ́eaire sur l’espace des fonctions tests de classe C∞ `a support compact
+
+
+3.2. LES DISTRIBUTIONS : DE ́FINITIONS ET EXEMPLES 63
+sur Ω, le corollaire ci-dessus montre que, dans un premier temps, une telle distribution se prolonge par continuit ́e de fac ̧on unique en une forme line ́aire positive sur l’espace des fonctions continues `a support compact.
+Par exemple, si Σ est une hypersurface de classe C∞ de RN , dont l’e ́le ́ment de surface est not ́e dσ, la distribution de simple couche de densite ́ 1
+C∞
+c (RN ) 3 φ 7→ 〈σ, φ〉 =
+∫
+Σ
+φ(x)dσ(x)
+est une distribution positive, qui se prolonge donc de mani`ere unique en une mesure de Radon positive, c’est-`a-dire en une forme lin ́eaire positive sur Cc(RN ).
+Mais on peut aller plus loin : le processus de prolongement par monotonie, utilis ́e pour de ́finir l’inte ́grale de Lebesgue a` partir de l’int ́egrale de Riemann, s’applique dans ce cas et permet de d ́efinir l’espace des fonctions sommables pour cette distribution positive, espace qui contient toutes les fonctions continues `a support compact, et dans lequel la distribution positive ve ́rifie les  ́enonc ́es habituels de convergence monotone ou domin ́ee. (Voir les chapitres III et V de [9].)
+3.2.3 Remarques sur la de ́finition des distributions
+Revenons `a la d ́efinition de la notion de distribution, en gardant a` l’esprit que cette notion doit ge ́ne ́raliser celle de fonction. Il peut  ́evidemment paraıˆtre  ́etrange a priori de choisir pour ce faire une notion de forme lin ́eaire continue sur un certain espace de fonctions 1. Il y a pourtant plusieurs raisons `a cela. Au de ́part, la notion de fonction (num ́erique) consiste a` associer une valeur r ́eelle ou complexe `a chaque point de l’ensemble de d ́epart. Or la th ́eorie de Lebesgue de l’int ́egration nous a de ́j`a habitu ́es `a abandonner cette vision des choses, puisqu’une “fonction” appartenant `a L1(R) est en r ́ealit ́e une classe d’ ́equivalence de fonctions  ́egales presque partout sur R. De la sorte, on ne peut jamais parler de la valeur prise par une “fonction” de L1(R) en un point quelconque x0 ∈ R, puisque le singleton {x0} est de mesure nulle. Ainsi, deux fonctions f et g mesurables sur R, telles que
+∫
+R
+|f (x)|dx < ∞ et
+∫
+R
+|g(x)|dx < ∞ ,
+ ́egales en dehors de {x0} et prenant en x0 des valeurs diff ́erentes quelconques, d ́efinissent le mˆeme e ́le ́ment de L1(R). Cette remarque explique bien pourquoi on est amen ́e naturellement `a abandonner en int ́egration l’id ́ee classique de fonction comme r`egle associant une valeur r ́eelle ou complexe `a tout point de son ensemble de d ́efinition. Toutefois, l’id ́ee de consid ́erer comme fonctions g ́en ́eralis ́ees des formes lin ́eaires sur des
+1. Cette de ́finition ne s’est d’ailleurs pas impose ́e d’embl ́ee a` l’esprit de Laurent Schwartz, `a qui l’on doit la the ́orie des distributions. Les lecteurs inte ́resse ́s pourront consulter les pp. 243–251 de ses me ́moires Un math ́ematicien aux prises avec le si`ecle, Odile Jacob, Paris 1997.
+
+
+64 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+espaces de fonctions — id ́ee qui nous avons justifi ́ee par la Proposition 3.2.3 a de quoi surprendre du strict point de vue ensembliste, puisqu’elle consiste `a identifier certaines applications (ici certaines formes lin ́eaires sur l’espace des fonctions test) avec des e ́le ́ments de leur ensemble source (c’est-`a-dire avec des fonctions de classe C∞ `a support compact.) Cependant, le lecteur aura d ́ej`a rencontre ́ plusieurs exemples de ce genre d’identification. Le the ́ore`me de repr ́esentation de Riesz (voir [6], The ́ore`me II.2.11 ou [9], chapitre VIII, The ́ore`me 2.2.1 et 2.2.5) applique ́ `a l’espace de Hilbert L2(R) identifie toute “fonction” f ∈ L2(R) `a la forme lin ́eaire continue sur L2(R)
+φ 7→
+∫
+R
+f (x)φ(x)dx
+(dans le cas ou` f est a` valeurs re ́elles). Toutefois, mˆeme si ce r ́esultat permet d’identifier toute “fonction” de L2(R) `a une forme lin ́eaire continue sur L2(R), il ne donne lieu a` aucune g ́en ́eralisation de la notion de “fonction” de L2(R), car il montre que L2(R) est isomorphe a` son dual. Il n’en va pas de mˆeme pour les espaces Lp avec p 6= 2. Pour tout p ∈]1, ∞[, notons p′ = p
+p−1 . Conside ́rons l’application
+Lp′ ([0, 1]) 3 f 7→ Λf ∈ Lp([0, 1])′,
+ou` Lp([0, 1])′ d ́esigne le dual topologique de Lp([0, 1]), et o`u
+Λf (φ) =
+∫1
+0
+f (x)φ(x)dx,
+est une forme lin ́eaire continue sur Lp([0, 1]) puisque, d’apre`s l’in ́egalit ́e de H ̈older (The ́ore`me 1.5.1)
+|Λf (φ)| =
+∣ ∣ ∣ ∣
+∫1
+0
+f (x)φ(x)dx
+∣ ∣ ∣ ∣
+≤ ‖f ‖Lp′ ([0,1])‖φ‖Lp([0,1]) .
+On voit donc que cette application lin ́eaire
+Lp′ ([0, 1]) 3 f 7→ Λf ∈ Lp([0, 1])′,
+ ́evidemment injective, identifie toute fonction de Lp′ ([0, 1]) `a une forme lin ́eaire continue sur Lp([0, 1]). (En fait, on d ́emontre que cette application line ́aire est un isomorphisme isom ́etrique, mais nous n’aurons pas besoin pour l’instant de ce re ́sultat plus pr ́ecis.) Or si 2 < p < ∞, alors 1 < p′ < 2, et en particulier p′ < p. D’autre part
+Lp([0, 1]) ⊂ Lp′ ([0, 1]), toujours d’apr`es l’ine ́galite ́ de H ̈older, car, pour tout p < q ∈]1, ∞[
+∫1
+0
+|f (x)|pdx ≤
+(∫ 1
+0
+dx
+)1−p/q (∫ 1
+0
+|f (x)|qdx
+)p/q
+
+
+3.2. LES DISTRIBUTIONS : DE ́FINITIONS ET EXEMPLES 65
+c’est-`a-dire que
+‖f ‖Lp([0,1]) ≤ ‖f ‖Lq([0,1]) , pour tout f ∈ Lq([0, 1]) .
+D’autre part, l’inclusion est stricte : la fonction f : x 7→ 1/xα est dans Lp′ ([0, 1]) mais pas dans Lp([0, 1]) lorsque 1/p < α < 1/p′. Ainsi le dual topologique de Lp([0, 1]) est, pour 2 < p < ∞, un espace plus gros que Lp([0, 1]) lui-mˆeme, qu’il contient. Le raisonnement ci-dessus montre d’ailleurs que, si l’on admet l’isomorphisme isome ́trique
+Lp′ ([0, 1]) ' Lp([0, 1])′ pour tout p ∈]1, ∞[ ,
+plus l’espace Lp([0, 1]) est petit, plus son dual topologique Lp′ ([0, 1]) est gros. Par comparaison, pour d ́efinir D′(]0, 1[), on part de l’espace Cc∞(]0, 1[) qui est
+contenu strictement dans Lp([0, 1]) pour tout p ∈]1, ∞[. On s’attend donc a` ce que l’espace D′(]0, 1[) obtenu par dualit ́e `a partir de Cc∞(]0, 1[) contienne stric
+tement Lp([0, 1]) pour tout p ∈]1, ∞[ — autrement dit, `a ce que les  ́el ́ements de D′(]0, 1[) soient des objets encore plus g ́en ́eraux que les “fonctions” des espaces de Lebesgue Lp([0, 1]) pour tout p ∈]1, ∞[. Ceci va bien e ́videmment `a l’encontre de l’intuition que nous donne le cas des espaces vectoriels de dimension finie, qui sont toujours isomorphes `a leurs duaux.
+La discussion ci-dessus montre que l’id ́ee de construire une g ́en ́eralisation de la notion de fonction par un argument de dualit ́e n’est finalement pas aussi surprenante sur le plan mathe ́matique qu’on pourrait le croire a priori 2.
+Il reste que l’ide ́e de g ́en ́eraliser les fonctions ind ́efiniment d ́erivables en les plongeant dans le dual d’un espace fonctionnel “assez petit” — celui des fonctions ind ́efiniment d ́erivables et `a support compact — n’est pas des plus intuitives, et d’ailleurs, les arguments que nous avons pre ́sent ́es pour tenter de la justifier rel`event de l’analyse fonctionnelle plutˆot que de l’intuition que chacun peut avoir de la notion de fonction.
+Du point de vue physique, on pense souvent a` une fonction comme a` une collection de mesures d’une certaine grandeur — par exemple la pression, ou la temp ́erature dans un fluide, ou encore les composantes d’un champ e ́lectromagn ́etique — que l’on effectuerait en tout point de l’espace. Ceci est toutefois une vue de l’esprit, car un appareil de mesure ne fournit jamais qu’une valeur moyenne locale de la quantit ́e mesur ́ee — comme la pression dans un fluide par exemple. C’est-`a-dire qu’au lieu de fournir la pression
+2. Encore que ce proce ́de ́ ne se soit pas impose ́ de prime abord comme le plus naturel — cf. note pre ́ce ́dente. D’ailleurs, l’ide ́e d’e ́crire une e ́quation aux de ́rive ́es partielles “au sens des distributions”, c’est a` dire sous la forme (C) dans l’introduction de ce chapitre, e ́tait connue plus de dix ans avant l’introduction par L. Schwartz de la notion de distribution. Cette formulation des e ́quations aux de ́rive ́es partielles apparait de ́j`a au de ́but des anne ́es 1930 dans un article fondamental de J. Leray sur les e ́quations de Navier-Stokes de la m ́ecanique des fluides visqueux incompressibles, ou encore dans les travaux de S.L. Sobolev.
+
+
+66 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+p(x) en tout point x ∈ R3, ce que l’on peut mesurer est plutoˆt une quantite ́ du
+type
+1 |A|
+∫
+A
+p(x)dx
+pour tout cube A de l’espace R3 — par exemple — ce que l’on e ́crit encore
+1 |A|
+∫
+R3
+1A(x)p(x)dx .
+Ceci sugge`re qu’une mesure physique fournit des quantit ́es du type
+∫
+R3
+φ(x)p(x)dx
+pour φ d ́ecrivant une classe bien choisie de fonctions — de ́pendant typiquement de l’appareil de mesure — plutˆot que la valeur p(x) de p en tout point x de R3. Dans ce point de vue, la quantit ́e physique p intervient seulement par le biais de la forme lin ́eaire
+φ 7→
+∫
+R3
+φ(x)p(x)dx .
+C’est d’ailleurs ce point de vue qui pr ́evaut en me ́canique quantique. Les quantit ́es (e ́nergie, impulsion...) relatives `a un syste`me que l’on mesure en m ́ecanique quantique, quantite ́s nomm ́ees les “observables”, sont des valeurs moyennes d’une fonction par rapport au carr ́e du module de la fonction d’onde dans l’espace des positions ou celui des impulsions — voir l’introduction du chapitre 10, ou, pour plus de d ́etails, [2], chapitre 3. Les consid ́erations qui pr ́ec`edent montrent que l’id ́ee de remplacer la notion de fonction comme re`gle associant une valeur a` tout point de l’espace par la donn ́ee de ses valeurs moyennes — ou, ce qui revient au mˆeme, par celle de ses int ́egrales contre n’importe quelle fonction test — rend finalement tr`es naturelle la De ́finition 3.2.1 des distributions. La suite de ce cours permettra d’appre ́cier tout le b ́en ́efice que l’on retire de ce changement de point de vue.
+3.3 Convergence des suites de distributions
+La convergence des suites de distributions n’est rien d’autre que la convergence simple — c’est-a`-dire ponctuelle — des suites de formes line ́aires.
+D ́efinition 3.3.1 (Suite convergente de distributions) Soient N ≥ 1 entier et Ω ouvert de RN , ainsi que (Tn)n≥1 une suite de distributions sur Ω. On dit que Tn → T dans D′(Ω) lorsque n → ∞ ,
+si, pour tout φ ∈ Cc∞(Ω),
+〈Tn, φ〉 → 〈T, φ〉 lorsque n → ∞ .
+
+
+3.3. CONVERGENCE DES SUITES DE DISTRIBUTIONS 67
+Evidemment, toute suite fn de fonctions localement int ́egrables sur Ω convergeant vers f dans L1
+loc(Ω) — c’est-`a-dire que, pour tout compact K ⊂ Ω
+∫
+K
+|fn(x) − f (x)|dx → 0 pour n → ∞
+— converge vers f dans D′(Ω). Mais cette nouvelle notion de convergence est beaucoup plus souple et permet de rendre compte de nombreux ph ́enom`enes inte ́ressants. Voici donc quelques exemples importants de suites convergentes de distributions.
+Exemple 3.3.2 (Dipˆole de moment μ) Dans le cas N = 1 et Ω = R, on pose
+Tn = μ n
+2 (δ1/n − δ−1/n) , n ≥ 1 .
+Alors on v ́erifie sans peine que
+Tn → −μδ(1)
+0 dans D′(R) .
+Comme les masses de Dirac δ1/n et δ−1/n repr ́esentent, du point de vue intuitif, des charges unite ́ ponctuelles situ ́ees respectivement en x = +1/n et x = −1/n, la limite des Tn repr ́esente un dipˆole d’intensit ́e — ou de moment μ localis ́e au point x = 0. La notion de dipˆole intervient e ́galement dans le contexte de l’analyse nume ́rique des e ́quations diffe ́rentielles. La r ́esolution num ́eri- que d’une  ́equation diff ́erentielle de la forme x ̇ (t) = f (t, x(t)) ,
+d’inconnue la fonction t 7→ x(t), s’effectue en rempla ̧cant la d ́eriv ́ee x ̇ (t) par une “diff ́erence finie”, c’est-`a-dire que l’on fait l’approximation
+x ̇ (t) ' x(t + ∆t) − x(t)
+∆t ou x(t) − x(t − ∆t)
+∆t ,
+ou` ∆t > 0 est un pas de temps pris suffisamment petit. En e ́crivant
+x(t + ∆t) − x(t)
+∆t =
+〈1
+∆t (δt+∆t − δt), x
+〉
+,
+x(t) − x(t − ∆t)
+∆t =
+〈1
+∆t (δt − δt−∆t), x
+〉
+,
+on voit que la m ́ethode des diff ́erence finie consiste `a approcher la d ́erivation par rapport `a t par un dipˆole, puisque, au sens des distributions,
+1
+∆t (δt+∆t − δt) → −δ(1)
+t et 1
+∆t (δt − δt−∆t) → −δ(1)
+t lorsque ∆ → 0+ ,
+et que
+〈−δ(1)
+t , x〉 = x ̇ (t) .
+
+
+68 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+Exemple 3.3.3 Dans R, on conside`re, pour tout entier n ≥ 1, la fonction localement inte ́grable sur R d ́efinie par
+Tn : x 7→ 1[1/n,+∞[(|x|)
+x;
+Alors, on v ́erifie `a nouveau sans aucune difficulte ́ que
+Tn → vp 1
+x dans D′(R) lorsque n → ∞ .
+Les deux exemples ci-dessus montrent qu’une suite de distributions de mˆeme ordre p donn ́e peut tr`es bien converger vers une distribution d’ordre > p.
+Exemple 3.3.4 (Valeurs au bord de 1/z sur l’axe r ́eel) Pour > 0, on consid`ere les fonctions f + et f − d ́efinies par les formules
+f +(x) = 1
+x + i , f −(x) = 1
+x−i , x ∈ R.
+Ces deux fonctions sont continues et born ́ees sur R, donc localement inte ́grables, de sorte qu’elles de ́finissent des distributions sur R. Nous allons montrer que, pour toute suite n → 0+, les suites de distributions f+
+n et f −
+n convergent vers des limites qui sont ind ́ependantes du choix de la suite
+n → 0+. On notera ces limites
+1
+x + i0 = nli→m∞ f +
+n, 1
+x − i0 = nli→m∞ f −
+n.
+On trouve que
+1
+x + i0 = vp 1
+x − iπδ0 ,
+1
+x − i0 = vp 1
+x + iπδ0 .
+En effet, pour toute fonction test φ ∈ Cc∞(R), il existe R > 0 tel que supp(φ) ⊂ [−R, R]. Alors
+〈f +, φ〉 =
+∫R
+−R
+1
+x + i (φ(x) − φ(0)) dx + φ(0)
+∫R
+−R
+dx x+i
+D’une part, d’apre`s le th ́eor`eme des accroissements finis,
+∣ ∣ ∣ ∣
+1
+x + i (φ(x) − φ(0))
+∣ ∣ ∣ ∣
+≤ C |x|
+|x + i | ≤ C , avec C = max
+|x|≤R
+|φ′(x)|
+de sorte que, par convergence domin ́ee
+∫R
+−R
+1
+x + i (φ(x) − φ(0)) dx →
+∫R
+−R
+φ(x) − φ(0)
+x dx
+=
+∫R
+0
+φ(x) − φ(−x)
+x dx
+=
+∫∞
+0
+φ(x) − φ(−x)
+x dx = 〈vp 1
+x , φ〉 .
+
+
+3.3. CONVERGENCE DES SUITES DE DISTRIBUTIONS 69
+D’autre part,
+∫R
+−R
+dx
+x+i =
+∫R
+−R
+x−i
+x2 + 2 dx = −i
+∫R
+−R x2 + 2 dx = −i
+[
+arctan
+( x )]x=+R
+x=−R
+= −i (arctan(R/ ) − arctan(−R/ )) → −iπ
+lorsque → 0+. On en d ́eduit que, pour toute suite n → 0+,
+〈f +
+n , φ〉 →
+〈
+vp 1
+x,φ
+〉
+− iπφ(0) ,
+d’ou` la relation entre 1
+x+i0 , vp 1
+x et δ0. On proc`ede de mˆeme pour  ́etudier 1
+x−i lorsque → 0+.
+Voici encore un exemple important de suite de fonctions convergeant au sens des distributions vers une limite qui n’est pas une fonction mais une distribution. Il fait comprendre l’essence de la distribution δx0 : une masse unit ́e concentr ́ee au point x0. Les suites r ́egularisantes (cf. D ́efinition 1.3.12) rele`vent  ́evidemment de la proposition ci-dessous.
+Proposition 3.3.5 (Crit`ere de convergence vers une masse de Dirac) Soient Ω ouvert de RN et x0 ∈ Ω. Soit (fn)n≥1 une suite de fonctions mesurables sur Ω v ́erifiant
+fn ≥ 0 p.p. sur Ω , supp(fn) ⊂ B(x0, rn) ,
+et ∫
+Ω
+fn(x)dx → 1 lorsque n → ∞ .
+Alors si rn → 0+ , on a fn → δx0 dans D′(Ω)
+lorsque n → ∞.
+D ́emonstration. En effet, pour tout φ ∈ Cc∞(Ω), on a
+∫
+Ω
+fn(x)φ(x)dx =
+∫
+Ω
+fn(x) (φ(x) − φ(x0)) dx + φ(x0)
+∫
+Ω
+fn(x)dx
+D’apr`es le the ́or`eme des accroissements finis, comme fn est `a support dans B(x0, rn), on a
+|φ(x) − φ(x0)| ≤ |x − x0| sup
+|x−x0 |≤rn
+|∇φ(x)| .
+Par hypoth`ese, rn → 0 lorsque n → ∞ ; soient r∗ > 0 tel que B(x0, r∗) ⊂ Ω et n∗ > 1 tel que 0 < rn < r∗ pour tout n ≥ n∗. Alors, pour tout n ≥ n∗ et tout x ∈ B(x0, rn)
+|φ(x) − φ(0)| ≤ C∗rn , avec C∗ = sup
+|x−x0 |≤r∗
+|∇φ(x)| .
+
+
+70 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+Ainsi, comme fn(x) ≥ 0 p.p. en x ∈ Ω, l’on a
+∣ ∣ ∣ ∣
+∫
+Ω
+fn(x) (φ(x) − φ(x0)) dx
+∣ ∣ ∣ ∣
+≤
+∫
+B (x0 ,rn )
+fn(x) |φ(x) − φ(x0)| dx
+≤ C∗rn
+∫
+Ω
+fn(x)dx → 0
+lorsque n → ∞ puisque, par hypothe`se,
+rn → 0+ et
+∫
+Ω
+fn(x)dx → 1 lorsque n → ∞ .
+De meˆme, toujours par hypoth`ese sur la suite (fn)n≥1,
+φ(x0)
+∫
+Ω
+fn(x)dx → φ(x0) lorsque n → ∞ .
+On en d ́eduit que
+∫
+Ω
+fn(x)φ(x)dx =
+∫
+Ω
+fn(x) (φ(x) − φ(x0)) dx + φ(x0)
+∫
+Ω
+fn(x)dx
+→ φ(x0) = 〈δx0 , φ〉
+d’ou` la convergence annonce ́e.
+Nous allons terminer cette section sur des consid ́erations plus d ́elicates relatives `a la convergence des distributions et des fonctions test. L’ ́enonc ́e fondamental est le
+Th ́eor`eme 3.3.6 (Principe de bornitude uniforme) Soient Ω ouvert de RN et K ⊂ Ω compact. Soit une suite (Tn)n≥1 de distributions sur Ω telle que
+la suite 〈Tn, φ〉 est convergente pour tout φ ∈ C∞(Ω) `a support dans K.
+Alors il existe un entier p ≥ 0 et C > 0 tels que
+|〈Tn, φ〉| ≤ C max
+|α|≤p
+sup
+x∈K
+|∂αφ(x)|
+pour tout n ≥ 1 et toute fonction test φ ∈ C∞(Ω) `a support dans K.
+Nous ne donnerons pas la preuve de ce re ́sultat, qui est une variante du th ́eor`eme de Banach-Steinhaus —  ́egalement bas ́ee sur le the ́ore`me de Baire. Voici deux conse ́quences remarquables du principe de bornitude uniforme.
+Corollaire 3.3.7 Soient Ω ouvert de RN et (Tn)n≥1 une suite de distributions sur Ω. Supposons que
+la suite 〈Tn, φ〉 est convergente pour tout φ ∈ Cc∞(Ω).
+Alors il existe une distribution T ∈ D′(Ω) telle que
+nli→m∞〈Tn, φ〉 = 〈T, φ〉 pour tout φ ∈ Cc∞(Ω),
+c’est-`a-dire que Tn → T dans D′(RN ) lorsque n → ∞.
+
+
+3.3. CONVERGENCE DES SUITES DE DISTRIBUTIONS 71
+D ́emonstration. Evidemment, l’application
+φ 7→ nli→m∞〈Tn, φ〉
+est une forme lin ́eaire T sur Cc∞(Ω). Il suffit donc de v ́erifier que cette forme lin ́eaire T a la proprie ́t ́e de continuit ́e des distributions. Or, pour tout K ⊂ Ω compact, il existe, d’apr`es le principe de bornitude uniforme, un entier pK ≥ 0 et une constante CK > 0 tels que
+|〈Tn, φ〉| ≤ CK max
+|α|≤pK
+sup
+x∈K
+|∂αφ(x)| ,
+pour toute fonction φ ∈ C∞(Ω) `a support dans K. En passant `a la limite dans l’in ́egalit ́e ci-dessus, on voit que
+|〈T, φ〉| ≤ CK max
+|α|≤pK
+sup
+x∈K
+|∂αφ(x)| ,
+pour toute fonction φ ∈ C∞(Ω) `a support dans K, ce qui est la propri ́ete ́ de continuite ́ assurant que T ∈ D′(Ω).
+Proposition 3.3.8 (Continuit ́e s ́equentielle du crochet de dualit ́e) Soient Ω ouvert de RN , une suite (Tn)n≥1 de distributions sur Ω, et une suite (φn)n≥1 de fonctions test appartenant `a Cc∞(Ω). Supposons que
+Tn → T dans D′(Ω) lorsque n → ∞, et
+φn → φ dans Cc∞(Ω) lorsque n → ∞.
+Alors
+〈Tn, φn〉 → 〈T, φ〉 lorsque n → ∞.
+D ́emonstration. Comme φn → φ dans Cc∞(Ω), il existe K ⊂ Ω compact tel que supp(φn) ⊂ K pour tout n ≥ 1. D’apr`es le principe de bornitude uniforme (Th ́eor`eme 3.3.6), il existe un entier p ≥ 0 et une constante C > 0 tels que
+|〈Tn, ψ〉| ≤ C max
+|α|≤p
+sup
+x∈K
+|∂αψ(x)|
+pour tout n ≥ 1 et pour toute fonction test ψ ∈ C∞(Ω) `a support dans K. Appliquant cela `a ψ = φn − φ, on trouve que
+|〈Tn, φn − φ〉| ≤ C max
+|α|≤p
+max
+x∈K |∂α(φn − φ)(x)| → 0
+lorsque n → ∞, puisque, par hypoth`ese sur la suite (φn)n≥1,
+∂αφn → ∂αφ uniform ́ement sur K pour n → ∞.
+Alors
+〈Tn, φn〉 − 〈T, φ〉 = 〈Tn, φn − φ〉 + 〈Tn − T, φ〉 .
+On vient de voir que le premier terme au membre de droite converge vers 0 lorsque n → ∞ ; quant au second, il converge  ́egalement vers 0 puisque Tn → T dans D′(Ω).
+
+
+72 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+3.4 Op ́erations sur les distributions
+Nous allons d ́efinir dans cette section les premiers exemples d’op ́erations sur les distributions. D’autres op ́erations, plus complexes (comme la transformation de Fourier) ne peuvent eˆtre de ́finies que sur certaines classes plus restreintes de distributions, que nous  ́etudierons ult ́erieurement.
+3.4.1 De ́rivation des distributions
+La d ́erivation des distributions s’effectue comme sugge ́re ́ par l’exemple  ́etudi ́e dans l’introduction du pr ́esent chapitre.
+D ́efinition 3.4.1 (D ́erivation des distributions) Soient N ≥ 1 entier, Ω ouvert de RN et T ∈ D′(Ω). Pour tout j = 1, . . . , N , on de ́finit la distribution ∂xj T par la formule
+〈∂xj T, φ〉 = −〈T, ∂xj φ〉 , pour tout φ ∈ C∞
+c (Ω) .
+Evidemment, cette notion de d ́erivation coı ̈ncide avec la notion habituelle pour les fonctions de classe C1.
+Proposition 3.4.2 (D ́erivation classique et dans D′) Soit Ω ouvert de RN . Pour toute fonction f ∈ C1(Ω)
+∂xj Tf = T∂xj f , j = 1, . . . , N .
+Commen ̧cons par le cas o`u N = 1 et o`u Ω =]a, b[. Pour toute fonction test φ ∈ Cc∞(]a, b[), en int ́egrant par parties
+〈T ′
+f , φ〉 = −〈Tf , φ′〉 = −
+∫b
+a
+f (x)φ′(x)dx
+= −[f (x)φ(x)]b
+a+
+∫b
+a
+f ′(x)φ(x)dx =
+∫b
+a
+f ′(x)φ(x)dx = 〈Tf′ , φ〉
+puisque φ(a) = φ(b) = 0. Donc T ′
+f = Tf′ dans D′(]a, b[).
+Pour N ≥ 2, on aura besoin du lemme  ́el ́ementaire suivant.
+Lemme 3.4.3 Soit C =]a1, b1[× . . . ×]aN , bN [ cube ouvert non vide de RN , et soit ψ ∈ Cc1(C). Alors, pour tout i = 1, . . . , N , on a
+∫
+C
+∂xi ψ(x)dx = 0 .
+D ́emonstration de la proposition. Soit K = supp(φ) compact dans Ω, et posons η = √1N dist(K, ∂Ω) > 0. Pour tout z ∈ RN et r > 0, on note
+C(x, r) :=
+N
+∏
+i=1
+]xi − r, xi + r[ .
+
+
+3.4. OPE ́RATIONS SUR LES DISTRIBUTIONS 73
+La famille (C(x, η))x∈K est un recouvrement ouvert de K dans Ω ; il existe donc x1, . . . , xn ∈ K tels que
+K ⊂ C(x1, η) ∪ . . . ∪ C(xn, η) .
+D’apr`es le Th ́eor`eme 1.4.3, il existe (χ1, . . . , χn) partition de l’unit ́e de classe C∞ subordonn ́ee au recouvrement fini (C(xk, η))1≤k≤n et telle que
+n
+∑
+k=1
+χk = 1 sur un voisinage de K .
+On calcule donc
+〈∂xj Tf , φ〉 = −
+∫
+Ω
+f (x)∂xj φ(x)dx = −
+∫
+Ω
+f (x)∂xj
+(n ∑
+k=1
+χk(x)φ(x)
+)
+dx
+=−
+n
+∑
+k=1
+∫
+C (xk ,η)
+f (x)∂xj (χkφ)(x)dx
+=
+n
+∑
+k=1
+∫
+C (xk ,η)
+χk(x)φ(x)∂xj f (x)dx −
+n
+∑
+k=1
+∫
+C (xk ,η)
+∂xj (χkφf )(x)dx .
+Or, d’apr`es le lemme ci-dessus appliqu ́e `a la fonction χkφf ∈ Cc1(C(xk, η)), on a ∫
+C (xk ,η)
+∂xj (χkφf )(x)dx = 0
+pour tout j = 1, . . . , N , de sorte que
+〈∂xj Tf , φ〉 =
+n
+∑
+k=1
+∫
+C (xk ,η)
+χk(x)φ(x)∂xj f (x)dx =
+n
+∑
+k=1
+∫
+Ω
+χk(x)φ(x)∂xj f (x)dx
+=
+∫
+Ω
+(n ∑
+k=1
+χk (x)
+)
+φ(x)∂xj f (x)dx =
+∫
+Ω
+φ(x)∂xi f (x)dx ,
+d’ou` l’on tire que ∂xj Tf = T∂xj f dans D′(Ω) .
+D ́emonstration du Lemme. Notons
+Cˆi :=]a1, b1[× . . . ×]ai−1bi−1[×]ai−1bi−1[× . . . ×]aN , bN [
+et xˆi = (x1, . . . , xi−1, xi+1, . . . , xN ). Pour tout xˆi ∈ Cˆi, on a
+∫ bi
+ai
+∂xi φ(x)dxi =
+[
+φ(x)
+]xi =bi
+xi =ai
+=0
+puisque
+φ(x1, . . . , xi−1, ai, xi+1, . . . , xN ) = φ(x1, . . . , xi−1, bi, xi+1, . . . , xN ) = 0 ,
+
+
+74 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+pour tout xˆi ∈ Cˆi, la fonction φ  ́etant `a support compact dans C. Enfin, la fonction ∂xi φ  ́etant continue a` support compact dans le cube C, on peut  ́echanger l’ordre d’int ́egration par rapport aux variables x1, . . . , xN , et
+∫
+C
+∂xi φ(x)dx =
+∫
+Cˆi
+(
+∫ bi
+ai
+∂xi φ(x)dxi
+)
+dxˆi = 0 .
+Voici un premier exemple de fonction dont la d ́eriv ́ee au sens des distributions n’est pas (repr ́esent ́ee par) une fonction localement int ́egrable.
+Exemple 3.4.4 (D ́eriv ́ee de la fonction de Heaviside) Notons H la fonction de Heaviside de ́finie par
+H(x) = 1R+ (x) , x ∈ R .
+Alors H′ = δ0 dans D′(R) .
+La ve ́rification de ce calcul ne pose aucune difficult ́e.
+On sait que toute fonction de classe C1 sur un intervalle ouvert de R et dont la d ́eriv ́ee est identiquement nulle sur cet intervalle est une fonction constante. Le mˆeme  ́enonc ́e vaut dans le cas des distributions, mais la de ́monstration en est assez diff ́erente — au moins a` premi`ere vue.
+Proposition 3.4.5 (D ́erivation et constantes) Soit I intervalle ouvert de R et T ∈ D′(I). Supposons que
+T ′ = 0 dans D′(I).
+Alors T est (la distribution de ́finie par) une fonction constante.
+D ́emonstration. Notons I =]a, b[. Dire qu’une fonction φ est la d ́eriv ́ee d’une fonction test Φ ∈ Cc∞(I) e ́quivaut `a dire que
+φ ∈ C∞
+c (I) et que
+∫
+I
+φ(x)dx = 0 .
+En effet, soit [c, d] ⊂]a, b[ tel que supp(φ) ⊂ [c, d]. Alors la fonction Φ d ́efinie par
+Φ(x) =
+∫x
+a
+φ(y)dy
+satisfait aux conditions suivantes :
+Φ ∈ C∞(I) , Φ′ = φ , supp(Φ) ⊂ [c, d]
+puisque, pour tout z ∈]d, b[ on a
+Φ(z) =
+∫z
+a
+φ(x)dx =
+∫
+I
+φ(x)dx = 0 .
+
+
+3.4. OPE ́RATIONS SUR LES DISTRIBUTIONS 75
+Soit donc ψ ∈ Cc∞(I) quelconque ; posons
+φ(x) = ψ(x) − χ(x)
+∫
+I
+ψ(y)dy , pour tout x ∈ I
+ou` χ ∈ Cc∞(I) est telle que
+∫
+I
+χ(y)dy = 1 .
+Alors ∫
+I
+φ(x)dx =
+∫
+I
+ψ(x)dx −
+(∫
+I
+χ(x)dx
+)∫
+I
+ψ(x)dx = 0
+de sorte que, d’apr`es ce qui pr ́ece`de, il existe Φ ∈ Cc∞(I) telle que φ = Φ′. Autrement dit
+ψ(x) = Φ′(x) + χ(x)
+∫
+I
+ψ(y)dy , pour tout x ∈ I.
+Par cons ́equent
+〈T, ψ〉 = 〈T, Φ′〉 + 〈T, χ〉
+∫
+I
+ψ(x)dx
+= −〈T ′, Φ〉 + 〈T, χ〉
+∫
+I
+ψ(x)dx = C〈1, ψ〉 avec C = 〈T, χ〉
+pour toute fonction test ψ ∈ Cc∞(I). Autrement dit T = C dans D′(I).
+Par dualit ́e, la d ́erivation au sens des distributions h ́erite  ́evidemment des propri ́et ́es lin ́eaires de la d ́erivation agissant sur les fonctions de classe C∞. En voici un premier exemple :
+Lemme 3.4.6 (Sym ́etrie des d ́eriv ́ees multiples) Soit Ω ouvert de RN . Pour toute distribution T ∈ D′(Ω) et tout j 6= k ∈ {1, . . . , N }, on a
+∂xj (∂xk T ) = ∂xk
+(∂xj T ) dans D′(Ω) .
+D ́emonstration. En effet, pour tout φ ∈ Cc∞(Ω), le lemme de Schwarz assure que
+∂xj (∂xk φ) = ∂xk
+(∂xj φ) sur Ω .
+Par cons ́equent
+〈∂xj (∂xk T ) , φ〉 = 〈T, ∂xk
+(∂xj φ)〉 = 〈T, ∂xj (∂xk φ)〉 = 〈∂xk
+(∂xj T ) , φ〉 ,
+d’ou` l’identite ́ anonc ́ee.
+Le lecteur a sans doute pre ́sent `a l’esprit les contre-exemples a` la sym ́etrie des d ́eriv ́ees crois ́ees d’ordre 2 dans le cas de fonctions qui ne sont pas 2 fois diff ́erentiables. Ainsi la fonction f d ́efinie sur R2 par
+f (x, y) = xy x2 − y2
+x2 + y2 , f (0, 0) = 0 ,
+
+
+76 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+est de classe C1 et ve ́rifie
+∂xf (0, y) = −y , et ∂yf (x, 0) = x ,
+de sorte que
+∂2
+yxf (0, 0) = −1 6= 1 = ∂2
+xyf (0, 0) .
+Pourtant, on v ́erifie sans difficult ́e que
+∂2
+x,yf = ∂2
+yxf in D′(R2) .
+A partir du lemme ci-dessus, on peut d ́efinir par re ́currence l’action de n’importe quel monˆome diff ́erentiel sur une distribution.
+D ́efinition 3.4.7 (D ́eriv ́ees d’ordre sup ́erieur dans D′) Soient un entier N ≥ 1, un ouvert Ω de RN et T ∈ D′(Ω). Pour tout multi-indice α ∈ NN , on pose
+〈∂α
+x T, φ〉 = (−1)|α|〈T, ∂α
+x φ〉 , pour tout φ ∈ C∞
+c (Ω) .
+Exemple 3.4.8 (D ́eriv ́ees de la masse de Dirac) Dans D′(R), on a
+∂m
+x δx0 = δ(m)
+x0
+ou` δ(m)
+x0 est la distribution d’ordre m d ́efinie ci-dessus par la formule
+〈δ(m)
+x0 , φ〉 = (−1)m〈δx0 , ∂m
+x φ〉 = (−1)mφ(m)(x0)
+pour toute fonction test φ ∈ Cc∞(R).
+L’un des grands avantages de la notion de distribution — et la premie`re motivation pour l’introduire — est que, contrairement au cas des fonctions, toute distribution peut eˆtre d ́eriv ́ee autant de fois qu’on le d ́esire. Mais ce n’est pas le seul. Un autre avantage de cette notion est la convergence au sens des distributions, qui donne des  ́enonc ́es d’une grande souplesse d’utilisation, comme on va le voir.
+Proposition 3.4.9 (Continuit ́e de la d ́erivation dans D′) Soient Ω ouvert de RN et (Tn)n≥1 une suite de distributions sur Ω. Supposons que
+Tn → T dans D′(Ω) lorsque n → ∞.
+Alors, pour tout multi-indice α ∈ N, la suite des d ́eriv ́ees multiples
+∂α
+x Tn → ∂α
+x T dans D′(Ω) lorsque n → ∞.
+D ́emonstration. En effet, pour toute fonction test φ ∈ Cc∞(Ω), on a
+〈∂α
+x Tn, φ〉 = (−1)|α|〈Tn, ∂α
+x φ〉 → (−1)|α|〈T, ∂α
+x φ〉 = 〈∂α
+x T, φ〉
+lorsque n → ∞.
+
+
+3.4. OPE ́RATIONS SUR LES DISTRIBUTIONS 77
+En particulier, si fn → f dans L1
+loc(Ω), alors ∂xαfn → ∂xαf — autrement dit,
+avec nos conventions de notation, ∂xαTfn → ∂xαTf — au sens des distributions sur Ω. Le lecteur comparera l’ ́enonc ́e ci-dessus, qui est d’une simplicite ́ maximale, avec les e ́nonce ́s classiques de d ́erivation terme `a terme des suites de fonctions — o`u on doit v ́erifier, typiquement, la convergence uniforme locale de la suite des d ́eriv ́ees. Il est vrai que la Proposition 3.4.9 ne donne que la convergence des d ́eriv ́ees au sens des distributions, c’est a` dire en un sens tr`es faible, contrairement `a l’ ́enonc ́e classique rappele ́ ci-dessus.
+Exemple 3.4.10 La fonction x 7→ ln |x| e ́tant localement inte ́grable sur R, elle d ́efinit un e ́le ́ment de D′(R). On a
+(ln |x|)′ = vp 1
+x dans D′(R) .
+En effet, pour tout φ ∈ Cc∞(R), on a, en inte ́grant par parties,
+〈(ln |x|)′, φ〉 = −
+∫ +∞
+−∞
+ln |x|φ′(x)dx = −
+∫∞
+0
+ln |x|(φ′(x) + φ′(−x))dx
+=−
+[
+ln |x|(φ(x) − φ(−x))
+]∞
+0
++
+∫∞
+0
+φ(x) − φ(−x)
+x dx
+=
+〈
+vp 1
+x,φ
+〉
+.
+Noter que les fonctions x 7→ φ′(x) ln |x| et x 7→ φ(x)−φ(−x)
+x , continues sur R∗,
+sont sommables sur R car φ est de classe C1, de sorte que l’int ́egration par parties ci-dessus est bien justifie ́e. Le mˆeme calcul que ci-dessus, mais en en inte ́grant par parties sur l’intervalle [1/n, +∞[ pour n ≥ 1 montre que
+(1|x|≥1/n| ln |x|)′ = 1|x|≥1/n
+x − ln n(δ1/n − δ−1/n)
+dans D′(R). Or 1|x|≥1/n| ln |x| → ln |x| dans L1
+loc(R)
+lorsque n → +∞ par convergence domin ́ee, tandis que
+1|x|≥1/n
+x → vp 1
+x dans D′(R)
+par d ́efinition. Enfin, pour tout φ ∈ Cc∞(R), on a
+ln n(φ(1/n) − φ(−1/n)) = ln n · O(1/n) → 0
+lorsque n → +∞, par le th ́eor`eme des accroissements finis, de sorte que
+ln n(δ1/n − δ−1/n) → 0 dans D′(R)
+
+
+78 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+lorsque n → +∞. En passant `a la limite pour n → +∞ dans l’ ́egalit ́e
+(1|x|≥1/n| ln |x|)′ = 1|x|≥1/n
+x − ln n(δ1/n − δ−1/n)
+au sens des des distributions, on retrouve la formule (ln |x|)′ = vp 1
+x.
+Exemple 3.4.11 (Solution de l’ ́equation de transport dans D′) Soient une fonction f in ∈ L1
+loc(RN ) et un vecteur non nul v ∈ RN ; posons
+f (t, x) = f in(x − tv) p.p. en (t, x) ∈ R × RN .
+Alors
+(a) pour tout R > 0, la restriction de f `a R × B(0, R) est continue en t ∈ R `a valeurs dans L1(B(0, R)) ; et (b) la fonction f est solution de l’e ́quation de transport
+∂tf + v · ∇xf = 0 dans D′(Rt × RN
+x ).
+On peut  ́evidemment v ́erifier le (b) `a partir de la d ́efinition de la d ́eriv ́ee au sens des distributions. Une autre m ́ethode consiste `a approcher f in par une suite fnin de fonctions
+de classe C∞ `a support compact, par exemple en posant
+f in
+n = (f in1|x|≤n
+) ? ζ1/n
+ou` (ζ ) >0 est une suite r ́egularisante sur RN . D’apr`es le Th ́eor`eme 2.1.2, la fonction fn d ́efinie par
+fn(t, x) = f in
+n (x − tv) , (t, x) ∈ R × RN ,
+est l’unique solution (au sens classique) du probl`eme de Cauchy
+∂tfn + v · ∇xfn = 0 sur R × RN ,
+fn
+∣
+∣t=0 = f in
+n,
+Enfin on passe `a la limite au sens des distributions dans l’ ́equation de transport grˆace `a la Proposition 3.4.9, en remarquant que fn → f dans D′(Ω).
+3.4.2 Multiplication par une fonction de classe C∞
+D ́efinition 3.4.12 (Produit C∞-D′) Soient N ≥ 1 et Ω ouvert de RN . Pour toute fonction a ∈ C∞(Ω) et toute distribution T ∈ D′(Ω), on de ́finit la distribution produit de T par a, not ́ee aT ∈ D′(Ω), par la formule
+〈aT, φ〉 = 〈T, aφ〉 , pour tout φ ∈ C∞
+c (Ω) .
+
+
+3.4. OPE ́RATIONS SUR LES DISTRIBUTIONS 79
+V ́erifions que la formule ci-dessus d ́efinit bien une distribution sur Ω, ce qui se rame`ne `a v ́erifier la propri ́et ́e de continuit ́e. Or la formule de Leibnitz montre que, pour tout compact K ⊂ Ω, on a
+max
+|α|≤p
+sup
+x∈K
+|∂α(aφ)(x)| = max
+|α|≤p
+sup
+x∈K
+∣ ∣ ∣ ∣ ∣ ∣
+∑
+β≤α
+(α
+β
+)
+∂ α−β a(x)∂ β φ(x)
+∣ ∣ ∣ ∣ ∣ ∣
+≤ Mp,K [a] max
+|β|≤p
+sup
+x∈K
+|∂ β φ(x)|
+avec
+Mp,K [a] = 2p max
+|α|≤p
+sup
+x∈K
+|∂αa(x)| .
+Evidemment, cette op ́eration est (s ́equentiellement) continue :
+Proposition 3.4.13 (Continuit ́e du produit par a ∈ C∞) Soient Ω ouvert de RN , une fonction a ∈ C∞(Ω) et une suite (Tn)n≥1 de distributions sur Ω telle que Tn → T dans D′(Ω) lorsque n → ∞.
+Alors aTn → aT dans D′(Ω) lorsque n → ∞.
+D ́emonstration. En effet, pour toute fonction test φ ∈ Cc∞(Ω), on a
+〈aTn, φ〉 = 〈Tn, aφ〉 → 〈T, aφ〉 = 〈aT, φ〉
+lorsque n → ∞. La multiplication par une fonction C∞ et la d ́erivation au sens des distributions interagissent comme dans le cas des fonctions.
+Proposition 3.4.14 (Formule de Leibnitz dans D′) Soient Ω ⊂ RN ouvert, une fonction a ∈ C∞(Ω) et une distribution T ∈ D′(Ω). Alors, pour tout j = 1, . . . , N , on a
+∂xj (aT ) = (∂xj a) T + a∂xj T dans D′(Ω) .
+Plus g ́en ́eralement, pour tout multi-indice α ∈ NN , on a
+∂α(aT ) =
+∑
+β≤α
+(α
+β
+)
+(∂α−βa) ∂βT dans D′(Ω) .
+D ́emonstration. En effet, pour toute fonction test φ ∈ Cc∞(Ω), on a
+〈∂xj (aT ), φ〉 = −〈T, a∂xj φ〉 = −〈T, ∂xj (aφ) − (∂xj a) φ〉
+= 〈∂xj T, aφ〉 + 〈(∂xj a) T, φ〉
+= 〈a∂xj T, φ〉 + 〈(∂xj a) T, φ〉
+d’ou` la premi`ere formule. La seconde formule de ́coule de la premi`ere par r ́ecurrence, comme dans le cas classique d’un produit de fonctions.
+
+
+80 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+Exemple 3.4.15 (Produit d’une fonction C∞ par ∂αδx0 ) On ve ́rifie sans peine que, pour tout x0 ∈ Ω et tout a ∈ C∞(Ω), l’on a
+aδx0 = a(x0)δx0 .
+Puis, en appliquant la formule de Leibnitz, on trouve que, pour tout j = 1, . . . , N ,
+a∂xj δx0 = a(x0)∂xj δx0 − (∂xj a) (x0)δx0 .
+En proc ́edant par r ́ecurrence, on calculerait de mˆeme
+a∂α
+x δx0 pour tout α ∈ NN .
+3.4.3 Localisation et recollement des distributions
+Il est impossible de d ́efinir une notion de valeur en un point d’une distribution. Mais on peut restreindre une distribution `a n’importe quel ouvert, comme suit.
+D ́efinition 3.4.16 (Restriction des distributions) Soient Ω ouvert de RN et ω ⊂ Ω ouvert. A toute distribution T ∈ D′(Ω), on associe sa restriction `a ω, not ́ee T ∣
+∣ω ∈ D′(ω) et d ́efinie comme suit :
+〈T ∣
+∣ω, φ〉 = 〈T, Φ〉 pour tout φ ∈ Cc∞(ω)
+ou` Φ est le prolongement de φ par 0 sur Ω \ ω.
+Il se trouve qu’on peut reconstruire une distribution T connaissant sa restriction `a chaque ouvert d’un recouvrement (ouvert) de Ω.
+Proposition 3.4.17 (Principe de recollement) Soient Ω ouvert de RN et (ωi)i∈I famille d’ouverts de Ω telle que
+⋃
+i∈I
+ωi = Ω .
+Soit (Ti)i∈I famille de distributions telle que Ti ∈ D′(ωi) pour tout i ∈ I. Supposons que
+Ti
+∣
+∣ωi∩ωj = Tj
+∣
+∣ωi∩ωj pour tous i, j ∈ I tels que ωi ∩ ωj 6= ∅.
+Alors il existe une unique distribution T ∈ D′(Ω) telle que
+T
+∣
+∣ωi = Ti , i ∈ I .
+D ́emonstration.
+Unicit ́e. Supposons qu’il existe deux distributions sur Ω, T et T ̃, v ́erifiant cette propri ́ete ́. Alors la distribution S = T − T ̃ est telle que
+S
+∣
+∣ωi = 0 pour tout i ∈ I.
+
+
+3.4. OPE ́RATIONS SUR LES DISTRIBUTIONS 81
+Montrons que S = 0. Soit donc φ ∈ Cc∞(Ω) et soit K = supp(φ) compact dans Ω. Comme (ωi)i∈I est un recouvrement ouvert de K, il en existe un sous-recouvrement fini, c’est`a-dire i1, . . . , in ∈ I tels que
+K ⊂ ωi1 ∪ . . . ∪ ωin .
+Soit (χ1, . . . χn) partition de l’unit ́e sur K subordonn ́ee au recouvrement fini (ωi1 , . . . , ωin ) : c’est-`a-dire que, pour tout k = 1, . . . , n
+0 ≤ χk ∈ C∞(RN ) est `a support compact dans ωik
+et
+n
+∑
+k=1
+χk = 1 au voisinage de K .
+Alors
+〈S, φ〉 =
+〈
+S,
+n
+∑
+k=1
+χk φ
+〉
+=
+n
+∑
+k=1
+〈
+S
+∣
+∣ωik
+, χkφ
+〉
+=0
+et comme ceci vaut pour toute fonction test φ ∈ Cc∞(Ω), on en d ́eduit que S = 0.
+Existence. Soit K compact dans Ω ; comme dans la preuve d’unicit ́e, on d ́eduit du fait que la famille (ωi)i∈I fournit un recouvrement ouvert du compact K l’existence d’un sous-recouvrement fini (ωi1 , . . . , ωin ) et d’une partition de l’unite ́ sur K not ́ee (χ1, . . . , χn) subordonn ́ee au sous-recouvrement fini (ωi1 , . . . , ωin ). Soit maintenant φ ∈ C∞(Ω) `a support dans K ; on pose
+TK (φ) =
+n
+∑
+k=1
+〈Tik , χkφ〉 .
+Montrons que la forme lin ́eaire TK est inde ́pendante du choix du sousrecouvrement fini (ωi1 , . . . , ωin ) et de la partition de l’unit ́e (χ1, . . . , χn). Pour cela, on va supposer qu’il existe un autre sous-recouvrement fini (ωi′
+1 , . . . , ωi′m )
+et une autre partition de l’unit ́e sur K not ́ee (χ′1, . . . , χ′m) subordonn ́ee `a ce sous-recouvrement. Il faut faire voir que
+n
+∑
+k=1
+〈Tik , χkφ〉 =
+m
+∑
+l=1
+〈Ti′
+l , χ′
+lφ〉 .
+Or
+n
+∑
+k=1
+〈Tik , χkφ〉 =
+n
+∑
+k=1
+m
+∑
+l=1
+〈
+Tik
+∣
+∣ωik ∩ωi′
+l
+, χkχ′
+lφ
+〉
+de sorte que, comme
+Tik
+∣
+∣ωik ∩ωi′
+l
+= Ti′
+l
+∣
+∣ωik ∩ωi′
+l
+
+
+82 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+on conclut que
+n
+∑
+k=1
+〈Tik , χkφ〉 =
+n
+∑
+k=1
+m
+∑
+l=1
+〈
+Tik
+∣
+∣ωik ∩ωi′
+l
+, χkχ′
+lφ
+〉
+=
+n
+∑
+k=1
+m
+∑
+l=1
+〈
+Ti′
+l
+∣
+∣ωik ∩ωi′
+l
+, χkχ′
+lφ
+〉
+=
+m
+∑
+l=1
+〈
+Ti′
+l , χ′
+lφ
+〉
+.
+Ainsi la forme lin ́eaire TK est-elle bien d ́efinie. Maintenant, si K′ est un autre compact de Ω, on montre de meˆme que
+〈TK , φ〉 = 〈TK′ , φ〉
+pour toute fonction test φ ∈ C∞(Ω) `a support dans K ∩ K′. Posons alors
+〈T, φ〉 = 〈TK , φ〉 pour tout φ ∈ C∞(Ω) `a support dans K.
+V ́erifions enfin que T est bien une distribution. Pour k = 1, . . . , n,  ́ecrivons la propri ́et ́e de continuit ́e de Tik sur le compact supp(χk) ⊂ ωik :
+|〈Tik , χkφ〉| ≤ Ck max
+|α|≤pk
+sup
+x∈supp(χk )
+|∂ α (χk φ)(x)|
+≤ CkC′
+k max
+|α|≤pk
+sup
+x∈supp(χk )
+|∂αφ(x)|
+d’apr`es la formule de Leibnitz, en posant
+C′
+k = max
+|α|≤pk
+sup
+x∈supp(χk )
+∑
+β≤α
+(α
+β
+)
+|∂βχk(x)| .
+En sommant membre `a membre toutes les in ́egalit ́es ci-dessus, on aboutit a` l’estimation
+|〈T, φ〉| = |〈TK , φ〉| ≤ C max
+|α|≤p
+sup
+x∈K
+|∂αφ(x)|
+pour tout φ ∈ C∞(Ω) `a support dans K, avec
+p = max
+1≤k≤n pk , et C =
+n
+∑
+k=1
+Ck C ′
+k.
+Ceci montre que la forme lin ́eaire T d ́efinie plus haut est une distribution sur Ω.
+3.4.4 Changement de variables dans les distributions
+De fac ̧on g ́en ́erale, on aimerait pouvoir d ́efinir le produit de composition T ◦χ d’une distribution T par une application χ — comme on le ferait dans le cas particulier ou` T est une fonction.
+
+
+3.4. OPE ́RATIONS SUR LES DISTRIBUTIONS 83
+Dans le cas g ́en ́eral ou` T est une distribution, il est plus d ́elicat, comme on va le voir, de d ́efinir ce produit de composition, et cela n ́ecessite d’ailleurs certaines hypothe`ses sur l’application χ. Nous allons commencer par le cas le plus simple, celui ou` on suppose que χ est un C∞-diff ́eomorphisme entre ouverts de RN . Supposons donc que Ω1 et Ω2 sont deux ouverts de RN et que
+χ : Ω1 → Ω2 est un diff ́eomorphisme de classe C∞ .
+Pour toute fonction f ∈ L1
+loc(Ω2), on sait que la fonction f ◦ χ appartient `a
+L1
+loc(Ω1), et la formule du changement de variables dans les int ́egrales entraıˆne que
+∫
+Ω1
+f ◦ χ(x)φ(x)dx =
+∫
+Ω2
+f (y)φ(χ−1(y))| d ́et(Dχ(χ−1(y)))|−1dy
+ou` Dχ(x) est la matrice jacobienne de χ au point x. On va donc d ́efinir le produit de composition T ◦ χ pour T ∈ D′(Ω2) en s’inspirant de la formule ci-dessus.
+D ́efinition 3.4.18 (Changement de variables dans D′) Soient deux ouverts Ω1 et Ω2 de RN , T ∈ D′(Ω2) une distribution et un diffe ́omorphisme de classe C∞
+χ : Ω1 → Ω2 .
+L’image inverse de la distribution T sur Ω2 par le diff ́eomorphisme χ est la distribution T ◦ χ sur Ω1 d ́efinie par la formule
+〈T ◦ χ, φ〉 = 〈T, χ∗(φ)〉 , pour tout φ ∈ C∞
+c (Ω1) ,
+ou` l’image directe de la fonction test par le C∞-diff ́eomorphisme χ est donne ́e par
+χ∗(φ)(y) = φ(χ−1(y))| d ́et(Dχ(χ−1(y)))|−1 , y ∈ Ω2 .
+Pour voir que T ◦ χ v ́erifie la propri ́et ́e de continuite ́ des distributions, on applique la formule de d ́erivation des applications compos ́ees et la formule de Leibnitz par r ́ecurrence sur l’ordre de la d ́erivation. Evidemment, pour toute fonction localement int ́egrable f sur Ω2, on a — en reprenant pour l’occasion nos anciennes notations 
+Tf ◦ χ = Tf◦χ .
+Autrement dit, le changement de variables au sens des distributions coı ̈ncide avec le changement de variables au sens habituel lorsqu’on l’applique `a une fonction localement int ́egrable — on a tout fait pour cela. On ve ́rifie  ́egalement sans difficult ́e que, si (Tn)n≥1 est une suite de distributions sur Ω2 telle que
+Tn → T dans D′(Ω2) lorsque n → ∞
+alors Tn ◦ χ → T ◦ χ dans D′(Ω1) lorsque n → ∞ .
+
+
+84 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+Exemple 3.4.19 (Changements de variables affines) Pour toute distribution T ∈ D′(RN ) et toute matrice carr ́ee inversible `a N lignes et colonnes A ∈ GLN (R), on a
+〈T ◦ A, φ〉 = | d ́et(A)|−1〈T, φ ◦ A−1〉 , φ ∈ C∞
+c (RN ) .
+Cette formule vaut en particulier lorsque A est une rotation ou une sym ́etrie orthogonale, ou plus g ́en ́eralement une matrice orthogonale A ∈ ON (R), auquel cas A−1 = AT et | d ́et(A)| = 1. Elle vaut encore dans le cas particulier ou` A est la matrice d’un homoth ́etie : pour λ ∈ R∗ et A = λI, on a
+〈T ◦ (λI), φ〉 = |λ|−N 〈T, φ(λ−1·)〉 .
+Le cas d’une translation est identique : pour tout vecteur V ∈ RN , notons τV la translation de vecteur V :
+τV : x 7→ x + V .
+Alors
+〈T ◦ τV , φ〉 = 〈T, φ ◦ τ−V 〉 , φ ∈ C∞
+c (RN ) .
+La formule du changement de variables pour une masse de Dirac est tout particuli`erement remarquable.
+Exemple 3.4.20 (Changement de variables dans une masse de Dirac) Soient Ω1 et Ω2 ouverts de RN , et soit χ : Ω1 → Ω2 un diff ́eomorphisme de classe C∞. Pour tout y0 ∈ Ω2, on a
+δy0 ◦ χ = | d ́et(Dχ(x0))|−1δx0 , ou` χ(x0) = y0 .
+Par exemple, lorsque Ω1 = Ω2 = RN et χ : x 7→ λx avec λ 6= 0, on trouve que
+δ0 ◦ (λI) = |λ|−N δ0 .
+Cette formule s’e ́tend sans difficult ́e aux de ́riv ́ees successives de la masse de Dirac :
+(∂αδ0) ◦ (λI) = |λ|−N−|α|∂αδ0
+dans D′(RN ), pour tout α ∈ NN .
+3.4.5 De ́rivation/Inte ́gration sous le crochet de dualite ́
+Les deux  ́enonc ́es suivants ge ́ne ́ralisent, d’une part le th ́eor`eme de d ́erivation sous le signe somme, et d’autre part le th ́eor`eme de Fubini.
+
+
+3.4. OPE ́RATIONS SUR LES DISTRIBUTIONS 85
+Proposition 3.4.21 (D ́erivation sous le crochet de dualit ́e) Soient un ouvert Ω ⊂ RN , une distribution T ∈ D′(Ω) et une fonction test φ ∈ C∞(Ωx ×Ryn)
+`a support dans K × Rn, ou` K est compact dans Ω. Alors la fonction
+y 7→ 〈T, φ(·, y)〉 est de classe C∞ sur Rn
+et l’on a
+∂α
+y 〈T, φ(·, y)〉 = 〈T, ∂α
+y φ(·, y)〉 .
+Lorsque T = Tf avec f ∈ L1
+loc(Ω), l’e ́nonce ́ ci-dessus se r ́eduit au fait que
+y 7→
+∫
+Ω
+f (x)φ(x, y)dx est de classe C∞ sur Rn
+et que
+∂α
+y
+∫
+Ω
+f (x)φ(x, y)dx =
+∫
+Ω
+f (x)∂α
+y φ(x, y)dx .
+Ce cas particulier de la proposition ci-dessus se ram`ene donc `a un  ́enonc ́e de d ́erivation sous le signe somme. D ́emonstration. Soit y0 ∈ Rn ; e ́crivons la formule de Taylor a` l’ordre 1 en y0 pour la fonction y 7→ φ(x, y) :
+φ(x, y0 + h) = φ(x, y0) +
+n
+∑
+i=1
+∂yi φ(x, y0)hi + r(x, y0, h)
+avec
+r(x, y0, h) = 2
+∑
+|α|=2
+hα
+α!
+∫1
+0
+(1 − t)∂α
+y φ(x, y0 + th)dt .
+On a supp(φ) ⊂ K × Rn ou` K est compact dans Ω, de sorte que, pour tout h ∈ Rn, la fonction x 7→ r(x, y0, h) est `a support dans K. D’autre part, pour tout x ∈ K et tout h ∈ Rn tel que |h| ≤ 1, on a, par d ́erivation sous le signe somme dans l’int ́egrale qui d ́efinit r(x, y0, h) :
+|∂α
+x r(x, y0, h)| ≤
+∑
+|β|=2
+|h|2 sup
+x∈K,|y −y0 |≤1
+|∂α
+x ∂β
+y φ(x, y)|
+≤ n(n+1)
+2 |h|2 max
+|β|≤2
+sup
+x∈K,|y −y0 |≤1
+|∂α
+x ∂β
+y φ(x, y)| .
+Alors
+〈T, φ(·, y0 + h)〉 = 〈T, φ(·, y0)〉 +
+n
+∑
+i=1
+〈T, ∂yi φ(·, y0)〉hi + 〈T, r(·, y0, h)〉 ,
+et
+|〈T, r(·, y0, h)〉| ≤ CK |h|2 max
+|α|≤pK ,|β|=2
+sup
+x∈K,|y −y0 |≤1
+|∂α
+x ∂β
+y φ(x, y)| = O(|h|2)
+
+
+86 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+lorsque |h| → 0, ou` CK et pK sont les constantes apparaissant dans la condition de continuit ́e de T . Par cons ́equent
+〈T, φ(·, y0 + h)〉 = 〈T, φ(·, y0)〉 +
+n
+∑
+i=1
+〈T, ∂yi φ(·, y0)〉hi + O(|h|2) ,
+ce qui montre que la fonction
+y 7→ 〈T, φ(·, y)〉
+est diffe ́rentiable sur Rn, et que ses de ́rive ́es partielles sont
+∂yi 〈T, φ(·, y)〉 = 〈T, ∂yi φ(·, y)〉 , pour tout y ∈ Rn .
+En it ́erant cet argument par r ́ecurrence sur l’ordre de la d ́erivation, on aboutit `a l’ ́enonc ́e de la proposition.
+En fait, la d ́emonstration ci-dessus peut se r ́esumer ainsi : pour toute suite (hm)m≥0 de Rn convergeant vers 0 lorsque m → ∞, la suite de fonctions test (Φm)m≥1 d ́efinie par
+Φm(x) := 1
+|hm| (φ(x, y0 + hm) − φ(x, y0) − ∇yφ(x, y0) · hm)
+v ́erifie Φm → 0 dans C∞
+c (Ω) lorsque m → ∞ .
+Par continuit ́e s ́equentielle de T (cf. Proposition 3.2.9) on conclut que
+〈
+T, 1
+|hm| (φ(x, y0 + hm) − φ(x, y0) − ∇yφ(x, y0) · hm)
+〉
+→0
+lorsque m → ∞. Comme ceci vaut pour toute suite (hm)m≥0 de Rn convergeant vers 0, il s’ensuit que
+〈
+T, 1
+|h| (φ(x, y0 + h) − φ(x, y0) − ∇yφ(x, y0) · h)
+〉
+→0
+lorsque |h| → 0.
+Proposition 3.4.22 (Int ́egration sous le crochet de dualit ́e) Soient un ouvert Ω ⊂ RN , une distribution T ∈ D′(Ω) et une fonction test φ ∈ Cc∞(Ωx×Ryn). Alors ∫
+Rn
+〈T, φ(·, y)〉dy =
+〈
+T,
+∫
+RN
+φ(·, y)dy
+〉
+.
+D ́emonstration. Commen ̧cons par traiter le cas ou` n = 1. Par hypoth`ese, il existe K compact dans Ω et R > 0 tels que φ soit `a support dans K × [−R, R].
+
+
+3.4. OPE ́RATIONS SUR LES DISTRIBUTIONS 87
+Soit maintenant ζ ∈ C∞(R) `a support dans [−R, R] et telle que
+∫
+R
+ζ(x)dx = 1 .
+Consid ́erons la fonction
+ψ(x, y) = φ(x, y) − ζ(y)
+∫
+R
+φ(x, z)dz .
+D’apr`es le th ́eor`eme de d ́erivation sous le signe somme, il est clair que la fonction ψ ∈ Cc∞(Ω × R) et v ́erifie
+supp(ψ) ⊂ K × [−R, R] et
+∫
+R
+ψ(x, y)dy = 0 pour tout x ∈ Ω .
+En particulier, la fonction Ψ de ́finie par
+Ψ(x, y) =
+∫y
+−∞
+ψ(x, z)dz
+est telle que Ψ ∈ C∞(Ω, R) et supp(Ψ) ⊂ K × [−R, R] .
+V ́erifions que
+〈T, Ψ(·, y)〉 =
+∫y
+−∞
+〈T, ψ(·, z)〉dz , pour tout y ∈ R.
+Par d ́erivation sous le crochet de dualit ́e (Proposition 3.4.21 ci-dessus), on montre que les fonctions de y figurant dans chaque membre de l’ ́egalit ́e ci-dessus sont de classe C∞ sur R et ont mˆeme de ́rive ́e
+y 7→ 〈T, ψ(·, y)〉 .
+Ces deux fonctions diff`erent donc d’une constante. De plus, ces deux fonctions sont identiquement nulles pour y < −R, car supp ψ et supp(Ψ) ⊂ K × [−R, R] : on en d ́eduit qu’elles coı ̈ncident pour tout y ∈ R.
+En particulier, on a
+∫
+R
+〈T, ψ(·, y)〉dy =
+∫R
+−∞
+〈T, ψ(·, y)〉dy =
+〈
+T, Ψ(x, R)
+〉
+= 0.
+Or, par d ́efinition de ψ
+∫
+R
+〈T, ψ(·, y)〉dy =
+∫
+R
+〈T, φ(·, y)〉dy −
+〈
+T,
+∫
+R
+φ(·, z)dz
+〉∫
+R
+ζ (y)dy
+=
+∫
+R
+〈T, φ(·, y)〉dy −
+〈
+T,
+∫
+R
+φ(·, z)dz
+〉
+=0
+d’ou` le r ́esultat dans le cas n = 1. Pour le cas ou` l’entier n > 1, on proce`de par r ́ecurrence `a partir du cas n = 1 en int ́egrant successivement par rapport a` toutes les composantes de y et en appliquant le th ́eor`eme de Fubini.
+
+
+88 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+3.4.6 Produit de distributions
+Dans tous les exemples pre ́c ́edents, on a vu qu’un grand nombre d’op ́erations bien connues sur les fonctions se ge ́ne ́ralisent facilement au cas des distributions. Malheureusement, toutes les op ́erations non lin ́eaires que l’on connait sur les fonctions continues ne se g ́en ́eralisent pas au cas des distributions. Un premier exemple est celui du produit usuel des fonctions `a valeurs r ́eelles ou complexes, qui, `a deux fonctions f, g : Ω → R ou C d ́efinies sur un ouvert Ω de RN , associe la fonction
+f g : Ω 3 x 7→ f (x)g(x) ∈ R ou C .
+Il n’existe aucun moyen satisfaisant d’ ́etendre cette op ́eration aux distributions, sauf dans certains cas particuliers. Par exemple, s’il paraıˆt tout `a fait naturel de poser
+δx1 δx2 = 0 dans D′(RN ) lorsque x1 6= x2 ,
+il n’est pas possible de donner un sens `a l’expression
+(δx0 )2 dans D′(RN ) ,
+sans risquer de se heurter a` de graves contradictions. Par exemple, on pourrait d ́efinir, dans D′(R),
+(δ0)2 = nli→m∞ δ0δ1/n = 0
+d’apr`es la remarque ci-dessus. Mais le mˆeme principe commanderait alors de d ́efinir (δ0)2 = nli→m∞ (ζnδ0)
+lorsque ζn est une suite r ́egularisante d ́efinie en posant
+ζn(x) = nζ(nx)
+ou` ζ ∈ C∞(R) v ́erifie
+supp(ζ) ⊂ [−1, 1] , ζ > 0 sur ] − 1, 1[ ,
+∫
+R
+ζ(x)dx = 1 .
+Or, comme ζn(0) = nζ(0) → +∞ lorsque n → ∞, la suite ζnδ0 = nζ(0)δ0 ne converge pas dans D′(R). Dans le meˆme ordre d’id ́ees, il n’est pas possible de donner un sens `a l’expression Hδ0 ou` H = 1R+ est la fonction d’Heaviside.
+En effet, comme Hn = H pour tout n ∈ N∗ et que H′ = δ0 dans D′(R), la formule de Leibnitz donnerait
+δ0 = H′ = (H2)′ = 2Hδ0 = (H3)′ = 3H2δ0 = 3Hδ0 ,
+
+
+3.5. LA FORMULE DES SAUTS ET SES VARIANTES 89
+d’ou` on tirerait
+Hδ0 = 1
+2 δ0 = 1
+3 δ0 ,
+ce qui est  ́evidemment absurde. Plus ge ́ne ́ralement, il n’est pas possible de donner un sens a` F (T ) pour F : R → R de classe C∞ mais non affine et pour T distribution quelconque sur un ouvert de RN . En r ́esum ́e, la construction des distributions par dualite ́ `a partir d’un espace de fonctions ind ́efiniment diff ́erentiables permet de de ́river toute distribution autant de fois qu’on le souhaite. Malheureusement, avec cette construction, on perd le calcul non lin ́eaire qui existe sur les fonctions continues.
+3.5 La formule des sauts et ses variantes
+Le calcul des distributions permet de manipuler de fa ̧con syst ́ematique des fonctions re ́gulie`res par morceaux dans le contexte des e ́quations aux d ́eriv ́ees partielles. Un exemple bien connu de ce type de situation est le cas des ondes de choc en m ́ecanique des fluides, sur lequel nous reviendrons ult ́erieurement.
+3.5.1 Formule des sauts en dimension N = 1
+On cherche `a calculer la d ́eriv ́ee au sens des distributions d’une fonction de classe C1 par morceaux, n’ayant que des discontinuit ́es de premie`re esp`ece 3.
+Th ́eor`eme 3.5.1 (Formule des sauts en dimension 1) Soit f : R → R de classe C1 par morceaux, n’ayant que des discontinuit ́es de premie`re esp`ece, et dont on note
+a1 < a2 < . . . < an
+les points de discontinuit ́e. La d ́eriv ́ee au sens des distributions de la fonction f est donn ́ee par la formule
+f ′ = {f ′} +
+n
+∑
+k=1
+(f (ak + 0) − f (ak − 0)) δak
+ou` la notation {f } d ́esigne 4
+{f ′} =
+(
+f
+∣
+∣R\{a1 ,...,an }
+)′
+,
+3. Soit f : I → R ou C, ou` I est un intervalle ouvert de R. On dit que f pr ́esente une discontinuite ́ de premie`re esp`ece en un point a ∈ I s’il existe > 0 tel que f soit continue sur ]a − , a[∪]a, a + [, que f admette des limites finies a` gauche et `a droite de a, note ́es resp. f (a − 0) et f (a + 0), et enfin que f (a − 0) 6= f (a + 0). 4. On remarquera que {f ′} n’est pas d ́efinie sur R, mais seulement sur R \ {a1, . . . , an}, o`u elle est continue. En particulier, {f ′} est une fonction mesurable de ́finie p.p. sur R. Par hypoth`ese, f ′ est born ́ee au voisinage de ses points de discontinuite ́, de sorte que {f ′} est localement int ́egrable et d ́efinit donc bien une distribution sur R.
+
+
+90 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+c’est-`a-dire que
+{f ′}(x) = f ′(x) pour tout x ∈ R \ {a1, . . . , an} .
+D ́emonstration. Soit φ ∈ Cc∞(R) ; calculons
+−
+∫
+R
+f (x)φ′(x)dx = −
+∫ a1
+−∞
+f (x)φ′(x)dx
+−
+n−1
+∑
+k=1
+∫ ak+1
+ak
+f (x)φ′(x)dx −
+∫∞
+an
+f (x)φ′(x)dx .
+Par hypothe`se, f est de classe C1 sur ]ak, ak+1[ et se prolonge par continuit ́e `a [ak, ak+1] pour tout k = 1, . . . , n − 1. En int ́egrant par parties, on trouve que
+−
+∫ ak+1
+ak
+f (x)φ′(x)dx = −
+[
+f (x)φ(x)
+]ak+1
+ak
++
+∫ ak+1
+ak
+f ′(x)φ(x)dx
+= − (f (ak+1 − 0)φ(ak+1) − f (ak + 0)φ(ak)) +
+∫ ak+1
+ak
+f ′(x)φ(x)dx ,
+tandis que
+−
+∫ a1
+−∞
+f (x)φ′(x)dx = −f (a1 − 0)φ(a1) +
+∫ a1
+−∞
+f ′(x)φ(x)dx
+et
+−
+∫∞
+an
+f (x)φ′(x)dx = f (an + 0)φ(an) +
+∫∞
+an
+f ′(x)φ(x)dx .
+Par cons ́equent
+−
+∫
+R
+f (x)φ′(x)dx = −f (a1 − 0)φ(a1) + f (an + 0)φ(an)
++
+n−1
+∑
+k=1
+(f (ak + 0)φ(ak) − f (ak+1 − 0)φ(ak+1))
++
+∫ a1
+−∞
+f ′(x)φ(x)dx +
+n−1
+∑
+k=1
+∫ ak+1
+ak
+f ′(x)φ(x)dx +
+∫∞
+an
+f ′(x)φ(x)dx .
+En regroupant d’une part les inte ́grales au membre de gauche et d’autre part tous les termes faisant intervenir φ(ak) pour tout k = 1, . . . , n, on aboutit `a la relation
+−
+∫
+R
+f (x)φ′(x)dx =
+∫
+R
+f ′(x)φ(x)dx +
+n
+∑
+k=1
+(f (ak + 0) − f (ak − 0)) φ(ak) ,
+qui signifie pr ́ecis ́ement que
+f ′ = {f ′} +
+n
+∑
+k=1
+(f (ak + 0) − f (ak − 0)) δak dans D′(R) .
+
+
+3.5. LA FORMULE DES SAUTS ET SES VARIANTES 91
+3.5.2 Formule de Green-Riemann : rappels
+Nous allons rappeler ici la formule de Green-Riemann telle qu’elle figure au programme des classes pre ́paratoires. Nous aurons besoins dans la suite d’une g ́en ́eralisation de cette formule, qui s’interpr`etera de fac ̧on tr`es naturelle dans le cadre des distributions. Une 1-forme diff ́erentielle de classe Ck sur U ouvert de RN est une application de classe Ck de U dans l’espace (RN )∗ des formes lin ́eaires sur RN .
+Exemple 3.5.2 Pour toute fonction f de classe Ck+1 sur U `a valeurs dans R, sa diff ́erentielle note ́e df est une 1-forme diff ́erentielle de classe Ck sur U . En effet, df (x) est, pour tout x ∈ U , une application line ́aire de RN dans R, c’est-a`dire une forme lin ́eaire sur RN . En particulier, si f (x) = xi ou` i = 1, . . . , N , on a df (x) = e∗
+i (ou` (e1∗, . . . , e∗
+N ) est la base duale de la base canonique (e1, . . . , eN )
+de RN .)
+Notation. Dans toute la suite, on notera dxi la diffe ́rentielle de la fonction x 7→ xi, c’est-`a-dire la 1-forme diff ́erentielle constante qui associe `a tout point x ∈ U la forme lin ́eaire e∗
+i.
+Exemple 3.5.3 Une 1-forme diff ́erentielle sur U n’est pas toujours de la forme df , ou` f est une fonction de classe C1 sur U `a valeurs re ́elles. Plus g ́en ́eralement, si f est une fonction de classe Ck+1 sur U `a valeurs dans R et g une fonction de classe Ck sur U `a valeurs dans R, alors gdf est une 1-forme de classe Ck sur U . Ainsi, x2dx1 est une 1-forme diff ́erentielle sur R2 qui n’est pas de la forme df avec f de classe C1 sur R2.
+Soit ω une 1-forme diff ́erentielle de classe Ck sur U ; pour tout x ∈ U , on note ωi(x) la i-`eme coordonn ́ee de la forme lin ́eaire ω(x) dans la base (e1∗, . . . , e∗
+N)
+(duale de la base canonique de RN .) Autrement dit, ωi(x) = ω(x) · ei ou` ei est le i-`eme vecteur de la base canonique de RN , et comme par hypoth`ese ω est une 1-forme de classe Ck, la fonction ωi : x 7→ ω(x) · ei est de classe Ck sur U . Ainsi, toute 1-forme diff ́erentielle de classe Ck sur U ouvert de RN s’ ́ecrit de fa ̧con unique comme
+ω=
+N
+∑
+i=1
+ωidxi , avec ω1, . . . ωN ∈ Ck(U ) .
+Venons-en `a la notion de circulation d’une 1-forme diff ́erentielle sur un arc de courbe. Soit γ : [a, b] → RN un arc param ́etr ́e de classe C1, et ω une 1-forme diff ́erentielle de classe C0 sur U . On suppose que l’arc de courbe γ([a, b]) ⊂ U . La circulation de ω sur l’arc param ́etr ́e γ est
+∫
+γ
+ω :=
+∫b
+a
+ω(γ(t)) · γ′(t)dt .
+
+
+92 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+K
+K
+Kc
+c
+Figure 3.1 – Orientation du bord d’un compact de R2.
+Autrement dit, si
+ω=
+N
+∑
+i=1
+ωidxi , et γ(t) = (γ1(t), . . . , γN (t)) pour tout t ∈ [a, b] ,
+on a
+∫
+γ
+ω=
+N
+∑
+i=1
+∫b
+a
+ωi(γ(t))γ′
+i(t)dt .
+Dans le cas ou` N = 2, soit K compact de R2 dont la fronti`ere est une r ́eunion finie de courbes de Jordan re ́gulie`res γ1, . . . , γm. (Rappelons qu’une courbe de Jordan de R2 est une application continue γ : [0, L] → R2 injective sur [0, L[ et telle que γ(0) = γ(L), et que γ est dite re ́gulie`re si γ ∈ C1([0, L]; R2) et que γ′(t) 6= 0 pour tout t ∈ [0, L].) Supposons que, lorsque chaque courbe γi est parcourue dans le sens des t croissants, le compact K est localement `a gauche de la courbe γi. De fac ̧on analogue, si ν(γi(t)) est le vecteur unitaire normal `a la courbe γi au point γi(t) dirig ́e vers l’ext ́erieur de K, la base orthogonale (ν(γi(t)), γ′
+i(t)) est directe. Si tel est le cas, on dit que la courbe γi est positivement orient ́ee par le champ de vecteurs normaux ν. Soit maintenant ω = P dx + Qdy une 1-forme de classe C0 sur un ouvert U de R2 contenant le compact K. Alors
+Formule de Green-Riemann.
+m
+∑
+i=1
+∫
+γi
+P (x, y)dx + Q(x, y)dy =
+∫∫
+K
+(∂xQ − ∂yP )(x, y)dxdy
+Nous allons maintenant  ́ecrire cette formule sous une forme l ́eg`erement diff ́erente. Pour i = 1, . . . , m, on a
+∫
+γi
+P (x, y)dx + Q(x, y)dy =
+∫ Li
+0
+(P (γ(t))γ′
+i,x(t) + Q(γ(t))γ′
+i,y(t))dt .
+
+
+3.5. LA FORMULE DES SAUTS ET SES VARIANTES 93
+Notons
+τ (γi(t)) = γ′
+i(t) |γ′
+i(t)| = (γ′
+i,x(t), γ′
+i,y (t))
+√
+γ′
+i,x(t)2 + γ′
+i,y (t)2
+le vecteur unitaire tangent `a la courbe γi orient ́e dans le sens des t croissants ; le vecteur
+ν(γi(t)) = (γ′
+i,y(t), −γ′
+i,x(t))
+√
+γ′
+i,x(t)2 + γ′
+i,y (t)2
+est l’image de τ (γi(t)) par la rotation d’angle − π
+2 . Autrement dit, (ν(γi(t)), τ (γi(t))),
+ou (ν(γi(t)), γ′
+i(t)) sont des bases orthogonales directes, de sorte que, d’apre`s l’hypoth`ese faite sur l’orientation, ν(γi(t)) est le vecteur unitaire normal `a la fronti`ere ∂K au point γi(t) dirig ́e vers l’ext ́erieur de K. Ainsi
+P (γ(t))γ′
+i,x(t) + Q(γ(t))γ′
+i,y(t)dt = (−Q(γi(t)), P (γi(t))) · ν(γi(t))|γ′
+i(t)|dt
+= (Q(γi(t)), −P (γi(t))) · ν(γi(t))ds(γi(t))
+ou` s une abscisse curviligne sur la courbe γi croissante en fonction de t. D’autre part
+∂xQ(x, y) − ∂yP (x, y) = div(Q, −P )(x, y) .
+Autrement dit, la formule de Green-Riemann se met sous la forme suivante, ou` ν(σ) d ́esigne le vecteur unitaire normal a` ∂K au point σ, dirig ́e vers l’ext ́erieur de K :
+Formule de Green-Riemann : 2`eme forme
+∫
+∂K
+(Q, −P )(σ) · ν(σ)ds(σ) =
+∫∫
+K
+div(Q, −P )(x, y)dxdy
+C’est pre ́cise ́ment cette forme de la formule de Green-Riemann que nous aurons besoin de ge ́ne ́raliser en dimension > 2.
+3.5.3 Formule de Green(-Ostrogradsky)
+Soit Ω ⊂ RN ouvert `a bord de classe C1 de RN . Rappelons que ceci signifie que (a) la fronti`ere ∂Ω de Ω est une hypersurface de classe C1 de RN ; et (b) localement, Ω est d’un seul cˆot ́e de ∂Ω.
+La condition (b) veut dire la chose suivante : pour tout x0 ∈ ∂Ω, il existe un ouvert ω0 de RN tel que x0 ∈ ω0 et une fonction ρ0 de classe C1 sur ω0 v ́erifiant les conditions suivantes
+∇ρ0(x) 6= 0 pour tout x ∈ ω0
+ainsi que
+∂Ω ∩ ω0 = {x ∈ ω0 | ρ0(x) = 0} ,
+Ω ∩ ω0 = {x ∈ ω0 | ρ0(x) < 0} .
+
+
+94 CHAPITRE 3. CALCUL DES DISTRIBUTIONS
+Le vecteur normal unitaire au point x ∈ ∂Ω ∩ ω0 pointant vers l’ext ́erieur de Ω est
+ν(x) = ∇ρ0(x)
+|∇ρ(x)| , x ∈ ∂Ω ∩ ω0 .
+Autrement dit, Ω ∪ ∂Ω est une sous-vari ́et ́e `a bord de RN de dimension N (voir la D ́efinition 9.8 de [17]).
+Etant donne ́ un ouvert `a bord Ω de classe C1 de RN , sa fronti`ere ∂Ω est une hypersurface de RN , dont on note ν le champ unitaire normal dirig ́e vers l’ext ́erieur de Ω, et dσ l’ ́el ́ement de surface — cf. Appendice, section 6.2. La deuxi`eme forme de la formule de Green-Riemann, rappel ́ee ci-dessus, se g ́en ́eralise alors imm ́ediatement en dimension N > 2 quelconque de la mani`ere suivante. La formule g ́en ́erale ainsi obtenue est connue sous le nom de formule de Green, ou d’Ostrogradsky, ou encore de Green-Ostrogradsky :
+Th ́eor`eme 3.5.4 (Formule de Green) Soient Ω ⊂ RN ouvert `a bord de classe C1 et V , un champ de vecteurs de classe C1 `a support compact sur Ω. Alors ∫
+Ω
+div V dx =
+∫
+∂Ω
+V · νdσ ,
+ou` ν(x) est le vecteur unitaire normal au point x de ∂Ω pointant vers l’exte ́rieur de Ω, et ou` dσ est l’ ́ele ́ment de surface sur ∂Ω.
+Une conse ́quence imm ́ediate de la formule de Green est l’ ́enonc ́e suivant :
+Corollaire 3.5.5 Soient Ω ⊂ RN ouvert `a bord de classe C1 et φ ∈ Cc1(Ω). Alors ∫
+Ω
+∂xj φdx =
+∫
+∂Ω
+φνjdσ , j = 1, . . . , N,
+ou` ν(x) est le vecteur unitaire normal au point x de ∂Ω pointant vers l’exte ́rieur de Ω, et ou` dσ est l’ ́ele ́ment de surface sur ∂Ω.
+Evidemment, l’ ́enonc ́e du Corollaire 3.5.5 n’est rien d’autre que la formule de Green usuelle appliqu ́ee au champ de vecteurs
+V (x) = φ(x)ej ou` ej est le j-i`eme vecteur de la base canonique de RN .
+R ́eciproquement, en appliquant le Corollaire 3.5.5 a` chaque composante de V et en additionnant membre a` membre les e ́galite ́s ainsi obtenues, on aboutit a` la formule de Green usuelle du Th ́eor`eme 3.5.4. On renvoie le lecteur int ́eress ́e `a [17], Th ́eor`eme 9.10, pour une d ́emonstration de la formule de Green en dimension 3 dans le langage des formes diff ́erentielles — le cas d’une dimension quelconque  ́etant identique. Remarque. Le lecteur qui aurait du mal `a se souvenir de l’orientation du vecteur normal intervenant dans la formule de Green aura int ́erˆet `a comparer cette dernie`re avec la formule usuelle
+∫b
+a
+f ′(x)dx = f (b) − f (a) ,

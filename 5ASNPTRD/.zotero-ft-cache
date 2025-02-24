@@ -1,0 +1,2868 @@
+Me ́canique du Vol
+Olivier Gicquel
+23 septembre 2020
+
+
+ii
+
+
+iii
+Pre ́ambule
+Ce polycopie ́ est le support du cours de Me ́canique du Vol de la mention A ́eronautique-EspaceTransports, de CentraleSup ́elec. Le contenu du cours est une initiation `a cette mati`ere passionnante. Pour le lecteur qui souhaite approfondir ses connaissances dans le domaine de la M ́ecanique du Vol, il est conseill ́e de lire les ouvrages suivants :
+— Bernard Etkin and Lloyd Duff Reid, ”Dynamics of Flight Stability and Control”, ISBN 0-471-03418-5 — Louis V. Schmidt, ”Introduction to Aircraft Flight Dynamics”, AIAA Education Series, ISBN 1-56347-226-0 — Thomas R. Yechout et al, ”Introduction to Aircraft Flight Mechanics”, AIAA Education Series, ISBN 1-56347-577-4 — Bandu N. Pamadi, ”Performance, Stability, Dynamics, and Control of Airplanes Second Edition”, AIAA Education Series, ISBN 1-56347-583-9 — L. George et al, ”La m ́ecanique du vol, performances des avions et des engins”, Dunod 1969
+
+
+iv
+
+
+Table des matie`res
+1 G ́en ́eralit ́es et Conventions 1 1.1 Probl`eme, Tri`edres, Hypoth`eses . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 1.1.1 Bilan des forces agissant sur l’avion . . . . . . . . . . . . . . . . . . . . . 1 1.1.2 Conditions g ́en ́erales du vol . . . . . . . . . . . . . . . . . . . . . . . . . . 1 1.2 Tri`edres de r ́ef ́erences . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 1.2.1 Hypoth`eses utilise ́es . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4 1.3 Notions d’altitude et de vitesse . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5 1.3.1 L’atmosphe`re de r ́ef ́erence : L’atmosph`ere standard . . . . . . . . . . . . . 5 1.3.2 L’altitude . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7 1.3.3 La vitesse . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+2 Performances 15 2.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15 2.2 Equation du vol dans le plan vertical . . . . . . . . . . . . . . . . . . . . . . . . . 16 2.2.1 Hypoth`eses . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16 2.2.2 Bilan des forces exerc ́ees sur l’avion . . . . . . . . . . . . . . . . . . . . . 16 2.2.3 Les  ́equations du mouvement . . . . . . . . . . . . . . . . . . . . . . . . . 16 2.3 Le vol plan ́e . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19 2.3.1 Hypoth`eses . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19 2.3.2 Bilan des forces exerc ́ees sur l’avion . . . . . . . . . . . . . . . . . . . . . 19 2.3.3 Les  ́equations du vol plan ́e . . . . . . . . . . . . . . . . . . . . . . . . . . . 19 2.3.4 La pente a ́erodynamique . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21 2.3.5 Distance franchissable . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22 2.3.6 Vitesse de chute (ou taux de chute) . . . . . . . . . . . . . . . . . . . . . 22 2.3.7 L’endurance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23 2.4 Le vol horizontal . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25 2.4.1 Hypoth`eses . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25 2.4.2 Bilan des forces exerc ́ees sur l’avion . . . . . . . . . . . . . . . . . . . . . 25 2.4.3 Equation du vol `a l’ ́equilibre . . . . . . . . . . . . . . . . . . . . . . . . . 26 2.4.4 Les courbes ”planeur” . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27 2.4.5 Courbes ”moteur” . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30 2.4.6 Utilisation des courbes ”planeur”/”moteur” . . . . . . . . . . . . . . . . . 32 2.5 Vol en mont ́ee . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37 2.5.1 Hypoth`eses . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37 2.5.2 Bilan des forces exerc ́ees sur l’avion . . . . . . . . . . . . . . . . . . . . . 38 2.5.3 Equation du vol en phase stationnaire . . . . . . . . . . . . . . . . . . . . 38
+v
+
+
+vi TABLE DES MATIE`RES
+2.5.4 Grandeurs caract ́eristiques . . . . . . . . . . . . . . . . . . . . . . . . . . 39 2.5.5 Utilisation des diagrammes . . . . . . . . . . . . . . . . . . . . . . . . . . 41 2.5.6 Mont ́ee non-uniforme : Me ́thode de l’ ́energie totale . . . . . . . . . . . . . 44 2.6 Vol en descente . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49 2.6.1 Hypoth`eses . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49 2.6.2 Bilan des forces exerc ́ees sur l’avion . . . . . . . . . . . . . . . . . . . . . 50 2.6.3 Equation du vol en phase stationnaire . . . . . . . . . . . . . . . . . . . . 50 2.6.4 La vitesse de chute v′z . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51 2.6.5 La pente de descente γ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51 2.6.6 Utilisation des diagrammes . . . . . . . . . . . . . . . . . . . . . . . . . . 52 2.7 Facteur de charge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52 2.7.1 Virage parfait . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52 2.7.2 Le virage d ́erap ́e . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55 2.7.3 Le virage gliss ́e . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56 2.7.4 Le looping . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56 2.7.5 L’arrondi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56 2.8 Rayon d’action . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58 2.9 L’endurance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62 2.10 D ́ecollage et atterrissage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63 2.10.1 Le d ́ecollage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63 2.10.2 L’atterrissage . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66
+3 Stabilit ́e statique longitudinale 69 3.1 Moment a ́erodynamique longitudinal . . . . . . . . . . . . . . . . . . . . . . . . . 69 3.2 Le centre de pousse ́e a ́erodynamique . . . . . . . . . . . . . . . . . . . . . . . . . 71 3.3 Le foyer . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73 3.4 Notion de centrage : stabilit ́e d’une aile volante . . . . . . . . . . . . . . . . . . . 74 3.4.1 Cas du centrage avant : . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74 3.4.2 Cas du centrage arri`ere : . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74 3.4.3 Bilan sur la stabilit ́e statique de l’avion . . . . . . . . . . . . . . . . . . . 75 3.5 Test en vol de la stabilit ́e : cas du manche bloque ́ . . . . . . . . . . . . . . . . . . 75 3.5.1 Action du manche pour un avion stable . . . . . . . . . . . . . . . . . . . 77 3.5.2 Action du manche pour un avion instable . . . . . . . . . . . . . . . . . . 77 3.5.3 Action du manche pour un avion neutre . . . . . . . . . . . . . . . . . . . 78 3.6 Test en vol de la stabilit ́e : cas du manche libre . . . . . . . . . . . . . . . . . . . 78 3.7 Cas du d ́eplacement du foyer en vol . . . . . . . . . . . . . . . . . . . . . . . . . 81
+4 Equations du mouvement 83 4.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 83 4.2 Les angles d’Euler . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 83 4.3 Equations du mouvement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 85 4.4 Les  ́equations lin ́earis ́ees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 86 4.5 Formulation matricielle . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 89 4.5.1 Syste`me longitudinal . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 89 4.5.2 Syste`me transversal . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 91 4.6 Liens avec les coefficients ae ́rodynamiques adimensionne ́s . . . . . . . . . . . . . 93
+
+
+TABLE DES MATIE`RES vii
+5 D ́eriv ́ees de stabilit ́e 99 5.1 D ́eriv ́ees de stabilit ́e longitudinales . . . . . . . . . . . . . . . . . . . . . . . . . . 99 5.1.1 De ́rive ́es par rapport `a u/V . . . . . . . . . . . . . . . . . . . . . . . . . . 99 5.1.2 De ́rive ́es par rapport `a α . . . . . . . . . . . . . . . . . . . . . . . . . . . 101 5.1.3 De ́rive ́es par rapport `a q . . . . . . . . . . . . . . . . . . . . . . . . . . . . 103 5.1.4 De ́rive ́es par rapport `a α ̇ . . . . . . . . . . . . . . . . . . . . . . . . . . . 105 5.2 D ́eriv ́ees de stabilit ́e transversales . . . . . . . . . . . . . . . . . . . . . . . . . . . 106 5.2.1 De ́rive ́es de stabilit ́e dues `a β . . . . . . . . . . . . . . . . . . . . . . . . . 107 5.2.2 De ́rive ́es de stabilit ́e dues au moment de lacet, r . . . . . . . . . . . . . . 110 5.2.3 De ́rive ́es de stabilit ́e dues au moment de roulis, p . . . . . . . . . . . . . . 112 5.2.4 De ́rive ́es de stabilit ́e dues dues aux commandes lat ́erales . . . . . . . . . . 114
+6 Stabilit ́e dynamique longitudinale 117 6.1 Cas de l’avion d’attaque A-4D . . . . . . . . . . . . . . . . . . . . . . . . . . . . 117 6.2 L’oscillation d’incidence . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 118 6.3 La Phugoı ̈de . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 119 6.4 L’approximation de l’oscillation d’incidence . . . . . . . . . . . . . . . . . . . . . 121 6.5 L’approximation phugoı ̈de . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 124
+7 Stabilit ́e dynamique transversale 127 7.1 Le Roulis Hollandais . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 128 7.2 Le mouvement de roulis pur . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 129 7.3 Le mode Spirale . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 129
+A Atmosph`ere Standard 133
+B Caract ́eristiques des diff ́erents avions utilis ́es 137 B.1 Le Cessna Skylane . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 137 B.2 Le Cessna Citation 3 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 138 B.3 Le Douglas A4D Skyhawk, avion d’attaque de l’US Navy . . . . . . . . . . . . . 139 B.4 Le McDonnell-Douglas F-4C Phantom II, avion de combat de l’US Air Force . . 141 B.5 Le McDonnell-Douglas DC-8 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 143 B.6 Le Lockheed JetStar . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 145
+
+
+viii TABLE DES MATIE`RES
+
+
+Chapitre 1
+Ge ́ne ́ralite ́s et Conventions
+1.1 Position du proble`me, Tri`edre de r ́efe ́rences, Hypothe`ses
+classiques
+1.1.1 Bilan des forces agissant sur l’avion
+— Forces de masses (pesanteur, forces d’inertie) — Forces de surfaces (forces cre ́es par le d ́eplacement de l’air sur le fuselage, les ailes, les pi`eces mobiles ou fixes. . .) - forces de propulsions - forces a ́erodynamiques Dans certains cas, il est n ́ecessaire d’ajouter des forces consid ́er ́ees comme ponctuelles : roulage, catapultage, remorquage, freinage.
+1.1.2 Conditions g ́ene ́rales du vol
+Les conditions g ́en ́erales de vol sont de ́finies par les deux  ́equations suivantes :
+∑
+Fext = mγ (1.1)
+∑
+M = 0 (1.2)
+1.2 Trie`dres de re ́fe ́rences
+D ́efinitions
+En m ́ecanique du vol, il existe trois tri`edres de r ́ef ́erence. — le tri`edre li ́e `a la terre (O, x0, y0, z0) Ce trie`dre permet de d ́ecrire les mouvements de l’avion par rapport `a la terre. La terre est suppos ́ee plane et l’axe Oz0 est orient ́e suivant la gravite ́. — le tri`edre a ́erodynamique (O, xa, ya, za) Ce tri`edre permet d’exprimer simplement les forces a ́erodynamiques. L’axe Oxa est orient ́e suivant la vitesse. Il est d ́efini positif vers l’avant. L’axe Oza est dans le plan de syme ́trie de l’avion choisi positif vers le dessous de l’avion.
+1
+
+
+2 CHAPITRE 1. GE ́NE ́RALITE ́S ET CONVENTIONS
+— le tri`edre avion (O, x, y, z) Ce tri`edre est li ́e `a l’avion avec l’axe Ox suivant le fuselage positif vers l’avant et Oz positif vers le ventre de l’avion.
+Positions relatives des diff ́erents rep`eres
+tri`edre a ́ero/tri`edre avion : L’angle α entre le trie`dre a ́ero et le tri`edre avion est appele ́ incidence. α est choisi positif quand Ox est au dessus de Oxa (voir figure 1.1). L’angle β repr ́esente l’angle de d ́erapage. Il est positif si l’air souffle sur le cote ́ droit de l’avion (voir figure 1.2).
+Z0
+O
+Z
+Za
+ga q
+a
+X0
+Xa
+X
+Figure 1.1 – Pr ́esentation des diffe ́rents angles utilise ́s en m ́ecanique du vol.
+tri`edre a ́ero/ tri`edre terreste γa est appel ́ee ”pente a ́erodynamique”. Il est choisi comme la projection sur le plan Ox0z0 de l’angle fait par la vitesse (Oxa) avec l’axe Ox0. γ est choisi positif quand l’avion monte. (voir figure 1.2). L’azimut a ́erodynamique ψa est d ́efini comme l’angle entre le plan vertical passant par V et l’axe Ox0. Dans l’e ́tude des performances de l’avion, nous ferons l’hypoth`ese d’un vol syme ́trique donc seul ψ est utile. En cas de vent, il faut differencier ψ et ψa et tenir compte de l’incidence du vent.
+tri`edre avion/ tri`edre terrestre Les angles θ, ψ et φ d ́efinissent respectivement l’assiette longitudinale, l’azimut et l’angle de gˆıte.
+
+
+1.2. TRIE`DRES DE RE ́FE ́RENCES 3
+Ya
+Y0 Y
+Ya
+X0
+Xa
+X
+V
+Y
+b
+Figure 1.2 – Pr ́esentation des diffe ́rents angles utilise ́s en m ́ecanique du vol.
+j
+Y
+Ya
+Y0
+Z0
+Za
+Z
+Figure 1.3 – Pr ́esentation des diffe ́rents angles utilise ́s en m ́ecanique du vol.
+
+
+4 CHAPITRE 1. GE ́NE ́RALITE ́S ET CONVENTIONS
+1.2.1 Hypothe`ses utilise ́es
+— Nous choisissons de nous placer dans le cas d’un vol sym ́etrique (de ́rapage nul). Les forces a ́erodynamiques n’ont donc aucune composante suivant l’axe Oya. Seules restent : la traıˆn ́ee suivant Oxa, la portance suivant Oza. — Les forces a ́erodynamiques sont fonction de la vitesse de l’avion par rapport `a l’air. — Les forces d’inertie font intervenir le mouvement de l’avion par rapport au sol. — Le vent est suppos ́e nul (l’influence du vent est e ́tudie ́e dans le cadre de la navigation a ́erienne). — On n ́eglige les courants ascendants. — La pouss ́ee des propulseurs est paralle`le `a la vitesse donc ne participe pas de fac ̧on notable `a la portance.
+
+
+1.3. NOTIONS D’ALTITUDE ET DE VITESSE 5
+1.3 Notions d’altitude et de vitesse
+Pour de ́finir les performances d’un avion et pouvoir les comparer `a celles d’autres avions, il est n ́ecessaire de d ́efinir une atmosph`ere de r ́ef ́erence. Celle-ci permet de relier une altitude donn ́ee `a la tempe ́rature et la pression qui lui sont associ ́ees. Les diff ́erentes lois r ́egissant cette atmosph`ere ont e ́t ́e obtenues `a l’aide de diffe ́rents moyens de mesure tels que des ballons sondes (voir figure 1.4). La mise en commun de nombreux r ́esultats a permis de tabuler l’ensemble des grandeurs caract ́erisant l’air en fonction de l’altitude. Cette de ́finition reste cependant th ́eorique et n’est que rarement repr ́esentative de la r ́ealit ́e.
+Figure 1.4 – Exemple de lˆacher d’un ballon sonde.
+1.3.1 L’atmosph`ere de re ́fe ́rence : L’atmosphe`re standard
+Il existe plusieurs mod`ele d’atmosph`ere standard de part le monde. Nous allons ici nous limiter au mode`le franc ̧ais (il est identique `a celui utilise ́ par les Etats-Unis).
+D ́efinitions :
+1. L’air est assimil ́e `a un gaz parfait avec une constante massique R = 287 J/kg.K.
+2. L’air est sec.
+3. L’atmosph`ere est au repos. La relation reliant la pression a` l’altitude est alors :
+dp = −ρg(h)dh
+ou` h est l’altitude par rapport au niveau de la mer. Il est possible de reformuler cette expression pour obtenir :
+dp = −ρg0dH (1.3)
+
+
+6 CHAPITRE 1. GE ́NE ́RALITE ́S ET CONVENTIONS
+avec H l’altitude ge ́opotentielle.
+4. L’ ́evolution de la temp ́erature en fonction de l’altitude est la suivante :
+entre 0 et 11 000 m : T (K) = 288.15 + H ∗ (216.65 − 288.15)/11000
+entre 11 000 et 20 000 m : T (K) = 216.65
+entre 20 000 et 32 000 m : T (K) = 216.65 + (H − 20000) ∗ (228.65 − 216.65)/12000
+entre 32 000 et 47 000 m : T (K) = 228.65 + (H − 32000) ∗ (270.65 − 228.65)/12000 L’ ́evolution de la tempe ́rature en fonction de l’altitude est repr ́esent ́ee sur la figure 1.5.
+pente +3°/1000m
+TROPOSAUSE
+-56,5°C
+11 km
+36 000 ft
+25 km
+Altitude
+pente -6.5°/1000m
+15°C T(°C)
+TROPOSHERE
+STRATOSPHERE
+Figure 1.5 – Evolution de la tempe ́rature en fonction de l’altitude dans le cas de l’atmosphe`re standard.
+Altitude de vol
+En utilisant cette de ́finition de l’atmosph`ere, il est possible de d ́efinir des altitudes de vol (flight level). Les avions sont re ́partis sur ces diff ́erentes altitudes de vol par le contrˆole a ́erien. L’altitude de vol classique pour un avion de ligne est de 36 000 ft (FL 360). A partir de cette
+
+
+1.3. NOTIONS D’ALTITUDE ET DE VITESSE 7
+altitude de r ́ef ́erence les avions sont e ́tage ́s tous les 1000 ft. Le Concorde quand `a lui, volait `a FL 600.
+Evolution de la pression en fonction de l’altitude
+En utilisant l’hypoth`ese d’atmosph`ere standard, il est possible de relier analytiquement la pression `a l’altitude. — entre 0 et 11 000 m : P (P a) = 101325(1 − 22.558 10−6H)5.256 — entre 11 000 et 20 000 m :
+P (P a) = 22632e−157.7 10−6(H−11000)
+— entre 20 000 et 32 000 m : P (P a) = 5474.9[1 + 4.615 10−6(H − 20000)]34.163 — entre 32 000 et 47 000 m : P (P a) = 868.014[1 + 12.245 10−6(H − 32000)]−12.2
+Evolution des grandeurs thermodynamiques en fonction de l’altitude
+Dans le cadre de l’atmosph`ere standard on trouve : — masse volumique : ρ = p/rT — densit ́e : σ = ρ/ρ0
+— Vitesse du son : c = √γrT
+— Viscosit ́e :μ = μ0 ∗ 0.083T √T /(T + 110.4) — Viscosit ́e cine ́matique : ν = μ/ρ avec ρ0 = 1.225 Kg/m3, μ0 = 17.82 U SI, r = 287 U SI et γ = Cp/Cv = 1.4 L’ensemble des formules pr ́esent ́ees pr ́ec ́edemment permet donc de d ́efinir comple`tement les caract ́eristiques locales de l’atmosph`ere en fonction de l’altitude. Cependant l’utilisation de ces formules s’ave ́rant un peu fastidieuse, de nombreux abaques sont disponibles. Une table d ́efinissant l’atmosphe`re standard est disponible en annexe A. Une formule empirique permet de calculer tr`es simplement la densit ́e de l’air en fonction de l’altitude :
+σ = 20 − Z
+20 + Z (1.4)
+avec l’altitude Z exprim ́e en kilom`etres, P0 = 101325P a et ρ0 = 1.225kg/m3. Les r ́esultats obtenus sont particuli`erement satisfaisants pour les altitudes fre ́quent ́ees par les avions de lignes.
+1.3.2 L’altitude
+Connaıˆtre exactement son altitude lorsque l’on est dans avion est, bien qu’ ́etant quelque chose de particuli`erement cruciale, assez difficile. Il existe, en effet, diff ́erentes d ́efinitions de l’altitude qui ne sont pas  ́equivalentes : — L’altitude g ́eom ́etrique, h : elle repr ́esente la distance entre le sol et l’avion. Elle est assez difficile `a mesurer.
+
+
+8 CHAPITRE 1. GE ́NE ́RALITE ́S ET CONVENTIONS
+— L’altitude g ́eopotentielle, H : elle est bas ́ee sur l’hypoth`ese d’atmosph`ere standard en supposant g0 = 9.806 ms−2 = cte. Elle est obtenue `a partir de la pression locale et des formules d ́efinissant l’atmosph`ere standard. — L’altitude pression : Elle correspond a` une pression/hauteur. Si l’atmosph`ere est dans les conditions standards, elle est e ́gale `a l’altitude g ́eopotentielle. L’atmosph`ere r ́eelle n’ ́etant que tr`es rarement dans ces conditions, le pilote annonce une altitude qui n’est en fait qu’une pression. Ainsi un pilote annon ̧cant une altitude de 11 000 m, annonce en re ́alite ́ une altitude ou` re`gne une pression de 22 631 Pa.
+Alt g ́eopotentielle (m) 0 5000 11000 20000 47000 Alt ge ́ome ́trique (m) 0 5004 11019 20063 47350
+Table 1.1 – Comparaison entre l’altitude g ́eopotentielle et l’altitude g ́eom ́etrique
+Il est important de r ́ealiser que dans les phases de vol stationnaire, la connaissance exacte de l’altitude n’est pas primordiale. La seule chose qui soit re ́ellement importante est de s’assurer que tous les avions volant au mˆeme endroit utilisent la mˆeme d ́efinition de l’altitude. En effet l’ ́etagement des avions  ́etant bas ́e sur le FL 360, tous les avions se calent par rapport a` ce niveau. L’altitude annonce ́e par les pilotes est donc celle qu’ils lisent sur leur altim`etre soit une altitude pression.
+1.3.3 La vitesse
+Technique pour mesurer la vitesse
+Pour mesurer la vitesse de l’avion, diff ́erentes techniques sont disponibles, nous ne nous int ́eresserons ici qu’`a la technique de r ́ef ́erence : l’utilisation d’un tube de Pitot. Dans la plupart des avions, deux prises de pressions sont pr ́evues : la premi`ere sert `a mesurer la pression d’arreˆt et la seconde la pression statique (Fig. 1.6). En reliant ces deux prises de pression `a un manom ́etre diff ́erentiel il est possible de d ́eterminer la vitesse de l’avion. Il est important de comprendre que
+Figure 1.6 – Prise de pression d’arreˆt situ ́ee sous l’aile d’un avion de tourisme
+cette technique mesure une diff ́erence de pression et non une vitesse. La vitesse n’est obtenue qu’en utilisant les relations math ́ematiques reliant la diffe ́rence de pression et la vitesse. La
+
+
+1.3. NOTIONS D’ALTITUDE ET DE VITESSE 9
+relation classique (Bernoulli) qui relie ces deux grandeurs est la suivante :
+∆p = pt − p = ρV 2
+∞/2 (1.5)
+Cette relation n’est valable qu’`a faible vitesse, pour un  ́ecoulement subsonique, la v ́eritable formule (formule de St Venant) est obtenue en supposant que l’ ́ecoulement est isentropique et adiabatique :
+∆p = pt − ps = ps
+(
+1 + (γ − 1)
+2 M2
+∞
+)γ
+γ−1
+− ps (1.6)
+Dans le cas supersonique, il faut appliquer la formule de Rayleigh :
+∆p = pt
+( (γ + 1)M 2∞
+2
+)
+γ
+γ−1 ( γ + 1
+2γM 2∞ − (γ − 1)
+)1
+γ−1
+(1.7)
+Dans le cas ou` le Mach de vol est faible il est possible de lin ́eariser (1.6) :
+∆p = pt − ps = ps
+γ
+2M2
+∞ (1.8)
+En utilisant :
+c = √γrT et p = ρrT
+il est possible de r ́e ́ecrire (1.8) en utilisant les relations pr ́ece ́dentes :
+∆p = ps
+γ
+2M2
+∞= 1
+2 ρ∞V 2
+∞ (1.9)
+A faible vitesse la formule de St Venant se simplifie donc pour donner celle de Bernoulli. Pour pouvoir utiliser la mesure donn ́ee par le tube de Pitot, il est n ́ecessaire de l’ ́etalonner. Cet  ́etalonnage est effectue ́ au sol, pour ρ = ρ0. Pour chaque valeur de ∆P mesur ́ee, une valeur de la vitesse est de ́termine ́e. Pour e ́viter au pilote de faire des conversions entre la pression mesur ́ee et la vitesse, le manom`etre est directement gradu ́e en vitesse.
+La vitesse conventionnelle Vc
+Pour r ́ealiser l’e ́talonnage de l’an ́emom`etre, il est possible d’utiliser les formules (1.8 ou 1.6) `a basse vitesse et uniquement (1.6) pour les vitesses  ́elev ́ees. Cependant quelle que soit la formule utilise ́e, celle ci fait intervenir la masse volumique. Lors de l’e ́talonnage, la masse volumique est suppos ́ee constante et e ́gale `a ρ0. La vitesse donn ́ee par le manom`etre sera donc entache ́e d’une erreur li ́ee `a la non prise en compte de la variation de densit ́e de l’air ambiant. La vitesse mesure ́e n’est  ́egale `a la vitesse vraie qu’au sol ou` ρ = ρ0. Ce probl`eme est mis en  ́evidence par les figures 1.7 et 1.8 ou` est repr ́esent ́ee l’e ́volution du diff ́erentiel de pression calcul ́e `a partir de la formule de Rayleigh ou la formule de Bernoulli en fonction de la vitesse vol pour deux altitudes (le niveau de la mer et 10 000 m). Ce r ́esultat montre que pour un mˆeme ∆P , la vitesse correspondante est tr`es diffe ́rente suivant l’altitude de vol. La vitesse affich ́ee sur l’ane ́mome`re est appel ́ee : vitesse conventionnelle, Vc. Pour relier Vc `a la vitesse vraie V , il existe un abaque dit : abaque de Chevalier (Fig. 1.9). Les  ́ecarts entre ces deux vitesses peuvent ˆetre non n ́egligeables comme le montre le tableau 1.2.
+
+
+10 CHAPITRE 1. GE ́NE ́RALITE ́S ET CONVENTIONS
+Figure 1.7 – Repr ́esentation du ∆P calcul ́e, au niveau de la mer avec la formule de Rayleigh ainsi qu’avec la formule de Bernoulli et `a une altitude 10 000 m avec la formule de Rayleigh en fonction de la vitesse de vol.
+H(m) 11000 11000 11000 V(kt) 181.2 512.2 965.9 Mach 0.316 0.893 1.684 Vc(kt) 100 300 600 EV(kt) 98.8 279.2 526.5
+Table 1.2 – Comparaison entre les diff ́erentes vitesses
+
+
+1.3. NOTIONS D’ALTITUDE ET DE VITESSE 11
+Figure 1.8 – Repr ́esentation du logarithme de ∆P calcul ́e, au niveau de la mer avec la formule de Rayleigh ainsi qu’avec la formule de Bernoulli et a` une altitude 10 000 m avec la formule de Rayleigh en fonction de la vitesse de vol.
+
+
+12 CHAPITRE 1. GE ́NE ́RALITE ́S ET CONVENTIONS
+iso-Mach
+H
+iso-EV
+V
+iso-Vc
+Figure 1.9 – Abaque dit de Chevalier
+
+
+1.3. NOTIONS D’ALTITUDE ET DE VITESSE 13
+Pourquoi utiliser Vc ?
+Pour bien comprendre l’int ́erˆet de la vitesse conventionnelle, il ne faut pas voir l’an ́emom ́etre comme un instrument de navigation mais comme un instrument de pilotage. Dans cette optique, il est plus important de savoir si l’avion risque de d ́ecrocher plutˆot que de savoir `a quelle vitesse vraie va l’avion. Nous allons introduire, ici, en quelques lignes la notion de de ́crochage : l’avion d ́ecroche quand la portance ae ́rodynamique n’est plus suffisante pour e ́quilibrer le poids de l’avion. La portance est donne ́e par l’ ́equation suivante :
+L= 1
+2 ρSV 2CL (1.10)
+La valeur maximale de CL, CLmax et l’ ́equation (1.10) permettent de connaıˆtre la vitesse minimale que doit avoir l’avion pour se maintenir dans les airs. Cette vitesse est d ́efinie comme la vitesse d ́ecrochage, Vdecro.
+mg = L = 1
+2 ρSV 2
+decroCLmax (1.11)
+Les risques de d ́ecrochage ont ge ́ne ́ralement lieu `a basse vitesse (d ́ecollage, approche, atterrissage). Dans ce cas de figure, il est possible d’utiliser la formule (1.9), ce qui donne :
+∆p = 1
+2 ρV 2 = 1
+2 ρ0V 2
+c (1.12)
+Il est donc possible de re ́e ́crire (1.10) :
+mg = L = 1
+2 ρ0SV 2
+c CL (1.13)
+ce qui donne une vitesse limite inf ́erieure de vol, Vclim, `a ne jamais franchir sous peine de voir l’avion de ́crocher.
+Vclim =
+√ 2mg
+ρ0SCL
+(1.14)
+L’an ́emom`etre sert alors d’indicateur de de ́crochage. Ceci est particuli`erement int ́eressant car la vitesse conventionnelle de de ́crochage est inde ́pendante des variations de densite ́. La vitesse conventionnelle sera donc utilis ́ee pour d ́efinir des domaines de vol.
+L’ ́equivalent vitesse
+Certaines personnes utilisent une autre vitesse appel ́ee l’ ́equivalent vitesse EV. Il est de ́fini comme suit :
+EV = √σV
+Il sert aussi d’indicateur de d ́ecrochage et est  ́equivalent `a Vc `a basse vitesse, ou` la relation de Bernoulli peut s’appliquer. A grande vitesse Vc et EV diff`erent  ́enorm ́ement (voir tableau 1.2). A basse vitesse nous avons :
+CLmax = mg/ 1
+2 ρ0S(EV )2 (1.15)
+
+
+
+
+Chapitre 2
+Performances
+2.1 Introduction
+Lors de l’ ́etude d’un ve ́hicule, il est important de pouvoir re ́pondre `a de nombreuses questions sur ses performances. Dans le cas d’un avion, parmi les questions les plus couramment pos ́ees, nous pouvons trouver, en autres, les questions suivantes : Quelle est sa vitesse maximale ? Quelle altitude maximale peut-il atteindre ? A quelle vitesse et suivant quelle pente peut-il monter ? Quel est son rayon d’action ? Le but de ce chapitre est d’essayer de r ́epondre `a ces questions. Les performances d’un avion d ́ependent de son poids, de ses caract ́eristiques ae ́rodynamiques et de la pouss ́ee ou de la puissance fournie par ses moteurs. Dans le cadre de cours, nous supposerons que les forces de traıˆn ́ee et de portance peuvent s’ ́ecrire sous la forme suivante :
+D= 1
+2 ρSV 2CD (2.1)
+L= 1
+2 ρSV 2CL (2.2)
+avec ρ la densit ́e de l’air, S une surface de r ́ef ́erence, V la vitesse de l’avion et CD et CL les coefficients de traıˆn ́ee et de portance. Ces deux coefficients sont obtenus de la fac ̧on suivante :
+CL = a(α − α0) (2.3)
+CD = CD0 + kC2
+L (2.4)
+avec a une constante caract ́eristique de l’avion, α l’incidence, α0 l’incidence associ ́ee `a une portance nulle, CD0 le coefficient de traıˆn ́ee associ ́e `a une portance nulle et kC2
+L le terme caract ́erisant la traıˆn ́ee induite. La constante k peut s’ ́ecrire sous la forme suivante :
+k= 1
+πeλ (2.5)
+avec λ = B2/S l’allongement avec B l’envergure de l’avion et e une constante caract ́erisant le profil, e = 1 pour un profil elliptique et e < 1 pour les autres profils. Ce coefficient e est d ́etermin ́e `a partir de mesures en soufflerie.
+15
+
+
+16 CHAPITRE 2. PERFORMANCES
+2.2 Equation du vol dans le plan vertical
+2.2.1 Hypothe`ses
+Pour pouvoir mettre en  ́evidence les ph ́enom`enes importants, nous allons faire les hypoth`eses simplificatrices suivantes : — Le centre de pouss ́ee et le centre de gravit ́e sont suppos ́es confondus — Le vol est suppos ́e syme ́trique
+2.2.2 Bilan des forces exerce ́es sur l’avion
+Comme dans tout probl`eme de me ́canique, il est important de faire un bilan exhaustif des forces exerce ́es sur l’avion. — Le poids : P — La pouss ́ee due aux moteurs : T — Les forces a ́erodynamique Ra qui peuvent se d ́ecomposer en : L la force de portance D la force de traıˆn ́ee
+Z=Za
+Fz
+Fx
+Z0
+P
+Ra
+αε
+V
+X0
+X=Xa γ
+Figure 2.1 – Projection des diff ́erentes forces exerc ́ees sur l’avion.
+La figure 2.1 reprend l’ensemble de ces forces. Il est important de se rappeler que la portance L est perpendiculaire `a la vitesse et la traıˆn ́ee D sur le meˆme axe que la vitesse. La pouss ́ee T s’exerce suivant l’axe de l’avion.
+2.2.3 Les  ́equations du mouvement
+Les mouvements de l’avion dans le plan vertical sont r ́egis par les deux e ́quations suivantes :
+T cos(α − ) − D − P sin γ = P
+g
+dV
+dt (2.6)
+
+
+2.2. EQUATION DU VOL DANS LE PLAN VERTICAL 17
+T sin(α − ) + L − P cos γ = P
+g
+V2
+R (2.7)
+avec l’angle de calage des moteurs, α l’angle d’incidence de l’avion, P le poids de l’avion, γ l’angle form ́e par le vecteur vitesse et l’horizontale appele ́e la pente a ́erodynamique, R le rayon local de giration et V la vitesse tangente `a la trajectoire. L’ensemble de ces notations sont report ́ees sur la figure 2.3. Dans le cadre de l’ ́etude classique des performances d’un avion, nous supposons que la pouss ́ee des moteurs est align ́ee avec l’axe de l’avion, soit : = 0. De mˆeme nous supposerons que l’angle d’incidence de l’avion est faible. Nous nous plac ̧ons dans le cas d’un vol stationnaire. Les e ́quations 2.6 et 2.7 s’ ́ecrivent dans ces conditions :
+T − D − P sin γ = 0 (2.8)
+L − P cos γ = 0 (2.9)
+A ces deux  ́equations, nous pouvons ajouter les deux e ́quations suivantes qui permettent de d ́eterminer la position de l’avion dans l’espace :
+x ̇ = V cos γ (2.10)
+ ̇h = V sin γ (2.11)
+Il est possible d’exprimer les  ́equations pr ́ec ́edentes de fa ̧con plus compactes en utilisant les grandeurs adimensionn ́ees suivantes :
+f = CL
+CD
+(2.12)
+n= L
+P (2.13)
+t = T.fmax
+P (2.14)
+u= V
+VR
+(2.15)
+VR =
+√
+2.P
+ρ.S
+4
+√
+k
+CD0
+(2.16)
+
+
+18 CHAPITRE 2. PERFORMANCES
+ou` f est la finesse ae ́rodynamique, fmax la finesse maximale, n le facteur de charge, t la pouss ́ee adimensionn ́ee, u est la vitesse adimensionne ́e par VR, la vitesse de r ́ef ́erence, VR correspondant `a la vitesse associ ́ee `a la traıˆn ́ee minimale. Pour d ́eterminer la finesse maximale fmax, il suffit de trouver le point pour lequel la d ́eriv ́ee de 1/f est nulle.
+1
+f = CD
+CL
+= CD0 + kC2
+L CL
+(2.17)
+pour d ́eterminer la valeur maximale de la finesse,
+d
+dCL
+( CD
+CL
+)
+= −CD0 + kC2
+L
+C2
+L
+= 0 (2.18)
+ce qui donne :
+C∗
+L=
+√ CD0
+k (2.19)
+ou encore
+( CD
+CL
+)
+min
+= 2√kCD0 (2.20)
+ce qui donne pour la finesse maximale :
+fmax =
+( CL
+CD
+)
+max
+=1
+2
+√kCD0
+(2.21)
+Il est possible d’exprimer la traıˆne ́e en fonction des grandeurs adimensionn ́ees :
+D= 1
+2 ρV 2S(CD0 + kC2
+L). (2.22)
+Il est possible d’exprimer le coefficient de portance en fonction du poids de l’avion et du facteur de charge :
+CL = 2nP
+ρV 2S . (2.23)
+2.22 s’e ́crit alors :
+D= 1
+2 ρV 2S
+(
+CD0 +
+( 4kn2P 2 ρ2V 4S2
+))
+(2.24)
+ou encore
+D= 1
+2 ρS
+(
+CD0 V 2 +
+( 4kn2P 2 ρ2V 2S2
+))
+(2.25)
+ce qui donne en fonction des grandeurs adimensionn ́ees :
+
+
+2.3. LE VOL PLANE ́ 19
+D= P
+2fmax
+(
+u2 + n2
+u2
+)
+(2.26)
+Les e ́quations 2.6 et 2.7 peuvent s’ ́ecrire :
+tP
+fmax
+−P
+2fmax
+(
+u2 + n2
+u2
+)
+− P sin γ = 0 (2.27)
+ou encore
+2tu2 − u4 − n2 − 2fmaxu2 sin γ = 0 (2.28)
+et
+n − cos γ = 0 (2.29)
+2.3 Le vol plane ́
+Tout les avions quelles que soient leurs motorisations, sont avant tout des planeurs. Il est donc important de commencer l’ ́etude des performances d’un avion par l’ ́etude de ses performances dans le cas du vol plan ́e.
+2.3.1 Hypothe`ses
+— L’angle de calage de la voilure est suppos ́e nul. L’incidence de l’avion est  ́egale `a l’angle d’attaque de l’aile. — La pouss ́ee des moteurs est nulle. — Nous nous limitons au cas du vol plan ́e stationnaire uniforme. — Le vol est suppos ́e syme ́trique
+2.3.2 Bilan des forces exerce ́es sur l’avion
+— Le poids : P — Les forces a ́erodynamique Ra qui peuvent se d ́ecomposer en : La portance L La traıˆn ́ee D La pente a ́erodynamique est ne ́gative : γ < 0. La projection dans le plan vertical des diff ́erentes forces qui s’exercent sur l’avion est donn ́ee sur la figure 2.2.
+2.3.3 Les  ́equations du vol plane ́
+Les e ́quations 2.6, 2.7, 2.10 et 2.11 s’ ́ecrivent alors :
+D + P sin γ = 0 (2.30)
+L − P cos γ = 0 (2.31)
+
+
+20 CHAPITRE 2. PERFORMANCES
+Z0
+Ra
+Fx
+Z=Za
+Fz
+P
+θ=γ
+X=Xa
+X0
+V
+T
+Figure 2.2 – Projection des diff ́erentes forces exerc ́ees sur l’avion.
+x ̇ = V cos γ (2.32)
+ ̇h = V sin γ (2.33)
+Dans la plupart des cas de vol plan ́e, la pente ae ́rodynamique est faible. Il est donc possible de r ́e ́ecrire les  ́equations pr ́ec ́edentes comme suit :
+D + P γ = 0 (2.34)
+L = P (2.35)
+x ̇ = V (2.36)
+ ̇h = V γ (2.37)
+Les forces de portance et de traıˆn ́ee sont donn ́ees par :
+L= 1
+2 ρSV 2CL (2.38)
+
+
+2.3. LE VOL PLANE ́ 21
+et
+D= 1
+2 ρSV 2CD = 1
+2 ρSV 2(CD0 + kC2
+L) (2.39)
+Les  ́equations 2.35 et 2.38 permettent d’exprimer la vitesse de l’avion en fonction de son poids et du coefficient de portance :
+V=
+√
+2P
+ρSCL
+(2.40)
+2.3.4 La pente ae ́rodynamique
+L’angle de descente ( la pente ae ́rodynamique ) est obtenue `a partir des  ́equations 2.34 et 2.35 :
+γ = −D
+P
+= −D
+L
+= −1
+f
+(2.41)
+L’angle de descente minimal, γmin est donc obtenu pour la finesse maximale. Le poids du planeur  ́etant constant tout au long de sa descente, l’expression pr ́ec ́edente permet aussi de montrer que la finesse maximale est obtenue lorsque la traıˆn ́ee est minimale.
+γmin = − 1
+fmax
+= − Dmin
+P (2.42)
+L’ ́equation 2.19 nous donne le coefficient de portance associ ́e `a la finesse maximale, il est donc possible de de ́terminer la vitesse de vol associe ́e `a l’angle de descente minimal :
+V=
+√
+2P
+ρS C ∗
+L
+(2.43)
+ou encore
+Vγmin =
+√
+2P
+ρS
+4
+√
+k
+CD0
+= VR (2.44)
+La vitesse de r ́ef ́erence de ́finie dans la section pr ́ec ́edente (2.16) correspond donc a` la vitesse de l’avion lors d’un vol plane ́ avec une pente de descente minimale.
+
+
+22 CHAPITRE 2. PERFORMANCES
+2.3.5 Distance franchissable
+Pour de ́terminer la distance franchissable, R par un planeur partant d’une altitude hi, il faut proc ́eder de la fa ̧con suivante :
+dx
+dt = V (2.45)
+dx
+dh
+dh
+dt = V (2.46)
+dx
+dh = V
+V γ (2.47)
+dx
+dh = 1
+γ = −f (2.48)
+La distance franchissable, R, est obtenue en int ́egrant l’ ́equation pr ́ec ́edente entre l’altitude initiale, hi, et le sol, hf :
+R=−
+∫ hf
+hi
+f dh (2.49)
+Dans le cas ou` l’angle d’incidence de l’avion reste constant durant tout le vol, la finesse est, elle aussi, constante. Il est alors possible de re ́e ́crire l’ ́equation pr ́ec ́edente comme suit :
+R = f ∆h (2.50)
+avec ∆h = hi − hf . Pour un meˆme ∆f la distance franchissable est proportionnelle `a la finesse f et sera maximum pour un vol effectu ́e `a finesse maximale.
+Rmax = fmax∆h = ∆h
+2
+√kCD0
+(2.51)
+2.3.6 Vitesse de chute (ou taux de chute)
+La vitesse de chute de l’avion est not ́ee v′z, elle correspond `a la composante dans le plan vertical de la vitesse de l’avion. Elle est obtenue comme suit :
+v′
+z = −V γ
+= DV
+P
+=
+√
+2P
+ρSCL
+( CD
+CL
+)
+=
+√
+2P
+ρS
+(
+CD C 3/2
+L
+)
+(2.52)
+
+
+2.3. LE VOL PLANE ́ 23
+Nous pouvons constater que la vitesse de chute est minimale quand DV ( la puissance ne ́cessaire
+pour le vol plan ́e ) est minimale. Cette configuration correspond au cas ou` Cx/C3/2
+z est minimal soit :
+d
+dCL
+(
+CD C 3/2
+L
+)
+=0
+d
+dCL
+(
+CD0 + kC2
+L C 3/2
+L
+)
+=0
+−3
+2
+CD0 C 5/2
+L
++k
+2 C−1/2
+L =0
+3CD0 = kC2
+L
+(2.53)
+soit
+CLv′zmin
+=
+√ 3CD0
+k = √3C∗
+L (2.54)
+La vitesse de l’avion dans le cas d’un vol plan ́e `a vitesse de descente minimale est :
+Vv′zmin =
+√
+2P
+ρS
+4
+√
+k
+3CD0
+' 0.76VR (2.55)
+La vitesse de chute minimum est, elle, donn ́ee par :
+v′
+zmin = 4
+√
+2P
+ρS
+4
+√
+k3CD0
+27 (2.56)
+2.3.7 L’endurance
+L’endurance correspond au temps que le planeur reste en l’air. Il peut eˆtre de ́termine ́ comme suit :
+dt = dh
+V γ , (2.57)
+ce qui donne apr`es inte ́gration :
+t=
+√ ρS
+2P
+(
+C 3/2
+L CD
+)
+(hi − hf ) (2.58)
+Le temps pass ́e en vol est maximum quand (C3/2
+L /CD) est maximum. Comme nous venons de le voir dans la section pr ́ec ́edente, cette condition nous donne :
+CL =
+√ 3CD0
+k = √3C∗
+L (2.59)
+
+
+24 CHAPITRE 2. PERFORMANCES
+et
+V ' 0.76VR (2.60)
+ce qui donne :
+tmax =
+√ ρS
+2P
+4
+√
+27
+k3CD0
+( hi − hf
+4
+)
+(2.61)
+Exemple 2.1
+Soit un planeur ayant les caract ́eristiques suivantes : P = 2000 N, S = 8 m2, λ = 16.0, e = 0.95, CD0 = 0.015. Il est laˆche ́ par l’avion qui le tracte `a une altitude de 300 m. Calculer le rayon d’action maximum ainsi l’angle de descente correspondant, ainsi que la vitesse et le coefficient de portante CL. La densit ́e de l’air sera prise  ́egale a` ρ = 1.225 kg/m3
+k= 1
+πλe
+=1
+π ∗ 16 ∗ 0.95 = 0.02
+ce qui donne
+fmax= 1
+2
+√kCD0
+=1
+2√0.02 ∗ 0.015 = 28.86
+donc
+Rmax= fmax∆h
+= 28.86 ∗ 300 = 8.658 km
+ou encore pour l’angle de descente minimum
+γmin= 1
+fmax
+=1
+28.86 = 0.0346 rad = 1.985 deg
+Vγmin =
+√
+2P
+ρS
+4
+√
+k
+CD0
+=
+√ 2 ∗ 2000
+1.2258.0
+4
+√ 0.02
+0.015 = 23.328 m.s−1
+CL=
+√ CD0 k
+=
+√ 0.015
+0.02 = 0.866
+
+
+2.4. LE VOL HORIZONTAL 25
+Exemple 2.2
+Un planeur ayant un poids de 5000 N est  ́equip ́e d’une aile elliptique d’une surface 10 m2. Pour assurer une descente stabilis ́ee suivant un angle de 3 deg, la vitesse du planeur doit ˆetre de 50 m.s−1. Nous supposerons que pour ce planeur CD0 = 0.015, quel est alors son aspect ratio A. Le planeur  ́etant  ́equip ́e d’un profil d’aile elliptique, nous savons que : e = 1.
+γ= − CD
+CL = 3 ∗ 2π
+360 = −0.0524 rad
+CL= 2P
+ρSV2 = 2 ∗ 5 000
+1.225 ∗ 10 ∗ 502
+CD= CL.γ
+= 0.326 ∗ 0.0524 = 0.01708
+k= CD − CD0
+C2
+L
+= 0.01708 − 0.015
+0.3262 = 0.0196
+λ= 1
+kπe
+=1
+0.0196 ∗ π ∗ 1 = 16.20
+2.4 Le vol horizontal
+2.4.1 Hypothe`ses
+— L’angle de calage de la voilure est suppos ́e nul. L’incidence de l’avion est  ́egale `a l’angle d’attaque de l’aile. — Le centre de pouss ́ee et le centre de gravit ́e sont suppos ́es confondus — Nous nous limitons au cas du vol stationnaire uniforme `a altitude constante. — Le vol est suppos ́e syme ́trique
+2.4.2 Bilan des forces exerce ́es sur l’avion
+— Le poids : P — La pouss ́ee due aux moteurs : T — Les forces a ́erodynamique Ra qui peuvent se d ́ecomposer en : La portance L La traıˆn ́ee D La figure 2.3 reprend l’ensemble de ces forces. Il est important de se rappeler que la portance L est perpendiculaire `a la vitesse et la traˆın ́ee D sur le meˆme axe que la vitesse. La pouss ́ee T s’exerce suivant l’axe de l’avion.
+
+
+26 CHAPITRE 2. PERFORMANCES
+Za
+P
+Fz
+Fx
+Ra
+a
+T
+Xa
+X
+V
+Figure 2.3 – Projection des diff ́erentes forces exerc ́ees sur l’avion.
+2.4.3 Equation du vol a` l’e ́quilibre
+Dans le cas du vol horizontal et uniforme et en effectuant les hypoth`eses e ́nonce ́es pr ́ec ́edemment les e ́quations 2.6, 2.7, 2.10 et 2.11 deviennent :
+P = L + T sin α (2.62)
+D = T cos α (2.63)
+x ̇ = V (2.64)
+ ̇h = 0 (2.65)
+Pour la plupart des avions, en vol de croisi`ere l’angle d’incidence α est tre`s faible. Les  ́equations pr ́ec ́edentes peuvent donc se simplifier pour donner un jeu d’ ́equations extrˆemement simples :
+P = L (2.66)
+D = T (2.67)
+x ̇ = V (2.68)
+ ̇h = 0 (2.69)
+ou encore
+P=1
+2 ρSV 2CL (2.70)
+T=1
+2 ρSV 2CD (2.71)
+Il est alors possible de relier la pouss ́ee, la traıˆn ́ee et la finesse de l’avion par la relation suivante :
+P
+T = CL
+CD
+= f (2.72)
+
+
+2.4. LE VOL HORIZONTAL 27
+2.4.4 Les courbes ”planeur”
+La caract ́erisation d’un avion se fait en  ́etudiant dans un premier temps l’a ́erodynamique de l’avion celui-ci  ́etant alors consid ́er ́e comme un planeur, puis dans un deuxie`me temps en  ́etudiant la motorisation. L’ ́etude du planeur permet de d ́eterminer les besoins de l’avion pour voler en palier suivant la vitesse de vol souhait ́ee. Une fois ces besoins d ́etermin ́es, il est possible de choisir une motorisation adapt ́ee. Les moteurs disponibles sur le march ́e sont caract ́eris ́es soit par leur pouss ́ee (les turbor ́eacteurs) ou leur puissance (les moteurs a` he ́lice). Il existe donc deux types de courbes ”planeur” : — Les courbes donnant la traıˆn ́ee en fonction de la vitesse, — Les courbes donnant la puissance n ́ecessaire en fonction de la vitesse.
+D ́etermination des courbes ”planeur” `a partir de l’e ́tude de la polaire
+On d ́efinit une courbe ”planeur” pour une altitude donn ́ee, un poids d’avion donn ́e et une polaire donne ́e (Fig. 2.4). Il est possible `a partir de l’ ́etude de la polaire de d ́eterminer l’ ́evolution
+CZ
+a0
+a2
+a4
+Cx
+Figure 2.4 – Polaire de l’avion
+de la traıˆn ́ee en fonction de la vitesse. Le raisonnement appliqu ́e est synth ́etis ́e dans le tableau 2.1. La courbe ”planeur” (traıˆn ́ee/vitesse) ainsi obtenue est pre ́sent ́ee sur la figure 2.5. En utilisant la relation suivante, il est possible de de ́terminer la courbe ”planeur” puissance/vitesse (Fig. 2.5).
+W =T ∗V
+
+
+28 CHAPITRE 2. PERFORMANCES
+V Vmin ↗ Vfmax ↗ ∞
+α α4 ↘ α2 ↘ α0 f f4 ↗ fmax ↘ 0 T=P
+f T4 ↘ Tmin ↗ ∞
+Table 2.1 – D ́etermination de l’ ́evolution de la traıˆn ́ee du planeur en fonction de sa vitesse
+a2
+a2
+Vfmax
+VWmin
+a4
+a3
+Vmin
+Wmin
+W4
+T4
+Tmin
+Vmin
+Tn
+W
+a4
+V
+Vfmax
+V
+Figure 2.5 – Courbes ”planeur”
+
+
+2.4. LE VOL HORIZONTAL 29
+D ́etermination des courbes ”planeur” `a partir des  ́equations du mouvement
+La courbe planeur repr ́esente la pouss ́ee n ́ecessaire, Tn, `a fournir en fonction de la vitesse. La pouss ́ee  ́etant e ́gale `a la traıˆn ́ee dans le cas du vol en palier, nous  ́etudierons l’ ́evolution de la traıˆne ́e en fonction de la vitesse pour de ́terminer les  ́equations de la courbe ”planeur”. L’expression de la traıˆn ́ee est donn ́ee par la formule suivante :
+Tn = D = 1
+2 ρSV 2(CD0 + kC2
+L) (2.73)
+Le facteur de charge  ́etant nul, le coefficient de portance s’exprime en fonction du poids et de la vitesse comme suit :
+CL = 2P
+ρSV 2 . (2.74)
+La pouss ́ee n ́ecessaire peut alors s’e ́crire :
+Tn = 1
+2 ρSV 2
+(
+CD0 + 4kP 2
+ρ2S2V 4
+)
+(2.75)
+ou encore
+Tn = 1
+2 ρSV 2CD0
+} {{ }
+traıˆn ́ee de frottement
++ 2kP 2
+ρSV 2
+} {{ }
+traıˆn ́ee induite
+(2.76)
+L’expression de la pouss ́ee n ́ecessaire en fonction de la vitesse est caract ́eristique des avions. Elle est compose ́e de deux termes, la traˆın ́ee de frottement et la traıˆn ́ee induite, qui  ́evoluent de fa ̧con inverse suivant la vitesse. La traıˆn ́ee de frottement augmente avec la vitesse alors que la traıˆn ́ee induite diminue avec la vitesse. L’ ́evolution de la traıˆn ́ee induite s’explique par le fait qu’`a basse vitesse l’avion doit avoir un CL  ́elev ́e pour assurer sa portance alors qu’a` haute vitesse la portance e ́tant assur ́ee en grande partie par le terme V 2 le CL est re ́duit. L’ ́evolution de la pouss ́ee n ́ecessaire en fonction de la vitesse e ́tant la re ́sultante de ces deux grandeurs, elle connaıˆt un minimum. La vitesse correspondant a` la pouss ́ee n ́ecessaire minimale peut ˆetre obtenue en d ́erivant 2.76 :
+ρSV CD0 − 4kP 2
+ρSV 3 = 0 (2.77)
+ce qui donne
+VTnmin =
+√
+2P
+ρS
+4
+√
+k
+CD0
+(2.78)
+En substituant 2.78 dans 2.76, il est possible de d ́eterminer la pousse ́e n ́ecessaire minimale pour faire voler l’avion :
+Tnmin = 2P √kCD0 (2.79)
+
+
+30 CHAPITRE 2. PERFORMANCES
+La puissance n ́ecessaire au vol en palier, Wn, est donn ́ee par l’expression suivante :
+Wn = D.V = T.V
+=1
+2 ρV 3SCD0 +
+( 2kP 2
+ρV S
+) (2.80)
+Comme dans le cas de la vitesse, la puissance n ́ecessaire est la r ́esultante de deux composantes ayant un comportement inverse en fonction de la vitesse. Il existe donc une vitesse pour laquelle la puissance n ́ecessaire `a fournir pour faire voler l’avion en palier est minimale. Pour la d ́eterminer, nous pouvons proc ́eder comme suit :
+dWn
+dV = 3
+2 ρV 2SCD0 −
+( 2kP 2
+ρV 2S
+)
+= 0, (2.81)
+ce qui donne pour une vitesse associ ́ee `a la puissance minimale :
+VWnmin =
+√
+2P
+ρS
+4
+√
+k
+3CD0
+=1
+4 √3 VR (2.82)
+La vitesse VWnmin  ́etant connue, il est possible de d ́eterminer le coefficient de portance correspondant :
+CLWnmin = 2P
+ρSV 2
+Wn min
+(2.83)
+ou encore
+CLWnmin =
+√ 3CD0
+k = √3C∗
+L (2.84)
+de mˆeme, la finesse vol li ́ee `a la puissance n ́ecessaire minimale pour le vol en palier en donne ́es par :
+fWnmin = 0.866fmax (2.85)
+ce qui finalement donne pour la puissance n ́ecessaire minimale au vol en palier :
+Wnmin = P VWnmin
+0.866fmax
+(2.86)
+2.4.5 Courbes ”moteur”
+Trois types de moteur sont disponibles pour  ́equiper les avions : — les groupes motopropulseurs (moteurs a` pistons + h ́elices) ; — les turbor ́eacteurs ; — les turbopropulseurs (une turbine fait tourner une he ́lices).
+
+
+2.4. LE VOL HORIZONTAL 31
+Les groupes motopropulseurs
+Un groupe motopropulseur regroupe un moteur `a pistons qui entraıˆne une h ́elice. Un moteur `a pistons est caracte ́rise ́ par la puissance qu’il est capable de fournir (Wm). L’h ́elice, elle, est caracte ́rise ́e par un coefficient d’efficacit ́e (ηh) qui caract ́erise son aptitude `a transformer la puissance me ́canique en puissance propulsive r ́eellement utile (Wu).
+Wu = ηh ∗ Wm
+L’ ́evolution de Wu en fonction de la vitesse est pre ́sent ́ee sur la figure 2.6. Pour une vitesse inf ́erieure a` VA, le rendement de l’he ́lice augmente avec la vitesse permettant ainsi l’augmentation de Wu. Dans la plage de vitesse comprise en VA et VB, Wu est maintenue constante en jouant sur le pas de l’h ́elice. Pour des vitesses supe ́rieures `a VB, le rendement de l’h ́elice diminue entraıˆnant avec lui Wu. Si l’altitude augmente la densit ́e de l’air diminue, ce qui provoque une diminution de la puissance me ́canique (Wm) donc de Wu.
+W
+Va
+Z2
+Z3
+Z1
+Vb V
+Figure 2.6 – Evolution de Wu en fonction V pour un groupe motopropulseur avec Z1 < Z2 < Z3.
+Le turbor ́eacteur
+La pouss ́ee fournie par un turbor ́eacteur, Tu est proportionnelle `a la quantite ́ d’air d ́eplac ́ee ainsi qu’`a sa variation de quantit ́e de mouvement.
+Tu = m ̇ air(Vjet − Vavion)
+Dans le cadre de ce cours, le terme (Vjet − Vavion) sera suppos ́e constant dans toutes les phases de vol. Seul m ̇ air diminue avec l’altitude. La pouss ́ee d’un turbor ́eacteur, dans ces conditions, ne de ́pend que la densit ́e de l’air et peut donc s’ ́ecrire de la fac ̧on suivante :
+Tu(z) = σT u(sol)
+
+
+32 CHAPITRE 2. PERFORMANCES
+La figure 2.7 repr ́esente la pouss ́ee Tu fournie par un turbor ́eacteur en fonction de la vitesse et de l’altitude de l’avion. La puissance utile, Wu, est aussi pr ́esente ́e.
+W
+V
+Tu
+Z3
+V
+Z1
+Z1
+Z2
+Z3
+Z2
+Figure 2.7 – Evolution de Tu et Wu en fonction V pour un turbor ́eacteur avec Z1 < Z2 < Z3.
+2.4.6 Utilisation des courbes ”planeur”/”moteur”
+Une fois les courbes ”planeur” et ”moteur” d ́etermin ́ees, il suffit de les superposer pour v ́erifier si la motorisation choisie est adapte ́e `a l’avion dessine ́. La puissance ou la pouss ́ee fournie par le moteur doit en effet ˆetre suffisante pour compenser la puissance n ́ecessit ́ee par le planeur.
+
+
+2.4. LE VOL HORIZONTAL 33
+cas du groupe motopropulseur
+Le diagramme regroupant les deux courbes ”moteur” et ”planeur” est pr ́esent ́e sur la figure 2.8. Sur cette courbe, deux points caract ́eristiques O2 et O1 apparaissent. Ils correspondent `a deux configurations de vol ou` la puissance utile fournie par le groupe motopropulseur est exactement  ́egale `a la puissance n ́ecessaire pour faire voler le planeur. Dans la zone comprise entre les points O1 et O2, il existe une r ́eserve de puissance. Ce diagramme permet aussi de montrer que jamais l’avion pre ́sent ́e ici ne pourra voler `a une vitesse inf ́erieure `a V2 ou `a une vitesse supe ́rieure `a V1.
+a2
+W
+O1
+a3
+a4
+V
+O2 Wu
+Wn
+Figure 2.8 – Diagramme des puissances pour un groupe motopropulseur.
+cas du groupe turbor ́eacteur
+Le raisonnement est le mˆeme que dans le cas pr ́ec ́edent. Il suffit seulement de tracer le diagramme dans le repe`re vitesse-pouss ́ee et non vitesse-puissance (voir figure 2.9). Les re ́sultats trouv ́es `a partir de l’analyse du graphique 2.9 peuvent aussi ˆetre retrouver analytiquement. Pour cela nous posons :
+T = D (2.87)
+=1
+2 ρSV 2(CD0 + kC2
+L) (2.88)
+=1
+2 ρSV 2CD0 +
+( 2kP 2
+ρSV 2
+)
+(2.89)
+cette e ́quation peut s’ ́ecrire sous la forme
+AV 4 − T V 2 + B = 0 (2.90)
+
+
+34 CHAPITRE 2. PERFORMANCES
+a2
+T
+O1
+a4
+V
+Tn
+Tu
+O2
+Figure 2.9 – Diagramme des pouss ́ees pour un turbore ́acteur.
+avec
+A= 1
+2 ρSCD0
+B=
+( 2kP 2
+ρS
+) (2.91)
+La solution de cette e ́quation donne :
+Vmax =
+√
+T + √T 2 − 4AB
+2A
+Vmin =
+√
+T − √T 2 − 4AB
+2A
+(2.92)
+L’avion peut donc voler `a deux vitesses diff ́erentes Vmin ou Vmax. Cependant, il est important de ve ́rifier que lorsque l’avion vol `a Vmin, il est capable de cr ́eer une force de portance suffisante pour compenser le poids de l’avion P . La force de portance est donn ́ee par :
+L= 1
+2 ρSV 2CL (2.93)
+Pour r ́eduire la vitesse de l’avion, il est ne ́cessaire d’augmenter au maximum le coefficient de portance CL, ce qui nous donne une vitesse de vol minimale ou vitesse de d ́ecrochage :
+Vdec =
+√
+2P
+ρS CLmax
+(2.94)
+
+
+2.4. LE VOL HORIZONTAL 35
+Si Vmin < Vdec alors, l’avion, ne peut voler a` Vmin. La plage de vitesse utile est alors : Vdec < V < Vmax.
+Les  ́equations qui viennent d’eˆtre pr ́esent ́ees sont exactes, mais elles sont peu pratiques pour conduire des calculs manuellement. Il est possible d’en obtenir une formulation plus l ́eg`ere en utilisant les  ́equations adimensionne ́es du mouvement. 2.28 et 2.29 donne alors :
+u4 − 2tu2 + 1 = 0 (2.95)
+n = 1 (2.96)
+ce qui donne comme solution pour les vitesses adimensionne ́es :
+umax =
+√
+t+
+√
+t2 − 1 (2.97)
+umin =
+√
+t−
+√
+t2 − 1 (2.98)
+soit pour les vitesses dimensionn ́ees :
+Vmax = umax ∗ VR (2.99)
+Vmin = umin ∗ VR (2.100)
+Exemple 2.3
+Soit un avion  ́equip ́e de turbore ́acteur ayant un poids de 50 000 N et une surface de voilure S = 32 m2. Sa polaire est la suivante : CD = 0.014 + 0.038C2
+L avec CLmax = 1.5. La pouss ́ee fournie par ses turbor ́eacteurs est donn ́ee par : T = 20000σ N. De ́terminer ses vitesses de vol minimale et maximale pour un vol au niveau de la mer ainsi que pour un vol a` une altitude de 9 000 m (σ = 0.3813). Quelle est son altitude de vol maximale ? Pour pouvoir utiliser les  ́equations adimensionne ́es, nous devons de ́terminer la finesse maximale :
+fmax= 1
+2
+√kCD0
+=1
+2√0.038 ∗ 0.014 = 21, 68
+Dans le cas d’un vol au niveau de la mer, nous avons :
+t= Tfmax
+P
+= 20 000 ∗ 21.68
+50 000 = 8.67
+VR=
+√
+2P
+ρS
+4
+√
+k
+CD0
+=
+√ 2 ∗ 50 000
+1.225 ∗ 32
+4
+√ 0.038
+0.014 = 64.82 m.s−1
+
+
+36 CHAPITRE 2. PERFORMANCES
+umax=
+√
+t+
+√
+t2 − 1
+=
+√
+8.67 +
+√
+8.672 − 1 = 4.16
+umin=
+√
+t−
+√
+t2 − 1
+=
+√
+8.67 −
+√
+8.672 − 1 = 0.24
+ce qui donne
+Vmax= umax ∗ VR
+= 64.82 ∗ 4.16 = 269, 52 m.s−1
+Vmin= umin ∗ VR
+= 64.82 ∗ 0.24 = 15, 59 m.s−1
+Il faut maintenant v ́erifier si Vmin > Vdec
+Vdec=
+√
+2P
+ρSCLmax
+=
+√ 2 ∗ 20 000
+1.225 ∗ 32 ∗ 1.5 = 41.2 m.s−1
+comme Vmin < Vdec les deux vitesses de vol autoris ́ees pour cet avion, au niveau de la mer, seront :
+Vmax= 269.52 m.s−1
+Vmin= 41.2 m.s−1
+Passons au cas o`u l’altitude de vol est 9 000 m. σ = 0.3813 ce qui nous donne une densite ́ pour l’air  ́egale `a ρ = 0.4671 ainsi qu’une pouss ́ee fournie par les moteurs de T = 7 262 N. Nous obtenons avec ces nouvelles donn ́ees :
+t= Tfmax
+P
+= 7 262 ∗ 21.68
+50 000 = 3.31
+VR=
+√
+2P
+ρS
+4
+√
+k
+Cx0
+=
+√ 2 ∗ 50 000
+0.3813 ∗ 32
+4
+√ 0.038
+0.014 = 104.98 m.s−1
+umax=
+√
+t+
+√
+t2 − 1
+=
+√
+8.67 +
+√
+8.672 − 1 = 2.54
+umin=
+√
+t−
+√
+t2 − 1
+=
+√
+8.67 −
+√
+8.672 − 1 = 0.39
+
+
+2.5. VOL EN MONTE ́E 37
+ce qui donne
+Vmax= umax ∗ VR
+= 104.98 ∗ 2.54 = 266.79 m.s−1
+Vmin= umin ∗ VR
+= 104.98 ∗ 0.39 = 41.31 m.s−1
+Il faut maintenant v ́erifier si Vmin > Vdec
+Vdec=
+√
+2P
+ρSCLmax
+=
+√ 2 ∗ 7 262
+0.4671 ∗ 32 ∗ 1.5 = 66, 78 m.s−1
+comme Vmin < Vdec les deux vitesses de vol autoris ́ees pour cet avion, `a une altitude 9 000 m, seront :
+Vmax= 266, 79 m.s−1
+Vmin= 66, 78 m.s−1
+Il reste `a d ́eterminer l’altitude maximale `a laquelle l’avion puisse voler. Nous savons que la pouss ́ee fournie par les turbor ́eacteurs diminue avec l’altitude. Il existe donc une altitude ou` l’avion ne poss ́edera plus de r ́eserve de puissance. Il devra alors n ́ecessairement voler `a la finesse maximale. Dans ce cas, nous avons z = 1. A partir de son expression, nous pouvons d ́eterminer la pouss ́ee correspondant `a ce vol, `a partir de cette pousse ́e et de la loi d’e ́volution de la pousse ́e en fonction de la densit ́e, nous remontons `a la densit ́e locale. Cette densite ́ nous permet alors, `a partir des tables de l’atmosphe`re standard, de retrouver l’altitude est donc de connaˆıtre le plafond de propulsion.
+T= zP
+fmax
+= 1 ∗ 50 000
+21.68 = 2306 N
+σ= T
+T0 = 2306
+20 000 = 0, 3024
+ce qui correspond `a une altitude de 12 000 m (voir table de l’atmosph`ere standard en annexe).
+2.5 Vol en mont ́ee
+2.5.1 Hypothe`ses
+— L’angle de calage de la voilure est suppos ́e nul. L’incidence de l’avion est  ́egale `a l’angle d’attaque de l’aile. — Le centre de pouss ́ee et le centre de gravit ́e sont suppos ́es confondus. — Nous nous limitons au cas du vol rectiligne uniforme. — Le vol est suppos ́e syme ́trique — L’incidence (α) est n ́egligeable devant le pente a ́erodynamique (γ) : θ = γ.
+
+
+38 CHAPITRE 2. PERFORMANCES
+2.5.2 Bilan des forces exerce ́es sur l’avion
+— Le poids : P — La pouss ́ee due aux moteurs : T — Les forces a ́erodynamique Ra qui peuvent se d ́ecomposer en : La portance L La traıˆn ́ee D
+Z=Za
+Z0
+Fz
+Fx
+P
+Ra
+q=g
+V
+X0
+T X=Xa
+Figure 2.10 – Projection des diff ́erentes forces exerc ́ees sur l’avion.
+2.5.3 Equation du vol en phase stationnaire
+Pour d ́eterminer les relations d ́ecrivant la phase de mont ́ee, les diff ́erentes forces sont projete ́es sur les axes du rep`ere a ́erodynamique :
+ ́equation de sustentation : P cos(γ) = L (2.101)
+ ́equation de propulsion : Tu = D + P sin(γ) (2.102)
+Dans le cas d’une mont ́ee standard pour un avion de ligne, l’angle de mont ́ee est inf ́erieur `a 10◦. Il est donc possible de simplifier les deux e ́quations pr ́ec ́edentes :
+ ́equation de sustentation : P = L (2.103)
+ ́equation de propulsion : Tu = D + P sin(γ) (2.104)
+Il est int ́eressant de remarquer que l’ ́equation de sustentation reste la meˆme que pour le vol rectiligne horizontal. L’avion ne monte pas en raison d’une augmentation de la portance, mais grˆace `a une augmentation de la pousse ́e fournie par le moteur. L’augmentation de pouss ́ee `a fournir pour pouvoir monter suivant une pente γ est donne ́e par la relation suivante :
+∆Tu = P sin(γ) (2.105)
+
+
+2.5. VOL EN MONTE ́E 39
+2.5.4 Grandeurs caracte ́ristiques
+Deux grandeurs caract ́erisent la phase de monte ́e pour un avion : — la vitesse ascensionnelle vz ; — la pente de mont ́ee γ.
+La vitesse ascensionnelle vz
+La vitesse ascensionnelle est d ́efinie de la fac ̧on suivante : en multipliant l’e ́quation de propulsion (2.104) par V on obtient :
+Tu.V = D.V + P.V sin(γ). (2.106)
+Il est alors possible de faire apparaıˆtre la puissance utilise fournie par le moteur (Wu) et la puissance ne ́cessaire `a la sustentation de l’avion (Wn) :
+Wu = Wn + P.V sin(γ). (2.107)
+La vitesse de mont ́ee vz  ́etant relie ́e `a la vitesse V de l’avion ainsi qu’`a la pente de mont ́ee γ par vz = V sin(γ) on peut  ́ecrire :
+Wu = Wn + P.vz. (2.108)
+ou encore
+vz = ∆W
+P (2.109)
+La vitesse de mont ́ee est donc directement proportionnelle `a la r ́eserve de puissance que poss`ede l’avion.
+D ́etermination analytique de la vitesse de mont ́ee dans le cas d’un groupe turbor ́eacteur : Pour effectuer cette approche analytique, la pente de mont ́ee est suppos ́ee faible et que le facteur de charge est  ́egal `a 1. L’ ́equation 2.27 se r ́eduit alors `a :
+tP
+fmax
+−P
+2fmax
+(
+u2 + 1
+u2
+)
+− P sin γ = 0 (2.110)
+ce qui donne :
+sin γ = 1
+2fmax
+[
+2t −
+(
+u2 + 1
+u2
+)]
+(2.111)
+La vitesse ascensionnelle adimensionn ́ee s’ ́ecrit alors :
+u sin γ = 1
+2fmax
+[
+2tu −
+(
+u3 + 1
+u
+)]
+(2.112)
+La vitesse de monte ́e maximale est obtenue pour :
+du sin γ
+du = 0
+d
+du
+(
+2tu − u3 − 1
+u
+)
+=0
+(2.113)
+
+
+40 CHAPITRE 2. PERFORMANCES
+ce qui donne :
+3u4 − 2tu2 − 1 = 0 (2.114)
+ou encore
+u=
+√
+t ± √t2 + 3
+3 (2.115)
+La vitesse de monte ́e ascensionnelle adimensionn ́ee maximum est donc :
+(u sin γ)max = 1
+2fmax
+[
+2tum −
+(
+u3
+m+ 1
+um
+)]
+(2.116)
+avec
+um =
+√
+t + √t2 + 3
+3 (2.117)
+ce qui donne :
+vzmax = (V sin γ)max = (u sin γ)maxVR (2.118)
+La pente de mont ́ee γ
+vz  ́etant la composante verticale de la vitesse de l’avion, elle est d ́efinie comme suit :
+sin(γ) = vz
+V (2.119)
+En utilisant la relation (2.109) on obtient :
+sin(γ) = Wu − Wn
+P.V (2.120)
+ou encore
+sin(γ) = V.Tu
+P.V − V.Tn
+P.V (2.121)
+en utilisant la d ́efinition de la finesse, on trouve :
+sin(γ) =
+( Tu
+P −1
+f
+)
+(2.122)
+Dans de nombreux cas, la pente de mont ́ee  ́etant faible (inf ́erieure `a 10◦), on parle de la pente de mont ́ee en l’exprimant en pourcentage Pente% = 100 sin(γ) ' 100 tan(γ).
+Pente% = 100
+( Tu
+P −1
+f
+)
+(2.123)
+
+
+2.5. VOL EN MONTE ́E 41
+D ́etermination analytique de la pente de mont ́ee dans le cas d’un groupe turbor ́eacteur : Pour effectuer cette approche analytique, nous allons supposer que la pente de mont ́ee est faible et que le facteur de charge est  ́egal `a 1. L’ ́equation 2.27 se r ́eduit alors `a :
+tP
+fmax
+−P
+2fmax
+(
+u2 + 1
+u2
+)
+− P sin γ = 0 (2.124)
+ce qui donne :
+sin γ = 1
+2fmax
+[
+2t −
+(
+u2 + 1
+u2
+)]
+(2.125)
+La pente de mont ́ee maximum est obtenue quand :
+d sin γ
+du = − 1
+2fmax
+(
+2u − 2
+u3
+)
+=0
+(2.126)
+L’angle de mont ́ee maximum est obtenu pour :
+u = 1 (2.127)
+ce qui correspond `a V = VR. Nous obtenons donc pour la pente maximal de mont ́ee :
+γmax = sin−1
+(t − 1
+fmax
+)
+(2.128)
+2.5.5 Utilisation des diagrammes
+La vitesse ascensionnelle vz et la pente de mont ́ee peuvent ˆetre facilement de ́termin ́ees `a partir des diagrammes ”planeur”/”moteurs”.
+Cas des groupes motopropulseurs
+A partir des diagrammes de la figure 2.11, nous pouvons constater que : — la vitesse ascentionnelle vz est maximale pour la valeur maximale du surplus de puissance ∆W ; — la vitesse maximale de monte ́e est obtenue pour une pente de mont ́ee γ inf ́erieure `a
+γmax ;
+— la pente de mont ́ee maximale est obtenue pour un angle d’incidence sup ́erieur `a α3 ; — quand la re ́serve de puissance est nulle, ∆W = 0, la vitesse de monte ́e est nulle, l’avion vole en palier ; — le plafond de propulsion, altitude maximale de vol accessible en ne tenant compte que des probl`emes de propulsion, est obtenu pour l’incidence α = α3.
+cas du turbor ́eacteur
+Dans le cas d’une motorisation `a base de turbor ́eacteurs, la figure 2.12 permet de tirer les conclusions suivantes : — La vitesse de monte ́e maximale est obtenue quand la r ́eserve de puissance est maximale ; — la pente de mont ́ee maximale γmax est obtenue pour l’incidence finesse maximale α2, ce qui est parfaitement coh ́erent avec la formule 2.122 ;
+
+
+42 CHAPITRE 2. PERFORMANCES
+a3 a2
+g max
+Vz max
+DW
+W
+Vz
+a4
+V
+V
+Wn
+Wu
+Figure 2.11 – Utilisation du diagramme de puissance dans le cas d’un groupe motopropulseur pour d ́eterminer vz et la pente de mont ́ee γ.
+
+
+2.5. VOL EN MONTE ́E 43
+a3 a2
+Vz max
+g max
+W
+Vz
+a4
+V
+Wn
+Wu
+DW
+V
+Figure 2.12 – Utilisation du diagramme de puissance dans le cas d’un turbor ́eacteur pour d ́eterminer vz et la pente de mont ́ee γ.
+
+
+44 CHAPITRE 2. PERFORMANCES
+D ́etermination des plafonds de propulsion
+Pour d ́eterminer le plafond de propulsion d’un avion, il suffit de reprendre les diagrammes pr ́ec ́edents et d’y faire figurer les diff ́erentes courbes moteurs tenant compte de l’altitude de vol. Dans le cas d’un groupe motopropulseur le plafond de propulsion est obtenu pour l’incidence de vol α3 correspondant Wnmin (voir figure 2.13), alors que dans le cas d’un avion  ́equip ́e de turbor ́eacteur le plafond de propulsion est obtenu en volant `a l’incidence de finesse maximale α = α2 (voir figure 2.14)
+a3
+a4
+W
+V
+Wu(Z3)
+Wu(Z2)
+Wu(Z1)
+Wn
+Figure 2.13 – Utilisation du diagramme de puissance dans le cas d’un groupe motopropulseur pour d ́eterminer le plafond de propulsion avec Z1 < Z2 < Z3.
+2.5.6 Monte ́e non-uniforme : Me ́thode de l’e ́nergie totale
+Dans le cas d’une mont ́ee `a vitesse non constante, les  ́equations 2.6, 2.7, 2.10 et 2.11 s’ ́ecrivent :
+T − D − P sin γ = P
+g
+dV
+dt (2.129)
+L − P cos γ = P
+g V dγ
+dt (2.130)
+x ̇ = V cos γ (2.131)
+ ̇h = V sin γ (2.132)
+
+
+2.5. VOL EN MONTE ́E 45
+a2
+a4
+W
+V
+Wn
+Wu(Z1)
+Wu(Z2)
+Wu(Z3)
+Wu(Z4)
+Figure 2.14 – Utilisation du diagramme de puissance dans le cas d’un turbor ́eacteur pour d ́eterminer le plafond de propulsion avec Z1 < Z2 < Z3 < Z4.
+L’ ́equation 2.129 peut aussi s’ ́ecrire :
+T −D
+P − sin γ = 1
+g
+dV
+dt (2.133)
+ou encore
+V
+(T − D
+P
+)
+− V sin γ = 1
+2g
+dV 2
+dt (2.134)
+Il est donc possible de de ́finir la hauteur totale ht
+ht = h + V 2
+2g (2.135)
+A partir de 2.132, 2.134 et 2.135 on obtient :
+dht
+dt = V
+(T − D
+P
+)
+= Ws (2.136)
+ou` Ws repr ́esente l’exc`es de puissance ramen ́e au poids de l’avion. Le temps pour passer d’une altitude totale hti `a une altitude totale htf donn ́ee est obtenu par :
+t=
+∫ htf
+hti
+dht
+Ws
+(2.137)
+
+
+46 CHAPITRE 2. PERFORMANCES
+Il est particuli`erement important pour un avion de pouvoir minimiser ce temps de mont ́ee. Dans le cas des avions commerciaux, le pilote doit pouvoir de ́gager le plus rapidement possible l’espace a ́erien de l’ae ́roport d’ou` il vient de de ́coller et rejoindre son altitude de vol ou` sa consommation de carburant est minimale. Concernant les avions de chasse, on comprend tr`es bien l’avantage que peut avoir un intercepteur `a minimiser le temps qu’il met `a rejoindre une altitude donn ́ee. Il est possible de minimiser cette int ́egrale `a partir d’une approche graphique. Pour cela, il faut tracer, les iso-exce`s de puissance ramen ́ee au poids, Ws sur un graphique (V, h).
+Temps de mont ́ee minimum : cas de l’avion subsonique
+En utilisant l’hypoth`ese de monte ́e stationnaire que nous avons faite au d ́ebut de cette section, le temps de mont ́ee minimum est obtenu quand a` chaque instant la vitesse ascensionnelle, vz est maximale. La trajectoire correspondant a` cette solution est donn ́ee sur la figure 2.15 (trajectoire entre A et B). La solution obtenue montre que, dans ce cas, l’avion ne vole pas `a vitesse constante ce qui est en contradiction avec les hypoth`eses de vol stationnaire. Pour corriger cette erreur, il faut utiliser la m ́ethode de l’e ́nergie totale. Dans ce cas, l’ ́etude de la formule 2.137 permet de d ́eduire que pour minimiser le temps de mont ́ee, il faut que pour chaque valeur d’altitude totale ht, l’exce`s de puissance soit maximum ce qui minimise le terme dht/Ws. La trajectoire ainsi obtenue est repr ́esent ́ee sur la figure 2.15 par la courbe AB′. L’ensemble des points de la courbe AB′ correspondent localement aux endroits o`u les iso-altitude totale sont tangents aux iso-exc`es de puissance. Dans le cas des avions subsoniques, ces deux trajectoires sont assez proches ce qui rend l’approximation faite dans le cas du vol stationnaire tout `a fait valable ?.
+Temps de mont ́ee minimum : cas de l’avion supersonique
+Le cas des avions supersoniques est assez diffe ́rents de celui des avions subsoniques. Nous nous limiterons, ici , aux cas avions supersoniques d’ancienne g ́en ́eration qui e ́taient limit ́es en exc`es de puissance dans les phases transsonique et supersonique. Cette caract ́eristique se traduit sur la figure 2.16. Dans la zone subsonique, les iso-Ws sont identiques `a ceux des avions subsoniques. Par contre dans les zones transsonique et supersonique, la limitation en exc`es de puissance disponible se traduit par des discontinuit ́es des iso-Ws comme il est possible de le voir sur la figure 2.16. Pour d ́eterminer la trajectoire correspondant au temps de monte ́e minimum, il faut identifier une trajectoire qui soit caract ́eris ́ee par une  ́evolution croissante de l’altitude totale tout en assurant que localement l’exc`es de puissance de maximum. Pour ce faire dans le zone subsonique, l’avion doit suivre la mˆeme trajectoire qu’un avion subsonique standard, trajectoire entre A et B sur la figure 2.16. Une fois en B, l’avion continue sa progression suivant une iso-ht jusqu’en C, ou` il rejoint une nouvelle iso-Ws. Durant cette phase de vol, l’avion cesse de monter pour perdre d’altitude en acc ́el ́erant, atteignant ainsi des vitesses supersoniques. Une fois en C, l’avion reprend sa mont ́ee en suivant la trajectoire C-D en volant `a une vitesse supersonique. Arriv ́e en D l’avion change un nouvelle fois d’attitude pour rejoindre sa destination finale E. Durant cette derni`ere phase, l’avion monte en d ́ec ́el ́erant. Cette trajectoire, bien que particuli`erement peu intuitive, est la fac ̧on la plus rapide, en raison de la limitation en exce`s de pouss ́ee, de rejoindre le point E depuis le point A. Dans le cas des intercepteurs modernes, il n’y a plus de proble`me manque d’exc`es de puissance ce qui fait disparaıˆtre toutes les discontinuit ́es des iso-Ws. La minimisation du temps de mont ́ee devient alors similaire au cas des avions subsoniques. La vitesse
+
+
+2.5. VOL EN MONTE ́E 47
+Figure 2.15 – Trajectoire pour minimiser le temps de mont ́ee d’un avion subsonique [of ?].
+Figure 2.16 – Trajectoire pour minimiser le temps de mont ́e d’un avion supersonique [tire ́e de ?]
+
+
+48 CHAPITRE 2. PERFORMANCES
+vz redevient alors un crit`ere pr ́epond ́erant dans le choix d’un avion militaire. Quelques exemples de vz sont donne ́s dans le tableau 2.2
+Avion Type vzmax au niveau de la mer Temps de mont ́ee minimum Mirage III Intercepteur 5.0 km/min 3 min pour 11 km Mirage 2000 Intercepteur 14,94 km/min 2,4 min pour 14,94 km F-111 Combat 10,94 km/min N/A F-4 Combat 8.534 km/min N/A F-14 Intercepteur 9.14 km/min N/A F-15 Combat 15.24 km/min N/A F-16 Combat 15.24 km/min N/A
+Table 2.2 – Performances en mont ́ee de diffe ́rents avions militaires
+Exemple 2.4
+Un avion pesant 156 960 N est propuls ́e par des turbore ́acteurs dont la pousse ́e totale ne varie pas avec la vitesse. La vitesse de mont ́ee maximale au niveau de la mer est obtenue pour une vitesse de vol de 152.5 ms−1. La surface de l’aile est de 46 m2. La polaire de l’avion est donn ́ee par : Cx = 0.016 + 0.045Cz2 et Czmax = 1.5. Calculer la pouss ́ee de ́veloppe ́e par le moteur au niveau de la mer, le coefficient de portance et les vitesses de vol minimale et maximale au niveau de la mer. Calculer le plafond de propulsion en supposant que la pouss ́ee varie avec l’altitude comme suit : T = T0σ0.6. Nous avons donc : P = 156 960 N, S = 46 m2, Cx0 = 0.016, k = 0.045, Czmax = 1.5, ρ0 = 1.225 kg/m3 et (vz)max = 152.5 ms−1. Nous avons :
+fmax= 1
+2
+√kCx0
+=1
+2√0.045 ∗ 0.016 = 18.64
+et
+VR=
+√
+2P
+ρS
+4
+√
+k
+Cx0
+=
+√ 2 ∗ 156 960
+1.225 ∗ 46
+4
+√ 0.045
+0.016 = 96.136 m.s−1
+ce qui donne :
+um= V(vz)max
+VR = 152.5
+96.136 = 1.5863
+comme nous l’avons vu, la vitesse ascensionnelle maximale est obtenue pour :
+3u4
+m − 2t0u2
+m−1=0
+
+
+2.6. VOL EN DESCENTE 49
+ce qui donne
+t0= fmaxT0
+P = 3u4m − 1
+2u2m
+= 3(1.5863)4 − 1
+2(1.5863)2 = 3.5758
+ou encore T0 = 30 110.6790 N Le coefficient de portance est donn ́e par :
+Cz = 2P
+ρS(V)2
+(vz )max
+= 0.2370
+Les vitesses de vol minimale et maximale sont obtenues comme suit :
+umax =
+√
+t0 +
+√
+t20 − 1 = 2.6474
+Vmax = umaxVR = 254.51 m.s−1
+et
+umin =
+√
+t0 −
+√
+t20 − 1 = 2.6474
+Vmin = uminVR = 36.31 m.s−1
+comme `a chaque fois, il faut v ́erifier si la vitesse minimale n’est pas inf ́erieure `a la vitesse de d ́ecrochage :
+Vdec =
+√
+2PρSCzmax = 60.6135 m.s−1
+il est donc impossible pour l’avion de voler `a Vmin. Quand l’avion vole `a son plafond de propulsion, il n’a plus de r ́eserve puissance, il vole donc `a finesse maximale pour minimiser la traˆın ́ee. Dans ce cas nous avons t = 1, ce qui donne :
+t = t0σ0.6fmax
+P ou encore
+σ=
+( tP
+T0fmax
+)1/0.6
+= 0.1196
+En utilisant la table d’atmosph`ere standard, nous trouvons une altitude de 16 800 m comme plafond de propulsion.
+2.6 Vol en descente
+2.6.1 Hypothe`ses
+— L’angle de calage de la voilure est suppos ́e nul. L’incidence de l’avion est  ́egale `a l’angle d’attaque de l’aile. — Le centre de pouss ́ee et le centre de gravit ́e sont suppos ́es confondus. — L’ ́etude est limit ́ee au cas du vol rectiligne uniforme. — Le vol est suppos ́e syme ́trique — L’incidence (α) est n ́egligeable devant le pente a ́erodynamique (γ) : θ = γ.
+
+
+50 CHAPITRE 2. PERFORMANCES
+2.6.2 Bilan des forces exerce ́es sur l’avion
+— Le poids : P — La pouss ́ee due aux moteurs : T — Les forces a ́erodynamique Ra qui peuvent se d ́ecomposer en : La portance L La traıˆn ́ee D
+Z0
+P
+Fz
+Z=Za
+Fx
+Ra
+TV
+X0
+X=Xa
+q=g
+Figure 2.17 – Projection des diff ́erentes forces exerc ́ees sur l’avion.
+2.6.3 Equation du vol en phase stationnaire
+A partir des hypoth`eses  ́enonc ́ees pr ́ec ́edemment, il est possible de re ́e ́crire les e ́quations 2.6, 2.7, 2.10 et 2.11 comme suit :
+P cos(γ) = L (2.138)
+Tu − P sin(γ) = D (2.139)
+x ̇ = V cos γ (2.140)
+ ̇h = V sin γ (2.141)
+Comme dans le cas de la mont ́ee, lors d’une descente standard pour un avion de ligne l’angle de descente est infe ́rieur `a 10 degr ́es. Il est donc possible de simplifier les deux  ́equations pr ́ec ́edentes :
+P = L (2.142)
+Tu − P sin(γ) = D (2.143)
+x ̇ = V (2.144)
+ ̇h = V sin γ (2.145)
+
+
+2.6. VOL EN DESCENTE 51
+Il est int ́eressant de remarquer que si l’on coupe les moteurs (Tu = 0) le syst`eme d’e ́quation qui d ́ecrit la descente de l’avion est celui d’un planeur. Deux grandeurs caract ́erisent la phase de monte ́e pour un avion : — la vitesse de chute ou taux de chute v′z ; — la pente de descente γ.
+2.6.4 La vitesse de chute v′
+z
+La vitesse de chute est de ́finie de la fa ̧con suivante : en multipliant l’ ́equation de propulsion (2.143) par V on obtient :
+Tu.V − P.V sin(γ) = D.V. (2.146)
+Il est alors possible de faire apparaıˆtre la puissance utile fournie par le moteur (Wu) et la puissance ne ́cessaire `a la sustentation de l’avion (Wn) :
+Wu − P.V sin(γ) = Wn. (2.147)
+La vitesse de chute v′z  ́etant relie ́e `a la vitesse V de l’avion ainsi qu’`a la pente de descente γ par
+v′z = V sin(γ) on peut  ́ecrire :
+Wu − P.v′
+z = Wn. (2.148)
+ou encore
+v′
+z = ∆W′
+P (2.149)
+La vitesse chute est donc directement proportionnelle au manque de puissance de l’avion, ∆W ′ = Wu − Wn.
+2.6.5 La pente de descente γ
+Si la pente de monte ́e est inf ́erieure `a 10 degr ́es, il possible d’ ́ecrire :
+tan(γ) = v′z
+V (2.150)
+En utilisant la relation (2.149) on obtient
+tan(γ) = Wu − Wn
+P.V (2.151)
+ou encore
+tan(γ) = V.Tu
+P.V − V.Tn
+P.V (2.152)
+en utilisant (2.72) on trouve
+tan(γ) =
+( Tu
+P −1
+f
+)
+(2.153)
+Dans de nombreux cas, on parle de la pente de descente en l’exprimant en pourcentage Pente% = 100 tan(γ).
+Pente% = 100
+( Tu
+P −1
+f
+)
+(2.154)
+
+
+52 CHAPITRE 2. PERFORMANCES
+2.6.6 Utilisation des diagrammes
+A partir des diagrammes ”planeur” et ”moteur”, il est possible de de ́terminer la vitesse de chute et la pente de descente en raisonnant de la mˆeme fa ̧con que pour le vol en mont ́ee. L’analyse de la figure 2.18 permet de tirer les conclusions suivantes : — la vitesse de chute (v′z) diminue quand la puissance utile (Wu) augmente ; — la pente de descente (γ) diminue quand la puissance utile (Wu) augmente ; — la vitesse de vol correspondant a` la vitesse de chute minimale reste constante en fonction de Wu ; — la vitesse de vol correspondant `a la pente de descente minimale diminue quand Wu augmente.
+2.7 Facteur de charge
+Dans le monde de l’a ́eronautique la notion de facteur de charge ( n ), commun ́ement appel ́e ”nombre de g”, est particuli`erement importante. n est une grandeur qui caract ́erise les forces li ́ees aux acc ́el ́erations que subit l’avion. Lors d’un vol stationnaire horizontal l’avion ne subit que l’acc ́el ́eration de la gravite ́, n est alors choisi  ́egal `a 1. Lors d’une ressource ou d’un virage, le facteur de charge peut consid ́erablement augmenter. Cette augmentation provoque un accroissement des contraintes sur la structure de l’avion. Il est donc important pour chaque avion de d ́efinir un facteur de charge limite a` ne jamais atteindre lors d’un vol. Ce facteur de charge limite devient alors dimensionnant pour la structure. Il s’exprime sous la forme suivante :
+n.mg =
+∑
+Fext (2.155)
+avec
+n=
+( mg
+mg + Finertie
+mg
+)
+(2.156)
+Nous allons par la suite analyser diff ́erentes phases d’un vol et caract ́eriser l’ ́evolution de n qui leur est associ ́e.
+2.7.1 Virage parfait
+Nous supposons dans ce cas que le virage se fait bille au milieu, le poids apparent subit par l’avion est suivant l’axe Oz. Nous n ́egligeons les phases instationnaires d’entr ́ee et de sortie de virage.
+Bilan des forces exerc ́ees sur l’avion Les diffe ́rentes forces exerce ́es sur l’avion sont : — le poids : P ; — la r ́esultante a ́erodynamique : Ra, la traıˆn ́ee : D, la portance : L ; — les forces d’inertie : Fc ; Le rayon de giration sera not ́e R. L’ensemble de ces donn ́ees est regroupe ́ sur la figure 2.19.
+
+
+2.7. FACTEUR DE CHARGE 53
+a3
+tan g
+V'z
+W
+a4
+Wu
+Wn
+a2
+V
+Figure 2.18 – Utilisation du diagramme de puissance dans le cas d’un groupe motopropulseur pour d ́eterminer la vitesse desctionnelle (Vz′) et la pente de descente (γ). La courbe en trait plein repr ́esente la vitesse de chute dans le cas d’un planeur alors que la courbe en trait mixte correspond `a la vitesse obtenue moteurs allum ́es.
+
+
+54 CHAPITRE 2. PERFORMANCES
+Fc
+Z
+j
+Y0
+Y
+Z0
+R
+P
+Fz
+Figure 2.19 – Bilan des forces exerc ́ees sur l’avion lors d’un virage a` altitude constante.
+Calcul du facteur de charge : Pour d ́eterminer le facteur de charge nz (la composante suivant l’axe Oz du vecteur n), il suffit de projeter la relation exprimant l’ ́equilibre de l’avion sur l’axe de portance et l’axe transversal :
+axe de sustentation : L = mg cos(φ) + Fcsin(φ) (2.157)
+axe transversal : Fc cos(φ) = P sin(φ) (2.158)
+On obtient alors :
+Fc = mg
+[
+cos(φ) + sin2(φ)
+cos(φ)
+]
+(2.159)
+ou encore
+nz = 1
+cos(φ) (2.160)
+Calcul du rayon de giration : Le rayon de giration associ ́e `a un facteur de charge donne ́ et `a une vitesse de vol peut ˆetre obtenu `a partir de l’ ́equation 2.158 :
+tan φ = Fc
+P . (2.161)
+donc
+tan(φ) = V2
+Rg = ω2R
+g (2.162)
+avec ω la vitesse angulaire plus couramment appel ́ee ”taux de virage”.
+
+
+2.7. FACTEUR DE CHARGE 55
+Les diff ́erents types de virage Lorsque que le pilote d ́ecide d’amorcer un virage `a altitude constante, trois solutions s’offrent `a lui. Pour les diff ́erencier, il est int ́eressant de se reporter au diagramme de puissance du couple ”planeur”-”moteur”. Sur ce diagramme il convient de tracer la courbe planeur correspondant `a l’avion de poids P , ainsi que la courbe planeur correspondant au mˆeme avion mais de poids n.P (voir figure 2.20). Cette nouvelle courbe planeur prend en compte les efforts dus aux forces d’inertie lors du virage.
+Iso incidences
+a3
+W
+a4
+V
+P
+nP
+Wn
+Wu
+4
+3 2
+1
+Figure 2.20 – Bilan des forces exerc ́ees sur l’avion lors d’un virage a` altitude constante.
+— Premier type de virage (1 → 2) : la vitesse est constante : le pilote doit augmenter la puissance fournie par le moteur, le pilote doit augmenter l’incidence pour augmenter la portance. — Deuxi`eme type de virage (1 → 3) : l’incidence reste constante : le pilote doit augmenter la puissance fournie par le moteur, en r ́eaction l’avion va acc ́el ́erer. — Troisi`eme type de virage (1 → 4) : la puissance fournie par les moteurs reste constante : le pilote doit augmenter l’incidence de l’avion, en r ́eaction l’avion va ralentir.
+2.7.2 Le virage d ́erape ́
+Le virage est dit ”d ́erap ́e” quand les forces d’inertie sont supe ́rieures `a celles exerce ́es lors du virage parfait. Le poids apparent et donc le facteur de charge nz sont sup ́erieurs `a ceux du virage parfait, ce qui est caract ́eris ́e par un d ́ecalage de la bille par rapport au plan de sym ́etrie. Un sch ́ema de principe est pre ́sent ́e sur la figure 2.21. Les solutions pour se rapprocher du virage parfait sont : — diminuer les forces d’inertie (Fc = mV 2
+R ): en diminuant la vitesse, en augmentant le rayon de giration (”le pied chasse la bille”) ;
+
+
+56 CHAPITRE 2. PERFORMANCES
+Z
+Fc
+Y
+Y0
+j
+Z0
+Fz
+P
+R
+Figure 2.21 – Bilan des forces exerc ́ees sur l’avion lors d’un virage ”de ́rap ́e” `a altitude constante.
+— augmenter l’angle φ.
+2.7.3 Le virage glisse ́
+Le virage est dit ”gliss ́e” quand les forces d’inertie sont inf ́erieures `a celles exerc ́ees lors du virage parfait. Le poids apparent et donc le facteur de charge nz sont inf ́erieurs `a ceux du virage parfait, ce qui est caract ́eris ́e par un d ́ecalage de la bille par rapport au plan de sym ́etrie. Un sche ́ma de principe est pr ́esent ́e sur la figure 2.22. Les solutions pour se rapprocher du virage parfait sont : — diminuer les forces d’inertie (Fc = mV 2
+R ): en augmentant la vitesse, en diminuant le rayon de giration (”le pied chasse la bille”) ; — diminuer l’angle φ.
+2.7.4 Le looping
+Lorsqu’un avion fait un looping le facteur de charge nz  ́evolue tout au long de la trajectoire. Quatre points caract ́eristiques sont pre ́sent ́es sur la figure 2.23. — en A : nz = 1 + V 2
+Rg
+— en B et D : nz = V 2
+Rg
+— en C : nz = V 2
+Rg − 1
+2.7.5 L’arrondi
+L’arrondi correspond `a l’arc de cercle que d ́eclenche le pilote pour passer de la phase de descente `a l’atterrissage (voir figure 2.24). Le facteur de charge nz au point d’impact avec le sol
+
+
+2.7. FACTEUR DE CHARGE 57
+Z
+Y
+Y0
+j
+Z0
+Fc
+Fz
+P
+R
+Figure 2.22 – Bilan des forces exerc ́ees sur l’avion lors d’un virage ”glisse ́” `a altitude constante.
+A
+Fc
+Fz
+D
+C
+P
+Fc
+Fz
+P
+Fz
+B
+Fc
+P
+P
+Fc
+Fz
+R
+Figure 2.23 – Bilan des forces exerc ́ees sur l’avion lors d’un virage looping.
+
+
+58 CHAPITRE 2. PERFORMANCES
+est :
+nz = 1 + V 2
+Rg (2.163)
+h
+g
+g
+R
+Figure 2.24 – Phase d’approche : arrondi.
+Remarque : pour assurer le confort des passagers le facteur de charge nz maximal admissible lors de l’atterrissage est pris  ́egal `a nzmax = 1.2.
+2.8 Rayon d’action
+Le rayon d’action d’un avion correspond a` la distance que peut couvrir un avion durant sa phase de vol stationnaire. Les phases de d ́ecollage et d’atterrissage ne sont pas prises en compte. Cette grandeur est particuli`erement importante pour les avions destin ́es `a faire des vols ”long courrier” tels que les Airbus A340-600 et A380 ou les Boeing 777 et 787 ainsi que pour les bombardiers comme les B1 ou les B52. Nous nous limiterons dans ce cours au cas des avions  ́equip ́es de turbore ́acteurs. Le cas des avions `a h ́elices sera  ́etudi ́e dans une prochaine version de ce manuscrit. Les  ́equations permettant de d ́eterminer le rayon d’action d’un avion e ́quip ́e de turbor ́eacteurs, sont celles du vol stationnaire horizontal :
+P = L (2.164)
+D = T (2.165)
+x ̇ = V (2.166)
+ ̇h = 0 (2.167)
+
+
+2.8. RAYON D’ACTION 59
+auxquelles vient se rajouter une  ́equation caracte ́risant la perte de poids de l’avion au cours du temps.
+dP
+dt = −m ̇ f g = −cgT, (2.168)
+avec  ̇mf le d ́ebit massique de fuel par unite ́ de temps et c la consommation sp ́ecifique de fuel. c caract ́erise la quantit ́e (en masse) de fuel ne ́cessaire pour obtenir 1 Newton de pouss ́ee par unite ́ de temps. Traditionnellement c, la consommation sp ́ecifique est exprim ́ee en kg/(N.h). Dans le cadre de ce calcul, la perte de poids de l’avion sera uniquement due `a la consommation du carburant. De mˆeme la consommation sp ́ecifique de fuel sera suppose ́e constante `a une altitude donn ́ee. L’ ́equation 2.166 peut s’ ́ecrire :
+dx
+dP
+dP
+dt = V (2.169)
+dx
+dP = − V
+cgT
+=− V
+cgD
+(2.170)
+dx/dP est appele ́ ”rayon d’action instantan ́e” . Elle correspond pour une voiture `a la consommation instantane ́e exprim ́ee en litre par kilom`etre. En utilisant la relation 2.164, l’e ́quation peut s’ ́ecrire :
+dx
+dP = −
+(L
+D
+)( V
+cgP
+)
+=−
+( CL
+CD
+)( V
+cgP
+) (2.171)
+Pour obtenir le rayon d’action, R, il suffit d’int ́egrer 2.171 entre l’instant correspondant au de ́but du vol de croisi`ere et le moment ou` l’avion amorce sa descente :
+R=−
+∫ P1
+P0
+( CL
+CD
+)( 1
+cg
+)
+V dP
+P (2.172)
+avec P0 le poids de l’avion au d ́ecollage et P1 le poids de l’avion `a l’atterrissage. Pour calculer le rayon d’action R, nous allons faire l’hypoth`ese que le pilote maintient l’angle d’attaque de l’avion constant. Les coefficients Cz et Cx sont alors eux aussi constants tout comme la consommation sp ́ecifique de fuel c. Seule la vitesse est donc susceptible de varier au cours du vol.
+Rayon d’action `a altitude et finesse constante (vitesse variable)
+L’altitude  ́etant constante, la densit ́e de l’air ne varie pas au cours du vol. De plus l’avion perdant de la masse, il doit r ́eduire sa vitesse pour re ́duire la force de portance. L’ ́equation 2.164 permet de de ́terminer la vitesse de l’avion en fonction du poids :
+V=
+√
+2P
+ρSCL
+(2.173)
+
+
+60 CHAPITRE 2. PERFORMANCES
+2.172 et 2.173 nous donnent :
+R=−
+∫ P1
+P0
+( √CL
+CD
+)( 1
+cg
+)√ 2
+ρS
+d√PP (2.174)
+ou encore
+R=
+(2
+cg
+) ( √CL
+CD
+)√ 2
+ρS (√P0 − √P1) (2.175)
+Le rayon d’action maximum, pour un poids donn ́e de l’avion, est obtenu lorsque (√CL/CD) est maximum. Un calcul simple permet de montrer que cette condition est v ́erifi ́ee pour :
+CL =
+√ CD0 3k
+= √13 C∗
+L
+(2.176)
+ce qui donne comme vitesse :
+V = 4 √3VR (2.177)
+Rayon d’action `a vitesse et finesse constante
+Dans le cas d’un vol `a vitesse constante, le re ́sultat de l’int ́egration de l’e ́quation 2.172 donne :
+R=
+(V
+cg
+)
+f ln
+( P0
+P1
+)
+(2.178)
+Cette formule est connue sous le nom de formule de Breguet. Le rayon maximum `a vitesse constante est obtenu pour la finesse maximale ce qui donne :
+Rmax =
+(V
+gc
+)
+fmax ln
+( P0
+P1
+)
+(2.179)
+pour une vitesse de vol :
+VR =
+√
+2P0
+ρS
+4
+√
+k
+CD0
+(2.180)
+La vitesse  ́etant constante et l’avion perdant du poids au cours du temps, celui-ci va voir son altitude augmenter durant le vol. Ce phe ́nome`ne s’explique en e ́tudiant l’ ́equation 2.165 :
+P =L= 1
+2 ρSV 2CL (2.181)
+Le poids de l’avion diminue au cours du temps, la vitesse reste constante de mˆeme que le coefficient CL, le rayon maximum  ́etant obtenu pour une configuration de vol a` finesse maximale. La seule solution permettant d’ ́equilibrer la portance et le poids est donc de r ́eduire la densit ́e ce qui est obtenu en augmentant l’altitude de vol.
+
+
+2.8. RAYON D’ACTION 61
+Avion Nb sie`ge Rayon d’action maxi Airbus A-300 266/360 7 500 km Airbus A-320 130/180 5 000 km Airbus A-321 157/220 4 300 km Airbus A-340 230/440 13 500 km Airbus A-380 480/800 14 200/16 200 km Concorde 90/114 6 500 km Boeing 747 260/450 14 000 km Boeing 777 280/303 8 700 km DC-10 250/380 9 100 km
+Table 2.3 – Rayon d’action maximum pour diff ́erents avions civils
+Exemple 2.5
+Calculer, dans le cas du Cessna Citation III, le rayon d’action `a altitude constante ainsi que celui `a vitesse constante. Nous choisirons une altitude de vol de 6 700 m
+Nous allons tout d’abord commencer par d ́eterminer les grandeurs dont nous aurons besoin par la suite :
+k= 1
+πeλ = 0.044
+Le poids a` vide est :
+P1 = 9.81 ∗ (8 984 − 3 384) = 54 936 N
+c = 0.061/3600 = 16.99 10−6 kg/(N.s)
+Rayon d’action `a altitude constante :
+CL=
+√ Cx0 3k
+=
+√ 0.02
+3 ∗ 0.044 = 0.39
+CD= CD0 + kC2
+L
+= 0.02 + 0.044 ∗ (0.39)2
+= 0.027
+R=
+(2
+cg
+) ( √CL
+CD
+)
+√
+2
+ρS (√P0 − √P1)
+=
+(2
+16.99 10−6 ∗ 9.81
+)
+( √0.39
+0.027
+)√ 2
+0.6102 ∗ 29.5 (
+√8984 ∗ 9.81 −
+√54936)
+= 5 848 km
+
+
+62 CHAPITRE 2. PERFORMANCES
+Rayon d’action `a vitesse constante : La vitesse de vol est :
+VR=
+√
+2P0
+ρS
+4
+√
+k
+CD0
+=
+√ 2 ∗ 8984 ∗ 9.81
+0.6102 ∗ 29.5
+4
+√ 0.044
+0.02
+= 120 m.s−1
+le vol se fait a` finesse maximum :
+fmax= 1
+2
+√kCD0
+=1
+2√0.044 ∗ 0.02
+= 16.85
+Le rayon d’action est alors :
+Rmax=
+(V
+gc
+)
+fmax ln
+( P0
+P1
+)
+=
+( 120
+9.81 ∗ 16.99 10−6
+)
+16.85 ln
+( 8984 ∗ 9.81
+54936
+)
+= 5 734 km
+2.9 L’endurance
+L’endurance correspond au temps qu’un avion est capable de rester en vol. L’endurance peut ˆetre un crit`ere pr ́epond ́erant pour certains types d’avions. Ainsi dans le cas d’un patrouilleur dont la mission est de surveiller un zone proche d’un a ́eroport, il est plus important de pouvoir rester longtemps en vol plutˆot que de tenter la distance parcourue. L’endurance pour un avion  ́equip ́e de turbor ́eacteurs peut ˆetre d ́etermin ́e comme suit :
+dP
+dt = −cgT
+dt = − dP
+cgT
+dt = − dP
+cg
+P
+T
+1
+P
+(2.182)
+soit
+dt =
+(1
+cg
+)
+f
+( dP
+P
+)
+(2.183)
+ou encore
+t=−
+∫ P1
+P0
+(1
+cg
+)
+f
+( dP
+P
+)
+(2.184)
+
+
+2.10. DE ́COLLAGE ET ATTERRISSAGE 63
+ce qui donne si l’on suppose l’angle d’attaque constant lors du vol un temps de vol maximum :
+tmax =
+(1
+cg
+)
+fmax ln
+( P0
+P1
+)
+(2.185)
+L’altitude n’influence par directement le temps de vol maximum d’un avion, mais en fait elle apparaıˆt indirectement dans l’ ́equation pr ́ec ́edente au travers de la consommation sp ́ecifique fuel qui, elle,  ́evolue en fonction de l’altitude de vol.
+Exemple 2.6
+Calculer l’endurance maximum du Cessna Citation III.
+tmax=
+(1
+cg
+)
+fmax ln
+( P0
+P1
+)
+=
+(1
+9.81 ∗ 16.99 10−6
+)
+16.85 ln
+( 8984 ∗ 9.81
+54936
+)
+= 47 786 s
+= 13.3 h
+2.10 De ́collage et atterrissage
+Les phases de d ́ecollage et d’atterrissage bien que n ́egligeables en temps par rapport au temps total de vol sont des phases critiques lors d’un vol. Il convient donc de les  ́etudier.
+2.10.1 Le d ́ecollage
+Pour la plupart des avions, le d ́ecollage se d ́eroule en trois phases successives : — le pilote met plein gaz. L’avion acc ́el`ere jusqu’`a obtenir la vitesse de d ́ecollage, — le pilote amorce une rotation de l’avion qui, en soulevant le nez de l’avion, permet d’augmenter son incidence jusqu’`a obtenir une portance suffisante pour compenser son poids, — l’avion entame alors sa mont ́ee. La phase de d ́ecollage est consid ́er ́ee comme finie lorsque l’avion atteint une hauteur, h, impos ́ee par la r ́eglementation (la FAR impose h = 35 ft alors que la RAE (UK) impose h = 50 ft).
+Calcul de la distance au sol
+Les forces s’exerc ̧ant sur l’avion sont les suivantes : — la pouss ́ee T , — la train ́ee D, — la portance L, — le poids P , — les forces de frottement μ(P − L) ou` μ est le coefficient de frottement entre les roues et la piste. Pour des pistes en b ́eton, μ varie entre 0,02 et 0,05, alors que pour une piste de herbe, μ est de l’ordre de 0.1. La projection des forces sur l’axe horizontal donne :
+P
+g
+dV
+dt = T − D − μ(P − L) (2.186)
+
+
+64 CHAPITRE 2. PERFORMANCES
+Dans un premier temps, nous allons ne ́gliger l’ensemble des forces de frottement (la traˆın ́ee et la r ́esistance de roulement) et supposer que la pousse ́e est inde ́pendante de la vitesse et ne de ́pend que de la densit ́e (T = T0σ). L’e ́quation 2.186 devient alors :
+P
+g
+dV
+dt = T
+P
+g V dV
+ds = T
+(2.187)
+ou encore
+ds = P
+2T g dV 2 (2.188)
+ce qui donne une fois int ́egr ́ee :
+sd ́ec = P
+T
+V2
+d ́ec
+2g (2.189)
+Pour des raisons de s ́ecurit ́e, la vitesse de d ́ecollage est g ́en ́eralement choisie  ́egale `a 1.2 fois la vitesse de d ́ecrochage :
+Vd ́ec = 1.2
+√
+2P
+ρS CLmax
+(2.190)
+on obtient alors :
+sd ́ec = P
+T
+1.44(P /S )
+ρ0σgCLmax
+=P
+T0
+1.44(P /S )
+ρ0σ2gCLmax
+(2.191)
+Cette e ́quation, bien que tr`es simplifi ́ee permet d’ ́etudier l’influence des diff ́erents parame`tres qui influencent le d ́ecollage. Il est ainsi de possible constater que : — la distance au sol est tr`es sensible au poids de l’avion, variant quadratiquement avec celui-ci, — la distance au sol d ́epend fortement des conditions atmosph ́eriques locales,  ́etant inversement proportionnelle au carr ́e de la densit ́e, — la distance au sol diminue en augmentant la surface alaire (P/S), le Czmax et la pouss ́ee. L’augmentation de la surface alaire, n’est pas une solution adapt ́ee car elle entraˆıne une r ́eduction du rayon d’action de l’avion. Il en est de meˆme pour l’augmentation de la pouss ́ee, si elle n’est obtenue par l’utilisation d’une post-combustion, car elle provoque une augmentation du poids des moteurs. Nous allons maintenant nous inte ́resser `a la r ́esistance `a l’avancement. Celle-ci se d ́ecompose en deux parties : la traıˆn ́ee a ́erodynamique et la re ́sistance de roulement. La traıˆn ́ee a ́erodynami-que s’exprime sous la forme suivante :
+D= 1
+2 ρSV 2
+(
+CD0 + φ C2
+L
+eπλ
+)
+(2.192)
+avec le CD qui permet de tenir compte des deux effets suivants :
+
+
+2.10. DE ́COLLAGE ET ATTERRISSAGE 65
+— l’influence du d ́eploiement des volets, qui provoque une augmentation de traıˆn ́ee par rapport `a la configuration de vol standard qui est repre ́sent ́e par Cx0, — l’effet de sol, qui se caract ́erise par une diminution de la traıˆn ́ee induite. Celui-ci est responsable de la tendance `a ”flotter” des avions au moment de l’atterrissage. Il est pris en compte dans la formule pr ́ec ́edente par le coefficient φ avec φ < 1. Une bonne approximation de φ est donn ́ee par ? :
+φ = (16h/b)2
+1 + (16h/b)2 (2.193)
+avec h la distance entre l’aile et le sol et b l’envergure de l’aile. La r ́esistance de roulement, quant `a elle, est proportionnelle `a la diff ́erence entre le poids de l’avion et `a la force de portance. Il est important de noter que lors du calcul de la force portance, il faut prendre en compte de CL dans la configuration volets sortis et non dans la configuration standard. Elle s’ ́ecrit donc sous la forme suivante :
+Froul = μP − μ 1
+2 ρSV 2CL (2.194)
+La r ́esistance de roulement et la traıˆn ́ee a ́erodynamique sont toutes les deux des fonctions qui varient lin ́eairement en fonction de V 2. De plus, elles ont une  ́evolution oppose ́e quand la vitesse augmente ainsi la r ́esistance de roulement diminue line ́airement avec V 2 alors que la traˆın ́ee a ́erodynamique augmente, elle aussi, lin ́eairement. Une bonne approximation consiste `a supposer que la somme Froul + D est constante en fonction de V 2. Pour de ́terminer la valeur de cette constante, il est courant d’utiliser la valeur de Froul + D calcul ́ee pour une vitesse de 0.7 Vd ́ec [?]. Il est donc possible de recalculer la distance de d ́ecollage en reprenant le raisonnement pr ́ec ́edant et en y substituant la pouss ́ee T par T − (Froul + D)Vd ́ec, ce qui donne :
+sd ́ec = 1.44(P/S)
+ρ0σgCLmax
+P
+T − (D + μ(P − L))0.7Vd ́ec
+(2.195)
+Avion Poids au d ́ecollage Vitesse de d ́ecollage Boeing 737 45 360 kg 250 km/h, 130 kts Boeing 757 108 860 kg 260 km/h, 140 kts Airbus A320 70 305 kg 275 km/h, 150 kts Airbus A340 259 000 kg 290 km/h, 155 kts Boeing 747 362 870 kg 290 km/h, 155 kts Concorde 181 435 kg 360 km/h, 195 kts
+Table 2.4 – Exemples de poids et de vitesse au d ́ecollage pour diff ́erents avions de ligne
+Exemple 2.7
+Calculer la distance n ́ecessaire au d ́ecollage pour le Cessna Citation 3 au niveau de la mer. Nous supposerons que la piste est goudronn ́ee (μ = 0.02). Le coefficient de portance lors de la phase
+
+
+66 CHAPITRE 2. PERFORMANCES
+d’acc ́el ́eration sur la piste sera limit ́e a` Cz = 1. Durant toute cette phase, les ailes se trouvent `a 1.82 m au dessus de la piste. Pour d ́eterminer la distance n ́ecessaire au d ́ecollage, il convient dans un premier temps de quantifier la re ́duction de traıˆn ́ee due `a l’effet de sol :
+φ= (16h/b)2
+1 + (16h/b)2
+= (16 ∗ 1.82/16.25)2
+1 + (16 ∗ 1.82/16.25)2
+= 0, 763
+De meˆme, il convient de calculer la vitesse de de ́collage Vd ́ec :
+Vd ́ec= 1.2 ∗
+√
+2P
+ρSCLmax
+= 1.2 ∗
+√ 2 ∗ 8 984 ∗ 9.81
+1.225 ∗ 29.5 ∗ 1
+= 83.8 m.s−1
+Il est alors possible de calculer la force de traˆın ́ee moyenne en se basant sur la traıˆne ́e obtenue pour une vitesse de 0.7Vd ́ec.
+L= 1
+2 ρS(0.7Vd ́ec)2CL
+=1
+2 1.225 ∗ 29.5 ∗ (0.7 ∗ 83.8)2 ∗ 1
+= 62 189 N
+D= 1
+2 ρS(0.7Vd ́ec)2
+(
+CD0 + φ C2
+L
+πeλ
+)
+=1
+2 1.225 ∗ 29.5 ∗ (0.7 ∗ 83.8)2
+(
+0.02 + 0.763 12
+π ∗ 0.81 ∗ 16.252/29.5
+)
+= 3 332 N
+ce qui donne pour le distance de d ́ecollage :
+sd ́ec= 1.44(P/S)
+ρσgCLmax
+P
+T − (FD + μ(P − FL)0.7Vd ́ec
+= 1.44(8 984 ∗ 9.81/29.5)
+1.225 ∗ 1 ∗ 9.81 ∗ 1
+8 984 ∗ 9.81
+32 470 − (3 332 + 0.02(8 984 ∗ 9.81 − 62 189))
+= 1 102 m
+2.10.2 L’atterrissage
+Pour traiter l’atterrissage, nous pouvons utiliser un raisonnement similaire `a celui fait pour le calcul de la longueur de piste ne ́cessaire au d ́ecollage. Une fois que l’avion `a toucher le sol, le
+
+
+2.10. DE ́COLLAGE ET ATTERRISSAGE 67
+pilote coupe la pousse ́e des moteurs ou enclenche les inverseurs de pouss ́ee, ce qui cre ́e alors une force s’opposant au mouvement TR. L’ ́equation de ́crivant le mouvement devient alors :
+P
+g
+dV
+dt = −TR − D − μ(P − L) (2.196)
+Les e ́volutions de la force de traıˆn ́ee et de la r ́esistance de roulement, comme dans le cas du d ́ecollage, restent lin ́eaire en fonction de V 2 et de signe oppose ́es. De plus la force cre ́e par les inverseurs de pousse ́e peut ˆetre consid ́er ́ee comme constante. L’hypoth`ese, consistant `a supposer que le somme de ces deux forces reste constante est donc toujours valable. Pour la calculer, il est courant de la choisir  ́egale `a la valeur de la force de r ́esistance globale obtenue pour une vitesse de 0.7Vimp, avec Vimp la vitesse de l’avion `a l’instant ou` il touche le sol. Nous avons alors :
+P
+g
+dV
+dt = −TR − D − μ(P − L) = −(TR + D + μ(P − L))0.7Vimp (2.197)
+En utilisant le raisonnement d ́eveloppe ́ dans le cas du d ́ecollage, nous obtenons pour la distance de piste n ́ecessaire `a l’atterrissage :
+satt = 1.69(P/S)
+ρ0σgCLmax
+P
+TR + (Froul + D)0.7Vimp
+(2.198)
+pour assurer la se ́curite ́ de l’avion durant cette phase critique du vol, la vitesse pendant la phase finale d’approche est choisi e ́gale `a 1.3Vdec :
+Vimp = 1.3
+√
+2P
+ρS CLmax
+(2.199)
+La phase de d ́ecollage n’est consid ́er ́ee comme finie que lorsque l’avion atteint l’altitude 50 ft.
+Exemple 2.8
+Estimez la longueur de piste n ́ecessaire a` l’atterrissage du Cessna Citation III sur a ́eroport situ ́e au niveau de la mer. Aucune reverse n’est activ ́ee et les deux moteurs sont coup ́es. Les a ́erofreins sont sortis de sorte que la portance peut ˆetre consid ́er ́ee comme nulle. Le coefficient de frottement CD0 est quant `a lui augmenter d’environ 10%. Les re ́servoirs de fuel sont suppose ́s vides. Lors de la phase d’approche les volets sont compl`etement sortis, ce qui permet d’obtenir au moment de l’atterrissage CLmax = 2.5. Le coefficient de frottement de la piste mu est choisi  ́egal `a 0.4.
+Le poids de l’avion lors de l’atterrissage est de :
+P = (8984 − 3384) ∗ 9.81 = 54 942N
+La vitesse d’approche est donne ́e par :
+Vimp= 1.3
+√
+2P
+ρSCLmax
+= 1.3
+√ 2 ∗ 54 942
+1.225 ∗ 29.5 ∗ 2.5
+= 45, 34 m.s−1
+
+
+68 CHAPITRE 2. PERFORMANCES
+Nous devons maintenant calculer la traıˆn ́ee pour une vitesse de 0.7Vimp, pour cela, il faut tenir de la nouvelle valeur de CD0 = 0.022 et se rappeler que la portance et la traıˆne ́e sont nulles.
+D= 1
+2 ρS(0.7Vimp)2CD0
+=1
+2 1.225 ∗ 29.5 ∗ (0.7 ∗ 45.34)2 ∗ 0.022
+= 400 N
+Nous obtenons donc pour la longueur de piste :
+satt= 1.69(P/S)
+ρσgCLmax
+P
+(μP + D)0.7Vimp
+= 1.69(54 942/29.5)
+1.225 ∗ 9.81 ∗ 2.5
+54 942
+(0.4 ∗ 54 942 + 400)
+= 257 m
+
+
+Chapitre 3
+Stabilite ́ statique longitudinale
+3.1 Moment ae ́rodynamique longitudinal
+L’ ́etude du moment a ́erodynamique longitudinal est extreˆmement importante dans le cadre la stabilit ́e longitudinale d’un avion. Il d ́epend : — de la voilure ; — de l’empennage ; — du fuselage. Pour simplifier le de ́but de la pr ́esentation, nous allons tout d’abord  ́etudier un simple profil d’aile. Le coefficient Cm, qui est fonction de l’angle d’incidence, permet de d ́eterminer le moment de forces a ́erodynamique au point A (voir figure 3.1).
++
+A
+Figure 3.1 – convention de signes.
+Par convention, on choisit : — Cm > 0 donne un moment cabreur ; — Cm < 0 donne un moment piqueur ; Pour  ́etudier la stabilit ́e d’un avion ou d’un profil d’aile, il est int ́eressant de tracer la courbe Cm = f (α) (figure 3.2). Le profil typique pour une aile standard donne une incidence d’ ́equilibre franchement n ́egative. L’incidence correspondant `a une portance nulle est not ́ee : α0. Le moment correspondant est piqueur : Cm0 < 0. Il est aussi int ́eressant pour rendre cette courbe parlante de tracer Cm en fonction du coefficient de portance CL (figure 3.3). Dans la zone d’utilisation standard :
+CmA = Cm0 − h.CL, (3.1)
+69
+
+
+70 CHAPITRE 3. STABILITE ́ STATIQUE LONGITUDINALE
+-0.1
+Cm0
+0.1
+Cm
+a0
+équilibre
+a=15 a
+Figure 3.2 – Repr ́esentation du coefficient Cm en fonction de l’incidence α.
+Cm0
+-0.1
+0.1
+Cm
+équilibre
+( piqueur )
+( cabreur )
+Cz max Cz
+Figure 3.3 – Repr ́esentation du coefficient Cm en fonction du coefficient de portance Cz.
+
+
+3.2. LE CENTRE DE POUSSE ́E AE ́RODYNAMIQUE 71
+Cm0
+Cm
+0.1
+-0.1
+a0
+( piqueur )
+Da Da
+( cabreur )
+équilibre
+a
+a=15
+Figure 3.4 – Repr ́esentation du coefficient Cm en fonction de l’incidence α dans le cas d’un profil ou d’un avion stable.
+avec h = 0.25 pour une voilure. Dans le cas pr ́esent ́e ici, profil simple, l’incidence d’e ́quilibre correspond `a une portance n ́egative, ce qui est contraire au but recherch ́e. Un profil d’aile standard est donc instable statiquement. Il est possible de rem ́edier `a ce probl`eme en utilisant un profil `a double cambrure ou en rajoutant un empennage arri`ere qui va modifier le Cm de l’avion complet. Pour un profil stable l’ ́evolution de Cm en fonction de l’incidence est donn ́ee figure 3.4. L’incidence d’ ́equilibre correspond `a une portance positive ce qui est n ́ecessaire, mais pas suffisant pour assurer la stabilite ́ de l’avion. Il est aussi important de voir comment re ́agit l’avion s’il est soumis a` une variation d’incidence (∆α). Si la perturbation est n ́egative, Cm devient positif et engendre un moment cabreur augmentant ainsi l’incidence. De meˆme si la perturbation est positive, Cm devient n ́egatif provoquant un moment piqueur ce qui tend `a diminuer l’incidence. Toute perturbation est donc naturellement amortie, l’avion est donc statiquement stable.
+3.2 Le centre de pousse ́e ae ́rodynamique
+Le centre de pouss ́ee des forces a ́erodynamiques correspond au point d’application de la r ́esultante des forces ae ́rodynamiques sur le profil. Dans cette  ́etude, nous supposerons qu’il est situ ́e sur la corde du profil (point E sur la figure 3.5). Nous allons nous placer dans le cas ou` l’incidence est faible. Il est alors possible de supposer que :
+L = Fn. (3.2)
+Ce qui nous donne pour le moment de la force a ́erodynamique en A :
+Ma = −Fnd = −Fzd. (3.3)
+De plus, nous pouvons  ́ecrire :
+Ma = 1
+2 ρSlV 2Cma et L = 1
+2 ρSV 2CL. (3.4)
+
+
+72 CHAPITRE 3. STABILITE ́ STATIQUE LONGITUDINALE
+Fx
+A
+Ra
+Fz
+Fn
+Ft a V
+E
+d l
+Figure 3.5 – D ́ecomposition de la re ́sultante a ́erodynamique.
+L’ ́equation (3.3) devient alors :
+1
+2 ρSlV 2Cma = − 1
+2 ρSV 2CLd, (3.5)
+soit :
+Cma = −CL
+d
+l . (3.6)
+En utilisant la relation (3.1), on obtient :
+d
+l = − Cm0
+CL
++ h (3.7)
+la position du centre de pousse ́e a ́erodynamique (E) d ́epend de CL donc de l’incidence.
+Cas du profil `a double courbure (Cm0 > 0) : — si l’incidence (α) augmente, — ⇒ CL augmente, — ⇒ le rapport Cm0/CL diminue, — ⇒ d augmente, — ⇒ le centre de pouss ́ee ae ́rodynamique recule.
+Cas du profil a` simple courbure (Cm0 < 0) : — si l’incidence (α) augmente, — ⇒ CL augmente, — ⇒ le rapport |Cm0|/CL diminue, — ⇒ d diminue, — ⇒ le centre de pouss ́ee ae ́rodynamique avance.
+
+
+3.3. LE FOYER 73
+3.3 Le foyer
+Comme nous venons de le voir, la position du centre de pouss ́ee a ́erodynamique n’est pas constante quand l’incidence de l’avion varie. Ceci est probl ́ematique lorsque l’on  ́etudie la stabilit ́e de l’avion autour de son centre de gravit ́e. Pour surmonter ce proble`me, un nouveau point caract ́eristique est introduit : le foyer. On introduit un nouveau point P (Fig. 3.6) ou` l’on
+d
+x
+P
+E Ft
+Fn
+A
+Figure 3.6 – Introduction de la notion de foyer.
+calcule les moments
+MP = −L(d − x)
+= −Ld + Lx (3.8)
+= MA + Lx
+ce qui donne :
+MP = 1
+2 ρSlV 2CmP = 1
+2 ρSlV 2CmA + 1
+2 ρSV 2CLx (3.9)
+⇒ CmP = CmA + CL
+x
+l (3.10)
+En utilisant (3.1) on obtient :
+CmP = Cm0 + CL
+(x
+l −h
+)
+, (3.11)
+Il existe donc un point P pour lequel le moment des forces a ́erodynamiques est ind ́ependant de l’incidence et  ́egal `a Cm0. Ce point est appele ́ le foyer (F). Il est situ ́e en xF = h.l. Cette d ́efinition du foyer reste vraie pour des angles d’incidence mod ́er ́es (Fig. 3.7).
+
+
+74 CHAPITRE 3. STABILITE ́ STATIQUE LONGITUDINALE
+Cm
+Cm0
+CmF
+a
+Figure 3.7 – Evolution du moment de forces a ́erodynamiques au foyer en fonction de l’incidence.
+3.4 Notion de centrage : stabilite ́ d’une aile volante
+3.4.1 Cas du centrage avant :
+Le centre de gravite ́ (G) est situ ́e en avant du foyer (F). Il y a  ́equilibre autour de G si :
+∑
+MG = 0 (3.12)
+⇒
+∑
+MG = MF − xL avec xL > 0 (3.13)
+Il faut donc que MF > 0 ce qui est le cas des profils a` double courbure. — Si α augmente alors L augmente ce qui donne un moment en G n ́egatif donc un moment piqueur. — Si α diminue alors L diminue ce qui donne un moment en G positif donc un moment cabreur. L’avion est statiquement stable.
+3.4.2 Cas du centrage arrie`re :
+Le centre de gravit ́e (G) est situ ́e en arri`ere du foyer (F). Il y a e ́quilibre autour de G si :
+∑
+MG = 0 (3.14)
+⇒
+∑
+MG = MF + xL avec xL > 0 (3.15)
+Il faut donc que MF < 0 ce qui est le cas des profils simples. — Si α augmente alors L augmente ce qui donne un moment en G positif donc un moment cabreur. — Si α diminue alors L diminue ce qui donne un moment en G n ́egatif donc un moment piqueur. L’avion est statiquement instable.
+
+
+3.5. TEST EN VOL DE LA STABILITE ́ : CAS DU MANCHE BLOQUE ́ 75
+3.4.3 Bilan sur la stabilite ́ statique de l’avion
+Pour qu’un avion soit stable, il faut que le moment Cm0 soit positif et que l’avion soit centr ́e vers l’avant. Cependant un avion instable n’est pas forcement non pilotable. Il existe en effet des syst`emes de contrˆole qui, int ́egr ́es `a la chaıˆne de commande de l’avion, permettent de le stabiliser. Les ailes volantes, pour ˆetre stables, doivent utiliser des profils `a double courbure. Les avions standards utilisent des profils d’ailes simples qui sont instables. Mais il ne faut pas oublier que le moment Cm0 est d ́efini pour l’avion complet. Il prend donc en compte l’effet de l’empennage arri`ere, des canards, de la carlingue. . .
+3.5 Test en vol de la stabilite ́ : cas du manche bloque ́
+Pour d ́eterminer en vol si un avion est statiquement stable, il faudrait tracer la courbe MA = f (α). Ceci est impossible. En effet, lors d’un vol stationnaire MA = 0. En dehors de la phase stationnaire, il faut mesurer dq/dt = MA/I. Mais dans ce cas, la vitesse rotation est non nulle, q 6= 0, le terme Cmqql/v modifie MA. On ne peut donc isoler la contribution de l’incidence et donc d ́eterminer si Cmα < 0. La solution est de tracer pour diffe ́rentes positions de la gouverne δm la courbe CmA en fonction de l’incidence.
+CmA = Cm0 + Cmαα + Cmδδm (3.16)
+Un braquage positif du manche (manche avant) donne : — δm > 0 ; — un couple piqueur n ́egatif ; — donc Cmδ < 0. Dans le cas d’un avion stable (Cmα < 0) le faisceau de courbes CmA, en fonction de l’incidence, est pre ́sent ́e sur la figure 3.8. Dans le cas d’un avion instable (Cmα > 0) les courbes sont pr ́esent ́ees sur la figure 3.9. L’analyse de ces deux graphiques, nous permet de conclure que dans le cas d’un :
+avion stable :
+— si δm augmente, — l’incidence d’ ́equilibre αeq diminue, — la vitesse augmente ;
+avion instable :
+— si δm augmente, — l’incidence d’ ́equilibre αeq augmente, — la vitesse diminue ; Il suffit de tracer l’ ́evolution de la position du manche en fonction de la vitesse pour savoir si l’avion est stable ou instable. L’augmentation de la consigne de braquage donne un moment piqueur ce qui tend `a faire diminuer l’incidence et donc a` augmenter la vitesse. Ceci peut ˆetre r ́esum ́e par la figure 3.11.
+
+
+76 CHAPITRE 3. STABILITE ́ STATIQUE LONGITUDINALE
+dm1
+dm2
+dm3
+dm4
+a3
+a4 a2 a1 a
+Cma
+Figure 3.8 – Cas de l’avion stable, δm1 < δm2 < δm3 < δm4.
+dm4
+a3
+a4 a
+a1
+dm1
+dm2
+dm3
+a2
+Cma
+Figure 3.9 – Cas de l’avion instable, δm1 < δm2 < δm3 < δm4.
+
+
+3.5. TEST EN VOL DE LA STABILITE ́ : CAS DU MANCHE BLOQUE ́ 77
+Manche avant
+dm
+Manche
+arrière
+V
+Stable
+Instable
+Figure 3.10 – Crit`ere de stabilit ́e en fonction de la position du manche.
+3.5.1 Action du manche pour un avion stable
+Pour cabrer un avion stable, il suffit de tirer sur le manche et inversement pour le faire piquer (voir figure 3.11).
+dm1
+a3
+Manche avant piqueur
+a4
+dm4 dm3 dm2 Manche arrière
+cabreur
+a2
+Cma
+a
+a1
+Figure 3.11 – Crit`ere de stabilite ́ en fonction de la position du manche, δm1 < δm2 < δm3 < δm4 dans le cas d’un avion stable.
+3.5.2 Action du manche pour un avion instable
+Pour cabrer un avion instable, il faut tirer sur le manche pour le mettre en rotation puis il faut arreˆter ce mouvement puis repousser le manche jusqu’a` une position plus avance ́e que la position initiale. Pour faire piquer l’avion, il faut pousser le manche, puis tirer sur le manche jusqu’`a une position plus recul ́ee que la position initiale (voir figure 3.12).
+
+
+78 CHAPITRE 3. STABILITE ́ STATIQUE LONGITUDINALE
+Manche avant piqueur
+a4 a3
+Manche arrière cabreur
+dm4 dm3 dm2 dm1
+Cma
+a2 a1 a
+Figure 3.12 – Crit`ere de stabilite ́ en fonction de la position du manche, δm1 < δm2 < δm3 < δm4 dans le cas d’un avion instable.
+3.5.3 Action du manche pour un avion neutre
+Pour cabrer un avion neutre, il faut tirer sur le manche puis une fois l’incidence souhait ́ee obtenue, il faut repousser le manche dans sa position initiale. (voir figure 3.13)
+a3
+Manche avant piqueur
+a1 dm4
+dm2
+dm3
+dm1
+Manche arrière cabreur
+Cma
+a2 a
+Figure 3.13 – Crit`ere de stabilite ́ en fonction de la position du manche, δm1 < δm2 < δm3 < δm4 dans le cas d’un avion neutre.
+3.6 Test en vol de la stabilite ́ : cas du manche libre
+Dans le cas d’un avion sans servo-commandes, la proc ́edure `a suivre en vol pour savoir si l’avion est stable ou pas est la suivante : l’avion vole `a la vitesse V0 avec une incidence α0 et
+
+
+3.6. TEST EN VOL DE LA STABILITE ́ : CAS DU MANCHE LIBRE 79
+un angle de gouverne de profondeur δm0. Le compensateur, install ́e sur la gouverne, est r ́egl ́e de telle fa ̧con que le moment de charni`ere est nul :
+Ccharni`ere = Cc = a0 + a1α0 + a2δm0 + a3δt0 = 0 (3.17)
+V0 et α0 sont appel ́ees respectivement vitesse et incidence de compensateur. δt0 est l’angle de r ́eglage du compensateur. Comme dans le cas pr ́ec ́edent, il faudrait tracer la courbe MA = f (α) ou encore CmA = f (α) pour diff ́erentes valeur de Cc.
+CmA = Cm0 + Cmαα + Cmδδm (3.18)
+Cc = a0 + a1α + a2δm + a3δt0 (3.19)
+Il est possible d’introduire dans l’expression pr ́ec ́edente les donn ́ees relatives `a l’ ́equilibre α0 et
+δm0.
+CmA = Cmα(α − α0) + Cmδ(δm − δm0) (3.20)
+Cc = a1(α − α0) + a2(δm − δm0) (3.21)
+Ceci peut encore s’ ́ecrire :
+CmA =
+(
+Cmα − Cmδ
+a1
+a2
+)
+(α − α0) + Cmδ
+Cc
+a2
+(3.22)
+ou encore
+CmA = C′
+mα(α − α0) + Cmδ
+Cc
+a2
+(3.23)
+Une augmentation de braquage δm augmente la portance de l’empennage de profondeur. Un moment piqueur est donc cr ́e ́e d’ou` :
+Cmδ < 0. (3.24)
+Une augmentation de braquage par rapport a` δm0 doit conduire `a un moment de charni`ere n ́egatif qui tend `a ramener la gouverne `a sa position d’ ́equilibre donc :
+a2 < 0. (3.25)
+Dans le cas contraire, on dit que la gouverne est surcompense ́e. Ce ph ́enom`ene est tr`es dangereux car la gouverne ne demande qu’`a partir en but ́ee. Sous l’effet d’un moment de charni`ere positif, δm augmente et le manche a tendance `a partir vers l’avant. Pour  ́equilibrer un moment de charni`ere positif, le pilote doit donc appliquer un effort ”`a tirer” sur le manche. Ces quelques remarques nous permettent de tracer deux graphs donnant l’ ́evolution du moment a ́erodynamique en fonction du moment de charni`ere. Les figures 3.14 et 3.15 repre ́sentent respectivement le cas de l’avion stable et celui de l’avion instable. En vol, il suffit de tracer les efforts que doit fournir le pilote pour maintenir une incidence diff ́erente α0. En pratique, on trace l’e ́volution de la vitesse de vol en fonction des efforts fournis par le pilote pour tenir le manche. L’avion est stable si une augmentation de vitesse, donc une diminution de l’incidence, entraıˆne un effort ”`a pousser” de la part du pilote (voir figure 3.16).
+
+
+80 CHAPITRE 3. STABILITE ́ STATIQUE LONGITUDINALE
+Cma
+a3
+Cc négatif effet à pousser
+a
+a1
+a2
+Cc positif effet à tirer
+Cc = 0
+Figure 3.14 
+Cma
+a3
+a2 a1
+Cc négatif effet à pousser
+Cc = 0
+Cc positif effet à tirer
+a
+Figure 3.15 
+
+
+3.7. CAS DU DE ́PLACEMENT DU FOYER EN VOL 81
+Efforts "à pousser"
+Efforts
+"à tirer"
+Instable
+Stable
+V
+Figure 3.16 
+3.7 Cas du de ́placement du foyer en vol
+Tout ce qui a e ́te ́ d ́eveloppe ́ dans ce chapitre est vrai `a faible incidence et si l’avion ne franchit pas le mur du son. — A grande incidence, les avions `a forte fl`eche d ́ecrochent en bout d’aile, ce qui change la position du foyer (pitch up). — Lors du passage en supersonique, la cr ́eation d’ondes de choc d ́eplace, elle aussi, la position du foyer. Cela peut provoquer une d ́estabilisation de l’avion en cours de vol. Ce ph ́enom`ene est repre ́sent ́e sur la figure 3.17. Pour une incidence inf ́erieure `a α2, l’avion est statiquement stable pour des incidences sup ́erieures, il devient instable. Pour une incidence sup ́erieure `a α3, les gouvernes sont en but ́ee et il n’y a plus moyen de r ́ecup ́erer l’avion.
+Cma
+Butée manche arrière
+Butée manche avant
+a1 a
+amax
+a3
+a2
+Figure 3.17 
+
+
+82 CHAPITRE 3. STABILITE ́ STATIQUE LONGITUDINALE
+Remarque : lorsque le Concorde passe le mur du son, le foyer recule de quelques m`etres. L’avion devient alors beaucoup trop stable statiquement. Une partie du carburant est alors transf ́er ́ee de l’avant de l’avion vers l’arrie`re pour reculer le centre de gravit ́e et re ́duire la stabilit ́e. Lors du retour en subsonique, le foyer avance de quelques me`tres pour reprendre sa position initiale qui se trouve devant la position du centre de gravit ́e utilis ́ee en supersonique. Il est alors imp ́eratif de retransf ́erer du carburant vers l’avant pour assurer un centrage avant et ainsi retrouver une stabilit ́e statique de l’avion.
+
+
+Chapitre 4
+Equations du mouvement
+4.1 Introduction
+Le but de ce chapitre est de d ́efinir l’ensemble des e ́quations qui r ́egissent le mouvement de l’avion. Pour cela, nous allons introduire la notion d’angles d’Euler qui permet de d ́efinir des matrices de passage entre les rep`eres terrestre et avion. Les  ́equations du mouvement seront alors d ́efinies en ne tenant compte que des forces a ́erodynamiques et de la force de pesanteur. Puis une lin ́earisation de ces e ́quations, permettant l’e ́tude de la r ́eponse aux petites perturbations, sera propos ́ee.
+4.2 Les angles d’Euler
+Pour  ́etablir les e ́quations du mouvement de l’avion, deux repe`res sont couramment utilis ́es : le rep`ere terrestre (qui est consid ́er ́e comme Galil ́een) et le rep`ere avion. Ces deux rep`eres  ́etant en mouvement permanent l’un par rapport a` l’autre, il est important de disposer de matrices de passage qui permettent d’exprimer les diff ́erentes forces dans l’un ou l’autre des repe`res. Pour cela, en m ́ecanique du vol, il est courant d’utiliser la transformation des angles d’Euler.
+Cette transformation se d ́ecompose en trois rotations successives (cf Fig. 5.2) :
+— la premi`ere rotation consiste `a prendre un rep`ere align ́e sur le rep`ere terrestre (O, x0, y0, z0) et `a lui faire subir une rotation autour de l’axe Oz0 d’un angle Ψ, appel ́e azimut, ce qui donne un nouveau rep`ere (O, x1, y1, z1) avec z1 = z0, — la deuxi`eme rotation suivant l’axe Oy1 d’un angle Θ, appel ́e assiette permet de passer du rep`ere (O, x1, y1, z1) au rep`ere (O, x2, y2, z2), — pour finir une rotation suivant l’axe Ox2 d’un angle Φ, appele ́ angle de gıˆte ou encore de roulis, permet de passer du repe`re (O, x2, y2, z2) au rep`ere avion (O, x, y, z)
+La matrice de passage, S, entre le repe`re terrestre et le rep`ere avion est obtenue comme le produit des matrices associ ́ees aux trois rotations d ́efinies pr ́ec ́edemment.
+S=
+
+    
+(cos Ψ cos Θ) (sin Ψ cos Θ) (− sin Θ) (cos Ψ sin Θ sin Φ − sin Ψ cos Θ
+) (sin Ψ sin Θ sin Φ + cos Ψ cos Φ
+)
+(cos Θ sin Φ)
+(cos Ψ sin Θ cos Φ + sin Ψ sin Θ
+) (sin Ψ sin Θ cos Φ − cos Ψ sin Φ
+)
+(cos Θ cos Φ)
+
+    
+(4.1)
+83
+
+
+84 CHAPITRE 4. EQUATIONS DU MOUVEMENT
+Figure 4.1 – D ́efinition des trois angles d’Euler [tir ́ee de ?]
+Pour passer du repe`re avion au rep`ere terrestre, il faut utiliser la matrice de passage inverse qui est dans notre cas aussi  ́egale `a la transpos ́ee de S :
+S−1 = ST =
+
+    
+(cos Ψ cos Θ)
+(cos Ψ sin Θ sin Φ − sin Ψ cos Θ
+) (cos Ψ sin Θ cos Φ + sin Ψ sin Θ
+)
+(sin Ψ cos Θ)
+(sin Ψ sin Θ sin Φ + cos Ψ cos Φ
+) (sin Ψ sin Θ cos Φ − cos Ψ sin Φ
+)
+(− sin Θ) (cos Θ sin Φ) (cos Θ cos Φ)
+
+    
+(4.2)
+Pour illustrer l’utilisation de ces matrices de passage, nous allons pr ́esenter deux exemples. Le premier montre `a partir des composantes de la vitesse de l’avion dans le rep`ere avion comment les exprimer dans le repe`re terrestre :
+
+
+dx0
+ddyt0
+ddzt0 dt
+
+ = ST
+
+
+u v w
+
+ (4.3)
+Cette  ́equation est utilise ́e dans les simulateurs de vol pour calculer la position de l’avion. Elle n’est cependant pas auto-suffisante. En effet, il faut aussi connaıˆtre l’e ́volution temporelle des angles d’Euler pour pouvoir d ́eterminer compl`etement la position et l’attitude de l’avion au cours du temps. Le deuxi`eme exemple concerne l’expression du poids de l’avion. En effet, les forces de gravit ́e sont extrˆemement simples `a exprimer dans le repe`re terrestre :
+Pterrestre = (0 0 mg)T (4.4)
+
+
+4.3. EQUATIONS DU MOUVEMENT 85
+Pour l’exprimer dans le repe`re avion, il suffit d’appliquer la transformation d’Euler :
+Pavion = S
+
+
+0 0 mg
+
+ = (mg)
+
+
+− sin Θ cos Θ sin Φ cos Θ cos Φ
+
+ (4.5)
+Le cas de la vitesse de rotation est l ́eg`erement diff ́erent. Le vecteur rotation est d ́efini comme suit :
+Ω=
+
+
+p q r
+
+ (4.6)
+avec — p la vitesse de roulis, rotation autour de l’axe Ox, p = dφ/dt, — q la vitesse de tangage, rotation autour de l’axe Oy, q = dθ/dt, — r la vitesse de lacet, rotation autour de l’axe Oz, r = dψ/dt il peut aussi ˆetre d ́efini `a partir des angles d’Euler :
+Ω = ∆ΩΦ + ∆ΩΘ + ∆ΩΨ (4.7)
+Pour relier les vitesses de rotation mesur ́ees dans l’avion (p, q, r) aux angles d’Euler, il suffit d’exprimer le vecteur rotation bas ́e sur les angles d’Euler dans le repe`re avion. Nous avons donc :
+Ω = TΦ
+
+
+dΦ dt
+0 0
+
+ + TΦTΘ
+
+
+0
+dΘ dt
+0
+
+ + TΦTΘTΨ
+
+
+0 0
+dΨ dt
+
+ (4.8)
+ce qui donne :
+
+
+p q r
+
+=
+
+
+1 0 − sin Θ 0 cos Θ cos Θ sin Φ 0 − sin Φ cos Θ cos Φ
+
+
+
+
+dΦ ddΘt
+ddΨt dt
+
+ (4.9)
+Nous pouvons aussi exprimer la variation des angles d’Euler en fonction des vitesses de rotation autour des axes de l’avion :
+
+
+dΦ ddΘt
+ddΨt dt
+
+=
+
+
+1 sin Φ tan Θ cos Φ tan Θ 0 cos Φ − sin Φ 0 sin Φ tan−1 Θ cos Φ tan−1 Θ
+
+
+
+
+p q r
+
+ (4.10)
+4.3 Equations du mouvement
+Les e ́quations d ́ecrivant le mouvement de l’avion, dans le rep`ere avion, sont obtenues en appliquant les r`egles classiques de la m ́ecanique des solides :
+Fx = mu ̇ + m(qw − rv) (4.11)
+Fy = mv ̇ + m(ru − pw) (4.12)
+Fz = mw ̇ + m(pv − qu) (4.13)
+
+
+86 CHAPITRE 4. EQUATIONS DU MOUVEMENT
+Mx = Ixp ̇ − Ixzr ̇ + qr(Iz − Iy) − pqIxz (4.14)
+My = Iyq ̇ + pr(Ix − Iz) + (p2 − r2)Ixz (4.15)
+Mz = Izr ̇ − Ixzp ̇ + pq(Iy − Ix) + qrIxz (4.16)
+x ̇ 0 = cos Θ cos Ψu + (sin Φ sin Θ cos Ψ − cos Φ sin Ψ)v
++ (cos Φ sin Θ cos Ψ + sin Φ sin Ψ)w (4.17)
+y ̇0 = cos Θ sin Ψu + (sin Φ sin Θ sin Ψ − cos Φ cos Ψ)v
++ (cos Φ sin Θ sin Ψ + sin Φ cos Ψ)w (4.18)
+z ̇0 = − sin Θu + sin Φ cos Θv + cos Φ cos Θw (4.19)
+ ̇Φ = p + tan Θ(q sin Φ + r cos Φ) (4.20)
+ ̇Θ = q cos Φ − r sin Φ (4.21)
+ ̇Ψ = tan−1 Θ(q sin Φ + r cos Φ) (4.22)
+Ce jeu d’e ́quations peut se simplifier si l’axe principal d’inertie est aligne ́ avec le tri`edre avion. Dans ce cas Ixz = 0. Mais malgr ́e tout, les termes tels que mq(t)w(t) et mq(t)r(t) rendent ce syste`me d’ ́equations fortement coupl ́e et non lin ́eaire. Il est donc n ́ecessaire de recourir `a la simulation num ́erique pour le re ́soudre et connaıˆtre les  ́evolutions de l’avion. Cependant, il est possible de comprendre et d’analyser un grand nombre de comportements de l’avion en simplifiant le syste`me d’ ́equations pr ́ec ́edent `a l’aide d’une lin ́earisation des e ́quations bas ́ee sur une e ́tude des petites perturbations autour d’un point de vol stable.
+4.4 Les e ́quations line ́arise ́es
+Pour pouvoir  ́etudier les re ́actions de l’avion face `a des perturbations, nous allons line ́ariser les  ́equations 4.11 `a 4.22. Le syst`eme obtenu sera valable pour l’e ́tude des phases de vol stationnaires et permettra de quantifier l’impact, sur la dynamique de l’avion, de petites perturbations. Pour cette analyse, nous allons faire les deux hypoth`eses suivantes : — L’avion est en vol horizontal stationnaire. — A l’instant initial, le rep`ere avion est align ́e avec le vecteur vitesse. Ces axes peuvent donc eˆtre utilis ́es comme axes de stabilit ́e. Les forces s’exer ̧cant sur l’avion sont la somme des forces a ́erodynamiques et de la force de pesanteur. Nous avons donc :
+Fx = T + X0 + ∆X(t) − mg sin Θ
+Fy = Y0 + ∆Y (t) + mg cos Θ sin Φ
+Fz = Z0 + ∆Z(t) + mg cos Θ cos Φ
+(4.23)
+ou` l’indice 0 caract ́erise les forces appliqu ́ees sur l’avion lors du vol en phase stationnaire et les termes de la forme ∆X(t) repr ́esentent les perturbations dues aux  ́evolutions de l’avion autour de son point d’ ́equilibre.
+
+
+4.4. LES E ́QUATIONS LINE ́ARISE ́ES 87
+Les moments s’exer ̧cant sur l’avion s’ ́ecrivent sous la forme suivante :
+Mx = L = L0 + ∆L(t)
+My = M = M0 + ∆M (t)
+Mz = N = N0 + ∆N (t)
+(4.24)
+Pour pouvoir line ́ariser les  ́equations, il faut, dans un premier temps, d ́efinir pour, chaque variable, sa valeur d’ ́equilibre et la perturbation qui lui est associ ́ee :
+u =u0 + ∆u(t)
+v =v0 + ∆v(t) = v(t)
+w =w0 + ∆w(t) = w(t)
+p =p0 + ∆p(t) = p(t)
+q =q0 + ∆q(t) = q(t)
+r =r0 + ∆r(t) = r(t)
+Θ =Θ0 + ∆Θ(t)
+Φ =Φ0 + ∆Φ(t) = Φ(t)
+(4.25)
+De plus, nous pouvons ajouter `a ce jeu d’e ́quations, les e ́quations de ́crivant le vol stationnaire de l’avion :
+T + X0 − mg sin Θ0 = 0 (4.26)
+Y0 = 0 (car Φ0 = 0) (4.27)
+Z0 + mg cos Θ0 = 0 (4.28)
+L0 = M0 = N0 = 0 (4.29)
+Dans les e ́quations, il apparaıˆt des termes en sin Θ, cos Θ, sin Φ et cos Φ qui peuvent ˆetre lin ́earis ́es comme suit si ∆Θ(t) << 1 et Φ(t) << 1 :
+sin Θ = sin Θ0 + ∆Θ(t) cos Θ0
+cos Θ = cos Θ0 − ∆Θ(t) sin Θ0
+sin Φ =Φ(t) pour Φ0 = 0
+cos Φ =1.0 pour Φ0 = 0
+(4.30)
+Toutes les hypothe`ses e ́tant maintenant pose ́es, il est possible de lin ́eariser l’ensemble des  ́equations 4.11 `a 4.22. A titre d’exemple, nous allons d ́etailler la lin ́earisation de la premi`ere  ́equation du syst`eme 4.11. Cette e ́quation devient en utilisant l’ensemble des relations pr ́esent ́ees pre ́ce ́demment :
+∆X(t) − mgΘ(t) cos Θ0 = m[∆u ̇ (t) + q(t)w(t) − r(t)v(t)] (4.31)
+Dans cette  ́etape de lin ́earisation, nous n’allons conserver que les termes d’ordre 0 ou 1. L’ ́equation 4.31 devient alors :
+∆X(t) − mgΘ(t) cos Θ0 = m∆u ̇ (t) = mV0(∆u ̇ (t)/V0) (4.32)
+
+
+88 CHAPITRE 4. EQUATIONS DU MOUVEMENT
+Il est possible d’appliquer la mˆeme proce ́dure pour les trois  ́equations de conservation de la quantit ́e de mouvement. Nous obtenons alors :
+∆X(t) − mgΘ(t) cos Θ0 =m∆u ̇ (t) = mV0(∆u ̇ (t)/V0)
+∆Y (t) + mgΦ(t) cos Θ0 =m(v ̇(t) + r(t)V0) = mV0(β ̇(t) + r(t))
+∆Z(t) − mgΘ(t) sin Θ0 =m(w ̇ (t) − q(t)V0) = mV0(α ̇ (t) − q(t)
+(4.33)
+avec : — α(t) la perturbation de l’angle d’attaque, α(t) = w(t)/V0 — β(t) la perturbation de l’angle de de ́rapage, β(t) = v(t)/V0 Pour obtenir les  ́equations lin ́earis ́ees pour les moments de lacet, de tangage et de roulis, il suffit de prendre les  ́equations 4.14 `a 4.16 et d’imposer L0, M0 et N0 `a z ́ero (l’avion  ́etant initialement `a l’ ́equilibre) puis de supprimer tous les termes d’ordre 2. Nous obtenons alors :
+∆L(t) =Ixp ̇(t) − Ixzr ̇(t)
+∆M (t) =Iyq ̇(t)
+∆N (t) =Izr ̇(t) − Ixzp ̇(t)
+(4.34)
+ce qui nous donne pour le syst`eme complet :
+∆X(t) − mg∆θ(t) cos Θ0 = m∆u ̇ (t) = mV0(∆u ̇ (t)/V0) (4.35)
+∆Y (t) + mg∆φ(t) cos Θ0 = m(v ̇(t) + r(t)V0) = mV0(β ̇(t) + r(t)) (4.36)
+∆Z(t) − mg∆θ(t) sin Θ0 = m(w ̇ (t) − q(t)V0) = mV0(α ̇ (t) − q(t)) (4.37)
+∆L(t) = Ixp ̇(t) − Ixzr ̇(t) (4.38)
+∆M (t) = Iyq ̇(t) (4.39)
+∆N (t) = Izr ̇(t) − Ixzp ̇(t) (4.40)
+x ̇ 0 = (u0 + ∆u(t)) cos Θ0 − u0∆Θ(t) sin Θ0 + w(t) sin Θ0 (4.41)
+y ̇0 = u0Ψ cos Θ0 + v(t) (4.42)
+z ̇0 = −(u0 + ∆u(t)) sin Θ0 − u0∆Θ(t) cos Θ0 + w(t) cos Θ0 (4.43)
+∆  ̇Θ(t) = q (4.44)
+ ̇Φ(t) = p(t) + r(t) tan Θ0 ou encore p(t) = Φ ̇ (t) −  ̇Ψ(t) sin Θ0 (4.45)
+ ̇Ψ(t) = r(t) tan−1 Θ0 (4.46)
+L’ensemble des forces et moments a ́erodynamiques qui interviennent dans le syst`eme lin ́earis ́e seront d ́eveloppe ́s en s ́erie Taylor. Ce de ́veloppement fera l’objet du chapitre 5. Les variables, traditionnellement prises en compte, dans ces de ́veloppements, sont les variables d’e ́tat suivantes :
+∆X(t) = ∆X[(u/V0), α, α ̇ , q, δ, β, β ̇, p, r, . . . ] (4.47)
+ou` δ repr ́esente l’action des commandes. Les de ́rive ́es des forces et moments a ́erodynamiques par rapport au variables d’ ́etat (Xi) sont appel ́ees d ́eriv ́ees de stabilite ́ dimensionnelles. Dans le cadre de ce cours, nous allons faire les hypoth`eses traditionnellement utilis ́ees dans le monde de la me ́canique du vol :
+
+
+4.5. FORMULATION MATRICIELLE 89
+— Le vol est sym ́etrique, les de ́rive ́es des forces et des couples lat ́eraux par rapport aux variables longitudinales (u, w, q) sont nulles. — Les d ́eriv ́ees des forces et des couples a ́erodynamiques longitudinaux par rapport aux variables lat ́erales seront n ́eglig ́ees. — Les d ́eriv ́ees des forces et des couples a ́erodynamiques par rapport aux d ́erive ́es temporelles des variables d’ ́etat sont n ́eglig ́ees, `a l’exception de Zw ̇ et Mw ̇ . — La d ́eriv ́ee Xq est ne ́glige ́e. — Les variations de la masse volumique en fonction de l’altitude sont n ́eglig ́ees.
+4.5 Formulation matricielle
+Le syst`eme d’ ́equation  ́eq. 4.35 `a  ́eq. 4.46 peut ˆetre d ́ecompos ́e en un syst`eme d ́ecrivant les mouvements longitudinaux et un syst`eme d ́ecrivant les mouvements lat ́eraux. Cette d ́ecomposition ne peut ˆetre faıˆte que dans le cas d’un avion standard. Les  ́equations associ ́ees au mode longitudinal sont les  ́equations de ́crivant la force axiale, ∆X(t), la force normale, ∆Z(t) et le moment de tangage, ∆M (t). Celles associ ́ees aux modes lat ́eraux sont les  ́equations d ́ecrivant la force late ́rale, ∆Y (t), et les moments de roulis, ∆L(t), et de lacet, ∆N (t).
+4.5.1 Syste`me longitudinal
+Le d ́eveloppement de Taylor pour les grandeurs : ∆X(t), ∆Z(t) et ∆M (t) est fait suivant les variables suivantes :
+u(t)
+V , α(t) = w(t)
+V , α ̇ = dα
+dt , q = dθ
+dt , et δ(t) (4.48)
+Le de ́veloppement de la force a ́erodynamique axiale s’ ́ecrit comme suit :
+∆X(t) = ∆Xu[u(t)/V ] + ∆Xαα(t) + ∆Xα ̇ α ̇ + ∆Xqq(t) + ∆Xδδ(t) (4.49)
+avec : — ∆Xu la variation de ∆X par unit ́e de (u/V ) : ∂∆X/∂(u/V ) (N) — ∆Xα la variation de ∆X par unit ́e de α : ∂∆X/∂α (N.rad−1) — ∆Xα ̇ la variation de ∆X par unit ́e de α ̇ : ∂∆X/∂α ̇ (N.s.rad−1) — ∆Xq la variation de ∆X par unit ́e de q : ∂∆X/∂q (N.s.rad−1) — ∆Xδ la variation de ∆X par unit ́e de δ : ∂∆X/∂δ (N.rad−1) Les termes ∆Xα ̇ et ∆Xq sont souvent n ́eglig ́es en raison de leur faible valeur compar ́ee aux autres termes. Le terme ∆Xα est quant `a lui tre`s d ́ependant du coefficient de portance CL. Il est aussi possible d’ ́ecrire :
+∆Z(t) = ∆Zu[u(t)/V ] + ∆Zαα(t) + ∆Zα ̇ α ̇ + ∆Zqq(t) + ∆Zδδ(t) (4.50)
+Dans cette expression, le terme ∆Zα d ́epend fortement de la pente de la polaire. Les termes ∆Zα ̇ et ∆Zq sont parfois donn ́es pour certains avions. Cependant ils n’ont qu’une influence mineure sur la dynamique de l’avion. De meˆme, nous pouvons e ́crire :
+∆M (t) = ∆Mu[u(t)/V ] + ∆Mαα(t) + ∆Mα ̇ α ̇ + ∆Mqq(t) + ∆Mδδ(t) (4.51)
+
+
+90 CHAPITRE 4. EQUATIONS DU MOUVEMENT
+avec ∆Mα qui de ́pend fortement de la position du centre de gravit ́e par rapport au foyer. Le terme ∆Mq est d ́ependant des coefficients d’amortissement de tangage. Il joue un rˆole pr ́eponde ́rant dans l’amortissement du mode propre naturel le plus rapide de l’avion (l’oscillation d’incidence). Pour faciliter la suite de l’expos ́e, nous allons introduire de nouvelles de ́finitions pour les d ́eriv ́ees dimensionnelles des forces et des moments. Pour les d ́eriv ́ees d ́ependantes de : α, α ̇ , q et δ, nous posons :
+Xi = ∆Xi/m (4.52)
+Zi = ∆Zi/m (4.53)
+Mi = ∆Mi/Iy (4.54)
+Pour les d ́eriv ́ees d ́ependantes de u, nous posons :
+Xu = ∆Xu/(mV ) (4.55)
+Zu = ∆Zu/(mV ) (4.56)
+Mu = ∆Mu/(IyV ) (4.57)
+Les e ́quations 4.35, 4.37, 4.39 et 4.44 d ́ecrivant la partie longitudinale des mouvements de l’avion donne alors :
+V (∆u ̇ /V ) = V Xu(∆u/V ) + Xαα − g∆Θ cos Θ0 + Xδδ (4.58)
+(V − Zα ̇ )α ̇ = V Zu(∆u/V ) + Zαα + (V + Zq)q − g∆Θ sin Θ0 + Zδδ (4.59)
+−Mα ̇ α ̇ + q ̇ = V Mu(∆u/V ) + Mαα + Mqq + Mδδ (4.60)
+∆Θ ̇ = q (4.61)
+Nous de ́finissons comme jeu de variables d’e ́tat du syst`eme longitudinal :
+{x} = [∆u/V α q ∆Θ]T (4.62)
+Le syste`me longitudinal peut alors s’e ́crire :
+[In]{x ̇ } = [An]{x} + {Bn}δ (4.63)
+avec
+[In] =
+
+  
+V 0 00 0 (V − Zα ̇ ) 0 0 0 −Mα ̇ 1 0 0 0 01
+
+  
+(4.64)
+[An] =
+
+  
+V Xu Xα 0 −g cos Θ0 V Zu Zα (V + Zq) −g sin Θ0 V Mu Mα Mq 0 00 1 0
+
+  
+(4.65)
+et
+{Bn} = [Xδ Zδ Mδ 0]T (4.66)
+
+
+4.5. FORMULATION MATRICIELLE 91
+La matrice [In] n’ ́etant pas singuli`ere, il est possible de multiplier l’ ́equation 4.63 par [In]−1. Ce qui donne alors :
+{x ̇ } = [A]{x} + {B}δ (4.67)
+avec : — [A] la matrice caract ́eristique de l’avion [A] = [In]−1[An] — [B] la matrice caract ́eristique des commandes de l’avion [B] = [In]−1[Bn] Les coefficients de la matrice [A] e ́tant :
+A11 = Xu A12 = Xα/V A13 = 0 A14 = −(g/V ) cos Θ0
+A21 = V Zu/(V − Zα ̇ ) A22 = Zα/(V − Zα ̇ )
+A23 = (V + Zq)/(V − Zα ̇ ) A24 = −g sin Θ0/(V − Zα ̇ )
+A31 = V Mu + Mα ̇ V Zu/(V − Zα ̇ ) A32 = Mα + Mα ̇ Zα/(V − Zα ̇ )
+A33 = Mq + Mα ̇ (V + Zq)/(V − Zα ̇ ) A34 = 0
+A41 = A42 = A44 = 0 A43 = 1
+et ceux de la matrice [B] :
+B1 = Xδ/V B2 = Zδ/(V − Zα ̇ )
+B3 = Mδ + Mα ̇ Zδ/(V − Zα ̇ ) B4 = 0
+4.5.2 Syst`eme transversal
+Le de ́veloppement de Taylor pour les grandeurs : ∆Y (t), ∆L(t) et ∆N (t) est dans ce cas fait selon les variables suivantes :
+β(t) = v(t)
+V , p = dφ
+dt , r = dψ
+dt et δ(t) (4.68)
+contrairement au cas longitudinal ou` les d ́eriv ́ees suivant α et α ̇  ́etait consid ́er ́ee, dans le cas transversal, l’influence des d ́eriv ́ees suivant β ̇ = dβ/dt est n ́eglig ́ees. De meˆme l’influence de l’angle de gıˆte, φ, sur les grandeurs ae ́rodynamiques sera n ́eglig ́ee. La force a ́erodynamique lat ́erale, peut donc s’e ́crire sous la forme suivante :
+∆Y (t) = ∆Yββ(t) + ∆Ypp(t) + ∆Yrr(t) + ∆Yδδ(t) (4.69)
+avec : — ∆Yβ la variation de ∆Y par unit ́e de β : ∂∆Y /∂β (N.rad−1) — ∆Yp la variation de ∆Y par unit ́e de p : ∂∆Y /∂p (N.s.rad−1) — ∆Yr la variation de ∆Y par unit ́e de r : ∂∆Y /∂r (N.s.rad−1) — ∆Yδ la variation de ∆Y par unit ́e de δ : ∂∆Y /∂δ (N.rad−1) Le moment de roulis s’ ́ecrit sous la forme suivante :
+∆L(t) = ∆Lββ(t) + ∆Lpp(t) + ∆Lrr(t) + ∆Lδδ(t) (4.70)
+Le terme ∆Lβ d ́epend directement de l’effet a ́erodynamique connu sous le nom d’effet di`edre. Quand au terme ∆Lp, il caract ́erise la capacite ́ de l’avion `a amortir le roulis.
+
+
+92 CHAPITRE 4. EQUATIONS DU MOUVEMENT
+De meˆme, le moment de lacet, s’e ́crit :
+∆N (t) = ∆Nββ(t) + ∆Npp(t) + ∆Nrr(t) + ∆Nδδ(t) (4.71)
+Le terme ∆Nβ caract ́erise la stabilit ́e de route de l’avion, ∆Nr caract ́erisant lui l’amortissement en lacet. Comme dans le cas du syste`me longitudinal, les de ́rive ́es dimensionn ́ees lat ́erales sont reformul ́ees comme suit pour simplifier la suite de la pr ́esentation :
+Yi = ∆Yi/m (4.72)
+Li = ∆Li/Ix (4.73)
+Ni = ∆Ni/Iz (4.74)
+avec i = β, p, r, δ. Les  ́equations ?? deviennent alors :
+V β ̇ = Yββ + Ypp + gΦ cos Θ0 + (Yr − V )r + Yδδ (4.75)
+p ̇ − (Ixz/Ix)r ̇ = Lββ + Lpp + Lrr + Lδδ (4.76)
+−(Ixz/Iz)p ̇ + r ̇ = Nββ + Npp + Nrr + Nδδ (4.77)
+Φ ̇ = p + r tan Θ0 (4.78)
+Les variables d’ ́etat caracte ́risant les mouvements transversaux sont :
+{x} = [β p Φ r]T (4.79)
+Le syste`me transversal peut alors s’ ́ecrire :
+[In]{x ̇ } = [An]{x} + {Bn}δ (4.80)
+avec
+[In] =
+
+  
+V 000 0 1 0 −Ixz/Ix 0 010 0 −Ixz/Iz 0 1
+
+  
+(4.81)
+[An] =
+
+  
+Yβ/V Yp/V g cos Θ0/V (Yr − V )/V Lβ Lp 0 Lr 0 1 0 tan Θ0 Nβ Np 0 Nr
+
+  
+(4.82)
+et
+{Bn} = [Yδ Lδ 0 Nδ]T (4.83)
+La matrice [In] n’ ́etant pas singuli`ere, il est possible de multiplier l’ ́equation 4.80 par [In]−1. Ce qui donne alors :
+{x ̇ } = [A]{x} + {B}δ (4.84)
+avec :

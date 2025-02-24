@@ -1,0 +1,2545 @@
+Mécanique des uides appliquée
+Écoulements compressibles
+Ondes de choc
+ESM/SDI/S4/Majeure Mécanique - option Propulsion -Énergie
+Patrick Barreau
+Figure 1 Ondes de choc attachées à un avion en vol supersonique M=1,09 ©NASA
+Édition 2023
+
+
+
+
+Table des matières
+Sommaire v
+1 Dé nitions et rappels 1 1.1 Analyse du mouvement d'un élément de volume - Taux de déformation . . . . . 1 1.1.1 Variations du vecteur vitesse en un point . . . . . . . . . . . . . . . . . . 1 1.1.2 Taux de dilatation volumique . . . . . . . . . . . . . . . . . . . . . . . . 2 1.2 Contraintes dans un uide . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3 1.3 Viscosité des uides . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4 1.3.1 Expérience de Couette - Viscosité dynamique . . . . . . . . . . . . . . . 4 1.3.2 Viscosité cinématique . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5 1.3.3 Variation de la viscosité avec la température et la pression . . . . . . . . 6
+2 Théorèmes généraux 7 2.1 Hypothèses de travail . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7 2.2 Dérivée particulaire (ou dérivée matérielle) d'une fonction scalaire . . . . . . . . 7 2.3 Dérivée particulaire d'une fonction vectorielle . . . . . . . . . . . . . . . . . . . 7 2.4 Dérivée d'une intégrale de volume . . . . . . . . . . . . . . . . . . . . . . . . . . 8 2.4.1 Cas d'une fonction scalaire . . . . . . . . . . . . . . . . . . . . . . . . . . 8 2.4.2 Cas d'un vecteur . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+3 Équations fondamentales de la mécanique des uides 9 3.1 Équation de conservation de la masse . . . . . . . . . . . . . . . . . . . . . . . . 9 3.1.1 Énoncé du principe . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9 3.1.2 Équation intégrée . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9 3.2 Équations des quantités de mouvement . . . . . . . . . . . . . . . . . . . . . . . 10 3.2.1 Énoncé du principe . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10 3.2.2 Équations dynamiques ponctuelles . . . . . . . . . . . . . . . . . . . . . 10 3.3 Les équations de Navier-Stokes . . . . . . . . . . . . . . . . . . . . . . . . . . . 11 3.3.1 Équations de la dynamique des uides visqueux . . . . . . . . . . . . . . 11 3.3.2 Équations des uides visqueux incompressibles : équations de Navier-Stokes 12 3.4 Équation intégrée du théorème des quantités de mouvement . . . . . . . . . . . 12 3.5 Théorème de l'énergie cinétique . . . . . . . . . . . . . . . . . . . . . . . . . . . 12 3.5.1 Principe . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12 3.5.2 Détermination de la puissance des forces de volume Pv . . . . . . . . . . 13 3.5.3 Détermination de la puissance des forces de surface . . . . . . . . . . . . 14 3.5.4 Détermination de la puissance des forces intérieures . . . . . . . . . . . . 14 3.5.5 Écriture dé nitive du théorème de l'énergie cinétique . . . . . . . . . . . 15
+iii
+
+
+4 Théorème de Bernoulli 17 4.1 Rappel des équations de la dynamique . . . . . . . . . . . . . . . . . . . . . . . 17 4.2 Cas des uides parfaits, barotropes ou incompressibles . . . . . . . . . . . . . . 17 4.2.1 Équation dynamique ponctuelle . . . . . . . . . . . . . . . . . . . . . . . 17 4.2.2 Intégration de l'équation dynamique ponctuelle . . . . . . . . . . . . . . 18 4.2.3 Cas des écoulements de uides incompressibles homogènes . . . . . . . . 19 4.2.4 Charge . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19 4.3 Cas des uides visqueux incompressibles - Théorème de Bernoulli généralisé . . . 19 4.3.1 Hypothèses . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19 4.3.2 Théorème de Bernoulli généralisé . . . . . . . . . . . . . . . . . . . . . . 20 4.3.3 Formules pour l'expression des pertes de charge régulière . . . . . . . . . 20 4.3.4 Canalisations industrielles - Diagramme de Moody . . . . . . . . . . . . 21 4.3.5 Cas des pertes de charge singulières . . . . . . . . . . . . . . . . . . . . . 22
+5 Écoulements mono-dimensionnels des uides compressibles 25 5.1 Étude générale de l'écoulement . . . . . . . . . . . . . . . . . . . . . . . . . . . 26 5.1.1 Équations de base de l'écoulement . . . . . . . . . . . . . . . . . . . . . . 26 5.1.2 Vitesse du son dans un uide quelconque . . . . . . . . . . . . . . . . . . 27 5.2 Étude de l'écoulement isentropique d'un gaz parfait . . . . . . . . . . . . . . . . 28 5.2.1 Écoulement adiabatique d'un uide non pesant . . . . . . . . . . . . . . 28 5.2.2 Étude générale de l'écoulement . . . . . . . . . . . . . . . . . . . . . . . 29 5.2.3 Particularités de l'écoulement . . . . . . . . . . . . . . . . . . . . . . . . 32 5.3 Écoulement unidimensionnel dans une tuyère . . . . . . . . . . . . . . . . . . . . 32 5.3.1 Rappel des hypothèses et de l'objectif de la tuyère . . . . . . . . . . . . . 32 5.3.2 Relation de Hugoniot . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32 5.3.3 Divers régimes de fonctionnement d'une tuyère . . . . . . . . . . . . . . . 33 5.4 Tuyère convergente - divergente dans un moteur fusée . . . . . . . . . . . . . . . 36 5.4.1 Expression de la poussée . . . . . . . . . . . . . . . . . . . . . . . . . . . 36 5.4.2 Poussée si la tuyère est adaptée . . . . . . . . . . . . . . . . . . . . . . . 36 5.4.3 Tuyère non adaptée . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37 5.4.4 Rendements pour caractériser l'e cacité d'un propulseur . . . . . . . . . 37 5.4.5 Puissance perdue . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37 5.4.6 Puissance disponible . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37 5.4.7 Rendement de propulsion . . . . . . . . . . . . . . . . . . . . . . . . . . 37 5.4.8 Impulsion spéci que du propulseur . . . . . . . . . . . . . . . . . . . . . 38
+6 Ondes de choc droit 39 6.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39 6.2 Choc normal . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39 6.2.1 Hypothèses . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39 6.2.2 Équations du choc . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40 6.2.3 Expressions des rapports des pressions, masses volumiques, températures et nombre de Mach en fonction du nombre de Mach aval Ma1 . . . . . . 40 6.2.4 Variation d'entropie au passage du choc . . . . . . . . . . . . . . . . . . 44 6.2.5 Modi cations des conditions génératrices . . . . . . . . . . . . . . . . . . 45 6.2.6 Expression du rapport des sections critiques . . . . . . . . . . . . . . . . 46
+page iv
+
+
+7 Ondes de choc oblique 47 7.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47 7.2 Équations à la traversée du choc oblique . . . . . . . . . . . . . . . . . . . . . . 48 7.3 Expressions des rapports de pressions, températures, masses volumiques et nombre de Mach . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48 7.4 Expression de la di érence d'entropie et conséquence . . . . . . . . . . . . . . . 49 7.5 Polaire de choc . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+Bibliographie 53
+page v
+
+
+page vi
+
+
+Chapitre 1
+Dé nitions et rappels
+1.1 Analyse du mouvement d'un élément de volume - Taux de déformation
+1.1.1 Variations du vecteur vitesse en un point
+L'espace est rapporté au référentiel cartésien R (x, y, z, t). On considère à l'instant t un élément de volume entourant le point M (x, y, z) et soit M ′ (x, y, z) un point voisin de M. On note ~v (u, v, w) la vitesse en M et v~′ (u′, v′, w′) la vitesse au point M'.
+Le vecteur in niment petit −−−→
+M M ′ a pour composantes (h, k, l). On peut écrire que la composante u′ du vecteur v~′ est :
+u′ (x + h, y + k, z + l) = u (x, y, z) + h ∂u
+∂x + k∂u
+∂y + l∂u
+∂z (1.1)
+De même avec les deux autres composantes v′ et w′. En utilisant la notation indicielle, on écrit alors
+u′
+i = ui + dui = ui + hj
+∂ui
+∂xj
+(1.2)
+L'équation 1.1peut s'écrire
+u′ = u + 1
+2
+[
+l
+(∂u
+∂z − ∂w
+∂x
+)
+−k
+(∂v
+∂x − ∂u
+∂y
+)]
++ h∂u
+∂x + 1
+2k
+(∂v
+∂x + ∂u
+∂y
+)
++1
+2l
+(∂u
+∂z + ∂w
+∂x
+) (1.3)
+Le vecteur ~Ω = 1
+2
+r−o→t~v a pour composantes :
+−→Ω =
+
+       
+       
+ξ=1
+2
+(∂w
+∂y − ∂v
+∂z
+)
+η=1
+2
+(∂u
+∂z − ∂w
+∂x
+)
+ζ= 1
+2
+(∂v
+∂x − ∂u
+∂y
+)
+(1.4)
+Le vecteur ~Ω est appelé vecteur tourbillon.
+1
+
+
+Chapitre 1. Dé nitions et rappels
+On note également les quantités ci-après
+
+                  
+                  
+zy = yz = 1
+2
+(∂w
+∂y + ∂v
+∂z
+)
+xz = zx = 1
+2
+(∂u
+∂z + ∂w
+∂x
+)
+yx = xy = 1
+2
+(∂v
+∂x + ∂u
+∂y
+)
+xx = ∂u
+∂x
+yy = ∂v
+∂y
+zz = ∂w
+∂z
+(1.5)
+On peut utiliser l'écriture synthétique
+ij = ji = 1
+2
+( ∂ui
+∂xj
++ ∂uj
+∂xi
+)
+(1.6)
+Les composantes du vecteur v~′ s'écrivent donc
+
+
+
+u′ = u + (ηl − ζk) + xxh + xyk + xzl v′ = v + (ζh − ξl) + yxh + yyk + yzl w′ = w + (ξk − ηh) + zxh + zyk + zzl
+(1.7)
+Ce qui s'écrit
+v~′ (M ′) = ~v (M ) + ~Ω ∧ −−−→
+M M ′ + ~D (1.8)
+Le vecteur vitesse v~′ est donc le résultat de la somme de trois vecteurs : le vecteur ~v,
+le vecteur ~Ω ∧ −−−→
+M M ′ qui correspond à une rotation en bloc de l'élément de volume autour du point M à la vitesse angulaire ~Ω, le vecteur ~D dont les composantes sont
+
+
+
+Dx = xxh + xyk + xzl
+Dy = yxh + yyk + yzl
+Dz = zxh + zyk + zzl
+(1.9)
+En notation indicielle Di = ijhj Le vecteur ~D est appelée vitesse de déformation et les termes ij sont les taux de déformation de l'élément de volume
+1.1.2 Taux de dilatation volumique
+On peut montrer que la quantité e dé nie par :
+e = ∂u
+∂x + ∂v
+∂y + ∂w
+∂z = ∂ui
+∂xi
+= div~v (1.10)
+est le taux de dilatation cubique Conséquence : lorsque le uide est incompressible, on a
+div~v = 0 (1.11)
+page 2
+
+
+Chapitre 1. Dé nitions et rappels
+1.2 Contraintes dans un uide
+On considère un point M quelconque dans le uide et un élément de surface autour du point M orienté par le vecteur normal ~n. Le vecteur contrainte au point M relativement à l'élément de surface dS orienté par le vecteur ~n est dé ni par
+T~ (M, ~n) =
+d−→F
+dS (1.12)
+avec d−→F la résultante des forces extérieures sur dS. On peut dé nir un tenseur des contraintes au point M σ ̄ ̄ (M ). Le vecteur contrainte s'écrit alors :
+T~ (M, ~n) = σ ̄ ̄ (M ) ~n (1.13)
+Il est symétrique et est représenté par une matrice symétrique lorsque l'espace est rapporté à des coordonnées cartésiennes.
+σ (M ) =
+
+
+σxx σxy σxz
+σxy σyy σyz
+σxz σyz σzz
+
+ (1.14)
+On peut donc écrire en notation indicielle :
+Ti = σijnj (1.15)
+Dans le cas des uides newtoniens, les contraintes σij sont des fonctions linéaires des taux de déformation du milieu. Elles s'écrivent :
+σij = −pδij + 2μ ij + ηδij ( xx + yy + zz) (1.16)
+avec p pression statique indépendante de la direction en un point donné μ et η deux paramètres caractérisant les propriétés visqueuses du uide μ correspond à la viscosité de cisaillement η correspond à la viscosité de dilatation On note τij le terme
+τij = 2μ ij + ηδij ( xx + yy + zz) (1.17)
+Il s'écrit encore en utilisant e la notation pour le taux de dilatation cubique
+τij = 2μ ij + ηδije (1.18)
+L'équation 1.16 peut s'écrire sous forme vectorielle
+T~ = −p~n + τ~ (1.19)
+Le vecteur T~ est la contrainte totale et τ~ la contrainte visqueuse. Ses composantes normales sont :
+
+       
+       
+σxx = −p + 2μ ∂u
+∂x + η
+(∂u
+∂x + ∂v
+∂y + ∂w
+∂z
+)
+σyy = −p + 2μ ∂v
+∂y + η
+(∂u
+∂x + ∂v
+∂y + ∂w
+∂z
+)
+σxx = −p + 2μ ∂w
+∂z + η
+(∂u
+∂x + ∂v
+∂y + ∂w
+∂z
+)
+(1.20)
+page 3
+
+
+Chapitre 1. Dé nitions et rappels
+Les composantes tangentielles sont ;
+
+       
+       
+τxy = μ
+(∂u
+∂y + ∂v
+∂x
+)
+τyz = μ
+(∂v
+∂z + ∂w
+∂y
+)
+τzx = μ
+(∂w
+∂x + ∂u
+∂z
+)
+(1.21)
+1.3 Viscosité des uides
+L'expression des contraintes a montré que les propriétés visqueuses des uides newtoniens sont caractérisées par les deux paramètres μ et η. Les forces tangentielles de viscosité sont mises en évidence par l'expérience de Couette.
+1.3.1 Expérience de Couette - Viscosité dynamique
+Le dispositif est constitué de deux cylindres coaxiaux, de rayons peu di érents, dont l'espace annulaire est rempli d'un uide. Lorsque l'on entraîne le cylindre extérieur avec un moteur à une vitesse angulaire constante ω, le cylindre intérieur se met à tourner dans le même sens. Pour le maintenir immobile, il faut lui appliquer un couple C de sens opposé.
+Figure 1.1 Dispositif de Couette
+La distance e, entre les cylindres, est très petite devant leur rayon moyen r (cf. gure 1.1) ; on peut alors modéliser l'expérience en considérant un uide compris entre deux plans. Un plan P' mobile se déplaçant à une vitesse v et un plan xe P parallèle à Ox de surface S = 2πrh. Sur le plan xe s'exerce une force de frottement F due à la présence du uide. L'écoulement qui s'établit est représenté sur la gure 1.2
+L'expérience montre que la force F est proportionnelle au rapport v
+e.
+page 4
+
+
+Chapitre 1. Dé nitions et rappels
+Figure 1.2 Schématisation de l'écoulement de Couette
+On a la relation
+F = μS v
+e (1.22)
+avec μ facteur de proportionnalité qui ne dépend que du uide et de la température. On peut dé nir une contrainte tangentielle
+τ=F
+S = μv
+e = μdu
+dy (1.23)
+La relation 1.23 est l'expression de la contrainte tangentielle τxy dans le cas d'un écoulement parallèle à Ox (v = w = 0).
+τxy = μ
+(∂u
+∂y + ∂v
+∂x
+)
+(1.24)
+Le coe cient de proportionnalité μ se confond avec la viscosité de cisaillement . μ est encore appelé viscosité dynamique ou viscosité absolue. L'unité de la viscosité absolue est le Poiseuille (Pl).
+1.3.2 Viscosité cinématique
+La viscosité cinématique est dé nie par le rapport
+ν=μ
+ρ (1.25)
+L'unité de la viscosité cinématique est le m2/s. Voici quelques valeurs pour trois uides à la pression atmosphérique (1 bar) et 20 °C :
+Fluide μ (kg/(ms) ρ (kg/m3) ν (m2/s Hydrogène 9 ∗ 10−6 0, 084 1, 05 ∗ 10−4 Eau 1 ∗ 10−3 998 1, 0 ∗ 10−6 Air 1, 8 ∗ 10−5 1, 2 1, 5 ∗ 10−5
+page 5
+
+
+Chapitre 1. Dé nitions et rappels
+1.3.3 Variation de la viscosité avec la température et la pression
+In uence de la pression
+La pression modi e peu la viscosité. Celle-ci pour les gaz et la plupart des liquides augmente légèrement avec la pression. Une exception pour l'eau autour de 30 °C où la viscosité diminue légèrement avec la pression. Généralement, les e ets de la pression sont considérés comme négligeables jusqu'à 100 bars.
+In uence de la température
+la viscosité des gaz augmente avec la température. Il existe deux modèles : la loi en puissance
+μ
+μ0
+=
+(T
+T0
+)n
+(1.26)
+la loi de Sutherland
+μ
+μ0
+=
+(T
+T0
+)3/2
+(T0 + S)
+T + S (1.27)
+avec μ0 viscosité connue généralement à 273 K. Les constantes n et S sont déterminées à partir des mesures expérimentales. Pour l'air, par exemple, n ' 0, 7 et S = 110 K. la viscosité des liquides diminue avec la température (décroissance exponentielle). La loi s'écrit
+ln
+(μ
+μ0
+)
+= a + b T0
+T +c
+( T0
+T
+)2
+(1.28)
+avec par exemple pour l'eau :
+
+    
+    
+T0 = 273, 16K μ0 = 0, 001792kg/(ms) a = −1, 94 b = −4, 80 c = 6, 74
+page 6
+
+
+Chapitre 2
+Théorèmes généraux
+2.1 Hypothèses de travail
+l'espace est rapporté à des coordonnées cartésiennes Représentation eulérienne du milieu uide les composantes du vecteur vitesse ~v en un point M du uide sont :
+~v =
+u v w
+2.2 Dérivée particulaire (ou dérivée matérielle) d'une fonction scalaire
+Soit f (M, t) une fonction scalaire. Lorsque l'on suit une particule dans son déplacement, on a :
+Df (M, t)
+Dt = ∂f (M, t)
+∂t
+} {{ }
+termelocal
++ ~v.−−→
+gradf
+} {{ }
+termeconvectif
+(2.1)
+Ce qui peut s'écrire
+Df
+Dt = ∂f
+∂t + u∂f
+∂x + v∂f
+∂y + w∂f
+∂z (2.2)
+2.3 Dérivée particulaire d'une fonction vectorielle
+Soit A~ (M, t) une fonction vectorielle. Lorsque l'on suit une particule dans son mouvement, on a pour chaque composante Ai :
+DAi
+Dt = ∂Ai
+∂t + ~v.−−→
+gradAi
+En notation indicielle, cette équation s'écrit :
+DAi
+Dt = ∂Ai
+∂t + uj
+∂Ai
+∂xj
+Sous forme d'écriture vectorielle, on obtient :
+DA~
+Dt = ∂A~
+∂t +
+(
+~v−−→
+grad
+) A~ (2.3)
+7
+
+
+Chapitre 2. Théorèmes généraux
+Si la fonction vectorielle A~ est le vecteur vitesse ~v, la dérivée particulaire du vecteur vitesse est l'accélération et s'écrit :
+~a = DV~
+Dt = ∂V~
+∂t + −−→
+grad
+( v2
+2
+)
++
+(r−o→t~v
+)
+∧ ~v (2.4)
+2.4 Dérivée d'une intégrale de volume
+2.4.1 Cas d'une fonction scalaire
+On considère un domaine de uide à un instant t, D(t) , et soit K(t) l'intégrale d'une fonction scalaire volumique f (M, t) attachée à ce domaine.
+K (t) =
+∫∫∫
+D
+f (M, t) dV
+On montre que la variation de K lorsque l'on suit le domaine est :
+DK
+Dt =
+∫∫∫
+D
+∂f
+∂t dV +
+∫∫
+S
+f~v.~ndS (2.5)
+avec ~n : vecteur normal unitaire dirigé vers l'extérieur du volume ~v : vecteur vitesse de la particule uide au niveau de la surface de contrôle la première intégrale représente la variation, par unité de temps, de la quantité de f contenue dans D considéré comme xe, la seconde intégrale représente le débit de f sortant de S Ce qui peut s'écrire également en utilisant le théorème d'Ostrogradski ( ux-divergence)
+DK
+Dt =
+∫∫∫
+D
+(∂f
+∂t + div (f~v)
+)
+dV (2.6)
+Ce résultat est présenté également sous la désignation théorème du transport pour un volume.
+2.4.2 Cas d'un vecteur
+Le théorème de transport pour une grandeur vectorielle ~b s'écrit :
+D
+Dt
+∫∫∫
+D
+~bdV =
+∫∫∫
+D
+∂~b
+∂t dV +
+∫∫
+S
+~b~v.~ndS (2.7)
+page 8
+
+
+Chapitre 3
+Équations fondamentales de la mécanique
+des uides
+3.1 Équation de conservation de la masse
+3.1.1 Énoncé du principe
+La masse M d'un domaine D de uide reste constante c'est à dire que
+DM
+Dt = 0 (3.1)
+La masse du domaine D s'écrit
+M=
+∫∫∫
+D
+ρdV (3.2)
+D'après l'expression de la dérivée particulaire d'une intégrale de volume, on a
+DM
+Dt =
+∫∫∫
+D
+(∂ρ
+∂t + div (ρ~v)
+)
+dV (3.3)
+Le domaine D étant quelconque, on en déduit que, en tout point M du uide, on a la relation :
+∂ρ
+∂t + div (ρ~v) = 0 (3.4)
+L'équation 3.4 est l'équation locale de conservation de la masse ou encore l'équation de continuité Le terme div (ρ~v) s'écrit aussi :
+div (ρ~v) = ρdiv (~v) + ~v.−−→
+gradρ
+En utilisant cette expression dans l'équation 3.4, on obtient
+Dρ
+Dt + ρdiv (~v) = 0 (3.5)
+3.1.2 Équation intégrée
+Équation
+La dérivée particulaire de la masse M du domaine D peut s'écrire :
+DM
+Dt =
+∫∫∫
+D
+∂ρ
+∂t dV +
+∫∫
+S
+ρ~v.~ndS (3.6)
+9
+
+
+Chapitre 3. Équations fondamentales de la mécanique des uides
+La dérivée particulaire de M est nulle d'où
+∫∫∫
+D
+∂ρ
+∂t dV +
+∫∫
+S
+ρ~v.~ndS = 0 (3.7)
+La première intégrale représente la variation pendant le temps dt de la masse de uide contenue dans D délimité par une surface de contrôle xe. La seconde intégrale représente la somme des débits massiques de uide entrant et sortant à travers la surface de contrôle.
+Cas de l'écoulement permanent
+Dans ce cas, ∂ρ
+∂t = 0,et donc
+∫∫
+S
+ρ~v.~ndS = 0 (3.8)
+Ce qui s'énonce : la somme des débits massiques qui sortent d'une surface fermée xe tracée dans le uide est nulle.
+3.2 Équations des quantités de mouvement
+3.2.1 Énoncé du principe
+Le référentiel est galiléen et O est son origine. La dérivée par rapport au temps du torseur des quantités de mouvement est égal au torseur des forces extérieures appliquées au domaine D (forces de volume et forces de surface). On note F~ la densité volumique de forces de volume. L'égalité entre les torseurs se traduit par deux égalités vectorielles : l'égalité entre les résultantes générales des torseurs (équations de la dynamique)
+D
+Dt
+∫∫∫
+D
+ρ~vdV =
+∫∫∫
+D
+ρF~ dV +
+∫∫
+S
+T~ dS (3.9)
+l'égalité entre les moments résultants des torseurs (équations des moments)
+D
+Dt
+∫∫∫
+D
+O−−M→ ∧ ρ~vdV =
+∫∫∫
+D
+O−−M→ ∧ ρF~ dV +
+∫∫
+S
+O−−M→ ∧ T~ dS (3.10)
+3.2.2 Équations dynamiques ponctuelles
+La projection de l'équation 3.9 sur les axes donnent les trois équations :
+D
+Dt
+∫∫∫
+D
+ρuidV =
+∫∫∫
+D
+ρFidV +
+∫∫
+S
+TidS (3.11)
+Le terme à gauche de l'égalité s'écrit :
+D
+Dt
+∫∫∫
+D
+ρuidV =
+∫∫∫
+D
+ρ Dui
+Dt dV (3.12)
+Le terme relatif aux e orts de surface s'écrit :
+∫∫
+S
+TidS =
+∫∫
+S
+σijnjdS =
+∫∫∫
+D
+∂σij
+∂xj
+dV (3.13)
+page 10
+
+
+Chapitre 3. Équations fondamentales de la mécanique des uides
+L'équation3.11 s'écrit donc :
+∫∫∫
+D
+ρ Dui
+Dt dV =
+∫∫∫
+D
+ρFidV +
+∫∫∫
+D
+∂σij
+∂xj
+dV (3.14)
+Le domaine D est arbitraire d'où :
+ρ Dui
+Dt = ρFi + ∂σij
+∂xj
+(3.15)
+Quand les forces de volume dérivent d'un potentiel U, on a
+F~ = −−−→
+gradU
+donc
+Fi = − ∂U
+∂xi
+Lorsque le uide est newtonien, le terme σij du tenseur des contraintes s'écrit :
+σij = −pδij + τij
+Donc ∂σij
+∂xj
+= − ∂p
+∂xi
++ ∂τij
+∂xj
+(3.16)
+Le terme ∂τij
+∂xj
+représente les forces de viscosité volumique ; on le note fi.
+On obtient donc l'équation vectorielle
+ρ DV~
+Dt = ρ~a = −ρ−−→
+gradU − −−→
+gradp + f~ (3.17)
+Lorsque la force de pesanteur est la seule force de volume, l'équation précédente s'écrit
+ρ DV~
+Dt = ρ~a = ρ−g→ − −−→
+gradp + f~ (3.18)
+Au deuxième membre gurent des forces volumiques dont les unités sont le N/m3.
+3.3 Les équations de Navier-Stokes
+3.3.1 Équations de la dynamique des uides visqueux
+Pour un uide newtonien, le tenseur des contraintes visqueuses τij dépend linéairement des taux de déformation. On a la relation
+τij = 2μ ij + ηeδij (3.19)
+avec e le taux de dilatation volumique . On remplace τij dans l'équation 3.18 par l'expression 3.19. On obtient alors les équations :
+page 11
+
+
+Chapitre 3. Équations fondamentales de la mécanique des uides
+ρ Du
+dt =ρgx − ∂p
+∂x + μ∆u + (μ + η) ∂e
+∂x (3.20)
+ρ Dv
+dt = ρgy − ∂p
+∂y + μ∆v + (μ + η) ∂e
+∂y (3.21)
+ρ Dw
+dt =ρgz − ∂p
+∂z + μ∆w + (μ + η) ∂e
+∂z (3.22)
+Ce sont les équations de la dynamique des uides visqueux écrites en coordonnées cartésiennes
+3.3.2 Équations des uides visqueux incompressibles : équations de Navier-Stokes
+Lorsque le uide est incompressible, le taux e de dilatation cubique est nul. Les équations s'écrivent alors :
+ρ Du
+dt =ρgx − ∂p
+∂x + μ∆u (3.23)
+ρ Dv
+dt = ρgy − ∂p
+∂y + μ∆v (3.24)
+ρ Dw
+dt =ρgz − ∂p
+∂z + μ∆w (3.25)
+Ce sont les équations de Navier-Stokes sous forme cartésienne.
+3.4 Équation intégrée du théorème des quantités de mouvement
+Dans l'équation 3.12, on utilise le théorème de Reynolds pour exprimer la dérivée matérielle de la quantité de mouvement. On a donc
+DP~
+Dt = D
+Dt
+∫∫∫
+D
+ρ~vdV =
+∫∫∫
+D
+∂ρ~v
+∂t dV +
+∫∫
+S
+(ρ~v) ~v.~ndS (3.26)
+Ce qui donne
+∫∫∫
+D
+∂ρ~v
+∂t dV +
+∫∫
+S
+(ρ~v) ~v.~ndS = m~g −
+∫∫
+S
+p~ndS +
+∫∫
+S
+τ~dS (3.27)
+3.5 Théorème de l'énergie cinétique
+3.5.1 Principe
+On reprend les équations de la dynamique
+ρ Dui
+Dt = ρFi + ∂σij
+∂xj
+page 12
+
+
+Chapitre 3. Équations fondamentales de la mécanique des uides
+On les multiplie par ui et on ajoute les trois équations membre à membre ce qui donne
+ρD
+Dt
+( v2
+2
+)
+= ρuiFi + ui
+∂σij
+∂xj
+Ce qui peut s'écrire
+ρD
+Dt
+( v2
+2
+)
+= ρuiFi + ∂uiσij
+∂xj
+− σij
+∂ui
+∂xj
+On intègre ensuite sur un domaine D
+∫∫∫
+D
+ρD
+Dt
+( v2
+2
+)
+dV =
+∫∫∫
+D
+ρuiFidV +
+∫∫∫
+D
+∂uiσij
+∂xj
+dV −
+∫∫∫
+D
+σij
+∂ui
+∂xj
+dV (3.28)
+Cette égalité peut s'écrire
+D
+Dt
+∫∫∫
+D
+ρ
+( v2
+2
+)
+dV =
+∫∫∫
+D
+ρuiFidV +
+∫∫∫
+D
+∂uiσij
+∂xj
+dV −
+∫∫∫
+D
+σij
+∂ui
+∂xj
+dV (3.29)
+Le premier membre correspond à la dérivée de l'énergie cinétique du domaine D La signi cation des di érents termes du second membre est : le terme ∫∫∫
+D ρuiFidV est la puissance des forces de volume, notée PV
+le terme ∫ ∫ ∫
+D
+∂uiσij
+∂xj
+dV =
+∫∫
+S
+ui σij nj dS
+représente la puissance des forces de surface, notée PS La somme de la puissance des forces de volume et de la puissance des forces de surface est égale à la puissance des forces extérieures, notée Pe
+le terme − ∫∫∫
+D σij
+∂ui
+∂xj
+dV représente la puissance des forces intérieures Pi
+3.5.2 Détermination de la puissance des forces de volume Pv
+On a :
+Pv =
+∫∫∫
+D
+ρuiFidV =
+∫∫∫
+D
+ρF~ .~vdV
+Lorsque les forces de volume dérivent d'un potentiel U, on peut écrire :
+F~ = −−−→
+gradU
+La puissance des forces de volume s'écrit donc :
+Pv = −
+∫∫∫
+D
+ρ~v.−−→
+gradU dV
+D'après l'expression de la dérivée particulaire d'une fonction, on peut écrire :
+DU
+Dt = ∂U
+∂t + ~v.−−→
+gradU
+Comme le potentiel ne dépend pas du temps, l'expression devient
+DU
+Dt = ~v.−−→
+gradU
+La puissance des forces de volume devient alors :
+Pv = −
+∫∫∫
+D
+ρ DU
+Dt dV = − D
+Dt
+∫∫∫
+D
+ρU dV (3.30)
+La puissance des forces de volume correspond donc à une diminution, par unité de temps, de l'énergie potentielle du uide lorsque l'on suit le domaine D dans son déplacement.
+page 13
+
+
+Chapitre 3. Équations fondamentales de la mécanique des uides
+3.5.3 Détermination de la puissance des forces de surface
+Lorsque la surface S est tracée entièrement dans le uide, les contraintes σij s'écrivent :
+σij = −pδij + τij
+L'expression de PS s'écrit alors :
+PS = −
+∫∫
+S
+puiδijnjdS +
+∫∫
+S
+uiτijnjdS (3.31)
+Ce qui donne
+PS = −
+∫∫
+S
+puinidS +
+∫∫
+S
+uiτijnjdS (3.32)
+Ce qui peut s'écrire
+PS = −
+∫∫
+S
+p~v.~ndS +
+∫∫
+S
+uiτijnjdS (3.33)
+Ou encore
+PS = −
+∫∫
+S
+pVndS +
+∫∫
+S
+uiτijnjdS (3.34)
+Le terme PS a donc deux composantes : une composante due à la puissance des forces de pression statique, une composante due à la puissance des forces de viscosité On remarque que les parois solides xes n'apportent aucune contribution à la puissance des forces de surface car Vn = 0, ui = 0.
+3.5.4 Détermination de la puissance des forces intérieures
+La puissance des forces intérieures Pi = − ∫∫∫
+D σij
+∂ui
+∂xj
+dV s'écrit en utilisant l'expression de
+la contrainte σij :
+Pi = +
+∫∫∫
+D
+p ∂ui
+∂xi
+dV −
+∫∫∫
+D
+τij
+∂ui
+∂xj
+dV (3.35)
+Ce qui donne
+Pi = +
+∫∫∫
+D
+pdiv~vdV −
+∫∫∫
+D
+τij
+∂ui
+∂xj
+dV (3.36)
+On pose
+Φ = τij
+∂ui
+∂xj
+(3.37)
+Φ est une fonction positive ; elle est nommée fonction de dissipation (fonction de Rayleigh). L'intégrale ∫∫∫
+D φdV représente la puissance dissipée par frottement visqueux dans tout le
+domaine intérieur D.
+page 14
+
+
+Chapitre 3. Équations fondamentales de la mécanique des uides
+3.5.5 Écriture dé nitive du théorème de l'énergie cinétique
+Le théorème de l'énergie cinétique (3.29) s'écrit donc :
+D
+Dt
+∫∫∫
+D
+ρ
+( v2
+2
+)
+dV = − D
+Dt
+∫∫∫
+D
+ρU dV −
+∫∫
+S
+pVndS+
+∫∫
+S
+ui τij nj dS +
+∫∫∫
+D
+pdiv~vdV −
+∫∫∫
+D
+ΦdV
+(3.38) Ou encore
+D
+Dt
+∫∫∫
+D
+(
+ρ v2
+2 + ρU
+)
+dV = −
+∫∫
+S
+pVndS +
+∫∫∫
+D
+pdiv~vdV +
+∫∫
+S
+uiτijnjdS −
+∫∫∫
+D
+ΦdV
+(3.39) Le premier terme peut s'écrire en utilisant la dérivée particulaire d'une intégrale
+D
+Dt
+∫∫∫
+D
+(
+ρ v2
+2 + ρU
+)
+dV =
+∫∫∫
+D
+[∂
+∂t
+(
+ρ v2
+2 + ρU
+)
++ div
+[(
+ρ v2
+2 + ρU
+)
+~v
+]]
+dV
+Ce qui s'écrit
+∫∫∫
+D
+[∂
+∂t
+(
+ρ v2
+2 + ρU
+)
++ div
+[(
+ρ v2
+2 + ρU
+)
+~v
+]]
+dV =
+∫∫∫
+D
+∂
+∂t
+(
+ρ v2
+2 + ρU
+)
+dV
++
+∫∫
+S
+(
+ρ v2
+2 + ρU
+)
+vinidS
+(3.40)
+Ou encore
+∫∫∫
+D
+[∂
+∂t
+(
+ρ v2
+2 + ρU
+)
++ div
+[(
+ρ v2
+2 + ρU
+)
+~v
+]]
+dV =
+∫∫∫
+D
+∂
+∂t
+(
+ρ v2
+2 + ρU
+)
+dV
++
+∫∫
+S
+(
+ρ v2
+2 + ρU
+)
+vndS
+(3.41)
+En injectant cette expression dans l'expression du théorème de l'énergie cinétique (3.39), on obtient
+∫∫∫
+D
+∂
+∂t
+(
+ρ v2
+2 + ρU
+)
+dV +
+∫∫
+S
+(
+ρ v2
+2 + ρU + p
+)
+vndS =
+∫∫∫
+D
+pdiv~vdV
+−Pμ
+(3.42)
+avec
+Pμ = −
+∫∫
+S
+uiτijnjdS +
+∫∫∫
+D
+ΦdV (3.43)
+Ce terme correspond à la puissance totale dissipée par viscosité. L'équation 3.42 est dénommée Formule de Cotton - Fortier ou Formule de Bernoulli généralisée
+page 15
+
+
+Chapitre 3. Équations fondamentales de la mécanique des uides
+page 16
+
+
+Chapitre 4
+Théorème de Bernoulli
+4.1 Rappel des équations de la dynamique
+Lorsque les seules forces de volume sont les forces de pesanteur, on a vu que pour un uide, l'équation dynamique ponctuelle s'écrit :
+ρ DV~
+Dt = ρ~a = ρ−g→ − −−→
+gradp + f~ (4.1)
+avec f~ densité volumique des forces de viscosité
+4.2 Cas des uides parfaits, barotropes ou incompressibles
+4.2.1 Équation dynamique ponctuelle
+La densité volumique des forces de viscosité est alors nulle. L'équation ponctuelle de la dynamique s'écrit donc :
+ρ DV~
+Dt = ρ~a = ρ−g→ − −−→
+gradp (4.2)
+Ce qui peut encore s'écrire
+DV~
+Dt = ρ~a = −g→ − 1
+ρ
+−−→
+gradp (4.3)
+En utilisant l'expression de l'accélération
+~a = DV~
+Dt = ∂V~
+∂t + −−→
+grad
+( v2
+2
+)
++
+(r−o→t~v
+)
+∧ ~v (4.4)
+On obtient
+∂V~
+∂t + −−→
+grad
+( v2
+2
+)
++
+(r−o→t~v
+)
+∧ ~v = −g→ − 1
+ρ
+−−−→
+gradp (4.5)
+Par dé nition, un uide est barotrope lorsque la masse volumique est fonction de la pression.
+Ainsi pour un gaz parfait barotrope, on a p
+ρn = Cte.
+l'isotherme correspond à n = 1 l'adiabatique correspond à n = γ
+17
+
+
+Chapitre 4. Théorème de Bernoulli
+Les uides incompressibles homogènes pour lesquels ρ = cte sont aussi des cas particuliers de uides barotropes. Lorsque le uide est barotrope, on peut introduire la fonction P dé nie par
+P=
+∫ dp
+ρ
+On a les relations dP = dp
+ρ et −−−−→
+gradP = 1
+ρ
+−−−→
+gradp
+Lorsque ρ = cte, la fonction P s'écrit P = p
+ρ
+D'autre part, on peut écrire le vecteur intensité de la pesanteur ~g = −−−→
+grad (gz) L'équation dynamique ponctuelle peut donc s'écrire ;
+∂V~
+∂t + −−→
+grad
+( v2
+2 + P + gz
+)
++
+(r−o→t~v
+)
+∧ ~v = ~0 (4.6)
+On note Em = v2
+2 + P + gz . Elle représente une énergie mécanique de l'unité de masse du
+uide. L'équation dynamique ponctuelle peut donc s'écrire ;
+∂V~
+∂t + −−→
+grad (Em) +
+(r−o→t~v
+)
+∧ ~v = ~0 (4.7)
+4.2.2 Intégration de l'équation dynamique ponctuelle
+Cas où l'écoulement est permanent
+On a alors ∂~v
+∂t = ~0
+L'équation dynamique devient
+−−→
+grad (Em) +
+(r−o→t~v
+)
+∧ ~v = ~0 (4.8)
+Le vecteur −−→
+grad (Em) est donc perpendiculaire à chaque instant aux deux vecteurs ~v et r−o→t~v. Il est perpendiculaire aux lignes de courant et aux lignes tourbillon. Par conséquent, la quantité Em est constante le long des lignes de courant et le long des lignes tourbillon. Ce qui s'écrit
+v2
+2 + P + gz = cte (4.9)
+sur les lignes de courant et les lignes tourbillon
+L'écoulement est permanent et irrotationnel
+L'équation dynamique devient −−→
+grad (Em) = ~0 (4.10)
+On a donc Em constant dans tout le uide. Ce qui s'écrit
+v2
+2 + P + gz = cte (4.11)
+dans tout le uide.
+page 18
+
+
+Chapitre 4. Théorème de Bernoulli
+L'écoulement est permanent et type Beltrami-Gromeka
+De tels écoulements véri ent : r−o→t~v et ~v sont parallèles L'équation dynamique devient −−→
+grad (Em) = ~0 (4.12)
+On a donc Em constant dans tout le uide. Ce qui s'écrit
+v2
+2 + P + gz = cte (4.13)
+dans tout le uide.
+4.2.3 Cas des écoulements de uides incompressibles homogènes
+On a donc ρ = Cte . L'équation4.9 s'écrit donc
+v2
+2 +p
+ρ + gz = cte (4.14)
+C'est la relation de Bernoulli ; elle traduit la conservation de l'énergie mécanique totale de l'unité de masse le long des lignes de courant ou le long des lignes de tourbillon.
+4.2.4 Charge
+On dé nit la charge d'un uide, notée H par la relation
+H= p
+ρg + z + v2
+2g (4.15)
+La dimension de cette grandeur est le mètre. Dans le cas d'un uide parfait incompressible en écoulement permanent, on constate que la charge se conserve.
+4.3 Cas des uides visqueux incompressibles - Théorème de Bernoulli généralisé
+4.3.1 Hypothèses
+Les écoulements seront considérés comme unidimensionnels. on considère des écoulements dans des canalisations de sections réduites . Dans celles-ci, les pression, position et vitesse varient faiblement. On prendra les valeurs des pression, vitesse et position aux centres de ces sections. Ainsi le théorème de Bernoulli appliqué à l'écoulement dans une canalisation s'écrit :
+(p
+ρ + gz + v2
+2
+)
+1
+=
+(p
+ρ + gz + v2
+2
+)
+2
+(4.16)
+Dans le cas d'un uide visqueux, du fait des forces de frottement non nulles, l'énergie mécanique du uide diminue dans le sens de l'écoulement dans la canalisation. Cette diminution se traduit par une diminution de la charge. Généralement, on écrit
+page 19
+
+
+Chapitre 4. Théorème de Bernoulli
+(p
+ρg + z + v2
+2g
+)
+1
+−
+(p
+ρg + z + v2
+2g
+)
+2
+= er
+g = hr (4.17)
+La quantité hr est homogène à une hauteur et er a la dimension d' une énergie massique. Dans les installations, le uide s'écoule dans des conduites régulières mais également dans des singularités comme par exemple des coudes, des raccords, des élargissements ou des contractions . Ces di érents éléments contribuent à la diminution de l'énergie du uide. On parle de pertes de charges singulières. L'équation 4.17 s'écrit alors :
+(p
+ρg + z + v2
+2g
+)
+1
+−
+(p
+ρg + z + v2
+2g
+)
+2
+= er
+g + es
+g = hr + hs (4.18)
+4.3.2 Théorème de Bernoulli généralisé
+On considère maintenant une installation avec une machine soit réceptrice comme une turbine ou motrice comme une pompe. La machine réceptrice absorbe une partie de l'énergie du uide alors que la machine motrice fournit de l'énergie au uide. On note wt le travail apporté à l'unité de masse du uide. On alors l'équation :
+(p
+ρ + gz + v2
+2
+)
+2
+−
+(p
+ρ + gz + v2
+2
+)
+1
+= −er − es + wt = −ghr − ghs (4.19)
+Cette dernière relation est généralement dénommée : théorème de Bernoulli généralisé Le travail wt est un travail théorique ; il faut tenir compte du rendement de la pompe ou de la turbine. dans le cas d'une pompe, le travail réel massique à fournir est :
+wtreel = wt
+η (4.20)
+dans le cas d'une turbine, le travail réel massique récupéré est :
+wtreel = ηwt (4.21)
+4.3.3 Formules pour l'expression des pertes de charge régulière
+La perte de charge dans une canalisation cylindrique de diamètre D et de longueur L est proportionnelle à v2
+m avec vm vitesse moyenne débitante. On a la relation :
+hr = er
+g =ΛL
+D
+v2
+m
+2g (4.22)
+Le coe cient Λ est appelé coe cient de perte de charge. Ce coe cient de perte de charge dépend principalement :
+du nombre de Reynolds Re = vmD
+ν
+page 20
+
+
+Chapitre 4. Théorème de Bernoulli
+du coe cient de rugosité relative ε
+D
+On dispose d'expressions analytiques du coe cient de perte de charge en fonction du régime d'écoulement. Le régime est laminaire - Re < 2000 Le coe cient de perte de charge est le même quelle que soit la rugosité. Son expression est donnée par l'équation 4.23
+Λ = 64
+Re (4.23)
+Pour les conduites lisses et un nombre de Reynolds inférieur à 105 et supérieur à 4000, on peut utiliser la formule de Blasius 4.24
+Λ = 0, 316
+Re
+1
+4
+(4.24)
+Pour les conduites lisses et les nombres de Reynolds supérieurs à 105, la formule de Von Karman et Nikuradse (équation 4.25) est adaptée
+√1Λ = 2log10
+(
+Re
+√ Λ
+)
+− 0, 8 (4.25)
+Pour la région de transition (2000 < Re < 4000 ) et des conduites rugueuses, c'est la formule de Colebrook (équation 4.26) qui est le plus souvent utilisée.
+√1Λ = −2log10
+
+
+ε
+D
+3, 7 + 2, 51
+Re√Λ
+
+ (4.26)
+Les deux dernières expressions ne donnent pas le coe cient Λ de manière explicité ; il faut faire une résolution numérique.
+4.3.4 Canalisations industrielles - Diagramme de Moody
+Une étude détaillée des pertes de charge dans les conduites industrielles a été réalisée par l'ingénieur et professeur d'hydraulique Lewis Ferry Moody. Il a réalisé un diagramme, dénommé diagramme de Moody, qui permet de déterminer graphiquement le coe cient de perte de charge Λ en fonction de la rugosité relative de la paroi
+ε
+D et du nombre de Reynolds (cf. gure 4.1)
+page 21
+
+
+Chapitre 4. Théorème de Bernoulli
+Figure 4.1 Diagramme de Moody
+4.3.5 Cas des pertes de charge singulières
+Expression de la perte de charge singulière
+Les grandeurs es ou hs sont également proportionnelles à la vitesse moyenne débitante vm. Par convention, la vitesse vm est calculée sur la section du conduit, en amont de la singularité. On a les expressions
+es = k v2
+m
+2 (4.27)
+ou
+hs = k v2
+m
+2g (4.28)
+Le coe cient k dépend de chaque type de singularité, est déterminé expérimentalement ou calculé numériquement. Sur la gure 4.2 sont indiqués quelques exemples d'expression du coe cient k.
+page 22
+
+
+Chapitre 4. Théorème de Bernoulli
+Figure 4.2 Expressions du coe cient k
+page 23
+
+
+Chapitre 4. Théorème de Bernoulli
+page 24
+
+
+Chapitre 5
+Écoulements mono-dimensionnels des
+uides compressibles
+Figure 5.1 Simulation du nombre de Mach dans une tuyère de Laval
+25
+
+
+Chapitre 5. Écoulements mono-dimensionnels des uides compressibles
+5.1 Étude générale de l'écoulement
+cf texte article de l'ingénieur La connaissance de l'écoulement sur le plan cinématique se réduit alors à la détermination de la valeur vp (vitesse principale) de la vitesse en fonction de l'abscisse curviligne s. On a un problème d'écoulement monodimensionnel dans lequel on fait l'hypothèse que tous les autres paramètres physiques du uide ne dépendent que de s. La composante principale est notée v dans la suite.
+5.1.1 Équations de base de l'écoulement
+Rappel des hypothèses
+l'écoulement est conservatif (pas de source, ni puits de courant), l'écoulement est stationnaire, l'écoulement est dans un tube de courant.
+Équation de continuité
+On note Ω1 et Ω2 les sections planes perpendiculaires à la ligne moyenne. Elles sont appelées également sections droites. On note vi la composante du vecteur vitesse selon la normale à chacune de ces sections. On a la relation
+ρ1v1Ω1 = ρ2v2Ω2 = qm (5.1)
+avec qm débit massique du uide dans l'écoulement. L'équation 5.1 peut s'écrire
+dρ
+ρ + dv
+v + dΩ
+Ω = 0 (5.2)
+Bilan de quantité de mouvement
+Les forces considérées sont classiquement : celles dues à la pression, celles dues à la pesanteur, celles dues à la viscosité. On note f~ la force visqueuse par unité de masse. L'équation de la dynamique s'écrit donc ;
+ρ D~v
+Dt = −−−→
+grad (p) − ρg−−→
+grad (z) + ρf~ (5.3)
+Pour un écoulement mono-dimensionnel, et permanent, en multipliant scalairement les deux membres de l'équation par le vecteur élémentaire d~s, on obtient l'équation :
+vdv + dp
+ρ + gdz = −f ds (5.4)
+Équation de l'énergie cinétique ou équation énergétique mécanique
+Si on intègre l'équation 5.4 entre les points 1 et 2 d'une même ligne de courant, on obtient :
+∫2
+1
+dp
+ρ + ∆ec12 + ∆ep12 + τ12 = 0 (5.5)
+page 26
+
+
+Chapitre 5. Écoulements mono-dimensionnels des uides compressibles
+C'est une équation énergétique massique dite équation de l'énergie cinétique ou encore équation énergétique mécanique. Elle ne fait apparaître que des énergies de type mécanique : ec énergie cinétique massique et ep énergie potentielle de pesanteur, énergie de pression p τ12 est l'opposé du travail des forces de frottement par unité de masse. τ12 est toujours positif. Il correspond à la transformation d'énergie mécanique en énergie thermique. Si un élément mobile d'une machine (arbre de turbine, piston, etc) se trouve entre les points 1 et 2, on a l'équation suivante
+wt12 =
+∫2
+1
+dp
+ρ + ∆ec12 + ∆ep12 + τ12 (5.6)
+Ou encore
+wt12 =
+∫2
+1
+dp
+ρ +1
+2
+(v2
+2 − v2
+1
+) + g (z2 − z1) + τ12 (5.7)
+avec wt12 énergie reçue par unité de masse du uide lors de son contact au cours du déplacement avec l'élément de machine. On la nomme travail technique.
+Équation de l'énergie ou équation énergétique thermodynamique
+Il s'agit de l'expression du premier principe de la thermodynamique en systèmes ouverts. Elle s'écrit :
+wt12 + qe12 = ∆h12 + ∆ec12 + ∆ep12 (5.8)
+avec qe12 quantité de chaleur échangée entre l'unité de masse du uide et le milieu extérieur. L'équation 5.8 peut s'écrire en utilisant l'enthalpie totale ht
+wt12 + qe12 = ∆ht12 (5.9)
+Équation d'état du uide
+Il s'agit de l'équation d'état thermodynamique d'un uide. Elle a une expression simple dans le cas où l'on considère le uide comme un gaz parfait. Elle s'écrit :
+pv = p
+ρ = rT (5.10)
+avec r = R
+M où
+R = 8, 314 J/(mol.K) M : masse molaire du gaz
+5.1.2 Vitesse du son dans un uide quelconque
+Le son est produit par des variations faibles de pression du milieu dans lequel il se propage. La vitesse du son correspond à la propagation de ces variations de pression. On considère une onde sonore qui se déplace de la gauche vers la droite à la vitesse vs. On observe donc une di érence de pression dp entre la partie droite 1 et la partie gauche 2 du milieu uide. Si on considère le mouvement relatif du uide par rapport à l'onde sonore, le uide se déplace également à la vitesse vs mais dans le sens opposé.
+page 27
+
+
+Chapitre 5. Écoulements mono-dimensionnels des uides compressibles
+En appliquant l'équation de continuité, on obtient
+dρ
+ρ + dvs
+vs
+= 0 (5.11)
+Compte tenu de la valeur in niment petite de l'épaisseur du front d'onde, on admet que la traversée de l'onde de pression s'e ectue sans frottement. On admet aussi que le phénomène est adiabatique. Elle s'e ectue de manière réversible. On néglige également la pesanteur En utilisant l'équation 5.4, on obtient :
+dp
+ρ + vsdvs = 0 (5.12)
+La combinaison des équations 5.11 et 5.12 donne :
+vs =
+√
+( dp
+dρ
+)
+s
+(5.13)
+Pour un gaz parfait, une évolution adiabatique réversible entraîne la relation p 1
+ργ = cte.
+La vitesse du son a alors l'expression
+vs =
+√
+γp
+ρ (5.14)
+En utilisant l'équation d'état des gaz parfaits, la vitesse du son s'exprime sous la forme :
+vs = √γrT (5.15)
+5.2 Étude de l'écoulement isentropique d'un gaz parfait
+5.2.1 Écoulement adiabatique d'un uide non pesant
+Lorsqu'il n' y a pas d'échanges thermiques et que les énergies liées à la pesanteur sont négligées, l'équation énergétique thermodynamique 5.8 s'écrit
+∆h12 + ∆ec12 = 0 (5.16)
+Ce qui peut s'écrire
+h + v2
+2 = cte (5.17)
+Cette équation est appelée équation de Zeuner . Elle est valable en écoulement réversible comme irréversible.
+page 28
+
+
+Chapitre 5. Écoulements mono-dimensionnels des uides compressibles
+5.2.2 Étude générale de l'écoulement
+Système d'équations
+Le uide est un gaz parfait et l'écoulement est isentropique, on dispose du système d'équations
+ρvΩ = cte
+h + v2
+2 = cte
+p
+ρ = rT
+h = cpT + cte
+p
+ργ = cte
+(5.18)
+Vitesse de l'écoulement
+On considère une veine d'écoulement quelconque, une section de référence amont 1 et une section de référence aval 2 quelconques. D'après l'équation de Zeuner, on a
+1
+2
+(v2
+2 − v2
+1
+) = −∆h12 = −cp (T2 − T1) (5.19)
+On note δ = p2
+p1
+le taux de détente et a = γ − 1
+γ
+5.19 s'écrit
+1
+2
+(v2
+2 − v2
+1
+) = cpT1
+(
+1 − T2
+T1
+)
+(5.20)
+Or T2
+T1
+= δa d'où
+1
+2
+(v2
+2 − v2
+1
+) = cpT1 (1 − δa) (5.21)
+En utilisant la relation de Mayer, on peut écrire cp = r
+a donc l'équation précédente s'écrit
+1
+2
+(v2
+2 − v2
+1
+)= r
+a T1 (1 − δa) (5.22)
+On en déduit l'expression de la vitesse aval v2
+v2 =
+√
+v2
+1+2∗ r
+a T1 (1 − δa) (5.23)
+Cette équation est l'équation de Barré de Saint-Venant. Elle indique que la vitesse aval dépend : des conditions amont (vitesse, température), du taux de détente, de la nature du uide
+page 29
+
+
+Chapitre 5. Écoulements mono-dimensionnels des uides compressibles
+État générateur - Point d'arrêt
+Lorsque la section amont a une aire in nie, la vitesse d'écoulement est nulle dans cette section. Les grandeurs p et T relatives à cette section sont notées p0 et T0. Par dé nition, cet état est l'état générateur du uide s'écoulant isentropiquement depuis la section amont jusqu'à une section où le uide a la vitesse v, la pression p et la température T.
+Le taux de détente δ0 = p
+p0
+est le taux de détente générateur de l'écoulement.
+La vitesse v dans une section quelconque aval s'écrit :
+v=
+√
+2∗ r
+a T0 (1 − δa
+0 ) (5.24)
+Inversement on peut déterminer les conditions génératrices à partir des conditions de l'écoulement dans la section où le uide s'écoule à la vitesse v, à la pression p et à la température T. On trouve pour la pression génératrice p0 l'expression :
+p0 = p
+(
+1 + v2
+2cpT
+)
+1
+a (5.25)
+De même la température génératrice T0 a pour expression :
+T0 = T
+(
+1 + v2
+2cpT
+)
+(5.26)
+La masse volumique de l'état générateur s'écrit :
+ρ0 = ρ
+(
+1 + v2
+2cpT
+)
+1
+γ − 1 (5.27)
+L'état générateur sert de référence dans tous les écoulements de gaz parfaits, isentropiques ou non. Dans le cas d'un écoulement non isentropique, cet état est un état amont hypothétique. La représentation dans un diagramme T-s est indiquée sur la gure 5.2. On met ainsi en
+Figure 5.2 Représentation de l'état générateur d'un gaz parfait dans un diagramme T-s©Techniques de l'ingénieur
+évidence l'énergie cinétique à partir de l'équation de Zeuner
+v2
+2 = h0 − h (5.28)
+page 30
+
+
+Chapitre 5. Écoulements mono-dimensionnels des uides compressibles
+Et inversement l'enthalpie de l'état générateur h0 s'obtient à partir de :
+h0 = h + v2
+2 (5.29)
+Lorsque l'évolution est isentropique (adiabatique et réversible) l'état générateur reste le même. Si l'écoulement est irréversible ( écoulement de 2 à 3),et adiabatique, on peut montrer (cf. TD) que les températures génératrices sont constantes T01 = T03 alors que les pressions génératrices évoluent p01 > p03 On peut également exprimer les pression, température et masses volumiques génératrices en fonction du nombre de Mach (Ma). En utilisant l'expression de la célérité du son (cf. 5.15) et les expressions 5.25 et 5.26 on obtient :
+p0 = p
+(
+1+ γ−1
+2 M a2
+)
+1
+a =p
+(
+1+ γ−1
+2 M a2
+)
+γ
+γ − 1 (5.30)
+et
+T0 = T
+(
+1+ γ−1
+2 M a2
+)
+(5.31)
+et
+ρ0 = ρ
+(
+1+ γ−1
+2 M a2
+)
+1
+γ − 1 (5.32)
+L'étude de ces fonctions (cf.TD.) montre que pour les écoulements subsoniques (M a < 1), les conditions génératrices sont proches de l'état du uide en écoulement lorsque le nombre de Mach est inférieur à 0, 3. De même la compressibilité du uide est négligeable tant que l'écoulement reste nettement subsonique (M a < 0.5)
+Vitesse de détente dans le vide
+En utilisant l'expression 5.24, on trouve
+v=
+√
+2∗ r
+a T0 = √2cpT0 (5.33)
+Cette vitesse est maximale et elle est notée vmax. Elle est indépendante de la pression génératrice ; elle ne dépend que de la température et de la nature du gaz. On peut la comparer à la vitesse du son dans le gaz à la température T0, notée vs0. On a la relation :
+vmax =
+√2
+γ − 1 vs0 (5.34)
+page 31
+
+
+Chapitre 5. Écoulements mono-dimensionnels des uides compressibles
+5.2.3 Particularités de l'écoulement
+Évolution de la section droite en fonction de la pression
+La référence amont est prise égale à l'état générateur (Ω0− > ∞).
+Le débit massique qm étant constant, la section Ω est proportionnelle au rapport 1
+ρv . On étudie donc séparément l'évolution de ces deux paramètres avec la pression p. Évolution de la masse volumique avec la pression En utilisant l'équation 5.27 , on obtient la relation
+ρ = ρ0δ
+1
+γ
+0 (5.35)
+La masse volumique varie donc de la valeur maximale ρ0 pour p = p0 à 0 pour p = 0. Évolution de la vitesse avec la pression En utilisant les relations 5.24 et l'expression de la vitesse maximale, on obtient la relation :
+v = vmax
+√1 − δa
+0 (5.36)
+L'étude mathématique de la fonction montre que la vitesse v est décroissante avec δ0. Elle est nulle dans l'état générateur δ0 = 1 et maximale pour δ0 = 0. L'étude de la dérivée indique la présence d'un point d'in exion i.
+5.3 Écoulement unidimensionnel dans une tuyère
+5.3.1 Rappel des hypothèses et de l'objectif de la tuyère
+Le uide est compressible et contenu dans un réservoir sous pression, L'objectif est de rechercher la forme optimale de la canalisation de décharge du réservoir pour transformer l'énergie interne en énergie cinétique, L'écoulement est supposé unidimensionnel et permanent, Les forces de viscosité sont négligées, L'écoulement se fait le long de l'axe x de la tuyère
+5.3.2 Relation de Hugoniot
+Démonstration
+A partir de l'équation de continuité, on obtient l'équation di érentielle :
+ρ
+ρ+Ω
+Ω + dv
+v = 0 (5.37)
+De même à partir de l'équation de la dynamique(ou bilan de quantité de mouvement), on obtient l'équation di érentielle :
+vdv + dp
+ρ = 0 (5.38)
+On rappelle l'expression de la célérité du son :
+vs =
+√
+( dp
+dρ
+)
+s
+(5.39)
+page 32
+
+
+Chapitre 5. Écoulements mono-dimensionnels des uides compressibles
+Cette dernière relation permet d'écrire pour un écoulement isentropique
+dρ = dp
+vs2
+(5.40)
+En combinant les équations 5.37, 5.38 et 5.40, on obtient l'équation
+− vdv 1
+vs2
++Ω
+ω + dv
+v = 0 (5.41)
+Ce qui peut s'écrire en utilisant le nombre de Mach, Ma :
+dv
+v
+(1 − M a2) + Ω
+Ω = 0 (5.42)
+En n, cette dernière équation s'écrit sous la forme :
+dΩ
+Ω = dv
+v
+(M a2 − 1) (5.43)
+C'est la relation de Hugoniot
+Conséquences
+L'écoulement est subsonique (M a < 1) La vitesse augmente (dv > 0) si la section de la tuyère diminue (dΩ < 0). L'écoulement est supersonique (M a > 1) La vitesse augmente (dv > 0) si la section de la tuyère augmente (dΩ > 0). La canalisation de décharge aura donc la forme suivante. Elle sera d'abord convergente tant que la vitesse d'écoulement sera inférieure à la célérité locale du son puis lorsque la vitesse d'écoulement sera supérieure à la célérité locale du son, elle sera divergente. La section de la tuyère passe donc par un col : le col de la tuyère. Au col de la tuyère (dΩ = 0), dv > 0, donc M a = 1. Une telle tuyère est dénommée tuyère de Laval Au col v = vc = vsc La section au col est la section critique et le régime au col est le régime critique.
+Le taux de détente δ0c = pc
+p0
+est le taux de détente critique.
+La pression pc est la pression critique.
+Cas des écoulements entièrement subsoniques dans une tuyère
+La condition au col dΩ = 0 entraîne dv = 0. La vitesse passe donc par un maximum au col car l'écoulement n'est pas sonique au col.
+D'après l'équation de la dynamique (vdv = −dp
+ρ ) dv = 0 entraîne dp = 0 ; la pression passe
+par un minimum au col. De même l'équation di érentielle de continuité (cf. équation 5.37)entraîne au col (dΩ = 0 et dv = 0) dρ = 0. Au col, la masse volumique passe par un minimum.
+5.3.3 Divers régimes de fonctionnement d'une tuyère
+Présentation
+On considère que la pression amont p0 est maintenue constante et la pression aval pa variable.
+page 33
+
+
+Chapitre 5. Écoulements mono-dimensionnels des uides compressibles
+La pression dans la section d'éjection, di érente de pa pour certains régimes de fonctionnement est notée pe. On fait décroître progressivement la pression aval pa de p0 à patm. On suppose pour simpli er que la vitesse est négligeable à l'entrée de la tuyère. Tant que la di érence p0 − pa est faible, l'écoulement est subsonique dans toute la tuyère : la vitesse atteint son maximum au col, la pression atteint son minimum (courbes α). Dans la section d'éjection pe = pa. Si l'on diminue pa, la pression s'abaisse en tout point de la tuyère avec augmentation corrélative de la vitesse et toujours un maximum au col. L'écoulement reste isentropique dans toute la tuyère. Il est contrôlé par la pression aval pa . La pression d'arrêt est conservée. Pour une certaine valeur de pa, les conditions critiques sont atteintes au col (courbe β). A partir de cette condition, les modi cations de pa ne peuvent plus remonter le col puisqu'elles se propagent à la célérité du son. Par conséquent la diminution de pa n'in uencera plus l'écoulement au col et en amont du col. L'écoulement est uniquement déterminé par les conditions d'entrée :p0, T0. Le débit massique de la tuyère est alors
+qm = ρcΩcvc (5.44)
+Il devient indépendant de la pression aval. La tuyère est dite amorcée. On dit également qu'il y a blocage. Les valeurs atteintes au col ne changeront plus lorsque pa sera assez faible pour que l'écoulement soit supersonique dans tout le divergent (courbe γ). Lorsque l'on a pe = pe′ = pa, la tuyère est dite adaptée à la pression ambiante. La détente est isentropique dans toute la tuyère ; la pression génératrice p0 égale à la pression d'arrêt est toujours conservée. Pour les pressions ambiantes comprises entre p′e et p′′e. Il n y a plus d'écoulement isentropique. Si on considère une pression d'éjection pd, elle pourrait être atteinte grâce à un écoulement subsonique d'd. Une onde de choc (variation brusque de pression et de vitesse) se produit dans la section où la pression est d'. L'écoulement est supersonique entre le col et la section d' ; il redevient subsonique après l'onde de choc. La vitesse diminue et la pression augmente pour atteindre la pression aval p − a. Au fur et à mesure que la pression aval décroît, le choc recule vers l'aval pour atteindre nalement la section d'éjection lorsque la pression y atteint une valeur p − f
+Conditions au col lorsque la tuyère est amorcée
+Au col, on a M a = 1 ; à partir des expressions des équations 5.31, 5.30 et 5.32 , on obtient les relations ci-après : Rapport des températures :
+Tc
+T0
+=2
+γ + 1 (5.45)
+Rapport des pressions (taux de détente critique) :
+pc
+p0
+=
+(2
+γ+1
+)
+γ
+γ − 1 (5.46)
+page 34
+
+
+Chapitre 5. Écoulements mono-dimensionnels des uides compressibles
+Rapport des masses volumiques :
+ρc
+ρ0
+=
+(2
+γ+1
+)
+1
+γ − 1 (5.47)
+Vitesse au col
+vc
+vs0
+= vsc
+vs0
+=
+√ Tc
+T0
+=
+√2
+γ + 1 (5.48)
+Pour l'air avec γ = 1, 405, on trouve : Tc
+T0
+= 0, 833 ; pc
+p0
+= 0, 528 ; ρc
+ρ0
+= 0, 634 ; vc
+vs0
+= 0, 912
+Le débit massique dans la tuyère amorcée est donc égal à :
+qmc = ρcΩcvc = p0Ωc
+(2
+γ+1
+)
+γ+1
+2 (γ − 1) √ γ rT0
+(5.49)
+On constate que le débit massique dans la tuyère lorsque celle-ci est amorcée ne dépend que de l'état générateur (p0, T0), de la section au col Ωc et du gaz (γ, r). On peut ajouter qu'il est directement proportionnel à la pression génératrice p0 et à la section au col Ωc. Pour l'air avec γ = 1, 405, on trouve :
+qmc = 0, 685 p0
+√rT0
+Ωc
+On écrit parfois : qmc = CDp0Ωc (5.50)
+CD est appelé coe cient de décharge. Son expression est :
+cD =
+(2
+γ+1
+)
+γ+1
+2 (γ − 1) √ γ rT0
+(5.51)
+On peut également déterminer le rapport des sections Ω
+Ωc
+.
+La conservation du débit massique implique que le débit massique dans une section quelconque Ω est égal au débit critique (au col). On a donc la relation suivante :
+ρΩv = ρcΩcvc (5.52)
+On en déduit le rapport :
+Ω
+Ωc
+= ρc
+ρ
+vc
+v = ρc
+ρ0
+ρ0
+ρ
+vc
+v (5.53)
+En utilisant les expressions 5.47, 5.32,5.24, on montre que le rapport des sections s'écrit :
+Ω
+Ωc
+=
+(2
+γ+1
+)
+γ+1
+2 (γ − 1)
+
+      
+(
+1+ γ−1
+2 M a2
+)
+γ+1
+2 (γ − 1)
+Ma
+
+      
+(5.54)
+page 35
+
+
+Chapitre 5. Écoulements mono-dimensionnels des uides compressibles
+Tables numériques des écoulements permanents de l'air sans onde de choc
+A partir des expressions 5.31, 5.30, 5.30 et 5.54, on établit des tables donnant les valeurs
+numériques des rapports ρ
+ρ0
+,p
+p0
+,T
+T0
+et Ω
+Ωc
+en fonction du nombre de Mach.
+5.4 Tuyère convergente - divergente dans un moteur fusée
+5.4.1 Expression de la poussée
+Mettre une image d'une tuyère En utilisant le théorème d'Euler, on obtient la relation ci-après pour la poussée du moteur :
+F = qmve + (pe − pa) Ωe (5.55)
+avec ve vitesse d'éjection, pe pression du gaz au niveau de la sortie d'éjection, pa pression extérieure Ωe section d'éjection
+5.4.2 Poussée si la tuyère est adaptée
+Expression de la poussée
+Lorsque la tuyère est adaptée à la pression extérieure, la pression d'éjection pe est alors égale à pa. La poussée s'écrit alors F = qmve (5.56)
+D'après les expressions de qm et v (cf. équations 5.24 et 5.49), on obtient la relation :
+F 0 = p0Ωc
+(2
+γ+1
+)
+γ+1
+2 (γ − 1) √γ
+√ √ √ √ √ √
+2γ
+γ−1
+
+
+1 −
+( pe
+p0
+)
+γ−1
+γ
+
+
+ (5.57)
+Coe cient de poussée
+Le coe cient de poussée est dé ni par le rapport :
+C0
+F = F0
+p0Ωc
+(5.58)
+Le coe cient de poussée a donc l'expression
+C0
+F=
+(2
+γ+1
+)
+γ+1
+2 (γ − 1) √γ
+√ √ √ √ √ √
+2γ
+γ−1
+
+
+1 −
+( pe
+p0
+)
+γ−1
+γ
+
+
+ (5.59)
+Le coe cient de poussée C0
+F dépend du taux de détente pe
+p0
+et du gaz.
+page 36
+
+
+Chapitre 5. Écoulements mono-dimensionnels des uides compressibles
+5.4.3 Tuyère non adaptée
+Pour la tuyère non adaptée, la poussée peut s'écrire :
+F = F 0 + (pe − pa) Ωe = F 0 + p0
+( pe
+p0
+− pa
+p0
+)
+(5.60)
+Le coe cient de poussée a alors l'expression
+CF = C0
+F + Ωe
+Ωc
+( pe
+p0
+− pa
+p0
+)
+(5.61)
+On constate que le coe cient de poussée dépend également du taux de détente dans la
+section de sortie δ0 = pe
+p0
+.
+5.4.4 Rendements pour caractériser l'e cacité d'un propulseur
+Puissance utile à la propulsion
+On a la relation Pu = F vF (5.62)
+avec vF la vitesse de la fusée Dans le cas d'une tuyère adaptée, l'équation 5.62 s'écrit :
+Pu = (qmve) vF (5.63)
+5.4.5 Puissance perdue
+Il s'agit de la puissance cinétique absolue du jet. Elle s'écrit
+PP = qm v2
+a
+2 = qm (ve − vF )2
+2 (5.64)
+5.4.6 Puissance disponible
+La puissance disponible est
+Pd = Pu + PP = qm v2
+e + v2
+F
+2 (5.65)
+5.4.7 Rendement de propulsion
+Son expression est :
+ηP = Pu
+Pd
+=
+2 VF
+ve
+1+
+( VF
+ve
+)2 (5.66)
+Le rendement est maximal et égal à 1 pour VF = ve. Les gaz éjectés sortiraient sans vitesse de la tuyère.
+page 37
+
+
+Chapitre 5. Écoulements mono-dimensionnels des uides compressibles
+5.4.8 Impulsion spéci que du propulseur
+Cette impulsion est dé nie comme étant le rapport de l'impulsion totale obtenue (poussée) sur la consommation de l'unité de poids du propergol. Elle s'écrit :
+Is = F
+qmg (5.67)
+Si la tuyère est adaptée à la pression extérieure (ou ambiante), on a :
+Is = qmve
+qmg = ve
+g (5.68)
+L'unité de l'impulsion spéci que est la seconde. Si la tuyère n'est pas adaptée, l'impulsion spéci que s'écrit :
+Is = qmve + (pe − pa) Ωe
+qmg = p0ΩcCF
+qmg (5.69)
+On a montré que le débit massique s'écrit
+qm = CDp0Ac (5.70)
+avec CD coe cient de décharge. L'impulsion spéci que s'écrit alors
+Is = CF
+gCD
+(5.71)
+Généralement, on utilise plutôt l'inverse du coe cient de décharge CD ; il est noté C∗ = 1
+CD
+et est appelé vitesse caractéristique. Son expression est d'après l'expression de CD donnée par l'équation 5.51 :
+C∗ =
+(γ + 1
+2
+)
+γ+1
+2 (γ − 1)
+√
+rT0
+γ (5.72)
+Au nal, l'impulsion spéci que s'écrit :
+Is = CF C∗
+g (5.73)
+page 38
+
+
+Chapitre 6
+Ondes de choc droit
+6.1 Introduction
+Lors d'écoulements compressibles à haute vitesse, on trouve des zones où ils existent de fortes variations des propriétés physiques (ρ, p, T) sur des distances très faibles (de l'ordre du libre parcours moyen). On parle alors de chocs. Sur la gure 6.1 , on peut voir une onde de choc droit à la sortie d'une tuyère de Laval. La technique de visualisation est basée sur la propriété physique que l'indice de réfraction dans un écoulement à haute vitesse est fonction de la masse volumique (méthode strioscopique et omboscopique). Des di érences de masse volumique peuvent donc être visualisées. Un choc droit sera caractérisé par un trait.
+Figure 6.1 Onde de choc droit en sortie de tuyère ©ONERA
+6.2 Choc normal
+6.2.1 Hypothèses
+L'écoulement est supposé : permanent (ou stationnaire), unidimensionnel, absence de transferts thermiques, les forces de frottement et de volume sont négligeables les surfaces de discontinuité sont des surfaces in niment minces
+39
+
+
+Chapitre 6. Ondes de choc droit
+On considère un uide en écoulement dans une veine de section constante et subissant une onde de choc normale à la direction d'écoulement dans un plan xe. On note Σ cette surface de discontinuité. L'indice 1 caractérise le uide en amont de l'onde de choc et l'indice 2 le uide en aval.
+6.2.2 Équations du choc
+L'équation de conservation de la masse (ou équation de continuité) s'écrit :
+ρ1v1 = ρ2v2 (6.1)
+Le théorème des quantités de mouvement appliqué au uide compris dans un volume de contrôle incluant le choc donne :
+p1 − p2 = ρ1v1 (v2 − v1) (6.2)
+En utilisant l'équation de continuité, l'équation peut s'écrire
+p1 − p2 = ρ2v2
+2 − ρ1v2
+1 (6.3)
+Ce qui s'écrit encore
+p1 + ρ1v2
+1 = p2 + ρ2v2
+2 (6.4)
+Du fait de l'absence de forces de frottement, de forces de pesanteur, de la brièveté du choc (transformation adiabatique) le premier principe de la thermodynamique pour un écoulement donne
+h1 + v2
+1
+2 = h2 + v2
+2
+2 (6.5)
+En n l'équation d'état des gaz parfaits donne
+p1
+ρ1T1
+= p2
+ρ2T2
+(6.6)
+6.2.3 Expressions des rapports des pressions, masses volumiques, températures et nombre de Mach en fonction du nombre de Mach aval Ma1
+On note c1, c2 les célérités du son en amont et aval de l'onde de choc droite. On rappelle que pour un gaz parfait l'enthalpie s'écrit h = cpT . L'équation 6.5 peut s'écrire
+cpT1 + M 2
+1 c2
+1
+2 = cpT2 + M 2
+2 c2
+2
+2 (6.7)
+En utilisant l'expression de la célérité du son c = √γrT , on obtient
+cpT1 + M 2
+1 γrT1
+2 = cpT2 + M 2
+2 γrT2
+2 (6.8)
+Le rapport T2
+T1
+s'écrit donc :
+T2
+T1
+=
+cp + 1
+2 γrM 2
+1
+cp + 1
+2 γrM 2
+2
+(6.9)
+page 40
+
+
+Chapitre 6. Ondes de choc droit
+En utilisant la relation de Mayer cp − cv = r et l'expression de γ = cp
+cv
+, l'équation 6.9 s'écrit :
+T2
+T1
+= 2 + (γ − 1) M 2
+1
+2 + (γ − 1) M 2
+2
+(6.10)
+L'équation de continuité 6.1 s'écrit en utilisant le nombre de Mach
+ρ1M1
+√γrT1 = ρ2M2
+√γrT2 (6.11)
+En utilisant l'équation 6.10, on peut écrire :
+ρ1
+ρ2
+= M2
+M1
+[ 2 + (γ − 1) M 2
+1
+2 + (γ − 1) M 2
+2
+]
+1
+2 (6.12)
+En introduisant le nombre de Mach dans l'équation de la quantité de mouvement 6.4, on obtient l'équation :
+p1 + γp1M 2
+1 = p2 + γp2M 2
+2 (6.13)
+On en déduit le rapport
+p2
+p1
+= 1 + γM2
+1
+1 + γM2
+2
+(6.14)
+A partir de l'équation d'état 6.6, on écrit :
+p2
+p1
+ρ1
+ρ2
+= T2
+T1
+(6.15)
+En utilisant les équations 6.12, 6.14 et 6.10, on obtient l'équation :
+1 + γM2
+1
+1 + γM2
+2
+M2
+M1
+[ 2 + (γ − 1) M 2
+1
+2 + (γ − 1) M 2
+2
+]
+1
+2 = 2 + (γ − 1) M 2
+1
+2 + (γ − 1) M 2
+2
+(6.16)
+En mettant tout ce qui est relatif à M1 d'un côté et tout ce qui est relatif à M2 de l'autre, on arrive à l'équation ci-après :
+M2
+1
+(
+1+ γ−1
+2 M2
+1
+)
+(1 + γM 2
+1 )2 =
+M2
+2
+(
+1+ γ−1
+2 M2
+2
+)
+(1 + γM 2
+2 )2 (6.17)
+Cette équation peut-être considérée comme une équation du second degré en M 2
+2 ; elle a deux solutions. La solution élémentaire M 2
+1 et la solution :
+M2
+2 = 2 + (γ − 1) M 2
+1
+1 − γ + 2γM 2
+1
+(6.18)
+La courbe nombre de Mach aval sur nombre de Mach amont est représentée sur la gure 6.2 On constate que si l'écoulement est supersonique alors l'écoulement en aval est subsonique. En utilisant l' expression de M 2
+2 (équation 6.18) dans les équations 6.14, 6.10 et 6.12, on obtient : Rapport des pressions
+p2
+p1
+= 2γ
+γ + 1M2
+1 − γ−1
+γ + 1 (6.19)
+Le rapport des pressions aval sur amont est représenté sur la gure 6.3 On constate que la pression à l'aval du choc augmente fortement.
+page 41
+
+
+Chapitre 6. Ondes de choc droit
+Figure 6.2 M2 versus M1
+Figure 6.3 p2/p1 versus M1
+page 42
+
+
+Chapitre 6. Ondes de choc droit
+Rapport des masses volumiques
+ρ1
+ρ2
+= γ−1
+γ+1 + 2
+(γ + 1) M 2
+1
+(6.20)
+Le rapport des masses volumiques aval sur amont est représenté sur la gure 6.4
+Figure 6.4 rho2/rho1 versus M1
+Rapport des températures
+T2
+T1
+= (2 + (γ − 1) M 2
+1 ) (1 − γ + 2γM 2
+1)
+(γ + 1)2 M 2
+1
+(6.21)
+Le rapport des températures aval sur amont est représenté sur la gure 6.5
+Figure 6.5 T2/T1 versus M1
+page 43
+
+
+Chapitre 6. Ondes de choc droit
+6.2.4 Variation d'entropie au passage du choc
+Pour un gaz parfait, on peut écrire la variation élémentaire d'entropie sous la forme :
+ds = cv
+dp
+p + cp
+dv
+v = cv
+[ dp
+p + γ dv
+v
+]
+(6.22)
+En intégrant, la variation d'entropie s2 − s1 s'écrit :
+s2 − s1 = cvln
+[ p2
+p1
+( ρ1
+ρ2
+)γ ]
+(6.23)
+Ou encore en faisant intervenir les températures et masses volumiques :
+s2 − s1 = cvln
+[
+T2
+T1
+( ρ2
+ρ1
+)1−γ ]
+(6.24)
+L'entropie est une fonction d'état donc cette expression de variation est juste quelle que soit l'évolution. En particulier, elle s'applique au choc qui est un phénomène irréversible. L'écoulement du uide étant permanent et comme les transferts thermiques sont négligeables (choc adiabatique), la variation d'entropie s2 − s1 est supérieure à zéro.
+En remplaçant les rapports T2
+T1
+et ρ1
+ρ2
+par leurs expressions données par les équations 6.20
+et 6.21, s2 − s1 devient une fonction du nombre de Mach amont M1. Une étude de fonction permet alors de montrer que M1 > 0 c'est à dire que l'écoulement amont est supersonique. La gure montre également que l'irréversibilité du choc ne peut être véri é que si M1 > 1 c'est à dire que l'écoulement amont est supersonique. En e et la fonction logarithme népérien est supérieure à zéro si la quantité est supérieure à 1.
+Figure 6.6 Courbe T 2
+T1
+( ρ2
+ρ1
+)1−γ
+D'après l'expression 6.18 , M1 > 1 entraîne M2 < 1.
+L'écoulement à l'aval du choc est subsonique. Un choc normal décélère un écoulement de manière discontinue de conditions supersoniques à des conditions subsoniques.
+page 44
+
+
+Chapitre 6. Ondes de choc droit
+De même l'étude des rapports de pressions, températures, masses volumiques montre que
+p2
+p1
+> 1 , ρ1
+ρ2
+< 1, v2
+v1
+< 1 et T2
+T1
+>1
+6.2.5 Modi cations des conditions génératrices
+Le choc est adiabatique, il n y a donc pas de variation d'enthalpie totale à la traversée de celui-ci. En nommant T01 et T02 les températures génératrices ou d'arrêt des écoulements amont et aval, on a
+ht1 = ht2
+cpT01 = cpT02
+T01 = T02
+(6.25)
+On constate donc que la température génératrice n'est pas modi ée à la traversée du saut
+On a vu dans le chapitre des écoulements isentropiques unidimensionnels les équations suivantes :
+p1
+p01
+=
+(
+1+ γ−1
+2 M2
+1
+)
+γ
+1 − γ (6.26)
+et
+p2
+p02
+=
+(
+1+ γ−1
+2 M2
+2
+)
+γ
+1 − γ (6.27)
+On peut donc écrire le rapport des pressions génératrices p02
+p01
+comme :
+p02
+p01
+= p02
+p2
+p2
+p1
+p1
+p01
+(6.28)
+Chaque rapport peut-être exprimé en fonction du nombre de Mach amont M1. On obtient alors la relation :
+p02
+p01
+=
+[ (γ + 1) M 2
+1
+2 + (γ − 1) M 2
+1
+]
+γ
+γ−1 ∗
+[ γ+1
+2γM 2
+1 − (γ − 1)
+]
+1
+γ − 1 (6.29)
+On obtient une fonction représentée par la courbe 6.7 On constate que la pression génératrice n'est pas conservée à la traversée d'un choc. La pression génératrice diminue lors du passage du choc. Les valeurs numériques montrent que tant que le nombre de Mach amont M1 est inférieur à 1, 2 , le rapport des pressions génératrices (ou totales) est peu di érent de l'unité. Ce qui montre que les chocs peu intenses s'écartent peu de la loi isentropique. Par contre lorsque le nombre de Mach augmente, les élévations de température et de pression deviennent très importantes.
+page 45
+
+
+Chapitre 6. Ondes de choc droit
+Figure 6.7 Rapport des pressions génratrices versus M1
+6.2.6 Expression du rapport des sections critiques
+En utilisant l'expression du rapport des sections Ω
+Ωc
+établie dans le chapitre sur les écou
+lements compressibles, on montre que le rapport des sections critiques Ωc2
+ωc1
+est donné par la
+relation :
+Ωc2
+Ωc1
+= M a2
+M a1
+[ 2 + (γ − 1) M a2
+1
+2 + (γ − 1) M a2
+2
+]
+1
+2
+γ+1
+γ − 1 (6.30)
+Cette équation se traduit par la courbe 6.8
+Figure 6.8 Rapport des sections critiques en fonction du nombre de Mach amont M1
+On constate que la section critique augmente modérément jusqu'à M a = 2, 5 puis nettement.
+page 46
+
+
+Chapitre 7
+Ondes de choc oblique
+7.1 Introduction
+Un obstacle xe ou un changement de direction dans un écoulement de gaz en écoulement hypersonique sont à l'origine d'un choc. On peut citer comme exemple : L'onde balistique créée dans l'atmosphère par un projectile animé d'une vitesse supersonique tel qu'une balle de fusil (7.1).
+Figure 7.1 Sillage de choc d'une balle de fusil
+Ondes de chocs obliques créés par un avion supersonique La gure ci-après (cf. gure 7.2) réalisée sur une campagne d'essais menée entre 2011 et 2015 par des chercheurs américains montre les ondes de choc oblique générées par un avion en vol supersonique.
+Figure 7.2 Ondes de choc attachées à un avion en vol supersonique (M=1,09) ©NASA
+Onde de choc dans une tuyère de Laval Onde de choc détachée
+47
+
+
+Chapitre 7. Ondes de choc oblique
+7.2 Équations à la traversée du choc oblique
+On considère la base (~n, t~) la base liée à l'onde de choc c'est à dire : ~n vecteur normal à l'onde de choc, t~ vecteur tangentiel à l'onde de choc. Dans cette base les vecteurs v~1 et v~2 ont pour composantes (v1n, v1t) et (v2n, v2t). On a les relations :
+v2
+1 = v2
+1n + v2
+1t (7.1)
+et
+v2
+2 = v2
+2n + v2
+2t (7.2)
+D'après la gure, les composantes tangentielle et normale du vecteur vitesse v~1 dans la base (~n, t~) s'écrivent :
+{ v1t = v1cosε
+v1n = v1sinε (7.3)
+De même pour le vecteur v~2, on a
+{ v2t = v2cosβ
+v2n = v2sinβ (7.4)
+D'après la gure, on a également entre les angles la relation :
+δ = ε − β (7.5)
+Les équations de conservation de la masse et de l'énergie s'écrivent à la traversée du saut :
+
+    
+    
+ρ1v1n = ρ2v2n
+ρ1v2
+1n + p1 = ρ2v2
+2n + p2
+v1t = v2t
+h1 + v2
+1n
+2 = h2 + v2
+2n
+2
+(7.6)
+Les trois premières équations traduisent la conservation de la masse et de la quantité de mouvement. La dernière traduit la conservation de l'énergie. On a également l'inégalité suivante du fait de l'irréversibilité du choc :
+s2 > s1 (7.7)
+On constate que ce système d'équations a le même formalisme que celui du choc droit . Les termes v1n et v2n jouent le même rôle que les termes v1 et v2.
+7.3 Expressions des rapports de pressions, températures, masses volumiques et nombre de Mach
+D'après la constatation précédente, on peut reprendre les expressions obtenues pour le choc droit. Les relations sont donc :
+page 48
+
+
+Chapitre 7. Ondes de choc oblique
+Rapport des températures
+T2
+T1
+= (2 + (γ − 1) M 2
+1n) (1 − γ + 2γM 2
+1n)
+(γ + 1)2 M 2
+1n
+(7.8)
+Rapport des masses volumiques
+ρ1
+ρ2
+= γ−1
+γ+1 + 2
+(γ + 1) M 2
+1n
+(7.9)
+Rapport des pressions
+p2
+p1
+= 2γ
+γ + 1M2
+1n − γ − 1
+γ + 1 (7.10)
+Expression du nombre de Mach aval
+M2
+2n = 2 + (γ − 1) M 2
+1n
+1 − γ + 2γM 2
+1n
+(7.11)
+avec M1n = v1n
+a1
+et M2n = v2n
+a2
+où a1 et a2 sont les célérités du son.
+En utilisant les expressions des composantes normales, on peut écrire :
+M1n = V1
+a1
+sinε = M1sinε (7.12)
+et
+M2n = V2
+a2
+sinβ = M2sinβ = M2sin (ε − δ) (7.13)
+7.4 Expression de la di érence d'entropie et conséquence
+En considérant le gaz comme un gaz parfait, la variation ∆s = s2 − s1 peut s'écrire
+∆s = s2 − s1 = cvln
+[
+T2
+T1
+( ρ2
+ρ1
+)1−γ ]
+(7.14)
+Du fait du caractère irréversible du choc, on a ∆s > 0. L'étude de la fonction (étude longue) permet de montrer que cette inégalité est véri ée si M1n > 1 et M2n < 1.
+On a donc M1sinε > 1 et donc M1 > 1
+sinε > 1.
+De même M2n = M2sinβ < 1 donc M2 < 1
+sinβ . Par conséquent M2 > 1 ou M2 < 1.
+Le bilan est donc : Une onde de choc oblique ne peut apparaître qu'en écoulement supersonique ; par contre l'écoulement en aval du choc peut être supersonique ou subsonique. Il y a : diminution du nombre de Mach, augmentation de la pression, augmentation de la température, augmentation de la masse volumique.
+page 49
+
+
+Chapitre 7. Ondes de choc oblique
+7.5 Polaire de choc
+On connaît l'écoulement avant le choc. On cherche à déterminer les angles ε c'est à dire l'orientation de l'onde de choc et δ le changement de direction de l'écoulement. On a la relation v1t = v2t qui peut s'écrire :
+v1cos (ε) = v2cos (ε − δ) (7.15)
+De même on a la relation ρ1v1n = ρ2v2n qui peut s'écrire :
+ρ1v1sin (ε) = ρ2v2sin (ε − δ) (7.16)
+L'équation 7.15 donne
+v1
+v2
+= cos (ε − δ)
+cos (ε) (7.17)
+L'équation 7.16 donne
+ρ1
+ρ2
+= v2
+v1
+sin (ε − δ)
+sin (ε) = cos (ε)
+cos (ε − δ)
+sin (ε − δ)
+sin (ε) = tan (ε − δ)
+tan (ε) (7.18)
+En utilisant l'expression du rapport des masses volumiques en fonction du nombre de Mach (cf. équation 7.9, on obtient l'équation :
+γ−1
+γ+1 + 2
+(γ + 1) M 2
+1n
+= tan (ε − δ)
+tan (ε) (7.19)
+Hypothèse :
+L'angle ε de l'onde de choc oblique est comprise dans l'intervalle
+[
+0; π
+2
+]
+.
+Pour un nombre de Mach amont M1 donné, on a la condition :
+M1sin (ε) ≥ 1 (7.20)
+On a donc
+sin (ε) ≥ 1
+M1
+(7.21)
+D'où
+arcsin
+(1
+M1
+)
+≤ε≤ π
+2 (7.22)
+L'équation 7.19 détermine les courbes δ = δ (M1, ε). Elles sont représentées pour quelques valeurs de M1 sur la gure 7.3 Commentaires L'angle δ est généralement connu car souvent le choc oblique apparaît avec un obstacle. Le uide étant parfait, on considère que le uide s'écoule parallèlement à la surface de l'obstacle. Pour chaque valeur du nombre de Mach amont M1, il existe une valeur maximale de l'angle δ repérée par le symbole ∗. si δ = δmax (M1) une unique solution (ε) existe, si δ ∈ [0, δmax (M1)] deux solutions existent :
+arcsin
+(1
+M1
+)
+< ε− < ε+ < π
+2 (7.23)
+page 50
+
+
+Chapitre 7. Ondes de choc oblique
+Figure 7.3 Polaires de choc pour le gaz parfait ©ENSTA PARIS
+la ligne en trait continu représente la ligne sonique aval M2 = 1. On rappelle l'expression du rapport des pressions :
+p2
+p1
+= 2γ
+γ + 1M2
+1n − γ − 1
+γ + 1 = 2γ
+γ + 1 (M1sin (ε))2 − γ − 1
+γ + 1 (7.24)
+Ce rapport est donc une fonction croissante de sin (ε) et par conséquent de ε. On a donc l'inégalité suivante :
+p2
+p1
+(ε+) > p2
+p1
+(ε−) (7.25)
+On parle donc de choc fort pour la solution ε+ et de choc faible pour la solution
+ε−
+Remarque : en dehors de conditions particulières imposées à l'aval, des considérations de stabilité favorisent la solution du choc faible.
+La gure 7.3 montre également : les chocs forts conduisent toujours en aval à un écoulement subsonique, les chocs faibles conduisent en aval à un écoulement supersonique ou subsonique.
+Lorsque l'angle de déviation est trop grand, le modèle du choc oblique attaché n'est plus valable.
+page 51
+
+
+Chapitre 7. Ondes de choc oblique
+page 52
+
+
+Bibliographie
+[1] LALLEMAND A. Ecoulements des uides - uides compressibles en monodimensionnel. Techniques de l'Ingénieur - BE8165 V1, 2020.
+[2] BAUER P. Propulseurs aéronautiques et spatiaux - Thermodynamique des gaz inertes et réactifs - Systèmes de propulsion anaérobie et aérobie. Paris : Ellipses, 2009.
+[3] COMOLET R. Mécanique expérimentale des uides, Tome II Dynamque des uides réels, Turbomachines. Paris : Masson, 1994.
+[4] KLING R. Thermodynamique générale et applications. Paris : Editions Technip, 1980.
+[5] CANDEL S. Mécanique des uides. Paris : Dunod Université, 1990.
+[6] XUE H. WHITE F.-M. Fluid Mechanics. New York : Mc Graw Hill, 2021.
+53

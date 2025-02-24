@@ -1,0 +1,2241 @@
+Convex analysis and optimisation
+September 12, 2022
+Contents
+1 Convex sets 3 1.1 Convex sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3 1.2 Hahn-Banach theorem . . . . . . . . . . . . . . . . . . . . . . . . . . 4 1.3 Continuous linear forms . . . . . . . . . . . . . . . . . . . . . . . . . 6 1.4 Linear separation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7 1.5 Closed convex sets . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9 1.6 Support function and normal cone . . . . . . . . . . . . . . . . . . . 10
+2 Convex functions 13 2.1 Definition and first properties . . . . . . . . . . . . . . . . . . . . . . 13 2.2 Lower semicontinuous convex functions . . . . . . . . . . . . . . . . . 15 2.3 Application: Existence of minimizers . . . . . . . . . . . . . . . . . . 18 2.4 Continuity of convex functions . . . . . . . . . . . . . . . . . . . . . 21
+3 Subdifferential 24 3.1 Directional derivatives . . . . . . . . . . . . . . . . . . . . . . . . . . 24 3.2 Gâteaux and Fréchet differentiability . . . . . . . . . . . . . . . . . . 25 3.3 Definition of the subdifferential and first properties . . . . . . . . . . 26 3.4 Subdifferential calculus . . . . . . . . . . . . . . . . . . . . . . . . . . 29 3.5 Application: optimality conditions . . . . . . . . . . . . . . . . . . . 33 3.6 Differentiability almost everywhere . . . . . . . . . . . . . . . . . . . 36
+4 Proximal operator 41 4.1 Definition and properties . . . . . . . . . . . . . . . . . . . . . . . . . 41 4.2 Proximal point algorithm . . . . . . . . . . . . . . . . . . . . . . . . 42
+5 Convex duality 45 5.1 Convex conjugate . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45 5.2 Perturbations of convex problems . . . . . . . . . . . . . . . . . . . . 48 5.3 Application: Lagrangian duality . . . . . . . . . . . . . . . . . . . . . 51 5.4 Application: Fenchel-Rockafellar’ theorem . . . . . . . . . . . . . . . 53
+1
+
+
+A Topology and functional analysis 56 A.1 Point-set topology . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56 A.2 Topological vector spaces . . . . . . . . . . . . . . . . . . . . . . . . 58 A.3 Weak and weak∗ topologies . . . . . . . . . . . . . . . . . . . . . . . 58
+B Exercises 65 B.1 Chapter 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65 B.2 Chapter 3 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67 B.3 Chapter 4 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67 B.4 Chapter 5 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69 B.5 Chapter 6 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
+2
+
+
+1 Convex sets
+Most of the statements of this course hold when X is a normed space i.e. a vector space endowed with a norm ‖‖ which endows X with a topology. The closed ball of radius around a point x is then denoted B(x, r) = {y ∈ X | ‖x − y‖ ≤ r}, and the topology is induced by the metric d(x, y) = ‖x − y‖. In particular, the results of this course can be applied to Hilbert spaces, Banach spaces, and even Rd. However, it is often the case that our statement hold in the more setting of (locally convex) topological vector spaces, which is particularly adequate when one wants to consider weak/weak∗ topologies, which are important in some applications.
+Definition 1 (Locally convex topological vector space). A topological vector space is a vector space X endowed with a topology which makes addition of vectors (x, y) ∈ X 2 7→ x+y ∈ X and multiplication by a scalar (λ, x) ∈ R×X 7→ λx ∈ X continuous. A topological vector X is called locally convex if there exists a family B of convex open sets containing the origin such that for all neighborhood O of the origin, there exists a basis set ω ∈ B such that ω ⊆ O.
+Any normed space is a locally convex topological vector spaces, and most of the course can be understood by someone knowing only normed spaces “(locally convex) topological vector spaces” with “normed space” in all statements. Topological vector spaces are of interest in infinite dimension, because they allow to define weak topologies, which are useful to prove existence to optimization problems. We propose a short introduction to these notions in Appendix A.
+1.1 Convex sets
+Definition 2 (Convex set). A subset K of X is called convex if and only if for any x, y ∈ K, the segment [x, y] = {(1 − t)x + ty | t ∈ [0, 1]} is included in K.
+Example 1. Elementary examples of convex sets include • open and closed balls in normed vector spaces, • hyperplanes, i.e. sets of the form {x ∈ X | φ(x) = α} for some linear function φ on X and some α ∈ R, • affine subspaces, i.e. intersection of hyperplanes, • halfspaces, i.e. sets of the form {x ∈ X | φ(x) ≤ α} for some linear function φ on X and some α ∈ R, • intersection of halfspaces, which are called polyhedra if one take a finite intersection of halfspaces, • the space of symmetric positive definite matrices, • sublevel sets {x ∈ X | f (x) ≥ α} or epigraphs {(x, t) | t ≥ f (x)} where f : X → R is a convex function and α ∈ R.
+Definition 3 (Convex hull). The convex hull of a set A ⊆ X , denoted conv(A), is the smallest convex set containing A.
+Proposition 1. The following properties hold
+3
+
+
+(i) If (Kα)α∈A is family of convex sets, ∩α∈AKα is convex (ii) If K ⊆ X is convex and L : X → Y is linear, then L(K) is convex. (iii) If K ⊆ X is convex and L : Y → X is linear, then L−1(K) is convex. (iv) If K ⊆ X , L ⊆ Y are convex, then K × L is convex. (v) If K, L ⊆ X are convex, then K ⊕ L is convex. (vi) conv(A) is the intersection of all convex sets containing A.
+(vii) conv(A) =
+{
+∑k
+i=1 αixi | k ≥ 1, xi ∈ A, αi ≥ 0, ∑k
+i=1 αi = 1
+}
+.
+Proof. Exercise.
+1.2 Hahn-Banach theorem
+The most important tool of this course is the representation of closed convex sets as intersection of closed half-spaces, which is the basis of subdifferential calculus, of the duality theory of Fenchel and Rockafellar, etc. This representation relies mainly on the Hahn-Banach theorem.
+Definition 4 (Sublinearity). A function p : X → R is sublinear if it is (i) 1-homogeneous: for any x ∈ X and λ ≥ 0, p(λx) = λp(x); (ii) subadditive: for any x, y ∈ X , p(x + y) ≤ p(x) + p(y).
+Example of sublinear functionals include norms over the space, or more generally gauges of convex sets.
+Definition 5 (Gauge). The gauge — also called Minkowski functional — of a convex K ⊆ X convex is the function pK taking value in R ∪ {+∞} defined on X
+pK(x) = inf{r > 0 | x ∈ rK}.
+Lemma 2. Let K ⊆ X be a convex neighborhood of the origin. Then the gauge pK is sublinear and continuous, and K ⊆ {pK ≤ 1}.
+Proof. The sublinearity of pK is left as an exercise, we only show the continuity. By definition of the gauge, we easily see that |pK(x)| ≤ 1 for all x in K. Then, for any ε > 0, we have |pK| ≤ ε on εK, implying the continuity of pK at the origin. We now use the sublinearity of pK to extend the continuity to the whole space X . Given x, y ∈ X , we have
+{
+pK (x) = pK (x − y + y) ≤ pK (x − y) + pK (y)
+pK (y) = pK (y − x + x) ≤ pK (y − x) + pK (x)
+implying that |pK(y) − pK(x)| ≤ max(pK(x − y), pK(y − x)). Let ε > 0, and let K′ = x + ε(K ∩ −K). Then K′ is a neighborhood of x and |pK(·) − pK(x)| ≤ ε on K′, thus showing the continuity of pK at x.
+Theorem 3 (Hahn-Banach). Let X be a topological vector space and let p be a continuous sublinear function on X . If E is a linear subspace of X and if f is a linear function on E satisfying f ≤ p, then f can be extended into a continuous linear form fˆ ∈ X ∗ which also satisfies fˆ ≤ p.
+4
+
+
+We refer to Brézis [Bre10] for a proof of the Hahn-Banach theorem in the case of general vector spaces (which also does not require that p is continuous), while we prove it only in the case where X is separable, which makes the proof more constructive.
+Proof. Let (vi)i≥1 be a countable dense subset of X , and define by induction E0 = E and Ei = span(Ei−1, vi).
+Step 1: Extension of f to Ei: We first show how to construct a linear extension fi of f on Ei satisfying fi ≤ p, assuming that fi−1 is already constructed. If vi belongs to Ei−1, one has Ei = Ei−1 and there is nothing to do. If not, for any α ∈ R we can define a linear function fi,α on Ei by setting
+∀x ∈ Ei−1, ∀t ∈ R, fi,α(x + tvi) = fi−1(x) + tα.
+We now need to choose α so that fi,α ≤ p or equivalently so that
+∀x ∈ Ei−1, ∀t ∈ R, fi−1(x) + tα ≤ p(x + tei)
+⇐⇒ ∀x ∈ Ei−1, ∀t ∈ R \ {0}, fi−1
+(x
+|t|
+)
++t
+|t| α ≤ p
+(x
+|t| + t
+|t| ei
+)
+⇐⇒ ∀x ∈ Ei−1, fi−1(x) ± α ≤ p(x ± ei).
+We used the homogeneity of p to go from the first to the second line. This is again equivalent to α satisfying
+sup
+x∈Ei−1
+fi−1(x) − p(x − ei) ≤ α ≤ inf
+y∈Ei−1
+p(y + ei) − fi−1(y).
+Thus, such an α exists if the supremum is less than the infimum, i.e. if
+∀(x, y) ∈ Ei−1, fi−1(x) − p(x − ei) ≤ p(y + ei) − fi−1(y)
+⇐⇒ ∀(x, y) ∈ Ei−1, fi−1(x + y) ≤ p(y + ei) + p(x − ei)
+⇐= ∀(x, y) ∈ Ei−1, fi−1(x + y) ≤ p(x + y),
+where the last implication is deduced from the subadditivity of p. Since fi−1 ≤ p, we can backtrack the chain of implications to deduce the existence of α ∈ R such that fi,α ≤ p. In practice, one can set
+α = inf
+y∈Ei−1
+p(y + ei) − f (y) ≥ −p(−ei) > −∞.
+Step 2: Extension of f to X The previous constructions allows to construct a linear function f ̃ : Eˆ → R on the linear subspace Eˆ = ∪iEi satisfying f ̃ ≤ p and f ̃
+∣ ∣ ∣E
+= f . The subspace Eˆ contains the vectors (vi)i≥1 and is therefore dense in X .
+To extend f ̃ to X , we will use the continuity of p. We first notice that by assumption
+−p(y − x) ≤ f ̃(x − y) ≤ p(x − y),
+5
+
+
+implying that ∣
+∣ ∣
+f ̃(x − y)
+∣ ∣
+∣ ≤ max |p(x − y)| , |p(y − x)|.
+One can first use this inequality to show that if (xn) is a sequence of points of Eˆ converging to some x ∈ X , then (f ̃(xn)) is a Cauchy sequence in R, thus converging to some value, denoted fˆ(x). We can use again the same inequality to prove that if two sequences (xn), (yn) of elements of Eˆ converge to the same point x ∈ X , then limn→+∞ f ̃(xn) = limn→+∞ f ̃(yn), proving that fˆ is well-defined. Finally, fˆ also
+satisfies
+∣ ∣ ∣
+fˆ(x − y)
+∣ ∣
+∣ ≤ p(x − y) for all x, y ∈ X , proving its continuity.
+1.3 Continuous linear forms
+Definition 6 (Dual space). The topological dual of X is the space of all continuous linear functions on X , and is denoted X ∗.
+The elements of X ∗ are denoted with a star, e.g. x∗ ∈ X ∗, and we denote the pairing between X ∗ and X using the notation for scalar product, i.e. 〈x∗ | x〉 := x∗(x), to underline the similarity with the case of Hilbert spaces.
+Remark 1. When (X , ‖·‖) is a normed vector space, the topological dual X ∗ may be endowed with the dual norm
+‖x∗‖ = sup
+x∈X
+〈x∗ | x〉.
+One could construct a “strong” topology on X ∗ even when X is not a normed space, but this will not be necessary in this course.
+We recall the following characterization of continuous linear forms on a topological vector space, which generalizes a similar criterion for normed spaces.
+Lemma 4. (Continuous linear forms) Let φ : X → R be a linear form on a topological vector space (X, σ). Then, the following are equivalent (i) φ is continuous, (ii) φ is continuous near the origin (i.e. for all ε > 0, there exists O ∈ σ containing 0 such that |φ| < ε on O), (iii) φ is bounded (from above or from below) in a neighborhood of the origin, (iv) φ is bounded (from above or from below) on a non-empty open subset.
+Proof. We only prove the implication (iii) =⇒ (ii). Let ω be a neighborhood of the origin such that |φ| ≤ M on ω. Then, for any ε > 0, define ωε = (ε/M )O. Then, ωε ∈ σ (by continuity of (λ, x) 7→ λx) and |φ| ≤ ε on ωε, thus proving continuity of φ at zero.
+Lemma 5. (Closed halfspaces) Let φ : X → R be a linear form over a topological vector space X . Then, the following are equivalent: (i) φ is continuous, (ii) the set H = {x ∈ X | φ(x) ≤ α} is closed,
+6
+
+
+(iii) the set H′ = {x ∈ X | φ(x) = α} is closed,
+Proof. If φ is continuous, then the halfspace H (resp. hyperplane H′) is closed as the inverse image of (−∞, α] (resp. {α}) under φ. Conversely, if H is closed (resp. H′ is closed), then φ > α on the non-empty open set X \ H (resp. X \ H′), so that φ is continuous by the previous lemma.
+1.4 Linear separation
+Definition 7 (Separation). Two sets K, L ⊆ X are continuously linearly separated, or separated for short, if there exists a non-trivial continuous linear form x∗ ∈ X∗\{0} such that supK〈x∗ | ·〉 ≤ infL〈x∗ | ·〉. If the inequality is strict, we will say that the sets are strongly separated.
+Corollary 6. Let X be a topological vector space, K an open convex subset of X and z ∈ X \ K. Then K and {z} are separated.
+Proof of Corollary 6. Translating if necessary, we assume that K contains the origin in its interior, and we consider its gauge pK. Let E = Rz, and define f (tz) := t on E. Since z ∈/ K, pK(z) ≥ 1 = f (z), from which we deduce by positive homogeneity that f (tz) ≤ pK(tz) for t ≥ 0. For t ≤ 0 we have f (tz) = t ≤ 0 ≤ pK(tz). Thus, f ≤ pK on E. By the Hahn-Banach theorem, we get the existence of a continuous
+linear extension fˆ of f such that fˆ ≤ pK on X . Moreover, for all x ∈ K, we
+have fˆ(x) ≤ pK(x) ≤ 1 = fˆ(z), thus showing that K is separated from {z} by a
+continuous linear form, which moreover is nontrivial since fˆ(z) = 1.
+A simple argument using the Minkowski sum allows to separate two convex sets, one of which is open. We recall that the Minkowski sum A ⊕ B between two sets is
+A ⊕ B = {x + y | x ∈ A, y ∈ B}.
+The Minkowski difference is defined similarly as A B := {x + y | x ∈ A, y ∈ B}. The Minkowski sum of two convex sets is convex (exercise).
+Corollary 7. Let X be a topological vector space and let K and L be two disjoint convex subsets of X , such that L is open. Then, K and L are separated.
+Proof. We consider the Minkowski difference between K and L, M = K L,
+M := {x − y | x ∈ K, y ∈ L} =
+⋃
+y∈L
+(K − y),
+which is open (as a union of open sets) and convex as already noted. Since K and L are disjoint, M does not contain z := 0 in its interior. By the previous corollary, we get the existence of x∗ ∈ X ∗ such that
+∀x ∈ M = K ⊕ (−L), 〈x∗ | x〉 ≤ 〈x∗ | z〉 = 0
+This directly implies that K and L are separated by x∗.
+7
+
+
+Corollary 8. Let X be a topological vector space and let K and L be two convex subsets of X . Assume that there exists an open convex neighborhood V of 0 such that (K ⊕ V ) ∩ L = ∅. Then, K and L are strongly separated.
+Proof. We first note that the set K ⊕ V is convex (at the sum of convex sets) and open (as in the proof of the previous corollary). Thus, by the previous corollary, we can separate K ⊕ V from L, i.e. there exists x∗ ∈ X ∗ \ {0} so that
+sup
+x∈K ⊕V
+〈x∗ | x〉 ≤ inf
+y∈L〈x∗ | y〉.
+In addition, one easily sees that
+sup
+x∈K ⊕V
+〈x∗ | x〉 = sup
+x∈K
+〈x∗ | x〉 + sup
+y∈V
+〈x∗ | y〉.
+Since x∗ 6= 0, there exists v ∈ X such that 〈x∗ | v〉 6= 0, and replacing v by −v if necessary, we can assume that 〈x∗ | v〉 > 0. Since the set V is open and since 0 belongs to V , for t > 0 sufficiently small, tv must also belongs to V . Thus, supy∈V 〈x∗ | y〉 > t〈x∗ | v〉 > 0: this shows the strong separation.
+Corollary 9. Let X be a locally convex topological vector space and let K and L be two convex subsets of X , and assume that K is compact and L is closed. Then, K and L are strongly separated.
+Lemma 10. In a topological vector space, if X is compact and Y is closed, then the Minkowski sum X ⊕ Y is closed.
+Proof of Lemma 10, Normed spaces. Let zn be a converging sequence of points in Z = X ⊕ Y , so that zn = xn + yn with xn ∈ X and yn ∈ Y . We denote z the limit of (zn)n≥1. By compactness of X, taking a subsequence if necessary, we can assume that the sequence (xn)n≥1 converges to some x ∈ X. The relation zn = xn + yn then implies that the sequence (yn)n≥1 converges to some point y = z − x, and by closedness of L, the point y belongs to L. In conclusion, z = x + y belongs to Z = X ⊕ Y ⊕ (−L) and M is closed.
+Proof of Lemma 10, Topological vector spaces. Let z 6∈ X ⊕ Y . Then, for every x ∈ X we have z − x 6∈ Y , implying by closedness of Y that there exists an open set Ox so that z − x ∈ Ox and Ox ∩ Y = ∅. By continuity of the substraction, there exists opens set Bx containing x and Ux containing z such that (Ux Bx) ⊆ Ox, so that (Ux Bx) ∩ Y = ∅. The sets (Bx)x∈X cover the compact set X, so that by compactness, one may extract a finite family x1, . . . , xN ∈ X s.t. ⋃
+i Bxi contains X. Then U = ∩iUxi is an open set containing z and such that
+(U X) ∩ Y ⊆
+(
+U
+⋃
+i
+Bxi
+)
+∩Y ⊆
+⋃
+i
+(Uxi Bxi ) ∩ Y = ∅,
+thus implying that U ∩ (X ⊕ Y ) = ∅. This shows that (X ⊕ Y ) is closed.
+8
+
+
+Proof of Corollary 9. We first notice that thanks to the previous lemma, K L = K ⊕(−L) is closed, and by hypothesis it does not contain the origin. Therefore, there exists an open set V such that V ∩ (K L) = ∅. Moreover, since we assumed that X is locally convex, we may assume that V is convex. Thus, we can apply Corollary 8 to conclude that K and L are strongly separated.
+Remark 2 (Separation of points). The previous corollary implies that if X is a separated (Hausdorff) locally convex topological vector space, then for every distinct points x, y ∈ X , there exists x∗ ∈ X ∗ such that 〈x∗ | x〉 > 0 > 〈x∗ | y〉. In particular, this shows that X endowed with the weak topology σ(X , X ∗) is separated (see Definition 38).
+1.5 Closed convex sets
+We recall that thanks to Lemma 5, in a topological vector X a closed half-space is a set of the form H = {x ∈ X | 〈x∗ | x〉 ≤ α} where x∗ ∈ X ∗ and α ∈ R.
+Proposition 11. Let K be a closed convex set of a locally convex topological vector space X . Then, K is the intersection of all the closed half-spaces containing K.
+Proof. Denote L the intersection of all the closed half-spaces containing K. The inclusion K ⊆ L is obvious, so let us prove that (X \ K) ⊆ (X \ L). To do that, we consider some point x ∈ X \ K. By the strong separation theorem (Corollary 9) applied to the closed convex set K and the compact convex set {x}, there exists x∗ ∈ X ∗ and ε > 0 so that
+∀z ∈ K, 〈x∗ | z〉 + ε ≤ 〈x∗ | x〉.
+Thus, the closed half-space H = {z ∈ E | 〈x∗ | z〉 + ε
+2 ≤ 〈x∗ | x〉} contains K, so that by definition L ⊆ H. Since x does not belong to H, this shows that x 6∈ L.
+Definition 8 (Closed convex hull). The closed convex hull of a subset A of a normed space is the smallest closed convex set containing A, or equivalently the intersection of all the closed convex sets containing A. We denote it convA.
+Corollary 12. Let X be a locally convex topological vector space. Then, for all subsete A ⊆ X , the closed convex hull of A equals the intersection of all the halfspaces containing A.
+Example 2. Let A = {(x, y) ∈ R2 | y ≥ 1
+1+x2 }. Then, convA = {(x, y) ∈ R2 | y ≥ 0}.
+Definition 9 (Weak convergence). A sequence (xn) of points in X is called weakly convergent to x ∈ X if for any continuous linear form x∗ one has
+lim
+n→+∞〈x∗ | xn〉 = 〈x∗ | x〉.
+9
+
+
+As a consequence of the proposition, we see that all closed convex sets are also closed under weak limits. This is useful to show existence to optimization problems posed in infinite dimensions, e.g. in optimal control, calculus of variations or optimal transport. We can actually prove that closed convex sets are also closed under the weak topology on the space. More details are provided in Appendix A.3.
+Corollary 13. Let K ⊆ X be a closed convex set in a topological vector space X , and let (xn) be a weakly converging sequence, with limit in x. Then, x belongs to K.
+Proof. By Proposition 11, one can write K = ∩i∈I Hi, where Hi = {〈x∗
+i | ·〉 ≤ αi}
+are closed half-spaces. In particular, for all i ∈ I and n, one has 〈x∗
+i | xn〉 ≤ αi. By weak convergence, we deduce that
+〈x∗
+i | x〉 = lim
+n→+∞〈x∗
+i | xn〉 ≤ αi,
+thus proving that x also belongs to K.
+Proposition 14. Let X be a locally convex topological vector space, and let K ⊆ X be convex. Then, K is weakly closed if and only if it is closed.
+Proof. We already know that (Remark 27) that if K is weakly closed, then K is closed. Conversely, assume that K is closed and convex. By the Proposition 11, K is a (possibly uncountable) intersection of closed halfspaces. Since every closed halfspace is weakly closed, we deduce that K is also weakly closed.
+1.6 Support function and normal cone
+Definition 10 (Support function, support hyperplane). The support function of a non-empty set A ⊆ X is the fonction σA on X ∗ defined by
+σA : x∗ ∈ X ∗ 7→ sup
+x∈A
+〈x∗ | x〉 ∈ R ∪ {+∞} (1)
+A (closed) hyperplane H = {〈x∗ | ·〉 = α} is a support hyperplane to A at at a point x ∈ A, or supports A at x if 〈x∗ | x〉 = α and if A ⊆ {〈x∗ | ·〉 ≤ α}. The linear form x∗ is then called an (exterior) normal to A at x.
+Remark 3. Note that H supports A at x if and only if σA(x∗) = 〈x∗ | x〉, explaining why σA is called the support function of A.
+The support function of a singleton (A = {x}) is linear, while in general the support function of a set is sublinear (as in Definition 4). Support functions were introduced by Minkowski in the finite-dimensional setting. A nice feature of the embedding K 7→ σK is that it preserves much of the structure of the set of closed convex subsets of X . We refer to Hörmander [Hör55] for a short summary of the properties of support functions of closed convex sets. Support function can be used to get a geometric interpretation of some rules of subdifferential calculus. Our first propositions shows that the support function of a closed convex set can be used to reconstruct it.
+10
+
+
+Proposition 15. Let X be a locally convex topological vector space and let K ⊆ X be closed and convex. Then,
+K=
+⋂
+x∗∈X ∗
+{x ∈ X | 〈x∗ | x〉 ≤ σK (x∗)}. (2)
+Proof. Denote L the intersection of halfspaces Hx∗ = {〈x∗ | ·〉 ≤ σK(x∗)}. Since every halfspace in the intersection contains K, so does L. We now prove the converse inclusion X \ K ⊆ X \ L. Given a point x ∈ X \ K, Proposition 11 shows that there exists a closed convex hyperplane H = {〈x∗ | ·〉 ≤ α} containing K but not containing the point x. Then, using
+α ≥ sup
+x∈K
+〈x∗ | x〉 = σK (x∗),
+we see that Hx∗ ⊆ H. The half-space H does not contain x, so that neither Hx∗ and L can contain x.
+Proposition 16. Let X be a locally convex topological vector space. (i) Let K, L ⊆ X be closed and convex. Then, K ⊆ L iff σK ≤ σL. (In particular σK = σL if and only if K = L.) (ii) Let K1, . . . , K` be closed and convex and let λ1, . . . λ` > 0. Then
+σ
+⊕
+i λiKi =
+∑
+i
+λiσKi ;
+(iii) Let K1, . . . , K` be closed and convex. Then, σ⋃
+i Ki = maxi σKi . Then,
+σ
+⋃
+i Ki = miax σKi .
+Remark 4. This proposition is sometimes used to construct algorithm for computing the Minkowski sums of convex sets and especially convex polyhedra.
+Proof. (i) The direct implication (if K ⊆ L, then σK ≤ σL) is obvious from the definition, and the converse follows from Proposition 16. (ii) We have for every x∗ ∈ X ,
+σK (x∗) = sup
+x∈K
+〈x∗ | x〉 = sup
+x∈⊕
+i λiKi
+〈x∗ | x〉
+= sup
+(x1,...,x`)∈K1×...×K`
+〈x∗ |
+∑
+i
+λixi〉 =
+∑
+i
+λiσKi (x∗).
+(iii) is proven similarly.
+Definition 11 (Normal cone). Let K ⊆ X be a convex set. The normal cone to K at a point x in K is defined by Norx K = {x∗ ∈ X ∗ | ∀y ∈ K, 〈x∗ | x − y〉 ≥ 0}. When x is outside of K, we define Norx K = ∅.
+Informally, the normal cone Norx K is the set of “slopes” x∗ ∈ X ∗ of all support hyperplanes {〈x∗ | ·〉 = α} to K at the point x.
+11
+
+
+Example 3 (Smooth sublevel set). Let X = Rd, let g : Rd → R be a C1 convex function such that infRd g < 0, and let K = g−1((−∞, 0]). Note in particular that K has non-empty interior. Then,
+Norx K =
+
+ 
+ 
+R+∇g(x) if x ∈ ∂K
+0 if x ∈ int(K)
+∅ if x 6∈ K
+The notion of normal cone allows to generalize this construction for convex sets that are not differentiable, e.g. polyhedra.
+Example 4 (Hilbertian setting). In X is a Hilbert space, the dual space X ∗ can be identified by X itself thanks to Riesz’ theorem (i.e. any continuous linear form on X is of the form 〈x | ·〉, where x ∈ X ). Then, the normal cone can be characterized by
+Norx K = {v ∈ X | ∃t > 0, pK(x + tv) = v},
+where pK is the orthogonal projection on K.
+Proposition 17. Let X be a topological vector space and let K ⊆ X be closed and convex. Then, (i) The normal cone Norx K is convex and weak∗ closed for any x ∈ K, and can be characterized by x∗ ∈ Norx K ⇐⇒ σK (x∗) = 〈x∗ | x〉. (ii) If K has non-empty interior, then for any x ∈ ∂K, Norx K 6= ∅.
+Proof. (i) The convexity and weak∗ closedness of Norx K follows from the fact that this set can be written as an intersection of weak∗ closed halfspaces:
+Norx K = {x∗ ∈ X ∗ | ∀y ∈ K, 〈x∗ | x − y〉 ≥ 0} =
+⋂
+y∈K
+{〈x∗ | ·〉 ≤ 〈x∗ | x〉}.
+The characterization of the normal cone follows from the definitions. (ii) Let L = int K and let x ∈ ∂K. Since x 6∈ L, the open convex set L and the point x can be linearly separated (Corollary 6): there exists x∗ 6= 0 such that
+sup
+y∈L
+〈x∗ | y〉 ≤ 〈x∗ | x〉.
+This implies, by definition, that x∗ belongs to Norx K.
+12
+
+
+2 Convex functions
+In convex analysis it is very common to encounter functions taking values in the (half) extended real line R = R ∪ {+∞}. They arise for instance when one includes constraints directly in the minimized functional, i.e. if one replaces the problem
+mKin f,
+where K ⊆ X is convex, by the unconstrained minimization problem
+mXin f + iK ,
+where iK is the convex indicator function of K, i.e.
+iK (x) =
+{
+0 if x ∈ K
++∞ if not.
+This may seem like a formal trick, but this formulation is often of practical interest, because it allows to solve constrained convex optimization problem using general algorithms for minimizing the sum of two convex functions. More importantly perhaps, convex functions taking the value +∞ appear naturally one when considers the Legendre-Fenchel conjugate. For instance, we will see that the Legendre-Fenchel conjugate of a norm is the 0/ + ∞-valued indicator of the dual unit ball. The set R ∪ {+∞} comes with the intuitive calculus rules such a + (+∞) = +∞ for a ∈ R, a × (+∞) = +∞ for a > 0. Often, one adopts the convention 0 × +∞ = 0, so that 0 × iK is the zero function.
+2.1 Definition and first properties
+Definition 12 (Domain and epigraph). Let f : X → R. We call (i) domain of f , denoted dom(f ), the subset of X where f take finite values:
+dom(f ) = {x ∈ X , f (x) 6= +∞};
+(ii) epigraph of f the subset of X × R above the graph of f , i.e.
+epi(f ) = {(x, t) ∈ X × R; t ≥ f (x)}.
+A function f : X → R is proper iff dom(f ) 6= ∅, i.e. if f 6≡ +∞.
+Definition 13. A function f : X → R is convex if epi(f ) is a convex subset of X ×R.
+The relationship between this definition and the usual definition of convexity is given in the next proposition.
+Proposition 18. A function f : X → R is convex iff dom(f ) is convex and if for all x, y in dom(f ) and all α ∈ [0, 1],
+f ((1 − α)x + αy) ≤ (1 − α)f (x) + αf (y). (3)
+13
+
+
+Proof. Assume f is convex. Defining ΠX : X × R → R as the (linear) application ΠX (x, t) = x, one has
+dom(f ) = {x ∈ R | ∃t ∈ R, (x, t) ∈ epi(f )} = ΠX (epi(f )),
+Thus, dom(f ) is convex as the image of a convex set under an affine application. Moreover, for all x, y ∈ dom(f ), the points x′ := (x, f (x)) and y′ := (y, f (y)) belong to epi(f ). Thus, by convexity of epi(f ), one gets that for all α ∈ [0, 1],
+z′ = (1 − α)x′ + αy′ = ((1 − α)x + αy, (1 − α)f (x) + αf (y))
+belongs to the epigraph of f , giving (3). The converse is left as an exercise.
+The proposition belows give some examples of how to construct convex functions.
+Proposition 19. (i) If (fi)i∈I is a (possibily uncountable) family of convex functions, the function x 7→ supi∈I fi(x) is also convex. (ii) Let A : X → Y be affine, and let f be convex on X . Then, f ◦ A is convex. (iii) If f1, . . . , fN are convex and if λ1, . . . , λN ≥ 0, then ∑N
+i=1 λifi is convex.
+Example 5. a. Let K ⊆ X and let iK : E → R be its indicatrix function, defined by iK(x) = 0 if x ∈ K and +∞ if x 6∈ K. Then, iK is convex iff K is convex. b. Linear forms (even discontinuous) are convex. c. Sublinear functions (e.g. norms, gauges, support functions) are convex. d. The sublevel sets of a convex functions are convex sets. The reciprocal is false: there exists non-convex functions whose sublevel sets are convex. For instance, the sublevel sets of any mononotone function on R are convex. Functions with convex sublevel sets are usually called quasi-convex. e. Let A ⊆ X be a bounded subset of a normed space. The function x 7→ supp∈A ‖x − p‖ is convex. f. If f is convex and if K is a convex set, the function g = f + iK is convex. g. The composition of convex functions is not necessarily convex: e.g. f (x) = x2 and g(x) = −x are convex on R, but g ◦ f is not.
+Definition 14 (Strict convexity). A function f : X → R is strictly convex if it is convex and if for all x 6= y ∈ dom f and all t ∈]0, 1[,
+f ((1 − t)x + ty) < (1 − t)f (x) + tf (y) (4)
+Remark 5 (Strong and semi-convexity). On a normed vector space, we will say that a function f has convexity modulus ω : R → R if for all x, y ∈ dom f and t ∈ [0, 1],
+f ((1 − t)x + ty) + t(1 − t)ω(‖x − y‖) ≤ (1 − t)f (x) + tf (y) (5)
+When ω(t) = α
+2 t2 with α > 0, f is called α-strongly convex. If α < 0, f is called α-semiconvex. Note that a semi-convex function is usually not convex.
+14
+
+
+2.2 Lower semicontinuous convex functions
+Definition 15 (Lower semi-continuity). Let X be a topological vector space. A function f : X → R is called lower semicontinuous or lsc if for all a ∈ R the sublevel set lev≤a f is closed, where
+lev≤a f = {x ∈ X | f (x) ≤ a}.
+Equivalently, f is lsc if the strict superlevel set lev>a f is open for all a ∈ R. Lower semi-continuous functions are sometimes called closed in the literature.
+Remark 6 (Continuity). A function f : X → R is continuous if the sublevel sets lev≤a and superlevel sets lev≥a are closed for all a ∈ R, or equivalently if the strict sublevel sets lev<a and strict superlevel sets lev>a are open. Indeed, this openness assumption implies that for all a ≤ b,
+f −1((a, b)) = lev>a f ∩ lev<b f
+is open, as the intersection of a finite number of open sets. Recalling that every open set O of R is a (possibly uncountable) union of open intervals, we deduce that f −1(O) is open, proving the continuity of f .
+Proposition 20. Let X be a topological space, let fi : X → R be lower semicontinuous functions indexed by some set I. Then, (i) the function supi∈I fi is lower semicontinuous; (ii) if I is finite and if (λi)i∈I are positive, then ∑
+i∈I λifi is lower semicontinuous.
+Proof. (i) Let f = supi∈I fi. Then its sublevel sets
+lev≤a f = {x ∈ X | ∀i, fi(x) ≤ a} =
+⋂
+i∈I
+lev≤a fi,
+are closed as intersections of closed sets. (ii) We treat the case Card I = 2: let f1, f2 be two lsc functions. Then,
+lev>α f1 + f2 = {x ∈ X | f1(x) + f2(x) > α} =
+⋃
+t+s>α
+lev>t f1 ∩ lev>s f2,
+is open as an (arbitrary) union of finite intersections of open sets.
+We have the following alternative characterizations of lower semicontinuity. In the following the product space X × R is always endowed with the product topology (Definition 35), i.e. a subset O ⊆ X × R is open if for all point (x, t) ∈ O, there exists an neighborhood Nx of x in X and ε > 0 such that Nx × (t − ε, t + ε) ⊆ O.
+Proposition 21. The following properties are equivalent: (i) the function f is lower-semicontinuous ; (ii) the set epi(f ) ⊆ X × R is closed ;
+15
+
+
+In a metric space X , a function f : X → R is lower semi-continuous if for all x ∈ X and every sequence (xn)n≥1 converging to x one has
+f (x) ≤ lim inf
+n→+∞ f (xn).
+The limit inferior of a real-valued sequence (fn) ∈ RN, denoted lim infn→+∞ fn, is the smallest cluster point of the sequence.
+Proof. (ii) =⇒ (i): Assume that epi(f ) is closed. Then, for all a ∈ R, the sublevel set of f can be written as
+lev≤a f = ΠX (epi(f ) ∩ X × [a, +∞)),
+i.e. the image under the continuous projection ΠX of the intersection between two closed subsets of X × R. Thus, lev≤a f is closed for every a and f is lsc. (i) =⇒ (ii): We will show that the complement (X × R) \ epi(f ) is open. Consider a point (x, t) 6∈ epi(f ), i.e. t < f (x), and let α ∈ R be such that t < α < f (x). Then, x does not belong to lev≤α f , and by closedness of this set there exists a small neighborhood Nx around x so that Nx ∩ lev≤α f = ∅. The set Nx ∩ (−∞, α] is a neighborhood of (x, t) in X × R and it does not intersect epi(f ), proving that (X × R) \ epi(f ) is closed. The characterization in the metric setting is left as an exercise.
+Remark 7 (Lsc envelope). Let X be a topological space and let f : X → R. The previous propositions shows that the function fˆ defined by
+fˆ(x) = sup{g(x) | g : X → R is lsc and g ≤ f }.
+is lower semicontinuous; it is in fact the largest lower semicontinuous function below f , called the lsc envelope of f .
+Example 6 (Indicator function). The 0/ + ∞-valued indicator function iA of a set A ⊆ X is lower semi-continuous iff A is closed.
+Example 7 (Maximum of continuous linear functions). Any continuous linear form x∗ ∈ X ∗ (and more generally any continuous function) is lower semicontinuous. Since any supremum of lsc function remains lsc (Proposition 20), one deduces that any function of the form
+sup
+i∈I
+〈x∗
+i | ·〉 + ti,
+is lower semicontinuous, where (x∗
+i )i∈I is a (possibly uncountable) family of continuous linear forms and where ti ∈ R.
+The next proposition asserts that for convex functions, weak and strong lowersemicontinuity coincide. This is useful because typically much easier to prove that a function is lower semi-continuous than to prove that it is weakly lower-semicontinuous.
+Proposition 22. Let X be a locally convex topological vector space, and let f : X → R be convex. Then f is lower semi-continuous if and only if f is weakly lower semi-continuous.
+16
+
+
+Proof. This follows from Proposition 14: since the sublevel sets of a convex function are convex, they are closed iff they are weakly closed.
+Example 8 (Norm). Let φ : R → R be a convex non-decreasing function, which we assume to be lower semi-continuous. Then, f (x) := φ(‖x‖) is convex and strongly lower semi-continuous, and therefore sequentially weakly lower-semicontinuous.
+Example 9 (An integral functional). Let Ω ⊆ Rd be a bounded open set, let φ ∈ C0(Rd) and assume that φ(x) ≥ a ‖x‖p for some a ∈ R and p > 1. Consider X = Lp(Ω), and for any v ∈ X define
+f (v) =
+∫
+Ω
+φ(v(x))dx ∈ R.
+We first prove that f is (strongly) lower semi-continuous. In a normed space, f is lower semicontinuous at v ∈ X iff for every sequence (vn) converging (in norm) to v ∈ X one has f (v) ≤ lim infn→+∞ f (vn). By a known result on Lp spaces, taking a subsequence if necessary, we may assume that vn converges (Lebesgue-)almost
+everywhere to v. Applying Fatou’s lemma to x 7→ φ(vn(x)) − a ‖vn(x)‖p ≥ 0 we get
+f (v) − a ‖v‖p
+X=
+∫
+Ω
+lim
+n→+∞ φ(vn(x)) − a ‖vn(x)‖p dx
+≤ lim inf
+n→+∞
+∫
+Ω
+φ(vn(x)) − a ‖vn(x)‖p dx
+= lim inf
+n→+∞ f (vn) − a lim
+n→+∞ ‖vn‖p
+X,
+thus showing that f (v) ≤ lim infn→+∞ f (vn), and establishing that f is strongly lsc. If one assumes φ to be convex, then f is also convex, and by the previous proposition we deduce that it is weakly lower-semicontinuous.
+Definition 16 (Convex lsc functions). The set of lower-continuous convex functions is denoted Γ(X ), and the set of proper lsc convex functions is denoted
+Γ0(X ) = {f ∈ Γ(X ) | dom(f ) 6= ∅}.
+Proposition 23. Let X be a locally convex topological vector space. If f ∈ Γ(X ) is convex lsc, then f is equal to the supremum of its affine minorant, i.e.
+∀x ∈ X , f (x) = sup{〈x∗ | x〉 + b | x∗ ∈ X , b ∈ R s.t. f ≥ 〈x∗ | ·〉 + b}.
+Example 10. Let f (x) = ‖x‖ on a normed space. Then,
+f (x) = sup{〈x∗ | x〉 | x∗ ∈ X ∗ and ‖x∗‖ ≤ 1}.
+Proof. If dom f = ∅, f is constant and equal to +∞, so that there is nothing to prove. Let us suppose that dom f 6= ∅, or equivalently that K = epi(f ) is a closed convex subset of X × R. Define
+g(x) = sup{〈x∗ | x〉 + b | x∗ ∈ X ∗, b ∈ R s.t. f ≥ 〈x∗ | ·〉 + b}.
+17
+
+
+The function g is a supremum of functions below f , so that g ≤ f . We now prove that g ≥ f . For this purpose, we will prove that for all x0 in X and all t0 < f (x0), one has g(x0) ≥ t0. Since t0 < f (x0), the point (x0, t0) does not belong to K, so that we can strongly separate the closed convex set K from the compact convex set {(x0, t0)} (Corollary 9). This means that there exists a continuous linear form on X × R, which can be described by (x∗, v) ∈ X ∗ × R such that
+inf
+(x,t)∈epi(f )
+〈x∗ | x〉 + tv > 〈x∗ | x0〉 + t0v
+Taking (x, t) = (x0, f (x0)), we get in particular vf (x0) > t0v, i.e. v(f (x0) − t0) > 0. Since f (x0) > t0, we deduce that v > 0. Therefore, taking (x, f (x)) ∈ epi(f ) in the previous inequality, we deduce
+∀x ∈ X , f (x) ≥ 〈 x∗
+v | x0 − x〉 + t0.
+By definition of g as the supremum of affine minorant of f , we get
+g(x) ≥ 〈 x∗
+v | x0 − x〉 + t0,
+In particular, g(x0) ≥ t0 for any t0 < f (x0) so that g(x0) ≥ f (x0).
+Since an intersection of closed convex sets is convex and closed, we deduce that a supremum of convex lower semi-continuous functions is convex lower semicontinuous. This leads to the following definition.
+Definition 17 (Lsc convex envelope). Let f : X → R be a function. Its convex lower-semicontinuous envelope is defined by
+convf = sup{g | g ≤ f and g ∈ Γ(X )}.
+By the previous proposition, we can also characterize convf by
+convf (x) = sup{〈x∗ | x〉 + b | x∗ ∈ X , b ∈ R s.t. f ≥ 〈x∗ | ·〉 + b}.
+2.3 Application: Existence of minimizers
+Examples in functional spaces For the next two examples, we will use the Sobolev space W 1,p(Ω), where Ω is a bounded open set of Rd and p > 1. Roughly speaking, an element of W 1,p(Ω) is a function u ∈ Lp(Ω) such that for all 1 ≤ i ≤ d, the partial derivative ∂iu belongs to Lp(Ω) in the sense of distributions.1 This Sobolev space is a Banach space, when endowed with the norm
+‖u‖p
+W 1,p = ‖u‖p
+Lp(Ω) + ‖∇u‖p
+Lp(Ω,Rd) ,
+1This means that there exists a function vi ∈ Lp(Ω) such that for all smooth and compactly supported test function φ ∈ C∞
+c (Ω) one has ∫
+Ω(∂iφ)u = − ∫
+Ω uvi. One then defines ∂iu := vi.
+18
+
+
+and a reflexive space when 1 < p < +∞. We consider W 1,p
+0 (Ω) to be the space
+of elements of Ω who vanish on ∂Ω, formally defined as the closure of Cc∞(Ω) in
+W 1,p(Ω). Poincaré’s inequality asserts that there exists a constant C such that
+∀u ∈ W 1,p
+0 (Ω), ‖u‖W 1,p(Ω) ≤ C ‖∇u‖Lp(Ω,Rd) .
+When p = 2, these spaces are Hilbert spaces, and one denotes H1(Ω) = W 1,2(Ω) and H01(Ω) = W 1,2
+0 (Ω).
+Example 11 (Obstacle problem). Let X = H01(Ω), K = {u ∈ X | u ≥ Ψa.e.} for
+some Ψ ∈ Cc∞(Ω) and consider the minimization problem
+min
+u∈K f (u) with f (u) :=
+∫
+Ω
+‖∇u(x)‖2 dx.
+Following Exercise 6, one can prove that K is closed, and this set is obviously convex. In addition, the function f is strictly convex, so that the problem minK f admits at most one solution. Let (uk)k≥1 be a minimizing sequence, that is a sequence of elements of K such that
+inKf f = lim
+k→+∞ f (uk).
+We can assume, without loss of generality that (f (uk))k≥1 is decreasing. Then, Poincaré’s inequality implies that (uk)k≥1 is bounded, so that by Banach-Alaoglu, this sequence admits a weakly converging subsequence, with limit u. Since K is convex and closed, it is weakly closed, so that u belongs. Finally, since f is lower semicontinuous we have
+f (u) ≤ lim inf
+k→+∞ f (uk) = inKf f,
+thus showing the existence of a minimizer
+This example can be generalized as follows.
+Definition 18 (Coercivity). A function f : X → R is coercive on a subset K of a normed vector space X if for every sequence (xn)n∈N of elements of K satisfying limn→+∞ ‖xn‖ = +∞, one has limn→+∞ f (xn) = +∞.
+Proposition 24. Let X be a separable and reflexive space, let f : X → R be convex, proper, lsc, let K ⊆ X be closed and convex, and consider the minimization problem
+inf
+x∈K f (x).
+Then the minimum is attained, provided that one of the following conditions hold a. the set K is bounded ; b. or the function f is coercive on K. The minimizer is unique if f is strictly convex on K.
+Proof. Exercise.
+19
+
+
+Example 12 (A variational problem). On the space X := W 1,p
+0 (Ω) we consider the integral functional
+f (u) =
+∫
+Ω
+φ(∇u(x))dx,
+with φ : R → R a convex continuous function satisfying φ(v) ≥ a ‖v‖p and a > 0. Then, the minimization problem
+inf
+u∈X f (u),
+admits a solution. To see this, consider a minimizing sequence, i.e. a sequence (un) of elements of X such that limn→+∞ f (un) = infX f . In particular, f (un) ≤ M for some constant M > 0. By the assumption on f and Poincaré’s inequality, we deduce that the sequence (un)n∈N is bounded,
+‖un‖p
+W 1,p(Ω) ≤ Cp ‖∇un‖p
+Lp(Ω,Rd) ≤ Cp
+a f (un) ≤ M Cp
+a
+By Banach-Alaoglu’s theorem, taking a subsequence if necessary, we may assume that the sequence (un)n∈N admits a weakly converging subsequence, with weak limit u. Then, as in Example 9, we know that the functional f is weakly lower semicontinuous on X , so that
+f (u) ≤ lim inf
+n→+∞ f (un) = lim
+n→+∞ f (un) = iXnf f,
+thus showing that u minimizes f over X .
+Example in spaces of measures In the next example, we work in the space of Radon measures over a compact subset Ω ⊆ Rd, i.e.
+M(Ω) := C0(Ω)∗.
+Example 13 (Sparse spikes deconvolution). Consider a measure on the circle T := R/Z made of finitely many Dirac mass (called “spikes” in this setting), i.e.
+μ=
+∑
+1≤i≤N
+αiδxi .
+The measure μ is not known, but one has access to a blurry version of it, y = Φμ ∈ L2(T). More precisely, we are given a linear operator (typically a convolution operator) Φ : M(Ω) → L2(T), which we assume to be sequentially weak*-continuous. The Beurling LASSO problem is the following optimization problem, for λ > 0:
+inf
+ν∈M(T)
+‖Φν − y‖2
+L2(T) + λ ‖ν‖T V ,
+We now show that this problem admits a solution. First note that g = ‖·‖T V and
+h = ‖Φ(·) − y‖2
+L2(T) are sequentially weak* lsc : for g this follows from the definition of the dual norm as a supremum, and for h this is by assumption. In addition, any
+20
+
+
+minimizing sequence (νn)n∈N is bounded, ensuring by Banach-Alaoglu the existence of a (not relabeled) weak*-converging subsequence, with limit ν. Thus,
+(g + h)(ν) ≤ lim inf
+n→+∞(f + g)(νn) = inνf g + h.
+Note also that g + h is a convex function, which is crucial for being able to solve the minimization problem numerically, but we did not use this fact for proving existence. In fact, since the space M(X) is not reflexive, we cannot apply Proposition 24.
+2.4 Continuity of convex functions
+Proposition 25. Let f : X → R be convex on a topological vector space, and assume that f is upper bounded on a neighborhood of x. Then, f is continuous at x.
+Remark 8. Proposition 25 implies that if f is linear, then it is continuous at x if and only if it is upper bounded (or lower bounded) on a neighborhood of x. Proposition 25 may be seen as a generalization of the well-know characterization of continuity for linear forms (Lemma 4).
+Proof. Without loss of generality, we assume that x = 0 and f (x) = 0, and we let O be a neighborhood of the origin and M ≥ 0 so that f ≤ M on O. Replacing O by the intersection O ∩ (−O) if necessary, we may assume that O is symmetric, i.e. O = −O. Let ε ∈ (0, 1) and let x ∈ Oε := εO. Then, since x = (1 − ε)0 + 1
+ε x we get by convexity of f
+f (x) ≤ (1 − ε)f (0) + εf (x/ε) ≤ εM.
+Using 0 = 1/(1 + ε)x + ε/(1 + ε)(−x/ε) we get by convexity of f
+f (0) ≤ 1
+1 + ε f (x) + ε
+1 + ε f (−x/ε),
+so that, using −x/ε ∈ O and f ≤ M on O we get
+f (x) ≥ (1 + ε)f (0) − εf (−x/ε) ≥ −M ε.
+We have proven that |f | ≤ M ε on Oε, thus showing continuity of f at 0.
+From now on, we denote
+cont f = {x ∈ dom f | f is continuous at x}.
+Proposition 26. Let f : X → R be convex on a topological vector space. If there exists an open set on which f is upper bounded, then cont f = int dom f .
+Proof. Let O be an open set on which f ≤ M , and let x ∈ O. We will use this hypothesis to prove that f is locally upper bounded near any point y ∈ Ω = int dom(f ). By openness of Ω, there exists t > 0 such that z := y + t(y − x) belongs to Ω. The point y belongs to the segment [x, z], and more precisely
+y = (1 − α)x + αz
+21
+
+
+with α = 1/(1 + t). The set Oy = (1 − α)O + αz is therefore open (as the Minkowski sum of an open set with a non-empty set) and it contains y. We now prove that f ≤ max(M, f (z)) on B := B(y, (1 − α)δ). By definition of the Minkowski sum, for all point wy ∈ Oy, there exists wx ∈ O such that wy = (1 − α)wx + αz. Thus, using f ≤ M on O,
+f (wy) ≤ (1 − α)f (wx) + αf (z) ≤ max(M, f (z)).
+The function is then upper bounded in a neighborhood of y, and by the previous proposition, it is continuous at y.
+Remark 9. The hypothesis that f is upper bounded is crucial. For instance, take f a discontinuous linear form on an infinite-dimensional space X . Then, dom(f ) = X , f is convex, but f is discontinuous at every point of X .
+Example 14. Let X be a normed space, let K ⊆ X and assume that K contains the ball B(0, r) for some r > 0. Let f = jK be the gauge of K. Then, |f | ≤ 1/r on the unit ball. The previous proposition implies that f is continuous on X .
+Corollary 27. If f : X → R is convex and cont f 6= ∅, then cont f = int dom f .
+Corollary 28. If X is finite dimensional, and f : X → R is convex, then cont f = int dom f .
+Proof. Take f : X → R convex. If dom(f ) has non-empty interior, then there exists points x1, . . . , xn in the interior so that K = conv({x1, . . . , xn}) also has non-empty interior (take e.g. x1 ∈ int dom(f ) and x2, . . . , xn ∈ int dom(f ) so that vect({x2 − x1, . . . , xn − x1}) = X ). Moreover, since every element of K is a convex combination of the points x1, . . . , xn,
+∀x ∈ K, f (x) ≤ M = miax f (xi).
+We conclude using the previous corollary.
+In the remainder of this paragraph, we assume that X is a normed space. Then, the continuity of convex functions can be improved into local Lipschitzness.
+Definition 19 (Locally Lipschitz). A function f : Ω ⊆ X → R is locally Lipschitz on the open set Ω if every point in Ω has a neighborhood on which f is Lipschitz:
+∀x0 ∈ Ω, ∃δ > 0, ∃M ∈ R, ∀x, y ∈ B(x0, δ), |f (x) − f (y)| ≤ M ‖x − y‖ .
+We start with the following intermediary result.
+Lemma 29. Let f : X → R be convex and assume that |f | ≤ M on B(x0, 2δ). Then, f is 2M
+δ -Lipschitz on B(x0, δ).
+22
+
+
+Proof. Let x, y ∈ B(x0, δ), and define α = ‖x − y‖ and z := y + δ
+α (y − x) which by construction belongs to B(x0, 2δ). The point y is a convex combination of z and x,
+y = δ/α
+1 + δ/α x + 1
+1 + δ/α z,
+so that by convexity of f ,
+f (y) ≤ δ/α
+1 + δ/α f (x) + 1
+1 + δ/α f (z)
+i.e. f (y) − f (x) ≤ −1
+1 + δ/α f (x) + 1
+1 + δ/α f (z)
+We now use the upper bound on |f |:
+f (y) − f (x) ≤ 2M
+1 + δ/α ≤ 2M
+δ α = 2M
+δ ‖x − y‖ .
+We conclude by inversing the role of x et y to get the desired Lipschitz property.
+Combining Lemma 29 and the previous continuity results, we get:
+Proposition 30. Let f : X → R be convex on a normed space. If cont f 6= ∅, then f is locally Lipschitz in int dom(f ).
+Remark 10. The assumption that Ω is open cannot be removed. Take for instance
+f : x ∈ [0, 1] 7→ −√x. Then, limx→0,x6=0 f ′(x) = −∞, so that f is not locally Lipschitz at 0.
+23
+
+
+3 Subdifferential
+3.1 Directional derivatives
+In this section we study the “algebraic” properties of the directional derivatives of convex functions. All the properties hold for any vector space X , even without a topology. Since we are only using the linear properties of the space, one shouldn’t hope to get any information about regularity (even continuity) of the functions.
+Definition 20. Given a function f : X → R, x ∈ dom(f ) and v ∈ X , we define the directional derivative as the following limit (if it exists):
+f +(x; v) = lim
+ε→0+
+f (x + εv) − f (x)
+ε (6)
+Proposition 31. Let f : X → R be convex and let x ∈ dom(f ). Then, the directional derivative f +(x; v) ∈ R ∪ {±∞} is well defined for any v ∈ X and moreover,
+f +(x; v) = εin>f0
+f (x + εv) − f (x)
+ε (7)
+Remark 11. The limit defining f +(x; v) can take the values ±∞. (i) Since the limit (6) can be replaced by an infimum (7), one has f +(x; v) = +∞ if and only if the half-line {x + tv | t > 0} does not intersect dom f . As a consequence, if x belongs to the interior of dom(f ), then f +(x; v) < +∞. (ii) It is easy to build examples of convex functions on R such that f +(x; v) = −∞ for some x ∈ dom(f ). (Exercise: find one.)
+The proof is deduced directly from the following lemma, which is a well-known property of 1D convex functions (slopes are increasing).
+Lemma 32. The function ε ∈ R+ 7→ 1
+ε (f (x + εv) − f (x)) is increasing.
+Proof. Let ε2 > ε1 ≥ 0. Since x + ε1v = (1 − ε1/ε2)x + ε1/ε2(x + ε2v), one has using the convexity of f ,
+f (x + ε1v) ≤ (1 − ε1/ε2)f (x) + ε1/ε2f (x + ε2v),
+which gives the desired inequality.
+Proposition 33. Let f : X → R be convex. Then, (i) If x, y ∈ dom(f ), then the following monotonicity property holds
+∀x, y ∈ dom(f ), f +(x; y − x) ≤ f +(y; y − x). (8)
+(ii) If x ∈ int(dom(f )), then f +(x, ·) takes finite values only and is sublinear. (iii) If x ∈ cont(f ), then f +(x, ·) is a continuous sublinear function.
+24
+
+
+Proof. (i) This properties directly corresponds to the fact that the slopes of convex function on R are increasing. (ii) We first prove finiteness. Let v ∈ X . Since x ∈ int(dom(f )), there exists ε > 0 such that x ± εv belong to dom(f ). Using (7), we deduce that f +(x, v) ≤
+1
+ε (f (x + εv) − f (x)) < +∞. Similarly, we have f +(x; −v) < +∞. Now, by convexity of f we have
+f (x) = f
+( x + εv
+2 + x − εv
+2
+)
+≤1
+2 f (x + εv) + 1
+2 f (x − εv),
+and all terms are finite. Therefore,
+f (x + εv) − f (x)
+ε ≥ − f (x − εv) − f (x)
+ε,
+Taking the limit ε → 0, we get f +(x; v) ≥ −f +(x; −v) > +∞, i.e f +(x; ·) is finite. We now prove sublinearity of f +(x; ·). The definition directly implies 1-homogeneity of f +(x; ·), we therefore show subadditivity. Let u, v ∈ X , and ε > 0. Then,
+x + ε(u + v) = x + 2εu
+2 + x + 2εv
+2
+so that by convexity
+1
+ε (f (x + ε(u + v)) − f (x)) ≤ 1
+2ε (f (x + 2εu) − f (x)) + 1
+2ε (f (x + 2εv) − f (x)).
+Taking the limit as ε → 0 gives the desired inequality. (iii) As f is continuous at x, it is bounded in a neighborhood Ox of x. Then, using (7), and setting O = Ox − x, we have
+∀v ∈ O, f +(x; v) ≤ f (x + v) − f (x) ≤ mOaxx
+f − f (x).
+This shows that f +(x; ·) is bounded in a neighborhood of the origin. Since f +(x; ·) is convex (by sublinearity), we deduce from Corollary 27 that f +(x; ·) is continuous on the interior of dom(f +(x; ·), i.e. on the whole space since f +(x; ·) takes finite values only.
+3.2 Gâteaux and Fréchet differentiability
+Definition 21 (Gâteaux-differentiability). A function f : X → R on a topological vector space X is called Gâteaux-differentiable at x ∈ dom f if and only if the directional derivative v ∈ X 7→ f +(x; v) is a continuous linear form.
+Remark 12. The notion of of Gâteaux-differentiability is quite weak. For instance, considerf : R2 → R defined
+f (x1, x2) =
+{
+1 if x1 6= 0 and x2 = x2
+1
+0 if not
+Then, f +(0; ·) ≡ 0 so that f is Gâteaux-differentiable at the origin. On the other hand, f is not even continuous at (0, 0)!
+25
+
+
+Corollary 34. Let f : X → R be convex and let x ∈ cont f . Then, f is Gâteauxdifferentiable at x if and only if f +(x; v) ≤ −f +(x; −v) for all v ∈ X . (' iff the left and right derivatives at x coincide for any direction v)
+Remark 13. The function v 7→ f +(x; v) can be linear and discontinuous, e.g. if f is a discontinuous linear form. Note also that the inequality f +(x; v) ≥ −f +(x; −v) always holds, so that the hypothesis could be replaced by f +(x; v) ≤ −f +(x; −v).
+Example 15. Let f (x) = |x| on R, then f +(0; 1) = 1 and f +(0; −1) = 1 6= −f +(0, 1).
+This proposition follows directly from Proposition 33 and the following lemmas.
+Lemma 35. A sublinear function g : X → R is linear if and only if g(v) ≤ −g(−v) for all v ∈ X .
+Proof. The direct implication is obvious, let us prove the converse. By sublinearity, we have 0 ≤ g(v) + g(−v), i.e. g(v) ≥ −g(−v), so that the assumption implies g(v) = −g(−v). Then,
+g(v + w) ≤ g(v) + g(w)
+g(−(v + w)) ≤ g(−v) + g(−w) = −g(v) − g(w),
+where we used the assumption on the last line. Thus,
+g(v) + g(w) ≤ −g(−(v + w)) = g(v + w) ≤ g(v) + g(w),
+and all inequalities must be equalities; in particular g(v + w) = g(v) + g(w). Since in addition we know from Proposition 33 that g(λv) = λg(v), g is linear.
+Definition 22 (Fréchet-differentiability). A function f : X → R is Fréchet-différentiable at x ∈ dom(f ) if it is Gâteaux-differentiable at x and if
+lim
+v→0,v6=0
+|f (x + v) − f (x) − f +(x; v)|
+‖v‖ = 0, (9)
+i.e. f (x + v) = f (x) + f +(x; v) + o(‖v‖).
+Remark 14. Fréchet-differentiability is the usual differentiability (and implies continuity). In general, Fréchet différentiability =⇒ Gâteaux-différentiability =⇒ linearity of v 7→ f +(x; v). The converse implications are false in general, but is true when f is a convex function on a finite-dimensional space, see Section 3.6.2.
+3.3 Definition of the subdifferential and first properties
+Definition 23 (Subgradient and subdifferential). Let f : X → R and x0 ∈ dom f . A linear form x∗ ∈ X ∗ is called a subgradient of f at x0 if
+∀y ∈ X , f (y) ≥ f (x0) + 〈x∗ | y − x0〉.
+The set of subgradients of f at x0 is called the subdifferential of f at x0 and is denoted ∂f (x0). When x0 6∈ dom f , we set ∂f (x0) := ∅.
+26
+
+
+Remark 15. When X is a Hilbert space or Rd, we will often consider the subdifferential of a function at a point as a subset of X , using the isomorphism X ∗ ' X .
+Example 16. (i) Let f (x) = |v| = max(x, −x). Then,
+∂f (x) =
+
+ 
+ 
+{−1} if x < 0
+{1} if x > 0
+[−1, 1] if x = 0
+(ii) If f is defined on Rd by f (x) = ∑d
+i=1 g(xi) with g : R → R convex,
+∂f (x) =
+∏
+i
+∂g(xi).
+Thus, if f (x) = ∑
+1≤i≤N |xi|. Then, denoting s(x) = ∂ |·| (x),
+∂f (x) =
+∏
+1≤i≤d
+s(xi).
+(iii) Let X be a normed space and let f (x) = ‖x‖. Then,
+x∗ ∈ ∂f (0) ⇐⇒ ∀x ∈ X , 〈x∗ | x〉 ≤ ‖x‖ ⇐⇒ ‖x∗‖∗ ≤ 1
+In other words, ∂f (0) is the dual unit ball.
+(iv) Let f (x) = −√x on [0, +∞[. Then, ∂f (0) = ∅ even though 0 belongs to dom f .
+The last example, in the form of a proposition, makes the connection between the notion of subdifferential and the notion of normal cone:
+Proposition 36 (Subdifferential of indicator function). Let K ⊆ X be a convex set and let x ∈ K. Then, ∂iK(x) = Norx K.
+Proposition 37 (General properties). Let f : X → R. Then,
+(i) (Fermat’s rule) f attains its minimum at x0 ∈ X if and only if 0 ∈ ∂f (x0). (ii) (Convexity and closedness) ∂f (x) is weak*-closed and convex. (iii) (Monotonicity) ∀x, y ∈ X , x∗ ∈ ∂f (x) and y∗ ∈ ∂f (y), 〈x∗ − y∗ | x − y〉 ≥ 0. (iv) (Upper semi-continuity) Assume f is lower semicontinuous. Then, if (xn, x∗n)n∈N
+is such that x∗n ∈ ∂f (xn), and if
+xn
+strong
+−−−−−→
+n→+∞ x and x∗
+n
+weak*
+−−−−−→
+n→+∞ x∗,
+then x∗ ∈ ∂f (x).
+(The same conclusion holds if instead xn
+weak
+−−−−−→
+n→+∞ x and x∗n
+strong
+−−−−−→
+n→+∞ x∗.)
+Proof. (ii) This follows from the following representation of ∂f (x) as an intersection of weak* closed halfspaces:
+∂f (x) =
+⋂
+y∈X
+{x∗ ∈ X ∗ | f (y) ≥ f (x) + 〈x∗ | y − x〉}.
+27
+
+
+(iii) By definition of x∗ ∈ ∂f (x) and y∗ ∈ ∂f (y) we have
+f (y) ≥ f (x) + 〈x∗ | y − x〉 and f (x) ≥ f (y) + 〈y∗ | x − y〉.
+We conclude by summing these inequalities. (iv) Under the assumptions, we have for all y ∈ X
+f (y) ≥ f (xn) + 〈x∗
+n | y − xn〉
+= f (xn) + 〈x∗
+n | y − x〉 + 〈x∗ | x − xn〉 + 〈x∗
+n − x∗ | x − xn〉
+Taking the limit (or liminf) as n → +∞, we get f (y) ≥ f (x) + 〈x∗ | y − x〉, thus showing that x∗ ∈ ∂f (x).
+Theorem 38 (Subdifferential of convex functions). Let X be a locally convex topological vector space and let f : X → R be convex. Then,
+(i) if x ∈ dom(f ), ∂f (x) = {x∗ ∈ X ∗ | f +(x; ·) ≥ 〈x∗ | ·〉}. (ii) if x ∈ cont f , ∂f (x) is non-empty. (iii) if x ∈ cont f and if X is a normed space, ∂f (x) is bounded w.r.t ‖·‖∗.
+(iv) if x ∈ cont f , f +(x; v) = sup{〈x∗ | v〉 | x∗ ∈ ∂f (x)}.
+(v) if x ∈ cont f , then f is Gâteaux-differentiable at x if and only if ∂f (x) is a singleton {x∗}, and then f +(x; ·) = 〈x∗ | ·〉.
+Remark 16 (Support function of the subdifferential). Let f ∈ Γ0(X ) and x ∈ cont f . Note that we endowed X ∗ with the weak∗ topology and that any weak∗ continuous linear form over X ∗ is induced by a vector of X , i.e. (X ∗)∗ ' X . The support function of ∂f (x) can therefore be defined as
+σ∂f(x) : y ∈ X 7→ sup
+x∗∈∂f (x)
+〈x∗ | y〉 ∈ R
+Then Theorem 38 immediately implies that σ∂f(x) = f +(x, ·), i.e. the directional derivative can be thought of as the support function of the subdifferential.
+Proof. (i) Let A be the second member of the equality. If x∗ ∈ A we have,
+∀v ∈ X , 〈x∗ | v〉 ≤ f +(x; v) = ti>nf0
+f (x + tv) − f (x)
+t ≤ f (x + v) − f (x)
+Thus, given y ∈ X and letting v = y − x, we get 〈x∗ | y − x〉 ≤ f (y) − f (x), implying that x∗ belongs to ∂f (x). Reciprocally, assume that x∗ ∈ ∂f (x). Then, for all v ∈ X , t > 0 and y = x + tv we have 〈x∗ | y − x〉 ≤ f (x + tv) − f (x). Dividing by t and using y − x = tv, we get
+〈x∗ | v〉 ≤ f (x + tv) − f (x)
+t.
+Since this is true for all t > 0, we have as desired 〈x∗ | v〉 ≤ f +(x; v), i.e. x ∈ A.
+(ii) By Proposition 33, the function g = f +(x; ·) is convex and continuous, so that by Proposition 23, g is equal to the supremum of its affine minorant. In particular,
+28
+
+
+g admits at least a affine minorant: there exists x∗ ∈ X ∗ and α ∈ R such that g(x) ≥ 〈x∗ | x〉 + α for all x ∈ X . Letting x = ty, we use the homogeneity of g to get
+∀y ∈ X , ∀t > 0, t(〈x∗ | y〉 + α/t) ≤ tg(y).
+Letting t → +∞ we get g ≥ 〈x∗ | ·〉, so that, using (i), x∗ ∈ ∂f (x) 6= ∅.
+(iii) To show that ∂f (x) is bounded, we use that since f is continuous at x, it is L-Lipschitz near x for some L ≥ 0. This directly implies that f +(x; v) ≤ L ‖v‖, so that if x∗ ∈ ∂f (x) we have 〈x∗ | v〉 ≤ f +(x; v) ≤ L ‖v‖. By definition of the dual norm, we get ‖x∗‖ ≤ L.
+(iv) If x∗ ∈ ∂f (x), one has f +(x; ·) ≥ 〈x∗ | ·〉, giving
+∀v ∈ X , f +(x; v) ≥ g(v) := sup
+x∗∈∂f (x)
+〈x∗ | x〉.
+We now prove the converse inequality. Let v ∈ X \ {0} and define a linear form on the 1D vector subspace V = Rv ⊆ X by setting φ(v) = f +(x; v). The linear form φ : V → R is bounded by the sublinear function f +(x; ·) (by homogeneity), so that by Hahn-Banach theorem φ can be extended into a linear form on X such that φ ≤ f +(x; ·). As in (ii) one deduces that φ is continuous, and by (i) we get φ ∈ ∂f (x). By definition of g we conclude that f +(x; v) = 〈x∗ | v〉 ≤ g(v).
+(v) If f is Gâteaux-differentiable at x, then φ := f +(x; ·) is linear continuous, and (i) implies that ∂f (x) = {φ0}. Conversely, if ∂f (x) = {x∗} is a singleton, (iv) directly implies that f +(x; ·) = 〈x∗ | ·〉 is linear continuous.
+3.4 Subdifferential calculus
+In applications, one often encounters minimization of functions which are defined as a sum, maximum, or composition of other functions with linear operators. It is therefore of prime interest to study the effect of these operations on the subdifferential. We start with a very general and easy inclusion result. We recall the definition of the adjoint operator:
+Definition 24 (Adjoint). Let L(Y, X ) be the set of continuous linear operators between two topological vector spaces Y and X . The adjoint of A ∈ L(Y, X ) is a linear operator between the dual spaces X ∗ and Y∗ defined by
+A∗ : x∗ ∈ X ∗ 7→ (y ∈ Y 7→ 〈x∗ | Ay〉) ∈ Y∗.
+It is characterized by the property 〈A∗x∗ | y〉 = 〈x∗ | Ay〉.
+Proposition 39 (Inclusions). (i) for all function f, g : X → R and all x ∈ X ,
+∂f (x) + ∂g(x) ⊆ ∂(f + g)(x).
+(ii) if (fi)i∈I is a family of functions from X → R, and f = supi∈I fi, then for all x ∈ X , and Ix := arg maxi∈I fi(x),
+conv
+⋃
+i∈Ix
+∂fi(x) ⊆ ∂f (x).
+29
+
+
+(iii) if f : X → R, A ∈ L(Y, X ), and g = f ◦ A then for y ∈ Y,
+A∗∂f (Ay) ⊆ ∂g(y)
+Proof. Exercise.
+Remark 17 (A counterexample). We note that these inclusions may sometimes be
+strict. For instance, consider f = i[−∞,0) and g(x) = −√x on for x ≥ 0 and g(x) = +∞ for x < 0. Then, f + g takes value +∞ everywhere expect at x = 0, so that ∂(f + g)(0) = R. On the other hand, ∂g(0) = ∅, so that ∂f (0) + ∂g(0) = ∅.
+In order to avoid this counterexample, we need to assume that the domains of f and g intersect non-trivially. Such assumptions are called qualification conditions in the literature. The next theorem gives an example of such a qualification condition, but there exists weaker conditions on Banach spaces (see e.g. Brézis-Attouch [AB86]) or when X = Rd (see [Roc70, Chapter 23]).
+Theorem 40 (Moreau-Rockafellar). Let X be a locally convex topological vector space, let f, g ∈ Γ0(X ) and assume the qualification condition holds:
+dom f ∩ cont g 6= ∅.
+Then, for all x ∈ X one has
+∂f (x) + ∂g(x) = ∂(f + g)(x).
+Proof. Let x ∈ X and consider x∗ ∈ ∂(f + g)(x). Thus,
+∀y ∈ X , f (y) + g(y) ≥ f (x) + g(x) + 〈x∗ | y − x〉.
+Setting f ̃(y) = f (y) − (f (x) + g(x)) − 〈x∗ | y − x〉, this is equivalent to
+∀y ∈ X , f ̃(y) ≥ −g(y).
+Consider the set K = epi(f ̃) and L = − epi(g) in X × R. Since cont(g) 6= ∅, L has non-empty interior, ensuring by Exercise 5, that L is the closure of its interior M := int L. As a consequence of the Hahn-Banach theorem (Corollary 7), there exists a continuous affine function on X × R separating the disjoint convex sets K and M , with M open. This means that there exists z∗ ∈ X ∗ and α ∈ R such that
+inf
+(y,t)∈K
+〈z∗ | y〉 + αt ≥ sup
+(y,s)∈M
+〈z∗ | y〉 + αs = sup
+(y,s)∈L
+〈z∗ | y〉 + αs, (10)
+where the last equality holds because L is the closure of M . Taking y = x0, t > f ̃(x0) and s < −g(x0) in the previous inequality (so that t − s > f ̃(x0) − g(x0) ≥ 0) gives
+0 ≤ α(t − s),
+which is only possible if α ≥ 0. We now rule out the possibility that α = 0. By contradiction, assume that α = 0. Then, the separation inequality gives
+inf
+y∈dom f〈z∗ | y〉 ≥ sup
+y∈dom g
+〈z∗ | y〉,
+30
+
+
+i.e. dom f and dom g are linearly separated (note that z∗ 6= 0 since (z∗, α) 6= 0 and α = 0). This contradicts the assumption dom f ∩cont g = ∅. Thus, α > 0. Replacing z∗ by 1
+α z∗ if necessary, we may therefore assume that α = 1 in the separation
+inequality (10). With (x, f ̃(x)) ∈ K and (y, −g(y)) ∈ L, this inequality gives
+∀y ∈ X , 〈z∗ | x〉 + f ̃(x) ≥ 〈z∗ | y〉 − g(y),
+and since f ̃(x) = −g(x),
+∀y ∈ X , g(y) ≥ g(x) + 〈z∗ | y − x〉.
+In other words, z∗ ∈ ∂g(x). Applying again the separation equality (10) but with (y, f ̃(y)) ∈ K and (x, −g(x)) ∈ L we get
+∀y ∈ X , 〈z∗ | y〉 + f ̃(y) ≥ 〈z∗ | x〉 − g(x),
+Using f ̃(y) = f (y) − (f (x) + g(x)) − 〈x∗ | y − x〉 we get
+∀y ∈ X , f (y) ≥ 〈x∗ − z∗ | y − x〉 + f (x),
+so that x∗ − z∗ ∈ ∂f (x). Thus, x∗ ∈ ∂(f + g)(x) can be written as the sum of z∗ ∈ ∂g(x) and x∗ − z∗ ∈ ∂f (x).
+Theorem 41 (Moreau-Rockafellar). Let f ∈ Γ0(X ) and A : Y → X be a continuous linear operator between two topological vector spaces. Assume the following qualification hypothesis holds:
+cont f ∩ A(Y) 6= ∅.
+Then, for all y ∈ Y one has
+∂(f ◦ A)(y) = A∗∂f (Ay).
+Proof. Let y ∈ Y, and y∗ be an element of ∂(f ◦ A)(y). This reads
+∀z ∈ Y, f (Az) ≥ `(z) := f (Ay) + 〈y∗ | z − y〉.
+We introduce K = epi f and L = {(Az, `(z) | z ∈ Y} which are two convex subsets of X × R. Since the function f is continuous at some point in X , the set K has non-empty interior and is therefore equal to the closure of its interior M := int K. The convex sets M and L are disjoint thanks to the subdifferential inequality above and the set M is open, so that by Corollary 7 there exists a non-zero continuous linear form (x∗, α) ∈ X × R such that
+inf
+(x,t)∈K
+〈x∗ | z〉 + αt = inf
+(x,t)∈M
+〈x∗ | z〉 + αt ≥ sup
+(x,s)∈L
+〈x∗ | x〉 + αs.
+We argue similarly as before to prove that α > 0. By assumption, there exists a point y0 ∈ Y such that Ay0 ∈ cont f . Taking x = Ay0 in the infimum and supremum and
+31
+
+
+choosing t > f (Ay0) and s = `(y0), so that t > s, we obtain that α ≥ 0. Second, we note that α = 0 implies that dom f and AY are linearly separated, a contradiction with cont f ∩ AY 6= ∅. Dividing z∗ by α > 0 if necessary, we now assume that α = 1. The separation inequality can then be rewritten as
+∀x ∈ X , ∀z ∈ Y, 〈x∗ | x〉 + f (x) ≥ 〈x∗ | Az〉 + `(z) = 〈x∗ | Az〉 + f (Ay) + 〈y∗ | z − y〉.
+Taking z = y in this inequality inequality, we get
+∀x ∈ X , 〈x∗ | x〉 + f (x) ≥ 〈x∗ | Ay〉 + f (Ay),
+i.e. −x∗ ∈ ∂f (Ay). Taking x = Ay on the other hand, we obtain
+∀z ∈ Y, 〈A∗x∗ + y∗ | y − z〉 ≥ 0,
+showing that −A∗x∗ = y∗. Thus, y∗ = A∗(−x∗) with −x∗ ∈ ∂f (Ay) as desired.
+Theorem 42 (Dubovitskii-Milyutin). Let X be a topological vector space, let f1, . . . , fN ∈ Γ0(X ) and define f = sup1≤i≤N fi. Then for all x ∈ cont(f1) ∩ . . . ∩ cont(fN ), and Ix := arg maxi∈I fi(x),
+∂f (x) = conv
+(
+⋃
+i∈Ix
+∂fi(x)
+)
+.
+A more general version of this theorem, where the index set is not finite but compact is proven in [Zal02, Theorem 2.4.18].
+Proof. We let K = conv (⋃
+i∈Ix ∂fi(x)) ⊆ X ∗. For proving that ∂f (x) = K we note
+f +(x; v) = lim
+t→0,t>0
+f (x + tv) − f (x)
+t
+= lim
+t→0,t>0 max
+i∈Ix
+fi(x + tv) − fi(x)
+t
+= max
+i∈Ix
+lim
+t→0,t>0
+fi(x + tv) − fi(x)
+t
+= max
+i∈Ix
+f+
+i (x; v).
+Since the fi are continuous at x, the function f is also continous at x. Using Remark 16, the previous computation thus yields
+σ∂f(x) = max
+i∈Ix
+σ∂fi(x).
+By Proposition 16, we deduce that σ∂f(x) = σK, and since both K and ∂f (x) are convex and weak*-closed, we deduce from Proposition 16 that K = ∂f (x).
+32
+
+
+3.5 Application: optimality conditions
+3.5.1 Examples
+Example 17 (Fermat’s problem). We consider the following minimization problem
+min
+x∈Rd αi ‖x − x1‖ + . . . + αN ‖x − xN ‖ ,
+where α1, . . . , αN ≥ 0 and where x1, . . . , xN ∈ Rd are distinct points. The minimizer of this problem is called a Fermat point. Putting fi = ‖· − xi‖, we have
+∂fi(x) =
+{ x−xi
+‖x−xi‖ if x 6= xi
+B(0, 1) if x = xi
+.
+Since all the functions fi are convex and continuous, by Theorem 40
+∂(α1f1 + . . . + α1fN ) =
+{{∑
+i αi x−xi
+‖x−xi‖ } if x 6∈ {x1, . . . , xN }
+B(0, αj) + ∑
+i6=j αi x−xi
+‖x−xi‖ if x = xj .
+Thus, x is a Fermat point iff
+(x = xj and
+∥ ∥ ∥ ∥ ∥ ∥
+∑
+i6=j
+αi
+xj − xi
+‖xj − xi‖
+∥ ∥ ∥ ∥ ∥ ∥
+≤ αj)
+or (x 6∈ {x1, . . . , xN } and ∑
+i
+αi
+x − xi
+‖x − xi‖ = 0.)
+Example 18 (Lasso problem). Let A a m-by-d matrix, y ∈ Rm and γ > 0. We consider the following modification of the least-squared problem
+min
+x∈Rd
+1
+2 ‖Ax − y‖2
+2 + γ ‖x‖1 .
+Set f (x) = 1
+2 ‖Ax − y‖2
+2 and g(x) = ‖x‖1. Setting h = |·| we have
+∂f (x) = {∇f (x)} = {AT (Ax − y)},
+∂g(x) = ∂h(x1) × . . . × ∂h(xd)
+Since these functions are continuous and convex, Theorem 40 gives ∂(f + γg)(x) = ∂f (x) + γ∂g(x). Thus, x is a minimizer of the problem if and only if
+AT (Ax − y) = −γv where v satisfies
+{
+vi = sgn(xi) if xi 6= 0
+vi ∈ [−1, 1] if xi = 0
+or in other words, letting Ai be the ith column of A, x is a minimizer iff
+{
+|〈Ai | Ax − y〉| ≤ γ if xi = 0
+〈Ai | Ax − y〉 = γ sgn(xi) otherwise
+⇐⇒
+{
+|〈Ai | Ax − y〉| ≤ γ if xi = 0
+〈Ai | Ax − y〉 = γ sgn(xi) otherwise.
+One can see from this example that the term ‖x‖1 induces sparsity of the solution
+33
+
+
+3.5.2 Karush-Kuhn-Tucker theorem
+Theorem 43 (Variational characterization of optimality). Let K ⊆ X be a closed convex subset and f : X → R be convex lsc, and assume that
+(int K ∩ dom f 6= ∅) or (K ∩ cont f 6= ∅)).
+Then, the following are equivalent : (i) x is a minimizer of f on K ; (ii) −∂f (x) ∩ Norx K 6= ∅. (iii) ∃x∗ ∈ ∂f (x) s.t.
+∀y ∈ K, 〈x − y | −x∗〉 ≥ 0.
+Proof. The point x ∈ X minimizes f on K if and only if it minimizes f + g with g = iK. This is also equivalent to 0 ∈ ∂(f + g)(x). Since dom g = K and cont g = int K, the first hypothesis is equivalent to cont g ∩ dom f 6= ∅ and the second one is equivalent to dom g ∩ cont f 6= ∅. In either case, one can apply Theorem 40 to get
+∂(f + g) = ∂f (x) + ∂iK = ∂f (x) + Norx K.
+We deduce that x is a minimizer if and only if there exists x∗ ∈ ∂f (x) such that −x∗ ∈ Norx K (this is (ii)) and the equivalence with (iii) comes from the definition of the normal cone.
+Proposition 44 (Normal cone of sublevel set). Let g ∈ Γ0(X ), let K = lev≤0 g and assume Slater’s condition: {
+K ⊆ cont g
+lev<0 g 6= ∅
+Then,
+Norx K =
+
+ 
+ 
+0 if g(x) < 0
+R+∂g(x) if g(x) = 0
+∅ if g(x) > 0
+.
+Proof. First we note that if g(x) < 0, then by assumption x ∈ cont g. Thus, g ≤ 0 on a neighborhood of x, which implies that iK is locally equal to zero. From this we deduce that Norx K = ∂iK(x) = {0}. From now on we assume that g(x) = 0. We first prove the inclusion R+∂g(x) ⊆ Norx K. Let x∗ ∈ ∂g(x), so that
+∀y ∈ X , g(y) ≥ 〈x∗ | y − x〉 + g(x)
+Multiplying this inequality by λ ≥ 0 we get
+∀y ∈ K, 0 ≥ λg(y) ≥ 〈λx∗ | y − x〉 + g(x)
+}{{}
+=0
+,
+thus showing that λx∗ ∈ Norx K.
+34
+
+
+Let us prove the converse inclusion Norx K ⊆ R+∂g(x). Let x∗ ∈ Norx K. By definition of the normal cone, for all y ∈ K one has 〈x∗ | x〉 ≥ 〈x∗ | y〉, implying that K is included in the complement of the closed half-space H = {y ∈ X | 〈x∗ | y〉 ≥ 〈x∗ | x〉 ≥ 0}. This in turns implies that g ≥ 0 on H, so that x minimizes g over H. Since x ∈ cont g ∩ dom(iH ), we can apply the subdifferential sum rule:
+0 ∈ ∂(g + iH ) = ∂g(x) + R+{−x∗}.
+In other words, there exists y∗ ∈ ∂g(x) and λ ≥ 0 such that λx∗ = y∗. Note that λ cannot be zero since x is not a minimizer of g. Then, x∗ = 1
+λ y∗ as desired.
+Theorem 45 (Karush-Kuhn-Tucker). Let f, g1, . . . , gN ∈ Γ0(X ) let K = ⋂
+1≤i≤N lev≤0 gi,
+and assumes that Slater’s condition
+{
+lev≤0 gi ⊆ int dom gi ∀i ∈ {1, . . . , N }
+dom f ∩ lev<0 g1 ∩ . . . ∩ lev<0 gN 6= ∅ (11)
+hold. Then the following are equivalent: (i) x is a minimizer of f on K ; (ii) there exists λ1, . . . , λN ≥ 0 such that
+{
+0 ∈ ∂f (x) + λ1∂g1(x) + . . . + λN ∂gN (x)
+λigi(x) = 0 ∀i ∈ {1, . . . N }
+Remark 18. If the functions gi are continuous, the first hypothesis in Slater’s condition automatically holds.
+Remark 19 (Lagrange multipliers). The scalars λ1, . . . , λN whose existence is given by the theorem are called Lagrange multipliers. If λ1, . . . , λN are as in the theorem, we directly obtain that x minimizes f +λ1g1 +. . .+λN gN over X . Thus, knowing the Lagrange multipliers allows to replace the constrained optimization problem minK f by an unconstrained problem.
+Proof. We consider Ki = lev≤0 gi. The second assumption’s in Slater’s condition ensures that there exists a point in dom f in the interior of the sets Ki, i.e.
+dom f ∩ cont(iK1) ∩ . . . ∩ cont(iKN ) 6= ∅.
+Applying Theorem 40 recursively, we obtain
+∂(f + iK1 + . . . + iKN )(x) = ∂f (x) + ∂iK1(x) + . . . + ∂iKN (x)
+= ∂f (x) + Norx K1 + . . . + Norx KN ,
+so that x ∈ K minimizes f on K iff there exists x∗ ∈ ∂f (x) and x∗
+i ∈ Norx Ki such
+that −x∗ = x∗1 + . . . + x∗
+i . Since in addition for x ∈ K, we have
+Norx Ki =
+{
+R+∂gi(x) if gi(x) < 0
+{0} if not ,
+we get that x∗
+i = λiy∗
+i with y∗
+i ∈ ∂gi(x) and λi = 0 if gi(x) < 0 and λi ≥ 0 if not, as desired.
+35
+
+
+3.6 Differentiability almost everywhere
+Motivation Given a compact convex domain K ⊆ X and x∗ ∈ X ∗, we consider the following linear programming problem:
+sup
+x∈K
+〈x∗ | x〉 (12)
+We denote f : x∗ ∈ X ∗ → R the value function of this problem, i.e. f (x∗) is the value of the maximum in the previous definition. In other words, f is the support function of K. Then, f is convex and if x is a solution to (12), i.e. if x ∈ K and f (x∗) = 〈x∗ | x〉, one has
+f +(x∗, v∗) = εli→m0
+1
+ε (f +(x∗ + εv∗) − f (x∗))
+≥ εli→m0
+1
+ε (〈x∗ + εv∗ | x〉 − 〈x∗ | x〉) ≥ 〈v∗ | x〉
+It is often useful to know whether (12) has a unique maximizer. Suppose that there exists x 6= y ∈ K such that f (x∗) = 〈x∗ | x〉 = 〈x∗ | y〉. Then, as before,
+f +(x∗, v∗) ≥ max(〈v∗ | x〉, 〈v∗ | y〉).
+This shows that the application v∗ ∈ X ∗ 7→ f +(x∗; v∗) is not linear, so that f is not differentiable at x. Thus Gâteaux-differentiability of f at x∗ implies the uniqueness of the minimizer to the linear programming problem (12). If we prove that f is Gâteaux-differentiable “almost everywhere”, we get that the problem (12) has a unique solution for “almost every” linear form x∗ ∈ X ∗. (Note that this last property is quite intuitive when K is a convex polytope in Rd.)
+Remark 20. Characterizing the non-differentiability locus of convex functions also has applications in optimal transport [M+95], in optimal control [CS04], etc. There exists many results on the “size” of the non-differentiability locus of convex functions, both in finite [AAC92] and infinite dimensions [BV+10, §4.6].
+On R, convex functions are differentiable almost everywhere thanks to the following proposition.
+Proposition 46. Let f : R → R be convex. Then, there are at most a countable number of points in dom f where f is non-differentiable.
+This proposition is false in higher dimension, consider e.g. f (x1, x2) = |x1| on R2.
+Proof. Consider f ′+(x) = f +(x; 1) et f ′−(x) = −f +(x, −1) the right and left derivatives. These functions are increasing (exercise) and for all x < x0 in dom(f ),
+f′
++(x) = inf
+y>x
+f (y) − f (x)
+y − x ≤ f (x0) − f (x)
+x0 − x ≤ f ′
+−(x0),
+thus showing the inequality
+lim
+x→x−
+0
+f′
++(x) ≤ f ′
+−(x0) ≤ f ′
++(x0).
+36
+
+
+The function f is differentiable at x0 if and only f ′−(x0) = f ′+(x0). Thus, if f is not
+differentiable at x0, the right derivative f ′+ has a jump at x0:
+lim
+x→x−
+0
+f′
+d(x) < f ′
+d(x0).
+One concludes by using that an increasing function can only have a countable number of jumps.
+3.6.1 Gâteaux-différentiability almost everywhere
+Theorem 47 (Mazur). Let X be a separable Banach space and let f : X → R be continuous and convex. Then, f is Gâteaux-differentiable on a dense subset of X .
+To prove this theorem, we start by considering a dense sequence (vn)n≥0 in X , which exist thanks to the separability assumption. Then, we introduce the sets
+Am,n = {x ∈ X | f +(x, vn) + f +(x, −vn) ≥ 1/m}, A =
+⋃
+m,n≥1
+Am,n (13)
+The sketch of the proof is as follows: a. First we prove that f is Gâteaux-differentiable on X \ A; b. Second, that all sets Am,n are closed and have empty interior. Then, by Baire’s theorem, we know that A has empty interior (i.e. X \ A is dense).
+Lemma 48. The function f is Gâteaux-differentiable on X \ A.
+Proof. As f is continuous on X , by Corollary 34,
+f is not Gâteaux-differentiable at x ∈ X
+=⇒ ∃v ∈ X , f +(x, v) + f +(x, −v) > 0
+=⇒ ∃v ∈ X , ∃m > 1, f +(x, v) + f +(x, −v) > 2/m
+=⇒ ∃m, n ≥ 1, f +(x, vn) + f +(x, −vn) > 1/m
+=⇒ x ∈ Am,n ⊆ A,
+where we used the continuity of the map v 7→ f +(x, v).
+Lemma 49. The set Am,n defined in (13) is closed.
+This is a consequence of the following proposition, showing that for any v ∈ X , the directional derivative f +(·, v) is upper-semicontinuous. Then, f +(·, v)+f +(·, −v) is also usc, and Am,n is closed as a superlevel set of a usc function.
+Lemma 50. Let f : X → R be convex and let x ∈ cont(f ). Then, for any sequence (xn)n∈N converging to x, one has f +(x, v) ≥ lim supk→∞ f +(xk, v).
+37
+
+
+Proof. By convexity and continuity, f is M -Lipschitz in a neighborhood of x. Without loss of generality, we assume that the sequence (xn)n∈N remains in this neighborhood. Let ε > 0. Using the Lipschitz property, we get
+1
+ε (f (x + εv) − f (x)) ≥ 1
+ε (f (xk + εv) − f (xk) − 2L ‖x − xk‖)
+≥ f +(xk, v) − 2L ‖x − xk‖
+ε
+Taking the infimum on the left-hand side we get
+f +(x; v) ≥ lim sup
+k→∞
+f +(xk, v).
+Lemma 51. The set Am,n defined in (13) has empty interior.
+Proof. Assume that the interior of Am,n contains a point x, i.e. there exists r > 0 such that B(x, r) ⊆ Am,n. Let xt := x + tvn and g : t ∈ [0, r] 7→ f (xt). Then,
+∀t ∈ [0, r], − f +(xt, −vn) + 1/m ≤ f +(xt, vn)
+=⇒ ∀t ∈ [0, r], g is not differentiable at t
+This contradicts Proposition 46, which shows that the non-differentiability set of g is countable.
+3.6.2 Fréchet-differentiability almost everywhere on Rd
+The behaviour of convex functions on Rd is much simpler than on infinite-dimensional spaces. Let f : Rd → R be a convex function and let x ∈ cont f . We will prove the following chain of implications:
+f admits partial derivatives
+( ∂f
+∂ei (x)
+)
+1≤i≤d
+=⇒ the application v 7→ f +(x; v) is linear
+=⇒ f is Gâteaux-differentiable at x
+=⇒ f is Fréchet-differentiable at x
+From this, we will deduce that a convex function f : Rd → R is a.e. differentiable on its domain.
+Proposition 52. Let f : R → R be convex. If f is Gâteaux-differentiable at x ∈ int(dom(f )), then f is also Fréchet-différentiable at x.
+This proposition follows from the next lemma and from the fact that f is locally Lipschitz around x.
+Lemma 53. Let f : B(x, r) ⊆ Rd → R be convex and Lipschitz. Then, f is Gâteauxdifferentiable at x iff it is Fréchet-différentiable at x.
+38
+
+
+Proof. Let S be the unit sphere of Rd. By compactness, for all ε > 0, there exists a finite family of vectors (vi)1≤i≤N of S such that S ⊆ ∪iB(vi, ε). By Gâteauxdifferentiability of f at x, for all i, there exists δi such that
+∀t ∈ [−δi, δi], ∥
+∥f (x + tvi) − (f (x) + tf +(x; vi))∥
+∥ ≤ ε |t|
+Consider δ := mini δi > 0. By construction of the (vi), for all v in S, there exists i ∈ {1, . . . , N } such that ‖vi − v‖ ≤ ε. Then, using that f is Lipschitz (which implies that f +(x; ·) is also Lipschitz), we have
+‖f (x + tvi) − f (x + tv)‖ ≤ M |t| ε
+∥
+∥f +(x; vi) − f +(x; v)∥
+∥ ≤ M |t| ε
+Thus, for all v ∈ S and all |t| ≤ δ,
+∥
+∥f (x + tv) − (f (x) + tf +(x; v))∥
+∥≤∥
+∥f (x + tvi) − (f (x) + tf +(x; v))∥
+∥ + 2M ε |t|
+≤ (2M + 1)ε |t|
+Equivalently (by homogeneity of f +(x; ·)) we have for all v ∈ Rd, ‖v‖ ≤ δ,
+∥
+∥f (x + v) − (f (x) + f +(x; v))∥
+∥ ≤ (2M + 1)ε ‖v‖ ,
+thus showing that f is Fréchet-differentiable at x.
+Proposition 54. Let f : Rd → R be convex. Then, f is Gâteaux-differentiable at x ∈ int(dom(f )) iff it admits partial derivatives at x.
+Lemma 55. Let g : Rd → R be sublinear. Then, the set
+V = {v ∈ Rd | f +(x; v) = −f +(x; −v)}
+is a linear subspace of Rd.
+Proof. The fact that V is stable by multiplication by a scalar follows from the homogeneity of g. By sublinearity, 0 = g(u+(−u)) ≤ g(u)+g(−u), so that −g(−u) ≤ g(u). Let v, w ∈ V . We have
+g(v + w) ≤ g(v) + g(w) = −g(−v) + −g(−w) ≤ −g(−v − w) ≤ g(v + w),
+where we used sublinearity to get the first and second inequality, the definition of V to get the equality, and the property −g(u) ≤ g(−u) to get the third inequality. This shows that v + w ∈ V , proving that V is a linear subspace.
+Proof of Proposition 54. The function f is locally Lipschitz near x and g = f +(x; ·) is sublinear. Let V := {v ∈ X | g(v) = −g(−v)}. By the previous lemma, V is a linear subspace of X . Since the partial derivatives exist, we have f +(x; −ei) = −f +(x; ei) for all basis vector ei, thus showing that ei ∈ V for all i. Therefore, V = X and f +(x; ·) is linear.
+39
+
+
+Theorem 56. Let f : Rd → R be a convex function. Then f is Fréchet-différentiable at a.e. point in int(dom(f )).
+Proof. Let A be the non-diffentiability locus of f in Ω := int(dom(f )). By Proposition 54, the set A is contained in the union of the sets
+Ai :=
+{
+x ∈ Ω | ∂f
+∂ei
+does not exist x
+}
+.
+Therefore, to show that A has zero measure, it suffices to prove that all of the sets Ai have zero measure. Without loss of generality, we assume that i = n, and we consider φ the indicator function of An. By Tonelli’s theorem,
+λ(An) =
+∫
+Rn
+φ(x)dx =
+∫
+Rn−1
+∫
+R
+φ(y, xn)dxndy
+However, for all y ∈ Rn−1, t 7→ φ(y, t) is the non-differentiability locus of the 1D convex function t ∈ R 7→ f (y, t). By Proposition 46, By is countable, and therefore has zero Lebesgue measure, thus concluding the proof.
+Remark 21. In fact, one can prove that the non-differentiability locus of f : Rd → R has Hausdorff dimension d − 1, and it is in fact a rectifiable set of dimension ≤ d − 1. This means that S can be covered, up to a set with zero d − 1–Hausdorff measure, by a countable union of Lipschitz maps (φn)n∈N with φi : Rd−1 → R [AAC92]. This fact is used, in optimal transport, to give a characterization of pairs of measures for which there exists an optimal transport map, see e.g. [M+95].
+40
+
+
+4 Proximal operator
+In this short chapter, we assume that X is a Hilbert space, which we identify with its dual. We introduce the proximal operator, which is a basic building block of many first-order methods for minimizing non-smooth convex functions. We recall that a function f : X → R is coercive if lim‖x‖→∞ f (x) = +∞.
+4.1 Definition and properties
+Definition 25 (Proximal operator). The proximal operator associated to a function f ∈ Γ0(X ) is defined by
+Proxf(x) = arg min
+y∈X
+1
+2 ‖x − y‖2 + f (y).
+Example 19 (Projection). If K is a closed convex subset of X and f = iC, then for all γ > 0 one has ProxγiK x = pK(x). The proximal operator generalizes the projection on a convex set, and shares some of its properties.
+Proposition 57. Let f ∈ Γ0(X ) and γ > 0. Then, (i) The minimization problem
+min
+y∈X
+1
+2γ ‖x − y‖2 + f (y),
+has a unique solution, implying that Proxγf is well defined. (ii) The point p = Proxγf (x) is characterized by the relation x ∈ (id + γ∂f ) (p). (iii) The point x minimizes f on X iff x = Proxγf (x);
+Proof. Let g = 1
+2γ ‖x − ·‖2 and h = f +g. (i) The function h belongs to Γ0(X ). Since f ∈ Γ0(X ), f is equal to the supremum of its affine minorants (Proposition 23), so that in particular it admits an affine minorant: there exists x∗ ∈ X and α ∈ R such that f ≥ 〈x∗ | ·〉 + α. Thus,
+h = f + g ≥ 〈x∗ | ·〉 + α + 1
+2γ ‖x − ·‖2 ,
+from which we deduce that h is coercive. In addition, h is strictly convex as the sum of a convex and a strictly convex function. By Proposition 24, we deduce that h admits a unique minimizer. (ii) Applying Theorem 40 on the subdifferential of a sum of two functions, which we can use since cont(g) = X and dom f 6= ∅, we see that p = Proxγf (x) if and only if
+0 ∈ ∂(f + g)(p) = ∂f (p) + 1
+γ {p − x} ⇐⇒ x ∈ (id + γ∂f )(p).
+(iii) The point x minimizes f if and only if 0 belongs to ∂[γf ](x) = γ∂f (x), or equivalently if x belongs to (id + γ∂f )(x).
+41
+
+
+Example 20 (Proximal of `1 norm). Let h : R → R, x 7→ |x|. Then,
+∂h(y) =
+
+ 
+ 
+−1 if y < 0
+[−1, 1] if y = 0
+1 if y > 0
+=⇒ (id + γ∂h)(y) =
+
+ 
+ 
+y − γ if y < 0
+[−γ, γ] if y = 0
+y + γ if y > 0
+.
+By the characterization given in the previous proposition, we get
+Proxγh(x) =
+
+ 
+ 
+x − γ if x ≥ γ
+0 if − γ ≤ x ≤ γ
+x + γ if x ≤ −γ.
+Thus, Proxγh is exactly the so-called soft thresholding operator
+sγ(r) =
+{
+r − γ sgn(r) if |r| ≥ γ
+0 otherwise .
+already introduced in Example 18. If X = Rn and if f (x) = ‖x‖1 = ∑
+i |xi|, then
+min
+y∈Rn
+1
+2γ ‖x − y‖2
+2 + f (y) =
+∑
+1≤i≤n
+min
+yi∈R
+1
+2γ (xi − yi)2 + |yi| ,
+so that Proxγf (x) = (sγ(x1), . . . , sγ(xn)).
+4.2 Proximal point algorithm
+By Proposition 57, minimizing f is equivalent to finding a fixed point of the proximal operator. This suggests the following minimization algorithm:
+{
+x0 ∈ X
+xn+1 = Proxγf (xn) (PPA)
+This algorithm is called the proximal point algorithm. It has been originally introduced by Martinet [Mar70, Mar72] in the 1970s, and was later generalized by Rockafellar [Roc76]. Before proving the convergence of this algorithm, we list a very useful property of the proximal operator.
+Definition 26 (Firm non-expansiveness). A map T : X → X is firmly non-expansive it it satisfies one of the following equivalent conditions
+(i) ∀x, y ∈ X , ‖T (x) − T (y)‖2 ≤ 〈T (x) − T (y) | x − y〉
+(ii) ∀x, y ∈ X , ‖T (x) − T (y)‖2 ≤ ‖x − y‖2 − ‖(x − T (x)) − (y − T (y))‖2
+To see that these two conditions are equivalent, it suffices to remark that
+‖(x − T (x)) − (y − T (y))‖2 = ‖x − y‖2 + ‖T (x) − T (y)‖2 − 2〈x − y | T (x) − T (y)〉.
+Note that a firmly non-expansive operator is 1-Lipschitz – but firm non-expansiveness is a stronger property.
+42
+
+
+Proposition 58. Let f ∈ Γ0(X ) and let γ > 0. Then
+(i) The point p = Proxγf (x) is characterized by the inequality
+∀q ∈ X , 1
+γ 〈x − p | q − p〉 ≤ f (q) − f (p)
+(ii) The operator T : x 7→ Proxγf (x) is firmly non-expansive.
+Note that (i) is a generalization of a well-known characterization of the projection of a point on a convex set.
+Proof. (i) The point p = Proxλf (x) is characterized by x ∈ (id + γ∂f )(p) or equivalently by 1
+γ (x − p) ∈ ∂f (p). This is equivalent to
+∀q ∈ X , f (q) ≥ f (p) + 1
+γ 〈x − p | q − p〉.
+(ii) Let x1, x2 ∈ X and let pi = Proxγf (xi). We apply the inequality form (i) using first x = x1, p = p1 et q = p2 and then switching the roles:
+f (p2) − f (p1) ≥ 1
+γ 〈x1 − p1 | p2 − p1〉
+f (p1) − f (p2) ≥ 1
+γ 〈x2 − p2 | p1 − p2〉
+Summing these inequalities and multipliying by γ > 0, we obtain
+‖p2 − p1‖2 ≤ 〈p1 − p2 | x1 − x2〉.
+We note that since T = Proxγf is merely 1-Lipschitz, we cannot deduce the convergence of the proximal point algorithm from Picard’s fixed point theorem (one would need T to be k-Lipschitz for some k < 1). However, the property of nonexpansiveness allows prove convergence of the PPA.
+Theorem 59 (Martinet). Let f ∈ Γ0(X ) and assume that f is coercive, meaning that lim‖x‖→+∞ f (x) = +∞. Then, the sequence of points generated by the proximal point algorithm (PPA) weakly converges to a global minimizer of f .
+This theorem is a direct consequence of the next theorem about firmly nonexpansive operators, where where we have set T = Proxγf . Note that by assumption, f has a minimizer, implying that the set of fixed-points of T is non-empty
+Fix(T ) = {x ∈ X | T (x) = x} 6= ∅.
+Theorem 60 (Martinet). Let T be firmly non-expansive and such that Fix(T ) 6= ∅. Then the sequence defined by xn+1 = T (xn) converges weakly to a fixed point of T .
+A modern proof of this theorem placing it in the general setting of fixed point iterations for α-averaged operators can be found in the book of Bauschke and Combettes [BC+11]. We nonetheless present the original proof of Martinet, which is self-contained, for the completeness of these notes.
+43
+
+
+Proof. Step 1. We first prove that the sequence (xn)n∈N is bounded and that limn→∞ ‖xn − xn+1‖ = 0. Let c ∈ Fix(T ). Firm non-expansiveness gives:
+‖T xn − T c‖2 ≤ ‖xn − c‖2 − ‖(xn − T (xn)) − (c − T (c))‖2 .
+Using T xn = xn+1 and T (c) = c, we deduce that
+‖xn+1 − c‖2 ≤ ‖xn − c‖2 − ‖xn − xn+1‖2 .
+The sequence ‖xn − c‖n≥1 is therefore decreasing and bounded from below, and thus
+admits a limit. This gives ‖xn − xn+1‖2 ≤ ‖xn − c‖2 − ‖xn+1 − c‖2 −→
+n→+∞ 0.
+Step 2. We prove that every weak cluster point x ̄ of (xn)n∈N is a fixed point of T . First, we note that
+‖xn − T (x ̄)‖2 = ‖xn − x ̄ + x ̄ − T (x ̄)‖2
+= ‖xn − x ̄‖2 + ‖x ̄ − T (x ̄)‖2 − 2〈xn − x ̄ | x ̄ − T (x ̄)〉,
+Second, using that xn+1 = T (xn) and that T is 1-Lipschitz we get
+‖xn − T (x ̄)‖ = ‖xn − xn+1 + xn+1 − T (x ̄)‖
+≤ ‖xn − xn+1‖ + ‖T (xn) − T (x ̄)‖
+≤ ‖xn − xn+1‖ + ‖xn − x ̄‖ ,
+Combining these computations, we therefore get
+‖x ̄ − T (x ̄)‖2 = ‖xn − T (x ̄)‖2 − ‖xn − x ̄‖2 + 2〈xn − x ̄ | x ̄ − T (x ̄)〉
+≤ (‖xn − xn+1‖ + ‖xn − x ̄‖)2 − ‖xn − x ̄‖2 + 2〈xn − x ̄ | x ̄ − T (x ̄)〉
+= ‖xn − xn+1‖2 + 2 ‖xn − xn+1‖ ‖xn − x ̄‖ + 2〈xn − x ̄ | x ̄ − T (x ̄)〉 n→+∞
+−−−−−→ 0.
+Note that we have used Step 1. to prove that the first two terms converge to zero and the hypothesis that x ̄ is a weak cluster point to control the last term.
+Step 3. Let c1 and c2 be two weak cluster points of the sequence, which by Step
+2 belong to Fix(T ). By Step 1, we know that ‖xn+1 − ci‖2 ≤ ‖xn − ci‖2, implying that the sequence
+‖xn‖2 − 2〈xn | ci〉 = ‖xn − ci‖2 − ‖ci‖2 ,
+is decreasing and therefore converging. Substrating these sequences for i = 1 and 2, we see that
+(‖xn‖2 − 2〈xn | c1〉) − (‖xn‖2 − 2〈xn | c2〉) = 2〈xn | c1 − c2〉
+is converging. Since c1 and c2 are weak cluster points of xn, we obtain by taking limit over the corresponding subsequences
+〈c1 | c1 − c2〉 = 〈c2 | c1 − c2〉,
+implying ‖c1 − c2‖2 = 0, i.e. c1 = c2. The sequence (xn)n≥1 is bounded and has a unique weak cluster point, and is therefore weakly converging.
+44
+
+
+5 Convex duality
+In this chapter, all spaces are supposed to be locally convex topological vector spaces.
+5.1 Convex conjugate
+Definition 27 (Convex conjugate). Let f : X → R be a proper function on a space X . Its convex conjugate or Legendre-Fenchel transform is the function f ∗ : X ∗ → R defined by
+f ∗(x∗) = sup
+x∈X
+〈x∗ | x〉 − f (x).
+Note that since f is proper, there exists x ∈ dom(f ) implying that f ∗ ≥ 〈· | x〉−f (x). In particular, f ∗ never takes the value −∞.
+Example 21. We start of a few examples of conjugate functions. a. Let A be a non-empty subset of X , and let iA be its indicator function. Then,
+∀x∗ ∈ X ∗, i∗
+A(x∗) = sup
+x∈X
+〈x∗ | x〉 − iA(x) = sup
+x∈A
+〈x∗ | x〉 = σA
+One can therefore think of the Legendre-Fenchel transform as a generalization of the support function. b. Let f = ‖.‖ be the norm on X . Then,
+∀x∗ ∈ X ∗, f ∗(x∗) = sup
+x∈X
+〈x∗ | x〉 − ‖x‖
+If ‖x∗‖ > 1, by definition there exists x ∈ X such that 〈x∗ | x〉 − ‖x‖ > 0. Multiplying x by λ, one can see that f ∗(x∗) = +∞. On the other hand, if ‖x∗‖∗ ≤ 1, 〈x∗ | x〉 − ‖x‖ ≤ 0 with equality when x = 0. Thus, f ∗(x∗) = 0.
+Finally, f ∗ is the indicator function of the unit ball in X ∗. c. Let f = 〈z∗ | ·〉 be a continuous linear form. Then,
+f ∗(x∗) = sup
+x∈E
+〈x∗ − z∗ | x〉 =
+{
+0 if x∗ = z∗
++∞ if not.
+Thus, f ∗ = i{z∗}. d. If f (x) = 1
+p |x|p on R with p ∈ (1, +∞), and if we identify the dual space with R, one can verify that f ∗(y) = 1
+q |y|q where 1
+p+1
+q = 1.
+Proposition 61 (Basic properties). Let f : X → R be proper. Then, the following properties hold
+(i) [Fenchel-Young]: ∀(x, x∗) ∈ X × X ∗, f (x) + f ∗(x∗) ≥ 〈x∗ | x〉, (ii) f ∗(0) = − inf f,
+(iii) f ∗ is convex and weak* lower semicontinuous, (iv) if in addition f ∈ Γ0(X ), then f ∗ ∈ Γ0(X ∗).
+45
+
+
+Hypothesis Conclusion Remark f (x) ≤ g(x) f ∗(x∗) ≥ g∗(x∗) g(x) = iC (x) g∗(x∗) = σC (x∗) g(x) = ‖x‖ g∗(x∗) = iB(0,1) g(x) = ‖x‖2
+H g∗(x∗) = ‖x∗‖2
+H H = Hilbert
+g(x) = 〈z∗ | x〉, z∗ ∈ X∗ g∗(x∗) = i{z∗}(x∗) g(x) = f (λx), λ 6= 0 g∗(x∗) = f ∗(x∗/λ) g(x) = λf (x), λ > 0 g∗(x∗) = λf ∗(x∗/λ) g(x) = f (x + b), b ∈ X g∗(x∗) = f ∗(x∗) − 〈x∗ | b〉
+Table 1: A few examples of convex conjugates.
+Example 22. Hölder inequality: with f (x) = 1
+p |x|p on R, we have :
+xy ≤ f (x) + f ∗(y) = 1
+p |x|p + 1
+q |x|q
+Summing, we get for all x, y ∈ Rn, such that ‖x‖p = ‖y‖q = 1,
+〈x | y〉 =
+n
+∑
+i=1
+xiyi ≤ 1
+p ‖x‖p + 1
+q ‖y‖q = ‖x‖p ‖y‖q .
+By homogeneity, this inequality remains true for all x, y ∈ Rn.
+Proof. (iii) These properties hold because f ∗ is a supremum of functions of the form x∗ 7→ 〈x∗ | x〉 − f (x), which are convex and weak* continuous. (iv) If f ∈ Γ0(X ) then by Proposition 23 it is equal to the supremum of its affine minorants. In particular, there exists x∗ ∈ X ∗ and α ∈ R s.t. f ≥ 〈x∗ | ·〉 + α. Therefore, f ∗(x∗) = supx∈E〈x∗ | x〉 − f (x) ≤ supx∈E〈x∗ − x∗ | x〉 − α ≤ −α, so that
+f ∗ is indeed proper.
+Definition 28 (Biconjugate). The convex biconjugate of a function f : X → R is the function f ∗∗ on X defined by
+f ∗∗(x) = sup
+x∗∈X ∗
+〈x∗ | x〉 − f ∗(x∗).
+(In other words, f ∗∗ is the restriction of (f ∗)∗ : (X ∗)∗ → R to the base space X , which one regards as a subset of X ∗∗ through the canonical isomorphism.)
+Theorem 62 (Fenchel-Moreau). Let f : X → R be a proper function. Then, f ∗∗ is the lower semicontinuous convex envelope of f (Definition 17):
+f ∗∗ = convf,
+In particular one always has f ∗∗ ≤ f , with equality if and only f ∈ Γ0(X ).
+46
+
+
+Proof. We first prove f ∗∗ ≤ f . By Fenchel-Young, for all x ∈ X and x∗ ∈ X ∗ we have f (x) + f ∗(x∗) ≥ 〈x∗ | x〉. Applying this inequality in the definition of f ∗∗ we obtain
+f ∗∗(x) = sup
+x∗∈X ∗
+〈x∗ | x〉 − f ∗(x∗) ≤ f (x).
+Since in addition is convex and lower semicontinuous, we deduce from the definition of convf that f ∗∗ ≤ conv(f ). To prove the converse inequality, we use that convf is equal to the supremum of the affine minorants of f . It is therefore sufficient to prove that f ∗∗ is larger than any affine minorant of f . Consider x∗ ∈ X ∗ and α ∈ R s.t. f ≥ 〈x∗0 | ·〉 + α. Then,
+f ∗(x∗) = sup
+x∈X
+〈x∗ | x〉 − f (x) ≤ sup
+x∈X
+〈x∗ | x〉 − (〈x∗ | x〉 + α) = −α.
+Thus,
+∀x ∈ X , f ∗∗(x) = sup
+z∗∈X ∗
+〈z∗ | x〉 − f ∗(z∗) ≥ 〈x∗ | x〉 − f ∗(x∗) = 〈x∗ | x〉 + α.
+Theorem 63 (Subdifferential and conjugation). Let f : X → R be proper. Then, for any x ∈ X and x∗ ∈ X ∗ the following two conditions are equivalent: (i) x∗ ∈ ∂f (x) ; (ii) f (x) + f ∗(x∗) = 〈x∗ | x〉
+If in addition f belongs to Γ0(X ), then (i) and (ii) are equivalent with (iii) x ∈ ∂f ∗(x∗) ;
+Proof. (i)⇐⇒ (ii) A linear form x∗ belongs to ∂f (x) if and only if
+∀y ∈ X , f (y) ≥ f (x) + 〈x∗ | y − x〉 ⇐⇒ ∀y ∈ X , 〈x∗ | y〉 − f (y) ≤ 〈x∗ | x〉 − f (x)
+⇐⇒ f ∗(x∗) = sup
+y∈Y
+〈x∗ | y〉 − f (y) ≤ 〈x∗ | x〉 − f (x)
+⇐⇒ f ∗(x∗) + f (x) ≤ 〈x∗ | x〉
+Since Fenchel-Young’s inequality asserts that f ∗(x∗) + f (x) ≥ 〈x∗ | x〉 always holds, we get the equivalence between (i) and (iii). (i)⇐⇒ (iii) Since f ∈ Γ0(X ), we know from Fenchel-Moreau that f ∗∗ = f . Therefore,
+x∗ ∈ ∂f (x) ⇐⇒ f (x) + f ∗(x∗) = 〈x∗ | x〉
+⇐⇒ f ∗∗(x) + f ∗(x∗) = 〈x∗ | x〉
+⇐⇒ x ∈ ∂f ∗(x∗),
+where we applied the equivalence between (i) and (iii) to the function f ∗.
+Example 23 (A sufficient condition for Gâteaux-differentiability). Let f ∈ Γ0(X ). If f ∗ is strictly convex, then f is Gâteaux-differentiable in cont(f ).
+47
+
+
+Proof. Let x ∈ cont(f ). To show that f is Gâteaux-differentiable at x it suffices to establish that Card ∂f (x) ≤ 1. Assume by contradiction that there exists x∗0 6= x∗1
+such that x∗0, x∗1 ∈ ∂f (x). By convexity of ∂f (x) one has xt∗ = (1−t)x∗0 +tx∗1 ∈ ∂f (x) for all t ∈ [0, 1]. Thus, using the previous proposition,
+∀t ∈ [0, 1], f (x) = 〈x∗
+t | x〉 − f ∗(x∗
+t ) = 〈x∗
+0 | x〉 − f ∗(x∗
+0) = 〈x∗
+1 | x〉 − f ∗(x∗
+1).
+Therefore, f ∗ is not strictly convex on [x∗0, x∗1].
+Example 24 (Prox of conjugate). Let X be a Hilbert space and f ∈ Γ0(X ). Then,
+∀x ∈ X , Proxf (x) + Proxf∗(x) = x. (14)
+Proof. Let p = Proxf (x). Then, by definition,
+x ∈ (id + ∂f )(p) ⇐⇒ x − p ∈ ∂f (p)
+⇐⇒ p ∈ ∂f ∗(x − p)
+⇐⇒ x ∈ x − p + ∂f ∗(x − p)
+⇐⇒ x − p = Proxf ∗(x).
+Remark 22. Eq. (14) generalizes the formula x = projV x + projV ⊥x, where V ⊥ is the orthogonal of the subspace V ⊆ X . See Exercise 27 for a generalization of this formula to convex cones.
+5.2 Perturbations of convex problems
+This section is inspired by the presentation of Ekeland and Temam [ET99] and by a forthcoming book by Guillaume Carlier. We consider the problem of minimizing a convex function f ∈ Γ0(X ) on a space X
+P = inf
+x∈X f (x),
+and we assume that the function f can be written as f (x) = Φ(x, 0) where Φ ∈ Γ0(X × Y) is also convex, and where Y is another space. In other words, we assume that the original problem is a special instance of the following problem, which is parameterized by a vector y ∈ Y :
+Py := inf
+x∈X Φ(x, y).
+In the following, we regard Φ∗ as a function on X ∗ × Y∗, through the identification (X × Y)∗ ' X ∗ × Y∗. The dual problem to the minimization problem P is then:
+D = sup
+y∗ ∈Y ∗
+−Φ∗(0, y∗).
+The construction of this dual problem is be found in the proof of the following proposition. Note that there is no uniqueness of the dual problem: there is one dual problem to P associated to each perturbation Φ of f .
+48
+
+
+Proposition 64 (Weak duality). The weak duality inequality P ≥ D always hold. Moreover, for (x, y∗) ∈ X × Y∗, the following statements are equivalent: (i) Φ(x, 0) = −Φ∗(0, y∗),
+(ii) x is a minimizer of P and y∗ a maximizer of D and P = D, (iii) (0, y∗) ∈ ∂Φ(x, 0), (iv) (x, 0) ∈ ∂Φ∗(0, y∗).
+Proof. Fenchel-Young’s formula asserts that
+∀(x, y∗) ∈ X × Y∗, Φ(x, 0) + Φ∗(0, y∗) ≥ 〈(0, y∗) | (x, 0)〉 = 0,
+thus implying infx Φ(x, 0) ≥ supy∗ −Φ∗(0, y∗). We deduce at once the equivalence between the statements (i) and (ii). To see the equivalence between (i) and (iii), we use the equality case in Fenchel-Young’s inequality (Theorem 63): equality holds if (0, y∗) ∈ ∂Φ(x, 0). The equivalence between (i) and (iii) uses the same equality case but applied to Φ∗ and Φ∗∗ = Φ.
+Theorem 65 (Strong duality). Let X , Y be two spaces, let Φ ∈ Γ0(X, Y ) and consider the following minimisation problem: P = infX Φ(·, 0). Assume: • P is finite ; • the following qualification hypothesis is verified: ∃x0 ∈ X , 0 ∈ cont(Φ(x0, ·)). Then, the maximum in the the dual problem D = maxy∗∈Y∗ −Φ∗(0, y∗) is attained and strong duality holds
+P = D.
+In addition, the set of the maximizers of D is the subdifferential of the value function
+v : y ∈ Y 7→ inf
+x∈X Φ(x, y).
+The following lemma is central:
+Lemma 66. Under the assumptions of Theorem 65, the value function v satisfies: (i) v is convex;
+(ii) v∗(y∗) = Φ∗(0, y∗) ;
+(in particular, v(0) = P and v∗∗(0) = supy∗∈Y∗ −Φ∗(0, y∗) = D ; (iii) v is continuous at 0 ; (iv) ∂v(0) 6= ∅.
+Since P = v(0) and D = v∗∗(0), Moreau-Rockafellar’s theorem (Theorem 62) would directly imply P = D if v was lower-semicontinuous. This is not a priori the case, but the last claim will nonetheless allow us to prove that v(0) = v∗∗(0).
+Proof. (i) Let y0, y1 ∈ Y and let yt = (1 − t)y0 + ty1. Then, for t ∈ [0, 1] and x ∈ X , one has
+Φ(x, yt) = Φ(x, (1 − t)y0 + ty1) ≤ (1 − t)Φ(x, y0) + tΦ(x, y1).
+49
+
+
+Taking the infimum on both sides gives
+v(yt) ≤ inxf(1 − t)Φ(x, y0) + tΦ(x, y1)
+≤ (1 − t) inxf Φ(x, y0) + t inxf Φ(x, y1)
+= (1 − t)v(y0) + tv(y1)
+.
+(ii) Given y∗ ∈ Y∗ one has
+v∗(y∗) = sup
+y∈Y
+〈y∗ | y〉 − v(y)
+= sup
+y∈Y
+〈y∗ | y〉 − inf
+x∈X Φ(x, y)
+= sup
+(x,y)∈Y ×X
+〈(0, y∗) | (0, y)〉 − Φ(x, y) = Φ∗(0, y∗).
+(iii) By the qualification hypothesis, there exists x0 ∈ X such that Φ(x0, ·) is continuous near 0. Then,
+v(y) = inf
+x∈X Φ(x, y) ≤ Φ(x0, y),
+is bounded near y = 0. Since the function v is convex, boundedness in an open set implies continuity inside that set (Proposition 30). (iv) From Theorem 38, the continuity of v at 0 implies the non-emptiness of the subdifferential.
+Proof of Theorem 65. By the previous lemma, the subdifferential ∂v(0) of the value function at y = 0 contains a linear form y∗ ∈ Y. Then, by the equality case in Fenchel-Young’s inequality,
+{
+v(0) + v∗(y∗) = 0
+v(0) + v∗(z∗) ≥ 0 ∀z∗ ∈ Y .
+which can be rewritten as ∀z∗ ∈ Y∗, − v∗(z∗) ≤ v∗(y). Thus,
+v∗∗(0) = sup
+z ∗ ∈Y ∗
+−v∗(z∗) = −v∗(y∗) = v(0).
+This shows that P = D, and that y∗ is a maximizer of the dual problem.
+Example 25 (Application: linear programming). As a first simple application, we consider the case where X = Rn, Y = Rm, which we identify with their dual spaces through the Euclidean scalar product. Given a matrix with n columns and m rows and b ∈ Y and c ∈ X ∗, we consider
+Φ(x, y) = 〈c | x〉 + iAx−b≤y.
+Thus,
+P = inf
+x∈X Φ(x, 0) = min
+Ax≤b〈c | x〉,
+50
+
+
+where Ax ≤ b means that for all j, (Ax)j ≤ bj. The primal problem consists in minimizing the linear form 〈c | x〉 over the polyhedron K = {x ∈ X | Ax ≤ b}. For simplicity, we assume that K has non-empty interior, thus ensuring the existence of x0 ∈ K such that Φ(x0, ·) is continuous at 0. By strong duality (Theorem 65), we therefore P = D where the dual problem is given by
+D = max
+y∗∈Y∗ −Φ∗(0, y∗).
+Let us now compute the convex conjugate appearing in D:
+Φ∗(0, y∗) = sup
+(x,y)∈X ×Y
+〈(0, y∗) | (x, y)〉 − Φ(x, y)
+= sup
+(x,y)∈X ×Y|Ax−b≤y
+〈y∗ | y〉 − 〈c | x〉.
+At this point, we note that if y∗
+i > 0 for some i, then for all λ ≥ 0, setting y = λei and x = x0 in the supremum, we obtain
+Φ∗(0, y∗) ≥ λy∗
+i − 〈c | x0〉 λ→+∞
+−−−−→ +∞,
+thus showing that Φ∗(0, y∗) = +∞. On the other hand, if y∗
+i ≤ 0 for all i, then the supremum is attained for y = Ax − b, i.e.
+Φ∗(0, y∗) = sup
+x∈X
+〈y∗ | Ax − b〉 − 〈c | x〉 =
+{
+−〈y∗ | b〉 if AT y∗ = c
++∞ if not
+Thus, the dual problem can be written as
+D = max
+{y∗∈Y∗|y∗≤0 and AT y∗=c}
+−〈y∗ | b〉.
+Note that the maximum is attained in D as a consequence of the strong duality theorem.
+5.3 Application: Lagrangian duality
+In this section, we briefly see how the method of perturbation can be used to recover Lagrangian duality for constrained optimization problems where the constraint set is defined by a family of inequalities. Let f, g1, . . . , gN ∈ Γ0(X ), and consider
+P = inKf f, K = {x ∈ X | g1(x) ≤ 0, . . . , gN (x) ≤ 0}.
+We construct the perturbed problems for y ∈ Rd by
+Py = inf{f (x) | g1(x) ≤ y1, . . . , gN (x) ≤ yN }.
+This amounts to introducing the following perturbation function
+Φ : X × RN → R
+(x, y) 7→
+{
+f (x) if gi(x) ≤ yi for 1 ≤ i ≤ N
++∞ otherwise
+51
+
+
+The function Φ can also be expressed as
+Φ(x, y) = f (x) +
+∑
+1≤i≤N
+iepi(gi)(x, yi),
+and this expression clearly shows that Φ is convex and lower-semicontinuous. We assume the following condition, similar to (11):
+∃x0 ∈ dom f s.t. gi(x0) < 0 for i ∈ {1, . . . , N }. (15)
+Thus, Φ(x0, y) = f (x0) as soon as ‖y‖∞ ≤ min1≤i≤N |gi(x0)|, implying that Φ(x0, y) is continuous near y = 0. We can therefore apply the strong duality theorem (Theorem 65), which gives us P = D = supy∗∈RN −Φ∗(0, y∗). The conjugate Φ∗(0, y∗) can be computed explicitely in terms of the Lagrangian of the problem, i.e.
+L : X × RN → R
+(x, y) 7→ f (x) +
+∑
+1≤i≤N
+yigi(x), (16)
+Lemma 67. Φ∗(0, y∗) =
+{
+supx∈X
+∑
+i y∗
+i gi(x) − f (x) if y∗ ≥ 0
++∞ if not .
+Proof. By definition,
+Φ∗(0, y∗) = sup
+(x,y)∈X ×Rd
+〈y∗ | y〉 − Φ(x, y)
+= sup{〈y∗ | y〉 − f (x) | (x, y) ∈ X × Rd, gi(x) ≤ yi∀i}.
+Note that if y∗
+i > 0 for some i, one can take x = x0 and yr
+i = rei (where ei is a
+coordinate vector), showing that Φ∗(0, y∗) = +∞. On the other hand, if y∗
+i ≤ 0 for
+all i, the scalar product 〈y∗ | y〉 is maximized when yi = gi(x), so that in this case
+sup
+x∈X
+∑
+i
+y∗
+i gi(x) − f (x) if y∗
+i ≤ 0.
+This leads to the following expression for the dual problem:
+D = sup
+y∗≤0
+−Φ∗(0, y∗) = sup
+λ∈RN
++
+inf
+x∈X L(x, λ).
+Note that we replaced the variable y by λ to follow the standard notation for Lagrange multipliers.
+Theorem 68 (Lagrangian duality). Let f, g1, . . . , gN ∈ Γ0(X ) satisfying the qualification condition (15), and define the Lagrangian L as in (16). Then,
+inf
+x∈X sup
+λ∈RN
++
+L(x, λ) = max
+λ∈RN
++
+inf
+x∈X L(x, λ),
+if one assumes that the left-hand-side of this equation is finite. If λ ∈ R+N is a solution of the dual problem, then x is a solution to the primal problem if and only if it satisfies the three Karush-Kuhn-Tucker conditions • admissibility: gi(x) ≤ 0 for i ∈ {1, . . . , N } • Lagrangian minimization: x ∈ arg minX L(·, λ), • complementary slackness: λigi(x) = 0 for i ∈ {1, . . . , N }.
+52
+
+
+5.4 Application: Fenchel-Rockafellar’ theorem
+Let X , Y be two spaces, g ∈ Γ0(X ), h ∈ Γ0(Y) and A : X → Y be a continuous linear operator. Consider the primal minimization problem
+P = inf
+x∈X g(x) + h(Ax),
+and the dual maximization problem
+D = sup
+y∗ ∈Y ∗
+−g∗(A∗y∗) − h∗(−y∗).
+Proposition 69 (Weak duality). P ≥ D.
+Moreover, if P = D then the following statements are equivalent: (i) x is a minimizer in P and y∗ is a maximizer of D ; (ii) A∗y∗ ∈ ∂g(x) and −y∗ ∈ ∂h(Ax) ; (iii) x ∈ ∂g∗(A∗y) and Ax ∈ ∂h∗(−y∗).
+Proof. We first prove the weak duality inequality P ≥ D: by Fenchel-Young,
+∀(y, y∗) ∈ X × X ∗, g(y) + g∗(A∗y∗) ≥ 〈y | A∗y∗〉
+∀(y, y∗) ∈ X × X ∗, h(Ay) + h∗(−y∗) ≥ 〈Ay | −y∗〉,
+thus giving
+P = inf
+x∈X g(x) + h(Ax) ≥ sup
+y∗∈X ∗
+−g(A∗y∗) − h(−y∗).
+Now assume that x is a solution of P and y∗ a solution of D and that P = D. Then,
+g(x) + h(Ax) = −g(A∗y∗) − h(−y∗).
+Using Fenchel-Young’s inequality, we may rewrite this as
+g(y) + g∗(A∗y∗) − 〈y | A∗y∗〉
+} {{ }
+≥0
++ h(Ay) + h∗(−y∗) − 〈Ay | −y∗〉
+} {{ }
+≥0
+= 0.
+By Theorem 63, these two equalities hold if and only if A∗y ∈ ∂g(x) and −y∗ ∈ ∂h(Ax) iff x ∈ ∂g∗(A∗y) and Ax ∈ ∂h(−y∗).
+Theorem 70 (Fenchel-Rockafellar). If P is finite and if the following qualification holds
+∃x0 ∈ dom g s. t. Ax0 ∈ cont h.
+Then, P = D.
+Proof of Theorem 70. We introduce f (x) = g(x) + h(Ax) and the perturbation
+Φ(x, y) = g(x) + h(Ax − y).
+53
+
+
+The dual problem associated to this perturbation is D = supy∗ −Φ∗(0, y∗). We now
+compute Φ∗(0, y∗):
+Φ∗(0, y∗) = sup
+(x,y)∈X ×Y
+〈(0, y∗) | (x, y)〉 − Φ(x, y)
+= sup
+(x,y)∈X ×Y
+〈(0, y∗) | (x, y)〉 − (g(x) + h(Ax − y
+} {{ }
+:=z
+))
+= sup
+(x,z)∈X ×Y
+〈y∗ | Ax − z〉 − (g(x) + h(z))
+= sup
+x∈X
+〈A∗y∗ | x〉 − g(x) + sup
+z∈Y
+〈y∗ | −z〉 − h(z)
+= g∗(A∗y) + h∗(−y∗).
+Therefore, the dual problem is
+D = sup
+y∗
+−Φ∗(0, y∗) = sup
+y∗
+−g∗(A∗y) − h∗(−y∗).
+By assumption, there exists x0 ∈ dom g such that Ax0 ∈ cont h. Thus, Φ(x0, ·) = g(x0) + h(Ax0 − y) is continuous at y = 0. By Theorem 65, we get P = D and the existence of a maximizer for D.
+Remark 23 (Proof by subdifferential calculus). If the minimum in the primal problem P is attained, one can prove Theorem 70 using subdifferential calculus. Assume for simplicity that Y = X and A = Id. To prove the D ≥ P , we assume that x ∈ arg min g + h. Thanks to the qualification hypothesis we can apply Theorem 40 on the subdifferential of the sum, giving
+0 ∈ ∂(g + h)(x) = ∂g(x) + ∂h(x).
+Thus, there exists x∗ ∈ ∂g(x) such that −x∗ ∈ ∂h(x). Therefore, using the equality case in Fenchel-Young (Theorem 63) we get
+g(x) + g∗(x∗) = 〈x∗ | x〉, h(x) + h∗(−x∗) = 〈−x∗ | x〉.
+Summing these inequalities, we obtain g(x) + h(x) = −g∗(x∗) − h(−x∗), implying the strong duality P ≤ D.
+Example 26 (Von Neumann minimax theorem). TODO
+Example 27 (LASSO). Consider again the LASSO problem
+min
+x∈Rd
+1
+2 ‖Ax − b‖2
+2 + γ ‖x‖1 ,
+which is under the desired form by setting h(y) = 1
+2 ‖y − b‖2
+2 and g(x) = γ ‖x‖1. To
+54
+
+
+compute the dual problem we need to compute the conjugate functions to f and g:
+g∗(x∗) = sup
+x∈Rd
+〈x∗ | x〉 − γ ‖x‖1
+= sup
+x∈Rd
+∑
+i
+x∗
+i xi − γ
+∑
+i
+|xi|
+= sup
+x∈Rd
+∑
+i
+xi(x∗
+i − γ sgn(xi))
+=
+{
+0 if ∀i, |x∗
+i| ≤ λ
++∞ otherwise
+= i[−λ,λ]d
+Similarly, one can compute h∗:
+h∗(y∗) = sup
+y∈Rd
+〈y∗ | y〉 − 1
+2 ‖y − b‖2
+2= 1
+2 ‖y∗ + b‖2 − ‖b‖2 .
+Thus, the dual problem is
+D = max
+x∗∈Rd −g∗(A∗y∗) − h∗(−y∗) = max{− 1
+2 ‖A∗x∗ + b‖2 + ‖b‖2 | A∗x∗ ∈ [−λ, λ]d}.
+The unconstrained non-smooth optimization problem P is tranformed into the constrained smooth optimization problem D.
+Example 28 (Rudin-Osher-Fatemi). As a second example, we consider an abstract version of the Rudin-Osher-Fatemi model for image denoising: given some x0 ∈ Rd and a linear operator D : Rd → Rn we consider
+P = min
+x∈Rd
+1
+2 ‖x − x0‖2
+2 + γ ‖Dx‖1 .
+Fenchel-Rockafellar’s theorem can be applied by setting g(x) = 1
+2 ‖x − x0‖2, h(x) = ‖·‖1 and A = D. The dual problem is then
+D = max
+y∗∈Rn −g∗(D∗y∗) − h∗(−y∗) = max
+y∗∈[−γ,γ]d − 1
+2
+∥
+∥DT y∗ + x0
+∥ ∥
+2
+2 + ‖x0‖2
+2.
+This problem is much easier than the primal problem, because the optimized function is quadratic and the constraint set is separable (i.e. a product of segments). This problem is, for instance, directly amenable to projected gradient descent. Once a solution y∗ to D is found, we know by Theorem 70 that if x is a solution of P , then
+x ∈ ∂g∗(DT y∗) = {∇g∗(DT y∗)} = {DT y∗ + x0}.
+This gives us the explicit expression x = x0 + DT y∗, allowing to recover the primal solution.
+55
+
+
+Example 29 (Minimization over a polyhedron). Let A be a n × d matrix, let b ∈ Rn and g : Rd → R be a convex function. We consider the minimization problem
+P = inf{g(x) | Ax ≤ b},
+where the inequality Ax ≤ b should be understood coordinatewise, i.e. (Ax)i ≤ bi for all i. This problem can be recast under the form
+P = inf
+x∈Rd g(x) + h(Ax)
+by setting h = iL where L = {y ∈ Rn | ∀i, yi ≤ bi}. Assume that: • there exists x0 ∈ Rd such that Ax0 ∈ int L. Note that this implies that the polyhedron K = {x ∈ Rd | Ax ≤ b} has non-empty interior, • P is finite. Then, the assumptions in Fenchel-Rockafellar’s theorem are satisfied and we thus get
+P = D = max
+y∗∈Y∗ −g∗(A∗y∗) − h∗(−y∗).
+Let us compute h∗:
+h∗(y∗) = sup
+y∈Rn
+〈y∗ | y〉 − iL(y) = sup
+y≤b
+〈y∗ | y〉 =
+{
+〈y∗ | b〉 if y ≤ 0,
++∞ otherwise. .
+Thus,
+D = max{−g∗(A∗y∗) − 〈y∗ | b〉 | y ∈ Rn, y ≤ 0}.
+If g(x) = 〈c∗ | x〉, P is a linear programming problem, and we recover linear programming duality (under the unnecessary assumption int K 6= ∅) as in Example 25. Indeed, by Example 21, g∗(x∗) = ic∗, so that
+D = max{−〈y∗ | b〉 | y ∈ Rn, y ≤ 0 and A∗y∗ = c∗}.
+A Topology and functional analysis
+A.1 Point-set topology
+We briefly recall some elementary notions from topology, even if we assume some familiarity with them.
+Definition 29 (Topology). A topology on a set X is a family of subsets τ of X, called open sets, which satisfy the following axioms: (i) the empty set is open, i.e. ∅ ∈ τ ; (ii) the intersection of a finite family of open subsets is open: if ω1, . . . , ωk ∈ τ , then ω1 ∩ . . . ∩ ωk ∈ τ .
+(iii) any union of open subsets if open: if (ωi)i∈I belongs to τ , then so does ∪iωi. The space (X, τ ) is then called a topological space. The complement of an open set is called a closed set.
+56
+
+
+Example 30 (Metric topology). Let (X, d) be a metric space, i.e. d : X × X → R satisfies the assumptions (i) d(x, y) ≥ 0 with equality if and only if x = y; (ii) d(x, y) = d(y, x) for all x, y ∈ X; (iii) d(x, z) ≤ d(x, y) + d(y, z) for all x, y, z ∈ X.
+We denote B(x, r) = {y ∈ X | d(x, y) ≤ r} the closed ball. We call a set ω open if for any x ∈ ω, there exists r > 0 such that B(x, r) ⊆ ω. Then, the family τd of such open sets satisfies the axioms of a topology.
+Definition 30 (Neighborhood). Let (X, τ ) be a topological space. A neighborhood of x ∈ X is any set that contains an open set, which itself contains x. A neighborhood basis at x is a family Bx of subsets of X sucht that (i) every set B ∈ Bx is a neighborhood of x and (ii) for any neighborhood N of x, there exists B ∈ Bx such that B ⊆ N .
+Example 31. In a metric space, the sets Bx = {B(x, δ) | δ > 0} and B′x = {B(x, 1
+n) | n ∈ N} form two neighborhood bases at x.
+Definition 31 (Continuity at a point). A function f : (X , σ) → (Y, τ ) between topological spaces is continuous at x if for any neighborhood B of f (x), the inverse image f −1(B) is a neighborhood of x. Equivalently, f is continuous at x ∈ X iff there are neighborhood bases Bx at x and Bf(x) at f (x) such that
+∀C ∈ Bf(x), ∃B ∈ Bx s.t. f −1(C) ⊆ B.
+In the case of metric spaces, one recovers the definition of continuity using ε and δ.
+The notion of continuity depends on the choice of the topologies σ and τ . This is important to keep in mind, because we will sometimes consider two topologies over the same space.
+Definition 32 (Continuity). The function f : (X , σ) → (Y, τ ) is continuous on X if it is continuous at every x ∈ X . Equivalently, f is continuous on X if the inverse image of any open set under f is open, i.e. ∀ω ∈ τ , f −1(ω) ∈ σ.
+Definition 33. A topological space (X , τ ) is called • separated or Hausdorff if for any distinct points x, y ∈ X have neighborhoods Ox, Oy such that Ox ∩ Oy = ∅. • metrizable if the topology τ is induced by a metric;
+Remark 24. Metric spaces are automatically separated. In addition, for a metric space, and hence for a metrizable space, all topological notions may be recovered through sequences. For instance, • a set C ⊆ X is closed if and only if C contains the limit of every converging sequence in C ; • a function f is continuous at x if and only if for every sequence (xn)n∈N converging to x one has limn→+∞ f (xn) = f (x).
+57
+
+
+A.2 Topological vector spaces
+Most of the statements of this course hold when X is a normed space i.e. a vector space endowed with a norm ‖‖ which endows X with a topology. The closed ball of radius around a point x is then denoted B(x, r) = {y ∈ X | ‖x − y‖ ≤ r}, and the topology is induced by the metric d(x, y) = ‖x − y‖. In particular, the results of this course can be applied to Hilbert spaces, Banach spaces, and even Rd. However, it is often the case that our statement hold in the more setting of (locally convex) topological vector spaces, which is particularly adequate when one wants to consider weak/weak∗ topologies, which are important in some applications.
+Definition 34 (Topological vector space). A topological vector space is a vector space X endowed with a topology τ which makes the addition of vectors (x, y) ∈ X 2 7→ x + y ∈ X and the multiplication by a scalar (λ, x) ∈ R × X 7→ λx ∈ X continuous.
+In order to define the continuity of the maps X 2 → X and R × X → X , we need to define a topology on these product spaces, called the product topology.
+Definition 35 (Product topology). Let (X1, τ1) and (X2, τ2) be topological spaces. A set O ⊆ X1 × X2 is open for the product topology τ1 ⊗ τ2 if for any (x1, x2) ∈ O, there exists neighborhoods N1 and N2 of x1 and x2 such that N1 × N2 ⊆ O.
+One can check that if O is an open subset of a topological vector space, then for all x ∈ X, O + x = {x + y | y ∈ O} is also open. This is because the map T : y 7→ y − x, and O + x = T −1(O). In particular, if B is a basis of neighborhood of the origin, then {B + x | B ∈ B} is a basis of neighborhood at x.
+Definition 36 (Locally convex topological vector space). A topological vector space is called locally convex if the origin admits a neighborhood basis made of convex sets.
+A.3 Weak and weak∗ topologies
+In many cases, the topology associated with the norm is too fine, in the sense that it has too few compact sets, making it difficult to to prove existence to optimization problems. This is why we will try to define coarser topologies, i.e. topologies with less open sets and thus more compact sets. One standard way to do this is to start with a family of maps, and to construct the coarsest (i.e. smallest with respect to inclusion) topology that makes all these maps continuous. We will explain the construction of the coarsest topology making a family of linear forms Y over a vector space X continuous.
+Lemma 71. Let X be a vector space and let Y be a vector space of linear forms over X . Assume that σ is a topology over X and that every linear form in Y is continuous with respect to X . Then, all sets of the following form are open with respect to σ:
+Bx,y1,...,yN ,ε := {z ∈ X | ∀i ∈ {1, . . . , N }, |〈yi | z − x〉| < ε},
+with x ∈ X , y1, . . . , yN ∈ Y and ε > 0.
+58
+
+
+Proof. Let y1, . . . , yN ∈ Y. Then,
+Bx,y1,...,yN ,ε =
+N
+⋂
+i=1
+y−1
+i ((〈yi | x〉 − ε, 〈yi | x〉 + ε)).
+Thus, Bx,y1,...,yN ,ε is open with respect to σ as a finite intersection of inverse images of the open sets (〈yi | x〉 − ε, 〈yi | x〉 + ε) under the maps y1, . . . , yN which we have assumed continuous with respect to σ.
+This lemma suggests the following definition.
+Definition 37 (Topology generated by linear forms). Let X be a vector space and let Y be a vector space of linear forms over X . A set O is open with respect to the topology generated by Y, denoted σ(X , Y) if for any x ∈ O, there exists y1, . . . , yN ∈ Y and ε > 0 such that Bx,y1,...,yN ,ε ⊆ O.
+The sets Bx,y1,...,yN ,ε are open with respect to σ(X , Y) (exercise!) and a neighborhood basis of the point x ∈ X for σ(X , Y) is given by
+Bx = {Bx,y1,...,yN ,ε | N ∈ N, y1, . . . , yN ∈ Y, and ε > 0}.
+In some sense, the sets Bx,y1,...,yN ,ε play the role of balls for the weak topology. However, this topology has a rather surprising feature: if X is infinite dimensional, then any set with non-empty σ(X, Y )-interior must contain a set of the above form and must therefore be unbounded. In particular, in infinite dimension the unit ball B(0, 1) has empty σ(X, Y )-interior.
+Proposition 72. Let X be a vector space and let Y be a vector space of linear forms over X . Then, (i) (X , σ(X , Y)) is a locally convex topological vector space; (ii) A linear form y : X → R is continuous with respect to the topology σ(X , Y) if and only if it belongs to Y;
+Corollary 73. Given a linear form y : X → R and α ∈ R, the hyperplane y−1(α) (resp. the halfspace y−1((−∞, α])) is closed w.r.t. σ(X , Y) if and only if y ∈ Y.
+Remark 25 (Coarsest topology). Lemma 71 shows that if σ is a topology on X such that all the linear forms in Y are continuous, then it contains all the sets of the form Bx,y1,...,yN ,ε with y1, . . . , yN ∈ Y. Thus, any such topology σ must contain σ(X , Y), implying that σ(X , Y) is the coarsest topology on Y making all the linear forms in Y are continuous. (This also means that it has the most compact subsets, or the most converging sequences...)
+Remark 26 (Convergence of sequences). One can show that a sequence (xn)n≥1 of points of X converges to x ∈ X with respect to the topology of σ(X , Y) — meaning that for all neighborhood O of x one has xn ∈ O for n large enough — if and only if
+∀y ∈ Y, lim
+n→+∞〈y | xn〉 = 〈y | x〉.
+59
+
+
+Proof. (i) The family σ(X , Y) contains ∅, is (easily) stable under arbitrary unions, and is finite under finite intersections because
+Bx,y1,...,yN ,y′
+1,...,y′
+M ,min(ε,ε′) ⊆ Bx,y1,...,yN ,ε ∩ Bx,y′
+1,...,y′
+M ,ε′ .
+This proves that σ(X , Y) is a topology. We will prove that the map S : X × X → X defined by S(x, y) = x + y is continuous with respect to σ(X , Y). To see this, take x, y ∈ X and consider a neighborhood Nz of z = S(x, y) = x + y. We want to prove that there exists neighborhoods Nx, Ny of x and y so that S(Nx, Ny) ⊆ Nz. By definition, the neighborhood Nz contains a set of the form Bz := Bz,y1,...,yN ,ε.
+Define Bx := Bx,y1,...,yN , 1
+2 ε and By = By,y1,...,yN , 1
+2 ε. For any x′ ∈ Bx and y′ ∈ By, let
+z′ = S(x′, y′) = x′ + y′). We have
+∣
+∣〈yi | z′ − z〉∣
+∣= 1
+2
+∣
+∣〈yi | x′ + y′ − (x + y)〉∣
+∣≤ 1
+2 (∣
+∣〈yi | x′ − x〉∣
+∣+∣
+∣〈yi | x′ − x〉∣
+∣) < ε,
+thus ensuring that z′ ∈ Bz. In other words, S(Bx, By) ⊆ Bz, and Bx and By are neighborhoods of x and y respectively: this shows the continuity of S at (x, y). We would prove similarly that the map P : (λ, x) ∈ R × X 7→ λx ∈ X , thus proving that (X , σ(X , Y)) is a topological vector space. Finally, the space is locally convex because all the sets Bx,y1,...,yN ,ε are convex. (ii) Let y be a linear form over X and assume that it is continuous with respect to the topology σ(X , Y). Thus, there exists a neighborhood N of the origin on which the linear form y is bounded by 1. By construction of the topology, there exists y1, . . . , yN and ε > 0 such that B0,y1,...,yN ,ε ⊆ N . Thus, we have
+(∀i ∈ {1, . . . , N }, 〈yi | x〉 < ε) =⇒ |〈y | x〉| < 1,
+which implies in particular that if Ker(y1) ∩ . . . Ker(yn) ⊆ Ker(y). By a the linear algebra lemma below, this implies that y ∈ vect(y1, . . . , yN ) ⊆ Y.
+Lemma 74. Let X be a vector space, and let y1, . . . , yN , y be linear forms on X such that Ker(y1) ∩ . . . Ker(yn) ⊆ Ker(y). Then y ∈ vect(y1, . . . , yN ).
+Proof. Let F : X → RN+1 be defined by F (x) = (y(x), y1(x), . . . , yN (x)). The assumption implies that the subspace L = F (X ) and the point z = (1, 0, . . . , 0) are disjoint. Denoting p ∈ L the orthogonal projection of z on L and p − z = (λ, λ1, . . . , λN ) 6= 0, the characterization of the orthogonal projection gives
+∀x ∈ X , 〈F (x) | λ〉 = 0,
+i.e. λy + ∑
+i λiyi = 0. Moreover, 〈p | z − p〉 > 0, giving λ 6= 0.
+Definition 38 (Weak-topology). Let X be a topological vector space, and let X ∗ be the space of continuous linear forms over X . The topology over X generated by the linear forms X ∗, namely σ(X , X ∗), is called the weak topology.
+60
+
+
+Remark 27 (Relation to the strong topology). We will call the original topology on X the strong topology to distinguish it from the weak topology σ(X , X ∗). The sets
+Bx,x∗
+1 ,...,x∗
+N ,ε, which form a basis of the weak topology, are open with respect to the
+original topology. This directly implies that weakly open sets are strongly open, and similarly that weakly closed sets are strongly closed. Maybe unintuitively, this also implies that if a function f : X → R is weakly continuous, then it is strongly continuous (Proof: assume that f is weakly continuous. Then, for any open subset O of R, the set f −1(O) is weakly open, therefore strongly open. Thus, f is strongly continuous). The converse implications are false in general, but we will show that they are true when convexity hypotheses are added (see e.g Proposition 14).
+Definition 39 (Weak∗-topology). Let X be a topological vector space, and consider the canonical injection
+i : X → X ∗∗, x 7→ (x∗ 7→ 〈x∗ | x〉).
+Thanks to this injection, X can be identified with the set i(X ) of linear forms over X ∗. The topology over X ∗ generated by the linear forms i(X ) is called the weak topology and often denoted σ(X ∗, X ) := σ(X , i(X )).
+We refer to [Bre10]) for a more thorough treatment of the weak/weak* topology.
+Remark 28 (Weak∗ and pointwise convergence). A good exercise is to show that a sequence (x∗n) of elements of X ∗ converges to x∗ with respect to σ(X ∗, X ) (for short
+we will say that (x∗n) weak-∗ converges to x∗) if and only if
+∀x ∈ X , lim
+n→+∞〈x∗
+n | x〉 = 〈x∗ | x〉.
+In plain words, (x∗n) weak-∗ converges to x∗ if only if (x∗n) converges pointwise to x∗, when these linear forms are seen as functions on X .
+Remark 29 (Separation). The space (X ∗, σ(X ∗, X )) is separated, i.e. Hausdorff. Indeed, let x∗, y∗ ∈ X ∗ be two distinct linear forms. Then, there exists x ∈ X such that 〈x∗ | x〉 6= 〈y∗ | x〉, for instance 〈x∗ | x〉 < 〈y∗ | x〉. Thus, denoting r =
+〈1
+2 (x∗ + y∗) | x〉, the two weak∗ open sets O− = {〈· | x〉 < r} and O+ = {〈· | x〉 > r}
+separate the points x∗ and y∗: they are disjoint and x∗ ∈ O− and y∗ ∈ O+.
+Example 32 (Measures). Let K ⊆ Rd be compact and let X = C0(K) be the space of continuous functions over K. What are examples of linear functionals over X ? Let μ be a finite (Radon) measure over X : then, the functional f ∈ C0(K) 7→ ∫ f dμ is linear. Conversely, Riesz-Markov’s theorem asserts that any linear functional over X is induced by a finite (Radon) measure. Thus, in this course, we will define the space of Radon measures as
+M(K) := C0(K)∗.
+An example of Radon measure is the Dirac mass δx ∈ M(K), defined by
+∀φ ∈ C0(K), 〈δx | φ〉 = δx(φ) := φ(x).
+61
+
+
+The dual norm on M(K) is called the total variation of the measure μ. It is defined by ‖ν‖T V = sup{〈ν | φ〉 | ‖φ‖∞ ≤ 1}. Note that if x, y are distinct points in K, it
+is possible to construct a function φ ∈ C0(X) so that φ(x) = 1 and φ(y) = −1 and ‖φ‖∞ ≤ 1. Thus,
+‖δx − δy‖T V ≥
+∫
+φd(δx − δy) = φ(x) − φ(y) = 2.
+In other words, even if (xn) converges to x ∈ K, the Dirac mass δxn does not converge to δx with respect to the total variation ‖·‖T V . On the other hand,
+∀φ ∈ C0(X), 〈φ | δxn〉 = φ(xn) −→n→+∞ 〈φ | δx〉,
+so that (δxn) weak∗-converges to δx, i.e. with respect to the topology σ(M(X), C0(X)). This is an illustration of the fact that the weak-∗ topology σ(M(X), C0(X)) has more converging sequences, and thus more compact sets as well.
+Remark 30 (Continuous linear forms over (X ∗, σ(X ∗, X ))). By Proposition 72, we know that a linear form over X ∗ is continuous if and only if is induced by an element to X , i.e. (X ∗, σ(X ∗, X )) can be identified with X . This implies, for instance, that the dual of the space of measures endowed with its weak∗ topology is (M(K), σ(M(K), C0(K)))∗ ' C0(K), while the dual (M(K), ‖·‖∗)∗ is a much larger space and much less understood (there is a book devoted to this topic [Kap11]).
+Definition 40 (Separability). A topological space is separable if X contains a countable dense subset.
+Example 33. Examples of separable spaces include • the space (C0(X), ‖·‖∞) of continuous functions over a compact subset X of Rd endowed with the norm of uniform convergence. This is a consequence of the Stone-Weierstrass theorem, which guarantees that continuous functions over a compact subset of Rd can be uniformly approximated by polynomials ; • the spaces (`p, ‖·‖p) of p-summable sequences and the spaces (Lp(Ω), ‖·‖p) of p-integrable functions over a bounded domain of Rd, for p ∈ [1, +∞). Note that `∞ and L∞(Ω) are not separable.
+Theorem 75 (Metrizability of the dual ball). Let X be a separable normed vector space, and let (xn)n≥1 be a dense sequence in X . Then the weak∗ topology on a bounded subset S of X ∗ is induced by the distance
+d(x∗, y∗) =
+∑
+n≥1
+2−n
+∣ ∣ ∣ ∣
+〈x∗ − y∗ | xn
+‖xn‖ 〉
+∣ ∣ ∣ ∣
+.
+Remark 31. The open sets of the weak∗ topology on S are of the form O′ = O ∩ S, where O is a weak∗ open sets of X ∗.
+Proof. The series defining d(x∗, y∗) is converging. Indeed, by definition of ‖·‖∗,
+∣ ∣ ∣ ∣
+〈x∗ − y∗ | xn
+‖xn‖ 〉
+∣ ∣ ∣ ∣
+≤ ‖x∗ − y∗‖∗ ≤ diam(S).
+62
+
+
+The symmetry of d, and the triangle inequality are clear. If d(x∗, y∗) = 0, then for all xn we have 〈x∗ | x〉 = 〈y∗ | x〉. Thus, the continuous linear forms x∗ and y∗ agree on the dense subset (xn)n≥1, and therefore they agree on X , i.e. x∗ = y∗. Let S be a bounded set in X ∗; we assume that S ⊆ B(0∗, R) for some R > 0. Let O′ = O ∩ S be an open set with respect to the distance d. Our goal is to prove that O ∩ S is also weak∗ open. Let x∗ ∈ O ∩ S: by openness of O with respect to the distance d, there exists ε > 0 such that B(x∗, ε) ⊆ O. For any y∗, z∗ ∈ S, we have ‖y∗ − z∗‖ ≤ 2R, so that there exists some N ∈ N such that
+∀y∗, z∗ ∈ S,
+∑
+n≥N
+2−n
+∣ ∣ ∣ ∣
+〈x∗ − y∗ | xn
+‖xn‖ 〉
+∣ ∣ ∣ ∣
+≤ε
+2.
+If we consider some point z∗ ∈ S ∩ Bx∗,y1,...,yN , ε
+4 , then
+∀i ∈ {1, . . . , N } |〈x∗ − z∗ | yi〉| < ε
+4.
+This implies that such a point belongs to the ball B(x∗, ε) because
+d(x∗, z∗) =
+∑
+1≤n<N
+2−n
+∣ ∣ ∣ ∣
+〈x∗ − y∗ | xn
+‖xn‖ 〉
+∣ ∣ ∣ ∣
++
+∑
+n≥N
+2−n
+∣ ∣ ∣ ∣
+〈x∗ − y∗ | xn
+‖xn‖ 〉
+∣ ∣ ∣ ∣
+≤ ε.
+To summarize, the set S ∩ Bx∗,y1,...,yN , ε
+4 is included in S ∩ B(x∗, ε), itself included in
+O′. By definition, this implies that O′ is weak∗ open in S. To conclude that the weak∗ and the metric topology agree on S, we need to prove that conversely, any weak∗ open set of S is open with respect to the distance d. The proof of this fact is similar, and is left as an exercise.
+Theorem 76 (Banach-Alaoglu). Let X be a separable normed space. Then, any bounded sequence in X ∗ admit a weak*–converging subsequence.
+Proof. Let A be a dense countable subset of X . Let (x∗n) be a bounded sequence
+in X ∗. Then, for all x ∈ A, the sequence (〈x∗n | x〉)n∈N is bounded and admits a converging subsequence. By a diagonal argument, and taking subsequences where necessary, we can assume that for all x ∈ A there exists fa ∈ R such that
+lim
+n→+∞〈x∗
+n | x〉 = lim
+n→+∞ x∗
+n(x) = fa.
+Thus, the sequence of functions x∗n|A converges pointwise to the function f : A → R
+defined by f (x) = fa. By boundedness of the sequence (x∗n), there exists R > 0 such
+that ‖x∗n‖∗ ≤ R for all n ∈ N. Then,
+∀x, y ∈ X , |〈x∗
+n | x〉 − 〈x∗
+n | y〉| ≤ R ‖x − y‖ .
+Passing to the limit as n → +∞, this proves that the function f is R-Lipschitz on the dense set A ⊆ X and can therefore be extended uniquely into a R-Lipschitz function function fˆ : X → R. We will now show that x∗n converges pointwise to fˆ on X . Let
+63
+
+
+x be an arbitrary point X , and let ε > 0. By density of A, there exists y ∈ A such that ‖x − y‖ ≤ 1
+3R ε; by convergence of x∗n(y) to fˆ(y), there exists N ∈ N such that
+for n ≥ N ,
+∣ ∣ ∣
+fˆ(y) − x∗n(y)
+∣ ∣
+∣≤ 1
+3 ε. Then,
+∣ ∣ ∣
+fˆ(x) − x∗
+n(x)
+∣
+∣
+∣≤
+∣ ∣ ∣
+fˆ(x) − fˆ(y)
+∣
+∣
+∣+
+∣ ∣ ∣
+fˆ(y) − x∗
+n(y)
+∣ ∣
+∣ + |x∗
+n(y) − x∗
+n(x)| ≤ ε.
+This shows that limn→+∞ x∗n(x) = fˆ(x), and that weak∗ converges to fˆ. Finally, we
+note that a pointwise limit of linear functions is linear to conclude that fˆ ∈ X ∗.
+Theorem 77 (Banach-Alaoglu). Let X be a separable normed space. Then, the unit ball of X ∗ is weakly*–closed.
+Proof. The unit ball B of X ∗ is bounded, so that its weak∗ topology is metrizable by Theorem 75. Thus, B is weak∗ compact if and only if it is sequentially weak∗ compact, i.e. iff any sequence of elements of B admits a weak∗ converging subsequence. One concludes by invoking Theorem 77.
+Example 34 (Probability measures). Let K be a compact subset of Rd, and let X = C0(K). Then, the dual space X ∗ is the space of Radon measures over K, i.e. X ∗ = M(K), and its unit ball is
+B = {μ ∈ M(K) | ‖μ‖T V ≤ 1},
+and by Banach-Alaoglu’s theorem, B is weak∗ compact. Now let M+(K) be the set of positive measures on K, i.e.
+M+(K) = {μ ∈ M(K) | ∀φ ∈ C0(K), φ ≥ 0 =⇒ 〈μ | φ〉 ≥ 0}.
+Then, M+(K) is a weak∗ closed set (which is also convex). Thus, the set of probability measures
+P(X) = {μ ∈ M+(K) | 〈μ | 1K〉 = 1} = M+(K) ∩ B,
+is a weak∗-compact set.
+We finish by an application of the Banach-Alaoglu theorem to reflexive spaces, a class of spaces that include Hilbet spaces.
+Definition 41 (Reflexive space). A normed space X is reflexive if and only if X ∗∗, the dual space to X ∗, can be identified with X , meaning that the canonical injection
+i : X → X ∗∗,
+x 7→ (φx : x∗ ∈ X ∗ 7→ 〈x∗ | x〉)
+is a bijection. In other words, a space X is reflexive if every continuous linear form on its dual X ∗, i.e. φ : X ∗ → R, can be written under the form φ(x∗) = 〈x∗ | x〉 for some x ∈ X .
+64
+
+
+Note that the canonical injection is an isometry, i.e. ‖i(x)‖ = ‖x‖. In this course, it will be sufficient to know a few facts about reflexive spaces, such as • finite-dimensional spaces are reflexive; • Hilbert spaces are reflexive; • Lp spaces and Sobolev spaces W 1,p are separable and reflexive for 1 < p < +∞.
+Corollary 78. In a separable and reflexive space, the unit ball is weakly compact.
+Proof. We only prove sequential weak compactness.Let K be a bounded closed convex set and let (xn)n∈N be a sequence of elements of X with ‖xn‖ ≤ 1. We regard these points as elements of X ∗∗ through the canonical injection, i.e. x∗n∗ := i(x∗n).
+The sequence (x∗n∗)n∈N is also bounded (since ‖i(x)‖ = ‖x‖), ensuring by BanachAlaoglu’s theorem the existence of a weak*–converging subsequence. Relabeling if necessary, we may therefore assume that there exists x∗∗ ∈ X ∗∗ s.t.
+∀x∗ ∈ X ∗, 〈x∗∗
+n | x∗〉 n→+∞
+−−−−−→ 〈x∗∗ | x∗〉.
+Since the canonical injection is surjective (by reflexivity of X ), there exists some x such that x∗∗ = i(x). The previous convergence then yields
+∀x∗ ∈ X ∗, 〈x∗ | xn〉 n→+∞
+−−−−−→ 〈x∗ | x〉,
+i.e. (xn)n∈N weakly converges to x. Since K is closed and convex, it is sequentially weakly closed, from which we deduce that x ∈ K.
+B Exercises
+B.1 Chapter 2
+Exercise 1. Convex hull of union. 1. Given two convex sets K, L, prove that: conv(K ∪ L) = {(1 − α)x + αy | (x, y, α) ∈ K × L × [0, 1]}. 2. Given convex sets K1, . . . , Kn, prove that
+conv(K1 ∪ . . . ∪ Kn) =
+
+
+
+∑
+1≤i≤n
+αixi | α ∈ ∆n and ∀i, xi ∈ Ki
+
+
+
+,
+where ∆n is the unit simplex in Rn.
+Exercise 2. Prove Lemma 2 when X is a normed space and K contains a ball B(0, r). What is the continuity modulus of pK?
+Exercise 3. Prove that the closure of a convex set is convex. Deduce that the closed convex hull of A is equal to the closure of the convex hull of A.
+Exercise 4. Interior of a convex set. 1. Prove that if B, C ⊆ K are subsets of a convex set K, then (1 − t)B + tC ⊆ K.
+65
+
+
+2. Deduce that if x belongs to the interior of K and y ∈ K, then [x, y) lies in the interior of K. 3. Prove that the interior of a convex set is convex. 4. Prove that if K is closed and has non-empty interior, then K is the closure of its interior.
+Exercise 5. Let X = L2([0, 1]) and let K = {f ≥ 0 a.e. | f ∈ X }. Prove that K is convex and closed and therefore sequentially weakly closed. Write explicitely K as an intersection of closed half-spaces.
+Exercise 6. Discontinuous linear form. Consider X = R[X] the space of polynomials, endowed with the sup-norm (if P = anXn + . . . + a0, then ‖P ‖ = maxi |ai|), then the linear form φ(P ) = P ′(1) is discontinuous everywhere.
+Exercise 7. Mazur’s lemma. Let (xn)n∈N be a weakly converging sequence in a normed space X , with weak limit x. Considering the set K = conv({xn | n ∈ N}), prove that there exists a sequence yn of convex combinations of the xn (i.e. yn ∈ K) such that yn converges strongly to x.
+Definition 42 (Extreme point). Let K ⊆ X convex. An extreme point is a point x ∈ K that cannot be obtained by taking a nontrivial convex combination of points in K, i.e. there is no y, z ∈ K \ {x} and α ∈ (0, 1) such that x = (1 − α)y + αz. The set of extremal points of K is denoted ext(K).
+Exercise 8. Let A ⊆ X and K = conv(A). Prove that ext(K) ⊆ A.
+Exercise 9. Extreme points and strict convexity of the ball . We recall that a convex set K is strictly convex if
+∀x 6= y ∈ K, ∀α ∈ (0, 1), (1 − α)x + αy ∈ int(K).
+1. Prove that the unit ball in a Hilbert space is strictly convex and that all points are extreme. 2. Given x ∈ Rd, we define ‖x‖1 = ∑
+1≤i≤d |xi| and ‖u‖∞ = max1≤i≤d |xi|. Are the unit balls of (Rd, ‖·‖1) and (Rd, ‖·‖∞) strictly convex ? What are their extreme points? 3. Same question for X = C0([0, 1]) endowed with the sup-norm ‖·‖∞ and with
+X = L1([0, 1]).
+Exercise 10. Support functions. Compute the support functions of the following objects: 1. a segment [a, b] in Rd, 2. a square [0, 1]2 in R2,
+3. the unit simplex ∆ = {x ∈ Rd+ | ∑
+i xi = 1} in X = Rd,
+Exercise 11. Let (X , ‖‖) be a normed space and let B be the unit ball of X . Prove that σB coincides with the dual norm ‖·‖∗.
+66
+
+
+Exercise 12. Hausdorff distance. Let K, L be two compact convex bodies in Rd, and consider the unit sphere Sd−1 = {x ∈ Rd | ‖x‖ = 1}. We denote dH (K, L) the Hausdorff distance between K and L, i.e.
+dH (K, L) =
+(
+max
+x∈K min
+y∈L ‖x − y‖ , max
+y∈L min
+x∈K ‖x − y‖
+)
+,
+1. Prove that dH (K, L) = min{ε ≥ 0 | K ⊆ L + B(0, ε) and L ⊆ K + B(0, ε)}, 2. Prove that K ⊆ L + B(0, ε) iff σK ≤ σL + ε on Sd−1, 3. Conclude that dH (K, L) = ‖σK − σL‖∞,Sd−1.
+B.2 Chapter 3
+Exercise 13. Distance functions. Let K ⊆ X , and define dK(x) = infp∈K ‖x − p‖ . 1. Prove that if K is convex, then dK is convex.
+2. Prove that if X is a Hilbert space, then ‖·‖2 − d2
+K is convex2 and lsc. (nb one does not need to assume that K is convex)
+Exercise 14. Suppose that f : X → R is convex and satisfies f (x) ≤ L ‖x‖ for all x ∈ X . Prove that f is L-Lipschitz.
+We recall that a Banach space is a complete normed space. Baire’s theorem asserts that if (Fn)n∈N is a countable family of closed subsets of a Banach space X (or more generally of a complete metric space), each with empty interior, then ∪n∈NFn has empty interior. We use it to deduce a characterization of the continuity set of lsc convex functions.
+Exercise 15. Let f : X → R be a lower semicontinuous convex function on a Banach space, and assume that int dom f contains a point x.
+1. Assume that B(0, r) ⊆ dom f . Letting Fn = {y ∈ B(0, r) | max(f (y), f (−y)) ≤ n}, prove that f is bounded on a set with non-empty interior. 2. Conclude that cont f = int dom f .
+Exercise 16. Banach-Steinhaus. Let (Tα)α∈A be a family of continuous linear operators, Tα : X → Y where X and Y are Banach spaces, and define f (x) := supα∈A ‖Tα(x)‖.
+1. Prove that f is convex and lower-semicontinuous. 2. We now assume that for all x ∈ X , ∃Mx ≥ 0 s.t. supα ‖Tα(x)‖ < Mx. Prove that f is continuous on X , and locally Lipschitz near the origin. 3. Deduce the existence of M ≥ 0 such that supα ‖Tα‖ ≤ M .
+Exercise 17. Characterization of support functions. Let σ : Y → R be a lowersemicontinuous sublinear (hence convex) function. 1. Let g(x) = 〈x∗ | x〉 + t be an affine minorant of σ. Prove that g(0) = 0. 2. Deduce that σ(x) = sup{〈x∗ | x〉 | σ ≥ 〈x∗ | ·〉}. 3. Prove that if Y = X ∗ and if X ∗ is reflexive, then there exists a convex set K ⊆ X such that σ = σK
+2one says that d2
+K is semi-concave
+67
+
+
+B.3 Chapter 4
+Exercise 18. Envelope theorem. Let fi ∈ C1(Rd) be convex functions satisfying
+∀i0 6= i1 ∈ I, ∀x ∈ Rn, ∇fi0(x) 6= ∇fi1(x) (17)
+We define f = maxi∈I fi the pointwise maximum of these functions, and we assume that the maximum is attaine at any x ∈ Rd. 1. Prove that if I is finite, then f is differentiable almost everywhere. (Hint: invoke the implicit function theorem.) 2. In the general case, consider the set
+A = {x ∈ Rn | ∃i0 6= i1 ∈ I, f (x) = fi0(x) = fi1(x)}.
+Prove that if x belongs to A, then f is not Gâteaux-differentiable at x. 3. Deduce that f that for almost every x ∈ Rd, f is differentiable at x and there exists a unique ix ∈ I s.t. f (x) = fix(x) and ∇f (x) = ∇fix(x).
+Exercise 19. Simplex . Let f : Rd → R be defined by f (x1, . . . , xd) = max(x1, . . . , xd). Prove that ∂f (0) = {x ∈ Rd | x1 + . . . + xd = 1 and ∀i, xi ≥ 0}.
+Exercise 20. Failure of subdifferential sum rule. Let A = B((0, 0), 1), B = B((0, 2), 1) bet closed balls in R2, and f = iA, g = iB. Compute the subdifferentials ∂f (x), ∂g(x) and ∂(f + g)(x) at x = (0, 1).
+Exercise 21. Characterization of convexity. Let f : X → R be a proper function so that for all x ∈ dom f , the subdifferential ∂f (x) is non-empty. 1. Prove that f is equal to the supremum of its affine minorants. 2. Deduce that f is convex lsc. 3. Conversely, prove that if f : Rd → R is convex then ∂f (x) 6= ∅ for all x ∈ Rd
+Exercise 22. Subdifferential sum rule. Prove using support functions (see Remark 16) that ∂(f + g)(x) = ∂f (x) + ∂g(x) when x ∈ cont f ∩ cont g.
+Exercise 23. Exact penalization using distance. Let K be a closed non empty convex subset of a Hilbert space X . We will consider subdifferentials, normal cones, etc. as subsets of X ' X ∗. 1. Show that ∂iK(p) = {v ∈ E; ∀q ∈ K, 〈v | p〉 ≥ 〈v | q〉}. Using the characterization of the orthogonal projection on K, prove that
+∂iK(p) = {v ∈ E; pK(p + v) = p}. (18)
+2. Application: Let f : X → R be continuous. Prove that p ̄ ∈ K if a minimizer of
+min
+p∈K f (p) (19)
+iff there exists w ∈ ∂f (p ̄) such that pK(p ̄ − w) = p ̄. (Indication: use the subdifferential sum rule.)
+68
+
+
+3. We now prove that if p ∈ K and v ∈ Norx K = ∂iK(p) then v/ ‖v‖ ∈ ∂dK(p), or equivalently that
+∀x ∈ E, dK (x) ≥ dK (p) + 〈 v
+‖v‖ | x − p〉. (20)
+a. Prove that (20) holds if 〈v | x〉 ≤ 〈v | p〉. b. Let x 6∈ H := {x ∈ E; 〈v | p〉 ≥ 〈v | x〉}, and define xH = pH (x). Prove that xH = x − 〈 v
+‖v‖ | x − p〉 v
+‖v‖ .
+c. Using K ⊆ H, prove that dK(x) ≥ dH (x) = ‖x − xH ‖ = 〈 v
+‖v‖ | x − p〉,
+and deduce that v/ ‖v‖ ∈ ∂dK. 4. Application: Let p ̄ ∈ K be a minimizer of (19). a. Prove that there exists w ∈ ∂f (p ̄) such that −w ∈ ∂iK(p ̄), so that
+0 ∈ ∂(f + ‖w‖ dK)(p ̄).
+b. Deduce the existence of λ ≥ 0 such that p ̄ minimizes the penalized problem
+min
+p∈X f (p) + λdK (p).
+Exercise 24. Limiting subdifferential, Exam 2020 . Let f ∈ C0(Rn) be convex. 1. Fix a point x ∈ Rn, and define K = convS where
+S=
+{
+s ∈ Rn | ∃xn → x, s.t. f is differentiable at xn and nli→m∞ ∇f (xn) = s
+}
+.
+a. Prove that S ⊆ ∂f (x) and K ⊆ ∂f (x).
+The goal of the next questions is to prove the converse inclusion.
+b. Fix some vector v ∈ Rn. Prove that for all tn = 1/n, there exists vn ∈ Rn such that ‖vn − v‖ ≤ tn and such that f is differentiable at xn = x + tnvn. c. Prove that, taking a subsequence if necessary, one can assume that ∇f (xn) converges to a vector s ∈ S. Show that f +(x, v) ≤ 〈s | v〉. d. Deduce that f +(x, v) ≤ σK(v) where σK is the support function of K. Conclude that ∂f (x) ⊆ K. 2. Application. Assume there exists G ∈ C0(Rd, Rd) such that ∀x ∈ Rn, G(x) ∈ ∂f (x). Prove that f belongs to C1(Rn) and that ∇f = G.
+subdifferential of TV norm
+B.4 Chapter 5
+Exercise 25. Let X = X1 ⊕ X2, where X1, X2 are two closed subspaces, let fi ∈ Γ0(Xi) and f = f1 ⊕ f2, i.e. f : X → R is defined by
+∀(x1, x2) ∈ X1 ⊕ X2 7→ f1(x1) + f2(x2).
+Prove that Proxγf (x1 + x2) = Proxγf1(x1) + Proxγf2(x1).
+Exercise 26. Let f ∈ Γ0(X ) be coercive, let T = Proxf and define xn+1 = T (xn).
+69
+
+
+1. Prove that ∀x ∈ X , f (x) ≥ f (xn+1) + 1
+γ 〈x − xn+1 | xn − xn+1〉. 2. Using this inequality, (i) prove that (f (xn))n∈N is decreasing and that (xn)n∈N is bounded; (ii) prove that any weak cluster point of (xn)n∈N minimizes f globally; (Hint: use that limn→+∞ ‖xn+1 − xn‖ = 0, as in Theorem 60.) 3. Deduce that (xn)n∈N is a minimizing sequence. 4. Conclude that if f is strictly convex, the sequence (xn)n∈N converges weakly to the unique minimizer of f .
+B.5 Chapter 6
+Exercise 27. Convex cones. Let K be a non-empty convex cone (i.e. for all x ∈ K and λ ≥ 0, λx ∈ K) and let K∗ ⊆ X ∗ be its polar of K
+K∗ = {x∗ ∈ X ∗ | ∀x ∈ K, 〈x∗ | x〉 ≤ 0}.
+1. Prove that if f = iK , then f ∗ = iK∗ and that ∂f (0) = K∗. 2. Prove that K∗∗ = {x ∈ X | ∀x∗ ∈ K∗, 〈x∗ | x〉 ≤ 0} is closed, convex, and contains K. 3. Prove that if K is a closed convex cone, then K∗∗ = K. 4. Assume that X is a Hilbert space, let K be a closed convex cone, K∗ ⊆ X ' X ∗ be its polar. Prove that
+∀x ∈ X , x = projK (x) + projK∗(x).
+Exercise 28. Strong convexity and subdifferential . Let X be a Hilbert space. A function f : X → R is called α-strongly convex if it satisfies one the following equivalent conditions:
+∀x, y ∈ dom(f ), ∀λ ∈ [0, 1], α
+2 λ(1 − λ) ‖x − y‖2 + f ((1 − λ)x + λy) ≤ (1 − λ)f (x) + λf (y) (21)
+∀x0 ∈ X , fx0 : x ∈ X 7→ f − α
+2 ‖x − x0‖2 is convex (22)
+1. Assume that f ∈ Γ0(X ) is α-strongly convex and let v ∈ ∂f (x0). Prove that
+0∈∂
+(
+f−α
+2 ‖· − x0‖2 − 〈v | ·〉
+)
+(x0),
+and deduce that ∀x ∈ X , f (x) ≥ f (x0) + 〈v | x − x0〉 + α
+2 ‖x − x0‖2 . 2. Prove that for all x0, y0 ∈ X , v ∈ ∂f (x0) and ∀w ∈ ∂f (y0) one has
+α ‖x0 − y0‖ ≤ ‖v − w‖ .
+3. Deduce that the same inequality holds if x0 ∈ ∂f ∗(v) and y0 ∈ ∂f ∗(w). 4. Let D = {v ∈ E | ∂f ∗(v) 6= ∅}. Prove that f ∗ is Gâteaux-differentiable on D, and that the application v ∈ D 7→ ∇f ∗(v) is (1/α)-Lipschitz.
+70
+
+
+Exercise 29. Moreau-Yosida regularization. Let X be a Hilbert space and f ∈ Γ0(X ). Given τ > 0, define the Moreau-Yosida regularization of f as
+fτ (x) = inf
+z∈E f (z) + 1
+2τ ‖x − z‖2
+1. Prove that fτ is convex, finite everywhere, and bounded on every bounded subset of X . 2. Prove that fτ is continuous and that ∂fτ (x) 6= ∅ for all x ∈ X . 3. Prove that fτ = (f ∗ + g∗)∗ where g(x) = 1
+2τ ‖x‖2.
+4. Using the previous exercise, deduce that fτ is Gâteaux-differentiable at all x ∈ X and that ∇fτ is τ -Lipschitz. 5. Prove that fτ converges pointwise to f as τ → 0. 6. Prove that Proxτf (x) = x − τ ∇fτ (x).
+(Hint: Let p = Proxτf (x), and prove that x−p
+τ ∈ ∂fτ (x) using the equality case in Fenchel-Young’s inequality.)
+This last question shows that the proximal point algorithm can be interpreted as “usual” gradient descent for the Moreau-Yosida regularization. For the next exercise, recall that a measure on a compact set X is a linear form μ : C0(X) → R which is continous for the topology induced by the sup-norm ‖·‖∞. The space of measures is denoted
+M(X) = (C0(X))∗.
+A measure μ is non-negative if ∀f ∈ C0(X), (f ≥ 0 =⇒ μ(f ) ≥ 0). Finally, a probability measure on X is a non-negative measure μ such that ‖μ‖T V = 1. The space of non-negative measures is denoted M+(X), and the space of probability measures is P(X).
+Exercise 30. Kantorovich Duality. Let X, Y be two compact sets, let μ be a probability measure on X, let ν be a probability measure on Y and finally let c ∈ C0(X×Y ). Define a linear form Λ : C0(X) × C0(Y ) → C0(X × Y ) by Λ(φ, ψ) = φ ⊕ ψ where
+φ ⊕ ψ : (x, y) ∈ X × Y 7→ φ(x) + ψ(y).
+We consider the following optimization problem
+P := inf{−(〈μ | φ〉 + 〈ν | ψ〉) | (φ, ψ) ∈ C0(X) × C0(Y ), φ ⊕ ψ ≤ c}.
+1. Prove that P = inf(φ,ψ)∈C0(X)×C0(Y ) f (Λ(φ, ψ)) + g(φ, ψ), where
+f : σ ∈ C0(X × Y ) 7→=
+{
+0 if σ ≤ c
++∞ otherwise,
+g : (φ, ψ) ∈ E × F 7→ −(〈μ | φ〉 + 〈ν | ψ〉).
+71
+
+
+2. Prove that f ∗ and g∗ are given by:
+f ∗ : γ ∈ M(X × Y ) : γ 7→ =
+{
+〈γ | c〉 if γ ∈ M+(X × Y )
++∞ otherwise
+g∗ : (κ, λ) ∈ M(X) × M(Y ) 7→
+{
+0 if (κ, λ) = −(μ, ν)
++∞ otherwise
+3. Let γ ∈ M(X × Y ). The marginal of γ on X is the measure ΠX γ ∈ M(X) defined by ΠX γ : φ ∈ C0(X) = γ(φ⊕0). The marginal on Y is defined similarly. Prove that the adjoint Λ∗ of γ is given by
+Λ∗(γ) = (ΠX γ, ΠY γ) ∈ M(X) × M(Y ).
+4. Deduce from Fenchel-Rockafellar that P = D where
+D := max
+γ∈C0(X×Y )∗ −g∗(−Λ∗γ) − f ∗(γ)
+= max{−〈γ | c〉 | γ ∈ M+(X × Y ) s.t. ΠX γ = ν and ΠY γ = ν}.
+This duality formula is due to Leonid Kantorovich, and is one of the most important results in the theory of optimal transport.
+References
+[AAC92] Giovanni Alberti, Luigi Ambrosio, and Piermarco Cannarsa. On the singularities of convex functions. Manuscripta Math, 76(3-4):421–435, 1992.
+[AB86] Hédy Attouch and Haïm Brezis. Duality for the sum of convex functions in general banach spaces. In North-Holland Mathematical Library, volume 34, pages 125–133. Elsevier, 1986.
+[BC+11] Heinz H Bauschke, Patrick L Combettes, et al. Convex analysis and monotone operator theory in Hilbert spaces, volume 408. Springer, 2011.
+[Bre10] Haim Brezis. Functional analysis, Sobolev spaces and partial differential equations. Springer Science & Business Media, 2010.
+[BV+10] Jonathan M Borwein, Jon D Vanderwerff, et al. Convex functions: constructions, characterizations and counterexamples, volume 172. Cambridge University Press Cambridge, 2010.
+[CS04] Piermarco Cannarsa and Carlo Sinestrari. Semiconcave functions, Hamilton-Jacobi equations, and optimal control, volume 58. Springer Science & Business Media, 2004.
+72
+
+
+[ET99] Ivar Ekeland and Roger Temam. Convex analysis and variational problems. SIAM, 1999.
+[Hör55] Lars Hörmander. Sur la fonction d’appui des ensembles convexes dans un espace localement convexe. Arkiv för matematik, 3(2):181–186, 1955.
+[Kap11] Samuel Kaplan. The Bidual of C(X). Elsevier, 2011.
+[M+95] Robert J McCann et al. Existence and uniqueness of monotone measurepreserving maps. Duke Mathematical Journal, 80(2):309–324, 1995.
+[Mar70] B Martinet. Régularisation d’inéquations variationnelles par approximations successives. rev. française informat. Recherche Opérationnelle, 4:154158, 1970.
+[Mar72] Bernard Martinet. Détermination approchée d’un point fixe d’une application pseudo-contractante. CR Acad. Sci. Paris, 274(2):163–165, 1972.
+[Roc70] R Tyrrell Rockafellar. Convex analysis. Number 28. Princeton university press, 1970.
+[Roc76] R Tyrrell Rockafellar. Monotone operators and the proximal point algorithm. SIAM journal on control and optimization, 14(5):877–898, 1976.
+[Zal02] Constantin Zalinescu. Convex analysis in general vector spaces. World scientific, 2002.
+73

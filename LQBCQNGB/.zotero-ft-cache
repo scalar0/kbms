@@ -1,0 +1,662 @@
+École CentraleSupelec - AACA - 1
+AACA
+2023-24 - École CentraleSupelec 
+3ème Année d'Étude
+Automatique Appliqué au Contrôle d’un Avion
+____________
+Contrôle Digital d’un Avion Instable
+Laurent Goerig, Carole Largeais, Dassault Aviation.
+laurent.goerig@dassault-aviation.com, carole.largeais@dassault-aviation.com
+L’objet de cette étude est de faire découvrir la conception d’un contrôleur digital (ou numérique, ou encore en temps discret) au travers d’une application consistant à élaborer la boucle de contrôle numérique longitudinal d’un avion instable. On s’intéressera ici au contrôle du mode d’oscillation d’incidence de l’avion (mouvement longitudinal rapide).
+Le système sera organisé de la façon suivante: un clinomètre (i.e. girouette) capte l’incidence réelle de l’avion en vol et fournit une incidence mesurée. A partir de cette valeur mesurée (qui peut être différente de la valeur réelle), un observateur va reconstruire les états de l’avion (incidence et vitesse de tangage) qui seront utilisés par un contrôleur pour stabiliser l’avion et lui permettre de répondre correctement aux ordres du pilote.
+CNA = Convertisseur Numérique / Analogique.
+La conception de cette boucle de contrôle pose plusieurs problèmes.
+En premier lieu, il faut remarquer que le processus à contrôler (avion longitudinal muni de son clinomètre) relève de la physique du continu, alors que les fonctions de l’observateur et du contrôleur sont réalisées par un calculateur numérique. C’est pourquoi il est nécessaire d’une part d’intercaler des convertisseurs analogique/numérique et des convertisseurs numérique/analogique des signaux utiles. D’autre part, au cours de la conception du contrôleur et de l’observateur, on sera confronté au problème de la discrétisation (ou numérisation) d’un système continu (que ce soit l’avion ou le contrôleur). Cette tâche particulière fera l’objet de la première partie de cette étude.
+En second lieu, il s’agit de concevoir un contrôleur capable de stabiliser automatiquement l’avion sans intervention du pilote, et capable de plus de réaliser les ordres de ce dernier. Ce sera l’objectif de la deuxième partie de l’étude. Les calculs seront simplifiés en ne tenant pas compte dans un premier temps de la présence du clinomètre (on supposera ce capteur parfait).
+Enfin, dans la troisième partie, on verra que la conception simplifiée du contrôleur calculé précédemment peut mener à la déstabilisation de l’avion si l’on prend en compte la présence réelle du clinomètre. On étudiera donc l’influence des dynamiques internes du clinomètre sur la boucle de contrôle, puis on concevra un observateur qui permettra d’intégrer ces informations dans la mise au point du contrôleur définitif.
+incidence mesurée
+Avion longitudinal instable
+gouverne de profondeur Capteur
+girouette
+états à contrôler
+Observateur
+CAN
+Contrôleur
+CNA
+ordres pilote
+Processus physique
+
+
+École CentraleSupelec - AACA - 2
+AACA
+Mots clés. Cette étude permettra de revoir les notions suivantes du domaine de l'automatique :
+filtre, gain statique, transformée de Laplace/z, bande passante, pulsation de coupure, Shannon, repliement, méthode d'intégration/discrétisation, bloqueur, filtre anti-aliasing, linéarisation, système en boucle ouverte/fermée, mode propre, amortissement, système dynamique linéaire du premier/second ordre, régime transitoire/permanent, diagramme de Bode, lieu de Black/Nichols, lieu des racines d'Evans, marge de gain/phase, représentation d'état, retour d'état statique/dynamique, placement de pôle, compensateur avance/retard, dépassement, temps de réponse, stabilité, Hurwitz, temps de doublement, observateur, principe de séparation, action intégrale, robustesse.
+Des notions élémentaires de mécanique du vol sont utilisées dans cette étude. Les analyses et réalisations de l’étude seront effectuées avec le logiciel Matlab/Simulink.
+Rafale
+Falcon 7X
+Neuron
+Falcon 6X
+AACA
+
+
+École CentraleSupelec - AACA - 3
+AACA
+2023-24 - École CentraleSupelec 
+3ème Année d'Étude
+Automatique Appliqué au Contrôle d’un Avion
+Problème No I :
+Réalisation d'un Filtre Passe-bas Numérique
+1. Introduction
+La réalisation numérique d'un filtre passe-bas permettra de comprendre certains des problèmes qui se posent lorsque l'on traite dans des calculateurs numériques des signaux continus en les échantillonnant à une cadence déterminée. Cette réalisation s'étend sur quatre séances et permettra en outre de se familiariser avec le logiciel Matlab/Simulink qui permet d'effectuer les calculs et les simulations.
+On considère un filtre du premier ordre dont la pulsation de coupure est égale à 1 rad/s. Sa fonction de transfert est :
+s = opérateur de Laplace a = 1 rad/s
+Dans le domaine temporel, cette fonction de transfert correspond à la représentation d'état :
+(1)
+2. Etude de la réponse continue du filtre
+2.1 Analyse temporelle
+Etant donnée l'entrée u(t) définie de la façon suivante comme la superposition de trois signaux sinusoïdaux, u1(t), u2(t), u3(t), représentant, par exemple, trois tensions différentes :
+u1(t) = E1.sin(1.t), E1 = 1 V, 1 = 0,1 rad/s,
+u2(t) = E2.sin(2.t), E2 = 1 V, 2 = 3 rad/s,
+u3(t) = E3.sin(3.t), E3 = 1 V, 3 = 10 rad/s,
+u(t) = u1(t) + u2(t) + u3(t) .
+2.1.1 Calculez analytiquement la sortie du filtre y(t) en résolvant l’équation différentielle associée ;
+2.1.2 Retrouvez ce résultat en appliquant la méthode de la transformée inverse de Laplace (voir la Table plus bas) ;
+2.1.3 Identifiez les termes transitoires et permanents ;
+sa
+a
+Gs 
+( )
+() . ()
+. () ()
+()
+y t axt
+axt u t
+dt
+dx t
+
+   avec:
+x(t): état;
+u(t): entrée; y(t): sortie.
+
+
+École CentraleSupelec - AACA - 4
+AACA
+2.1.4 Simulez cette réponse y(t) à l'aide de Simulink (Réglages de Simulink : onglet Simulation/Model Configuration Parameters/Solver : Type=Fixed-step, solver=ode3, Additional options : fixed-step size=0,01 sec.), et jouez sur le temps de simulation de façon à faire apparaître le régime transitoire puis le régime établi1. Constatez le déphasage et l'atténuation des différentes composantes de y(t).
+2.2 Analyse fréquentielle
+Calculez le gain et la phase de la fonction de transfert du filtre. En déduire les diagrammes de Bode asymptotiques correspondants. Puis tracez les diagrammes exacts avec Matlab (help bode).
+2.3 Synthèse
+Retrouvez sur les diagrammes du 2.2 les résultats du 2.1.4 concernant en particulier le déphasage et l'atténuation des différentes composantes de y(t) .
+3. Discrétisation
+Un filtre discret est généralement réalisé à l’aide d'un calculateur numérique. Le calculateur dispose en entrée d’un échantillonneur-bloqueur qui mesure la valeur de l'entrée continue à chaque pas d'échantillonnage et, s’il s’agit d’un bloqueur d’ordre zéro, conserve cette valeur pendant T secondes. De même, la sortie du calculateur est constante pendant un pas d'échantillonnage et change à chaque nouveau pas. Les signaux vus par le calculateur sont donc des fonctions en escalier. Le calcul effectué par le calculateur est une relation de récurrence telle que le transfert entrée-sortie du calculateur approxime au mieux celui du filtre continu. Il existe plusieurs façons de calculer un filtre discret à partir de sa réalisation continue. Nous allons en voir quatre.
+3.1 Approximation de l'intégration
+Cette méthode consiste à approcher l’opérateur continu d’intégration par un algorithme numérique. Il existe de nombreuses méthodes comme la méthode d’Euler, de Tustin, Simpson, Runge-Kutta, etc. Nous nous intéresserons ici aux deux premières.
+Les méthodes d’Euler et de Tustin consistent à obtenir un modèle d'état discret de la forme :
+x(T + n.T) = ad.x(n.T) + bd.u(n.T) y(n.T) = cd.x(n.T)
+en intégrant les 2 membres de l'équation d'état continue du filtre G : dx
+dt = −a. x + b. u entre les instants
+n.T et (n.T + T).
+3.1.1 Méthode des rectangles (Euler)
+On intègre les 2 membres de l'équation d'état continue du filtre G par la méthode d'Euler entre les instants n.T et (n.T + T) en supposant que le membre de droite est constant entre les instants n.T et (n.T + T) et égal à sa valeur à n.T.
+1 le filtre étant linéaire, la réponse de la somme des trois entrées est la somme des réponses obtenues pour chaque entrée séparée. On utilisera une méthode numérique d'intégration à pas fixe pour pouvoir utiliser la superposition.
+
+
+École CentraleSupelec - AACA - 5
+AACA
+Mettez le filtre numérique obtenu sous la forme d'une transmittance discrète entre l'entrée u et la sortie y (on utilisera pour cela l’opérateur retard z-1). Quel est le gain statique du filtre discret obtenu ? Quel est le pôle du filtre discret ? Discutez de la stabilité du filtre discret obtenu.
+3.1.2 Méthode des trapèzes (Tustin, ou encore Transformation bilinéaire)
+Mêmes questions qu'au 3.1.1 en intégrant cette fois-ci l'équation continue par la méthode de Tustin (membre de droite constant entre les instants n.T et (n.T + T) et égal à la demi-somme de sa valeur à n.T et (n.T + T)).
+3.2 Transformée en z
+En se rappelant la définition d'une transmittance (discrète ou continue) à partir de la réponse impulsionnelle, calculez le filtre discret présentant une réponse impulsionnelle qui est l'échantillonnée de celle du filtre continu G(s). On l'obtiendra tout d'abord de façon explicite sans l'aide des tables de transformation en z, puis avec. Quel est le pôle du système discret obtenu et le gain statique du filtre ? Discutez de la stabilité du filtre discret.
+3.3 Bloqueur d'ordre zéro
+Obtenez un modèle d'état discret en résolvant analytiquement l'équation d'état entre nT et (T + nT) et en se rappelant que u(t) est constant sur l'intervalle pour un bloqueur d’ordre zéro.
+Quel est le pôle du système discret et le gain statique du filtre ? Discutez de la stabilité du filtre discret obtenu.
+3.4 Comparaison des quatre filtres
+Comparez les quatre filtres numériques obtenus en 3.1, 3.2 et 3.3 du point de vue de leur stabilité, de leur gain statique, de l'analogue continu de chacun des pôles discrets (en utilisant la formule de passage entre les opérateurs s et z-1), et de leur transmittance isochrone. Que deviennent ces résultats lorsque T tend vers zéro (développement au premier ordre) ? Quelles sont selon vous les meilleures approximations discrètes du filtre continu considéré, et dans quelle bande de fréquence ?
+4. Application numérique
+Le calculateur considéré ici dispose de 2 périodes d'échantillonnage :
+T1 = 0,01 sec T2 = 0,5 sec
+4.1 Analyse
+Calculez les valeurs numériques des pôles discrets obtenus par les différentes méthodes de discrétisation pour les deux fréquences d'échantillonnage. Dans un second temps, obtenez directement numériquement les transmittances discrètes par la fonction c2d de Matlab (help c2d). Trouvez l'analogue continu de chacun de ces pôles. Discutez de la stabilité des filtres.
+
+
+École CentraleSupelec - AACA - 6
+AACA
+4.2 Simulation
+Avec Simulink, simulez la réponse de chacun des filtres pour les deux fréquences d'échantillonnage et pour l'entrée u(t) définie en 2. Calculez les réponses en superposant les sorties obtenues séparément avec u1(t), u2(t) et u3(t). Discutez du régime transitoire (en changeant les conditions initiales du filtre par exemple), du régime établi, des fréquences des signaux de sortie et comparez ces réponses avec celle du filtre continu associé. Conclure.
+5. Généralisation : Bloqueur d'ordre 0 pour un système linéaire général
+Le bloqueur d’ordre zéro est l’un des types de bloqueur le plus employé dans le traitement des signaux. Nous allons généraliser les résultats obtenus jusqu’à présent pour un filtre du premier ordre à un système dynamique linéaire d’ordre quelconque. Ces résultats seront utiles pour la suite du laboratoire.
+5.1 Rappel théorique
+Soit un système dynamique linéaire d'ordre fini, donné par sa représentation d'état :
+(1)
+avec : X vecteur d'état de dimension n  1, u vecteur d'entrée de dimension m  1, Y vecteur de sortie de dimension l  1, A matrice des dynamiques à coefficients constants de dimension n  n, B matrice de commande à coefficients constants de dimension n  m, C et D matrices d'observation de dimension l  n et l  m respectivement. Vérifiez que la fonction vectorielle :
+est solution du système différentiel (1) pour les conditions initiales X(0) = X0.
+On rappelle que l'exponentielle matricielle2 expm{M} est définie comme la limite de la série :
+expm{M} = I + M + M2/2! + M3/3! + ... + Mn/n! + ...
+Montrez que la fonction matricielle Bd(t), définie par :
+Bd(t) = t.[ I + M/2! + M2/3 + ... + Mn/(n+1)! + ... ].B M = A.t
+est égale à l'intégrale :
+et que, si A est inversible, Bd(t) = A-1.(expm{A.t} - I).B
+Montrez finalement que si u est égal à un constant entre les instants n.T et (n+1).T, et que Xn est la valeur de l'état à l'instant n.T, le modèle linéaire discret du système (1) est :
+2 Attention : la fonction exponentielle de matrice se réalise sous MATLAB exclusivement par la commande expm(-).
+
+
+
+
+
+Y CX Du
+AX Bu
+dt
+dX
+..
+..
++ t {A.(t-τ }.B.uτ( .dτ
+0
+X(t) =expm{A.t}.X 0expm ) )
+t
+(t)= 0exp m{A.(t-τ) }.B.dτ
+Bd
+
+
+École CentraleSupelec - AACA - 7
+AACA
+5.2 Application Reprenez la forme d'état du filtre du premier ordre G(s) et retrouvez une nouvelle fois les résultats du 3.3 à partir de la démarche générale de la question 5.1.
+À titre indicatif, Bd(t) est aussi égale à :
+Bd(t) = lim (A-.P)-1.[expm{(A-.P).t} - I].B 0
+où P est n'importe quelle matrice dont le noyau est strictement distinct de celui de A, et est un scalaire. Cette formulation particulière couvre le cas où A n'est pas inversible (cas d'intégrateurs purs dans la dynamique).
+n
+D.u
+n
+C.X
+Yn
+.un
+BD
+n
+.X
+AD
+Xn
+
+
+1
+
+
+
+
+()
+expm
+T
+Bd
+BD
+{A.T}
+AD
+avec
+
+
+École CentraleSupelec - AACA - 8
+AACA
+6. Effet du bloquage
+Un bloqueur doit être utilisé avec précaution dans un système continu. En effet, le processus d’échantillonnage/blocage d’un signal introduit des harmoniques parasites de haute fréquence dans le signal continu généré qu’il faut réduire au mieux pour ne conserver que le signal original (partie utile basse fréquence). Nous allons étudier dans la suite le phénomène dit de « repliement » spectral.
+6.1 Génération d’un signal harmonique pur discret
+Construisez le schéma simulink suivant, et générez une sinusoïde pure de fréquence 3 Hz échantillonnée à 100 Hz d’une durée de 5 secondes (signal y100) :
+Le signal y20 résulte d’un bloquage à 20 Hz de la sinusoïde d’origine. Les signaux y100 et y20 sont échantillonnés à 100 Hz (solveur simulink (ode3) cadencé à une fréquence de calcul de 100 Hz).
+Après simulation du schéma ci-dessus, on définit dans le Workspace de Matlab les variables suivantes : y100 = y.signals.values(:,1); % 100 Hz zero-Order Hold y20 = y.signals.values(:,2); % 20 Hz zero-Order Hold
+L = length(y.time); % Length of signal Fs = 100; % Sampling frequency NFFT = 2^nextpow2(L); % Next power of 2 from length of y
+Tracez les en superposant les 0,3 premières secondes des signaux y100 et y20.
+6.2 Analyse fréquentielle de y100
+Effectuez une analyse fréquentielle (Fast Fourier Transform, help fft) du signal y100 jusqu’à la fréquence d’échantillonnage, de la manière suivante : Y100 = fft(y100,NFFT)/L; f = Fs*linspace(0,1,NFFT);
+figure(1) plot(f,2*abs(Y100(1:NFFT))) title('Full Single-Sided Amplitude Full Spectrum of y100(t)') xlabel('Frequency (Hz)'),ylabel('|Y(f)|'),grid
+Remarquez et expliquez la présence de l’harmonique de fréquence 97 Hz en démontrant que, par tous les points d’une sinusoïde de fréquence f0 échantillonnée à une fréquence fe, on peut faire passer une famille de
+Solver = ode3 Stop time = 5 s Fixed-step size = 0.01 s Single mode = SingleTasking
+Zero-Order Hold
+Sample time = 0.05 s
+y
+To Workspace
+Structure With Time Decimation = 1 Sample time = -1
+Sine Wave
+Amplitude = 1 Bias = Phase = 0 Frequency = 3 Hz Sample time = 0.01 s
+Scope
+y 100
+y 20
+
+
+École CentraleSupelec - AACA - 9
+AACA
+sinusoïdes continues de même amplitude au signe près et de fréquences f = k.fe  f0 , kZ (entier relatif). Le phénomène observé sur le spectre est appelé « repliement spectral ». Vérifiez la propriété démontrée ci-dessus en traçant les signaux temporels suivants : figure(2) plot(y.time,y100,'+'),xlim([0 0.15]),ylim([-1.1 1.1]),hold on t=0:1/Fs/1000:0.15; plot(t,sin(2*pi*3*t),'r') plot(t,sin(-2*pi*97*t),'k') plot(t,sin(2*pi*103*t),'g')
+etc...
+6.3 Analyse fréquentielle de y20
+De la même manière, effectuez une analyse fréquentielle (Fast Fourier Transform) du signal y20 jusqu’à la fréquence de Shannon (= fréquence d’échantillonnage / 2), de la manière suivante : Y20 = fft(y20,NFFT)/L; f = Fs/2*linspace(0,1,NFFT/2+1);
+figure(3) plot(f,2*abs(Y20(1:NFFT/2+1))) title('Shannon restricted Single-Sided Amplitude Spectrum of y20(t)') xlabel('Frequency (Hz)'),ylabel('|Y(f)|'),grid
+Remarquez et justifiez la présence des harmoniques parasites.
+6.4 Filtre anti-aliasing
+Pour ne conserver que la fréquence d’origine du signal y20, placez en sortie du bloqueur sur le signal y20 un filtre passe-bas (appelé filtre anti-repliement ou anti-aliasing) ayant une fréquence de coupure adéquate, puis vérifiez l’atténuation des harmoniques parasites par une analyse fréquentielle analogue à celle du paragraphe 6.3 ci-dessus.
+
+
+École CentraleSupelec - AACA - 10
+AACA
+PETIT FORMULAIRE AACA
+Table des transformées usuelles monolatères de Laplace et Z
+f(t0) , f(t<0)=0 L[f(t)] = F(s) Z[f(t)] = F(z-1) , t = n.T , n entier > 0
+f(t0) , f(t<0)=0
++
+ f(t).e-s.t.dt
+0
++
+ f(t).z-n
+n=0
+1 s-1 (1 - z-1)-1
+e-At
+(A scalaire ou matrice carrée)
+(s.I + A)-1
+(I matrice identité avec dim(I)=dim(A))
+(I - z-1.e-AT)-1
+sin(t)
+
+s2 + 2]-1 z-1.sin(T).[z-2-2z-1cos(T)+1]-1
+cos(t)
+
+ss2 + 2]-1 (1-z-1.cos(T)).[z-2-2z-1cos(T)+1]-1
+f(t - ) e-s.F(s) Z[f(t - )] , ou z-m.F(z-1) si  = m.T
+df(t)/dt s.F(s)-f(0) Z[df(t)/dt] , ou [(z-1).F(z-1)-z.f(0)]/T si f(t) est linéaire sur [t, t+T]
+t
+h(t) =  f().g(t-).d
+0
+F(s).G(s) Z[h(t)] , ou T.F(z-1).G(z-1) si f(t) et g(t) sont constants sur [t, t+T]
+Contrôle linéaire par retour de sortie et placement de pôles
+1- Expression analytique dans le cas d’un système dynamique linéaire du second ordre à 1 entrée et 2 sorties :
+Le système dynamique linéaire du second ordre dX/dt = A.X+B.u , Y = C.X+D.u, (u scalaire, dim(X)=dim(Y)=2) bouclé par u =
+Ky.Y avec Ky = Kx.C-1/(1+Kx.C-1.D) , Kx = -BT.J.(A2+2...A-2.J2)/(BT.J.A.B) , et J = [0 1 ; -1 0] , présente des pôles racines de
+s2+2...s+2 (pulsation  et amortissement 
+2- Algorithme dans le cas d’un système dynamique linéaire d’ordre quelconque à 1 entrée et p sorties :
+L’ensemble défini par les pôles du système dynamique linéaire dX/dt = A.X+B.u , Y = C.X+D.u, (u scalaire) bouclé par u = Ky.Y
+, avec Ky calculé par la fonction place1.m donnée ci-dessous, contient les p pôles (réels ou complexes conjugués) concaténés dans
+le vecteur P.
+function K=place1(A,B,C,D,P) n=length(B); for i=1:length(P) N=null([A-P(i)*eye(n) B]); V(:,i)=N(1:n); W(i)=N(n+1); end K=real(W/(C*V+D*W));
+
+
+École CentraleSupelec - AACA - 11
+AACA
+2023-24
+- École CentraleSupelec 
+3ème Année d'Étude
+Automatique Appliqué au Contrôle d’un Avion
+Problème No II :
+Réalisation d'un compensateur numérique
+1. Introduction
+La réalisation numérique d'un compensateur peut être entreprise en suivant deux approches, selon l’endroit où l’on fait intervenir la numérisation, cette dernière devant être effectuée avec soin :
+- la première consiste à étudier et à concevoir un compensateur continu, c'est à dire nonéchantillonné, à partir du système continu à compenser. On obtient une réalisation d'état ou, de façon équivalente, une fonction de transfert décrivant le compensateur. Comme au Problème I, on peut ensuite obtenir une réalisation numérique de cette fonction de transfert. Cette méthode est souvent plus simple au niveau de la modélisation, puisqu’elle reprend directement la structure du système continu ;
+- la seconde voie consiste à obtenir d’abord un modèle discrétisé du système à contrôler. A partir de ce modèle discret on peut alors étudier et réaliser directement le compensateur numérique.
+L'étude proposée s'étend sur quatre séances. Elle s'organise autour d'un modèle longitudinal élémentaire d'un avion, et consiste à concevoir une loi de commandes de vol simple. On rappelle que les dynamiques longitudinales d’un avion sont composées essentiellement de deux modes, un mode lent, et un mode rapide. Le mode longitudinal lent de l'avion, dit mode phygoïde, est caractérisé par un échange oscillatoire lent (de l'ordre de la minute) entre énergie cinétique (vitesse) et énergie potentielle (altitude), échange qui s'effectue à incidence à peu près constante. Le mode rapide concerne les oscillations d'incidence, et met en jeu essentiellement la portance et le moment de tangage de l’avion. On supposera ici que le mode phygoïde est suffisamment lent pour laisser au pilote le temps de le contrôler. Par contre, les oscillations d’incidence sont critiques à très court terme, et nécessiteront la mise en place d’une loi de commandes de vol (compensateur) pour les contrôler automatiquement. De plus, on considèrera dans cette étude que ces oscillations d’incidence rapides ne modifient pas notablement le point de vol (i.e. vitesse et altitude). On fera appel aux fonctions de la Control Toolbox de Matlab (help control).
+
+
+École CentraleSupelec - AACA - 12
+AACA
+2. Modèle longitudinal rapide d'un avion
+2.1 Description du système
+On considère le modèle longitudinal rapide de l'avion représentatif des oscillations d'incidence. De ce modèle, on cherche à extraire le système dynamique linéaire (modèle linéarisé tangent) représentatif du modèle aux petits mouvements et qui permettra de réaliser la boucle de stabilisation longitudinale interne par des méthodes d’automatique linéaire.
+Le modèle de l'avion de masse m et d’inertie B comporte deux états, l'incidence aérodynamique et la vitesse de tangage q. Le contrôle longitudinal de l’avion est assuré par le braquage dm des gouvernes de profondeur (on supposera ici que l’avion braque simultanément et de la même quantité toutes ses gouvernes de profondeur, ce qui revient à ne disposer que d’une seule gouverne de profondeur). Une girouette située dans le nez de l'avion permet d’obtenir une mesure de l'incidence  utilisée pour fermer la boucle de contrôle longitudinal interne. Afin d’obtenir le modèle linéarisé tangent, l'expérience suggère de procéder comme suit :
+2.1.1 Ecrire les équations de la dynamique qui régissent le mouvement vertical du Centre de Gravité (CG) de l'avion et le mouvement de rotation de l'avion autour du CG (tangage) en les projetant sur les axes vitesse. On supposera que dans ces axes, seul le moment Ma des forces aérodynamiques par rapport au CG et la portance Za interviennent (la poussée équilibre la traînée et elle a une composante négligeable sur l'axe Zvitesse à faible
+incidence). Mettre ces équations sous la forme d/dt et dq/dt égaux à des fonctions des paramètres Za, Ma , m ,g, , V, B, q.
+X avion
+Z sol (vertical)
+CG
+
+Z avion
+
+X sol
+
+
+X vitesse
+V
+dm > 0
+q = ddt
+2.1.2 A une altitude fixée, on a :
+Za = V2.KZ.CZ(, dm)
+Ma = V2.Km.Cm(, q, dm)
+
+
+École CentraleSupelec - AACA - 13
+AACA
+avec KZ constant, homogène à une masse linéique, et Km constant homogène à une masse. KZ = 0,5..S où représente la densité atmosphérique au point de vol considéré et S une surface de
+référence caractéristique de l'avion considéré, et Km = KZ.L où L est une longueur de référence.
+CZ et Cm sont respectivement les coefficients aérodynamiques adimensionnels de portance et de moment de tangage donnés en axes vitesse.
+Remarque : 0,5..V2 est homogène à une pression et ce terme est communément appelé "pression
+dynamique". V2.KZ est homogène à une force et V2.Km à un moment.
+Ecrire les équations du système à l'équilibre, avec = 0 , = 0 , q = 0 et dm = dm0 .
+2.1.3 On se place dans le cas d'un vol en palier (0 = 0). Afin d'étudier les petits mouvements autour de la position d'équilibre 0 , dm0 et q0 = 0 , on peut linéariser les coefficients CZ(, dm) et Cm(, q, dm) de la manière suivante :
+CZ = CZ0 + CZa.+ CZm .m
+Cm = Cm0 + Cma.+ Cmm .m + Cmq.q.
+avec = - 0 et m = dm - dm0
+Ecrire les équations qui régissent l'évolution des paramètres et q. Dans la suite, par abus de langage, on posera = . Mettre les équations précédentes sous la forme d'état linéaire classique suivante :
+d/dt = Z.+ Zq .q + Zm .m dq/dt = M.+ Mq .q + Mm .m
+et identifier les paramètres Z, Zq , Zm , M, Mq et Mm .
+Dans toute la suite, on considérera les valeurs numériques suivantes3 : V = 250 m/s CZ = 0,9 L = 4 m B = 100000 kg.m2 CZm = 0,2 m = 10000 kg Cm = 0,02
+KZ = 40 kg/m Cmq = -0,5625
+Km = 160 kg Cmm = -0,1
+Calculez les paramètres Z, Zq , Zm , M, Mq et Mm . Ces valeurs sont représentatives de conditions de vol subsonique faible altitude pour un avion de combat.
+IMPORTANT : Désormais, dans toute la suite des problèmes II et III, on fera appel à des simulations temporelles utilisant des schémas Simulink dans lesquels on veillera à faire toujours intervenir explicitement le processus à contrôler (i.e. le modèle continu d'avion naturel sous sa forme d'état mis au point au chapitre 2), augmenté des différentes boucles de contrôle étudiées (continues ou discrètes). Réglages de Simulink : onglet MODELING/Model Settings/Solver : Type = Fixed-step, solver = ode3, Solver Details : fixed-step size = 0,01 sec.
+1 Notez qu'on peut considérer le modèle linéaire indifféremment en radians ou en degrés puisqu'il n'y a que des variables angulaires.
+V
+.L
+
+
+École CentraleSupelec - AACA - 14
+AACA
+2.2 Modèle linéaire continu
+2.2.1 Analyse modale de la stabilité
+En définissant le vecteur d'état X = [ q]T, identifiez les matrices A, B et C du modèle linéaire de l'avion :
+dX/dt = A.X + B.m y = C.X = 
+Calculez les pôles du système (voir dans Matlab : help eig, help damp). Le système est-il stable ?
+On perturbe légèrement l'incidence d'équilibre. Montrez que le temps de doublement de l'incidence tend vers log(2)/1 , 1 étant la valeur propre positive de A (pour effectuer le calcul du temps de doublement, on supposera que la gouverne n'est pas activée, que la vitesse de tangage initiale est nulle, et on négligera, en le justifiant, le mode stable du système).
+2.2.2 Analyse fréquentielle de la stabilité
+On veut savoir dans un premier temps s'il est possible de stabiliser simplement l'avion en fermant la boucle entre et m avec un unique gain statique K.
+Calculez la fonction de transfert G(s) de l'avion en boucle ouverte entre et m (voir Matlab : help linmod, help feedback) et tracez-la dans le plan de Black (help nichols). En déduire l'ensemble des valeurs de K qui stabilisent l'ensemble de la boucle obtenue4.
+Testez en simulation (SOLVER=ode3, TYPE=fixed step=0,01 sec.) les allures que prend (t) en fonction de différentes valeurs de K stabilisantes, lorsque c(t) est un échelon. Sont-elles satisfaisantes du point de vue du temps de réponse et de l'amortissement ? Corroborez cette analyse en traçant ensuite le lieu d'Evans du système (help rlocus). En déduire la valeur de K qui amortit l'avion à 0,7. Pourquoi avec cette valeur de K n'obtient-on pas en simulation pour un échelon unitaire de c(t) un dépassement sur de 5% caractéristique d'un système dynamique du second ordre amorti à 0,7 (calculez la fonction de transfert entre c et ) ? Pourquoi cette valeur de K n'est-elle pas acceptable (tracez l'activité de la gouverne m) ?
+3. Conception d'un compensateur dans le domaine continu
+3.1 Stabilisation continue
+De façon à améliorer la réponse en boucle fermée, nous allons augmenter le nombre de degrés de libertés de notre contrôleur au travers de l'étude de deux méthodes classiques de stabilisation, le retour d’état statique et
+4 Par convention, le lieu de Black s'entend pour une boucle de retour unitaire d'une mesure arrivant sur la borne négative du sommateur en entrée du système étudié (cf. le schéma ci-dessus). Il doit se lire dans un diagramme dont l'abscisse (la phase) varie de -360 à 0 degrés (le point critique est à -180°, 0 dB); si tel n'est pas le cas, il faut changer le signe de la mesure choisie pour fermer la boucle.
+avion
+G(s) 
+m K )
++ 
+c
+
+
+École CentraleSupelec - AACA - 15
+AACA
+le compensateur dynamique avance-retard. La première méthode sera étudiée plus en détail dans le AACA III dans la mesure où la numérisation de cette technique n’intervient effectivement que si le retour d’état statique requiert un observateur des états non mesurés. On cherche à contrôler l'incidence de l'avion. La commande d’entrée de la boucle est donc une incidence commandée c.
+3.1.1 Retour d’état statique
+Une première méthode consiste à augmenter le nombre de mesure. On élabore donc un correcteur utilisant un
+retour d’état statique entre l’état X = [ q]T et la gouverne de profondeur m :
+m = K+ Kq.q + Kc.c
+Ceci suppose la connaissance des deux états et q. On suppose dans un premier temps que Kc=1.
+On souhaite que la réponse de l’avion en boucle fermée à un échelon d'incidence c présente un dépassement (overshoot in english) inférieur à 5% et un temps de réponse de l’ordre de 1 seconde.
+Calcul analytique
+Déterminer les valeurs de Ket Kq de telle sorte que la réponse à un échelon d'incidence c, approximée par la réponse à un système dynamique linéaire du second ordre F(s) ci-dessous, présente un dépassement X égal à 5% et un temps de réponse Tr (mesuré à l'instant du premier maximum de la réponse) égal à 1 seconde.
+On rappelle à cet égard que, pour un système du second ordre dont la dynamique est définie par la pulsation naturelle  et l'amortissement :
+22 . 2
+2
+( )  
+
+
+s s
+F s , on a :  1 2
+
+
+Tr et X = exp(-Tr.).
+Que deviennent les nouvelles matrices A, B et C du 2.2.1 associées à la forme d'état de l'avion bouclé par ce correcteur (avec maintenant une entrée c au lieu de m) ?
+À partir d'une simulation temporelle, déduire la valeur de Kc de façon à obtenir un gain statique unitaire entre c et. Quelle est la valeur théorique du dépassement X prévu et celui observé en simulation ?
+Commande modale
+Dans un second temps, on calculera directement les gains Ket Kq par la technique de commande modale (placement de pôle) à l’aide des fonctions Matlab associées (fonction place1.m donnée dans le formulaire en fin du problème I, help place, help roots).
+Commande LQ
+Enfin, on calculera les gains Ket Kq par la technique de commande LQ à l’aide des fonctions Matlab associées (fonction lqr.m , help lqr). Vérifiez que cette méthode dispose de 3 degrés de liberté de réglage pour le problème posé (au lieu de 2 avec la commande modale). On proposera une solution qui s’approche au mieux du cahier des charges demandé en termes de Tr et X.
+
+
+École CentraleSupelec - AACA - 16
+AACA
+3.1.2 Compensateur dynamique avance-retard
+Une autre méthode consiste à introduire une dynamique supplémentaire dans le correcteur sans mesure supplémentaire : on ferme alors la boucle entre et m à l'aide d'un correcteur dynamique K(s). La commande d’entrée de la boucle est l'incidence commandée c que l’on compare avec l’incidence mesurée (schéma du 2.2.2). Le correcteur utilisé est un système avance-retard (Lead-Lag) du premier ordre, avec un zéro -a (terme d'avance), un pôle -b (terme de retard) et un gain en haute fréquence k :
+Sélectionnez le pôle du correcteur pour compenser le zéro de la fonction de transfert G(s) (opération dite de simplification d’un couple pôle-zéro stable). De ce fait, la fonction de transfert en boucle ouverte H(s) = K(s).G(s) conserve son ordre 2, et le transfert en boucle fermée F(s) peut s’écrire :
+Trouvez les valeurs à donner à k et a pour que la réponse du système en boucle fermée à un échelon d’incidence présente un dépassement de moins de 5% et un temps de réponse inférieur à 1 sec. On fera ce calcul directement en utilisant des fonctions de Matlab par la technique du placement de pôle (fonction place1.m donnée dans le formulaire en fin du problème I, help place, help tf, help zpk, help feedback). Donnez les pôles en boucle fermée et effectuez une simulation de la réponse à un échelon d’incidence c pour les valeurs choisies. Quelle doit être la valeur du gain qu’il faudrait mettre sur la consigne d’entrée pour que l’avion stabilisé réalise la consigne d’incidence en régime permanent ?
+A l’aide des fonctions Matlab ci-dessus, évaluez l’effet d’un autre choix de la valeur de b du correcteur sur l’amplitude des gains k et a, sur la qualité de la réponse à un échelon d’incidence c et sur l’activité de la gouverne m (position et vitesse).
+Analyse fréquentielle
+Tracez le diagramme de Black de la fonction de transfert du système en boucle ouverte H(s) avec le premier correcteur ci-dessus (synthétisé pour b=50,9) et comparez-la à celle sans correcteur obtenue au chapitre 2.2 . Trouvez la marge de gain du système et vérifiez-la en simulation.
+Numérisation du compensateur
+On dispose pour réaliser le contrôle de l'avion d'un calculateur travaillant avec une période d'échantillonnage T. A partir du premier correcteur mis au point en 3.1.2 (synthétisé pour b=50,9), trouvez une réalisation numérique K(z-1) de la fonction K(s). Pour cela, utilisez les résultats du Problème 1 relatifs au bloqueur d'ordre zéro.
+Procédez à la simulation du système global [avion naturel continu]+[correcteur numérique]. Quel est le dépassement et le temps de réponse du système si la période d'échantillonnage vaut T=T1 = 0,01 sec. ? Et pour T=T2 = 0,1 sec. ?
+3.2 Effet d'un vent vertical de vitesse Wz
+3.2.1 Mettre le système linéarisé sous la forme :
+dX/dt = A.X + B.m + Bv.Wz Y = C.X + Dv.Wz
+sb
+sa
+Ks k 
+
+( ) .
+s ds e
+sa
+k g0
+Hs
+Hs
+Fs
+c 
+
+
+
+  2.
+..
+1 ()
+()
+() 
+
+
+
+École CentraleSupelec - AACA - 17
+AACA
+3.2.2 Modéliser l'effet d'une turbulence verticale :
+(générateur de bruit blanc gaussien) (filtre de Dryden)
+avec
+Simuler l'effet sur l'avion d'abord en boucle ouverte, puis en boucle fermée avec le contrôleur continu du 3.1.1. Dans le dernier cas, regardez l'activité des gouvernes m.
+3.3 Effet de la stabilité
+Comment modifier conceptuellement la répartition massique pour avoir un avion naturellement stable, et sur quel coefficient de la matrice d'état A cela joue-t-il principalement ? Choisissez un exemple et comparez les activités de gouvernes m (position et vitesse) pour les deux configurations (stable et instable).
+f Wz
+ms
+Ls
+L
+f
+out
+out
+3/
+: pasd'éch.delasimulation
+3
+
+
+
+
+
+
+
+
+
+École CentraleSupelec - AACA - 18
+AACA
+4. Conception d'un compensateur dans le domaine discret
+4.1 Discrétisation du modèle
+En utilisant la méthode matricielle du bloqueur d'ordre zéro du Problème 1, calculez les éléments du modèle d'état discret de l'avion pour T1 = 0,01 sec. et T2 = 0,1 sec. :
+X(k+1) = ADi .X(k) + BDi .m(k) i = 1, 2 (correspondant respectivement à T1 et T2). (k) = CDi .X(k)
+Pour chaque période, trouvez le numérateur et le dénominateur de la fonction de transfert en z qui vaut : G(z) = CDi .(zI - ADi)-1 .BDi
+4.2 Conception du compensateur
+On utilise pour stabiliser l'avion un compensateur de même structure que précédemment avec un pôle, un zéro et un gain, mais le système est cette fois-ci discret :
+Comme précédemment, on placera le pôle en z de K(z) pour compenser le zéro de G(z). La boucle fermée prendra alors la forme :
+On choisira kd et ad pour que les pôles en boucle fermée discrets soient les équivalents discrets des pôles en boucle fermée continus obtenus au chapitre 3.1.2. On pourra utiliser la fonction place1 pour calculer ces valeurs (comme pour le chapitre 3.1.2).
+4.3 Comparaison des méthodes
+Comparez la performance des deux méthodes de conception 3.1.2 et 4. Calculez les pôles discrets en boucle fermée du modèle discrétisé avec le compensateur du chapitre 3.1.2 puis conclure.
+z bd
+z ad
+kd
+z bd
+z ad
+K z kd 1
+1
+1
+( ) . .1 
+
+
+
+
+
+
+
+z dd z ed
+z ad
+d0
+g
+F z kd  
+
+2
+() . .
+
+
+École CentraleSupelec - AACA - 19
+AACA
+2023-24 - École CentraleSupelec 
+3ème Année d'Étude
+Automatique Appliqué au Contrôle d’un avion
+Problème No III :
+Contrôle numérique par retour de sortie et observateur
+1. Préliminaire
+Le contrôle par retour d'état d'un système linéaire offre de nombreuses libertés, dont celle de pouvoir obtenir n'importe quelle dynamique en boucle fermée pour la partie contrôlable du système. Considérant un modèle d'état discret d'ordre n du type :
+Xk+1 = AD .Xk + BD .uk (1)
+où Xk est le vecteur d'état de dimension n à l'instant k, uk le vecteur de commande (gouverne de profondeur m), le retour :
+uk = - K.Xk+ rk
+produit le système en boucle fermée avec la consigne rk :
+Xk+1 = (AD - BD.K). Xk+ BD .rk
+Les valeurs propres de la matrice AD - BD.K, qui déterminent les pôles du système dynamique discret, peuvent être placées de façon arbitraire en choisissant correctement le gain K.
+La mesure directe de l'état complet du système est cependant souvent impossible, en particulier quand ce dernier est de grande dimension. Pour résoudre ce problème, si l’on connaît bien la dynamique interne du système à contrôler (matrice AD), on peut utiliser un observateur d’état qui donne à tout instant une estimation du vecteur d'état complet, et ce dernier peut alors être utilisé par la boucle de contrôle comme s’il était directement mesuré. Étant donné le système linéaire précédent (1) auquel on adjoint un vecteur de mesure yk :
+Xk+1 = AD .Xk + BD .uk
+yk = CD .Xk
+le vecteur d'état Zk dont la dynamique est définie par :
+Zk+1 = AD .Zk + BD .uk + L.(yk - CD.Zk) (2)
+converge vers Xk si la matrice (AD - L.CD) est Hurwitz. Le vecteur Zk est un observateur de l’état Xk , un mélange d'une prédiction analytique (la matrice (AD.Zk+BD.uk) représentant la dynamique connue du système), et d'un recalage grâce à la mesure (terme L.(yk - CD.Zk)). Le choix de la matrice de gain L permet de mitiger prédiction et mesure : si les perturbations sont faibles par rapport au bruit de mesure, on choisira
+
+
+École CentraleSupelec - AACA - 20
+AACA
+des gains faibles et on privilégiera la partie analytique ; dans le cas contraire, les gains pourront être choisis plus importants.
+2. Dynamique de l'observateur
+En assemblant les dynamiques du système et de l'observateur, trouvez la représentation d'état du système agrégé (i.e. trouvez comment évolue le vecteur d'état augmenté Tk = [Xk
+T Zk
+T]T).
+Dans la suite, on note Ek = Zk - Xk le vecteur d’erreur d’estimation. En changeant de représentation d'état et en prenant maintenant Sk = [Xk
+T Ek
+T]T comme le vecteur d’état augmenté, montrez que la dynamique de l'erreur est déterminée par la matrice (AD - L.CD) et donc que l'erreur Ek tend vers zéro si et seulement si cette matrice est Hurwitz.
+3. Dynamique en Boucle Fermée
+On suppose maintenant que l'on utilise la mesure Zk au lieu de Xk pour constituer le retour :
+uk = mk = - K.Zk
+Comme précédemment, trouvez la dynamique du système complet décrit par le vecteur d'état augmenté Tk = [Xk
+T Zk
+T]T. En changeant de variable et en utilisant Sk défini plus haut, montrez que la dynamique en boucle fermée est définie par les pôles de (AD - L.CD) et de (AD -BD.K). Ceci constitue le principe de séparation : le choix de L qui détermine la dynamique de l'observateur et celui de K qui détermine la dynamique du système en boucle fermée sont indépendants.
+Pour choisir L et K, différentes techniques sont possibles. On utilisera dans ce problème le placement de pôles grâce à la commande Matlab 'place'.
+4. Modèle simplifié d'avion
+Reprenez le modèle d'avion du AACA II, et calculez le modèle discrétisé pour un échantillonnage T = 0,01 seconde1, de façon à le mettre sous la forme (1) du paragraphe 1 ci-dessus.
+Calculez la matrice gain de retour d'état K qui place les pôles discrets du système en boucle fermée à leur équivalents continus correspondant à = 5 rad/sec et = 0,7 (utilisez la commande Matlab 'place').
+On suppose que la mesure inertielle de la vitesse de tangage q n'est pas disponible. En utilisant la seule mesure de l'incidence , calculez la matrice de gain L qui donne pour l'observateur une dynamique de l'erreur dont les pôles se situent à = 20 rad/sec et = 0,7 (2).
+1 On rappelle A = [-0,9 1 ; 2 -0,9] ; B = [-0,2 ; -10] ; C = [1 0] ; AD = expm(A.T) ; BD = A-1.(AD - I).B; CD = C.
+2 Notez la dualité du problème : les pôles de AD - L.CD sont les mêmes que ceux de sa transposée (AD
+T - CD
+T.LT). Pour calculer
+les gains de l'observateur, on peut résoudre le problème de retour pour le système AD
+T, CD
+T et transposer le résultat obtenu.
+
+
+École CentraleSupelec - AACA - 21
+AACA
+Etant donné le système global discret défini par :
+Xk+1 = AD .Xk + BD .uk (1)
+yk = CD .Xk
+Zk+1 = AD .Zk + BD .uk + L.(yk - CD.Zk) (2)
+uk = -K.Zk + rk
+tracez sa représentation en forme de schéma-bloc sous Simulink puis simulez la réponse à un ordre en échelon de profondeur rk. En particulier, on tracera le vecteur d'erreur (Zk - Xk) et la sortie yk superposée à lorsque l'observateur n'est pas initialisé aux bonnes valeurs de et q.
+Finalement, testez le modèle continu de l’avion stabilisé grâce au système numérique (2) défini ci-dessus. On placera un gain statique G de façon à ce que rk représente un ordre d'incidence commandée c et que l'erreur statique en incidence soit nulle en régime permanent.
+Quelle est la robustesse du système global en termes de stabilité et de dégradation de l'allure de la réponse en si l'avion réel diffère du modèle d'avion choisi pour concevoir le contrôleur ? (on fera varier séparément les termes M et Mm en leur attribuant quelques valeurs différentes des données nominales, et on déterminera la plage de variation possible « acceptable »).
+5. Modélisation de la girouette
+Sur notre avion, le capteur mesurant l'incidence est une girouette qui se met toujours dans le lit du vent local. Cette girouette possède une dynamique propre du fait entre autres de son inertie et de ses caractéristiques aérodynamiques. On prendra comme modèle simplifié de la girouette un oscillateur de fréquence g = 10 rad/sec et d'amortissement g = 0,2. Son modèle d'état dans le domaine continu est :
+
+.
+1
+0
+.
+2. .
+01
+/ 2 
+
+
+
+
+
+
+
+  
+g
+g
+g
+g
+dXg dt X
+yg = [g 2 0].Xg
+est l'incidence (vraie) vue par l'avion, et yg désigne l'incidence mesurée par la girouette. Déterminez un modèle d'état discret, AV, BV, CV, et d’état augmenté XV, de l'ensemble [avion + capteur], que
+l'on nommera le modèle Vrai, avec une période d'échantillonnage T = 0,01 seconde (il est plus facile de constituer le modèle continu de l'ensemble et de discrétiser le tout).
+Avion (continu)
+y=
+q
+Observateur (2) (discret)
+u=m
+u
+K
++
+-Z
+r
+G
+c
+, q] estimé
+
+
+École CentraleSupelec - AACA - 22
+AACA
+Constituez le modèle d'état du système en boucle fermée en assemblant le compensateur (1) précédemment obtenu :
+Zk+1 = AD .Zk + BD .uk + L.(yk - CD.Zk)
+uk = -K.Zk + rk
+et le modèle vrai :
+XVk+1 = AV .XVk + BV .uk yk = CV .XVk
+Calculez les pôles en boucle fermée. Le système global est-il stable ?
+6. Compensateur d'ordre 4
+6.1 Développement
+On tient compte désormais du modèle de la girouette. A partir du modèle discret complet [Avion+Girouette], calculez la matrice de retour KV (ordre 4) plaçant les pôles à l'équivalent continu de 5 rad/sec et 10 rad/sec avec un amortissement de 0,707.
+Calculez à partir du modèle complet le gain LV de l'observateur discret qui place la dynamique de l'erreur à 20 rad/sec avec un amortissement de 0,707 (pôles superposés).
+Vérifiez la valeur des pôles obtenus en boucle fermée.
+Simulez la réponse du système à un échelon. Tracez en particulier la commande de gouverne u et observez le transitoire.
+Avion Girouette
+
+q Observateur L
+yg
+u=m
+u
+K
++
+-Z
+r
+G
+c
+, q, Xg(1), Xg(2)] estimé
+
+
+École CentraleSupelec - AACA - 23
+AACA
+Avant de valider le système ainsi élaboré, il convient de s’assurer que la commande u n’est pas trop exigeante du point de vue des dynamiques pour les servo-gouvernes (qui risquent de buter sur les limites de vitesse et de position si la commande est forte). Tracez la fonction de transfert en boucle fermée entre la référence r (incidence commandée) et la commande de braquage de gouverne u. On observe que cette fonction de transfert présente un gain important en hautes fréquences. Réalisez alors un filtrage de c (filtre du premier ordre et de gain unitaire) et introduisez-le dans le système (en amont du gain G). Trouvez en simulation la constante de temps  du filtre qui permet d'avoir un transitoire acceptable sur les commandes tout en conservant de bonnes performances sur la réponse en .
+6.2 Eléments de robustesse
+Enfin, testez la robustesse du système ainsi conçu en faisant varier le terme Mde l'avion de +/-20% (effet par
+exemple d'une variation de centrage), toute chose étant égale par ailleurs. Afin de conserver un gain statique
+unité entre l'incidence commandée et l'incidence mesurée en régime permanent, on rajoute une faible action
+intégrale dans la boucle3. Trouvez par simulation4 une valeur convenable du gain R associé à cet intégrateur
+qui satisfasse le gain statique recherché sans dégrader significativement la dynamique de la réponse en .
+3 Remarquez que le filtre et l'intégrateur font désormais aussi parti des éléments du contrôleur, et qu'il faudra donc les discrétiser en final pour les introduire dans le calculateur (non demandé ici).
+4 Les techniques de l’Automatique permettent de calculer simultanément l’ensemble des gains du retour d’état, de l’observateur et de l’action intégrale (placement de pôle par exemple).
+____ s
+R
+Avion Girouette
+
+q Observateur L
+yg
+u=m
+u
+K
++
+-Z
+c
+, q, Xg(1), Xg(2)] estimé
+ estimé
++
+
++
+
+G
+______ s. + 1
+1

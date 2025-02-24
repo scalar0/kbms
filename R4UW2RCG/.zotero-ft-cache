@@ -1,0 +1,3955 @@
+Overview of the course Convex sets and functions Duality
+Stochastic Optimization Recalls on convex analysis
+V. Lecl`ere
+November 24 2021
+Vincent Lecle`re OS - 1 24/11/2021 1 / 30
+Overview of the course Convex sets and functions Duality
+Objective of the course
+Uncertainty is present in most optimization problem, sometimes taken into account. Two major way of taking uncertainty into account : Robust approach: assuming that uncertainty belongs in some set C , and will be chosen adversarily. Stochastic approach: assuming that uncertainty is a random variable with known law.
+We will take the stochastic approach, considering the multi-stage approach : a first decision is taken, then part of the uncertainty is revealed, before taking a second decision and so on.
+Vincent Lecle`re OS - 1 24/11/2021 2 / 30
+Overview of the course Convex sets and functions Duality
+Syllabus
+1st course: Convex toolbox
+2nd course: Probability toolbox
+3rd course: two-stage stochastic programm
+4th course: Bellman operators and Dynamic Programming
+5th course: Decomposition methods for two stage SP
+6th course: Stochastic Dual Dynamic Programming
+Vincent Lecle`re OS - 1 24/11/2021 3 / 30
+Overview of the course Convex sets and functions Duality
+Validation
+The stochastic optimization course is in two part Evaluation have 2 components : Practical works to be done in between classes and sent to vincent.leclere@enpc.fr Written exam ith theoretical and modelling questions
+Practical work will be done in Julia (www.julialang.com)using jupyter notebook
+Instructions for installing julia / jupyter and using the library can be found at https://github.com/leclere/TP-Saclay
+Practical work will be posted there
+Vincent Lecle`re OS - 1 24/11/2021 4 / 30
+
+
+Overview of the course Convex sets and functions Duality
+Fundamental definitions and results
+Presentation Outline
+1 Overview of the course
+2 Convex sets and functions Fundamental definitions and results Convex function and minimization Subdifferential and Fenchel-Transform
+3 Duality Recall on Lagrangian duality Marginal interpretation of multiplier Fenchel duality
+Vincent Lecle`re OS - 1 24/11/2021 4 / 30
+Overview of the course Convex sets and functions Duality
+Fundamental definitions and results
+Convex sets
+C is a convex set iff
+∀x1, x2 ∈ C , [x1, x2] ⊂ C .
+If for all i ∈ I, Ci is convex, then so is ∩i∈I Ci
+C1 + C2, and C1 × C2 are convex
+For any set X the convex hull of X is the smallest convex set containing X ,
+conv(X ) :=
+{
+tx1 + (1 − t)x2 | x1, x2 ∈ C , t ∈ [0, 1]
+} .
+The closed convex hull of X is the intersection of all half-spaces containing X .
+Vincent Lecle`re OS - 1 24/11/2021 5 / 30
+Overview of the course Convex sets and functions Duality
+Fundamental definitions and results
+Separation
+Let X be a Banach space, and X ∗ its topological dual (i.e. the set of all continuous linear form on X ).
+Theorem (Simple separation)
+Let A and B be convex non-empty, disjunct subsets of X . Assume that,
+int(A) 6= ∅, then there exists a separating hyperplane (x ∗, α) ∈ X ∗ × R such that
+〈x ∗, a〉 ≤ α ≤ 〈x ∗, b〉 ∀a, b ∈ A × B.
+Theorem (Strong separation)
+Let A and B be convex non-empty, disjunct subsets of X . Assume that, A is closed, and B is compact (e.g. a point), then there exists a strict
+separating hyperplane (x ∗, α) ∈ X ∗ × R such that, there exists ε > 0,
+〈x ∗, a〉 + ε ≤ α ≤ 〈x ∗, b〉 − ε ∀a, b ∈ A × B.
+Vincent Lecle`re OS - 1 24/11/2021 6 / 30
+Overview of the course Convex sets and functions Duality
+Fundamental definitions and results
+Convex functions : basic properties
+A function f : X → R ̄ is convex if its epigraph is convex.
+f : X → R ∪ {+∞} is convex iff
+∀t ∈ [0, 1], ∀x , y ∈ X , f (tx + (1 − t)y ) ≤ tf (x ) + (1 − t)f (y ).
+If f , g convex, λ > 0, then λf + g is convex.
+If f convex non-decreasing, g convex, then f ◦ g convex.
+If f convex and a affine, then f ◦ a is convex.
+If (fi )i∈I is a family of convex functions, then supi∈I fi is convex.
+Vincent Lecle`re OS - 1 24/11/2021 7 / 30
+
+
+Overview of the course Convex sets and functions Duality
+Fundamental definitions and results
+Convex functions : further definitions and properties
+The domain of a convex function is dom(f ) = {x ∈ X | f (x ) < +∞}.
+The level set of a convex function is levα(f ) = {x ∈ X | f (x ) ≤ α}
+A function is lower semi continuous (lsc) iff for all α ∈ R, levα is closed.
+The domain and the level sets of a convex function are convex.
+A convex function is proper if it never takes −∞, and dom(f ) 6= ∅.
+A function is coercive if lim‖x‖→∞ f (x ) = +∞.
+Vincent Lecle`re OS - 1 24/11/2021 8 / 30
+Overview of the course Convex sets and functions Duality
+Fundamental definitions and results
+Convex functions : polyhedral functions
+A polyhedra is a finite intersection of half-spaces, thus convex.
+A polyhedral function is a function whose epigraph is a polyhedra.
+Finite intersection, cartesian product and sum of polyhedra is polyhedra.
+In particular a polyhedral function is convex lsc, with polyhedral domain and level sets.
+If f : Rn → R ̄ is polyhedral, then it can be written as
+f (x ) = mθin θ
+s.t. ακ>x + βκ ≤ θ ∀κ ≤ k
+γκ>x + δκ ≤ 0 ∀κ ≤ k′
+Vincent Lecle`re OS - 1 24/11/2021 9 / 30
+Overview of the course Convex sets and functions Duality
+Fundamental definitions and results
+Convex functions : polyhedral approximations
+f is convex iff it is above all its tangeant.
+Let {xκ, gκ}κ≤k be a collection of (sub-)gradient, that is such that f ≥ 〈gκ, · − xκ〉 + f (xκ), then
+fk : x 7→ max
+κ≤k 〈gκ, x − xκ〉 + f (xκ)
+is a polyhedral outer-approximation of f .
+Let {xκ}κ≤k be a collection of point in dom(f ). Then,
+f ̄k : x 7→ min
+σ∈∆k
+{ k ∑
+κ=1
+σκf (xκ)
+∣∣∣
+k ∑
+κ=1
+σκxκ = x
+}
+is a polyhedral inner-approximation of f .
+Vincent Lecle`re OS - 1 24/11/2021 10 / 30
+Overview of the course Convex sets and functions Duality
+Fundamental definitions and results
+Convex functions : strict and strong convexity
+f : X → R ∪ {+∞} is strictly convex iff
+∀t ∈]0, 1[, ∀x , y ∈ X , f (tx + (1 − t)y ) < tf (x ) + (1 − t)f (y ).
+f : X → R ∪ {+∞} is α-convex iff ∀x , y ∈ X
+f (y ) ≥ f (x ) + 〈∇f (x ), y − x 〉 + α
+2 ‖y − x ‖2.
+If f ∈ C 1(Rn)
+〈∇f (x ) − ∇f (y ), x − y 〉 ≥ 0 iff f convex if strict inequality holds, then f strictly convex
+If f ∈ C 2(Rn),
+∇2f < 0 iff f convex
+if ∇2f 0 then f strictly convex if ∇2f < αI then f is α-convex
+Vincent Lecle`re OS - 1 24/11/2021 11 / 30
+
+
+Overview of the course Convex sets and functions Duality
+Convex function and minimization
+Presentation Outline
+1 Overview of the course
+2 Convex sets and functions Fundamental definitions and results Convex function and minimization Subdifferential and Fenchel-Transform
+3 Duality Recall on Lagrangian duality Marginal interpretation of multiplier Fenchel duality
+Vincent Lecle`re OS - 1 24/11/2021 11 / 30
+Overview of the course Convex sets and functions Duality
+Convex function and minimization
+Convex optimization problem
+min
+x∈C f (x )
+Where C is closed convex and f convex finite valued, is a convex optimization problem.
+If C is compact and f proper lsc, then there exists an optimal solution.
+If f proper lsc and coercive, then there exists an optimal solution.
+The set of optimal solutions is convex.
+If f is strictly convex the minimum (if it exists) is unique.
+If f is α-convex the minimum exists and is unique.
+Vincent Lecle`re OS - 1 24/11/2021 12 / 30
+Overview of the course Convex sets and functions Duality
+Convex function and minimization
+Constraints and infinite values
+A very standard trick in optimization consists in replacing constraints by infinite value of the cost function.
+min
+x∈C⊂X f (x ) = min
+x∈X f (x ) + IC (x ).
+where
+IC (x ) =
+{
+0 if x ∈ C +∞ otherwise
+If f is lsc and C is closed, then f + IC is lsc.
+If f is proper and C is bounded, then f + IC is coercive.
+Thus, from a theoretical point of view, we do not need to explicitely write constraint in a problem.
+Vincent Lecle`re OS - 1 24/11/2021 13 / 30
+Overview of the course Convex sets and functions Duality
+Subdifferential and Fenchel-Transform
+Presentation Outline
+1 Overview of the course
+2 Convex sets and functions Fundamental definitions and results Convex function and minimization Subdifferential and Fenchel-Transform
+3 Duality Recall on Lagrangian duality Marginal interpretation of multiplier Fenchel duality
+Vincent Lecle`re OS - 1 24/11/2021 13 / 30
+
+
+Overview of the course Convex sets and functions Duality
+Subdifferential and Fenchel-Transform
+Subdifferential of convex function
+Let X be a Banach space, f : X → R ̄ .
+X ∗ is the topological dual of X , that is the set of continuous linear form on X .
+The subdifferential of f at x ∈ dom(f ) is the set of slopes of all affine minorants of f exact at x :
+∂f (x ) :=
+{
+x ∗ ∈ X ∗ | f (·) ≥ 〈x ∗, · − x 〉 + f (x )
+} .
+If f is convex and derivable at x then
+∂f (x ) = {∇f (x )}.
+Vincent Lecle`re OS - 1 24/11/2021 14 / 30
+Overview of the course Convex sets and functions Duality
+Subdifferential and Fenchel-Transform
+Partial infimum
+Let f : X × Y → R ̄ be a jointly convex and proper function, and define
+v (x ) = inf
+y∈Y f (x , y )
+then v is convex. If v is proper, and v (x ) = f (x , y ](x )) then
+∂v (x ) =
+{
+g ∈ X∗ |
+(g
+0
+)
+∈ ∂f (x , y ](x ))
+}
+proof:
+g ∈ ∂v (x ) ⇔ ∀x ′, v (x ′) ≥ v (x ) + 〈g , x ′ − x 〉
+⇔ ∀x ′, y ′ f (x ′, y ′) ≥ f (x , y ](x )) +
+〈(g
+0
+) ,
+(x ′
+y′
+) −
+(x
+y ](x )
+)〉
+⇔
+(g
+0
+)
+∈ ∂f (x , y ](x ))
+Vincent Lecle`re OS - 1 24/11/2021 15 / 30
+Overview of the course Convex sets and functions Duality
+Subdifferential and Fenchel-Transform
+Convex function : regularity
+Assume f convex, then f is continuous on the relative interior of its domain, and Lipschtiz on any compact contained in the relative interior of its domain.
+A proper convex function is subdifferentiable on the relative interior of its domain
+Assume f : X → R ̄ is convex, and consider A ⊂ X .
+If f is L-Lipschitz on A then ∂f (x ) ⊂ B(0, L), ∀x ∈ ri(A) If ∂f (x ) ⊂ B(0, L), ∀x ∈ A + εB(0, 1) then f is L-Lipschitz on A then
+Vincent Lecle`re OS - 1 24/11/2021 16 / 30
+Overview of the course Convex sets and functions Duality
+Subdifferential and Fenchel-Transform
+Fenchel transform
+Let X be a Banach space, f : X → R ̄ convex proper.
+The Fenchel transform of f , is f ∗ : X ∗ → R ̄ with
+f ∗(x ∗) := sup
+x ∈X
+〈x ∗, x 〉 − f (x ).
+f ∗ is convex lsc as the supremum of affine functions.
+f ≤ g implies that f ∗ ≥ g ∗.
+If f is proper convex lsc, then f ∗∗ = f , otherwise f ∗∗ ≤ f .
+Vincent Lecle`re OS - 1 24/11/2021 17 / 30
+
+
+Overview of the course Convex sets and functions Duality
+Subdifferential and Fenchel-Transform
+Fenchel transform and subdifferential
+By definition f ∗(x ∗) ≥ 〈x ∗, x 〉 − f (x ) for all x ,
+thus we always have (Fenchel-Young) f (x ) + f ∗(x ∗) ≥ 〈x ∗, x 〉.
+Recall that x ∗ ∈ ∂f (x ) iff for all x ′, f (x ′) ≥ f (x ) + 〈x ∗, x ′ − x 〉 iff
+〈x ∗, x 〉 − f (x ) ≥ 〈x ∗, x ′〉 − f (x ′) ∀x ′
+that is
+x ∗ ∈ ∂f (x ) ⇔ x ∈ arg max
+x ′∈X
+{〈x ∗, x ′〉−f (x ′)} ⇔ f (x )+f ∗(x ∗) = 〈x ∗, x 〉
+From Fenchel-Young equality we have
+∂v ∗∗(x ) 6= ∅ =⇒ ∂v ∗∗(x ) = ∂v (x ) and v ∗∗(x ) = v (x ).
+If f proper convex lsc
+x ∗ ∈ ∂f (x ) ⇐⇒ x ∈ ∂f ∗(x ∗).
+Vincent Lecle`re OS - 1 24/11/2021 18 / 30
+Overview of the course Convex sets and functions Duality
+Recall on Lagrangian duality
+Presentation Outline
+1 Overview of the course
+2 Convex sets and functions Fundamental definitions and results Convex function and minimization Subdifferential and Fenchel-Transform
+3 Duality Recall on Lagrangian duality Marginal interpretation of multiplier Fenchel duality
+Vincent Lecle`re OS - 1 24/11/2021 18 / 30
+Overview of the course Convex sets and functions Duality
+Recall on Lagrangian duality
+Weak duality
+The problem
+(P) min
+x∈Rn f (x )
+s.t. ci (x ) = 0 ∀i ∈ J1, nE K cj (x ) ≤ 0 ∀j ∈ JnE + 1, nE + nI K
+can be written min
+x∈Rn max
+λ∈RnE ,μ∈Rn+I
+L(x , λ, μ)
+where
+L(x , λ, μ) := f (x ) +
+nE +nI
+∑
+i =1
+λi ci (x )
+The dual problem is
+(D) max
+λ∈RnE ×Rn+I
+min
+x∈Rn L(x , λ, μ)
+and we have, without assumption
+vD ≤ vP .
+Vincent Lecle`re OS - 1 24/11/2021 19 / 30
+Overview of the course Convex sets and functions Duality
+Recall on Lagrangian duality
+Linear Programming duality
+min
+x≥0 c >x
+s.t. Ax = b
+is equivalent to min
+x≥0 mλax(c − A>λ)>x + b>λ
+and the dual problem is
+mλax b>λ
+s.t. A>λ ≤ c
+with equality between both problem except if there is neither primal nor dual admissible solution.
+Vincent Lecle`re OS - 1 24/11/2021 20 / 30
+
+
+Overview of the course Convex sets and functions Duality
+Recall on Lagrangian duality
+Strong duality
+The duality gap is the difference between the primal value and dual value of a problem. Consider problem
+(P) min
+x∈Rn f (x )
+s.t. ci (x ) = 0 ∀i ∈ J1, nE K cj (x ) ≤ 0 ∀j ∈ JnE + 1, nE + nI K
+with (P) convex in the sense that f is convex, cI is convex lsc, cI is affine. If further the constraints are qualified, then there is no duality gap.
+Vincent Lecle`re OS - 1 24/11/2021 21 / 30
+Overview of the course Convex sets and functions Duality
+Recall on Lagrangian duality
+Recall KKT
+Assume that f , gi and hj are differentiable. Assume that x ] is an optimal
+solution of (P), and that the constraints are qualified in x ]. Then we
+have 
+
+∇x L(x ], λ]) = ∇f (x ]) +
+nE +ni
+∑
+i =1
+λ]
+i ∇ci (x ]) = 0
+cE (x ]) = 0
+0 ≤ λI ⊥ cI (x ]) ≤ 0
+Vincent Lecle`re OS - 1 24/11/2021 22 / 30
+Overview of the course Convex sets and functions Duality
+Marginal interpretation of multiplier
+Presentation Outline
+1 Overview of the course
+2 Convex sets and functions Fundamental definitions and results Convex function and minimization Subdifferential and Fenchel-Transform
+3 Duality Recall on Lagrangian duality Marginal interpretation of multiplier Fenchel duality
+Vincent Lecle`re OS - 1 24/11/2021 22 / 30
+Overview of the course Convex sets and functions Duality
+Marginal interpretation of multiplier
+Perturbed problem
+Consider the perturbed problem
+(Pp) min
+x∈Rn f (x )
+s.t. ci (x ) + pi = 0 ∀i ∈ J1, nE K cj (x ) + pj ≤ 0 ∀j ∈ JnE + 1, nI + nE K
+with value v (p), and optimal multiplier (for p = 0) λ0.
+Vincent Lecle`re OS - 1 24/11/2021 23 / 30
+
+
+Overview of the course Convex sets and functions Duality
+Marginal interpretation of multiplier
+Linear programming case
+v (p) := min
+x≥0 c >x
+s.t. Ax + p = b
+by LP duality (assuming at least one admissible primal solution) we have
+v (p) = mλax − b>λ + p>λ
+s.t. A>λ ≤ c
+Note λ0 the optimal multiplier for (P0), note that it is admissible for
+(Dp), hence v (p) ≥ −b>λ0 + p>λ0. By strong duality we have
+v (0) = −b>λ0, hence
+v (p) ≥ v (0) + λ0>p
+or λ0 ∈ ∂v (0).
+Vincent Lecle`re OS - 1 24/11/2021 24 / 30
+Overview of the course Convex sets and functions Duality
+Marginal interpretation of multiplier
+Optimality condition by saddle point
+Let Λ := RnE × Rn+I . (x ], λ]) is a saddle-point of L on Rn × Λ iff
+∀λ ∈ Λ, L(x ], λ) ≤ L(x ], λ]) ≤ L(x , λ]), ∀x ∈ Rn
+Consider (x ̄, λ ̄) ∈ Rn × Λ. Then λ ̄ ∈ arg maxλ∈Λ L(x ̄, λ) iff cE (x ̄) = 0
+and 0 ≤ λ ̄I ⊥ cI (x ̄) ≤ 0.
+Theorem
+If (x ], λ]) is a saddle-point of L on Rn × Λ, then x ] is an optimal solution of (P).
+Note that we need no assumption for this result.
+Vincent Lecle`re OS - 1 24/11/2021 25 / 30
+Overview of the course Convex sets and functions Duality
+Marginal interpretation of multiplier
+Convex case
+If (P) is convex in the sense that f is convex, cI is convex and cE is affine, then v is convex.
+Theorem
+Assume that v is convex, then
+∂v (0) = {λ ∈ Λ | (x , λ) is a saddle point of L}
+In particular, ∂v (0) 6= ∅ iff there exists a saddle point of L.
+Theorem (Slater’s qualification condition)
+Consider a convex optimisation problem. Assume that c′E is onto, and
+there exists x ∈ rint(dom(f )) with cI (x ) < 0, and cI continuous at x ,
+then if x ∗ is an optimal solution, there exists λ∗ such that (x ∗, λ∗) is a saddle-point of the Lagrangian. Further, v is locally Lipschitz around 0.
+Vincent Lecle`re OS - 1 24/11/2021 26 / 30
+Overview of the course Convex sets and functions Duality
+Fenchel duality
+Presentation Outline
+1 Overview of the course
+2 Convex sets and functions Fundamental definitions and results Convex function and minimization Subdifferential and Fenchel-Transform
+3 Duality Recall on Lagrangian duality Marginal interpretation of multiplier Fenchel duality
+Vincent Lecle`re OS - 1 24/11/2021 26 / 30
+
+
+Overview of the course Convex sets and functions Duality
+Fenchel duality
+Duality by abstract perturbation
+Let X and Y be Banach spaces. There exists an abstract duality framework for minx∈X f (x ) by considering a perturbation function
+Φ : X × Y → R ∪ {+∞} (with Φ(·, 0) = f ).
+(Py ) v (y ) := xin∈fX Φ(x , y ).
+We have
+v ∗(y ∗) = sup
+y ∈Y
+〈y ∗, y 〉 − v (y )
+= sxu,yp
+〈y ∗, y 〉 − Φ(x , y ) = Φ∗(0, y ∗)
+Thus we have
+(Dy ) v ∗∗(y ) = sup
+y∗∈Y∗ 〈y ∗, y 〉 − Φ∗(0, y ∗)
+Generically
+val(Dy ) = v ∗∗(y ) ≤ v (y ) = val(Py )
+Vincent Lecle`re OS - 1 24/11/2021 27 / 30
+Overview of the course Convex sets and functions Duality
+Fenchel duality
+Solution of the dual as subgradient
+Note that the set of solution of the dual is S(Dy ) = ∂v ∗∗(y ). Recall that, for v proper convex,
+∂v ∗∗(x ) 6= ∅ =⇒ ∂v ∗∗(x ) = ∂v (x ) and v ∗∗(x ) = v (x )
+Thus, if v is proper convex and subdifferentiable at y (or equivalently if S(Dy ) 6= ∅), then,
+val(Dy ) = val(Py ) S(Dy ) = ∂v (y )
+Finally, as a convex function is subdifferentiable on the relative interior of its domain, a sufficient qualification condition (to have a zero dual gap and existence of multipliers), is that
+0 ∈ rint(dom(v )).
+Vincent Lecle`re OS - 1 24/11/2021 28 / 30
+Overview of the course Convex sets and functions Duality
+Fenchel duality
+Recovering the Lagrangian dual
+Problem (Py ) can be written
+mx,izn Φ(x , z)
+s.t. z = y
+with Lagrangian dual
+max
+y∗∈Y ∗ inf
+x,z∈X×Y Φ(x , z)+〈y ∗, y −z〉 = max
+y∗∈Y ∗〈y ∗, y 〉− sup
+x ,z∈X ×Y
+{
+〈y ∗, z〉 − Φ(x , z)
+}
+} {{ }
+Φ∗(0,y ∗)
+Hence, we recover the Fenchel dual from the Lagrangian dual.
+Vincent Lecle`re OS - 1 24/11/2021 29 / 30
+Overview of the course Convex sets and functions Duality
+Fenchel duality
+For next week
+Install Julia / Jupyter / JuMP (see instructions https://github.com/leclere/TP-Saclay)
+Run the CrashCourse notebook to get used with those tools (there are other resources available on the web as well)
+Contact me vincent.leclere@enpc.fr in case of trouble
+Vincent Lecle`re OS - 1 24/11/2021 30 / 30
+
+
+Probability recalls Random function Limit of averages Newsvendor problem
+Stochastic Optimization Recalls on probability
+V. Lecl`ere
+December 1st 2021
+Vincent Lecle`re OS - 2 1/12/2021 1 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Presentation Outline
+1 Probability recalls
+2 Random function
+3 Limit of averages
+4 Newsvendor problem
+Vincent Lecle`re OS - 2 1/12/2021 1 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Probability space
+Let Ω be a set.
+A σ-algebra F of Ω is a collection of subset of Ω such that
+Ω∈F F is closed under complementation F is closed under countable union
+A measure P : F → [0, 1] is a probability if
+P(Ω) = 1
+P(∪i∈NAi ) = ∑
+i∈N P(Ai ) where {Ai }i∈N is a collection of
+pairwise disjoint sets of F
+(Ω, F, P) is a probability space.
+A ∈ F is P-almost-sure if P(A) = 1, and negligible if P(A) = 0.
+(Ω, F, P) is complete if all subset of a negligible set is measurable.
+Vincent Lecle`re OS - 2 1/12/2021 2 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Measurability and representation
+Let F be a σ-algebra on Ω.
+A σ-algebra is generated by a collection of sets if it is the smallest containing the collection.
+A function X : Ω → Rn is F -measurable if X −1(I) ∈ F for all boxes
+I of Rn, we note X F .
+A σ-algebra σ(X ) is generated by a function X : Ω → Rn sets if it is
+generated by {X −1(I) | I boxes of Rn}.
+The σ-algebra generated by all boxes is called the Borel σ-algebra.
+Theorem (Doob-Dynkin)
+Let X : Ω → Rn, Y : Ω → Rp be two F -measurable functions. Then
+Y σ(X ) iff there exists a Borel measurable function f : Rn → Rp such that Y = f (X ).
+Vincent Lecle`re OS - 2 1/12/2021 3 / 26
+
+
+Probability recalls Random function Limit of averages Newsvendor problem
+Random variables
+Let (Ω, F, P) be a complete probability space.
+Define the equivalence class over the L0(Ω, F , P; Rn)
+X ∼ Y ⇐⇒ P(
+{ω ∈ Ω | X (ω) = Y (ω)}
+)
+=1
+A random variable X is an element of
+L0(Ω, F , P; Rn) := L0(Ω, F , P; Rn)/ ∼.
+In other word a random variable is a measurable function from Ω to
+Rn defined up to negligeable set.
+Vincent Lecle`re OS - 2 1/12/2021 4 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Expectation and variance
+We recall that E[X] := ∫
+Ω X(ω)P(dω).
+If P is discrete, we have E[X] = ∑|Ω|
+ω=1 X (ω)pω.
+If X admit a density function f we have E[X] = ∫
+R xf (x )dx .
+We define the variance of X
+var (X) := E[(
+X − E[X])2]
+= E[X2] − (E[X])2
+and the standard deviation
+std(X) := √var (X)
+the covariance is given by
+cov (X, Y ) = E[XY ] − E[X]E[Y ]
+Vincent Lecle`re OS - 2 1/12/2021 5 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Random variables spaces
+L0(Ω, F , P; Rn) is the set of rv
+L1(Ω, F , P; Rn) is the set of rv such that E[|X|] < +∞
+Lp(Ω, F , P; Rn) is the set of rv such that E[|X|p] < +∞
+L∞(Ω, F , P; Rn) is the set of rv that is almost surely bounded
+Lp(Ω, F , P; Rn), for p ∈]1, +∞[ is a reflexive Banach space, with
+dual Lq, where 1
+p+1
+q =1
+L1(Ω, F , P; Rn) is a non-reflexive Banach space with dual L∞
+L2(Ω, F , P; Rn) is a Hilbert space
+L∞(Ω, F , P; Rn) is a non-reflexive Banach space
+Vincent Lecle`re OS - 2 1/12/2021 6 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Independence
+The cumulative distribution function (cdf) of a random variable X is
+FX (x ) := P(X ≤ x )
+Two random variables X and Y are independent iff (one of the following)
+FX,Y (a, b) = FX (a)FY (b) for all a, b
+P(X ∈ A, Y ∈ B) = P(X ∈ A)P(Y ∈ B) for all Borel sets A and B
+E[f (X)g(Y )] = E[f (X)]E[g(Y )] for all Borel functions f and g
+A sequence of identically distributed indenpendent variables is denoted iid.
+Vincent Lecle`re OS - 2 1/12/2021 7 / 26
+
+
+Probability recalls Random function Limit of averages Newsvendor problem
+Inequalities
+(Markov) P(|X| ≥ a) ≤ E
+[
+|X |
+]
+a , for a > 0.
+(Chernoff) P(X ≥ a) ≤ E
+[
+etX ]
+eta , for t, a > 0.
+(Chebyshev) P(|X − E[X ]| ≥ a) ≤ var(X)
+a2 , for a > 0.
+(Jensen) E[f (X)] ≥ f (E[X]) for f convex
+(Cauchy-Schwartz) E[|XY |] ≤ ‖X‖2‖Y ‖2
+(H ̈older) E[|XY |] ≤ ‖X‖p‖Y ‖q for 1
+p+1
+q =1
+(Hoeffding) P(
+Mn − E[Mn
+]≥t
+)
+≤ exp
+( −2n2t2
+∑n
+i=1(bi −ai )2
+)
+where
+{X i
+}
+i∈N is a sequence of bounded independent rv with
+ai ≤ Xi ≤ bi .
+Vincent Lecle`re OS - 2 1/12/2021 8 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Limits of random variable
+Let {Xn
+}
+n∈N be a sequence of random variables.
+We say that {Xn
+}
+n∈N converges almost surely toward X if
+P(
+linm(Xn − X) = 0
+)
+= 1.
+We say that {Xn
+}
+n∈N converges in probability toward X if
+∀ε > 0, P(|Xn − X| > ε) → 0.
+We say that {Xn
+}
+n∈N converges in Lp toward X if
+‖Xn − X‖p = E[
+|Xn − X|p]
+→ 0.
+We say that {Xn
+}
+n∈N converges in law toward X if
+E[f (Xn)] → E[f (X)] for all bounded Lipschitz f
+Vincent Lecle`re OS - 2 1/12/2021 9 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Conditional expectation
+P(A|B) = P(A ∩ B)/P(B)
+If (X, Y ) has density fX,Y , then the conditional law (X|Y ) has density fX|Y (x |y ) = fX,Y (x , y )/fY (y ).
+In the continuous case we have
+E[X|Y = y ] =
+∫
+R
+xfX|Y (x |y )dx .
+More generally if G is a sub-sigma-algebra of F, the conditional
+expectation of X ∈ L1(Ω, F, P) w.r.t G is the G-measurable random variable Y satisfying
+E[Y 1G
+] = E[X1G
+], ∀G ∈ G
+Finally, we always have
+E[E[X|Y ]]
+= E[X]
+Vincent Lecle`re OS - 2 1/12/2021 10 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Presentation Outline
+1 Probability recalls
+2 Random function
+3 Limit of averages
+4 Newsvendor problem
+Vincent Lecle`re OS - 2 1/12/2021 10 / 26
+
+
+Probability recalls Random function Limit of averages Newsvendor problem
+Monotone and dominated convergence
+Theorem (Monotone convergence)
+Let {Xn
+}
+n∈N be a sequence of random variables such that
+Xn+1 ≥ Xn P-a.s.
+Xn → X∞ P-a.s.
+then limn→∞ E[Xn
+] = E[ limn Xn
+]
+Theorem (Dominated convergence)
+Let {Xn
+}
+n∈N be a sequence of random variables, and Y such that
+|Xn| ≤ Y P-a.s. with E[|Y |] < +∞
+Xn → X∞ P-a.s.
+then limn→∞ E[Xn
+] = E[ limn Xn
+]
+Vincent Lecle`re OS - 2 1/12/2021 11 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Measurability of multi-valued function
+Consider a measurable space (Ω, F).
+A function f : Ω → R is F -measurable if f −1(I) ∈ F for all interval
+I of R.
+A multi-function G : Ω ⇒ Rn is F -measurable if
+∀A ⊂ Rnclosed, G−1(A) := {ω ∈ Ω | G(ω) ∩ A 6= ∅} ∈ F .
+A closed valued multi-function G : Ω ⇒ Rn is F-measurable iff
+dx (ω) := dist(x , G(ω)) is F -measurable.
+Theorem (Measurable selection theorem)
+If G : Ω ⇒ Rn is a closed valued measurable multifunction, then there
+exists a measurable selection of G, that is a measurable function
+π : dom(G) ⊂ Ω → Rn such that π(ω) ∈ G(ω) for all ω ∈ dom(G).
+Vincent Lecle`re OS - 2 1/12/2021 12 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Normal integrand
+Assume that F is P-complete.
+Definition (Caratheodory function)
+f : Rn × Ω → R is a Carath ́eodory function if
+f (·, ω) is continuous for a.a. ω ∈ Ω
+f (x , ·) is measurable for all x ∈ Rn
+Definition (Normal integrand)
+f : Rn × Ω → R ̄ is a normal integrand (aka random lowersemicontinuous function) if
+f (·, ω) is lsc for a.a. ω ∈ Ω
+f (·, ·) is measurable
+f is a convex normal integrand if in addition it is convex in x for a.a. ω ∈ Ω.
+A caratheodory function is a special case of normal integrand.
+Vincent Lecle`re OS - 2 1/12/2021 13 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Measurability of minimum and argmin
+Theorem (Measurability of minimum)
+Let f : Rn × Ω → R ̄ be a normal integrand and define
+θ(ω) := inxf f (x , ω) X ∗(ω) := arg min
+x f (x , ω).
+Then, θ and X ∗ are measurable.
+Theorem (Pointwise minimization)
+Let f : Rn × Ω →  ̄R be a normal convex integrand then
+inf
+U∈L0,U∈U E[f (U(ω), ω)] = E[
+inf
+u∈U(ω) f (u, ω)
+]
+Vincent Lecle`re OS - 2 1/12/2021 14 / 26
+
+
+Probability recalls Random function Limit of averages Newsvendor problem
+Continuity and derivation under expectation
+Let f : Rn × Ω be a random function (i.e. measurable in ω for all x ). We say that f is dominated on X if, for all x ∈ X , there exists an integrable random variable Y such that f (x , ·) ≤ Y almost surely. If f is dominated
+on X ⊂ Rn, we define F (x ) := E[f (x , ω)].
+If f is lsc in x and dominated on X , then F is lsc.
+If f is continuous in x and dominated on X , then F is continuous.
+If f is Lispchitz in x , with E[lip(f (·, ω))] < +∞, then F in Lipschitz continous. Moreover if f is differentiable in x , we have
+∇F (x ) = E[∇x f (x , ω)].
+If f is a convex normal integrand, and x0 ∈ int(dom(F )), then
+∂F (x0) = E[∂f (x0, ω)]
+Vincent Lecle`re OS - 2 1/12/2021 15 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Presentation Outline
+1 Probability recalls
+2 Random function
+3 Limit of averages
+4 Newsvendor problem
+Vincent Lecle`re OS - 2 1/12/2021 15 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Strong Law of large number
+We consider a function f : Rn × Ξ → R, and a random variable ξ
+which takes values in Ξ, and define F (x ) := E[f (x , ξ)].
+We consider a sequence of random variables {ξi
+}
+i ∈N .
+We define the average function
+FˆN (x ) := 1
+N
+N ∑
+i =1
+f (x , ξi )
+We say that we have a Law of Large Number (LLN) if,
+∀x ∈ Rn, P(
+linm
+Fˆn(x ) = F (x )
+)
+=1
+The strong LLN state that LLN holds if f (x , ξ) is integrable, and
+{ξi
+}
+i∈N is a iid (with same law as ξ).
+Vincent Lecle`re OS - 2 1/12/2021 16 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Uniform Law of large number
+Having LLN means that, for all ε > 0 (and almost all sample),
+∀x , ∃Nε ∈ N, n ≥ N =⇒ |FˆN (x ) − F (x )| ≤ ε
+We say that we have ULLN if for all ε > 0 (and almost all sample),
+∃Nε ∈ N, ∀x , n ≥ N =⇒ |FˆN (x ) − F (x )| ≤ ε
+or equivalently
+∃N ∈ N n ≥ N =⇒ suxp
+|FˆN (x ) − F (x )| ≤ ε
+Theorem
+If f is a dominated Caratheodory function on X compact and the sample is iid then we have ULLN on X .
+Vincent Lecle`re OS - 2 1/12/2021 17 / 26
+
+
+Probability recalls Random function Limit of averages Newsvendor problem
+Central Limit Theorem
+Theorem
+Let {Xi
+}
+i∈N be a sequence of rv iid, with finite second order moments.
+Then we have
+√n
+(1
+n
+n ∑
+i =1
+Xi
+} {{ }
+Mn
+−E [X ])
+→ N (0, std(X))
+where the convergence is in law.
+Vincent Lecle`re OS - 2 1/12/2021 18 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Monte-Carlo method
+Let {Xi
+}
+i∈N be a sequence of rv iid with finite variance.
+We have P(
+MN ∈
+[E[X ] ± Φ−1(p)std(X)
+√N
+])
+≈p
+In order to estimate the expectation E[X], we can
+sample N independent realizations of X, {Xi
+}
+i ∈J1,N K
+compute the empirical mean MN =
+∑N
+i=1 Xi
+N , and
+standard-deviation sN
+choose an error level p (e.g. 5%) and compute Φ−1(1 − p/2) (1.96)
+and we know that, asymptotically, the expectation E[X] is in
+[
+MN ± Φ−1(p)sN
+√N
+]
+with probability (on the sample) 1 − p
+In the case of bounded independent variable we can use Hoeffding
+P(E[X] ∈ [Mn ± t]
+)
+≥ 2e− 2nt2
+b−a
+Vincent Lecle`re OS - 2 1/12/2021 19 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Presentation Outline
+1 Probability recalls
+2 Random function
+3 Limit of averages
+4 Newsvendor problem
+Vincent Lecle`re OS - 2 1/12/2021 19 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+The (deterministic) newsboy problem
+In the 50’s a boy would buy a stock u of newspapers each morning at a cost c, and sell them all day long for a price p. The number of people interested in buying a paper during the day is d. We assume that 0 < c < p.
+How shall we model this ?
+Control u ∈ R+
+Cost L(u) = cu − p min(u, d)
+Leading to
+muin cu − p min(u, d)
+s.t. u ≥ 0
+Vincent Lecle`re OS - 2 1/12/2021 20 / 26
+
+
+Probability recalls Random function Limit of averages Newsvendor problem
+The (stochastic) newsboy problem
+Demand d is unknown at time of purchasing. We model it as a random variable d with known law. Note that
+the control u ∈ R+ is deterministic
+the cost is a random variable (depending of d ). We choose to minimize its expectation.
+We consider the following problem
+muin E[cu − p min(u, d )]
+s.t. u ≥ 0
+How can we justify the expectation ? By law of large number: the Newsboy is going to sell newspaper again and again. Then optimizing the sum over time of its gains is closely related to optimizing the expected gains.
+Vincent Lecle`re OS - 2 1/12/2021 21 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Solving the stochastic newsboy problem
+For simplicity assume that the demand d has a continuous density f . Define J(u) the expected ”loss” of the newsboy if he bought u newspaper. We have
+J(u) = E[cu − p min(u, d )]
+= (c − p)u − pE[ min(0, d − u)]
+= (c − p)u − p
+∫u
+−∞
+(x − u)f (x )dx
+= (c − p)u − p
+(∫ u
+−∞
+xf (x )dx − u
+∫u
+−∞
+f (x )dx
+)
+Thus,
+J′(u) = (c − p) − p
+(
+uf (u) −
+∫u
+−∞
+f (x )dx − uf (u)
+)
+= c − p + pF (u)
+where F is the cumulative distribution function (cdf) of d . F being non
+decreasing, the optimum control u∗ is such that J′(u∗) = 0, which is
+u∗ ∈ F −1( p − c
+p
+)
+Vincent Lecle`re OS - 2 1/12/2021 22 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Newsvendor problem (continued)
+We assume that the demand can take value {di }i∈J1,nK with probabilities {pi }i∈J1,nK. In this case the stochastic newsvendor problem reads
+muin
+n ∑
+i =1
+pi
+(
+cu − p min(u, di )
+)
+s.t. u ≥ 0
+Vincent Lecle`re OS - 2 1/12/2021 23 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Two-stage newsvendor problem I
+We can represent the newsvendor problem in a 2-stage framework.
+Let u0 be the number of newspaper bought in the morning. first stage control
+let u1 be the number of newspaper sold during the day. second stage control The problem reads
+min
+u0,u1 E[
+cu0 − pu1
+]
+s.t. u0 ≥ 0
+u1 ≤ u0 P − as
+u1 ≤ d P − as
+u1 d
+Vincent Lecle`re OS - 2 1/12/2021 24 / 26
+
+
+Probability recalls Random function Limit of averages Newsvendor problem
+Two-stage newsvendor problem II
+In extensive formulation the problem reads
+min
+u0 ,{u i1 }i ∈J1,nK
+n ∑
+i =1
+pi
+(cu0 − pui1
+)
+s.t. u0 ≥ 0
+ui1 ≤ u0 ∀i ∈ J1, nK
+ui1 ≤ di ∀i ∈ J1, nK
+Note that there are as many second-stage control ui1 as there are
+possible realization of the demand d , but only one first-stage control u0.
+Vincent Lecle`re OS - 2 1/12/2021 25 / 26
+Probability recalls Random function Limit of averages Newsvendor problem
+Practical work
+Using julia we are going to model and work around the Newsvendor problem
+Download the files at https://github.com/leclere/TP-Saclay
+Start working on the ”Newsvendor Problem” up to question 3.
+Vincent Lecle`re OS - 2 1/12/2021 26 / 26
+
+
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Two-stage stochastic program
+V. Lecl`ere
+December 8 2021
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 1 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Presentation Outline
+1 Optimization under uncertainty Some considerations on dealing with uncertainty Evaluating a solution
+2 Stochastic Programming Approach One-stage Problems Two-stage Problems Recourse assumptions
+3 Information and discretization Information Frameworks Sample Average Approximation
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 1 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Some considerations on dealing with uncertainty
+Presentation Outline
+1 Optimization under uncertainty Some considerations on dealing with uncertainty Evaluating a solution
+2 Stochastic Programming Approach One-stage Problems Two-stage Problems Recourse assumptions
+3 Information and discretization Information Frameworks Sample Average Approximation
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 1 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Some considerations on dealing with uncertainty
+A standard optimization problem
+mui0n L(u0)
+s.t. g (u0) ≤ 0
+where
+u0 is the control, or decision.
+L is the cost or objective function.
+g(u0) ≤ 0 represent the constraint(s).
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 2 / 43
+
+
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Some considerations on dealing with uncertainty
+The (deterministic) newsboy problem
+In the 50’s a boy would buy a stock u of newspapers each morning at a cost c, and sell them all day long for a price p. The number of people interested in buying a paper during the day is d. We assume that 0 < c < p.
+How shall we model this ?
+Control u ∈ R+
+Cost L(u) = cu − p min(u, d)
+Leading to
+muin cu − p min(u, d)
+s.t. u ≥ 0
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 3 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Some considerations on dealing with uncertainty
+An optimization problem with uncertainty
+Adding uncertainty ξ in the mix
+mui0n L(u0, ξ)
+s.t. g (u0, ξ) ≤ 0
+Remarks: ξ is unknown. Two main ways of modelling it: ξ ∈ Ξ with a known uncertainty set Ξ, and a pessimistic approach. This is the robust optimization approach (RO). ξ is a random variable with known probability law. This is the Stochastic Programming approach (SP). Cost is not well defined. RO : maxξ∈Ξ L(u, ξ).
+SP : E[L(u, ξ)].
+Constraints are not well defined. RO : g(u, ξ) ≤ 0, ∀ξ ∈ Ξ.
+SP : g(u, ξ) ≤ 0, P − a.s..
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 4 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Some considerations on dealing with uncertainty
+The (stochastic) newsboy problem
+Demand d is unknown at time of purchasing. We model it as a random variable d with known law. Note that
+the control u ∈ R+ is deterministic
+the cost is a random variable (depending of d ). We choose to minimize its expectation.
+We consider the following problem
+muin E[cu − p min(u, d )]
+s.t. u ≥ 0
+How can we justify the expectation ? By law of large number: the Newsboy is going to sell newspaper again and again. Then optimizing the sum over time of its gains is closely related to optimizing the expected gains.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 5 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Some considerations on dealing with uncertainty
+Solving the stochastic newsboy problem
+For simplicity assume that the demand d has a continuous density f . Define J(u) the expected ”loss” of the newsboy if he bought u newspaper. We have
+J(u) = E[cu − p min(u, d )]
+= (c − p)u − pE[ min(0, d − u)]
+= (c − p)u − p
+∫u
+−∞
+(x − u)f (x )dx
+= (c − p)u − p
+(∫ u
+−∞
+xf (x )dx − u
+∫u
+−∞
+f (x )dx
+)
+Thus,
+J′(u) = (c − p) − p
+(
+uf (u) −
+∫u
+−∞
+f (x )dx − uf (u)
+)
+= c − p + pF (u)
+where F is the cumulative distribution function (cdf) of d . F being non
+decreasing, the optimum control u∗ is such that J′(u∗) = 0, which is
+u∗ ∈ F −1( p − c
+p
+)
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 6 / 43
+
+
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Some considerations on dealing with uncertainty
+The robust newsboy problem
+Demand d is unknown at time of purchasing. We assume that it will be in the set [d, d]. The robust problem consist in solving
+muin max
+d∈[d,d] cu − p min(u, d )
+s.t. u ≥ 0
+By monotonicity it is equivalent to
+muin cu − p min(u, d)
+s.t. u ≥ 0
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 7 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Some considerations on dealing with uncertainty
+Alternative cost functions I
+When the cost L(u, ξ) is random it might be natural to want
+to minimize its expectation E[L(u, ξ)].
+This is even justified if the same problem is solved a large number of time (Law of Large Number).
+In some cases the expectation is not really representative of your risk attitude. Lets consider two examples: Are you ready to pay $1000 to have one chance over ten to win $10000 ? You need to be at the airport in 1 hour or you miss your flight, you have the choice between two mean of transport, one of them take surely 50’, the other take 40’ four times out of five, and 70’ one time out of five.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 8 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Some considerations on dealing with uncertainty
+Alternative cost functions II
+Here are some cost functions you might consider
+Probability of reaching a given level of cost : P(L(u, ξ) ≤ 0)
+Value-at-Risk of costs V @Rα(L(u, ξ)), where for any real valued random variable X,
+V @Rα(X) := inf
+t ∈R
+{P(X ≥ t) ≤ α
+} .
+In other word there is only a probability of α of obtaining a cost worse than V @Rα(X).
+Average Value-at-Risk of costs AV @Rα(L(u, ξ)), which is the expected cost over the α worst outcomes.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 9 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Some considerations on dealing with uncertainty
+Alternative constraints I
+The natural extension of the deterministic constraint g(u, ξ) ≤ 0 to g(u, ξ) ≤ 0 P − as can be extremely conservative, and even often without any admissible solutions.
+For example, if u is a level of production that need to be greater than the demand. In a deterministic setting the realized demand is equal to the forecast. In a stochastic setting we add an error to the forecast. If the error is unbouded (e.g. Gaussian) no control u is admissible.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 10 / 43
+
+
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Some considerations on dealing with uncertainty
+Alternative constraints II
+Here are a few possible constraints
+E[g(u, ξ)] ≤ 0, for quality of service like constraint.
+P(g(u, ξ) ≤ 0) ≥ 1 − α for chance constraint. Chance constraint is easy to present, but might lead to misconception as nothing is said on the event where the constraint is not satisfied.
+AV @Rα(g (u, ξ)) ≤ 0
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 11 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Evaluating a solution
+Presentation Outline
+1 Optimization under uncertainty Some considerations on dealing with uncertainty Evaluating a solution
+2 Stochastic Programming Approach One-stage Problems Two-stage Problems Recourse assumptions
+3 Information and discretization Information Frameworks Sample Average Approximation
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 11 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Evaluating a solution
+Computing expectation
+Computing an expectation E[L(u, ξ)] for a given u is costly.
+If ξ is a r.v. with known law admitting a density, E[L(u, ξ)] is a (multidimensional) integral.
+If ξ is a r.v. with known discrete law, E[L(u, ξ)] is a sum over all possible realizations of ξ, which can be huge. If ξ is a r.v. that can be simulated but with unknown law,
+E[L(u, ξ)] cannot be computed exactly. Solution : use Law of Large Number (LLN) and Central Limit Theorem (CLT). Draw N ' 1000 realization of ξ.
+Compute the sample average 1
+N
+∑sN=1 L(u, ξs ).
+Use CLT to give an asymptotic confidence interval of the expectation. This is known as the Monte-Carlo method.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 12 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Evaluating a solution
+Consequence : evaluating a solution is difficult
+In stochastic optimization even evaluating the value of a solution can be difficult an require approximate methods.
+The same holds true for checking admissibility of a candidate solution.
+It is even more difficult to obtain first order informations (gradient).
+Standard solution : sampling and solving the sampled problem (Sample Average Approximation).
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 13 / 43
+
+
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Evaluating a solution
+Recall on CLT
+Let {Ci }i∈N be a sequence of identically distributed random variables with finite variance. Then the Central Limit Theorem ensures that
+√N
+( ∑iN=1 C i
+N − E[C1]
+)
+=⇒ G ∼ N (0, Var [C 1]) ,
+where the convergence is in law. In practice it is often used in the following way. Asymptotically,
+P(E[C1
+]∈
+[C ̄ N − 1.96σN
+√N , C ̄ N + 1.96σN
+√N
+])
+' 95% ,
+where C ̄ N =
+∑N
+i=1 C i
+N is the empirical mean and
+σN =
+√ ∑N
+i=1(C i −C ̄ N )2
+N−1 the empirical standard deviation.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 14 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Evaluating a solution
+Optimization problem and simulator
+Generally speaking stochastic optimization problem are not well posed and often need to be approximated before solving them.
+Good practice consists in defining a simulator, i.e. a representation of the “real problem” on which solution can be tested.
+Then find a candidate solution by solving an (or multiple) approximated problem.
+Finally evaluate the candidate solutions on the simulator. The comparison can be done on more than one dimension (e.g. constraints, risk...)
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 15 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Evaluating a solution
+Conclusion
+When addressing an optimization problem under uncertain one has to consider carefully
+How to model uncertainty ? (random variable or uncertainty set)
+How to represent your attitude toward risk ? (expectation, probability level,...)
+How to include constraints ?
+What is your information stucture ? (More on that later)
+Set up a simulator and evaluate your solutions.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 16 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+One-stage Problems
+Presentation Outline
+1 Optimization under uncertainty Some considerations on dealing with uncertainty Evaluating a solution
+2 Stochastic Programming Approach One-stage Problems Two-stage Problems Recourse assumptions
+3 Information and discretization Information Frameworks Sample Average Approximation
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 16 / 43
+
+
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+One-stage Problems
+One-Stage Problems
+Assume that ξ has a discrete distribution 1 , with
+P(ξ = ξs
+) = πs > 0 for s ∈ J1, SK. Then, the one-stage problem
+mui0n E[
+L(u0, ξ)
+]
+s.t. g (u0, ξ) ≤ 0, P − a.s
+can be written
+mui0n
+S ∑
+s =1
+πs L(u0, ξs )
+s.t g (u0, ξs ) ≤ 0, ∀s ∈ J1, SK.
+1If the distribution is continuous we can sample and work on the sampled distribution, this is called the Sample Average Approximation approach with lots of guarantee and results
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 17 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+One-stage Problems
+Newsvendor problem (continued)
+We assume that the demand can take value {ds }s∈J1,SK with
+probabilities {πs }s∈J1,SK. In this case the stochastic newsvendor problem reads
+muin
+S ∑
+s =1
+πs (
+cu − p min(u, ds )
+)
+s.t. u ≥ 0
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 18 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Two-stage Problems
+Presentation Outline
+1 Optimization under uncertainty Some considerations on dealing with uncertainty Evaluating a solution
+2 Stochastic Programming Approach One-stage Problems Two-stage Problems Recourse assumptions
+3 Information and discretization Information Frameworks Sample Average Approximation
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 18 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Two-stage Problems
+Recourse Variable
+In most problem we can make a correction u1 once the uncertainty is known:
+u0 ξ1 u1.
+As the recourse control u1 is a function of ξ it is a random variable. The two-stage optimization problem then reads
+min
+u0,u1 E[
+L(u0, ξ, u1)
+]
+s.t. g (u0, ξ, u1) ≤ 0, P − a.s
+u1 ξ
+u0 is called a first stage control u1 is called a second stage (or recourse) control
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 19 / 43
+
+
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Two-stage Problems
+Two-stage Problem
+The extensive formulation of
+min
+u0,u1 E[
+L(u0, ξ, u1)
+]
+s.t. g (u0, ξ, u1) ≤ 0, P − a.s
+u1 ξ
+is
+min
+u0 ,{u s1 }s ∈J1,S K
+S ∑
+s =1
+ps L(u0, ξs , us1)
+s.t g (u0, ξs , us1) ≤ 0, ∀s ∈ J1, SK.
+It is a deterministic problem that can be solved with standard tools or specific methods.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 20 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Two-stage Problems
+Two-stage newsvendor problem I
+We can represent the newsvendor problem in a 2-stage framework.
+Let u0 be the number of newspaper bought in the morning. first stage control
+let u1 be the number of newspaper sold during the day. second stage control The problem reads
+min
+u0,u1 E[
+cu0 − pu1
+]
+s.t. u0 ≥ 0
+u1 ≤ u0 P − as
+u1 ≤ d P − as
+u1 d
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 21 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Two-stage Problems
+Two-stage newsvendor problem II
+In extensive formulation the problem reads
+min
+u0 ,{u s1 }s ∈J1,S K
+S ∑
+s =1
+πs (cu0 − pus1
+)
+s.t. u0 ≥ 0
+us1 ≤ u0 ∀s ∈ J1, SK
+us1 ≤ ds ∀s ∈ J1, SK
+Note that there are as many second-stage control us1 as there are
+possible realization of the demand d , but only one first-stage control u0.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 22 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Recourse assumptions
+Presentation Outline
+1 Optimization under uncertainty Some considerations on dealing with uncertainty Evaluating a solution
+2 Stochastic Programming Approach One-stage Problems Two-stage Problems Recourse assumptions
+3 Information and discretization Information Frameworks Sample Average Approximation
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 22 / 43
+
+
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Recourse assumptions
+Time decomposition of the problem
+We presented the generic two-stage problem as
+min
+u0,u1 E[
+L(u0, ξ, u1)
+]
+s.t. g (u0, ξ, u1) ≤ 0, P − a.s u1 ξ
+With L(u0, ξ, u1) = L0(u0) + L1(u0, ξ, u1), it can also be written as
+mui0n
+L0(u0) + E[Q ̃ (u0, ξ)
+]
+first stage problem
+s.t. g0(u0) ≤ 0
+where
+Q ̃ (u0, ξ) := mui1n
+L1(u0, ξ, u1) second stage problem
+s.t. g1(u0, ξ, u1) ≤ 0
+The reformulation always exists, but is not unique
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 23 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Recourse assumptions
+Admissible set
+For a given decomposition, we set
+U0 :={u0 ∈ Rn0 | g0(u0) ≤ 0}
+U ̃1(u0, ξ) :={u1 ∈ Rn1 | g1(u0, ξ, u1) ≤ 0}
+Note that
+U ̃1(u0, ξ) is the set of admissible solutions of the second stage problem
+U0 contains the set of admissible solutions of the first stage problem
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 24 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Recourse assumptions
+We say that we are in a complete recourse framework, if for all u0 ∈ U0, and almost-all possible outcome ξ, every control u1 is admissible, i.e.,
+P(U ̃1(u0, ξ) = Rn1 ) = 1, ∀u0 ∈ U0.
+We say that we are in a relatively complete recourse framework, if for all u0 ∈ U0, and almost-all possible outcome ξ, there exists a control u1 that is admissible, i.e.,
+P(U ̃1(u0, ξ) 6= ∅) = 1, ∀u0 ∈ U0.
+We say that we are in an extended relatively complete recourse framework, if there exists ε > 0 such that, for all u0 ∈ U0 + εB, and almost-all possible outcome ξ, there exists a control u1 that is admissible, i.e.,
+P(U ̃1(u0, ξ) 6= ∅) = 1, ∀u0 ∈ U0 + εB.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 25 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Recourse assumptions
+Obtaining relatively complete recourse
+Assume that the two-stage program is given by
+min
+u0 ∈U0
+{
+L0(u0)+E[Q ̃ (u0, ξ)]}
+and Q ̃ (u0, ξ) := min
+u1 ∈U ̃1 (u0 ,ξ)
+L1(u0, ξ, u1)
+with finite value, but not necessarily relatively complete recourse. Then the program is equivalent to
+min
+u0 ∈U0 ∩U i0nd
+{
+L0(u0)+E[Q ̃ (u0, ξ)]}
+and Q ̃ (u0, ξ) := min
+u1 ∈U ̃1 (u0 ,ξ)
+L1(u0, ξ, u1)
+where Ui0nd is the set of induced constraints given by
+U i0nd =
+{
+u0 ∈ Rn0 | P(U ̃1(u0, ξ) 6= ∅) = 1
+} ,
+and with this formulation we are in a relatively complete recourse framework.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 26 / 43
+
+
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Information Frameworks
+Presentation Outline
+1 Optimization under uncertainty Some considerations on dealing with uncertainty Evaluating a solution
+2 Stochastic Programming Approach One-stage Problems Two-stage Problems Recourse assumptions
+3 Information and discretization Information Frameworks Sample Average Approximation
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 26 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Information Frameworks
+Two-stage framework : three information models
+Consider the problem
+min
+u0,u1 E[L(u0, ξ, u1)]
+Open-Loop case : u0 and u1 are deterministic. In this case both controls are choosen without any knowledge of the alea ξ. The set of control is small, and an optimal control can be found through specific method (e.g. Stochastic Gradient). Two-Stage case : u0 is deterministic and u1 is measurable with respect to ξ. This is the problem tackled by the Stochastic Programming case. Anticipative case : u0 and u1 are measurable with respect to ξ. This case consists in solving one deterministic problem per possible outcome of the alea, and taking the expectation of the value of this problems.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 27 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Information Frameworks
+Splitted formulation
+The extended formulation (in a compact way)
+min
+u0 ,{u s1 }s ∈J1,S K
+S ∑
+s =1
+πs L(u0, ξs , us1)
+s.t g (u0, ξs , us1) ≤ 0, ∀s ∈ J1, SK.
+Can be written in a splitted formulation
+min
+u ̄0 ,u s0 ,{u s1 }s ∈J1,S K
+S ∑
+s =1
+πs L(us0, ξs , us1)
+s.t g (us0, ξs , us1) ≤ 0, ∀s ∈ J1, SK
+us0 = us′
+0 ∀s, s′
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 28 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Information Frameworks
+Splitted formulation
+The extended formulation (in a compact way)
+min
+u0 ,{u s1 }s ∈J1,S K
+S ∑
+s =1
+πs L(u0, ξs , us1)
+s.t g (u0, ξs , us1) ≤ 0, ∀s ∈ J1, SK.
+Can be written in a splitted formulation
+min
+u ̄0 ,u s0 ,{u s1 }s ∈J1,S K
+S ∑
+s =1
+πs L(us0, ξs , us1)
+s.t g (us0, ξs , us1) ≤ 0, ∀s ∈ J1, SK
+us0 = ∑
+s′
+πs′ us′
+0 ∀s
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 28 / 43
+
+
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Information Frameworks
+Information models for the Newsvendor I
+Open-loop :
+min
+u0,u1
+S ∑
+s =1
+πs (cu0 − pu1
+)
+s.t. u0 ≥ 0
+u1 ≤ u0
+u1 ≤ ds ∀s ∈ J1, SK
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 29 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Information Frameworks
+Information models for the Newsvendor II
+Two-stage :
+min
+u0 ,{u s1 }s ∈J1,S K
+S ∑
+s =1
+πs (cu0 − pus1
+)
+s.t. u0 ≥ 0
+us1 ≤ u0 ∀s ∈ J1, SK
+us1 ≤ ds ∀s ∈ J1, SK
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 30 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Information Frameworks
+Information models for the Newsvendor III
+Anticipative :
+min
+{u s0 ,u s1 }s ∈J1,S K
+S ∑
+s =1
+πs (cus0 − pus1
+)
+s.t. us0 ≥ 0 ∀s ∈ J1, SK
+us1 ≤ u0 ∀s ∈ J1, SK
+us1 ≤ ds ∀s ∈ J1, SK
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 31 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Information Frameworks
+Comparing the information models
+The three information models can be written this way :
+min
+{u s0 ,u s1 }s ∈J1,S K
+S ∑
+s =1
+πs (cus0 − pus1
+)
+s.t. us0 ≥ 0 ∀s ∈ J1, SK
+us1 ≤ u0 ∀i ∈ J1, SK
+us1 ≤ ds ∀i ∈ J1, sK
+us0 = us′
+0 ∀s, s′
+us1 = us′
+1 ∀s, s′
+Hence, by simple comparison of constraints we have
+V anticipative ≤ V 2−stage ≤ V OL.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 32 / 43
+
+
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Information Frameworks
+Value of information
+The Expected Value of Perfect Information (EVPI) is defined as
+EVPI = v 2−stage − v anticipative ≥ 0.
+Its the maximum amount of money you can gain by getting more information (e.g. incorporating better statistical model in your problem)
+The Value of Stochastic Solution is defined as
+VSS = v OL − v 2−stage ≥ 0.
+The expected value problem is the value of the deterministic problem where the randomness is replaced by its expectation
+v EV = min
+u0 ,u1
+L(u0, E[ξ], u1).
+If (u0EV , u1EV ) is the solution of the EV problem, then
+E[L(u0EV , ξ, u1EV )], is known as Expected Value of Expected Value
+problem v EEV .
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 33 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Information Frameworks
+Comparison and convexity
+Without assumption we have
+v EEV ≥ v OL ≥ v 2−stage ≥ v anticipative
+If additionally L is jointly convex we have
+v anticipative = E[
+L(uξ
+0 , ξ, uξ
+1)
+]
+≥ L(E[uξ
+0
+], E[ξ], E[uξ
+1 )]
+≥ L(u0EV , E[ξ], u1EV ) = v EV
+Hence, under convexity we have,
+v EEV ≥ v OL ≥ v 2−stage ≥ v anticipative ≥ v EV
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 34 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Information Frameworks
+Solving the problems
+The solution of v EEV is easy to find (one deterministic problem), and its value is obtained by Monte-Carlo.
+v OL can be approximated through specific methods (e.g. SG).
+v 2−stage is obtained through Stochastic Programming specific methods. There are two main approaches:
+Lagrangian decomposition methods (like Progressive-Hedging algorithm). Benders decomposition methods (like L-shaped or nested-decomposition methods).
+v anticipative is difficult to compute exactly but can be estimated through Monte-Carlo approach by drawing a reasonable number of realizations of ξ, solving the deterministic problem for each realization ξi and taking the means of the value of the deterministic problem.
+v EV is easy to compute, but is usefull only in the convex case.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 35 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Sample Average Approximation
+Presentation Outline
+1 Optimization under uncertainty Some considerations on dealing with uncertainty Evaluating a solution
+2 Stochastic Programming Approach One-stage Problems Two-stage Problems Recourse assumptions
+3 Information and discretization Information Frameworks Sample Average Approximation
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 35 / 43
+
+
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Sample Average Approximation
+How to deal with continuous distributions ?
+Recall that if ξ as finite support we rewrite the 2-stage problem
+min
+u0,u1 E[
+L(u0, ξ, u1)
+]
+s.t. g (u0, ξ, u1) ≤ 0, P − a.s
+as
+min
+u0 ,{u s1 }s ∈J1,S K
+S ∑
+s =1
+πs L(u0, ξs , us1)
+s.t g (u0, ξs , us1) ≤ 0, ∀s ∈ J1, SK.
+If we consider a continuous distribution (e.g. a Gaussian), we would need an infinite number of recourse variables to obtain an extensive formulation.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 36 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Sample Average Approximation
+Simplest idea: sample ξ
+First consider the one-stage problem
+min
+u∈U E[L(u, ξ)] (P)
+Draw a sample (ξ1, . . . , ξN ) (in a i.i.d setting with law ξ).
+Consider the empirical probability ˆPN = 1
+N
+∑iN=1 δξi .
+Replace P by ˆPN to obtain a finite-dimensional problem that can be solved. This means solving
+min
+u∈U
+1 N
+N ∑
+i =1
+L(u, ξi ) (PN )
+We denote by vˆN (resp. v ∗) the value of (PN ) (resp. (P)),
+and Sn the set of optimal solutions (resp. S∗).
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 37 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Sample Average Approximation
+Biased estimator
+Generically speaking the estimators of the minimum are biased
+E[vˆN
+] ≤ E[vˆN+1
+] ≤ v∗
+proof : Let (ξi )i∈N be a sequence of iid copies of ξ
+Set J(u) := E[L(u, ξ)], JN (u) := 1
+N
+∑iN=1 L(u, ξi )
+We have, for every u′ ∈ U, JN (u′) ≥ infu∈U JN (u). Taking the expectation yields,
+J(u′) = E[
+JN (u′)
+]
+≥ E[
+inf
+u∈U JN (u)
+]
+= E[vˆN
+].
+We now take the infimum over u′ ∈ U, to obtain
+v ∗ = inf
+u′∈U J (u′) ≥ E[vˆN
+].
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 38 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Sample Average Approximation
+Decreasing bias
+We now show that the bias is monotonically decreasing. Notice that
+JN+1(u) = 1
+N +1
+N +1
+∑
+i =1
+[1
+N
+∑
+j 6=i
+L(u, ξj )
+] .
+Hence,
+E[vˆN+1
+] = E[
+ui∈nfU JN+1(u)
+]
+=E
+[
+ui∈nfU
+1
+N +1
+N +1
+∑
+i =1
+[1
+N
+∑
+j 6=i
+L(u, ξj )
+]]
+≥E
+[1
+N +1
+N +1
+∑
+i =1
+inf
+ui ∈U
+[1
+N
+∑
+j 6=i
+L(ui , ξj )
+]]
+=1
+N +1
+N +1
+∑
+i =1
+E
+[
+inf
+ui ∈U
+[1
+N
+∑
+j 6=i
+L(ui , ξj )
+]]
+=1
+N +1
+N +1
+∑
+i =1
+E[vˆN
+] = E[vˆN
+]
+which ends the proof.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 39 / 43
+
+
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Sample Average Approximation
+Consistency of estimator
+Definition
+Let {f N
+}
+N∈N be a sequence of random functions mapping X into
+R. We say that f N converges almost surely toward f : X 7→ R uniformly on X , if
+∀ε > 0, ∃N ∈ N, ∀n ≥ N, P(
+sup
+x ∈X
+|f n(x ) − f (x )| ≤ ε
+)
+= 1.
+Theorem (Consistency of SAA)
+If JN+1 converges almost surely toward J uniformly on U, then vˆN
+converges almost surely toward v ].
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 40 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Sample Average Approximation
+Theorem (Convergence in the compact case)
+Assume that
+1 U is compact non empty,
+2 JN converges uniformly on U toward J,
+3 U]
+N in non-empty,
+4 J is continuous on U.
+Then,
+v]
+N → v ] PN -a.s.,
+D(U]n, U]) → 0 PN -a.s.
+1 can be relaxed in a compact set containing optimal solution 2 usually comes from the uniform law of large number
+3 can be obtained if JN is lower semi-continuous with some non-empty but uniformly bounded level set 4 often rely on a domination theorem.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 41 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Sample Average Approximation
+Theorem (Convergence in the convex case)
+Assume that
+1 j is a.s. convex l.s.c.
+2 U is closed convex
+3 J is l.s.c, and there exists u ∈ U such that a neighboorhoud of u is contained in dom(J)
+4 S 6= ∅ is bounded
+5 the LLN holds
+Then,
+v]
+N → v ] PN -a.s.,
+D(U]n, U]) → 0 PN -a.s.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 42 / 43
+Optimization under uncertainty Stochastic Programming Approach Information and discretization
+Sample Average Approximation
+Theorem (Convergence speed)
+Assume that,
+E[j(u, ξ)2] < ∞,
+u 7→ j(u, ξ) is Lipschitz-continuous with constant L(ξ) with
+E[L(ξ)2] < ∞,
+U is compact, U] = {u]}.
+Then,
+v]
+N = JN (u]) + o( √1N ),
+√N (v ]
+N − v ]) ⇒ N (0, σ2(u])),
+where σ2(u) := E[(j(u, ξ) − E[j(u, ξ)])2]
+.
+The unicity of solution assumption can be relaxed. Good reference for precise results : Lectures on Stochastic Programming (Dentcheva, Ruszczynski, Shapiro) chap. 5.
+Vincent Lecle`re Two-stage stochastic program 08/12/2021 43 / 43
+
+
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Stochastic Dynamic Programming Bellman Operators
+V. Lecle`re
+December 15, 2021
+V. Lecle`re Dynamic Programming 15/12/2020 1 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Contents
+1 Multistage stochastic programming From two-stage to multistage programming Information structure Bounds and heuristics
+2 Dynamic Programming Stochastic optimal control problem Dynamic Programming principle Bellman Operators
+3 Practical aspects of Dynamic Programming Curses of dimensionality Numerical techniques
+V. Lecle`re Dynamic Programming 15/12/2020 2 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Contents
+1 Multistage stochastic programming From two-stage to multistage programming Information structure Bounds and heuristics
+2 Dynamic Programming Stochastic optimal control problem Dynamic Programming principle Bellman Operators
+3 Practical aspects of Dynamic Programming Curses of dimensionality Numerical techniques
+V. Lecle`re Dynamic Programming 15/12/2020 2 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Where do we come from: two-stage programming
+u0
+(ξ11, p1)
+u1,1
+(ξ12, p2)
+u1,2
+(ξ13, p3)
+u1,3
+(ξ14, p4)
+u1,4
+(ξ15, p5) u1,5
+(ξ16, p6) u1,6
+(ξ17, p7)
+u1,7
+(ξ18, p8)
+u1,8 We take decisions in two stages
+u0 ; ξ1 ; u1 ,
+with u1: recourse decision .
+On a tree, it resumes to solve the extensive formulation:
+min
+u0 ,u1,s
+∑
+s ∈S
+πs [〈cs , u0
+〉 + 〈ps , u1,s
+〉] .
+We have as many u1,s as scenarios!
+V. Lecle`re Dynamic Programming 15/12/2020 3 / 41
+
+
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Extending two-stage to multistage programming
+u0
+(ξ11, π1)
+u11
+u1,1
+2
+u1,2
+2
+u1,3
+2
+u1,4
+2
+(ξ12, π2)u12
+u2,1
+2
+u2,2
+2
+u2,3
+2
+u2,4
+2
+(ξ13, π3)u13
+u3,1
+2
+u3,2
+2
+u3,3
+2
+u3,4
+2
+(ξ14, π4)
+u14
+u4,1
+2
+u4,2
+2
+u4,3
+2
+u4,4
+2 muin E(j(u, ξ))
+U = (u0, · · · , UT )
+ξ = (ξ1, · · · , ξT )
+We take decisions in T stages
+ξ0 ; u0 ; ξ1 ; u1 ; · · · ; ξT ; uT .
+V. Lecle`re Dynamic Programming 15/12/2020 4 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Multistage extensive formulation approach
+u0
+(ξ11, π1)
+u11
+u1,1
+2
+u1,2
+2
+u1,3
+2
+u1,4
+2
+(ξ12, π2)u12
+u2,1
+2
+u2,2
+2
+u2,3
+2
+u2,4
+2
+(ξ13, π3)u13
+u3,1
+2
+u3,2
+2
+u3,3
+2
+u3,4
+2
+(ξ14, π4)
+u14
+u4,1
+2
+u4,2
+2
+u4,3
+2
+u4,4
+2
+Assume that ξt ∈ Rnξ can take nξ values
+and that Ut (x) ⊂ Rnu .
+Then, considering the extensive formulation approach, we have
+nξT scenarios.
+(nT +1
+ξ − 1)/(nξ − 1) nodes in the tree.
+Number of variables in the optimization problem is roughly nu × (nT +1
+ξ − 1)/(nξ − 1) ≈ nunξT .
+The complexity grows exponentially with the number of stage. :-( A way to overcome this issue is to compress information!
+V. Lecle`re Dynamic Programming 15/12/2020 5 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Illustrating extensive formulation with the damsvalley example
+Gnioure Izourt Soulcem
+Auzat
+Sabart
+5 interconnected dams
+5 controls per timesteps
+52 timesteps (one per week, over one year)
+nξ = 10 noises for each timestep
+We obtain 1052 scenarios, and ≈ 5.1052 constraints in the extensive formulation ... Estimated storage capacity of the Internet: 1024 bytes.
+V. Lecle`re Dynamic Programming 15/12/2020 6 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Contents
+1 Multistage stochastic programming From two-stage to multistage programming Information structure Bounds and heuristics
+2 Dynamic Programming Stochastic optimal control problem Dynamic Programming principle Bellman Operators
+3 Practical aspects of Dynamic Programming Curses of dimensionality Numerical techniques
+V. Lecle`re Dynamic Programming 15/12/2020 6 / 41
+
+
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Optimization Problem
+We want to solve the following optimization problem
+min E[ T −1
+∑
+t =0
+Lt
+(x t , ut , ξt+1
+) + K (xT
+)]
+(1a)
+s.t. x t+1 = ft (x t , ut , ξt+1), x 0 = ξ0 (1b)
+ut ∈ Ut (x t ) (1c)
+σ(ut ) ⊂ Ft := σ(ξ0, · · · , ξt
+) (1d)
+Where
+constraint (1b) is the dynamic of the system ;
+constraint (1c) refer to the constraint on the controls;
+constraint (1d) is the information constraint : ut is choosen knowing the realisation of the noises ξ0, . . . , ξt but without knowing the realisation of the noises ξt+1, . . . , ξT −1.
+V. Lecle`re Dynamic Programming 15/12/2020 7 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Information structure I
+In Problem (1), constraint (1d) is the information constraint. There are different possible information structure.
+If constraint (1d) reads σ(ut) ⊂ F0, the problem is open-loop, as the controls are choosen without knowledge of the realisation of any noise.
+If constraint (1d) reads σ(ut) ⊂ Ft, the problem is said to be
+in decision-hazard structure as decision ut is chosen without knowing ξt+1.
+If constraint (1d) reads σ(ut) ⊂ Ft+1, the problem is said to
+be in hazard-decision structure as decision ut is chosen with
+knowledge of ξt+1 (in which case we have ut ∈ Ut (xt , ξt+1))
+If constraint (1d) reads σ(ut) ⊂ FT−1, the problem is said to
+be anticipative as decision ut is chosen with knowledge of all the noises.
+V. Lecle`re Dynamic Programming 15/12/2020 8 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Information structure II
+Be careful when modeling your information structure:
+Open-loop information structure might happen in practice (you have to decide on a planning and stick to it). If the problem does not require an open-loop solution then it might be largely suboptimal (imagine driving a car eyes closed...). In any case it yields an upper-bound of the problem.
+In some cases decision-hazard and hazard-decision are both approximation of the reality. Hazard-decision yield a lower value then decision-hazard.
+Anticipative structure is never an accurate modelization of the reality. However it can yield a lower-bound of your optimization problem relying on deterministic optimization and Monte-Carlo.
+We are going to assume Hazard-Decision structure
+V. Lecle`re Dynamic Programming 15/12/2020 9 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Contents
+1 Multistage stochastic programming From two-stage to multistage programming Information structure Bounds and heuristics
+2 Dynamic Programming Stochastic optimal control problem Dynamic Programming principle Bellman Operators
+3 Practical aspects of Dynamic Programming Curses of dimensionality Numerical techniques
+V. Lecle`re Dynamic Programming 15/12/2020 9 / 41
+
+
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Bounds and heuristics
+Due to the size of the extensive formulation of multistage programm we cannot hope to numerically solve them without further assumptions on the problem. However, there are a few ideas we can use to get heuristics policies (that is non-optimal but ”reasonable” solution), and thus upper bounds (estimated by Monte Carlo) lower bounds to guarantee quality of heuristics We can get these through: deterministic approximation two-stage approximations linear decision rules ...
+V. Lecle`re Dynamic Programming 15/12/2020 10 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Anticipative lower bound
+If we relax the measurability constraint by assuming that ut is measurable w.r.t σ(ξ0, . . . , ξT ), that is knows the whole scenario we get the anticipative solution :
+E[
+muin
+T ∑
+t =0
+Lt (x t , ut , ξt+1) + K (xT )
+]
+This can be computed by solving |Ω| deterministic optimization problems.
+As |Ω| is often too large, this lower bound is estimated by Monte-Carlo : draw N scenarios (e.g. N = 1000) solve each deterministic problem average their value to estimate the lower bound
+V. Lecle`re Dynamic Programming 15/12/2020 11 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Deterministic heuristic
+A natural heuristic consists in looking for a deterministic solution (we stick to the plan).
+The first heuristic consists in simply replacing ξt+1 by an
+estimation (often its expectation E[ξt+1]), and solve a deterministic problem.
+A more advanced heuristic consists in looking for optimal open-loop solution (e.g. by using Stochastic Gradient algorithms).
+V. Lecle`re Dynamic Programming 15/12/2020 12 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Model Predictive Control
+A very classical heuristic, often very efficient if the stochasticity is not too important is the so-called Model Predictive Control (MPC). MPC works in the following way : at time t0, being in x0, solve the deterministic problem
+min
+T −1
+∑
+t =t0
+Lt
+(xt , ut , ξˆt+1
+) + K (xT
+)
+s.t. xt+1 = ft (xt , ut , ξˆt+1), xt0 = x0
+ut ∈ Ut (xt )
+where ξˆt is your best estimate of ξt (its expectation by default) apply ut0 and get xt0+1 update your estimation of ξ, set x0 = xt0+1 and t0 = t0 + 1
+V. Lecle`re Dynamic Programming 15/12/2020 13 / 41
+
+
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Two-stage lower-bound
+We can refine the anticipative lower bound by relaxing all measurability constraint except the one on u0.
+We thus obtain a two-stage programm u0 being the first stage control, and all the other ut knowing the whole scenario are second-stage variable.
+We thus have a 2-stage program with |Ω| second stage (vector) variables whose value is a lower-bound to the original problem. This value can be approximated by SAA : draw N scenarios write a 2-stage programm with these scenarios, with u0 as first stage control and (u1, . . . , uT−1) as recourse its value is an estimation of the 2-stage lower-bound
+V. Lecle`re Dynamic Programming 15/12/2020 14 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+2-stage repeated heuristic
+We can adapt the MPC approach by solving two-stage programm instead of deterministic one. The procedure goes as follows: at time t0 in stage x0, draw N scenarios approximate the problem on [t0, T ] by a two-stage programm with ut0 as first stage variable, and (ut0+1, . . . , uT−1) as recourse apply ut0 and get xt0+1 set x0 = xt0+1 and t0 = t0 + 1
+V. Lecle`re Dynamic Programming 15/12/2020 15 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Linear Decision Rules
+Another way of getting heuristics consists in looking for solution ut = Φt (ξ0, . . . , ξt+1) where Φ is in a specific class of function.
+Classically we can look for Φt in the class of affine functions.
+In which case, a multistage linear stochastic programm turns into a large one-stage stochastic linear programm, which can be approximated by SAA to get a reasonable LP.
+Don’t forget to evaluate the obtained heuristic by Monte Carlo on new scenarios.
+V. Lecle`re Dynamic Programming 15/12/2020 16 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Contents
+1 Multistage stochastic programming From two-stage to multistage programming Information structure Bounds and heuristics
+2 Dynamic Programming Stochastic optimal control problem Dynamic Programming principle Bellman Operators
+3 Practical aspects of Dynamic Programming Curses of dimensionality Numerical techniques
+V. Lecle`re Dynamic Programming 15/12/2020 16 / 41
+
+
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Stochastic Controlled Dynamic System
+A discrete time controlled stochastic dynamic system is defined by its dynamic
+x t+1 = ft (x t , ut , ξt+1)
+and initial state
+x0 = ξ0
+The variables
+xt is the state of the system,
+ut is the control applied to the system at time t,
+ξt is an exogeneous noise.
+Usually, xt ∈ Xt and ut beglongs to a set depending upon the
+state: ut ∈ Ut (xt ).
+V. Lecle`re Dynamic Programming 15/12/2020 17 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Examples
+Stock of water in a dam: xt is the amount of water in the dam at time t,
+ut is the amount of water turbined at time t, ξt+1 is the inflow of water in [t, t + 1[. Boat in the ocean: xt is the position of the boat at time t,
+ut is the direction and speed chosen for [t, t + 1[, ξt+1 is the wind and current for [t, t + 1[. Subway network: xt is the position and speed of each train at time t,
+ut is the acceleration chosen at time t, ξt+1 is the delay due to passengers and incident on the network for [t, t + 1[.
+V. Lecle`re Dynamic Programming 15/12/2020 18 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+More considerations about the state
+Physical state: the physical value of the controlled system. e.g. amount of water in your dam, position of your boat...
+Information state: physical state and information you have over noises. e.g.: amount of water and weather forecast...
+Knowledge state: your current belief over the actual information state (in case of noisy observations). Represented as a distribution law over information states.
+The state in the Dynamic Programming sense is the information required to define an optimal solution.
+V. Lecle`re Dynamic Programming 15/12/2020 19 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Optimization Problem
+We want to solve the following optimization problem
+mu iΦn E[ T −1
+∑
+t =0
+Lt
+(x t , ut , ξt+1
+) + K (xT
+)]
+s.t. x t+1 = ft (x t , ut , ξt+1), x 0 = ξ0 ut ∈ Ut (x t , ξt+1)
+σ(ut ) ⊂ σ(ξ0, · · · , ξt+1
+)ut = Φ(ξ0, · · · , ξt+1)
+1 We want to minimize the expectation of the sum of costs.
+2 The system follows a dynamic given by the function ft.
+3 There are constraints on the controls.
+4 The controls are functions of the past noises (= non-anticipativity).
+V. Lecle`re Dynamic Programming 15/12/2020 20 / 41
+
+
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Optimization Problem with independence of noises
+If noises at time independent, the optimization problem is equivalent to
+mπin E[ T −1
+∑
+t =0
+Lt
+(x t , ut , ξt+1
+) + K (xT
+)]
+s.t. x t+1 = ft (x t , ut , ξt+1), x 0 = ξ0 ut ∈ Ut (x t , ξt+1) ut = πt (x t , ξt+1)
+V. Lecle`re Dynamic Programming 15/12/2020 21 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Keeping only the state
+For notational ease, we want to formulate Problem (1) only with states. Let Xt (xt , ξt+1) be the reachable states, i.e.,
+Xt (xt , ξt+1) :=
+{
+xt+1 ∈ Xt+1 | ∃ut ∈ Ut (xt , ξt+1), xt+1 = ft (xt , ut , ξt+1)
+} .
+And ct (xt , xt+1, ξt+1) the transition cost from xt to xt+1, i.e.,
+ct (xt , xt+1, ξt+1) := min
+ut ∈Ut (xt ,ξt+1)
+{
+Lt (xt , ut , ξt+1) | xt+1 = ft (xt , ut , ξt+1)
+} .
+Then, under independance of noises, the optimization problem reads
+mψin E[ T −1
+∑
+t =0
+ct (xt , xt+1, ξt+1) + K (xT )
+]
+s.t. x t+1 ∈ Xt (x t , ξt+1), x0 = ξ0
+x t+1 = ψt (x t , ξt+1)
+V. Lecle`re Dynamic Programming 15/12/2020 22 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Contents
+1 Multistage stochastic programming From two-stage to multistage programming Information structure Bounds and heuristics
+2 Dynamic Programming Stochastic optimal control problem Dynamic Programming principle Bellman Operators
+3 Practical aspects of Dynamic Programming Curses of dimensionality Numerical techniques
+V. Lecle`re Dynamic Programming 15/12/2020 22 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Bellman’s Principle of Optimality
+Richard Ernest Bellman (August 26, 1920 – March 19, 1984)
+An optimal policy has the property that whatever the initial state and initial decision are, the remaining decisions must constitute an optimal policy with regard to the state resulting from the first decision (Richard Bellman)
+V. Lecle`re Dynamic Programming 15/12/2020 23 / 41
+
+
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+The shortest path on a graph illustrates Bellman’s Principle of Optimality
+For an auto travel analogy, suppose that the fastest route from Los Angeles to Boston passes through Chicago.
+The principle of optimality translates to obvious fact that the Chicago to Boston portion of the route is also the fastest route for a trip that starts from Chicago and ends in Boston. (Dimitri P. Bertsekas)
+V. Lecle`re Dynamic Programming 15/12/2020 24 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Idea behind dynamic programming
+If noises are time independent, then
+1 The cost to go at time t depends only upon the current state.
+2 We can compute recursively the cost to go for each position, starting from the terminal state and computing optimal trajectories backward.
+Optimal cost-to-go of being in state x at time t is: At time t, Vt+1 gives the cost of the future. Dynamic
+Programming is a time decomposition method.
+V. Lecle`re Dynamic Programming 15/12/2020 25 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Dynamic Programming Principle
+Assume that the noises ξt are time-independent and exogeneous. The Bellman’s equation writes
+
+
+VT (x) = K (x)
+Vˆt(x, ξ) = min
+y∈Xt(x,ξ) ct (x , y , ξt+1) + Vt+1(y )
+Vt (x) = E[Vˆt (x, ξt+1)
+]
+An optimal state trajectory is obtained by xt+1 = ψtV
+(x t
+), with
+ψtV (x, ξ) ∈ arg min
+y ∈Xt (x,ξ)
+ct (x, y , ξ)
+} {{ }
+current cost
++ Vt+1(y )
+} {{ }
+future costs
+,
+V. Lecle`re Dynamic Programming 15/12/2020 26 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Interpretation of Bellman Value Function
+The Bellman’s value function Vt0 (x) can be interpreted as the value of the problem starting at time t0 from the state x. More precisely we have
+Vt0 (x ) = min E[ T −1
+∑
+t =t0
+Lt
+(x t , ut , ξt+1
+) + K (xT
+)]
+s.t. x t+1 = ft (x t , ut , ξt+1), x t0 = x ut ∈ Ut (x t , ξt+1)
+σ(ut ) ⊂ σ(ξ0, · · · , ξt+1
+)
+or
+mψin E[ T −1
+∑
+t =t0
+ct (xt , xt+1, ξt+1) + K (xT )
+]
+s.t. x t+1 ∈ Xt (x t , ξt+1), xt0 = x
+x t+1 = ψt (x t )
+V. Lecle`re Dynamic Programming 15/12/2020 27 / 41
+
+
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Contents
+1 Multistage stochastic programming From two-stage to multistage programming Information structure Bounds and heuristics
+2 Dynamic Programming Stochastic optimal control problem Dynamic Programming principle Bellman Operators
+3 Practical aspects of Dynamic Programming Curses of dimensionality Numerical techniques
+V. Lecle`re Dynamic Programming 15/12/2020 27 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Optimization Problem
+Recall that we want to solve the following optimization problem
+mψin E[ T −1
+∑
+t =0
+ct (xt , xt+1, ξt+1) + K (xT )
+]
+s.t. x t+1 ∈ Xt (x t , ξt+1), x0 = ξ0
+x t+1 = ψt (x t )
+With Bellman’s equation reading
+
+
+VT (x) = K (x)
+Vˆt(x, ξ) = min
+y∈Xt(x,ξ) ct (x , y , ξ) + Vt+1(y )
+Vt (x) = E[Vˆt (x, ξt+1)]
+V. Lecle`re Dynamic Programming 15/12/2020 28 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Bellman operator
+For any time t, and any function R mapping the set of states and noises X × Ξ into R, we define
+
+
+Bˆt (R)(x, ξ) := min
+y∈Xt(x,ξ) ct (x , y , ξ) + R(y )
+Bt (R)(x) := E (Bˆt (R)(x, ξt+1)
+)
+Thus the Bellman equation simply reads
+{ VT = K
+Vt = Bt (Vt+1)
+Further, any estimation R of the value functions yields an admissible trajectory given by
+ψtR (x, ξ) ∈ arg min
+y ∈X (x,ξ)
+ct (x, y , ξ) + Rt+1(y )
+optimal if Rt = Vt .
+V. Lecle`re Dynamic Programming 15/12/2020 29 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Properties of the Bellman operator
+Assume that ξt are finitely supported
+Monotonicity:
+R ≤ R ⇒ Bt
+(R) ≤ Bt
+(R )
+Convexity: if ct is jointly convex in (x, y ) for all ξ, R is convex, gr(Xt ) is convex then
+x 7→ Bt
+(R)(x) is convex
+Polyhedrality: for any polyhedral function R, if ct is also polyhedral for all ξ, and gr(Xt ) is polyhedral, then
+x 7→ Bt
+(R)(x) is polyhedral
+V. Lecle`re Dynamic Programming 15/12/2020 30 / 41
+
+
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Computing upper bounds
+In the convex case we can compute exact upper-bound on the value of the stochastic optimization problem.
+For all t ≤ T , select points {xtn}n≤N in Xt .
+For t = T , define vTn = K (xtn). Iteratively backward for t = T ..1 :
+V ̄t (x) := min
+α∈∆n
+{ ∑N
+n=1 αnvtn
+∣∣∣ ∑N
+n=1 αnxtn = x
+}
+where ∆n = {α ∈ Rn | ∑
+n αn = 1, αn ≥ 0}.
+Compute vtn−1 = Bt−1(V ̄t )(xtn−1)
+For all t, V ̄t ≥ Vt, and in particular B0
+(V ̄1
+)(x0) is an upper bound on the value of our problem.
+V. Lecle`re Dynamic Programming 15/12/2020 31 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Contents
+1 Multistage stochastic programming From two-stage to multistage programming Information structure Bounds and heuristics
+2 Dynamic Programming Stochastic optimal control problem Dynamic Programming principle Bellman Operators
+3 Practical aspects of Dynamic Programming Curses of dimensionality Numerical techniques
+V. Lecle`re Dynamic Programming 15/12/2020 31 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Dynamic Programming Algorithm - Discrete Case
+Data: Problem parameters Result: optimal trajectory and value; VT ≡ K ; Vt ≡ 0
+for t : T − 1 → 0 do for x ∈ Xt do for ξ ∈ Ξt do
+Vˆt (x, ξ) = ∞;
+for y ∈ Xt (x, ξ) do
+vy = ct (x, y , ξ) + Vt+1(y );
+if vy < Vˆt (x, ξ) then
+Vˆt (x, ξ) = vy ; ψt (x, ξ) = y ;
+Vt (x) = Vt (x) + P(ξ)Vˆt (x, ξ)
+Algorithm 1: Classical stochastic dynamic programming algorithm
+V. Lecle`re Dynamic Programming 15/12/2020 32 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+3 curses of dimensionality
+Complexity = O(T × |Xt | × |Xt | × |Ξt |) Linear in the number of time steps, but we have 3 curses of dimensionality :
+1 State. Complexity is exponential in the dimension of Xt e.g. 3 independent states each taking 10 values leads to a loop over 1000 points.
+2 Decision. Complexity is exponential in the dimension of Xt. due to exhaustive minimization of inner problem. Can be accelerated using faster method (e.g. MILP solver).
+3 Expectation. Complexity is exponential in the dimension of Ξt . due to expectation computation. Can be accelerated through Monte-Carlo approximation (still at least 1000 points)
+In practice DP is not used for state of dimension more than 5.
+V. Lecle`re Dynamic Programming 15/12/2020 33 / 41
+
+
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Illustrating dynamic programming with the damsvalley example
+Gnioure Izourt Soulcem
+Auzat
+Sabart
+V. Lecle`re Dynamic Programming 15/12/2020 34 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Illustrating the curse of dimensionality
+We are in dimension 5 (not so high in the world of big data!) with 52 timesteps (common in energy management) plus 5 controls and 5 independent noises.
+1 We discretize each state’s dimension in 100 values: |Xt | = 1005 = 1010
+2 We discretize each control’s dimension in 100 values: |Ut | = 1005 = 1010
+3 We use optimal quantization to discretize the noises’ space in 10 values: |Ξt| = 10
+Number of flops: O(52 × 1010 × 1010 × 10) ≈ O(1023). In the TOP500, the best computer computes 1017 flops/s. Even with the most powerful computer, it takes at least 12 days to solve this problem.
+V. Lecle`re Dynamic Programming 15/12/2020 35 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Contents
+1 Multistage stochastic programming From two-stage to multistage programming Information structure Bounds and heuristics
+2 Dynamic Programming Stochastic optimal control problem Dynamic Programming principle Bellman Operators
+3 Practical aspects of Dynamic Programming Curses of dimensionality Numerical techniques
+V. Lecle`re Dynamic Programming 15/12/2020 35 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Computing a decision online
+Algorithm: Offline value functions precomputation + Online open loop reoptimization
+Offline: We produce value functions with Bellman equation:
+Vt (x) = E[
+min
+y∈Xt (x,ξt+1) ct (x , y , ξt+1) + Vt+1(y )
+]
+Online: At time t, knowing xt and ξt+1 we plug the computed value function Vt+1 as future cost
+xt+1 ∈ arg min
+y ∈Xt (xt ,ξt+1)
+ct (xt , y , ξt+1) + Vt+1(y )
+This can be extended to approximate value function V ̃t computed in any way.
+V. Lecle`re Dynamic Programming 15/12/2020 36 / 41
+
+
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Dynamic Programming : Discretization-Interpolation
+When the state space is continuous, the DP equation holds :
+Vt (x) = E[
+min
+y∈Xt (x,ξt+1) ct (x , y , ξt+1) + Vt+1(y )
+] .
+But computation is impractical in a continuous space. Simplest solution : discretization and interpolation.
+We choose a finite set XtD ⊂ Xt where we will compute (an approximation of) the Bellman value Vt.
+We approximate the Bellman value at time t by interpolating these value.
+V. Lecle`re Dynamic Programming 15/12/2020 37 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Dynamic Programming : Discretization-Interpolation
+Data: Problem parameters, discretization, one-stage solver, interpolation operator; Result: approximation of optimal value;
+V ̃T ≡ K ;
+for t : T − 1 → 0 do for x ∈ XtD do
+V ̃t (x) := E[
+min
+y∈Xt (x,ξt+1) ct (x , y , ξt+1) + V ̃t+1(y )
+] ;
+Define V ̃t by interpolating {V ̃t (x) | x ∈ XtD };
+Algorithm 2: Dynamic Programming Algorithm (Continuous)
+V. Lecle`re Dynamic Programming 15/12/2020 38 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Independence of noises
+The Dynamic Programming equation requires only the time-independence of noises. This can be relaxed if we consider an extended state. Consider a dynamic system driven by an equation
+y t+1 = ft (y t , ut , εt+1)
+where the random noise εt is an AR-1 process :
+εt = αt εt−1 + βt + ξt ,
+{ξt }t∈Z being independent.
+Then y t is called the physical state of the system and DP can
+be used with the information state xt = (y t, εt). Generically speaking, if the noise ξt is exogeneous (not
+affected by decisions ut), then we can always apply Dynamic
+Programming with the state (xt, ξ1, . . . , ξt).
+V. Lecle`re Dynamic Programming 15/12/2020 39 / 41
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+State augmentation limits
+Because of the curse of dimensionality it might be impossible to take into account correlation by augmenting the state variable.
+Practitioners often ignore noise dependence for the value functions computation but use dependence information during online reoptimization.
+V. Lecle`re Dynamic Programming 15/12/2020 40 / 41
+
+
+Multistage stochastic programming Dynamic Programming Practical aspects of Dynamic Programming
+Conclusion
+Multistage stochastic programming fails to handle large number of timesteps.
+Dynamic Programming overcomes this difficulty while compressing information inside a state x.
+Dynamic Programming computes backward a set of value
+functions {Vt
+}, corresponding to the optimal cost of being at a given position at time t.
+Numerically, DP is limited by the curse of dimensionality and its performance are deeply related to the discretization of the look-up table used.
+Other methods exist to compute the value functions without look-up table (Approximate Dynamic Programming, SDDP).
+V. Lecle`re Dynamic Programming 15/12/2020 41 / 41
+Independence of noises: AR-1 case
+Consider a dynamic system driven by an equation y t+1 = ft (y t , ut , εt+1) where the random noise εt is an AR-1 process : εt = αt εt−1 + βt + ξt+1, {ξt }t∈Z being independent.
+Define the information state xt = (y t, εt).
+Then we have
+x t+1 =
+(ft (y t , ut , αt εt + βt + ξt+1) αt εt + βt + ξt+1
+)
+= f ̃t (x t , ut , ξt+1)
+And we have the following DP equation
+Vt ( yε ) = min
+u∈Ut (x) E[
+Lt (y , u, αt ε + βt + ξt+1
+} {{ }
+”εt +1 ”
+)+Vt+1◦f ̃t
+(x , u, ξt+1
+)
+} {{ }
+”x t+1”
+]
+V. Lecle`re Dynamic Programming 15/12/2020 42 / 41
+DP on a Markov Chain
+Sometimes it is easier to represent a problem as a controlled Markov Chain
+Dynamic Programming equation can be computed directly, without expliciting the control.
+Let’s work out an example...
+V. Lecle`re Dynamic Programming 15/12/2020 43 / 41
+Controlled Markov Chain
+A controlled Markov Chain is controlled stochastic dynamic system with independent noise (w t)t∈Z, where the dynamic and the noise are left unexplicited.
+What is given is the transition probability
+πtu(x, y ) := P(x t+1 = y | x t = x, ut = u
+) .
+In this case the cost are given as a function of the current stage, the next stage and the control.
+The Dynamic Programming Equation then reads (assume finite state)
+Vt (x) = muin
+∑
+y ∈Xt+1
+πtu(x, y )
+[
+Ltu(x , y ) + Vt+1(y )
+] .
+V. Lecle`re Dynamic Programming 15/12/2020 44 / 41
+
+
+Example
+Consider a machine that has two states : running (R) and broken (B). If it is broken we need to fix it (F) for a cost of 100. If it is running there are two choices: maintaining it (M), or not maintaining (N). If we maintain, the cost is 25 and the machine stay running with probability πM (R, R) = 1; if we do not maintain there is a probability of πN (R, B) = 0.5 of breaking it (or keep it running). We need to have it running for 3 periods.
+V. Lecle`re Dynamic Programming 15/12/2020 45 / 41
+Controlled Markov Chain
+V0 V1
+R min {25 + 50, 0 + (50 + 125)/2}75 min {25 + 25, 0 + (25 + 100)/2}50
+B 100 + 50150 100 + 25125
+V. Lecle`re Dynamic Programming 15/12/2020 46 / 41
+
+
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Stochastic Optimization Decomposition Methods for Two-stage problems
+V. Lecl`ere
+January 5th 2022
+Vincent Lecle`re OS - 5 05/01/2022 1 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Presentation Outline
+1 Lagrangian decomposition
+2 L-Shaped decomposition method
+3 Multistage program
+Vincent Lecle`re OS - 5 05/01/2022 1 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Two-stage Problem
+The extensive formulation of
+min
+u0,u1 E[
+L(u0, ξ, u1)
+]
+s.t. g (u0, ξ, u1) ≤ 0, P − a.s
+σ(u1) ⊂ σ(ξ)
+is
+min
+u0 ,{u s1 }s ∈J1,S K
+S ∑
+s =1
+πs L(u0, ξs , us1)
+s.t g (u0, ξs , us1) ≤ 0, ∀s ∈ J1, SK.
+It is a deterministic problem that can be solved with standard tools or specific methods.
+Vincent Lecle`re OS - 5 05/01/2022 2 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Splitting variables
+The extended Formulation (in a compact formulation)
+min
+u0 ,{u s1 }s ∈J1,S K
+S ∑
+s =1
+πs L(us0, ξs , us1)
+s.t g (u0, ξs , us1) ≤ 0, ∀s ∈ J1, SK.
+Can be written in a splitted formulation
+min
+u ̄0 {u s0 ,u s1 }s ∈J1,S K
+S ∑
+s =1
+πs L(us0, ξs , us1)
+s.t g (us0, ξs , us1) ≤ 0, ∀s ∈ J1, SK
+us0 = us′
+0 ∀s, s′
+Vincent Lecle`re OS - 5 05/01/2022 3 / 29
+
+
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Splitting variables
+The extended Formulation (in a compact formulation)
+min
+u0 ,{u s1 }s ∈J1,S K
+S ∑
+s =1
+πs L(us0, ξs , us1)
+s.t g (u0, ξs , us1) ≤ 0, ∀s ∈ J1, SK.
+Can be written in a splitted formulation
+min
+u ̄0 {u s0 ,u s1 }s ∈J1,S K
+S ∑
+s =1
+πs L(us0, ξs , us1)
+s.t g (us0, ξs , us1) ≤ 0, ∀s ∈ J1, SK
+us0 = ∑
+s′
+πs′ us′
+0 ∀s
+Vincent Lecle`re OS - 5 05/01/2022 3 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Dualizing non-anticipativity constraint I
+min
+{u s0 ,u s1 }s ∈J1,S K
+S ∑
+s =1
+πs L(us0, ξs , us1)
+s.t g (us0, ξs , us1) ≤ 0, ∀s ∈ J1, SK
+us0 = ∑
+s′
+πs′ us′
+0 ∀s
+is equivalent to
+min
+{u s0 ,u s1 }s ∈J1,S K
+max
+{λs }s∈J1,SK
+S ∑
+s =1
+πs L(us0, ξs , us1) + πs λs (
+us0 − ∑
+s′
+πs′ us′
+0
+)
+s.t g (us0, ξs , us1) ≤ 0, ∀s ∈ J1, SK
+Vincent Lecle`re OS - 5 05/01/2022 4 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Dualizing non-anticipativity constraint I
+min
+{u s0 ,u s1 }s ∈J1,S K
+S ∑
+s =1
+πs L(us0, ξs , us1)
+s.t g (us0, ξs , us1) ≤ 0, ∀s ∈ J1, SK
+us0 = ∑
+s′
+πs′ us′
+0 ∀s
+is equivalent to
+min
+{u s0 ,u s1 }s ∈J1,S K
+max
+{λs }s∈J1,SK
+S ∑
+s =1
+πs L(us0, ξs , us1)
++
+S ∑
+s =1
+πs λs us0 − ∑
+s′
+E[λ]πs′ us′
+0
+s.t g (us0, ξs , us1) ≤ 0, ∀s ∈ J1, SK
+Vincent Lecle`re OS - 5 05/01/2022 4 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Dualizing non-anticipativity constraint I
+min
+{u s0 ,u s1 }s ∈J1,S K
+S ∑
+s =1
+πs L(us0, ξs , us1)
+s.t g (us0, ξs , us1) ≤ 0, ∀s ∈ J1, SK
+us0 = ∑
+s′
+πs′ us′
+0 ∀s
+is equivalent to
+min
+{u s0 ,u s1 }s ∈J1,S K
+max
+{λs }s∈J1,SK
+S ∑
+s =1
+πs L(us0, ξs , us1)
++
+S ∑
+s =1
+πs (
+λs − E[λ])
+us0
+s.t g (us0, ξs , us1) ≤ 0, ∀s ∈ J1, SK
+Vincent Lecle`re OS - 5 05/01/2022 4 / 29
+
+
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Dualizing non-anticipativity constraint II
+Thus, the dual problem reads
+max
+λ:E[λ]=0 min
+{u s0 ,u s1 }s ∈J1,S K
+S ∑
+s =1
+πs (
+L(us0, ξs , us1) +
+(
+λs − E[λ])
+us0
+)
+s.t g (us0, ξs , us1) ≤ 0, ∀s ∈ J1, SK
+The inner minimization problem, for λ given, can decompose scenario by scenario, by solving S deterministic problem
+min
+{us0,us1} L(us0, ξs , us1) + λs us0
+s.t g (us0, ξs , us1) ≤ 0
+Vincent Lecle`re OS - 5 05/01/2022 5 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Price of information
+By weak duality, any λ such that E[λ] = 0 will give a lower bound on the 2-stage problem, computed as
+S ∑
+s =1
+πs min
+u s0 ,u s1
+(
+L(us0, ξs , us1) + λs us0
+)
+s.t g (us0, ξs , us1) ≤ 0
+λ = 0 lead to the anticipative lower-bound
+If problem is convex, and under some qualification
+assumptions, there exists an optimal λ∗, called the price of information, such that the lower bound is tight.
+Vincent Lecle`re OS - 5 05/01/2022 6 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Progressive Hedging Algorithm
+The progressive hedging algorithm build on this decomposition in the following way.
+1 Set a price of information {λs }s∈J1,SK such that E[λ] = 0 2 For each scenario solve
+min
+u s0 ,u s1
+L(us0, ξs , us1) + λs us0+ρ‖us0 − u ̄0‖2
+s.t g (us0, ξs , us1) ≤ 0
+3 Compute the mean first control u ̄0 := ∑sS=1 πs us0 4 Update the price of information with
+λs := λs + ρ(us0 − u ̄0)
+5 Go back to 2.
+Vincent Lecle`re OS - 5 05/01/2022 7 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Convergence of Progressive Hedging
+Theorem
+Assume that L and g are convex lsc in (u0, u1) for all ξ, and that,
+for all s ∈ S, there exists (us0, us1) such that L(us0, ξs , us1) < +∞
+and g (us0, ξs , us1) < 0.
+Then, the progressive hedging algorithm converges toward an optimal primal solution, and the price of information converges toward an optimal price of information.
+Moreover we can show that
+εk =
+√
+‖(u0k , u1k ) − (u]
+0, u]
+1)‖22 + 1
+ρ2 ‖λ − λ]‖22,
+is a decreasing sequence.
+Vincent Lecle`re OS - 5 05/01/2022 8 / 29
+
+
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Bounds in Progressive Hedging
+At any iteration of the PH algorithm, we have a collection of primal solution {(us0, us1)}s∈S , and a price of information
+{λs }s∈S .
+We have a lower bound on the value of the stochastic programm given by
+LBPH = ∑
+s ∈S
+πs [L(us0, ξs , us1) + λs us0
+],
+and an upper bound given by
+UBPH = ∑
+s ∈S
+πs L(u ̄0, ξs , us1(u0)).
+Vincent Lecle`re OS - 5 05/01/2022 9 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Presentation Outline
+1 Lagrangian decomposition
+2 L-Shaped decomposition method
+3 Multistage program
+Vincent Lecle`re OS - 5 05/01/2022 9 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Linear 2-stage stochastic program
+Consider the following problem
+min E[
+c>u0 + q>u1
+]
+s.t. Au0 = b, u0 ≥ 0
+T u0 + W u1 = h, u1 ≥ 0, P − a.s. u0 ∈ Rn, σ(u1) ⊂ σ(q, T , W , h
+} {{ }
+ξ
+)
+Which we rewrite
+min
+u0≥0 c>u0 + E[
+Q(u0, ξ)
+]
+s.t. Au0 = b
+with
+Q(u0, ξ) := min
+u1≥0 qξ>u1
+s.t. Wξu1 = hξ − Tξu0
+Vincent Lecle`re OS - 5 05/01/2022 10 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Linear 2-stage stochastic program : Extensive Formulation
+The associated extensive formulation read
+min c>u0 +
+S ∑
+s =1
+πs qs · us1
+s.t. Au0 = b, u0 ≥ 0 T s u0 + W s us1 = hs , us1 ≥ 0, ∀s
+Which we rewrite
+mui0n
+c>u0 +
+S ∑
+s =1
+πs Qs (u0)
+s.t. Au0 = b, u0 ≥ 0
+with
+Qs (u0) := min
+u1≥0 qs · u1
+s.t. W s u1 = hs − T s u0
+Vincent Lecle`re OS - 5 05/01/2022 11 / 29
+
+
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Relatively complete recourse
+We assume here relatively complete recourse. Without this assumption we would need feasability cuts. Here, relatively complete recourse means that, for u0 ≥ 0 :
+Au0 = b =⇒ Qs (u0) < +∞, ∀s ∈ J1, SK
+Vincent Lecle`re OS - 5 05/01/2022 12 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Decomposition of linear 2-stage stochastic program
+We rewrite the extended formulation as
+min
+u0,(θs )s∈S
+c>u0 + ∑
+s
+πs θs
+s.t. Au0 = b, u0 ≥ 0
+θs ≥ Qs (u0)θs ≥ αsk · u0 + βks ∀k, ∀s
+Note that Qs (u0) is a polyhedral function of u0, hence
+θs ≥ Qs (u0) can be rewritten θs ≥ αsk · u0 + βks , ∀k.
+The decomposition approach consists in constructing iteratively cut coefficients αsk and βks .
+Vincent Lecle`re OS - 5 05/01/2022 13 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Obtaining (optimality) cuts I
+Recall that
+Qs (u0) := min
+us1∈Rn qs · us1
+s.t. W s us1 = hs − T s u0, us1 ≥ 0
+can also be written (through strong duality by relatively complete recourse assumption)
+(Du0) Qs (u0) = max
+λs ∈Rm λs · (hs − T s u0
+)
+s.t. (W s )>λs ≤ qs
+Vincent Lecle`re OS - 5 05/01/2022 14 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Obtaining (optimality) cuts II
+(Du0) Qs (u0) = max
+λs ∈Rm λs · (hs − T s u0
+)
+s.t. (W s )>λs ≤ qs
+admits for optimal solution λsu0.
+Consider another control u′0, we have
+(Du′0 ) Qs (u′0) = max
+λs ∈Rm λs · (hs − T s u′0
+)
+s.t. (W s )>λs ≤ qs
+As λsu0 is admissible for (Du0) it is also admissible for (Du′0), hence
+Qs (u′0) ≥ λsu0 · (hs − T s u′0
+).
+Vincent Lecle`re OS - 5 05/01/2022 15 / 29
+
+
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Obtaining (optimality) cuts III
+To sum up we have seen that, for any admissible first stage solution, we can construct an exact cut for Qs by solving the dual of the second stage problem.
+More precisely, let u0k ≥ 0 be such that Au0k = b. Let λsk be an
+optimal dual solution. Then, setting
+αsk := −(T s )>λsk and βks := (λsk )>hs
+we have
+{Qs (u′0) ≥ αsk · u′0 + βks ∀u′0 ≥ 0, Au′0 = b Qs (u0k ) = αsk · u0k + βks
+Vincent Lecle`re OS - 5 05/01/2022 16 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+L-shaped method (multi-cut version)
+1 We have a collection of K × S cuts, such that Qs (u0) ≥ αsk · u0 + βks .
+2 Solve the master problem, with optimal primal solution uK+1
+0.
+min
+u0≥0 c >u0 +
+S ∑
+s =1
+πs θs
+s.t. Au0 = b
+θs ≥ αsk u0 + βks ∀k ∈ J1, K K, ∀s ∈ J1, SK
+3 Solve S slave problems, with optimal dual solution λsK+1
+Qs (uK+1
+0 ) = min
+us1∈Rn qs · us1
+s.t. W s us1 = hs − T s uK+1
+0 , us1 ≥ 0
+Qs (uK+1
+0 ) = max
+λs ∈Rm λs · (hs − T s uK +1
+0
+)
+s.t. W s · λs ≤ qs 4 construct S new cuts with
+αsK+1 := −(T s )>λsK+1, βsK+1 := hs · λsK+1
+Vincent Lecle`re OS - 5 05/01/2022 17 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+L-shaped method (multi-cut version) : bounds
+At any iteration of the L-shaped method we can easily determine upper and lower bound over our problem.
+Indeed, u0K is an admissible firt stage solution, and Qs (u0K ) is the
+value of a slave problem. Thus the value of admissible solution u0k is
+simply given by
+UB = c>u0K +
+S ∑
+s =1
+πs Qs (u0K ).
+Furthermore, QsK (u0) ≥ maxk≤K αsk · u0 + βks , thus the value of the
+master problem is always a lower bound over the value of the SP problem :
+LB = c>u0K +
+S ∑
+s =1
+πs θsK .
+Vincent Lecle`re OS - 5 05/01/2022 18 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+L-shaped method (single-cut version)
+1 We have a collection of K cuts, such that
+Q(u0) := ∑
+s∈S Qs (u0) ≥ αk · u0 + βk .
+2 Solve the master problem, with optimal primal solution uK+1
+0.
+min
+u0≥0 c >u0 + θ
+s.t. Au0 = b
+θ ≥ αk u0 + βk ∀k ∈ J1, K K
+3 Solve S slave dual problems, with optimal dual solution λsK+1
+max
+λs ∈Rm λs · (hs − T s uK +1
+0
+)
+s.t. W s · λs ≤ qs 4 construct new cut with
+αK+1 := −
+S ∑
+i =1
+πs (T s )>λs , βK+1 :=
+S ∑
+i =1
+πs hs · λs .
+Vincent Lecle`re OS - 5 05/01/2022 19 / 29
+
+
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Feasibility cuts
+Without the relatively complete recourse assumption we cannot guarantee that Q(u0) < +∞, however we still have that Q is polyhedral, thus so is dom(Q).
+Without RCR we need to add feasibility cuts in the following way:
+If, Qs (u0k ) = +∞, then we can find an unbounded ray of the
+dual problem
+max
+λs ∈Rm λs · (hs − T s u0k
+)
+s.t. W s · λs ≤ qs
+more precisely a vector λ ̄k such that, for all t ≥ 0
+W s · tλ ̄k ≤ qs .
+Then, for u0 to be admissible, we need that
+λ ̄k · (hs − T s u0
+)≤0
+which is a feasibility cut.
+Vincent Lecle`re OS - 5 05/01/2022 20 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Convergence
+Theorem
+In the linear case, the L-Shaped algorithm terminates in finitely many steps, yielding the optimal solution.
+The proof is done by noting that only finitely many cuts can be added, and not being able to add a cut prove that the algorithm has converged.
+Vincent Lecle`re OS - 5 05/01/2022 21 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Comparison of Progressive Hedging and L-shaped
+Progressive Hedging L-Shaped problems convex continuous linear, 1st stage integer sol. at it. k non-admissible splitted solutions admissible primal solution Bounds LB free, UB easy LB and UB free Convergence asymptotic finite Complexity fixed : S deterministic problem increasing for master problem, fixed for slave problem Implem. easy from deterministic solver built from scratch
+Vincent Lecle`re OS - 5 05/01/2022 22 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Presentation Outline
+1 Lagrangian decomposition
+2 L-Shaped decomposition method
+3 Multistage program
+Vincent Lecle`re OS - 5 05/01/2022 22 / 29
+
+
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Where do we come from: two-stage programming
+u0
+(ξ11, p1)
+u1,1
+(ξ12, p2)
+u1,2
+(ξ13, p3)
+u1,3
+(ξ14, p4)
+u1,4
+(ξ15, p5) u1,5
+(ξ16, p6) u1,6
+(ξ17, p7)
+u1,7
+(ξ18, p8)
+u1,8
+We take decisions in two stages
+u0 ; ξ1 ; u1 ,
+with u1: recourse decision .
+On a tree, it means solving the extensive formulation:
+min
+u0 ,u1,s
+c0u0 + ∑
+s ∈S
+ps
+[〈cs , u1,s
+〉] .
+Vincent Lecle`re OS - 5 05/01/2022 23 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Extending two-stage to multistage programming
+u0
+(ξ11, π1)
+u11
+u1,1
+2
+u1,2
+2
+u1,3
+2
+u1,4
+2
+(ξ12, π2)u12
+u2,1
+2
+u2,2
+2
+u2,3
+2
+u2,4
+2
+(ξ13, π3)u13
+u3,1
+2
+u3,2
+2
+u3,3
+2
+u3,4
+2
+(ξ14, π4)
+u14
+u4,1
+2
+u4,2
+2
+u4,3
+2
+u4,4
+2
+We want to minimize minu E[c(u, ξ)]
+Where we take decisions in T stages
+u0 ; ξ1 ; u1 ; · · · ; ξT ; uT .
+It can be represented on a tree T , where a node n of depth t represent a realisation of (ξ1, . . . , ξt ), and to which is attached a
+probability pn.
+Then, the extensive formulation reads
+min
+{un }n∈T
+∑
+n∈T
+pncn(un)
+Vincent Lecle`re OS - 5 05/01/2022 24 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Compact and splitted extended formulation
+Consider a tree of depth T . A scenario s = (n1, . . . , nT ) is a sequence of node, where each element is a descendent of the previous one. A scenario s ∈ S is uniquely defined by its last element, which is a leaf of the tree.
+Let πs be the probability of the leaf defining scenario s.
+The compact formulation of the multistage problem reads
+min
+{un }n∈T
+∑
+n∈T
+πncn(un) = ∑
+s ∈S
+πs ∑
+n∈S
+cn(un)
+The splitted extended formulation reads
+min
+{us,t }s∈S,t∈J0,T K
+∑
+s ∈S
+πs
+T ∑
+t =0
+cs,t (us,t )
+s.t. us,t = us′,t ∀t, ∀n ∈ Nt , ∀s, s′ 3 n
+where Nt is the set of nodes of depth t
+Vincent Lecle`re OS - 5 05/01/2022 25 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Introducing the non-anticipativity constraint
+We do not know what holds behind the door.
+Non-anticipativity
+At time t, decisions are taken sequentially, only knowing the past realizations of the perturbations.
+Mathematically, this is equivalent to say that at time t, the decision ut is 1 a function of past noises
+ut = πt (ξ0, · · · , ξt ) ,
+2 taken knowing the available information,
+σ(ut ) ⊂ σ(ξ0, · · · , ξt ) .
+Vincent Lecle`re OS - 5 05/01/2022 26 / 29
+
+
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Multistage extensive formulation approach
+u0
+(ξ11, π1)
+u11
+u21,1
+u21,2
+u21,3
+u21,4
+(ξ12, π2)u12
+u22,1
+u22,2
+u22,3
+u22,4
+(ξ13, π3)u13
+u23,1
+u23,2
+u23,3
+u23,4
+(ξ14, π4)
+u14
+u24,1
+u24,2
+u24,3
+u24,4
+Assume that ξt ∈ Rnξ can take nξ values and that Ut (x ) can take nu values.
+Then, considering the extensive formulation approach, we have
+nξT scenarios.
+(nT +1
+ξ − 1)/(nξ − 1) nodes in the tree.
+Number of variables in the optimization problem is roughly
+nu × (nT +1
+ξ − 1)/(nξ − 1) ≈ nunξT .
+The complexity grows exponentially with the number of stage. :-( A way to overcome this issue is to compress information!
+Vincent Lecle`re OS - 5 05/01/2022 27 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+Illustrating extensive formulation with the damsvalley example
+5 interconnected dams
+5 controls per timesteps
+52 timesteps (one per week, over one year)
+nξ = 10 noises for each timestep
+We obtain 1052 scenarios, and ≈ 5.1052 constraints in the extensive formulation ... Estimated storage capacity of the Internet: 1024 bytes.
+Vincent Lecle`re OS - 5 05/01/2022 28 / 29
+Lagrangian decomposition L-Shaped decomposition method Multistage program
+2-stage approach
+The 2-stage approach consists in approximating the multistage program by a two-stage programm :
+relax all non-anticipativity constraints except the ones on u0, this turn the tree into a scenario fan (same number of scenario),
+it means that all decision (u1, . . . , uT−1) are anticipative (not u0).
+reduce the number of scenarios by sampling, and solve the SAA approximation of the 2-stage relaxation.
+Denote v ] the value of the multistage problem, v 2SA the value of the 2-stage relaxation, and v 2mSA the (random) value of the SAA of the
+2-stage relaxation. Then we have
+v 2SA ≤ v ]
+v 2mSA → v 2SA
+E[v 2mSA
+] ≤ v 2SA
+Vincent Lecle`re OS - 5 05/01/2022 29 / 29
+
+
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+An Introduction to
+Stochastic Dual Dynamic Programming (SDDP).
+V. Lecle`re (CERMICS, ENPC)
+12/01/2022
+V. Lecle`re Introduction to SDDP 12/01/2022 1 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Introduction
+Large scale stochastic optimization problems are hard to solve
+Different ways of attacking such problems: decompose the problem and coordinate solutions construct easily solvable approximations (Linear Programming) find approximate value functions or policies
+Behind the name SDDP, Stochastic Dual Dynamic Programming, one finds three different things: a class of algorithms, based on specific mathematical assumptions a specific implementation of an algorithm a software implementing this method, and developed by the PSR company
+V. Lecle`re Introduction to SDDP 12/01/2022 2 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Setting
+Multi-stage stochastic optimization problems with finite horizon.
+Continuous, finite dimensional state and control.
+Convex cost, linear dynamic.
+Discrete, stagewise independent noises.
+V. Lecle`re Introduction to SDDP 12/01/2022 3 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Contents
+1 Kelley’s algorithm
+2 Deterministic case Problem statement Some background on Dynamic Programming SDDP Algorithm Initialization and stopping rule Convergence
+3 Stochastic case Problem statement Computing cuts SDDP algorithm Complements Risk Convergence result
+4 Conclusion
+V. Lecle`re Introduction to SDDP 12/01/2022 4 / 46
+
+
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+J (x )
+V. Lecle`re Introduction to SDDP 12/01/2022 5 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Kelley algorithm
+Data: Convex objective function J, Compact set X , Initial point x0 ∈ X
+Result: Admissible solution x(k), lower-bound v (k) Set J(0) ≡ −∞ ; for k ∈ N do
+Compute a subgradient α(k) ∈ ∂J(x(k)) ; Define a cut C(k) : x 7→ J(x(k)) + 〈α(k), x − x (k)〉; Update the lower approximation J(k+1) = max{J(k), C(k)} ; Solve (P(k)) : min
+x∈X J(k+1)(x );
+Set v (k) = val (P(k)); Select x (k+1) ∈ sol (P(k)); end
+Algorithm 1: Kelley’s cutting plane algorithm
+V. Lecle`re Introduction to SDDP 12/01/2022 6 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Contents
+1 Kelley’s algorithm
+2 Deterministic case Problem statement Some background on Dynamic Programming SDDP Algorithm Initialization and stopping rule Convergence
+3 Stochastic case Problem statement Computing cuts SDDP algorithm Complements Risk Convergence result
+4 Conclusion
+V. Lecle`re Introduction to SDDP 12/01/2022 6 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Problem considered
+We consider an optimal control problem in discrete time with finite horizon T
+min
+x ∈RnT
+T −1
+∑
+t =0
+ct (xt , xt+1) + K (xT )
+s.t. (xt , xt+1) ∈ Pt , x0 given
+xt ∈ Xt
+We assume that Pt ⊂ Rn × Xt+1 is convex, and Xt convex compact
+the transition costs ct (xt , xt+1) and the final cost K (xT ) are convex
+For example, xt follow a dynamic xt+1 = ft (xt , ut ), with
+ft affine, ut ∈ Ut (xt ) is convex compact
+ct (xt , xt+1) = min {Lt (xt , ut ) | ut ∈ Ut (xt ), ft (xt , ut ) = xt+1
+},
+where Lt is a convex instantaneous cost function
+V. Lecle`re Introduction to SDDP 12/01/2022 7 / 46
+
+
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Contents
+1 Kelley’s algorithm
+2 Deterministic case Problem statement Some background on Dynamic Programming SDDP Algorithm Initialization and stopping rule Convergence
+3 Stochastic case Problem statement Computing cuts SDDP algorithm Complements Risk Convergence result
+4 Conclusion
+V. Lecle`re Introduction to SDDP 12/01/2022 7 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Introducing Bellman’s function
+We look for solutions as policies, where a policy is a sequence of functions π = (π1, . . . , πT−1) giving for any state x a control u This problem can be solved by dynamic programming, thanks to the Bellman function that satisfies
+
+
+VT (x) = K (x),
+V ̃t (x) = min
+y :(x,y )∈Pt
+{ct (x, y ) + Vt+1(y )}
+Vt = V ̃t + IXt
+Indeed, an optimal policy for the original problem is given by
+πt (x) ∈ arg min
+xt+1
+{ct (x , xt+1) + Vt+1(xt+1) ∣∣ (xt , xt+1) ∈ Pt
+}
+V. Lecle`re Introduction to SDDP 12/01/2022 8 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Introducing Bellman’s operator
+We define the Bellman operator
+Bt(A) : x 7→ min
+y :(x,y )∈Pt
+{ct(x, y ) + A(y )}
+With this notation, the Bellman Equation reads
+{ VT = K ,
+Vt = Bt (Vt+1) + IXt
+Any approximate cost function V ̆t+1 induce an admissible policy
+πV ̆t+1
+t : x 7→ arg min Bt
+(V ̆t+1
+)(x ).
+By Dynamic Programming, πVt+1
+t is optimal.
+V. Lecle`re Introduction to SDDP 12/01/2022 9 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Properties of the Bellman operator
+Monotonicity:
+V ≤ V ⇒ Bt
+(V ) ≤ Bt
+(V )
+Convexity: if ct is jointly convex, P and X are closed convex, V is convex then
+x 7→ Bt
+(V )(x) is convex
+Polyhedrality: for any polyhedral function V , if ct is also polyhedral, and Pt and Xt are polyhedron, then
+x 7→ Bt
+(V )(x) is polyhedral
+V. Lecle`re Introduction to SDDP 12/01/2022 10 / 46
+
+
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Duality property
+Consider J : X × U → R jointly convex, and define
+φ(x) = min
+u∈U J(x , u)
+Then we can obtain a subgradient α ∈ ∂φ(x0) as the dual multiplier of
+mx,iun J(x, u),
+s.t. x0 − x = 0 [α]
+(This is the marginal interpretation of the multiplier) In particular, we have that
+φ(·) ≥ φ(x0) + 〈α, · − x0〉
+V. Lecle`re Introduction to SDDP 12/01/2022 11 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Contents
+1 Kelley’s algorithm
+2 Deterministic case Problem statement Some background on Dynamic Programming SDDP Algorithm Initialization and stopping rule Convergence
+3 Stochastic case Problem statement Computing cuts SDDP algorithm Complements Risk Convergence result
+4 Conclusion
+V. Lecle`re Introduction to SDDP 12/01/2022 11 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+General idea
+The SDDP algorithm recursively constructs an approximation of each Bellman function Vt as the supremum of affine functions
+At stage k, we have a lower approximation V (k)
+t of Vt and we want to construct a better approximation
+We follow an optimal trajectory (x(k)
+t )t of the approximated problem, and add a so-called “cut” to improve each Bellman function
+V. Lecle`re Introduction to SDDP 12/01/2022 12 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Deterministic SDDP
+V0
+x
+t=0
+V1
+x
+t=1
+K
+x
+t=2
+Final Cost V2 = K Real Bellman function V1 = B1(V2) Real Bellman function V0 = B0(V1)
+V. Lecle`re Introduction to SDDP 12/01/2022 13 / 46
+
+
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Deterministic SDDP
+V0
+x0
+V0(x0)
+V 20(x0)
+x
+t=0
+V1
+x12
+x
+t=1
+K
+x22
+x
+t=2
+Assume that we have lower polyhedral approximations of Vt
+We apply πV (2)
+0 1 to x0 and obtain x (2)
+1
+We apply πV (2)
+1 1 to x (2)
+1 and obtain x(2)
+2
+V. Lecle`re Introduction to SDDP 12/01/2022 13 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Deterministic SDDP
+V0
+x0
+V0(x0)
+V 20(x0)
+x
+t=0
+V1
+x12
+x
+t=1
+K
+x22
+x
+t=2
+Compute a cut for K at x(2)
+2
+Add the cut to V (2)
+2 which gives V (3)
+2
+A new lower approximation of V1 is B1(V (3)
+2)
+We only compute the face active at x(2)
+1
+V. Lecle`re Introduction to SDDP 12/01/2022 13 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+DDP description
+Data: Starting point, initial lower approximation Result: optimal trajectory and value function; VT ≡ K ;
+for k = 1, 2, . . . do set x (k)
+0 = x0
+/* Forward pass : compute trajectory */ for t = 0, . . . , T − 1 do find x (k)
+t+1 ∈ arg min Bt (V (k)
+t+1)(x (k)
+t ); end
+/* Backward pass : update cuts */ for t = T − 1, . . . , 0 do Solve Bt (V (k+1)
+t+1 )(x (k)
+t ) to compute C(k+1)
+t; Update lower approximations : V (k+1)
+t := max{V (k)
+t , C(k+1)
+t }; end end
+Algorithm 2: Deterministic Dual Dynamic Programming
+V. Lecle`re Introduction to SDDP 12/01/2022 14 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Detailing forward pass
+From t = 0 to t = T − 1 we have to solve T one-stage problem of the form
+x (k)
+t+1 ∈ arg min
+y
+ct (x (k)
+t , y ) + V (k)
+t+1(y )
+(x (k)
+t , y ) ∈ Pt
+We only need to keep the trajectory (x(k)
+t )t∈J0,T K.
+V. Lecle`re Introduction to SDDP 12/01/2022 15 / 46
+
+
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Detailing Backward pass
+From t = T − 1 to t = 0 we have to solve T one-stage problem of the form
+θ(k +1)
+t = mx,iyn ct (x , y ) + V (k+1)
+t+1 (y )
+(x, y ) ∈ Pt
+x = x (k)
+t [α(k+1)
+t]
+By construction, we have that
+θ(k +1)
+t = Bt
+(
+V (k+1)
+t +1
+)(x (k)
+t
+), α(k+1)
+t ∈ ∂Bt
+(
+V (k+1)
+t +1
+)(x (k)
+t
+).
+Which means
+C (k +1)
+t := θ(k+1)
+t +〈α(k+1)
+t , ·−x (k)
+t 〉 ≤ Bt
+(
+V (k+1)
+t +1
+)
+≤ Bt
+(
+Vt+1
+)
+= V ̃t ≤ Vt
+V. Lecle`re Introduction to SDDP 12/01/2022 16 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Contents
+1 Kelley’s algorithm
+2 Deterministic case Problem statement Some background on Dynamic Programming SDDP Algorithm Initialization and stopping rule Convergence
+3 Stochastic case Problem statement Computing cuts SDDP algorithm Complements Risk Convergence result
+4 Conclusion
+V. Lecle`re Introduction to SDDP 12/01/2022 16 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Initialization and stopping rule
+To initialize the algorithm, we need a lower bound V (0)
+t for each value function Vt. This lower bound can be computed backward by arbitrarily choosing a point xt and using the standard cut computation.
+At any step k we have an admissible, non optimal trajectory
+(x (k)
+t )t , with an upper bound
+T −1
+∑
+t =0
+ct
+(x (k)
+t , x (k)
+t +1
+) + K (x (k)
+T
+)
+a lower bound V (k)
+0 (x0)
+A reasonable stopping rule for the algorithm is given by checking that the (relative) difference between the upper and lower bounds is small enough
+V. Lecle`re Introduction to SDDP 12/01/2022 17 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Contents
+1 Kelley’s algorithm
+2 Deterministic case Problem statement Some background on Dynamic Programming SDDP Algorithm Initialization and stopping rule Convergence
+3 Stochastic case Problem statement Computing cuts SDDP algorithm Complements Risk Convergence result
+4 Conclusion
+V. Lecle`re Introduction to SDDP 12/01/2022 17 / 46
+
+
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Extended Relatively Complete Recourse
+We say that we are in a relatively complete recourse framework if
+∀t, ∀xt ∈ Xt , ∃xt+1 ∈ Xt+1 such that (xt , xt+1) ∈ Pt .
+We say that we are in a extended relatively complete recourse framework if there exists ε > 0 such that
+∀t, ∀xt ∈ Xt + εB, ∃xt+1 ∈ Xt+1 such that (xt , xt+1) ∈ Pt .
+RCR is required for the algorithm to run (otherwise we could find non-finite problems, and would require some feasability cuts mechanisms).
+ERCR is required for the convergence proof as the way of ensuring that the multipliers αtk remains bounded.
+V. Lecle`re Introduction to SDDP 12/01/2022 18 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Technical lemmas
+Lemma
+Let f : X → R where X is compact. Let (f k )k∈N be a sequence of functions such that
+f k ≤ f k+1 ≤ f
+f k are Lipschitz continuous uniformly in k
+Consider a sequence (xk )k∈N of points of X such that
+f (xk ) − f k+1(xk ) → 0. Then, we also have f (xk ) − f k (xk ) → 0.
+Lemma
+Under convexity assumptions, compactness of Xt , and ERCR the SDDP algorithm is well defined and
+i) for all t, Vt is convex and Lipschitz
+ii) for all t, k, and x ∈ Xt , V tk ≤ Vt
+iii) There exists L > 0 such that ‖αtk ‖ ≤ L, thus V tk is L-Lipschitz
+V. Lecle`re Introduction to SDDP 12/01/2022 19 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Convergence result
+Theorem
+Let K and ct be convex functions, Xt and Pt be closed convex sets, and Xt bounded. Assume that we have extended relatively complete recourse. Then, for every t, we have
+likm V (k)
+t (x (k)
+t ) − Vt (x (k)
+t ) = 0.
+Further, the cost associated to πV (k)
+t converges toward the optimal value of the problem. In other words, the upper and lower bounds are both converging.
+V. Lecle`re Introduction to SDDP 12/01/2022 20 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Contents
+1 Kelley’s algorithm
+2 Deterministic case Problem statement Some background on Dynamic Programming SDDP Algorithm Initialization and stopping rule Convergence
+3 Stochastic case Problem statement Computing cuts SDDP algorithm Complements Risk Convergence result
+4 Conclusion
+V. Lecle`re Introduction to SDDP 12/01/2022 20 / 46
+
+
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+What’s new ?
+Now we introduce random variables ξt in our problem, which complexifies the algorithm in different ways:
+we need some probabilistic assumptions
+for each stage k we need to do a forward phase, for each sequence of realizations of the random variables, that yields a trajectory (x(k)
+t )t, and a backward phase that gives a new cut
+we cannot compute an exact upper bound for the problem value
+V. Lecle`re Introduction to SDDP 12/01/2022 21 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Problem statement
+We consider the optimization problem
+min E[ T −1
+∑
+t =0
+ct (x t , x t+1, ξt+1) + K (x T )
+]
+s.t. (x t , x t+1) ∈ Pt (ξt+1)
+x t ∈ Xt , x 0 = x0 x t σ(ξ1, . . . , ξt )
+under the crucial assumption that (ξt )t∈{1,··· ,T} is a white noise
+we are in an hazard-decision framework.
+V. Lecle`re Introduction to SDDP 12/01/2022 22 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Stochastic Dynamic Programming
+By the white noise assumption, this problem can be solved by dynamic programming, where the Bellman functions satisfy
+
+
+VT = K
+Vˆt (x, ξ) = min
+(x,y)∈Pt (ξ) ct (x , y , ξ) + Vt+1(y )
+V ̃t (x) = E[Vˆt (x, ξt )
+]
+Vt = V ̃t + IXt
+Indeed, an optimal policy for this problem is given by
+πt (x, ξ) ∈ arg min
+(x,y )∈Pt (ξ)
+{ct (x, y , ξ) + Vt+1(y )}
+V. Lecle`re Introduction to SDDP 12/01/2022 23 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Bellman operator
+For any time t, and any function A mapping the set of states and noises X × Ξ into R, we define
+
+
+Bˆt (A)(x, ξ) := min
+(x,y)∈Pt (ξ) ct (x , y , ξ) + A(y )
+Bt (A)(x) := E[Bˆt (A)(x, ξt )
+]
+Thus the Bellman equation simply reads
+
+
+VT = K
+Vt = Bt (Vt+1)
+} {{ }
+V ̃t
++IXt
+The Bellman operators have the same properties as in the deterministic case
+V. Lecle`re Introduction to SDDP 12/01/2022 24 / 46
+
+
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Contents
+1 Kelley’s algorithm
+2 Deterministic case Problem statement Some background on Dynamic Programming SDDP Algorithm Initialization and stopping rule Convergence
+3 Stochastic case Problem statement Computing cuts SDDP algorithm Complements Risk Convergence result
+4 Conclusion
+V. Lecle`re Introduction to SDDP 12/01/2022 24 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Computing cuts (1/2)
+Suppose that we have V (k+1)
+t+1 ≤ Vt+1
+θˆ(k +1)
+t (ξ) = mx,iyn ct (x , y , ξ) + V (k+1)
+t+1 (y )
+s.t x = x (k)
+t [αˆ(k+1)
+t (ξ)]
+(x, y ) ∈ Pt (ξ)
+This can also be written as
+θˆ(k +1)
+t (ξ) = Bˆt
+[
+V (k+1)
+t +1
+]
+(x, ξ)
+αˆ (k +1)
+t (ξ) ∈ ∂x Bˆt
+[
+V (k+1)
+t +1
+]
+(x, ξ)
+Thus, for all ξ, Cˆ(k+1),ξ
+t : x 7→ θˆ(k+1)
+t (ξ) +
+〈
+αˆ (k +1)
+t (ξ), x − x (k)
+t
+〉
+satisfy
+Cˆ(k +1),ξ
+t (x) ≤ Bˆt
+[
+V (k+1)
+t +1
+]
+(x, ξ) ≤ Bˆt
+[
+Vt+1
+]
+(x, ξ) = Vˆt (x, ξ)
+V. Lecle`re Introduction to SDDP 12/01/2022 25 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Computing cuts (2/2)
+Thus, we have an affine minorant of Vˆt (x, ξt ) for each realization of ξt Replacing ξ by the random variable ξt and taking the expectation yields the following affine minorant
+C(k+1) := θ(k+1)
+t+
+〈
+α(k +1)
+t , · − x (k)
+t
+〉
+≤ Vt
+where
+
+
+θ(k +1)
+t := E[θˆ(k+1)
+t (ξt )
+]
+= Bt
+[
+V (k)
+t +1
+]
+(x )
+α(k +1)
+t := E[
+αˆ (k +1)
+t (ξt )
+]
+∈ ∂Bt
+[
+V (k)
+t +1
+]
+(x )
+V. Lecle`re Introduction to SDDP 12/01/2022 26 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Contents
+1 Kelley’s algorithm
+2 Deterministic case Problem statement Some background on Dynamic Programming SDDP Algorithm Initialization and stopping rule Convergence
+3 Stochastic case Problem statement Computing cuts SDDP algorithm Complements Risk Convergence result
+4 Conclusion
+V. Lecle`re Introduction to SDDP 12/01/2022 26 / 46
+
+
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Abstract SDDP
+V0
+x
+t=0
+V1
+x
+t=1
+K
+x
+t=2
+Final Cost V2 = K Real Bellman function V1 = B1(V2) Real Bellman function V0 = B0(V1)
+V. Lecle`re Introduction to SDDP 12/01/2022 27 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Abstract SDDP
+V0
+x0
+V0(x0)
+V 20(x0)
+x
+t=0
+V1
+x12
+x
+t=1
+K
+x22
+x
+t=2
+Apply πV (2)
+0 1 to x0 and obtain X (2)
+1
+Draw a random realisation x(2)
+1 of X (2)
+1
+We apply πV (2)
+1 1 to x (2)
+1 and obtain X (2)
+2
+Draw a random realisation x(2)
+2 of X (2)
+2
+V. Lecle`re Introduction to SDDP 12/01/2022 27 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Abstract SDDP
+V0
+x0
+V0(x0)
+V 20(x0)
+x
+t=0
+V1
+x12
+x
+t=1
+K
+x22
+x
+t=2
+Compute a cut for K at x(2)
+2
+Add the cut to V (2)
+2 which gives V (3)
+2
+A new lower approximation of V1 is B1(V (3)
+2)
+Compute the face active at x(2)
+1
+V. Lecle`re Introduction to SDDP 12/01/2022 27 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+SDDP description
+for k = 1, 2, . . . do
+set V (k+1)
+T ≡ K ; x (k)
+0 = x0 ;
+draw (ξ(k)
+t )t∈J1,T K ;
+/* Forward pass : compute trajectory */ for t = 0, . . . , T − 1 do find x (k)
+t+1 ∈ arg min Bˆt (V (k)
+t+1)(x (k)
+t , ξ(k)
+t ); end
+/* Backward pass : update cuts */ for t = T − 1, . . . , 0 do for ξ ∈ Ξt do
+Solve Bˆt (V (k+1)
+t+1 )(x (k)
+t , ξ) to compute Cˆ(k+1),ξ
+t; end end
+Compute averaged cut : C(k+1)
+t;
+Update lower approximation : V (k+1)
+t := max{V (k)
+t , C(k+1)
+t }; end
+Algorithm 3: Stochastic Dual Dynamic Programming
+V. Lecle`re Introduction to SDDP 12/01/2022 28 / 46
+
+
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Detailing forward pass
+From t = 0 to t = T − 1 we have to solve T one-stage problem of the form
+x (k)
+t+1 ∈ arg min
+y
+ct (x (k)
+t , y , ξ(k)
+t ) + V (k)
+t+1(y )
+(x (k)
+t , y ) ∈ Pt
+We only need to keep the trajectory (x(k)
+t )t∈J0,T K.
+V. Lecle`re Introduction to SDDP 12/01/2022 29 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Detailing Backward pass
+For each t = T − 1 → 0 we solve Ξt one-stage problem
+θˆ(k +1)
+t (ξ) = myin ct (x (k)
+t , y , ξ) + V (k+1)
+t+1 (y )
+(x (k)
+t , y ) ∈ Pt
+x = x (k)
+t [αˆ(k+1)
+t (ξ)]
+By construction, we have that
+θˆ(k +1)
+t (ξ) = Bt
+(
+V (k)
+t +1
+)(x (k)
+t , ξ), αˆ(k+1)
+t (ξ) ∈ ∂Bt
+(
+V (k)
+t +1
+)(x (k)
+t , ξ).
+We average the coefficients
+θ(k +1)
+t = E[θˆ(k+1)
+t (ξ)], α(k+1)
+t = E[αˆ(k+1)
+t (ξ)]
+Which means
+C (k +1)
+t := θ(k+1)
+t +〈α(k+1)
+t , ·−x (k)
+t 〉 ≤ Bt
+(
+V (k+1)
+t +1
+)
+≤ Bt
+(
+Vt+1
+)
+= V ̃t ≤ Vt
+V. Lecle`re Introduction to SDDP 12/01/2022 30 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Recall on CLT
+Let {Ci }i∈N be a sequence of identically distributed random variables with finite variance.
+Then the Central Limit Theorem ensures that
+√n
+( ∑n
+i=1 C i
+n − E[C 1]
+)
+=⇒ G ∼ N (0, Var [C 1]) ,
+where the convergence is in law.
+In practice it is often used in the following way. Asymptotically,
+P(E[C1
+]∈
+[C ̄ n − 1.96σn
+√n , C ̄ n + 1.96σn
+√n
+])
+' 95% ,
+where C ̄ n =
+∑in=1 C i
+n is the empirical mean and
+σn =
+√ ∑in=1(C i −C ̄ n)2
+n−1 the empirical standard deviation.
+V. Lecle`re Introduction to SDDP 12/01/2022 31 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Bounds
+Exact lower bound on the value of the problem: V (k)
+0 (x0). Exact upper bound on the value of the problem:
+E[ T −1
+∑
+t =0
+ct (x (k)
+t , x (k)
+t+1, ξt+1) + K (X T )
+]
+where X (k)
+t is the trajectory induced by V (k)
+t. This bound cannot be computed exactly, but can be estimated by Monte-Carlo method as follows
+Draw N scenarios {ξ1n, . . . , ξnT
+}.
+Simulate the corresponding N trajectories x(k),n
+t,
+and the total cost for each trajectory C (k),n.
+Compute the empirical mean C ̄(k),N and standard dev. σ(k),N . Then, with confidence 95% the upper bound on the problem is
+[C ̄(k),N − 1.96σ(k),N
+√N , C ̄(k),N + 1.96σ(k),N
+√N
+} {{ }
+UBk
+]
+V. Lecle`re Introduction to SDDP 12/01/2022 32 / 46
+
+
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Stopping rule
+One stopping test consist in fixing an a priori relative gap ε, and stopping if
+UBk − V (k)
+0 (x0)
+V (k)
+0 (x0) ≤ ε
+in which case we know that the solution is ε-optimal with probability 97.5%.
+It is not necessary to evaluate the gap at each iteration.
+To alleviate the computational load, we can estimate the upper bound by using the trajectories of the recent forward phases.
+Another more practical stopping rule consists in stopping after a given number of iterations or fixed computation time.
+V. Lecle`re Introduction to SDDP 12/01/2022 33 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Contents
+1 Kelley’s algorithm
+2 Deterministic case Problem statement Some background on Dynamic Programming SDDP Algorithm Initialization and stopping rule Convergence
+3 Stochastic case Problem statement Computing cuts SDDP algorithm Complements Risk Convergence result
+4 Conclusion
+V. Lecle`re Introduction to SDDP 12/01/2022 33 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Non-independent inflows
+In most cases the stagewise independence assumption is not realistic.
+One classical way of modelling dependencies consists in considering that the inflows It follow an AR-k process
+It = α1It−1 + · · · + αk It−k + θt + ξt
+where ξt is the residual, forming an independent sequence.
+The state of the system is now (Xt , It−1, . . . , I(t−k)).
+V. Lecle`re Introduction to SDDP 12/01/2022 34 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Implementations and numerical tricks
+We can play with the number of forward / backward pass. Classically we do 200 forward passes in parallel, before computing cuts.
+Instead of averaging the cuts, we can keep one cut per alea, for a multicut version. In other word instead of representing Vt we
+represent Vˆt .
+Early forward passes are not really usefull, selecting (randomly or by hand) a few trajectory can save some workload.
+Cut pruning (eliminating useless cuts) is easy to implement and pretty efficient.
+Adding some regularization term in the forward pass has shown some numerical improvement but is not yet fully understood.
+V. Lecle`re Introduction to SDDP 12/01/2022 35 / 46
+
+
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Cut Selection methods I
+Let V (k)
+t be defined as max`≤k C(`)
+t
+For j ≤ k, if
+xm,iαn α − C(j)
+t (x)
+s.t. α ≥ C(`)
+t (x) ∀` 6= j
+is non-negative, then cut j can be discarded without modifying V (k)
+t
+this technique is exact but time-consuming.
+V. Lecle`re Introduction to SDDP 12/01/2022 36 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Cut Selection methods II
+Instead of comparing a cut everywhere, we can choose to compare it only on the already visited points. The Level-1 cut method goes as follow:
+keep a list of all visited points x(`)
+t for ` ≤ k.
+for ` from 1 to k, tag each cut that is active at x(`)
+t. Discard all non-tagged cut.
+V. Lecle`re Introduction to SDDP 12/01/2022 37 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Contents
+1 Kelley’s algorithm
+2 Deterministic case Problem statement Some background on Dynamic Programming SDDP Algorithm Initialization and stopping rule Convergence
+3 Stochastic case Problem statement Computing cuts SDDP algorithm Complements Risk Convergence result
+4 Conclusion
+V. Lecle`re Introduction to SDDP 12/01/2022 37 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Coherent Risk Measure I
+To take into account some risk aversion we can replace the expectation by a risk measure. A risk measure is a function giving to a random cost X a determinitic equivalent ρ(X ) A Coherent
+Risk Measure ρ : L∞(Ω, F, P) → R is a functionnal satisfying
+Monotonicity: if X ≥ Y then ρ(X ) ≥ ρ(Y ),
+Translation equivariance: for c ∈ R we have
+ρ(X + c) = ρ(X ) + c,
+Convexity: for t ∈ [0, 1], we have
+ρ(tX + (1 − t)Y ) ≤ tρ(X ) + (1 − t)ρ(Y ),
+Positive homogeneity: for α ∈ R+, we have ρ(αX ) = αρ(X ).
+V. Lecle`re Introduction to SDDP 12/01/2022 38 / 46
+
+
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Coherent Risk Measure II
+From convex analysis we obtain the main theorem over coherent risk measure.
+Theorem
+Let ρ be a coherent risk measure, then there exists a (convex) set of probability P such that
+∀X , ρ(X ) = sup
+Q∈P EP[X ].
+V. Lecle`re Introduction to SDDP 12/01/2022 39 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Average Value at Risk I
+One of the most practical and used coherent risk measure is the Average Value at Risk at level α. Roughly, it is the expectation of the cost over the α-worst cases. For a random variable X admitting a density, we define de value at risk of level α, as the quantile of level α, that is
+VaRα(X ) = inf
+{
+t ∈ R | P(X ≥ t) ≤ α
+} .
+And the average value at risk is
+AVaRα(X ) = E[X ∣∣ X ≥ VaRα(X )]
+V. Lecle`re Introduction to SDDP 12/01/2022 40 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Average Value at Risk II
+One of the best aspect of the AVaR, is the following formula
+AVaRα(X ) = min
+t ∈R
+{
+t + E[X − t]+
+α
+} .
+Indeed it allow to linearize the AVaR.
+V. Lecle`re Introduction to SDDP 12/01/2022 41 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+SDDP and risk
+The problem studied was risk neutral
+However a lot of works has been done recently about how to solve risk averse problems
+Most of them are using AVAR, or a mix between AVAR and expectation either as objective or constraint
+Indeed AVAR can be used in a linear framework by adding other variables
+Another easy way is to use “composed risk measures”
+Finally a convergence proof with convex costs (instead of linear costs) exists, although it requires to solve non-linear problems
+V. Lecle`re Introduction to SDDP 12/01/2022 42 / 46
+
+
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Contents
+1 Kelley’s algorithm
+2 Deterministic case Problem statement Some background on Dynamic Programming SDDP Algorithm Initialization and stopping rule Convergence
+3 Stochastic case Problem statement Computing cuts SDDP algorithm Complements Risk Convergence result
+4 Conclusion
+V. Lecle`re Introduction to SDDP 12/01/2022 42 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Assumptions
+Noises are time-independent, with finite support.
+Xt is convex compact, Pt is closed convex.
+Costs are convex and lower semicontinuous.
+We are in a strong relatively complete recourse framework.
+Remark, if we take the tree-view of the algorithm
+stage-independence of noise is not required to have theoretical convergence
+node-selection process should be admissible (e.g. independent, SDDP, CUPPS...)
+V. Lecle`re Introduction to SDDP 12/01/2022 43 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Convergence result
+Theorem
+With the preceding assumption, we have that the upper and lower bound are almost surely converging toward the optimal value, and we can obtain an ε−optimal strategy for any ε > 0. More precisely, if we call V (k)
+t the outer approximation of the
+Bellman function Vt at step k of the algorithm, and π(k)
+t the corresponding strategy, we have
+V (k)
+0 (x0) →k V0(x0)
+and
+E[
+ct
+(x (k)
+t , x (k)
+t+1, ξt
+) + V (k)
+t+1(x (k)
+t+1)
+]
+− Vt (x (k)
+t ) →k 0.
+V. Lecle`re Introduction to SDDP 12/01/2022 44 / 46
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Conclusion
+SDDP is an algorithm, more precisely a class of algorithms, that
+exploits convexity of the value functions (from convexity of costs...)
+does not require state discretization
+constructs outer approximations of Vt, those approximations being precise only “in the right places” gives bounds:
+“true” lower bound V (k)
+0 (x0)
+estimated (by Monte-Carlo) upper bound
+constructs linear-convex approximations, thus enabling to use linear solver like CPLEX
+can be shown to display asymptotic convergence
+V. Lecle`re Introduction to SDDP 12/01/2022 45 / 46
+
+
+Kelley’s algorithm Deterministic case Stochastic case Conclusion
+Bibliography
+R. Van Slyke and R. Wets (1969).
+L-shaped linear programs with applications to optimal control
+and stochastic programming.
+SIAM Journal on Applied Mathematics
+M. Pereira, L.Pinto (1991).
+Multi-stage stochastic optimization applied to energy planning
+Mathematical Programming
+A. Shapiro (2011).
+Analysis of stochastic dual dynamic programming method.
+European Journal of Operational Research.
+P.Girardeau, V.Lecl`ere, A. Philpott (2014).
+On the convergence of decomposition methods for multi-stage
+stochastic convex programs.
+Mathematics of Operations Research.
+V. Lecle`re Introduction to SDDP 12/01/2022 46 / 46

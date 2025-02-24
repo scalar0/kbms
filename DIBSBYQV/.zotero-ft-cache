@@ -1,0 +1,5844 @@
+Introduction to Vibration and Acoustics Page 1
+CentraleSupelec
+Introduction to Vibration and Acoustics
+Pierre-Etienne Gautier
+Andrea Barbarulo
+2018-2019
+
+
+Introduction to Vibration and Acoustics Page 2
+CentraleSupelec
+
+
+Introduction to Vibration and Acoustics Page 3
+CentraleSupelec
+Introduction to Vibration and Acoustics .................................................................................... 1 1. Discrete or discretized systems dynamics ....................................................................... 6 1.1. Multiple degree of freedom (MDOF) oscillator ...................................................... 6 1.2. Dynamic equation .................................................................................................... 7 1.3. Associated conservative system and solutions (eigenvector basis) ......................... 7 1.4. Orthogonality of eigen modes with respect to M and K .......................................... 8 1.5. Modal expansion of the solution.............................................................................. 8 1.6. Rayleigh’s quotient ................................................................................................ 10 1.7. Damped oscillator (« proportional damping » case).............................................. 11 1.8. Forced response; Complex notation; Frequency response function (FRF) ........... 12 1.9. Interpretation of the terms of the FRF ................................................................... 14 1.10. General case of viscously damped systems........................................................ 15 2. Beam Dynamics ............................................................................................................ 18 2.1. Introduction to beam dynamics.............................................................................. 18 2.2. Beam kinematics and dynamic equations .............................................................. 20 2.3. Dynamic equations and their solutions: waves and modes.................................... 28 2.4. The traction-compression (elastic bar) case........................................................... 29 2.5. Beam vibration for bending movements (Euler-Bernoulli case) ........................... 35 2.6. Conclusion ............................................................................................................. 41 3. Energetic approach: Virtual Power Theorem for continuous media: 3D solids and beams.................................................................................................................................... 44 3.1. Vibration of 3D elastic solids: Basic concepts and strong formulation................. 44 3.2. Virtual Power Theorem/Principle .......................................................................... 47 3.3. Mass and stiffness operators, properties, and general weak formulation .............. 49 3.4. VPT/VPP and weak formulation for beams (bending) .......................................... 50 3.5. Eigenmode basis .................................................................................................... 53 3.6. Rayleigh’s Quotient ............................................................................................... 54 3.7. Conclusion and important formulas....................................................................... 54 4. Galerkin and Finite Element methods........................................................................... 57 4.1. Galerkin method for system discretisation ............................................................ 57 4.2. The Finite Element Method: Principles ................................................................. 62 4.3. Finite Element modelling of a bar (traction-compression) .................................... 63 4.4. Finite Element formulation for a thin beam in-plane bending problem (no prestress)........................................................................................................................... 68 4.5. Conclusion and important formulas:...................................................................... 70 5. Modes in continuous and discrete systems ................................................................... 73 5.1. Example of a simply supported beam: the modal basis ......................................... 73 5.2. The general case of a continuous system ............................................................... 75 5.3. Frequency Response Function in case of a MDOF discrete (or discretized) systems 76 5.4. Modal truncation: Residual flexibility ................................................................... 78 5.5. Base or seismic excitation: effective masses ......................................................... 79 5.6. Conclusion and important formulas....................................................................... 80 6. Introduction to random vibrations, and extreme value analysis.................................... 82 6.1. Random variables and processes ........................................................................... 82 6.2. Stationary random response of linear SDOF dynamical systems .......................... 89 6.3. Stationary random response of MDOF systems .................................................... 92 6.4. Example: Basic introduction to wind engineering................................................. 94 6.5. Conclusion and important formulas....................................................................... 95
+
+
+Introduction to Vibration and Acoustics Page 4
+CentraleSupelec
+7. Introduction to Acoustics-Basic Equations and Sources............................................... 97 7.1. Linear acoustics ..................................................................................................... 97 7.2. Plane acoustic waves............................................................................................ 103 7.3. Acoustic energy density, acoustic intensity ......................................................... 105 7.4. Introduction to acoustic sources........................................................................... 107 8. Acoustic modes and waveguides................................................................................. 111 8.1. Acoustic modes .................................................................................................... 111 8.2. Acoustic waveguides ........................................................................................... 115 8.3. Conclusion: .......................................................................................................... 121 9. Bibliography................................................................................................................ 122
+
+
+Introduction Page 5
+CentraleSupelec
+
+
+Discrete or discretized system systems dynamics Page 6
+CentraleSupelec
+1. Discrete or discretized systems dynamics
+1.1. Multiple degree of freedom (MDOF) oscillator
+It is well known, that in the case of a system of n rigid bodies linked by elastic springs or linear dampers, the dynamic equations have a generic form, which generalizes the single degree of freedom oscillator. This form is known as the multi degree of freedom (MDOF) oscillator and will be given below. This is also the case, as it will be seen in the following chapters, for discretised systems, e.g. continuous systems discretised by the finite element method. These MDOF oscillator exhibit generic properties (eigenfrequencies and eigenmodes), which will be developed below. These properties generalise the ones of the single degree of freedom oscillator, and are also similar to those of continuous systems.
+In the following a discrete (or discretised) MDOF system of order N will be considered. Examples of such system are plotted in Fig 2.1 and 2.2 below:
+Fig 2.1 Two degree of freedom system
+Fig 2.2 Model of a five storey building as a lumped mass 5 DOF system
+
+
+Discrete or discretized system systems dynamics Page 7
+CentraleSupelec
+1.2. Dynamic equation
+The MDOF oscillator equation writes, if x(t )is a N-th order (time dependant) column vector, the components of which are the N system degrees of freedom or coordinates:
+Mẍ + Cẋ + Kx = F (1.1)
+Where: M is the nxn system mass matrix, C the nxn system damping matrix, K the NxN system stiffness matrix. M is symmetric positive and definite, K is symmetric positive and semi definite (possibly zero eigenvalues of K may correspond to rigid body modes), and C is symmetric. F(t) is the N dimension (time dependent ) vector, whose components are the N components of driving force acting on each of the system degrees of freedom.
+Let us remember that:
+ The system kinetic energy is given by T = 1
+2 tẋ Mẋ
+ The elastic energy for the system is : U = 1
+2 txKx,
+Which shows the positive character of M and K and semi-definite character of K: rigid body modes or internal mechanisms entail no strain energy.
+1.3. Associated conservative system and solutions (eigenvector basis)
+The dynamic equation of the associated conservative system (same M, same K, C=0) writes:
+Mẍ + Kx = 0 (1.2)
+We assume that Ker(M) is empty, that is the system has no “purely static mode”. We will be looking at the solutions for the free vibrating system (F=0).
+Solutions of eq. (1.2) are sought in the following form:
+cos( )
+x = x0 t + , or equivalently eit
+x = X0 .
+Replacing any of the previous expression in (2.2) gives a necessary condition for nonzero
+solutions to exist:
+ 0
+−2M + K x = , (1.3)
+or alternatively since M is definite :
+− 2I + M −1K x = 0
+ (1.4)
+The solutions to both previous equations are the N (since Ker M is empty) vectors: Φn, n=1,...,N, which are the eigenvectors of M-1K.
+
+
+Discrete or discretized system systems dynamics Page 8
+CentraleSupelec
+The eigenvalues of M-1K satisfy then (2.3):   0
+−n2M + K Φn = and are then the square of
+the circular frequencies n2 of the solutions to (1.2).
+1.4. Orthogonality of eigen modes with respect to M and K
+It can be shown that the modal vectors Φn are orthogonal to each other with respect to both the inner products defined by M and K.
+That is:
+kn N
+mn N
+l nn
+t
+ln n
+t
+, 1,...,
+, 1,...,
+ln
+ln
+==
+==
+
+
+Φ KΦ
+Φ MΦ (1.5)
+Alternatively the eigen modes or modal vectors Φn can be seen to simultaneously diagonalize M and K.
+Equivalently, matrix Φ, whose column vectors Φ i are formed with the eigen modes, then verifies, thanks to (2.5):
+   n
+t n
+tΦMΦ = diag m , ΦKΦ = diag k (1.6)
+Proof:
+Let us take two different mode indexes n and l, and write (2.3) for mode n and pre- multiply the obtained equation by tΦl:
+ 0
+l − n2 + n =
+tΦ  M K Φ , which gives 0
+− 2 l n=
+t ln n
+tΦ KΦ  Φ MΦ
+In a similar way, (2.3) written for mode l, and pre-multiplied by by tΦl gives:
+0
+− 2 n l=
+t nl l
+tΦ KΦ  Φ MΦ
+Thanks to the symmetry of K and M, subtracting the latter two equations gives:
+() 0
+2− 2 l n=
+t
+l n Φ MΦ , since 2 2
+l  n , then l n = 0
+tΦ MΦ , and consequently l n = 0
+tΦ KΦ .
+Remark: In (2.5) the quantities mn and kn, the diagonal terms of tΦMΦ and tΦKΦ are respectively called modal masses and modal stiffnesses.
+1.5. Modal expansion of the solution
+As these vectors form a basis of RN, one can write: =
+=
+N
+n
+qn n 1
+x(t) (t)Φ (1.7)
+Or, alternatively, with q the vector formed with qn(t) as components:
+x(t) = Φq(t) (1.8)
+The –time dependent- qn(t) will be called “modal coordinates”.
+
+
+Discrete or discretized system systems dynamics Page 9
+CentraleSupelec
+Dynamic equation (2.2) in homogeneous form (F=0) can be written in terms of q coordinates, using (2.8):
+MΦq̈ (t) + KΦq(t) = 0,
+which in turn writes, when pre-multiplying both members by matrix tΦ the transposed of Φ :
+tΦMΦq̈ + tΦKΦq = 0 (1.9)
+Now since Φ is the matrix which simultaneously diagonalises M and K, one has from (1.6):
+   n
+t n
+tΦMΦ = diag m , ΦKΦ = diag k ,
+And the previous coupled equation system uncouples into:
+mnq ̈n + knqn = 0, n=1,...,N (1.10)
+a system of n uncoupled oscillators with respective circular frequencies n N
+m
+k
+n
+n
+n = , = 1,
+.
+The system of the N vectors Φn is called modal basis. In this basis, with coordinates qn , the dynamical MDOF system equations write:
+q̈ + [diag (ωn2)]q = 0 (1.11)
+With n n-th circular resonant frequency of the system.
+Let us notice that Φ n can be normalized to any value, through the arbitrary choice of the modal mass mn.
+The time-domain response of the free system (with zero external force) is then, as expressed in terms of modal coordinates:
+cos( ),
+0
+qn = qn nt +n
+It then becomes in terms of initial coordinates x:
+( ) cos( ),
+0
+11
+n nn
+N
+n
+nn
+N
+n
+= = nq t = = q  t +
+x Φ Φ (1.12)
+Where Φ n are column vectors of matrix Φ.
+To summarize, the free system response is then the superposition of the response of N eigen modes, each of them being characterized by:
+• its characteristic circular frequency n or associated eigen frequency 
+
+2
+n
+fn =
+• its modal shape vector Φ n, which characterizes each point of the structure characteristic vibration amplitude, for mode # n
+
+
+Discrete or discretized system systems dynamics Page 10
+CentraleSupelec
+Let us remark that matrix Φ being real valued, for a given mode, all the structure degrees of freedom vibrate in phase (this will no longer be the case for a damped system in general).
+ The squared eigen circular frequencies n2 can be seen as the eigenvalues of the following system:
+ 0
+−n2 M + K Φn = , (1.13)
+ Eigenmodes, or modal shapes of the structure, which again in the present situation are real, are the eigenvectors of the abovementioned system.
+1.6. Rayleigh’s quotient
+For an arbitrary vector x let us define Rayleigh’s quotient as: xMx
+xKx
+xt
+t
+R( ) = (1.14)
+If x is now projected on the modal shape basis x = Φ q where now Φ is normed in such a way
+that 
+
+= == =
+n
+n
+n
+nn
+t
+t
+t
+t t
+q
+q
+Rx 2
+22
+, ()
+
+q ΦMΦq
+q ΦKΦq
+xMx
+xKx
+ΦMΦ I t
+t
+Let us first remark that if x = Φi , then 2
+() i
+R x = , and we have the following theorem:
+Theorem: Rayleigh’s quotient is stationary in the vicinity of every eigenvector and reaches for its own value an extremum which is equal to the corresponding eigen value (squared value of the modal circular frequency).
+Indeed, let: 
+ 
+ =  + i k
+i k
+i k kk q
+q
+x Φ x qΦ Φ
+Setting: = i  1
+k
+i
+iq
+q 
+Then: ( )
+2 2 
+2
+2 22
+2
+22
+1
+1
+() k i
+ik
+i
+ik
+k ii
+i
+ii O
+q
+q
+Rx  
+
+ 
+ =+
++
++
+= =
+
+
+
+
+
+Corollary: if 2
+1 is the lowest eigenvalue of the system, then R(x) reaches a minimum value
+when x = Φ 1.
+This provides a practical numerical algorithm to search the eigenvalues and eigenvectors of a system;
+
+
+Discrete or discretized system systems dynamics Page 11
+CentraleSupelec
+Once 2
+1 is found the same approach is then applied in ⊥
+1
+Φ with respect to K and M inner
+products, which will lead to 2
+2 and Φ 2.
+1.7. Damped oscillator (« proportional damping » case)
+The equations of motion of the free system in the viscous damping case then writes:
+Mẍ + Cẋ + Kx = 0 (1.15)
+Setting as previously x= Φ q, the above equation becomes: tΦMΦq̈ + tΦCΦq̇ + tΦKΦq = 0,
+(M −1C )M −1K = M −1K (M −1C ) is a sufficient condition for the system to be diagonalized,
+this is the so called « Caughey » condition which is not by any means guaranteed to apply in practice!
+One can show however that the Caughey condition is automatically satisfied when: C = M + K .
+Damping is in that case said to be « proportional » (i.e. to the mass and stiffness matrixes)
+If the Caughey condition is satisfied then equation, then the coupled system equations Mẍ + Cẋ + Kx = 0 simplify again into a system of uncoupled equations:
+[diag (mn)]q̈ + [diag (cn)]q̇ + [diag (kn)]q = 0 (1.16)
+Setting
+n
+n
+nm
+c
+2 = ,
+and
+n
+n
+nm
+k
+2 = , where i
+ is the resonant frequency of the n-th mode of an undamped system
+with same matrixes mass and stiffness matrixes M and K, but with no damping (the “associated conservative system”) the system (1.16 ) becomes : q ̈n + 2δnq ̇n + ωn2 qn = 0
+Equations (1.16) can be interpreted again as n uncoupled but now damped oscillators :
+cos( ),
+0
+nn
+t
+qn qne n  t 
+= − + (1.17)
+With respective:
+-resonant circular frequencies: n = n2 −n2 = n 1 −n2 (1.18)
+-and damping ratio:
+n
+n
+n
+
+ = (1.19)
+Orders of magnitude:
+
+
+Discrete or discretized system systems dynamics Page 12
+CentraleSupelec
+Damping ratios are of the order of magnitude of 0,001 or even lower for metallic monobloc structures ( springs, railway monobloc wheels) , about 0,01 or higher for assembled structures such as an automotive , railway, or plane carbody, a satellite or a bridge.... They can be much higher (near to critical damping ration : = 1 ) for structures involving
+elastomers or rubber materials.
+The free system response is then given by:
+cos( ),
+0
+11
+nn
+t n
+N
+n
+in
+N
+n
+iq Q e n t 
+= = − +
+x = Φ = Φ (1.20)
+For a given mode, all the points in the structure are vibrating in phase, which is not the case in general for damped dynamical systems, and is encountered indeed in practice when experimental modal analysis of a system is carried out. In practice however, especially in design studies where the actual damping of the assembly of the structure cannot be measured or even predicted, the « proportional damping hypothesis is often taken as « default values ». This can be relatively correct if the structure is « weakly damped » and on the other hand if the modal separation (distance between modes in terms of frequencies) is « satisfactory »!
+Two sufficient conditions for this modes uncoupling hypothesis - known as “Basile’s hypothesis” - to be verified are:
+2 1 (Warburton)
+1 (Hasselman)
+1
+2
+2
+2
+2
+2
+k
+j
+k
+kjj
+kjj j
+jj
+kj
+j
+k
+j
+C
+C
+C
+C
+min
+
+ 
+
+
+ 
+  −
+
+
+
+
+
+
+
+ −
+
+
+
+
+
+
+
+
+
+
+
+But as, except in very particular cases, the Cij are not known (they can just be estimated through measurements!), it is kind of a chicken and egg story.... Nevertheless, Basile’s hypothesis is said to work rather satisfactorily in practice for a number
+of lightly damped structures (i  1% ).
+1.8. Forced response; Complex notation; Frequency response function (FRF)
+a) Forced response
+Let us consider our damped system again, with now proportional damping hypothesis in order to simplify the calculations, and let us consider the system’s response to a general time domain excitation. In a second step, the excitation will be taken as harmonic, with circular frequency :
+Mẍ + Cẋ + Kx = F(t)
+
+
+Discrete or discretized system systems dynamics Page 13
+CentraleSupelec
+Let us decompose x on the eigenmode basis, setting:
+x = = Φ = Φq
+n
+N
+n
+nq
+1
+,
+Now substitute x by Φq, in the previous system matrix equation, which was initially premultiplied by the transposed matrix of Φ i.e. t Φ. Then thanks to the simultaneous diagonlizing property of Φ with respect to M, C, K, shown in the previous paragraph the forced system equations uncouple again into:
+[diag (mn)]q̈ + [diag (cn)]q̇ + [diag (kn)]q = tΦF(t) Or
+mi(q ̈n + 2δnq ̇n + ωn2 qn) = tBF(t) n=1,....,N (1.21)
+The system response in then that of N uncoupled damped oscillators, each of them (index n) being excited by the projection of the excitation vector F on the modal shape vector Φn.
+b) Harmonic excitation -Complex notations
+In particular, if the excitation vector F is harmonic with circular frequency, each of the oscillators response is harmonic with circular frequency .
+In practice , whereas quantities in terms of excitation (generally forces) , or response (displacements or accelerations) are harmonic, it is often chosen, in the same way as in electrical engineering, to express the system sate quantities (excitation and response) in complex numbers, in order to understand and calculate mode easily phase lags. The system excitations and response values will be taken as the real part of these complex quantities.
+Indeed, setting: e and q Q e Qn C
+it nn
+= i t = 0 0
+0 , ,
+F F , the above equations turn into :
+m i Q nn N
+t
+n ( 2 n n ) n 0 , 1,
+−2 +  +2 0 = Φ F =
+Then, substituting the components of q by their expression calculated just above into x= Φq leads to:
+it
+n
+in n n
+nn n
+N
+n
+ne
+mi
+q
+  
+= =  − + +
+== =
+1
+0
+22
+1 ( 2 )F
+ΦΦ
+x Φq Φ
+t
+c) Frequency response function
+The latter expression introduces the frequency response (matrix) function (FRF) H(ω),
+which is defined , if one sets i eit
+x = X 0 ( ) , by the matrix function linking the system’s
+response vector to the systems excitation vector , for an excitation circular frequency ω :
+X 0 (i) = H ()F0 : (1.22)
+This definition is quite general and applies in fact to any measured or modelled system.
+
+
+Discrete or discretized system systems dynamics Page 14
+CentraleSupelec
+For the discretized system under consideration, the FRF matrix then simply writes in terms of modal quantities/
+
+= −+ +
+=
+N
+nn n n
+nn
+1m i
+( 2 2 2)
+( )   
+ ΦΦ
+H
+t
+(1.23)
+Attention has to be taken to the fact that, F and x being n- dimensional complex vectors, H is a – complex valued- NxN matrix.
+H can also be calculated by taking the Laplace transform of eq. (2.17) and taking p=iω, if p is the Laplace variable.
+1.9. Interpretation of the terms of the FRF
+In terms of components, the Hi,j term row i and column j or the FRF reads :
+
+= −+ +
+=
+N
+nn n n
+ni n j
+ij 1m i
+22
+,,
+, (2 )
+( )   
+ ΦΦ
+H (1.24)
+It means physically the response on the coordinate of index i (usually displacement or rotation at an observation or measurement point) to a force which is concentrated on the coordinate of index j (generally an excitation point, or an input point from a vibrating source).
+It expresses that the response at a given (circular) frequency as a sum of the contribution of each mode for that frequency.
+Then for each mode n, the response on point (or coordinate) i to an excitation on point (or
+coordinate) j is the product of the n-th modal shapes at points i and j divided by the factor
+( 2 2 2)
+nn
+− + i+ . This factor is in fact the dominator of an FRF function for a single degree
+oscillator.
+a) Evolution with frequency: dynamic amplification factor
+When  is close to n, the resonance circular frequency of mode n, this factor is equal to
+2
+2in= 2inn , and as the damping ratio n of mode n can be very low, the denominator can
+be very low then the FRF term can be very high: this characterises the generally strong increase of the amplitude of the FRF at the resonance of each mode.
+
+
+Discrete or discretized system systems dynamics Page 15
+CentraleSupelec
+The figure below shows, for various values ofn , the evolution in amplitude and phase of a
+single mode oscillator ( 2 )
+1
+() 2 2
+mn  in n
+ −+ +
+H = , or in other words the n-th mode
+dynamic contribution, or dynamic amplification factor.
+Figure 2.1: Dynamic amplification factor: module D and phase φ of the single mode FRF
+transfer function ( 2 )
+1
+() 2 2
+nn
+ i 
+ −+ +
+H = , as a function of circular frequency ω and
+damping ratio ξ [Preumont]
+b) Influence of the modal shape vector Φn
+The response amplitude for mode n was seen to be is the product of the n-th modal shapes at points i (response coordinate) and j (excitation point or coordinate). It can be amplified if either the amplitude or modal vector at excitation or response dof is maximum.
+Conversely the modal response can be null if the modal shape is equal to zero either on the excitation or response dof (nodal point or dof for this mode).
+A practical application of this principle can be cited for passenger comfort of railway coaches, where the secondary suspension points were positioned at nodal point of the first global flexural mode of the vehicle, in order to minimize the excitation of that mode.
+1.10. General case of viscously damped systems
+
+
+Discrete or discretized system systems dynamics Page 16
+CentraleSupelec
+The general case of viscously damped system (Matrix C general) can be treated analytically. However, the formalism is then to rewrite the equations as a first order differential system using the sate form of the equations introducing the state vector
+[x
+ẋ ]
+. The modal shape vector can then be seen to be complex, which means that , for a given modal shape the different points or dof’s of the structure vibrate with given (fixed) phase lags with respect to the others. The same formulas as (2.23) (2.24) for the FRF can be demonstrated, however with complex-valued modal vectors Φn.
+
+
+Discrete or discretized system systems dynamics Page 17
+CentraleSupelec
+
+
+Beam Dynamics Page 18
+CentraleSupelec
+2. Beam Dynamics
+2.1. Introduction to beam dynamics
+Beams are examples of continuous structures for which analytical solutions can be easily provided. Furthermore, beams are very frequently used in practice as bridges or elements of bridges, cables like catenary wires in rail systems. Even turbine blades may be modelled with beams...
+Fig 2.1 Normandy Bridge in France Beams can also be assembled to form trusses, see Fig 2.2 below.
+Fig 2.2 Example of trusses of beams used in the construction of a railway viaduct (which can be also modelled as a beam): the viaducts near Avignon on the he TGV Mediterranean line.
+
+
+Beam Dynamics Page 19
+CentraleSupelec
+Beams are also examples of slender structures like plates or shells for which one (or two in the case of beams) characteristic dimensions can be considered small with respect to the other one(s). The three-dimensional continuous mechanics equations can then be simplified in 2 D (for the case of plates and shells), or even 1D in the case of beams equations.
+Fig 2.3 Example of beams in a structure: The millennium bridge –London and the Simone de Beauvoir –Paris pedestrian bridges (Clouteau)
+Beam-like structures dynamic behaviour can lead, if not controlled properly to catastrophic phenomena. An historical example is the collapse and ruin of the Takoma narrows suspension bridge due to flutter (instability) due to wind.
+Fig 2.4 The Takoma Narrows bridge collapse due to wind
+Very recently the excitation of the vibrations modes of the Millennium Bridge by a pedestrian crowd walking on the bridge generated panic because people felt unsafe. Dynamic absorbers had to be fit to the bridge. The same case happened for a pedestrian bridge recently built in Paris (Passerelle Solférino).
+Beam dynamics will be now studied using the continuous approach, whereas discretized approaches (e.g. finite element methods) will be introduced later. The main concepts for vibrations (eigenmodes characterized by discrete resonance frequencies and modes shapes) will appear again but here with an infinite number of modes. Furthermore, as beams can be in some cases considered infinite, wave phenomena can also appear. After a general recall of beam kinematics and dynamic equations the two main movements for a beam (extension and bending movements) will be considered.
+
+
+Beam Dynamics Page 20
+CentraleSupelec
+2.2. Beam kinematics and dynamic equations
+a) Beam basic hypotheses
+G(s)
+
+A beam is a volume generated by a surface , called cross-section, which can be eventually variable along a line called the mean fiber characterized by its curvilinear coordinate s. The cross section G(s) moves along the mean fiber to generate the beam volume.
+We will consider only in this section straight beams, where the beam axis is a straight line Ox1. The curvilinear coordinate s can then be taken as x1.
+The basic beam hypotheses are the following:
+H1:The beam cross section  remains as a rigid body in the beam deformation, which enables, for a given section  (s) to represent the forces acting on the cross section only by a resulting force R and moment M, which constitute the load set (torsor) of the internal efforts in the beam.
+H2 : the stress tensor σ in the beam is of the following type:
+σ =11i1  i1 +12(i1  i2 + i2  i1)+13(i1  i3 + i3  i1)
+In terms of components in the reference axis coordinate system (i1, i2, i3), where i1 is tangent to the mean fiber axis :
+
+
+
+
+
+
+
+
+
+
+=
+00
+00
+13
+12
+11 12 13
+
+
+
+σ
+H3 (Saint Venant): the beam theory in valid “far from the boundaries or cross section changes” ( about one section width away )
+G(s)
+
+x1
+x2
+x3
+N
+T
+M1
+Mf
+t
+n
+(P)
+
+
+Beam Dynamics Page 21
+CentraleSupelec
+The physical significance of the components of the components of torsor of the internal efforts is the following:
+At coordinate G on the mean fiber the components R and M of the torsor can be written in the (local here global to the beam) coordinate system (i1, i2, i3), where i1 along the mean fiber axis:
+• For the resulting force R: R = R1i1 +R2 i2 + R3i3 :
+• R1=N is the normal effort, which characterizes traction –compression effects (N is positive for extension and negative for compression)
+• R2 and R3 are the components of the shear force often noted as T, for which adjacent sections slide along each other.
+• For the resulting moment M= M1i1 +M2 i2 + M3i3 :
+• Component M1 constitutes the torsion moment, which characterizes torsion, or rotation of the beam cross section with respect to an adjacent one.
+• Component M2 et M3 are components of the bending moment Mf. Mf = M2 i2 + M3 i3, respectively in the Ox1,Ox3 plane for M2 and Ox1,Ox2 plane for M3 La bending results in curving the mean fiber in each of the plane orthogonal to the bending moment component.
+The vectors R and M are also the resulting force and moment, on the cross section  (s); of the stress vector σ(n) at a current point on the cross section P for a vector n normal to the cross section oriented towards positive x1 :
+(P)( )da(P)
+R
+R
+N
+1
+3
+R 2  σ i
+=
+
+
+
+
+
+
+
+
+
+
+= and (2.1)
+( (P)( ))da(P)
+M
+M
+M
+1
+3
+2
+1
+M  σ i
+=
+
+
+
+
+
+
+
+
+
+
+= GP (2.2)
+From the expression of the stress vector (P) associated to exterior normal vector n= i1 pour:
+σ(P) = σ(i1) = 11i1 + 21i2 + 31i3
+The components of R and M can be written in terms of the stress tensor components in P as:
+N 11da
+=   (2.3)
+R 2 2 R 3 3  ( 21 2 31 3 )da  ( 12 2 13 3 )da
+T = i + i =  i +  i =  i +  i (2.4)
+
+
+Beam Dynamics Page 22
+CentraleSupelec
+M1  (x 2 31 x3 21 ) da  (x 2 13 x3 12 ) da
+=  −  =  −  (2.5)
+f = M2 2 + M3 3 =  (x3 2 − x 2 3 ) 11da
+M i i i i (2.6)
+b) Beam kinematics (general – “Timoshenko” -case)
+• Displacement vector of a current point in the section (s)
+Let us consider in a current cross section  (s) a point P, whose coordinates can be expressed in terms of the cross-section intersection G(s) with the mean fiber as:
+( ) ( ( )) ⊥
+x P = x G s + X , where X⊥ = G(s)P =x2i2+x3i3
+In general taking into account the hypothesis H1 of rigid cross-section, the displacement of a current point P writes:
+u(P) = u(G (s)) +(s)X⊥, (2.7)
+where: • u(G(s)) is the displacement vector of the cross section  (s) centre of gravity,
+• (s) the rotation vector of section (s), and again X⊥ = G(s)P .
+The physical meaning of the components of u and ω is the following:
+• Component u1G(s) along i1 of u(G) characterizes traction-compression (extension) effect, • Component 1(s) along i1 of (G) characterizes beam torsion, • Components 2(s) and 3(s) along i2 and i3 of (G) characterize section (s) rotations (bending along Gx2 et Gx3) and will be associated to bending moment M2 i2 + M3i3 ,
+In terms of components:
+u uG (s)
+1 = 1 +2 (s)x3 −3 (s)x2 (2.8)
+u uG (s)
+2 = 2 −1(s)x3 (2.9)
+u uG (s)
+3 = 3 −1(s)x2 (2.10)
+• Strain tensor
+shear extension
+bending
+torsion
+
+
+Beam Dynamics Page 23
+CentraleSupelec
+The components of the strain tensor in P can be calculated by studying a slice of thickness ds around <p in the small displacement and small strain hypothesis. Curvilinear coordinate s will
+be taken as x1, so that ds
+d
+x=
+1
+
+.
+Calculating then the strain tensor ( )T
+ = Dxu + Dxu in the small displacement, small strain
+hypothesis leads to, in terms of its components:
+ds
+d
+x
+ds
+d
+x
+ds
+du
+x
+uG
+3 2
+2 3
+1
+1
+1 11
+
+
+
+
+ = = + − (2.11)
+()
+
+
+
+
+
+ =  − + −
+
+
+
+
+=  + ds
+ds
+x
+ds
+du
+x
+u
+x
+uG
+1 3
+2 3 1
+2
+2
+1
+12 2
+1
+2
+1
+
+
+
+
+
+ (2.12)
+()
+
+
+
+
+
+ =  + +
+
+
+
+
+=  + ds
+ds
+x
+ds
+du
+x
+u
+x
+uG
+1 2
+3 2 1
+3
+3
+1
+13 2
+1
+2
+1
+
+
+
+
+
+ (2.13)
+For 12 et 13, the first term is associated to bending, the second to shear, and the third to torsion effects. It can also be checked that:
+0
+22 = 33 = 23 =
+Which is coherent with the rigid cross section hypothesis.
+c) Local dynamic equations on a beam
+For a straight beam subject to general line force and moment densities the local dynamic equations written in the deformed configuration write:
+B
+A
+x2
+i2
+i3 i1
+G(x1)
+-R(x1)
+R(x1+dx1)
+M(x1+dx1)
+M(x1)
+x3
+x1
+Traction
+compression Bending
+
+
+Beam Dynamics Page 24
+CentraleSupelec
+dR
+dx1 + f(x1) = ρSü (2.14)
+dM
+dx1 + x1 × R + cL(x1) = J(ω̈ ) (2.15)
+Where f(x1) is the line external force density vector, cL the applied external density of moments (usually zero) u and ω the section displacements and rotation vectors, and J the section inertia tensor. Usually the section angular rotation acceleration will be neglected, so that the second term of equation (2.15) can be neglected. With this latter hypotheses, in terms of components, this leads to:
+dR1
+dx1 + f1(x1) = ρSü1
+dR2
+dx1 + f2(x1) = ρSü2
+dR3
+dx1 + f3(x1) = ρSü3
+(2.16)
+dM1
+dx1
++ cL1(x1) = J1(ω̈ 1)
+dM2
+dx1
+− R3 + cL2(x1) = J2(ω̈ 2) ≈ 0
+dM3
+dx1
++ R2 + cL3(x1) = J3(ω̈ 3) ≈ 0
+(2.17)
+if the inertia moments J2 and J3 respectively around Ox2 and Ox3 are neglected.
+d) Thin beam kinematics: Euler-Bernoulli case
+In the following the Euler Bernoulli model will be adopted in order to get simpler equations. This model is adapted for thin beams, where the transversal dimensions of the beam does not generally exceed one tenth of the beam length.
+In this model the influence of shear on the deflection is neglected, through the assumption that cross section (s) remains orthogonal to the mean fiber (deformed beam centerline):
+3
+x2
+u2
+i2
+i3 s s+ds
+u2 du2
++
+x1
+3
+i1
+The latter hypothesis implies then:
+ds
+duG
+2
+3 = (2.18)
+ds
+du G
+3
+2 = − (2.19)
+
+
+Beam Dynamics Page 25
+CentraleSupelec
+Instead of having 6 unknowns for the kinematics (3 displacement parameters for the displacement of the section center of mass G and 3 rotations for the section), the Bernoulli-Euler hypothesis introduces 2 relationships for beam deflection displacement parameters u2 and u3 due to bending and section rotations, which reduces to 4 the number of parameters characterizing the beam kinematics The former relationship can then be written in a more general way:
+3
+2 =
+ds
+du (2.16)
+2
+3 = −
+ds
+du (2.17)
+e) Constitutive equations for beams in the Euler-Bernoulli (thin beams) hypothesis
+The constitutive equations will be set for linear homogeneous isotropic elastic beams starting from the constitutive equation for the material (stress-strain relationship), introducing the beam kinematic parameters and finally calculating the global section resulting forces as a function of the kinematic parameters.
+For a linear homogeneous isotropic material, the stress-strain relationship writes:
+σ = I Tr(ε) + 2ε , where: (1 v)(1 2v)
+Ev
++−
+ = , and 2(1 v)
+E
++
+=
+are Lamé coefficients, E Young’s modulus and  the Poisson coefficient . Tr() is the trace
+of the strain tensor . ( ) 11 22 33
+Tr  =  + +
+Writing the constitutive equation in terms of E and inverting it, then comes:
+E E (Tr )I
+ε 1 σ−  σ
++
+= , for the components: Tr(σ)
+E
+v
+E
+1v
+ij ij − ij
++
+= , which gives :
+E EE
+1 11 11 11 11
++ −  = 
+ = , 12 E 12
+1+ 
+ = , 13 E 13
+1+ 
+ = , and inverting again and introducing
+into the strain components ij
+ the beam kinematic parameters the stress tensor components
+are expressed as a function of the beam kinematic parameters:
+
+
+
+
+
+= =  + − ds
+d
+x
+dx
+d
+x
+ds
+du
+EE
+G 3 2
+2 3
+1 11 11
+
+
+  (2.18)
+ds
+d
+x
+ds
+d
+x
+ds
+du
+v
+EG
+1 3
+1 3
+2
+12 12 2 12 3
+1
+
+      = −
+
+
+
+
+= = − + −
++
+= (2.19),
+due to the Bernoulli-Euler hypothesis (2.17) :
+ds
+d
+x
+ds
+d
+x
+ds
+du
+2
+1v
+E1
+2
+1 2
+G 3 13 13 13 2
+
+      =
+
+
+
+
+= = + +
++
+= (2.20),
+
+
+Beam Dynamics Page 26
+CentraleSupelec
+In the same way:
+0
+22 = 23 = 33  (2.21)
+One can already notice that tangential stress components in this model are only due to torsion. The total resultant force R and moment M components can then be calculated by integration of the stress components on a section (s) at its mass center G.
+Then, as
+() ()
+x da x da 0
+s
+3 s
+ 2 =  =
+• For the resultant forces: * Normal force:
+()
+N da
+s
+11
+
+
+=  if
+()
+S da
+s
+=
+ds
+du
+N ES
+G 1
+= (2..22)
+* Contribution of shear to resulting forces: T = R 2i2 + R3i3 with
+()
+R da
+s
+2  12
+=  , the
+terms ds
+d1 turns out to be null and:
+0
+ds
+du
+RS
+G 2
+2 3  =
+
+
+
+
+=   − + , (2.23)
+due to the Bernoulli Euler hypothesis (2.18)
+In the same way:
+()
+0
+ds
+du
+R da S
+G 3 2 s
+3 13  =
+
+
+
+
+=  =  +
+   (2.24)
+In this model the resultants due to shear are indeed found null. However form any physical loading, there exists a shear resultant due to bending which appears through equation 2.17.
+• For the components of the resulting moment M :
+( )da
+M = GP   n , then for the components:
+( )( )
+( )
+= +   + +
+s
+M x 2i 2 x 3i3 11i1 12i 2 13i3 da
+* M1 component characterizes torsion:
+()
+()
+()
+x x da
+ds
+d
+M x x da
+s
+2 3
+2 2
+1 12 s
+1  2 13 3 
++
+
+=  −  =
+ds
+M Jd 1
+1
+
+=  , with ( )
+()
+J x x da
+s
+2 3
+2 2
+
+
+= + (2.25)
+
+
+Beam Dynamics Page 27
+CentraleSupelec
+.
+* Calculating M2 and M3 (bending), noticing that only 11 contributes to their expression:
+() ()
+da
+ds
+d
+ds
+d
+x
+ds
+du
+M x da Ex 3
+2 3
+G 1
+s
+11 3 s
+2 3 
+
+
+
+
+
+−
+
+=  +  =  +
+G being the section center, the traction compression term ds
+du G
+1 vanishes.
+Also,
+()
+x x da 0
+s
+23 =
+
+
+, axes Gx2 et Gx3 being the principal section inertia axes, there only
+remains :
+2
+3
+2 2
+2 2 ds
+du
+EI
+ds
+d
+M = +EI  = − , (2.26)
+thanks to (2.17), with
+()
+I x da
+s
+2
+2  3
+= , section (s) inertia with respect to axis #2 (Gx2).
+In the same way:
+()
+M x 11da
+s
+3 =  − 2
+, et 2
+2
+2
+3
+3
+3 3 ds
+du
+EI
+ds
+d
+M = EI  = , (2.27)
+Thanks to (2.16) where in a similar way,
+()
+I x ds
+s
+2
+3  2
+= is the section inertia moment with
+respect to axis Gx3. .
+To summarize, in the beam model (Euler-Bernoulli / thin beam hypotheses for bending), the constitutive equations are the following:
+• For traction compression (in any beam model):
+ds
+du
+ES
+ds
+du
+N ES
+G
+= 1 = 1 (2.28)
+• For torsion :
+ds
+M Jd 1
+1
+
+=  (2.29)
+• For bending in the case of thin beam (Euler-Bernoulli-):
+3
+3 2
+2
+2
+EI
+M
+ds
+d u = (2.30)
+2
+2 2
+3
+2
+EI
+M
+ds
+d u = − (2.31)
+The bending moments can be seen to be linked to the second derivative of the deflection along the beam axis that is the mean fiber curvature.
+
+
+Beam Dynamics Page 28
+CentraleSupelec
+Furthermore, using the equilibrium equations, the shear resultant in this model can be calculated from the third (spatial) derivative of the deflection (cL assumed to be null).
+3 1
+2
+3
+3
+3
+2 dx
+du
+EI
+ds
+dM
+R = − = − (2.32)
+3 1
+3
+3
+2
+2
+3 dx
+du
+EI
+ds
+dM
+R = = − (2.33)
+• The normal stress 11 associated to normal vector i1 (11 = (i1 ). i1 ), can then be
+written in termes of the resultant force and moment, replacing G
+u1 , ds
+,d
+ds
+d3
+2
+ into (2.18) from
+the constitutive laws (2.28) (2.30) (2.32):
+3
+3 2 2
+2
+11 3 I
+M
+x
+I
+M
+x
+S
+ = N + − (2.34)
+1
+2
+3
+
+2.3. Dynamic equations and their solutions: waves and modes
+a) Dynamic equations
+The dynamic equations for the beam movements in terms of beam displacement parameters can be obtained by substituting (2.17) into (2.16) and then N, M2 and M3 by their expression in terms of displacements ( for traction and bending) -and rotation for torsion -taken from the constitutive equations (2.28 to 2.31) Then come successively, in the absence of external linear density of forces f or moment cL:
+Tractioncompresssion
+Bending around axis #2 ( in the 1-3 plane)
+Bending around axis3 (in the 1-2 plane)
+One may notice: The stress contribution due to traction compression is constant throughout the section The contribution from bending varies linearly in the section Example: 11 in the case of bending around axis3 (in the 1-2 plane)
+
+
+Beam Dynamics Page 29
+CentraleSupelec
+,
+dR1
+dx1 = ρSü1 (traction − compression)
+dM1
+dx1 = J1(ω̈ 1) (torsion)
+d2M2
+dx12 = −ρSü 2 (bending around x3)
+d2M3
+dx12 = ρSü 3 (bending around x2)
+(2.35)
+Then after substitution from constitutive equations (2.28 to 2.31) and introducing the partial derivatives for space derivatives and ° for time derivatives for the sake of clarity:
+∂
+∂x1 (ES ∂u1
+∂x1) = ρSü1 (traction − compression) a.
+∂
+∂x1 (μJ ∂ω1
+∂x1 ) = J1(ω̈ 1) (torsion) b.
+∂2
+∂x21 (EI3
+∂2u2
+∂x21 ) = −ρSü 2 (bending around x3)
+∂2
+∂x21 (EI2
+∂2u3
+∂x21 ) = ρSü 3 (bending around x2) d.
+c.
+(2.36)
+b) Solutions for the dynamic equations: waves and modes
+Equations (2.36) a.) to d.) can be recognized as wave equations. However, they are quite different in nature in the sense that equations a. and b.for traction-compression and torsion are non-dispersive, whereas equations c. and d; for bending are dispersive.
+The nature of solutions to the dynamic equations varies with the type of boundary conditions:
+• If the beam is considered as infinite, solutions will be sought in terms of waves.
+• If the beam is finite, then reflection of waves at the boundaries may create for definite frequencies interference phenomena which lead to ‘standing waves’ which are in fact the vibration modes of the beam.
+The following sections will concentrate on two important cases: traction-compression and bending. The torsion equations (2.36) b;) can be seen of similar nature as the traction compression case: for this reason it will not be further developed.
+2.4. The traction-compression (elastic bar) case
+a) Dynamic equations
+x
+u(x,t)
+
+
+Beam Dynamics Page 30
+CentraleSupelec
+Let us consider an elastic homogeneous isotropic beam of constant section S in tractioncompression along the Ox axis (Ox1 in the previous paragraph). In such a case, one often talks about a bar instead of a beam. The stress tensor reduces to its σ11 component normal effort contribution R1=N:
+x
+u
+Ee E
+S
+N
+
+
+= = 11 =
+1 11
+ , (2.37)
+If u us the longitudinal displacement (along Ox) of a current point of coordinate x on the bar u=u1 in the previous paragraphs), E Young’s modulus of the bar. The dynamic equation for a continuous medium (or alternatively equation for R1=N in 3.16 replacing R1=N from the constitutive law (2.28)) then writes:
+() t
+gives :
+t2  2
+
+ =
+
+
+
+
+
+
+
+
+
+=
+
+u
+x
+u
+E
+x
+u
+x
+22
+11   , (2.38)
+where  is the bar volume mass density. It can be noticed that this equation is independent of the bar section.
+b) Infinite bar general solutions (waves)
+Considering now the beam with constant E and ρ as an infinite medium, equation (3.36) is a classical wave equation, general solution is of the following form: u x = g1(x − ct)+ g2 (x + ct)
+( , t) , superposition of wave of any shape propagating in both
+directions (x>0 for g1, and x<0 for g2). c is the wave celerity or phase velocity:
+
+E
+c = (2.39)
+We will now look for solutions of dynamic equation of the form of (harmonic) waves propagating in the direction x>0: u(x, t) = (U (k,) cos(kx −t )) , where
+• k is the wave number, • ω=2πf is the circular frequency, f being the wave frequency, • U is the wave amplitude. Casting the latter expression for u(x,t) in the dynamic equation (2.38) gives a necessary condition on k and ω for non-null solutions for u to exist, that is :
+Ek 2 = 2 (2.40)
+For a given ω, there exist two values of k which satisfy the dispersion equation (2.40).
+Ec
+k
+=  =  , alternatively= ck , (2.41)
+for waves propagating either in the direction x>0 or x<0.
+The group velocity (propagating speed of the energy) is defined by k
+cg 
+= . In this case, cg is
+equal to c, which is a characteristic of non-dispersive waves.
+
+
+Beam Dynamics Page 31
+CentraleSupelec
+c) Finite bar general solutions (modes)
+For a finite bar, the boundary conditions depend on the connections between the bar extremities and the outside. The general harmonic solution can be sought in the form of a standing wave:
+u x e(U x eit )
+( , t) =  ( ) ,
+which is equivalent to taking the Fourier transform of the previous equation. Replacing u(x,t) by its value, equation (3.2) is replaced by an equation where the time variable vanishes, so a simple differential equation in terms of x variable:
+()
+() Ux
+x
+Ux
+E
+x
+2
+d
+d
+d
+d  = −
+
+
+
+Which gives, if the bar is homogeneous along x (E, S, constants):
+() 0
+() 2
+2 + Ux=
+x
+Ux
+E 
+d
+d2
+. (2.42)
+As 0
+E
+2
+
+ , the general solution of the latter equation is of the following form:
+( ) cos( ) sin( ), ( ) cos( ) sin( E x)
+Ex B
+Ux A
+E
+U x A kx B kx k 
+
+
+
+
+= + with =  or = + (2.43)
+A, B, and allowable values for k will be determined by the boundary conditions.
+d) The Free-free beam case
+In the case of a free-free beam the boundary conditions write:
+( ) ( ) 0, sin( ) cos( ) 0
+( )0
+( ) ( 0) 0, 0
+( 0) 0
+11
+11
+== == − + =
+== == =
+x L Ak kL Bk kL
+x
+Ux
+xL E
+xB
+x
+Ux
+xE
+then
+d
+d
+,
+then
+d
+d
+,
+
+
+For a non-zero solution to exist ( A  0 ), then the following condition on k is required:
+sin( ) = 0, sin E L) = 0
+kL 
+or ( (2.44)
+Which leads to an infinite, but countable values for k, then for circular frequencies such as:
+
+
+
+
+E
+L
+n
+n E L = n , n  , or n = , (2.45)
+The associated eigen frequencies are then:
+= n
+E
+L
+f n 2n  , , (2.46)
+And the associated solutions for the eigenmode equations (3.3), which are then the modal shapes are then:
+
+
+
+
+
+=n
+L
+x
+U n A cos n , (2.47)
+Let us remark that for n = 0, fn = 0 , which leads to the rigid body mode solution: U0  1
+
+
+Beam Dynamics Page 32
+CentraleSupelec
+The modal shapes of a free-free bar are represented on Fig.3.5 below.
+Fig. 3.5: Modal shapes of a free-free bar
+e) Orthogonality relationships between modes
+The modal shapes can be checked to be orthogonal with respect to the mass operator associated to the beam’ kinetic energy: Let us consider:
+=  ( ) ( ) , for n, m  1,n  m
+2
+1
+T 0 SU x Um x dx
+L
+nm  n .
+Then: ( ) ( )
+T SL
+SL
+T
+dx T
+L
+x
+nm
+L
+x
+T S nm
+dx
+L
+x
+m
+L
+x
+T Sn
+nm
+nm
+L
+nm
+L
+nm
+
+
+ 
+ 
+== =
+=
+
+ 
+
+
+ +  −
+
+
+= +
+
+
+
+
+
+
+
+
+=
+
+
+00
+0
+0
+,
+4
+cos cos , 0
+4
+1
+cos cos
+2
+1
+Conversely , if n m,
+and if n - m 0, (2.48)
+This clearly shows that two modal shapes associated to different indexes are orthogonal with respect to the mass operator: their scalar product in the sense of this operator is null.
+Moreover, for n=m, Tnm 2 mn
+= 1 , where mn is the modal mass associated to the mode of index
+n.
+Using the differential equation for U(x): d
+d
+d
+d ()
+( ) 2U x
+x
+Ux
+E
+x  = −
+
+
+ , and using parts
+integration, one could check that two modal shapes associated to different indexes are also
+
+
+Beam Dynamics Page 33
+CentraleSupelec
+orthogonal with respect to the beam stiffness operator K, which is defined by :
+dx
+dx
+dV
+dx
+dU
+U V LE
+
+
+
+
+
+
+
+= 0
+K( , ) , and is associated with the beam’s elastic energy.
+As a matter of fact this is indeed a general property, which generalizes the orthogonality relationships between mode shapes already seen for discretized systems, and applies to all elastic continuous systems,
+f) Modes of a clamped- free bar
+Considering the clamped –free bar case let us look for the solutions of the dynamic equation:
+0
+d
+d2
+2
+2
++ ( )=
+() Ux
+x
+Ux
+E  , again in the form :
+, U (x) Acos(kx) B sin(kx)
+E
+k=  = +
+
+The limiting boundary conditions become:
+( ) 0, cos( ) 0
+( 0) 0 0
+11 = = =
+== =
+x L Bk kL
+ux A
+then
+, which gives
+
+Then it comes: kL = (2n +1)2 , n  0 ,
+Which gives:
+( ) ( ) ,0
+2
+2 , sin 2 1
+21 
+
+
+
+= + =  + xn
+L
+n E L n Un B n
+ 
+ and (2.49)
+The mode shapes of a clamped-free bar are represented of Fig 3.6 below
+x
+u(x,t)
+
+
+Beam Dynamics Page 34
+CentraleSupelec
+Fig 3.6: Mode shapes of a clamped-free bar
+
+
+Beam Dynamics Page 35
+CentraleSupelec
+2.5. Beam vibration for bending movements (Euler-Bernoulli case)
+Now the bending case for a straight beam
+of axis Ox1 will be considered. Pure bending
+(no shear) as in the Bernoulli Euler theory for
+thin (in terms of width dimensions with
+respect to the length) beams will be considered
+in order to simplify the equations and
+formulations. The bending plane will be the 1
+2 coordinates plane. In a first part free
+vibrations, in the absence of any external
+loading will be studied.
+The beam deflection u2(x,t) along the x2
+coordinate will be simplified to: u2(x,t) =u(x,t).
+the x1 coordinate along the beam axis l’axe
+Ox1 will be simplified into x.
+a) Dynamic equations and boundary conditions:
+The dynamic equations can be deduced from the general beam dynamic equations, or from the bending general equations for a beam considering that the line force density is the inertial forces:
+( ,t)
+2
+2
+2x
+t
+u
+f S
+
+= −
+The dynamic equations then become:
+t t t) = 0
+
+
+ −
+
+
+
+
+
+
+
+
+
+ + = −
+
+
+
+
+
+
+
+
+
+− ( , ) ( , ) 2( ,
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+x
+t
+u
+xS
+x
+u
+EI
+x
+xf
+x
+u
+EI
+x  (2.50)
+In the case of a beam with characteristics EI and S constants with x, this equation than becomes:
+t t) = 0
+
+
++
+
+ ( ,) 2( ,
+2
+4
+4
+x
+t
+u
+xS
+x
+u
+EI  (2.51)
+Let us remember that for bending movements of the beam the following the shear force and bending moment are given respectively by the following formulas:
+• Shear force (resultant): 
+
+
+
+
+
+
+
+
+
+= =− 2( , )
+2
+2 xt
+x
+u
+EI
+x
+T R (2.52)
+• Constitutive equation: 2 ( , )
+2
+3 xt
+x
+u
+M M EI 
+
+= = , (2.53)
+where M is the bending moment along axis 3.
+The boundary conditions are given by the following formula:
+u(x)
+x1=x
+x2
+O
+
+
+Beam Dynamics Page 36
+CentraleSupelec
+• Free end :
+o M=0, than : 0
+2
+2
+=
+
+
+x
+u , and T=0, which entails 0
+3
+3
+=
+
+
+x
+u , (2.54)
+• Hinged or pinned end (along axis Ox3), also called simply supported:
+o u=0, and M=0, which gives : 0
+2
+2
+=
+
+
+x
+u
+(3.16) • Clamped end:
+o u=0, and 0
+3=
+
+= x
+u
+ (2.55)
+Generally the modal frequencies and mode shapes depend, as in was seen in the extensioncompression case, on the boundary conditions. Some practical examples of boundary conditions are given below.
+Fig 3.7 Examples of boundary conditions: (a) clamped and hinged beams in the structure of Beaubourg building, (b) simply supported deck of a bridge, (c) ball joint in a hip replacement (d) elastic joint of an helicopter blade [Clouteau]
+The method for determining the modes will be given below and later applied on examples.
+b) General method for finding the modes
+Taking the Fourier transform of dynamic equation (2.51) or setting in the same equation:
+u x U x eit
+( , t) = ( )
+Equation (2.51) is transformed again into a simple, now 4th order differential equation for the x variable:
+() 0
+() 2
+4
+4
+− SU x =
+dx
+dU x
+EI   , (2.56)
+Looking for the solutions in the following form: L
+kx
+U x U0e
+( ) = , where k is interpreted as a
+reduced wavenumber, the 4th order characteristic equation for k is obtained:
+S
+EI
+L
+k
+EI
+S
+L
+k
+S
+L
+k
+EI 
+
+
+  2
+2 2
+4 2
+4
+0, = , =
+
+
+
+
+−=
+
+
+
+ or : (2.57)
+The general solution for the differential equation in terms of U is then:
+
+
+
+
+ +
+
+
+
+ +
+
+
+
+ +
+
+
+
+=L
+kx
+Dsh
+L
+kx
+Cch
+L
+kx
+B
+L
+kx
+U (x) Acos sin
+This solution must satisfy the boundary conditions. M and T, which are involved in the boundary conditions are then given by the following formula:
+
+
+Beam Dynamics Page 37
+CentraleSupelec
+
+ 
+ 
+
+
+
+ +
+
+
+
+ +
+
+
+
+ −
+
+
+
+=− L
+kx
+Dk sh
+L
+kx
+Ck ch
+L
+kx
+Bk
+L
+kx
+M (x) EI Ak 2 cos 2 sin 2 2 (2.58)
+
+ 
+ 
+
+
+
+ +
+
+
+
+ +
+
+
+
+ −
+
+
+
+=− − L
+kx
+Dk ch
+L
+kx
+Ck sh
+L
+kx
+Bk
+L
+kx
+T (x) EI Ak 3 sin 3 cos 3 3 (2.59)
+c) Finding the modes: the simply supported case:
+In the case of a simply supported beam, u and M are equal to zero for x=0 et x=L, which leads to: • For x=0: o U=0 leads to A+C=0 o M=0 leads to –A+C=0, then A=0, et C=0. • For x=L: o Acosk+Bsink+Cchk+Dshk=0 o -Acosk-Bsink+Cchk+Dshk=0
+A necessary condition for nonzero solution to exist is then:
+sin k = 0 (2.60)
+An infinite but countable number of modes appear again for values of k such as: k = n, n  1, hence the eigen frequency for the index n eigen mode:
+2
+2
+2L
+n
+S
+EI
+fn
+
+
+= (2.61)
+Remark: The resonance frequencies are now proportional to n2.
+The modal shape Un associated to the n-th eigen frequency fn is then (B#0):
+sin , 1
+0
+
+
+
+
+=n
+L
+nx
+Un U
+ , (2.62)
+The modal mass of mode n is then:
+= L =
+nn
+SL
+m 0 SU x dx
+2
+2
+() 
+ , (2.63)
+The transfer function H(x,x0,p), also called the frequency response function H(x,x0 ω), which gives the dynamic response on point of coordinate x to a point excitation on a point of coordinate x0, is defined in the same way as for a discrete system:
+
+
+=
+
+= 
+
+
+
++
+=
++
+=
+1
+4 2
+0
+1
+22
+0 0
+2
+nn n n
+nn
+L
+n
+S
+EI
+p
+L
+nx
+L
+nx
+m p SL
+U xU x
+H xx p
+
+
+
+
+sin sin
+()
+() ( )
+( , , ) , (2.64)
+U(x)
+
+
+Beam Dynamics Page 38
+CentraleSupelec
+
+
+=
+
+= 
+
+
+
+−+
+=
++
+=
+1
+4 2
+0
+1
+22
+0 0
+sin sin
+2
+()
+() ( )
+(, , )
+nn n n
+nn
+L
+n
+S
+EI
+L
+nx
+L
+nx
+m p SL
+U xU x
+H xx
+
+
+
+
+
+ (2.65)
+For each mode, the response amplitude as in a discrete system is again proportional to the product: o of the modal shape of mode n at the exciting point(x0), o and of the modal shape of mode n at the observation point.
+It appears that for uneven n the response will be maximum for an excitation at the beam mid span. Conversely, for even vales of n the modes will not be excited in the driving force is located at the beam mid span.In practice, as fn varies as n2, the modal frequencies can be out of the frequency band of interest for relatively low values of n.
+By setting p=j, the frequency response of the beam to a harmonic excitation at circular
+frequency f=2 can be studied. The contribution of mode n 4
+2
+0
+sin sin
+
+
+
+
+−+ L
+n
+S
+EI
+L
+nx
+L
+nx
+
+
+
+
+
+appears to be
+infinite for the resonance circular frequency of mode n, =n.
+In practice, in the same way as for discrete systems, the amplitude of the response can be quite large, but is limited however by structural damping. A similar model to those developed in the previous chapter then applies for the denominator of the modal contribution. On can also remark that when  increases above n, resonance frequency of mode n, the contribution of mode n decreases significantly (like 1/2).
+d) Eigen frequencies and mode shapes for other boundary conditions.
+The characteristic equation, which leads to the eigen frequencies (sink=0, for simply supported beam) varies according to the type of boundary conditions. In the following table, some examples of these characteristic equations along with solution for k are given for different boundary conditions.
+Boundary conditions Characteristic equation k1 k2 k3 Simply supported/ pinned-pinned sink=0  2 3 Free-free chkcosk=1 4,730 7,853 10,996 Clamped –clamped chkcosk=1 4,730 7,853 10,996 Clamped-pinned thk=tgk 3,927 7,069 10,210
+Table 3.1: Characteristic equations and values of k1, k2, k3 for various boundary conditions
+
+
+Beam Dynamics Page 39
+CentraleSupelec
+The mode shapes of a free-free beam in bending are given in Fig. 3.8 below.
+Fig 3.8: Mode shapes in bending for a free-free beam
+Exemple : Musical instrument: xylophone (from A. Chaigne)
+Xylophones are instruments for which the tone is given by a wooden thick plate (the blade) that can be in a first instance modelled as a free-free beam (even if it is simply supported!). The blades’ (which will be considered in a first step as of constant section) eigen frequencies can then be shown to satisfy the following formula, solutions of the characteristic equation chkcosk=1:
+For a given blade, the resonance frequencies are no longer harmonic and the blade tone is then not so pure...!
+Fig 3.9 Example: amplitude spectrum of a constant section bar (A.Chaigne)
+The xylophone blade section has then a varying section with longitudinal coordinate in order for the resonance frequency spectrum to be composed of more frequencies which are roughly multiple of each other (A. Chaigne):
+-0,03
+-0,02
+-0,01
+0
+0,01
+0,02
+0,03
+0,04
+0 0,2 0,4 0,6 0,8 1
+amplitude
+x/L
+modal shapes in bending for a free-free beam
+mode1
+mode2
+mode3
+
+
+Beam Dynamics Page 40
+CentraleSupelec
+Fig 3.10 Example of a xylophone with varying section bars and corresponding spectrum[Chaigne]
+This varying shape for blades was spontaneously found by traditional instrument makers.
+e) Bending waves in beams
+If now the beam is considered as an infinite medium, solutions of the wave equation for bending can be sought in the following form:
+()
+u x e(U k ei kx t )
+−
+( , t) =  ( , ) , (2.66)
+where: • k is the wave number, • ω=2πf is the circular frequency, f being the wave frequency, • U(k,ω) is the (complex) wave amplitude
+• e(Z ) is the real part of a complex number Z.
+It can be notice that it is then equivalent to taking the Fourier transform of the wave solution, both in time and space domain.
+Substituting the above expression for u into dynamic equation for plane bending (2.51) leads to the dispersion equation for k and ω:
+ (, ) 0
+EIk4 −2S U k  = (2.67)
+A necessary condition for non-null solutions for U to exist is then:
+ 0
+EIk 4 −2S = (2.68)
+For a given (real) value of ω, equation (2.68) has two real solutions:
+•
+4
+EI
+S
+k =  , which correspond to propagating waves,
+
+
+Beam Dynamics Page 41
+CentraleSupelec
+•
+4
+EI
+S
+k = i , which correspond to exponentially decaying waves;
+The phase velocity is then 
+
+4
+S
+EI
+k
+cb = = , depending on ω, so the group velocity can be
+calculated as: g cb
+S
+k EI
+c 24 2
+1
+==
+
+
+
+ 
+
+=
+−
+
+  , the waves are dispersive.
+A physical example is given below where low frequency components from an impact on a beam at point B arrive later than higher frequency components at a distant observation point (point A).
+Figure 3.11 [Clouteau]: Accelerations recorded at two points A and B of a beam after an impact at point B.
+2.6. Conclusion
+After a recall of the beam kinematics, with a focus on the Euler-Bernoulli (thin beam) hypotheses, the dynamic equations for beams were established. For infinite beams, a wave approach can leads to non-dispersive waves for tractioncompression and dispersive waves for bending. For bounded beams, solutions in terms of infinite but countable number of modes were determined for different boundary conditions, in the most important cases of traction compression (where modal frequencies are harmonic) and bending , where they are not.
+
+
+Beam Dynamics Page 42
+CentraleSupelec
+Frequency response functions were then calculated in both cases. They have the same form as for the discretized systems.
+Important formulas:
+Dynamic equations for beams:
+dR1
+dx1
++ f1(x1) = ρSü1 (traction − compression)
+dR2
+dx1
++ f2(x1) = ρSü2 (Shear)
+dR2
+dx1
++ f3(x1) = ρSü3 (Shear)
+dM1
+dx1
++ cL1(x1) = J1(ω̈ 1) (torsion)
+d2M2
+dx12 − R3 + cL2(x1) = −ρSü 2 (bending around x3)
+d2M3
+dx12 + R2 + cL3(x1) = ρSü 3 (bending around x2)
+Constitutive equations:
+• For traction compression (in any beam model):
+1
+1
+dx
+du
+N = ES
+• For torsion :
+1
+1
+1 dx
+M J d
+=
+• For bending in the case of thin beam (Euler-Bernoulli-):
+3
+3 2 1
+2
+2
+EI
+M
+dx
+du =
+Traction-Compression
+• Dynamic equation: t 2
+
+
+ =
+
+
+
+
+
+
+u
+x
+u
+E
+x
+2
+
+• Eigen frequencies and mode shapes of a free- free bar: = n  
+E
+L
+n,
+2
+fn  ,
+
+
+
+
+
+=n
+L
+x
+Un Acos n ,
+• Eigen frequencies and mode shapes of a fre-clamped bar:
+( ) ( ) ,1
+2
+2 , sin 2 1
+21 
+
+
+
+= + =  + Lx n
+n E L n Un B n
+ 
+ and
+
+
+Beam Dynamics Page 43
+CentraleSupelec
+Bending (Euler Bernoulli)
+• Dynamic equations: t 2 t) 0
+2
+4
+4
+=
+
+
++
+
+ ( , ) (x,
+t
+u
+xS
+x
+u
+EI 
+• Resonance frequencies and modes shapes of simply supported beam: 2
+2
+2L
+n
+S
+EI
+fn
+
+
+=
+sin , 1
+0
+
+
+
+
+=n
+L
+nx
+Un U
+
+• Frequency response function for a simply supported beam:
+
+
+=
+
+= 
+
+
+
+−+
+=
++
+=
+1
+4 2
+0
+1
+22
+0 0
+sin sin
+2
+()
+() ( )
+(, , )
+nn n n
+nn
+L
+n
+S
+EI
+L
+nx
+L
+nx
+m p SL
+U xU x
+H xx
+
+
+
+
+
+
+
+
+
+Virtual Power Theorem Page 44
+CentraleSupelec
+3. Energetic approach: Virtual Power Theorem for continuous media: 3D solids and beams
+In this chapter, energetic approach (Virtual Power Theorem or Principle) will be introduced for 3D solids and beams. This energetic approach enables to satisfy the
+dynamic equations in a mean (energetic) sense, instead of locally at each point of the solid. This approach provides then a coherent framework for approximate numerical methods e.g Galerkin methods or Finite Element methods, which will be developed in the next chapter. After a short recall on continuum mechanics for 3D solids, the Virtual Power Theorem or Principle (VPP) will be introduced for a 3D solid, then for a beam. Basic properties of the mass and stiffness operators, introduced thanks to the VPP, will enable in both cases then to show the existence of an infinite, but countable number of modes, which form a basis of the admissible displacements of the structure. The use of energetic quantities for determining the modes will then be presented.
+3.1. Vibration of 3D elastic solids: Basic concepts and strong formulation
+We will now consider small amplitude vibration of three dimensional solids. After a brief recall on continuum mechanics basic notions, the dynamic equations will be recalled. In the following we will consider a three dimensional elastic structure defined by a volume V in an inertial frame, subject to external forces generating vibrations of small amplitude, in such a way that the displacements and strains will remain small. With this hypothesis, Lagrangian and Eulerian frames as defined in continuum mechanics can be taken as identical. The displacement of a point P of the solid will be noted u(x,t), x being the coordinate vector of the displaced point in the (reference or actual) configuration (O, i1, i2, i3):
+i
+3
+i1
+u =  uii
+= .The main tool introduced to model the solid deformation is the strain tensor ε,
+whereas internal forces in the solid are modelled using the Cauchy stress tensor σ.
+a) The strain tensor ε
+The strain tensor ε is defined, under the hypothesis of small displacements/ small strains as:
+= 2 (Dxu + DxuT )
+1
+ , (3.1)
+where Dxu stands for the gradient operator and T designates the transposition operator.
+In terms of components, =
+= = 
+3
+i, j 1
+ε ijii i j ijii i j , with Einstein convention of summation,
+on repeated indexes, where:
+
+
+
+
+
+
+
++
+
+
+=
+i
+j
+j
+i
+ij x
+u
+x
+u
+2
+1
+ (3.2)
+The strain tensor is symmetric i.e: ij = ji
+
+
+Virtual Power Theorem Page 45
+CentraleSupelec
+b) The Cauchy stress tensor σ
+The Cauchy stress tensor characterizes internal forces in the solid. Under the assumption that the surface traction t(x,,n,t)applied on a local boundary, defined by its normal vector n, around a point P(x), depends only on x and n, it can be shown [Aubry] that this dependence in linear i.e. t( x, n, t) = σ( x, t)n ,
+which introduces the Cauchy stress tensor σ. The stress tensor is symmetric, that is in terms
+of components: =
+= = 
+3
+i, j 1
+ ijii i j ijii i j ,ij = ji (can be demonstrated using the balance
+of momentum). Usually, the stress tensor is defined in Eulerian coordinates.
+c) Dynamic equations: balance of momentum
+.
+The dynamic equations for the continuous medium are obtained by writing the balance of momentum around point P:
+Divσ + fV = ρa = ρü , x ∈ V (3.3) Where: • σ is the stress tensor introduced in (3.2), • fV is the volume external force density, • ρ is the solid mass density, • u is the displacement vector of point P with coordinates x.
+In terms of components the balance of momentum equation (3.3) reads:
+∑ ∂σij
+∂xj
+3
+j=1
++ fi = ρüi, i = 1,2,3
+d) Boundary conditions
+The boundary conditions on the solid or structure are usually prescribed in terms of prescribed surface force density (traction) text on a subset Γt of the solid boundary V, and of prescribed displacements uext on the complementary part of V:
+•t
+( ) = ext , on 
+σ n t , (3.4)
+•t
+= , on  = V / 
+ext u
+u u . (3.5)
+
+
+Virtual Power Theorem Page 46
+CentraleSupelec
+e) Constitutive equations in linear elasticity
+In a homogeneous isotropic elastic solid, stress and strain tensor are linked by the constitutive equation (Hooke’s law) which writes:
+σ = I Tr(ε)+ 2ε , (3.6)
+where λ and μ are Lame coefficients, and Tr() =11 +22 +33 is the trace of the
+strain tensor .
+More usually, from experimental measurements, E Young’s modulus and  the Poisson coefficient are used. The expression of λ and μ in terms of E and ν are:
+(1 v)(1 2v)
+Ev
++−
+ = , and 2(1 v)
+E
++
+ = , (3.7)
+Writing the constitutive equation (3.6) in terms of E and inverting it, gives a more classically used equivalent formulation for the constitutive equation (3.6):
+E E (Tr )I
+ε 1 σ−  σ
++
+= , (3.8)
+or in terms of components:
+Tr (σ )
+E
+v
+E
+v
+ij ij − ij
++
+= 1 (3.9)
+f) The elastodynamic system
+Finally, the elastodynamic system in obtained by the set of equations formed by the dynamic equation (3.3) with boundary conditions (3.4), (3.5), the constitutive Hooke’s law (3.6), combined with the strain tensor definition (3.1). This set of equations are to be also complemented in terms of initial conditions (values at t=0) of the displacement field and velocities field for the problem to be well posed in the mathematical sense.
+Namely:
+• Divσ + fV = ρü , x ∈ V, (3.3)
+• σ = I Tr(ε) + 2ε , (3.6)
+• = 2 (Dxu + DxuT )
+1
+ (3.1)
+•t
+( ) = ext , on 
+σ n t , (3.4)
+• = ext V t = u
+u u , on / . (3.5)
+• u(x,0) = uin , on V (3.10)
+• u̇ (x, 0) = u̇ IN , on V (3.11)
+
+
+Virtual Power Theorem Page 47
+CentraleSupelec
+3.2. Virtual Power Theorem/Principle
+Instead of having the dynamic equation (3.3) and boundary conditions satisfied exactly on every point of the structure, it may be useful to have them satisfied on average, especially in view of developing numerical approximation methods such as the Finite element method. The virtual power theorem/principle (VPP) has been developed to this end. It encapsulates in one equation the dynamic equation, plus the boundary conditions. This type of formulation is called “weak formulation”, contrarily to “strong formulations” (dynamic equations) which have to be satisfied precisely on every point of the structure. Moreover, the order of the derivatives involved in the VPP is reduced with respect to the dynamic equations, which makes the numerical approximation functions to use a lot simpler.
+a) General weak formulation
+Let us consider a displacement field w(x) on V, which can be for the time being arbitrary, but “sufficiently derivable” to an order which will be seen hereafter. The interpretation of w, which could actually be a displacement or a velocity field, as a velocity will be clarified later. The term “virtual” emphasizes the arbitrary character of w which may not be the real displacement or velocity field of the structure under the current loading.
+Let us then multiply the dynamic equation (4.3) by w for any point x of the structure and integrate over V:
+∫ (Divσ + fV − ρü , )
+V wdV = 0 , ∀w ∈ H1 (V) (3.12)
+H1 is the Hilbert space of derivable functions in V, with square integrable partial derivatives.
+Using the tensor product derivation formula:
+(σ w) σ w (σDX w)
+Div T = Div . + Tr , (3.13)
+Replacing Divσ.w by its expression from the latter equation, and applying Ostrograski’s formula on σT w (which is in fact integrating by parts), yields the following expression:
+∫ (σn). wdV − ∫ Tr(σDXw). dV
+V+
+∂V ∫ (fV − ρü , )
+V wdV = 0 , ∀w ∈ H1 (V) (3.14)
+b) Admissible velocity field and Virtual Power Theorem
+Definition: a cinematically admissible (c.a.) velocity field is a velocity field in H1, which vanishes on Γu. In the first integral on the left hand side of (3.14) only remains the external traction term on Γu:
+∫ (text). wdV − ∫ Tr(σDXw)dS
+V
++
+Γu
+∫ (fV − ρü , )
+V
+wdV = 0 , ∀w ∈ H1 (V)
+(3.15)
+
+
+Virtual Power Theorem Page 48
+CentraleSupelec
+The Virtual Power theorem in then obtained by reordering the terms in (3.15), and interpreting the integral , as w is considered as a velocity field, as external and internal efforts (virtual) powers developed by this field on the system:
+− ∫ Tr(σDXw)dV
+V
++ ∫ (text). wdS
+Γu
++ ∫ fV.
+V
+wdV = ∫ ρü .
+V
+wdV, ∀w c. a.
+(3.16) With the following interpretation:
+− ∫ Tr(σDXw)dV
+V
+⏟
+Virtual Power of internal forces
++ ∫ (text). wdS
+Γu
++ ∫ fV.
+V
+wdV
+⏟
+Virtual Power of external forces
+= ∫ ρü .
+V
+wdV
+⏟
+Virtual power of accelerations
+, ∀w c. a.
+(3.17)
+The sum of the virtual power of external forces plus the virtual power of internal forces equals the virtual power of accelerations.
+Alternatively, thanks to the symmetry of the stress tensor σ, the VPP can be written in terms of associated strain to the virtual field w, ε(w):
+ε w = 2 (Dxw + DxwT )
+1
+() ,
+Given the transposition of the definition (3.1) of ε associated to u, which should have been written ε(u), to w:
+− ∫ Tr(σ(u)ε(w))dV
+V
++ ∫ (text). wdS
+Γu
++ ∫ fV.
+V
+wdV = ∫ ρü .
+V
+wdV, ∀w c. a.
+(3.18)
+Remark: in the first integral of the left hand side of equation (3.18), it is to be noted that the stress σ is associated to the real displacement vector, whereas the strain ε is associated to the virtual field through ε(w).
+c) The Virtual Power Principle
+In the approach presented above, we have derived a virtual power theorem from the dynamic equations of the structure. Conversely, in many recent textbooks, the virtual power theorem is considered as a principle for the system’s movements. A supplementary hypothesis is then necessary, that the power of internal forces is a linear function of the strain sensor ε, thus introducing σ such as:
+Pint = ∫ Tr(σ(u)ε(w))dV
+V (3.19)
+Then, thanks to appropriate different choices for w null on Γ, then on the interior of V, though the reverse steps as before, both the dynamic equation and the boundary conditions can be retrieved from the VPP (3.17).
+
+
+Virtual Power Theorem Page 49
+CentraleSupelec
+3.3. Mass and stiffness operators, properties, and general weak formulation
+Writing the virtual power Theorem/principle in terms of the real displacement filed u and a virtual cinematically admissible virtual (velocity) field w introduces two operators defined on the space H10 of the c.a displacements fields for the solid. These operators are the mass M
+and stiffness K operators associated to the structure:
+− ∫ Tr(σDXw)dV
+V
+⏟
+−K(u,w)
++ ∫ (text). wdS
+Γu + ∫ fV.
+V wdV
+⏟
+Virtual Power of external forces
+= ∫ ρü .
+V wdV
+⏟
+M(ü ,w)
+, ∀w c. a. (3.20)
+With the stiffness operator K of the structure defined as:
+Tr( )dV Tr( )dV
+VV
+( , ) =
+K u w =  σ Div X w σε(w (3.21)
+It important to remark that in (4.21) the stress tensor σ is associated to the real displacement field, whereas the strain term ε(w) is associated to the virtual velocity field w. In that sense, σ should have been noted σ(u) for clarity. (4.21) then rewrites:
+Tr( )dV Tr( )dV
+VV
+( , ) =
+u w =  σ(u) DivX w σ(u)ε(w)
+K (3.22)
+Tor a linear elastic homogeneous solid the constitutive equation (3.6) implies:
+( ( ( )) ( ) )
+( ( )) ( ( )) ( )
+Tr Tr Tr dV
+Tr ITr dV
+V
+V
+(, )
+(, )
+= +
+= +
+2 )( )
+( 2 )( )
+uw u v u εw
+uw u u εw
+  
+  
+K
+K
+(3.23)
+K can be seen to be a symmetric positive operator in the sense of operators in functional
+spaces.
+The mass operator M of the structure defined as:
+=
+V
+M(u, w) u.wdV . (3.24)
+M can be seen to be a symmetric positive definite bilinear operator in the sense of operators
+in functional spaces.
+The mass and stiffness operators can be interpreted in a physical sense as related respectively to the kinetic energy, or mass distribution of the structure (for the mass operator), and elastic strain energy for the stiffness operator.
+Indeed, for the real velocity field v of the structure the kinetic energy Ekin(v) involved reads:
+E v v v.v 2 M(v,v)
+1
+2
+1
+2
+1
+( ) = V 2 = V =
+kin  dV  dV (3.25)
+
+
+Virtual Power Theorem Page 50
+CentraleSupelec
+Thus confirming the positive definite character of the quadratic form associated to M.
+The right hand side term of (4.20) can then be interpreted as:
+M(ü, u) = ∫ ρü. u
+V dV = d
+dt Ekin(u) (3.26)
+Using (3.19) the virtual power of internal forces reads:
+(σ u ε w ) = −K(u,w)
+P = −Tr dV
+V
+()( )
+int , which is related to the elastic strain (free)
+energy accumulated in the solid in the deformation:
+( ) ( ( ( ))) ( )
+Tr u dV u ( Tr Tr )dV
+V
+V
+el = =  +
+
+= 22 2
+2
+1
+( )()
+2
+1
+E (u) σ u ε K(u, )   u   u (4.27),
+This confirms the positive character of the bilinear form associated to K, when no pre
+stress is applied to the structure. The latter case will be treated independently.
+For potential rigid body movements of the structure, the associated strain energy is zero. K is then not definite in general except if the structure is clamped (no rigid body
+mode).
+Finally the VPP/ VPT (4.20) writes in terms of mass and stiffness operators as:
+M(ü , w) + K(u, w) = ∫ (text). wdS
+Γu + ∫ fV.
+V wdV, ∀w c. a. (3.28)
+an equation which generalizes, in a weak sense and for (infinite dimensional) functional spaces, the classical MDOF dynamic equation (1.2) seen in chapter 1 for an undamped system:
+Mẍ + Kx = 0 (1.2)
+3.4. VPT/VPP and weak formulation for beams (bending)
+In this section, the weak formulation will be developed for the particular case of beam bending. The cases of the bar (traction-compression) and of the torsion are simply 1D applications of the previous section and will not be further developed.
+Let us consider the case addressed in section 3.5 of a beam AB of constant characteristics E, S, ρ, with in-plane bending, again with the Euler-Bernoulli hypothesis of pure bending (thin beam- no shear).
+
+
+Virtual Power Theorem Page 51
+CentraleSupelec
+A
+B
+RA
+RB
+MA
+MB
+x1
+x2 =3
+u=u2(G)
+P
+On each of the beam ends (A and B), either the displacement u or rotation ω is prescribed, the corresponding force or moment component being unknown, or the resultant force or moments are prescribed. In the latter case, the corresponding kinematic quantity is unknown. There are different ways of deriving a VPT/VPP approach for a beam in bending: starting directly from the dynamic equations for a beam, as it was done in the last section or using the continuous 3D model approach and introducing then the beam kinematic approximations or stress tensor simplifications.
+a) Approach from the dynamic equations
+The dynamic equation for the beam deflection u (3.50) with external force density fext along axis 2 writes:
+( , t) fext 2 ( , t)
+2
+4
+4
+x
+t
+u
+xS
+x
+u
+EI 
+
++ =−
+
+
+−  (4.29)
+Let us consider a virtual velocity (or displacement) field w, compatible with the kinematic constraints quoted above (c.a.), and multiply both sides of equation (3.29) by w and integrate over the beam length.
+t fext t) w
+
+
++=
+
+
+
+
+
+
+
+
+−  ( , )  0 2 ( , ,
+2
+04 0
+L 4 L L x wds
+t
+u
+x wds wds S
+x
+u
+EI  (3.30)
+In order to have simpler notations in the following we will adopt the dots for the time derivatives and the commas for the space derivatives. Thus as : ü = ∂2u
+∂t2 (x, t),
+And:
+u′′′′ = ∂4u
+∂x4 (x, t)
+
+
+Virtual Power Theorem Page 52
+CentraleSupelec
+(3.29) then writes:
+−EIu′′′′ + fext = ρSü ,
+whilst (3.30) writes:
+− ∫ (EIu′′′′)
+L
+0 wds + ∫ fextwds
+L
+0 = ∫ ρSü wds
+L
+0 , ∀w
+Integrating by parts the first integral gives:
+∫ EIu′′′
+L
+0
+w′ds − [EIu′′′w]L0 + ∫ fextwds
+L
+0
+= ∫ ρSü wds
+L
+0
+, ∀w
+Which gives, taking into account equation (3.50) (for R2=T): T R EIu
+= 2 =−
+∫ EIu′′′
+L
+0
+w′ds + T(L)w(L) − T(0)w(0) + ∫ fextwds
+L
+0
+= ∫ ρSü wds
+L
+0
+, ∀w
+One further integration then leads to:
+− ∫ EIu′′
+L
+0
+w′′ds + [EIu′′w′]L0 + T(L)w(L) − T(0)w(0) + ∫ fextwds
+L
+0
+= ∫ ρSü wds
+L
+0
+, ∀w
+which then can be written considering M EUu
+= as:
+− ∫ EIu′′
+L
+0
+w′′ds + M(L)w′(L) − M(0)w′(0) + T(L)w(L) − T(0)w(0) + ∫ fextwds
+L
+0
+= ∫ ρSü wds
+L
+0
+, ∀w
+(3.31) Remembering that the boundary conditions write:
+M (L) = M B; M (0) = −M A;T (L) = RB ; M (0) = −RA ,
+and if we define w
+w
+ = rotation associated to the virtual deflection w, (3.31) writes:
+− ∫ EIu′′
+L
+0
+w′′ds
+⏟
+Virtual Power of
+internal forces −K(u,w)
++ M(L)w′(L) − M(0)w′(0) + T(L)w(L) − T(0)w(0)
+⏟
+Virtual Power of external forces
+= ∫ ρSü wds
+L
+⏟0 Virtual power
+of accelerations M(ü ,w)
+, ∀w c. a.
+(3.32)
+One recognizes then the virtual power of external, internal forces and accelerations, which in turn introduces the stiffness and mass operators:
+
+
+Virtual Power Theorem Page 53
+CentraleSupelec
+( ) 
+ 
+
+
+
+
+
+=
+ 
+= L L ds
+x
+w
+x
+x
+u
+K u w EIu w ds 0 EI 2
+2
+2
+2
+, 0 ( , t) (3.33)
+M (u, w) = 0LSuwds, (3.34)
+3.5. Eigenmode basis
+As the general properties of the mass M and stiffness K operators introduced above for
+continuous systems are equivalent, in infinite dimensional functional spaces, to properties of M and K in finite dimension spaces (symmetry and positivity), it will be seen in the following that the same basic properties can be derived subject to the same conditions as in finite dimension:
+• Existence of a now infinite, but still countable, eigen mode basis for the structure displacements,
+• Consequently, the time (or frequency domain) solutions for the dynamic behaviour can be developed on the modal basis of the structure, in the very same way as for a finite dimension system. The same formula can be then derived, simply replacing finite summations by infinite ones.
+With appropriate formulation of the problem in appropriate functional space, it can be shown (H0 : functional space with finite energy for displacements or velocities ) cf [Clouteau], the general symmetry and positive character of the associated quadratic forms imply that in such Hilbert spaces that operators K and M can be« simultaneously diagonalized » , that is
+there exists an infinite but countable set of functions un, called modal shapes, or modal vectors, each of them associated to a real number ωn (Eigen circular frequency), The couple (un, ωn) are than the Eigen modes such as que un, simultaneously diagonalizes K and M:
+• K(un , w) = n2M(un , w), w H0
+ (3.35)
+• ωn is the circular eigen frquency of mode n.
+• 0 0  ... n , lni→m(n ) = + (3.36)
+• M(un ,um ) =mnmmn , , and 2 2
+K(un , um ) = n M(un , um ) = mnmmnn (3.37)
+Where the real numbers mn are strictly positive numbers called modal mass for mode n. Then the set of the un forms an (infinite dimension) basis of H0, which means that any cinematically admissible function u(x,t) or w , can be written as a linear (time dependent if u is time dependent) combination of the un :
+( ,) () ( ) ( ,)
+1
+q rt
+j
+u x = j wj x +u x
+
+=
+t t (3.38)
+Where un(x,t) is a particular solution of the problem with prescribed displacements (u=uext on Γu).
+The same results as established in chapter 3 for beams are now found in a general case.
+
+
+Virtual Power Theorem Page 54
+CentraleSupelec
+3.6. Rayleigh’s Quotient
+As seen in Chapter 2 for finite dimension MDOF systems,, Rayleigh’s quotient is commonly used for numerical methods for finding the modes in discrete approximating methods, e.g ; finite element method. However its approximating properties are also useful for any (even global or analytical) approximation of the mode shapes. This is the reason why it will also be presented in the case of infinite dimension.
+Rayleigh’s quotient can be defined for any cinematically admissible field 0
+w V0 = H1 , by:
+(, )
+(, )
+ww
+ww
+wM
+K
+Q( ) = (3.39)
+It can be shown that: inf ( ) ( 0 )
+2 0 0
+wu
+= wV Q = Q
+ (3.40)
+More over : inf ( ) ( ), ( 1)
+2
+⊥−
+=  = u = n n
+V
+n Q Q VV L
+n
+wu u
+w n-1
+ with , (3.41)
+Where L(un−1) = Spanun−1, and ⊥
+ the direct orthogonal sum of subspaces. Vn is then the
+subspace in Vn-1 orthogonal to ( n−1)
+Lu .
+This shows how the un basis can be constructed iteratively, by looking for un in the subspace orthogonal to un-1. This is a procedure widely used in practice.
+3.7. Conclusion and important formulas
+In this chapter, after a rapid recall of the basic notions in continuous mechanics, and the so-called “strong” formulation of the dynamic equation, the “weak” formulation (dynamic equations satisfied on average over the solid volume) was introduced in terms of the Virtual Power Theorem (VPT). Reciprocally, together with the hypothesis that the virtual power of internal forces is a linear form of the strain tensor, which introduces the corresponding linear coefficients as the terms of the stress tensor, VPT equation (3.17) stated as a principle (VPP) enables retrieving the set of dynamic equations and boundary conditions of the strong formulation. Any form introduces the stiffness and mass operators.
+The VPP was also developed for beams (3.31)-(3.32), introducing also the stiffness and mass operators.
+VPP or VPT will prove useful in the following for demonstration of the existence of a modal basis, and for the calculation of the forced response of the structure (3D or beam) to external forces.
+
+
+Virtual Power Theorem Page 55
+CentraleSupelec
+Important formulas:
+The 3D elastodynamic system:
+• Divσ + fV = ρa = ρü , x ∈ V, (3.3)
+• σ = I Tr(ε) + 2ε , (3.6)
+• = 2 (Dxu + DxuT )
+1
+ (3.1)
+•t
+( ) = ext , on 
+σ n t , (3.4)
+• = ext V t = u
+u u , on / . (3.5)
+• u(x,0) = uin , on V (3.10)
+• u̇ (x, 0) = u̇ IN (3.11)
+VPP/VPT for a 3D structure:
+• − ∫ Tr(σ(u)ε(w))dV
+V + ∫ (text). wdS
+Γu + ∫ fV.
+V wdV = ∫ ρü .
+V wdV, ∀w c. a.
+(3.18) Stiffness operator (3D)
+• Tr( )dV Tr( ) dV
+VV
+(, ) 
+=
+
+K u w = σ(u) Div w σ(u)ε(w) (3.23)
+Mass operator (3D)
+• =
+V
+M(u, w) u.wdV (3.24)
+VPP/ VPT in terms of mass and stiffness operators
+• M(ü , w) + K(u, w) = ∫ (text). wdS
+Γu + ∫ fV.
+V wdV, ∀w c. a. (3.28)
+VPP/VPT for a thin beam in bending motion (Euler-Bernoulli)
+• − ∫ EIu′′
+L
+0 w′′ds + M(L)w′(L) − M(0)w′(0) + T(L)w(L) − T(0)w(0) +
+∫ fextwds
+L
+0 = ∫ ρSü wds
+L
+0 , ∀w
+(3.31/3.32)
+Stiffness operator for a thin beam (bending motion)
+• ( ) 
+ 
+
+
+
+
+
+=
+ 
+= L L ds
+x
+w
+x
+x
+u
+u w EIu w ds 0 EI 2
+2
+2
+2
+K , 0 ( , t) ( 3.33)
+Mass operator for a thin beam (bending motion)
+• (u w) = 0L Suwds
+M ,  (3.34)
+Modes
+• K(un, w) = n2M(un, w), w H0
+ (3.35)
+• M(un , um ) =mnmmn , 2 2
+K(un , um ) =nM(un , um ) =mnmmnn (3.37)
+• ( ,) () ( ) ( ,)
+1
+q rt
+j
+u x = j wj x +u x
+
+=
+t t (3.38)
+Rayleigh’s quotient
+
+
+Virtual Power Theorem Page 56
+CentraleSupelec
+• (, )
+(, )
+ww
+ww
+wM
+K
+Q( ) = , (3.39)
+• inf ( ) ( 0 )
+2 0 0
+wu
+= wV Q = Q
+ (3.40)
+• inf ( ) ( ), ( 1)
+2
+⊥−
+=  = u = n n
+V
+n Q Q VV L
+n
+wu u
+w n-1
+ with (3.41)
+
+
+Galerkin and Finite Element methods Page 57
+CentraleSupelec
+4. Galerkin and Finite Element methods
+Galerkin methods are one example of approximation of the dynamic behaviour of a continuous system by a reduced number of degrees of freedom, through the use of a set of functions to approximate the behaviour of the structure (usually the displacements). This is done through the use of a set of functions wj(x), depending only of the position vector x, whereas the dependence coefficients –or generalized coordinates qj(t)– depend only of time to build an approximate solution uh(x,t) of u(x,t):
+( ,) ( ) ()
+1
+t jt
+N
+j
+uh x = w j x q
+= (4.1)
+In order for the approximation uh to be convergent to u when N tends to infinity, the set of
+functions   =1,
+( )j
+w j x should form a basis of the (functional) space of admissible solutions.
+Through the use of the VTP with virtual displacement fields selected in the approximation basis as wn(x), n=1,....,N, the infinite dimension system is transformed in a finite dimension approximating system of differential equations in terms of the only unknown qj(t).
+According to the problem, and the choice of the basis of approximating functions   =1,
+( )j
+wj x
+the situations can be classified in two types:
+• wj(x) can be chosen as “global” ( being non null generally) any point of the structure. This is then called a RITZ method. The functions wj(x) are either “assumed” deformed shapes for the structure (a pertinent choice could be the actual vibration modes of the structure, or an approximation of them), or more simply in practice tentative guesses for deformed shapes. The values of N are then relatively low (as compared with the situation to come next). Shape functions can then be either of high polynomial degree or somehow “complex” (sine or cosine functions...). This solution is quite effective when main characteristics of the response of the structure e.g. modal shapes or a good approximation of them is already known. The method converges then quite rapidly.
+• Alternatively, when the characteristics of the response of the structure is not known, the functions wj(x) can be chosen to approximate locally the displacement of the structure, in a simple way (they should then be of the lowest possible order for polynomials for example). But then, approximating locally the structural displacement they have to be null except on the local region where they approximate the displacement. Their total number N is then much bigger than in the previous case. This is the philosophy behind the Finite Element Method, which will be presented later.
+4.1. Galerkin method for system discretisation
+a) Principle of the method
+As stated above, Galerkin method consists in approximating the solution u(x,t) in a continuous (infinite dimensional) system by a solution in a finite dimensional approximating functional basis system of order N, using N selected linearly
+
+
+Galerkin and Finite Element methods Page 58
+CentraleSupelec
+independent functions in a functional basis of the cinematically admissible displacements of the structure  j N
+j 1,
+()=
+w x . One will then writes, assuming approximate solution uh(x,t) and
+real solution u(x,t): are equal:
+( ,) ( ) ()
+1
+t jt
+N
+j
+u x = w j x q
+= (4.1)
+Equation (5.1) can be seen as the projection of the solution on the approximate basis system  j N
+j 1,
+()=
+w x . The functions wj(x) sometime called shape functions depend only on x,
+not on time. Conversely, the coefficients qj(t) of the projection, called generalized coordinates, depend on time indeed.
+The discretization process is carried as follows:
+• Substituting u(x,t) by its expression (4.1) in the VPT general equation:
+M(ü , w) + K(u, w) = ∫ (text). wdS
+Γu + ∫ fV.
+V wdV, ∀w c. a (3.28)
+.
+taking into account the fact that only qj(t) depends on t leads to an infinite dimensional differential equation:
+∑[q ̈n(t)M(wn, w) + qn(t)K(wn, w)] = F(w)(t), ∀w (4.2)
+N
+n=1
+• Then, taking as virtual velocities vectors successively the N shape functions wm(x), m=1,...,N, as leads to a system of N (possibly coupled) differential equations:
+∑[q ̈n(t)M(wn, wm) + qn(t)K(wn, wm)] = F(wm)(t), m = 1, ... . , N (4.3)
+N
+n=1
+,
+which in turn can be written in matrix form:
+Mq̈ (t) + Kq(t) = F(t) (4.4)
+introducing the N dimensional vector of generalised coordinates q(t) : qT = [q1(t) ... qj(t) ... q1N(t)]
+The coefficients of matrixes M and K, called approximate mass and stiffness matrixes are given from (4.3); they can be calculated from the expressions of the mass and stiffness operators:
+  ( m, n)
+M nm = M w w (4.5)
+  ( m, n)
+K nm = K w w (4.6)
+
+
+Galerkin and Finite Element methods Page 59
+CentraleSupelec
+It can be shown from the properties of the mass and stiffness operators that the approximate mass, and stiffness matrixes are symmetric, positive and definite if there is no negative pre-stress.
+b) Example for a 3D continuous system
+For a 3D continuous system, the VPT writes:
+− ∫ Tr(σ(u)ε(w))dV
+V + ∫ (text). wdS
+Γu + ∫ fV.
+V wdV = ∫ ρü .
+V wdV, ∀w c. a. (3.18)
+Using (4.1) and applying successively (3.18) for w=wm(x), m=1,...,N, leads to:
+∑ [− ∫ Tr(σ(wn)ε(wm))dV
+V]
+⏟
+K(wn,wm)
+nN=1 q̈n(t) + [∫ ρẅn.
+V wmdV]
+⏟
+M(ẅn,wm)
+qn(t) =
+∫ (text). wmdS
+Γu + ∫ fV.
+V wmdVm = 1, ... . , N,
+⏟
+virtual power Fn (t) of external forces through wm
+(4.7)
+Which can be written as: Mq̈ (t) + Kq(t) = F(t) , with:
+=  =
+V
+K Knm , Knm Tr(σX (wm )ε (wn )dV , (4.8)
+ . ,
+= =
+V
+M M nm , M nm wm wndV (4.9)
+F(t) = [
+⋮
+Fn(t) ⋮
+] , Fn(t) = ∫ (text). wndS
+Γu + ∫ fV.
+V wndV (4.10)
+The terms of M and K can be retrieved from (4.5) and (4.6), by simply applying the definitions (4.23) and (4.24) of operators K and M for a 3D system.
+The right hand side vector F(t) appears as the (time varying) projection of the external surface tractions and volumic forces on to wn.
+c) Example for a simply supported beam without preload
+For a simply supported beam without preload, the VPT writes as (3.32) given the BCs:
+∫ EIu′′
+L
+0
+w′′ds
+⏟
+K(u,w)
++ ∫ ρSü wds
+L
+⏟0 M(ü ,w)
+= ∫ fextwds
+L
+⏟0 Virtual Power of external forces
+∀w c. a.
+where the virtual power of forces at both ends x=0 and x=L vanish, due to boundary conditions (u,w=0, M=0) both on u and w!
+
+
+Galerkin and Finite Element methods Page 60
+CentraleSupelec
+The mass and stiffness matrixes K and M can be simply derived from (4.5) and (4.6) with the definitions (3.33) and (3.34) for K and M:
+( ) 
+ 
+
+
+
+
+
+=
+ 
+= =  L n m
+L
+nm m n n m ds
+x
+w
+x
+x
+w
+K w w EIw w ds 0 EI 2
+2
+2
+2
+K , 0 ( , t) , (4.11)
+= ( )= L
+M nm wm wn 0 Swnwmds
+M ,  , (4.12)
+As an example, if we consider now the wn to be the N first exact natural modes of vibration of the beam:
+n = 1,..., N
+
+
+
+
+= sin L ,
+nx
+wn
+ , one can then calculate:
+mn
+L
+nm
+L
+L
+n
+dx EI
+L
+mx
+L
+nx
+L
+m
+L
+n
+K EI 
+   
+2
+sin sin
+4
+0
+22
+
+
+
+
+=
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+==  (4.13)
+Knm is naturally zero if n is different from m, since the natural modes wn are orthogonal with respect to the stiffness operator K, and since the definition for the approximate operator
+term Knm is indeed K(wn,wm)!
+() ,
+2
+, 0 0 sin sin mn
+LL
+nm n m n m
+SL
+ds
+L
+mx
+L
+nx
+M w w Sw w ds S 
+ 
+ =
+
+
+
+
+
+
+
+
+= = =
+M (4.14)
+The same remark on orthogonality of modes with respect to M explains that Mnm is zero if
+m is different from n.
+Finally, the system uncouples in N equations for uncoupled oscillators:
+ρSL
+2 q̈n(t) + EI (nπ
+L )4 L
+2 qn(t) = fn(t), n = 1, ... . , N (4.15)
+which can be put in the form:
+mn[q̈n(t) + ω2qn(t)] = fn(t), n = 1, ... . , N (4.16)
+With:
+2
+SL
+mn
+=  , modal mass of mode n, (4.17)
+and 2
+2 44
+SL
+EI
+n
+n
+ =  (4.18),
+thus giving the exact n-th circular frequency of mode n in accordance with (2.59)
+2
+2
+2L
+n
+S
+EI
+fn
+
+
+= , which provides the resonant frequencies for mode n.
+It should be noticed that right hand side member is the projection of the linear force density on to the n-th vibration mode:
+
+
+Galerkin and Finite Element methods Page 61
+CentraleSupelec
+ 
+
+
+
+=L
+n dx
+L
+nx
+f (t) 0 (t, x)sin 
+ext
+f (4.19)
+In practice, the Galerkin method is useful, when the structure modes are known exactly, or approximately, to calculate the response to an external load. The calculation is indeed much simpler if carried out on the modal basis
+d) Simply supported beam with preload
+exercise
+
+
+Galerkin and Finite Element methods Page 62
+CentraleSupelec
+4.2. The Finite Element Method: Principles
+The Finite Element method FEM was introduced from the work of R. Courant 18881972: Göttingen , then New-York (1943), and more precisely by R. Clough 1920- in UC Berkeley, Civil Eng. (FEM introduced 1959), cf Dynamics of Structures, 1975, and also O. Zienkiewicz 1921-2009 in Swansea (FEM developed in 1965),The Finite Element Method 1970.J. Argyris 1913-2004: Civil & Aero. Eng. Stuttgart also contributed. Mathematical convergence of and error boundaries of the FEM with respect to element formulation were developed until the 1980’s, as a research subject. In principle, the Finite Element method is a Galerkin method where the basis functions wn are local, i.e . null outside the element to which they are related: they are meant to approximate the displacements inside the element by low order polynomial functions. The physical variables to determine are the displacements at the nodes of the mesh. Contrarily to global Galerkin methods, where the convergence can be accelerated through a greater sophistication of the basis (global) approximating functions, in the FEM the type of functions is kept, and the convergence is simply obtained by refining the mesh, through a number of DOF(s which can be as high as hundreds of thousands.
+The principle of the Finite Element Method can be summarized in the following process:
+• Divide the structure into ‘finite’ elements (Mesh) • Define wn functions on elements as ‘simple’ functions ( linear, low order polynomials) approximating displacements inside element, (wn functions are null outside elements)
+• Apply Galerkin method with wn’s:
+• VPP on structure applied to wn divides into sum of each element contributions
+• Apply VPP on one ‘reference’ element to local masses and stiffness matrixes Ml,Kl once for all
+• Sum contributions (assemble into global M, K matrixes ) • Take into account boundary conditions • Compute f resulting from external forces • Solve for qn’s
+It can be noted as the displacements are approximated by low order polynomials, the resulting approximation of stresses is of poorer quality, as they are related to the first order gradient of the displacements. To this end other formulations (dual or mixed) for the VTP have been introduced along with elements where the basic functions are stress tensor approximations, as an alternative to mesh refinement, which is current practice in industrial software, in order to capture stress concentration around low radius shape variations More recently, to be to capture stronger stress gradients around cracks without having to accurately mesh around the crack, special formulations involving special displacement field approximations around cracks or stress singularities have been developed. In the following, as an introduction to FEM, only bar (traction-compression) elements will be presented. For 3D element formulation the reader cen refer to e.g Imbert, Trompette or to the pioneering work of Zienkiewicz, Clough and Penzien. Nevetheless, problems raised by Finite Element modelling second order problems like beams (or plates or even shells) will be introduced in a second paragraph.
+
+
+Galerkin and Finite Element methods Page 63
+CentraleSupelec
+4.3. Finite Element modelling of a bar (traction-compression)
+The process described above will be applied for a bar
+F2
+F1
+A1 A2
+u1 u2
+f(x,t)
+x
+Let us consider a bar of length L, of axis Ox, of constant section S, Young’s modulus E, volume mass density ρ, working in tractioncompression, submitted to a (longitudinal) external force density f(x,t).
+At the extremities A1 (x=0) and A2 (x=L) the longitudinal displacements are u1 and u2 respectively corresponding to applied forces F1 and F2.
+a) Meshing
+Meshing means dividing the bar into: • N nodes with longitudinal coordinates {xn}, n=1,...,N, which results in: • N-1 elements {]xE, xE+1[}, E=1,...,N-1
+Figure 5.1 : Meshing a beam into elements
+b) Displacement approximation inside one element
+The approximation functions wi for the displacement inside one element will be chosen as the simplest polynomial function (satisfying the static equilibrium for a bar EIu’’=0), that is linear functions. The displacement inside the element can be expressed as a linear combination of the nodal longitudinal displacements u1(t)= u(xE,t) and u2(t)= u(xE+1,t):
+() () () ()
+  ( ) ()
+()
+()
+( , ) () ()
+2
+1
+1 1 2 2 1 2 xt
+ut
+ut
+u x t wE x u t wE x u t wE x wE x  = W q
+ 
+
+= + = , (4.20)
+Through the following choice of the approximating functions:
+()
+EE
+E
+E
+xx
+xx
+wx −
+−
+=
++
++
+1
+1
+1 and ( )
+EE
+E
+E
+xx
+xx
+wx −
+−
+=
++1
+2 (4.21)
+Figure 5:2 shape (basis) functions w1, w2 for a bar element
+
+
+Galerkin and Finite Element methods Page 64
+CentraleSupelec
+In (5.20), the general coordinates vector 
+ 
+= ( )
+()
+()
+2
+1
+ut
+ut
+q t gathers the (time dependant)
+nodal displacements u1(t)= u(xE,t) and u2(t)= u(xE+1,t), whereas the basis function row
+vector ( ) ( )
+x wE x wE x 
+12
+W ( ) = gathers the basis functions w1(x) and w2(x) of the element,
+the latter ones being space dependant only.
+For an element of length L, the linear approximation in terms of the nodal displacements u1 and u2 simply writes:
+L
+x
+u(x,t) = u1(t) + (u2 (t) − u1(t)) (4.22)
+(u being constant throughout the bar section), which can be put into the form of eqn. (5.20) :
+( , ) 1( )(1 ) 2 ( ) u1(t)w1(x) u2 (t)w2 (x),
+l
+x
+ut
+l
+x
+u x t =u t − + = +
+where 1( ) (1 l )
+x
+w x = − and l
+x
+et w2 (x) = are base functions of the bar element.
+c) VPT for a bar element (traction-compression)
+The dynamical equation for a bar writes, for constant S, E and ρ:
+ESu,, + f = ρSü (4.23)
+The VPT can then be derived from multiplying both members of the dynamic equation by an appropriate cinematically admissible velocity field w (or displacement, in the latter case one speaks about Virtual Work Theorem -VWT):
+∫ ESu′′(x, t)
+L
+0
+w(x)ds + ∫ f(x, t)w(x)ds
+L
+0
+= ∫ ρSu(ẍ, t)w(x)ds
+L
+0
+, ∀w(x), w(0) = 0
+(4.24)
+Integrating and taking into account boundary conditions leads to:
+− ∫ ESu′(x, t)
+L
+0
+w ′(x) ds
+⏟
+−K(u,w)
++ ∫ f(x, t)w(x)ds
+L
+⏟0 f(t)
+= ∫ ρSu(ẍ, t)w(x)ds
+L
+⏟0 M(ü ,w)
+, ∀w(x), w(0) = 0
+(4.25)
+In order to apply the VPT (4.25), one has to calculate:
+() () () ()
+  ( ) ()
+()
+()
+( , ) () ()
+2
+1
+1 1 2 2 1 2 xt
+ut
+ut
+u x t w E x u t w E x u t w E x w E x W q
+ =
+ 
+
+
+=
+
++
+
+=
+
+
+
+Galerkin and Finite Element methods Page 65
+CentraleSupelec
+Then applying the VPT successively with w=w1 and w=w2 leads to a time domain 2DOF differential system of equations in terms of q(t):
+MEq(̈t) + KEq(t) = fE(t) (4.26)
+Where the mass matrix and stiffness matrixes are defined as:
+S x dx
+E L t ()
+M = 0  WW (4.27)
+ES L t  x  x dx
+E  
+K = 0 W ( ) W ( ) (4.28)
+The right hand side member of equation (5.23) is given by:
+1, 2
+() 0 ( ,) ( ) 0 ( ,) ( )
+ =
+
+
+=  =  n
+L
+n
+f E t L f x t tW x dx f x t w x dx (4.29)
+d) Calculation of the element mass, stiffness matrixes and contribution to nodal forces
+The mass and stiffness matrixes for element E can be simply calculated from (4.27) and (4.28):
+  ()
+() () ()
+
+ 
+
+
+
+=L E E
+E
+E
+E w x w x dx
+wx
+wx
+S
+0 12
+2
+1
+M  (4.30)
+  ()
+() () ()
+
+ 
+
+
+
+
+
+
+=L E E
+E
+E
+E w x w x dx
+wx
+wx
+ES
+0 12
+2
+1
+K (4.31)
+In the calculation, care has to be taken that L is the length of the element, and not that of the beam. The components of row m, column m of KE, ME are calculated as:
+
+nm
+L
+mn
+E
+nm ESw w dx
+
+
+ 
+= 0
+K (4.32)
+
+nm
+L
+mn
+E
+nm Sw w dx
+
+
+M = 0  (4.33)
+One then finally finds, from the definition (5.21) of w1 and w2:
+
+ 
+
+−
+−
+=
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+−
+
+
+
+
+
+
+
+−
+
+
+
+
+
+
+
+−
+
+
+
+−
+=  11
+11
+1 1 11
+11 11
+0L
+ES
+dx
+L L LL
+LL LL
+ES L
+E
+K (4.34)
+and:
+
+ 
+
+=
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+−
+
+
+
+−
+
+
+
+−
+=  12
+21
+6
+1
+11
+02
+2
+SL
+dx
+L
+x
+L
+x
+L
+x
+L
+x
+L
+x
+L
+x
+SL
+E
+M  (4.35)
+
+
+Galerkin and Finite Element methods Page 66
+CentraleSupelec
+Remark:
+Matrixes KE and ME could also be calculated from a 3D approach taking into account the particularities of the stress and strain tensor for a bar. Indeed, in such a simplified 3D approach, the VPT writes:
+Tr((u) (w)dV+ρu.w dV =fv.wdV +fs.wdSt,  w cinematically admissible,
+The strain tensor associated to the assumption (5.21) for an element of length L reduces to :
+= 11 i1 i1, with component 11 as follows:
+L (u u )
+1
+11 (x) = 2 − 1 (4.36)
+With this approximation the traction along Ox case is approximately reproduced. The associated stress tensor is then:
+= 11 i1 i1+22 i2 i2+33 i3 i3,
+Component 11 can then be written in terms of the nodal displacements u1 and u2:
+11 11( ) (u2 u1)
+L
+E
+ = E x = − , (4.37)
+Which indeed corresponds to the stress strain relationship for a simple traction case
+Components 22 and 33 are non-zero –contrarily to the actual traction case-, but do not contribute to the power of internal forces since 22 et 33 are equal to zero with the considered displacement approximation.
+The VPT then writes, giving to w values successively equal to w1 et w2 :
+( ) ( ) ( )   0 ( ) , 1,2
+2
+1 12 2
+1
+0
+2
+1 11 11 1 11 2 0
+=+ =
+
+ 
+ 
+ 
+
++
+
+ 
+   dx F w  p x w dx i
+q
+q
+ww
+w
+w
+dx
+q
+q
+w ww
+L
+ES L
+ii i
+L
+i
+L
+  
+(4.38)
+Now setting :
+
+ 
+=
+2
+1
+u
+u
+q , generalized coordinates column vector,
+
+ 
+=
+2
+1
+F
+F
+F , external force vector,
+
+
+
+
+
+
+
+
+ =
+ 
+
+
+
+=
+
+
+L
+L
+p x w dx
+p x w dx
+F
+F
+02
+01
+2
+1
+()
+()
+F , nodal forces induced to the nodes (in the virtual power
+sense ) by the linear force density along the element.
+
+
+
+ = 
+
+
+=  L
+ij
+L
+ij
+E w w Sdx 0 E 11 w 11 w Sdx
+K 0 11( )11( )  ( ) ( ) , Stiffness (local) matrix of the
+element
+
+
+
+= L
+ij
+E w w dx
+M 0
+
+
+Galerkin and Finite Element methods Page 67
+CentraleSupelec
+The same expressions and values as above are found for ME and KE
+The right hand side member (generalized forces due to external linear force density) can in turn be calculated as:
+
+
+
+
+
+
+
+ =
+
+
+
+= =
+
+
+ =
+L
+L
+n
+L
+n
+EL t
+f x t w dx
+f x t w dx
+t f x t x dx f x t w x dx
+02
+01
+1,2
+0 0 ( ,)
+( ,)
+f ( ) ( , ) W ( ) ( , ) ( ) (4.39)
+The components of this column vector is the contribution of element E to nodal forces vector.
+e) Assembling the mass stiffness matrixes and nodal force vector into global K, M matrixes and nodal force vector
+Writing the VPT now written for the complete beam, for wn of each element, and taking into account the fact that wn is zero outside the element to which it is related results in a system of the following type :
+Mq(̈t) + Kq(t) = f(t) (4.40)
+where now matrixes M, K and nodal forces vector f(t), are respectively NxN matrixes and N column vector relative to the full structure.
+Matrixes M and K can be seen to be block diagonal matrices, the blocks being built from matrixes ME and KE for each element as shown in Figure 5.3 below:
+Figure 5.3: Assembling mass and stiffness local matrixes into global K and M matrixes for a bar
+The nodal force vector is built in a similar way by assembling the element contributions:
+f(t) =
+[
+∫ f(x, t)w1E1dx
+LE1
+0
+∫ f(x, t)w2E1dx
+LE1
+0 + ∫ f(x, t)w1E2dx
+LE2
+0
+⋮
+∫ f(x, t)w2EN−2dx
+LEN−2
+0 + ∫ f(x, t)w1EN−1dx
+LEN−1
+0
+∫ f(x, t)w2EN−1dx
+LEN−1
+0]
+(5.41)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+−
+−
+−
+−
+=
+0 0 11
+21
+00
+12
+1 10 0
+
+ 
+
+ 
+
+L
+ES
+K
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=
+0 0 12
+41
+00
+14
+21 0 0
+6
+
+ 
+
+ 
+
+SL
+M
+
+
+Galerkin and Finite Element methods Page 68
+CentraleSupelec
+4.4. Finite Element formulation for a thin beam in-plane bending problem (no prestress)
+The case in-plane bending of a thin beam with no prestress will be now be considered.
+a) Meshing
+Meshing a beam in flexural motion is the same process as for traction-compresssion, hence it will not be repeated here. Let us remark that a beam with varying characteristics can be divided into elements of constant characteristics.
+b) Approximation of the deflection inside one element
+u2
+1
+2
+A1
+L
+u1
+A2
+1 2
+u(x)
+x
+A homogeneous beam section A1A2of length L submitted to in-plane (axes 1-2) bending is considered. As before the effect of shear forces on the deflection will be neglected (Euler-Bernoulli case).
+Let us first remark that elements with “first order” polynomials are not appropriate to model bending motion. Indeed, bending involves changing beam curvature, which is reflected in the dynamic equation for plane bending (3.49):
+EIu′′′′(x, t) + ρSü (x, t) = f(x, t) (3.49)
+For example, with first order polynomials used to model traction-compression the curvature is zero. Higher order polynomials should then be considered. The 4th order in space of equation (3.49) suggests to consider polynomials of degree 3, which involves 4 parameters. This choice turns out to be relevant, when thinking that for the static case of equation (3.49) with no external linear force density, the beam shape depends on 4 parameters deflections u1, u2 and section rotations 1 and 2 at both ends of the beam.
+In a similar way as for equation (5.20) the deflection u(x,t) at a section with longitudinal coordinate x will be approximated as:
+u(x,t) = w1(x), w2(x), w3(x), w4(x)q(t) = W(x)q(t) , (4.41)
+with :
+
+
+
+
+
+
+
+
+
+
+
+
+=
+2
+2
+1
+1
+()
+
+
+u
+u
+q t the vector of (time varying) generalized coordinates , which are the
+deflections and section rotations at both ends of the element. The choice of the modal coordinate vector components suggests to choose for the basis functions w1 to w4, the solutions of the static problem with no linear external forces and successively prescribed
+
+
+Galerkin and Finite Element methods Page 69
+CentraleSupelec
+displacements or rotations at each end of the element. It appears that w1(x),..., w4(x) are so called Hermite polynomials:
+If one considers variable L
+x
+= :
+w1(x) then corresponds to the following boundary conditions : u1=1, u2=0, 1=0, 2=0.
+23
+w1 = 1− 3 + 2 (4.42)
+w2(x) then corresponds to the following boundary conditions: u1=0, u2=0, 1=1, 2=0.
+2
+w2 = L( −1) (4.43)
+w3(x) then corresponds to the following boundary conditions: u1=0, u2=1, 1=0, 2=0.
+23
+w3 = 3 − 2 (4.44)
+w4(x) then corresponds to the following boundary conditions: u1=0, u0=1, 1=0, 2=1.
+2( 1)
+w4 = L  − (4.45)
+Remark: functions w3(x) et w4(x) are symmetric functions of w1(x) and w2(x) with
+respect to the mid-span of the beam : w3(1−) = w1() ,et w4(1−) = w2()
+c) Virtual Power Theorem applied to the element
+The VPT applied to the element will enable the calculation of the mass, stiffness matrixes and nodal forces and moments at the elements ends.
+Let us remind that the VPT writes, for any virtual velocity field w with square-integrable second order derivatives and cinematically admissible:
+∫ EIu′′
+L
+0
+w′′ds
+⏟
+K(u,w)
++ ∫ ρSü wds
+L
+⏟0 M(ü ,w)
+= ∫ fextwds
+L
+⏟0 Virtual Power of external forces
+∀w c. a.
+(4.46)
+From (4.41) one can write:
+u (x,t) w1(x), w2(x), w3(x), w4(x)q(t) W (x)q(t)
+=
+   
+=
+ (4.47)
+
+
+Galerkin and Finite Element methods Page 70
+CentraleSupelec
+and the VPT successively applied with w=w1,...,w=w4 writes into the form of a dynamic MDOF equation:
+MEq(̈t) + KEq(t) = F(t) (4.48)
+with the following expressions for mass matrix ME, stiffness matrix KE of the element:
+S x dx
+E L t ()
+M = 0  WW (4.49)
+EI L t  x  x dx
+E   
+K = 0 W ( ) W ( ) (4.50)
+And nodal dynamic external forces vector f(t):
+
+
+
+= L
+f (t) 0 f (x,t)wn (x)dx (4.51)
+Calculating KE and ME, from the expressions (4.42) to (4.45) of the basis functions leads to:
+
+
+
+
+
+
+
+
+
+
+
+
+−
+−
+−
+=
+2
+22
+3
+4
+12 6
+4 62
+12 6 12 6
+sym L
+L
+L LL
+LL
+L
+EI
+E
+K (4.52)
+
+
+
+
+
+
+
+
+
+
+
+
+−
+−
+−
+=
+2
+22
+4
+156 22
+4 13 3
+156 22 54 13
+420
+sym L
+L
+LLL
+LL
+m
+M (4.53)
+Remark: K is an exact static solution for prescribed unitary displacements / rotations at nodes 1 and 2, since wi satisfy EIu(4)=0 with prescribed unitary boundary conditions.
+d) Assembling the mass stiffness matrixes and nodal force vector into global K, M matrixes and nodal force vector
+Assembling local element matrixes into global K and M matrixes and nodal force vector is carried out in the same manner as for the bar case, and will not be repeated here.
+4.5. Conclusion and important formulas:
+The Ritz -Galerkin methods was introduced with two objectives of approximating the system displacements using an (infinite) basis of approximating functions: When the functions used in the expansion are global their number can be relatively small. In compensation they should reproduce the global system displacement field relatively accurately. This is in particular the case for the modal basis of the system, where the discrete
+
+
+Galerkin and Finite Element methods Page 71
+CentraleSupelec
+MDOF equations applied using the VPT for the system modal shapes lead to a system of uncoupled equations. The case of the simply supported beam in-plane bending was presented. Conversely, the Finite Element Method uses local functions with relatively low order polynomial approximation for the displacements inside one element. The mass and stiffness element matrixes can be easily calculated, but they need to be assembled into a global matrix for the whole structure dynamic problem to be solved. Examples were given for a bar (traction- compression) or in-plane bending.
+Important formulas:
+Galerkin Basis expansion:
+( ,) ( ) ()
+1
+t jt
+N
+j
+u x = w j x q
+= (4.1)
+Dynamic equations of approximating system:
+∑[qn(̈ t)M(wn, wm) + qn(t)K(wn, wm)] = F(w), m = 1, ... . , N (4.3)
+N
+n=1
+Mass and stiffness approximating matrixes:
+General case:   ( m, n )
+M nm = M w w (4.5)
+  ( m, n)
+K nm = K w w (4.6)
+3D system: =   = 
+V
+K Knm , Knm Tr(σX (wm )ε (wn )dV (4.8)
+=  =
+V
+M M nm , M nm wm.wndV (4.9)
+F(t) = [
+⋮
+Fn(t) ⋮
+] , Fn(t) = ∫ (text). wndS
+Γu + ∫ fV.
+V wndV (4.10)
+In plane bending of thin beam:
+( ) 
+ 
+
+
+
+
+
+=
+ 
+= =  L n m
+L
+nm m n n m ds
+x
+w
+x
+x
+w
+K w w EIw w ds 0 EI 2
+2
+2
+2
+K , 0 ( , t) (4.11)
+= ( )= L
+M nm wm wn 0 Swnwmds
+M ,  (4.12)
+Finite element element matrixes for a bar:
+
+ 
+
+−
+−
+= 11
+11
+L
+ES
+K E (4.34)
+
+ 
+
+= 12
+21
+6
+SL
+E
+M (4.35)
+Finite element element matrixes for a beam (in plane bending- no prestress)
+
+
+
+
+
+
+
+
+
+
+
+
+−
+−
+−
+=
+2
+22
+3
+4
+12 6
+4 62
+12 6 12 6
+sym L
+L
+L LL
+LL
+L
+EI
+E
+K (4.52)
+
+
+Galerkin and Finite Element methods Page 72
+CentraleSupelec
+
+
+
+
+
+
+
+
+
+
+
+
+−
+−
+−
+=
+2
+22
+4
+156 22
+4 13 3
+156 22 54 13
+420
+sym L
+L
+LLL
+LL
+m
+E
+M (4.53)
+
+
+Modes in continuous and discrete systems Page 73
+CentraleSupelec
+5. Modes in continuous and discrete systems
+In this chapter, the similarities in tools and methods induced by the existence of a modal basis (which is indeed infinite in the case of continuous systems) with modal approach in the finite dimension MDOF case will be emphasized. In particular, the existence of the Frequency Response Function (FRF) or matrix, and its similar expression in the finite or infinite dimensional case will be shown. The simply supported beam will be considered first, followed by continuous 3D system, as compared with the MDOF system already seen in Chapter 2. Finally, further approximations or properties in the modal description of a system (residual flexibility and effective masses) will be introduced.
+5.1. Example of a simply supported beam: the modal basis
+a) Modal expansion
+Let us consider again a simply supported thin beam with in plane (1-2) bending. As seen in Chapter 5, applying a Galerkin method:
+( ,) () ( )
+1
+ux q w x
+N
+n
+nn
+
+=
+t = t (5.1)
+and the VPT:
+∫ EIu′′
+L
+0
+w′′ds
+⏟
+K(u,w)
++ ∫ ρSü wds
+L
+⏟0 M(ü ,w)
+= ∫ fextwds
+L
+⏟0 Virtual Power of external forces
+∀w c. a.
+to the vibration modes of the beam
+n = 1,..., N
+
+
+
+
+( ) = ( ) = sin L ,
+nx
+wn x Un x
+
+leads to a set of uncoupled equations for the generalized coordinates qn(t) , which are named in that particular case modal participations:
+ρSL
+2 q̈n(t) + EI (nπ
+L )4 L
+2 qn(t) = fn(t), n = 1, ... . , N (5.2)
+where the resonant frequencies of the beam are given by:
+ω2 = n4π4 EI
+ρSL4 (5.3)
+thanks to the orthogonality of the mode shapes functions wn(x) with respect to mass and stiffness operators M and K.
+
+
+Modes in continuous and discrete systems Page 74
+CentraleSupelec
+b) Harmonic excitation
+In the case of a harmonic excitation, a complex notation will be adopted, with the implicit hypothesis that all quantities will be the real part of the complex numbers describing them. Indeed one then writes for the harmonic excitation that entails a harmonic response at the same circular frequency ω:
+f x t F x ei t F x C
+ext ( , ) = ( )  , ( ) 
+and: q t Q e Qn C
+it
+n ( ) = n0  , 0  , then replacing in (5.1): ( , ) ( )
+1
+u x Q0e U x
+N
+n
+n
+it n
+
+=
+=
+t , and the sytem
+of modal equations turns into an algebraic equation system in terms of circular frequency ω:
+( ) dx n N
+L
+nx
+Q Fx
+SL L
+n n ( ) sin , 1,
+20
+2 20 =
+
+
+
+
+− + = 
+
+ (5.4)
+Remark: equation (5.2) is simply the Fourier transform of equation (51) with appropriate definitions for the Fourier transforms F(x) of f, and Q0n for qn(t). it could also be seen as the Laplace transform of 5.1 setting p=iω.
+c) Point excitation; Frequency response function (FRF)
+In the case of a point excitation, one has: F(x) = F(x − x0 ) , and the modal equation
+becomes , from the properties of the Dirac distribution:
+( ) FU x n N
+L
+nx
+QF
+SL
+n n sin n ( ), 1,
+20
+0
+2 2 0  = =
+
+
+
+−+ = 
+
+ (5.5)
+Replacing in the modal expansion: i t
+N
+n
+n
+it
+u(x, ) Qn e U (x) U (x,)e 
+1
+= = 0 =
+t , and solving
+for the Q0Ns: ( 2 2 )
+0
+0
+2
+sin
+n
+n SL
+L
+nx
+F
+Q
+
+
+
+−+
+
+
+
+
+= , leads to the expression for the frequency domain
+component of the response:
+()
+= = − +
+==
+N
+n
+n
+n
+n
+N
+n
+nn Ux
+SL
+FU x
+U x QU x
+1 22
+0
+1
+0 ()
+2
+()
+(, ) ()
+
+
+ (5.6)
+Which introduces the Frequency Response Function (FRF) (indeed F(x) should have been written F(x0,ω) for an excitation at point x0,and for a circular frequency ω:
+= =
+
+
+
+
+
+−+
+=
++
+==
+N
+n
+N
+nn n
+nn
+L
+n
+S
+EI
+L
+nx
+L
+nx
+m p SL
+U xU x
+Fx
+Ux
+H xx
+1
+4 2
+0
+1
+22
+0
+0
+0
+sin sin
+2
+()
+() ( )
+( ,)
+(, )
+(, , )
+
+
+
+
+
+ 
+
+ (5.7)
+As a matter of fact the process and the summation can be extended with N→∞, which leads to a similar expression for the FRF:
+
+
+Modes in continuous and discrete systems Page 75
+CentraleSupelec
+
+
+=
+
+= 
+
+
+
+−+
+=
++
+=
+1
+4 2
+0
+1
+22
+0 0
+sin sin
+2
+()
+() ( )
+(, , )
+nn n n
+nn
+L
+n
+S
+EI
+L
+nx
+L
+nx
+m p SL
+U xU x
+H xx
+
+
+
+
+
+
+ (5.8)
+5.2. The general case of a continuous system
+a) Modal expansion and VPT
+For any continuous system (3D, beam, plate, shell) we have seen in Chapter 4 that the VPT applied to the structure can be written in the following generic form:
+M(ü , w) + K(u, w) = F(w)
+The existence of an (infinite, countable) modal basis for the admissible functions was stated in Chapter 4, if this modal basis wn is used to build a modal expansion for the solution:
+( ,) () ( )
+1
+ux  w x
+
+=
+=
+n
+t qn t n (5.9)
+Then the VPT applied to the structure with w= wm, m=1,....∞ leads to an infinite set of uncoupled equations:
+∑[q̈ (t)M(wn, wm) + qn(t)K(wn, wm)] = Fm(t) = ∫ (text). wmdS
+Γu
++ ∫ fV.
+V
+wmdV, m
+N
+n=1
+= 1, ... . , ∞ (5.10),
+Which, thanks to the orthogonality of the modes with respect to K and M simplify into:
+mn[q̈n(t) + ω2qn(t)] = Fn(t) = ∫ (text). wndS
+Γu + ∫ fV.
+V wndV, n = 1, ... . , ∞ (5.11)
+b) Harmonic excitation and FRF
+Similarly to the beam case, in the case of a harmonic excitation, one introduces the complex notation (alternatively Fourier Transform equation (5.11)):
+x t x e and q Q e Qn C
+it nn
+it
+ext ( , ) = ( , )  , = 0  , 0 
+f F  (5.12)
+Because of the linearity of the differential equations, the response which is also harmonic with circular frequency ω then writes:
+it
+n
+n
+it
+( , ) Qn e  (x) ( ,)e 
+1
+u x = 0 w =U x
+
+=
+t (5.13)
+And the VPT system becomes a (infinite) system of algebraic equations:
+− +  = =  +  = 
+t , n 1,...
+V
+Sn V
+mn n Qn Fn ( ) fV .wndV f .w dSt
+2 2 0 (5.14)
+For a point excitation at location x0, the force distribution is: F (x) = F (x0,)(x − x0 ) ,
+hence:
+
+
+Modes in continuous and discrete systems Page 76
+CentraleSupelec
+f .w f .w wn ( x0 ).F ( x0 ,)
+V
+Sn V
+ V ndV +  dSt =
+And solving for the Qn0 in each of the equations (5.14) leads to: ( 2 2 )
+0
+0 .( ,)
+nn
+n
+nm
+Q 
+
+−+
+= w F x , and
+replacing for U in (5.13) entails:
+( ) (, , ) ( , )
+( ). ( , )
+(, ) () () 0 0
+22
+00
+11
+0 
+
+
+ Fx
+w Fx
+U w w H xx
+m
+x
+x Qx x
+nn
+n
+n
+n n
+nn =
+−+
+= =
+
+=
+
+=
+(5.15)
+Which in turn introduces the frequency response function FRF between excitation at location x0 and response at location x for the circular frequency ω:
+( 2 2)
+0
+1
+0
+( ).
+(, , ) ()
+nn
+n
+n
+n m 
+ −+
+=
+
+=
+wx
+H x x w x (5.16)
+Not surprisingly, this expression for the FRF involves in a similar way as in the previous paragraph, for each mode:
+• At the numerator, the product of the modal shape at the excitation point and in the direction of the excitation, by the modal shape at the response (observation ) point, • At the denominator, a dynamical factor involving the difference in squared circular frequency with the squared resonance frequency of the mode.
+Remark: to avoid infinite terms at resonance frequency a term representing damping – as in MDOF systems- can be introduced.
+5.3. Frequency Response Function in case of a MDOF discrete (or discretized) systems
+Let us recall that in the case of a MDOF system the dynamic equations write:
+Mẍ (t) + Cẋ (t) + Kx(t) = F(t) (5.17)
+Where x is the generalized coordinate vector M, C, K the mass, (viscous) damping, and stiffness matrixes. In the case of proportional damping (actually in all the cases , but then the modal vectors are complex, which means that all the displacements relevant to a modal shape Φn are no longer in phase), one can use the associated conservative system modal basis ( or the complex modal basis ) to derive a modal expansion:
+
+=
+=
+N
+n
+qn n 1
+x(t) (t)Φ (5.18)
+Substituting into system (6.16) leads to:
+∑(MΦnq ̈n(t) + CΦnq ̇n(t) + KΦnq(t))
+N
+n=1
+= F(t)
+and left multiplying by tΦn unsurprisingly leads , thanks to the orthogonality properties of the Φns with respect to both M C, K , to a set of N uncoupled equations:
+mn[q̈n(t) + 2δq̇n(t) + ω2qn(t)] = ΦnTFn(t), n = 1, ... . , N (5.19)
+
+
+Modes in continuous and discrete systems Page 77
+CentraleSupelec
+Remark: left multiplying by tΦn is equivalent to applying the VTP to the discrete system with Φn as the virtual field... In case of harmonic excitation
+e and q Q e Qn C
+it nn
+= i t = 0 0
+0 , ,
+FF
+Replacing with complex expressions leads again to an algebraic system formally equivalent (in finite dimension) of the infinite systems found before:
+m i Q nn N
+t
+n ( 2 n n ) n 0, 1,
+−2 + +2 0 = Φ F =
+Solving for the Q0n and replacing for x then leads to:
+it
+n
+in n n
+nn n
+N
+n
+ne
+mi
+q
+  
+= =  − + +
+== =
+1
+0
+22
+1 ( 2 )F
+ΦΦ
+x Φq Φ
+t
+Which again introduces the FRF matrix such as if i eit
+x = X0( ) , X0 (i) = H ()F0 :
+
+= −+ +
+=
+N
+nn n n
+nn
+1m i
+( 2 2 2)
+( )   
+ ΦΦ
+H
+t
+(5.20)
+In practice H exhibits peaks at resonance frequencies of the modes, along with phase changes from 0 to -180deg., along with anti-resonances between modes. Indeed, equation (5.20) shows that around a resonance, if modes are weakly couples the FRF can be
+approximates by n
+2i
+1 so a complex number with phase +/-90 deg. according to the sign of
+the numerator of the FRF. The Figure 6.1 below shows an example of frequency response function for a railway wheel.
+Fig 5.1: FRF of a railway wheel, lightly damped: at resonances, phase equals -90 deg downwards, whereas at anti resonances phase crosses -90 deg upwards.
+50 100 200 500 1000 2000 5000
+-250
+-225
+-200
+-175
+-150
+-125
+-100
+Amplitude [dB ref 1 m/N]
+fréquence centrale dans d'octave [Hz]
+Matlab simulation cas test TWINS
+-180
+0
+180
+Phase [degré]
+Receptance axiale de la roue
+
+
+Modes in continuous and discrete systems Page 78
+CentraleSupelec
+5.4. Modal truncation: Residual flexibility
+The strong point of modal expansion is that, if the excitation is limited to a certain frequency band, for the calculation of the system response, only the modes whose resonance frequency is in that frequency band should be taken into account. However, as shown in figure 6.2 below, if modes whose resonance frequency lies outside the excitation frequency band do not contribute in terms of resonance, their associated term in the FRF contributes with a quasi-constant value which equals the value of the FRF term of that mode for ω=0. The latter term is called the residual flexibility of the concerned mode.
+Fig: 5.2 Excitation bandwidth and residual flexibility of higher order mode (in red) [Preumont]
+Indeed, in the FRF expression (6.19) if ω→0, each FRF term associated with mode n
+tends to 2
+()
+nn
+nn
+nm
+H
+ Φ tΦ
+ (5.21)
+One can then separate modes 1 to M situated in the excitation bandwidth, from higher order modes, whose resonance frequencies is higher than the excitation band upper value. For the latter modes an approximation of type (6.20) can be made if the FRF is calculated only in the excitation bandwidth. Eqn. (5.20) becomes, with such an approximation:
+= =+
++
+−+ +
+=
+N
+nM n n
+nn
+M
+nn n n
+nn
+m i 1m
+2 1
+( 2 2 2)
+( )    
+ ΦΦ ΦΦ
+H
+tt
+(5.22)
+
+
+Modes in continuous and discrete systems Page 79
+CentraleSupelec
+5.5. Base or seismic excitation: effective masses
+In the case of a horizontal base excitation, which is a simple model for a seismic excitation, the structure is submitted to an imposed displacement:
+ur (t, x) = ub (t)ex , where ex is the basis horizontal vector.
+The modal expansion must include an imposed displacement term and then be written as:
+( ,) () ( ) ( ,)
+1
+q rt
+N
+n
+uh x = = n wn x + u x
+t t (5.23)
+The VPT with mode shapes wn as virtual velocities (or displacements) then leads to the following expression for the second member:
+[f(t)]n = fn(t) = −M(ü r, wn) = −ü b(t) ∫ (ρex, wn)dV
+V (5.24)
+For a discretized model, expansion on the modes wn=Φn of the discretized model writes:
+x(t) = y(t) + 1uex = Φq(t) + 1uex, Φ = [⋯ Φn ⋯], 1 = [
+1 ⋮ 1
+] (5.25)
+And the VPT on a discretized structure leads to:
+Mÿ (t) + Ky(t) = −M1ü ex(t),
+which writes in terms of the modal coordinates qns:
+mn[q̈n(t) + ω2qn(t)] = ΦnT1ü ex , n = 1, ... . , N (5.26)
+One can then introduce the modal participation factor Γn or matrix Γ:
+Φ M1 Γ tΦM1
+n
+t
+n =− , =− (5.27)
+The support reaction can then be calculated as:
+
+
+Modes in continuous and discrete systems Page 80
+CentraleSupelec
+F0 = 1TMẍ = mnü ex−ΓTq (5.28)
+Using modal expansion (6.14) x(t) = Φq(t) + 1uex,, and modal equations in terms of Γn:
+mn[q̈n(t)+ω2qn(t)] = −Γnü ex, n = 1, ... . , N (5.29)
+For harmonic excitation, using complex notation as:
+ü ex = Ü exeiωt, qn = Qn0eiωt, Qn0 ∈ C,
+one can express the complex modal coordinate in terms of the modal participation factor in a simple way:
+Qn0 = Γn
+mn(ω2n−ω2) Ü ex (5.30)
+The dynamic apparent mass at a given circular frequency can then be calculated as:
+F0
+Üex = 1TM1 + ∑ 1MΦn
+nN=1
+Γn
+mn(ω2n−ω2) = mt + ∑ Γn
+mn(ω2n−ω2)
+nN=1 (5.31)
+Or alternatively:
+F0
+Üex = ∑ Γnω2n
+mn(ω2n−ω2)
+nN=1 (5.32)
+One can then introduce the effective mass of mode n:
+n
+n
+m
+2 (5.33)
+And show the following summation:
+
+=
+
+=
+N
+nn
+n
+tm
+m
+1
+2
+(5.34)
+The physical meaning of the effective mass of mode n is the proportion of total mass mt mobilized by mode n.
+5.6. Conclusion and important formulas
+In this chapter, similarities in modal approaches for either continuous systems (beams 3D) or discrete systems was shown through similar form of equations, modal expansion, or frequency response functions. Furthermore, in the case of discrete systems relevant for low frequency bandwidth for higher order modes (residual flexibility) was introduced. Similarly, for base ore seismic excitation, the concepts of modal participation factors and effective masses were developed: the latter explaining the proportion of the actual mass of the system mobilized by a mode.
+Important formulas:
+Modal expansion: ( , ) ( ) ( )
+1
+ux q w x
+N
+n
+nn
+
+=
+t = t (5.1)
+Beam in bending:
+
+
+Modes in continuous and discrete systems Page 81
+CentraleSupelec
+• Equation for the modal participations:
+• ρSL
+2 (q̈n(t) + ωn2qn(t)) = ∫ fext(t, x) sin (nπx
+L)
+L
+0 dx, n = 1, ... . , N
+• FRF :  
+
+=
+
+= 
+
+
+
+−+
+=
+−+
+=
+1
+4 2
+0
+1
+22
+0 0
+sin sin
+2
+()
+() ( )
+(, , )
+nn n n
+nn
+L
+n
+S
+EI
+L
+nx
+L
+nx
+m SL
+U xU x
+H xx
+
+
+
+
+ 
+
+General continuous systems -FRF: ( )
+
+
+= −+
+=
+1
+22
+0 0
+( ) ( ).
+(, , )
+nn n
+nn
+m 
+ w xw x
+Hxx
+MDOF (damped ) system:
+• FRF = − + +
+=
+N
+nn n n
+nn
+1m i
+( 2 2 2)
+( )   
+ ΦΦ
+H
+t
+,
+• Residual flexibility: 
+
+
+
+
+ − =
+−
+M
+n nn
+nn
+m
+K
+1
+2
+1
+
+Φ tΦ
+Seismic excitation:
+• Modal participation factor: Φ M1 Γ tΦM1
+n
+t
+n =− , =−
+• Dynamic apparent mass: F0
+Üex = ∑ Γnω2n
+mn(ω2n−ω2)
+nN=1
+• Summation of modal participation factors : =
+
+=
+N
+nn
+n
+tm
+m
+1
+2
+
+
+Random vibrations Page 82
+CentraleSupelec
+6. Introduction to random vibrations, and extreme value analysis
+In many practical cases, e.g. wind, earthquakes for buildings or bridges, ocean waves for offshore platforms, turbulence for aircrafts, road or track defects for ground transport vehicles... excitation forces are not deterministic, but random. The response of the structure will then also be random. Hence there is a need to: • Characterise the random (or stochastic) excitation processes, in the most efficient and compact way, and • Study the characteristics of the response of the structure to this random excitation.
+The characteristics of the (random) response will then be studied from two points of views:
+• The “current” characteristics of the response signal, that characterize its basic (statistical) properties. For these characteristics, for linear dynamical systems which are the scope of the present studies, the concept of frequency response function (FRF), will prove very useful to characterise the dynamic response of the system, even in the stochastic case. • The “extreme value” analysis, which characterizes what are the values taken in “extreme” cases with very low probability, but very high values for the response, which may entail damages to the structure or even ruin the structure. After a short recap on random variables and processes, the stationary random response of linear dynamical systems will be studied, with a final focus on wind response as an example.
+6.1. Random variables and processes
+This paragraph is mainly a summary of useful definitions and properties, rather than a proper introduction to stochastic processes. The corresponding more detailed material with proper mathematical tools can be found in either in signal theory and processing textbooks or mathematical analysis of random processes textbooks.
+A definition for a random process is a quantity which varies with e.g. time in a stochastic way, i.e. its values at every instants are random, or stochastic variables, so that repeated
+measurements of the same process would not give the same set of values although some main statistical properties or characteristics would remain. As an example, we can take the (so called) instantaneous wind speed measured by a meteorological station or anemometer. An example given on Figure 6.1 below is the wind speed measured at Edinburgh meteorological station.
+
+
+Random vibrations Page 83
+CentraleSupelec
+Figure 6.1 “Instantaneous” wind speed measured in Edinburgh
+At every sampling instant, the wind value is a random variable, which then needs to be characterised. The mean value and variance tend however to be constant over the sample time. In general however, short time histories do not capture the essential characteristics of the variations of the variable, or very long time histories are needed. Another approach, i.e. the probabilistic approach for characterizing the variable at every instant, is then needed.
+a) Random variables
+A random or stochastic variable F is a variable which can take different values with varying probability for each of them. The probability associated with the possible values for the variable may be given by its cumulative distribution function DF(f), that is :
+DF ( f ) = Prob(F  f ) (6.1)
+A typical example for a graphic representation of a cumulative distribution function is given below in Figure 6.2:
+Figure 6.2: Example of a cumulative distribution function for a random variable F
+A practical formula for approximating the cumulative distribution function DF(f) from a set of sampled (measured) values is given by:
+
+
+Random vibrations Page 84
+CentraleSupelec
+()
+T
+Ff
+FN
+N
+Df 
+ , where NF<f, means the number of samples of F with values lower than f,
+and NT the total number of sampled values.
+Alternatively, the random variable F may be characterised by its probability density function (pdf), which is actually the partial derivative (with respect to f) of the cumulative distribution function DF(f):
+() f
+D
+pF f 
+
+= (6.2)
+()  
+pF f df = Prob f  F  f + df (6.3)
+An example of a probability density function for wind 10 min. mean values is given in Figure 6.3 below:
+Figure 6.3: Example of a probability density function (pdf) for wind measured values
+In order to characterise a stochastic or random variable, the main quantities of interest are the following ones:
+• The mean value (or mathematical expectation):
+
+
+f = E(F) = fpF ( f )df (6.4)
+In the case that a time sample is available an approximation of E(F) can be
+f t dt
+T
+f T
+ 0 ()
+1
+ (6.5)
+• The standard deviation σF or r.m.s.(root mean square) value, defined as “centred order 2 moment”:
+( ) ( ) (f t f ) dt
+T
+E F f f f p f df T
+FF
+2
+0
+2
+2 2 ()
+1
+= ( − ) = − ( )   −
+
+
+ (6.6)
+The latter approximated term in (6.6) is again an approximation in case of a time sampling of the variable is available.
+
+
+Random vibrations Page 85
+CentraleSupelec
+An approximation of the probability for values for F of being higher than a given threshold fmax is given by the Chebyshev inequality:
+2 max
+2
+( max ) f
+P F f f F
+−   (6.7)
+In general, f = E(F) and σF are not sufficient to characterise F, except for Gaussian
+variables defined by:
+() ( )
+
+
+
+
+
+
+
+−
+= −2
+2
+exp
+2
+1
+F
+F
+F
+ff
+pf 
+ (6.8)
+b) Random vectors
+In a number of cases, a single quantity is not sufficient to characterise a physical process; for example in ocean engineering, ocean waves are characterised by their height and period. One needs than a vector (height, period) at each instant or period of the day to characterise the waves, and then can introduce a 2D random quantity F = (F1, F2 ), which can again be
+characterised by its (cumulative) distribution function:
+DF ( f ) = DF ( f1, f2 ) = ProbF1  f1and F2  f2  (6.9)
+Or joint probability:
+()
+12
+2
+1, 2 f f
+D
+p ff F
+
+
+=
+F (6.10)
+Other quantities of interest are the marginal distributions defined as, for example:
+() ( )
+
+
+pF f1 = pF f1, f2 df2 (6.11)
+On figure 6.4 below are shown the joint probability and marginal distributions for a stochastic ocean wave model:
+Figure 6.4: Joint distribution and marginal distributions for an ocean wave model [Clouteau]
+For a random vector one can then ask what happens with the mean and rms quantities. The mean value of the process is now a vector whose components are the mean values of the components, and involve the marginal distributions:
+
+
+Random vibrations Page 86
+CentraleSupelec
+
+
+==
+N
+f E(F ) fpF ( f )df (6.12)
+
+
+fi = E( fi ) = fi pFi ( fi )dfi (6.13)
+The rms value now becomes a matrix called the correlation matrix:
+( )
+
+= = 
+N
+RF E F F F FpF (F )dF (6.14)
+Its diagonal terms (row i) are called autocorrelation of component i. For example for a two dimensional vector:
+  ( ) ( )2
+1
+22 1
+RF 11 = E F =F1 + f (6.15)
+Extra-diagonal terms are cross-correlation between components. For example again in dim2:
+  ( 1 2) 1 2 ( 1 2) 1 2
+12 , 2
+E f f pF f f df df
+
+
+RF = F F = (6.16)
+Their physical meaning is how dependent of each other components 1 and 2 of the process are.
+c) Stochastic (random) process
+For simplicity reasons we will consider here a heuristic approach to random processes. The reader interested in theory can refer to signal processing manuals.
+Definition:
+Consider a scalar quantity F (force component, wind speed in precise direction...) to start with (we will talk about a scalar random process). Values F(ti) of sampled values of F at different instants t1, t2,....,tN, are random variables, which can define a vector valued random variable: F(t1,....,tN)=(F(ti) ... ,F(ti),...,F(tN)) The random process F(t) is the “limiting object” when t becomes continuous.
+In principle, in order to characterize the process, all probabilities densities: • pF(ti), • pF(ti, tj) • ....
+• pF(ti,tj,....,tN), should be known for all ti,...,which could lead to very difficult situations in practice. A simpler situation is most often sufficient in practice: the case of second order processes.
+Definition:
+A“2nd order random process “is a process such as the 1rst and 2nd order joint densities exists.
+The Basic quantities for such a process are the following:
+The 1rst order pdf of the process is now time dependent p1(f;t) with: Prob f F (t) f df  p1( f ;t)df
+  + = (6.17)
+
+
+Random vibrations Page 87
+CentraleSupelec
+With mean value given by:
+( ) 
+t = E( (t)) = fp1( f ;t)df
+f F (6.18)
+And rms value:
+()
+
+
+t = f − f t p f t df
+F ( ) ( ) 1( ; )
+2
+2
+ (6.19)
+An important quantity is the (second order) joint pdf:
+Prob f1 F (t1) f1 df , f2 F (t2 ) f2 df2  pF ( f1, f2;t1, t2 )df1df2
+  +   + = (6.20)
+The time correlation or autocorrelation of the process F is defined as:
+RF (t t ) E f t f t  ff pF ( f f t t )dfdf 
+= = 
+, ' ( ) ( ') , '; , ' (6.21)
+It can be seen to be symmetric: RF (t,t') = RF (t',t) (6.22)
+With the following property: RF (t,t) =F2 (t) (6.23)
+The cross-correlation between two processes F and U can also be defined as:
+RFU (t,t') E f (t)u(t')  fupFU ( f ,u;t,t')dfdu
+==
+(6.24)
+d) Stationary processes
+An important case in practice is the stationary process defined as a process for which the marginal distributions are invariant with respect to time: pF ( f1, f2 ;t1, t2 ) = pF ( f1, f2 ; t1 +, t2 +)
+(6.25) Then: pF ( f1, f2;t1, t2 ) = pF ( f1, f2;0, t2 − t1) (6.26)
+And the mean value, and variance do not depend on time:
+=0
+
+
+t
+f , and = 0
+
+
+t
+F (6.27)
+The time correlation or autocorrelation of the process can then be seen to depend only on the time lag τ=t2-t1:
+RF (t1, t2 ) = RF (t1 − t2,0) = RF (); (6.28)
+Furthermore: RF (−) = RF () (6.29)
+Finally:
+2
+RF (0) =F (6.30)
+e) Ergodic process
+In this category, one can also notice, because they are important in practice, the ergodic processes for which:
+• Time averages are equal to ensemble averages • All process characteristics can be determined from one (sufficiently long) time sample
+Then, the mean value of an ergodic process can be calculated as:
+
+
+Random vibrations Page 88
+CentraleSupelec
+f t dt
+T
+f t EFt T
+T
+T −
+→
+= = ()
+2
+1
+( ) ( ( )) lim (6.31)
+And the autocorrelation function as:
+f t f t dt
+T
+R EFtFt T
+T
+T
+F () ( )
+2
+1
+() = ( ( ) ( +)) = lim − +
+→ (6.32)
+f) Power spectral density (PSD)
+The Power Spectral Density (PSD) of a stationary process (with finite energy...) is defined as the Fourier transform of the autocorrelation function. For a centred (mean value equal to zero), ergodic process, the PSD definition is then:
+S ( ) R (t)e dt RF (t) tdt
+it
+FF 
+
+  cos
+1
+2
+1  +
+−
+
+= = (6.33)
+It is a real, even function of the frequency (the unit for the PSD is the process unit squared per Hertz):
+() ( ) () 0
+SF  = SF − = SF*   (6.34)
+(Where the * stands for the complex conjugate of a complex number) And its integral over the frequency band equals the variance of the signal:
+()
+
+
+F = SF  d
+2 (6.35)
+An example below is a wind speed PSD , which shows that the different meteorological phenomena are associated with different time scales. In particular, the dip in the PSD between 5 minutes and several hours justifies the practice of averaging wind measurements over 10 minutes minimum to get rid of the gust (local turbulence) effects.
+
+
+Random vibrations Page 89
+CentraleSupelec
+Figure 6 .5: Example of PSD for wind measurements
+In practice, the PSD can be estimated from the (Fast-cf Digital signal processing textbooks) Fourier Transform of N sampled signals :
+( ) 
+ 
+
+ =
+N
+k
+F fk
+TN
+S
+1
+2
+ˆ( )
+1
+2
+1
+
+
+ (6.36)
+6.2. Stationary random response of linear SDOF dynamical systems
+a) Time domain quantities
+Let us consider a SODF system ( Spring K, Mass M, viscous damper C 1 dof system with displacement u(t) ) excited by a driving force f(t).
+The time domain response u(t) of the system in a deterministic way, is the convolution of the force signal by the Impulse response function H(τ) , which gives the system response at time τ following a n impulse (Dirac) excitation at time 0:
+u(t) = 0t H () f (t −)d (6.37)
+For a random excitation signal f(t), the convolution integral being a linear function of a deterministic (H) and a random signal F (in particular second order, eventually stationary and ergodic process), the response will be a random process whose properties can be calculated from the convolution integral (6.37).
+
+
+Random vibrations Page 90
+CentraleSupelec
+The mean value of the response can then be calculated as:
+( ) 0 ( ) ( )  = 0 ( ) ( − ) = 0
+
+
+u t = Et H  f t − d t H  f t  d (6.38)
+Accordingly, the cross correlation on the two processes F and U is given by:
+RUF(t, t′) = E[U(t), f(t′)] = E [∫ H(τ)
+R f(t − τ)f(t′)dτ]
+= ∫ H(τ)
+R E[f(t − τ)f(t′)]
+⏟
+RFF(t−τ,t′)
+dτ
+= (H ∗ RF)(t − t′)
+(6.39)
+b) Spectral (Frequency domain) quantities
+Taking the Fourier Transform of convolution equation (6.37) as the Fourier transform of a convolution product is simply the product of the Fourier transform of the quantities, Fourier transform of equation (6.37) becomes :
+() ()()
+Uˆ  = Hˆ  Fˆ  (6.40)
+with ( ) ( ) ( )
+U  H , Fˆ 
+,ˆ
+ˆ respectively Fourier transforms of u(t), H(t), f(t).
+The cross- power spectral density of processes U and F can then be defined as the Fourier Transform of the cross correlation function, thus generalizing the definition of the PSD. Using the property of the Fourier Transform with respect to convolution, it can simply be expressed as the product of the Fourier Transforms U with complex conjugate of FT of F; the complex conjugate comes from the –τ associated with f in (6.37):
+( ) ( ( )) ( ) ( ) ( )
+  
+RUF =  RUF t t =  U  F = Uˆ Fˆ
+,
+ˆ (6.41)
+Then, using (6.40): ( ) ( ) ( ) ( ) ( )
+Uˆ  Fˆ   = Hˆ  Fˆ  Fˆ   , one can derive the important formula:
+() () ()
+SUF  Hˆ  SF 
+= (6.42)
+An important quantity in practice is the coherence function defined as:
+() ()
+() ()
+
+
+
+FU
+UF
+SS
+S2
+2 = (6.43)
+The coherence function characterizes the linear dependence between two in case of experimental measurements it should be 1; Is is a nearly compulsory test in practice when measuring transfer function to check that the output signal is not polluted by extra unknown inputs.
+Then, using (6.42) a practical (least squares ) estimation for the FRF from measurements of input (force) and response (displacements or more easily acceleration) signals can be done using FFT samples in the same way as for estimating the PSD (6.36) :
+
+
+Random vibrations Page 91
+CentraleSupelec
+()
+() ()
+() ()
+
+
+=
+
+=
+
+N
+k
+kk
+N
+k
+kk
+FF
+UF
+H
+1
+1
+ˆˆ
+ˆˆ
+ˆ
+
+
+ (6.44)
+The variance of the estimation on H can be shown to be varying with √N, N being the number of samples : in practice 10 samples or more are often sufficient. Conversely, one single sample should never be used the associated variance being equal to calculated value!....
+The response PSD can then be calculated as: ( ) ( ) ( ) ( ) ( ) ( )
+Uˆ Uˆ   = Hˆ  Hˆ   Fˆ  Fˆ  
+Which writes:
+() () ()
+  F
+SU H 2 S
+ˆ
+= (6.45)
+Formula (6.45) shows the amplification in the response spectrum of the excitation spectrum by the amplitude squared of the system FRF. High values can naturally be obtained at resonance or close to it.
+Figure 6.6: response psd of a SDOF simplified structure : effect of the excitation psd (wind) and resonance through FRF
+c) Extreme value statistics for the response
+As extreme values on a very long time horizon cannot be deduced directly from time samples of the process, where often long enough samples are not available, statistical estimation for these extreme values had to be developed.
+The standard deviation for the system response (displacements) and velocities are given by:
+U  SU ()d
+2 = (6.46)
+  SU ()d
+U 
+2 = 2 (6.47)
+From these quantities, counting the number of crossing upwards a defined threshold leads to the S.O. Rice formulas for the statistics of extreme values for the process:
+• Mean frequency ν(u) of crossing up a level u:
+
+
+Random vibrations Page 92
+CentraleSupelec
+
+
+
+
+
+= − 2
+2
+2
+exp
+2
+1
+()
+UU
+Uu
+u 
+
+
+  (6.48)
+• Statistics on the extreme values on a time horizon T:
+( ) uT
+Prob u e−( )
+=
+max
+U (6.49)
+• Expected value of the extreme value on horizon [0,T]:
+  ( ) ( ) 
+
+
+
+
+= + T
+E U T 2 ln 0
+0,5772
+2ln 0 
+
+max
+U (6.50)
+These statistics (Gumbel distributions) are used to qualify extreme values for high wind or floods over hundred years for example.
+6.3. Stationary random response of MDOF systems
+In this paragraph, the tools developed in the previous paragraph for a MDOF system will be generalized for MDOF systems. The notion of vector valued stochastic process along with its characterization tools have to be introduced first.
+a) Vector valued stochastic process
+A vector valued stochastic (random) process can be defined in the same way as a real valued random process, where now the main variable F, which varies is time is vector valued i.e. belongs to . One can then define the n-th order joint densities for n time samples
+of the process: p ( f1,...., fn,t1,...., tn )
+F , and consider , which will be done in the following
+only second order processes for which the 1st and second order joint densities exist.
+The correlation function then becomes a correlation matrix for a vector valued stochastic process, which is defined as follows:
+RF (t1, t2 ) 2N f1 f2 pF ( f1, f2 , t1, t2 )df1df2
+
+=   (6.51)
+In particular, for a stationary random process, one has:
+RF (− t) = RF (t)T (6.52)
+In Figure 6.6 below, the cross-correlation between wind speed and wave height is shown for two sites:
+
+
+Random vibrations Page 93
+CentraleSupelec
+Figure 6.6: Cross-correlation between wind speed and wave height
+b) Power spectral density matrix
+For a second order stationary vector-valued random process, one can define the (Hermitian) (power) spectral density matrix as the Fourier transform of the autocorrelation matrix:
+( ) (t)e itdt
+
+−
+
+SF = 2 RF
+1 (6.53)
+One can see that: ( ) ( )
+ 
+SF − = SF (6.48)
+An estimate for the power spectral density matrix from N sampled realizations can be derived in the same way as for a single valued process by:
+( ) 
+ 
+
+ =
+ 
+    =
+
+=
+s  Ns
+k
+k
+t k s
+N
+k
+kk
+T Ns 1 T N 1
+()
+ˆ( )ˆ
+1
+2
+1
+()
+ˆ
+ˆ( )
+1
+2
+1 
+
+
+
+SF  f f f f
+ (6.54)
+c) Spectral response –in the frequency domain- of MDOF systems
+For a linear MDOF system the impulse response (matrix) function can be used in the very same way as in the SDOF case, for expression the system response to a (now vector valued) driving force time history:
+u(t)
+⏟
+Nx1
+= ∫ H(τ)
+⏟
+NxN
+t
+0 f(t − τ)
+⏟
+Nx1
+dτ (6.55)
+Which leads in the very same way to: ̂U(ω)
+⏟
+Nx1
+= ̂H(ω)
+⏟
+NxN
+̂f(ω)
+⏟
+Nx1
+(6.56)
+Repeating the same process as in the SDOF case to calculate the power spectral density matrix of the response –with special attention to the facts that products of matrix quantities do not commute any more!-, one gets:
+
+
+Random vibrations Page 94
+CentraleSupelec
+SU(ω)
+⏟
+Nx1
+= ̂H(ω)
+⏟
+NxN
+SF(ω)
+⏟
+NxN
+̂HT∗(ω)
+⏟
+NxN
+(6.57)
+Which generalizes the formula found in the SDOF case.
+The above formula (6.51) involves for each frequency 3 NxN matrix products; it can be simplified if the excitation PSD matrix can be diagonalized, by calculating the response on the m lowest energy modes of fluctuation of the excitation F (m<N):
+SF(ω)
+⏟
+NxN
+= ∑ EM
+Mm=1 (ω)(fm(ω)
+⏟
+Nx1
+fmT∗(ω)
+⏟
+1xN
+(6.58)
+One gets then only m N-vectors qm to calculate per frequency:
+SF(ω)
+⏟
+NxN
+= ∑ EM
+M
+m=1
+(ω) ̂H(ω)
+⏟
+NxN
+(fm(ω)
+⏟
+Nx1
+fmT∗(ω)
+⏟
+1xN
+̂HT∗(ω)
+⏟
+NxN
+6.4. Example: Basic introduction to wind engineering
+To introduce in a simplified way the very basics of wind engineering, the modelling process for the main phenomena involved are the following:
+• The Wind velocity can be decomposed into a“ constant mean wind speed ν(z)” (over 10 minutes averaging),which depends significantly on the altitude z of the excitation point, and a turbulent component (associated to gusts) time varying :
+v(z,t) = v(z)(1+ X (t)) (6.59)
+• X(t) can be considered as a stationary centred process : turbulence and gusts
+• The line drag force can then be expressed by basic aerodynamic formula :
+D(z,t) = Cdv2  d(z)(1+ 2X (t))
+Which turns, through a 1st order approximation (X(t)<1) of the excitation formula, into a constant height dependent force plus a fluctuating , height dependent again component, having the same characteristics as the turbulent wind
+• The wind spectrum can be shown to have the following characteristics, as compared with earthquakes typical psd:
+Figure 6.7:Typical values for wind and earthquakes psds
+
+
+Random vibrations Page 95
+CentraleSupelec
+From figure 6.7 it can be inferred that attention should be paid for long span bridges as well as tall buildings, with respect to wind excitation, from the coincidence of their typical resonance frequencies with high values for the wind excitation spectrum. Low rise buildings are prone to be more sensitive to earthquakes. Special studies process are however requested in European or international standards.
+6.5. Conclusion and important formulas
+In many practical situations, excitation forces on structures are not deterministic but rather random. Tools to model random processes, mono dimensional as well as multi-dimensional (vector valued) were introduced (auto and cross-correlation, psd), as well as for calculating the (random) response characteristics. The concept of power spectral density (PSD) proves powerful as well in the mono dimensional as in the multi-dimensional case, in characterizing both the excitation(s) and response(s). The FRF links in a simple manner the response PSD with the excitation PSD (quantities product in the SDOF case, matrixes products in MDOF) . Furthermore, statistics for extreme values of the response on a very long time horizon (Rice formula) were also given.
+Important formulas
+Random variable: Probability density function for a random variable: ( )  
+pF f df = Prob f  F  f + df
+Gaussian variable pdf: ( ) ( )
+
+
+
+
+
+
+
+−
+= −2
+2
+exp
+2
+1
+F
+F
+F
+ff
+pf 
+
+Meanvalue: 
+f = E(F) = fpF ( f )df
+Rms value: ( ) ( ) (f t f ) dt
+T
+E F f f f p f df T
+FF
+2
+0
+2
+2 2 ()
+1
+= ( − ) = − ( )   −
+
+
+
+Random vector
+Correlation matrix: ( ) 
+
+= = 
+N
+RF E F F F FpF (F )dF
+Random processes:
+Mean value ( ) 
+t = E( (t)) = fp1( f ;t)df
+fF
+RMS value: ( )
+
+
+t = f − f t p f t df
+F ( ) ( ) 1( ; )
+2
+2
+
+Autocorrelation: RF (t t ) E f t f t  ff pF ( f f t t )dfdf 
+= = 
+, ' ( ) ( ') , '; , '
+Cross-correlation between two processes: RFU (t,t') E f (t)u(t')  fupFU ( f ,u;t,t')dfdu
+==
+SDOF systems:
+Power spectral density: S ( ) R (t)e dt RF (t) tdt
+it
+FF 
+
+  cos
+1
+2
+1  +
+−
+
+==
+Cross spectral density between excitation and response ( ) ( ) ( )
+SUF  Hˆ  SF 
+=
+
+
+Random vibrations Page 96
+CentraleSupelec
+Response psd: ( ) ( ) ( )
+  F
+SU H 2 S
+ˆ
+=
+MDOF systems: Response PSD matrix :
+SU(ω)
+⏟
+Nx1
+= ̂H(ω)
+⏟
+NxN
+SF(ω)
+⏟
+NxN
+̂HT∗(ω)
+⏟
+NxN
+
+
+Acoustics-Basic Equations and Sources Page 97
+CentraleSupelec
+7. Introduction to Acoustics-Basic Equations and Sources
+In this chapter, basic elements for linear acoustics will be provided: acoustic quantities definitions, basic equations, as well as basic solutions in infinite domain: acoustic waves. The main models for sources (monopoles and dipoles) will then be introduced.
+7.1. Linear acoustics
+Acoustics can be considered as a branch of fluid mechanics, where very small variations or fluctuations to “average “aerodynamic quantities characterizing the fluid movement are considered. Thus there is a need to develop a dedicated set of equations for these quantities: the acoustic equations.
+a) Acoustic quantities definitions and acoustic pressure in dB
+To be more precise let us consider a fluid which can for the moment be moving with “reference” quantities, steady or unsteady. An Eulerian perspective (following the fluid in its movement) is considered: Fluid movements are characterized by quantities at (x,t).The variables characterizing the fluid state are the following: pressure p, velocity (vector) v, fluid density . For the reasons explained above and which will be more quantitatively detailed in the following, a distinction will be made between total quantities which will be split into « reference » quantities, plus fluctuating (acoustic) quantities.
+One will then write:
+pt(x,t)= pref(x,t)+ p(x,t), vt(x,t)=vref(x,t)+v(x,t) (7.1) ρt(x,t)=ρref(x,t)+(x,t) +Thermodynamic quantities
+The reason for this split is that the fluctuations are very small as compared to the reference values.In terms of pressure p, for usual aerial acoustics, whereas the atmospheric pressure equals 101325 Pa , the fluctuations detected by the human ear range from p0=2.10-5 Pa, minimal audible pressure to around 20 Pa, which is indeed very small as compared not only with atmospheric pressure, but to pressure generated by air flows. This important range of fluctuation, associated with a logarithmic sensitivity to noise of the human ear, lead to characterize the acoustic pressure fluctuation on a logarithmic scale. Then the acoustic pressure level, corresponding to a pressure fluctuation p, as expressed in dB will be given by:
+
+
+
+
+
+
+ =
+
+
+
+
+
+=
+00
+10
+2
+2
+( ) 10log10 20log p
+p
+p
+p
+L dB , (7.2)
+where p0=2.10-5 Pa, is the minimum audible pressure fluctuation, the term log10 or log stands for base 10 logarithm.
+
+
+Acoustics-Basic Equations and Sources Page 98
+CentraleSupelec
+The following table (Figure 7.1) gives the correspondence between levels in dB and acoustic pressure fluctuations in Pa:
+Figure 7.1 Corresponding scale between decibels and Pascals for acoustic pressure levels.
+b) Basic equations in the general case
+The basic equations are written so far for a fluid occupying a volume Vt at instant t, in terms of total quantities. They are the following:
+• Continuity equation (mass conservation):
+This equation can be obtained by a mass balance on an –eventually moving – volume V, with boundary surface Γ : • Acoustic sources inside volume Vt will be characterized by volume rate qt, le mass input rate (introduced mass per volume unit) is then ρtqt. Global mass balance through Γ then writes :
+( )= V t t
+V tdV q dV
+Dt
+D 
+Where the D sign means total derivative, following volume V in its motion.
+
+
+
++
+
+
+= tt
+t t grad
+Dt t
+D
+  v.
+• If now V is considered as a fixed volume the derivative becomes a simple partial derivative with respect to time , but the mass variation equals the opposite of the outgoing mass flux through Γ, augmented with introduced mass, integral over V of ρtqt.
+And applying Ostrograski’s formula :
+one finally gets:
+( ) t ( t ) t t ext
+t
+t t t t div q
+Dt
+D
+div   
+
+ 
+ + v = + v = = (7 .3)
+with ρtqt = ρ̇extrate of injected mass density.
+( ) 
+=−
+
+ dV ds
+t tt
+V t v .n
+( )= − ( ) + 
+
+
+V tt
+V tt
+V tdV dV q dV
+t  Div v 
+
+
+Acoustics-Basic Equations and Sources Page 99
+CentraleSupelec
+• Momentum conservation (Euler equation) :
+It can be obtained in the same way via a momentum balance equation through the – moving – volume V (hence the total derivative):
+( ) ( ) 
+
+
++
+
+
++ = = tt
+t t
+t
+t v t grad
+Dt t
+D
+div t t t v v
+vv
+σ x, f (x, )  x,  . (7.4)
+• Constitutive equation
+Generally, variables S (entropy) and T (temperature) are involved through :
+()
+d dp p dT
+dp d
+Tp
+C
+dS
+t tT t t
+t tT
+t
+v
+  
+
+
+
+
+=−
+
+
+
+= − ,
+If the fluid is undergoing adiabatic transformation, (dS=0), the former equations then simplifies into:
+,
+2
+dpt = c dt (7.5)
+with
+TS
+c  
+1
+2 = = sound celerity in the medium
+Remark: In air c0= 340 m/s, and 1500 m/s for water
+• Fluid inviscid behaviour
+This point will be detailed below.
+c) Fluid at rest: basic equations
+In a fluid at rest v0=0, and reference quantities are: σref = − pref I, vref = 0, ref
+The fluid inviscid behavior writes: σt = − pt I = −(pref + p)I .
+First order expansion with no source leads to:
+For continuity equation:
+t+ div(ref v) = 0 (7.6)
+For Euler equation (momentum conservation equation):
+( ) 
+
+
+
+
+
+− + =t
+pt v t t
+v
+grad x, f (x, )  (7.7)
+The constitutive equation then becomes:
+
+
+Acoustics-Basic Equations and Sources Page 100
+CentraleSupelec
+( ,) 2 ( ,)
+p x t = c0 x t (7.8)
+d) Wave equation
+Taking the time derivative of the continuity equation (7.6), and the divergence of Euler equation (7.7) ,writing div(7.7)- and taking into account constitutive equation (7.8) to express only in terms of acoustic pressure leads to the well-known wave equation for the acoustic pressure p (if sources are now taken into account):
+1 C2
+∂2p
+∂t2 − ∆p = ρ̈ext − div fv (7.9)
+e) Velocity potential
+Taking the curl of the momentum equation leads to:
+Curl v = 0 , if Curl f = 0 and = 0
+ref
+grad 
+Then the fluctuating velocity can be written as: v = grad, (7.10)
+with φ being the velocity potential
+The velocity potential φ can be seen to satisfy also the wave equation (7.9) (without sources). When an analytical solution to the wave equation in terms of φ can be determined, for example for “simple” or reference geometry configurations, then it is an easy way to determine all acoustic quantities, since both the velocity (through the gradient of φ) and the acoustic pressure (through the momentum equation) can be determined from the only knowledge of φ.
+f) Initial and Boundary conditions
+For the problem formulation in a mathematical sense to be well posed, i.e.to guarantee existence and uniqueness of solutions two types of boundary conditions have to be set: • Initial condition if the problem is time dependent (evolutionary), • (proper) boundary conditions. These conditions are necessary anyway, and may be sufficient if the time-dependent problem is transformed (e.g. Fourier Transformed) into a (frequency dependent) pseudo static problem, depending only on space variables. This will be the case of the Helmholtz formulation, as it will be seen later.
+For initial conditions, it is sufficient to give in all the volume Vt occupied by the fluid, initial values for v and p.

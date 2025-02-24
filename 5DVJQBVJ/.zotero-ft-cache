@@ -1,0 +1,4296 @@
+TEXTBOOKS in MATHEMATICS
+MEASURE THEORY
+AND FINE PROPERTIES
+OF FUNCTIONS
+Revised Edition
+Lawrence C. Evans
+University of California Berkeley, USA
+Ronald F. Gariepy
+University of Kentucky Lexington, USA
+
+
+Contents
+Preface to the Revised Edition xi
+Preface xiii
+1 General Measure Theory 1
+1.1 Measures and measurable functions . . . . . . . . . . . 1 1.1.1 Measures . . . . . . . . . . . . . . . . . . . . . . 1 1.1.2 Systems of sets . . . . . . . . . . . . . . . . . . . 5 1.1.3 Approximation by open and compact sets . . . . 9 1.1.4 Measurable functions . . . . . . . . . . . . . . . . 16 1.2 Lusin’s and Egoroff’s Theorems . . . . . . . . . . . . . 19 1.3 Integrals and limit theorems . . . . . . . . . . . . . . . 24 1.4 Product measures, Fubini’s Theorem, Lebesgue measure 29 1.5 Covering theorems . . . . . . . . . . . . . . . . . . . . . 35 1.5.1 Vitali’s Covering Theorem . . . . . . . . . . . . . 35 1.5.2 Besicovitch’s Covering Theorem . . . . . . . . . . 39 1.6 Differentiation of Radon measures . . . . . . . . . . . . 47 1.6.1 Derivatives . . . . . . . . . . . . . . . . . . . . . 47 1.6.2 Integration of derivatives; Lebesgue decomposition . . . . . . . . . . . . . . . . . . . . . . . . . 50 1.7 Lebesgue points, approximate continuity . . . . . . . . 53 1.7.1 Differentiation Theorem . . . . . . . . . . . . . . 53 1.7.2 Approximate limits, approximate continuity . . . 56 1.8 Riesz Representation Theorem . . . . . . . . . . . . . . 59 1.9 Weak convergence . . . . . . . . . . . . . . . . . . . . . 65 1.9.1 Weak convergence of measures . . . . . . . . . . 65 1.9.2 Weak convergence of functions . . . . . . . . . . 68 1.9.3 Weak convergence in L1 . . . . . . . . . . . . . . 70 1.9.4 Measures of oscillation . . . . . . . . . . . . . . . 75 1.10 References and notes . . . . . . . . . . . . . . . . . . . 78
+vii
+
+
+viii Contents
+2 Hausdorff Measures 81
+2.1 Definitions and elementary properties . . . . . . . . . . 81 2.2 Isodiametric inequality, Hn = Ln . . . . . . . . . . . . . 87 2.3 Densities . . . . . . . . . . . . . . . . . . . . . . . . . . 92 2.4 Functions and Hausdorff measure . . . . . . . . . . . . 96 2.4.1 Hausdorff measure and Lipschitz mappings . . . 96 2.4.2 Graphs of Lipschitz functions . . . . . . . . . . . 97 2.4.3 Integrals over balls . . . . . . . . . . . . . . . . . 98 2.5 References and notes . . . . . . . . . . . . . . . . . . . 100
+3 Area and Coarea Formulas 101
+3.1 Lipschitz functions, Rademacher’s Theorem . . . . . . . 101 3.1.1 Lipschitz continuous functions . . . . . . . . . . . 101 3.1.2 Rademacher’s Theorem . . . . . . . . . . . . . . 103 3.2 Linear maps and Jacobians . . . . . . . . . . . . . . . . 108 3.2.1 Linear mappings . . . . . . . . . . . . . . . . . . 108 3.2.2 Jacobians . . . . . . . . . . . . . . . . . . . . . . 114 3.3 The area formula . . . . . . . . . . . . . . . . . . . . . 114 3.3.1 Preliminaries . . . . . . . . . . . . . . . . . . . . 114 3.3.2 Proof of the area formula . . . . . . . . . . . . . 119 3.3.3 Change of variables formula . . . . . . . . . . . . 122 3.3.4 Applications . . . . . . . . . . . . . . . . . . . . 123 3.4 The coarea formula . . . . . . . . . . . . . . . . . . . . 126 3.4.1 Preliminaries . . . . . . . . . . . . . . . . . . . . 126 3.4.2 Proof of the coarea formula . . . . . . . . . . . . 134 3.4.3 Change of variables formula . . . . . . . . . . . . 139 3.4.4 Applications . . . . . . . . . . . . . . . . . . . . 140 3.5 References and notes . . . . . . . . . . . . . . . . . . . 142
+4 Sobolev Functions 143
+4.1 Definitions and elementary properties . . . . . . . . . . 143 4.2 Approximation . . . . . . . . . . . . . . . . . . . . . . . 145 4.2.1 Approximation by smooth functions . . . . . . . 145 4.2.2 Product and chain rules . . . . . . . . . . . . . . 153 4.2.3 W 1,∞ and Lipschitz continuous functions . . . . 155 4.3 Traces . . . . . . . . . . . . . . . . . . . . . . . . . . . . 156 4.4 Extensions . . . . . . . . . . . . . . . . . . . . . . . . . 158
+
+
+Contents ix
+4.5 Sobolev inequalities . . . . . . . . . . . . . . . . . . . . 162 4.5.1 Gagliardo–Nirenberg–Sobolev inequality . . . . . 162 4.5.2 Poincar ́e’s inequality on balls . . . . . . . . . . . 164 4.5.3 Morrey’s inequality . . . . . . . . . . . . . . . . . 167 4.6 Compactness . . . . . . . . . . . . . . . . . . . . . . . . 168 4.7 Capacity . . . . . . . . . . . . . . . . . . . . . . . . . . 170 4.7.1 Definitions and elementary properties . . . . . . 171 4.7.2 Capacity and Hausdorff dimension . . . . . . . . 179 4.8 Quasicontinuity, precise representatives of Sobolev functions . . . . . . . . . . . . . . . . . . . . . . . . . . . . 183 4.9 Differentiability on lines . . . . . . . . . . . . . . . . . . 187 4.9.1 Sobolev functions of one variable . . . . . . . . . 188 4.9.2 Differentiability on a.e. line . . . . . . . . . . . . 189 4.10 References and notes . . . . . . . . . . . . . . . . . . . 190
+5 Functions of Bounded Variation, Sets of Finite Perimeter 193
+5.1 Definitions, Structure Theorem . . . . . . . . . . . . . . 193 5.2 Approximation and compactness . . . . . . . . . . . . . 199 5.2.1 Lower semicontinuity . . . . . . . . . . . . . . . . 199 5.2.2 Approximation by smooth functions . . . . . . . 199 5.2.3 Compactness . . . . . . . . . . . . . . . . . . . . 203 5.3 Traces . . . . . . . . . . . . . . . . . . . . . . . . . . . . 204 5.4 Extensions . . . . . . . . . . . . . . . . . . . . . . . . . 210 5.5 Coarea formula for BV functions . . . . . . . . . . . . . 212 5.6 Isoperimetric inequalities . . . . . . . . . . . . . . . . . 215 5.6.1 Sobolev’s and Poincar ́e’s inequalities for BV . . . 216 5.6.2 Isoperimetric inequalities . . . . . . . . . . . . . 217 5.6.3 Hn−1 and Cap1 . . . . . . . . . . . . . . . . . . . 220 5.7 The reduced boundary . . . . . . . . . . . . . . . . . . 221 5.7.1 Estimates . . . . . . . . . . . . . . . . . . . . . . 221 5.7.2 Blow-up . . . . . . . . . . . . . . . . . . . . . . . 225 5.7.3 Structure Theorem for sets of finite perimeter . . 231 5.8 Gauss–Green Theorem . . . . . . . . . . . . . . . . . . 235 5.9 Pointwise properties of BV functions . . . . . . . . . . . 236 5.10 Essential variation on lines . . . . . . . . . . . . . . . . 244 5.10.1 BV functions of one variable . . . . . . . . . . . 245 5.10.2 Essential variation on almost all lines . . . . . . 247 5.11 A criterion for finite perimeter . . . . . . . . . . . . . . 249
+
+
+x Contents
+5.12 References and notes . . . . . . . . . . . . . . . . . . . 255
+6 Differentiability, Approximation by C1 Functions 257
+6.1 Lp differentiability, approximate differentiability . . . . 257
+6.1.1 L1∗ differentiability for BV . . . . . . . . . . . . 257 6.1.2 Lp∗ differentiability a.e. for W 1,p . . . . . . . . . 260 6.1.3 Approximate differentiability . . . . . . . . . . . 262 6.2 Differentiability a.e. for W 1,p (p > n) . . . . . . . . . . 265 6.3 Convex functions . . . . . . . . . . . . . . . . . . . . . . 266 6.4 Second derivatives a.e. for convex functions . . . . . . . 273 6.5 Whitney’s Extension Theorem . . . . . . . . . . . . . . 276 6.6 Approximation by C1 functions . . . . . . . . . . . . . 282 6.6.1 Approximation of Lipschitz continuous functions 283 6.6.2 Approximation of BV functions . . . . . . . . . . 283 6.6.3 Approximation of Sobolev functions . . . . . . . 286 6.7 References and notes . . . . . . . . . . . . . . . . . . . 288
+Bibliography 289
+Notation 293
+Index 297
+
+
+Preface to the Revised Edition
+We published the original edition of this book in 1992 and have been extremely gratified with its popularity for now over 20 years. The publisher recently asked us to write an update, and we have agreed to do so in return for a promise that the future price be kept reasonable.
+For this revised edition the entire book has been retyped into LaTeX and we have accordingly been able to set up better cross-references with page numbers. There have been countless improvements in notation, format and clarity of exposition, and the bibliography has been updated. We have also added several new sections, describing the π-λ Theorem, weak compactness criteria in L1 and Young measure methods for weak convergence.
+We will post any future corrections or comments at LCE’s homepage, accessible through the math.berkeley.edu website. We remain very grateful to the many readers who have written us over the years, suggesting improvements and error fixes.
+LCE has been supported during the writing of the revised edition by the National Science Foundation (under the grant DMS-1301661), by the Miller Institute for Basic Research in Science and by the Class of 1961 Collegium Chair at UC Berkeley.
+Best wishes to our readers, past and future.
+LCE/RFG November, 2014 Berkeley/Lexington
+xi
+
+
+
+
+Preface
+These notes gather together what we regard as the essentials of real analysis on Rn.
+There are of course many good texts describing, on the one hand, Lebesgue measure for the real line and, on the other, general measures for abstract spaces. But we believe there is still a need for a source book documenting the rich structure of measure theory on Rn, with particular emphasis on integration and differentiation. And so we packed into these notes all sorts of interesting topics that working mathematical analysts need to know, but are mostly not taught. These include Hausdorff measures and capacities (for classifying “negligible” sets for various fine properties of functions), Rademacher’s Theorem (asserting the differentiability of Lipschitz continuous functions almost everywhere), Aleksandrov’s Theorem (asserting the twice differentiability of convex functions almost everywhere), the area and coarea formulas (yielding change-of-variables rules for Lipschitz continuous maps between Rn and Rm), and the Lebesgue–Besicovitch Differentiation Theorem (amounting to the fundamental theorem of calculus for real analysis).
+This book is definitely not for beginners. We explicitly assume our readers are at least fairly conversant with both Lebesgue measure and abstract measure theory. The expository style reflects this expectation. We do not offer lengthy heuristics or motivation, but as compensation have tried to present all the technicalities of the proofs: “God is in the details.”
+Chapter 1 comprises a quick review of mostly standard real analysis, Chapter 2 introduces Hausdorff measures, and Chapter 3 discusses the area and coarea formulas. In Chapters 4 through 6 we analyze the fine properties of functions possessing weak derivatives of various sorts. Sobolev functions, which is to say functions having weak first partial derivatives in an Lp space, are the subject of Chapter 4; functions of bounded variation, that is, functions having measures as weak first partial derivatives, the subject of Chapter 5. Finally, Chapter 6 discusses
+xiii
+
+
+xiv Preface
+the approximation of Lipschitz continuous, Sobolev and BV functions by C1 functions, and several related subjects.
+We have listed in the references the primary sources we have relied upon for these notes. In addition many colleagues, in particular S. Antman, J.-A. Cohen, M. Crandall, A. Damlamian, H. Ishii, N.V. Krylov, N. Owen, P. Souganidis, S. Spector, and W. Strauss, have suggested improvements and detected errors. We have also made use of S. Katzenburger’s class notes. Early drafts of the manuscript were typed by E. Hampton, M. Hourihan, B. Kaufman, and J. Slack.
+LCE was partially supported by NSF Grants DMS-83-01265, 8601532, and 89-03328, and by the Institute for Physical Science and Technology at the University of Maryland. RFG was partially supported by NSF Grant DMS-87-04111 and by NSF Grant RII-86-10671 and the Commonwealth of Kentucky through the Kentucky EPSCoR program.
+Warnings
+Our terminology is occasionally at variance with standard usage. The principal changes are these:
+• What we call a measure is usually called an outer measure.
+• For us a function is integrable if it has an integral (which may equal ±∞).
+• We call a function f summable if |f | has a finite integral.
+• We do not identify two Lp, BV or Sobolev functions that agree almost everywhere.
+
+
+Chapter 1
+General Measure Theory
+This chapter is mostly a review of standard measure theory, with particular attention paid to Radon measures on Rn.
+Sections 1.1 through 1.4 are a rapid recounting of abstract measure theory. In Section 1.5 we establish Vitali’s and Besicovitch’s Covering Theorems, the latter being the key for the Lebesgue–Besicovitch Differentiation Theorem for Radon measures in Sections 1.6 and 1.7. Section 1.8 provides a vector-valued version of Riesz’s Representation Theorem. In Section 1.9 we study weak compactness for sequences of measures and functions.
+The reader should as necessary consult the Appendix for a summary of our notation.
+1.1 Measures and measurable functions
+1.1.1 Measures
+Although we intend later to work almost exclusively in Rn, it is most convenient to start abstractly.
+Let X denote a nonempty set, and 2X the collection of all subsets of X.
+DEFINITION 1.1. A mapping μ : 2X → [0, ∞] is called a measure on X provided
+(i) μ(∅) = 0, and
+(ii) if
+A⊆
+∞
+⋃
+k=1
+Ak ,
+1
+
+
+2 General Measure Theory
+then
+μ(A) ≤
+∞
+∑
+k=1
+μ(Ak ).
+Condition (ii) is called subadditivity.
+Warning: Most texts call such a mapping μ an outer measure, reserving the name measure for μ restricted to the collection of μ-measurable subsets of X (see below). We will see, however, that there are definite advantages to being able to “measure” even nonmeasurable sets.
+DEFINITION 1.2. Let μ be a measure on X and C ⊆ X. Then μ
+restricted to C, written
+μ C,
+is the measure defined by
+(μ C)(A) := μ(A ∩ C) for all A ⊆ X.
+DEFINITION 1.3. A set A ⊆ X is μ-measurable if for each set B ⊆ X we have
+μ(B) = μ(B ∩ A) + μ(B − A).
+THEOREM 1.1 (Elementary properties of measures). Let μ be a measure on X.
+(i) If A ⊆ B ⊆ X, then
+μ(A) ≤ μ(B).
+(ii) A set A is μ-measurable if and only if X − A is μ-measurable.
+(iii) The sets ∅ and X are μ-measurable. More generally, if μ(A) = 0, then A is μ-measurable.
+(iv) If C is any subset of X, then each μ-measurable set is also μ Cmeasurable.
+Proof. 1. Assertion (i) follows at once from the definition. To show (ii), assume A is μ-measurable and B ⊆ X. Then
+μ(B) = μ(B ∩ A) + μ(B − A) = μ(B − (X − A)) + μ(B ∩ (X − A));
+and so X − A is μ-measurable.
+
+
+1.1 Measures and measurable functions 3
+2. Suppose now μ(A) = 0, B ⊆ X. Then μ(B ∩ A) = 0, and consequently
+μ(B) ≥ μ(B − A) = μ(B ∩ A) + μ(B − A).
+The opposite inequality is clear from subadditivity.
+3. Assume A is μ-measurable, B ⊆ X. Then
+μ C(B) = μ(B ∩ C)
+= μ((B ∩ C) ∩ A) + μ((B ∩ C) − A)
+= μ((B ∩ A) ∩ C) + μ((B − A) ∩ C)
+= μ C(B ∩ A) + μ C(B − A).
+Hence A is μ C-measurable.
+THEOREM 1.2 (Sequences of measurable sets). Let {Ak}∞
+k=1
+be a sequence of μ-measurable sets.
+(i) The sets
+∞
+⋃
+k=1
+Ak and
+∞
+⋂
+k=1
+Ak
+are μ-measurable.
+(ii) If the sets {Ak}∞
+k=1 are disjoint, then
+μ
+(∞ ⋃
+k=1
+Ak
+)
+=
+∞
+∑
+k=1
+μ(Ak ).
+(iii) If A1 ⊆ . . . Ak ⊆ Ak+1 . . . , then
+kli→m∞ μ(Ak) = μ
+(∞ ⋃
+k=1
+Ak
+)
+.
+(iv) If A1 ⊃ . . . Ak ⊃ Ak+1 . . . and μ(A1) < ∞, then
+kli→m∞ μ(Ak) = μ
+(∞ ⋂
+k=1
+Ak
+)
+.
+
+
+4 General Measure Theory
+Proof. 1. Since subadditivity implies
+μ(B) ≤ μ(B ∩ A) + μ(B − A)
+for all A, B ⊆ Rn, it suffices to show the opposite inequality in order to prove the set A is μ-measurable. For each set B ⊆ Rn,
+μ(B) = μ(B ∩ A1) + μ(B − A1)
+= μ(B ∩ A1) + μ((B − A1) ∩ A2) + μ((B − A1) − A2)
+≥ μ(B ∩ (A1 ∪ A2)) + μ(B − (A1 ∪ A2)),
+and thus A1 ∪ A2 is μ-measurable. By induction, the union of finitely many μ-measurable sets is μ-measurable.
+2. Because
+X − (A1 ∩ A2) = (X − A1) ∪ (X − A2),
+the intersection of two, and thus of finitely many, μ-measurable sets is μ-measurable.
+3. Assume now the sets {Ak}∞
+k=1 are disjoint, and write
+Bj :=
+j
+⋃
+k=1
+Ak (j = 1, 2, . . . ).
+Then
+μ(Bj+1) = μ(Bj+1 ∩ Aj+1) + μ(Bj+1 − Aj+1)
+= μ(Aj+1) + μ(Bj) (j = 1, . . . );
+whence
+μ
+(j ⋃
+k=1
+Ak
+)
+=
+j
+∑
+k=1
+μ(Ak) (j = 1, . . . ).
+It follows that ∞
+∑
+k=1
+μ(Ak) ≤ μ
+(∞ ⋃
+k=1
+Ak
+)
+,
+from which assertion (ii) follows.
+
+
+1.1 Measures and measurable functions 5
+4. To prove (iii), we note from (ii) that
+kli→m∞ μ(Ak) = μ(A1) +
+∞
+∑
+k=1
+μ(Ak+1 − Ak) = μ
+(∞ ⋃
+k=1
+Ak
+)
+.
+Assertion (iv) follows from (iii), since
+μ(A1) − kli→m∞ μ(Ak) = kli→m∞ μ(A1 − Ak) = μ
+(∞ ⋃
+k=1
+(A1 − Ak)
+)
+≥ μ(A1) − μ
+(∞ ⋂
+k=1
+Ak
+)
+.
+5. Recall that if B is any subset of X, then each μ-measurable set is also μ B-measurable. Since Bj := ∪j
+k=1Ak is μ-measurable by Step 1, for each B ⊆ X with μ(B) < ∞ we have
+μ
+(
+B∩
+∞
+⋃
+k=1
+Ak
+)
++μ
+(
+B−
+∞
+⋃
+k=1
+Ak
+)
+= (μ B)
+(∞ ⋃
+k=1
+Bk
+)
++ (μ B)
+(∞ ⋂
+k=1
+(X − Bk)
+)
+= kli→m∞(μ B)(Bk) + kli→m∞(μ B)(X − Bk)
+= μ(B).
+Thus ∪∞
+k=1Ak is μ-measurable, as is ∩∞
+k=1Ak, since
+X−
+∞
+⋂
+k=1
+Ak =
+∞
+⋃
+k=1
+(X − Ak).
+This proves (i).
+1.1.2 Systems of sets
+We introduce next certain important classes of subsets of X.
+DEFINITION 1.4. A collection of subsets A ⊆ 2X is a σ-algebra provided
+(i) ∅, X ∈ A;
+
+
+6 General Measure Theory
+(ii) A ∈ A implies X − A ∈ A;
+(iii) Ak ∈ A (k = 1, . . . ) implies
+∞
+⋃
+k=1
+Ak ∈ A;
+(iv) Ak ∈ A (k = 1, . . . ) implies
+∞
+⋂
+k=1
+Ak ∈ A.
+Remark. Since
+X−
+(∞ ⋂
+k=1
+Ak
+)
+=
+∞
+⋃
+k=1
+(X − Ak),
+(iv) in fact follows from (ii) and (iii). Similarly, (ii) and (iv) imply (iii).
+THEOREM 1.3 (Measurable sets as a σ-algebra). If μ is a measure on a nonempty set X, then the collection of all μ-measurable subsets of X is a σ-algebra.
+Proof. This follows at once from Theorems 1.1 and 1.2.
+The intersection of any collection of σ-algebras is a σ-algebra, and consequently the following makes sense:
+DEFINITION 1.5. If C ⊆ 2X is any nonempty collection of subsets of X, the σ-algebra generated by C, denoted
+σ(C),
+is the smallest σ-algebra containing C.
+An important special case is when C is the collection of all open subsets of Rn:
+DEFINITION 1.6.
+(i) The Borel σ-algebra of Rn is the smallest σ-algebra of Rn containing the open subsets of Rn.
+
+
+1.1 Measures and measurable functions 7
+(ii) A measure μ on Rn is called Borel if each Borel set is μmeasurable.
+Caratheodory’s criterion (Theorem 1.9) will provide us with a convenient way to check that a measure is Borel.
+For various applications it is convenient to introduce as well certain classes of subsets having less structure than σ-algebras.
+DEFINITION 1.7. A nonempty collection of subsets P ⊆ 2X is a π-system provided
+A, B ∈ P implies A ∩ B ∈ P.
+So a π-system is simply a collection of subsets closed under finite intersections.
+DEFINITION 1.8. A collection of subsets L ⊆ 2X is a λ-system provided
+(i) X ∈ L;
+(ii) A, B ∈ L and B ⊆ A implies A − B ∈ L;
+(iii) if Ak ∈ L and Ak ⊆ Ak+1 for k = 1, . . . , then
+∞
+⋃
+k=1
+Ak ∈ L.
+Since both π-systems and λ-systems have less stringent properties than σ-algebras, it will be easy in applications to check that various interesting collections of sets are indeed π- or λ-systems. The following will then provide a link back to σ-algebras:
+THEOREM 1.4 (π–λ Theorem). If P is a π-system and L is a λ-system with
+P ⊆ L,
+then
+σ(P) ⊆ L.
+Proof. 1. Define
+S :=
+⋂
+L′⊇P
+L′,
+
+
+8 General Measure Theory
+the intersection of all λ-systems L′ containing P. Clearly P ⊆ S ⊆ L, and it is easy to check that S is itself a λ-system.
+2. Claim #1: S is a π-system.
+Proof of claim: Select any A, B ∈ S; we must show A ∩ B ∈ S. Define
+A := {C ⊆ X | A ∩ C ∈ S}.
+Since S is a λ-system, it follows that A is a λ-system. Therefore S ⊆ A. But then since B ∈ S, we see that A ∩ B ∈ S.
+3. Claim #2: S is a σ-algebra.
+Proof of claim: This will follow since S is both a λ- and a π-system. Since X ∈ S, it follows that ∅ = X − X ∈ S. Clearly A ∈ S implies X − A ∈ S. Since S is closed under complements and under finite intersections, it is closed under finite unions. Hence if A1, A2, · · · ∈ S, then Bn := ∪n
+k=1Ak ∈ S. As S is a λ-system, we see that therefore
+∪∞
+k=1Ak ∈ S. Thus S is a σ-algebra.
+4. Since S ⊇ P is a σ-algebra, it follows that
+σ(P) ⊆ S ⊆ L.
+As a first application, we show that finite Borel measures in Rn are uniquely determined by their values on closed “rectangles” with sides parallel to the coordinate axes:
+THEOREM 1.5 (Borel measures and rectangles). Let μ and ν be two finite Borel measures on Rn such that
+μ(R) = ν(R)
+for all closed “rectangles”
+R := {x ∈ Rn | −∞ ≤ ai ≤ xi ≤ bi ≤ ∞ (i = 1, . . . , n)}.
+Then
+μ(B) = ν(B)
+for all Borel sets B ⊆ Rn.
+Proof. We apply the π-λ Theorem with
+P := {R ⊆ Rn | R is a rectangle}
+
+
+1.1 Measures and measurable functions 9
+and L := {B ⊆ Rn | B is Borel, μ(B) = ν(B)}.
+Then P ⊆ L, P is clearly a π-system, and we check that L is a λsystem. Consequently, the π-λ Theorem implies σ(P) ⊆ L. But σ(P) comprises the Borel sets, since each open subset of Rn can be written as a countable union of closed rectangles.
+Remark. This proof illustrates the usefulness of λ-systems. It is not so clear that {B Borel | μ(B) = ν(B)} is a σ-algebra, since it is not obviously closed under intersections.
+1.1.3 Approximation by open and compact sets
+Next we introduce certain classes of measures that admit good approximations of various types.
+DEFINITION 1.9.
+(i) A measure μ on X is regular if for each set A ⊆ X there exists a μ-measurable set B such that A ⊆ B and μ(A) = μ(B).
+(ii) A measure μ on Rn is Borel regular if μ is Borel and for each A ⊆ Rn there exists a Borel set B such that A ⊆ B and μ(A) = μ(B).
+(iii) A measure μ on Rn is a Radon measure if μ is Borel regular and μ(K) < ∞ for each compact set K ⊂ Rn.
+THEOREM 1.6 (Increasing sets). Let μ be a regular measure on X. If A1 ⊆ . . . Ak ⊆ Ak+1 . . . , then
+kli→m∞ μ(Ak) = μ
+(∞ ⋃
+k=1
+Ak
+)
+.
+Remark. An important point is that the sets {Ak}∞
+k=1 need not be μ-measurable here.
+Proof. Since μ is regular, there exist measurable sets {Ck}∞
+k=1, with Ak ⊆ Ck and μ(Ak) = μ(Ck) for each k. Set Bk := ∩j≥kCj . Then Ak ⊆ Bk, each Bk is μ-measurable, and μ(Ak) = μ(Bk). Thus
+kli→m∞ μ(Ak) = kli→m∞ μ(Bk) = μ
+(∞ ⋃
+k=1
+Bk
+)
+≥μ
+(∞ ⋃
+k=1
+Ak
+)
+.
+
+
+10 General Measure Theory
+But Ak ⊆ ∪∞
+j=1Aj, and so also
+kli→m∞ μ(Ak) ≤ μ
+⎛
+⎝
+∞
+⋃
+j=1
+Aj
+⎞
+⎠.
+We demonstrate next that if μ is Borel regular, we can create a Radon measure by restricting μ to a measurable set of finite measure.
+THEOREM 1.7 (Restriction and Radon measures). Let μ be a Borel regular measure on Rn. Suppose A ⊆ Rn is μ-measurable and μ(A) < ∞.
+Then μ A is a Radon measure.
+Remark. If A is a Borel set, then μ A is Borel regular, even if μ(A) = ∞.
+Proof. 1. Let ν := μ A. Clearly ν(K) < ∞ for each compact K. Since Theorem 1.1, (iv) asserts that every μ-measurable set is νmeasurable, ν is a Borel measure.
+2. Claim: ν is Borel regular.
+Proof of claim: Since μ is Borel regular, there exists a Borel set B such that A ⊆ B and μ(A) = μ(B) < ∞. Then, since A is μ-measurable,
+μ(B − A) = μ(B) − μ(A) = 0.
+Choose C ⊆ Rn. Then
+(μ B)(C) = μ(C ∩ B)
+= μ(C ∩ B ∩ A) + μ((C ∩ B) − A)
+≤ μ(C ∩ A) + μ(B − A)
+= (μ A)(C).
+Thus μ B = μ A, and so we may as well assume A is a Borel set.
+3. Now let C ⊆ Rn We must show that there exists a Borel set D such that C ⊆ D and ν(C) = ν(D). Since μ is a Borel regular measure, there exists a Borel set E such that A ∩ C ⊆ E and μ(E) = μ(A ∩ C). Let D := E ∪(Rn −A). Since A and E are Borel sets, so is D. Moreover, C ⊆ (A ∩ C) ∪ (Rn − A) ⊆ D. Finally, since D ∩ A = E ∩ A,
+ν(D) = μ(D ∩ A) = μ(E ∩ A) ≤ μ(E) = μ(A ∩ C) = ν(C).
+
+
+1.1 Measures and measurable functions 11
+We consider next the possibility of measure theoretically approximating by open, closed or compact sets.
+LEMMA 1.1. Let μ be a Borel measure on Rn and let B be a Borel set.
+(i) If μ(B) < ∞, there exists for each ε > 0 a closed set C such that
+C ⊆ B, μ(B − C) < ε.
+(ii) If μ is a Radon measure, then there exists for each ε > 0 an open set U such that
+B ⊆ U, μ(U − B) < ε.
+Proof. 1. Let ν := μ B. Since μ is Borel and μ(B) < ∞, ν is a finite Borel measure. Let
+F := {A ⊆ Rn | A is μ -measurable and for each ε > 0
+there exists a closed set C ⊆ A with ν(A − C) < ε}.
+Obviously, F contains all closed sets.
+2. Claim #1: If {Ai}∞
+i=1 ⊆ F , then A := ∩∞
+i=1Ai ∈ F .
+Proof of claim: Fix ε > 0. Since Ai ∈ F , there exists a closed set Ci ⊆ Ai with ν(Ai − Ci) < ε
+2i (i = 1, 2, . . . ). Let C := ∩∞
+i=1Ci. Then C is closed and
+ν(A − C) = ν
+(∞ ⋂
+i=1
+Ai −
+∞
+⋂
+i=1
+Ci
+)
+≤ν
+(∞ ⋃
+i=1
+(Ai − Ci)
+)
+≤
+∞
+∑
+i=1
+ν(Ai − Ci) < ε.
+Thus A ∈ F .
+3. Claim #2: If {Ai}∞
+i=1 ⊆ F , then A := ∪∞
+i=1Ai ∈ F .
+Proof of claim: Fix ε > 0 and choose Ci as above. Since ν(A) < ∞, we have
+
+
+12 General Measure Theory
+xli→m∞ ν
+(
+A−
+m
+⋃
+i=1
+Ci
+)
+=ν
+(∞ ⋃
+i=1
+Ai −
+∞
+⋃
+i=1
+Ci
+)
+≤ν
+(∞ ⋃
+i=1
+(Ai − Ci)
+)
+≤
+∞
+∑
+i=1
+ν(Ai − Ci) < ε.
+Consequently, there exists an integer m such that
+ν
+(
+A−
+m
+⋃
+i=1
+Ci
+)
+< ε.
+But ∪m
+i=1Ci is closed, and so A ∈ F .
+4. Since every open subset of Rn can be written as a countable union of closed sets, Claim #2 shows that F contains all open sets. Consider next
+G := {A ∈ F | Rn − A ∈ F }.
+Trivially, if A ∈ G, then Rn − A ∈ G. Note also that G contains all open sets.
+5. Claim #3: If {Ai}∞
+i=1 ⊆ G, then A = ∪∞
+i=1Ai ∈ G.
+Proof of claim: By Claim #2, A ∈ F . Since also {Rn − Ai}∞
+i=1 ⊆ F ,
+Claim #1 implies Rn − A = ∩∞
+i=1(Rn − Ai) ∈ F .
+6. Thus G is a σ-algebra containing the open sets and therefore also the Borel sets. In particular, B ∈ G; and hence, given ε > 0, there is a closed set C ⊆ B such that
+μ(B − C) = ν(B − C) < ε.
+This establishes (i).
+7. Write Um := B0(0, m), the open ball with center 0, radius m. Then Um − B is a Borel set with μ(Um − B) < ∞, and so we can apply (i) to find a closed set Cm ⊆ Um − B such that μ((Um − Cm) − B) = μ((Um − B) − Cm) < ε
+2m .
+Let U := ∪m ∞=1(Um − Cm); U is open. Now B ⊆ Rn − Cm and thus Um ∩ B ⊆ Um − Cm. Consequently,
+B=
+∞
+⋃
+m=1
+(Um ∩ B) ⊆
+∞
+⋃
+m=1
+(Um − Cm) = U.
+
+
+1.1 Measures and measurable functions 13
+Furthermore,
+μ(U −B) = μ
+(∞ ⋃
+m=1
+(Um − Cm) − B)
+)
+≤
+∞
+∑
+m=1
+μ((Um−Cm)−B) < ε.
+THEOREM 1.8 (Approximation by open and by compact sets). Let μ be a Radon measure on Rn. Then
+(i) for each set A ⊆ Rn,
+μ(A) = inf{μ(U ) | A ⊆ U, U open},
+and
+(ii) for each μ-measurable set A ⊆ Rn,
+μ(A) = sup{μ(K) | K ⊆ A, Kcompact}.
+Remark. Assertion (i) does not require A to be μ-measurable.
+Proof. 1. If μ(A) = ∞, (i) is obvious, and so let us suppose μ(A) < ∞. Assume first A is a Borel set. Fix ε > 0. Then by Lemma 1.1, there exists an open set U ⊃ A with μ(U − A) < ε. Since μ(U ) = μ(A) + μ(U − A) < ∞, (i) holds. Now, let A be an arbitrary set. Since μ is Borel regular, there exists a Borel set B ⊃ A with μ(A) = μ(B). Then
+μ(A) = μ(B) = inf{μ(U ) | B ⊆ U, U open}
+≥ inf{μ(U ) | A ⊆ U, U open}.
+The reverse inequality is clear, and so assertion (i) is proved.
+2. Now let A be μ-measurable, with μ(A) < ∞. Set ν := μ A; then ν is a Radon measure according to Theorem 1.7. Fix ε > 0. Applying (i) to ν and Rn − A, we obtain an open set U with Rn − A ⊆ U and ν(U ) ≤ ε. Let C := Rn − U . Then C is closed and C ⊆ A. Moreover,
+μ(A − C) = ν(Rn − C) = ν(U ) ≤ ε.
+Thus 0 ≤ μ(A) − μ(C) ≤ ε,
+
+
+14 General Measure Theory
+and so μ(A) = sup{μ(C) | C ⊆ A, C closed}. (⋆)
+3. Suppose that μ(A) = ∞. Define Dk := {x | k − 1 ≤ |x| < k}. Then A = ∪∞
+k=1(Dk ∩ A); so ∞ = μ(A) = ∑∞
+k=1 μ(A ∩ Dk). Since μ is a Radon measure, μ(Dk ∩ A) < ∞. Then by the above, there exists a closed set Ck ⊆ Dk ∩A with μ(Ck) ≥ μ(Dk ∩A)− 1
+2k . Now ∪∞
+k=1Ck ⊆ A
+and
+nli→m∞ μ
+(n ⋃
+k=1
+Ck
+)
+=μ
+(∞ ⋃
+k=1
+Ck
+)
+=
+∞
+∑
+k=1
+μ(Ck) ≥
+∞
+∑
+k=1
+(
+μ(Dk ∩ A) − 1
+2k
+)
+= ∞.
+But ∪n
+k=1Ck is closed for each n, whence in this case we also have assertion (⋆) .
+4. Finally, let B(m) denote the closed ball with center 0, radius m. Let C be closed, Cm := C ∩ B(m). Each set Cm is compact and μ(C) = limm→∞ μ(Cm). Hence for each μ-measurable set A,
+sup{μ(K) | K ⊆ A, K compact} = sup{μ(C) | C ⊆ A, C closed}.
+We introduce next a simple and very useful way to verify that a measure is Borel.
+THEOREM 1.9 (Caratheodory’s criterion). Let μ be a measure on Rn. If for all sets A, B ⊆ Rn, we have
+μ(A ∪ B) = μ(A) + μ(B) whenever dist(A, B) > 0,
+then μ is a Borel measure.
+Proof. 1. Suppose A, C ⊆ Rn and C is closed. We must show
+μ(A) ≥ μ(A ∩ C) + μ(A − C), (⋆)
+the opposite inequality following from subadditivity.
+If μ(A) = ∞, then (⋆) is obvious. Assume instead μ(A) < ∞. Define
+Cn :=
+{
+x ∈ Rn | dist(x, C) ≤ 1
+n
+}
+(n = 1, 2, . . . ).
+
+
+1.1 Measures and measurable functions 15
+Then dist(A − Cn, A ∩ C) ≥ 1
+n > 0. Therefore, by hypothesis,
+μ(A − Cn) + μ(A ∩ C) = μ((A − Cn) ∪ (A ∩ C)) ≤ μ(A). (⋆⋆)
+2. Claim: limn→∞ μ(A − Cn) = μ(A − C).
+Proof of claim: Set
+Rk :=
+{
+x∈A| 1
+k + 1 < dist(x, C) ≤ 1
+k
+}
+(k = 1, . . . ).
+Since C is closed, A − C = (A − Cn) ∪ ∪∞
+k=nRk; consequently,
+μ(A − Cn) ≤ μ(A − C) ≤ μ(A − Cn) +
+∞
+∑
+k=n
+μ(Rk).
+If we can show ∑∞
+k=1 μ(Rk) < ∞, we will then have
+nli→m∞ μ(A − Cn) ≤ μ(A − C)
+≤ nli→m∞ μ(A − Cn) + nli→m∞
+∞
+∑
+k=n
+μ(Rk)
+= nli→m∞ μ(A − Cn),
+thereby establishing the claim.
+3. Now dist(Ri, Rj) > 0 if j ≥ i + 2. Hence by induction we find
+m
+∑
+k=1
+μ(R2k) = μ
+(m ⋃
+k=1
+R2k
+)
+≤ μ(A),
+and likewise
+m
+∑
+k=0
+μ(R2k+1) = μ
+(m ⋃
+k=0
+R2k+1
+)
+≤ μ(A).
+Combining these results and letting m → ∞, we discover
+∞
+∑
+k=1
+μ(Rk) ≤ 2μ(A) < ∞.
+4. We therefore have
+μ(A − C) + μ(A ∩ C) = nli→m∞ μ(A − Cn) + μ(A ∩ C) ≤ μ(A),
+according to (⋆⋆) . This proves (⋆) and thus the closed set C is μmeasurable.
+
+
+16 General Measure Theory
+1.1.4 Measurable functions
+We now extend the notion of measurability from sets to functions.
+Let X be a set and Y a topological space. Assume μ is a measure on X.
+DEFINITION 1.10.
+(i) A function f : X → Y is called μ-measurable if for each open set U ⊆ Y , the set
+f −1(U )
+is μ-measurable.
+(ii) A function f : X → Y is Borel measurable if for each open set U ⊆ Y , the set
+f −1(U )
+is Borel measurable.
+EXAMPLE. If f : Rn → Y is continuous, then f is Borel-measurable. This follows since f −1(U ) is open, and therefore μ-measurable, for each open set U ⊆ Y .
+THEOREM 1.10 (Inverse images).
+(i) If f : X → Y is μ-measurable, then f −1(B) is μ-measurable for each Borel set B ⊆ Y .
+(ii) A function f : X → [−∞, ∞] is μ-measurable if and only if f −1([−∞, a)) is μ-measurable for each a ∈ R.
+(iii) If f : X → Rn and g : X → Rm are μ-measurable, then
+(f, g) : X → Rn+m
+is μ-measurable.
+Proof. 1. We check that
+{A ⊆ Y | f −1(A) is μ-measurable}
+is a σ-algebra containing the open sets and hence the Borel sets.
+2. Likewise,
+{A ⊆ [−∞, ∞] | f −1(A) is μ-measurable}
+
+
+1.1 Measures and measurable functions 17
+is a σ-algebra containing [−∞, a) for each a ∈ R, and therefore containing the Borel subsets of R.
+3. Let h := (f, g). Then
+{A ⊆ Rn+m | h−1(A) is μ-measurable}
+is a σ-algebra containing all open sets of the form U ×V , where U ⊆ Rn and V ⊆ Rm are open.
+Measurable functions inherit the good properties of measurable sets:
+THEOREM 1.11 (Properties of measurable functions).
+(i) If f, g : X → [−∞, ∞] are μ-measurable, then so are
+f + g, f g, |f |, min(f, g) and max(f, g).
+The function f
+g is also μ-measurable, provided g ̸= 0 on X.
+(ii) If the functions fk : X → [−∞, ∞] are μ-measurable (k = 1, 2, . . . ), then
+inf
+k≥1 fk, sup
+k≥1
+fk, lim inf
+k→∞ fk, and lim sup
+k→∞
+fk
+are also μ-measurable.
+Proof. 1. As noted above, f : X → [−∞, ∞] is μ-measurable if and only if f −1[−∞, a] is μ-measurable for each a ∈ R.
+2. Suppose f, g : X → R are μ-measurable, Then
+(f + g)−1(−∞, a) =
+⋃
+r,s rational r+s<a
+(f −1(−∞, r) ∩ g−1(−∞, s)),
+and so f + g is μ-measurable. Since
+(f 2)−1(−∞, a) = f −1(−∞, a 1
+2 ) − f −1(−∞, −a 1
+2 ],
+for a ≥ 0, f 2 is μ-measurable. Consequently,
+fg = 1
+2 [(f + g)2 − f 2 − g2]
+
+
+18 General Measure Theory
+is μ-measurable as well. Next observe that if g ̸= 0,
+(
+1 g
+)−1
+(−∞, a) =
+⎧
+⎪ ⎪ ⎨
+⎪ ⎪ ⎩
+g−1(a−1, 0) if a < 0
+g−1(−∞, 0) if a = 0
+g−1(−∞, 0) ∪ g−1(a−1, ∞) if a > 0;
+thus 1
+g and so also f
+g are μ-measurable.
+3. Finally,
+f + = f χ{f≥0} = max(f, 0), f − = −f χ{f<0} = max(−f, 0)
+are μ-measurable, and consequently so are
+|f | = f + + f −,
+max(f, g) = (f − g)+ + g,
+min(f, g) = −(f − g)− + g.
+4. Suppose next the functions fk: X → [−∞, ∞] (k = 1, 2, . . . ) are μ-measurable. Then
+(
+inf
+k≥1 fk
+)−1
+[−∞, a] =
+∞
+⋃
+k=1
+f −1
+k [−∞, a)
+and
+(
+sup
+k≥1
+fk
+)−1
+[−∞, a] =
+∞
+⋂
+k=1
+f −1
+k [−∞, a].
+Therefore inf
+k≥1 fk,, sup
+k≥1
+fk
+are μ- measurable.
+5. We complete the proof by noting that
+lim inf
+k→∞ fk = sup
+m≥1
+inf
+k≥m fk, lim sup
+k→∞
+fk = inf
+m≥1 sup
+k≥m
+fk.
+Next is an elegant and quite useful way to rewrite a nonnegative measurable function.
+
+
+Lusin’s and Egoroff ’s Theorems 19
+THEOREM 1.12 (Decomposition of nonnegative measurable functions). Assume that f : X → [0, ∞] is μ-measurable. Then there exist μ-measurable sets {Ak}∞
+k=1 in X such that
+f=
+∞
+∑
+k=1
+1
+k χAk .
+Observe that the sets {Ak}∞
+k=1 need not be disjoint and that this assertion is valid even if f is not a simple function.
+Proof. Set
+A1 := {x ∈ X | f (x) ≥ 1},
+and inductively define for k = 2, 3, . . .
+Ak :=
+⎧
+⎨
+⎩
+x∈X ∣
+∣ f (x) ≥ 1
+k+
+k−1
+∑
+j=1
+1
+j χAj
+⎫
+⎬
+⎭
+.
+An induction argument shows that
+f≥
+m
+∑
+k=1
+1
+k χAk (m = 1, . . . );
+and therefore
+f≥
+∞
+∑
+k=1
+1
+k χAk .
+If f (x) = ∞, then x ∈ Ak for all k. If instead 0 ≤ f (x) < ∞, then for infinitely many n, x ∈/ An. Hence for infinitely many n,
+0 ≤ f (x) −
+n−1
+∑
+k=1
+1
+k χAk ≤ 1
+n.
+1.2 Lusin’s and Egoroff’s Theorems
+THEOREM 1.13 (Extending continuous functions). Suppose K ⊆ Rn is compact and f : K → Rm is continuous. Then there exists
+a continuous mapping f ̄ : Rn → Rm such that
+f ̄ = f on K.
+
+
+20 General Measure Theory
+Remark. Extension theorems preserving more of the structure of f will be presented in Sections 3.1, 4.4, 5.4, and 6.5.
+Proof. 1. The assertion for m > 1 follows easily from the case m = 1, and so we may assume f : K → R.
+Let U := Rn − K. For x ∈ U and s ∈ K, set
+us(x) := max
+{
+2 − |x − s|
+dist(x, K) , 0
+}
+.
+Then ⎧
+⎪ ⎪ ⎨
+⎪ ⎪ ⎩
+x 0→ us(x) is continuous on U,
+0 ≤ us(x) ≤ 1,
+us(x) = 0 if |x − s| ≥ 2 dist(x, K).
+Now let {sj}∞
+j=1 be a countable dense subset of K, and define
+σ(x) :=
+∞
+∑
+j=1
+2−jusj (x) for x ∈ U.
+Observe 0 < σ(x) ≤ 1 for x ∈ U . Next, set
+vk(x) := 2−kusk (x)
+σ(x)
+for x ∈ U , k = 1, 2, . . . . The functions {vk}∞
+k=1 form a partition of unity on U . Define
+f ̄(x) :=
+⎧
+⎪ ⎨
+⎪ ⎩
+f (x) if x ∈ K
+∞
+∑
+k=1
+vk(x)f (sk) if x ∈ U. .
+According to the Weierstrass M-test, f ̄ is continuous on U.
+2. We must show
+lim
+x→a,x∈U
+f ̄(x) = f (a)
+for each a ∈ K. Fix ε > 0. There exists δ > 0 such that
+|f (a) − f (sk)| < ε
+
+
+1.2 Lusin’s and Egoroff’s Theorems 21
+for all sk such that |a − sk| < δ. Suppose x ∈ U with |x − a| < δ
+4 . If |a − sk| ≥ δ, then
+δ ≤ |a − sk| ≤ |a − x| + |x − sk| < δ
+4 + |x − sk|,
+so that
+|x − sk| ≥ 3
+4 δ > 2|x − a| ≥ 2 dist(x, K).
+Thus, vk(x) = 0 whenever |x − a| < δ
+4 and |a − sk| ≥ δ. Since
+∞
+∑
+k=1
+vk(x) = 1
+if x ∈ U , we calculate for |x − a| < δ
+4 , x ∈ U , that
+|f ̄(x) − f (a)| ≤
+∞
+∑
+k=1
+vk(x)|f (sk) − f (x)| < ε.
+We now show that a measurable function can measure theoretically approximated by a continuous function.
+THEOREM 1.14 (Lusin’s Theorem). Let μ be a Borel regular measure on Rn and f : Rn → Rm be μ-measurable. Assume that A ⊆ Rn is μ-measurable and μ(A) < ∞. Fix ε > 0.
+Then there exists a compact set K ⊆ A such that
+(i) μ(A − K) < ε, and
+(ii) f |K is continuous.
+Proof. 1. For each positive integer i, let Bij∞
+j=1 ⊂ Rm be disjoint
+Borel sets such that Rm = ∪∞
+j=1Bij and diam Bij < 1
+i . Define Aij :=
+A ∩ f −1(Bij).Then Aij is μ-measurable and A = ∪∞
+j=1Aij .
+2. Write ν := μ A; ν is a Radon measure. Theorem 1.8 implies the existence of a compact set Kij ⊆ Aij with ν(Aij − Kij) < ε
+2i+j .
+Then
+μ
+⎛
+⎝A −
+∞
+⋃
+j=1
+Kij
+⎞
+⎠=ν
+⎛
+⎝A −
+∞
+⋃
+j=1
+Kij
+⎞
+⎠
+
+
+22 General Measure Theory
+=ν
+⎛
+⎝
+∞
+⋃
+j=1
+Aij −
+∞
+⋃
+j=1
+Kij
+⎞
+⎠
+≤ν
+⎛
+⎝
+∞
+⋃
+j=1
+(Aij − Kij)
+⎞
+⎠< ε
+2i .
+Since limN→∞ μ (A − ∪N
+j=1Kij
+) = μ (A − ∪∞
+j=1Kij
+) , there exists a number N (i) such that
+μ
+⎛
+⎝A −
+N (i)
+⋃
+j=1
+Kij
+⎞
+⎠< ε
+2i .
+3. Set Di := ∪N(i)
+j=1 Kij; then Di is compact. For each i and j, we fix
+bij ∈ Bij and we then define gi : Di → Rm by setting gi(x) = bij for x ∈ Kij (j ≤ N (i)). Since Kil, . . . , KiN(i) are compact, disjoint sets, and thus are a positive distance apart, gi is continuous. Furthermore, |f (x) − gi(x)| < 1
+i for all x ∈ Di. Set K := ∩∞
+i=1Di. Then K is compact and
+μ(A − K) ≤
+∞
+∑
+i=1
+μ(A − Di) < ε.
+Since |f (x) − gi(x)| < 1
+i for each x ∈ Di, we see gi → f uniformly on K. Thus f |K is continuous, as required.
+THEOREM 1.15 (Approximation by continuous functions). Let μ be a Borel regular measure on Rn and suppose that f : Rn → Rm is μ-measurable. Assume A ⊂ Rn is μ-measurable and μ(A) < ∞. Fix ε > 0.
+Then there exists a continuous function f ̄ : Rn → Rm such that
+μ({x ∈ A | f ̄(x) ̸= f (x)}) < ε.
+Proof. According to Lusin’s Theorem, there exists a compact set K ⊆ A such that μ(A−K) < ε and f |K is continuous. Then by Theorem 1.13 there exists a continuous function f ̄ : Rn → Rm such that f ̄|K = f |K and
+μ
+{x ∈ A | f ̄(x) ̸= f (x)} ≤ μ(A − K) < ε.
+
+
+1.2 Lusin’s and Egoroff’s Theorems 23
+Remark. Compare this with Whitney’s Extension Theorem 6.10, which identifies conditions ensuring the existence of a C1 extension f ̄.
+NOTATION The expression
+μ-a.e.
+means “almost everywhere with respect the measure μ,” that is, except possibly on a set A with μ(A) = 0.
+THEOREM 1.16 (Egoroff ’s Theorem). Let μ be a measure on Rn and suppose fk : Rn → Rm (k = 1, 2, . . . ) are μ-measurable. Assume also A ⊂ Rn is μ-measurable, with μ(A) < ∞, and
+fk → f μ-a.e. on A.
+Then for each ε > 0 there exists a μ-measurable set B ⊆ A such that
+(i) μ(A − B) < ε, and
+(ii) fk → f uniformly on B.
+Proof. For i, j = 1, 2, . . . define
+Cij :=
+∞
+⋃
+k=j
+{x | |fk(x) − f (x)| > 2−i}.
+Then Ci,j+1 ⊆ Cij for all i, j; and so, since μ(A) < ∞,
+jli→m∞ μ(A ∩ Cij ) = μ
+⎛
+⎝A ∩
+∞
+⋂
+j=1
+Cij
+⎞
+⎠ = 0.
+Hence there exists an integer N (i) such that μ(A ∩ Ci,N(i)) < ε2−i. Let B := A − ∪∞
+i=1Ci,N(i). Then
+μ (A − B) ≤
+∞
+∑
+i=1
+μ
+(A ∩ Ci,N(i)
+) < ε.
+Then for each i, each x ∈ B, and all n ≥ N (i), we have |fn(x)−f (x)| ≤ 2−i. Consequently fn → f uniformly on B.
+
+
+24 General Measure Theory
+1.3 Integrals and limit theorems
+Now we want to extend calculus to the measure theoretic setting. This section presents integration theory; differentiation theory is harder and will be set forth later in Section 1.6.
+NOTATION f + = max(f, 0), f − = max(−f, 0),
+f = f+ − f−.
+Let μ be a measure on a nonempty set X.
+DEFINITION 1.11. A function g : X → [−∞, ∞] is called a simple function if the image of g is countable.
+DEFINITION 1.12.
+(i) If g is a nonnegative, simple, μ-measurable function, we define its integral ∫
+g dμ :=
+∑
+0≤y≤∞
+yμ(g−1{y}).
+(ii) If g is a simple μ-measurable function and either ∫ g+ dμ < ∞ or ∫ g− dμ < ∞, we call g a μ-integrable simple function and define ∫
+g dμ :=
+∫
+g+ dμ −
+∫
+g− dμ.
+This expression may equal ±∞.
+Thus if g is a μ-integrable simple function,
+∫
+g dμ :=
+∑
+−∞≤y≤∞
+yμ(g−1{y}).
+DEFINITION 1.13.
+(i) Let f : X → [−∞, ∞]. We define the upper integral
+∫∗
+f dμ :=
+inf
+{∫
+g dμ | g μ-integrable, simple, g ≥ f μ-a.e.
+}
+
+
+1.3 Integrals and limit theorems 25
+and the lower integral
+∫
+∗
+f dμ :=
+sup
+{∫
+g dμ | g μ-integrable, simple, g ≤ f μ-a.e.
+}
+.
+(ii) A μ-measurable function f : X → [−∞, ∞] is called μ
+integrable if ∫ ∗ f dμ = ∫
+∗ f dμ, in which case we write
+∫
+f dμ :=
+∫∗
+f dμ =
+∫
+∗
+f dμ.
+Warning: Our use of the term “integrable” differs from most texts. For us, a function is “integrable” provided it has an integral, even if this integral equals +∞ or –∞. Note that a nonnegative μ-measurable function is always μintegrable.
+We assume the reader to be familiar with all the usual properties of integrals.
+DEFINITION 1.14.
+(i) A function f : X → [−∞, ∞] is μ-summable if f is μ-integrable and ∫
+|f | dμ < ∞.
+(ii) We say a function f : Rn → [−∞, ∞] is locally μ-summable if f |K is μ-summable for each compact set K ⊂ Rn.
+DEFINITION 1.15. We say ν is a signed measure on Rn if there exists a Radon measure μ on Rn and a locally μ-summable function f : Rn → [−∞, ∞] such that
+ν(K) =
+∫
+K
+f dμ (⋆)
+for all compact sets K ⊆ Rn.
+
+
+26 General Measure Theory
+NOTATION
+(i) We write
+ν=μ f
+provided (⋆) holds for all compact sets K. Note that therefore
+μ A = μ χA.
+(ii) We denote by
+L1(X, μ)
+the set of all μ-summable functions on X, and
+L1
+loc (Rn, μ)
+the set of all locally μ-summable functions.
+(iii) Likewise, if 1 < p < ∞,
+Lp(X, μ)
+denotes the set of all μ-measurable functions f on X such that |f |p is μ-summable , and
+Lp
+loc (Rn, μ)
+the set of μ-measurable functions f such that |f |p is locally μsummable.
+(iv) We do not identify two Lp (or Lp
+loc) functions that agree μ-a.e.
+The following three limit theorems for integrals are among the most important assertions in all of analysis.
+THEOREM 1.17 (Fatou’s Lemma). Let fk : X → [0, ∞] be μmeasurable for k = 1, . . . . Then
+∫
+lim inf
+k→∞ fk dμ ≤ lim inf
+k→∞
+∫
+fk dμ.
+Proof. Take g := ∑∞
+j=1 ajχAj to be a nonnegative simple function less
+than or equal to lim infk→∞ fk. Suppose the μ-measurable sets {Aj}∞
+j=1
+are disjoint and aj > 0 for j = 1, . . . .
+
+
+1.3 Integrals and limit theorems 27
+Fix 0 < t < 1. Then
+Aj =
+∞
+⋃
+k=1
+Bj,k,
+where
+Bj,k := Aj ∩ {x | fl(x) > taj for all l ≥ k}.
+Note
+Aj ⊇ Bj,k+1 ⊇ Bj,k (k = 1, . . . ).
+Thus
+∫
+fk dμ ≥
+∞
+∑
+j=1
+∫
+Aj
+fk dμ ≥
+∞
+∑
+j=1
+∫
+Bj,k
+fk dμ ≥ t
+∞
+∑
+j=1
+aj μ(Bj,k );
+and so
+lim inf
+k→∞
+∫
+fk dμ ≥ t
+∞
+∑
+j=1
+ajμ(Aj) = t
+∫
+g dμ.
+This inequality holds for each 0 < t < 1 and each simple function g less than or equal to lim infk→∞ fk. Consequently,
+lim inf
+k→∞
+∫
+fk dμ ≥
+∫
+∗
+lim inf
+k→∞ fk dμ =
+∫
+lim inf
+k→∞ fk dμ.
+THEOREM 1.18 (Monotone Convergence Theorem). Let fk : X → [0, ∞] be μ-measurable (k = 1, . . . ), with
+f1 ≤ · · · ≤ fk ≤ fk+1 ≤ . . . .
+Then
+kli→m∞
+∫
+fk dμ =
+∫
+kli→m∞ fk dμ.
+Proof. Clearly,
+∫
+fj dμ ≤
+∫
+kli→m∞ fk dμ (j = 1, . . . );
+and therefore
+kli→m∞
+∫
+fk dμ ≤
+∫
+kli→m∞ fk dμ.
+The opposite inequality follows from Fatou’s Lemma.
+
+
+28 General Measure Theory
+THEOREM 1.19 (Dominated Convergence Theorem). Assume g ≥ 0 is μ-summable and f, {fk}∞
+k=1 are μ-measurable. Suppose
+fk → f μ-a.e.
+as k → ∞, and
+|fk| ≤ g (k = 1, . . . ).
+Then
+kli→m∞
+∫
+|fk − f | dμ = 0.
+Proof. By Fatou’s Lemma,
+∫
+2g dμ =
+∫
+lim inf
+k→∞ (2g − |f − fk|) dμ ≤ lim inf
+k→∞
+∫
+2g − |f − fk| dμ;
+whence
+lim sup
+k→∞
+∫
+|f − fk| dμ ≤ 0.
+THEOREM 1.20 (Variant of Dominated Convergence Theorem). Assume g, {gk}∞
+k=1 are μ-summable and f, {fk}∞
+k=1 are μmeasurable. Suppose fk → f μ-a.e. and
+|fk| ≤ gk (k = 1, . . . ),
+If also gk → g μ-a.e.
+and
+kli→m∞
+∫
+gk dμ =
+∫
+g dμ,
+then
+kli→m∞
+∫
+|fk − f | dμ = 0.
+Proof. Similar to proof of the Dominated Convergence Theorem.
+It is easy to see that limk→∞
+∫ |fk − f | dμ = 0 does not necessarily imply fk → f μ-a.e. But if we pass to an appropriate subsequence, we can obtain a.e. convergence.
+
+
+Product measures, Fubini’s Theorem, Lebesgue measure 29
+THEOREM 1.21 (Almost everywhere convergent subsequence). Assume f, {fk}∞
+k=1 are μ-summable and
+kli→m∞
+∫
+|fk − f | dμ = 0.
+Then there exists a subsequence {fkj }∞
+j=1 for which
+fkj → f μ-a.e.
+Proof. We select a subsequence {fkj }∞
+j=1 of the functions {fk}∞
+k=1
+satisfying ∞
+∑
+j=1
+∫
+|fkj − f | dμ < ∞.
+In view of the Monotone Convergence Theorem, this implies
+∫∞ ∑
+j=1
+|fkj − f | dμ < ∞;
+and thus ∞
+∑
+j=1
+|fkj − f | < ∞ μ-a.e.
+Consequently, fkj → f at μ-a.e. point.
+1.4 Product measures, Fubini’s Theorem, Lebesgue measure
+Let X and Y be nonempty sets.
+DEFINITION 1.16. Let μ be a measure on X and ν a measure on Y . We define the measure μ × ν : 2X×Y → [0, ∞] by setting
+(μ × ν)(S) := inf
+{∞ ∑
+i=1
+μ(Ai)ν(Bi)
+}
+,
+for each S ⊆ X × Y , where the infimum is taken over all collections of
+
+
+30 General Measure Theory
+μ-measurable sets Ai ⊆ X and ν-measurable sets Bi ⊆ Y (i = 1, . . . ) such that
+S⊆
+∞
+⋃
+i=1
+(Ai × Bi).
+The measure μ × ν is called the product measure of μ and ν.
+DEFINITION 1.17.
+(i) A subset A ⊆ X is σ-finite with respect to μ if we can write
+A=
+∞
+⋃
+k=1
+Bk ,
+where each Bk is μ-measurable and μ(Bk) < ∞ for k = 1, 2, . . . .
+(ii) A function f : X → [−∞, ∞] is σ-finite with respect to μ if f is μ-measurable and {x | f (x) ̸= 0} is σ-finite with respect to μ.
+THEOREM 1.22 (Fubini’s Theorem). Let μ be a measure on X and ν a measure on Y.
+(i) Then μ × ν is a regular measure on X × Y , even if μ and ν are not regular.
+(ii) If A ⊆ X is μ-measurable and B ⊆ Y is ν-measurable, then A×B is (μ × ν)-measurable and
+(μ × ν)(A × B) = μ(A)ν(B).
+(iii) If S ⊆ X × Y is σ-finite with respect to μ × ν, then the cross section
+Sy := {x | (x, y) ∈ S}
+is μ-measurable for ν-a.e. y,
+Sx := {y | (x, y) ∈ S}
+is ν-measurable for μ-a.e. x, μ(Sy) is ν-integrable, and ν(Sx) is μ-integrable. Moreover,
+(μ × ν)(S) =
+∫
+Y
+μ(Sy) dν(y) =
+∫
+X
+ν(Sx) dμ(x).
+
+
+1.4 Fubini’s Theorem, Lebesgue measure 31
+(iv) If f is (μ × ν)-integrable and f is σ-finite with respect to μ × ν (in particular, if f is (μ × ν)-summable), then the mapping
+y 0→
+∫
+X
+f (x, y) dμ(x)
+is ν-integrable, the mapping
+x 0→
+∫
+Y
+f (x, y) dν(y)
+is μ-integrable, and
+∫
+X ×Y
+f d(μ × ν) =
+∫
+Y
+[∫
+X
+f (x, y) dμ(x)
+]
+dν(y)
+=
+∫
+X
+[∫
+Y
+f (x, y) dν(y)
+]
+dμ(x).
+Remark. We will later study the coarea formula (Theorem 3.10), which is a kind of “curvilinear” version of Fubini’s Theorem.
+Proof. 1. Let F denote the collection of all sets S ⊆ X × Y for which the mapping
+x 0→ χS(x, y)
+is μ-integrable for each y ∈ Y and the mapping
+y 0→
+∫
+X
+χS(x, y) dμ(x)
+is ν-integrable. If S ∈ F , we write
+ρ(S) :=
+∫
+Y
+[∫
+X
+χS(x, y) dμ(x)
+]
+dν(y).
+2. Define
+P0 := {A × B | A μ-measurable, B ν-measurable} ,
+P1 := {∪∞
+j=1 Sj | Sj ∈ P0 (j = 1, . . . )} ,
+P2 := {∩∞
+j=1Sj | Sj ∈ P1 (j = 1, . . . )} .
+Note P0 ⊆ F and ρ(A × B) = μ(A)ν(B)
+
+
+32 General Measure Theory
+when A × B ∈ P0. If A1 × B1, A2 × B2 ∈ P0, then
+(A1 × B1) ∩ (A2 × B2) = (A1 ∩ A2) × (B1 ∩ B2) ∈ P0,
+and
+(A1 × B1) − (A2 × B2) = ((A1 − A2) × B1) ∪ ((A1 ∩ A2) × (B1 − B2))
+is a disjoint union of members of P0. It follows that each set in P1 is a countable disjoint union of sets in P0. Hence P1 ⊆ F .
+3. Claim #1: For each S ⊆ X × Y ,
+(μ × ν)(S) = inf{ρ(R) | S ⊆ R ∈ P1}.
+Proof of claim: First we note that if S ⊆ R = ∪∞
+i=1 (Ai × Bi), then
+ρ(R) ≤
+∞
+∑
+i=1
+ρ(Ai × Bi) =
+∞
+∑
+i=1
+μ(Ai)ν(Bi).
+Thus inf{ρ(R) | S ⊆ R ∈ P1} ≤ (μ × ν)(S).
+Moreover, there exists a disjoint collection of sets {A′
+j × B′
+j }∞
+j=1 in P0
+such that
+R=
+∞
+⋃
+j=1
+(A′
+j × B′
+j ).
+Thus
+ρ(R) =
+∞
+∑
+j=1
+μ(A′
+j )ν (B ′
+j) ≥ (μ × ν)(S).
+4. Fix A × B ∈ P0. Then
+(μ × ν)(A × B) ≤ μ(A)ν(B) = ρ(A × B) ≤ ρ(R)
+for all R ∈ P1 such that A × B ⊆ R. Thus Claim #1 implies
+(μ × ν)(A × B) = μ(A)ν(B).
+5. Next we must prove A × B is (μ × ν)-measurable. So suppose T ⊆ X × Y and T ⊆ R ∈ P1. Then R − (A × B) and R ∩ (A × B) are disjoint and belong to P1. Consequently,
+
+
+1.4 Fubini’s Theorem, Lebesgue measure 33
+(μ × ν)(T − (A × B)) + (μ × ν)(T ∩ (A × B))
+≤ ρ(R − (A × B)) + ρ(R ∩ (A × B))
+= ρ(R),
+and so, according to Claim #1,
+(μ × ν)(T − (A × B)) + (μ × ν)(T ∩ (A × B)) ≤ (μ × ν)(T ).
+Thus (A × B) is (μ × ν)-measurable. This proves (ii).
+6. Claim #2: For each S ⊆ X × Y there is a set R ∈ P2 such that S ⊆ R and
+ρ(R) = (μ × ν)(S).
+Proof of claim: If (μ × ν)(S) = ∞, set R = X × Y . If (μ × ν)(S) < ∞, then for each j = 1, 2, . . . there is according to Claim #1 a set Rj ∈ P1 such that S ⊆ Rj and
+ρ(Rj) < (μ × ν)(S) + 1
+j.
+Define
+R :=
+∞
+⋂
+j=1
+Rj ∈ P2.
+Then R ∈ F , and by the Dominated Convergence Theorem,
+(μ × ν)(S) ≤ ρ(R) = kli→m∞ ρ (∩k
+j=1Rj
+) ≤ (μ × ν)(S).
+7. From (ii) we see that every member of P2 is (μ × ν)-measurable and thus (i) follows from Claim #2.
+8. If S ⊆ X × Y and (μ × ν)(S) = 0, then there is a set R ∈ P2 such that S ⊆ R and ρ(R) = 0; thus S ∈ F and ρ(S) = 0.
+Now suppose that S ⊆ X ×Y is (μ×ν)-measurable and (μ×ν)(S) < ∞. Then there is a R ∈ P2 such that S ⊆ R and
+(μ × ν)(R − S) = 0;
+hence ρ(R − S) = 0.
+
+
+34 General Measure Theory
+Thus
+μ({x | (x, y) ∈ S}) = μ({x | (x, y) ∈ R})
+for ν-a.e. y ∈ Y , and
+(μ × ν)(S) = ρ(R) =
+∫
+μ({x | (x, y) ∈ S}) dν(y).
+Assertion (iii) follows, provided (μ × ν)(S) < ∞. If S is σ-finite with respect to μ × ν, we decompose S into countably many sets with finite measure.
+9. Assertion (iv) reduces to (iii) when f = χS. If f is (μ × ν)integrable, is nonnegative and is σ-finite with respect to μ × ν, we use Theorem 1.12 to write
+f=
+∞
+∑
+k=1
+1
+k χAk .
+Then assertion (iv) follows for f from the Monotone Convergence Theorem. Finally, for general f we write
+f = f+ − f−,
+to deduce (iv) in general.
+DEFINITION 1.18.
+(i) One-dimensional Lebesgue measure on R1 is
+L1(A) := inf
+{∞ ∑
+i=1
+diam Ci | A ⊆
+∞
+⋃
+i=1
+Ci, Ci ⊆ R
+}
+for all A ⊆ R.
+(ii) We inductively define n-dimensional Lebesgue measure Ln on Rn by
+Ln := Ln−1 × L1 = L1 × · · · × L1 (n times)
+THEOREM 1.23 (Another characterization of Lebesgue measure). We have
+Ln = Ln−k × Lk
+for each k ∈ {1, . . . , n − 1}.
+
+
+Covering theorems 35
+Proof. Let Q := [−L, L]n denote a closed cube with sides parallel to the coordinate axes and define
+μ := Ln Q, ν = (Ln−k × Lk) Q.
+Then μ(R) = ν(R) < ∞ for each “rectangle” R := {x | −∞ ≤ ai ≤ xi ≤ bi ≤ ∞ (i = 1, . . . , n)}. According then to Theorem 1.5, μ and ν agree on all Borel sets. This conclusion is valid for each cube Q as above, and thus Ln and Ln−k × Lk agree on Borel subsets of Rn. Since both are Radon measures, they thus agree on all subsets of Rn.
+We hereafter assume the reader’s familiarity with all the usual facts about Ln.
+NOTATION We will write “dx,” “dy,” etc. rather than “dLn” in integrals taken with respect to Ln.
+We also write L1(Rn) for L1(Rn, Ln), etc.
+1.5 Covering theorems
+We present in this section the fundamental covering theorems of Vitali and of Besicovitch. Vitali’s Covering Theorem is easier and is most useful for investigating Ln on Rn. Besicovitch’s Covering Theorem is much harder to prove, but it is necessary for studying arbitrary Radon measures on Rn. The crucial geometric difference is that Vitali’s Covering Theorem provides a cover of enlarged balls, whereas Besicovitch’s Covering Theorem yields a cover out of the original balls, at the price of a certain controlled amount of overlap. These covering theorems will be employed throughout the rest of this book, the first and most important applications being the differentiation theorems in Section 1.6.
+1.5.1 Vitali’s Covering Theorem
+NOTATION If B = B(x, r) is a closed ball in Rn, we write
+Bˆ = B(x, 5r)
+to denote the concentric closed ball with radius 5 times the radius of B.
+
+
+36 General Measure Theory
+DEFINITION 1.19.
+(i) A collection F of closed balls in Rn is a cover of a set A ⊂ Rn if
+A⊆
+⋃
+B∈F
+B.
+(ii) F is a fine cover of A if, in addition,
+inf{diam B | x ∈ B, B ∈ F } = 0
+for each x ∈ A.
+THEOREM 1.24 (Vitali’s Covering Theorem). Let F be any collection of nondegenerate closed balls in Rn with
+sup{diam B | B ∈ F } < ∞.
+Then there exists a countable family G of disjoint balls in F such that
+⋃
+B∈F
+B⊆
+⋃
+B∈G
+Bˆ.
+Proof. 1. Write D := sup{diam B | B ∈ F }. Set
+Fj := {B ∈ F | D
+2j < diam B ≤ D
+2
+j−1
+} (j = 1, 2, . . . ).
+We define Gj ⊆ Fj as follows:
+(a) Let G1 be any maximal disjoint collection of balls in F1.
+(b) Assuming G1 . . . , Gk−1 have been selected, we choose Gk to be any maximal disjoint subcollection of
+{B ∈ Fk | B ∩ B′ = ∅ for all B′ ∈ ∪k−1
+j=1 Gj
+}.
+Finally, define G := ∪∞
+j=1Gj .
+Clearly G is a collection of disjoint balls and G ⊆ F .
+2. Claim: For each ball B ∈ F , there exists a ball B′ ∈ G such that B ∩ B′ ̸= ∅ and B ⊆ Bˆ′.
+Proof of claim: Fix B ∈ F . There then exists an index j such that B ∈ Fj. By the maximality of Gj, there exists a ball B′ ∈ ∪j
+k=1Gk
+with B ∩ B′ ̸= ∅. But diam B′ ≥ D
+2j and diam B ≤ D
+2j−1 ; so that
+diam B ≤ 2 diam B′. Thus B ⊆ Bˆ′, as claimed.
+
+
+1.5 Covering theorems 37
+A technical consequence we will need later is this:
+THEOREM 1.25 (Variant of Vitali Covering Theorem). Assume that F is a fine cover of A by closed balls and
+sup{diam B | B ∈ F } < ∞.
+Then there exists a countable family G of disjoint balls in F such that for each finite subset {B1, . . . , Bm} ⊆ F , we have
+A−
+m
+⋃
+k=1
+Bk ⊆
+⋃
+B ∈G −{B1 ,...,Bm }
+Bˆ.
+Proof. Choose G as in the proof of the Vitali Covering Theorem and select {B1, . . . , Bm} ⊆ F .
+If A ⊆ ∪m
+k=1Bk, we are done. Otherwise, let x ∈ A − ∪m
+k=1Bk. Since the balls in F are closed and F is a fine cover, there exists B ∈ F with x ∈ B and B ∩ Bk = ∅ for k = 1, . . . , m. But then, from the claim in the proof above, there exists a ball B′ ∈ G such that B ∩ B′ ̸= ∅ and so B ⊆ Bˆ′.
+Next we show we can measure and theoretically “fill up” an arbitrary open set with many countably disjoint closed balls.
+THEOREM 1.26 (Filling open sets with balls). Let U ⊂ Rn be open, δ > 0. There exists a countable collection G of disjoint closed balls in U such that diam B < δ for all B ∈ G and
+Ln
+(
+U−
+⋃
+B∈G
+B
+)
+= 0.
+Proof. 1. Fix 1 − 1
+5n < θ < 1. Assume first Ln(U ) < ∞.
+2. Claim: There exists a finite collection {Bi}M1
+i=1 of disjoint closed balls in U such that diam Bi < δ for i = 1, . . . , M1, and
+Ln
+(
+U−
+M1
+⋃
+i=1
+Bi
+)
+≤ θLn(U ). (⋆)
+
+
+38 General Measure Theory
+Proof of claim: Let F1 := {B ⊆ U | diam B < δ}. By the Vitali Covering Theorem there exists a countable disjoint family G1 ⊆ F1 such that
+U⊆
+⋃
+B∈G1
+Bˆ.
+Thus
+Ln(U ) ≤
+∑
+B∈G1
+Ln(Bˆ) = 5n ∑
+B∈G1
+Ln(B) = 5nLn
+(
+⋃
+B∈G1
+B
+)
+.
+Hence
+Ln
+(
+⋃
+B∈G1
+B
+)
+≥1
+5n Ln(U ),
+and consequently
+Ln
+(
+U−
+⋃
+B∈G1
+B
+)
+≤
+(
+1− 1
+5n
+)
+Ln(U ).
+Since G1 is countable and since 1 − 1
+5n < θ < 1, there exist finitely many balls B1, . . . , BM1 in G1 satisfying (⋆) .
+3. Now let
+U2 := U −
+M1
+⋃
+i=1
+Bi,
+F2 := {B | B ⊆ U2, diam B < δ} ,
+and, as above, find finitely many disjoint balls BM1+1, . . . , BM2 in F2 such that
+Ln
+(
+U−
+M2
+⋃
+i=1
+Bi
+)
+= Ln
+(
+U2 −
+M2
+⋃
+i=M1+1
+Bi
+)
+≤ θLn(U2) ≤ θ2Ln(U ).
+4. Continue this process to obtain a countable collection of disjoint balls such that
+Ln
+(
+U−
+Mk
+⋃
+i=1
+Bi
+)
+≤ θkLn(U ) (k = 1, . . . ).
+Since θk → 0, the theorem is proved if Ln(U ) < ∞.
+
+
+1.5 Covering theorems 39
+Should Ln(U ) = ∞, we apply the above construction to each of the open sets
+Um := {x ∈ U | m < |x| < m + 1} (m = 0, 1, . . . ).
+Remark. See also Theorem 1.28 in the next section, which replaces Ln in the preceding proof by an arbitrary Radon measure.
+1.5.2 Besicovitch’s Covering Theorem
+If μ is an arbitrary Radon measure on Rn, there is no systematic
+way to control μ(Bˆ) in terms of μ(B). Vitali’s Covering Theorem is consequently not so useful for studying such a measure; we need instead a covering theorem that does not require us to enlarge balls.
+THEOREM 1.27 (Besicovitch’s Covering Theorem).
+There exists a constant Nn, depending only on the dimension n, with the following property:
+If F is any collection of nondegenerate closed balls in Rn with
+sup{diam B | B ∈ F } < ∞
+and if A is the set of centers of balls in F , then there exist Nn countable collections G1, . . . , GNn of disjoint balls in F such that
+A⊆
+Nn
+⋃
+i=1
+⋃
+B∈Gi
+B.
+Proof. 1. First suppose that A is bounded. Write
+D := sup{diam B | B ∈ F }.
+Choose any ball B1 = B(a1, τ1) ∈ F such that τ1 ≥ 3
+4
+D
+2 . Inductively
+choose Bj for j ≥ 2, as follows. Let Aj := A − ∪j−1
+i=1 Bi. If Aj = ∅, stop and set J := j − 1. If Aj ̸= ∅, choose Bj = B(aj, rj) ∈ F such that aj ∈ Aj and
+rj ≥ 3
+4 sup{r | B(a, r) ∈ F , a ∈ Aj}.
+If Aj ̸= ∅ for all j, set J := ∞.
+2 Claim #1: If j > i, then rj ≤ 4
+3 ri.
+
+
+40 General Measure Theory
+Proof of claim: Suppose j > i. Then aj ∈ Ai and so
+ri ≥ 3
+4 sup{r | B(A, r) ∈ F , a ∈ Ai} ≥ 3
+4 rj.
+3. Claim #2: The balls {B(aj, rj
+3 )}J
+j=1 are disjoint.
+Proof of claim: Let j > i. Then aj ∈/ Bi; hence
+|ai − aj | > ri = ri
+3 + 2ri
+3 ≥ ri
+3 +2
+3
+3
+4 rj > ri
+3 + rj
+3.
+4. Claim #3: If J = ∞, then limj→∞ rj = 0.
+Proof of claim: By Claim #2 the balls {B(aj, rj
+3 )}J
+j=1 are disjoint. Since aj ∈ A and A is bounded, rj → 0.
+5. Claim #4: A ⊆ ∪J
+j=1Bj .
+Proof of claim: If J < ∞, this is trivial. Suppose J = ∞. If a ∈ A, there exists an r > 0 such that B(a, r) ∈ F . Then by Claim #3, there exists an rj with rj < 3
+4 r, a contradiction to the choice of rj, if a ∈/ ∪j−1
+i=1 Bi.
+6. Fix k > 1 and let I := {j | 1 ≤ j < k, Bj ∩ Bk ̸= ∅}. We need to estimate the cardinality of I. Set
+K := I ∩ {j | rj ≤ 3rk}.
+7. Claim #5: Card(K) ≤ 20n.
+Proof of claim: Let j ∈ K. Then Bj ∩ Bk ̸= ∅ and rj ≤ 3rk. Choose
+any x ∈ B(aj, rj
+3 ). Then
+|x − ak| ≤ |x − aj| + |aj − ak| ≤ rj
+3 + rj + rk
+=4
+3 rj + rk ≤ 4rk + rk = 5rk.
+Thus B(aj, rj
+3 ) ⊆ B(ak, 5rk). Recall from Claim #2 that the balls
+B(ai, ri
+3 ) are disjoint. Thus Claim #1 implies
+α(n)5nrn
+k = Ln(B(ak, 5rk)) ≥
+∑
+j∈K
+Ln (
+B
+(
+aj, rj
+3
+))
+=
+∑
+j∈K
+α(n)
+( rj
+3
+)n
+≥
+∑
+j∈K
+α(n)
+( rk
+4
+)n
+
+
+1.5 Covering theorems 41
+= Card(K)α(n) rn
+k
+4n .
+Consequently,
+5n ≥ Card(K) 1
+4n .
+8. We must now estimate Card(I − K).
+Let i, j ∈ I − K, with i ̸= j. Then 1 ≤ i,j < k, Bi ∩ Bk ̸= ∅, Bj ∩ Bk ̸= ∅, ri > 3rk, and rj > 3rk. For simplicity of notation, we assume ak = 0.
+Let 0 ≤ θ ≤ π be the angle between the vectors ai and aj. We want to find a lower bound on θ, and to this end we first assemble some geometric facts:
+Since i, j < k, 0 = ak ∈/ Bi ∪ Bj. Thus ri < |ai| and rj < |aj |. Since Bi ∩ Bk ̸= ∅ and Bj ∩ Bk ̸= ∅, |ai| ≤ ri + rk and |aj| ≤ rj + rk. Finally, without loss of generality we can assume |ai| ≤ |aj|. In summary,
+⎧
+⎪ ⎨
+⎪ ⎩
+3rk < ri < |ai| ≤ ri + rk
+3rk < rj < |aj | ≤ rj + rk
+|ai| ≤ |aj|.
+9. Claim #6a: If cos θ > 5
+6 , then ai ∈ Bj.
+
+
+42 General Measure Theory
+Proof of claim: Suppose |ai − aj| ≥ |aj|; then the law of cosines gives
+cos θ = |ai|2 + |aj |2 − |ai − aj|2
+2|ai||aj | ≤ |ai|2
+2|ai||aj | = |ai|
+2|aj | ≤ 1
+2<5
+6.
+Suppose instead that |ai − aj | ≤ |aj | and ai ∈/ Bj. Then rj < |ai − aj| and
+cos θ = |ai|2 + |aj|2 − |ai − aj|2
+2|ai||aj |
+= |ai|
+2|aj | + (|aj| − |ai − aj|)(|aj | + |ai − aj|)
+2|ai||aj |
+≤1
+2 + (|aj| − |ai − aj|)(2|aj|)
+2|ai||aj |
+≤1
+2 + rj + rk − rj
+ri
+=1
+2 + rk
+ri
+≤5
+6.
+10. Claim #6b: If ai ∈ Bj, then
+0 ≤ |ai − aj| + |ai| − |aj| ≤ |aj|ε(θ),
+for
+ε(θ) := 8
+3 (1 − cos θ).
+Proof of claim: Since ai ∈ Bj, we must have i < j; hence aj ∈/ Bi and so |ai − aj | > ri. Thus
+0 ≤ |ai − aj| + |ai| − |aj|
+|aj |
+≤ |ai − aj| + |ai| − |aj|
+|aj | · |ai − aj| − |ai| + |aj|
+|ai − aj |
+= |ai − aj|2 − (|aj | − |ai|)2
+|aj||ai − aj|
+= |ai|2 + |aj |2 − 2|ai||aj | cos θ|ai|2 − |aj|2 + 2|ai||aj |
+|aj||ai − aj|
+= 2|ai|(1 − cos θ)
+|ai − aj|
+
+
+1.5 Covering theorems 43
+≤ 2(ri + rk)(1 − cos θ)
+ri
+≤ 2(1 + 1
+3 )ri(1 − cos θ)
+ri
+= ε(θ).
+11. Claim #6c: If ai ∈ Bj, then cos θ ≤ 61
+64 .
+Proof of claim: Since ai ∈ Bj and aj ∈/ Bi, we have ri < |ai − aj| ≤ rj. Since i < j, rj ≤ 4
+3 ri. Therefore,
+|ai − aj| + |ai| − |aj| ≥ ri + ri − rj − rk
+≥3
+2 rj − rj − rk
+=1
+2 rj − rk ≥ 1
+6 rj
+=1
+6
+3
+4 (rj + 1
+3 rj) ≥ 1
+8 (rj + rk)
+≥1
+8 |aj |.
+Then, by Claim #6b,
+1
+8 |aj | ≤ |ai − aj | + |ai| − |aj | ≤ |aj |ε(θ).
+Hence cos θ ≤ 61
+64 .
+12. Claim #6: For all i, j ∈ I − K with i ̸= j, let θ denote the angle between ai − ak and aj − ak. Then
+θ ≥ arccos 61
+64 =: θ0 > 0.
+This follows from Claims #6a–c.
+13. Claim #7: There exists a constant Ln depending only on n such that Card(I − K) ≤ Ln.
+Proof of claim: First, fix r0 > 0 such that if x ∈ ∂B(1) and y, z ∈ B(x, r0), then the angle between y and z is less than the constant θ0 from Claim #6. Choose Ln so that ∂B(1) can be covered by Ln balls with radius r0 and centers on ∂B(1), but cannot be covered by Ln − 1 such balls.
+
+
+44 General Measure Theory
+Then ∂Bk can be covered by Ln balls of radius r0rk, with centers on ∂Bk. By Claim #6, if i, j ∈ I −K with i ̸= j, then the angle between ai − aj and aj − ak exceeds θ0. Thus by the construction of r0, the rays aj − ak and ai − ak cannot both go through the same ball on ∂Bk. Consequently, Card(I − K) ≤ Ln.
+14. Finally, set Mn := 20n + Ln + 1. Then by Claims #5 and #7,
+Card(I) = Card(K) + Card(I − K) ≤ 20n + Ln < Mn.
+15. We next define the families of disjoint balls G1, . . . , GMn.
+First, we define σ : {1, 2, . . . } → {1, . . . , Mn}:
+(a) Let σ(i) = i for 1 ≤ i ≤ Mn.
+(b) For k ≥ Mn inductively define σ(k + 1) as follows. According to the calculations above,
+Card{j | 1 ≤ j ≤ k, Bj ∩ Bk+1 ̸= ∅} < Mn,
+so there exists l ∈ {1, . . . , Mn} such that Bk+1 ∩ Bj = ∅ for all j such that σ(j) = l (j = 1, . . . , k). Set σ(k + 1) = l.
+Now, let Gj = {Bi | σ(i) = j}
+for 1 ≤ j ≤ Mn. From the definition of σ(i) it follows that each Gj consists of disjoint balls from F . Moreover, each Bi is in some Gj; so that
+A⊆
+J
+⋃
+i=1
+Bi =
+Mn
+⋃
+i=1
+⋃
+B∈Gi
+B.
+16. Next, we extend the result to unbounded sets A.
+For l ≥ 1, let Al = A ∩ {x | 3D(l − 1) ≤ |x| < 3Dl} and set F l := {B(a, r) ∈ F | a ∈ Al}. Then by Step 15, there exist countable collections Gl1, . . . , Gl
+Mn of disjoint closed balls in F l such that
+Al ⊆
+Mn
+⋃
+i=1
+⋃
+B∈Gl
+i
+B.
+
+
+1.5 Covering theorems 45
+Let
+Gj :=
+∞
+⋃
+l=1
+G2l−1
+j for 1 ≤ j ≤ Mn,
+Gj+Mn =
+∞
+⋃
+l=1
+G2l
+j for 1 ≤ j ≤ Mn.
+Set Nn := 2Mn.
+We now see as a consequence of Besicovitch’s Theorem that we can “fill up” an arbitrary open set with a countable collection of disjoint balls in such a way that the remainder has μ-measure zero.
+THEOREM 1.28 (More on filling open sets with balls). Let μ be a Borel measure on Rn, and F any collection of nondegenerate closed balls. Let A denote the set of centers of the balls in F . Assume
+μ(A) < ∞
+and
+inf{r | B(a, r) ∈ F } = 0
+for each a ∈ A. Then for each open set U ⊆ Rn, there exists a countable collection G of disjoint balls in F such that
+⋃
+B∈G
+B⊆U
+and
+μ
+(
+(A ∩ U ) −
+⋃
+B∈G
+B
+)
+= 0.
+Remark. The set A need not be μ-measurable here. Compare this assertion with Theorem 1.26 based on Vitali’s Covering Theorem, above.
+Proof. 1. Fix 1 − 1
+Nn < θ < 1.
+Claim: There exists a finite collection {B1, . . . BM1 } of disjoint closed balls in U such that
+μ
+(
+(A ∩ U ) −
+M1
+⋃
+i=1
+Bi
+)
+≤ θμ(A ∩ U ). (⋆)
+
+
+46 General Measure Theory
+Proof of claim: Let F1 = {B ∈ F | diam B ≤ 1, B ⊂ U }. By Bescovitch’s Theorem there exist families G1, . . . , GNn of disjoint balls in F1 such that
+A∩U ⊆
+Nn
+⋃
+i=1
+⋃
+B∈Gi
+B.
+Thus
+μ(A ∩ U ) ≤
+Nn
+∑
+i=1
+μ
+(
+A∩U ∩
+⋃
+B∈Gi
+B
+)
+.
+Consequently, there exists an integer j between 1 and Nn for which
+μ
+⎛
+⎝A ∩ U ∩
+⋃
+B∈Gj
+B
+⎞
+⎠≥ 1
+Nn
+μ(A ∩ U ).
+By Theorem 1.6, there exist balls B1, . . . , BM1 ∈ Gj such that
+μ
+(
+A∩U ∩
+M1
+⋃
+i=1
+Bi
+)
+≥ (1 − θ)μ(A ∩ U ).
+But
+μ(A ∩ U ) = μ
+(
+A∩U ∩
+M1
+⋃
+i=1
+Bi
+)
++μ
+(
+(A ∩ U ) −
+M1
+⋃
+i=1
+Bi
+)
+,
+since ⋃M1
+i=1 Bi is μ-measurable. Therefore (⋆) holds.
+2. Now let U2 := U − ⋃M1
+i=1 Bi and F2 := {B | B ∈ F , diam B ≤ 1, B ⊂ U2}. As above, we find finitely many disjoint balls BM1+1, . . . , BM2 such that
+μ
+(
+(A ∩ U ) −
+M2
+⋃
+i=1
+Bi
+)
+=μ
+(
+(A ∩ U2) −
+M2
+⋃
+i=M1+1
+Bi
+)
+≤ θμ(A ∩ U2)
+≤ θ2μ(A ∩ U ).
+3. Continue this process to obtain a countable collection of disjoint balls from F and within U such that
+μ
+(
+(A ∩ U ) −
+Mk
+⋃
+i=1
+Bi
+)
+≤ θkμ(A ∩ U ).
+Since θk → 0 and μ(A) < ∞, the theorem is proved.
+
+
+Differentiation of Radon measures 47
+1.6 Differentiation of Radon measures
+We now utilize the covering theorems of the previous section to study the differentiation of Radon measures on Rn.
+1.6.1 Derivatives
+Let μ and ν be Radon measures on Rn.
+DEFINITION 1.20. For each point x ∈ Rn, define
+Dμν(x) :=
+⎧
+⎨
+⎩
+lim sup
+r→0
+ν(B(x, r))
+μ(B(x, r)) if μ(B(x, r)) > 0 for all r > 0
++∞ if μ(B(x, r)) = 0 for some r > 0
+and
+Dμν(x) :=
+⎧
+⎨
+⎩
+lim inf
+r→0
+ν(B(x, r))
+μ(B(x, r)) if μ(B(x, r)) > 0 for all r > 0
++∞ if μ(B(x, r)) = 0 for some r > 0.
+DEFINITION 1.21. If Dμν(x) = Dμν(x) < +∞, we say ν is differentiable with respect to μ at x and write
+Dμν(x) := Dμν(x) = Dμν(x).
+Dμν is the derivative of ν with respect to μ. We also call Dμν the density of ν with respect to μ.
+Our goals are to learn when Dμν exists and when ν can be recovered by integrating Dμν.
+LEMMA 1.2. Fix 0 < α < ∞. Then
+(i) A ⊆ {x ∈ Rn | Dμν(x) ≤ α} implies ν(A) ≤ αμ(A).
+(ii) A ⊆ {x ∈ Rn | Dμν(x) ≥ α} implies ν(A) ≥ αμ(A).
+Remark. The set A need not be μ- nor ν-measurable here.
+
+
+48 General Measure Theory
+Proof. We may assume μ(Rn), ν(Rn) < ∞, since we could otherwise consider μ and ν restricted to compact subsets of Rn.
+Fix ε > 0. Let U be open, A ⊆ U , where A satisfies the hypothesis of (i). Set
+F := {B | B = B(a, r), a ∈ A, B ⊆ U, ν(B) ≤ (α + ε)μ(B)}.
+Then inf{r | B(a, r) ∈ F } = 0 for each a ∈ A, and so Theorem 1.28 provides us with a countable collection G of disjoint balls in F such that
+ν
+(
+A−
+⋃
+B∈G
+B
+)
+= 0.
+Then
+ν(A) ≤
+∑
+B∈G
+ν(B) ≤ (α + ε)
+∑
+B∈G
+μ(B) ≤ (α + ε)μ(U ).
+This estimate is valid for each open set U ⊇ A, and hence Theorem 1.8 implies ν(A) ≤ (α + ε)μ(A). This proves (i). The proof of (ii) is similar.
+THEOREM 1.29 (Differentiating measures). Let μ and ν be Radon measures on Rn. Then
+(i) Dμν exists and is finite μ-a.e., and
+(ii) Dμν is μ-measurable.
+Proof. We may assume ν(Rn), μ(Rn) < ∞, as we could otherwise consider μ and ν restricted to compact subsets of Rn.
+1. Claim #1: Dμν exists and is finite μ-a.e.
+Proof of claim: Let I := {x | Dμν(x) = +∞}. Observe that for each α > 0, I ⊆ {x | Dμν(x) ≥ α}. Thus by Lemma 1.2,
+μ(I) ≤ 1
+α ν (I ).
+Send α → ∞ to conclude μ(I) = 0, and so Dμν is finite μ-a.e.
+For each 0 < a < b, define
+R(a, b) := {x | Dμν(x) < a < b < Dμν(x) < ∞}.
+
+
+1.6 Differentiation of Radon measures 49
+Again using Lemma 1.2, we see that
+bμ(R(a, b)) ≤ ν(R(a, b)) ≤ aμ(R(a, b));
+whence μ(R(a, b)) = 0, since b > a. Furthermore,
+{x | Dμν(x) < Dμν(x) < ∞} =
+⋃
+0<a<b
+a,b rational
+R(a, b);
+and consequently Dμν exists and is finite μ-a.e.
+2. Claim #2: For each x ∈ Rn and r > 0,
+lim sup
+y→x
+μ(B(y, r)) ≤ μ(B(x, r)).
+A similar assertion holds for ν.
+Proof of claim: Choose yk ∈ Rn with yk → x. Set fk := χB(yk,r) and f = χB(x,r). Then
+lim sup
+k→∞
+fk ≤ f
+and so lim inf
+k→∞ (1 − fk) ≥ (1 − f ).
+Thus by Fatou’s Lemma,
+∫
+B(x,2r)
+(1 − f ) dμ ≤
+∫
+B(x,2r)
+lim inf
+k→∞ (1 − fk) dμ
+≤ lim inf
+k→∞
+∫
+B(x,2r)
+(1 − fk) dμ;
+that is,
+μ(B(x, 2r)) − μ(B(x, r)) ≤ lim inf
+k→∞ (μ(B(x, 2r)) − μ(B(yk, r))).
+Now since μ is a Radon measure, μ(B(x, 2r)) < ∞; the claim follows.
+3. Claim #3: Dμν is μ-measurable.
+Proof of claim: According to Claim #2, for all r > 0, the functions x 0→ μ(B(x, r)) and x 0→ ν(B(x, r)) are upper semicontinuous and thus Borel measurable. Consequently, for every r > 0,
+fr(x) :=
+⎧
+⎨
+⎩
+ν(B(x,r))
+μ(B(x,r)) if μ(B(x, r)) > 0
++∞ if μ(B(x, r)) = 0
+
+
+50 General Measure Theory
+is μ-measurable. But
+Dμν = rli→m0 fr = kli→m∞ f 1
+k μ-a.e.
+and so Dμν is μ-measurable.
+1.6.2 Integration of derivatives; Lebesgue decomposition
+DEFINITION 1.22. Assume μ and ν are Borel measures on Rn.
+(i) The measure ν is absolutely continuous with respect to μ, written
+ν << μ,
+provided μ(A) = 0 implies ν(A) = 0 for all A ⊆ Rn.
+(ii) The measures ν and μ are mutually singular, written
+ν ⊥ μ,
+if there exists a Borel subset B ⊆ Rn such that
+μ(Rn − B) = ν(B) = 0.
+THEOREM 1.30 (Differentiation of Radon measures). Let ν, μ be Radon measures on Rn, with ν << μ. Then
+ν(A) =
+∫
+A
+Dμν dμ
+for all μ-measurable sets A ⊆ Rn.
+Remark. This is a version of the Radon–Nikodym Theorem. Observe we prove not only that ν has a density with respect to μ, but also that this density Dμν can be computed by “differentiating” ν with respect to μ. These assertions comprise in effect the fundamental theorem of calculus for Radon measures on Rn.
+Proof. 1. Let A be μ-measurable. Then there exists a Borel set B with A ⊆ B, μ(B − A) = 0. Thus ν(B − A) = 0 and so A is ν-measurable. Hence each μ-measurable set is also ν-measurable.
+2. Set
+Z := {x ∈ Rn | Dμν(x) = 0}, I := {x ∈ Rn | Dμν(x) = +∞};
+
+
+1.6 Differentiation of Radon measures 51
+Z and I are μ-measurable. By Theorem 1.29, μ(I) = 0 and so ν(I) = 0. Also, Lemma 1.2 implies ν(Z) ≤ αμ(Z) for all α > 0; thus ν(Z) = 0. Hence
+ν(Z) = 0 =
+∫
+Z
+Dμν dμ
+and
+ν(I) = 0 =
+∫
+I
+Dμν dμ.
+3. Now let A be μ-measurable and fix 1 < t < ∞. Define for each integer m
+Am := A ∩ {x ∈ Rn | tm ≤ Dμν(x) < tm+1}.
+Then Am is μ-measurable, and so also ν-measurable. Moreover,
+A−
+∞
+⋃
+m=−∞
+Am ⊆ Z ∪ I ∪ {x | Dμν(x) ̸= Dμν(x)};
+and hence
+ν
+(
+A−
+∞
+⋃
+m=−∞
+Am
+)
+= 0.
+Consequently, Lemma 1.2 implies
+ν(A) =
+∞
+∑
+m=−∞
+ν(Am) ≤
+∑
+m
+tm+1μ(Am)
+=t
+∑
+m
+tmμ(Am) ≤ t
+∫
+A
+Dμν dμ.
+Similarly, Lemma 1.2 gives
+ν(A) =
+∑
+m
+ν(Am) ≥
+∑
+m
+tmμ(Am)
+= t−1 ∑
+m
+tm+1μ(Am) ≥ t−1 ∑
+m
+∫
+Am
+Dμν dμ
+= t−1
+∫
+Am
+Dμν dμ.
+Thus 1
+t
+∫
+A Dμν dμ ≤ ν(A) ≤ t ∫
+A Dμν dμ for all 1 < t < ∞. Now
+send t → 1+.
+
+
+52 General Measure Theory
+THEOREM 1.31 (Lebesgue Decomposition Theorem). Let ν and μ be Radon measures on Rn.
+(i) Then ν = νac + νs,
+where νac, νs are Radon measures on Rn with
+νac << μ, νs ⊥ μ.
+(ii) Furthermore,
+Dμν = Dμνac, Dμνs = 0 μ-a.e.;
+and consequently
+ν(A) =
+∫
+A
+Dμν dμ + νs(A)
+for each Borel set A ⊆ Rn.
+DEFINITION 1.23. We call νac the absolutely continuous part and νs the singular part of ν with respect to μ.
+Proof. 1. As before, we may as well assume μ(Rn), ν(Rn) < ∞.
+Define
+E := {A ⊆ Rn | A Borel, μ(Rn − A) = 0},
+and choose Bk ∈ E such that
+ν(Bk) ≤ inf
+A∈E ν(A) + 1
+k (k = 1 . . . ).
+Write B := ∩∞
+k=1Bk. Since
+μ(Rn − B) ≤
+∞
+∑
+k=1
+μ(Rn − Bk) = 0.
+we have B ∈ E, and so
+ν(B) = inf
+A∈E ν(A). (⋆)
+Define νac := ν B, νs := ν (Rn − B);
+these are Radon measures according to Theorem 1.7.
+
+
+Lebesgue points, approximate continuity 53
+3. Now suppose A ⊆ B, A is a Borel set, μ(A) = 0, but ν(A) > 0. Then B − A ∈ E and ν(B − A) < ν(B), a contradiction to (⋆) . Consequently, νac << μ. On the other hand, μ(Rn − B) = 0, and thus νs ⊥ μ.
+Finally, fix α > 0 and set
+C := {x ∈ B | Dμνs(x) ≥ α}.
+According to Lemma 1.2,
+αμ(C) ≤ νs(C) = 0,
+and therefore Dμνs = 0 μ-a.e. This implies
+Dμνac = Dμν μ-a.e.
+1.7 Lebesgue points, approximate continuity
+1.7.1 Differentiation Theorem
+NOTATION We denote the average of f over the set E with respect μ by ∫
+−
+E
+f dμ := 1
+μ(E)
+∫
+E
+f dμ,
+provided 0 < μ(E) < ∞ and the integral is defined.
+THEOREM 1.32 (Lebesgue–Besicovitch Differentiation Theorem).
+Let μ be a Radon measure on Rn and f ∈ L1
+loc(Rn, μ). Then
+rli→m0
+∫
+−
+B(x,r)
+f dμ = f (x)
+for μ-a.e. x ∈ Rn.
+Proof. For Borel sets B ⊆ Rn, define ν±(B) := ∫
+B f ± dμ, and for
+arbitrary A ⊆ Rn, let ν±(A) := inf{ν±(B) | A ⊆ B, B Borel}. Then ν+ and ν− are Radon measures, and so, according to Theorem 1.30,
+ν+(A) =
+∫
+A
+Dμν+ dμ =
+∫
+A
+f + dμ
+
+
+54 General Measure Theory
+and
+ν−(A) =
+∫
+A
+Dμν− dμ =
+∫
+A
+f − dμ
+for all μ-measurable A. Thus Dμν± = f ± μ-a.e. Consequently,
+rli→m0
+∫
+−
+B(x,r)
+f dμ = rli→m0
+1
+μ(B(x, r))[ν+(B(x, r)) − ν−(B(x, r))]
+= Dμν+(x) − Dμν−(x)
+= f +(x) − f −(x) = f (x)
+for μ-a.e. point x.
+THEOREM 1.33 (Lebesgue points for Radon measures). Let μ be a Radon measure on Rn, and suppose f ∈ Lp
+loc(Rn, μ) for some 1 ≤ p < ∞. Then
+rli→m0
+∫
+−
+B(x,r)
+|f − f (x)|p dμ = 0 (⋆)
+for μ-a.e. point x.
+DEFINITION 1.24. A point x for which (⋆) holds is called a Lebesgue point of f with respect to μ.
+Proof. Let {ri}∞
+i=1 be a countable dense subset of R. By the LebesgueBesicovitch Differentiation Theorem 1.32,
+rli→m0
+∫
+−
+B(x,r)
+|f − ri|p dμ = |f (x) − ri|p
+for μ-a.e. x and i = 1, 2, . . . . Thus there exists a set A ⊆ Rn such that μ(A) = 0, for which x ∈ Rn − A implies
+rli→m0
+∫
+−
+B(x,r)
+|f − ri|p dμ = |f (x) − ri|p
+for all i. Fix x ∈ Rn−A and ε > 0. Choose ri such that |f (x)−ri|p < ε
+2p .
+Then
+lim sup
+r→0
+∫
+−
+B(x,r)
+|f − f (x)|p dμ
+≤ 2p−1
+[
+lim sup
+r→0
+∫
+−
+B(x,r)
+|f − ri|p dμ
+
+
+1.7 Lebesgue points, approximate continuity 55
++
+∫
+−
+B(x,r)
+|f (x) − ri|p dμ
+]
+= 2p−1[|f (x) − ri|p + |f (x) − ri|p] < ε.
+For the case μ = Ln, this stronger assertion holds:
+THEOREM 1.34 (Differentiation with noncentered balls). Assume that f ∈ Lp
+loc for some 1 ≤ p < ∞. Then
+lim
+B→{x}
+∫
+−
+B
+|f − f (x)|p dy = 0 for Ln-a.e. x.,
+where the limit is taken over all closed balls B containing x, as diam B → 0.
+The point is that the balls need not be centered at x.
+Proof. We show that for each sequence of closed balls {Bk}∞
+k=1 with x ∈ Bk and dk := diam Bk → 0,
+∫
+−
+Bk
+|f − f (x)|p dy → 0
+as k → ∞, at each Lebesgue point of f .
+Choose balls {Bk}∞
+k=1 as above. Then Bk ⊆ B(x, dk), and consequently,
+∫
+−
+Bk
+|f − f (x)|p dy ≤ 2n
+∫
+−
+B (x,dk )
+|f − f (x)|p dy.
+The right-hand side goes to zero if x is a Lebesgue point.
+THEOREM 1.35 (Points of density 1 and density 0). Let E ⊆ Rn be Ln-measurable. Then
+rli→m0
+Ln(B(x, r) ∩ E)
+Ln(B(x, r)) = 1 for Ln-a.e. x ∈ E
+and
+xli→m0
+Ln(B(x, r) ∩ E)
+Ln(B(x, r)) = 0 for Ln-a.e. x ∈ Rn − E.
+Proof. Set f = χE, μ = Ln in the Lebesgue–Besicovitch Differentiation Theorem.
+
+
+56 General Measure Theory
+DEFINITION 1.25. Let E ⊆ Rn. A point x ∈ Rn is a point of density 1 for E if
+rli→m0
+Ln(B(x, r) ∩ E)
+Ln(B(x, r)) = 1
+and a point of density 0 for E if
+rli→m0
+Ln(B(x, r) ∩ E)
+Ln(B(x, r)) = 0.
+Remark. We regard the set of points of density 1 of E as comprising the measure theoretic interior of E; according to Theorem 1.35, Lna.e. point in an Ln-measurable set E belongs to its measure theoretic interior. Similarly, the points of density 0 for E make up the measure theoretic exterior of E. In Section 5.8 we will define and investigate the measure theoretic boundary of certain sets E.
+DEFINITION 1.26. Assume f ∈ L1
+loc(Rn). Then
+f ∗(x) :=
+⎧
+⎨
+⎩
+rli→m0
+∫
+−
+B(x,r)
+f dy if this limit exists
+0 otherwise
+is the precise representative of f .
+Remark. Note that if f, g ∈ L1
+loc(Rn), with f = g Ln-a.e., then
+f ∗ = g∗ for all points x ∈ Rn. In view of the Lebesgue–Besicovitch Differentiation Theorem with μ = Ln, limr→0
+−∫ B(x,r)f dy exists Lna.e. In Chapters 4 and 5, we will prove that if f is a Sobolev or BV function, then f ∗ = f , except possibly on a “very small” set of appropriate capacity or Hausdorff measure zero.
+Observe also that it is possible for the above limit to exist even if x is not a Lebesgue point of f ; cf. Theorem 5.19 in Section 5.9.
+1.7.2 Approximate limits, approximate continuity
+DEFINITION 1.27. Let f : Rn → Rm. We say l ∈ Rm is the approximate limit of f as y → x, written
+ap lim
+y→x
+f (y) = l,
+if for each ε > 0,
+rli→m0
+Ln(B(x, r) ∩ {|f − l| ≥ ε})
+Ln(B(x, r)) = 0.
+
+
+1.7 Lebesgue points, approximate continuity 57
+So if l is the approximate limit of f at x, then for each ε > 0 the set {|f − l| ≥ ε} has density 0 at x.
+THEOREM 1.36 (Uniqueness of approximate limits). An approximate limit, if it exists, is unique.
+Proof. Assume for each ε > 0 that both
+Ln(B(x, r) ∩ {|f − l| ≥ ε})
+Ln(B(x, r)) → 0 (⋆)
+and Ln(B(x, r) ∩ {|f − l′| ≥ ε})
+Ln(B(x, r)) → 0 (⋆⋆)
+as r → 0. Then if l ̸= l′, we set ε := |l−l′|
+3 and observe for each y ∈ B(x, r) that
+3ε = |l − l′| ≤ |f (y) − l| + |f (y) − l′|.
+Thus
+B(x, r) ⊆ {|f − l| ≥ ε} ∪ {|f − l′| ≥ ε}.
+Therefore
+Ln(B(x, r)) ≤ Ln(B(x, r) ∩ {|f − l| ≥ ε})
++ Ln(B(x, r) ∩ {|f − l′| ≥ ε}),
+a contradiction to (⋆), (⋆⋆) .
+DEFINITION 1.28. Let f : Rn → R.
+(i) We say l is the approximate lim sup of f as y → x, written
+ap lim sup
+y→x
+f (y) = l,
+if l is the infimum of the real numbers t such that
+rli→m0
+Ln(B(x, r) ∩ {f > t})
+Ln(B(x, r)) = 0.
+(ii) Similarly, l is the approximate lim inf of f as y → x, written
+ap lim inf
+y→x
+f (y) = l,
+if l is the supremum of the real numbers t such that
+rli→m0
+Ln(B(x, r) ∩ {f < t})
+Ln(B(x, r)) = 0.
+
+
+58 General Measure Theory
+DEFINITION 1.29. We say f : Rn → Rm is approximately continuous at x ∈ Rn if
+ap lim
+y→x
+f (y) = f (x).
+THEOREM 1.37 (Measurability and approximate continuity). Suppose that f : Rn → Rm is Ln-measurable. Then f is approximately continuous Ln-a.e.
+Remark. Thus a measurable function is “practically continuous at practically every point.” The converse is also true; see Federer [F, Section 2.9.13].
+Proof. 1. Claim: There exist disjoint, compact sets {Ki}∞
+i=1 ⊆ Rn such that
+Ln (Rn − (∪∞
+i=1Ki)) = 0
+and for each i = 1, 2, . . . , f |Ki is continuous.
+Proof of claim: For each positive integer m, set Bm := B(m). By Lusin’s Theorem, there exists a compact set K1 ⊆ B1 such that Ln(B1 − K1) ≤ 1 and f |K1 is continuous. Assuming now K1, . . . , Km have been constructed, there exists a compact set
+Km+1 ⊆ Bm+1 − ∪m
+i=1Ki
+such that
+Ln (Bm+1 − ∪m+1
+i=1 Ki
+)≤ 1
+m+1
+and f |Km+1 is continuous.
+2. For Ln-a.e. x ∈ Ki,
+rli→m0
+Ln(B(x, r) − Ki)
+Ln(B(x, r)) = 0. (⋆)
+Define A := {x | x ∈ Ki for some i, and (⋆) holds}; then Ln(Rn − A) = 0. Let x ∈ A, so that x ∈ Ki and (⋆) holds for some fixed i. Fix ε > 0. There exists s > 0 such that y ∈ Ki and |x − y| < s imply |f (x) − f (y)| < ε.
+Then if 0 < r < s, B(x, r) ∩ {y | |f (y) − f (x)| ≥ ε} ⊆ B(x, r) − Ki. In view of (⋆) , we see that therefore
+ap lim
+y→x
+f (y) = f (x).
+
+
+Riesz Representation Theorem 59
+Remark. If f ∈ L1
+loc(Rn), the proof is much easier. Indeed, for each ε>0
+Ln(B(x, r) ∩ {|f − f (x)| > ε})
+Ln(B(x, r)) ≤ 1
+ε
+∫
+−
+B(x,r)
+|f − f (x)| dy,
+and the right-hand side goes to zero for Ln-a.e. x. In particular a Lebesgue point is a point of approximate continuity.
+In Section 5.9 we will define and discuss the related notion of approximate differentiability.
+1.8 Riesz Representation Theorem
+In this book there will be two primary sources of measures to which we will apply the foregoing abstract theory. These are (a) Hausdorff measures, constructed in Chapter 2, and (b) Radon measures characterizing certain linear functionals. These arise as follows:
+THEOREM 1.38 (Riesz Representation Theorem). Let
+L : Cc(Rn; Rm) → R
+be a linear functional satisfying
+sup{L(f ) | f ∈ Cc(Rn; Rm), |f | ≤ 1, spt(f ) ⊆ K} < ∞ (⋆)
+for each compact set K ⊂ Rn. Then there exists a Radon measure μ on Rn and a μ-measurable function σ : Rn → Rm such that
+|σ(x)| = 1 for μ-a.e. x,
+and
+L(f ) =
+∫
+Rn
+f · σ dμ
+for all f ∈ Cc(Rn; Rm).
+DEFINITION 1.30. We call μ the variation measure associated with L. It is defined for each open set V ⊂ Rn by
+μ(V ) := sup{L(f ) | f ∈ Cc(Rn; Rm), |f | ≤ 1, spt(f ) ⊆ V }.
+
+
+60 General Measure Theory
+Proof. 1. Define μ on open sets V as above and then set
+μ(A) := inf{μ(V ) | A ⊆ V open}
+for arbitrary A ⊆ Rn.
+2. Claim #1: μ is a measure.
+Proof of claim: Let V , {Vi}∞
+i=1 be open subsets of Rn, with V ⊆ ∪∞
+i=1Vi.
+Choose g ∈ Cc(Rn; Rm) such that |g| ≤ 1 and spt(g) ⊆ V . Since spt(g) is compact, there exists an index k such that spt(g) ⊆ ∪k
+j=1Vj .
+Let {ζj}k
+j=1 be a finite sequence of smooth nonnegative functions such that spt ζj ⊂ Vj for 1 ≤ j ≤ k and ∑ k
+j=1ζj = 1 on spt g. Then
+g = ∑k
+j=1 gζj, and so
+|L(g)| ≤
+k
+∑
+j=1
+|L(gζj)| ≤
+∞
+∑
+j=1
+μ(Vj ).
+Taking the supremum over g, we find μ(V ) ≤ ∑∞
+j=1 μ(Vj).
+Now let {Aj}∞
+j=1 be arbitrary sets with A ⊆ ∪∞
+j=1Aj . Fix ε > 0.
+Choose open sets Vj such that Aj ⊆ Vj and μ(Aj) + ε
+2j ≥ μ(Vj). Then
+μ(A) ≤ μ
+⎛
+⎝
+∞
+⋃
+j=1
+Vj
+⎞
+⎠≤
+∞
+∑
+j=1
+μ(Vj) ≤
+∞
+∑
+j=1
+μ(Aj) + ε.
+3. Claim #2: μ is a Radon measure.
+Proof of claim: Let U1 and U2 be open sets with dist(U1, U2) > 0. Then μ(U1 ∪ U2) = μ(U1) + μ(U2) by definition of μ. Hence if A1, A2 ⊆ Rn and dist(A1, A2) > 0, then μ(A1 ∪ A2) = μ(A1) + μ(A2). According to Caratheodory’s criterion (Theorem 1.9), μ is a Borel measure.
+Furthermore, by its definition, μ is Borel regular; indeed, given A ⊆ Rn, there exist open sets Vk such that A ⊆ Vk and μ(Vk) ≤ μ(A) + 1
+k
+for all k. Thus μ(A) = μ (∩∞
+k=1Vk) . Finally, the boundedness condition (⋆) implies μ(K) < ∞ for all compact K.
+4. Now, let Cc+(Rn) := {f ∈ Cc(Rn) | f ≥ 0}; and for f ∈ Cc+(Rn), set λ(f ) := sup{|L(g)| | g ∈ Cc(Rn; Rm), |g| ≤ f }.
+Observe that for all f1, f2 ∈ Cc+(Rn), f1 ≤ f2 implies λ(f1) ≤ λ(f2). Also λ(cf ) = cλ(f ) for all c ≥ 0 and f ∈ Cc+(Rn).
+
+
+1.8 Riesz Representation Theorem 61
+5. Claim #3: For all f1, f2 ∈ Cc+(Rn), λ(f1 + f2) = λ(f1) + λ(f2).
+Proof of claim: If g1, g2 ∈ Cc(Rn; Rm) with |g1| ≤ f1 and |g2| ≤ f2, then |g1 + g2| ≤ f1 + f2. We can furthermore assume L(g1), L(g2) ≥ 0. Therefore,
+|L(g1)| + |L(g2)| = L(g1 + g2) = |L(g1 + g2)| ≤ λ(f1 + f2).
+Taking suprema over g1 and g2 with g1, g2 ∈ Cc(Rn; Rm) gives
+λ(f1) + λ(f2) ≤ λ(f1 + f2).
+Now fix g ∈ Cc(Rn; Rm), with |g| ≤ f1 + f2. Set
+gi :=
+{ fig
+f1+f2 if f1 + f2 > 0
+0 if f1 + f2 = 0
+for i = 1, 2. Then g1, g2 ∈ Cc(Rn; Rm) and g = g1 + g2. Moreover, |gi| ≤ fi,(i = 1, 2); and consequently
+|L(g)| ≤ |L(g1)| + |L(g2)| ≤ λ(f1) + λ(f2).
+Hence, λ(f1 + f2) ≤ λ(f1) + λ(f2).
+6. Claim #4: λ(f ) = ∫
+Rn f dμ for all f ∈ Cc+(Rn).
+Proof of claim: Let ε > 0. Choose 0 = t0 < t1 < · · · < tN such that tN := 2∥f ∥L∞, 0 < ti − ti−1 < ε, and μ(f −1{ti}) = 0 for i = 1, . . . , N . Set Uj = f −1((tj−1, tj )); then Uj is open and μ(Uj) < ∞.
+By Theorem 1.8, there exist compact sets Kj such that Kj ⊆ Uj and μ(Uj − Kj) < ε
+N for j = 1, 2, . . . , N . Furthermore there exist
+functions gj ∈ Cc(Rn; Rm) with |gj| ≤ 1, spt(gj) ⊆ Uj , and |L(gj)| ≥ μ(Uj) − ε
+N . Note also that there exist functions hj ∈ Cc+(Rn) such that spt(hj) ⊆ Uj, 0 ≤ hj < 1, and hj ≡ 1 on the compact set Kj ∪ spt(gj). Then
+λ(hj) ≥ |L(gj)| ≥ μ(Uj) − ε
+N
+and
+λ(hj) = sup {|L(g)| | g ∈ Cc(Rn; Rm), |g| ≤ hj}
+≤ sup{|L(g)| | g ∈ Cc(Rn; Rm), |g| ≤ 1, spt(g) ⊆ Uj}
+= μ(Uj);
+whence μ(Uj) − ε
+N ≤ λ(hj) ≤ μ(Uj).
+
+
+62 General Measure Theory
+Define
+A :=
+{
+x | f (x)
+(
+1 − ∑N
+j=1 hj (x)
+)
+>0
+}
+.
+Then A is open and
+μ(A) = μ (∪N
+j=1(Uj − {hj = 1})) ≤
+N
+∑
+j=1
+μ(Uj − Kj) ≤ ε.
+Therefore
+λ
+(
+f − f ∑N
+j=1hj
+)
+= sup
+{
+|L(g)| ∣
+∣ g ∈ Cc(Rn; Rm), |g| ≤ f − f ∑N
+j=1hj
+}
+≤ sup{|L(g)| | g ∈ Cc(Rn; Rm), |g| ≤ ∥f ∥L∞χA}
+= ∥f ∥L∞ sup{L(g) | g ∈ Cc(Rn; Rm), |g| ≤ χA}
+= ∥f ∥L∞μ(A)
+≤ ε∥f ∥L∞.
+Hence
+λ(f ) = λ
+(
+f − f ∑N
+j=1 hj
+)
++λ
+(
+f
+∑N
+j=1 hj
+)
+≤ ε∥f ∥L∞ +
+N
+∑
+j=1
+λ(f hj) ≤ ε∥f ∥L∞ +
+N
+∑
+j=1
+tj μ(Uj )
+and
+λ(f ) ≥
+N
+∑
+j=1
+λ(f hj) ≥
+N
+∑
+j=1
+tj−1
+(
+μ(Uj) − ε
+N
+)
+≥
+N
+∑
+j=1
+tj−1μ(Uj) − tN ε.
+Finally, since
+N
+∑
+j=1
+tj−1μ(Uj) ≤
+∫
+Rn
+f dμ ≤
+N
+∑
+j=1
+tj μ(Uj ),
+we have
+∣ ∣ ∣ ∣
+λ(f ) −
+∫
+f dμ
+∣ ∣ ∣ ∣
+≤
+N
+∑
+j=1
+(tj − tj−1)μ(Uj) + ε∥f ∥L∞ + εtN
+≤ εμ(spt(f )) + 3ε∥f ∥L∞.
+
+
+1.8 Riesz Representation Theorem 63
+7. Claim #5: There exists a μ-measurable function σ : Rn → Rm satisfying assertion (ii).
+Proof of claim: Fix e ∈ Rm, |e| = 1. Define λe(f ) := L(f e) for f ∈ Cc(Rn). Then λe is linear and
+|λe(f )| = |L(f e)|
+≤ sup{|L(g)| | g ∈ Cc(Rn; Rm), |g| ≤ |f |}
+= λ(|f |) =
+∫
+Rn
+|f | dμ;
+thus we can extend λe to a bounded linear functional on L1(Rn; μ). Hence there exists σe ∈ L∞(μ) such that
+λe(f ) =
+∫
+Rn
+f σe dμ
+for f ∈ Cc(Rn)). Let e1, . . . , em be the standard basis for Rm and define σ :=
+∑m
+j=1σej ej. Then if f ∈ Cc(Rn; Rm), we have
+L(f ) =
+m
+∑
+j=1
+L((f · ej)ej) =
+m
+∑
+j=1
+∫
+(f · ej)σej dμ =
+∫
+f · σ dμ.
+8. Claim #6: |σ| = 1 μ-a.e.
+Proof of claim: Let U ⊆ Rn be open, μ(U ) < ∞. By definition,
+μ(U ) =
+sup
+{∫
+f · σ dμ ∣
+∣ f ∈ Cc(Rn; Rm), |f | ≤ 1, spt(f ) ⊂ U
+}
+. (⋆⋆)
+Now take fk ∈ Cc(Rn; Rm) such that |fk| ≤ 1, spt(fk) ⊆ U , and fk·σ → |σ| μ-a.e.; such functions exist according to Theorem 1.15. Then
+∫
+U
+|σ| dμ = kli→m∞
+∫
+fk · σ dμ ≤ μ(U )
+by (⋆⋆) . On the other hand, if f ∈ Cc(Rn; Rm) with |f | ≤ 1 and spt f ⊆ U , then ∫
+f · σ dμ ≤
+∫
+U
+|σ| dμ.
+
+
+64 General Measure Theory
+Consequently (⋆⋆) implies
+μ(U ) ≤
+∫
+U
+|σ| dμ.
+Thus μ(U ) = ∫
+U |σ| dμ for all open U ⊂ Rn; hence |σ| = 1 μ-a.e.
+An immediate and very useful application is the following characterization of nonnegative linear functionals.
+THEOREM 1.39 (Nonnegative linear functionals). Assume
+L : C∞
+c (Rn) → R
+is linear and nonnegative; that is,
+L(f ) ≥ 0 for all f ∈ C∞
+c (Rn), f ≥ 0. (⋆)
+Then there exists a Radon measure μ on Rn such that
+L(f ) =
+∫
+Rn
+f dμ
+for all f ∈ Cc∞(Rn).
+Proof. Choose any compact set K ⊆ Rn, and select a smooth function ζ such that ζ has compact support, ζ ≡ 1 on K, and 0 ≤ ζ ≤ 1.
+For any f ∈ Cc∞(Rn) with spt f ⊆ K, set g := ∥f ∥L∞ζ − f ≥ 0. Then (⋆) implies
+0 ≤ L (g) = ∥f ∥L∞L(ζ) − L(f ),
+and so
+L(f ) ≤ C∥f ∥L∞
+for C := L(ζ). Replacing f with −f , we deduce that
+|L(f )| ≤ C∥f ∥L∞.
+The functional L thus extends to a linear mapping from Cc(Rn) into R, satisfying the hypothesis of the Riesz Representation Theorem. Hence there exist μ, σ as above so that
+L(f ) =
+∫
+Rn
+f σ dμ
+for f ∈ Cc∞(Rn)), with σ = ±1 μ-a.e. But then (⋆) implies σ = 1 μ-a.e.
+
+
+Weak convergence 65
+1.9 Weak convergence
+1.9.1 Weak convergence of measures
+We introduce next a notion of weak convergence for measures.
+THEOREM 1.40 (Weak convergence of measures). Let μ, μk (k = 1, 2, . . . ) be Radon measures on Rn. The following three statements are equivalent:
+(i) limk→∞
+∫
+Rn f dμk = ∫
+Rn f dμ for all f ∈ Cc(Rn).
+(ii) lim supk→∞ μk(K) ≤ μ(K) for each compact set K ⊆ Rn and μ(U ) ≤ lim inf k→∞ μk(U ) for each open set U ⊆ Rn.
+(iii) limk→∞ μk(B) = μ(B) for each bounded Borel set B ⊆ Rn with μ(∂B) = 0.
+DEFINITION 1.31. If (i)–(iii) hold, we say the measures {μk}∞
+k=1
+converge weakly to the measure μ, written
+μk ⇀ μ.
+Proof. 1. Assume (i) holds and fix ε > 0. Let U ⊂ Rn be open and choose a compact set K ⊆ U . Next, choose f ∈ Cc(Rn) such that spt f ⊂ U , 0 ≤ f ≤ 1, f ≡ 1 on K. Then
+μ(K) ≤
+∫
+Rn
+f dμ = kli→m∞
+∫
+Rn
+f dμk ≤ lim inf
+k→∞ μk(U ).
+Thus
+μ(U ) = sup{μ(K) | K compact, K ⊆ U } ≤ lim inf
+k→∞ μk(U ).
+This proves the second part of (ii); the proof of the other part is similar.
+2. Suppose now (ii) holds, B ⊆ Rn is a bounded Borel set, μ(∂B) = 0. Let B0 denote the interior of B. Then
+μ(B) = μ(B0) ≤ lim inf
+k→∞ μk(B0) ≤ lim sup μk(B ̄) ≤ μ(B ̄) = μ(B).
+3. Finally, assume (iii) holds. Fix ε > 0, f ∈ Cc+(Rn). Let R > 0 be such that spt(f ) ⊆ B(0, R) and μ(∂B(R)) = 0. Choose 0 = t0 < t1, <
+
+
+66 General Measure Theory
+· · · < tN such that tN := 2∥f ∥L∞, 0 < ti −ti−1 < ε, and μ(f −1{ti}) = 0 for i = 1, . . . , N . Set Bi = f −1(ti−1, ti); then μ(∂Bi) = 0 for i = 2, . . . . Now
+N
+∑
+i=2
+ti−1μk(Bi) ≤
+∫
+Rn
+f dμk ≤
+N
+∑
+i=2
+tiμk(Bi) + t1μk(B(R))
+and N
+∑
+i=2
+ti−1μ(Bi) ≤
+∫
+Rn
+f dμ ≤
+N
+∑
+i=2
+tiμ(Bi) + t1μ(B(R);
+so (iii) implies
+lim sup
+k→∞
+∣ ∣ ∣ ∣
+∫
+Rn
+f dμk −
+∫
+Rn
+f dμ
+∣ ∣ ∣ ∣
+≤ 2εμ(B(R)).
+The great advantage of weak convergence of measures is that compactness is had relatively easily.
+THEOREM 1.41 (Weak compactness for measures). Let {μk}∞
+k=1 be a sequence of Radon measures on Rn satisfying
+sup
+k
+μk(K) < ∞ for each compact set K ⊂ Rn.
+Then there exists a subsequence {μkj }∞
+j=1 and a Radon measure μ such that
+μkj ⇀ μ.
+Proof. 1. Assume first
+sup
+k
+μk(Rn) < ∞. (⋆)
+2. Let {fk}∞
+k=1 be a countable dense subset of Cc(Rn). As (⋆) implies {
+∫ f1 dμj} is bounded, we can find a subsequence {μj1}j∞=1 and a1 ∈ R such that ∫
+f1 dμ1
+j → a1.
+Continuing, we choose a subsequence {μk
+j }∞
+j=1 of {μk−1
+j }∞
+j=1 and ak ∈ R such that ∫
+fk dμk
+j → ak.
+
+
+1.9 Weak convergence 67
+Set νj := μj
+j; then
+∫
+fk dνj → ak
+for all k ≥ 1.
+Define L(fk) = ak, and note that L is linear, with |L(fk)| ≤ ∥fk∥L∞M by (⋆), for M := supk μk(Rn). Thus L can be uniquely
+extended to a bounded linear functional L ̄ on Cc(Rn). Then according to the Riesz Representation Theorem, there exists a Radon measure μ on Rn such that
+L ̄(f ) =
+∫
+f dμ
+for all f ∈ Cc(Rn).
+3. Choose any f ∈ Cc(Rn). The denseness of {fk}∞
+k=1 implies the
+existence of a subsequence {fi}∞
+i=1 such that fi → f uniformly. Fix ε > 0 and then choose i so large that
+∥f − fi∥L∞ < ε
+4M .
+Next choose J so that for all j > J
+∣ ∣ ∣ ∣
+∫
+fi dνj −
+∫
+fi dμ
+∣ ∣ ∣ ∣
+<ε
+2.
+Then for j > J
+∣ ∣ ∣ ∣
+∫
+f dνj −
+∫
+f dμ
+∣ ∣ ∣ ∣
+≤
+∣ ∣ ∣ ∣
+∫
+f − fi dνj
+∣ ∣ ∣ ∣
++
+∣ ∣ ∣ ∣
+∫
+f − fi dμ
+∣ ∣ ∣ ∣
++
+∣ ∣ ∣ ∣
+∫
+fi dνj −
+∫
+fi dμ
+∣ ∣ ∣ ∣
+≤ 2M ∥f − fi∥L∞ + ε
+2 < ε.
+4. In the general case that (⋆) fails to hold, but
+sup
+k
+μk(K) < ∞
+for each compact set K ⊂ Rn, we apply the reasoning above to the measures
+μl
+k := μk B(l) (k, l = 1, 2, . . . )
+and use a diagonal argument.
+
+
+68 General Measure Theory
+1.9.2 Weak convergence of functions
+Assume now that U ⊆ Rn is open, 1 ≤ p < ∞.
+DEFINITION 1.32. A sequence {fk}∞
+k=1 ⊂ Lp(U ) converges
+weakly to a function f ∈ Lp(U ), written
+fk ⇀ f in Lp(U ),
+provided
+kli→m∞
+∫
+U
+fkg dx =
+∫
+U
+f g dx
+for each g ∈ Lq(U ), where
+1
+p+1
+q = 1 (1 < q ≤ ∞).
+THEOREM 1.42 (Weak compactness in Lp). Suppose 1 < p < ∞. Let {fk}∞
+k=1 be a sequence of functions in Lp(U ) satisfying
+sup
+k
+∥fk∥Lp(U) < ∞. (⋆)
+Then there exists a subsequence {fkj }∞
+j=1 and a function f ∈ Lp(U ) such that
+fkj ⇀ f in Lp(U ).
+Remark. This assertion is in general false for p = 1, but see Section 1.9.3 below.
+Proof. 1. If U ̸= Rn, we extend each function fk to all of Rn by setting it equal to zero on Rn −U. This done, we may with no loss of generality assume U = Rn. Furthermore, we may as well suppose
+fk ≥ 0 Ln-a.e;
+for we could otherwise apply the following analysis to f +
+k and f −
+k.
+2. Define the Radon measures
+μk := Ln fk (k = 1, 2, . . . ).
+Then for each compact set K ⊂ Rn,
+μk(K) =
+∫
+K
+fk dx ≤
+(∫
+K
+fp
+k dx
+)1
+p
+Ln(K)1− 1
+p,
+
+
+1.9 Weak convergence 69
+and so sup
+k
+μk(K) < ∞.
+Accordingly, we may apply Theorem 1.41, to find a Radon measure μ on Rn and a subsequence μkj ⇀ μ.
+3. Claim #1: μ << Ln.
+Proof of claim: Let A ⊂ Rn be bounded, Ln(A) = 0. Fix ε > 0 and choose an open, bounded set V ⊃ A such that Ln(V ) < ε. Then
+μ(V ) ≤ lim inf
+j→∞ μkj (V )
+= lim inf
+j→∞
+∫
+V
+fkj dx
+≤ lim inf
+j→∞
+(∫
+V
+fp
+kj dx
+)1
+p
+Ln(V )1− 1
+p
+≤ Cε1− 1
+p.
+Thus μ(A) = 0.
+4. In view of Theorem 1.30, there exists a function f ∈ L1
+loc satisfying
+μ(A) =
+∫
+A
+f dx
+for all Borel sets A ⊆ Rn.
+5. Claim #2: f ∈ Lp(Rn).
+Proof of claim: Let φ ∈ Cc(Rn). Then
+∫
+Rn
+φf dx =
+∫
+Rn
+φ dμ = jli→m∞
+∫
+Rn
+φ dμkj
+= jli→m∞
+∫
+Rn
+φfkj dx ≤ sup
+k
+∥fk∥Lp ∥φ∥Lq
+≤ C∥φ∥Lq ,
+where 1
+p+1
+q = 1, 1 < q < ∞. Thus
+∥f ∥Lp = sup
+φ∈Cc (Rn ) ∥φ∥Lq ≤1
+∫
+Rn
+φf dx < ∞.
+6. Claim #3: fkj ⇀ f in Lp(Rn).
+
+
+70 General Measure Theory
+Proof of claim: As noted above,
+∫
+Rn
+fkj φ dx →
+∫
+Rn
+f φ dx
+for all φ ∈ Cc(Rn). Given g ∈ Lq(Rn), we fix ε > 0 and then choose φ ∈ Cc(Rn) with
+∥g − φ∥Lq(Rn) < ε.
+Then
+∫
+Rn
+(fkj − f )g dx =
+∫
+Rn
+(fkj − f )φ dx +
+∫
+Rn
+(fkj − f )(g − φ) dx.
+The first term on the right goes to zero, and the last term is estimated by
+∥fkj − f ∥Lp∥g − φ∥Lq ≤ Cε.
+1.9.3 Weak convergence in L1
+The Lp weak compactness Theorem 1.42 fails for L1, since its dual space L∞ is not separable. We need more information to find weakly convergent sequences in L1:
+THEOREM 1.43 (Uniform integrability and weak convergence). Assume U is bounded and let {fk}∞
+k=1 be a sequence of func
+tions in L1(U ) satisfying
+sup
+k
+∥fk∥L1(U) < ∞. (⋆)
+Suppose also
+ll→im∞ sup
+k
+∫
+{|fk |≥l}
+|fk| dx = 0. (⋆⋆)
+Then there exist a subsequence {fkj }∞
+j=1 and f ∈ L1(U ) such that
+fkj ⇀ f in L1(U ).
+Remark. We call condition (⋆⋆) uniform integrability.
+Proof. 1. Claim #1 : For each ε > 0, there exists δ > 0 such that
+Ln(E) < δ implies sup
+k
+∫
+E
+|fk| dx < ε
+for each Ln-measurable set E ⊂ U .
+
+
+1.9 Weak convergence 71
+Proof of claim: For each j = 1, . . . ,
+∫
+E
+|fj| dx =
+∫
+E ∩{|fj |≥l}
+|fj| dx +
+∫
+E ∩{|fj |<l}
+|fj| dx
+≤ sup
+k
+∫
+{|fk |≥l}
+|fk| dx + lLn(E)
+< ε,
+provided we employ (⋆⋆) to fix l so large that
+sup
+k
+∫
+{|fk |≥l}
+|fk| dx < ε
+2
+and then let δ = ε
+2l .
+2. As in the proof of Theorem 1.42, we may assume fk ≥ 0 and define the Radon measures
+μk := Ln fk (k = 1, 2, . . . ).
+Then sup
+k
+μk(U ) < ∞.
+We invoke Theorem 1.41, to find a Radon measure μ on Rn and a subsequence μkj ⇀ μ. We can use Claim #1 to prove that μ << Ln U ; and consequently, according to Theorem 1.30, there exists a function f ∈ L1(U ) satisfying
+μ(E) =
+∫
+E
+f dx
+for each Borel set E ⊆ Rn.
+3. Claim #2 : fkj ⇀ f in L1(U ).
+Proof of claim: Select any function g ∈ L∞(U ); we must show that
+∫
+U
+fkj g dx →
+∫
+U
+f g dx.
+Using mollifiers (see Theorem 4.1 later) we obtain a sequence {gi}i∞=1 of
+bounded, continuous functions that converge to g Ln-a.e. Fix ε > 0 and select the corresponding δ given by Claim #1. According the Egoroff’s Theorem, there exists a measurable set E ⊂ U such that
+gi → g uniformly on U − E, Ln(E) ≤ δ.
+
+
+72 General Measure Theory
+Then
+∣ ∣ ∣ ∣
+∫
+U
+(fkj − f )g dx
+∣ ∣ ∣ ∣
+≤
+∫
+U
+|fkj − f ||g − gi| dx
++
+∣ ∣ ∣ ∣
+∫
+U
+(fkj − f )gi dx
+∣ ∣ ∣ ∣
+≤
+∫
+E
+|fkj − f ||g − gi| dx +
+∫
+U −E
+|fkj − f ||g − gi| dx
++
+∣ ∣ ∣ ∣
+∫
+U
+(fkj − f )gi dx
+∣ ∣ ∣ ∣
+≤C
+∫
+E
+|fkj | + |f | dx + C sup
+U −E
+|g − gi| +
+∣ ∣ ∣ ∣
+∫
+U
+(fkj − f )gi dx
+∣ ∣ ∣ ∣
+≤ Cε + C sup
+U −E
+|g − gi| +
+∣ ∣ ∣ ∣
+∫
+U
+(fkj − f )gi dx
+∣ ∣ ∣ ∣
+,
+according to Claim #1. We fix i so large that the second term is smaller than ε, and then send kj → ∞, to deduce that
+lim sup
+j→∞
+∣ ∣ ∣ ∣
+∫
+U
+fkj g dx −
+∫
+U
+f g dx
+∣ ∣ ∣ ∣
+≤ Cε.
+If a sequence bounded in L1 fails to satisfy the uniform integrability condition (⋆⋆) from Theorem 1.43, we can nevertheless still find a subsequence weakly convergent off a set of arbitrarily small Ln measure, a tiny “bite” taken from U :
+THEOREM 1.44 (Biting Lemma). Assume U is bounded and let {fk}∞
+k=1 be a sequence of functions in L1(U ) satisfying
+sup
+k
+∥fk∥L1(U) < ∞. (⋆)
+There exists a subsequence {fkj }∞
+j=1 and a function f ∈ L1(U ) such
+that for each δ > 0 there exists an Ln-measurable set E ⊂ U with
+Ln(E) ≤ δ
+and
+fkj ⇀ f in L1(U − E).
+Proof. 1. For k = 1, . . . and integers l ≥ 0, define
+φk(l) :=
+∫
+{|fk |≥l}
+|fk| dx.
+
+
+1.9 Weak convergence 73
+Then the mapping l 0→ φk(l) is nonincreasing for each k and the functions {φk}∞
+k=1 are uniformly bounded on Z+.
+Using the standard diagonal argument, we can find a subsequence kj → ∞ such that the limits
+α(l) := jli→m∞ φkj (l)
+exist for all integers l = 0, 1, . . . . Furthermore, l 0→ α(l) is nonincreasing and consequently the limit
+α∞ := lli→m∞
+l integer
+α(l)
+exists.
+2. Case 1 : α∞ = 0. In this situation,
+lli→m∞ sup
+j
+∫
+{|fkj |≥l}
+|fkj | dx = 0,
+and hence the L1 weak convergence Theorem 1.43 applies. Consequently, passing if necessary to a further subsequence and reindexing, we have
+fkj ⇀ f in L1(U )
+and so we can take E = ∅.
+3. Case 2 : α∞ > 0. We must construct a small set E off which a further subsequence converges weakly.
+4. Claim #1 : There exists a sequence {lj}∞
+j=1 of integers such that
+lj → ∞, φkj (lj) → α∞.
+Proof of claim: Define
+lj := max{l ∈ Z+ | φkj (l) ≥ α∞ − 1
+l };
+the maximum exists since liml→∞ φk(l) = 0 for each k. Also, if supj lj
+is finite, then for l′ > supj lj we would have
+φkj (l′) < α∞ − 1
+l′
+for all j. Then α(l′) ≤ α∞ − 1
+l′ , a contradiction since l 0→ α(l) is nonincreasing. Hence, passing if necessary to a subsequence and reindexing, we may assume lj → ∞.
+
+
+74 General Measure Theory
+Now fix a positive integer m. Then for large enough j,
+α∞ − 1
+lj ≤ φkj (lj ) ≤ φkj (m)
+and so α∞ ≤ lim inf
+j→∞ φkj (lj) ≤ lim sup
+j→∞
+φkj (lj) ≤ α(m).
+Letting m → ∞, we deduce that limj→∞ φkj (lj) = α∞.
+5. Claim #2 : We have
+lim
+m→∞ sup
+j
+∫
+{m≤|fkj |≤lj }
+|fkj | dx = 0.
+Proof of claim: Select any ε > 0 and then m0 ∈ Z+ such that α(m0) < α∞ + ε. Next, pick j0 so that j ≥ j0 implies
+φkj (m0) ≤ α(m0) + ε, φkj (lj) ≥ α∞ − ε.
+Then φkj (m0) − φkj (lj) ≤ α(m0) − α∞ + 2ε ≤ 3ε.
+Hence if m1 ≥ max{m0, max0≤j≤j0 lj}, we have
+sup
+j
+∫
+{m1≤|fkj |≤lj }
+|fkj | dx = sup
+j, lj >m
+{φj (m1) − φkj (lj)} ≤ 3ε.
+6. Given now δ > 0, pass to a further subsequence if necessary to guarantee that ∞
+∑
+j=1
+1
+lj
+≤ δ.
+Define
+E :=
+∞
+⋃
+j=1
+{|fkj | ≥ lj}.
+Then
+Ln(E) ≤
+∞
+∑
+j=1
+Ln({|fkj | ≥ lj })
+≤
+∞
+∑
+j=1
+1
+lj
+∫
+U
+|fkj | dx ≤ C
+∞
+∑
+j=1
+1
+lj
+≤ Cδ,
+
+
+1.9 Weak convergence 75
+and
+lim
+m→∞ sup
+j
+∫
+{|fkj |≥m}−E
+|fkj | dx
+≤ lim
+m→∞ sup
+j
+∫
+{m≤|fkj |≤lj }
+|fkj | dx = 0,
+owing to Claim #2. We now apply Theorem 1.43 to extract a further subsequence weakly convergent in L1(U − E).
+7. Repeating this construction for δ = 1, 1
+2,..., 1
+2m , . . . and reindexing, we obtain the desired subsequence.
+1.9.4 Measures of oscillation
+Let μ be a finite Radon measure on Rn+m.
+DEFINITION 1.33. The projection of μ onto Rn is the measure σ defined by
+σ(A) := μ(A × Rm)
+for A ⊆ Rn.
+THEOREM 1.45 (Slicing measures). For σ-a.e. point x ∈ Rn there exists a Radon measure νx on Rm such that
+νx(Rm) = 1 σ-a.e.;
+and for each bounded continuous function f : Rn × Rm → R, the mapping x 0→ ∫
+Rm f (x, y) dνx(y) is σ-measurable and
+∫
+Rn+m
+f dμ =
+∫
+Rn
+(∫
+Rm
+f dνx
+)
+dσ. (⋆)
+Proof. 1. Let {fk}∞
+k=1 be a countable, dense subset of Cc(Rm). For
+each k = 1, . . . , define the signed measure γk by
+γk(A) :=
+∫
+A×Rm
+fk(y) dμ (A Borel, A ⊆ Rn).
+Then γk << σ. Hence Theorems 1.29 and 1.30 imply that for k = 1, . . . the limits
+Dσγk(x) := rli→m0
+γk(B(x, r))
+σ(B(x, r)) (⋆⋆)
+
+
+76 General Measure Theory
+exist for σ-a.e. x; the mappings x 0→ Dσγk are σ-measurable and bounded; and we can write
+∫
+A×Rm
+fk(y) dμ = γk(A) =
+∫
+A
+Dσγk dσ (⋆ ⋆ ⋆)
+for k = 1, . . . and Borel sets A ⊆ Rn.
+2. Since
+∣ ∣ ∣ ∣
+γk(B(x, r))
+σ(B(x, r)) − γl(B(x, r))
+σ(B(x, r))
+∣ ∣ ∣ ∣
+≤ max
+Rm |fk − fl|,
+we have |Dσγk(x) − Dσγl(x)| ≤ max
+Rm |fk − fl|
+at any point x where (⋆⋆) holds.
+Given a function f ∈ Cc(Rm), select a subsequence {fkj }∞
+j=1 ⊂
+{fk}∞
+k=1 such that fkj → f uniformly as j → ∞. Then
+Λx(f ) := jli→m∞ Dσγkj (x)
+exists for each point x satisfying (⋆⋆) and is independent of the particular choice of the subsequence fkj → f .
+3. For such points x, the mapping f 0→ Λx(f ) is linear, with
+|Λx(f )| ≤ mRanx |f |
+for each f ∈ Cc(Rm). According to the Riesz Representation Theorem, there exists a Radon measure νx such that
+Λx(f ) =
+∫
+Rm
+f dνx.
+Passing to limits in (⋆ ⋆ ⋆) as k = kj → ∞, we deduce that
+∫
+A×Rm
+f (y) dμ =
+∫
+A
+(∫
+Rm
+f dνx
+)
+dσ.
+An approximation now shows that
+∫
+Rn+m
+g(x)f (y) dμ =
+∫
+Rn
+g(x)
+(∫
+Rm
+f dνx
+)
+dσ
+for continuous functions f and g. Putting f ≡ 1 shows that νx(Rm) = 1. A further approximation gives the integration formula (⋆).
+
+
+1.9 Weak convergence 77
+A weakly convergent sequence fk ⇀ f need not converge almost everywhere, even if we pass to a subsequence. It is possible for example that the functions fk may oscillate more and more rapidly as k → ∞. We can however introduce measures νx to “record” these oscillations near almost every point x.
+THEOREM 1.46 (Weak limits and Young measures). Suppose that U is bounded and the sequence {fk}∞
+k=1 is bounded in L∞(U ; Rm).
+Then there exist a subsequence {fkj }∞
+j=1 ⊆ {fk}∞
+k=1 and, for Ln-a.e.
+x ∈ U , a Radon measure νx on Rm such that
+νx(Rm) = 1
+and
+F (fkj ) ⇀ F :=
+∫
+Rm
+F (y) dνx
+weakly in L2(U ) for each continuous function F on Rm.
+DEFINITION 1.34. We call {νx}x∈U Young measures associated with the subseqence {fkj }∞
+j=1.
+Remark. In fact F (fkj ) ⇀ F weakly in Lp(U ) for each 1 < p < ∞. If fk → f Ln-a.e., then νx = δf(x) almost everywhere.
+Proof. 1. For each Borel set A ⊆ Rn+m, define
+μk(A) :=
+∫
+U
+χA(x, fk(x)) dx.
+According to Theorem 1.10,(iii), the integrand is Ln-measurable. We extend μk to a Radon measure on Rn+m and observe that
+sup
+k
+μk(Rn+m) < ∞.
+Consequently, there exists a subsequence {μkj }∞
+j=1 and a finite Radon measure μ such that
+μkj ⇀ μ weakly on Rn+m.
+2. Claim: The projection of μ onto Rn is σ := Ln U .
+
+
+78 General Measure Theory
+Proof of claim: Let V ⊂ U be open. Then
+σ(V ) = μ(V × Rm) ≤ lim inf
+j→∞ μkj (V × Rm) = Ln(V ).
+Thus σ ≤ Ln U . Now let K ⊂ U be compact. There exists a closed ball B(R) ⊂ Rm such that spt(μ), spt(μkj ) ⊂ U ̄ × B(R) for j = 1, . . . . Therefore
+σ(K) = μ(K × Rm) = μ(K × B(R))
+≥ lim sup
+j→∞
+μkj (K × B(R)) = Ln(K);
+and consequently σ ≥ Ln U .
+3. According therefore to Theorem 1.45, we have
+∫
+Rn+m
+f dμ =
+∫
+U
+(∫
+Rm
+f dνx
+)
+dx
+for each f ∈ C(Rn+m). Let f (x, y) = g(x)F (y), where g ∈ Cc(U ) and F ∈ C(Rm). Then
+jli→m∞
+∫
+U
+gF (fkj ) dx = jli→m∞
+∫
+Rn+m
+f dμkj
+=
+∫
+Rn+m
+f dμ
+=
+∫
+U
+(∫
+Rm
+f dνx
+)
+dx
+=
+∫
+U
+gF dx.
+This is valid for each g ∈ Cc(U ) and thus for each g ∈ L2(U ). Consequently F (fkj ) ⇀ F weakly in L2(U ).
+1.10 References and notes
+This long chapter mostly follows Federer [F], with additional material from Simon [S, Chapter 1] and Hardt [H].
+Theorems 1.1–1.6 in Section 1.1 are from [F, Sections 2.1.3, 2.1.5].
+
+
+1.10 References and notes 79
+The π-λ Theorem is from Durrett [D] and Stroock [Sk]. Lemma 1.1 is [F, Section 2.2.2] and Theorem 1.8 is [F, Section 2.2.5]. Theorem 1.9 (Caratheodory’s criterion) and Theorem 1.11 are from [F, Section 2.3.2]; Theorem 1.12 is [F, Section 2.3.3].
+Theorem 1.13 in Section 1.2 is a simplified version of [F, Sections 3.1.13, 3.1.14]. Lusin’s and Egoroff’s theorems are in [F, Sections 2.3.5, 2.3.7]. The general theory of integration may be found in [F, Section 2.4]; see in particular [F, Sections 2.4.6, 2.4.7, 2.4.9] for Fatou’s Lemma, the Monotone Convergence Theorem, and the Dominated Convergence Theorem. Our treatment of product measure and Fubini’s Theorem is taken directly from [F, Section 2.6]. The π-λ Theorem provides an alternative approach to assertion (iii) of Fubini’s Theorem; see Durrett [D] or Stroock [Sk].
+We relied heavily on Simon [S] for Vitali’s Covering Theorem and Hardt [H] for Besicovitch’s Covering Theorem. Consult also [F, Sections 2.9.12, 2.9.13]. Furedi and Loeb [F-L] discuss the best constant for Besicovitch’s Theorem. The differentiation theory in Section 1.6 is based on [H], [S], and [F, Section 2.9]. Approximate limits and approximate continuity are in [F, Sections 2.9.12, 2.9.13].
+We took the proof of the Riesz Representation Theorem from [S, Sections 4.1, 4.2] (cf. [F, Section 2.5]). A. Damlamian showed us the proof of Theorem 1.39 in Section 1.8. See Giusti [G, Appendix A] for Theorem 1.41 in Section 1.9. Theorem 1.43 is sometimes called the Dunford–Pettis Theorem. The Biting Lemma appears in BrooksChacon [B-C] and our proof follows Ball–Murat [B-M]. L. Tartar introduced Young measure methods for PDE theory; see for instance [T]. The proofs for Theorems 1.45 and 1.46 are from [E1].
+There are many good introductory measure theory books. We recommend especially DiBenedetto [DB], Fitzpatrick–Royden [F-R], Folland [Fo] and Wheeden–Zygmund [W-Z]. Krantz–Parks [K-P] and LinYang [L-Y] are two very good more advanced texts. Oxtoby [O] provides a fascinating discussion of measure theory versus Baire category for characterizing “negligible” sets.
+
+
+
+
+Chapter 2
+Hausdorff Measures
+We introduce next certain “lower dimensional” measures on Rn, which allow us to measure certain “very small” subsets of Rn. These are the Hausdorff measures Hs, defined in terms of the diameters of various efficient coverings. The idea is that A is an “s-dimensional subset” of Rn if 0 < Hs(A) < ∞, even if A is very complicated geometrically.
+Section 2.1 provides the definitions and basic properties of Hausdorff measures. In Section 2.2 we prove n-dimensional Lebesgue and n-dimensional Hausdorff measure agree on Rn. Density theorems for lower dimensional Hausdorff measures are established in Section 2.3. Section 2.4 records for later use some easy facts concerning the Hausdorff dimension of graphs and the sets where a summable function is large.
+2.1 Definitions and elementary properties
+DEFINITION 2.1.
+(i) Let A ⊆ Rn, 0 ≤ s < ∞, 0 < δ ≤ ∞. We write
+Hs
+δ(A) :=
+inf
+⎧
+⎨
+⎩
+∞
+∑
+j=1
+α(s)
+( diam Cj 2
+)s
+∣
+∣A⊆
+∞
+⋃
+j=1
+Cj, diam Cj ≤ δ
+⎫
+⎬
+⎭
+,
+where
+α(s) := π s
+2
+Γ
+(s
+2 + 1) .
+(ii) For A and s as above, define
+Hs(A) := δli→m0 Hs
+δ(A) = sup
+δ>0
+Hs
+δ(A).
+81
+
+
+82 Hausdorff Measures
+We call Hs s-dimensional Hausdorff measure on Rn.
+Remarks.
+(i) Our requiring δ → 0 forces the coverings to “follow the local geometry” of the set A.
+(ii) In the definition, Γ(s) := ∫ ∞
+0 e−xxs−1 dx (0 < s < ∞) is the gamma function. Observe that
+Ln(B(x, r)) = α(n)rn
+for balls B(x, r) ⊂ Rn. We will see later in Chapter 3 that if s = k is an integer, Hk agrees with ordinary “k-dimensional surface area” on nice sets; this is the reason we include the normalizing constant α(s) in the definition.
+THEOREM 2.1 (Hausdorff measures are Borel). For all 0 ≤ s < ∞ Hs is a Borel regular measure in Rn.
+Warning: Hs is not a Radon measure if 0 ≤ s < n, since Rn is not σ-finite with respect to Hs.
+Proof. 1. Claim #1: Hs
+δ is a measure.
+Proof of claim: Choose {Ak}∞
+k=1 ⊆ Rn and suppose Ak ⊆ ∪j∞=1Ck
+j, diam Ck
+j ≤ δ. Then {Ck
+j }∞
+j,k=1 covers ∪∞
+k=1Ak. Thus
+Hs
+δ
+(∞ ⋃
+k=1
+Ak
+)
+≤
+∞
+∑
+k=1
+∞
+∑
+j=1
+α(s)
+(
+diam Ck
+j
+2
+)s
+.
+Taking infima, we find
+Hs
+δ
+(∞ ⋃
+k=1
+Ak
+)
+≤
+∞
+∑
+k=1
+Hs
+δ (Ak ).
+2. Claim #2: Hs is a measure.
+Proof of claim: Select {Ak}∞
+k=1 ⊆ Rn. Then
+Hs
+δ
+(∞ ⋃
+k=1
+Ak
+)
+≤
+∞
+∑
+k=1
+Hs
+δ(Ak) ≤
+∞
+∑
+k=1
+Hs (Ak ).
+Let δ → 0.
+
+
+2.1 Elementary properties 83
+3. Claim #3: Hs is a Borel measure.
+Proof of claim: Choose A, B ⊆ Rn with dist(A, B) > 0. Select 0<δ< 1
+4 dist(A, B). Suppose A ∪ B ⊆ ∪∞
+k=1Ck and diam Ck ≤ δ.
+Write A := {Cj | Cj ∩ A ̸= ∅}, and let B := {Cj | Cj ∩ B ̸= ∅}. Then A ⊆ ∪Cj∈ACj and, B ⊆ ∪Cj∈BCj, Ci ∩ Cj = ∅ if Ci ∈ A, Cj ∈ B. Hence
+∞
+∑
+j=1
+α(s)
+( diam Cj 2
+)s
+≥
+∑
+Cj ∈A
+α(s)
+( diam Cj 2
+)s
++
+∑
+Cj ∈B
+α(s)
+( diam Cj 2
+)s
+≥ Hs
+δ(A) + Hs
+δ (B ).
+Taking the infimum over all such sets {Cj}∞
+j=1, we find Hs
+δ(A∪B) ≥
+Hs
+δ (A)+Hs
+δ(B), provided 0 < 4δ < dist(A, B). Letting δ → 0, we obtain
+Hs(A ∪ B) ≥ Hs(A) + Hs(B). Consequently,
+Hs(A ∪ B) = Hs(A) + Hs(B)
+for all A, B ⊆ Rn with dist(A, B) > 0. Hence Caratheodory’s criterion implies Hs is a Borel measure.
+4. Claim #4; Hs is a Borel regular measure.
+Proof of claim: Note that diam C ̄ = diam C for all C; hence
+Hs
+δ(A) =
+inf
+⎧
+⎨
+⎩
+∞
+∑
+j=1
+α(s)
+( diam Cj 2
+)s
+∣
+∣A⊆
+∞
+⋃
+j=1
+Cj , diam Cj ≤ δ, Cj closed
+⎫
+⎬
+⎭
+.
+Choose A ⊆ Rn such that Hs(A) < ∞; then Hs
+δ(A) < ∞ for all δ > 0.
+For each k ≥ 1, choose closed sets {Ck
+j }∞
+j=1 so that diam Ck
+j ≤1
+k,
+A ⊆ ∪∞
+j =1 C k
+j , and
+∞
+∑
+j=1
+α(s)
+(
+diam Ck
+j
+2
+)s
+≤ Hs1
+k
+(A) + 1
+k.
+
+
+84 Hausdorff Measures
+Let Ak := ∪∞
+j =1 C k
+j , B := ∩∞
+k=1Ak; B is Borel. Also A ⊆ Ak for each k, and so A ⊆ B, Furthermore,
+Hs1
+k
+(B) ≤
+∞
+∑
+j=1
+α(s)
+(
+diam Ck
+j
+2
+)s
+≤ Hs1
+k
+(A) + 1
+k.
+Letting k → ∞, we discover Hs(B) ≤ Hs(A). But A ⊆ B, and thus Hs(A) = Hs(B).
+THEOREM 2.2 (Properties of Hausdorff measure).
+(i) H0 is counting measure.
+(ii) H1 = L1 on R1.
+(iii) Hs ≡ 0 on Rn for all s > n.
+(iv) Hs(λA) = λsHs(A) for all λ > 0, A ⊆ Rn.
+(v) Hs(L(A)) = Hs(A) for each affine isometry L : Rn → Rn, A ⊆ Rn.
+Proof. 1. Statements (iv) and (v) are easy.
+2. First observe α(0) = 1. Thus obviously H0({a}) = 1 for all a ∈ Rn, and (i) follows.
+3. Choose A ⊆ R1 and δ > 0. Then
+L1(A) = inf
+⎧
+⎨
+⎩
+∞
+∑
+j=1
+diam Cj | A ⊆
+∞
+⋃
+j=1
+Cj
+⎫
+⎬
+⎭
+≤ inf
+⎧
+⎨
+⎩
+∞
+∑
+j=1
+diam Cj | A ⊆
+∞
+⋃
+j=1
+Cj, diam Cj ≤ δ
+⎫
+⎬
+⎭
+= H1
+δ (A),
+since Γ( 3
+2) =
+√π
+2 and thus α(1) = 2. Hence L1(A) ≤ H1(A).
+On the other hand, set Ik := [kδ, (k+1)δ] for k ∈ Z. Then diam(Cj ∩
+Ik) ≤ δ and
+∞
+∑
+k=−∞
+diam(Cj ∩ Ik) ≤ diam Cj.
+
+
+2.1 Elementary properties 85
+Hence
+L1(A) = inf
+⎧
+⎨
+⎩
+∞
+∑
+j=1
+diam Cj | A ⊆
+∞
+⋃
+j=1
+Cj
+⎫
+⎬
+⎭
+≥ inf
+⎧
+⎨
+⎩
+∞
+∑
+j=1
+∞
+∑
+k=−∞
+diam(Cj ∩ Ik) | A ⊆
+∞
+⋃
+j=1
+Cj
+⎫
+⎬
+⎭
+≥ H1
+δ (A).
+Thus L1 = H1
+δ for all δ > 0, and so L1 = H1 on R1.
+4. Fix an integer m ≥ 1. The unit cube Q in Rn can be decomposed into mn cubes with side 1
+m and diameter
+√n
+m . Therefore
+H s√n
+m
+(Q) ≤
+mn
+∑
+i=1
+α(s)
+( √n
+m
+)s
+= α(s)n s
+2 mn−s;
+and the last term goes to zero as m → ∞, if s > n. Hence Hs(Q) = 0, and so Hs(Rn) = 0.
+A convenient way to verify that Hs vanishes on a set is the following:
+LEMMA 2.1. Suppose A ⊂ Rn and Hs
+δ(A) = 0 for some 0 < δ < ∞.
+Then Hs(A) = 0.
+Proof. The conclusion is obvious for s= 0, and so we may assume s > 0.
+Fix ε > 0. There then exist sets {Cj}∞
+j=1 such that A ⊆ ∪∞
+j=1Cj ,
+and ∞
+∑
+j=1
+α(s)
+( diam Cj 2
+)s
+≤ ε.
+In particular for each i,
+diam Ci ≤ 2
+(ε
+α(s)
+)1
+s
+=: δ(ε).
+Hence
+Hs
+δ(ε)(A) ≤ ε.
+Since δ(ε) → 0 as ε → 0, we see that Hs(A) = 0.
+
+
+86 Hausdorff Measures
+Next we define the Hausdorff dimension of a subset of Rn.
+LEMMA 2.2. Let A ⊂ Rn and 0 ≤ s < t < ∞.
+(i) If Hs(A) < ∞, then Ht(A) = 0.
+(ii) If Ht(A) > 0, then Hs(A) = +∞.
+Proof. Let Hs(A) < ∞ and δ > 0. Then there exist sets {Cj}j∞=1 such
+that diam Cj ≤ δ, A ⊆ ∪∞
+i=1Cj and
+∞
+∑
+j=1
+α(s)
+( diam Cj 2
+)s
+≤ Hs
+δ(A) + 1 ≤ Hs(A) + 1.
+Consequently,
+Ht
+δ(A) ≤
+∞
+∑
+j=1
+α(t)
+( diam Cj 2
+)t
+= α(t)
+α(s) 2s−t
+∞
+∑
+j=1
+α(s)
+( diam Cj 2
+)s
+(diam Cj )t−s
+≤ α(t)
+α(s) 2s−tδt−s(Hs(A) + 1).
+We send δ → 0 to conclude Ht(A) = 0. This proves assertion (i). Assertion (ii) follows at once from (i).
+DEFINITION 2.2. The Hausdorff dimension of a set A ⊆ Rn is
+Hdim(A) := inf{0 ≤ s < ∞ | Hs(A) = 0}.
+Remark. Observe Hdim(A) ≤ n. Let s = Hdim(A). Then Ht(A) = 0 for all t > s and Ht(A) = +∞ for all t < s; Hs(A) may be any number between 0 and ∞, inclusive.
+Furthermore, Hdim(A) need not be an integer. Even if Hdim(A) = k is an integer and 0 < Hk(A) < ∞, A need not be a “k-dimensional surface” in any sense; see Falconer [Fa1], [Fa2] or Federer [F] for examples of extremely complicated Cantor-like subsets A of Rn, with 0 < Hk(A) < ∞.
+
+
+Isodiametric inequality, Hn = Ln 87
+2.2 Isodiametric inequality, Hn = Ln
+Our goal in this section is to prove Hn = Ln on Rn. This is not obvious, since Ln is defined as the n-fold product of one-dimensional Lebesgue measure L1 and therefore
+Ln(A) = inf{
+∞
+∑
+i=1
+Ln(Qi) | Qi cubes, A ⊆ ∪∞
+i=1Qi}.
+On the other hand, Hn(A) is computed in terms of arbitrary coverings of small diameter.
+LEMMA 2.3. Let f : Rn → [0, ∞] be Ln-measurable. Then the region “under the graph of f ”
+A := {(x, y) | x ∈ Rn, y ∈ R, 0 ≤ y ≤ f (x)},
+is Ln+1-measurable.
+Proof. Set
+g(x, y) := f (x) − y
+for x ∈ Rn and y ∈ R. Then g is Ln+1-measurable and thus
+A = {(x, y) | y ≥ 0} ∩ {(x, y) | g(x, y) ≥ 0}
+is Ln+1-measurable.
+NOTATION Fix a, b ∈ Rn, with |a| = 1. We define
+La
+b := {b + ta | t ∈ R},
+the line through b in the direction a, and
+Pa := {x ∈ Rn | x · a = 0},
+the plane through the origin perpendicular to a.
+DEFINITION 2.3. Choose a ∈ Rn with |a| = 1, and let A ⊂ Rn. We define the Steiner symmetrization of A with respect to the plane Pa to be the set
+Sa(A) :=
+⋃
+b∈Pa
+A∩La
+b ̸=∅
+{
+b + ta | |t| ≤ 1
+2 H1(A ∩ La
+b)
+}
+.
+
+
+88 Hausdorff Measures
+A
+Pa
+Sa(A)
+THEOREM 2.3 (Properties of Steiner symmetrization).
+(i) diam Sa(A) ≤ diam A.
+(ii) If A is Ln-measurable, then so is Sa(A); and
+Ln(Sa(A)) = Ln(A).
+Proof. 1. Statement (i) is trivial if diam A = ∞; assume therefore diam A < ∞. We may also suppose A is closed. Fix ε > 0 and select x, y ∈ Sa(A) such that
+diam Sa(A) ≤ |x − y| + ε.
+Write b := x − (x · a)a and c = y − (y · a)a; then b, c ∈ Pa. Set
+r := inf{t | b + ta ∈ A},
+s := sup{t | b + ta ∈ A},
+u := inf{t | c + ta ∈ A},
+v := sup{t | c + ta ∈ A}.
+Without loss of generality, we may assume v − r ≥ s − u. Then
+v−r≥ 1
+2(v − r) + 1
+2 (s − u)
+
+
+2.2 Isodiametric inequality, Hn = Ln 89
+=1
+2(s − r) + 1
+2 (v − u)
+≥1
+2 H1(A ∩ La
+b
+)+ 1
+2 H1(A ∩ La
+c
+).
+Now |x · a| ≤ 1
+2 H1(A ∩ La
+b ) and |y · a| ≤ 1
+2 H1(A ∩ La
+c ). Consequently
+v − r ≥ |x · a| + |y · a| ≥ |x · a − y · a|.
+Therefore
+(diam Sa(A) − ε)2 ≤ |x − y|2
+= |b − c|2 + |x · a − y · a|2
+≤ |b − c|2 + (v − r)2
+= |(b + ra) − (c + va)|2
+≤ (diam A)2,
+since A is closed and so b + ra, c + va ∈ A. It follows that diam Sa(A) − ε ≤ diam A. This establishes (i).
+2. As Ln is rotation invariant, we may assume a = en = (0, . . . , 0, 1). Then Pa = Pen = Rn−1. Since L1 = H1 on R1, Fubini’s Theorem implies the map f : Rn−1 → R defined by f (b) = H1(A ∩ La
+b ) is Ln−1
+measurable and Ln(A) = ∫Rn−1 f (b) db. Hence
+Sa(A) :=
+{
+(b, y) | −f (b)
+2 ≤ y ≤ f (b)
+2
+}
+− {(b, 0)|La
+b ∩ A = ∅}
+is Ln-measurable by Lemma 1, and
+Ln(Sa(A)) =
+∫
+Rn−1
+f (b) db = Ln(A).
+Remark. In proving Hn = Ln below, observe we only use statement (ii) above in the special case that a is a standard coordinate vector. Since Hn is obviously rotation invariant, we therefore in fact prove Ln is rotation invariant.
+THEOREM 2.4 (Isodiametric inequality). For all sets A ⊆ Rn,
+Ln(A) ≤ α(n)
+( diam A 2
+)n
+.
+
+
+90 Hausdorff Measures
+Remark. This is interesting since it is not necessarily the case that A is contained in a ball whose diameter is diam A.
+Proof. 1. If diam A = ∞, this is trivial; let us therefore suppose diam A < ∞. Let {e1, . . . , en} be the standard basis for Rn. Define A1 := Se1(A), A2 := Se2(A1), . . . , An := Sen (An−1). Write A∗ = An.
+2. Claim #1: A∗ is symmetric with respect to the origin.
+Proof of claim: Clearly A1 is symmetric with respect to Pe1. Let 1 ≤ k < n and suppose Ak is symmetric with respect to Pe1, . . . Pek. Clearly Ak+1 = Sek+1(Ak) is symmetric with respect to Pek+1 Fix 1 ≤ j ≤ k and let Sj : Rn → Rn be reflection through Pej . Let b ∈ Pek+1. Since Sj(Ak) = Ak,
+H1(Ak ∩ Lek+1
+b ) = H1(Ak ∩ Lek+1
+Sjb );
+consequently
+{t | b + tek+1 ∈ Ak+1} = {t | Sjb + tek+1 ∈ Ak+1}.
+Thus Sj(Ak+1) = Ak+1; that is, Ak+1 is symmetric with respect to Pej . Thus A∗ = An is symmetric with respect to Pe1, . . . , Pen and so with respect to the origin.
+3. Claim #2: Ln(A∗) ≤ α(n)
+( diam A∗ 2
+)n
+.
+Proof of claim: Choose x ∈ A∗. Then −x ∈ A∗ by Claim #1, and so
+diam A∗ ≥ 2|x|. Thus A∗ ⊆ B(0, diam A∗
+2 ) and consequently
+Ln(A∗) ≤ Ln
+(
+B
+(
+0, diam A∗
+2
+))
+= α(n)
+( diam A∗ 2
+)n
+.
+4. Claim #3: Ln(A) ≤ α(n) ( diam A
+2
+)n .
+Proof of claim: A ̄ is Ln-measurable, and thus Lemma 2 implies
+Ln((A ̄)∗) = Ln(A ̄), diam(A ̄)∗ ≤ diam A ̄.
+Hence Claim # 2 lets us compute
+Ln(A) ≤ Ln(A ̄) = Ln((A ̄)∗) ≤ α(n)
+( diam(A ̄)∗ 2
+)n
+≤ α(n)
+( diam A ̄ 2
+)n
+= α(n)
+( diam A 2
+)n
+.
+
+
+2.2 Isodiametric inequality, Hn = Ln 91
+THEOREM 2.5 (n-dimensional Hausdorff and Lebesgue measures). We have
+Hn = Ln on Rn.
+Proof. 1. Claim #1: Ln(A) ≤ Hn(A) for all A ⊆ Rn.
+Proof of claim: Fix δ > 0. Choose sets {Cj}∞
+j=1 such that A ⊆ ∪∞
+j=1Cj
+and diam Cj ≤ δ. Then by the isodiametric inequality,
+Ln(A) ≤
+∞
+∑
+j=1
+Ln(Cj) ≤
+∞
+∑
+j=1
+α(n)
+( diam Cj 2
+)n
+.
+Taking infima, we find Ln(A) ≤ Hn
+δ (A), and thus Ln(A) ≤ Hn(A).
+2. Now, from the definition of Ln as L1 × · · · × L1, we see that for all A ⊆ Rn and δ > 0,
+Ln(A) = inf
+{∞ ∑
+i=1
+Ln(Qi) | Qi cubes, A ⊆
+∞
+⋃
+i=1
+Qi, diam Qi ≤ δ
+}
+.
+Here and afterwards we consider only cubes parallel to the coordinate axes in Rn.
+3. Claim #2: Hn is absolutely continuous with respect to Ln.
+Proof of claim: Set Cn := α(n)(
+√n
+2 )n. Then for each cube Q ⊂ Rn,
+α(n)
+( diam Q 2
+)n
+= CnLn(Q).
+Thus
+Hn
+δ (A)
+≤ inf
+{∞ ∑
+i=1
+α(n)
+( diam Qi 2
+)n
+|A⊆
+∞
+⋃
+i=1
+Qi, diam Qi ≤ δ
+}
+= CnLn(A),
+where in the second line the Qi are cubes. Let δ → 0.
+4. Claim #3: Hn(A) ≤ Ln(A) for all A ⊆ Rn.
+Proof of claim: Fix δ > 0, ε > 0. We can select cubes {Qi}∞
+i=1, such
+that A ⊆ ∪∞
+i=1Qi, diam Qi < δ, and
+∞
+∑
+i=1
+Ln(Qi) ≤ Ln(A) + ε.

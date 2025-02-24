@@ -1,0 +1,4084 @@
+Introduction to Quantum Optics: an
+amateur’s view
+Lecture notes
+M.I. Petrov, D.F. Kornovan, I.V. Toftul
+ITMO University, Department of Physics and Mathematics
+Autumn, 2019
+
+
+Preface
+I am very grateful to Andrey Bogdanov who helped me to organize this course, and to Kristina Frizyuk for her enormous help in preparing this manuscript.
+1
+
+
+Contents
+Recommended literature 5
+1 Atom-field interaction. Semiclassical theory 6 Homework . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+2 Density matrix of two energy level system 12 2.1 Density matrix of a subsystem . . . . . . . . . . . . . . . . . . . . . . . . . 13 2.2 Density matrix of a mixed state . . . . . . . . . . . . . . . . . . . . . . . . 14 2.3 Density matrix of a two-level system . . . . . . . . . . . . . . . . . . . . . 15 2.4 Bloch sphere . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16 2.5 Dissipations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17 2.5.1 Spontaneous emission of TLS . . . . . . . . . . . . . . . . . . . . . 17 2.6 Dielectric constant of media . . . . . . . . . . . . . . . . . . . . . . . . . . 18 2.7 Homework . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20 Homework . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+3 Secondary quantization 21 3.1 Vector potential of the electromagnetic field . . . . . . . . . . . . . . . . . 21 3.2 Field in the box, harmonics expansion, and the energy of the electromagnetic field . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22 3.3 Field quantization . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24 3.4 Ladder operators. Fock state. Second quantization . . . . . . . . . . . . . 25 3.5 Fields’ fluctuation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26 3.6 Homework . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+4 Coherent states 28 4.1 Eigenstates of anihilation operator . . . . . . . . . . . . . . . . . . . . . . 28 4.2 Basic properties of coherent states . . . . . . . . . . . . . . . . . . . . . . . 29 Homework . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30 4.3 Classical field . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30 Homework . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31 4.4 Fluctuations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31 4.5 Squeezed states or getting the maximum accuracy! . . . . . . . . . . . . . 34 Homework . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+5 The coherence of light 37 5.1 Michelson stellar interferometer . . . . . . . . . . . . . . . . . . . . . . . . 37 5.2 Quantum theory of photodetection . . . . . . . . . . . . . . . . . . . . . . 40
+6 Atom–field interaction. Quantum approach 42 6.1 Jaynes–Cummings model (RWA) . . . . . . . . . . . . . . . . . . . . . . . 42 Homework . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46 6.2 Collapse and revival . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46 6.3 Energy spectrum. Dispersion relation . . . . . . . . . . . . . . . . . . . . . 46
+7 Spontaneous relaxation. Weisskopf-Wigner theory 51
+2
+
+
+8 Dipole radiation. Dyadic Green’s function. The Purcell effect: classical approach 55 8.1 Dipole radiation and dyadic Green’s function . . . . . . . . . . . . . . . . . 55 8.1.1 Derivation of the Green’s function for Maxwell equations . . . . . . 56 8.1.2 Near-, intermediate- and far-field parts of Green’s function . . . . . 57 8.2 Spontaneous relaxation and local density-of-state (IN A MIXED UNITS) . 57 8.2.1 An expression for spontaneous decay . . . . . . . . . . . . . . . . . 57 8.2.2 Spontaneous decay and Green’s dyadics . . . . . . . . . . . . . . . . 59 8.3 The Purcell factor . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60 Homework . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61
+9 Theory of relaxation of electromagnetic filed. Heisenberg–Langevin method 62 9.1 In previous series . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 62 9.2 the Heisenberg–Langevin equation . . . . . . . . . . . . . . . . . . . . . . . 62 Homework . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64 9.3 Properties of the stochastic operator . . . . . . . . . . . . . . . . . . . . . 64 9.4 Equation of motion for the field correlation functions. Wiener–Khintchine theorem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+10 Atom in a damped cavity 68 10.1 The Purcell factor for a closed cavity . . . . . . . . . . . . . . . . . . . . . 68 10.2 Rigorous derivation of the atomic decay . . . . . . . . . . . . . . . . . . . . 69
+11 Casimir force and his close friends 72 11.1 Casimir force between two perfectly conducting plates . . . . . . . . . . . . 74 11.1.1 Case D = 3 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74 11.1.2 Case D = 1 and philosophy about divergent sums . . . . . . . . . . 76 11.2 Casimir–Polder force . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77 11.3 Orders of forces . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 79 11.4 The latest advances . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 80 11.4.1 The dynamical Casimir effect . . . . . . . . . . . . . . . . . . . . . 80 11.4.2 Quantum levitation or repulsive Casimir–Lifshitz forces . . . . . . . 80
+3
+
+
+Notation
+• E is the energy of the system
+•
+̂E(r, t), and ̂H(r, t) are the calssical electric and magnetic field vectors
+•
+̂E(r, t), and ̂H(r, t) are the quantum electric and magnetic field operators
+•
+̂H is the quantum hamiltonian of the system
+• By ω0 we normally denote the atomic transition frequency, while the frequency of the field we denote as ω;
+• TLS d=ef Two-Level System
+4
+
+
+Recommended literature
+1. Scully, M. O., & Zubairy, M. S. (1999). Quantum optics.
+2. Novotny, L., & Hecht, B. (2012). Principles of nano-optics. Cambridge university press.
+3. Mandel, L., & Wolf, E. (1995). Optical coherence and quantum optics. Cambridge university press.
+4. Fox, M. (2006). Quantum optics: an introduction (Vol. 15). OUP Oxford.
+5. Loudon, R., & von Foerster, T. (1974). The quantum theory of light. American Journal of Physics, 42(11), 1041-1042.
+5
+
+
+1 Atom-field interaction. Semiclassical theory
+We start with consideration of a basic problem in our course: the interaction of electromagnetic field with quantum system. In the following we will refer to such system as an ”atom”. The word semiclassical in this context means that we treat electromagnetic field classical, but describe atom as a quantum system. We start with a two-level system (see Fig. 1) as a simplest but very rich example of light-matter interaction.
+L
+r
+0
+r
+>
+|
+>
+|
+a
+b
+k
+E
+ω
+Figure 1: The energy system of two-level atom.
+We assume that the electron in the system is initially in the ground state, and at time moment t = 0 it is excited with a plane wave with polarization E and wavevector k = ω/c. Let us find the probability of atom to be in the excited state at time moment t. In the suggested formulation the problem is a typical example from quantum mechanics
+course. One should start with writing down the Hamiltonian ̂H0 of an electron in the system without electric field :
+̂H0 = ̂p2
+2m + ̂V (r). (1.1)
+Here ̂p is the momentum operator, and ̂V is the potential energy of the electron. One can find the eigen states and energy levels of the atom:
+̂H0 |ψ〉 = E |ψ〉 . (1.2)
+In the following we will assume that there are two eigen states, which we define as |a〉 and |b〉 (ground state) with energies Ea and Eb correspondingly. Their difference gives the energy of atomic transition ħω0 = Ea − Eb. The Hamiltonian of the system after introducing the electromagnetic field is as follows:
+̂H = (pˆ − e
+c A)2
+2m + Vˆ (r) − eφ. (1.3)
+NB: Potentials are not determined uniquely, and gauge transformation may take place:
+A → A + ħc
+e ∇χ, φ → φ − ħc
+e
+∂χ
+∂t , (1.4)
+wehre χ(r, t) is a real-valued function of coordinate and time. Then the wave function should also be transformed.
+ψ → ψeiχ(r,t). (1.5)
+6
+
+
+Next, we write down a vector potential describing the incident plane wave:
+A = A0eikr−iωt = A0(t)eikr. (1.6)
+Assuming that characteristic scale of the system L is much smaller than the wavelength
+L λ (1.7)
+one can expanding A near r0 (the radius-vector of atom center) in Taylor series:
+A(r, t) ≈ A0(t)eikr0 (1 + ikρ) ≈ A0eikr0. (1.8)
+So the vector potential does not change in space, but in time. By choosing the coordinate so that r0 = 0 one can simplify the system even further A ≈ A0(t):
+Hˆ = 1
+2m
+(
+pˆ − e
+c A0(t)
+)2
++ V (r) + eφ. (1.9)
+The standard choice it to use Coulomb gauge:
+div A = 0, φ = 0. (1.10)
+After that, using pˆ = −iħ∇, we obtain
+Hˆ = − ħ2
+2m
+(
+∇ − ie
+ħc A0
+)2
++ V (r). (1.11)
+Our goal is to find out the temporal evolution of the system. This is can be done by solving the Schr ̈odinger equation:
+̂H ψ = iħ ∂ψ
+∂t
+First of all, we simplify the Hamiltonian by introducing a new wave function ψ ̃ =
+ψ e−i e
+cħ A0r
+} {{ }
+↪→=u
+. This substitution and related unitary transformation ̂H → u† ̂H u will make
+an momentum shift ˆp − e/cA → pˆ. Indeed, if one recalls that
+(∇ − ig) (∇ − ig) ψ ̃eigr = = (∇ − ig)
+(
+∇
+ψ ̃
+)
+eigr =
+(
+∇2ψ ̃
+)
+eigr, (1.12)
+where g d=ef e
+cħ A0(t), the Schr ̈oedinger equation will give us
+Hˆψ = iħ ∂ψ
+∂t ⇒
+(
+− ħ2
+2m ∇2 + V
+)
+} {{ }
+Hˆ0
+ψ ̃(r, t) = iħ ∂ψ ̃
+∂t − ħr · ∂g
+∂t
+ψ ̃. (1.13)
+Lets pay attention to the second term in right and side
+∂g
+∂t = e
+ħc
+∂A0(t)
+∂t = −e
+ħ E(t). (1.14)
+Using that we can rewrite (1.13) as
+Hˆ0ψ ̃ − erEψ ̃
+} {{ }
+atom-field interaction
+= iħ ∂ψ ̃
+∂t . (1.15)
+7
+
+
+The second component in the lefthand side is the interaction term, which appeared after transformation of the Hamiltonian. By its form one can treat is as a dipole energy in the electric field, and we will define Hˆ1
+d=ef −d · E, and d d=ef −er is the dipole moment. This, finally, leads us to a simplified form of the Schro ̈dinger equation (we omit the tilde sign here to avoid additional idle symbols):
+(
+̂H0 + ̂H1
+) ψ ̃ = iħ∂ψ ̃
+∂t . (1.16)
+In order to solve this equation one can apply the expansion of |ψ〉 over the eigenstates
+of non-perturbed system:
+∣ ∣ ∣
+ψ ̃
+〉
+= Ca(t) |a〉 + Cb(t) |b〉 , (1.17)
+where
+Hˆ0 |a〉 = Ea |a〉 , Hˆ0 |b〉 = Eb |b〉 . (1.18)
+NB: Here we switch to ”bra” and ”ket” respresentation.
+We recall that Ea − Eb = ħω0 is the transition frequency. We assume that the incident
+field has following time dependence E = E0 cos ωt, so Hˆ1 = −d · E. Let us assume that initially the system is in the ground state in accordance with the formulation of the problem:
+∣ ∣ ∣
+ψ ̃
+〉∣ ∣
+∣t=0
+= |b〉 → Ca(0) = 0,
+Cb(0) = 1. (1.19)
+Then one can rewrite the equation in the form:
+(EaCa |a〉 + EbCb |b〉) − d · E Ca |a〉 − d · E Cb |b〉 = iħC ̇ a |a〉 + iħC ̇ b |b〉 . (1.20)
+Projecting it over |a〉 and |b〉 one can get:
+
+ 
+ 
+〈a| · (1.20) : EaCa − Ca 〈a| d · ε |a〉 − Cb 〈a| d · ε |b〉 = iħC ̇ a,
+〈b| · (1.20) : EbCb − Cb 〈b| d · ε |b〉 − Ca 〈b| d · ε |a〉 = iħC ̇ b.
+(1.21)
+In the dipole approximation the field E does not change in space, so we can write
+〈a| d · E |a〉 = 〈a| d |a〉 · E, 〈a| d · E |b〉 = 〈a| d |b〉 · E. (1.22)
+This allows one to introduce dipole matrix elements:
+dαβ
+d=ef 〈α| d |β〉 =
+∫
+dV ψ∗
+α(r)erψβ(r) α, β = a, b. (1.23)
+By symmetry considerations it follows |dαα| |dαβ|α6=β, since normally neighbouring
+states have opposite parity, and er is the odd function. Basing on this, we set daa, dbb → 0 in (1.21), and we can write
+{
+iħC ̇ a = EaCa − Cbdab · E,
+iħC ̇ b = EbCb − Cadba · E. dba = d∗
+ab (1.24)
+Here we can see that if we ”turn off” the interaction (dαβ = 0) states |a〉 and |b〉 will be unloosened. If we turn the interaction on transitions will take place. To get rid off phase factor we introduce
+C ̃a(t) d=ef Ca(t)e− i
+ħ Eat, C ̃b(t) d=ef Cb(t)e− i
+ħ Ebt. (1.25)
+8
+
+
+After that we have 
+   
+   
+ ̇
+C ̃a = i
+ħ dab · Eeiω0tC ̃b(t),
+ ̇
+C ̃b = i
+ħ d∗
+ab · Ee−iω0tC ̃a(t).
+(1.26)
+Now we need to apply rotating wave approximation (RWA). To understand what is it lets look at
+E(t)eiω0t = E0
+eiωt + e−iωt
+2 eiω0t = 1
+2 E0
+
+ ei(ω0+ω)t
+} {{ }
+fastly oscillating
++ei(ω0−ω)t
+
+ . (1.27)
+Fast oscillating term will lead to a small contribution, so it may be neglected. Leaving only ∼ ei(ω0−ω)t term is called RWA. It is convenient to denote ∆ d=ef ω0 − ω, which is the frequency of detuning between the excitation frequency and atomic transition frequency, which gives us:
+
+   
+   
+ ̇
+C ̃a = i
+2ħ dab · E0ei∆tC ̃b(t),
+ ̇
+C ̃b = i
+2ħ d∗
+ab · E0e−i∆tC ̃a(t).
+(1.28)
+One can see that there is pronounced coupling between the ground and excited state, which is defined by constant
+ΩR
+d=ef |dab · E0|
+ħ , (1.29)
+which is called Rabi frequency. Its real part gives the strength of coupling between the states. To illustrate our result one can consider zero detuning case ∆ = 0 (resonant excitation) and a specific phase of incident light:
+
+   
+   
+ ̇
+C ̃a = i ΩR
+2
+C ̃b,
+ ̇
+C ̃b = i ΩR
+2
+C ̃a.
+(1.30)
+The solution for given initial conditions (1.19) is easy to obtain: C ̃b = i cos ( ΩRt
+2
+) , C ̃a =
+i sin ( ΩRt
+2
+). The squared amplitudes of the coefficients |Ca|2 and |Cb|2 have the real physical meaning of the probability of occupation on excited and ground states respectively. NB: There are couple of very simple but illustrative conclusion one can make:
+1. If d ⊥ E, then ΩR = 0 and there is no coupling between the two states;
+2. To increase Rabi frequency one needs to increase the amplitude of incident wave |E0|;
+3. The inversion population oscillates with period 2π
+ΩR
+, however the wavefunction, which
+describes the quantum state is periodic with 4π
+ΩR
+;
+4. There is no spontaneous emission in the system. If one turns out the field at time moment t then the system will remain in its state.
+9
+
+
+0
+0
+0.5
+1
+|Сa|
+2 |Сb|
+2
+ΩR t
+2π 4π
+0 2π 4π
+0
+0.5
+1∆
+∆
+1
+2
+∆1 ∆2
+= 0.1
+Figure 2: Rabi oscillations of two-level system. Could you add to this solution a dynamics in the non-resonant excitation.
+Homework. Deadline: 1st December
+1. (3 pts) The hydrogen atom wave functions with quantum numbers (n, l, ml) of (2,0,0) and (3,1,0) are as follows:
+ψ1(r, θ, φ) = 1
+4√2πa3/2
+0
+(
+2− r
+a0
+)
+exp−r/2a0
+ψ2(r, θ, φ) =
+√2
+81√πa5/2
+0
+(
+6− r
+a0
+)
+r cos(θ) exp−r/3a0
+where a0 is the Bohr radius, where θ is the angle with the z-axis (quantization axis). Calculate the intensity of z-polarized light field and light power required to observe Rabi oscillations with period of several picoseconds.
+2. Consider a TLS from the first lecture. Assume that at time moment t = 0 the system was in ground state, and it was excited by a finite optical pulse given by an amplitude envelope: E0(t) = Eenv(t) cos(ωt),
+where Eenv(t) is a slowly varying function. Please, formulate the condition for the envelope function, which ensure that the system will be in the inversed population state after the pulse has passed.
+3. (6 pts) Consider a two-level system with non-zero diagonal elements of dipole transition operator:
+dˆ =
+( daa dab d∗
+ab dbb
+)
+10
+
+
+Using semiclassical approach generalize the RWA (Rotating wave approximation) for this case and find the expression for “new” Rabi frequency.
+Hint: To simplify the problem use the interaction picture:
+1)Hˆ0 6= Hˆ0(t) Hˆ = Hˆ0 + Vˆ −→ Vˆint = e− i
+ħ Hˆ0tVˆ e i
+ħ Hˆ0t
+2)Hˆ0 = Hˆ0(t) Hˆ = Hˆ0(t) + Vˆ −→ Vˆint = e− i
+ħ
+∫t
+0 Hˆ0(τ )dτ Vˆ e i
+ħ
+∫t
+0 Hˆ0(τ )dτ
+Isidor Isaac Rabi (29 July 1898 - 11 January 1988)
+I encourage you to add some bio here. On you taste :)
+Wiki: ”In 1942 Oppenheimer attempted to recruit Rabi and Robert Bacher to work at the Los Alamos Laboratory on a new secret project. They convinced Oppenheimer that his plan for a military laboratory would not work, since a scientific effort would need to be a civilian affair. The plan was modified, and the new laboratory would be a civilian one, run by the University of California under contract from the War Department. In the end, Rabi still did not go west, but did agree to serve as a consultant to the Manhattan Project.[52] Rabi attended the Trinity test in July 1945. The scientists working on Trinity set up a betting pool on the yield of the test, with predictions ranging from total dud to 45 kilotons of TNT equivalent (kt). Rabi arrived late and found the only entry left was for 18 kilotons, which he purchased. Wearing welding goggles, he waited for the result with Ramsey and Enrico Fermi. The blast was rated at 18.6 kilotons, and Rabi won the pool.”
+Figure 3: Isidor Isaac Rabi (29 July 1898 11 January 1988)
+11
+
+
+2 Density matrix of two energy level system
+We continue the consideration of a TLS started previous lecture. In Section 1 we obtained the dynamics of a TLS, showing Rabi oscillations. There is no need to stress that any dissipative forces were omitted in that consideration. This results in a conclusion that turning off the incident field will make the system to ”freeze” in the final state forever (see Fig. 4). This contradicts with the well-known effect of spontaneous relaxation, happening in the real life. One could add a phenomenological dissipative terms to dynamical system Eq. (1.30), but this will ruin the wavefunction and it’s normalization, as we change the final equations but not the Hamiltonian of the system. In the framework of semiclassical consideration the only correct way out is to use density matrix formalism.
+02
+0
+0.5
+1
+|Сa|
+2
+4
+|Сb|
+2
+ΩR t
+ππ
+Field:
+Figure 4: An illustrative case of Fig. 2 when the incident field is turned off.
+A density matrix is a matrix that describes a quantum system in a mixed state, a statistical ensemble of several quantum states. In other words, density matrix is very useful if we do not know a wave function which contains all the information of the system but we still want to describe our system. We illustrate this with two very typical examples (fig. 5):
+1. |ψA〉 is known but we need to describe only B-system which is a subsystem of A. This means that though the system is in a pure quantum mechanical state, we might not always can describe the subsystem B with any particular wavefunction.
+2. B — is not a conservative system, and there is an interaction with energy exchanging with the outer system (reservoir) is taking place. We do not know the exact mechanism of this interaction, and, thus, can not build a proper wavefunction. But still can give some assumptions on that.
+NB: If a state can be described by a particular wavefunction, then we call it ”pure” state
+If |ψ〉 is known than density matrix is defined by
+ρˆ = |ψ〉 〈ψ| (2.1)
+If we expand to Fock states |ψ〉 = ∑ Cn |n〉 then
+ρˆ =
+∑
+nm
+C∗
+nCm |m〉 〈n| . (2.2)
+12
+
+
+BA
+A
+B
+Ψ>
+|
+Ψ>
+|
+Ψ>
+|
+Ψ>
+|
+A
+A
+B
+B
+- known
+- not known
+- not known
+- not known
+reservoir
+Figure 5: Possible systems where one need to use density matrix
+Matrix elements — ρmn = C∗
+nCm.
+Example: Density matrix for two-level system.
+For a two-level system considered in the first lecture we have:
+|ψ〉 = Ca |a〉 + Cb |b〉 , (2.3)
+so
+ρˆ = |ψ〉 〈ψ| =
+( |Ca(t)|2 Ca(t)C∗
+b (t) Cb (t)C ∗
+a(t) |Cb(t)|2
+)
+, ρij = 〈i| ρˆ|j〉 . (2.4)
+Mean operator value:
+f ̄ = 〈ψ| fˆ|ψ〉 ∑
+nm
+C∗
+nCm 〈n| fˆ|m〉 =
+∑
+mn
+ρnmfnm = Tr
+(
+ρˆfˆ
+)
+. (2.5)
+This is the main intended use of density matrix! Properties:
+1. Hermiticity: ρˆ† = ρˆ.
+2. Tr ρˆ = 1 → diagonal elements: ρmn = |Cn|2. Remark: only for pure states!
+3. ] ρˆ = |ψ〉 〈ψ| → ρˆ2 = ρˆ. It’s easy to show:
+ρˆ2 = |ψ〉 〈ψ| |ψ〉
+} {{ }
+↪→=1
+〈ψ| = |ψ〉 〈ψ| . (2.6)
+It also means that density matrix of pure state is a projector.
+2.1 Density matrix of a subsystem
+Let fˆA is an operator that acts only in subsystem A. Now let us ask a question: how
+to find mean value f ̄A?
+13
+
+
+Subsystem A does not have its own wave function and |ψ〉 (wave function of A + B) does not fall in multiplication of |ψA〉 and |ψB〉. But we can write an expansion in eigenfunctions |n〉 of subsystem A and |α〉 of B:
+|ψ〉 =
+∑
+nα
+Cnα |n〉 |α〉 . (2.7)
+Now we can write
+f ̄A = 〈ψ| fˆA |ψ〉 =
+∑
+nαn′α′
+Cnα C ∗
+n′α′ 〈α′|
+fn′ n
+{ }} {
+〈n′| fˆA |n〉 |α〉 =
+=
+∑
+nαn′α′
+Cnα C ∗
+n′α′ fn′n 〈α′|α〉
+} {{ }
+↪→=δij αα′
+=
+∑
+nn′
+∑
+α
+Cnα C ∗
+n′αfn′n =
+∑
+nn′
+(ρˆA)n′n fn′n. (2.8)
+Here we denoted (ρˆA)n′n =
+∑
+α
+Cnα C ∗
+n′α (2.9)
+or in other words (ρˆA)n′n =
+∑
+α=α′
+(ρˆA+B)nαn′α′ . (2.10)
+In the general case:
+ρˆA = TrB (ρˆA+B) (2.11)
+2.2 Density matrix of a mixed state
+Now let us consider a mixed state. Let there are lots of systems in different pure states |ψi〉. Let there are Ni particles in |ψi〉, then the whole amount of particles (=systems) is N = ∑ Ni. The probabily to find any system in |ψi〉 is wi = Ni
+N . The question we are trying to answer now: how can we find mean operator value?
+f ̄ = Tr ρˆfˆ =? since ρˆ =? (2.12)
+Scenario is the following:
+1. Calculation of quantum-average values: fi = 〈ψi| fˆ|ψi〉.
+2. Calculation of classical average values: f ̄ = ∑ wifi.
+So
+f ̄ =
+∑
+wi 〈ψi| fˆ|ψi〉 =
+∑
+i
+wi
+∑
+nm
+(C i
+n
+)∗ Cm
+} {{ }
+ρimn
+〈n| fˆ|m〉
+} {{ } fnm
+=
+=
+∑
+nm
+∑
+i
+ρi
+mnwifnm
+d=ef Tr
+(
+ρˆfˆ
+)
+. (2.13)
+Here we defined density matrix as (ρˆmix)mn = ∑
+i wiρi
+mn. Density matrix has a probability meaning:
+ρˆmix =
+∑
+i
+wiρˆi, ρˆi = |ψi〉 〈ψi| . (2.14)
+Coefficients ωi are defined by statistical (not quantum!) mechanics (e.g. Boltzmann distribution). Remarks:
+14
+
+
+1. Tr ρˆmix = 1 by virtue of the fact that ∑ wi = 1.
+2. Tr ρˆ2
+mix = ∑ w2
+i ≤ 1.
+Proof:
+Tr ρˆ2
+mix = Tr
+∑
+ij
+wiwj
+∑
+nm
+C∗
+mi Cni |ni〉 〈mi| ∑
+n′ m′
+C∗
+m′
+j Cn′
+j
+∣
+∣n′
+j
+〉 〈m′
+j
+∣
+∣=
+= Tr
+∑
+ij
+wiwj
+∑
+nmn′m′
+C∗
+mi C ∗
+m′
+j Cni Cn′
+j |ni〉 〈mi| ∣
+∣n′
+j
+〉
+} {{ }
+↪→=δmn′ δij
+〈m′
+j
+∣
+∣=
+= Tr
+∑
+i
+w2
+i
+∑
+n′
+|Cn′ |2
+} {{ }
+↪→=1
+ρˆi =
+∑
+i
+w2
+i . (2.15)
+It means it is not a projector anymore! Testing criterion of pureness is introduced by
+μ = Tr ρˆ − Tr ρˆ2 ≥ 0 (2.16)
+2.3 Density matrix of a two-level system
+Let us consider a TLS with upper state |a〉 with energy Ea = ħωa and lower |b〉 with Eb = ħωb shown in Fig. ??. Wave function of such system is
+|ψ〉 = Ca |a〉 + Cb |b〉 , |a〉 =
+(0
+1
+)
+, |b〉 =
+(1
+0
+)
+. (2.17)
+Density matrix is
+ρˆ =
+( |Ca(t)|2 Ca(t)C∗
+b (t) Cb (t)C ∗
+a(t) |Cb(t)|2
+)
+. (2.18)
+The von Neumann equation for time evolution
+ρˆ ̇ = − i
+ħ
+[Hˆ, ρˆ
+]
+. (2.19)
+It is convenient to separate Hamiltonian into two parts Hˆ = ̂H0 + ̂H1, where
+̂H0 = ħωa |a〉 〈a| + ħωb |b〉 〈b| , (2.20)
+̂H1 = −E(t) (dab |a〉 〈b| + d∗
+ab |b〉 〈a|) , (2.21)
+where E(t) = E0 cos ωt. Motion equations
+ρ ̇mn = − i
+ħ
+∑
+k
+(Hmkρkn − ρmkHkn) (2.22)
+or
+
+   
+   
+ρ ̇aa = − i
+ħ E(t) (d∗
+abρab − dabρba)
+ρ ̇bb = −ρ ̇aa
+ρ ̇ab = −iω0ρab + i E(t)dab
+ħ (ρbb − ρaa)
+ρ ̇ba = (ρ ̇ab)∗
+(2.23)
+where ω0 = ωa − ωb. Needless to note this is not a RWA yet. Let ρab = ρ ̃abe−iωt and ρba = ρ ̃baeiωt then
+15
+
+
+ ̇
+ρ ̃ab = −i(ω0 − ω)ρ ̃ab + i E(t)dabeiωt
+ħ (ρbb − ρaa) = −i(ω0 − ω)ρ ̃ab+
+i E0dab
+2ħ
+(eiωt + e−iωt) eiωt (ρbb − ρaa) ≈ −i (ω0 − ω)
+} {{ }
+∆
+ρ ̃ab + i E0dab
+2ħ
+} {{ }
+ΩR/2
+(ρbb − ρaa) . (2.24)
+So in RWA we have
+
+    
+    
+ ̇
+ρ ̃ab = −i∆ρ ̃ab + i ΩR
+2 (ρbb − ρaa) ,  ̇
+ρ ̃ba = (  ̇
+ρ ̃ab)∗,
+ρ ̇aa = −i ΩR
+2 (ρ ̃ab − ρ ̃ba) ,
+ρ ̇bb = −ρ ̇aa.
+(2.25)
+While obtaining this we have also assumed that dab ∈ R, which simplifies the consideration without loosing the generality. Let us consider a specific case: at time t = 0 system is in the lower state:
+Ca = 0, Cb = 1,
+ρbb
+∣
+∣t=0 = 1, ρaa
+∣
+∣t=0 = 0. (2.26)
+02
+0
+0.5
+1
+a
+4
+ρ
+a ρb
+ΩR t
+ππ
+b
+Figure 6: Inverse population of two level system for resonant and non-resonant excitation
+Let the incident field be E = E0 cos (ωt + φ). Induced dipole moment is dab = 〈a| er |b〉 ∈ C, so |Ω| = ΩR = E0·dab
+ħ.
+2.4 Bloch sphere
+There is an easy-to-see way to visualize the state of a two-level system. First of all, while we are considering the a system in a pure state we have only two independent parameters because of the additional restictions conditions applied for the density matrix. It appears that it is convenient to introduce the following variables:
+
+ 
+ 
+x = 2 Re ρab
+y = 2 Im ρab
+z = ρaa − ρbb
+(2.27)
+These coordinates form a new vector r = {x, y, z}. There are several properties of this vector:
+16
+
+
+• if the system is in the pure state, then the |r| = 1 and the vector’s end lies on the sphere, which is often called Bloch’s sphere. This is a consequence of the relation |r|2 = Tr(ρˆ2);
+• by the definition, z-coordinate shows the inverse population of the system;
+• one can show, that the system (2.30) can be rewritten in the form of
+r ̇ = [Ω × r] , (2.28)
+where Ω is the vector of precession (see Homework).
+2.5 Dissipations
+We recall that one of the main reasons, which stimulated us to consider the density matrix, was the potential possibility of introducing the losses and dissipation processes in the system. This can be done phenomenologically or more rigorously using relaxation theory (see Scully&Zubairy for the details). The simplified conclusion of this rigorous approach can be formulate in a general form of recipe of adding the losses through the dissipation operator Γˆ:
+ρˆ ̇ = − i
+ħ
+[Hˆ, ρˆ
+]
+−1
+2
+{ˆΓ, ρˆ
+}
+, (2.29)
+where Γmn = γnδmn, γn is the dissipation rate constants. However, this is not the only way how one can introduce the dissipation terms.
+2.5.1 Spontaneous emission of TLS
+With the density matrix tool one can introduce the process of spontaneous emission for describing the TLS. This can be done by adding the necessary terms in the right-hand side of the master equation. As soon as we want to describe the spontaneous decay of the excited state, we should add a terms −γ1ρaa in the equation describing the dynamics of the upper state population given by ρaa. In order to conserve the total probability, one should add the same term to the equation for ρbb. We will also add a rate of coherence dissipation defined by the constant γ2
+
+    
+    
+ρ ̇aa = −i ΩR
+2 (ρ ̃ab − ρ ̃ba) − γ1ρaa,
+ρ ̇bb = −ρ ̇aa.  ̇
+ρ ̃ab = −i∆ρ ̃ab + i ΩR
+2 (ρbb − ρaa) − γ2ρ ̃ab,  ̇
+ρ ̃ba = (  ̇
+ρ ̃ab)∗.
+(2.30)
+The introduced dissipation rates γ1 and γ2 are often referred to inversion population decay and coherence decay (dephasing) rates respectively. The are also often called longitudinal and transverse damping constants, the reason for this notation will be clear later. The inversion population rate has quite simple origin and can be related to many processes, which can be divided into radiative (spontaneous emission) and non-radiative(relaxation through phonon interaction or any other non-radiating channel): γ1 = γr
+1 + γnr
+1 . The decoherence rate is, actually, more complicated process and it can not be lower that doubled inversion population decay rate:
+γ2 = 2γ1 + γ′
+2.
+17
+
+
+1 2’
+2’’
+Longitudinal
+Transverse
+Figure 7: The trajectory of the state on the Bloch sphere for two cases: γ′
+2 γ1 strong transverse damping (1-2’), γ′′
+2 γ1 strong longitudinal damping (1-2”).
+This illustrates the fact that the inversion population results in decoherence of the quantum state. On the other hand, the factor γ′
+2 corresponds to so-called pure dephasing time, which is not necessarily is related to population decay. Finally, all the relaxation processes result in the destroying of the pure quantum states and transferring it into the mixed state. This can be very easily illustrated with the help of the Bloch sphere. We consider two distinct cases:
+1. γ′
+2 γ1 corresponds to pure dephasing process. In this cases the population inversion stays constant at this time scales, and the relaxation process occurs with z ≈ const and the vector has only transverse dynamics (see Fig. 7 1-2’).
+2. γ1 γ′
+2 corresponds to dynamics with varying all the coordinates. The final state corresponds to the ground state as show in Fig. 7 1-2” trajectory.
+Note, that in both cases the vector leaves the surface and goes inside the sphere, which is a sign of an incoherence, and the system transfers switches into a mixed state.
+2.6 Dielectric constant of media
+The proposed picture of a TLS interaction with classical field based on density matrix gives a powerful tool for analyzing large quantum systems consisting of many atoms. This allows, in particular, to build a proper description of lasing. But here we will consider another important example of deriving the dielectric susceptibility of a media by considering it as an ensemble of identical TLS. From classical electrodynamics one knows that susceptibility is a constant, which ties together polarization vector P and electric amplitude vector E:
+P = χE.
+18
+
+
+At the same time, the polarization vector is a dipole moment of a unit volume, which can be calculated basing on the quantum mechanical approach. The time-varying polarization can be obtained by averaging the dipole moment of a TLS using the density matrix of the system:
+P ̃ (t) = N Tr(ρˆ(t)dˆ) = N (ρabd∗
+ab + ρbadab), (2.31)
+here N is the concentration of atoms in media. On the other hand temporal dependence of P ̃ (t) can be expanded in two counter-rotating terms:
+P ̃ (t) = Pe−iωt + P∗eiωt, (2.32)
+which gives us that P = N ρ ̃abd∗
+ab. Now, in order to derive the expression for polarization tensor one should consider the stationary regime, which forms in TLS after applying external harmonic field excitation. This can be easily done by assuming ρ ̇ˆ → 0 in Eq. (2.30), which results in
+
+    
+    
+ρaa = −i ΩR
+2γ1
+(
+ρ ̃ab − ρ ̃ba)
+ρ ̃ab = i ΩR
+2(γ2 + i∆) (ρbb − ρaa)
+(2.33)
+Using the properties of the density matrix, we get ρbb − ρaa = 1 − 2ρaa = 1 + iΩR
+γ1
+(
+ρ ̃ab −
+ρ ̃ba). After some simple algebra, one obtains:
+ρbb − ρaa = 1 − Ω2
+Rγ2
+γ1(γ2
+2 + ∆2) (ρbb − ρaa),
+which, finally, gives us:
+ρbb − ρaa = γ2
+2 + ∆2
+γ2
+2 + ∆2 + Ω2
+Rγ2
+γ1
+, (2.34)
+and
+ρ ̃ab = 1
+2
+ΩR(∆ + iγ2)
+γ2
+2 + ∆2 + Ω2
+Rγ2
+γ1
+. (2.35)
+Now, recalling the definition of Rabi frequency ΩR = dabE/ħ, we can write down the expression for χ:
+χ(ω) = |dab|2((ω0 − ω) + iγ2)
+2ħ
+(
+(ω0 − ω)2 + γ2
+2 + Ω2
+Rγ2
+γ1
+) . (2.36)
+The obtained expression for χ(ω) demonstrates two very important features:
+• Any quantum dipole transition gives a resonant response in material constants of media.
+• Any TLS is highly nonlinear material. Indeed, as Ω2
+R ∼ E2, then the susceptibility is a function of field intensity. Moreover, at the resonance the imaginary part Im(χ), responsible for absorption has following expression:
+Im(χ(ω)) = |dab|2γ1
+2ħ (γ1γ2 + Ω2
+R).
+19
+
+
+2.7 Homework
+Homework. Можно здесь добавить домашку про построение сферы Блоха с затуханием и, например, указать сразу пример системы с Γ 6= 0. бла бла бла
+Homework. Density Matrix of TLS
+1. (4 pt) Entangled spins
+The system consisting of two electrons forming a singlet state have the following wavefunction
+|ψ〉 =√12 (| ↑〉| ↓〉 − | ↓〉| ↑〉)
+Find the density matrix for the first electron and show that the state of the electron is not pure.
+2. (5 pt) Dynamics on the Bloch sphere
+A problem of a general two-level system can be expressed in terms of 2×2 matrices, which can be expanded in the following basis: {ˆ1, σˆx, σˆy, σˆz}. For example, the Hamiltonian and the density matrix can be expressed as
+Hˆ = ħ
+2
+(ω0ˆ1 + Ω · σ)
+ρˆ = 1
+2
+(r0ˆ1 + r · σ)
+As soon as T r(ρˆ) = 1, r0 = 1 and we can set ω0 to 0 by choosing a zero
+level energy. Proof the equivalence of the Neumann equation ρˆ ̇ = − i
+ħ [Hˆ, ρˆ] and
+r ̇ = Ω × r. Write several sentences commenting this result.
+3. Damped TLS
+Consider a problem of a two-level system interacting with electromagnetic field using a semiclassical approach. Now we can phenomenologically introduce decoherence:
+ρ ̇aa = − iΩR
+2 (ρba − ρab) − 2γρaa
+ρ ̇bb = −ρ ̇aa
+ρ ̇ba = ρ ̇∗
+ab = iΩR
+2 (ρbb − ρaa) + [i(ω0 − ω) − γ] ρba
+Assume that the system is initially prepared in the ground state (ρbb(t = 0) = 1)
+a) (5 pt) Solve the system of ODE numerically and analyze it for i) strong (ΩR γ) and weak (ΩR γ) coupling, ii) on/off- resonant excitation;
+b) (2 pt) Find the analytical solution for populations ρaa and ρbb for t → ∞ (stationary regime).
+c)[Optional task] (6pt) Be means of any mathematical software plot the trajectory of the solution obtained in a) on the Bloch sphere
+20
+
+
+3 Secondary quantization
+The discussed semi-classical approach is a powerful method for description of lightmatter interaction. It allows explanation of many complex physical effects. By adding classical fluctuation into the semi-classical system can cover a bigger part of quantum optics [Mandel]. However, there are several important effects, which can not be explained in terms of semi-classical approach. Spontaneous emission of excited atom is one of them, though it lies in the fundamentals of many physical systems. In order to understand this and other purely quantum effects, one needs to introduce a quantum of electromagnetic field, which are photons, or, in other words, one should quantize field. In order to do that, we will follow the standart method of field quantization and start from wave nature of electromagnetic field.
+3.1 Vector potential of the electromagnetic field
+The Maxwell equations in vacuum in the absence of charges and currents have very simple form:
+
+      
+      
+rot E = −1
+c
+∂H
+∂t , (3.1a)
+rot H = 1
+c
+∂E
+∂t , (3.1b)
+div E = 0, (3.1c)
+div H = 0. (3.1d)
+We will work with vector potential A, which can be introduced as follows:
+H = rot A (3.2)
+E = −1
+c
+∂A
+∂t − ∇φ, (3.3)
+where φ is the scalar electric potential. The vector and scalar potential can be defined in non-unique way up to the gradient of an arbitrary real function and time derivative of the same function, which often called “calibration freedom”. In order to eliminate this uncertainty in A and φ we apply additional restriction (Lorentz gauge):
+div A = 0. (3.4)
+Substituting the electric field expression to the (3.1b) gives
+rot rot A = − 1
+c2
+∂2A
+∂t2 − 1
+c ∇ ∂φ
+∂t (3.5)
+and since rot rot A = grad div A
+} {{ }
+↪→=0
+− div grad A = −∆A (3.6)
+we arrive to the Helmholtz equation for the vector potential:
+∆A − 1
+c2
+∂2A
+∂t2 = 1
+c ∇ ∂φ
+∂t . (3.7)
+Applying the divergence operation over (3.3), one can get the equation for the scalar potential:
+div E
+} {{ }
+↪→=0
+=−1
+c
+∂
+∂t div A
+} {{ }
+↪→=0
+−∆φ ⇒ ∆φ = 0 ⇒ ∇φ = 0. (3.8)
+21
+
+
+LL
+L
+(a) (b)
+k
+e k1
+Ak
+e*
+k2
+Figure 8: Formulation of the problem
+In a free space, we can apply the scalar potential φ ≡ 0, which simplifies the system for A: 
+  
+  
+∆A − 1
+c2
+∂2A
+∂t2 = 0,
+div A = 0.
+(3.9)
+3.2 Field in the box, harmonics expansion, and the energy of
+the electromagnetic field
+After we set the equation for vector potential, we can build its solution for a very simple yet very important case. Let us consider a cube box with the length of the edge L (Fig. 8) with periodic boundary conditions. Such a box can interpret a free space once the limit L → ∞ will be applied. The solution of (3.9) may be written as a sum of all eigen solutions, which are the plane waves in Cartesian system. Taking into the account periodic boundary that results in
+A(r, t) =
+∑
+k
+Ak(t)eikr, kα = 2πnα
+L , α = x, y, z nα ∈ Z. (3.10)
+• The vector potential A(r, t) is real valued that provides the condition:
+Ak(t) = A∗
+−k(t) (3.11)
+• The temporal dependence of the vector potential is described by two oscillating terms: Ak(t) = cke−iωkt + c∗
+−keiωkt, (3.12)
+where ωk = ck = c√kx2 + ky2 + kz2. The form of Ak(t) is provided by the condition (3.11).
+• The Lorentz gauge leads to the fact that the waves are transverse:
+div A = 0 → ∑
+kAkeikr = 0 ⇐⇒ Ak(t) · k = 0. (3.13)
+Consider a wave with wave vector k. According to Maxwell equations, there are two independent polarizations, so we introduce two transverse polarization vectors (see Fig. 8
+22
+
+
+(b)) ek1; ek2. Three vectors (ek1; ek2; k/k) form a right-handed orthonormal basis which implies:
+k · eks = 0, [ek1 × e∗
+k2] = k/k,
+eks · e∗
+ks′ = δss′ , ck = ∑
+s ckseks.
+(3.14)
+After that we can rewrite decomposition of A as
+A=
+∑
+k,s
+A ̃k
+(cksekse−iωkt + c∗
+−kse∗
+−kseiωkt) · eikr =
+= /inverse 2nd sum using (3.12): (−k) → k/ =
+∑
+k,s
+A ̃k
+(uks(t)ekseikr + u∗
+ks(t)e∗
+kse−ikr) ,
+(3.15)
+where uks(t) = ckse−iωkt. Now we can write fields
+E = −1
+c
+∂A
+∂t = i
+c
+∑
+k,s
+A ̃kωk
+(uks(t)ekseikr − u∗
+ks(t)e∗
+kse−ikr) , (3.16)
+H = rot A = i
+∑
+k,s
+A ̃k
+(uks [k × eks] eikr − u∗
+ks [k × e∗
+ks] e−ikr) . (3.17)
+The obtained plane-wave expansion allows us to get a simple picture of EM field as an ensemble of oscillators. It is very illustrative to consider the energy of EM field inside the box:
+H= 1
+8π
+∫
+(H2 + E2) dV. (3.18)
+We will simplify this further by using several important relations. First is the orthogonality of the modes:
+∫
+L3
+ei(k−k′)rdV = L3δkk′ . (3.19)
+This feature vanish the ∑
+k. Second, it is convenient to notice that
+e∗
+ks · eks′ = δss′ → [k × e∗
+ks] · [k × eks′] = k2δss′. (3.20)
+Then, we get
+H = L3
+8π 2
+∑
+k,s
+A ̃2
+k
+(
+ω2
+k
+c2 |uks|2
+} {{ }
+↪→E2
++ k2 |uks|2
+} {{ }
+↪→H 2
+)
+, k2 = ω2
+k
+c2 (for each mode!) (3.21)
+H = L3
+2π
+∑
+k,s
+A ̃2
+kk2 |uks|2 . (3.22)
+With this we see that electric and magnetic counterparts give equal contribution into the total EM energy. We split the real and imaginary parts of the mode amplitude |uks| by introducing new variables
+qks(t) = uks(t) + u∗
+ks(t), (3.23)
+pks(t) = −iωk (uks(t) − u∗
+ks(t)) . (3.24)
+23
+
+
+It’s obvious that
+uks(t) = 1
+2 qks(t) − 1
+2iω pks(t) → |uks|2 = 1
+4ω2
+k
+(p2
+ks + ω2
+kq2
+ks
+) . (3.25)
+The energy will be as follows
+H = L3
+4πc2
+∑
+k,s
+A ̃2
+k
+2
+(p2
+ks + ω2
+kq2
+ks
+) . (3.26)
+Let us boldly put A ̃k = √4πc2/L3, then finally
+H=
+∑
+k,s
+( p2
+ks
+2 + ω2
+kq2
+ks
+2
+)
+. (3.27)
+This picture is indeed very illustrative as represent the Hamiltonian of the field as a sum of harmonic oscillators energies.
+3.3 Field quantization
+The field quantization procedure bases on the quantum-to-classical correspondence principe: we obtain the classical expression, and then quantize it by assuming that physical fields become operators. In our case, we see that the system can be considered as a set of harmonic oscillators, and H ∼ p2/2 + ω2q2/2, one can correspond quantum operators of coordinate and momentum to classical ones:
+{
+qks → qˆks,
+pks → pˆks. (3.28)
+We know, that in any quantum oscillator the coordinate and momentum can not commute. Thus, the introduced operators should also satisfy the same commutation relations:
+[qˆks; pˆk′s′] = iħδ(3)
+kk′ δss′ , (3.29)
+[qˆks; qˆk′s′] = [pˆks; pˆk′s′] = 0. (3.30)
+These operators should also correspond to measurable quantity and, thus, should be hermitian: qˆks = qˆ†
+ks, pˆks = pˆ†
+ks. (3.31)
+Relations (3.29), (3.30) and (3.31) impose conditions for qˆks and pˆks. Then, our Hamiltonian acquires operator form
+H −→ ̂H =
+∑
+k,s
+( pˆ2
+ks
+2 + ω2
+kqˆ2
+ks
+2
+)
+.
+In order to further simplify the Hamiltonian and consideration in general, it is convenient to introduce the ladder operators:
+aˆks(t) = 1
+√2ħω (ωqˆks + ipˆks) , (3.32)
+and his conjugated friend
+aˆ†
+ks(t) = 1
+√2ħω (ωqˆks − ipˆks) . (3.33)
+24
+
+
+This leads to the useful representation of qˆks and pˆks:
+qˆks(t) =
+√ħ
+2ω
+(
+aˆ†
+ks + ˆaks
+)
+, (3.34)
+pˆks(t) = i
+√ ħω
+2
+(
+aˆ†
+ks − aˆks
+)
+. (3.35)
+Commutation relations can be easily derived from consideration [qˆks; pˆks] in the representation of ladder operators and using (3.29) and (3.30). So we get
+[
+aˆk,s; aˆ†
+k′,s′
+]
+= δ(3)
+kk′δss′. (3.36)
+Easy to show that Hamiltonian can be written as follows
+Hˆ =
+∑
+k,s
+ħωk
+[
+aˆ†
+k,saˆk,s + 1
+2
+]
+. (3.37)
+It’s convenient to rewrite coefficients uˆks and uˆ+
+ks as
+uˆks = 1
+2
+(
+qˆks − 1
+iωk
+pˆks
+)
+=
+√ħ
+2ωk
+aˆks, (3.38)
+uˆ+
+ks =
+√ħ
+2ωk
+aˆ+
+ks. (3.39)
+Now, we can quantize the electric potential and introduce the operator A → Aˆ such that:
+ˆA =
+∑
+k,s
+Ak
+(aˆksekseikr + h.c. ) , Ak =
+√ 2πħc2
+L3ω . (3.40)
+Finally we can write field operators:
+ˆE =
+∑
+k,s
+εk
+(iaˆksekseikr + e.c. ) , εk =
+√ 2πħωk
+L3 , (3.41)
+ˆH =
+∑
+k,s
+Ak
+(iaˆks [k × eks] eikr + e.c. ) . (3.42)
+Remark: Electric field E satisfies wave equation E = 0 at the same time. We could quantize it:
+E=
+∑
+εk
+[aˆkekseikr + c.c. ] , (3.43)
+H=
+∑
+Ak
+[−iaˆk [k × eks] eikr + c.c. ] . (3.44)
+3.4 Ladder operators. Fock state. Second quantization
+First of all lets write how ladder operators work:
+aˆks |nks〉 = √nks |nks − 1〉 , aˆks |0〉 = |0〉 ,
+aˆ†
+ks |nks〉 = √nks + 1 |nks − 1〉 , aˆ†
+ks |0〉 = |1〉 .
+(3.45)
+25
+
+
+1, s1 2, s1
+mode 1
+mode 1 in state |3>
+mode 2 in state |1>
+mode 2 mode 3 mode 4
+1, s2
+|0
+|1
+|2
+|3
+Another important operator is of quantity of particles nˆks = aˆ†
+ksaˆks in ks mode:
+ˆnks |nks〉 = nks |nks〉 . (3.46)
+Another import remark: |nks〉 — it is a state with wave vector k and state s which has exactly n photos.
+Let us make things more clear, by discussing a bit about denotations:
+|nks〉 ←→ ψks
+n (x). (3.47)
+Besides, any wave function can decomposed on the basis (if the basis is full):
+ψ(x) =
+∑
+Cnφn(x), (3.48)
+so it’s equivalent
+ψ(x) ←→
+
+ 
+C...1
+Cn
+
+
+ . (3.49)
+Column of numbers (C1, . . . , Cn)T is a vector in Hilbert space — bra- or ket-vector. For
+example
+∣ ∣ ∣ ∣
+√12 , 0, √12 , 0
+〉
+←→ √12 φ1(x) + √12 φ3(x). (3.50)
+In particular, Fock state can be written as
+|n〉 =
+∣ ∣ ∣ ∣ ∣ ∣
+0, . . . , 0, 1
+}{{}
+n-th place
+, 0, . . . , 0
+〉
+. (3.51)
+3.5 Fields’ fluctuation
+Let consider single mode field:
+Eˆx(0) = εaˆ + ε∗aˆ†. (3.52)
+Let’s compute the average field:
+〈n| Eˆx |n〉 = ε 〈n| aˆ |n〉 + e.c. = 0, (3.53)
+because 〈n| aˆ |n〉 = √n〈n|n − 1〉 = 0.
+26
+
+
+The average of Eˆ2 gives us the following
+〈n| Eˆ2
+x |n〉 = |ε|2 〈n| aˆˆa† |n〉+|ε|2 〈n| aˆ†aˆ |n〉 = 2 |ε|2 〈n| ˆn+ 1
+2 |n〉 = 2 |ε|2
+(
+n+ 1
+2
+)
+. (3.54)
+Here we can make a few conclusions: a) the average field is zero for any Fock state; b) in vacuum state (n = 0) fluctuations are minimal, but not zero!
+A standard calculation procedure of fluctuation of any variable X in |n〉 state is the following:
+∆X =
+√
+〈n| Xˆ 2 |n〉 − 〈n| Xˆ |n〉2. (3.55)
+Remark: for many modes we get
+∑
+k,s
+〈nks| ˆE2 |nks〉 =
+∑
+k,s
+2 |εks|2
+(
+nks + 1
+2
+)
+∣ ∣ ∣ ∣
+∣nks=0
+=
+∑
+k,s
+2 |εks|2 =
+∑
+k,s
+2πħωk
+L3 =
+=
+∑
+k,s
+ħωk
+(2π)2 ∆kx∆ky∆kz
+∣ ∣ ∣ ∣
+∣L→∞
+=2
+(2π)3
+∫
+d3pħωk = 2 · 4π
+(2π)2
+ħ
+c3
+∞
+∫
+0
+ω3dω → ∞. (3.56)
+So, fluctuations are infinite for multimode vacuum state.
+3.6 Homework
+1. (2 pt) Calculate the average: 〈n|(a + a†)2|n〉
+2. (2 pt) Calculate the average: 〈n|(a + a†)3|n − 1〉
+3. (4 pts) Commutation of EM operators.
+Show the following commutation relation (see Scully&Zubairy):
+[Eˆj(r, t), Hˆj(r′, t)] = 0, i = x, y, z
+[Eˆj(r, t), Hˆk(r′, t)] = −iħc2 ∂
+∂l δ(3)(r − r′, ), j, k, l = x, y, z
+4. (4 pts) Fock states in the position space.
+Show the operator identities aˆ+|n〉 = √n + 1|n + 1〉 and aˆ|n〉 = √n|n − 1〉 in the position space.
+5. (4 pts) Quantum virial theorem.
+Consider quantum oscillator in Fock state |n〉.
+a) Check the virial theorem, computing the average potential 〈Πˆ 〉 and kinetic 〈Kˆ 〉 energy
+b) Compute the energy fluctuations ∆Π and ∆K in this state
+27
+
+
+4 Coherent states
+We have already noticed that the Fock states forming a full orthogonal set of function in Hilbert space sometimes lack of physical meaning. In particular, they provide a zero average value of electric field operator ˆE. In this lecture we build an alternative set of wave functions, which will acquire the deep physical meaning by the end of the lecture and are called coherent states.
+4.1 Eigenstates of anihilation operator
+The problem with measuring the value of the electric field at the Fock states starts with the problem that the ladder operators in the basis of Fock states have no diagonal elements. The matrix of the ˆa operator has the form:
+〈m| aˆ |n〉 =
+
+      
+0 √1 0 · · · 0 · · ·
+0 0 √2 · · · 0 · · · ... ... . . . . . . ... · · ·
+0 ... · · · 0 √n · · · ... ... ... ... ... . . .
+
+      
+. (4.1)
+This problem can be overcome if we will switch to the basis of eigen functions of the anihilation operator:
+aˆ |α〉 = α |α〉 .
+where α is the eigenvalue. Our task is to construct these states |α〉, so we start with expanding them over the Fock states basis:
+|α〉 =
+∞
+∑
+n=0
+cn |n〉 .
+By substituting the expansion into the eigen equation, one gets
+aˆ |α〉 =
+∞
+∑
+n=0
+cnaˆ |n〉 =
+∞
+∑
+n=0
+cn
+√n |n − 1〉 =
+∞
+∑
+n=0
+√n + 1 |n〉 = α
+∞
+∑
+n=0
+cn |n〉 ,
+which gives the recurrent relation
+cn+1
+√n + 1 = cnα → cn = αn
+√n! c0 → |α〉 = c0
+∞
+∑
+n=0
+αn
+√n! |n〉 .
+The constant c0 can be found from the normalization condition:
+〈α|α〉 = 1 → 1 = |c0|2
+∞
+∑
+n,m=0
+(α∗)m αn
+√m!n! 〈m|n〉
+} {{ }
+↪→δmn
+= |c0|2
+∞
+∑
+n=0
+|α|2
+n! , (4.2)
+c0 = e−|α|2/2eiφ (4.3)
+and finally
+|α〉 = e−|α|2/2eiφ
+∞
+∑
+n=0
+αn
+√n! |n〉 . (4.4)
+NB: We put the phase φ = 0 as a wave function can be defined only up to a arbitrary phase factor. The obtained states are called the coherent states. Before going further lets discuss some of their main properties.
+28
+
+
+4.2 Basic properties of coherent states
+• How many photons are there in coherent state?
+The average number of photons in the coherent state |α〉 can be calculated as follows:
+n = 〈α| aˆ†aˆ |α〉 .
+From the definition of coherent states
+ˆa |α〉 = α |α〉 ,
+〈α| aˆ† = α∗ 〈α| ,
+it immediately follows n = |α|2 . (4.5)
+• But how the photons are distributed? The probability to find n photons in the state |α〉 state is given by the probability:
+pn = |〈n|α〉|2 = e−|α|2 |α|2n
+n! . (4.6)
+In expression Eq. 4.6 one can recognize the Poisson distribution with average number of photons |α|2. According to the properties of Poisson distribution the dispersion
+∆n = |α| ∼ √n and relative fluctuations of photon number is proportional to
+∆n/n ∼ √n average number of photons (Fig. 9). The distribution of photons in a coherent state is shown in Fig.9 for different n average number of photons in a coherent state.
+• Are the coherent states orthogonal or not?
+The answer can be given by direct computation of the scalar product:
+〈α′|α〉 = e−|α|2/2e−|α′|2/2 ∑ (α∗ ′)nαn
+n! = e− 1
+2 |α|2 e− 1
+2 |α′|2 e
+α∗′α 6= 0, ⇒
+|〈α′|α〉|2 = e−|α−α′|2. (4.7)
+So the coherent states are not orthogonal, but the amplitude norm of the scalar product exponentially depends on the ”distance” between the eigen numbers according to (4.7). For instance, it is very illustrative to consider the following example.
+Example:
+Consider two states with average number of photon equal to n = 5 (see Fig.9 (b)). Though the average number of photons in each of them is equal, their scalar product can be quite small:
+|α〉 = |3 + 4i〉
+|α′〉 = |4 + 3i〉 → |〈α′|α〉|2 = e−2 ≈ 0.1
+|α〉 = |3 + 4i〉
+|α′〉 = |−4 − 3i〉 → |〈α′|α〉|2 = e−98.
+So, effectively, in the latter case one can assume that they are orthogonal.
+29
+
+
+0 5 10 15 20 25 Number of photons
+0
+0.1
+0.2
+0.3
+0.4
+Probability
+n=15
+n=5
+3+4i
+’4+3i
+’4-3i
+n=10
+n=1
+Re()
+Im()
+(a) (b)
+Figure 9: (a) The Probability distribution of photons in the coherent states for different average number of photons n. (b) The complex plane of eigen values and almost orthogonal states.
+Homework. Deadline: 6th of November
+1. (3 pt) Construct the eigenfunction of the creation operator ˆa+|β〉 = β|β〉.
+2. (4 pt) Find the eigenfunctions of a coherent state |α〉 in the position space (either analytically or numerically).
+NB: For solving these problems you will require the Baker-Campbell-Hausdorff relations:
+• eAˆ+Bˆ = eAˆeBˆ e− 1
+2 [Aˆ,Bˆ], if [Aˆ, [Aˆ, Bˆ]] = [Bˆ, [Bˆ, Aˆ]] = [Bˆ, [Aˆ, Bˆ]] = 0
+• eiAˆBˆe−iAˆ = Bˆ + [iAˆ, Bˆ] + [iAˆ, [iAˆ, Bˆ]]
+2! + ...
+4.3 Classical field
+Let us come back to the problem of the average electric field computation and recall that being computed at the Fock states it gives zero value. The situation becomes different for the coherent states. Indeed, consider a single mode field given by the operator:
+ˆE = ε (aˆeeikr−ωt + h. c.) . (4.8)
+The average value at the coherent state will be as follows:
+E = 〈α| ˆE |α〉 = εαeeikr−ωt + c. c. d=ef E+(r, t) + E−(r, t). (4.9)
+The resulting value is a sum of two vector fields corresponding to the plane waves propagating in opposite direction. This is a classical coherent monochromatic field, which we are used to. The amplitude and phase of the field is defined by the complex value α:
+E+ = E+eeikr−ωt, E+ = αε, ε =
+√ 2πħ
+V ω . (4.10)
+The intensity is proportional to
+I+ ∝ |E+|2 = ε2 |α|2 = ε2n, (4.11)
+30
+
+
+whilethe complex field amplitude also contains the phase φ
+E+ = ε |α| eiφ. (4.12)
+Thus, the coherent state realizes the quantum state, which behaves in a very similar manner to classical field. But this can be understood already at the level of the coherent state definition. Since we have aˆ |α〉 = α |α〉 , (4.13)
+then number of photons in the system does not change under the action of the anihilation operator. In the next lecture we will see that the ˆa operator is responsible for detecting (measuring) photons. In classical physics the action of the measuring field does not change the state of the field, and this is exactly what we have for coherent states contrary to Fock states, where anihilation operator changes the number of photons |n〉 → |n + 1〉
+Homework. Deadline: 6th of November
+1. (3 pt) Prove the overcompleteness of coherent states:
+1=
+∫
+C
+|α〉〈α| d2α
+π
+NB: For solving these problems you will require the Baker-Campbell-Hausdorff relations:
+• eAˆ+Bˆ = eAˆeBˆ e− 1
+2 [Aˆ,Bˆ], if [Aˆ, [Aˆ, Bˆ]] = [Bˆ, [Bˆ, Aˆ]] = [Bˆ, [Aˆ, Bˆ]] = 0
+• eiAˆBˆe−iAˆ = Bˆ + [iAˆ, Bˆ] + [iAˆ, [iAˆ, Bˆ]]
+2! + ...
+4.4 Fluctuations
+The “classical” behaviour of the coherent state is also expressed in the level of the fluctuations, which as low as any quantum state may have. In this paragraph we will elaborate more on that comparing the fluctuations of the coherent states with the Fock states. We start with a recalling the generalized momentum and coordinate operators:
+pˆ = i
+√ ħω
+2
+(aˆ† − aˆ) , qˆ =
+√ħ
+2ω
+(aˆ† + ˆa) . (4.14)
+The general Heisenberg relation tells us that ∆p∆q ≥ ħ
+2 , but now we apply it for Fock
+and coherent states.
+Fock states
+To find the fluctuations amplitude let us compute
+p = 〈n| pˆ|n〉 = 0, q = 〈n| qˆ|n〉 = 0,
+and
+p2 = 〈n| pˆ2 |n〉 = ħω
+2 (2n + 1) ,
+q2 = 〈n| qˆ2 |n〉 = ħ
+2ω (2n + 1) .
+31
+
+
+n=0
+n=1
+nn==22
+0
+n=1
+n=0
+p2
+ћω
+√
+q2
+ћ
+ω
+√
+Re{α}
+Im{α}
+2
+2
+∆φ
+∆√n
+φ
+(a) (b)
+Figure 10: (a) The phase space representation of the Fock state. (b) The phase space representation of the coherent states as a shifted vacuum state
+So we have
+∆pn =
+√
+p2 − p2 =
+√ ħω
+2
+√(2n + 1),
+∆qn =
+√
+q2 − q2 =
+√ħ
+2ω
+√(2n + 1).
+Now we can rewrite the uncertainty principle as following
+∆pn∆qn = ħ
+2 (2n + 1) . (4.15)
+We need to stress here, that the amplitude of the fluctuation increase with increasing the number of photons in the state. In the phase space the Fock state can be represented by a circle with the centre at the origin and radius increasing with the number of photons in the state (as shown in Fig. 10 (a)).
+Coherent states
+In a similar manner, we can obtain the fluctuations of the coherent states. For the reasons we have already discussed the average value of the momentum and coordinate operator are non-zero and correspond to imaginary and real part of the eigen value α:
+p = 〈α| pˆ|α〉 = i
+√ ħω
+2 (α∗ − α) = 2
+√ ħω
+2 Im {α} ,
+q=2
+√ħ
+2ω Re {α} ,
+The dispersion can be obtained from the following expression:
+p2 = − ħω
+2 〈α| aˆ†2 − aˆ†aˆ − aˆaˆ† + ˆa2 |α〉 = ħω
+2 (4 Im {α} + 1) , (4.16)
+32
+
+
+q2 = ħ
+2ω (4 Re {α} + 1) . (4.17)
+Then
+∆pα =
+√ ħω
+2 [4 Im {α} + 1 − 4 Im {α}]1/2 = ħω
+2 , ∆qα = ħ
+2ω . (4.18)
+The uncertainty relation for the coherent states will have a simple form of
+∆pα∆qα = ħ
+2 ∼/ α. (4.19)
+One can see that the uncertainty ∆pα∆qα does not depend on α, and it is equal to the vacuum state uncertainty, which is minimal among all the possible Fock states. So the coherent states minimize the uncertainty of the quantum fluctuations. The phase space representation of the coherent state is shown in Fig. 10 (b) along with the vacuum state. From this illustrative picture one can expect that the coherent state can be generated from a vacuum state with a linear operator Dˆ (α) which makes some sort of a state shifting in the phase space:
+|α〉 = Dˆ (α) |0〉 , (4.20)
+Indeed, the operator Dˆ exists and is called the displacement operator. In order to construct it, one can make trivial operations:
+e−|α|2/2
+∞
+∑
+n=0
+αn
+√n! |n〉 = Dˆ (α) |0〉 , (4.21)
+and since |n〉 = (aˆ†)n
+√n! |0〉, so
+D(α) = e−|α|2/2eαaˆ† e−α∗aˆ. (4.22)
+Remark: factor e−α∗aˆ does not change the result (because e−α∗aˆ |0〉 = |0〉), but gives some additional properties to the Dˆ (α):
+1. Using the Hausdorff relation we can get a compact form of the displacement operator: Dˆ (α) = eαaˆ†−α∗aˆ. (4.23)
+2. The displacement operator is a unitary operator. It means that Dˆ (α)Dˆ †(α) = Dˆ †(α)Dˆ (α) = ˆ1.
+3. Since Dˆ †(α) = Dˆ (−α), the hermitian conjugate of the displacement operator can also be interpreted as a displacement in the opposite “direction”.
+4. Following relations hold:
+Dˆ †(α)ˆaDˆ (α) = aˆ + α, (4.24)
+Dˆ (α)ˆaDˆ †(α) = aˆ − α, (4.25)
+Dˆ (α)Dˆ (β) = e(αβ∗−α∗β)/2Dˆ (α + β). (4.26)
+33
+
+
+4.5 Squeezed states or getting the maximum accuracy!
+The discussed fluctuations behaviour of the Fock and coherent states do not have only abstract fundamental value, but there are very practical consequence. The quantum fluctuations limit the accuracy of the optical measurements: even if you manage to suppress all the sources of systematic error in optical measurement the quantum noise will still be present. Thus, one of the natural question, which may appear: is it possible to overcome the limit of ∆pα∆qα = ħ
+2 to get more accurate measurements?
+Sure, we cannot break the uncertainty principle but we can title the balance of scales for ours good. The main idea is to squeeze light state in the geometrical meaning making an oval from the circle in the phase space(see Fig. 11). This will give us suppression of the uncertainty at least in one of the directions.
+p2 ћω
+√
+q2 ћ
+ω
+√
+2
+2
+∆φ
+∆√n
+p2 ћω
+√
+q2 ћ
+ω
+√
+2
+2
+∆φ
+∆√n
+a) b)
+a)
+Figure 11: Different light sates on a phase plane: (a) amplitude-squeezed light, (b) phasesqueezed light.
+To get quantitative and more specific description one can use the squeeze operator :
+Sˆ (ξ) |α〉 = |α, ξ〉 , (4.27)
+where |ξ| — ratio of the main semiaxes of squeezed state, arg ξ — a turning angle. Here are some helpful properties of the squeeze operator:
+1. It make be written as following:
+Sˆ = eξaˆ†2−ξ∗aˆ2 . (4.28)
+2. It is commutative with displacement operator:
+Sˆ(ξ)Dˆ (α) 6= Dˆ (α)Sˆ(ξ). (4.29)
+Another a more explicit view on that can be given with help of a simple consideration. The average value of a single mode field is as follows:
+E = ε|α| cos [ωt + φ+] . (4.30)
+Now, assume that we have fluctuations artificially added to this expression, resulting in: E(t) = ε (|α| + δα) cos [ωt + φ + δφ] , (4.31)
+where δα and δφ are the fluctuating components of the amplitude and phase. Withtin this picture the Fock and coherent states can be visualized in according to Fig. 12 (a).
+34
+
+
+tt
+α
+|∆ |∆
+|≠ 0 φ|= 0
+α
+|∆ |∆
+|= 0 φ|≠ 0
+t
+E(t)
+E(t) E(t)
+Coherent state
+Phase squeezing Amplitude squeezing
+Fock state
+(a)
+(b) (c)
+Figure 12: The temporal picture of fluctuating signal: (a) the Fock and coherent states; (b) the phase squeezed state; (c) the amplitude squeezed state.
+One can see that coherent state has constant level of fluctuations. Now, if one suppresses the fluctuations of either amplitude or phase the signal will be modified according to Fig. 12 (b) and (c). Measuring them at exact points, one can break the quantum noise limits and measure the signal well below the threshold provided by the Heisenberg principal. Lets draw attention to (4.28). We can notice that squeeze operator Sˆ consist of squares of ladder operators (∼ aˆ†2, aˆ2). It means here we have a generation of second harmonic (2ħω instead of ħω). In other words, from a experimenter’s point of view, to get the squeezed state one needs a non-linear optical element with χ2 6= 0, so it’s polarizability P = χ1E + χ2E2.
+Homework. Deadline: 6th of November
+1. (3 pt) Eigen states of aˆ†
+Construct the eigenfunction of the creation operator ˆa+|β〉 = β|β〉.
+2. (4 pt) Coherent states in position space.
+Find the eigenfunctions of a coherent state |α〉 in the position space (either analytically or numerically).
+3. (3 pt) Completeness of coherent states.
+Prove the completeness of coherent states:
+1=
+∫
+C
+|α〉〈α| d2α
+π
+4. (2 pts) Displacement operator
+Show that the operator Dˆ (α) = exp(αaˆ† − α∗aˆ) displaces the creation operator by proving the following relations:
+Dˆ (α)ˆaDˆ (α)−1 = aˆ − α
+5. (6 pts) Displacement operator: matrix elements
+35
+
+
+Compute the matrix elements 〈m|Dˆ (α)|n〉 of the displacement operator in Fock’s basis. Express the result in terms of associated Laguerre polynomials.
+6. (4 pt) Classical squeezing.
+For the problem of a classical harmonic oscillator a general solution can be expressed as x(t) = c1 cos ω0t + c2 sin ω0t, where c1 and c2 depend on the initial conditions. Now consider that you drive this system on a 2ω0 frequency so that V (t) = 1
+2 mω2
+0x2 (1 + sin 2ω0t) ( << 1). Prove that c1(t) = eβt and c2(t) = e−βt and find β using the second Newton’s law, the method of variation of parameters, considering c1(t) and c2(t) as slowly varying variables and ignoring fast-oscillating terms.
+7. (5 pt) Quantum squeezing.
+Now you know that for squeezing you need to drive your system at 2ω0 frequency. In quantum case it corresponds to the process of parametric down-conversion when you have a strong coherent field (mode b) with a frequency 2ω0 as an input and on the output you have two photons of frequency ω0 (mode a). It can
+expressed with the following Hamiltonian Hˆ = aˆ†aˆ†bˆ + ˆaaˆbˆ†. The corresponding squeezing operator is Sˆ(r) = exp [− r
+2
+(aˆ2 − aˆ†2)], here r describes the strength of squeezing. Compute
+1)Sˆ(r)xˆSˆ†(r)
+2)Sˆ(r)pˆSˆ†(r)
+where xˆ = aˆ+aˆ†
+√2 and pˆ = aˆ−ˆa†
+√2 .
+NB: For solving these problems you will require the Baker-Campbell-Hausdorff relations:
+• eAˆ+Bˆ = eAˆeBˆ e− 1
+2 [Aˆ,Bˆ], if [Aˆ, [Aˆ, Bˆ]] = [Bˆ, [Bˆ, Aˆ]] = [Bˆ, [Aˆ, Bˆ]] = 0
+• eiAˆBˆe−iAˆ = Bˆ + [iAˆ, Bˆ] + [iAˆ, [iAˆ, Bˆ]]
+2! + ...
+36
+
+
+5 The coherence of light
+The coherence of electromagnetic field is one of the most important characheristic of the light and photon state. It also gives the information about the state of the quantum sources, which emitted the light. Almost all the methods of testing the coherence of light are based on interferometry effects. Thus, we start to consider the coherence of light on the classical examples of light interference.
+5.1 Michelson stellar interferometer
+One of the important ones is Michelson stellar interferometer invented by the Albert Abraham Michelson in 19th century (see Fig. 13). The basic idea of this interferometer was studying the double stars and the angular distance between them just basing on their optical or microwaveve signals.
+Figure 13: A Michelson stellar interferometer
+Lets consider Michelson stellar interferometer (fig 13). From distant stars the two light beams is coming to our set-up. Light is an electromagnetic wave, so we can write:
+E = Ek
+(eikrM1 + eikrM2
+) + Ek′
+(
+eik′rM1 + eik′rM2
+)
+. (5.1)
+If we decide to compute the intensity, we will get (see Scully)
+I = 〈E · E∗〉t = 4I0
+
+  
+1 + cos
+[ (k + k′) r0
+2
+]
+} {{ }
+fast term
+cos
+[1
+2 kr0φ
+]
+} {{ }
+slow term
+
+  
+, (5.2)
+where r0 = rM1 − rM2, I0 = 〈Ek · E∗
+k〉t = 〈Ek′ · E∗
+k′〉t. To make out light and dark spots we need the following condition
+kr0φ ≈ π → φ = π
+kr0
+. (5.3)
+It means that to change light spot to the dark one we need ∆r0 = π
+kφ . So the bigger
+distance between mirrors M1 and M2, the better resolution we get (we will be able to detect smaller φ). But there appear to be a lot of technical troubles.
+37
+
+
+Figure 14: A symmetric interferometer with distant photodetectors
+One can chose another pill and built a set up with two distant photodetectors (fig 14). Now we don’t have annoying mirrors and measure only currents i1 and i2, which are proportional to the intensities I1 and I2 of incident light beams. By this framework we can significantly increase r0 and this will lead to a higher resolution. People who did very precise measurements, noticed that they no longer measure intensities of indecent light, but only noises of almost single photons. Now lets take a look at this situation from a theoretical point of view. Let us compute the following correlator
+g(2) = 〈i1, i2〉
+〈i1〉〈i2〉 , (5.4)
+where
+i1 = 〈i1〉 + ∆i1, i2 = 〈i2〉 + ∆i2, 〈i1〉 = 〈i2〉 = i0. (5.5)
+Then we can write
+g(2) = i2
+0 + 〈∆i1, ∆i2〉
+i2
+0
+= 1 + 〈∆i1, ∆i2〉
+i2
+0
+. (5.6)
+So in fact one measured the average of ∆i1 and ∆i2. To study the issue in more details the so called HBT experiment was done. The principle scheme of the set up it shown on fig 15. The heart of the matter is that method allows to avoid the atmospherically
+sensitive terms (fast terms) like cos
+[ (k+k′)·r0 2
+]
+.
+Lets analyze the second order correlator:
+g(2)(τ ) = 1 + 〈∆i(t)∆i(t + τ )〉
+i2
+0
+. (5.7)
+Here can single out some properties:
+1. g(2)(0) = 1 + 〈∆i2(t)〉
+i2
+0 ≥ 1.
+2. τli→m∞ g(2)(τ ) = 1.
+3. g(2)(0) ≥ g(2)(τ ).
+38
+
+
+a) Light beam mode
+b) Single photon mode
+Figure 15: Schematic diagram of the Hanbury Brown-Twiss intensity interferometer. Here P1 and P2 are photodetectors, τ is the delay time, C is a multiplier, and M is the integrator
+Figure 16: Approximate plot of g(2)(τ )
+To summarize we could guess that approximate plot of g(2)(τ ) is as it shown of fig. 16 with a solid line. During measuring noises, which were mentioned thereinbefore, experimentalists got the next weird result: g(2)(τ ) < 1. (5.8)
+This effect is called photon bunching. But a few lines above it was shown that g(2)(τ ) ≥ 1. How could it be possible? Let us consider the same experiments but with a single photons emitter (fig. 15 b). Assume τ = 0, so then we calculate how photon at place 1 is correlated with a photon at place 1′. If our light source emits discreate photos then single photon cannot be at two places at the same time, so g(2)(0) = 0.
+39
+
+
+5.2 Quantum theory of photodetection
+Photons are described by field operators
+Eˆ = ˆE+ + Eˆ −, (5.9)
+where
+ˆE+ =
+∑
+k
+εkaˆkeikr−iωtek, (5.10)
+ˆE− =
+∑
+k
+εkaˆ†
+ke−ikr+iωte∗
+k. (5.11)
+a) b)
+Figure 17: a) An indecent photon generate an electron which brings current; b) Atom states
+To simplify all the calculations let us consider only one mode and only one linear polarisation of field:
+Eˆ + = Eˆ+ek. (5.12)
+When an indecent photon got absorbed, it excites the atom detector: |i〉 → |f 〉 (see fig. 17, b). The probability of absorption of one photon (= the probability of detection of one photon) depends only on operator Eˆ+ due to detection principle (see fig. 17). The transition probability of the detector atom for absorbing a photon from the field at position r between times t and t + dt is proportional to ω1(r, t)dt, with
+ω1(r, t) =
+∑
+f
+∣ ∣
+∣〈f | Eˆ+ |i〉
+∣ ∣ ∣
+2
+=
+∑
+f
+〈i| Eˆ− |f 〉 〈f | Eˆ+ |i〉 = 〈i| Eˆ−(r, t)Eˆ+(r, t) |i〉 . (5.13)
+Here the ∑
+f |f 〉 〈f | = 1 relation was used. Shall us define the first-order correlation function
+g(1)(r1, t1; r2, t2) ∼ 〈i| Eˆ−(r1, t1)Eˆ+(r2, t2) |i〉 = 〈Eˆ−(r1, t1)Eˆ+(r2, t2)〉. (5.14)
+It is useful for quantifying the coherence between two electric fields, as measured in a Michelson or other linear optical interferometer. Here we used the average notation as
+〈Aˆ〉 d=ef 〈i| Aˆ |i〉 . (5.15)
+The detection probability of two photons is given by
+ω2(r1, t1; r2, t2) =
+∑
+f
+∣ ∣
+∣〈f | Eˆ+(r1, t1)Eˆ+(r2, t2) |i〉
+∣ ∣ ∣
+2
+=
+= 〈i| Eˆ−(r2, t2)Eˆ−(r1, t1)Eˆ+(r1, t1)Eˆ+(r2, t2) |i〉 . (5.16)
+40
+
+
+The joint probability of photodetection is thus governed by the second-order correlation function:
+g(2)(r1, t1; r2, t2) = 〈Eˆ−(r2, t2)Eˆ−(r1, t1)Eˆ+(r1, t1)Eˆ+(r2, t2)〉
+〈Eˆ−(r2, t2)Eˆ+(r2, t2)〉〈Eˆ−(r1, t1)Eˆ+(r1, t1)〉 . (5.17)
+It refers to intensity (e.g. for currents). The exact expression for the first-order correlation function is the following:
+g(1)(r1, t1; r2, t2) = 〈Eˆ−(r1, t1)Eˆ+(r2, t2)〉
+√
+〈Eˆ−(r2, t2)Eˆ+(r2, t2)〉〈Eˆ−(r1, t1)Eˆ+(r1, t1)〉
+. (5.18)
+In fact it refers to interference in quantum mechanic. A particular case is often used, precisely a case r1 = r2 and τ = t2 − t1. In such case notation is g(2)(r1, t1; r2, t2) d=ef g(2)(τ ). So we have
+g(2)(τ ) = 〈Eˆ−(τ )Eˆ−(0)Eˆ+(0)Eˆ+(τ )〉
+〈Eˆ−(0)Eˆ+(0)〉2 , (5.19)
+where 〈Eˆ−(0)Eˆ+(0)〉 = 〈Eˆ−(τ )Eˆ+(τ )〉, ∀τ was used which means that the signal is homogeneous. For a case of only one mode field we can write
+g(2)(τ ) = 〈aˆ†(τ )ˆa†(0)ˆa(0)ˆa(τ )〉
+〈aˆ†aˆ〉2 . (5.20)
+Important to notice that in numerator of fraction is normally ordered.
+Example: The second-order correlation function for Fock states (|i〉 = |n〉).
+g(2)(0) = 〈n| aˆ†aˆ†aˆaˆ |n〉
+〈n| aˆ†aˆ |n〉 = n(n − 1)
+n2 = 1 − 1
+n < 1, ∀n. (5.21)
+This is a factor of a single-photon beam, e.g. n = 1 → g(2)(0) = 0. Exactly this effect was observed in a HBT experiment!
+Homework. The second-order correlation function for coherent states. Compute g(2)(0) for case |i〉 = |α〉.
+41
+
+
+6 Atom–field interaction. Quantum approach
+6.1 Jaynes–Cummings model (RWA)
+Figure 18: Two–level system
+Hamiltonian of system ”quantum atom” + ”quantum field”:
+Hˆ = HˆA + HˆF + Hˆint. (6.1)
+where HˆA describes only atom, HˆF describes only quantized field and Hˆint — interaction part. Explicit expressions are:
+HˆA = Ea |a〉 〈a| + Eb |b〉 〈b| , (6.2)
+HˆF =
+∑
+k
+ħωk
+(
+nˆk + 1
+2
+)
+, ˆnk = aˆ†
+kaˆk, (6.3)
+Hˆint = −er · Eˆ , (6.4)
+where field operator is given by
+ˆE =
+∑
+k
+εk
+(
+aˆkekeikr + ˆa†
+ke∗
+ke−ikr)
+, (6.5)
+where ek is polarization vector. For simplicity we consider case k = 0 and ek ∈ R so we have ˆE =
+∑
+k
+ekεk
+(
+aˆ†
+k + ˆak
+)
+. (6.6)
+Now let us rewrite dipole moment:
+er = 1ˆ · er · ˆ1 =
+∑
+i,j=a,b
+|i〉 〈i| er |j〉
+} {{ } dij
+〈j| =
+∑
+ij
+dij |i〉 〈j|
+} {{ }
+σˆij
+=
+∑
+ij
+dijσˆij. (6.7)
+Here we denoted:
+dij
+d=ef 〈i| er |j〉 , σˆij
+d=ef |i〉 〈j| . (6.8)
+Then
+Hˆint = − ∑
+ij
+∑
+k
+(dij · ek) σijεk
+(
+aˆ†
+k + ˆak
+)
+. (6.9)
+Introduce a new notation:
+gk
+ij
+d=ef − εk (dij · ek)
+ħ . (6.10)
+This is a similarity to Rabi frequency but for one mode of field. To simplify computations let gk
+ij ∈ R. So our Mr. Hamiltonian
+Hˆ = Eaσˆaa + Ebσˆbb +
+∑
+k
+ħωk
+(
+aˆ†
+kaˆk + 1
+2
+)
++
+∑
+ij
+∑
+k
+ħgk
+ij σˆij
+(
+aˆ†
+k + ˆak
+)
+. (6.11)
+42
+
+
+Figure 19: A free choice of initial energy level
+Let us put a starting energy point right in between Ea and Eb (fig.19). If we do so then
+Eaσˆaa + Ebσˆbb = 1
+2 ħω0 (σˆaa − σˆbb) + 1
+2 (Ea + Eb) (σˆaa + σˆbb)
+} {{ }
+↪→=ˆ1
+. (6.12)
+After that we make a transition to the new Hamiltonian by this energy shift
+Hˆ − 1
+2 (Ea + Eb) → Hˆ. (6.13)
+It is convenient to make new denotions:
+σˆz
+d=ef σˆbb − σˆaa, (6.14)
+σˆ+
+d=ef σˆab = |a〉 〈b| , (6.15)
+σˆ−
+d=ef σˆba = |b〉 〈a| , (6.16)
+where
+|b〉 =
+(1
+0
+)
+, |a〉 =
+(0
+1
+)
+, (6.17)
+so reader may easily construct matrices for σˆz, σˆ+ and σˆ−:
+σˆz =
+(1 0 0 −1
+)
+, σˆ+ =
+(0 0 10
+)
+, σˆ− =
+(0 1 00
+)
+. (6.18)
+To answer how act new operators σˆ+ and σˆ− consider the following:
+σˆ+ |b〉 = |a〉 〈b|b〉 = |a〉 , (6.19)
+σˆ− |a〉 = |b〉 〈a|a〉 = |b〉 . (6.20)
+The operator σˆ+ takes the system from lower state to upper states vice versa. Usually daa = dbb = 0, so
+gk
+aa = 0, gk
+bb = 0, (6.21)
+gk
+ab = gk
+ba
+d=ef gk. (6.22)
+After that Hamiltonian may be written as
+Hˆ =
+∑
+k
+ħωk
+(
+aˆ†
+kaˆk + 1
+2
+)
+} {{ }
+field
++ ħω0
+2 σˆz
+} {{ }
+atom
++ħ
+∑
+k
+gk (σˆ+ + σˆ−)
+(
+aˆ†
+k + ˆak
+)
+} {{ }
+interaction
+. (6.23)
+43
+
+
+Algebra of new operators:
+[σˆ−, σˆ+] = −σˆz, (6.24)
+[σˆ−, σˆz] = 2σˆ−, (6.25)
+[σˆ+, σˆz] = −2σˆ+, (6.26)
+{σˆ+, σˆ−} = ˆ1. (6.27)
+Last property is rooted in fact that electrons are fermions. σˆ+ and σˆ− are creation and annihilation operators for electron in atom. Lets consider the physical meaning of the interactive terms:
+(σˆ+ + σˆ−)
+(
+aˆ†
+k + ˆak
+)
+= σˆ+aˆ
+}{{}
+(I)
++
+unphysical
+{ }} {
+σˆ+aˆ†
+} {{ }
+(II)
++ σˆ−aˆ
+}{{}
+(III)
++ σˆ−aˆ†
+} {{ }
+(IV)
+, (6.28)
+where (I) — photon annihilation and electron excitation, (II) — photon creation and electron excitation, (III) — photon annihilation and electron relaxation, (IV) — photon creation and electron relaxation. Terms σˆ+aˆ† + σˆ−aˆ are unphysical, so may be omitted. In fact this is the RWA. After such assumption we have:
+Hˆ =
+∑
+k
+ħωk
+(
+aˆ†
+kaˆk + 1
+2
+)
++ ħω0
+2 σˆz +
+∑
+k
+ħgk (
+σˆ+aˆk + ˆa†
+kσˆ−
+)
+. (6.29)
+For simplicity let us consider one mode field
+Hˆ = ħω
+(
+aˆ†aˆ + 1
+2
+)
++ ħω0
+2 σˆz
+} {{ }
+Hˆ0
++ ħg (σˆ+aˆ + ˆa†σˆ−
+)
+} {{ }
+Vˆ
+. (6.30)
+Now we pass into the representation of interaction
+HˆV = e i
+ħ Hˆ0tVˆ e− i
+ħ Hˆ0t. (6.31)
+Remark : The interaction representation means the following. After unitary transformation
+∣ ∣ ∣
+ψ ̃
+〉
+= ei
+ħ Hˆ0t |ψ〉 , Hˆ → HˆV
+we obtain new effective Schr ̈odinger equation
+iħ|ψ ̇ 〉 = Hˆ |ψ〉 → iħ∣  ̇
+∣ ∣
+ψ ̃
+〉
+= HˆV
+∣ ∣ ∣
+ψ ̃
+〉
+.
+Let us begin. We need to consider
+ei ω0
+2 σˆzteiωaˆ†aˆtVˆ e−iωaˆ†aˆte−i ω0
+2 σˆzt. (6.32)
+Different terms will appear:
+eiωˆa†aˆtaˆe−iωaˆ†ˆat = aˆe−iωt, (6.33)
+eiωaˆ†aˆtaˆ†e−iωaˆ†aˆt = aˆ†eiωt, (6.34)
+ei ω0
+2 σˆztσˆ+e−i ω0
+2 σˆzt = σˆ+eiω0t, (6.35)
+ei ω0
+2 σˆztσˆ−e−i ω0
+2 σˆzt = σˆ−e−iω0t. (6.36)
+44
+
+
+Figure 20: Oscillations in a cavity
+So HˆV = ħg (aˆ†σˆ−e−i(ω0−ω)t + σˆ+aˆei(ω0−ω)t) . (6.37)
+As a matter of convenience we introduce ∆ d=ef ω0 − ω. An effective Schro ̈dinger equation now may be written as
+iħ ∂
+∂t
+∣ ∣ ∣
+ψ ̃
+〉
+= HˆV
+∣ ∣ ∣
+ψ ̃
+〉
+. (6.38)
+After that we expand wave function in series
+∣ ∣ ∣
+ψ ̃
+〉
+=
+∑
+n
+Ca,n(t) |n〉 |a〉 +
+∑
+n
+Cb,n(t) |n〉 |b〉 , (6.39)
+where Ca,n(t) — a probability of finding an electron in |a〉 and a photon in |n〉 at time t. To bring into focus results we omit all the computations and present only the solution:
+{
+iħC ̇ a,n(t) = ħg√n + 1Cb,n+1(t)ei∆t,
+iħC ̇ b,n+1(t) = ħg√n + 1Ca,n(t)e−i∆t. (6.40)
+For simplicity let us consider a resonant excitation, it means we need to put ∆ = 0 in (6.40). After we have
+{C ̇ a,n(t) = −ig√n + 1Cb,n+1(t)
+C ̇ b,n+1(t) = −ig√n + 1Ca,n(t) → C ̈a,n(t) + g2(n + 1)
+} {{ }
+Ω2
+Rn
+Ca,n(t) = 0. (6.41)
+Easy to notice, we obtained osculations with angular frequency
+ΩRn = g√n + 1. (6.42)
+A physical interpretation of such oscillations is shown in fig. 20.
+Example: Vacuum Rabi oscillations.
+If we put n = 0 we get ΩR0 = g 6= 0. We have a vacuum interaction: no field, interaction exists!
+45
+
+
+Figure 21: Time evolution of the population inversion W (t) for an initially coherent state.
+Homework. Deadline: 29th of December
+1. (6 pts) (See problem 6.2 from Scully). One of the common models of light-atom interaction in a cavity can be described by the Hamiltonian :
+H = ħω0σz + ħωa+a + ħg(√a+aa+σ− + σ+a√a+a),
+where interaction depends on the intensity. Compute the inverse population at the timescale of Rabi oscillations, considering initial state of photons as coherent.
+6.2 Collapse and revival
+Another important quantity is the inversion W (t) which is related to the probabilty amplitudes Ca,n(t) and Cb,n(t) by the expression
+W (t) =
+∑
+n
+(|Ca,n(t)|2 − |Cb,n(t)|2) . (6.43)
+In fig. 21 W (t) is plotted as a function of normalized time gt for an initial coherent state. The behavior of W (t) is quite different from the corresponding curve (fig. 2) in the semiclassical theory. In the present case the envelope of the sinusoidal Rabi oscillations ’collapses’ to zero. However as time increases we encounter a ’revival ’ of the collapsed inversion. This behavior of collapse and revival of inversion is repeated with increasing time, with the amplitude of Rabi osculations decreasing and the time duration in which revival takes place increasing and ultimately overlapping with the earlier revival.
+6.3 Energy spectrum. Dispersion relation
+Let us find eigenstates of Hˆ which is given by (6.30). Here, for convenience, the vacuum field energy is set to 0, so
+Hˆ = ħωˆn + ħω0
+2 σˆz
+} {{ }
+Hˆ0
++ ħg (σˆ+aˆ + ˆa†σˆ−
+)
+} {{ }
+Hˆint
+. (6.44)
+The equation for eigenvalues is
+Hˆ |ψ〉 = E |ψ〉 . (6.45)
+46
+
+
+Next terms will appear:
+Hˆ0 |a〉 |n〉 =
+( ħω0
+2 + ħωn
+)
+|a〉 |n〉 , (6.46)
+Hˆ0 |b〉 |n + 1〉 =
+(
+− ħω0
+2 + ħωn
+)
+|b〉 |n + 1〉 , (6.47)
+Hˆint |a〉 |n〉 = ħg√n + 1 |b〉 |n + 1〉 , (6.48)
+Hˆint |b〉 |n + 1〉 = ħg√n + 1 |a〉 |n〉 . (6.49)
+Important to notice that number of quantas is concerned, if we take basis |a〉 |n〉 and
+|b〉 |n + 1〉. After acting Hˆint we stay in the same subspace with the same basis. Consequently, eigenfunctions may be written as
+|ψ〉 = |φ1〉 · |φ2〉 · ... · |φn〉 · ... (6.50)
+Each of |φn〉 acts on its own subspace and does not affect the others:
+|φn〉 = cn |a〉 |n〉 + c2n |b〉 |n + 1〉 . (6.51)
+It leads to a very imports consequence — Hˆ is block-diagonal matrix :
+Hˆ =
+
+      
+Hˆ1 0 0 . . . 0 . . .
+0 Hˆ2 0 . . . 0 . . .
+... . . . . . . . . . ... . . .
+0 . . . 0 Hˆn 0 . . .
+... ... ... . . . . . . . . .
+
+      
+. (6.52)
+Where each of Hˆn is a 2 × 2 matrix. Looking for an energy spectrum (6.45) is equivalent to the Hamiltonian diagonalization. We simplified our problem and now we need only to diagonalize 2 × 2 matrices or in other words we need to solve
+Hˆn |φn〉 = En |φn〉 . (6.53)
+In an explicit form we need to diagonalize
+Hˆn = Hˆ0
+n + Hˆint
+n=
+( ħω0
+2 + ħωn 0
+0 − ħω0
+2 + ħωn
+)
++
+( 0 ħg√n + 1
+ħg√n + 1 0
+)
+=
+= ħω
+(
+n+ 1
+2
+)
+Iˆ + ħ
+2
+
+
+∆ 2g√n + 1
+2g√n + 1 −∆
+
+ , (6.54)
+where ∆ = ω − ω0 and Iˆ =
+(1 0 01
+)
+is an identity matrix. Human by nature is lazy, so
+we do. It means let us consider a simple case when ∆ = 0, so
+det
+(Hˆn − EIˆ
+)
+=0 →
+(
+E − ħω(n + 1
+2)
+)
+= ħ2g2(n + 1) (6.55)
+or {
+E1 = ħω (n + 1
+2
+) + ħg√n + 1,
+E2 = ħω (n + 1
+2
+) − ħg√n + 1. (6.56)
+47
+
+
+Figure 22: Level splitting after acting Hˆn
+Figure 23: Rotation in a subspace
+This energy splitting is shown in fig. 22. If we consider case ∆ 6= 0 then we will get
+{
+E1 = ħω (n + 1
+2
+)+ 1
+2 ħRn,
+E2 = ħω (n + 1
+2
+)− 1
+2 ħRn, (6.57)
+where Rn = √∆2 + 4g2(n + 1). Eigenstates may be written as a rotated |a, n〉 and |b, n + 1〉 states
+{
+|φ1n〉 = cos θn |a, n〉 + sin θn |b, n + 1〉 ,
+|φ2n〉 = − sin θn |a, n〉 + cos θn |b, n + 1〉 , (6.58)
+where cos θn = 2g√n+1
+√(Rn−∆)2+4g2(n+1) . Just to make things clear, |a, n〉 and |b, n + 1〉 are
+eigenfunctions of Hˆ0
+n, after ’turning on’ an interaction we gain a plane rotation! States |φ1n〉 and |φ2n〉 — polariton states. This is a mixed stated of light and medium. For ∆ = 0 we have θ = π
+4 . It means that
+{|φ1n〉 = √12 (|a, n〉 + |b, n + 1〉) ,
+|φ2n〉 = √12 (− |a, n〉 + |b, n + 1〉) . (6.59)
+Energy is given by (6.57). If there is no interaction (g = 0) we have
+{
+E1n = ħω (n + 1
+2
+)+ ħ
+2 ∆,
+E2n = ħω (n + 1
+2
+)− ħ
+2 ∆. (6.60)
+48
+
+
+Figure 24: Case of n = 0 and g = 0. State |b, 1〉 — there is a photon with energy ħω, so E = E(ω) is linear. State |a, 0〉 — no photon in cavity, energy does not depend on ħω, there is an exciton
+Figure 25: Case of n = 0 and g 6= 0. Line splitting is observed. At frequency ω0 there is no pure atom state nor photon state — it is mixed state, polariton state
+49
+
+
+Figure 26: Cummings ladder. Energy splitting as a result of combining two quantum systems: atom and field
+Not let us make a graphical analysis. At first shall we put n = 0 and g = 0 (fig. 24). After that we ’turn on’ interaction (n = 0, g 6= 0) and we get fig. 25. All necessary comments are given under the figures. At point A on fig. 25 quantum of energy neither in atom nor in photon, it is equidistant from E01 and E02. This is a polariton state! In fact we described a so called Cummings ladder (fig. 26).
+50
+
+
+7 Spontaneous relaxation. Weisskopf-Wigner theory
+We have shown that quantum approach to atom-field interaction results in Rabi oscillation between the excited atomic state and photon states. In particular, the interaction with field vacuum results in vacuum Rabi oscillations and solves the problem of atomic state evolution in the absence of the excitation field. However, the the origin of spontaneous emission of excited stated has not been discussed yet. At the same time, we have seen that effects similar to exponential decay of the excited state appears in collapserevival dynamics, when an atom interacts with many photon states of a single mode field. In this lecture, we will see that spontaneous emission originates from interaction with multimode field.
+Figure 27: Initial conditions
+As in the previous lecture, we start from the interaction Hamiltonian in the interaction picture and within RWA:
+Vˆ (t) = ħ
+∑
+k
+[g∗
+kσˆ+aˆkei(ω0−ωk)t + H.c.] . (7.1)
+In order to study the dynamics of the system, we write down the wavefunction of the system with time dependent coefficients:
+|ψ(t)〉 =
+∑
+n,k
+(ca,nk(t) |a〉 |nk〉 + cb,nk(t) |b〉 |nk〉) , (7.2)
+where ca(b),nk
+d=ef ca(b),nk1,nk2,... and |nk〉 d=ef |nk1〉 |nk2〉 · . . . . We assume that at time t = 0
+the atom is in the excited state |a〉 and the field modes are in the vacuum state |0〉. That means that one needs to consider only state with total number of quanta equal to one. That reduces the wavefunction to the following form:
+|ψ(t)〉 = ca,0(t) |a〉 |0〉 +
+∑
+k
+cb,k(t) |b〉 |1k〉 , (7.3)
+which should satisfy the Schroedinger equation
+iħ
+∣ ∣ ∣
+ψ ̇ (t)
+〉
+= Vˆ (t) |ψ(t)〉 (7.4)
+supported by the initial conditions
+ca,0(0) = 1, cb,k(0) = 0. (7.5)
+From the Schroedinger equation we get the equations of motion for the probability amplitudes:
+
+
+
+c ̇a,0(t) = −i
+∑
+k
+g∗
+kei∆ktcb,1k(t), (7.6a)
+c ̇b,1k(t) = −igke−i∆ktca,0(t), (7.6b)
+51
+
+
+x
+s y
+z
+
+s
+z
+d k k
+k1
+k2
+Figure 28: Illustration of k-space integration
+where ∆k
+d=ef ω0 − ωk. To solve this system , firstly, we integrate the equation ∫ (7.6b)dt:
+cb,1k(t) = −igk
+t
+∫
+0
+dτ e−i∆kτ ca,0(τ ). (7.7)
+After that, we substitute (7.7) to (7.6a) and get the differential-integral equation
+c ̇a,0(t) = − ∑
+k
+|gk|2
+t
+∫
+0
+dτ e−i∆k(τ−t)ca,0(τ ). (7.8)
+This is still an exact equation. However, its solution is a complicated mathematical problem, and we make some approximations. Assuming that the modes of the field are closely spaced in k-space, we can
+∑
+k
+L→∞
+−→ ∑
+λ
+V
+∫ d3k
+(2π)3 (7.9)
+where we have left summation over different polarizations, and ∫ d3k =
+∫∞
+0 k2dk ∫ 2π
+0 dφ ∫ π
+0 sin θdθ in the spherical coordinate system. We recall that gk,λ =
+−(d · εk,λ)/ħ is the coupling constant between the atom and k-mode with λ polarization. System has a preferred direction and we direct the z-axis along the dipole moment d. For each k-vector we fix one of the polarizations laying in the plane containing z-axis and k-vector as shown in Fig. 28, while another polarization vector becomes orthogonal to z-axis and dipole moment d. The one can account for interaction with one mode only:
+gk,1 = − |d|εk,1
+ħ sin θ. (7.10)
+This allows us easily integrate over θ and φ:
+2π
+∫
+0
+π
+∫
+0
+|gk,1|2 sin θdφdθ = (|d|εk,1)2
+ħ2 · 2π
+π
+∫
+0
+dθ sin3 θ = (|d|εk,1)2
+ħ2
+4π
+3 . (7.11)
+It means that (7.8) becomes
+c ̇a,0(t) = − 2V
+(2πħ)3 · 4π
+3 |d|2
+∞
+∫
+0
+dk
+t
+∫
+0
+dτ k2ε2
+k,1e−i∆k(τ−t)ca,0(τ ). (7.12)
+52
+
+
+Figure 29: Relaxation process
+Now, we rewrite the ∫ dk part using dispersion law k = ωk/c and recalling that ε2
+k = ħωk
+2ε0V
+(see Lecture on secondary quantization):
+∞
+∫
+0
+dkk2 ħωk
+2ε0V e−i∆k(τ−t) = ħ
+2c3ε0V
+∞
+∫
+0
+dωkω3
+ke−i(ω0−ωk)(τ −t), (7.13)
+so
+c ̇a,0(t) = − 2V
+(2πħ)3 · 4π
+3 |d|2 · ħ
+2c3ε0V
+∞
+∫
+0
+dωk
+t
+∫
+0
+dτ ω3
+ke−i(ω0−ωk)(τ−t)ca,0(τ ). (7.14)
+In the emission spectrum, the intensity of light associated with the emitted radiation is going to be centered around the atomic transition frequency ω0. The quantity ω3
+k varies slowly around ωk = ω0. Therefore here we can use the stationary-phase method :
+∞
+∫
+0
+dωkω3
+ke−i(ω0−ωk)(τ −t) → ω3
+0
+∞
+∫
+−∞
+dωke−i(ω0−ωk)(τ −t) = ω3
+0 · 2πδ(τ − t). (7.15)
+Now integral over dτ is easy to compute ∫ t
+0 dτ δ(τ − t)ca,0(τ ) = 1
+2 ca,0(t), and we finally obtain
+c ̇a,0(t) = − γ0
+2 ca,0(t), → ca,0(t) = exp
+[
+− γ0
+2t
+]
+, (7.16)
+where the free space decay constant
+γ0
+d=ef ω3
+0 |d|2
+3πħc3ε0
+. (7.17)
+To conclude this part, one can see that interaction of a single excited atom with continuum of states results in the irreversible decay of the excitation into the photon
+NB:
+• If we consider a medium with refractive index n, which effectively changes the wave vector k → nk, then we get
+γ0 = ω3
+0 |d|2 n
+3πħc3ε0
+. (7.18)
+The origin of this will be also discussed in the following lectures.
+• It is useful to remember that γ ∼ n|d|2 and expression for γ contains the Plank constant ħ, which means that this process has a quantum nature.
+53
+
+
+• Substitution of summation over continuum with the integration
+∑
+k
+→
+∫
+dωk → δ(t − τ ) (7.19)
+is called the Weisskopf-Wigner method.
+54
+
+
+8 Dipole radiation. Dyadic Green’s function. The
+Purcell effect: classical approach
+8.1 Dipole radiation and dyadic Green’s function
+NB: Brief overview of Green’s functions
+A Green’s function, G(x, s), of a linear differential operator Lˆ acting on distributions over a subset of the Euclidean space, at a point s, is any solution of
+LˆG(x, s) = δ(x − s). (8.1)
+The knowledge of G(x, s) allows one to write the solution of the differential equation with with arbitrary inhomogeneous function in rhs. In other words,
+Lˆu(x) = f (x) → u(x) =
+∫
+dsG(x, s)f (s). (8.2)
+Consider an oscillating point dipole d(t) = d0e−iωt which is located in the point r0. Let us find the electric field generated by this dipole in a free space. In order to solve the Maxwell equation we the express the dipole source in terms of current density a time derivative of polarization density:
+j = ∂P
+∂t = ∂d(t)
+∂t δ(r − r0) = −iωd(t)δ(r − r0) (8.3)
+We then can write down the Maxwell equations with account for the currents sources (in SI units)
+
+      
+      
+rot E = −∂B
+∂t , (8.4a)
+rot H = ∂D
+∂t + j, (8.4b)
+div D = ρ, (8.4c)
+div B = 0. (8.4d)
+After applying the Fourier transform over time (in fact just ∂t → −iω) and using D = εε0E and B = μμ0H we obtain
+rot rot E − μμ0εε0ω2E = iμμ0ωj (8.5)
+introducing k = ω
+c
+√εμ we get
+rot rot E − k2E = k2
+εε0
+d0δ(r − r0). (8.6)
+Here we have an inhomogeneous differential equation with a δ–function on the r.h.s. of the equation. It solution manifests itself in a Green’s function ˆG(r, r0), however as Eq. (8.6) is a vectorial equation then the Green’s function for electromagnetic field is a tensor of second rank or a so–called dyadic Green’s function. This fact is represent by writing a ”hat” over G. By having the Green’s function (the radiation of a arbitrary oriented dipole), we can calculate radiation for any complex current j(r).
+55
+
+
+Example: Field from an arbitrary current
+E(r) = i
+
+   
+4π
+c
+1
+cε0
+
+   
+k
+∫
+d3r′ ˆG(r, r′)j(r′), units:
+
+
+sgs
+SI
+
+ (8.7)
+Remark: ˆGj = eiGˆikjk, where ei is the unit vector.
+8.1.1 Derivation of the Green’s function for Maxwell equations
+We construct now the explicit form of ˆG in a homogeneous medium. The general definition of the dyadic Green’s function is defined as a solution of the equation
+rot rot ˆG(r, r0) − k2 ˆG(r, r0) = Iˆδ(r − r0). (8.8)
+All we need to find is the relation which connects electric field E(r, ω) and current density j(r, ω). In order to find it, one can write down the expression of electric field in terms of scalar and vectorial potentials
+E = −∂A
+∂t − ∇φ. (8.9)
+If we use electromagnetic potential A then we can choose any gauge for our convenience. Let us take the Lorenz gauge
+div A + εμ
+c2
+∂φ
+∂t = 0 → ∇φ = c2
+iωεμ∇ div A. (8.10)
+By using the gauge formula and relation for vector potential B = rot A, one gets the equation for φ and A:
+
+
+
+∆A + k2A = −μμ0j, (8.11a)
+∆φ + k2φ = − ρ
+εε0
+. (8.11b)
+As we can see (8.11) —inhomogeneous Helmholtz equations. The Green’s function is well-known from classical electrodynamics course:
+G0(r, r0) = eikR
+4πR , R = |r − r0| . (8.12)
+It means that we can write the solution of (8.11) as
+
+  
+  
+A(r) = μμ0
+∫
+d3r′G0(r, r′)Iˆj(r′), (8.13a)
+φ(r) = 1
+εε0
+∫
+d3r′G0(r, r′)ρ(r′), (8.13b)
+where Iˆik = δik — a unit tensor. To get the final answer for ˆG we substitute (8.13), (8.10) in (8.9) and compare the result with (8.7). Substitution gives
+E(r) = iωA − c2
+iωεμ ∇ div A = iωμμ0
+∫
+d3r′
+[
+G0(r, r′)Iˆ + 1
+k2 ∇ div G0(r, r′)Iˆ
+]
+} {{ }
+↪→d=ef ˆG(r,r′)
+j(r′) (8.14)
+or
+Gˆ (r, r0) =
+(
+Iˆ + 1
+k2 ∇ ⊗ ∇
+)
+G0(r, r0) , (8.15)
+where (∇ ⊗ ∇)αβ = ∂α∂β, α, β = x, y, z is the tensor product of ∇.
+56
+
+
+Example: Field of a point dipole in vacuum
+Let us assume a monochromic dipole, so from (8.3) we obtain
+j = −iωd0δ(r − r0). (8.16)
+Substitution to (8.7) gives
+E(r) = i 1
+cε0
+k(−iω)
+∫
+d3r′Gˆ (r, r′)d0δ(r − r0) = k2
+ε0
+ˆG(r, r0)d0 (8.17)
+or
+Eα(r) =
+
+ 
+4π
+1
+ε0
+
+
+ k2Gˆαβ(r, r0)d0β units:
+
+
+sgs
+SI
+
+ . (8.18)
+Remark: it is worth noting that if d0 = (d0, 0, 0) then the first column of ˆG corresponds to the field, induced by a dipole directed along the x-axis.
+8.1.2 Near-, intermediate- and far-field parts of Green’s function
+Sometimes it is convenient to write (8.15) in different form:
+ˆG(r, r0) R=r−r0
+= Gˆ (R) = eikR
+4πR
+[(
+1 + ikR − 1
+k2R2
+)
+Iˆ + 3 − 3ikR − k2R2
+k2R2
+R⊗R
+R2
+]
+. (8.19)
+Though this expression looks bulky, it can be separated into several components, which have different distance dependence (containing different powers of kR)
+ˆG(R) = Gˆ NF + ˆGIF + ˆGF F , (8.20)
+where
+(near field = electrostatic) ˆGNF = eikR
+4πR
+1 k2R2
+(
+3 R⊗R
+R2 − Iˆ
+)
+, kR 1
+(intermediate field) ˆGIF = eikR
+4πR
+i kR
+(Iˆ − 3 R⊗R
+R2
+)
+, kR ∼ 1
+(far-field = radiating) ˆGF F = eikR
+4πR
+(Iˆ − R⊗R
+R2
+)
+, kR 1
+The simplified electric field distribution illustrating the effect of different components in (8.20) is shown in Fig. 30.
+8.2 Spontaneous relaxation and local density-of-state (IN A MIXED
+UNITS)
+8.2.1 An expression for spontaneous decay
+Consider an excited atom which interacts with vacuum (fig. 31). Relaxation may accrue to different channels which are related to a singe photon in different modes. According to Fermi’s Golden Rule the transition speed γ is given by
+γ = 2π
+ħ2
+∑
+f
+∣ ∣
+∣〈f | Vˆ |i〉
+∣ ∣ ∣
+2
+δ(ωi − ωf ), [γ] =
+[1
+time
+]
+, (8.21)
+57
+
+
+Figure 30: Intuitive picture of positioning of maximum radiation of a dipole
+Figure 31: Transition from an initial state |a, 0〉 to a set if final states ∣
+∣b, 1{k}
+〉. All the final states have the same energy. The states are products of atomic states and single–photon states.
+where |f 〉 = ∣
+∣b, 1{k}
+〉 and |i〉 = |a, 0〉. In order to find it we need to calculate the matrix element. As we had above, perturbation operator is given by
+Vˆ = ħ
+∑
+k,λ
+gk,λσˆ+aˆk,λ + h.c. (8.22)
+and field operator
+ˆE =
+∑
+k,λ
+εkeikr−iωkter,λaˆk,λ + h.c. = ˆE+ + Eˆ −, εk =
+√ 2πħωk
+V , (8.23)
+which is convenient to rewrite as
+Eˆ + =
+∑
+k,λ
+εkeikrek,λaˆk,λe−iωkt =
+∑
+k,λ
+u+
+k,λ(r)ˆak,λe−iωk, (8.24)
+where u+
+k (r) — a vector of a mode which contains all the information about the system which is quantized. Omitting the computational details we have
+∣ ∣
+∣〈f | Vˆ |i〉
+∣ ∣ ∣
+2
+= ħ2 |gk,λ|2 , (8.25)
+so
+γ = 2π
+ħ2
+∑
+k,λ
+ħ2 |gk,λ|2 δ(ωk − ω). (8.26)
+58
+
+
+Using the fact that gk,λ = − d·u+
+k,λ
+ħ we have
+γ = 2π
+ħ2
+∑
+k,λ
+(d · u+
+k,λ
+)∗ (d · u+
+k,λ
+) δ(ωk − ω) = 2π
+ħ2
+∑
+k,λ
+d∗ (u−
+k,λ ⊗ u+
+k,λ
+) dδ(ωk − ω) =
+=
+/
+u+
+k,λ = εkeikrekλ = √2πħωk · √1V ekλeikr d=ef √2πħωku0+
+kλ
+/
+=
+= 2π
+ħ2 ħω2π|d|2 ∑
+k,λ
+n∗ (u0+
+kλ ⊗ u0−
+kλ
+) nδ(ωk − ω), d = |d|n. (8.27)
+Now we introduce the local density-of-state which contains all the information about the system
+ρd(r, ω) d=ef 3
+∑
+k,λ
+n∗ (u0+
+kλ ⊗ u0−
+kλ
+) nδ(ωk − ω), (8.28)
+then
+γ = 4π2ω0
+3ħ |d|2ρd, |d|2 = |〈a| er |b〉|2 . (8.29)
+8.2.2 Spontaneous decay and Green’s dyadics
+After that need apply a Hilbert???Schmidt formula
+ˆG(r, r0, ω)
+∑
+k,λ
+(u0+
+kλ ⊗ u0−
+kλ
+)
+ω2
+k
+c2 − ω2
+c2
+. (8.30)
+Using Sokhotski formula
+Im
+{1
+ω2
+k − ω2
+0
+}
+=π
+2ωk
+
+δ(ωk − ω0) + δ(ωk + ω0)
+} {{ }
+↪→=0, ωk>0
+
+ . (8.31)
+Let us consider the imaginary part of the dyadic Green’s function
+Im
+{ ˆG(r, r0, ω)
+}
+= πc2
+2ω
+∑
+k,λ
+(u0+
+kλ (r) ⊗ u0−
+kλ (r0)) δ(ω − ωk), (8.32)
+then the local density-of-state
+ρd(r0, ω) = 6ω
+πc2
+(
+n∗ · Im
+{Gˆ (r0, r0, ω)
+}
+·n
+)
+. (8.33)
+The main thing to notice is
+γ ∼ ρd(r0, ω) ∼ Im
+{ ˆG(r0, r0, ω)
+}
+. (8.34)
+Now let us calculate the spectral density of state
+D(ω) =
+∫
+d3r0ρd(r0, ω), (8.35)
+then we find averaging over different orientations
+〈ρd〉orientations = 6ω
+πc2
+1
+3 Im
+{
+Tr ˆG
+}
+= ω2
+π2c3 , (8.36)
+59
+
+
+here we used
+Im
+{Gˆαα(r0, r0, ω)
+}
+=k
+6π , α = x, y, z. (8.37)
+Remark: the real part has singularity
+rli→mr0
+Re
+{Gˆαα(r, r0, ω)
+}
+= ∞, α = x, y, z. (8.38)
+Substitution to (8.29) gives us
+(vacuum) γ0 = 4|d|2ω3
+3πħc3 [sgs] = |d|2ω3
+3ħε0πc3 [SI]. (8.39)
+For medium with n = √εm but with the same Green’s function we have
+(medium) γ0 = 4|d|2ω3
+3πħc3 n [sgs] = |d|2ω3
+3ħε0πc3 n [SI]. (8.40)
+8.3 The Purcell factor
+The Purcell factor is defined as
+Fp
+d=ef γ
+γ0
+=
+Im
+{
+n ˆGnewn
+}
+Im
+{
+nGˆ n
+} =1+
+Im
+{
+n ˆGextn
+}
+Im
+{
+nGˆ n
+} =1+
+Im
+{
+n ˆGextn
+}
+k/6π , (8.41)
+where ˆGnew = ˆG + Gˆ ext, γ — transition probability in a new media with its own Gˆ new. Now let us take a look from the classical standpoint. Radiation power is given by the integral
+P = −1
+2 Re
+∫
+d3rj∗E, (8.42)
+where dipole current and field is given by (8.16) and (8.17) respectively. After substitution we obtain
+(sgs): P = ω2
+2 Im
+∫
+d3r4πk2d∗Gˆ (r, r0, ω)dδ(r − r0) =
+= 2πk2ω|d| Im
+{ ˆG(r0, r0, ω)
+}
+= 2πk2ω|d| · k
+6π (8.43)
+and we’ve got the Rayleigh formula
+P = k3ω|d|2
+3 ∼ ω4. (8.44)
+If a dipole is dieing down then its energy
+W (t) = W (0)e−γt (8.45)
+and radiation power
+P (t) = d
+dt W (t) = −γW (t). (8.46)
+At time t ≈ 0 we obtain Pmedium(t)
+Pvacuum(t) ≈ γ
+γ0
+= Fp. (8.47)
+We have the same result but only using the classical approach. But one needs to remember that the reason of radiation has a quantum nature.
+60
+
+
+2R
+x
+dt
+dt
+Figure 32: Atom with transverse and parallel dipole moment near a nanoparticle
+Homework. Deadline: 29th of December
+1. (6 pts) Calculate Purcell factor for an atom placed near a metal nanoparticle of raidus R as a function of the distance to nanoparticle surface. Use dipole approximation considering the nanoparticle as a dipole with moment d = αE, where E is the external electrical field calculated in the center of the nanoparticle. The polarizability of metal nanoparticle is α = R3(ε − 1)/(ε + 2) (CGS untis). Use Drude model for the dielectric permittivity ε = 1 − ω2
+p/(ω(ω + iγ)), where the damping constant γ = 0.1ωp, and compute the distance dependence at the
+frequency of surface plasmon resonance ω = ωSP R = ωp/√3. Consider two atom polarizations as shown in the figure.
+61
+
+
+9 Theory of relaxation of electromagnetic filed. Heisenberg
+Langevin method
+9.1 In previous series
+We have discussed:
+1. Two-level system (e.g. atom) and one mode field. Result: Rabi oscillations.
+2. Two-level system and continuum of modes (e.g. cavity). Result: spontaneous emission.
+3. One-mode field in the cavity and continuum of modes. Result: let’s find out!
+Figure 33: Different possible cases for analytical consideration.
+9.2 the Heisenberg–Langevin equation
+We are interested in dynamics of bˆ(t) and ˆa(t) in thermodynamics equilibrium at the temperature T . We consider modes which are fluctuate independently
+〈bˆ†
+k (0)bˆk′ (0)
+〉
+= n ̄kδkk′, (9.1)
+〈bˆk(0)
+〉
+=
+〈bˆ†
+k(0)
+〉
+= 0, (9.2)
+〈bˆk(0)bˆ†
+k′ (0)
+〉
+= (n ̄k + 1)δkk′, (9.3)
+〈bˆk (0)bˆk′ (0)
+〉
+=
+〈bˆ†
+k(0)bˆ†
+k′ (0)
+〉
+= 0. (9.4)
+Here and hereinafter the angle brakes represent the reservoir averages 〈. . .〉 ≡ 〈. . .〉R. As the wave function is unknown we use the density matrix approach. Density matrix and distribution function in thermodynamics equilibrium is given by
+ρR = Π
+(
+1 − e− ħωk
+kT
+)
+e− ħωkˆb†
+kˆbk
+kT ,  ̄nk = 1
+e ħωk
+kT − 1
+. (9.5)
+The Hamiltonian of the system can be written as
+Hˆ = ħωaˆ†aˆ
+} {{ }
+resonator
++
+∑
+k
+ħωkbˆ†
+kbˆk
+} {{ }
+cavity
++
+∑
+k
+ħ
+(
+gkbˆ†
+kaˆk + g∗
+kaˆ†
+kbˆk
+)
+} {{ }
+Hˆ int
+. (9.6)
+62
+
+
+The explicit form of gk is strongly depend on exact system. However we know the asymptotic behavior — if the resonator is ideal then gk = 0. Time evolution is defined by
+aˆ ̇ (t) = i
+ħ
+[Hˆ, aˆ
+]
+, bˆ ̇(t) = i
+ħ
+[Hˆ, bˆ
+]
+, (9.7)
+which gives
+
+ 
+ 
+aˆ ̇ (t) = −iωaˆ(t) − i
+∑
+k
+g∗
+kbˆk(t), (9.8a)
+bˆ ̇k(t) = −iωkbˆk(t) − igkaˆ(t), (9.8b)
+Important to notice that it is sensible to consider only the mean values of operators. Now let us solve this system. it is easy to verify that the solution of (9.8b) is
+bˆk(t) = bˆk(0)e−iωkt
+} {{ }
+reservoir modes evolution
+− igk
+t
+∫
+0
+dτ aˆ(τ )e−iωk(t−τ)
+} {{ }
+interaction between reservoir and oscillator
+(9.9)
+then we substitute this result in (9.8a) and obtain
+aˆ ̇ (t) = −iωaˆ(t) − fˆa(t) +
+∑
+k
+|gk|2
+t
+∫
+0
+dτ aˆ(τ )e−iωk(t−τ), (9.10)
+where fˆa(t) d=ef i
+∑
+k
+g∗
+kbˆk(0)e−iωkt (9.11)
+is a stochastic operator as the number of photons in a particular time moment is undefined. After that we introduce
+aˆ ̃(t) d=ef aˆ(t)eiωt, Fˆa ̃(t) = fˆa(t)eiωt (9.12)
+and obtain a stochastic integro-differential equation
+ ̇aˆ ̃(t) =
+∑
+k
+|gk|2
+t
+∫
+0
+dτ aˆ ̃ei(ω−ωk)(t−τ) + Fˆa ̃(t). (9.13)
+which is quite hard to solve, unless one was educated in the USSR. To find a solution of (9.13) we, first of all, make transition from sum to the integral
+∑
+k
+|gk|2 → V
+π2c3
+∞
+∫
+0
+dωkω2
+k |gωk|2 . (9.14)
+63
+
+
+Now let us consider only the integral in (9.13) which becomes
+V
+π2c3
+∞
+∫
+0
+dωkω2
+k |gωk |2
+t
+∫
+0
+dτ aˆ ̃(τ )ei(ω−ωk)(t−τ) =
+=
+/
+ω2
+k |gωk|2 is a slow function
+/
+≈V
+π2c3
+t
+∫
+0
+dτ aˆ ̃(τ ) · ω2
+k |gωk |2 ·
+∞
+∫
+0
+dωkei(ω−ωk)(t−τ )
+} {{ }
+↪→≈2πδ(t−τ )
+=
+=V
+π2c3 ω2
+k · 2π |gωk|2
+t
+∫
+0
+dτ aˆ ̃(τ )δ(t − τ )
+} {{ } 1
+2 aˆ ̃(t)
+=Γ
+2
+aˆ ̃(t), (9.15)
+where we defined a relaxation constant Γ and density of states D:
+Γ d=ef D(ωk) · 2π |gωk|2 , D(ωk) = V ω2
+k
+π2c3 =
+∫
+d3rρ(r, ωk). (9.16)
+So finally here is the Heisenberg–Langevin equation:
+ ̇aˆ ̃(t) = −Γ
+2
+aˆ ̃(t) + Fˆa ̃(t). (9.17)
+Remark: we could obtain the same result if we would have considered the dynamics of atom’s operator σˆ ̇ z(t).
+Example: Connection between dissipation and fluctuation
+Let us put Fˆa ̃(t) = 0. It means that aˆ ̃(t) = aˆ ̃(0)e− Γ
+2 t which leads to
+[aˆ ̃(t), aˆ ̃†(t)
+]
+= e−Γt 6= 1. (9.18)
+That is nonsense! It couldn’t be, so we can not just put the stochastic term to zero. If there is a dissipation then there have to be fluctuation in the system.
+Homework. Deadline: 29th of December
+1. (4 pts) Consider two interacting cavities described by the Hamiltonian:
+H = ħωa+a + ħωb+b + ħg(a+b + b+a)
+Initially there were Na and Nb photons in each resonator. Please, describe how the number of photon will change in time in each resonator.
+Hint: use the equation of operator motion to calculate ˆna and nˆb
+9.3 Properties of the stochastic operator
+Let us find out properties of the stochastic operator Fˆa(t). The mean values are
+〈Fˆa(t)
+〉
+=
+〈Fˆ†
+a (t)
+〉
+= 0. (9.19)
+64
+
+
+Now let us find the correlator
+〈Fˆ†
+a (t)Fˆa(t′)
+〉
+=
+∑
+kk′
+g∗
+kgk′ ·
+〈bˆ†
+k(0)bˆk(0)
+〉
+·
+} {{ } ↪→=  ̄nk δkk′
+av. num. of ph. in k
+ei(ωk−ω)t−i(ωk′ −ω)t′ =
+=
+∑
+k
+|gk|2  ̄nkei(ωk−ω)(t−t′) =
+∞
+∫
+0
+dωkD(ωk) |gk|2  ̄nk(ωk)ei(ωk−ω)(t−t′) ≈
+≈ D(ωk) |gk|2  ̄nk(ωk)
+} {{ }
+slow func
+·2πδ(t − t′), (9.20)
+so we have 〈Fˆ†
+a (t)Fˆa(t′)
+〉
+=  ̄nkΓδ(t − t′). (9.21)
+Any stochastic function with δ–shaped correlator is called white noise. After integration over t′ in (9.21) the dissipation rate can be written as
+Γ= 1
+ ̄nk(ωk)
+∞
+∫
+−∞
+dt′ 〈Fˆ†
+a (t)Fˆa(t′)
+〉
+. (9.22)
+This relation takes it roots from the fluctuation-dissipation theorem. Consider another averaging, that is the average of stochastic operator and an annihi
+lation operator
+〈Fˆ†
+a (t)aˆ ̃(t)
+〉
+. From (9.17) we get
+aˆ ̃(t) = aˆ ̃(0)e− Γ
+2t +
+t
+∫
+0
+dτ Fˆa(τ )e− Γ
+2 (t−τ), (9.23)
+so
+〈Fˆ†
+a (t)aˆ ̃(t)
+〉
+=
+〈Fˆ†
+a (t)aˆ ̃(0)e− Γ
+2 t〉
+} {{ }
+↪→=0, as 〈Fˆa〉=0
++
+t
+∫
+0
+dτ
+〈Fˆ†
+a (t)Fˆa(τ )
+〉
+e− Γ
+2 (t−τ ) (9.21)
+= n ̄kΓ
+2 . (9.24)
+In a similar way it is easy to get the same result for
+〈aˆ ̃(t)Fˆ†
+a (t)
+〉
+, so we can write
+〈Fˆ†
+a (t)aˆ ̃(t)
+〉
+=
+〈aˆ ̃(t)Fˆ†
+a (t)
+〉
+=  ̄nkΓ
+2 . (9.25)
+These correlation functions will be employed to derive equations of motion for the field correlation functions.
+9.4 Equation of motion for the field correlation functions. Wiener
+Khintchine theorem
+The mean time development of the field number operator is
+d
+dt
+〈aˆ ̃†(t)aˆ ̃(t)
+〉
+=
+〈
+daˆ ̃†
+dt
+aˆ ̃
+〉
++
+〈
+aˆ ̃† daˆ ̃
+dt
+〉
+(9.17)
+= −Γ
+2
+〈aˆ ̃†aˆ ̃
+〉
++
+〈Fˆ†
+a aˆ ̃
+〉
++
+〈aˆ ̃Fˆ†
+a
+〉
+} {{ }
+↪→(9.=25)Γ ̄nk
+−Γ
+2
+〈aˆ ̃†aˆ ̃
+〉
+=
+= −Γ
+〈aˆ ̃†aˆ ̃
+〉
++ Γn ̄k. (9.26)
+65
+
+
+Figure 34: Wiener–Khintchine theorem in 40 seconds
+In a similar manner, it can be shown that
+d
+dt
+〈aˆ ̃(t)aˆ ̃†(t)
+〉
+= −Γ
+〈aˆ ̃aˆ ̃†〉
++ Γ ( ̄nk + 1) . (9.27)
+To verify our results let us find the same commutator which was found in the example above. Shall we start with
+d
+dt
+〈[aˆ ̃(t), aˆ ̃†(t)
+]〉
+=Γ
+(
+1−
+〈[aˆ ̃(t), aˆ ̃†(t)
+]〉)
+. (9.28)
+We now what value should be at time t = 0, in other words we know the initial conditions
+for this differential equation, so letting ζ d=ef
+〈[aˆ ̃(t), aˆ ̃†(t)
+]〉
+, we have
+{ζ ̇ = Γ(1 − ξ)
+ζ t=0 = 1 → ζ = 1 →
+〈[aˆ ̃(t), aˆ ̃†(t)
+]〉
+= 1. (9.29)
+Which is correct in contrast to (9.18). To define the spectrum we need to use the Wiener–Khintchine theorem. In short, this theorem allows to find spectrum using the knowledge of the correlation function (fig. 34) using relation
+Sf (ω) = 1
+π
+∞
+∫
+−∞
+dτ e−iωτ · 〈f ∗(t)f (t + τ )〉 (9.30)
+Спектр написал, как было на лекциях, хотя в Скалли (ур-е 9.3.11) немного другое выражение, там ∫ ∞
+0 и берут действительную часть от интеграла.
+In our case instead of f (t) we have aˆ(t) = aˆ ̃(t)e−iωt which gives
+〈aˆ†(t0)ˆa(t0 + τ )〉 =
+〈aˆ ̃†(t0)aˆ ̃(t0 + τ )
+〉
+e−iωτ = 〈n〉 e− Γτ
+2 e−iωτ , (9.31)
+where 〈n〉 d=ef
+〈aˆ ̃†(t0)aˆ ̃(t0)
+〉
+is the mean number of photons at the initial time t0. Then the
+spectrum
+S(ν) = 1
+π 〈n〉
+∞
+∫
+−∞
+dτ e−iντ · e− Γτ
+2 e−iωτ = 1
+π 〈n〉 Γ/2
+(ν − ω)2 + (Γ/2)2 . (9.32)
+This is a Lorentzian distribution centered at ν = ω with a half–width Γ (fig. 35). The quality factor is connected with our results and can be written as Q = ω
+Γ.
+66
+
+
+Figure 35: Spectrum has a Lorentzian distribution shape
+67
+
+
+10 Atom in a damped cavity
+In the previous sections we have discussed different parts of the system (fig. 36) which we are going to combine in this section.
+Figure 36: From left to right: atom in vacuum, atom in the cavity, field in a cavity in a thermostat.
+Here we are going to study the evolution of a single two-level atom initially prepared in the upper level |a〉 of the transition resonant with the cavity mode (fig 37). In particular, it is seen that the spontaneous emission rate of the atom inside a resonant cavity is substantially enhanced over its free-space value (Purcell effect).
+Figure 37: Atom in a cavity with losses. System has two coupling constants: g — atom and field coupling, Γ — cavity and reservoir coupling (transparency of a mirror)
+10.1 The Purcell factor for a closed cavity
+The decay rate γ can be written as
+γ = 2π |g(ω)|2 D(ω)
+V , (10.1)
+where D/V = ρ is the density of state. In vacuum it is D0(ω) = ω2
+π2c3 but in a cavity it can be approximated by the Lorentzian (fig) with resonant frequency ω0
+D(ω) = 1
+π
+ω0/2Q
+(ω − ω0)2 + (ω0/2Q)2 . (10.2)
+There two cases which is interesting to consider:
+68
+
+
+Figure 38: The decay rate in vacuum and in a cavity
+Case 1. ω ≈ ω0 — transition and cavity frequencies are approximately equal. Then
+D(ω = ω0) ≈ 1
+π
+2Q
+ω0
+. (10.3)
+Substitution to (10.1) gives
+γ = 2π |g(ω)|2 2Q
+πω
+1
+V = 2π |g(ω)|2 ω2
+π2c3
+} {{ }
+↪→=γ0
+·1
+V
+π2c3
+ω2 · 2Q
+πω = γ0
+1
+(2π)2
+λ3
+V Q, (10.4)
+so the Purcell factor for a cavity is strongly depends on the λ3/V and the quality factor Q:
+FP = γ
+γ0
+=1
+(2π)2 · λ3
+V Q. (10.5)
+Case 2. |ω0 − ω| Γ = ω0/Q. In this case we have
+D(ω) ≈ 1
+π
+Γ
+2ω2 = 1
+2π
+1
+Qω , (10.6)
+then
+FP = γ
+γ0
+=1
+(2π)2
+λ3
+V ·1
+Q. (10.7)
+Usually Q 1 and λ3
+V ∼ 1, so far from the resonance FP 1.
+10.2 Rigorous derivation of the atomic decay
+If the approach is rigorous then we have to call Mr. Hamiltonian immediately
+Hˆ = HˆA + HˆF + HˆAF + HˆR + HˆRF, (10.8)
+where A stands for atom, F for field and R for reservoir. Summands of Hˆ are the following
+HˆF = ħωˆn, HˆA = 1
+2 ħω0σˆz, HˆR =
+∑
+k
+ħωkˆnk, (10.9)
+HˆAF = ħg (σˆ+aˆ + ˆa†σˆ−
+) , HˆFR = ħ
+∑
+k
+gk
+(
+aˆ†bˆk + bˆ†
+kaˆ
+)
+, g, gk ∈ R. (10.10)
+69
+
+
+We are interested in time dependence of 〈σˆz〉 and 〈aˆ†aˆ〉. Angle brackets represents the averaging over the reservoir and quantum mechanics averaging 〈. . .〉 ≡ 〈〈. . .〉R〉QM. For
+an any atom operator OˆA we have a supporting relation
+d
+dt
+〈
+(ˆa†)m(ˆa)nOˆA
+〉
+= −i
+ħ
+[
+(ˆa†)m(ˆa)nOˆA, HˆA + HˆF + HˆAF
+]
++d
+dt
+〈(ˆa†)m(ˆa)n〉 OˆA. (10.11)
+Similar to (9.26) it is not so hard to obtain the answer for a any positive integer powers
+d
+dt
+〈(ˆa†)m(ˆa)n〉 =
+[
+iω(m − n) − Γ
+2 (m + n)
+]
+〈(ˆa†)m(ˆa)n〉 +
++ Γ · mn ·  ̄ˆnR
+〈(ˆa†)m−1(ˆa)n−1〉 . (10.12)
+In the particular case, when OˆA = ˆ1, we have
+d
+dt
+〈aˆ†aˆ〉 = − i
+ħ
+〈[
+aˆ†aˆ, HˆA + HˆF + HˆAF
+]〉
+− Γ 〈aˆ†aˆ〉 + Γ ̄ˆnR. (10.13)
+As the commutator of ˆa is trivial [aˆ, aˆ†] = 1, so
+[aˆ†aˆ, g (σˆ+aˆ + ˆa†σˆ−
+)] = gaˆ†σˆ− − gσˆ+aˆ, (10.14)
+then d
+dt
+〈aˆ†aˆ〉 = − i
+ħ g 〈aˆ†σˆ− − σˆ+aˆ〉
+} {{ }
+?
+−Γ 〈aˆ†aˆ〉 + Γn ̄ˆR, (10.15)
+where 〈aˆ†σˆ− − σˆ+aˆ〉 is yet unknown. Now let us take a look at sigma–z operator
+d
+dt 〈σˆz〉 = − i
+ħ
+〈[σˆz, gaˆ†σˆ− + gσˆ+aˆ]〉 = 2g i
+ħ
+〈ˆa†σˆ− − σˆ+aˆ〉
+} {{ }
+?
+, (10.16)
+where we have got the same unknown averaging. To obtain last result the commutation relations for σ–matrices had been used:
+[σˆz, σˆ−] = −2σˆ−, [σˆz, σˆ+] = 2σˆ+. (10.17)
+To solve (10.15) and (10.16) we need to know the time dependence of that unknown Hermitean operator 〈aˆ†σˆ− − σˆ+aˆ〉, which equation of motion involves the quantity 〈aˆ†σˆzaˆ〉 and so on. In general, we get an infinite set of equations which may not be analytically solvable. The way out is the following — we need to cut the chain of equations at some step. Here the things we are going to suppose:
+1. Put cavity at zero temperature reservoir ( ̄ˆnR = 0).
+2. Initially the atom is in the excited sate |a〉 and field inside the cavity is in the vacuum state |0〉.
+In other words, we consider a single photon approximation. If the photon is only one then all summands which are proportional to aˆ2 or ˆa†2 are identically zero. As the result, under these conditions, we obtain the following system of equations:
+
+   
+   
+d dt
+〈aˆ†aˆ〉 = gχ(t) − Γ 〈aˆ†aˆ〉
+d
+dt 〈σˆz〉 = −2gχ(t)
+d
+dt χ(t) = g 〈σˆz〉 + 2g · y(t) + g − Γ
+2 χ(t)
+d
+dt y(t) = −gχ(t) − Γy(t)
+, χ(t) d=ef i 〈σˆ+aˆ − aˆ†σˆ−
+〉,
+y(t) d=ef 〈aˆ † σˆzaˆ〉 , (10.18)
+70
+
+
+Figure 39: Probability Pa versus dimensionless time gt for the different limiting behavior regimes.
+with the initial conditions
+χ
+∣
+∣t=0 = 0, y∣
+∣t=0 = 0, 〈aˆ†aˆ〉 ∣
+∣t=0 = 0, 〈σˆz〉 ∣
+∣t=0 = 1. (10.19)
+Using the single photon approximation is always simplifies the problem and make it look more ”classical”. This system has two main parameters: g and Γ (see fig. 37). Let us consider two limiting behavior regimes:
+Regime 1. Γ g → Γ ΩR or a overdamping regime. Here we have
+〈σˆz〉 = −1 + 2e−4g2 t
+Γ = −1 + 2e−γt, (10.20)
+where
+γ = 4g2
+Γ = 4g2Q
+ω = 6πc3Q
+V ω2
+} {{ }
+FP
+· 8 |d|2 ω2
+ħω0c3 → γ ∼ FP. (10.21)
+The cavity increase the dissipation rate!
+Regime 2. Γ g or a low losses regime. Here we can obtain that the atomic inversion 〈σˆz〉 is
+〈σˆz〉 = −1 + e− Γ
+2 t [1 + cos (2gt)] (10.22)
+so the probability Pa take the simple form
+Pa = 〈σˆz〉 + 1 = e− Γ
+2 t [1 + cos (2gt)] (10.23)
+Different regimes are represented on a fig. 39.
+71
+
+
+11 Casimir force and his close friends
+This section is an overview of so-called fluctuation-induced forces. All effects here have a stochastic nature. Depending on the point of view this force may have different names: Casimir force, van der Waals force and Casimir–Polder force.
+Example: A Frenchman of keen observation
+In the XVIII century French navy men noticed one interesting thing. Two ships in a confused sea and with no-wind conditions being at a distance of 40 meters began to attract each other (Fig. 40). That happens because of the wave interference in the space between them. The calm see between ships creates less pressure than the confused one outside. Because of the same reason plastic islands originate.
+Figure 40: Two ships in a confused sea.
+Fluctuating charges in a neutral body give rise to fluctuating electromagnetic fields which interact with the charges in other bodies. As a consequence, electromagnetic fields mediate between the charge fluctuations in separate bodies. The resulting charge correlations give rise to an electromagnetic force that is referred to as the dispersion force.
+Example: A skillful Gecko
+Geckos climb even the most slippery surfaces with ease and hang from glass using a single toe (Fig. 41). The secret behind this extraordinary climbing skill lies with millions of tiny keratin hairs on the surface of each foot. Although the dispersion force associated with each hair is miniscule, the millions of hairs collectively produce a powerful adhesive effect. The “gecko effect” is applied to the design of strongly adhesive tapes.
+72
+
+
+Figure 41: A nice Gecko climbs a vertical glass.
+73
+
+
+11.1 Casimir force between two perfectly conducting plates
+Let us consider two parallel perfectly conducting metal plates in vacuum at the distance d. We choose z axis orthogonally to the plates (Fig. 42). Due to the boundary conditions waves have nods where plates are. So wave vector kz is quantized as
+kz = nπ
+d , n ∈ Z. (11.1)
+Figure 42: Perfectly conducting plates in vacuum. Wave vector kz is quantized.
+The main idea of calculating the force is the following. We expect that the force between two plates at the distance d is potential, so we could write
+Fz(d) = − dU
+dz
+∣ ∣ ∣
+∣z=d
+. (11.2)
+It means that we need to find the potential energy of the plate interaction U (d), which shows how much energy we need to expend to separate two plates from distance z = d to z → ∞, so
+U (d) = E(d) − E(d → ∞). (11.3)
+We need to remind that in the picture of secondary quantization Mr. Hamiltonian of photons looks as (??)
+Hˆ =
+∑
+k,s
+ħωk
+[
+aˆ†
+k,saˆk,s + 1
+2
+]
+, (11.4)
+where ωk = c|k|. Our system has no real photons, so energy of the ground state |0〉 is
+E = 〈0| Hˆ |0〉 . (11.5)
+Further calculations depends on how many dimensions we live.
+11.1.1 Case D = 3
+In three dimensions we have
+ωk = c|k| = c
+√
+kx2 + ky2 + kz2 =
+√
+kx2 + ky2 +
+( nπ
+d
+)2
+, (11.6)
+74
+
+
+therefore interaction energy is
+E=
+∑
+k,s
+ħωk
+2 = ħcA
+∞
+∫
+−∞
+dkxdky
+(2π)2
+∞
+∑
+n=0
+√
+kx2 + ky2 +
+( nπ
+d
+)2
+. (11.7)
+Here we used the fact that real photons may have two possible polarisations, so ∑
+s → 2.
+We also rewrote sum as ∑
+k=∑
+kx,ky
+∑
+kz , where first sum was changed to the integral by the rule
+∑
+kx,ky
+=A
+∞
+∫
+−∞
+dkxdky
+(2π)2 , (11.8)
+where A is the normalization area. ∑
+kz should sum all possible values of kz, due to the fact that kz is quantised because of the boundary conditions it is a countable infinity, so
+∑
+kz
+g(kz) =
+∞
+∑
+n=0
+g
+( nπ
+d
+)
+, (11.9)
+where g is any function of kz. System has circular symmetry, so it is convenient to calculated integral in cylindrical coordinates where ∫ dkxdky = ∫ dφdkρkρ = 2π ∫ dkρkρ. It is also reasonable to look for the energy per area unit
+Es
+A = ħc
+2π
+∞
+∑
+n=0
+∞
+∫
+0
+dkρkρ
+[
+k2
+ρ+
+(πn
+d
+)] 1−s
+2 , (11.10)
+where a new parameter s was introduced. Remark : at this point we have made a bold move: we swapped ∑
+n and ∫ dkρ. By mathematical rigor we should have verified that both the sum and the integral are convergent. But we are physicist and we do need right answers other than a dense jungle of mathematical proof. The main feat to calculate (11.10) is to introduce new parameter s and find Es pretending that Re s > 3 and our life is fine and full of convergent integrals and sums. After that we just brassily say E = lsi→m0 Es. Let us start
+Es
+A=
+/
+x = k2
+ρ
+/
+=
+= ħc
+2π
+∞
+∑
+n=0
+1
+2
+∞
+∫
+0
+dx
+[
+x+
+(πn
+d
+)2] 1−s
+2
+= ħc
+4π
+∞
+∑
+n=0
+2
+3−s
+[
+x+
+(πn
+d
+)2] 3−s
+2
+∣ ∣ ∣ ∣ ∣
+∞
+0
+=
+= − ħc
+2π
+1
+3−s
+{∞ ∑
+n=0
+(πn
+d
+)3−s −
+∞
+∑
+n=0
+lim
+kρ→∞ k3−s
+ρ
+}
+. (11.11)
+One should not be afraid of the last term which is obviously divergent if we take limit s → 0. As it was stated above we are searching for potential energy U (d) = E(d)−E(d → ∞). Considering E(d → ∞) in the same manner we get
+E(d → ∞) ∼ . . .
+√
+kx2 + ky2 + dli→m∞
+(πn
+d
+)2
+= ...
+√
+kρ2 + 0. (11.12)
+This term precisely reduces second divergent term in (11.11).
+75
+
+
+Potential energy per area unit is
+U (d)
+A = − lsi→m0
+ħc
+2π
+1
+3−s
+π3−s
+d3−s
+∞
+∑
+n=0
+n3−s = − ħcπ2
+6d3
+∞
+∑
+n=0
+n3 = − ħcπ2
+720d3 . (11.13)
+Here used regularized Riemann zeta–fuction
+ζ(s) =
+∞
+∑
+n=1
+n−s, (11.14)
+which in particular case gives ζ(−3) = 1
+120 . Remark : we will discuss such hardly intuitively understandable result later. Finally, force acting on right metal plate per area unit is equal
+Fz (d)
+A = ħcπ2
+240d4 . (11.15)
+11.1.2 Case D = 1 and philosophy about divergent sums
+In one dimension case
+ωk = ckz = nπ
+d , (11.16)
+so calculation are much easier, therefore it is easier to watch physics behind this effect. At first, let us find energy
+E = 〈0| Hˆ |0〉 =
+∑
+kz ,s
+ħωk
+2 = ħc π
+d
+∞
+∑
+n=1
+n=
+/
+ζ(−1) = − 1
+12
+/
+= −ħcπ
+12d , (11.17)
+so force in one dimensional case is
+Fz = ħcπ
+12d2 . (11.18)
+Here we again faced with a weird divergent sum which has a finite value. It not an artificial trick and it has physical reasons to do so. Infinite sum ∑∞
+n=1 n represents a sum of all possible modes between plates, but all real metals have inductive impedance at high frequencies, so we may introduce a cutoff as
+∞
+∑
+n=1
+n→
+∞
+∑
+n=1
+ne−εn. (11.19)
+Now, considering ε 1, using Taylor expansion we may write first terms
+∞
+∑
+n=1
+ne−εn = e−ε
+(1 − e−ε)2 = 1
+ε2 − 1
+12
+} {{ }
+important
++ ε2
+240 + o(ε4). (11.20)
+Neglecting all ε–dependent terms physically means that we are looking for the difference between energy of two states: vacuum and vacuum with two plates. In math it is called Dirichlet normalization.
+76
+
+
+11.2 Casimir–Polder force
+In this part we are going to find fluctuation-induced force using point electric dipole approximation and Green’s function (GF) formalism. Due to the fact that magnetic dipole and electric quadrupole interaction is usually the next order effect, point electric dipole approximation is enough for many cases. Let us consider in average neutral objects with independent fluctuating field Efl and dipole moment pfl. Now, we need to keep in mind that fluctuating filed induces a dipole moment of the object with polarizability α may be written as
+pin(ω) = α(ω)Efl. (11.21)
+Moreover, any fluctuating dipole emits electromagnetic field. Induced field may be easily written using Green’s function approach
+Ein(r, ω) = ω2
+c2
+1
+ε0
+ˆG(r, r0, ω)pfl(ω), (11.22)
+where r0 is the location of the fluctuating dipole.
+Figure 43: A small particle near unknown media, which is given by its Green’s function.
+From the electrodynamics an average electromagnetic force acting on a point dipole is given by
+〈F〉 = 〈 ∑
+i=x,y,z
+pi∇Ei〉. (11.23)
+Both p and E may be induced or fluctuative, so F ∼ pE = (pfl + pin)(Efl + Ein). Because of the fact that fluctuations are independent 〈pflEfl〉 = 0 and due to (11.21) and (11.22) 〈pinEin〉 ∼ 〈Eflpfl〉 = 0. Other term are proportional to the mean square of fluctuating values which are non–zero. Then (11.23) transforms into
+〈F〉 =
+∑
+i
+[〈pin
+i ∇Efl
+i 〉 + 〈pfl
+i ∇Ein
+i 〉] . (11.24)
+Applying Fourier transform in respect that E∗ = E and with the help of (11.21) and (11.22) we obtain
+〈F〉 =
+∑
+i
+∫
+dωdω′ei(ω′−ω)tα(ω)∇
+〈
+Efl
+i (ω)
+↓ E ∗fl
+i (ω′)
+〉
++
++
+∑
+i
+∫
+dωdω′ei(ω′−ω)t ω′2
+c2
+1
+ε0
+∇ ˆG(r↓0, r0)
+〈
+pfl
+i (ω)p∗fl
+i (ω′)
+〉
+, (11.25)
+77
+
+
+where arrow shows which argument ∇ ”hits”. In this expression we don’t know yet 3 things: (1) field correlator, (2) dipole correlator and (3) system Green’s function. Expressions for correlators may be obtained with the help of fluctuation-dissipation theorem (FDT). Dipole radiation is associated with the imaginary part of the polarizability1. In liberal interpretation the FDT connects the fluctuating radioactive noise of the system with its losses. Without any additional details (see Novotny L.Principles of nano–optics, chapter 14):
+2πiω
+kT
+〈
+pfl
+j (ω)p∗fl
+k (ω′)
+〉
+} {{ }
+fluctuations
+=
+[αik(ω) − α∗
+kj
+] δ(ω − ω′)
+} {{ }
+losses
+. (11.26)
+Moreover, there is a similar expretion for field correlator
+〈
+Efl
+j (r, ω)E∗fl
+k (r′, ω′)
+〉
+=ω
+πc2ε0
+δ(ω − ω′)
+[ ħω
+1 − e−ħω/kT
+]
+Im Gjk(r, r′, ω). (11.27)
+Combining this equations, for our system we get
+〈F(r0)〉 =
+∑
+i
+∫
+dω ω
+πc2ε0
+[ ħω
+1 − e−ħω/kT
+]
+Im
+{
+α1(ω)∇Gii(r↓0, r0, ω)
+}
+. (11.28)
+Figure 44: Definition of coordinates for the calculation of the dispersion force between two polarizable particles.
+The only thing is left to find is the GF of the system. The electromagnetic dyadic GF connects a dipole moment with the total radiated field
+E(r2) = ω2
+c2
+1
+ε0
+·
+(
+system’s GF
+)
+} {{ }
+?
+·p1. (11.29)
+So, all the information about the system (reflections, self–action, self–consistent effects and so on) is hidden in the GF.
+1 Loss power
+Ploss ∼ Re {j∗E} ∼ Re {α∗(−iω)|E|2} ∼ |E|2 Im α,
+where we used
+j = p ̇ δ(r − r0) = −iωδ(r − r0)p = −iωδ(r − r0)αE.
+78
+
+
+Now let us consider the simplest case: two point dipole with polarizabilities α1 and α2. In other words, we replaced the unknown media in Fig. 43 by a another small particle. Total electric filed at some point r may be written as
+E(r) = k2
+ε0
+ˆG0(r, r1)p1 + k2
+ε0
+ˆG0(r, r2)p2, (11.30)
+where Gˆ 0 is the vacuum GF and k2 = ω2/c2. Now we want something that looks like (11.29). So we need to rewrite p2 in terms of p1. The dipole moment of the second particle is induced by the field from the first particle E1(r2)
+p2 = α2E1(r2) = α2
+k2
+ε0
+ˆG0(r2, r1)p1. (11.31)
+Now (11.30) transforms into
+E(r) = k2
+ε0
+(
+ˆG0(r, r1) + k2
+ε0
+ˆG0(r, r2)α2 ˆG0(r2, r1)
+)
+} {{ }
+system’s GF
+p1. (11.32)
+In the more general case, for particles with non-isotropic polarizability we have
+ˆGeff(r, r1) = ˆG0(r, r1) + k2
+ε0
+Gˆ 0(r, r2)αˆ2 ˆG0(r2, r1). (11.33)
+After lots of calculations it appears that force is potential in a sense U = − ∫ 〈FR〉dR and potential may be written as
+U (R) = − ħc
+16π3ε2
+0
+1
+R6
+∞
+∫
+0
+dηα1(icη)α2(icη)e−2ηR [3 + 6ηR + 5(ηR)2 + 3(ηR)3 + (ηR)4] .
+(11.34) This is the Casimir–Polder potential. It is important to look at asymptotics:
+• R → 0:
+U (R → 0) ∼ 1
+R6 . (11.35)
+This is the van der Waals potential.
+• R → ∞:
+U (R → ∞) ∼ 1
+R7 . (11.36)
+This is the Casimir potential.
+11.3 Orders of forces
+Two small metal plates with side area A = 1 μm and at the distance d = 5 nm in accordance to (11.15) attracts to each other with force F ∼ 0.1 mN, which is incredibly strong for a nanoworld. If we take in account the finite size of the plates, non–ideal conductivity and medium around then we get F ∼ 1 nN, which is still enough to crush a biomolecule! By the way, it is possible to measure forces up to several pN.
+79
+
+
+Figure 45: Two small metal plates with area A = 1 μm at the distance d = 5 nm attracts to each other with the force F ∼ 10−9 N.
+11.4 The latest advances
+11.4.1 The dynamical Casimir effect
+The dynamical Casimir effect is the production of particles and energy from an accelerated moving mirror. This reaction was predicted by certain numerical solutions to quantum mechanics equations made in the 1970s. In May 2011 an announcement was made by researchers at the Chalmers University of Technology, in Gothenburg, Sweden, of the detection of the dynamical Casimir effect. In their experiment, microwave photons were generated out of the vacuum in a superconducting microwave resonator. Virtual photons between plates are seeds of real photons. The kinetic energy of moving mirrors transforms into radiative energy. This effect is possible only at very high frequencies, ideally plates should oscillate with an optical frequency. This can be obtained by modulating effective ε in the media between mirrors, so the optic length between them is also changing. Moreover, due to the conservation laws, new photons are entangled.
+11.4.2 Quantum levitation or repulsive Casimir–Lifshitz forces
+Let us consider a nanoparticle over a surface. With respect to some conditions attractive force may become repulsive. In such case this effect is called the generalized Casimir effect or Casimir–Lifshitz effect. See Fig. 47 for more details. This may used as a building block for ultra slippery surfaces in the future.
+80
+
+
+Figure 46: Metal plates brought together at very high speed (ideally at an optic frequency). As the result, due to conservations laws entangled photons are generated.
+a
+b
+Figure 47: Repulsive quantum electrodynamical forces can exist for two materials separated by a fluid. (a) The interaction between material 1 and material 2 immersed in a fluid (material 3) is repulsive when ε1 > ε3 > ε2. See details in Nature 457, 170–173. (b) Cover of Nature issue about Casimir–Lifshitz force.
+81

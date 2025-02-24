@@ -1,0 +1,2931 @@
+Introduction à la théorie de
+l’apprentissage statistique
+(notes de cours)
+Michel BARRET
+2020/2021
+
+
+Introduction à la théorie de l’apprentissage statistique
+Michel Barret
+2 mars 2020
+On s’intéresse aux problèmes rencontrés en apprentissage supervisé. Pour un ensemble X , et m ∈ N, m 6= 0, on note |X | son cardinal, X m l’ensemble des m
+uplets (x1, . . . , xm) dont chaque terme est un élément de X , on pose X ? = ⋃∞
+m=1 X m. Pour Y
+un ensemble discret, on note δ le symbole de Kronecker défini sur Y2 par δy,y′ = 1 si y = y′ et 0 si y 6= y′. Pour (X , MX ) et (Y, MY) deux espaces mesurables, on note M(X , Y) l’ensemble des fonctions mesurables de X dans Y. On note (Ω, E, P) un espace probabilisé qui modélise l’expérience aléatoire sous-jacente à toutes les variables aléatoires introduites dans la suite.
+1 Modèle formel de l’apprentissage statistique supervisé
+Un algorithme d’apprentissage supervisé utilise les concepts suivants : – un espace mesurable (X , MX ), dont les éléments x ∈ X sont des objets à partir desquels une décision est prise ; – un espace mesurable (Y, MY), dont les éléments y ∈ Y sont les résultats possibles de la décision ; – une séquence finie S = ((x1, y1), . . . , (xm, ym)) ∈ (X × Y)? d’objets labélisés, c’est-à-dire d’objet xi et de l’étiquette (ou décision) associée, appelée données d’entraînement. Un algorithme d’apprentissage donne en sortie une hypothèse (ou prédicteur ) h ∈ M(X , Y), appelée également un classificateur quand Y est discret 1 ou un estimateur quand Y est continu. Dans le cas supervisé, il admet pour entrée une séquence finie S ci-dessus et s’écrit formellement
+A : (X × Y)? → M(X , Y) S 7→ A(S).
+L’objectif d’un algorithme d’apprentissage supervisé est de fournir un “bon” (voire le meilleur) estimateur ou classificateur de la théorie de la décision dans un cadre statistique, c’est-à-dire sans connaître la ou les vraisemblances, mais à partir des observations (x1, y1), . . . , (xm, ym) et sous l’hypothèse 1 suivante.
+Hypothèse 1 Les données d’entraînement sont des réalisations de variables aléatoires indépendantes et identiquement distribuées (i.i.d.).
+1.1 Un démarrage en douceur
+Considérons un problème de classification binaire, qui consiste à décider si un objet vérifie une propriété particulière ou non, par exemple l’objet est une photo et la propriété “une voiture est visible sur la photo”. De façon formelle, on peut écrire X ⊂ Rd, où d est le nombre de pixels de la photo, Y = {0 , 1} (y = 1 si et seulement si une voiture est visible sur la photo) et on dispose des données d’entraînement S = ((x1, y1), . . . , (xm, ym)), i.e., m réalisations indépendantes d’un couple de variables aléatoires (x, y) à valeurs dans X × Y ; dans notre exemple : m photos xi, avec pour chacune d’elle la réponse yi à la question :
+1. C’est-à-dire quand le nombre d’éléments est fini ou infini dénombrable.
+1
+
+
+« Une voiture est-elle visible sur la photo ? »
+On suppose dans cette sous-section qu’il existe une fonction f ∈ M(X , Y) telle que y = f (x). À toute hypothèse h ∈ M(X , Y), on associe son risque de généralisation ou risque réel ou simplement risque
+R(h) = P[h(x) 6= y] = E[1h(x)6=y] (1)
+et on cherche une hypothèse h de risque réel minimum. Comme on ne connaît pas les vraisemblances (i.e., les lois de probabilité), on ne peut pas calculer ce risque. On introduit alors le risque empirique de h ∈ M(X , Y) défini par
+RS(h) = 1
+m
+m
+∑
+i=1
+1h(xi)6=yi (2)
+qui, d’après la loi forte des grands nombres (les échantillons (xi, yi) étant i.i.d.), converge presque sûrement (p.s.) et en moyenne quadratique (m.q.) vers le risque de généralisation quand m tend vers l’infini. On cherche l’hypothèse hS qui minimise le risque empirique. C’est la règle du risque empirique minimum (ERM).
+Mais si on n’applique pas de contrainte à l’hypothèse qui minimise le risque empirique, on obtient la plupart du temps une hypothèse hS qui admet un fort risque de généralisation, c’est le problème de sur-apprentissage, i.e., RS(hS) ' 0 et R(hS) 0. Pour l’éviter on impose des contraintes aux hypothèses retournées par l’algorithme d’apprentissage. Formellement on introduit un sous-ensemble H ⊂ M(X , Y) et on cherche une hypothèse dans H qui minimise le risque empirique 2
+hS = ERMH(S) ∈ arg min
+h∈H RS(h). (3)
+Il est important de noter que hS est aléatoire, car c’est une fonction des données d’entraînement qui sont aléatoires. Introduisons l’hypothèse de prédiction singulière 3 (realizability assumption)
+Hypothèse 2 Il existe h? ∈ H tel que R(h?) = 0.
+Elle entraîne que h?(x) = f (x) p.s., donc que RS(hS) = 0 p.s. En général h? n’est pas la seule hypothèse qui minimise le risque empirique et un algorithme d’apprentissage retourne une hypothèse hS 6= h?, qui peut avoir un risque de généralisation important. Pour étudier précisément cette situation, considérons un écart ε ∈ ]0 ; 1[ et calculons la probabilité de l’événement R(hS) > ε. Introduisons le sous-ensemble des hypothèses défavorables Hd = {h ∈ H, R(h) > ε} et l’ensemble des données d’entraînement défavorables {S : hS ∈ Hd} ⊂ {S : ∃h ∈ Hd, RS(h) = 0 p.s.} = ⋃
+h∈Hd{S : RS(h) = 0 p.s.} ; pour h ∈ Hd,
+on a P[RS(h) = 0] = (P[h(x) = y])m = [1 − R(h)]m ≤ (1 − ε)m ≤ e−εm. Donc, si l’espace des hypothèses H est fini, il vient
+P[R(hS) > ε] ≤ |Hd|e−mε ≤ |H|e−mε. (4)
+Nous avons montré le résultat suivant.
+Proposition 1.1 Soit H un ensemble fini d’hypothèses. Pour tous δ, ε ∈ ]0 ; 1[ et tout entier
+m qui satisfont
+m ≥ log(|H|/δ)
+ε,
+pour toute loi de probabilité de x, si H vérifie l’hypothèse 2 de prédiction singulière, alors avec une probabilité d’au moins 1 − δ, R(hS) ≤ ε.
+Autrement dit, pour m assez grand, la règle qui consiste à minimiser le risque empirique est probablement (avec une confiance de 1 − δ) approximativement (à une erreur ε près) correcte (PAC).
+2. Dans ce chapitre, nous utilisons la notation min dans les expressions mathématiques sans distinguer les notions de minimum et de borne inférieure. 3. En effet, dans ce cas, l’estimation ou la détection est singulière car le risque moyen s’annule.
+2
+
+
+1.2 Modèle général de l’apprentissage supervisé
+Considérons un problème d’estimation ou de classification général en introduisant une fonction coût 4 L : Y × Y → R+ (voire à valeurs dans R) qui, pour une hypothèse h et un couple (x, y) ∈ X × Y, modélise par L[h(x), y] le coût de la décision h(x) quand la vraie valeur est y. Pour une hypothèse h, les risques, de généralisation et empirique (1-2), deviennent
+R(h) = E (L[h(x), y]) (5)
+RS(h) = 1
+m
+m
+∑
+i=1
+L[h(xi), yi]. (6)
+L’algorithme d’apprentissage ERMH qui minimise le risque empirique reste défini par l’équation (3).
+1.3 Capacité d’apprentissage PAC et convergence uniforme
+Définition 1.1 Un ensemble d’hypothèses H a la capacité d’apprentissage PAC quand il existe une application mH : ]0 ; 1[2→ N et un algorithme d’apprentissage ayant la propriété : pour tout (ε, δ) ∈ ]0 ; 1[2 et toute loi de probabilité jointe de (x, y), la sortie hS de l’algorithme d’apprentissage appliqué à m ≥ mH(ε, δ) réalisations i.i.d. de (x, y) vérifie avec une probabilité d’au moins 1 − δ que
+R(hS) ≤ min
+h∈H R(h) + ε.
+Autrement dit, la probabilité pour que l’excès de risque de hS (qui vaut R(hS) − minh∈H R(h) par définition) soit supérieur à ε est inférieure à δ. Pour un ensemble d’hypothèses qui a la capacité d’apprentissage PAC, la fonction mH minimale, c’est-à-dire telle que pour tout (ε, δ) mH(ε, δ) soit le plus petit entier qui vérifie la propriété de la définition 1.1, détermine la complexité (mémoire ou d’échantillon) de H. Les auteurs de [2] introduisent une deuxième notion de capacité d’apprentissage PAC plus faible (apparemment), en restreignant la définition 1.1 à toute loi de probabilité vérifiant l’hypothèse 2 d’une prédiction singulière. Nous verrons avec le premier théorème fondamental de l’apprentissage, page 11, que ces deux définitions sont équivalentes, et, sans toujours le justifier, nous utiliserons la notion plus restrictive dans certaines preuves.
+Définition 1.2 Soit ε > 0. Les données d’entraînement S forment un échantillon ε-représentatif (pour un ensemble d’hypothèses H, une fonction coût L et une loi de probabilité) quand
+pour tout h ∈ H, |RS(h) − R(h)| ≤ ε. (7)
+Lemme 1.2 Soit S un échantillon ε/2-représentatif (pour un ensemble d’hypothèses H, une fonction coût L et une loi de probabilité). Alors toute hypothèse hS ∈ arg minh∈H RS(h) vérifie
+R(hS) ≤ min
+h∈H R(h) + ε.
+Preuve. Pour tout h ∈ H,
+R(hS) ≤ RS(hS) + ε
+2 ≤ RS(h) + ε
+2 ≤ R(h) + ε
+2+ε
+2 = R(h) + ε.
+Les première et troisième inégalités proviennent de la ε/2-représentativité de S, et la deuxième de la définition de hS.
+4. En général, dans les cours d’apprentissage statistique, la fonction coût est définie par
+` : H × Z → R+ (voire à valeurs dans R)
+(h, z) 7→ `(h, z) = L[h(x), y] où z = (x, y),
+Z = X × Y et L : Y2 → R+ (voire à valeurs dans R) est une fonction coût selon la définition du cours de Traitement statistique du signal.
+3
+
+
+Définition 1.3 Un ensemble d’hypothèses H a la propriété de convergence uniforme (par rapport à X × Y et à une fonction coût) quand il existe une fonction mCU
+H : ]0 ; 1[2→ N telle que pour tous ε, δ ∈ ]0 , 1[ et pour toute loi de probabilité sur X × Y, si S est un échantillon de m ≥ mCU
+H (ε, δ) tirages i.i.d. suivant cette loi, alors avec une probabilité d’au moins 1 − δ, S est ε-représentatif.
+Comme pour la définition de la complexité de H, la fonction mCU
+H mesure la complexité minimale de l’échantillon assurant la propriété de convergence uniforme. Le terme uniforme indique ici une taille d’échantillon minimale, valable pour toute hypothèse h ∈ H, indépendamment de la loi de probabilité. Nous déduisons du lemme 1.2 la proposition suivante.
+Proposition 1.3 Si un ensemble d’hypothèses H a la propriété de convergence uniforme avec une fonction mCU
+H , alors H a la capacité PAC d’apprendre avec une complexité mH(ε, δ) ≤
+mCU
+H (ε/2, δ). De plus, dans ce cas la règle de minimisation du risque empirique donne un algorithme d’apprentissage PAC pour H.
+1.4 Capacité d’apprentissage PAC des ensembles d’hypothèses finis
+Nous allons montrer que les ensembles d’hypothèses finis ont la propriété de convergence uniforme. Nous commençons par rappeler l’inégalité de Hoeffding, dont une preuve est donnée en exercice.
+Lemme 1.4 Soient a < b deux nombres réels et x1, . . . , xm une séquence i.i.d. de VA telles que E[xi] = μ ∈ R et P[a ≤ xi ≤ b] = 1. Alors pour tout ε > 0,
+P
+[∣ ∣ ∣ ∣ ∣
+1
+m
+m
+∑
+i=1
+xi − μ
+∣ ∣ ∣ ∣ ∣
+>ε
+]
+≤ 2 exp (−2mε2/(b − a)2) .
+Fixons ε, δ ∈ ]0 ; 1[. Nous recherchons une taille m d’échantillon qui garantit que pour toute loi de probabilité de (x, y), avec une probabilité d’au moins 1 − δ, l’échantillon S = ((x1, y1), . . . , (xm, ym)) est ε-représentatif, i.e., pour tout h ∈ H, |RS(h) − R(h)| ≤ ε. Considérons l’événement complémentaire
+{S : ∃h ∈ H, |RS(h) − R(h)| > ε} =
+⋃
+h∈H
+{S : |RS(h) − R(h)| > ε}.
+Remarquons maintenant que pour h ∈ H, E[RS(h)] = R(h) et en supposant que la fonction coût est à valeurs dans [0 ; 1], il résulte de l’inégalité de Hoeffding que
+P[{S : ∃h ∈ H, |RS(h) − R(h)| > ε}] ≤
+∑
+h∈H
+2 exp(−2mε2) = 2|H| exp(−2mε2),
+ainsi si m ≥ log(2|H|/δ)
+2ε2 , alors S est ε-représentatif. Nous avons démontré la proposition suivante.
+Proposition 1.5 Soit H un ensemble fini d’hypothèses et L une fonction coût à valeurs dans [0 ; 1]. Alors H a la propriété de convergence uniforme avec la complexité
+mCU
+H (ε, δ) ≤
+⌈ log(2|H|/δ)
+2ε2
+⌉
+,
+de plus H a la capacité d’apprentissage PAC en utilisant l’algorithme ERMH avec la complexité
+mH(ε, δ) ≤ mCU
+H (ε/2, δ) ≤
+⌈ 2 log(2|H|/δ)
+ε2
+⌉
+.
+4
+
+
+Remarque 1.1 Quand l’espace des hypothèses a la puissance du continu, c’est-à-dire quand chaque hypothèse hθ dépend de k variables réelles regroupées dans un vecteur θ ∈ Θ ⊂ Rk, où Θ est borné, si l’on recherche une hypothèse qui minimise le risque empirique avec un ordinateur, les valeurs réelles que l’on peut coder étant en nombre N fini, par exemple si elles sont codées sur 64 bits N = 264, alors |H| ' N k et la complexité mH(ε, δ) est majorée par
+⌈ 2k log(N )+2 log(2/δ) ε2
+⌉
+. Une autre façon d’obtenir le même résultat est de considérer que Θ = [0 , 1]k
+(ou plus généralement Θ = [a , b]k avec a, b ∈ R) et que chaque composante est uniformément échantillonnée sur N valeurs, alors |H| ' N k.
+Exemple 1.1 Dans un problème de classification, l’algorithme des k plus proches voisins, avec k = 1 et m données d’entraînement (xi, yi) (1 ≤ i ≤ m), où xi ∈ X ⊂ Rd, donne un espace d’hypothèses qui dépend de md paramètres réels : les points x1, . . . , xm. Il est clair qu’avec la
+discrétisation de la remarque 1.1, on a log(|H|)
+m ≥ 1, donc l’excès de risque est majoré par une valeur supérieure à 1 et nous verrons avec le 2ème théorème fondamental de l’apprentissage page 12 que pour le problème de classification binaire, il n’est pas possible d’améliorer cette majoration de l’erreur d’estimation. Autrement dit, l’algorithme du plus proche voisin a trop de degrés de liberté pour contrôler l’excès de risque.
+1.5 Le dilemme biais-complexité
+Nous pouvons décomposer l’erreur du prédicteur hS = ERMH(S) en la somme de deux termes :
+R(hS) = app + est avec app = min
+h∈H R(h) et est = R(hS) − min
+h∈H R(h). (8)
+Le premier terme est l’erreur d’approximation ou le biais dû aux contraintes de H et le deuxième terme est l’excès de risque ou l’erreur de fluctuation ou encore l’erreur d’estimation due au fait que le risque empirique n’est qu’une estimation du risque réel. L’erreur d’estimation dépend
+Figure 1 – Allure des courbes de biais et d’excès de risque en fonction de la complexité de H, pour m fixé.
+de la taille m de l’échantillon et de la complexité de H. Nous avons vu que pour un ensemble d’hypothèses fini, est croît (logarithmiquement) avec |H| et décroît avec m. Nous pouvons considérer l’entropie de H (log(|H|)) comme une mesure de la complexité de H.
+5
+
+
+Puisque notre objectif est de minimiser le risque de généralisation R(hS), il faut trouver le bon compromis entre le biais et la complexité de H. Pour réduire le biais, il faut augmenter la complexité, mais attention au sur-apprentissage. De même, si l’on réduit trop la complexité de H, le terme de biais devient prépondérant, c’est le problème du sous-apprentissage. Tout l’art du data scientist est d’exploiter l’information a priori qu’il a du problème de décision pour choisir un bon ensemble d’hypothèses, bien adapté à la taille des données d’entraînement dont il dispose. D’après la proposition 1.5, l’excès de risque R(hS) − minh∈H R(h) est majoré par 2ε dès que 2mε2 ≥ log(|H|)+log(2/δ) ; ainsi en écrivant log(2/δ) = mε2 et log(|H|) = mε2 et en supposant qu’il existe des constantes C > 0 et α > 0 telles que l’erreur d’approximation soit majorée par C log(|H|)−α, on trouve que le risque réel R(hS) est majoré par 3ε avec une probabilité d’au
+moins 1 − δ ≥ 1 − 2e−(C/ε)1/α si C(mε2)−α ≤ ε, i.e., si m ≥ C1/αε−2−1/α, autrement dit nous avons démontré la proposition suivante de Stéphane Mallat [1].
+Proposition 1.6 S’il existe des constantes C > 0 et α > 0 telles que min
+h∈H R(h) ≤ C(log |H|)−α,
+alors P[R(hS) ≤ 3ε] ≥ 1 − 2e−(C/ε)1/α si m ≥ C1/αε−2−1/α.
+Ainsi, si α est petit, alors le nombre d’échantillons doit être très grand, de l’ordre de ε−1/α, pour garantir un risque réel probablement de l’ordre de ε. Si Y = R et L(y, y′) = |y − y′|p (où p ≥ 1), et s’il existe une fonction f ∈ M(X , Y) telle que y = f (x), alors R(h) = E [|h(X) − f (X)|p] ≤ supx∈X |h(x) − f (x)|p = ‖h − f ‖p
+∞ et l’erreur d’approximation satisfait la condition
+( app) 1
+p = min
+h∈H ‖h − f ‖∞. (9)
+On tombe sur le problème d’approximation de la fonction f par une fonction h ∈ H, à la différence que f est inconnue ici. Supposons que nous ayons quelque information a priori sur le problème, à savoir que f ∈ C, où C ⊂ M(X , Y) est une classe de fonctions connue, on peut alors majorer l’inégalité (9) par une borne qui ne dépend plus de f :
+min
+h∈H ‖h − f ‖∞ ≤ max
+f∈C min
+h∈H ‖h − f ‖∞. (10)
+Supposons enfin que le membre de droite de l’inégalité (10) soit majoré par C (log |H|)−α, avec α grand, alors on peut appliquer la proposition 1.6 ci-dessus et affirmer que le risque réel est probablement approximativement petit pour un nombre d’échantillons m pas trop grand. Comment traduire l’information a priori que l’on a sur f dans des classes C de fonctions ? Stéphane Mallat propose d’utiliser la notion de régularité des fonctions. Si X ⊂ Rd et Y ⊂ R, la notion de régularité la plus simple est associée à celle de dérivabilité, ou plus généralement à la notion de régularité lipschitzienne.
+Définition 1.4 Soit D ⊂ Rd un domaine ouvert. Une application f : D → R est localement lipschitzienne en x ∈ D quand il existe Cx > 0 tel que pour tout x′ ∈ D, |f (x) − f (x′)| ≤ Cx‖x − x′‖, où ‖x‖ désigne la norme euclidienne. L’application f est C-lipschitzienne dans D quand pour tous x, x′ ∈ D, |f (x) − f (x′)| ≤ C‖x − x′‖. L’application f est lipschitzienne quand il existe C > 0 tel que f est C-lipschitzienne.
+Il est facile de vérifier que si f : D → R est continûment différentiable dans D, alors elle est localement lipschitzienne. Nous admettrons le théorème de Rademacher, qui dit que si f : D → R est lipschitzienne, alors elle est différentiable presque partout dans D pour la mesure de Lebesgue. Revenons au problème de classification et supposons f C-lipschitzienne, i.e., X est un domaine compact D ⊂ Rd et C est l’ensemble des fonctions C-lipschitziennes de D dans R. L’algorithme du plus proche voisin donne une approximation de f par une fonction constante sur les cellules de Voronoï définies par les données d’entraînement : ∀x ∈ D, hS(x) = f (xi) pour
+6
+
+
+i ∈ arg minj∈[[1 ; m]] ‖x − xj‖. Ainsi, ∀x ∈ D, |f (x) − hS(x)| ≤ C mini ‖x − xi‖ et le problème revient à avoir maxx mini ‖x − xi‖ = ε petit. La question alors est de savoir combien il faut de données d’entraînement pour être sûr que ce soit vrai. Nous allons voir que cette question conduit à la malédiction de la dimensionnalité, c’est-àdire que le nombre de données d’entraînement nécessaire croit plus vite qu’exponentiellement avec la dimension d. Choisissons pour X l’hypercube D = [0 ; 1]d et supposons que les xi soient régulièrement répartis dans le cube sur le réseau obtenu en divisant chaque côté de D en ∆−1 − 1 segments de longueur ∆ et 2 segments de longueur ∆/2, un sur chacun des bords
+∆
+01
+Figure 2 – Découpage d’un côté de l’hypercube, ici ∆ = 1/5.
+(voir la figure 2), le nombre de points du réseau vaut m = (∆−1)d et pour un point x ∈ X , si xi désigne le (ou un) point du réseau le plus proche de x, on a
+‖x − xi‖2 =
+d
+∑
+u=1
+(x(u) − xi(u))2 ≤ d∆2
+4,
+car chaque terme dans la somme est majoré par ( ∆
+2
+)2. On obtient donc
+ε = sup
+x∈D
+miin ‖x − xi‖ ≤
+√d∆
+2≤
+√dm−1/d
+2 . (11)
+Par ailleurs, si l’on veut recouvrir l’hypercube D par des boules de rayon ε, en notant B(x, ε) la boule de centre x et de rayon ε, on a D ⊂ ⋃m
+i=1 B(xi, ε), qui entraîne que
+1 = vol(D) ≤ vol
+(m ⋃
+i=1
+B(xi, ε)
+)
+≤ m vol(B(0, ε)) = mεdπd/2
+Γ
+(d
+2 + 1) ,
+où vol désigne le volume. En utilisant la formule de Stirling 5 on obtient l’inégalité
+1≤
+( 2eπ
+d
+)d
+2 mεd
+√πd ou encore
+√
+πd
+(d
+2eπ
+)d
+2
+ε−d ≤ m, (12)
+qui montre que le nombre de données d’entraînement minimal, pour une erreur d’approximation petite avec l’algorithme des k plus proches voisins, croit beaucoup plus vite que ε−d. Ce phénomène est connu sous le nom de la malédiction de la dimensionnalité, et correspond au fait que πd/2/Γ( d
+2 + 1), le rapport du volume de l’hypersphère inscrite dans l’hypercube sur le volume de l’hypercube, tend très vite vers 0 quand la dimension augmente. Nous concluons ce paragraphe en montrant qu’en grande dimension, la régularité lipschitzienne ne suffit pas comme information a priori pour assurer un risque réel petit avec l’algorithme des k plus proches voisins. En effet, si f est C-lipschitzienne et le coût quadratique, nous avons vu avec les inégalités (10) et (11) que app ≤ C2ε2 ≤ C2dm−2/d
+4 , or pour H l’ensemble des fonctions constantes sur les cellules de Voronoï construites à partir de m points, nous avons vu à la remarque 1.1 que log(|H|) = md log(N ) (où N = 264 si les flottants sont codés sur 64
+bits) donc pour tout d, il existe C′(d) > 0 tel que minh∈H R(h) ≤ C′(d) (log(|H|))−2/d et si d n’est pas un petit entier (i.e., s’il est supérieur à 5 ou 6), d’après la proposition 1.6, le nombre
+m de données assurant un risque réel petit (e.g., 10−2) est astronomique (supérieur à 1002+ d
+2 ). Remarquons qu’en revanche, quand d est petit (inférieur à 2 ou 3), l’algorithme des k plus proches voisins donne un estimateur non paramétrique de la ddp de x (en supposant qu’elle
+5. Γ ( d
+2 + 1) = ( d
+2
+)! ' √πd ( d
+2e
+)d
+2 quand d tend vers l’infini, et ( d
+2
+)! ≤ √πd ( d
+2e
+)d
+2 pour tout d ≥ 0.
+7
+
+
+existe) 6 et que dans un problème de détection (i.e., de classification binaire) le rapport de vraisemblance (i.e., le rapport de la ddp sous l’une des hypothèses sur la ddp de l’hypothèse alternative) est une statistique suffisante. Autrement dit, si l’on connaît les deux vraisemblances, le problème de détection est parfaitement résolu. En grande dimension, par exemple si x est une image de d = 106 pixels, la régularité lipschitzienne de f ou des vraisemblances ne suffit pas pour trouver une approximation de f sans que le nombre de données d’entraînement nécessaires explose. Dans un problème de classification, les objets d’une même classe présentent une grande variabilité et, pour reprendre les termes de Stéphane Mallat :
+« Tout le problème est de contrôler cette variabilité, la fonction f est régulière par rapport à une source de variabilité qui est beaucoup plus compliquée [à modéliser]. C’est le centre de tous les problèmes d’approximation que de comprendre cette régularité. »
+En grande dimension, les objets x ∈ X à partir desquels un algorithme d’apprentissage supervisé prend une décision, sont très souvent des signaux numériques, c’est-à-dire le résultat d’un échantillonnage appliqué à une fonction x(u) où la variable u ∈ R` est de petite dimension 1 ≤ ` ≤ 4, et les signaux que l’on rencontre dans les applications (par exemple les images ou les sons) sont des fonctions u 7→ x(u) qui ont une certaine régularité. La régularité de la fonction u 7→ x(u) nous donne de l’information a priori sur la fonction f , elle implique que la donnée x n’occupe pas tout le domaine X = [0 ; 1]d, mais seulement un domaine de volume négligeable et la démonstration ci-dessus de la malédiction de la dimensionnalité ne s’applique plus. En petite dimension, la notion de régularité d’une fonction est bien comprise d’un point de vue mathématique, elle repose sur les notions de transformée de Fourier, de décompositions en ondelettes et de représentation parcimonieuse d’un signal, qui sont enseignées dans les cours de “Traitement du signal”.
+1.6 Il n’existe pas d’algorithme d’apprentissage universel
+Nous allons montrer qu’il n’existe pas d’algorithme d’apprentissage universel. C’est l’objet du théorème suivant (dit no-free-lunch).
+Théorème 1.7 Soit A un algorithme d’apprentissage pour un problème de classification binaire. Soit une taille d’échantillon m strictement inférieure à |X |/2. Alors il existe une loi de probabilité sur X × {0, 1} telle que :
+1. il existe une fonction f : X → {0, 1} avec R(f ) = 0 ;
+2. avec une probabilité d’au moins 1/7 sur le choix de S, on a R[A(S)] ≥ 1/8.
+Preuve. Soit C un sous-ensemble de X de taille 2m. Il y a T = 22m fonctions de C dans {0 , 1}, numérotons-les f1, . . . , fT . Pour chacune de ces fonctions, considérons la loi de probabilité
+Di({(x, y)}) =
+{ 1/|C| si y = fi(x) 0 sinon.
+En notant RDi(h) le risque réel de h pour la loi Di, il est clair que RDi(fi) = 0. Nous allons montrer que tout algorithme d’apprentissage admettant pour entrée un échantillon S de m couples dans C × {0, 1} et retournant une fonction A(S) : C → {0, 1} vérifie
+max
+i∈[[1 ; T ]] EDm
+i
+[RDi[A(S)]] ≥ 1/4. (13)
+Il y a k = (2m)m séquences S possibles, notons-les Sj = (xj
+1, . . . , xj
+m) pour j ∈ [[1 ; k]], et pour i ∈ [[1 ; T ]] notons Si
+j = ((xj
+1, fi(xj
+1)), . . . , (xj
+m, fi(xj
+m))). Si la loi de probabilité est Di, alors les
+6. Voir Y. P. Mack et M. Rosenblatt, “Multivariate k-nearest neighbor density estimates”, Journal of Multivariate Analysis, vol. 9, pp. 1–15, 1979 et E. Parzen, “On estimation of a density probability function and mode”, Ann. Inst. Statist. Math., vol. 33, pp. 1065–1076, 1962.
+8
+
+
+données d’entraînement que peut recevoir A sont les Si
+j pour 1 ≤ j ≤ k et tous ces échantillons sont équiprobables. Par conséquent, nous avons
+EDm
+i
+[RDi[A(S)]] = 1
+k
+k
+∑
+j=1
+RDi [A(S i
+j)] (14)
+et, le maximum étant supérieur à la moyenne qui est supérieure au minimum,
+max
+i∈[[1 ; T ]]
+1
+k
+k
+∑
+j=1
+RDi [A(S i
+j)] ≥ 1
+T
+T
+∑
+i=1
+1
+k
+k
+∑
+j=1
+RDi [A(S i
+j)] = 1
+k
+k
+∑
+j=1
+1
+T
+T
+∑
+i=1
+RDi [A(S i
+j )]
+≥ min
+j∈[[1 ; k]]
+1
+T
+T
+∑
+i=1
+RDi [A(S i
+j)]. (15)
+Fixons maintenant j ∈ [[1 ; k]], notons Sj = (x1, . . . , xm) et v1, . . . , vp les éléments de C qui n’apparaissent pas dans Sj. Les tirages étant avec remise, on a p ≥ m et pour toute hypothèse h : C → {0, 1} et tout i, nous avons
+RDi(h) = 1
+2m
+∑
+x∈C
+1[h(x)6=fi(x)] ≥ 1
+2m
+p
+∑
+r=1
+1[h(vr)6=fi(vr)] ≥ 1
+2p
+p
+∑
+r=1
+1[h(vr)6=fi(vr)], (16)
+donc
+1
+T
+T
+∑
+i=1
+RDi [A(S i
+j)] ≥ 1
+2p
+p
+∑
+r=1
+1
+T
+T
+∑
+i=1
+1[A(Si
+j )(vr)6=fi(vr)] ≥ 1
+2 min
+r∈[[1 ; p]]
+1
+T
+T
+∑
+i=1
+1[A(Si
+j)(vr)6=fi(vr)]. (17)
+Enfin, fixons r ∈ [[1 ; p]]. Nous pouvons partitionner l’ensemble de toutes les fonctions fi en T /2 paires disjointes, où pour toute paire {fi, fi′}, nous avons quel que soit c ∈ C, fi(c) 6= fi′(c) si et seulement si c = vr. Enfin, puisque que pour chaque paire nous avons Si
+j = Si′
+j,
+il vient 1[A(Si
+j )(vr)6=fi(vr)] + 1[A(Si′
+j )(vr)6=fi′ (vr)] = 1, qui entraîne 1
+T
+∑T
+i=1 1[A(Si
+j )(vr)6=fi(vr)] = 1
+2 . La
+démonstration de (13) en résulte, d’après les inégalités (17), (15) et (14).
+Finalement, P(RDi[A(S)] ≥ 1 − a) ≥ E
+(
+RDi [A(S)]
+)
+−(1−a)
+a , d’après l’inégalité de Markov ap
+pliquée à 1 − RDi[A(S)], et a = 7/8 donne P(RDi[A(S)] ≥ 1
+8
+)≥ E
+(
+RDi [A(S)]
+)
+−(1/8)
+7/8 ≥ 1
+7.
+Corollaire 1.8 Soient X un ensemble infini et Y = {0, 1}. Alors l’ensemble H = M(X , Y) n’a pas la capacité d’apprentissage PAC.
+Preuve. Supposons que H ait la capacité PAC d’apprendre. Soient ε < 1/8 et δ < 1/7, il résulte de la capacité PAC d’apprendre qu’il existe un algorithme d’apprentissage A et un entier m = m(ε, δ) tels que pour toute loi de probabilité sur X × Y, s’il existe une fonction f ∈ M(X , Y) telle que R(f ) = 0, alors avec une probabilité d’au moins 1 − δ, quand A est appliqué à des données d’entraînements S de taille m, on a R[A(S)] ≤ ε. Mais cela est en contradiction avec le théorème 1.7 puisque |X | > 2m. Nous voyons ainsi clairement apparaître le phénomène de sur-apprentissage, si l’on n’impose pas de contrainte à l’ensemble d’hypothèses H.
+1.7 La dimension VC (Vapnik-Chervonenkis) d’un ensemble d’hypo
+thèses
+Nous commençons par donner l’exemple d’un espace d’hypothèses continu ayant la capacité PAC d’apprendre. Pour a ∈ R, on définit le détecteur à seuil ha : R → {0, 1} par ha(x) = 1 si x ≥ a et ha(x) = 0 si x < a.
+9
+
+
+Lemme 1.9 Pour X × Y = R ×{0, 1}, l’ensemble des détecteurs à seuil a la capacité PAC
+d’apprendre pour l’algorithme d’apprentissage ERMH avec une complexité mH(ε, δ) ≤
+⌈ log(2/δ) ε
+⌉
+.
+Preuve. Nous donnons une démonstration dans le cas où l’ensemble des détecteurs à seuil vérifie l’hypothèse de prédiction singulière, le cas général se déduira du premier théorème fondamental de l’apprentissage (théorème 1.14). Soit a? ∈ R tel que R(ha?) = 0. Fixons ε, δ ∈ ]0 ; 1[. Avec la convention inf ∅ = +∞ et sup ∅ = −∞, introduisons
+a0 = sup{a < a? : P(a ≤ x < a?) ≥ ε} et a1 = inf{a > a? : P(a? ≤ x < a) ≥ ε}.
+Pour un échantillon S = ((xi, yi))1≤i≤m, avec m ≥ mH(ε, δ), posons b1(S) = inf{xi : yi = 1} et b0(S) = sup{xi : yi = 0}. Soit bS un seuil correspondant à ERMH(S). On a b0(S) < bS ≤ b1(S) et R(hS) ≤ ε si et seulement si a0 ≤ b0(S) et b1(S) ≤ a1. Donc P[R(hS) > ε] ≤ P[a0 > b0(S)] + P[a1 < b1(S)], mais P[a1 < b1(S)] = P(x 6∈ [a? , a1[)m ≤ (1 − ε)m ≤ e−mε et de même P[a0 > b0(S)] = P(x 6∈]a0 , a?])m ≤ (1 − ε)m ≤ e−mε, d’où P[R(hS) > ε] ≤ 2e−mε ≤ δ puisque
+m≥
+⌈ log(2/δ) ε
+⌉
+.
+Définition 1.5 Soient C ⊂ X . La restriction de H à C, notée HC, est {h/C : C → Y, h ∈ H}.
+Quand C = {c1, . . . , cm} avec m < ∞, on identifie la restriction h/C d’une hypothèse h au m-uplet (h(c1), . . . , h(cm)) ∈ Ym.
+Définition 1.6 Un ensemble d’hypothèses H ⊂ M(X , {0, 1}) brise 7 C quand HC est l’ensemble des fonctions de C dans {0, 1} (autrement dit |HC| = 2|C|).
+Autrement dit, H brise C, quand pour tout sous-ensemble B ⊂ C, il existe h ∈ H telle que h/C coïncide sur C avec la fonction indicatrice de B. Ou encore, si C correspond aux objets x ∈ X des données d’entraînement, alors quelles que soient les labels (y) associés, il existe h ∈ H qui annule le risque empirique.
+Par exemple, l’ensemble des détecteurs à seuil brise tout singleton {c} ⊂ R, mais il ne brise aucune paire {c1, c2} ⊂ R (en effet, si c1 < c2, aucun détecteur à seuil ha ci-dessus ne donnera ha(c1) = 1 et ha(c2) = 0).
+Corollaire 1.10 Soient H ⊂ M(X , {0, 1}) et m la taille de données d’entraînement. Supposons qu’il existe un sous-ensemble C de X de cardinal 2m qui est brisé par H. Alors, pour tout algorithme d’apprentissage, A, il existe une loi de probabilité sur X × {0, 1} et un prédicteur h ∈ H tels que R(h) = 0 et P(R[A(S)] ≥ 1/8) ≥ 1/7.
+Preuve. La démonstration du corollaire 1.8 s’applique ici.
+Définition 1.7 La dimension-VC d’un ensemble d’hypothèses H, notée dimVC(H), est la taille maximale d’un sous-ensemble fini C ⊂ X qui peut être brisé par H. Si H peut briser des sous-ensembles finis de n’importe quelle taille, sa dimension-VC est infinie.
+Le théorème suivant résulte directement du corollaire 1.10.
+Théorème 1.11 Aucun ensemble d’hypothèses de dimension-VC infinie n’a la capacité d’apprentissage PAC.
+7. shatter en anglais.
+10
+
+
+1.8 Le théorème fondamental de l’apprentissage PAC
+Définition 1.8 Soit H un ensemble d’hypothèses. L’application τH : N → N définie par
+τH(m) = max
+C⊂X : |C|=m
+|HC |
+est la fonction de croissance de H.
+Il est clair que si dimVC(H) = d < ∞, alors pour tout m ≤ d, τH(m) = 2m. Le lemme suivant montre que la fonction de croissance est polynomiale quand m > d.
+Lemme 1.12 (Sauer-Shela-Perles) Si dimVC(H) = d < ∞ pour un ensemble d’hypothèses H, alors pour tout m, τH(m) ≤ ∑d
+i=0
+(m i
+). En particulier pour m > d+1 on a τH(m) ≤ (em/d)d.
+Preuve. Nous allons démontrer une assertion plus forte : pour tout C ⊂ X de taille m
+∀H ⊂ M(X , {0, 1}), |HC| ≤ |{B ⊂ C : H brise B}|. (18)
+En effet, puisqu’aucun sous-ensemble de taille strictement supérieure à d ne peut être brisé par H, on a |{B ⊂ C : H brise B}| ≤ ∑d
+i=0
+(m i
+) et l’inégalité (18) implique alors la première assertion du lemme. La preuve de la deuxième assertion du lemme est laissée à titre d’exercice. La démonstration de (18) se fait par récurrence sur m. Pour m = 1, les deux membres de l’inégalité (18) ont tous les deux la même valeur, qui est 2 ou 1 (par convention l’ensemble vide est toujours brisé par H). Supposons que l’inégalité (18) soit satisfaite pour tout sous-ensemble de taille k < m et prouvons-la pour m. Fixons C = {c1, . . . , cm} et H, posons C′ = {c2, . . . , cm} et définissons les ensembles
+Y0 = {(y2, . . . , ym) ∈ {0, 1}m−1 : (0, y2, . . . , ym) ∈ HC ou (1, y2, . . . , ym) ∈ HC}
+Y1 = {(y2, . . . , ym) ∈ {0, 1}m−1 : (0, y2, . . . , ym) ∈ HC et (1, y2, . . . , ym) ∈ HC}.
+Il est clair que |HC| = |Y0| + |Y1| et, puisque Y0 = HC′, l’hypothèse de récurrence appliquée à H et C′ donne
+|Y0| ≤ |{B ⊂ C′ : H brise B}| = |{B ⊂ C : c1 6∈ B et H brise B}|.
+Maintenant, introduisons les paires d’hypothèses qui coïncident sur C′ et qui diffèrent sur c1 :
+H′ = {h ∈ H : ∃h′ ∈ H, (1 − h′(c1), h′(c2), . . . , h′(cm) = (h(c1), h(c2), . . . , h(cm))}.
+Il est clair que si H′ brise un sous-ensemble B ⊂ C′, alors il brise B ∪ {c1} et réciproquement. En remarquant que Y1 = H′
+C′ et en appliquant l’hypothèse de récurrence à H′ et C′ on obtient
+|Y1| ≤ |{B ⊂ C′ : H′ brise B}| = |{B ⊂ C′ : H′ brise B ∪ {c1}}|
+= |{B ⊂ C : c1 ∈ B et H′ brise B}|
+≤ |{B ⊂ C : c1 ∈ B et H brise B}|.
+Finalement, nous avons |HC| = |Y0| + |Y1| et l’inégalité
+|Y0| + |Y1| ≤ |{B ⊂ C : c1 6∈ B et H brise B}| + |{B ⊂ C : c1 ∈ B et H brise B}|,
+dont le membre de droite vaut |{B ⊂ C : H brise B}|, ce qui termine la démonstration.
+Théorème 1.13 (1er théorème fondamental d’apprentissage) Soit un ensemble d’hypothèses H ⊂ M(X , {0, 1}) et un coût d’erreur constant ( L(y, y′) = 1 − δy,y′). Les assertions suivantes sont équivalentes.
+(i) H a la propriété de convergence uniforme ;
+11
+
+
+(ii) H a la capacité d’apprentissage PAC avec l’algorithme ERMH ;
+(iii) la dimension-VC de H est finie.
+Nous avons déjà démontré que (i) ⇒ (ii) (lemme 1.2 et proposition 1.1). Remarquons que l’assertion (ii) entraîne trivialement que H a la capacité d’apprentissage PAC “faible”, où ne sont considérées que les lois de probabilité pour lesquelles H vérifie l’hypothèse 2 de prédiction singulière, et que la capacité d’apprentissage “faible” entraîne l’assertion (iii) (théorème 1.11). La démonstration de l’implication (iii) ⇒ (i) et celle du théorème suivant sont reportées aux prochaines sous-sections.
+Remarque 1.2 Il résulte du premier théorème fondamental d’apprentissage que si H a la capacité d’apprentissage PAC pour toute loi de probabilité satisfaisant l’hypothèse de prédiction singulière, alors il a la capacité d’apprentissage PAC pour toute loi de probabilité (même quand l’hypothèse de prédiction singulière n’est pas satisfaite).
+Théorème 1.14 (2ème théorème fondamental d’apprentissage) Considérons un problème de classification binaire X × {0, 1} et un coût d’erreur constant ( L(y, y′) = 1 − δy,y′. Alors il existe des constantes C1 et C2 telles que pour tout ensemble d’hypothèses H ⊂ M(X , {0, 1}) de dimension-VC finie égale à d,
+(i) H a la propriété de convergence uniforme avec la complexité
+C1
+d + log(1/δ)
+ε2 ≤ mCU
+H (ε, δ) ≤ C2
+d + log(1/δ)
+ε2
+(ii) H a la capacité d’apprentissage PAC avec la complexité
+C1
+d + log(1/δ)
+ε2 ≤ mH(ε, δ) ≤ C2
+d + log(1/δ)
+ε2
+(iii) si, de plus, H satisfait l’hypothèse 2 de prédiction singulière, alors H a la la capacité d’apprentissage PAC avec la complexité
+C1
+d + log(1/δ)
+ε ≤ mH(ε, δ) ≤ C2
+d + log(1/δ)
+ε.
+Les constantes C1 et C2 des assertions (i), (ii) et (iii) ne sont pas les mêmes.
+Lemme 1.15 Soit X une VA réelle. Supposons qu’il existe a > 0 et b ≥ e tels que pour tout t ≥ 0, P(|X| > t) ≤ 2be−t2/a2. Alors, E[|X|] ≤ a(2 + √log(b)).
+Preuve. Pour i ∈ N, posons ti = a(i + √log(b)). On a
+E[|X|] =
+∫ t0
+0
+udP|X|(u) +
+∞
+∑
+i=1
+∫ ti
+ti−1
+udP|X|(u) ≤ t0 +
+∞
+∑
+i=1
+ti P(ti−1 < |X| ≤ ti)
+≤ t0 +
+∞
+∑
+i=1
+ti P(|X| > ti−1) ≤ a√log(b) + 2ab
+∞
+∑
+i=1
+(i + √log(b))e−
+(
+i−1+
+√
+log(b)
+)2
+≤ a√log(b) + 2ab
+∫ +∞
+1+
+√
+log(b)
+xe−(x−1)2 dx ≤ a√log(b) + 2ab
+∫ +∞
+√
+log(b)
+(u + 1)e−u2 du,
+car, puisque log(b) ≥ 1, x 7→ xe−(x−1)2 est décroissante sur [1 + √log(b) ; +∞[. Enfin,
+2ab
+∫ +∞
+√
+log(b)
+(u + 1)e−u2 du ≤ 4ab
+∫ +∞
+√
+log(b)
+ue−u2 du = 2a
+12
+
+
+Théorème 1.16 Soient H un ensemble d’hypothèses et τH sa fonction de croissance. Alors, pour toute loi de probabilité et tout δ ∈ ]0 ; 1[, avec une probabilité d’au moins 1 − δ sur les données d’entraînement S de taille m, nous avons
+∀h ∈ H, |R(h) − RS(h)| ≤
+√2
+m
+(
+2 + √log[τH(2m)]
+δ
+)
+.
+Preuve. Il suffit de montrer
+E
+[
+sup
+h∈H
+|R(h) − RS(h)|
+]
+≤
+√2
+m
+(
+2 + √log[τH(2m)]
+)
+, (19)
+car le théorème en découle directement d’après l’inégalité de Markov. Pour majorer le membre de gauche de (19), introduisons un nouvel échantillon S′ = ((x′
+i, y′
+i))1≤i≤m i.i.d. et indépendant de S. Pour toute hypothèse h, on a R(h) = E[RS′(h)] et
+∣
+∣E [RS′(h) − RS(h) ∣
+∣ S]∣
+∣ ≤ E [|RS′(h) − RS(h)| ∣
+∣ S] ≤ E
+[
+sup
+g∈H
+|RS′(g) − RS(g)|
+∣
+∣
+∣S
+]
+,
+donc sup
+h∈H
+|R(h) − RS(h)| = sup
+h∈H
+∣
+∣E [RS′(h) − RS(h) ∣
+∣ S]∣
+∣≤E
+[
+sup
+h∈H
+|RS′(h) − RS(h)|
+∣
+∣
+∣S
+]
+et
+E
+[
+sup
+h∈H
+|R(h) − RS(h)|
+]
+≤E
+[
+sup
+h∈H
+|RS′(h) − RS(h)|
+]
+. (20)
+Maintenant, on a
+|RS′(h) − RS(h)| = 1
+m
+∣ ∣ ∣ ∣ ∣
+m
+∑
+i=1
+(L[h(x′
+i), y′
+i] − L[h(xi), yi])
+∣ ∣ ∣ ∣ ∣
+et, les 2m données S et S′ étant i.i.d., l’égalité précédente est inchangée en moyenne si on permute un (xi, yi) avec un (x′
+i, y′
+i), autrement dit si on remplace un terme L[h(x′
+i), y′
+i] − L[h(xi), yi] par son opposé − (L[h(x′
+i), y′
+i] − L[h(xi), yi]).
+Ainsi pour tout vecteur σ = (σi)1≤i≤m ∈ {−1, 1}m, le membre de droite de l’inégalité (20) est égal à
+E
+[
+sup
+h∈H
+1
+m
+∣ ∣ ∣ ∣ ∣
+m
+∑
+i=1
+σi
+(L[h(x′
+i), y′
+i] − L[h(xi), yi])
+∣ ∣ ∣ ∣ ∣
+]
+, (21)
+qui reste inchangé si l’on considère le vecteur σ aléatoire avec une loi uniforme. Fixons alors S et S′ et posons C = {x1, . . . , xm, x′
+1, . . . , x′
+m} ; la borne supérieure de l’expression (21) coïncide avec le maximum obtenu sur HC. Pour h ∈ HC, introduisons la VA
+θh = 1
+m
+m
+∑
+i=1
+σi
+(L[h(xi), yi] − L[h(x′
+i), y′
+i]),
+égale à la moyenne statistique de m VA i.i.d. centrées et à valeurs dans [−1 ; 1] (qui sont les
+σi
+(L[h(xi), yi] − L[h(x′
+i), y′
+i]) sachant S et S′). Il résulte alors de l’inégalité de Hoeffding que pour tout η > 0,
+P[|θh| > η | S, S′] ≤ 2 exp(−mη2/2),
+donc P
+[
+max
+h∈HC
+|θh| > η
+∣ ∣
+∣ S, S′
+]
+≤ 2|HC| exp(−mη2/2), qui entraîne, d’après le lemme 1.15,
+E
+[
+max
+h∈HC
+|θh|
+∣ ∣
+∣ S, S′
+]
+≤
+√2
+m
+(
+2 + √log(|HC|)
+)
+≤
+√2
+m
+(
+2 + √log[τH(2m)]
+)
+,
+ce qui termine la démonstration avec l’inégalité (20).
+13
+
+
+1.9 Preuve du premier théorème fondamental
+D’après le lemme de Sauer, nous avons τH(2m) ≤ (2me/d)d, qui combiné avec le théorème 1.16 montre qu’avec une probabilité d’au moins 1 − δ,
+|RS(h) − R(h)| ≤
+√2
+m
+(
+2 + √d log(2em/d)
+)
+δ ≤ 2√2d log(2em/d)
+δ√m ,
+où pour simplifier nous avons supposé que 2 ≤ √d log(2em/d).
+Maintenant 2
+√
+2d log(2em/d)
+δ√m ≤ ε, si et seulement si,
+mε2δ2
+8d ≥ log
+( 2em
+d
+)
+= 1 + log
+( mε2δ2
+8d
+)
++ 2 log
+(4
+εδ
+)
+,
+ou encore, si et seulement si, g
+(
+mε2δ2 8d
+)
+≥ 2 log ( 4
+εδ
+) avec g(u) = u − log(u) − 1. La fonction g,
+définie pour u > 0, est convexe positive, elle atteint son minimum (qui est nul) pour u = 1. Donc g(u/2) ≥ 0, ce qui entraîne g(u) ≥ u/2 − log(2). Ainsi, si
+m ≥ 32d
+ε2δ2 log
+(
+4√2
+εδ
+)
+, (22)
+alors avec une probabilité d’au moins 1 − δ, |RS(h) − R(h)| ≤ ε, et donc H a la propriété de convergence uniforme avec une complexité mCU
+H (ε, δ) majorée par le membre de droite de l’inégalité (22).
+1.10 La capacité d’apprentissage PAC non uniforme
+Définition 1.9 Un ensemble d’hypothèses H ⊂ M(X , Y) a la capacité PAC d’apprentissage non uniforme quand il existe un algorithme d’apprentissage A et mANU
+H : ]0 ; 1[2×H → N une fonction telle que pour tous ε, δ ∈ ]0 , 1 [, pour tout h ∈ H, si m ≥ mANU
+H (ε, δ, h), alors pour toute loi de probabilité sur X × Y, avec une probabilité d’au moins 1−δ sur le choix des données d’entraînement S de taille m, on a
+R[A(S)] ≤ R(h) + ε.
+Remarquons que si H a la capacité PAC d’apprentissage, alors il a la capacité d’apprentissage non uniforme.
+Théorème 1.17 Soit un ensemble d’hypothèses H = ⋃∞
+n=1 Hn, où, pour tout n ≥ 1, Hn a la propriété de convergence uniforme. Alors H a la capacité d’apprentissage non uniforme.
+Un énoncé plus précis de ce théorème est donné à la section suivante (théorème 1.20), avec sa démonstration.
+Théorème 1.18 Pour Y = {0, 1} (i.e., un problème de classification binaire), un ensemble d’hypothèses a la capacité d’apprentissage non uniforme si et seulement si c’est la réunion dénombrable d’ensembles d’hypothèses ayant la capacité d’apprentissage PAC.
+Preuve. Supposons H = ⋃∞
+n=1 Hn, où, pour tout n ≥ 1, Hn a la capacité d’apprentissage PAC. Alors, d’après le théorème fondamental d’apprentissage, chaque Hn a la propriété de convergence uniforme et donc H a la capacité d’apprentissage non uniforme, d’après le théorème 1.17. Réciproquement, pour n ≥ 1, posons Hn = {h ∈ H : mANU
+H (1/8, 1/7, h) ≤ n}. Il est clair que
+H = ⋃∞
+n=1 Hn. De plus, d’après la définition de mANU
+H , pour toute loi de probabilité qui vérifie l’hypothèse de prédiction singulière dans Hn, on a une probabilité d’au moins 6/7 de tirer un échantillon S de taille n tel que R[A(S)] ≤ 1/8. Ceci entraîne, d’après le corollaire 1.10 et le théorème 1.11, que la dimension VC de Hn est finie et donc, d’après le théorème fondamental d’apprentissage, que Hn a la capacité PAC d’apprentissage.
+14
+
+
+1.11 Minimisation du risque structurel
+Soit un ensemble d’hypothèses H = ⋃∞
+n=1 Hn, où pour tout n ≥ 1, Hn a la propriété de
+convergence uniforme avec une complexité d’échantillon mCU
+Hn(ε, δ). Définissons pour n ≥ 1
+n : N ×]0 ; 1[ → ]0 ; 1[ (m, δ) 7→ inf{ε ∈ ]0 ; 1[ : mCU
+Hn (ε, δ) ≤ m}, (23)
+autrement dit, pour une taille m d’échantillon donnée, on cherche la borne inférieure de l’écart atteignable entre les risques, empirique et réel, pour tout h ∈ Hn. Ainsi, avec une probabilité d’au moins 1 − δ sur l’échantillon S de taille m, on a
+∀h ∈ Hn, |R(h) − RS(h)| ≤ n(m, δ). (24)
+Soit w : N \{0} → [0 ; 1] telle que ∑
+n≥1 w(n) ≤ 1. Nous disons que c’est une fonction de pondération sur les classes d’hypothèses H1, H2, . . . Le poids w(n) correspond à l’importance que l’on porte a priori sur l’ensemble d’hypothèses Hn. La règle de minimisation du risque structurel consiste à minimiser une certaine borne supérieure du risque réel.
+Théorème 1.19 Soit w : N \{0} → [0 ; 1] telle que ∑
+n≥1 w(n) ≤ 1 et un ensemble d’hypo
+thèses H = ⋃∞
+n=1 Hn, où, pour tout n ≥ 1, Hn a la propriété de convergence uniforme avec
+une complexité d’échantillon mCU
+Hn. Soit n définie à la relation (23). Alors, pour tout δ ∈ ]0 ; 1[, pour toute loi de probabilité, avec une probabilité d’au moins 1 − δ sur le choix d’un échantillon S de taille m, la borne suivante est valable (simultanément) pour tout n ≥ 1 et tout h ∈ Hn :
+|R(h) − RS(h)| ≤ n(m, w(n)δ).
+Par conséquent, pour tout δ ∈ ]0 ; 1[ et toute loi de probabilité, avec une probabilité d’au moins 1 − δ on a
+∀h ∈ H, R(h) ≤ RS(h) + inf
+n : h∈Hn
+n(m, w(n)δ). (25)
+Preuve. Fixons δ ∈ ]0 ; 1[ et posons δn = w(n)δ pour n ≥ 1, alors d’après la propriété de convergence uniforme et la relation (24), pour n fixé, pour toute loi de probabilité et tout échantillon S de taille m, avec une probabilité d’au moins 1 − δn, on a
+∀h ∈ Hn, |R(h) − RS(h)| ≤ n(m, δn).
+Et donc, avec une probabilité d’au moins 1 − ∑
+n≥1 δn = 1 − δ ∑
+n≥1 w(n) ≥ 1 − δ, l’inégalité précédente est valable pour tout n ≥ 1, ce qui conclut la preuve. Posons
+n(h) = min{n ≥ 1 : h ∈ Hn}, (26)
+l’équation (25) implique que pour toute loi de probabilité, avec une probabilité d’au moins 1−δ, pour tout échantillon S de taille m, pour tout h ∈ H, R(h) ≤ RS(h) + n(h)(m, w[n(h)]δ). La règle de minimisation du risque structurel consiste à minimiser le membre de droite de cette inégalité :
+SRMH,w(S) ∈ arg min
+h∈H
+[RS(h) + n(h)(m, w[n(h)]δ)] . (27)
+Théorème 1.20 Soit un ensemble d’hypothèses H = ⋃∞
+n=1 Hn, où, pour tout n ≥ 1, Hn a la
+propriété de convergence uniforme avec une complexité d’échantillon mCU
+Hn . Soit w : N \{0} →
+[0 ; 1], défini par w(n) = 6
+π2n2 . Alors H a la capacité d’apprentissage non uniforme en utilisant la règle de minimisation du risque structurel, avec la taille d’échantillon minimale
+mANU
+H (ε, δ, h) ≤ mCU
+Hn(h)
+(
+ε/2, 6δ
+π2n2(h)
+)
+.
+15
+
+
+Preuve. Soit A l’algorithme d’apprentissage défini par la relation (27). Pour tous h ∈ H, ε, δ ∈ ]0 ; 1[, soit m ≥ mCU
+Hn(h)(ε/2, w[n(h)]δ) ; puisque ∑∞
+n=1 w(n) = 1, il résulte du théorème 1.19 qu’avec une probabilité d’au moins 1 − δ sur le choix de l’échantillon S de taille m, nous avons pour tout h′ ∈ H
+R(h′) ≤ RS(h′) + n(h′)(m, w[n(h′)]δ);
+en particulier, pour h′ = A(S). De plus, par définition de SRMH,w nous avons
+R[A(S)] ≤ min
+h′∈H
+[RS(h′) + n(h′)(m, w[n(h′)]δ)] ≤ RS(h) + n(h)(m, w[n(h)]δ).
+Finalement, puisque m ≥ mCU
+Hn(h)(ε/2, w[n(h)]δ), on a n(h)(m, w[n(h)]δ) ≤ ε/2, et la propriété
+de convergence uniforme de chaque Hn impliquant que RS(h) ≤ R(h) + ε/2, nous obtenons R[A(S)] ≤ R(h) + ε, ce qui termine la preuve.
+1.12 La règle de longueur de code minimale
+Supposons que l’ensemble d’hypothèses H soit dénombrable, que L soit à valeurs dans [0 , 1] et écrivons H = ⋃∞
+n=1{hn}. D’après l’inégalité de Hoeffding, chaque singleton {hn} a la
+propriété de convergence uniforme avec la complexité mCU(ε, δ) = log(2/δ)
+2ε2 et la fonction n de
+la relation (23) devient n(m, δ) =
+√
+log(2/δ)
+2m et la règle de minimisation du risque structurel
+devient
+SRMH,w(S) ∈ arg min
+hn∈H
+[
+RS(hn) +
+√
+− log[w(n)] + log(2/δ)
+2m
+]
+,
+de façon équivalente, on peut considérer w comme une fonction de H dans [0 ; 1] et écrire
+SRMH,w(S) ∈ arg min
+h∈H
+[
+RS(h) +
+√
+− log[w(h)] + log(2/δ)
+2m
+]
+.
+Ainsi, notre connaissance a priori est uniquement déterminée par le poids que nous assignons à chaque hypothèse. Le poids est d’autant plus important, que nous croyons l’hypothèse correcte et dans l’algorithme d’apprentissage, nous préférons les hypothèses qui ont les plus grands poids. Considérons une fonction d’encodage des hypothèses
+σ : H → {0, 1}? h 7→ σ(h)
+qui à chaque hypothèse h ∈ H associe une suite finie de bits, σ(h). La taille de σ(h) (exprimée en nombre de bits) est notée |h|. On suppose que la fonction d’encodage donne des mots de codes dont aucun est le préfixe d’un autre (on dit alors que le code σ est instantané). Il vérifie alors l’inégalité de Kraft :
+∑
+h∈H
+1
+2|h| ≤ 1. (28)
+En posant w(h) = 2−|h|, le théorème suivant résulte du théorème 1.19 avec n(m, δ) =
+√
+log(2/δ) 2m
+en remarquant que log(2|h|) = |h| log(2) < |h|.
+Théorème 1.21 Supposons que la fonction coût soit à valeurs dans [0 , 1]. Soient H un ensemble dénombrable d’hypothèses et σ : H → {0, 1}? un code instantané pour H. Alors pour toute taille m d’échantillon, pour toute valeur du paramètre de confiance δ et pour toute loi de probabilité, avec une probabilité d’au moins 1 − δ sur le choix de l’échantillon S de taille m, nous avons
+∀h ∈ H, R(h) ≤ RS +
+√
+|h| + log(2/δ)
+2m ,
+où |h| est la longueur du mot de code σ(h).
+16
+
+
+2 Preuve du 2ème théorème fondamental d’apprentissage
+2.1 Définitions et notations
+Soient un ensemble d’hypothèses H ∈ M(X , Y), une fonction coût L : Y2 → R+ et un échantillon S = ((x1, y1), . . . , (xm, ym)) de m réalisations i.i.d. d’un vecteur aléatoire (x, y) à valeurs dans X × Y, appelées données d’entraînement. Nous définissons la représentativité de S par rapport à H et L comme étant l’écart maximal entre le risque réel et le risque empirique de h ∈ H :
+Rep(S, H, L) d=ef sup
+h∈H
+(R(f ) − RS(f )). (29)
+C’est une variable aléatoire, fonction de S.
+L’ensemble des coûts des observations filtrées (avec contrainte) est
+L(H | S) =
+{
+(L(h(xi), yi
+)
+1≤i≤m : h ∈ H
+}
+. (30)
+2.2 Complexité de Rademacher
+Soit (σi)1≤i≤m une séquence de m variables aléatoires i.i.d. uniformes à valeurs dans {−1, +1}. La complexité de Rademacher d’un sous-ensemble A ⊂ Rm est définie par
+ρ(A) d=ef 1
+mE
+[
+sup
+a∈A
+m
+∑
+i=1
+σiai
+]
+, (31)
+où a = (a1, . . . , am).
+Introduisons des données de test S′ = ((x′
+i, y′
+i))
+1≤i≤m i.i.d., de même loi que (x, y) et in
+dépendantes de S. Le raisonnement de la preuve du théorème 1.16 peut être refait ici pour montrer que
+E [Rep(S, H, L)] ≤ E
+[
+sup
+h∈H
+RS′(h) − RS(h)
+]
+=1
+mE
+[
+sup
+h∈H
+m
+∑
+i=1
+σi
+(L(h(x′
+i), y′
+i
+) − L(h(xi), yi
+))
+]
+≤2
+mE
+{
+sup
+h∈H
+m
+∑
+i=1
+σiL[(h(xi), yi
+)]
+}
+,
+d’où le lemme suivant.
+Lemme 2.1
+E [Rep(S, H, L)] ≤ 2 E {ρ[L(H | S)]} .
+Théorème 2.2 Pour tous H, L et S nous avons
+E {R [ERMH(S)] − RS [ERMH(S)]} ≤ 2 E {ρ[L(H | S)]} .
+De plus, pour tout h ∈ H
+E {R [ERMH(S)]} − R(h) ≤ 2 E {ρ[L(H | S)]}
+et pour tout δ ∈ ]0 ; 1[, avec une probabilité d’au moins 1 − δ sur le choix de S nous avons
+R [ERMH(S)] − min
+h∈H R(h) ≤ 2 E {ρ[L(H | S)]}
+δ.
+17
+
+
+Preuve. La première inégalité résulte du lemme 2.1, la deuxième de l’optimalité de ERMH(S) : RS(h) ≥ RS[ERMH(S)], donc R(h) ≥ E{RS[ERMH(S)]} et la troisième de l’inégalité de Markov en remarquant que la VA R [ERMH(S)] − minh∈H R(h) est positive.
+Lemme 2.3 (Inégalité de Mc Diarmid) Soient X1, . . . , Xm m VA indépendantes à valeurs dans X et f : X m → R. Si pour tout i ∈ [[1 ; m]] il existe ci > 0 tel que pour tous x1, . . . , xm, x′
+i ∈ X on ait
+|f (x1, . . . , xi−1, xi, xi+1, . . . , xm) − f (x1, . . . , xi−1, x′
+i, xi+1, . . . , xm)| ≤ ci, (32)
+alors pour tout ε > 0, on a
+P {f (X1, . . . , Xm) − E[f (X1, . . . , Xm)] ≥ ε} ≤ exp
+( −2ε2
+∑m
+i=1 c2
+i
+)
+P {f (X1, . . . , Xm) − E[f (X1, . . . , Xm)] ≤ −ε} ≤ exp
+( −2ε2
+∑m
+i=1 c2
+i
+)
+P {|f (X1, . . . , Xm) − E[f (X1, . . . , Xm)]| ≥ ε} ≤ 2 exp
+( −2ε2
+∑m
+i=1 c2
+i
+)
+.
+Une preuve de ce lemme est donnée en exercice.
+Théorème 2.4 Supposons qu’il existe c > 0 tel que pour tout h ∈ H et tout (x, y) ∈ X × Y, |L(h(x), y)| ≤ c, alors pour tout δ ∈ ]0 ; 1[
+(i) avec une probabilité d’au moins 1 − δ sur l’échantillon S, pour tout h ∈ H
+R(h) − RS(h) ≤ 2 E {ρ[L(H | S)]} + c
+√
+2 log(1/δ)
+m , (33)
+en particulier pour h = ERMH(S) ;
+(ii) avec une probabilité d’au moins 1 − δ sur l’échantillon S, pour tout h ∈ H
+R(h) − RS(h) ≤ 2ρ[L(H | S)] + 3c
+√
+2 log(2/δ)
+m , (34)
+en particulier pour h = ERMH(S) ;
+(iii) avec une probabilité d’au moins 1 − δ sur l’échantillon S, pour tout h ∈ H
+R(ERMH(S)) − R(h) ≤ 2ρ[L(H | S)] + 4c
+√
+2 log(4/δ)
+m,
+Preuve. Remarquons que pour tout échantillon S de taille m et toute fonction h ∈ H, la fonction RS(h) vérifie la propriété (32) avec ci = 2c
+m , donc la fonction Rep(S, H, L) = suph∈H
+(R(h) − RS(h)) vérifie également la propriété (32) avec la même valeur ci = 2c
+m . Il résulte alors de l’inégalité de Mc Diarmid appliquée à Rep(S, H, L) qu’avec une probabilité d’au moins 1 − δ
+Rep(S, H, L) ≤ E[Rep(S, H, L)] + c
+√
+2 log(1/δ)
+m
+et l’inégalité (33) se déduit du lemme 2.1 et de la définition de Rep(S, H, L). De même, la fonction ρ[L(H | S)] vérifie la propriété (32) avec ci = 2c
+m , il résulte alors de l’inégalité de Mc Diarmid appliquée à ρ[L(H | S)] pour δ/2, de l’inégalité (33) appliquée pour δ/2 que l’inégalité (34) est valide. Enfin, en posant hS = ERMH(S), on a pour tout h ∈ H
+R(hS) − R(h) = R(hS) − RS(hS) + RS(hS) − RS(h) + RS(h) − R(h)
+≤ R(hS) − RS(hS) + RS(h) − R(h).
+18
+
+
+Le premier terme du membre de droite de la dernière inégalité est majoré avec une probabilité d’au moins 1 − δ/2 grâce à l’inégalité (34) et le deuxième terme, où h? ne dépend pas de S, est majoré grâce à l’inégalité de Hoeffding avec une probabilité d’au moins 1 − δ/2 par
+RS(h) − R() ≤ c
+√
+2 log(2/δ)
+m,
+ce qui termine la démonstration. Terminons ce paragraphe par deux lemmes sur la complexité de Rademacher. La preuve du premier est immédiate.
+Lemme 2.5 Pour A ⊂ Rm, c ∈ R et a0 ∈ Rm, ρ(cA + a0) = |c|ρ(A).
+Lemme 2.6 (Lemme de Massart) Soient A = {a1, . . . , aN } ⊂ Rm et a = 1
+N
+∑N
+i=1 ai, alors
+ρ(A) ≤ max
+a∈A ‖a − a‖
+√2 log(N )
+m.
+Preuve. Supposons sans perte de généralité que a = 0 (d’après le lemme 2.5). Soit λ > 0, posons A′ = λA. On a
+mρ(A′) = E
+(
+max
+a∈A′
+m
+∑
+i=1
+σiai
+)
+=E
+[
+log
+(
+max
+a∈A′ exp
+(m ∑
+i=1
+σiai
+))]
+≤E
+[
+log
+(
+∑
+a∈A′
+exp
+(m ∑
+i=1
+σiai
+))]
+≤ log
+[
+E
+(
+∑
+a∈A′
+exp
+(m ∑
+i=1
+σiai
+))]
+= log
+[
+∑
+a∈A′
+m
+∏
+i=1
+E (eσiai )
+]
+≤ log
+[
+∑
+a∈A′
+m
+∏
+i=1
+ea2
+i /2
+]
+= log
+[
+∑
+a∈A′
+e‖a‖2/2
+]
+≤ log
+(
+|A′| max
+a∈A′ e‖a‖2/2
+)
+= log(|A′|) + max
+a∈A′ ‖a‖2/2.
+Puisque ρ(A) = 1
+λ ρ(A′), nous obtenons
+ρ(A) ≤ log(|A|) + λ2 maxa∈A ‖a‖2/2
+λm ,
+et l’inégalité obtenue pour λ = √2 log(|A|)/ maxa∈A ‖a‖2 termine la preuve.
+2.3 Preuve de la borne supérieure
+Nous allons démontrer une borne supérieure un peu plus faible que celle du deuxième théorème fondamental d’apprentissage, à savoir
+mH(ε, δ) ≤ C d log(1/ε) + log(1/δ)
+ε2 . (35)
+Soit ((x1, y1), . . . , (xm, ym)) des données d’entraînement pour un problème de classification. Il résulte du lemme 1.12 de Sauer-Shela-Perles que si dimVC(H) = d, alors
+∣
+∣L(H | S)∣
+∣≤
+( em
+d
+)d
+et donc A = {(1h(x1)6=y1, . . . , 1h(xm)6=ym) : h ∈ H} vérifie |A| ≤ ( em
+d
+)d, qui combiné avec
+le lemme 2.6 de Massart, donne ρ(A) ≤
+√
+2d log(em/d)
+m . Enfin, il résulte du théorème 2.4 (ii)
+qu’avec une probabilité d’au moins 1 − δ, pour tout h ∈ H
+R(h) − RS(h) ≤ 2
+√
+2d log(em/d)
+m +3
+√
+2 log(2/δ)
+m
+19
+
+
+donc avec une probabilité d’au moins 1 − δ, pour tout h ∈ H
+|R(h) − RS(h)| ≤ 2
+√
+2d log(em/d)
+m +3
+√
+2 log(4/δ)
+m ≤2
+√
+4d log(em/d) + 9 log(4/δ)
+m
+et cette quantité est majorée par ε si et seulement si
+ε2m
+16d ≥ 1 + log
+( ε2m
+16d
+)
++9
+4d log
+(4
+δ
+)
++ log
+( 16
+ε2
+)
+,
+i.e., si et seulement si g
+(
+ε2m 16d
+)
+≥9
+4d log ( 4
+δ
+) + log ( 16
+ε2
+), où g(u) = u − log(u) − 1, définie pour
+u > 0, est convexe positive et atteint sont minimum (qui s’annule) en u = 1 ; donc g(u/2) ≥ 0, ce qui entraîne que g(u) ≥ u/2 − log(2). Ainsi, si m ≥ 32d
+ε2
+[9
+4d log ( 4
+δ
+) + log ( 16
+ε2
+) + log(2)], alors avec une probabilité d’au moins 1 − δ pour tout h ∈ H, |R(h) − RS(h)| ≤ ε et nous avons montré qu’il existe une constante C > 0 pour laquelle l’inégalité (35) est vérifiée.
+2.4 Démonstration de la borne inférieure
+Lemme 2.7 Soit X une loi binomiale B(m, p) avec p = (1 − ε)/2, alors
+P(X ≥ m/2) ≥ 1
+2
+(
+1 − √1 − exp (−mε2/(1 − ε2))
+)
+.
+Preuve. La preuve repose sur l’inégalité de Slud 8 [3] : si p ≤ 1/2 et m pair alors
+P(X ≥ m/2) ≥ 1 − Φ
+(
+m/2 − mp
+√mp(1 − p)
+)
+,
+où Φ est la fonction de répartition d’une VA réelle gaussienne centrée réduite. Ici,
+m/2 − mp
+√mp(1 − p) =
+√ mε2
+1 − ε2 .
+En posant pour u ≥ 0, g(u) = 2(1 − Φ(u)) et f (u) = 1 − √1 − e−u2, nous allons montrer que g(u) ≥ f (u) pour u ≥ 0. On a g(0) − f (0) = 0 = uli→m∞g(u) − f (u),
+g′(u) − f ′(u) = ue−u2
+√1 − e−u2 −
+√2
+π e−u2/2,
+lim
+u→0+g′(u) − f ′(0) = 1 −
+√2
+π > 0, uli→m∞g′(u) − f ′(u) = 0 et g′(u) − f ′(u) = 0 si et seulement si
+h(u) d=ef ue−u2/2
+√1 − e−u2 =
+√2
+π . (36)
+Enfin, h′(u) =
+−e−u2/2
+(
+e−u2 − (1 − u2)
+)
+(1 − e−u2)3/2 < 0, h(0) = 1 > √2/π > 0 = uli→m∞h(u), donc l’équa
+tion (36) n’a qu’une racine u0 > 0 et g′(u) − f ′(u) ne s’annule qu’une fois, ainsi g(u) − f (u) est croissante sur [0 , u0], puis décroissante sur [u0 , ∞[ et g(u) ≥ f (u) pour u ≥ 0.
+Pour montrer qu’il existe C > 0 tel que mH(ε, δ) ≥ C d+log(1/δ)
+ε2 , nous procédons en deux
+étapes. Nous commençons par montrer que mH(ε, δ) ≥ ( 1
+2 ) log[1/(4δ)]/ε2, puis nous montrons
+que pour tout δ ≤ 1/8, nous avons mH(ε, δ) ≥ 8d/ε2.
+8. Pour une preuve, voir [4].
+20
+
+
+Montrons que pour tout ε < √12 et tout δ ∈ ]0 ; 1[, nous avons mH(ε, δ) ≥ ( 1
+2 ) log[1/(4δ)]/ε2.
+Pour cela, remarquons que c’est trivial si δ ≥ 1
+4 , nous supposerons donc δ < 1
+4 , et montrons
+que si m ≤ ( 1
+2 ) log[1/(4δ)]/ε2, alors H n’a pas la capacité PAC d’apprentissage. Considérons un exemple c ∈ X qui est brisé par H, i.e., il existe h+, h− ∈ H tels que h+(c) = 1 et h−(c) = −1. Considérons les deux lois de probabilité D+ et D− définies par
+Db
+({(x, y)}) =
+{ 1 b yε
+2 si x = c
+0 sinon. (37)
+avec b ∈ {+, −}. Soient un algorithme d’apprentissage quelconque A et la loi de probabilité Db, un échantillon de m données d’entraînement est alors donné par S = ((c, y1), . . . , (c, ym)). Il est donc entièrement caractérisé par le vecteur y = (y1, . . . , ym) ∈ {−1, +1}m et A(S) = hS est caractérisé par hS(c) ∈ {−1, +1}. Ainsi l’algorithme d’apprentissage peut être considéré comme une application de {−1, +1}m dans {−1, +1} et l’on note A(y) = hS(c). Remarquons
+que pour tout h ∈ H, on a R(h) = P[h(c) 6= y] = 1−h(c)bε
+2 , en particulier pour le classificateur optimal de Bayes hB on a
+R[A(S)] − R(hB) = 1 − A(y)bε
+2 − 1−ε
+2=
+{ ε si A(y) 6= b
+0 sinon. .
+Fixons l’algorithme d’apprentissage A. On a
+P
+{R[A(S)] − R(hB) = ε} =
+∑
+y∈{−1, +1}m
+Dm
+b (y)1A(y)6=b,
+notons N + = {y ∈ {−1, +1}m : |{i ∈ [[1 ; m]] : yi = 1}| ≥ m/2} et N − = {−1, +1}m \ N +. Remarquons que pour tout y ∈ N +, on a Dm
++ (y) ≥ Dm
+− (y) et pour tout y ∈ N −, on a Dm
+− (y) ≥ Dm
++ (y). Par conséquent,
+max
+b∈{−1, +1} P{R[A(S)] − R(hB) = ε} = max
+b∈{−1, +1}
+∑
+y∈{−1, +1}m
+Dm
+b (y)1A(y)6=b
+≥1
+2
+∑
+y∈{−1, +1}m
+Dm
++ (y)1A(y)6=+1 + 1
+2
+∑
+y∈{−1, +1}m
+Dm
+− (y)1A(y)6=−1
+=1
+2
+∑
+y∈N +
+[Dm
++ (y)1A(y)6=+1 + Dm
+− (y)1A(y)6=−1
+]
++1
+2
+∑
+y∈N −
+[Dm
++ (y)1A(y)6=+1 + Dm
+− (y)1A(y)6=−1
+]
+≥1
+2
+∑
+y∈N +
+[Dm
+− (y)1A(y)6=+1 + Dm
+− (y)1A(y)6=−1
+]
++1
+2
+∑
+y∈N −
+[Dm
++ (y)1A(y)6=+1 + Dm
++ (y)1A(y)6=−1
+]= 1
+2
+∑
+y∈N +
+Dm
+− (y) + 1
+2
+∑
+y∈N −
+Dm
++ (y).
+Remarquons maintenant que ∑
+y∈N − Dm
++ (y) = ∑
+y∈N + Dm
+− (y) et que chacune de ces probabilité est égale à la probabilité pour qu’une loi binomiale B(m, (1−ε)/2) prenne une valeur supérieure ou égale à m/2. D’après le lemme 2.7, cette probabilité est minorée par
+1
+2
+(
+1 − √1 − exp (−mε2/(1 − ε2))
+)
+≥1
+2
+(
+1 − √1 − exp (−2mε2)
+)
+,
+où nous avons utilisé la condition ε2 ≤ 1/2. On en déduit que si m ≤ ( 1
+2 ) log(1/(4δ))/ε2, alors
+il existe b tel que Dm
+b {R[A(S)] − R(hB) = ε} ≥ 1
+2
+(1 − √1 − 4δ) ≥ δ. Ceci termine la première étape.
+21
+
+
+Montrons maintenant que m(ε, 1/8) ≥ 8d/ε2 dès que ε < 1/(8√2). Soit ρ = 8ε ∈ ]0 ; 1/√2[ et C = {c1, . . . , cd} ⊂ X qui est brisé par H. Pour chaque vecteur b = (b1, . . . , bd) ∈ {−1, +1}d définissons une loi de probabilité Db sur X × Y par
+Db
+({(x, y)}) =
+{1
+d . 1+ybiρ
+2 si ∃i ∈ [[1 ; d]] : x = ci 0 sinon.
+Le classificateur de Bayes pour Db est défini par hB(ci) = bi pour 1 ≤ i ≤ d et son risque réel vaut R(hB) = P[hB(x) 6= y] = 1−ρ
+2 . De plus, pour toute hypothèse h ∈ H, son risque vaut
+R(h) = 1 + ρ
+2 . |{i ∈ [[1 ; d]] : h(ci) 6= bi}|
+d +1−ρ
+2 . |{i ∈ [[1 ; d]] : h(ci) = bi}|
+d,
+donc
+R(h) − min
+g∈H R(g) = ρ. |{i ∈ [[1 ; d]] : h(ci) 6= bi}|
+d . (38)
+Maintenant, fixons un algorithme d’apprentissage A et, comme dans la preuve du théorème no free lunch, en supposant b aléatoire avec une loi uniforme nous avons
+max
+Db : b∈{−1, +1}d E
+[
+R[A(S)] − min
+g∈H R(g) ∣
+∣b
+]
+≥E
+[
+R[A(S)] − min
+g∈H R(g)
+]
+=E
+[
+ρ. |{i ∈ [[1 ; d]] : A(S)(ci) 6= bi}|
+d
+]
+(39)
+=ρ
+d
+d
+∑
+i=1
+E
+[1[A(S)(ci)6=bi
+] . (40)
+Le tirage d’un échantillon S de taille m suivant la loi Db se fait de la manière suivante : choisir au hasard m entiers j = (j1, . . . , jm) dans [[1 ; d]] (m tirages indépendants avec remise), on
+a alors x` = cj` (1 ≤ ` ≤ m) et pour chaque `, choisir y` = bj` avec une probabilité de
+1+ρ
+2 . Ainsi, on peut remplacer l’échantillon S par le couple (j, y) où j est défini ci-dessus et
+y = (y1, . . . , ym). Fixons i ∈ [[1 ; d]], notons b(−i) = (b1, . . . , bi−1, bi+1, . . . , bd), et pour j fixé, notons I(j) = {` ∈ [[1 ; m]] : j` = i} et Ic(j) = [[1 ; m]] \ I(j), on a
+P(y | b, j) = P((y`)`∈Ic(j), (y`)`∈I(j)
+∣
+∣ b(−i), bi, j) = P((y`)`∈Ic(j)
+∣
+∣ b(−i), j) P((y`)`∈I(j)
+∣
+∣ bi, j),
+donc
+E
+[1[A(S)(ci)6=bi] | j] = 1
+2
+∑
+bi∈{−1, +1}
+E
+[1[A(j,y)(ci)6=bi] | bi, j]
+=1
+2d−1
+∑
+b(−i)
+∑
+(y` )`∈I c (j )
+P
+((y`)`∈Ic(j)
+∣
+∣ b(−i), j) 1
+2
+∑
+(y` )`∈I (j )
+(
+∑
+bi
+P
+((y`)`∈I(j)
+∣
+∣ bi, j)1[A(j,y)(ci)6=bi]
+)
+.
+Le terme entre parenthèses est minimisé quand A(j, y)(ci) maximise P((y`)`∈I(j)
+∣
+∣ bi, j), c’està-dire quand il correspond au maximum de vraisemblance :
+A(j, y)(ci) =
+∑
+`∈I (j )
+y`, (41)
+correspondant au vote majoritaire entre les (y`) pour lesquels ` ∈ I(j) (i.e., j` = i). Minorons maintenant l’expression (40) quand A est l’estimateur du maximum de vraisemblance (41). Pour i ∈ [[1 ; d]] et j ∈ [[1 ; d]]m fixés, E [1[A(S)(ci)6=bi | j]
+] est la probabilité pour qu’une loi binomiale
+B(|I(j)|, 1−ρ
+2 ) prenne une valeur supérieure ou égale à |I(j)|
+2 , or quand 2ρ2 ≤ 1, cette probabilité est minorée par
+1
+2
+(
+1 − √1 − exp(−2|I(j)|ρ2)
+)
+≥1
+2
+(
+1 − √2|I(j)|ρ2
+)
+.
+22
+
+
+Maintenant, en moyennant suivant j, il résulte de l’inégalité de Jensen (la racine carrée étant concave) que
+E
+[1[A(S)(ci)6=bi
+]≥ 1
+2
+(
+1 − ρ√2 E[|I(j)|]
+)
+=1
+2
+(
+1−ρ
+√m
+d
+)
+donc le minimum de (40) est minoré par ρ
+2
+(1 − ρ√ m
+d
+) et tant que m < d
+8ρ2 , ce terme sera
+minoré par ρ/4. En résumé, nous avons montré que si m < d
+8ρ2 , alors pour tout algorithme d’apprentissage
+il existe une loi de probabilité telle que E [R[A(S)] − minh∈H RS(h)] ≥ ρ/4. Finalement, en posant ∆ = 1
+ρ (R[A(S)] − minh∈H RS(h)) et en remarquant que 0 ≤ ∆ ≤ 1 (d’après (39), il
+résulte de l’inégalité de Markov que P
+(
+∆> ε
+ρ
+)
+≥ E[∆] − ε
+ρ≥1
+4−ε
+ρ.
+En choisissant ρ = 8ε, nous concluons que si m < 8d
+ε2 , alors avec une probabilité d’au moins 1/8, nous avons R[A(S)] − minh∈H RS(h) ≥ ε.
+3 Bornes bayésiennes PAC pour les déviations des moyen
+nes empiriques par rapport à leurs espérances
+Cette section est très largement inspirée d’un cours d’Olivier Catoni du 12-06-2013, disponible sur internet à l’adresse http://ocatoni.perso.math.cnrs.fr/learning2013-02.pdf, voir également [5]. Nous commençons par généraliser l’inégalité de Hoeffding à des variables aléatoires réelles du deuxième ordre en suivant un raisonnement que nous reproduirons à la section suivante pour établir des bornes bayésiennes PAC sur l’écart entre des moyennes empiriques et leurs espérances. Cela nous permettra de démontrer la propriété de convergence uniforme d’espaces d’hypothèses mesurables, pour n’importe quelle fonction coût.
+3.1 Déviations de sommes de VA indépendantes
+Soit (Xi)1≤i≤m un échantillon de m variables aléatoires (VA) réelles indépendantes et
+M= 1
+m
+m
+∑
+i=1
+Xi
+leur moyenne empirique. Soit μ = E[M ]. Considérons les fonctions génératrices des moments φi(λ) = E[exp(λXi)] et leurs logarithmes
+ψi(λ) = log {E [exp(λXi)]}
+ψ(λ) = 1
+m
+m
+∑
+i=1
+ψi(λ).
+Ces derniers sont des fonctions convexes 9, nulles en 0, à valeurs dans R ∪ {+∞}. Considérons la fonction duale
+ψ?(x) = sup
+λ∈R+
+[λx − ψ(λ)] ,
+qui est à valeurs dans R ∪ {+∞}.
+9. En effet, pour λ, λ′ et α ∈ ]0 , 1[, l’inégalité de Hölder appliquée à f = eαλXi et g = e(1−α)λ′Xi s’écrit
+φi (αλ + (1 − α)λ′) = E[f g] ≤
+(
+E
+[
+f
+1 α
+])α (
+E
+[
+g
+1 1−α
+])1−α
+= φi(λ)αφi(λ′)1−α,
+et en prenant le logarithme on obtient : ψi (αλ + (1 − α)λ′) ≤ αψi(λ) + (1 − α)ψi(λ′) (voir également la proposition 3.3 page 24 et sa démonstration).
+23
+
+
+Proposition 3.1 Pour tout x ∈ R, P(M ≥ x) ≤ exp [−mψ?(x)].
+Preuve. Pour tout x ∈ R et tout λ ∈ R?
++ on a
+P(M ≥ x) = E {1[exp (mλ(M − x)) ≥ 1]}
+≤ E {exp [mλ(M − x)]} = exp {m [ψ(λ) − λx]}
+et par conséquent P(M ≥ x) ≤ infλ∈R+ exp{−m[λx − ψ(λ)]} = exp[−mψ?(x)].
+Proposition 3.2 Posons Λi = sup{λ ∈ R+ : φi(λ) < ∞} et Λ = min
+1≤i≤m Λi. Alors, pour tout
+λ ∈ [0 , Λi[, φi(λ) < ∞ et φi est C∞ sur ]0 , Λi[ lorsque Λi > 0. Si de plus E(|Xi|k) < ∞, alors φi est Ck sur [0 , Λi[.
+Preuve. Soit λ ∈ [0 , Λi[. Par définition de Λi, il existe β > λ tel que φi(β) < ∞ et d’après
+l’inégalité de Jensen φi(β) = E
+[
+(eλXi ) β
+λ
+]
+≥ φi(λ) β
+λ , donc φi(λ) < ∞.
+Pour montrer que φi est C∞, fixons 0 < α < β < Λi, remarquons que ∀j ≥ 1, Xj−1
+i eβXi = X j−1
+i eαXi + ∫ β
+α Xj
+i eλXi dλ. De plus, E [supλ∈[α , β]
+∣
+∣X j
+i eλXi ∣
+∣
+] < ∞, car pour γ ∈ ]β , Λi[, en posant
+c1 = supx∈R+ xje−(γ−β)x et c2 = supx∈R+ xje−αx, on a
+∣
+∣X j
+i eλXi ∣
+∣≤
+{ c1eγXi si Xi ≥ 0
+c2 si Xi ≤ 0 ,
+donc E [supλ∈[α , β]
+∣
+∣X j
+i eλXi ∣
+∣
+] ≤ c1 E[eγXi] + c2 < ∞. On peut ainsi appliquer le théorème de Fubini pour obtenir
+E
+[X j−1
+i eβXi ] = E [Xj−1
+i eαXi ] +
+∫β
+α
+E
+[X j
+i eλXi] dλ (42)
+et déduire du théorème de convergence dominée que l’application de [α , β] dans R définie par
+λ 7→ E [Xj
+i eλXi] est continue, donc β 7→ E [Xj−1
+i eβXi] est de classe C1, de dérivée E [Xj
+i eβXi ]
+et φi est C∞ sur ]0 , Λi[, enfin il en est de même pour ψi = log(φi). Supposons maintenant que E[|Xi|k] < ∞, alors le raisonnement ci-dessus s’applique pour α = 0 tant que j ≤ k et montre que pour tout β ∈ ]0 , Λi[ et pour tout j ∈ [[0 , k]], l’égalité (42) est valable pour α = 0, ce qui entraîne que φi et ψi sont Ck sur [0 , Λi[.
+Proposition 3.3 Si E[X2
+i ] < ∞ et Λi > 0, alors ∀λ ∈ [0 , Λi[, ψ′′
+i (λ) est la variance d’une VA :
+ψ′′
+i (λ) = E [X2
+i eλXi ]
+E [eλXi] −
+(
+E
+[XieλXi ]
+E [eλXi ]
+)2
+et
+ψi(λ) = λ E[Xi] +
+∫λ
+0
+(λ − α)ψ′′
+i (α) dα.
+Preuve. D’après la proposition 3.2, ψi est C2 sur [0 , Λi[, avec ψ′
+i(λ) = E[XieλXi ]
+E[eλXi ] et ψ′′
+i (λ) =
+E[X 2
+i eλXi ]
+E[eλXi ] −
+(
+E[XieλXi ]
+E[eλXi ]
+)2
+. Considérons la VA Yi de loi P(Yi ∈ A) = E[1(Xi∈A)eλXi]
+E[eλXi] (∀A borélien),
+alors pour toute fonction borélienne f telle que E[|f (Xi)|eλXi] < ∞, on a E[f (Yi)] = E[f(Xi)eλXi]
+E[eλXi ] ,
+ce qui montre que ψ′′
+i (λ) = E[Y 2
+i ] − E[Yi]2 est bien une variance et la dernière égalité vient du
+développement de Taylor avec reste intégral ψi(λ) = ψi(0) + λψ′
+i(0) + ∫ λ
+0 (λ − α)ψ′′
+i (α) dα.
+24
+
+
+Proposition 3.4 Supposons que Λ > 0 et que E[X2
+i ] < ∞ (1 ≤ i ≤ m). Posons pour λ ∈ [0 , Λ[
+V (λ) = 2
+λ2 [ψ(λ) − λμ] = 2
+λ2
+∫λ
+0
+(λ − α)ψ′′(α) dα, V (λ) = sup
+β∈[0 , λ]
+V (β) et
+v = V (0) = 1
+m
+m
+∑
+i=1
+var(Xi).
+Alors la fonction V est croissante, continue, à valeurs dans R et pour tout 10 x et tout δ ∈ ]0 ; 1[
+P(M ≥ μ + x) ≤ exp
+( −mx2
+2V (x/v)
+)
+(43)
+P
+
+M ≥ μ +
+√ √ √ √
+2 log(δ−1)
+mV
+(√
+2 log(δ−1)
+mv
+)
+
+ ≤ δ. (44)
+Preuve. On a v = limλ→0 V (λ) = ψ′′(0) = 1
+m
+∑m
+i=1 var(Xi). De plus, V est continue, car étant croissante, pour tout λ ∈ ]0 , Λ[ elle admet une limite à droite et une limite à gauche en λ : V (λ−) ≤ V (λ+) et, comme V est continue d’après la proposition 3.2, on a V (λ−) = sup
+β∈[0 , λ]
+V (β) = V (λ+) (= V (β0) pour un β0 ∈ [0 , λ]). Pour tout λ ∈ ]0 , Λ[ et tout β ∈ [0 , λ],
+−ψ?(μ + x) = inf
+γ∈R+
+ψ(γ) − γ(μ + x) ≤ ψ(β) − β(μ + x) = β2
+2 V (β) − βx ≤ −
+[
+βx − β2
+2 V (λ)
+]
+,
+donc d’après la proposition 3.1 P(M ≥ μ+x) ≤ exp[−mψ?(μ+x)] ≤ exp
+[
+−m
+(
+βx − β2
+2 V (λ)
+)]
+et pour λ = x/v et β = x/V (λ) ≤ λ, on obtient l’inégalité (43). Enfin, posons
+δ = exp
+[
+−m
+(
+βx − β2
+2 V (λ)
+)]
+,
+donc log(δ−1)
+mβ + β
+2 V (λ) = x et P
+(
+M ≥μ+ β
+2 V (λ) + log(δ−1)
+mβ
+)
+≤ δ, et choisissons λ =
+√
+2 log(δ−1)
+mv ≥
+β=
+√ 2 log(δ−1)
+mV (λ) pour conclure.
+Proposition 3.5 [Inégalité de Hoeffding]. Supposons que pour tout i ∈ [[1 , m]], il existe des constantes ai et bi telles que ai ≤ Xi ≤ bi, alors pour tout x ∈ R et tout δ ∈ ]0 ; 1[
+P (M ≥ μ + x) ≤ exp
+( −2m2x2
+∑m
+i=1(bi − ai)2
+)
+et
+P
+(
+M ≥μ+
+√ ∑m
+i=1(bi − ai)2 log(δ−1)
+2m2
+)
+≤ δ.
+Preuve. ψ′′
+i est la variance d’une VA à valeurs dans [ai , bi] et ne peut donc pas dépasser (bi−ai)2
+4,
+donc ψ(λ) ≤ λμ + λ2
+8m
+∑m
+i=1(bi − ai)2 et
+ψ?(μ + x) = sup
+λ∈R+
+[λμ + λx − ψ(λ)] ≥ sup
+λ∈R+
+(
+λx − λ2
+8m
+m
+∑
+i=1
+(bi − ai)2
+)
+= 2mx2
+∑m
+i=1(bi − ai)2 .
+L’inégalité de Hoeffding résulte donc de la proposition 3.1 et de l’égalité 2m2x2
+A = log(δ−1), qui
+implique x =
+√
+A log(δ−1)
+2m2 .
+10. Sous réserve que 0 ≤ x < Λv et que δ > e−mvΛ2/2.
+25
+
+
+3.2 Divergence de Kullback-Leibler
+Pour (Θ, MΘ) un espace mesurable, nous noterons P1
++(Θ, MΘ) (ou P1
++(Θ) quand il n’y a pas d’ambiguïté sur la tribu associée) l’ensemble des mesures de probabilité sur (Θ, MΘ). Pour ρ et ν dans P1
++(Θ), la divergence de Kullback-Leibler , appelée aussi entropie relative, des probabilités ρ et ν est définie par
+K(ρ, ν) =
+
+
+
+∫
+Θ
+log
+( dρ
+dν (θ)
+)
+dρ(θ) si ρ ν
++∞ sinon,
+(45)
+où dρ
+dν (θ) désigne une dérivée de Radon-Nikodym de ρ par rapport à ν. Quand ρ ν, on a
+K(ρ, ν) =
+∫
+Θ
+[
+1 − dρ
+dν (θ) + dρ
+dν (θ) log
+( dρ
+dν (θ)
+)]
+dν(θ)
+et la fonction définie sur R?
++ par x 7→ 1 − x + x log(x) étant positive, strictement convexe et ne s’annulant que pour x = 1, on en déduit que la divergence de Kullback-Leibler est toujours positive et ne s’annule que si ρ = ν, ν-presque sûrement.
+3.3 Bornes bayésiennes PAC des déviations entre moyennes empi
+rique et réelle
+Soient m VA indépendantes Z1, . . . , Zm à valeurs dans Z, un espace mesurable (on notera MZ la tribu associée). Soient Θ un espace de paramètres, également mesurable (avec MΘ la tribu associée), et f : Z × Θ → R une fonction mesurable.
+Exemple 3.1 Un problème d’apprentissage supervisé 11, où Z = X × Y, Zi = (xi, yi)—la base d’entraînement—, avec un espace d’hypothèses hθ dépendant d’un paramètre θ ∈ Θ, autrement dit il existe une application h : Θ → M(X , Y) telle que H = h(Θ)—on écrit hθ l’hypothèse h(θ)—, et pour une fonction coût L : Y2 → R+ (ou à valeurs dans R), f (Zi, θ) = L[hθ(xi), yi].
+Supposons que pour tout θ ∈ Θ et tout i ∈ [[1 , m]], E[f (Zi, θ)2] < ∞. Posons
+M (θ) = 1
+m
+n
+∑
+i=1
+f (Zi, θ), μ(θ) = E[M (θ)],
+ψi(λ, θ) = log{E(exp[λf (Zi, θ)])}, ψ(λ, θ) = 1
+m
+m
+∑
+i=1
+ψi(λ, θ)
+et Λ = sup{λ : ∀θ ∈ Θ, ψ(λ, θ) < ∞}.
+Avec l’exemple 3.1, M (θ) et μ(θ) correspondent aux risques empirique RS(hθ) et réel R(hθ).
+Proposition 3.6 Supposons Λ > 0. Soit ν ∈ P1
++(Θ) une mesure de référence sur l’espace des paramètres Θ. Alors ∀λ ∈ [0 , Λ[
+E
+[
+exp
+(
+sup
+{∫
+Θ
+m[λM (θ) − ψ(λ, θ)] dρ(θ) − K(ρ, ν) : ρ ∈ P1
++(Θ) et
+θ 7→ λM (θ) − ψ(λ, θ) ∈ L1(ρ) et K(ρ, ν) < ∞
+})]
+≤ 1.
+Par conséquent, pour tout δ > 0, avec une probabilité d’au moins 1 − δ, pour toute distribution de probabilité ρ ∈ M1
++(Θ) telle que θ 7→ λM (θ) − ψ(λ, θ) ∈ L1(ρ) et K(ρ, ν) < ∞, pour tout λ ∈ [0 , Λ[
+∫
+Θ
+M (θ) dρ(θ) ≤ 1
+λ
+∫
+Θ
+ψ(λ, θ) dρ(θ) + K(ρ, ν) + log(δ−1)
+mλ .
+11. Voir la section 1.
+26
+
+
+Preuve. D’après l’inégalité de Jensen
+exp
+{∫
+Θ
+m[λM (θ) − ψ(λ, θ)] dρ(θ) − K(ρ, ν)
+}
+≤
+∫
+Θ
+exp{m[λM (θ) − ψ(λ, θ)]}
+( dρ
+dν (θ)
+)−1
+1
+[ dρ
+dν (θ) > 0
+]
+dρ(θ)
+=
+∫
+Θ
+exp{m[λM (θ) − ψ(λ, θ)]}1
+[ dρ
+dν (θ) > 0
+]
+dν(θ)
+≤
+∫
+Θ
+exp{m[λM (θ) − ψ(λ, θ)]}dν(θ).
+On peut ensuite appliquer le théorème de Fubini pour les fonctions positives en ayant remarqué
+que E [exp{m[λM (θ) − ψ(λ, θ)]}dν(θ)] = ∏m
+i=1
+E[eλf (Zi ,θ) ]
+eψi(λ,θ) = 1 pour conclure que
+E
+[
+exp
+{∫
+Θ
+m[λM (θ) − ψ(λ, θ)] dρ(θ) − K(ρ, ν)
+}]
+≤ E[
+∫
+Θ
+exp{m[λM (θ) − ψ(λ, θ)]}dν(θ)] = 1.
+L’espérance indiquée dans la proposition ne porte pas forcément sur une fonction mesurable, mais cette fonction est majorée par une fonction mesurable d’espérance inférieure ou égale à 1. C’est ce que montre la preuve et c’est le sens à donner à la proposition. La deuxième partie de la proposition s’obtient en appliquant l’inégalité de Markov 12 : considérons ρ ∈ P1
++(Θ) satisfaisant aux conditions de la proposition. On a
+P
+[
+exp
+(∫
+Θ
+m[λM (θ) − ψ(λ, θ)]dρ(θ) − K(ρ, ν)
+)
+≥ δ−1
+]
+≤ δE
+[
+exp
+(∫
+Θ
+m[λM (θ) − ψ(λ, θ)]dρ(θ) − K(ρ, ν)
+)]
+≤ δ,
+donc P
+[∫
+Θ
+M (θ) dρ(θ) ≤ 1
+λ
+∫
+Θ
+ψ(λ, θ) dρ(θ) + K(ρ, ν) + log(δ−1)
+mλ
+]
+≥ 1 − δ. Ici aussi, l’événe
+ment n’est pas forcément mesurable, il faut comprendre qu’il contient un événement mesurable de probabilité supérieure ou égale à 1 − δ. Posons pour θ ∈ Θ et λ ∈ [0 , Λ[
+μi(θ) = E[f (Zi, θ)], v(θ) = 1
+m
+m
+∑
+i=1
+E
+{[f (Zi, θ) − μi(θ)]2},
+V (λ, θ) = 2
+λ2 [ψ(λ, θ) − λμ(θ)], V (λ, θ) = sup
+β∈[0 , λ]
+V (β, θ),
+V (λ) = sup
+θ∈Θ
+V (λ, θ), V (λ) = sup
+θ∈Θ
+V (λ, θ)
+et supposons que
+v = sup
+θ∈Θ
+v(θ) < ∞ et ∃Λ′ > 0, ∀λ ∈ [0 , Λ′[, V (λ) < ∞. (46)
+Proposition 3.7 Sous les hypothèses ci-dessus, on a pour tout 13 c > 0
+E
+[
+sup
+{∫
+Θ
+[M (θ) − μ(θ)] dρ(θ) : ρ ∈ P1
++(Θ) et θ 7→ M (θ) − μ(θ) ∈ L1(ρ) et K(ρ, ν) ≤ c
+}]
+≤ inf
+λ∈[0 , Λ′[
+( λV (λ)
+2 +c
+λm
+)
+≤
+√ √ √ √
+2c
+mV
+(√ 2c
+mv
+)
+.
+12. Pour Z une VA positive, P(Z ≥ a) ≤ E[Z]
+a.
+13. En fait, pour tout c tel que 0 < c < Λ′2mv
+2 , qui assure que
+√
+2c
+mv < Λ′.
+27
+
+
+En particulier quand |Θ| < ∞ avec c = log(|Θ|), ρ = δθ et ν(θ) = 1
+|Θ| on obtient
+E
+{
+sup
+θ∈Θ
+[M (θ) − μ(θ)]
+}
+≤
+√ √ √ √
+2 log(|Θ|)
+mV
+(√
+2 log(|Θ|)
+mv
+)
+.
+Preuve. D’après la preuve de la proposition précédente, pour ρ ∈ P1
++(Θ) telle que K(ρ, ν) ≤ c et θ 7→ M (θ) − μ(θ) ∈ L1(ρ), on a 14 pour tout λ ∈ [0 , Λ′[ et grâce à l’inégalité de Jensen
+∫
+Θ
+[M (θ) − μ(θ)] dρ(θ) = 1
+mλ
+{
+log exp
+[∫
+Θ
+m[λM (θ) − ψ(λ, θ)]dρ(θ) − K(ρ, ν)
+]
++
++
+∫
+Θ
+m[ψ(λ, θ) − λμ(θ)]dρ(θ) + K(ρ, ν)
+}
+≤1
+λm
+{
+log
+[∫
+Θ
+exp
+[
+m[λM (θ) − ψ(λ, θ)]
+]
+dν(θ)
+]
++
++ c + mλ2
+2 V (λ)
+}
+et en appliquant encore une fois l’inégalité de Jensen (E[log(Y )] ≤ log[E(Y )]) on déduit de
+la proposition 3.6 la première inégalité. Le majorant inf
+λ∈[0 , Λ′[
+λV (λ)
+2 +c
+λm peut être affaibli en
+inf
+λ∈[0 , β]
+λV (β)
+2 +c
+λm , avec 0 ≤ β < Λ′. Enfin, on obtient la deuxième inégalité en choisissant
+β=
+√ 2c
+v (voir la note 13 au bas de la page 27) et λ =
+√
+2c
+mV (β) ≤ β.
+Proposition 3.8 Sous les hypothèses précédentes, pour toute constante c > 0 et pour tout 15 δ > 0, avec probabilité d’au moins 1 − δ
+sup
+{∫
+Θ
+[M (θ) − μ(θ)] dρ(θ) : ρ ∈ P1
++(Θ) et θ 7→ M (θ) − μ(θ) ∈ L1(ρ) et K(ρ, ν) ≤ c
+}
+≤ inf
+λ∈[0 , Λ′[
+λV (λ)
+2 + c + log(δ−1)
+λm
+≤
+√ √ √ √
+2[c + log(δ−1)]
+mV
+(√
+2[c + log(δ−1)]
+mv
+)
+.
+En particulier quand Θ est fini, avec probabilité d’au moins 1 − δ
+sup
+θ∈Θ
+[M (θ) − μ(θ)] ≤
+√ √ √ √
+2 log(|Θ|/δ)
+mV
+(√
+2 log(|Θ|/δ)
+mv
+)
+.
+Preuve. C’est une conséquence directe de la deuxième partie de la proposition 3.6, de la majo
+ration ψ(λ, θ) − λμ(θ) ≤ λ2V (λ)
+2 et de la fin de la démonstration de la proposition 3.7.
+Remarque 3.1 Remarquons que la proposition 3.8 est encore vraie en remplaçant f par −f , c’est-à-dire M par −M et μ par −μ.
+14. Remarquons que l’hypothèse (46) entraîne que θ 7→ ψ(λ, θ) − λμ(θ) ∈ L1(ρ) pour tout λ ∈ [0 , Λ′[ et donc θ 7→ ψ(λ, θ) − λM (θ) étant la somme de deux fonctions de L1(ρ), elle est aussi dans L1(ρ). 15. Sous réserve que c + log δ−1 < Λ′2mv
+2.
+28
+
+
+Remarque 3.2 Si f est à valeurs dans [0 ; 1] ou dans [−1 ; 0], alors V (λ) ≤ 1
+4 pour tout λ, et si |Θ| est fini, alors avec une probabilité d’au moins 1 − δ, supθ∈Θ |M (θ) − μ(θ)| ≤
+√
+log(2|Θ|/δ)
+2m et l’on retrouve la propriété de convergence uniforme de Θ (que l’on identifie à
+l’espace d’hypothèse) donnée à la proposition 1.5.
+Proposition 3.9 Supposons que Θ = Bd = {θ ∈ Rd : ‖θ‖ ≤ 1} et qu’il existe deux constantes strictement positives B et g telles que
+sup
+z∈Z
+f (z, θ) − inf
+z∈Z f (z, θ) ≤ B (∀θ ∈ Bd)
+|f (z, θ) − f (z, θ′)| ≤ g‖θ − θ′‖ (∀z ∈ Z, ∀θ, θ′ ∈ Bd).
+Considérons un estimateur qui minimise le risque empirique
+θˆ ∈ arg min
+θ∈Bd
+M (θ).
+Alors, avec une probabilité d’au moins 1 − δ
+μ(θˆ) ≤ inf
+θ∈Bd
+μ(θ) + B
+
+
+
+√ √ √ √
+d
+2m log
+(
+1 + 4g
+B
+√ 2m
+d
+)
++ log(2/δ)
+2m +
+√d
+8m +
+√
+log(2/δ)
+2m
+
+
+
+.
+Sous ces hypothèses très simples, il apparaît que la qualité de l’estimation du risque minimum
+inf
+θ∈Bd
+μ(θ)
+par le risque de généralisation μ(θˆ) dépend de la dimension d de l’espace des paramètres, et plus précisément du rapport d/m entre cette dimension et la taille de l’échantillon. Preuve. Commençons par prolonger la fonction f à Rd en posant
+f (z, θ) = f (z, θ/‖θ‖) (θ ∈ Rd \Bd).
+Soit η > 0 dont la valeur sera précisée ultérieurement et ν la mesure de probabilité uniforme sur la boule (1 + η)Bd de rayon 1 + η. Pour tout θ ∈ Bd, considérons ρθ la mesure uniforme sur la boule θ + ηBd de rayon η centrée en θ. Le volume d’une boule de Rd étant proportionnel à son rayon élevé à la puissance d, on a
+K(ρθ, ν) =
+∫
+Bd
+d log
+(1 + η
+η
+)
+dρθ(u) = d log(1 + η−1) (θ ∈ Bd).
+Il résulte de la proposition 3.3 en y remplaçant Xi par f (Zi, θ) que pour tout θ ∈ Rd, la
+dérivée seconde ∂2ψi(λ,θ)
+∂λ2 est la variance d’une VA à valeurs dans
+[
+inf
+z∈Z f (z, θ) , sup
+z∈Z
+f (z, θ)
+]
+, ce
+qui entraîne, d’après les hypothèses de la proposition 3.9, que
+V (λ, θ) ≤ B2
+4 (∀λ ∈ [0 , Λ[, ∀θ ∈ Rd).
+Ainsi, la proposition 3.8 et la remarque 3.1 impliquent (avec c = K(ρθ, ν) = d log(1 + η−1)) qu’avec une probabilité d’au moins 1 − δ, on a
+∫
+Rd
+μ(θ′)dρθ(θ′) ≤
+∫
+Rd
+M (θ′)dρθ(θ′) + B
+√
+d log(1 + η−1) + log(δ−1)
+2m
+et pour θ = θˆ on obtient qu’avec une probabilité d’au moins 1 − δ
+μ(θˆ) ≤ M (θˆ) + 2gη + B
+√
+d log(1 + η−1) + log(δ−1)
+2m
+29
+
+
+car
+∫
+Rd
+μ(θ′)dρθˆ(θ′) ≥ μ(θˆ) − 1
+m
+∣ ∣ ∣ ∣ ∣
+m
+∑
+i=1
+∫
+Rd
+E
+[f (Zi, θ′) − f (Zi, θˆ)]dρθˆ(θ′)
+∣ ∣ ∣ ∣ ∣
+≥ μ(θˆ) − g
+∫
+Rd
+‖θˆ − θ′‖dρθˆ(θ′) ≥ μ(θˆ) − gη
+et de même
+∫
+Rd
+M (θ′)dρθˆ(θ′) ≤ M (θˆ) + 1
+m
+∣ ∣ ∣ ∣ ∣
+m
+∑
+i=1
+∫
+Rd
+[f (Zi, θ′) − f (Zi, θˆ)]dρθˆ(θ′)
+∣ ∣ ∣ ∣ ∣
+≤ M (θˆ) + gη.
+Soit θ? ∈ Bd tel que
+μ(θ?) = inf
+θ∈Bd
+μ(θ)
+(qui existe car θ 7→ μ(θ) est continue sur le compact Bd). Il résulte de l’inégalité de Hoeffding qu’avec une probabilité d’au moins 1 − δ
+M (θ?) ≤ μ(θ?) + B
+√
+log(δ−1)
+2m .
+Par définition de θˆ, on a M (θˆ) ≤ M (θ?), donc avec une probabilité d’au moins 1 − 2δ
+μ(θˆ) ≤ μ(θ?) + B
+{√
+d log(1 + η−1) + log(δ−1)
+2m +
+√
+log(δ−1)
+2m
+}
++ 2gη.
+Enfin, le choix η = B
+4g
+√d
+2m permet de conclure, en remplaçant δ par δ/2.
+Proposition 3.10 Supposons que Θ = Rd, qu’il existe une fonction (z, θ) 7→ ∇f (z, θ) ∈ Rd mesurable et des constantes strictement positives g et H telles que ∀z ∈ Z, ∀θ, θ′ ∈ Rd,
+|f (z, θ) − f (z, θ′)| ≤ g‖θ − θ′‖
+|f (z, θ) − f (z, θ′) − 〈∇f (z, θ), θ′ − θ〉| ≤ H
+2 ‖θ′ − θ‖2.
+Soient θ? ∈ arg minθ∈Bd μ(θ) et θˆ ∈ arg minθ∈Bd M (θ). Introduisons la fonction
+R?
++ 3 h 7→ χ(h) = sup
+θ∈Bd
+{h
+2 ‖θ − θ∗‖2 − μ(θ) + μ(θ?)
+}
+.
+Alors, pour tout h > 0, avec une probabilité d’au moins 1 − δ
+‖θˆ − θ?‖2 ≤ 8g2
+mh2
+[( 8H
+h +1
+)
+d + 2 log(δ−1)
+]
++ 4χ(h)
+h
+μ(θˆ) − μ(θ?) ≤ 4g2
+mh
+[( 8H
+h +1
+)
+d + 2 log(δ−1)
+]
++ χ(h).
+Dans le cas où il existe h > 0 tel que χ(h) = 0, on obtient ainsi une vitesse de convergence en d/m au lieu d’une vitesse en √d/m sous les hypothèses plus faibles de la proposition 3.9. Preuve. Soit β > 0, choisissons des densités gaussiennes ρθ = N (θ, β−1I) et ν = ρθ?. On a 16
+K(ρθ, ν) = β‖θ − θ?‖2
+2.
+16. En effet,
+K(ρθ0 , ν) = Eρθ0
+{
+log
+[
+exp
+( −β 2
+[
+(θ − θ0)T (θ − θ0) − (θ − θ?)T (θ − θ?)
+]
+)]}
+=β
+2 Eρθ0
+{2θT θ0 − θT
+0 θ0 − 2θT θ? + θT
+? θ?
+}= β
+2
+(θT
+0 θ0 − 2θT
+0 θ? + θT
+? θ?
+) = β‖θ0 − θ?‖2
+2.
+30
+
+
+Nous allons appliquer la proposition 3.6 à la fonction (z, θ) 7→ f (z, θ?)−f (z, θ) = f ̃(z, θ). Notons
+respectivement ψ ̃i, ψ ̃, μ ̃ et M ̃ les fonctions ψi, ψ, μ et M associées à f ̃. On a μ ̃(θ) = μ(θ?)−μ(θ),
+M ̃ (θ) = M (θ?) − M (θ) et (d’après la proposition 3.2 en remplaçant Xi par f ̃(Zi, θ))
+ψ ̃′′
+i (λ, θ) = var(Yi) ≤ E[Y 2
+i ]=
+E
+{
+[f (Zi, θ?) − f (Zi, θ)]2eλf ̃(Zi,θ)
+}
+E
+[eλf ̃(Zi,θ)]
+≤
+E
+{
+[g‖θ − θ?‖]2eλf ̃(Zi,θ)
+}
+E
+[eλf ̃(Zi,θ)] = g2‖θ − θ?‖2,
+donc ψ ̃′′(λ, θ) ≤ g2‖θ − θ?‖2 et ψ ̃(λ, θ) ≤ λμ ̃(θ) + λ2g2‖θ−θ?‖2
+2 = λ[μ(θ?) − μ(θ)] + λ2g2‖θ−θ?‖2
+2. Ainsi, il résulte de la deuxième assertion de la proposition 3.6 qu’avec une probabilité d’au moins 1 − δ
+∫
+Rd
+M ̃ (θ′)dρθ(θ′) ≤ 1
+λ
+∫
+Rd
+ψ ̃(λ, θ′)dρθ(θ′) + β‖θ − θ?‖2
+2mλ + log(δ−1)
+mλ
+≤
+∫
+Rd
+{
+μ ̃(θ′) + λg2‖θ′ − θ?‖2
+2
+}
+dρθ(θ′) + β‖θ − θ?‖2
+2mλ + log(δ−1)
+mλ
+ce qui s’écrit
+∫
+Rd
+μ(θ′)dρθ(θ′) − μ(θ?) ≤
+∫
+Rd
+M (θ′)dρθ(θ′) − M (θ?) + λg2
+2
+∫
+Rd
+‖θ′ − θ‖2dρθ(θ′) +
++ β‖θ − θ?‖2
+2mλ + log(δ−1)
+mλ .
+En remarquant que
+f (Zi, θ′) = f (Zi, θ) + 〈∇f (Zi, θ), θ′ − θ〉 + f (Zi, θ′) − f (Zi, θ) − 〈∇f (Zi, θ), θ′ − θ〉
+et ∫
+Rd(θ′ − θ)dρθ(θ′) = 0, on obtient après double intégration et moyenne statistique
+∫
+Rd
+μ(θ′)dρθ(θ′) = μ(θ) + 1
+m
+m
+∑
+i=1
+E
+{∫
+Rd
+[
+f (Zi, θ′) − f (Zi, θ) − 〈∇f (Zi, θ), θ′ − θ〉
+]
+dρθ(θ′)
+}
+≥ μ(θ) − H
+2
+∫
+Rd
+‖θ′ − θ‖2dρθ(θ′) = μ(θ) − Hd
+2β ;
+de même ∫
+Rd M (θ′)dρθ(θ′) ≤ M (θ) + Hd
+2β . Ainsi, avec une probabilité d’au moins 1 − δ, pour tout θ ∈ Bd, on a
+μ(θ) − μ(θ?) ≤ M (θ) − M (θ?) + Hd
+β + λg2d
+2β + λg2‖θ − θ?‖2
+2 + β‖θ − θ?‖2
+2mλ + log(δ−1)
+mλ .
+De plus, par définition de χ, pour tout θ ∈ Bd, on a μ(θ) − μ(θ?) ≥ h
+2 ‖θ − θ?‖2 − χ(h) et par
+construction M (θˆ) ≤ M (θ?) donc avec une probabilité d’au moins 1 − δ
+h
+2 ‖θˆ − θ?‖2 ≤ χ(h) + d
+β
+(
+H + λg2
+2
+)
++
+( λg2
+2+ β
+2mλ
+)
+‖θˆ − θ?‖2 + log(δ−1)
+mλ
+ou encore
+‖θˆ − θ?‖2
+(
+1 − λg2
+h− β
+mλh
+)
+≤ 2χ(h)
+h + 2d
+βh
+(
+H + λg2
+2
+)
++ 2 log(δ−1)
+mhλ .
+Choisissons alors λ = h
+4g2 et β = mhλ
+4 = mh2
+16g2 . On obtient
+1
+2 ‖θˆ − θ?‖2 ≤ 2χ(h)
+h + 32g2d
+mh3
+(
+H+h
+8
+)
++ 8g2 log(δ−1)
+mh2
+31
+
+
+qui donne la première majoration de la proposition. Pour prouver la seconde, on utilise
+‖θˆ − θ?‖2 ≤ 2
+h
+[μ(θˆ) − μ(θ?) + χ(h)]
+pour obtenir
+μ(θˆ) − μ(θ?) ≤ d
+β
+(
+H + λg2
+2
+)
++
+( λg2
+2+ β
+2mλ
+)2
+h
+[μ(θˆ) − μ(θ?) + χ(h)] + log(δ−1)
+mλ
+et l’on conclut en remplaçant λ et β par leurs valeurs ci-dessus.
+4 Bornes bayésiennes PAC pour le problème de classifica
+tion supervisée
+Soient Z1, . . . , Zm m VA i.i.d. à valeurs dans Z un espace mesurable, soit Θ un espace mesurable de paramètres et f : Z × Θ → {0, 1} une fonction mesurable binaire, que nous appellerons fonction coût 17 par abus de langage. Notre objectif est de minimiser par rapport à θ le risque
+R(θ) =
+∫
+Z
+f (z, θ)dPZ(z) = E[f (Z, θ) | θ],
+où PZ est la loi marginale des Zi. De façon plus précise, ne connaissant pas la loi PZ, l’objectif
+est de trouver un estimateur θˆ(Z1, . . . , Zm) dépendant de l’échantillon observé S = Z1, . . . , Zm ayant un excès de risque
+R(θˆ) − inf
+θ∈Θ R(θ) =
+∫
+Z
+f (z, θˆ)dPZ(z) − inf
+θ∈Θ
+∫
+Z
+f (z, θ)dPZ(z)
+petit. Cette quantité est aléatoire car θˆ dépend de l’échantillon aléatoire S. Par conséquent, dire quelle est petite peut être compris de différentes manières. Nous nous focaliserons sur les déviations de l’excès de risque, c’est-à-dire que nous rechercherons des estimateurs qui donnent un risque petit avec une probabilité proche de 1. Un exemple clé d’un tel problème est celui de la classification supervisée, où Z = X × Y, avec Y un ensemble fini, les Zi = (Xi, Yi) sont les couples (entrée, sortie) de la classification, {hθ : X → Y, θ ∈ Θ} est une famille indexée par Θ de règles de classification considérées et la fonction perte est l’erreur de classification
+L[(x, y), θ] = 1 [hθ(x) 6= y] .
+L’objectif est donc de minimiser l’erreur de classification moyenne PX,Y [hθ(X) 6= Y ] à partir de la connaissance d’un échantillon (Xi, Yi)1≤i≤m observé.
+4.1 Bornes de déviation pour des sommes de VA de Bernoulli
+Pour λ ∈ R, considérons la transformation log-Laplace (normalisée) d’une loi de Bernoulli de probabilité p :
+Φλ(p) d=ef − 1
+λ log[1 − p + p exp(−λ)],
+la divergence de Kullback-Leibler de deux lois de Bernoulli :
+K(q, p) d=ef q log
+(q
+p
+)
++ (1 − q) log
+(1 − q
+1−p
+)
+17. Voir l’exemple 3.1 page 26, où Zi = (Xi, Yi) et f (Z, θ) = L[hθ(X), Y ].
+32
+
+
+et notons PS la mesure de probabilité empirique
+PS = 1
+m
+m
+∑
+i=1
+δZi
+d’un échantillon i.i.d. (Zi)1≤i≤m tiré suivant la loi P ⊗m
+Z ∈ P1
++(Zm). Nous introduisons des notations courtes pour désigner des intégrales : pour ρ, π ∈ P1
++(Θ) et g ∈ L1(Z ×Θ2, PZ ⊗ρ⊗π),
+g(PZ, ρ, π) =
+∫
+g(z, θ, θ′)dPZ(z)dρ(θ)dπ(θ′),
+de sorte que f (PZ, ρ) = ∫ f (z, θ)dPZ(z)dρ(θ) (par exemple). Commençons par rappeler la borne de Chernoff.
+Proposition 4.1 Pour toute valeur fixée de θ ∈ Θ, l’identité
+∫
+exp[−mλf (PS, θ)]dP ⊗m
+Z = exp {−mλΦλ[f (PZ, θ)]}
+montre qu’avec une probabilité d’au moins 1 − δ,
+f (PZ, θ) ≤ B+
+[f (PS, θ), log(δ−1)/m] ,
+où pour q ∈ [0 ; 1] et η ≥ 0, B+(q, η) = inf
+λ∈R+
+Φ−1
+λ
+(
+q+ η
+λ
+)
+= sup{p ∈ [0 ; 1] : K(q, p) ≤ η}.
+De plus
+−ηq ≤ B+(q, η) − q − √2ηq(1 − q) ≤ 2η(1 − q).
+De même, l’identité ∫ exp[mλf (PS, θ)]dP ⊗m
+Z = exp {mλΦ−λ[f (PZ, θ)]} montre qu’avec une pro
+babilité d’au moins 1 − δ, f (PS, θ) ≤ B− [f (P, θ), log(δ−1)/m], où pour q ∈ [0 ; 1] et η ≥ 0,
+B−(q, η) = inf
+λ∈R+
+{
+Φ−λ(q) + η
+λ
+}
+= sup{p ∈ [0 ; 1] : K(p, q) ≤ η} et
+−ηq ≤ B−(q, η) − q − √2ηq(1 − q) ≤ 2η(1 − q).
+Présentons maintenant une identité importante.
+Proposition 4.2 Pour toutes mesures de probabilité ρ et π sur un espace mesurable telles que K(ρ, π) < ∞, et pour toute fonction mesurable bornée g, définissons la mesure de probabilité transformée πexp(g) π par sa densité
+dπexp(g)
+dπ = exp(g)
+Z , avec Z =
+∫
+exp(g)dπ
+et
+var(g dπ) =
+∫(
+g−
+∫
+g dπ
+)2
+dπ.
+Les moyennes par rapport à ρ et π et la transformée log-Laplace de g sont reliées par les identités
+∫
+g dρ − K(ρ, π) + K(ρ, πexp(g)) = log
+[∫
+exp(g)dπ
+]
+(47)
+=
+∫
+g dπ +
+∫1
+0
+(1 − α) var[g dπexp(αg)]dα. (48)
+33
+
+
+Preuve. La première identité est une application directe des définitions et la deuxième est le développement de Taylor à l’ordre 2 avec reste intégral de 18 f (α) = log [∫ exp(αg) dπ] :
+f (1) = f (0) + f ′(0) + ∫ 1
+0 (1 − α)f ′′(α) dα, car f ′(α) =
+∫ g exp(αg) dπ
+∫ exp(αg) dπ et f ′′(α) = var(g dπexp(αg)).
+Prouvons maintenant la proposition 4.1. Remarquons que
+f (PS, θ) =
+∫
+Z
+f (z, θ)dPS(z) = 1
+m
+m
+∑
+i=1
+f (Zi, θ)
+et
+E {exp[−mλf (PS, θ)] | θ} = E
+[n ∏
+i=1
+e−λf (Zi,θ)
+∣ ∣ ∣ ∣
+θ
+]
+=
+(E[e−λf(Z,θ) ∣
+∣ θ])m
+= exp
+[
+m log
+(∫
+Z
+e−λf(z,θ)dPZ (z)
+)]
+= exp{−mλΦλ[PZ{f (Z, θ) = 1}]} = exp{−mλΦλ[f (PZ, θ)]}.
+Il résulte alors de l’inégalité de Markov, qu’avec une probabilité d’au moins 1 − δ :
+exp[−mλf (PS, θ)] ≤ δ−1 exp{−mλΦλ[f (PZ, θ)]},
+soit
+Φλ[f (PZ, θ)] ≤ f (PS, θ) + log(δ−1)
+mλ .
+L’expression Φλ[f (PZ , θ)] − log(δ−1)
+mλ n’étant pas aléatoire, nous pouvons chercher à optimiser l’inégalité précédente en fonction de λ. Or, ∀λ 6= 0, la fonction p 7→ Φλ(p) de dérivée Φ′
+λ(p) = (− 1
+λ
+) e−λ−1
+1−p+pe−λ est strictement
+croissante sur [0 ; 1] et vérifie Φλ(0) = 0 et Φλ(1) = 1. Nous trouvons donc que
+f (PZ, θ) ≤ B+[f (PS, θ), log(δ−1)/m].
+De plus, pour tout q ∈ [0 ; 1[, et pour tout η > 0, il existe λ > 0, tel que q + η
+λ < 1, donc B+(q, η) < 1. L’application de l’identité (47) à la fonction g(x) = −λx donne pour p, q ∈ [0 ; 1] en notant Ber(p) la loi de Bernoulli de probabilité p
+∫
+g(x)dq(x) − K(q, p) + K[Ber(q), Ber(p)exp(g)] = log
+[∫
+exp[g(x)]d Ber(p)(x)
+]
+= −λΦλ(p),
+soit
+λΦλ(p) = λq + K(q, p) − K(q, pλ) avec pλ = p
+p + (1 − p)eλ ∈ [0 ; 1],
+car d Ber(p)exp(g)
+d Ber(p) (x) = e−λx
+1−p+pe−λ entraîne que Ber(p)exp(g) = Ber(pλ). Ceci montre que
+B+(q, η) = sup{p ∈ [0 ; 1[ : ∀λ > 0, λΦλ(p) ≤ λq + η}
+= sup{p ∈ [q , 1[ : ∀λ > 0, K(q, p) ≤ η + K(q, pλ)}
+= sup{p ∈ [q , 1[ : K(q, p) ≤ η} = sup{p ∈ [0 ; 1[ : K(q, p) ≤ η},
+18. Pour justifier que f est C2, remarquons que pour tout α > 0 et tout k ∈ N
+gk exp(αg) = gk +
+∫α
+0
+gk+1 exp(γg)dγ et
+∫∫ α
+0
+|gk+1(x)| exp[γg(x)]dγdπ(x) < +∞,
+car la fonction g est bornée. On peut donc appliquer le théorème de Fubini :
+∫
+gk(x) exp[αg(x)]dπ(x) =
+∫
+gk(x)dπ(x) +
+∫α
+0
+(∫
+gk+1(x) exp[γg(x)]dπ(x)
+)
+dγ
+et l’application α 7→ ∫ gk+1(x) exp[γg(x)]dπ(x) étant continue d’après le théorème de convergence dominée, on déduit que l’application α 7→ ∫ gk(x) exp[αg(x)]dπ(x) est C1 de dérivée α 7→ ∫ gk+1(x) exp[αg(x)]dπ(x), donc α 7→ ∫ exp[αg(x)]dπ(x) est C∞, à valeurs dans R∗+, donc f est infiniment dérivable.
+34
+
+
+car pour q ≤ p < 1 et λ0 = log
+( q−1−1 p−1−1
+)
+, on a λ0 ≥ 0 et pλ0 = q.
+Remarquons maintenant que ∂K(x,p)
+∂x = log
+(
+x p
+)
+−log
+(
+1−x 1−p
+)
+et ∂2K(x,p)
+∂x2 = x−1(1−x)−1 de sorte
+que la formule de Taylor à l’ordre 2 appliqué K(x, p) en x = p donne K(q, p) = (p−q)2
+2 K′′
+xx(y, p)
+avec q < y < p. Ainsi, si 1
+2 ≤ q, alors K′′
+xx(y, p) ≥ K′′
+xx(q, p), donc
+K(q, p) ≥ (p − q)2
+2q(1 − q)
+et l’inégalité K(q, p) ≤ η entraîne p ≤ q + √2ηq(1 − q). Et si q ≤ 1
+2 , alors K′′
+xx(y, p) ≥ 1
+p(1−q) ,
+donc
+K(q, p) ≥ (p − q)2
+2p(1 − q)
+et l’inégalité K(q, p) ≤ η entraîne (p − q)2 ≤ 2ηp(1 − q), qui implique
+(p − q)2 − 2(p − q)η(1 − q) ≤ 2ηq(1 − q), i.e., [p − q − η(1 − q)]2 ≤ 2ηq(1 − q) + η2(1 − q)2
+et donc
+p − q ≤ η(1 − q) + √2ηq(1 − q) + η2(1 − q)2 ≤ √2ηq(1 − q) + 2η(1 − q).
+D’autre part, nous avons K′′
+xx(y, p) < 1
+q(1−p) puisque q < y < p, donc
+K(q, p) < (p − q)2
+2q(1 − p)
+et ainsi si K(q, p) = η, alors (p − q)2 ≥ 2ηq(1 − p), impliquant
+p − q ≥ −ηq + √2ηq(1 − q) + η2q2 ≥ √2ηq(1 − q) − ηq.
+La preuve de la deuxième partie de la proposition 4.1 se fait en suivant la même démarche.
+4.2 Bornes bayésiennes PAC
+Nous allons rendre la proposition 4.1 uniforme par rapport à θ. L’approche bayésienne PAC pour répondre à cette question consiste à rendre θ aléatoire, nous considérerons donc des distributions de probabilité jointes de Z1, . . . , Zm, θ qui admettent toujours P ⊗m
+Z comme
+distribution de Zm
+1 et la loi conditionnelle de θ sachant l’échantillon Zm
+1 est donnée par un noyau de probabilités de transition ρ : Zm → P1
++(Θ), appelé dans ce contexte 19 “loi a posteriori ”. Cette loi a posteriori ρ sera comparée à une loi a priori (i.e., non aléatoire) π ∈ P1
++(Θ).
+Proposition 4.3 Introduisons la notation
+BΛ(q, η) = inf
+λ∈Λ Φ−1
+λ
+(
+q+ η
+λ
+)
+.
+Pour toute loi a priori π ∈ P1
++(Θ) et tout λ ∈ R+,
+∫
+exp
+{
+sup
+ρ∈P 1
++(Θ)
+[mλ {Φλ[f (PZ, ρ)] − f (PS, ρ)} − K(ρ, π)]
+}
+dP ⊗m
+Z ≤ 1, (49)
+et donc pour tout ensemble fini Λ ⊂ R+, avec une probabilité d’au moins 1 − δ, pour tout ρ ∈ P1
++(Θ),
+f (PZ, ρ) ≤ BΛ
+(
+f (PS, ρ), K(ρ, π) + log(|Λ|/δ)
+m
+)
+.
+19. Nous supposerons que ρ est un noyau de probabilités de transition régulier, c’est-à-dire que pour tout ensemble mesurable A, l’application (z1, . . . , zm) 7→ ρ(z1, . . . , zm | A) est mesurable. Nous supposerons également que la tribu sur Θ est générée à partir d’un nombre fini de sous-ensembles de Θ.
+35
+
+
+Preuve L’identité (47) appliquée à g(θ) = mλ{Φλ[f (P, θ)] − f (PS, θ)} donne
+∫
+mλ{Φλ[f (P, θ)]−f (PS, θ)}dρ(θ)−K(ρ, π) ≤ log
+[∫
+exp [mλ{Φλ[f (P, θ)] − f (PS, θ)}] dπ(θ)
+]
+et, puisque mf (PS, θ) = ∑m
+i=1 f (Zi, θ), en posant p = f (P, θ) on a
+exp {mλΦλ[f (P, θ)]}
+exp [mλf (PS, θ)] = exp[−m log(1 − p + pe−λ)]
+exp[λ ∑
+i f (Zi, θ)] =
+m
+∏
+i=1
+( 1 − p + pe−λ
+eλf (Zi,θ)
+)
+≤ 1,
+car λ ≥ 0. Enfin, la fonction Φλ étant convexe 20, l’inégalité de Jensen entraîne
+Φλ[f (P, ρ)] = Φλ
+(∫
+f (P, θ)dρ(θ)
+)
+≤
+∫
+Φλ[f (P, θ)]dρ(θ).
+Remarquons que PS et ρ dépendent de S et sont donc aléatoires. Soient ρ une loi a posteriori et δ > 0. Pour λ ∈ Λ, posons
+Aλ = {zm
+1 ∈ Zm : exp [mλ (Φλ[f (P, ρ)] − f (PS, ρ)) − K(ρ, π)] ≥ δ−1} .
+Il résulte de l’identité de Markov que P ⊗m
+Z (Aλ) ≤ δ et donc P ⊗m
+Z (∪λ∈ΛAλ) ≤ |Λ|δ. Ainsi, avec une probabilité d’au moins 1 − δ, ∀λ ∈ Λ,
+Φλ[f (P, ρ)] ≤ f (PS, ρ) + log(|Λ|/δ) + K(ρ, π)
+mλ ,
+ce qui termine la démonstration. Pour p ∈ [0 ; 1], posons
+v(p) =
+{ p(1 − p) si p ≤ 1/2 1/4 si p ≥ 1/2.
+Proposition 4.4 Soient m ∈ N∗ et
+t= 1
+4 log
+(m
+8 log[(m + 1)/δ]
+)
+.
+Avec une probabilité d’au moins 1 − δ, pour toute loi a posteriori ρ ∈ P1
++(Θ),
+f (PZ, ρ) ≤ f (PS, ρ) + Bm[f (PS, ρ), K(ρ, π), δ],
+où
+Bm(q, e, δ) = max
+{√
+2v(q){e + log[(m + 1)/δ]}
+m cosh(t/m)
++ 2(1 − q){e + log[(m + 1)/δ]}
+m cosh2(t/m), 2{e + log[(m + 1)/δ]}
+m
+}
+≤
+√
+2v(q){e + log[(m + 1)/δ]}
+m cosh(t/m) + 2{e + log[(m + 1)/δ]}
+m cosh2(t/m).
+De plus, dès que m ≥ 5, Bblog(m)2c−1(q, e, δ) ≤ B(q, e, δ), où
+B(q, e, δ) =
+√
+2v(q){e + log[log(m)2/δ]}
+m cosh[log(m)−1)] +
++ 2{e + log[log(m)2/δ]}
+m cosh2[log(m)−1], (50)
+20. En effet, Φ′
+λ(p) = −1
+λ
+( −1+e−λ 1−p+pe−λ
+)
+et Φ′′
+λ(p) = (−1+e−λ)2
+λ(1−p+pe−λ)2 .
+36
+
+
+ainsi avec une probabilité d’au moins 1 − δ, pour toute loi a posteriori ρ,
+f (PZ, ρ) ≤ f (PS, ρ) +
+√
+2v[f (PS, ρ)]{K(ρ, π) + log[log(m)2/δ]}
+m cosh[log(m)−1)]
++ 2{K(ρ, π) + log[log(m)2/δ]}
+m cosh2[log(m)−1].
+Preuve. Posons
+q = f (PS, ρ),
+η = K(ρ, π) + log[(m + 1)/δ]
+m,
+λmin =
+√
+8 log[(m + 1)/δ]
+m,
+Λ = {λ1−k/m
+min , k = 0, . . . , m},
+p = BΛ(q, η),
+λˆ =
+√
+2η
+v(p) .
+En appliquant l’identité (48) aux distributions de Bernoulli on obtient pour g(x) = −λx :
+−λΦλ(p) = −λp +
+∫1
+0
+(1 − α)λ2pαλ(1 − pαλ)dα = −λp +
+∫λ
+0
+λ−α
+λ λ2pα(1 − pα) dα
+λ
+soit
+Φλ(p) = p − 1
+λ
+∫λ
+0
+(λ − α)pα(1 − pα)dα ≤ q + η
+λ.
+De plus 21 pα ≤ p, donc
+p − q ≤ inf
+λ∈Λ
+[ λv(p)
+2 +η
+λ
+]
+= inf
+λ∈Λ
+√2ηv(p) cosh
+[
+log
+( ˆλ
+λ
+)]
+.
+Puisque v(p) ≤ 1/4 et η ≥ log[(m+1)/δ]
+m,
+√
+2η
+v(p) = λˆ ≥ λmin =
+√
+8 log[(m + 1)/δ]
+m.
+Si λmin ≤ λˆ ≤ max Λ = 1, alors log(ˆλ) est à une distance d’au plus t/m d’un λ ∈ Λ, car log(Λ)
+est une grille à pas constant de taille − log(λmin)
+m = 2t/m. Donc
+p − q ≤ √2ηv(p) cosh(t/m).
+Remarquons que pour tout λ, Φλ(0) = 0, Φλ(1) = 1 et p 7→ Φλ(p) étant strictement croissante et convexe sur [0 ; 1], q 7→ Φ−1
+λ (q) est strictement croissante et concave sur [0 ; 1]. Donc pour
+tout q ∈ [0 ; 1], q ≤ Φ−1
+λ (q) et q ≤ infλ∈Λ Φ−1
+λ (q) ≤ infλ∈Λ Φ−1
+λ
+(q + η
+λ
+) = p.
+Ainsi, p(1 − p) ≤ p(1 − q) et si q ≤ 1/2, alors v(p) ≤ p(1 − q), et en posant c = cosh(t/m), nous obtenons l’inégalité quadratique en p : p2 − 2p[q + c2η(1 − q)] + q2, de discriminant c2η(1 − q)[2q + c2η(1 − q)], donc en notant p2 la plus grande racine
+p ≤ p2 = q + c2η(1 − q) + c√2ηq(1 − q) + c2η2(1 − q)2 ≤ q + c√2ηq(1 − q) + 2c2η(1 − q).
+21. En effet, (1 − p) ≤ (1 − p)eα entraîne [p + (1 − p)eα]−1 ≤ 1, i.e., pα
+p ≤ 1.
+37
+
+
+Maintenant si q ≥ 1/2, alors v(q) = v(p) = 1
+4 et p − q ≤ √2v(q)c, donc dans tous les cas
+p − q ≤ √2ηv(q) cosh(t/m) + 2η(1 − q) cosh2(t/m). (51)
+Considérons maintenant le cas ˆλ > 1, donc v(p) < 2η, dans ce cas infλ∈Λ cosh
+[
+log
+( λˆ λ
+)]
+est
+obtenu pour λ = 1 donc
+p − q ≤ v(p)
+2 + η < 2η.
+Pour conclure, appliquons la proposition 4.3 : avec une probabilité d’au moins 1 − δ et pour toute loi a posteriori ρ,
+f (PZ, ρ) ≤ p ≤ q + max{2η, √2ηv(q) cosh(t/m) + 2η(1 − q) cosh2(t/m)},
+qui correspond à ce que l’on doit démontrer. Dans le cas particulier où m = blog(m)2c − 1 ≥ log(m)2 − 2,
+t
+m≤ 1
+4[log(m)2 − 2] log
+(m
+8 log[log(m)2 − 1]
+)
+≤1
+log(m) .
+La dernière inégalité est valide dès que m ≥ exp(√2) ' 4,11 pour que log(m)2 − 2 > 0 et 3 log(m)2 − 8 + log(m) log{8 log[log(m)2 − 1]} ≥ 0 (on peut le vérifier numériquement).
+Références
+[1] S. Mallat, L’apprentissage face à la malédiction de la grande dimension, Cours du Collège de France, 2018.
+[2] S. Shalev-Shwartz et S. Ben-David, Understanding Machine Learning, from theory to algorithms, Cambridge University Press, 2014.
+[3] E. Slud, “Distribution inequalities for the binomial law”, The Annals of Probability, vol. 5, no. 3, pp. 404–412, 1977.
+[4] M. Telgarsky, “Central binomial tail bounds”, preprint, https ://arxiv.org/abs/0911.2077, 2010.
+[5] O. Catoni, Measures of complexity, Festschrift for Alexey Chervonenkis, Vladimir Vovk, Harris Papadopoulos, Alexander Gammerman Editors, chap. 20, Springer, 2015.
+38

@@ -1,0 +1,3631 @@
+FIMFA
+Inte ́gration, Probabilite ́s
+et Processus Ale ́atoires
+Jean-Franc ̧ois Le Gall
+Septembre 2006
+D ́epartement Math ́ematiques et Applications Ecole normale sup ́erieure de Paris
+
+
+2
+
+
+Sommaire
+I Int ́egration 7
+1 Espaces mesure ́s 9 1.1 Ensembles mesurables . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9 1.2 Mesures positives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11 1.3 Fonctions mesurables . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13 1.4 Classe monotone . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+2 Inte ́gration par rapport `a une mesure 17 2.1 Int ́egration de fonctions positives . . . . . . . . . . . . . . . . . . . . . . . . 17 2.2 Fonctions int ́egrables . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23 2.3 Int ́egrales d ́ependant d’un param`etre . . . . . . . . . . . . . . . . . . . . . . 26
+3 Construction de mesures 29 3.1 Mesures ext ́erieures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29 3.2 La mesure de Lebesgue . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31 3.3 Liens avec l’int ́egrale de Riemann . . . . . . . . . . . . . . . . . . . . . . . . 38 3.4 Un exemple d’ensemble non mesurable . . . . . . . . . . . . . . . . . . . . . 39 3.5 Int ́egrale de Stieltjes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39 3.6 Le th ́eor`eme de repr ́esentation de Riesz . . . . . . . . . . . . . . . . . . . . . 41
+4 Espaces Lp 43 4.1 D ́efinition et in ́egalit ́e de H ̈older . . . . . . . . . . . . . . . . . . . . . . . . . 43 4.2 L’espace de Banach Lp(E, A, μ) . . . . . . . . . . . . . . . . . . . . . . . . . 46 4.3 Th ́eor`emes de densit ́e dans les espaces Lp . . . . . . . . . . . . . . . . . . . . 49 4.4 Le th ́eor`eme de Radon-Nikodym . . . . . . . . . . . . . . . . . . . . . . . . . 52
+5 Mesures produits 57 5.1 G ́en ́eralit ́es sur les espaces produits . . . . . . . . . . . . . . . . . . . . . . . 57 5.2 Construction de la mesure-produit . . . . . . . . . . . . . . . . . . . . . . . . 58 5.3 Le th ́eor`eme de Fubini . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61 5.4 Applications . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63 5.4.1 Int ́egration par parties . . . . . . . . . . . . . . . . . . . . . . . . . . 63 5.4.2 Convolution . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64 5.4.3 Calcul du volume de la boule unit ́e . . . . . . . . . . . . . . . . . . . 67
+3
+
+
+6 Mesures signe ́es 69 6.1 D ́efinition et variation totale . . . . . . . . . . . . . . . . . . . . . . . . . . . 69 6.2 La d ́ecomposition de Jordan . . . . . . . . . . . . . . . . . . . . . . . . . . . 72 6.3 La dualit ́e Lp − Lq . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 75 6.4 Le th ́eor`eme de repr ́esentation de Riesz . . . . . . . . . . . . . . . . . . . . . 79
+7 Formule de changement de variables et comple ́ments 81 7.1 La formule de changement de variables . . . . . . . . . . . . . . . . . . . . . 81 7.2 Mesure de Lebesgue sur la sph`ere unit ́e . . . . . . . . . . . . . . . . . . . . . 85
+II Probabilit ́es 89
+8 Fondements de la the ́orie des probabilite ́s 91 8.1 D ́efinitions g ́en ́erales . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 91 8.1.1 Espaces de probabilit ́e . . . . . . . . . . . . . . . . . . . . . . . . . . 91 8.1.2 Variables al ́eatoires . . . . . . . . . . . . . . . . . . . . . . . . . . . . 93 8.1.3 Esp ́erance math ́ematique . . . . . . . . . . . . . . . . . . . . . . . . . 94 8.1.4 Exemple : le paradoxe de Bertrand . . . . . . . . . . . . . . . . . . . 96 8.1.5 Lois classiques . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 98 8.1.6 Fonction de r ́epartition d’une variable al ́eatoire r ́eelle . . . . . . . . . 99 8.1.7 Tribu engendr ́ee par une variable al ́eatoire . . . . . . . . . . . . . . . 100 8.2 Moments de variables al ́eatoires . . . . . . . . . . . . . . . . . . . . . . . . . 101 8.2.1 Moments d’ordre p et variance . . . . . . . . . . . . . . . . . . . . . . 101 8.2.2 La r ́egression lin ́eaire . . . . . . . . . . . . . . . . . . . . . . . . . . . 103 8.2.3 Fonctions caract ́eristiques . . . . . . . . . . . . . . . . . . . . . . . . 104 8.2.4 Fonction g ́en ́eratrice . . . . . . . . . . . . . . . . . . . . . . . . . . . 107
+9 Inde ́pendance 109 9.1 Ev ́enements ind ́ependants . . . . . . . . . . . . . . . . . . . . . . . . . . . . 109 9.2 Variables al ́eatoires et tribus ind ́ependantes . . . . . . . . . . . . . . . . . . 111 9.3 Le lemme de Borel-Cantelli . . . . . . . . . . . . . . . . . . . . . . . . . . . 116 9.4 Sommes de variables al ́eatoires ind ́ependantes. . . . . . . . . . . . . . . . . . 119
+10 Convergence de variables ale ́atoires 125 10.1 Les diff ́erentes notions de convergence . . . . . . . . . . . . . . . . . . . . . . 125 10.2 La loi forte des grands nombres . . . . . . . . . . . . . . . . . . . . . . . . . 127 10.3 La convergence en loi . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 131 10.4 Deux applications . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 137 10.4.1 La convergence des mesures empiriques . . . . . . . . . . . . . . . . . 137 10.4.2 Le th ́eor`eme central limite . . . . . . . . . . . . . . . . . . . . . . . . 138 10.4.3 Extension au cas vectoriel . . . . . . . . . . . . . . . . . . . . . . . . 140
+4
+
+
+11 Conditionnement 143 11.1 Conditionnement discret . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 143 11.2 La d ́efinition de l’esp ́erance conditionnelle . . . . . . . . . . . . . . . . . . . 145 11.2.1 Cas des variables int ́egrables . . . . . . . . . . . . . . . . . . . . . . . 145 11.2.2 Cas des variables positives . . . . . . . . . . . . . . . . . . . . . . . . 147 11.2.3 Le cas particulier des variables de carr ́e int ́egrable . . . . . . . . . . . 150 11.3 Propri ́et ́es sp ́ecifiques de l’esp ́erance conditionnelle . . . . . . . . . . . . . . . 150 11.4 Calculs d’esp ́erance conditionnelle . . . . . . . . . . . . . . . . . . . . . . . . 153 11.4.1 Conditionnement discret . . . . . . . . . . . . . . . . . . . . . . . . . 153 11.4.2 Cas des variables `a densit ́e . . . . . . . . . . . . . . . . . . . . . . . . 153 11.4.3 Conditionnement gaussien . . . . . . . . . . . . . . . . . . . . . . . . 154 11.5 Probabilit ́es de transition et lois conditionnelles . . . . . . . . . . . . . . . . 157
+III Processus al ́eatoires 161
+12 The ́orie des martingales `a temps discret 163 12.1 D ́efinitions et exemples . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 163 12.2 Temps d’arrˆet . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 167 12.3 Convergence presque sˆure des martingales . . . . . . . . . . . . . . . . . . . 169 12.4 La convergence dans Lp pour p > 1 . . . . . . . . . . . . . . . . . . . . . . . 176 12.5 Uniforme int ́egrabilit ́e et martingales . . . . . . . . . . . . . . . . . . . . . . 179 12.6 Martingales r ́etrogrades . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 186
+13 Chaıˆnes de Markov 191 13.1 D ́efinition et premi`eres propri ́et ́es . . . . . . . . . . . . . . . . . . . . . . . . 191 13.2 Quelques exemples . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 193 13.2.1 Variables al ́eatoires ind ́ependantes . . . . . . . . . . . . . . . . . . . . 193 13.2.2 Marches al ́eatoires sur Zd . . . . . . . . . . . . . . . . . . . . . . . . 194 13.2.3 Marche al ́eatoire simple sur un graphe . . . . . . . . . . . . . . . . . 194 13.2.4 Processus de branchement . . . . . . . . . . . . . . . . . . . . . . . . 194 13.3 La chaˆıne de Markov canonique . . . . . . . . . . . . . . . . . . . . . . . . . 195 13.4 La classification des  ́etats . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 200 13.5 Mesures invariantes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 206 13.6 Comportement asymptotique . . . . . . . . . . . . . . . . . . . . . . . . . . 211 13.7 Martingales et chaˆınes de Markov . . . . . . . . . . . . . . . . . . . . . . . . 215
+14 Introduction au mouvement brownien 219 14.1 Le mouvement brownien comme limite de marches al ́eatoires . . . . . . . . . 219 14.2 La construction du mouvement brownien . . . . . . . . . . . . . . . . . . . . 222 14.3 La mesure de Wiener . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 226 14.4 Premi`eres propri ́et ́es du mouvement brownien . . . . . . . . . . . . . . . . . 227 14.5 La propri ́et ́e de Markov forte . . . . . . . . . . . . . . . . . . . . . . . . . . . 230 14.6 Fonctions harmoniques et probl`eme de Dirichlet . . . . . . . . . . . . . . . . 233
+5
+
+
+14.7 Fonctions harmoniques et mouvement brownien . . . . . . . . . . . . . . . . 241
+6
+
+
+Partie I
+Inte ́gration
+7
+
+
+
+
+Chapitre 1
+Espaces mesure ́s
+L’id ́ee de d ́epart de la th ́eorie de la mesure est d’assigner un nombre r ́eel positif (la mesure de ce sous-ensemble) `a chaque sous-ensemble d’un ensemble donn ́e, de mani`ere `a satisfaire certaines propri ́et ́es naturelles d’additivit ́e (la mesure d’une r ́eunion disjointe doit ˆetre la somme des mesures). Pour des raisons profondes, il n’est pas possible en g ́en ́eral de d ́efinir la mesure de n’importe quel sous-ensemble, et on doit se restreindre `a une certaine classe (tribu) de sous-ensembles, appel ́es les sous-ensembles mesurables : un ensemble muni d’une tribu est appel ́e espace mesurable. Ce chapitre introduit les notions fondamentales de tribu (= famille des ensembles mesurables), de mesure sur un espace mesurable, et de fonctions mesurables, qui sont les fonctions dont on saura plus tard de ́finir l’int ́egrale. Le dernier paragraphe  ́enonce une forme du lemme de classe monotone, qui joue un rˆole tr`es important `a la fois en th ́eorie de la mesure et en th ́eorie des probabilit ́es.
+1.1 Ensembles mesurables
+De ́finition 1.1.1 Soit E un ensemble quelconque. Une tribu (ou σ-alg`ebre) sur E est une famille A de parties de E telle que:
+(i) E ∈ A ;
+(ii) A ∈ A ⇒ Ac ∈ A ;
+(iii) Si An ∈ A pour tout n ∈ N, on a aussi ⋃
+n∈N
+An ∈ A.
+Les  ́el ́ements de A sont appel ́es parties mesurables, ou parfois A-mesurables s’il y a ambiguˆıt ́e. On dit que (E, A) est un espace mesurable.
+Enonc ̧ons quelques cons ́equences de la d ́efinition :
+(1) ∅ ∈ A
+(2) Si An ∈ A pour tout n ∈ N, on a aussi ⋂
+n∈N
+An ∈ A.
+9
+
+
+(3) Puisqu’on peut toujours prendre An = ∅ pour n assez grand, la propri ́et ́e (iii) entraˆıne que A est stable par r ́eunions finies (et de mˆeme par intersection finies).
+Exemples.
+• A = P(E) ;
+• A = {∅, E} est la tribu triviale ;
+• l’ensemble des parties de E qui sont (au plus) d ́enombrables ou dont le compl ́ementaire est (au plus) d ́enombrable forme une tribu sur E.
+Pour donner des exemples plus int ́eressants, on remarque qu’une intersection quelconque de tribus est encore une tribu. Ceci conduit `a la d ́efinition suivante.
+De ́finition 1.1.2 Soit C un sous-ensemble de P(E). Il existe alors une plus petite tribu sur E qui contienne C. Cette tribu not ́ee σ(C) peut ˆetre d ́efinie par
+σ(C) = ⋂
+A tribu,C⊂A
+A.
+σ(C) est appel ́ee la tribu engendr ́ee par C.
+Tribu bore ́lienne. Pour donner un premier exemple de l’int ́erˆet de la notion de tribu engendr ́ee, consid ́erons le cas o`u E est un espace topologique.
+De ́finition 1.1.3 Supposons que E est un espace topologique, et soit O la classe des ouverts de E. La tribu σ(O) est appel ́ee tribu bor ́elienne et not ́ee B(E).
+La tribu bor ́elienne est donc la plus petite tribu qui contienne tous les ouverts de E. Les  ́el ́ements de B(E) sont appel ́es bor ́eliens de E. Dans la suite, `a chaque fois que l’on consid ́erera un espace topologique, par exemple R ou Rd, on supposera sauf indication du contraire qu’il est muni de sa tribu bor ́elienne.
+Exercice. V ́erifier que la tribu B(R) est aussi engendr ́ee par les intervalles ]a, b[, a, b ∈ R, a < b, ou par les intervalles ] − ∞, a[, a ∈ R, ou encore les intervalles ] − ∞, a[, a ∈ Q (on peut aussi remplacer intervalles ouverts par intervalles ferm ́es).
+Tribu-produit. Un deuxi`eme exemple important de la notion de tribu engendr ́ee est la tribu-produit.
+De ́finition 1.1.4 Soient (E1, A1) et (E2, A2) deux espaces mesurables. La tribu-produit est la tribu sur E1 × E2 d ́efinie par
+A1 ⊗ A2 = σ(A1 × A2 ; A1 ∈ A1, A2 ∈ A2}.
+Exercice. V ́erifier que B(R2) = B(R) ⊗ B(R).
+10
+
+
+1.2 Mesures positives
+Soit (E, A) un espace mesurable.
+De ́finition 1.2.1 Une mesure positive sur (E, A) est une application μ : A −→ [0, ∞] qui v ́erifie les propri ́et ́es suivantes:
+(i) μ(∅) = 0 ;
+(ii) Pour toute famille (An)n∈N de parties mesurables disjointes,
+μ
+(⋃
+n∈N
+An
+)
+=∑
+n∈N
+μ(An).
+Remarquons qu’il est important d’autoriser la valeur +∞. La propri ́et ́e (ii) est appel ́ee σ-additivit ́e. Elle contient  ́evidemment le cas particulier o`u les An sont vides `a partir d’un certain rang, ce qui donne la propri ́et ́e d’additivit ́e finie.
+Proprie ́te ́s.
+(1) Si A ⊂ B, μ(A) ≤ μ(B) et si de plus μ(A) < ∞,
+μ(B\A) = μ(B) − μ(A) ;
+(2) Si A, B ∈ A, μ(A) + μ(B) = μ(A ∪ B) + μ(A ∩ B) ;
+(3) Si An ∈ A et An ⊂ An+1,
+μ( ⋃
+n∈N
+An) = nli→m∞ ↑ μ(An) ;
+(4) Si Bn ∈ A et Bn+1 ⊂ Bn, et si μ(B0) < ∞,
+μ( ⋂
+n∈N
+Bn) = nli→m∞ ↓ μ(Bn) ;
+(5) Si An ∈ A,
+μ( ⋃
+n∈N
+An) ≤ ∑
+n∈N
+μ(An).
+D ́emontrons seulement (3),(4) et (5). Pour (3), on pose C0 = A0 et pour tout n ≥ 1,
+Cn = An\An−1
+de sorte que ∪An = ∪Cn. Puisque les Cn sont disjoints,
+μ( ⋃
+n∈N
+An) = μ( ⋃
+n∈N
+Cn) = ∑
+n∈N
+μ(Cn) = lim
+N→∞ ↑
+N ∑
+n=0
+μ(Cn) = lim
+N→∞ ↑ μ(AN ).
+11
+
+
+Pour (4), on pose An = B0\Bn pour tout n, de sorte que la suite (An) est croissante. Alors
+μ(B0) − μ( ⋂
+n∈N
+Bn) = μ(B0\ ⋂
+n∈N
+Bn) = μ( ⋃
+n∈N
+An) = nli→m∞ ↑ μ(An) = nli→m∞ ↑ (μ(B0) − μ(Bn)).
+La condition μ(B0) < ∞ est utilis ́ee notamment pour  ́ecrire μ(An) = μ(B0) − μ(Bn). Enfin, pour (5), on pose C0 = A0 puis pour tout n ≥ 1,
+Cn = An\
+n−1
+⋃
+k=0
+Ak .
+Les ensembles Cn sont disjoints et donc
+μ( ⋃
+n∈N
+An) = μ( ⋃
+n∈N
+Cn) = ∑
+n∈N
+μ(Cn) ≤ ∑
+n∈N
+μ(An).
+Exemples.
+(1) Si E = N, et A = P(N), la mesure de comptage est d ́efinie par
+μ(A) = Card(A).
+(On peut d ́efinir plus g ́en ́eralement la mesure de comptage sur (E, P(E)) lorsque E est quelconque.) Cet exemple permet de voir que la condition μ(B0) < ∞ est n ́ecessaire dans la propri ́et ́e (4) ci-dessus : en prenant
+Bn = {n, n + 1, n + 2, . . .}
+on a μ(Bn) = ∞ alors que ∩Bn = ∅ et donc μ(∩Bn) = 0. (2) Soit (E, A) quelconque et soit x ∈ E. La mesure δx d ́efinie par
+δx(A) = 1A(x) =
+{ 1 si x ∈ A 0 si x ∈/ A
+est appel ́ee mesure de Dirac au point x. Plus g ́en ́eralement, si xn, n ∈ N sont des points de
+E et αn ∈ [0, ∞] on peut consid ́erer la mesure ∑ αnδxn d ́efinie par
+(∑ αnδxn)(A) = ∑ αnδxn(A) = ∑ αn1A(xn).
+(3) Mesure de Lebesgue. Il existe une unique mesure positive sur (R, B(R)), not ́ee λ, telle que pour tout intervalle ouvert ]a, b[ de R on ait λ(]a, b[) = b − a. L’existence et l’unicit ́e de cette mesure seront  ́etablies plus loin.
+De ́finitions.
+• μ est dite finie si μ(E) < ∞ (la quantit ́e μ(E) est la masse totale de μ). • μ est une mesure de probabilit ́e si μ(E) = 1. • μ est dite σ-finie s’il existe une suite croissante de parties mesurables En telles que
+E= ⋃
+n∈N
+En et μ(En) < ∞ pour tout n.
+• x ∈ E est un atome de μ si μ({x}) > 0 (on suppose que {x} ∈ A). • La mesure μ est dite diffuse si elle n’a pas d’atomes.
+12
+
+
+1.3 Fonctions mesurables
+De ́finition 1.3.1 Soient (E, A) et (F, B) deux espaces mesurables. Une application f : E −→ F est dite mesurable si
+∀B ∈ B , f −1(B) ∈ A.
+Lorsque E et F sont des espaces topologiques munis de leurs tribus bor ́eliennes, on dit aussi que f est bor ́elienne.
+Proposition 1.3.1 La composition de deux applications mesurables est encore mesurable.
+C’est imm ́ediat en  ́ecrivant (g ◦ f )−1(C) = f −1(g−1(C)).
+Proposition 1.3.2 Pour que f soit mesurable, il suffit qu’il existe une sous-classe C de B telle que σ(C) = B et telle que la propri ́et ́e f −1(B) ∈ A soit vraie pour tout B ∈ C.
+Preuve. Soit
+G = {B ∈ B : f −1(B) ∈ A}.
+Alors il est facile de v ́erifier que G est une tribu. Par hypoth`ese C ⊂ G. Il en d ́ecoule que G contient σ(C) = B, d’o`u le r ́esultat recherch ́e.
+Exemples. (1) Dans le cas o`u (F, B) = (R, B(R)), il suffit pour montrer que f est mesurable d’ ́etablir que les ensembles f −1(]a, b[), ou mˆeme les f −1(] − ∞, a[) sont mesurables. (2) Dans le cas o`u E et F sont des espaces topologiques munis de leurs tribus bor ́eliennes, toute application continue est aussi mesurable (prendre pour C la classe des ouverts de F ).
+Ope ́rations sur les fonctions mesurables.
+Lemme 1.3.3 Soient f1 : (E, A) −→ (F1, B1) et f2 : (E, A) −→ (F2, B2) deux applications mesurables. Alors l’application produit f : (E, A) −→ (F1 × F2, B1 ⊗ B2) d ́efinie par f (x) = (f1(x), f2(x)) est aussi mesurable.
+Preuve. On applique la derni`ere proposition en prenant
+C = {B1 × B2 ; B1 ∈ B1, B2 ∈ B2}.
+Puisque f −1(B1 × B2) = f1−1(B1) ∩ f2−1(B2) ∈ A on obtient imm ́ediatement le r ́esultat.
+Remarque. La r ́eciproque de la proposition (si f est mesurable, f1 et f2 le sont aussi) est vraie et aussi facile.
+Corollaire 1.3.4 Si f, g : (E, A) −→ (R, B(R)) sont mesurables, alors les fonctions f + g, f g, inf(f, g), f + = sup(f, 0), f − = sup(−f, 0) sont mesurables.
+13
+
+
+La d ́emonstration est facile : par exemple f + g est la compos ́ee des deux applications x −→ (f (x), g(x)) et (a, b) −→ a + b qui sont mesurables, la seconde parce que continue.
+Rappelons que si (an) est une suite d’ ́el ́ements de R ̄ = R ∪ {−∞, +∞}, on d ́efinit
+lim sup an = nli→m∞ ↓
+(
+sup
+k≥n
+ak
+)
+, lim inf an = nli→m∞ ↑
+(
+inf
+k≥n ak
+) ,
+les limites existant dans R ̄ . Alors, lim sup an et lim inf an sont respectivement la plus grande et la plus petite valeur d’adh ́erence de la suite (an).
+Proposition 1.3.5 Si fn est une suite de fonctions mesurables de E dans R ̄ , alors
+sup
+n
+fn , innf fn , lim sup fn , lim inf fn
+sont aussi mesurables. En particulier si la suite fn converge simplement, sa limite lim fn est mesurable. En g ́en ́eral, l’ensemble {x ∈ E : lim fn(x) existe} est mesurable.
+Preuve. Soit f (x) = inf fn(x). Il suffit de montrer que pour tout a ∈ R, f −1([−∞, a[) ∈ A. Or
+f −1([−∞, a[) = {x : inf fn(x) < a} = ⋃
+n
+{x : fn(x) < a}
+d’o`u le r ́esultat. On traite de mˆeme le cas de sup fn. Il en d ́ecoule que
+lim inf fn = sup
+n≥0
+(
+inf
+k≥n fk
+)
+est mesurable. Pour la derni`ere assertion, on  ́ecrit
+{x ∈ E : lim fn(x) existe} = {x ∈ E : lim inf fn(x) = lim sup fn(x)} = G−1(∆)
+si G est l’application mesurable G(x) = (lim inf fn(x), lim sup fn(x)) et ∆ d ́esigne la diagonale
+de  ̄R2, qui est mesurable parce que ferm ́ee.
+Notion de mesure-image.
+De ́finition 1.3.2 Soit f : (E, A) −→ (F, B) une application mesurable, et soit μ une mesure positive sur (E, A). La mesure-image de μ par f , not ́ee f (μ) est la mesure positive sur (F, B) d ́efinie par
+f (μ)(B) = μ(f −1(B)).
+Il est facile de voir que la derni`ere formule d ́efinit bien une mesure sur (F, B). Les mesures μ et f (μ) ont mˆeme masse totale, mais il peut arriver que μ soit σ-finie sans que f (μ) le soit.
+14
+
+
+1.4 Classe monotone
+De ́finition 1.4.1 Un sous-ensemble M de P(E) est appel ́e classe monotone si
+(i) E ∈ M ;
+(ii) Si A, B ∈ M et A ⊂ B, alors B\A ∈ M ;
+(iii) Si An ∈ M et An ⊂ An+1, alors ⋃
+n
+An ∈ M.
+Toute tribu est aussi une classe monotone. Comme dans le cas des tribus, on voit imm ́ediatement que toute intersection de classes monotones est encore une classe monotone. Si C est une partie quelconque de P(E), on peut donc d ́efinir la classe monotone engendr ́ee par C, not ́ee M(C), en posant
+M(C) = ⋂
+M classe monotone, C⊂M
+M.
+The ́ore`me 1.4.1 (Lemme de classe monotone) Si C ⊂ P(E) est stable par intersections finies, alors M(C) = σ(C).
+Preuve. Puisque toute tribu est une classe monotone, il est clair qu’on a M(C) ⊂ σ(C). Pour  ́etablir l’inclusion inverse, il suffit de montrer que M(C) est une tribu. Or une classe monotone est une tribu si et seulement si elle est stable par intersections finies (en effet, par passage au compl ́ementaire, elle sera alors stable par r ́eunion finies, puis par passage `a la limite croissant par r ́eunion d ́enombrable). Montrons donc que M(C) est stable par intersections finies. Soit A ∈ C fix ́e. Posons
+M1 = {B ∈ M(C) : A ∩ B ∈ M(C)}.
+Puisque C est stable par intersections finies, il est clair que C ⊂ M1. V ́erifions ensuite que M1 est une classe monotone:
+• E ∈ M1 est imm ́ediat.
+• Si B, B′ ∈ M1 et B ⊂ B′, on a A ∩ (B′\B) = (A ∩ B′)\(A ∩ B) ∈ M(C) et donc B′\B ∈ M1 .
+• Si Bn ∈ M1 pour tout n et la suite Bn croˆıt, on a A ∩ (∪Bn) = ∪(A ∩ Bn) ∈ M(C) et donc ∪Bn ∈ M1.
+Puisque M1 est une classe monotone qui contient C, M1 contient aussi M(C). On a donc montr ́e
+∀A ∈ C, ∀B ∈ M(C), A ∩ B ∈ M(C).
+15
+
+
+Ce n’est pas encore le r ́esultat recherch ́e, mais on peut appliquer la mˆeme id ́ee une seconde fois. Pr ́ecis ́ement, on fixe maintenant B ∈ M(C), et on pose
+M2 = {A ∈ M(C) : A ∩ B ∈ M(C)}.
+D’apr`es la premi`ere  ́etape de la preuve, C ⊂ M2. En reprenant exactement les mˆemes arguments que dans la premi`ere  ́etape, on montre que M2 est une classe monotone. Il en d ́ecoule que M(C) ⊂ M2, ce qui montre bien que M(C) est stable par intersections finies et termine la preuve.
+Corollaire 1.4.2 Soient μ et ν deux mesures sur (E, A). Supposons qu’il existe une classe C ⊂ A stable par intersections finies, telle que σ(C) = A et μ(A) = ν(A) pour tout A ∈ C. (1) Si μ(E) = ν(E) < ∞, on a μ = ν. (2) S’il existe une suite croissante de parties En ∈ C telles que E = ∪En et μ(En) = ν(En) < ∞, on a μ = ν.
+Preuve. (1) Soit G = {A ∈ A : μ(A) = ν(A)}. Par hypoth`ese, C ⊂ G. Par ailleurs, on v ́erifie ais ́ement que G est une classe monotone : par exemple, si A, B ∈ G et A ⊂ B, on a μ(B\A) = μ(B) − μ(A) = ν(B) − ν(A) = ν(B\A), et donc B\A ∈ E (noter qu’on utilise ici le fait que μ et ν sont finies). On conclut que G contient M(C) = σ(C) = A (la premi`ere  ́egalit ́e d’apr`es le th ́eor`eme de classe monotone, la seconde par hypoth`ese). Donc G = A, c’est-`a-dire μ = ν. (2) Notons, pour tout n, μn la restriction de μ `a En et νn la restriction de ν `a En :
+∀A ∈ A , μn(A) = μ(A ∩ En), νn(A) = ν(A ∩ En).
+On peut appliquer la partie (1) `a μn et νn, et on trouve μn = νn. Finalement, en utilisant les propri ́et ́es de limite croissante des mesures, pour tout A ∈ A,
+μ(A) = lim ↑ μ(A ∩ En) = lim ↑ ν(A ∩ En) = ν(A).
+Conse ́quence. Unicit ́e de la mesure de Lebesgue. Il existe au plus une mesure λ sur (R, B(R)) telle que pour tout intervalle ouvert non vide ]a, b[, on ait λ(]a, b[) = b − a. En effet, si λ′ est une seconde mesure ayant la mˆeme propri ́et ́e, on peut appliquer `a λ et λ′ la partie (2) du corollaire pr ́ec ́edent, en prenant pour C la classe des intervalles ouverts (dont on sait qu’elle engendre la tribu bor ́elienne) et En =] − n, n[ pour tout n.
+De la mˆeme fac ̧on, on d ́eduit du corollaire pr ́ec ́edent qu’une mesure finie μ sur R est caract ́eris ́ee par les valeurs de μ(] − ∞, a]) pour tout a ∈ R.
+16
+
+
+Chapitre 2
+Inte ́gration par rapport a` une mesure
+Le premier objectif de ce chapitre est de construire l’int ́egrale de fonctions mesurables. La d ́efinition est facile pour les fonctions dites  ́etag ́ees, qui ne prennent qu’un nombre fini de valeurs. Ensuite l’int ́egrale d’une fonction mesurable positive est d ́efinie comme le supremum des int ́egrales des fonctions  ́etag ́ees qui la minorent. Pour les fonctions de signe quelconque, on raisonne par lin ́earit ́e en se limitant aux fonctions dites int ́egrables, dont la valeur absolue est d’int ́egrale finie. Une fois construite l’int ́egrale, on  ́etablit les trois grands th ́eor`emes de convergence de la th ́eorie, `a savoir le th ́eor`eme de convergence monotone, le lemme de Fatou et le th ́eor`eme de convergence domin ́ee. Ces trois  ́enonce ́s visent `a donner des conditions assurant que l’int ́egrale de la limite d’une suite de fonctions est la limite des int ́egrales de ces fonctions. Le dernier paragraphe donne des applications importantes `a la continuit ́e ou la d ́erivabilit ́e d’int ́egrales d ́ependant d’un param`etre.
+2.1 Int ́egration de fonctions positives
+On se donne un espace mesur ́e, c’est-`a-dire un espace mesurable (E, A) muni d’une mesure μ.
+Fonctions e ́tage ́es. Une fonction mesurable f `a valeurs dans R est dite  ́etag ́ee si elle ne prend qu’un nombre fini de valeurs. Si α1, α2, . . . , αn sont les valeurs prises par f , qu’on peut supposer rang ́ees par ordre croissant α1 < α2 < · · · < αn, on a alors
+f (x) =
+n ∑
+i=1
+αi 1Ai(x)
+o`u, pour chaque i ∈ {1, . . . , n}, Ai = f −1({αi}) ∈ A. L’ ́ecriture pr ́ec ́edente sera appel ́ee l’ ́ecriture canonique de f .
+De ́finition 2.1.1 Supposons f `a valeurs dans R+. L’int ́egrale de f par rapport `a μ est alors d ́efinie par ∫
+f dμ =
+n ∑
+i=1
+αi μ(Ai)
+avec la convention 0.∞ = 0 dans le cas o`u αi = 0 et μ(Ai) = ∞.
+17
+
+
+On a a priori ∫ f dμ ∈ [0, ∞]. Supposons qu’on ait une autre  ́ecriture de f sous la forme
+f=
+m ∑
+j=1
+βj 1Bj
+les ensembles mesurables Bj formant toujours une partition de E mais les nombres βj n’ ́etant plus n ́ecessairement distincts. Alors il est facile de v ́erifier qu’on a aussi
+∫
+f dμ =
+∑ m
+j=1
+βj μ(Bj).
+En effet, pour chaque i ∈ {1, . . . , n}, Ai doit ˆetre la r ́eunion disjointe des ensembles Bj pour les indices j tels que βj = αi. Il suffit alors d’utiliser la propri ́et ́e d’additivit ́e de la mesure pour  ́ecrire
+μ(Ai) = ∑
+{j:βj =αi}
+μ(Bj )
+ce qui conduit au r ́esultat annonc ́e.
+Proprie ́te ́s. Soient f et g deux fonctions  ́etag ́ees positives. (1) Pour tous a, b ≥ 0,
+∫
+(af + bg)dμ = a
+∫
+f dμ + b
+∫
+gdμ.
+(2) Si f ≤ g, ∫
+f dμ ≤
+∫
+gdμ.
+Preuve. (1) Soient
+f=
+n ∑
+i=1
+αi 1Ai , g =
+∑ m
+k=1
+α′k 1A′k
+les  ́ecritures canoniques de f et g. En  ́ecrivant chaque Ai comme la r ́eunion disjointe des ensembles Ai ∩ A′k, k ∈ {1, . . . , m}, et de mˆeme pour chaque A′k, on voit qu’on peut  ́ecrire
+f=
+p ∑
+j=1
+βj 1Bj , g =
+p ∑
+j=1
+γj 1Bj
+avec les mˆemes ensembles mesurables disjoints Bj (mais les nombres βj, resp. γj, non n ́ecessairement distincts). D’apr`es la remarque suivant la d ́efinition, on a
+∫
+f dμ =
+p ∑
+j=1
+βj μ(Bj) ,
+∫
+g dμ =
+∑p
+j=1
+γj μ(Bj).
+et de mˆeme ∫ (af + bg)dμ = ∑p
+j=1(aβj + bγj) μ(Bj), d’o`u le r ́esultat voulu.
+18
+
+
+(2) On applique (1) en  ́ecrivant ∫
+gdμ =
+∫
+f dμ +
+∫
+(g − f )dμ ≥
+∫
+f dμ.
+Notons E+ l’espace des fonctions  ́etag ́ees positives.
+De ́finition 2.1.2 Soit f : E −→ [0, ∞] une fonction mesurable. On pose ∫
+f dμ = sup
+h∈E+,h≤f
+∫
+h dμ .
+La propri ́et ́e (2) ci-dessus montre que cette d ́efinition est coh ́erente avec la pr ́ec ́edente quand f est  ́etag ́ee. On notera indiff ́eremment ∫
+f dμ =
+∫
+f (x)dμ(x) =
+∫
+f (x)μ(dx)
+et on trouve parfois la notation 〈μ, f 〉 ou mˆeme μ(f ).
+Proprie ́te ́s.
+(1) Si f ≤ g, ∫ f dμ ≤ ∫ gdμ ( ́evident sur la d ́efinition)
+(2) Si μ({x ∈ E : f (x) > 0}) = 0, alors ∫ f dμ = 0. (en effet il suffit de le v ́erifier lorsque f est  ́etag ́ee, mais alors c’est  ́evident sur la d ́efinition)
+The ́ore`me 2.1.1 (The ́ore`me de convergence monotone) Soit (fn) une suite croissante de fonctions mesurables positives (`a valeurs dans [0, ∞]), et soit f = lim ↑ fn. Alors ∫
+f dμ = nli→m∞ ↑
+∫
+fndμ.
+Preuve. D’apr`es la propri ́et ́e (1) ci-dessus, on a ∫
+f dμ ≥ nli→m∞ ↑
+∫
+fndμ
+et il suffit donc d’ ́etablir l’autre in ́egalit ́e. Pour cela, choisissons une fonction  ́etag ́ee positive
+h=
+∑ m
+i=1
+αi 1Ai
+avec h ≤ f . Soit a ∈ [0, 1[, et
+En = {x ∈ E : ah(x) ≤ fn(x)}.
+Alors En est mesurable. De plus en utilisant le fait que fn croˆıt vers f , et la condition a < 1, on voit que E est la r ́eunion croissante des ensembles En.
+19
+
+
+Ensuite on remarque qu’on a l’in ́egalit ́e fn ≥ a1Enh, d’o`u
+∫
+fndμ ≥
+∫
+a1Enh dμ = a
+∑ m
+i=1
+αi μ(Ai ∩ En).
+Puisque En ↑ E on a Ai ∩En ↑ Ai et μ(Ai ∩En) ↑ μ(Ai) quand n → ∞, d’apr`es les propri ́et ́es  ́el ́ementaires des mesures. En passant `a la limite croissante il vient
+nli→m∞ ↑
+∫
+fndμ ≥ a
+∑ m
+i=1
+αi μ(Ai) = a
+∫
+hdμ.
+En faisant tendre a vers 1, on trouve
+nli→m∞ ↑
+∫
+fndμ ≥
+∫
+hdμ.
+Comme ∫ f dμ est d ́efinie par le supremum des quantit ́es de droite lorsque h d ́ecrit l’ensemble des fonctions  ́etag ́ees positives major ́ees par f , on obtient bien l’in ́egalit ́e recherch ́ee.
+Dans toute la suite “fonction mesurable positive” signifie fonction mesurable `a valeurs dans [0, ∞].
+Proposition 2.1.2 (1) Soit f une fonction mesurable positive. Il existe une suite croissante (fn) de fonctions  ́etag ́ees positives telle que fn ↑ f . (2) Si f et g sont mesurables positives et a, b ∈ R+,
+∫
+(af + bg)dμ = a
+∫
+f dμ + b
+∫
+gdμ.
+(3) Si (fn) est une suite quelconque de fonctions mesurables positives,
+∫∑
+n
+fn dμ = ∑
+n
+∫
+fn dμ.
+Preuve. (1) Pour tout n ≥ 1 et tout i ∈ {0, 1, . . . , n2n − 1}, posons
+An = {x ∈ E : f (x) ≥ n}
+Bn,i = {x ∈ E : i2−n ≤ f (x) < (i + 1)2−n}.
+Soit ensuite fn la fonction  ́etag ́ee
+fn =
+n2n−1
+∑
+i=0
+i
+2n 1Bn,i + n 1An.
+On v ́erifie ais ́ement que fn(x) ↑ f (x) pour tout x ∈ E.
+20
+
+
+(2) On construit deux suites de fonctions  ́etag ́ees positives (fn), (gn) avec fn ↑ f , gn ↑ g. Alors on a aussi afn + bgn ↑ af + bg, et en utilisant le th ́eor`eme de convergence monotone et les propri ́et ́es de l’int ́egrale des fonctions  ́etag ́ees, ∫
+(af + bg)dμ = lim ↑
+∫
+(afn + bgn)dμ = lim ↑ (a
+∫
+fndμ + b
+∫
+gndμ) = a
+∫
+f dμ + b
+∫
+gdμ.
+(3) Cette assertion d ́ecoule de (2) (cas d’une somme finie) et du th ́eor`eme de convergence monotone.
+Remarque. Consid ́erons le cas particulier o`u E = N et μ est la mesure de comptage. Alors il est facile de voir que ∫
+f dμ = ∑
+k∈N
+f (k)
+et (3) redonne la propri ́et ́e bien connue  ́enonc ̧ant que pour toute suite double (an,k) de r ́eels positifs, ∑
+k∈N
+(∑
+n∈N
+an,k
+)
+=∑
+n∈N
+(∑
+k∈N
+an,k
+) .
+Corollaire 2.1.3 Soit f mesurable positive, et pour tout A ∈ A, soit
+ν(A) =
+∫
+1Af dμ (not.)
+=
+∫
+A
+f dμ.
+Alors ν est une mesure positive sur (E, A), appel ́ee mesure de densit ́e f par rapport `a μ, et not ́ee ν = f · μ.
+Preuve. Il est imm ́ediat que ν(∅) = 0. Par ailleurs, si (An) est une suite d’ensembles mesurables disjoints,
+ν
+(⋃
+n∈N
+An
+) =
+∫∑
+n∈N
+1Anf dμ = ∑
+n∈N
+∫
+1Anf dμ = ∑
+n∈N
+ν(An)
+en utilisant la propri ́et ́e (3) ci-dessus.
+Remarque. On a μ(A) = 0 ⇒ ν(A) = ∫ 1Af dμ = 0.
+On dit qu’une propri ́et ́e est vraie μ presque partout, ou μ p.p. ou mˆeme simplement p.p. s’il n’y a pas ambigu ̈ıt ́e, si elle est vraie en dehors d’un ensemble de mesure nulle. Par exemple si f et g sont deux fonctions mesurables, f = g p.p. signifie
+μ({x ∈ E : f (x) 6= g(x)}) = 0.
+Proposition 2.1.4 Soit f une fonction mesurable positive. (1) Pour tout a > 0,
+μ({x ∈ E : f (x) ≥ a}) ≤ 1
+a
+∫
+f dμ.
+21
+
+
+(2) On a ∫
+f dμ < ∞ ⇒ f < ∞ p.p.
+(3) On a ∫
+f dμ = 0 ⇔ f = 0 p.p.
+(4) Si g est une autre fonction mesurable positive,
+f = g p.p. ⇒
+∫
+f dμ =
+∫
+gdμ.
+Preuve. (1) Posons Aa = {x ∈ E : f (x) ≥ a}. Alors f ≥ a1Aa et donc
+∫
+f dμ ≥
+∫
+a1Aa dμ = aμ(Aa).
+(2) Pour tout n ≥ 1, soit An = {x ∈ E : f (x) ≥ n} et soit A∞ = {x ∈ E : f (x) = ∞}. Alors, en utilisant (1),
+μ(A∞) = μ
+(⋂
+n≥1
+An
+)
+= nli→m∞ ↓ μ(An) ≤ nli→m∞
+1 n
+∫
+f dμ = 0.
+(3) L’implication ⇐ a d ́ej`a  ́et ́e vue. Pour ⇒, soit, pour tout n ≥ 1, Bn = {x ∈ E : f (x) ≥ n−1}. Alors, d’apr`es (1),
+μ(Bn) ≤ n
+∫
+f dμ = 0
+et donc μ(Bn) = 0 ce qui entraˆıne μ({x : f (x) > 0}) = μ
+(⋃
+n≥1
+Bn
+)
+= 0.
+(4) Utilisons la notation f ∨ g = sup(f, g) et f ∧ g = inf(f, g). Alors f ∨ g = f ∧ g p.p., d’o`u ∫
+(f ∨ g)dμ =
+∫
+(f ∧ g)dμ +
+∫
+(f ∨ g − f ∧ g)dμ =
+∫
+(f ∧ g)dμ,
+puisque f ∨ g − f ∧ g = 0 p.p. Puisque f ∧ g ≤ f ≤ f ∨ g, et de mˆeme pour g, il en d ́ecoule que ∫
+f dμ =
+∫
+(f ∨ g)dμ =
+∫
+gdμ.
+The ́ore`me 2.1.5 (Lemme de Fatou) Soit (fn) une suite quelconque de fonctions mesurables positives. Alors, ∫
+(lim inf fn)dμ ≤ lim inf
+∫
+fndμ.
+22
+
+
+Preuve. On a
+lim inf fn = kli→m∞ ↑
+(
+inf
+n≥k fn
+)
+et donc d’apr`es le th ́eor`eme de convergence monotone, ∫
+(lim inf fn)dμ = kli→m∞ ↑
+∫(
+inf
+n≥k fn
+)
+dμ.
+Par ailleurs, pour tout entier p ≥ k,
+inf
+n≥k fn ≤ fp
+ce qui entraˆıne ∫ (
+inf
+n≥k fn
+)
+dμ ≤ inf
+p≥k
+∫
+fpdμ.
+En passant `a la limite croissante quand k ↑ ∞, il vient
+kli→m∞ ↑
+∫(
+inf
+n≥k fn
+)
+dμ ≤ kli→m∞ ↑ inf
+p≥k
+∫
+fpdμ = lim inf
+∫
+fndμ,
+ce qui termine la preuve.
+2.2 Fonctions int ́egrables
+De ́finition 2.2.1 Soit f : E −→ R une fonction mesurable. On dit que f est int ́egrable par rapport `a μ (ou μ-int ́egrable) si ∫
+|f | dμ < ∞.
+Dans ce cas on pose ∫
+f dμ =
+∫
+f +dμ −
+∫
+f −dμ
+o`u f + = sup(f, 0), resp. f − = sup(−f, 0) est la partie positive, resp. n ́egative, de f . (Noter que f + et f − sont mesurables et que f = f + − f − et |f | = f + + f −.)
+Remarque. On a ∫ f +dμ ≤ ∫ |f |dμ < ∞ et de mˆeme ∫ f −dμ < ∞, ce qui montre que la
+d ́efinition de ∫ f dμ a bien un sens. Dans le cas o`u f est positive, cette d ́efinition co ̈ıncide bien sˆur avec la pr ́ec ́edente.
+On note L1(E, A, μ) l’espace des fonctions μ-int ́egrables. On utilisera parfois la notation L1+(E, A, μ) pour les fonctions μ-int ́egrables `a valeurs positives.
+Proprie ́te ́s.
+(a) | ∫ f dμ| ≤ ∫ |f |dμ pour f ∈ L1(E, A, μ).
+(b) L1(E, A, μ) est un espace vectoriel et l’application f → ∫ f dμ est une forme lin ́eaire sur cet espace vectoriel.
+(c) Si f, g ∈ L1(E, A, μ) et f ≤ g, alors ∫ f dμ ≤ ∫ gdμ.
+23
+
+
+(d) Si f, g ∈ L1(E, A, μ) et f = g μ p.p., alors ∫ f dμ = ∫ gdμ.
+Preuve. (a) On  ́ecrit
+|
+∫
+f dμ| = |
+∫
+f +dμ −
+∫
+f −dμ| ≤ |
+∫
+f +dμ| + |
+∫
+f −dμ| =
+∫
+|f |dμ.
+(b) Soit f ∈ L1(E, A, μ). Pour a ∈ R, ∫
+|af |dμ = |a|
+∫
+|f |dμ < ∞.
+Si a ≥ 0, ∫
+(af )dμ =
+∫
+(af )+dμ −
+∫
+(af )−dμ = a
+∫
+f dμ
+et si a < 0, ∫
+(af )dμ =
+∫
+(af )+dμ −
+∫
+(af )−dμ = (−a)
+∫
+f −dμ + a
+∫
+f +dμ = a
+∫
+f dμ.
+De plus, si f, g ∈ L1(E, A, μ), l’in ́egalit ́e |f + g| ≤ |f | + |g| entraˆıne que f + g ∈ L1. En outre, (f + g)+ − (f + g)− = f + g = f + − f − + g+ − g−
+entraˆıne (f + g)+ + f − + g− = (f + g)− + f + + g+.
+En utilisant l’additivit ́e de l’int ́egrale pour les fonctions positives, ∫
+(f + g)+dμ +
+∫
+f −dμ +
+∫
+g−dμ =
+∫
+(f + g)−dμ +
+∫
+f +dμ +
+∫
+g+dμ,
+d’o`u, puisque toutes les int ́egrales sont finies, ∫
+(f + g)+dμ −
+∫
+(f + g)−dμ =
+∫
+f +dμ −
+∫
+f −dμ +
+∫
+g+dμ −
+∫
+g−dμ,
+ce qui donne bien ∫ (f + g)dμ = ∫ f dμ + ∫ gdμ.
+(c) Il suffit d’ ́ecrire ∫ gdμ = ∫ f dμ + ∫ (g − f )dμ. (d) L’ ́egalit ́e f = g p.p. entraˆıne f + = g+ et f − = g− p.p. Il suffit alors d’utiliser les r ́esultats vus dans le cas des fonctions positives.
+Remarque. On combine facilement (c) et (d) pour obtenir que, si f, g ∈ L1(E, A, μ) et
+f ≤ g p.p., alors ∫ f dμ ≤ ∫ gdμ.
+Extension au cas complexe. Soit f : E −→ C une fonction mesurable (cela  ́equivaut `a dire que Re(f ) et Im(f ) sont toutes deux mesurables). On dit que f est int ́egrable et on note f ∈ L1C(E, A, μ) si ∫
+|f |dμ < ∞.
+24
+
+
+On pose alors ∫
+f dμ =
+∫
+Re(f )dμ + i
+∫
+Im(f )dμ.
+Les propri ́et ́es (a),(b) et (d) ci-dessus restent vraies si L1(E, A, μ) est remplac ́e par L1C(E, A, μ) (pour montrer (a), remarquer que
+|
+∫
+f dμ| = sup
+a∈C,|a|=1
+a·
+∫
+f dμ
+o`u a · z d ́esigne le produit scalaire dans C identifi ́e `a R2).
+The ́ore`me 2.2.1 (The ́ore`me de convergence domine ́e) Soit (fn) une suite de fonctions dans L1(E, A, μ) (resp. dans L1C(E, A, μ)). On suppose:
+(1) Il existe une fonction f mesurable `a valeurs dans R (resp. dans C) telle que
+fn(x) −→ f (x) μ p.p.
+(2) Il existe une fonction g : E −→ R+ mesurable telle que ∫ gdμ < ∞ et pour tout n,
+|fn| ≤ g μ p.p.
+Alors f ∈ L1(E, A, μ) (resp. f ∈ L1C(E, A, μ)), et on a
+nli→m∞
+∫
+fndμ =
+∫
+f dμ
+et
+nli→m∞
+∫
+|fn − f |dμ = 0.
+Preuve. On suppose d’abord que les hypoth`eses suivantes plus fortes sont v ́erifi ́ees: (1)’ Pour tout x ∈ E,
+fn(x) −→ f (x)
+(2)’ Il existe une fonction g : E −→ R+ mesurable telle que ∫ gdμ < ∞ et pour tout n et tout x ∈ E
+|fn(x)| ≤ g(x).
+La propri ́et ́e f ∈ L1 est alors claire puisque |f | ≤ g et ∫ gdμ < ∞. Ensuite, puisque |f − fn| ≤ 2g et |f − fn| −→ 0, on peut appliquer le lemme de Fatou pour trouver
+lim inf
+∫
+(2g − |f − fn|) dμ ≥
+∫
+lim inf(2g − |f − fn|) dμ = 2
+∫
+gdμ.
+Par lin ́earit ́e de l’int ́egrale, il vient
+2
+∫
+gdμ − lim sup
+∫
+|f − fn|dμ ≥ 2
+∫
+gdμ,
+25
+
+
+d’o`u
+lim sup
+∫
+|f − fn|dμ = 0,
+et donc ∫ |f − fn|dμ −→ 0. Finalement il suffit d’ ́ecrire
+∣∣∣
+∫
+f dμ −
+∫
+fndμ
+∣∣∣ ≤
+∫
+|f − fn|dμ.
+Dans le cas g ́en ́eral o`u on suppose seulement (1) et (2), on pose
+A = {x ∈ E : fn(x) −→ f (x) et pour tout n, |fn(x)| ≤ g(x)}.
+Alors μ(Ac) = 0, et on peut appliquer la premi`ere partie de la preuve aux fonctions
+f ̃n(x) = 1A(x)fn(x) , f ̃(x) = 1A(x)f (x).
+On a f = f ̃ p.p., fn = f ̃n p.p. et donc ∫ fndμ = ∫ f ̃ndμ, ∫ f dμ = ∫ f ̃dμ et ∫ |fn − f |dμ =
+∫ |f ̃n − f ̃|dμ. Les r ́esultats recherch ́es d ́ecoulent du cas o`u (1)’ et (2)’ sont v ́erifi ́es.
+2.3 Int ́egrales d ́ependant d’un param`etre
+On se donne un espace m ́etrique (U, d) qui correspond `a l’espace des param`etres. Soit une application f : U × E −→ R (ou C).
+The ́ore`me 2.3.1 Soit u0 ∈ E. Supposons
+(i) pour tout u ∈ U, l’application x −→ f (u, x) est mesurable;
+(ii) μ(dx) p.p. l’application u −→ f (u, x) est continue en u0;
+(iii) il existe une fonction g ∈ L1+(E, A, μ) telle que pour tout u ∈ U,
+|f (u, x)| ≤ g(x) μ(dx) p.p.
+Alors la fonction F (u) = ∫ f (u, x)μ(dx) est bien d ́efinie en tout point u ∈ U et elle est continue en u0.
+Preuve. L’hypoth`ese (iii) entraˆıne que la fonction x −→ f (u, x) est int ́egrable et donc F (u) est bien d ́efinie. Ensuite, soit (un)n≥1 une suite convergeant vers u0. L’hypoth`ese (ii) assure que
+f (un, x) n−→→∞ f (u0, x) , μ p.p.
+Grˆace `a l’hypoth`ese de domination (iii), on peut appliquer le th ́eor`eme de convergence domin ́ee, qui donne
+nli→m∞
+∫
+f (un, x) μ(dx) =
+∫
+f (u0, x) μ(dx).
+26
+
+
+Exemples. (a) Soit μ une mesure diffuse sur (R, B(R)). Si φ ∈ L1(R, B(R), μ), la fonction
+F (u) =
+∫
+]−∞,u]
+φ(x) μ(dx) =
+∫
+1]−∞,u](x)φ(x) μ(dx)
+est continue. Pour le voir, il suffit d’appliquer le th ́eor`eme `a f (u, x) = 1]−∞,u](x)φ(x), en prenant g = |φ| et en observant que pour u0 ∈ R fix ́e, la fonction u −→ f (u, x) est continue en u0 pour tout x ∈ R\{u0}. (b) Transform ́ee de Fourier. Si φ ∈ L1(R, B(R), λ), la fonction
+φˆ(u) =
+∫
+eiux φ(x) λ(dx)
+est continue sur R. (c) Convolution. Soit φ ∈ L1(R, B(R), λ), et soit h une fonction continue born ́ee de R dans R. Alors la fonction h ∗ φ d ́efinie sur R par
+h ∗ φ(u) =
+∫
+h(u − x) φ(x) λ(dx)
+est continue (et born ́ee).
+Nous passons maintenant `a un th ́eor`eme de d ́erivabilit ́e sous le signe int ́egrale, et pour cela nous supposons que U = I est un intervalle ouvert de R. Soit `a nouveau une application f : U × E −→ R (ou C).
+The ́ore`me 2.3.2 Soit u0 ∈ I. Supposons que
+(i) pour tout u ∈ I, l’application x −→ f (u, x) est dans L1(E, A, μ);
+(ii) μ(dx) p.p. l’application u −→ f (u, x) est d ́erivable en u0 de d ́eriv ́ee not ́ee
+∂f
+∂u (u0, x) ;
+(iii) il existe une fonction g ∈ L1+(E, A, μ) telle que pour tout u ∈ I,
+|f (u, x) − f (u0, x)| ≤ g(x)|u − u0| μ(dx) p.p.
+Alors la fonction F (u) = ∫ f (u, x)μ(dx) est d ́erivable en u0, de d ́eriv ́ee
+F ′(u0) =
+∫ ∂f
+∂u (u0, x) μ(dx).
+Remarque. A priori la d ́eriv ́ee ∂f
+∂u (u0, x) n’est d ́efinie (par (ii)) que pour x appartenant
+au compl ́ementaire d’un ensemble de mesure nulle. On peut la prolonger `a E tout entier de mani`ere arbitraire (par exemple par la valeur 0), de fac ̧on `a d ́efinir l’int ́egrale qui donne F ′(u0).
+27
+
+
+Preuve. Soit (un)n≥1 une suite dans I\{u0} convergeant vers u0, et soit
+φn(x) = f (un, x) − f (u0, x)
+un − u0
+.
+Grˆace `a (ii), φn(x) converge vers ∂f
+∂u (u0, x), μ(dx) p.p. De plus l’hypoth`ese (iii) permet
+d’appliquer le th ́eor`eme de convergence domin ́ee et d’obtenir
+nli→m∞
+F (un) − F (u0) un − u0
+= nli→m∞
+∫
+φn(x) μ(dx) =
+∫ ∂f
+∂u (u0, x) μ(dx).
+Remarque. Dans de nombreuses applications, les hypoth`eses (ii) et (iii) sont remplac ́ees par les hypoth`eses plus fortes
+(ii)’ μ(dx) p.p. l’application u −→ f (u, x) est d ́erivable sur I;
+(iii)’ il existe une fonction g ∈ L1+(E, A, μ) telle que μ(dx) p.p.,
+∀u ∈ I ,
+∣∣∣ ∂f
+∂u (u, x)
+∣∣∣ ≤ g(x).
+(Noter que (iii)’⇒(iii) grˆace au th ́eor`eme des accroissements finis.) Sous ces hypoth`eses, la fonction F est d ́erivable sur I. L’exercice ci-dessous montre cependant que la forme plus pr ́ecise de l’ ́enonc ́e du th ́eor`eme est parfois n ́ecessaire.
+Exemples. (a) Soit φ ∈ L1(R, B(R), λ) telle que
+∫
+|xφ(x)| λ(dx) < ∞.
+Alors la transform ́ee de Fourier φˆ(u) est d ́erivable sur R, et
+φˆ′(u) = i
+∫
+x eiux φ(x) λ(dx).
+(b) Soit φ ∈ L1(R, B(R), λ), et soit h une fonction de R −→ R une fonction de classe C1, born ́ee ainsi que sa d ́eriv ́ee. Alors la convolution h ∗ φ est d ́erivable sur R, et
+(h ∗ φ)′ = h′ ∗ φ.
+On peut bien sˆur it ́erer. Par exemple si h est de classe C∞ `a support compact, h ∗ φ est aussi de classe C∞.
+Exercice. Soit μ une mesure diffuse sur (R, B(R)) et soit φ ∈ L1(R, B(R), μ) telle que
+∫
+|xφ(x)| μ(dx) < ∞.
+Pour tout u ∈ R, on pose
+F (u) =
+∫
+R
+(u − x)+φ(x) μ(dx).
+Montrer que F est d ́erivable sur R, de d ́eriv ́ee
+F ′(u) =
+∫
+]−∞,u]
+φ(x) μ(dx).
+28
+
+
+Chapitre 3
+Construction de mesures
+Le chapitre pr ́ec ́edent partait de la donn ́ee d’une mesure sur un espace mesurable. Nous montrons maintenant comment on construit des mesures int ́eressantes, et particuli`erement la mesure de Lebesgue. Le premier paragraphe introduit la notion de mesure ext ́erieure, v ́erifiant des propri ́et ́es des propri ́et ́es plus faibles que celles d’une mesure, et montre comment `a partir d’une mesure ext ́erieure on peut construire une (vraie) mesure sur une tribu convenable. Cette approche, qui est celle qu’avait utilise ́e Lebesgue, permet assez facilement de construire la mesure de Lebesgue sur R ou sur Rd. Nous discutons aussi diverses propri ́et ́es de la mesure de Lebesgue, ainsi que ses liens avec l’int ́egrale de Riemann. Une autre application est l’int ́egrale de Stieltjes, qui correspond `a l’int ́egrale par rapport `a une mesure finie arbitraire sur la droite r ́eelle.
+3.1 Mesures ext ́erieures
+De ́finition 3.1.1 Soit E un ensemble quelconque. Une application μ∗ : P(E) −→ [0, ∞] est appel ́ee mesure ext ́erieure si
+(i) μ∗(∅) = 0;
+(ii) μ∗ est croissante : A ⊂ B ⇒ μ∗(A) ≤ μ∗(B);
+(iii) μ∗ est σ-sous-additive : pour toute suite Ak, k ∈ N d’ ́el ́ements de P(E),
+μ∗( ⋃
+k∈N
+Ak) ≤ ∑
+k∈N
+μ∗(Ak).
+Les propri ́et ́es d’une mesure ext ́erieure sont moins contraignantes que celles d’une mesure. Remarquons cependant qu’une mesure ext ́erieure est d ́efinie sur l’ensemble de toutes les parties de E et non pas seulement sur une tribu. Nous verrons plus loin sur des exemples comment on construit des mesures ext ́erieures. Notre objectif dans ce paragraphe est de montrer comment `a partir d’une mesure ext ́erieure μ∗ on construit une mesure sur une tribu M(μ∗) qui d ́epend de μ∗. Dans la suite de cette partie, on fixe une mesure ext ́erieure μ∗.
+29
+
+
+De ́finition 3.1.2 Une partie B de E est dite μ∗-mesurable si pour toute partie A de E,
+μ∗(A) = μ∗(A ∩ B) + μ∗(A ∩ Bc).
+On note M(μ∗) l’ensemble des parties μ∗-mesurables.
+Remarque. L’in ́egalit ́e μ∗(A) ≤ μ∗(A ∩ B) + μ∗(A ∩ Bc) est toujours v ́erifi ́ee par σ-sousadditivit ́e. Pour v ́erifier que B est μ∗-mesurable, c’est donc l’in ́egalit ́e inverse qu’il importe de v ́erifier.
+The ́ore`me 3.1.1 (1) M(μ∗) est une tribu, qui contient toutes les parties B de E telles que μ∗(B) = 0.
+(2) La restriction de μ∗ `a M(μ∗) est une mesure.
+Preuve. (1) Notons M = M(μ∗) pour simplifier. Si μ∗(B) = 0, l’in ́egalit ́e
+μ∗(A) ≥ μ∗(A ∩ Bc) = μ∗(A ∩ B) + μ∗(A ∩ Bc)
+montre aussitˆot que B ∈ M. Ensuite on voit imm ́ediatement que ∅ ∈ M et que M est stable par passage au compl ́ementaire. Pour terminer la preuve de la partie (1), il reste a` montrer que M est stable par r ́eunion d ́enombrable. On commence par  ́etablir que M est stable par r ́eunion finie. Soient B1, B2 ∈ M. Alors, pour toute A ∈ P(E), l’hypoth`ese B1 ∈ M montre que
+μ∗(A∩(B1∪B2)) = μ∗(A∩(B1∪B2)∩B1)+μ∗(A∩(B1∪B2)∩B1c) = μ∗(A∩B1)+μ∗(A∩B2∩B1c).
+Donc en utilisant successivement les propri ́et ́es B2 ∈ M et B1 ∈ M,
+μ∗(A ∩ (B1 ∪ B2)) + μ∗(A ∩ (B1 ∪ B2)c)
+= μ∗(A ∩ B1) + μ∗(A ∩ B1c ∩ B2) + μ∗(A ∩ B1c ∩ B2c) = μ∗(A ∩ B1) + μ∗(A ∩ B1c) = μ∗(A),
+ce qui montre bien que B1 ∪ B2 ∈ M. Etant stable par passage au compl ́ementaire et par r ́eunion finie, M est stable par intersection finie. En cons ́equence, si B, B′ ∈ M, B\B = B′ ∩ Bc ∈ M.
+Compte-tenu de cette derni`ere remarque, il suffit pour compl ́eter la preuve de montrer
+que si les ensembles Bk ∈ M, k ∈ N sont deux `a deux disjoints on a ⋃ Bk ∈ M. Pour cela on montre par r ́ecurrence que pour tout entier m ∈ N et toute partie A de E,
+μ∗(A) =
+m ∑
+k=0
+μ∗(A ∩ Bk) + μ∗(A ∩
+( m ⋂
+k=0
+Bkc
+)
+). (3.1)
+Pour m = 0, c’est la d ́efinition de B0 ∈ M. Pour passer de l’ ́etape m `a l’ ́etape m + 1, il suffit d’ ́ecrire
+μ∗(A ∩
+( m ⋂
+k=0
+Bkc
+)
+) = μ∗(A ∩
+( m ⋂
+k=0
+Bkc
+)
+∩ Bm+1) + μ∗(A ∩
+( m+1
+⋂
+k=0
+Bkc
+) )
+= μ∗(A ∩ Bm+1) + μ∗(A ∩
+( m+1
+⋂
+k=0
+Bkc
+) )
+30
+
+
+en utilisant le fait que les Bk sont disjoints. On d ́eduit de (3.1) que
+μ∗(A) ≥
+∑ m
+k=0
+μ∗(A ∩ Bk) + μ∗(A ∩
+( ∞ ⋂
+k=0
+Bkc
+) )
+et en faisant tendre m vers ∞,
+μ∗(A) ≥
+∞ ∑
+k=0
+μ∗(A ∩ Bk) + μ∗(A ∩
+( ∞ ⋂
+k=0
+Bkc
+) )
+≥ μ∗(A ∩
+( ∞ ⋃
+k=0
+Bk
+)
+) + μ∗(A ∩
+( ∞ ⋂
+k=0
+Bkc
+) ),
+par σ-sous-additivit ́e. Cela suffit pour conclure que
+∞ ⋃
+k=0
+Bk ∈ M.
+(2) Notons μ la restriction de μ∗ `a M. On sait d ́ej`a que μ(∅) = 0. Soient Bk, k ∈ M des  ́elements disjoints de M. La preuve de (1) montre que pour toute partie A de E,
+μ∗(A) ≥
+∑ ∞
+k=0
+μ∗(A ∩ Bk) + μ∗(A ∩
+( ∞ ⋂
+k=0
+Bkc
+) )
+et donc en prenant A =
+∞ ⋃
+k=0
+Bk ,
+μ∗(
+∞ ⋃
+k=0
+Bk) ≥
+∞ ∑
+k=0
+μ∗(Bk).
+Comme l’in ́egalit ́e inverse est aussi vraie par σ-sous-additivit ́e, cela termine la preuve.
+3.2 La mesure de Lebesgue
+Pour toute partie A de R, on d ́efinit
+λ∗(A) = inf{∑
+i∈N
+(bi − ai) : A ⊂ ⋃
+i∈N
+]ai, bi[}.
+L’infimum porte sur tous les recouvrements d ́enombrables de A par des intervalles ouverts ]ai, bi[, ai ≤ bi ( ́evidemment il existe toujours de tels recouvrements).
+The ́ore`me 3.2.1 (i) λ∗ est une mesure ext ́erieure sur R. (ii) La tribu M(λ∗) contient B(R).
+(iii) Pour tous a ≤ b, λ∗([a, b]) = λ∗(]a, b[) = b − a.
+31
+
+
+La restriction de λ∗ `a B(R) (ou `a M(λ∗)) est la mesure de Lebesgue sur R, et sera not ́ee simplement λ. En cons ́equence des r ́esultats de la fin du Chapitre 1, c’est l’unique mesure sur B(R) qui v ́erifie la propri ́et ́e λ(]a, b[) = b − a pour tout intervalle ]a, b[.
+Preuve. (i) Il est imm ́ediat que λ∗(∅) = 0 et que λ∗ est croissante. Il reste `a  ́etablir la sous-additivit ́e. Pour cela, on se donne une suite (An)n∈N de parties de N. On peut supposer λ∗(An) < ∞ pour tout n (sinon il n’y a rien `a montrer). Soit ε > 0. Pour tout n ∈ N, on peut trouver une suite d’intervalles ]a(n)
+i , b(n)
+i [, i ∈ N tels que
+An ⊂ ⋃
+i∈N
+]a(n)
+i , b(n)
+i[
+et ∑
+i∈N
+(b(n)
+i − a(n)
+i ) ≤ λ∗(An) + ε
+2i .
+Il suffit alors de remarquer que les intervalles ]a(n)
+i , b(n)
+i [, n ∈ N, i ∈ N forment un recouvrement d ́enombrable de la r ́eunion des An, et donc
+λ∗( ⋃
+n∈N
+An) ≤ ∑
+n∈N
+∑
+i∈N
+(b(n)
+i − a(n)
+i )≤∑
+n∈N
+λ∗(An) + 2ε,
+d’o`u le r ́esultat puisque ε est arbitraire. (ii) Puisque M(λ∗) est une tribu, il suffit de montrer qu’elle contient une famille qui engendre la tribu bor ́elienne, par exemple la famille des intervalles ] − ∞, α], α ∈ R. On se donne donc α ∈ R et on pose B =] − ∞, α]. Le probl`eme est de v ́erifier que pour toute partie A de R,
+λ∗(A) ≥ λ∗(A ∩ B) + λ∗(A ∩ Bc).
+Soit (]ai, bi[)i∈N un recouvrement de A, et ε > 0. Les intervalles ]ai ∧ α, (bi ∧ α) + ε2−i[ recouvrent A ∩ B, et les intervalles ]ai ∨ α, bi ∨ α[ recouvrent A ∩ Bc. Donc
+λ∗(A ∩ B) ≤ ∑
+i∈N
+((bi ∧ α) − (ai ∧ α)) + 2ε,
+λ∗(A ∩ Bc) ≤ ∑
+i∈N
+((bi ∨ α) − (ai ∨ α)).
+En faisant la somme on trouve
+λ∗(A ∩ B) + λ∗(A ∩ Bc) ≤ ∑
+i∈N
+(bi − ai) + 2ε.
+Puisque ε  ́etait arbitraire, on a
+λ∗(A ∩ B) + λ∗(A ∩ Bc) ≤ ∑
+i∈N
+(bi − ai),
+et comme λ∗(A) est par d ́efinition l’infimum des sommes de droite sur tous les recouvrements de A, l’in ́egalit ́e recherch ́ee en d ́ecoule.
+32
+
+
+(iii) Il est imm ́ediat par d ́efinition que
+λ∗([a, b]) ≤ b − a.
+Pour l’in ́egalit ́e inverse, supposons que
+[a, b] ⊂ ⋃
+i∈N
+]ai, bi[.
+Par compacit ́e, on peut trouver un entier N assez grand tel que
+[a, b] ⊂
+N ⋃
+i=0
+]ai, bi[.
+Un raisonnement  ́el ́ementaire montre alors que
+b−a≤
+N ∑
+i=0
+(bi − ai) ≤
+∑ ∞
+i=0
+(bi − ai).
+Cela donne l’autre in ́egalit ́e b − a ≤ λ∗([a, b]). Il est facile de voir enfin que λ∗(]a, b[) = λ∗([a, b]) (par exemple en observant que λ∗({a}) = λ∗({b}) = 0).
+Extension en dimension d.
+On appelle pav ́e ouvert (resp. ferm ́e) un sous-ensemble P de Rd de la forme
+P=
+d ∏
+j=1
+]aj, bj[ , (resp. P =
+d ∏
+j=1
+[aj, bj]).
+Le volume de P est par d ́efinition
+vol (P ) =
+d ∏
+j=1
+(bj − aj).
+On d ́efinit alors pour toute partie A de Rd
+λ∗(A) = inf{∑
+i∈N
+vol (Pi) : A ⊂ ⋃
+i∈N
+Pi}.
+o`u l’infimum porte sur tous les recouvrements d ́enombrables de A par des pav ́es ouverts. On a alors l’analogue suivant du th ́eor`eme pr ́ec ́edent.
+The ́ore`me 3.2.2 (i) λ∗ est une mesure ext ́erieure sur Rd. (ii) La tribu M(λ∗) contient B(Rd). (iii) Pour tous pav ́e (ouvert ou ferm ́e) P , λ∗(P ) = vol (P ).
+33
+
+
+La restriction de λ∗ `a B(Rd) (ou `a M(λ∗)) est la mesure de Lebesgue sur Rd, et sera not ́ee simplement λ.
+Preuve. La preuve de (i) est exactement la mˆeme que dans le cas d = 1. Pour (ii), il suffit de montrer que si A est un ensemble de la forme
+A = R × · · · × R×] − ∞, a] × R × · · · × R,
+on a A ∈ M(λ∗) (il est facile de voir que les ensembles de cette forme engendrent la tribu B(Rd)). La d ́emonstration est alors tout `a fait semblable `a celle du cas d = 1. Enfin pour (iii), on se ram`ene `a montrer que si P est un pav ́e ferm ́e et si
+P⊂
+⋃n
+i=1
+Pi
+o`u les Pi sont des pav ́es ouverts, on a
+vol (P ) ≤
+n ∑
+i=1
+vol (Pi).
+Cette assertion est laiss ́ee en exercice.
+Remarque. On verra plus tard (dans le Chapitre 5) une autre fac ̧on de construire la mesure de Lebesgue en dimension d `a partir du cas de la dimension un.
+On peut se demander si la tribu M(λ∗) est beaucoup plus grande que la tribu B(R). Nous allons voir qu’en un certain sens ces deux tribus ne sont pas tr`es diff ́erentes. Nous  ́enonc ̧ons d’abord une proposition pr ́eliminaire.
+Proposition 3.2.3 Soit (E, A, μ) un espace mesur ́e. La classe des parties n ́egligeables est par d ́efinition
+N = {A ∈ P(E) : ∃B ∈ A, A ⊂ B et μ(B) = 0}.
+La tribu compl ́et ́ee de A (par rapport `a μ) est A ̄ = σ(A ∪ N ). Il existe alors une unique
+mesure sur (E, A ̄) qui prolonge μ.
+Preuve. On remarque d’abord que la tribu A ̄ peut ˆetre obtenue de la mani`ere suivante : si
+B = {A ∈ P(E) : ∃B, B′ ∈ A, B ⊂ A ⊂ B′ et μ(B′\B) = 0}
+on a A ̄ = B. En effet on v ́erifie facilement que B est une tribu. Il est clair que A ⊂ B et
+N ⊂ B, ce qui entraˆıne que A ̄ ⊂ B. Enfin, si A ∈ B, on choisit B et B′ comme dans la
+d ́efinition et on remarque que A = B ∪ (A\B), avec B ∈ A et A\B ∈ N . L’inclusion B ⊂ A ̄ en d ́ecoule.
+Une fois acquise l’ ́egalit ́e A ̄ = B, on construit le prolongement de μ `a A ̄ de la mani`ere
+suivante. Si A ∈ A ̄ = B, et si B et B′ sont comme dans la d ́efinition de B ci-dessus,
+on pose μ(A) = μ(B) = μ(B′). Cela ne d ́epend pas du choix de B et B′ : si B ̃, B ̃′ est
+un autre choix, on a `a la fois μ(B ̃) ≤ μ(B′) et μ(B ̃′) ≥ μ(B) ce qui force les  ́egalit ́es
+34
+
+
+μ(B) = μ(B′) = μ(B ̃) = μ(B ̃′). Enfin, il est facile de v ́erifier que le prolongement de μ `a
+A ̄ est une mesure : si An, n ∈ N sont des  ́el ́ements disjoints de A ̄, on peut pour chaque n choisir Bn ∈ A, Bn ⊂ An de mani`ere que An\Bn soit n ́egligeable, et on a
+∑
+n
+μ(An) = ∑
+n
+μ(Bn) = μ(⋃
+n
+Bn) = μ(⋃
+n
+An),
+la derni`ere  ́egalit ́e parce que ⋃
+n An\ ⋃
+n Bn ⊂ ⋃
+n(An\Bn) est n ́egligeable.
+Proposition 3.2.4 La tribu M(λ∗) co ̈ıncide avec la compl ́et ́ee B ̄(Rd) de B(Rd) par rapport `a la mesure de Lebesgue λ.
+Preuve. L’inclusion B ̄(Rd) ⊂ M(λ∗) est imm ́ediate : si A ∈ P(Rd) est tel que A ⊂ B, o`u B ∈ B(Rd) et λ(B) = 0, alors λ∗(A) ≤ λ∗(B) = λ(B) = 0, et d’apr`es le th ́eor`eme du paragraphe 1, on sait que cela entraˆıne A ∈ M(λ∗).
+Inversement, soit A ∈ M(λ∗). On veut montrer que A ∈ B ̄(Rd). Sans perte de g ́en ́eralit ́e, on peut supposer A ⊂]−K, K[d (sinon on  ́ecrit A comme la r ́eunion croissante des ensembles A∩] − n, n[d). On a alors λ∗(A) < ∞, et donc pour chaque n ≥ 1 on peut trouver une famille d ́enombrable (Pin, i ∈ N) de pav ́es ouverts contenus dans ] − K, K[d tels que
+A⊂⋃
+i
+Pin , ∑
+i
+vol (Pin) ≤ λ∗(A) + 1
+n.
+Posons
+Bn = ⋃
+i
+Pin, B = ⋂
+n
+Bn.
+Alors B ∈ B(Rd), A ⊂ B, et d’autre part pour chaque n,
+λ∗(B) ≤ ∑
+i
+vol (Pin) ≤ λ∗(A) + 1
+n
+ce qui implique λ∗(B) = λ∗(A). En remplac ̧ant A par ] − K, K[d\A, on construit de mˆeme
+B ̃ ∈ B(Rd), B ̃ ⊂] − K, K[d telle que ] − K, K[d\A ⊂ B ̃ et λ∗(] − K, K[d\A) = λ∗(B ̃). Si
+B′ =] − K, K[d\B ̃, on doit alors avoir B′ ⊂ A et λ∗(B′) = λ∗(A). Finalement on a bien trouv ́e deux bor ́eliens B et B′ avec B′ ⊂ A ⊂ B et λ(B\B′) = 0.
+The ́ore`me 3.2.5 La mesure de Lebesgue sur Rd est invariante par translation, au sens o`u pour tout A ∈ B(Rd) et tout x ∈ Rd, on a λ(x + A) = λ(A). Inversement, si μ est une mesure sur (Rd, B(Rd)) finie sur les parties born ́ees et invariante par translation, il existe une constante c ≥ 0 telle que μ = cλ.
+Preuve. Notons σx la translation σx(y) = y − x pour tout y ∈ Rd. La mesure-image σx(λ) est d ́efinie par ∀A ∈ B(Rd), σx(λ)(A) = λ(σx−1(A)) = λ(x + A).
+35
+
+
+L’ ́egalit ́e σx(λ)(A) = λ(A) est vraie pour tout pav ́e A (puisque A et x+A sont deux pav ́es de mˆeme volume). A l’aide du lemme de classe monotone du Chapitre 1, il en d ́ecoule aussitˆot que σx(λ) = λ, ce qui est la premi`ere assertion du th ́eor`eme. Inversement, soit μ une mesure sur B(Rd) invariante par translation. Soit
+c = μ([0, 1[d).
+Comme [0, 1[d est la r ́eunion disjointe de nd pav ́es qui sont des translat ́es de [0, 1
+n [d, il en
+r ́esulte que pour tout entier n ≥ 1,
+μ([0, 1
+n [d) = c
+nd .
+Soient ensuite a1, . . . , ad ≥ 0. En  ́ecrivant
+d ∏
+j=1
+[0, [naj]
+n [⊂
+∏d
+j=1
+[0, aj[⊂
+d ∏
+j=1
+[0, [naj] + 1
+n[
+(o`u [x] d ́esigne la partie enti`ere de x), on trouve
+(
+∏d
+j=1
+[naj]) c
+nd = μ(
+d ∏
+j=1
+[0, [naj]
+n [) ≤ μ(
+d ∏
+j=1
+[0, aj[) ≤ μ(
+d ∏
+j=1
+[0, [naj] + 1
+n [) = (
+d ∏
+j=1
+[naj] + 1) c
+nd .
+En faisant tendre n vers ∞, il vient
+μ(
+d ∏
+j=1
+[0, aj[) = c
+n ∏
+j=1
+aj = cλ(
+d ∏
+j=1
+[0, aj[)
+et en utilisant l’invariance par translation de μ on trouve que les mesures μ et cλ co ̈ıncident sur tous les pav ́es de la forme
+∏d
+j=1
+[aj, bj[.
+Comme dans la premi`ere partie de la preuve, cela suffit pour conclure que μ = cλ.
+Proposition 3.2.6 La mesure de Lebesgue sur Rd est r ́eguli`ere au sens o`u pour tout A ∈
+B ̄(Rd), on a
+λ(A) = inf{λ(U) : U ouvert , A ⊂ U}
+= sup{λ(F ) : F compact , F ⊂ A}.
+Preuve. La quantit ́e inf{λ(U) : U ouvert , A ⊂ U} est toujours plus grande que λ(A). Pour l’autre in ́egalit ́e, on peut supposer λ(A) < ∞. Ensuite, par d ́efinition de λ(A) = λ∗(A), on peut pour chaque ε > 0 trouver un recouvrement de A par des pav ́es ouverts Pi tels que
+∑ λ(Pi) ≤ λ(A) + ε. Mais alors l’ouvert U d ́efini comme la r ́eunion des Pi contient A et on
+a λ(U) ≤ ∑ λ(Pi) ≤ λ(A) + ε, ce qui conduit `a l’in ́egalit ́e voulue.
+36
+
+
+Pour la deuxi`eme  ́egalit ́e de la proposition, on peut supposer A contenu dans un compact C (sinon on  ́ecrit λ(A) = lim ↑ λ(A ∩ [−n, n]d)). Pour chaque ε > 0 on peut grˆace `a la premi`ere partie de la preuve trouver un ouvert U contenant C\A, tel que λ(U) < λ(C\A)+ε. Mais alors F = C\U est un compact contenu dans A, et
+λ(F ) ≥ λ(C) − λ(U) ≥ λ(C) − (λ(C\A) + ε) = λ(A) − ε,
+ce qui donne la deuxi`eme  ́egalit ́e.
+La proposition pr ́ec ́edente peut ˆetre  ́etendue `a un cadre beaucoup plus g ́en ́eral. Nous nous limitons au cas des mesures finies.
+Proposition 3.2.7 Soit (E, d) un espace m ́etrique, et soit μ une mesure finie sur (E, B(E)). Alors, pour tout A ∈ B(E),
+μ(A) = inf{μ(U) : U ouvert , A ⊂ U}
+= sup{μ(F ) : F ferm ́e , F ⊂ A}.
+Preuve. Notons O la classe des ouverts de E, et soit C la classe des ensembles A ∈ B(E) qui v ́erifient la propri ́et ́e de la proposition. Puisque la tribu bor ́elienne est par d ́efinition engendr ́ee par O, il suffit de montrer que O ⊂ C et que C est une tribu. Si A ∈ O, la premi`ere  ́egalit ́e est triviale. Pour la seconde, on remarque que pour tout n ≥ 1, l’ensemble
+Fn = {x ∈ E : d(x, Ac) ≥ 1
+n}
+est ferm ́e. Par ailleurs A = lim ↑ Fn, ce qui entraˆıne
+μ(A) = lim ↑ μ(Fn),
+ce qui donne bien la seconde  ́egalit ́e et prouve que O ⊂ C. Il reste `a montrer que C est une tribu. On a ∅ ∈ C et `a cause de la sym ́etrie entre ouverts et ferm ́es, on voit imm ́ediatement que C est stable par passage au compl ́ementaire. Soit ensuite (An)n∈N une suite dans C et soit ε > 0. Pour chaque n, on peut trouver un ouvert Un contenant An tel que μ(Un) ≤ μ(An) + ε2−n, d’o`u
+μ
+(⋃
+n∈N
+Un\ ⋃
+n∈N
+An
+)
+≤∑
+n∈N
+μ(Un − An) ≤ 2ε.
+Puisque ⋃ Un est ouvert cela donne la premi`ere des deux  ́egalit ́es recherch ́ees pour ⋃ An. Ensuite, soit N un entier assez grand pour que
+μ(
+N ⋃
+n=0
+An) ≥ μ( ⋃
+n∈N
+An) − ε.
+Pour chaque n ∈ {0, 1, . . . , N } on peut trouver un ferm ́e Fn ⊂ An tel que μ(An\Fn) ≤ ε2−n. Alors
+F=
+N ⋃
+n=0
+Fn
+37
+
+
+est ferm ́e et
+μ((
+N ⋃
+n=0
+An)\F ) ≤
+N ∑
+n=0
+μ(An − Fn) < 2ε
+d’o`u
+μ((
+∞ ⋃
+n=0
+An)\F ) ≤ 3ε.
+On conclut que ⋃ An ∈ C, ce qui termine la preuve.
+3.3 Liens avec l’int ́egrale de Riemann
+Fixons un intervalle [a, b] non trivial de R. Une fonction h : [a, b] −→ R est dite en escalier, et on note h ∈ Esc, s’il existe une subdivision a = x0 < x1 < · · · < xN = b et des r ́eels y1, . . . , yN tels que ∀i ∈ {1, . . . , N }, ∀x ∈]xi−1, xi[, f (x) = yi.
+On pose alors
+I(h) =
+N ∑
+i=1
+yi(xi − xi−1).
+Il est imm ́ediat que I(h) = ∫
+[a,b] h dλ.
+Une fonction born ́ee f : [a, b] −→ R est dite Riemann-int ́egrable si
+sup
+h∈Esc, h≤f
+I(h) = inf
+h∈Esc, h≥f I (h)
+et cette valeur commune est not ́ee I(f ).
+Proposition 3.3.1 Soit f une fonction Riemann-int ́egrable sur [a, b]. Alors f est mesurable
+pour la tribu compl ́et ́ee B ̄([a, b]), et
+I(f ) =
+∫
+[a,b]
+f dλ.
+Preuve. On peut trouver une suite (hn) de fonctions en escalier sur [a, b] telles que hn ≥ f et I(hn) ↓ I(f ). Quitte `a remplacer hn par h1 ∧ h2 ∧ · · · ∧ hn, on peut supposer la suite (hn) d ́ecroissante, ce qui permet de poser
+h∞ = lim ↓ hn ≥ f.
+De mˆeme, on peut trouver une suite croissante ( ̃hn) de fonctions en escalier avec  ̃hn ≤ f et
+I( ̃hn) ↑ I(f ), et poser
+ ̃h∞ = lim ↑  ̃hn ≤ f.
+38
+
+
+Les fonctions h∞ et  ̃h∞ sont bor ́eliennes born ́ees. Par convergence domin ́ee, ∫
+[a,b]
+h∞dλ = lim ↓
+∫
+[a,b]
+hndλ = lim ↓ I(hn) = I(f ),
+∫
+[a,b]
+ ̃h∞dλ = lim ↑
+∫
+[a,b]
+ ̃hndλ = lim ↑ I( ̃hn) = I(f ).
+Donc, ∫
+[a,b]
+(h∞ −  ̃h∞)dλ = 0.
+Puisque h∞ ≥  ̃h∞, cela entraˆıne h∞ =  ̃h∞, λ p.p. Comme h∞ ≥ f ≥  ̃h∞, f co ̈ıncide p.p.
+avec une fonction bor ́elienne, et il est facile d’en d ́eduire que f est B ̄([a, b])-mesurable. Enfin
+puisque f = h∞ p.p. on a ∫
+[a,b] f dλ = ∫
+[a,b] h∞ dλ = I(f ).
+3.4 Un exemple d’ensemble non mesurable
+Consid ́erons l’espace R/Q des classes d’ ́equivalence des r ́eels modulo les rationnels. Pour chaque a ∈ R/Q, soit xa un repr ́esentant de a dans l’intervalle [0, 1]. On pose
+F = {xa ; a ∈ R/Q} ⊂ [0, 1].
+Alors F n’est pas bor ́elien, ni mˆeme mesurable par rapport `a la tribu compl ́et ́ee B ̄(R).
+Pour le v ́erifier, supposons F mesurable et montrons que cela conduit `a une contradiction. D’abord, on a par construction
+R⊂ ⋃
+q∈Q
+(q + F )
+et donc λ(F ) > 0, car sinon R serait contenu dans une r ́eunion d ́enombrable d’ensembles de mesure nulle. Par ailleurs, les ensembles q + F , q ∈ Q sont disjoints (si q + xa = q′ + xa′ on a xa − xa′ = q′ − q ∈ Q et donc a = a′ puis q = q′). De l’inclusion ⋃
+q∈Q∩[0,1]
+(q + F ) ⊂ [0, 2]
+on d ́eduit donc ∑
+q∈Q∩[0,1]
+λ(q + F ) ≤ 2
+d’o`u λ(F ) = 0 ce qui est la contradiction recherch ́ee.
+3.5 Int ́egrale de Stieltjes
+Le th ́eor`eme suivant donne une description de toutes les mesures finies sur (R, B(R)). Le r ́esultat peut ˆetre facilement  ́etendu aux mesures de Radon.
+39
+
+
+The ́ore`me 3.5.1 (i) Soit μ une mesure finie sur (R, B(R)). Pour tout x ∈ R, soit
+Fμ(x) = μ(] − ∞, x]).
+La fonction Fμ est croissante, born ́ee, continue `a droite et Fμ(−∞) = 0. (ii) Inversement, soit F : R −→ R+ une fonction est croissante, born ́ee, continue `a droite et telle que F (−∞) = 0. Il existe alors une unique mesure finie μ sur (R, B(R)) telle que F = Fμ.
+Remarque. Lorsque F = Fμ, on note souvent ∫
+f (x) μ(dx) =
+∫
+f (x) dF (x).
+C’est l’int ́egrale de Stieltjes de f par rapport `a F . On a en particulier ∫
+]a,b]
+dF (x) = F (b) − F (a),
+et ∫
+[a,b]
+dF (x) = nli→m∞
+∫
+]a−n−1,b]
+dF (x) = F (b) − F (a−),
+o`u F (a−) d ́esigne la limite `a gauche de F en a.
+Preuve. (i) La v ́erification des propri ́et ́es de Fμ est facile. Par exemple si xn ↓ x, les intervalles ] − ∞, xn] d ́ecroissent vers ] − ∞, x], et donc
+Fμ(xn) = μ(] − ∞, xn]) ↓ μ(] − ∞, x]) = F (x).
+De mˆeme, si xn ↓ −∞, les intervalles ] − ∞, xn] d ́ecroissent vers ∅ et donc Fμ(xn) ↓ 0. (ii) L’unicit ́e de μ est une cons ́equence du lemme de classe monotone (cf Chapitre 1) : la classe C = {] − ∞, x]; x ∈ R} est stable par intersection finie et engendre la tribu B(R). Pour montrer l’existence, on pose pour tout A ⊂ R:
+μ∗(A) = inf{∑
+i∈N
+(F (bi) − F (ai)) : A ⊂ ⋃
+i∈N
+]ai, bi]}.
+(Noter qu’on recouvre A par des intervalles ouverts `a droite et ferm ́es `a gauche, et non plus des intervalles ouverts comme pour la mesure de Lebesgue.) Les mˆemes arguments que dans le cas de la mesure de Lebesgue montrent que μ∗ est une mesure ext ́erieure. On v ́erifie par la mˆeme m ́ethode que dans le cas de la mesure de Lebesgue que les intervalles ] − ∞, α] sont dans M(λ∗) (en fait c’est mˆeme plus facile ici). Il en d ́ecoule que la tribu M(μ∗) contient la tribu bor ́elienne, et que la restriction, not ́ee μ, de μ∗ `a M(μ∗) est une mesure sur (R, B(R)). Pour terminer, il reste `a montrer que μ(] − ∞, x]) = F (x) pour tout x ∈ R. Il suffit pour cela d’ ́etablir que μ(]a, b]) = F (b) − F (a) pour tous a < b (ensuite faire tendre a vers −∞). L’in ́egalit ́e
+μ(]a, b]) ≤ F (b) − F (a)
+40
+
+
+est imm ́ediate par construction de μ∗. Dans l’autre sens, soit (]xi, yi])i∈N un recouvrement d ́enombrable de ]a, b]. Soit ε ∈ ]0, b − a[. Pour chaque i ∈ N, on peut trouver yi′ > yi tel que F (yi′) ≤ F (yi) + ε2−i. Ensuite, on remarque qu’on peut recouvrir l’intervalle compact [a + ε, b] par une sous-famille finie (]xi, yi′[)i∈{0,1,...,Nε} de la famille des intervalles ouverts (]xi, yi′[)i∈N. Un raisonnement simple montre qu’alors
+F (b) − F (a + ε) ≤
+N ∑ε
+i=0
+(F (yi′) − F (xi)) ≤
+∞ ∑
+i=0
+(F (yi′) − F (xi)) ≤
+∑ ∞
+i=0
+(F (yi) − F (xi)) + 2ε.
+En faisant tendre ε vers 0 on trouve
+F (b) − F (a) ≤
+∞ ∑
+i=0
+(F (yi) − F (xi))
+ce qui par d ́efinition de μ∗ donne bien la minoration μ(]a, b]) ≥ F (b) − F (a).
+Cas des mesures de Radon. La formule
+F (x) =
+{ μ(]0, x]) si x ≥ 0, −μ(]x, 0]) si x < 0,
+donne une correspondance bijective entre mesures de Radon μ sur R et fonctions F : R −→ R croissantes continues `a droite et nulles en 0. Ce r ́esultat d ́ecoule facilement du cas des mesures finies. On a encore l’ ́egalit ́e μ(]a, b]) = F (b) − F (a). Dans le cas particulier F (x) = x la mesure μ est la mesure de Lebesgue.
+3.6 Le th ́eor`eme de repr ́esentation de Riesz
+Soit X un espace m ́etrique. On note Cc(X) l’espace des fonctions continues `a support compact sur X. Une forme lin ́eaire J sur Cc(X) est dite positive si J(f ) ≥ 0 d`es que f ≥ 0. Si μ est une mesure de Radon sur X, on d ́efinit une forme lin ́eaire J sur Cc(X) en posant
+J(f ) =
+∫
+f dμ.
+Noter que l’int ́egrale est bien d ́efinie puisque |f | ≤ C 1K, o`u K est un compact de X, et μ est finie sur les compacts. De plus J est positive. Le th ́eor`eme de repr ́esentation de Riesz montre que sous des hypoth`eses convenables toute forme lin ́eaire positive sur Cc(X) est de ce type.
+The ́ore`me 3.6.1 Soit X un espace m ́etrique localement compact s ́eparable, et soit J une forme lin ́eaire positive sur Cc(X). Il existe alors une unique mesure de Radon μ sur (X, B(X)) telle que
+∀f ∈ Cc(X), J(f ) =
+∫
+f dμ.
+41
+
+
+La mesure μ est r ́eguli`ere au sens o`u pour tout A ∈ B(X),
+λ(A) = inf{λ(U) : U ouvert , A ⊂ U}
+= sup{λ(F ) : F compact , F ⊂ A}.
+De plus, pour tout ouvert U de X,
+μ(U ) = sup{J(f ) : f ∈ Cc(X), 0 ≤ f ≤ 1U }.
+Exemple. Si X = R, on peut prendre J(f ) = I(f ), o`u I(f ) est comme ci-dessus l’int ́egrale de Riemann de la fonction f . On v ́erifie ais ́ement que J est une forme lin ́eaire positive sur Cc(R). La mesure associ ́ee est (bien sˆur) la mesure de Lebesgue. Cela fournit donc une autre construction de la mesure de Lebesgue (en supposant construite l’int ́egrale de Riemann des fonctions continues).
+Nous ne donnons pas ici la preuve du Th ́eor`eme 3.6.1 : voir le Th ́eor`eme 10.1 de Briane et Pag`es [2] ou le chapitre 2 de Rudin [7], qui donne un  ́enonc ́e un peu plus pr ́ecis.
+42
+
+
+Chapitre 4
+Espaces Lp
+Ce chapitre est consacr ́e principalement `a l’ ́etude de l’espace Lp des fonctions dont la valeur absolue est de puissance p-i`eme int ́egrable. Les in ́egalit ́es fondamentales de H ̈older, de Minkowski et de Jensen constituent un outil important pour cette  ́etude. On  ́etudie notamment la structure d’espace de Banach de l’espace Lp, et dans le cas particulier p = 2 la structure d’espace de Hilbert de L2. Les th ́eor`emes de densit ́e montrant qu’on peut approcher n’importe quelle fonction de Lp par des fonctions plus “r ́eguli`eres” jouent un rˆole important dans beaucoup d’applications en analyse. En application de la structure hilbertienne de L2, on  ́etablit le th ́eor`eme de Radon-Nikodym, qui  ́etant donn ́e une mesure de r ́ef ́erence permet de d ́ecomposer n’importe quelle autre mesure en la somme d’une mesure `a densit ́e par rapport `a la mesure de r ́ef ́erence et d’une mesure “ ́etrang`ere”.
+4.1 D ́efinition et in ́egalit ́e de H ̈older
+Dans tout ce chapitre on consid`ere un espace mesur ́e (E, A, μ). Pour tout r ́eel p ≥ 1 on pose
+Lp(E, A, μ) = {f : E −→ R mesurable;
+∫
+|f |pdμ < ∞}
+et on d ́efinit aussi
+L∞(E, A, μ) = {f : E −→ R mesurable; ∃C ∈ R+ : |f | ≤ C, μ p.p.}.
+On pourrait aussi consid ́erer les espaces Lp
+C et LC∞ obtenus en consid ́erant des fonctions `a valeurs complexes, mais dans ce chapitre nous nous int ́eresserons surtout au cas r ́eel. Pour chaque p ∈ [1, ∞], on d ́efinit une relation d’ ́equivalence sur Lp en posant
+f ∼ g si et seulement si f = g, μ p.p.
+Cela conduit `a d ́efinir l’espace quotient
+Lp(E, A, μ) = Lp(E, A, μ)/ ∼ .
+Un  ́el ́ement de Lp(E, A, μ) est donc une classe d’ ́equivalence de fonctions  ́egales μ p.p. Dans la suite on fera presque syst ́ematiquement l’abus d’ ́ecriture consistant `a identifier un  ́element de Lp(E, A, μ) `a l’un de ses repr ́esentants.
+43
+
+
+Pour toute fonction f : E −→ R mesurable, on note pour p ∈ [1, ∞[,
+‖f ‖p =
+(∫
+|f |pdμ
+)1/p
+(avec la convention ∞1/p = ∞) et
+‖f ‖∞ = inf{C ∈ [0, ∞] : |f | ≤ C, μ p.p.}
+de fac ̧on que ‖f ‖ ≤ ‖f ‖∞, μ p.p. et que ‖f ‖∞ est le plus petit nombre dans [0, ∞] avec cette propri ́et ́e. Soient p, q ∈ [1, ∞]. On dit que p et q sont des exposants conjugu ́es si
+1
+p+1
+q = 1.
+En particulier, p = 1 et q = ∞ sont conjugu ́es.
+The ́ore`me 4.1.1 (Ine ́galite ́ de H ̈older) Soient p et q des exposants conjugu ́es. Alors, si f et g sont deux fonctions mesurables de E dans R, ∫
+|f g| dμ ≤ ‖f ‖p‖g‖q .
+En particulier, f g ∈ L1(E, A, μ) d`es que f ∈ Lp(E, A, μ) et g ∈ Lq(E, A, μ).
+Preuve. Si ‖f ‖p = 0, on a f = 0, μ p.p., ce qui entraˆıne ∫ |f g|dμ = 0, et l’in ́egalit ́e est triviale. On peut donc supposer ‖f ‖p > 0 et ‖g‖q > 0. Sans perte de g ́en ́eralit ́e on peut aussi supposer f ∈ Lp(E, A, μ) et g ∈ Lq(E, A, μ). Le cas p = 1, q = ∞ est facile : on a |f g| ≤ ‖g‖∞|f |, μ p.p., d’o`u ∫
+|f g| dμ ≤ ‖g‖∞
+∫
+|f |dμ = ‖g‖∞‖f ‖1.
+Supposons 1 < p < ∞ (et donc 1 < q < ∞). Soit α ∈]0, 1[. On a pour tout x ∈ R+
+xα − αx ≤ 1 − α.
+En effet la fonction φα(x) = xα − αx a pour d ́eriv ́ee sur ]0, ∞[, φ′α(x) = α(xα−1 − 1) qui est positive sur ]0, 1[ et n ́egative sur ]1, ∞[. Donc φα est maximale en x = 1, ce qui donne
+l’in ́egalit ́e recherch ́ee. En appliquant cette in ́egalit ́e `a x = u
+v , o`u u ≥ 0 et v > 0, on trouve
+uαv1−α ≤ αu + (1 − α)v,
+in ́egalit ́e qui reste vraie si v = 0. On prend alors α = 1
+p (donc 1 − α = 1
+q ) puis
+u = |f (x)|p
+‖f ‖pp
+, v = |g(x)|q
+‖g‖qq
+44
+
+
+pour aboutir `a
+|f (x)g(x)| ‖f ‖p‖g‖q
+≤1
+p
+|f (x)|p ‖f ‖pp
++1
+q
+|g(x)|q ‖g‖qq
+.
+En int ́egrant cette derni`ere in ́egalit ́e par rapport `a μ, il vient
+1
+‖f ‖p‖g‖q
+∫
+|f g|dμ ≤ 1
+p+1
+q = 1.
+Exercice. Lorsque 1 < p < ∞, montrer qu’il y a  ́egalit ́e dans l’in ́egalit ́e de H ̈older ssi il existe deux r ́eels positifs α, β non tous deux nuls, tels que α|f |p = β|g|q μ p.p.
+Le cas particulier p = q = 2 de l’in ́egalit ́e de H ̈older est l’in ́egalit ́e de Cauchy-Schwarz
+∫
+|f g| dμ ≤
+(∫
+|f |2dμ
+)1/2( ∫
+|g|2dμ
+)1/2.
+Consid ́erons le cas particulier o`u μ est finie. En prenant g = 1, on trouve
+∫
+|f | dμ ≤ μ(E)1/q ‖f ‖p
+ce qui montre que Lp ⊂ L1 pour tout p ∈]1, ∞]. En remplac ̧ant |f | par |f |r (r ≥ 1) et en posant r′ = pr, on trouve pour tous 1 ≤ r ≤ r′ ≤ ∞
+‖f ‖r ≤ μ(E) 1
+r− 1
+r′ ‖f ‖r′,
+et donc Lr′ ⊂ Lr (toujours dans le cas o`u μ est finie). Lorsque μ est une mesure de probabilit ́e on a ‖f ‖r ≤ ‖f ‖r′ pour tous 1 ≤ r ≤ r′ ≤ ∞. Cette derni`ere in ́egalit ́e peut ˆetre vue comme un cas particulier de l’in ́egalit ́e de Jensen.
+The ́ore`me 4.1.2 (Ine ́galite ́ de Jensen) Supposons que μ est une mesure de probabilit ́e, et soit φ : R −→ R+ une fonction convexe. Alors, pour f ∈ L1(E, A, μ),
+∫
+φ ◦ f dμ ≥ φ
+(∫
+f dμ
+) .
+Remarque. L’int ́egrale ∫ φ◦f dμ est bien d ́efinie comme int ́egrale d’une fonction mesurable positive.
+Preuve. Soit
+Eφ = {(a, b) ∈ R2 : ∀x ∈ R, φ(x) ≥ ax + b}.
+Les propri ́et ́es bien connues des fonctions convexes assurent que
+∀x ∈ R , φ(x) = sup
+(a,b)∈Eφ
+(ax + b).
+45
+
+
+En cons ́equence,
+∫
+φ ◦ f dμ ≥ sup
+(a,b)∈Eφ
+∫
+(af + b)dμ
+= sup
+(a,b)∈Eφ
+( a
+∫
+f dμ + b
+)
+=φ
+(∫
+f dμ
+)
+Exercice. Montrer que si μ(E) < ∞ on a
+‖f ‖∞ = pli→m∞ ‖f ‖p.
+4.2 L’espace de Banach Lp(E, A, μ)
+The ́ore`me 4.2.1 (Ine ́galite ́ de Minkowski) Soit p ∈ [1, ∞], et soient f, g ∈ Lp(E, A, μ). Alors, f + g ∈ Lp(E, A, μ) et
+‖f + g‖p ≤ ‖f ‖p + ‖g‖p .
+Preuve. Les cas p = 1 et p = ∞ sont faciles en utilisant simplement l’in ́egalit ́e |f + g| ≤ |f | + |g|. Supposons donc 1 < p < ∞. En  ́ecrivant
+|f + g|p ≤ 2p(|f |p + |g|p)
+on voit que ∫ |f + g|pdμ < ∞ et donc f + g ∈ Lp. Ensuite, en int ́egrant par rapport `a μ l’in ́egalit ́e
+|f + g|p ≤ |f | |f + g|p−1 + |g| |f + g|p−1
+on trouve ∫
+|f + g|pdμ ≤
+∫
+|f | |f + g|p−1dμ +
+∫
+|g| |f + g|p−1dμ.
+En appliquant l’in ́egalit ́e de H ̈older aux r ́eels conjugue ́s p et q = p/(p − 1), il vient
+∫
+|f + g|pdμ ≤ ‖f ‖p
+(∫
+|f + g|pdμ
+) p−1
+p + ‖g‖p
+(∫
+|f + g|pdμ
+) p−1
+p.
+Si ∫ |f + g|pdμ = 0, l’in ́egalit ́e du th ́eor`eme est triviale. Sinon on peut diviser chacun des
+deux membres de l’in ́egalit ́e pr ́ec ́edente par (∫ |f + g|pdμ)(p−1)/p et on trouve le r ́esultat recherch ́e.
+The ́ore`me 4.2.2 (Riesz) Pour tout p ∈ [1, ∞], l’espace Lp(E, A, μ) muni de la norme f → ‖f ‖p est un espace de Banach (i.e. un espace vectoriel norm ́e complet).
+46
+
+
+Preuve. On se limite au cas 1 ≤ p < ∞ (le cas p = ∞ est plus facile). V ́erifions d’abord que f → ‖f ‖p est une norme sur Lp. On a
+‖f ‖p = 0 ⇒
+∫
+|f |pdμ = 0 ⇒ f = 0 μ p.p.
+ce qui signifie que f = 0 dans Lp (f appartient `a la classe d’ ́equivalence de 0). La propri ́ete ́ ‖λf ‖p = |λ|‖f ‖p pour λ ∈ R est imm ́ediate, et l’in ́egalit ́e de Minkowski donne l’in ́egalit ́e triangulaire. Il reste `a montrer que Lp muni de cette norme est complet. Soit (fn)n≥1 une suite de Cauchy dans Lp. Alors on peut choisir une suite d’entiers (kn) strictement croissante de fac ̧on que pour tout n ≥ 1,
+‖fkn+1 − fkn‖p ≤ 2−n.
+Posons gn = fkn et remarquons en utilisant le th ́eor`eme de convergence monotone puis l’in ́egalit ́e de Minkowski que
+∫ ( ∞ ∑
+n=1
+|gn+1 − gn|
+)pdμ = Nli↑m∞ ↑
+∫ ( N ∑
+n=1
+|gn+1 − gn|
+)pdμ
+≤ Nli↑m∞ ↑
+( N ∑
+n=1
+‖gn+1 − gn‖p
+)p
+=
+( ∑ ∞
+n=1
+‖gn+1 − gn‖p
+)p
+< ∞.
+On a donc ∞ ∑
+n=1
+|gn+1 − gn| < ∞ , μ p.p.
+et cela permet de poser
+h = g1 +
+∞ ∑
+n=1
+(gn+1 − gn)
+la s ́erie convergeant absolument sauf sur un ensemble de mesure nulle sur lequel on peut prendre une d ́efinition arbitraire de h (par exemple h = 0). La fonction h est alors mesurable. Puisque gN converge vers h, μ p.p., on a |h| = lim inf |gN |, μ p.p. et le lemme de Fatou montre imm ́ediatement que ∫
+|h|pdμ ≤ lim inf
+∫
+|gN |pdμ ≤ sup
+N ≥1
+∫
+|gN |pdμ < ∞,
+puisque la suite fn  ́etant de Cauchy est born ́ee dans Lp. Enfin, `a nouveau grˆace au lemme de Fatou, on a
+‖h − gn‖pp =
+∫
+|h − gn|pdμ ≤ lim inf
+N →∞
+∫
+|gN − gn|pdμ = lim inf
+N→∞ ‖gN − gn‖pp ≤ (2−n+1)p
+47
+
+
+en majorant pour N > n, ‖gN −gn‖p ≤ ‖gn+1 −gn‖p +· · ·+‖gN −gN−1‖p ≤ 2−n+1. L’in ́egalit ́e pr ́ec ́edente montre que gn converge vers h dans Lp. Cela entraˆıne que fn converge vers h et termine la preuve.
+Exemple. Si E = N et μ est la mesure de comptage, pour tout p ∈ [1, ∞[, l’espace Lp est l’espace des suites a = (an)n∈N de r ́eels tels que
+∑ ∞
+n=0
+|an|p < ∞
+muni de la norme
+‖a‖p =
+( ∑ ∞
+n=0
+|an|p)1/p.
+L’espace L∞ est simplement l’espace des suites (an)n∈N qui sont born ́ees, muni de la norme ‖a‖∞ = sup(an). Remarquons que dans ce cas il n’y a pas d’ensemble non vide de mesure nulle et donc Lp co ̈ıncide avec Lp. Cet espace est en g ́en ́eral not ́e lp = lp(N). Il joue un rˆole important dans la th ́eorie des espaces de Banach.
+La derni`ere preuve fait apparaˆıtre un r ́esultat interm ́ediaire qui m ́erite d’ˆetre  ́enonc ́e.
+Proposition 4.2.3 Soit p ∈ [1, ∞[ et soit (fn) une suite qui converge vers f dans Lp(E, A, μ). Il existe alors une sous-suite (fkn) qui converge μ p.p. vers f .
+Remarque. Le r ́esultat est aussi vrai pour p = ∞, mais dans ce cas l’extraction d’une soussuite n’est pas n ́ecessaire puisque la convergence L∞  ́equivaut `a une convergence uniforme sauf sur un ensemble de mesure nulle.
+On peut se demander si inversement la convergence μ p.p. entraˆıne la convergence Lp. Cela n’est pas vrai, mais le th ́eor`eme de convergence domin ́ee montre que si :
+(i) fn −→ f , μ p.p.
+(ii) Il existe une fonction g ≥ 0 telle que ∫ |f |pdμ < ∞ et ∀n, |fn| ≤ g, μ p.p.
+alors fn −→ f dans Lp.
+Exercice. On suppose μ(E) < ∞. Soit p ∈ [1, ∞[. Montrer que les conditions
+(i) fn −→ f , μ p.p.
+(ii) Il existe r > p tel que sup
+n
+∫
+|fn|rdμ < ∞
+entraˆınent fn −→ f dans Lp.
+Le cas p = 2 du th ́eor`eme de Riesz est particuli`erement important puisque l’espace L2 a une structure d’espace de Hilbert.
+48
+
+
+The ́ore`me 4.2.4 L’espace L2(E, A, μ) muni du produit scalaire
+〈f, g〉 =
+∫
+f g dμ
+est un espace de Hilbert (r ́eel).
+Preuve. L’in ́egalit ́e de Cauchy-Schwarz montre que si f, g ∈ L2, f g est int ́egrable et donc 〈f, g〉 est bien d ́efini. Ensuite il est clair que (f, g) −→ 〈f, g〉 d ́efinit une forme bilin ́eaire sym ́etrique d ́efinie positive, et que la norme associ ́ee est la norme ‖f ‖2. Le caract`ere complet d ́ecoule du th ́eor`eme de Riesz.
+On peut donc appliquer `a L2(E, A, μ) les r ́esultats classiques sur les espaces de Hilbert. En particulier, si Φ : L2(E, A, μ) −→ R est une forme lin ́eaire continue, il existe un (unique)  ́el ́ement g de L2(E, A, μ) tel que ∀f ∈ L2, Φ(f ) = 〈f, g〉. Ce r ́esultat nous sera utile dans la suite de ce chapitre.
+Remarque. Comme les r ́esultats pr ́ec ́edents, le th ́eor`eme ci-dessus s’ ́etend au cas complexe. L’espace L2C(E, A, μ) est un espace de Hilbert complexe pour le produit scalaire
+〈f, g〉 =
+∫
+f g ̄ dμ.
+4.3 Th ́eor`emes de densit ́e dans les espaces Lp
+Si (E, d) est un espace m ́etrique, une mesure μ sur (E, B(E)) est dite ext ́erieurement r ́eguli`ere si ∀A ∈ B(E) , μ(A) = inf{μ(U) : U ouvert, A ⊂ U}.
+Une fonction f : E −→ R est dite lipschitzienne s’il existe une constante K telle que
+∀x, y ∈ E , |f (x) − f (y)| ≤ K d(x, y).
+The ́ore`me 4.3.1 Soit p ∈ [1, ∞[.
+(1) L’espace des fonctions  ́etag ́ees int ́egrables est dense dans Lp(E, A, μ). (2) Si (E, d) est un espace m ́etrique, et μ une mesure ext ́erieurement r ́eguli`ere sur (E, B(E)), l’espace des fonctions lipschitziennes born ́ees qui sont dans Lp est dense dans Lp(E, B(E), μ).
+(3) Si (E, d) est un espace m ́etrique localement compact s ́eparable, et μ une mesure de Radon sur E, alors l’espace des fonctions lipschitziennes `a support compact est dense dans Lp(E, B(E), μ).
+Preuve. (1) En d ́ecomposant f = f + − f −, il suffit de montrer que si f ∈ Lp est positive, alors f est limite dans Lp d’une suite de fonctions  ́etag ́ees. On sait que
+f = nli→m∞ ↑ φn
+49
+
+
+o`u pour chaque n, 0 ≤ φn ≤ f et φn est  ́etag ́ee. Alors, ∫ |φn|pdμ ≤ ∫ |f |pdμ < ∞ et donc φn ∈ Lp (ce qui pour une fonction  ́etag ́ee  ́equivaut `a φn ∈ L1). Puisque |f − φn|p ≤ f p, le th ́eor`eme de convergence domin ́ee donne
+nli→m∞
+∫
+|f − φn|pdμ = 0.
+(2) Il suffit de montrer que toute fonction  ́etag ́ee int ́egrable est limite dans Lp de fonctions lipschitziennes born ́ees. On se ram`ene ais ́ement au cas f = 1A, A ∈ B(E), μ(A) < ∞. Soit alors ε > 0. On peut trouver un ouvert O contenant A tel que μ(O\A) < (ε/2)p, et donc
+‖1O − 1A‖p < ε
+2.
+Ensuite, pour tout k ≥ 1, on pose φk(x) = (k d(x, Oc)) ∧ 1. La fonction φk est lipschitzienne
+et φk ↑ 1O quand k → ∞. Par convergence domin ́ee, ∫ |1O − φk|pdμ −→ 0 quand k → ∞, et donc on peut choisir k assez grand pour que
+‖1O − φk‖p < ε
+2.
+Finalement,
+‖1A − φk‖p ≤ ‖1A − 1O‖p + ‖1O − φk‖p < ε.
+(3) On utilise le lemme suivant, dont la preuve est repouss ́ee `a la fin de la d ́emonstration.
+Rappelons que si A est un sous-ensemble de E, A◦ d ́esigne l’int ́erieur de A.
+Lemme 4.3.2 Soit E un espace m ́etrique localement compact s ́eparable. Alors il existe une
+suite croissante de compacts (Ln)n≥1 tels que, pour tout n, Ln ⊂L◦ n+1 et E = ⋃
+n≥1
+Ln = ⋃
+n≥1
+◦Ln.
+Il est facile de d ́eduire du lemme que toute mesure de Radon μ sur E est ext ́erieurement r ́eguli`ere (ce qui a d ́ej`a  ́et ́e vu, sans d ́emonstration, dans l’ ́enonc ́e du th ́eor`eme de repr ́esentation de Riesz). En effet, si A est un bor ́elien de E, on peut en consid ́erant la restriction de
+μ `a L◦ n (qui est une mesure finie) appliquer un r ́esultat de r ́egularit ́e ext ́erieure du chapitre
+pr ́ec ́edent et trouver pour chaque n un ouvert On ⊂ L◦ n tel que A∩ ◦Ln⊂ On et
+μ(On\(A∩ ◦Ln)) ≤ ε 2−n.
+Alors la r ́eunion O des On est un ouvert de E et
+μ(O\A) ≤ ∑
+n≥1
+μ(On\(A∩ ◦Ln)) ≤ ε.
+Ensuite, puisque μ est ext ́erieurement r ́eguli`ere, on peut appliquer la partie (2) du th ́eor`eme. On est ainsi ramen ́e `a montrer que toute fonction f lipschitzienne born ́ee telle
+50
+
+
+que ∫ |f |pdμ < ∞ est limite dans Lp de fonctions lipschitziennes `a support compact (noter que celles-ci sont automatiquement dans Lp). Par convergence domin ́ee, on a
+nli→m∞
+∫
+( ◦Ln)c
+|f |pdμ = 0,
+et donc ‖f − f 1◦Ln
+‖p −→ 0. D’autre part, pour chaque n fix ́e, et pour tout k ≥ 1, soit
+φn,k(x) = k d(x, (L◦ n)c) ∧ 1.
+Alors φn,k ∈ Lp puisque φn,k ≤ 1◦Ln
+. De plus, par convergence domin ́ee `a nouveau, on voit
+que pour chaque n fix ́e, φn,k converge vers 1◦Ln
+dans Lp quand k → ∞. Finalement, en
+ ́ecrivant
+‖f − f φn,k‖p ≤ ‖f − f 1◦Ln
+‖p + ‖f 1 ◦Ln
+− f φn,k‖p ≤ ‖f − f 1◦Ln
+‖p + ‖f ‖∞‖1◦Ln
+− φn,k‖p
+et en choisissant n puis k assez grands, on approche f dans Lp par la fonction f φn,k qui est lipschitzienne `a support compact.
+Preuve du lemme. On montre d’abord que E est r ́eunion d’une suite croissante de compacts (Kn)n≥1. Pour cela, soit (xp)p≥0 une suite dense dans E. Introduisons l’ensemble I de couples d’entiers d ́efini par
+I = {(p, k) ∈ N2 : B ̄(xp, 2−k) est compact},
+o`u B ̄(x, r) d ́esigne la boule ferm ́ee de centre x et de rayon r. En utilisant le fait que E est localement compact et la densit ́e de la suite (xp) il est facile de voir que
+E= ⋃
+(p,k)∈I
+B ̄(xp, 2−k).
+Par ailleurs, I  ́etant d ́enombrable, on peut trouver une suite croissante de sous-ensembles finis In, n ≥ 1 de I tels que I soit la r ́eunion des In. Alors il suffit de poser
+Kn = ⋃
+(p,k)∈In
+B ̄(xp, 2−k)
+pour avoir les propri ́et ́es recherch ́ees. Ensuite, on construit la suite (Ln) par r ́ecurrence sur n. On prend L1 = K1. Si on a construit Ln, on recouvre le compact Kn+1 ∪ Ln par une r ́eunion finie V1 ∪ V2 ∪ . . . ∪ Vp de voisinages ouverts d’adh ́erence compacte de points de Kn+1 ∪ Ln, et on prend Ln+1 =
+V ̄1 ∪ V ̄2 ∪ . . . ∪ V ̄p.
+Conse ́quences. Pour p ∈ [1, ∞[, on a :
+(i) L’espace Cc(Rd) des fonctions continues `a support compact sur Rd est dense dans Lp(Rd, B(Rd), λ). On peut remplacer λ par n’importe quelle mesure de Radon sur (Rd, B(Rd)).
+51
+
+
+(ii) L’ensemble des fonctions en escalier (`a support compact) est dense dans Lp(R, B(R), λ). En effet il sufit de v ́erifier que toute fonction f ∈ Cc(R) est limite dans Lp de fonctions en escalier. Cela se voit en  ́ecrivant
+f = nli→m∞
+(∑
+k∈Z
+f(k
+n ) 1[ k
+n , k+1
+n[
+) .
+Application. Si f ∈ L1(R, B(R), λ),
+fˆ(ξ) −→
+|ξ|→∞ 0.
+On se ram`ene par densit ́e au cas o`u f est une fonction en escalier : si f est limite dans L1 d’une suite (φn) de fonctions en escalier,
+sup
+ξ∈R
+|fˆ(ξ) − φˆn(ξ)| = sup
+ξ∈R
+∣∣∣
+∫
+f (x)eixξdx −
+∫
+φn (x)eixξ dx
+∣∣∣ ≤ ‖f − φn‖1
+qui tend vers 0 quand n → ∞. Ensuite, si f est en escalier, f =
+p ∑
+j=1
+λj 1]xj,xj+1[, on a
+fˆ(ξ) =
+p ∑
+j=1
+λj
+( eiξxj+1 − eiξxj
+iξ
+)
+−→
+|ξ|→∞ 0,
+d’o`u le r ́esultat voulu.
+4.4 Le th ́eor`eme de Radon-Nikodym
+De ́finition 4.4.1 Soient μ et ν deux mesures sur (E, A). On dit que:
+(i) ν est absolument continue par rapport `a μ (notation ν ≪ μ) si
+∀A ∈ A, μ(A) = 0 ⇒ ν(A) = 0.
+(ii) ν est  ́etrang`ere `a μ (notation ν ⊥ μ) s’il existe N ∈ A tel que μ(N) = 0 et ν(N c) = 0.
+Exemple. Si f est mesurable positive , la mesure ν = f · μ d ́efinie par
+ν(A) =
+∫
+A
+f dμ
+est absolument continue par rapport `a μ.
+The ́ore`me 4.4.1 (Radon-Nikodym) Soient μ et ν deux mesures σ-finies sur (E, A). Il existe alors un unique couple (νa, νs) de mesures σ-finies sur (E, A) telles que
+52
+
+
+(1) ν = νa + νs.
+(2) νa ≪ μ et νs ⊥ μ.
+De plus, il existe une fonction mesurable g : E −→ R+ telle que
+∀A ∈ A, νa(A) =
+∫
+A
+g dμ
+et la fonction g est unique `a un ensemble de μ-mesure nulle pr`es.
+Preuve. On traite d’abord en d ́etail le cas o`u les deux mesures μ et ν sont finies. L’extension au cas σ-fini ne pr ́esentera pas de difficult ́e.
+Cas o`u μ ≥ ν. Dans un premier temps, on suppose ν ≤ μ, c’est-`a-dire ∫ g dν ≤ ∫ g dμ pour toute fonction mesurable positive g. Consid ́erons alors l’application Φ : L2(E, A, μ) −→ R d ́efinie par
+Φ(f ) =
+∫
+f dν.
+Remarquons que l’int ́egrale a bien un sens puisque ∫
+|f |dν ≤
+∫
+|f |dμ
+et on sait que pour une mesure finie L2(μ) ⊂ L1(μ). De plus, Φ(f ) ne d ́epend pas du
+repr ́esentant de f choisi pour calculer ∫ f dν :
+f = f ̃, μ p.p. ⇒ f = f ̃, ν p.p. ⇒
+∫
+f dν =
+∫
+f dν ̃.
+L’in ́egalit ́e de Cauchy-Schwarz montre que
+|Φ(f )| ≤
+(∫
+f 2dν
+)1/2ν(E)1/2 ≤
+(∫
+f 2dμ
+)1/2ν(E)1/2 = ν(E)1/2‖f ‖L2(μ).
+Donc Φ est une forme lin ́eaire continue sur L2(E, A, μ) et on sait alors qu’il existe une fonction h ∈ L2(E, A, μ) telle que
+∀f ∈ L2(E, A, μ), Φ(f ) = 〈f, h〉 =
+∫
+f h dμ.
+En particulier, en prenant f = 1A,
+∀A ∈ A, ν(A) =
+∫
+A
+h dμ.
+On peut aussi remarquer que 0 ≤ h ≤ 1, μ p.p. En effet, pour tout ε > 0,
+μ({x : h(x) ≥ 1+ε}) ≥ ν({x : h(x) ≥ 1+ε}) =
+∫
+{x:h(x)≥1+ε}
+hdμ ≥ (1+ε)μ({x : h(x) ≥ 1+ε})
+53
+
+
+ce qui implique μ({x : h(x) ≥ 1+ε}) = 0. On montre de mˆeme que h ≥ 0 μ p.p. Remarquons que quitte `a remplacer h par (h ∨ 0) ∧ 1, on peut supposer 0 ≤ h(x) ≤ 1 pour tout x ∈ E.
+Cas g ́en ́eral. On applique la premi`ere partie de la preuve aux mesures ν et μ + ν. Il existe donc une fonction mesurable h telle que 0 ≤ h ≤ 1 et, pour toute fonction f ∈ L2(μ + ν), ∫
+f dν =
+∫
+f h d(μ + ν).
+En particulier, pour toute fonction f mesurable born ́ee, ∫
+f dν =
+∫
+f h dμ +
+∫
+f h dν
+d’o`u ∫
+f (1 − h) dν =
+∫
+f h dμ.
+En utilisant le th ́eor`eme de convergence monotone, on voit que cette derni`ere  ́egalit ́e est vraie pour toute fonction f mesurable positive. Posons N = {x ∈ E : h(x) = 1}. Alors en prenant f = 1N , on voit que μ(N) = 0. La mesure
+νs = 1N · ν (∀A ∈ A, νs(A) = ν(A ∩ N ))
+est donc  ́etrang`ere `a μ. D’autre part, en remplac ̧ant f par 1Nc(1 − h)−1f dans l’ ́egalit ́e ci-dessus, on trouve que pour toute fonction f mesurable positive, ∫
+Nc
+f dν =
+∫
+Nc
+fh
+1 − h dμ =
+∫
+f g dμ,
+o`u g = 1Nc h
+1−h . En posant
+νa = 1Nc · ν = g · μ
+on a bien les propri ́et ́es (1) et (2) du th ́eor`eme, et la repr ́esentation annonc ́ee pour νa. L’unicit ́e du couple (νa, νs) est facile. Si (ν ̃a, ν ̃s) est un autre couple avec les propri ́et ́es (1) et (2), on a ∀A ∈ A, νa(A) − ν ̃a(A) = νs(A) − ν ̃s(A).
+Mais comme νs et ν ̃s sont port ́ees respectivement par des ensembles N et N ̃ de μ-mesure nulle, on a
+νs(A) − ν ̃s(A) = νs(A ∩ (N ∪ N ̃ )) − ν ̃s(A ∩ (N ∪ N ̃ )) = νa(A ∩ (N ∪ N ̃ )) − ν ̃a(A ∩ (N ∪ N ̃ )) = 0
+`a cause de la propri ́et ́e νa ≪ μ, ν ̃a ≪ μ. Enfin, pour obtenir l’unicit ́e de g, on se donne une autre fonction g ̃ avec la mˆeme propri ́et ́e, et on observe que ∫
+{g ̃>g}
+g ̃ dμ = νa({g ̃ > g}) =
+∫
+{g ̃>g}
+g dμ,
+d’o`u ∫
+{g ̃>g}
+(g ̃ − g) dμ = 0
+54
+
+
+ce qui force g ̃ ≤ g, μ p.p. et par sym ́etrie g = g ̃, μ p.p.
+Il reste `a s’affranchir de l’hypoth`ese suppl ́ementaire que μ et ν sont finies. Si μ et ν sont seulement σ-finies, on peut construire une partition mesurable d ́enombrable (En)n∈N de E de mani`ere que μ(En) < ∞ et ν(En) < ∞ pour tout n. Notons μn la restriction de μ `a En et νn la restriction de ν `a En. En appliquant le d ́ebut de la preuve on peut  ́ecrire pour tout n ∈ N,
+νn = νan + νsn
+o`u νsn ⊥ μn, et νan = gn · μn, la fonction mesurable gn  ́etant nulle sur Ecn (puisque μn(Ecn) = 0, il est clair qu’on peut imposer cette derni`ere condition). On obtient le r ́esultat du th ́eor`eme en posant
+νa = ∑
+n∈N
+νan , νs = ∑
+n∈N
+νsn , g = ∑
+n∈N
+gn.
+(Dans la derni`ere somme, remarquer que pour chaque x ∈ E il y a au plus une valeur de n pour laquelle gn(x) > 0.) La v ́erification des propri ́et ́es d’unicit ́e ne pr ́esente pas de difficult ́e.
+55
+
+
+56
+
+
+Chapitre 5
+Mesures produits
+Etant donn ́e deux espaces mesurables munis chacun d’une mesure, on peut construire sur leur produit cart ́esien une mesure appel ́ee la mesure produit. De plus l’int ́egrale d’une fonction d ́efinie sur l’espace produit peut ˆetre calcul ́ee en int ́egrant d’abord par rapport `a la mesure sur le premier espace puis par rapport `a la mesure sur le second, ou bien dans l’ordre inverse : c’est le fameux th ́eor`eme de Fubini. Outre ses applications importantes en analyse (int ́egration par parties, convolution, etc.) ou en th ́eorie des probabilit ́es, le th ́eor`eme de Fubini est un outil essentiel pour le calcul effectif des int ́egrales.
+5.1 G ́en ́eralit ́es sur les espaces produits
+Soient (E, A) et (F, B) deux espaces mesurables. On peut alors munir le produit E × F de la tribu-produit
+A ⊗ B = σ(A × B ; A ∈ A, B ∈ B).
+Les ensembles de la forme A × B sont appel ́es pav ́es mesurables. Il est facile de v ́erifier que A⊗B est la plus petite tribu sur E ×F qui rende mesurables les deux projections canoniques π1 : E × F −→ E et π2 : E × F −→ F .
+Soit (G, C) un troisi`eme espace mesurable, et soit f : G −→ E × F . Notons f (x) = (f1(x), f2(x)). On a vu dans le Chapitre 1 que f est mesurable (E × F  ́etant muni de la tribu produit) ssi les deux applications f1 et f2 le sont. On  ́etend facilement la d ́efinition de la tribu produit au cas d’un nombre fini quelconque d’espaces mesurables (E1, A1), . . . , (En, An) :
+A1 ⊗ A2 ⊗ · · · ⊗ An = σ(A1 × · · · × An ; Ai ∈ Ai)
+et on a les propri ́et ́es d’“associativit ́e” attendues, `a savoir par exemple pour n = 3,
+(A1 ⊗ A2) ⊗ A3 = A1 ⊗ (A2 ⊗ A3) = A1 ⊗ A2 ⊗ A3 .
+Proposition 5.1.1 Si E et F sont deux espaces m ́etriques s ́eparables, on a
+B(E × F ) = B(E) ⊗ B(F ).
+57
+
+
+Preuve. L’inclusion B(E × F ) ⊃ B(E) ⊗ B(F ) est vraie sans hypoth`ese de s ́eparabilit ́e : elle d ́ecoule de ce que les projections π1 et π2 sont continues donc mesurables pour la tribu B(E × F ).
+Dans l’autre sens, on observe qu’on peut trouver un ensemble d ́enombrable d’ouverts U = {Un, n ≥ 1} de E tels que tout ouvert de E soit r ́eunion d’une sous-famille de U (si (xk) est une suite dense dans E, il suffit de prendre pour U les boules ouvertes de rayon rationnel centr ́ees en l’un des xk). Soit V = {Vn, n ≥ 1} une famille analogue pour F . Pour tout ouvert O de E × F et tout z = (x, y) ∈ O, on sait que O contient un ouvert de la forme U × V , o`u U, resp. V , est un ouvert de E, resp. de F , contenant x, resp. y. Il en d ́ecoule que O doit ˆetre r ́eunion (au plus d ́enombrable) d’une sous-famille de la famille {Un × Vm; n, m ≥ 1}. Donc tout ouvert de E × F est mesurable pour B(E) ⊗ B(F ) et cela entraˆıne B(E × F ) ⊂ B(E) ⊗ B(F ).
+On revient au cas o`u (E, A) et (F, B) sont deux espaces mesurables quelconques. Si C ⊂ E × F , on pose pour x ∈ E
+Cx = {y ∈ F : (x, y) ∈ C}
+et pour y ∈ F ,
+Cy = {x ∈ E : (x, y) ∈ C}.
+Si f est une fonction d ́efinie sur E × F , on note pour x ∈ E, fx(y) = f (x, y) et pour y ∈ F , f y(x) = f (x, y).
+The ́ore`me 5.1.2 (i) Soit C ∈ A ⊗ B. Alors, pour tout x ∈ E, Cx ∈ B et pour tout y ∈ F , Cy ∈ A.
+(ii) Soit f : E × F −→ G une application mesurable pour la tribu produit A ⊗ B. Alors, pour tout x ∈ E, fx est B-mesurable, et pour tout y ∈ F , f y est A-mesurable.
+Preuve. (i) Fixons x ∈ E et posons
+C = {C ∈ A ⊗ B : Cx ∈ B}.
+Alors C contient les pav ́es mesurables (si C = A × B, Cx = B ou Cx = ∅ selon que x ∈ A ou x ∈/ A). Par ailleurs il est facile de v ́erifier que C est une tribu, et donc C = A ⊗ B. (ii) Pour toute partie mesurable D de G,
+fx−1(D) = {y ∈ F : (x, y) ∈ f −1(D)} = (f −1(D))x
+qui est dans B d’apr`es (i).
+5.2 Construction de la mesure-produit
+The ́ore`me 5.2.1 Soient μ et ν deux mesures σ-finies respectivement sur (E, A) et sur (F, B).
+58
+
+
+(i) Il existe une unique mesure m sur (E × F, A ⊗ B) telle que
+∀A ∈ A, ∀B ∈ B, m(A × B) = μ(A)ν(B)
+(avec la convention usuelle 0 · ∞ = 0). Cette mesure est σ-finie, et est not ́ee m = μ ⊗ ν. (ii) Pour tout C ∈ A ⊗ B,
+μ ⊗ ν(C) =
+∫
+E
+ν(Cx) μ(dx) =
+∫
+F
+μ(Cy) ν(dy).
+Preuve. Unicit ́e. Il existe une suite croissante An ∈ A, resp. Bn ∈ B, telle que μ(An) < ∞, resp. μ(Bn) < ∞, pour tout n, et E = ∪An, resp. F = ∪Bn. Alors, si Cn = An × Bn, on a aussi
+E×F =⋃
+n
+Cn.
+Soient m et m′ deux mesures sur A ⊗ B v ́erifiant la propri ́et ́e  ́enonc ́ee en (i) du th ́eor`eme. Alors,
+• m et m′ co ̈ıncident sur la classe des pav ́es mesurables, qui est stable par intersection finie et engendre la tribu A ⊗ B;
+• pour tout n, m(Cn) = μ(An)ν(Bn) = m′(Cn) < ∞.
+D’apr`es une cons ́equence du lemme de classe monotone vue dans le Chapitre 1, cela suffit pour dire que m = m′. Existence. On pose pour tout C ∈ A ⊗ B,
+m(C) =
+∫
+E
+ν(Cx) μ(dx). (5.1)
+Remarquons que ν(Cx) est bien d ́efinie pour tout x ∈ E d’apr`es le th ́eor`eme pr ́ec ́edent. Pour v ́erifier que la formule (5.1) a bien un sens il faut aussi montrer que l’application x −→ ν(Cx) est A-mesurable. Supposons d’abord ν finie et posons
+G = {C ∈ A ⊗ B : x −→ ν(Cx) est A-mesurable}.
+Alors
+• G contient les pav ́es mesurables : si C = A × B, ν(Cx) = 1A(x)ν(B).
+• G est une classe monotone : si C ⊂ C′, on a ν((C\C′)x) = ν(Cx) − ν(C′x) (parce que ν est finie !) et si Cn est une suite croissante, ν((∪Cn)x) = lim ↑ ν((Cn)x).
+D’apr`es le lemme de classe monotone, on a donc G = A ⊗ B, ce qui donne la mesurabilit ́e recherch ́ee pour l’application x −→ ν(Cx). Dans le cas g ́en ́eral o`u ν n’est pas finie mais seulement σ-finie, on choisit la suite (Bn) comme ci-dessus et on peut remplacer ν par νn(B) = ν(B ∩ Bn), pour obtenir que x −→ ν(Cx) = lim ↑ νn(Cx) est mesurable pour tout C ∈ A ⊗ B.
+59
+
+
+Il est ensuite facile de montrer que m est une mesure sur A ⊗ B : si (Cn) est une famille de parties disjointes dans A ⊗ B, les (Cn)x sont aussi disjoints pour tout x ∈ E, et donc
+m
+(⋃
+n
+Cn
+) =
+∫
+E
+ν
+(⋃
+n
+(Cn)x
+)
+μ(dx)
+=
+∫
+E
+∑
+n
+ν((Cn)x) μ(dx)
+=∑
+n
+∫
+E
+ν((Cn)x) μ(dx)
+=∑
+n
+m(Cn)
+l’interversion entre somme et int ́egrale  ́etant justifi ́ee par un r ́esultat du Chapitre 2. Il est imm ́ediat que m v ́erifie la propri ́et ́e
+m(A × B) = μ(A)ν(B).
+Par ailleurs, si on d ́efinit m′ par
+m′(C) =
+∫
+F
+μ(Cy) ν(dy),
+les mˆemes arguments montrent que m′ est une mesure sur A⊗B qui v ́erifie la mˆeme propri ́et ́e, ce qui d’apr`es l’unicit ́e entraˆıne m = m′. On en d ́eduit l’assertion (ii) du th ́eor`eme, ce qui compl`ete la preuve.
+Remarques. (i) L’hypoth`ese de σ-finitude est essentielle au moins pour la partie (ii). En effet, si on prend (E, A) = (F, B) = (R, B(R)), μ = λ et ν la mesure de comptage, on remarque que pour C = {(x, x) : x ∈ R},
+∞=
+∫
+ν(Cx) λ(dx) 6=
+∫
+λ(Cy) ν(dy) = 0.
+(ii) Si on a maintenant n mesures σ-finies μ1, . . . , μn, on peut d ́efinir le produit μ1 ⊗ · · · ⊗ μn en posant
+μ1 ⊗ · · · ⊗ μn = μ1 ⊗ (μ2 ⊗ (· · · ⊗ μn)).
+L’ordre des parenth`eses n’a en fait pas d’importance car la mesure μ1⊗· · ·⊗μn est caract ́eris ́ee par ses valeurs sur les pav ́es
+μ1 ⊗ · · · ⊗ μn(A1 × · · · × An) = μ1(A1) . . . μn(An).
+Exemple. Si (E, A) = (F, B) = (R, B(R)), et μ = ν = λ, on v ́erifie facilement que λ ⊗ λ est la mesure de Lebesgue sur R2 (observer que la mesure de Lebesgue sur R2 est caract ́eris ́ee par ses valeurs sur les rectangles [a, b] × [c, d], toujours d’apr`es le lemme de classe monotone). Ceci se g ́en ́eralise en dimension sup ́erieure et montre qu’il aurait suffi de construire la mesure de Lebesgue en dimension un.
+60
+
+
+5.3 Le th ́eor`eme de Fubini
+On commence par donner l’ ́enonc ́e qui concerne les fonctions positives. Comme dans le paragraphe pr ́ec ́edent, on consid`ere deux espaces mesurables (E, A) et (F, B), et le produit E × F est muni de la tribu A ⊗ B.
+The ́ore`me 5.3.1 (Fubini-Tonnelli) Soient μ et ν deux mesures σ-finies respectivement sur (E, A) et sur (F, B), et soit f : E × F −→ [0, ∞] une fonction mesurable. (i) Les fonctions
+x −→
+∫
+f (x, y) ν(dy)
+y −→
+∫
+f (x, y) μ(dx)
+sont respectivement A-mesurable et B-mesurable. (ii) On a ∫
+E×F
+f dμ ⊗ ν =
+∫
+E
+(∫
+F
+f (x, y) ν(dy)
+)
+μ(dx) =
+∫
+F
+(∫
+E
+f (x, y) μ(dx)
+)
+ν(dy).
+Preuve. (i) Soit C ∈ A ⊗ B. Si f = 1C, on a d ́ej`a vu que la fonction x −→ ∫ f (x, y)ν(dy) =
+ν(Cx) est A-mesurable, et de mˆeme y −→ ∫ f (x, y)μ(dx) = μ(Cy) est B-mesurable. Par lin ́earit ́e, on en d ́eduit que le r ́esultat de (i) est vrai pour toute fonction  ́etag ́ee positive. Enfin, si f est quelconque, on peut  ́ecrire f = lim ↑ fn, o`u les fonctions fn sont  ́etag ́ees positives, et on utilise le fait qu’alors ∫
+f (x, y) ν(dy) = lim ↑
+∫
+fn(x, y) ν(dy)
+et de mˆeme pour ∫ f (x, y) μ(dx). (ii) Pour f = 1C, l’ ́egalit ́e annonc ́ee est
+μ ⊗ ν(C) =
+∫
+E
+ν(Cx) μ(dx) =
+∫
+F
+μ(Cx) ν(dy)
+et a d ́ej`a  ́et ́e vue dans le paragraphe pr ́ec ́edent. On en de ́duit par lin ́earit ́e le r ́esultat voulu quand f est  ́etag ́ee positive, puis par limite croissante pour f quelconque : on remarque par exemple que si f = lim ↑ fn, ∫
+E
+(∫
+F
+f (x, y) ν(dy)
+)
+μ(dx) = lim ↑
+∫
+E
+(∫
+F
+fn(x, y) ν(dy)
+)
+μ(dx)
+par une double application du th ́eor`eme de convergence monotone.
+Nous passons maintenant au cas de fonctions de signe quelconque. On conserve les hypoth`eses du th ́eor`eme pr ́ec ́edent.
+61
+
+
+The ́ore`me 5.3.2 (Fubini-Lebesgue) Soit f ∈ L1(E × F, A ⊗ B, μ ⊗ ν) (ou f ∈ L1C(E × F, A ⊗ B, μ ⊗ ν)). Alors
+(a) μ(dx) p.p. la fonction y −→ f (x, y) est dans L1(F, B, ν),
+ν(dy) p.p. la fonction x −→ f (x, y) est dans L1(E, A, μ).
+(b) Les fonctions x −→ ∫ f (x, y) ν(dy) et y −→ ∫ f (x, y) μ(dx), bien d ́efinies sauf sur un ensemble mesurable de mesure nulle, sont respectivement dans L1(E, A, μ) et L1(F, B, ν).
+(c) On a
+∫
+E×F
+f dμ ⊗ ν =
+∫
+E
+(∫
+F
+f (x, y) ν(dy)
+)
+μ(dx) =
+∫
+F
+(∫
+E
+f (x, y) μ(dx)
+)
+ν(dy).
+Preuve. (a) En appliquant le th ́eor`eme pr ́ec ́edent `a |f |, ∫
+E
+(∫
+F
+|f (x, y)| ν(dy)
+)
+μ(dx) =
+∫
+|f | dμ ⊗ ν < ∞.
+cela entraˆıne que μ(dx) p.p. ∫
+F
+|f (x, y)| ν(dy) < ∞
+et donc la fonction y −→ f (x, y), dont on sait d ́ej`a qu’elle est mesurable, est dans L1(F, B, ν). (b) En  ́ecrivant f = f + − f − et en utilisant le th ́eor`eme pr ́ec ́edent, on voit que
+x −→
+∫
+f (x, y) ν(dy) =
+∫
+f +(x, y) ν(dy) −
+∫
+f −(x, y) ν(dy)
+est mesurable (pour ˆetre pr ́ecis, il faudrait donner une valeur arbitraire, par exemple 0, `a
+l’int ́egrale ∫ f (x, y) ν(dy) pour les x tels que ∫ |f (x, y)| ν(dy) = ∞, qui forment un ensemble de mesure nulle). De plus, ∫
+E
+∣∣∣
+∫
+F
+f (x, y) ν(dy)
+∣∣∣μ(dx) ≤
+∫
+E
+(∫
+F
+|f (x, y)| ν(dy)
+)
+μ(dx) =
+∫
+|f | dμ ⊗ ν < ∞.
+(c) Il suffit de faire la diff ́erence terme `a terme dans les  ́egalit ́es ∫
+E
+(∫
+F
+f +(x, y) ν(dy)
+)
+μ(dx) =
+∫
+E×F
+f + dμ ⊗ ν ∫
+E
+(∫
+F
+f −(x, y) ν(dy)
+)
+μ(dx) =
+∫
+E×F
+f − dμ ⊗ ν.
+Remarque. L’hypoth`ese f ∈ L1(μ⊗ν) est cruciale. Il peut arriver en effet que les propri ́et ́es (a) et (b) soient toutes les deux satisfaites, et donc que les quantit ́es ∫
+E
+(∫
+F
+f (x, y) ν(dy)
+)
+μ(dx) et
+∫
+F
+(∫
+E
+f (x, y) μ(dx)
+)
+ν(dy)
+62
+
+
+soient bien d ́efinies, sans que ces quantit ́es soient  ́egales. Pour donner un exemple, consid ́erons la fonction
+f (x, y) = 2e−2xy − e−xy
+d ́efinie pour (x, y) ∈]0, ∞[×]0, 1]. Alors, pour tout y ∈]0, 1],
+∫
+]0,∞[
+f (x, y) dx = 2
+∫∞
+0
+e−2xydx −
+∫∞
+0
+e−xydx = 0
+et pour tout x > 0, ∫
+]0,1]
+f (x, y)dy = 2
+∫1
+0
+e−2xydy −
+∫1
+0
+e−xydy = e−x − e−2x
+x.
+On voit alors que ∫
+]0,1]
+(∫
+]0,∞[
+f (x, y) dx
+)
+dy = 0
+alors que ∫
+]0,∞[
+(∫
+]0,1]
+f (x, y)dy
+)
+dx =
+∫∞
+0
+e−x − e−2x
+x dx > 0.
+Evidemment dans cet exemple on a
+∫
+]0,∞[×]0,1[
+|f (x, y)| dxdy = ∞.
+En pratique, il faut se souvenir que l’application du th ́eor`eme de Fubini est toujours justifi ́ee pour des fonctions mesurables positives, et que dans le cas de fonctions de signe quelconque, il faut s’assurer que ∫
+|f | dμ ⊗ ν < ∞
+ce qui se fait le plus souvent en appliquant le cas des fonctions positives.
+Notation. Lorsque l’application du th ́eor`eme de Fubini est justifi ́ee (et seulement dans ce
+cas), on omet souvent les parenth`eses et on  ́ecrit
+∫
+f dμ ⊗ ν =
+∫
+E
+∫
+F
+f (x, y) μ(dx)ν(dy).
+5.4 Applications
+5.4.1 Int ́egration par parties
+Soient f et g deux fonctions mesurables de R dans R localement int ́egrables (i.e. int ́egrables sur tout compact pour la mesure de Lebesgue). On pose pour x ∈ R,
+F (x) =
+∫x
+0
+f (t) dt
+(
+=
+{∫
+[0,x] f (t) dt si x ≥ 0
+−∫
+[x,0] f (t) dt si x < 0
+)
+G(x) =
+∫x
+0
+g(t) dt.
+63
+
+
+Alors, pour tous a < b,
+F (b)G(b) = F (a)G(a) +
+∫b
+a
+f (t)G(t)dt +
+∫b
+a
+F (t)g(t)dt.
+On voit facilement que cette  ́egalit ́e  ́equivaut `a
+∫b
+a
+f (t)(G(t) − G(a)) dt =
+∫b
+a
+(F (b) − F (t))g(t) dt.
+Pour  ́etablir cette derni`ere  ́egalit ́e, on  ́ecrit
+∫b
+a
+f (t)(G(t) − G(a)) dt =
+∫b
+a
+f (t)
+(∫ t
+a
+g(s)ds
+)
+dt
+=
+∫b
+a
+(∫ b
+a
+1{s≤t}f (t)g(s)ds
+)
+dt
+=
+∫b
+a
+(∫ b
+a
+1{s≤t}f (t)g(s)dt
+)
+ds
+=
+∫b
+a
+g(s)
+(∫ b
+s
+f (t)dt
+)
+ds
+=
+∫b
+a
+g(s)(F (b) − F (s))ds.
+Dans la troisi`eme  ́egalit ́e on a appliqu ́e le th ́eor`eme de Fubini-Lebesgue `a la fonction
+φ(s, t) = 1{s≤t}f (t)g(s)
+en observant que, grˆace au th ́eor`eme de Fubini-Tonnelli, ∫
+[a,b]2
+|φ(s, t)|dsdt ≤
+∫
+[a,b]2
+|f (t)||g(s)|dsdt =
+(∫
+[a,b]
+|f (t)|dt
+)( ∫
+[a,b]
+|g(s)|ds
+)
+< ∞.
+5.4.2 Convolution
+Si f et g sont deux fonctions mesurables sur Rd, la convolution
+f ∗ g(x) =
+∫
+Rd
+f (x − y)g(y) dy
+est bien d ́efinie `a condition que
+∫
+Rd
+|f (x − y)g(y)| dy < ∞.
+Dans ce cas, l’invariance de la mesure de Lebesgue par translation et par la sym ́etrie y → −y entraˆıne aussitˆot que g ∗ f (x) est bien d ́efinie et g ∗ f (x) = f ∗ g(x).
+64
+
+
+Proposition 5.4.1 Soient f, g ∈ L1(Rd, B(Rd), λ). Alors, pour λ presque tout x ∈ Rd, la convolution f ∗ g(x) est bien d ́efinie. De plus, f ∗ g ∈ L1(λ) et ‖f ∗ g‖1 ≤ ‖f ‖1‖g‖1.
+Remarque. Cela a bien un sens de dire qu’une fonction d ́efinie λ presque partout est dans L1(λ) : on peut choisir de mani`ere arbitraire le prolongement sur l’ensemble o`u la fonction n’est pas d ́efinie.
+Preuve. D’apr`es le th ́eor`eme de Fubini-Tonnelli,
+∫
+Rd
+(∫
+Rd
+|f (x − t)||g(t)|dt
+)
+dx =
+∫
+Rd
+(∫
+Rd
+|f (x − t)||g(t)|dx
+)
+dt
+=
+∫
+Rd
+|g(t)|
+(∫
+Rd
+|f (x − t)|dx
+)
+dt
+=
+(∫
+Rd
+|g(t)|dt
+)( ∫
+Rd
+|f (x)|dx
+)
+<∞
+ce qui montre que ∫
+Rd
+|f (x − t)||g(t)|dt < ∞ dx p.p.
+et donne la premi`ere assertion. Pour la seconde, on utilise encore le calcul pr ́ec ́edent pour  ́ecrire ∫
+Rd
+|f ∗ g(x)|dx ≤
+∫
+Rd
+(∫
+Rd
+|f (x − t)||g(t)|dt
+)
+dx = ‖f ‖1‖g‖1 < ∞.
+La proposition suivante donne un autre cadre dans lequel on peut consid ́erer la convolution de f et g.
+Proposition 5.4.2 Soit p ∈ [1, ∞[, et soit q ∈]1, ∞] tels que 1
+p+1
+q = 1. Soient f ∈
+Lp((Rd, B(Rd), λ) et g ∈ Lq(Rd, B(Rd), λ). Alors, pour tout x ∈ Rd, la convolution f ∗ g(x) est bien d ́efinie et f ∗ g est uniform ́ement continue et born ́ee sur Rd.
+Preuve. L’in ́egalit ́e de H ̈older donne
+∫
+Rd
+|f (x − y)g(y)| dy ≤
+(∫
+|f (x − y)|pdy
+)1/p‖g‖q = ‖f ‖p‖g‖q.
+Cela donne la premi`ere assertion et montre aussi que f ∗ g est born ́ee par ‖f ‖p‖g‖q. Pour l’uniforme continuit ́e, on utilise le lemme suivant.
+Lemme 5.4.3 Notons σx(y) = y − x. Pour f ∈ Lp(Rd, B(Rd), λ), p ∈ [1, ∞[, l’application x −→ f ◦ σx est uniform ́ement continue de Rd dans Lp(Rd, B(Rd), λ).
+65
+
+
+Si on admet le lemme, il est facile de compl ́eter la preuve de la proposition : pour x, x′ ∈ Rd,
+|f ∗ g(x) − f ∗ g(x′)| ≤
+∫
+|f (x − y) − f (x′ − y)||g(y)| dy
+≤ ‖g‖q
+(∫
+|f (x − y) − f (x′ − y)|pdy
+)1/p
+= ‖g‖q ‖f ◦ σ−x − f ◦ σ−x′‖p
+et on utilise le lemme pour dire que ‖f ◦ σ−x − f ◦ σ−x′‖p tend vers 0 quand x − x′ tend vers 0.
+Preuve du lemme. Supposons d’abord f ∈ Cc(Rd). Alors, ∫
+|f ◦ σx − f ◦ σy|pdλ =
+∫
+|f (z − x) − f (z − y)|pdz =
+∫
+|f (z) − f (z − (y − x))|pdz
+qui tend vers 0 quand y − x → 0 par convergence domin ́ee. Dans le cas g ́en ́eral, on peut trouver une suite fn ∈ Cc(Rd) qui converge vers f dans Lp(λ) (cf Chapitre 4). Alors
+‖f ◦ σx − f ◦ σy‖p ≤ ‖f ◦ σx − fn ◦ σx‖p + ‖fn ◦ σx − fn ◦ σy‖p + ‖fn ◦ σy − f ◦ σy‖p
+= 2‖f − fn‖p + ‖fn ◦ σx − fn ◦ σy‖p.
+Pour ε > 0, on choisit d’abord n tel que ‖f − fn‖p < ε/4, puis δ > 0 tel que ‖fn ◦ σx − fn ◦ σy‖p ≤ ε/2 si |x − y| < δ. Les in ́egalit ́es pr ́ec ́edentes montrent alors que ‖f ◦ σx − f ◦ σy‖p ≤ ε si |x − y| < δ.
+Approximations de la mesure de Dirac. On dit qu’une suite φn dans Cc(Rd) est une
+approximation de δ0 si :
+• Il existe un compact K tel que supp(φn) ⊂ K pour tout n.
+• Pour tout n, φn ≥ 0 et ∫
+Rd
+φn(x) dx = 1.
+• Pour tout δ > 0,
+nli→m∞
+∫
+{|x|>δ}
+φn(x) dx = 0.
+Il est facile de construire des approximations de δ0. Si φ : Rd −→ R+ est une fonction
+continue `a support compact telle que ∫ φ(x)dx = 1, il suffit de poser
+φn(x) = ndφ(nx) , x ∈ Rd.
+On peut mˆeme s’arranger pour que les fonctions φn soient de classe C∞ : prendre par exemple
+φ(x) = c exp
+(
+−1
+1 − |x|2
+)
+1{|x|<1},
+la constante c > 0  ́etant choisie pour que la condition ∫ φ(x)dx = 1 soit satisfaite.
+66
+
+
+Proposition 5.4.4 Soit (φn) une approximation de δ0. (i) Si f : Rd −→ R est continue, on a φn ∗ f −→ f quand n → ∞, uniform ́ement sur tout compact. (ii) Si f ∈ Lp(Rd, B(Rd), λ), avec p ∈ [1, ∞[, on a φn ∗ f −→ f dans Lp.
+Preuve. La partie (i) est facile `a  ́etablir, en  ́ecrivant
+φn ∗ f (x) =
+∫
+|y|≤δ
+f (x − y)φn(y)dy +
+∫
+|y|>δ
+f (x − y)φn(y)dy
+et en utilisant la continuit ́e de f . Pour la partie (ii), on observe que si f, g ∈ Lp(Rd, λ), ∫
+|φn ∗ f (x) − φn ∗ g(x)|pdx ≤
+∫ (∫
+φn(x − y)|f (y) − g(y)|dy
+)pdx
+≤
+∫ (∫
+φn(x − y)|f (y) − g(y)|pdy
+)
+dx
+=
+∫
+|f (y) − g(y)|p( ∫
+φn(x − y)dx
+)
+dy
+=
+∫
+|f (y) − g(y)|pdy
+o`u la deuxi`eme in ́egalit ́e est une cons ́equence de l’in ́egalit ́e de Jensen (observer que φn(x − y)dy est une mesure de probabilit ́e). Cette majoration permet de se ramener au cas o`u f ∈ Cc(Rd), et alors le r ́esultat d ́ecoule de (i) et du th ́eor`eme de convergence domin ́ee.
+Application. En dimension d = 1, on peut prendre
+φn(x) = cn(1 − x2)n 1{|x|≤1}
+o`u la constante cn est choisie pour que ∫ φn(x)dx = 1. Soit alors [a, b] un intervalle contenu dans ]0, 1[, et soit f une fonction continue sur [a, b]. On peut facilement prolonger f en une fonction continue sur R et `a support compact contenu dans [0, 1] (prendre par exemple f affine sur les intervalles [0, a] et [b, 1]. Alors,
+φn ∗ f (x) = cn
+∫
+(1 − (x − y)2)n1{|x−y|≤1}f (y)dy −→ f (x)
+uniform ́ement sur [a, b]. Pour x ∈ [a, b], on peut clairement enlever l’indicatrice 1{|x−y|≤1}, et on voit que f est limite uniforme sur [a, b] de polynˆomes (th ́eor`eme de Stone-Weierstrass).
+5.4.3 Calcul du volume de la boule unit ́e
+On note ici Bd la boule unit ́e ferm ́ee de Rd, et λd la mesure de Lebesgue sur Rd. En vue de calculer γd = λd(Bd) on observe d’abord que pour tout a > 0, l’image de λd par l’application x −→ ax est a−dλd : pour tout A ∈ B(Rd),
+λd(a−1A) = a−dλd(A)
+67
+
+
+(il suffit de le v ́erifier lorsque A est un pav ́e, et alors c’est  ́evident). En particulier,
+λd(aBd) = adλd(Bd).
+Ensuite on  ́ecrit en utilisant le th ́eor`eme de Fubini, si d ≥ 2,
+γd =
+∫
+Rd
+1Bd(x)dx =
+∫
+Rd
+1{x21+···+x2d≤1}dx1 . . . dxd
+=
+∫1
+−1
+(∫
+Rd−1
+1{x21+···+x2d−1≤1−x2d}dx1 . . . dxd−1
+)
+dxd
+=
+∫1
+−1
+λd−1
+(√
+1 − x2dBd−1
+)
+dxd
+= γd−1
+∫1
+−1
+(1 − x2d)(d−1)/2 dxd
+= γd−1Id−1
+`a condition de poser pour tout entier n ≥ 0,
+In =
+∫1
+−1
+(1 − x2)n/2dx.
+Une int ́egration par parties simple montre que pour n ≥ 2,
+In = n
+n + 1 In−2.
+En utilisant les cas particuliers I0 = 2, I1 = π/2, on en d ́eduit par r ́ecurrence que pour tout d ≥ 2,
+Id−1Id−2 = 2π
+d.
+En cons ́equence, pour d ≥ 3,
+γd = Id−1Id−2γd−2 = 2π
+d γd−2.
+A partir des cas particuliers γ1 = 2, γ2 = γ1I1 = π, on en d ́eduit
+γ2k = πk
+k! , γ2k+1 = πk
+(k + 1
+2 )(k − 1
+2)··· 3
+2·1
+2
+ce qu’on peut regrouper dans la formule
+γd = πd/2
+Γ( d
+2 + 1) .
+68
+
+
+Chapitre 6
+Mesures signe ́es
+A la diff ́erence des chapitres pr ́ec ́edents, on consid`ere ici des mesures sign ́ees, pouvant prendre aussi bien des valeurs n ́egatives que des valeurs positives. Le r ́esultat principal de ce chapitre est la d ́ecomposition de Jordan, qui fournit une  ́ecriture minimale d’une telle mesure sign ́ee comme la diff ́erence de deux mesures positives port ́ees par des ensembles mesurables disjoints. A titre d’application, on  ́etablit un th ́eor`eme important d’analyse fonctionnelle, qui affirme que pour deux exposants p et q conjugu ́es ( 1
+p+1
+q = 1) l’espace Lq est le dual topologique de
+Lp.
+6.1 D ́efinition et variation totale
+De ́finition 6.1.1 Soit (E, A) un espace mesurable. Une mesure sign ́ee μ sur (E, A) est une application μ : A −→ R telle que μ(∅) = 0 et que pour toute famille (An)n∈N d’ ́el ́ements disjoints de A, la s ́erie ∑
+n∈N
+μ(An)
+converge absolument, et
+μ
+(⋃
+n∈N
+An
+)
+=∑
+n∈N
+μ(An).
+The ́ore`me 6.1.1 Soit μ une mesure sign ́ee sur (E, A). Pour tout A ∈ A, posons
+|μ|(A) = sup
+(∑
+n∈N
+|μ(An)| : A = ⋃
+n∈N
+An , An disjoints
+)
+o`u le supremum porte sur toutes les  ́ecritures de A comme r ́eunion d’une famille d ́enombrable (An)n∈N de parties mesurables disjointes. Alors |μ| est une mesure positive finie sur (E, A), et pour tout A ∈ A, |μ(A)| ≤ |μ|(A).
+Preuve. On montre d’abord que |μ| est une mesure positive. Soit (Bi)i∈N une famille de
+parties mesurables disjointes, et B = ⋃
+i∈N Bi. Par d ́efinition, si ti ∈ [0, |μ|(Bi)[ (ou ti = 0
+69
+
+
+dans le cas |μ|(Bi) = 0), on peut trouver une partition1 mesurable Bi = ⋃
+n∈N An,i, de fac ̧on
+que ∑
+n∈N
+|μ(An,i)| ≥ ti.
+Alors (An,i)n,i∈N est une partition d ́enombrable de B, et donc
+|μ|(B) ≥ ∑
+i∈N
+∑
+n∈N
+|μ(An,i| ≥ ∑
+i∈N
+ti.
+Puisque les ti peuvent ˆetre choisis arbitrairement proches des |μ|(Bi), il en d ́ecoule que
+|μ|(B) ≥ ∑
+i∈N
+|μ|(Bi).
+Pour obtenir l’in ́egalit ́e inverse, soit (An)n∈N une partition de B. Alors
+∑
+n∈N
+|μ(An)| = ∑
+n∈N
+|∑
+i∈N
+μ(An ∩ Bi)|
+≤∑
+n∈N
+∑
+i∈N
+|μ(An ∩ Bi)|
+=∑
+i∈N
+∑
+n∈N
+|μ(An ∩ Bi)|
+≤∑
+i∈N
+|μ|(Bi),
+la derni`ere in ́egalit ́e d ́ecoulant du fait que les An ∩ Bi, n ∈ N forment une partition de Bi, et de la d ́efinition de |μ|(Bi). En prenant le supremum sur les partitions (An)n∈N de B, on trouve
+|μ|(B) ≤ ∑
+i∈N
+|μ|(Bi)
+ce qui ach`eve de montrer que |μ| est une mesure positive. Comme l’in ́egalit ́e |μ(A)| ≤ |μ|(A) est imm ́ediate, il reste `a  ́etablir que |μ| est une mesure finie.
+Lemme 6.1.2 Si A ∈ A est tel que |μ|(A) = ∞, alors il existe deux parties mesurables disjointes B et C telles que A = B ∪ C et |μ(B)| > 1, |μ|(C) = ∞.
+Preuve du lemme. Puisque |μ|(A) = ∞, on peut trouver une partition mesurable A =
+⋃
+n∈N An de A de fac ̧on que
+∑
+n∈N
+|μ(An)| > 2(1 + |μ(A)|).
+1On fait un abus de langage puisque dans la d ́efinition usuelle d’une partition les  ́el ́ements de la partition sont tous non vides, ce qui n’est pas forc ́ement le cas ici.
+70
+
+
+On a alors par exemple ∑
+n∈N
+μ(An)+ > 1 + |μ(A)|
+(le cas sym ́etrique ∑
+n∈N μ(An)− > 1 + |μ(A)| se traite de la mˆeme mani`ere). On pose alors
+B= ⋃
+{n:μ(An )>0}
+An
+de fac ̧on que
+μ(B) = ∑
+n∈N
+μ(An)+ > 1 + |μ(A)|.
+De plus, si C = A\B,
+|μ(C)| = |μ(A) − μ(B)| ≥ |μ(B)| − |μ(A)| > 1.
+Par ailleurs, puisque A = B ∪ C et que |μ| est une mesure on doit avoir |μ|(B) = ∞ ou |μ(C)| = ∞, ce qui donne le r ́esultat du lemme quitte `a  ́echanger les roˆles de B et C si n ́ecessaire. Nous pouvons maintenant compl ́eter la preuve du th ́eor`eme. On suppose que |μ|(E) = ∞. Alors, on peut trouver des parties mesurables disjointes B0 et C0 avec |μ(B0)| > 1 et |μ|(C0) = ∞. En appliquant de mˆeme le lemme `a C0 on trouve B1 et C1 disjoints tels que C0 = B1 ∪ C1, |μ(B1)| > 1 et |μ|(C1) = ∞. Par r ́ecurrence, on construit ainsi une suite de parties mesurables disjointes (Bn)n∈N, telle que |μ(Bn)| > 1 pour tout n. Cela contredit le fait que la s ́erie ∑
+n∈N
+μ(Bn)
+doit converger absolument, d’apr`es la d ́efinition d’une mesure sign ́ee. On conclut que |μ|(E) < ∞.
+Exemple. Soit ν une mesure positive sur (E, A), et soit g ∈ L1(E, A, ν). Alors la formule
+ν(A) =
+∫
+A
+g dν
+d ́efinit une mesure sign ́ee. En effet, si A est la r ́eunion disjointe d’une suite (An) de parties mesurables, l’ ́egalit ́e
+μ(A) = ∑
+n∈N
+μ(An)
+est obtenue en observant que
+g 1A = kli→m∞ g 1∪n≤kAn dans L1,
+d’apr`es le th ́eor`eme de convergence domin ́ee. Nous verrons plus loin que dans ce cas |μ| = |g| · ν.
+71
+
+
+6.2 La d ́ecomposition de Jordan
+Soit μ une mesure sign ́ee sur (E, A). Alors, on v ́erifie imm ́ediatement que les formules
+μ+ = 1
+2 (μ + |μ|),
+μ− = 1
+2 (|μ| − μ),
+d ́efinissent deux mesures positives finies sur (E, A). De plus, μ = μ+ − μ− et |μ| = μ+ + μ−.
+The ́ore`me 6.2.1 Soit μ une mesure sign ́ee sur (E, A). Il existe une partie mesurable B de E, unique a` un ensemble de |μ|-mesure nulle pr`es, telle que μ+ = 1B · |μ| et μ− = 1Bc · |μ| (de mani`ere  ́equivalente, μ+, resp. μ−, est la restriction de |μ| `a B, resp. `a Bc). De plus, on a pour tout A ∈ A,
+μ+(A) = μ+(A ∩ B) = μ(A ∩ B) , μ−(A) = μ−(A ∩ Bc) = −μ(A ∩ Bc).
+En cons ́equence,
+μ(A) = μ+(A ∩ B) − μ−(A ∩ Bc),
+|μ|(A) = μ+(A ∩ B) + μ−(A ∩ Bc).
+Preuve. On v ́erifie imm ́ediatement que μ+ ≤ |μ| et μ− ≤ |μ|, et donc les mesures μ+ et μ− sont absolument continues par rapport `a |μ|. D’apr`es le th ́eor`eme de Radon-Nikodym, il existe deux fonctions mesurables positives (finies) h1 et h2 telles que μ+ = h1 · |μ| et μ− = h2 · |μ|. Puisque μ+ ≤ |μ| et μ− ≤ |μ|, on sait que 0 ≤ h1 ≤ 1 et 0 ≤ h2 ≤ 1. Si h = h1 − h2, on a alors, pour tout A ∈ A,
+μ(A) = μ+(A) − μ−(A) =
+∫
+A
+(h1 − h2) d|μ|.
+Il est facile de d ́eduire de cette  ́egalit ́e que |h1 − h2| = 1, |μ| p.p. En effet, soit r < 1, et soit (An)n∈N une partition mesurable de Er = {x ∈ E : |h1(x) − h2(x)| ≤ r}. Alors
+∑
+n∈N
+|μ(An)| = ∑
+n∈N
+∣∣∣
+∫
+An
+(h1 − h2)d|μ|
+∣∣∣
+≤∑
+n∈N
+∫
+An
+|h1 − h2|d|μ|
+≤∑
+n∈N
+r |μ|(An)
+= r |μ|(Er).
+De la d ́efinition de |μ|, il d ́ecoule alors que |μ|(Er) ≤ r |μ|(Er), et donc |μ|(Er) = 0. Comme cela est vrai pour tout r < 1, on a |h1 − h2| ≥ 1 μ p.p. et l’in ́egalit ́e inverse est triviale.
+72
+
+
+Les propri ́et ́es 0 ≤ h1 ≤ 1, 0 ≤ h2 ≤ 1 et |h1 − h2| = 1 |μ| p.p. entraˆınent que
+|μ|(dx) p.p. ou bien h1(x) = 1 et h2(x) = 0,
+ou bien h1(x) = 0 et h1(x) = 0.
+On pose alors B = {x ∈ E : h1(x) = 1}. D’apr`es ce qui pr ́ec`ede on a h1 = 1B et h2 = 1Bc, |μ| p.p. Cela donne les  ́egalit ́es μ+ = 1B · |μ| et μ− = 1Bc · |μ|. L’unicit ́e de B est une cons ́equence de l’unicit ́e de la densit ́e dans le th ́eor`eme de Radon-Nikodym. Les autres propri ́et ́es de l’ ́enonc ́e sont ensuite facilement  ́etablies.
+Remarque. Si μ = μ1 − μ2 est une autre d ́ecomposition de μ comme diff ́erence de deux mesures positives finies, on a n ́ecessairement μ1 ≥ μ+ et μ2 ≥ μ−. En effet,
+μ1(A) ≥ μ1(A ∩ B) ≥ μ(A ∩ B) = μ+(A ∩ B) = μ+(A).
+Inte ́gration par rapport `a une mesure signe ́e.
+Si f ∈ L1(E, A, |μ|), on d ́efinit ∫
+f dμ :=
+∫
+f dμ+ −
+∫
+f dμ− =
+∫
+f (1B − 1Bc)d|μ|.
+Il est alors imm ́ediat que ∣∣∣
+∫
+f dμ
+∣∣∣ ≤
+∫
+|f |dμ.
+Proposition 6.2.2 Soit ν une mesure positive sur (E, A), soit g ∈ L1(E, A, ν), et soit μ la mesure sign ́ee d ́efinie par
+μ(A) =
+∫
+A
+gdν.
+Alors |μ| = |g| · ν. De plus, pour toute fonction f ∈ L1(E, A, |μ|), on a f g ∈ L1(E, A, ν)), et ∫
+f dμ =
+∫
+f g dν.
+Preuve. Avec les notations du th ́eor`eme pr ́ec ́edent, on a pour tout A ∈ A :
+|μ|(A) = μ(A ∩ B) − μ(A ∩ Bc) =
+∫
+A∩B
+gdν −
+∫
+A∩B
+gdν =
+∫
+A
+gh dν,
+en posant h = 1B − 1Bc. En prenant A = {x ∈ E : g(x)h(x) < 0}, on d ́eduit facilement de cette  ́egalit ́e que gh ≥ 0, ν p.p. Donc gh = |gh| = |g|, ν p.p., d’o`u
+|μ|(A) =
+∫
+A
+|g|dν.
+Ensuite, on a ∫
+|f |d|μ| =
+∫
+|f | |g|dν
+73
+
+
+et donc f ∈ L1(|μ|) ⇒ f g ∈ L1(ν). L’ ́egalit ́e ∫
+f dμ =
+∫
+f g dν
+est vraie par d ́efinition si f est  ́etag ́ee. Dans le cas, g ́en ́eral, on utilise le fait qu’on peut  ́ecrire f = lim fn, o`u les fonctions fn sont  ́etag ́ees et domin ́ees en valeur absolue par |f |. Le th ́eor`eme de convergence domin ́ee appliqu ́e `a μ+, μ− et ν donne le r ́esultat voulu.
+Le the ́ore`me de Radon-Nikodym pour les mesures signe ́es.
+Soit ν une mesure positive, et soit μ une mesure sign ́ee. On dit que μ est absolument continue par rapport `a ν (notation : μ ≪ ν) si
+∀A ∈ A, ν(A) = 0 ⇒ μ(A) = 0.
+The ́ore`me 6.2.3 Soit μ une mesure sign ́ee et soit ν une mesure positive σ-finie. Les trois propri ́et ́es suivantes sont  ́equivalentes :
+(i) μ ≪ ν .
+(ii) Pour tout ε > 0, il existe δ > 0 tel que
+∀A ∈ A, ν(A) ≤ δ ⇒ |μ|(A) ≤ ε.
+(iii) Il existe g ∈ L1(E, A, ν) telle que :
+∀A ∈ A, μ(A) =
+∫
+A
+gdν.
+Preuve. (ii)⇒(i) est  ́evident. Montrons (i)⇒(iii). Si μ ≪ ν, on aussi μ+ ≪ ν et μ− ≪ ν, et donc le th ́eor`eme de Radon-Nikodym pour les mesures positives permet d’ ́ecrire μ+ = g1 · ν
+et μ− = g2 · ν avec g1, g2 ≥ 0, ∫ g1dν = μ+(E) < ∞ et ∫ g2dν = μ−(E) < ∞. On obtient ainsi (iii) avec g = g1 − g2. Il reste `a montrer (iii)⇒(ii). D’apr`es la proposition pr ́ec ́edente, on a |μ| = |g| · ν. De plus, le th ́eor`eme de convergence domin ́ee entraˆıne que
+nli→m∞
+∫
+{|g|≥n}
+|g| dν = 0.
+Donc, si ε > 0 est fix ́e, on peut choisir N assez grand de fac ̧on que ∫
+{|g|≥N }
+|g| dν < ε
+2.
+Alors, en prenant δ = ε/(2N), on a, pour tout A ∈ A tel que ν(A) < δ,
+|μ|(A) =
+∫
+A
+|g|dν ≤
+∫
+{|g|≥N }
+|g| dν +
+∫
+A∩{|g|<N }
+|g| dν ≤ ε
+2 +N ε
+2N = ε.
+74
+
+
+6.3 La dualit ́e Lp − Lq
+Soit ν une mesure positive sur (E, A). Soit p ∈ [1, ∞] et soit q l’exposant conjugu ́e de p. Alors, si on fixe g ∈ Lq(E, A, ν), la formule
+Φg(f ) =
+∫
+f g dν
+d ́efinit une forme lin ́eaire continue sur Lp(E, A, ν). En effet, l’in ́egalit ́e de H ̈older montre d’une part que Φg(f ) est bien d ́efinie, d’autre part que
+|Φg(f )| ≤ Cg ‖f ‖p
+avec Cg = ‖g‖q. On voit aussi que la norme op ́erateur de Φg, d ́efinie par
+‖Φg‖ = sup
+‖f ‖p≤1
+|Φg(f )|,
+v ́erifie ‖Φg‖ ≤ ‖g‖q. La question est alors de savoir si l’on obtient ainsi toutes les formes lin ́eaires continues sur Lp(E, A, ν) (dans le cas p = q = 2, la th ́eorie des espaces de Hilbert nous dit d ́ej`a que la r ́eponse est oui). Le th ́eor`eme suivant donne la r ́eponse lorsque p < ∞.
+The ́ore`me 6.3.1 Soit ν une mesure σ-finie sur (E, A), soit p ∈ [1, ∞[ et soit q l’exposant conjugu ́e de p. Alors, si Φ est une forme lin ́eaire continue sur Lp(E, A, ν), il existe une unique g ∈ Lq(E, A, ν) tel que, pour toute f ∈ Lp(E, A, ν),
+Φ(f ) =
+∫
+f g dν.
+De plus la norme op ́erateur de Φ est
+‖Φ‖ = ‖g‖q.
+Aves les notations pr ́ec ́edant le th ́eor`eme, on voit que l’application g −→ Φg permet d’identifier Lq(ν) au dual topologique de Lp(ν) (c’est `a-dire `a l’espace vectoriel des formes lin ́eaires continues sur Lp(ν), muni de la norme op ́erateur). Nous verrons en remarque que cette propri ́et ́e ne subsiste pas dans le cas p = ∞.
+Preuve. Supposons d’abord ν(E) < ∞. Alors, pour tout A ∈ A, posons
+μ(A) = Φ(1A),
+ce qui a bien un sens puisque 1A ∈ Lp(ν). On commence par v ́erifier que μ est une mesure sign ́ee sur (E, A). Soit (An)n∈N une famille d ́enombrable de parties mesurables disjointes. Si A d ́esigne la r ́eunion des An, on a
+1A = kli→m∞
+∑
+n≤k
+1An
+75
+
+
+dans Lp(ν) (par convergence domin ́ee, facilement justifi ́ee puisque la fonction 1 est dans Lp(ν)). En utilisant la continuit ́e de Φ, on obtient ainsi
+μ(A) = kli→m∞ Φ
+(∑
+n≤k
+1An
+)
+= kli→m∞
+∑
+n≤k
+μ(An).
+La convergence absolue de la s ́erie ∑ μ(An) est une cons ́equence : en notant A′n = An si
+μ(An) > 0 et A′n = ∅ sinon, et A′ la r ́eunion des A′n, on a
+∑
+n
+μ(An)+ = ∑
+n
+μ(A′n) = kli→m∞
+∑
+n≤k
+μ(A′n) = μ(A′) < ∞,
+et de mˆeme pour les termes n ́egatifs de la suite (μ(An)). Une fois acquise la convergence
+absolue de la s ́erie, l’ ́egalit ́e μ(A) = ∑
+n μ(An) d ́ecoule de ce qui pr ́ec`ede.
+Si A ∈ A et ν(A) = 0, on a 1A = 0 dans Lp(E, A, ν) et donc μ(A) = Φ(1A) = 0. Donc μ ≪ ν et le th ́eor`eme pr ́ec ́edent montre qu’il existe une fonction g ∈ L1(E, A, ν) telle que
+∀A ∈ A , Φ(1A) = μ(A) =
+∫
+A
+g dν.
+L’ ́egalit ́e
+Φ(f ) =
+∫
+f g dν
+est vraie par lin ́earit ́e lorsque f est  ́etag ́ee, puis lorsque f est seulement mesurable born ́ee puisqu’une telle fonction est limite uniforme (donc dans Lp(ν) parce que ν est finie) de fonctions  ́etag ́ees. Montrons maintenant que g ∈ Lq(ν).
+• Si p = 1, alors pour tout A ∈ A,
+∣∣∣
+∫
+A
+gdν
+∣∣∣ = |Φ(1A)| ≤ ‖Φ‖ ‖1A‖1 = ‖Φ‖ ν(A)
+ce qui entraˆıne facilement que |g| ≤ ‖Φ‖, ν p.p. (pour le voir consid ́erer A = {g > ‖Φ‖ + ε} ou A = {g < −‖Φ‖ − ε}), et donc ‖g‖∞ ≤ ‖Φ‖.
+• Si p ∈]1, ∞[, on pose En = {x ∈ E : |g(x)| ≤ n}, puis fn = 1En|g|q−1signe(g). Comme fn est born ́ee, on a ∫
+En
+|g|qdν =
+∫
+fng dν = Φ(fn) ≤ ‖Φ‖ ‖fn‖p = ‖Φ‖
+(∫
+En
+|g|qdν
+)1/p,
+d’o`u ∫
+En
+|g|qdν ≤ ‖Φ‖q.
+En faisant tendre n vers ∞, on trouve par convergence monotone que ‖g‖q ≤ ‖Φ‖.
+76
+
+
+Dans les deux cas, on a obtenu que g ∈ Lq(ν) et ‖g‖q ≤ ‖Φ‖. Vus comme fonctions de f ∈ Lp(ν), les deux membres de l’ ́egalit ́e
+Φ(f ) =
+∫
+f g dν
+sont des fonctions continues sur Lp(ν) qui co ̈ıncident lorsque f appartient au sous-ensemble dense des fonctions mesurables born ́ees. Elles co ̈ıncident donc partout. Par ailleurs, comme expliqu ́e avant l’ ́enonc ́e de th ́eor`eme, l’in ́egalit ́e de H ̈older entraˆıne que ‖Φ‖ ≤ ‖g‖q, et comme l’in ́egalit ́e inverse a  ́et ́e obtenue ci-dessus, on a ‖Φ‖ = ‖g‖q.
+Enfin, l’application qui `a g ∈ Lq(ν) associe la forme lin ́eaire f −→ ∫ f g dν est une isom ́etrie de Lq(ν) sur le dual topologique de Lp(ν) (i.e. l’espace des formes lin ́eaires continues sur Lp(ν)) et est donc n ́ecessairement injective. Cela donne l’unicit ́e de g dans l’ ́enonc ́e du th ́eor`eme. Il reste `a traiter le cas ν(E) = ∞. Dans ce cas, on peut  ́ecrire E comme la r ́eunion d’une famille d ́enombrable disjointe (En)n∈N de parties mesurables telles que ν(En) < ∞ pour tout n. Notons νn la restriction de ν `a En. Alors l’application f −→ f 1En induit une isom ́etrie
+de Lp(νn) sur un sous-espace de Lp(ν). En remplac ̧ant ν par νn on peut donc appliquer la premi`ere partie de la preuve `a la forme lin ́eaire continue Φn d ́efinie sur Lp(νn) par
+Φn(f ) = Φ(f 1En).
+Il existe donc une fonction gn ∈ Lq(νn) telle que, pour toute fonction f ∈ Lp(νn),
+Φ(f 1En) =
+∫
+f gn dνn.
+Quitte `a remplacer gn par gn1En on peut supposer que gn = 0 sur Ecn, et r ́e ́ecrire le r ́esultat pr ́ec ́edent sous la forme
+Φ(f 1En) =
+∫
+f gn dν,
+pour toute fonction f ∈ Lp(ν). Si f ∈ Lp(ν), on a f = kli→m∞
+∑
+n≤k
+f 1En dans Lp(ν),
+ce qui entraˆıne
+Φ(f ) = kli→m∞
+∫ f
+(∑
+n≤k
+gn
+)
+dν.
+Par ailleurs, de l’in ́egalit ́e ∫ f
+(∑
+n≤k
+gn
+)
+dν = Φ(f ∑
+n≤k
+1En) ≤ ‖Φ‖ ‖f ‖p
+on d ́eduit grˆace aux mˆemes arguments que dans le cas o`u ν(E) < ∞ que, pour tout entier
+k ≥ 1,
+‖∑
+n≤k
+gn‖q ≤ ‖Φ‖.
+77
+
+
+Posons maintenant pour tout x ∈ E,
+g(x) = ∑
+n∈N
+gn(x)
+(il y a eu plus un terme non nul dans la somme pour chaque x). Si q = ∞, l’in ́egalit ́e pr ́ec ́edente montre que ‖g‖∞ ≤ ‖Φ‖. Si q < ∞, la mˆeme in ́egalit ́e donne
+∫
+|g|qdν = ∑
+n∈N
+∫
+|gn|qdν = kli→m∞
+∑
+n≤k
+∫
+|gn|qdν ≤ ‖Φ‖q.
+Dans les deux cas on a g ∈ Lq(ν). Enfin,
+Φ(f ) = kli→m∞
+∫ f
+(∑
+n≤k
+gn
+)
+dν =
+∫
+f g dν,
+o`u dans la deuxi`eme  ́egalit ́e l’application du th ́eor`eme de convergence domin ́ee est justifi ́ee
+par la majoration | ∑
+n≤k gn| ≤ |g|.
+L’ ́egalit ́e ‖Φ‖ = ‖g‖q et l’unicit ́e de g sont maintenant obtenues par les mˆemes arguments que dans le cas o`u ν(E) < ∞.
+Remarque. Lorsque p = ∞, le r ́esultat du th ́eor`eme est faux en g ́en ́eral : il existe des formes lin ́eaires continues sur L∞(E, A, ν) qui ne peuvent pas se repr ́esenter sous la forme
+Φ(f ) = ∫ f g dν avec une fonction g ∈ L1(E, A, ν). Consid ́erons le cas de l∞, qui est l’espace des suites born ́ees a = (ak)k∈N de r ́eels, muni de la norme ‖a‖∞ = sup ak. Soit H le sousespace (ferm ́e) de l∞ d ́efini par
+H = {a ∈ l∞ : kli→m∞ ak existe},
+et d ́efinissons Φ : H −→ R par Φ(a) = kli→m∞ ak.
+Evidemment |Φ(a)| ≤ ‖a‖∞. Le th ́eor`eme de Hahn-Banach permet alors de prolonger Φ `a une forme lin ́eaire sur l∞, de fac ̧on que la propri ́et ́e |Φ(a)| ≤ ‖a‖∞ reste vraie pour tout a ∈ l∞. Il est facile de voir qu’on ne peut pas repr ́esenter Φ sous la forme
+Φ(a) = ∑
+k∈N
+ak bk
+avec un  ́el ́ement b = (bk)k∈N de l1. En effet, si tel  ́etait le cas, en consid ́erant pour tout n ∈ N l’ ́el ́ement a(n) de l∞ d ́efini par a(n)
+k = 1{k=n}, on trouverait, pour tout n ∈ N,
+bn = Φ(a(n)) = 0,
+ce qui est absurde.
+78
+
+
+6.4 Le th ́eor`eme de repr ́esentation de Riesz
+Dans tout ce paragraphe, nous supposons que E est un espace m ́etrique localement compact s ́eparable. On note C0(E) l’espace des fonctions continues sur E qui tendent vers 0 `a l’infini : f ∈ C0(E) si et seulement si f est continue et si pour tout ε > 0 il existe un compact K de E tel que |f (x)| < ε pour tout x ∈ E\K. L’espace C0(E) est un espace de Banach pour la norme ‖f ‖ = sup
+x∈E
+|f (x)|.
+Si μ est une mesure sign ́ee sur (E, B(E)), l’application
+Φ(f ) =
+∫
+E
+f dμ , f ∈ C0(E),
+d ́efinit une forme lin ́eaire continue sur C0(E). De plus, cette forme lin ́eaire est continue puisque
+|Φ(f )| ≤
+∫
+E
+|f | d|μ| ≤ |μ|(E) ‖f ‖.
+Cette in ́egalit ́e montre mˆeme que ‖Φ‖ ≤ |μ|(E).
+The ́ore`me 6.4.1 Soit Φ une forme lin ́eaire continue sur C0(E). Il existe alors une unique mesure sign ́ee μ sur (E, B(E)) telle que
+∀f ∈ C0(E) , Φ(f ) =
+∫
+E
+f dμ.
+Nous renvoyons au chapitre 6 de Rudin [7] pour une preuve qui traite en fait le cadre complexe plus g ́en ́eral.
+Remarque. L’espace M(E) des mesures sign ́ees sur E est un espace vectoriel, et il est facile de v ́erifier que l’application μ −→ |μ|(E) d ́efinit une norme sur cet espace vectoriel. De plus, M(E) est complet pour cette norme. Le th ́eor`eme pr ́ec ́edent peut ˆetre alors reformul ́e en disant que M(E) est le dual topologique de C0(E). Lorsque E est compact, l’espace C0(E) co ̈ıncide avec l’espace Cb(E) des fonctions continues born ́ees sur E, et donc M(E) est le dual de Cb(E). Cette assertion devient fausse lorsque E n’est pas compact, par exemple lorsque E = R. Dans ce cas, il existe des formes lin ́eaires continues sur Cb(E) qui ne se repr ́esentent pas par des mesures sign ́ees (on peut en construire en adaptant l’exemple de la fin de la partie pr ́ece ́dente).
+79
+
+
+80
+
+
+Chapitre 7
+Formule de changement de variables
+et comple ́ments
+La formule de changement de variables identifie l’image par un diff ́eomorphisme de la mesure de Lebesgue sur un ouvert de Rd. Apr`es le th ́eor`eme de Fubini, c’est le deuxi`eme outil fondamental de calcul des int ́egrales. Comme application particuli`erement importante, on donne ici la formule d’int ́egration en coordonn ́ees polaires dans Rd, ce qui conduit aussi `a introduire la mesure de Lebesgue sur la sph`ere unit ́e.
+7.1 La formule de changement de variables
+Nous commenc ̧ons par traiter le cas particulier important d’une application affine.
+Proposition 7.1.1 Soit b ∈ Rd et soit M une matrice d × d `a coefficients r ́eels inversible. D ́efinissons f : Rd −→ Rd par f (x) = Mx + b. Alors, pour tout bor ́elien A de Rd,
+λ(f (A)) = |det(M)| λ(A).
+Remarque. Si M n’est pas inversible, f (A) ⊂ f (Rd) est contenu dans un hyperplan, qui est de mesure de Lebesgue nulle (exercice !).
+Preuve. Remarquons d’abord que f (A) = (f −1)−1(A) ∈ B(Rd) si A ∈ B(Rd). Grˆace `a l’invariance par translation de la mesure de Lebesgue, on se ram`ene au cas b = 0. Dans ce cas, on a pour tous a ∈ Rd et A ∈ B(Rd),
+λ(f (a + A)) = λ(f (a) + f (A)) = λ(f (A)),
+ce qui montre que la mesure A −→ λ(f (A)) (mesure-image de λ par f −1) est invariante par translation. Donc il existe une constante c telle que, pour tout A ∈ B(Rd),
+λ(f (A)) = c λ(A).
+Il reste `a montrer que c = |det(M)|.
+81
+
+
+Si M est une matrice orthogonale, et Bd d ́esigne la boule unit ́e ferm ́ee de Rd, on a f (Bd) = Bd, d’o`u il d ́ecoule aussitˆot que c = 1 = |det(M)| dans ce cas. Si M est une matrice sym ́etrique d ́efinie positive, alors on peut trouver une matrice orthogonale P telle que tP MP soit diagonale avec coefficients diagonaux αi > 0, i ∈ {1, . . . , d}. Alors,
+f (P ([0, 1]d)) = {MP x : x ∈ [0, 1]d} = {P y : y ∈
+d ∏
+i=1
+[0, αi]},
+et donc, en utilisant le cas orthogonal,
+c = c λ(P ([0, 1]d)) = λ(f (P ([0, 1]d))) = λ
+(
+{P y : y ∈
+∏d
+i=1
+[0, αi]}
+)
+=λ
+( ∏d
+i=1
+[0, αi]
+) =
+d ∏
+i=1
+αi.
+Dans ce cas on trouve encore c = |det(M)|. Enfin, dans le cas g ́en ́eral, on remarque qu’on peut  ́ecrire M = P S, o`u P est orthogonale
+et S est sym ́etrique d ́efinie positive (prendre S = √tMM et P = MS−1). En utilisant les deux cas particuliers ci-dessus, on trouve aussitˆot :
+c = |det(P )| |det(S)| = |det(M)|.
+Soient U et D deux ouverts de Rd. On dit qu’une application φ : U −→ D est un diff ́eomorphisme de classe C1 si φ est bijective et de classe C1 sur U et si φ−1 est aussi de classe C1 sur D. On sait qu’alors la d ́eriv ́ee φ′(u) est inversible, pour tout u ∈ U.
+The ́ore`me 7.1.2 Soit φ : U −→ D un diff ́eomorphisme de classe C1. Alors pour toute fonction bor ́elienne f : D −→ R+, ∫
+D
+f (x) dx =
+∫
+U
+f (φ(u)) |Jφ(u)| du ,
+o`u Jφ(u) = det(φ′(u)) est le Jacobien de φ en u.
+Preuve. Par les arguments habituels (passage `a la limite croissant) on se ram`ene au cas o`u f est  ́etag ́ee positive, puis au cas f = 1A, A  ́etant un bor ́elien de D. Dans ce cas, l’ ́egalit ́e du th ́eor`eme s’ ́ecrit :
+λ(A) =
+∫
+φ−1(A)
+|Jφ(u)| du.
+Quitte `a remplacer A par φ−1(A), il suffit de montrer que, pour tout bor ́elien A de U,
+λ(φ(A)) =
+∫
+A
+|Jφ(u)| du. (7.1)
+(Remarquer que φ(A) = (φ−1)−1(A) est bor ́elien.)
+82
+
+
+Lemme 7.1.3 Soit K un compact de U et soit ε > 0. Alors on peut choisir δ > 0 assez petit de mani`ere que, pour tout cube C de faces parall`eles aux axes, de centre u0 ∈ K et de cot ́e de longueur inf ́erieure `a δ,
+(1 − ε)|Jφ(u0)| λ(C) ≤ λ(φ(C)) ≤ (1 + ε)|Jφ(u0)| λ(C).
+Preuve du lemme. En utilisant la continuit ́e de φ′, on voit qu’on peut choisir δ > 0 assez petit pour que d’une part δ < 1
+d dist(K, U c) et d’autre part, pour tout u0 ∈ K et tout u ∈ Rd
+tel que |u − u0| < dδ,
+|φ(u) − φ(u0) − φ′(u0) · (u − u0)| ≤ ε|u − u0|.
+Notons f (v) = φ(u0) + φ′(u0) · v pour v ∈ Rd. On voit que, si |u − u0| < dδ,
+φ(u) = f (u − u0) + h(u, u0),
+avec |h(u, u0)| ≤ ε|u − u0|. En prenant g(u, u0) = φ′(u0)−1 · h(u, u0), on trouve que
+φ(u) = f (u − u0 + g(u, u0)),
+o`u |g(u, u0)| ≤ aε|u − u0|, avec a := sup{‖φ′(v)−1‖; v ∈ K} < ∞. Soit maintenant C un cube centr ́e en u0 et de cot ́e r ≤ δ. Il d ́ecoule de ce qui pr ́ec`ede que
+φ(C) ⊂ f ((1 + daε)C ̃),
+o`u C ̃ est le cube translat ́e de C centr ́e en 0. Grˆace `a la proposition ci-dessus, il vient alors
+λ(φ(C)) ≤ λ(f ((1 + daε)C ̃)) = |det φ′(u0)| λ((1 + daε)C ̃) = (1 + daε)d|Jφ(u0)| λ(C),
+ce qui donne la majoration souhait ́ee. La preuve de la minoration est analogue : on montre que pour une constante c′ bien choisie, on a
+φ−1(f ((1 − c′ε)C ̃)) ⊂ C ,
+d’o`u
+f ((1 − c′ε)C ̃) ⊂ φ(C)
+et on conclut de la mˆeme mani`ere.
+On revient `a la preuve du th ́eor`eme. Soit n ≥ 1 un entier. On appelle cube  ́el ́ementaire d’ordre n tout cube de la forme
+C=
+d ∏
+j=1
+]kj2−n, (kj + 1)2−n] , kj ∈ Z.
+On note Cn l’ensemble des cubes  ́el ́ementaires d’ordre n.
+Soit C0 un cube  ́el ́ementaire d’ordre n0 fix ́e, tel que C ̄0 ⊂ U, et soit ε > 0. Fixons n ≥ n0
+assez grand pour que d’une part la conclusion du lemme soit vraie pour K = C ̄0 et δ = 2−n, et d’autre part, pour tous u, v ∈ K tels que |u − v| ≤ dδ,
+(1 − ε)|Jφ(u)| ≤ |Jφ(v)| ≤ (1 + ε)|Jφ(u)|. (7.2)
+83
+
+
+Alors, en notant xC le centre d’un cube C,
+λ(φ(C0)) = ∑
+C ∈Cn C ⊂C0
+λ(φ(C ))
+≤ (1 + ε) ∑
+C ∈Cn C ⊂C0
+|Jφ(xC)| λ(C)
+≤ (1 + ε)2 ∑
+C ∈Cn C ⊂C0
+∫
+C
+|Jφ(u)| du
+= (1 + ε)2
+∫
+C0
+|Jφ(u)| du.
+On a utilis ́e le lemme dans la premi`ere in ́egalit ́e, et (7.2) dans la seconde. On obtient de mˆeme la minoration
+λ(φ(C0)) ≥ (1 − ε)2
+∫
+C0
+|Jφ(u)| du.
+Comme ε  ́etait arbitraire, on conclut que
+λ(φ(C0)) =
+∫
+C0
+|Jφ(u)| du.
+On a donc obtenu (7.1) lorsque A est un cube  ́el ́ementaire d’adh ́erence contenue dans A. Le cas g ́en ́eral d ́ecoule maintenant d’arguments de classe monotone. Notons μ la mesureimage de la mesure de Lebesgue sur D par φ−1 :
+μ(A) = λ(φ(A))
+pour tout bor ́elien A de U. Soit aussi
+μ ̃(A) =
+∫
+A
+|Jφ(u)| du.
+On a obtenu que μ(C) = μ ̃(C) pour tout cube  ́el ́ementaire C d’adh ́erence contenue dans U. D’autre part, si Un d ́esigne la r ́eunion (disjointe) des cubes  ́el ́ementaires d’ordre n d’adh ́erence contenue dans U ∩ {u : |u| ≤ n}, on a Un ↑ U quand n → ∞ et μ(Un) = μ ̃(Un) < ∞ pour tout n. Comme la classe des cubes  ́el ́ementaires d’adh ́erence contenue dans U est stable par intersection finie et engendre la tribu bor ́elienne B(U), on peut appliquer le dernier corollaire du Chapitre 1 pour conclure que μ = μ ̃, ce qui  ́etait le r ́esultat recherch ́e.
+Application `a l’inte ́grale en coordonne ́es polaires.
+On prend d = 2, U =]0, ∞[×] − π, π[ et D = R2\{(x, 0); x ≤ 0}. Alors l’application
+φ(r, θ) = (r cos θ, r sin θ) , (r, θ) ∈ U
+84
+
+
+est un diff ́eomorphisme de classe C1 de U sur D. On calcule facilement
+φ′(r, θ) =
+( cos θ −r sin θ sin θ r cos θ
+)
+et donc Jφ(r, θ) = r.
+Il d ́ecoule du th ́eor`eme que, pour toute fonction bor ́elienne f : R2 −→ R+,
+∫
+D
+f (x, y) dxdy =
+∫
+U
+f (r cos θ, r sin θ) r drdθ =
+∫∞
+0
+∫π
+−π
+f (r cos θ, r sin θ) r drdθ.
+Comme la demi-droite n ́egative est de mesure de Lebesgue nulle dans R2, on a aussi
+∫
+R2
+f (x, y) dxdy =
+∫∞
+0
+∫π
+−π
+f (r cos θ, r sin θ) r drdθ.
+Exemple. Pour f (x, y) = exp(−x2 − y2), le th ́eor`eme de Fubini-Tonnelli donne d’une part ∫
+R2
+e−x2−y2 dxdy =
+( ∫ +∞
+−∞
+e−x2 dx
+)2
+et d’autre part ∫ ∞
+0
+∫π
+−π
+f (r cos θ, r sin θ) r drdθ = 2π
+∫∞
+0
+e−r2 r dr = π,
+ce qui donne la valeur ∫ +∞
+−∞
+e−x2 dx = √π.
+7.2 Mesure de Lebesgue sur la sph`ere unit ́e
+Dans cette partie on note λd la mesure de Lebesgue sur Rd. Soit Sd−1 la sph`ere unit ́e de Rd :
+Sd−1 = {x ∈ Rd : |x| = 1}.
+Si A ∈ B(Sd−1), on note Γ(A) le bor ́elien de Rd d ́efini par
+Γ(A) = {rx; r ∈ [0, 1] et x ∈ A}.
+The ́ore`me 7.2.1 Pour tout A ∈ B(Sd−1), on pose
+ωd(A) = d λd(Γ(A)).
+Alors ωd est une mesure positive finie sur Sd−1, qui est invariante par les isom ́etries vecto
+rielles. De plus, pour toute fonction bor ́elienne f : Rd −→ R+,
+∫
+Rd
+f (x) dx =
+∫∞
+0
+∫
+S d−1
+f (rz) rd−1 dr ωd(dz). (7.3)
+Enfin la masse totale de ωd (volume de la sph`ere unit ́e) est
+ωd(Sd−1) = 2πd/2
+Γ(d/2) .
+85
+
+
+Remarque. On peut aussi montrer que toute mesure finie sur Sd−1 invariante par les isom ́etries vectorielles est proportionnelle `a ωd.
+Preuve. Il est imm ́ediat que ωd est une mesure positive finie sur Sd−1 : on peut la voir
+comme l’image de la restriction de d λd `a la boule unit ́e Bd par l’application x −→ x
+|x| . Le fait que λd soit invariante par les isom ́etries vectorielles de Rd (proposition de la partie 1) entraˆıne facilement que ωd l’est aussi. En effet, si φ est une telle isom ́etrie,
+λd(Γ(φ−1(A))) = λd(φ−1(Γ(A))) = λd(Γ(A)).
+La masse totale de ωd est
+ωd(Sd−1) = d λd(Bd) = d πd/2
+Γ( d
+2 + 1) = 2πd/2
+Γ( d
+2) .
+Il reste `a  ́etablir (7.3). Il suffit de traiter le cas f = 1B, o`u B est un bor ́elien de Rd\{0}. La formule
+μ(B) =
+∫∞
+0
+∫
+S d−1
+1B(rz) rd−1 dr ωd(dz)
+d ́efinit une mesure μ sur Rd\{0} et le probl`eme est de montrer que μ = λd. Consid ́erons d’abord le cas o`u B est de la forme
+B = {x ∈ Rd\{0}; a < |x| ≤ b et x
+|x| ∈ A},
+o`u A est un bor ́elien de Sd−1, et 0 < a ≤ b. Alors,
+μ(B) = ωd(A)
+∫b
+a
+rd−1 dr = bd − ad
+d ωd(A).
+Pour calculer λd(B), notons α = a
+b ∈]0, 1[, et pour tout entier n ≥ 0 posons
+Γn(A) = {y = rx; αn+1 < r ≤ αn et x ∈ A}.
+Alors, λd(Γn(A)) = αndλd(Γ0(A)) et par ailleurs
+λd(Γ(A)) =
+∞ ∑
+n=0
+λd(Γn(A)).
+Il en d ́ecoule aussitˆot que
+λd(Γ0(A)) = (1 − αd) λd(Γ(A)) = 1 − αd
+d ωd(A),
+et puisque B = b Γ0(A),
+λd(B) = bdλd(Γ0(A)) = bd − ad
+d ωd(A) = μ(B).
+86
+
+
+Finalement, la classe des ensembles B de la forme ci-dessus est stable par intersections finies, et on voit facilement qu’elle engendre la tribu bor ́elienne sur Rd\{0}. Les arguments de classe monotone habituels montrent alors que μ = λd.
+Si f : Rd −→ R+ est une fonction radiale, au sens o`u f (x) = f (|x|), le th ́eor`eme montre que ∫
+Rd
+f (x) dx = cd
+∫∞
+0
+f (r) rd−1 dr,
+avec cd = ωd(Sd−1).
+87
+
+
+88
+
+
+Partie II
+Probabilite ́s
+89
+
+
+
+
+Chapitre 8
+Fondements de la the ́orie des
+probabilite ́s
+Ce chapitre introduit les notions fondamentales de la th ́eorie des probabilit ́es : variables al ́eatoires, esp ́erance, loi, moments de variables al ́eatoires, fonctions caract ́eristiques, etc. Puisque un espace de probabilit ́e n’est rien d’autre qu’un espace mesurable muni d’une mesure de masse totale 1, beaucoup de ces notions correspondent `a ce qui a d ́ej`a  ́et ́e vu dans le cadre de la th ́eorie de l’int ́egration. Par exemple une variable al ́eatoire n’est rien d’autre qu’une fonction mesurable, et la notion d’esp ́erance co ̈ıncide avec l’int ́egrale. Cependant, le point de vue de la th ́eorie des probabilit ́es, qui est expliqu ́e ci-dessous, est bien diff ́erent, et une difficult ́e importante est de comprendre ce point de vue. Ainsi, la notion de loi, qui est un cas particulier de la notion de mesure-image, devient-elle maintenant fondamentale car elle permet d’ ́evaluer la probabilit ́e qu’une variable al ́eatoire “tombe” dans un ensemble donn ́e.
+8.1 D ́efinitions g ́en ́erales
+8.1.1 Espaces de probabilit ́e
+Soit (Ω, A) un espace mesurable, et soit P une mesure de probabilit ́e sur (Ω, A). On dit alors que (Ω, A) est un espace de probabilit ́e. Un espace de probabilit ́e est donc un cas particulier d’espace mesur ́e, pour lequel la masse totale de la mesure est  ́egale `a 1. En fait, le point de vue diff`ere de la th ́eorie de l’int ́egration : dans le cadre de la th ́eorie des probabilit ́es, on cherche `a fournir un mod`ele math ́ematique pour une “exp ́erience al ́eatoire”.
+• Ω repr ́esente l’ensemble de toutes les  ́eventualit ́es possibles, toutes les d ́eterminations du hasard dans l’exp ́erience consid ́er ́ee.
+• A est l’ensemble des “ ́ev ́enements”, qui sont les parties de Ω dont on peut  ́evaluer la probabilit ́e. Il faut voir un  ́ev ́enement A ∈ A comme un sous-ensemble de Ω contenant toutes les  ́eventualit ́es ω pour lesquelles une certaine propri ́et ́e est v ́erifi ́ee.
+91
+
+
+• Pour A ∈ A, P (A) repr ́esente la probabilit ́e d’occurrence de l’ ́ev ́enement A. Dans les premiers trait ́es de th ́eorie des probabilit ́es, longtemps avant l’introduction de la th ́eorie de la mesure, la probabilit ́e P (A)  ́etait d ́efinie de la mani`ere suivante : on imagine qu’on r ́ep`ete l’exp ́erience al ́eatoire un nombre N de fois, et on note NA le nombre de r ́ep ́etitions pour lesquelles l’ ́ev ́enement A est r ́ealis ́e; alors, la proportion NA/N converge quand N → ∞ vers la probabilit ́e P (A). Nous verrons plus loin le lien entre cette d ́efinition “historique” et l’approche moderne.
+Exemples. (1) On lance un d ́e deux fois :
+Ω = {1, 2, . . . , 6}2 , A = P(Ω) , P (A) = Card(A)
+36 .
+Le choix de la probabilit ́e correspond `a l’id ́ee que tous les r ́esultats possibles pour les deux tirages sont  ́equiprobables.
+(2) On lance le d ́e jusqu’`a obtenir un 6. Ici le choix de Ω est d ́ej`a moins  ́evident. Comme le nombre de lancers n ́ecessaires n’est a priori pas born ́e, le bon choix est d’imaginer qu’on fait une infinit ́e de lancers :
+Ω = {1, 2, . . . , 6}N∗
+de sorte qu’un  ́el ́ement de Ω est une suite ω = (ω1, ω2, . . .) qui donne les r ́esultats des tirages successifs. La tribu A sur Ω est la tribu-produit d ́efinie comme la plus petite tribu rendant mesurables tous les ensembles de la forme
+{ω : ω1 = i1, ω2 = i2, . . . , ωn = in}
+o`u n ≥ 1 et i1, . . . , in ∈ {1, 2, . . . , 6} (A co ̈ıncide aussi avec la tribu bor ́elienne pour la topologie produit sur Ω). Enfin P est l’unique mesure de probabilit ́e sur Ω telle que, pour tout choix de n et de i1, . . . , in,
+P ({ω : ω1 = i1, ω2 = i2, . . . , ωn = in}) = ( 1
+6 )n.
+L’unicit ́e de P est une cons ́equence simple du lemme de classe monotone. L’existence est un cas particulier de la construction de mesures sur des produits infinis. On peut aussi construire P facilement partir de la mesure de Lebesgue sur [0, 1] : si `a tout r ́eel x ∈ [0, 1]
+on associe la suite (εk)k∈N∗ ∈ Ω telle que x = ∑∞
+k=1(εk − 1) 6−k (cette suite est unique pour presque tout x), la probabilit ́e P est obtenue comme mesure-image de la mesure de Lebesgue sur [0, 1] par l’application x −→ (εk)k∈N∗.
+(3) On s’int ́eresse au d ́eplacement dans l’espace d’une particule ponctuelle soumise `a des perturbations al ́eatoires. Si on se limite `a l’intervalle de temps [0, 1], l’espace de probabilit ́e naturel est C([0, 1], R3) : un  ́el ́ement de Ω, une trajectoire possible, est une fonction continue ω : [0, 1] −→ R3. La tribu sur Ω est alors la plus petite tribu qui rende mesurables toutes les applications coordonn ́ees ω −→ ω(t) pour t ∈ R+. Cette tribu co ̈ıncide avec la tribu bor ́elienne pour la topologie de la convergence uniforme sur Ω. Il resterait `a construire la probabilit ́e P , pour laquelle de multiples choix sont possibles. L’exemple le plus important,
+92
+
+
+`a la fois du point de vue th ́eorique et pour les applications, est la mesure de Wiener, qui est la loi du mouvement brownien.
+Remarque importante. Tr`es souvent dans la suite, on ne sp ́ecifiera pas le choix de l’espace de probabilit ́e. Les donn ́ees importantes seront les propri ́et ́es des fonctions d ́efinies sur cet espace, les variables al ́eatoires.
+8.1.2 Variables al ́eatoires
+De ́finition 8.1.1 Soit (E, E) un espace mesurable. Une application mesurable X : Ω −→ E est appel ́ee variable al ́eatoire (v.a. en abr ́eg ́e) `a valeurs dans E.
+Exemples. En reprenant les trois exemples ci-dessus :
+(1) X((i, j)) = i + j d ́efinit une variable al ́eatoire `a valeurs dans {1, 2, . . . , 12}.
+(2) X(ω) = inf{j : ωj = 6}, avec la convention inf ∅ = ∞, d ́efinit une v.a. `a valeurs dans
+ ̄N = N ∪ {∞}. Pour v ́erifier la mesurabilit ́e, on observe que, pour tout k ≥ 1,
+X−1({k}) = {ω ∈ Ω : ω1 6= 6, ω2 6= 6, . . . , ωk−1 6= 6, ωk = 6}.
+(3) Pour t ∈ [0, 1] fix ́e, X(ω) = ω(t) est une v.a. `a valeurs dans R3. (Remarquons que nous n’avons pas construit P dans cet exemple, mais cela n’intervient pas pour les questions de mesurabilit ́e.)
+De ́finition 8.1.2 La loi de la variable al ́eatoire X est la mesure-image de P par X. C’est donc la mesure de probabilit ́e sur (E, E), not ́ee PX, d ́efinie par
+PX(B) = P (X−1(B)) , ∀B ∈ E.
+En pratique on  ́ecrit plutˆot :
+PX (B) = P (X ∈ B) (= P ({ω ∈ Ω : X(ω) ∈ B}) ).
+La loi PX permet de calculer la probabilit ́e des  ́ev ́enements qui “de ́pendent” de la v.a. X. Il faut comprendre qu’`a chaque ω ∈ Ω on a associ ́e un “point al ́eatoire” X(ω) dans E, et que PX(B) est la probabilit ́e que ce point al ́eatoire tombe dans B.
+Remarque. Si μ est une mesure de probabilit ́e sur Rd, ou sur un espace plus g ́en ́eral, il existe une mani`ere canonique de construire une variable al ́eatoire dont la loi est μ. Il suffit de prendre Ω = Rd, A = B(Rd), P = μ, puis de poser X(ω) = ω. La loi de X est μ, de mani`ere  ́evidente.
+Cas particuliers.
+• Variables ale ́atoires discre`tes. C’est le cas o`u E est d ́enombrable (et E est l’ensemble des parties de E). La loi de X est alors
+PX = ∑
+x∈E
+px δx
+93
+
+
+o`u px = P (X = x) et δx d ́esigne la la mesure de Dirac en x. En effet,
+PX (B) = P (X ∈ B) = P (
+(⋃
+x∈B
+{X = x}
+)
+=∑
+x∈B
+P (X = x) = ∑
+x∈E
+px δx(B).
+En pratique, trouver la loi d’une v.a. discr`ete, c’est donc calculer toutes les probabilit ́es P (X = x) pour x ∈ E.
+Exemple. Revenons `a l’exemple (2) ci-dessus, avec X(ω) = inf{j : ωj = 6}. Alors, pour tout k ≥ 1,
+P (X = k) = P
+(⋃
+i1 ,...,ik−1 6=6
+{ω1 = i1, . . . , ωk−1 = ik−1, ωk = 6}
+)
+= 5k−1 ( 1
+6)k = 1
+6(5
+6 )k−1.
+Remarquons que ∑∞
+k=1 P (X = k) = 1 et donc P (X = ∞) = 1 − P (X ∈ N) = 0. Observons
+que l’ensemble {X = ∞} est loin d’ˆetre vide puisqu’il contient toutes les suites (i1, i2, . . .) qui ne prennent pas la valeur 6.
+• Variables ale ́atoires `a densite ́. Une variable al ́eatoire X `a valeurs dans (Rd, B(Rd)) est dite `a densit ́e si PX est absolument continue par rapport `a la mesure de Lebesgue λ. Dans ce cas, le th ́eor`eme de Radon-Nikodym montre qu’il existe une fonction bor ́elienne p : Rd −→ R+ telle que
+PX(B) =
+∫
+B
+p(x) dx.
+On a en particulier ∫
+Rd p(x)dx = P (X ∈ Rd) = 1. La fonction p, qui est unique `a en ensemble
+de mesure de Lebesgue nulle pr`es, est appel ́ee la densit ́e de (la loi de) X. Si d = 1, on a en particulier, pour tous α ≤ β,
+P (α ≤ X ≤ β) =
+∫β
+α
+p(x) dx.
+8.1.3 Esp ́erance math ́ematique
+De ́finition 8.1.3 Soit X une variable al ́eatoire r ́eelle (i.e. `a valeurs dans R). On note alors
+E[X] =
+∫
+Ω
+X(ω) P (dω),
+qui est bien d ́efinie dans les deux cas suivants : · si X ≥ 0 (alors E[X] ∈ [0, ∞]),
+· si X est de signe quelconque et E[|X|] = ∫ |X|dP < ∞. On  ́etend cette d ́efinition au cas o`u X = (X1, . . . , Xd) est une variable al ́eatoire `a valeurs dans Rd en prenant alors E[X] = (E[X1], . . . , E[Xd]), pourvu bien sˆur que chacune des esp ́erances E[Xi] soit bien d ́efinie.
+Remarque. Si X = 1B, E[X] = P (B). En g ́en ́eral, E[X] s’interpr`ete comme la moyenne de la v.a. X. Dans le cas particulier o`u Ω est fini et P attribue la mˆeme valeur `a chaque singleton, E[X] est bien la moyenne au sens usuel des valeurs prises par X.
+94
+
+
+Proposition 8.1.1 Soit X une variable al ́eatoire `a valeurs dans (E, E). Pour toute fonction mesurable f : E −→ [0, ∞], on a
+E[f (X)] =
+∫
+E
+f (x) PX(dx).
+Preuve. C’est  ́evidemment une propri ́et ́e g ́en ́erale des mesures-images d ́ej`a rencontr ́ee dans le cours d’int ́egration. On remarque que le r ́esultat est vrai par d ́efinition pour f = 1B puis par lin ́earit ́e pour toute fonction  ́etag ́ee positive. Dans le cas g ́en ́eral, on utilise le th ́eor`eme de convergence monotone et le fait que toute fonction mesurable positive est limite croissante d’une suite de fonctions  ́etag ́ees positives.
+Si f est de signe quelconque, la formule de la proposition reste vraie `a condition que les int ́egrales soient bien d ́efinies, ce qui revient `a E[|f (X)|] < ∞. La donn ́ee de PX permet donc de calculer la valeur moyenne de variables al ́eatoires de la forme f (X). Inversement, on utilise souvent la proposition pour calculer la loi d’une v.a. X : si on arrive `a  ́ecrire
+E[f (X)] =
+∫
+f dν
+pour toute fonction f “suffisamment” g ́en ́erale, alors on peut identifier ν `a la loi de X. Donnons un exemple simple de ce principe.
+Proposition 8.1.2 Soit X = (X1, . . . , Xd) une v.a. `a valeurs dans Rd. Supposons que la loi de X a une densit ́e p(x1, . . . , xd). Alors, pour tout j ∈ {1, . . . , d}, la loi de Xj a une densit ́e donn ́ee par
+pj(x) =
+∫
+Rd−1
+p(x1, . . . , xj−1, x, xj+1, . . . , xd) dx1 . . . dxj−1dxj+1 . . . dxd
+(par exemple, si d = 2,
+p1(x) =
+∫
+R
+p(x, y) dy , p2(y) =
+∫
+R
+p(x, y) dx).
+Preuve. Soit πj la projection πj(x1, . . . , xd) = xj. En utilisant le th ́eor`eme de Fubini, on  ́ecrit, pour toute fonction bor ́elienne f : R −→ R+,
+E[f (Xj)] = E[f (πj(X))] =
+∫
+Rd
+f (xj)p(x1, . . . , xd) dx1 . . . dxd
+=
+∫
+Rd
+f (xj)
+(∫
+Rd−1
+p(x1, . . . , xd) dx1 . . . dxj−1dxj+1 . . . dxd
+)
+dxj
+=
+∫
+R
+f (xj)pj(xj) dxj,
+ce qui donne le r ́esultat voulu.
+95
+
+
+Remarque. Si X = (X1, . . . , Xd) est une v.a. `a valeurs dans Rd, les lois PXj , qu’on appelle souvent les lois marginales de X, sont d ́etermin ́ees par la loi de X, simplement parce que PXj = πj(PX), avec la notation ci-dessous. Il est important d’observer que :
+la re ́ciproque est fausse !
+Pour un exemple, consid ́erons une densit ́e de probabilit ́e q sur R, et observons que la fonction p(x1, x2) = q(x1)q(x2) est alors aussi une densit ́e de probabilit ́e sur R2. D’apr`es une remarque ci-dessus on peut construire une v.a. X = (X1, X2) `a valeurs dans R2 dont la loi est la mesure de densit ́e p par rapport `a la mesure de Lebesgue. Mais alors les deux v.a. X et X′ = (X1, X1) ont mˆemes lois marginales (la proposition ci-dessus montre que PX1(dx) = PX2(dx) = q(x)dx) alors que les lois PX et PX′ sont tr`es diff ́erentes, simplement parce que
+PX′ est port ́ee par la diagonale de R2, qui est de mesure de Lebesgue nulle.
+8.1.4 Exemple : le paradoxe de Bertrand
+Pour illustrer les notions introduites dans les paragraphes pr ́ec ́edents, consid ́erons le probl`eme suivant. On s’int ́eresse `a la probabilit ́e qu’une corde choisie au hasard sur un cercle ait une longueur plus grande que le cot ́e du triangle  ́equilat ́eral inscrit. Sans perte de g ́en ́eralit ́e on peut supposer que le cercle est le cercle unit ́e. Bertrand proposait deux m ́ethodes de calcul :
+(a) On choisit les deux extr ́emit ́es de la corde au hasard sur le cercle. La premi`ere  ́etant choisie, la longueur de la corde sera plus grande que le cot ́e du triangle  ́equilat ́eral inscrit si et seulement si la seconde extr ́emit ́e est dans un secteur angulaire d’ouverture 2π/3. La probabilit ́e est donc 2π/3
+2π = 1
+3.
+(b) On choisit le centre de la corde au hasard sur le disque unit ́e. La probabilit ́e d ́esir ́ee est la probabilit ́e que le centre tombe dans le disque de rayon 1/2 centr ́e `a l’origine. Comme l’aire de ce disque est un quart de l’aire du disque unit ́e, on trouve comme probabilit ́e 1
+4.
+On obtient donc un r ́esultat diff ́erent dans les deux cas. L’explication tient dans le fait que les deux m ́ethodes correspondent `a des exp ́eriences al ́eatoires diff ́erentes, repr ́esent ́ees par des choix diff ́erents de l’espace de probabilit ́e. Il n’y a donc aucune raison pour que la loi de la variable al ́eatoire que l’on consid`ere (la longueur de la corde) soit la mˆeme dans les deux cas. Pour nous en convaincre, explicitons les choix des espaces de probabilit ́e.
+(a) Dans ce cas,
+Ω = [0, 2π[2 , A = B([0, 2π[2) , P (dω) = 1
+4π2 dθ dθ′,
+o`u on note ω = (θ, θ′) pour ω ∈ Ω. La longueur de la corde est
+X(ω) = 2| sin( θ − θ′
+2 )|.
+96
+
+
+On calcule facilement la loi de X :
+E[f (X)] =
+∫
+Ω
+f (X(ω)) P (dω)
+=1
+4π2
+∫ 2π
+0
+∫ 2π
+0
+f (2| sin( θ − θ′
+2 )|) dθdθ′
+=1
+π
+∫π
+0
+f (2 sin( u
+2 )) du
+=1
+π
+∫2
+0
+f (x) 1
+√
+1 − x2
+4
+dx.
+Donc X est une v.a. r ́eelle `a densit ́e : PX(dx) = p(x)dx, avec
+p(x) = 1
+π
+1
+√
+1 − x2
+4
+1[0,2](x).
+En particulier, la probabilit ́e recherch ́ee est
+P (X ≥ √3) =
+∫2
+√3
+p(x) dx = 1
+3.
+(b) Maintenant,
+Ω = {ω = (y, z) ∈ R2 : y2 + z2 < 1} , A = B(Ω) , P (dω) = 1
+π 1Ω(y, z) dy dz.
+La longueur de la corde est
+X(ω) = 2√1 − y2 − z2
+et pour calculer sa loi on  ́ecrit
+E[f (X)] = 1
+π
+∫
+R2
+f (2√1 − y2 − z2) 1{y2+z2<1} dydz
+=2
+∫1
+0
+f (2√1 − r2) r dr
+=1
+2
+∫2
+0
+f (x) x dx.
+Donc PX(dx) = p(x)dx, avec
+p(x) = 1
+2 1[0,2](x) x dx.
+On peut remarquer que la densit ́e obtenue est tr`es diff ́erente de celle du cas (a). En particulier,
+P (X ≥ √3) =
+∫2
+√3
+p(x) dx = 1
+4.
+Exercice. Traiter le cas de la troisi`eme m ́ethode propos ́ee par Bertrand : on choisit au hasard la direction du rayon orthogonal `a la corde, puis le centre de la corde uniform ́ement sur ce rayon.
+97
+
+
+8.1.5 Lois classiques
+On donne dans ce paragraphe quelques exemples importants de lois.
+Lois discre`tes.
+(a) Loi uniforme. Si E est un ensemble fini, Card(E) = n, une v.a. X est de loi uniforme sur E si
+P (X = x) = 1
+n , ∀x ∈ E.
+(b) Loi de Bernoulli de param`etre p ∈ [0, 1]. C’est la loi d’une v.a. X `a valeurs dans {0, 1} telle que P (X = 1) = p , P (X = 0) = 1 − p.
+On interpr`ete X comme le r ́esultat du lancer d’une pi`ece truqu ́ee qui tombe sur pile avec probabilit ́e p.
+(c) Loi binˆomiale B(n, p) (n ∈ N∗, p ∈ [0, 1]). C’est la loi d’une v.a. X `a valeurs dans {1, . . . , n} telle que P (X = k) = Cnk pk (1 − p)n−k.
+On interpr`ete X comme le nombre de piles obtenus en n lancers avec la pi`ece pr ́ec ́edente.
+(d) Loi g ́eom ́etrique de param`etre p ∈]0, 1[. C’est la loi d’une v.a. X `a valeurs dans N, telle que P (X = k) = (1 − p) pk.
+X est le nombre de piles obtenus avant le premier face.
+(e) Loi de Poisson de param`etre λ > 0. X est une v.a. `a valeurs dans N, et
+P (X = k) = λk
+k! e−λ , ∀k ∈ N.
+On calcule facilement E[X] = λ. La loi de Poisson est tr`es importante aussi bien du point de vue th ́eorique que dans les applications. Intuitivement, elle correspond au nombre d’ ́ev ́enements rares qui se sont produits durant une p ́eriode longue. La traduction math ́ematique de cette intuition est l’approximation binˆomiale de la loi de Poisson : si pour tout n ≥ 1, Xn suit une loi binˆomiale B(n, pn) et si npn −→ λ quand n → ∞, alors pour tout entier k ∈ N,
+nli→m∞ P (Xn = k) = λk
+k! e−λ.
+Lois continues. Dans les trois exemples qui suivent, X est une v.a. `a valeurs dans R, `a densit ́e p(x).
+(a) Loi uniforme sur [a, b] (a < b).
+p(x) = 1
+b − a 1[a,b](x).
+98
+
+
+(b) Loi exponentielle de param`etre λ > 0.
+p(x) = λ e−λx 1R+(x).
+Les lois exponentielles poss`edent la propri ́et ́e caracte ́ristique suivante : si a, b > 0,
+P (X > a + b) = P (X > a) P (X > b),
+ce qu’on interpr`ete en disant que la probabilit ́e que X − a > b sachant que X > a co ̈ıncide avec la probabilit ́e que X > b. C’est la propri ́et ́e d’absence de m ́emoire de la loi exponentielle, qui explique qu’elle soit utilis ́ee par exemple pour mod ́eliser les temps de vie de machine sans usure.
+(c) Loi gaussienne, ou normale, N (m, σ2) (m ∈ R, σ > 0).
+p(x) = 1
+σ√2π exp
+(
+− (x − m)2
+2σ2
+) .
+Avec la loi de Poisson, c’est la loi la plus importante en th ́eorie des probabilit ́es. Sa densit ́e est la fameuse courbe en cloche. Les param`etres m et σ s’interpr`etent comme
+m = E[X] , σ2 = E[(X − m)2].
+On remarque aussi que X − m suit la loi N (0, σ2). La loi gaussienne jouera un rˆole important dans le Chapitre 10.
+Par convention on dira qu’une v.a. constante  ́egale `a m suit la loi gaussienne N (m, 0). Si X suit la loi N (m, σ2), pour tous λ, μ ∈ R, λX + μ suit la loi N (λm + μ, λ2σ2).
+8.1.6 Fonction de r ́epartition d’une variable al ́eatoire r ́eelle
+Si X est une v.a. r ́eelle, la fonction de r ́epartition de X est la fonction FX : R −→ [0, 1] d ́efinie par
+FX(t) = P (X ≤ t) = PX(] − ∞, t]) , ∀t ∈ R.
+La fonction FX est croissante, continue `a droite et a pour limite 0 en −∞ et 1 en +∞. Inversement, si on se donne une fonction F ayant ces propri ́et ́es, on a vu dans le cours d’int ́egration qu’il existe une (unique) mesure de probabilit ́e μ telle que μ(] − ∞, t]) = F (t) pour tout t ∈ R. Cela montre qu’on peut interpr ́eter F comme la fonction de r ́epartition d’une v.a. r ́eelle. Il d ́ecoule des r ́esultats du cours d’int ́egration que FX caract ́erise la loi PX de X. On a en particulier
+P (a ≤ X ≤ b) = FX (b) − FX(a−) si a ≤ b,
+P (a < X < b) = FX(b−) − FX (a) si a < b,
+et les sauts de FX correspondent aux atomes de PX.
+99
+
+
+8.1.7 Tribu engendr ́ee par une variable al ́eatoire
+Soit X une v.a. `a valeurs dans un espace mesurable quelconque (E, E). La tribu engendr ́ee par X, not ́ee σ(X), est par d ́efinition la plus petite tribu sur Ω qui rende X mesurable :
+σ(X) = {A = X−1(B) : B ∈ E}.
+Remarque. On peut g ́en ́eraliser cette d ́efinition `a une famille quelconque (Xi)i∈I de v.a., Xi  ́etant `a valeurs dans (Ei, Ei). Dans ce cas,
+σ(X) = σ(X−1
+i (Bi) : Bi ∈ Ei, i ∈ I).
+Proposition 8.1.3 Soit X une variable al ́eatoire `a valeurs dans (E, E), et soit Y une v.a. r ́eelle. Il y a  ́equivalence entre :
+(i) Y est σ(X)-mesurable.
+(ii) Il existe une fonction mesurable f de (E, E) dans (R, B(R)) telle que Y = f (X).
+Preuve. L’implication (ii)⇒(i) est facile puisqu’une compos ́ee de fonctions mesurables est mesurable. Dans l’autre sens, supposons que Y est σ(X)-mesurable. Traitons d’abord le cas o`u Y est  ́etag ́ee :
+Y=
+n ∑
+i=1
+λi 1Ai
+o`u λi ∈ R et Ai ∈ σ(X), pour tout i ∈ {1, . . . , n}. Alors, pour chaque i ∈ {1, . . . , n}, on peut trouver Bi ∈ E tel que Ai = X−1(Bi), et on a
+Y=
+∑n
+i=1
+λi 1Ai =
+n ∑
+i=1
+λi 1Bi ◦ X = f ◦ X,
+o`u f = ∑n
+i=1 λi 1Bi est E -mesurable.
+Dans le cas g ́en ́eral, on sait que Y est limite simple d’une suite de v.a. Yn  ́etag ́ees et σ(X)-mesurables. D’apr`es la premi`ere  ́etape, on peut  ́ecrire, pour tout n, Yn = fn(X), o`u la fonction fn : E −→ R est mesurable. On pose alors pour tout x ∈ E :
+f (x) =
+{ nli→m∞ fn(x) si la limite existe,
+0 sinon.
+On sait que la fonction f ainsi d ́efinie est mesurable. Par ailleurs, pour tout ω ∈ Ω, X(ω) appartient `a l’ensemble des x pour lesquels lim fn(x) existe (puisque lim fn(X(ω)) = lim Yn(ω) = Y (ω)), et de plus
+f (X(ω)) = lim fn(X(ω)) = Y (ω)
+ce qui donne la repr ́esentation recherch ́ee Y = f (X).
+100

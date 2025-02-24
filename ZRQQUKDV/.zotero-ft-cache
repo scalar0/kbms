@@ -1,0 +1,1732 @@
+C ́edric Villani
+Optimal transport, old and new
+June 13, 2008
+Springer
+Berlin Heidelberg NewYork Hong Kong London Milan Paris Tokyo
+
+
+Do mo chuisle mo chro ́ı, A ̈elle
+
+
+VII
+This is the June 14, 2008 version of my lecture notes for the 2005 Saint-Flour summer school. The changes with respect to the previous version which I had daringly called “final” are the following:
+- a third Appendix to Chapter 14, to clarify certain properties of Jacobi fields and fill a gap (pointed out to me by D. Cordero-Erausquin) in the discussion of distortion coefficients;
+- a corrected statement for Corollary 5.23 (stability of the transport map), given to me by B. Schulte;
+- Step 5 of the dreadful proof of Theorem 23.13, which used the faulty version of Corollary 5.23, has been corrected; as a result that proof is even dreadfuller now;
+- Chapter 23 on concentration has been updated with some recent results by N. Gozlan.
+This is the version sent back to the publisher after copyediting.
+C. Villani
+UMPA, ENS Lyon 46 all ́ee d’Italie 69364 Lyon Cedex 07 FRANCE
+Email: cvillani@umpa.ens-lyon.fr
+Webpage: www.umpa.ens-lyon.fr/~cvillani
+
+
+
+
+Contents
+Preface . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+Conventions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+Introduction 13
+1 Couplings and changes of variables . . . . . . . . . . . . . . . . . . . 17
+2 Three examples of coupling techniques . . . . . . . . . . . . . . . 33
+3 The founding fathers of optimal transport . . . . . . . . . . . 41
+Part I Qualitative description of optimal transport 51
+4 Basic properties . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+5 Cyclical monotonicity and Kantorovich duality . . . . . . . 63
+6 The Wasserstein distances . . . . . . . . . . . . . . . . . . . . . . . . . . . 105
+7 Displacement interpolation . . . . . . . . . . . . . . . . . . . . . . . . . . . 125
+8 The Monge–Mather shortening principle . . . . . . . . . . . . . 175
+9 Solution of the Monge problem I: Global approach . . . 217
+10 Solution of the Monge problem II: Local approach . . . 227
+
+
+X Contents
+11 The Jacobian equation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 287
+12 Smoothness . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 295
+13 Qualitative picture . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 347
+Part II Optimal transport and Riemannian geometry 367
+14 Ricci curvature . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 371
+15 Otto calculus . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 435
+16 Displacement convexity I . . . . . . . . . . . . . . . . . . . . . . . . . . . . 449
+17 Displacement convexity II . . . . . . . . . . . . . . . . . . . . . . . . . . . . 463
+18 Volume control . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 507
+19 Density control and local regularity . . . . . . . . . . . . . . . . . . 521
+20 Infinitesimal displacement convexity . . . . . . . . . . . . . . . . . 541
+21 Isoperimetric-type inequalities . . . . . . . . . . . . . . . . . . . . . . . 561
+22 Concentration inequalities . . . . . . . . . . . . . . . . . . . . . . . . . . . 583
+23 Gradient flows I . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 645
+24 Gradient flows II: Qualitative properties . . . . . . . . . . . . . 709
+25 Gradient flows III: Functional inequalities . . . . . . . . . . . . 735
+Part III Synthetic treatment of Ricci curvature 747
+26 Analytic and synthetic points of view . . . . . . . . . . . . . . . . 751
+27 Convergence of metric-measure spaces . . . . . . . . . . . . . . . 759
+28 Stability of optimal transport . . . . . . . . . . . . . . . . . . . . . . . . 789
+
+
+Contents XI
+29 Weak Ricci curvature bounds I: Definition and
+Stability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 811
+30 Weak Ricci curvature bounds II: Geometric and
+analytic properties . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 865
+Conclusions and open problems 921
+References . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 933
+List of short statements . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 975
+List of figures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 983
+Index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 985
+Some notable cost functions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 989
+
+
+
+
+Preface
+
+
+2 Preface
+When I was first approached for the 2005 edition of the Saint-Flour Probability Summer School, I was intrigued, flattered and scared.1 Apart from the challenge posed by the teaching of a rather analytical subject to a probabilistic audience, there was the danger of producing a remake of my recent book Topics in Optimal Transportation.
+However, I gradually realized that I was offered a unique opportunity to rewrite the whole theory from a different perspective, with alternative proofs and different focus, and a more probabilistic presentation; plus the incorporation of recent progress. Among the most striking of these recent advances, there was the rising awareness that John Mather’s minimal measures had a lot to do with optimal transport, and that both theories could actually be embedded in a single framework. There was also the discovery that optimal transport could provide a robust synthetic approach to Ricci curvature bounds. These links with dynamical systems on one hand, differential geometry on the other hand, were only briefly alluded to in my first book; here on the contrary they will be at the basis of the presentation. To summarize: more probability, more geometry, and more dynamical systems. Of course there cannot be more of everything, so in some sense there is less analysis and less physics, and also there are fewer digressions. So the present course is by no means a reduction or an expansion of my previous book, but should be regarded as a complementary reading. Both sources can be read independently, or together, and hopefully the complementarity of points of view will have pedagogical value. Throughout the book I have tried to optimize the results and the presentation, to provide complete and self-contained proofs of the most important results, and comprehensive bibliographical notes — a dauntingly difficult task in view of the rapid expansion of the literature. Many statements and theorems have been written specifically for this course, and many results appear in rather sharp form for the first time. I also added several appendices, either to present some domains of mathematics to non-experts, or to provide proofs of important auxiliary results. All this has resulted in a rapid growth of the document, which in the end is about six times (!) the size that I had planned initially. So the non-expert reader is advised to skip long proofs at first reading, and concentrate on explanations, statements, examples and sketches of proofs when they are available.
+1 Fans of Tom Waits may have identified this quotation.
+
+
+Preface 3
+About terminology: For some reason I decided to switch from “transportation” to “transport”, but this really is a matter of taste. For people who are already familiar with the theory of optimal transport, here are some more serious changes. Part I is devoted to a qualitative description of optimal transport. The dynamical point of view is given a prominent role from the beginning, with Robert McCann’s concept of displacement interpolation. This notion is discussed before any theorem about the solvability of the Monge problem, in an abstract setting of “Lagrangian action” which generalizes the notion of length space. This provides a unified picture of recent developments dealing with various classes of cost functions, in a smooth or nonsmooth context. I also wrote down in detail some important estimates by John Mather, well-known in certain circles, and made extensive use of them, in particular to prove the Lipschitz regularity of “intermediate” transport maps (starting from some intermediate time, rather than from initial time). Then the absolute continuity of displacement interpolants comes for free, and this gives a more unified picture of the Mather and Monge–Kantorovich theories. I rewrote in this way the classical theorems of solvability of the Monge problem for quadratic cost in Euclidean space. Finally, this approach allows one to treat change of variables formulas associated with optimal transport by means of changes of variables that are Lipschitz, and not just with bounded variation. Part II discusses optimal transport in Riemannian geometry, a line of research which started around 2000; I have rewritten all these applications in terms of Ricci curvature, or more precisely curvaturedimension bounds. This part opens with an introduction to Ricci curvature, hopefully readable without any prior knowledge of this notion. Part III presents a synthetic treatment of Ricci curvature bounds in metric-measure spaces. It starts with a presentation of the theory of Gromov–Hausdorff convergence; all the rest is based on recent research papers mainly due to John Lott, Karl-Theodor Sturm and myself. In all three parts, noncompact situations will be systematically treated, either by limiting processes, or by restriction arguments (the restriction of an optimal transport is still optimal; this is a simple but powerful principle). The notion of approximate differentiability, introduced in the field by Luigi Ambrosio, appears to be particularly handy in the study of optimal transport in noncompact Riemannian manifolds.
+
+
+4 Preface
+Several parts of the subject are not developed as much as they would deserve. Numerical simulation is not addressed at all, except for a few comments in the concluding part. The regularity theory of optimal transport is described in Chapter 12 (including the remarkable recent works of Xu-Jia Wang, Neil Trudinger and Gre ́goire Loeper), but without the core proofs and latest developments; this is not only because of the technicality of the subject, but also because smoothness is not needed in the rest of the book. Still another poorly developed subject is the Monge–Mather–Man ̃e ́ problem arising in dynamical systems, and including as a variant the optimal transport problem when the cost function is a distance. This topic is discussed in several treatises, such as Albert Fathi’s monograph, Weak KAM theorem in Lagrangian dynamics; but now it would be desirable to rewrite everything in a framework that also encompasses the optimal transport problem. An important step in this direction was recently performed by Patrick Bernard and Boris Buffoni. In Chapter 8 I shall provide an introduction to Mather’s theory, but there would be much more to say. The treatment of Chapter 22 (concentration of measure) is strongly influenced by Michel Ledoux’s book, The Concentration of Measure Phenomenon; while the results of Chapters 23 to 25 owe a lot to the monograph by Luigi Ambrosio, Nicola Gigli and Giuseppe Savare ́, Gradient flows in metric spaces and in the space of probability measures. Both references are warmly recommended complementary reading. One can also consult the two-volume treatise by Svetlozar Rachev and Ludger Ru ̈schendorf, Mass Transportation Problems, for many applications of optimal transport to various fields of probability theory. While writing this text I asked for help from a number of friends and collaborators. Among them, Luigi Ambrosio and John Lott are the ones whom I requested most to contribute; this book owes a lot to their detailed comments and suggestions. Most of Part III, but also significant portions of Parts I and II, are made up with ideas taken from my collaborations with John, which started in 2004 as I was enjoying the hospitality of the Miller Institute in Berkeley. Frequent discussions with Patrick Bernard and Albert Fathi allowed me to get the links between optimal transport and John Mather’s theory, which were a key to the presentation in Part I; John himself gave precious hints about the history of the subject. Neil Trudinger and Xu-Jia Wang spent vast amounts of time teaching me the regularity theory of Monge–Ampe`re equations. Alessio Figalli took up the dreadful chal
+
+
+Preface 5
+lenge to check the entire set of notes from first to last page. Apart from these people, I got valuable help from Stefano Bianchini, Franc ̧ois Bolley, Yann Brenier, Xavier Cabre ́, Vincent Calvez, Jose ́ Antonio Carrillo, Dario Cordero-Erausquin, Denis Feyel, Sylvain Gallot, Wilfrid Gangbo, Diogo Aguiar Gomes, Nathae ̈l Gozlan, Arnaud Guillin, Kazuhiro Kuwae, Michel Ledoux, Gre ́goire Loeper, Francesco Maggi, Robert McCann, Shin-ichi Ohta, Vladimir Oliker, Yann Ollivier, Felix Otto, Ludger Ru ̈schendorf, Giuseppe Savare ́, Walter Schachermayer, Benedikt Schulte, Theo Sturm, Josef Teichmann, Anthon Thalmaier,
+Hermann Thorisson, Su ̈leyman  ̈Ustu ̈nel, Anatoly Vershik, and others. Short versions of this course were tried on mixed audiences in the Universities of Bonn, Dortmund, Grenoble and Orle ́ans, as well as the Borel seminar in Leysin and the IHES in Bures-sur-Yvette. Part of the writing was done during stays at the marvelous MFO Institute in Oberwolfach, the CIRM in Luminy, and the Australian National University in Canberra. All these institutions are warmly thanked. It is a pleasure to thank Jean Picard for all his organization work on the 2005 Saint-Flour summer school; and the participants for their questions, comments and bug-tracking, in particular Sylvain Arlot (great bug-tracker!), Fabrice Baudoin, Je ́roˆme Demange, Steve Evans (whom I also thank for his beautiful lectures), Christophe Leuridan, Jan Obl ́oj, Erwan Saint Loubert Bie ́, and others. I extend these thanks to the joyful group of young PhD students and maıˆtres de confe ́rences with whom I spent such a good time on excursions, restaurants, quantum ping-pong and other activities, making my stay in Saint-Flour truly wonderful (with special thanks to my personal driver, Ste ́phane Loisel, and my table tennis sparring-partner and adversary, Franc ̧ois Simenhaus). I will cherish my visit there in memory as long as I live! Typing these notes was mostly performed on my (now defunct) faithful laptop Torsten, a gift of the Miller Institute. Support by the Agence Nationale de la Recherche and Institut Universitaire de France is acknowledged. My eternal gratitude goes to those who made fine typesetting accessible to every mathematician, most notably Donald Knuth for TEX, and the developers of LATEX, BibTEX and XFig. Final thanks to Catriona Byrne and her team for a great editing process. As usual, I encourage all readers to report mistakes and misprints. I will maintain a list of errata, accessible from my Web page.
+Ce ́dric Villani Lyon, June 2008
+
+
+
+
+Conventions
+
+
+8 Conventions
+Axioms
+I use the classical axioms of set theory; not the full version of the axiom of choice (only the classical axiom of “countable dependent choice”).
+Sets and structures
+Id is the identity mapping, whatever the space. If A is a set then the function 1A is the indicator function of A: 1A(x) = 1 if x ∈ A, and 0 otherwise. If F is a formula, then 1F is the indicator function of the set defined by the formula F . If f and g are two functions, then (f, g) is the function x 7−→ (f (x), g(x)). The composition f ◦ g will often be denoted by f (g). N is the set of positive integers: N = {1, 2, 3, . . .}. A sequence is written (xk)k∈N, or simply, when no confusion seems possible, (xk).
+R is the set of real numbers. When I write Rn it is implicitly assumed that n is a positive integer. The Euclidean scalar product between two vectors a and b in Rn is denoted interchangeably by a · b or 〈a, b〉. The Euclidean norm will be denoted simply by | · |, independently of the dimension n. Mn(R) is the space of real n × n matrices, and In the n × n identity matrix. The trace of a matrix M will be denoted by tr M , its determinant by det M , its adjoint by M ∗, and its Hilbert–Schmidt norm
+√tr (M ∗M ) by ‖M ‖HS (or just ‖M ‖). Unless otherwise stated, Riemannian manifolds appearing in the text are finite-dimensional, smooth and complete. If a Riemannian manifold M is given, I shall usually denote by n its dimension, by d the geodesic distance on M , and by vol the volume (= n-dimensional Hausdorff) measure on M . The tangent space at x will be denoted by TxM , and the tangent bundle by TM . The norm on TxM will most
+of the time be denoted by | · |, as in Rn, without explicit mention of the point x. (The symbol ‖ · ‖ will be reserved for special norms or functional norms.) If S is a set without smooth structure, the notation TxS will instead denote the tangent cone to S at x (Definition 10.46).
+If Q is a quadratic form defined on Rn, or on the tangent bundle of a
+manifold, its value on a (tangent) vector v will be denoted by 〈Q·v, v〉, or simply Q(v). The open ball of radius r and center x in a metric space X is denoted interchangeably by B(x, r) or Br(x). If X is a Riemannian manifold, the distance is of course the geodesic distance. The closed ball will be denoted interchangeably by B[x, r] or Br](x). The diameter of a metric space X will be denoted by diam (X ).
+
+
+Conventions 9
+The closure of a set A in a metric space will be denoted by A (this is also the set of all limits of sequences with values in A). A metric space X is said to be locally compact if every point x ∈ X admits a compact neighborhood; and boundedly compact if every closed and bounded subset of X is compact. A map f between metric spaces (X , d) and (X ′, d′) is said to be C-Lipschitz if d′(f (x), f (y)) ≤ C d(x, y) for all x, y in X . The best admissible constant C is then denoted by ‖f ‖Lip. A map is said to be locally Lipschitz if it is Lipschitz on bounded sets, not necessarily compact (so it makes sense to speak of a locally Lipschitz map defined almost everywhere). A curve in a space X is a continuous map defined on an interval of R, valued in X . For me the words “curve” and “path” are synonymous. The time-t evaluation map et is defined by et(γ) = γt = γ(t). If γ is a curve defined from an interval of R into a metric space, its length will be denoted by L(γ), and its speed by |γ ̇ |; definitions are recalled on p. 131. Usually geodesics will be minimizing, constant-speed geodesic curves. If X is a metric space, Γ (X ) stands for the space of all geodesics γ : [0, 1] → X . Being given x0 and x1 in a metric space, I denote by [x0, x1]t the set of all t-barycenters of x0 and x1, as defined on p. 407. If A0 and A1 are two sets, then [A0, A1]t stands for the set of all [x0, x1]t with (x0, x1) ∈ A0 × A1.
+Function spaces
+C(X ) is the space of continuous functions X → R, Cb(X ) the space of bounded continuous functions X → R; and C0(X ) the space of continuous functions X → R converging to 0 at infinity; all of them are equipped with the norm of uniform convergence ‖φ‖∞ = sup |φ|.
+Then Cbk(X ) is the space of k-times continuously differentiable func
+tions u : X → R, such that all the partial derivatives of u up to order k are bounded; it is equipped with the norm given by the supremum of all norms ‖∂u‖Cb , where ∂u is a partial derivative of order at most k;
+Cck(X ) is the space of k-times continuously differentiable functions with compact support; etc. When the target space is not R but some other space Y, the notation is transformed in an obvious way: C(X ; Y), etc. Lp is the Lebesgue space of exponent p; the space and the measure will often be implicit, but clear from the context.
+
+
+10 Conventions
+Calculus
+The derivative of a function u = u(t), defined on an interval of R and valued in Rn or in a smooth manifold, will be denoted by u′, or more often by u ̇ . The notation d+u/dt stands for the upper right-derivative of a real-valued function u: d+u/dt = lim sups↓0[u(t + s) − u(t)]/s. If u is a function of several variables, the partial derivative with respect to the variable t will be denoted by ∂tu, or ∂u/∂t. The notation ut does not stand for ∂tu, but for u(t).
+The gradient operator will be denoted by grad or simply ∇; the divergence operator by div or ∇· ; the Laplace operator by ∆; the Hessian operator by Hess or ∇2 (so ∇2 does not stand for the Laplace operator). The notation is the same in Rn or in a Riemannian manifold. ∆ is the divergence of the gradient, so it is typically a nonpositive operator. The value of the gradient of f at point x will be denoted either by
+∇xf or ∇f (x). The notation  ̃∇ stands for the approximate gradient, introduced in Definition 10.2. If T is a map Rn → Rn, ∇T stands for the Jacobian matrix of T , that is the matrix of all partial derivatives (∂Ti/∂xj ) (1 ≤ i, j ≤ n). All these differential operators will be applied to (smooth) functions but also to measures, by duality. For instance, the Laplacian of a mea
+sure μ is defined via the identity ∫ ζ d(∆μ) = ∫ (∆ζ) dμ (ζ ∈ Cc2). The notation is consistent in the sense that ∆(f vol) = (∆f ) vol. Similarly, I shall take the divergence of a vector-valued measure, etc. f = o(g) means f /g −→ 0 (in an asymptotic regime that should be clear from the context), while f = O(g) means that f /g is bounded. log stands for the natural logarithm with base e. The positive and negative parts of x ∈ R are defined respectively by x+ = max (x, 0) and x− = max (−x, 0); both are nonnegative, and |x| = x+ + x−. The notation a ∧ b will sometimes be used for min (a, b). All these notions are extended in the usual way to functions and also to signed measures.
+Probability measures
+δx is the Dirac mass at point x. All measures considered in the text are Borel measures on Polish spaces, which are complete, separable metric spaces, equipped with their Borel σ-algebra. I shall usually not use the completed σ-algebra, except on some rare occasions (emphasized in the text) in Chapter 5. A measure is said to be finite if it has finite mass, and locally finite if it attributes finite mass to compact sets.
+
+
+Conventions 11
+The space of Borel probability measures on X is denoted by P (X ), the space of finite Borel measures by M+(X ), the space of signed finite Borel measures by M (X ). The total variation of μ is denoted by ‖μ‖TV. The integral of a function f with respect to a probability measure
+μ will be denoted interchangeably by ∫ f (x) dμ(x) or ∫ f (x) μ(dx) or
+∫ f dμ.
+If μ is a Borel measure on a topological space X , a set N is said to be μ-negligible if N is included in a Borel set of zero μ-measure. Then μ is said to be concentrated on a set C if X \ C is negligible. (If C itself is Borel measurable, this is of course equivalent to μ[X \ C] = 0.) By abuse of language, I may say that X has full μ-measure if μ is concentrated on X . If μ is a Borel measure, its support Spt μ is the smallest closed set on which it is concentrated. The same notation Spt will be used for the support of a continuous function. If μ is a Borel measure on X , and T is a Borel map X → Y, then T#μ stands for the image measure2 (or push-forward) of μ by T : It is
+a Borel measure on Y, defined by (T#μ)[A] = μ[T −1(A)]. The law of a random variable X defined on a probability space (Ω, P ) is denoted by law (X); this is the same as X#P . The weak topology on P (X ) (or topology of weak convergence, or narrow topology) is induced by convergence against Cb(X ), i.e. bounded continuous test functions. If X is Polish, then the space P (X ) itself is Polish. Unless explicitly stated, I do not use the weak-∗ topology of measures (induced by C0(X ) or Cc(X )). When a probability measure is clearly specified by the context, it will sometimes be denoted just by P , and the associated integral, or expectation, will be denoted by E . If π(dx dy) is a probability measure in two variables x ∈ X and y ∈ Y, its marginal (or projection) on X (resp. Y) is the measure X#π (resp. Y#π), where X(x, y) = x, Y (x, y) = y. If (x, y) is random with law (x, y) = π, then the conditional law of x given y is denoted by π(dx|y); this is a measurable function Y → P (X ), obtained by disintegrating π along its y-marginal. The conditional law of y given x will be denoted by π(dy|x). A measure μ is said to be absolutely continuous with respect to a measure ν if there exists a measurable function f such that μ = f ν.
+2 Depending on the authors, the measure T#μ is often denoted by T #μ, T∗μ, T (μ), T μ, R δT (a) μ(da), μ ◦ T −1, μT −1, or μ[T ∈ · ].
+
+
+12 Conventions
+Notation specific to optimal transport and related fields
+If μ ∈ P (X ) and ν ∈ P (Y) are given, then Π(μ, ν) is the set of all joint probability measures on X × Y whose marginals are μ and ν. C(μ, ν) is the optimal (total) cost between μ and ν, see p. 92. It implicitly depends on the choice of a cost function c(x, y). For any p ∈ [1, +∞), Wp is the Wasserstein distance of order p, see Definition 6.1; and Pp(X ) is the Wasserstein space of order p, i.e. the set of probability measures with finite moments of order p, equipped with the distance Wp, see Definition 6.4. Pc(X ) is the set of probability measures on X with compact support.
+If a reference measure ν on X is specified, then P ac(X ) (resp. Ppac(X ), Pcac(X )) stands for those elements of P (X ) (resp. Pp(X ), Pc(X )) which are absolutely continuous with respect to ν. DCN is the displacement convexity class of order N (N plays the role of a dimension); this is a family of convex functions, defined on p. 457 and in Definition 17.1. Uν is a functional defined on P (X ); it depends on a convex function U and a reference measure ν on X . This functional will be defined at various levels of generality, first in equation (15.2), then in Definition 29.1 and Theorem 30.4.
+Uπβ,ν is another functional on P (X ), which involves not only a convex function U and a reference measure ν, but also a coupling π and a distortion coefficient β, which is a nonnegative function on X × X : See again Definition 29.1 and Theorem 30.4. The Γ and Γ2 operators are quadratic differential operators associated with a diffusion operator; they are defined in (14.47) and (14.48).
+β (K,N )
+t is the notation for the distortion coefficients that will play a prominent role in these notes; they are defined in (14.61). CD(K, N ) means “curvature-dimension condition (K, N )”, which morally means that the Ricci curvature is bounded below by Kg (K a real number, g the Riemannian metric) and the dimension is bounded above by N (a real number which is not less than 1). If c(x, y) is a cost function then cˇ(y, x) = c(x, y). Similarly, if π(dx dy) is a coupling, then πˇ is the coupling obtained by swapping variables, that is πˇ(dy dx) = π(dx dy), or more rigorously, πˇ = S#π, where S(x, y) = (y, x).
+Assumptions (Super), (Twist), (Lip), (SC), (locLip), (locSC), (H∞) are defined on p. 246, (STwist) on p. 313, (Cutn−1) on p. 317.
+
+
+Introduction
+
+
+
+
+15
+To start, I shall recall in Chapter 1 some basic facts about couplings and changes of variables, including definitions, a short list of famous couplings (Knothe–Rosenblatt coupling, Moser coupling, optimal coupling, etc.); and some important basic formulas about change of variables, conservation of mass, and linear diffusion equations. In Chapter 2 I shall present, without detailed proofs, three applications of optimal coupling techniques, providing a flavor of the kind of applications that will be considered later. Finally, Chapter 3 is a short historical perspective about the foundations and development of optimal coupling theory.
+
+
+
+
+1
+Couplings and changes of variables
+Couplings are very well-known in all branches of probability theory, but since they will occur again and again in this course, it might be a good idea to start with some basic reminders and a few more technical issues.
+Definition 1.1 (Coupling). Let (X , μ) and (Y, ν) be two probability spaces. Coupling μ and ν means constructing two random variables X and Y on some probability space (Ω, P ), such that law (X) = μ, law (Y ) = ν. The couple (X, Y ) is called a coupling of (μ, ν). By abuse of language, the law of (X, Y ) is also called a coupling of (μ, ν).
+If μ and ν are the only laws in the problem, then without loss of generality one may choose Ω = X × Y. In a more measure-theoretical formulation, coupling μ and ν means constructing a measure π on X ×Y such that π admits μ and ν as marginals on X and Y respectively. The following three statements are equivalent ways to rephrase that marginal condition:
+• (projX )#π = μ, (projY )#π = ν, where projX and projY respectively stand for the projection maps (x, y) 7−→ x and (x, y) 7−→ y;
+• For all measurable sets A ⊂ X , B ⊂ Y, one has π[A × Y] = μ[A], π[X × B] = ν[B];
+• For all integrable (resp. nonnegative) measurable functions φ, ψ on X , Y,
+∫
+X ×Y
+(φ(x) + ψ(y)) dπ(x, y) =
+∫
+X
+φ dμ +
+∫
+Y
+ψ dν.
+
+
+18 1 Couplings and changes of variables
+A first remark about couplings is that they always exist: at least there is the trivial coupling, in which the variables X and Y are independent (so their joint law is the tensor product μ ⊗ ν). This can hardly be called a coupling, since the value of X does not give any information about the value of Y . Another extreme is when all the information about the value of Y is contained in the value of X, in other words Y is just a function of X. This motivates the following definition (in which X and Y do not play symmetric roles).
+Definition 1.2 (Deterministic coupling). With the notation of Definition 1.1, a coupling (X, Y ) is said to be deterministic if there exists a measurable function T : X → Y such that Y = T (X).
+To say that (X, Y ) is a deterministic coupling of μ and ν is strictly equivalent to any one of the four statements below:
+• (X, Y ) is a coupling of μ and ν whose law π is concentrated on the graph of a measurable function T : X → Y; • X has law μ and Y = T (X), where T#μ = ν; • X has law μ and Y = T (X), where T is a change of variables from μ to ν: for all ν-integrable (resp. nonnegative measurable) functions φ, ∫
+Y
+φ(y) dν(y) =
+∫
+X
+φ(T (x)) dμ(x); (1.1)
+• π = (Id , T )#μ.
+The map T appearing in all these statements is the same and is uniquely defined μ-almost surely (when the joint law of (X, Y ) has been
+fixed). The converse is true: If T and T ̃ coincide μ-almost surely, then
+T#μ = T ̃#μ. It is common to call T the transport map: Informally, one can say that T transports the mass represented by the measure μ, to the mass represented by the measure ν. Unlike couplings, deterministic couplings do not always exist: Just think of the case when μ is a Dirac mass and ν is not. But there may also be infinitely many deterministic couplings between two given probability measures.
+
+
+Some famous couplings 19
+Some famous couplings
+Here below are some of the most famous couplings used in mathematics — of course the list is far from complete, since everybody has his or her own preferred coupling technique. Each of these couplings comes with its own natural setting; this variety of assumptions reflects the variety of constructions. (This is a good reason to state each of them with some generality.)
+1. The measurable isomorphism. Let (X , μ) and (Y, ν) be two Polish (i.e. complete, separable, metric) probability spaces without atom (i.e. no single point carries a positive mass). Then there exists a (nonunique) measurable bijection T : X → Y such that T#μ = ν, (T −1)#ν = μ. In that sense, all atomless Polish probability spaces are isomorphic, and, say, isomorphic to the space Y = [0, 1] equipped with the Lebesgue measure. Powerful as that theorem may seem, in practice the map T is very singular; as a good exercise, the reader might try to construct it “explicitly”, in terms of cumulative distribution functions, when X = R and Y = [0, 1] (issues do arise when the density of μ vanishes at some places). Experience shows that it is quite easy to fall into logical traps when working with the measurable isomorphism, and my advice is to never use it.
+2. The Moser mapping. Let X be a smooth compact Riemannian manifold with volume vol, and let f, g be Lipschitz continuous positive probability densities on X ; then there exists a deterministic coupling of μ = f vol and ν = g vol, constructed by resolution of an elliptic equation. On the positive side, there is a somewhat explicit representation of the transport map T , and it is as smooth as can be: if f, g are Ck,α then T is Ck+1,α. The formula is given in the Appendix at the end of this chapter. The same construction works in Rn provided that f and g decay fast enough at infinity; and it is robust enough to accommodate for variants.
+3. The increasing rearrangement on R. Let μ, ν be two probability measures on R; define their cumulative distribution functions by
+F (x) =
+∫x
+−∞
+dμ, G(y) =
+∫y
+−∞
+dν.
+Further define their right-continuous inverses by
+
+
+20 1 Couplings and changes of variables
+F −1(t) = inf
+{
+x ∈ R; F (x) > t
+} ;
+G−1(t) = inf
+{
+y ∈ R; G(y) > t
+} ;
+and set
+T = G−1 ◦ F.
+If μ does not have atoms, then T#μ = ν. This rearrangement is quite simple, explicit, as smooth as can be, and enjoys good geometric properties.
+4. The Knothe–Rosenblatt rearrangement in Rn. Let μ and ν be two probability measures on Rn, such that μ is absolutely continuous with respect to Lebesgue measure. Then define a coupling of μ and ν as follows.
+Step 1: Take the marginal on the first variable: this gives probability measures μ1(dx1), ν1(dy1) on R, with μ1 being atomless. Then define y1 = T1(x1) by the formula for the increasing rearrangement of μ1 into ν1.
+Step 2: Now take the marginal on the first two variables and disintegrate it with respect to the first variable. This gives probability measures μ2(dx1 dx2) = μ1(dx1) μ2(dx2|x1), ν2(dy1 dy2) = ν1(dy1) ν2(dy2|y1). Then, for each given y1 ∈ R, set y1 = T1(x1), and define y2 = T2(x2; x1) by the formula for the increasing rearrangement of μ2(dx2|x1) into ν2(dy2|y1). (See Figure 1.1.)
+Then repeat the construction, adding variables one after the other and defining y3 = T3(x3; x1, x2); etc. After n steps, this produces a map y = T (x) which transports μ to ν, and in practical situations might be computed explicitly with little effort. Moreover, the Jacobian matrix of the change of variables T is (by construction) upper triangular with positive entries on the diagonal; this makes it suitable for various geometric applications. On the negative side, this mapping does not satisfy many interesting intrinsic properties; it is not invariant under isometries of Rn, not even under relabeling of coordinates.
+5. The Holley coupling on a lattice. Let μ and ν be two discrete probabilities on a finite lattice Λ, say {0, 1}N , equipped with the natural partial ordering (x ≤ y if xn ≤ yn for all n). Assume that
+∀x, y ∈ Λ, μ[inf(x, y)] ν[sup(x, y)] ≥ μ[x] ν[y]. (1.2)
+
+
+Some famous couplings 21
+T1
+dx1 dy1
+ν μ
+Fig. 1.1. Second step in the construction of the Knothe–Rosenblatt map: After the correspondance x1 → y1 has been determined, the conditional probability of x2 (seen as a one-dimensional probability on a small “slice” of width dx1) can be transported to the conditional probability of y2 (seen as a one-dimensional probability on a slice of width dy1).
+Then there exists a coupling (X, Y ) of (μ, ν) with X ≤ Y . The situation above appears in a number of problems in statistical mechanics, in connection with the so-called FKG (Fortuin–Kasteleyn–Ginibre) inequalities. Inequality (1.2) intuitively says that ν puts more mass on large values than μ.
+6. Probabilistic representation formulas for solutions of partial differential equations. There are hundreds of them (if not thousands), representing solutions of diffusion, transport or jump processes as the laws of various deterministic or stochastic processes. Some of them are recalled later in this chapter.
+7. The exact coupling of two stochastic processes, or Markov chains. Two realizations of a stochastic process are started at initial time, and when they happen to be in the same state at some time, they are merged: from that time on, they follow the same path and accordingly, have the same law. For two Markov chains which are started independently, this is called the classical coupling. There
+
+
+22 1 Couplings and changes of variables
+are many variants with important differences which are all intended to make two trajectories close to each other after some time: the Ornstein coupling, the ε-coupling (in which one requires the two variables to be close, rather than to occupy the same state), the shift-coupling (in which one allows an additional time-shift), etc.
+8. The optimal coupling or optimal transport. Here one introduces a cost function c(x, y) on X × Y, that can be interpreted as the work needed to move one unit of mass from location x to location y. Then one considers the Monge–Kantorovich minimization problem
+inf E c(X, Y ),
+where the pair (X, Y ) runs over all possible couplings of (μ, ν); or equivalently, in terms of measures,
+inf
+∫
+X ×Y
+c(x, y) dπ(x, y),
+where the infimum runs over all joint probability measures π on X ×Y with marginals μ and ν. Such joint measures are called transference plans (or transport plans, or transportation plans); those achieving the infimum are called optimal transference plans.
+Of course, the solution of the Monge–Kantorovich problem depends on the cost function c. The cost function and the probability spaces here can be very general, and some nontrivial results can be obtained as soon as, say, c is lower semicontinuous and X , Y are Polish spaces. Even the apparently trivial choice c(x, y) = 1x6=y appears in the probabilistic interpretation of total variation:
+‖μ − ν‖T V = 2 inf
+{
+E 1X6=Y ; law (X) = μ, law (Y ) = ν
+} .
+Cost functions valued in {0, 1} also occur naturally in Strassen’s duality theorem. Under certain assumptions one can guarantee that the optimal coupling really is deterministic; the search of deterministic optimal couplings (or Monge couplings) is called the Monge problem. A solution of the Monge problem yields a plan to transport the mass at minimal cost with a recipe that associates to each point x a single point y. (“No mass shall be split.”) To guarantee the existence of solutions to the
+
+
+Gluing 23
+Monge problem, two kinds of assumptions are natural: First, c should “vary enough” in some sense (think that the constant cost function will allow for arbitrary minimizers), and secondly, μ should enjoy some regularity property (at least Dirac masses should be ruled out!). Here is a typical result: If c(x, y) = |x − y|2 in the Euclidean space, μ is absolutely continuous with respect to Lebesgue measure, and μ, ν have finite moments of order 2, then there is a unique optimal Monge coupling between μ and ν. More general statements will be established in Chapter 10.
+Optimal couplings enjoy several nice properties:
+(i) They naturally arise in many problems coming from economics, physics, partial differential equations or geometry (by the way, the increasing rearrangement and the Holley coupling can be seen as particular cases of optimal transport);
+(ii) They are quite stable with respect to perturbations;
+(iii) They encode good geometric information, if the cost function c is defined in terms of the underlying geometry;
+(iv) They exist in smooth as well as nonsmooth settings;
+(v) They come with a rich structure: an optimal cost functional (the value of the infimum defining the Monge–Kantorovich problem); a dual variational problem; and, under adequate structure conditions, a continuous interpolation.
+On the negative side, it is important to be warned that optimal transport is in general not so smooth. There are known counterexamples which put limits on the regularity that one can expect from it, even for very nice cost functions.
+All these issues will be discussed again and again in the sequel. The rest of this chapter is devoted to some basic technical tools.
+Gluing
+If Z is a function of Y and Y is a function of X, then of course Z is a function of X. Something of this still remains true in the setting of nondeterministic couplings, under quite general assumptions.
+Gluing lemma. Let (Xi, μi), i = 1, 2, 3, be Polish probability spaces. If (X1, X2) is a coupling of (μ1, μ2) and (Y2, Y3) is a coupling of (μ2, μ3),
+
+
+24 1 Couplings and changes of variables
+then one can construct a triple of random variables (Z1, Z2, Z3) such that (Z1, Z2) has the same law as (X1, X2) and (Z2, Z3) has the same law as (Y2, Y3).
+It is simple to understand why this is called “gluing lemma”: if π12 stands for the law of (X1, X2) on X1 × X2 and π23 stands for the law of (X2, X3) on X2 × X3, then to construct the joint law π123 of (Z1, Z2, Z3) one just has to glue π12 and π23 along their common marginal μ2. Expressed in a slightly informal way: Disintegrate π12 and π23 as
+π12(dx1 dx2) = π12(dx1|x2) μ2(dx2),
+π23(dx2 dx3) = π23(dx3|x2) μ2(dx2),
+and then reconstruct π123 as
+π123(dx1 dx2 dx3) = π12(dx1|x2) μ2(dx2) π23(dx3|x2).
+Change of variables formula
+When one writes the formula for change of variables, say in Rn or on a Riemannian manifold, a Jacobian term appears, and one has to be careful about two things: the change of variables should be injective (otherwise, reduce to a subset where it is injective, or take the multiplicity into account); and it should be somewhat smooth. It is classical to write these formulas when the change of variables is continuously differentiable, or at least Lipschitz:
+Change of variables formula. Let M be an n-dimensional Riemannian manifold with a C1 metric, let μ0, μ1 be two probability measures on M , and let T : M → M be a measurable function such that T#μ0 =
+μ1. Let ν be a reference measure, of the form ν(dx) = e−V (x) vol(dx), where V is continuous and vol is the volume (or n-dimensional Hausdorff ) measure. Further assume that
+(i) μ0(dx) = ρ0(x) ν(dx) and μ1(dy) = ρ1(y) ν(dy);
+(ii) T is injective;
+(iii) T is locally Lipschitz.
+Then, μ0-almost surely,
+
+
+Change of variables formula 25
+ρ0(x) = ρ1(T (x)) JT (x), (1.3)
+where JT (x) is the Jacobian determinant of T at x, defined by
+JT (x) := lεi↓m0
+ν[T (Bε(x))]
+ν[Bε(x)] . (1.4)
+The same holds true if T is only defined on the complement of a μ0negligible set, and satisfies properties (ii) and (iii) on its domain of definition.
+Remark 1.3. When ν is just the volume measure, JT coincides with
+the usual Jacobian determinant, which in the case M = Rn is the absolute value of the determinant of the Jacobian matrix ∇T . Since V is continuous, it is almost immediate to deduce the statement with an arbitrary V from the statement with V = 0 (this amounts to multiplying ρ0(x) by eV (x), ρ1(y) by eV (y), JT (x) by eV (x)−V (T (x))).
+Remark 1.4. There is a more general framework beyond differentiability, namely the property of approximate differentiability. A function T on an n-dimensional Riemannian manifold is said to be approx
+imately differentiable at x if there exists a function T ̃, differentiable at
+x, such that the set {T ̃ 6= T } has zero density at x, i.e.
+rli→m0
+vol [{x ∈ Br(x); T (x) 6= T ̃(x)}]
+vol [Br(x)] = 0.
+It turns out that, roughly speaking, an approximately differentiable map can be replaced, up to neglecting a small set, by a Lipschitz map (this is a kind of differentiable version of Lusin’s theorem). So one can prove the Jacobian formula for an approximately differentiable map by approximating it with a sequence of Lipschitz maps. Approximate differentiability is obviously a local property; it holds true if the distributional derivative of T is a locally integrable function, or even a locally finite measure. So it is useful to know that the change of variables formula still holds true if Assumption (iii) above is replaced by
+(iii’) T is approximately differentiable.
+
+
+26 1 Couplings and changes of variables
+Conservation of mass Formula
+The single most important theorem of change of variables arising in continuum physics might be the one resulting from the conservation of mass formula, ∂ρ
+∂t + ∇ · (ρ ξ) = 0. (1.5)
+Here ρ = ρ(t, x) stands for the density of a system of particles at time t and position x; ξ = ξ(t, x) for the velocity field at time t and position x; and ∇· stands for the divergence operator. Once again, the natural setting for this equation is a Riemannian manifold M . It will be useful to work with particle densities μt(dx) (that are not necessarily absolutely continuous) and rewrite (1.5) as
+∂μ
+∂t + ∇ · (μ ξ) = 0,
+where the divergence operator is defined by duality against continuously differentiable functions with compact support: ∫
+M
+φ ∇ · (μ ξ) = −
+∫
+M
+(ξ · ∇φ) dμ.
+The formula of conservation of mass is an Eulerian description of the physical world, which means that the unknowns are fields. The next theorem links it with the Lagrangian description, in which everything is expressed in terms of particle trajectories, that are integral curves of the velocity field:
+ξ(t, Tt(x)) = d
+dt Tt(x). (1.6)
+If ξ is (locally) Lipschitz continuous, then the Cauchy–Lipschitz theorem guarantees the existence of a flow Tt locally defined on a maximal time interval, and itself locally Lipschitz in both arguments t and x. Then, for each t the map Tt is a local diffeomorphism onto its image. But the formula of conservation of mass also holds true without any regularity assumption on ξ; one should only keep in mind that if ξ is not Lipschitz, then a solution of (1.6) is not uniquely determined by its value at time 0, so x 7−→ Tt(x) is not necessarily uniquely defined. Still it makes sense to consider random solutions of (1.6).
+Mass conservation formula. Let M be a C1 manifold, T ∈ (0, +∞] and let ξ(t, x) be a (measurable) velocity field on [0, T ) × M . Let
+
+
+Diffusion formula 27
+(μt)0≤t<T be a time-dependent family of probability measures on M (continuous in time for the weak topology), such that
+∫T
+0
+∫
+M
+|ξ(t, x)| μt(dx) dt < +∞.
+Then, the following two statements are equivalent:
+(i) μ = μt(dx) is a weak solution of the linear (transport) partial differential equation
+∂tμ + ∇x · (μ ξ) = 0
+on [0, T ) × M ;
+(ii) μt is the law at time t of a random solution Tt(x) of (1.6).
+If moreover ξ is locally Lipschitz, then (Tt)0≤t<T defines a deterministic flow, and statement (ii) can be rewritten (ii’) μt = (Tt)#μ0.
+Diffusion formula
+The final reminder in this chapter is very well-known and related to Itˆo’s formula; it was discovered independently (in the Euclidean context) by Bachelier, Einstein and Smoluchowski at the beginning of the twentieth century. It requires a bit more regularity than the Conservation of mass Formula. The natural assumptions on the phase space are in terms of Ricci curvature, a concept which will play an important role in these notes. For the reader who has no idea what Ricci curvature means, it is sufficient to know that the theorem below applies when M is either Rn, or a compact manifold with a C2 metric. By convention, Bt denotes the “standard” Brownian motion on M with identity covariance matrix.
+Diffusion theorem. Let M be a Riemannian manifold with a C2 metric, such that the Ricci curvature tensor of M is uniformly bounded below, and let σ(t, x) : TxM → TxM be a twice differentiable linear mapping on each tangent space. Let Xt stand for the solution of the stochastic differential equation
+dXt = √2 σ(t, Xt) dBt (0 ≤ t < T ). (1.7)
+
+
+28 1 Couplings and changes of variables
+Then the following two statements are equivalent:
+(i) μ = μt(dx) is a weak solution of the linear (diffusion) partial differential equation
+∂tμ = ∇x ·
+(
+(σσ∗)∇xμ
+)
+on M × [0, T ), where σ∗ stands for the transpose of σ;
+(ii) μt = law (Xt) for all t ∈ [0, T ), where Xt solves (1.7).
+Example 1.5. In Rn, the solution of the heat equation with initial
+datum δ0 is the law of Xt = √2 Bt (Brownian motion sped up by a
+factor √2).
+Remark 1.6. Actually, there is a finer criterion for the diffusion equation to hold true: it is sufficient that the Ricci curvature at point x be bounded below by −Cd(x0, x)2gx as x → ∞, where gx is the metric at point x and x0 is an arbitrary reference point. The exponent 2 here is sharp.
+Exercise 1.7. Let M be a smooth compact manifold, equipped with its standard reference volume, and let ρ0 be a smooth positive probability density on M . Let (ρt)t≥0 be the solution of the heat equation
+∂tρ = ∆ρ.
+Use (ρt) to construct a deterministic coupling of ρ0 and ρ1.
+Hint: Rewrite the heat equation in the form of an equation of conservation of mass.
+Appendix: Moser’s coupling
+In this Appendix I shall promote Moser’s technique for coupling smooth positive probability measures; it is simple, elegant and powerful, and plays a prominent role in geometry. It is not limited to compact manifolds, but does require assumptions about the behavior at infinity. Let M be a smooth n-dimensional Riemannian manifold, equipped with a reference probability measure ν(dx) = e−V (x) vol(dx), where V ∈ C1(M ). Let μ0 = ρ0 ν, μ1 = ρ1 ν be two probability measures on
+
+
+Bibliographical notes 29
+M ; assume for simplicity that ρ0, ρ1 are bounded below by a constant K > 0. Further assume that ρ0 and ρ1 are locally Lipschitz, and that the equation
+(∆ − ∇V · ∇) u = ρ0 − ρ1
+can be solved for some u ∈ C1,1
+loc (M ) (that is, ∇u is locally Lipschitz).
+Then, define a locally Lipschitz vector field
+ξ(t, x) = ∇u(x)
+(1 − t) ρ0(x) + t ρ1(x) ,
+with associated flow (Tt(x))0≤t≤1, and a family (μt)0<t<1 of probability measures by
+μt = (1 − t) μ0 + t μ1.
+It is easy to check that
+∂tμ = (ρ1 − ρ0) ν,
+∇·(μt ξ(t, ·)) = ∇·(∇u e−V vol ) = e−V (∆u−∇V ·∇u) vol = (ρ0−ρ1) ν.
+So μt satisfies the formula of conservation of mass, therefore μt = (Tt)#μ0. In particular, T1 pushes μ0 forward to μ1. In the case when M is compact and V = 0, the above construction works if ρ0 and ρ1 are Lipschitz continuous and positive. Indeed, the
+solution u of ∆u = ρ0 − ρ1 will be of class C2,α for all α ∈ (0, 1),
+and in particular ∇u will be of class C1 (in fact C1,α). In more general situations, things might depend on the regularity of V , and its behavior at infinity.
+Bibliographical notes
+An excellent general reference book for the “classical theory” of couplings is the monograph by Thorisson [781]. There one can find an exhaustive treatment of classical couplings of Markov chains or stochastic processes, such as ε-coupling, shift-coupling, Ornstein coupling. The classical theory of optimal couplings is addressed in the two volumes by Rachev and Ru ̈schendorf [696]. This includes in particular the theory of optimal coupling on the real line with a convex cost function, which can be treated in a simple and direct manner [696, Section 3.1].
+
+
+30 1 Couplings and changes of variables
+(In [814], for the sake of consistency of the presentation I treated optimal coupling on R as a particular case of optimal coupling on Rn, however this has the drawback to involve subtle arguments.) The Knothe–Rosenblatt coupling was introduced in 1952 by Rosenblatt [709], who suggested that it might be useful to “normalize” statistical data before applying a statistical test. In 1957, Knothe [523] rediscovered it for applications to the theory of convex bodies. It is quite likely that other people have discovered this coupling independently. An infinite-dimensional generalization was studied by Bogachev, Kolesnikov and Medvedev [134, 135]. FKG inequalities were introduced in [375], and have since then played a crucial role in statistical mechanics. Holley’s proof by coupling appears in [477]. Recently, Caffarelli [188] has revisited the subject in connection with optimal transport. It was in 1965 that Moser proved his coupling theorem, for smooth compact manifolds without boundaries [640]; noncompact manifolds were later considered by Greene and Shiohama [432]. Moser himself also worked with Dacorogna on the more delicate case where the domain is an open set with boundary, and the transport is required to fix the boundary [270]. Strassen’s duality theorem is discussed e.g. in [814, Section 1.4]. The gluing lemma is due to several authors, starting with Vorob’ev in 1962 for finite sets. The modern formulation seems to have emerged around 1980, independently by Berkes and Philipp [101], Kallenberg, Thorisson, and maybe others. Refinements were discussed e.g. by de Acosta [273, Theorem A.1] (for marginals indexed by an arbitrary set) or Thorisson [781, Theorem 5.1]; see also the bibliographic comments in [317, p. 20]. For a proof of the statement in these notes, it is sufficient to consult Dudley [317, Theorem 1.1.10], or [814, Lemma 7.6]. A comment about terminology: I like the word “gluing” which gives a good indication of the construction, but many authors just talk about “composition” of plans. The formula of change of variables for C1 or Lipschitz change of variables can be found in many textbooks, see e.g. Evans and Gariepy [331, Chapter 3]. The generalization to approximately differentiable maps is explained in Ambrosio, Gigli and Savare ́ [30, Section 5.5]. Such a generality is interesting in the context of optimal transportation, where changes of variables are often very rough (say BV , which means of bounded variation). In that context however, there is more structure:
+
+
+Bibliographical notes 31
+For instance, changes of variables will typically be given by the gradient of a convex function in Rn, and on such a map one knows slightly more than on a general BV function, because convex functions are twice differentiable almost everywhere (Theorem 14.25 later in these notes). McCann [614] used this property to prove, by slightly more elementary means, the change of variables formula for a gradient of convex function; the proof is reproduced in [814, Theorem 4.8]. It was later generalized by Cordero-Erausquin, McCann and Schmuckenschla ̈ger to Riemannian manifolds [246], a case which again can be treated either as part of the general theory of BV changes of variables, or with the help of almost everywhere second derivatives of semiconcave functions. The formula of conservation of mass is also called the method of characteristics for linear transport equations, and is described in a number of textbooks in partial differential equations, at least when the driving vector field is Lipschitz, see for instance Evans [327, Section 3.2]. An essentially equivalent statement is proven in [814, Theorem 5.34]. Treating vector fields that are only assumed to be locally Lipschitz is not so easy: see Ambrosio, Gigli and Savare ́ [30, Section 8.1]. The Lipschitz condition can be relaxed into a Sobolev or even a BV condition, but then the flow is determined only almost everywhere, and this becomes an extremely subtle problem, which has been studied by many authors since the pioneering work of DiPerna and Lions [304] at the beginning of the nineties. See Ambrosio [21] for recent progress and references. The version which is stated in these notes, with no regularity assumption, is due to Ambrosio and carefully proved in [30, Section 8.1]. In spite of its appealing and relatively natural character (especially in a probabilistic perspective), this is a very recent research result. Note that, if Tt(x) is not uniquely determined by x, then the solution to the conservation equation starting with a given probability measure might admit several solutions. A recent work by Lisini [565] addresses a generalization of the formula of conservation of mass in the setting of general Polish spaces. Of course, without any regularity assumption on the space it is impossible to speak of vector fields and partial differential equations; but it is still possible to consider paths in the space of probability measures, and random curves. Lisini’s results are most naturally expressed in the language of optimal transport distances; see the bibliographical notes for Chapter 7.
+
+
+32 1 Couplings and changes of variables
+The diffusion formula can be obtained as a simple consequence of the Itˆo formula, which in the Euclidean setting can be found in any textbook on stochastic differential equations, e.g. [658]. It was recently the hundredth anniversary of the discovery of the diffusion formula by Einstein [322]; or rather rediscovery, since Bachelier already had obtained the main results at the turn of the twentieth century [251, 739]. (Some information about Bachelier’s life can be found online at
+sjepg.univ-fcomte.fr/sjepgbis/libre/bachelier/page01/page01.htm.) Fasci
+nating tales about the Brownian motion can be read in Nelson’s unconventional book [648], especially Chapters 1–4. For the much more subtle Riemannian setting, one may consult Stroock [759], Hsu [483] and the references therein. The Brownian motion on a smooth Riemannian manifold is always well-defined, even if the manifold has a wild behavior at infinity (the construction of the Brownian motion is purely local); but in the absence of a good control on the Ricci curvature, there might be several heat kernels, and the heat equation might not be uniquely solvable for a given initial datum. This corresponds to the possibility of a blow-up of the Brownian motion (i.e. the Brownian motion escapes to infinity) in finite time. All this was explained to me by Thalmaier. The sharp criterion Ricx ≥ −C (1 + d(x0, x)2) gx for avoiding blow-up of the heat equation is based on comparison theorems for Laplace operators. In the version stated here it is due to Ichihara [486]; see also the book by Hackenbroch and Thalmaier [454, p. 544]. Nonexplosion criteria based on curvature have been studied by Gaffney, Yau, Hsu, Karp and Li, Davies, Takeda, Sturm, and Grigor’yan; for a detailed exposition, and many explanations, the reader can consult the survey by Grigor’yan [434, Section 9].
+
+
+2
+Three examples of coupling techniques
+In this chapter I shall present three applications of coupling methods. The first one is classical and quite simple, the other two are more original but well-representative of the topics that will be considered later in these notes. The proofs are extremely variable in difficulty and will only be sketched here; see the references in the bibliographical notes for details.
+Convergence of the Langevin process
+Consider a particle subject to the force induced by a potential V ∈ C1(Rn), a friction and a random white noise agitation. If Xt stands for the position of the particle at time t, m for its mass, λ for the friction coefficient, k for the Boltzmann constant and T for the temperature of the heat bath, then Newton’s equation of motion can be written
+m d2Xt
+dt2 = −∇V (Xt) − λ m dXt
+dt + √kT dBt
+dt , (2.1)
+where (Bt)t≥0 is a standard Brownian motion. This is a second-order (stochastic) differential equation, so it should come with initial condi
+tions for both the position X and the velocity X ̇ . Now consider a large cloud of particles evolving independently, according to (2.1); the question is whether the distribution of particles will converge to a definite limit as t → ∞. In other words: Consider the stochastic differential equation (2.1) starting from some initial distribu
+tion μ0(dx dv) = law (X0, X ̇ 0); is it true that law (Xt), or law (Xt, X ̇ t), will converge to some given limit law as t → ∞?
+
+
+34 2 Three examples of coupling techniques
+Obviously, to solve this problem one has to make some assumptions on the potential V , which should prevent the particles from all escaping at infinity; for instance, we can make the very strong assumption that V is uniformly convex, i.e. there exists K > 0 such that the Hessian ∇2V satisfies ∇2V ≥ KIn. Some assumptions on the initial distribution might also be needed; for instance, it is natural to assume that the Hamiltonian has finite expectation at initial time:
+E
+(
+V (X0) + |X ̇ 0|2
+2
+)
+< +∞
+Under these assumptions, it is true that there is exponential convergence to equilibrium, at least if V does not grow too wildly at infinity (for instance if the Hessian of V is also bounded above). However, I do not know of any simple method to prove this. On the other hand, consider the limit where the friction coefficient is quite strong, and the motion of the particle is so slow that the acceleration term may be neglected in front of the others: then, up to resetting units, equation (2.1) becomes
+dXt
+dt = −∇V (Xt) + √2 dBt
+dt , (2.2)
+which is often called a Langevin process. Now, to study the convergence of equilibrium for (2.2) there is an extremely simple solution by coupling. Consider another random position (Yt)t≥0 obeying the same equation as (2.2):
+dYt
+dt = −∇V (Yt) + √2 dBt
+dt , (2.3)
+where the random realization of the Brownian motion is the same as in (2.2) (this is the coupling). The initial positions X0 and Y0 may be coupled in an arbitrary way, but it is possible to assume that they are independent. In any case, since they are driven by the same Brownian motion, Xt and Yt will be correlated for t > 0. Since Bt is not differentiable as a function of time, neither Xt nor Yt is differentiable (equations (2.2) and (2.3) hold only in the sense of solutions of stochastic differential equations); but it is easily checked that αt := Xt − Yt is a continuously differentiable function of time, and
+dαt
+dt = −(∇V (Xt) − ∇V (Yt)),
+
+
+Euclidean isoperimetry 35
+so in particular
+d dt
+|αt|2
+2 =−
+〈
+∇V (Xt)−∇V (Yt), Xt−Yt
+〉
+≤ −K ∣∣Xt−Yt
+∣∣2 = −K |αt|2.
+It follows by Gronwall’s lemma that
+|αt|2 ≤ e−2Kt |α0|2.
+Assume for simplicity that E |X0|2 and E |Y0|2 are finite. Then
+E |Xt − Yt|2 ≤ e−2Kt E |X0 − Y0|2 ≤ 2 (E |X0|2 + E |Y0|2) e−2Kt. (2.4)
+In particular, Xt − Yt converges to 0 almost surely, and this is independent of the distribution of Y0. This in itself would be essentially sufficient to guarantee the existence of a stationary distribution; but in any case, it is easy to check, by applying the diffusion formula, that
+ν(dy) = e−V (y) dy
+Z
+(where Z = ∫ e−V is a normalization constant) is stationary: If law (Y0) = ν, then also law (Yt) = ν. Then (2.4) easily implies that μt := law (Xt) converges weakly to ν; in addition, the convergence is exponentially fast.
+Euclidean isoperimetry
+Among all subsets of Rn with given surface, which one has the largest volume? To simplify the problem, let us assume that we are looking for a bounded open set Ω ⊂ Rn with, say, Lipschitz boundary ∂Ω, and that the measure of |∂Ω| is given; then the problem is to maximize the measure of |Ω|. To measure ∂Ω one should use the (n − 1)-dimensional Hausdorff measure, and to measure Ω the n-dimensional Hausdorff measure, which of course is the same as the Lebesgue measure in Rn. It has been known, at least since ancient times, that the solution to this “isoperimetric problem” is the ball. A simple scaling argument shows that this statement is equivalent to the Euclidean isoperimetric inequality:
+
+
+36 2 Three examples of coupling techniques
+|∂Ω|
+|Ω| n
+n−1
+≥ |∂B|
+|B| n
+n−1
+,
+where B is any ball. There are very many proofs of the isoperimetric inequality, and many refinements as well. It is less known that there is a proof by coupling. Here is a sketch of the argument, forgetting about regularity issues. Let B be a ball such that |∂B| = |∂Ω|. Consider a random point X distributed uniformly in Ω, and a random point Y distributed uniformly in B. Introduce the Knothe–Rosenblatt coupling of X and Y : This is a deterministic coupling of the form Y = T (X), such that, at each x ∈ Ω, the Jacobian matrix ∇T (x) is triangular with nonnegative diagonal entries. Since the law of X (resp. Y ) has uniform density 1/|Ω| (resp. 1/|B|), the change of variables formula yields
+∀x ∈ Ω 1
+|Ω| = (det ∇T (x)) 1
+|B| . (2.5)
+Since ∇T is triangular, the Jacobian determinant of T is det(∇T ) =
+∏ λi, and its divergence ∇ · T = ∑ λi, where the nonnegative numbers (λi)1≤i≤n are the eigenvalues of ∇T . Then the arithmetic–geometric
+inequality (∏ λi)1/n ≤ (∑ λi)/n becomes
+(det ∇T (x))1/n ≤ ∇ · T (x)
+n.
+Combining this with (2.5) results in
+1
+|Ω|1/n ≤ (∇ · T )(x)
+n |B|1/n .
+Integrate this over Ω and then apply the divergence theorem:
+|Ω|1− 1
+n≤ 1
+n |B| 1
+n
+∫
+Ω
+(∇ · T )(x) dx = 1
+n |B| 1
+n
+∫
+∂Ω
+(T · σ) dHn−1, (2.6)
+where σ : ∂Ω → Rn is the unit outer normal to Ω and Hn−1 is the (n − 1)-dimensional Hausdorff measure (restricted to ∂Ω). But T is valued in B, so |T · σ| ≤ 1, and (2.6) implies
+|Ω|1− 1
+n ≤ |∂Ω|
+n |B| 1
+n
+.
+
+
+Caffarelli’s log-concave perturbation theorem 37
+Since |∂Ω| = |∂B| = n|B|, the right-hand side is actually |B|1− 1
+n , so the volume of Ω is indeed bounded by the volume of B. This concludes the proof. The above argument suggests the following problem:
+Open Problem 2.1. Can one devise an optimal coupling between sets (in the sense of a coupling between the uniform probability measures on these sets) in such a way that the total cost of the coupling decreases under some evolution converging to balls, such as mean curvature motion?
+Caffarelli’s log-concave perturbation theorem
+The previous example was about transporting a set to another, now the present one is in some sense about transporting a whole space to another. It is classical in geometry to compare a space X with a “model space” M that has nice properties and is, e.g., less curved than X . A general principle is that certain inequalities which hold true on the model space can automatically be “transported” to X . The theorem discussed in this section is a striking illustration of this idea. Let F, G, H, J, L be nonnegative continuous functions on R, with H and J nondecreasing, and let l ∈ R. For a given measure μ on Rn, let λ[μ] be the largest λ ≥ 0 such that, for all Lipschitz functions h : Rn → R, ∫
+Rn
+L(h) dμ = l =⇒ F
+(∫
+Rn
+G(h) dμ
+)
+≤1
+λH
+(∫
+Rn
+J(|∇h|) dμ
+) .
+(2.7) Functional inequalities of the form (2.7) are variants of Sobolev inequalities; many of them are well-known and useful. Caffarelli’s theorem states that they can only be improved by log-concave perturbation of the Gaussian distribution. More precisely, if γ is the standard Gaussian measure and μ = e−vγ is another probability measure, with v convex, then
+λ[μ] ≥ λ[γ].
+
+
+38 2 Three examples of coupling techniques
+His proof is a simple consequence of the following remarkable fact, which I shall call Caffarelli’s log-concave perturbation theorem: If dμ/dγ is log-concave, then there exists a 1-Lipschitz change of variables from the measure γ to the measure μ. In other words,
+there is a deterministic coupling (X, Y = C(X)) of (γ, μ), such that |C(x) − C(y)| ≤ |x − y|, or equivalently |∇C| ≤ 1 (almost everywhere). It follows in particular that
+∣∣∇(h ◦ C)∣∣ ≤ |(∇h) ◦ C|, (2.8)
+whatever the function h. Now it is easy to understand why the existence of the map C implies (2.7): On the one hand, the definition of change of variables implies ∫
+G(h) dμ =
+∫
+G(h ◦ C) dγ,
+∫
+L(h) dμ =
+∫
+L(h ◦ C) dγ;
+on the other hand, by the definition of change of variables again, inequality (2.8) and the nondecreasing property of J, ∫
+J(|∇h|) dμ =
+∫
+J(|∇h ◦ C|) dγ ≥
+∫
+J(|∇(h ◦ C)|) dγ.
+Thus, inequality (2.7) is indeed “transported” from the space (Rn, γ) to the space (Rn, μ).
+Bibliographical notes
+It is very classical to use coupling arguments to prove convergence to equilibrium for stochastic differential equations and Markov chains; many examples are described by Rachev and Ru ̈schendorf [696] and Thorisson [781]. Actually, the standard argument found in textbooks to prove the convergence to equilibrium for a positive aperiodic ergodic Markov chain is a coupling argument (but the null case can also be treated in a similar way, as I learnt from Thorisson). Optimal couplings are often well adapted to such situations, but definitely not the only ones to apply. The coupling method is not limited to systems of independent particles, and sometimes works in presence of correlations, for instance if the law satisfies a nonlinear diffusion equation. This is exemplified in works
+
+
+Bibliographical notes 39
+by Tanaka [777] on the spatially homogeneous Boltzmann equation with Maxwell molecules (the core of Tanaka’s argument is reproduced in my book [814, Section 7.5]), or some recent papers [138, 214, 379, 590]. Cattiaux and Guillin [221] found a simple and elegant coupling argument to prove the exponential convergence for the law of the stochastic process
+dXt = √2 dBt − E ̃ ∇V (Xt − X ̃t) dt,
+where X ̃t is an independent copy of Xt, the E ̃ expectation only bears
+on X ̃t, and V is assumed to be a uniformly convex C1 potential on Rn satisfying V (−x) = V (x). It is also classical to couple a system of particles with an auxiliary artificial system to study the limit when the number of particles becomes large. For the Vlasov equation in kinetic theory this was done by Dobrushin [309] and Neunzert [653] several decades ago. (The proof is reproduced in Spohn [757, Chapter 5], and also suggested as an exercise in my book [814, Problem 14].) Later Sznitman used this strategy in a systematic way for the propagation of chaos, and made it very popular, see e.g. his work on the Boltzmann equation [767] or his Saint-Flour lecture notes [768] and the many references included. In all these works, the “philosophy” is always the same: Introduce some nice coupling and see how it evolves in a certain asymptotic regime (say, either the time, or the number of particles, or both, go to infinity). It is possible to treat the convergence to equilibrium for the complete system (2.1) by methods that are either analytic [301, 472, 816, 818] or probabilistic [55, 559, 606, 701], but all methods known to me are much more delicate than the simple coupling argument which works for (2.2). It is certainly a nice open problem to find an elementary coupling argument which applies to (2.1). (The arguments in the abovementioned probabilistic proofs ultimately rely on coupling methods via theorems of convergence for Markov chains, but in a quite indirect way.) Coupling techniques have also been used recently for proving rather spectacular uniqueness theorems for invariant measures in infinite dimension, see e.g. [321, 456, 457]. Classical references for the isoperimetric inequality and related topics are the books by Burago and Zalgaller [176], and Schneider [741]; and the survey by Osserman [664]. Knothe [523] had the idea to use a “coupling” method to prove geometric inequalities, and Gromov [635, Appendix] applied this method to prove the Euclidean isopetrimetric inequality. Trudinger [787] gave a closely related treatment of the same
+
+
+40 2 Three examples of coupling techniques
+inequality and some of its generalizations, by means of a clever use of the Monge–Ampe`re equation (which more or less amounts to the construction of an optimal coupling with quadratic cost function, as will be seen in Chapter 11). Cabre ́ [182] found a surprising simplification of Trudinger’s method, based on the solution of just a linear elliptic equation. The “proof” which I gave in this chapter is a variation on Gromov’s argument; although it is not rigorous, there is no real difficulty in turning it into a full proof, as was done by Figalli, Maggi and Pratelli [369]. These authors actually prove much more, since they use this strategy to establish a sharp quantitative stability of the isoperimetric inequality (if the shape of a set departs from the optimal shape, then its isoperimetric ratio departs from the optimal ratio in a quantifiable way). In the same work one can find a very interesting comparison of the respective performances of the couplings obtained by the Knothe method and by the optimal transport method (the comparison turns very much to the advantage of optimal transport). Other links between coupling and isoperimetric-type inequalities are presented in Chapter 6 of my book [814], the research paper [587], the review paper [586] and the bibliographical notes at the end of Chapters 18 and 21. The construction of Caffarelli’s map C is easy, at least conceptually: The optimal coupling of the Gaussian measure γ with the measure μ = e−vγ, when the cost function is the square of the Euclidean distance, will do the job. But proving that C is indeed 1-Lipschitz is much more of a sport, and involves some techniques from nonlinear partial differential equations [188]. An idea of the core of the proof is explained in [814, Problem 13]. It would be nice to find a softer argument.
+ ̈Ustu ̈nel pointed out to me that, if v is convex and symmetric (v(−x) = v(x)), then the Moser transport T from γ to e−vγ is contracting, in the sense that |T (x)| ≤ |x|; it is not clear however that T would be 1-Lipschitz. Caffarelli’s theorem has many analytic and probabilistic applications, see e.g. [242, 413, 465]. There is an infinite-dimensional version by
+Feyel and U ̈ stu ̈nel [361], where the Gaussian measure is replaced by the Wiener measure. Another variant was recently studied by Valdimarsson [801]. Like the present chapter, the lecture notes [813], written for a CIME Summer School in 2001, present some applications of optimal transport in various fields, with a slightly impressionistic style.
+
+
+3
+The founding fathers of optimal transport
+Like many other research subjects in mathematics, the field of optimal transport was born several times. The first of these births occurred at the end of the eighteenth century, by way of the French geometer Gaspard Monge. Monge was born in 1746 under the French Ancient Re ́gime. Because of his outstanding skills, he was admitted in a military training school from which he should have been excluded because of his modest origin. He invented descriptive geometry on his own, and the power of the method was so apparent that he was appointed professor at the age of 22, with the understanding that his theory would remain a military secret, for exclusive use of higher officers. He later was one of the most ardent warrior scientists of the French Revolution, served as a professor under several regimes, escaped a death sentence pronounced during the Terror, and became one of Napoleon’s closest friends. He taught at
+ ́Ecole Normale Supe ́rieure and E ́cole Polytechnique in Paris. Most of his work was devoted to geometry. In 1781 he published one of his famous works, Me ́moire sur la the ́orie des de ́blais et des remblais (a “de ́blai” is an amount of material that is extracted from the earth or a mine; a “remblai” is a material that is input into a new construction). The problem considered by Monge is as follows: Assume you have a certain amount of soil to extract from the ground and transport to places where it should be incorporated in a construction (see Figure 3.1). The places where the material should be extracted, and the ones where it should be transported to, are all known. But the assignment has to be determined: To which destination should one send the material that has been extracted at a certain place? The answer does matter because transport is costly, and you want to
+
+
+42 3 The founding fathers of optimal transport
+minimize the total cost. Monge assumed that the transport cost of one unit of mass along a certain distance was given by the product of the mass by the distance.
+x
+d ́eblais remblais
+T
+y
+Fig. 3.1. Monge’s problem of de ́blais and remblais
+Nowadays there is a Monge street in Paris, and therein one can find an excellent bakery called Le Boulanger de Monge. To acknowledge this, and to illustrate how Monge’s problem can be recast in an economic perspective, I shall express the problem as follows. Consider a large number of bakeries, producing loaves, that should be transported each morning to cafe ́s where consumers will eat them. The amount of bread that can be produced at each bakery, and the amount that will be consumed at each cafe ́ are known in advance, and can be modeled as probability measures (there is a “density of production” and a “density of consumption”) on a certain space, which in our case would be Paris (equipped with the natural metric such that the distance between two points is the length of the shortest path joining them). The problem is to find in practice where each unit of bread should go (see Figure 3.2), in such a way as to minimize the total transport cost. So Monge’s problem really is the search of an optimal coupling; and to be more precise, he was looking for a deterministic optimal coupling.
+Fig. 3.2. Economic illustration of Monge’s problem: squares stand for production units, circles for consumption places.
+
+
+3 The founding fathers of optimal transport 43
+Monge studied the problem in three dimensions for a continuous distribution of mass. Guided by his beautiful geometric intuition, he made the important observation that transport should go along straight lines that would be orthogonal to a family of surfaces. This study led him to the discovery of lines of curvature, a concept that by itself was a great contribution to the geometry of surfaces. His ideas were developed by Charles Dupin and later by Paul Appell. By current mathematical standards, all these arguments were flawed, yet it certainly would be worth looking up all these problems with modern tools. Much later Monge’s problem was rediscovered by the Russian mathematician Leonid Vitaliyevich Kantorovich. Born in 1912, Kantorovich was a very gifted mathematician who made his reputation as a firstclass researcher at the age of 18, and earned a position of professor at just the same age as Monge had. He worked in many areas of mathematics, with a strong taste for applications in economics, and later theoretical computer science. In 1938 a laboratory consulted him for the solution of a certain optimization problem, which he found out was representative of a whole class of linear problems arising in various areas of economics. Motivated by this discovery, he developed the tools of linear programming, that later became prominent in economics. The publication of some of his most important works was delayed because of the great care with which Soviet authorities of the time handled the divulgence of scientific research related to economics. In fact (and this is another common point with Monge) for many years it was strictly forbidden for Kantorovich to publicly discuss some of his main discoveries. In the end his work became well-known and in 1975 was awarded the Nobel Prize for economics, jointly with Tjalling Koopmans, “for their contributions to the theory of optimum allocation of resources”. In the case that is of direct interest for us, namely the problem of optimal coupling, Kantorovich stated and proved, by means of functional analytical tools, a duality theorem that would play a crucial role later. He also devised a convenient notion of distance between probability measures: the distance between two measures should be the optimal transport cost from one to the other, if the cost is chosen as the distance function. This distance between probability measures is nowadays called the Kantorovich–Rubinstein distance, and has proven to be particularly flexible and useful.
+
+
+44 3 The founding fathers of optimal transport
+It was only several years after his main results that Kantorovich made the connection with Monge’s work. The problem of optimal coupling has since then been called the Monge–Kantorovich problem. Throughout the second half of the twentieth century, optimal coupling techniques and variants of the Kantorovich–Rubinstein distance (nowadays often called Wasserstein distances, or other denominations) were used by statisticians and probabilists. The “basis” space could be finite-dimensional, or infinite-dimensional: For instance, optimal couplings give interesting notions of distance between probability measures on path spaces. Noticeable contributions from the seventies are due to Roland Dobrushin, who used such distances in the study of particle systems; and to Hiroshi Tanaka, who applied them to study the time-behavior of a simple variant of the Boltzmann equation. By the mid-eighties, specialists of the subject, like Svetlozar Rachev or Ludger Ru ̈schendorf, were in possession of a large library of ideas, tools, techniques and applications related to optimal transport. During that time, reparametrization techniques (yet another word for change of variables) were used by many researchers working on inequalities involving volumes or integrals. Only later would it be understood that optimal transport often provides useful reparametrizations. At the end of the eighties, three directions of research emerged independently and almost simultaneously, which completely reshaped the whole picture of optimal transport. One of them was John Mather’s work on Lagrangian dynamical systems. Action-minimizing curves are basic important objects in the theory of dynamical systems, and the construction of closed actionminimizing curves satisfying certain qualitative properties is a classical problem. By the end of the eighties, Mather found it convenient to study not only action-minimizing curves, but action-minimizing stationary measures in phase space. Mather’s measures are a generalization of action-minimizing curves, and they solve a variational problem which in effect is a Monge–Kantorovich problem. Under some conditions on the Lagrangian, Mather proved a celebrated result according to which (roughly speaking) certain action-minimizing measures are automatically concentrated on Lipschitz graphs. As we shall understand in Chapter 8, this problem is intimately related to the construction of a deterministic optimal coupling. The second direction of research came from the work of Yann Brenier. While studying problems in incompressible fluid mechanics, Bre
+
+
+3 The founding fathers of optimal transport 45
+nier needed to construct an operator that would act like the projection on the set of measure-preserving mappings in an open set (in probabilistic language, measure-preserving mappings are deterministic couplings of the Lebesgue measure with itself). He understood that he could do so by introducing an optimal coupling: If u is the map for which one wants to compute the projection, introduce a coupling of the Lebesgue measure L with u#L. This study revealed an unexpected link between optimal transport and fluid mechanics; at the same time, by pointing out the relation with the theory of Monge–Ampe`re equations, Brenier attracted the attention of the community working on partial differential equations. The third direction of research, certainly the most surprising, came from outside mathematics. Mike Cullen was part of a group of meteorologists with a well-developed mathematical taste, working on semigeostrophic equations, used in meteorology for the modeling of atmospheric fronts. Cullen and his collaborators showed that a certain famous change of unknown due to Brian Hoskins could be re-interpreted in terms of an optimal coupling problem, and they identified the minimization property as a stability condition. A striking outcome of this work was that optimal transport could arise naturally in partial differential equations which seemed to have nothing to do with it. All three contributions emphasized (in their respective domain) that important information can be gained by a qualitative description of optimal transport. These new directions of research attracted various mathematicians (among the first, Luis Caffarelli, Craig Evans, Wilfrid Gangbo, Robert McCann, and others), who worked on a better description of the structure of optimal transport and found other applications. An important conceptual step was accomplished by Felix Otto, who discovered an appealing formalism introducing a differential point of view in optimal transport theory. This opened the way to a more geometric description of the space of probability measures, and connected optimal transport to the theory of diffusion equations, thus leading to a rich interplay of geometry, functional analysis and partial differential equations. Nowadays optimal transport has become a thriving industry, involving many researchers and many trends. Apart from meteorology, fluid mechanics and diffusion equations, it has also been applied to such diverse topics as the collapse of sandpiles, the matching of images, and the design of networks or reflector antennas. My book, Topics in Optimal
+
+
+46 3 The founding fathers of optimal transport
+Transportation, written between 2000 and 2003, was the first attempt to present a synthetic view of the modern theory. Since then the field has grown much faster than I expected, and it was never so active as it is now.
+Bibliographical notes
+Before the twentieth century, the main references for the problem of “de ́blais et remblais” are the memoirs by Monge [636], Dupin [319] and Appell [42]. Besides achieving important mathematical results, Monge and Dupin were strongly committed to the development of society and it is interesting to browse some of their writings about economics and industry (a list can be found online at gallica.bnf.fr). A lively account of Monge’s life and political commitments can be found in Bell’s delightful treatise, Men of Mathematics [80, Chapter 12]. It seems however that Bell did dramatize the story a bit, at the expense of accuracy and neutrality. A more cold-blooded biography of Monge was written by de Launay [277]. Considered as one the greatest geologists of his time, not particularly sympathetic to the French Revolution, de Launay documented himself with remarkable rigor, going back to original sources whenever possible. Other biographies have been written since then by Taton [778, 779] and Aubry [50]. Monge originally formulated his transport problem in Euclidean space for the cost function c(x, y) = |x − y|; he probably had no idea of the extreme difficulty of a rigorous treatment. It was only in 1979 that Sudakov [765] claimed a proof of the existence of a Monge transport for general probability densities with this particular cost function. But his proof was not completely correct, and was amended much later by Ambrosio [20]. In the meantime, alternative rigorous proofs had been devised first by Evans and Gangbo [330] (under rather strong assumptions on the data), then by Trudinger and Wang [791], and Caffarelli, Feldman and McCann [190]. Kantorovich defined linear programming in [499], introduced his minimization problem and duality theorem in [500], and in [501] applied his theory to the problem of optimal transport; this note can be considered as the act of birth of the modern formulation of optimal transport. Later he made the link with Monge’s problem in [502]. His major work
+
+
+Bibliographical notes 47
+in economics is the book [503], including a reproduction of [499]. Another important contribution is a study of numerical schemes based on linear programming, joint with his student Gavurin [505]. Kantorovich wrote a short autobiography for his Nobel Prize [504]. Online at www.math.nsc.ru/LBRT/g2/english/ssk/legacy.html are some comments by Kutateladze, who edited his mathematical works. A recent special issue of the Journal of Mathematical Sciences, edited by Vershik, was devoted to Kantorovich [810]; this reference contains translations of [501] and [502], as well as much valuable information about the personality of Kantorovich, and the genesis and impact of his ideas in mathematics, economy and computer science. In another historical note [808] Vershik recollects memories of Kantorovich and tells some tragicomical stories illustrating the incredible ideological pressure put on him and other scientists by Soviet authorities at the time. The “classical” probabilistic theory of optimal transport is exhaustively reviewed by Rachev and Ru ̈schendorf [696, 721]; most notable applications include limit theorems for various random processes. Relations with game theory, economics, statistics, and hypotheses testing are also common (among many references see e.g. [323, 391]). Mather introduced minimizing measures in [600], and proved his Lipschitz graph theorem in [601]. The explicit connection with the Monge–Kantorovich problem came only recently [105]: see Chapter 8. Tanaka’s contributions to kinetic theory go back to the mid-seventies [644, 776, 777]. His line of research was later taken up by Toscani and collaborators [133, 692]; these papers constituted my first contact with the optimal transport problem. More recent developments in the kinetic theory of granular media appear for instance in [138]. Brenier announced his main results in a short note [154], then published detailed proofs in [156]. Chapter 3 in [814] is entirely devoted to Brenier’s polar factorization theorem (which includes the existence of the projection operator), its interpretation and consequences. For the sources of inspiration of Brenier, and various links between optimal transport and hydrodynamics, one may consult [155, 158, 159, 160, 163, 170]. Recent papers by Ambrosio and Figalli [24, 25] provide a complete and thorough rewriting of Brenier’s theory of generalized incompressible flows. The semi-geostrophic system was introduced by Eliassen [325] and Hoskins [480, 481, 482]; it is very briefly described in [814, Problem 9, pp. 323–326]. Cullen and collaborators wrote many papers on the sub
+
+
+48 3 The founding fathers of optimal transport
+ject, see in particular [269]; see also the review article [263], the works by Cullen and Gangbo [266], Cullen and Feldman [265] or the recent book by Cullen [262]. Further links between optimal transport and other fields of mathematics (or physics) can be found in my book [814], or in the treatise by Rachev and Ru ̈schendorf [696]. An important source of inspiration was the relation with the qualitative behavior of certain diffusive equations arising from gas dynamics; this link was discovered by Jordan, Kinderlehrer and Otto at the end of the nineties [493], and then explored by several authors [208, 209, 210, 211, 212, 213, 214, 216, 669, 671]. Below is a nonexhaustive list of some other unexpected applications. Relations with the modeling of sandpiles are reviewed by Evans [328], as well as compression molding problems; see also Feldman [353] (this is for the cost function c(x, y) = |x − y|). Applications of optimal transport to image processing and shape recognition are discussed by Gangbo and McCann [400], Ahmad [6], Angenent, Haker, Tannenbaum, and Zhu [462, 463], Chazal, Cohen-Steiner and Me ́rigot [224], and many other contributors from the engineering community (see e.g. [700, 713]). X.-J. Wang [834], and independently Glimm and Oliker [419] (around 2000 and 2002 respectively) discovered that the theoretical problem of designing reflector antennas could be recast in terms of optimal transport for the cost function c(x, y) = − log(1−x·y) on S2; see [402, 419, 660] for further work in the area, and [420] for another version of this problem involving two reflectors.1 Rubinstein and Wolansky adapted the strategy in [420] to study the optimal design of lenses [712]; and Gutie ́rrez and Huang to treat a refraction problem [453]. In his PhD Thesis, Bernot [108] made the link between optimal transport, irrigation and the design of networks. Such topics were also considered by Santambrogio with various collaborators [152, 207, 731, 732, 733, 734]; in particular it is shown in [732] that optimal transport theory gives a rigorous basis to some variational constructions used by physicists and hydrologists to study river basin morphology [65, 706]. Buttazzo and collaborators [178, 179, 180] explored city planning via optimal transport. Brenier found a connection to the electrodynamic equations of Maxwell and related models in string theory [161, 162, 163, 164, 165, 166]. Frisch and collaborators
+1 According to Oliker, the connection between the two-reflector problem (as formulated in [661]) and optimal transport is in fact much older, since it was first formulated in a 1993 conference in which he and Caffarelli were participating.
+
+
+Bibliographical notes 49
+linked optimal transport to the problem of reconstruction of the “conditions of the initial Universe” [168, 382, 755]. (The publication of [382] in the prestigious generalist scientific journal Nature is a good indication of the current visibility of optimal transport outside mathematics.) Relations of optimal transport with geometry, in particular Ricci curvature, will be explored in detail in Parts II and III of these notes. Many generalizations and variants have been studied in the literature, such as the optimal matching [323], the optimal transshipment (see [696] for a discussion and list of references), the optimal transport of a fraction of the mass [192, 365], or the optimal coupling with more than two prescribed marginals [403, 525, 718, 723, 725]; I learnt from Strulovici that the latter problem has applications in contract theory. In spite of this avalanche of works, one certainly should not regard optimal transport as a kind of miraculous tool, for “there are no miracles in mathematics”. In my opinion this abundance only reflects the fact that optimal transport is a simple, meaningful, natural and therefore universal concept.
+
+
+
+
+Part I
+Qualitative description of optimal transport
+
+
+
+
+53
+The first part of this course is devoted to the description and characterization of optimal transport under certain regularity assumptions on the measures and the cost function. As a start, some general theorems about optimal transport plans are established in Chapters 4 and 5, in particular the Kantorovich duality theorem. The emphasis is on c-cyclically monotone maps, both in the statements and in the proofs. The assumptions on the cost function and the spaces will be very general. From the Monge–Kantorovich problem one can derive natural distance functions on spaces of probability measures, by choosing the cost function as a power of the distance. The main properties of these distances are established in Chapter 6. In Chapter 7 a time-dependent version of the Monge–Kantorovich problem is investigated, which leads to an interpolation procedure between probability measures, called displacement interpolation. The natural assumption is that the cost function derives from a Lagrangian action, in the sense of classical mechanics; still (almost) no smoothness is required at that level. In Chapter 8 I shall make further assumptions of smoothness and convexity, and recover some regularity properties of the displacement interpolant by a strategy due to Mather. Then in Chapters 9 and 10 it is shown how to establish the existence of deterministic optimal couplings, and characterize the associated transport maps, again under adequate regularity and convexity assumptions. The Change of variables Formula is considered in Chapter 11. Finally, in Chapter 12 I shall discuss the regularity of the transport map, which in general is not smooth. The main results of this part are synthetized and summarized in Chapter 13. A good understanding of this chapter is sufficient to go through Part II of this course.
+
+
+
+
+4
+Basic properties
+Existence
+The first good thing about optimal couplings is that they exist:
+Theorem 4.1 (Existence of an optimal coupling). Let (X , μ) and (Y, ν) be two Polish probability spaces; let a : X → R ∪ {−∞} and b : Y → R ∪ {−∞} be two upper semicontinuous functions such that a ∈ L1(μ), b ∈ L1(ν). Let c : X × Y → R ∪ {+∞} be a lower semicontinuous cost function, such that c(x, y) ≥ a(x) + b(y) for all x, y. Then there is a coupling of (μ, ν) which minimizes the total cost E c(X, Y ) among all possible couplings (X, Y ).
+Remark 4.2. The lower bound assumption on c guarantees that the expected cost E c(X, Y ) is well-defined in R ∪ {+∞}. In most cases of applications — but not all — one may choose a = 0, b = 0.
+The proof relies on basic variational arguments involving the topology of weak convergence (i.e. imposed by bounded continuous test functions). There are two key properties to check: (a) lower semicontinuity, (b) compactness. These issues are taken care of respectively in Lemmas 4.3 and 4.4 below, which will be used again in the sequel. Before going on, I recall Prokhorov’s theorem: If X is a Polish space, then a set P ⊂ P (X ) is precompact for the weak topology if and only if it is tight, i.e. for any ε > 0 there is a compact set Kε such that μ[X \Kε] ≤ ε for all μ ∈ P.
+Lemma 4.3 (Lower semicontinuity of the cost functional). Let X and Y be two Polish spaces, and c : X × Y → R ∪ {+∞} a lower
+
+
+56 4 Basic properties
+semicontinuous cost function. Let h : X × Y → R ∪ {−∞} be an upper semicontinuous function such that c ≥ h. Let (πk)k∈N be a sequence of probability measures on X ×Y, converging weakly to some π ∈ P (X ×Y), in such a way that h ∈ L1(πk), h ∈ L1(π), and ∫
+X ×Y
+h dπk −−−→
+k→∞
+∫
+X ×Y
+h dπ.
+Then ∫
+X ×Y
+c dπ ≤ lim inf
+k→∞
+∫
+X ×Y
+c dπk.
+In particular, if c is nonnegative, then F : π → ∫ c dπ is lower semicontinuous on P (X × Y), equipped with the topology of weak convergence.
+Lemma 4.4 (Tightness of transference plans). Let X and Y be two Polish spaces. Let P ⊂ P (X ) and Q ⊂ P (Y) be tight subsets of P (X ) and P (Y) respectively. Then the set Π(P, Q) of all transference plans whose marginals lie in P and Q respectively, is itself tight in P (X × Y).
+Proof of Lemma 4.3. Replacing c by c − h, we may assume that c is a nonnegative lower semicontinuous function. Then c can be written as the pointwise limit of a nondecreasing family (cl)l∈N of continuous real-valued functions. By monotone convergence, ∫
+c dπ = lli→m∞
+∫
+cl dπ = lli→m∞ kli→m∞
+∫
+cl dπk ≤ lim inf
+k→∞
+∫
+c dπk.
+⊓⊔
+Proof of Lemma 4.4. Let μ ∈ P, ν ∈ Q, and π ∈ Π(μ, ν). By assumption, for any ε > 0 there is a compact set Kε ⊂ X , independent of the choice of μ in P, such that μ[X \ Kε] ≤ ε; and similarly there is a compact set Lε ⊂ Y, independent of the choice of ν in Q, such that ν[Y \ Lε] ≤ ε. Then for any coupling (X, Y ) of (μ, ν),
+P [(X, Y ) ∈/ Kε × Lε
+] ≤ P [X ∈/ Kε] + P [Y ∈/ Lε] ≤ 2ε.
+The desired result follows since this bound is independent of the coupling, and Kε × Lε is compact in X × Y. ⊓⊔
+Proof of Theorem 4.1. Since X is Polish, {μ} is tight in P (X ); similarly, {ν} is tight in P (Y). By Lemma 4.4, Π(μ, ν) is tight in P (X × Y), and
+
+
+Restriction property 57
+by Prokhorov’s theorem this set has a compact closure. By passing to the limit in the equation for marginals, we see that Π(μ, ν) is closed, so it is in fact compact. Then let (πk)k∈N be a sequence of probability measures on X × Y,
+such that ∫ c dπk converges to the infimum transport cost. Extracting a subsequence if necessary, we may assume that πk converges to some
+π ∈ Π(μ, ν). The function h : (x, y) 7−→ a(x) + b(y) lies in L1(πk)
+and in L1(π), and c ≥ h by assumption; moreover, ∫ h dπk = ∫ h dπ =
+∫ a dμ + ∫ b dν; so Lemma 4.3 implies ∫
+c dπ ≤ lim inf
+k→∞
+∫
+c dπk.
+Thus π is minimizing. ⊓⊔
+Remark 4.5. This existence theorem does not imply that the optimal cost is finite. It might be that all transport plans lead to an infinite
+total cost, i.e. ∫ c dπ = +∞ for all π ∈ Π(μ, ν). A simple condition to rule out this annoying possibility is ∫
+c(x, y) dμ(x) dν(y) < +∞,
+which guarantees that at least the independent coupling has finite total cost. In the sequel, I shall sometimes make the stronger assumption
+c(x, y) ≤ cX (x) + cY (y), (cX , cY ) ∈ L1(μ) × L1(ν),
+which implies that any coupling has finite total cost, and has other nice consequences (see e.g. Theorem 5.10).
+Restriction property
+The second good thing about optimal couplings is that any sub-coupling is still optimal. In words: If you have an optimal transport plan, then any induced sub-plan (transferring part of the initial mass to part of the final mass) has to be optimal too — otherwise you would be able to lower the cost of the sub-plan, and as a consequence the cost of the whole plan. This is the content of the next theorem.
+
+
+58 4 Basic properties
+Theorem 4.6 (Optimality is inherited by restriction). Let (X , μ) and (Y, ν) be two Polish spaces, a ∈ L1(μ), b ∈ L1(ν), let c : X × Y → R ∪ {+∞} be a measurable cost function such that c(x, y) ≥ a(x) + b(y) for all x, y; and let C(μ, ν) be the optimal transport cost from μ to ν. Assume that C(μ, ν) < +∞ and let π ∈ Π(μ, ν) be an optimal transport plan. Let π ̃ be a nonnegative measure on X × Y, such that π ̃ ≤ π and π ̃[X × Y] > 0. Then the probability measure
+π′ := π ̃
+π ̃[X × Y]
+is an optimal transference plan between its marginals μ′ and ν′.
+Moreover, if π is the unique optimal transference plan between μ and ν, then also π′ is the unique optimal transference plan between μ′ and ν′.
+Example 4.7. If (X, Y ) is an optimal coupling of (μ, ν), and Z ⊂ X ×Y
+is such that P [(X, Y ) ∈ Z] > 0, then the pair (X, Y ), conditioned to lie in Z, is an optimal coupling of (μ′, ν′), where μ′ is the law of X conditioned by the event “(X, Y ) ∈ Z”, and ν′ is the law of Y conditioned by the same event.
+Proof of Theorem 4.6. Assume that π′ is not optimal; then there exists π′′ such that
+(projX )#π′′ = (projX )#π′ = μ′, (projY )#π′′ = (projY )#π′ = ν′, (4.1) yet ∫
+c(x, y) dπ′′(x, y) <
+∫
+c(x, y) dπ′(x, y). (4.2)
+Then consider
+̂π := (π − π ̃) + Z ̃π′′, (4.3)
+where Z ̃ = π ̃[X × Y] > 0. Clearly, ̂π is a nonnegative measure. On the other hand, it can be written as
+̂π = π + Z ̃(π′′ − π′);
+then (4.1) shows that ̂π has the same marginals as π, while (4.2) implies that it has a lower transport cost than π. (Here I use the fact that the total cost is finite.) This contradicts the optimality of π. The conclusion is that π′ is in fact optimal.
+
+
+Convexity properties 59
+It remains to prove the last statement of Theorem 4.6. Assume that π is the unique optimal transference plan between μ and ν; and let π′′ be any optimal transference plan between μ′ and ν′. Define again ̂π by (4.3). Then ̂π has the same cost as π, so ̂π = π, which implies that
+π ̃ = Z ̃π′′, i.e. π′′ = π′. ⊓⊔
+Convexity properties
+The following estimates are of constant use:
+Theorem 4.8 (Convexity of the optimal cost). Let X and Y be two Polish spaces, let c : X ×Y → R∪{+∞} be a lower semicontinuous function, and let C be the associated optimal transport cost functional on P (X ) × P (Y). Let (Θ, λ) be a probability space, and let μθ, νθ be two measurable functions defined on Θ, with values in P (X ) and P (Y) respectively. Assume that c(x, y) ≥ a(x) + b(y), where a ∈ L1(dμθ dλ(θ)),
+b ∈ L1(dνθ dλ(θ)). Then
+C
+(∫
+Θ
+μθ λ(dθ),
+∫
+Θ
+νθ λ(dθ)
+) ≤
+(∫
+Θ
+C(μθ, νθ) λ(dθ)
+) .
+Proof of Theorem 4.8. First notice that a ∈ L1(μθ), b ∈ L1(νθ) for λalmost all values of θ. For each such θ, Theorem 4.1 guarantees the existence of an optimal transport plan πθ ∈ Π(μθ, νθ), for the cost c. Then
+π := ∫ πθ λ(dθ) has marginals μ := ∫ μθ λ(dθ) and ν := ∫ νθ λ(dθ). Admitting temporarily Corollary 5.22, we may assume that πθ is a measurable function of θ. So
+C(μ, ν) ≤
+∫
+X ×Y
+c(x, y) π(dx dy)
+=
+∫
+X ×Y
+c(x, y)
+(∫
+Θ
+πθ λ(dθ)
+)
+(dx dy)
+=
+∫
+Θ
+(∫
+X ×Y
+c(x, y) πθ(dx dy)
+)
+λ(dθ)
+=
+∫
+Θ
+C(μθ, νθ) λ(dθ),
+and the conclusion follows. ⊓⊔
+
+
+60 4 Basic properties
+Description of optimal plans
+Obtaining more precise information about minimizers will be much more of a sport. Here is a short list of questions that one might ask:
+• Is the optimal coupling unique? smooth in some sense? • Is there a Monge coupling, i.e. a deterministic optimal coupling? • Is there a geometrical way to characterize optimal couplings? Can one check in practice that a certain coupling is optimal?
+About the second question: Why don’t we try to apply the same reasoning as in the proof of Theorem 4.1? The problem is that the set of deterministic couplings is in general not compact; in fact, this set is often dense in the larger space of all couplings! So we may expect that the value of the infimum in the Monge problem coincides with the value of the minimum in the Kantorovich problem; but there is no a priori reason to expect the existence of a Monge minimizer.
+Example 4.9. Let X = Y = R2, let c(x, y) = |x − y|2, let μ be H1 restricted to {0} × [−1, 1], and let ν be (1/2) H1 restricted to {−1, 1} × [−1, 1], where H1 is the one-dimensional Hausdorff measure. Then there is a unique optimal transport, which for each point (0, a) sends one half of the mass at (0, a) to (−1, a), and the other half to (1, a). This is not a Monge transport, but it is easy to approximate it by (nonoptimal) deterministic transports (see Figure 4.1).
+Fig. 4.1. The optimal plan, represented in the left image, consists in splitting the mass in the center into two halves and transporting mass horizontally. On the right the filled regions represent the lines of transport for a deterministic (without splitting of mass) approximation of the optimum.
+
+
+Bibliographical notes 61
+Bibliographical notes
+Theorem 4.1 has probably been known from time immemorial; it is usually stated for nonnegative cost functions. Prokhorov’s theorem is a most classical result that can be found e.g. in [120, Theorems 6.1 and 6.2], or in my own course on integration [819, Section VII-5]. Theorems of the form “infimum cost in the Monge problem = minimum cost in the Kantorovich problem” have been established by Gangbo [396, Appendix A], Ambrosio [20, Theorem 2.1], and Pratelli [687, Theorem B]. The most general results to this date are those which appear in Pratelli’s work: Equality holds true if the source space (X , μ) is Polish without atoms, and the cost is continuous X ×Y → R∪{+∞}, with the value +∞ allowed. (In [687] the cost c is bounded below, but it is sufficient that c(x, y) ≥ a(x)+ b(y), where a ∈ L1(μ) and b ∈ L1(ν) are continuous.)
+
+
+
+
+5
+Cyclical monotonicity and Kantorovich duality
+To go on, we should become acquainted with two basic concepts in the theory of optimal transport. The first one is a geometric property called cyclical monotonicity; the second one is the Kantorovich dual problem, which is another face of the original Monge–Kantorovich problem. The main result in this chapter is Theorem 5.10.
+Definitions and heuristics
+I shall start by explaining the concepts of cyclical monotonicity and Kantorovich duality in an informal way, sticking to the bakery analogy of Chapter 3. Assume you have been hired by a large consortium of bakeries and cafe ́s, to be in charge of the distribution of bread from production units (bakeries) to consumption units (cafe ́s). The locations of the bakeries and cafe ́s, their respective production and consumption rates, are all determined in advance. You have written a transference plan, which says, for each bakery (located at) xi and each cafe ́ yj, how much bread should go each morning from xi to yj. As there are complaints that the transport cost associated with your plan is actually too high, you try to reduce it. For that purpose you choose a bakery x1 that sends part of its production to a distant cafe ́ y1, and decide that one basket of bread will be rerouted to another cafe ́ y2, that is closer to x1; thus you will gain c(x1, y2) − c(x1, y1). Of course, now this results in an excess of bread in y2, so one basket of bread arriving to y2 (say, from bakery x2) should in turn be rerouted to yet another cafe ́, say y3. The process goes on and on until finally you
+
+
+64 5 Cyclical monotonicity and Kantorovich duality
+redirect a basket from some bakery xN to y1, at which point you can stop since you have a new admissible transference plan (see Figure 5.1).
+Fig. 5.1. An attempt to improve the cost by a cycle; solid arrows indicate the mass transport in the original plan, dashed arrows the paths along which a bit of mass is rerouted.
+The new plan is (strictly) better than the older one if and only if
+c(x1, y2)+c(x2, y3)+. . .+c(xN , y1) < c(x1, y1)+c(x2, y2)+. . .+c(xN , yN ).
+Thus, if you can find such cycles (x1, y1), . . . , (xN , yN ) in your transference plan, certainly the latter is not optimal. Conversely, if you do not find them, then your plan cannot be improved (at least by the procedure described above) and it is likely to be optimal. This motivates the following definitions.
+Definition 5.1 (Cyclical monotonicity). Let X , Y be arbitrary sets, and c : X × Y → (−∞, +∞] be a function. A subset Γ ⊂ X × Y is said to be c-cyclically monotone if, for any N ∈ N, and any family (x1, y1), . . . , (xN , yN ) of points in Γ , holds the inequality
+N ∑
+i=1
+c(xi, yi) ≤
+N ∑
+i=1
+c(xi, yi+1) (5.1)
+(with the convention yN+1 = y1). A transference plan is said to be c-cyclically monotone if it is concentrated on a c-cyclically monotone set.
+
+
+Definitions and heuristics 65
+Informally, a c-cyclically monotone plan is a plan that cannot be improved: it is impossible to perturb it (in the sense considered before, by rerouting mass along some cycle) and get something more economical. One can think of it as a kind of local minimizer. It is intuitively obvious that an optimal plan should be c-cyclically monotone; the converse property is much less obvious (maybe it is possible to get something better by radically changing the plan), but we shall soon see that it holds true under mild conditions. The next key concept is the dual Kantorovich problem. While the central notion in the original Monge–Kantorovich problem is cost, in the dual problem it is price. Imagine that a company offers to take care of all your transportation problem, buying bread at the bakeries and selling them to the cafe ́s; what happens in between is not your problem (and maybe they have tricks to do the transport at a lower price than you). Let ψ(x) be the price at which a basket of bread is bought at bakery x, and φ(y) the price at which it is sold at cafe ́ y. On the whole, the price which the consortium bakery + cafe ́ pays for the transport is φ(y) − ψ(x), instead of the original cost c(x, y). This of course is for each unit of bread: if there is a mass μ(dx) at x, then the total price of the bread shipment from there will be ψ(x) μ(dx). So as to be competitive, the company needs to set up prices in such a way that
+∀(x, y), φ(y) − ψ(x) ≤ c(x, y). (5.2)
+When you were handling the transportation yourself, your problem was to minimize the cost. Now that the company takes up the transportation charge, their problem is to maximize the profits. This naturally leads to the dual Kantorovich problem:
+sup
+{∫
+Y
+φ(y) dν(y) −
+∫
+X
+ψ(x) dμ(x); φ(y) − ψ(x) ≤ c(x, y)
+}
+. (5.3)
+From a mathematical point of view, it will be imposed that the functions ψ and φ appearing in (5.3) be integrable: ψ ∈ L1(X , μ); φ ∈ L1(Y, ν).
+With the intervention of the company, the shipment of each unit of bread does not cost more than it used to when you were handling it yourself; so it is obvious that the supremum in (5.3) is no more than the optimal transport cost:
+
+
+66 5 Cyclical monotonicity and Kantorovich duality
+sup
+φ−ψ≤c
+{∫
+Y
+φ(y) dν(y) −
+∫
+X
+ψ(x) dμ(x)
+}
+≤ inf
+π∈Π (μ,ν )
+{∫
+X ×Y
+c(x, y) dπ(x, y)
+}
+. (5.4)
+Clearly, if we can find a pair (ψ, φ) and a transference plan π for which there is equality, then (ψ, φ) is optimal in the left-hand side and π is also optimal in the right-hand side. A pair of price functions (ψ, φ) will informally be said to be competitive if it satisfies (5.2). For a given y, it is of course in the interest of the company to set the highest possible competitive price φ(y), i.e. the highest lower bound for (i.e. the infimum of) ψ(x) + c(x, y), among all bakeries x. Similarly, for a given x, the price ψ(x) should be the supremum of all φ(y) − c(x, y). Thus it makes sense to describe a pair of prices (ψ, φ) as tight if
+φ(y) = inxf
+(
+ψ(x) + c(x, y)
+)
+, ψ(x) = suyp
+(
+φ(y) − c(x, y)
+)
+. (5.5)
+In words, prices are tight if it is impossible for the company to raise the selling price, or lower the buying price, without losing its competitivity. Consider an arbitrary pair of competitive prices (ψ, φ). We can always improve φ by replacing it by φ1(y) = infx
+(ψ(x) + c(x, y)). Then we can also improve ψ by replacing it by ψ1(x) = supy
+(φ1(y) − c(x, y)); then replacing φ1 by φ2(y) = infx
+(ψ1(x) + c(x, y)), and so on. It turns out that this process is stationary: as an easy exercise, the reader can check that φ2 = φ1, ψ2 = ψ1, which means that after just one iteration one obtains a pair of tight prices. Thus, when we consider the dual Kantorovich problem (5.3), it makes sense to restrict our attention to tight pairs, in the sense of equation (5.5). From that equation we can reconstruct φ in terms of ψ, so we can just take ψ as the only unknown in our problem. That unknown cannot be just any function: if you take a general function ψ, and compute φ by the first formula in (5.5), there is no chance that the second formula will be satisfied. In fact this second formula will hold true if and only if ψ is c-convex, in the sense of the next definition (illustrated by Figure 5.2).
+Definition 5.2 (c-convexity). Let X , Y be sets, and c : X × Y → (−∞, +∞]. A function ψ : X → R ∪ {+∞} is said to be c-convex if it is not identically +∞, and there exists ζ : Y → R ∪ {±∞} such that
+
+
+Definitions and heuristics 67
+∀x ∈ X ψ(x) = sup
+y∈Y
+(
+ζ(y) − c(x, y)
+)
+. (5.6)
+Then its c-transform is the function ψc defined by
+∀y ∈ Y ψc(y) = inf
+x∈X
+(
+ψ(x) + c(x, y)
+)
+, (5.7)
+and its c-subdifferential is the c-cyclically monotone set defined by
+∂cψ :=
+{
+(x, y) ∈ X × Y; ψc(y) − ψ(x) = c(x, y)
+} .
+The functions ψ and ψc are said to be c-conjugate. Moreover, the c-subdifferential of ψ at point x is
+∂cψ(x) =
+{
+y ∈ Y; (x, y) ∈ ∂cψ
+} ,
+or equivalently
+∀z ∈ X , ψ(x) + c(x, y) ≤ ψ(z) + c(z, y). (5.8)
+y0 x0
+y1 x1 y2
+x2
+Fig. 5.2. A c-convex function is a function whose graph you can entirely caress from below with a tool whose shape is the negative of the cost function (this shape might vary with the point y). In the picture yi ∈ ∂cψ(xi).
+Particular Case 5.3. If c(x, y) = −x · y on Rn × Rn, then the ctransform coincides with the usual Legendre transform, and c-convexity is just plain convexity on Rn. (Actually, this is a slight oversimplification: c-convexity is equivalent to plain convexity plus lower semicontinuity! A convex function is automatically continuous on the largest
+
+
+68 5 Cyclical monotonicity and Kantorovich duality
+open set Ω where it is finite, but lower semicontinuity might fail at the boundary of Ω.) One can think of the cost function c(x, y) = −x · y as basically the same as c(x, y) = |x − y|2/2, since the “interaction” between the positions x and y is the same for both costs.
+Particular Case 5.4. If c = d is a distance on some metric space X , then a c-convex function is just a 1-Lipschitz function, and it is its own c-transform. Indeed, if ψ is c-convex it is obviously 1Lipschitz; conversely, if ψ is 1-Lipschitz, then ψ(x) ≤ ψ(y) + d(x, y), so ψ(x) = infy[ψ(y) + d(x, y)] = ψc(x). As an even more particular case, if c(x, y) = 1x6=y, then ψ is c-convex if and only if sup ψ − inf ψ ≤ 1,
+and then again ψc = ψ. (More generally, if c satisfies the triangle inequality c(x, z) ≤ c(x, y) + c(y, z), then ψ is c-convex if and only if ψ(y) − ψ(x) ≤ c(x, y) for all x, y; and then ψ = ψc.)
+Remark 5.5. There is no measure theory in Definition 5.2, so no assumption of measurability is made, and the supremum in (5.6) is a true supremum, not just an essential supremum; the same for the infimum in (5.7). If c is continuous, then a c-convex function is automatically lower semicontinuous, and its subdifferential is closed; but if c is not continuous the measurability of ψ and ∂cψ is not a priori guaranteed.
+Remark 5.6. I excluded the case when ψ ≡ +∞ so as to avoid trivial situations; what I called a c-convex function might more properly (!) be called a proper c-convex function. This automatically implies that ζ in (5.6) does not take the value +∞ at all if c is real-valued. If c does achieve infinite values, then the correct convention in (5.6) is (+∞) − (+∞) = −∞.
+If ψ is a function on X , then its c-transform is a function on Y. Conversely, given a function on Y, one may define its c-transform as a function on X . It will be convenient in the sequel to define the latter concept by an infimum rather than a supremum. This convention has the drawback of breaking the symmetry between the roles of X and Y, but has other advantages that will be apparent later on.
+Definition 5.7 (c-concavity). With the same notation as in Definition 5.2, a function φ : Y → R ∪ {−∞} is said to be c-concave if it is not identically −∞, and there exists ψ : X → R ∪ {±∞} such that φ = ψc. Then its c-transform is the function φc defined by
+∀x ∈ X φc(x) = sup
+y∈Y
+(
+φ(y) − c(x, y)
+) ;
+
+
+Kantorovich duality 69
+and its c-superdifferential is the c-cyclically monotone set defined by
+∂cφ :=
+{
+(x, y) ⊂ X × Y; φ(y) − φc(x) = c(x, y)
+} .
+In spite of its short and elementary proof, the next crucial result is one of the main justifications of the concept of c-convexity.
+Proposition 5.8 (Alternative characterization of c-convexity). For any function ψ : X → R∪{+∞}, let its c-convexification be defined by ψcc = (ψc)c. More explicitly,
+ψcc(x) = sup
+y∈Y
+inf
+xe∈X
+(
+ψ(x ̃) + c(x ̃, y) − c(x, y)
+) .
+Then ψ is c-convex if and only if ψcc = ψ.
+Proof of Proposition 5.8. As a general fact, for any function φ : Y → R ∪ {−∞} (not necessarily c-convex), one has the identity φccc = φc. Indeed,
+φccc(x) = sup
+y
+inxef sup
+ye
+[
+φ(y ̃) − c(x ̃, y ̃) + c(x ̃, y) − c(x, y)
+] ;
+then the choice x ̃ = x shows that φccc(x) ≤ φc(x); while the choice y ̃ = y shows that φccc(x) ≥ φc(x). If ψ is c-convex, then there is ζ such that ψ = ζc, so ψcc = ζccc = ζc = ψ.
+The converse is obvious: If ψcc = ψ, then ψ is c-convex, as the c-transform of ψc. ⊓⊔
+Remark 5.9. Proposition 5.8 is a generalized version of the Legendre duality in convex analysis (to recover the usual Legendre duality, take c(x, y) = −x · y in Rn × Rn).
+Kantorovich duality
+We are now ready to state and prove the main result in this chapter.
+
+
+70 5 Cyclical monotonicity and Kantorovich duality
+Theorem 5.10 (Kantorovich duality). Let (X , μ) and (Y, ν) be two Polish probability spaces and let c : X × Y → R ∪ {+∞} be a lower semicontinuous cost function, such that
+∀(x, y) ∈ X × Y, c(x, y) ≥ a(x) + b(y)
+for some real-valued upper semicontinuous functions a ∈ L1(μ) and b ∈ L1(ν). Then
+(i) There is duality:
+min
+π∈Π (μ,ν )
+∫
+X ×Y
+c(x, y) dπ(x, y)
+= sup
+(ψ,φ)∈Cb(X )×Cb(Y); φ−ψ≤c
+(∫
+Y
+φ(y) dν(y) −
+∫
+X
+ψ(x) dμ(x)
+)
+= sup
+(ψ,φ)∈L1(μ)×L1(ν); φ−ψ≤c
+(∫
+Y
+φ(y) dν(y) −
+∫
+X
+ψ(x) dμ(x)
+)
+= sup
+ψ∈L1 (μ)
+(∫
+Y
+ψc(y) dν(y) −
+∫
+X
+ψ(x) dμ(x)
+)
+= sup
+φ∈L1 (ν )
+(∫
+Y
+φ(y) dν(y) −
+∫
+X
+φc(x) dμ(x)
+) ,
+and in the above suprema one might as well impose that ψ be c-convex and φ c-concave.
+(ii) If c is real-valued and the optimal cost C(μ, ν) = infπ∈Π(μ,ν)
+∫ c dπ is finite, then there is a measurable c-cyclically monotone set Γ ⊂ X ×Y (closed if a, b, c are continuous) such that for any π ∈ Π(μ, ν) the following five statements are equivalent: (a) π is optimal; (b) π is c-cyclically monotone; (c) There is a c-convex ψ such that, π-almost surely, ψc(y) − ψ(x) = c(x, y);
+(d) There exist ψ : X → R ∪ {+∞} and φ : Y → R ∪ {−∞}, such that φ(y) − ψ(x) ≤ c(x, y) for all (x, y), with equality π-almost surely; (e) π is concentrated on Γ .
+(iii) If c is real-valued, C(μ, ν) < +∞, and one has the pointwise upper bound
+c(x, y) ≤ cX (x) + cY (y), (cX , cY ) ∈ L1(μ) × L1(ν), (5.9)
+
+
+Kantorovich duality 71
+then both the primal and dual Kantorovich problems have solutions, so
+min
+π∈Π (μ,ν )
+∫
+X ×Y
+c(x, y) dπ(x, y)
+= max
+(ψ,φ)∈L1(μ)×L1(ν); φ−ψ≤c
+(∫
+Y
+φ(y) dν(y) −
+∫
+X
+ψ(x) dμ(x)
+)
+= max
+ψ∈L1 (μ)
+(∫
+Y
+ψc(y) dν(y) −
+∫
+X
+ψ(x) dμ(x)
+) ,
+and in the latter expressions one might as well impose that ψ be cconvex and φ = ψc. If in addition a, b and c are continuous, then there is a closed c-cyclically monotone set Γ ⊂ X × Y, such that for any π ∈ Π(μ, ν) and for any c-convex ψ ∈ L1(μ),
+{
+π is optimal in the Kantorovich problem if and only if π[Γ ] = 1;
+ψ is optimal in the dual Kantorovich problem if and only if Γ ⊂ ∂cψ.
+Remark 5.11. When the cost c is continuous, then the support of π is c-cyclically monotone; but for a discontinuous cost function it might a priori be that π is concentrated on a (nonclosed) c-cyclically monotone set, while the support of π is not c-cyclically monotone. So, in the sequel, the words “concentrated on” are not exchangeable with “supported in”. There is another subtlety for discontinuous cost functions: It is not clear that the functions φ and ψc appearing in statements (ii) and (iii) are Borel measurable; it will only be proven that they coincide with measurable functions outside of a ν-negligible set.
+Remark 5.12. Note the difference between statements (b) and (e): The set Γ appearing in (ii)(e) is the same for all optimal π’s, it only depends on μ and ν. This set is in general not unique. If c is continuous and Γ is imposed to be closed, then one can define a smallest Γ , which is the closure of the union of all the supports of the optimal π’s. There is also a largest Γ , which is the intersection of all the c-subdifferentials ∂cψ, where ψ is such that there exists an optimal π supported in ∂cψ. (Since the cost function is assumed to be continuous, the c-subdifferentials are closed, and so is their intersection.)
+Remark 5.13. Here is a useful practical consequence of Theorem 5.10: Given a transference plan π, if you can cook up a pair of competitive prices (ψ, φ) such that φ(y) − ψ(x) = c(x, y) throughout the support of π, then you know that π is optimal. This theorem also shows that
+
+
+72 5 Cyclical monotonicity and Kantorovich duality
+optimal transference plans satisfy very special conditions: if you fix an optimal pair (ψ, φ), then mass arriving at y can come from x only if c(x, y) = φ(y) − ψ(x) = ψc(y) − ψ(x), which means that
+x ∈ Arg min
+x′∈X
+(
+ψ(x′) + c(x′, y)
+) .
+In terms of my bakery analogy this can be restated as follows: A cafe ́ accepts bread from a bakery only if the combined cost of buying the bread there and transporting it here is lowest among all possible bakeries. Similarly, given a pair of competitive prices (ψ, φ), if you can cook up a transference plan π such that φ(y) − ψ(x) = c(x, y) throughout the support of π, then you know that (ψ, φ) is a solution to the dual Kantorovich problem.
+Remark 5.14. The assumption c ≤ cX + cY in (iii) can be weakened into ∫
+X ×Y
+c(x, y) dμ(x) dν(y) < +∞,
+or even 
+
+μ
+[{ x;
+∫
+Y
+c(x, y) dν(y) < +∞
+}]
+> 0;
+ν
+[{ y;
+∫
+X
+c(x, y) dμ(x) < +∞
+}]
+> 0.
+(5.10)
+Remark 5.15. If the variables x and y are swapped, then (μ, ν) should be replaced by (ν, μ) and (ψ, φ) by (−φ, −ψ).
+Particular Case 5.16. Particular Case 5.4 leads to the following variant of Theorem 5.10. When c(x, y) = d(x, y) is a distance on a Polish space X , and μ, ν belong to P1(X ), then
+inf E d(X, Y ) = sup E [ψ(X) − ψ(Y )] = sup
+{∫
+X
+ψ dμ −
+∫
+Y
+ψ dν
+} .
+(5.11) where the infimum on the left is over all couplings (X, Y ) of (μ, ν), and the supremum on the right is over all 1-Lipschitz functions ψ. This is the Kantorovich–Rubinstein formula; it holds true as soon as the supremum in the left-hand side is finite, and it is very useful.
+Particular Case 5.17. Now consider c(x, y) = −x · y in Rn × Rn. This cost is not nonnegative, but we have the lower bound c(x, y) ≥
+
+
+Kantorovich duality 73
+−(|x|2 + |y|2)/2. So if x → |x|2 ∈ L1(μ) and y → |y|2 ∈ L1(ν), then one can invoke the Particular Case 5.3 to deduce from Theorem 5.10 that
+sup E (X · Y ) = inf E [φ(X) + φ∗(Y )] = inf
+{∫
+X
+φ dμ +
+∫
+Y
+φ∗ dν
+} ,
+(5.12) where the supremum on the left is over all couplings (X, Y ) of (μ, ν), the infimum on the right is over all (lower semicontinuous) convex functions on Rn, and φ∗ stands for the usual Legendre transform of φ. In formula (5.12), the signs have been changed with respect to the statement of Theorem 5.10, so the problem is to maximize the correlation of the random variables X and Y .
+Before proving Theorem 5.10, I shall first informally explain the construction. At first reading, one might be content with these informal explanations and skip the rigorous proof.
+Idea of proof of Theorem 5.10. Take an optimal π (which exists from Theorem 4.1), and let (ψ, φ) be two competitive prices. Of course, as in (5.4), ∫
+c(x, y) dπ(x, y) ≥
+∫
+φ dν −
+∫
+ψ dμ =
+∫
+[φ(y) − ψ(x)] dπ(x, y).
+So if both quantities are equal, then ∫ [c − φ + ψ] dπ = 0, and since the integrand is nonnegative, necessarily
+φ(y) − ψ(x) = c(x, y) π(dx dy) − almost surely.
+Intuitively speaking, whenever there is some transfer of goods from x to y, the prices should be adjusted exactly to the transport cost. Now let (xi)0≤i≤m and (yi)0≤i≤m be such that (xi, yi) belongs to the support of π, so there is indeed some transfer from xi to yi. Then we hope that 
+
+φ(y0) − ψ(x0) = c(x0, y0)
+φ(y1) − ψ(x1) = c(x1, y1)
+...
+φ(ym) − ψ(xm) = c(xm, ym).
+On the other hand, if x is an arbitrary point,
+
+
+74 5 Cyclical monotonicity and Kantorovich duality
+
+
+φ(y0) − ψ(x1) ≤ c(x1, y0)
+φ(y1) − ψ(x2) ≤ c(x2, y1)
+...
+φ(ym) − ψ(x) ≤ c(x, ym).
+By subtracting these inequalities from the previous equalities and adding up everything, one obtains
+ψ(x) ≥ ψ(x0) + [c(x0, y0) − c(x1, y0)] + . . . + [c(xm, ym) − c(x, ym)].
+Of course, one can add an arbitrary constant to ψ, provided that one subtracts the same constant from φ; so it is possible to decide that ψ(x0) = 0, where (x0, y0) is arbitrarily chosen in the support of π. Then
+ψ(x) ≥ [c(x0, y0) − c(x1, y0)] + . . . + [c(xm, ym) − c(x, ym)], (5.13)
+and this should be true for all choices of (xi, yi) (1 ≤ i ≤ m) in the support of π, and for all m ≥ 1. So it becomes natural to define ψ as the supremum of all the functions (of the variable x) appearing in the right-hand side of (5.13). It will turn out that this ψ satisfies the equation
+ψc(y) − ψ(x) = c(x, y) π(dx dy)-almost surely.
+Then, if ψ and ψc are integrable, one can write ∫
+c dπ =
+∫
+ψc dπ −
+∫
+ψ dπ =
+∫
+ψc dν −
+∫
+ψ dμ.
+This shows at the same time that π is optimal in the Kantorovich problem, and that the pair (ψ, ψc) is optimal in the dual Kantorovich problem. ⊓⊔
+Rigorous proof of Theorem 5.10, Part (i). First I claim that it is sufficient to treat the case when c is nonnegative. Indeed, let
+c ̃(x, y) := c(x, y) − a(x) − b(y) ≥ 0, Λ :=
+∫
+a dμ +
+∫
+b dν ∈ R.
+Whenever ψ : X → R∪{+∞} and φ : Y → R∪{−∞} are two functions,
+define ψ ̃(x) := ψ(x) + a(x), φ ̃(y) := φ(y) − b(y).
+
+
+Kantorovich duality 75
+Then the following properties are readily checked:
+c real-valued =⇒ c ̃ real-valued
+c lower semicontinuous =⇒ c ̃ lower semicontinuous
+ψ ̃ ∈ L1(μ) ⇐⇒ ψ ∈ L1(μ); φ ̃ ∈ L1(ν) ⇐⇒ φ ∈ L1(ν);
+∀π ∈ Π(μ, ν),
+∫
+c ̃dπ =
+∫
+c dπ − Λ;
+∀(ψ, φ) ∈ L1(μ) × L1(ν),
+∫
+φ ̃ dν −
+∫
+ψ ̃ dμ =
+∫
+φ dν −
+∫
+ψ dν − Λ;
+ψ is c-convex ⇐⇒ ψ ̃ is c ̃-convex;
+φ is c-concave ⇐⇒ φ ̃ is c ̃-concave;
+(φ, ψ) are c-conjugate ⇐⇒ (φ ̃, ψ ̃) are c ̃-conjugate;
+Γ is c-cyclically monotone ⇐⇒ Γ is c ̃-cyclically monotone.
+Thanks to these formulas, it is equivalent to establish Theorem 5.10 for the cost c or for the nonnegative cost c ̃. So in the sequel, I shall assume, without further comment, that c is nonnegative.
+The rest of the proof is divided into five steps.
+Step 1: If μ = (1/n) ∑n
+i=1 δxi , ν = (1/n) ∑n
+j=1 δyj , where the costs c(xi, yj) are finite, then there is at least one cyclically monotone transference plan.
+Indeed, in that particular case, a transference plan between μ and ν can be identified with a bistochastic n × n array of real numbers aij ∈ [0, 1]: each aij tells what proportion of the 1/n mass carried by point xi will go to destination yj. So the Monge–Kantorovich problem becomes
+inf
+(aij )
+∑
+ij
+aij c(xi, yi)
+where the infimum is over all arrays (aij) satisfying ∑
+i
+aij = 1, ∑
+j
+aij = 1. (5.14)
+Here we are minimizing a linear function on the compact set [0, 1]n×n, so obviously there exists a minimizer; the corresponding transference plan π can be written as
+
+
+76 5 Cyclical monotonicity and Kantorovich duality
+π= 1
+n
+∑
+ij
+aij δ(xi,yj),
+and its support S is the set of all couples (xi, yj) such that aij > 0. Assume that S is not cyclically monotone: Then there exist N ∈ N and (xi1 , yj1), . . . , (xiN , yjN ) in S such that
+c(xi1 , yj2 ) + c(xi2 , yj3) + . . . + c(xiN , yj1) < c(xi1 , yj1) + . . . + c(xiN , yjN ). (5.15) Let a := min(ai1,j1, . . . , aiN ,jN ) > 0. Define a new transference plan π ̃ by the formula
+π ̃ = π + a
+n
+N ∑
+l=1
+(δ(xil ,yjl+1 ) − δ(xil ,yjl )
+).
+It is easy to check that this has the correct marginals, and by (5.15) the cost associated with π ̃ is strictly less than the cost associated with π. This is a contradiction, so S is indeed c-cyclically monotone!
+Step 2: If c is continuous, then there is a cyclically monotone transference plan.
+To prove this, consider sequences of independent random variables xi ∈ X , yj ∈ Y, with respective law μ, ν. According to the law of large numbers for empirical measures (sometimes called fundamental theorem of statistics, or Varadarajan’s theorem), one has, with probability 1,
+μn := 1
+n
+n ∑
+i=1
+δxi −→ μ, νn := 1
+n
+n ∑
+j=1
+δyj −→ ν (5.16)
+as n → ∞, in the sense of weak convergence of measures. In particular, by Prokhorov’s theorem, (μn) and (νn) are tight sequences. For each n, let πn be a cyclically monotone transference plan between μn and νn. By Lemma 4.4, {πn}n∈N is tight. By Prokhorov’s theorem, there is a subsequence, still denoted (πn), which converges weakly to some probability measure π, i.e. ∫
+h(x, y) dπn(x, y) −→
+∫
+h(x, y) dπ(x, y)
+for all bounded continuous functions h on X × Y. By applying the previous identity with h(x, y) = f (x) and h(x, y) = g(y), we see that
+
+
+Kantorovich duality 77
+π has marginals μ and ν, so this is an admissible transference plan between μ and ν. For each n, the cyclical monotonicity of πn implies that for all N
+and πn⊗N -almost all (x1, y1), . . . , (xN , yN ), the inequality (5.1) is sat
+isfied; in other words, πn⊗N is concentrated on the set C(N ) of all
+((x1, y1), . . . , (xN , yN )) ∈ (X × Y)N satisfying (5.1). Since c is con
+tinuous, C(N ) is a closed set, so the weak limit π⊗N of πn⊗N is also concentrated on C(N ). Let Γ = Spt π (Spt stands for “support”), then
+Γ N = (Spt π)N = Spt(π⊗N ) ⊂ C(N ),
+and since this holds true for all N , Γ is c-cyclically monotone.
+Step 3: If c is continuous real-valued and π is c-cyclically monotone, then there is a c-convex ψ such that ∂cψ contains the support of π.
+Indeed, let Γ again denote the support of π (this is a closed set). Pick any (x0, y0) ∈ Γ , and define
+ψ(x) := sup
+m∈N
+sup
+{ [c(x0, y0) − c(x1, y0)] + [c(x1, y1) − c(x2, y1)]
++ · · · + [c(xm, ym) − c(x, ym)]; (x1, y1), . . . , (xm, ym) ∈ Γ
+} .
+(5.17)
+By applying the definition with m = 1 and (x1, y1) = (x0, y0), one immediately sees that ψ(x0) ≥ 0. On the other hand, ψ(x0) is the supremum of all the quantities [c(x0, y0) − c(x1, y0)] + . . . + [c(xm, ym) − c(x0, ym)] which by cyclical monotonicity are all nonpositive. So actually ψ(x0) = 0. (In fact this is the only place in this step where c-cyclical monotonicity will be used!) By renaming ym as y, obviously
+ψ(x) = sup
+y∈Y
+sup
+m∈N
+sup
+(x1 ,y1 ),...,(xm−1 ,ym−1 ),xm
+{ [c(x0, y0) − c(x1, y0)]
++ [c(x1, y1) − c(x2, y1)] + · · · + [c(xm, y) − c(x, y)];
+(x1, y1), . . . , (xm, y) ∈ Γ
+}
+. (5.18)
+So ψ(x) = supy[ζ(y) − c(x, y)], if ζ is defined by
+ζ(y) = sup
+{[c(x0, y0)−c(x1, y0)]+[c(x1, y1)−c(x2, y1)]+· · ·+c(xm, y);
+m ∈ N, (x1, y1), . . . , (xm, y) ∈ Γ
+}
+(5.19)
+
+
+78 5 Cyclical monotonicity and Kantorovich duality
+(with the convention that ζ = −∞ out of projY (Γ )). Thus ψ is a cconvex function. Now let (x, y) ∈ Γ . By choosing xm = x, ym = y in the definition of ψ,
+ψ(x) ≥ sump
+{(
+sup
+(x1 ,y1 ),...,(xm−1 ,ym−1 )
+[c(x0, y0) − c(x1, y0)]+
+· · · + [c(xm−1, ym−1) − c(x, ym−1)])
++ [c(x, y) − c(x, y)]}
+.
+In the definition of ψ, it does not matter whether one takes the supremum over m − 1 or over m variables, since one also takes the supremum over m. So the previous inequality can be recast as
+ψ(x) ≥ ψ(x) + c(x, y) − c(x, y).
+In particular, ψ(x) + c(x, y) ≥ ψ(x) + c(x, y). Taking the infimum over x ∈ X in the left-hand side, we deduce that
+ψc(y) ≥ ψ(x) + c(x, y).
+Since the reverse inequality is always satisfied, actually
+ψc(y) = ψ(x) + c(x, y),
+and this means precisely that (x, y) ∈ ∂cψ. So Γ does lie in the csubdifferential of ψ.
+Step 4: If c is continuous and bounded, then there is duality.
+Let ‖c‖ := sup c(x, y). By Steps 2 and 3, there exists a transference plan π whose support is included in ∂cψ for some c-convex ψ, and which
+was constructed “explicitly” in Step 3. Let φ = ψc. From (5.17), ψ = sup ψm, where each ψm is a supremum of continuous functions, and therefore lower semicontinuous. In particular, ψ is measurable.1 The same is true of φ. Next we check that ψ, φ are bounded. Let (x0, y0) ∈ ∂cψ be such that ψ(x0) < +∞; then necessarily φ(y0) > −∞. So, for any x ∈ X ,
+ψ(x) = suyp [φ(y) − c(x, y)] ≥ φ(y0) − c(x, y0) ≥ φ(y0) − ‖c‖;
+1 A lower semicontinuous function on a Polish space is always measurable, even if it is obtained as a supremum of uncountably many continuous functions; in fact it can always be written as a supremum of countably many continuous functions!
+
+
+Kantorovich duality 79
+φ(y) = inxf [ψ(x) + c(x, y)] ≤ ψ(x0) + c(x0, y) ≤ ψ(x0) + ‖c‖.
+Re-injecting these bounds into the identities ψ = φc, φ = ψc, we get
+ψ(x) ≤ suyp φ(y) ≤ ψ(x0) + ‖c‖;
+φ(y) ≥ inxf ψ(x) ≥ φ(y0) − ‖c‖.
+So both ψ and φ are bounded from above and below. Thus we can integrate φ, ψ against μ, ν respectively, and, by the marginal condition, ∫
+φ(y) dν(y) −
+∫
+ψ(x) dμ(x) =
+∫ [φ(y) − ψ(x)] dπ(x, y).
+Since φ(y) − ψ(x) = c(x, y) on the support of π, the latter quantity
+equals ∫ c(x, y) dπ(x, y). It follows that (5.4) is actually an equality, which proves the duality.
+Step 5: If c is lower semicontinuous, then there is duality.
+Since c is nonnegative lower semicontinuous, we can write
+c(x, y) = kli→m∞ ck(x, y),
+where (ck)k∈N is a nondecreasing sequence of bounded, uniformly continuous functions. To see this, just choose
+ck(x, y) = inf
+(x′ ,y′ )
+{
+min
+(
+c(x′, y′), k
+)
++k
+[
+d(x, x′) + d(y, y′)
+]} ;
+note that ck is k-Lipschitz, nondecreasing in k, and further satisfies
+0 ≤ ck(x, y) ≤ min(c(x, y), k).2 By Step 4, for each k we can find πk, φk, ψk such that ψk is bounded
+and c-convex, φk = (ψk)c, and ∫
+ck(x, y) dπk(x, y) =
+∫
+φk(y) dν(y) −
+∫
+ψk(x) dμ(x).
+Since ck is no greater than c, the constraint φk(y) − ψk(x) ≤ ck(x, y) implies φk(y) − ψk(x) ≤ c(x, y); so all (φk, ψk) are admissible in the
+2 It is instructive to understand exactly where the lower semicontinuity assumption is used to show c = lim ck.
+
+
+80 5 Cyclical monotonicity and Kantorovich duality
+dual problem with cost c. Moreover, for each k the functions φk and ψk are uniformly continuous because c itself is uniformly continuous. By Lemma 4.4, Π(μ, ν) is weakly sequentially compact. Thus, up to extraction of a subsequence, we can assume that πk converges to some π ̃ ∈ Π(μ, ν). For all indices l ≤ k, we have cl ≤ ck, so ∫
+cl dπ ̃ = kli→m∞
+∫
+cl dπk
+≤ lim sup
+k→∞
+∫
+ck dπk
+= lim sup
+k→∞
+(∫
+φk(y) dν(y) −
+∫
+ψk(x) dμ(x)
+) .
+On the other hand, by monotone convergence, ∫
+c dπ ̃ = lli→m∞
+∫
+cl dπ ̃.
+So
+inf
+Π (μ,ν )
+∫
+c dπ ≤
+∫
+c dπ ̃ ≤ lim sup
+k→∞
+(∫
+φk(y) dν(y) −
+∫
+ψk(x) dμ(x)
+)
+≤ inf
+Π (μ,ν )
+∫
+c dπ.
+Moreover, ∫
+φk(y) dν(y) −
+∫
+ψk(x) dμ(x) −−−→
+k→∞ inf
+Π (μ,ν )
+∫
+c dπ. (5.20)
+Since each pair (ψk, φk) lies in Cb(X ) × Cb(Y), the duality also holds with bounded continuous (and even Lipschitz) test functions, as claimed in Theorem 5.10(i). ⊓⊔
+Proof of Theorem 5.10, Part (ii). From now on, I shall assume that the optimal transport cost C(μ, ν) is finite, and that c is real-valued. As in the proof of Part (i) I shall assume that c is nonnegative, since the general case can always be reduced to that particular case. Part (ii) will be established in the following way: (a) ⇒ (b) ⇒ (c) ⇒ (d) ⇒ (a) ⇒ (e) ⇒ (b). There seems to be some redundancy in this chain of implications, but this is because the implication (a) ⇒ (c) will be used to construct the set Γ appearing in (e).
+
+
+Kantorovich duality 81
+(a) ⇒ (b): Let π be an optimal plan, and let (φk, ψk)k∈N be as in Step 5 of the proof of Part (i). Since the optimal transport cost is finite by assumption, the cost function c belongs to L1(π). From (5.20) and the marginal property of π, ∫[
+c(x, y) − φk(y) + ψk(x)
+]
+dπ(x, y) −−−→
+k→∞ 0,
+so c(x, y) − φk(y) + ψk(x) converges to 0 in L1(π) as k → ∞. Up to choosing a subsequence, we can assume that the convergence is almost sure; then φk(yi) − ψk(xi) converges to c(xi, yi), π(dxi dyi)-almost surely, as k → ∞. By passing to the limit in the inequality
+N ∑
+i=1
+c(xi, yi+1) ≥
+N ∑
+i=1
+[φk(yi+1) − ψk(xi)] =
+N ∑
+i=1
+[φk(yi) − ψk(xi)]
+(where by convention yN+1 = y1) we see that, π⊗N -almost surely,
+N ∑
+i=1
+c(xi, yi+1) ≥
+N ∑
+i=1
+c(xi, yi). (5.21)
+At this point we know that π⊗N is concentrated on some set ΓN ⊂
+(X × Y)N , such that ΓN consists of N -tuples ((x1, y1), . . . , (xN , yN )) satisfying (5.21). Let projk((xi, yi)1≤i≤N ) := (xk, yk) be the projec
+tion on the kth factor of (X × Y)N . It is not difficult to check that Γ := ∩1≤k≤N projk(ΓN ) is a c-cyclically monotone set which has full π-measure; so π is indeed c-cyclically monotone.
+(b) ⇒ (c): Let π be a cyclically monotone transference plan. The function ψ can be constructed just as in Step 3 of the proof of Part (i), only with some differences. First, Γ is not necessarily closed; it is just a Borel set such that π[Γ ] = 1. (If Γ is not Borel, make it Borel by modifying it on a negligible set.) With this in mind, define, as in Step 3 of Part (i),
+ψ(x) := sup
+m∈N
+sup
+{ [c(x0, y0) − c(x1, y0)] + [c(x1, y1) − c(x2, y1)]
++ · · · + [c(xm, ym) − c(x, ym)]; (x1, y1), . . . , (xm, ym) ∈ Γ
+} .
+(5.22)
+From its definition, for any x ∈ X ,
+
+
+82 5 Cyclical monotonicity and Kantorovich duality
+ψ(x) ≥ c(x0, y0) − c(x, y0) > −∞.
+(Here the assumption of c being real-valued is useful.) Then there is no difficulty in proving, as in Step 3, that ψ(x0) = 0, that ψ is c-convex, and that π is concentrated on ∂cψ.
+The rest of this step will be devoted to the measurability of ψ, ψc and ∂cψ. These are surprisingly subtle issues, which do not arise if c is continuous; so the reader who only cares for a continuous cost function might go directly to the next step.
+First, the measurability of ψ is not clear at all from formula (5.22): This is typically an uncountable supremum of upper semicontinuous functions, and there is no a priori reason for this to be Borel measurable. Since c is nonnegative lower semicontinuous, there is a nondecreasing sequence (cl)l∈N of continuous nonnegative functions, such that cl(x, y) converges to c(x, y) as l → ∞, for all (x, y). By Egorov’s theorem, for each k ∈ N there is a Borel set Ek with π[Ek] ≤ 1/k, such that the convergence of cl to c is uniform on Γ \ Ek. Since π (just as any probability measure on a Polish space) is regular, we can find a compact set Γk ⊂ Γ \Ek, such that π[Γk] ≥ 1−2/k. There is no loss of generality in assuming that the sets Γk are increasing in k. On each Γk, the sequence (cl) converges uniformly and monotonically to c; in particular c is continuous on Γk. Furthermore, since π is obviously concentrated on the union of all Γk, there is no loss of generality in assuming that Γ = ∪Γk. We may also assume that (x0, y0) ∈ Γ1. Now, let x be given in X , and for each k, l, m, let
+Fm,k,l
+(x0, y0, . . . , xm, ym
+) := [c(x0, y0) − cl(x1, y0)]
++ [c(x1, y1) − cl(x2, y1)] + · · · + [c(xm, ym) − cl(x, ym)],
+for (x0, y0, . . . , xm, ym) ∈ Γkm. It is clear that Fm,k,l is a continuous
+function (because cl is continuous on X × X , and c is continuous on
+Γk). It is defined on the compact set Γkm, and it is nonincreasing as a function of l, with
+lli→m∞ Fm,k,l = Fm,k,
+where
+Fm,k
+(x0, y0, . . . , xm, ym
+) := [c(x0, y0) − c(x1, y0)]
++ [c(x1, y1) − c(x2, y1)] + · · · + [c(xm, ym) − c(x, ym)].
+
+
+Kantorovich duality 83
+Now I claim that
+lli→m∞ sup
+Γkm
+Fm,k,l = sup
+Γkm
+Fm,k. (5.23)
+Indeed, by compactness, for each l ∈ N there is Xl ∈ Γkm such that
+sup
+Γkm
+Fm,k,l = Fm,k,l(Xl);
+and up to extraction of a subsequence, one may assume that Xl con
+verges to some X. Then by monotonicity, for any l′ ≤ l,
+sup
+Γkm
+Fm,k,l = Fm,k,l(Xl) ≤ Fm,k,l′ (Xl);
+and if one lets l → ∞, with l′ fixed, one obtains
+lim sup
+l→∞
+sup
+Γkm
+Fm,k,l ≤ Fm,k,l′ (X).
+Now let l′ → ∞, to get
+lim sup
+l→∞
+sup
+Γkm
+Fm,k,l ≤ Fm,k(X) ≤ sup
+Γkm
+Fm,k .
+The converse inequality
+sup
+Γkm
+Fm,k ≤ lim inf
+l→∞ sup
+Γkm
+Fm,k,l
+is obvious because Fm,k ≤ Fm,k,l; so (5.23) is proven. To summarize: If we let
+ψm,k,l(x) := sup
+{ [c(x0, y0) − cl(x1, y0)] + [c(x1, y1) − cl(x2, y1)]
++ · · · + [c(xm, ym) − cl(x, ym)]; (x1, y1), . . . , (xm, ym) ∈ Γk
+} ,
+then we have
+lli→m∞ ψm,k,l(x) = sup
+{ [c(x0, y0) − c(x1, y0)] + [c(x1, y1) − c(x2, y1)]
++ · · · + [c(xm, ym) − c(x, ym)]; (x1, y1), . . . , (xm, ym) ∈ Γk
+} .
+It follows easily that, for each x,
+
+
+84 5 Cyclical monotonicity and Kantorovich duality
+ψ(x) = sup
+m∈N
+sup
+k∈N
+lli→m∞ ψm,k,l(x).
+Since ψm,k,l(x) is lower semicontinuous in x (as a supremum of continuous functions of x), ψ itself is measurable.
+The measurability of φ := ψc is subtle also, and at the present level of generality it is not clear that this function is really Borel measurable. However, it can be modified on a ν-negligible set so as to become measurable. Indeed, φ(y) − ψ(x) = c(x, y), π(dx dy)-almost surely, so if one disintegrates π(dx dy) as π(dx|y) ν(dy), then φ(y)
+will coincide, ν(dy)-almost surely, with the Borel function φ ̃(y) :=
+∫
+X [ψ(x) + c(x, y)] π(dx|y).
+Then let Z be a Borel set of zero ν-measure such that φ ̃ = φ outside of Z. The subdifferential ∂cψ coincides, out of the π-negligible set X ×Z,
+with the measurable set {(x, y) ∈ X × Y; φ ̃(y) − ψ(x) = c(x, y)}. The conclusion is that ∂cψ can be modified on a π-negligible set so as to be Borel measurable.
+(c) ⇒ (d): Just let φ = ψc.
+(d) ⇒ (a): Let (ψ, φ) be a pair of admissible functions, and let π be a transference plan such that φ − ψ = c, π-almost surely. The goal is to show that π is optimal. The main difficulty lies in the fact that ψ and φ need not be separately integrable. This problem will be circumvented by a careful truncation procedure. For n ∈ N, w ∈ R ∪ {±∞}, define
+Tn(w) =
+
+
+w if |w| ≤ n
+n if w > n
+−n if w < −n,
+and
+ξ(x, y) := φ(y) − ψ(x); ξn(x, y) := Tn(φ(y)) − Tn(ψ(x)).
+In particular, ξ0 = 0. It is easily checked that ξn converges monotonically to ξ; more precisely, • ξn(x, y) remains equal to 0 if ξ(x, y) = 0; • ξn(x, y) increases to ξ(x, y) if the latter quantity is positive; • ξn(x, y) decreases to ξ(x, y) if the latter quantity is negative.
+As a consequence, ξn ≤ (ξn)+ ≤ ξ+ ≤ c. So (Tnφ, Tnψ) is an admissible pair in the dual Kantorovich problem, and
+
+
+Kantorovich duality 85
+∫
+ξn dπ =
+∫
+(Tnφ) dν −
+∫
+(Tnψ) dμ ≤ sup
+φ′ −ψ′ ≤c
+(∫
+φ′ dμ −
+∫
+ψ′ dν
+) .
+(5.24) On the other hand, by monotone convergence and since ξ coincides with c outside of a π-negligible set, ∫
+ξ≥0
+ξn dπ −−−→
+n→∞
+∫
+ξ≥0
+ξ dπ =
+∫
+c dπ;
+∫
+ξ<0
+ξn dπ −−−→
+n→∞
+∫
+ξ<0
+ξ dπ = 0.
+This and (5.24) imply that ∫
+c dπ ≤ sup
+φ′ −ψ′ ≤c
+(∫
+φ′ dμ −
+∫
+ψ′ dν
+) ;
+so π is optimal.
+Before completing the chain of equivalences, we should first construct the set Γ . By Theorem 4.1, there is at least one optimal trans
+ference plan, say π ̃. From the implication (a) ⇒ (c), there is some ψ ̃
+such that π ̃ is concentrated on ∂cψ ̃; just choose Γ := ∂cψ ̃.
+(a) ⇒ (e): Let π ̃ be the optimal plan used to construct Γ , and let
+ψ = ψ ̃ be the associated c-convex function; let φ = ψc. Then let π be another optimal plan. Since π and π ̃ have the same cost and same marginals,
+∫
+c dπ =
+∫
+c dπ ̃ = nli→m∞
+∫
+(Tnφ − Tnψ) dπ ̃
+= nli→m∞
+∫
+(Tnφ − Tnψ) dπ,
+where Tn is the truncation operator that was already used in the proof of (d) ⇒ (a). So
+∫ [c(x, y) − Tnφ(y) + Tnψ(x)] dπ(x, y) −−−→
+n→∞ 0. (5.25)
+As before, define ξ(x, y) := φ(y) − ψ(x); then by monotone convergence, ∫
+ξ≥0
+[c − Tnφ + Tnψ] dπ −−−→
+n→∞
+∫
+ξ≥0
+(c − ξ) dπ;
+
+
+86 5 Cyclical monotonicity and Kantorovich duality
+∫
+ξ<0
+[c − Tnφ + Tnψ] dπ −−−→
+n→∞
+∫
+ξ<0
+(c − ξ) dπ.
+Since ξ ≤ c, the integrands here are nonnegative and both integrals make sense in [0, +∞]. So by adding the two limits and using (5.25) we get ∫
+(c − ξ) dπ = nli→m∞
+∫ [c − Tnφ + Tnψ] = 0.
+Since ξ ≤ c, this proves that c coincides π-almost surely with ξ, which was the desired conclusion.
+(e) ⇒ (b): This is obvious since Γ is cyclically monotone by assumption. ⊓⊔
+Proof of Theorem 5.10, Part (iii). As in the proof of Part (i) we may assume that c ≥ 0. Let π be optimal, and let ψ be a c-convex function such that π is concentrated on ∂cψ. Let φ := ψc. The goal is to show that under the assumption c ≤ cX + cY , (ψ, φ) solves the dual Kantorovich problem. The point is to prove that ψ and φ are integrable. For this we repeat the estimates of Step 4 in the proof of Part (i), with some variants: After securing (x0, y0) such that φ(y0), ψ(x0), cX (x0) and cY (y0) are finite, we write
+ψ(x) + cX (x) = suyp
+[φ(y) − c(x, y) + cX (x)] ≥ suyp [φ(y) − cY (y)]
+≥ φ(y0) − cY (y0);
+φ(y) − cY (y) = inxf
+[ψ(x) + c(x, y) − cY (y)] ≤ inxf [ψ(x) + cX (x)]
+≤ ψ(x0) + cX (x0).
+So ψ is bounded below by the μ-integrable function φ(y0)−cY (y0)−cX , and φ is bounded above by the ν-integrable function ψ(x0)+cX (x0)+cY ;
+thus both − ∫ ψ dμ and ∫ φ dν make sense in R ∪ {+∞}. Since their
+sum is ∫ (φ − ψ) dπ = ∫ c dπ < +∞, both integrals are finite. So ∫
+c dπ =
+∫
+φ dν −
+∫
+ψ dμ,
+and it results from Part (i) of the theorem that both π and (ψ, φ) are optimal, respectively in the original and the dual Kantorovich problems.
+
+
+Restriction property 87
+To prove the last part of (iii), assume that c is continuous; then the subdifferential of any c-convex function is a closed c-cyclically monotone set. Let π be an arbitrary optimal transference plan, and (ψ, φ) an optimal pair of prices. We know that (ψ, ψc) is optimal in the dual Kantorovich problem, so ∫
+c(x, y) dπ(x, y) =
+∫
+ψc dν −
+∫
+ψ dμ.
+Thanks to the marginal condition, this be rewritten as
+∫ [ψc(y) − ψ(x) − c(x, y)] dπ(x, y) = 0.
+Since the integrand is nonnegative, it follows that π is concentrated on the set of pairs (x, y) such that ψc(y) − ψ(x) − c(x, y) = 0, which is precisely the subdifferential of ψ. Thus any optimal transference plan is concentrated on the subdifferential of any optimal ψ. So if Γ is defined as the intersection of all subdifferentials of optimal functions ψ, then Γ also contains the supports of all optimal plans. Conversely, if π ̃ ∈ Π(μ, ν) is a transference plan concentrated on
+Γ , then ∫ c dπ ̃ = ∫ [ψc − ψ] dπ ̃ = ∫ ψc dν − ∫ ψ dμ, so π ̃ is optimal. Similarly, if ψ ̃ is a c-convex function such that ∂cψ ̃ contains Γ , then
+by the previous estimates ψ ̃ and ψ ̃c are integrable against μ and ν
+respectively, and ∫ c dπ = ∫ [ψ ̃c − ψ ̃] dπ = ∫ ψ ̃c dν − ∫ ψ ̃ dμ, so (ψ ̃, ψ ̃c) is optimal. This concludes the proof. ⊓⊔
+Restriction property
+The dual side of the Kantorovich problem also behaves well with respect to restriction, as shown by the following results.
+Lemma 5.18 (Restriction of c-convexity). Let X , Y be two sets and c : X × Y → R ∪ {+∞}. Let X ′ ⊂ X , Y′ ⊂ Y and let c′ be the restriction of c to X ′ × Y′. Let ψ : X → R ∪ {+∞} be a c-convex function. Then there is a c′-convex function ψ′ : X ′ → R ∪ {+∞} such that ψ′ ≤ ψ on X ′, ψ′ coincides with ψ on projX ((∂cψ) ∩ (X ′ × Y′))
+and ∂cψ ∩ (X ′ × Y′) ⊂ ∂c′ψ′.
+
+
+88 5 Cyclical monotonicity and Kantorovich duality
+Theorem 5.19 (Restriction for the Kantorovich duality theorem). Let (X , μ) and (Y, ν) be two Polish probability spaces, let a ∈ L1(μ) and b ∈ L1(ν) be real-valued upper semicontinuous functions, and let c : X × Y → R be a lower semicontinuous cost function such that c(x, y) ≥ a(x) + b(y) for all x, y. Assume that the optimal transport cost C(μ, ν) between μ and ν is finite. Let π be an optimal transference plan, and let ψ be a c-convex function such that π is concentrated on ∂cψ. Let π ̃ be a measure on X × Y satisfying π ̃ ≤ π, and
+Z = π ̃[X × Y] > 0; let π′ := π ̃/Z, and let μ′, ν′ be the marginals of π′. Let X ′ ⊂ X be a closed set containing Spt μ′ and Y′ ⊂ Y a closed set containing Spt ν′. Let c′ be the restriction of c to X ′ × Y′. Then there is a c′-convex function ψ′ : X ′ → R ∪ {+∞} such that
+(a) ψ′ coincides with ψ on projX ((∂cψ) ∩ (X ′ × Y′)), which has full
+μ′-measure;
+(b) π′ is concentrated on ∂c′ ψ′;
+(c) ψ′ solves the dual Kantorovich problem between (X ′, μ′) and (Y′, ν′) with cost c′.
+In spite of its superficially complicated appearance, Theorem 5.19 is very simple. If the reader feels that it is obvious, or alternatively that it is obscure, he or she may just skip the proofs and retain the loose statement that “it is always possible to restrict the cost function”.
+Proof of Lemma 5.18. Let φ = ψc. For y ∈ Y′, define
+φ′(y) =
+{
+φ(y) if ∃ x′ ∈ X ′; (x′, y) ∈ ∂cψ;
+−∞ otherwise.
+For x ∈ X ′ let then
+ψ′(x) = sup
+y∈Y ′
+[φ′(y) − c(x, y)] = sup
+y∈Y ′
+[φ′(y) − c′(x, y)].
+By construction, ψ′ is c′-convex. Since φ′ ≤ φ and Y′ ⊂ Y it is obvious that
+∀x ∈ X ′, ψ′(x) ≤ sup
+y∈Y
+[φ(y) − c(x, y)] = ψ(x).
+Let x ∈ projX ((∂cψ) ∩ (X ′ ∩ Y′)); this means that there is y ∈ Y′ such
+that (x, y) ∈ ∂cψ. Then φ′(y) = φ(y), so
+ψ′(x) ≥ φ′(y) − c(x, y) = φ(y) − c(x, y) = ψ(x).
+
+
+Application: Stability 89
+Thus ψ′ does coincide with ψ on projX ((∂cψ) ∩ (X ′ × Y′)).
+Finally, let (x, y) ∈ ∂cψ ∩(X ′ ×Y′), then φ′(y) = φ(y), ψ′(x) = ψ(x);
+so for all z ∈ X ′,
+ψ′(x) + c′(x, y) = ψ(x) + c(x, y) = φ(y) = φ′(y) ≤ ψ′(z) + c′(z, y),
+which means that (x, y) ∈ ∂c′ψ′. ⊓⊔
+Proof of Theorem 5.19. Let ψ′ be defined by Lemma 5.18. To prove (a), it suffices to note that π′ is concentrated on (∂cψ) ∩ (X ′ × Y′), so μ′ is
+concentrated on projX ((∂cψ) ∩ (X ′ × Y′)). Then π is concentrated on
+∂cψ, so π ̃ is concentrated on ∂cψ ∩ (X ′ × Y′), which by Lemma 5.18
+is included in ∂c′ψ′; this proves (b). Finally, (c) follows from Theorem 5.10(ii). ⊓⊔
+The rest of this chapter is devoted to various applications of Theorem 5.10.
+Application: Stability
+An important consequence of Theorem 5.10 is the stability of optimal transference plans. For simplicity I shall prove it under the assumption that c is bounded below.
+Theorem 5.20 (Stability of optimal transport). Let X and Y be Polish spaces, and let c ∈ C(X × Y) be a real-valued continuous cost function, inf c > −∞. Let (ck)k∈N be a sequence of continuous cost functions converging uniformly to c on X × Y. Let (μk)k∈N and (νk)k∈N be sequences of probability measures on X and Y respectively. Assume that μk converges to μ (resp. νk converges to ν) weakly. For each k, let πk be an optimal transference plan between μk and νk. If
+∀k ∈ N,
+∫
+ck dπk < +∞,
+then, up to extraction of a subsequence, πk converges weakly to some c-cyclically monotone transference plan π ∈ Π(μ, ν). If moreover
+lim inf
+k∈N
+∫
+ck dπk < +∞,
+then the optimal total transport cost C(μ, ν) between μ and ν is finite, and π is an optimal transference plan.
+
+
+90 5 Cyclical monotonicity and Kantorovich duality
+Corollary 5.21 (Compactness of the set of optimal plans). Let X and Y be Polish spaces, and let c(x, y) be a real-valued continuous cost function, inf c > −∞. Let K and L be two compact subsets of P (X ) and P (Y) respectively. Then the set of optimal transference plans π whose marginals respectively belong to K and L is itself compact in P (X × Y).
+Proof of Theorem 5.20. Since μk and νk are convergent sequences, by Prokhorov’s theorem they constitute tight sets, and then by Lemma 4.4 the measures πk all lie in a tight set of X ×Y; so we can extract a further subsequence, still denoted (πk) for simplicity, which converges weakly to some π ∈ Π(μ, ν). To prove that π is c-monotone, the argument is essentially the same as in Step 2 of the proof of Theorem 5.10(i). Indeed, by Theorem 5.10, each πk is concentrated on a ck-cyclically monotone set; so π⊗N
+k is
+concentrated on the set Ck(N ) of ((x1, y1), . . . , (xN , yN )) such that ∑
+1≤i≤N
+ck(xi, yi) ≤ ∑
+1≤i≤N
+ck(xi, yi+1),
+where as usual yN+1 = y1. So if ε > 0 and N are given, for k large
+enough π⊗N
+k is concentrated on the set Cε(N ) defined by ∑
+1≤i≤N
+c(xi, yi) ≤ ∑
+1≤i≤N
+c(xi, yi+1) + ε.
+Since this is a closed set, the same is true for π⊗N , and then by letting ε → 0 we see that π⊗N is concentrated on the set C(N ) defined by ∑
+1≤i≤N
+c(xi, yi) ≤ ∑
+1≤i≤N
+c(xi, yi+1).
+So the support of π is c-cyclically monotone, as desired. Now assume that lim infk→∞
+∫ ck dπk < +∞. Then by the same
+argument as in the proof of Theorem 4.1, ∫
+c dπ ≤ lim inf
+k→∞
+∫
+ck dπk < +∞.
+In particular, C(μ, ν) < +∞; so Theorem 5.10(ii) guarantees the optimality of π. ⊓⊔
+An immediate consequence of Theorem 5.20 is the possibility to select optimal transport plans in a measurable way.
+
+
+Application: Stability 91
+Corollary 5.22 (Measurable selection of optimal plans). Let X , Y be Polish spaces and let c : X × Y → R be a continuous cost function, inf c > −∞. Let Ω be a measurable space and let ω 7−→ (μω, νω) be a measurable function Ω → P (X ) × P (Y). Then there is a measurable choice ω 7−→ πω such that for each ω, πω is an optimal transference plan between μω and νω.
+Proof of Corollary 5.22. Let O be the set of all optimal transference plans, equipped with the weak topology on P (X × Y), and let Φ : O → P (X ) × P (Y) be the map which to π associates its marginals (μ, ν). Obviously Φ is continuous. By Theorem 5.20, O is closed; in particular it is a Polish space. By Theorem 4.1, Φ is onto. By Corollary 5.21 all pre-images Φ−1(μ, ν) are compact. So the conclusion follows from general theorems of measurable selection (see the bibliographical notes for more information). ⊓⊔
+Theorem 5.20 also admits the following corollary about the stability of transport maps.
+Corollary 5.23 (Stability of the transport map). Let X be a locally compact Polish space, and let (Y, d) be another Polish space. Let c : X × Y → R be a lower semicontinuous function with inf c > −∞, and for each k ∈ N let ck : X × Y → R be lower semicontinuous, such that ck converges uniformly to c. Let μ ∈ P (X ) and let (νk)k∈N be a sequence of probability measures on Y, converging weakly to ν ∈ P (Y). Assume the existence of measurable maps Tk : X → Y such that each πk := (Id , Tk)#μ is an optimal transference plan between μ and νk for the cost ck, having finite total transport cost. Further, assume the existence of a measurable map T : X → Y such that π := (Id , T )#μ is the unique optimal transference plan between μ and ν, for the cost c, and has finite total transport cost. Then Tk converges to T in probability:
+∀ε > 0 μ
+[{
+x ∈ X; d(Tk(x), T (x)) ≥ ε
+}]
+−−−→
+k→∞ 0. (5.26)
+Remark 5.24. An important assumption in the above statement is the uniqueness of the optimal transport map T .
+Remark 5.25. If the measure μ is replaced by a sequence (μk)k∈N converging weakly to μ, then the maps Tk and T may be far away from each other, even μk-almost surely: take for instance X = Y = R, μk = δ1/k, μ = δ0, νk = ν = δ0, Tk(x) = 0, T (x) = 1x6=0.
+
+
+92 5 Cyclical monotonicity and Kantorovich duality
+Proof of Corollary 5.23. By Theorem 5.20 and uniqueness of the optimal coupling between μ and ν, we know that πk = (Id , Tk)#μk converges weakly to π = (Id , T )#μ. Let ε > 0 and δ > 0 be given. By Lusin’s theorem (in the abstract version recalled in the end of the bibliographical notes) there is a closed set K ⊂ X such that μ[X \ K] ≤ δ and the restriction of T to K is continuous. So the set
+Aε =
+{
+(x, y) ∈ K × Y; d(T (x), y) ≥ ε
+} .
+is closed in K × Y, and therefore closed in X × Y. Also π[Aε] = 0 since π is concentrated on the graph of T . So, by weak convergence of πk and closedness of Aε,
+0 = π[Aε] ≥ lim sup
+k→∞
+πk[Aε]
+= lim sup
+k→∞
+πk
+[{(x, y) ∈ K × Y; d(T (x), y) ≥ ε}]
+= lim sup
+k→∞
+μ[{x ∈ K; d(T (x), Tk(x)) ≥ ε}]
+≥ lim sup
+k→∞
+μ[{x ∈ X ; d(T (x), Tk(x)) ≥ ε}] − δ.
+Letting δ → 0 we conclude that lim sup μ[d(T (x), Tk(x)) ≥ ε] = 0, which was the goal. ⊓⊔
+Application: Dual formulation of transport inequalities
+Let c be a given cost function, and let
+C(μ, ν) = inf
+π∈Π (μ,ν )
+∫
+c dπ (5.27)
+stand for the value of the optimal transport cost of transport between μ and ν. If ν is a given reference measure, inequalities of the form
+∀μ ∈ P (X ), C(μ, ν) ≤ F (μ)
+arise in several branches of mathematics; some of them will be studied in Chapter 22. It is useful to know that if F is a convex function of

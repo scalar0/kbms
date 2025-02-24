@@ -1,0 +1,2238 @@
+OPTIMAL TRANSPORT
+Contents
+1. The problems of Monge and Kantorovich 2 1.1. Monge's problem 2 1.2. Kantorovich's problem 3 2. One-dimensional optimal transport 5 2.1. Quantile function and one-dimensional Wasserstein spaces 6 3. Kantorovich duality 9 3.1. Derivation of the dual problem 9 3.2. Strong duality 10 3.3. Existence of solution for the dual problem 12 3.4. Stability of optimal transport plans 14 4. Kantorovich's functional 15 4.1. Kantorovich's functional 15 4.2. Solution of Monge's problem 16 4.3. Semi-discrete optimal transport 18 4.4. Oliker Prussner's algorithm 20 5. Entropy-regularized optimal transport 21 5.1. Primal problem 21 5.2. Dual problem 23 5.3. Existence of a solution to the dual 25 5.4. Sinkhorn algorithm as block-coordinate ascent 27 5.5. Linear convergence of Sinkhorn's algorithm 29 6. Wasserstein distances 31 6.1. p-Wasserstein spaces over compact metric spaces 31 6.2. p-Wasserstein geodesics on Rd 33 6.3. Geodesic convexity with respect to W2 on Rd 35 7. Quantization and uniform quantization of measures 38 8. Embedding of the Wasserstein space 38 8.1. Non-embeddability results 39 8.2. Embedding via slicing 41 8.3. Linearization of the quadratic Wasserstein distance 42 9. Stability of quadratic optimal transport maps 44 9.1. Stability near a regular con guration 45 9.2. Stability of potentials for entropy-regularized quadratic optimal transport 46 10. Hölder stability of dual potentials 49 References 51
+1
+
+
+2 OPTIMAL TRANSPORT
+Why study optimal transport ? The main motivation studying optimal transport in statistics is the notion of Wasserstein distance between probability measures on a compact metric space X:
+• The Wasserstein distances Wp represent faithfully the geometry of the underlying space: x ∈ X 7→ δx ∈ P(X) is an isometry. This means that unlike many notions of distances between functions/divergences between probability measures (E.g relative entropy), • Application: inverse problems, Wasserstein GANs • Application: statistics over the space of probability measures, e.g. geodesics barycenters, k-means, PCA... • Application: PDE / particle systems
+References. Introduction to optimal transport, with applications to PDE and/or calculus of variations can be found in books by Villani [42] and Santambrogio [34]. Villani's second book [43] concentrates on the application of optimal transport to geometric questions (e.g. synthetic de nition of Ricci curvature), but its rst chapters might be useful. We also mention Gigli, Ambrosio and Savaré [3] for the study of gradient ows with respect to the Monge-Kantorovich/Wasserstein metric.
+Notation. In the following, we assume that X is a compact metric space, and we denote C0(X) the space of continuous functions over X endowed with the norm of uniform convergence ∥φ∥∞ = supx∈X |φ(x)|. We denote M(X) the
+space of Radon measures on X, which we identify with the continuous dual of C0(X). We will denote ⟨μ|φ⟩ = R φdμ. We de ne
+M+(X) := {μ ∈ M(X) | ∀φ ∈ C0(X), φ ⩾ 0 =⇒ ⟨μ|φ⟩ ⩾ 0}
+P(X) := {μ ∈ M+(X) | ⟨μ|1⟩ = 1}
+The support of a measure μ is denoted spt(μ). The dual space is endowed with the total variation norm
+∥μn∥TV = sup
+φ∈C 0 (X ),∥φ∥∞ ⩽1
+⟨μ|φ⟩.
+However, the topology that we will consider by default on M0(X) is the weak∗ topology. We recall for instance that a sequence (μn)n⩾0 of measures converges weak∗ to μ if and only if
+∀φ, lim
+n→+∞⟨μn|φ⟩ = ⟨μ|φ⟩.
+We note that thanks to the Banach-Alaoglu theorem, any bounded sequence (μn)n∈N in M(X) admits a weak∗ converging subsequence. This applies in particular to any sequence in P(X): the space of probability measures is weak∗ sequentially compact (and even compact).
+1. The problems of Monge and Kantorovich
+1.1. Monge's problem.
+De nition 1 (Push-forward and transport map). Let X, Y be compact metric spaces, μ ∈ M(X) and let T : X → Y be a measurable map. The push-forward of μ by T is the measure T#μ on Y de ned by
+∀B ⊆ Y, T#μ(B) = μ(T −1(B)).
+
+
+OPTIMAL TRANSPORT 3
+or equivalently if the following change-of-variable formula holds for all test function φ ∈ C0(Y ):
+Z
+Y
+φ(y)dν(y) =
+Z
+X
+φ(T (x))dμ(x).
+A measurable map T : X → Y such that T#μ = ν is also called a transport map between μ and ν.
+Example 1. If Y = {y1, . . . , yn}, then T#μ = P
+1⩽i⩽n μ(T −1({yi}))δyi .
+De nition 2 (Monge's problem). Consider two metric spaces X, Y , two probability measures μ ∈ P(X), ν ∈ P(Y ) and a cost function c : X × Y → R ∪ {+∞}. Monge's problem is the following optimization problem
+(MP) := inf
+Z
+X
+c(x, T (x))dμ(x) | T : X → Y and T#μ = ν (1.1)
+This problem exhibits several di culties, one of which is that both the constraint (T#μ = ν) and the functional are non-convex.
+Example 2. There might exist no transport map between μ and ν. For instance, consider μ = δx for some x ∈ X. Then, T#μ(B) = μ(T −1(B)) = δT (x). In particular, if ν is not a Dirac mass, then there exists no transport map between μ and ν.
+1.2. Kantorovich's problem.
+De nition 3 (Transport plan). Let X, Y be two metric spaces and μ ∈ M+(X) and ν ∈ M+(Y ) be two non-negative measures. A transport plan between μ and ν is a non-negative measure γ on the product space X × Y whose marginals are μ and ν. The set of transport plans is denoted
+Γ(μ, ν) = {γ ∈ M+(X × Y ) | ΠX#γ = μ, ΠY #γ = ν} ,
+where ΠX : X × Y → X and ΠY : X × Y → Y are the projection maps. Note that Γ(μ, ν) is a convex set, and that it is non-empty if and only if μ and ν have the same total mass, i.e. μ(X) = ν(Y ).
+De nition 4 (Kantorovich's problem). Given two metric spaces X, Y , two non-negative measures μ ∈ P(X), ν ∈ P(Y ) and a continuous cost function c ∈ C0(X × Y ), Kantorovich's problem is the following optimization problem
+(KP) := inf {⟨c|γ⟩ | γ ∈ Γ(μ, ν)} (1.2)
+We will denote T c the associated transport cost
+T c : M+(X) × M+(Y ) → R ∪ {+∞}
+(μ, ν) 7→ inf{⟨c|γ⟩ | γ ∈ Γ(μ, ν)}. (1.3)
+Note that by convention, the in mum over the empty set is +∞, so that T c(μ, ν) = +∞ if μ(X) ̸= ν(Y ).
+Remark 1. The in mum in Kantorovich's problem is less than the in mum in Monge's problem. Indeed, consider a transport map satisfying T#μ = ν and the associated transport plan γT = (id, T )#μ. Then, by the change-ofvariable formula one has
+⟨c|γT ⟩ ⩽
+Z
+X ×Y
+c(x, y)d(id, T )#μ(x, y) =
+Z
+X
+c(x, T (x))dμ,
+
+
+4 OPTIMAL TRANSPORT
+thus proving the claim.
+Example 3 (Finite support). Assume that X = Y = {1, . . . , N } and that μ, ν are the uniform probability measures over X and Y . Then, Monge's problem can be rewritten as a minimization problem over the set of bijections between the two sets X and Y :
+min
+
+
+
+1 N
+X
+1⩽i⩽N
+c(i, σ(i)) | σ ∈ SN
+
+
+
+.
+In Kantorovich's relaxation, the set of transport plans Γ(μ, ν) agrees with the set of bi-stochastic matrices :
+γ ∈ Γ(μ, ν) ⇐⇒ γ ⩾ 0, X
+i
+γ(i, j) = 1/N =
+X
+j
+γ(i, j).
+By Birkho 's theorem, any extremal bi-stochastic matrix is induced by a permutation. This shows that, in this case, the solution to Monge's and Kantorovich's problems agree.
+Theorem 1 (Existence of solutions to (KP)). Let X, Y be compact metric spaces and let c ∈ C0(X × Y ). Then for any measures (μ, ν) ∈ M+(X)×M+(Y ) with equal total mass, Kantorovich's problem (KP) admits a minimizer. Moreover, the transport cost T c is a convex and weak∗ lower semicontinuous functional on M+(X) × M+(Y ).
+Proposition 2. Let X, Y be compact metric spaces and let (μn)n∈N and (νn)n∈N be sequences of non-negative measures on X and Y with same total
+mass. Assume that these sequence weak∗ converge to μ ∈ M+(X) and ν ∈ M+(Y ) respectively. Then, any sequence of transport plans γn ∈ Γ(μn, νn) admits a subsequence converging to some γ ∈ Γ(μ, ν).
+In particular, the previous proposition implies that Γ(μ, ν) is compact.
+Proof. Since μn ⩾ 0, one has ∥μn∥TV = ⟨μn|1⟩, which converges to ∥μ∥TV
+by weak∗ convergence. Thus the sequence (μn) is bounded. Since
+∥γn∥TV = ⟨γn|1⟩ = ⟨Π#γn|1⟩ = ⟨μn|1⟩,
+the sequence (γn)n∈N is also bounded. By Banach-Alaoglu's theorem, it admits a weak∗ converging subsequence. Relabeling if necessary, we therefore assume that γn converges weak∗ to some γ ∈ M(X × Y ). Then,
+∀φ ∈ C0(X × Y ) s.t. φ ⩾ 0, ⟨γ|φ⟩ = lim
+n→+∞⟨γn|φ⟩ ⩾ 0
+so that γ is a non-negative measures. Given φ ∈ C0(X) and φˆ(x, y) := φ(x), using ΠX#γn = μn we get ⟨φ|μn⟩ = ⟨φ|ΠX#γn⟩ = ⟨φˆ|γn⟩. Taking the limit as n → +∞, we deduce that ⟨φ|μ⟩ = ⟨φˆ|γ⟩ for all φ, implying that ΠX#γ = μ. Similarly, we prove that ΠY #γ = ν, proving that γ ∈ Γ(μ, ν). □
+Proof of theorem 1. We rst note that the function γ 7→ ⟨c|γ⟩ is linear and continuous on M(X × Y ). Second, we note that if μ(X) = ν(Y ), the set Γ(μ, ν) is non-empty as it contains a suitably rescaled product of μ and ν. The previous lemma shows that the set Γ(μ, ν) is weak∗ compact, so that
+
+
+OPTIMAL TRANSPORT 5
+⟨c|γ⟩ attains its minimum on this set. This shows existence of at least one solution to (KP). To prove that T c is lower semicontinous, we consider converging sequences (μn), (νn) in M+(X) and M+(Y ) respectively. with weak∗ limits μ and ν. Without loss of generality, we assume that μn and νn have the same total mass (if not, T c(μn, νn) = +∞). For each n we consider γn ∈ Γ(μn, νn) the optimal transport plan. Using the previous proposition, we assume taking a subsequence if necessary that γn converges to some γ ∈ Γ(μ, ν). Then,
+T c(μ, ν) ⩽ ⟨c|γ⟩ = lim
+n→+∞⟨c|γn⟩ = lim
+n→+∞ T c(μn, νn).
+□
+2. One-dimensional optimal transport
+De nition 5 (Monotone set). A subset S of R × R is called monotone if
+∀(x, y), (x′, y′) ∈ S, (x′ − x) · (y′ − y) ⩾ 0.
+De nition 6 (Submodular cost). A cost function c : R × R → R is called strictly submodular if for every x0 < x1, the function y 7→ c(x1, y) − c(x0, y) is decreasing.
+Theorem 3. Let μ, ν be probability measures supported in X = Y = [a, b] ⊆ R, and let c be a continuous and strictly submodular cost on X × Y . Then, there exists a unique optimal transport plan γ ∈ Γ(μ, ν), which is also the unique transport plan with monotone support.
+Proof. Step 1. We rst establish that any optimal transport plan between μ and ν must be monotone. Consider a transport plan γ ∈ Γ(μ, ν) and consider (x0, y0) and (x1, y1) in spt(γ). Since we want to prove that (x0 − x1)(y0 − y1) ⩽ 0, we may assume that x1 ̸= x0 and y1 ̸= y0. By continuity of the cost, for any δ > 0 there exists r > 0 such that:
+B((x0, y0), r) ∩ B((x1, y1), r) ̸= ∅
+∀a, b ∈ {x1, x0, y1, y0}, ∀(x, y) ∈ B((a, b), r), |c(x, y) − c(a, b)| ⩽ δ
+Since (x0, y0) and (x1, y1) both belong to the support of γ, there must exist non-negative measures γ0 ⩽ γ and γ1 ⩽ γ with equal positive mass ε and such that spt(γi) ⊆ B((xi, yi), r). Consider the marginals μi = πX#γi and νi = πY #γi, and take any coupling σ0 (resp. σ1) between μ0 and ν1 (resp. μ1 and ν0). Then, one can check that the measure
+σ = γ − γ0 − γ1 + σ0 + σ1
+is a transport plan between μ and ν (the non-negativity comes from γi ⩽ γ and spt(γ1) ∩ spt(γ0) = ∅). Using the optimality of γ one gets
+0 ⩽ F (σ) − F (γ) = F (σ0) − F (γ0) + F (σ1) − F (γ1)
+=
+Z
+B(x0,r)×B(y1,r)
+cdσ0 +
+Z
+B(x1,r)×B(y0,r)
+cdσ1
+−
+Z
+B(x0,r)×B(y0,r)
+cdγ0 −
+Z
+B(x1,r)×B(y1,r)
+cdγ1
+⩽ ε · (c(x0, y1) + c(x1, y0) − c(x0, y0) − c(x1, y1) + 4δ)
+
+
+6 OPTIMAL TRANSPORT
+Since this holds for all δ > 0 small enough, we deduce that
+c(x0, y0) + c(x1, y1) ⩽ c(x0, y1) + c(x1, y0).
+Assume without loss of generality that x0 < x1. Then,
+c(x1, y1) − c(x0, y1) ⩽ c(x1, y0) − c(x1, y0),
+thus implying by submodularity (the function y 7→ c(x1, y1) − c(x0, y1) is decreasing) that y0 ⩽ y1. Step 2. We show that there exists at most one monotone transport plan between μ and ν. Recall that a probability measure γ on R2 is uniquely de ned from the values γ((−∞, a] × (−∞, b]) for any a, b ∈ R. This follows from the fact that such sets generate the Borel σ-algebra. Consider A = (−∞, a] × (b, +∞) and B = (a, +∞) × (−∞, b]. Then, by monotonicity of spt(γ) one cannot have γ(A) > 0 and γ(B) > 0 at the same time. Hence,
+γ((−∞, a] × (−∞, b]) = min(γ(((−∞, a] × (−∞, b]) ∪ A),
+γ(((−∞, a] × (−∞, b]) ∪ B))
+= min(μ((−∞, a]), ν((−∞, b])).
+This shows that γ((−∞, a] × ((−∞, b]) is uniquely de ned from μ, ν, so that γ is unique. □
+2.1. Quantile function and one-dimensional Wasserstein spaces.
+De nition 7 (Cdf and quantile function). Let μ be a probability measure on R. The cumulative distribution function Fμ : R → [0, 1] and the inverse cumulative distribution function Tμ : [0, 1] → R are de ned by:
+Fμ(x) = μ((−∞, x]) Tμ(m) = inf {x ∈ R | Fμ(x) ⩾ m} .
+The function Tμ will also be called the quantile function.
+In the following, we assume that X is a segment of R.
+De nition 8 (Wasserstein distance). TheWasserstein distance of exponent p ⩾ 1 between two probability measures μ, ν ∈ P(X) is de ned by
+Wp
+p(μ, ν) = min
+γ∈Γ(μ,ν)
+Z
+∥x − y∥p dγ(x, y).
+Proposition 4 (Quantile functions and Wasserstein distance). Let μ, ν be two probability measure on a segment X ⊆ R. Then,
+(i) Tμ is a transport map between the Lebesgue measure λ[0,1] and μ (ii) γμ→ν = (Tμ, Tν)#λ[0,1] is the unique monotone transport plan between μ and ν; (iii) for all p ⩾ 1, Wp(μ, ν) = ∥Tμ − Tν ∥Lp([0,1]).
+Example 4 (Translation). If ν is obtained by translating ν by a constant v ∈ R, then Tν = Tμ + v so that Wp(μ, ν) = ∥Tμ − Tν ∥Lp([0,1]) = |v|.
+Example 5 (Discrete measures). If μ = 1
+N
+PN
+i=1 δxi and the sequence (xi)1⩽i⩽N
+is increasing, then the quantile function satis es
+Tμ|[ i−1
+n ,i
+n ] = xi.
+
+
+OPTIMAL TRANSPORT 7
+In particular, if ν = 1
+N
+PN
+i=1 δyi, where the sequence y1⩽i⩽N is also increasing,
+Wp(μ, ν)p = 1
+N
+X
+i
+∥xi − yi∥p .
+Proof. (i) Let μˆ = Tμ#λ[0,1]. Then,
+Fμˆ(x) = μˆ((−∞, x])
+= λ(T −1
+μ (−∞, x])
+= λ({m ∈ [0, 1], Tμ(m) ⩽ x}
+= λ({m ∈ [0, 1], Fμ(x) ⩾ m})
+= Fμ(x).
+were we used the equivalence Tμ(m) ⩽ x i Fμ(x) ⩾ m. This shows that μˆ = μ.
+(ii) Denote γ := γμ→ν . We note rst that ΠX#γ = ΠX ◦ (Tμ, Tν )#λ[0,1] = μ, and similarly ΠY #γ = ν. Thus, γ is a transport plan between μ and ν. In addition, γ is supported on the set S := {(Tμ(m), Tν(m)) | m ∈ [0, 1]}. Given two couples (xi, yi) ∈ S, there exists mi ∈ [0, 1] such that xi = Tμ(mi) and yi = Tν(mi). Without loss of generality, assume that m0 ⩽ m1. Then, Tμ(m0) ⩽ Tμ(m1) and Tν(m0) ⩽ Tν(m1) so that
+(x1 − x0)(y1 − y0) ⩾ 0,
+implying that S is monotone. (iii) Theorem 3 proves that a solution to the optimal transport problem is
+given between μ and ν for the convex cost c(x, y) = ∥x − y∥p is given by the monotone plan, i.e.
+min
+γ∈Γ(μ,ν)
+Z
+∥x − y∥p dγ(x, y) =
+Z
+∥x − y∥p dγμ→ν (x, y)
+=
+Z
+∥x − y∥p d(Tμ, Tν )#λ[0,1] (x, y)
+=
+Z1
+0
+∥Tμ(m) − Tν(m)∥p dm
+= ∥Tμ − Tν ∥p
+Lp([0,1]) □
+Proposition 5 (Properties of the 1D Wasserstein spaces). The following properties hold for any segment X ⊆ R and any p ⩾ 1:
+(i) Wp is a distance on P(X) (ii) Wp metrizes weak∗ convergence on P(X), i.e. for any sequence (μn) in P(X) and any μ ∈ P(X),
+lim
+n→+∞ Wp(μn, μ) = 0 ⇐⇒ ∀φ ∈ C0(X), lim
+n→+∞⟨μn|φ⟩ = ⟨μ|φ⟩.
+(iii) the application μ 7→ Tμ mapping a probability measure to its inverse cdf is an isometric embedding of (P(X), Wp(X)) into Lp([0, 1]).
+Proof. (i) We note that Wp(μ, ν) = 0 implies that Tμ = Tν a.e., so that μ = Tμ#λ[0,1] = Tν#λ[0,1] = nu. The symmetry is immediate, and the triangle inequality for Wp follows from the triangle inequality in Lp([0, 1]).
+
+
+8 OPTIMAL TRANSPORT
+(ii) Assume rst that Wp(μn, μ) = ∥Tμn − Tμ∥Lp([0,1]) converges to zero as n → +∞. Then, ∥Tμn − Tμ∥L1([0,1]) also converges to zero as n → +∞. Let f : X → R be L-Lipschitz. Then,
+|⟨f |μn − μ⟩| =
+Z1
+0
+f (Tμn(m)) − f (Tμ(m))dm
+⩽L
+Z1
+0
+∥Tμn(m) − Tμ(m)∥ dm
+= L W1(μn, μ) n→+∞
+−−−−−→ 0
+Since continuous functions on X can be uniformly approximated by Lipschitz functions, we get weak∗ convergence. Conversely, assume that μn converges weakly to μ. The non-decreasing map Tμ is continuous on [0, 1] \ Z, where Z is at most countable. It is standard that for any x ̸∈ Z, Tμn(x) converges to Tμ(x) as n → +∞, i.e. Tμn converges a.e. to Tμ. Since in addition Tμn is bounded, we deduce that
+convergence holds in Lp([0, 1]) for any p ⩾ 1. □
+De nition 9 (Geodesic). Let (E, d) be a metric space. A constant speed geodesic between two points x0, x1 ∈ E is a continuous curve x : [0, 1] → E such that for every s, t ∈ [0, 1], d(xs, xt) = |s − t| d(x0, x1).
+Proposition 6. Let X be a segment of R and let μ0, μ1 ∈ P(X). De ne
+μt := Tt#λ[0,1], where Tt = (1 − t)Tμ0 + tTμ1
+Then, the curve μt is a constant speed geodesic between μ0 and μ1 in the space (P(X), Wp), for any exponent p ⩾ 1. In particular, this space is a geodesic space, meaning that any μ0, μ1 ∈ Pp(X) can be joined by (at least one) constant speed geodesic.
+Proof. First note that if 0 ⩽ s ⩽ t ⩽ 1,
+Wp(μ0, μ1) ⩽ Wp(μ0, μs) + Wp(μs, μt) + Wp(μt, μ1),
+so that it su ces to prove the inequality Wp(μs, μt) ⩽ |t − s| Wp(μ0, μ1) for all 0 ⩽ s ⩽ t ⩽ 1 to get equality. The inequality is easily checked by taking γst := (Ts, Tt)#λ[0,1] ∈ Γ(μs, μt), so that
+Wp(μs, μt)p ⩽
+Z
+∥Ts(m) − Tt(m)∥p dm
+=
+Z
+∥(1 − s)T0(m) + sT1(m) − ((1 − t)T0(m) + tT1(m))∥p dm
+=
+Z
+∥(t − s)(T0(m) − Tt(m))∥p dm = (t − s)p Wp(μ, ν)p □
+Remark 2 (Barycenters). We can also consider barycenters in the Wasserstein, at least in the case p = 2 and on a segment X. The weighted barycenter of probability measures μ0, . . . , μk ∈ P(X) with weights α1, . . . , αk > 0 is the unique minimizer of
+min
+μ∈P (X )
+X
+1⩽i⩽k
+αk W2
+2(μk, μ).
+
+
+OPTIMAL TRANSPORT 9
+The quantile function of the barycenter μ therefore solves the following minimization problem
+Tμ ∈ arg mTin
+X
+1⩽i⩽k
+αk ∥Tμk − T ∥2
+L2([0,1]) ,
+so that Tμ is simply a weighted average of the Tμk :
+Tμ = 1
+P
+k αk
+X
+1⩽i⩽k
+αkTμk .
+The barycenter is nally recovered thanks to the formula μ = Tμ#λ[0,1], i.e.
+μ=
+
+
+1
+P
+k αk
+X
+1⩽i⩽k
+αk Tμk
+
+
+#
+λ[0,1].
+3. Kantorovich duality
+3.1. Derivation of the dual problem. The primal Kantorovich problem (KP) can be reformulated by introducing Lagrange multipliers for the constraints. Namely, we use that for any γ ∈ M+(X × Y ),
+sup
+φ∈C 0 (X )
+−⟨φ ⊗ 1|γ⟩ + ⟨φ|μ⟩ =
+(
+0 if ΠX#γ = μ +∞ if not
+sup
+φ∈C 0 (X )
+−⟨1 ⊗ ψ|γ⟩ + ⟨ψ|μ⟩ =
+(
+0 if ΠX#γ = μ +∞ if not
+to deduce that for any γ ∈ M+(X × Y ),
+sup
+φ∈C0(X),ψ∈C0(Y )
+⟨φ|μ⟩ + ⟨ψ|ν⟩ − ⟨φ ⊕ ψ|γ⟩ =
+(
+0 if γ ∈ Γ(μ, ν) +∞ if not.
+This leads to the following formulation of the Kantorovich problem
+(KP) = inf
+γ∈M+(X×Y )
+sup
+(φ,ψ)∈C0(X)×C0(Y )
+⟨c − (φ ⊕ ψ)|γ⟩ + ⟨φ|μ⟩ − ⟨ψ|ν⟩
+Kantorovich dual problem is simply obtained by inverting the in mum and the supremum:
+(KD) := sup
+φ,ψ
+inf
+γ⩾0⟨c − (φ ⊕ ψ)|γ⟩ + ⟨φ|μ⟩ − ⟨ψ|ν⟩.
+Note that we will often omit the assumptions that γ ∈ M(X × Y ) and φ, ψ are continuous, when the context is clear. The dual problem can further be simpli ed by remarking that
+inf
+γ⩾0⟨c − φ ⊕ ψ|γ⟩ =
+(
+0 if φ ⊕ ψ ⩽ c −∞ if not.
+De nition 10 (Kantorovich's dual problem). Given μ ∈ P(X) and ν ∈ P(Y ) with X, Y compact metric spaces and c ∈ C0(X × Y ), we de ne Kantorovich's dual problem by
+(KD) = sup
+Z
+X
+φdμ +
+Z
+Y
+ψdν | (φ, ψ) ∈ C0(X) × C0(Y ), φ ⊕ ψ ⩽ c
+(3.4)
+
+
+10 OPTIMAL TRANSPORT
+Proposition 7. Weak duality holds, i.e. (KP) ⩾ (KD).
+Proof. Given (φ, ψ, γ) ∈ C0(X) × C0(Y ) × Γ(μ, ν) satisfying the constraint φ ⊕ ψ ⩽ c, one has
+⟨φ|μ⟩ + ⟨ψ|ν⟩ = ⟨φ ⊕ ψ|γ⟩ ⩽ ⟨c|γ⟩,
+where we used γ ∈ Γ(μ, ν) to get the equality and φ ⊕ ψ ⩽ c to get the inequality. As a conclusion,
+(KD) = sup
+φ⊕ψ⩽c
+⟨φ|μ⟩ − ⟨ψ|ν⟩ ⩽ min
+γ∈Γ(μ,ν)
+⟨c|γ⟩ = (KP) □
+Remark 3. As often, the Lagrange multipliers (or Kantorovich potentials) φ, ψ have an economic interpretation as prices. For instance, imagine that μ is the distribution of sand available at quarries, and ν describes the amount of sand required by construction work. Then, (KP) can be interpreted as nding the cheapest way of transporting the sand from μ to ν for a construction company. Imagine that this company wants to externalize the transport, by paying a loading coast φ(x) at a point x (in a quarry) and an unloading coast ψ(y) at a point y (at a construction place). Then, the constraint φ(x)+ψ(y) ⩽ c(x, y) translates the fact that the construction company would not externalize if its cost is higher than the cost of transporting the sand by itself. Then, Kantorovich's dual problem (KD) describes the problem of a transporting company: maximizing its revenue R φdμ + R ψdν under the constraint φ ⊕ ψ ⩽ c imposed by the construction company. The economic interpretation of the strong duality (KP) = (KD) is that in this setting, externalization has exactly the same cost as doing the transport by oneself.
+The questions that we will address now are the following:
+• When does strong duality ((KP) = (KD)) hold ? • When is the supremum in Kantorovich's dual problem attained ? • What does Kantorovich's duality imply about Monge's problem, stability of optimal transport maps/plans, numerics, etc ?
+3.2. Strong duality. We prove strong duality using a strategy recently proposed by Savaré and Sodini [35], which relies only the Fenchel-Moreau theorem from convex analysis. In addition to the transport cost functional,
+T c : M(X) × M(Y ) → R ∪ {+∞}
+(μ, ν) 7→
+(
+inf{⟨c|γ⟩ | γ ∈ Γ(μ, ν)} if μ ⩾ 0, ν ⩾ 0, and μ(X) = ν(Y ) +∞ otherwise (3.5) we will consider the following, non-convex and very singular functional, which encodes the cost of transport between Dirac masses with the same weight:
+Fc : M(X) × M(Y ) → R ∪ {+∞}
+(μ, ν) 7→
+(
+mc(x, y) if μ = mδx, ν = mδy and m ⩾ 0 +∞ otherwise
+(3.6)
+Theorem 8 (Savaré and Sodini). T c = Fc∗∗
+
+
+OPTIMAL TRANSPORT 11
+Corollary 9 (Strong duality in Kantorovich's problem). (KP) = (KD).
+The proof ot these results rely on the Fenchel-Moreau theorem from convex analysis. To state this theorem, we need to de ne the convex and convex biconjugate of a function on a topological vector space.
+De nition 11 (Convex conjugate). Let E be a topological vector space. The convex conjugate of a function F : E → R ∪ {+∞} is the function F ∗ on the dual space E∗ de ned by
+F ∗(x∗) = sup
+x∈E
+⟨x∗|x⟩ − F (x).
+The biconjugate of F is then de ned as F ∗∗ : E → R ∪ {+∞} by
+F ∗∗(x) = sup
+x∗∈E∗
+⟨x∗|x⟩ − F ∗(x∗).
+It is quite easy to see that F ∗ and F ∗∗ are convex and lower semicontinuous, as suprema of continuous a ne functions. Fenchel-Moreau's theorem show that F ∗∗ is in fact the lower semicontinuous convex envelope of F , i.e. the largest lsc convex function that lies below F .
+Theorem 10 (Fenchel-Moreau). Let E be a locally convex and separated topological vector space and let F : E → R ∪ {+∞}. Then F ∗∗ is the lsc convex envelope of F , i.e. the largest lsc convex function that lies below F . In particular, F = F ∗∗ if and only if F is convex and lower semicontinuous.
+Proof. Let G be the lsc convex envelope of F . We rst prove that F ∗∗ ⩽ G. Given any point x ∈ E, the de nition of F ∗ as a supremum gives F ∗(x∗) ⩾ ⟨x∗|x⟩ − F (x). Thus,
+F ∗∗(x) = sup
+x∗∈E∗
+⟨x∗|x⟩ − F ∗(x∗) ⩽ sup
+x∗∈E∗
+⟨x∗|x⟩ − (⟨x∗|x⟩ − F (x)) = F (x).
+This shows that the lsc convex function F ∗∗ lies below F , so that F ∗∗ lies below the lsc convex envelope of F . To prove that F ∗∗ ⩾ G, we use the following representation of G as the maximum of continuous a ne functions that lie below F :
+G(x) = sup {⟨x∗|x⟩ + α | (x∗, α) ∈ X∗ × R s.t. ⟨x∗|·⟩ + α ⩽ F } .
+We now choose some a ne function de ned by (x∗, α) ∈ E∗ × R and lying below F , i.e. such that F ⩾ ⟨x∗|·⟩ + α. Then,
+F ∗(x∗) ⩽ sup
+x∈X
+⟨x∗|x⟩ − F (x) ⩽ sup
+x∈X
+⟨x∗|x⟩ − (⟨x∗|x⟩ + α) = −α.
+This implies that F ∗∗(x) ⩾ ⟨x∗|x⟩ − F ∗(x) ⩾ ⟨x∗|x⟩ + α. In other words, F ∗∗ is larger than any a ne function that lies below F , i.e. F ∗∗ ⩾ G. □
+Proof of Theorem 8. We need to compute the convex conjugate and biconjucate of the functional Fc. This functional is de ned on the space M(X) × M(Y ) endowed with the product of the weak∗-topologies, making it a locally convex and separated topological vector space. By de nition of the weak∗
+
+
+12 OPTIMAL TRANSPORT
+topology, M(X)∗ = C0(X), so that we may identify (M(X) × M(X))∗ with C0(X) × C0(Y ). We have
+F∗
+c (φ, ψ) = sup
+μ,ν
+⟨μ|φ⟩ + ⟨ν|ψ⟩ − F (μ, ν)
+= sup
+x,y∈X,m⩾0
+m(⟨δx|φ⟩ + ⟨δy|ψ⟩ − c(x, y))
+= sup
+x,y∈X,m⩾0
+m(φ(x) + ψ(y) − c(x, y))
+=
+(
+0 if φ ⊕ ψ ⩽ c +∞ otherwise
+Therefore, the biconjugate of Fc is given by
+F ∗∗
+c (μ, ν) = sup
+φ,ψ
+⟨μ|φ⟩ + ⟨ν|ψ⟩ − F ∗
+c (φ, ψ)
+= sup
+φ⊕ψ⩽c
+⟨μ|φ⟩ + ⟨ν|ψ⟩ = (KD).
+Recall that Fc∗∗ is the largest lsc convex function that lie below Fc. Since T c is
+lsc convex and also lies below Fc, we deduce that (KD) = Fc∗∗ ⩾ T c = (KP). Since we already know (by weak duality) that (KP) ⩾ (KD), we deduce strong duality ((KP) = (KD)) and Fc∗∗ = T c. □
+3.3. Existence of solution for the dual problem. Kantorovich's dual problem (KD) consists in maximizing a concave (actually linear) functional under linear inequality constraints. It can also also easily be turned into an unconstrained minimization problem. The idea is quite simple: given a certain ψ ∈ C0(Y ), one wishes to select φ on X which is as large as possible (to maximize the term ⟨φ|μ⟩ in (KD)) while satisfying the constraint φ ⊕ ψ ⩽ c. This constraint can be rewritten as
+∀x ∈ X, φ(x) ⩽ min
+y∈Y c(x, y) − ψ(y).
+The largest function φ satisfying it is φ(x) = miny∈Y c(x, y) − ψ(y). Thus,
+(KP) = sup
+φ⊕ψ⩽c
+⟨φ|μ⟩ + ⟨ψ|ν⟩
+= sup
+ψ∈C0(Y )
+Z
+X
+min
+y∈Y c(x, y) − ψ(y) dμ(x) +
+Z
+ψ(y)dν(y).
+This idea is at the basis of many algorithms to solve discrete instances of optimal transport, but also useful in theory. It also suggests to introduce the notion of c-transform.
+De nition 12 (c-Transform, c-Concavity). The c-transform (resp. c-transform) of a function ψ : Y → R ∪ {+∞} (resp. φ : X → R ∪ {+∞}) is
+ψc : x ∈ X 7→ min
+y∈Y c(x, y) − ψ(y) (3.7)
+φc : y ∈ Y 7→ min
+x∈X c(x, y) − φ(x) (3.8)
+A function φ on X is called c-concave if φ = ψc for some ψ ∈ C0(Y ). Similarly, a function ψ on Y is called c-concave if ψ = φc for some φ ∈ C0(X).
+
+
+OPTIMAL TRANSPORT 13
+Thanks to this notion of c-transform, one can reformulate the dual problem (KD) as an unconstrained maximization problem:
+(KD) = sup
+ψ∈C0(Y )
+Z
+X
+ψcdμ +
+Z
+Y
+ψdν. (3.9)
+Theorem 11 (Existence of dual potentials). The dual Kantorovich problem (KD) admits a maximizer. Moreover, for any x0 ∈ X there exists a maximizer of the form (φ, ψ), such that φ = ψc and ψ = φc, and satisfying φ(x0) = 0.
+The existence of maximizers follows from the fact that a c-concave/cconvex function has the same modulus of continuity as c.
+De nition 13 (Modulus of continuity). A real-valued function f on a metric space (Z, dZ) has modulus of continuity ω : R+ → R if ω satis es limt→0 ω(t) = 0 and if for every z, z′ ∈ Z, |f (z) − f (z′)| ⩽ ω(dZ (z, z′)).
+Lemma 12 (Properties of c-transforms). Let ω : R+ → R+ be a modulus of continuity for c ∈ C0(X × Y ) for the distance
+dX×Y ((x, y), (x′, y′)) = dX (x, x′) + dY (y, y′).
+Then for every φ ∈ C0(X) and every ψ ∈ C0(Y ),
+• φc and ψc also admits ω as modulus of continuity. • ψcc ⩾ ψ and ψccc = ψc. • φcc ⩾ φ and φccc = φc.
+Proof. (i) Let ψ ∈ C0(Y ) and let x be a point in X. By compactness, there exists a point yx in Y realizing the minimum in the de nition of ψc. Then, for every x′ ∈ X,
+ψc(x′) = min
+y∈Y c(x′, y) − ψ(y)
+⩽ c(x′, yx) − ψ(yx) = ψc(x) + c(x′, yx) − c(x, yx)
+⩽ ψc(x) + ω(dX (x, x′)).
+Exchanging the role of x and x′ we get |ψc(x′) − ψc(x)| ⩽ ω(dX (x, x′)) as desired. The proof that φc has the ω as modulus of continuity is similar. (ii) By de nition, of the c and c-transforms, one has
+ψcc(y) = min
+x∈X c(x, y) − min
+y ̃∈Y c(x, y ̃) − ψ(y ̃) .
+Taking y ̃ = y, one gets ψcc(y) ⩾ ψ(y). Again, by de nition, we have
+ψccc(x) = min
+y∈Y c(x, y) − min
+x ̃∈X c(x ̃, y) − min
+y ̃∈Y c(x ̃, y ̃) − ψ(y ̃) .
+By taking x ̃ = x , one gets ψccc(x) ⩾ ψc(x), while taking y ̃ = y gives us ψccc(x) ⩽ ψc(x). The claim (iii) is proven similarly. □
+Proof of Theorem 11. Let (φn, ψn)n∈N be a maximizing sequence for (KD),
+i.e. φn ⊕ ψn ⩽ c and limn→+∞⟨φn|μ⟩ + ⟨ψn|ν⟩ = (KD). De ne φˆn = ψcn and
+ψˆn = φˆnc. Then φˆn ⊕ ψˆn ⩽ c, φn ⩽ φˆn and ψn ⩽ ψˆn, which implies
+⟨φn|μ⟩ + ⟨ψn|ν⟩ ⩽ ⟨φˆn|μ⟩ + ⟨ψˆn|ν⟩.
+
+
+14 OPTIMAL TRANSPORT
+Thus, the sequence (φˆn, ψˆn)n∈N is also a maximizing sequence for (KD). We note at this point that it is possible to assume that φˆn(x0) = 0 for all n, where x0 is a given point in X. Indeed, if this is not the case, we may replace the original sequence (φˆn, ψˆn)n∈N by (φˆn − φˆn(x0), ψˆn + φˆn(x0))n∈N, which is also admissible and has the same dual value.
+We now prove that the sequence (φˆn, ψˆn) admits a converging subsequence. By Lemma 12, the sequences (φˆn)n and (ψˆn)n are equicontinuous. Since φˆn(x0) = 0, we deduce from uniform continuity that the sequence (φˆn)n∈N is uniformly bounded. Then, using
+ψˆn(y) = φˆc
+n(y) = max
+x∈X c(x, y) − φˆn(x),
+we deduce that ∥ψˆn∥∞ ⩽ ∥c∥∞ + ∥φˆn∥∞ so that (φˆn)n∈N is also uniformly bounded. By Arzelà-Ascoli's theorem, both sequences therefore admit converging subsequences. The limit potentials are then maximizers for (KD) because the functional which is maximized in (KD) is continuous. □
+3.4. Stability of optimal transport plans.
+Proposition 13 (Support of OT plans). Let (φ, ψ) ∈ C0(X) × C0(Y ) be admissible for the problem (KD), i.e. φ ⊕ ψ ⩽ c, and let γ ∈ Γ(μ, ν) be a transport plan. Then the two assertions are equivalent • γ is an optimal transport plan and (φ, ψ) is a maximizer in (KD) • spt(γ) ⊆ {(x, y) ∈ X × Y | φ(x) ⊕ ψ(y) = c(x, y)}.
+Proof. Using rst the admissibility of (φ, ψ) and then γ ∈ Γ(μ, ν),
+0 ⩽ ⟨c|γ⟩ − ⟨φ ⊕ ψ|γ⟩ = ⟨c|γ⟩ − (⟨φ|μ⟩ + ⟨ψ|ν⟩
+We see that the last term vanishes if and only if γ minimizes (KP) and (φ, ψ) maximizes (KD) (and if strong duality, (KP) = (KD), holds). But this term also vanishes if and only if the rst inequality is an equality. Since φ⊕ψ ⩽ c, this is equivalent to c − φ ⊕ ψ = 0 γ-almost everywhere. □
+Because of this proposition, one can think of the dual Kantorovich potentials, the prices in the economic interpretation of OT, as an optimality certi cate for an optimal transport plan (i.e. a way to convince someone that you actually found the optimum). This leads to the following stability theorem for optimal transport maps.
+Theorem 14 (Stability of OT plans). Let X, Y be compact metric spaces and let c ∈ C0(X × Y ). Consider (μk)k∈N and (νk)k∈N in P(X) and P(Y ) converging weakly to μ and ν respectively.
+• If γk ∈ Γ(μk, νk) is optimal then, up to subsequences, (γk) converges weakly to an optimal transport plan γ ∈ Γ(μ, ν). • Let (φk, ψk) be optimal Kantorovich potentials in the dual problem between μk and νk, satisfying ψk = φc
+k, φk = ψc
+k and φk(x0) = 0 for
+some x0 ∈ X. Then, up to subsequences, the sequence (φk, ψk) converges uniformly to a maximizing pair (φ, ψ) for (KD) also satisfying φ = ψc and ψ = φc.
+We will use the following lemma about the convergence of the supports of weak∗ converging measures.
+
+
+OPTIMAL TRANSPORT 15
+Lemma 15. If a sequence of non-negative measures (μn)n∈N weak∗-converges to μ, then any point x in spt(μ) is the limit as n → +∞ of points xn in spt(μn).
+Proof of Theorem 14. As c-concave functions, φk and ψk have the same modulus of continuity as the cost function c (see Lemma 12), and they are uniformly bounded (using φk(x0) = 0). Using Arzelà-Ascoli theorem, we can therefore assume that up to subsequences, (φk) (resp. (ψk)) converges to some φ (resp ψ) uniformly. Then, one easily sees that φ⊕ψ ⩽ c so that (φ, ψ) are admissible for the limit dual problem (KD). By Proposition 2, we can assume, taking subsequences if necessary, that the sequence γk ∈ Γ(μk, νk) converges to some γ ∈ Γ(μ, ν). By Proposition 13, we see that γk is supported on the set
+Sk = {(x, y) ∈ X × Y | φk(x) + ψk(y) = c(x, y)}.
+Moreover, by Lemma 15, every pair (x, y) ∈ spt(γ) can be approximated by a sequence of pairs (xk, yk) ∈ spt(γk) i.e. limk→∞(xk, yk) = (x, y). Since γk is supported on Sk one has c(xk, yk) = φk(xk) + ψk(xk). This gives at the limit c(x, y) = φ(x) + ψ(y). We have just shown that for every point pair (x, y) in spt(γ), c(x, y) = φ(x) + ψ(y) where φ, ψ is admissible. Applying Proposition 13 again, this shows that γ and (φ, ψ) are optimal for their respective problems. □
+4. Kantorovich's functional
+4.1. Kantorovich's functional. As already mentioned in (3.9), the Kantorovich's dual problem (KD) can be expressed as an unconstrained maximization problem, involving the c-transform.
+De nition 14. The Kantorovitch functional is de ned on C0(Y ) by
+Kμ(ψ) =
+Z
+X
+ψcdμ (4.10)
+The Kantorovitch dual problem therefore amounts to maximizing the Kantorovitch functional plus a linear term:
+(KD) = max
+ψ∈C0(Y )
+Kμ(ψ) + ⟨ψ|ν⟩.
+It is quite easy to see that Kμ is concave, recalling the de nition of the ctransform as a minimum. If (φ, ψ) are maximizers in the Kantorovich's dual problem (KD) between μ and ν, then ψ is a maximizer of Kμ + ⟨·|ν⟩. This subsection is devoted to the computation of the superdi erential of Kantorovich's functional, in particular when the source measure μ is absolutely continuous. This computation will be used to establish existence of solutions to Monge's problem (following Brenier and Gangbo-McCann) and to construct and study algorithms for (semi-)discretized optimal transport.
+De nition 15 (Response map). Given a potential ψ ∈ C0(Y ), we call response map the set-valued map Tˆψ de ned by
+Tˆψ(x) = arg min
+y∈Y c(x, y) − ψ(y) = {y ∈ Y | c(x, y) − ψ(y) = ψc(x)}.
+
+
+16 OPTIMAL TRANSPORT
+Remark 4 (Construction of optimal transports). One can easily sees that the graph of Tˆψ is
+Graph(Tˆψ) = {(x, y) ∈ X × Y | ψc(x) + ψ(y) = c(x, y)}.
+We note that if ψ is a maximizer of Kμ + ⟨·|ν⟩, then (ψc, ψ) is a maximizer of (KD). By proposition Proposition 13, we see that the set of optimal transport plans between μ and ν is equal to
+{γ ∈ Γ(μ, ν) | spt(γ) ⊆ Graph(Tˆψ)}, (4.11)
+making it a priori possible to recover a solution to the primal problem from a maximizer of the Kμ + ⟨·|ν⟩.
+Proposition 16. Let X, Y be compact metric spaces and let c ∈ C0(X × Y ). Then, for all measure μ ∈ P(X) and any ψ ∈ C0(Y ), one has
+∂+Kμ(ψ) =
+n
+−ν | ∃γ ∈ Γ(μ, ν) s.t. spt(γ) ⊆ Graph(Tˆψ)
+o
+.
+Proof. Let ψ ∈ C0(Y ) and let ν ∈ (C0(Y ))∗ = M(Y ). Assume that −ν belongs to ∂+Kμ(ψ). Then,
+∀ψ′ ∈ C0(Y ), Kμ(ψ′) ⩽ Kν(ψ) − ⟨ψ′ − ψ|ν⟩,
+which is equivalent to
+∀ψ′ ∈ C0(Y ), ⟨(ψ′)c|μ⟩ + ⟨ψ′|ν⟩ ⩽ ⟨ψc|μ⟩ + ⟨ψ|ν⟩,
+so that (ψc, ψ) is a maximizer of the dual Kantorovich problem between μ and ν. By strong Kantorovich duality (T c(μ, ν) = (KD)), this implies that ν is non-negative, with same mass as μ, and that ⟨ψc|μ⟩ + ⟨ψ|ν⟩ = T c(μ, ν). Let γ ∈ Γ(μ, ν) be an optimal transport plan between μ and ν for the cost c. Then, by Proposition 13, we see that ψc ⊕ ψ = c on spt(γ) as desired. Conversely, if a measure ν is such that there exists γ ∈ Γ(μ, ν) supported on ψc ⊕ ψ = c, we get using (ψ′)c ⊕ ψ ⩽ c
+Kμ(ψ′) = ⟨(ψ′)c|μ⟩ = ⟨(ψ′)c ⊕ ψ′|γ⟩ − ⟨ψ′|ν⟩
+⩽ ⟨c|γ⟩ − ⟨ψ|ν⟩
+= ⟨ψc ⊕ ψ|γ⟩ − ⟨ψ′|ν⟩
+= Kμ(ψ) + ⟨ψ′ − ψ| − ν⟩,
+thus proving that −ν ∈ ∂+Kμ(ψ). □
+4.2. Solution of Monge's problem. We now use Proposition 16 to prove the existence of optimal transport maps when the source measure is absolutely continuous on a compact subset of Rd and when the cost function satis es a twist condition. This result is due to Brenier [12] in the case of the quadratic cost, that is c(x, y) = ∥x − y∥2 on Rd, and Gangbo-McCann in the general case of twisted costs [20]. The question is to determine conditions under which the response map Tˆψ is single-valued μ-almost everywhere.
+De nition 16 (Twisted cost). Let ΩX , ΩY be open subsets of Rd, and let c ∈ C1(ΩX × ΩY ). The cost function c satis es the twist condition if
+∀x0 ∈ ΩX , the map y ∈ ΩY 7→ ∇xc(x0, y) ∈ Rd is injective, (4.12)
+where ∇xc(x0, y) is the gradient of x 7→ c(·, y) at x = x0.
+
+
+OPTIMAL TRANSPORT 17
+Proposition 17. Let ΩX , ΩY be open subsets of Rd, let c ∈ C1(ΩX × ΩY ) be a cost satisfying the twist condition (4.12), and let X, Y be compact subsets of ΩX and ΩY . Then, for Lebesgue-almost every x ∈ X, the response map is a singleton:
+Tˆψ(x) = arg min
+y∈Y c(x, y) − ψ(y) =: {Tψ(x)}.
+In particular, if μ ∈ P(X) is absolutely continuous, then
+∇Kμ(ψ) = −Tψ#μ.
+Proof. De ne φ = ψc, i.e. φ(x) = miny∈Y c(x, y) − ψ(y). If the minimum in the de nition of the response map is not unique, there exists two distinct points y0, y1 in Tˆψ(x). For any i ∈ {0, 1}, we have
+φ(x′) = min
+y∈Y c(x, y) − ψ(y) ⩽ c(x′, yi) − ψ(yi),
+with equality at x′ = x. Since ∇c(x′, y1) ̸= ∇c(x′, y0) by injectivity of y 7→ ∇c(x′, y), we see that φ is not di erentiable at x. Using c ∈ Lip(X × Y ), we get that φ is Lipschitz. Rademacher's theorem then implies that φ is di erentiable on a set B with full Lebesgue measure in X. By the previous paragraph, we obtain that Tˆψ is a singleton at any point of B. We conclude with the next lemma. □
+Lemma 18. Let μ ∈ P(X) and let Tˆ : X → Y be a set-valued map such that Tˆ(x) = {T (x)} for μ-almost every x. Then, there exists only one transport plan γ ∈ Γ(μ, ν) satisfying spt(γ) ⊆ γ(Graph(Tˆ)). This transport plan is induced by the map T , i.e. γ = (id, T )#γ.
+Proof. By de nition of γT = (id, T )#γ one has γT (A × B) = μ(T −1(B) ∩ A) for all Borel sets A ⊆ X and B ⊆ Y . On the other hand, consider the set X′ ⊆ X of points such that Tˆ(x) = {T (x)}, so that X \ X′ is μ-negligible by assumption. Then,
+γ(A × B) = γ((A ∩ X′) × B)
+= γ({(x, y) | x ∈ A ∩ X′, and y ∈ B})
+= γ({(x, y) | x ∈ A ∩ X′, y ∈ B and y = T (x)})
+= γ({(x, y) | x ∈ A ∩ X′ ∩ T −1(B), y = T (x)}
+= μ(A ∩ X′ ∩ T −1(B))
+= μ(A ∩ T −1(X))
+thus proving the claim. □
+Theorem 19 (Gangbo-McCann [20]). Let ΩX , ΩY be open subsets of Rd and let c ∈ C1(ΩX × ΩY ) be a cost satisfying the twist condition (4.12). Given compact subsets X and Y of ΩX and ΩY and two probability measures (μ, ν) ∈ Pac(X) × P(Y ). Then, there exists ψ ∈ C0(Y ) such that the unique optimal tranport map between μ and ν is induced by Tψ.
+Proof of Theorem 19. Let ψ be a maximizer of Kμ+⟨ν|·⟩. By equation (4.11), the set of optimal transport plans is {γ ∈ Γ(μ, ν) | spt(γ) ⊆ Graph(Tˆψ)}.
+
+
+18 OPTIMAL TRANSPORT
+Combining Proposition 17 and Lemma 18, we deduce that the unique element of this set is γ = (id, Tψ)#μ. □
+Here, we obtain Brenier's theorem as a corollary of Gangbo-McCann's result even though historically Brenier's theorem has been proven rst.
+Corollary 20 (Brenier [12]). Let X, Y be two compact subsets of Rd, let c(x, y) = ∥x − y∥2 and let (μ, ν) ∈ Pac(X) × P(Y ). Then, there exists φ : Rd → R convex such that ∇φ#μ = ν and the unique optimal transport plan between μ and ν is induced by the map T = ∇φ.
+Proof. We need to compute the response map associated to the maximizer ψ of Kμ + ⟨·|ν⟩ for the quadratic cost:
+Tψ(x) = arg myin ∥x − y∥2 − ψ(y)
+= arg myin ∥y∥2 − 2⟨x|y⟩ − ψ(y)
+= arg myax⟨x|y⟩ − 1
+2 (∥y∥2 − ψ(y)).
+Recalling the de nition of the convex conjugate, one can see at once that
+Tψ = ∇u where u = 1
+2 (∥·∥2 − ψ)
+∗. □
+Remark 5 (Monge-Kantorovich quantiles). Given a xed probability density ρ on a compact domain of Rd, e.g. ρ ≡ 1 on [0, 1]d, and any compactly supported ν ∈ P(Rd), one can denote Tν the quadratic optimal transport map between ρ and ν. In dimension d = 1, one recovers the quantile function. In higher dimension, there is no canonical de nition of a quantile function, but Tν was proposed as a challenger under the name Monge-Kantorovich quantile by Chernozhukov, Galichon, Hallin, Henry in [15]. Being the gradient of a convex function, the Monge-Kantorovich quantile is monotone, i.e.
+for a.e. x, y ∈ spt(ν), ⟨Tν(x) − Tν(y)|x − y⟩ ⩾ 0.
+This notion can be used to de ne multivariate notions of ranks and depth.
+4.3. Semi-discrete optimal transport. Our working assumptions for the remainder of this section are the following:
+• ΩX , ΩY are two open subsets of Rd. The cost function c belongs to C1(ΩX × ΩY ) and satis es the twist condition (4.12). • the source measure ρ is absolutely continuous with respect to the Lebesgue measure and is supported in a compact subset X of ΩX . • the target space Y is nite so that ν ∈ P(Y ) can be written under the form ν = P
+y∈Y νyδy. For simplicity, we assume that miny νy > 0.
+Note that by an abuse of notation, we will often con ate ρ with its density with respect to the Lebesgue measure.
+De nition 17 (Laguerre tessellation). The Laguerre tessellation associated to a set of prices ψ : Y → R is a decomposition of the space into Laguerre cells de ned by
+Lagy(ψ) := {x ∈ ΩX | ∀z ∈ Y, c(x, y) − ψ(y) ⩽ c(x, z) − ψ(z)}. (4.13)
+
+
+OPTIMAL TRANSPORT 19
+YX
+Figure 1. (Left) The domain X (with boundary in blue) is endowed with a probability density pictured in grayscale representing the density of population in a city. The set Y (in red) represents the location of bakeries. Here, X, Y ⊆ R2 and c(x, y) = |x − y|2 (Middle) The Voronoi tessellation induced by the bakeries (Right) The Laguerre tessellation: the price of bread the bakery near the center of X is higher than at the other bakeries, e ectively shrinking its Laguerre cell.
+When ψ ≡ 0, the Laguerre cells are called Voronoi cells. The Voronoi cell of the point y ∈ Y is denoted Vory(ψ).
+Remark 6 (Response map). Let ψ ∈ RY . The response map Tψ is constant on the interior of the Laguerre cells (and unde ned on their boundary) by:
+∀y ∈ Y, Tψ| Lagy = y.
+In particular,
+Tψ#ρ =
+X
+y∈Y
+Gy(ψ)δy, where Gy(ψ) = ρ(Lagy). (4.14)
+Theorem 21 (Aurenhammer, Ho man, Aronov). Under the assumptions of this paragraph, the Kantorovich functional Kμ is C1-smooth on RY . Its gradient is given by
+∇Kρ(ψ) = −
+X
+y∈Y
+ρ(Lagy(ψ))δy (4.15)
+In particular ψ ∈ RY maximizes Kρ + ⟨·|ν⟩, where ν ∈ P(Y ), if and only if
+∀y ∈ Y, ρ(Lagy(ψ)) = ν({y}).
+The only new statement in this theorem, compared to Proposition 17 is that Kμ is C1. This is proven as point (iv) of the following lemma. In what follows, we will denote R the oscillation of the cost function:
+R := max
+X×Y c − min
+X×Y c, (4.16)
+Lemma 22. Assume c is twisted (Def. 16) and ρ ∈ Pac(X). Then,
+(i) ∀y ∈ Y , the map t 7→ Gy(ψ + t1y) is non-decreasing, (ii) ∀y ̸= z ∈ Y , the map t 7→ Gy(ψ + t1z) is non-increasing, (iii) if ψ ∈ RY is such that Gy0(ψ) > 0, then ψ(y0) ⩽ minY ψ + R, (iv) for all y ∈ Y , the function Gy is continuous.
+
+
+20 OPTIMAL TRANSPORT
+Proof. The properties (i), (ii) are straightforward consequences of the de nition of Laguerre cells. To prove (iii), take ψ such that Gy0(ψ) > 0, implying in particular that the Laguerre cell Lagy0(ψ) is non-empty and contains a point x ∈ X. Then, by de nition of the cell one has for all y ∈ Y \ {y0}, c(x, y0) + ψ(y0) ⩽ c(x, y) + ψ(y), thus showing that ψ(y0) ⩽ minY ψ + R. It remains to establish that each of the maps Gy is continuous. For this purpose, we consider a sequence (ψn)n∈N converging to some ψ∞. We rst note that thanks to the Twist hypothesis, the set S de ned by
+S = {x ∈ X | ∃y ̸= z ∈ Y s.t. c(x, y) − ψ(y) = c(x, y) − ψ(z)}
+⊆
+[
+y∈Y,z∈Y \{y}
+{x ∈ X | c(x, y) − ψ(y) = c(x, y) − ψ(z)}.
+is included in a nite union of (d − 1)-dimensional submanifolds, which are all Lebesgue-negligible. Thus, S is also ρ-negligible. De ning χ = 1Lagy(ψ) and χn = 1Lagy(ψn), we have
+Gy(ψn) =
+Z
+χndρ, and G(ψ) =
+Z
+χdρ.
+To prove that limn→+∞ Gy(ψn) = Gy(ψ) it su ces to establish that χn converges to χ on X \ S, which is straightforward (because the inequalities de ning the set X \ S are strict), and to apply Lebesgue's dominated convergence theorem. □
+4.4. Oliker Prussner's algorithm. Oliker-Prussner's algorithm for solving G(ψ) = ν is described in Algorithm 1, and bears strong resemblance with Bertsekas' auction algorithm for the assignement problem [8, 9]. In particular, the values of ψ are evolved in a monotonic way.
+Algorithm 1 Oliker-Prussner algorithm
+Input: A tolerence parameter δ > 0. Initialization: Fix some y0 ∈ Y once for all. Set
+ψ(0)(y) :=
+(
+0 if y = y0 R if not.
+While: ∃y ∈ Y \ {y0} such that Gy(ψ(k))) ⩽ νy − δ
+N
+Step 1: Compute
+ty = min{t ⩾ 0 | Gy(ψ(k) + t1y) ⩾ νy}. (4.17)
+Step 2: Set ψ(k+1) = ψ(k) + t1y. Output: A vector ψ(k) that satis es maxy Gy(ψ(k)) − ν({y}) ∞ ⩽ δ.
+Theorem 23 (Oliker-Prussner). Assume that the cost c ∈ C2(ΩX × ΩY ) is twisted (Def. 16) and that ρ ∈ Pac(X) ∩ L∞(X). Then,
+• Oliker-Prussner's algorithm terminates in a nite number of steps. • Furthermore, at the nal step k, one has
+max
+y∈Y Gi(ψ(k)) − νi ⩽ δ.
+
+
+OPTIMAL TRANSPORT 21
+Proof of Theorem 23. Step 1 (Correctness) When Algorithm 1 terminates with ψ := ψ(k), one has for any y ̸= y0, ρ(Lagy(ψ)) ⩽ νy. When it stops, it also means that one has ρ(Lagy(ψ)) ⩾ νy − δ
+N . Then, as desired, we get
+ρ(Lagy0(ψ)) = 1 −
+X
+y̸=y0
+ρ(Lagy0 (ψ)) ∈ [νy0 , νy0 + δ].
+Step 2 (A priori bound on ψk) By construction one has ρ(Lagy(ψ(k))) ⩽ νy, which also imply that
+ρ(Lagy0 (ψ(k))) = 1 −
+X
+y∈Y \{y0}
+ρ(Lagy(ψ(k))) ⩾ νy0 > 0.
+By Proposition 22 (iii), we get 0 = ψk(y0) ⩽ minY ψ(k) + R. Since the price of y0 is never changed, ψ(k)(y0) = 0 and R ⩾ ψ(k) ⩾ −R. Step 3 (Minimum decrease and termination) Since by Lemma 22 (iv) Gy is continuous, it admits a continuity modulus on the compact set [−R, R]Y , i.e. a function ωy : R → R such that limt→0 ωy(t) = 0 and such that
+∀ψ, ψ′ ∈ [−R, R]Y , Gy(ψ) − Gy(ψ′) ⩽ ψ − ψ′
+∞.
+In the second step of the algorithm, when ψ(k) is updated one has Gy(ψ(k) − ty1y) ⩾ Gy(ψ(k)) + δ
+N . Using the uniform continuity of Gy, we have
+δ
+N ⩽ Gy(ψ(k) − ty1y) − Gy(ψ(k)) ⩽ ω(ty),
+implying that there exists τ > 0 such that ty ⩾ τ . Since for any k, ψk(y) ∈ [−R, R], the number of times ky the price of a point y ∈ Y has been updated is bounded: ky ⩽ 2R/τ . Thus, the algorithm terminates in nite time. □
+Remark 7 (Quadratic cost). For the cost c(x, y) = ∥x − y∥2, but also in more general cases (see e.g. [27]), one can show that G is Lipschitz, with constant larger than CN . In this case, the number of iterations is of the algorithm is bounded by O(N 3).
+5. Entropy-regularized optimal transport
+5.1. Primal problem. We start from the primal formulation of the optimal transport problem, but instead of imposing the non-negativity constraints γ ⩾ 0, we add a term to the transport cost, which promotes (minus) the entropy of the transport plan and acts as a barrier for the non-negativity constraint. The entropy of a measure μ ∈ M(X) on a compact metric space X with respect to a probability measure ω on X is de ned by
+H(μ | ω) =
+( R h(ρ)dω if dμ = ρdω +∞ otherwise ,
+where h(r) =
+
+ 
+ 
+r(log r − 1) if r > 0,
+0 if r = 0, +∞ if r < 0.
+(5.18)
+
+
+22 OPTIMAL TRANSPORT
+The regularized optimal transport problem is then de ned as
+(KPε) := inf
+γ∈Γ(μ,ν)
+⟨c|γ⟩ + εH(γ | μ ⊗ ν). (5.19)
+We will rely on the following dual representation of entropy.
+Proposition 24 (Donsker-Varadhan). Let Z be a compact space, and let ω ∈ M+(Z) be nite. Then, for any measure μ ∈ M(Z),
+H(μ | ω) = sup
+f ∈C0(Z)
+⟨f |μ⟩ − ⟨ef |ω⟩. (5.20)
+In particular, μ 7→ H(μ | ω) is convex and weak∗ lsc. In addition:
+(i) the supremum in (5.20) is attained at f ∈ C0(Z) if and only if ef is the density of μ with respect to ω. (ii) the restriction of μ 7→ H(μ | ω) to the set of absolutely continuous measures with respect to ω is strictly convex.
+Remark 8 (Finite entropy implies non-negativity). We can prove thanks to (5.20) that if μ ̸∈ M+(Z), then H(μ | ω) = +∞. Indeed, if ⟨μ|g⟩ < 0 for some continuous function g ⩾ 0, one can check by taking f = −λg that
+H(μ | γ) ⩾ λ ⟨μ| − g⟩
+| {z }
+>0
+−⟨ eλg
+|{z}
+⩽1
+|ω⟩ λ→+∞
+−−−−→ +∞.
+This means that the regularized optimal transport problem can be equivalently written by removing non-negativity constraint γ ⩾ 0:
+(KPε) = inf
+γ∈M(X×Y )|ΠX#γ=μ,ΠY #γ=ν
+⟨c|γ⟩ + εH(γ | μ ⊗ ν).
+Proof. Note that for r > 0, h′(r) = ln(r) for r > 0. The convex conjugate of h is therefore given by
+h∗(s) = sup
+r>0
+rs − h(r) = er.
+The Fenchel-Young inequality reads h∗(s) + h(r) ⩾ rs with equality if and only if r = es. Assume that μ has density ρ with respect to ω. Then,
+H(μ | ω) =
+Z
+h(ρ(x))dω(x)
+=
+Z
+h∗∗(ρ(x))dω(x)
+=
+Z
+sup
+s
+sρ(x) − h∗(ρ(x))dω(x)
+In particular, for any bounded measurable function f we have
+H(μ | ω) ⩾ ⟨f |ρω⟩ − ⟨ef |ω⟩ = ⟨f |μ⟩ − ⟨ef |ω⟩,
+with equality if f = eρ a.e. □
+Proposition 25. The regularized optimal transport problem admits a unique solution. Moreover, the density of γ with respect to μ ⊗ ν is positive a.e.
+Remark 9 (No transport maps). In this entropy regularized setting, one cannot expect to nd an optimal transport map, since minimizers of the regularized optimal transport problem are supported on the whole support of the product μ ⊗ ν.
+
+
+OPTIMAL TRANSPORT 23
+Remark 10 (Barrier). The main ingredient of the previous proposition is that the slope of h : r 7→ r ln r is +∞ at r = 0, which forbids the density of γ with respect to μ ⊗ ν to vanish on sets of positive measure. A stronger e ect could be obtained by using a penalization of the form εG(γ | μ ⊗ ν) instead of εH(γ | μ ⊗ ν) where
+G(μ | ω) =
+( R g(ρ)dμ ⊗ ν if dμ = ρdω
++∞ otherwise , (5.21)
+where
+g(r) =
+(
+− log r if r > 0, +∞ if r ⩽ 0.
+This barrier is stronger, as it forbis r = 0. When X and Y are nite, this choice is related to the interior point method for solving the optimal transport problem, where one would solve subsequent problems of the form
+min
+γ∈Γ(μ,ν)
+⟨c|γ⟩ + εkH(γ | μ ⊗ ν)
+for a sequence of parameters εk converging to zero.
+Proof. Existence follows from lower semi-continuity of the functional and compactness of Γ(μ, ν), while uniqueness follows from the strict convexity. Let γ∗ be the optimizer of (KPε), and let ρ be the density of γ∗ with respect to μ ⊗ ν. We will prove by contradiction that the set Z := {(x, y) | ρ = 0} satis es ρ(Z) = 0. For this purpose, we de ne a new transport plan γt between μ and ν by setting γt = (1 − t)γ∗ + tμ ⊗ ν. The density of γt with respect to μ ⊗ ν is ρt = (1 − t)ρ + t. We give an upper bound on the energy of γt. We rst observe that by convexity of h(r) = r(ln r − 1), we have
+Z
+X×Y \Z
+h(ρt)dμ ⊗ ν ⩽ (1 − t)
+Z
+X×Y \Z
+h(ρt)dμ ⊗ ν + t
+Z
+X×Y \Z
+h(1)dμ ⊗ ν
+= (1 − t)H(γt | μ ⊗ ν) − t · μ ⊗ ν(X × Y \ Z).
+On the other hand, on Z we have ρt = t, so that
+Z
+X×Y \Z
+h(ρt)dμ ⊗ ν = t(ln(t) − 1) · μ ⊗ ν(Z).
+Finally, we note that ⟨c|γt⟩ = ⟨c|γ∗⟩ + t(⟨μ ⊗ ν − γ∗|c⟩. Summing these equalities and inequalities, we get
+⟨c|γt⟩ + εH(γt | μ ⊗ ν) ⩽ ⟨c|γ∗⟩ + εH(γ∗ | μ ⊗ ν) + t(C + ln(t) · μ ⊗ ν(Z)).
+Taking t small enough, one get a contradiction on the optimality of γ∗, unless the set Z has zero μ ⊗ ν measure. □
+5.2. Dual problem. The dual problem is constructed, as before, by introducing Lagrange multipliers φ ∈ C0(X) and ψ ∈ C0(Y ) for the constraints ΠX#γ = μ and ΠY #γ = ν, and also dualizing the entropy using the DonskerVaradhan formula. We have
+(KPε) = inf
+γ|ΠX#γ=μ and ΠX#γ
+⟨c|γ⟩ + εH(γ | μ ⊗ ν)
+= inγf sup
+φ,ψ,f
+⟨c − φ ⊕ ψ|γ⟩ + ⟨φ|μ⟩ + ⟨ψ|ν⟩ + ε(⟨f |γ⟩ − ⟨ef |μ ⊗ ν⟩)
+
+
+24 OPTIMAL TRANSPORT
+The dual problem is constructed by inverting the in mum and the supremum:
+(KDε) = sup
+φ,ψ,f
+inγf⟨c − φ ⊕ ψ + εf |γ⟩ + ⟨φ|μ⟩ + ⟨ψ|ν⟩ − ε⟨ef |μ ⊗ ν⟩)
+One notices that the in mum is −∞ unless c−φ⊕ψ+εf = 0, i.e. f = φ⊕ψ−c
+ε.
+This gives us the following dual formulation
+(KDε) = sup
+φ∈C0(X),ψ∈C0(Y )
+Kε(φ, ψ)
+with
+Kε(φ, ψ) = ⟨φ|μ⟩ + ⟨ψ|ν⟩ − ε⟨e φ⊕ψ−c
+ε |μ ⊗ ν⟩, which is a concave maximization problem.
+Remark 11 (Penalization of φ ⊕ ψ ⩽ c). The dual of the entropy-regularized (KDε) resembles the dual of the standard optimal transport problem, but where the hard constraint φ ⊕ ψ ⩽ c is replaced by a soft penalization: for small values of ε, e φ⊕ψ−c
+ε is small only φ ⊕ ψ − c is not much larger than zero.
+Lemma 26 (Weak duality). For any potentials (φ, ψ) ∈ C0(X) × C0(Y ) and any transport plan γ ∈ Γ(μ, ν), one has
+Kε(φ, ψ) ⩾ ⟨c|γ⟩ + εH(γ | μ ⊗ ν),
+with equality if γ = e φ+ψ−c
+ε μ ⊗ ν. In particular, weak duality (KPε) ⩾ (KDε) holds.
+Proof. Denote f = φ+ψ−c
+ε . Then,
+⟨φ|μ⟩ + ⟨ψ|ν⟩ − ε⟨e φ+ψ−c
+ε |μ ⊗ ν⟩ = ⟨c|γ⟩ + ε⟨f |γ⟩ − ε⟨ef |μ ⊗ ν⟩
+⩾ ⟨c|γ⟩ + εH(γ | μ ⊗ ν),
+with equality if and only if the density of γ with respect to μ ⊗ ν is ef . □
+Lemma 27 (Optimality condition). The gradients of Kε are given by:
+∇φKε(φ, ψ) = μ − ΠX#e φ⊕ψ−c
+ε μ⊗ν
+∇ψKε(φ, ψ) = ν − ΠY #e φ⊕ψ−c
+ε μ⊗ν
+Proof. We compute the rst gradient, the second being similar. Let (φ, ψ) ∈ C0(X) × C0(Y ) and let v ∈ C0(X). Then,
+1
+t (Kε(φ + tv, ψ) − Kε(φ, ψ)) = ⟨v|μ⟩ − ε
+t ⟨e (φ+tv)⊕ψ−c
+ε − e (φ)⊕ψ−c
+ε |μ ⊗ ν⟩.
+Taking the limit as t → 0, we get
+⟨∇Kε(φ, ψ)|⟩ = ⟨v|μ⟩ − ⟨ve φ⊕ψ−c
+ε |μ ⊗ ν⟩
+= ⟨v|μ − ΠX#e φ⊕ψ−c
+ε μ ⊗ ν⟩. □
+Remark 12 (Existence of a maximizer to (KDε) implies strong duality). If the dual problem admits a maximizer (φ, ψ) ∈ C0(X) × C0(Y ), then the optimality conditions read ΠX#γ = μ and ΠY #γ = ν, where
+γ = e φ⊕ψ−c
+ε μ ⊗ ν.
+Thus, by Lemma 26, we see that γ is a minimizer for the primal problem, and that strong duality holds.
+
+
+OPTIMAL TRANSPORT 25
+Lemma 28 (Uniqueness of maximizer up to a constant). If (φ∗, ψ∗) is a maximizer of (KDε), then for any other maximizer (φ, ψ) of (KDε), there exists a constant C such that
+φ = φ∗ + C μ-a.e., ψ = ψ∗ − C ν-a.e..
+Proof. Let φ, ψ be another maximizer of (KDε), and let
+φ′ = 1
+2φ + 1
+2 φ∗, ψ′ = 1
+2ψ + 1
+2 ψ∗.
+Then, by optimality of (φ, ψ) and (φ∗, ψ∗), we have
+0 ⩾ Kε(φ′, ψ′) − 1
+2 Kε(φ′, ψ′) − 1
+2 Kε(φ∗, ψ∗)
+=−
+Z
+e
+φ′ ⊕ψ′ −c
+ε −1
+2 e φ∗⊕ψ∗−c
+ε − e1
+2
+φ⊕ψ−c
+ε dμ ⊗ ν.
+By strong convexity of t 7→ et, this is possible if and only if φ′ ⊕ ψ′ = φ∗ ⊕ ψ∗ μ⊗ν almost everywhere. Now, choose x∗ ∈ sptμ, and de ne C = ⟨φ−φ∗|μ⟩. Then, expanding the square in the following expression and using Fubini's theorem, we obtain
+0=
+Z
+(φ∗ ⊕ ψ∗ − φ ⊕ ψ)2dμ ⊗ ν
+=
+Z
+(φ∗(x) − φ(x) − C + ψ∗(y) − ψ(y) + C)2d(μ ⊗ ν)
+=
+Z
+(φ∗(x) − φ(x) − C)2dμ(x) +
+Z
+(ψ∗(y) − ψ(y) + C)2dν(y) □
+5.3. Existence of a solution to the dual. We now prove the existence of a solution to the dual problem. As in optimal transport the trick is to prove that the maximum can be taken over a compact subset of C0(X) × C0(Y ), where the potentials are uniformly continuous. This is obtained by taking the maximum with respect to one of the two variables only. For instance, let ψ ∈ C0(Y ). Then, the maximum of Kε(·, ψ) is attained for some φ satisfying
+∇φKε(φ, ψ) = 0 = μ − ΠX#e φ⊕ψ−c
+ε μ ⊗ ν.
+A su cient condition is that for μ-almost every x ∈ X,
+1=
+Z
+Y
+e
+φ(x)+ψ(y)−c(x,y)
+ε dν(y) = e φ(x)
+ε ⟨e ψ−c(x,·)
+ε |ν⟩.
+De nition 18 ((c, ε)-Transform). We de ne the (c, ε) transform of ψ ∈ C0(Y ) and the (c, ε) transform of φ ∈ C0(X) by
+ψc,ε(x) = −ε log ⟨e ψ−c(x,·)
+ε |ν⟩
+φc,ε(y) = −ε log ⟨e φ−c(·,y)
+ε |μ⟩
+(5.22)
+Remark 13 (Convergence to the c-transform as ε → 0). Bounding the term in the exponential in the integral de ning ψc,ε from below, one clearly sees
+ψc,ε(x) ⩽ min
+y∈spt(ν) c(x, y) − ψ(y). (5.23)
+
+
+26 OPTIMAL TRANSPORT
+On the other hand, by de nition of the support of ν and by continuity of c(x, y) − ψ(y), for any η > 0 there exists a measurable set A ⊆ spt(A) with ν(A) > 0 and such that
+∀z ∈ A, c(x, z) − ψ(z) ⩽ min
+y∈spt(ν) c(x, y) − ψ(y) + η = η
+Then,
+ψc,ε(x) ⩾ −ε log
+Z
+A
+e
+ψ(z)−c(x,z)
+ε dν(z)
+⩾ −ε log
+Z
+A
+e
+miny∈spt(ν) c(x,y)−ψ(y)+η
+ε dν(z)
+⩾ min
+y∈spt(ν) c(x, y) − ψ(y) + η − ε log ν(A)
+Thus, lim infε→0 ψc,ε(x) ⩾ miny∈spt(ν) c(x, y) − ψ(y) + η. Since this holds for all η > 0, we deduce with (5.23) that if spt(ν) = Y , then
+εli→m0 ψc,ε(x) = ψc(x).
+Lemma 29 (Modulus of continuity). For any (φ, ψ) ∈ C0(X) × C0(Y ), the transforms ψc,ε and φc,ε have the same modulus of continuity as the cost c.
+Proof. We only prove this property for ψc,ε, denoting ωc the continuity modulus of the cost c:
+ψc,ε(x′) − ψc,ε(x) = ε log ⟨e ψ−c(x,·)
+ε |ν⟩ − log ⟨e ψ−c(x′,·)
+ε |ν⟩
+= ε log ⟨e ψ−c(x′,·)
+ε e c(x′,·)−c(x,·)
+ε |ν⟩ − log ⟨e ψ−c(x′,·)
+ε |ν⟩
+⩽ ε log ⟨e ψ−c(x′,·)
+ε e ωc(dX (x,x′))
+ε |ν⟩ − log ⟨e ψ−c(x′,·)
+ε |ν⟩
+⩽ ωc(dX (x, x′)). □
+Corollary 30 (Existence of solution to (KDε)). The supremum in the de nition of (KDε) is attained for a couple (φ, ψ) ∈ C0(X) × C0(Y ) such that • φ, ψ have the same continuity modulus as c, • ⟨ψ|ν⟩ = 0
+Then, (KPε) = (KDε) and the unique solution to (KPε) is given by
+γ = e φ⊕ψ−c
+ε μ ⊗ ν.
+Proof. We note that by de nition of the (c, ε) and (c, ε) transforms,
+sup
+φ,ψ
+Kε(φ, ψ) = sup
+ψ
+Kε(ψc,ε, ψ)
+= sup
+ψ
+Kε(ψc,ε, (ψc,ε)c,ε)
+= sup
+ψ
+Kε(((ψc,ε)c,ε)c,ε, (ψc,ε)c,ε)
+= sup
+ψ∈C0,ωc (X)
+Kε(ψc,ε, ψ),
+
+
+OPTIMAL TRANSPORT 27
+where C0,ω(X) denotes the space of continuous functions with continuity modulus ω. Since for any constant C ∈ R, one has Kε(φ + C, ψ − C) = Kε(φ, ψ), we may impose without loss of generality that ⟨ψ|ν⟩ = 0 in the optimization problem. Thus,
+(KDε) = sup
+ψ∈C0,ωc (Y )|⟨ψ|ν⟩=0
+Kε(ψc,ε, ψ).
+Since ψ belongs to C0,ωc(Y ), we have
+osc(ψ) := mYax ψ − mYin ψ ⩽ osc(c) ⩽ 2 ∥c∥∞ .
+Using in addition that ⟨ψ|ν⟩ = 0, we get ∥ψ∥∞ ⩽ 2 ∥c∥∞. This shows that
+the set
+{ψ ∈ C0,ωc(Y ) | ⟨ψ|ν⟩ = 0}
+is a compact subset of C0(Y ). Finally, we check that ψ 7→ Kε(ψc,ε, ψ) is continuous on this set, and we conclude by Arzelà-Ascoli's theorem that the maximum in (KDε) is attained. □
+5.4. Sinkhorn algorithm as block-coordinate ascent. We study in this section the algorithm that consists in computing a maximizer to the dual problem (KDε) by optimizing the functional Kε alternatively in φ and ψ. The iterations are de ned by
+(
+φ(k+1) = (ψ(k))c,ε
+ψ(k+1) = (φ(k+1))c,ε. (5.24)
+or equivalently ψ(k+1) = S(ψ(k)) where
+S(ψ) = (ψc,ε)c,ε. (5.25)
+Remark 14 (Fixed point). Assume that (φ, ψ) is a xed point of the algorithm, i.e. φ = ψc,ε and ψ = φc,ε, and denote γ = e φ⊕ψ−c
+ε μ ⊗ ν. Thus,
+mφˆax Kε(φˆ, ψ) = Kε(φ, ψ).
+The rst-order optimality condition for this problem, ∇φKε(φ, ψ) = 0, implies that ΠX#γ = μ. Similarly, we get ΠY #γ = ν, showing by Lemma 26 that (φ, ψ) maximizes (KDε) and γ minimizes (KPε).
+Remark 15 (Relation to matrix factorization). Algorithm (5.24) is in fact a reformulation, using a logarithmic change of variable, of Sinkhorn's algorithm for nding a factorization of non-negative matrices [38]. Let X = {x1, . . . , xN }, Y = {y1, . . . , yM }, cij = c(xi, yj), μ = P
+i μiδxi and ν =
+P
+j νjδyj . Then, by the discussion of the previous paragraph, γ = P
+i,j γij δij
+is a solution to the entropy-regularized optimal transport problem between μ and ν if there exists φ ∈ RN and ψ ∈ RN such that
+γij = e
+φi+ψj −cij ε
+s.t.
+(
+∀i ∈ {1, . . . , N }, P
+1⩽j⩽N γij = μi
+∀j ∈ {1, . . . , N }, P
+1⩽i⩽N γij = νj .
+
+
+28 OPTIMAL TRANSPORT
+Denote Kij = e− cij
+ε . The iterates of Sinkhorn's algorithm are
+
+   
+   
+φk+1
+i = −ε log P
+je
+ψjk −cij
+ε νj
+!
+ψk+1
+j = −ε log P
+ie
+φk+1
+i −cij
+ε μi
+(5.26)
+One may also record the transport plan γk induced by φk and ψk:
+γk
+ij = e
+φik +ψjk −cij
+ε μiνj
+Denoting uk
+i = e φk
+ε μi, vk
+i = e φk
+ε νi and Kij = e
+−cij
+ε , we may even simplify the iterations further:
+
+ 
+ 
+uk+1
+i = μi/(Kvk)i
+vk+1
+j = νj /(KT uk+1)j
+γk = diag(vk)K diag(uk),
+(5.27)
+where diag(x) is the square diagonal matrix with entries xi. It is also possible to drop the variables u, v and write the iterations purely in term of γ. In practice, this is not advised because of memory requirements: the memory to store u and v is N + M while the memory to store γ is N M . In addition, the use of the variables u and v instead of φ, ψ is not advised, because the iteration (5.27) is less stable numerically than the formula (5.26) for small values of ε. In particular, for (5.26), one may use robust implementation of the LogSumExp function provided in most machine learning frameworks.
+The following two properties are very similar to some properties holding for the standard c-transform. In the following, we denote ∥·∥o,∞ the pseudonorm of uniform convergence up to addition of a constant:
+∥f ∥o,∞ = inf
+a∈R ∥f + a∥∞ = 1
+2 (sup f − inf f ).
+This pseudo-norm will be very useful to state convergence results for Sinkhorn's algorithm for solving the regularized optimal transport problem. We rst note that the Sinkhorn map is 1-Lipschitz with respect to this norm.
+Proposition 31. Let ψ, ψ ∈ RY . Then, (i) for a ∈ R, (ψ + a)c,ε = ψc,ε + a.
+(ii) ψc,ε − ψc,ε
+∞,o ⩽ ψ − ψ ∞,o.
+Similar properties hold for the map φ ∈ RX 7→ φc,ε.
+Proof. (i) follows immediately from the de nition (ii) We rst show that the map is 1-Lipschitz with respect to the norm of uniform convergence:
+ψc,ε(x) − ψc,ε(x)
+= ε log ⟨e ψ−c(x,·)
+ε |ν⟩ − ε log ⟨e ψ−c(x,·)
+ε |ν⟩
+= ε log ⟨e ψ−c(x,·)
+ε e ψ−ψ
+ε |ν⟩ − ε log ⟨e ψ−c(x,·)
+ε |ν⟩ ⩽ ψ − ψ ∞
+
+
+OPTIMAL TRANSPORT 29
+Taking the maximum over x leads to ∥ψc,ε − ψc,ε∥ ⩽ ∥ψ − ψ∞∥. The same inequality with ∥·∥o,∞ will follow easily using (i) and the de nition of the norm ∥·∥∞,o as a minimum. □
+5.5. Linear convergence of Sinkhorn's algorithm. In order to prove convergence, we need to strengthen the 1-Lipschitz estimation from Proposition 31. This allows to apply Picard's xed point theorem to get the contraction of the Sinkhorn iteration (5.25). The proof we present in this chapter has been rst introduced in course notes of Vialard [41].
+Theorem 32 (Convergence of Sinkhorn, [41]). The map S is a contraction for ∥·∥o,∞. More precisely,
+S(ψ0) − S(ψ1) o,∞ ⩽ 1 − e−2 ∥c∥o,∞
+ε ψ0 − ψ1
+o,∞ .
+In particular, the iterates (φ(k), ψ(k)) of Sinkhorn's algorithm (5.24) converge with linear rate to the unique (up to constant) maximizer the regularized dual problem (KPε).
+Remark 16 (Other convergence proofs). The convergence of Sinkhorn's algorithm is usually proven (e.g. in [39]) using a theorem of Birkho [10]. We refer to the recent book by Peyré and Cuturi [32] for this point of view. Other convergence proofs exist, see for instance Berman [7] (in the continuous case), and Altschuler, Weed and Rigollet [1], or Carlier [] and Nutz [] for proofs relying on the strong concavity of Kε.
+Remark 17 (Convergence speed). This theorem shows that the Sinkhorn algorithm converges with linear speed, but the contraction constant has a bad dependency in ε. Denoting C = ∥c∥o,∞, to get an error of η > 0, the number of iterations must satisfy
+(1 − e−2C/ε)k ≲ η
+i.e. k ≳ e2C/ε log(1/η),
+where the second inequality holds for small values of ε. This bad dependency in ε seems to be a practical obstacle to choosing a very small smoothing parameter. This calls for scaling techniques, as for the auction's algorithm, and was considered by Schmitzer [36, 37].
+Remark 18 (Implementation). The numerical implementation of Sinkhorn's algorithm is more complicated than it seems:
+• In a naive implementation, the computation of the smoothed ctransforms (5.22) has a cost proportional to Card(X)Card(Y ). This can be alleviated for instance when X = Y are grids and when the cost is a ∥·∥p norm, using fast convolution techniques (see e.g. [40] or [32, Remark 4.17]), or when the cost is the squared geodesic distance on a Riemannian manifold [16, 40]. • The convergence speed can be slow when the supports of the data X, Y are far from each other, and when ε is small. This di culty is cirvumvented using the ε-scaling techniques mentioned above, often combined with multi-scale (coarse-to- ne) strategies, studied in this context by Benamou, Carlier and Nenna [6] and Schmitzer [36].
+
+
+30 OPTIMAL TRANSPORT
+• Finally, some numerical di culties (divisions by zero) can occur when ε is small and the potential ψ is far from the solution.
+The book of Cuturi and Peyré present these di culties in more details and explain how to circumvent them [32]. In addition to the works already cited, we refer to the PhD work of Feydy [14, 19], and especially to the implementation of regularized optimal transport in the library GeomLoss1.
+In order to prove this theorem, we will make use of the following elementary lemma, giving an upper bound on the total variation distance between two Gibbs kernels.
+Lemma 33. Let u0, u1 ∈ C0(Y ) and ν ∈ P(Y ). We denote gi = eui/Ziν where Zi = ⟨eui|ν⟩. Then,
+∀v ∈ C0(Y ), |⟨v|g1 − g0⟩| ⩽ 2(1 − e−2∥u0−u1∥o,∞ ) ∥v∥o,∞ .
+Proof. Note that by de nition the Gibbs kernel gi does not change if a constant is added to ui, so that we can assume that
+ε := ∥u0 − u1∥o,∞ = ∥u0 − u1∥∞ .
+Using the inequality u0 − ε ⩽ u1 ⩽ u0 + ε, one easily shows that
+eu0−ε ⩽ eu1 ⩽ eu0+ε.
+Integrating this inequality multiplied by ν, this implies that
+e−εZ0 ⩽ Z1 ⩽ eεZ0, i.e. e−ε 1
+Z0
+⩽1
+Z1
+⩽ eε 1
+Z0
+.
+Multiplying this last inequality with the rst one, we get
+e−2ε eu0
+Z0
+⩽ eu1
+Z1
+⩽ e2ε eu0
+Z0
+.
+Let v ∈ C0(Y ) be non-negative. Then,
+e−2ε⟨v|g0⟩ ⩽ ⟨v|g1⟩ ⩽ e2ε⟨v|g0⟩,
+thus implying
+|⟨v|g1 − g0⟩| ⩽ (1 − e−2ε) max(⟨v|g0⟩, ⟨v|g1⟩) ⩽ (1 − e−2ε) ∥v∥∞ .
+If v is not positive, we apply the previous inequality to vˆ = v − minY v ⩾ 0, remarking that ∥vˆ∥∞ = 2 ∥v∥∞,o. □
+Proof of Theorem 32. Consider ψ0, ψ1 ∈ C0(Y ). We will rst give an upper
+bound on ∥ψc,ε
+1 − ψc,ε
+0 ∥o,∞, and to do that we will give an upper bound on
+A(x, x′) = (ψc,ε
+1 (x) − ψc,ε
+0 (x)) − (ψc,ε
+1 (x′) − ψc,ε
+0 (x′))
+which is independent of x, x′ ∈ X. For this purpose, we introduce ψt = ψ0 + tv with v = ψ1 − ψ0, and
+B(t, x, x′) = ψc,ε
+t (x) − ψc,ε
+t (x′)
+= ε log ⟨e ψt−c(x′,·)
+ε |ν⟩ − ε log ⟨e ψt−c(x′,·)
+ε |ν⟩
+1https://www.kernel-operations.io/geomloss/
+
+
+OPTIMAL TRANSPORT 31
+Then,
+∂tB(t, x, x′) = ⟨v|gx,t − gx′,t⟩, with gx,t = e ψt−c(x′,·)
+εν
+⟨e ψt−c(x′,·)
+ε |ν⟩
+.
+Lemma 33 directly gives us
+∂tB(t, x, x′) ⩽ 2(1 − e−2∥c(x′,·)−c(x,·)∥∞ ) ∥v∥∞,o .
+We therefore get
+A(x, x′) ⩽
+Z1
+0
+∂tB(t, x, x′) ⩽ 2(1 − e−2∥c∥∞,o ) ∥ψ1 − ψ0∥∞,o .
+Taking the supremum over x, x′ ∈ X, we obtain
+∥ψc,ε
+1 − ψc,ε
+0 ∥o,∞ = 1
+2 max
+x,x′ A(x, x′) ⩽ 1 − e−2 ∥c∥o,∞
+ε ∥ψ1 − ψ0∥o,∞ .
+We conclude the proof of the contraction inequality by remarking that the map φ 7→ φc,ε is 1-Lipschitz, thanks to Proposition 31.(ii). □
+6. Wasserstein distances
+6.1. p-Wasserstein spaces over compact metric spaces.
+De nition 19 (Wassertein distance). Let (X, dX ) be a compact metric space and p ⩾ 1. The Wasserstein distance between two probability measures μ, ν ∈ P(X) is de ned as
+Wp(μ, ν) = min
+γ∈Γ(μ,ν)
+⟨cp|γ⟩
+1/p
+, cp(x, y) := dX (x, y)p (6.28)
+Theorem 34 (Kantorovich-Rubinstein). The Wasserstein-1 distances admit the following formulation:
+W1(μ, ν) = sup ⟨f |μ⟩ − ⟨f |ν⟩ | f ∈ C0(X), Lip(f ) ⩽ 1 . (6.29)
+Proof. Note that for c = dX , ψc(x) = miny∈X d(x, y) − ψ(y) is 1-Lipschitz as a in mum of 1-Lipschitz functions. This implies that the dual problem may be rewritten as
+min
+ψ∈C 0 (X )|Lip(ψ)⩽1
+⟨ψc|μ⟩ + ⟨ψ|ν⟩.
+If ψ is 1-Lipschitz, then d(x, y) − ψ(y) ⩾ −ψ(x), so that
+ψc(x) = inyf d(x, y) − ψ(y) = −ψ(x)□.
+Maximal correlation?
+Theorem 35 (Properties of Wp). The following properties hold:
+(i) W1 ⩽ Wp for all p ⩾ 1, (ii) Wp is a distance on P(X), (iii) Wp metrizes weak convergence.
+
+
+32 OPTIMAL TRANSPORT
+Proof. (i) The rst claim is a consequence of the Jensen's inequality. (ii) To prove the second claim, we note that the stability of optimal transport plans (Theorem 14) implies in particular that the Wasserstein distances Wp
+p
+are weak∗ continuous with respect to their arguments. To establish the triangle inequality, we let μ, ν, σ ∈ P(X) and we consider empirical measures
+μN = 1
+N
+N
+X
+i=1
+δxi
+N , νN = 1
+N
+N
+X
+i=1
+δyi
+N , σN = 1
+N
+X
+i=1
+δzi
+N.
+converging weak∗ to μ, ν and σ respectively. Without loss of generality, we can reorder the points so that the optimal transport map between μN and νN is given by xi
+N → yi
+N , and that the optimal transport map beween νN
+and σN is yi
+N → zi
+N . Then,
+Wp(μN , σN ) ⩽
+
+
+1 N
+X
+1⩽i⩽N
+xi
+N − zi
+N
+p
+
+
+1/p
+⩽
+
+
+1 N
+X
+1⩽i⩽N
+xi
+N − yi
+N
+p
+
+
+1/p
++
+
+
+1 N
+X
+1⩽i⩽N
+yi
+N − zi
+N
+p
+
+
+1/p
+= Wp(μN , νN ) + Wp(νN , σN )
+We conclude by taking the limit N → +∞. (iii) Since W1 ⩽ Wp, if a sequence (μn) converges to μ with respect to Wp, then it also converges to μ with respect to W1. Kantorovich-Rubinstein's formula then implies that for any function f ∈ C0(X) with Lip(f ) ⩽ 1 one has limn→+∞
+R f dμn = R f dμ, thus proving weak∗ convergence of (μn) towards μ as n → +∞. Conversely, if μn converges weak∗ to μ, then by the weak∗ continuity of Wp
+p we get
+lim
+n→+∞ Wp(μn, μ) = W1(μ, μ) = 0. □
+Theorem 36 (Subdi erential of Wp
+p). Let μ ∈ P(X). The function F =
+Wp
+p(μ, ·) is convex and continuous in P(X) × P(X). Its subdi erential is given by
+∂F (ν) = ψ ∈ C0(X) | ⟨ψc|μ⟩ + ⟨ψ|ν⟩ = Wp
+p(μ, ν) .
+In particular, if the dual problem maxψ⟨ψc|μ⟩ + ⟨ψ|ν⟩ has a unique solution ψ up to an additive constant, then for any measure ν′ ∈ P(X) one has
+d
+dt F (ν + t(ν′ − ν)) t=0 = ⟨ψ|ν′ − ν⟩.
+Proof. Let (ψc, ψ) ∈ C0(X) × C0(X) be a maximizer of the dual Kantorovich problem. Then, for all measures ν′ ∈ P(X) × P(X) one has
+F (ν′) = Wp
+p(μ, ν′) ⩾ ⟨ψc|μ⟩ + ⟨ψ|ν′⟩
+= ⟨ψc|μ⟩ + ⟨ψ|ν⟩ + ⟨ψ|ν′ − ν⟩
+= F (ν) + ⟨ψ|ν′ − ν⟩,
+
+
+OPTIMAL TRANSPORT 33
+thus showing that ψ belong to ∂F (ν). To prove the converse, we introduce K ̃μ(ψ) = − R ψcdμ. Then,
+K ̃ ∗
+μ(ψ) = sup
+ν ∈P (X )
+⟨ν|ψ⟩ + ⟨μ|ψc⟩ = Wp
+p(μ, ν) = F (ν).
+By subdi erential calculus, we have
+ψ ∈ ∂F (ν) ⇐⇒ ν ∈ ∂F ∗(ψ) = ∂K ̃μ(ψ)
+⇐⇒ ψ ∈ arg max (KD),
+where the last equivalence comes from Proposition 16. □
+Remark 19 (Horizontal perturbations in the discrete case). For simplicity, assume that μ = 1
+N
+P
+i δxi and ν = 1
+N
+P
+i δyi and that there exists unique
+optimal transport maps S : μ → ν and T : ν → ν (which are thus inverse of each other). Let ξ be a smooth and compactly supported vector eld. Then, for small values of t, the map (id + tξ) ◦ S is optimal between μ and νt = (id + tξ)#ν. Thus,
+Wp
+p(νt, μ) =
+Z
+∥y − (id + tξ) ◦ T (y)∥p dμ(y),
+directly implying that
+d
+dt Wp
+p(νt, μ) =
+Zd
+dt ∥y − (id + tξ) ◦ S(y)∥p dμ(y),
+=
+Z
+p ∥y − S(y)∥p−2 ⟨ξ ◦ S(y)|S(y) − y⟩dμ(y),
+=
+Z
+p ∥T (x) − x∥p−2 ⟨ξ(x)|x − T (x)⟩dν(x)
+Letting T be the optimal transport map between μ. More concretely, if we denote
+Fˆ : (z1, . . . , zN ) ∈ RdN 7→ F ( 1
+N
+X
+i
+δzi , ν),
+then the previous computation shows that
+∇ziFˆ(x1, . . . , xN ) = p
+N ∥T (xi) − xi∥p−2 (xi − T (xi)).
+6.2. p-Wasserstein geodesics on Rd. In this subsection, we provide a short introduction to the geometry of the Wasserstein space on Rd. We refer to [2] for a more complete exposition.
+De nition 20 (Geodesic). In a metric space (X, dX ), a curve ω : [0, 1] → X is called a constant speed geodesic if
+∀s, t ∈ [0, 1], dX (ωs, ωt) ⩽ |t − s| dX (ω0, ω1).
+A space is called geodesic if any pair of points in X is joined by a geodesic.
+Remark 20. Let ω be a constant speed geodesic and assume that s ⩽ t. Then, the triangle inequality gives us
+dX (ω0, ω1) ⩽ dX (ω0, ωs) + dX (ωs, ωt) + dX (ωt, ω1)
+⩽ ((1 − t) + (s − t) + (1 − t))dX (ω0, ω1)
+⩽ dX (ω0, ω1).
+
+
+34 OPTIMAL TRANSPORT
+Thus, all inequalities must in fact be equalities, showing in particular that
+dX (ωs, ωt) = |t − s| dX (ω0, ω1).
+Theorem 37 (Geodesics in Wp). Let X be a convex subset of Rd, let μ0, μ1 ∈ P(X) and let γ ∈ Γ(μ, ν) be an optimal transport plan for the cost cp(x, y) =
+∥x − y∥p. Then, the curve t ∈ [0, 1] 7→ μt ∈ P(X) is a constant speed geodesic between μ0 and μ1, with
+μt = Pt#γ, where Pt : (x, y) 7→ (1 − t)x + ty
+Moreover, all constant speed geodesics between μ0 and μ1 are of this form. In particular, if μ0 or μ1 are absolutely continuous with respect to the Lebesgue measure, then the geodesic between μ0 and μ1 is unique.
+Example 6 (Geodesics when a transport map exists). If there exists an optimal transport map T between μ0 and μ1, then the geodesic de ned above is μt = ((1 − t)id + tT )#μ0. In the discrete case, if
+μ0 = 1
+N
+X
+1⩽i⩽N
+δxi
+0 and μ1 = 1
+N
+X
+1⩽i⩽N
+δxi
+0
+are two empirical measures, and if the points are ordered such that
+Wp
+p(μ0, μ1) = 1
+N
+X
+1⩽i⩽N
+xi
+1 − xi
+0
+p,
+a geodesic between μ0 and μ1 is given by
+μt = 1
+N
+X
+x∈X0
+δ(1−t)xi
+0+txi
+1.
+Thus, μt provides an interpolation between the supports of μ0 and μ1.
+Remark 21 (Many geodesics). It is quite easy to construct examples of measures μ0 and μ1 such that there exists more than one transport map between μ0 and μ1. For instance, take μ0 = 1
+N
+P
+i δ(i/N,0) and μ1 = 1
+N
+P
+i δ(0,i/N).
+Then, every bijection between the supports of μ0 and μ1 is optimal for p = 2, and therefore there exists an countably in nite number of geodesics between μ0 and μ1. In particular, this shows that the space (P([0, 1]2, W2) cannot be embedded isometrically into any Banach space.
+Proof of Theorem 37. One can observe that γst = (Ps, Pt)#γ has marginals μs and μt. In particular,
+Wp
+p(μs, μt) ⩽
+Z
+∥xs − xt∥p dγst(xs, xt)
+=
+Z
+∥(1 − s)x + sy − (1 − t)x + sx∥p dγ(x, y)
+= (t − s)p
+Z
+∥x − y∥o dγ(x, y) = (t − s)o Wp
+p(μ0, μ1),
+thus proving that μt is a constant speed geodesic. Let us now prove that all geodesics are of this form. For every T ∈ N and any i ∈ {1, . . . , T + 1}, denote γT
+i,i+1 an optimal transport between μti and
+
+
+OPTIMAL TRANSPORT 35
+μti+1, with ti = (i − 1)/T . By the gluing lemma recalled below, there exists ΓT ∈ P(XT +1) whose projection on (Xi, Xi+1) agrees with γT
+i,i+1. Moreover,
+Z
+∥x1 − xT +1∥2 dΓT (x1, . . . , xT +1)
+1/2
+⩽
+T −1
+X
+j=0
+Z
+∥xi+1 − xi∥2 dΓT (x1, . . . , xT +1)
+1/2
+=
+T +1
+X
+j=1
+W2(μti , μti )
+= W2(μ0, μ1)
+This implies in particular that γT = (Π1, ΠT +1)#ΓT , but also that for ΓT almost every x = (x1, . . . , xT +1), the points x1, . . . , xT +1 are aligned, i.e. xi = (1 − ti)x1 + tixT +1. Thus, we see that ΓT = (P0, P1/T , . . . , P1)#γT with Pt(x, y) = (1 − t)x + ty. In particular, we have μt = Pt#γT for all t ∈ {0/T, . . . , T /T }. One can nally check that if γ is a weak∗-limit of γ, then for all t ∈ [0, 1], one has μt = Pt#γ. □
+Lemma 38 (Gluing). Let X1, . . . , XN be compact metric spaces, and for any 1 ⩽ i ⩽ N − 1 consider a transport plan γi ∈ Γ(μi, μi+1). Then, there exists γ ∈ P(X1, . . . , XN ) such that for all i ∈ {1, . . . , N − 1}, πi,i+1γ = γi, where πi,i+1 : X1 × · · · × XN → Xi × Xi+1 is the projection.
+Proof. See Lemma 5.3.2 and Remark 5.3.3 in [3]. □
+6.3. Geodesic convexity with respect to W2 on Rd.
+De nition 21 (Geodesic convexity for sets). A set S ⊆ P2ac(Rd) is called geodesically convex if for any μ0, μ1 ∈ S, any W2 geodesic between μ0 and μ1 remains in S.
+Example 7 (Geodesically convex subsets of (P(X), W2).). Example of geodesically convex subsets of P(X) include :
+(a) the set obtained by translating and shearing a reference measure μ,
+{T#μ | T (x) = Ax + b, A symmetric,A ⩾ 0}
+In particular, the set of Gaussians densities is geodesically convex in P(Rd). The restriction of the Wasserstein distance on this set can be computed in near closed-form, and called the Bures-Wasserstein metric. (b) the set Pac(X) of absolutely continuous measures (c) the set of probability densities whose density is upper bounded by a constant (d) the set of measures of the form μ = 1
+N
+P
+i δxi (where the points xi
+are not necessary distinct) is convex under some geodesics, namely those induced by bijections (cf Example 6.
+Proposition 39. The set Pac(X) is geodesically convex. More precisely, given μ0 ∈ Pac(X) and μ1 ∈ P(X), one has μt ∈ Pac(X) for any t ∈ [0, 1).
+Proof. Let μ0 ∈ Pac(X), μ1 ∈ P(Rd) and φ ∈ Lip(X) be a convex function so that μt = ((1−t)id+t∇φ)#μ0 is the unique Wasserstein geodesic between
+
+
+36 OPTIMAL TRANSPORT
+μ0 and μ1. De ne Tt = (1 − t)id + t∇φ. Then, for any x, y ∈ spt(μ0),
+⟨Tt(x) − Tt(y)|x − y⟩ = (1 − t) ∥x − y∥2 + t⟨∇φ(x) − ∇φ(y)|x − y⟩
+⩾ (1 − t) ∥x − y∥2 ,
+where we used the monotonicity of the gradient of convex functions to get the inequality. In particular, if x ̸= y and t < 1, then Tt(x) ̸= Tt(y) and the inverse map T −1
+t is well-de ned. Moreover, the same inequality shows that
+T −1
+t is Lipschitz with constant L = 1/(1 − t). In addition, T −1
+t transports
+μt to μ0, i.e. μt(B) = μ0(T −1
+t (B)) for any Borel set B. Thus, if N is
+Lebesgue-negligible, T −1
+t (N ) is also negligible (by the next lemma), so that
+μt(N ) = μ0(T −1
+t (N )) = 0. This implies that μt ≪ λ. □
+Lemma 40. If N is Lebesgue-negligible, and if S is Lipschitz, then S(N ) is Lebesgue-negligible.
+De nition 22 (Geodesic convexity for functions). A function F : Pac(X) to R ∪ {+∞} is geodesically convex if and only if for any μ0, μ1 ∈ Pac(W ),
+F (μt) ⩽ (1 − t)F (μ0) + tF (μ1) (6.30)
+where (μt) is the W2 geodesic. Following McCann, a geodesically convex function is often called displacement convex.
+De nition 23 (Internal energy). Let A : R+ → R ∪ {+∞}. The înternal energy associated to A generalizes Boltzmann's functional. It is de ned as
+EA : μ ∈ P(X) 7→
+(R
+Ω A(ρ(x))dx if μ ≪ λ and ρ := dμ
+dλ
++∞ if not (6.31)
+Theorem 41 (McCann). Let A : R+ → R+ ∪ {+∞} be such that
+(i) A(0) = 0 and (ii) r 7→ A(r−d)rd is convex non-increasing. Then internal energy EA is displacement convex on P(X).
+We will call conditions (i) and (ii) McCann's conditions. Example of functions A that satisfy such conditions include • A(r) = rq for q > 1; • A(r) = r log r; • A(r) = −rm for m ∈ [1 − 1/d, 1).
+This theorem is a corollary of the more general result below. Indeed, take μ0 = μ ∈ Pac(X), φ0 = 1
+2 ∥·∥2 and φ1 a convex function such that T = ∇φ1
+is the optimal transport map between μ0 and μ1. Then,
+μt = ((1 − t)∇φ0 + t∇φ1)#μ = ((1 − t)id + tT )#μ0
+is the unique Wasserstein geodesic between μ0 and μ1.
+Theorem 42. Let μ ∈ Pac(X) and let φ0, φ1 ∈ Lip(X) be two convex functions such that ∇φi(X) ⊆ X, and let φt = (1 − t)φ0 + tφ1. Assume that A : R+ → R+ satis es McCann's conditions. Then
+t ∈ [0, 1] 7→ EA(∇φt#μ)
+is convex.
+
+
+OPTIMAL TRANSPORT 37
+We only prove this theorem when the functions φ0 and φ1 are C2 and uniformly convex, which implies that the gradients ∇φi are di eomorphisms from X to ∇φi(X). The proof in the general case can be found in the article of McCann [26] or in Villani's rst book [42].
+Lemma 43. Assume that μ ∈ Pac(X) has density ρ and that φ ∈ C2(X) is uniformly convex . Then
+EA(∇φ#μ) =
+Z
+Rd
+A ρ(x)
+det(D2φ(x)) det(D2φ(x))dx.
+Proof. Since T is a di eomorphism, the measure T#μ is absolutely continuous with respect to the Lebesgue measure. We denote σ the density of T#μ, which satis es
+σ(T (x)) det(DT (x)) = ρ(x)
+Moreover, by the change of variable formula y = T (x) and using det(DT (x)) = |det DT (x))|, which follows from the convexity of T , we get
+EA(∇φ#μ) =
+Z
+A(σ(y))dy
+=
+Z
+A(σ(T (x))) det(DT (x))dx
+=
+Z
+A ρ(x)
+det(DT (x)) det(DT (x))dx □
+Lemma 44. The map M 7→ det(M )1/d is concave over the set of symmetric positive d-by-d matrices.
+Proof. Recall Hadamard's formula for a symmetric positive matrix M :
+det(M ) = min
+e1,...,ed orthonormal⟨e1|M e1⟩ · · · ⟨ed|M ed⟩,
+where the minimum is taken over orthonormal bases. Given a xed orthonormal basis e1, . . . , ed consider f (M ) = (⟨e1|M e1⟩ · · · ⟨ed|M ed⟩)1/d. Then f is concave over the set of matrices M satisfying ⟨ei|M ei⟩ ⩾ 0 as the composition ofthe geometric mean (x ∈ (R+)d 7→ (x1 · · · xd)1/d) with linear functions. Then, det(·)1/d is concave over the set of symmetric positive matrices, as a minimum of concave functions. □
+Proof of Theorem 42. If φ0, φ1 are C2 and uniformly convex, the interpolant φt := (1 − t)φ0 + tφ1 is also C2 and uniformly convex. Hence, by Lemma 43,
+EA(∇φt#μ) =
+Z
+X
+B(D(x, t))ρ(x)dx,
+where we have set B(r) = A(r−d)rd and D(x, t) = (det(D2φt(x))/ρ(x))1/d. By Lemma 44, for all x ∈ X, t ∈ [0, 1] 7→ D(x, t) is concave so that
+D(x, t) ⩾ (1 − t)D(x, 0) + tD(x, 1).
+Hence, since B is non-decreasing and convex,
+B(D(x, t)) ⩽ B((1 − t)D(x, 0) + tD(x, 1)) ⩽ (1 − t)B(D(x, 0)) + tB(D(x, 1)).
+Integrating this inequality gives the desired convexity result. □
+
+
+38 OPTIMAL TRANSPORT
+Remark 22 (Displacement convexity in the linear case). Assume that T0(x) = x and T1(x) = M · x where M is a xed symmetric positive de nite matrix, and ρ ∈ Pac(Ω). Then, the 2-Wasserstein geodesic between ρ0 = ρ and ρ1 = T1#ρ is given by ρt = Tt#, where Tt = Mt · x, with Mt = (1 − t)Id + tM . The density of ρt satis es ρt(Tt(x)) det DTt(x) = ρ(x), where det(DTt(x)) = det(Mt) does not depend on x. Then,
+EA(ρt) =
+Z
+A(ρt(y))dy
+=
+Z
+A(ρt(Tt(x))) det(Mt)dx
+=
+Z
+A ρ(x)
+det(Mt) det(Mt)dx
+Since A(r) = r ln(r), A(r/s)s = rln(r/s) = r(ln(r) − ln(s)). Thus,
+EA(ρt) =
+Z
+A(ρ(x))dx − log(det(Mt))ρ(x)
+Using that M 7→ log ◦ det(M ) is concave on the set of symmetric positive de nite matrices, we conclude that t 7→ EA(ρt) is convex.
+Corollary 45 (Brunn-Minkowski's inequality). Let K0, K1 be compact subsets of X, and let Kt = (1 − t)K0 + tK1. Then,
+λ(Kt)1/d ⩾ (1 − t)λ(K0)1/d + tλ(K1)1/d.
+Proof. Assume that λ(K0), λ(K1) > 0. Let μi = λ|Ki /λ(Ki), let μt be the
+geodesic between μ0 and μ1. Then μt is absolutely continuous, with density ρt, and supported on Kt. The convexity of A(r) = −r1−1/d and Jensen's inequality implies
+Z
+Kt
+A(ρt(x))dλ(x) = λ(Kt)
+Z
+Kt
+A(ρt(x)) dλ(x)
+λ(Kt)
+⩽ λ(Kt)A
+Z
+Kt
+ρt(x) dλ(x)
+λ(Kt)
+= λ(Kt)A(1/λ(Kt)) = −λ(Kt)1/d
+Moreover, for t = 0 and t = 1 we get
+Z
+Ki
+A(ρi(x))dλ(x) =
+Z
+Ki
+λ(Ki)A(1/λ(Ki)) = −λ(Ki)1/d
+□
+7. Quantization and uniform quantization of measures
+8. Embedding of the Wasserstein space
+We recall that there exists an explicit isometric embedding of (Pp(R), Wp) into the space Lp([0, 1]), which maps μ ∈ P(R) to its quantile function Tμ ∈ Lp([0, 1]), i.e. the unique non-decreasing map which transports λ[0,1] onto ν:
+∀μ, ν ∈ Pp(R), Wp(μ, ν) = ∥Tμ − Tν ∥Lp([0,1]) .
+
+
+OPTIMAL TRANSPORT 39
+This embedding is practically very useful, because it allows to simplify many constructions in the 1D Wasserstein space (geodesics, barycenters, etc). However, we already saw (Remark 21) that in (Pp(Rd), Wp), there may exist several geodesics between two probability measures, preventing an isometric embedding of this space into a Banach space. A natural question is whether (for instance) there may exist bi-Lipschitz or bi-Hölder embeddings of (Pp(Rd), Wp) into Banach spaces, and we will see that the answer is mostly negative.
+8.1. Non-embeddability results.
+De nition 24 (Coarse embedding). Let X, Y be metric spaces. A function f : X → Y is a coarse embedding if there exists a non-decreasing functions ρ± : R+ → R+ satisfying
+• ρ−(dX (x, y)) ⩽ dY (f (x), f (y)) ⩽ ρ+(dX (x, y)) • limt→+∞ ρ−(t) = +∞.
+In particular, if f is bi-Lipschitz or bi-Hölder (or even uniformly continuous and with uniformly continuous inverse)), the embedding is coarse. However, note that the de nition does not imply that f is continuous. The notion of coarse embedding is therefore extremely weak, so that theorem establishing the impossibility of coarse embeddings are usually strong and di cult theorems. Our aim with this sections is not to present a comprehensive review of the literature on embedding metric spaces into Banach spaces, but rather to present some striking impossibility results when the source space is a Wasserstein space over Rd with d > 1. The rst result is about coarse embeddability into a Hilbert space, and was originally proven by Wagner in the context of persistence diagrams in computational topology [44]. We provide here an (easy) adaptation of the arguments of Wagner to the Wasserstein setting.
+Theorem 46 (Wagner). Let p > 2. Then, there is no coarse embedding of the Wasserstein space (Pp(Rd), Wp) into a Hilbert space.
+The proof of this theorem relies on a characterization of coarse embeddability of a metric space in a Hilbert space through the uniform coarse embeddability of nite subsets, due to P. Nowak [29] (see also [18]), and relying on Schoenberg's characterization of isometric embeddability into a Hilbert space.
+Theorem 47 (Nowak). A metric space (X, dX ) admits a coarse embedding into a Hilbert space if and only if there exists non-decreasing functions ρ± : R+ → R+ satisfying limt→+∞ ρ−(t) = +∞, and such that for any nite subset A ⊆ X, there exists a coarse embedding fA : A → l2 satisfying
+∀x, y ∈ A, ρ−(dX (x, y)) ⩽ ∥fA(x) − fA(y)∥ ⩽ ρ+(dX (x, y)).
+Nowak's theorem was used for instance to prove that the space lp = {a ∈
+RN | P
+i |ai|p < +∞} with p > 2 cannot be coarsely embedded into a
+Hilbert space [22]. We will use this result to prove that (Pp, Wp) also cannot be embedded into a Hilbert space.
+
+
+40 OPTIMAL TRANSPORT
+Lemma 48. Given any p ⩾ 1, R ∈ R+ and N ∈ N, the map
+ΦR,N : ([−R, R]N , ∥·∥p) → (Pp(R2), Wp)
+a = (a1, . . . , aN ) 7→ 1
+N
+N
+X
+i=1
+δ2N 1/pRi,N 1/pai
+is an isometry.
+Proof. Let a, b ∈ [−R, R]N and denote pi(a) = (2N 1/pRi, N 1/pai) ∈ R2. Then, for all i ̸= j, one has
+∥pi(a) − pj(b)∥ ⩾ 2N 1/pR |i − j| ⩾ 2RN 1/p.
+On the other hand,
+∥pi(a) − pi(b)∥ = N 1/p |ai − bi| ⩽ 2RN 1/p.
+Thus, the optimal transport map between ΦR,N (a) and ΦR,N (b) simply maps the point pi(a) to pi(b), so that
+Wp(ΦR,N (a), ΦR,N (b)) = 1
+N
+N
+X
+i=1
+∥pi(a) − pi(b)∥p
+=1
+N
+N
+X
+i=1
+(N 1/p |ai − bi|)p
+= ∥a − b∥p
+p□
+Proof of Theorem 46. Assume that (Pp(R2), Wp) can be embedded into a Hilbert space. Then there exists two functions ρ± with limt→+∞ ρ−(t) = +∞ and for any nite subset S of Pp(R2), there exists a map fS : S → l2 such that
+∀μ, ν ∈ S, ρ−(Wp(μ, ν)) ⩽ ∥fS(μ) − fS(ν)∥ ⩽ ρ+(Wp(μ, ν)). (8.32)
+We now prove using the converse of Theorem 47 that this would imply that lp can be coarsely embedded into a Hilbert space, which is known to be false [22]. Let A be a nite subset of lp. Then, there exists N > 0 such that
+∀a ∈ A,
++∞
+X
+i=N +1
+|ai|p
+!1/p
+⩽1
+2.
+We let R = maxa∈A ∥a∥∞ and we consider ΠA : A → [−R, R]N obtained by
+keeping only the rst N coordinates of a sequence, i.e. ΠA(a) = (ai)1⩽i⩽N . Then,
+∀a, b ∈ A, ∥a − b∥p − 1 ⩽ ∥ΠA(a) − ΠA(b)∥ ⩽ ∥a − b∥p .
+Thus, denoting S = ΦR,N (ΠA(A)) and fA = fS ◦ ΦR,N ◦ ΠA, we get for all a, b ∈ A, using (8.32) and Lemma 48,
+∥fA(a) − fA(b)∥ ⩽ ρ+(Wp(ΦR,N ◦ ΠA(a), ΦR,N ◦ ΠA(a)))
+= ρ+(∥ΠA(a) − ΠA(b)∥)
+⩽ ρ+(∥a − b∥p).
+
+
+OPTIMAL TRANSPORT 41
+Similarly, introducing ρ ̃−(r) = max(ρ−(r) − 1, 0) we get
+∥fA(a) − fA(b)∥ ⩾ ρ ̃−(∥a − b∥p).
+We can use Theorem 47 to conclude that lp can be coarsely embedded into a Hilbert space, contradicting p > 2. □
+Below, we report a more di cult negative result from Andoni, Naor and Neiman [4, Theorem 7]. In particular, this result shows that it is not possible construct a bi-Lipschitz or bi-Hölder embedding of (P2(Rd), W2), d ⩾ 3, into any Hilbert or Lp space.
+Theorem 49 (Andoni, Naor, Neiman). For every p > 1, the space (Pp(R3), Wp) does not admit a coarse embedding into any Banach space of nontrivial type.
+8.2. Embedding via slicing. Theorems 46 and 49 show that it is impossible to coarsely embed Wasserstein spaces into a Hilbert space when d ⩾ 3 and p = 2 or d ⩾ 2 and p > 2. In the case d = 1, the map μ 7→ Tμ (quantile function) is an (Pp(R), Wp) into the space Lp([0, 1]). An natural idea, initially proposed by Marc Bernot, is to de ne an easy to compute analogues of the Wasserstein distance in dimension d > 1 using averages of 1D Wasserstein distances. This idea was rst exploited in a joint work between Marc Bernot, Julie Delon, Gabriel Peyré and Julien Rabin in the context of texture generation [33]. We also refer to the PhD theses of Nicolas Bonnotte [11] and Kimia Nadjahi [28], which provide the most detailed theoretical study of these distances.
+De nition 25 (Sliced Wasserstein). Given a direction θ in the unit sphere Sd−1, we note Pθ(x) = ⟨x|θ⟩ the projection of x on the line spanned by θ. The p-sliced Wasserstein distance between two measures μ, ν ∈ P(Rd) are then de ned by averaging 1D Wasserstein distances:
+SWp
+p(μ, ν) =
+Z
+Wp
+p(Pθ#μ, Pθ#ν)dσ(θ),
+where σ is the uniform probability measure over the unit sphere Sd−1.
+Proposition 50. The sliced Wasserstein distance SWp enjoys the following properties:
+(i) SWp is indeed a distance on Pp(Rd); in particular, SWp(μ, ν) = 0 if and only if μ = ν (ii) SWp is weaker than the Wasserstein distance:
+∀μ, ν ∈ Pp(Rd), SWp(μ, ν) ⩽ Wp(μ, ν).
+(iii) the topology induced by SWp is stronger than the weak∗ topology (iv) the map
+Φ : Pp(Rd) → Lp(Sd−1 × [0, 1])
+μ 7→ (θ, r) 7→ TPθ#μ(r) ,
+where TPθ#μ is the quantile function of Pθ#μ, is an isometric embedding of (Pp(Rd), SWp) into the Banach space Lp(Sd−1 × [0, 1]).
+
+
+42 OPTIMAL TRANSPORT
+We refer to [11, Proposition 5.1.2 and 5.1.3] for a detailed proof of some of these properties.
+Proof. (i) We note that for any θ ∈ Sd−1 and k ∈ R,
+⟨μ|ei⟨kθ|·⟩⟩ =
+Z
+Rd
+eikPθ(x)dx =
+Z
+R
+eiktdPθ#μ(t) = ⟨Pθ#μ|eik·⟩.
+where we used the change of variable t = Pθ(x). If SWp(μ, ν) = 0, then for all θ, Pθ#μ = Pθ#ν, so that by the above computation the Fourier transform of μ, ν agree. This implies that μ = ν. (ii) The upper bound of SWp in terms of Wp is obtained by remarking that if γ ∈ Γ(μ, ν), then (Pθ, Pθ)#γ belongs to Γ(Pθ#μ, Pθ#ν). (iii) This is a consequence of the Cramér-Wold theorem and the fact that Wp topologizes weak convergence on Pp(R). □
+From the last point of the previous proposition, and form the Theorem 49, we deduce that the sliced Wasserstein distance SWp cannot be coarsely equivalent to the Wasserstein distance Wp on Pp(Rd) when d ⩾ 3 and p > 1. However, Bonotte [11, Theorem 5.1.5] was still able to prove that SWp and Wp are bi-Hölder equivalent to each other when the probability measures are on a xed compact set.
+Theorem 51 (Bonotte). Let K be a compact subset of Rd with diam(K) ⩽ R. Then for all p ⩾ 1, there exists constants Cd,p,R > 0 such that
+∀μ, ν ∈ P(K), SWp(μ, ν) ⩽ Wp(μ, ν) ⩽ Cd,p,R SWp(μ, ν)
+1
+p(d+1) .
+Remark 23 (Non-convex image). The image of Pp(Rd) under the embedding Φ described above is not necessarily a convex subset of Lp(Sd−1 ×[0, 1]) (this is discussed in detail in [33]). This complicates many tasks that one could wish to accomplish using this embedding, e.g. de ning a notion of barycenter between measures. In order to de ne the barycenter between μ1, . . . , μN with weights α1, . . . , αN > 0, one could start by taking a weighted average of the images Φ(μi),
+1
+P
+i αi
+N
+X
+i=1
+αiΦ(μi).
+However, this average might not belong to the range of Φ, so that we may not be able to take its inverse image.
+8.3. Linearization of the quadratic Wasserstein distance. We x a supported probability density ρ ∈ Pac(Rd), supported over a compact convex set X and bounded from above and below positive constants. Given μ ∈ P2(Rd), we call Brenier map Tρ→μ the quadratic optimal transport map between ρ and μ. In practice, since ρ is xed, we will often denote Tμ the Brenier map.
+Remark 24 (Relation to quantile function). Note that in dimension 1, if ρ is the Lebesgue measure on [0, 1], the map Tρ→μ coincides with the quantile function. In fact, maps of the form Tρ→μ have been suggested as a analogue of the quantile function in [15].
+
+
+OPTIMAL TRANSPORT 43
+Proposition 52. The mapping μ 7→ Tμ enjoys the following properties:
+(i) μ 7→ Tμ is injective; (ii) μ 7→ Tμ is reverse-Lipschitz:
+∀μ, ν ∈ P(Y ), W2(μ, ν) ⩽ ∥Tμ − Tν ∥L2(ρ,Rd). (8.33)
+(iii) μ 7→ Tμ is continuous. (iv) the image of μ 7→ Tμ is a convex subset of L2(ρ, Rd).
+We note that the arguments used to prove the general continuity result (iii) are non-quantitative.
+Proof. (i) The injectivity comes from the fact that μ = Tμ#ρ. (ii) If we denote γ := (Tμ, Tν)#ρ, then γ ∈ Π(μ, ν). The change of variable formula gives
+W2
+2(μ, ν)⩽
+Z
+Y ×Y
+∥y − y′∥2
+2dγ(y, y′)
+=
+Z
+X
+∥Tμ(x) − Tν(x)∥2
+2ρ(x)dx = ∥Tμ − Tν ∥2
+L2(ρ).
+(iii) If a sequence of probability measures (μn)n converges to some μ in (P2(Rd), W2), then Tμn converges to Tμ in L2(ρ, Rd). This continuity property is for instance implied by Corollary 5.23 in [43], together with the dominated convergence theorem. □
+These properties of the map μ 7→ Tμ motivated its use to embed the metric space (P2(Rd), W2) into the Hilbert space L2(ρ, Rd). This approach is often referred to as the Linearized Optimal Transport (LOT) [45] framework and has shown great results in applications to image processing [45, 24, 5, 13, 31, 23].
+Remark 25 (Convex image). A practical bene t of the embedding is to enable the use of the classical Hilbertian statistical toolbox on families of probability measures while keeping some features of the Wasserstein geometry. A particularly nice feature of the embedding μ 7→ Tμ is that its image in L2(ρ, Rd) is convex, i.e. barycenters of optimal transport maps are optimal transport maps, and that the inverse image of the embedding is very easy to compute.
+Remark 26 (Relation to generalized geodesics). Working with this embedding is equivalent to replacing the Wasserstein distance by the distance
+W2,ρ(μ, ν) = ∥Tμ − Tν ∥L2(ρ,Rd) .
+We note that the geodesic curves with respect to the distance W2,ρ are called the generalized geodesics in the book of Ambrosio, Gigli, Savaré [3].
+Remark 27 (μ 7→ Tμ as a Riemannian logarithm). The choice of the Brenier map between a reference measure ρ and a measure μ as an embedding of μ may also be motivated by the Riemannian interpretation of the Wasserstein geometry [30, 3]. In this interpretation, the tangent space to P2(Rd) at ρ is included in L2(ρ, Rd). The Brenier map minus the identity, Tμ − id, can be regarded as the vector in the tangent space at ρ which supports the Wasserstein geodesic from ρ to μ. In the Riemannian language again, the map μ 7→ Tμ − id would be called a logarithm, i.e. the inverse of the Riemannian
+
+
+44 OPTIMAL TRANSPORT
+exponential map: it sends a probability measure μ in the (curved) manifold P2(Rd) to a vector Tμ − id belonging to the linear space L2(ρ, Rd). This establishes a connection between the linearized optimal transport framework idea and similar strategies used to extend statistical inference notions such as principal component analysis to manifold-valued data.
+It is quite natural to expect that the embedding μ 7→ Tμ retains some of the geometry of the underlying space, or equivalently that the metric W2,ρ is comparable, in some coarse sense, to the Wasserstein distance (however, not on the whole space P2(Rd), by Theorem 49!). A rst question in this direction is to estimate the Hölder exponent of the map μ 7→ Tμ when restricted to a suitable family of probability measures. We rst note that μ 7→ Tμ cannot be better than 1
+2 -Hölder (another ex
+ample of this fact can be found in [21]).
+Lemma 53. Let ρ be uniform on the unit disc X ⊆ R2. Then, there is a curve θ ∈ [0, 2π] → μθ ∈ P(X) and C > 0 such that
+∥Tμθ − Tμ0 ∥L2(ρ) ⩾ C W2(μθ, μ0)1/2.
+Proof. Given θ ∈ R, we denote xθ = (cos θ, sin(θ)) and μθ = 1
+2 (δxθ + δ−xθ ).
+Then, the optimal transport map between ρ and μθ is given by
+Tμθ (x) =
+(
+xθ if ⟨x|xθ⟩ ⩾ 0
+−xθ if not. (8.34)
+One can easily check that for θ one has W2(μ0, μθ) ⩽ |θ|. For θ > 0 we set
+Dθ = {x ∈ R2 | ⟨x|x0⟩ ⩾ 0 and ⟨x|xθ⟩ ⩽ 0}. (8.35)
+Then, on Dθ, Tμθ ≡ x−θ and Tμ0 ≡ x0, giving
+∥Tμθ − Tμ0 ∥2
+L2(ρ) ⩾
+Z
+Dθ
+∥x−θ − x0∥2 dx = |Dθ| ∥x−θ − x0∥2 . (8.36)
+Moreover, if |θ| ⩽ π
+2 one has ∥x−θ − x0∥2 ⩾ 2. This gives
+∥Tμθ − Tμ0 ∥2
+L2(ρ) ⩾ 2 |Dθ| ⩾ |θ|
+π. □
+9. Stability of quadratic optimal transport maps
+We are interested in establishing quantitative continuity estimates for the map μ ∈ P(Y ) 7→ Tμ, where Tμ is the optimal transport map between a reference probability density ρ on Rd and μ, and where Y is a ( xed) compact subset of Rd. We will rely on the following assumptions and notations:
+De nition 26. We x a supported probability density ρ ∈ Pac(Rd), supported over a compact convex set X and bounded from above and below positive constants. Given μ ∈ P2(Rd), we call
+• Brenier map Tμ the optimal transport map between ρ and μ; • Brenier potential the unique lower semi-continuous convex function φρ→μ ∈ L2(ρ) such that Tμ = ∇φμ and R
+X φμdρ = 0;
+• dual potential the convex conjugate of φμ, denoted ψμ = φ∗μ.
+
+
+OPTIMAL TRANSPORT 45
+Our main tool to prove these continuity estimates will be Kantorovich duality with respect to the cost c(x, y) = −⟨x|y⟩. More precisely we will rely on the semi-dual problem
+min
+ψ∈C0(Y )
+K(ψ) + ⟨ψ|μ⟩. (9.37)
+where K is the Kantorovich functional
+K(ψ) =
+Z
+ψ∗dρ.
+We have already established (see Proposition 17) that ∇K(ψ) = −∇ψ∗
+#ρ, so that the optimality condition for the problem (9.37) is
+∇ψ∗
+μ#ρ = μ.
+If ψμ satis es this condition, then φμ = ψ∗μ is the Brenier potential and Tμ = ∇φμ is the Brenier map. Adding a constant from φμ if necessary, we may assume that ⟨φμ|ρ⟩ = 0; the same constant is then substracted from ψμ and (φμ, ψμ, Tμ) are then uniquely de ned.
+9.1. Stability near a regular con guration. We state a rst positive result, which is a slight variant of a known stability result due to Ambrosio and reported in [21].
+Theorem 54. Let μ, ν ∈ P(Y ) and assume that Tμ is K-Lipschitz. Then,
+∥Tμ − Tν ∥L2(ρ) ⩽ 2pMX K W1(μ, ν)1/2, (9.38)
+where MX = maxx∈X ∥x∥.
+We deduce this theorem from the following elementary lemma, which can be regarded as a strong concavity estimate for the Kantorovich functional K, as it can be rephrased as
+⟨ψν − ψμ|K(ψν) − K(ψμ)⟩ ⩾ 1
+2K ∥Tμ − Tν ∥2
+L2(ρ) .
+Lemma 55. Under the assumptions of Theorem 54,
+∥Tμ − Tν ∥2
+L2(ρ) ⩽ 2K
+Z
+Y
+(ψν − ψμ)d(μ − ν) (9.39)
+Proof. From convex analysis, we know that the map Tμ = ∇φμ is K-Lipschitz if and only if the dual ψμ is 1
+K -strongly convex. We denote A = R
+Y ψνd(μ−ν)
+and B = R
+Y ψμd(ν − μ). Using that (∇φμ)#ρ = μ and (∇φν)#ρ = ν, we get
+A=
+Z
+X
+(ψν(∇φμ) − ψν(∇φν))dρ
+=
+Z
+X
+(ψν (∇ψ∗
+μ) − ψν (∇ψ∗
+ν))dρ (9.40)
+We now use the inequality ψν(y) − ψν(z) ⩾ ⟨y − z|v⟩, which holds for all v in the subdi erential ∂ψν(z). The convex functions ψν, ψμ are di erentiable ρ-almost everywhere. Taking z = ∇ψν∗(x) and y = ∇ψ∗μ(x), and using x ∈ ∂ψν(z), we obtain
+A⩾
+Z
+X
+⟨id, ∇ψ∗
+μ − ∇ψ∗
+ν⟩dρ (9.41)
+
+
+46 OPTIMAL TRANSPORT
+Using the strong convexity of ψμ, we get a similar lower bound on B, with an extra quadratic term
+B=
+Z
+X
+(ψμ(∇ψ∗
+ν ) − ψμ(∇ψ∗
+μ))dρ
+⩾
+Z
+X
+⟨id, ∇ψ∗
+ν − ∇ψ∗
+μ⟩ + 1
+2K ∥∇ψ∗
+ν − ∇ψ∗
+μ∥2
+2 dρ. (9.42)
+Summing up the lower bounds on A and B, we get:
+Z
+Y
+(ψν − ψμ)d(μ − ν) ⩾ 1
+2K
+Z
+X
+∥∇ψ∗
+ν − ∇ψ∗
+μ∥2
+2dρ
+=1
+2K ∥Tν − Tμ∥2
+L2(ρ). □
+Proof of Theorem 54. Being de ned as the convex conjugate of φν : X → R, we know that ψν is Lipschitz with constant ⩽ MX . Combining this with Lemma 55,
+∥Tμ − Tν ∥2
+L2(ρ) ⩽ 2K
+Z
+Y
+(ψν − ψμ)d(μ − ν)
+⩽ 2K max
+Lip(f )⩽MX
+Z
+Y
+f d(μ − ν)
+= 2KMX max
+Lip(f )⩽1
+Z
+Y
+f d(μ − ν)
+= 2KMX W1(μ, ν), (9.43)
+where we used Kantorovich-Rubinstein's theorem to get the last equality. □
+9.2. Stability of potentials for entropy-regularized quadratic optimal transport. In this section, we x a reference probability measure σ in P(Y ), with support equal to Y . Given ε > 0, and ψ ∈ C0(Y ), we de ne the ε-regularized convex conjugate as
+ψ∗,ε(x) = ε log
+Z
+Y
+e
+⟨x|y⟩−ψ(y)
+ε dσ(y) ,
+and the ε-regularized Kantorovich as
+Kε(ψ) =
+Z
+X
+ψ∗,εdρ.
+Lemma 56 (Convergence as ε → 0). For any ψ ∈ C0(Y ),
+• ψ∗,ε converges pointwise to ψ as ε → 0; • limε Kε(ψ) = K(ψ) ;
+We now look at the gradient of Kε. To each potential ψ ∈ C0(Y ) and any point x in the source domain X, we will associate a probability density μˆεx[ψ]
+(with respect to σ) and the corresponding probability measure μεx[ψ] on Y :
+μˆx
+ε [ψ] = e ⟨x|y⟩−ψ(y)
+ε
+R
+Y e ⟨x|z⟩−ψ(z)
+ε dσ(z)
+μx
+ε [ψ] = μˆx
+ε [ψ]dσ
+
+
+OPTIMAL TRANSPORT 47
+We also de ne
+με[ψ] =
+Z
+X
+μx
+ε [ψ]dρ(x).
+Remark 28 (Limit as ε → 0). Note that if ∇ψ∗ is di erentiable at x, then the maximum of y 7→ ⟨x|y⟩ − ψ(y) is attained at the point ∇ψ∗(x). If this is the case, then
+εli→m0 μx
+ε [ψ] = δ∇ψ∗(x).
+Thus, at least formally, με[ψ] is the analogue of
+∇ψ∗
+#ρ =
+Z
+δ∇ψ∗(x)dρ(x).
+Lemma 57 (Gradient of Kε). The smoothed Kantorovich functional Kε is di erentiable at any ψ ∈ C0(Y ) with
+∇Kε(ψ) = −με[ψ],
+i.e. for all v ∈ C0(Y ),
+d
+dt Kε(ψ + tv) = −⟨με[ψ]|v⟩ = −
+Z
+X
+⟨μˆx
+ε [ψ]|v⟩dρ(x).
+Moreover,
+liεm ∇Kε(ψ) = ∇K(ψ)
+Proof. Let ψt = ψ + tv. Then, by de nition of μεx[ψ] we have
+d
+dt ψ∗,ε
+t (x) = ε d
+dt log
+Z
+Y
+e
+⟨x|y⟩−ψt (y)
+ε dσ(y)
+=ε
+R
+Y
+d
+dt e ⟨x|y⟩−ψt(y)
+ε dσ(y)
+R
+Y e ⟨x|y⟩−ψt(y)
+ε dσ(y)
+= −⟨v|μx
+ε [ψ]⟩
+(9.44)
+We conclude by di erentiating under the integral de ning Kε(ψ) that
+d
+dt Kε(ψ + tv) = ε
+Z
+X
+d
+dt ψ∗,ε
+t (x)dρ(x).
+=−
+Z
+X
+⟨v|μx
+ε [ψ]⟩dρ(x).
+= −⟨v|με⟩. □
+We consider the set of continuous functions with bounded oscillation, where osc(ψ) = sup ψ − inf ψ:
+C0
+R(Y ) = {ψ ∈ C0(Y ) | osc(ψ) ⩽ R}.
+Theorem 58. The functional Kε is strongly convex on C0
+R(Y ). More pre
+cisely, if ψ0, ψ1 ∈ C0
+R(Y ), then
+⟨∇Kε(ψ1) − ∇Kε(ψ0)|ψ1 − ψ0⟩ ⩾ cVarσ(ψ1 − ψ0).
+where cε = 1
+ε e− 2RX RY +R
+ε and RZ = maxz∈Z ∥z∥.
+
+
+48 OPTIMAL TRANSPORT
+Remark 29 (Stability of dual potentials). In particular, if ψ0, ψ1 are Lipschitz with constant K, then
+Varσ(ψ1 − ψ0) ⩽ 1
+cε
+⟨με[ψ1] − με[ψ0]|ψ1 − ψ0⟩
+⩽2
+cε
+K W1(με[ψ1], με[ψ0]),
+where we used Kantorovich-Rubinstein's theorem (Theorem 34) to get the second inequality. Note that as ε → 0, cε tends to in nity, so that this inequality does not translate into a stability inequality for the unregularized case ε = 0. In a similar spirit (but using di erent techniques, involving the so-called Hilbert metric), Giulia Luise et al [25, Theorem C.4] proves an estimate of the form
+osc(ψ1 − ψ0) ⩽ cε ∥με[ψ0] − με[ψ1]∥TV ,
+with limε→0 cε = +∞. Note that the dependence is Lipschitz in their case, which is important for some applications.
+Given ψ ∈ C0(Y ) and a direction v ∈ C0(Y ), we de ne
+⟨D2Kε(ψ)v|v⟩ = tli→m0⟨∇Kε(ψ + tv) − ∇Kε(ψ)|v⟩.
+Lemma 59. ⟨D2Kε(ψ)v|v⟩ = 1
+ε
+R
+X Varμεx[ψ](v)dρ(x).
+Proof. Let ψt = ψ + tv. By integration under the integral, we have
+d
+dt ⟨∇Kε(ψt)|v⟩ = −
+Z
+X ×Y
+⟨v| d
+dt μx
+ε [ψ]⟩dρ(x).
+Let us compute the derivative of the density μˆεx[ψ]:
+d
+dt μˆx
+ε [ψt](y)|t=0 = d
+dt
+e
+⟨x|y⟩−ψt (y) ε
+R
+Y e ⟨x|z⟩−ψt(z)
+ε dσ(z)
+= − v(y)
+ε e ⟨x|y⟩−ψt(y)
+ε
+R
+Y e ⟨x|z⟩−ψt(z)
+ε dσ(z) + 1
+ε e ⟨x|y⟩−ψt(y)
+ε
+R
+Y e ⟨x|z⟩−ψt(z)
+ε v(z)dσ(z)
+(
+R
+Y e ⟨x|ez⟩−ψt(z)
+ε dσ(z))2
+= − v(y)
+ε μˆx
+ε [ψ](y) + 1
+ε μˆx
+ε [ψ](y)⟨μx
+ε |ψ⟩
+Thus,
+⟨D2Kε(ψ)v|v⟩ = 1
+ε
+Z
+X
+⟨v2|μx
+ε [ψ]⟩ − (⟨v|μx
+ε [ψ]⟩)2dρ(x)
+=1
+ε
+Z
+X
+Varμεx[ψ](v)dρ(x). □
+Proof of Theorem 58. Let v = ψ1−ψ0 and ψt = ψ0+tv. By Taylor's formula, we have
+⟨∇Kε(ψ1) − ∇Kε(ψ0)|ψ1 − ψ0⟩ = ⟨∇Kε(ψ1) − ∇Kε(ψ0)|v⟩
+=
+Z1
+0
+⟨D2Kε(ψt)v|v⟩dt
+⩾1
+ε
+Z1
+0
+Z
+X
+Varμεx[ψt](v)dρ(x)dt
+
+
+OPTIMAL TRANSPORT 49
+Recall that μεx[ψt] has density μˆεx[ψt] with respect to σ:
+μˆx
+ε [ψt](y) = e ⟨x|y⟩−ψt(y)
+ε
+R
+Y e ⟨x|z⟩−ψt(z)
+ε dσ(z)
+⩾ e ⟨x|y⟩−sup ψt
+ε
+R
+Y e ⟨x|z⟩−inf ψt
+ε dσ(z)
+⩾ e −RX RY −sup ψt
+ε
+e
+RX RY −inf ψ ε
+,
+where RX = maxx∈X ∥x∥, RY = maxy∈Y ∥y∥ with respect to σ, so that with
+c = e− 2RX RY +R
+ε we get
+μˆx
+ε [ψt](y) ⩾ cσ.
+From this, we deduce that Varγˆεx(v) ⩾ cVarσ(v), which allows to conclude.
+□
+10. Hölder stability of dual potentials
+In this section, we show how to prove Hölder estimates for the dual potentials. The proof is taken from [17], and relies on strong convexity estimates for Kε, with a constant that does not degrade as ε → 0. The main idea is to deduce strong convexity of Kε from mere convexity of
+Iε(ψ) = log
+Z
+X
+e−ψ∗,ε dx .
+Given ψ ∈ C0(Y ), we will denote ρε[ψ] the Gibbs measure of ψ∗,ε, i.e.
+ρε[ψ](x) = e−ψ∗,ε(x)
+R
+X e−ψ∗,ε(z)dz .
+Proposition 60. Iε is concave and
+∇Iε(ψ) =
+Z
+X
+μx
+ε [ψ]ρε[ψ](x)dx,
+⟨D2Iε(ψ)v|v⟩ = − 1
+ε +1
+Z
+X
+Varμεx[ψt](v)ρε[ψt](x)dx + VarμIε[ψt](v),
+where μIε[ψ] = R μεx[ψ]ρε[ψ](x)dx.
+Proof. Let ψt = ψ + tv. Then,
+d
+dt eIε(ψt) = d
+dt
+Z
+X
+e−ψ∗,ε
+t dx
+=
+Z
+X
+d
+dt e−ψ∗,ε
+t dx
+=−
+Z
+X
+d
+dt ψ∗,ε
+t (x) e−ψ∗,ε
+t dx
+=−
+Z
+X
+d
+dt ψ∗,ε
+t (x) e−ψ∗,ε
+t dx
+=
+Z
+X
+⟨v|μx
+ε [ψt]⟩e−ψ∗,ε
+t dx
+Thus,
+∇Iε(ψt) = 1
+Iε(ψt)
+Z
+X
+μx
+ε [ψt]e−ψ∗,ε
+t dx =
+Z
+X
+μx
+ε [ψt]ρε[ψt]dx
+
+
+50 OPTIMAL TRANSPORT
+We now compute the second derivative:
+⟨D2Iε(ψt)v|v⟩ = d
+dt ⟨∇Iε(ψt)|v⟩
+=d
+dt
+Z
+X
+Z
+Y
+v(y)μˆx
+ε [ψt](y)ρε[ψt](x)dσ(y)dx
+=
+Z
+X
+Z
+Y
+v(y) d
+dt μˆx
+ε [ψt](y) ρε[ψt](x) + μˆx
+ε [ψt](y) d
+dt ρε[ψt](x) dσ(y)dx
+=
+Z
+X
+Z
+Y
+v(y) d
+dt μˆx
+ε [ψt](y) ρε[ψt](x)dσ(y)dx
++
+Z
+X
+Z
+Y
+v(y)μˆx
+ε [ψt](y) d
+dt ρε[ψt](x) dσ(y)dx
+Following the computations already performed for Kε, we can see that the rst term of the sum is equal to
+−1
+ε
+Z
+X
+Varμεx[ψt](v)dρε[ψ].
+We turn to the second term. Let us rst di erentiate ρε[ψt](x) with respect to t:
+d
+dt ρε[ψt](x) = d
+dt
+e−ψ∗,ε
+t (x)
+R
+X e−ψ∗,ε
+t (z)dz
+=
+d
+dt e−ψ∗,ε
+t (x)
+R
+X e−ψ∗,ε
+t (z)dz − e−ψ∗,ε
+t (x) d
+dt
+R
+X e−ψ∗,ε
+t (z)dz
+(
+R
+X e−ψ∗,ε(z)dz)2
+=−
+d
+dt ψ∗,ε
+t (x) e−ψ∗,ε
+t (x)
+R
+X e−ψ∗,ε
+t (z)dz + e−ψ∗,ε
+t (x) R
+X
+d
+dt ψ∗,ε
+t (z) e−ψ∗,ε
+t (z)dz
+(
+R
+X e−ψ∗,ε(z)dz)2
+= ⟨μx
+ε [ψt]|v⟩ρε[ψt](x) − ρε[ψt](x)
+Z
+X
+⟨μz
+ε [ψt ]|v⟩ρε [ψt ](z )dz
+= ⟨μx
+ε [ψt]|v⟩ρε[ψt](x) − ρε[ψt](x)⟨μI
+ε [ψt ]|v⟩,
+where we used (9.44). Then,
+Z
+X
+Z
+Y
+v(y)μˆx
+ε [ψt](y) d
+dt ρε[ψt](x) dσ(y)dx
+=
+Z
+X
+⟨v|μx
+ε [ψt]⟩ ⟨μx
+ε [ψt]|v⟩ρε[ψt](x) − ρε[ψt](x)⟨μI
+ε[ψt]|v⟩) dx
+=
+Z
+(⟨v|μx
+ε [ψt]⟩)2 ρε[ψt](x)dx − ⟨μI
+ε[ψt]|v⟩ 2
+= Varρε[ψt](x 7→ ⟨v|μx
+ε [ψt]⟩)
+= VarμIε[ψt](v) −
+Z
+X
+Varμεx[ψt](v)ρε[ψt](x)dx,
+where we used a variance decomposition formula to get the last line. Concavity comes from the Prékopa-Leindler inequality □
+
+
+OPTIMAL TRANSPORT 51
+Let ct = ⟨v|με[ψt]⟩ and c = R 1
+0 ctdt. Then,
+Varρ(ψ∗,ε
+1 − ψ∗,ε
+0 )⩽
+Z
+X
+(ψ∗,ε
+1 (x) − ψ∗,ε
+0 (x) − c)2dρ(x)
+⩽
+Z
+X
+Z1
+0
+d
+dt ψ∗,ε
+t (x) − ct
+2
+dρ(x)
+=
+Z1
+0
+Z
+X
+|⟨μx
+ε [ψt] − ct|v⟩|2 dρ(x)
+=
+Z1
+0
+Z
+X
+Varμε[ψt](v)dt
+References
+1. Jason Altschuler, Jonathan Weed, and Philippe Rigollet, Near-linear time approximation algorithms for optimal transport via sinkhorn iteration, Advances in Neural Information Processing Systems, 2017, pp. 1964 1974. 2. Luigi Ambrosio and Nicola Gigli, A user's guide to optimal transport, Modelling and optimisation of ows on networks, Springer, 2013, pp. 1 155. 3. Luigi Ambrosio, Nicola Gigli, and Giuseppe Savaré, Gradient ows: in metric spaces and in the space of probability measures, Springer Science & Business Media, 2008. 4. Alexandr Andoni, Assaf Naor, and Ofer Neiman, Snow ake universality of wasserstein spaces, Annales Scienti ques de l'Ecole Normale Superieure 51 (2018), no. 3, 657 700. 5. Saurav Basu, Soheil Kolouri, and Gustavo K. Rohde, Detecting and visualizing cell phenotype di erences from microscopy images using transport-based morphometry, Proceedings of the National Academy of Sciences 111 (2014), no. 9, 3448 3453. 6. Jean-David Benamou, Guillaume Carlier, and Luca Nenna, A numerical method to solve multi-marginal optimal transport problems with coulomb cost, Splitting Methods in Communication, Imaging, Science, and Engineering, Springer, 2016, pp. 577 601. 7. Robert J. Berman, The Sinkhorn algorithm, parabolic optimal transport and geometric Monge-Ampère equations, arXiv preprint arXiv:1712.03082, 2017. 8. D.P. Bertsekas, A new algorithm for the assignment problem, Mathematical Programming 21 (1981), no. 1, 152 171. 9. D.P. Bertsekas and J. Eckstein, Dual coordinate step methods for linear network ow problems, Mathematical Programming 42 (1988), no. 1, 203 243. 10. Garrett Birkho , Tres observaciones sobre el algebra lineal, Univ. Nac. Tucuman, Ser. A 5 (1946), 147 154. 11. Nicolas Bonnotte, Unidimensional and evolution methods for optimal transportation, Ph.D. thesis, Paris 11, 2013. 12. Yann Brenier, Polar factorization and monotone rearrangement of vector-valued functions, Communications on pure and applied mathematics 44 (1991), no. 4, 375 417. 13. Tianji Cai, Junyi Cheng, Nathaniel Craig, and Katy Craig, Linearized optimal transport for collider events, Phys. Rev. D 102 (2020), 116019. 14. Benjamin Charlier, Jean Feydy, Joan Alexis Glaunes, and Alain Trouvé, An e cient kernel product for automatic di erentiation libraries, with applications to measure transport, Working version, 2017. 15. Victor Chernozhukov, Alfred Galichon, Marc Hallin, Marc Henry, et al., Monge kantorovich depth, quantiles, ranks and signs, The Annals of Statistics 45 (2017), no. 1, 223 256. 16. Keenan Crane, Clarisse Weischedel, and Max Wardetzky, Geodesics in heat: A new approach to computing distance based on heat ow, ACM Transactions on Graphics (TOG) 32 (2013), no. 5, 152. 17. Alex Delalande, Nearly tight convergence bounds for semi-discrete entropic optimal transport, International Conference on Arti cial Intelligence and Statistics, PMLR, 2022, pp. 1619 1642.
+
+
+52 OPTIMAL TRANSPORT
+18. AN Dranishnikov, G Gong, V La orgue, and G Yu, Uniform embeddings into hilbert space and a question of gromov, Canadian Mathematical Bulletin 45 (2002), no. 1, 60 70. 19. Jean Feydy, Pierre Roussillon, Alain Trouvé, and Pietro Gori, Fast and scalable optimal transport for brain tractograms, International Conference on Medical Image Computing and Computer-Assisted Intervention, Springer, 2019, pp. 636 644. 20. Wilfrid Gangbo and Robert J McCann, The geometry of optimal transportation, Acta Mathematica 177 (1996), no. 2, 113 161. 21. Nicola Gigli, On hölder continuity-in-time of the optimal transport map towards measures along a curve, Proceedings of the Edinburgh Mathematical Society 54 (2011), no. 2, 401 409. 22. William B Johnson and N Lovasoa Randrianarivony, lp(p > 2) does not coarsely embed into a hilbert space, Proceedings of the American Mathematical Society (2006), 1045 1050. 23. Soheil Kolouri and Gustavo K. Rohde, Transport-based single frame super resolution of very low resolution face images, 2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2015, pp. 4876 4884. 24. Soheil Kolouri, Akif B. Tosun, John A. Ozolek, and Gustavo K. Rohde, A continuous linear optimal transport approach for pattern analysis in image datasets, Pattern Recognition 51 (2016), 453 462. 25. Giulia Luise, Saverio Salzo, Massimiliano Pontil, and Carlo Ciliberto, Sinkhorn barycenters with free support via frank-wolfe algorithm, Advances in neural information processing systems 32 (2019). 26. Robert J McCann, A convexity principle for interacting gases, Advances in mathematics 128 (1997), no. 1, 153 179. 27. Quentin Merigot and Boris Thibert, Optimal transport: discretization and algorithms, Handbook of Numerical Analysis, vol. 22, Elsevier, 2021, pp. 133 212. 28. Kimia Nadjahi, Sliced-wasserstein distance for large-scale machine learning: theory, methodology and extensions, Ph.D. thesis, Institut Polytechnique de Paris, 2021. 29. Piotr Nowak, Coarse embeddings of metric spaces into banach spaces, Proceedings of the American Mathematical Society 133 (2005), no. 9, 2589 2596. 30. Felix Otto, The geometry of dissipative evolution equations: the porous medium equation, Communications in Partial Di erential Equations 26 (2001), 101 174. 31. S. Park and M. Thorpe, Representing and learning high dimensional data with the optimal transport map from a probabilistic viewpoint, 2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition, 2018, pp. 7864 7872. 32. Gabriel Peyré and Marco Cuturi, Computational optimal transport, Foundations and Trends® in Machine Learning 11 (2019), no. 5-6, 355 607. 33. Julien Rabin, Gabriel Peyré, Julie Delon, and Marc Bernot, Wasserstein barycenter and its application to texture mixing, International Conference on Scale Space and Variational Methods in Computer Vision, Springer, 2011, pp. 435 446. 34. Filippo Santambrogio, Optimal transport for applied mathematicians, Springer, 2015. 35. Giuseppe Savaré and Giacomo E Sodini, A simple relaxation approach to duality for optimal transport problems in completely regular spaces, Journal of Convex Analysis 29 (2022), no. 1, 1 12. 36. Bernhard Schmitzer, A sparse multiscale algorithm for dense optimal transport, Journal of Mathematical Imaging and Vision 56 (2016), no. 2, 238 259. 37. , Stabilized sparse scaling algorithms for entropy regularized transport problems, SIAM Journal on Scienti c Computing 41 (2019), no. 3, A1443 A1481. 38. Richard Sinkhorn, A relationship between arbitrary positive matrices and doubly stochastic matrices, The annals of mathematical statistics 35 (1964), no. 2, 876 879. 39. Richard Sinkhorn and Paul Knopp, Concerning nonnegative matrices and doubly stochastic matrices, Paci c Journal of Mathematics 21 (1967), no. 2, 343 348. 40. Justin Solomon, Fernando De Goes, Gabriel Peyré, Marco Cuturi, Adrian Butscher, Andy Nguyen, Tao Du, and Leonidas Guibas, Convolutional Wasserstein distances: E cient optimal transportation on geometric domains, ACM Transactions on Graphics (TOG) 34 (2015), no. 4, 66.
+
+
+OPTIMAL TRANSPORT 53
+41. François-Xavier Vialard, An elementary introduction to entropic regularization and proximal methods for numerical optimal transport, Lecture, May 2019. 42. Cédric Villani, Topics in optimal transportation, no. 58, American Mathematical Soc., 2003. 43. , Optimal transport: old and new, vol. 338, Springer Science & Business Media, 2008. 44. Alexander Wagner, Nonembeddability of persistence diagrams with p > 2 wasserstein metric, Proceedings of the American Mathematical Society 149 (2021), no. 6, 2673 2677. 45. Wei Wang, Dejan Slep£ev, Saurav Basu, John A. Ozolek, and Gustavo K. Rohde, A linear optimal transportation framework for quantifying and visualizing variations in sets of images, Int. J. Comput. Vision 101 (2013), no. 2, 254 269.

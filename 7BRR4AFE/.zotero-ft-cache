@@ -1,0 +1,3793 @@
+STATISTICS & LEARNING
+1st Year, CentraleSupélec
+2020-2021
+Paul-Henry COURNÈDE
+
+
+’Ingénieur’ Curriculum, CentraleSupélec
+Official handbook of the Statistics and Learning course written by Paul-Henry Cournède, MICS laboratory & Mathematics department, CentraleSupélec. Please report any errors you may find at paul-henry.cournede@centralesupelec.fr.
+First édition, April 2020
+
+
+Contents
+I Elements of Mathematical Statistics 7
+1 Data and Statistical Models . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+1.1 From data to statistical inference. 9
+1.2 Probabilistic framework 9
+1.2.1 Random Variables . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+1.2.2 Density . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+1.2.3 Conditional law and density function . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+1.3 Sampling theory 14
+1.4 Empirical statistical method 15
+1.4.1 Expectation and empirical mean . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+1.4.2 Empirical Variance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+1.4.3 Empirical Distribution Function . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+1.4.4 Empirical Density . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+1.5 Statistical Model 20
+1.5.1 Some examples of simple models . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+1.5.2 Regression Models . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+
+
+2 Parameter Estimation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+2.1 Fisher Information 23
+2.2 Point Estimation 27
+2.2.1 Substitution method, method of moments . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+2.2.2 Maximum Likelihood . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+2.3 Properties of point estimators 31
+2.3.1 Quadratic Risk and Bias . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+2.3.2 Efficiency of Unibiased Estimators . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+2.4 Limit theorems 37
+2.5 Asymptotic properties of estimators 40
+2.6 Asymptotic Properties of the Maximum Likelihood Estimator 43
+2.7 Bayesian Estimation 45
+2.7.1 Bayesian Model and Conditional Probability Distributions . . . . . . . . . . . . . . . . . . . . . . . 45
+2.7.2 Bayesian Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+2.7.3 Choice of the prior distribution . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+2.7.4 Point Bayesian Estimation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50
+2.8 Confidence Region 52
+2.8.1 Exact Confidence Region . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+2.8.2 Asymptotic confidence region . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 57
+3 Statistical Hypothesis Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
+3.1 Problem Formulation 63
+3.1.1 Statistical Hypothesis and Test . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63
+3.1.2 Risk of a test . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
+3.2 Parametric Tests 67
+3.2.1 Parametric Tests and Power Function . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
+3.2.2 Method to Build Critical Regions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
+3.2.3 p-value for Parametric Tests . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 72
+3.2.4 Pearson’s χ2 Test for the Multinomial Model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73
+
+
+3.3 Goodness of Fit Tests 75
+3.3.1 χ2-Test . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 75
+3.3.2 Goodness of Fit Test of Kolmogorov-Smirnov . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76
+II Statistical Learning 79
+4 Supervised learning . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 81
+4.1 Probabilistic Framework of Statistical Learning 81
+4.1.1 Regression Model, Classification Model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 82
+4.1.2 Decision Theory . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 82
+4.2 Models of Linear Regression 84
+4.2.1 Definition . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 84
+4.2.2 Estimation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 85
+4.3 Linear Models for Classification 95
+4.3.1 Logistic Model for Classification . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 96
+4.3.2 Performance criteria and classification decision . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 101
+4.4 Regularization, Variable Selections, Model Selection 107
+4.5 Basis Expansion for Non-linear Regression 113
+4.5.1 Decision Trees . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 114
+4.6 Artificial Neural Networks 117
+4.6.1 Multilayer Perceptron for Regression and Classification . . . . . . . . . . . . . . . . . . . . . . . . . 117
+4.6.2 Activation Function . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 119
+4.6.3 Training Neural Networks . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 120
+5 Unsupervised Learning . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 123
+5.1 Representation Learning 123
+5.1.1 Principal Component Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 123
+5.2 Clustering 131
+5.2.1 Algorithme des K moyennes ou K-means . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 134
+5.2.2 Choice of the Optimal Number of Clusters . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 135
+
+
+6
+A Annexes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 141
+A.1 Lois usuelles 141
+A.1.1 Lois discrètes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 141
+A.1.2 Lois continues . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 141
+A.2 Propriétés des échantillons gaussiens 143
+
+
+Part I
+Elements of Mathematical Statistics
+
+
+
+
+1. Data and Statistical Models
+1.1 From data to statistical inference.
+The following definition sets the basic framework for statistics.
+Definition 1.1 — Data. A data is the observed realization of a random variable.
+The random variable corresponds to a phenomenon that we want to study (size of an individual in a population, price of a financial product, remission rate of sick patients, yield of a crop ...). The law of probability P ∗ of the random variable is generally unknown, and the purpose of statistics is to provide the methodological framework for analysing the data in order to deduce knowledge about the underlying phenomenon. In a simplified way, we can distinguish between descriptive statistics, which seeks to give meaning to the data by their description (what is the empirical mean observed, are there typical sub-populations ...), and statistical inference, which is interested in identifying the unknown law P ∗, i.e. to infer the unknown characteristics of the studied phenomenon from the observations (e.g. the unknown characteristics of a population from a sample from this population). In this course, we are primarily interested in statistical inference. Statistical modeling will provide the specific probabilistic assumptions that allow statistical inference to be translated into a formal framework. We will focus here on the mathematical treatment of two specific inferential approaches: parameter estimation and hypothesis testing.
+1.2 Probabilistic framework
+1.2.1 Random Variables
+Let (Ω, F, P) be a probability space, it corresponds to the set of elementary events. We consider a random variable X defined on (Ω, F, P) with values in a measurable space (X , A). We recall that the measurability condition for the random variable X ensures that the reciprocal image by X of any element A of the σ-algebra A has a probability and thus allows to define, on
+
+
+10 Chapter 1. Data and Statistical Models
+(X , A), a probability measure, noted PX , by:
+PX (A) = P
+(
+X −1 (A)
+)
+= P (X ∈ A) .
+The measure PX is the image, by the application X, of the probability P defined on (Ω, F).
+Definition 1.2 PX is called the probability law of the random variable X.
+In the remainder of this course, we will generally consider random variables with values in (X , A) where X ⊂ Rd and X ∈ B(Rd). For a continuous random variable, we’ll generally take A = B (X ) the Borel σ-algebra over X , and for a discrete value random variable, that is, if X is of finite cardinal or countable, A = P (X ), that is, all parts of X .
+1.2.2 Density
+We recall below a remarkable consequence of the Radon-Nikodym theorem, based on the concept of measure dominance.
+Definition 1.3 The σ-finite measure P is said dominated by a σ-finite measure μ if the sets that are negligible for μ are also negligible for P . P is said absolutely continuous with respect to μ.
+Proposition 1.1 Let P be a probability measure. P admits a density p (or density function)
+which is the derivative of Radon-Nikodym dP
+dμ with respect to P if and only if P is dominated
+by μ.
+In this course, for continuous random variables the reference measure μ will be the Lebesgue measure and for discrete random variables the reference measure μ will be the count measure. This allows us to consider these two situations in the same theoretical framework. Unless otherwise stated, all the laws of random variables considered in this course will admit a density with respect to either of these reference measures.
+Remark 1.1 Note, however, the importance of the "unless otherwise stated" because there are relatively simple cases of random variables that do not admit a density. For example, if we consider two random variables X and Y , independent and uniform on [0; 1], we can show that the pair (X, sup(X, Y )) does not admit density with respect to λ2 (Lebesgue’s measure in dimension 2).
+Thus, for a continuous random variable, p represents the density in the usual sense (defined almost everywhere as the derivative of the partition function), and:
+displaystyle∀A ∈ B(Rd), PX (A) =
+∫
+A
+p(x)λd(dx)
+where λd denotes Lebesgue’s measure on Rd.
+
+
+1.2 Probabilistic framework 11
+For a discrete law with values in E, p(x) = P{X = x} denotes the point mass function, and we have:
+∀A ∈ P(E), PX (A) =
+∫
+A
+p(x)K(dx) = ∑
+α∈A
+P{X = α}
+where K is the counting measure on E. Let us recall however that by using as a reference measure ∑
+α∈E δα, where E is a countable set containing at least all α values such that PX {X = α} > 0, we can also place ourselves on the Borel σ-algebra by considering:
+∀A ∈ B(Rd), PX (A) =
+∫
+A
+p(x) ∑
+α∈E
+δα(dx) = ∑
+α∈A
+P{X = α}.
+Nous serons souvent amenés à réaliser des changements de variables aléatoires Y = φ(X), qui se traduiront par des changements de densités, nous rappelons ci-dessous le théorème fondamental pour cela.
+Theorem 1.2 — Change of variables in a probability density function. Let the random variable X with values in SX ⊂ Rd of density pX with respect to Lebesgue’s measure Let φ : Rd → Rd a transformation, such that φ is a C1-differomorphism of SX in SY := φ (SX ). The Jacobian transformation matrix is given ∀x ∈ SX by:
+Jφ(x) =
+( ∂φi
+∂xj
+(x)
+)
+1≤i,j≤d
+The random variable Y = φ(X) then admits for density function ∀y ∈ Rd:
+pY (y) = pX (φ−1(y))
+|Jφ(φ−1(y))| ISY (y).
+where ISY (y) is the indicator function, ISY (y) = 1 if y ∈ SY , 0 otherwise. Remember that ∀y ∈ SY :
+|Jφ−1 (y)| = 1
+|Jφ(φ−1(y))|
+The proof derives from the formula of variable change for functions of several variables.
+1.2.3 Conditional law and density function
+The notion of conditioning is paramount in statistics. It expresses that the study of a random variable can generally benefit from a possible link between this variable and other auxiliary random variables (or events). The latter provide information to better determine the stochastic properties of the studied phenomenon.
+Let two random variables X and Y with values respectively in (X , A) and (Y, B), two measurable spaces. The course of probabilities (Billingsley, 1995) showed that it was easy to define the conditional law of Y given X when X is discrete, with values in X . The conditional law of Y given X is the family of laws {PY |X=x, x ∈ A} on B, such that if PX ({x}) 6= 0,
+
+
+12 Chapter 1. Data and Statistical Models
+PY |X=x(B) = P(Y ∈ B|{X = x}) = P(Y ∈ B, {X = x})/PX ({x}), ∀B ∈ B (1.1)
+and, PY |X=x is any probability on B otherwise. This construction of conditional law does not extend to the general case, due to the impossibility of dividing by 0. The notion of a transitional kernel is introduced to get around this problem.
+Definition 1.4 — Transition Kernel. A map ν: X B → [0.1] is called a transition kernel if it satisfies the following properties: (i) ∀x ∈ X , ν(x, .) is a measure of probability on B; (ii) ∀B ∈ B, the map ν(., B) is A-measurable.
+If μ is a probability measure on A and ν is a transition kernel on B, then μ.ν is the application defined on A × B by:
+μ.ν(A × B) =
+∫
+A
+ν(x, B)dμ(x) , for all A ∈ A and B ∈ B .
+We can show that this application extends into a single probability on (X × Y, A ⊗ B) (see for example Billingsley (1995)). The extension is still denoted μ.ν. The application of Fubini’s theorem is then direct and gives us the following properties, very useful in statistics.
+Property 1.3 — Fubini’s theorem. If μ is a measure of probability on A and ν a transition kernel on X × B and if φ: X × Y → R+ is a positive measurable function, then we can apply Fubini’s theorem:
+∫
+X ×Y
+φ(x, y) (μ.ν)(dx, dy) =
+∫
+X
+(∫
+Y
+φ(x, y)ν(x, dy)
+)
+μ(dx) (1.2)
+Similarly, if φ is integrable on (X × Y, A ⊗ B, μ.ν), then we have μ-almost everywhere, y →
+φ(x, y) is ν(x, .)-integrable, and the map defined μ-almost everywhere: x →
+( ∫
+Y φ(x, y)ν(x, dy)
+)
+is μ-integrable. The above equality (1.2) is also true.
+This notion of transitional kernel allows us to give a more general definition of a conditional law.
+Definition 1.5 — Conditional law. We call the conditional law of Y given X a transition kernel ν on X × B such that P(X,Y ) = PX .ν.
+We show that, under fairly broad conditions (especially if X = Rp and Y = Rq and A, B the associated Borel σ-agebras), the conditional law of Y given X exists (cf. Jirina’s theorem (Billingsley, 1995)). The ν transition kernel is then often denoted PY |X=· (or simply PY |X ). Note, however, that a conditional law is really a family of laws of probability. The notation PY |X=x thus represents ν(x, .) for x ∈ X , which is indeed a measure of probability on B.
+Remark 1.2 In the case where X has discrete values, we find the conditional law defined by (1.1). Indeed, for any A ⊂ X and B ∈ B, we have by definition the generalized conditional law:
+P(X,Y )(A × B) =
+(
+PX .PY |X=·
+)
+(A × B)
+
+
+1.2 Probabilistic framework 13
+Using (1.2) and the count measure, we have:
+P(X,Y )(A × B) =
+∫
+A
+PY |X=x(B)PX (dx) = ∑
+x∈D0∩A
+PY |X=x(B)PX ({x}) .
+where D0 = {x ∈ X tels que P(X = x) 6= 0}.
+Remark 1.3 Let us note in particular that if PY |X=· exists and if φ : Y → R is PY -integrable, the random variable ψ(X) defined for any x ∈ X by:
+ψ(x) =
+∫
+Y
+φ(y)PY |X=x(dy)
+is a determination of the conditional expectation E(φ(Y )|X). This gives meaning to the frequently used notation E(φ(Y )|X = x), which is equal to ψ(x).
+Let X, Y , Z be three random variables such that there is a measurable function φ, such as Z = φ(X, Y ) and one wishes to study the conditional law of Z|X, then the application of the Transfer Theorem (Billingsley, 1995) to the conditional law allows to obtain a very useful result in practice in statistics.
+Theorem 1.4 — Conditional Transfer. Let φ be a measurable function of X × Y such that Pφ(X,Y )|X=· and PY |X=· exist. Then, ∀x ∈ X , Pφ(X,Y )|X=x = Pφ(x,Y )|X=x. In particular, if X and Y are independent, we have ∀x ∈ X : Pφ(X,Y )|X=x = Pφ(x,Y ).
+Corollary 1.5 Under the right conditions of integrability, the calculation of expectations of the type E[φ(X, Y )|X] is then facilitated:
+E[φ(X, Y )|X = x] = E[φ(x, Y )|X = x] =
+∫
+X
+φ(x, y)PY |X=x(dy) .
+If, in addition, X and Y are independent, we have:
+E[φ(X, Y )|X = x] =
+∫
+X
+φ(x, y)PY (dy).
+These subtle concepts find a very simple expression when the pair of random variables (X, Y ) admits a probability density function p.
+Definition 1.6 — Conditional Density. If for PX −almost all x ∈ Rp, PY |X=x has a density, it is called conditional density of Y given X = x.
+Theorem 1.6 — Conditional Density. If (X, Y ) admits a density p, then for all x such tha
+
+
+14 Chapter 1. Data and Statistical Models
+pX (x) > 0, the law PY |X=x has a conditional density given by:
+pY |X=x(y) = p(x, y)
+pX (x) .
+Preuve : Let λ, μ be the reference measures on (X , A), (Y, B). Let ρ be any probability on (Y, B). For all x ∈ X and B ∈ B, we define
+ν(x, B) =
+∫
+B
+p(x, y)
+pX (x) μ(dy),
+if pX (x) > 0, and ν(x, B) = ρ(B) if pX (x) = 0. ν is then a conditional law of Y given X, since ν is a transition kernel on X × Y satisfying P(X,Y ) = PX .ν. Moreover, if pX (x) > 0, the measure ν(x, .) has the density p(X,Y )(x, .)/pX (x)with respect to μ.
+Remark 1.4 We will often use the simplified notation pY |X=x(y) = p(y|x) if there is no ambiguity.
+These preliminary remarks will later allow us to manipulate with a great deal of freedom conditional laws, whether discrete or continuous, or pairs of random variables mixing the two types.
+1.3 Sampling theory
+Let X be a random variable with values in (X , A), of unknown law of probability PX , corresponding to our phenomenon of interest. We need data to make statistical inference on this unknown law. In general, a single data, i.e. a single observation of a realization of this random variable is not enough. Several observations of the random variable are then realized, which is formalized by the concept of sample.
+Definition 1.7 — Sample of observations - Random sample. Let (Ω, F , P), be a probability space over which is defined the random variable X.
+The random variable defined on the product space
+(
+ΩN , F ⊗N )
+with values in
+(
+X N , A⊗N )
+:
+(ω1, ω2, . . . , ωN ) 7→ (X(ω1), X(ω2), . . . , X(ωN ))
+is called a random sample of size N . (X(ω1), X(ω2), . . . , X(ωN )) is called a sample of observations. It is generally denoted by (x1, x2, . . . , xN ).
+Remark 1.5 Note the difference between the notion of random sample and sample of observations. In one case, we consider the random variable and in the other its realization. However, we will not hesitate to speak simply of sample, in both situations, when there is no possible ambiguity.
+An important case is when the random sample is of probability law P ⊗N
+X , i.e. the product law. It is equivalent to consider N independent realizations of a random variable of law PX and the
+
+
+1.4 Empirical statistical method 15
+realization of N independent random variables X1, X2, . . . , XN of the same law PX . This is the framework of the renewable experiment. We will then speak of an independent identically distributed sample, which will often provide the basic framework for statistical inference on the unknown PX law.
+Definition 1.8 — Sample of independent and identically distributed random variables. Si les (Xi)1≤i≤N sont des variables aléatoires dans (X , A), indépendantes de même loi PX , alors
+le vecteur aléatoire (X1, X2, . . . , XN ) dans
+(
+X N , A⊗N ,
+)
+is said sample of independent and
+identically distributed random variables (i.i.d.) for PX , or for short, i.i.d. sample. We will denote:
+X1, X2, . . . , Xn ∼ PX
+or if PX has a density pX :
+X1, X2, . . . , Xn ∼ pX
+The joint law of the random vector is the product law PX1 ⊗ PX2 ⊗ · · · ⊗ PXN = P ⊗N
+X.
+In practice, a sample is usually of finite size. However, the general framework of an infinite sampling model (in the countable sense) is indispensable for the theoretical study of asymptotic properties, which will call for the theory on the limits of sequences and series of random variables.
+1.4 Empirical statistical method
+Let us now give the mathematical definition of a statistic.
+Definition 1.9 — Statistic. Let (X1, . . . , XN ) be a random sample of size N in
+(
+X N , A⊗N ,
+)
+.
+A statistic T is a measurable function on
+(
+X N , A⊗N ,
+)
+with values in a measurable space
+(Z, C). By a slight misuse, we will also call statistic of the sample the function T ◦(X1, . . . , XN )
+defined on
+(
+ΩN , F ⊗N )
+and denoted T (X1, . . . , XN ).
+The Z space can be diverse. It can be X , but it can also be a functional space. Below are some examples of common statistics.
+Example 1.6
+1. The empirical mean, T :
+(
+X N , A⊗N )
+→ (X , A)
+T (X1, . . . , XN ) = 1
+N
+N
+∑
+i=1
+Xi
+2. The maximum, T :
+(
+X N , A⊗N )
+→ (X , A)
+T (X1, . . . , XN ) = max
+i=1,...,N (Xi)
+
+
+16 Chapter 1. Data and Statistical Models
+Subsequently, we will consider (X1, . . . , XN ) a N -sample of independent1 and identically distributed random variables of law PX . The statistics defined on this sample allow us to apprehend some characteristics of the unknown distribution, without any a priori presumption about it. First of all, let us recall the definition of Dirac’s measure.
+Definition 1.10 — Dirac’s Measure. Let (X , A) be a measurable space. Let x ∈ X . The map δx defined on A such that for all A ∈ A, δx(A) = 1 if x ∈ A, and δx(A) = 0 otherwise, is a measure called Dirac’s measure associated to x. We will also use the notation corresponding to the indicator function defined for all A ∈ A by
+IA(x) =
+{
+1 si x ∈ A 0 sinon
+Definition 1.11 — Empirical measure. For an i.i.d. sample (X1, . . . , XN ), the empirical
+measure on (X , A) is defined as the statistic PˆX from
+(
+X N , A⊗N )
+into the space of
+probability measures on (X , A) by:
+∀(x1, . . . , xN ) ∈ X N , PˆX (x1, . . . , xN ) = 1
+N
+N
+∑
+i=1
+δxi .
+The statistic will be denoted: PˆX (X1, . . . , XN ) = 1
+N
+∑N
+i=1 δXi .
+We can then approach the characteristics of the true PX law from the empirical measure PˆX as follows. If the characteristic is expressed as a mapping from P, the set of probability measures on (X , A), into a measurable space (Z, C), G : P → Z, then G(PX ) is the true characteristic and G(PˆX (x1, . . . , xN )) is the empirical characteristic associated with the sample of observations (x1, . . . , xN ).
+To determine whether an empirical characteristic converges to the true characteristic, limit theorems from probability theory must be used. Most useful theorems are recalled in the section 2.4. For characteristics that can be expressed as means, various versions of the law of large numbers are particularly useful to show the convergence.
+1.4.1 Expectation and empirical mean
+Let X be a random variable in (R, B(R)), integrable, of law PX . We recall that:
+E(X) =
+∫
+R
+x PX (dx) .
+Let (x1, . . . , xN ) be a sample of observations for (X1, . . . , XN ), i.i.d. random variables of law
+PX . Then the empirical mean denoted ˆE(x1, . . . , xN ) associated to the empirical measure
+1Although it is beyond the scope of this course, it is worth keeping in mind that many results extend through the ergodic theorem for samples of non-independent random variables generated by a stationary Markov chain of distribution P , cf. Robert and Casella (1999), which is the basis of a paramount method in numerical statistics, the MCMC (Markov chain Monte-Carlo).
+
+
+1.4 Empirical statistical method 17
+associated to (x1, . . . , xN ) is given by:
+ˆE(x1, . . . , xN ) =
+∫
+X
+x PˆX (x1, . . . , xN )(dx) ,
+that is to say:
+ˆE(x1, . . . , xN ) =
+∫
+R
+x
+(1
+N
+N
+∑
+i=1
+δxi
+)
+(dx) = 1
+N
+N
+∑
+i=1
+∫
+X
+x δxi(dx) = 1
+N
+N
+∑
+i=1
+xi .
+We denote by XN (or X) the corresponding random variable:
+XN = 1
+N
+N
+∑
+i=1
+Xi .
+Likewise, note that if X is a random variable in (X , A), and if h : (X , A) → (R, B(R)) is PX -integrable:
+E (h(X)) =
+∫
+X
+h(x) PX (dx) ,
+and for (x1, . . . , xN ) a sample of observations for (X1, . . . , XN ), i.i.d. random variables of law PX , we obtain the corresponding empirical mean Eˆh:
+ˆEh(x1, . . . , xN ) =
+∫
+X
+x PˆX (x1, . . . , xN )(dx) = 1
+N
+N
+∑
+i=1
+h (xi) .
+For a real-valued random variable, if we take h(X) = Xk, we thus obtain the empirical moment of order k ≥ 1:
+mˆk(x1, . . . , xN ) = 1
+N
+N
+∑
+i=1
+xk
+i.
+1.4.2 Empirical Variance
+Let X be a real-valued and square-integrable random variable, remembering that V(X) = E(X2) − E(X)2, we can deduce the empirical variance, given by the random variable:
+S2 = 1
+N
+N
+∑
+i=1
+X2
+i − X2
+N
+which is also written
+S2 = 1
+N
+N
+∑
+i=1
+(
+Xi − XN
+)2 .
+1.4.3 Empirical Distribution Function
+Let X be a random variable, X : (Ω, F, P) → (R, B(R)). We recall the definition of the distribution function on R:
+∀x ∈ R, F (x) = P{X ≤ x} = PX (] − ∞, x])
+And for (x1, . . . , xN ), a sample of observations for (X1, . . . , XN ), i.i.d. random variables of law PX , The empirical distribution function is given by:
+Fˆ (x1, . . . , xN ) (x) =
+(1
+N
+N
+∑
+i=1
+δxi
+)
+(] − ∞, x]) = 1
+N
+N
+∑
+i=1
+I]−∞,x](xi)
+
+
+18 Chapter 1. Data and Statistical Models
+1.4.4 Empirical Density
+Let X be a random variable in (bR, cB (bR)), absolutely continuous with respect to Lebesgue’s measure λ. It admits a density pX . Let (x1, . . . , xN ) a sample of observations for (X1, . . . , XN ) an N -sample of i.i.d. random variables of law PX . Then, the empirical measure PˆX (x1, . . . , xN ) is not absolutely continuous with respect to Lebesgue’s measure: PˆX (x1, . . . , xN ) ({xi}) = 1
+N
+whereas λ ({xi}) = 0. Therefore, determining an empirical density is not possible. However, there is a very useful way to approximate the density from the sample (x1, . . . , xN ), by histograms, which represent the number (or frequency) of observations at intervals. For a real-valued random variable, we choose a0 < a1 < · · · < aL in R such that
+{x1, . . . , xN } ⊂ [a0; aL]
+and we take:
+fˆ(x1, . . . , xN ) (x) =
+L
+∑
+j=1
+∑N
+i=1 I]aj−1;aj ](xi)
+N (aj − aj−1) I]aj−1;aj](x)
+Another way to approximate density from a sample is the kernel method.
+Definition 1.12 The function K : R → R+ is called kernel if it is integrable, even and if:
+∫
+R
+K(x)dx = 1 .
+A kernel is thus a density of probability. Let us notice that if K is a kernel, then for any h > 0, x→ 1
+hK (x
+h
+) is also a kernel. So we can choose h as a scaling factor to fit the data. Among the most frequently used kernels, we find: • the Gaussian kernel:
+K(x) = e− x2
+2
+√2π ,
+• Epanechnikov’s kernel:
+K(x) = 3
+4
+(
+1 − x2)
+I{|x|≤1}(x) ,
+• or the triangle kernel:
+K(x) = (1 − |x|) I{|x|≤1}(x) .
+To approximate the probability density, we take:
+fˆK (x1, . . . , xN ) = 1
+Nh
+N
+∑
+i=1
+K
+( x − xi
+h
+)
+,
+for a well-chosen h. Note that if K is the Gaussian kernel, then Silverman’s rule suggests taking h = 0.9 S N −0.2 where S is the empirical standard deviation on (x1, . . . , xN ), (Silverman, 1986). In Figure 1.1, we compare for different sizes (N = 100, 1000, 10000) of i.i.d. samples for the Gaussian distribution N (19.62) the histogram, the density reconstructed by the kernel method with a Gaussian kernel and Silverman’s rule, and the true density. We find that for a sample of 100, if the histogram remains a very coarse representation of the density, the reconstruction by the kernel method is already very relevant. For a sample of 10000, both the histogram and the reconstructed density are excellent approximations of the true density.
+
+
+1.4 Empirical statistical method 19
+Figure 1.1: Histogram, density estimated by the kernel method and true density for sample sizes N = 100, 1000, 10000 respectively.
+
+
+20 Chapter 1. Data and Statistical Models
+1.5 Statistical Model
+For a random variable X in (X , A) with an unknown PX distribution, the empirical method aimed to approximate some characteristics of PX from observations of an i.i.d. sample, without a priori on the PX distribution. We are now going to add a "modeling" step, i.e. a postulate on the family of laws to which PX belongs. This is the principle of statistical modeling.
+Definition 1.13 — Statistical Model. A M statistical model is a family of probability laws on (X , A). If this family can be parameterized by Θ, a finite dimensional space, we speak of a parametric statistical model and we denote: MΘ = {Pθ, θ ∈ Θ}.
+The case where Θ is of infinite dimension (in a functional space for example) concerns the field of non-parametric statistics that will be seen later in the curriculum. If the family of probability laws is dominated by a finite sigma-measure, then they admit densities ptheta and we get MT heta = {pθ, θ ∈ Θ}.
+If X ∼ pθ, then we will also use the following notation: pθ(x) = p (x|θ), i.e. as a conditional density considering the parameter θ as a random variable. The reasons for this will become clear when we see the concepts of Bayesian statistics in part 2.7.1.
+1.5.1 Some examples of simple models
+We speak of a simple statistical model when the family of laws is given by a family of classical probability distributions. Below we consider various examples: • Family of Poisson distributions (univariate, discrete), MΘ = {Pλ, λ ∈ R∗+
+}
+P(X = k) = Pλ(k) = λk
+k! eλ
+• Family of Gaussian distributions (univariate, continuous), MΘ =
+{
+p(μ,σ2), (μ, σ2) ∈ R × R∗+
+}
+p(μ,σ2)(x) = 1
+√2πσ2 e− (x−μ)2
+2σ2
+• Family of multivariate Gaussian distributions (multivariate, continuous),
+MΘ =
+{
+p(μ,Σ), (μ, Σ) ∈ Rd × S+
+d (R)
+}
+, with p(μ,Σ)(x) = (2π)−d/2 |Σ|−1/2e− 1
+2 (x−μ)tΣ−1(x−μ)
+1.5.2 Regression Models
+Let X and Y be two random variables with values in (X , A) and (Y, B) respectively, such that the pair (X, Y ) admits a density with respect to the product measure on (X × Y, A ⊗ B).
+We will generally consider cases where (cX, A) = (Rd, B
+(
+Rd)
+, we will speak of quantitative
+variables, or (X , A) = (Nm, P (Nm)), we will speak of qualitative or categorical variables. We can
+also find a combination of the two types of variables (X , A) =
+(
+Rd × Nm, B
+(
+Rd)
+⊗ P (Nm)
+)
+.
+The same will be true for (Y, B), the two variables X and Y not necessarily being of the same type. We are interested in a fundamental problem in statistics (and more specifically in the field of statistical learning), that of predicting (or estimating) Y from X. The random variable Y will
+
+
+1.5 Statistical Model 21
+then be said to be an explained variable and X an explanatory variable (we will also speak of covariates or features or inputs for all the components of X). For all x ∈ X such that pX (x) 6= 0, we recall that we can define the conditional density pY |X=x(y) = p(x, y)/pX (x) (see Section 1.2.3).
+Definition 1.14 — Modèle statistique de régression. Under the above assumptions, we call a statistical regression model a family of conditional probability laws given X. Especially if the family is parameterized and the conditional laws admit densities, we will have:
+MΘ = {pθ(y|x), θ ∈ Θ, x ∈ X }
+using the notation pY |X=x(y) = p(y|x).
+In practice, we will observe pairs of explanatory variables/explained variables (Xi, Yi) and use them for inference.
+Example 1.7 — Linear Regression Model. .
+Let X be a raondom variable with values in (Rp, B (Rp)), Y, ξ random variables variables in (R, B (R)), and β0 ∈ R, β ∈ Rp. If ξ ∼ N (0, σ2), then the equation:
+Y = β0 + βtX + ξ
+defines the statistical linear regression model:
+MΘ =
+{
+p(β0,β,σ2)(y|x), (β0, β, σ2) ∈ R × Rp × R∗
++, x ∈ Rp}
+with:
+p(β0,β,σ2)(y|x) = 1
+σ√2π e− 1
+2
+( y−β0−βtx σ
+)2
+Example 1.8 — Time dependent random variable. By analogy, we can consider in the same framework the case where we have a stochastic process (Yx)x∈Ω indexed by Ω, a measurable set of (X , A). The random variable Yx is then considered as the conditional random variable Y |X = x, and the same regression framework can be applied. Let Y (t), a time-indexed random variable with values in R, and let ξ ∼ N (0, σ2). Let’s consider the logistic model:
+Y (t) = θ1
+1 + θ2e−θ3t (1 + ξ) .
+Then:
+MΘ =
+{
+p(θ,σ2)(y|t), (θ, σ2) ∈ R3 × R∗
++
+}
+with p(θ,σ2)(y|t) la densité de N
+(
+θ1
+1+θ2e−θ3t , σ2 ( θ1
+1+θ2 e−θ3 t
+)2)
+Assuming that the unknown law P ∗ of the random phenomenon studied belongs to a family of parametric laws MΘ raises two main questions that will be dealt with in the rest of this course:
+
+
+22 Chapter 1. Data and Statistical Models
+• On one hand, based on the data, that is, the observations, how can we determine θˆ such that Pθˆ ∈ MΘ is as close as possible to P ∗? That’s the problem of parameter
+estimation. Not only will it be necessary to determine θˆ from the data, but also to qualify the quality of the approximation, it will be characterized in particular by the uncertainty or confidence in θˆ. • On the other hand, we can question the quality of our statistical model, i.e. our starting hypothesis. This can concern different situations, for example to verify if the postulated law Pθ0 is indeed equal to the unknown law P ∗, or even to test if P ∗ really belongs to the parametric family of laws MΘ. We talk of hypothesis testing.
+
+
+2. Parameter Estimation
+Let X be a random variable in (X , A), of unknown law P ∗. Our objective is to identify P ∗ from observations of X or from an i.i.d. sample for the P ∗ law, (X1, . . . , XN ). This approach is greatly simplified if we assume that there is a statistical model MΘ = {Pθ, θ ∈ Θ} such as P ∗ ∈ MΘ. In such case, there exists θ∗ ∈ Θ (unknown), such that P ∗ = Pθ∗. θ∗ is said to be the true value of the parameter. Note that we will generally expect θ∗ to be unique, which will be ensured as soon as the model is identifiable.
+Definition 2.1 — Identifiability. A parematric model MΘ = {Pθ, θ ∈ Θ} is said identifiable is the map: θ 7→ Pθ is injective.
+In the remainder of this chapter, we will consider observable random variables with values in X ⊂ Rd. The parametric statistical model considered MΘ will be identifiable, dominated by ν, a σ-finite measure (Lebesgue measure or count measure) and represented by a family of densities on (X , A): MΘ = {pθ, θ ∈ Θ}, with Θ a Borel set of Rp.
+2.1 Fisher Information
+The statistical model is the prism through which the data is analyzed. Before detailing the estimation methods in the next section, we introduce the Fisher information concept, a very useful notion that defines the information that an observable random variable can provide about the unknown parameter, on which the random variable depends through the statistical model.
+Definition 2.2 — Regularity Conditions. We define the regularity conditions of a MΘ statistical model, conditions that will be useful to us later on. (C1) Θ is an open set and the distributions in MΘ satisfy pθ(x) > 0 ⇔ pθ′(x) > 0, ∀x ∈ X , ∀θ, θ′ ∈ Θ. It follows that all laws in MΘ have the same support, denoted S.
+
+
+24 Chapter 2. Parameter Estimation
+(C2) ∀θ ∈ Θ, ∀k, 1 ≤ k ≤ p, we can differentiate under the integral sign:
+∂
+∂θk
+∫
+S
+pθ(x) ν(dx) =
+∫
+S
+∂ pθ (x)
+∂θk
+ν(dx) .
+(C3) For almost every x ∈ S, the map θ 7→ pθ(x) The function is twice continuously differentiable on Θ. (C4) ∀θ ∈ Θ, ∀i, j, 1 ≤ i, j ≤ p, we can differentiate under the integral sign:
+∂
+∂θi
+∫
+S
+∂ pθ (x)
+∂θj
+ν(dx) =
+∫
+S
+∂ 2 pθ (x)
+∂θi∂θj
+ν(dx) .
+Remark 2.1 The differentiation under the integral sign is ensured if the derivative is locally dominated (Billingsley, 1995). For example, for condition (C2), let θ ∈ Θ and k, 1 ≤ k ≤ p, there exists a neighborhood of θ and a map g, integrable over (S, A, ν), such that for almost
+every x ∈ S,
+∣ ∣ ∣
+∂ pθ (x) ∂θk
+∣ ∣
+∣ ≤ g(x). Finer regularity conditions are also possible (Spokoiny and
+Dickhaus, 2015).
+Definition 2.3 — Likelihood, Score. Let X be a random variable, X ∼ pθ∗, with p∗
+θ ∈ MΘ
+and θ∗ unknown. Let x ∈ X be an observation of X. The map defined from Θ to [0; 1]: θ 7→ pθ (x) is called likelihood of the parameter θ. We will denote: L (θ; x). If the regularity condition (C1) is satisfied and if for almost every x ∈ S (S support of MΘ), θ 7→ ln (L(θ, x)) is differentiable, then the score is the random vector defined by:
+Sθ(X) = ∇θ ln (pθ (X)) =
+( ∂ ln (pθ(X))
+∂θ1
+, . . . , ∂ ln (pθ(X))
+∂θp
+)T
+,
+that is to say the gradient of the log-likelihood function with respect to the parameter vector.
+Proposition 2.1 If the regularity conditions (C1,C2) are satisfied, the score is a centered random vector:
+Eθ(Sθ(X)) = 0 .
+Preuve : We recall that Eθ denotes the expectation of the random variable with respect to the
+probability law of density pθ. For all its components [Sθ (X)]k = ∂ ln (pθ(X))
+∂θk
+, we successively
+have:
+Eθ ([Sθ (x)]k) =
+∫
+S
+∂ ln (pθ(x))
+∂θk
+pθ(x)ν(dx)
+=
+∫
+S
+∂ pθ (x)
+∂θk
+ν(dx)
+=∂
+∂θk
+(∫
+S
+pθ(x)ν(dx)
+)
+where the last line is obtained from condition (C2).
+
+
+2.1 Fisher Information 25
+As
+∫
+S
+pθ(x)ν(dx) = 1, we obtain the desired result.
+Note that we can write
+∫
+S
+∂ ln (pθ(x))
+∂θk
+pθ(x)ν(dx) since ∂ ln (pθ(x))
+∂θk
+is defined almost everywhere
+(with respect to Pθ).
+The Fisher Infomation is defined from the score vector.
+Definition 2.4 — Fisher Information. We call Fisher Information in θ the variance-covariance matrix of the score vector. It is denoted by I(θ):
+I(θ) = Vθ (Sθ (X))
+If condition (C2) is satisfied, we have directly by Proposition 2.1:
+I(θ) = Eθ[Sθ(X)Sθ(X)T ]
+Proposition 2.2 If the regularity conditions (C1,C2,C3,C4) are verified, the Fisher Information is expressed as follows:
+I(θ) = −Eθ[∇θ [Sθ(X)]T ]
+that is to say for all 1 ≤ i, j ≤ p:
+Iij(θ) = −Eθ
+[ ∂2 ln pθ(X)
+∂θi∂θj
+]
+Preuve : For all 1 ≤ i, j ≤ p, we have successively:
+Iij(θ) =
+∫
+S
+∂ ln (pθ(x))
+∂θi
+∂ ln (pθ(x))
+∂θj
+pθ(x)ν(dx)
+=
+∫
+S
+∂ ln (pθ(x))
+∂θi
+∂ pθ (x)
+∂θj
+ν(dx)
+=
+∫
+S
+∂
+∂θj
+[ ∂ ln (pθ(x))
+∂θi
+pθ (x)
+]
+ν(dx) −
+∫
+S
+∂2 ln (pθ(x))
+∂θi∂θj
+pθ(x)ν(dx)
+=
+∫
+S
+∂
+∂θj
+[ ∂ (pθ(x))
+∂θi
+]
+ν(dx) −
+∫
+S
+∂2 ln (pθ(x))
+∂θi∂θj
+pθ(x)ν(dx)
+= ∂2
+∂ θj ∂ θi
+∫
+S
+pθ(x)ν(dx) −
+∫
+S
+∂2 ln (pθ(x))
+∂θi∂θj
+pθ(x)ν(dx)
+by using the fact that θ 7→ ln pθ(x) is twice-differentiable (condition (C3)) and where the last equality is obtained from conditions (C4) and (C2).
+And since
+∫
+S
+pθ(x)ν(dx) = 1, and we finally get the desired result.
+Example 2.2 — Gaussian law. Let X ∼ N (μ, σ2). We can check that the Gaussian model verifies the regularity conditions (C1,C2,C3,C4). Note that we consider directly σ2 as the parameter, not σ.
+
+
+26 Chapter 2. Parameter Estimation
+We have:
+ln p(μ,σ2)(x) = ln
+(
+p|μ, σ2)
+= −1
+2 ln 2π − 1
+2 ln σ2 − 1
+2σ2 (x − μ)2,
+∂2 ln p(x|μ, σ2)
+∂μ2 = − 1
+σ2
+thus
+−Eθ
+( ∂2 ln p(X|μ, σ2)
+∂μ2
+)
+=1
+σ2 .
+Similarly:
+∂2 ln p(x|μ, σ2)
+(∂σ2)2 = 1
+2σ4 − 1
+σ6 (x − μ)2
+and
+−Eθ
+( ∂2 ln p(x|μ, σ2)
+(∂σ2)2
+)
+=1
+2σ4
+by using the fact that Eθ
+((x − μ)2) = σ2. Finally:
+∂2 ln p(x|μ, σ2)
+∂μ∂σ2 = μ − x
+σ4
+which leads to
+Eθ
+( ∂2 ln p(X|μ, σ2)
+∂μ∂σ2
+)
+= 0.
+and we obtain:
+I(μ, σ2) =
+
+ 
+1
+σ2 0
+01
+2σ4
+
+ 
+An important property for Fisher information is its additivity for independent random variables.
+Proposition 2.3 Let’s consider two statistical models MΘ = {pθ, θ ∈ Θ} and M′
+Θ= {qθ, θ ∈ Θ} with same parameterization defined by Θ. Let X and Y be two independent random variables of laws pθ in MΘ and qθ in M′
+Θ respectively, then:
+I(X,Y )(θ) = IX (θ) + IY (θ) , ∀θ ∈ Θ,
+where I(X,Y )(θ) is the Fisher information in θ for the random variable (X, Y ) of density (x, y) 7→ pθ(x)qθ(y).
+Preuve : If we get back to the score, we have:
+Sθ (X, Y ) = ∇θ ln(pθ(X, Y )) = ∇θ ln (pθ(X)qθ(Y )) = ∇θ ln (pθ(X)) + ∇θ ln (qθ(X))
+that is to say:
+Sθ (X, Y ) = Sθ (X) + Sθ (Y )
+
+
+2.2 Point Estimation 27
+and the to vectors Sθ (X) and Sθ (Y ) are independent (images of two independent random vectors by measurable functions).
+The variance of the sum of two independent random variables is the sum of the variances of each, hence the result.
+An important application of this result concerns i.i.d. samples.
+Proposition 2.4 Let (X1, . . . , XN ) be an i.i.d. sample for Pθ such that the Fisher information associated with each variable individually is I(θ). Then the Fisher information of the sample (X1, . . . , XN ) denoted IN (θ) is: IN (θ) = N I(θ)
+In a simple way, we can see that N independent observations provide N times more information than a single observation.
+Finally, we introduce the concept of a regular model that will allow to simplify the presentation of results in the remainder of the document. Note however that the definition varies in the literature.
+Definition 2.5 — Regular Statistical Model. A regular model is a dominated statistical model MΘ that verifies the regularity conditions (C1-C1-C3-C4) and for which the Fisher information matrix I(θ) is positive definitea ∀θ ∈ Θ.
+aWe recall that a symetric matrix A is positive definite if for all x 6= 0, xt A x > 0.
+2.2 Point Estimation
+Point estimation aims at determining θ∗, or more precisely to approximate it as accurately as possible. To do this, an estimator is used.
+Definition 2.6 — Estimator and estimation. Let (X1, . . . , XN ) be an i.i.d. sample for Pθ∗. An estimator is a statistic TN (X1, . . . , XN ) with values in Θ whose objective is to approximate the unknown parameter θ∗. A realization TN (x1, . . . , xN ) of TN will be called an estimate of θ∗.
+2.2.1 Substitution method, method of moments
+Let X be a random ariable in (X , A) and let P be the set of probability measures on (X , A). We consider a statistical model MΘ ⊂ P, Θ ⊂ Rp, and the map G : P → Rm (usuall m = p, the dimension of the paramter vector). Given Pθ ∈ MΘ, G (Pθ) is a function of θ, and we denote g(θ) = G (Pθ). We then evaluate G at the empirical measure associated to observations
+Pˆ (x1, . . . , xN ) and determine gˆ = G
+(Pˆ (x1, . . . , xN )
+)
+. The estimate θˆ is thus obtained by
+solving g(θ) = gˆ or by minimizing ||g(θ) − gˆ||. We sometimes speak of substitution method. It is a generalization of the method of moments which consists in choosing G as the moments of the proability distribution.
+
+
+28 Chapter 2. Parameter Estimation
+Method of moments
+If the real-valued random variable X : (Ω, F, P) → (R, B (R)) is in Lp (Ω, F, P), we recal tha it is in Lq (Ω, F, P) for all q < p and the q-th moment, 1 ≤ q ≤ p, is defined by:
+E (Xq) =
+∫
+Ω
+X(ω)q P(dω) .
+If the distribution of X is in the statistical model MΘ = {Pθ, θ ∈ Θ}, Θ ⊂ Rp, X ∼ Pθ, we also have:
+E (Xq) =
+∫
+R
+xq Pθ(dx) ,
+and if the statistical model is dominated, X admits a probability density function pθ, and we have:
+E (Xq) =
+∫
+R
+xq pθ(x) dx .
+We will use the following notation Eθ (X) for EPθ (X), that is to say the expectation of X with respect to Pθ or E (X) when X ∼ Pθ. We choose the map G with values in Rp such that
+G (Pθ) = (Eθ (X) , . . . , Eθ (Xp))
+Recall then (see section 1.4.1) that the application of the G function to the empirical measure for a sample (x1, . . . , xN ) gives:
+G
+(Pˆ (x1, . . . , xN )
+)
+=
+(1
+N
+N
+∑
+i=1
+xi, . . . , 1
+N
+N
+∑
+i=1
+xp
+i
+)
+.
+Estimation with the method of moments amounts to solve a system of p equations with p
+unknowns (since Θ ⊂ Rp), we look for θˆ =
+(θˆ1, . . . , θˆp
+)
+such that:
+
+  
+  
+Eθˆ (X) = 1
+N
+∑N
+i=1 xi
+...
+Eθˆ (Xp) = 1
+N
+∑N
+i=1 xp
+i
+Example 2.3 Let (x1, . . . , xN ), the realization of an i.i.d. random sample for a Gaussian
+distribution of unknown parameters. We consider: MΘ =
+{
+p(μ,σ2), (μ, σ2) ∈ R × R∗+
+}
+with
+p(μ,σ2)(x) = 1
+√2πσ2 e− (x−μ)2
+2σ2
+and we take G:
+p(μ,σ2) →
+(∫
+xp(μ,σ2)(x)dx,
+∫
+x2p(μ,σ2)(x)dx
+)
+.
+For Gaussian distributions, we have:
+G
+(
+p(μ,σ2)
+)
+=
+(
+μ, σ2 + μ2)
+.
+
+
+2.2 Point Estimation 29
+With the empirical moments, we then directly deduce the estimates by the method of moments:
+
+       
+       
+μˆ = 1
+N
+N
+∑
+i=1
+xi
+σˆ2 = 1
+N
+N
+∑
+i=1
+x2
+i−
+(1
+N
+N
+∑
+i=1
+xi
+)2
+2.2.2 Maximum Likelihood
+We recall the definition of the likelihood function.
+Definition 2.7 — Likelihood. Let MΘ a parametric statistical model on (X , A), Θ ⊂ Rp, characterized by a family of probability density functions:
+MΘ = {pθ, θ ∈ Θ} .
+Let X be a random variable, X ∼ pθ∗ with pθ∗ ∈ MΘ. For an observed value x of the random variable X, the function defined on the parameter set Θ: θ 7→ pθ (x) is called the likelihood (or likelihood function) of the parameter θ, we will denote L (θ) ou L (θ; x) to mean that the likelihood depends on the observed value x for which it is calculated. For an i.i.d. sample of observations (x1, x2, . . . , xN ), the likelihood can be written:
+L(θ; x1, x2, . . . , xN ) =
+N
+∏
+i=1
+pθ(xi) ,
+or
+L(θ; x1, x2, . . . , xN ) =
+N
+∏
+i=1
+p(xi|θ) .
+The likelihood of the parameter θ thus corresponds to its plausibility for a certain set of observed data.
+Definition 2.8 — Maximum Likelihood Estimation. For an observed value or a a sample of observations x, if θˆ(x) maximizes the likelihood L(θ; x) on Θ θˆ(x) will be called maximum likelihood estimate and the associated estimator, maximum likelihood estimator (MLE).
+We denote:
+θˆ(x) = arg max
+θ∈Θ L(θ; x),
+Remark 2.4
+(i) The existence and uniqueness of the maximum are not necessarily assured. (ii) It may be easier to look for the maximum of `(θ) = ln (L(θ)) or the minimum of −`(θ).
+
+
+30 Chapter 2. Parameter Estimation
+(iii) If θˆ is an interior point in Θ, a necessary condition for θˆ = arg max
+θ∈Θ L(θ) is that:
+∇L(θˆ) =
+( ∂L(θˆ)
+∂θ1
+, . . . , ∂L(θˆ)
+∂θN
+)T
+=0.
+f L(θ) is concave and if Θ is convex, the condition is sufficient. It is generally necessary to implement numerical optimization procedures to solve the maximization problem (gradient method, quasi-Newton method..., see for example Nocedal and Wright (2006)). (iv) Finally, note that for a continuous random variable, the probability that θˆ = θ∗, i.e., that the estimate is equal to the true value of the parameter, is null...
+Example 2.5 Let X1, . . . , XN be an i.i.d. sample for N (θ, 1), θ ∈ R, and let be x = (x1, . . . , xN ) the observed values. In x, the likelihood is given by:
+L (θ; x) =
+N
+∏
+i=1
+√12π e− 1
+2 (xi−θ)2 = 1
+(2π)N/2 e− 1
+2
+∑N
+i=1 (xi −θ)2
+Our objective is to maximizeL (θ; x) for θ ∈ R, which is equivalent to maximize
+l(θ; x) = ln (L (θ; x)) = − N
+2 ln(2π) − 1
+2
+N
+∑
+i=1
+(xi − θ)2
+or quivalent to minimize: h(θ) = 1
+2
+∑N
+i=1 (xi − θ)2.
+h′(θ) = ∑N
+i=1 (xi − θ) = N θ − ∑N
+i=1 xi Thus h′(θˆ) = 0 gives θˆ = 1
+N
+∑N
+i=1 xi = x ̄. Since h is convex on R, the minimality necessary condition is sufficient, and x ̄ is the maximum likelihood estimate of θ. Without the convexity argument, we can also simply draw a variation table, checking that h is strictly decreasing on ] − ∞; x ̄[ and strictly increasing on ]x ̄; +∞[, it thus reaches its minimum in x ̄. Another way to check the result without using the derivative is to use a well-known equality: 1
+N
+∑
+i=1
+(xi − θ)2 =
+N
+∑
+i=1
+(xi − x ̄)2 +
+N
+∑
+i=1
+(x ̄ − θ)2 .
+we see that ∀θ ∈ R,
+N
+∑
+i=1
+(xi − θ)2 ≥
+N
+∑
+i=1
+(xi − x ̄)2
+1This equality is sometimes called the generalized Koenig-Huygens formula: it is demonstrated in a simple way by noticing that
+N
+∑
+i=1
+(xi − θ)2 =
+N
+∑
+i=1
+(xi − x ̄ + x ̄ − θ)2 =
+N
+∑
+i=1
+(xi − x ̄)2 +
+N
+∑
+i=1
+(x ̄ − θ)2 + 2
+N
+∑
+i=1
+(xi − x ̄) (x ̄ − θ)
+Since:
+N
+∑
+i=1
+(xi − x ̄) (x ̄ − θ) = (x ̄ − θ)
+(N ∑
+i=1
+xi − N x ̄
+)
+=0
+
+
+2.3 Properties of point estimators 31
+and we obtain the equality if and only if θ = x ̄, which gives h (x ̄) ≤ h (θ) , ∀θ ∈ R and equivalently L (x ̄; x) ≥ L (θ; x) , ∀θ ∈ R, with the equality only true when θ = x ̄. The maximum likelihood estimator is therefore given by the empirical mean statistic X ̄ .
+We are sometimes interested not in estimating the parameter θ directly, but in a function of it, g(θ). Then we have a very interesting result.
+Theorem 2.5 If θˆ is the maximum likelihood estimator for θ, then g(θˆ) is the maximum likelihood estimator for g(θ) .
+Preuve : Let x = (x1, . . . , xN ), be a sample of observations for pθ. Let η = g(θ), and let’s denote L∗(η, x), the likelihood function in η. If g is a bijection (one-to-one mapping) from Θ onto g(Θ), then the result is direct:
+L∗(η; x) =
+N
+∏
+i=1
+p
+(
+xi|g−1(η)
+)
+=L
+(
+g−1(η); x
+)
+,
+and thus:
+sup
+η
+L∗(η; x) = sup
+θ
+L(θ; x) .
+Finally, if θˆ maximizes L(θ; x), g(θˆ) maximizes L∗(η; x). If g is not one-to-one, the situation is more complex, since for a given η, there can be several θ such that g(θ) = η and the likelihood function L∗(η; x) = ∏N
+i=1 p (xi|g−1(η)) is not uniquely defined. In such case, we can introduce the induced likelihood:
+L∗(η; x) = sup
+θ:g(θ)=η
+L
+(
+g−1(η); x
+)
+,
+and the result follows simlarly as for the bijective case.
+Example 2.6 Let (x1, . . . , xN ) be a sample of observations for the Bernoulli distribution B(p). Suppose that we have determined the maximum likelihood estimate pˆ for p. Then the MLE for the standard deviation of the distribution is directly √pˆ(1 − pˆ) (knowing that the standard deviation is obtained as a function of p, g(p) = √p(1 − p)).
+2.3 Properties of point estimators
+We have given some methods to estimate the unknown parameters of a probability law from the data. Nevertheless, we still need to study the properties of these estimators in order to characterize them. This study will be carried out both in the non-asymptotic framework, i.e. for a finite dimension of the vector of observations, but also in the asymptotic framework, considering that the dimension of the vector of observations tends towards infinity. In the rest of the section, we consider X to be a random variable in (X , A), X ⊂ Rd, of unknown distribution Pθ∗ such that Pθ∗ ∈ MΘ, a parametric statistical model represented by a family of density functions on (X , A): MΘ = {pθ(x), θ ∈ Θ}, with Θ ⊂ Rp. From an i.i.d. sample X1, . . . , XN de loi Pθ∗, we consider the estimator TN = T (X1, . . . , XN ) of θ.
+
+
+32 Chapter 2. Parameter Estimation
+2.3.1 Quadratic Risk and Bias
+The first criterion considered in evaluating an estimator T is its risk, in particular the quadratic risk.
+Definition 2.9 — Quadratic Risk. For T , estimator of the parameter θ∗, we call quadratic risk:
+R(T, θ∗) = Eθ∗
+(
+‖T − θ∗‖2)
+We also talk of d’mean square error.
+The concept of risk will allow for the comparison of two estimators, T and T ′.
+Definition 2.10 If for all θ ∈ Θ, we have
+R(T, θ) ≤ R(T ′, θ) ,
+and if there exists θ′ ∈ Θ such that
+R(T, θ′) < R(T ′, θ′)
+then T is said to be a better estimator than T ′. T ′ is thus said inadmissible and T is said admissible is there is no better estimator.
+The quadratic risk of T decomposes into two terms, the squared bias and the estimator variance.
+Definition 2.11 — Bias. If the estimator T is integrable, Eθ∗(‖T ‖) < +∞, bθ∗(T ) = Eθ∗(T ) − θ∗ is called the bias of T . An estimator T of θ is said unbiased if ∀θ ∈ Θ:
+bθ(T ) = 0, that is to say Eθ(T ) = θ.
+This means that on average, for independent replications of the same experiment, the estimator neither overestimates nor underestimates the true parameter, whatever it is.
+Proposition 2.6 — Bias-variance Decomposition. When T is square-integrable, i.e. Eθ∗
+(‖T ‖2) < +∞, we can decompose the quadratic risk as follows:
+Eθ∗
+(
+‖T − θ∗‖2)
+= Tr(V∗
+θ(T )) + ‖bθ∗(T )‖2 ,
+where V∗
+θ(T ) is the variance-covariance matrix of T . We talk about bias-variance decomposition.
+Preuve : Indeed, we have:
+Eθ∗
+(
+‖T − θ∗‖2)
+= Eθ∗
+(
+‖T − θ∗ − bθ∗ (T ) + bθ∗ (T )‖2)
+= Eθ∗
+(
+‖T − θ∗ − bθ∗ (T )‖2)
++ ‖bθ∗ (T )‖2
+
+
+2.3 Properties of point estimators 33
+since bθ∗(T ) = Eθ∗ (T − θ∗), then:
+Eθ∗
+(
+‖T − θ∗‖2)
+= Eθ∗
+[
+(T − θ∗ − bθ∗(T ))T (T − θ∗ − bθ∗(T ))
+]
++ ‖bθ∗ (T )‖2
+= Tr(Vθ∗(T − θ∗)) + ‖bθ∗(T )‖2 = Tr(Vθ∗(T )) + ‖bθ∗(T )‖2
+Remark 2.7 If Θ ⊂ R, we simply:
+Eθ∗
+(
+(T − θ∗)2)
+= Vθ∗ (T ) + bθ∗ (T )2 .
+Example 2.8 — (Continuation of example 2.3).
+Consider the Gaussian model, M = {N (μ, σ2), (μ, σ2) ∈ R × R∗+
+}. For an i.i.d. sample, we have seen that by the method of moments we can construct the following estimators:
+
+  
+  
+μˆ = 1
+N
+∑N
+i=1 Xi := X
+σˆ2 = 1
+N
+∑N
+i=1 Xi2 −
+(1
+N
+∑N
+i=1 Xi
+)2 = 1
+N
+∑N
+i=1
+(
+Xi − X
+)2 := S2
+Let’s calculate the expectations and variances of the two estimators (denoting θ = (μ, σ2)). For the estimator of the mean, μˆ = X:
+
+   
+   
+Eθ
+(
+X
+)
+=1
+N
+∑N
+i=1 Eθ (Xi) = μ
+Vθ
+(
+X
+)
+=1
+N
+∑N
+i=1 Vθ (Xi) = σ2
+N
+The estimator X is thus an unbiased estimator of the mean.
+For the estimator of the variance σˆ2 = S2:
+Eθ
+(
+S2)
+=1
+N
+N
+∑
+i=1
+Eθ
+(
+X2
+i
+)
+− Eθ
+(
+X2)
+=
+(
+μ2 + σ2)
+−
+(
+Vθ
+(
+X
+)
++E
+(
+X
+)2)
+= N −1
+N σ2
+S2 is thus a biased estimator of the variance. We then sometimes introduce the unbiased estimator: S′2 = N
+N−1 S2.
+Regarding the variance of the S2 estimator, a longer calculation gives:
+Vθ
+(
+S2)
+= 2(N − 1)
+N 2 σ4 (2.1)
+Finally, an application of Cochran’s theorem (Lehmann and Casella, 2006) would show that for the family of Gaussian laws, X and S2 are independent random variables. The variance covariance matrix is then given by:
+Vθ
+(
+X, S2)
+=
+
+  
+σ2
+N0
+0 2(N − 1)
+N2 σ4
+
+  
+
+
+34 Chapter 2. Parameter Estimation
+Note that the results obtained for Eθ
+(
+X
+)
+, Vθ
+(
+X
+)
+and Eθ
+(S2) are true whatever the distribution,
+provided that the second moment exists. For Vθ
+(S2) however, the general result is given by the following formula, if the fourth moment exists:
+Vθ
+(
+S2)
+= (N − 1)
+N3
+(
+(N − 1)μ4 − (N − 3)σ4)
+where μ4 = Eθ
+(
+(X − μ)4)
+is the centered fourth moment. For the Gaussian law, we know that
+μ4 = 3σ4, which gives (2.1). For the Gaussian family, we can thus quantify the quadratic risks:
+R(X, μ) = σ2
+N et R(S2, σ2) = 2N − 1
+N2 σ4 .
+Interestingly, we have directly that R(S′2, σ2) = 2
+N−1 σ4 , and since 1
+N −1 > N −1
+N2 , we see that
+even if it is biased S2 is a better estimator of the variance than the unbiased estimator S′2, regarding the quadratic risk. For a particular problem, it is therefore important to clearly identify the criterion one wishes to favour. Finally, it should be noted that when the sample size increases, the difference between the two estimators becomes very small.
+2.3.2 Efficiency of Unibiased Estimators
+For unbiased estimators, the bias-variance decomposition allows to directly compare variances to compare estimators.
+Definition 2.12 — Efficiency. Let T, T ′ be two unbiased estimators of θ, θ ∈ Θ. The estimator T is said to be more efficient than T ′ if:
+Vθ(T ) ≤ Vθ(T ′), ∀θ ∈ Θ
+and
+∃θ′ ∈ Θ, Vθ′ (T ) < Vθ′ (T ′) .
+The unbiased estimator T is said to have minimum variance (or best unbiased estimator) if Vθ(T ) ≤ Vθ(T ′) for all unbiased estimators T ′ and for all θ ∈ Θ.
+Remember that for two symmetric matrices A and B, we denote A ≤ B if B − A is positive semi-definite2 and A < B if B − A is positive definite3). In regular statistical models, there is a lower bound on the variance of unbiased estimators.
+Theorem 2.7 — Cramér-Rao Bound. Let MΘ, Θ ⊂ Rp, be a regular statistical model, dominated by the σ-finite measure ν, with support S. Let T be an unbiased estimator of θ for θ ∈ Θ, with T square-integrable, Eθ‖T ‖2 < ∞, and
+2∀x, (xt(B − A)x ≥ 0 3∀x 6= 0, (xt(B − A)x > 0
+
+
+2.3 Properties of point estimators 35
+such that one can differentiate its expectation under the integral sign, ∀1 ≤ i, j ≤ p:
+∂ Eθ (Ti )
+∂θj
+=
+∫
+S
+Ti(x) ∂pθ(x)
+∂θj
+ν(dx) .
+Then we have :
+Vθ(T ) ≥ I−1(θ) .
+The quantity I−1(θ) is called Cramér-Rao bound (or Cramér-Rao lower bound)
+Preuve : Let’s denote S = S(X, θ) = ∇θ ln pθ(X)(θ) the score vector. We know that Eθ(S) = 0 (from condition C2) and Vθ(S) = I(θ) for all θ ∈ Θ.
+Moreover, T being an unbiased estimator of θ, we have Eθ(T ) = θ, and thus ∀1 ≤ i, j ≤ p,
+∂ Eθ (Ti )
+∂θj = δij, with δij the Kronecker symbol4. But thanks to the condition of differentiation
+under the integral sign,
+∂ Eθ (Ti )
+∂θj
+=
+∫
+S
+Ti(x) ∂pθ(x)
+∂θj
+ν(dx)
+=
+∫
+S
+Ti(x)
+∂ pθ (x)
+∂θj
+pθ(x) pθ(x)ν(dx)
+=
+∫
+S
+Ti(x) ∂ ln pθ(x)
+∂θj
+pθ(x)ν(dx)
+= Eθ (TiSj)
+Using matrix notation, we have:
+Eθ(T ST ) = Eθ(ST T ) = Id (2.2)
+Thanks to a writing trick, by decomposing the matrix variance5, and by using the symmetry of I−1(θ) and the fact that E(S) = 0, we finally get (without denoting the dependency on θ of I to simplify the writing):
+Vθ(I−1S − T ) = E
+(
+(I−1S − T )(I−1S − T )T )
+−E
+(
+I−1S − T
+)
+E
+(
+I−1S − T
+)T
+=E
+(
+I−1SST I−1)
+−E
+(
+I−1ST T )
+−E
+(
+T ST I−1)
++E
+(
+TTT)
+− E (T ) E (T )T
+I−1 can be taken out of the expectation, and by using Equation (2.2) and the fact that
+E
+(
+SST )
+= V(S) = I(θ), we finally get:
+Vθ(I−1S − T ) = I−1E
+(
+SST )
+I−1 − I−1E
+(
+STT )
+−E
+(
+TST )
+I−1 + V(T ) = V(T ) − I−1
+V(T ) − I−1(θ) is thus expressed as a matrix of variance-covariance, therefore it is positive definite, and we can note: V(T ) ≥ I−1(θ).
+4δij = 1 if i = j, 0 otherwise.
+5If X is in Rd, V(X) = E ((X − E(X))(X − E(X))T ) = E (XXT ) − E(X)E(X)T
+
+
+36 Chapter 2. Parameter Estimation
+Remark 2.9 We hypothesized that Mθ was regular for the sake of brevity, but we see in the proof that it is sufficient that Mθ verifies the conditions of regularity (C1,C2), and that I(θ) is invertible.
+Corollary 2.8 Under the same assumptions as in 2.7 Theorem, let’s now assume that the T estimator is such that Eθ(T ) = g(θ). So, by adapting the proof, we get that:
+V(T ) ≥
+( ∂g(θ)
+∂θ
+) ( ∂g(θ)
+∂θ
+)T
+I−1(θ) ,
+where
+( ∂g(θ) ∂θ
+)
+is the Jacobian matrix,
+( ∂g(θ) ∂θ
+)
+ij = ∂gi(θ)
+∂θj .
+This result concerns biased estimators, but also cases where one is more interested in estimating g(θ) rather than θ directly.
+The important consequence in practice of the Cramér-Rao theorem is that the larger the information, the smaller the minimum variance and potentially a more accurate estimator can be found.
+Definition 2.13 — Efficient estimator. An unbiased estimator T whose variance-covariance matrix satisfies:
+Vθ(T ) = I−1(θ)
+is called an efficient estimator.
+Remark 2.10 There is no guarantee of the existenc of an estimator with variance equal to the Cramér-Rao bound.
+Corollary 2.9 If the estimator is built from an i.i.d. sample, T (X1, . . . , XN ), we then immediately get:
+V(T (X1, . . . , XN )) ≥ I−1
+N (θ) = 1
+N I−1(θ) ,
+where IN (θ) is the Fisher information matrix for the i.i.d. sample and I(θ) that of the elementary random variable.
+Example 2.11 — (Continuation of examples 2.2 and 2.8). From Example 2.2, we know that for a Gaussian model, the elementary Fisher information (i.e. for the realization of a random variable) is given by:
+I(μ, σ2) =
+
+ 
+1
+σ2 0
+01
+2σ4
+
+ 
+
+
+2.4 Limit theorems 37
+Moreover, we have found in Example 2.8, that for an i.i.d. Gaussian sample,
+Vμ,σ2
+(
+X, S2)
+=
+
+  
+σ2
+N0
+0 2(N − 1)
+N2 σ4
+
+  
+Since I(θ) and Vθ
+(
+X, S2)
+are diagonal, matrix inequality translates into inequality on the
+diagonal terms For the estimator of the mean, we therefore have:
+V(μ,σ2)
+(
+X
+)
+=
+I −1
+(1,1)(μ, σ2)
+N =1
+N σ2 ,
+X is an efficient estimator of the mean.
+For the variance estimator S2, we have
+V(μ,σ2)
+(
+S2)
+= 2(N − 1)
+N2 σ4 <
+I −1
+(2,2)(μ, σ2)
+N.
+But we recall that the estimator S2 is biased for the variance, so we are not in the framework of Theorem 2.7 ! Note that in the same way, we have for the unbiased estimator (X, S′2):
+Vμ,σ2
+(
+X, S′2)
+=
+
+  
+σ2
+N0
+02
+N − 1σ4
+
+  
+Considering the term corresponding to the variance:
+V(μ,σ2)
+(
+S′2)
+=2
+N − 1σ4 >
+I −1
+(2,2)(μ, σ2)
+N =2
+N σ4 .
+S′2 is not an efficient estimator of the variance. However, it could be shown to be the the unbiased estimator of minimal variance, because there exists no unbiased efficient estimator for the variance.
+In many cases, we will be interested in the properties of an estimator not for a fixed sample size of N , but in the limit when this size tends to infinity. The limit theorems in probability (the law of the large numbers, the central limit theorem) will often make it possible to infer properties of the estimator in this infinite limit. We will talk about asymptotic properties. Before looking in detail at the asymptotic properties of estimators, we recall several classical theorems on the convergences of random variable sequences that will prove useful in practice.
+2.4 Limit theorems
+We first recall the two fundamental theorems for the sequences of i.i.d. real-valued random variables seen in the probability course (Billingsley, 1995).
+
+
+38 Chapter 2. Parameter Estimation
+Theorem 2.10 — Strong Law of Large Number. Let (Xi)i∈N∗ be a sequence of i.i.d. realvalued random variables such that E(|X1|) < +∞. We thus have:
+XN
+p.s.
+−→ E(X1) ,
+where we denoted XN = 1
+N
+N
+∑
+i=1
+Xi.
+Theorem 2.11 — Central Limit Theorem. Let (Xi)i∈N∗ be a sequence of i.i.d. real-valued random variables such that 0 < V(X1|) < +∞. We thus have:
+√ N
+( XN − E(X1)
+√V(X1)
+)
+−L→ N (0, 1)
+or in an equivalent manner:
+√ N
+(
+XN − E(X1)
+) −L→ N (0, V(X1)) . (2.3)
+Remark 2.12 Note that in this second form (2.3), the Central Limit Theorem remains true for sequences of i.i.d. random vectors in Rd, with finite expectation and invertible variance-covariance matrix.
+We then recall some classical properties on the convergences of sequences of random variables. For the definition of the different types of convergence, we refer to (Billingsley, 1995)
+Theorem 2.12 — Slutsky’s theorem. Soient deux suites de variables aléatoires réelles Let YN and ZN be two sequences of real-valued random variables, Y a random variable and c ∈ R, such that:
+YN
+−L→ Y et ZN
+−L→ c.
+Then
+YN + ZN
+−L→ Y + c et YN ZN
+−L→ cY .
+More generally, if f is continuous, f (XN , YN ) −L→ f (X, c).
+Proposition 2.13 Let YN be a sequence of random variables with values in Rd and c ∈ Rd such that:
+YN
+−L→ c
+then:
+YN
+−P→ c .
+The reciprocal is of course always true, even if c is a non-degenerate random variable.
+
+
+2.4 Limit theorems 39
+Proposition 2.14 Let YN be a sequence of random variables with values in Rd. If there exists a random variable Z, a real-valued sequence (aN )N such that lim
+N→+∞aN = +∞, and c ∈ Rd
+verifying:
+aN (YN − c) −L→ Z
+then:
+YN
+−P→ c .
+The continuity theorem below makes it possible to transport limit laws by a function.
+Theorem 2.15 — Continuity Theorem. Let YN be a sequence of random variables with values in Rd and h a continuous function on Rd. Then:
+(i) YN
+−L→ Y ⇒ h(YN ) −L→ h(Y )
+(ii) YN
+−P→ Y ⇒ h(YN ) −P→ h(Y )
+(iii) YN
+p.s.
+−→ Y ⇒ h(YN ) p.s.
+−→ h(Y )
+Finally, the delta method allows in particular to extrapolate the results of the central limit theorem to transforms of random variables.
+Theorem 2.16 — Delta Method. Let YN be a sequence of random variables with values in R, m ∈ R, and Z a random variable such that:
+√
+N (YN − m) −L→ Z
+If h : R → R is of class C1 and h′(m) 6= 0, then:
+√ N
+( h(YN ) − h(m)
+h′(m)
+)
+−L→ Z
+Preuve : Let’s consider the following function:
+ψ(x) =
+{ h(x)−h(m)
+x−m si x 6= m
+h′(m) si x = m.
+It is continuous, since h is C1. Moreover, we know that YN
+−P→ m thanks to Proposition 2.14.
+Applying the continuity theorem, we have: ψ(YN ) −P→ ψ(m) = h′(m). Then we write:
+√ N
+( h(YN ) − h(m)
+h′(m)
+)
+=
+√
+N (YN − m) ψ(YN )
+h′(m)
+Since √N (YN − m) −L→ Z and ψ(YN ) −P→ h′(m), the application of Slutsky’s theorem leads to the conclusion.
+Remark 2.13 To remember this result (this is not a rigorous demonstration!), we can apply
+
+
+40 Chapter 2. Parameter Estimation
+Taylor’s formula to h(YN ) in m:
+h(YN ) ≈ h(m) + h′(m) (YN − m)
+and
+h(YN ) − h(m)
+h′(m) ≈ (YN − m) .
+In the case where h′(m) = 0 but h′′(m) 6= 0, we still have a limit law but we have to look for the term of order 2 and the limit law is proportional to that of Z2.
+2.5 Asymptotic properties of estimators
+First, we give the extension in the asymptotic framework of the notion of unbiased estimator.
+We consider in this section TN = T (X1, . . . , XN ), an estimator of θ for X1, . . . , XN i.i.d. for an unknown law in MΘ.
+Definition 2.14 — Asymptotically unbiased. If for all θ ∈ Θ, lim
+N→+∞bθ (TN ) = 0, the estima
+tor T is said asymptotically unbiased.
+Example 2.14 In the example ??, we saw that the variance estimator for an i.i.d. sample (Gaussian, but also more generally) of size N , S2
+N was biased, with bias bσ2
+(S2
+N
+) = σ2
+N . We can see that the estimator is on the other hand asymptotically unbiased.
+This is a probabilistic convergence in expectation, lim
+N→+∞Eθ (TN ) = θ. It remains less strong
+than the convergence in probability and the almost-sure convergence, which define the consistency of the estimator.
+Definition 2.15 — Consistency / Convergence.
+TN is said consistent (sometimes weakly consistent) or convergent if, for all θ ∈ Θ, it converges in probability to θ:
+Pθ (‖TN − θ‖ > ) −→
+N→+∞ 0, ∀ > 0 .
+We denote TN
+−P→ θ.
+TN is said strongly consistent or strongly convergent if, for all θ ∈ Θ, TN converges almost surely to θ:
+Pθ
+(
+lim
+N→+∞TN = θ
+)
+=1.
+We denote TN
+p.s.
+−→ θ.
+Remark 2.15 A strongly consistent estimator is of course consistent, since the almost sure convergence impliques the convergence in probability, cf. (Billingsley, 1995).
+We have the following two results.
+
+
+2.5 Asymptotic properties of estimators 41
+Proposition 2.17 If TN is asymptotically unbiased and if T r (Vθ (TN )) −→
+N→+∞ 0, then:
+(i) R(TN , θ) = E (‖TN − θ‖2) −→
+N→+∞ 0. TN converges in quadratic mean to θ;
+(ii) TN est consistant.
+Preuve : The first point is simply the result of the bias-variance decomposition. The second point is a result of convergence theorems for the sequences of random variables: convergence in quadratic mean implies convergence in probability.
+Example 2.16 We saw that the estimator of the mean X was unbiased and the variance estimator S2 was asymptotically unbiased. Furthermore, we also showed in the example ?? that their variances −→
+N→+∞0. Both estimators are therefore consistent.
+Proposition 2.18 If TN is consistent and if there exist C1, C2 > 0, such that ∀N : ‖bθ(TN )‖2 ≤ C1 and T r (Vθ (TN )) ≤ C2,, then TN is asymptotically unbiased.
+Preuve : Since the expectation of a random vector is the vector of the expectations of each component, we can get back to the case where θ ∈ R. Let > 0:
+|Eθ(TN − θ)| ≤
+∫
+x∈X N ,|TN (x)−θ|≤
+|TN (x) − θ| Pθ(dx) +
+∫
+x∈X N ,|TN (x)−θ|>
+|TN (x) − θ| Pθ(dx)
+≤+
+∫
+x∈X N I{|TN (x)−θ|> }(x)|TN (x) − θ| Pθ(dx)
+≤+
+(∫
+x∈X N I2
+{|TN (x)−θ|> }(x) Pθ(dx)
+∫
+x∈X N
+|TN (x) − θ|2 Pθ(dx)
+)1/2
+≤ + (Pθ (|TN (x) − θ| > ))1/2 (
+‖bθ(TN )‖2 + Vθ (TN )
+)1/2
+≤ + √C1 + C2 (Pθ (|TN (x) − θ| > ))1/2
+Therefore lim
+N→+∞Eθ(TN − θ)| ≤ . That being true for all > 0, we finally get lim
+N→+∞|Eθ(TN −
+θ)| = 0, the estimator is asymptotically unbiased.
+We are now interested in the rate of convergence of consistent estimators.
+Definition 2.16 — Rate of convergence of an estimator. . Let TN be a consistent estimator of θ. Let’s suppose that there exist a real-valued and positive sequence (aN ) such that:
+lim
+N→∞ aN = +∞ et aN (TN − θ) −L→ Z,
+where Z is a non-degenerate random variable (that is to say that it is not almost surelly equalt to a constant). The sequence (aN ) is called the convergence rate of TN .
+In parametric models, convergence rate usually vary between √N and N according to the regularity of the statistical model, the convergence in N being faster than the convergence in
+
+
+42 Chapter 2. Parameter Estimation
+√N .
+Example 2.17 We consider the Gaussian family of variance 1: Mμ = {N (μ, 1), μ ∈ R} We saw in example 2.8 that XN is an unbiased estimator of parameter μ, and we know that the sum of independent Gaussian variables is a Gaussian variable of mean the sum of means and variance the sum of variances6. Therefore XN ∼ N (μ, 1/N ), and finally:
+√ N
+(
+XN − μ
+)
+∼ N (0, 1)
+It remains for us to consider the asymptotic efficiency of an estimator. This notion is only valid for estimators that are asymptotically unbiased (i.e. for most estimators that are consistent thanks the proposition 2.18). Thanks to the central limit theorem, it often boils down to estimators whose limit law is a Gaussian.
+Definition 2.17 An estimator TN of θ is asymptotically normal if there exist Σ(θ), a positive definite symmetric matrix of order p such that
+√
+N (TN − θ) −L→ N (0, Σ(θ)) .
+The variance-covariance matrix Σ does not depend on N . It will be called asymptotic variance associated with the normal estimator TN (beware, it is not the variance limit of the TN estimator). We have the following useful result.
+Proposition 2.19 If an estimator is asymptotically normal, then it is consistent.
+Preuve : If TN is an asymptotically normal estimator of θ, then we can apply Proposition 2.14,
+and we have directly that TN
+−P→ θ.
+For asymptotically normal estimators, it is natural to compare the associated asymptotic variances.
+Definition 2.18 Let TN and T ′
+N be estimators of θ which are asymptotically normal, of
+associated asymptotic variances Σ and Σ′. Then TN is said asymptotically more efficient than T ′
+N if:
+Σ(θ) ≤ Σ′(θ) , ∀θ ∈ Θ et ∃θ′ ∈ Θ, Σ(θ′) < Σ′(θ′) .
+For two symmetric matrices A, B we recall that we denote A < B when B − A is positive definite, A ≤ B when B − A positive semi-definite.
+Definition 2.19 An estimator is asymptotically efficient when it is asymptotically normal and
+6This result can easily be shown by the characteristic functions, cf. Billingsley (1995)
+
+
+2.6 Asymptotic Properties of the Maximum Likelihood Estimator 43
+when its associated asymptotic variance matrix
+Σ(θ) = I−1(θ) .
+Remark 2.18 This notion comes from the fact that if the estimator was efficient, we would have for all N :
+Vθ (TN ) = 1
+N I(θ)−1 ,
+or équivalent:
+Vθ
+(√
+N (TN − θ)
+)
+= I(θ)−1 .
+The extension of the concept to the asymptotic case is not obtained directly by the limit on
+variance. For an asymptotically efficient estimator, we consider that √N (TN − θ) converges in distribution towards a normal distribution of variance I(θ)−1, which is différent, and does not
+necessarily imply the convergence of Vθ
+(√N (TN − θ)
+)
+to I(θ)−1 !
+2.6 Asymptotic Properties of the Maximum Likelihood Estimator
+We first define a very classical notion of divergence between laws of probability.
+Definition 2.20 — Kullback-Leibler Divergence. We consider a statistical model Mθ, dominated by the σ-finite measure ν, and described by the family of densities:
+Mθ = {pθ, θ ∈ Θ} .
+∀θ, θ′ ∈ Θ, is a measure of how one probability distribution pθ′ is different from a second, reference probability distribution pθ and is given by:
+K(θ, θ′) = Eθ
+[
+ln
+( pθ(X)
+pθ′ (X)
+)
+I{pθ′ (X)>0}
+]
+=
+∫
+{x,pθ′ (x)>0}
+ln
+( pθ(x)
+pθ′ (x)
+)
+pθ(x)ν(dx).
+K is not a distance since it is not symmetric. On the other hand, one can easily verify (using Jensen’s inequality) that K(θ, θ′) ≥ 0 and that K(θ, θ) = 0.
+We then have the consistency result for the maximum likelihood estimator.
+
+
+44 Chapter 2. Parameter Estimation
+Theorem 2.20 — Consistency of the maximum likelihood estimator. Let (Xi)i∈N∗ be a sequence of i.i.d. random variables aléatoires for Pθ∗, with Pθ∗ ∈ Mθ, a dominated statistical model. We denote :
+MN (θ) = 1
+N
+N
+∑
+i=1
+ln
+( pθ(Xi)
+pθ∗ (Xi)
+)
+and M (θ) = −K(θ∗, θ). Let’s suppose:
+sup
+θ∈Θ
+|MN (θ) − M (θ)| −P→ 0
+and that for all > 0:
+sup
+θ∈Θ,|θ−θ∗|≥
+M (θ) < M (θ∗)
+Then the maximum likelihood estimator is weakly consistent:
+θˆN
+−P→ θ∗
+Preuve : By the definition of the Kullback-Leibler divergence, M (θ∗) = −K(θ∗, θ∗) = 0 and −M (θ∗) = K(θ∗, θ) ≥ 0, ∀θ. On the other hand, the definition of the maximum likelihood estimator gives us
+MN (θˆN ) ≥ MN (θ∗) .
+We then have the following majoration:
+0 ≤ M (θ∗) − M (θˆN ) = M (θ∗) − MN (θ∗) + MN (θ∗) − MN (θˆN ) + MN (θˆN ) − M (θˆN )
+≤ M (θ∗) − MN (θ∗) + MN (θˆN ) − M (θˆN )
+≤ 2 sup
+θ∈Θ
+|MN (θ) − M (θ)|
+Using the second assumption, for all >0, there’s a δ >0 such that
+|θ − θ∗| ≥ ⇒ M (θ) < M (θ∗) − δ
+The logical implication is the inclusion of the corresponding events:
+Pθ∗{|θˆN − θ∗| ≥ } ≤ Pθ∗{M (θ∗) − M (θˆN ) ≥ δ} ≤ Pθ∗{2 sup
+θ∈Θ
+|MN (θ) − M (θ)| ≥ δ}
+Now, by the first hypothesis of the theorem and by definition of convergence in probability, we have that:
+∀δ > 0, lim
+N→∞ Pθ∗ {sup
+θ∈Θ
+|MN (θ) − M (θ)| ≥ δ
+2 } = 0.
+Therefore, ∀ > 0, limN→∞ Pθ∗{|θ − θ∗| ≥ } = 0, which concludes the proof.
+Under regularity conditions, the asymptotic normality of the maximum likelihood estimator can be established (see e.g. Lehmann and Casella (2006) for demonstration).
+
+
+2.7 Bayesian Estimation 45
+Theorem 2.21 Let MΘ be a regular statistical model for random variables with values in Rd. Let (Xi)i∈N∗ be a sequence of i.i.d. random variables aléatoires with density pθ∗ ∈ MΘ,
+and with Fisher information I(θ∗), and with I(θ) is well-defined and positive definite on a neighborhood of θ∗. Then, if the maximum likelihood estimator θˆMV
+N is a consistent estimator
+of θ∗, we have: √
+N (θˆMV
+N − θ∗) −L→ N (0, I(θ∗)−1) .
+Under these conditions, the maximum likelihood estimator is asymptotically normal and asymptotically efficient.
+2.7 Bayesian Estimation
+2.7.1 Bayesian Model and Conditional Probability Distributions
+Let X be a random variable in (X , A), of unknown law Pθ ∈ MΘ, Θ ⊂ Rp. Since θ is unknwon, it can be considered as a random variable in (Θ, FΘ), where FΘ is Θ (generally FΘ = B(Θ), Borel sets of Θ) if we give ourselves a probability law reflecting a priori knowledge on this parameter. This is the basis of the Bayesian approach. To clarify things, we introduce θ, a random variable in Θ, B (Θ) and we reserve the θ notation for the realizations of the random variable.
+Definition 2.21 A Bayesian statistical model is a parametric statistical model MΘ and a law of probability Πθ on (Θ, FΘ), called prior distribution (or a priori distribution).
+Proposition 2.22 If (MΘ, πθ) is a Bayesian statistical model and if ∀A ∈ A, the mapping θ 7→ Pθ(A) is FΘ-measurable, then the mapping ν : Θ × A → [0, 1], ν(θ, A) = Pθ(A) is a transition kernel. The transition kernel thus defined allows considering Pθ as a conditional distribution:
+∀θ ∈ Θ, ∀A ∈ A : ν(θ, A) = Pθ(A) = PX|θ=θ(A)
+by considering the joint distribution ∀(E, A) ∈ (FΘ, A):
+P(θ,X) (E, A) =
+∫
+E
+Pθ(A) Πθ(dθ) . (2.4)
+Preuve : The result is immediate by from the definition of a transition kernel (Definition 1.4): (i) ∀θ ∈ Θ, ν(θ, .) = Pθ is a probability law on (X , A). (ii) ∀A ∈ A, the mapping ν(., A) is FΘ-measurable. Equation (2.4) of the joint distribution allows to define ν as a conditional distribution of X given θ (see section 1.2.3).
+Remark 2.19 If MΘ is dominated by a measure μ σ-finite and if Πθ admits a density function π, we have owing to (2.4) that the joint density of (θ, X) admits a density function:
+p(θ,X)(θ, x) = pθ(x)π(θ),
+
+
+46 Chapter 2. Parameter Estimation
+pθ is the probability density function of the conditonal distribution PX|θ=θ and we denote:
+pθ(x) = pX|θ=θ(x) = p(x|θ) .
+Remark 2.20 The condition requiring that ∀A ∈ A, the mapping θ 7→ Pθ(A) shoulf be FΘ-measurable is easy to ensure: for example, in the case of a model dominated by μ, if for almost every x, θ 7→ pθ(x) is continuous. The condition is therefore satisfied in particular for a regular model.
+2.7.2 Bayesian Method
+For the rest of this section, we therefore consider a Bayesian model, whose statistical model is dominated and the prior admits a density, and for which the application condition of the proposition 2.22 is also verified. These assumptions then allow us to manipulate conditional densities in a classical way. The model is denoted: ({pθ, θ ∈ Θ} , π) . Under these conditions, we recall the Bayes formula, which is central to Bayesian estimation.
+Theorem 2.23 — Bayes Formula. Let x ∈ X . If pX (x) 6= 0, then we can define the conditional density of the distribution Pθ|X=x, and we have:
+p(θ|x) = p(θ,X)(θ, x)
+pX (x) = p(x|θ)π(θ)
+pX (x) .
+For x given, we have by the formula of marginalization:
+pX (x) =
+∫
+θ∈Θ
+p(x|θ)π(θ) dθ ,
+pX (x) can be seen as a normalization constant (since p(θ|x) is a density, its integral is equal to 1). We then often simply denote:
+p(θ|x) ∝ p(x|θ)π(θ) (2.5)
+Equation (2.5) allows us to define the framework of Bayesian estimation.
+Definition 2.22 — Bayesian Estimation. Let ({pθ, θ ∈ Θ} , π) be a Bayesian model.
+Let x be an observation for a random variable for a distribution of the Bayesian model. Then Bayesian estimation consists in determining the posterior distribution p(θ|x), from the prior distribution π(θ) and the likelihood L(θ; x) = p(x|θ) en x.
+Example 2.21 — Bernoulli model with uniform prior. Let X1, . . . , XN be an i.i.d. sample of random variables following a Bernoulli distribution B(θ), θ ∈ [0, 1], and let x = (x1, . . . , xN ) the corresponding sample of observations. Considering a prior distribution on the parameter θ amounts to consider that θ is the realization of a random variable θ. We suppose here that θ ∼ U([0, 1]).
+We recall that if Xi ∼ B(θ), PXi(1) = θ and PXi(0) = 1 − θ. The density of the law (with respect to the count measure on {0; 1}), can thus be written concisely: p(xi|θ) = θxi(1 − θ)1−xi.
+
+
+2.7 Bayesian Estimation 47
+Et donc pour l’échantillon x, on a:
+p(x|θ) =
+N
+∏
+i=1
+θxi (1 − θ)1−xi .
+Let S denote the statistics S(X1, . . . , XN ) = ΣiN=1Xi and S(x), its realization in x, we have:
+p(x|θ) = θS(x)(1 − θ)N−S(x).
+By Bayes formula, we get:
+p(θ|x) ∝ p(x|θ)p(θ) = θS(x)(1 − θ)N−S(x)
+We recall that the density of the bêta distribution B(a, b) is given by7:
+p(a,b)(θ) = Γ(a + b)
+Γ(a)Γ(b) θa−1(1 − θ)b−1 .
+p(θ|x) is thus proportional to the density of the bêta distribution B(S(x) + 1, N − S(x) + 1). But we know that two probability density function that are proportional are necessary equal (since their integrals are both equal to 1). We thus deduce the posterior distribution:
+[ θ|X = x ] ∼ B(S(x) + 1, N − S(x) + 1) .
+Note that the conditional distribution given the sample (X1, . . . , XN ) depends on the sample only through the S statistic. It is called a sufficient statistic with respect to the statistical model and its associated unknown parameter. In Figure 2.1, we illustrate this example. By simulation of random variables, we construct a sample of size N = 100, (x1, . . . , x100) for the Bernoulli distribution B(0.6), and we deduce the posterior distributions using the first data p(θ|x1), the first ten p(θ|x1, . . . , x10) and the whole sample p(θ|x1, . . . , x100), with a uniform prior on [0; 1]. We can clearly see the evolution of the posterior distribution a with the increase of the sample size, it refocuses towards the true unknown value of 0.6. Note that we hads x1 = 1, which led to p(θ|x1) = 2θI[0;1](θ).
+2.7.3 Choice of the prior distribution
+In the Bayesian method, the determination of the prior distribution is crucial. It generally has a strong influence on the posterior distribution. There are favourable situations in which one has a relatively precise idea of the prior. For example, if the parameters have a particular physical meaning, the distribution of these parameters can be evaluated in comparable and already known situations. This is for example the case when we want to estimate for a particular individual, a parameter for which we know the distribution in the population to which the individual belongs.
+Example 2.22 We find classic examples in pharmacokinetics (Lavielle, 2014). A simple model (PK) gives the concentration y of a drug in the blood as a function of time t and of the administered dose D as follows:
+y(t, D) = Dka
+V ka − Cl
+[
+exp
+(
+−t Cl
+V
+)
+− exp (−kat)
+]
++
+with:
+7The Γ function can be seen as a generalization to positive real numbers (and even to the complex half-plane) of the factorial function: ∀x ∈ R+, Γ(x) = ∫ +∞
+0 tx−1e−t dt, with Γ(n + 1) = n! if n ∈ N.
+
+
+48 Chapter 2. Parameter Estimation
+Figure 2.1: Posterior Distributions p(θ|x) for different sample sizes.
+• ∼ N (0, σ2).
+• ka (absorption rate), Cl (elimination rate), V (distribution volume) are parameters specific to each individual. An example of a curve obtained for this model is given in figure 2.2. Let us suppose that experiments on a certain number of individuals have allowed us to determine the distributions within the population8, for example:
+(ka, V, Cl)T ∼ N
+(
+(kpop
+a , V pop, Cpop
+l )T , Σpop)
+. (2.6)
+Thus, if for a new patient we need to estimate his specific parameters, we can use the distribution in the population as a prior in a Bayesian approach.
+In many cases, however, it is not possible to determine a precise prior distribution. In such cases, technical arguments can be used. For some types of likelihood functions, the prior and posterior distributions belong to the same family of probability laws, and the calculation of the posterior distribution amounts to a simple updating of the distribution parameters from the data. These are called conjugate distributions.
+8We do not go into these details here, but the estimation of such population parameters corresponds to a very interesting field of Statistics, we speak of random effects models (or mixed effects models if certain parameters are stable in the population) or hierarchical models, see Lavielle (2014)
+
+
+2.7 Bayesian Estimation 49
+Figure 2.2: Example of a simulation for the PK model(2.6)
+Definition 2.23 — Conjugate Distributions. A family of distributions F is said conjugate with respect to a likelihood function p(x|θ) if for all prior distribution π ∈ F, the posterior distribution p(θ|x) is also in F.
+Example 2.23 Let X be a random variable aléatoire in N following a Poisson distribution
+P(λ). Let x be an observation. We recall that for x ∈ N, p(x|λ) = λx
+x! e−λ.
+We wand to determine the posteriot distribution p(λ|x) from a prior distribution on λ given by the Gamma distribution G(α, β):
+π(λ) = βα
+Γ(α) λα−1e−βλ
+We thus have:
+p(λ|x) ∝ p(x|λ)π(λ) = λx
+x! e−λ βα
+Γ(α) λα−1e−βλ ∝ λx+α−1e−(β+1)λ .
+where we kept only the terms containing λ, the density being entirely determined by them, thanks to the normalization constraint of the density integral being 1. Once again, we see that the distribution is proportional to the density of a Gamma G(α + x, β + 1) distribution, so the posterior distribution is G(α + x, β + 1). The family of Gamma distributions is therefore conjugate for the likelihood of Poisson distributions.
+There are many conjugate families. We refer, for example, to Robert (2007) for more examples. In practice, if conjugate families are chosen in order to simplify the calculations, these distributions should however be parameterized a priori as accurately as possible, for example by the method of moments. In our example 2.23, if we expect the parameter λ to equal a reference value λ0 for example, we will choose the parameters (α, β) of the Gamma distribution such that its expectation is λ0, that is to say such that α
+β = λ0 (since the expectation of G(α, β) is given by
+α
+β , see the appendix).
+
+
+50 Chapter 2. Parameter Estimation
+Finally, one last way is the non-informative prior distribution. For example, we can choose a uniform distribution over all the possible parameters: none of the parameters is favored a priori. This is the approach used in Example 2.21.
+Remark 2.24 It is interesting to note that even this choice of a uniform prior is not neutral: if we get back to Example 2.21, for an observation x1 = 1, we found p(θ|X1 = 1) = 2θI[0;1](θ), for which the expectation is 2/3, while if we had performed a maximum likelihood estimation, we would have found θˆ = 1.
+2.7.4 Point Bayesian Estimation
+One of the interests of Bayesian estimation lies in its contribution to decision theory (Robert, 2007). The estimation of a parameter in a statistical model is often only the prelude to a decision a user has to make: to give a forecast for a meteorologist, to take a position on the market for a trader, to prescribe a specific treatment to a patient for a doctor... Decision-making under uncertainty can be characterized by a so-called loss function, which measures the gap between the decision taken and the optimal decision. In a simplified way, for parameter estimation, one can assimilate the decision space to the Θ parameter space and the decision can be reduced to the choice of δ which minimizes the distance to the true parameter θ: L (θ, δ). Since θ is unknown, we minimize L (θ, δ) in expectation. In particular, in the Bayesian framework, and for an observation sample X = x, we will try to minimize:
+J (δ) = EPθ|X=x (L(θ, δ)) =
+∫
+Θ
+L(θ, δ)p(θ|x) dθ .
+The loss function is generally considered to be the opposite of a utility function, the definition of which depends on the problem (e.g. the gain for taking a position in a market or the quality of the weather forecast). Two of the most common examples of loss functions are given below.
+Example 2.25 — Quadratic loss function. For Θ ⊂ Rp, we can choose L(θ, δ) = ‖δ − θ‖2. This function can be used to penalize large deviations. We search θˆ minimizing over Θ the loss:
+J(δ) =
+∫
+Θ
+‖δ − θ‖2 p (θ|x) dθ .
+But ∫
+Θ θ p (θ|x) dθ = E(θ|x), therefore ∫
+Θ(δ − E(θ|x))T (E(θ|x) − θ) p (θ|x) dθ = 0 and finally:
+J(δ) =
+∫
+Θ
+(
+‖δ − E(θ|x)‖2 + ‖E(θ|x) − θ‖2)
+p (θ|x) dθ ,
+that is to say
+J(δ) = ‖δ − E(θ|x)‖2 +
+∫
+Θ
+‖E(θ|x) − θ‖2 p (θ|x) dθ .
+The second term in the sum does not depend on δ, therefore θˆ is obtained by minimizing ‖δ − E(θ|x)‖2, and
+θˆ = E(θ|x) =
+∫
+Θ
+θ p (θ|x) dθ ,
+θˆ is the expectation of the prior distribution, also called posterior expectation.
+
+
+2.7 Bayesian Estimation 51
+Example 2.26 — Mean absolute loss. When Θ ⊂ R, we can also choose the mean absolute loss L(θ, δ) = |δ − θ|. We search θˆ minimizing over Θ the loss:
+J(δ) =
+∫
+Θ
+|δ − θ| p (θ|x) dθ .
+We have:
+J(δ) =
+∫δ
+−∞
+(δ − θ) p (θ|x) dθ +
+∫ +∞
+δ
+(θ − δ) p (θ|x) dθ ,
+and therefore ∀h ∈ R:
+J (δ+h)−J (δ)
+h =1
+h
+[
+∫ δ+h
+−∞ (δ + h − θ)p (θ|x) dθ + ∫ +∞
+δ+h (θ − δ − h)p (θ|x) dθ
+−
+∫δ
+−∞(δ − θ) p (θ|x) dθ − ∫ +∞
+δ (θ − δ) p (θ|x) dθ
+]
+=1
+h
+[
+∫δ
+−∞ h p (θ|x) dθ + ∫ +∞
+δ (−h) p (θ|x) dθ
++
+∫ δ+h
+δ (δ + h − θ) p (θ|x) dθ − ∫ δ+h
+δ (θ − δ − h) p (θ|x) dθ
+]
+=
+∫δ
+−∞ p (θ|x) dθ − ∫ +∞
+δ p (θ|x) dθ + 2
+h
+∫ δ+h
+δ (δ + h − θ) p (θ|x) dθ .
+We have ∀θ ∈ [δ; δ + h], 0 ≤ δ + h − θ ≤ h, thus
+hli→m0
+(2
+h
+∫ δ+h
+δ
+(δ + h − θ) p (θ|x) dθ
+)
+=0,
+so finally:
+J ′(δ) = hli→m0
+J(δ + h) − J(δ)
+h=
+∫δ
+−∞
+p (θ|x) dθ −
+∫ +∞
+δ
+p (θ|x) dθ .
+A necessary condition for θˆ to minimize J is that J′(θˆ) = 0, that is to say
+∫ θˆ
+−∞
+p (θ|x) dθ =
+∫ +∞
+θˆ
+p (θ|x) dθ .
+But
+∫δ
+−∞
+p (θ|x) dθ +
+∫ +∞
+δ
+p (θ|x) dθ = 1 ,
+therefore J′(θˆ) = 0 when :
+∫ θˆ
+−∞
+p (θ|x) dθ =
+∫ +∞
+θˆ
+p (θ|x) dθ = 1/2 ,
+that is to say when θˆ is the median of the posterior distribution. We have morevoer that J′(δ) ≤ 0 when δ < θˆ and J′(δ) ≥ 0 when δ > θˆ. The median of the posterior distribution is therefore the estimator minimizing the mean absolute loss.
+
+
+52 Chapter 2. Parameter Estimation
+2.8 Confidence Region
+Let X be a random variable aléatoire or an i.i.d. sample for an unknown distribution inconnue Pθ∗ in a statistical model MΘ, with Θ ⊂ Rp. The point estimation of θ∗ by θˆ from data x, that is to say from an observation of X, remains unsatisfactory: the randomness of the observations from which the estimate is made necessarily results in an estimation uncertainty. In order to better characterize it, a confidence region can be constructed for the parameter.
+2.8.1 Exact Confidence Region
+Definition 2.24 — Confidence Region. Let X = (X1, . . . , XN ) be a i.i.d. sample of Pθ∗. Let α ∈]0, 1[ a given risk level. A confidence region Iα(X) of confidence level 1 − α is a statistic of the sample X with values in P (Θ) such that:
+Pθ∗ (θ∗ ∈ I(X)) ≥ 1 − α.
+If Pθ∗ (θ∗ ∈ I(X)) = 1 − α, the confidence region will be said of size 1 − α. If Θ ⊂ R, we choose the confidence region in the set of intervals on R and we talk of confidence interval.
+In the remainder of this chapter we’ll restrict ourselves to the case where Θ ⊂ R Θ ⊂ R, so we’ll talk about confidence intervals. Concepts can be generalized to the multidimensional case.
+Remark 2.27 We point out that θ∗ is fixed, the interval is a random variable. Typically, we can choose a level of risk α = 0.05, and if we determine a statistic Iα(X) which is a confidence interval of size α, then for 95% of observation samples x, Iα(x) contains the true parameter θ∗.
+Remark 2.28 For a given law and a given confidence level, there is an infinity of confidence intervals satisfying the definition: if I is a confidence interval of level 1 − α, any I′ interval containing I is a confidence interval too. The interval of minimum length is generally preferred, giving a better precision on the value of the true parameter.
+The explicit determination of a confidence interval is based on the existence of a pivotal function.
+Definition 2.25 — Pivotal function and distribution free of the parameter. For a model whose unknown parameter is θ, a pivotal function is a statistic S(X; θ) that depends on θ, but whose probability distribution does not depend on θ. We say that its distribution is free of θ. It is also called an ancillary statistic.
+In practice, we choose the pivotal function whose expression according to the parameter is the simplest possible.
+Example 2.29 — Pivotal function for the Gaussian model. Let X = (X1, . . . , XN ) be an i.i.d. sample for N (μ, σ2). We consider several situations:
+(i) We want to estimate μ, with σ2 known. The sum of N independent Gaussian variables is a Gaussian of mean the sum of the means and variance the sum of the variances. However, the Gaussian family is stable with respect
+
+
+2.8 Confidence Region 53
+to changes in location and scale.9, then
+√N
+(
+X −μ
+)
+σ ∼ N (0, 1) .
+N (0, 1) is a distributoin free of θ, and
+√N (X −μ)
+σ is a pivotal function for μ.
+(ii) We want to estimate σ2, with μ knwon.
+We still have: √N
+(
+X −μ
+)
+σ ∼ N (0, 1) .
+Therefore,
+√N (X −μ)
+σ is also a pivotal function for σ. But another pivotal function is usually used to facilitate the management of the confidence interval. If Z1, . . . , ZN are i.i.d. variables of distibution N (0, 1), then ∑N
+i=1 Zi2 ∼ χ2(N ), a χ2 distribution with N degrees of freedom. Therefore:
+∑N
+i=1(Xi − m)2
+σ2 ∼ χ2(N ) ,
+and finally
+∑N
+i=1 (Xi −m)2
+σ2 is a pivotal function for σ2.
+(iii) We want to estiamte σ2, with μ unknwown. The pivotal function σ2 can no longer involve μ. We can show using Cochran’s theorem that for a Gaussian law:
+NS2
+σ2 =
+∑N
+i=1(Xi − X)2
+σ2 ∼ χ2(N − 1) .
+This result is detailed in Appendix A.2, Theorem A.2.
+NS2
+σ2 is thus a pivotal function for σ2
+(iv) We want to estimate μ, with σ2 unknown. We can then combine the pivotal functions obtained in (i) and (iii). As a matter of fact, if U ∼ N (0, 1), Z ∼ χ2(ν) and Z is independent of U , then √UZ/ν ∼ T (ν), Student’s
+t-distribution with ν degrees of freedom. By Cochran’s theorem, we also know that for a Gaussian distribution, X and S2 are independent (cf. Appendix A.2). Thus
+√N
+(
+X −μ
+)
+σ
+√
+NS2
+(N − 1)σ2
+=
+√N − 1
+(
+X −μ
+)
+S ∼ T (N − 1)
+Example 2.30 Let us consider the family of exponential distributions:
+M=
+{
+E(λ), pλ(x) = λe−λxI[0;+∞[(x), λ > 0
+}
+,
+9If X ∼ N (μ, σ2), X−μ
+σ ∼ N (0, 1).
+
+
+54 Chapter 2. Parameter Estimation
+and let X1, . . . , XN be an i.i.d. sample for E(λ). It is easy to chec that if X ∼ E(λ), and if β > 0, βX ∼ E(λ/β), and thus in particular, 2λXi ∼ E(1/2). We also know that E(1/2) = χ2(2) (cf. Appendix A.1). On the other hand the sum of independent χ2 variables is a χ2 distribution of degree of freedom equal to the sum of the degrees of freedom. Therefore: 2λ ∑N
+i=1 Xi ∼ χ2(2N ). 2λ ∑N
+i=1 Xi is a pivotal function
+for λ of distribution χ2(2N ), free of λ.
+The quantiles of the distributions of the pivotal functions will allow us to determine the confidence intervals.
+Definition 2.26 — Quantile. Let F be the distribution function of a probability law P on R. For r ∈]0; 1[, the r-quantile of F is defined by:
+qr = inf {x ∈ R, F (x) ≥ r} .
+If F is continuous, we have F (qr) = r. If moreover F is strictly increasing, qr is the unique point such that F (qr) = r, that is to say qr = F −1(r).
+Remark 2.31 Historically, the quantiles of the usual laws were determined from statistical tables. Now, these quantiles are obtained directly from software. We give below a small code in Julia (https://julialang.org/) allowing to determine the 0.975-quantiles for a reduced centered Gaussian distribution and 0.95-quantile fot a χ2 distribution with 10 degrees of freedom.
+using Distributions q1=quantile(Normal(0,1),0.975) q2=quantile(Chisq(10),0.95)
+The following proposition gives us a way to construct confidence intervals from the pivotal functions and their distributions.
+Proposition 2.24 Let α, 0 < α < 1, be given. Let S(X; θ) be a pivotal function for a parametric statistical model, of parameter θ ∈ Θ. If its cumulative distribution function is continuous and if qr denotes the r-quantile, then ∀γ, 0 ≤ γ ≤ α:
+Iγ
+α(X) = S−1(X; [qγ; qγ+1−α]) = {a ∈ Θ, qγ ≤ S(X; a) ≤ qγ+1−α}
+is a confidence interval of size (1 − α) for θ.
+Preuve : It is enough to check that:
+Pθ (θ ∈ Iγ
+α(X)) = Pθ (qγ ≤ S(X; θ) ≤ qγ+1−α) = F (qγ+1−α) − F (qγ) = 1 − α
+where F denotes the continuous cumulative distribution function of S(X; θ).
+Remark 2.32 One generally adapts the choice of γ so that, for a given level of risk α, Iαγ is as small as possible, corresponding to better precision.
+
+
+2.8 Confidence Region 55
+Example 2.33 We go back to case (i) of Example 2.29. We consider a Gaussian i.i.d. sample
+X1, . . . , XN ∼ N (μ, 1), of parameter μ unknown. We saw that S(X1, . . . , XN ; μ) = √N (X −μ) is a pivotal function for μ with distribution N (0, 1) free of μ, for which the cumulative distribution function is continuous. We then use Proposition 2.24. Let α be given, ∀γ, 0 ≤ γ ≤ α, Iαγ(X) = S−1(X1, . . . , XN ; [qγ; qγ+1−α]). The difficulty lies in calculating this reciprocal image, which is not always easy. Here, we have:
+P
+(
+qγ ≤
+√
+N (X − μ) ≤ qγ+1−α
+)
+=1−α
+which is equivalent to write:
+P
+(
+X − qγ+1−α
+√N ≤ μ ≤ X − √qγN
+)
+=1−α
+By symmetry of the density of N (0, 1), we have −qγ = q1−γ, therefore
+Iγ
+α=
+[
+X − qγ+1−α
+√N ≤ μ ≤ X + q1−γ
+√N
+]
+.
+The length of the confidence interval is (qγ+1−α + q1−γ) /√N . In the case where the parameterfree distribution is a Gaussian density and if α ≤ 0.5 (which is usually the case, since we often take α = 0.01, 0.05 ou 0.1 for example), we can show that the smallest (and therefore the most accurate) interval is obtained for γ = α/2. Indeed, on [1/2; 1], the quantile function of the Gaussian distribution (that is to say F −1, the reciprocal of the cumulative distribution function) is convex10 (cf. Figure 2.3) and thus:
+qγ+1−α + q1−γ = F −1(γ + 1 − α) + F −1(1 − γ) = 2
+(1
+2 F −1(γ + 1 − α) + 1
+2 F −1(1 − γ)
+)
+For α ≤ 0.5, since 0 ≤ γ ≤ α, we have γ + 1 − α and 1 − γ in [1/2; 1], and therefore by convexity of F −1 over this interval:
+(1
+2 F −1(γ + 1 − α) + 1
+2 F −1(1 − γ)
+)
+≥ F −1
+(1
+2 (γ + 1 − α) + 1
+2 (1 − γ)
+)
+= F −1 (1 − α/2) .
+So finally, ∀ 0 ≤ γ ≤ α ≤ 0.5 and for a parameter-free centered Gaussian distribution, we have that the smallest confidence interval is obtained for γ = α/2, that is to say:
+Iγ
+α=
+[
+X − q1−α/2
+√N ≤ μ ≤ X + q1−α/2
+√N
+]
+.
+Numerical Example: let’s suppose that for example, α = 0.05, X = 10, and N = 100, we obtain that q0.975 ≈ 1.96 and the optimal confidence interval is given by:
+I0.05 ≈ [9.804; 10.196] .
+Now assume that N = 1000, for the same observed empirical mean. The confidence interval becomes more precise:
+I0.05 ≈ [9.938; 10.062] .
+10Let C be a convex set in a vector space E, and f : C → R. We say that f is convex if ∀x1, x2 ∈ C, ∀t ∈]0; 1[, f (tx1 + (1 − t)x2) ≤ tf (x1) + (1 − t)f (x2). In particular, f is convex if and only if its epigraph Ef = {(x, α), f (x) ≤ α} is convex.
+
+
+56 Chapter 2. Parameter Estimation
+Figure 2.3: Quantile function of the standard Gaussian distribution.
+Example 2.34 We now return to the (ii) case in Example 2.29. We considet a Gaussian i.i.d. sample X1, . . . , XN ∼ N (0; σ2), of parameter σ2 unknown. We saw that S(X1, . . . , XN ; μ) =
+∑N
+i=1 X2
+i
+σ2 is a pivotal function pivotale for σ2 with distribution χ2(N ), whose cumulative distribution function is continuous. Let α be gicen and let γ, 0 ≤ γ ≤ α. We have then:
+P
+(
+qγ ≤
+∑N
+i=1 Xi2
+σ2 ≤ qγ+(1−α)
+)
+=1−α
+where qr denotes the r-quantile for χ2(N ). We deduce:
+P
+( ∑N
+i=1 Xi2
+qγ+(1−α)
+≤ σ2 ≤
+∑N
+i=1 Xi2 qγ
+)
+=1−α
+and the confidence interval:
+Iγ
+α=
+[ ∑N
+i=1 Xi2
+qγ+(1−α)
+;
+∑N
+i=1 Xi2 qγ
+]
+.
+Note that it’s much harder to pick the best γ. If N is large, we can approach the χ2(N ) distribution by a normal law, and we also get that the best gamma is close to α/2.
+Example 2.35 — (Continuation of Example 2.30). We consider the exponential distributions model E(λ) seen in Example 2.30. We know that: 2λ ∑
+1≤i≤N
+Xi is a pivotal function for λ with
+χ2(2N ) distribution. Let α be given, and let γ, 0 ≤ γ ≤ α. We have:
+P
+
+qγ ≤ 2λ ∑
+1≤i≤N
+Xi ≤ qγ+(1−α)
+
+=1−α
+
+
+2.8 Confidence Region 57
+where qr denotes the r-quantile of the χ2(2N ) distribution, which gives us the confidence interval:
+Iγ
+α=
+[ qγ
+2
+∑
+1≤i≤N Xi
+; qγ+(1−α)
+2
+∑
+1≤i≤N Xi
+]
+.
+As in the previous example 2.34, it is not easy to find the optimal gamma, but for N big enough, we can take gamma = α/2, and:
+Iα =
+[ qα/2
+2
+∑
+1≤i≤N Xi
+; q(1−α/2)
+2
+∑
+1≤i≤N Xi
+]
+.
+Numerical example: take for example α = 0.05, N = 100, and suppose ∑
+1≤i≤N Xi = 18.34, we obtain I0.05 = [4.44; 6.57]. (Note that the values were obtained by simulation for Xi ∼ E(5)).
+2.8.2 Asymptotic confidence region
+It is often not possible to determine a pivotal function for the parameter to be estimated. Thanks to the convergence theorems on the sequences of random variables (in particular the central limit theorem), one can often considet the asymptotic framework.
+Definition 2.27 — Asymptotic Confidence Region. Let (Xi)i∈N be a sequence of i.i.d. random variables of distribution Pθ∗. Let α ∈]0, 1[ be a given risk level. A confidence region Iα(X) of asymtotic level 1 − α is a statistic on sample X with values in P (Θ) such that:
+lim
+N→+∞Pθ∗ (θ∗ ∈ I(X)) ≥ 1 − α.
+In the same way as for the exact confidence regions, if lim
+N→+∞Pθ∗ (θ∗ ∈ I(X)) = 1 − α, the
+confidence région is said of asymptotic size 1 − α. Confidence regions of asymptotic levels or asymptotic sizes are called asymptotic confidence regions. If Θ ⊂ R, the confidence region will be chosen in the set of intervals on R and we talk of asymptotic confidence intervals.
+However, the confidence region construction is carried out for a finite sample size of N . We then define the coverage probability, corresponding to the real size, which will allow us to measure the deviation from the asymptotic size.
+Definition 2.28 — Coverage Probability. Let X = (X1, . . . , XN ) be an i.i.d. sample for Pθ∗. Let I(X) be a confidence region for θ∗. The coverage proability τc is defined by:
+τc = Pθ∗ (θ∗ ∈ I(X)) .
+If Iα(X) is an exact confidence region of size (1 − α), then τ c = 1 − α. Of course, this is no longer the case if I(X) is a confidence region of asymptotic size 1 − α, we only have lim
+N→+∞τ c = 1 − α. We therefore often use τ c to characterize the construction of asymptotic
+confidence regions. It’s illustrated in figure 2.4.
+
+
+58 Chapter 2. Parameter Estimation
+Figure 2.4: Confidence intervals and coverage probability: the true parameter θ∗ is indicated by the blue line and several realizations of I(X) are shwon, in green if the interval contains θ∗, in red otherwise.
+These asymptotic confidence regions are built from asymptotic pivotal functions.
+Definition 2.29 — Asymptotic pivotal function. Let us considet a model of parameter θ, MΘ = {Pθ, θ ∈ Θ}, and (Xi)i∈N∗, a sequence of i.i.d. random variables for Pθ ∈ MΘ. An asymptotic pivotal function is a statistic S(X1, . . . , XN ; θ) which may depend on θ, but whode limit distribution does not depend on θ, that is to say that there exists a random variable Y of known and θ-free distribution (that is to say independent of θ) such that:
+S(X1, . . . , XN ) −L→ Y .
+Example 2.36 Let us consider the model of Bernoulli distributions, M = {B(θ), θ ∈]0; 1[}. If X1, . . . , XN is an i.i.d. sample of distribution B(θ), it is not possible to find a pivotal function. We know for example that ∑
+1≤i≤N Xi ∼ B(N, θ) (binomial law), but it does not allow to determine a pivotal function. On the other hand, we can use the central limit theorem: we know that E(Xi) = θ and V(Xi) = θ(1 − θ), therefore
+√ N
+( X−θ
+√θ(1 − θ)
+)
+−L→ N (0, 1) ,
+√N
+( X−θ
+√θ(1 − θ)
+)
+is an asymptotic pivotal function:
+Example 2.37 — (Continuation of example 2.30). If we take the model of exponential distributions of Example 2.30, let X1, . . . , XN be an i.i.d sample for E(λ). We found an exact pivotal
+
+
+2.8 Confidence Region 59
+function, but we also have an asymptotic pivotal function using the central limit theorem. Since E(Xi) = 1/λ and V(Xi) = 1/λ2, we have
+√ N
+( X − 1/λ
+1/λ
+)
+−L→ N (0; 1) ,
+√N
+(
+λX − 1
+)
+is an asymptotic pivotal function. In this case, it is of course preferable to choose
+the exact pivotal function. We will see below the difference that it implies in the construction of confidence intervals, in terms of coverage probabilities.
+The following theorem will help us to construct asymptotic pivotal functions in the case where θ ∈ R.
+Theorem 2.25 Let MΘ = {Pθ, θ ∈ Θ ⊂ R} be a statistical model. Let TN be an estimator of θ, asymptotically normal, satisfying ∀θ ∈ Θ:
+√
+N (TN − θ) −L→ N (0, V (θ))
+with V (θ) > 0 and continuous in θ, then:
+√
+N (TN − θ)
+√V (θ) et
+√
+N (TN − θ)
+√V (TN )
+are asymptotic pivital functions for θ with distribution N (0; 1).
+Preuve : It is direct for
+√N (TN −θ)
+√V (θ) . Since TN is asymptotically normal, it converges in probability
+to θ (cv. Theorem 2.19). By the continuity theorem 2.15, we then have that
+√V (θ)
+√V (TN )
+−P→ 1
+and since √N (TN − θ)
+√V (θ)
+−L→ N (0; 1)
+using Slutsky"s theorem 2.12
+√
+N (TN − θ)
+√V (TN ) =
+√
+N (TN − θ)
+√V (θ)
+√V (θ)
+√V (TN )
+−L→ N (0; 1) .
+The second asymptotic pivotal function is obviously easier to inverse.
+Corollary 2.26 Let α be given,
+Iα =
+[
+TN − q1−α/2
+√
+V (TN )/N ; TN + q1−α/2
+√
+V (TN )/N
+]
+
+
+60 Chapter 2. Parameter Estimation
+is a confidence interval for θ of asymptotic size (1 − α).
+Preuve : Using the convergence in distribution of the pivotal function to the standard Gaussian law, and noting qr the r-quantile of the latter, we have:
+lim
+N →+∞P
+(
+qα/2 ≤
+√
+N (TN − θ)
+√V (TN ) ≤ q1−α/2
+)
+=1−α
+by using the symmetry of the standard Gaussian distribution, qα/2 = −q1−α/2, and we directly get the result.
+Remark 2.38 — ’Plug-in’ Method. In a pivotal function that is difficult to invert, the use of the estimator in place of the parameter to be estimated is often made possible by Slutsky’s theorem, as in the demonstration of theorem 2.25, which can simplify the expression and ease the determination of the asymptotic confidence interval. This is called a substitution or ’plug-in’ method.
+Example 2.39 — (Continuation of Example 2.36). For the model of Bernoulli distributions, we saw that √
+N
+( X−θ
+√θ(1 − θ)
+)
+is an asymptotic pivotal function of asymptotic distribution N (0, 1) or equivalently, that X is an asymptotically normal estimator of θ with:
+√ N
+(
+X −θ
+) −L→ N (0, θ(1 − θ))
+so using Theorem 2.25 and its corollary 2.26, we directly have the confidence interval of asymptotic size (1 − α):
+[
+X − q1−α/2
+√
+X(1 − X)/
+√
+N ; X + q1−α/2
+√
+X(1 − X)/
+√ N
+]
+(2.7)
+where qr denotes the r-quantile of the standard Gaussian distribution. Numerical example: for N = 100 and α = 0.05, suppose X = 0.53 (for example 53% of positive answers in a sample of 100 people), we find the asymptotic confidence interval [0.432; 0.628]. We can see that the accuracy is very low. With N = 1000 and the same percentage X = 0.53 observed, the confidence interval becomes [0.499; 0.561]. By simulation, we can calculate an approximation of the coverage probability τc: for example, for a true parameter value of p0 = 0.53, we simulate a very large number of times Ns = 106 a sample of N = 100 variables B(p0), we calculate the confidence interval given by Equation (2.7), and we count the number of times where p0 belongs to the confidence interval thus constructed. Here we find τc(100) = 0.944. We do the same for N = 1000 and we find τc(1000) = 0.947. The coverage probabilities here are very good (the asymptotic value being 0.95).
+Example 2.40 — (Continuation of Exemples 2.35, 2.37). For the model of exponential distri
+butions, we showed that √N
+(
+λX − 1
+)
+is an asymptotic pivotal function for λ. We directly
+have:
+lim
+N →+∞P
+(
+−q1−α/2 ≤
+√ N
+(
+λX − 1
+)
+≤ q1−α/2
+)
+= 1 − α (2.8)
+
+
+2.8 Confidence Region 61
+where qr denotes the r-quantile of the standard Gaussian distribution. Anf finally, the asymptotic confidence interval:
+[1
+X
+(
+1 − q1−α/2
+√N
+)
+;1
+X
+(
+1 + q1−α/2
+√N
+)]
+Numerical example: if we take the numerical values from Example 2.35, α = 0.05, N = 100,
+∑
+1≤i≤N Xi = 18.34, and we obtain by Equation (2.8) the asymptotic confidence interval [4.38; 6.52], to compare with the exact confidence interval, that is to say I0.05 = [4.44; 6.57]. (Recall that the values were obtained by simulation by taking Xi ∼ E(5)). We calculate the coverage probability by simulation and find τc(100) = 0.951. Even for N = 20, we find τc(20) = 0.953: here again, the asymptotic approximation proves to be of good quality, even for a small sample size.
+
+
+
+
+3. Statistical Hypothesis Testing
+This chapter introduces the basic concepts of statistical hypothesis testing theory. This field covers a wide range of different configurations and many methods (Lehmann and Romano, 2006). We introduce the general principles here by illustrating them through a few simple examples.
+3.1 Problem Formulation
+Hypothesis testing is used to formalize decision making based on experimental data and the risk measures associated with this decision making.
+3.1.1 Statistical Hypothesis and Test
+Let us consider a statistical model M, family of probability distribution on (X , A), and let P ∗ ∈ M be an unknown probability distribution describing the phenomenon of interest.
+Definition 3.1 — Statistical Hypothesis. A statistical hypothesis about a distribution P ∗ ∈ M is a statement of the type P ∗ ∈ M0, where M0 ⊂ M is a subfamily of distributions in M.
+Example 3.1 These hypotheses can be very diverse, for example M0 can be reduced to a singleton: P ∗ is a Gaussian distribution of zero mean and variance 10. M0 can also be a particular parametric model M0 = {E(λ), λ > 0} or relate only to features of the distribution: P ∗ is a symmetric distribution.
+The purpose of a statistical hypothesis test (or more simply statistical test or test) is to indicate whether a statistical hypothesis can be considered true. Usually, the test will confront two disjoint statistical hypotheses, which is the framework we are considering here.
+
+
+64 Chapter 3. Statistical Hypothesis Testing
+Definition 3.2 — Statistical Hypothesis Test. Let M0 ⊂ M, M1 ⊂ M, M0 ∩ M1 = ∅. A statistical hypothesis test is a procedure that compares two statistical hypotheses: H0 : P ∗ ∈ M0 and H1 : P ∗ ∈ M1 and defines a decision rule allowing from the observation of an independent identically distributed sample of size N for P ∗ to indicate whether H0 can be accepted (assumed to be true) or rejected (assumed to be false) in favor of H1.
+We call H0 the null or conservative hypothesis and H1 the alternative hypothesis.
+Formally, a test on (X N , A⊗N ), is thus defined by the triplet (M0, M1, δ) where M0, M1 are two disjoint family of distributions on (X , A) and δ a statistic δ : X N → {0, 1} such that for all (x1 . . . , xN ) ∈ X N , if δ(x1, . . . , xN ) = 0 H0 is accepted, whereas if δ(x1, . . . , xN ) = 1, H0 is rejected.
+Remark 3.2 An important aspect of this formulation is the asymmetry of the two assumptions. Indeed, depending on whether the null hypothesis is P ∗ ∈ M0 or P ∗ ∈ M1, we will have different tests and potentially different conclusions. The important thing to remember is that the null hypothesis must represent the conservative hypothesis, the one we would least like to falsely reject. A classic analogy is that of the presumption of innocence in a court of law: the basic assumption is that the person on trial is innocent, and convincing evidence must be provided to show that this is not true. This presumption is based on the principle that it is more serious to convict an innocent person than to release a guilty one. Another typical situation is, for example, the decision to put a new product into production for a company: since this potentially involves large additional costs, it is important to prove that the new product is better than an old product, for example. In this case, the conservative null hypothesis would be H0: the new product is not better than the old one.
+Definition 3.3 — Critical region. Let (M0, M1, δ) be a test on (X N , A⊗N ). The set R ⊂ X N , R = δ−1 ({1}), is called critical region (or region of rejection). Practically, since the statistic δ is completely defined by R, (∀(x1, . . . , xN ) ∈ X N , δ(x1, . . . , xN ) = 1 if (x1, . . . , xN ) ∈ R, δ(x1, . . . , xN ) = 0 otherwise), a test will be equivalently considered a triplet (M0, M1, R), specifying instead the critical region.
+Generally, the critical region R leading to the rejection of the hypothesis H0 is constructed from a test statistic T : X N → R, the distribution of which is known, and the rejection region will be in the form:
+R=
+{
+(x1, . . . , xN ) ∈ X N : T (x1, . . . , xN ) ∈ W
+}
+, avec W ⊂ R .
+We will later see several ways to determine the T test statistic.
+3.1.2 Risk of a test
+The problem of constructing a hypothesis test is closely related to the risk of false conclusion. Indeed, if M0 and M1 have the same support, any observation can be generated from any distribution of M0 and M1. Thus, in the decision to accept or reject the null hypothesis, there is always a probability of error, which should be controlled. In the test of H0 versus H1, there are two types of error: type I error, which consists in rejecting H0 when it is true (convicting an
+
+
+3.1 Problem Formulation 65
+innocent), and type II error, which consists in accepting H0 when H1 is true (releasing a guilty person).
+Definition 3.4 Let (M0, M1, R) be a hypothesis test regarding P ∗ on (X N , A⊗N ). A type I risk is probability of rejection of a true null hypothesis, that is to say P ((X1, . . . , XN ) ∈ R) while P ∗ ∈ M0. A type II risk is the probability of non-rejection of a false null hypothesis, that is to say P ((X1, . . . , XN ) ∈/ R) while P ∗ ∈ M1.
+The power of the test is (1 - type II risk), that is to say the probability of rejecting a false H0.
+The greater the power of the test, the more it is able to challenge the conservative assumption when it is false. We can see that there is a compromise to be found between type I risk and power.
+In many cases, it is not possible to determine these risks because the true P ∗ law is unknown. Instead, we will calculate an upper bound of them. As mentioned above, the most serious error is the type I error. Also, in the construction of the test, once the assumptions H0 and H1 have been determined (i.e. M0 and M1 given) we will generally impose an upper bound α on the type I risk (typically α = 0.05 or α = 0.01) and the critical region will be constructed so that the type I risk remains below the threshold α. So we give α and look for a critical region Rα such that:
+sup
+P ∗∈M0
+P ((X1, . . . , XN ) ∈ Rα) ≤ α . (3.1)
+Remark 3.3 If X ∼ P ∗ and (X1, . . . , XN ) is an i.i.d. sample, we denote:
+P ((X1, . . . , XN ) ∈ Rα) for (P ∗)⊗N (Rα) .
+The notation P ((X1, . . . , XN ) ∈ Rα) is preferred here because it is more explicit.
+As a test should be as powerful as possible (as discriminating as possible), it is appropriate to choose among the critical regions verifying the condition (3.1) of type I risk majoration, the one that ensures that P ((X1, . . . , XN ) ∈ Rα) is the greatest possible when P ∗ ∈ M1. In particular, if R ⊂ R′ and if for the two regions the majoration condition (3.1) is satisfied, then, as ∀P ∗, P ((X1, . . . , XN ) ∈ R) ≤ P ((X1, . . . , XN ) ∈ R′), the test associated with R′ will be more powerful.
+Definition 3.5 — Size and significance level of a test. For a test (M0, M1, R) sur (X N , A⊗N ), we call size of the test
+α = sup
+P ∗∈M0
+P ((X1, . . . , XN ) ∈ R) .
+Any upper-bound of the test size will be called significance level of the test.
+In practice, we will therefore often set a test significance level α ∈]0; 1[, and look for the most powerful test of that level (there is not necessarily a test of size α, especially if the distributions involved are discrete). We can also not define a significance level α a priori, but rather consider a collection of tests of critical regions of different sizes, and see from the data, which tests lead to accept H0 and which ones lead to reject H0. We use the notion of p-value (for probability-value).
+
+
+66 Chapter 3. Statistical Hypothesis Testing
+Definition 3.6 — p-value. Let {(M0, M1, Rt) , t ∈ T } be a collection of tests on
+(
+X N , A⊗N )
+indexed by t ∈ T ⊂ R, and αt the size of the test of critical region Rt. The p-value α∗ is the statistic defined on X N by:
+α∗(X1, . . . , XN ) = inf {αt, t ∈ T : (X1, . . . , XN ) ∈ Rt}
+For a given sample of observations x = (x1, . . . , xN ), α∗(x) is therefore the lower bound of the test sizes for which we reject H0. If {αt, t ∈ T } is an interval, it is also the upper bound of the test sizes for which we accept H0. (This is not necessarily the case if the law of test statistics is discrete, for example).
+Figure 3.1: Acceptation / Rejection of H0 as a function of the test size - α∗(x) denotes the p-value.
+The p-value can then be interpreted as a measure of evidence against H0. The smaller α∗ is, the stronger the evidence against H0 (a low test level means that one must be very conservative not to reject H0). In practice, we draw the conclusions described below based on the p-value:
+p-valeur évidence α∗(x) < 0.01 very strong evidence against H0 0.01 ≤ α∗(x) < 0.05 strong evidence against H0 0.05 ≤ α∗(x) < 0.1 weak evidence against H0 0.1 ≤ α∗(x) no real evidence against H0
+Remark 3.4 In the classical test approach presented here, the p-value is not the probability that H0 is true. H0 is true with probability 1 or 0, because even if we don’t know it, the unknown distribution P ∗ is either in M0 or in M1, it cannot be in both. Bayesian tests, on the contrary, provide a probabilistic framework giving the probability that H0 is conditionally true given the x observation. We will not present these concepts here.
+
+
+3.2 Parametric Tests 67
+In the following, we will consider two particular and complementary types of tests: on the one hand parametric tests, for which we consider a given parametric model and the hypotheses of the tests relate to the values of parameters, and on the other hand goodness of fit tests, for which we check whether a distribution actually belongs to a parametric family.
+3.2 Parametric Tests
+We consider a parametric statistical model. MΘ = {Pθ, θ ∈ Θ}.
+3.2.1 Parametric Tests and Power Function
+Definition 3.7 — Parametric test. Let MΘ be a parametric statistical model. A parametric test is a statistical test (M0, M1, R) such that there exist Θ0 ⊂ Θ, Θ1 ⊂ Θ, Θ0 ∩ Θ1 = ∅ with M0 = {Pθ, θ ∈ Θ0} and M1 = {Pθ, θ ∈ Θ1}. It will be noted then (Θ0, Θ1, R).
+In other words, for a parametric model MΘ, and denoting Pθ the unknown distribution, a parametric test is a hypothesis test of the form:
+{H0 : θ ∈ Θ0
+H1 : θ ∈ Θ1
+where Θ0 and Θ1 are two disjoint subsets of Θ.
+Example 3.5
+• A parametric test is said with simple hypotheses when Θ0 and Θ1 are reduced to singletons, that is to say:
+{H0 : θ = θ0
+H1 : θ = θ1
+• Any other parametric test is said composite (or with composite hypotheses). A general example is
+{H0 : θ ∈ Θ0
+H1 : θ ∈ Θ1 = Θc
+0,
+where Θc0 is the complementary set of Θ0 in Θ, and a frequent case is such that: Θ0 = {θ0}:
+{H0 : θ = θ0
+H1 : θ 6= θ0
+If Θ ⊂ R, this last configuration corresponds to a two-tailed test, as opposed to one-tailed
+tests: {H0 : θ = θ0
+H1 : θ > θ0
+where {H0 : θ = θ0
+H1 : θ < θ0.
+
+
+68 Chapter 3. Statistical Hypothesis Testing
+Definition 3.8 — Power function. If (Θ0, Θ1, R) is a parametric test on
+(
+X N , A⊗N )
+, then
+its power funciton π is defined ∀θ ∈ Θ0 ∪ Θ1 by:
+π(θ) = Pθ(X ∈ R),
+Remark 3.6 The test size α is thus given by:
+α = sup
+θ∈Θ0
+π(θ)
+In the special case of simple hypothesis testing, Θ0 = {θ0} and Θ1 = {θ1}, we get: (i) α = π(θ0) is the test size, that is to say the type I risk, (ii) β = 1 − π(θ1) is the type II risk, (iii) π(θ1) is the power of the test.
+In the case of tests with simple hypotheses, it is then easy to compare the power of the tests.
+Definition 3.9 Let T = (Θ0, Θ1, R) and T ′ = (Θ0, Θ1, R′) be two parametric tests both confronting the same hypotheses and their respective power functions π and π′. If Θ1 = {θ1}: T is more powerful than T ′ if π(θ1) > π′(θ1) In the general case (Θ1 not necessarily a singleton): T is said uniformly more powerful than T ′ if π(θ) > π′(θ), ∀θ ∈ Θ1.
+3.2.2 Method to Build Critical Regions
+Let MΘ be a parametric statistical model, and suppose defined the unknown distribution Pθ, Pθ ∈ MΘ and the two alternative hypotheses:
+{H0 : θ ∈ Θ0
+H1 : θ ∈ Θ1
+with Θ0 ⊂ Θ, Θ1 ⊂ Θ et Θ0 ∩ Θ1 = ∅.
+Exact Method
+Consider an i.i.d. sample of size N for Pθ. Our objective is to determine the critical region R ⊂ X N of the test. Generally, the test size α is given, and we look for a test statistic T : X N → R whose distribution is known la loi, and the critical region will be obtained as:
+R=
+{
+(x1, . . . , xN ) ∈ X N : T (x1, . . . , xN ) ∈ W
+}
+, avec W ⊂ R . (3.2)
+such that
+sup
+θ∈Θ0
+Pθ((X1, . . . , XN ) ∈ R) ≤ α .
+Among all the critical regions verifying constraint (3.2), we will look for the one that maximizes the power.
+
+
+3.2 Parametric Tests 69
+Example 3.7 We consider a Gaussian statistical model M = {N (θ, 1) : θ ∈ R} for which the variance is given, equal to 1. Let Pθ ∈ M and X = (X1, . . . , XN ), an i.i.d. sample for Pθ. We test the following hypotheses:
+{
+H0 : θ = −1 H1 : θ = 1
+We are in a simple hypothesis test. Since we know that the maximum likelihood estimator of θ is the empirical mean X, we propose a test based on it and it seems natural to consider a rejection region of the type:
+R=
+{
+(x1, . . . , xN ) ∈ RN : 1
+N
+N
+∑
+i=1
+xi > x0
+}
+with x0 ∈ R. Le test consiste donc à faire la moyenne des observations et à rejeter l’hypothèse θ = −1 au profit de θ = 1 si cette moyenne dépasse un certain seuil x0. A reasonable value for x0 is the midpoint between θ0 and θ1, that is to say 0. Let’s calculate the type I risk α and the power π associated with this test:
+α = Pθ=−1 ((X1, . . . , XN ) ∈ R) = Pθ=−1
+(
+X >0
+)
+and
+π = Pθ=1 ((X1, . . . , XN ) ∈ R) = Pθ=1
+(
+X >0
+)
+We must evaluate the probability of the same event but under different distributions. In the first
+case, under hypothesis H0, we have X ∼ N (−1, 1/N ), that is to say √N
+(
+X +1
+)
+∼ N (0, 1)
+and in the second case, under hypothesis H1, we have X ∼ N (1, 1/N ), and √N
+(
+X −1
+)
+∼
+N (0, 1). The two distributions are represented (for N = 1) in Figure 3.2. We denote Φ the cumulative distribution function of the standard Gaussian distribution N (0, 1) and we have:
+α = Pθ=−1{
+√
+N (X + 1) >
+√
+N } = 1 − Φ(
+√
+N)
+π = Pθ=1{
+√
+N (X − 1) > −
+√
+N } = 1 − Φ(−
+√
+N ) = Φ(
+√
+N)
+We notice that if the sample size N tends towards infinity, the type I risk tends towards 0 and the power tends towards 1. But for N = 1 for example, we find α = 0.159, which is generally too great a risk. By taking a threshold x0 = 0.5, which gives the risks represented by the Figure 3.2, we then have: α = 0.068, which is already more acceptable. If we set the test size at α = α0, a critical region Rα0 is then defined by choosing a rejection
+threshold cα such that α0 = Pθ=−1
+(
+X > cα
+)
+= Pθ=−1
+(√N (X + 1) > √N (cα + 1)
+)
+=
+1 − Φ(√N (cα + 1)). We can deduce that
+cα = −1 + √1N q1−α0
+where qu here designates the u-quantile of the standard normal distribution, qu = Φ−1(u). For N = 1, we find cα = 0.644.
+
+
+70 Chapter 3. Statistical Hypothesis Testing
+Figure 3.2: Test of simple hypotheses, Example 3.7. We show the density function of the test statistic under hypotheses H0 and H1. The rejection rule (X > 0.5) leads to two types of errors whose probabilities under H0 and under H1 are respectively represented here by the areas hatched in red (type I risk) and blue (type II risk). It can be seen that these two quantities vary in opposite directions when the threshold defining the rejection region shifts, they cannot be minimized simultaneously.
+Asymptotic Method
+In the previous example, the distribution quantiles of the statistic T (X) were seen to be involved in the calibration of thresholds specifying the region of rejection. If the exact law of T (X) is not known, its limit distribution can be used. The use of the quantiles of the limit distribution instead of the exact one defines an approximation of the critical region of the test. This is referred to as an asymptotic test.
+Likelihood ratio test and Neyman-Pearson method
+We consider the case of a simple hypothesis test on the N -sample (X1, . . . , XN ) i.i.d. for the unknown law Pθ in a dominated parametric model (Pθ admits a density pθ).
+{
+H0 : θ = θ0 H1 : θ = θ1
+
+
+3.2 Parametric Tests 71
+Definition 3.10 A likelihood ratio test of significance level α is a test that uses the test statistic:
+T ∗(X1, . . . , XN ) = L (θ1; X1, . . . , XN )
+L (θ0; X1, . . . , XN )
+and defines the critical region by
+R∗
+α=
+{
+(x1, . . . , xN ) ∈ X N , T ∗(x1, . . . , xN ) > cα
+}
+,
+where cα is chosen such that Pθ0 ((X1, . . . , XN ) ∈ R∗α) ≤ α.
+Theorem 3.1 — Neyman-Pearson Lemma. The likelihood ratio test of size α is the most powerful test of all tests of significance level α.
+Preuve : Consider the sample X = (X1, . . . , XN ) and its realization x = (x1, . . . , xN ). We know that L(θ; x) = pθ(x) = ΠiN=1pθ(xi).
+Let R∗ be the region of rejection associated with the likelihood ratio test...la région de rejet
+associée au test du rapport de vraisemblance, R∗ =
+{
+x ∈ RN : T ∗(x) > cα
+}
+de taille α. On
+veut montrer que, pour toute région de rejet R associée à un test de niveau α, on a:
+Pθ1 (X ∈ R) ≤ Pθ1 (X ∈ R∗) .
+Or
+Pθ (X ∈ R) =
+∫
+R
+pθ(x) dx.
+On the other hand, by definition of the likelihood ratio test, if x ∈ R∗ then pθ1(x) > cαpθ0(x). The difference can then be computed:
+Pθ1 (X ∈ R∗) − Pθ1 (X ∈ R) =
+∫
+R∗
+pθ1(x) dx −
+∫
+R
+pθ1 (x) dx
+=
+∫
+R∗\R
+pθ1(x) dx −
+∫
+R\R∗
+pθ1 (x) dx
+R∗\R ⊂ R∗, so pθ1(x) > cαpθ0(x) on R∗\R, while R\R∗∩R∗ = ∅, and thus pθ1(x) ≤ cαpθ0(x) on R\R∗. Therefore:
+Pθ1 (X ∈ R∗) − Pθ1 (X ∈ R) ≥ cα
+( ∫
+R∗\R
+pθ0(x)dx −
+∫
+R\R∗
+pθ0 (x) dx
+)
+= cα
+(∫
+R∗
+pθ0(x) dx −
+∫
+R
+pθ0 (x) dx
+)
+= cα(Pθ0 (X ∈ R∗) − Pθ0 (X ∈ R)) ≥ 0
+where we used the fact that Pθ0 (X ∈ R∗) = α (likelihood ratio test of size α) and Pθ0 (X ∈ R)) ≤ α (test of significance level α).
+
+
+72 Chapter 3. Statistical Hypothesis Testing
+Example 3.8 To illustrate this result, we use the Gaussian statistical model:
+M = {N (θ, 1) : θ ∈ R}
+studied in Example 3.7 and the test of simple hypotheses: H0 : θ = θ0, versus H1 : θ = θ1. Neyman-Pearson lemma applies. The likelihood ratio is then
+T ∗(X1, . . . , XN ) = ΠN
+i=1pθ1 (Xi) ΠN
+i=1pθ0 (Xi) = exp
+(
+−1
+2
+N
+∑
+i=1
+(Xi − θ1)2 + 1
+2
+N
+∑
+i=1
+(Xi − θ0)2
+)
+that is to say after simplifying
+T ∗(X1, . . . , XN ) = exp
+(
+N (θ1 − θ0)X
+)
+exp
+(N
+2
+(
+θ2
+0 − θ2
+1)
+)
+)
+The exponential is a strictly increasing function. Two cases must be considered: if θ1 > θ0, we have T ∗(X1, . . . , XN ) > c if and only if X > c′, for a given c′, and if θ1 < θ0, we have T ∗(X1, . . . , XN ) > c if and only if X < c′′, for a given c′′. We therefore find a test based on the empirical mean, whose threshold only needs to be calibrated to be α. We now know that this natural test is the most powerful test for these hypotheses.
+3.2.3 p-value for Parametric Tests
+In the previous section, we placed ourselves in the situation where we gave ourselves the level of the test, and constructed a rejection region. Now suppose that we have defined a test statistic, but that we do not want to set the test level a priori, but determine the p-value from the data.
+Theorem 3.2 Consider a collection of tests {(M0, M1, Rt) , t ∈ I} where I is an interval in R such that ∀t ∈ I the critical region Rt is of the following form:
+Rt =
+{
+(x1, . . . , xN ) ∈ X N : T (x1, . . . , xN ) > t
+}
+,
+for a test statistic T on X N . Let y be an observation sample of size N such that T (y) ∈ I. Then, the p-value α∗(y) is given by:
+α∗(y) = sup
+θ∈Θ0
+{Pθ (T (X1, . . . , XN ) ≥ T (y))} .
+If Θ0 = {θ0},
+α∗(y) = Pθ0 (T (X1, . . . , XN ) ≥ T (y)) .
+Preuve : We consider directly the simplified case where Θ0 = {θ0}. For t ∈ I, let’s denote αt the size of the test associated with Rt. If t ≥ T (y): then y ∈/ Rt and
+αt = Pθ0 (X ∈ Rt) = Pθ0 (T (X) > t) ≤ Pθ0 (T (X) ≥ T (y)) .
+If t < T (y): then y ∈ Rt and
+αt = Pθ0 (X ∈ Rt) = Pθ0 (T (X) > t) ≥ Pθ0 (T (X) ≥ T (y)) .
+
+
+3.2 Parametric Tests 73
+Moreover,
+lim
+t→T (y)−Pθ0 (T (X) > t) = 1− lim
+t→T (y)−Pθ0 (T (X) ≤ t) = 1−Pθ0 (T (X) < T (y)) = Pθ0 (T (X) ≥ T (y)) .
+We thus have that
+inf {αt, t ∈ I : y ∈/ Rt} = inf {Pθ0 (T (X) > t) , t < T (y)} = Pθ0 (T (X1, . . . , XN ) ≥ T (y)) .
+Example 3.9 We get back to Example3.7: in the Gaussian statistical model M = {N (θ, 1) : θ ∈ R} where the variance is given, equal to 1. We want to test the hypotheses:
+{
+H0 : θ = −1 H1 : θ = 1
+We defined Rα =
+{
+x ∈ RN : x > cα
+}
+with
+cα = −1 + √1N q1−α
+and reciprocally:
+α = Pθ=−1
+(
+X > cα
+)
+= 1 − Φ(
+√
+N (cα + 1))
+We thus have a collection of tests as in the hypothesis of Theorem 3.2. For a given sample of observations y, we thus have that the p-value α∗(y) is given by:
+α∗(y) = Pθ=−1
+(
+X ≥y
+}
+) = 1 − Φ(
+√
+N (y + 1))
+Thus, we move from acceptance to rejection as soon as the size of the test exceeds the value of α = α∗(y) and we reject H0 for all α > α∗(y).
+3.2.4 Pearson’s χ2 Test for the Multinomial Model
+The multinomial model is considered here. The multinomial distribution of parameters (N, p) corresponds to the following experiment: we consider an urn with balls of k different colors in proportions p = (p1, . . . , pk). We make N draws with replacement and note the number of Xi of ball draws of each color in the vector X = (X1, . . . , Xk), we have Σik=1Xi = N .
+Definition 3.11 — Multinomial distribution. Let N ∈ N∗, p ∈]0; 1[k such that ∑k
+i=1 pi = 1.
+We call multinomial distribution of parameters (N, p), the probability law on {0; 1; . . . ; N }k defined by the mass function:
+P (x1, . . . , xk) = N !
+∏k
+i=1 xi!
+k
+∏
+i=1
+pxi
+i,
+for all (x1, . . . , xk) ∈ {0; 1; . . . ; N }k such that Σk
+i=1xj = N. We denote: X ∼ M (N, p).
+Remark 3.10 The ith marginal distribution of a multinomial variable M (N, p) is a binomial distribution B(N, pi).
+For the multinomial model, we introduce the Pearson statistic.
+
+
+74 Chapter 3. Statistical Hypothesis Testing
+Definition 3.12 — Pearson Statistic. Let X ∼ M (N, p), p ∈]0; 1[k, ∑k
+i=1 pi = 1. The Pearson statistic T is defined by:
+T (X) =
+k
+∑
+i=1
+(Xi − N pi)2
+N pi
+.
+T is a relative measure of the difference between actual and theoretical numbers of elements in each category.
+Proposition 3.3 Let X ∼ M (N, p), p ∈]0; 1[k, ∑k
+i=1 pi = 1 and T (X), the Pearson statistic. Then, the limit distribution of T (X) is a chi-squared ditribution with k − 1 degrees of freedom:
+T (X) =
+k
+∑
+i=1
+(Xi − N pi)2
+N pi
+−L→ χ2(k − 1)
+Preuve : We give a sketch of the proof below and refer to (Lehmann and Romano, 2006) for details. First, it requires the use of the Multidimensional Central Limit Theorem, which gives us:
+√1N
+
+  
+X1−N p1
+√p1
+...
+Xk−N pk
+√pk
+
+  
+−L→ N (0, I − √p√pT )
+The result is established by noting that the vector X is the sum of i.i.d. vectors whose mean and covariance matrix can be calculated. The proposition is then a consequence of the multidimensional TCL and Cochran’s theorem. The limit Gaussian covariance matrix is the
+matrix of the orthogonal projector on the orthogonal of the vector √p thus on a subspace of dimension k − 1. The norm of the limit Gaussian vector is thus distributed as a χ2(k − 1) distribution. We conclude by using the continuous mapping theorem with the Euclidean norm.
+An asymptotic test procedure can then be implemented for the multidimensional model.
+Corollary 3.4 — Pearson’s chi-squared test for the multidimensional model. Let X ∼ M (N, p), N and p given. Let p0 ∈]0; 1[k such that ∑k
+i=1 p0i = 1. We consider the test:
+{
+H0 : p = p0 H1 : p 6= p0
+Then, under H0,
+T (X) =
+k
+∑
+i=1
+(Xi − N p0i)2
+N p0i
+−L→ χ2(k − 1) .
+
+
+3.3 Goodness of Fit Tests 75
+For a given test size α, we deduce the asymptotic region of rejection:
+Rα =
+{
+x : T (x) > qχ2(k−1)
+1−α
+}
+with qχ2(k−1)
+1−α the (1 − α)-quantile for the χ2(k − 1) distribution. We have:
+Pp0 (X ∈ Rα) −→
+N→+∞ α.
+Note that we choose the one-tailed region of rejection for large T (X), because T measures the difference between realized and theoretical enrolments under H0, and the smaller this measure is, the more H0 should be preferred.
+3.3 Goodness of Fit Tests
+Goodness of fit tests (Test for fit of a distribution) belong to the family of non-parametric tests. Let (X1, . . . , XN ), be an i.i.d sample for an unknown distribution P ∗. In this part, we want to check if P ∗ belongs to a specific parametric family MΘ = {Pθ, θ ∈ Θ}:
+{
+H0 : P ∗ ∈ MΘ H1 : P ∗ ∈/ MΘ
+In practice, this type of test generally considers first an estimation phase: for a given sample (x1, . . . , xN ), among all the Pθ, one chooses the one that maximizes Pθ(x1, . . . , xN ). Then, by
+taking Pθˆ(x1,...,xN ), with θˆ(x1, . . . , xN ) the maximum likelihood estimate of θ, we are back to a
+test of the type:
+{
+H0 : P ∗ = Pθ0 H1 : P ∗ 6= Pθ0
+Note that despite this particular form, it is not a parametric test strictly speaking, because the alternative hypothesis does not assume that P ∗ ∈ MΘ as would be the case for a parametric test.
+3.3.1 χ2-Test
+The χ2 goodness of fit test adapts the test defined for the multinomial distribution presented in Section 3.2.4. Let MΘ be a parametric model, and θ0 ∈ Θ, the χ2-test allows to test:
+{
+H0 : P ∗ = Pθ0 H1 : P ∗ 6= Pθ0
+Definition 3.13 — Generalized Pearson statistic. Let (X1, . . . , XN ) be an i.i.d. sample of distribution P ∗. Let (I1, . . . , Ik) be a partition of the support of P ∗ such that ∀j, 1 ≤ j ≤ k, P ∗(Ij) > 0. Let’s denote pj = P ∗(Ij) and p = (p1, . . . , pk). We consider Y = (Y1, . . . , Yk), the statistic taking values in {0; 1; . . . ; N }k and counting the
+
+
+76 Chapter 3. Statistical Hypothesis Testing
+number of Xi in every Ij, 1 ≤ j ≤ k:
+Yj(X1, . . . , XN ) =
+N
+∑
+i=1
+IIj (Xi) .
+Then Y ∼ M (N, p) and
+T ̃(X1, . . . , XN ) := T (Y (X1, . . . , XN )) =
+k
+∑
+i=1
+(Yi − N pi)2
+N pi
+is the generalized Pearson statistic.
+Under hypothesis H0, Y ∼ M (N, p0) with p0j = Pθ0(X1 ∈ Ij), ∀1 ≤ j ≤ k. And thus:
+T (Y (X1, . . . , XN )) =
+k
+∑
+i=1
+(Yi − N p0i)2
+N p0i
+−L→ χ2(k − 1) .
+For a given test level α, we form the asymptotic region of rejection:
+Rα =
+{
+(x1, . . . , xN ) : T (Y (x1, . . . , xN )) > qχ2(k−1)
+1−α
+}
+,
+with qχ2(k−1)
+1−α the (1 − α)-quantile of χ2(k − 1). We have:
+lim
+N→∞ Pθ0 ((X1, . . . , XN ) ∈ Rα) = α
+Note again that since the Pearson statistic measures the difference between observed class sizes and theoretical class sizes under H0, the rejection region is one-tailed: H0 is rejected when the differences are too large.
+Remark 3.11 As udnerlined, the χ2-test is often preceded by an estimation phase of θ0. If Θ is of dimension q, q degrees of freedom are thus lost, and we have:
+T (Y (X1, . . . , XN )) =
+k
+∑
+i=1
+(Yi − N p0i)2
+N p0i
+−L→ χ2(k − 1 − q) .
+Remark 3.12 We consider that the asymptotic approximation is valid as soon as we have at least N p0i ≥5 for all classes. If this is not the case, some classes can be grouped together so that the asymptotic approximation is more realistic.
+3.3.2 Goodness of Fit Test of Kolmogorov-Smirnov
+For an i.i.d. sample X1, . . . , XN of distribution P ∗, we consider a test of the form:
+{
+H0 : P ∗ = P0 H1 : P ∗ 6= P0
+where P0 is a distribution whose cumulative function F0 is known.
+
+
+3.3 Goodness of Fit Tests 77
+Let FˆN be the empirical cumulative distribution function computed from the sample. We recall that:
+Fˆ(x) = 1
+N
+∑
+1≤i≤N
+I]−∞;Xi](x) .
+The Kolmogorov-Smirnov test consists in rejecting the null hypothesis H0 as soon as the statistic:
+DN = sup
+x∈R
+|FˆN (x) − F0(x)|
+exceeds a certain threshold.
+This threshold can be calculated numerically since the limit law of √N DN under the null hypothesis is known. Indeed, we have:
+lim
+N→∞ P
+(√
+N sup
+x∈R
+|FˆN (x) − F0(x)| ≤ y
+)
+=
+
+
++∞
+∑
+k=−∞
+(−1)k e−2k2 y2
+
+ I[0;+∞[(y) . (3.3)
+that is to say √
+N DN
+−L→ K
+with K, the Kolmogorov-Smirnov cumulative distribution function given by the second member of the equation (3.3). This distribution is tabulated and accessible in the different statistical software.
+Remark 3.13 Effectively, for the calculation of DN , as FˆN is piecewise constant and F0 is increasing and continuous, it is enough to look for the maximum among a finite number of 2N values:
+DN = max
+{∣ ∣ ∣ ∣
+i
+N − F0(X(i))
+∣ ∣ ∣ ∣
+;
+∣ ∣ ∣ ∣
+i−1
+N − F0(X(i))
+∣ ∣ ∣ ∣
+: i ∈ {1, . . . , N }
+}
+where X(i) is the statistic which to the sample (X1, . . . , XN ) maps the ith element for the order relationship, X(1) ≤ · · · ≤ X(i) ≤ X(i+1) ≤ · · · ≤ X(N).
+Example 3.14 Consider the following sample x = (x1, . . . , x10):
+6.42 ; 5.12 ; 2.99 ; 2.00 ; 9.79 ; 5.78 ; 5.54 ; 6.44 ; 8.92 ; 6.19 .
+We wish to test the fit to the N (5.22) Gaussian distribution. We compute the value of the D10
+statistic in the sample and we find D10 ≈ 0.325 (cf. Figure 3.14), that is to say √10D10 ≈ 1.027. By using the asymptotic approximation (even if N = 10 remains pretty low), we determine the p-value α∗(x), obtained by α∗(x) = P(K > 1.027) = 0.243. There is no evidence against H0. Note that if we perform the test with the Gamma distribution γ(5.1), we find D10 = 0.381 and a p-value of 0.110. For the classical test levels (0.01, 0.05, 0.1), we cannot reject H0, whereas in practice the sample has actually been simulated with a N (5.22) distribution. We need a N large enough for the good ness of fit test with a γ(5.1) to be rejected. This is due to the proximity of the cumulative distribution functions of N (5.22) and γ(5.1), as shown in Figure 3.14.
+
+
+78 Chapter 3. Statistical Hypothesis Testing
+Figure 3.3: Goodness of fit test of the observation sample N (5, 22): the Kolmogorov-Smirnov distance is represented by the arrow.
+Figure 3.4: Comparison of cumulative distribution functions for N (5, 22) and γ(5, 1).
+
+
+Part II
+Statistical Learning
+
+
+
+
+4. Supervised learning
+Let (X , A), (Y, B) be two measurable spaces.
+In this chapter, we look at the problem of predicting a variable y ∈ Y from a variable x ∈ X , that is, determining a decision function h : X → Y, such that y = h(x).
+x is generally multidimensional, we will speak of explanatory variables (or covariates, or predictors...) and y is(are) the explained variable(s). If Y is a continuous set, we talk about a regression problem, if Y is a finite set (for example {0; 1}), we talk about a classification problem. Explanatory variables can also be continuous or discrete, or a combination of both.
+Example 4.1
+• We can try to automatically predict from the gray levels of an image pixels representing a handwritten digit which digit it is (LeCun et al., 1990). • We can try to predict the survival time of a cancer patient based on clinical variables (such as age, smoking, treatment, etc.), genomic variables (such as the level of expression of genes), imaging variables (corresponding to radiology images of the affected organ)... (Zhu et al., 2017).
+To carry out this prediction task, we have N observations of pairs of explanatory variables explained variables {(xi, yi)}1≤i≤N : these are the data. The learning task will be to determine the decision function h from these data.
+We will consider this prediction problem in a probabilistic framework.
+4.1 Probabilistic Framework of Statistical Learning
+We consider two random variables X and Y with values respectively in (X , A) and (Y, B), such that (X, Y ) admits a density with respect to a product measure on (X × Y, A ⊗ B).
+
+
+82 Chapter 4. Supervised learning
+4.1.1 Regression Model, Classification Model
+For all x ∈ X such that the marginal density pX (x) 6= 0, we recall that the conditional density can be defined: pY |X=x(y) = p(x, y)/pX (x) (see Section 1.2.3).
+Definition 4.1 — Statistical regression model. Under the above assumptions, we call a statistical regression model a family of conditional probability distributions given X. In particular, if the family is parameterized and the conditional distributions admit densities, we will have:
+MΘ = {pθ(y|x), θ ∈ Θ, x ∈ X }
+where we use the notation pY |X=x(y) = p(y|x).
+Remark 4.2 This definition is general, regardless of the type of explained variable. Nevertheless, as mentioned previously, the usage differentiates regression model when Y is a continuous random variable from classification model when Y is a discrete random variable, with values in a finite set. The values taken by Y are then called labels. If the mathematical framework is identical, we will see that the methods differ.
+The determination of the decision function h is then based on the determination of a family of conditional laws, and learning from the data set {(xi, yi)}1≤N is then a problem of statistical inference. If the model is parametric, we’re faced with an estimation problem. We look for θˆ such that the conditional distribution pY |X (family of conditional probability distributions
+{
+pY |X=x(y), x ∈ X
+}
+) is given by the family {pθˆ(y|x), x ∈ X }.
+4.1.2 Decision Theory
+As with the Bayesian estimate, the conditional distribution may not be sufficient, and in order to make a decision, a point value may be needed. For x ∈ X , how to choose h(x) according to p(y|x)?
+We consider a loss function L(y, h(x)) which measures the difference between the true value and the predicted value and depends on the intended application. For example, for regression problems, we often choose L(y, h(x)) = ‖y − h(x)‖2, , which will strongly penalize large errors. L(y, h(x)) = ‖y − h(x)‖ will rather consider all errors in the same way.
+We then look for h∗ which minimizes the expectation of the loss function, that is to say:
+h∗ = arg min
+h
+∫
+X ⊗Y
+L(y, h(x))p(x, y) dx dy.
+Theorem 4.1 Let x ∈ X . For the loss function L(y, h(x)) = ‖y − h(x)‖2, the prediction function h∗ which minimizes the expectation of the loss function is given by:
+h∗(x) = E (Y |X = x) .
+
+
+4.1 Probabilistic Framework of Statistical Learning 83
+Preuve : Let us denote α(x) = E (Y |X = x):
+∫
+X ⊗Y
+L(y, h(x))p(x, y) dx dy =
+∫
+X
+∫
+Y
+‖y − h(x)‖2p(y|x) dy p(x) dx
+=
+∫
+X
+∫
+Y
+[
+‖y − α(x)‖2 + ‖α(x) − h(x)‖2 + 2 (y − α(x), α(x) − h(x))
+]
+p(y|x) dy p(x) dx .
+Since:
+(i)
+∫
+Y
+‖y − α(x)‖2p(y|x) dy does not depend on h,
+(ii)
+∫
+Y
+‖α(x) − h(x)‖2p(y|x) dy = ‖α(x) − h(x)‖2 ,
+(iii)
+∫
+Y
+2 (y − α(x), α(x) − h(x)) p(y|x) dy = 0 because
+∫
+Y
+yp(y|x) dy = E(Y |X = x) =
+α(x). Minimizing ∫
+X ⊗Y L(y, h(x))p(x, y) dx dy is equivalent to minimize ∫
+X ‖α(x) − h(x)‖2p(x) dx,
+and the minimum is attained for h∗(x) = α(x) = E(Y |X = x).
+Remark 4.3 Thus, if the objective is essentially that of prediction, one can directly seek to approximate the conditional expectation simply from the data, without going through the construction of a probabilistic model and its inference.
+Example 4.4 — k-nearest neighbours. An elementary way is to search for the nearest xi in the training data for a given x, and define h(x) = yi. In order to smooth things out, one can also instead choose the nearest k neighbors with k ≥ 1. If we call Vk(x) the set of nearest k neighbors in the training set, we thus take:
+h(x) = 1
+k
+∑
+xi ∈Vk (x)
+yi
+(A priority rule can be specified in the case where two points are equidistant from x, e.g. choose the lowest index, so as to uniquely determine h). One can also weight the influence of the points by taking into account the distance at x for example by the Gaussian kernel method:
+h(x) =
+N
+∑
+i=1
+ωiyi
+N
+∑
+i=1
+ωi
+,
+where the wieights wi are given by:
+wi = exp
+(
+− ‖xi − x‖2
+2σ2
+)
+.
+Note that in these last two methods, the number k which defines the number of points in the neighborhood and the σ, standard deviation of the Gaussian distribution, are two parameters to be determined: we speak of hyperparameters. We will see in Section 4.3.1 how to determine them.
+
+
+84 Chapter 4. Supervised learning
+Other methods of direct approximation of conditional expectation exist (e.g. neural networks described in Section 4.6. However, we will first consider the use of parametric models of conditional densities to build decision functions, starting with the most classical of them, the linear model.
+4.2 Models of Linear Regression
+In this section, we consider real-valued explained and explanatory variable, and we consider the Borel σ-algebra.
+4.2.1 Definition
+Definition 4.2 — Linear regression model. Let X = (X1, X2, . . . , Xp), random variable with values in Rp and Y , random variable in R. We call linear regression model of Y with respect to X the family of conditional distributions
+M=
+{
+p(β0,β,σ2)(y|x), (β0, β, σ2) ∈ R × Rp × R∗
++, x ∈ Rp}
+in which densities are given by
+p(β0,β,σ2)(y|x) = 1
+σ√2π e− 1
+2
+( y−β0−βtx σ
+)2
+.
+The model defines an affine relationship between the conditional expectation of Y given X and X:
+E(Y |X) = β0 + βtX ,
+and there exists a centered Gaussian random variable ξ ∼ N (0, σ2), ξ independent of X, such that:
+Y = β0 + βtX + ξ .
+The randome variable ξ is called residual.
+If the explained variable Y is in Rd, d > 1, me speak of multivariate regression. β0 ∈ Rd, β ∈ Mp,d(R) (matrix with p rows, d columns), and the variable ξ is a multivariate Gaussian variable of variance Σ: ξ ∼ N (0, Σ).
+Definition 4.3 — Multivariate Linear Regression Model. Let X = (X1, X2, . . . , Xp) be a random variable with values in Rp and Y random variable in Rd. We call multivariate linear regression model of Y with respect to X the family of conditional distributions
+M=
+{
+p(β0,β,Σ)(y|x), (β0, β, Σ) ∈ Rd × Mp,d(R) × S+
+d (R) , x ∈ Rp}
+whose densities are given by
+p(β0,β,Σ)(y|x) = 1
+|Σ|1/2(2π)d/2 e− 1
+2 (y−β0−βtx)tΣ−1(y−β0−βtx) .
+
+
+4.2 Models of Linear Regression 85
+Remark 4.5 If Σ is diagonal, then the multivariate linear regression model is equivalent to d independent univariate linear regression models, corresponding to the d components of Y .
+Remark 4.6 It is also possible to have the relationship
+Y = β0 + βtX + ξ ,
+with E(ξ) = 0, ξ independent of X, but ξ not a Gaussian random variable, we then speak of non-Gaussian linear regression.
+We can extend the definition of the linear model to the case where it is a function of the expectation of the response Y which depends linearly on the explanatory variables (Nelder and Wedderburn, 1972).
+Definition 4.4 If there exists g such that
+g (E(Y |X)) = β0 + βtX ,
+we speak of generalized linear regression model. The function g is called link function.
+4.2.2 Estimation
+Univariate Case
+We first consider the univariate case: X with values in Rp and Y in R. From the observation couples (xi, yi)1≤i≤N , our objective is to estimate θ = (β0, β, σ2), that will completely characterize the linear model. Let’s denote θˆ = (βˆ0, βˆ, σˆ2), the maximum likelihood estimate. It is obtained by minimizing the opposite of the log-likelihood:
+J(θ) = − ln
+(
+L
+(
+θ; (xi, yi)1≤i≤N
+))
+=N
+2 ln(2π) + N
+2 ln(σ2) + 1
+2σ2
+N
+∑
+i=1
+(
+yi − β0 − βtxi
+)2 .
+(4.1)
+Lemme 4.2 If
+(βˆ0, βˆ
+)
+minimizes the sum of squared residuals R (β0, β) = ∑N
+i=1
+(yi − β0 − βtxi
+)2,
+then for all (β0, β, σ2) ∈ R × Rp × R∗+,
+J
+(βˆ0, βˆ, σ2)
+≤J
+(
+β0, β, σ2)
+.
+Preuve : This simply stems from the fact that J can be written:
+J (θ) = J1(σ2) + 1
+2σ2 R (β0, β) .
+Therefore, if R(βˆ0, βˆ) ≤ R (β0, β) for all (β0, β), then 1
+2σ2 R(βˆ0, βˆ) ≤ 1
+2σ2 R (β0, β)for all
+(β0, β, σ2), and similarly J1(σ2) + 1
+2σ2 R(βˆ0, βˆ) ≤ J1(σ2) + 1
+2σ2 R (β0, β) for all (β0, β, σ2).
+This small result is very interesting in practice, as it allows to decouple the estimation of the regression parameters (β0, β) and the residual parameter σ2. We obtain:
+(βˆ0, βˆ) = arg min
+(β0,β)
+R (β0, β) , puis σˆ2 = arg min
+σ2 J
+(βˆ0, βˆ, σ2)
+.
+
+
+86 Chapter 4. Supervised learning
+Let xij be the j-th component of the explanatory variables of xi, the i-th element of the observation sample. Let us denote:
+A=
+
+ 
+1 x11 . . . x1p
+... ... ...
+1 xN1 . . . xNp
+
+
+ , B=
+
+ 
+y1 ...
+yN
+
+
+ , γ = (β0, β) .
+Alors, R(β0, β) = R(γ) se récrit:
+R(γ) = ‖Aγ − B‖2 .
+Remark 4.7 Matrix A, with or without the column of 1, is called design matrix. Without the column of 1, it is often denoted by X in the literature, with the slight ambiguity that it does not correspond to the matrix of vectors xi in columns, but in rows:
+X = (x1, . . . , xN )T .
+Theorem 4.3 In the univariate case, if A is injective, then the maximum likelihood estimator of the linear regression model is given by:
+γˆ = (βˆ0, βˆ) = (At A)−1At B (4.2)
+and
+σˆ2 = 1
+N R(γˆ) = 1
+N
+N
+∑
+i=1
+(
+yi − βˆ0 − βˆtxi
+)2 . (4.3)
+Preuve : We first look for γˆ minimizing R(γ) = ‖Aγ − B‖2. i) Let us first show that there is a solution to the problem of minimization. We denote ‖Aγ‖2 = γt At Aγ, and since A is injective, At A is symmetrical and invertible. (If At Az = 0, then zt At Az = ‖Az‖2 = 0, and z = 0 because of the injectivity of A. At A is injective, thus bijective as an endomorphism, and finally invertible). At A is thus positive definite, and according to the spectral representation theorem: ∀γ, γt At Aγ ≥ λmin‖γ‖2, where λmin > 0 is the smallest eigenvalue of At A.
+Therefore, lim
+‖γ‖→+∞
+‖Aγ‖ = +∞, and since ‖Aγ − B‖ ≥ ‖Aγ‖ − ‖B‖, we finally have that
+lim
+‖γ‖→+∞
+R(γ) = +∞. This property is called coercivity.
+Let γ0 ∈ Rp+1. By the coercivity property, there exists M0 such that ∀γ : ‖γ‖ > M0, R(γ) > R(γ0). So the lower bound of the function is to be searched on {γ : ‖γ‖ ≤ M0}, i.e. a compact set, and thus R being continuous, it reaches its minimum on {γ : ‖γ‖ ≤ M0}. ii) Having proved the existence of the minimum, we can show that a necessary condition for R to reach its minimum in γ is that ∇R(γ) = 0 (that is to say the gradient 1 of R cancels out in
+1Let f : H → R, with H a Hilbert space. We say that f admits a gradient in x, if there exists an element of H, denoted ∇f (x), such that ∀h ∈ H, f (x + h) = f (x) + (∇f (x), h) + o(‖h‖). (Frechet differentiability. Slightly less strict conditions can be given with Gâteaux differentiability). In Euclidean spaces, the gradient is classically given by the vector of partial derivatives.
+
+
+4.2 Models of Linear Regression 87
+γ). Indeed, if R admits a gradient, then R(γ + th) = R(γ) + t(∇R(γ), h) + t2α(t), with α(t) bounded (Taylor expansion). Therefore:
+R(γ + th) − R(γ) = t(∇R(γ), h) + tα(t) ,
+and if ∇R(γ) 6= 0, ∃h such that (∇R(γ), h) 6= 0 and if there exists t small enough, positive or negative, such that the member on the right side takes any sign, and therefore the minimum (nor the maximum for that matter) cannot be reached in γ. A necessary condition for the minimum to be reached in γ is that ∇R(γ) = 0. iii) We now compute ∇R, using scalar product notation:
+R(γ + h) = (A(γ + h) − b, A(γ + h) − b) = (Aγ − b + Ah, Aγ − b + Ah)
+= R(γ) + 2(Aγ − b, Ah) + (Ah, Ah)
+= R(γ) + (2At (Aγ − b), h) + o(‖h‖)
+soit ∇R(γ) = 2At (Aγ − b). iv) Finally„
+∇R(γˆ) = 0 ⇐⇒ γˆ =
+(
+At A
+)−1 AtB ,
+thanks to the invertibility of At A. γˆ is the only point verifying the necessary conditions of minimality, but the existence of the minimum has been shown, so it is the only point where R reaches its minimum, and it is therefore the maximum likelihood estimate for the γ parameter. Using Lemma 4.2, we get σˆ2 by minimizing J(γˆ, α) with respect to α. From Equation 4.1, we
+have: ∂J(γˆ, α)
+∂α = N
+2α − 1
+2α2 R(γˆ) ,
+and ∂J(γˆ, αˆ)
+∂α = 0 ⇐⇒ αˆ = σˆ2 = 1
+N R(γˆ) .
+We see that α 7→ J(γˆ, α) is strictly decreasing for α < αˆ and strictly increasing for α > αˆ,J reaches its minimum in (γˆ, αˆ), which concludes the proof.
+Remark 4.8 An important assumption of Theorem 4.3 is the injectivity of A. In practice, it corresponds to the fact that we have enough data to inverse the model. But there are many problems in which the number of covariates is much larger than the number of observations (p > N ), so A is not invertible: this is called overfitting. We will see in Part 4.4 that regularization techniques allow to get around this problem.
+Remark 4.9 — Estimation of the maximum likelihood or minimization of a loss function. Note that to characterize the decision function for the quadratic loss, we only need to estimate γ = (β0, β), since
+hγ(X) = E(Y |X) = β0 + βtX .
+It is a pretty common situation in some statistical learning: many methods will not propose a parametric family of probability densities, but directly a family of parametric functions. {hθ : X → Y, θ ∈ Θ} corresponding to the decision function. And, a linear regression model has also come to mean a model of the form Y = β0 + βtX (en identifying Y with E(Y |X)), and
+
+
+88 Chapter 4. Supervised learning
+we solve Equation 4.2. The same applies, for example, to neural networks, Section 4.6. Learning will no longer be strictly an estimation of parameters by maximum likelihood, but the calibration of a model by minimizing a loss function, generally quadratic: we look for h∗ = hθ∗ such that
+hθ∗ = arg min
+θ∈Θ
+1
+N
+N
+∑
+i=1
+|hθ(xi) − yi|2 .
+where 1
+N
+∑N
+i=1 |hθ(xi) − yi|2 is the empirical approximation of E (L(hθ(X), Y ). We can always go back to the probabilistic framework by assuming the existence of a random variable ξ ∼ N (0; σ2) such that
+Y = hθ(X) + ξ .
+As mentioned above for the linear case, it is easy to see that for this model, the estimate of θ by the maximum likelihood corresponds to the minimization of the quadratic loss function. It is important to keep in mind the underlying probabilistic formulation, especially when characterizing the properties of the estimator or when performing an uncertainty analysis of our predictions.
+For the linear regression, we can deduce several important properties of the estimator.
+Theorem 4.4 If (γˆ, σˆ2) is the maximum likelihood estimator for the linear regression as defined in Theorem 4.3, then γˆ and σˆ2 are two independent random variables:
+γˆ ∼ N
+(
+γ, σ2(AtA)−1)
+N σˆ2
+σ2 ∼ χ2 (N − p − 1)
+(4.4)
+(4.5)
+Preuve : If η is a Gaussian vector of dimension N , all components of which are independent and of variance σ2, η ∼ N (0, σ2IN ) (IN , identity matrix of order N ). We then have:
+γˆ = (At A)−1At B = (At A)−1At (Aγ + η) = γ + (At A)−1Atη .
+We know that if Z is a real-valued random vector of dimension k and of covariance Σ, and if M is a real matrix l × k, then M Z is a random vector of covariance M ΣM t (see for example Anderson (1962)). We thus have:
+V
+(
+(At A)−1Atη
+)
+= (At A)−1Atσ2IN (At A)−1At = σ2At A ,
+and γˆ ∼ N (γ, σ2(AtA)−1). The independence of random variables and the fact that N σˆ2
+σ2 ∼
+χ2 (N − p − 1) results from Cochran’s Theorem (cf. Appendix A.2). We have N − p − 1 degrees of freedom since p + 1 parameters were estimated for γ.
+
+
+4.2 Models of Linear Regression 89
+Corollary 4.5 ∀i = 0, . . . , p, let us denote:
+σˆ2
+i = N σˆ2
+N − p − 1 [(At A)−1]ii , (4.6)
+where for a matrix M , Mii represents the i-th term of the diagonal. Therefore:
+∀i = 0, . . . , p :
+βˆi − βi
+σˆi
+∼ T (N − p − 1) ,
+that is to say a Student distribution with N − p − 1 degrees of freedom.
+Preuve : From 4.4,
+βˆi − βi
+σ
+√[(At A)−1]ii
+∼ N (0, 1), thus by using 4.5 and the independence of the
+two variables: βˆi − βi
+σ
+√[(At A)−1]ii
+( N σˆ2
+(N − p − 1) σ2
+)1/2 ∼ T (N − p − 1)
+by definition of the Student distribution, which gives us the result.
+Remark 4.10 — Test on the nullity of a regression coefficient. An important application of
+this result to the distribution of
+βˆi − βi
+σˆi
+is that it allows us to implement tests on the nullity of
+the regression coefficients, if we want to test, for example, whether a certain covariate has an influence on our variable to be explained. Let i be the index of the covariate of interest, then we construct the hypothesis test:
+{H0 : βi = 0
+H1 : βi 6= 0
+Under H0,
+βˆi
+σˆi
+∼ T (N − p − 1) and we build the region of rejection at significance level α:
+Rα =
+{
+(x1, y1), · · · , (xN , yN ) ∈ (X × Y)N :
+∣ ∣ ∣ ∣ ∣
+βˆi
+σˆi
+∣ ∣ ∣ ∣ ∣
+> qT (N−p−1)
+1−α/2
+}
+,
+where qT (k)
+u represents the u-quantile for a Student distribution with k degrees of freedom. If the test leads to reject hypothesis H0, then the regression coefficient for the covariate i cannot be considered zero. If, on the contrary, we cannot reject H0, we can consider a simplified regression model, which does not take into account the i-th covariate. For given observations, we obtain the p-value α associated with our hypothesis test by:
+α=2
+(
+1 − ΦT (N−p−1)
+(∣ ∣ ∣ ∣ ∣
+βˆi
+σˆi
+∣ ∣ ∣ ∣ ∣
+))
+where ΦT (N−p−1) represents the cumulative distribution function of the Student distribution with (N − p − 1) degrees of freedom.
+
+
+90 Chapter 4. Supervised learning
+Note that the tests are valid only for each coefficient individually, as the coefficients obtained are correlated with each other. If, for example, a first test leads us to accept the hypothesis that the coefficient linked to the i-th covariate is zero, then we must perform a new regression without taking this covariate into account before implementing the test for a new covariate.
+Example 4.11 — Linear regression and k-nearest neighbours. We consider two random variables X and Y with values in R. Let N = 50 and consider N couples of observations (xi, yi)1≤i≤N représented in Figure 4.1.
+Figure 4.1: Scatterplot of 50 experimental points (xi, yi). In blue, regression line y = βˆ0 + βˆ1x.
+Linear Regression:
+First of all, we consider an affine regression model, i.e:
+Y = β0 + β1X + ξ , avec ξ ∼ N (0, σ2) .
+We form the matrix A by adding a column of 1 to the columns of explanatory variables and the vector B given by the yi, and we get:
+(βˆ0
+βˆ1
+)
+= (At A)−1At B =
+(
+0.03756 0.05275
+)
+, σˆ = 0.03969 ,
+and using Equation 4.6, standard errors can be calculated on the regression coefficients:
+(
+σˆ0 σˆ1
+)
+=
+(
+0.008232 0.01791
+)
+.
+Testing for the nullity of a regression coefficient:
+
+
+4.2 Models of Linear Regression 91
+When looking at the scatterplot, one may wonder whether Y varies with X or not. This
+corresponds to testing the nullity of β1. The test statistic takes the value t1 = βˆ1
+σˆ1 = 2.9444, and
+the test statistic follows a Student distribution with N − 2 degrees of freedom, and we deduce the p-value α:
+2(1 − ΦT (48)(|t1|)) = 0.00497 .
+For classical levels of tests, even very conservative ones (for example at a level of 0.01), we reject the hypothesis H0, and the coefficient cannot be considered as null.
+Prevision:
+We now consider a prediction test. Suppose we have Nt = 20 new points (xi, yi)N+1,N+Nt, in black in Figure 4.2. We wish to evaluate the prediction capacity of the linear model. The estimation of the coefficients is carried out on the first 50 points, then the model thus obtained is tested by estimating yˆi = βˆ0 + βˆ1xi for i = N + 1, . . . , N + Nt. The points on which we evalute the prediction capacity, not used to calibrate the model, are often refered to as "test points". Predicted values are indicated with blue crosses in Figure 4.2. Different criteria can be used to assess the quality of the prediction. We consider the mean squared error of prediction (MSEP).
+MSEP = 1
+Nt
+N +Nt
+∑
+i=N +1
+‖yi − yˆi‖2 .
+In this example, we find: M SEP = 0.0181.
+Figure 4.2: The 20 points in black are the test points. The blue crosses are the linear regression predictions, the green crosses are the 5-closest neighbor predictions.
+Method of the k nearest neighbors and selection of the hyperparameter k:
+It may be interesting to compare linear regression with another method, for example the elementary method of k-nearest neighbors (cf. example 4.4). For k = 5, we find M SEP = 0.00202, the
+
+
+92 Chapter 4. Supervised learning
+predictions are indicated by green crosses on the figure. The result is therefore slightly worse. However, the choice k = 5 may not be optimal. In figure 4.3, we show how the mean squared error of prediction evolves as a function of the hyperparameter k for the k-nearest neighbor method.
+Figure 4.3: Mean squared error of prediction (M SEP ) as a function of k, the number of nearest neighbors.
+We see that the best result is obtained for k = 11, with M SEP = 0.00171. We are therefore tempted to conclude that the nearest neighbor method with k = 11 is a better prediction model than linear regression. This would correspond to a very classical reasoning error in statistical learning. Indeed, we used the test data to select the hyperparameter. In other words, we are not really in a pure prediction approach, because of course the nearest neighbor method is not generally the best for k = 11, it depends on both the training data set and the test data set. When the prediction model depends on hyperparameters, then the correct approach is to use the training dataset to select the hyperparameters, and then set these hyperparameters to perform the predictions on the test dataset. Thus, among the N = 50 observations of the training set, we put aside for example 20% as valitdation data, in order to choose the hyperparameters. Here, we take Nv = 10 observations for validation. Therefore, for each value of hyperparameter (or a search grid), we use (xi, yi)1≤i≤N−Nv to evaluteate the model, and the M SEP is calculted for (xi, yi)N−Nv+1≤i≤N . The best k is obtained for k = 4, but the MSEP on the test data is then 0.00221... Rather than take the last N V of data from the learning set, a more robust method is called cross-validation: the learning set is divided into m parts of equal size (or roughly when N is not divisible by m), and successively, each part is used for validation, while the other m − 1 parts are used for learning. The validation M SEP is then obtained by averaging the MSEP obtained for all m configurations (cf. Figure 4.5. This generally increases robustness, especially when the training data set is small. We apply this strategy with m = 5 on our training data. The mean squared error of prediction
+
+
+4.2 Models of Linear Regression 93
+Figure 4.4: Mean squared error of prediction (M SEP ) as a function of k, the number of nearest neighbors.
+Training and validation 1 → M SEP1
+Training and validation 2 → M SEP2
+Training and validation 3 → M SEP3
+Training and validation 4 → M SEP4
+Training and validation 5 → M SEP5
+Total size of the training data
+Figure 4.5: 5-fold cross valisation: for each row j, 1 ≤ j ≤ 5, data in white are used for training and data in grey are used for validation and computation of M SEPj. We then compute the mean M SEP : M SEP cv = 1
+5
+∑5
+j=1 M SEPj
+obtained by cross-validation averaging, denoted M SEP cv, is given as a function of the number of neighbors in Figure 4.6. The best result is then obtained for k = 24! We can see the very high variability in the selected hyperparameter. It is due to the very noisy data. We then find in prediction (on the test data this time) M SEP = 0.188. A special case of cross validation is when m = N , we talk about leave-one-out cross validation, it is normally the most robust because we use almost the whole training set for each validation, but it is of course much more expensive. With eh leave-one-out method on our example, we find that the best hyperparameter is k = 29! The M SEP on the test set is then M SEP = 0.187. In this case, there is little difference with the 5-fold cross-validation.
+
+
+94 Chapter 4. Supervised learning
+Figure 4.6: Mean squared error of prediction (M SEP ) as a function of k, the number of nearest neighbors.
+Multivariate Regression
+In this course, we will not go into the details of multivariate linear regression. However, it is interesting to keep in mind that when the residuals are correlated, the regression of an explained variable Y of dimension d is more interesting than d one-dimensional regressions performed independently: the regression for each of the component of Y is enriched by the information on the other components. We give in the theorem below the coefficients of multivariate regression, whose expression is very similar to that of one-dimensional regression.
+Theorem 4.6 Let X, Y be random variableswith values respectively in Rp and Rd, such that there exist β0 ∈ Rd, β ∈ Mp,d(R), ξ ∼ N (0, Σ) such that
+Y = β0 + βt X + ξ .
+Let (xi, yi)1≤i≤N , be N independent couples of observations of (X, Y ). xi ∈ Rp and we denote xij, 1 ≤ j ≤ p, the j-th component of xi. Similarly, yi ∈ Rd and we denote yij, 1 ≤ j ≤ d, the j-th component of yi. Once more, let:
+A=
+
+ 
+1 x11 . . . x1p
+... ... ...
+1 xN1 . . . xNp
+
+
+ , B=
+
+ 
+y11 . . . y1d
+... ...
+yN1 . . . yNd
+
+
+ , γ=
+
+    
+β01 . . . β0d β11 . . . β1d
+... ...
+βp1 . . . βpd
+
+    
+
+
+4.3 Linear Models for Classification 95
+Then the maximum likelihood estimate of γ is given by:
+γˆ = (At A)−1At B (4.7)
+et
+ˆΣ = 1
+N (Aγˆ − B)t (Aγˆ − B) (4.8)
+The proof can be found for example in Anderson (1962), chapter 8.
+4.3 Linear Models for Classification
+We first consider a two-class classification problem. Let X be a random variable with values in X , X ⊂ Rp, and Y a random variable with values in {0; 1} (one class will correspond to the 0 label and the other to the 1 label). The classification problem corresponds to the determination of the conditional distribution P(Y |X), i.e. the determination of {P(Y = 0|X), P(Y = 1|X)}. Since Y only takes two valuess, we have ∀x, P(Y = 0|X = x) = 1 − P(Y = 1|X = x) and thus the two-class classification simply boils down to the determination of P(Y = 1|X) = {P(Y = 1|X = x), x ∈ X }.
+Definition 4.5 — Linear binary classification model. We will call any parametric family of conditional probability distributions a linear binary classification model:
+Mψ =
+{
+P(Y |X) : P(Y = 1|X) = ψ
+(
+β0 + βt X
+)
+, (β0, β) ∈ Rp+1}
+where ψ : R → [0; 1] is a strictly increasing function.
+Definition 4.6 — Decision function. As for linear regression, we define for a parametric model P(β0,β)(Y |X), the decision function (also called classification function) δ : X → {0; 1} which to x ∈ X maps one labels as follows:
+δ : x 7→
+
+ 
+ 
+δ(x) = 1 if P(β0,β)(Y = 1|X = x) > δ0 δ(x) = 0 or 1 if P(β0,β)(Y = 1|X = x) = δ0 δ(x) = 0 if P(β0,β)(Y = 1|X = x) < δ0
+, (4.9)
+where δ0 ∈ [0; 1] is a decision threshold.
+For the sake of simplicity and without loss of generality, we choose δ(x) = 1 if P(β0,β)(Y = 1|X = x) = δ0.
+Remark 4.12 Classically, we take δ0 = 1/2, which is equivalent to write:
+δ : x 7→
+{
+δ(x) = 1 si P(β0,β)(Y = 1|X = x) ≥ P(β0,β)(Y = 0|X = x)
+δ(x) = 0 si P(β0,β)(Y = 0|X = x) > P(β0,β)(Y = 1|X = x) .
+But in some configurations (unbalanced data between labels, asymmetric risks associated to labels 0 and 1 ...), it may be more relevant to have an asymmetric decision function, considering a decision threshold different from 1/2.
+
+
+96 Chapter 4. Supervised learning
+Corollary 4.7 For the decision function of a linear classification model, if we consider the partitioning of the covariate space X in X0 = {x ∈ X : δ(x) = 0} and X1 = {x ∈ X : δ(x) = 1}, then the boundary between X0 and X1 is an affine hyperplane.
+Preuve : ψ is increasing: x ∈ X1 is equivalent to ψ (β0 + βt x) ≥ δ0, that is to say β0 + βt x ≥ ψ−(δ0) (where ψ−(δ0) is the generalized inverse, ψ−(δ0) = inzf{z ∈ R : ψ(z) ≥ δ0}).
+Therefore, the affine hyperplane (β0 − ψ−(δ0)) + βt x = 0 represents the boundary between X0 and X1.
+4.3.1 Logistic Model for Classification
+The most classical model is the logistic one where ψ : z 7→ ez
+1+ez . We thus have:
+
+  
+  
+P(β0,β)(Y = 1|X = x) = exp (β0 + βt x)
+1 + exp (β0 + βt x)
+P(β0,β)(Y = 0|X = x) = 1
+1 + exp (β0 + βt x)
+We notice that:
+ln
+( P(β0,β)(Y = 1|X = x)
+1 − P(β0,β)(Y = 1|X = x)
+)
+= β0 + βt x . (4.10)
+The function p 7→ ln
+(p
+1−p
+)
+is called the logit function. It is interesting in that it transforms a
+probability (between 0 and 1) into a value between −∞ and +∞, which makes possible the representation by the real number line. We see that we have:
+logit(E(Y |X)) = β0 + βt X ,
+the logistic classification model is a generalized linear model (cf. Definition 4.4), the logit function is a link function.
+Remark 4.13 For δ0 = 1/2, the boundary between X0 and X1 for the decision function is thus directly β0 + βt x = 0.
+Remark 4.14 — Extension to the multi-label case. Note that the equation 4.10 allows to easily extend the logistic model to multiclass (multilabel) classification, i.e. for any number of classes. Let us now consider that Y takes its values (the labels) dans Y = {0, 1, 2, . . . , K}. A class (for example the class corresponding to label 0) is used as a reference, and the model
+determined by:
+
+         
+         
+ln
+( P(Y = 1|X = x)
+P(Y = 0|X = x)
+)
+= β1,0 + βt
+1x
+ln
+( P(Y = 2|X = x)
+P(Y = 0|X = x)
+)
+= β2,0 + βt
+2x
+...
+ln
+( P(Y = K|X = x)
+P(Y = 0|X = x)
+)
+= βK,0 + βt
+Kx
+The model corresponding to the conditional distribution P(Y |X) is totally determined because
+∑K
+k=0 P(Y = k|X = x) = 1.
+
+
+4.3 Linear Models for Classification 97
+Estimation
+We consider the 2-class classification problem, X takes values in Rp and Y in {0; 1}. Based on the pairs of observations (xi, yi)1≤i≤N , we try to estimate γ = (β0, β), the parameters of the logistic models such that:
+
+  
+  
+Pγ(Y = 1|X = x) = exp (β0 + βt x)
+1 + exp (β0 + βt x)
+Pγ(Y = 0|X = x) = 1
+1 + exp (β0 + βt x)
+(4.11)
+We denote p(γ; x) = Pγ(Y = 1|X = x) and form the likelihood using the classic rewriting trick for the Bernoulli distribution:
+L
+(
+γ; (xi, yi)1≤i≤N
+)
+=
+∏N
+i=1 P (Y = yi|X = xi)
+=
+∏N
+i=1 p(γ; xi)yi (1 − p(γ; xi)]1−yi .
+The log-likelihood is then written as follows:
+`
+(
+γ; (xi, yi)1≤i≤N
+)
+=
+N
+∑
+i=1
+yi ln [p (γ, xi)] + (1 − yi) ln [1 − p (γ, xi)] . (4.12)
+Denoting zi = (1, xi) and using the probability expressions given in 4.11, we obtain after simplification:
+`
+(
+γ; (xi, yi)1≤i≤N
+)
+=
+N
+∑
+i=1
+yi
+(
+γt zi
+)
+− ln
+(
+1 + exp
+(
+γt zi
+))
+. (4.13)
+In what follows, we omit the data in the ` argument for the sake of simplicity. Since the function is concave, we can show that a necessary and sufficient condition for ell to reach its maximum in hatγ is that ∇`(γˆ) = 0 (where ∇`(γ) represents the gradient of ` in γ). This equation can be solved by Newton-Raphson’s method, by constructing a sequence (γn)n∈N such that γ0 is given (for example γ0 = 0) and that
+γn+1 = γn +
+[
+∇2`(γn)
+]−1 ∇`(γn) . (4.14)
+with ∇2`(γn), the Hessian2 of ` in γn. We have:
+∇`(γ) =
+N
+∑
+i=1
+yizi − exp(γt zi)
+1 + exp(γt zi) zi
+and
+∇2`(γ) = −
+N
+∑
+i=1
+exp(γt zi)
+(1 + exp(γt zi))2 zizt
+i.
+2Let f : H → R, H an Hilbert space, f twice differentiable in x ∈ H, there exists a unique linear application ∇2f : H → L(H), (L(H): set of endomorphisms on H), called Hessian such that ∀h, k ∈ H, d2f (x)(h, k) = (∇2f (x)h, k). If H = Rn and if the scalar product is the Euclidean product, the Hessian simply corresponds to the Hessian matrix.
+
+
+98 Chapter 4. Supervised learning
+The algorithm doesn’t necessarily converge to a point γˆ such that ∇`(γˆ) = 0. Nevertheless, we will see in the optimization course (or for example in Nocedal and Wright (2006)) that we can always choose a ρn > 0 small enough in the recurrence equation (4.15):
+γn+1 = γn + ρn
+[
+∇2`(γn)
+]−1 ∇`(γn) . (4.15)
+such that at each iteration `(γn+1) > `(γn) and that the method converges towards γˆ such that ∇`(γˆ) = 0 and therefore attains the maximum likelihood.
+Remark 4.15 — Cross-entropy. Equation 4.12 illustrates an important concept, that of crossentropy. In the particular case of distributions from the same parametric model, we have given the definition of the Kullback-Leibler divergence (cf. Definition 2.20). In the more general case, the Kullback-Leibler divergence DKL (Q ‖ P ) measures how much a distribution P deviates from a reference distribution Q.. If P and Q are probability distributions on X , absolutely continuous with respect to a reference measure μ, and denoting p, q their densities with respect to μ, we have:
+DKL(Q ‖ P ) =
+∫
+X
+q ln
+(q
+p
+)
+dμ
+=−
+∫
+X
+q ln (p) dμ +
+∫
+X
+q ln (q) dμ
+The first term H(Q, P ) is called cross entropy:
+H(Q, P ) = −
+∫
+X
+q ln (p) dμ .
+The second term, denoted H(Q) is called entropy:
+H(Q) =
+∫
+X
+q ln (q) dμ .
+In the case of binary classification, if we consider a sample (xi, yi) ∈ X × {0; 1}, we take as reference distribution Q the reality (known through the empirical distribution), and as approximation distribution P , the model. We then have:
+H(Q, P ) = − ∑
+c=0,1
+Q(yi = c|xi) ln (P (yi = c|xi)) ,
+and since Q(Yi = 1|xi) = yi (it is 1 if yi = 1 and 0 if yi = 0) and Q(Yi = 0|xi) = 1 − yi, we get:
+H(Q, P ) = −yi ln (p(γ; xi)) − (1 − yi) ln (1 − p(γ; xi)) .
+We have H(Q) = 0 since
+H(Q) = − ∑
+c=0,1
+Q(yi = c|xi) ln (Q(yi = c|xi)) ,
+and Q(yi = c|xi) = 0 or Q(yi = c|xi) = 1.
+Finally, we see that for the maximum likelihood estimation of the parameters of the classification model, we see that the log-likelihood (cf. equation 4.12) is the opposite of the sum of the cross entropy on all samples, maximizing the likelihood will therefore be equivalent to minimizing the cross entropy, which can thus be considered as a loss function. In the same way as the quadratic loss function is the loss function conventionally chosen for regression, the cross-entropy is the loss function conventionally used for classification. It extends to the multi-class case.
+
+
+4.3 Linear Models for Classification 99
+Definition 4.7 — Cross entropy loss function. Let X a random variable with values in X , Y with values in {0; 1; . . . ; K}. Let P(Y |X) be a statistical model for the multi-class classification problem. Then, the cross entropy loss function for this model is defined for all (x, y) ∈ X × Y by:
+L ((x, y), P(Y |X)) = −
+K
+∑
+k=0
+δy(k) ln[P(Y = k|X = x)] .
+The best model P∗(Y |X) with respect to this loss function is classically obtained by minimizing the expectation of the loss function:
+P∗(Y |X) = arg min
+P(Y |X)E (L ((X, Y ), P(Y |X))) .
+Let (xi, yi)1≤i≤N be an observation sample, by taking the empirical mean:
+P∗(Y |X) = arg min
+P(Y |X)
+−1
+N
+N
+∑
+i=1
+K
+∑
+k=0
+δyi(k) ln[P(Y = k|X = xi)] .
+If P(Y |X) is parametric, P(Y |X) = Pγ(Y |X) and if Pγˆ(Y |X) is obtained by minimizing the empirical mean of the cross-entropies on all samples, γˆ is the maximum likelihood estimator for the model.
+Example 4.16 — Logistic model for classification.
+Generation of training data:
+Let X0 ∼ N (m0; Σ0) with m0 =
+(
+1 1
+)
+and Σ0 =
+(
+21 12
+)
+, and X1 ∼ N (m1; Σ1), with
+m1 =
+(
+3 3
+)
+et Σ1 =
+(
+10 01
+)
+. Denote respectively p0 and p1 the associated densities.
+Let (xi)1≤i≤N0 an i.i.d. sample for X0 giving the elements in class 0, and (xi)N0+1≤i≤N0+N1 an i.i.d. sample for X1 giving the elements in class 1. Figure 4.7 illustrates the samples for N0 = N1 = 200.
+Estimation of model parameters:
+The parameters of a logistic classification model are estimated from the training data {(xi, 0)1≤i≤N0, (xi, 1)N0+1≤i≤N0+ using Newton-Raphson method. We find: γˆ = (−6.09, 1.43, 1.56), and the associated line: βˆ0 + βˆt x = 0 visible in Figure 4.7 represents the boundary of the decision function obtained for δ0 = 1/2 (cf. Remark 4.13).
+That is to say that for new entries (x ̃i)1≤i≤Ntest, if βˆ0 + βˆt x ̃i > 0, we take δ(x ̃i) = 1 and if
+βˆ0 + βˆt x ̃i < 0, δ(x ̃i) = 0. If the point is on the boundary (but it is a zero probability event...), we define the decision rule we want. As the supports of the distributions of X0 and X1 overlap, we see that it will not be possible to obtain a perfect classifier.
+Predictino Test:
+Let’s perform a prediction test by randomly generating Ntest = 1000 test points (x ̃i)1≤i≤Ntest, choosing also randomly according to X0 or X1. We know the distribution from which each of the
+
+
+100 Chapter 4. Supervised learning
+Figure 4.7: Light grey dots: i.i.d. sample for X0 (class 0) and black crosses: i.i.d. sample for
+X1 (class 1). The dotted line indicates the boundary of the decision function. βˆ0 + βˆt x = 0.
+dots is drawn: that gives us the truth y ̃i for each of the x ̃i’s. For each of them, the prediction is
+calculated from the sign of βˆ0 + βˆt x ̃i, and we calculate our rate of correct classifications, called Accuracy:
+Accuracy = 1
+Ntest
+Ntest
+∑
+i=1
+I{j:δ(x ̃j)=y ̃j}(i) .
+On our test case, we find: Accuracy = 0.892. The results are shown in Figure 4.8. As you would expect, the misclassifications are in the overlapping area of the two distributions, around the border. Note that in this example, we could calculate the theoretical decision function δth at any point x by calculating the density ratio:
+δth(x) =
+{
+1 si p1(x) ≥ p0(x) 0 sinon.
+But p1(x) ≥ p0(x) is equivalent to ln (|Σ0|) − ln (|Σ1|) + (x − m0)tΣ−1
+0 (x − m0) − (x −
+m1)tΣ−1
+1 (x − m1) ≥ 0. The theoretical decision boundary is not linear. It is shown in Figure 4.9. We find Accuracy = 0.901 on our 1000 test samples. Classically, we have E(Accuracy(δ)) ≤ E(Accuracy(δth)) for any classifier δ. We can estimate those expectations at the limit when Ntest tends towards +∞. Here, for the given training set, E(Accuracy(δ)) = 0.899 and E(Accuracy(δth)) = 0.903.
+Comparison with the k-nearest neighbors classifier:
+We can as well compare with the k-nearest neighbors classifier. Let Vk(x) be the set of the k nearest neighbors of x in the training set. We can similarly choose a decision threshold δ0NN to

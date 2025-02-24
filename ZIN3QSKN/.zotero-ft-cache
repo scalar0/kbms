@@ -1,0 +1,2921 @@
+Traitement du Signal
+Auteurs: G. Chardon , R. Combes, J. Fiorina,
+E. Lahalle, J. Picheral, P. Rodriguez,
+C. Soussen, G. Valmorbida, A. Wautier
+CentraleSupélec, Avril 2020
+
+
+
+
+TABLE DES MATIÈRES
+Résumé 7 Notations 9
+1 bases mathématiques 11
+1.1 Espaces vectoriels de dimension finie 11 1.1.1 Définition 11 1.1.2 Applications linéaires 12 1.1.3 Norme, produit scalaire 12 1.2 Espaces de Banach 13 1.2.1 Espaces `p 14 1.2.2 Espaces Lp 14 1.3 Espaces de Hilbert 14 1.3.1 Séries de Fourier 16 1.4 Distributions 16 1.4.1 Distributions tempérées 19 1.4.2 Distributions à support compact 19 1.5 Variables et processus aléatoires 20 1.5.1 Brefs rappels de statistiques 24
+2 systèmes linéaires invariants 25
+2.1 Notion de signal 25 2.1.1 Définitions 25 2.1.2 Représentations énergétiques 26 2.2 Convolution 26 2.2.1 Cas continu : convolutions de fonctions 27 2.2.2 Cas discret 28 2.2.3 Signaux modélisés par des distributions 28 2.2.4 Propriétés du produit de convolution 30 2.3 Notion de système 30 2.3.1 Définition 30 2.3.2 Propriétés des systèmes 31 2.4 Filtres linéaires convolutifs 33 2.4.1 Définition 33 2.4.2 Filtres à réponse impulsionnelle finie (FIR) 34 2.4.3 Filtre à réponse impulsionnelle infinie (IIR) 36 2.4.4 Équations aux différences 36 2.5 Fonctions propres 37 2.6 Conclusion 38
+3 transformées de fourier 39
+3.1 Transformée de Fourier à Temps continu 40 3.1.1 Transformée de Fourier des signaux dans L1 40 3.1.2 Transformée de Fourier des signaux dans L2 42 3.1.3 Transformée de Fourier dans S′ 43
+
+
+4 table des matières
+3.1.4 Quelques exemples classiques 46 3.2 Décomposition en série de Fourier 47 3.2.1 Signaux à support limité 47 3.2.2 Signaux périodiques 48 3.3 Transformée de Fourier à temps discret 48 3.3.1 Transformée de signaux dans `1 49 3.3.2 Transformée des signaux dans `2 50 3.3.3 Quelques exemples classiques 51 3.4 Transformée de Fourier Discrète 51 3.5 Application au filtrage linéaire 53 3.5.1 Filtrage dans le domaine de Fourier 53 3.5.2 Calcul numérique de la réponse fréquentielle d’un filtre FIR 55 3.6 Analyse spectrale 57 3.6.1 Effet du fenêtrage 57 3.6.2 Notion de résolution 58 3.6.3 Calcul numérique avec la TFD 58 3.7 Conclusion 60
+4 echantillonnage 63
+4.1 Effet de l’échantillonnage 63 4.2 Théorème de Shannon 66 4.2.1 Base orthogonale de PWB 69 4.2.2 Convergence de la série 69 4.3 L’échantillonnage en pratique 70 4.3.1 Filtre anti-repliement 70 4.3.2 Reconstruction pratique 71 4.4 Conclusion 71
+5 processus aléatoires 73
+5.1 Définition et caractérisation des processus aléatoires 73 5.1.1 Définition 74 5.1.2 Lois fini-dimensionelles 75 5.1.3 Processus gaussien 76 5.1.4 Moyenne et autocorrélation 76 5.2 Processus stationnaires 78 5.2.1 Stationnarité stricte 78 5.2.2 Stationnarité au sens large (SSL) 78 5.2.3 Densité spectrale de puissance (DSP) 80 5.2.4 Bruit blanc 82 5.2.5 Filtrage de processus 84 5.2.6 Processus autorégressif (AR) 86
+6 estimation 91
+6.1 Estimateur de la moyenne et de l’autocorrélation 92 6.1.1 Estimateur de la moyenne 92 6.1.2 Estimateur de l’autocorrélation 93 6.2 Estimation de la DSP : périodogramme 96 6.2.1 Définition 96
+
+
+table des matières 5
+6.2.2 Propriétés statistiques du périodogramme 98 6.2.3 Variantes du périodogramme 99 6.3 Estimation paramétrique 102 6.3.1 Estimation de la DSP : application à un modèle
+AR 102
+6.4 Estimateur linéaire optimal 105 6.4.1 Définition et propriétés 106 6.4.2 Prédiction d’un processus aléatoire 107 6.4.3 Filtre de Wiener pour le débruitage 109 Bibliographie 114
+
+
+
+
+RÉSUMÉ
+contexte et enjeux
+Le monde numérique produit des volumes importants de signaux de toutes sortes (audio, images, vidéo, mesures physiques) dans des domaines aussi variés que la santé, les télécommunications, l’industrie ou l’environnement. L’extraction d’information de ces données est de plus en plus nécessaire pour le diagnostic médical, la compression de données, la suppression de bruits parasites d’un signal audio, etc. Ce cours introduit des méthodes pour aborder différents problèmes comme le filtrage, la transmission, le débruitage de signaux, ou l’analyse spectrale.
+organisation
+Les méthodes présentées reposent sur des concepts mathématiques tels que les espaces de Hilbert, les distributions, et les vecteurs aléatoires. Ces concepts sont revisités au chapitre 1. Le chapitre 2 introduit les notions de signaux et de systèmes, en particulier les filtres linéaires convolutifs. Le chapitre 3 étudie les transformées Fourier, un outil incontournable du traitement du signal. Les différentes transformations sont introduites pour des signaux à temps continu et à temps discret, et utilisées pour analyser le contenu fréquentiel des signaux (analyse spectrale) et pour caractériser les filtres linéaires dans le domaine fréquentiel. La théorie de l’échantillonnage introduite au chapitre 4 définit les conditions sous lesquelles l’information contenue dans un signal est conservée lors de sa discrétisation. Le théorème de Shannon est le résultat fondamental permettant d’assurer la reconstruction exacte d’un signal à bande limitée. Enfin, les chapitres 5 et 6 introduisent un cadre probabiliste pour caractériser les propriétés statistiques de signaux, vus comme des processus aléatoires. L’analyse de signaux stationnaires repose sur la fonction d’auto-corrélation (domaine temporel) et la densité spectrale de puissance (domaine fréquentiel), introduites formellement au chapitre 5. Le chapitre 6 présente les techniques d’estimation de ces caractéristiques à partir de données expérimentales, avec des applications au débruitage, au filtrage, à la prédiction de données, et à l’analyse spectrale.
+
+
+
+
+N O TAT I O N S
+Vecteurs
+x ∈ Cn vecteur x[k] k-ème coordonnée du vecteur
+Représentations fréquentielles
+(F x)( f ) ou X( f ) transformée de Fourier (F x)(ν) ou X(ν) transformée de Fourier à temps discret X ∈ Cn transformée de Fourier discrète d’un vecteur x ∈ Cn
+Variables aléatoires
+Xk variable aléatoire à l’instant k
+Produits scalaires et normes
+(x , y)L2 produit scalaire dans L2(R), égal à
+∫
+R
+x y∗dλ
+(x , y)L2 produit scalaire dans L2(0, T), égal à 1
+T
+∫
+[0,T]
+x y∗dλ
+(x , y) produit scalaire dans `2(Z), égal à ∑
+k∈Z
+x[k] y∗[k]
+‖ . ‖Lp norme Lp, avec ‖x‖p
+Lp =
+∫
+R
+|x(t)|p dt
+‖ . ‖p norme `p, avec ‖x‖p
+p=∑
+k
+|x[k]|p
+Distributions
+〈T , φ〉 image d’une fonction test φ par la distribution T
+Dirac vs. Kronecker
+δa distribution de Dirac décentrée : 〈δa , φ〉 = φ(a) δ = δ0 distribution de Dirac centrée : 〈δ , φ〉 = φ(0) T peigne de dirac : T = ∑
+k∈Z
+δkT
+δ[k] fonction de Kronecker, δ[k] = 1 si k = 0, 0 sinon
+
+
+10 table des matières
+Exponentielles complexes
+e f (t) = exp(2iπ f t) exponentielle complexe de fréquence f
+en(t) = exp
+(
+2iπ nt
+T
+)
+exponentielle complexe utilisée pour les séries de Fourier
+[notation simplifiée pour en/T]
+eν[k] = exp(2iπνk) exponentielle complexe discrète de fréquence ν
+en ∈ RN Version discrétisée de la fonction exp(2iπnt) sur [0, 1[ :
+en =
+{
+exp(2iπ nk
+N ), k = 0, . . . , N − 1
+}
+
+
+1
+BASES MATHÉMATIQUES
+Le but de ce chapitre est de poser les bases mathématiques de ce cours : espaces fonctionnels, opérations de base sur les signaux, rappels de probabilité, et de donner des liens avec les problématiques abordées dans le cours de traitement du signal.
+On appellera signal une fonction, une distribution, ou une suite numérique, dépendant le plus souvent du temps (signal audio, télécommunications), de l’espace (image, données géographiques), ou des deux (vidéo).
+1.1 espaces vectoriels de dimension finie
+1.1.1 Définition
+On appelle espace vectoriel sur un corps K (ici, R ou C) un ensemble E muni d’une loi de composition interne + de E × E dans E, et d’une loi de composition externe · de K × E dans E.
+Ces lois sont telles que (E, +) est un groupe, que · vérifie des propriétés d’associativité et de distributivité par rapport à +, et que l’élément neutre de · soit l’élément neutre de la multiplication de K.
+Les espaces vectoriels en dimension finie admettent une base, c’està-dire une famille B de N vecteurs (ei)1≤i≤N telle que tout vecteur x de E s’écrive comme une combinaison linéaire des éléments de la base de façon unique. On appelle coordonnées de x dans la base B les xi tels que :
+x=
+N
+∑
+i=1
+xiei.
+Toutes les bases d’un même espace vectoriel contiennent le même nombre N de vecteurs. On appelle N la dimension de l’espace vectoriel.
+application en traitement du signal : Les signaux en di
+mension finie seront membres d’un tel espace. Pour un signal sonore, on peut penser à l’amplification ou à l’atténuation pour la multiplication par un scalaire, et au mixage de deux sons pour l’addition.
+
+
+12 bases mathématiques
+1.1.2 Applications linéaires
+On appelle application linéaire une application L de E dans F telle que pour tout u et v dans E, et λ dans K,
+L(u + v) = L(u) + L(v)
+L(λu) = λL(u).
+La propriété de linéarité permet de simplifier cette description. En se donnant une base BE de E, et BF de F, on montre que les coefficients de y = L(x) sont donnés par :
+yn =
+N
+∑
+n=1
+anmxm, (1)
+pour N la dimension de E, et amn des éléments de K, dépendant de L et du choix des bases. On appelle A la matrice de l’application L dans les bases BE et BF. C’est le tableau à deux entrées contenant les éléments anm, et on définit le produit matriciel
+y = Ax (2)
+par l’équation (1). On peut donc représenter L par sa matrice A, simple tableau de nombres (aisément manipulable par un calculateur), et écrire le résultat de son application à un vecteur comme un produit matriciel (2), très simple à implémenter. Certaines applications de E dans E sont de plus diagonalisables. Le résultat y = Ax de leur application à un vecteur x se résume à multiplier les coefficients de x dans une base bien choisie (de vecteurs propres, tels que L(un) = λnun) :
+yn = λnxn.
+Une telle description permet une interprétation et un calcul plus simple de l’action de L sur des vecteurs de E.
+application en traitement du signal : on s’intéressera en
+traitement du signal à une classe particulière d’applications linéaires (en dimension finie ou pas), qui en plus d’être linéaires, sont invariantes par translation, et qu’on appellera filtres. De la même façon qu’on décrit une application linéaire par une matrice, un filtre sera décrit par sa réponse impulsionnelle. L’équivalent du produit matriciel sera la convolution. La transformée de Fourier jouera le rôle de la diagonalisation.
+1.1.3 Norme, produit scalaire
+On appelle norme N(·) sur E une application de E dans R+, vérifiant les axiomes suivants :
+
+
+1.2 espaces de banach 13
+— séparabilité : N(x) = 0 ⇒ x = 0, — homogénéité : N(λx) = |λ|N(x), — inégalité triangulaire : N(x + y) ≤ N(x) + N(y). Un espace vectoriel muni d’une norme est appelé espace vectoriel normé. Une norme permet de définir une topologie, et donc de parler de convergence, par exemple d’une suite de vecteurs xn approximant un vecteur x. On notera qu’en dimension finie, toutes les normes sont équivalents, et définissent donc la même topologie : la notion de convergence de dépend pas alors de la norme choisie. On rencontre souvent les normes suivantes : — ‖x‖1 = ∑iN=1 |xi|,
+— ‖x‖2 =
+√
+∑iN=1 |xi|2,
+— ‖x‖∞ = max1≤i≤N |xi| Un espace de dimension finie muni d’un produit scalaire est dit préhilbertien. Un produit scalaire (hermitien, si K = C) est une application bilinéaire (sesquilinéaire) vérifiant les propriétés suivantes : — symétrie : (x, y) = (y, x)∗, — positivité : (x, x) ∈ R+, — définie : (x, x) = 0 ⇒ x = 0. Un produit scalaire induit une norme ‖x‖ = √(x, x). En particulier, le produit scalaire (x, y) = ∑iN=1 xiy∗
+i induit la norme ‖ · ‖2. L’égalité de Cauchy-Schwarz nous indique que
+|(x, y)| ≤ ‖x‖‖y‖. (3)
+On peut définir dans ces espaces des bases orthonormales, i.e., des bases (ei)1≤i≤N telles que (ei, ej) = 1 si i = j, et 0 sinon. Dans ce cas, les coefficients de décomposition de x sur la base (ei)1≤i≤N
+x=
+N
+∑
+i=1
+xiei. (4)
+sont directement donnés par :
+xi = (x, ei). (5)
+1.2 espaces de banach
+L’étude des espaces vectoriels ne pose pas de difficultés particulières en dimension finie : tout espace de dimension finie admet une base, on peut donc toujours représenter un vecteur par ses coordonnées, et toutes les normes définies sur un espace vectoriel donné sont équivalentes. De plus, tout espace vectoriel de dimension finie sur R ou C est complet. La situation est bien sûr autrement plus complexe en dimension infinie. On appelle espace de Banach un espace vectoriel normé et complet. Nous utiliserons deux types d’espaces de Banach.
+
+
+14 bases mathématiques
+1.2.1 Espaces `p
+Pour p ≤ 1, l’espace `p est l’espace des suites (x[n])n∈Z telles que ∑n∈Z |x[n]|p < ∞. On s’intéressera en particulier : — aux suites intégrables `1, ‖x‖1 = ∑n∈Z |x[n]|, — aux suites d’énergie finie `2, ‖x‖22 = ∑n∈Z |x[n]|2,
+— aux suites bornées `∞, ‖x‖∞ = supi∈Z |x[n]|. On note δ[n] la suite définie par
+δ[n] =
+{ 1 si n = 0
+0 sinon (6)
+δ est appelée fonction de Kronecker ou impulsion de Kronecker.
+Remarque. La notation δ sera aussi utilisée pour désigner la distribution de Dirac, qu’on peut interpréter comme la limite d’une suite de fonctions définies sur R. Au contraire de la distribution de Dirac, la fonction de Kronecker δ[k] est une suite définie sur Z.
+1.2.2 Espaces Lp
+De même, on peut montrer que les espaces Lp(I), pour 1 ≤ p ≤ ∞ et I un intervalle, sont des espaces de Banach. On définit d’abord
+Lp(I), l’ensemble des fonctions mesurables x définies sur I telles que
+∫
+I |x|p < ∞. L’espace Lp(I) est alors l’ensemble des classes d’équiva
+lence de Lp(I) par la relation "égal presque partout". On s’intéressera en particulier : — aux fonctions intégrables L1(R), ‖x‖L1 = ∫
+R |x|dλ,
+— aux fonctions d’énergie finie L2(R), ‖x‖2
+L2 = ∫
+R |x|2dλ,
+— aux fonctions essentiellement bornées L∞(R) = esssup |x|. On notera bien que ces espaces ne prennent pas en compte la régularité des fonctions (i.e., les fonctions de Lp n’ont aucune raison d’être continues), et qu’ils n’ont pas de relation d’inclusion entre eux (sauf si I est borné, auquel cas Lp(I) ⊂ Lq(I) si p > q).
+application en traitement du signal : les espaces `p servi
+ront pour modéliser les signaux à temps discret, les espaces Lp pour les signaux à temps continu. En particulier, dans le cas p = 2 développé dans la section suivante, on parle de signaux d’énergie finie, où l’énergie est ‖ · ‖22.
+1.3 espaces de hilbert
+Le cas particulier de L2(I) mérite un peu plus d’attention. Dans le cas où l’interval I n’est pas borné, on définit le produit scalaire dans L2(I) par :
+(x, y)L2 =
+∫
+R
+xy∗dλ. (7)
+
+
+1.3 espaces de hilbert 15
+Si I est borné, on choisit de normaliser le produit scalaire par la longueur de I 1. Ainsi, le produit scalaire sur L2([0, T]) est défini par :
+(x, y)L2 = 1
+T
+∫
+[0,T]
+xy∗dλ. (8)
+Le produit scalaire vérifie évidemment l’inégalité de Cauchy-Schwarz.
+L2(I) est alors un espace de Hilbert, i.e., un espace de Banach muni d’un produit scalaire. De plus, L2 est séparable (il existe un sousensemble dénombrable dense dans L2). Il existe donc une base hilbertienne (ei)i∈Z de L2(I) : toute fonction x de L2 s’écrit comme la somme d’une série
+x= ∑
+i∈Z
+ci ei, (9)
+où la convergence se fait en norme L2. De plus, la famille (ei)i∈Z est orthonormale. Les coefficients ci sont donnés par
+ci = (x, ei)L2. (10)
+Le théorème de représentation de Riesz est une propriété importante des espaces de Hilbert : une forme linéaire continue ` sur un espace de Hilbert H peut toujours s’écrire
+∀x ∈ H, `(x) = (x, x`)H
+où x` ∈ H. On peut donc, par l’intermédiaire du produit scalaire, confondre H et son dual.
+On peut également définir les espaces de Sobolev Hm, dont les fonctions x sont telles que x et ses dérivées jusqu’à l’ordre m (au sens des distributions) soient dans L2. Ces espaces permettent de prendre en compte la régularité des fonctions. Pour le cas particulier de H1, le produit scalaire est :
+(x, y)H1 = (x, y)L2 + (x′, y′)L2.
+application en traitement du signal : la construction de
+bases d’espaces de Hilbert tels que L2(R) est très importante en traitement du signal, puisqu’elle est liée à la décomposition des signaux en temps continu. On peut citer par exemple les bases d’ondelettes discrètes, les bases de cosinus locaux, et pour les signaux à bande limitée, les bases de sinus cardinaux, qui permettront de les échantillonner sans perte d’information.
+1. pour des raisons qui deviendront plus claires au paragraphe 1.3.1.
+
+
+16 bases mathématiques
+1.3.1 Séries de Fourier
+L’espace L2([0, T]) des fonctions de carré intégrable définies sur [0, T] est un espace de Hilbert séparable. Une base orthonormale classique de L2([0, T]) est la base de Fourier définie par :
+en(t) = exp
+(
+i2π nt
+T
+)
+, n ∈ Z. (11)
+Les coefficients cn de la décomposition
+x = n∈∑Z
+cn en (12)
+x(t) = n∈∑Z
+cn exp
+(
+i2π nt
+T
+)
+(13)
+sont donnés par :
+cn = (x, en)L2
+=1
+T
+∫
+[0,T]
+x(t) exp(−i2πnt) dt (14)
+application en traitement du signal : la série de Fourier
+permet de décomposer un signal périodique de période T (signal de parole, note de musique, etc.) en sommes d’harmoniques. L’appartenance de la fonction à un espace de Sobolev Hm garantit la décroissance rapide des coefficients.
+1.4 distributions
+Comme vu plus haut, dans un espace de Hilbert H (par exemple L2), il est possible d’identifier les vecteurs de H avec les formes linéaires continues sur H. C’était déjà le cas pour les espaces de dimension finie. Par contre, pour Lp en général, ce n’est plus le cas. On peut montrer que pour p > 1, le dual de Lp est isomorphe à Lq, avec 1/p + 1/q = 1. Pour les espaces Lp définis sur un intervalle borné (par exemple [0, 1]), on remarque que pour p > 2, le dual Lp n’est pas égal à Lp, et est même strictement plus gros (en effet, c’est Lq, avec q = p/(p − 1) < p). On peut donc faire grossir le dual en limitant l’espace de départ. Cette idée est poussée à l’extrême par les distributions, qui forment l’espace D′(R) des formes linéaires continues sur l’espace D(R) des fonctions C∞ à support compact, qu’on appelle fonctions test. L’espace de départ étant ici très restreint, son dual est absolument gigantesque, et contient par exemple tous les espaces Lp pour p ≥ 1. En effet, parmi les distributions, on trouve les distributions régulières associées aux fonctions localement intégrables (et donc, toutes
+
+
+1.4 distributions 17
+les fonctions de Lp, pour 1 ≤ p ≤ ∞). Dans ce cas, l’image d’une fonction test φ par la distribution Tx associée à la fonction x est donné par
+〈Tx, φ〉 =
+∫
+R
+xφ dλ. (15)
+Cependant, toutes les distributions ne sont pas associées à des fonctions. En particulier, la distribution δ de Dirac
+〈δ, φ〉 = φ(0) (16)
+ne peut pas s’écrire comme l’intégrale de φ contre une fonction. Plus généralement, on définit δa par
+〈δa, φ〉 = φ(a). (17)
+On a en particulier
+δ0 = δ. (18)
+Attention : ne pas confondre la distribution de Dirac δ avec la fonction de Kronecker δ[k] définie en (6). Cette dernière est une suite numérique. On définit également le peigne de Dirac comme la somme de distributions de Dirac espacées de a :
+a = n∈∑Z
+δna. (19)
+Égalité et convergence au sens des distributions sont définies par :
+T = S ⇔ ∀φ ∈ D(R), 〈T, φ〉 = 〈S, φ〉 ,
+Tn → T ⇔ ∀φ ∈ D(R), 〈Tn, φ〉 → 〈T, φ〉 .
+Toute distribution est dérivable, et sa dérivée est encore une distribution, définie par
+〈T′, φ
+〉 = − 〈T, φ′〉 , (20)
+qui étend l’intégration par parties quand T est une fonction suffisamment régulière. En particulier, la fonction de Heaviside x = 1R+ n’est pas dérivable au sens classique, mais sa dérivée au sens des distributions est la distribution de Dirac δ (remarque : la valeur de 1R+ en zéro n’a, du point de vue des distributions, aucune importance). Ce résultat peut se généraliser de la façon suivante : avec I = [a, b] un intervalle de R et x une fonction dérivable, la dérivée de x1I est donnée par
+(x1I )′ = x′1I + x(a)δa − x(b)δb. (21)
+Les discontinuités de la fonction font apparaître des distributions de Dirac dans la dérivée, avec des amplitudes égales à celles des sauts.
+
+
+18 bases mathématiques
+1
+0
+1
+-1 0 1 2 3 4
+-2
+-4 -3
+1
+0
+H
+Figure 1 – Fonction de Heaviside H = 1R+, distribution de Dirac δ = δ0 et peigne de Dirac a pour a = 1.
+Un changement de variable affine χ(x) = ax + b est défini de la façon suivante :
+〈T ◦ χ, φ〉 = 1
+|a|
+〈
+T, φ ◦ χ−1〉
+. (22)
+Cette définition est justifié par le fait que si T est la distribution régulière associée à une fonction localement intégrable, elle est cohérente avec la formule de changement de variable dans le calcul de l’intégrale de (x ◦ χ)φ. En particulier, pour la distribution de Dirac et χ(x) = ax − b,
+δ0 ◦ χ = 1
+|a| δb/a. (23)
+application en traitement du signal : les distributions
+sont utiles pour modéliser les systèmes linéaires invariants dans le temps, définis plus tard dans le document, par des convolutions. En particulier, l’élément neutre de la convolution est la distribution δ. L’opérateur δa agit comme un retard sur un signal, avec un décalage
+
+
+1.4 distributions 19
+en temps égal à a. On utilisera parfois la notations δ(t − a) à la place de δa, pour rendre ce retard plus explicite. On gardera bien à l’esprit qu’une distribution n’est pas une fonction de t, et que cette notation n’est rien d’autre qu’un abus commode. Notons que la distribution de Dirac peut être vue comme la limite, au sens des distributions, d’une suite d’impulsions d’intégrale 1 et de supports de plus en plus concentrés autour de zéro.
+Le peigne de Dirac sera important pour l’étude de l’opération d’échantillonnage (passage d’un signal en temps continu à un signal en temps discret).
+1.4.1 Distributions tempérées
+On définit l’espace de Schwartz S comme l’ensemble des fonctions φ C∞ sur R telles que
+∀α, β ∈ N, sup
+t∈R
+∣ ∣
+∣tα φ(β)(t)
+∣ ∣
+∣ < ∞, (24)
+c’est-à-dire qu’elles, et leur dérivées, décroissent plus vite que n’importe quelle puissance négative de |t|.
+Les membres de son dual S′ sont appelées distributions tempérées. Les fonctions test étant dans l’espace de Schwartz (D ⊂ S), les distributions tempérées sont également des distributions (S′ ⊂ D′).
+Quelques exemples de distributions tempérées :
+— fonctions localement intégrable à croissance au plus polynomiale — distribution de Dirac — peigne de Dirac
+1.4.2 Distributions à support compact
+Avant de définir les distributions à support compact, on rappelle que le support d’une fonction, noté supp(φ), est défini comme l’adhérence de l’ensemble des valeurs x pour lesquelles φ(x) 6= 0.
+Définition 1.1. Une distribution T ∈ D′(R) est dite nulle sur un ouvert O de R si pour tout φ ∈ D(R) telle que supp(φ) ⊂ O, 〈T, φ〉 = 0.
+Par exemple, on peut facilement vérifier que δ est nulle sur R∗ et que pour x ∈ L1(R), Tx est nulle sur O équivaut à x|O = 0 presque partout.
+On étend à présent le concept de support aux distributions.
+
+
+20 bases mathématiques
+Définition 1.2 (Support d’une distribution). Le support d’une distribution T ∈ D′(R) est le complémentaire du plus grand ouvert sur lequel T est nulle.
+Exemple 1.1.
+— Si ai ∈ R et αi ∈ C, supp(∑ik=1 αiδai ) = {a1, . . . , ak}.
+— Si x ∈ L1(R), supp(Tx) = supp(x).
+Définition 1.3 (Distributions à support compact). On note E ′(R) le sous-espace vectoriel de D′(R) formé des distributions à support compact.
+E ′(R) contient les distributions de Dirac δa, leurs dérivées δ(k)
+a quelquesoit k ∈ N, et l’ensemble des fonctions x ∈ L1(R) à support compact (vues comme des distributions régulières). E ′(R) contient en particulier l’espace des fonctions tests : D(R) ⊂ E ′(R). On a de plus l’emboîtement suivant :
+E ′(R) ⊂ S′(R) ⊂ D′(R). (25)
+application en traitement du signal : Les distributions
+tempérées forment le cadre le plus général pour la transformée de Fourier. Elle permettent notamment de calculer la transformée de Fourier d’une distribution de Dirac ou d’un peigne de Dirac, mais aussi d’une exponentielle complexe eν(t) = exp(i2πνt), qui ne sont ni dans L1, ni dans L2.
+1.5 variables et processus aléatoires
+Étant donné un espace Ω muni d’une tribu F et d’une mesure P telle que P(Ω) = 1 (on parle d’espace probabilisé), une variable aléatoire X est une application mesurable de (Ω, F ) dans (R, B). Une variable aléatoire complexe Xc peut se décomposer comme la somme Xc = Xr + iXi où Xr et Xi sont des variables aléatoires réelles. La loi de la variable aléatoire X est la mesure PX sur R telle que PX(A) = P(X−1(A)). L’espérance de X est définie par :
+E(X) =
+∫
+Ω X(ω)dP(ω)
+=
+∫
+R
+x dPX(x), (26)
+et sa variance Var(X) par :
+Var(X) =
+∫
+Ω
+|X(ω) − E(X)|2dP(ω)
+=
+∫
+R
+|x − E(X)|2dPX(x), (27)
+
+
+1.5 variables et processus aléatoires 21
+On peut également caractériser une variable aléatoire par sa fonction de répartition :
+FX(x) = P(X ≤ x) (28)
+et sa fonction caractéristique
+φX(t) = E(exp(itX)). (29)
+Si la loi PX(x) est absolument continue par rapport à la mesure de Lebesgue (i.e., dPX = fXdλ), on parle de loi à densité. Un cas très important de loi à densité est la loi normale N (μ, σ2), de moyenne μ et de variance σ2, définie par :
+fX(x) = 1
+√
+2πσ2 exp
+(
+− (x − μ)2
+2σ2
+)
+. (30)
+Les vecteurs aléatoires sont des variables aléatoires de Ω dans RN. Leur loi de probabilité est une mesure sur RN. Pour un couple de variables aléatoires (X, Y), on définit la covariance par :
+Cov(X, Y) = E ((X − E(X)) (Y − E(Y))∗) (31)
+=
+∫
+R2
+(x − E(X))(y − E(Y))∗dPXY(x, y).
+en notant X∗ la conjuguée hermitienne de X (i.e., la matrice transposée conjuguée). La moyenne d’un vecteur aléatoire X est μX = E(X) et la matrice de covariance est :
+ΣX = E((X − μX)(X − μX)∗), (32)
+dont les coefficients valent ΣX,nm = Cov(Xn, Xm). La matrice de covariance d’un vecteur aléatoire est toujours hermitienne semi-définie positive. En effet, quelque soit le vecteur a = (aj)1≤j≤N, a∗ΣXa = Var((a, X)) ≥ 0.
+Un vecteur aléatoire gaussien est, par définition, tel que toute combinaison linéaire de ses composantes suit une loi normale. Un vecteur aléatoire gaussien réel X est défini par sa moyenne μ et sa matrice de covariance Σ. Sa fonction caractéristique est :
+φX(t) = exp
+(
+iμtXt − 1
+2 ttΣt
+)
+(33)
+Si de plus Σ est inversible, ce vecteur aléatoire admet une densité donnée par :
+fX(x) = 1
+(2π)N/2|Σ|1/2 exp
+(
+−1
+2 (x − μX)tΣ−1(x − μX)
+)
+(34)
+La figure 2 donne un exemple de vecteur gaussien. Il est à noter qu’il n’est pas suffisant que les lois marginales des composantes du
+
+
+22 bases mathématiques
+Figure 2 – Réalisations d’un vecteur gaussien (X, Y), de moyenne
+μ = (1, 2), de matrice de covariance Σ =
+(1 1 12
+)
+. Les
+lois de toute combinaison linéaire X et Y sont normales.
+vecteur soient normales pour que le vecteur soit gaussien, comme le montre l’exemple de la figure 3.
+Un processus aléatoire à temps discret (Xn(ω)) est une suite de variables aléatoires pour n ∈ Z. Ce concept généralise celui de vecteurs aléatoire. Un processus est dit gaussien si tout vecteur extrait du processus est gaussien.
+Des réalisations du processus (Xn(ω)) (i.e., des valeurs du processus pour des ω donnés) sont aussi appelées trajectoires.
+La figure 4 montre des réalisations d’un processus aléatoire simple, où les Xk prennent comme valeur -1 et 1, et où Xk+1 = Xk avec probabilité 9/10, Xk+1 = −Xk avec probabilité 1/10.
+application en traitement du signal : de nombreux si
+gnaux peuvent être modélisés par des processus aléatoires, au sens où il est utile de les considérer comme des réalisations d’un processus aléatoire. Ce type de modélisation est, par exemple, très utile pour des signaux de parole non voisée (chuchotement, consonnes telles que /ch/, /s/, /f/), pour lesquels il est plus informatif de donner les caractéristiques du processus aléatoire les ayant produits, plutôt que les valeurs de leurs trajectoires spécifiques, compte tenu de la variabilité entre les trajectoires. En traitement du signal, on manipulera l’autocorrélation d’un signal (entre deux instants n et m), égale à E(XnX∗m), qui coïncide avec l’élément ΣX,nm lorsque X est centré.
+
+
+1.5 variables et processus aléatoires 23
+Figure 3 – Réalisations d’un vecteur aléatoire (X, Y), où Y = X1|X|<1 − X1|X|≥1, et X est une variable normale de loi N (0, 1). Les lois marginales de X et Y sont normales, mais X − Y ne suis pas une loi normale. Ce n’est pas donc un vecteur gaussien.
+Figure 4 – 5 trajectoires d’un processus aléatoire à valeurs −1 ou 1.
+
+
+24 bases mathématiques
+1.5.1 Brefs rappels de statistiques
+Le but de la statistique est d’estimer des caractéristiques d’une variable aléatoire (moyenne, variance, paramètre d’une famille de lois de probabilité, etc.) à partir de réalisations de cette variable aléatoire. Par exemple, à partir d’un nombre fini de lancés de dé, on cherche à estimer la probabilité de chaque face du dé. Voici un exemple simple d’estimation. La moyenne empirique μˆ N est un estimateur de la moyenne μ d’une variable aléatoire X. Avec des données Xn indépendantes identiquement distribuées pour 1 ≤ n ≤ N,
+μˆ N = 1
+N
+N
+∑
+n=1
+Xn. (35)
+Cet estimateur est également une variable aléatoire. On peut calculer son espérance et sa variance :
+E(μˆ N) = E(X) (36)
+Var(μˆ N) = 1
+N2
+N
+∑
+n=1
+Var(Xn) (37)
+=1
+N Var(X) (38)
+Cet estimateur est non biaisé (son espérance est l’espérance de X, quantité à estimer), et consistant (sa variance tend vers 0 quand la taille des données tend vers l’infini).
+application en traitement du signal : comme vu plus
+haut, il est fréquent de considérer un signal comme la réalisation d’un processus aléatoire. Avec quelques hypothèses supplémentaires (stationnarité, ergodicité), nous verrons qu’il est possible d’estimer les paramètres d’un processus aléatoire avec une unique réalisation. Par exemple, on peut estimer les paramètres d’un modèle de production de parole à partir d’un enregistrement unique. Le problème de l’estimation de la fréquence d’une sinusoïde dans du bruit fera également appel à ce formalisme.
+
+
+2
+S Y S T È M E S L I N É A I R E S I N VA R I A N T S
+Ce chapitre étudie les filtres linéaires et invariants, qui sont des outils fondamentaux en traitement du signal. Après quelques définitions élémentaires pour décrire les signaux à temps continu et à temps discret, on introduit le produit de convolution de deux signaux et liste ses principales propriétés mathématiques. On étudie les propriétés des filtres linéaires convolutifs, et montre finalement que les signaux exponentiels complexes sont fonctions propres d’un filtre linéaire. A ce titre, ils caractérisent le filtre dans le domaine fréquentiel.
+2.1 notion de signal
+2.1.1 Définitions
+On désigne par signal déterministe, ou plus simplement signal, une fonction d’une ou plusieurs variables de temps ou d’espace, à valeurs dans R ou C en général. On distingue deux grandes classes de signaux, à temps continu et à temps discret.
+Un signal (à temps) continu, appelé signal analogique, est une fonction d’une variable continue t ∈ R. On la notera
+x: R → C t 7→ x(t)
+La variable t peut représenter le temps, mais aussi l’espace (t = (x, y) dans le cas d’une image), la longueur d’onde, etc.
+Un signal (à temps) discret est une suite numérique
+x = {x[k], k ∈ Z}
+Très souvent, un signal discret est obtenu en échantillonnant les valeurs d’un signal à temps continu à différents instants tk, k ∈ Z. On a ainsi :
+x[k] = xc(tk), ∀k ∈ Z
+en notant xc le signal continu associé au signal discret x. Pour cette raison, les signaux discrets sont aussi appelés signaux échantillonnés. Notons qu’un signal numérique est un signal discret et quantifié, i.e., ne pouvant prendre qu’un nombre fini de valeurs. La quantification est l’opération q = Q(x) qui transforme un signal à valeurs
+
+
+26 systèmes linéaires invariants
+continues (x[k] ∈ R) en un signal à valeurs discrètes. Par exemple, si q est à valeurs dans N, q[k] est l’entier le plus proche de x[k]. Les signaux déterministes seront vus comme des objets mathématiques qui vivent dans des espaces fonctionnels comme Lp(R) (temps continu) ou `p(Z) (temps discret). Par opposition aux signaux déterministes, on définit les signaux stochastiques comme des processus aléatoires. Ces représentations seront étudiées aux chapitres 5 et 6.
+2.1.2 Représentations énergétiques
+Soit x un signal déterministe à temps continu. On définit, quand elles existent, les grandeurs suivantes :
+— La puissance moyenne Px = Tli→m∞
+1 2T
+∫
+[−T,T]
+|x(t)|2 dt
+— L’énergie Ex =
+∫
+R
+|x(t)|2 dt = ‖x‖2
+L2 .
+Un signal d’énergie finie vérifie donc x ∈ L2(R), et Px = 0. Des définitions analogues s’appliquent dans le cas discret, avec Ex = ‖x‖22. On définit l’intercorrélation entre deux signaux d’énergie finie par :
+∀τ ∈ R, γxy(τ) =
+∫
+R
+x(t) y∗(t − τ) dt (cas continu) (39)
+∀n ∈ N, γxy[n] = ∑
+k
+x[k] y∗[k − n] (cas discret) (40)
+L’intercorrélation est égale au produit scalaire entre x et la version retardée de y :
+γxy(τ) = (x , y( · − τ)) (cas continu)
+γxy[n] = (x , y[ · − n]) (cas discret)
+On définit le Rapport Signal-Sur-Bruit (RSB, ou SNR pour Signal-toNoise Ratio) pour quantifier le niveau de perturbation d’un signal lors de sa transmission dans un réseau de communication. En notant u le signal utile (i.e., non bruité) et x = u + b le signal bruité (en supposant le bruit b additif), le SNR est respectivement défini par :
+SNR =
+( Pu
+Pb
+)
+ou SNR =
+( Eu
+Eb
+)
+(41)
+pour des signaux de puissance et d’énergie finie. Le SNR est le plus souvent exprimé en dB :
+SNRdB = 10 log10 (SNR). (42)
+2.2 convolution
+La convolution est une opération fondamentale en traitement du signal. Nous la définissons successivement dans les espaces Lp, pour les signaux discrets (espaces `p), et pour des distributions.
+
+
+2.2 convolution 27
+2.2.1 Cas continu : convolutions de fonctions
+Définition 2.1 (Convolution de deux fonctions). Soient deux fonctions x : R → C et y : R → C. Le produit de convolution de x et y, noté x ∗ y, est la fonction, si elle est définie, définie par :
+∀t ∈ R, (x ∗ y)(t) =
+∫
+R
+x(θ)y(t − θ)dθ (43)
+=
+∫
+R
+x(t − θ)y(θ)dθ. (44)
+(x ∗ y)(t) est parfois noté x ∗ y(t). Dans ce polycopié, on privilégie l’écriture (x ∗ y)(t) pour bien marquer que (x ∗ y)(t) dépend de toutes les valeurs de y(θ). On remarque que la convolution n’est pas toujours définie. Par exemple, si x = y = 1R, alors ∀t, (x ∗ y)(t) = ∞. Par ailleurs, la convolution a un pouvoir régularisant (cf. cours de CIP). Par exemple, pour les fonctions discontinues x = y = 1[− T
+2,T
+2 ], où T > 0, x ∗ y est la
+fonction "triangle" (continue) de largeur 2T et d’amplitude T :
+(x ∗ y)(t) = (T − |t|) 1[−T,T](t). (45)
+La convolution est définie partout (éventuellement presque partout) en fonction de l’espace dans lequel vivent les signaux x et y.
+Théorème 2.1. La convolution de deux fonctions de Lp et Lq est définie dans les cas suivants :
+x y x ∗ y définie L1 L1 L1 p.p. L1 L2 L2 p.p. L1 L∞ L∞ partout L2 L2 L∞ partout
+La norme de x ∗ y est bornée par le produit des normes de x et y.
+Les démonstrations sont élémentaires et laissées en exercice.
+Pour aller plus loin...
+Le théorème 2.1 est généralisé par l’inégalité de Young. Avec p, q, r ∈ [1, ∞] et 1
+p+1
+q =1+ 1
+r,
+la convolution de x ∈ Lp et de y ∈ Lq est dans Lr, avec la borne
+‖x ∗ y‖r ≤ ‖x‖p‖y‖q
+
+
+28 systèmes linéaires invariants
+Remarque. L’expression (43) ressemble à la définition de l’intercorrélation (39). Pour x et y ∈ L2(R), γxy(τ) est égal au produit scalaire entre x et le signal retardé y∗( · − τ). En notant y ̄(t) = y∗(−t), on a
+γxy = x ∗ y ̄ (46)
+2.2.2 Cas discret
+Définition 2.2 (Convolution dans le cas discret). Soient x = {x[k], k ∈ Z} et y = {y[k], k ∈ Z}. Le produit de convolution de x et y est la suite x ∗ y , si elle est définie, définie par :
+∀n ∈ Z, (x ∗ y)[n] = ∑
+k∈Z
+x[k] y[n − k] (47)
+=∑
+k∈Z
+x[n − k] y[k]. (48)
+(x ∗ y)[n] est parfois noté x ∗ y[n]. On privilégie l’écriture (x ∗ y)[n]. Les conditions d’existence sont similaires au cas continu. On peut donc écrire la convolution de deux signaux `1(Z), de deux signaux dans `2(Z), d’un signal `1(Z) avec un signal `∞(Z), etc.
+2.2.3 Signaux modélisés par des distributions
+Il est nécessaire d’étendre la convolution aux distributions pour pouvoir définir certains filtres comme les filtres à retard (55) y = δτ ∗ x. Le lecteur est redirigé vers le chapitre 1 pour une définition des espaces de distributions sur lesquels nous travaillons.
+Convolution d’une fonction C∞ et d’une distribution
+On définit d’abord la convolution d’une fonction C∞(R) avec une distribution comme extension directe de la définition (44).
+Définition 2.3. Soit x ∈ C∞(R) et Y ∈ D′(R). On suppose que l’une des trois hypothèses suivantes sont satisfaites :
+1. x ∈ D(R) et Y ∈ D′(R) ;
+2. x ∈ S (R) et Y ∈ S′(R) ;
+3. x ∈ C∞(R) et Y ∈ E ′(R).
+On définit la fonction x ∗ Y par
+∀t ∈ R, (x ∗ Y)(t) = 〈Y , x(t − · )〉 (49)
+où x(t − · ) désigne la fonction θ 7→ x(t − θ).
+
+
+2.2 convolution 29
+Théorème 2.2. Sous les hypothèses précédentes, x ∗ Y ∈ C∞(R). De plus, pour tout k ∈ N, (x ∗ Y)(k) = x(k) ∗ Y = x ∗ Y(k).
+Exemple 2.1. Pour Y = δa et x ∈ C∞(R), (49) implique :
+∀t ∈ R, (x ∗ δa)(t) = x(t − a). (50)
+Pour aller plus loin...
+Définition 2.4 (Convolution de distributions). Soient X ∈ E ′(R) et Y ∈ D′(R). Le produit de convolution X ∗ Y est la distribution X ∗ Y définie par :
+∀φ ∈ D(R), 〈X ∗ Y , φ〉 = 〈X , θ 7→ 〈Y, φ( · + θ)〉〉 (51)
+= 〈Y , θ 7→ 〈X, φ( · + θ)〉〉 (52)
+Cette définition possède un lien direct avec la définition (43)-(44) de la convolution de deux fonctions x et y. Soient x ∈ L1(R) et y ∈ L1(R). D’après le théorème 2.1, x ∗ y ∈ L1(R). La distribution régulière associée s’écrit :
+∀φ ∈ D(R), 〈Tx∗y , φ
+〉=
+∫
+R
+(x ∗ y)(t)φ(t)dt
+=
+∫
+R
+[∫
+R x(θ) y(t − θ)dθ
+]
+φ(t)dt
+=
+∫
+R
+[∫
+R y(t − θ) φ(t) dt
+]
+x(θ)dθ
+=
+∫
+R
+[∫
+R y(x) φ(u + θ) du
+]
+x(θ)dθ
+=
+∫
+R x(θ) 〈Ty , φ( · + θ)〉 dθ (53)
+en utilisant le théorème de Fubini pour intervertir les deux intégrales. (53) s’identifie clairement avec (51). De façon similaire, on peut établir un lien direct entre (52) et (44).
+Remarque. Le produit de convolution de deux distributions n’est donc pas toujours défini. En raison de l’emboîtement E ′ ⊂ S′ ⊂ D′, la définition (avec X ∈ E ′, Y ∈ D′) couvre les cas suivants : — X ∈ D, Y ∈ D′ ;
+— X et Y ∈ E ′. On a alors X ∗ Y ∈ E ′ ; — X ∈ E ′ et Y ∈ S′. On a alors X ∗ Y ∈ S′ ;
+Exemple 2.2.
+— Pour X = δa ∈ E ′(R), on a pour Y ∈ D′(R),
+∀φ ∈ D(R), 〈δa ∗ Y , φ〉 = 〈Y, φ( · + a)〉 .
+Pour a = 0, on en déduit que δ ∗ Y = Y. — Dans le cas particulier où Y = y ∈ C0(R), on a :
+〈δa ∗ y , φ〉 =
+∫
+R y(t) φ(t + a) dt =
+∫
+R y(t − a) φ(t) dt
+On retrouve le résultat (50) : ∀t, (δa ∗ y)(t) = y(t − a).
+
+
+30 systèmes linéaires invariants
+2.2.4 Propriétés du produit de convolution
+Les propriétés sont énoncées quelque soit la nature des signaux x, y et z sous réserve que les quantités manipulées sont bien définies.
+— Commutativité : x ∗ y = y ∗ x — Associativité : x ∗ (y ∗ z) = (x ∗ y) ∗ z — Distributivité : x ∗ (y + z) = (x ∗ y) + (x ∗ z) — Élément neutre (cas continu) : distribution de Dirac δ0 = δ : δ ∗ y = y.
+— Élément neutre (cas discret) : fonction de Kronecker δ[k] : δ ∗ y = y.
+— Translation : x(t − τ) = (x ∗ δτ)(t) — Dérivation (éventuellement au sens des distributions) : d
+dt (x ∗
+y) = dx
+dt ∗ y = x ∗ dy
+dt
+— Support (éventuellement au sens des distributions) : supp(x ∗ y) ⊂ supp(x) + supp(y). — Intercorrélation : γxy = x ∗ y ̄ avec y ̄(t) = y∗(−t).
+2.3 notion de système
+2.3.1 Définition
+Un système est défini comme une application y = S(x) de l’espace des signaux d’entrée x vers celui des signaux de sortie y. Les espaces considérés sont typiquement les espaces Lp pour des signaux continus et `p pour des signaux discrets. Un système est représenté symboliquement par le schéma "boîte noire" de la figure 5.
+Entrée x Système S Sortie y
+Figure 5 – Représentation d’un système.
+Un système modélise des transformations subies par un signal. Il peut s’agir de l’altération d’un signal physique (signal audio, onde électromagnétique) lors de sa transmission à travers un milieu de propagation, mais aussi d’un traitement visant à améliorer le contenu du signal (débruitage d’un enregistrement sonore, déconvolution pour retirer le flou dans une image). Dans ce cours, on ne considère que les systèmes mono entrée - mono sortie.
+
+
+2.3 notion de système 31
+2.3.2 Propriétés des systèmes
+Définition 2.5 (Homogénéité). Un système est dit homogène en entrée/sortie, si l’entrée et la sortie sont des signaux de même nature (continue ou discrète).
+Définition 2.6 (Linéarité). Un système S est linéaire si pour toute combinaison linéaire
+x = a1 x1 + a2 x2, a1, a2 ∈ R,
+on a
+S(x) = a1 S(x1) + a2 S(x2).
+Ainsi, le signal de sortie S(x) s’exprime comme la superposition des signaux S(x1) et S(x2) avec les mêmes poids a1 et a2 que dans la décomposition x = a1 x1 + a2 x2.
+Remarque. Les systèmes physiques sont très rarement linéaires. Un modèle S est une équation qui représente le comportement attendu d’un phénomène conformément aux lois de la physique. On procède souvent à une linéarisation autour d’un point dit de fonctionnement (ou point d’équilibre) du système pour aboutir à un modèle linéaire.
+Les définitions qui suivent sont données dans le cas de signaux à temps continu. Des définitions identiques s’appliquent aux signaux à temps discret. On rappelle que (δτ ∗ x)(t) = x(t − τ) est un décalage dans le temps du signal x(t), aussi appelé translation. Pour τ > 0, le signal δτ ∗ x est une version retardée de x(t).
+Définition 2.7 (Invariance par translation). Un système S est dit invariant par translation si pour toute entrée x et pour tout τ ∈ R,
+S(δτ ∗ x) = (S(x)) ∗ δτ. (54)
+Autrement dit, la sortie du filtre associée au signal retardé coïncide avec la version retardée du signal de sortie S(x), avec le même retard.
+Définition 2.8 (Filtre linéaire homogène). Un filtre linéaire est un système qui vérifie les deux propriétés de linéarité et d’invariance par translation.
+La convolution y = h ∗ x est un cas important de filtrage linéaire, où h (appelé réponse impulsionnelle) caractérise le filtre. On peut vérifier à partir des propriétés du produit de convolution (section 2.2.4),
+
+
+32 systèmes linéaires invariants
+que ce système est linéaire (trivial) et invariant par translation, car la sortie associée à un signal retardé s’écrit :
+h ∗ (δτ ∗ x) = (h ∗ x) ∗ δτ.
+Deux exemples remarquables s’obtiennent dans les cas où h = δτ (système à retard) et h = 1R+ (intégrateur).
+Exemple 2.3.
+— Retard : y = δτ ∗ x ou y = δ[ · − n] ∗ x :
+y(t) = x(t − τ), ou y[k] = x[k − n]. (55)
+— Intégrateur : y = 1R+ ∗ x ou y = 1N ∗ x :
+y(t) =
+∫t
+−∞ x(τ)dτ, ou y[k] =
+k
+∑
+n=−∞
+x[n] (56)
+Définition 2.9 (Système causal). Un système est causal si sa réponse à un instant donné ne dépend que des valeurs de l’entrée aux instants précédents (éventuellement de la valeur à l’instant présent).
+Exemple 2.4. L’intégrateur défini en (56) est un système causal. En revanche, le calcul de la moyenne dans un intervalle centré
+y(t) = 1
+2T
+∫ t+T
+t−T
+x(θ)dθ (57)
+n’est pas causal, car il faut connaître la valeur de l’entrée x(θ) pour θ > t.
+Si la causalité semble naturelle pour des systèmes physiques (l’effet ne précède pas à la cause), il faut envisager l’existence de systèmes non causaux dans le cas de traitement en temps différé (offline). Par exemple, lorsque la totalité d’un signal a été enregistré ou stocké dans une mémoire tampon, on peut effectuer a posteriori des calculs de moyenne comme (57) sur une fenêtre centrée autour d’un instant t.
+La stabilité d’un système peut être caractérisée de diverses manières. Nous retenons la définition au sens Entrée Bornée, Sortie Bornée (EBSB).
+Définition 2.10 (Stabilité Entrée Bornée, Sortie Bornée). Le système S est stable si pour toute entrée x ∈ L∞(R), S(x) ∈ L∞(R).
+
+
+2.4 filtres linéaires convolutifs 33
+2.4 filtres linéaires convolutifs
+Comme nous l’avons vu, un filtre linéaire est un système linéaire et invariant (SLI), que nous supposons homogène en entrée/sortie. On s’intéresse aux filtres définis par une convolution.
+2.4.1 Définition
+Définition 2.11 (Réponse impulsionnelle). Soit S un filtre linéaire dont la relation entrée-sortie est associée à une convolution :
+y = S(x) = h ∗ x, (58)
+(sous réserve que h ∗ x soit bien défini). Le signal h est appelé réponse impulsionnelle du filtre. C’est possiblement une distribution.
+Comme la distribution de Dirac δ = δ0 (contexte continu) ou la fonction de Kronecker δ[k] (contexte discret) est l’élément neutre de la convolution, on a
+h = S(δ), (59)
+D’où le nom de réponse impulsionnelle : h est la réponse du filtre à une impulsion (de Dirac ou de Kronecker suivant le contexte).
+Interprétations du calcul
+Prenons l’exemple d’un système discret et d’une entrée impulsionnelle (x[k] = δ[k]). La sortie y[k] = h[k] s’identifie avec la réponse impulsionnelle, comme le montre la figure 6.
+y[k ]
+S.L.I.
+-1 0 1 2 3 4
+k
+u[k] = d[k]
+K
+K
+1 u[k]
+-1 0 1 2 3 4
+k
+y[k] = h[k]
+K
+K
+1
+Figure 6 – Réponse impulsionnelle d’un SLI
+Considérons maintenant une entrée quelconque x[k]. En connaissant la réponse impulsionnelle, la sortie
+y[k] = (h ∗ x)[k] = n∈∑Z
+x[n] h[k − n]
+s’obtient comme combinaison linéaire des versions retardées de h (les signaux k 7→ h[k − n]) pondérées par les amplitudes des impulsions x[n]. Comme le produit de convolution est commutatif, on a aussi
+y[k] = n∈∑Z
+h[n] x[k − n]
+
+
+34 systèmes linéaires invariants
+h[n] peut-être interprétée comme une séquence de pondération : le terme h[n] pondère la valeur de l’entrée passée de n instants (c’est-àdire x[k − n]) pour contribuer au calcul de y à l’instant k.
+Stabilité
+La stabilité EBSB du filtre est garantie si
+h ∈ L1(R) (cas continu)
+h ∈ `1(Z) (cas discret)
+En effet, d’après le théorème 2.1, ces conditions impliquent que si x est borné (x ∈ L∞(R), respectivement `∞(Z)), alors h ∗ x est borné.
+Causalité
+En écrivant la définition de la convolution (ici dans le cas continu) :
+y(t) = (h ∗ x)(t) =
+∫
+R
+h(θ)x(t − θ)dθ
+il apparaît que le filtre est causal si et seulement si h(t) = 0 pour t < 0 (respectivement h[k] = 0 pour k < 0), c’est-à-dire
+supp(h) ⊂ R+ (cas continu)
+supp(h) ⊂ N (cas discret)
+La relation entrée-sortie s’écrit alors
+y(t) =
+∫
+R+
+h(θ)x(t − θ) dθ =
+∫
+]−∞,t]
+h(t − θ)x(θ) dθ.
+et prend la forme
+y(t) =
+∫
+[0,t]
+h(θ)x(t − θ) dθ =
+∫
+[0,T]
+h(t − θ)x(θ) dθ.
+si x(t) est nulle pour t < 0. Des expressions similaires s’obtiennent dans le cas discret.
+Remarque. Pour un système discret stable, h[n] tend vers 0 quand |n| tend vers l’infini : une valeur de l’entrée passée très éloignée de l’instant k contribue peu à la valeur de la sortie à cet instant.
+2.4.2 Filtres à réponse impulsionnelle finie (FIR)
+Définition 2.12. On appelle filtre FIR (Finite Impulse Response) un filtre dont le support de la réponse impulsionnelle est fini.
+
+
+2.4 filtres linéaires convolutifs 35
+Exemple 2.5 (Filtre dérivateur). Ce filtre réalise la différence entre deux points consécutifs, d’où son nom de dérivateur. La sortie y du filtre est :
+y[k] = x[k] − x[k − 1] (60)
+En identifiant cette équation avec
+y[k] = ∑
+k∈Z
+h[n]x[k − n]
+on obtient la réponse impulsionnelle :
+h[n] =
+
+
+
+1 si n = 0, −1 si n = 1, 0 sinon.
+0
+1
+-1 2 3 4
+k
+h[k ]
+K
+K
+1
+-1
+Figure 7 – Réponse impulsionnelle d’un filtre dérivateur.
+Exemple 2.6 (Filtre à moyenne glissante). Ce filtre calcule la valeurs du signal sur une fenêtre de 2K + 1 points centrée sur le point suivant :
+y[k] = 1
+2K + 1
+K
+∑
+n=−K
+x[k − n] (61)
+Le filtre n’est pas causal car y[k] dépend d’entrées postérieures à l’instant k. En identifiant (61) avec (h ∗ x)[k], il vient :
+h[n] =
+{ 1 si |n| ≤ K, 0 sinon.
+-1 0 1 2
+k
+h[k ]
+-K K
+1
+K
+Figure 8 – Réponse impulsionnelle d’un filtre moyenneur.
+
+
+36 systèmes linéaires invariants
+2.4.3 Filtre à réponse impulsionnelle infinie (IIR)
+Définition 2.13. On appelle filtre IIR (Infinite Impulse response) un filtre dont la réponse impulsionnelle est à support infini.
+-1 0 1 2
+k
+h[k ]
+K
+K
+Figure 9 – Réponse impulsionnelle d’un filtre IIR causal.
+Exemple 2.7. Lissage exponentiel causal La figure 9 montre la réponse impulsionnelle d’un filtre pour lequel h[n] = αn avec 0 < α < 1. La relation entrée-sortie s’écrit :
+y[k] =
+∞
+∑
+n=0
+αnx[k − n] (62)
+2.4.4 Équations aux différences
+La relation entrée/sortie d’un filtre peut-être décrite par une convolution, mais aussi par une équation récursive entre les sorties à différents instants. Prenons une équation aux dérivées ordinaires du type :
+y(t) − α1y′(t) − ... − αpy(p)(t) = β0x(t) + ..... + βmx(m)(t), t ∈ R+
+(avec p conditions initiales à t = 0). Sa discrétisation par la méthode de différences finies conduit à une équation du type :
+y[k] =
+p
+∑
+i=1
+ai y[k − i] +
+m
+∑
+j=0
+bjx[k − j] (63)
+où les paramètres ai et bj sont indépendants de k. Cette équation est appelée équation aux différences finies d’ordre p.
+Comme la réponse impulsionnelle h coïncide avec la sortie du filtre pour l’entrée x[k] = δ[k], il vient
+∀k > m, h[k] =
+p
+∑
+i=1
+aih[k − i] (64)
+∀k ∈ {0, . . . , m}, h[k] =
+p
+∑
+i=1
+aih[k − i] + bk. (65)
+
+
+2.5 fonctions propres 37
+En supposant le système causal, ces équations permettent de déduire h en résolvant un système linéaire.
+2.5 fonctions propres
+En dimension finie, les valeurs et vecteurs propres d’une application linéaire, donnent des informations capitales sur son action sur un vecteur. Le théorème suivant montre que tous les systèmes linéaires invariants stables admettent les signaux exponentiels complexes comme fonctions propres, i.e., telles que la sortie du filtre pour ces fonctions soit proportionnelle à l’entrée.
+Théorème 2.3. Les exponentielles complexes définies par
+e f (t) = exp(i2π f t)
+sont fonctions propres des systèmes linéaires invariants stables. Si le système admet une réponse impulsionnelle h ∈ L1, les valeurs propres correspondantes sont données par la transformée de Fourier de h, appelée réponse fréquentielle :
+H(f ) =
+∫
+R
+h(t) exp(−i2π f t)dt (66)
+Théorème 2.4. Les exponentielles complexes discrètes définies par
+eν[k] = exp(i2πνk)
+sont fonctions propres des systèmes linéaires invariants discrets stables. Si le système admet une réponse impulsionnelle h ∈ `1, les valeurs propres correspondantes sont données par la transformée de Fourier à temps discret de h :
+H(ν) = ∑
+k∈Z
+h[k] exp(−i2πνk) (67)
+Démonstration. (Cas continu) Soit τ ∈ R. On remarque que e f ∗ δ−τ = exp(i2π f τ)e f . Par invariance temporelle et linéarité de S, on a donc :
+S(e f ) ∗ δ−τ = S(e f ∗ δ−τ) = exp(i2π f τ)S(e f ).
+On en déduit que
+∀τ, S(e f )(0 + τ) = exp(i2π f τ) S(e f )(0)
+c’est-à-dire S(e f ) = S(e f )(0) e f . Donc e f est une fonction propre de S. Dans le cas où S admet une réponse impulsionnelle h ∈ L1, la valeur propre associée est donnée par :
+S(e f )(0) = (e f ∗ h)(0) =
+∫
+R h(t) exp(−i2π f t)dt
+
+
+38 systèmes linéaires invariants
+On remarquera que dans le cas discret, les signaux eν et eν+n sont identiques pour n ∈ Z, et que H(ν) est périodique de période 1.
+Pour aller plus loin...
+La réponse fréquentielle d’un filtre peut être mesurée en faisant agir le filtre sur une exponentielle complexe, et en mesurant le facteur selon lequel elle a été amplifiée ou atténuée, et déphasée. C’est en pratique impossible, une exponentielle complexe ayant un support infini, en particulier vers les temps négatifs. Cependant, dans le cas d’un filtre stable (et causal) de réponse impulsionnelle h ∈ L1, la réponse à une exponentielle complexe limitée aux temps positifs e f 1R+ tend vers la réponse à l’exponentielle complexe e f quand t tend vers l’infini. En effet, la différence entre les deux réponses est donnée par :
+S(e f )(t) − S(e f 1R+ )(t) = S(e f 1R− )(t) =
+∫
+R e f (t − τ)h(τ)1]t,+∞[(τ)dτ
+qui tend vers 0 quand t → +∞ par convergence dominée. On peut donc mesurer la réponse fréquentielle en introduisant une exponentielle complexe à partir de t = 0 dans le système, et en attendant l’extinction du régime transitoire.
+2.6 conclusion
+Les liens entre systèmes linéaires invariants et transformée de Fourier ont une importance capitale en traitement du signal : ils justifient l’analyse fréquentielle des systèmes (par exemple, tracé de diagrammes de Bode, qui n’est rien d’autre que la détermination des valeurs propres d’un système). En effet, la connaissance de la réponse fréquentielle H( f ) d’un système permet, par transformée de Fourier inverse, de reconstituer sa réponse impulsionnelle, et donc de prédire son action sur n’importe quel signal d’entrée. Le chapitre 3 rappelle les propriétés importantes de la transformée de Fourier utiles à l’analyse des systèmes linéaires invariants. Cependant, en temps continu, le lien entre réponse impulsionnelle et réponse fréquentielle n’est donné ici que quand la réponse impulsionnelle est une fonction intégrable. Or, de nombreux filtres admettent comme réponse impulsionnelle une distribution (comme le cas élémentaire des retards, dont la réponse impulsionnelle est une distribution de Dirac translatée). L’extension de la transformée de Fourier aux distributions tempérées, permettant l’analyse fréquentielle de ces systèmes, est également introduite dans le chapitre 3.
+
+
+3
+TRANSFORMÉES DE FOURIER
+Dans ce chapitre, nous introduisons les transformées de Fourier, des transformées linéaires appliquées à des signaux à temps continu et temps discret. Cet outil permet de représenter les signaux dans le domaine fréquentiel. Par exemple, le contenu de signaux audio s’interprète aisément si les signaux sont exprimés dans le domaine fréquentiel. De plus, la représentation fréquentielle simplifie certains traitements. En particulier, une convolution dans le domaine temporel se traduit par un simple produit dans le domaine fréquentiel.
+Le principe de l’analyse fréquentielle d’un signal est de rechercher une décomposition du type
+x(t) =
+∫
+R
+X( f ) exp(2iπ f t) d f (68)
+qu’on peut interpréter comme une décomposition du signal x sur l’espace des signaux exponentiels e f : t 7→ exp(2iπ f t). (68) généralise au cas de signaux non périodiques la décomposition en série de Fourier, bien connue dans le cas de signaux périodiques.
+Organisation du chapitre
+On présentera successivement les quatre transformées de Fourier :
+— La transformée de Fourier à temps continu, pour un signal x(t) à temps continu, de support infini. — La décomposition en série de Fourier, pour un signal à temps continu et de support compact (ou pour un signal périodique). — La transformée de Fourier à temps discret, pour un signal x[k] à temps discret et de support infini. — La transformée de Fourier discrète, pour un signal à temps discret de support fini, représenté comme un vecteur x ∈ CN.
+On présentera enfin des applications de ces résultats en traitement du signal dans le cadre du filtrage linéaire et de l’analyse spectrale.
+
+
+40 transformées de fourier
+3.1 transformée de fourier à temps continu
+La transformé de Fourier (TF) d’un signal x : R → C, t 7→ x(t) est la fonction F x : R → C définie 1 par :
+∀ f ∈ R, F x( f ) =
+∫
+R
+e−i2π f t x(t)dt (69)
+De même, la transformé de Fourier conjuguée d’un signal x est la fonction F ∗x : R → C définie par :
+∀ f ∈ R, F ∗x( f ) =
+∫
+R
+ei2π f t x(t)dt (70)
+Le module |F x( f )| est le plus souvent utilisé pour donner une représentation graphique de la transformée de Fourier, appelée spectre du signal x. Cependant, deux signaux peuvent avoir une TF de même module en étant sensiblement différents dans le domaine temporel.
+Notations. F x( f ) doit être compris comme (F x)( f ). S’il est nécessaire d’expliciter la dépendance de x par rapport à t, on utilisera F {x(t)} ( f ). On utilisera très souvent la notation courte X := F x. Ainsi,
+∀ f ∈ R, X( f ) =
+∫
+R
+e−i2π f t x(t)dt (71)
+Nous commençons par définir la transformée de Fourier dans L1(R), avant d’aborder les extensions à l’espace L2(R) et à l’espace S′(R) des distributions tempérées. Le lecteur est redirigé vers le polycopié de CIP pour les preuves des théorèmes.
+3.1.1 Transformée de Fourier des signaux dans L1
+La définition de la TF est la plus simple pour x ∈ L1(R), car l’intégrale (69) est définie en tout point f . Notons que pour f = 0, on a :
+X(0) =
+∫
+R
+x(t)dt. (72)
+Notons également que si x est à valeurs réelle, alors X est à symétrie hermitienne : ∀ f , X(− f ) = X∗( f ).
+Théorème 3.1. Soit x ∈ L1. Sa transformée de Fourier satisfait — X ∈ L∞ ; — X ∈ C0 ; — (Riemann-Lebesgue) lim
+| f |→∞ X( f ) = 0.
+— Si x ∈ L1 et supp(x) est borné, alors X ∈ C∞(R)
+1. On trouve parfois la définition alternative : X(ω) = √12π
+∫
+R exp(−iωt) x(t)dt.
+
+
+3.1 transformée de fourier à temps continu 41
+−5 −4 −3 −2 −1 0 1 2 3 4 5
+0
+0.5
+1
+t
+−5 −4 −3 −2 −1 0 1 2 3 4 5
+−1
+0
+1
+2
+f
+Figure 10 – Fenêtre rectangulaire de largeur 1 et sa TF. La TF est un sinus cardinal qui s’annule pour f ∈ Z\{0}.
+D’après le théorème précédent, la TF d’un signal dans L1 est continue et bornée. En revanche, X n’est pas nécessairement dans L1, comme le montre l’exemple ci-dessous.
+Exemple 3.1 (Fenêtre rectangulaire). Soit le signal x = 1[− T
+2,T
+2 ]. On
+calcule
+X( f ) =
+∫
+[− T
+2,T
+2 ] e−i2π f t dt = T sinc(Tπ f ) (73)
+où la fonction sinus cardinal est définie par
+sinc(θ) :=
+{ sin(θ)
+θ si θ 6= 0
+1 si θ = 0 (74)
+La TF de la fenêtre rectangulaire paire est donc à valeurs réelles, mais n’est pas dans L1(R). Elle s’annule pour f = k
+T , k ∈ Z∗. La valeur en zéro coïncide avec son intégrale, cf. (72), égale à T.
+Propriétés
+Les principales propriétés de la TF sont listées dans le tableau 1 et démontrées en annexe. On retiendra que la TF d’un signal dilaté est la version contractée de la TF du signal de départ, avec le même facteur de dilatation/contraction (α, 1/α). On retiendra aussi que que la TF d’un produit de convolution est égale au produit simple des TF. Inversement, la TF d’un produit de fonctions est égale au produit de convolution de leurs TF. Un cas d’application important de ce résultat est le suivant : la TF d’un signal retardé est égale à la version modulée de la TF du signal de départ (et inversement). Ces résultats se déduisent de ceux sur la TF du produit de convolution et du pro
+
+
+42 transformées de fourier
+Table 1 – Propriétés de la transformée de Fourier, avec e f0 (t) = exp(i2π f0t).
+z(t) Z( f )
+Linéarité (αx + βy)(t) αX( f ) + βY( f )
+Dilatation / Contraction x(αt) 1
+|α| X
+(f
+α
+)
+Dualité de la TF (F X)(t) X(− f )
+Produit x(t) y(t) (X ∗ Y)( f ) Convolution (x ∗ y)(t) X( f ) Y( f )
+Retard x(t − τ0) e−τ0 ( f ) X( f ) Modulation e f0 (t) x(t) X( f − f0)
+Dérivée x(n)(t) (i2π f )nX( f ) Produit par tn tnx(t) F x(n)( f )/(−i2π)n
+duit, en notant que x(t − τ0) = (δτ0 ∗ x)(t). Les TF de δτ0 et e f0 sont données dans le tableau 2.
+Une propriété fondamentale est que la transformée de Fourier conjuguée F ∗ est l’opérateur inverse de la transformé de Fourier.
+Théorème 3.2. Si x ∈ L1(R) et F x ∈ L1(R), alors on a F ∗F x(t) = x(t) presque partout.
+La transformée de Fourier inverse s’écrit donc :
+x(t) =
+∫
+R
+e2iπ f t X( f ) d f . (75)
+3.1.2 Transformée de Fourier des signaux dans L2
+La transformée de Fourier se prolonge en une isométrie de L2(R) dans L2(R).
+Définition 3.1. Soit x ∈ L2(R). On pose xn = x1[−n,n] pour n ∈ Z. La TF de x est la limite dans L2 :
+X=
+L2
+nli→m∞ Xn (76)
+de la suite Xn des transformées de Fourier (dans L1) des fonctions xn. La transformée de Fourier conjuguée se prolonge de façon similaire.
+Le lecteur est redirigé vers le cours de CIP pour de plus amples détails. Les principales propriétés sont énoncées ci-dessous.
+
+
+3.1 transformée de fourier à temps continu 43
+Théorème 3.3 (Plancherel-Parseval). La TF est une isométrie de L2(R) dans L2(R). Elle préserve la norme et le produit scalaire : — ∀x ∈ L2(R), ‖X‖ = ‖x‖.
+— ∀x, y ∈ L2(R), (X, Y) = (x, y).
+La première propriété s’interprète comme la conservation de l’énergie (Ex = ‖x‖2 = EX) quelque soit la représentation, temporelle ou fréquentielle, choisie pour le signal.
+Théorème 3.4 (Transformée de Fourier inverse). Pour tout x ∈ L2(R), F F ∗x = F ∗F x = x presque partout.
+3.1.3 Transformée de Fourier dans S′
+Les propriétés de la TF sur l’espace de Schwartz S (R) sont à la base de la généralisation de la TF aux distributions. Tout d’abord, notons que S (R) ⊂ L2(R) ∩ L1(R). De plus, contrairement à D(R), S (R) est stable par transformée de Fourier (cf. polycopié du cours de CIP).
+Lemme 3.1. ∀φ ∈ S(R), F φ ∈ S(R).
+C’est la raison pour laquelle on se place dans l’espace des distributions tempérées T ∈ S′(R) pour généraliser la TF.
+Définition 3.2. Soit T ∈ S′(R). La transformée de Fourier de T est la distribution tempérée F T ∈ S′(R) définie par :
+∀φ ∈ S(R), 〈F {T} , φ〉 = 〈T, F φ〉 . (77)
+L’espace E ′(R) des distributions à support compact étant inclus dans S′(R), la définition précédente est encore valable pour T ∈ E ′(R).
+Remarque. L’expression (77) est une généralisation du lemme suivant aux distributions.
+Lemme 3.2. Si x et φ ∈ S (R), alors F x φ et φF x ∈ L1(R), et
+∫
+R
+Fx φ =
+∫
+R
+xF φ.
+〈F {T} , φ〉 dans (77) joue le rôle de ∫
+R F x φ ici.
+Appliquons maintenant la définition au calcul de la TF de la distribution de Dirac.
+Exemple 3.2 (TF d’un Dirac). Soit f0 ∈ R. Pour φ ∈ S (R),
+〈F δf0, φ
+〉=〈
+δf0, F φ
+〉 = (F φ)( f0) =
+∫
+R
+e−i2π f0t φ(t)dt = 〈e− f0, φ〉.
+
+
+44 transformées de fourier
+−4 −3 −2 −1 0 1 2 3 4
+0
+0.5
+1
+t
+magnitude
+−4 −3 −2 −1 0 1 2 3 4
+−2
+0
+2
+t
+phase
+−4 −3 −2 −1 0 1 2 3 4
+0
+0.5
+1
+f
+Fx
+Figure 11 – Fonction e f0 (t) = exp(2iπ f0t) pour f0 = 1 : variations temporelles de l’amplitude et de la phase, tracé de sa TF.
+On a donc
+F δf0 = e− f0 , (78)
+En particulier, pour f0 = 0,
+F δ = 1R. (79)
+Théorème 3.5 (Transformée de Fourier inverse). La TF est un isomorphisme de S′(R) dans lui-même, et la transformée de Fourier inverse F −1 = F ∗ est la distribution définie par :
+∀φ ∈ S(R), 〈F ∗ {T} , φ〉 = 〈T, F ∗ φ〉 .
+Exemple 3.3 (TF de l’exponentielle complexe). Soit f0 ∈ R. En réitérant le calcul de l’exemple précédent pour la TF inverse, on trouve F ∗δf0 = e f0 , d’où
+F e f0 = F F ∗δf0 = δf0 . (80)
+Il en découle que les TF des distributions associés aux signaux trigonométriques sont données par
+F {cos(2π f0t)} = F
+{ e f0 + e− f0
+2
+}
+= δ− f0 + δf0
+2
+F {sin(2π f0t)} = F
+{ e f0 − e− f0
+2i
+}
+= δ− f0 − δf0
+2i .
+
+
+3.1 transformée de fourier à temps continu 45
+−4 −3 −2 −1 0 1 2 3 4
+−1
+0
+1
+t
+−4 −3 −2 −1 0 1 2 3 4
+0
+0.2
+0.4
+0.6
+f
+Figure 12 – Fonction cos(2π f0t) pour f0 = 1 : représentations temporelle et fréquentielle.
+−4 −3 −2 −1 0 1 2 3 4
+0
+1
+2
+t
+−4 −3 −2 −1 0 1 2 3 4
+0
+1
+2
+f
+Figure 13 – Peigne de Dirac : représentations temporelle T et fréquentielle 1
+T1
+T pour T = 1
+2.
+Nous avons en particulier pour f0 = 0 :
+F 1R = δ0 = δ.
+Le calcul de la TF d’un peigne de Dirac repose sur le lemme suivant.
+Lemme 3.3 (Formule sommatoire de Poisson). Pour φ ∈ S (R) et T > 0, on a
+1
+T∑
+k∈Z
+φ
+(k
+T
+)
+=∑
+k∈Z
+F φ(kT). (81)
+Théorème 3.6 (TF d’un peigne de Dirac). Soit T > 0. Alors le peigne de Dirac T vérifie T ∈ S′(R). De plus, on a :
+F T= 1
+T1
+T (82)
+
+
+46 transformées de fourier
+Démonstration. En appliquant (81) aux fonctions test φ, on a :
+∀φ ∈ S(R), 1
+T〈 1
+T , φ〉 = 1
+T∑
+k∈Z
+φ
+(k
+T
+)
+=∑
+k∈Z
+(F φ)(kT)
+= 〈 T , F φ〉
+= 〈F T , φ〉.
+d’où l’égalité (82).
+3.1.4 Quelques exemples classiques
+Les résultats les plus classiques sont récapitulés dans le tableau 2. On détaille maintenant le calcul très classique de la TF d’une fonction triangle. Soit
+4[−T,T](t) =
+(
+1 − |t|
+T
+)
+1[−T,T](t) (83)
+la fonction "triangle" centrée en 0, d’amplitude 1 et de support [−T, T]. Comme
+4[−T,T] = 1
+T
+(
+1[− T
+2,T
+2 ] ∗ 1[− T
+2,T
+2]
+)
+, (84)
+on déduit de la propriété sur la TF du produit de convolution et de (73) que
+F 4[−T,T]( f ) = T sinc2 (Tπ f ) . (85)
+−4 −3 −2 −1 0 1 2 3 4
+0
+0.5
+1
+t
+−4 −3 −2 −1 0 1 2 3 4
+0
+0.2
+0.4
+0.6
+f
+Figure 14 – Fonction 4[−T,T] pour T = 1 : représentations temporelle
+et fréquentielle.
+
+
+3.2 décomposition en série de fourier 47
+Table 2 – Transformées de Fourier usuelles. On note la symétrie des expressions (lignes 1-2, 3-4, 5-6, 7-8) du fait de la propriété de dualité de la TF : (F F x)(t) = x(−t).
+x(t) X( f )
+1[−T,T](t) 2T sinc(2πT f )
+sinc(2π f0t) 1
+2 f0
+1[− f0, f0]
+1R δ
+δ 1R
+e f0 δf0
+δτ0 e−τ0
+cos(2π f0t) δ− f0 + δf0
+2
+sin(2π f0t) δ− f0 − δf0
+2i
+T1
+T1
+T 1 σ
+√2π exp(− t2
+2σ2 ) exp(−2σ2π2 f 2)
+3.2 décomposition en série de fourier
+3.2.1 Signaux à support limité
+Le théorème de décomposition en série de Fourier est énoncé pour des signaux à support limité, dans l’intervalle [0, T]. L’espace L2([0, T]) est muni du produit scalaire (x , y) = 1
+T
+∫
+[0,T] xy∗ dλ.
+Théorème 3.7. Tout signal x ∈ L2([0, T]) est décomposable dans la base hilbertienne de L2([0, T]) formée par les fonctions :
+ek : [0, T] → C
+t 7→ exp
+(
+2iπ kt
+T
+)
+La décomposition s’écrit
+x= ∑
+k∈Z
+ck ek (86)
+où
+ck = (x , ek) = 1
+T
+∫T
+0
+exp
+(
+−i2π kt
+T
+)
+x(t) dt. (87)
+On a de plus l’égalité de Parseval :
+‖x‖2
+L2(0,T) = 1
+T
+∫
+[0,T]
+|x(t)|2 dt = ∑
+k∈Z
+|ck|2 . (88)
+
+
+48 transformées de fourier
+La série (86) converge dans dans L2. Sous certaines hypothèses, on a des propriétés de convergence simple et uniforme.
+Théorème 3.8 (Dirichlet). Si x est C1 par morceaux, alors (86) est valable en tout point t où x est continue. Si x est de plus continue, la convergence de la série de Fourier vers x est uniforme.
+3.2.2 Signaux périodiques
+On définit la transformée de Fourier de signaux périodiques au sens des distributions. Considérons un signal T-périodique x et son motif période xT := x1[0,T]. On peut alors écrire ∀t, x(t) = ∑k∈Z xT(t − kT), ou encore
+x =xT ∗ T. (89)
+On suppose que xT ∈ L1(0, T), de telle sorte que XT ∈ C0(R). D’après le théorème 3.6, la transformée de Fourier de x s’écrit :
+X = F {xT ∗ T} = XT
+1
+T1
+T.
+On a donc
+X= ∑
+k∈Z
+ck δ k
+T (90)
+où
+ck = 1
+T XT
+(k
+T
+)
+=1
+T
+∫T
+0
+exp
+(
+−i2π kt
+T
+)
+x(t) dt (91)
+sont égaux aux coefficients de Fourier de xT définis en (87).
+On retiendra qu’une fonction périodique possède un spectre de raies conformément à (90). Inversement, on montre dans la prochaine section que la transformée de Fourier d’un signal à temps discret est périodique.
+3.3 transformée de fourier à temps discret
+La transformée de Fourier d’un signal à temps discret (TFTD) x : Z → C est définie par
+∀ν ∈ R, F x(ν) = X(ν) = ∑
+k∈Z
+x[k] e−i2πνk (92)
+De même que dans le cas continu, on utilise X := F x, et la notation F {x [k]} (ν) lorsqu’il est nécessaire d’expliciter la dépendance de x par rapport à k.
+
+
+3.3 transformée de fourier à temps discret 49
+La transformée de Fourier à temps discret est un signal
+X: R → C
+ν 7→ X(ν)
+périodique de période 1. La variable ν est appelée fréquence réduite.
+3.3.1 Transformée de signaux dans `1
+Les propriétés de la TFTD dans le cas de signaux dans `1(Z) sont analogues à celles de la TF pour les signaux L1.
+Théorème 3.9. Soit x ∈ `1. La TFTD satisfait — X ∈ `∞ ; — X ∈ C0.
+Nous avons également, à partir de la définition, que
+X(0) = ∑
+k∈Z
+x [k] . (93)
+Exemple 3.4 (Fenêtre rectangulaire). Considérons la fenêtre (discrète) rectangulaire de largeur 2N + 1 donnée par
+1[−N,N][k] =
+N
+∑
+n=−N
+δ[k − n]
+La TFTD s’écrit :
+F
+{
+1[−N,N]
+}
+(ν) =
+N
+∑
+k=−N
+e−i2πkν =
+{ sin(π(2N+1)ν)
+sin(πν) si ν 6= 0
+2N + 1 si ν = 0.
+−8 −6 −4 −2 0 2 4 6 8
+0
+0.5
+1
+k
+1[−4,4] [k]
+−2 −1.5 −1 −0.5 0 0.5 1 1.5 2
+0
+24
+6
+180
+ν
+F 1[−4,4](ν)
+Figure 15 – Fenêtre rectangulaire discrète 1[−N,N] : représentations temporelle et fréquentielle (en module). Comme pour tout signal discret, la TFTD est 1-périodique.
+
+
+50 transformées de fourier
+Table 3 – Propriétés de la transformée de Fourier à temps discret. z[k] Z(ν)
+Linéarité αx[k] + βy[k] αX(ν) + βY(ν) Dualité F {X(ν)} [k] X(−ν)
+Retard x[k − k0] e−i2πνk0 X(ν) Modulation ei2πν0kx[k] X(ν − ν0)
+Produit x[k] y[k] (X ~ Y)(ν) Convolution (x ∗ y)[k] X(ν) Y(ν)
+On remarque que le sinus cardinal obtenu dans le cas continu, cf. (73) est remplacé ici par un rapport de sinus.
+3.3.2 Transformée des signaux dans `2
+Théorème 3.10. L’opérateur F défini par (92) est une isométrie bijective de `2(Z) dans L2([0, 1]), ce qui se traduit par la conservation du produit scalaire et de l’énergie (égalité de Parseval) :
+∀x, y ∈ `2(Z), ∑
+k∈Z
+x[k] y∗[k] =
+∫
+[0,1]
+X(ν)Y∗(ν) dν
+∀x ∈ `2(Z), ∑
+k∈Z
+|x[k]|2 =
+∫
+[0,1]
+|X(ν)|2 dν.
+La transformation inverse est donnée par
+x[k] =
+∫
+[0,1[
+X(ν) e2iπkν dν (94)
+Remarque. (92) n’est rien d’autre que la décomposition en série de Fourier de la fonction (1-périodique) X = F x. Les coefficients de cette décomposition s’expriment comme les produits scalaires de X avec les signaux exponentiels complexes, voir (94). X étant 1-périodique, son énergie est définie comme une intégrale sur une période, comme [0, 1].
+Les principales propriétés de la TFTD sont résumées dans le tableau 3. De même que pour la TF de signaux continus, la TFTD d’une convolution est le produit des TFTD de chaque signal discret. Inversement, la TFTD d’un produit est le produit de convolution circulaire des TFTD. X et Y étant des fonctions 1-périodiques, la convolution circulaire ~ est définie par :
+∀ν ∈ R, (X ~ Y)(ν) =
+∫
+[0,1[
+X(θ) Y(ν − θ) dθ. (95)
+
+
+3.4 transformée de fourier discrète 51
+Table 4 – Récapitulatif des transformées de Fourier de signaux à temps discret.
+x[k] X(ν)
+1[−N,N][k] sin(π(2N+1)ν)
+sin(πν) exp(i2πν0k) ∑k∈Z δk+ν0 δ[k] 1R(ν) ∑n∞=−∞ δ[k − nN] 1
+N1
+N
+cos(2πν0k) 1
+2 ∑k∈Z(δk−ν0 + δk+ν0 )
+sin(2πν0k) 1
+2i ∑k∈Z(δk−ν0 + δk+ν0 )
+−8 −6 −4 −2 0 2 4 6 8
+0
+0.5
+1
+k
+magnitude
+−8 −6 −4 −2 0 2 4 6 8
+−202
+k
+phase
+−2 −1.5 −1 −0.5 0 0.5 1 1.5 2
+0
+0.5
+1
+nu
+Fx
+Figure 16 – Exponentielle complexe exp(2iπν0k) : représentations temporelle (amplitude et phase) et fréquentielle pour ν0 = 0, 25. La TFTD est 1-périodique.
+3.3.3 Quelques exemples classiques
+Le tableau 4 récapitule des exemples classiques de résultats de transformée de Fourier. Certains signaux considérés comme les exponentielles complexes, ne se trouvent ni dans `1 ni dans `2. Dans ce cas, leur TFTD est calculée au sens des distributions.
+3.4 transformée de fourier discrète
+La transformée de Fourier discrète (à ne pas confondre avec la TFTD) est un outil très utile en pratique pour le traitement numérique du signal. Contrairement à la TFTD, elle s’applique à un signal discret de longueur finie, représenté par un vecteur x = {x[0], . . . , x[N − 1]} ∈ CN.
+
+
+52 transformées de fourier
+Définition 3.3 (Transformée de Fourier Discrète). La Transformée de Fourier Discrète (TFD) est l’application linéaire
+CN → CN
+x 7→ X = FNx
+où FN ∈ CN×N est la matrice définie par
+FN[n, k] = e−i2π nk
+N (96)
+pour n et k ∈ {0, . . . , N − 1}.
+La TFD permet de définir une représentation fréquentielle X[n], n ∈ {0, . . . , N − 1} du signal x avec
+X[n] =
+N−1
+∑
+k=0
+FN[n, k] x[k]
+=
+N−1
+∑
+k=0
+e−i2π` kn
+N x[k]. (97)
+On note que FN est une matrice symétrique de Vandermonde, dont l’inverse est égale (à un facteur multiplicatif près) à sa conjuguée.
+Théorème 3.11 (TFD inverse). La Transformée inverse de la TFD est l’opération linéaire x = F−1
+N X, où
+F−1
+N =1
+N F∗
+N. (98)
+Ainsi, la TFD inverse prend la forme
+x[k] = 1
+N
+N−1
+∑
+n=0
+ei2π nk
+N X[n] (99)
+pour k ∈ {0, . . . , N − 1}.
+Remarque. (99) s’interprète comme la décomposition de x dans la base
+orthogonale formée par les signaux exponentiels complexes de fréquence
+n
+N , notés en = {exp(2iπ nk
+N ), k = 0, . . . , N − 1} :
+x=
+N−1
+∑
+n=0
+(1
+N X[n]
+)
+en (100)
+Le théorème de Parseval garantit la conservation de l’énergie (à un facteur multiplicatif près).
+Théorème 3.12 (Parseval). Pour x ∈ CN, on a ‖FNx‖22 = N ‖x‖22.
+
+
+3.5 application au filtrage linéaire 53
+Démonstration.
+‖FNx‖22 = (FNx)∗(FNx) = x∗F∗
+NFNx = x∗(NI)x = N‖x‖22.
+Notons que les calculs de produit matrice-vecteur FNx et F−1
+NX
+coûtent en principe de l’ordre de N2 opérations élémentaires (additions et multiplications). Cependant, on dispose d’algorithmes rapides (appelés FFT, pour Fast Fourier Transform) permettant d’effectuer ces calculs en O(N log(N)) opérations, en exploitant la structure particulière de la matrice FN.
+3.5 application au filtrage linéaire
+3.5.1 Filtrage dans le domaine de Fourier
+Considérons un filtre convolutionnel de réponse impulsionnelle h. La relation entrée-sortie s’écrit y(t) = (h ∗ x)(t) ou y[k] = (h ∗ x)[k]. Cette relation est simplifiée dans le domaine fréquentiel car la TF (TFTD) d’un produit de convolution est le produit des TF (TFTD).
+Filtres à temps continu
+Définition 3.4 (Réponse fréquentielle). La relation entrée-sortie d’un filtre s’écrit dans le domaine fréquentiel sous la forme :
+∀ f ∈ R, Y( f ) = H( f ) X( f ) (101)
+où H( f ) = (F h)( f ) est appelée réponse fréquentielle ou fonction de transfert.
+Les exponentielles complexes e f sont fonctions propres des filtres (cf. section 2.5). La sortie associée s’écrit :
+y = H( f ) e f . (102)
+Le module et la phase de H( f ) s’interprètent comme le gain en amplitude et le déphasage subis par le signal e f au passage dans le filtre.
+Exemple 3.5. Un filtre passe-bas idéal est caractérisé par la réponse fréquentielle H( f ) = 1[− fc, fc]( f ) en notant fc la fréquence de coupure. Il a pour effet de couper les hautes fréquences correspondant aux discontinuités (sauts des valeurs du signal) et au bruit contenu dans le signal d’entrée. Il lisse ce signal. D’après le tableau 2, sa réponse impulsionnelle s’écrit h(t) = 2 fc sinc(2π fct).
+Le filtre n’est ni causal, ni à réponse impulsionnelle finie, d’où son nom de passe-bas idéal. En pratique, on a recours à des techniques de fenêtrage
+
+
+54 transformées de fourier
+-1
+0
+1
+h[n]
+-10 -5 0 5 10 Time (Samples)
+-2 -1 0 1 2 Frequency)
+0
+1
+2
+|H( )|
+0
+0.05
+0.1
+h[n]
+-10 -5 0 5 10 Time (samples)
+-0.5 0 0.5 Frequency
+0
+0.5
+1
+|H( )|
+Figure 17 – Réponses impulsionnelle et fréquentielle des filtres dérivateur (gauche) et à moyenne glissante (droite).
+pour concevoir un filtre causal et stable dont la réponse fréquentielle soit une bonne approximation de 1[− fc, fc].
+Filtres à temps discret
+Définition 3.5. La relation entrée-sortie d’un filtre à temps discret s’écrit dans le domaine fréquentiel sous la forme :
+∀ν, Y(ν) = H(ν) X(ν) (103)
+où H(ν) = (F h)(ν) est la réponse fréquentielle. Les TFTD étant périodiques, elle sont calculées sur un intervalle de longueur 1 (généralement, pour ν ∈ [0, 1[ ou ν ∈ [− 1
+2, 1
+2 [).
+Exemple 3.6. Le filtre dérivateur est défini par y[n] = x[n] − x[n − 1]. Sa réponse impulsionnelle s’écrit
+h[k] = δ[k] − δ[k − 1] (104)
+(cf. paragraphe 2.4.2). Le support de h est donc réduit à {0, 1}. La réponse fréquentielle du filtre s’écrit :
+H(ν) = h[0] + h[1] exp(−2iπν)
+= 1 − exp(−2iπν)
+= 2i exp(−iπν) sin(πν). (105)
+C’est un filtre passe-haut car H(0) = 0 et les valeurs maximales de |H(ν)| sont atteintes pour |ν| = 1/2.
+Exemple 3.7. Le filtre à moyenne glissante est défini par
+y[n] = 1
+2L + 1
+L
+∑
+k=−L
+x[n − k].
+
+
+3.5 application au filtrage linéaire 55
+On montre que sa réponse fréquentielle s’écrit
+H(ν) = sin(2π(2L + 1))
+(2L + 1) sin(πν)
+C’est un filtre passe bas.
+Équations aux différences
+Certains filtres IIR sont caractérisés par des équations aux différences du type :
+∀k, y[k] =
+p
+∑
+`=1
+a` y[k − `] + x[k] (106)
+où p est l’ordre du filtre. On a donc l’égalité des signaux :
+y=
+p
+∑
+`=1
+a` y[ · − `] + x.
+La réponse impulsionnelle du filtre étant de support infini, son calcul n’est pas direct. En revanche, la réponse fréquentielle H(ν) se calcule très simplement. On applique la propriété de la TFTD de signaux retardés (tableau 3) :
+∀ν, Y(ν) =
+p
+∑
+`=1
+a` e−2iπ`ν Y(ν) + X(ν). (107)
+Par identification avec (103), on déduit que :
+∀ν, H(ν) = 1
+1 − ∑p
+`=1 a` e−2iπ`ν . (108)
+3.5.2 Calcul numérique de la réponse fréquentielle d’un filtre FIR
+Considérons un filtre FIR causal, et notons p la taille de la réponse impulsionnelle. La relation entrée-sortie s’écrit
+y[n] =
+p−1
+∑
+k=0
+h[k] x[n − k]
+Le support de h étant fini, on a recours à la TFD pour calculer la réponse fréquentielle H(ν), renotée (F h)(ν) pour éviter les confusions. La TFD opère sur le vecteur h = {h[k], k = 0, . . . , p − 1} ∈ Cp. Le vecteur H = FPh obtenu (cf. (97)) coïncide avec l’évaluation de (F h)(ν) pour des fréquences multiples de 1
+p:
+∀n ∈ {0, . . . , p − 1}, H[n] = (F h)
+(n
+p
+)
+(109)
+
+
+56 transformées de fourier
+Figure 18 – Calcul de la réponse fréquentielle d’un filtre FIR. A droite, la TFTD (F h)(ν) est représentée en trait continu, et son évaluation (pour 4 et 20 points fréquentiels, respectivement) par TFD est en rouge. Le bourrage de zéros (figures du bas) améliore la représentation fréquentielle.
+Le pas de la grille fréquentielle (égal à l’espacement entre deux points sur cette grille) est donc 1/p.
+La technique de bourrage de zéros (ou zero-padding) consiste à rajouter artificiellement des 0 dans le vecteur h afin d’améliorer la représentation fréquentielle. Notons h′ = {h, 0M−p} ∈ CM le vecteur formé en ajoutant M − p zéros à la fin du vecteur h (avec M > p). La TFD H′ = FMh′ évalue la réponse fréquentielle sur la grille de pas 1/M :
+∀n ∈ {0, . . . , M − 1}, H′[n] = (F h)
+(n
+M
+)
+. (110)
+Pour pouvoir calculer la représentation fréquentielle de la sortie y = h ∗ x du filtre associée à une entrée x par la formule (103), on veillera à calculer la TFTD X(ν) sur la même grille que la grille de calcul de (F h)(ν), c’est-à-dire sur une grille de pas 1/M en suivant (110).
+
+
+3.6 analyse spectrale 57
+0 2 4 6 8 10
+−4
+−2
+0
+2
+4
+t
+Figure 19 – Fenêtrage rectangulaire : x(t) = s(t) 1[a,b](t). Le signal
+observé x est tracé en vert.
+3.6 analyse spectrale
+Le problème de l’analyse spectrale consiste à décomposer un signal comme une somme de sinusoïdes. C’est un problème très classique rencontré dans différents domaines allant de l’analyse du son à la localisation radar, à l’analyse de la lumière émise par un corps céleste en astrophysique. La transformée de Fourier est l’outil naturel pour effectuer cette décomposition.
+3.6.1 Effet du fenêtrage
+En pratique, le signal x(t) qu’on cherche à analyser a été observé pendant une durée finie, par exemple pour t ∈ [− T
+2, T
+2
+]. On peut donc le modéliser comme le produit d’un signal idéal stationnaire s(t), correspondant à un horizon infini, par une fenêtre rectangulaire :
+x(t) = s(t) 1[− T
+2,T
+2 ](t) (111)
+On déduit des propriétés de la TF que :
+X = S ∗ F 1[− T
+2,T
+2]
+= S ∗ {T sinc(πT f )}. (112)
+Prenons l’exemple du signal sinusoïdal s(t) = cos(2π f0t), dont la TF est égale à 1
+2 (δf0 + δ− f0 ). (112) se réécrit :
+∀ f, X( f ) = T
+2 (sinc(πT ( f − f0) ) + sinc(πT ( f + f0) )) (113)
+Graphiquement, les impulsions de Dirac (aussi appelées raies) en f = ± f0 sont remplacées par des sinus cardinaux, toujours centrés en ± f0. Leurs lobes primaires et secondaires sont représentés sur la figure 20.
+
+
+58 transformées de fourier
+−4 −3 −2 −1 0 1 2 3 4
+−1
+0
+1
+t
+−4 −3 −2 −1 0 1 2 3 4
+−1
+0
+1
+2
+3
+f
+Figure 20 – Sinusoïde avec fenêtrage rectangulaire : représentations temporelle et fréquentielle.
+3.6.2 Notion de résolution
+La résolution spectrale est la capacité à distinguer des sinusoïdes proches. Dans le cas d’une fenêtre rectangulaire, elle est égale à la largeur du lobe principal du motif T sinc(πT f ). Elle vaut 2/T car sinc(πT f ) s’annule en f = ± 1
+T . La résolution est donc d’autant meilleure que la durée d’observation est longue. De plus, l’amplitude des lobes secondaires décroît relativement lentement (en 1/ f ). Dans le cas d’un signal plus complexe qu’une simple sinusoïde, la présence de lobes multiples et leur superposition constitue une difficulté pour distinguer des fréquences proches. On peut atténuer, dans une certaine mesure, les effets du fenêtrage rectangulaire en remplaçant (111) par
+∀t ∈ R, x(t) = s(t) w[− T
+2,T
+2 ](t) (114)
+où w[− T
+2,T
+2 ](t) est la fenêtre triangulaire 4[−T/2,T/2] définie en (83), ou
+encore une fenêtre de forme plus spécifique, comme celle Hann :
+w[− T
+2,T
+2 ](t) = cos2
+(
+πt T
+)
+1[− T
+2,T
+2 ](t). (115)
+représentée Fig. 21. Ces fenêtres sont de largeur T et conduisent à une décroissance rapide des lobes secondaires (en 1/ f 2 ou 1/ f 3, respectivement) au prix d’une résolution spectrale double (4/T), voir Fig. 22.
+3.6.3 Calcul numérique avec la TFD
+Pour un signal discret quelconque s[k], le principe du fenêtrage reste valable. Le signal fenêtré s’exprime par :
+∀k ∈ Z, x[k] = s[k] w{0,...,N−1}(k) (116)
+
+
+3.6 analyse spectrale 59
+−4 −2 0 2 4
+0
+0.5
+1
+t
+−4 −2 0 2 4
+0
+0.5
+1
+f
+Figure 21 – Fenêtre de Hann : représentations temporelle et fréquentielle (en module).
+−4 −3 −2 −1 0 1 2 3 4
+−1
+0
+1
+2
+f
+3fenetres
+Figure 22 – Effets de fenêtrage sur une sinusoïde : fenêtrages rectangulaire (bleu), triangulaire (noir), de Hann (jaune).
+où w{0,...,N−1} est une version discrète des fenêtres précédentes (rectangulaire, triangulaire ou Hann) de longueur N. Après fenêtrage, on dispose d’un vecteur x = {x[k], k = 0, . . . , N − 1} de longueur N. La technique du bourrage de zéros introduite dans la section 3.5.2 consiste à rajouter artificiellement M − N zéros à ce vecteur, pour M > N. La TFD du vecteur x augmenté fournit une évaluation X ∈ CM de F x(ν) sur la grille fréquentielle
+νn = n
+M , n = 0, . . . , M − 1
+de pas 1
+M . En localisant la position, l’amplitude et la phase des maxima locaux de |X[n]|, on déduit les paramètres des sinusoïdes contenues dans le signal de départ s[k]. L’intérêt de la technique de bourrage de zéros est illustrée sur la Fig. 23 dans le cas où M = 2N. On observe un gain notable de précision pour localiser la fréquence de la sinusoïde discrète.
+
+
+60 transformées de fourier
+Figure 23 – Représentations fréquentielles d’un signal discret de longueur N = 10. A droite, la TFTD X(ν) est représentée en trait continu. Son évaluation par TFD est en rouge. Le calcul est fait pour N points fréquentiels (figures du haut). Pour un calcul avec M points fréquentiels (M > N), on procède à un bourrage de zéros en ajoutant M − N zéros au signal x[k] (M = 25 pour les figures du bas).
+3.7 conclusion
+La transformée de Fourier est un outil fondamental permettant d’analyser des signaux stationnaires. De nombreux signaux ne sont pas stationnaires, on a alors recours à des outils plus sophistiqués comme la transformée de Fourier à court terme ou la transformée en ondelettes. Enfin, la TF joue un rôle majeur dans la compréhension de l’échantillonnage de signaux continus. Cette opération est nécessaire pour la transmission, le stockage et la reconstruction des signaux temporels et sera détaillée au prochain chapitre.
+annexe
+Les propriétés sont présentées pour les TF de fonctions dans L1.
+
+
+3.7 conclusion 61
+Linéarité. Soit z = αx + βy.
+Z( f ) =
+∫
+R
+e−i2π f t(αx(t) + βy(t)) dt
+=α
+∫
+R
+e−i2π f tx(t)dt + β
+∫
+R
+e−i2π f ty(t)dt
+= αX( f ) + βY( f )
+Dilatation. Soit z(t) = x(αt).
+Z( f ) =
+∫
+R
+e−i2π f tx(αt)dt
+=
+∫
+R
+e−i2π f θ
+α x(θ) 1
+|α| dθ
+=1
+|α| X
+(f
+α
+)
+.
+Dualité de la TF. La transformée de Fourier inverse est donnée par x(t) = ∫
+R ei2πtη X(η)dη, nous avons donc
+x(− f ) =
+∫
+R
+e−i2π f η X(η)dη = F {X} ( f )
+Produit de convolution. Soit z = x ∗ y.
+Z( f ) =
+∫
+R
+e−i2π f t
+∫
+R
+x(θ)y(t − θ)dθdt
+=
+∫
+R
+∫
+R
+e−i2π f tx(θ)y(t − θ)dθdt
+=
+∫
+R
+∫
+R
+e−i2π f (t−θ)e−i2π f θ x(θ)y(t − θ)dθdt
+=
+∫
+R
+e−i2π f θ x(θ)
+∫
+R
+e−i2π f (t−θ)y(t − θ)dtdθ
+=
+∫
+R
+e−i2π f θ x(θ)
+∫
+R
+e−i2π f τy(τ)dτdθ
+=
+∫
+R
+e−i2π f θ x(θ)dθ
+∫
+R
+e−i2π f τy(τ)dτ
+= X( f ) Y( f ).
+Produit. Soit z = xy.
+Z( f ) =
+∫
+R
+e−i2π f tx(t)y(t)dt
+=
+∫
+R
+e−i2π f t
+(∫
+R
+ei2πtηF x(η)dη
+)
+y(t)dt
+=
+∫
+R
+(∫
+R
+e−i2π( f −η)ty(t)dt
+)
+F x(η)dη
+=
+∫
+R
+F y( f − η)F x(η)dη
+= (X ∗ Y)( f ) (F y ∗ F x) ( f )
+
+
+62 transformées de fourier
+Retard. Soit z(t) = x(t − τ). On peut effectuer le calcul :
+Z( f ) =
+∫
+R
+e−i2π f tx(t − τ)dt
+=
+∫
+R
+e−i2π f (θ+τ)x(θ)dθ
+= e−i2π f τ
+∫
+R
+e−i2π f θ x(θ)dθ
+= e−τ( f ) X( f ).
+On arrive au même résultat de façon plus directe en notant que z = δτ ∗ x, et en exploitant le résultat sur la TF du produit de convolution :
+Z( f ) = (F δτ)( f )X( f ) = e−τ( f ) X( f )
+Modulation / Translation en fréquence.
+F (ef0 x)( f ) =
+∫
+R
+e−i2π f t (
+ei2π f0tx(t)
+)
+dt
+=
+∫
+R
+e−i2π( f − f0)tx(t)dt
+= X( f − f0).
+On arrive directement au résultat en exploitant le résultat sur la TF du produit de convolution :
+F (ef0 x) = (F ef0) ∗ X = δf0 ∗ X.
+Dérivée. La TF existe si limt→∞ x(t) = 0. Une intégration par parties conduit à :
+F
+{x′} ( f ) =
+∫
+R
+e−i2π f tx′(t)dt
+= ali→m∞
+(
+e−i2π f ax(a) − ei2π f ax(−a)
+)
++
+∫
+R
+(2iπ f e−i2π f t) x(t) dt
+= (2iπ f ) X( f ).
+Par récurrence on conclut que
+F
+{
+x(n)}
+( f ) = (i2π f )nX( f ).
+Multiplication par tn. La dérivée de la TF est
+X′( f ) = d
+df
+∫
+R
+e−i2π f tx(t)dt
+= (−i2π) d
+df
+∫
+R
+e−i2π f ttx(t)dt
+= (−i2π)F {tx(t)} ( f )
+Nous avons donc F {tx(t)} ( f ) = 1
+(−i2π) X( f ). La propriété
+F {tnx(t)} ( f ) = 1
+(−i2π)n X( f )
+se déduit par récurrence.
+
+
+4
+ECHANTILLONNAGE
+L’application d’un traitement numérique à un signal provenant du monde réel, à temps continu, nécessite que le signal soit représenté sous forme discrète, i.e., une suite de nombres (réels ou complexes), qu’il est possible de stocker dans la mémoire d’un calculateur. La notion de discrétisation a déjà été abordée dans les cours de mathématiques : — en CIP, l’existence de bases orthogonales des espaces de Hilbert séparables, par exemple l’isomorphisme entre les fonctions L2 sur [0, 1] et les suites `2(Z) donné par la série de Fourier, — en EDP, discrétisation par éléments finis ou différences finies, où la régularité des fonctions (au sens Ck ou des espaces de Sobolev) permet de montrer la convergence de la discrétisation vers la fonction approximée. Dans ce cours, la discrétisation des signaux est abordée sous l’angle de l’échantillonnage, qui consiste à répondre à la question suivante : sous quelles conditions est-il possible de reconstituer un signal à temps continu x(t) à partir de ses valeurs xn à certains temps tn ? Nous verrons dans le cas d’un échantillonnage uniforme qu’une condition suffisante pour reconstituer un signal à partir de ses échantillons est que son spectre soit à support compact, et que le signal original peut-être reconstitué de façon simple à partir de ses échantillons.
+4.1 effet de l’échantillonnage
+Définition 4.1 (Echantillonnage). On appelle échantillonnage l’opération qui consiste à construire un signal à temps discret xd[n] à partir d’un signal à temps continu x(t). On se limitera ici à l’échantillonnage uniforme, c’est-à-dire, étant donnée une période d’échantillonnage Te > 0, xd[n] = x(nTe). (117)
+On définit également la fréquence d’échantillonage fe = 1/Te.
+Il est évidemment nécessaire que le signal x soit continu, sans quoi l’équation (117) n’aurait pas de sens. On décide de se placer dans le
+
+
+64 echantillonnage
+-2 0 2 Temps [s]
+0
+0.5
+1
+x
+0
+0.5
+1
+x III
+-2 0 2 Temps [s], T e = 0.25s
+0
+0.5
+1
+xd
+-10 -5 0 5 10 Indice n
+-4 -2 0 2 4 Fréquence f [Hz]
+0
+0.5
+|X|
+-4 -2 0 2 4 Fréquence f [Hz], f e = 4.00Hz
+0
+1
+2
+|X III |
+-1 -0.5 0 0.5 1 Fréquence réduite
+0
+1
+2
+|X d|
+Figure 24 – Cas où le critère de Shannon est respecté. Gauche : Signaux continus x et x , et signal discret xd. Droite : leurs spectres. Le spectre X ( f ) est fe périodique, son motif période est X( f ) à un facteur multiplicatif près. De plus, xd étant un signal discret, Xd(ν) est 1-périodique, et le graphe est identique à celui de X ( f ), à un changement d’échelle près.
+cas où x(t) est tel que sa transformée de Fourier est dans L1. On sait en effet que la transformée de Fourier d’une fonction L1 est continue et bornée, et que les transformées de Fourier directe et inverse ont (quasiment) les même propriétés, ce qui assure que x(t) est continu et borné. Dans ce cas, le signal discret xd est dans `∞.
+On définit le signal x par :
+x = n∈∑Z
+x(nTe)δnTe . (118)
+qu’on peut réécrire comme le produit de x(t) et du peigne de Dirac
+Te :
+x = Te x. (119)
+Ce signal modèle permet de faire le lien entre le signal x(t) à temps continu, et le signal xd[n] à temps discret. En effet, on peut relier x à xd par l’équation
+x = n∈∑Z
+xd[n]δnTe . (120)
+La colonne de gauche de la figure 24 donne une représentation de ces trois signaux dans un cas particulier.
+Le théorème suivant relie les spectres de x, x et xd :
+
+
+4.1 effet de l’échantillonnage 65
+-2 0 2 Temps [s]
+0
+0.5
+1
+x
+0
+0.5
+1
+x III
+-2 0 2 Temps [s], T e = 0.50s
+0
+0.5
+1
+xd
+-5 0 5 Indice n
+-4 -2 0 2 4 Fréquence f [Hz]
+0
+0.5
+|X|
+-4 -2 0 2 4 Fréquence f [Hz], f e = 2.00Hz
+1
+1.5
+|X III |
+-2 -1 0 1 2 Fréquence réduite
+1
+1.5
+|X d|
+Figure 25 – Cas où le critère de Shannon n’est pas respecté. Gauche : Signaux continus x et x , et signal discret xd. Droite : leurs spectres. Dans le spectre X ( f ), les copies du spectre X( f ) se superposent et empêchent la reconstruction du signal.
+Théorème 4.1. Soit x(t) un signal tel que sa transformée de Fourier X( f ) soit dans L1, et x et xd définis comme plus haut. La transformée de Fourier X de x est donnée par :
+X ( f ) = fe n∈∑Z
+X ( f − n fe) (121)
+et la transformée de Fourier à temps discret de xd est donnée par :
+Xd(ν) = fe n∈∑Z
+X (ν fe − n fe) (122)
+Les séries convergent au sens L1 sur l’intervalle ]− fe
+2 , fe
+2 [, resp.
+]− 1
+2, 1
+2[
+Démonstration. X est le spectre du produit de Te et de x. C’est donc la convolution des spectres de ces deux signaux. D’après le théorème 3.6 sur la TF d’un peigne de Dirac,
+X (f) =
+(1
+Te
+1 Te
+∗X
+)
+( f ) = fe n∈∑Z
+X( f − n fe).
+Dans L1(] − fe
+2 , fe
+2 [), la suite N →
+N
+n=∑−N
+X( f − n fe) est de Cauchy par le théorème
+de convergence dominée, et convergente par complétude de L1(] − fe
+2 , fe
+2 [).
+La deuxième égalité du théorème s’obtient en calculant la transformée de Fourier de (120) :
+X ( f ) = n∈∑Z
+xd[n]e−i2π f nTe = Xd( f Te),
+en posant ν = f Te = f / fe.
+
+
+66 echantillonnage
+On retiendra de ce théorème que la TF d’un signal échantillonné à la fréquence fe est fe-périodique. Inversement, la TF d’un signal périodique est un spectre de raies (cf. section 3.2).
+interprétation du théorème 4.1 : l’opération d’échantillonnage en temps est équivalente à périodiser le spectre du signal. Il est donc, en général, impossible de reconstituer un signal à partir de ses échantillons, différentes copies du spectre pouvant se superposer et empêcher la reconstruction du spectre original. Ceci est visible sur la figure 25. On remarque cependant que si les versions du spectre décalées de multiples de fe ont des supports disjoints, comme c’est le cas sur la figure 24, il est possible de reconstituer le spectre du signal d’original. Cette observation est formalisée dans la section suivante.
+Pour aller plus loin...
+Le théorème 4.1 est également valable dans le cas où x(t) est tel que sa transformée de Fourier soit une distribution à support compact (par exemple, un signal combinaison linéaire finie de sinusoïdes). En effet, de telles fonctions sont continues (plus précisément, C∞ à croissance au plus polynomiale). De plus, les séries du théorème se réduisent à des sommes finies et ne posent pas de problème de convergence.
+4.2 théorème de shannon
+On montre dans cette partie, que si un signal d’énergie finie est à bande limitée, et qu’il est échantillonné avec une période suffisamment petite, il peut être reconstitué de manière exacte.
+Définition 4.2 (Signal à bande limitée). Un signal à bande limitée est tel que le support de son spectre est inclus dans [−B, B] pour un B fini. On appelle PWB l’ensemble des fonctions L2 dont le support du spectre est inclus dans l’intervalle [−B, B]. PWB est donc l’image réciproque par la transformée de Fourier des fonctions L2 à support dans [−B, B].
+Par exemple, la fonction définie par x(t) = sinc(πt), où on rappelle la définition de sinc donnée par l’équation (74) :
+sinc(θ) :=
+{ sin(θ)
+θ si f 6= 0 1 si f = 0
+vérifie x ∈ PW1
+2 car sa TF vaut X = 1[− 1
+2,1
+2 ]. En utilisant les pro
+priétés de dilatation-contraction de la TF, la fonction définie xB(t) =
+sinc(2πBt) pour B > 0 vérifie xB ∈ PWB car sa TF vaut XB =
+1
+2B 1[−B,B].
+
+
+4.2 théorème de shannon 67
+Les fonctions de PWB vérifient l’hypothèse du théorème 4.1 (en effet, la TF d’une fonction x ∈ L2 est dans L2, de plus toute fonction X ∈ L2 à support compact est L1). Le théorème de Shannon, aussi appelé théorème d’échantillonnage, est un théorème fondamental qui établit les conditions de conservation de l’information contenue dans un signal x(t) à bande limitée lors de son échantillonnage.
+Théorème 4.2 (Théorème de Shannon). Soit x ∈ PWB, et Te = 1/(2B). Alors pour tout t ∈ R :
+x(t) = n∈∑Z
+x(nTe) sinc(π(t − nTe)/Te) (123)
+= n∈∑Z
+xd[n] sinc(π(t − nTe)/Te)
+Remarque. Comme x ∈ PWB implique x ∈ PWB′ avec B′ ≥ B, le théorème est bien évidemment valable pour tout Te ≤ 1/2B.
+critère de shannon : Dans le cas de fonction d’énergie finie et à bande limité dans [−B, B], il est suffisant d’échantillonner à la fréquence
+fe ≥ 2B (critère de Shannon)
+pour reconstruire exactement le signal x(t) à partir de ses échantillons xd[n]. Sans autre information (par ex., trous dans le spectre), cette condition est également nécessaire : un échantillonnage à la fréquence fe ne peut caractériser de façon unique que les signaux à spectre limité dans la bande [− fe/2, fe/2].
+interprétation du théorème de shannon : L’équation (123)
+montre que x(t) peut être interpolé à partir de ses échantillons xd[n]. (123) peut s’interpréter comme la convolution de x et du sinus cardinal sinc(πt/ fe). Le spectre de cette convolution est le spectre de x multiplié par la fenêtre rectangulaire 1[−B,B] (transformée de Fourier du sinus cardinal). Dans la somme (121), et sous la condition que x ∈ PWB,
+— le support du terme X( f ) pour n = 0 est inclus dans le support de la fenêtre, — les supports des termes X( f − n fe) pour n 6= 0 ne s’intersectent pas avec le support de la fenêtre. La formule de reconstruction (123) peut donc être interprétée comme un filtrage des repliements du spectre du signal original introduits par la discrétisation. Les figures 26 et 27 montrent des reconstructions de signaux dans les cas où le critère de Shannon est respecté ou non.
+
+
+68 echantillonnage
+-4 -3 -2 -1 0 1 2 3 4
+-0.5
+0
+0.5
+1
+Signal continu Reconstruction Échantillons Sinus cardinaux
+Figure 26 – Cas où le critère de Shannon est respecté. Reconstruction du signal par la somme (123).
+-4 -3 -2 -1 0 1 2 3 4
+-0.5
+0
+0.5
+1
+Signal continu Reconstruction Échantillons Sinus cardinaux
+Figure 27 – Cas où le critère de Shannon n’est pas respecté. Reconstruction du signal par la somme (123).
+
+
+4.2 théorème de shannon 69
+Le théorème est démontré en deux étapes :
+1. construction d’une base orthogonale de PWB, permettant d’assurer la convergence de (123) dans L2.
+2. analyse de la convergence simple de la série.
+4.2.1 Base orthogonale de PWB
+Lemme 4.1. La famille de fonctions sn pour n ∈ Z définie par
+sn(t) = √1Te
+sin(π(t − nTe)/Te) π(t − nTe)/Te
+. (124)
+est une base orthogonale de PWB. Les coefficients xn d’une fonction x ∈ PWB dans cette base sont donnés par :
+xn = √Tex(nTe), (125)
+et
+x = n∈∑Z
+xnsn (126)
+au sens L2, où Te = 1/(2B).
+Démonstration. La base de Fourier de L2([−B, B]) est donnée par :
+∀n ∈ Z, Sn( f ) = √12B exp
+(
+−i2π n f
+2B
+)
+1[−B,B]( f ).
+La transformée de Fourier étant une isométrie, les transformées de Fourier inverses des Sn forment une base de PWB. Or, les transformées inverses des Sn sont les sn. Les coefficients Xn de X( f ) dans la base des Sn sont les mêmes que les coefficients xn de x dans la base des sn (Parseval). Les coefficients de décomposition de X dans la base de Fourier sont donnés par
+Xn = √12B
+∫
+[−B,B] X( f ) exp
+(
+i2π n f
+2B
+)
+df
+où X = ∑n∈Z XnSn. En interprétation l’intégrale comme la transformée de Fourier inverse de X( f ), évaluée en t = n/(2B) = nTe, on trouve :
+xn = Xn = √Tex(nTe)
+4.2.2 Convergence de la série
+On démontre maintenant la convergence simple de la série. La famille sn étant une base orthogonale, on observe que
+‖xn‖22 = ‖x‖2
+L2 , (127)
+ce qui montre que les coefficients xn sont dans `2. De plus, pour tout t, la suite de terme général sn(t) est de carré intégrable. En interprétant (123) comme le produit scalaire de deux suites de termes xn et sn(t),
+
+
+70 echantillonnage
+on en déduit la convergence de la série par l’inégalité de CauchySchwarz.
+On démontre, de plus, que la somme de la série est continue. Sur l’intervalle t ∈ [−Te, Te] :
+— pour tout t, la suite xnsn(t) est sommable — pour tout n, xnsn(t) est continue
+— pour tout t dans l’intervalle, |xnsn(t)| ≤ |xn| max(1, (π(|n| − 1))−1), sommable comme produit de deux suites de `2.
+On en déduit la continuité de la série sur [−Te, Te]. On peut reprendre cette démonstration sur tout intervalle de la forme [−Te + kTe, Te + kTe] pour démontrer que continuité sur R entier. La somme de la série étant continue, et égale à la fonction continue x(t) au sens L2, la série convergence simplement vers x(t) pour tout t.
+Pour aller plus loin...
+Dans le cas de signaux dont la transformée de Fourier est une distribution à support dans [−B, B] (ce qui assure continuité et croissance au plus polynomiale), le théorème doit être légèrement modifié. La fréquence d’échantillonnage fe = 1/Te doit être strictement plus grande que 2B, et le signal x(t) est reconstruit par la formule
+∀t ∈ R, x(t) = n∈∑Z
+x(nTe)φ(t − nTe) (128)
+où φ est choisie telle que sa transformée de Fourier Φ vérifie les conditions suivantes :
+— Φ ∈ C∞,
+— Φ( f ) = 1/ fe pour | f | ≤ B, — Φ( f ) = 0 pour | f | ≥ fe/2. La série (128) peut être écrite comme la convolution x ∗ φ. Son spectre est donné par
+X ( f )Φ( f ) = fe n∈∑Z
+X ( f − n fe) Φ( f ). (129)
+Les conditions sur les valeurs de Φ et le support de X( f ) permettent de sélectionner uniquement le terme de la série pour n = 0, i.e., de reconstituer exactement X( f ). De plus, la régularité de Φ est nécessaire pour garantir la convergence simple de (128). En effet, les échantillons x(nTe) ne sont plus bornés, mais seulement à croissance au plus polynomiale. La régularité de Φ implique que φ décroît plus vite que tout polynôme, ce qui garantit la convergence de la série.
+4.3 l’échantillonnage en pratique
+4.3.1 Filtre anti-repliement
+Le théorème de Shannon suppose que le signal à échantillonner a un spectre à support compact. Ce n’est évidemment pas toujours le cas en pratique. De plus, même quand le spectre du signal à échantillonner est à support borné, il n’est pas toujours possible d’utiliser une fréquence d’échantillonnage assez élevée.
+
+
+4.4 conclusion 71
+L’échantillonnage est donc toujours précédé par un filtrage passebas du signal, coupant la bande de fréquence au dessus de fe/2. Il est à noter que ce filtre est forcément implémenté sous forme analogique.
+4.3.2 Reconstruction pratique
+Les formules de reconstruction (123) et (128) sont inutilisables en pratique. En effet, la reconstruction de x à un temps t nécessite la connaissance de tous les échantillons x(nTe), y compris ceux situés dans le futur. Le bloquage d’ordre zéro est une technique simple permettant d’approximer le signal à reconstruire. Le signal bloqué x0(t) est le signal en escalier défini par :
+x0(t) = n∈∑Z
+xd[n]1[nTe,(n+1)Te[(t). (130)
+La reconstruction au temps t ne nécessite que la connaissance de l’échantillon à l’instant précédent nTe, où n = bt/Tec. L’effet du bloquage d’ordre zéro sur le spectre peut être étudié en écrivant x0 comme une convolution
+x0 = 1[0,Te[ ∗ x . (131)
+Le spectre de x0 est donc donné par
+X0( f ) = X ( f )
+(
+Tee−iπ f Te sin π f Te
+π f Te
+)
+(132)
+Les effets du blocage d’ordre zéro sont : — l’introduction d’un décalage temporel de durée Te/2 (terme
+e−iπ f Te ),
+— un filtrage du signal dans la bande utile ((sin π f Te)/(π f Te) non constant dans la bande utile), — la présence de repliements du spectre atténués en 1/ f . Les deux derniers effets peuvent être limités par l’utilisation d’un filtrage analogique passe-bas appliqué à x0.
+4.4 conclusion
+La théorie de l’échantillonnage permet de relier les spectres d’un signal continu x(t) et de sa version échantillonnée xd. Nous retiendrons en premier lieu que l’échantillonnage d’un signal avec une période Te se traduit par une périodisation du spectre avec la période fe = 1/Te. De plus, l’information contenue dans x(t) est préservée si le critère de Shannon est satisfait, à savoir fe ≥ 2B où B est la fréquence maximale contenue dans le signal x. Dans ce cas, on peut (théoriquement) reconstruire parfaitement x(t) à partir des valeurs de xd[n], n ∈ Z.
+
+
+72 echantillonnage
+-4 -3 -2 -1 0 1 2 3 4 Temps t [s]
+-0.5
+0
+0.5
+1
+Signal continu Reconstruction par blocage Échantillons
+-10 -5 0 5 10 Fréquence f [Hz]
+0
+0.2
+0.4
+0.6
+|X(f)|
+Signal continu Reconstruction par blocage
+Figure 28 – Reconstruction par blocage d’ordre 0. Le filtrage du signal et les copies générées par le blocage sont visibles sur le spectre.
+Si le critère de Shannon n’est pas satisfait, on utilise un filtre antirepliement (passe-bas) en amont de l’échantillonnage. Dans ce cas, le signal reconstruit à partir des échantillons est une version approchée du signal x(t), contenant ses composantes basse-fréquences.
+
+
+5
+PROCESSUS ALÉATOIRES
+La théorie des signaux déterministes atteint ses limites pour traiter et modéliser des phénomènes physiques pour lesquels il n’est plus possible d’expliciter les valeurs des signaux pour chaque instant (typiquement à l’aide d’une fonction de R dans R). On utilise alors des processus aléatoires qui sont des modèles probabilistes permettant de caractériser les propriétés statistiques des signaux et de construire des traitements exploitant ces propriétés.
+Prenons l’exemple d’une mesure physique entachée de bruit. Le cadre déterministe ne permet pas de proposer un modèle du bruit qui expliciterait la valeur du signal pour chaque instant. Grâce au processus aléatoire, il est possible de caractériser les propriétés statistiques du bruit et du signal utile afin de réaliser un traitement de débruitage pour réduire l’influence du bruit (un tel traitement sera détaillé à la section 6.4.3 du chapitre 6).
+Considérons un deuxième exemple : en traitement de la parole, deux sons peuvent sembler identiques d’un point de vue auditif alors que les valeurs des deux signaux associés sont très différentes. L’étude des propriétés statistiques de ces signaux permet de classifier les différents sons par exemple dans le cadre d’applications de reconnaissance vocale. A partir de ces propriétés statistiques, il est aussi possible de synthétiser de nouveaux signaux très similaires du point de vue auditif (par exemple pour la synthèse vocale). Ces aspects seront succinctement abordés dans le cadre d’un exemple illustrant la section 6.3.1 du chapitre 6.
+5.1 définition et caractérisation des processus aléa
+toires
+Les processus aléatoires (à temps discrets) sont une généralisation des vecteurs aléatoires afin de construire des modèles de signaux à support infini contrairement aux vecteurs aléatoires, définis à partir de N variables aléatoires scalaires et sont donc de dimension finie.
+
+
+74 processus aléatoires
+5.1.1 Définition
+Dans le cadre de ce cours, nous nous limiterons à l’étude des processus aléatoires à temps discrets.
+Définition 5.1 (processus aléatoire discret). Un processus aléatoire discret noté Xn est une suite de variable aléatoires {Xn(ω)}n∈Z définies sur un espace de probabilité (Ω, F , P ).
+En traitement du signal, l’indice n correspond à la variable d’évolution du signal (par exemple le temps ou l’espace).
+On appelle réalisation 1 du processus Xn, le signal déterministe, noté x[n], construit à partir d’une réalisation de la famille de variables aléatoires {Xn(ω)}n∈Z. Ainsi pour un ω donné, on a :
+∀n ∈ Z, x[n] = Xn(ω)
+Il convient de bien distinguer deux notions complémentaires :
+— d’une part le processus aléatoire qui est une suite de variables aléatoires, pour modéliser les signaux afin d’établir certaines propriétés (par ex. la loi de probabilité, la moyenne, la corrélation...) — d’autre part la (ou les) réalisation(s) du processus qui sont les signaux observés.
+En traitement du signal et en statistique, on utilise les réalisations pour estimer les propriétés du processus aléatoire. La spécificité du traitement du signal est que l’on exploite les propriétés du processus aléatoire pour traiter les signaux observés (les réalisations) afin d’améliorer leur qualité (par ex. suppression de bruit ou déconvolution pour supprimer le flou introduit par un appareil de mesure).
+Remarque. On utilise couramment aussi les termes processus stochastiques ou signaux aléatoires pour désigner les processus aléatoires. La réalisation d’un processus aléatoire est aussi souvent appelée trajectoire ou observation.
+Exemple 5.1. Voici trois exemples de processus avec une représentation de quelques-unes de leurs réalisations — Exemple 1 : Suite de variables i.i.d Xn = An avec An ∼ N (0, σ) et An i.i.d — Exemple 2 : Processus constant à valeur aléatoire Yn = A avec A ∼ N (0, σ) — Exemple 3 : Modulation d’amplitude par des variables aléatoires Zn = A cos(2πν0n) + B sin(2πν0n) où (A, B) ∼ N (000, ΣΣΣ).
+1. En statistique on parle de données plutôt que de réalisations
+
+
+5.1 définition et caractérisation des processus aléatoires 75
+Figure 29 – Exemples de réalisations de processus aléatoires
+Pour aller plus loin...
+Processus aléatoire à temps continu.
+Il existe aussi des processus continus. La définition de processus aléatoire au sens général est la suivante.
+Définition 5.2. Un processus aléatoire X(ω, t) est une application définie par
+X : Ω × T −→ K
+(ω, t) 7−→ X(ω, t),
+où — (Ω, E , P) est un espace probabilisé, — K est un espace topologique ou mesurable (en général un espace vectoriel réel ou complexe normé), — T est un ensemble, et telle que pour tout t ∈ T , l’application partielle
+Ω −→ K ω 7−→ X(ω, t)
+soit une variable aléatoire.
+La variable t est la variable d’évolution du signal, il s’agit en général du temps ou de l’espace. Pour ω0 fixé, X(ω0, t) est une réalisation du processus. C’est un signal qui ne dépend plus que de la variable d’évolution t. Selon l’ensemble défini par T , on obtient un processus discret ou continu : — t ∈ R : processus continu — t ∈ Z : processus discret (on note plutôt X(ω, n) avec n ∈ Z )
+5.1.2 Lois fini-dimensionelles
+Les lois fini-dimensionnelles sont la généralisation pour un processus aléatoire, de la loi de probabilité d’un vecteur aléatoire.
+
+
+76 processus aléatoires
+Définition 5.3 (lois fini-dimensionnelle). Pour tout N > 0, on définit les lois fini-dimensionnelles d’ordre N comme les lois de probabilité jointes définies pour tout (n1, n2, . . . , nN) ∈ ZN par
+P(Xn1 ∈ [a1, b1], Xn2 ∈ [a2, b2], . . . , XnN ∈ [aN, bN])
+Un processus aléatoire est entièrement décrit par l’ensemble de ses lois fini-dimensionnelles. Cependant, il s’agit d’une caractérisation en général très complexe et difficile à expliciter. En pratique, on utilise donc rarement cette caractérisation.
+5.1.3 Processus gaussien
+Définition 5.4 (Processus gaussien). Un processus est gaussien si ses lois fini-dimensionnelles sont normales : ∀N > 0, ∀(n1, n2, · · · , nN) ∈ ZN,
+(Xn1 , Xn2 , . . . , X[nN]) ∼ N (μn1,n2,...,nN , Σn1,n2,...,nN )
+ou de manière équivalente si toute combinaison linéaire finie de Xn est une variable aléatoire gaussienne :
+∀N > 0, ∀(n1, n2, · · · , nN) ∈ ZN, ∀(α1, α2, · · · , αN) ∈ RN,
+∃μ, σ :
+N
+∑
+i=1
+αiXni ∼ N (μ, σ)
+Il est important de remarquer que la gaussianité des lois marginales de chaque échantillon Xn n’est pas suffisante pour assurer que le processus est gaussien. Ainsi on peut construire un processus X non gaussien bien que les variables aléatoires Xn soient gaussiennes pour tout n.
+5.1.4 Moyenne et autocorrélation
+Nous avons vu précédemment que la description complète d’un processus par ses lois fini-dimensionnelles est une tâche assez complexe. C’est pourquoi, on se contente couramment de caractériser partiellement les processus à l’aide de leurs deux premiers moments : la moyenne et l’autocorrélation.
+En pratique cette caractérisation partielle est bien souvent suffisante pour de nombreuses applications. Par exemple, pour caractériser différents phonèmes de parole, l’étude des deux premiers moments du signal permettra de distinguer un son /f/, d’un son /s/.
+
+
+5.1 définition et caractérisation des processus aléatoires 77
+Une deuxième motivation pour s’intéresser à ces deux premiers moments est que dans le cas particulier des processus gaussiens, ils caractérisent entièrement le processus. Il est bien sûr important de noter que dans le cas général, il s’agit d’une caractérisation partielle.
+Définition 5.5 (Moyenne). On définit la moyenne (ou moment d’ordre 1) d’un processus Xn par
+μX[n] = E(Xn)
+μX[n] donne la valeur moyenne du processus à l’instant n (c’est un signal déterministe).
+Définition 5.6 (Autocorrélation). On définit l’autocorrélation (ou moment d’ordre 2) d’un processus Xn par
+rX[n1, n2] = E (Xn1 X∗
+n2
+)
+rX[n1, n2] donne la corrélation du processus entre les instants n1 et n2 (c’est un signal déterministe à deux dimensions). Pour la plupart des processus modélisant des phénomènes physiques, rX[n1, n2] décroît quand |n2 − n1| devient grand. Intuitivement, cela correspond au fait que deux échantillons pris à des instants proches sont en général plus corrélés que deux échantillons très éloignés.
+Définition 5.7 (Intercorrélation). On définit l’intercorrélation entre deux processus Xn et Yn par
+rXY[n1, n2] = E (Xn1Y∗
+n2
+)
+Remarque. On peut remarquer que rXX[n1, n2] = rX[n1, n2], c’est à dire que l’intercorrélation d’un processus avec lui-même correspond à son autocorrélation.
+Définition 5.8 (Décorrélation). Les processus Xn et Yn sont dit décorrélés si
+∀n1, n2, rXY[n1, n2] − μX[n1]μ∗
+Y[n2] = 0,
+ou encore :
+∀n1, n2, E ((Xn1 − μX[n1])(Y∗
+n2 − μ∗
+Y[n2])) = 0.
+Remarque. si Z = X + Y avec X et Y décorrélés et centrés alors :
+rZ[n1, n2] = rX[n1, n2] + rY[n1, n2]
+
+
+78 processus aléatoires
+Pour aller plus loin...
+On peut aussi définir le moment d’ordre 2 centré, dénommé autocovariance : E ((Xn1 − μX [n1])(Yn∗2 − μ∗
+Y[n2])). De la même manière, on définit
+aussi l’intercovariance E ((Xn1 − μX[n1])(Yn∗2 − μ∗
+Y [n2 ])).
+Si Xn et Yn sont centrés, leur auto/inter-covariances coïncident avec leur auto/inter-corrélation.
+5.2 processus stationnaires
+La stationnarité est une propriété extrêmement importante qui permet de nombreuses simplifications calculatoires pour étudier les processus. La stationnarité se traduit par le fait que les propriétés du processus ne changent pas au cours du temps. Un exemple trivial de processus non stationnaire est un processus dont la moyenne μX[n] n’est pas constante en fonction de n.
+5.2.1 Stationnarité stricte
+Définition 5.9 (Stationnarité stricte). Un processus aléatoire est dit strictement stationnaire si les lois fini-dimensionnelles du processus sont invariantes par translation. C’est à dire que, ∀k ∈ Z, ∀N > 0, les vecteurs aléatoires (Xn1, . . . , XnN ) et (Xn1+k, . . . , XnN+k) ont des lois identiques.
+La stationnarité au sens strict est en général difficile à établir et d’un intérêt assez limité 2. C’est pourquoi par la suite, nous nous intéresserons uniquement à la stationnarité au sens large.
+5.2.2 Stationnarité au sens large (SSL)
+Définition 5.10 (Stationnarité au sens large (SSL)). Un processus est dit stationnaire au sens large (SSL) (ou du second ordre ou stationnaire au sens faible) si :
+— la moyenne est constante (elle ne dépend pas du temps) :
+∀n, μX[n] = μX
+— E(|Xn|2) < ∞
+2. elle est souvent surdimensionnée, au sens où une propriété de stationnarité moins forte (la stationnarité au sens large, définie plus loin) est suffisante pour mener à bien la plupart des calculs.
+
+
+5.2 processus stationnaires 79
+— l’autocorrélation ne dépend que l’écart de temps entre les deux instants considérés :
+∀n1, n2 rX[n1, n2] = γX[n1 − n2]
+On peut aussi remarquer que si Xn est SSL, E(|Xn|2) = rX[n, n] est aussi constant. Pour l’autocorrélation d’un processus stationnaire, on utilisera donc la notation simplifiée :
+γX[k] := rX[n + k, n] = E(Xn+kX∗
+n).
+Remarque. En raison de la stationnarité du processus, on peut écrire de manière équivalente
+γX[k] = E(Xn+kX∗
+n) = E(XnX∗
+n−k) = E(Xn+1+kX∗
+n+1) = ...
+De même, l’intercorrélation entre deux processus conjointement stationnaires s’écrit :
+γXY[k] = E(Xn+kY∗
+n ).
+Pour résumer, il convient de distinguer les deux fonctions : — la fonction d’autocorrélation à deux variables (définie pour tous les processus) : rX[n1, n2] = E(Xn1 Xn∗2 ) — la fonction d’autocorrélation à une variable (définie uniquement pour les processus stationnaires) : γX[k] = E(Xn+kXn∗) = rX[n + k, n]
+On supposera dans la suite que tous les processus sont stationnaires au sens large, en particulier cela implique que leur moment d’ordre deux sont finis et on utilisera donc les notations γX et γXY.
+Définition 5.11 (Variance). On définit la variance d’un processus stationnaire Xn par :
+σ2X = E(|Xn − μX|2) = E(|Xn|2) − |μX|2
+Définition 5.12 (Rapport signal-sur-bruit). La rapport signalsur-bruit quantifie la perturbation d’un processus stationnaire Xn = Un + Wn, où Un est le signal utile et Wn le bruit perturbateur. Il est défini par le rapport de variances σ2U/σ2W. Il est le plus souvent exprimé en dB :
+SNRdB = 10 log10
+( σ2U
+σ2W
+)
+. (133)
+
+
+80 processus aléatoires
+Définition 5.13 (Puissance). La puissance d’un processus stationnaire Xn est la valeur de l’autocorrélation en zéro :
+E(|Xn|2) = γX[0] = σ2X + |μX|2
+Propriété. L’autocorrélation d’un processus stationnaire est finie et maximum en zéro :
+∀k ∈ Z, |γX[k]| ≤ γX[0]
+Démonstration. Le résultat est trivial en utilisant l’inégalité de Cauchy-Schwarz avec γX[k] = 〈Xn+k, Xn〉 (en notant 〈 , 〉 le produit scalaire entre variables aléatoires). Par ailleurs, par définition d’un processus stationnaire au sens large, γX[0] est fini.
+Propriété. L’autocorrélation est à symétrie hermitienne :
+∀k ∈ Z, γX[k] = γ∗
+X[−k]
+Démonstration.
+γX[−k] = E(Xn−k Xn∗) = E(X∗
+n−kXn)∗ = γ∗
+X [k].
+5.2.3 Densité spectrale de puissance (DSP)
+Pour de nombreuses applications, il est important de pouvoir caractériser un processus aléatoire dans le domaine fréquentiel. Par exemple, les signaux de télécommunication sont couramment modélisés par des processus aléatoires et il est important de pouvoir quantifier la bande spectrale utilisée par ces signaux pour optimiser les canaux de transmissions.
+L’outil principal qui permet de caractériser fréquentiellement les processus aléatoires stationnaires est la Densité Spectrale de Puissance (DSP).
+Définition 5.14. La Densité Spectrale de Puissance (DSP) d’un processus aléatoire stationnaire Xn est définie par :
+∀ν ∈ R, ΓX(ν) = Nli→m∞ E
+
+
+1
+2N + 1
+∣ ∣ ∣ ∣ ∣
+N
+∑
+k=−N
+Xk e−i2πkν
+∣ ∣ ∣ ∣ ∣
+2
+
+
+
+
+5.2 processus stationnaires 81
+Théorème 5.1 (Wiener-Khinchin). La densité spectrale de puissance d’un processus Xn est la transformée de Fourier de l’autocorrélation du processus :
+∀ν ∈ R, ΓX(ν) = ∑
+k∈Z
+γX [k]e−i2πνk
+Démonstration. Par définition de la DSP :
+ΓX (ν) = Nli→m∞ E
+
+
+1
+2N + 1
+∣ ∣ ∣ ∣ ∣
+N
+∑
+k=−N
+Xk exp(−i2πkν)
+∣ ∣ ∣ ∣ ∣
+2
+
+ (134)
+On écrit :
+ΓXN (ν) = E
+
+
+1
+2N + 1
+∣ ∣ ∣ ∣ ∣
+N
+∑
+k=−N
+Xk exp(−i2πkν)
+∣ ∣ ∣ ∣ ∣
+2
+
+
+=1
+2N + 1E
+(( N
+∑
+k=−N
+Xk exp(−i2πkν)
+)∗ ( N
+∑
+k=−N
+Xk exp(−i2πkν)
+))
+=1
+2N + 1E
+(N
+∑
+k=−N
+N
+n=∑−N
+X∗
+k Xn exp(−i2π(n − k)ν)
+)
+=1
+2N + 1
+N
+∑
+k=−N
+N
+n=∑−N
+E(X∗
+k Xn) exp(−i2π(n − k)ν)
+=1
+2N + 1
+N
+∑
+k=−N
+N
+n=∑−N
+γX[n − k] exp(−i2π(n − k)ν)
+=
+2N
+m=∑−2N
+2N + 1 − |m|
+2N + 1 γX[m] exp(−i2πmν)
+= m∈∑Z
+max
+(
+0, 2N + 1 − |m|
+2N + 1
+)
+γX[m] exp(−i2πmν)
+Dans le cas où γX ∈ L1, on peut borner les termes de la série par |γX[m]| et appliquer le théorème de convergence dominée pour intervertir limite et somme. On trouve :
+ΓX (ν) = Nli→m∞ ΓXN (ν) = m∈∑Z
+γX[m] exp(−i2πmν)
+de plus, ΓX(ν) est continue. Dans le cas où γX n’est pas intégrable, il faut calculer la limite au sens des distributions pour montrer que
+Nli→m∞
+〈
+PXN, φ
+〉
+=
+〈
+m∈∑Z
+γX[m]δm, Φ
+〉
+où est φ une fonction test et Φ sa transformée de Fourier.
+En pratique, on utilise plus fréquemment l’expression de la densité spectrale de puissance donnée par le théorème de Wiener-Khinchin car il est, en général, plus simple de calculer la transformée de Fourier de l’autocorrélation du processus que d’appliquer le passage à la limite et l’espérance à partir de la définition de la DSP.
+
+
+82 processus aléatoires
+Propriété. La densité spectrale de puissance est réelle et positive :
+∀ν, ΓX(ν) ∈ R
+∀ν, ΓX(ν) ≥ 0
+Ces propriétés se déduisent directement de la définition.
+Propriété. La puissance d’un processus est l’intégrale de la densité spectrale de puissance :
+γX[0] =
+∫ 1/2
+−1/2
+ΓX(ν)dν
+Démonstration. D’après le théorème de Wiener-Khinchin, l’autocorrélation est la transformée de Fourier inverse de la DSP :
+γX[n] =
+∫ 1/2
+−1/2
+ΓX (ν)ei2πνn dν
+Pour n = 0 on retrouve l’expression de la puissance.
+Ce résultat justifie la dénomination de densité spectrale de puissance puisqu’en intégrant la densité dans le domaine spectral, on obtient bien la puissance du processus. On peut, bien sûr, intégrer la DSP dans une bande fréquentielle restreinte pour obtenir la puissance du processus dans cette bande de fréquence.
+Méthodologie de calcul
+En pratique, la méthodologie usuelle pour calculer analytiquement la DSP d’un processus aléatoire est la suivante :
+1. Calculer la moyenne μX[n] = E(Xn)
+2. Calculer l’autocorrélation : rX[k1, k2] = E(Xk1 X∗
+k2 )
+3. Vérifier que le processus est SSL — μX[k] = μX, — rX[k1, k2] = γX[k1 − k2]
+4. Vérifier la cohérence des calculs à l’aide des propriétés de γX[k] : — γX[0] ≥ |γX[k]|, — γX[k = γ∗
+X [−k].
+5. Calcul de la densité spectrale de puissance ΓX(ν) = F γX(ν).
+5.2.4 Bruit blanc
+Le bruit blanc est un processus aléatoire couramment utilisé pour modéliser des phénomènes physiques, par exemple pour établir un modèle mathématique du bruit de mesure.
+
+
+5.2 processus stationnaires 83
+Définition 5.15 (bruit blanc au sens large). Un processus Wn est un bruit blanc au sens large de variance σ2 s’il vérifie les propriétés suivantes : — Wn est un processus centré et stationnaire au sens large, — γW [n] = σ2δ[n].
+On dit parfois qu’il s’agit d’un bruit blanc au sens faible.
+Définition 5.16 (bruit blanc au sens strict). Un processus Wn est un bruit blanc au sens strict s’il vérifie les propriétés suivantes : — Wn est un processus stationnaire au sens large, — γW [n] = σ2δ[n],
+— Wn et Wk sont indépendants ∀k 6= n.
+Remarque. Un bruit blanc gaussien est toujours un bruit blanc au sens strict car la décorrélation implique l’indépendance pour les processus gaussiens.
+Propriété. Un bruit blanc au sens large vérifie les propriétés suivantes : — Wn et Wm sont décorrélés pour n 6= m
+— La DSP d’un bruit blanc est constante : ΓW = σ21R
+Le bruit blanc tire son nom de cette dernière propriété par analogie avec la lumière blanche dont le spectre contient toutes les composantes fréquentielles dans les mêmes proportions.
+Exemple 5.2. Soit deux processus : un bruit blanc (à gauche sur la figure 30), et un bruit coloré (à droite). La figure 30 représente les réalisations, les autocorrélations et les DSP de ces processus. — Réalisations : D’un point de vue empirique, en observant une réalisation de chaque processus, on peut remarquer qu’à gauche, pour le bruit blanc, les valeurs successives semblent décorrélées entre elles ; tandis qu’à droite, on remarque une alternance positive/négative des valeurs traduisant une certaine corrélation. Du point de vue théorique, on peut confirmer les commentaires précédents à partir des caractéristiques des processus : — Autocorrélation : l’autocorrélation du bruit blanc est de forme impulsionnelle, tandis que l’autocorrélation du bruit coloré fait ressortir la corrélation positive entre les échantillons espacés d’un nombre de points pair et négative pour les intervalles impairs.
+— Densité Spectrale de Puissance : la DSP du bruit blanc est constante tandis que la DSP du bruit coloré comporte principalement des hautes fréquences ce qui est cohérent avec les variations rapides observées sur la réalisation.
+
+
+84 processus aléatoires
+Figure 30 – Comparaison des caractéristiques de deux processus : un bruit blanc et un bruit coloré
+5.2.5 Filtrage de processus
+Le filtrage de signaux est l’une des principales opérations utilisées en traitement du signal, l’objet de cette section est de déterminer les propriétés d’un processus filtré.
+Formule des interférences
+Figure 31 – Filtrage de deux processus (formule des interférences)
+
+
+5.2 processus stationnaires 85
+Théorème 5.2 (Formule des interférences). Soit :
+— Xn et X′n deux processus aléatoires stationnaires au sens large,
+— h et h′ les réponses impulsionnelles (`1) de deux filtres stables — les processus filtrés Yn et Yn′ sont définis par
+Yn = (h ∗ X)n = ∑
+k∈Z
+h[k]Xn−k
+Y′
+n = (h′ ∗ X′)n = ∑
+k∈Z
+h′[k]X′
+n−k
+Alors : — les processus filtrés Yn et Yn′ sont stationnaires,
+— l’intercorrélation entre Yn et Yn′ est donnée par :
+γYY′ = h ∗  ̄h′ ∗ γXX′
+avec  ̄h′[k] = h′∗[−k].
+Démonstration.
+γYY′ [k] = E(Yn+kYn′∗)
+=E
+
+∑
+i∈Z
+∑
+j∈Z
+h[i]h′∗ [ j]Xn+k−i X′∗
+n−j
+
+
+=∑
+i∈Z
+∑
+j∈Z
+h[i]h′∗ [ j]E(Xn+k−i X′∗
+n−j)
+=∑
+j∈Z
+h′∗[j] ∑
+i∈Z
+h[i]γXX′ [j + k − i]
+=∑
+j∈Z
+h′∗[j]g[j + k] avec g = h ∗ γ
+=∑
+j∈Z
+ ̄h′[−j]g[j + k]
+=∑
+j∈Z
+ ̄h′[j]g[k − j]
+=  ̄h′ ∗ g[k]
+=  ̄h′ ∗ h ∗ γXX′ [k]
+Ce théorème (appelé formule des interférences) est très important car il permet d’exprimer les moments d’ordre 2 des processus filtrés en fonction des réponses impulsionnelles des filtres et des moments des processus d’entrée.
+Ce théorème se décline sur de nombreuses applications pratiques dont quelques cas particuliers sont détaillés ci-dessous.
+
+
+86 processus aléatoires
+Filtrage d’un processus
+Corollary 5.1. Soit
+— Xn un processus stationnaire au sens large, — h la réponse impulsionnelle d’un filtre stable, le processus filtré Yn = h ∗ Xn possède les propriétés suivantes : — l’autocorrélation de Yn est : γY = h ∗  ̄h ∗ γX, — la DSP de Yn est : ΓY(ν) = |H(ν)|2ΓX(ν).
+Démonstration. La démonstration est triviale en utilisant la formule des interférences avec — X′ = X — h′ = h NB. On utilise aussi la propriété de la transformé de Fourier : F  ̄h(ν) = H∗(ν)
+Cette formule est très importante puisqu’elle permet d’expliciter la DSP (et donc l’autocorrélation) du processus filtré en fonction de celle du processus d’entrée.
+Identification d’un filtre
+Il est courant de chercher à identifier la réponse impulsionnelle d’un système linéaire invariant (un filtre) inconnu afin de pouvoir le caractériser. Une méthode consiste à introduire un bruit blanc en entrée du filtre. Il est alors possible de retrouver la réponse impulsionnelle du filtre à partir de l’intercorrélation entre l’entrée et la sortie.
+Corollary 5.2. Soit
+— Wn un bruit blanc, — h la réponse impulsionnelle d’un filtre stable. L’intercorrélation entre le bruit en entrée Wn et le processus filtré Yn = h ∗ Wn est égale à la réponse impulsionnelle du filtre :
+γYW [k] = h[k].
+Démonstration. La démonstration est triviale en utilisant la formule des interférences avec
+— Xn = X′n = Wn
+— h′[n] = δ[n]
+On a alors Yn = (h ∗ W)n et Yn′ = Wn, d’où d’une part γYY′ = γYW . D’autre part d’après la formule des interférences : γYY′ = h ∗  ̄h′ ∗ γXX′ = h ∗ δ ∗ γW = h
+5.2.6 Processus autorégressif (AR)
+Les processus aléatoires autorégressifs sont des modèles très couramment utilisés car ils permettent de modéliser de nombreux phénomènes. On peut par exemple citer la modélisation des phonèmes de parole, l’étude de séries chronologiques aussi variées que des mesures de pollution ou de valeurs financières.
+
+
+5.2 processus stationnaires 87
+Une deuxième raison justifiant l’utilisation des modèles AR est que l’estimation de leurs paramètres est relativement simple comme nous le verrons dans le chapitre 6 portant sur l’estimation.
+Définition
+Définition 5.17. (Processus autorégressif) Un processus autorégressif (AR) d’ordre p est un processus filtré, plus précisément il s’agit d’un bruit blanc filtré par un filtre stable dont la fonction de transfert est donnée par :
+H(ν) = 1
+1 − ∑p
+k=1 ake−i2πkν
+où l’on suppose les ak réels.
+Relation temporelle : équation aux différences finies
+D’après les résultats de la section 3.5.1, on peut définir un processus autorégressif dans le domaine temporel à l’aide de son équation aux différences de la manière suivante.
+Théorème 5.3. Un processus autorégressif Yn d’ordre p s’écrit sous la forme :
+Yn =
+p
+∑
+k=1
+akYn−k + Wn (135)
+où Wn est un bruit blanc.
+Remarque. Pour exprimer la relation entrée-sortie du filtre, on peut utiliser la réponse impulsionnelle du filtre, mais dans ce cas, elle est de durée infinie. Il est donc plus pertinent d’utiliser l’équation aux différences finies qui ne fait intervenir qu’un nombre fini de termes Yn−k (et donc de paramètres) pour décrire le filtre.
+Paramètres d’un modèle AR
+Un processus AR d’ordre p est donc entièrement décrit par les paramètres suivants : — la variance σ2 du bruit blanc générateur Wn, — les p coefficients {ak}1≤k≤p de l’équation aux différences finies.
+DSP d’un modèle AR
+Un processus AR étant un bruit blanc filtré, sa DSP s’exprime aisément à l’aide des relations vues à la section précédente :
+
+
+88 processus aléatoires
+ΓY(ν) = σ2
+∣ ∣ ∣ ∣ ∣
+1
+1 − ∑p
+k=1 ake−i2πkν
+∣ ∣ ∣ ∣ ∣
+2
+Autocorrélation d’un modèle AR
+Propriété. L’autocorrélation d’un processus AR s’écrit :
+∀k ≥ 0, γY[k] =
+p
+∑
+i=1
+aiγY[k − i] + σ2δ[k] (136)
+avec γY[k] = γY[−k] pour k < 0.
+Démonstration.
+γY[k] = E(YnYn−k)
+=E
+(( p
+∑
+i=1
+aiYn−i + Wn
+)
+Yn−k
+)
+=
+p
+∑
+i=1
+aiE (Yn−iYn−k) + E (WnYn−k)
+=
+p
+∑
+i=1
+aiγY[k − i] + σ2δ[k]
+La relation E (WnYn−k) = σ2δ[k] se déduit de l’équation (135) et du fait que Wn
+est un bruit blanc (E(WiWj) = σ2δ[i − j]). En effet, en remarquant que d’après (135), Yn−k ne dépend que des Wi tel que i ≤ n − k, on obtient : — pour k > 0, E (WnYn−k) = 0 ; — pour k = 0,
+E (WnYn−k) = E (WnYn)
+=E
+(
+Wn
+(p
+∑
+i=1
+aiYn−i + Wn
+))
+=
+p
+∑
+i=1
+aiE(WnYn−i) + E(Wn2)
+= 0 + σ2
+Ainsi, si on prend les équations précédentes (136) pour 0 ≤ k ≤ p, on obtient un système linéaire de p + 1 équations qui permet d’estimer les p + 1 paramètres du modèles, à savoir {a1, a2, . . . , ap, σ2} à partir de l’autocorrélation. On reviendra sur ce sujet dans le chapitre suivant. Les équations qui forment ce système linéaire sont appelées équations de Yule-Walker.
+
+
+5.2 processus stationnaires 89
+À retenir du chapitre
+— définition d’un processus aléatoire discret — définition d’un processus gaussien — définition des deux premiers moments : moyenne et autocorrélation — définition de la stationnarité — définition de la densité spectrale de puissance (DSP) — méthode de calcul de la DSP — définition d’un bruit blanc — filtrage de processus : connaître et savoir utiliser la formule des interférences et son expression fréquentielle — définition d’un processus autorégressif : expression temporelle, fréquentielle
+
+
+
+
+6
+E S T I M AT I O N
+Le chapitre précédent a permis de définir un certain nombre d’outils mathématiques permettant de modéliser et caractériser les signaux à l’aide de processus aléatoires. En pratique, on dispose de signaux qui correspondent à des réalisations de ces processus et on souhaite estimer les quantités qui caractérisent les processus. Typiquement, à partir de mesures, on souhaite estimer la moyenne, l’autocorrélation, la DSP ou les paramètres du modèle. L’objet de chapitre est donc principalement de définir les estimateurs de ces grandeurs. Ce chapitre fera donc appel à des concepts communs avec le cours de statistiques. A titre d’exemple, considérons par exemple une application en traitement de la parole, pour laquelle on souhaite identifier la nature des sons élémentaires (appelés phonèmes) afin de réaliser de la reconnaissance automatique ou de la compression. Certains phonèmes comme le /s/ ou le /f/ peuvent être modélisés par un processus aléatoire de type autorégressif (AR). En pratique, on dispose de l’enregistrement d’un signal audio qui correspond à une réalisation du processus AR. L’objectif est d’estimer les paramètres du modèle AR à partir de cette unique réalisation afin d’identifier le type de phonème. Précisons, du point de vue des notations, les différents objets que nous serons amenés à manipuler dans ce chapitre : — un processus aléatoire est noté d’une lettre majuscule avec en indice la variable d’évolution : Xn — le signal correspondant à un réalisation de ce processus est noté avec une lettre minuscule : x[n] — l’estimateur (ou la statistique) est noté avec un chapeau circonflexe : μˆ NB. il s’agit d’une variable (ou d’un processus) aléatoire
+Dans l’ensemble de ce chapitre on ne considérera que les processus à temps discret, stationnaires au sens large et à valeurs réelles.
+
+
+92 estimation
+Pour aller plus loin...
+Dans un cadre plus général, on peut considérer un ensemble de N réalisations, ce qui amène à définir le concept d’échantillons aléatoire et d’échantillons d’observations a. Soit un processus aléatoire Xn(ω), on définit l’échantillon aléatoire de taille N comme le processus aléatoire de dimension N défini par :
+(ω1, ω1, . . . , ωN) 7→ (Xn(ω1), Xn(ω2), . . . , Xn(ωN))
+L’échantillon d’observation (Xn(ω1), Xn(ω2), . . . , Xn(ωN )) est alors noté
+(x(1)[n], x(2)[n], . . . , x(N)[n])
+Dans la plupart des applications en traitement du signal, on ne dispose que d’une réalisation. Dans ce cas l’échantillon aléatoire est identique au processus Xn et l’échantillon d’observation correspond à la réalisation notée x[n].
+a. il s’agit d’une généralisation du concept vu en cours de statistiques pour les variables aléatoires
+6.1 estimateur de la moyenne et de l’autocorrélation
+L’une des difficultés de l’estimation en traitement du signal est liée au fait qu’on ne dispose, en général, que d’une seule réalisation du processus aléatoire. En d’autres termes, il n’est possible de réaliser qu’une seule mesure du signal qui correspond donc à une observation du modèle. Si on fait le parallèle avec une variable aléatoire, cela reviendrait à essayer d’estimer sa moyenne ou sa variance à partir d’une seule réalisation ! C’est pourquoi on ne traitera que le cas des signaux ergodiques pour lesquels on peut remplacer l’estimateur empirique qui réalise la moyenne statistique sur les réalisations par un estimateur utilisant la moyenne temporelle des échantillons du processus. Il est évident qu’une telle approche n’a de sens que pour les signaux stationnaires pour lesquels les grandeurs à estimer ne dépendent pas du temps.
+6.1.1 Estimateur de la moyenne
+Définition 6.1 (Estimateur de la moyenne). L’estimateur temporel de la moyenne à partir de N instants est défini par :
+μˆ XN = 1
+N
+N−1
+∑
+n=0
+Xn.
+Propriété. Cet estimateur n’est pas biaisé.
+On montre en effet aisément que E(μˆ XN) = 1
+N ∑N−1
+n=0 E(Xn) = μX.
+
+
+6.1 estimateur de la moyenne et de l’autocorrélation 93
+Définition 6.2 (Ergodicité d’ordre 1). Le processus stationnaire Xn est dit ergodique d’ordre 1 si l’estimateur temporel de la moyenne converge dans L2 vers le moment d’ordre 1 (i.e., la moyenne) du processus :
+μˆ XN = 1
+N
+N−1
+∑
+n=0
+Xn
+L2
+−−−→
+N→∞ μX
+ou de manière équivalente car l’estimateur n’est pas biaisé :
+Var(μˆ XN) −−−→
+N→∞ 0
+En pratique, on calcule une réalisation de la variable aléatoire μˆ XN à partir d’une unique réalisation x[n] = Xn(ω) d’un processus stationnaire et ergodique Xn. Cette réalisation s’écrit : μˆ XN(ω) = 1
+N ∑N−1
+n=0 x[n]. L’ergodicité du processus permet donc de remplacer l’opérateur de moyenne sur plusieurs réalisations par un opérateur de moyenne temporelle sur les valeurs d’une unique réalisation.
+Exemple 6.1. Soit deux exemples de processus stationnaires, le premier est ergodique tandis que le deuxième ne l’est pas : — un bruit blanc est ergodique à l’ordre 1. En effet
+Var(μˆ XN) = 1
+N2
+N−1
+∑
+n′ =0
+N−1
+∑
+n=0
+E(XnXn′ )
+=1
+N2
+N−1
+∑
+n=0
+E(Xn2) car E(XnXn′ ) = 0, ∀n 6= n′
+= γX[0]
+N
+— le processus aléatoire à valeur aléatoire constante défini par Xn = A avec A ∼ N (0, σ) n’est pas ergodique. En effet :
+Var(μˆ XN) = 1
+N2
+N−1
+∑
+n′ =0
+N−1
+∑
+n=0
+E(XnXn′ )
+=1
+N2
+N−1
+∑
+n′ =0
+N−1
+∑
+n=0
+E(A2)
+= σ2
+6.1.2 Estimateur de l’autocorrélation
+
+
+94 estimation
+Définition 6.3 (Estimateur non biaisé de l’autocorrélation). L’estimateur temporel non biaisé de l’autocorrélation est défini par :
+γˆ N,nb
+X [k] = 1
+N−k
+N−k−1
+∑
+`=0
+X`+k X∗
+` pour 0 ≤ k < N.
+avec de plus γˆ N,nb
+X [k] = γˆ N,nb∗
+X [−k] pour −N < k < 0.
+Propriété. Cet estimateur est non biaisé pour les valeurs de k pour lesquelles il est défini. On montre en effet facilement que E(γˆ N,nb
+X [k]) = γX[k], ∀|k| < N.
+On peut remarquer que cet estimateur fournit une estimation de l’autocorrélation uniquement pour les 2N − 1 valeurs telles que |k| < N.
+Cet estimateur est rarement utilisé car sa variance est très élevée pour les valeurs de k proches de N. En effet, dans le cas extrême k = N − 1, la moyenne ne porte plus que sur une unique valeur (ce qui implique une variance élevée). Par contre, pour k = 0, la moyenne porte sur N valeurs (la variance peut donc être supposée raisonnablement faible si N est suffisamment grand - cf. rappels de statistiques dans la section 1.5.1 du chapitre 1).
+Définition 6.4 (Estimateur biaisé de l’autocorrélation). L’estimateur temporel biaisé de l’autocorrélation est défini par :
+γˆ XN[k] = 1
+N
+N−k−1
+∑
+`=0
+X`X`+k pour 0 ≤ k < N.
+avec de plus γˆ XN[k] = γˆ N∗
+X [−k] pour −N < k < 0.
+La différence avec l’estimateur non biaisé est liée au facteur de normalisation en 1
+N au lieu de 1
+N−|k| .
+Cet estimateur est biaisé puisque :
+E(γˆ XN[k]) = E
+( N − |k|
+N γˆ N,nb
+X [k]
+)
+= N − |k|
+N γX[k]
+On peut remarquer que le biais est faible pour k ≈ 0 et devient plus important pour k proche de N. Cet estimateur possède une variance plus faible que celle de l’estimateur non biaisé puisque :
+Var(γˆ XN[k]) =
+( N − |k|
+N
+)2
+Var(γnXb [k])
+Les termes pour k proche de N qui sont estimés sur peu d’échantillons sont forcés à des valeurs proches de zéros (par la normalisation en 1/N) afin d’en réduire la variance.
+
+
+6.1 estimateur de la moyenne et de l’autocorrélation 95
+On retiendra que cet estimateur est privilégié par rapport à l’estimateur non biaisé car il possède, en général, une erreur quadratique 1 plus faible que l’estimateur non biaisé 2.
+Soit XN = (X0, X1 . . . , XN−1) le processus aléatoire tronqué sur N points. Il s’agit d’un vecteur aléatoire de dimension N qui contient l’ensemble des instants du processus utilisés par les estimateurs temporels définis ci-dessus.
+Pour aller plus loin...
+Propriété. On peut écrire l’estimateur biaisé de l’autocorrélation comme un produit de convolution :
+γˆ XN = 1
+N XN ∗ X ̄ N
+avec ∀k ∈ Z, X ̄ −Nk = XN∗
+k
+Démonstration.
+γXN [k] = 1
+N
+N−k−1
+∑
+`=0
+X`+k X∗
+`
+=1
+N
+N−k−1
+∑
+`=0
+X`+k X ̄ −`
+=1
+N
+N−k−1
+∑
+`′ =0
+X`′ X ̄ k−`′ avec `′ = ` + k
+=1
+N
+N−k−1
+∑
+`′ =0
+X`N′ X ̄ kN−`′
+d’où
+γXN = 1
+N XN∗ X ̄ N
+1. L’erreur quadratique moyenne (EQM) est couramment utilisée en statistique pour comparer les estimateurs en prenant en compte simultanément le biais et la variance, elle est définie par :
+EQM(γˆ ) = E(γˆ )2 + Var(γˆ )
+2. La plupart des processus modélisant des phénomènes physiques ont une autocorrélation qui décroît rapidement (intuitivement, cela correspond au fait que deux échantillons pris à des instants proches sont en général plus corrélés que deux échantillons très éloignés). Dans ce cas, l’EQM de l’estimateur biaisé est plus faible que celle de l’estimateur non biaisé car on peut négliger le terme liais au biais. En effet, pour les petites valeurs de k le biais est faible car l’estimateur biaisé est proche de l’estimateur non biaisé
+( N−|k|
+N ≈ 1N
+)
+, et pour les grandes valeurs de k, le biais
+( N−|k|
+N γX[k]
+)
+reste faible car
+γX[k] est petit.
+
+
+96 estimation
+Définition 6.5 (Ergodicité d’ordre 2). Le processus stationnaire Xn est dit ergodique d’ordre 2 si l’estimateur non biaisé de son moment d’ordre 2 (l’autocorrélation) converge en moyenne quadratique vers l’autocorrélation du processus :
+γˆ N,nb
+X [k] L2
+−−−→
+N→∞ γX[k]
+ou de manière équivalente :
+Var(γN,nb
+X [k]) −−−→
+N→∞ 0
+L’ergodicité d’ordre 2 d’un processus est donc une propriété indispensable pour pouvoir estimer son autocorrélation à l’aide des estimateurs temporels.
+6.2 estimation de la dsp : périodogramme
+L’estimation de la densité spectrale de puissance d’un processus à partir de données se résumant à une unique réalisation du processus est un problème classique en traitement du signal afin de caractériser un phénomène dans le domaine fréquentiel.
+Exemple 6.2. Ainsi par exemple en climatologie, une question consiste à retrouver la périodicité des variations climatiques liées aux oscillations de l’axe de la terre. L’objectif étant de distinguer plus finement les variations climatiques liées à l’activité humaine par rapport aux autres facteurs. L’une des mesures les plus utilisées est la concentration de deutérium dans les carottes glaciaires datant de plusieurs milliers d’années. On modélise le signal correspondant à la concentration en deutérium en fonction du temps par un processus aléatoire, bien évidemment, on ne dispose que d’une seule réalisation de ce processus. En estimant la DSP du processus à partir de cette unique réalisation, on peut alors retrouver les principales périodicités qui correspondent aux pics de la DSP.
+6.2.1 Définition
+L’estimateur classique de la densité spectrale de puissance est appelé périodogramme, il est défini de la manière suivante :
+Définition 6.6 (Périodogramme). Le périodogramme sur N points est un estimateur de la DSP défini comme la transformée de Fourier de l’estimateur biaisé de l’autocorrélation :
+ˆΓX(ν) =
+N−1
+∑
+k=−N+1
+γˆ XN [k]e−i2πkν
+
+
+6.2 estimation de la dsp : périodogramme 97
+ou de manière équivalente :
+ˆΓX(ν) = 1
+N
+∣ ∣ ∣ ∣ ∣
+N−1
+∑
+k=−N+1
+XN
+k e−i2πkν
+∣ ∣ ∣ ∣ ∣
+2
+où XN = (X0, X1 . . . , XN−1) est une troncature du processus aléatoire Xn sur N points.
+Démonstration. L’équivalence entre les deux définitions s’obtient en utilisant γˆ XN = 1N XN ∗ X ̄ N :
+Γˆ X(ν) = F γXN (ν)
+=1
+N F {XN ∗ X ̄ N }(ν)
+=1
+N F XN (ν)F X ̄ N (ν)
+=1
+N
+(
+F XN(ν)
+)(
+F XN(ν)
+)∗
+=1
+N
+∣ ∣
+∣F XN(ν)
+∣ ∣ ∣
+2
+Rappelons la définition de la densité spectrale de puissance donnée à la section 5.2.3 du chapitre 5,
+∀ν ∈ R, ΓX(ν) = Nli→m∞ E
+
+
+1
+2N + 1
+∣ ∣ ∣ ∣ ∣
+N
+∑
+k=−N
+Xk e−i2πkν
+∣ ∣ ∣ ∣ ∣
+2
+
+
+Si on compare cette expression à celle du périodogramme, on peut remarquer que l’espérance et le passage à la limite ont été supprimés pour pouvoir définir l’estimateur. On retiendra que ces deux simplifications ont des conséquences importantes :
+— Résolution fréquentielle limitée (biais) : Supprimer le passage à la limite revient à réaliser une troncature sur N points : cela a des conséquences sur la résolution spectrale et les lobes secondaires de l’estimateur, cf. section 3.6.2 du chapitre 3. — Variance élevée : supprimer l’espérance revient à réaliser une moyenne empirique sur une unique réalisation : il en résulte une variance très élevée de l’estimateur qui le rend inutilisable dans la plupart des cas. Ce qui justifie les variantes du périodogramme (présentées dans la section suivante) et dont l’objectif est de réduire la variance. D’un point de vue pratique, pour obtenir une estimation de la DSP à partir d’une réalisation x[n] du processus tronquée sur N points, on réalise la TFD des x[n] (en général en effectuant un bourrage de zéros pour affiner le tracé comme introduit à la section 3.6 du chapitre 3).
+Exemple 6.3. Afin d’illustrer la variance du périodogramme, on considère un bruit blanc filtré dont la DSP théorique est tracée en trais épais.
+
+
+98 estimation
+La figure 32 représente la DSP du processus ainsi que trois réalisations du périodogramme obtenues à partir de trois réalisations différentes du processus. Sur la figure de gauche, la longueur du signal utilisé est de N = 40 échantillons tandis que sur la figure de droite N = 400. On peut remarquer que : — l’estimation de la DSP obtenue par le périodogramme est très différente de la DSP théorique, cela illustre la variance élevée de l’estimateur — la dispersion des valeurs est très importante et ne diminue pas sur la figure de droite lorsqu’on utilise plus d’échantillons, cela illustre le fait que l’estimateur n’est pas consistant.
+0 0.1 0.2 0.3 0.4 0.5 Fréquence réduite ( )
+0
+0.5
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5 Longueur N=40 échantillons
+0 0.1 0.2 0.3 0.4 0.5 Fréquence réduite ( )
+0
+1
+2
+3
+4
+5
+6
+7
+8 Longueur N=400 échantillons
+Figure 32 – Illustration de la variance du périodogramme : comparaison de la DSP théorique (trait gras) avec des réalisations du périodogramme pour N = 40 et N = 400 échantillons
+Pour aller plus loin...
+6.2.2 Propriétés statistiques du périodogramme
+Biais et résolution
+Propriété. Le périodogramme est biaisé :
+E(ΓN (ν)) = (ΓX ~ WN )(ν)
+où W(ν) est la transformée de Fourier de la fenêtre triangle : Wn(ν) =
+1N
+sin2 (π N ν) sin2 (π ν)
+Démonstration.
+E(γˆ XN [k]) = N − |k|
+N γX[k]
+E(ΓN (ν)) = (ΓX ~ WN )(ν)
+
+
+6.2 estimation de la dsp : périodogramme 99
+On peut retenir que : — le biais est lié à la troncature sur N points, — le biais limite la résolution spectrale à 1/N, — le biais est asymptotiquement nul (quand N → 0) : pour améliorer la résolution, il suffit d’augmenter la durée de l’observation (c’est à dire le nombre de points N)
+Loi asymptotique de l’estimateur
+Propriété. Si Xn est processus gaussien dont la DSP est ΓX(ν) — Dans le cas asymptotique (N → ∞), le périodogramme suit une loi exponentielle :
+pΓˆ (ν)(x) = 1
+Γ(ν)2 e− x
+Γ(ν)2
+— Moyenne asymptotique du périodogramme :
+μΓˆ (ν) = Γ(ν)
+— Variance asymptotique du périodogramme :
+Var(Γˆ (ν)) = Γ(ν)2
+On retiendra principalement de ce résultat que l’écart-type de l’estimateur est égal à la valeur que l’on cherche à estimer, ce qui limite fortement l’intérêt d’un tel estimateur !
+6.2.3 Variantes du périodogramme
+Comme nous l’avons vu précédemment, la variance du périodogramme est très élevée, les variantes du périodogramme proposent différentes méthodes pour la réduire par moyennage 3. On présente succinctement le périodogramme de Bartlett. Comme illustré sur la figure 33, le principe du périodogramme de Bartlett consiste à diviser le signal en K fenêtres, et à moyenner les périodogrammes obtenus sur chacune de ces fenêtres.
+Définition 6.7. Soit une troncature XN de N échantillons du processus Xn, avec N = KL, le périodogramme de Bartlett sur K fenêtres de longueur L est défini par :
+ˆΓBart(ν) = 1
+K
+K−1
+∑
+k=0
+Γ(k)(ν)
+avec Γ(k)(ν) = 1
+L
+∣ ∣ ∣ ∣ ∣
+L−1
+∑
+`=0
+X`N+k L e−i2π ν`
+∣ ∣ ∣ ∣ ∣
+2
+.
+3. En complément du moyennage, certaines variantes permettent aussi d’appliquer une fenêtre de troncature de forme particulière afin de limiter les lobes secondaires.
+
+
+100 estimation
+Figure 33 – Principe du périodogramme de Bartlett.
+On pourra retenir les deux propriétés suivantes du périodogramme de Bartlett comparé au périodogramme standard : — Réduction de la variance : moyenner K périodogrammes permet de réduire la variance de l’estimateur de la DSP 4. — Augmentation du biais : en réduisant la longueur de la fenêtre d’un facteur K, l’effet de troncature est amplifié, ce qui se traduit par une dégradation de la résolution spectrale (elle est multipliée par K) comme vu à la section 3.6 du chapitre 3. Le choix du nombre de fenêtres K est donc un compromis entre le biais et la variance.
+Exemple 6.4. Considérons un processus dont la DSP est tracée en gras sur la figure 34. On dispose de l’observation de ce processus sur une durée de 10 000 échantillons. — La figure du haut présente trois réalisations du périodogramme standard dont on peut constater que la variance est trop importante pour estimer correctement la DSP. — La figure du centre présente les réalisations du périodogramme de Bartlett en moyennant sur 50 fenêtres de longueur 200. Bien que l’estimation demeure bruitée, elle se rapproche de la valeur théorique. Par ailleurs, le biais reste très faible (l’espérance tracée en pointillé est quasiment confondue avec la valeur théorique). Cet estimateur apparaît comme un bon compromis. — la figure du bas présente les réalisations du périodogramme de Bartlett en moyennant sur 500 fenêtres de longueur 20. La variance est très faible, mais en contrepartie, le biais n’est plus négligeable.
+4. Dans le cas d’un bruit blanc les échantillons des fenêtres sont décorrélés, on peut donc dire que la variance est réduite d’un facteur K.

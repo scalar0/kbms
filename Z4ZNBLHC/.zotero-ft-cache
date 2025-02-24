@@ -1,0 +1,3416 @@
+Introduction to Many-Body Physics
+A modern, graduate-level introduction to many-body physics in condensed matter, this textbook explains the tools and concepts needed for a research-level understanding of the correlated behavior of quantum fluids. Starting with an operator-based introduction to the quantum field theory of manybody physics, this textbook presents the Feynman diagram approach, Green’s functions, and finite-temperature many-body physics before developing the path integral approach to interacting systems. Special chapters are devoted to the concepts of Landau–Fermiliquid theory, broken symmetry, conduction in disordered systems, superconductivity, local moments and the Kondo effect, and the physics of heavy-fermion metals and Kondo insulators. A strong emphasis on concepts and numerous exercises make this an invaluable course book for graduate students in condensed matter physics. It will also interest students in nuclear, atomic, and particle physics.
+Piers Coleman is a Professor at the Center for Materials Theory at the Serin Physics Laboratory at Rutgers, The State University of New Jersey. He also holds a part-time position as Professor of Theoretical Physics, Royal Holloway, University of London. He studied as an undergraduate at the University of Cambridge and later as a graduate student at Princeton University. He has held positions at Trinity College, University of Cambridge, and the Kavli Institute for Theoretical Physics, University of California, Santa Barbara. Professor Coleman is an active contributor to the theory of interacting electrons in condensed matter. He believes deeply that the great frontier of science lies in understanding the remarkable emergent properties of matter that develop when quantum particles come together. He is currently co-director of I2CAM, the International Institute for Complex Adaptive Matter. He invented the slave boson approach to strongly correlated electron systems and believes that new mathematical methods open the door to major new discoveries. Professor Coleman has a long-standing interest in highly correlated d- and f -electron materials, novel forms of superconductivity, topological matter, and the unsolved problem of quantum criticality in metals. He is also interested in science outreach, and co-produced Music of the Quantum with his brother, the musician Jaz Coleman.
+
+
+Introduction to Many-Body Physics
+PIERS COLEMAN
+Rutgers, The State University of New Jersey
+
+
+University Printing House, Cambridge CB2 8BS, United Kingdom
+Cambridge University Press is part of the University of Cambridge.
+It furthers the University’s mission by disseminating knowledge in the pursuit of education, learning and research at the highest international levels of excellence.
+www.cambridge.org Information on this title: www.cambridge.org/9780521864886
+© Piers Coleman 2015
+Cover illustration © Swarez Modern Art Ltd. 2015
+This publication is in copyright. Subject to statutory exception and to the provisions of relevant collective licensing agreements, no reproduction of any part may take place without the written permission of Cambridge University Press.
+First published 2015
+Printed in the United Kingdom by Bell & Bain Ltd
+A catalogue record for this publication is available from the British Library
+Library of Congress Cataloguing in Publication data Coleman, Piers, 1958 – author. Introduction to many body physics / Piers Coleman, Rutgers University, New Jersey. pages cm Includes bibliographical references and index. ISBN 978-0-521-86488-6 1. Many-body problem. 2. Condensed matter. I. Title. QC174.17.P7C64 2015
+530.4′1–dc23 2015001415
+ISBN 978-0-521-86488-6 Hardback
+Cambridge University Press has no responsibility for the persistence or accuracy of URLs for external or third-party internet websites referred to in this publication, and does not guarantee that any content on such websites is, or will remain, accurate or appropriate.
+
+
+To Ronald Coleman, who shared a love of invention and experiment.
+
+
+
+
+Contents
+Preface page xvii
+Introduction 1 References 4
+1 Scales and complexity 5 1.1 T: Time scale 6 1.2 L: length scale 6 1.3 N: particle number 7 1.4 C: complexity and emergence 7 References 9
+2 Quantum fields 10 2.1 Overview 10 2.2 Collective quantum fields 17 2.3 Harmonic oscillator: a zero-dimensional field theory 17 2.4 Collective modes: phonons 23 2.5 The thermodynamic limit: L → ∞ 28 2.6 The continuum limit: a → 0 31 Exercises 37 References 40
+3 Conserved particles 42 3.1 Commutation and anticommutation algebras 43 3.1.1 Heuristic derivation for bosons 44 3.2 What about fermions? 46 3.3 Field operators in different bases 47 3.4 Fields as particle creation and annihilation operators 50 3.5 The vacuum and the many-body wavefunction 53 3.6 Interactions 55 3.7 Equivalence with the many-body Schrödinger equation 60 3.8 Identical conserved particles in thermal equilibrium 62 3.8.1 Generalities 62 3.8.2 Identification of the free energy: key thermodynamic properties 64 3.8.3 Independent particles 66
+
+
+viii Contents
+Exercises 67 References 69
+4 Simple examples of second quantization 71 4.1 Jordan–Wigner transformation 71 4.2 The Hubbard model 78 4.3 Non-interacting particles in thermal equilibrium 80 4.3.1 Fluid of non-interacting fermions 81 4.3.2 Fluid of bosons: Bose–Einstein condensation 84 Exercises 89 References 93
+5 Green’s functions 95 5.1 Interaction representation 96 5.1.1 Driven harmonic oscillator 100 5.1.2 Wick’s theorem and generating functionals 103 5.2 Green’s functions 106 5.2.1 Green’s function for free fermions 107 5.2.2 Green’s function for free bosons 110 5.3 Adiabatic concept 111 5.3.1 Gell-Mann–Low theorem 112 5.3.2 Generating function for free fermions 114 5.3.3 The spectral representation 118 5.4 Many-particle Green’s functions 121 Exercises 124 References 126
+6 Landau Fermi-liquid theory 127 6.1 Introduction 127 6.2 The quasiparticle concept 129 6.3 The neutral Fermi liquid 133 6.3.1 Landau parameters 135 6.3.2 Equilibrium distribution of quasiparticles 138 6.4 Feedback effects of interactions 139 6.4.1 Renormalization of paramagnetism and compressibility by interactions 143 6.4.2 Mass renormalization 145 6.4.3 Quasiparticle scattering amplitudes 148 6.5 Collective modes 150 6.6 Charged Fermi liquids: Landau–Silin theory 153 6.7 Inelastic quasiparticle scattering 157 6.7.1 Heuristic derivation 157 6.7.2 Detailed calculation of three-body decay process 158 6.7.3 Kadowaki-Woods ratio and “local Fermi liquids” 165
+
+
+Contents ix
+6.8 Microscopic basis of Fermi-liquid theory 168 Exercises 172 References 174
+7 Zero-temperature Feynman diagrams 176 7.1 Heuristic derivation 177 7.2 Developing the Feynman diagram expansion 183 7.2.1 Symmetry factors 189 7.2.2 Linked-cluster theorem 191 7.3 Feynman rules in momentum space 195 7.3.1 Relationship between energy and the S-matrix 197 7.4 Examples 199 7.4.1 Hartree–Fock energy 199 7.4.2 Exchange correlation 200 7.4.3 Electron in a scattering potential 202 7.5 The self-energy 206 7.5.1 Hartree–Fock self-energy 208 7.6 Response functions 210 7.6.1 Magnetic susceptibility of non-interacting electron gas 215 7.6.2 Derivation of the Lindhard function 218 7.7 The RPA (large-N) electron gas 219 7.7.1 Jellium: introducing an inert positive background 221 7.7.2 Screening and plasma oscillations 223 7.7.3 The Bardeen–Pines interaction 225 7.7.4 Zero-point energy of the RPA electron gas 228 Exercises 229 References 232
+8 Finite-temperature many-body physics 234 8.1 Imaginary time 236 8.1.1 Representations 236 8.2 Imaginary-time Green’s functions 239 8.2.1 Periodicity and antiperiodicity 240 8.2.2 Matsubara representation 241 8.3 The contour integral method 245 8.4 Generating function and Wick’s theorem 248 8.5 Feynman diagram expansion 251 8.5.1 Feynman rules from functional derivatives 253 8.5.2 Feynman rules in frequency–momentum space 254 8.5.3 Linked-cluster theorem 258 8.6 Examples of the application of the Matsubara technique 259 8.6.1 Hartree–Fock at a finite temperature 260 8.6.2 Electron in a disordered potential 260 8.7 Interacting electrons and phonons 268
+
+
+x Contents
+8.7.1 α2F: the electron–phonon coupling function 276 8.7.2 Mass renormalization by the electron–phonon interaction 280 8.7.3 Migdal’s theorem 284 Appendix 8A Free fermions with a source term 287 Exercises 288 References 290
+9 Fluctuation–dissipation theorem and linear response theory 292 9.1 Introduction 292 9.2 Fluctuation–dissipation theorem for a classical harmonic oscillator 294 9.3 Quantum mechanical response functions 296 9.4 Fluctuations and dissipation in a quantum world 297 9.4.1 Spectral decomposition I: the correlation function S(t − t′) 298 9.4.2 Spectral decomposition II: the retarded response function χR(t − t′) 298 9.4.3 Quantum fluctuation–dissipation theorem 300 9.4.4 Spectral decomposition III: fluctuations in imaginary time 301 9.5 Calculation of response functions 301 9.6 Spectroscopy: linking measurement and correlation 305 9.7 Electron spectroscopy 308 9.7.1 Formal properties of the electron Green’s function 308 9.7.2 Tunneling spectroscopy 310 9.7.3 ARPES, AIPES, and inverse PES 313 9.8 Spin spectroscopy 315 9.8.1 DC magnetic susceptibility 315 9.8.2 Neutron scattering 315 9.8.3 Nuclear magnetic resonance 318 9.9 Electron transport spectroscopy 321 9.9.1 Resistivity and the transport relaxation rate 321 9.9.2 Optical conductivity 324 9.9.3 The f-sum rule 326 Appendix 9A Kramers–Kronig relation 328 Exercises 329 References 331
+10 Electron transport theory 332 10.1 Introduction 332 10.2 The Kubo formula 335 10.3 Drude conductivity: diagrammatic derivation 338 10.4 Electron diffusion 343 10.5 Anderson localization 347
+
+
+Contents xi
+Exercises 354 References 356
+11 Phase transitions and broken symmetry 357 11.1 Order parameter concept 357 11.2 Landau theory 359 11.2.1 Field-cooling and the development of order 359 11.2.2 The Landau free energy 361 11.2.3 Singularities at the critical point 362 11.2.4 Broken continuous symmetries: the “Mexican hat” potential 364 11.3 Ginzburg–Landau theory I: Ising order 366 11.3.1 Non-uniform solutions of Ginzburg–Landau theory 367 11.4 Ginzburg–Landau II: complex order and superflow 372 11.4.1 A “macroscopic wavefunction” 372 11.4.2 Off-diagonal long-range order and coherent states 374 11.4.3 Phase rigidity and superflow 378 11.5 Ginzburg–Landau III: charged fields 381 11.5.1 Gauge invariance 381 11.5.2 The Ginzburg–Landau equations 383 11.5.3 The Meissner effect 384 11.5.4 Vortices, flux quanta and type II superconductors 393 11.6 Dynamical effects of broken symmetry: the Anderson–Higgs mechanism 397 11.6.1 Goldstone mode in neutral superfluids 397 11.6.2 The Anderson–Higgs mechanism 399 11.6.3 Electroweak theory 402 11.7 The concept of generalized rigidity 406 11.8 Thermal fluctuations and criticality 406 11.8.1 Limits of mean-field theory: the Ginzburg criterion 410 Exercises 412 References 414
+12 Path integrals 416 12.1 Coherent states and path integrals 416 12.2 Coherent states for bosons 419 12.2.1 Matrix elements and the completeness relation 420 12.3 Path integral for the partition function: bosons 424 12.3.1 Multiple bosons 427 12.3.2 Time-ordered expectation values 427 12.3.3 Gaussian path integrals 429 12.3.4 Source terms in Gaussian integrals 433 12.4 Fermions: coherent states and Grassman mathematics 435 12.4.1 Completeness and matrix elements 436 12.4.2 Path integral for the partition function: fermions 439 12.4.3 Gaussian path integral for fermions 444
+
+
+xii Contents
+12.5 The Hubbard–Stratonovich transformation 447 12.5.1 Heuristic derivation 447 12.5.2 Detailed derivation 450 12.5.3 Effective action 452 12.5.4 Generalizations to real variables and repulsive interactions 453 Appendix 12A Derivation of key properties of bosonic coherent states 455 Appendix 12B Grassman differentiation and integration 457 Appendix 12C Grassman calculus: change of variables 458 Appendix 12D Grassman calculus: Gaussian integrals 459 Exercises 460 References 462
+13 Path integrals and itinerant magnetism 464 13.1 Development of the theory of itinerant magnetism 464 13.2 Path integral formulation of the Hubbard model 466 13.3 Saddle points and the mean-field theory of magnetism 469 13.4 Quantum fluctuations in the magnetization 477 Exercises 482 References 484
+14 Superconductivity and BCS theory 486 14.1 Introduction: early history 486 14.2 The Cooper instability 490 14.3 The BCS Hamiltonian 496 14.3.1 Mean-field description of the condensate 498 14.4 Physical picture of BCS theory: pairs as spins 499 14.4.1 Nambu spinors 500 14.4.2 Anderson’s domain-wall interpretation of BCS theory 502 14.4.3 The BCS ground state 505 14.5 Quasiparticle excitations in BCS theory 506 14.6 Path integral formulation 511 14.6.1 Mean-field theory as a saddle point of the path integral 512 14.6.2 Computing # and Tc 517 14.7 The Nambu–Gor’kov Green’s function 518 14.7.1 Tunneling density of states and coherence factors 523 14.8 Twisting the phase: the superfluid stiffness 531 14.8.1 Implications of gauge invariance 532 14.8.2 Calculating the phase stiffness 535 Exercises 538 References 540
+15 Retardation and anisotropic pairing 542 15.1 BCS theory with momentum-dependent coupling 542 15.2 Retardation and the Coulomb pseudopotential 545
+
+
+Contents xiii
+15.3 Anisotropic pairing 548 15.4 d-wave pairing in two-dimensions 553 15.5 Superfluid 3He 565 15.5.1 Early history: theorists predict a new superfluid 565 15.5.2 Formulation of a model 567 15.5.3 Gap equation 568 Exercises 578 References 580
+16 Local moments and the Kondo effect 582 16.1 Strongly correlated electrons 582 16.2 Local moments 584 16.3 Asymptotic freedom in a cryostat: a brief history of the theory of magnetic moments 585 16.4 Anderson’s model of local moment formation 587 16.4.1 The atomic limit 588 16.4.2 Virtual bound state formation: the non-interacting resonance 591 16.4.3 The Friedel sum rule 594 16.4.4 Mean-field theory 597 16.5 The Coulomb blockade: local moments in quantum dots 601 16.6 The Kondo effect 603 16.6.1 Adiabaticity and the Kondo resonance 606 16.7 Renormalization concept 609 16.8 Schrieffer–Wolff transformation 613 16.9 “Poor man’s” scaling 619 16.9.1 Kondo calculus: Abrikosov pseudo-fermions and the Popov–Fedatov method 624 16.9.2 Universality and the resistance minimum 629 16.10 Nozières Fermi-liquid theory 634 16.10.1 Strong-coupling expansion 634 16.10.2 Phase-shift formulation of the local Fermi liquid 636 16.10.3 Experimental observation of the Kondo effect 640 16.11 Multi-channel Kondo physics 641 Appendix 16A Derivation of Kondo integral 645 Exercises 647 References 651
+17 Heavy electrons 656 17.1 The Kondo lattice and the Doniach phase diagram 656 17.2 The Coqblin–Schrieffer model 663 17.2.1 Construction of the model 663 17.2.2 Enhancement of the Kondo temperature 666 17.3 Large-N expansion for the Kondo lattice 668 17.3.1 Preliminaries 668
+
+
+xiv Contents
+17.4 The Read–Newns path integral 670 17.4.1 The effective action 674 17.5 Mean-field theory of the Kondo impurity 679 17.5.1 The impurity effective action 679 17.5.2 Minimization of free energy 683 17.6 Mean-field theory of the Kondo lattice 685 17.6.1 Diagonalization of the Hamiltonian 685 17.6.2 Mean-field free energy and saddle point 688 17.6.3 Kondo lattice Green’s function 691 17.7 Kondo insulators 693 17.7.1 Strong-coupling expansion 693 17.7.2 Large-N treatment of the Kondo insulator 695 17.8 The composite nature of the f -electron 697 17.8.1 A thought experiment: a Kondo lattice of nuclear spins 697 17.8.2 Cooper pair analogy 698 17.9 Tunneling into heavy-electron fluids 703 17.9.1 The cotunneling Hamiltonian 704 17.9.2 Tunneling conductance and the “Fano lattice” 705 17.10 Optical conductivity of heavy electrons 709 17.10.1 Heuristic discussion 709 17.10.2 Calculation of the optical conductivity, including interband term 710 17.11 Summary 714 Exercises 714 References 715
+18 Mixed valence, fluctuations, and topology 720 18.1 The slave boson and mixed valence 721 18.2 Path integrals with slave bosons 723 18.2.1 The link between the Kondo and Anderson lattices 727 18.3 Fluctuations about the large-N limit 733 18.3.1 Effective action and Gaussian fluctuations 734 18.3.2 Fermi liquid interactions 739 18.4 Power-law correlations, Elitzur’s theorem, and the X-ray catastrophe 740 18.5 The spectrum of spin and valence fluctuations 744 18.6 Gauge invariance and the charge of the f -electron 747 18.7 Topological Kondo insulators 751 18.7.1 The rise of topology 752 18.7.2 The Z2 index 752 18.7.3 Topology: solution to the mystery of SmB6 753 18.7.4 The Shockley chain 757 18.7.5 Two dimensions: the spin Hall effect 761 18.7.6 Three dimensions and SmB6 772 18.8 Summary 773
+
+
+Contents xv
+Appendix 18A Fluctuation susceptibilities in the Kondo and infinite U Anderson models 774 Appendix 18B Elitzur’s theorem 778 Exercises 780 References 782
+Epilogue: the challenge of the future 787 References 789
+Author Index 790 Subject Index 792
+
+
+
+
+Preface
+This book could not have been written without the inspiration of my family, mentors, friends, colleagues and students, whom I thank from the bottom of my heart. Certain folk deserve a very special mention. As a kid, my mother inspired me with a love of mathematics and science. My father taught me that theory is fine, but amounts to nought without down-to-earth pragmatism and real-world experiment. I owe so much to Gil Lonzarich at Cambridge who inspired and introduced me to the beauty of condensed matter physics, and to Phil Anderson, who introduced me, as a graduate student, to the idea of emergence and the notion that deep new physics is found within simple yet elegant concepts. I particularly want to thank my wife and physics colleague at Rutgers, Premi Chandra, who not only encouraged and shared ideas with me, but kept it real by constantly reminding me to think about my audience. At Rutgers, my colleagues Elihu Abrahams, Natan Andrei, Lev Ioffe and Gabi Kotliar receive my special appreciation, who over the years have kept physics exciting and real by sharing with me their ideas and questions, and listening to my own. I also want to especially note my Russian friends and collaborators, who have provided constant input and new insight, especially the late Anatoly Larkin and my two close friends, Andrey Chubukov and Alexei Tsvelik, each of whom has shared with me the wonderful Russian ideal of “kitchen table” physics. Throughout the book, there are various references to the history of many-body physics – here I have benefited immensely over the years, especially through discussion with David Pines, David Khmelnitskii, Lev Gor’kov and Igor Dzyaloshinskii. My apologies to you for any innaccuracies you find in this aspect of the text. I also wish to thank Andy Schofield, who has shared with me his ideas about presenting basic many-body physics. Many others have read and corrected the book with a critical eye, providing wonderful suggestions, including Annica Black-Schaffer, Eran Lebanon, Anna Posazhennikova and my former student Revaz Ramazashvili. Finally, my deep thanks to many students and postdocs who have listened to my lectures over the years, helping to improve the course and presentation. I particularly want to thank the National Science Foundation and the Department of Energy, who over the years have supported my research in condensed matter theory at Rutgers University. Special thanks in this context goes to my program managers at the National Science Foundation and the Department of Energy, Daryl Hess and James Davenport, respectively. We are so fortunate in the United States to have scientifically adept and involved program managers. The final stages of this book were finished with the support of National Science Foundation grant DMR 1309929 and the support of a Simons Fellowship while at the Kavli Institute for Theoretical Physics, Santa Barbara. Finally, I want to thank Simon Capelin at Cambridge University Press for his constant patience and encouragement during the long decade it has taken to write this book.
+
+
+
+
+Introduction
+This book is written with the graduate student in mind. I had in mind to write a text that would introduce my students to the basic ideas and concepts behind many-body physics. At the same time, I felt very strongly that I would like to share my excitement about this field, for without feeling the thrill of entering uncharted territory I do not think one has the motivation to learn and to make the passage from learning to research. Traditionally, as physicists we ask “what are the microscopic laws of nature?”, often proceeding with the brash certainty that, once revealed, these laws will have such profound beauty and symmetry that the properties of the universe at large will be self-evident. This basic philosophy can be traced from the earliest atomistic philosophy of Democritus to the most modern quests to unify quantum mechanics and gravity. The dreams and aspirations of many-body physics interwine the reductionist approach with a complementary philosophy: that of emergent phenomena. In this view, fundamentally new kinds of phenomena emerge within complex assemblies of particles which cannot be anticipated from an a priori knowledge of the microscopic laws of nature. Many-body physics aspires to synthesize, from the microscopic laws, new principles that govern the macroscopic realm, asking:
+What emergent principles and laws develop as we make the journey from the microscopic to the macroscopic?
+This is a comparatively modern and far less familiar scientific philosophy. Charles Darwin was perhaps the first to seek an understanding of emergent laws of nature. Following in his footsteps, Ludwig Boltzmann and James Clerk Maxwell were among the first physicists to appreciate the need to understand how emergent principles are linked to microscopic physics. From Boltzmann’s biography [1], we learn that he was strongly influenced and inspired by Charles Darwin. In more modern times, a strong advocate of this philosophy has been Philip W. Anderson, who first introduced the phrase “emergent phenomenon” into physics. In an influential article entitled “More is different,” written in 1967 [2], he captured the philosophy of emergence, writing:
+The behavior of large and complex aggregations of elementary particles, it turns out, is not to be understood in terms of a simple extrapolation of the properties of a few particles. Instead, at each level of complexity entirely new properties appear, and the understanding of the new behaviors requires research which I think is as fundamental in its nature as any other.
+In an ideal world, I would hope that from this short course your knowledge of manybody techniques will grow hand-in-hand with an appreciation of the motivating philosophy.
+
+
+2 Introduction
+In many ways, this dual track is essential, for often one needs both inspiration and overview to steer one lightly through the formalism, without getting bogged down in mathematical quagmires. I have tried in the course of the book to mention aspects of the history of the field. We often forget that the act of discovering the laws of nature is a very human and very passionate one. Indeed, the act of creativity in physics research is very similar to the artistic process. Sometimes, scientific and artistic revolutions even go hand-in-hand, for the desire for change and revolution often crosses between art and the sciences [3]. I think it is important for students to gain a feeling of this passion behind the science, and for this reason I have often included a few words about the people and the history behind the ideas that appear in this text. There are, unfortunately, very few texts that tell the history of many-body physics. Abraham Pais’ book Inward Bound [4] has some important chapters on the early stages of many-body physics. A few additional references are included at the end of this chapter [5–7]. There are several texts that can be used as reference books in parallel with this book, of which a few deserve special mention. The student reading this book will need to consult standard references on condensed matter and statistical mechanics. Among these let me recommend Statistical Physics, Part 2 by Lifshitz and Pitaevksii [8]. For a conceptual underpining of the field, I recommend Anderson’s classic Basic Notions of Condensed Matter Physics [9]. For an up-to-date perspective on solid state physics from a many-body physics perspective, may I refer you to Advanced Solid State Physics by Philip Phillips [10]. Among the classic references to many-body physics let me also mention Methods of Quantum Field Theory by Abrikosov, Gor’kov and Dzyaloshinskii (“AGD”) [11]. This is the text that drove the quantum many-body revolution of the 1960s and 1970s, yet it is still very relevant today, if rather terse. Other many-body texts which introduce the reader to the Green’s function approach to many-body physics include Many-Particle Physics by G. Mahan [12], notable for the large number of problems he provides, Green’s Functions for Solid State Physicists by Doniach and Sondheimer [13] and a very light introduction to the subject, A Guide to Feynman Diagrams in the Many-Body Problem by Richard Mattuck [14]. Among the more recent treatments, let me note Alexei Tsvelik’s Quantum Field Theory in Condensed Matter Physics [15], which provides a wonderful introduction to bosonization and conformal field theory, and Condensed Matter Field Theory by Alexander Altland and Ben Simons [17], a perfect companion volume to my own work. As a reference to the early developments of many-body physics, I recommend The Many-Body Problem by David Pines [16], which contains a compilation of the classic early papers in the field. Lastly, let me direct the reader to numerous excellent online reference sources; in addition to the online physics archive http://arXiv.org, let me mention the lecture notes on solid state physics and many-body theory by Chetan Nayak [18]. Here is a brief summary of the book:
+• Scales and complexity: the gulf of time (T), length scale (L), particle number (N), and complexity that separates the microscopic from the macroscopic (Chapter 1) • Second quantization: the passage from the wavefunction to the field operator, and an introduction to the excitation concept (Chapters 2–4)
+
+
+Introduction 3
+• The Green’s function: the fundamental correlator of quantum fields (Chapter 5) • Landau Fermi-liquid theory: an introduction to Landau’s phenomenological theory of interacting fermions and his concept of the quasiparticle (Chapter 6) • Feynman diagrams: an essential tool for visualizing and calculating many-body processes (Chapter 7) • Finite temperature and imaginary time: by replacing it −→ τ , e−iHt −→ e−Hτ , quantum field theory is extended to finite temperature, where we find an intimate link between fluctuations and dissipation (Chapters 8–9) • Electron transport theory: using many-body physics to calculate the resistance of a metal; second-quantized treatment of weakly disordered metals: the Drude metal and the derivation of Ohm’s law (Chapter 10) • The concepts of broken symmetry and generalized rigidity (Chapter 11) • Path integrals: using the coherent state to link the partition function and the S-matrix by an integral over all possible time-evolved paths of the many-body system (Z =
+∫
+PATH e−S/ħ); using path integrals to study itinerant magnetism (Chapters 12–13)
+• Superconductivity and BCS theory, including anisotropic pairing (Chapters 14–15) • Introduction to the physics of local moments and the Kondo effect (Chapter 16) • Introduction to the physics of heavy electrons and mixed valence using the large-N and slave boson approaches (Chapters 17–18).
+Finally, some notes on conventions. This book uses standard SI notation, which means abandoning some of the notational elegance of cgs units, but brings the book into line with international standards. Following early Russian texts on physics and many-body physics, and Mahan’s Many Particle Physics [12], I use the convention that the charge on the electron is
+e = −1.602 . . . × 10−19 C.
+In other words, e = −|e| denotes the magnitude and the sign of the electron charge. This convention minimizes the number of minus signs required. The magnitude of the electron charge is denoted by |e| in formulae such as the electron cyclotron frequency ωc = |e|B
+m.
+With this notation, the Hamiltonian of an electron in a magnetic field is given by
+H = (p − eA)2
+2m + eφ,
+where A is the vector potential and φ the electric potential. We choose the notation φ for electric potential in order to avoid confusion with the frequent use of V for potential and also for hybridization. Following a tradition started in the Landau and Lifshitz series, this book uses the notation
+F = E − TS − μN
+for the Landau free energy – the grand canonical version of the traditional Helmholtz free energy (E − TS), which for simplicity will be referred to as the free energy. One of the more difficult choices in the book concerns the notation for the density of states of a Fermi gas. To deal with the different conventions used in Fermi-liquid theory, in superconductivity and in local-moment physics, I have adopted the notation
+
+
+4 Introduction
+N (0) ≡ 2N(0)
+to denote the total density of states at the Fermi energy, where N(0) is the density of states per spin. The alternative notation N(0) ≡ ρ is used in Chapters 16, 17, and 18, in keeping with traditional notation for the Kondo effect.
+References
+[1] E. Broda and L. Gray, Ludwig Boltzmann: Man, Physicist, Philosopher, Woodbridge, 1983. [2] P. W. Anderson, More is different, Science, vol. 177, p. 393, 1972. [3] R. March, Physics for Poets, McGraw-Hill, 1992.
+[4] A. Pais, Inward Bound: Of Matter and Forces in the Physical World, Oxford University Press, 1986. [5] L. Hoddeson, G. Baym, and M. Eckert, The development of the quantum mechanical electron theory of metals: 1928–1933, Rev. Mod. Phys., vol. 59, p. 287, 1987. [6] M. Riordan and L. Hoddeson, Crystal Fire, W.W. Norton, 1997.
+[7] L. Hoddeson and V. Daitch, True Genius: The Life and Science of John Bardeen, National Academy Press, 2002.
+[8] E.M.L. Lifshitz and L. P. Pitaevksii, Statistical Mechanics, Part 2: Theory of the Condensed State, Landau and Lifshitz Course on Theoretical Physics, vol. 9, trans. J.B. Sykes and M.J. Kearsley, Pergamon Press, 1980.
+[9] P. W. Anderson, Basic Notions of Condensed Matter Physics, Benjamin Cummings, 1984. [10] P. Phillips, Advanced Solid State Physics, Cambridge University Press, 2nd edn., 2012. [11] A. A. Abrikosov, L. P. Gor’kov, and I. E. Dzyaloshinski, Methods of Quantum Field Theory in Statistical Physics, Dover, 1977.
+[12] G. D. Mahan, Many-Particle Physics, Plenum, 3rd edn., 2000.
+[13] S. Doniach and E. H. Sondheimer, Green’s Functions for Solid State Physicists, Imperial College Press, 1998.
+[14] R. Mattuck, A Guide to Feynman Diagrams in the Many-Body Problem, Dover, 2nd edn., 1992.
+[15] A. Tsvelik, Quantum Field Theory in Condensed Matter Physics, Cambridge University Press, 2nd edn., 2003. [16] D. Pines, The Many-Body Problem, Wiley Advanced Book Classics, 1997. [17] A. Altland and B. Simons, Condensed Matter Field Theory, Cambridge University Press, 2006. [18] C. Nayak, Quantum Condensed Matter Physics, http://stationq.cnsi.ucsb.edu/nayak/ courses.html, 2004.
+
+
+Scales and complexity 1
+We do in fact know the microscopic physics that governs all metals, chemistry, materials and possibly life itself. In principle, all can be determined from the many-particle wavefunction
+!(⃗x1, ⃗x2, . . . ⃗xN, t), (1.1)
+which in turn is governed by the Schrödinger equation [1, 2], written out for identical particles as
+⎧⎨
+⎩− ħ2
+2m
+N ∑
+j=1
+∇j2 + ∑
+i<j
+V(⃗xi − ⃗xj) + ∑
+j
+U(⃗xj)
+⎫⎬
+⎭ ! = iħ ∂!
+∂t . (1.2)
+There are of course a few details that we have omitted. For instance, if we’re dealing with electrons, then
+V(⃗x) = e2
+4π ε0
+1
+|⃗x| (1.3)
+is the Coulomb interaction potential, where e = −|e| is the charge on the electron. In an electromagnetic field we must also gauge the derivatives ∇ → ∇ − i(e/ħ)A and
+U(⃗x) → U(⃗x) + eφ(⃗x), where ⃗A is the vector potential and φ(⃗x) is the electric potential. Furthermore, to be complete we must discuss spin and the antisymmetry of ! under particle exchange; moreoever, if we are to treat the vibrations of the lattice, we must include the nuclear locations in the wavefunction. But with these various provisos, we have every reason to believe that the many-body Schrödinger equation contains the essential microscopic physics that governs the macrosopic behavior of materials. Unfortunately this knowledge is only the beginning. Why? Because, at the most pragmatic level, we are defeated by the sheer complexity of the problem. Even the task of solving the Schrödinger equation for modest multi-electron atoms proves insurmountable without bold approximations. The problem facing the condensed matter physicist, with systems involving 1023 atoms, is qualitatively more severe. The amount of storage required for numerical solution of Schrödinger equation grows exponentially with the number of particles, so with a macroscopic number of interacting particles this becomes far more than a technical problem: it becomes one of principle. Indeed, we believe that the gulf between the microscopic and the macroscopic is something qualitative and fundamental, so much so that new properties emerge in macroscopic systems that we cannot anticipate a priori by using brute-force analysis of the Schrödinger equation. The Hitchhiker’s Guide to the Galaxy [3] describes a super-computer called Deep Thought that, after millions of years spent calculating “the answer to the ultimate
+
+
+6 Scales and complexity
+question of life and the universe”, reveals it to be “42.” Douglas Adams’ cruel parody of reductionism holds a certain sway in physics today. Our “42,” is Schrödinger’s manybody equation: a set of relations whose complexity grows so rapidly that we can’t trace its full consequences to macroscopic scales. All is fine, provided we wish to understand the workings of isolated atoms or molecules up to sizes of about a nanometer, but, between the nanometer and the micron, wonderful things start to occur that severely challenge our understanding. Physicists have coined the term “emergence” from evolutionary biology to describe these phenomena [4–7]. The pressure of a gas is an example of emergence: it’s a cooperative property of large numbers of particles which cannot be anticipated from the behavior of one particle alone. Although Newton’s laws of motion account for the pressure in a gas, 180 years elapsed before James Clerk Maxwell developed the statistical description of atoms needed to understand pressure. Let us dwell a little more on this gulf of complexity that separates the microscopic from the macroscopic. We can try to describe this gulf using four main catagories of scale:
+• T: time • L: length • N: number of particles • C: complexity.
+1.1 T: Time scale
+We can make an estimate of the characteristic quantum time scale by using the uncertainty principle, &τ &E ∼ ħ, so that
+&τ ∼ ħ
+[1 eV] ∼ ħ
+10−19 J ∼ 10−15s. (1.4)
+Although we know the physics on this time scale, in our macroscopic world the characteristic time scale ∼ 1s, so that
+&τmacroscopic
+&τquantum
+∼ 1015. (1.5)
+To link quantum and macroscopic time scales, we must make a leap comparable with an extrapolation from the time scale of a heartbeat to the age of the universe (10 billion years ∼ 1017s).
+1.2 L: length scale
+An approximate measure for the characteristic length scale in the quantum world is the de Broglie wavelength of an electron in a hydrogen atom,
+Lquantum ∼ 10−10m, (1.6)
+
+
+1.4 C: complexity and emergence 7
+Matter wave
+1Å
+1Å
+1cm3
+The typical size of a de Broglie wave is 10−10 m, to be compared with a typical scale of 1 cm for a macroscopic crystal.
+!
+Fig. 1.1
+so
+Lmacroscopic
+Lquantum
+∼ 108 (1.7)
+(see Figure 1.1). At the beginning of the twentieth century, a leading philosopher-physicist of the era, Ernst Mach, argued to Boltzmann that the atomic hypothesis was metaphysical, for, he argued, one could simply not envisage any device with the resolution to detect or image something so small. Today, this incredible gulf of scale is routinely spanned in the lab with scanning tunneling microscopes, able to view atoms at sub-angstrom resolution.
+1.3 N: particle number
+To visualize the number of particles in a single mole of a substance, it is worth reflecting that a crystal containing a mole of atoms occupies a volume of roughly 1 cm3. From the quantum perspective, this is a cube with approximately 100 million atoms along each edge. Avagadro’s number,
+Nmacroscopic = 6 × 1023 ∼ (100 million)3, (1.8)
+is placed in perspective by reflecting that the number of atoms in a grain of sand is roughly comparable with the number of sand-grains in a 1-mile-long beach. But in quantum matter, the sand-grains, which are electrons, quantum mechanically interfere with one another, producing a state that is much more than the simple sum of its constituents.
+1.4 C: complexity and emergence
+Real materials are like “macroscopic atoms,” where the quantum interference among the constituent particles gives rise to a range of complexity and diversity that constitutes the largest gulf of all. We can attempt to quantify the “complexity” axis by considering the
+
+
+8 Scales and complexity
+Nb
+Fe Ferromagnet He-4 Superfluid
+Elements Binary Tertiary Quaternary
+102 104 106 108
+Semiconductor LAOFeAs
+9 K SC SiO
+35 K SC 95 K SC
+55 K SC
+Heavy-fermion SC
+MgB2 CeColn5 YBa2Cu3O7 Simplest biological
+molecules
+Number of different types of compound
+1 2 3 4 20 Complexity
+Number of inequivalent atoms per unit cell
+!
+Fig. 1.2 Condensed matter of increasing complexity. As the number of inequivalent atoms per unit cell grows, the complexity of the material and the potential for new types of behavior grows. In the labels, “X K SC” denotes a superconductor with a transition temperature Tc = X; thus MgB2 has a 35 K transition temperature.
+number of atoms per unit cell of a crystal. Whereas there are roughly 100 stable elements, there are roughly 1002 stable binary compounds. The number of stable tertiary compounds is conservatively estimated at more than 106, of which still only a tiny fraction have been explored experimentally. At each step the range of diversity increases (see Figure 1.2), and there is reason to believe that, at each level of complexity, new types of phenomena begin to emerge. But it is really the confluence of the length and time scales, particle number and complexity that provides the canvas for “more is different.” While classical matter develops new forms of behavior on large scales, the potential for quantum matter to develop emergent properties is far more startling. Let us take an example given by Anderson [8]. Consider similar atoms of niobium and gold: at the angstrom level, there is really nothing to distinguish them, yet as crystals on the macroscale one is a lustrous metal, the other a superconductor. Up to about 30 nm, there is little to distinguish copper and niobium, yet at longer length scales everything changes. Electrons can roam freely across gold crystals, forming the conducting fluid that gives it its lustrous metallic properties. But in niobium, beyond 30 nm the electrons pair up into “Cooper pairs”. By the time we reach the micron scale, these pairs congregate by the billions into a pair condensate, transforming the crystal into an entirely new metallic state: a type II superconductor,1 which conducts without resistance, excludes magnetic fields and has the ability to levitate magnets. Niobium is an elemental superconductor, with a transition temperature Tc = 9.2 K that is pretty typical of conventional low-temperature superconductors. When experimenters began to explore the properties of quaternary compounds in the 1980s, they came across the completely unexpected phenomenon of high-temperature superconductivity. Even today, three decades later, research has only begun to explore the vast universe of quaternary compounds, and the pace of discovery has not slackened. In the two years preceeding publication of this book, superconductivity has been tentatively observed at 108 K in a single-layer FeSe superconductor, and at 190 K in H2S at high pressure. I’d like to think
+1 Niobium, together with vanadium and technitium, is one of only three elements to exhibit type II superconductivity, which allows magnetic fields to penetrate, forming a vortex lattice. See Section 11.5.4.
+
+
+References 9
+that before this book goes out of print, many more families of superconductor will have been discovered. Superconductivity is only a beginning. First of all, it is only one of a large number of broken-symmetry states that can develop in “hard” quantum matter. But in assemblies of softer organic molecules, a tenth of a micron is already enough for the emergence of life. Self-sustaining microbes little more than 200 nm in size have recently been discovered. While we understand, more or less, the principles that govern the superconductor, we do not yet understand those that govern the emergence of life on roughly the same spatial scale [9].
+References
+[1] E. Schrödinger, Quantisierung als Eigenwertproblem I (Quantization as an eigenvalue problem), Ann. Phys., vol. 79, p. 361, 1926. [2] E. Schrödinger, Quantisierung als Eigenwertproblem IV (Quantization as an eigenvalue problem), Ann. Phys., vol. 81, p. 109, 1926.
+[3] D. Adams, The Hitchhiker’s Guide to the Galaxy, Pan Macmillan, 1979. [4] P. W. Anderson, More is different, Science, vol. 177, p. 393, 1972. [5] R. B. Laughlin, D. Pines, J. Schmalian, B. P. Stojkovic, and P. Wolynes, The middle way, Proc. Natl. Acad. Sci. U.S.A., vol. 97, 2000.
+[6] R. B. Laughlin, A Different Universe, Basic Books, 2005. [7] P. Coleman, The frontier at your fingertips, Nature, vol. 446, 2007.
+[8] P. W. Anderson, Basic Notions of Condensed Matter Physics, Benjamin Cummings, 1984. [9] J. C. Séamus Davis, Music of the Quantum, http://musicofthequantum.rutgers.edu, 2005.
+
+
+2 Quantum fields
+2.1 Overview
+At the heart of quantum many-body theory lies the concept of the quantum field. Like a classical field φ(x), a quantum field is a continuous function of position, except that now this variable is an operator φˆ(x). Like all other quantum variables, the quantum field is in general a strongly fluctuating degree of freedom that only becomes sharp in certain special eigenstates; its function is to add or subtract particles to the system. The appearance of particles or quanta of energy E = ħω is perhaps the greatest single distinction between quantum and classical fields. This astonishing feature of quantum fields was first recognized by Albert Einstein, who in 1905 and 1907 made the proposal that the fundamental excitations of continuous media the electromagnetic field and crystalline matter in particular – are carried by quanta [1–4], with energy
+E = ħω.
+Einstein made this bold leap in two stages, first showing that Planck’s theory of black-body radiation could be reinterpreted in terms of photons [1, 2], and one year later generalizing the idea to the vibrations inside matter [3] which, he reasoned, must also be made up of tiny wavepackets of sound that we now call phonons. From his phonon hypothesis Einstein was able to explain the strong temperature dependence of the specific heat in diamond a complete mystery from a classical standpoint. Yet despite these early successes, it took a further two decades before the machinery of quantum mechanics gave Einstein’s ideas a concrete mathematical formulation. Quantum fields are intimately related to the idea of second quantization. First quantization permits us to make the jump from the classical world to the simplest quantum systems. The classical momentum and position variables are replaced by operators such as
+E → iħ∂t
+p → pˆ = −iħ∂x, (2.1)
+while the Poisson bracket which relates canonical conjugate variables is now replaced by the quantum commutator [5, 6]:
+[x, p] = iħ. (2.2)
+The commutator is the key to first quantization, and it is the non-commuting property that leads to quantum fluctuations and the Heisenberg uncertainty principle. (See Examples
+
+
+2.1 Overview 11
+Classical string
+Quantum string
+φ (x)
+π( x)
+φ (x)
+π( x)
+Contrasting classical and quantum strings. !
+Fig. 2.1
+2.1 and 2.2.) Second quantization permits us to take the next step, extending quantum mechanics to
+• macroscopic numbers of particles • an excitation or quasiparticle description of low-energy physics • the dynamical response and internal correlations of large systems • collective behavior and broken-symmetry phase transitions.
+In its simplest form, second quantization elevates classical fields to the status of operators. The simplest example is the quantization of a classical string, as shown in Figure 2.1. Classically, the string is described by a smooth field φ(x) which measures the displacement from equilibrium, plus the conjugate field π (x) which measures the transverse momentum per unit length. The classical Hamiltonian is
+H=
+∫
+dx
+[T
+2
+(∇xφ(x))2+ 1
+2ρ π (x)2
+]
+, (2.3)
+where T is the tension in the string and ρ the mass per unit length. In this case, second quantization is accomplished by imposing the canonical commutation relation
+[φ(x), π (y)] = iħδ(x − y). canonical commutation relation (2.4)
+In this respect, second quantization is no different from conventional quantization, except that the degrees of freedom are defined continuously throughout space. The basic method I have just described works for collective fields such as sound vibrations, or for the electromagnetic field, but we also need to know how to develop the field theory of identical particles, such as an electron gas in a metal or a fluid of identical helium atoms. For particle fields, the process of second quantization is more subtle, for here the underlying fields have no strict classical counterpart. Historically, the first steps to dealing with
+
+
+12 Quantum fields
+Carbon with
+Carbon without exclusion principle exclusion principle
+!
+Fig. 2.2 Without the exclusion principle, all electrons would occupy the same atomic orbital. There would be no chemistry, no life.
+such many-particle systems were made in atomic physics. In 1925 Wolfgang Pauli proposed his famous exclusion principle [7] to account for the diversity of chemistry, and for the observation that atomic spectra could be understood only if one assumed there was no more than one electron per quantum state (Figure 2.2). A year later, Paul Dirac and Enrico Fermi examined the consequences of this principle for a gas of particles, which today we refer to as fermions. Dirac realized that the two fundamental varieties of particle, fermions and bosons, could be related to the parity of the many-particle wavefunction under particle exchange [8]:
+'(particle 1 at A, particle 2 at B) = ei('(particle 1 at B, particle 2 at A). (2.5)
+If one exchanges the particles twice, the total phase is e2i(. If we are to avoid a manyvalued wavefunction, then we must have
+e2i( = 1 ⇒ ei( =
+{ +1 for bosons
+−1 for fermions . (2.6)
+The choice of ei( = −1 leads to a wavefunction which is completely antisymmetric under particle exchange, which immediately prevents more than one particle in a given quantum state.1 In 1927, Pascual Jordan and Oskar Klein realized that to cast the physics of a manybody system into a more compact form, one needs to introduce an operator for the particle itself – the field operator. With their innovation, it proves possible to unshackle ourselves from the many-body wavefunction. The particle field operator
+ψˆ (x) (2.7)
+can be very loosely regarded as a quantization of the one-body Schrödinger wavefunction. Jordan and Klein [9] proposed that the particle field and its complex conjugate are conjugate variables. With this insight, the second quantization of bosons is achieved by
+1 In dimensions below three, it is possible to have wavefunctions with several Reimann sheets, which gives rise to the concept of fractional statistics and “anyons.”
+
+
+2.1 Overview 13
+introducing a non-zero commutator between the particle field and its complex conjugate. The new quantum fields that emerge play the roles of creating and destroying particles:
+(2.8)
+For fermions, the existence of an antisymmetric wavefunction means that particle fields must anticommute, i.e.,
+ψ(x)ψ(y) = −ψ(y)ψ(x), (2.9)
+a point first noted by Jordan and then developed by Jordan and Wigner [10]. The simplest example of anticommuting operators is provided by the Pauli matrices: we are now going to have to get used to a whole continuum of such operators! Jordan and Wigner realized that the second quantization of fermions requires that the non-trivial commutator between conjugate particle fields must be replaced by an anticommutator:
+(2.10)
+The operation {a, b} = ab + ba denotes the anticommutator. Remarkably, just as bosonic physics derives from commutators, fermionic physics derives from an algebra of anticommutators. How real is a quantum field and what is its physical significance? To get a feeling for its meaning, let us look at some key properties. The transformation from wavefunction to operator also extends to more directly observable quantities. Consider, for example, the electron probability density ρ(x) = ψ∗(x)ψ(x) of a one-particle wavefunction ψ(x). By elevating the wavefunction to the status of a field operator, we obtain
+ρ(x) = |ψ(x)|2 −→ ρˆ(x) = ψˆ †(x)ψˆ (x), (2.11)
+which is the density operator for a many-body system. Loosely speaking, the squared magnitude of the quantum field represents the density of particles. Another aspect of the quantum field we have to understand is its relationship to the many-body wavefunction. This link depends on a new concept, the vacuum. This unique state, denoted by |0⟩, is devoid of particles, and for this reason it is the only state for which there is no amplitude to destroy a particle, so
+ψ(x)|0⟩ = 0. the vacuum (2.12)
+We shall see that, as a consequence of the canonical algebra, the creation operator ψˆ †(x) increments the number of particles by one (see Figure 2.3), creating a particle at x, so that
+|x1⟩ = ψ†(x1)|0⟩ (2.13)
+is a single particle at x1,
+|x1, . . . xN ⟩ = ψ†(xN) · · · ψ†(x1)|0⟩ (2.14)
+
+
+14 Quantum fields
+Vacuum
+|0〉 ψ† (1)|0〉
+ψ† (1)
+ψ† (3)ψ† (2)ψ† (1)|0〉
+ψ† (3)ψ† (2)
+1 particle 3 particles
+3
+1 21
+!
+Fig. 2.3 Action of creation operator on vacuum to create a one-particle and a three-particle state.
+is the N-particle state with particles located at x1, . . . xN and
+⟨x1, . . . xN | = ⟨0|[ψ†(xN) · · · ψ†(x1)]† = ⟨0|ψ(x1) · · · ψ(xN) (2.15)
+is its conjugate “bra” vector. The wavefunction of an N-particle state |N⟩ is given by the overlap of ⟨x1, . . . xN| with |N⟩:
+ψ(x1, . . . xN) = ⟨x1, . . . xN|N⟩ = ⟨0|ψ(x1) · · · ψ(xN)|N⟩. (2.16)
+So, many-body wavefunctions correspond to matrix elements of the quantum fields. From this link we can see that the exchange symmetry under particle exchange is directly linked to the exchange algebra of the field operators. For bosons and fermions, respectively, we have
+⟨0| · · · ψ(xr)ψ(xr+1) · · · |N⟩ = ±⟨0| · · · ψ(xr+1)ψ(xr) · · · |N⟩ (2.17)
+(where + refers to bosons, − to fermions), so that
+ψ(xr)ψ(xr+1) = ±ψ(xr+1)ψ(xr). (2.18)
+From this we see that bosonic operators commute, but fermionic operators must anticommute. Thus it is the exchange symmetry of identical quantum particles that dictates the commuting or anticommuting algebra of the associated quantum fields. Unlike classical fields, quantum fields are in a state of constant fluctuation. This applies both to collective fields, as in the example of the string in Figure 2.1, and to quantum fluids. Just as the commutator between position and momentum gives rise to the uncertainty principle, [x, p] = iħ −→ *x*p > ̃ ħ, the canonical commutation or anticommutation rela
+tions give rise to a similar relation between the amplitude and phase of the quantum field. Under certain conditions the fluctuations of a quantum field can be eliminated, and in these extreme limits the quantum field begins to take on a tangible classical existence. In a Bose superfluid, for example, the quantum field becomes a sharp variable, and we can ascribe a meaning to the expectation of the quantum field,
+⟨ψ(x)⟩ = √ρseiθ , (2.19)
+
+
+2.1 Overview 15
+where ρs measures the density of particles in the superfluid condensate. We shall see that there is a parallel relation between the uncertainity in phase and density of quantum fields:
+*N*θ >
+ ̃ 1, (2.20)
+where θ is the average phase of a condensate and N the number of particles it contains. When N is truly macroscopic, the uncertainty in the phase may be made arbitrarily small, so that in a Bose superfluid the phase becomes sufficiently well defined that it is possible to observe interference phenomena! Similar situations arise inside a laser, where the phase of the electromagnetic field becomes well defined, or in a superconductor, where the phase of the pair electrons in the pair condensate becomes well defined. In the next two chapters we will return to see how all these features appear systematically in the context of free-field theory. We will begin with collective bosonic fields, which behave as a dense ensemble of coupled harmonic oscillators, and continue in the next chapter to consider conserved particles, where the exchange symmetry of the wavefunction leads to the commutation and anticommutation algebra of Bose and Fermi fields. We shall see how this information enables us to completely solve the properties of a non-interacting Bose or Fermi fluid. It is the non-commuting properties of quantum fields that generate their intrinsic “graininess.” Quantum fields, though nominally continuous degrees of freedom, can always be decomposed in terms of a discrete particular content. The action of a collective field involves the creation of a wavepacket centered at x by both the creation and destruction of quanta; schematically:
+φ(x) = ∑
+k
+[boson creation
+momentum –k + boson destruction
+momentum k
+]
+e−ik·x. (2.21)
+Examples include quanta of sound (phonons) and quanta of radiation (photons). In a similar way, the action of a particle-creation operator creates a particle localized at x; schematically:
+ψ†(x) = ∑
+k
+[ particle creation momentum k
+]
+eik·x. (2.22)
+When the underlying particles develop coherence, the quantum field or certain combinations of the quantum fields start to behave as classical collective fields. It is the ability of quantum fields to describe continuous classical behavior and discrete particulate behavior in a unified way that makes them so very special.
+Example 2.1 By considering the positivity of the quantity ⟨A(λ)†A(λ)⟩, where Aˆ = xˆ +iλˆp and λ is a real number, prove the Heisenberg uncertainty relation *x*p ≥ ħ2 .
+Solution
+Let us expand
+⟨A†A⟩ = ⟨(xˆ − iλˆp)(xˆ + iλˆp)⟩ = ⟨xˆ2⟩ + iλ
+iħ
+{ }} {
+⟨[xˆ, ˆp]⟩ +λ2⟨ˆp2⟩
+= ⟨xˆ2⟩ − λħ + λ2⟨ˆp2⟩ > 0. (2.23)
+
+
+16 Quantum fields
+Completing the square on this result, we have
+⟨A†A⟩ = ⟨pˆ2⟩
+(
+λ− ħ
+2⟨ ˆp2 ⟩
+)2
++
+(
+⟨xˆ2⟩ − ħ2
+4⟨ ˆp2 ⟩
+)
+> 0. (2.24)
+For this term to be positive definite, it follows that
+⟨x2⟩⟨ˆp2⟩ ≥
+(ħ
+2
+)2
+. (2.25)
+Now this isn’t quite what we wanted. However, let us replace Aˆ → Bˆ = Aˆ − ⟨Aˆ ⟩, ˆp → *ˆp = pˆ − ⟨ˆp⟩ and xˆ → *x = xˆ − ⟨xˆ⟩. Since the commutator [*x, *p] = iħ is unchanged,
+we can repeat the same arguments for ⟨Bˆ †Bˆ ⟩ ≥ 0, with the result that
+*x*p =
+√
+⟨*x2⟩⟨*ˆp2⟩ ≥ ħ
+2 , (2.26)
+proving the Heisenberg uncertainty relation.
+Example 2.2
+(a) How does the uncertainty principle prevent the collapse of the hydrogen atom? (b) Is the Heisenberg uncertainty principle enough to explain the stability of matter?
+Solution
+(a) The stability of a hydrogen atom can be indeed be understood as a qualitative consequence of the Heisenberg uncertainty principle. The energy in the ground state is
+E ∼ − e2
+4π ε0
+〈1
+r
+〉
++ ⟨p2⟩
+2m . (2.27)
+In a classical hydrogen atom, as ⟨r⟩ → 0 the Coulomb energy is unbounded below and the atom would be unstable. In a quantum atom, we can imagine variationally adjusting a trial ground-state wavefunction, varying its characteristic radius ⟨r⟩ and following how the potential and kinetic energy depend on ⟨r⟩. The uncertainty principle ensures that
+⟨p2⟩
+2m ∼ ħ2
+2m⟨r2⟩ , (2.28)
+so that
+E ∼ − e2
+4π ε0
+〈1
+r
+〉
++ ħ2
+2m⟨r2⟩ .
+As the characteristic radius of the wavefunction decreases, the decreasing uncertainty in position leads to an increasing uncertainty in momentum, which in turn causes the kinetic energy to grow faster than the Coulomb energy with the reduction in ⟨r⟩. The compromise between the Coulomb and uncertainty energy ultimately stabilizes the atom at a radius ⟨r⟩ ∼ aB of the order of the Bohr radius aB.
+
+
+2.3 Zero-dimensional field theory 17
+(b) No: the uncertainty relation is not sufficient to account for the stability of electronic matter. Although the uncertainty relation stabilizes the hydrogen atom, in multielectron systems it is the Pauli exclusion principle that stabilizes electronic matter and makes it “hard.” Were electrons bosons, they would collapse into the lowest 1s state of the atom, giving rise to a much denser and far more bland version of matter. Instead, the exclusion principle prevents multiple occupancy of atomic orbitals, so that, as atoms are brought together, the atomic orbitals overlap; and to avoid double occupancy, the exclusion principle forces electrons into higher-energy orbitals, creating a rapid increase in the energy and creating a strong repulsive interaction that is the origin of the hardness of matter.
+2.2 Collective quantum fields
+Here, we will begin to familiarize ourselves with quantum fields by developing the field theory of a free bosonic field. It is important to realize that a bosonic quantum field is nothing more than a set of linearly coupled oscillators. So long as the system is linear, the modes of oscillation can always be decomposed into a linear sum of independent normal modes, each one a simple harmonic oscillator. The harmonic oscillater is thus the basic building block for bosonic field theories. Our basic strategy for quantizing collective bosonic fields thus consists of two basic parts. First, we reduce the Hamiltonian to its normal modes. For translationally invariant systems, this is just a matter of Fourier transforming the field and its conjugate momenta. Second, we quantize the normal-mode Hamiltonian as a sum of independent harmonic oscillators:
+(2.29) The first part of this procedure is essentially identical for both quantum and classical oscillators. The second stage is nothing more than the quantization of a single harmonic oscillator. Consider the family of lattices shown in Figure 2.4. We shall start with a single oscillator at one site. We shall then graduate to one- and higher-dimensional chains of oscillators, as shown in Figure 2.4.
+2.3 Harmonic oscillator: a zero-dimensional field theory
+Although the Schrödinger approach is most widely used in first quantization, it is the Heisenberg approach [5, 11] that opens the door to second quantization. In the Schrödinger approach, one solves the wave equation
+
+
+18 Quantum fields
+0D 1D 3D
+j+1
+j
+j−1
+x φj
+φj
+πj πj
+j
+p
+!
+Fig. 2.4 Family of zero-, one- and three-dimensional harmonic crystals.
+hω
+n quanta
+!
+Fig. 2.5 Illustrating the excitation picture for a single harmonic oscillator.
+( −ħ2∂x2
+2m + 1
+2 mω2x2
+)
+ψn = Enψn, (2.30)
+from which one finds that the energy levels are evenly spaced according to
+En = (n + 1
+2 )ħω, (2.31)
+where ω is the frequency of the oscillator. The door to second quantization is opened by reinterpreting these evenly spaced energy levels in terms of quanta, each of energy ħω. The nth excited state corresponds to the addition of n quanta to the ground state (see Figure 2.5). We shall now see how we can put mathematical meat on these words by introducing an operator a† that creates these quanta, so that the nth excited state is obtained by acting n times on the ground state with the creation operator:
+|n⟩ = √1n! (a†)n|0⟩. (2.32)
+Let us now see how this works. The Hamiltonian for this problem involves conjugate position and momentum operators, as follows:
+
+
+2.3 Zero-dimensional field theory 19
+H = p2
+2m + 1
+2 mω2x2,
+[x, p] = iħ. (2.33)
+quantum harmonic oscillator
+In the ground state, the particle in the harmonic potential undergoes zero-point motion, with uncertainties in position and momentum *p and *x which satisfy *x*p ∼ ħ. Since
+the zero-point kinetic and potential energies are equal, *p2/2m = mω2*x2/2, so
+*x =
+√ħ
+mω , *p = √mωħ (2.34)
+define the scale of zero-point motion. It is useful to define dimensionless position and momentum variables by factoring out the scale of zero-point motion:
+ξ= x
+*x , pξ = p
+*p . (2.35)
+One quickly verifies that [ξ , pξ ] = i are still canonically conjugate, and that now
+H = ħω
+2
+[
+ξ 2 + p2
+ξ
+]
+. (2.36)
+Next, introduce the creation and annihilation operators
+a† = √12 (ξ − ipξ ) creation operator
+a = √12 (ξ + ipξ ). annihilation operator (2.37)
+Since [a, a†] = −2i
+([ξ , pξ ] − [pξ , ξ ]) = 1, these operators satisfy the algebra
+[a, a] = [a†, a†] = 0
+[a, a†] = 1.
+⎫⎬
+⎭ canonical commutation rules (2.38)
+It is this algebra which lies at the heart of bosonic physics, enabling us to interpret the creation and annihilation operators as the objects which add and remove quanta of vibration to and from the system. To follow the trail further, we rewrite the Hamiltonian in terms of a and a†. Since ξ =
+(a + a†)/√2 and pξ = (a − a†)/√2 i, the core of the Hamiltonian can be rewritten as
+ξ 2 + p2
+ξ = a†a + aa†. (2.39)
+But aa† = a†a + 1, from the commutation rules, so that
+H = ħω
+[
+a†a + 1
+2
+]
+. (2.40)
+
+
+20 Quantum fields
+This has a beautifully simple interpretation. The second term is just the zero-point energy E0 = ħω/2. The first term contains the number operator
+nˆ = a†a, number operator (2.41)
+which counts the number of vibrational quanta added to the ground state. Each of these quanta carries energy ħω. To see this, we need to introduce the concept of the vacuum, defined as the unique state such that
+a|0⟩ = 0. (2.42)
+From (2.40), this state is clearly an eigenstate of H, with energy E = ħω/2. We now assert that the state
+|N⟩ = 1
+λN
+(a†)N|0⟩, (2.43)
+where λN is a normalization constant, contains N quanta. To verify that ˆn counts the number of bosons, we use commutation algebra to show that [ˆn, a†] = a† and [ˆn, a] = −a, or
+ˆna† = a†(ˆn + 1)
+ˆna = a(ˆn − 1), (2.44)
+which means that when a† or a act on a state, they respectively add or remove one quantum of energy. Suppose that
+ˆn|N⟩ = N|N⟩ (2.45)
+for some N. Then, from (2.44),
+ˆn a†|N⟩ = a†(ˆn + 1)|N⟩ = (N + 1) a†|N⟩, (2.46)
+so that a†|N⟩ ≡ |N + 1⟩ contains N + 1 quanta. Since (2.45) holds for N = 0, it holds for all N. To complete the discussion, let us fix λN by noting that, from the definition of |N⟩,
+⟨N − 1|aa†|N − 1⟩ =
+( λN
+λN−1
+)2
+⟨N|N⟩ =
+( λN
+λN−1
+)2
+. (2.47)
+But since aa† = nˆ + 1, ⟨N − 1|aa†|N − 1⟩ = N⟨N − 1|N − 1⟩ = N. Comparing these two
+expressions, it follows that λN/λN−1 = √N, and since λ0 = 1, λN = √N!. Summarizing the discussion:
+H = ħω(ˆn + 12 )
+ˆn = a†a number operator
+|N⟩ = √1N! (a†)N|0⟩. N-boson state
+(2.48)
+
+
+2.3 Zero-dimensional field theory 21
+Using these results, we can quickly learn many things about the quantum fields a and a†. Let us look at a few examples. First, we can transform all time dependence from the states to the operators by moving to a Heisenberg representation, writing
+a(t) = eiHt/ħae−iHt/ħ. Heisenberg representation (2.49)
+This transformation preserves the canonical commutation algebra and the form of H. The equation of motion for a(t) is given by
+da(t)
+dt = i
+ħ [H, a(t)] = −iωa(t), (2.50)
+so that the Heisenberg operators are given by
+a(t) = e−iωta
+a†(t) = eiωta†. (2.51)
+Using these results, we can decompose the original momentum and displacement operators as follows:
+xˆ(t) = *xξ (t) = √*x2
+(a(t) + a†(t)) =
+√ħ
+2mω
+(ae−iωt + a†eiωt)
+ˆp(t) = *ppξ (t) = −i
+√ mħω 2
+(ae−iωt − a†eiωt). (2.52)
+Notice how the displacement operator – a priori a continuous variable – has the action of creating and destroying discrete quanta. We can use this result to compute the correlation functions of the displacement.
+Example 2.3 Calculate the autocorrelation function S(t − t′) = 12 ⟨0|{x(t), x(t′)}|0⟩ and the
+response function R(t − t′) = (i/ħ)⟨0|[x(t), x(t′)]|0⟩ in the ground state of the quantum harmonic oscillator.
+Solution
+We may expand the correlation function and response function as follows:
+S(t1 − t2) = 1
+2 ⟨0|x(t1)x(t2) + x(t2)x(t1)|0⟩
+R(t1 − t2) = (i/ħ)⟨0|x(t1)x(t2) − x(t2)x(t1)|0⟩. (2.53)
+But we may expand x(t) as given in (2.52). The only term which survives in the ground state is the term proportional to aa†, so that
+⟨0|x(t)x(t′)|0⟩ = ħ
+2mω ⟨0|aa†|0⟩e−iω(t−t′). (2.54)
+Now, using (2.53) we obtain
+1
+2 ⟨0|{x(t), x(t′)}|0⟩ = ħ
+2mω cos[ω(t − t′)] correlation function
+−i⟨0|[x(t), x(t′)]|0⟩ = 1
+mω sin[ω(t − t′)]. response function
+
+
+22 Quantum fields
+We shall later see that R(t − t′) gives the response of the ground state to an applied force F(t′), so that at a time t the displacement is given by
+⟨x(t)⟩ =
+∫t
+−∞
+R(t − t′)F(t′)dt′. (2.55)
+Remarkably, the response function is identical with a classical harmonic oscillator.
+Example 2.4 Calculate the number of quanta present in a harmonic oscillator with characteristic frequency ω, at temperature T.
+Solution
+To calculate the expectation value of any operator at temperature T, we need to consider an
+ensemble of systems in different quantum states |'⟩ = ∑
+n cn|n⟩. The expectation value
+of operator Aˆ in state |'⟩ is then
+⟨Aˆ ⟩ = ⟨'|A|'⟩ = ∑
+m,n
+c∗mcn⟨m|Aˆ |n⟩. (2.56)
+In a position basis (assuming ⟨x|A|x′⟩ = A(x)δ(x − x′) is local), this is
+⟨Aˆ ⟩ = ∑
+m,n
+c∗mcn
+∫
+dxψm∗ (x)A(x)ψm(x). (2.57)
+But now we have to average over the typical state |'⟩ in the ensemble, which gives
+⟨Aˆ ⟩ = ∑
+m,n
+c∗mcn⟨m|Aˆ |n⟩ = ∑
+m,n
+ρmn⟨m|Aˆ |n⟩, (2.58)
+where ρmn = c∗mcn is the density matrix. If the ensemble is in equilibrium with an incoherent heat bath at temperature T, quantum statistical mechanics asserts that there are no residual phase correlations between the different energy levels, which acquires a Boltzmann distribution
+ρmn = c∗mcn = pnδn,m, (2.59)
+where pn = e−βEn /Z is the Boltzmann distribution, with β = 1/kBT, and kB is Boltzmann’s constant. Let us now apply this to our problem, where
+Aˆ = ˆn = a†a (2.60)
+is the number operator. In this case,
+⟨ˆn⟩ = ∑
+n
+(e−βEn /Z)⟨n|ˆn|n⟩ = 1
+Z
+∑
+n
+ne−βEn . (2.61)
+To normalize the distribution, we must have ∑
+n pn = 1, so that
+Z=∑
+n
+e−βEn . (2.62)
+
+
+2.4 Collective modes: phonons 23
+Finally, since En = ħω(n + 12 ),
+⟨ˆn⟩ =
+∑
+n e−βħω(n+ 12 )n
+∑
+n e−βħω(n+ 12 ) =
+∑
+n e−λnn
+∑
+n e−λn (λ = βħω). (2.63)
+The sum in the denominator is a geometric series,
+∑
+n
+e−λn = 1
+1 − e−λ , (2.64)
+and the numerator is given by
+∑
+n
+e−λnn = − ∂
+∂λ
+∑
+n
+e−λn = e−λ
+(1 − e−λ)2 , (2.65)
+so that
+⟨ˆn⟩ = 1
+eλ − 1 = 1
+eβħω − 1 , (2.66)
+which is the famous Bose–Einstein distribution function.
+2.4 Collective modes: phonons
+We now extend the discussion of the previous section from zero to higher dimensions. Let us go back to the lattice shown in Figure 2.4 . To simplify our discussion, let imagine that at each site there is a single elastic degree of freedom. For example, consider the longitudinal displacement of an atom along a one-dimensional chain that runs in the x-direction. For the jth atom,
+xj = xj0 + φj. (2.67)
+If πj is the conjugate momentum to xj, then the two variables must satisfy canonical commutation relations
+[φi, πj] = iħδij. (2.68)
+Notice how variables at different sites are fully independent. We’ll imagine that our onedimensional lattice has N s sites, and we shall make life easier by working with periodic boundary conditions, so that φj+Ns ≡ φj and πj ≡ πj+Ns . Suppose nearest neighbors are connected by a “spring,” in which case the total total energy is then a sum of kinetic and potential energy:
+Hˆ = ∑
+j=1,Ns
+[ πj2
+2m + mω2
+2 (φj − φj+1)2
+]
+, (2.69)
+where m is the mass of an atom.
+
+
+24 Quantum fields
+Now the great simplifying feature of this model is that that it possesses translational symmetry, so that under the translation
+πj → πj+1, φj → φj+1 (2.70)
+the Hamiltonian and commutation relations remain unchanged. If we shrink the size of the lattice to zero, this symmetry will become a continuous translational symmetry. The generator of these translations is the crystal momentum operator, which must therefore commute with the Hamiltonian. Because of this symmetry, it makes sense to transform to operators that are diagonal in momentum space, so we’ll Fourier transform all fields as follows:
+φj = √1Ns
+∑
+q eiqRj φq
+πj = √1Ns
+∑
+q eiqRj πq
+}
+Rj = ja. (2.71)
+The periodic boundary conditions φj = φj+Ns , πj = πj+Ns mean that the values of q entering in this sum must satisfy qL = 2π n, where L = Nsa is the length of the chain and n is an integer. Thus the wavevectors
+q ≡ qn = 2π
+L n (n ∈ [1, Ns]) (2.72)
+must be discrete multiples of 2π
+L . The range of q is thus q ∈ [0, 2π
+a ]. As in any periodic
+structure, the crystal momentum is only defined modulo a reciprocal lattice vector, which in this case is 2π/a, so that q + 2π
+a ≡ q (since exp[i(q + 2π
+a )Rj] = exp[i(qRj + 2π j)] =
+exp[iqRj]). This means that the integer n in qn is only defined modulo the number of sites Ns.
+The functions √1Ns eiqRj ≡ ⟨ j|q⟩ form a complete orthogonal basis, and we may use
+Fourier’s theorem to show that
+⟨qr|qs⟩ ≡
+N ∑s
+j=1
+⟨qr|j⟩⟨ j|qs⟩ ≡ 1
+Ns
+N ∑s
+j=1
+ei(qs−qr)Rj = δrs orthogonality (2.73)
+vanishes unless qr = qs (see Exercise 2.2). This result is immensely useful, and we shall use it time and time again. Applying the orthogonality relation to (2.71), we can check that the inverse transformations are
+φq = √1Ns
+∑
+j
+e−iqRj φj
+πq = √1Ns
+∑
+j
+e−iqRj πj. (2.74)
+Notice that, since φj and πj are Hermitian operators, it follows that φq† = φ−q and πq† = π−q. Using orthogonality, we can verify that the transformed commutation relations are
+[φq, π−q′ ] = 1
+Ns
+∑
+i,j
+e−i(qRi−q′Rj)
+iħδij
+{ }} {
+[φi, πj]
+= iħ
+Ns
+∑
+j
+e−i(q−q′)Rj = iħδqq′ . (2.75)
+
+
+2.4 Collective modes: phonons 25
+We shall now see that πq and φq are quantized versions of normal coordinates which bring the hamiltonian back into the standard harmonic oscillator form. To check that the Hamiltonian is truly diagonal in these variables, we
+1. expand φj and πj in terms of their Fourier components 2. regroup the sums so that the summation over momenta is on the outside 3. eliminate all but one summation over momentum by carrying out the internal sum over site variables. This will involve terms like Ns−1
+∑
+j ei(q+q′)Rj = δq+q′ , which constrains
+q′ = −q and eliminates the sum over q′.
+With a bit of practice, these steps can be carried out very quickly. In transforming the potential energy, it is useful to rewrite it in the form
+V = mω2
+2
+∑
+j
+φj(2φj − φj+1 − φj−1). (2.76)
+The term in brackets can be Fourier transformed as follows:
+ω2(2φj − φj+1 − φj−1) = √1Ns
+∑
+q
+4ω2 sin2(qa/2)≡ωq2
+{ }} {
+ω2[2 − eiqa − e−iqa] × φq eiqRj
+≡ √1Ns
+∑
+q
+ωq2 φq eiqRj , (2.77)
+where we have defined ωq = 2ω| sin(qa/2)|. Inserting this into (2.76), we obtain
+V=m
+2
+∑
+q,q′
+ωq2 φ−q′ φq
+δq,q′
+{ }} { Ns−1
+∑
+j
+ei(q−q′)Rj
+=∑
+q
+mωq2
+2 φ−qφq. (2.78)
+Carrying out the same procedure on the kinetic energy, we obtain
+H=∑
+q
+(1
+2m πqπ−q + mωq2
+2 φqφ−q
+)
+, (2.79)
+which expresses the Hamiltonian in terms of normal coordinates φq and πq. So far, all of the transformations have preserved the ordering of the operators, so it is no surprise that the quantum and classical expressions for the Hamiltonian in terms of normal coordinates are formally identical. It is useful to note that at q = 0, ωq = 0, so that there is no contribution to the potential energy from the q = 0 mode. This mode corresponds to the center-of-mass motion of the entire system, and it is useful to separate it from the oscillatory modes, writing
+H=
+HCM
+{ }} {
+1
+2m π02 + ∑
+q̸=0
+(1
+2m πqπ−q + mωq2
+2 φqφ−q
+)
+. (2.80)
+
+
+26 Quantum fields
+The first term is just the center-of-mass energy. The next step merely repeats the procedure carried out for the single harmonic oscillator. For q ̸= 0 we define a set of conjugate creation and annihilation operators
+aq =
+√ mωq 2ħ
+(φq + miωq πq
+)
+a†q =
+√ mωq 2ħ
+(φ−q − miωq π−q
+)
+⎫⎬
+⎭ [aq, a†
+q′ ] = 2−ħi
+[
+[φq, π−q′ ] − [πq, φ−q′ ]
+]
+= δq,q′ .
+(2.81) The second expression for a†q is obtained by taking the complex conjugate of aq,
+remembering that φq† = φ−q and πq† = π−q, since the underlying fields are real. The inversion of these expressions is
+πq = −i
+√ mωqħ 2
+(aq − a†−q
+)
+φa =
+√ 2mħωq
+(aq + a†−q
+). (2.82)
+Notice how the Fourier component of the field at wavevector q either destroys a phonon of momentum q or creates a phonon of momentum −q. Both processes reduce the total momentum by q. It follows that
+πqπ−q = mωqħ
+2
+(a†−qa−q + aqa†q − a†−qa†q − aqa−q
+)
+φqφ−q = ħ
+2mωq
+(a†−qa−q + aqa†q + a†−qa†q + aqa−q
+). (2.83)
+Adding the two terms inside the Hamiltonian (2.80) then gives
+H = HCM + 1
+2
+∑
+q̸=0
+ħωq
+(aqa†q + a†−qa−q
+). (2.84)
+Now we can replace −q → q inside the summation and use the commutation relations aqa†q = a†qaq + 1, so that
+H = HCM + ∑
+q̸=0
+ħωq
+(
+a†qaq + 1
+2
+)
+. (2.85)
+Since each set of aq and a†q obey canonical commutation relations, we can immediately
+identify nq = a†qaq as the number operator for quanta in the qth momentum state. Remarkably, the system of coupled oscillators can be reduced to a sum of independent harmonic oscillators with characteristic frequency ωq, energy ħωq and momentum q. Each normal mode of the original classical system corresponds to a particular phonon excitation. From now on we will drop the center-of-mass term HCM with the understanding that summations over q do not include q = 0. We can immediately generalize all of our results from a single harmonic oscillator. For example, the general state of the system will now be an eigenstate of the phonon occupancies:
+|'⟩ = |nq1 , nq2 , . . . nqN ⟩ = ∏
+⊗
+|nqi ⟩ =
+[∏
+i
+(a†qi )nqi
+√nqi !
+]
+|0⟩, (2.86)
+
+
+2.4 Collective modes: phonons 27
+π
+sin(qa/2)
+ω = 2ω
+ωq
+2 /a
+0q
+2ω
+q
+L = 14
+2π/L
+Illustrating the excitation picture for a chain of coupled oscillators, length L = 14. !
+Fig. 2.6
+where the vacuum is the unique state that is annihilated by all of the aq. In this state, the occupation numbers nq are diagonal, so this is an energy eigenstate with energy
+E = E0 + ∑
+q
+nqħωq, (2.87)
+where E0 = 12
+∑
+q ħωq is the zero-point energy (see Figure 2.6).
+Remarks
+• The quantized displacements of a crystal are called phonons. Quantized fluctuations of magnetization in a magnet are magnons. • We can easily transform to a Heisenberg representation, whereupon aq(t) = aqe−iωqt. • We can expand the local field entirely in terms of phonons. Using (2.82), we obtain
+φj(t) = √1Ns
+∑
+q
+φqeiqRj
+= φCM(t) + √1Ns
+∑
+q̸=0
+√ħ
+2mωq
+[
+aq(t) + a†−q(t)
+]
+eiqRj , (2.88)
+where φCM = 1
+Ns
+∑
+j φj is the center-of-mass displacement. • The transverse displacements of the atoms can be readily included by simply upgrading the displacement and momentum φj and πj to vectors. For springs, the energies associated with transverse and longitudinal displacements are not the same because the stiffness associated with transverse displacements depends on the tension. Nevertheless, the Hamiltonian has an identical form for the one longitudinal and two transverse modes, provided one inserts a different stiffness for the transverse modes. The initial Hamiltonian is then simply a sum over three degenerate polarizations λ ∈ [1, 3]:
+Hˆ = ∑
+λ=1,3
+∑
+j=1,Ns
+[ πj2λ
+2m + mω2
+λ
+2 (φjλ − φj+1λ)2
+]
+, (2.89)
+where ω12 = ω2 for the longitudinal mode and ω22,3 = T/a, where T is the tension in the spring, for the two transverse modes. By applying the same procedure to all three modes, the final Hamiltonian then becomes
+
+
+28 Quantum fields
+H= ∑
+λ=1,3
+∑
+q
+ħωqλ
+( a†
+qλaqλ + 1
+2
+) ,
+where ωqλ = 2ωλsin(qa/2). Of course, in more realistic crystal structures the energies of the three modes will no longer be degenerate. • We can generalize all of this discussion to a two- or three-dimensional square lattice by noting that the orthogonality relation becomes
+Ns−1
+∑
+j
+e−i(q−q′)·Rj = δq−q′ , (2.90)
+where now
+q = 2π
+L (ii, i2, . . . iD) (2.91)
+and Rj is a site on the lattice. The general form for the potential energy is slightly more complicated, but one can still cast the final Hamiltonian in terms of a sum over longitudinal and transverse modes. • The zero-point energy E0 = 12
+∑
+q ħωq is very important in 3He and 4He crystals, where the lightness of the atoms gives rise to such large phonon frequencies that the crystalline phase is unstable at ambient pressure, melting under the influence of quantum zero-point motion. The resulting quantum fluids exhibit the remarkable property of superfluidity.
+2.5 The thermodynamic limit: L → ∞
+In the previous section, we examined a system of coupled oscillators on a finite lattice. By restricting a system to a finite lattice, we impose a restriction on the maximium wavelength, and hence the excitation spectrum. This is known as an “infrared cut-off”. When we take L → ∞, the allowed momentum states become closer and closer together, and we now have a continuum in momentum space. What happens to the various momentum summations in the thermodynamic limit, L → ∞? When the allowed momenta become arbitrarily close together, the discrete summations over momentum must be replaced by continuous integrals. For each dimension, the increment in momentum appearing inside the discrete summations is
+*q = 2π
+L , (2.92)
+so that L *q
+2π = 1 (see Figure 2.7). Thus in one dimension, the summation over the discrete
+values of q can be formally rewritten as
+∑
+qj
+{. . .} = L ∑
+qj
+*q
+2π {. . .} , (2.93)
+
+
+2.5 The thermodynamic limit: L → ∞ 29
+qx
+qz
+2π /L
+qy
+Illustrating the grid of allowed momenta for a three-dimensional crystal of dimensions L3. In the limit L → ∞, the grid becomes a continuum, with (L/2π)3 points per unit volume of momentum space.
+!
+Fig. 2.7
+where qj = 2π j
+L and j ∈ [1, Ns]. When we take L → ∞, q becomes a continuous variable
+q ∈ [0, 2π/a], where a = L/Ns is the lattice spacing, so that the summation can now be replaced by a continuous integral:
+∑
+q
+{. . .} −→L
+∫ 2π/a
+0
+dq
+2π {. . .} . (2.94)
+Similarly, in D dimensions, we can regard the D-dimensional sum over momentum as a sum over tiny hypercubes, each of volume
+(*q)D = (2π )D
+LD , (2.95)
+so that LD (*q)D
+(2π)D = 1 and
+∑
+q
+{. . .} = LD ∑
+q
+(*q)D
+(2π )D {. . .} −→LD
+∫
+0<qi<2π/a
+dDq
+(2π )D {. . .} , (2.96)
+where the integral is over a hypercube in momentum space, with sides of length 2π/a.
+Example 2.5 Re-express the Hamiltonian Hˆ of a simplified three-dimensional harmonic crystal in terms of phonon number operators and calculate the zero-point energy, where
+H=∑
+j
+πj2
+2m + ∑
+j,a=(xˆ,yˆ,zˆ)
+mω02
+2 (0j − 0j+a)2, (2.97)
+where φj ≡ φ(xj) and πj ≡ π (xj) denote canonically conjugate (scalar) displacement and momenta at site j, and ˆa = (xˆ, yˆ, zˆ) denotes the unit vector separating nearest-neighbor atoms.
+
+
+30 Quantum fields
+Solution
+First we must Fourier transform the coordinates and the harmonic potential. The potential can be rewritten as
+Vˆ = 1
+2
+∑
+i,j
+Vi−jφiφj, (2.98)
+where
+VR = mω02
+∑
+a=(xˆ,yˆ,zˆ)
+(2δR − δR−a − δR+a). (2.99)
+The Fourier transform of this expression is
+Vq = ∑
+R
+VRe−iq·R
+= mω02
+∑
+a=(xˆ,yˆ,zˆ)
+(2 − e−iq·a − eiq·a)
+= 2mω02
+∑
+l=x,y,z
+[1 − cos(qla)], (2.100)
+so that, writing Vq = m(ωq)2, it follows that the normal-mode frequencies are given by
+ωq = 2ω0[sin2(qxa/2) + sin2(qya/2) + sin2(qza/2)] 12 . (2.101)
+Fourier transforming the fields
+φj = √1N s
+∑
+q
+φqeiq·x
+πj = √1N s
+∑
+q
+πqeiq·x, (2.102)
+where q = 2π
+L (i, j, k) are the discrete momenta of a cubic crystal of volume L3 with periodic
+boundary conditions, we find
+H=∑
+q
+[ πqπ−q
+2m + mω2q
+2 φqφ−q
+]
+. (2.103)
+Defining the creation and annihilation operators
+bq =
+√ mωq
+2ħ
+(
+φq + i
+mωq
+πq
+)
+, b†q =
+√ mωq
+2ħ
+(
+φ−q − i
+mωq
+π−q
+)
+, (2.104)
+we reduce the Hamiltonian to its standard form,
+H=∑
+q
+ħωq
+(
+nˆq + 1
+2
+)
+, (2.105)
+where ˆnq = b†qbq is the phonon number operator.
+
+
+2.6 The continuum limit: a → 0 31
+In the ground state, nq = 0, so that the zero-point energy is
+E0 = ∑
+q
+ħωq
+2 −→ V
+∫ d3q
+(2π )3
+ħωq
+2 , (2.106)
+where V = L3. Substituting for ωq, we obtain
+E0 = V ∏
+l=1,3
+∫ 2π/a
+0
+dql
+2π ħω0
+√∑
+l=1,3
+sin2(qla/2)
+= Nsħω0I3, (2.107)
+where
+I3 =
+∫
+0<u1 ,u2 ,u3 <π
+d3u
+π3
+√∑
+l=1,3
+sin2(ul) = 1.19 (2.108)
+and Ns is the number of sites.
+Remarks
+• The zero-point energy per unit cell of the crystal is ħω0(I3/π3), a finite number. • Were we to take the continuum limit, taking the lattice separation to zero, the zero-point energy would diverge, due to the profusion of ultraviolet modes.
+2.6 The continuum limit: a → 0
+In contrast to the thermodynamic limit, when we take the continuum limit we remove the discrete character of the problem, allowing fluctuations of arbitrarily small wavelength and hence arbitrarily large energy. For a discrete system with periodic boundary conditions, the momentum in any one direction cannot exceed 2π/a. By taking a to zero, we send the ultraviolet cut-off to infinity. In the continuum limit, it is natural to normalize our plane-wave basis per unit volume, writing
+⟨x|q⟩ −→ eiq·x. (2.109)
+The orthogonality condition is now
+⟨q′|q⟩ =
+∫
+dD xei(q−q′)·x = LDδq,q′ , (2.110)
+where δq,q′ is the discrete delta function on the grid of allowed wavevectors. If we now also take the thermodynamic limit, the discrete delta function is replaced by the D-dimensional Dirac delta function as follows:
+LDδq,q′ = (2π )D δq,q′
+(*q)D −→ (2π )DδD(q − q′), (2.111)
+
+
+32 Quantum fields
+x
+Continuum limit a 0
+(a)
+(b)
+π (x) φ (x)
+πj
+a
+T
+T
+T
+T
+φj
+j
+!
+Fig. 2.8 Illustrating (a) a discrete and (b) a continuous string. By taking the length between units in the string to zero, and maintaining the density per unit length and the tension, we arrive at the continuum limit.
+so the orthogonality becomes
+∫
+dD xei(q−q′)·x = (2π )DδD(q − q′). (2.112)
+As a simple example, we shall consider a one-dimensional string. The important lesson that we shall learn is that both the discrete model and the continuum model have the same long-wavelength physics. Their behavior will only differ at very short distances, at high frequencies and over short times. This is a very simple example of the concept of renormalization. Provided we are interested in low-energy properties, the details of the string at short – distances – whether it is discrete or continuous don’t matter. In many respects, the continuum model is more satisfying and elegant. We shall see, however, that we always have to be careful in going to the continuum limit because this introduces quantum fluctuations on arbitrarily short length scales. These fluctuations don’t affect the low-energy excitations, but they do mean that the zero-point fluctuations of the field become arbitrarily large. Let us start out with a discrete string, as shown in Figure 2.8. For small displacements, the Hamiltonian for this discrete string is identical to that of the previous section, as we can see by the following argument. If a string is made up of point particles of mass m separated by a distance a, with a tensile force T acting between them, then, for small transverse displacements φj, the link between the jth and (j + 1)th particle is expanded by an amount *sj = (φj − φj+1)2/2a, raising the potential energy by an amount T*sj. The Hamiltonian is then
+Hˆ = ∑
+j=1,Ns
+[ πj2
+2m + T
+2a (φj − φj+1)2
+]
+, (2.113)
+which reverts to (2.69) with the replacement T/a → mω2.
+
+
+2.6 The continuum limit: a → 0 33
+To take the continuum limit, we let a → 0, preserving ρ = m/a. In this limit, we may replace
+a∑
+j
+→
+∫
+dx
+(φj − φj+1)2
+a2 → (∇xφ(x))2. (2.114)
+Making the replacement
+πj/a → π (xj), (2.115)
+we obtain
+H=
+∫
+dx
+[T
+2
+(∇xφ)2+ 1
+2ρ π (x)2
+]
+. (2.116)
+On the discrete lattice we have the commutation relations
+[φ(xi), π (xj)] = iħδ ̃(xi − xj), (2.117)
+where δ ̃(xi − xj) = a−1δij. In the limit a → 0, δ ̃(xi − xj) behaves as a Dirac delta function, so
+[φ(x), π (y)] = iħδ(x − y). (2.118)
+Notice that while we have taken a → 0 to obtain the continuum limit, in principle we can still retain the finite length L of the string. If we preserve the same periodic boundary conditions φ(x) = φ(x + L), the momenta q = 2π
+L n will still be discrete, despite the
+continuous position variables. We shall, however, skip this step and go directly to the thermodynamic limit. Transforming to momentum space, we obtain
+φq =
+∫
+dxφ(x)e−iqx
+πq =
+∫
+dxπ (x)e−iqx, (2.119)
+from which we immediately derive the canonical commutation relation
+[φq, π−q′ ] =
+∫
+dxdx′e−i(qx−q′x′)
+iħδ(x−x′)
+{ }} {
+[φ(x), π (x′)]
+= iħ
+⟨q|q′⟩=2π δ(q−q′)
+{ }} {
+∫
+dxe−i(q−q′)x = iħ × 2π δ(q − q′). (2.120)
+Now it is just a question of repeating the steps of the previous section, but for the continuous fields φq and πq. Using the inverse Fourier transforms,
+φ(x) =
+∫ dq
+2π φqeiqx
+π (x) =
+∫ dq
+2π πqeiqx. (2.121)
+
+
+34 Quantum fields
+When we transform the Hamiltonian, we obtain
+H=
+∫ dq 2π
+[ πqπ−q
+2ρ + Tq2
+2 φqφ−q
+]
+, (2.122)
+where the main effect is the replacement of the gradient by its Fourier transform, |∇xφ|2 → q2|φq|2. We can write this in a form reminiscent of the harmonic oscillator:
+H=
+∫ dq 2π
+[ πqπ−q
+2ρ + ρωq2
+2 φqφ−q
+]
+, (2.123)
+where now ωq = c|q|, and c = √T/ρ is the velocity of sound. Now the only problem with the above procedure is that, by going to the continuum, the spectrum ωq = c|q| stretches to infinity, with an unbounded number of high-frequency or ultraviolet modes. To carry out actual calculations, we still need some kind of momentum cut-off. A crude way would be simply to cut off the momentum integrals. A slightly more elegant way is to introduce a small exponential convergence factor into the Fourier transform, defining the real-space fields by
+φ(x) =
+∫ dq
+2π φqeiqxe−ε|q|/2, π (x) =
+∫ dq
+2π πqeiqxe−ε|q|/2. (2.124)
+If we repeat the calculation of the commutation relation, we now find
+[φ(x), π (y)] =
+∫ dqdq′
+(2π )2 ei(qx−q′x′)
+2π iħδ(q−q′)
+{ }} {
+[φq, π−q′ ] e− ε2 (|q|+|q′|)
+= iħ
+∫ dq
+(2π ) eiq(x−x′)−|q|ε = iħ ×
+[∫ ∞
+0
+e−(ε−i(x−x′))q +
+∫0
+−∞
+e(ε+i(x−x′))q
+]
+= iħ
+2π
+[1
+ε − i(x − x′) + 1
+ε + i(x − x′)
+]
+= iħ ×
+δε (x−x′)
+{ }} { 1
+π
+(ε
+ε2 + (x − x′)2
+) ,
+(2.125)
+showing that the removal of the ultraviolet modes smears the delta function into a Lorentzian of width ε. The regulated Hamiltonian now takes the form
+H=
+∫ dq 2π
+[ πqπ−q
+2ρ + ρωq2
+2 φqφ−q
+]
+e−ε|q|. (2.126)
+Notice how this has almost exactly the same form as the the discrete lattice, but now the high-momentum modes are cut off by the exponential factor, rather than the finite size of the Brillouin zone. Defining the creation and annihilation operators by the relations
+φq =
+√ħ
+2ρωq
+[aq + a†−q]
+πq = −i
+√ ħρωq
+2 [aq − a†−q], (2.127)
+
+
+2.6 The continuum limit: a → 0 35
+we find that the creation and annihilation operators satisfy
+[aq, a†
+q′ ] = 2π δ(q − q′). (2.128)
+We may now rewrite the Hamiltonian as
+H=
+∫∞
+−∞
+dq 2π
+ħωq 2
+(a†qaq + a−qa†−q
+)e−ε|q|. (2.129)
+If we reorder the boson operators, we obtain
+H=
+∫∞
+∞
+dq
+2π ħωq
+⎛
+⎝a†qaq +
+L
+{ }} {
+2π δ(0) 1
+2
+⎞
+⎠ e−ε|q| (2.130)
+The first term corresponds to the excitations of the string, and we recognize the last term as the zero-point energy of the string. Had we started out on a finite but long string, the term 2π δ(0) would be replaced by L, which is merely a statement that the zero-point energy scales with the length:
+Ezp = L
+∫∞
+0
+dq
+2π ħc|q|e−ε|q| = Lħc
+2π ε2 . (2.131)
+Once we remove the momentum cut-off, the momentum sum is unbounded and the zeropoint energy per unit length becomes infinite in the continuum limit. It often proves convenient to remove this nasty infinity by introducing the concept of normal ordering. If we take any operator A, then we denote its normal-ordered counterpart by the symbol : A :. The operator : A : is the same as A, except that all the creation operators have been ordered to the left of all of the annihilation operators. All commutators associated with the ordering are neglected. The normal-ordered Hamiltonian
+: H :=
+∫∞
+−∞
+dq
+2π ħωqa†qaq (ωq = c|q|) (2.132)
+measures the excitation energy above the ground state. Finally, let us look at the displacement of the string. The fields in coordinate space are given by
+φ(x, t) =
+∫ dq 2π
+√ħ
+2ρωq
+[aq(t) + a†−q(t)]eiqxe−ε|q|/2, (2.133)
+where, as in the case of the harmonic oscillator,
+aq(t) = aqe−iωqt, a†q(t) = aqeiωqt. (2.134)
+Note:
+• The generalization of the quantum string to higher dimensions is written
+H=
+∫
+ddx
+[T
+2
+(∇φ)2+ 1
+2ρ π (x)2
+]
+[φ(x), π (y)] = iħδd(x − y). (2.135)
+
+
+36 Quantum fields
+Sometimes it is useful to rescale φ(x) → φ(x)/√ρ, π (x) → π (x)√ρ, so that
+H= 1
+2
+∫
+ddx
+[(c∇φ)2+π 2]
+. (2.136)
+In two dimensions, this describes a fluctuating quantum membrane. • In particle physics, the “massive” version of the above model, written as
+H= 1
+2
+∫
+ddx
+[
+φ
+(
+−c2∇2 +
+( mc2
+ħ
+)2)
+φ + π2
+]
+, (2.137)
+where c is the speed of light, is called the Klein–Gordon Hamiltonian. In this model,
+the elementary quanta have energy Eq = √(ħcq)2 + (mc2)2. This also corresponds to a
+string where a uniform displacement φ costs an energy proportional to m2φ2.
+Example 2.6 Calculate the the equal-time ground-state correlation function
+S(x) = 1
+2 ⟨0|(φ(x) − φ(0))2|0⟩ (2.138)
+for a one-dimensional string.
+Solution
+Let us begin by rewriting
+S(x) = ⟨0|(φ(0)2 − φ(x)φ(0))|0⟩, (2.139)
+where we have used translational and inversion symmetry to replace ⟨0|φ(x)2|0⟩ = ⟨0|φ(0)2|0⟩ and ⟨0|φ(x)φ(0)|0⟩ = ⟨0|φ(0)φ(x)|0⟩. When we expand φ(x) and φ(0) in terms of creation and annihilation operators, only
+terms of the form ⟨0|aqa†
+−q′ |0⟩ = ⟨0|[aq, a†
+−q′ ]|0⟩ = (2π )δ(q − q′) will survive. Let us
+write this out explicitly:
+S(x) =
+∫ dqdq′ (2π )2
+ħ
+2ρc√|q||q′| ⟨0|[aq + a†−q][a−q′ + a†
+q′ ]|0⟩(1 − eiqx)e−|q|ε
+=ħ
+2ρc
+∫ dq
+2π e−|q|ε
+( 1 − eiqx
+|q|
+)
+=
+(ħ
+ρc
+)[ 1
+4π ln( ε2 + x2
+ε2
+)]
+, (2.140)
+where, to obtain the last step, we first calculate
+dS
+dx = − iħ
+2ρc
+∫ dq
+2π eiqx−q|ε|sgn(q)
+= − iħ
+2ρc
+[∫ ∞
+0
+dq
+2π e−[ε−ix]q −
+∫0
+−∞
+dq
+2π e[ε+ix]q
+]
+= − iħ
+4πρc
+[1
+ε − ix − 1
+ε + ix
+]
+=− ħ
+2πρc Im
+(1
+ε − ix
+)
+(2.141)
+
+
+Exercises 37
+and then integrate the answer on x, noting that S(0) = 0, to get
+S(x) = ħ
+2πρc Im
+∫x
+0
+1
+ε − ix′ dx′ = ħ
+2πρc Re ln
+( ε − ix
+ε
+)
+=ħ
+4πρc ln
+( ε2 + x2
+ε2
+)
+. (2.142)
+Remarks
+• Were we to send the cut-off ε → 0, the fluctuations at a given distance x would diverge logarithmically with ε, because the number of short-wavelength (ultraviolet) fluctuations becomes unbounded. • We could have also obtained this result by working with a discrete string and taking a → 0 at the end of the calculation. Had we done this, we would have found that
+S(x) = ħ
+2m
+∑
+q
+( 1 − eiqx
+ωq
+)
+, (2.143)
+which has the same long-wavelength behavior. • Had we repeated this calculation in D dimensions, the integral over q would become a D-dimensional integral. In this case,
+S(x) ∼
+∫
+dDq
+( 1 − eiqx
+|q|
+) ∼
+∫ 1/ε
+1/x
+dDq
+|q| ∼ 1
+xD−1 (2.144)
+at short distances. Notice that the eiqx term averages to zero at large q, but cuts off the integral for q < ̃ 1/x. In higher dimensions, the phase space for number of short
+wavelength fluctuations grows as qD, which leads to stronger fluctuations at short distances.
+Exercises
+Exercise 2.1 In 1906, in what is arguably the first paper in theoretical condensed matter physics [3], Albert Einstein postulated that vibrational excitations of a solid are quantized with energy ħω, just like photons in the vacuum. Repeat his calculation for diamond: calculate the energy E(T) of one mole of simple harmonic oscillators with characteristic frequency ω at temperature T and show that the specific heat capacity is
+CV (T) = dE
+dT = RF
+( ħω kBT
+) ,
+where
+F(x) =
+( x/2
+sinh(x/2)
+)2
+
+
+38 Quantum fields
+and R = NAV kB, the product of Avagadro’s number NAV and Boltzmann’s constant kB. Plot C(T) and show that it deviates from Dulong and Petit’s law, CV = (R/2) per quadratic degree of freedom, at temperatures T << ħω/kB. Exercise 2.2 Consider the orthogonality relation in (2.73): ∑
+j
+⟨qm|j⟩⟨ j|qn⟩ ≡ 1
+Ns
+∑
+j
+ei(qn−qm)Rj = δnm, (2.145)
+where qn = n 2π
+L , q = n 2π
+L = n 2π
+Nsa are the discrete wavevectors, Ns = L/a is the
+number of sites in the chain and a is the lattice spacing. By substituting Rj = ja and treating this expression as a geometric series, show that
+∑
+j
+⟨qm|j⟩⟨ j|qn⟩ ≡ 1
+Ns
+Ns−1
+∑
+j=0
+ei(qn−qm)ja = (−1)(N−1)(n−m)
+Ns
+sin[π (n − m)] sin[ π
+Ns (n − m)] ≡ δnm,
+thereby proving orthogonality. Exercise 2.3 For the harmonic oscillator H = ħω[a†a + 12 ], we know that
+⟨ˆn⟩ = n(ω) = 1
+eβħω − 1 , (2.146)
+where β = 1/(kBT) and nˆ = a†a is the number operator. In the ground state, using the equations of motion for the creation and annihilation operators, we showed that the zero-point fluctuations in position were described by the correlation function
+1
+2 ⟨{x(t), x(0)}⟩ = ħ
+2mω cos ωt. (2.147)
+Generalize this result to finite temperatures. You should find that there are two terms in the correlation function. Please give them a physical interpretation. Exercise 2.4 (a) Show that, if a is a canonical Bose operator, the canonical transformation
+b = ua + va†
+b† = ua† + va (2.148)
+(where u and v are real) preserves the canonical commutation relations, provided u2 − v2 = 1. (b) Using the results of (a), diagonalize the Hamiltonian
+H=ω
+(
+a†a + 1
+2
+)
++1
+2 *(a†a† + aa) (2.149)
+by transforming it into the form H = ω ̃ (b†b + 12 ). Find ω ̃ , u and v in terms of ω
+and *. What happens when * = ω? (c) The Hamiltonian in (b) has a boson pairing term. Show that the ground state of H can be written as a coherent condensate of paired bosons, given by
+| ̃0⟩ = e−α(a†a†)|0⟩.
+Calculate the value of α in terms of u and v. (Hint: | ̃0⟩ is the vacuum for b,
+i.e. b| ̃0⟩ = (ua + va†)| ̃0⟩ = 0. Calculate the commutator of [a, e−αa†a† ] by
+
+
+Exercises 39
+expanding the exponential as a power series. Find a value of α that guarantees that b annihilates the vacuum | ̃0⟩.) Exercise 2.5 (a) Find the classical normal-mode frequencies and normal coordinates for the one-dimensional chain with Hamiltonian
+H=∑
+j
+[ pj2
+2mj
++k
+2 (φj − φj−1)2
+]
+, (2.150)
+where at even sites m2j = m and at odd sites m2j+1 = M. Please sketch the dispersion curves. (b) What is the gap in the excitation spectrum? (c) Write the diagonalized Hamiltonian in second-quantized form and discuss how you might arrive at your final answer. You will now need two types of creation operator. Exercise 2.6 According to the Lindeman criterion, a crystal melts when the RMS displacement of its atoms exceeds one-third of the average separation of the atoms. Consider a three-dimensional crystal with separation a, atoms of mass m and a nearest-neighbor quadratic interaction V = mω2
+2 ( ⃗0R − ⃗0R+a)2.
+(a) Estimate the amplitude of zero-point fluctuations using the uncertainty principle, to show that, if
+ħ
+mωa2 > ζc, (2.151)
+where ζc is a dimensionless number of order one, the crystal will be unstable, even at absolute zero, and will melt due to zero-point fluctuations. (Hint: what would the answer be for a simple harmonic oscillator?) (b) Calculate ζc in the above model. If you like, to start out imagine that the atoms only move in one direction, so that 0 is a scalar displacement at the site with equilibrium position R. Calculate the RMS zero-point displacement of an atom,
+√⟨0|0(x)2|0⟩. Now generalize your result to take account of the fluctuations in three orthogonal directions. (c) Suppose ħω/kB = 300 K and the atom is a helium atom. Assuming that ω is independent of atom separation a, estimate the critical atomic separation ac at which the solid becomes unstable to quantum fluctuations. Note that in practice ω is dependent on a, and rises rapidly at short distances, with ω ∼ a−α, where α > 2. Is the solid stable for a < ac or for a > ac? Exercise 2.7 Find the transformation that diagonalizes the Hamiltonian
+H=∑
+j
+{
+J1(a†
+i+1ai + H.c.) + J2(a†
+i+1a†
+i + H.c.)
+}
+, (2.152)
+where the ith site is located at Rj = aj, and “H.c.” denotes the Hermitian conjugate. You may find it helpful to (i) transform to momentum space, writing aj = 1
+N 1/2
+∑
+q eiqRj aq, and (ii) carry out a canonical transformation of the form
+bq = uqaq + vqa†−q, where u2 − v2 = 1. What happens when J1 = J2?
+
+
+40 Quantum fields
+Exercise 2.8 This problem sketches the proof that the displacement of the quantum harmonic oscillator, originally in its ground state (in the distant past), is given by
+⟨x(t)⟩ =
+∫∞
+0
+R(t − t′)f (t′)dt′, (2.153)
+where
+R(t − t′) = i
+ħ ⟨0|[x(t), x(t′)]|0⟩ (2.154)
+is the response function and x(t) is the position operator in the Heisenberg representation of H0. A more detailed discussion can be found in Chapter 9. An applied force f (t) introduces an additional forcing term to the harmonic oscillator Hamiltonian
+Hˆ (t) = H0 + V(t) = Hˆ 0 − f (t)xˆ, (2.155)
+where H0 = ħω(a†a + 12 ) is the unperturbed Hamiltonian. To compute the dis
+placement of the harmonic oscillator, it is convenient to work in the interaction representation, which is the Heisenberg representation for H0. In this representation, the time evolution of the wavefunction is due to the force term. The wavefunction of the harmonic oscillator in the interaction representation |ψI(t)⟩ is related to the Schrödinger state |ψS(t)⟩ by the relation |ψI(t)⟩ = eiH0t/ħ|ψS(t)⟩. (a) By using the equation of motion for the Schrödinger state, iħ∂t|ψS(t)⟩ = (H0 + V(t))|ψS(t)⟩, show that the time evolution of the wavefunction in the interaction representation is
+iħ∂t|ψI(t)⟩ = VI(t)|ψI(t)⟩ = −f (t)xˆ(t)|ψI(t)⟩, (2.156)
+where VI(t) = eiH0t/ħVˆ (t)e−iH0t/ħ = −x(t)f (t) is the force term in the interaction representation. (b) Show that, if |ψ(t)⟩ = |0⟩ at t = −∞, then the leading-order solution to the above equation of motion is
+|ψI(t)⟩ = |0⟩ + i
+ħ
+∫t
+−∞
+dt′f (t′)xˆ(t′)|0⟩ + O( f 2), (2.157)
+so that
+⟨ψI(t)| = ⟨0| − i
+ħ
+∫t
+−∞
+dt′f (t′)⟨0|xˆ(t′) + O( f 2). (2.158)
+(c) Using the results just derived, expand the expectation value ⟨ψI(t)|x(t)|ψI(t)⟩ to linear order in f , obtaining the above cited result.
+References
+[1] A. Einstein, Concerning an heuristic point of view towards the emission and transformation of light, Ann. Phys. (Leipzig), vol. 17, p. 132, 1905.
+
+
+References 41
+[2] A. B. Arons and M. B. Peppard, Einstein’s proposal of the photon concept: a translation of the Annalen der Physik paper of 1905, Am. J. Phys., vol. 33, p. 367, 1965. [3] A. Einstein, Planck’s theory of radiation and the theory of the specific heat, Ann. Physik, vol. 22, p. 180, 1907.
+[4] A. Pais, Subtle is the Lord: the Science and the Life of Albert Einstein, Oxford University Press, 1982. [5] M. Born and P. Jordan, Zur Quantenmechanik (On quantum mechanics), Z. Phys., vol. 34, p. 858, 1925. [6] P. A. M. Dirac, The fundamental equations of quantum mechanics, Proc. R. Soc. A, vol. 109, p. 642, 1925. [7] W. Pauli, Die Quantumtheorie und die Rotverschiebung der Spektralien (Quantum theory and the red shift of spectra), Z. Phys., vol. 26, p. 765, 1925. [8] P. A. M. Dirac, On the theory of quantum mechanics, Proc. R. Soc. A, vol. 112, p. 661, 1926. [9] P. Jordan and O. Klein, Zum Mehrkörperproblem der Quantentheorie (On the manybody problem of quantum theory), Z. Phys., vol. 45, p. 751, 1927. The second quantization condition for bosons appears in equation (14) of this paper. [10] P. Jordan and E. Wigner, Uber das Paulische Aquivalenzverbot (On the Pauli exclusion principle), Z. Phys., vol. 47, p. 631, 1928. [11] W. Heisenberg, Uber quanten theoretische Umdeutung kinematischer und mechanischer Beziehungen (Quantum theoretical reinterpretation of kinematic and mechanical relations), Z. Phys., vol. 33, p. 879, 1925.
+
+
+3 Conserved particles
+From Einstein and Planck’s quantum hypothesis, we learned that the collective excitations of a field are discrete “massless” particles. This leads us naturally to reverse the logic, and to ask – in the case where we have conserved particles, particles with mass, such as a gas of 4He atoms, or an electron gas inside a metal – do those particles also arise from a quantum field?
+fields ! particles
+This is the motivation for this chapter: to find a way to rewrite Schrödinger’s many-body quantum mechanics in terms of a quantum field that encodes both the particles and their statistics. First-quantized quantum mechanics can deal with many-body physics, through the introduction of a many-particle wavefunction. This is the approach used in quantum chemistry, where the number of electrons is large but not macroscopic. The quantum chemistry approach revolves around the many-body wavefunction. For N particles, this a function of 3N variables and N spins. The Hamiltonian is then an operator expressed in terms of these coordinates:
+ψ −→ ψ(x1, x2, . . . xN , t)
+H −→ ∑
+j
+[
+− ħ2
+2m ∇j2 + U(xj)
+]
++1
+2
+∑
+i<j
+V(xi − xj). (3.1)
+With a few famous exceptions this method is cumbersome, and ill-suited to macroscopically large systems. The most notable exceptions occur in low-dimensional problems, where wavefunctions of macroscopically large ensembles of interacting particles have been obtained. Examples include:
+• Bethe ansatz solutions to interacting one-dimensional and impurity problems [1–4] • Laughlin’s wavefunction for interacting electrons in high magnetic fields, at commensurate filling factors [5, 6].
+Second quantization provides a general way of approaching many-body systems in which the wavefunction plays a minor role. As we mentioned in Chapter 2, the essence of second quantization is a process of raising the Schrödinger wavefunction to the level of an operator which satisfies certain canonical commutation or canonical anticommutation algebras. In first-quantized physics, physical properties of a quantum particle such as its density, kinetic energy and potential energy can be expressed in terms of the one-particle wavefunction. Second quantization elevates each of these quantities to the status of an operator by replacing the one-particle wavefuncion by its corresponding field operator:
+
+
+3.1 Commutation and anticommutation algebras 43
+ψ(x, t) −→ ψˆ (x, t) one-particle wavefunction field operator
+O(ψ∗, ψ) −→ ˆO(ψˆ †, ψˆ ).
+⎫⎪⎪⎬
+⎪⎪⎭
+second quantization (3.2)
+For example, Born’s famous expression for the one-particle (probability) density becomes an operator as follows:
+ρ(x) = |ψ(x)|2 −→ ρˆ(x) = ψˆ †(x)ψˆ (x), (3.3)
+so that the potential energy associated with an external potential is
+Vˆ =
+∫
+d3xU(x)ρˆ(x). (3.4)
+Similarly, the kinetic energy in first quantization
+T[ψ∗, ψ] =
+∫
+d3xψ ∗ (x)
+[
+− ħ2
+2m ∇2
+]
+ψ(x) (3.5)
+becomes the operator
+Tˆ =
+∫
+d3xψˆ †(x)
+[
+− ħ2
+2m ∇2
+]
+ψˆ (x). (3.6)
+Finally,
+H=
+∫
+d3xψˆ †(x)
+[
+− ħ2
+2m ∇2 + U(x)
+]
+ψˆ (x) + 1
+2
+∫
+d3xd3x′V(x − x′) : ρˆ(x)ρˆ(x′) : (3.7)
+is the complete many-body Hamiltonian in second-quantized form. Here V(x − x′) is the interaction potential between the particles, and the symbol “:” reflects the fact that order of the operators counts. The normal ordering operator “: . . . :” indicates that all creation operators between the two colons must be ordered to lie to the left of all destruction operators.
+3.1 Commutation and anticommutation algebras
+In 1928, Jordan and Wigner [7] proposed that the microscopic field operators describing identical particles divide up into two types. This is an axiom of quantum field theory. For bosons, field operators satisfy a commutation algebra, whereas fermions satisfy an anticommutation algebra. Since we will be dealing with many of their properties in parallel, it useful to introduce a unified notation for commutators and anticommutators, as follows:
+{a, b} = ab + ba ≡ [a, b]+
+[a, b] = ab − ba ≡ [a, b]− (3.8)
+so that
+[a, b]∓ = ab ∓ ba. (3.9)
+
+
+44 Conserved particles
+Table 3.1 First and second quantization treatment of conserved particles.
+First quantization Second quantization
+Wavefunction −→ field operator
+ψ(x) = ⟨x|ψ⟩ ψˆ (x)
+Commutator [x, p] = iħ [ψˆ (x), ψˆ †(x′)]∓ = δD(x − x′)
+Density ρ(x) = |ψ(x)|2 ρˆ(x) = ψˆ †(x)ψˆ (x)
+Arbitrary basis ψλ = ⟨λ|ψ⟩ ψˆ λ
+Change of basis ⟨s ̃|ψ⟩ = ∑
+λ⟨s ̃|λ⟩⟨λ|ψ⟩ ˆas = ∑
+λ⟨s ̃|λ⟩ψˆ λ
+Orthogonality ⟨λ|λ′⟩ = δλλ′ [ψλ, ψ†
+λ′ ]∓ = δλλ′
+One-particle energy p2
+2m + U ∫
+x ψˆ †(x)
+(
+− ħ2
+2m + U(x)
+)
+ψˆ (x)
+Interaction ∑
+i<j V(xi − xj) Vˆ = 12
+∫
+x,x′ V(x − x′) : ρˆ(x)ρˆ(x′) :
+= 12
+∑ V(q)c†
+k+qc†
+k′−qck′ ck Many-body wavefunction
+%(x1, x2, . . . xN ) ⟨0|ψˆ (x1) · · · ψˆ (xN )|%⟩
+Schrödinger equation
+(∑ Hi + ∑
+i<j Vij
+)
+% = iħ% ̇ [H(0) +∫
+x′ ρˆ(x′)V(x′ −x)]ψˆ (x)
+= iħψ ̇ (x)
+We shall adopt the −/+ subscript notation in this chapter while discussing both bosons and fermions together. The algebra of field operators is then
+[ψ(1), ψ(2)]∓ = [ψ†(2), ψ†(1)]∓ = 0
+[ψ(1), ψ†(2)]∓ = δ(1 − 2).
+⎫⎬
+⎭ bosons/fermions (3.10)
+When spin is involved, 1 ≡ (x1, σ1) and δ(1 − 2) = δ(D)(x1 − x2)δσ1σ2 . We shall motivate these axioms in two ways: (i) by showing, in the case of bosons, that they are a natural result of trying to quantize the one-particle wavefunction; (ii) by showing that they lead to the first-quantized formulation of many-body physics, naturally building the particle exchange statistics into the mathematical framework. Table 3.1 summarizes the main points of second quantization that we shall now discuss in detail.
+3.1.1 Heuristic derivation for bosons
+The name “second quantization” derives from the notion that many-body physics can be obtained by quantizing the one-particle wavefunction. Philosophically, this is very tricky, for surely the wavefunction is already a quantum object? Let us imagine, however, a thought experiment in which we prepare a huge number of non-interacting particles in such a way that they are all in precisely the same quantum state. The feasibility of this does not worry us here, but note that it can actually be done for a large ensemble of bosons
+
+
+3.1 Commutation and anticommutation algebras 45
+by condensing them into a single quantum state. In this circumstance, every single particle lies in the same one-particle state. If we time-evolve the system, we can think of the singleparticle wavefunction as a semiclassical variable describing the collective behavior of the condensate. Let us briefly recall one-particle quantum mechanics. If the particle is in a state |ψ⟩, then we can always expand the state in terms of a complete basis {|n⟩}, as follows:
+|ψ(t)⟩ = ∑
+n
+|n⟩
+ψn(t)
+{ }} {
+⟨n|ψ(t)⟩ = ∑
+n
+|n⟩ψn(t), (3.11)
+so that |ψn(t)|2 = pn(t) gives the probability of being in state n. Applying Schrödinger’s equation, Hˆ |ψ⟩ = iħ∂t|ψ⟩, gives
+iħψ ̇ n(t) = ∑
+m
+⟨n|H|m⟩ψm(t)
+iħψ ̇ n∗(t) = − ∑
+m
+⟨m|H|n⟩ψm∗ (t). (3.12)
+Now if we write the ground-state energy as a functional of the ψm(t), we get
+H(ψ, ψ∗) = ⟨H⟩ = ∑
+m,n
+ψm∗ ψn⟨m|H|n⟩. (3.13)
+We see that the equations of motion can be written in Hamiltonian form
+ψ ̇ m = ∂H(ψ, ψ∗)
+iħ∂ ψm∗
+(
+cf.  ̇q = ∂H
+∂p
+)
+iħψ ̇ m∗ = − ∂H(ψ, ψ∗)
+∂ ψm
+(
+cf. p ̇ = − ∂H
+∂q
+)
+, (3.14)
+so we can identify
+{ψn, iħψn∗} ≡ {qn, pn} (3.15)
+as the canonical position and momentum coordinates. But suppose we don’t have a macroscopic number of particles in a single state. In this case, the amplitudes ψn(t) are expected to undergo quantum fluctuations. Let us examine what happens if we second-quantize these variables, making the replacement
+[qn, pm] = iħδnm = iħ[ψn, ψm† ] (3.16)
+or
+[ψn, ψm] = [ψn†, ψm† ] = 0,
+[ψn, ψm† ] = δnm.
+(3.17)
+In terms of these operators, our second-quantized Hamiltonian becomes
+H=∑
+m,l
+ψˆ m† ψˆ l⟨m|H|l⟩. (3.18)
+
+
+46 Conserved particles
+If we now use this to calculate the time evolution of the quantum fields, we obtain
+− iħ∂tψj = [Hˆ , ψj] = ∑
+m,l
+⟨m|H|l⟩
+−δmj ψl
+{ }} {
+[ψm† ψl, ψj] . (3.19)
+Eliminating the sum over m, we obtain
+− iħ∂tψj = − ∑
+l
+⟨ j|H|l⟩ψl
+−iħ∂t ψ †
+j = [Hˆ , ψ†
+j]=∑
+l
+ψ†
+l ⟨l|H|j⟩, (3.20)
+where the complex conjugated expression gives the time evolution of ψ†
+l . Remarkably, the equations of motion of the operators match the time evolution of the one-particle amplitudes. But now that we have operators, we have all the new physics associated with quantum fluctuations of the particle fields.
+3.2 What about fermions?
+Remarkably, as Jordan and Wigner first realized, we recover precisely the same time evolution if we second-quantize the operators using anticommutators [7] rather than commutators, and it is this choice that gives rise to fermions and the exclusion principle. But for fermions we cannot offer a heuristic argument, because they don’t condense: as far as we know, there is no situation in which individual Fermi field operators behave semiclassically (although of course, in a superconductor, pairs of fermions behave semiclassically). In fact, all of the operations we carried out above work equally well with either canonical commutation or canonical anticomutation relations:
+[ψn, ψm]∓ = [ψn†, ψm† ]∓ = 0
+[ψn, ψm† ]∓ = δnm
+(3.21)
+where the ∓ refers to bosons/fermions, respectively. To evaluate the equation of motion of the field operators, we need to know the commutator [H, ψn]. Using the relation
+[ab, c] = a[b, c]∓ ± [a, c]∓b (3.22)
+we may verify that
+[ψm† ψl, ψj] = ψm† [
+{ }0} {
+ψl, ψj]∓
+−δmj
+{ }} {
+±[ψm† , ψj]∓ ψl
+= −δmjψl, (3.23)
+
+
+3.3 Field operators in different bases 47
+so that
+− iħ∂tψj = [Hˆ , ψj] = ∑
+m,l
+⟨m|H|l⟩
+−δmj ψl
+{ }} {
+[ψm† ψl, ψj]
+= −∑
+l
+⟨ j|H|l⟩ψl, (3.24)
+independently of whether we use an anticommuting or commuting algebra. Let us now go on, and look at some general properties of second-quantized operators that hold for both bosons and fermions.
+3.3 Field operators in different bases
+Let us first check that our results don’t depend on the one-particle basis we use. To do this, we must confirm that the commutation or anticommutation algebra of bosons or fermions is basis-independent. Let us recall that, in quantum mechanics, if Hilbert space is spanned by an orthonormal and complete basis of states {|r⟩}, then this basis satisfies
+⟨r|s⟩ = δrs orthonormality
+∑
+r
+|r⟩⟨r| = 1. completeness (3.25)
+The completeness identity is particularly valuable – one of my favourite equations 
+because we can always insert the identity 1 = ∑
+r |r⟩⟨r|, permitting operator expressions to be decomposed in terms of matrix elements with a particular basis. Suppose we have two complete, orthonormal bases of one-particle states: the {|r⟩} basis and a new {|s ̃⟩} basis, where
+|ψ⟩ = ∑
+r
+|r⟩ψr = ∑
+s
+| ̃s⟩as, (3.26)
+where ⟨ ̃s|ψ⟩ = as and ⟨r|ψ⟩ = ψr. Introducing the completeness relation 1 = ∑
+r |r⟩⟨r| into the first expression, we obtain
+as
+{ }} {
+⟨ ̃s|ψ⟩ = ∑
+r
+⟨ ̃s|r⟩
+ψr
+{ }} {
+⟨r|ψ⟩ . (3.27)
+If this is how the one-particle states transform between the two bases, then we must use the same unitary transformation to relate the field operators that destroy particles in the two bases:
+aˆs = ∑
+r
+⟨ ̃s|r⟩ψˆ r. (3.28)
+
+
+48 Conserved particles
+The commutation algebra of the new operators is now
+[ˆas, aˆ†p]± = ∑
+l,m
+⟨ ̃s|l⟩
+δlm
+{ }} {
+[ψˆ l, ψˆ m† ]±⟨m|p ̃⟩. (3.29)
+This is just the pre- and post-multiplication of a unit operator by the unitary matrix Usl = ⟨s ̃|l⟩ and its conjugate U†mp = ⟨m| ̃p⟩. The final result is unity, as expected:
+[ˆas, ˆa†p]± = ∑
+r
+⟨ ̃s|r⟩⟨r| ̃p⟩ = ⟨s ̃| ̃p⟩ = δsp. (3.30)
+In other words, the canonical commutation algebra is preserved by unitary transformations of basis. A basis of particular importance is the position basis. The one-particle wavefunction can always be decomposed in a discrete basis, as follows:
+ψ(x) = ⟨x|ψ⟩ = ∑
+n
+⟨x|n⟩ψn, (3.31)
+where ⟨x|n⟩ = φn(x) is the wavefunction of the nth state. We now define the corresponding destruction operator,
+ψˆ (x) = ∑
+n
+⟨x|n⟩ψˆ n, (3.32)
+which defines the field operator in real space. Using completeness of the one-particle
+eigenstates 1 = ∫ dDx|x⟩⟨x|, we can expand the orthogonality relation δnm = ⟨n|m⟩ as
+δnm = ⟨n|
+1=∫ dDx|x⟩⟨x|
+{}}{
+ˆ1 |m⟩ =
+∫
+dDx⟨n|x⟩⟨x|m⟩.
+By integrating (3.32) over x with ⟨n|x⟩, we can then invert this equation to obtain
+ψn =
+∫
+dDx⟨n|x⟩ψ(x), ψn† =
+∫
+dDxψ†(x)⟨x|n⟩. (3.33)
+You can see by now that, so far as transformation laws are concerned, ψn ∼ ⟨n| and ψ(x) ∼ ⟨x| transform like “bra” vectors, while their conjugates transform like “kets.” By moving to a real-space representation, we have traded a discrete basis for a continuous basis. The corresponding “unit” operator appearing in the commutation algebra now becomes a delta function:
+[ψ(x), ψ†(y)]± = ∑
+n,m
+⟨x|n⟩⟨m|y⟩
+δnm
+{ }} {
+[ψn, ψm† ]±
+=∑
+n
+⟨x|n⟩⟨n|y⟩ = ⟨x|y⟩
+= δ3(x − y), (3.34)
+where we have assumed a three-dimensional system.
+
+
+3.3 Field operators in different bases 49
+Another basis of importance is that provided by the one-particle energy eigenstates. In this basis ⟨l|H|m⟩ = Elδlm, so the Hamiltonian becomes diagonal:
+H=∑
+l
+Elψ †
+l ψl = ∑ El ˆnl. (3.35)
+The Hamiltonian of the non-interacting many-body system thus divides up into a set of individual components, each one describing the energy associated with the occupancy of a given one-particle eigenstate. The eigenstates of the many-body Hamiltonian are thus labeled by the occupancy of the lth one-particle state. Of course, in a real-space basis the Hamiltonian becomes more complicated. Formally, if we transform this back to the real-space basis, we find that
+H=
+∫
+dDx dDx′ψ†(x)⟨x|H|x′⟩ψ(x′). (3.36)
+For free particles in space, the one-particle Hamiltonian is
+⟨x|H|x′⟩ =
+[
+− ħ2
+2m ∇2 + U(x)
+]
+δD(x − x′), (3.37)
+so that the Hamiltonian becomes
+H=
+∫
+dDxψ † (x)
+[
+− ħ2
+2m ∇2 + U(x)
+]
+ψ(x), (3.38)
+which, despite its formidable appearance, is just a transformed version of the diagonalized Hamiltonian (3.35).
+Example 3.1 By integrating by parts, taking care with the treatment of surface terms, show that the second-quantized Hamiltonian (3.38) can be rewritten in the form
+H=
+∫
+dDx
+( ħ2
+2m |∇ψ(x)|2 + U(x)|ψ(x)|2
+)
+, (3.39)
+where we have taken a notational liberty common in field theory, denoting |∇ψ(x)|2 ≡ ⃗∇ψ†(x) · ⃗∇ψ(x) and |ψ(x)|2 ≡ ψ†(x)ψ(x).
+Solution
+Let us concentrate on the kinetic energy term in the Hamiltonian, writing H = T + U, where
+T=
+∫
+dDxψ † (x)
+(
+− ħ2
+2m ∇2
+)
+ψ(x). (3.40)
+Integrating this term by parts, we can split it into “bulk” and “surface” terms, as follows:
+T = ħ2
+2m
+∫
+dDx ⃗∇ψ†(x) · ⃗∇ψ(x) − ħ2
+2m
+TS
+{ }} {
+∫
+dDx ⃗∇ ·
+(
+ψ†(x) ⃗∇ψ(x)
+)
+. (3.41)
+
+
+50 Conserved particles
+Using the divergence theorem, we can rewrite the total derivative as a surface integral:
+TS = − ħ2
+2m
+∫
+d⃗S ·
+(
+ψ†(x) ⃗∇ψ(x)
+)
+. (3.42)
+Now it is tempting to just drop this term as a surface term that “vanishes at infinity.” However, here we are dealing with operators, so this brash step requires a little contemplation before we take it for granted. One way to deal with this term is to use periodic boundary conditions. In this case there really are no boundaries, or, more strictly speaking, opposite
+boundaries cancel (∫
+R dS + ∫
+L dS = 0), so the surface term is zero. But suppose we had
+used hard-wall boundary conditions, what then? Well, in this case we can decompose the field operators in terms of the one-particle eigenstates of the cavity. Remembering that, under change of bases, ψ(x) ∼ ⟨x| and ψ†(x) ∼ |x⟩ behave as “bras” and “kets” respectively, we write
+ψ(x) = ∑
+n
+φn(x)
+{ }} {
+⟨x|n⟩ ψn, ψ†(x) = ∑
+n
+ψn†
+φn∗ (x)
+{ }} {
+⟨n|x⟩ .
+Substituting these expressions into (3.42), the surface term becomes
+TS = ∑
+n,m
+t(nSm) ψn† ψm
+tnSm = − ħ2
+2m
+∫
+d⃗S · φn∗(x) ⃗∇φm(x). (3.43)
+Provided φn(x) = 0 on the surface, it follows that the matrix elements tnSm = 0, so that
+TˆS = 0.
+Thus, whether we use hard-wall or periodic boundary conditions, we can drop the surface contribution to the kinetic energy in (3.41), enabling us to write
+T = ħ2
+2m
+∫
+dDx| ⃗∇ψ(x)|2,
+and when we add in the potential term, we obtain (3.39).
+3.4 Fields as particle creation and annihilation operators
+By analogy with collective fields, we now interpret the quantity ˆnl = ψ†
+l ψl as the number operator, counting the number of particles in the one-particle state l. The total particle number operator is then
+N=∑
+l
+ψ†
+l ψl. (3.44)
+Using relation (3.22), it is easy to verify that, for both fermions and bosons,
+[Nˆ , ψl] = [ˆnl, ψl] = −ψl, [Nˆ , ψ†
+l ] = [ˆnl, ψ†
+l ] = ψ†
+l . (3.45)
+
+
+3.4 Fields as creation and annihilation operators 51
+In other words, Nˆ ψ†
+l = ψ†
+l (Nˆ + 1), so that ψ†
+l , adds a particle to state l. Similarly, since
+Nˆ ψl = ψl(Nˆ − 1), ψl destroys a particle from state l. There is, however, a vital difference between bosons and fermions. For bosons, the number of particles nl in the lth state is unbounded, but for fermions, since
+ψ†2
+l =1
+2 {ψ†
+l , ψ†
+l } = 0, (3.46)
+the amplitude for adding more than one particle to a given state is always zero. We can never add more than one particle to a given state: in other words, the exclusion principle follows from the algebra! The occupation number bases for bosons and fermions are given by
+|n1, n2, . . . nl, . . .⟩ = ∏
+l
+(ψ †
+l )nl
+√nl! |0⟩ (nr = 0, 1, 2, . . .) bosons
+|n1, n2, . . . nr⟩ = (ψr†)nr · · · (ψ†
+1 )n1 |0⟩ (nr = 0, 1), fermions
+(3.47)
+A specific example for fermions is
+|11 2013 4105 61⟩ = ψ †
+6ψ†
+4ψ†
+3ψ†
+1 |0⟩, (3.48)
+which contains particles in the 1st, 3rd, 4th and 6th one-particle states. Notice how the order in which we add the particles affects the sign of the wavefunction, so exchanging particles 4 and 6 gives
+ψ†
+4ψ†
+6ψ†
+3ψ†
+1 |0⟩ = −ψ†
+6ψ†
+4ψ†
+3ψ†
+1 |0⟩ = −|11 2013 4105 61⟩. (3.49)
+By contrast, a bosonic state is symmetric; for example,
+|81 02 3524 5416 ⟩ = 1
+√4! 2! 5! 8! ψ†
+6 (ψ †
+5 )4(ψ †
+4 )2(ψ †
+3 )5(ψ †
+1 )8|0⟩. (3.50)
+To get further insight, let us transform the number operator to a real-space basis by writing
+Nˆ =
+∫
+dDx dDy ∑
+l
+ψ † (x)
+δD(x−y)
+{ }} {
+⟨x|l⟩⟨l|y⟩ ψ(y), (3.51)
+so that
+Nˆ =
+∫
+dDxψ†(x)ψ(x). (3.52)
+From this expression, we are immediately led to identify
+ρ(x) = ψ†(x)ψ(x) (3.53)
+as the density operator. Furthermore, since
+[ρ(y), ψ(x)] = ∓[ψ†(y), ψ(x)]±ψ(y) = −δ3(x − y)ψ(y), (3.54)
+we can we can identify ψ(x) as the operator which annihilates a particle at x.
+
+
+52 Conserved particles
+Example 3.2 Using the result (3.54) that, if
+(3.55)
+measures the number of particles in some region R,
+[Nˆ R, ψ(x)] =
+{ −ψ(x), (x ∈ R)
+0 (x ̸∈ R). (3.56)
+By localizing the region R around x0, use this to prove that ψ(x0) annihilates a particle at position x0.
+Solution
+By directly commuting Nˆ R with ψ(x), we obtain
+[Nˆ R, ψ(x)] =
+∫
+y∈R
+[ρ(y), ψ(x)] = −
+∫
+y∈R
+δ3(x − y)ψ(y) =
+{ −ψ(x) (x ∈ R) 0 (x ̸∈ R).
+Suppose |nR⟩ is a state with a definite number nR of particles inside R. If the region R is centered around x0, then it follows that
+Nˆ Rψ(x0)|nR⟩ = ψ(x0)(Nˆ R − 1)|nR⟩ = (nR − 1)ψ(x0)|nR⟩
+contains one less particle. In this way, we see that ψ(x) annihilates a particle from inside region R, no matter how small that region is made, proving that ψ(x) annihilates a particle at position x0.
+Example 3.3 Suppose bq destroys a boson in a cubic box of side length L, where
+q = 2π
+L (i, j, k) is the momentum of the boson. Express the field operators in real space,
+and show that they satisfy canonical commutation relations. Write down the Hamiltonian in both bases.
+Solution
+The field operators in momentum space satisfy [bq, b†
+q′ ] = δqq′ . We may expand the field
+operator in real space as follows:
+ψ(x) = ∑
+q
+⟨x|q⟩bq. (3.57)
+Now
+⟨x|q⟩ = 1
+L3/2 eiq·x (3.58)
+is the one-particle wavefunction of a boson with momentum q. Calculating the commutator between the fields in real space, we obtain
+
+
+3.5 The vacuum and the many-body wavefunction 53
+[ψ(x), ψ†(y)] = ∑
+q,q′
+⟨x|q⟩⟨q′|y⟩
+δqq′
+{ }} {
+[bq, b†
+q′ ] = ∑
+q
+⟨x|q⟩⟨q|y⟩
+=1
+L3
+∑
+q
+eiq·(x−y) = δ(3)(x − y). (3.59)
+The last two steps could have been carried out by noting that ∑
+q |q⟩⟨q| = 1, so that
+[ψ(x), ψ†(y)] = ⟨x|y⟩ = δ3(x − y). The Hamiltonian for the bosons in a box is
+H = − ħ2
+2m
+∫
+d3xψ†(x)∇2ψ(x). (3.60)
+We now Fourier transform this, writing
+ψ†(x) = 1
+L3/2
+∑
+q
+e−iq·xb†q
+∇2ψ(x) = − 1
+L3/2
+∑
+q
+q2eiq·xbq. (3.61)
+Substituting into the Hamiltonian, we obtain
+H= 1
+L3
+∑
+q, q′
+εqb†
+q′ bq
+∫
+d3x
+L3 δq−q′
+{ }} {
+eiq−q′·x = ∑
+q
+εqb†qbq (3.62)
+where
+εq =
+( ħ2q2
+2m
+)
+(3.63)
+is the one-particle energy.
+3.5 The vacuum and the many-body wavefunction
+We are now in a position to build up the many-body wavefunction. Once again, of fundamental importance is the notion of the vacuum, the unique state |0⟩ which is annihilated by all field operators. If we work in the position basis, we can add a particle at site x to make the one-particle state
+|x⟩ = ψ†(x)|0⟩. (3.64)
+Notice that the overlap between two one-particle states is
+⟨x|x′⟩ = ⟨0|ψ(x)ψ†(x′)|0⟩. (3.65)
+
+
+54 Conserved particles
+By using the (anti) commutation algebra to move the creation operator in the above expression to the right-hand side, where it annihilates the vacuum, we obtain
+⟨0|ψ(x)ψ†(x′)|0⟩ = ⟨0|
+δ (3) (x−x′ )
+{ }} {
+[ψ(x), ψ†(x′)]∓|0⟩ = δ(3)(x − x′). (3.66)
+We can equally well add many particles, forming the N-particle state:
+|x1, x2, . . . xN ⟩ = ψ†(xN ) · · · ψ†(x2)ψ†(x1)|0⟩. (3.67)
+Now the corresponding “bra” state is given by
+⟨x1, x2, . . . xN| = ⟨0|ψ(x1)ψ(x2) · · · ψ(xN). (3.68)
+The wavefunction of the N-particle state %S(t) is the overlap with this state:
+%S(x1, x2, . . . xN , t) = ⟨x1, x2, . . . xN |%S(t)⟩ = ⟨0|ψ(x1)ψ(x2) · · · ψ(xN)|%S(t)⟩. (3.69)
+Remarks
+• In the above expression, the time dependence of the wavefunction lies in the “ket” vector |%(t)⟩. We can alternatively write the wavefunction in terms of the time-dependent Heisenberg field operators ψ(x, t) = eiHt/ħψ(x)e−iHt/ħ and the stationary Heisenberg “ket” vector |%H⟩ = eiHt/ħ|%S(t)⟩, as follows:
+%(x1, x2, . . . xN, t) = ⟨0|ψ(x1, t)ψ(x2, t) · · · ψ(xN, t)|%H⟩. (3.70)
+• The commutation/anticommutation algebra guarantees that the symmetry of this wavefunction under particle exchange is positive for bosons and negative for fermions, so that, if we permute the particles (1 2 · · · N) → (P1P2 · · · PN),
+⟨0|ψ(xP1 )ψ(xP2 ) · · · ψ(xPN )|%S(t)⟩ = (±1)P⟨0|ψ(x1)ψ(x2) · · · ψ(xN )|%(t)⟩, (3.71)
+where P is the number of pairwise permutations involved in making the permutation. Notice that, for fermions, this hard-wires the Pauli exclusion principle into the formalism, and guarantees a node at locations where any two position (and spin) coordinates coincide.
+Example 3.4 Two spinless fermions are added to a cubic box with sides of length L, in momentum states k1 and k2, forming the state
+|%⟩ = |k1, k2⟩ = c†
+k2 c†
+k1 |0⟩. (3.72)
+Calculate the two-particle wavefunction
+%(x1, x2) = ⟨x1, x2|%⟩. (3.73)
+
+
+3.6 Interactions 55
+Solution
+Written out explicitly, the wavefunction is
+%(x1, x2) = ⟨0|ψ(x1)ψ(x2)c†
+k2 c†
+k1 |0⟩. (3.74)
+To evaluate this quantity, we commute the two destruction operators to the right, until they annihilate the vacuum. Each time a destruction operator passes a creation operator, we generate a “contraction” term,
+{ψ(x), c†
+k} =
+∫
+d3y
+δ3(x−y)
+{ }} {
+{ψ(x), ψ†(y)}⟨y|k⟩ = ⟨x|k⟩ = L−3/2eik·x. (3.75)
+Carrying out this procedure, we generate a sum of pairwise contractions, as follows:
+⟨0|ψ(x1)ψ(x2)c†k2 c†k1 |0⟩ = ⟨x1|k1⟩⟨x2|k2⟩ − ⟨x1|k2⟩⟨x2|k1⟩
+=
+∣∣∣∣
+⟨x1|k1⟩ ⟨x1|k2⟩ ⟨x2|k1⟩ ⟨x2|k2⟩
+∣∣∣∣
+=1
+L3
+[
+ei(k1·x1+k2·x2) − ei(k1·x2+k2·x1)
+] .
+Note: the determinantal expression for the two-particle wavefunction is an example of a Slater determinant. The N-dimensional generalization can be used to define the wavefunction of the corresponding N-particle state.
+3.6 Interactions
+Second quantization is easily extended to interactions. Classically, the interaction potential energy of a continuous plasma of particles is given by
+V=1
+2
+∫
+d3x d3x′V(x − x′)ρ(x)ρ(x′), (3.76)
+so we might expect that the corresponding second-quantized expression is
+1 2
+∫
+d3x d3x′V(x − x′)ρˆ(x)ρˆ(x′). (3.77)
+This is wrong, because we have not been careful about the ordering of operators. Were we to use (3.77), then a one-particle state would interact with itself! We require that the action of the potential on the vacuum, or a one-particle state, gives zero:
+Vˆ |0⟩ = Vˆ |x⟩ = 0. (3.78)
+To guarantee this, we need to be careful that we normal order the field operators, by permuting them so that all destruction operators are on the right-hand side. All additional terms that are generated by permuting the operators are dropped, but the signs associated
+
+
+56 Conserved particles
+with the permutation process are preserved. We denote the normal-ordering process by two colons. Thus,
+: ρ(x)ρ(y) : = : ψ†(x)ψ(x)ψ†(y)ψ(y) : = ∓ψ†(x)ψ†(y)ψ(x)ψ(y) = ψ†(y)ψ†(x)ψ(x)ψ(y), (3.79)
+where we can remove the normal-ordering signs once all destruction operators are on the right-hand side. The correct expression for the interaction potential is then
+V=1
+2
+∫
+d3x d3x′V(x − x′) : ρˆ(x)ρˆ(x′) :
+=∑
+α,β
+1 2
+∫
+d3x d3x′V(x − x′)ψ†
+α(x′)ψ †
+β (x)ψβ (x)ψα(x′), (3.80)
+where we have written a more general expression for fields with spin α, β ∈ ± 12 .
+Example 3.5 Show that the action of the operator V on the many-body state |x1, . . . xN⟩ is given by
+Vˆ |x1, x2, . . . xN ⟩ = ∑
+i<j
+V(xi − xj)|x1, x2, . . . xN ⟩. (3.81)
+Solution
+First, note that this result is very natural, since the state |x1, . . . , xN⟩ is simultaneously an eigenstate of each of the N particle positions. Nevertheless, we’d like to confirm this with the machinery of the operators. To prove this, we first prove the intermediate result
+[Vˆ , ψ†(x)] =
+∫
+d3yV(x − y)ψ†(x)ρ(y). (3.82)
+This result can be obtained by expanding the commutator as follows:
+[Vˆ , ψ†(x)] = 1
+2
+∫
+y,y′ V(y − y′)ψ†(y)ψ†(y′)
+δ(y−x)ψ (y′ )±δ(y′ −x)ψ (y)
+{ }} {
+[ψ(y′)ψ(y), ψ†(x)]
+= ψ†(x) 1
+2
+∫
+y′ V(x − y′)ρ(y′) ± 1
+2
+∫
+y
+V(y − x)
+±ψ † (x)ψ † (y)
+{ }} {
+ψ†(y)ψ†(x) ψ(y)
+=
+∫
+y
+V(x − y)ψ†(x)ρ(y), (3.83)
+where the lower sign choice on the second line is for fermions. We now calculate
+Vˆ |x1, . . . xN ⟩ = Vˆ ψ†(xN) · · · ψ†(x1)|0⟩ (3.84)
+by commuting Vˆ successively to the right until it annihilates with the vacuum. Each time we hop Vˆ to the right over a field operator, we generate a remainder term. Commuting Vˆ past the jth creation operator,
+
+
+3.6 Interactions 57
++Rj
+= ψ†(xN) . . . ψ†(xj)V . . . ψ†(x1)
+ψ†(xN) . . . Vψ†(xj) . . . ψ†(xj)|0 |0
+ˆ ˆ , (3.85)
+we generate the remainder
+Rj =
+∫
+d3yψ†(xN) · · · V(y − xj)ψ†(xj)ρ(y) · · · ψ†(x1)|0⟩. (3.86)
+To write Rj in a more usable form, we use ρ(y)ψ†(xi) = ψ†(xi)ρ(y) + ψ†(xi)δ(y − xi) to commute the density operator to the right until it annihilates the vacuum. The terms generated by this procedure can be written
+Rj =
+j− ∑1
+i=1
+V(xi − xj)ψ†(xN ) · · · ψ†(xj) · · · ψ†(xi) · · · ψ†(x1)|0⟩
+=
+j− ∑1
+i=1
+V(xi − xj)|x1, x2, . . . xN⟩. (3.87)
+Our final answer is the sum of the remainders Rj:
+Vˆ ψ†(xN) · · · ψ†(x1)|0⟩ = ∑
+j=2,N
+Rj = ∑
+i<j
+V(xi − xj)|x1, x2, . . . xN ⟩. (3.88)
+In other words, the state |x1, . . . xN⟩ is an eigenstate of the interaction operator, with eigenvalue given by the classical interaction potential energy.
+To get another insight into the interaction, we shall now rewrite it in the momentum basis. This is very useful in translationally invariant systems, where momentum is conserved in collisions. Let us imagine we are treating fermions with spin. The transformation to a momentum basis is then
+ψσ (x) =
+∫
+k
+ckσ ei(k·x)
+ψ†
+σ (x) =
+∫
+k
+c†
+kσ e−i(k·x), (3.89)
+where {ckσ , c†
+k′σ ′ } = (2π )3δ3(k − k′)δσ σ ′ are canonical fermion operators in momentum
+space and we have used the shorthand notation ∫
+k
+=
+∫ d3k
+(2π )3 . (3.90)
+We shall also Fourier transform the interaction
+V(x − x′) =
+∫
+q
+V(q)eiq·(x−x′). (3.91)
+When we substitute these expressions into the interaction, we need to regroup the Fourier terms so that the momentum integrals are on the outside and the spatial integrals are on the inside. Doing this, we obtain
+Vˆ = 1
+2
+∑
+σσ′
+∫
+k1,2,3,4
+V(q) × c†
+k4σ c†
+k3σ ′ ck2σ ′ ck1σ × spatial integrals, (3.92)
+
+
+58 Conserved particles
+k1, α
+k2−q, β
+k2, β
+k1+q, α
+V (q)
+q
+!
+Fig. 3.1 Scattering of two particles, showing transfer of momentum q.
+where the spatial integrals take the form
+∫
+d3x d3x′ei(k1−k4+q)·xei(k2−k3−q)·x′ = (2π )6δ(3)(k4 − k1 − q)δ(3)(k3 − k2 + q), (3.93)
+which impose momentum conservation at each scattering event. Using the spatial integrals to eliminate the integrals over k3 and k4, the final result is
+Vˆ = 1
+2
+∑
+α,β
+∫
+k1,k2,q
+V (q)c†
+k1+qα c†
+k2−qβ ck2β ck1α. (3.94)
+In other words, when the particles scatter at positions x and x′, momentum is conserved. Particle 1 comes in with momentum k1, and gains momentum q from particle 2:
+particle 1: k1 −→ k1 + q
+particle 2: k2 −→ k2 − q (3.95)
+as illustrated in Figure 3.1. The matrix element associated with this scattering process is merely the Fourier transform of the potential V(q).
+Example 3.6 Particles interact via a delta-function interaction, V(x) = Ua3δ(3)(x). Write down the second-quantized interaction in a momentum space representation.
+Solution
+The Fourier transform of the interaction is
+V(q) =
+∫
+d3x Ua3δ(x)e−iq·x = Ua3, (3.96)
+so the interaction in momentum space is
+Vˆ = ∑
+α, β
+Ua3 2
+∫
+k1, k2,q
+c†
+k1−qα c†
+k2+qβ ck2β ck1α. (3.97)
+Example 3.7 A set of fermions interact via a screened Coulomb (Yukawa) potential,
+V(r) = Ae−λr
+r . (3.98)
+Write down the interaction in momentum space.
+
+
+3.6 Interactions 59
+Solution
+The interaction in momentum space is given by
+Vˆ = 1
+2
+∑
+α, β
+∫
+k1, k2,q
+V (q)c†
+k1+qα c†
+k2−qβ ck2β ck1α, (3.99)
+where
+V(q) =
+∫
+d3x Ae−λr
+r e−iq·x. (3.100)
+To carry out this integral, we use polar coordinates, with the z-axis aligned along the direction qˆ . Writing q · x = qr cos θ , then d3x = r2dφd cos θ → 2π r2d cos θ , so that
+V(q) =
+∫
+4π r2drV(r) 1
+2
+∫1
+−1
+d cos θ e−iqr cos θ
+} {{ }
+⟨e−iq·x⟩= sin qr
+qr
+, (3.101)
+so that, for an arbitrary spherically symmetric potential,
+V(q) =
+∫∞
+0
+4π r2drV(r)
+( sin qr qr
+)
+. (3.102)
+In this case,
+V(q) = 4πA
+q
+∫∞
+0
+dre−λr sin(qr) = 4π A
+q2 + λ2 . (3.103)
+Notice that the Coulomb interaction
+V(r) = e2
+4π ε0r (3.104)
+is the infinite-range limit of the Yukawa potential, with λ = 0, A = e2/4π ε0, so that, for the Coulomb interaction,
+V(q) = e2
+q2ε0
+. (3.105)
+Example 3.8 If one transforms to a new one-particle basis, writing ψ(x) = ∑
+s .s(x)cs, show that the interaction becomes
+Vˆ = 1
+2
+∑
+lmnp,αβ
+⟨lm|V |pn⟩c†
+lα c†
+mβ cnβ cpα, (3.106)
+where
+⟨lm|V|pn⟩ =
+∫
+x,y
+(.l∗(x).p(x))(.∗m(y).n∗(y))V(x − y) (3.107)
+is the interaction matrix element for scattering |pn⟩ → |lm⟩.
+
+
+60 Conserved particles
+Solution
+Substituting ψ†
+α(x) = ∑
+l .l∗(x)c†
+lα, ψ †
+β (y) = ∑
+m .∗m(y)c†
+mβ etc. into
+Vˆ = 1
+2
+∑
+α,β
+∫
+x,y
+[
+ψ†
+α (x)ψ †
+β (y)ψβ (y)ψα(x)
+]
+V(x − y), (3.108)
+we obtain
+Vˆ = 1
+2
+∑
+l,m,n,p,α,β
+⟨lm|Vˆ |pn⟩
+{ }} {
+[∫
+x,y
+.l∗(x).∗m(y).n(y).p(x)V(x − y)
+] c†
+lα c†
+mβ cnβ cpα
+=1
+2
+∑
+lmnp,αβ
+⟨lm|V |pn⟩c†
+lα c†
+mβ cnβ cpα. (3.109)
+3.7 Equivalence with the many-body Schrödinger equation
+In this section, we establish that our second-quantized version of the many-body Hamiltonian is indeed equivalent to the many-body Schrödinger equation. Let us start with the Hamiltonian for an interacting gas of charged particles,
+H=
+H0
+{ }} { ∑
+σ
+∫
+x
+ψ†
+σ
+[
+− ħ2∇2
+2m + U(x) − μ
+]
+ψσ (x) +
+Vˆ
+{ }} {
+1 2
+∫
+x,x′ V(x − x′) : ρˆ(x)ρˆ(x′) : , (3.110)
+where ∫
+x ≡ ∫ d3x and, by convention, we work in the grand canonical ensemble, subtract
+ing the term μN from the Schrödinger Hamiltonian HS: H = HS − μN. For a Coulomb interaction,
+V(x − x′) = e2
+4π ε0|x − x′| , (3.111)
+but the interaction might take other forms, such as the hard-core interaction between neutral atoms in liquid 3He and 4He. The Heisenberg equation of motion of the field operator is
+iħ ∂ψσ
+∂t = [ψσ , H]. (3.112)
+Using the relations
+[ψσ (x), ψ†
+σ ′ (x′)Ox′ ψσ ′ (x′)] = δσ σ ′ δ3(x − x′)Oxψσ (x),
+[ψσ (x), : ρ(x1)ρ(x2) :] = δ3(x1 − x)ρ(x2)ψσ (x) + δ3(x2 − x)ρ(x1)ψσ (x),
+we can see that the commutators of the one- and two-particle parts of the Hamiltonian with the field operator are
+
+
+3.7 Equivalence with the Schrödinger equation 61
+[ψσ (x), H0] =
+[
+− ħ2∇2
+2m + U(x) − μ
+]
+ψσ (x)
+[ψσ (x), V] =
+∫
+d3x′V(x′ − x)ρ(x′)ψσ (x).
+(3.113)
+The final equation of motion of the field operator thus resembles a one-particle Schrödinger equation:
+iħ ∂ψσ
+∂t =
+[
+− ħ2∇2
+2m + U(x) − μ
+]
+ψσ (x) +
+∫
+d3x′V(x′ − x)ρ(x′)ψσ (x). (3.114)
+If we now apply this to the many-body wavefunction, we obtain
+iħ ∂%(1, 2, . . . N)
+∂t = iħ ∑
+j=1,N
+⟨0|ψ(1) · · · ∂ψ(j)
+∂t · · · ψ(N)|%⟩
+=∑
+j
+[
+− ħ2∇j2
+2m + U(xj) − μ
+]
+%
++∑
+j
+∫
+d3x′V(x′ − xj)⟨0|ψ(1) · · · ρ(x′)ψσ (xj) · · · ψ(N)|%⟩.
+By commuting the density operator to the left until it annihilates with the vacuum, we find that
+⟨0|ψ(1) · · · ρ(x′)ψσ (xj) · · · ψ(N)|%⟩ = ∑
+l<j
+δ3(x′ − xl)⟨0|ψ(1) · · · ψ(N)|%⟩, (3.115)
+so that the final expression for the time evolution of the many-body wavefunction is precisely the same as we obtain in a first-quantized approach:
+iħ ∂%
+∂t =
+⎛
+⎝∑
+j
+H(0)
+j +∑
+l<j
+Vlj
+⎞
+⎠ %. (3.116)
+The second-quantized approach has the advantages that it builds in the exchange statistics and does not need an explicit reference to the many-body wavefunction. Notice, finally, that instead of using the equation of motion of the fields, we could have alternatively proved that |%⟩ satisfies the many-body Schrödinger equation using the results
+⟨x1, . . . xN |H0 = ∑
+j
+H(0)
+j ⟨x1, . . . xN | (3.117)
+and
+⟨x1, . . . xN|Vˆ = ∑
+i<j
+V(xi − xj)⟨x1, . . . xN |, (3.118)
+so that
+iħ ∂%
+∂t = ⟨x1, . . . xN|Hˆ 0 + Vˆ |%⟩ =
+⎛
+⎝∑
+j
+H(0)
+j +∑
+l<j
+Vlj
+⎞
+⎠ ⟨x1, . . . xN|%⟩. (3.119)
+
+
+62 Conserved particles
+3.8 Identical conserved particles in thermal equilibrium
+3.8.1 Generalities
+By quantizing the particle field, we have been led to a version of quantum mechanics with a vastly expanded Hilbert space which includes the vacuum and all possible states with an arbitrary number of particles. An exactly parallel development occurs in statistical thermodynamics in making the passage from a canonical to a grand canonical ensemble, where systems are considered to be in equilibrium with a heat and particle bath. Not surprisingly, then, second quantization provides a beautiful way of treating a grand canonical ensemble of identical particles. When we come to treat conserved particles in thermal equilibrium, we have to take into the account the conservation of two independent quantities:
+• energy, E • particle number, N.
+Statistical mechanics usually begins with an ensemble of identical systems of definite particle number N and energy E (more precisely, particle number and energy lying in the narrow ranges [N, N + dN] and [E, E + dE], respectively). Such an ensemble is called a microcanonical ensemble. This is a confusing name, because it suggests something small, yet typically a microcanonical ensemble is an ensemble of identical macroscopic systems that play the role of a heat bath [8–11]. The ergodic hypothesis of statistical mechanics assumes that, in such an ensemble, all accesible quantum states within this narrow band of allowed energies and particle numbers are equally probable (equal a priori probability). Now suppose we divide the system into two parts: a vast heat bath and a tiny sub-system, exchanging energy and particles as shown in Figure 3.2, until they reach a state of thermal equilibrium. In the vast heat and particle bath, the energy levels are so close together that they form a continuum. The density of states per unit energy and particle number is taken to be W(E′, N′), where E′ is the energy and N′ the number of particles in the bath. When the tiny sub-system is in a quantum state |λ⟩ with energy Eλ and particle number Nλ, the large system has energy E′ = E − Eλ and particle number N′ = N − Nλ. Assuming equal a priori probability, the probability that the small system is in state |λ⟩ is proportional to the number of states W(E, N) of the heat bath with energy E − Eλ and particle number N − Nλ:
+p(Eλ, Nλ) ∝ W(E − Eλ, N − Nλ) = elnW(E−Eλ,N−Nλ). (3.120)
+Following Boltzmann, we can tentatively identify W(E, N) with the entropy S(E, N) of the heat bath (see Exercise 3.6), according to the famous formula
+SB(E, N) = kB ln W(E, N), (3.121)
+where we have included the subscript B to indicate the heat bath. It follows that
+p(Eλ, Nλ) ∝ exp
+[1
+kB
+SB(E − Eλ, N − Nλ)
+]
+. (3.122)
+
+
+3.8 Identical particles in thermal equilibrium 63
+Heat/particle bath
+Particle and heat exchange
+Small system
+E+dE
+E
+E − Eλ ,
+W(E − Eλ, N − Nλ)dEdN
+Ebath
+Eλ , Nλ
+E − Eλ
+Eλ
+N − Nλ
+Illustrating equilibrium between a small system and a large heat bath. The diagram at top left illustrates how the number of states with energy Eλ and particle number Nλ is proportional to the density of states in the big system.
+!
+Fig. 3.2
+Now Eλ and Nλ are tiny perturbations to the total energy and particle number of the heat bath, so we may approximate S(E − Eλ, N − Nλ) by a linear expansion:
+SB(E − Eλ, N − Nλ) = SB(E, N) − Eλ
+∂ SB
+∂E − Nλ
+∂ SB
+∂N + · · · . (3.123)
+Now according to thermodynamics, dE = TdS + μdN, where T and μ are the temperature and chemical potential, respectively, so that dSB = T1 dE − μ
+T dN, allowing us to identify
+1
+kB
+∂ SB
+∂E = ∂lnW
+∂E = 1
+kBT ≡ β 1
+kB
+∂ SB
+∂N = ∂lnW
+∂N = − μ
+kBT ≡ −μβ.
+(3.124)
+These are the Lagrange multipliers associated with the conservation of energy and of particle number.1 Once we have made this expansion, it follows that the probability of being in state |λ⟩ is
+pλ = 1
+Z e−β(Eλ−μNλ), (3.125)
+where the normalizing partition function is Z = ∑
+λ e−β(Eλ−μNλ).
+To recast statistical mechanics in the language of many-body theory, we need to rewrite the above expression in terms of operators. Let us begin with the partition function, which we may rewrite as
+1 Incidentally, if you are uncomfortable with the use of classical thermodynamics to identify these quantities in terms of the temperature and chemical potential, you may regard these assignments as tentative, pending calculations of physical properties that allow us to definitively identify them in terms of temperature and chemical potential.
+
+
+64 Conserved particles
+Z=∑
+λ
+e−β(Eλ−μNλ)
+=∑
+λ
+⟨λ|e−β(Hˆ −μNˆ )|λ⟩ = Tr[e−β(Hˆ −μNˆ )]. (3.126)
+Although we started with the eigenstates of energy and particle number, the invariance of the trace under unitary transformations ensures that this final expression is independent of the many-body basis. Next, we cast the expectation value ⟨Aˆ ⟩ in a basis-independent form. Suppose the quantity A, represented by the operator Aˆ , is diagonal in the basis of energy eigenstates |λ⟩. Then the expectation value of A in the ensemble is
+⟨A⟩ = ∑
+λ
+pλ⟨λ|Aˆ |λ⟩ = Tr[ρˆAˆ ]. (3.127)
+Here we have elevated the probability distribution pλ to an operator, the Boltzmann density matrix:
+ρˆ = ∑
+λ
+|λ⟩pλ⟨λ| = Z−1e−β(Hˆ −μNˆ ). (3.128)
+The derivation of (3.127) assumed that Aˆ could be simultaneously diagonalized with the energy and particle number. However, quantum statistical mechanics makes the radical assertion that (3.127) holds for all quantum operators Aˆ representing observables, even when the operator ˆA does not commute with Hˆ or Nˆ and is thus not diagonal in the energy and particle number basis.
+3.8.2 Identification of the free energy: key thermodynamic properties
+There are a number of key thermodynamic quantities of great interest: the energy E, the particle number N, the entropy S and the free energy F = E − ST − μN. One of the key relations from elementary thermodynamics is that
+dE = TdS − μdN − PdV. (3.129)
+By putting F = E − TS − μN and dF = dE − dTS − SdT − μdN − Ndμ, one can also derive
+dF = −SdT − Ndμ − PdV, (3.130)
+a relationship of great importance. The energy and particle number can easily be written in the language of second quantization as
+E = Tr[Hˆ ρˆ]
+N = Tr[Nˆ ρˆ], (3.131)
+but what about the entropy? From statistical mechanics, we know that the general expression for the entropy is
+S = −kB
+∑
+λ
+pλlnpλ. (3.132)
+
+
+3.8 Identical particles in thermal equilibrium 65
+Now since the diagonal elements of the density matrix are pλ, we can rewrite this expression as
+S = −kBTr[ρˆlnρˆ]. (3.133)
+If we substitute lnρˆ = −β(Hˆ − μNˆ ) − ln Z into this expression, we obtain
+S= 1
+T Trρˆ(H − μN) + kBlnZ
+=1
+T (E − μN) + kBlnZ, (3.134)
+i.e. −kBTlnZ = E − ST − μN, from which we identify
+F = −kBTlnZ (3.135)
+as the free energy. Summarizing these key thermodynamic relationships, we have:
+F = −kBTlnZ free energy
+Z = Tr[e−β(Hˆ −μNˆ )] partition function
+ρˆ = e−β(Hˆ −μNˆ )
+Z density matrix
+N = Tr[Nˆ ρˆ] = − ∂F
+∂μ particle number
+S = −kBTr[ρˆlnρˆ] = − ∂F
+∂T entropy
+P = −∂F
+∂V pressure
+E − μN = Tr[(Hˆ − μNˆ )ρˆ] = − ∂ ln Z
+∂β energy
+Notice how all the key thermodynamic properties can be written as appropriate derivatives of the free energy.
+Example 3.9 (a) Enumerate the energy eigenstates of a single fermion Hamiltonian,
+H = Ec†c, (3.136)
+where {c, c†} = 1, {c, c} = {c†, c†} = 0. (b) Calculate the number of fermions at temperature T.
+Solution
+(a) The states of this problem are the vacuum state and the one-particle state:
+|0⟩ E0 = 0
+|1⟩ = c†|0⟩ E1 = E. (3.137)
+(b) The number of fermions at temperature T is given by
+⟨ˆn⟩ = Tr[ρˆ ˆn], (3.138)
+where ˆn = c†c,
+ρ = e−β(Hˆ −μNˆ )/Z (3.139)
+
+
+66 Conserved particles
+is the density matrix, and
+Z = Tr[e−β(H−μN)] (3.140)
+is the partition function. For this problem, we can write out the matrices explicitly:
+e−β(H−μN) =
+[1 0
+0 e−β(E−μ)
+]
+, ˆn =
+[0 0 01
+]
+, (3.141)
+so that
+Z = 1 + e−β(E−μ) (3.142)
+and
+Tr[ˆne−β(H−μN)] = e−β(E−μ). (3.143)
+The final result is thus
+⟨ˆn⟩ = e−β(E−μ)
+1 + e−β(E−μ) = 1
+eβ(E−μ) + 1 , (3.144)
+which is the famous Fermi–Dirac function for the number of fermions in a state of energy E and chemical potential μ.
+3.8.3 Independent particles
+In a system of independent particles with many energy levels Eλ, each energy level can be regarded as an independent member of a microcanonical ensemble. Formally, this is because the Hamiltonian is a sum of independent Hamiltonians
+H − μN = ∑
+λ
+(Eλ − μ)ˆnλ, (3.145)
+so that the partition function is then a product of the individual partition functions:
+Z = Tr
+[∏
+λ⊗
+e−β (Eλ −μ) ˆnλ
+]
+. (3.146)
+Since the trace of an (exterior) product of matrices, this is equal to the product of their
+individual traces (Tr ∏
+λ⊗ = ∏
+λ Tr),
+Z=∏
+λ
+Tr[e−β(Eλ−μ)ˆnλ ] = ∏
+λ
+Zλ. (3.147)
+Since
+Zλ =
+{ 1 + e−β(Eλ−μ) fermions
+1 + e−β(Eλ−μ) + e−2β(Eλ−μ) + · · · = (1 − e−β(Eλ−μ))−1, bosons (3.148)
+
+
+Exercises 67
+the corresponding free energy is given by
+F = ∓kBT ∑
+λ
+ln[1 ± e−β(Eλ−μ)].
+{ + for fermions
+− for bosons (3.149)
+The occupancy of the lth level is independent of all the other levels, and is given by
+⟨ˆnl⟩ = Tr[ρˆ ˆnl] = Tr
+[
+(∏
+⊗
+ρˆλ ) ˆnl
+]
+=∏
+λ̸=l
+=1
+{ }} {
+Tr[ρλ] ×Tr[ρlnˆl] = 1
+eβ(El−μ) ± 1 , (3.150)
+where (+) refers to fermions and (−) to bosons. In the next chapter, we shall examine the consequences of these relationships.
+Exercises
+Exercise 3.1 In this question c†
+i and ci are fermion creation and annihilation operators and the
+states are fermion states. Use the convention |11111000 · · ·⟩ = c†
+5c†
+4c†
+3c†
+2c†
+1|vacuum⟩.
+(a) Evaluate c†
+3c6c4c†
+6c3|111111000 · · ·⟩. (b) Write |1101100100 · · ·⟩ in terms of excitations about the “filled Fermi sea” |1111100000 · · ·⟩. Interpret your answer in terms of electron and hole excitations.
+(c) Find ⟨ψ|Nˆ |ψ⟩, where |ψ⟩ = A|100⟩ + B|111000⟩, Nˆ = ∑
+i c†
+i ci. Exercise 3.2 Consider two fermions, a1 and a2. (a) Show that the Bogoliubov transformation
+c1 = ua1 + va†
+2
+c†
+2 = −va1 + ua†
+2, (3.151)
+where u and v are real, preserves the canonical anticommutation relations if u2 + v2 = 1. (b) Use this result to show that the Hamiltonian
+H = ε(a†
+1a1 − a2a†
+2) + /(a†
+1a†
+2 + H.c.) (3.152)
+can be diagonalized in the form
+H=√
+ε2 + /2(c†
+1c1 + c†
+2c2 − 1). (3.153)
+(c) What is the ground-state energy of this Hamiltonian?
+(d) Write out the ground-state wavefunction in terms of the original operators c†
+1 and
+c†
+2 and their corresponding vacuum |0⟩ (c1,2|0⟩ = 0).
+
+
+68 Conserved particles
+Exercise 3.3 This is an alterative derivation of the normal-ordered interaction. (a) Show that, for a system of N identical classical particles with density ρ(x) =
+∑
+j=1,N δ(3)(x − xj), the interaction energy, corrected to avoid self-interaction, is given by
+V =∑
+i<j
+V(xi − xj) = 1
+2
+∫
+d3xd3yV(x − y)ρ(x)ρ(y) − 1
+2 V(0)N.
+(b) Second-quantize the above result and show that it leads directly to the normalordered form of the interaction, i.e. that
+Vˆ = 1
+2
+∫
+d3xd3yV(x − y)ρˆ(x)ρˆ(y) − 1
+2
+∫
+d3xV (0)ρˆ (x)
+=1
+2
+∫
+d3xd3yV(x − y) : ρˆ(x)ρˆ(y) : .
+Exercise 3.4 Consider a system of fermions or bosons created by the field ψ†(r) interacting under the potential
+V(r) =
+{ U (r < R)
+0 (r > R). (3.154)
+(a) Write the interaction in second-quantized form.
+(b) Switch to the momentum basis, where ψ(r) = ∫ d3k
+(2π)3 ckeik·r. Verify that
+[ck, c†
+k′ ]± = (2π )3δ(3)(k−k′) and write the interaction in this new basis. Sketch
+the form of the interaction in momentum space. Exercise 3.5
+(a) Show that, for a general system of conserved particles at chemical potential μ, the total particle number in thermal equilibrium can be written as
+N = −∂F/∂μ, (3.155)
+where
+F = −kBTlnZ
+Z = Tr[e−β(Hˆ −μN)]. (3.156)
+(b) Apply this to a single bosonic energy level, where
+H − μN = (ε − μ)a†a (3.157)
+and aˆ† creates either a fermion or a boson, to show that
+⟨ˆn⟩ = 1
+eβ(ε−μ) − 1 . (3.158)
+Why does μ have to be negative for bosons? Exercise 3.6 (Equivalence of the microcanonical and Gibbs ensembles for large systems.) In a microcanonical ensemble, the density matrix can be written
+ρˆM = 1
+W δ(E − Hˆ )δ(N − Nˆ ),
+
+
+References 69
+where E and N are the energy and particle number, respectively, while
+W ≡ W(E, N) = Tr
+[
+δ(E − Hˆ )δ(N − Nˆ )
+]
+is the density of states at energy E, particle number N. This normalizing quantity plays a role similar to the partition function in the Gibbs ensemble. (a) By rewriting the delta functions inside the above trace W as inverse Laplace transforms, such as
+δ(x − Hˆ ) =
+∫ β0+i∞
+β0−i∞
+dβ
+2π i e−β(x−Hˆ ),
+and evaluating the resulting integrals at the saddle point of the integrand, show that, for a large system, W is related to the entropy by Boltzmann’s relation,
+S(E, N) = kB ln W(E, N).
+(b) Using your result, show that, in a large system, the expectation value of an operator is the same for corresponding Gibbs and microcanonical ensembles, namely
+⟨A⟩ = Tr[ρMAˆ ] = Tr[ρBAˆ ],
+where ρˆB = Z−1e−β(H−μNˆ )|β=β0,μ=μ0 is the Boltzmann density matrix evaluated at the saddle point values of β0 and μ0,
+β0 = ∂ ln W
+∂E , μ0 = β0−1
+∂ ln W
+∂N .
+References
+[1] H. Bethe, Zur Theorie der Metalle: I. Eigenwerte und Eigenfunktionen der linearer Atomkerte (On the theory of metals: I. eigenvalues and eigenfunctions of the linear atom chain), Z. Phys., vol. 71, p. 205, 1931.
+[2] M. Takahashi, Thermodynamics of One-Dimensional Solvable Models, Cambridge University Press, 1999. [3] N. Andrei, K. Furuya, and J. H. Lowenstein, Solution of the Kondo problem, Rev. Mod. Phys., vol. 55, p. 331, 1983. [4] A. Tsvelik and P. Wiegman, The exact results for magnetic alloys, Adv. Phys., vol. 32, p. 453, 1983. [5] R. B. Laughlin, Anomalous quantum Hall effect: an incompressible quantum fluid with fractionally charged excitations, Phys. Rev. Lett., vol. 50, no. 18, p. 1395, 1983. [6] S. Girvin, Quantum Hall effect: novel excitations and broken symmetries, in Topological Aspects of Low-Dimensional Systems, ed. A. Comtet, T. Jolicoeur, S. Ouvry, F. David, pp. 53–175, Springer-Verlag and Les Editions de Physique, 2000. [7] P. Jordan and E. Wigner, Uber das Paulische Aquivalenzverbot (On the Pauli exclusion principle), Z. Phys., vol. 47, p. 631, 1928.
+
+
+70 Conserved particles
+[8] F. Reif, Fundamentals of Statistical and Thermal Physics, McGraw-Hill, 1965. [9] N. Saito, M. Toda, and R. Kubo, Statistical Physics I, Springer, 1998. [10] R. P. Feynman, Statistical Mechanics: A Set of Lectures, Westview Press, 1998. [11] M. Kardar, Statistical Physics of Particles, Cambridge University Press, 2007.
+
+
+Simple examples of second quantization 4
+In this chapter, we give three examples of the application of second quantization, mainly to non-interacting systems.
+4.1 Jordan–Wigner transformation
+A non-interacting gas of fermions is still highly correlated: the exclusion principle introduces a hard-core interaction between fermions in the same quantum state. This feature is exploited in the Jordan–Wigner representation of spins. A classical spin is represented by a vector pointing in a specific direction. Such a representation is fine for quantum spins with extremely large spin S, but once the spin S becomes small, spins behave as very new kinds of object. Now their spin becomes a quantum variable, subject to its own zero-point motions. Furthermore, the spectrum of excitations becomes discrete or grainy. Quantum spins are notoriously difficult objects to deal with in many-body physics, because they do not behave as canonical fermions or bosons. In one dimension, however, it turns out that spins with S = 12 actually behave like fermions. We shall show this by writing
+the quantum spin- 12 Heisenberg chain as an interacting one-dimensional gas of fermions,
+and we shall actually solve the limiting case of the one-dimensional spin- 12 x-y model, in
+which the Ising (z) component of the interaction is set to zero. Jordan and Wigner observed [1] that the “down” and “up” states of a single spin can be thought of as empty and singly occupied fermion states (Figure 4.1.), enabling them to make the mapping (see Figure 4.1)
+| ↑⟩ ≡ f †|0⟩, | ↓⟩ ≡ |0⟩. (4.1)
+An explicit representation of the spin-raising and spin-lowering operators is then
+S+ = f † =
+[0 1 00
+]
+S− = f ≡
+[0 0 10
+]
+. (4.2)
+The z component of the spin operator can be written
+Sz = 1
+2
+[
+| ↑⟩⟨↑ | − | ↓⟩⟨↓ |
+]
+≡ f †f − 1
+2 . (4.3)
+
+
+72 Simple examples of second quantization
+μ BB
+S=
+nf = 1
+nf = 0
+1 2
+!
+Fig. 4.1 The “up” and “down” states of a spin 12 can be treated as a one-particle state which is either full or empty.
+We can also reconstruct the transverse spin operators
+Sx = 1
+2 (S+ + S−) = 1
+2 (f † + f )
+Sy = 1
+2i (S+ − S−) = 1
+2i (f † − f ). (4.4)
+The explicit matrix representation of these operators makes it clear that they satisfy the same algebra:
+[Sa, Sb] = iεabcSc. (4.5)
+Curiously, due to a hidden supersymmetry, they also satisfy an anticommuting algebra:
+{Sa, Sb} = 1
+4 {σa, σb} = 1
+2 δab. (4.6)
+In this way, the Pauli spin operators provided Jordan and Wigner with an elementary model of a fermion. Unfortunately the represeentation needs to be modified if there is more than one spin, for independent spin operators commute but independent fermions anticommute. Jordan and Wigner discovered a way to fix this difficulty in one dimension by attaching a phase factor called a string to the fermions [1]. For a chain of spins in one dimension, the JordanWigner representation of the spin operator at site j is defined as
+Sj+ = f †
+j eiφj , (4.7)
+where the phase operator φj contains the sum over all fermion occupancies at sites to the left of j:
+φj = π
+∑
+l<j
+nj. (4.8)
+The operator eiφˆj is known as a string operator.
+
+
+4.1 Jordan–Wigner transformation 73
+spin
+fermion
+1 2 3 S4
+(+)
+f4
+†
+eiπ(n1 + n2 + n3)
+string
+Illustrating the Jordan–Wigner transformation. The spin-raising operator at site j = 4 is decomposed into a product of a fermion operator and a string operator.
+!
+Fig. 4.2
+The complete transformation is then
+Sjz = fj†fj − 12
+Sj+ = fj†eiπ ∑
+l<j nl
+Sj− = fje−iπ ∑
+l<j nl .
+⎫⎪⎪⎬
+⎪⎪⎭
+Jordan–Wigner transformation (4.9)
+(Notice that eiπnj = e−iπnj is a Hermitian operator so that the overall sign of the phase factors can be reversed without changing the spin operator.) In words (Figure 4.2):
+spin = fermion × string.
+The important property of the string is that it anticommutes with any fermion operator to the left of its free end. To see this, note first that the operator eiπnj anticommutes with fj. This follows because fj reduces nj from unity to zero so that, acting to the right of fj, since nj = 1, eiπnj = −1 and hence fj eiπnj = −fj; whereas, acting to the left of fj, since nj = 0, eiπnj fj = fj. It follows that
+{eiπnj , fj} = eiπnj fj + feiπnj = fj − fj = 0 (4.10)
+and similarly, from the conjugate of this expression, {eiπnj , f †
+j } = 0. Now the phase fac
+tor eiπnl at any other site l ̸= j commutes with fj and f †
+j , so that the string operator eiφˆj anticommutes with all fermions at all sites l to the left of j, i.e. l < j:
+{eiφj , f (†)
+l } = 0 (l < j),
+while commuting with fermions at all other sites l ≥ j:
+[eiφj , f (†)
+l ] = 0 (l ≥ j).
+We can now verify that the transverse spin operators satisfy the correct commutation algebra. Suppose j < k; then eiφj commutes with fermions at sites j and k, so that
+[S(±)
+j , S(±)
+k ] = [f (†)
+j eiφj , f (†)
+k eiφk ] = eiφj [f (†)
+j , f (†)
+k eiφk ].
+
+
+74 Simple examples of second quantization
+But f (†)
+j antcommutes with both f (†)
+k and eiφk so it commutes with their product f (†)
+k eiφk , and hence
+[S(±)
+j , S(±)
+k ] ∝ [f (†)
+j , f (†)
+k eiφk ] = 0. (4.11)
+So we see that by multiplying a fermion by the string operator, it is transformed into a boson. As an example of the application of this method, we shall now discuss the onedimensional Heisenberg model,
+H = −J ∑[SjxSjx+1 + Sy
+j Sy
+j+1] − Jz
+∑
+j
+SjzSz
+j+1. (4.12)
+In real magnetic systems, local moments can interact via ferromagnetic or antiferromagnetic interactions. Ferromagnetic interactions generally arise as a result of direct exchange, in which the Coulomb repulsion energy is lowered when electrons are in a triplet state because the wavefunction is then spatially antisymmetric. Antiferromagnetic interactions are generally produced by the mechanism of super exchange, in which electrons on neighboring sites that form singlets (antiparallel spin) lower their energy through virtual quantum fluctuations into high-energy states in which they occupy the same orbital. Here we have written the model as if the interactions are ferromagnetic. For convenience, the model can be rewritten as
+H = −J
+2
+∑[Sj++1Sj− + H.c.] − Jz
+∑
+j
+SjzSz
+j+1, (4.13)
+where “H.c.” denotes the Hermitian conjugate. To “fermionize” the first term, we note that all terms in the strings cancel except for eiπnj , which has no effect:
+J 2
+∑
+j
+Sj++1Sj− = J
+2
+∑
+j
+f†
+j+1eiπnj fj = J
+2
+∑
+j
+f†
+j+1 fj, (4.14)
+so that the transverse component of the interaction induces a “hopping” term in the fermionized Hamiltonian. Notice that the string terms would enter if the spin interaction involved next-nearest neighbors. The z component of the Hamiltonian becomes
+− Jz
+∑
+j
+Sz
+j+1Sjz = −Jz
+∑
+j
+(
+nj+1 − 1
+2
+)(
+nj − 1
+2
+)
+. (4.15)
+Notice how the ferromagnetic interaction means that spin fermions attract one another. The transformed Hamiltonian is then
+H = −J
+2
+∑
+j
+(f †
+j+1fj + f †
+j fj+1) + Jz
+∑
+j
+nj − Jz
+∑
+j
+njnj+1. (4.16)
+Interestingly enough, the pure x-y model has no interaction term in it, so this case can be mapped onto a non-interacting fermion problem, a discovery made by Lieb, Schulz and Mattis in 1961 [2]. To write out the fermionized Hamiltonian in its most compact form, let us transform to momentum space, writing
+
+
+4.1 Jordan–Wigner transformation 75
+fj = √1N
+∑
+k
+skeikRj , (4.17)
+where s†
+k creates a spin excitation in momentum space, with momentum k. In this case, the one-particle terms become
+Jz
+∑
+j
+nj = Jz
+∑
+k
+s†
+k sk
+−J
+2
+∑
+j
+( f†
+j+1 fj + H.c.) = − J
+2Ns
+∑
+k
+(e−ika + eika)s†
+k sk′
+N δkk′ s
+{ }} {
+∑
+j
+e−i(k−k′)Rj
+= −J ∑
+k
+cos(ka)s†
+ksk. (4.18)
+The anisotropic Heisenberg Hamiltonian can thus be written
+H=∑
+k
+ωk s†
+k sk − Jz
+∑
+j
+njnj+1, (4.19)
+where
+ωk = (Jz − J cos ka) (4.20)
+defines a magnon excitation energy. We can also cast the second term in momentum space by noticing that the interaction is a function of i − j, which is −Jz/2 for i − j = ±1 but zero otherwise. The Fourier transform of this short-range interaction is V(q) = −Jz cos qa, so that Fourier transforming the interaction term gives
+H=∑
+k
+ωk s†
+k sk − Jz
+Ns
+∑
+k,k′,q
+cos(qa) s†
+k−qs†
+k′+qsk′ sk. (4.21)
+This transformation holds for both the ferromagnet and the antiferromagnet. In the former case, the fermionic spin excitations correspond to the magnons of the ferromagnet. In the latter case, the fermionic spin excitations are often called spinons. To see what this Hamiltonian means, let us first neglect the interactions. This is a reasonable thing to do in the limiting cases of (i) the Heisenberg ferromagnet, Jz = J, and (ii) the x-y model, Jz = 0 .
+• Heisenberg ferromagnet, Jz = J (Figure 4.3) In this case, the spectrum
+ωk = 2J sin2(ka/2) (4.22)
+is always positive, so that there are no magnons present in the ground state. The ground state can thus be written
+|0⟩ = | ↓↓↓ · · · ⟩, (4.23)
+corresponding to a state with a spontaneous magnetization M = −Ns/2. Curiously, since ωk=0 = 0, it costs no energy to add a magnon of arbitrarily long wavelength. This is an example of a Goldstone mode, and the reason it arises is that the
+
+
+76 Simple examples of second quantization
+Heisenberg ferromagnet
+0k
+Goldstone
+mode
+k
+2J
+− π/a π/a
+ωk
+!
+Fig. 4.3 Excitation spectrum of the one-dimensional Heisenberg ferromagnet.
+spontaneous magnetization could actually point in any direction. Suppose we want to rotate the magnetization through an infinitesimal angle δθ about the x-axis; then the new state is given by
+|ψ⟩′ = eiδθSx | ↓↓ · · · ⟩
+= | ↓↓ · · ·⟩ + i δθ
+2
+∑
+j
+Sj+| ↓↓ · · · ⟩ + O(δθ 2). (4.24)
+The change in the wavefunction is proportional to the state
+ST+OT | ↓↓ · · · ⟩ ≡ ∑
+j
+f†
+j eiφj |0⟩
+=∑
+j
+f†
+j |0⟩ = √Nss†
+k=0|0⟩. (4.25)
+In other words, the action of adding a single magnon at q = 0 rotates the magnetization infinitesimally upwards. Rotating the magnetization should cost no energy, and this is the reason why the k = 0 magnon is a zero-energy excitation. • x-y ferromagnet (Figure 4.4)
+As Jz is reduced from J, the spectrum develops a negative part, and magnon states with negative energy will become occupied. For the pure x-y model, where Jz = 0, the interaction identically vanishes, and the excitation spectrum of the magnons is given by ωk = −J cos ka, as sketched in Figure 4.4. All the negative-energy fermion states with |k| < π/2a are occupied, so the ground state is given by
+|)g⟩ = ∏
+|k|<π/2a
+s†
+k|0⟩. (4.26)
+The band of magnon states is thus precisely half-filled, so that
+⟨Sz⟩ =
+〈
+nf − 1
+2
+〉
+= 0, (4.27)
+
+
+4.1 Jordan–Wigner transformation 77
+x−y ferromagnet
+particles
+Occupied states
+holes
+J
+−π/a 0 π/a
+−J
+ωk
+0
+k
+π/2a −π/2a
+Excitation spectrum of the one-dimensional x-y ferromagnet, showing how the negative energy states are filled. The negative-energy dispersion curve is “folded over” to describe the positive hole excitation energy.
+!
+Fig. 4.4
+so that, remarkably, there is no ground-state magnetization. We may interpret this loss of ground-state magnetization as a consequence of the growth of quantum spin fluctuations in going from the Heisenberg to the x-y ferromagnet. Excitations of the ground state can be made, either by adding a magnon at wavevectors |k| > π/2a or by annihilating a magnon at wavevectors |k| < π/2a, to form a hole. The energy to form a hole is −ωk. To represent the hole excitations, we make a particle–hole transformation for the occupied states, writing
+ ̃sk =
+{ sk (|k| > π/2a)
+s†
+−k, (|k| < π/2a). (4.28)
+These are the “physical” excitation operators. Since s†
+k sk = 1 − sks†
+k, the Hamiltonian of the pure x-y ferromagnet can be written
+Hxy = ∑
+k
+J| cos ka|(s ̃†
+k s ̃k − 1
+2 ). (4.29)
+Notice that, unlike the Heisenberg ferromagnet, the magnon excitation spectrum is now linear. The ground-state energy is evidently
+Eg = − 1
+2
+∑
+k
+J| cos ka|
+= −a
+∫ π/2a
+−π/2a
+dk
+2π J cos(ka) = − J
+π . (4.30)
+But if there is no magnetization, why are there zero-energy magnon modes at q = ±π/a? Although there is no true long-range order, it turns out that the spin correlations in the x-y model display power-law correlations with an infinite spin correlation length, generated by the gapless magnons in the vicinity of q = ±π/a.
+
+
+78 Simple examples of second quantization
+4.2 The Hubbard model
+In a real electronic system such as a metallic crystal, at first sight it might appear to be a task of hopeless complexity to model the behavior of the electron fluid. Fortunately, even in complex systems, at low energies only a certain subset of the electronic degrees of freedom are excited. This philosophy is closely tied up with the idea of renormalization – the idea that the high-energy degrees of freedom in a system can be successively eliminated or “integrated out” to reveal an effective Hamiltonian that describes the important low-energy physics. One such model which has enjoyed great success is the Hubbard model, introduced by Philip W. Anderson, John Hubbard, Martin Gutziller and Junjiro Kanamori [3–6]. Suppose we have a lattice of atoms where electrons are almost localized in atomic orbitals at each site. In this case we can use a basis of atomic orbitals. The operator which creates a particle at site j is
+c†
+jσ =
+∫
+d3x ψ†(x)σ *(x − Rj), (4.31)
+where *(x) is the wavefunction of a particle in the localized atomic orbital. In this basis, the Hamiltonian governing the motion of and interactions between the particles can be written quite generally as
+H=∑
+i,j
+⟨i|H0 | j⟩c†
+iσ cjσ + 1
+2
+∑
+lmnp
+⟨lm|V |pn⟩c†
+lσ c†
+mσ ′ cnσ ′ cpσ , (4.32)
+where ⟨i|H0|j⟩ is the one-particle matrix element between states i and j, and ⟨lm|V|pn⟩ is the interaction matrix element between two-particle states |lm⟩ and |pn⟩ (see Figure 4.5). Let us suppose that the energy of an electron in this state is ε. If this orbital is highly localized, then the amplitude for it to tunnel or “hop” between sites will decay exponentially with the distance between the sites, and to a good approximation we can eliminate all but nearest-neighbor hopping. In this case, the one-particle matrix elements which govern the motion of electrons between sites are
+⟨j|H(0)|i⟩ =
+⎧⎨
+⎩
+ε (j = i)
+−t (i, j nearest neighbors) 0 (otherwise).
+(4.33)
+The hopping matrix element between neighboring states is generally given by an overlap integral between the wavefunctions and the negative crystalline potential, and for this reason is taken to be be negative. Now of this matrix element the matrix element of the interaction between electrons at different sites will be given by
+⟨lm|V|pn⟩ =
+∫
+x,x′ *l∗(x)*p(x)*∗m(x′)*n∗(x′)V(x − x′), (4.34)
+but, in practice, if the states are well localized, this will be dominated by the onsite interaction between two electrons in a single orbital, so that we may approximate
+
+
+4.2 The Hubbard model 79
+E
+U
+U
+U 2E + U
+ψ( )
+t
+r V(r) E
+r
+Illustrating the Hubbard model. When two electrons of opposite spin occupy a single atom, this gives rise to a Coulomb repulsion energy U. The amplitude to hop from site to site in the crystal is t.
+!
+Fig. 4.5
+⟨lm|V|pn⟩ =
+{ U (l = p = m = n)
+0 (otherwise). (4.35)
+In this situation, the interaction term in (4.32) simplifies to
+U 2
+∑
+j,σ σ ′
+c†
+jσ c†
+jσ ′ cjσ ′ cjσ = U ∑ j
+nj↑nj↓, (4.36)
+where the exclusion principle (cj2σ = 0) means that the interaction term vanishes unless σ
+and σ ′ are opposite spins. The Hubbard model can be thus be written
+H = −t ∑
+j, ˆa,σ
+[c†
+j+ˆaσ cjσ + H.c.] + ε
+∑
+jσ
+c†
+jσ cjσ + U ∑ j
+nj↑nj↓, (4.37)
+where njσ = c†
+jσ cjσ represents the number of electrons of spin σ at site j. For completeness, let us rewrite this in momentum space, putting
+cjσ = √1Ns
+∑
+k
+ckσ eik·Rj , (4.38)
+whereupon
+H=∑
+kσ
+εkc†
+kσ ckσ + U
+Ns
+∑
+q,k,k′
+c†
+k−q↑c†
+k′+q↓ck′↓ck↑, (4.39)
+Hubbard model
+
+
+80 Simple examples of second quantization
+where
+εk = ∑ i
+⟨ j + Ri|H0|j⟩eik·Ri
+= −2t(cos kx + cos ky + cos kz) + ε (4.40)
+is recognized as the kinetic energy of the electron excitations, which results from their coherent hopping motion from site to site. We see that the Hubbard model describes a band of electrons with kinetic energy εk and a momentum-independent “point” interaction of strength U between particles of opposite spin.
+Remark
+• This model has played a central part in the theory of magnetism, metal–insulator transitions and, most recently, the description of electron motion in high-temperature superconductors. With the exception of one-dimensional physics, we do not yet have a complete understanding of the physics that this model can give rise to. One established prediction of the Hubbard model is that, under certain circumstance, if interactions become too large the electrons become localized to form what is called a Mott insulator. This occurs when the band is half-filled, with one electron per site. What is unclear at the present time is what happens to the Mott insulator when it is doped. There are many who believe that a complete understanding of the doped Mott insulator will enable us to understand high-temperature superconductivity.
+4.3 Non-interacting particles in thermal equilibrium
+Before we start to consider the physics of the interacting problem, let us go back and look at the ground-state properties of free particles (see Figure 4.6). What is not commonly recognized is that the ground state of non-interacting but identical particles is in fact a highly correlated many-body state. For this reason, the non-interacting ground state has a robustness that does not exist in its classical counterpart. In the next chapter, we shall embody some of these thoughts by considering the action of turning on the interactions adiabatically. For the moment, however, we shall content ourselves with looking at a few of the ground-state properties of non-interacting gases of identical particles. In practice, quantum effects will influence a fluid of identical particles at the point where their characteristic wavelength is comparable with the separation between particles. At a temperature T the RMS momentum of particles is given by p2RMS = 3mkBT, so that the characteristic de Broglie wavelength is given by
+λT = h
+√
+p2RMS
+=h
+√3mkBT . (4.41)
+
+
+4.3 Non-interacting particles in thermal equilibrium 81
+nk
+k
+k
+nk
+kF ky
+kx
+ky
+kz
+Fermions Bosons
+Fermi surface
+kF
+condensate
+kz
+kx
+Contrasting the ground states of non-interacting fermions and non-interacting bosons. Fermions form a degenerate Fermi gas, with all one-particle states below the Fermi energy individually occupied. Bosons form a Bose–Einstein condensate, with a macroscopic number of bosons in the zero-momentum state.
+!
+Fig. 4.6
+When λT ∼ ρ−1/3, the characteristic temperature is of order
+kBT∗ ∼ ħ2ρ2/3
+2m . (4.42)
+Below this temperature, identical particles start to interfere with one another, and a quantum mechanical treatment of the fluid becomes necessary. In a Fermi fluid exclusion statistics tends to keep particles apart, enhancing the pressure, whereas for a Bose fluid the correlated motion of particles in the condensate tends to lower the pressure, ultimately causing it to vanish at the Bose–Einstein condensation temperature. In electron fluids inside materials, this characteristic temperature is two orders of magnitude larger than room temperature, which makes electricity one of the most dramatic examples of quantum physics in everyday phenomena!
+4.3.1 Fluid of non-interacting fermions
+The thermodynamics of a fluid of fermions leads to the concept of a degenerate Fermi liquid, important in a wide range of physical situations such as
+• the ground state and excitations of metals • the low-energy physics of liquid 3He • the degenerate Fermi gas of neutrons, electrons and protons that lies within a neutron star.
+The basic physics of each of these cases can, to a first approximation, be described by a fluid of non-interacting fermions, with Hamiltonian
+
+
+82 Simple examples of second quantization
+H = HS − μN = ∑
+σ
+(Ek − μ)c†
+kσ ckσ . (4.43)
+Following the general discussion of the previous section, the free energy of such a fluid of fermions is described by a single free energy functional:
+F = −kBT ∑
+kσ
+ln[1 + e−β(Ek−μ)]
+= −2kBTV
+∫
+k
+ln[1 + e−β(Ek−μ)], (4.44)
+where we have taken the thermodynamic limit, replacing ∑
+kσ → 2V ∫
+k. By differentiating
+F with respect to volume, temperature and chemical potential, we can immediately derive the pressure, entropy and particle density of this fluid. Let us, however, begin with a more physical discussion. In thermal equilibrium the number of fermions in a state with momentum p = ħk is
+nk = f (Ek − μ), (4.45)
+where
+f (x) = 1
+eβx + 1 (4.46)
+is the Fermi–Dirac function. At low temperatures, this function resembles a step, with a jump in occupancy spread over an energy range of order kBT around the chemical potential. At absolute zero, f (x) → θ (−x), so that the occupancy of each state is given by
+nk = θ (μ − Ek). (4.47)
+This is a step function with an abrupt change in occupation when ε = μ, corresponding to the fact that states with Ek < μ are completely occupied and states above this energy are empty. The zero-temperature value of the chemical potential is often called the Fermi energy. In momentum space, the occupied states form a sphere whose radius in momentum space, kF, is often referred to as the Fermi momentum. The ground state corresponds to a state where all fermion states with momentum k < kF are occupied:
+|ψg⟩ = ∏
+|k|<kF, σ
+c†
+kσ |0⟩. (4.48)
+Excitations above this ground state are produced by the addition of particles at energies above the Fermi wavevector, or the creation of holes beneath the Fermi wavevector. To describe these excitations, we make the following particle–hole transformation:
+a†
+kσ =
+{
+c†
+kσ (k > kF) particle
+sgn(σ )c−k−σ (k < kF). hole (4.49)
+Beneath the Fermi surface, we must replace c†
+kσ ckσ → 1 − a†
+kσ akσ , so that in terms of
+particle and hole excitations, the Hamiltonian can be rewritten
+H − μN = ∑
+kσ
+|(Ek − μ)|a†
+kσ akσ + Fg, (4.50)

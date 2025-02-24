@@ -1,0 +1,2795 @@
+Introduction to Geometric Control
+Yuri Sachkov
+Springer Optimization and Its Applications 192
+
+
+Springer Optimization and Its Applications
+Volume 192
+Series Editors
+Panos M. Pardalos , University of Florida My T. Thai , University of Florida
+Honorary Editor
+Ding-Zhu Du, University of Texas at Dallas
+Advisory Editors
+Roman V. Belavkin, Middlesex University John R. Birge, University of Chicago Sergiy Butenko, Texas A&M University Vipin Kumar, University of Minnesota Anna Nagurney, University of Massachusetts Amherst Jun Pei, Hefei University of Technology Oleg Prokopyev, University of Pittsburgh Steffen Rebennack, Karlsruhe Institute of Technology Mauricio Resende, Amazon
+Tamás Terlaky, Lehigh University Van Vu, Yale University
+Michael N. Vrahatis, University of Patras Guoliang Xue, Arizona State University Yinyu Ye, Stanford University
+
+
+Aims and Scope
+Optimization has continued to expand in all directions at an astonishing rate. New algorithmic and theoretical techniques are continually developing and the diffusion into other disciplines is proceeding at a rapid pace, with a spot light on machine learning, artificial intelligence, and quantum computing. Our knowledge of all aspects of the field has grown even more profound. At the same time, one of the most striking trends in optimization is the constantly increasing emphasis on the interdisciplinary nature of the field. Optimization has been a basic tool in areas not limited to applied mathematics, engineering, medicine, economics, computer science, operations research, and other sciences.
+The series Springer Optimization and Its Applications (SOIA) aims to publish state-of-the-art expository works (monographs, contributed volumes, textbooks, handbooks) that focus on theory, methods, and applications of optimization. Topics covered include, but are not limited to, nonlinear optimization, combinatorial optimization, continuous optimization, stochastic optimization, Bayesian optimization, optimal control, discrete optimization, multi-objective optimization, and more. New to the series portfolio include Works at the intersection of optimization and machine learning, artificial intelligence, and quantum computing.
+Volumes from this series are indexed by Web of Science, zbMATH, Mathematical Reviews, and SCOPUS.
+
+
+Yuri Sachkov
+Introduction to
+Geometric Control
+
+
+Yuri Sachkov Program Systems Institute Pereslavl-Zalessky Russia
+English translation of Geometric Control Theory, published in Russian, Moscow, URSS, 2021
+ISSN 1931-6828 ISSN 1931-6836 (electronic) Springer Optimization and Its Applications ISBN 978-3-031-02069-8 ISBN 978-3-031-02070-4 (eBook) https://doi.org/10.1007/978-3-031-02070-4
+Mathematics Subject Classification: 93, 49, 53C17
+© The Editor(s) (if applicable) and The Author(s), under exclusive license to Springer Nature Switzerland AG 2022 This work is subject to copyright. All rights are solely and exclusively licensed by the Publisher, whether the whole or part of the material is concerned, specifically the rights of reprinting, reuse of illustrations, recitation, broadcasting, reproduction on microfilms or in any other physical way, and transmission or information storage and retrieval, electronic adaptation, computer software, or by similar or dissimilar methodology now known or hereafter developed. The use of general descriptive names, registered names, trademarks, service marks, etc. in this publication does not imply, even in the absence of a specific statement, that such names are exempt from the relevant protective laws and regulations and therefore free for general use. The publisher, the authors and the editors are safe to assume that the advice and information in this book are believed to be true and accurate at the date of publication. Neither the publisher nor the authors or the editors give a warranty, expressed or implied, with respect to the material contained herein or for any errors or omissions that may have been made. The publisher remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.
+This Springer imprint is published by the registered company Springer Nature Switzerland AG The registered company address is: Gewerbestrasse 11, 6330 Cham, Switzerland
+
+
+To Elena
+
+
+Preface
+Alone in the wilderness, lost in the jungle, the boy is searching, searching! The swelling waters, the far-away mountains, and the unending path; Exhausted and in despair, he knows not where to go, He only hears the evening cicadas singing in the maple-woods.
+Pu-ming, “The Ten Oxherding Pictures” (cited by Suzuki [110])
+Searching for the Ox
+vii
+
+
+viii Preface
+What Is This Book About?
+This is a short introductory course on geometric control theory with emphasis on controllability and optimal control problems. This direction of mathematical control theory originated in the 1970s; it actively employs methods of differential geometry, Lie groups and Lie algebras, and symplectic geometry for the study of control systems. The main literature on this subject are the books by V. Jurdjevic [26], A. Agrachev and the author [3], H. Schättler and U. Ledzewicz [34], and a very recent book by A. Agrachev, D. Barilari, and U. Boscain [2] (in chronological order). The course aims to give a very concise first impression on the circle of problems, methods, and results of geometric control theory, and to advance problem solving skills employing these methods and results.
+Whom Is This Book for?
+The book is intended for a wide readership, starting from undergraduate students in mathematics and applied mathematics to experts in “classic” control theory, for whom geometric methods might be new.
+What Prerequisites Are Assumed?
+The working knowledge of the basic courses taught in undergraduate mathematics programmes, such as calculus, linear algebra, and ordinary differential equations, is required. Acquaintance with smooth manifolds and vector fields on them, and elements of Lie theory is desirable (but not necessary). Knowledge of control theory is not expected.
+What Is the Purpose of This Book?
+The book may serve as a textbook for a semester or half-semester special course for students starting from the undergraduate level, as was done by the author in universities of Pereslavl-Zalessky, Moscow, Novosibirsk, Sochi, Trieste, Rouen, Brno, Bras ̧ov, Jyväskylä, Changchun, and Shanghai.
+
+
+Preface ix
+Pedagogical Principles
+We aim to achieve the following goals in this book:
+• Low initial prerequisites for readers • Problem-oriented exposition • Theoretical minimalism: only the theory absolutely necessary to start geometric control is included • Active use of illustrations • Relatively concise volume • Inclusion of some advanced, recently published material
+Structure of the Book
+The book consists of four chapters, Conclusion, and an appendix. Chapter 1 is introductory and is devoted to acquainting the reader with control problems and smooth manifolds. In Sect. 1.1, we state several particular geometric control problems: stopping a train, the Markov–Dubins car, the sub-Riemannian problem on the group of motions of the plane, Euler’s elasticae, the plate-ball problem, anthropomorphic curve restoration, and Dido’s problem. Next, we describe the main general problems of the course—the controllability problem and the optimal control problem. In Sect. 1.2, we recall initial facts about smooth manifolds, vector fields, and Lie groups required in the book. Chapter 2 is focused on the controllability problem. In Sect. 2.1, we prove some classic results on this problem: Kalman’s controllability test for linear systems and the sufficient local controllability condition of a nonlinear system via linear approximation. In Sect. 2.2, we prove the fundamental Nagano–Sussmann Orbit theorem and its important corollaries: the Rashevskii–Chow theorem and the Frobenius theorem. Section 2.3 is devoted to the famous Krener’s theorem on the structure of attainable sets of full-rank systems. Chapter 3 is devoted to the optimal control problem. In Sect. 3.1, we study this second main problem of the course: we state the problem and discuss Filippov’s theorem—a fundamental sufficient condition for existence of optimal controls. Section 3.2 is dedicated to the main necessary optimality condition in optimal control problems—the Pontryagin maximum principle. We use the symplectic geometry formalism to state the coordinate-free version of this theorem for problems on smooth manifolds. In Sect. 3.3, we consider sub-Riemannian problems, a popular domain during last decades. In this section, preceding results are specialized for these problems, and optimality conditions are discussed (conjugate points, Maxwell points). Additionally, the Pontryagin maximum principle for sub-Riemannian problem is proved. In Sect. 3.4, we describe a general symmetry method for constructing optimal synthesis in optimal control problems with a big symmetry group.
+
+
+x Preface
+In Chap. 4, we present solutions to several important left-invariant optimal control problems on Lie groups: Dido’s problem, Euler’s elastic problem, and the sub-Riemannian problems on the group of motions of the plane and on the Engel group. The Conclusion contains recommendations for further reading. In the appendix, we collect some basic facts on elliptic functions and integrals, and on the equation of pendulum. In the majority of sections, theoretical results are illustrated by the examples of problems stated in Sect. 1.1.1. Some sections include exercises. The epigraphs to the preface and chapters of this book are poems by Pu-min that accompany “Ten Oxherding Pictures” of Zen Buddhism [110].
+Acknowledgments The author is grateful to his teacher Andrei Alexandrovich Agrachev for continuous lessons of mathematics, control theory, and life. The author thanks his students Alexey Mashtakov, Alexey Podobryaev, and Andrei Ardentov for their careful reading of the text and a series of valuable suggestions. The author is grateful to Elena Sachkova for the help with drawing figures. Also, the author wishes to thank Ms Elizabeth Loew (Springer) for extensive editorial help with publication of this book.
+Pereslavl-Zalessky, Russia Yuri Sachkov March 2022
+
+
+Contents
+1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 1.1 Statement of Control Problems . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 1.1.1 Examples of Optimal Control Problems . . . . . . . . . . . . . . . . . . . . . 2 1.1.2 Control Systems and Problems. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11 1.2 Smooth Manifolds, Vector Fields, and Lie Groups . . . . . . . . . . . . . . . . . . . 13 1.2.1 Smooth Manifolds . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14 1.2.2 Smooth Vector Fields and Lie Brackets . . . . . . . . . . . . . . . . . . . . . 15 1.2.3 Lie Groups and Lie Algebras. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17 1.3 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+2 Controllability Problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21 2.1 Controllability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22 2.1.1 Controllability of Linear Systems . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22 2.1.2 Local Controllability of Nonlinear Systems . . . . . . . . . . . . . . . . . 25 2.1.3 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28 2.2 The Orbit Theorem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28 2.2.1 Orbit of a Control System . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28 2.2.2 Preliminaries . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29 2.2.3 The Orbit Theorem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31 2.2.4 Corollaries of the Orbit Theorem . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34 2.2.5 The Frobenius Theorem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35 2.2.6 Examples . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37 2.2.7 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38 2.3 Attainable Sets of Full-Rank Systems . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38 2.3.1 Krener’s Theorem. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39 2.3.2 Examples . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41 2.3.3 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+xi
+
+
+xii Contents
+3 Optimal Control Problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47 3.1 Optimal Control Problem: Statement and Existence of Solutions . . . 48 3.1.1 Problem Statement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48 3.1.2 Reduction to the Study of Attainable Sets . . . . . . . . . . . . . . . . . . . 48 3.1.3 Existence of Optimal Controls in Optimal Control Problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50 3.2 The Pontryagin Maximum Principle . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51 3.2.1 Elements of Symplectic Geometry. . . . . . . . . . . . . . . . . . . . . . . . . . . 51 3.2.2 Statement of the Pontryagin Maximum Principle . . . . . . . . . . . 55 3.2.3 Solution to Examples of Optimal Control Problems . . . . . . . . 56 3.3 Sub-Riemannian Geometry . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61 3.3.1 Sub-Riemannian Structures and Minimizers . . . . . . . . . . . . . . . . 61 3.3.2 The Lie Algebra Rank Condition for SR Problems . . . . . . . . . 64 3.3.3 The Filippov Theorem for SR Problems. . . . . . . . . . . . . . . . . . . . . 65 3.3.4 The Pontryagin Maximum Principle for SR Problems. . . . . . 65 3.3.5 Optimality of SR Extremal Trajectories . . . . . . . . . . . . . . . . . . . . . 66 3.3.6 Proof of the Pontryagin Maximum Principle for Sub-Riemannian Problems . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69 3.4 A Symmetry Method for Construction of Optimal Synthesis . . . . . . . . 76
+4 Solution to Optimal Control Problems . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 81 4.1 The Sub-Riemannian Problem on the Heisenberg Group . . . . . . . . . . . . 82 4.1.1 Existence of Solutions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 82 4.1.2 Geodesics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 82 4.1.3 Optimality of Geodesics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 84 4.1.4 Cut Locus and Caustic . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 87 4.1.5 Sub-Riemannian Distance and Spheres . . . . . . . . . . . . . . . . . . . . . . 88 4.2 The Sub-Riemannian Problem on the Group of Motions of the Plane . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 90 4.2.1 The Group of Euclidean Motions of the Plane . . . . . . . . . . . . . . 90 4.2.2 The Left-Invariant Sub-Riemannian Problem on SE(2) . . . . 91 4.2.3 Existence of Solutions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 91 4.2.4 The Pontryagin Maximum Principle . . . . . . . . . . . . . . . . . . . . . . . . . 92 4.2.5 Geodesics and the Exponential Mapping . . . . . . . . . . . . . . . . . . . . 97 4.2.6 Symmetries of the Exponential Mapping . . . . . . . . . . . . . . . . . . . . 98 4.2.7 Maxwell Time Corresponding to Symmetries. . . . . . . . . . . . . . . 103 4.2.8 Conjugate Points . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 103 4.2.9 Structure of the Exponential Mapping . . . . . . . . . . . . . . . . . . . . . . . 104 4.2.10 Cut Locus and Caustic . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 105 4.2.11 Explicit Optimal Solutions for Special Terminal Points . . . . 106 4.2.12 Sub-Riemannian Spheres and Wavefronts . . . . . . . . . . . . . . . . . . . 109 4.3 Euler’s Elasticae . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 110 4.3.1 History of the Problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 110 4.3.2 Problem Statement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 114 4.3.3 Existence of Solutions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 115
+
+
+Contents xiii
+4.3.4 The Pontryagin Maximum Principle . . . . . . . . . . . . . . . . . . . . . . . . . 115 4.3.5 Exponential Mapping and Its Symmetries . . . . . . . . . . . . . . . . . . . 122 4.3.6 Bounds of Conjugate Time . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 124 4.3.7 Diffeomorphic Structure of the Exponential Mapping . . . . . . 126 4.3.8 Optimal Trajectories for Various Boundary Conditions . . . . 127 4.4 The Sub-Riemannian Problem on the Engel Group . . . . . . . . . . . . . . . . . . 130 4.4.1 Problem Statement . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 130 4.4.2 Geodesics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 131 4.4.3 Symmetries of the Exponential Mapping and Maxwell Time. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 135 4.4.4 Lower Bound of the First Conjugate Time . . . . . . . . . . . . . . . . . . 136 4.4.5 Diffeomorphic Structure of the Exponential Mapping . . . . . . 136 4.4.6 Cut Time and Cut Locus. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 137 4.4.7 Sphere . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 138 4.4.8 Explicit Expressions of Sub-Riemannian Distance . . . . . . . . . 140 4.4.9 Metric Lines. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 140 4.5 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 141
+5 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 145
+A Elliptic Integrals, Functions and Equation of Pendulum . . . . . . . . . . . . . . . . 147 A.1 Elliptic Integrals and Functions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 147 A.1.1 Elliptic Integrals in Legendre’s Form . . . . . . . . . . . . . . . . . . . . . . . . 147 A.1.2 Jacobi’s Functions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 148 A.1.3 Standard Formulae . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 148 A.2 Pendulum . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 149 A.2.1 Equation of Pendulum and Its Solution . . . . . . . . . . . . . . . . . . . . . . 149 A.2.2 Straightening Coordinates . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 151
+Bibliography and Further Reading . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 153 Books on Control Theory, Calculus of Variations, and Nonholonomic Geometry . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 153 Some Important General Papers on Geometric Control Theory and Related Topics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 155 Papers in Which Particular Optimal Control Problems Are Studied. . . . . . . . 155 Other Cited Books and Papers . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 157
+Index . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 159
+
+
+List of Figures
+Searching for the Ox . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . vii
+Seeing the Traces . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+Fig. 1.1 Sub-Riemannian problem on the group of motions of the plane . . . 4 Fig. 1.2 Euler’s elastic problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5 Fig. 1.3 The plate-ball problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7 Fig. 1.4 Dido’s problem: S = S1 − S2 + S3 − . . . , l(γ ) → min . . . . . . . . . . . 9 Fig. 1.5 Lift of curve (x, y)(t) to (x, y, z)(t) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10 Fig. 1.6 Tangent vector γ ̇ (0) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14 Fig. 1.7 Tangent space Tq M . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+Seeing the Ox . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+Fig. 2.1 Immersed submanifold . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30 Fig. 2.2 Attainable set—smooth manifold without boundary. . . . . . . . . . . . . . . . 39 Fig. 2.3 Attainable set—manifold with smooth boundary . . . . . . . . . . . . . . . . . . . 39 Fig. 2.4 Attainable set—manifold with nonsmooth boundary . . . . . . . . . . . . . . . 40 Fig. 2.5 Attainable set—manifold with nonsmooth boundary . . . . . . . . . . . . . . . 40 Fig. 2.6 Forbidden attainable set: subset of lower dimension . . . . . . . . . . . . . . . . 40 Fig. 2.7 Forbidden attainable set: subset with boundary points isolated from interior . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40 Fig. 2.8 Steering q0 to q in Euler’s elastic problem . . . . . . . . . . . . . . . . . . . . . . . . . . 44 Fig. 2.9 Attainable set Aq0 (t1) in Euler’s elastic problem . . . . . . . . . . . . . . . . . . . 44
+Catching the Ox . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+Fig. 3.1 Trajectory qu ̃ (t) is optimal . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49 Fig. 3.2 Optimal synthesis in the problem on stopping a train . . . . . . . . . . . . . . . 59 Fig. 3.3 Optimal synthesis for the controlled linear oscillator . . . . . . . . . . . . . . . 61 Fig. 3.4 Maxwell point q(t): t2 < t1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
+xv
+
+
+xvi List of Figures
+Herding the Ox . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 81
+Fig. 4.1 Flow of the vertical subsystem (4.1)–(4.3) . . . . . . . . . . . . . . . . . . . . . . . . . . 83 Fig. 4.2 Geodesics in Dido’s problem. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 85 Fig. 4.3 Optimal trajectories in Dido’s problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 88 Fig. 4.4 Sub-Riemannian sphere on the Heisenberg group . . . . . . . . . . . . . . . . . . 89 Fig. 4.5 Sub-Riemannian hemisphere on the Heisenberg group . . . . . . . . . . . . . 89 Fig. 4.6 Intersection of level surfaces of integrals H and F . . . . . . . . . . . . . . . . . 93 Fig. 4.7 Intersection of {H = 1/2} and {F = 0} . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 94 Fig. 4.8 Intersection of {H = 1/2} and {F = const ∈ (0, 1)} . . . . . . . . . . . . . . . 94 Fig. 4.9 Intersection of {H = 1/2} and {F = 1} . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 94 Fig. 4.10 Intersection of {H = 1/2} and {F = const > 1}. . . . . . . . . . . . . . . . . . . . 95 Fig. 4.11 Phase portrait of pendulum (4.19) and (4.20) . . . . . . . . . . . . . . . . . . . . . . . 95 Fig. 4.12 Stratification (4.21) of the phase cylinder of pendulum (4.19) and (4.20) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 96 Fig. 4.13 Non-inflectional trajectory in SE(2): λ ∈ C1 . . . . . . . . . . . . . . . . . . . . . . . . 97 Fig. 4.14 Inflectional trajectory in SE(2): λ ∈ C2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 97 Fig. 4.15 Critical trajectory in SE(2): λ ∈ C3 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 97 Fig. 4.16 Reflections (4.22)–(4.28) in the phase cylinder of pendulum . . . . . . 98 Fig. 4.17 Reflections (4.30)–(4.36) of trajectories of pendulum . . . . . . . . . . . . . . 99 Fig. 4.18 Reflections (4.37)–(4.43) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 100 Fig. 4.19 Action of ε1, ε2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 102 Fig. 4.20 Action of ε4, ε7 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 102 Fig. 4.21 Action of ε5, ε6 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 102 Fig. 4.22 Cut locus Cut ⊂ SE(2) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 105 Fig. 4.23 Sub-Riemannian caustic on SE(2) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 106 Fig. 4.24 Sub-Riemannian sphere Sπ/2 ⊂ SE(2) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 109 Fig. 4.25 Sub-Riemannian sphere Sπ ⊂ SE(2) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 110 Fig. 4.26 Sub-Riemannian sphere S3π/2 ⊂ SE(2) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 110 Fig. 4.27 Wavefront Wπ ⊂ SE(2) in cut-out . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 110 Fig. 4.28 Rectangular elastica . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 111 Fig. 4.29 Sketches of elasticae by Euler [20] . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 112 Fig. 4.30 Photos of experiments by Born with elasticae [74] . . . . . . . . . . . . . . . . . 114 Fig. 4.31 Intersection of level surfaces of integrals H and F > 0 . . . . . . . . . . . . 117 Fig. 4.32 Intersection of {F = r > 0} and {H = −r} . . . . . . . . . . . . . . . . . . . . . . . . . 117 Fig. 4.33 Intersection of {F = r > 0} and {H = const ∈ (−r, r)} . . . . . . . . . . . 117 Fig. 4.34 Intersection of {F = r > 0} and {H = r} . . . . . . . . . . . . . . . . . . . . . . . . . . . 118 Fig. 4.35 Intersection of {F = r > 0} and {H > r} . . . . . . . . . . . . . . . . . . . . . . . . . . . 118 Fig. 4.36 Mathematical pendulum . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 119 Fig. 4.37 Phase portrait of pendulum (4.62) and (4.63) . . . . . . . . . . . . . . . . . . . . . . . 119 Fig. 4.38 Elastica-line : E = ±r, r > 0, c = 0 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 120
+Fig. 4.39 Inflectional elastica: E ∈ (−r, r), r > 0, k ∈ (0, 1/√2) . . . . . . . . . . . 120 Fig. 4.40 Rectangular inflectional elastica: E ∈ (−r, r), r > 0,
+k = 1/√2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 120
+Fig. 4.41 Inflectional elastica: E ∈ (−r, r), r > 0, k ∈ (1/√2, k0) . . . . . . . . . . 120
+
+
+List of Figures xvii
+Fig. 4.42 Periodic inflectional elastica: E ∈ (−r, r), r > 0, k = k0 ≈ 0.909 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 121 Fig. 4.43 Inflectional elastica: E ∈ (−r, r), r > 0, k ∈ (k0, 1) . . . . . . . . . . . . . . . 121 Fig. 4.44 Critical elastica: E = r > 0, β = π . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 121 Fig. 4.45 Noninflectional elastica: E > r > 0 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 121 Fig. 4.46 Elastica-circle: r = 0, c = 0 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 121 Fig. 4.47 One-parameter family of shapes of Euler elasticae . . . . . . . . . . . . . . . . . 122 Fig. 4.48 Optimal elasticae for x1 > 0, y1 = 0, θ1 = π . . . . . . . . . . . . . . . . . . . . . . . 127 Fig. 4.49 Optimal elasticae for x1 < 0, y1 = 0, θ1 = π . . . . . . . . . . . . . . . . . . . . . . . 128 Fig. 4.50 Optimal elastica-“drop” for x1 = 0, y1 = 0, θ1 = π . . . . . . . . . . . . . . . . 128 Fig. 4.51 Optimal elasticae for x1 > 0, y1 = 0, θ1 = 0, x1 ∈ (0, x∗) . . . . . . . . . 129 Fig. 4.52 Optimal elasticae for x1 > 0, y1 = 0, θ1 = 0, x1 ∈ (x∗, 1) . . . . . . . . . 129 Fig. 4.53 Optimal elasticae for x1 > 0, y1 = 0, θ1 = 0, x1 = x∗ . . . . . . . . . . . . . 129 Fig. 4.54 Optimal elasticae for x1 < 0, y1 = 0, θ1 = 0 . . . . . . . . . . . . . . . . . . . . . . . 129 Fig. 4.55 Engel algebra. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 131 Fig. 4.56 Intersection of level surfaces of integrals H , h4 > 0, and E . . . . . . . 133 Fig. 4.57 Intersection of level surfaces of integrals H , h4 = 0, and E . . . . . . . 133
+Fig. 4.58 Section of sphere S ̃ = S ∩ {x = z = 0} . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 139 Fig. 4.59 Sub-Riemannian sphere S in the Martinet flat case . . . . . . . . . . . . . . . . . 143 Fig. 4.60 S ∩ {y = 0} . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 143
+Coming Home on the Ox’s Back . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 145
+Fig. A.1 Phase portrait of pendulum (A.1) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 150
+
+
+Chapter 1 Introduction
+By the stream and under the trees, scattered are the traces of the lost; The sweet-scented grasses are growing thick—did he find the way? However remote over the hills and far away the beast may wander, His nose reaches the heavens and none can conceal it.
+Pu-ming, “The Ten Oxherding Pictures” (cited by Suzuki [110])
+Seeing the Traces
+We begin this chapter by stating several specific control problems, many of which will be studied in the book. Then we describe two main general problems of this book—the controllability problem and the optimal control problem. Finally, we recall some basic facts on smooth manifolds, vector fields, and Lie groups.
+© The Author(s), under exclusive license to Springer Nature Switzerland AG 2022 Yu. Sachkov, Introduction to Geometric Control, Springer Optimization and Its Applications 192, https://doi.org/10.1007/978-3-031-02070-4_1
+1
+
+
+2 1 Introduction
+1.1 Statement of Control Problems
+1.1.1 Examples of Optimal Control Problems
+Before developing the general theory, we state several particular optimal control problems.
+1.1.1.1 Stopping a Train
+Consider a material point of mass m > 0 with coordinate x ∈ R that moves along a line under the action of a force F bounded by the absolute value by Fmax > 0. Given an initial position x0 and initial velocity x ̇0 of the material point, we should find a force F that steers the point to the origin with zero velocity, for a minimal time. The second law of Newton gives |mx ̈| = |F | ≤ Fmax, thus |x ̈| ≤ Fmax
+m . Choosing
+appropriate units of measure, we can obtain Fmax
+m = 1, thus |x ̈| ≤ 1. Denote position
+of the point x1 = x, velocity x2 = x ̇, and acceleration u = x ̈, |u| ≤ 1. Then the problem is formalized as follows:
+x ̇1 = x2, (x1, x2) ∈ R2, (1.1)
+x ̇2 = u, |u| ≤ 1, (1.2)
+(x1, x2)(0) = (x0, x ̇0), (x1, x2)(t1) = (0, 0),
+t1 → min .
+Such an optimal control problem, where one should minimize the time t1 of motion of the system between two given points, is called a time-optimal problem. The problem is linear since the right-hand side of equations (1.1), (1.2) depends linearly both on the state (x1, x2) and the control parameter u. This problem is studied in Sect. 3.2.3.1.
+1.1.1.2 Control of Linear Oscillator
+Consider a pendulum that performs small oscillations under the action of a force bounded by the absolute value. We should choose a force that steers the pendulum from an arbitrary position and velocity to the stable equilibrium for a minimum time. After choosing appropriate units of measure, we get a mathematical model:
+x ̈1 = −x1 + u, |u| ≤ 1, x1 ∈ R.
+
+
+1.1 Statement of Control Problems 3
+Introducing the notation x2 = x ̇1 for velocity, we get a linear time-optimal problem:
+x ̇1 = x2, x = (x1, x2) ∈ R2,
+x ̇2 = −x1 + u, |u| ≤ 1,
+x(0) = x0, x(t1) = 0,
+t1 → min .
+This problem is discussed in Sect. 3.2.3.3.
+1.1.1.3 The Markov–Dubins Car
+Consider a simplified model of a car given by a unit vector attached at a point (x, y) ∈ R2, with orientation θ ∈ S1 (here and below S1 = R/(2π Z) is the circle, i.e., the one-dimensional sphere). The car moves forward with the unit velocity and can simultaneously rotate with an angular velocity |θ ̇| ≤ 1. Given an initial and a terminal state of the car, we should choose the angular velocity in such a way that the time of motion is as minimum as possible. We have the following time-optimal problem:
+x ̇ = cos θ, q = (x, y, θ ) ∈ R2
+x,y × S1
+θ = M,
+y ̇ = sin θ, |u| ≤ 1,
+θ ̇ = u,
+q(0) = q0, q(t1) = q1,
+t1 → min .
+This problem is nonlinear, moreover, the state space M = R2 × S1 is a nontrivial smooth manifold, homeomorphic to the solid torus. Parallel translations and rotations (i.e., motions of the plane) transform solutions of the problem into solutions, thus the problem is left-invariant on the group of motions of Euclidean
+plane SE(2) ∼= R2 × S1; see details on this group in Sect. 4.2. The problem on the Markov–Dubins car is studied in Sect. 3.2.3.2.
+1.1.1.4 The Sub-Riemannian Problem on the Group of Motions of the Plane
+Consider a (more realistic) model of a car in the plane that can move forward or backward with an arbitrary linear velocity and simultaneously rotate with an
+
+
+4 1 Introduction
+arbitrary angular velocity. The state of the car is given by its position in the plane and orientation angle. We should find a motion of the car from a given initial state to a given terminal state, so that the length of the path in the space of positions and orientations is as minimum as possible; see Fig. 1.1. We get the following optimal control problem:
+x ̇ = u cos θ, q = (x, y, θ ) ∈ R2
+x,y × S1
+θ , (1.3)
+y ̇ = u sin θ, (u, v) ∈ R2, (1.4)
+θ ̇ = v, (1.5)
+q(0) = q0, q(t1) = q1,
+l=
+∫ t1
+0
+√
+x ̇2 + y ̇2 + θ ̇2 dt =
+∫ t1
+0
+√
+u2 + v2 dt → min . (1.6)
+This is a nonlinear optimal control problem with integral cost functional l. Dynamics (1.3)–(1.5) is linear in the control (u, v), while the cost functional l is homogeneous of order 1 in the control, so we have a sub-Riemannian problem; see Sect. 3.3. Motions of the plane transform solutions into solutions, thus the problem is leftinvariant on the Lie group SE(2). This problem is considered in detail in Sect. 4.2.
+Fig. 1.1 Sub-Riemannian problem on the group of motions of the plane
+q0= (x0; y0; μ0)
+q1= (x1; y1; μ1)
+μ
+x
+y
+
+
+1.1 Statement of Control Problems 5
+1.1.1.5 Euler Elasticae
+Consider a uniform elastic rod of length l in the plane. Suppose that the rod has fixed endpoints and tangents at endpoints. We should find the profile of the rod. Let (x(t), y(t)) be an arclength parametrization of the rod, and let θ (t) be its orientation angle in the plane. Then the form of the rod γ (t) = (x(t), y(t)) is determined by the system
+x ̇ = cos θ, q = (x, y, θ ) ∈ R2 × S1,
+y ̇ = sin θ, u ∈ R,
+θ ̇ = u,
+q(0) = q0, q(t1) = q1, t1 = l is the length of the rod;
+see Fig. 1.2, where qi = (ai, θi), i = 0, 1.
+The elastic energy of the rod is equal to J = 1
+2
+∫ t1
+0 k2 dt, where k is the curvature
+of the rod. Since for an arclength parametrised rod k = θ ̇ = u, we obtain the cost functional
+J=1
+2
+∫ t1
+0
+u2 dt → min,
+because the rod takes the form that minimizes its elastic energy. Once more we have a nonlinear optimal control problem with integral cost functional, left-invariant on the Lie group SE(2). Although, now the system is affine (linear nonhomogeneous) in the control, thus the problem is not sub-Riemannian. This problem is studied in Sect. 4.3.
+1.1.1.6 The Plate-Ball Problem
+Let a uniform sphere roll without slipping or twisting on a horizontal plane. One can imagine that the sphere rolls between two horizontal planes: a fixed lower one
+Fig. 1.2 Euler’s elastic problem
+q0 = (a0; μ0)
+x
+y
+° (t) μ (t)
+q1 = (a1; μ1)
+
+
+6 1 Introduction
+and a moving upper one. Admissible motions are obtained by horizontal motions of the upper plane. Absence of slipping means that the contact point of the sphere with the plane has zero instantaneous velocity; and absence of twisting means that the angular velocity vector of the sphere is horizontal. We should roll the sphere from a given initial state to a given terminal state, so that the length of the curve in the plane traced by the contact point was the minimum possible. We are interested in the kinematics of motion of the sphere, thus we can forget about the upper plane. State of the system is determined by the contact point of the sphere and the plane, and the orientation of the sphere in the space. Introduce a fixed orthonormal frame (e1, e2, e3) in the space such that e1 and e2 are contained in the horizontal plane, and the vector e3 looks to the half-space where the sphere rolls. Further, let (f1, f2, f3) be a moving orthonormal frame attached to the sphere. Let a point of the sphere have coordinates (x, y, z) in the fixed frame (e1, e2, e3), and coordinates (X, Y, Z) in the moving frame (f1, f2, f3):
+xe1 + ye2 + ze3 = Xf1 + Yf2 + Zf3.
+Let (x, y) denote coordinates of the contact point of the sphere with the plane. Then the orthogonal 3 × 3 matrix R such that
+R
+⎛
+⎝
+x y z
+⎞
+⎠=
+⎛
+⎝
+X Y Z
+⎞
+⎠
+determines orientation of the sphere in the space. This matrix belongs to the group of rotations of the 3-dimensional space:
+R ∈ SO(3) =
+{
+A ∈ R3×3 | AT = A−1, det A = 1
+} ,
+where R3×3 is the space of all 3 × 3 real matrices. Then the state of the system is
+q = (x, y, R) ∈ R2 × SO(3) = M,
+and our problem is written as follows:
+x ̇ = u, y ̇ = v, (u, v) ∈ R2, (1.7)
+R ̇ = R
+⎛
+⎝
+0 0 −u 0 0 −v uv 0
+⎞
+⎠ , (1.8)
+
+
+1.1 Statement of Control Problems 7
+Fig. 1.3 The plate-ball problem
+e1
+e2
+e3
+f1
+f2
+f3
+(x0; y0)
+(x1; y1)
+l → min
+q(0) = q0, q(t1) = q1,
+l=
+∫ t1
+0
+√
+u2 + v2 dt → min;
+see Fig. 1.3. This is a left-invariant sub-Riemannian problem on the 5-dimensional Lie group R2 × SO(3). It was studied in detail in [80, 90]; see also Exercise 8 in Sect. 4.5.
+1.1.1.7 Anthropomorphic Curve Reconstruction
+Suppose that a greyscale image is given by a set of isophotes (level lines of brightness). Let the image be corrupted in some domain, and our goal is to reconstruct it anthropomorphically, i.e., close to the way a human brain does. Consider a problem of anthropomorphic reconstruction of a curve, i.e., of reconstruction by a method similar to the human one, when we reconstruct a corrupted curve to a complete arc. According to a discovery of D. Hubel and T. Wiesel [102] (1981 Nobel Prize in Physiology or Medicine), a human brain stores curves not as sequences of planar points (xi, yi), but as sequences of positions and orientations (xi, yi, θi). Moreover, an established model of the primary visual cortex V 1 of the human brain by J. Petitot, G. Citti and A. Sarti [100, 107] states that corrupted curves of images are reconstructed according to a variational principle, i.e., in a way that minimizes the activation energy of neurons required for drawing the missing part of the curve. So the discovery by Hubel and Wiesel states that the human brain lifts images (x(t), y(t)) from the plane to the space of positions and orientations (x(t), y(t), θ (t)). The lifted curve is a solution to the control system
+x ̇ = u cos θ, q = (x, y, θ ) ∈ R2 × S1,
+y ̇ = u sin θ, (u, v) ∈ R2,
+θ ̇ = v,
+
+
+8 1 Introduction
+with the boundary conditions provided by endpoints and tangents of the corrupted curve:
+q(0) = q0, q(t1) = q1.
+Moreover, the activation energy of neurons required to draw the corrupted curve is given by an integral to be minimized. By the model of the primary visual cortex V1 due to J. Petitot, G. Citti and A. Sarti, this energy is measured by the integral
+J=
+∫ t1
+0
+(u2 + v2) dt → min .
+By the Cauchy–Schwarz inequality, minimization of the energy J is equivalent to minimization of the length functional
+l=
+∫ t1
+0
+√
+u2 + v2 dt → min,
+for fixed t1. We have a remarkable fact: optimal trajectories for the sub-Riemannian problem on the group of motions of the plane solve the problem of anthropomorphic curve reconstruction!
+1.1.1.8 Dido’s Problem
+There bought a space of ground, which (Byrsa call’d, From the bull’s hide) they first inclos’d, and wall’d.
+Virgil “Aeneid ”
+Dido’s problem (the left-invariant sub-Riemannian problem on the Heisenberg group) is the simplest nontrivial sub-Riemannian problem. It is discussed in almost any textbook or survey on sub-Riemannian geometry or geometric control theory, see e.g. [2, 26, 28, 37]. We do not venture to break this tradition. Consider the following formalization of an ancient optimization problem going back to nineteenth century BC [28, 111]. Given points a0, a1 ∈ R2, a Lipschitzian curve γ ⊂ R2 connecting a1 with a0, and a number S ∈ R, one should find the shortest Lipschitzian curve γ ⊂ R2 connecting a0 with a1 for which the closed curve γ ∪ γ bounds a domain in R2 of the algebraic area S; see Fig. 1.4. Introduce Cartesian coordinates x, y in the plane R2 with the origin a0. Then a0 = (0, 0), a1 = (x1, y1), and the curves γ , γ are parametrised as
+γ (t) = (x(t), y(t)), t ∈ [0, t1],
+γ (t) = (x(t), y(t)), t ∈ [0, t1].
+
+
+1.1 Statement of Control Problems 9
+a0
+a1
+S1
+S2
+S3
+γ
+γ
+Fig. 1.4 Dido’s problem: S = S1 − S2 + S3 − . . . , l(γ ) → min
+The parameters t1, t1 are arbitrary, they can be considered fixed or free since the length of a curve does not depend on parametrisation. Consider a closed curve ̂γ = γ ∪ γ and a domain bounded by it: D ⊂ R2, ∂D = ̂γ . Then
+S(D) = 1
+2
+∮
+̂γ
+x dy − y dx = 1
+2
+∫ t1
+0
+(xy ̇ − yx ̇) dt − I ,
+I=1
+2
+∫ t1
+0
+(x y ̇ − y x ̇ ) dt = 1
+2
+∫
+γ
+x dy − y dx.
+Introduce the variable
+z(t) := 1
+2
+∫t
+0
+(xy ̇ − yx ̇) dt
+that measures the algebraic sectorial area swept by the radius-vector (x(t), y(t)). Thus a curve (x(t), y(t)) lifts to the curve (x(t), y(t), z(t)), where z(t) is equal to the sectorial area S(t); see Fig. 1.5. Then z(0) = 0, and the number z(t1) = S + I =: z1 is given.
+Denote functions from the space L∞:
+x ̇(t) =: u1(t), y ̇(t) =: u2(t),
+
+
+10 1 Introduction
+Fig. 1.5 Lift of curve (x, y)(t) to (x, y, z)(t)
+then
+z ̇(t) = 1
+2 (xu2 − yu1).
+Thus along solutions of Dido’s problem, the point q = (x, y, z) ∈ R3 satisfies the control system
+q ̇ = u1X1(q) + u2X2(q), u = (u1, u2) ∈ R2, q ∈ R3, (1.9)
+X1 = ∂
+∂x −y
+2
+∂
+∂ z , X2 = ∂
+∂y +x
+2
+∂
+∂ z , (1.10)
+the boundary conditions
+q(0) = q0 = (0, 0, 0), q(t1) = q1 = (x1, y1, z1), (1.11)
+and the optimality condition
+l(γ ) =
+∫ t1
+0
+√
+u2
+1 + u2
+2 dt → min . (1.12)
+This is a sub-Riemannian problem on R3; see Sect. 4.1 for its solution. By virtue of Exercise 4 (see Sect. 1.3), the length minimization problem (1.12) is equivalent to the energy minimization problem
+∫ t1
+0
+(u2
+1 + u2
+2) dt → min .
+
+
+1.1 Statement of Control Problems 11
+1.1.2 Control Systems and Problems
+1.1.2.1 Dynamical Systems and Control Systems
+A smooth dynamical system, or an ordinary differential equation (ODE) on a smooth manifold, is given by an equation
+q ̇ = f (q), q ∈ M, (1.13)
+where f ∈ Vec(M) is a smooth vector field on M. A basic property of a dynamical system is that it is deterministic, i.e., given an initial condition q(0) = q0 and a time t > 0, there exists a unique solution q(t) to ODE (1.13). A typical example of a dynamical system is a planet rotating around the sun. A control system is obtained from dynamical system (1.13) if we add a control parameter u in the right-hand side:
+q ̇ = f (q, u), q ∈ M, u ∈ U. (1.14)
+The control parameter varies in a set of control parameters U (usually a subset of Rm). This parameter can change in time: we can choose a control function u = u(t) ∈ U and substitute it to the right-hand side of control system (1.14) to obtain a nonautonomous ODE
+q ̇ = f (q, u(t)). (1.15)
+Together with an initial condition
+q(0) = q0, (1.16)
+ODE (1.15) determines a unique solution—a trajectory qu(t), t ≥ 0, of control system (1.14) corresponding to the control u(t) and initial condition (1.16). For another control u ̃(t), we get another trajectory qu ̃ (t) with initial condition (1.16). The manifold M is called the state space of control system (1.14). The mapping
+f : (q, u) → f (q, u)
+in (1.14) is assumed smooth. A typical example of a control system is a rocket flying in the space. Regularity assumptions for control u(·) can vary from problem to problem; typical examples are piecewise constant controls or Lebesgue measurable bounded controls (from L∞). The controls considered in a particular problem are called admissible controls.
+If we fix initial condition (1.16) and vary admissible controls, we get a new object—the attainable set of control system (1.14) from the point q0 for arbitrary
+
+
+12 1 Introduction
+times:
+Aq0 = {qu(t) | qu(0) = q0, u ∈ L∞([0, t], U ), t ≥ 0}.
+Notice that in control theory the time parameter t is usually assumed nonnegative. For a dynamical system, the attainable set is not considered since it is just a positivetime half-trajectory. But for control systems, the attainable set is a non-trivial object, and its study is one of the central problems of control theory. If we apply restrictions on the terminal time of trajectories, we get restricted attainable sets: the attainable set from the point q0 for a time t1 ≥ 0
+Aq0 (t1) = {qu(t1) | qu(0) = q0, u ∈ L∞([0, t1], U )},
+and the attainable set from the point q0 for times not greater than t1 ≥ 0:
+Aq0 (≤ t1) =
+t⋃1
+t =0
+Aq0 (t).
+Now we state our two main general problems.
+1.1.2.2 The Controllability Problem
+Definition 1.1 A control system (1.14) is called:
+• globally (completely) controllable if Aq0 = M for any q0 ∈ M • globally controllable from a point q0 ∈ M if Aq0 = M • locally controllable at q0 if q0 ∈ int Aq0 • small time locally controllable (STLC) at q0 if q0 ∈ int Aq0 (≤ t1) for any t1 > 0,
+where int denotes the interior of a set.
+Even the local controllability problem is rather hard to solve: there exist necessary conditions and sufficient conditions of STLC for arbitrary dimension of the state space M, but local controllability tests are available only for the case dim M = 2. The global controllability problem is naturally much more harder: there exist global controllability conditions only for very symmetric systems: linear systems, left-invariant systems on Lie groups.
+1.1.2.3 The Optimal Control Problem
+Suppose that for control system (1.14) the controllability problem between points q0, q1 ∈ M is solved positively: q1 ∈ Aq0 . Then typically the points q0, q1 are connected by more than one trajectory of the control system (usually by continuum
+
+
+1.2 Smooth Manifolds, Vector Fields, and Lie Groups 13
+of trajectories). Thus there naturally arises the question of the best (optimal in a certain sense) trajectory connecting q0 and q1. In order to measure the quality of trajectories (controls), introduce a cost functional to be minimized:
+J=
+∫ t1
+0
+φ(q, u) dt.
+A typical example: we should transfer the space satellite from one position to another with minimal expenditure of fuel. Thus we get an optimal control problem:
+q ̇ = f (q, u), q ∈ M, u ∈ U, (1.17)
+q(0) = q0, q(t1) = q1, (1.18)
+J=
+∫ t1
+0
+φ(q, u) dt → min . (1.19)
+Here the terminal time t1 may be fixed or free. The optimal control problem is also rather hard to solve—this is an optimization problem (1.19) in an infinite-dimensional space {u(·)} of admissible controls with specific constraints (1.17), (1.18). There exist general necessary optimality conditions (the most important of which are first order optimality conditions given by the Pontryagin maximum principle) and general sufficient optimality conditions (second-order and higher-order). But optimality tests are available only for special classes of problems (linear, linear-quadratic, convex problems). So we stated two main general problems of this course:
+1. the controllability problem 2. the optimal control problem.
+There are many other important mathematical control problems: equivalence, stabilization, observability, etc., which we do not touch upon. We study the controllability problem in Chap. 2, and the optimal control problem in Chap. 3. The general theory developed is applied to several particular optimal control problems in Chap. 4.
+1.2 Smooth Manifolds, Vector Fields, and Lie Groups
+Here we recall briefly some basics of calculus on smooth manifolds, vector fields, and Lie groups. For a systematic study we recommend a regular textbook on differential geometry (e.g., [109, 114]).
+
+
+14 1 Introduction
+1.2.1 Smooth Manifolds
+A smooth k-dimensional submanifold M ⊂ Rn is usually defined by one of the following equivalences:
+(a) implicitly by a system of regular equations:
+f1(x) = · · · = fn−k(x) = 0, x ∈ Rn,
+rank
+( ∂f1
+∂x , . . . , ∂fn−k
+∂x
+)
+= n − k,
+(b) or by a regular parametrization:
+x = (y), y ∈ Rk, x ∈ Rn,
+rank ∂
+∂y = k.
+An abstract smooth manifold M (not embedded into Rn) is defined via a system of charts (local coordinates) that mutually agree. A mapping between smooth manifolds is called smooth if it is smooth (of class C∞) in local coordinates. The tangent space to a smooth submanifold M ⊂ Rn at a point x ∈ M is defined as follows for the two definitions above of a submanifold:
+(a) Tx M = Ker ∂f
+∂x (x),
+(b) TxM = Im ∂
+∂y (y), x = (y).
+Now let M be an abstract smooth manifold and let q ∈ M. Consider a smooth
+curve γ : (−ε, ε) → M with γ (0) = q. Then the tangent vector γ ̇ (0) = dγ
+dt (0) is
+defined as the equivalence class of all smooth curves with γ (0) = q and with the same 1-st order Taylor polynomial in some (thus in any) system of local coordinates; see Fig. 1.6. The tangent space to M at a point q ∈ M is the set of all tangent vectors to M at q:
+Tq M = {γ ̇ (0) | γ : (−ε, ε) → M smooth, γ (0) = q};
+Fig. 1.6 Tangent vector γ ̇ (0)
+γ(0)
+γ(t)
+γ ̇ (0)
+
+
+1.2 Smooth Manifolds, Vector Fields, and Lie Groups 15
+Fig. 1.7 Tangent space Tq M
+q γ(t)
+γ ̇ (0)
+TqM
+M
+see Fig. 1.7. It is a vector space of the same dimension as M. Given a smooth mapping F : M → N between smooth manifolds, for any q ∈ M the differential
+F∗q : Tq M → TF (q)N
+is defined as follows:
+F∗q v = d
+dt
+∣∣∣∣t =0
+F (γ (t)),
+where γ : (−ε, ε) → M is a smooth curve such that γ (0) = q, γ ̇ (0) = v.
+1.2.2 Smooth Vector Fields and Lie Brackets
+A smooth vector field on a manifold M is a smooth mapping
+M q → V (q) ∈ Tq M.
+Notation: V ∈ Vec(M). A trajectory of a vector field V through a point q0 ∈ M is a solution to the Cauchy problem:
+q ̇(t) = V (q(t)), q(0) = q0.
+Suppose that a trajectory q(t) exists for all times t ∈ R, then we denote etV (q0) := q(t). The one-parameter group of diffeomorphisms etV : M → M is the flow of the vector field V . Now we define the Lie bracket (commutator) of vector fields V , W ∈ Vec(M). We say that V and W commute if their flows commute:
+etV ◦ esW = esW ◦ etV , t, s ∈ R.
+In the general case vector fields V and W do not commute, thus etV ◦ esW = esW ◦ etV , moreover, etV ◦ etW = etW ◦ etV . So the curve
+φ(t ) = e−tW ◦ e−tV ◦ etW ◦ etV (q0)
+
+
+16 1 Introduction
+satisfies the inequality φ(t) = q0, t ∈ R. The leading nontrivial term of the Taylor expansion of φ(t), t → 0, is taken as the measure of noncommutativity of vector fields V and W . Namely, we have φ(0) = 0, φ ̇(0) = 0, φ ̈(0) = 0 generically. Thus the commutator (Lie bracket) of the vector fields V , W at the point q0 is defined as
+[V , W ](q0) := 1
+2 φ ̈(0),
+so that
+φ(t) = q0 + t2[V , W ](q0) + o(t2), t → 0.
+In local coordinates
+[V , W ] = ∂W
+∂x V − ∂V
+∂x W. (1.20)
+1.2.2.1 Example: Car in the Plane
+Consider the vector fields in the right-hand side of the control system of Sect. 1.1.1.4
+⎛
+⎝
+x ̇ y ̇ θ ̇
+⎞
+⎠=u
+⎛
+⎝
+cos θ sin θ 0
+⎞
+⎠+v
+⎛
+⎝
+0 0 1
+⎞
+⎠,
+V = cos θ ∂
+∂x + sin θ ∂
+∂y , W = ∂
+∂θ .
+Compute their Lie bracket:
+[V , W ] = ∂W
+∂q V − ∂V
+∂q W = 0 · V −
+⎛
+⎝
+0 0 − sin θ 0 0 cos θ 00 0
+⎞
+⎠
+⎛
+⎝
+0 0 1
+⎞
+⎠=
+⎛
+⎝
+sin θ − cos θ 0
+⎞
+⎠.
+There is another way of computing Lie brackets, via commutator of differential operators corresponding to vector fields:
+[V , W ] = V ◦ W − W ◦ V =
+(
+cos θ ∂
+∂x + sin θ ∂
+∂y
+)∂
+∂θ − ∂
+∂θ
+(
+cos θ ∂
+∂x + sin θ ∂
+∂y
+)
+= sin θ ∂
+∂x − cos θ ∂
+∂y .
+
+
+1.2 Smooth Manifolds, Vector Fields, and Lie Groups 17
+Notice the visual meaning of the vector fields V , W, [V , W ] for the car in the plane:
+• V generates the motion forward • W generates rotations of the car • [V , W ] generates motion of the car in the direction perpendicular to its orientation, thus physically forbidden.
+Choosing alternating motions of the car:
+forward → rotation counter-clockwise → backward → rotation clockwise,
+we can move the car infinitesimally in the forbidden direction. So the Lie bracket [V , W ] is generated by a car during parking manoeuvres in a limited space.
+1.2.3 Lie Groups and Lie Algebras
+A set G is called a Lie group if it is a smooth manifold endowed with a group structure such that the following mappings are smooth:
+(g, h) → gh, G × G → G,
+g → g−1, G → G.
+Let Id ∈ G denote the identity element of the group G. Denote by Rn×n the set of al real n × n matrices. The set
+GL(n, R) = {g ∈ Rn×n | det g = 0}
+is obviously a Lie group w.r.t. the matrix product, it is called the general linear group. The main examples of Lie groups are linear Lie groups, i.e., closed subgroups of GL(n, R); see Exercise 6 in Sect. 1.3. A set g is called a Lie algebra if it is a vector space endowed with a binary operation [ · , · ] called Lie bracket that satisfies the following properties:
+(1) bilinearity: [ax +by, z] = a[x, z]+b[y, z], x, y, z ∈ g, a, b ∈ R, (2) skew symmetry: [x, y] = −[y, x], x, y ∈ g, (3) Jacobi identity: [x, [y, z]] + [y, [z, x]] + [z, [x, y]] = 0, x, y, z ∈ g.
+For any element g of a Lie group G, the mapping
+Lg : h → gh, G → G,
+
+
+18 1 Introduction
+is called the left translation by g. A vector field X ∈ Vec(G) is called left-invariant if it is preserved by left translations:
+(Lg)∗(X(h)) = X(gh), g, h ∈ G.
+Lie bracket of left-invariant vector fields is left-invariant. Thus left-invariant vector fields on a Lie group G form a Lie algebra g called the Lie algebra of the Lie group G. Any left-invariant vector field X ∈ g is uniquely determined by its
+value X(Id) ∈ TIdG, and vice versa. So there is a linear isomorphism g ∼= TIdG, which defines the structure of a Lie algebra on TIdG. Thus the tangent space TIdG is also called the Lie algebra of the Lie group G. For a Lie group G, the tangent space at a point g ∈ G is
+TgG = (Lg)∗TIdG, g ∈ G. (1.21)
+In the case of a linear Lie group G ⊂ GL(n, R), the differential of the left translation can be represented as a matrix product:
+(Lg)∗A = gA, g ∈ G, A ∈ TIdG.
+Thus left-invariant vector fields on a linear Lie group G have the form
+V (g) = gA, g ∈ G, A ∈ TIdG. (1.22)
+A control system on a Lie group G
+g ̇ = f (g, u), g ∈ G, u ∈ U,
+is called left-invariant if its dynamics is preserved by left translations:
+(Lh)∗f (g, u) = f (hg, u), g, h ∈ G, u ∈ U.
+Similarly, an optimal control problem on G is called left-invariant if both its dynamics and the cost functional are preserved by left translations. If an optimal control problem is left-invariant on a Lie group, then the initial point of trajectories can be set to the identity element of the group: g(0) = Id, since any trajectory can be mapped by left translations to satisfy such initial condition.
+1.3 Exercises
+1. Describe the attainable sets Aq0 for the examples of Sects. 1.1.1.1–1.1.1.8. Which of these systems are controllable?
+
+
+1.3 Exercises 19
+2. Describe in the example of Sect. 1.1.1.6:
+Lieq (X1, X2)
+= span(X1(q), X2(q), [X1, X2](q), [X1, [X1, X2]](q), [X2, [X1, X2]](q), . . . ),
+where X1 and X2 are the vector fields in the right-hand side of system (1.7), (1.8):
+q ̇ = u1X1 + u2X2, q ∈ R2 × SO(3).
+3. Show that the two-dimensional sphere S2 and the group SO(3) of rotations of the 3-space are smooth submanifolds. Compute their tangent spaces. Prove that S2 is not a Lie group. 4. Prove in example of Sect. 1.1.1.7:
+l=
+∫ t1
+0
+√
+u2
+1 + u2
+2 dt → min ⇔ J =
+∫ t1
+0
+(u2
+1 + u2
+2) dt → min
+for a fixed terminal time t1. 5. Prove formula (1.20). 6. Show that the following sets are linear Lie groups:
+• the special linear group
+SL(n, R) = {g ∈ GL(n, R) | det g = 1},
+• the special orthogonal group
+SO(n) =
+{
+g ∈ GL(n, R) | det g = 1, g−1 = gT }
+,
+• the special Euclidean group
+SE(n) =
+{( A v
+01
+)
+∈ GL(n + 1, R) | A ∈ SO(n), v ∈ Rn
+} ,
+• the special unitary group
+SU(n) =
+{( A B
+−B A
+)
+∈ R2n×2n | A, B ∈ Rn×n, AAT + BBT = Id,
+BAT − ABT = 0, det(A + iB) = 1
+} ,
+compute their dimensions.
+
+
+20 1 Introduction
+7. Compute the Lie algebras of the Lie groups of the previous item as their tangent spaces at the identity elements. 8. Prove formula (1.21). 9. Prove that left-invariant vector fields on a linear Lie group G have the form (1.22). 10. Show that in each example of Sects. 1.1.1.1–1.1.1.8 the state space has a natural structure of a Lie group. Which of these examples give left-invariant optimal control problems?
+
+
+Chapter 2 Controllability Problem
+On a yonder branch perches a nightingale cheerfully singing; The sun is warm, and a soothing breeze blows, on the bank the willows are green; The ox is there all by himself, nowhere is he to hide himself; The splendid head decorated with stately horns what painter can reproduce him?
+Pu-ming, “The Ten Oxherding Pictures” (cited by Suzuki [110])
+Seeing the Ox
+In this chapter we study the controllability problem. First we prove the classic Kalman controllability test for linear autonomous systems and a related sufficient local controllability condition for nonlinear systems via linearisation. Then we prove the fundamental Nagano–Sussmann Orbit theorem and its corollaries, including
+© The Author(s), under exclusive license to Springer Nature Switzerland AG 2022 Yu. Sachkov, Introduction to Geometric Control, Springer Optimization and Its Applications 192, https://doi.org/10.1007/978-3-031-02070-4_2
+21
+
+
+22 2 Controllability Problem
+the Rashevskii–Chow and the Frobenius theorems. Finally, we prove an important Krener’s theorem on attainable sets of full-rank systems. Theoretical development is illustrated by the study of systems given in Sect. 1.1.1.
+2.1 Controllability
+In this section we prove some basic facts on the controllability problem for linear and nonlinear systems.
+2.1.1 Controllability of Linear Systems
+We start from the simplest class of control systems, quite popular in applications. Linear control systems have the form
+x ̇ = Ax +
+k ∑
+i=1
+uibi = Ax + Bu, (2.1)
+x ∈ Rn, u = (u1, . . . , uk) ∈ Rk, u(·) ∈ L1([0, t1], Rk).
+Here A and B = (b1, . . . , bk) are constant n × n and n × k matrices respectively, b1, . . . , bk ∈ Rn.
+It is easy to find solutions to such systems by the variation of constants method. The linear ODE x ̇ = Ax has a solution
+x(t) = eAt C, C ≡ const ∈ Rn,
+where
+eAt =
+∑ ∞
+k=0
+(At )k k!
+is the matrix exponential. Let us look for solutions to system (2.1) in the form x(t) = eAt C(t). We substitute this expression into (2.1) and get
+x ̇ = AeAt C + eAt C ̇ = AeAt C + Bu,
+C ̇ (t) = e−At Bu(t),
+C(t) =
+∫t
+0
+e−As Bu(s) ds + C0,
+
+
+2.1 Controllability 23
+x(t) = eAt
+(∫ t
+0
+e−As Bu(s) ds + C0
+) ,
+x(0) = C0 = x0,
+x(t) = eAt
+(
+x0 +
+∫t
+0
+e−As Bu(s) ds
+)
+. (2.2)
+Formula (2.2) is called Cauchy’s formula for linear systems. We use Cauchy’s formula to prove the classic Kalman controllability test for linear systems.
+Definition 2.1 A linear system (2.1) is called controllable from a point x0 ∈ Rn for time t1 > 0 (for time not greater than t1) if
+Ax0 (t1) = Rn (resp. Ax0 (≤ t1) = Rn).
+Theorem 2.1 (Kalman Controllability Test) Let t1 > 0 and x0 ∈ Rn. A linear system (2.1) is controllable from x0 for time t1 iff
+span(B, AB, . . . , An−1B) = Rn. (2.3)
+Proof The mapping L1 u(·) → x(t1) ∈ Rn is affine, thus its image Ax0 (t1) is an
+affine subspace of Rn. Further we rewrite the definition of controllability taking into account Cauchy’s formula (2.2):
+Ax0 (t1) = Rn ⇔ Im eAt1
+(
+x0 +
+∫ t1
+0
+e−At Bu(t) dt
+)
+= Rn
+⇔ Im
+∫ t1
+0
+e−At Bu(t) dt = Rn.
+Now we prove the necessity. Let Ax0 (t1) = Rn, but span(B, AB, . . . , An−1B) =
+Rn. Then there exists a covector 0 = p ∈ Rn∗ such that
+pAiB = 0, i = 0, . . . , n − 1.
+By the Cayley–Hamilton theorem, An = ∑n−1
+i=0 αi Ai for some αi ∈ R. Thus
+Am =
+n−1
+∑
+i=0
+βm
+i Ai , βm
+i ∈ R, m = 0, 1, 2, . . . .
+
+
+24 2 Controllability Problem
+Consequently,
+pAmB =
+n−1
+∑
+i=0
+βm
+i pAiB = 0, m = 0, 1, 2, . . . ,
+pe−At B = p
+∞ ∑
+m=0
+(−At )m
+m! B = 0,
+and Im ∫ t1
+0 e−At Bu(t) dt = Rn, a contradiction.
+Then we prove the sufficiency. Let span(B, AB, . . . , An−1B) = Rn, but
+Im
+∫ t1
+0
+e−At Bu(t) dt = Rn.
+Then there exists a covector 0 = p ∈ Rn∗ such that
+p
+∫ t1
+0
+e−At Bu(t) dt = 0 ∀u ∈ L1([0, t1], Rk).
+Let e1, . . . , ek be the standard frame in Rk. For any τ ∈ [0, t1] and any i = 1, . . . , k, define the following controls:
+u(t) =
+{ ei, t ∈ [0, τ ],
+0, t ∈ (τ, t1]. (2.4)
+We have
+∫ t1
+0
+e−At Bu(t) dt =
+∫τ
+0
+e−At bi dt = Id −e−Aτ
+A bi ,
+thus
+p Id −e−Aτ
+A B = 0, (2.5)
+where
+Id −e−Aτ
+A=
+∞ ∑
+m=1
+(−1)m−1 τ m
+m! Am−1.
+We differentiate successively identity (2.5) at τ = 0 and obtain
+pB = pAB = · · · = pAn−1B = 0,
+
+
+2.1 Controllability 25
+thus span(B, AB, . . . , An−1B) = Rn, a contradiction.
+Condition (2.3) is called the Kalman controllability condition.
+Remark 2.1 Control (2.4) is piecewise constant. Thus if Kalman’s condition (2.3) holds, then linear system (2.1) is controllable for any time t1 > 0 with piecewiseconstant controls. For linear systems, controllability for the class of admissible controls u(·) ∈ L1 is equivalent to controllability for any class of admissible controls u(·) ∈ L where L is a linear subspace of L1 containing piecewise constant functions.
+Corollary 2.1 The following conditions are equivalent:
+• the Kalman controllability condition (2.3) • ∀ t1 > 0 ∀ x0 ∈ Rn linear system (2.1) is controllable from x0 for time t1 • ∀ t1 > 0 ∀ x0 ∈ Rn linear system (2.1) is controllable from x0 for time not greater than t1 • ∃ t1 > 0 ∃ x0 ∈ Rn such that linear system (2.1) is controllable from x0 for time t1 • ∃ t1 > 0 ∃ x0 ∈ Rn such that linear system (2.1) is controllable from x0 for time not greater than t1.
+In these cases linear system (2.1) is called controllable.
+2.1.2 Local Controllability of Nonlinear Systems
+Consider now a nonlinear system
+x ̇ = f (x, u), x ∈ Rn, u ∈ U ⊂ Rm, (2.6)
+where the right-hand side f : Rn × U → Rn is smooth. Admissible controls are Lebesgue measurable bounded mappings u(·) ∈ L∞([0, t1], U ). A point (x0, u0) ∈ Rn × U is called an equilibrium point of system (2.6) if f (x0, u0) = 0. We will suppose that
+u0 ∈ int U (2.7)
+and consider the linearisation of system (2.6) at the equilibrium point (x0, u0):
+y ̇ = Ay + Bv, y ∈ Rn, v ∈ Rm, (2.8)
+A = ∂f
+∂x
+∣∣∣∣(x0,u0)
+, B = ∂f
+∂u
+∣∣∣∣(x0,u0)
+.
+It is natural to expect that global properties of linearisation (2.8) imply the corresponding local properties of nonlinear system (2.6). Indeed, there holds the following statement.
+
+
+26 2 Controllability Problem
+Theorem 2.2 (Linearisation Principle for Controllability) If linearisation (2.8) is controllable at an equilibrium point (x0, u0) with (2.7), then for any t1 > 0 nonlinear system (2.6) is locally controllable at the point x0 for time t1:
+∀ t1 > 0 x0 ∈ int Ax0 (t1).
+Thus nonlinear system (2.6) is STLC at x0.
+Proof Fix any t1 > 0. Let e1, . . . , en be the standard frame in Rn. Since linear system (2.8) is controllable, then
+∀i = 1, . . . , n ∃vi ∈ L∞([0, t1], Rm) : yvi (0) = 0, yvi (t1) = ei . (2.9)
+Construct the following family of controls:
+u(z, t) = u0 + z1v1(t) + · · · + znvn(t), z = (z1, . . . , zn) ∈ Rn.
+By condition (2.7), for sufficiently small |z| and any t ∈ [0, t1], the control u(z, t) ∈ U , thus it is admissible for nonlinear system (2.6). Consider the corresponding family of trajectories of (2.6):
+x(z, t) = xu(z,·)(t), x(z, 0) = x0, z ∈ B,
+where B is a small open ball in Rn centred at the origin. Since
+x(z, t1) ∈ Ax0 (t1), z ∈ B,
+then the mapping
+F : z → x(z, t1), B → Rn
+satisfies the inclusion
+F (B) ⊂ Ax0 (t1).
+It remains to show that x0 ∈ int F (B). To this end define the matrix function
+W (t) = ∂x(z, t)
+∂z
+∣∣∣∣z=0
+.
+We show that det W (t1) = ∂F
+∂z
+∣∣∣z=0 = 0. This would imply that
+x0 = F (0) ∈ int F (B) ⊂ Ax0 (t1).
+
+
+2.1 Controllability 27
+Differentiating the identity ∂x
+∂t = f (x, u(z, t)) w.r.t. z, we get
+∂
+∂t
+∂x
+∂z
+∣∣∣∣z=0
+= ∂f
+∂x
+∣∣∣∣(x0,u0)
+∂x
+∂z
+∣∣∣∣z=0
++ ∂f
+∂u
+∣∣∣∣(x0,u0)
+∂u
+∂z
+∣∣∣∣z=0
+since u(0, t) ≡ u0 and x(0, t) ≡ x0. Thus we get a matrix ODE
+W ̇ (t) = AW (t) + B(v1(t), . . . , vn(t)) (2.10)
+with the initial condition
+W (0) = ∂x(z, 0)
+∂z
+∣∣∣∣z=0
+= ∂x0
+∂z
+∣∣∣∣z=0
+= 0.
+ODE (2.10) means that columns of the matrix W (t) are solutions to linear system (2.8) with the control vi(t). By condition (2.9) we have W (t1) = (e1, . . . , en), so det W (t1) = 1 = 0. By the implicit function theorem, we have x0 ∈ int F (B), thus x0 ∈ int Ax0 (t1).
+2.1.2.1 Example
+Consider a control system
+x ̇ = uf1(x) + (1 − u)f2(x), x = (x1, x2) ∈ R2, u ∈ [0, 1], (2.11)
+f1(x) = ∂
+∂ x1
+, f2(x) = − ∂
+∂ x1
++ x1
+∂
+∂ x2
+. (2.12)
+The point (x0, u0) = (0, 1
+2 ) is an equilibrium point of the system, moreover,
+u0 ∈ int([0, 1]). The linearisation of system (2.11) at the equilibrium point (x0, u0) has the form
+y ̇ = Ay + Bv, y ∈ R2, v ∈ R, (2.13)
+where
+A=
+(0 0
+1
+20
+)
+, B=
+(2
+0
+) .
+Let us check Kalman’s condition for the linearisation:
+rank(B, AB) = rank
+(2 0 01
+)
+= 2,
+
+
+28 2 Controllability Problem
+thus linear system (2.13) is controllable. So nonlinear system (2.11) is locally controllable at the point x0 for any time t1 > 0.
+2.1.3 Exercises
+1. For the sub-Riemannian problem on the group of motions of the plane, find equilibrium points and study controllability of linearisation at these points. 2. For Euler’s elastic problem, find equilibrium points and study controllability of linearisation at these points. 3. Prove local and global controllability of system (2.11), (2.12) geometrically, with the help of the phase portraits of the vector fields f1, f2.
+2.2 The Orbit Theorem
+This section is devoted to a fundamental geometric control theorem on an orbit of a control system.
+2.2.1 Orbit of a Control System
+In this section a control system on a smooth manifold M is an arbitrary set of vector fields F ⊂ Vec(M). We assume for simplicity that all vector fields in F are complete, i.e., have trajectories defined for any real time. The attainable set of the system F from a point q0 ∈ M is defined as
+Aq0 = {etN fN ◦ · · · ◦ et1f1 (q0) | ti ≥ 0, fi ∈ F, N ∈ N}.
+If we parametrize F by a control parameter u, such attainable set corresponds to piecewise constant controls and arbitrary nonnegative times. Before studying the attainable set, in which only the forward motion is possible, we consider a bigger set, in which one can move both forward and backward—the orbit of the system F through the point q0:
+Oq0 = {etN fN ◦ · · · ◦ et1f1 (q0) | ti ∈ R, fi ∈ F, N ∈ N}.
+There hold the following relations between attainable sets and orbits:
+1. Aq0 ⊂ Oq0 , this inclusion is obvious 2. Oq0 has a “simpler” structure than Aq0 3. Aq0 has a “reasonable” structure inside Oq0 .
+
+
+2.2 The Orbit Theorem 29
+We clarify relations 2, 3 in the Orbit theorem (Theorem 2.3) and in Krener’s theorem (Theorem 2.6) respectively. A system F is called symmetric if F = −F. The following property is obvious:
+4. F = −F ⇒ Aq0 = Oq0 .
+2.2.2 Preliminaries
+Before stating the Orbit theorem we recall some necessary facts about action of diffeomorphisms on vector fields and about immersed submanifolds.
+2.2.2.1 Action of Diffeomorphisms on Tangent Vectors and Vector Fields
+Let M, N be smooth manifolds, q ∈ M, and let v ∈ Tq M be a tangent vector. Let : M → N be a smooth mapping. Then the action (push-forward) of the mapping on the vector v is defined as follows. Let φ : (−ε, ε) → M be a smooth curve such that φ(0) = q, φ ̇(0) = v. Then the tangent vector ∗q v ∈ T (q)N is defined as ∗q v = d
+dt |t=0 ◦ φ(t). Thus we have a mapping Dq = ∗q :
+Tq M → T (q)N , the differential of the mapping at the point q. Now let V ∈ Vec(M) be a smooth vector field, and let : M → N be a diffeomorphism, i.e., a smooth bijective mapping with a smooth inverse. Then the vector field ∗V ∈ Vec(N ) is defined by the equality
+∗V | (q) = d
+dt
+∣∣∣∣t =0
+◦ etV (q) = ∗q (V (q)).
+Thus we have a mapping
+∗ : Vec(M) → Vec(N ),
+push-forward of vector fields from the manifold M to the manifold N under the action of the diffeomorphism . In the proof of the Orbit theorem we will need the following obvious property related to action of diffeomorphisms on vector fields and tangent vectors.
+Remark 2.2 Let : M → N be a diffeomorphism between manifolds, and let V ∈ Vec(M), q ∈ M. Then
+∗q (V (q)) = ( ∗V )( (q)).
+This equality follows immediately from the definitions of the action of diffeomorphisms on vector fields and tangent vectors.
+
+
+30 2 Controllability Problem
+2.2.2.2 Immersed Submanifolds
+Definition 2.2 A subset W of a smooth manifold M is called a k-dimensional immersed submanifold of M if there exists a k-dimensional manifold N and a smooth mapping F : N → M such that:
+• F is injective • Ker F∗q = 0 for any q ∈ N • W = F (N).
+Example 2.1 Figure of eight: prove that the curve
+{
+x = sin 2φ cos2 φ, y = sin 2φ sin2 φ | φ ∈ (0, π )
+}
+is a 1-dimensional immersed submanifold of the 2-dimensional plane; see Fig. 2.1.
+Example 2.2 Consider the two-dimensional torus
+T2 = R2/(2π Z2) = {(x, y) ∈ S1 × S1},
+and consider a vector field on it with constant coefficients: V = p ∂
+∂x + q ∂
+∂y ∈
+Vec(T2), p2 + q2 = 0. The orbit O0 of the vector field V through the origin 0 ∈ T2 may have two different qualitative types:
+(1) p/q ∈ Q ∪ {∞}. Then the orbit of V is closed: cl O0 = O0. (2) p/q ∈ R\Q. Then the orbit is dense in the torus: cl O0 = T2. In this case the orbit O0 is called the irrational winding of the torus.
+(Here and below cl denotes closure of a set.) In the both cases the orbit O0 is an immersed submanifold of the torus, but in the second case it is not embedded. So even for one vector field the orbit may be an immersed submanifold, but not an embedded one (an immersed submanifold N = F (W ) ⊂ M is called embedded if F : W → N is a homeomorphism in the topology induced by the inclusion
+Fig. 2.1 Immersed submanifold
+
+
+2.2 The Orbit Theorem 31
+N ⊂ M). In case (2) the topology of the orbit induced by the inclusion O0 ⊂ R2 is weaker than the topology of the orbit induced by the immersion
+t → etV (0), R → O0.
+2.2.3 The Orbit Theorem
+Now we can state and prove the following fundamental Orbit theorem.
+Theorem 2.3 (Orbit Theorem, Nagano–Sussmann) Let F ⊂ Vec(M), and let q0 ∈ M.
+(1) The orbit Oq0 is a connected immersed submanifold of M. (2) For any q ∈ Oq0
+Tq Oq0 = span(P∗F)(q) = span{(P∗V )(q) | P ∈ P, V ∈ F}, (2.14)
+P = {etN fN ◦ · · · ◦ et1f1 | ti ∈ R, fi ∈ F, N ∈ N}.
+Proof Introduce a vector space important in the sequel
+q = span(P∗F)(q) ⊂ Tq M, q ∈ M,
+this is a candidate tangent space to the orbit Oq0 ; see (2.14).
+(1) We prove that for all q ∈ Oq0
+dim q = dim q0 .
+Choose any point q ∈ Oq0 , then q = Q(q0), Q ∈ P. Let us show that
+Q∗−1( q ) ⊂ q0 .
+Choose any element (P∗f )(q) ∈ q , P ∈ P, f ∈ F. Then
+Q∗−1[(P∗f )(q)] = (Q∗−1 ◦ P∗f )(Q−1(q))
+= [(Q−1 ◦ P )∗f ](q0) ∈ (P∗F)(q0) ⊂ q0 .
+Thus Q∗−1( q ) ⊂ q0 , whence
+dim q ≤ dim q0 .
+Interchanging in this arguments q and q0, we get dim q0 ≤ dim q . Finally we have dim q = dim q0 , q ∈ Oq0 .
+
+
+32 2 Controllability Problem
+(2) For any point q ∈ M denote m = dim q , and choose such vector fields V1, . . . , Vm ∈ P∗F that
+q = span(V1(q), . . . , Vm(q)).
+Further, define a mapping
+Gq : (t1, . . . , tm) → etmVm ◦ · · · ◦ et1V1 (q), Rm → M.
+We have ∂Gq
+∂ti (0) = Vi (q), thus the vectors ∂Gq
+∂t1 (0), . . . , ∂Gq
+∂tm (0) are linearly
+independent. Consequently, the restriction of Gq to a sufficiently small neighbourhood W0 of the origin in Rm is a submersion. (3) The image Gq (W0) is an (embedded) submanifold of M, may be, for a smaller neighbourhood W0. (4) We show that Gq (W0) ⊂ Oq .
+We have Gq (W0) = {etmVm ◦ · · · ◦ et1V1 (q) | t ∈ W0}. Since V1 = P∗f, P ∈ P, f ∈ F, we get
+et1V1 (q) = et1P∗f (q) = P ◦ et1f ◦ P −1(q) ∈ Oq .
+We conclude similarly that et2V2 ◦ et1V1 (q) ∈ Oq etc. Finally we have Gq (t) ∈ Oq , t ∈ W0, q.e.d.
+(5) We show that Gq∗ (Tt Rm) = Gq(t), t ∈ W0. We have dim Gq∗ (Tt Rm) = m = dim Gq(t), thus it suffices to prove the inclusion
+∂ Gq
+∂ ti
+(t ) ∈ Gq (t), t ∈ W0.
+Let us compute this partial derivative:
+∂ Gq
+∂ ti
+=∂
+∂ ti
+etmVm ◦ · · · ◦ eti Vi ◦ · · · ◦ et1V1 (q)
+denote R = etmVm ◦ · · · ◦ eti+1Vi+1 , q′ = eti−1Vi−1 ◦ · · · ◦ et1V1 (q),
+=∂
+∂ ti
+R ◦ etiVi (q′) = R∗Vi (etiVi (q′))
+= (R∗Vi )[R ◦ etiVi ◦ · · · ◦ et1V1 (q)]
+= (R∗Vi )(Gq (t)) ∈ (P∗F)(Gq (t))
+⊂ Gq (t).
+
+
+2.2 The Orbit Theorem 33
+Thus Gq∗ (Tt Rm) = Gq(t), i.e., the space Gq(t) is a tangent space to the smooth manifold Gq (W0) at the point Gq (t). (6) We prove that the sets Gq (W0) form a base of a (“strong”) topology on M. (6a) It is obvious that any point q ∈ M is contained in the set Gq (W0).
+(6b) Let us show that for any point ̂q ∈ Gq (W0) ∩ Gq ̃(W ̃0) there exists a set
+Ĝq ( ̂W0) ⊂ Gq (W0) ∩ Gq ̃(W ̃0).
+Take any point ̂q ∈ Gq (W0) ∩ Gq ̃(W ̃0) and consider Ĝq (t) = etm ̂Vm ◦ · · · ◦
+et1 ̂V1 (̂q). For any point q′ ∈ Gq (W0) we have ̂V1(q′) ∈ (P∗F)(q′) ⊂ q′ . But Gq (W0) is a submanifold with the tangent space Tq′ Gq (W0) = q′ . The
+vector field ̂V1 is tangent to this submanifold, thus et1 ̂V1 (̂q) ∈ Gq (W0) for
+small |t1|. We conclude similarly that et2 ̂V2 ◦ et1 ̂V1 (̂q) ∈ Gq (W0) for small |t1|, |t2| etc. Finally we get
+Ĝq (t) ∈ Gq (W0) for small |t|.
+Similarly
+Ĝq (t) ∈ Gq ̃(W ̃0) for small |t|.
+Thus Ĝq ( ̂W0) ⊂ Gq (W0)∩Gq ̃(W ̃0) for some neighbourhood ̂W0, and property (6b) is proved. It follows from properties (6a) and (6b) that the sets Gq (W0) form a base
+of topology on the set M. Denote the corresponding topological space as MF. (7) We show that for any q0 ∈ M the orbit Oq0 is connected, open and closed in
+the space MF.
+The mappings ti → etifi (q) are continuous in MF (prove!), thus Oq0 is connected. Any point q ∈ Oq0 is contained in the neighbourhood Gq (W0) ⊂ Oq =
+Oq0 , thus the orbit is open in MF. Finally, any orbit is a complement in M to orbits with which it does not
+intersect. Thus any orbit is closed in MF.
+So any orbit Oq0 is a connected component of the topological space MF. (8) Introduce a smooth structure on Oq0 as follows:
+• the sets Gq (W0) are called coordinate neighbourhoods
+• the mappings Gq−1 : Gq (W0) → W0 are called coordinate mappings.
+It is easy to see that these coordinate neighbourhoods and mappings agree: for any intersecting neighbourhoods Gq (W0) and Gq ̃(W ̃0) the composition
+Gq ̃ ◦ Gq : G−1
+q (Gq (W0) ∩ Gq ̃(W ̃0)) → G−1
+q ̃ (Gq (W0) ∩ Gq ̃(W ̃0))
+is a diffeomorphism (prove!). Thus the orbit Oq0 is a smooth manifold.
+
+
+34 2 Controllability Problem
+Moreover, Oq0 ⊂ M is an immersed submanifold of dimension m = dim q0 . (9) It follows from item (5) above that the smooth manifold Oq0 has a tangent space
+Tq Oq0 = q = span(P∗F)(q), q ∈ Oq0 .
+The Orbit theorem is proved.
+2.2.4 Corollaries of the Orbit Theorem
+Now we prove several important corollaries of the Orbit theorem.
+Corollary 2.2 For any q0 ∈ M and any q ∈ Oq0
+Lieq (F) ⊂ Tq Oq0 , (2.15)
+where
+Lieq (F) = span{[fN , [. . . , [f2, f1] . . . ]](q) | fi ∈ F, N ∈ N} ⊂ Tq M.
+Proof Let q0 ∈ M, q ∈ Oq0 . Take any f ∈ F. Then φ(t) = etf (q) ∈ Oq0 , thus
+φ ̇(0) = f (q) ∈ Tq Oq0 .
+It follows that F(q) ⊂ Tq Oq0 .
+Further, take any f1, f2 ∈ F, then φ(t) = e−tf2 ◦ e−tf1 ◦ etf2 ◦ etf1 (q) ∈ Oq0 . Thus
+d
+dt
+∣∣∣∣t =0
+φ(√t) = [f1, f2](q) ∈ Tq Oq0 .
+It follows that [F, F](q) ⊂ Tq Oq0 . We prove similarly that [[F, F], F](q) ⊂ Tq Oq0 , and by induction that Lieq (F) ⊂ Tq Oq0 .
+In the analytic case inclusion (2.15) turns into an equality.
+Proposition 2.1 Let M and F be real-analytic. Then for any q0 ∈ M and any q ∈ Oq0
+Lieq (F) = Tq Oq0 .
+
+
+2.2 The Orbit Theorem 35
+This proposition is proved in [3]. But in a smooth non-analytic case inclusion (2.15) may become strict.
+Example 2.3 Orbit of non-analytic system: let M = R2x,y, F = {f1, f2}, f1 = ∂
+∂x ,
+f2 = a(x) ∂
+∂y , where a ∈ C∞(R), a(x) = 0 for x ≤ 0, a(x) > 0 for x > 0.
+It is easy to see that Oq = R2 for any q = (x, y) ∈ R2. Although, for x ≤ 0 we have
+Lieq (F) = span(f1(q)) = Tq Oq .
+A system F ⊂ Vec(M) is called completely nonholonomic ( full-rank, bracketgenerating) if
+Lieq (F) = Tq M ∀q ∈ M.
+Theorem 2.4 (Rashevskii–Chow) If F ⊂ Vec(M) is completely nonholonomic and M is connected, then Oq = M for any q ∈ M.
+Proof Take any q ∈ M and any q1 ∈ Oq . We have Tq1 Oq ⊃ Lieq1 (F) = Tq1 M, thus dim Oq = dim M, i.e., Oq is open in M. On the other hand, any orbit is closed as a complement to the union of all other orbits. Thus any orbit is a connected component of M. Since M is connected, each orbit coincides with M.
+Corollary 2.3 (Lie Algebra Rank Condition, LARC) If a manifold M is connected, and a system F ⊂ Vec(M) is symmetric and completely nonholonomic, then it is controllable on M.
+2.2.5 The Frobenius Theorem
+A distribution on a smooth manifold M is a smooth mapping
+: q → q ⊂ Tq M, q ∈ M,
+where the vector subspaces q have the same dimension called the rank of . An immersed submanifold N ⊂ M is called an integral manifold of a distribution if
+∀q ∈ N Tq N = q .
+A distribution on M is called integrable if for any point q ∈ M there exists an integral manifold Nq q.
+
+
+36 2 Controllability Problem
+Denote by
+ ̄ = {f ∈ Vec(M) | f (q) ∈ q ∀q ∈ M}
+the set of vector fields tangent to . A distribution is called holonomic if [  ̄ ,  ̄ ] ⊂  ̄ .
+Theorem 2.5 (Frobenius) A distribution is integrable iff it is holonomic.
+Proof Necessity. Take any f, g ∈  ̄ . Let q ∈ M, and let Nq q be the integral manifold of through q. Then
+φ(t) = e−tg ◦ e−tf ◦ etg ◦ etf (q) ∈ Nq ,
+thus
+d
+dt
+∣∣∣∣t =0
+φ(√t) = [f, g](q) ∈ Tq Nq = q .
+So [f, g] ∈  ̄ , and the inclusion [  ̄ ,  ̄ ] ⊂  ̄ follows. Sufficiency. We consider only the analytic case. We have
+[  ̄ ,  ̄ ] ⊂  ̄ , [[  ̄ ,  ̄ ],  ̄ ] ⊂ [  ̄ ,  ̄ ] ⊂  ̄ ,
+and inductively Lieq (  ̄ ) ⊂  ̄ q = q . The reverse inclusion is obvious, thus
+Lieq (  ̄ ) = q , q ∈ M. Denote Nq = Oq (  ̄ ) and prove that Nq is an integral manifold of :
+Tq′ Nq = Tq′ (Oq (  ̄ )) = Lieq′ (  ̄ ) = q′ , q′ ∈ Nq .
+So Nq q is the integral manifold of , and is integrable.
+Consider a local frame of :
+q = span(f1(q), . . . , fk(q)), q ∈ S ⊂ M, f1, . . . , fk ∈ Vec(S), k = dim q ,
+where S is an open subset of M. Then the inclusion [  ̄ ,  ̄ ] ⊂  ̄ takes the form
+[fi , fj ](q) =
+k ∑
+l=1
+cl
+ij (q)fl(q), q ∈ S, cl
+ij ∈ C∞(S).
+This equality is called the Frobenius condition.
+
+
+2.2 The Orbit Theorem 37
+2.2.6 Examples
+2.2.6.1 The Sub-Riemannian Problem on the Group of Motions of the Plane
+The control system has the following form; see Sect. 1.1.1.4:
+F = {u1f1 + u2f2 | (u1, u2) ∈ R2} ⊂ Vec(R2 × S1),
+f1 = cos θ ∂
+∂x + sin θ ∂
+∂y , f2 = ∂
+∂θ .
+The system is symmetric: F = −F. Compute its Lie algebra:
+[f1, f2] = sin θ ∂
+∂x − cos θ ∂
+∂y =: f3,
+Lieq (F) = span(f1(q), f2(q), f3(q)) = Tq (R2 × S1).
+The system F is completely nonholonomic, thus controllable.
+2.2.6.2 Orbits of Different Dimensions
+Let
+M = Rx, F =
+{
+x∂
+∂x
+}
+⊂ Vec(M).
+We have:
+x0 > 0 ⇒ Ox0 = {x > 0},
+x0 = 0 ⇒ Ox0 = {x = 0},
+x0 < 0 ⇒ Ox0 = {x < 0},
+i.e., the system has two one-dimensional orbits and one zero-dimensional orbit.
+2.2.6.3 More Orbits of Different Dimensions
+Let
+M = R3
+x,y,z, F =
+{
+x∂
+∂y − y ∂
+∂x, y ∂
+∂z − z ∂
+∂y , z ∂
+∂x − x ∂
+∂z
+}
+⊂ Vec(M).
+
+
+38 2 Controllability Problem
+Then for any point q ∈ R3
+Oq = {(x, y, z) ∈ R3 | x2 + y2 + z2 = |q|2},
+this is a sphere for q = 0 and a point for q = 0. An orbit of a control system is a generalisation of a trajectory of a vector field to the case of more than one vector field.
+2.2.7 Exercises
+1. Let N ⊂ M be an immersed submanifold. Prove that if a vector field f ∈ Vec(M) satisfies the condition f (q) ∈ Tq N for all q ∈ N , then etf (q) ∈ N for all q ∈ N, |t| < ε. 2. In which examples of Sect. 1.1.1 the system is small-time locally controllable? 3. Consider a control system
+q ̇ = f (q, u), q ∈ M, u ∈ U,
+with a convex set f (q0, U ). Prove that if f (q0, U ) 0 then the system is not STLC at the point q0. 4. Construct an example of a control system q ̇ = f (q, u), q ∈ M, u ∈ U , with a nonconvex set f (q0, U ) 0 that is STLC at a point q0. 5. Study local controllability of the system F = {uf1 + (1 − u)f2 | u ∈ [0, 1]} ⊂ Vec(R2),
+f1 = ∂
+∂x , f2 = − ∂
+∂x + xk ∂
+∂y , k ∈ N,
+at an equilibrium point. 6. Study integrability of the distribution = span (f1, f2), f1 = z ∂
+∂x + x ∂
+∂z , f2 = z∂
+∂y +y ∂
+∂z , (x, y, z) ∈ R3, z = 0. If it is integrable, describe its integral manifolds.
+7. Prove that the mappings ti → etifi (q) are continuous in the topology of MF; see item (7) of the proof of Theorem 2.3. 8. Fill the gaps in item (8) of the proof of Theorem 2.3.
+2.3 Attainable Sets of Full-Rank Systems
+Let us return to the study of attainable sets.
+
+
+2.3 Attainable Sets of Full-Rank Systems 39
+2.3.1 Krener’s Theorem
+Let F ⊂ Vec(M) be a full-rank system. The assumption of full rank is not very strong in the analytic case: if it is violated, we can consider the restriction of F to its orbit, and this restriction is full-rank. What is the possible structure of attainable sets of F? It is easy to construct systems in the two-dimensional plane that have the following attainable sets:
+• a smooth full-dimensional manifold without boundary; see Fig. 2.2 • a full-dimensional manifold with smooth boundary; see Fig. 2.3 • a full-dimensional manifold with non-smooth boundary, with corner or cusp singularity; see Figs. 2.4 and 2.5.
+But it is impossible to construct an attainable set that is:
+• a lower-dimensional submanifold; see Fig. 2.6 • a set whose boundary points are isolated from its interior points; see Fig. 2.7.
+Fig. 2.2 Attainable set—smooth manifold without boundary
+q0
+M
+Aq0
+Fig. 2.3 Attainable set—manifold with smooth boundary
+q0
+M
+Aq0
+
+
+40 2 Controllability Problem
+Fig. 2.4 Attainable set—manifold with nonsmooth boundary
+q0
+M
+Aq0
+Fig. 2.5 Attainable set—manifold with nonsmooth boundary
+q0 M
+Aq0
+Fig. 2.6 Forbidden attainable set: subset of lower dimension
+M
+Fig. 2.7 Forbidden attainable set: subset with boundary points isolated from interior
+M
+These possibilities are forbidden respectively by items (1) and (2) of the following theorem.
+Theorem 2.6 (Krener) Let F ⊂ Vec(M), and let Lieq F = Tq M for any q ∈ M. Then:
+(1) int Aq = ∅ for any q ∈ M
+(2) cl(int Aq ) ⊃ Aq for any q ∈ M.
+Proof Since item (2) implies item (1), we prove item (2). We argue by induction on dimension of M. If dim M = 0, the statement is obvious. Let dim M > 0. Take any q1 ∈ Aq , and fix any neighbourhood q1 ∈ W (q1) ⊂ M. We show that int Aq ∩ W (q1) = ∅. There exists f1 ∈ F such that f1(q1) = 0, otherwise F(q1) = {0} = Lieq1 (F) = Tq1 M, a contradiction. Consider the following set for a small ε1 > 0:
+N1 = {et1f1 (q1) | 0 < t1 < ε1} ⊂ W (q1) ∩ Aq .
+
+
+2.3 Attainable Sets of Full-Rank Systems 41
+N1 is a smooth 1-dimensional manifold. If dim M = 1, then N1 is open, thus N1 ⊂ int Aq , so int Aq ∩ W (q1) = ∅. Since the neighbourhood W (q1) is arbitrary, q1 ∈ cl(int Aq ).
+Let dim M > 1. There exist q2 = et1
+1 f1 (q1) ∈ N1 ∩ W (q1) and f2 ∈ F such that f2(q2) ∈ Tq2 N1. Otherwise dim F(q2) = dim Lieq2 (F) = dim Tq2 M = 1 for any q2 ∈ N2 ∩ W , and dim M = 1. Consider the following set for a small ε2:
+N2 = {et2f2 ◦ et1f1 (q2) | t 1
+1 < t1 < t 1
+1 + ε2, 0 < t2 < ε2} ⊂ W (q1) ∩ Aq .
+N2 is a smooth 2-dimensional manifold. If dim M = 2, then N2 is open, thus N2 ⊂ int Aq ∩ W (q1) = ∅ and q1 ∈ cl(int Aq ). If dim M > 2, we proceed by induction.
+A control system F ⊂ Vec(M) is called accessible at a point q ∈ M if int Aq = ∅. It follows from Proposition 2.1 and item (1) of Krener’s theorem that in the analytic case the accessibility property is equivalent to the full-rank condition.
+2.3.2 Examples
+Let us compute orbits and attainable sets in some problems of Sect. 1.1.1.
+2.3.2.1 Stopping a Train
+The control system has the form
+x ̇ = f1(x) + uf2(x), x = (x1, x2) ∈ R2, |u| ≤ 1,
+f1 = x2
+∂
+∂ x1
+, f2 = ∂
+∂ x2
+.
+We have [f1, f2] = − ∂
+∂x1 , whence the system F = {f1 + uf2 | u ∈ [−1, 1]} is
+full-rank:
+Liex(F) = span
+(∂
+∂ x1
+,∂
+∂ x2
+)
+(x) = Tx R2 ∀x ∈ R2,
+thus
+Ox = R2 ∀x ∈ R2.
+
+
+42 2 Controllability Problem
+In order to find the attainable sets, we compute trajectories of the system with a constant control u = 0: they are the parabolas
+x2
+2
+2 = ux1 + C.
+Now it is visually obvious that the system is controllable.
+2.3.2.2 The Markov–Dubins Car
+The control system has the form
+q ̇ = f1(q) + uf2(q), q = (x, y, θ ) ∈ M = R2 × S1, |u| ≤ 1,
+f1 = cos θ ∂
+∂x + sin θ ∂
+∂y , f2 = ∂
+∂θ .
+We have
+[f1, f2] = sin θ ∂
+∂x − cos θ ∂
+∂y =: f3,
+thus the system F = {f1 + uf2 | u ∈ [−1, 1]} is full-rank:
+Lieq (F) = span(f1(q), f2(q), f3(q)) = Tq M ∀q ∈ M,
+consequently,
+Oq = M ∀q ∈ M.
+In order to describe the attainable sets, we replace the initial system F by a restricted system F1 = {f1 ± f2} ⊂ F and prove that F1 is controllable (then F is controllable as well). Trajectories of the restricted system
+x ̇ = cos θ, x(0) = x0,
+y ̇ = sin θ, y(0) = y0,
+θ ̇ = ±1, θ (0) = θ0,
+have the form
+θ = θ0 ±t, x = x0 ±(sin(θ0 ±t)−sin θ0), y = y0 ±(cos θ0 −cos(θ0 ±t)).
+
+
+2.3 Attainable Sets of Full-Rank Systems 43
+These trajectories are periodic:
+e(t+2πn)(f1±f2) = et (f1±f2), t ∈ R, n ∈ Z.
+So a shift along the fields f1 ± f2 in the negative time can be obtained as a shift in the positive time. Consequently, if we introduce the system
+F2 = {f1 ± f2, −f1 ± f2},
+then we get
+Aq (F2) = Aq (F1), q ∈ M.
+But the system F2 is symmetric and full-rank, thus
+Aq (F2) = Oq (F2) = M,
+whence
+Aq (F) = Aq (F1) = M for all q ∈ M.
+That is, the Markov–Dubins car is completely controllable in the space R2 × S1.
+2.3.2.3 Euler’s Elastic Problem
+We have the control system
+q ̇ = f1(q) + uf2(q), q = (x, y, θ ) ∈ M = R2 × S1, u ∈ R,
+f1 = cos θ ∂
+∂x + sin θ ∂
+∂y , f2 = ∂
+∂θ ,
+q(0) = q0 = (0, 0, 0).
+Similarly to the Markov–Dubins car, the system F = {f1 + uf2 | u ∈ R} satisfies
+Lieq (F) = Tq M ⇒ Oq = M ∀q ∈ M.
+One can easily obtain an explicit description of the attainable set from geometric arguments in the plane (x, y); see Fig. 2.8:
+Aq0 (t1) =
+{
+(x, y, θ ) ∈ M | (x, y, θ ) = (t1, 0, 0) or x2 + y2 < t2
+1
+} ,
+
+
+44 2 Controllability Problem
+Fig. 2.8 Steering q0 to q in Euler’s elastic problem
+u = C1
+u = 0 u = C2
+q
+q0
+u = C3
+Fig. 2.9 Attainable set Aq0 (t1) in Euler’s elastic problem
+this is an open solid torus with one point at the boundary; see Fig. 2.9. This example shows that an attainable set may be not a manifold, and neither open nor closed set.
+2.3.2.4 Lie Brackets of Higher Order
+Consider a control system
+x ̇ = 1 − u, q = (x, y) ∈ R2, u ∈ [0, 1],
+y ̇ = uxk, k ∈ N.
+In the vector form,
+q ̇ = f1(q) + uf2(q), q = (x, y) ∈ R2,
+f1 = ∂
+∂x , f2 = − ∂
+∂x + xk ∂
+∂y .
+
+
+2.3 Attainable Sets of Full-Rank Systems 45
+Let us compute the first commutator of these vector fields, linearly independent of f1:
+[f1, f2] = kxk−1 ∂
+∂y ,
+[f1, [f1, f2]] = k(k − 1)xk−2 ∂
+∂y ,
+...
+[f1, [. . . , [f1
+} {{ }
+k
+, f2] . . . ]] = k! ∂
+∂y .
+We get
+Lieq (F) = span
+(∂
+∂x, ∂
+∂y
+)
+(q) = Tq R2,
+thus Oq = R2 for any q ∈ R2. It follows from geometric arguments that
+• for k = 2l + 1 the system is controllable • for k = 2l the system has an invariant subset (e.g., the upper half-plane), thus it is not controllable.
+2.3.3 Exercises
+1. Construct examples of control systems having an attainable set of the following structure:
+• a smooth manifold without boundary • a manifold with a smooth boundary • a manifold with boundary having an angle singularity • a manifold with boundary having a cusp singularity.
+
+
+Chapter 3 Optimal Control Problem
+With the energy of his whole being, the boy has at last taken hold of the ox: But how wild his will, how ungovernable his power! At times he struts up a plateau, When lo! he is lost again in a misty unpenetrable mountain-pass.
+Pu-ming, “The Ten Oxherding Pictures” (cited by Suzuki [110])
+Catching the Ox
+In this chapter we study the optimal control problem. First, we present Filippov’s sufficient condition for existence of optimal controls. Then, we state the Pontryagin maximum principle in invariant form for problems on smooth manifolds. Next, sub-Riemannian problems are considered: we specialize the preceding results,
+© The Author(s), under exclusive license to Springer Nature Switzerland AG 2022 Yu. Sachkov, Introduction to Geometric Control, Springer Optimization and Its Applications 192, https://doi.org/10.1007/978-3-031-02070-4_3
+47
+
+
+48 3 Optimal Control Problem
+discuss optimality conditions, and prove the Pontryagin maximum principle for these problems. Finally, we present a general symmetry method for construction of optimal synthesis in optimal control problems with a big symmetry group.
+3.1 Optimal Control Problem: Statement and Existence of Solutions
+3.1.1 Problem Statement
+We consider the following optimal control problem:
+q ̇ = f (q, u), q ∈ M, u ∈ U ⊂ Rm, (3.1)
+q(0) = q0, q(t1) = q1, (3.2)
+J [u] =
+∫ t1
+0
+φ(q, u) dt → min, (3.3)
+t1 fixed or free.
+A solution q(t), t ∈ [0, t1], to this problem is said to be (globally) optimal. The following assumptions are made for the dynamics f (q, u):
+• the mapping q → f (q, u) is smooth for any u ∈ U, • the mapping (q, u) → f (q, u) is continuous for any q ∈ M, u ∈ cl(U ),
+• the mapping (q, u) → ∂f
+∂q (q, u) is continuous for any q ∈ M, u ∈ cl(U ).
+The same assumptions are made for the function φ(q, u) that determines the cost functional J . Admissible control is u ∈ L∞([0, t1], U ).
+3.1.2 Reduction to the Study of Attainable Sets
+In order to include the functional J into dynamics of the system, introduce a new variable equal to the running value of the cost functional along a trajectory qu (t ):
+y(t) =
+∫t
+0
+φ(q, u) dt.
+
+
+3.1 Optimal Control Problem: Statement and Existence of Solutions 49
+Respectively, we introduce an extended state ̂q =
+(y
+q
+)
+∈ R × M that satisfies an
+extended control system
+d̂q
+dt =
+( y ̇ q ̇
+) =
+( φ(q, u) f (q, u)
+)
+=: ̂f (̂q, u). (3.4)
+The boundary conditions for this system are
+̂q(0) =
+(0
+q0
+)
+, ̂q(t1) =
+(J
+q1
+) .
+Remark 3.1 A trajectory qu ̃ (t) is optimal for the problem (3.1)–(3.8) with fixed time t1 if and only if the corresponding trajectory ̂qu ̃ (t) of the extended system (3.4)
+comes to a point (y1, q1) of the attainable set ̂A(0,q0)(t1) such that
+̂A(0,q0)(t1) ∩ {(y, q1) | y < y1} = ∅;
+see Fig. 3.1. For the problem with free terminal time an analogous condition is written for the attainable set ̂A(0,q0).
+Corollary 3.1 If the attainable set ̂A(0,q0)(t1) is compact and q1 ∈ Aq0 (t1), then the optimal control problem (3.1)–(3.3) with fixed time t1 has a solution.
+Theorem 3.1 (Filippov) Suppose that control system (3.1) satisfies the hypotheses:
+(1) the set U is compact (2) the set f (q, U ) is convex for all q ∈ M (3) there exists a compact set K ⊂ M such that for all q ∈ M\K, u ∈ U there holds the equality f (q, u) = 0.
+Then the attainable sets Aq0 (t), Aq0 (≤ t) are compact for any q0 ∈ M, t > 0.
+Proof See [3, 46].
+Fig. 3.1 Trajectory qu ̃ (t) is optimal
+q0 q1
+0q
+̂qu ̃(t) (y1; q1)
+̂A(0,q0)(t1)
+y
+y1
+
+
+50 3 Optimal Control Problem
+3.1.3 Existence of Optimal Controls in Optimal Control Problem
+Corollary 3.2 Let the optimal control problem (3.1)–(3.3) satisfy the hypotheses:
+(1) the set U is compact
+(2) the set
+{ ( φ(q, u) f (q, u)
+)
+|u∈U
+}
+is convex for all q ∈ M
+(3) there exists a compact set K ⊂ R × M such that ̂A(0,q0)(t1) ⊂ K (4) q1 ∈ Aq0 (t1).
+Then the problem (3.1)–(3.3) with fixed time t1 has a solution.
+Proof There exists a compact set K′ ⊂ R×M such that K ⊂ int K′. Take a function a ∈ C∞(R × M) such that
+a|K ≡ 1, a|(R×M)\K′ ≡ 0.
+Consider a new extended control system:
+d̂q
+dt = a(̂q)f (̂q, u), ̂q ∈ R × M, u ∈ U.
+This system has compact attainable sets for time t1 (by Theorem 3.1), which coincide with the corresponding attainable sets of extended system (3.4). Then optimal control problem (3.1)–(3.3) has a solution (by Corollary 3.1).
+Now consider a time-optimal problem
+q ̇ = f (q, u), q ∈ M, u ∈ U ⊂ Rm, (3.5)
+q(0) = q0, q(t1) = q1, (3.6)
+t1 → min . (3.7)
+For this problem, Theorem 3.1 gives the following condition of existence of solution.
+Corollary 3.3 Let the following conditions hold:
+(1) the set U is compact (2) the set f (q, U ) is convex for all q ∈ M (3) there exist t1 > 0 and a compact set K ⊂ M such that
+q1 ∈ Aq0 (≤ t1) ⊂ K.
+Then time-optimal problem (3.5)–(3.7) has a solution.
+
+
+3.2 The Pontryagin Maximum Principle 51
+3.2 The Pontryagin Maximum Principle
+This section is devoted to the main necessary optimality condition for optimal control problems—the Pontryagin maximum principle (PMP).
+3.2.1 Elements of Symplectic Geometry
+In order to state the Pontryagin maximum principle in invariant form, we need some basic facts of symplectic geometry, which we review in this subsection. Let M be an n-dimensional smooth manifold. Then the disjoint union of its tangent spaces
+TM = ⊔
+q ∈M
+Tq M = {(q, v) | q ∈ M, v ∈ Tq M}
+is called its tangent bundle.
+If (q1, . . . , qn) are local coordinates on M, then any tangent vector v ∈ Tq M has
+a decomposition v = ∑n
+i=1 vi ∂
+∂qi . So (q1, . . . , qn; v1, . . . , vn) are local coordinates
+on T M, which is thus a 2n-dimensional smooth manifold. For any point q ∈ M, the dual space (Tq M)∗ = Tq∗M is called the cotangent
+space to M at q. Thus Tq∗M consists of linear forms on Tq M. The disjoint union
+T ∗M = ⊔
+q ∈M
+Tq∗M = {(q, p) | q ∈ M, p ∈ Tq∗M}
+is called the cotangent bundle of M.
+If (q1, . . . , qn) are local coordinates on M, then any covector λ ∈ T ∗M
+has a decomposition λ = ∑n
+i=1 pi dqi . Thus (q1, . . . , qn; p1, . . . , pn) are local
+coordinates on T ∗M called the canonical coordinates. So T ∗M is a smooth 2ndimensional manifold.
+The canonical projection is the mapping
+π : T ∗M → M, Tq∗M λ → q ∈ M.
+The Liouville (tautological) differential 1-form s ∈ 1(T ∗M) is defined as follows:
+〈sλ, w〉 = 〈λ, π∗w〉, λ ∈ T ∗M, w ∈ Tλ(T ∗M).
+
+
+52 3 Optimal Control Problem
+In the canonical coordinates on T ∗M:
+w=
+∑n
+i=1
+(
+ai
+∂
+∂ qi
++ bi
+∂
+∂pi
+) ,
+π∗w =
+∑n
+i=1
+ai
+∂
+∂ qi
+,
+λ=
+n ∑
+i=1
+pi dqi ,
+〈sλ, w〉 =
+∑n
+i=1
+pi ai ,
+sλ =
+∑n
+i=1
+pi dqi .
+In other words, s = p dq. The canonical symplectic structure on T ∗M is the differential 2-form σ = ds ∈
+2(T ∗M). In the canonical coordinates σ = dp ∧ dq = ∑n
+i=1 dpi ∧ dqi .
+A Hamiltonian (Hamiltonian function) is an arbitrary function h ∈ C∞(T ∗M). The Hamiltonian vector field h ∈ Vec(T ∗M) with the Hamiltonian function h is defined by the equality dh = σ ( · , h). In the canonical coordinates:
+h = h(q, p),
+dh = hq dq + hp dp =
+∑n
+i=1
+( ∂h
+∂ qi
+dqi + ∂h
+∂pi
+dpi
+) ,
+σ = dp ∧ dq =
+∑n
+i=1
+dpi ∧ dqi ,
+h = ∂h
+∂p
+∂
+∂q − ∂h
+∂q
+∂
+∂p =
+∑n
+i=1
+( ∂h
+∂pi
+∂
+∂ qi
+− ∂h
+∂ qi
+∂
+∂pi
+) .
+The corresponding Hamiltonian system of ODEs is
+ ̇λ = h(λ), λ ∈ T ∗M.
+In the canonical coordinates:
+⎧⎪⎨
+⎪⎩
+q ̇ = ∂h
+∂p ,
+p ̇ = − ∂h
+∂q ,
+
+
+3.2 The Pontryagin Maximum Principle 53
+or
+⎧⎪⎨
+⎪⎩
+q ̇i = ∂h
+∂pi
+,
+p ̇i = − ∂h
+∂ qi
+, i = 1, . . . , n.
+The Poisson bracket of Hamiltonians h, g ∈ C∞(T ∗M) is the Hamiltonian {h, g} ∈ C∞(T ∗M) defined by the equalities
+{h, g} = hg = σ (h, g).
+In the canonical coordinates:
+{h, g} = ∂h
+∂p
+∂g
+∂q − ∂h
+∂q
+∂g
+∂p =
+∑n
+i=1
+( ∂h
+∂pi
+∂g
+∂ qi
+− ∂h
+∂ qi
+∂g
+∂pi
+) .
+Notice the simplest properties of Poisson bracket.
+Lemma 3.1 Let a, b, c ∈ C∞(T ∗M) and α, β ∈ R. Then:
+(1) {a, b} = −{b, a}, (2) {a, a} = 0, (3) {{a, b}, c} + {{b, c}, a} + {{c, a}, b} = 0, (4) {αa + βb, c} = α{a, c} + β{b, c}, (5) {ab, c} = {a, c}b + a{b, c}, (6) [a, b] = d, d = {a, b}.
+Proof
+(1) {a, b} = σ (a, b) = −σ (b, a) = −{b, a}. (2) {a, a} = −{a, a} = 0.
+(3) is proved by computation in the canonical coordinates. (4) {αa + βb, c} = (αa + βb)c = α{a, c} + β{b, c}. (5) {ab, c} = −{c, ab} = −c(ab) = −(ca)b − a(cb) = −{c, a}b − a{c, b} = {a, c}b + a{b, c}. (6) dc = {{a, b}, c} = {{a, c}, b} + {a, {b, c}} = a b c − b a c = [a, b]c, thus d = [a, b], where d = {a, b}.
+Theorem 3.2 (Noether) Let a, h ∈ C∞(T ∗M). Then
+a(eth(λ)) ≡ const ⇔ {h, a} = 0.
+Proof a(eth(λ)) ≡ const ⇔ ha = 0 ⇔ {h, a} = 0.
+Now we describe the last construction of symplectic geometry necessary for uslinear on fibers of T ∗M Hamiltonians. Let X ∈ Vec(M). The corresponding linear
+
+
+54 3 Optimal Control Problem
+on fibers of T ∗M Hamiltonian is defined as follows:
+hX(λ) = 〈λ, X(q)〉, q = π(λ).
+In the canonical coordinates:
+X=
+∑n
+i=1
+Xi
+∂
+∂ qi
+,
+hX(q, p) =
+∑n
+i=1
+pi Xi .
+Lemma 3.2 Let X, Y ∈ Vec(M). Then:
+(1) {hX, hY } = h[X,Y ], (2) [hX, hY ] = h[X,Y ], (3) π∗hX = X.
+Proof
+(1) is proved by computation in the canonical coordinates. (2) Let g ∈ C∞(T ∗M), then
+[hX, hY ]g = (hXhY − hY hX)g = {hX, {hY , g}} − {hY , {hX, g}}
+= {{hX, hY }, g} = h[X,Y ]g,
+whence [hX, hY ] = h[X,Y ]. (3) In the canonical coordinates
+hX(q, p) =
+∑n
+i=1
+pi Xi (q),
+hX =
+∑n
+i=1
+(
+Xi
+∂
+∂ qi
++ (. . . ) ∂
+∂pi
+) ,
+thus π∗hX =
+n∑
+i=1
+Xi ∂
+∂qi = X.
+The vector field hX ∈ Vec(T ∗M) is called the Hamiltonian lift of the vector field X ∈ Vec(M).
+
+
+3.2 The Pontryagin Maximum Principle 55
+3.2.2 Statement of the Pontryagin Maximum Principle
+Return to the optimal control problem
+q ̇ = f (q, u), q ∈ M, u ∈ U ⊂ Rm,
+q(0) = q0, q(t1) = q1,
+J=
+∫ t1
+0
+φ(q, u) dt → min,
+t1 fixed.
+Define a family of Hamiltonians of PMP
+hν
+u(λ) = 〈λ, f (q, u)〉 + νφ(q, u), ν ∈ R, u ∈ U, λ ∈ T ∗M, q = π(λ).
+A fundamental necessary optimality condition for optimal control problems is given by the following statement.
+Theorem 3.3 (PMP) If a control u(t) and the corresponding trajectory q(t), t ∈ [0, t1], are optimal, then there exist a curve λt ∈ Lip([0, t1], T ∗M), λt ∈ T ∗
+q (t ) M ,
+and a number ν ≤ 0 such that the following conditions hold for almost all t ∈ [0, t1]:
+(1)  ̇λt = hν
+u(t)(λt ),
+(2) hν
+u(t)(λt ) = max
+w∈U hνw(λt ),
+(3) (λt , ν) = (0, 0).
+Proof See [3, 30].
+Remark 3.2 If the terminal time t1 is free, then the following condition is added to (1)–(3):
+(4) hν
+u(t)(λt ) ≡ 0.
+We will prove the Pontryagin maximum principle for sub-Riemannian problems in Sect. 3.3.6. A curve λt that satisfies PMP is called an extremal, a curve q(t)—an extremal trajectory, a control u(t)—an extremal control.
+3.2.2.1 Time-Optimal Problem
+Let us apply PMP to the time-optimal problem
+q ̇ = f (q, u), q ∈ M, u ∈ U,
+q(0) = q0, q(t1) = q1,
+t1 =
+∫ t1
+0
+1 dt → min .
+
+
+56 3 Optimal Control Problem
+The Hamiltonian of PMP has the form hνu(λ) = 〈λ, f (q, u)〉 + ν. Introduce the shortened Hamiltonian gu(λ) = 〈λ, f (q, u)〉. Then the statement of PMP for the time-optimal problem takes the form:
+(1)  ̇λt = hν
+u(t)(λt ) = gu(t)(λt ),
+(2) hν
+u(t)(λt ) = max
+w∈U hνw(λt ) ⇔ gu(t)(λt ) = max
+w∈U gw(λt ),
+(3) λt = 0, (4) hν
+u(t)(λt ) ≡ 0 ⇔ gu(t)(λt ) ≡ const ≥ 0.
+3.2.2.2 Optimal Control Problem with General Boundary Conditions
+Consider optimal control problem (3.1), (3.3), where the boundary condition (3.2) is replaced by the following more general one:
+q(0) ∈ N0, q(t1) ∈ N1. (3.8)
+Here N0, N1 ⊂ M are smooth submanifolds. For problem (3.1), (3.3), (3.8) there holds the Pontryagin maximum principle with conditions (1)–(3) of Theorem 3.3 for fixed t1 (plus condition (4) for free t1), with additional transversality conditions
+(5) λ0 ⊥ Tq0 N0, λt1 ⊥ Tq(t1)N1.
+Remark 3.3 If a pair (λt , ν) satisfies PMP, then for any k > 0 the pair (kλt , kν) also satisfies PMP. The case ν < 0 is called the normal case. In this case the pair (λt , ν) can be normalized to get ν = −1. The case ν = 0 is called the abnormal case.
+Denote the maximized normal Hamiltonian of PMP
+H (λ) = max
+u∈U h−1
+u (λ), λ ∈ T ∗M.
+Theorem 3.4 Let H ∈ C2(T ∗M). Then a curve λt is a normal extremal iff it is a
+trajectory of the Hamiltonian system  ̇λt = H(λt ).
+Proof See [3].
+3.2.3 Solution to Examples of Optimal Control Problems
+In this subsection we apply PMP to two optimal control problems stated in Sect. 1.1.1.
+
+
+3.2 The Pontryagin Maximum Principle 57
+3.2.3.1 Stopping a Train
+We have the time-optimal problem
+x ̇1 = x2, x = (x1, x2) ∈ R2,
+x ̇2 = u, |u| ≤ 1,
+x(0) = x0, x(t1) = x1 = (0, 0),
+t1 → min .
+The right-hand side of the control system f (x, u) = (x2, u) satisfies the bound
+|f (x, u)| =
+√
+x2
+2 + u2 ≤
+√
+x2
+2 + 1 ≤ |x| + 1,
+thus r = x2 satisfies the differential inequality
+r ̇ = 2〈x, x ̇〉 = 2〈x, f (x, u)〉 ≤ 2(r + 1).
+So r(t) ≤ e2t (r0 + 1), thus attainable sets satisfy the a priori bound
+Ax0 (≤ t) ⊂
+{
+x ∈ R2 | |x| ≤ et √
+(x0)2 + 1
+} .
+Therefore we can assume that there exists a compact set K ⊂ R2 such that the right-hand side of the control system vanishes outside of K (one of conditions of the Filippov theorem). As we showed in Sect. 2.3.2, x1 = (0, 0) ∈ Ax0 for any x0 ∈ R2. The set of control parameters U is compact, and the set of admissible velocity vectors f (x, U ) is convex for any x ∈ R2. All hypotheses of the Filippov theorem are satisfied, thus optimal control exists. We apply PMP using the canonical coordinates (p1, p2, x1, x2) on T ∗R2. We
+decompose a covector λ = p1 dx1 + p2 dx2 ∈ T ∗R2, then the shortened Hamiltonian of PMP reads
+hu(λ) = p1x2 + p2u,
+and the Hamiltonian system  ̇λ = hu(λ) reads
+x ̇1 = x2, p ̇1 = 0,
+x ̇2 = u, p ̇2 = −p1.
+The maximality condition of PMP has the form
+hu(λ) = p1x2 + p2u → max
+|u|≤1,
+
+
+58 3 Optimal Control Problem
+and the nontriviality condition is
+(p1(t), p2(t)) = (0, 0).
+The Hamiltonian system implies that p1 ≡ const, thus p2(t) is linear. Moreover, p2(t) ≡ 0 due to the nontriviality condition. Thus p2(t) has not more than one root. The maximality condition yields:
+p2(t) > 0 ⇒ u(t) = 1,
+p2(t) < 0 ⇒ u(t) = −1.
+Thus extremal trajectories are the parabolas
+x1 = ± x2
+2
+2 + C,
+and the number of switchings (discontinuities) of control is not greater than 1. Let us construct such trajectories backward in time, starting from x1 = (0, 0):
+• the controls u = 1 and u = −1 generate two half-parabolas terminating at x1:
+x1 = x2
+2
+2 , x2 ≤ 0 and x1 = − x2
+2
+2 , x2 ≥ 0,
+• denote the union of these half-parabolas as , • after one switching, parabolic arcs with u = 1 terminating at the half-parabola
+x1 = − x2
+2
+2 , x2 ≥ 0, fill the part of the plane R2 below the curve ,
+• similarly, after one switching, parabolic arcs with u = −1 fill the part of the plane over the curve .
+So through each point of the plane R2 passes a unique extremal trajectory. In view of existence of optimal controls, the extremal trajectories are optimal. The optimal control found has explicit dependence on the current point of the plane:
+• if x1 = x2
+2
+2 , x2 ≤ 0, or if the point (x1, x2) lies below the curve , then
+u(x1, x2) = 1,
+• otherwise, u(x1, x2) = −1.
+The corresponding family of optimal trajectories coming to the origin is shown in Fig. 3.2. Such a dependence u(x) of optimal control on the current point x of the state space is called an optimal synthesis, it is the best possible form of solution to an optimal control problem.
+
+
+3.2 The Pontryagin Maximum Principle 59
+x1
+x2
+Fig. 3.2 Optimal synthesis in the problem on stopping a train
+3.2.3.2 The Markov–Dubins Car
+We have a time-optimal problem
+x ̇ = cos θ, q = (x, y, θ ) ∈ R2
+x,y × S1
+θ = M,
+y ̇ = sin θ, |u| ≤ 1,
+θ ̇ = u,
+q(0) = q0 = (0, 0, 0), q(t1) = q1,
+t1 → min .
+The system is completely controllable, see Sect. 2.3.2.2. All conditions of the Filippov theorem are satisfied: U is compact, f (q, U ) are convex, the bound |f (q, u)| ≤ 2 implies a priori bound of the attainable set. Thus optimal control exists. We apply PMP. The vector fields
+f0 = cos θ ∂
+∂x + sin θ ∂
+∂y ,
+f1 = ∂
+∂θ ,
+f2 = [f0, f1] = sin θ ∂
+∂x − cos θ ∂
+∂y
+form a frame in Tq M. Define the corresponding linear on fibers of T ∗M Hamiltonians:
+hi(λ) = 〈λ, fi〉, i = 0, 1, 2.
+
+
+60 3 Optimal Control Problem
+The shortened Hamiltonian of PMP is
+hu(λ) = 〈λ, f0 + uf1〉 = h0 + uh1.
+The functions h0, h1, h2 form a coordinate system on Tq∗M, and we write the Hamiltonian system of PMP in the non-canonical parametrization (h0, h1, h2, q)
+of T ∗M:
+h ̇0 = huh0 = {h0 + uh1, h0} = −uh2, (3.9)
+h ̇1 = {h0 + uh1, h1} = h2, (3.10)
+h ̇2 = {h0 + uh1, h2} = uh0, (3.11)
+q ̇ = f0 + uf1.
+The maximality condition hu(λ) = h0 + uh1 → max
+|u|≤1 implies that if h1(λt ) = 0,
+then u(t) = sgn h1(λt ).
+Consider the case where the control is not determined by PMP: h1(λt ) ≡ 0 (this case is called singular). Then (3.10) gives h2(λt ) ≡ 0, thus h0(λt ) = 0 by the nontriviality condition of PMP, so u(t) ≡ 0 by (3.11). The corresponding extremal trajectory (x(t), y(t)) is a straight line. If u(t) = ±1, then the extremal trajectory (x(t), y(t)) is an arc of a unit circle. One can show [78, 98] that optimal trajectories have one of the following two types:
+1. arc of unit circle + line segment + arc of unit circle 2. concatenation of three arcs of unit circles; in this case, if a, b, c are the times along the first, second, and third arc respectively, then π < b < 2π , min{a, c} < b, and max{a, c} < b.
+If boundary conditions are far one from another, then the optimal trajectory has type 1 and can explicitly be constructed as follows. Draw two unit circles that satisfy the initial condition and two unit circles that satisfy the terminal condition. Draw four common tangents to the initial circles and the terminal circles, with account of direction of motion along the circles determined by the boundary conditions. Among the four constructed extremal trajectories, find the shortest one. It is the optimal trajectory. The optimal synthesis for the Markov–Dubins car is known, but it is rather complicated, see [84].
+3.2.3.3 Control of Linear Oscillator
+Show that in this problem stated in Sect. 1.1.1.2 optimal trajectories are concatenations of circular arcs. Construct the optimal synthesis shown in Fig. 3.3.
+
+
+3.3 Sub-Riemannian Geometry 61
+x1
+x2
+u = −1
+u=1
+Fig. 3.3 Optimal synthesis for the controlled linear oscillator
+3.3 Sub-Riemannian Geometry
+In this section we consider an important special class of optimal control problemssub-Riemannian problems.
+3.3.1 Sub-Riemannian Structures and Minimizers
+A sub-Riemannian structure on a smooth manifold M is a pair ( , g), where
+= { q ⊂ Tq M | q ∈ M}
+is a distribution on M and
+g = {gq inner product in q | q ∈ M}
+is an inner product (nondegenerate positive definite quadratic form) on . The spaces q and inner products gq depend smoothly on q ∈ M, and dim q ≡ const.
+
+
+62 3 Optimal Control Problem
+A curve q ∈ Lip([0, t1], M) is called horizontal (admissible) if
+q ̇(t) ∈ q(t) for almost all t ∈ [0, t1].
+The sub-Riemannian length of a horizontal curve q(·) is defined as
+l(q(·)) =
+∫ t1
+0
+√g(q ̇, q ̇) dt.
+The sub-Riemannian (Carnot–Carathéodory) distance between points q0, q1 ∈ M is
+d(q0, q1) = inf{l(q(·)) | q(·) horizontal, q(0) = q0, q(t1) = q1}.
+A horizontal curve q(·) is called a sub-Riemannian length minimizer if
+l(q(·)) = d(q(0), q(t1)).
+Thus length minimizers are solutions to a sub-Riemannian optimal control problem:
+q ̇(t) ∈ q(t),
+q(0) = q0, q(t1) = q1,
+l(q(·)) → min .
+Suppose that a sub-Riemannian structure ( , g) has a global orthonormal frame f1, . . . , fk ∈ Vec(M):
+q = span(f1(q), . . . , fk(q)), q ∈ M, g(fi, fj ) = δij , i, j = 1, . . . , k.
+Then the optimal control problem for sub-Riemannian minimizers takes the standard form:
+q ̇ =
+k ∑
+i=1
+uifi(q), q ∈ M, u = (u1, . . . , uk) ∈ Rk, (3.12)
+q(0) = q0, q(t1) = q1, (3.13)
+l=
+∫ t1
+0
+( k ∑
+i=1
+u2
+i
+)1/2
+dt → min . (3.14)
+
+
+3.3 Sub-Riemannian Geometry 63
+Remark 3.4 The sub-Riemannian length does not depend on parametrization of a horizontal curve q(t). Namely, if
+q ̃(s) = q(t (s)), t ( · ) ∈ Lip([0, s1], [0, t1]), t′(s) > 0,
+is a reparametrization of a curve q(t), then l(q ̃( · )) = l(q( · )). Indeed,
+l(q ̃( · )) =
+∫ s1
+0
+√g(q ̃′(s), q ̃′(s)) ds =
+∫ s1
+0
+√g(q ̇(t), q ̇(t))t′(s) ds
+=
+∫ t1
+0
+√g(q ̇(t), q ̇(t)) dt = l(q( · )).
+Along with the length functional, it is convenient to consider the energy functional
+J (q(·)) = 1
+2
+∫ t1
+0
+g(q ̇, q ̇) dt.
+Denote ‖q ̇‖ = √g(q ̇, q ̇).
+Lemma 3.3 Let the terminal time t1 be fixed. Then minimizers of energy are exactly length minimizers of constant velocity:
+J (q( · )) → min ⇔ l(q( · )) → min, ‖q ̇‖ = const .
+Proof By the Cauchy–Schwarz inequality,
+(l(q( · )))2 =
+(∫ t1
+0
+‖q ̇‖ · 1 dt
+)2
+≤
+∫ t1
+0
+‖q ̇‖2 dt ·
+∫ t1
+0
+12 dt = 2J (q( · )) t1,
+moreover, equality is attained here only for ‖q ̇‖ = const. It is obvious that on constant velocity curves the problems l → min and J → min are equivalent. And for ‖q ̇‖ = const we have l2 < 2t1J , i.e., J does not attain minimum.
+In the following several examples we present optimal control problems (3.12)(3.14) for the corresponding sub-Riemannian structures.
+3.3.1.1 The Sub-Riemannian Problem on the Group of Motions of the Plane
+q ̇ = u1f1(q) + u2f2(q), q = (x, y, θ ) ∈ R2 × S1, u = (u1, u2) ∈ R2,
+f1 = cos θ ∂
+∂x + sin θ ∂
+∂y , f2 = ∂
+∂θ ,
+
+
+64 3 Optimal Control Problem
+q(0) = q0, q(t1) = q1,
+l=
+∫ t1
+0
+√
+u2
+1 + u2
+2 dt → min .
+This problem is studied in Sect. 4.2.
+3.3.1.2 The Sub-Riemannian Problem on the Heisenberg Group ⎛
+⎝
+x ̇ y ̇ z ̇
+⎞
+⎠ = u1
+⎛
+⎝
+1
+0
+−y
+2
+⎞
+⎠ + u2
+⎛
+⎝
+0
+1
+x 2
+⎞
+⎠ , q ∈ R3
+x,y,z, u = (u1, u2) ∈ R2,
+q(0) = q0, q(t1) = q1,
+l=
+∫ t1
+0
+√
+u2
+1 + u2
+2 dt → min .
+This problem is studied in Sect. 4.1.
+3.3.1.3 The Plate-Ball Problem
+q ̇ = u1f1(q) + u2f2(q), q = (x, y, R) ∈ R2 × SO(3), u = (u1, u2) ∈ R2,
+f1 = ∂
+∂x + R
+⎛
+⎝
+0 0 −1 00 0 10 0
+⎞
+⎠∂
+∂R , f2 = ∂
+∂y + R
+⎛
+⎝
+00 0 0 0 −1 01 0
+⎞
+⎠∂
+∂R ,
+q(0) = q0, q(t1) = q1,
+l=
+∫ t1
+0
+√
+u2
+1 + u2
+2 dt → min .
+In the following three subsections we see how general control theory theorems specialize for sub-Riemannian (SR) problems (3.12)–(3.14).
+3.3.2 The Lie Algebra Rank Condition for SR Problems
+The system F =
+{∑k
+i=1 ui fi | ui ∈ R
+}
+is symmetric, thus Aq = Oq for any q ∈ M.
+
+
+3.3 Sub-Riemannian Geometry 65
+Assume that M and F are real-analytic, and M is connected. Then by Corollary 2.3,
+Aq = M ∀q ∈ M ⇔ Oq = M ∀q ∈ M
+⇔ Lieq (F) = Lieq (f1, . . . , fk) = Tq M ∀ q ∈ M.
+3.3.3 The Filippov Theorem for SR Problems
+We can equivalently rewrite the optimal control problem (3.12)–(3.14) for SR minimizers as the following time-optimal problem:
+q ̇ =
+k ∑
+i=1
+ui fi (q),
+k ∑
+i=1
+u2
+i ≤ 1, q ∈ M,
+q(0) = q0, q(t1) = q1,
+t1 → min .
+Let us check hypotheses of the Filippov theorem (Corollary 3.3) for this problem.
+The set of control parameters U = {u ∈ Rk | ∑k
+i=1 u2
+i ≤ 1} is compact, and the sets
+of admissible velocities
+{∑k
+i=1 ui fi (q) | u ∈ U
+}
+⊂ Tq M are convex. If we prove
+an a priori estimate for the attainable sets Aq0 (≤ t1), then the Filippov theorem guarantees existence of length minimizers.
+3.3.4 The Pontryagin Maximum Principle for SR Problems
+Introduce the linear on fibers of T ∗M Hamiltonians hi(λ) = 〈λ, fi〉, i = 1, . . . , k. Then the Hamiltonian of PMP for SR problem takes the form
+hν
+u(λ) =
+k ∑
+i=1
+ui hi (λ) + ν
+2
+k ∑
+i=1
+u2
+i.
+3.3.4.1 The Normal Case
+Let ν = −1. The maximality condition
+k ∑
+i=1
+ui hi − 1
+2
+k ∑
+i=1
+u2
+i → max
+ui ∈R
+
+
+66 3 Optimal Control Problem
+yields ui = hi, then the Hamiltonian takes the form
+h−1
+u (λ) = 1
+2
+k ∑
+i=1
+h2
+i (λ) =: H (λ).
+The function H (λ) is called the normal maximized Hamiltonian. Since it is smooth, in the normal case extremals satisfy the Hamiltonian system  ̇λ = H(λ).
+3.3.4.2 The Abnormal Case
+Let ν = 0. The maximality condition
+k ∑
+i=1
+ui hi → max
+ui ∈R
+implies that hi(λt ) ≡ 0, i = 1, . . . , k. Thus abnormal extremals satisfy the conditions:
+ ̇λt =
+k ∑
+i=1
+ui (t)hi (λt ),
+h1(λt ) = · · · = hk(λt ) ≡ 0.
+Remark 3.5 Normal length minimizers are projections of solutions to the smooth Hamiltonian system  ̇λ = H(λ), thus they are smooth. An important open question of sub-Riemannian geometry is whether abnormal length minimizers are smooth, see [1, 48].
+We prove PMP for SR problems in Sect. 3.3.6.
+3.3.5 Optimality of SR Extremal Trajectories
+In this subsection we consider normal extremal trajectories q(t) = π(λt ),  ̇λt = H(λt ).
+A horizontal curve q(t) is called a SR geodesic if g(q ̇, q ̇) ≡ const and short arcs of q(t) are optimal.
+Theorem 3.5 (Legendre) Normal extremal trajectories are SR geodesics.
+Proof See [2].
+
+
+3.3 Sub-Riemannian Geometry 67
+Example 3.1 Geodesics on S2: consider the standard sphere S2 ⊂ R3 with the Riemannian metric induced by the Euclidean metric of R3. Geodesics starting from the North pole N ∈ S2 are great circles at the sphere passing through N (meridians). Such geodesics are optimal up to the South pole S ∈ S2. Variation of geodesics passing through N yields the fixed point S, thus S is a conjugate point to N. On the other hand, S is the intersection point of different geodesics of the same length starting at N, thus S is a Maxwell point. In this example, a conjugate point coincides with a Maxwell point due to the one-parameter group of symmetries (rotations of S2 around the line N S ⊂ R3). In order to distinguish these points, one should destroy the rotational symmetry as in the following example.
+Example 3.2 Geodesics on an ellipsoid: consider a three-axes ellipsoid with the Riemannian metric induced by the Euclidean metric of the ambient R3. Construct the family of geodesics on the ellipsoid starting from a vertex N, and let us look at this family from the opposite vertex S. The family of geodesics has an envelope—an astroid centred at S. Each point of the astroid is a conjugate point. At such points the geodesics lose their local optimality. On the other hand, there is a segment joining a pair of opposite vertices of the astroid, where pairs of geodesics of the same length meet one another. This segment (except its endpoints) consists of Maxwell points. At such points geodesics on the ellipsoid lose their global optimality.
+We will clarify now the notions and facts that appear in these examples. Consider the normal Hamiltonian system of PMP  ̇λt = H(λt ). The Hamil
+tonian H is an integral of this system. We can assume that H (λt ) ≡ 1
+2 , this
+corresponds to the arclength parametrization of normal geodesics: ‖q ̇(t)‖ ≡ 1. Denote the cylinder C = Tq∗0 M ∩ {H = 1
+2 } and define the sub-Riemannian exponential mapping
+Exp : C × R+ → M,
+Exp(λ0, t) = π ◦ etH(λ0) = q(t).
+A point Exp(λ0, t1) is called a conjugate point along the geodesic q(t) = Exp(λ0, t) if it is a critical value of Exp, i.e., Exp∗(λ0,t1) is degenerate. A point Exp(λ0, t1) is conjugate iff the Jacobian of the exponential mapping vanishes:
+det
+( ∂ Exp
+∂(λ0, t)
+)∣∣∣∣t =t1
+= 0.
+At a conjugate point a geodesic is tangent to the envelope of the family of geodesics starting from the initial point q0. A trajectory q(t) of control system (3.1) with a control u(t) and boundary conditions (3.2) is called locally (strongly) optimal if there is ε > 0 such that
+J [u] ≤ J [u ̃]
+
+
+68 3 Optimal Control Problem
+for any admissible control u ̃(t) such that the corresponding trajectory q ̃(t) = qu ̃ (t) satisfies boundary conditions (3.2) and the inequality
+max
+t∈[0,t1] |q(t ) − q ̃(t )| < ε
+in local coordinates on M.
+Theorem 3.6 (Jacobi) Let a normal geodesic q(t) be a projection of a unique, up to a scalar multiple, extremal. Then q(t) loses its local optimality at the first conjugate point.
+Proof See [2].
+A point q(t) is called a Maxwell point along a geodesic q(s) = Exp(λ0, s) if
+there exists another geodesic q ̃(s) = Exp( ̃λ0, s) ≡ q(s) such that q(t) = q ̃(t). See Fig. 3.4: there exists a geodesic ̂q(s) coming to the point q1 = q(t1) earlier than q(s).
+Lemma 3.4 If M and H are real-analytic, then a normal geodesic cannot be optimal after a Maxwell point.
+Proof Let q1 = q(t1) be a Maxwell point along a geodesic q(t) = Exp(λ0, t), and
+let q ̃(t) = Exp( ̃λ0, t) ≡ q(t) be another geodesic with q ̃(t1) = q1. If q(t), t ∈ [0, t1 + ε], ε > 0, is optimal, then the following curve is optimal as well:
+q ̄(t) =
+{
+q ̃(t), t ∈ [0, t1],
+q(t), t ∈ [t1, t1 + ε].
+The geodesics q(t) and q ̄(t) coincide at the segment t ∈ [t1, t1 + ε]. Since they are analytic, they should coincide at the whole domain t ∈ [0, t1 + ε]. Thus q(t) ≡ q ̃(t), t ∈ [0, t1], a contradiction.
+q0
+q(s)
+q(s)
+q(s)
+q(t) = q(t)
+q1 = q(t1) = q(t2)
+Fig. 3.4 Maxwell point q(t): t2 < t1
+
+
+3.3 Sub-Riemannian Geometry 69
+Theorem 3.7 Let q(t) be a normal geodesic that is a projection of a unique, up to a scalar multiple, extremal. Then q(t) loses its global optimality either at the first Maxwell point or at the first conjugate point (at the first one of these two points).
+Proof See [2].
+3.3.6 Proof of the Pontryagin Maximum Principle for Sub-Riemannian Problems
+In this subsection we prove PMP for the sub-Riemannian optimal control problem (3.12)–(3.14):
+q ̇ =
+k ∑
+i=1
+ui fi(q) =: fu(q), q ∈ M, u = (u1, . . . , uk) ∈ Rk,
+q(0) = q0, q(t1) = q1,
+l=
+∫ t1
+0
+( k ∑
+i=1
+u2
+i
+)1/2
+dt → min .
+As we showed in Sect. 3.3.4, the Pontryagin maximum principle (Theorem 3.3) for this problem takes the following form.
+Theorem 3.8 (PMP for SR Problems) Let q ∈ Lip([0, t1], M) be a SR minimizer
+for which the corresponding control u(t) satisfies the condition
+k∑
+i=1
+u2
+i (t) ≡ const.
+Then there exists a curve λt ∈ Lip([0, t1], T ∗M), π(λt ) = q(t), such that for almost all t ∈ [0, t1]
+ ̇λt =
+k ∑
+i=1
+ui(t)hi(λt ), (3.15)
+and one of the conditions hold:
+(N ) hi(λt ) ≡ ui(t), i = 1, . . . , k, or (A) hi(λt ) ≡ 0, i = 1, . . . , k, λt = 0 ∀t ∈ [0, t1].
+In conditions (N ), (A) corresponding to the normal and abnormal cases, as always, hi(λ) = 〈λ, fi〉, i = 1, . . . , k.
+Theorem 3.8 follows from the next two theorems.
+
+
+70 3 Optimal Control Problem
+Theorem 3.9 Let the hypotheses of Theorem 3.8 hold. For any t ∈ [0, t1], let Pt :
+M → M denote the flow of the nonautonomous vector field fu(t) =
+k∑
+i=1
+ui (t)fi from
+the time 0 to the time t. Then there exists λ0 ∈ Tq∗0 M such that the curve
+λt = (P −1
+t )∗(λ0) ∈ T ∗
+q(t)M (3.16)
+satisfies one of conditions (N ), (A) of Theorem 3.8.
+Theorem 3.10 Let the hypotheses of Theorems 3.8 and 3.9 hold. Then ODE (3.15) follows from identity (3.16).
+It is obvious that Theorem 3.8 follows from Theorems 3.9 and 3.10.
+Remark 3.6 In Theorem 3.9, the flow Pt : M → M of the nonautonomous field fu(t) from the time 0 to the time t is given as follows:
+Pt (q) = q(t), q ∈ M, t ∈ [0, t1],
+d
+dt q(t) =
+k ∑
+i=1
+ui(t)fi(q(t)), q(0) = q.
+Further, in Theorem 3.9 we use the mapping (Pt−1)∗ : Tq∗0 M → T ∗
+q(t)M, recall
+the necessary definition. If F : M → N is a smooth mapping between smooth manifolds and q ∈ M, then there is defined the differential
+F∗q : Tq M → TF (q)N,
+and the dual mapping of cotangent spaces:
+Fq∗ = (F∗q )∗ : T ∗
+F (q)N → Tq∗M,
+〈Fq∗(λ), v〉 = 〈λ, Fq∗(v)〉, v ∈ Tq M, λ ∈ T ∗
+F (q)N .
+Now we prove Theorem 3.9.
+Proof The curve q(t) is a minimizer of the length functional l of constant velocity,
+thus it is a minimizer of the energy functional J (u) = 1
+2
+∫ t1
+0
+k ∑
+i=1
+u2
+i (t) dt for a
+fixed t1.
+Take any control u( · ) = u( · ) + v( · ) ∈ L∞([0, t1], Rk) and consider the corresponding Cauchy problem
+q ̇(t) = fu(t)(q(t)), q(0) = q0.
+Recall that Pt : M → M is the flow of the nonautonomous vector field fu(t) from the time 0 to the time t. Consider the curve x(t) = Pt−1(q(t)) and derive an ODE
+
+
+3.3 Sub-Riemannian Geometry 71
+for x(t). We differentiate the identity q(t) = Pt (x(t)) and get
+q ̇(t) = fu(t)(Pt (x(t))) + (Pt )∗x ̇(t),
+whence
+x ̇(t) = (P −1
+t )∗[q ̇(t) − fu(t)(Pt (x(t)))]
+= (P −1
+t )∗[(fu(t) − fu(t))(Pt (x(t )))]
+= [(P −1
+t )∗(fu(t)−u(t))](x(t ))
+= [(P −1
+t )∗fv(t)](x(t)).
+We denote gtv = (Pt−1)∗fv and get the required ODE
+x ̇(t) = gt
+v(t)(x(t)), x(0) = P −1
+0 (q0) = q0. (3.17)
+Notice that fv is linear in v, thus gtv is linear in v.
+For any v ∈ L∞([0, t1], Rk), consider a mapping
+R s→
+( x(t1; u + sv) J (u + sv)
+)
+∈ M × R,
+where x(t1; u + sv) is the solution to Cauchy problem (3.17) corresponding to the control u + sv, and J (u + sv) is the corresponding energy.
+Lemma 3.5 There exists a covector λ ∈ (Tq0 M ⊕ R)∗, λ = 0, such that for any
+v ∈ L∞([0, t1], Rk) there holds the equality
+〈 λ,
+( ∂x(t1; u + sv)
+∂s
+∣∣∣∣s=0
+, ∂J (u + sv)
+∂s
+∣∣∣∣s=0
+)〉
+= 0. (3.18)
+Proof Denote
+(v) =
+( ∂x(t1; u + sv)
+∂s
+∣∣∣∣s=0
+, ∂J (u + sv)
+∂s
+∣∣∣∣s=0
+) ,
+: L∞([0, t1], Rk) → Tq0 M ⊕ R.
+We compute the derivatives in the definition of the mapping . It is easy to see that
+∂J (u + sv)
+∂s
+∣∣∣∣s=0
+=
+∫ t1
+0
+k ∑
+i=1
+ui(t)vi(t) dt. (3.19)
+
+
+72 3 Optimal Control Problem
+Indeed, this follows from the expansion
+J (u + sv) = 1
+2
+∫ t1
+0
+|u + sv|2 dt
+=1
+2
+∫ t1
+0
+(
+|u|2 + 2s
+k ∑
+i=1
+ui (t)vi (t) + s2|v|2
+)
+dt.
+Further, we show that
+∂x(t1; u + sv)
+∂s
+∣∣∣∣s=0
+=
+∫ t1
+0
+gt
+v(t)(q0) dt =
+∫ t1
+0
+k ∑
+i=1
+((P −1
+t )∗fi )(q0)vi (t) dt.
+(3.20)
+The ODE x ̇(t; u + sv) = gtsv(x(t; u + sv)) implies in local coordinates that
+x(t1; u + sv) = q0 +
+∫ t1
+0
+gt
+sv(t)(x(t; u + sv)) dt
+= q0 + s
+∫ t1
+0
+gt
+v(t)(x(t; u + sv)) dt,
+whence
+∂x(t1; u + sv)
+∂s
+∣∣∣∣s=0
+=
+∫ t1
+0
+gt
+v(t)(x(t; u)) dt
+=
+∫ t1
+0
+gt
+v(t)(q0) dt =
+∫ t1
+0
+k ∑
+i=1
+((P −1
+t )∗fi )(q0)vi (t) dt.
+One can see from (3.19), (3.20) that the mapping is linear. We show that it is not surjective. By contradiction, let Im = Tq0 M ⊕ R, then there exist
+v0, . . . , vn ∈ L∞([0, t1], Rk) such that (v0), . . . , (vn) are linearly independent, i.e., the vectors
+⎛
+⎝
+∂ x (t1 ;u+s v 0 ) ∂s
+∣∣∣s=0
+∂J (u+sv0) ∂s
+∣∣∣s=0
+⎞
+⎠, ...,
+⎛
+⎝
+∂ x (t1 ;u+s v n ) ∂s
+∣∣∣s=0
+∂J (u+svn) ∂s
+∣∣∣s=0
+⎞
+⎠
+are linearly independent. Consider the mapping
+F : (s0, . . . , sn) →
+⎛
+⎜⎜⎝
+x
+(
+t1; u +
+n∑
+i=0
+si vi
+)
+J
+(
+u+
+n∑
+i=0
+si vi
+)
+⎞
+⎟⎟⎠ , Rn+1 → M × R.
+
+
+3.3 Sub-Riemannian Geometry 73
+The mapping F is smooth near the point 0 ∈ Rn+1 and has a nondegenerate Jacobian at this point. Thus there exists a neighbourhood O0 ⊂ Rn+1 such that the restriction F |O0 is a diffeomorphism. Consequently,
+F (0) =
+( x(t1; u) J (u)
+) =
+( q0 J (u)
+)
+∈ int F (O0).
+Thus there exists a control v( · ) =
+n∑
+i=0
+sivi( · ) for which
+x(t1; u + v) = q0, J (u + v) < J (u).
+Consider the corresponding trajectory t → q(t; u + v). We have
+q(0; u + v) = q0,
+q(t1; u + v) = Pt1 (x(t1; u + v)) = Pt1 (q0) = q1.
+So the curve q(t; u + v) connects the points q0 and q1 with a lesser value of the functional J than the optimal trajectory q(t) = q(t; u). The contradiction obtained completes the proof of this lemma.
+We continue the proof of Theorem 3.9. By the previous lemma, there exists a covector 0 = λ ∈ (Tq0 M ⊕ R)∗ such that for any v ∈ L∞([0, t1], Rk) we have
+〈 λ,
+( ∂x(t1; u + sv)
+∂s
+∣∣∣∣s=0
+, ∂J (u + sv)
+∂s
+∣∣∣∣s=0
+)〉
+= 0.
+It is obvious that if this condition holds for some covector λ, then it also holds for any covector αλ, α = 0. Consequently, we can choose a covector λ of the form
+λ = (λ0, −1) or λ = (λ0, 0), λ0 = 0.
+Thus there exists a covector λ0 ∈ Tq∗0 M such that for any v ∈ L∞([0, t1], Rk)
+∂J (u + sv)
+∂s
+∣∣∣∣s=0
+−
+〈
+λ0, ∂x(t1; u + sv)
+∂s
+∣∣∣∣s=0
+〉
+= 0 (3.21)
+or
+0=
+〈
+λ0, ∂x(t1; u + sv)
+∂s
+∣∣∣∣s=0
+〉
+, λ0 = 0. (3.22)
+
+
+74 3 Optimal Control Problem
+Consider the case (3.21). Equalities (3.19) and (3.20) imply that for any v ∈ L∞([0, t1], Rk)
+∫ t1
+0
+k ∑
+i=1
+ui(t)vi(t) dt =
+∫ t1
+0
+k ∑
+i=1
+〈
+λ0, ((P −1
+t )∗fi )(q0)
+〉
+vi(t) dt
+=
+∫ t1
+0
+k ∑
+i=1
+〈λt , fi (q(t))〉vi(t) dt
+=
+∫ t1
+0
+k ∑
+i=1
+hi (λt )vi (t) dt.
+Since the functions vi ∈ L∞[0, t1] are arbitrary, we get in case (3.21)
+(N ) ui(t) = hi(λt ), i = 1, . . . , k.
+Similarly, in case (3.22) we get the condition
+(A) 0 = hi(λt ), i = 1, . . . , k; λ0 = 0.
+Theorem 3.9 is proved. Now we prove Theorem 3.10.
+Proof Recall: we should show that the curve λt = (Pt−1)∗λ0 ∈ T ∗
+q(t)M satisfies the
+ODE  ̇λt =
+k∑
+i=1
+ui(t)hi(λt ). Now we prove this for the flow of an autonomous vector
+field.
+Lemma 3.6 Let X ∈ Vec(M), Pt = etX. Then the curve λt = (Pt−1)∗λ0 satisfies
+the ODE  ̇λt = hX(λt ).
+Proof We set φ(t) = (Pt−1)∗(λ0), then we have to prove that
+φ ̇(t) = hX(φ(t)) ∈ Tφ(t)(T ∗M).
+A function a ∈ C∞(T ∗M) is called constant on fibers of T ∗M if it has the form a = α ◦ π for some function α ∈ C∞(M). Notation: a ∈ Cc∞st(T ∗M).
+A function hY ∈ C∞(T ∗M) is called linear on fibers of T ∗M if
+hY (λ) = 〈λ, Y (q)〉, q = π(λ), λ ∈ T ∗M,
+for some vector field Y ∈ Vec(M). Notation: hY ∈ C∞
+lin(T ∗M).
+An affine on fibers of T ∗M function is a sum of a constant on fibers and a linear on fibers functions:
+C∞
+aff(T ∗M) = Cc∞st(T ∗M) + C∞
+lin(T ∗M).
+
+
+3.3 Sub-Riemannian Geometry 75
+Remark 3.7 Let v, ω ∈ Tλ(T ∗M). The equality v = ω holds if and only if
+vg = ωg ∀g ∈ C∞
+aff(T ∗M).
+Indeed, the value vg = 〈dλg, v〉 depends only on the first order Taylor polynomial of the function g.
+So we check the required equality φ ̇(t) = hX(φ(t)) for affine on fibers of T ∗M functions. Let a = α ◦ π ∈ Cc∞st(T ∗M), we check the equality φ ̇(t)a = hXa. We have
+hXa = {hX, a} =
+∑n
+i=1
+∂ hX
+∂pi
+∂α
+∂ qi
+=
+∑n
+i=1
+Xi
+∂α
+∂ qi
+= Xα,
+φ ̇(t)a = d
+dt a(φ(t)) = d
+dt α ◦ etX(q0) = (Xα)(φ(t)),
+and the required equality is proved for functions a ∈ Cc∞st(T ∗M).
+Now let hY ∈ C∞
+lin(T ∗M), we check the equality φ ̇(t)hY = hXhY . We have
+hXhY = {hX, hY } = h[X,Y ].
+On the other hand,
+φ ̇(t)hY = d
+dt hY ◦ φ(t) = d
+dτ
+∣∣∣∣τ =0
+hY ◦ φ(t + τ )
+=d
+dτ
+∣∣∣∣τ =0
+hY ◦ (e−τ X)∗ ◦ (e−tX)∗(λ0)
+=d
+dτ
+∣∣∣∣τ =0
+〈
+(e−τ X)∗ ◦ (e−tX)∗(λ0), Y (e(t+τ )X(q0))
+〉
+=
+〈
+φ(t), d
+dτ
+∣∣∣∣τ =0
+e−τ X
+∗ Y (eτ X ◦ etX(q0))
+〉
+=
+〈
+φ(t), [X, Y ](etX(q0))
+〉
+= h[X,Y ](φ(t)).
+In the penultimate transition we used the equality
+d
+dτ
+∣∣∣∣τ =0
+e−τ X
+∗ Y (eτX(q)) = [X, Y ](q), (3.23)
+which we prove now.
+
+
+76 3 Optimal Control Problem
+We have
+d
+dτ
+∣∣∣∣τ =0
+e−τ X
+∗ Y (eτX(q)) = ∂2
+∂τ∂s
+∣∣∣∣τ =0,s=0
+e−τ X ◦ esY ◦ eτ X(q).
+We compute Taylor expansions of the compositions in the right-hand side:
+eτX(q) = q + τ X(q) + o(τ ),
+esY ◦ eτX = esY (q + τ X(q) + o(τ ))
+= q + τ X(q) + o(τ ) + sY (q + τ X(q) + o(τ )) + o(s)
+= q + τ X(q) + sY (q) + sτ ∂Y
+∂q X(q) + . . . ,
+e−τX ◦ esY ◦ eτX(q) = q + τ X(q) + sY (q) + sτ ∂Y
+∂q X(q)
+− τ X(q) − τ s ∂X
+∂q Y (q) + . . .
+= q + sY (q) + sτ [X, Y ](q) + . . . ,
+thus
+∂2
+∂τ∂s
+∣∣∣∣τ =0,s=0
+e−τX ◦ esY ◦ eτX(q) = [X, Y ](q),
+and equality (3.23) follows. Lemma 3.6 is proved. Similarly to Lemma 3.6 for an autonomous vector field X, one proves the
+equality  ̇λt =
+k∑
+i=1
+ui (t)hi (λt ) for a curve λt = (Pt−1)∗λ0 in the case of a
+nonautonomous vector field fu(t). This completes the proof of Theorem 3.10. As we noticed above, Theorem 3.8 follows from Theorems 3.9 and 3.10. The Pontryagin maximum principle for SR problems is proved.
+3.4 A Symmetry Method for Construction of Optimal Synthesis
+We describe a general method for construction of optimal synthesis for subRiemannian problems with a big group of symmetries (e.g. for left-invariant SR problems on Lie groups). This method easily generalizes from SR problems to more general classes of optimal control problems.
+
+
+3.4 A Symmetry Method for Construction of Optimal Synthesis 77
+Assume that for any q1 ∈ M there exists a length minimizer q(t) that connects q0 and q1. Moreover, suppose for simplicity that all abnormal geodesics are simultaneously normal. Thus all geodesics are parametrised by the normal exponential mapping
+Exp : N → M, N = C × R+, C = Tq∗0 M ∩
+{
+H=1
+2
+} .
+If this mapping is bijective onto M \ {q0}, then any point q1 ∈ M is connected with q0 by a unique geodesic q(t), and by virtue of existence of length minimizers this geodesic is optimal. But typically the exponential mapping is not bijective due to Maxwell points. Denote by t1
+Max(λ) ∈ (0, +∞] the first Maxwell time along a geodesic Exp(λ, t),
+λ ∈ C. Consider the Maxwell set in the image of the exponential mapping
+Max =
+{
+Exp(λ, t1
+Max(λ)) | λ ∈ C
+} ,
+and introduce the restricted exponential mapping
+Exp : N ̃ → M ̃,
+N ̃ =
+{
+(λ, t) ∈ N | t < t1
+Max(λ)
+} ,
+M ̃ = M\ cl(Max).
+This mapping may well be bijective, and if this is the case, then any point q1 ∈ M ̃ is connected with q0 by a unique candidate optimal geodesic; by virtue of existence, this geodesic is optimal. The bijective property of the restricted exponential mapping can often be proved via the following classic theorem.
+Theorem 3.11 (Hadamard) Let F : X → Y be a smooth mapping between smooth manifolds for which the following conditions hold:
+(1) dim X = dim Y
+(2) X, Y are connected, and Y is simply connected (3) F is nondegenerate (4) F is proper (preimage of a compact set is compact).
+Then F is a diffeomorphism, thus a bijection.
+Proof See [101, 103].
+Usually it is difficult to describe all Maxwell points (and respectively to describe the first of them), but one can often do this for a group of symmetries G of the exponential mapping. Suppose that we have a mapping ε acting both in the preimage
+
+
+78 3 Optimal Control Problem
+and image of the exponential mapping:
+ε : N → N, ε : M → M.
+This mapping is called a symmetry of the exponential mapping if it commutes with this mapping:
+ε ◦ Exp = Exp ◦ε
+and if it preserves time:
+ε(λ, t) = ( ∗ , t), (λ, t) ∈ N.
+Suppose that there is a group G of symmetries of the exponential mapping. If
+ε(λ, t) = (λ, t) and Exp ◦ε(λ, t) = Exp(λ, t) = q1,
+ε ∈ G, (λ, t) ∈ N,
+then q1 is a Maxwell point. In such a way, one can describe the Maxwell points corresponding to the group of symmetries G, and consequently describe the first Maxwell time corresponding to the group G:
+tG
+Max : C → (0, +∞].
+Then one can apply the above procedure with the restricted exponential mapping, replacing t1
+Max(λ) by t G
+Max(λ). If the group G is big enough, one can often prove that the restricted exponential mapping is bijective, and thus to construct optimal synthesis. This method is an extension of the classic Hadamard’s approach to the study of geodesics on Riemannian manifolds of negative curvature [101]. This symmetry method was successfully applied to a series of optimal control problems with a big symmetry group:
+• Dido’s problem (the sub-Riemannian problem on the Heisenberg group), see Sect. 4.1 and [37, 43, 79] • the sub-Riemannian problem in the flat Martinet case, see Example 6 in Sect. 4.5 and [61] • axisymmetric sub-Riemannian problems on the Lie groups SO(3), SU(2), SL(2), see [67, 68, 75] • a general left-invariant sub-Riemannian problem on the Lie group SO(3), see [73] • the sub-Riemannian problem with the growth vector (3, 6), see [83] • the two-step sub-Riemannian problems of coranks 1 and 2, see [60, 66] • the sub-Riemannian problem on the group of Euclidean motions of the plane, see Sect. 4.2 and [81, 91, 92]
+
+
+3.4 A Symmetry Method for Construction of Optimal Synthesis 79
+• the sub-Riemannian problem on the group of hyperbolic motions of the plane, see [77] • Euler’s elastic problem, see Sect. 4.3 and [94] • the problem on optimal rolling of a sphere on a plane without slipping, with twisting, see [72] • the plate-ball problem, see [80, 90] • sub-Riemannian problem on the Engel group, see Sect. 4.4 and [64] • sub-Riemannian problem on the Cartan group, see Exercise 2 in Sect. 4.5 and [63, 96] • axisymmetric Riemannian problems on the Lie groups SO(3), SU(2), SL(2), PSL(2), see [85, 86].
+
+
+Chapter 4 Solution to Optimal Control Problems
+The boy is not to separate himself with his whip and tether, Lest the animal should wander away into a world of defilements; When the ox is properly tended to, he will grow pure and docile; Without a chain, nothing binding, he will by himself follow the oxherd.
+Pu-ming, “The Ten Oxherding Pictures” (cited by Suzuki [110])
+Herding the Ox
+We present solutions to Dido’s problem, Euler’s elastic problem, and the subRiemannian problems on the group SE(2) and on the Engel group.
+© The Author(s), under exclusive license to Springer Nature Switzerland AG 2022 Yu. Sachkov, Introduction to Geometric Control, Springer Optimization and Its Applications 192, https://doi.org/10.1007/978-3-031-02070-4_4
+81
+
+
+82 4 Solution to Optimal Control Problems
+4.1 The Sub-Riemannian Problem on the Heisenberg Group
+As we saw in Sect. 1.1.1.8, Dido’s problem is stated as the following optimal control problem:
+q ̇ = u1f1(q) + u2f2(q), q ∈ M = R3
+x,y,z, u = (u1, u2) ∈ R2,
+q(0) = q0 = (0, 0, 0), q(t1) = q1,
+J=1
+2
+∫ t1
+0
+(u2
+1 + u2
+2) dt → min,
+f1 = ∂
+∂x − y
+2
+∂
+∂z , f2 = ∂
+∂y + x
+2
+∂
+∂z.
+4.1.1 Existence of Solutions
+We have [f1, f2] = f3 = ∂
+∂z . The system is symmetric and full-rank, thus it is completely controllable. The right-hand side satisfies the bound
+|u1f1(q) + u2f2(q)| ≤ C(1 + |q|), q ∈ M, u2
+1 + u2
+2 ≤ 1.
+Thus the Filippov theorem gives existence of optimal controls.
+4.1.2 Geodesics
+Introduce linear on fibers of T ∗M Hamiltonians:
+hi(λ) = 〈λ, fi〉, i = 1, 2, 3, λ ∈ T ∗M.
+4.1.2.1 Abnormal Case
+Abnormal extremals satisfy the Hamiltonian system  ̇λ = u1h1(λ) + u2h2(λ), in coordinates:
+h ̇1 = −u2h3,
+h ̇2 = u1h3,
+h ̇3 = 0,
+q ̇ = u1f1 + u2f2,
+
+
+4.1 The Sub-Riemannian Problem on the Heisenberg Group 83
+plus the identities
+h1(λt ) = h2(λt ) ≡ 0.
+Thus h3(λt ) = 0, and the first two equations of the Hamiltonian system yield u1(t) = u2(t) ≡ 0. So abnormal trajectories are constant.
+4.1.2.2 Normal Case
+Normal extremals satisfy the Hamiltonian system  ̇λ = H(λ) with the Hamiltonian H=1
+2 (h2
+1 + h2
+2), in coordinates:
+h ̇1 = −h2h3, (4.1)
+h ̇2 = h1h3, (4.2)
+h ̇3 = 0, (4.3)
+q ̇ = h1f1 + h2f2. (4.4)
+The subsystem of the Hamiltonian system for the adjoint variables h1, h2, h3 (the vertical subsystem) (4.1)–(4.3) has integrals H and h3. Moreover, in the plane {h3 = 0} the vertical subsystem stays fixed. Thus at the level surface {H = 1/2} it has the flow shown in Fig. 4.1: rotations in the circles {H = 1/2, h3 = const = 0} and fixed points in the circle {H = 1/2, h3 = 0}.
+On the level surface {H = 1
+2 }, we introduce the polar coordinate θ :
+h1 = cos θ, h2 = sin θ.
+Fig. 4.1 Flow of the vertical subsystem (4.1)–(4.3)
+
+
+84 4 Solution to Optimal Control Problems
+Arclength parametrized minimizers satisfy the normal Hamiltonian system
+θ ̇ = h3,
+h ̇3 = 0,
+x ̇ = cos θ,
+y ̇ = sin θ,
+z ̇ = − y
+2 cos θ + x
+2 sin θ,
+(x, y, z)(0) = (0, 0, 0).
+1. If h3 = 0, then
+θ ≡ θ0,
+x = t cos θ0,
+y = t sin θ0,
+z = 0.
+In this case geodesics are lines in the plane {z = 0}, see Fig. 4.2. 2. If h3 = 0, then
+θ = θ0 + h3t,
+x = (sin(θ0 + h3t) − sin θ0)/ h3,
+y = (cos θ0 − cos(θ0 + h3t))/ h3,
+z = (h3t − sin h3t)/ h2
+3.
+In this case geodesics are helices of nonconstant slope, they project to the plane (x, y) into circles, see Fig. 4.2.
+4.1.3 Optimality of Geodesics
+We present two ways to study optimality: an elementary one, specific for Dido’s problem, and a general one, based on the symmetry method (see Sect. 3.4).
+
+
+4.1 The Sub-Riemannian Problem on the Heisenberg Group 85
+Fig. 4.2 Geodesics in Dido’s problem
+x
+y
+z
+4.1.3.1 Elementary Argument
+Straight lines (case h3 = 0) minimize the Euclidean distance in R2x,y, thus they are optimal on any segment t ∈ [0, t1], t1 > 0. Helices (case h3 = 0) are not optimal after the first intersection with the z-axis
+at t = 2π
+|h3| since these intersections are Maxwell points. If t1 = 2π
+|h3| , then there is a
+continuum of helices q(t), t ∈ [0, t1], coming to the same point q(t1) at the z-axis; they are obtained one from another by rotations around this axis, thus they all are optimal. A part of an optimal arc is optimal, thus the helices are optimal also for t ∈ [0, t1], t1 ∈ (0, 2π
+|h3| ).
+Summing up, the cut time along a geodesic Exp(λ, t) is
+tcut(λ) =
+{ 2π
+|h3| for h3 = 0,
++∞ for h3 = 0.
+(4.5)
+4.1.3.2 General Argument
+As we mentioned above, in the case h3 = 0 all geodesics are optimal. In the case h3 = 0 we study first the local optimality by evaluation of conjugate points:
+J (t) = ∂ Exp
+∂(λ0, t) = ∂(x, y, z)
+∂(θ0, h3, t) = 0.
+
+
+86 4 Solution to Optimal Control Problems
+In the coordinates p = h3t
+2 , τ = θ0 + h3t
+2 , we have:
+x= 2
+h3
+cos τ sin p,
+y= 2
+h3
+sin τ sin p,
+z = 2p − sin 2p
+h2
+3
+.
+Thus
+J = f · ∂(x, y, z)
+∂(τ, p, h3) = f · 8 sin p
+h5
+3
+· φ(p), f = 0,
+φ(p) = (2p − sin 2p) cos p − (1 − cos 2p) sin p.
+The function φ(p) does not vanish for p ∈ (0, π ), thus the first root of the Jacobian J is p1
+conj = π . Summing up, the first conjugate time in the case h3 = 0 is
+t1
+conj = 2π
+|h3| .
+Now let us study the global optimality of geodesics. The problem has an obvious symmetry group G—rotations around the z-axis. The corresponding Maxwell times are t = 2πn
+h3 , and Maxwell points in the image of the exponential mapping are
+x = y = 0, z = 2πn
+h2
+3
+. The first Maxwell time corresponding to the group G is
+tG
+Max = 2π
+|h3| = t1
+conj.
+Consider the restricted exponential mapping
+Exp : N ̃ → M ̃,
+N ̃ =
+{
+(λ, t) ∈ N | θ ∈ S1, h3 > 0, t ∈
+(
+0, 2π
+h3
+)} ,
+M ̃ = {q ∈ M | z > 0, x2 + y2 > 0}.
+The mapping Exp |N ̃ is nondegenerate and proper:
+(θ, h3, t) → ∂N ̃ ⇒ q → ∂M ̃.

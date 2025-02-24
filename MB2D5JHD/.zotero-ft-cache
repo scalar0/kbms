@@ -1,0 +1,3723 @@
+Modélisation de phénomènes aléatoires :
+introduction aux chaînes de Markov et aux martingales
+Thierry Bodineau
+École Polytechnique Département de Mathématiques Appliquées
+1er novembre 2020
+
+
+2
+
+
+Table des matières
+I Chaînes de Markov 9
+1 De la marche aléatoire aux jeux de cartes 11
+2 Propriété de Markov 17 2.1 Propriété de Markov et matrice de transition . . . . . . . . . . . . . . . . . 17 2.2 Exemples de chaînes de Markov . . . . . . . . . . . . . . . . . . . . . . . . 19 2.3 Loi d’une chaîne de Markov . . . . . . . . . . . . . . . . . . . . . . . . . . . 21 2.3.1 Équation de Chapman-Kolmogorov . . . . . . . . . . . . . . . . . . 21 2.3.2 Processus décalé en temps . . . . . . . . . . . . . . . . . . . . . . . . 23 2.4 Temps d’arrêt et propriété de Markov forte . . . . . . . . . . . . . . . . . . 25 2.5 Applications . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27 2.5.1 Équation de la chaleur ? . . . . . . . . . . . . . . . . . . . . . . . . . 27 2.5.2 Ruine du joueur . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30 2.5.3 Méthode de Monte-Carlo pour un problème de Dirichlet ? . . . . . 32
+3 Mesures invariantes 37 3.1 Mesures de probabilité invariantes . . . . . . . . . . . . . . . . . . . . . . . 37 3.1.1 Définition des mesures invariantes . . . . . . . . . . . . . . . . . . . 37 3.1.2 Exemples de mesures invariantes . . . . . . . . . . . . . . . . . . . . 38 3.1.3 Premières propriétés des mesures invariantes . . . . . . . . . . . . 40 3.2 Irréductibilité et unicité des mesures invariantes . . . . . . . . . . . . . . . 41 3.2.1 Irréductibilité . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42 3.2.2 Unicité des mesures de probabilité invariantes . . . . . . . . . . . . 42 3.2.3 Construction de la mesure de probabilité invariante . . . . . . . . . 44 3.3 Réversibilité et Théorème H . . . . . . . . . . . . . . . . . . . . . . . . . . . 47 3.3.1 Réversibilité . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47 3.3.2 Théorème H pour les chaînes de Markov ? . . . . . . . . . . . . . . 48 3.3.3 Application : modèle d’Ehrenfest . . . . . . . . . . . . . . . . . . . . 49
+4 Espaces d’états dénombrables 53 4.1 Chaînes de Markov récurrentes et transitoires . . . . . . . . . . . . . . . . . 53 4.2 Application : marches aléatoires . . . . . . . . . . . . . . . . . . . . . . . . . 57 4.2.1 Marches aléatoires symétriques sur Zd . . . . . . . . . . . . . . . . 57 4.2.2 Un critère analytique . . . . . . . . . . . . . . . . . . . . . . . . . . . 59 4.3 Mesures invariantes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60 4.4 Application : branchement et graphes aléatoires . . . . . . . . . . . . . . . 64
+3
+
+
+4 TABLE DES MATIÈRES
+4.4.1 Arbres aléatoires de Galton-Watson . . . . . . . . . . . . . . . . . . 64 4.4.2 Graphes aléatoires d’Erdös-Rényi . . . . . . . . . . . . . . . . . . . 68
+5 Ergodicité et convergence 73 5.1 Ergodicité . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 73 5.1.1 Théorème ergodique . . . . . . . . . . . . . . . . . . . . . . . . . . . 73 5.1.2 Application : algorithme PageRank de Google . . . . . . . . . . . . 77 5.2 Convergence . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 78 5.2.1 Apériodicité et convergence . . . . . . . . . . . . . . . . . . . . . . . 79 5.2.2 Distance en variation et couplage . . . . . . . . . . . . . . . . . . . . 83 5.2.3 Vitesses de convergence . . . . . . . . . . . . . . . . . . . . . . . . . 90
+6 Application aux algorithmes stochastiques 97 6.1 Optimisation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 97 6.2 Algorithmes stochastiques . . . . . . . . . . . . . . . . . . . . . . . . . . . . 99 6.2.1 Algorithme de Metropolis-Hastings . . . . . . . . . . . . . . . . . . 99 6.2.2 Modèle d’Ising . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 101 6.3 Simulation parfaite : algorithme de Propp-Wilson ? . . . . . . . . . . . . . 103 6.4 Algorithme de recuit simulé ? . . . . . . . . . . . . . . . . . . . . . . . . . . 106 6.4.1 Problème du voyageur de commerce . . . . . . . . . . . . . . . . . 107 6.4.2 Traitement d’images . . . . . . . . . . . . . . . . . . . . . . . . . . . 108
+7 Application : la percolation ? 111 7.1 Description du modèle . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 111 7.2 Transition de phase . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 112 7.2.1 Absence de percolation pour p petit . . . . . . . . . . . . . . . . . . 113 7.2.2 Percolation pour p proche de 1 . . . . . . . . . . . . . . . . . . . . . 114 7.2.3 Point critique . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 115 7.2.4 Dimension 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 116
+II Martingales 119
+8 De la marche aléatoire aux stratégies optimales 121
+9 Espérance conditionnelle 125 9.1 Espérance conditionnelle sur un espace d’états discret . . . . . . . . . . . . 125 9.2 Définition de l’espérance conditionnelle . . . . . . . . . . . . . . . . . . . . 127 9.3 Propriétés de l’espérance conditionnelle . . . . . . . . . . . . . . . . . . . . 130 9.4 Processus aléatoire . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 132
+10 Martingales et stratégies 135 10.1 Martingales . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 135 10.2 Stratégies et théorème d’arrêt . . . . . . . . . . . . . . . . . . . . . . . . . . 138 10.3 Stratégies de gestion et évaluation des options ? . . . . . . . . . . . . . . . 143 10.4 Inégalités de martingales . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 151
+
+
+TABLE DES MATIÈRES 5
+11 Convergence des martingales 153 11.1 Convergence des martingales dans L2 . . . . . . . . . . . . . . . . . . . . . 153 11.2 Application : loi des grands nombres . . . . . . . . . . . . . . . . . . . . . . 155 11.3 Convergence des sous-martingales . . . . . . . . . . . . . . . . . . . . . . . 157 11.4 Application : le modèle de Wright-Fisher . . . . . . . . . . . . . . . . . . . 161 11.5 Martingales fermées . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 163 11.6 Théorème central limite . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 167 11.6.1 Théorème central limite pour les martingales . . . . . . . . . . . . . 167 11.6.2 Inégalité de Hoeffding . . . . . . . . . . . . . . . . . . . . . . . . . . 170 11.6.3 Théorème central limite pour les chaînes de Markov . . . . . . . . 173
+12 Applications des martingales 175 12.1 Cascades de Mandelbrot . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 175 12.2 Mécanismes de renforcement . . . . . . . . . . . . . . . . . . . . . . . . . . 180 12.2.1 Urne de Pólya . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 180 12.2.2 Graphes aléatoires de Barabási-Albert . . . . . . . . . . . . . . . . . 181 12.3 Descente de gradient stochastique . . . . . . . . . . . . . . . . . . . . . . . 184 12.3.1 Algorithme du gradient stochastique . . . . . . . . . . . . . . . . . 184 12.3.2 Réseaux de neurones artificiels . . . . . . . . . . . . . . . . . . . . . 189 12.4 L’algorithme de Robbins-Monro . . . . . . . . . . . . . . . . . . . . . . . . 191 12.5 Processus de Galton-Watson . . . . . . . . . . . . . . . . . . . . . . . . . . . 195
+13 Arrêt optimal et contrôle stochastique? 197 13.1 Arrêt optimal . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 197 13.1.1 Enveloppe de Snell . . . . . . . . . . . . . . . . . . . . . . . . . . . . 197 13.1.2 Le problème du parking . . . . . . . . . . . . . . . . . . . . . . . . . 200 13.1.3 Problème des secrétaires . . . . . . . . . . . . . . . . . . . . . . . . . 202 13.2 Contrôle stochastique . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 204 13.2.1 Équation de la programmation dynamique . . . . . . . . . . . . . . 205 13.2.2 Contrôle des chaînes de Markov . . . . . . . . . . . . . . . . . . . . 206
+A Théorie de la mesure 209 A.1 Espaces mesurables et mesures . . . . . . . . . . . . . . . . . . . . . . . . . 209 A.1.1 σ-algèbres . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 209 A.1.2 Mesures . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 210 A.2 Intégration . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 212 A.2.1 Fonctions mesurables . . . . . . . . . . . . . . . . . . . . . . . . . . 212 A.2.2 Integration des fonctions positives . . . . . . . . . . . . . . . . . . . 214 A.2.3 Fonctions intégrables . . . . . . . . . . . . . . . . . . . . . . . . . . . 216 A.2.4 Théorème de convergence dominée . . . . . . . . . . . . . . . . . . 218 A.3 Espaces produits . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 220 A.3.1 Mesurabilité sur les espaces produits . . . . . . . . . . . . . . . . . 220 A.3.2 Intégration sur les espaces produits . . . . . . . . . . . . . . . . . . 221
+
+
+6 TABLE DES MATIÈRES
+B Théorie des probabilités 223 B.1 Variables aléatoires . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 223 B.2 Intégration de variables aléatoires et espaces Lp . . . . . . . . . . . . . . . 225 B.2.1 Théorèmes de convergence . . . . . . . . . . . . . . . . . . . . . . . 225 B.2.2 Inégalités classiques . . . . . . . . . . . . . . . . . . . . . . . . . . . 225 B.2.3 Espaces Lp . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 228 B.3 Convergences . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 229 B.3.1 Convergence en probabilité . . . . . . . . . . . . . . . . . . . . . . . 230 B.3.2 Convergence en loi . . . . . . . . . . . . . . . . . . . . . . . . . . . . 233 B.4 Indépendance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 234 B.4.1 Variables aléatoires indépendantes . . . . . . . . . . . . . . . . . . . 234 B.4.2 Comportement asymptotique . . . . . . . . . . . . . . . . . . . . . . 235 B.5 Espérance conditionnelle . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 237 B.5.1 Construction de l’espérance conditionnelle . . . . . . . . . . . . . . 237 B.5.2 Propriétés de l’espérance conditionnelle . . . . . . . . . . . . . . . . 239
+
+
+L’aléa joue un rôle déterminant dans des contextes variés et il est souvent nécessaire de le prendre en compte dans de multiples aspects des sciences de l’ingénieur, citons notamment les télécommunications, la reconnaissance de formes ou l’administration des réseaux. Plus généralement, l’aléa intervient aussi en économie (gestion du risque), en médecine (propagation d’une épidémie), en biologie (évolution d’une population) ou en physique statistique (théorie des transitions de phases). Dans les applications, les données observées au cours du temps sont souvent modélisées par des variables aléatoires corrélées dont on aimerait prédire le comportement. L’objet de ce cours est de formaliser la notion de corrélation en étudiant deux types de processus aléatoires fondamentaux en théorie des probabilités : les chaînes de Markov et les martingales.
+En 1913, A. Markov posait les fondements d’une théorie qui a permis d’étendre les lois des probabilités des variables aléatoires indépendantes à un cadre plus général susceptible de prendre en compte des corrélations. La première partie de ce cours décrit la théorie des chaînes de Markov et certaines de leurs applications. Le parti pris de ce cours est de considérer le cadre mathématique le plus simple possible en se focalisant sur des espaces d’états finis, voire dénombrables, pour éviter le recours à la théorie de la mesure. Le comportement asymptotique des chaînes de Markov peut être classifié et prédit. Nous verrons que la structure de ces processus aléatoires corrélés est encodée dans une mesure invariante qui permet de rendre compte des propriétés ergodiques, généralisant ainsi les suites de variables aléatoires indépendantes. La convergence des chaînes de Markov vers leurs mesures invariantes constitue un aspect fondamental de la théorie des probabilités, mais elle joue aussi un rôle clef dans les applications. Plusieurs exemples seront décrits pour illustrer le rôle majeur des chaînes de Markov dans différents domaines de l’ingénierie comme les problèmes numériques (méthodes de Dirichlet, optimisation), la reconnaissance de formes ou l’algorithme PageRank de Google. Des exemples issus de la physique statistique (irréversibilité en théorie cinétique des gaz, transitions de phases) ou de la dynamique des populations (arbres de Galton Watson) permettront aussi d’éclairer certains aspects des chaînes de Markov. D’autres applications des chaînes de Markov sont présentées dans le livre de M. Benaim et N. El Karoui [2] et dans celui de J.F. Delmas et B. Jourdain [8]. Les ouvrages de C. Graham [13], P. Brémaud [5] et J. Norris [23] constituent aussi de très bonnes références sur la théorie des chaînes de Markov.
+La seconde partie de ce cours porte sur la théorie des martingales qui permet d’étudier d’autres structures de dépendance que celles définies par les chaînes de Markov. Les martingales sont communément associées aux jeux de hasard et nous verrons comment des stratégies optimales peuvent être définies à l’aide de martingales et de temps d’arrêt. Les martingales forment une classe de processus aléatoires aux propriétés très riches.
+7
+
+
+8 TABLE DES MATIÈRES
+En particulier, les fluctuations de ces processus peuvent être contrôlées et leur convergence facilement analysée. Les martingales permettent aussi d’étudier des mécanismes de renforcement pour mieux comprendre des comportements collectifs, des algorithmes stochastiques ou des phénomènes issus de l’écologie comme la dérive génétique. D’autres aspects de la théorie des martingales figurent dans les livres de J. Neveu [22] et D. Williams [28]. Les ouvrages de B. Bercu, D. Chafaï [3] et M. Duflo [9] proposent de nombreux développements sur les applications des martingales aux algorithmes stochastiques.
+Des compléments sur la théorie de la mesure et des probabilités figurent en annexe. Ils permettront d’approfondir certaines notions fondamentales de la théorie des probabilités et pourront servir de référence. Les parties du cours marquées par une étoile ? servent d’illustration et de complément, elles peuvent être omises en première lecture. Des développements plus complets figurent dans l’excellent cours de J.F. Le Gall [18] qui traite à la fois de la théorie de la mesure et des processus stochastiques. Les ouvrages anglophones de R. Durrett [10] et G. Grimmett, D. Stirzaker [14] proposent aussi de nombreux approfondissements sur la théorie des probabilités.
+Je souhaite exprimer toute ma reconnaissance à Nizar Touzi pour m’avoir permis de reprendre des éléments de son cours [25]. Je tiens aussi à remercier chaleureusement Stéphanie Allassonnière, Anne de Bouard, Djalil Chafai, Jean-René Chazottes, Jean-François Delmas, Laurent Denis, Lucas Gerin, Carl Graham, Arnaud Guillin, Arnaud Guyader, Marc Hoffmann, Clément Mantoux et Sylvie Roelly qui m’ont aidé dans la rédaction de ce cours par leurs précieux conseils et leur relecture attentive.
+
+
+Première partie
+Chaînes de Markov
+9
+
+
+
+
+Chapitre 1
+De la marche aléatoire aux jeux de
+cartes
+La loi des grands nombres et le théorème central limite sont deux théorèmes clef de la théorie des probabilités. Ils montrent que la limite d’une somme de variables aléatoires indépendantes obéit à des lois simples qui permettent de prédire le comportement asymptotique. Prenons l’exemple classique d’une marche aléatoire symétrique (cf. figure 1.1)
+X0 = 0 et pour n > 1, Xn =
+n
+∑
+i=1
+ζi (1.1)
+où les {ζi}i > 1 sont des variables indépendantes et identiquement distribuées
+∀i > 1, P(ζi = 1) = P(ζi = −1) = 1/2.
+La loi des grands nombres implique la convergence presque sûre
+nli→m∞
+1
+n Xn = E(ζ1) = 0 p.s. (1.2)
+et le théorème central limite assure la convergence en loi vers une gaussienne de moyenne nulle et de variance 1 que l’on notera γ
+√1n Xn
+(loi)
+−−−→
+n→∞ γ . (1.3)
+Pour de nombreuses applications, il est nécessaire d’ajouter des corrélations entre ces variables et d’enrichir ce formalisme au cas de processus aléatoires qui ne sont pas une simple somme de variables indépendantes. Par exemple, on voudrait décrire un mobile soumis à une force aléatoire et à une force de rappel qui le maintient près de l’origine (comme un atome qui vibre autour de sa position d’équilibre dans un cristal ou le prix d’une matière première soumise à la loi de l’offre et de la demande) et représenter sa position au cours du temps par Yn. Une façon simple de prendre en compte une force de rappel est de construire récursivement une suite aléatoire
+Y0 = 0 et n > 1, Yn = Yn−1 + signe(Yn−1)ζn , (1.4)
+11
+
+
+12 CHAPITRE 1. DE LA MARCHE ALÉATOIRE AUX JEUX DE CARTES
+2000 4000 6000 8000 10 000
+-50
+50
+2000 4000 6000 8000 10 000
+-15
+-10
+-5
+5
+10
+15
+20
+FIGURE 1.1 – À gauche, une réalisation de la marche aléatoire symétrique n → Xn représentée après 10000 pas. À droite, une réalisation de la trajectoire n → Yn représentée après 10000 pas pour p = 0.45.
+où les {ζi}i > 1 sont maintenant des variables indépendantes de Bernoulli de paramètre p ∈ [0, 1/2]
+∀i > 1, P(ζi = 1) = 1 − P(ζi = −1) = p .
+Dans (1.4), le signe de y est noté signe(y) ∈ {±1} et pour éviter toute ambiguïté, le signe de 0 sera pris égal à 1. Si p = 1/2, Yn est égal en loi à Xn. Par contre si p < 1/2, le biais aléatoire dépend du signe de Yn et il a tendance à ramener Yn vers 0 car E(ζ1) < 0. On voit sur la figure 1.1 que l’amplitude et la structure des processus {Xn} et {Yn} sont très différentes. Même pour un biais petit p = 0.45, la trajectoire n → Yn reste localisée autour de 0. Un des enjeux de ce cours sera de décrire le comportement asymptotique de Yn. Pour le moment, essayons de deviner ce comportement limite. La figure 1.2 montre une trajectoire de Yn dix fois plus longue que celle de la figure 1.1 et on constate que l’amplitude de cette trajectoire reste sensiblement inchangée. Ceci contraste avec l’amplitude de
+la marche aléatoire qui croît comme √n par le théorème central limite. L’histogramme de la figure 1.2 représente la fréquence des passages de la trajectoire en un site, i.e. la mesure πn définie par
+∀y ∈ Z, πn(y) = 1
+n
+n
+∑
+k=1
+1{Yk=y} .
+On montrera que πn converge vers une mesure limite π qui encode le comportement asymptotique de Yn
+∀y ∈ Z, nli→m∞
+1 n
+n
+∑
+k=1
+1{Yk=y} = π(y) p.s.
+Cette convergence peut s’interpréter comme un analogue de la loi des grands nombres. Ceci pose plusieurs questions auxquelles nous essayerons de répondre dans ce cours — Peut on décrire la mesure π ? — Quel est le temps nécessaire pour que πn soit proche de π ?
+Le processus {Yn}n > 0 en (1.4) a été obtenu par une récurrence aléatoire Yn+1 = f (Yn, ζn+1) pour une fonction f bien choisie. Sous cette forme, la structure additive de la marche aléatoire Xn a disparu et on peut ainsi envisager de construire des processus à valeurs dans un espace général. Par exemple, on peut définir une marche aléatoire sur le graphe G de
+
+
+13
+20 000 40 000 60 000 80 000 100 000
+-10
+10
+20
+-30 -20 -10 0 10 20 30 40
+2000
+4000
+6000
+8000
+10 000
+FIGURE 1.2 – À gauche, une réalisation de la trajectoire n → Yn est représentée après 100000 pas. À droite, l’histogramme correspondant au nombre de passages par chaque site pour la trajectoire.
+la figure 1.3 : le marcheur part d’un site donné et évolue à chaque pas de temps en sautant uniformément sur un des voisins du site occupé.
+FIGURE 1.3 – Un graphe aléatoire (de Barabási-Albert) avec 50 sites.
+Pour construire la récurrence aléatoire correspondante, on note V (x) l’ensemble des voisins d’un site x de G, i.e. les sites reliés à x par une arête. On décrit maintenant une procédure pour choisir uniformément un des voisins à l’aide d’une variable aléatoire uniforme sur [0, 1]. On note deg(x) le degré de x, i.e. le cardinal de l’ensemble V (x) (qui peut varier en fonction du site x). On numérote (une fois pour toute) par un indice entre 0 et deg(x) − 1 chaque arête entre x et ses voisins. Pour tout x ∈ G et u ∈ [0, 1], on définit f (x, u) comme le voisin de x dont l’arête a le numéro bdeg(x)uc, où b·c représente la partie entière. On a ainsi une construction explicite d’une marche aléatoire {Yn}n > 0 sur le graphe G en générant l’aléa à partir d’une suite {ξn}n > 1 de variables aléatoires indépendantes et uniformément distribuées sur [0, 1]
+Y0 = 0 et n > 1, Yn+1 = f (Yn, ζn+1) .
+La marche étant construite, on voudrait comprendre son comportement asymptotique : après un temps très long, quelle est la probabilité que la marche soit sur un site donné ? On verra entre autres que cette probabilité est proportionnelle au degré de chaque site.
+
+
+14 CHAPITRE 1. DE LA MARCHE ALÉATOIRE AUX JEUX DE CARTES
+Le modèle peut encore être enrichi en orientant les arêtes du graphe (cf. figure 1.4) et en autorisant seulement les transitions selon les arêtes orientées. La probabilité de chaque saut peut aussi être pondérée selon les voisins, par exemple sur le graphe de la figure 1.4 : la marche peut passer du site 1 au site 2 avec la probabilité P(1, 2) = 1/2, au site 3 avec la probabilité P(1, 3) = 1/4 et rester sur place avec la probabilité P(1, 1) = 1/4. La seule contrainte étant d’ajuster la somme des probabilités à 1.
+12
+1/2
+1/4
+1/4
+3
+1/4 3/4
+1
+FIGURE 1.4 – Un graphe orienté avec 3 sites.
+L’essentiel des exemples concrets que nous allons rencontrer dans ce cours peuvent se formaliser comme une marche aléatoire sur un graphe orienté avec des probabilités de transition associées à chaque lien. Parmi les exemples de marche aléatoire sur un graphe traités dans ce cours, nous évoquerons les robots d’indexation qui parcourent le World Wide Web pour collecter les données et indexer des pages Web. Certains graphes peuvent être compliqués et il est important de développer une théorie générale pour appréhender cette complexité.
+Terminons ce tour d’horizon sur les chaînes de Markov par le mélange de cartes. On représente un jeu de 52 cartes en numérotant leurs positions dans le paquet de 1 à K = 52. Mélanger les cartes revient à appliquer des permutations successives sur leurs positions. Mathématiquement, cette procédure n’est rien d’autre qu’une marche aléatoire sur le groupe symétrique SK des permutations sur {1, 2, . . . , K}. Initialement les cartes sont rangées dans l’ordre et l’état de départ est la permutation identité Id = {1, 2, . . . , K}. Étant donné une mesure μ de référence, on choisit au hasard une permutation σ1 sous μ et le jeu de cartes est réordonné en σ1 = σ1 ◦ Id. Pour battre les cartes, on itère plusieurs fois cette opération en tirant au hasard des permutations σ1, σ2, . . . , σn et en les composant σn ◦ · · · ◦ σ2 ◦ σ1. On peut imaginer différentes règles pour mélanger les cartes et choisir les permutation σk. Par exemple, permuter à chaque fois deux cartes choisies aléatoirement ou pour un modèle plus réaliste (mais mathématiquement plus compliqué) couper le jeu en 2 paquets et insérer l’un dans l’autre (riffle shuffle). On a ainsi construit une récurrence aléatoire sur le groupe symétrique SK. Si on mélange suffisamment longtemps le paquet, on s’attend à ce que les positions des cartes soient réparties uniformément parmi les 52! choix possibles. Pour le joueur de poker, le comportement asymptotique ne sert à rien. La véritable question est de savoir combien de fois il faut mélanger le jeu de cartes ? En termes mathématiques, on veut évaluer la vitesse de convergence vers un état d’équilibre. Cette question est déterminante pour de nombreuses applications. Si on souhaite réaliser une simulation numérique par un algorithme stochastique, il faut pouvoir prédire à quel moment la simulation peut
+
+
+15
+être arrêtée. Dans ce cours, des critères théoriques sur les vitesses de convergence seront présentés.
+Les modèles décrits précédemment sont tous des chaînes de Markov et peuvent être traités dans un formalisme unifié qui sera décrit dans les chapitres suivants.
+
+
+
+
+Chapitre 2
+Propriété de Markov
+Dans ce chapitre, nous allons définir les chaînes de Markov et présenter leurs premières propriétés.
+2.1 Propriété de Markov et matrice de transition
+Une suite de variables aléatoires {Xn}n > 0 prenant ses valeurs dans un ensemble E est appelée un processus aléatoire discret avec espace d’états E. Dans ce cours, on ne considérera que des espaces d’états E finis ou dénombrables. Le point commun entre les exemples de processus aléatoires discrets présentés au chapitre 1 est la propriété de Markov : la dépendance du processus au temps n + 1 par rapport à son passé se résume à la connaissance de l’état Xn. On peut le formaliser ainsi
+Définition 2.1 (Propriété de Markov). Soit {Xn}n > 0 un processus aléatoire discret sur un espace d’états dénombrable E. Le processus satisfait la propriété de Markov si pour toute collection d’états {x0, x1, . . . , xn, y} de E
+P
+(Xn+1 = y ∣
+∣ X0 = x0, X1 = x1, . . . , Xn = xn
+) = P (Xn+1 = y ∣
+∣ Xn = xn
+) (2.1)
+dès que les deux probabilités conditionnelles ci-dessus sont bien définies. Le processus {Xn}n > 0 sera alors appelé une chaîne de Markov. Si le membre de droite de (2.1) ne dépend pas de n, on dira que la chaîne de Markov est homogène.
+Les conditionnements dans (2.1) s’interprètent comme des probabilités conditionnelles
+P(A | B) = P(A ∩ B)
+P(B) si P(B) 6= 0
+avec les évènements A = {Xn+1 = y} et B = {X0 = x0, X1 = x1, . . . , Xn = xn}. Dans ce cours, on ne considèrera que des chaînes de Markov homogènes. La distribution d’une chaîne de Markov homogène {Xn}n > 0 peut donc être codée simplement par une matrice de transition P = {P(x, y)}x,y∈E. La matrice de transition décrit la probabilité de passer de xày ∀x, y ∈ E, P(x, y) = P (Xn+1 = y ∣
+∣ Xn = x) (2.2)
+17
+
+
+18 CHAPITRE 2. PROPRIÉTÉ DE MARKOV
+et elle satisfait
+∀x, y ∈ E, P(x, y) > 0 et ∀x ∈ E, y∈∑E
+P(x, y) = 1.
+Comme la chaîne est homogène les transitions ne dépendent pas du temps et la relation (2.2) est valable pour tout n.
+Montrons maintenant que les processus définis au chapitre 1 vérifient la propriété de Markov.
+Théorème 2.2 (Récurrence aléatoire). Soit {ξn}n > 1 une suite de variables aléatoires indépendantes et identiquement distribuées sur un espace F. Soit E un espace d’états dénombrable et f une fonction de E × F dans E. On considère aussi X0 une variable aléatoire à valeurs dans E indépendante de la suite {ξn}n > 1. La récurrence aléatoire {Xn}n > 0 définie par la relation
+n > 0, Xn+1 = f (Xn, ξn+1) (2.3)
+est une chaîne de Markov.
+Démonstration. Nous allons établir la propriété de Markov (2.1)
+P
+(Xn+1 = y ∣
+∣ X0 = x0, . . . , Xn = xn
+) = P ( f (Xn, ξn+1) = y, X0 = x0, . . . , Xn = xn)
+P (X0 = x0, . . . , Xn = xn)
+= P ( f (xn, ξn+1) = y, X0 = x0, X1 = x1, . . . , Xn = xn)
+P (X0 = x0, X1 = x1, . . . , Xn = xn) .
+L’évènement {X0 = x0, X1 = x1, . . . , Xn = xn} ne dépend que des variables {X0, ξ1, . . . , ξn} qui sont indépendantes de l’évènement { f (xn, ξn+1) = y}. Par conséquent, le numérateur est le produit de la probabilité de ces deux évènements indépendants et on en déduit
+P
+(Xn+1 = y ∣
+∣ X0 = x0, . . . , Xn = xn
+) = P ( f (xn, ξn+1) = y) = P (Xn+1 = y ∣
+∣ Xn = xn
+).
+La propriété de Markov est donc vérifiée et la formule précédente permet de déterminer la matrice de transition
+∀x, y ∈ E, P(x, y) = P ( f (x, ξ1) = y) .
+Inversement à toute matrice de transition P indexée par N = {0, 1, 2, . . .} (l’ensemble des entiers naturels), on peut associer une chaîne de Markov en construisant une récurrence aléatoire. Étant donné un état Xn = x de N, on choisit au hasard une variable aléatoire ξn+1 uniforme sur [0, 1] et on attribue à Xn+1 la valeur
+Xn+1 = y si ξn+1 ∈
+]y−1
+∑
+k=0
+P(x, k),
+y
+∑
+k=0
+P(x, k)
+]
+avec la convention ∑−1
+k=0 = 0. Cette relation définit la fonction f : N × [0, 1] 7→ N de la récurrence aléatoire (2.3). La même procédure s’applique pour une matrice de transition sur un espace E dénombrable.
+
+
+2.2. EXEMPLES DE CHAÎNES DE MARKOV 19
+2.2 Exemples de chaînes de Markov
+Variables indépendantes.
+Une suite de variables aléatoires indépendantes et identiquement distribuées constitue un exemple élémentaire de chaîne de Markov. Dans ce cas, la représentation sous forme de récurrence aléatoire est évidente Xn+1 = f (ξn+1) et la matrice de transition (2.2) ne dépend plus du site de départ
+∀x, y ∈ E, P(x, y) = P (Xn+1 = y ∣
+∣ Xn = x) = μ(y),
+où μ est la loi des variables {Xn}n > 0 sur E.
+Chaîne de Markov à 3 états.
+On considère une chaîne de Markov à 3 états, notés E = {1, 2, 3}, dont le graphe de transition est représenté figure 2.1. Sa matrice de transition P = {P(i, j)} est donnée par
+P=
+
+
+1/4 1/2 1/4 1/4 3/4 0 010
+
+ . (2.4)
+12
+1/2
+1/4
+1/4
+3
+1/4 3/4
+1
+FIGURE 2.1 – Un graphe de transitions à 3 états.
+Marche aléatoire.
+Reprenons l’exemple (1.1) de la marche aléatoire sur Z
+X0 = 0 et pour n > 0, Xn+1 =
+n+1
+∑
+i=1
+ζi = Xn + ζn+1, (2.5)
+où les {ζi}i > 1 sont des variables indépendantes et identiquement distribuées
+∀i > 1, P(ζi = 1) = p et P(ζi = −1) = q = 1 − p.
+Cette récurrence aléatoire a pour matrice de transition
+∀x, y ∈ Z, P(x, y) =
+
+ 
+ 
+p, si y = x + 1
+q, si y = x − 1
+0, sinon
+
+
+20 CHAPITRE 2. PROPRIÉTÉ DE MARKOV
+La matrice de transition est cette fois indexée par Z × Z (mais la plupart de ses coefficients sont nuls). On peut aussi considérer la marche aléatoire dans un domaine fini {1, . . . , L} par exemple en supposant que le domaine est périodique. Dans ce cas si la marche aléatoire est en L, elle sautera en 1 avec probabilité p et réciproquement elle sautera de 1 à L avec probabilité q. La matrice de transition P sera une matrice L × L
+P=
+
+     
+0 p 0 ... 0 0 q q 0 p ... 0 0 0 ... ... ... ... ... ... ...
+0 0 0 ... q 0 p p 0 0 ... 0 q 0
+
+     
+. (2.6)
+File d’attente.
+Les files d’attente interviennent dans des contextes variés : dans les magasins, pour gérer des avions au décollage, pour le stockage de requêtes informatiques avant leur traitement, etc. Le modèle le plus simple consister à supposer que ξn clients arrivent dans la file au temps n. On choisit les variables ξn indépendantes et identiquement distribuées à valeurs dans N. Le serveur sert exactement 1 client à chaque pas de temps si la file n’est pas vide. Le nombre de clients Xn dans la file au temps n vérifie donc
+Xn = (Xn−1 − 1)+ + ξn, (2.7)
+où la partie positive est notée x+ = sup{0, x}. Le processus {Xn}n > 0 est une récurrence aléatoire sur N et donc une chaîne de Markov. Sa matrice de transition est donnée pour tous x, y dans N par
+P(x, y) = P(
+ξ1 = y − (x − 1)+).
+FIGURE 2.2 – Les deux graphiques représentent le nombre de clients au cours du temps dans une file d’attente du type (2.7) où les arrivées sont distribuées selon une loi de Poisson de paramètre λ. Dans le graphique de gauche, λ vaut 0.8 et le taux de service est suffisant pour résorber les demandes. Sur la figure de droite, le nombre de clients en attente diverge avec le temps car λ = 1.2 et les arrivées sont trop importantes pour la capacité de service.
+La récurrence aléatoire (2.7) a une structure similaire à celle de la marche aléatoire (2.5), cependant leurs comportements asymptotiques peuvent être très différents. Dans la pratique, il s’avère essentiel de déterminer la stabilité d’une file d’attente en fonction
+
+
+2.3. LOI D’UNE CHAÎNE DE MARKOV 21
+de la distribution des arrivées ξn, i.e. de déterminer si Xn diverge ou non quand le temps n tend vers l’infini. Cette question sera formalisée dans la suite du cours (cf. par exemple le théorème 4.8), mais la figure 2.2 permet déjà d’entrevoir différents comportements asymptotiques selon le taux des arrivées.
+2.3 Loi d’une chaîne de Markov
+Dans cette section, on considère une chaîne de Markov homogène {Xn}n > 0 sur E dont la donnée initiale X0 est choisie aléatoirement sur E selon la mesure de probabilité μ0 qui attribue les probabilités {μ0(x)}x∈E aux éléments de E. On notera
+∀x ∈ E, Pμ0
+(X0 = x) = μ0(x).
+L’enjeu des paragraphes suivants est de déterminer la distribution de la chaîne de Markov au cours du temps.
+2.3.1 Équation de Chapman-Kolmogorov
+Après n pas de temps, Xn sera distribuée selon une loi que l’on notera μn
+∀x ∈ E, μn(x) := Pμ0
+(Xn = x).
+Avant d’énoncer l’équation de Chapman-Kolmogorov qui décrit l’évolution de la distribution μn, commençons par introduire quelques notations qui seront utilisées dans toute la suite du cours. Soit h une fonction de E dans R. On définit
+∀x ∈ E, Ph(x) = y∈∑E
+P(x, y)h(y). (2.8)
+Si E est fini, il s’agit simplement du produit à droite P · h entre la matrice P et h = {h(x)}x∈E vu comme un vecteur dont les coordonnées sont dans R. Soit μ = {μ(x)}x∈E une mesure de probabilité sur E, on définit le produit
+∀y ∈ E, μP(y) = x∈∑E
+μ(x)P(x, y). (2.9)
+Si E est fini, il s’agit du produit à gauche μ† · P entre un vecteur transposé et une matrice. Par convention, on omet le symbole transposé † dans (2.9). Pour n > 1, le produit matriciel Pn se définit par récurrence
+∀x, y ∈ E, Pn+1(x, y) = P × Pn(x, y) = z∈∑E
+P(x, z)Pn(z, y) = z∈∑E
+Pn(x, z)P(z, y)
+(2.10) avec la convention P1 = P.
+Théorème 2.3 (Chapman-Kolmogorov). Soit {Xn}n > 0 une chaîne de Markov sur E de matrice de transition P dont la donnée initiale X0 est distribuée selon la loi μ0. Alors, la probabilité d’observer la trajectoire {x0, x1, . . . , xn} est donnée par
+Pμ0
+(X0 = x0, X1 = x1, . . . , Xn = xn
+) = μ0(x0) P(x0, x1) P(x1, x2) . . . P(xn−1, xn). (2.11)
+
+
+22 CHAPITRE 2. PROPRIÉTÉ DE MARKOV
+La loi μn de Xn est déterminée par l’équation de Chapman-Kolmogorov
+∀y ∈ E, μn(y) = μn−1P(y) = μ0Pn(y). (2.12)
+Si initialement la chaîne de Markov part de X0 = x, alors la distribution initiale est donnée par μ0(y) = 1{y=x} et (2.12) s’écrit
+∀y ∈ E, P(Xn = y ∣
+∣ X0 = x) = Pn(x, y). (2.13)
+Soit h une fonction bornée de E dans R. Si initialement X0 = x, l’espérance de h(Xn) s’écrit
+E
+(h(Xn) ∣
+∣ X0 = x) = Pnh(x). (2.14)
+L’espérance E(h(Xn) ∣
+∣ X0 = x) sachant la donnée initiale est, à ce stade, posée comme une notation, mais on verra au chapitre 9 que celle-ci coïncide avec l’espérance conditionnelle. On interprète l’équation de Chapman-Kolmogorov en disant que la probabilité d’observer Xn en y est la somme des probabilités de toutes les trajectoires possibles de la chaîne de Markov partant de x0 et arrivant en y au temps n
+∀y ∈ E, μn(y) = ∑
+{x0 ,x1 ,...,xn−1 }∈En
+μ0(x0) P(x0, x1) P(x1, x2) . . . P(xn−1, y).
+Réciproquement, on remarquera que tout processus {Xn}n > 0 dont la distribution satisfait (2.11) pour tout n > 0 est une chaîne de Markov.
+Démonstration du théorème 2.3. Pour prouver (2.11), on procède par des conditionnements successifs et on applique la propriété de Markov (2.1) à chaque étape pour retrouver les probabilités de transition (2.2)
+Pμ0
+(X0 = x0, . . . , Xn = xn
+)
+= Pμ0
+(X0 = x0, . . . , Xn−1 = xn−1
+)Pμ0
+(Xn = xn
+∣
+∣ X0 = x0, . . . , Xn−1 = xn−1
+)
+= Pμ0
+(X0 = x0, . . . , Xn−1 = xn−1
+)P(xn−1, xn) = μ0(x0) P(x0, x1) P(x1, x2) . . . P(xn−1, xn).
+À la dernière étape, nous avons utilisé que X0 est distribuée selon μ0.
+Pour obtenir la loi de Xn, on écrit que Xn−1 peut prendre toutes les valeurs possibles
+μn(y) = Pμ0
+(Xn = y) = x∈∑E
+Pμ0
+(Xn−1 = x, Xn = y)
+= x∈∑E
+Pμ0
+(Xn−1 = x)Pμ0
+(Xn = y ∣
+∣ Xn−1 = x)
+= x∈∑E
+μn−1(x)P(x, y) = μn−1P(y) = μ0Pn(y)
+où la dernière relation s’obtient par récurrence. L’identité (2.13) n’est qu’un cas particulier de l’équation de Chapman-Kolmogorov (2.12) pour une mesure initiale concentrée en x. Si initialement X0 = x, l’espérance de h(Xn) peut se décomposer à l’aide de (2.13)
+E
+(h(Xn) ∣
+∣ X0 = x) = ∑y
+h(y)P(Xn = y ∣
+∣ X0 = x) = ∑y
+Pn(x, y)h(y) = Pnh(x).
+
+
+2.3. LOI D’UNE CHAÎNE DE MARKOV 23
+Reprenons l’exemple de la chaîne à 3 états dont la matrice de transition est donnée par (2.4). Les probabilités de transition après 2 pas de temps sont obtenues par produit matriciel P(X2 = y|X0 = x) = P2(x, y)
+P2 =
+
+
+3/16 3/4 1/16 1/4 11/16 1/16 1/4 3/4 0
+
+.
+Notations.
+Soit A un évènement portant sur la trajectoire de la chaîne de Markov {Xn}n > 0. Si la chaîne de Markov part d’un site x de E, la probabilité de A sera notée
+Px
+(A) := P(A ∣
+∣ X0 = x).
+Si la donnée initiale X0 est distribuée sous μ0, on notera
+Pμ0
+(A) := x∈∑E
+μ0(x)P(A ∣
+∣ X0 = x). (2.15)
+On utilisera l’abréviation suivante pour décrire l’espérance au temps n d’une chaîne de Markov partant d’un site x de E
+Ex
+(h(Xn)) := E(h(Xn) ∣
+∣ X0 = x) = y∈∑E
+h(y)P(Xn = y ∣
+∣ X0 = x). (2.16)
+Si la variable X0 est initialement distribuée sous une mesure μ0, on notera
+Eμ0
+(h(Xn)) := μ0Pnh = ∑
+{x0 ,x1 ,...,xn }∈En+1
+μ0(x0) P(x0, x1) . . . P(xn−1, xn)h(xn). (2.17)
+2.3.2 Processus décalé en temps
+Le théorème ci-dessous est une généralisation simple, mais très utile, de la propriété de Markov (2.1).
+Théorème 2.4. Pour toute collection d’états {x0, . . . , xn, y1, . . . , yK} de E
+P
+(Xn+1 = y1, . . . , Xn+K = yK
+∣
+∣X0 = x0, . . . , Xn = xn
+) = P (X1 = y1, . . . , XK = yK
+∣
+∣X0 = xn
+).
+(2.18)
+Soit A un évènement de EK dépendant uniquement des variables {Xn+1, . . . , Xn+K} et B un évènement de En dépendant de {X0, . . . , Xn−1}. Si {Xn = xn} est fixé, alors le conditionnement jusqu’au temps n n’est pas affecté par l’évènement B
+P
+(A∣
+∣{Xn = xn} ∩ B) = P (A∣
+∣Xn = xn
+) . (2.19)
+De plus, conditionnellement à {Xn = xn}, les évènements A et B sont indépendants
+P
+(A ∩ B∣
+∣Xn = xn
+) = P (A∣
+∣Xn = xn
+) P (B∣
+∣Xn = xn
+) . (2.20)
+
+
+24 CHAPITRE 2. PROPRIÉTÉ DE MARKOV
+L’identité (2.18) s’interprète en disant que conditionnellement à {Xn = xn}, le processus décalé en temps {Xn+k}k > 0 est une chaîne de Markov de matrice de transition P partant de xn au temps 0 et indépendante du passé (cf. figure 2.3).
+B
+A
+Xn = xn
+FIGURE 2.3 – Pour illustrer le théorème 2.4, on considère une marche aléatoire et deux évènements. L’évènement A correspond au passage de la marche à travers la zone rose après le temps n et B au passage à travers la zone bleue. Si Xn = xn est fixé le comportement de la marche aléatoire après n est indépendant du fait que B soit réalisé avant le temps n.
+Démonstration. On prouve le résultat à l’aide du théorème 2.3
+P
+(Xn+1 = y1, . . . , Xn+K = yK
+∣
+∣ X0 = x0, . . . , Xn = xn
+)
+= P (X0 = x0, . . . , Xn = xn, Xn+1 = y1, . . . , Xn+K = yK)
+P (X0 = x0, . . . , Xn = xn)
+= P(xn, y1)P(y1, y2) . . . P(yK−1, yK)
+= P (X1 = y1, . . . , XK = yK
+∣
+∣ X0 = xn
+),
+où la seconde égalité s’obtient en utilisant la relation (2.11).
+Pour montrer l’identité (2.19), on écrit
+P
+(A∣
+∣{Xn = xn} ∩ B) = P (A ∩ {Xn = xn} ∩ B)
+P ({Xn = xn} ∩ B) . (2.21)
+La probabilité au numérateur se décompose en fonction des trajectoires
+P
+(A ∩ {Xn = xn} ∩ B) = ∑
+{x0 ,...,xn−1 }∈B
+{y1,...,yK }∈A
+P (X0 = x0, . . . , Xn = xn, Xn+1 = y1, . . . , Xn+K = yK)
+=∑
+{x0 ,...,xn−1 }∈B
+{y1,...,yK }∈A
+P (X0 = x0, . . . , Xn = xn) P (X0 = x0, . . . , Xn = xn, Xn+1 = y1, . . . , Xn+K = yK)
+P (X0 = x0, . . . , Xn = xn)
+=∑
+{x0 ,...,xn−1 }∈B
+{y1,...,yK }∈A
+P (X0 = x0, . . . , Xn = xn) P (Xn+1 = y1, . . . , Xn+K = yK
+∣
+∣ X0 = x0, . . . , Xn = xn
+).
+
+
+2.4. TEMPS D’ARRÊT ET PROPRIÉTÉ DE MARKOV FORTE 25
+L’évènement {Xn = xn} étant fixé, la relation (2.18) permet de simplifier cette expression
+P
+(A ∩ {Xn = xn} ∩ B)
+=∑
+{x0 ,...,xn−1 }∈B
+{y1,...,yK }∈A
+P (X0 = x0, . . . , Xn = xn) P (Xn+1 = y1, . . . , Xn+K = yK
+∣
+∣ Xn = xn
+)
+= P (A ∣
+∣ Xn = xn
+)∑
+{x0,...,xn−1}∈B
+P (X0 = x0, . . . , Xn = xn)
+= P (A ∣
+∣ Xn = xn
+) P (B ∩ {Xn = xn}) . (2.22)
+Le quotient (2.21) se simplifie et l’identité (2.19) est ainsi prouvée.
+La preuve de (2.20) est similaire, il suffit d’appliquer une nouvelle fois (2.22)
+P
+(A ∩ B∣
+∣Xn = xn
+) = P (A ∩ {Xn = xn} ∩ B)
+P (Xn = xn) = P (A ∣
+∣ Xn = xn
+) P (B ∩ {Xn = xn})
+P (Xn = xn)
+= P (A∣
+∣Xn = xn
+) P (B∣
+∣Xn = xn
+).
+La propriété de Markov forte, qui sera établie dans la section suivante, généralise le théorème 2.4 en conditionnant en fonction de temps aléatoires.
+2.4 Temps d’arrêt et propriété de Markov forte
+Un temps d’arrêt T associé à un processus aléatoire discret {Xn}n > 0 est une variable aléatoire à valeurs dans N ∪ {+∞} telle que pour tout n > 0, l’évènement {T = n} est entièrement déterminé par les variables {X0, . . . , Xn}, c’est-à-dire que pour tout n, il
+existe une fonction φn : En+1 → R telle que
+1{T=n} = φn(X0, . . . , Xn).
+Un temps d’arrêt très souvent utilisé est le premier temps d’atteinte d’un sous-ensemble A ⊂ E par le processus {Xn}n > 0
+TA = inf {n > 0; Xn ∈ A},
+avec éventuellement TA = +∞ si le sous-ensemble A n’est jamais atteint. On a alors
+1{TA=n} = 1{X06∈A,..., Xn−16∈A, Xn∈A}.
+Un temps d’arrêt T permet de stopper un processus {Xn}n > 0 à un temps aléatoire dépendant uniquement du passé et du présent : l’évènement {T = n} ne doit pas contenir d’information sur ce qui se passe au-delà du temps n. Par exemple, on peut chercher le meilleur moment pour convertir une devise sur le marché des changes. Le moment optimal sera choisi par rapport à la connaissance du passé et du présent, mais, à moins de délit d’initié, la décision ne pourra pas être influencée par le futur. Les temps d’arrêt jouent un rôle privilégié dans la théorie des processus aléatoires et nous les retrouverons
+
+
+26 CHAPITRE 2. PROPRIÉTÉ DE MARKOV
+∂B
+XT
+FIGURE 2.4 – La trajectoire d’une marche aléatoire partant de l’origine est représentée sur ce schéma. La marche atteint la frontière de la boule ∂B pour la première fois au temps d’arrêt T. Conditionnellement au point d’impact XT, la seconde partie de la trajectoire est indépendante de la première.
+tout au long de ce cours. En particulier, nous en donnerons une définition plus formelle au chapitre 9 (section 9.4) .
+Une conséquence importante de la propriété de Markov est que le processus décalé en temps {Xn+k}k > 0 demeure, conditionnellement à {Xn = x}, une chaîne de Markov de matrice de transition P partant de x au temps 0 (cf. section 2.3.2). Cette propriété reste valable pour des décalages en temps par des temps d’arrêt.
+Théorème 2.5 (Propriété de Markov forte). Soit {Xn}n > 0 une chaîne de Markov de matrice de transition P et de loi initiale μ0. On considère T un temps d’arrêt pour cette chaîne de Markov. Conditionnellement à {T < ∞} et XT = x, le processus décalé en temps {XT+k}k > 0 est une chaîne de Markov de matrice de transition P partant initialement de x. De plus, toujours conditionnellement à {T < ∞} et XT = x, la chaîne de Markov {XT+k}k > 0 est indépendante de {X0, X1, . . . , XT−1}.
+Démonstration. On rappelle que la notation Pμ0 est définie en (2.15). Soit B un évènement dépendant uniquement de {X0, X1, . . . , XT−1}. Alors pour tout entier `, l’évènement B ∩ {T = `} est déterminé par {X0, X1, . . . , X`}. On peut donc écrire pour tout k > 1
+Pμ0
+({XT+1 = x1, . . . , XT+k = xk} ∩ B ∩ {T = `} ∩ {XT = x})
+= Pμ0
+({X`+1 = x1, . . . , X`+k = xk} ∩ B ∩ {T = `} ∩ {X` = x})
+= P(X1 = x1, . . . , Xk = xk
+∣
+∣ X0 = x) Pμ0
+(B ∩ {T = `} ∩ {X` = x})
+où la dernière égalité est une conséquence de la propriété de Markov (2.18) au temps `. Il suffit de sommer ces équations pour toutes les valeurs de ` et on obtient
+Pμ0
+({XT+1 = x1, . . . , XT+k = xk} ∩ B ∩ {XT = x} ∩ {T < ∞})
+= P(X1 = x1, . . . , Xk = xk
+∣
+∣ X0 = x) Pμ0
+(B ∩ {XT = x} ∩ {T < ∞}).
+Pour conclure le théorème, on reconstruit les probabilités conditionnelles en divisant les deux membres de l’équation par Pμ0
+({XT = x} ∩ {T < ∞})
+Pμ0
+({XT+1 = x1, . . . , XT+k = xk} ∩ B ∣
+∣ {XT = x} ∩ {T < ∞})
+= P(X1 = x1, . . . , Xk = xk
+∣
+∣ X0 = x) Pμ0
+(B ∣
+∣ {XT = x} ∩ {T < ∞}).
+
+
+2.5. APPLICATIONS 27
+La propriété de Markov forte sera utilisée à plusieurs reprises dans la suite du cours. L’exemple du temps d’atteinte, illustré figure 2.4, montre l’intérêt de cette propriété.
+2.5 Applications
+Cette section regroupe trois applications de la propriété de Markov. La première met en évidence les liens entre la loi d’une marche aléatoire et l’équation de la chaleur en utilisant simplement l’équation de Chapman-Kolmogorov. L’importance des temps d’arrêt est ensuite illustrée dans les deux applications suivantes.
+2.5.1 Équation de la chaleur ?
+On considère la marche aléatoire symétrique {Xn}n > 0 sur l’intervalle {1, . . . , L} avec conditions périodiques dont la matrice de transition a été définie en (2.6) (en choisissant p = q = 1/2). L’équation de Chapman-Kolmogorov de la distribution au temps n + 1 s’écrit
+∀x ∈ {1, . . . , L}, (2.23)
+μn+1(x) = μn(x + 1)P(x + 1, x) + μn(x − 1)P(x − 1, x) = 1
+2 μn(x + 1) + 1
+2 μn(x − 1)
+où on identifie L + 1 avec le site 1 et 0 avec le site L. Cette équation dit simplement que pour être en x au temps n + 1, la marche devait se trouver en x − 1 ou x + 1 au temps précédent. On peut ainsi déterminer complètement μn au cours du temps. Pour ceci, nous allons étudier des lois initiales de la forme
+∀x ∈ {1, . . . , L}, μ0(x) = 1
+L
+(
+1+
+K
+∑
+k=1
+ak cos
+( 2π
+L kx
+)
++ bk sin
+( 2π
+L kx
+)
+)
+(2.24)
+avec K ∈ {1, . . . , L} et où les coefficients ak, bk vérifient
+inf
+r∈[0,1]
+{K
+∑
+k=1
+ak cos (2πkr) + bk sin (2πkr)
+}
+> − 1 (2.25)
+(cette dernière condition sert juste à assurer que la probabilité μ0 ne prend pas des valeurs négatives). Si tous les ak, bk sont nuls, la donnée initiale est uniformément distribuée sur {1, . . . , L}. Les coefficients ak, bk sont simplement les coefficients de la transformée de Fourier (discrète) de μ0 et par conséquent toute mesure initiale peut être décomposée sous la forme (2.24). En utilisant les identités
+cos(a + b) + cos(a − b) = 2 cos(b) cos(a) et sin(a + b) + sin(a − b) = 2 cos(b) sin(a)
+on voit que
+μn(x) = 1
+L
+(
+1+
+K
+∑
+k=1
+cos
+( 2π
+Lk
+)n [
+ak cos
+( 2π
+L kx
+)
++ bk sin
+( 2π
+L kx
+)]
+)
+(2.26)
+
+
+28 CHAPITRE 2. PROPRIÉTÉ DE MARKOV
+est bien la solution de la récurrence (2.23) avec donnée initiale μ0.
+Nous allons appliquer ce résultat pour étudier le comportement d’une particule marquée dans un liquide. Le marquage de particules est souvent utilisé pour suivre les déplacements de matières dans une réaction chimique ou dans le sang. Pour modéliser le déplacement d’un marqueur placé dans une solution, nous allons supposer que le marqueur est distribué initialement dans une boîte [0, 1]d (de 1cm de côté) selon une loi de densité ρ0(r). Subdivisons la boîte [0, 1]d en Ld petits cubes de côté 1/L avec L très grand (disons
+que 1/L est de l’ordre de 10−6cm soit quelques centaines d’ångströms). Le comportement microscopique précis du marqueur est très compliqué à décrire et nous nous contenterons d’une approximation en suivant simplement le cube où le marqueur se trouve. La solution étant à l’équilibre, le marqueur se déplace uniformément au gré des collisions microscopiques et on suppose qu’il peut passer d’un cube à un de ses voisins avec probabilité 1
+2d (pour simplifier, on exclut les cubes voisins qui n’ont pas de face commune). Pour décrire l’évolution temporelle de ce marqueur, nous allons seulement considérer le cas de la dimension d = 1 qui correspond à un déplacement sur l’intervalle [0, 1] (le cas général se traiterait de la même façon) et nous identifierons cet intervalle à un domaine périodique. Dans ce cadre simplifié, le marqueur a un comportement statistique proche de celui d’une marche aléatoire dans le domaine {1, . . . , L} pour L extrêmement grand. On va donc analyser l’asymptotique de (2.26) quand L tend vers l’infini.
+1/L
+10 20 30 40 50 x
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4
+FIGURE 2.5 – Sur le schéma de gauche, la boîte [0, 1]2 a été subdivisée en carrés de côté 1/L et la position du marqueur est identifiée par le carré dans lequel il se trouve. Le graphe de droite représente la discrétisation de la densité ρ0(r) = 1 + sin(2π r)/2 en subdivisant l’intervalle [0, 1] avec L = 50.
+La première étape est de décrire la donnée initiale. À l’échelle macroscopique, le marqueur est distribué dans la boîte [0, 1] selon la densité ρ0(r) qui sera choisie de la forme
+ρ0(r) = 1 +
+K
+∑
+k=1
+ak cos (2πkr) + bk sin (2πkr)
+où K est un entier fixé et les ak, bk vérifient (2.25). On définit aussi
+∀t > 0, ρ(t, r) = 1 +
+K
+∑
+k=1
+exp ( − 2π2k2 t) [ak cos (2πkr) + bk sin (2πkr)] . (2.27)
+
+
+2.5. APPLICATIONS 29
+La répartition microscopique initiale s’obtient par discrétisation (cf. figure 2.5)
+∀x ∈ {1, . . . , L}, μ0(x) = 1
+L ρ0
+(x
+L
+)
+et satisfait donc (2.24). L’évolution de la mesure μn a été déterminée en (2.26). Soit r ∈ [0, 1] une position macroscopique et t > 0 un temps macroscopique, on leur associe les suites d’entiers
+xL = b rL c ∈ {1, . . . , L}, nL = b tL2 c ∈ N
+où b·c est la partie entière. Il faut interpréter xL comme la position microscopique correspondant à r et nL comme un temps microscopique
+Lli→m∞
+xL
+L = r, Lli→m∞
+nL
+L2 = t.
+Pour tout k 6 K, on a
+Lli→m∞ cos
+( 2π
+Lk
+)nL [
+ak cos
+( 2π
+L kxL
+)
++ bk sin
+( 2π
+L kxL
+)]
+= exp ( − 2π2k2 t) [ak cos (2πkr) + bk sin (2πkr)]
+ceci s’obtient en utilisant le développement limité du cosinus à l’origine
+cos
+( 2π
+Lk
+)nL
+=
+(
+1− 1
+2
+( 2π
+Lk
+)2
++o
+(1
+L3
+)
+)nL
+= exp
+(
+− 2π2k2
+L2 nL + o
+(1
+L
+))
+≈ exp ( − 2π2k2 t).
+On en déduit que la densité microscopique μnL converge vers la densité macroscopique ρ(t, r) définie en (2.27)
+Lli→m∞ L μnL (xL) = ρ(t, r).
+On vérifie facilement que ρ(t, r) satisfait l’équation de la chaleur
+∂tρ(t, r) = 1
+2 ∂r2ρ(t, r).
+Dans la pratique comme L est très grand, le comportement macroscopique du marqueur est bien décrit par l’équation de la chaleur. Le passage de modèles microscopiques où le comportement est aléatoire à des descriptions macroscopiques plus régulières (comme ici l’équation de la chaleur) est un problème très étudié en physique et en mathématiques. De nombreuses théories ont été développées pour comprendre comment des structures régulières peuvent émerger dans la limite macroscopique, mais des problèmes ouverts demeurent et il s’agit d’un domaine de recherche actuellement très actif en mathématiques.
+On remarquera que le passage des coordonnées microscopiques xL, nL aux coordonnées macroscopiques r, t s’est fait en changeant l’échelle spatiale d’un facteur L et le temps d’un facteur L2. Ce changement d’échelle est lié au théorème central limite, en effet le marqueur effectue une marche aléatoire et il ne peut explorer que des distances
+de l’ordre √n en un temps n. Pour que le marcheur puisse se déplacer d’une distance de l’ordre de L, il faut donc attendre des temps proportionnels à L2. Cette analogie entre la limite gaussienne de la marche aléatoire et l’équation de la chaleur est au coeur de la théorie du mouvement brownien.
+
+
+30 CHAPITRE 2. PROPRIÉTÉ DE MARKOV
+2.5.2 Ruine du joueur
+Imaginons 2 joueurs A et B qui décident de miser leurs fortunes respectives a et b au jeu. À la fin de chaque partie, la fortune du gagnant augmente de 1 et celle du perdant diminue de 1. Le jeu s’arrête quand l’un des deux joueurs est ruiné. Retraduit en termes probabilistes, on se donne p ∈ [0, 1] et une suite de variables aléatoires indépendantes, identiquement distribuées
+P(ξi = 1) = p et P(ξi = −1) = 1 − p .
+On notera Xn = X0 + ∑in=1 ξi la fortune de A au temps n et X0 = a sa fortune initiale. La
+fortune de B est alors donnée par a + b − Xn. Par construction, {Xn}n > 0 est une chaîne de Markov partant de a au temps 0. Si p = 1/2 le jeu est équilibré, sinon il est biaisé et un des joueurs a plus de chances de gagner que l’autre. On cherche à déterminer la probabilité que le joueur A soit ruiné avant B c’est-à-dire la probabilité avec laquelle le processus X = {Xn}n > 0, qui décrit la fortune de A, va atteindre 0 avant a + b (cf. figure 2.6)
+u(a) = Pa
+(X atteint 0 avant a + b).
+On peut réécrire cette probabilité à l’aide des temps d’arrêt
+T0 = inf{n > 0; Xn = 0} et Ta+b = inf{n > 0; Xn = a + b}.
+On admet que pour presque toute trajectoire la chaîne de Markov {Xn}n > 0 atteindra 0 ou a + b au bout d’un temps fini presque sûrement (ce résultat sera prouvé au lemme 3.8). Par conséquent inf{T0, Ta+b} est fini presque sûrement et on peut réécrire
+u(a) = Pa
+(T0 < Ta+b
+).
+FIGURE 2.6 – Premier temps d’atteinte de 20 = a + b ou de 0 pour la marche aléatoire symétrique Xn partant de a = 10. Dans cette réalisation T20 = 176 < T0.
+Au lieu de chercher uniquement à calculer u(a), nous allons généraliser la question et supposer que la chaîne de Markov puisse prendre toutes les valeurs initiales i ∈ {1, . . . , a + b − 1}
+u(i) = Pi
+(T0 < Ta+b
+).
+
+
+2.5. APPLICATIONS 31
+On pose aussi
+u(0) = 1 et u(a + b) = 0.
+Pour calculer u, nous allons effectuer une analyse du premier pas. L’idée consiste à conditionner la trajectoire en fonction des valeurs prises par X1 pour démontrer que u satisfait les équations suivantes
+i ∈ {1, . . . , a + b − 1}, u(i) = pu(i + 1) + (1 − p)u(i − 1). (2.28)
+On définit X ̃ la chaîne de Markov décalée en temps X ̃ n = Xn+1 pour n > 0. Si X0 6=
+0, a + b alors les évènements {X atteint 0 avant a + b} et {X ̃ atteint 0 avant a + b} sont identiques. Par l’identité (2.18), X0 et {X ̃ n}n > 0 sont indépendants sachant X1. On obtient donc pour i ∈ {1, . . . , a + b − 1}
+P
+({T0 < Ta+b}, X0 = i, X1 = i + 1) = P({X atteint 0 avant a + b}, X0 = i, X1 = i + 1)
+= P({X ̃ atteint 0 avant a + b}, X0 = i, X1 = i + 1)
+= P(X0 = i, X1 = i + 1)P({X ̃ atteint 0 avant a + b} ∣
+∣X ̃ 0 = i + 1).
+La chaîne de Markov décalée en temps X ̃ ayant la même loi que {Xn}n > 0, l’identité se réécrit donc
+P
+({T0 < Ta+b}, X0 = i, X1 = i + 1) = P(X0 = i) p u(i + 1). (2.29)
+De la même façon, si X1 = i − 1, on obtient
+P
+({T0 < Ta+b}, X0 = i, X1 = i − 1) = P(X0 = i) (1 − p) u(i − 1). (2.30)
+Étant donné X0 = i, le pas suivant sera X1 = i ± 1
+u(i) = Pi
+({T0 < Ta+b}, X1 = i + 1) + Pi
+({T0 < Ta+b}, X1 = i − 1).
+En utilisant (2.29) et (2.30), on obtient la relation annoncée en (2.28)
+i ∈ {1, . . . , a + b − 1}, u(i) = pu(i + 1) + (1 − p)u(i − 1)
+avec u(0) = 1 et u(a + b) = 0. On peut ensuite déterminer explicitement les solutions de cette récurrence linéaire en remarquant que les racines du polynôme caractéristique associé py2 − y + (1 − p) sont 1 et (1 − p)/p. On distingue deux cas.
+Jeu biaisé.
+Quand p 6= 1/2, les racines du polynôme sont distinctes et la solution de (2.28) s’écrit
+sous la forme u(i) = c1 + c2
+( 1−p p
+)i. Il suffit ensuite d’ajuster les constantes c1 et c2 en
+fonction des conditions aux bords pour conclure
+u(i) =
+( 1−p p
+)(a+b) −
+( 1−p p
+)i
+( 1−p p
+)(a+b) − 1
+.
+
+
+32 CHAPITRE 2. PROPRIÉTÉ DE MARKOV
+Jeu équilibré.
+Quand p = 1/2, les deux racines du polynôme valent 1 et on trouve
+u(i) = 1 − i
+a+b.
+Ces résultats permettent de retrouver la valeur u(a) cherchée qui vaut
+u(a) =
+( 1−p p
+)(a+b) −
+( 1−p p
+)a
+( 1−p p
+)(a+b) − 1
+.
+pour un jeu biaisé et u(a) = b
+a+b dans le cas d’un jeu équilibré.
+On définit T = inf{T0, Ta+b} le temps où le jeu s’arrête. Une méthode analogue permet de calculer l’espérance Ei(T). En utilisant la chaîne de Markov décalée en temps
+X ̃ n = Xn+1, on obtient pour tout i dans {1, . . . , a + b − 1}
+Ei(T) = 1 + p Ei+1(T) + (1 − p) Ei−1(T).
+Il suffit donc de résoudre le système linéaire satisfait par v(i) = Ei(T)
+v(i) = 1 + p v(i + 1) + (1 − p) v(i − 1)
+avec les conditions aux bords v(0) = v(a + b) = 0. Dans le cas d’un jeu équilibré (p = 1/2), on trouve pour tout i de {0, . . . , a + b}
+Ei(T) = i(a + b − i). (2.31)
+Le problème de la ruine du joueur constitue un cas d’école, mais des questions similaires se posent aux compagnies d’assurance qui cherchent à estimer la probabilité d’incidents aléatoires pouvant les conduire à la faillite.
+2.5.3 Méthode de Monte-Carlo pour un problème de Dirichlet ?
+L’équation de Laplace intervient dans de nombreux domaines de la physique (mécanique des fluides, électromagnétisme...) et elle joue un rôle clef en analyse. Le problème de Dirichlet associé se formule de la façon suivante. On considère un domaine D borné, connexe et régulier de R2. Les résultats suivants se généralisent facilement à toute dimension d > 1. Le bord de D sera noté ∂D. Étant donnée une fonction régulière φ définie sur ∂D, on cherche à déterminer f : D → R telle que
+∆ f (r) =
+2
+∑
+k=1
+∂k2 f (r) = 0 et ∀r ∈ ∂D, f (r) = φ(r) (2.32)
+où ∂k2 est la dérivée seconde par rapport à la kième coordonnée. Cette équation modélise par exemple la variation de température dans une plaque de métal en contact avec différentes sources de chaleur sur son bord. La plaque de métal est représentée par le domaine
+
+
+2.5. APPLICATIONS 33
+D, la température au point r ∈ D par f (r) et les températures au bord de la plaque sont égales à φ.
+Il existe différentes méthodes pour résoudre numériquement l’équation (2.32). Nous allons décrire une approche probabiliste dite méthode de Monte-Carlo. La première étape consiste à discrétiser le domaine D avec un maillage de taille 1/L, on notera DL le réseau discret correspondant
+DL =
+{( i
+L, j
+L
+)
+∈ D avec i, j ∈ Z2
+}
+= D⋂ 1
+L Z2 .
+Le bord discret ∂DL est constitué des sites de Dc ⋂ 1
+L Z2 à distance inférieure à 1/L de D (cf. figure 2.7).
+∂D T1
+T2
+T3
+T4
+∂DL
+FIGURE 2.7 – Un domaine borné D ⊂ R2 avec différentes températures imposées sur son bord ∂D. Le maillage de D induit une frontière discrète ∂DL représentée par les sites gris.
+Considérons f une fonction C3 sur D. La formule de Taylor implique que
+
+
+
+f
+(( i+1
+L ,j
+L
+))
+−f
+(( i
+L, j
+L
+))
+=1
+L ∂1 f
+(( i
+L, j
+L
+))
++1
+2L2 ∂21 f
+(( i
+L, j
+L
+))
++ O(1/L3)
+f
+(( i−1
+L ,j
+L
+))
+−f
+(( i
+L, j
+L
+))
+= −1
+L ∂1 f
+(( i
+L, j
+L
+))
++1
+2L2 ∂21 f
+(( i
+L, j
+L
+))
++ O(1/L3)
+En sommant ces deux équations, on obtient une approximation de la dérivée seconde ∂21 quand le pas du maillage tend vers 0
+∂21 f
+(( i
+L, j
+L
+))
+= L2
+[
+f
+(( i + 1
+L ,j
+L
+))
++f
+(( i − 1
+L ,j
+L
+))
+−2f
+(( i
+L, j
+L
+))]
++ O(1/L).
+Pour toute fonction F de DL ∪ ∂DL dans R, on définit le Laplacien discret en tout point x de DL par
+∆ ̄ F(x) = ∑
+y∈DL ∪∂DL ,
+y∼x
+(F(y) − F(x))
+où la notation y ∼ x signifie qu’on somme sur les voisins y de x, c’est-à-dire les sites de DL ∪ ∂DL à distance 1/L de x. En particulier si x est proche du bord, les valeurs de F sur la frontière ∂DL interviennent. Les calculs précédents justifient cette définition car pour des fonctions f régulières, le Laplacien discret est une bonne approximation du Laplacien
+
+
+34 CHAPITRE 2. PROPRIÉTÉ DE MARKOV
+∆ f (x) = L2∆ ̄ f (x) + O(1/L). Le problème de Dirichlet continu (2.32) peut être approché par le problème de Dirichlet discret
+∀x ∈ DL, ∆ ̄ F(x) = 0 et ∀y ∈ ∂DL, F(y) = φL(y) (2.33)
+où la contrainte de Dirichlet φ sur ∂D a été discrétisée en une fonction φL sur ∂DL.
+La solution du problème de Dirichlet discret peut s’écrire à l’aide d’une marche aléatoire {Xn}n > 0 sur 1
+L Z2 qui saute uniformément d’un site à chacun de ses voisins avec
+probabilité 1
+4 . On note T∂DL le premier temps d’atteinte du bord ∂DL par cette marche
+et XT∂DL le site de ∂DL où la marche est sortie. On admet (provisoirement) que T∂DL est
+fini presque sûrement, c’est-à-dire qu’une marche aléatoire finit toujours par sortir du domaine (ceci sera vérifié au lemme 3.8). On définit
+∀x ∈ DL, F(x) = Ex
+(
+φL(XT∂DL )
+)
+. (2.34)
+Nous vérifierons dans la suite que la fonction F est l’unique solution du problème de Dirichlet discret (2.33). Avant cela, nous allons utiliser cette représentation probabiliste pour déterminer numériquement la solution de (2.33). Pour chaque site x de DL, la valeur de F(x) se calcule en évaluant l’espérance de la fonction φL au point où la marche aléatoire partant de x ∈ DL a touché ∂DL pour la première fois. Concrètement pour calculer F(x), il suffit de construire K réalisations de la
+marche aléatoire {X(i)
+n }i 6 K partant de x ∈ DL et de prendre la moyenne sur les différents
+points de sortie X(i)
+T∂DL du domaine DL. Les K marches étant indépendantes, les variables
+φL(X(i)
+T∂DL
+) sont indépendantes, identiquement distribuées et la loi des grands nombres
+fournit une approximation de F quand K tend vers l’infini
+Kli→m∞
+1 K
+K
+∑
+i=1
+φL(X(i)
+T∂DL
+) = Ex
+(
+φL(XT∂DL )
+)
+presque sûrement. (2.35)
+Il faudra choisir K de façon optimale pour que l’approximation (2.35) donne des résultats pertinents sans nécessiter des temps de calcul trop longs. Le temps nécessaire pour réaliser ces simulations sera proportionnel à K Ex(T∂DL ).
+Il reste à vérifier que F est bien solution du problème de Dirichlet discret (2.33). On remarque que le cas de la dimension 1 a déjà été traité avec la ruine du joueur en (2.28) : on avait alors L = a + b et φL(0) = 1, φL(L) = 1. On procède de la même façon en décomposant la trajectoire de la marche aléatoire en fonction du premier pas. Étant donné X0 = x dans DL, le pas suivant sera X1 = y pour y ∼ x
+F(x) = y∼ ∑x
+Ex
+(
+φL(XT∂DL ) 1X1=y
+).
+En considérant, comme dans la ruine du joueur, la marche décalée en temps X ̃ n = Xn+1, on voit que F est la solution de l’équation de Laplace discrète
+F(x) = 1
+4 y∼ ∑x
+F(y) ⇒ ∆ ̄ F(x) = 0 .
+
+
+2.5. APPLICATIONS 35
+De plus si x appartient au bord ∂DL alors XT∂DL = x. La fonction F satisfait bien la
+contrainte de Dirichlet sur le bord. Par conséquent (2.34) fournit une représentation explicite de la solution du problème de Dirichlet discret (2.33). On peut facilement vérifier que la solution de (2.33) est unique. En effet, si F1 et F2 sont
+deux solutions alors ψ = F2 − F1 satisfait ∆ ̄ ψ = 0 et vaut 0 sur le bord ∂DL. Supposons que ψ atteigne son maximum en x0 ∈ DL. Comme
+ψ(x0) = 1
+4 y∼∑x0
+ψ(y) et ψ(y) 6 ψ(x0)
+alors ψ(y) = ψ(x0) pour tous les voisins de y de x0. En itérant cette procédure, on peut trouver un chemin de sites x0, x1, x2, . . . , x` avec x` ∈ ∂DL tels que xi ∼ xi+1 pour tout i > 0 et ψ(xi) = ψ(x0). Comme x` ∈ ∂DL, on en déduit que 0 = ψ(x0). Le maximum de ψ étant pris en x0, ceci implique que ψ 6 0. Par symétrie ψ > 0 et on a donc prouvé l’unicité de la solution du problème de Dirichlet discret (2.33).
+La méthode de Monte-Carlo permet d’évaluer la formulation probabiliste (2.33) du problème de Dirichlet discret. Dans la pratique plusieurs questions se posent pour mettre en œuvre cette méthode de Monte-Carlo. Quel pas de maillage 1/L doit-on prendre pour que le problème de Dirichlet discret (2.33) approche correctement l’équation limite. La valeur de L étant choisie, combien de marches indépendantes en chaque site doit-on lancer pour que la moyenne empirique (2.35) décrive correctement la solution du problème de Dirichlet discret (2.33). L’intérêt de la méthode de Monte-Carlo est d’être facile à implémenter et d’être performante quand la dimension d devient grande. On peut aussi généraliser cette méthode pour résoudre des équations aux dérivées partielles de la forme
+∇
+(
+σ(r) · ∇ f ) + b(r) · ∇ f = 0 et ∀r ∈ ∂D, f (r) = φ(r)
+où σ et b sont des champs de vecteurs sur D.
+
+
+
+
+Chapitre 3
+Mesures invariantes
+Dans le chapitre précédent, nous avons vu au théorème 2.3 que la distribution d’une chaîne de Markov de matrice de transition P évolue à chaque pas de temps selon les équations (2.12) de Chapman-Kolmogorov μn+1 = μnP. Nous allons, dans ce chapitre, étudier les mesures de probabilité μ invariantes par ces équations c’est-à-dire les mesures satisfaisant μ = μP. Ces mesures joueront par la suite un rôle clef dans le comportement asymptotique des chaînes de Markov. Dans ce chapitre nous ne considérerons que des chaînes de Markov sur des espaces d’états E finis. On notera |E| le cardinal de E. Le cas des espaces d’états dénombrables sera abordé au chapitre 4.
+3.1 Mesures de probabilité invariantes
+3.1.1 Définition des mesures invariantes
+Soit {Xn}n > 0 une chaîne de Markov sur un espace E fini de matrice de transition P.
+Définition 3.1. La mesure π sur E est une mesure invariante pour la chaîne de Markov {Xn}n > 0 si π = πP, c’est-à-dire ∀y ∈ E, π(y) = x∈∑E
+π(x)P(x, y) .
+Dans ce chapitre, nous ne considérerons que des mesures de probabilité invariantes, i.e. des mesures invariantes satisfaisant la normalisation ∑x∈E π(x) = 1.
+Au lemme 3.2, nous verrons que si la chaîne de Markov est distribuée initialement selon une mesure invariante π (on note μ0 = π) alors la distribution à tout temps n reste μn = π. Une mesure invariante π décrit donc un système dans un état stationnaire. En théorie des probabilités, on utilise de façon équivalente la terminologie mesure stationnaire ou mesure invariante. Comme exemple concret de mesure invariante, on peut imaginer un gaz à l’équilibre dans une pièce (confinée) : les positions des atomes sont aléatoires, les atomes se déplacent au cours du temps, mais à chaque instant, ils restent uniformément répartis dans la pièce. Leur distribution est donc invariante. Par contre si on ouvre un flacon de parfum au centre de cette pièce, le parfum se répand et la distribution des molécules n’est
+37
+
+
+38 CHAPITRE 3. MESURES INVARIANTES
+pas stationnaire au cours du temps. En anticipant un peu sur les prochains chapitres, on sait cependant qu’au bout d’un temps très long le parfum se sera entièrement répandu et que ses molécules seront distribuées uniformément dans toute la pièce, le système aura donc convergé vers la mesure invariante. Nous reviendrons sur l’interprétation d’une mesure invariante en utilisant l’analogie avec un gaz dans la section 3.3.3.
+3.1.2 Exemples de mesures invariantes
+Considérons un graphe G = (S, E ) fini et sans boucles (un site n’est jamais relié à luimême). On notera S l’ensemble des sites du graphe et E l’ensemble des arêtes entre les sites. On définit une marche aléatoire {Xn}n > 0 sur S dont les probabilités de transition d’un site vers ses voisins sont uniformes
+∀x, y ∈ S, P(x, y) = 1{x∼y}
+1
+deg(x) (3.1)
+où la notation x ∼ y signifie que x et y sont reliés par une arête du graphe ((x, y) ∈ E ) et deg(x) est le nombre de voisins de x, i.e. le degré de x.
+1
+6
+2
+3
+4
+5
+7
+FIGURE 3.1 – Le graphe G représenté ci-dessus a pour sommets S = {1, . . . , 7}. La matrice de transition P définie en (3.1) est indexée en fonction des arêtes de E dessinées en rouge. Sur cet exemple deg(1) = 2 et deg(2) = 4. Ainsi la marche aléatoire peut aller de 1 vers 2 avec probabilité P(1, 2) = 1/2 et de 2 vers 1 avec probabilité P(2, 1) = 1/4.
+On définit la probabilité π sur S par
+∀x ∈ S, π(x) = deg(x)
+2|E | (3.2)
+où |E | est le cardinal du nombre d’arêtes. Le graphe ne contenant pas de boucles, on voit facilement que π est bien normalisée car
+∑
+x∈S
+deg(x) = 2|E | .
+En effet, chaque arête du graphe est comptée deux fois dans la somme. La mesure de probabilité π est une mesure invariante car pour tout y dans S
+∑
+x∈S
+π(x)P(x, y) = ∑
+x∈S
+deg(x) 2|E |
+1
+deg(x) 1{x∼y} = 1
+2|E | x∑∼y
+1{x∼y} = π(y) .
+
+
+3.1. MESURES DE PROBABILITÉ INVARIANTES 39
+Le résultat précédent implique que la marche aléatoire symétrique sur {1, . . . , L}, définie par la matrice de transition (2.6) pour p = q = 1/2, avec conditions périodiques (cf. figure 3.2) a pour mesure de probabilité invariante la mesure uniforme
+∀x ∈ {1, . . . , L}, π(x) = 1
+L.
+Le choix de la matrice de transition (3.1) ne s’applique pas aux probabilités de sauts
+P(x, x + 1) = p, P(x, x − 1) = 1 − p,
+si p 6= 1/2. Cependant dans le cas particulier de la marche sur {1, . . . , L} avec conditions périodiques, on peut facilement vérifier que la mesure uniforme π(x) = 1
+L est encore
+invariante pour tout p ∈ [0, 1].
+13
+2
+4
+5
+6 12
+p
+1−p
+q
+1−q
+FIGURE 3.2 – À gauche, le graphe des transitions associé à la marche aléatoire symétrique sur le domaine périodique {1, . . . , 6}. Le graphe des transitions pour la chaîne à deux états est représenté à droite.
+En général, si la matrice de transition n’est pas de la forme (3.1), la mesure invariante peut être très difficile à calculer. Considérons l’exemple simple, d’une chaîne de Markov à deux états {1, 2} (cf. figure 3.2) dont la matrice de transition est donnée par
+P=
+( 1−p p q 1−q
+)
+(3.3)
+avec p, q ∈]0, 1[. La mesure de probabilité
+π(1) = q
+p + q , π(2) = p
+p+q
+est invariante. Pour le montrer, il suffit de calculer
+πP(1) = π(1)P(1, 1) + π(2)P(2, 1) = q
+p + q (1 − p) + p
+p + q q = π(1).
+On a de même πP(2) = π(2). Si p ou q est différent de 0, on peut vérifier que π est l’unique mesure de probabilité invariante. La distribution π reflète le comportement de la chaîne de Markov. En effet, si p est proche de 0 et q proche de 1, alors la chaîne de Markov va avoir tendance à sauter de 2 vers 1 et à rester sur place une fois qu’elle est au site 1. On remarque que π(1) est effectivement proche de 1 et π(2) proche de 0.
+
+
+40 CHAPITRE 3. MESURES INVARIANTES
+3.1.3 Premières propriétés des mesures invariantes
+Lemme 3.2. Si π est une mesure invariante alors π = πPn pour tout n > 1. De plus, si la chaîne de Markov est initialement distribuée sous la mesure invariante π, alors
+∀n, m > 0, (X0, X1, . . . , Xn) (l=oi) (Xm, Xm+1, . . . , Xm+n). (3.4)
+Ce lemme traduit le fait qu’une mesure invariante est préservée pour tout temps π(x) = Pπ(Xn = x). Ceci explique le rôle clef joué par les mesures invariantes dans le comportement asymptotique des chaînes de Markov (cf. chapitre 5).
+Démonstration. Comme π est invariante, on a π = πP et en composant à droite par la matrice de transition, on en déduit πP = πP2, ce qui donne π = πP2. Il suffit ensuite d’itérer cette relation pour conclure le Lemme 3.2. On peut décomposer le calcul matriciel précédant en écrivant
+π(y) = z∈∑E
+π(z)P(z, y).
+On en déduit en remplaçant π(z) par πP(z) que
+π(y) = z∈∑E x∈∑E
+π(x)P(x, z)P(z, y) = x∈∑E
+π(x)
+[
+∑
+z∈E
+P(x, z)P(z, y)
+]
+= x∈∑E
+π(x)P2(x, y).
+On retrouve bien la relation π = πP2.
+Pour démontrer l’identité en loi (3.4), commençons par appliquer la propriété de Markov au temps m pour un évènement A dans En+1
+Pπ
+(
+(Xm, . . . , Xm+n) ∈ A
+)
+= x∈∑E
+P
+(
+(Xm, . . . , Xm+n) ∈ A ∣
+∣ Xm = x
+)
+Pπ
+(
+Xm = x
+)
+= x∈∑E
+P
+(
+(X0, . . . , Xn) ∈ A ∣
+∣ X0 = x
+)
+Pπ
+(
+Xm = x
+)
+. (3.5)
+Comme la mesure π est invariante, on sait par la première partie du lemme que
+Pπ
+(
+Xm = x
+)
+= πPm(x) = π(x).
+Ceci conclut la preuve de (3.4) car l’égalité (3.5) se réécrit pour tout évènement A
+Pπ
+(
+(Xm, . . . , Xm+n) ∈ A
+)
+= Pπ
+(
+(X0, . . . , Xn) ∈ A
+)
+.
+Dans le cas d’un espace E fini, la mesure de probabilité invariante π peut être interprétée comme un vecteur à valeurs dans [0, 1]|E| qui est un espace compact. Un argument de compacité va donc nous permettre de justifier l’existence d’au moins une mesure de probabilité invariante π.
+
+
+3.2. IRRÉDUCTIBILITÉ ET UNICITÉ DES MESURES INVARIANTES 41
+Théorème 3.3. Pour toute chaîne de Markov sur un espace d’états fini E, il existe une mesure de probabilité invariante.
+Notons que ce théorème ne dit rien sur l’unicité de la mesure de probabilité invariante.
+Démonstration. À une mesure de probabilité ν donnée sur E, on associe la suite de mesures sur E
+νn = 1
+n
+n
+∑
+k=1
+νPk.
+Les vecteurs (νn(x))x∈E prennent leurs valeurs dans l’ensemble compact [0, 1]|E|. Il existe donc une suite extraite νnk qui converge vers une mesure π dans E
+∀x ∈ E, kli→m∞ νnk (x) = π(x).
+Par construction π est bien une mesure de probabilité car E est fini et pour tout n, on a
+∑
+x∈E
+νn(x) = 1 ⇒ x∈∑E
+π(x) = 1.
+Nous allons vérifier que π est une mesure invariante. Par construction
+νnP = 1
+n
+n
+∑
+k=1
+νPk+1 = νn + 1
+n
+(
+νPn+1 − νP
+)
+.
+Pour chaque x de E, la suite {νnP(x) − νn(x)}n > 1 converge donc vers 0. En passant à la limite, on en déduit que π est invariante car
+∀x ∈ E, πP(x) − π(x) = kli→m∞ νnk P(x) − νnk (x) = 0.
+3.2 Irréductibilité et unicité des mesures de probabilité invariantes
+La structure des mesures invariantes dépend de la matrice de transition P. Reprenons l’exemple de la chaîne sur deux sites dont la matrice de transition est définie en (3.3) dans le cas particulier où il n’existe aucune transition entre les états 1 et 2, i.e. p = q = 0. Les deux mesures
+π1(x) = 1{x=1} et π2(x) = 1{x=2}
+sont invariantes car si la chaîne part d’un état, elle y restera tout le temps. On peut vérifier que toute combinaison linéaire λπ1 + (1 − λ)π2 (avec λ ∈ [0, 1]) est une mesure invariante. Cet exemple très simple montre qu’il peut exister une infinité de mesures invariantes. Considérons maintenant le cas où il n’existe pas de transition de 1 vers 2, i.e. p = 0 et q 6= 0. Alors l’unique mesure invariante est π1(x) = 1{x=1} et elle n’attribue aucun poids au site 2 (ce qui n’est pas le cas si p > 0). Par conséquent, le support des mesures invariantes dépend de la structure de P.
+Avant d’analyser l’unicité des mesures invariantes, nous allons introduire la notion d’irréductibilité qui est équivalente à la connexité du graphe des transitions associé à la matrice P.
+
+
+42 CHAPITRE 3. MESURES INVARIANTES
+3.2.1 Irréductibilité
+Soit X = {Xn}n > 0 une chaîne de Markov sur E de matrice de transition P.
+Définition 3.4. Soient x, y deux états de E. On dit que (i) x communique avec y, on note x → y, s’il existe un entier n > 0 et des états x0 = x, x1, . . . , xn = y ∈ E tels que P(x0, x1) · · · P(xn−1, xn) > 0, i.e. si
+Px(Xn = y) = P(Xn = y|X0 = x) > 0. (3.6)
+(ii) x et y communiquent, on note x ↔ y, si x communique avec y et y communique avec x.
+Définition 3.5.
+(i) Une classe E0 ⊂ E est dite fermée si pour tous x, y ∈ E
+x ∈ E0 et x → y alors y ∈ E0.
+(ii) Une classe E0 ⊂ E est dite irréductible si x ↔ y pour tous x, y ∈ E0 et E0 est fermée. (iii) La chaîne de Markov X est dite irréductible si l’espace d’états E est irréductible.
+Les définitions (i) et (ii) sont illustrées figure 3.3. La définition (iii) est la plus importante en pratique car les chaînes irréductibles vont constituer notre principal cadre d’étude. La restriction de la chaîne de Markov à une classe fermée E0 est ainsi une chaîne de Markov d’espace d’états E0. Enfin si E0 = {x0} est fermée, alors l’état x0 est dit absorbant car une fois que la chaîne de Markov l’a atteint, elle reste bloquée dans cet état pour toujours.
+FIGURE 3.3 – Dans ce graphe de transition, on distingue 2 classes irréductibles fermées en rouge et en bleu clair. Aucun site de ces deux classes ne communique avec les sites blancs qui ne forment pas une classe fermée. La chaîne de Markov peut être restreinte à chacune des classes irréductibles.
+3.2.2 Unicité des mesures de probabilité invariantes
+Pour E fini, l’existence d’une mesure invariante a été prouvée au théorème 3.3. L’hypothèse d’irréductibilité de la chaîne permet de renforcer ce résultat.
+Théorème 3.6. Pour toute chaîne de Markov irréductible sur un espace d’états fini E, il existe une unique mesure de probabilité invariante π. De plus π(x) > 0 pour tout x ∈ E.
+
+
+3.2. IRRÉDUCTIBILITÉ ET UNICITÉ DES MESURES INVARIANTES 43
+Démonstration. Soit π une mesure invariante (son existence est assurée par le théorème 3.3). Nous allons d’abord vérifier que π(x) > 0 pour tout x ∈ E. Comme ∑y∈E π(y) = 1, il existe x0 de E tel que π(x0) > 0. La chaîne étant irréductible, x0 communique avec tout y de E et pour chaque y, il existe un entier n tel que Pn(x0, y) > 0. La mesure π est invariante π = πPn (cf. lemme 3.2) et on en déduit
+π(y) = z∈∑E
+π(z)Pn(z, y) > π(x0)Pn(x0, y) > 0.
+Pour montrer l’unicité, nous allons d’abord établir un résultat préliminaire et prouver que toute fonction h de E dans R vérifiant
+∀x ∈ E, h(x) = y∈∑E
+P(x, y)h(y) (3.7)
+est nécessairement constante. Une fonction h satisfaisant (3.7) est dite harmonique. Nous avons déjà rencontré des fonctions harmoniques section 2.5.3. Comme E est fini, il existe un état x0 où la fonction atteint son minimum h(x0) = miny∈E h(y). S’il existait z de E tel que P(x0, z) > 0 et h(z) > h(x0), on obtiendrait une contradiction en utilisant le fait que ∑y∈E P(x, y) = 1
+h(x0) = y∈∑E
+P(x0, y)h(y) > P(x0, z)h(x0) + ∑
+y6=z
+P(x0, y)h(y) > h(x0) .
+Ceci étant impossible, la fonction h est donc égale à h(x0) pous les états y connectés à x0, i.e. tels que P(x0, y) > 0. Comme la chaîne est irréductible, on déduit en itérant cette procédure que h est constante sur E. On remarque qu’une fonction harmonique h est un vecteur propre à droite pour P car h = Ph tandis qu’une mesure invariante π est un vecteur propre à gauche car π = πP. Le résultat précédent sur les fonctions harmoniques implique que la matrice P − Id a un noyau de dimension 1 (les vecteurs de la forme λ(1, . . . , 1)). La valeur propre 0 étant de multiplicité 1, elle est aussi valeur propre de multiplicité 1 pour la transposée P† − Id. Par conséquent s’il existe 2 mesures invariantes π1, π2 (que l’on peut interpréter comme des vecteurs) telles que π1 = π1P et π2 = π2P alors les deux vecteurs π1, π2 sont dans le noyau de P† − Id. Le noyau étant de dimension 1, il existe une constante c telle que π1 = c π2. Comme les deux mesures sont normalisées par 1, on en déduit que π1 = π2.
+Exercice 3.7. On propose une preuve alternative de l’unicité des mesures invariantes du théorème 3.6. Supposons que π1, π2 soient deux mesures invariantes strictement positives sur E. Montrer que
+∀x, y ∈ E, Q(x, y) = P(y, x) π1(y)
+π1(x)
+est une matrice de transition irréductible. Vérifier que f (x) = π2(x)
+π1(x) est harmonique pour Q, i.e.
+f = Q f . En utilisant le résultat sur l’unicité des fonctions harmoniques, en déduire que π1 = π2.
+
+
+44 CHAPITRE 3. MESURES INVARIANTES
+3.2.3 Construction de la mesure de probabilité invariante
+Le théorème 3.3 a permis d’obtenir l’existence d’une mesure invariante de façon implicite. Dans cette section, nous allons construire la mesure invariante et en donner une expression explicite qui pourra se généraliser facilement aux espaces d’états dénombrables.
+On rappelle la définition du premier temps d’atteinte Tx d’un élément x de E
+Tx = inf {n > 0; Xn = x}.
+On définit aussi
+Tx+ = inf {n > 1; Xn = x}.
+Ces deux temps d’arrêt coïncident sauf si le site initial est x car dans ce cas Tx = 0 et Tx+ est le premier temps de retour en x.
+Une propriété importante des temps de retour dans le cas des espaces finis est la suivante :
+Lemme 3.8. Pour une chaîne de Markov irréductible sur un espace d’états E fini
+∀x, y ∈ E, Ex(Ty+) < ∞.
+Démonstration. La chaîne étant irréductible et E fini, il existe ε > 0 et un entier n tels que pour tous x, y dans E
+∃j 6 n, Pj(x, y) > ε.
+La valeur j peut varier selon les couples x, y mais reste bornée par n. La probabilité d’atteindre y avant le temps n en partant de n’importe quel point est au moins ε. L’inégalité suivante est donc vraie uniformément en x, y
+Px
+(Ty+ > n) 6 1 − ε.
+Nous allons itérer ce résultat en conditionnant le processus par le passé jusqu’au temps (k − 1)n
+Px
+(Ty+ > kn) = z∈ ∑E
+z6=y
+Px
+({Ty+ > (k − 1)n} ∩ {X(k−1)n = z}
+n
+⋂
+i=1
+{X(k−1)n+i 6= y})
+= z∈ ∑E
+z6=y
+Px
+({Ty+ > (k − 1)n} ∩ {X(k−1)n = z})
+P
+(n
+⋂
+i=1
+{X(k−1)n+i 6= y}
+∣ ∣
+∣{Ty+ > (k − 1)n} ∩ {X(k−1)n = z}
+)
+où z représente toutes les valeurs possibles pouvant être prises par X(k−1)n. Par la propriété de Markov appliquée au temps (k − 1)n (cf. théorème 2.4), on en déduit que le conditionnement ne dépend que de la valeur de X(k−1)n
+Px
+(Ty+ > kn)
+= z∈ ∑E
+z6=y
+Px
+(
+{Ty+ > (k − 1)n} ∩ {X(k−1)n = z}
+)
+P
+(n
+⋂
+i=1
+{X(k−1)n+i 6= y}
+∣
+∣
+∣X(k−1)n = z
+)
+
+
+3.2. IRRÉDUCTIBILITÉ ET UNICITÉ DES MESURES INVARIANTES 45
+Le dernier terme peut s’exprimer par la propriété de Markov comme l’évènement {Ty+ >
+n} pour la chaîne décalée en temps
+P
+(n
+⋂
+i=1
+{X(k−1)n+i 6= y}
+∣
+∣
+∣X(k−1)n = z
+)
+=P
+(n
+⋂
+i=1
+{Xi 6= y}
+∣ ∣
+∣X0 = z
+)
+= Pz
+(
+Ty+ > n
+)
+.
+Conditionnellement à {X(k−1)n = z}, on peut le borner uniformément en z (avec z 6= y) par 1 − ε pour obtenir
+Px
+(Ty+ > kn) 6 (1 − ε)Px
+(
+Ty+ > (k − 1)n
+)
+.
+En itérant on obtient
+Px
+(Ty+ > kn) 6 (1 − ε)k.
+Pour toute variable aléatoire Z à valeurs dans N, on rappelle l’identité classique
+E(Z) = ∑
+`>1
+P(Z > `).
+On obtient donc
+Ex
+(Ty+
+)= ∑
+`>1
+Px
+(Ty+ > `) 6 n ∑
+k>0
+Px
+(Ty+ > kn) 6 n ∑
+k>0
+(1 − ε)k < ∞.
+Ce qui permet de conclure le lemme.
+Le théorème suivant permet d’exprimer la mesure invariante en fonction de la fréquence à laquelle la chaîne de Markov visite les sites de E.
+Théorème 3.9. Pour une chaîne de Markov irréductible {Xn}n > 0 sur un espace d’états E fini, l’unique mesure de probabilité invariante est donnée par
+∀x ∈ E, π(x) = 1
+Ex(Tx+) .
+Démonstration. Étant donné x un élément de E, nous allons définir la mesure π ̃ comme la moyenne du temps passé en chaque site par la chaîne de Markov entre deux passages par x
+∀y ∈ E, π ̃ (y) = Ex
+(
+nombre de visites en y avant de retourner en x
+)
+.
+Commençons par réécrire la mesure π ̃ sous une forme plus maniable
+π ̃ (y) = Ex
+( Tx+−1
+∑
+n=0
+1{Xn =y}
+)
+= Ex
+(
+∑
+n>0
+1{Xn=y} 1{Tx+>n}
+)
+= n∑> 0
+Px
+(
+Xn = y, Tx+ > n
+)
+,
+où nous avons utilisé le théorème de Fubini dans la dernière égalité. A priori, π ̃ dépend du choix de x, mais nous allons montrer que ce n’est pas le cas.
+
+
+46 CHAPITRE 3. MESURES INVARIANTES
+Le lemme 3.8 implique que π ̃ (y) est bien définie pour tout y car
+π ̃ (y) 6 n∑> 0
+Px
+(
+Tx+ > n
+)
+= Ex(Tx+) < ∞.
+Par contre π ̃ n’est pas une mesure de probabilité car elle n’est pas normalisée.
+Pour montrer que π ̃ est stationnaire, nous calculons
+∑
+z∈E
+π ̃ (z)P(z, y) = z∈∑E n∑> 0
+Px
+(
+Xn = z, Tx+ > n
+)
+P(z, y).
+Le point clef de la preuve est de constater que l’évènement {Tx+ > n} = {Tx+ > n + 1}
+ne dépend que de {X0, . . . , Xn} (on sait juste que la marche n’est pas revenue en x avant le temps n). Par conséquent, on peut appliquer la propriété de Markov et écrire
+Px
+(
+Xn = z, Tx+ > n + 1, Xn+1 = y
+)
+= Px
+(
+Xn = z, Tx+ > n
+)
+P
+(
+Xn+1 = y
+∣ ∣
+∣ Xn = z, Tx+ > n
+)
+= Px
+(
+Xn = z, Tx+ > n
+)
+P(z, y).
+On déduit de cette relation que
+∑
+z∈E
+π ̃ (z)P(z, y) = z∈∑E n∑> 0
+Px
+(
+Xn = z, Tx+ > n + 1, Xn+1 = y
+)
+= n∑> 0
+Px
+(
+Tx+ > n + 1, Xn+1 = y
+)
+= n∑> 1
+Px
+(
+Tx+ > n, Xn = y
+)
+.
+Cette expression est très proche de la définition de π ̃
+∑
+n>1
+Px
+(
+Tx+ > n, Xn = y
+)
+= n∑> 0
+Px
+(
+Xn = y, Tx+ > n
+)
+− Px
+(
+Tx+ > 0, X0 = y
+)
++ n∑> 1
+Px
+(
+Tx+ = n, Xn = y
+)
+= π ̃ (y) − Px
+(X0 = y) + Px
+(XTx+ = y).
+Il suffit maintenant de considérer les deux cas : — Si y = x alors Px(X0 = y) = Px(XTx+ = y) = 1.
+— Si y 6= x alors Px(X0 = y) = Px(XTx+ = y) = 0.
+On a donc prouvé que la mesure π ̃ est invariante, i.e. ∑z∈E π ̃ (z)P(z, y) = π ̃ (y). Pour
+obtenir une mesure de probabilité, il suffit de la normaliser. Comme ∑z∈E π ̃ (z) = Ex(Tx+), la mesure de probabilité
+∀y ∈ E, π(y) = π ̃ (z)
+Ex (Tx+ )
+est l’unique mesure de probabilité invariante (cf. théorème 3.6). En particulier, elle vérifie
+π(x) = π ̃ (x)
+Ex(Tx+) = 1
+Ex(Tx+) .
+Le site x qui servait de site de référence pour indexer les excursions de la chaîne a été choisi arbitrairement. L’identité ci-dessus est donc vérifiée pour tout x car la mesure de probabilité invariante est unique pour une chaîne de Markov irréductible.
+
+
+3.3. RÉVERSIBILITÉ ET THÉORÈME H 47
+3.3 Réversibilité et Théorème H
+3.3.1 Réversibilité
+Les mesures invariantes sont caractérisées par le système d’équations linéaires
+∀y ∈ E, π(y) = x∈∑E
+π(x)P(x, y)
+dont le nombre d’inconnues est égal au cardinal de E. Dans la pratique, ce cardinal peut être très grand (parfois infini) et il est souvent difficile de déterminer π analytiquement. La réversibilité est une condition suffisante et facile à vérifier qui assure l’existence d’une mesure invariante.
+Définition 3.10. Une chaîne de Markov de matrice de transition P sur E est dite réversible par rapport à la mesure π si elle satisfait
+∀x, y ∈ E, π(x)P(x, y) = π(y)P(y, x) .
+La réversibilité caractérise les systèmes à l’équilibre. Sous la mesure initiale π, si on observe une trajectoire x0, x1, . . . , xn pour une chaîne de Markov réversible alors la trajectoire inverse aura la même probabilité
+Pπ
+(X0 = x0, X1 = x1, . . . , Xn = xn
+) = Pπ
+(X0 = xn, X1 = xn−1, . . . , Xn = x0
+).
+Pour prouver cette relation, on écrit la propriété de Markov
+Pπ
+(X0 = x0, X1 = x1, . . . , Xn = xn
+) = π(x0)P(x0, x1)P(x1, x2) . . . P(xn−1, xn) .
+En itérant de proche en proche la relation de réversibilité, on obtient
+Pπ
+(X0 = x0, X1 = x1, . . . , Xn = xn
+) = P(x1, x0)π(x1)P(x1, x2) . . . P(xn−1, xn)
+= P(x1, x0)P(x2, x1)π(x2) . . . P(xn−1, xn)
+= π(xn)P(xn, xn−1)P(xn−1, xn−2) . . . P(x1, x0).
+Exemples.
+• D’après la section 3.1.2, la marche aléatoire sur {1, . . . , L} avec conditions périodiques et probabilités de sauts
+P(x, x + 1) = p, P(x, x − 1) = 1 − p
+a pour mesure invariante la mesure uniforme π(x) = 1
+L pour tout p ∈ [0, 1]. Cette chaîne
+de Markov n’est réversible que pour p = 1
+2 car pour p 6= 1
+2
+π(x)P(x, x + 1) 6= π(x + 1)P(x + 1, x).
+En effet, si p 6= 1
+2 la marche va tourner de façon privilégiée dans un sens et la probabilité
+de la voir tourner en sens inverse sera très faible. Si p = 1
+2 , la marche est symétrique et toute fluctuation dans un sens sera aussi probable qu’une fluctuation en sens inverse.
+
+
+48 CHAPITRE 3. MESURES INVARIANTES
+• La chaîne de Markov à deux états de matrice de transition P donnée par (3.3) est aussi
+réversible pour la mesure π(1) = q
+p+q , π(2) = p
+p+q car
+π(1) P(1, 2) = qp
+p + q = π(2) P(2, 1).
+Dans la pratique, la réversibilité permet de vérifier facilement qu’une mesure est invariante.
+Théorème 3.11. Si une chaîne de Markov de matrice de transition P est réversible par rapport à la mesure π, alors π est une mesure invariante.
+Démonstration. Pour tout y dans E, on obtient en utilisant la réversibilité et ∑x∈E P(y, x) = 1
+∑
+x∈E
+π(x)P(x, y) = x∈∑E
+π(y)P(y, x) = π(y).
+Par conséquent, π est bien une mesure invariante.
+3.3.2 Théorème H pour les chaînes de Markov ?
+Soient μ et ν deux mesures de probabilité sur un espace E. On suppose que μ(x) > 0 pour tout x de E et on note H l’entropie relative de ν par rapport à μ
+H
+(
+ν
+∣
+∣μ
+) = x∈∑E
+(
+ν(x)
+μ(x) log ν(x)
+μ(x)
+)
+μ(x) .
+L’entropie relative permet de mesurer la distance entre μ et ν car H est positive et ne s’annule que si ν = μ. Pour le vérifier, il suffit de remarquer que φ(u) = u log(u) est strictement convexe et par l’inégalité de Jensen
+H
+(
+ν
+∣
+∣μ
+) = x∈∑E
+φ
+(
+ν(x) μ(x)
+)
+μ(x) > φ
+(
+∑
+x∈E
+ν(x)
+μ(x) μ(x)
+)
+= 0.
+L’inégalité est stricte dès qu’il existe un x pour lequel ν(x)
+μ(x) 6= 1.
+Théorème 3.12. On considère une chaîne de Markov irréductible de matrice de transition P et de mesure invariante π. Alors pour toute probabilité μ, on a
+H
+(
+μP∣
+∣π
+) ≤ H(
+μ
+∣
+∣π
+).
+Par conséquent, l’entropie relative n → H(
+μPn∣
+∣π
+) décroît avec le temps.
+Ce résultat fait écho au Théorème H pour l’équation de Boltzmann, néanmoins les physiciens utilisent la convention opposée pour l’entropie et considèrent plutôt la croissance de −H. Nous verrons au chapitre 5 que les mesures μPn relaxent vers la mesure d’équilibre π. La décroissance de l’entropie relative permet déjà d’entrevoir cette relaxation car la distance entre μPn et π se réduit au cours du temps.
+
+
+3.3. RÉVERSIBILITÉ ET THÉORÈME H 49
+Démonstration. En utilisant la fonction φ(u) = u log(u), on a
+H
+(
+μP∣
+∣π
+) = x∈∑E
+φ
+(
+1
+π(x) y∈∑E
+μ(y)P(y, x)
+)
+π(x) = x∈∑E
+φ
+(
+∑
+y∈E
+μ(y) π(y)
+π(y)P(y, x) π(x)
+)
+π(x).
+La mesure π étant invariante, on peut vérifier que que y → π(y)P(y,x)
+π(x) est une mesure de probabilité sur E
+∑
+y∈E
+π(y)P(y, x)
+π(x) = 1
+π(x) y∈∑E
+π(y)P(y, x) = π(x)
+π(x) = 1
+on obtient par l’inégalité de Jensen
+H
+(
+μP∣
+∣π
+) 6 x∈∑E
+π(x) y∈∑E
+π(y)P(y, x)
+π(x) φ
+(
+μ(y) π(y)
+)
+= y∈∑E x∈∑E
+π(y)P(y, x)φ
+(
+μ(y) π(y)
+)
+.
+Comme ∑x∈E P(y, x) = 1, on conclut que
+H
+(
+μP∣
+∣π
+) 6 H(
+μ
+∣
+∣π
+).
+3.3.3 Application : modèle d’Ehrenfest
+Nous allons illustrer les concepts de réversibilité et de décroissance de l’entropie avec une chaîne de Markov proposée par Paul et Tatiana Ehrenfest en 1907. Ce modèle a joué un rôle important pour établir les fondements de la mécanique statistique et comprendre le paradoxe de l’irréversibilité en théorie cinétique des gaz.
+Commençons par un rappel historique pour expliquer les motivations qui ont conduit à introduire ce modèle. En 1872, Boltzmann propose une équation pour décrire l’évolution d’un gaz peu dense hors équilibre. Cette équation deviendra l’élément fondateur de la théorie cinétique des gaz. Le point de départ est de représenter les molécules dans un gaz comme un ensemble de sphères dures qui avancent en ligne droite à des vitesses différentes et qui rebondissent à la manière de boules de billard quand elles se touchent. Pour décrire le comportement d’un tel gaz, il n’est pas possible (ni souhaitable) de rendre compte de l’évolution de tous les atomes (l’ordre de grandeur de leur nombre étant 1023), par contre une quantité plus globale comme la densité f (t, x, v) de particules au temps t avec la position x et la vitesse v suffit à décrire le transport de matière. L’équation de Boltzmann régit l’évolution de la densité de particules
+∂t f (t, x, v) + v · ∇x f (t, x, v) = Q( f , f )
+Q( f , f )(v) =
+∫∫
+S2×R3 [ f (v′) f (v′1) − f (v) f (v1)] ((v − v1) · ν
+)
++ dv1dν
+où ν est un vecteur intégré sur la sphère unité S2 et les vitesses après collisions s’écrivent
+v′ = v + ν · (v1 − v) ν , v′1 = v1 − ν · (v1 − v) ν.
+
+
+50 CHAPITRE 3. MESURES INVARIANTES
+Une propriété fondamentale de cette équation connue comme le Théorème H, est la croissance de l’entropie au cours du temps
+H(t) = −
+∫∫
+dx dv f (t, x, v) log f (t, x, v) et ∂t H(t) > 0
+(La convention en physique est opposée à celle des mathématiciens qui considèrent plutôt la décroissance de −H(t), cf. section 3.3.2). Cette croissance traduit l’irréversibilité du système : si on perce un ballon rempli de gaz, le gaz s’échappe et le ballon se dégonfle. Ce mécanisme est irréversible, en effet il est très rare d’observer un ballon se regonflant spontanément. L’équation de Boltzmann a pourtant suscité de nombreuses controverses car l’irréversibilité des solutions de cette équation semble incompatible avec la réversibilité de la dynamique microscopique. La dynamique microscopique est un immense billard avec 1023 boules rebondissant les unes sur les autres. Si on observe l’évolution de cette dynamique jusqu’au temps t et qu’à l’instant t toutes les vitesses sont renversées (v → −v) alors le système microscopique revient en arrière en suivant exactement l’évolution inverse. En 1876, Loschmidt objectait que l’équation de Boltzmann ne pouvait pas rendre compte du système microscopique qui lui était réversible. Un second paradoxe est signalé par Zermelo en 1896 car le théorème de Poincaré assure que cette dynamique microscopique va repasser au cours du temps arbitrairement près de sa condition initiale et ce pour presque toutes les conditions initiales. Ceci pose encore la question de l’irréversibilité de l’équation de Boltzmann. Le modèle des époux Ehrenfest a permis de comprendre ces deux paradoxes.
+On considère un récipient isolé coupé en deux par une paroi, la partie gauche est remplie d’un gaz et celle de droite est vide (cf. figure 3.4). À l’instant initial, un trou minuscule est percé dans la paroi pour permettre au gaz de passer d’un compartiment à l’autre. Pour simplifier le modèle, on imagine qu’à chaque pas de temps, un atome est choisi au hasard et transféré d’un compartiment à l’autre. On note Xn le nombre d’atomes dans la partie gauche au temps n et on suppose qu’initialement le récipient contient K atomes, i.e. X0 = K. Cette chaîne de Markov a pour espace d’états {0, . . . , K} et les probabilités de transition sont données par
+P
+(Xn+1 = ` − 1∣
+∣Xn = `) = `
+K , P(Xn+1 = ` + 1∣
+∣Xn = `) = K − `
+K.
+Quand le système est à l’équilibre, les molécules sont réparties uniformément et la mesure invariante devrait intuitivement être une loi binomiale π(`) = 1
+2K (K
+` ) (on choisit `
+molécules parmi K et on les place dans la partie gauche, les K − ` autres seront alors dans la partie droite). Pour le vérifier, il suffit de remarquer que cette chaîne de Markov est réversible pour la mesure invariante π
+π(`)P(`, ` + 1) = 1
+2K
+K!
+`!(K − `)!
+K−`
+K = π(` + 1)P(` + 1, `).
+La distribution de π est représentée figure 3.4. La réversibilité stochastique peut être vue comme l’analogue de la réversibilité des équations du mouvement pour la dynamique microscopique du gaz de sphères dures.
+
+
+3.3. RÉVERSIBILITÉ ET THÉORÈME H 51
+20 40 60 80
+0.02
+0.04
+0.06
+0.08
+FIGURE 3.4 – Sur le schéma de gauche, le modèle d’Ehrenfest est représenté : le compartiment de gauche est rempli de molécules, celui de droite est presque vide. Un passage est ouvert entre les deux compartiments pour permettre le transfert des molécules. Le graphe de droite représente la distribution de π pour K = 80. Cette distribution est symétrique autour de sa moyenne et elle décrit l’état d’équilibre du gaz.
+L’irréductibilité de la chaîne de Markov implique par le lemme 3.8 que la chaîne va revenir en chacun des points presque sûrement. Si initialement le compartiment de gauche est rempli de gaz et celui de droite est vide, les molécules vont d’abord se répartir assez rapidement dans tout le récipient mais si on attend assez longtemps toutes les molécules finiront par retourner dans le compartiment de gauche. Cette propriété est l’analogue du théorème de récurrence de Poincaré pour les systèmes dynamiques que Zermelo opposait à Boltzmann. Dans le cas de la chaîne d’Ehrenfest, le théorème 3.9 permet de calculer l’espérance du temps de retour
+E`(T+
+` )= 1
+π(`) = 2K `!(K − `)!
+K! .
+En utilisant la formule de Stirling n! ' √2πn(n/e)n, on remarque que pour K très grand, par exemple de l’ordre du nombre d’Avogadro 1023
+EK (T +
+K ) = 2K et EK/2(T+
+K/2) '
+√
+πK
+2.
+Par conséquent, le temps de retour en K/2 (qui est la valeur d’équilibre) sera infiniment moins long que le temps de retour en K. Ce dernier est tellement grand qu’il peut être supérieur à la durée de vie de l’univers. Il faudra donc s’armer de patience avant de voir un ballon percé se regonfler spontanément. Les temps de récurrence d’évènements rares étant extrêmement longs, il n’y a donc pas de contradiction avec la validité de l’équation de Boltzman sur des échelles de temps plus courtes.
+
+
+
+
+Chapitre 4
+Espaces d’états dénombrables
+Ce chapitre est consacré aux chaînes de Markov sur des espaces d’états infinis (mais dénombrables) pour lesquelles des phénomènes nouveaux apparaissent concernant la fréquence des visites d’un état. On verra aussi que pour des espaces d’états infinis, l’irréductibilité ne suffit pas à garantir l’existence d’une unique mesure de probabilité invariante.
+4.1 Chaînes de Markov récurrentes et transitoires
+Un exemple simple de chaîne de Markov sur un espace d’états infini est la marche aléatoire symétrique sur Zd avec d > 1 et de matrice de transition
+∀x, y ∈ Zd, P(x, y) = 1
+2d 1{‖x−y‖2=1} .
+La marche saute de façon équiprobable d’un site vers ses voisins. Elle est irréductible car elle peut rejoindre n’importe quel point de Zd. Dans le cas des espaces d’états finis, le lemme 3.8 assure que, pour toute chaîne de Markov irréductible, le temps d’atteinte d’un état y de E
+Ty+ = inf {n > 1; Xn = y}
+en partant d’un état x est toujours intégrable Ex(Ty+) < ∞. En particulier, toute trajectoire de la chaîne de Markov issue de x finira par toucher presque sûrement n’importe quel état y de E. Pour des chaînes de Markov sur des espaces d’états infinis, cette propriété n’est plus vraie en général et il convient donc de distinguer plusieurs cas.
+Définition 4.1. Soit {Xn}n > 0 une chaîne de Markov sur un espace d’états E dénombrable. Un état x de E est dit
+— transitoire si Px(Tx+ < ∞) < 1.
+— récurrent si Px(Tx+ < ∞) = 1.
+Les états récurrents peuvent être de deux types : — Les états récurrents nuls si Ex(Tx+) = ∞.
+— Les états récurrents positifs si Ex(Tx+) < ∞.
+53
+
+
+54 CHAPITRE 4. ESPACES D’ÉTATS DÉNOMBRABLES
+Nous allons montrer qu’une chaîne de Markov repasse presque sûrement une infinité de fois par un état récurrent alors qu’elle ne passera qu’un nombre fini de fois par un état transitoire. Si l’espace d’états est fini, le lemme 3.8 implique que tous les états sont récurrents positifs pour une chaîne de Markov irréductible.
+Tx(0) Tx(1)
+Tx(2)
+Tx(3)
+S(x1) S(x2) S(x3)
+FIGURE 4.1 – Les excursions d’une marche aléatoire dans Z sont représentées en utilisant comme état de référence x = 0.
+Pour tout entier k, on définit le kième temps de retour en x par
+T(k+1)
+x = inf {n > T(k)
+x + 1; Xn = x} ∈ N ∪ {∞}
+où T(0)
+x = 0 et T(1)
+x coïncide avec Tx+. Si la chaîne ne passe que k fois en x alors tous les
+temps T(`)
+x avec ` > k + 1 seront infinis. La chaîne de Markov fait des excursions entre deux passages en x (cf. figure 4.1) dont les longueurs sont données par
+S(k)
+x=
+{
+T(k)
+x − T(k−1)
+x , si T(k−1)
+x <∞
+0, sinon
+Le nombre de visites d’un état x par la chaîne de Markov {Xn}n > 0 est donné par
+Nx = n∑> 0
+1{Xn=x}.
+Théorème 4.2. On distingue deux comportements différents : — Si un état x est récurrent, alors une chaîne de Markov issue de x repasse infiniment souvent en x
+Px
+(Nx = ∞) = 1.
+— Si un état x est transitoire, le nombre de visites Nx d’une chaîne de Markov issue de x suit
+une loi géométrique sur N de paramètre Px(Tx+ = ∞) > 0. En particulier
+Ex
+(Nx
+)= 1
+Px(Tx+ = ∞) ⇒ Px
+(Nx < ∞) = 1.
+Démonstration. Le point crucial de la preuve consiste à remarquer que pour k > 2, si on
+conditionne par l’évènement {T(k−1)
+x < ∞}, alors la longueur de l’excursion S(k)
+x est indé
+pendante de la trajectoire de la chaîne avant l’instant T(k−1)
+x , c’est-à-dire de {Xn; n 6 T(k−1)
+x} et
+∀` ∈ N, P(S(k)
+x =`∣
+∣ T(k−1)
+x < ∞) = Px
+(T(1)
+x = `) . (4.1)
+
+
+4.1. CHAÎNES DE MARKOV RÉCURRENTES ET TRANSITOIRES 55
+Intuitivement le résultat est évident : quand la chaîne de Markov repart de x, il n’y a plus besoin de connaître son passé pour déterminer son futur. En particulier, les excursions représentées figure 4.1 ont toutes la même loi et sont indépendantes. Pour le démontrer, il suffit d’appliquer la propriété de Markov forte établie au théorème 2.5. Au temps
+d’arrêt T(k−1)
+x la chaîne de Markov est dans l’état x et la chaîne de Markov décalée en temps {XT(k−1)
+x +n}n > 0 a la même loi que la chaîne {Xn}n > 0 partant de x. La longueur de
+l’excursion peut s’écrire comme un temps de retour
+S(k)
+x = inf
+{
+n > 1, XT(k−1)
+x +n = x
+}
+.
+Conditionnellement à l’évènement {T(k−1)
+x < ∞}, la longueur S(k)
+x a la même loi que T(1)
+x. On en déduit donc (4.1) par la propriété de Markov forte.
+Comme X0 = x, on remarque que Nx > 1. Pour tout k > 1, on obtient
+Px
+(Nx > k + 1) = Px
+(T(k)
+x < ∞) = Px
+(T(k−1)
+x < ∞ et S(k)
+x < ∞)
+= Px
+(T(k−1)
+x < ∞)Px
+(S(k)
+x <∞∣
+∣ T(k−1)
+x < ∞).
+En utilisant (4.1) et en itérant, on conclut que
+Px
+(Nx > k + 1) = Px
+(T(k−1)
+x < ∞)Px
+(T(1)
+x < ∞) = Px
+(Tx+ < ∞)k.
+Dans la dernière égalité, on a identifié T(1)
+x = Tx+. Si x est récurrent, alors Px
+(Nx > k) = 1 pour tout k. Comme l’évènement {Nx = ∞} est la limite (décroissante) des évènements {Nx > k}, on en déduit que Px
+(Nx = ∞) = 1.
+Un calcul similaire au précédent permet de montrer que pour k > 1
+Px
+(Nx = k) = Px
+(Tx+ < ∞)k−1 (
+1 − Px
+(Tx+ < ∞)
+)
+.
+Si x est transitoire alors Px(Tx+ < ∞) < 1. Le nombre de visites Nx d’une chaîne de Mar
+kov issue de x suit une loi géométrique sur N de paramètre Px(Tx+ < ∞) et l’espérance du nombre de retours est finie.
+La propriété de Chapman-Kolmogorov permet d’écrire pour tout n > 1
+∀x, y ∈ E, Pn(x, y) = Px
+(Xn = y)
+où Pn est la puissance nième de la matrice P. Le théorème 4.2 peut être reformulé à l’aide d’un critère plus simple à utiliser.
+Théorème 4.3. Pour tout état x de E, il n’existe que deux possibilités : — x est transitoire si et seulement si ∑n > 0 Pn(x, x) < ∞.
+— x est récurrent si et seulement si ∑n > 0 Pn(x, x) = ∞.
+Si x communique avec y, i.e. x → y, et x est un état récurrent alors y est un état récurrent. Par conséquent, si la chaîne est irréductible alors les états sont tous transitoires ou tous récurrents. De plus, dans ce dernier cas, on repasse infiniment souvent par n’importe quel point
+∀x, y ∈ E, Py(Tx+ < ∞) = 1 et Py(Nx = ∞) = 1. (4.2)
+
+
+56 CHAPITRE 4. ESPACES D’ÉTATS DÉNOMBRABLES
+Démonstration. L’espérance du nombre de visites peut se réécrire en utilisant le théorème de Fubini (pour permuter l’espérance et la somme)
+Ex
+(Nx
+) = Ex
+(
+∑
+n>0
+1Xn =x
+)
+= n∑> 0
+Ex
+(1Xn=x
+) = n∑> 0
+Pn(x, x).
+Le théorème 4.2 suffit donc à prouver l’alternative entre les deux possibilités.
+Soit x un état récurrent communiquant avec y. Il existe donc un entier ` tel que P`(x, y) > 0. Supposons que y ne communique pas avec x, c’est-à-dire que Pk(y, x) = 0 pour tout k alors
+Py
+(Tx+ < ∞) 6 ∑
+k>1
+Py
+(Xk = x) = ∑
+k>1
+Pk(y, x) = 0.
+Dans ce cas x ne pourrait pas être récurrent car la chaîne a une probabilité non nulle de passer dans l’état y et ainsi de ne plus revenir en x
+Px
+(Tx+ = ∞) > P`(x, y) > 0.
+Par conséquent si x → y et x est récurrent alors y → x. Il existe donc deux entiers `, k > 1 tels que P`(x, y) > 0 et Pk(y, x) > 0. On peut décomposer les trajectoires partant de y
+∑
+n>0
+Pn(y, y) > n∑> 0
+Pk(y, x)Pn(x, x)P`(x, y) = c n∑> 0
+Pn(x, x) = ∞
+où c > 0 est une constante. La dernière égalité provient du critère de récurrence appliqué à x. On en déduit que y doit aussi être récurrent.
+Si la chaîne de Markov est irréductible, tous les états communiquent et il suffit que l’un soit récurrent pour que les autres le soient.
+Supposons que la chaîne soit irréductible et que tous les états soient récurrents. Cette hypothèse assure, en particulier, que Px(Tx+ = ∞) = 0 pour tout x. Nous allons montrer la première assertion de (4.2). Étant donné y dans E, l’irréductibilité implique l’existence d’un chemin, de probabilité positive, de longueur n0 allant de x à y et ne repassant pas par x. Ceci permet d’affirmer que
+Px
+({Xn0 = y} ∩ {Tx+ > n0}) > 0.
+On en déduit, en utilisant la propriété de Markov au temps n0, que
+Px(Tx+ = ∞) > Px
+({Xn0 = y} ∩ {Tx+ = ∞}) = Px
+({Xn0 = y} ∩ {Tx+ > n0})Py(Tx+ = ∞),
+ce qui implique le résultat souhaité Py(Tx+ = ∞) = 0. La seconde assertion de (4.2), s’obtient en remarquant que
+Py(Nx = ∞) = Py({Nx = ∞} ∩ {Tx+ < ∞}) = Py(Tx+ < ∞)Px(Nx = ∞),
+où la derniere égalité est une conséquence de la propriété de Markov forte appliquée au temps Tx+. Comme x est récurrent Px(Nx = ∞) = 1 et Py(Tx+ < ∞) = 1, on en déduit
+que Py(Nx = ∞) = 1.
+
+
+4.2. APPLICATION : MARCHES ALÉATOIRES 57
+4.2 Application : marches aléatoires
+Les états récurrents et transitoires peuvent être illustrés dans le cadre des marches aléatoires sur Zd.
+4.2.1 Marches aléatoires symétriques sur Zd
+Le comportement de la marche aléatoire symétrique sur Zd de matrice de transition
+∀x, y ∈ Zd, P(x, y) = 1
+2d 1{‖x−y‖2=1}
+dépend de la dimension d. Le théorème suivant a été prouvé par Polya en 1921.
+Théorème 4.4. La marche aléatoire symétrique sur Z ou Z2 est récurrente. Pour d > 3, la marche symétrique sur Zd est transitoire.
+Démonstration. La chaîne étant irréductible tous les états sont de la même nature. D’après le théorème 4.3, il suffit donc de déterminer si la série ∑n > 0 Pn(0, 0) est divergente ou convergente. L’étude se fait pour chaque dimension.
+d = 1.
+Une marche aléatoire ne peut revenir en 0 qu’après un nombre pair de pas. Pour revenir en 0 au temps 2n, il faut qu’il y ait eu exactement n accroissements égaux à 1 et n accroissements égaux à −1. On a donc
+P2n(0, 0) = 1
+22n
+(2n n
+)
+' √1
+πn , P2n+1(0, 0) = 0
+où l’asymptotique a été obtenue en utilisant la formule de Stirling n! ' √2πn(n/e)n. Par conséquent, la série ∑n > 0 Pn(0, 0) est divergente et 0 est un état récurrent.
+d = 2.
+En inclinant la tête de 45 degrés (cf. figure 4.2), on voit qu’une marche aléatoire Xn
+sur Z2 se réécrit Xn = ( Xn++Xn−
+2 , Xn+−Xn−
+2 ) en fonction de Xn+, Xn−, deux marches aléatoires
+indépendantes sur Z partant initialement de 0.
+XN
+X√N+2
+X√N2−
+FIGURE 4.2 – Les marches aléatoires X√n+2 et X√n−2 sont les projections de Xn sur les axes du réseau à 45 degrés.
+
+
+58 CHAPITRE 4. ESPACES D’ÉTATS DÉNOMBRABLES
+Par l’indépendance des marches Xn+ et Xn−, on déduit du cas unidimensionnel que
+P2n(0, 0) = P0(X2n = 0) = P0(X+
+2n = 0)P0(X−
+2n = 0) ' 1
+πn
+où 0 représente (par abus de notation) l’origine de Z et de Z2. La série ∑n > 0 Pn(0, 0) de terme principal 1/n est divergente et 0 est un état récurrent.
+-80 -60 -40 -20 20
+-20
+20
+40
+60
+50 100 150 200 250
+-250
+-200
+-150
+-100
+-50
+FIGURE 4.3 – Deux réalisations de la marche aléatoire dans Z2 pour 104 et 105 pas.
+d = 3.
+Pour calculer P2n(0, 0), on décompose les trajectoires de longueur 2n en 2i, 2j, 2k sauts selon chacun des axes
+P2n(0, 0) = ∑
+i,j,k > 0 i+j+k=n
+(2n)!
+(i! j! k!)2
+(1
+6
+)2n
+=
+(2n n
+) (1
+2
+)2n
+∑
+i,j,k > 0 i+j+k=n
+(n
+ijk
+)2 ( 1
+3
+)2n
+où ( n
+i j k) = n!
+i! j! k! est le nombre de façons de ranger n boules dans 3 boîtes en mettant i boules dans la première, j dans la seconde et k dans la troisième. On rappelle
+∑
+i,j,k > 0 i+j+k=n
+(n
+ijk
+) (1
+3
+)n
+= 1 et
+( 3n ijk
+)
+6
+( 3n nnn
+)
+.
+Commençons par considérer le cas n = 3`. Par les identités précédentes, on a
+P2n(0, 0) 6
+(2n n
+) (1
+2
+)2n ( 3`
+```
+) (1
+3
+)n
+∑
+i,j,k>0 i+j+k=n
+(n
+ijk
+) (1
+3
+)n
+=
+(2n n
+)( 1
+12
+)n ( n
+```
+)
+'1
+2(2π)3/2
+(6
+n
+)3/2
+où l’expression asymptotique pour n grand est une conséquence de la formule de Stirling. Les autres valeurs de n peuvent être bornées par comparaison
+P2(3`)(0, 0) >
+(1
+6
+)2
+P2(3`−1)(0, 0) et P2(3`)(0, 0) >
+(1
+6
+)4
+P2(3`−2)(0, 0).
+La série ∑n P2n(0, 0) converge car un majorant de son terme principal tend vers 0 comme
+1
+n3/2 . La marche aléatoire en dimension 3 est donc transitoire.
+
+
+4.2. APPLICATION : MARCHES ALÉATOIRES 59
+Une approche combinatoire similaire pour les dimensions d > 4 montre que P2n(0, 0) est asymptotiquement de l’ordre de 1
+nd/2 . Par conséquent la marche aléatoire symétrique
+est transitoire dès que d > 3.
+On remarquera que la mesure π(x) = 1 pour tout x de Zd est une mesure invariante pour la marche aléatoire. Par contre, il n’existe pas de mesure de probabilité invariante, i.e. de mesure normalisée par 1. Ce comportement spécifique des espaces d’états infinis sera expliqué section 4.3.
+4.2.2 Un critère analytique
+Il est parfois plus facile d’étudier la série génératrice des temps de retours d’une chaîne de Markov. Pour x, y dans E et s dans [0, 1], on pose
+U(x, y, s) = Ex
+(sTy+ 1{Ty+<∞}
+) = n∑> 1
+sn Px
+(Ty+ = n).
+On remarque que U(x, x, 1) = Px
+(Tx+ < ∞).
+Nous allons illustrer l’utilisation de U en étudiant la marche aléatoire dans Z de probabilité de transition
+P(x, x + 1) = p, P(x, x − 1) = q
+où p + q = 1.
+Théorème 4.5.
+Si p 6= 1/2, la marche aléatoire est transitoire car P0
+(T+
+0 < ∞) = 1 − |1 − 2p| < 1.
+Si p = 1/2, la marche aléatoire est récurrente nulle car E0(T+
+0 ) = ∞.
+Démonstration. En utilisant la propriété de Markov après un pas de temps, on obtient
+U(1, 0, s) = s(pU(2, 0, s) + q) et U(−1, 0, s) = s(p + qU(−2, 0, s)) . (4.3)
+Pour aller de 2 à 0, la marche doit d’abord passer par 1. Le temps nécessaire pour at
+teindre 0 se décompose donc sous la forme T+
+0 = T+
+1 + T1→0 où T1→0 est le premier temps d’atteinte de 0 après avoir touché 1. La propriété de Markov forte appliquée après
+le temps d’arrêt T+
+1 permet d’écrire
+U(2, 0, s) = E2
+(sT+
+1 1{T+
+1 <∞} sT1→0 1{T1→0<∞}
+) = E1
+(sT1→0 1{T1→0<∞}
+)U(2, 1, s)
+= U(1, 0, s)U(2, 1, s) = U(1, 0, s)2.
+Par symétrie U(−2, 0, s) = U(−1, 0, s)2. Ces relations permettent de réécrire les équations (4.3) et d’obtenir, en remarquant que U(1, 0, 0) = U(−1, 0, 0) = 0, une solution explicite
+U(1, 0, s) = s(pU(1, 0, s)2 + q) ⇒ U(1, 0, s) = 1 − √1 − 4pqs2
+2ps
+U(−1, 0, s) = s(p + qU(1, 0, s)2) ⇒ U(−1, 0, s) = 1 − √1 − 4pqs2
+2qs ,
+
+
+60 CHAPITRE 4. ESPACES D’ÉTATS DÉNOMBRABLES
+En appliquant une nouvelle fois la propriété de Markov, on en déduit
+U(0, 0, s) = s(pU(1, 0, s) + qU(−1, 0, s)) = 1 −
+√
+1 − 4pqs2 .
+Si p 6= q, U(0, 0, s) admet une limite quand s tend vers 1
+P0
+(T+
+0 < ∞) = U(0, 0, 1) = 1 − √1 − 4pq = 1 − |1 − 2p|.
+Si p = q = 1/2, la limite vaut 1 et la marche aléatoire sur Z est bien récurrente, comme nous l’avions déjà montré par le théorème de Polya 4.4. Pour tout s < 1, on peut dériver U ∂sU(0, 0, s) = E0
+(T+
+0 sT+
+0 −1 1T+
+0 <∞
+)= s
+√1 − s2 .
+Comme la limite diverge quand s tend vers 1, on en déduit que E0
+(T+
+0 1T+
+0 <∞
+) = ∞. La marche est donc récurrente nulle : elle revient infiniment souvent en 0 mais l’espérance du temps de retour est infinie.
+4.3 Mesures invariantes
+Le théorème 3.9 sur les mesures invariantes dans le cas des espaces d’états finis se généralise aux chaînes récurrentes positives sur des espaces d’états dénombrables.
+Théorème 4.6. Pour toute chaîne de Markov irréductible sur un espace d’états E dénombrable, les deux assertions suivantes sont équivalentes : (i) La chaîne est récurrente positive. (ii) Il existe une mesure de probabilité invariante.
+De plus s’il existe une mesure de probabilité invariante alors elle est unique et est donnée par
+∀x ∈ E, π(x) = 1
+Ex(Tx+) > 0.
+Pour une chaîne de Markov irréductible et récurrente nulle, on peut montrer qu’il existe toujours une mesure invariante (voir par exemple [13]), cependant celle-ci ne peut pas être normalisée en une mesure de probabilité. Ainsi, la mesure π(x) = 1 est invariante pour la marche aléatoire dans Zd (que la chaîne soit récurrente nulle ou transitoire). Certaines chaînes de Markov irréductibles et transitoires peuvent ne pas admettre de mesures invariantes.
+Démonstration ?. L’implication (i) donne (ii) est une conséquence directe de la preuve du théorème 3.9 dans le cas des espaces d’états finis. Considérons maintenant l’implication inverse et supposons que (ii) soit vérifiée. La preuve se décompose en trois étapes.
+Étape 1. Montrons que tous les états sont récurrents. La chaîne étant irréductible, les états sont tous transitoires ou tous récurrents. Supposons qu’ils soient tous transitoires alors pour tous x et y de E
+nli→m∞ Pn(x, y) = 0
+
+
+4.3. MESURES INVARIANTES 61
+car le nombre de visites en y est fini
+Ex(Ny) = n∑> 0
+Pn(x, y) < ∞.
+S’il existe une mesure de probabilité invariante π, elle vérifie pour tout temps n les relations
+∀y ∈ E, π(y) = x∈∑E
+π(x)Pn(x, y).
+Comme ∑x∈E π(x) = 1, on en déduit (par exemple en utilisant le théorème de convergence dominée) que
+∀y ∈ E, π(y) = nli→m∞ x∈∑E
+π(x)Pn(x, y) = x∈∑E
+π(x) nli→m∞ Pn(x, y) = 0.
+Ce qui contredit l’existence de la mesure π. Par conséquent, la chaîne de Markov doit être récurrente.
+Étape 2. Montrons que la chaîne est récurrente positive. Soit x un état de référence fixé. Comme dans le théorème 3.9 pour les espaces d’états finis, nous allons montrer que la mesure définie par les excursions issues de x
+∀y ∈ E, π ̃ (y) = n∑> 0
+Px
+(
+Xn = y, Tx+ > n
+)
+(4.4)
+est invariante. Nous n’avons pas encore établi que la chaîne est récurrente positive, par conséquent il faut vérifier que la mesure π ̃ est bien définie. Par l’hypothèse (ii), il existe π une mesure invariante qui vérifie
+π(y) = z1∑∈E
+π(z1)P(z1, y) = π(x)P(x, y) + ∑
+z16=x
+π(z1)P(z1, y).
+En appliquant la propriété d’invariance aux états z1 6= x
+π(y) = π(x)P(x, y) + ∑
+z16=x
+∑
+z2∈E
+π(z2)P(z2, z1)P(z1, y)
+= π(x)P(x, y) + ∑
+z16=x
+π(x)P(x, z1)P(z1, y) + ∑
+z16=x
+∑
+z26=x
+π(z2)P(z2, z1)P(z1, y).
+On itère ` fois cette procédure
+π(y) = π(x)
+
+
+P(x, y) +
+`−1
+∑
+k=1
+∑
+z1 6=x,z2 6=x,
+...zk 6=x
+P(x, zk) . . . P(z1, y)
+
+ 
++∑
+z1 6=x,z2 6=x,
+...z` 6=x
+π(z`)P(z`, z`−1) . . . P(z1, y)
+> π(x)
+`−1
+∑
+n=1
+Px
+(
+Xn = y, Tx+ > n
+)
+
+
+62 CHAPITRE 4. ESPACES D’ÉTATS DÉNOMBRABLES
+où la dernière inégalité a été obtenue en identifiant le terme entre crochets par l’espérance du nombre de passages en y avant de revenir en x et en négligeant le second terme qui est positif. Quand ` tend vers l’infini, ceci implique que pour tout y de E
+π(y) > π(x) π ̃ (y). (4.5)
+La chaîne étant irréductible, la mesure π est strictement positive pour tout x (cf. théorème 3.6). La mesure π ̃ est donc bien définie et
+Ex
+(Tx+
+) = y∈∑E
+π ̃ (y) 6 1
+π(x) y∈∑E
+π(y) < ∞.
+L’état x est donc récurrent positif. En répétant la preuve pour d’autres états de référence, on en déduit que tous les états de E sont récurrents positifs, i.e. que la chaîne de Markov est récurrente positive.
+Étape 3. Représentation de la mesure invariante. Un calcul identique à celui du théorème 3.9 montre que π ̃ (définie en (4.4)) est une mesure invariante. On rappelle que x est l’état de référence pour construire π ̃ et que π ̃ (x) = 1. Supposons que π(x) = 1 (quitte à multiplier tous les coefficients par le facteur 1/π(x)) alors l’argument utilisé au théorème 3.6 permet de conclure à l’unicité π = π ̃ . En effet la mesure ν = {π(y) − π ̃ (y)}y∈E a tous ses termes positifs ou nuls d’après l’inégalité (4.5). De plus ν est invariante car π et π ̃ le sont. Comme ν atteint son minimum en x car ν(x) = π(x) − π ̃ (x) = 0, il suffit de suivre la preuve du théorème 3.6 pour montrer π = π ̃ . On a donc identifié l’unique mesure invariante telle que π(x) = 1. Pour obtenir une mesure de probabilité, il suffit maintenant de la normaliser et on retrouve
+∀x ∈ E, π(x) = 1
+Ex(Tx+) .
+Corollaire 4.7. Les états d’une chaîne de Markov irréductible et récurrente sont tous récurrents positifs ou tous récurrents nuls.
+Démonstration. S’il existe un état récurrent positif, on peut construire une mesure de probabilité invariante (4.4) et on en déduit par le théorème 4.6 que tous les états sont récurrents positifs.
+Le processus de naissance et de mort est un exemple classique de chaîne de Markov à valeurs dans N. Au temps n, on note Xn le nombre d’individus dans une population ou de clients dans une file d’attente et on suppose que ce processus évolue comme une chaîne de Markov de matrice de transition
+P(x, x + 1) = p, P(0, 0) = 1 − p et P(x, x − 1) = 1 − p si x > 1.
+Le processus de naissance et de mort s’interprète comme une marche aléatoire sur N réfléchie quand elle touche 0. Si p < 1/2 la chaîne de Markov aura tendance à revenir vers 0. Quel que soit l’état initial, on s’attend donc à ce que la chaîne atteigne un régime stationnaire décrit par une mesure invariante localisée autour de 0. Si p > 1/2 la chaîne de Markov va croître en moyenne et elle va diverger vers l’infini.
+
+
+4.3. MESURES INVARIANTES 63
+Théorème 4.8. On distingue deux comportements : — Si p 6 1/2, la chaîne est récurrente. — Si p > 1/2, la chaîne est transitoire.
+Les mesures invariantes de cette chaîne de Markov sont de la forme
+∀x > 1, π(x) = π(0)
+(p
+1−p
+)x
+et elle est récurrente positive si et seulement si p < 1/2.
+Démonstration. Tant que la chaîne n’a pas touché 0, elle se comporte comme une marche aléatoire sur Z avec probabilités de transition (p, 1 − p). On peut donc reprendre les notations et l’argument de la preuve du théorème 4.5 pour obtenir
+U(1, 0, s) = E1
+(sT+
+0 1{T+
+0 <∞}
+) = 1 − √1 − 4p(1 − p)s2
+2ps .
+Au point 0, les nouvelles probabilités de transition s’appliquent
+U(0, 0, s) = s((1 − p) + pU(1, 0, s)) = s(1 − p) + 1 − √1 − 4p(1 − p)s2
+2.
+Finalement, on obtient
+P0(T+
+0 < ∞) = U(0, 0, 1) = (1 − p) + 1 − √1 − 4p(1 − p)
+2 = (1 − p) + 1
+2 −|1
+2 − p| .
+Ceci conclut la première partie du théorème
+P0(T+
+0 < ∞) =
+{
+1, si p 6 1/2
+2 − 2p, si p > 1/2
+Une mesure invariante π satisfait les relations
+∀x > 1, π(x) = pπ(x − 1) + (1 − p)π(x + 1) et π(0) = (1 − p)π(0) + (1 − p)π(1)
+qui se réécrivent π(1) =
+(p
+1−p
+)
+π(0) et
+∀i > 1, π(x + 1) − π(x) =
+(p
+1−p
+) (
+π(x) − π(x − 1)) =
+(p
+1−p
+)x
+(
+π(1) − π(0)).
+La famille des mesures invariantes est donc indexée par un paramètre π(0)
+∀x > 1, π(x) = π(0)
+(p
+1−p
+)x
+.
+Ces mesures ne peuvent être normalisées que pour p < 1/2 et dans ce cas la chaîne de Markov est récurrente positive. On remarque que la chaîne de Markov est réversible pour ces mesures invariantes
+P(x, x + 1)π(x) = P(x + 1, x)π(x + 1).
+
+
+64 CHAPITRE 4. ESPACES D’ÉTATS DÉNOMBRABLES
+Exercice 4.9. Montrer qu’un processus de naissance et de mort de matrice de transition générale
+P(x, x + 1) = px > 0, P(0, 0) = 1 − p0 et P(x, x − 1) = 1 − px si x > 1
+admet une mesure de probabilité invariante si et seulement si
+∑
+n>1
+n
+∏
+x=1
+px−1
+1 − px
+< ∞.
+4.4 Application : processus de branchement et graphes aléatoires
+Les processus de branchement ont de nombreuses applications allant de la démographie aux arbres phylogénétiques en passant par la fission nucléaire. Nous allons décrire un exemple de processus de branchement, les arbres aléatoires de Galton-Watson, et montrer comment ces arbres permettent d’étudier des graphes aléatoires.
+4.4.1 Arbres aléatoires de Galton-Watson
+Les processus de branchement que nous allons considérer modélisent le nombre d’individus au cours du temps d’une population en fonction de règles de reproduction. Le modèle à été proposé par Sir Francis Galton en 1873 pour décrire l’évolution des noms de famille en Angleterre. À l’époque les noms de famille étant transmis exclusivement par les hommes, il suffisait de suivre le nombre de descendants masculins dans chaque famille. Cette hypothèse permet de considérer un seul type d’individus et de supposer qu’à chaque génération les individus se reproduisent selon la même loi de probabilité. On s’intéressera à la taille de la population à chaque génération. Ce modèle peut aussi décrire la fission des neutrons dans une réaction nucléaire. Si cette fission s’opère trop rapidement cela peut conduire à une explosion. La mutation de gènes dans une population peut être modélisée par ces processus de branchement. D’autres applications des processus de branchement en écologie et dans les modèles d’évolution sont détaillées dans le cours Modèles aléatoires en écologie et évolution [21].
+Les arbres aléatoires de Galton-Watson sont des processus de branchement définis par récurrence à l’aide d’une suite {ζit} i > 1,
+t > 1 (à 2 indices) de variables aléatoires indépendantes
+et identiquement distribuées sur les entiers selon la loi
+∀k > 0, P(ζit = k) = pk. (4.6)
+L’arbre de Galton-Watson décrit la croissance d’une population dont le nombre d’individus au temps t sera noté par Zt. Initialement pour t = 0, on suppose que cette population n’est formée que par un seul individu et on pose Z0 = 1. Au temps t = 1, cet individu a Z1 = ζ11 enfants. Chaque enfant a ensuite un nombre aléatoire de descendants selon la loi de reproduction (4.6). Par récurrence, le nombre Zt+1 d’individus dans la population au temps t + 1 évolue en fonction des Zt individus présents au temps t :
+Zt+1 =
+{
+ζ t+1
+1 + · · · + ζt+1
+Zt , si Zt > 0
+0, si Zt = 0 (4.7)
+
+
+4.4. APPLICATION : BRANCHEMENT ET GRAPHES ALÉATOIRES 65
+FIGURE 4.4 – Un exemple d’arbre aléatoire après 7 générations.
+S’il n’y a plus de descendants à partir d’un temps t, i.e. Zt = 0, alors la population restera éteinte à jamais.
+La connaissance de la population au temps t + 1 ne dépend que de Zt et des variables
+{ζ t+1
+i }i > 1 qui sont indépendantes du passé. Le processus {Zt}t > 0 est donc une chaîne de Markov. Pour calculer sa matrice de transition, on suppose qu’il existe n individus au temps initial
+P(n, k) = P(Z1 = k ∣
+∣Z0 = n) = P(
+Z0
+∑
+`=1
+ζ`1 = k ∣
+∣Z0 = n)
+= P(
+n
+∑
+`=1
+ζ`1 = k) = i1,...,i ∑n∈N
+i1 +···+in =k
+pi1 pi2 . . . pin .
+On exclut les lois de reproduction pathologiques (4.6) telles que — p1 = 1 : la taille de population reste constante — p0 + p1 = 1 et p0 > 0 : il y a au maximum un seul individu qui finit forcément par mourir. — p0 = 0 et p1 < 1 : la population ne fait que croître. Dans la suite, nous étudierons donc le comportement des arbres de Galton-Watson quand t tend vers l’infini pour des lois de reproduction satisfaisant
+0 < p0 et p0 + p1 < 1. (4.8)
+Si la population disparaît au temps t alors Zs = 0 pour tous les temps suivants s > t. L’état 0 est donc absorbant pour cette chaîne de Markov. On remarque qu’aucun autre état ne peut être récurrent car tous les états communiquent avec 0. En effet, la population peut disparaître en un seul pas de temps
+∀n > 1, P(Z1 = 0 | Z0 = n) = p0n > 0.
+Par conséquent, il n’existe que deux comportements possibles : la population disparaît ou sa taille tend vers l’infini.
+Le comportement asymptotique du processus de branchement est déterminé par le nombre moyen d’enfants par individu μ = E(ζ11). Pour s’en convaincre, il suffit d’ana
+lyser E(Zt) la taille moyenne de la population au temps t. En utilisant la propriété de
+
+
+66 CHAPITRE 4. ESPACES D’ÉTATS DÉNOMBRABLES
+Markov et en conditionnant par la génération précédente, on a
+E
+(Zt+1
+)=
+∞
+∑
+n=0
+E
+(Zt+1
+∣
+∣Zt = n) P(Zt = n) =
+∞
+∑
+n=0
+E
+(
+ζ t+1
+1 + · · · + ζtn+1
+) P(Zt = n)
+= E(
+ζ t+1
+1)
+∞
+∑
+n=0
+nP(Zt = n) = μE(Zt
+) = μt+1E(Z0
+) = μt+1 (4.9)
+où on a utilisé que la loi de reproduction est identique pour tous les individus. On distingue donc trois régimes — Le régime sous-critique μ < 1 : la taille moyenne de la population tend vers 0 exponentiellement vite et la population va disparaître presque sûrement. Pour le démontrer, il suffit de remarquer que
+P(Zt > 1) 6 E(Zt) 6 μt
+et d’utiliser le théorème de Borel-Cantelli. — Le régime sur-critique μ > 1 : la taille moyenne de la population tend vers l’infini exponentiellement vite et nous allons montrer que la taille de la population diverge avec une probabilité positive. — Le régime critique μ = 1 : la taille moyenne de la population reste constante, mais la population va s’éteindre presque sûrement.
+Pour préciser ces comportements, nous allons étudier le premier temps d’extinction, i.e. le temps d’atteinte de 0 par la chaîne de Markov
+T0 = inf {t > 1; Zt = 0}.
+On définit la fonction génératrice de la loi de reproduction
+∀u ∈ [0, 1], φ(u) = E(uζt1
+) = n∑> 0
+un pn.
+Le théorème suivant confirme l’heuristique établie par le calcul de la taille moyenne de la population
+Théorème 4.10. Si μ 6 1, la population s’éteint presque sûrement
+P
+(T0 < ∞) = 1.
+Si μ > 1, la population s’éteint avec probabilité ρ ∈]0, 1[
+P
+(T0 < ∞) = ρ
+où ρ est l’unique point fixe dans ]0, 1[ de φ(ρ) = ρ. Par conséquent la taille de la population diverge avec probabilité 1 − ρ > 0.
+Démonstration. Commençons par calculer la fonction génératrice de Zt
+∀u ∈ [0, 1], Φt(u) = E(uZt ) = n∑> 0
+un P(Zt = n).
+
+
+4.4. APPLICATION : BRANCHEMENT ET GRAPHES ALÉATOIRES 67
+La propriété de Markov et l’indépendance des variables {ζt+1
+i }i > 0 permettent d’écrire
+Φt+1(u) =
+∞
+∑
+n=0
+E
+(uZt+1 ∣
+∣Zt = n) P(Zt = n) =
+∞
+∑
+n=0
+E
+(uζt+1
+1 +···+ζtn+1 ) P(Zt = n)
+=
+∞
+∑
+n=0
+n
+∏
+`=1
+E
+(uζt+1
+`
+)P(Zt = n) .
+avec la convention ∏`0=1 E(uζt+1
+`
+) = 1 pour n = 0. En identifiant la fonction génératrice de la loi de reproduction, on obtient la relation de récurrence
+Φt+1(u) =
+∞
+∑
+n=0
+φ(u)nP(Zt = n) = Φt
+(
+φ(u)).
+On en déduit
+Φt+1(u) = φ ◦ φ ◦ · · · ◦ φ
+} {{ }
+t+1 fois
+(u).
+Ceci peut aussi s’écrire
+Φt+1(u) = φ
+(Φt
+(u)) .
+0.2 0.4 0.6 0.8 1.0
+0.2
+0.4
+0.6
+0.8
+1.0
+0.2 0.4 0.6 0.8 1.0
+0.2
+0.4
+0.6
+0.8
+1.0
+FIGURE 4.5 – Graphes de la fonction génératrice φ et de x → x. Dans le cas sous-critique μ < 1, représenté à gauche, l’unique point fixe φ(x) = x est x = 1. Dans le cas sur-critique μ > 1, représenté à droite, il existe un point fixe ρ < 1.
+On note xt = P(Zt = 0) la probabilité que la population ait disparu au temps t. On remarque que xt = Φt
+(0), par conséquent cette suite satisfait la récurrence
+xt+1 = φ(xt) avec x0 = 0.
+L’asymptotique de xt quand t tend vers l’infini dépend des points fixes de φ(x) = x. On vérifie que pour u ∈ [0, 1[
+φ(1) = 1, φ′(u) = n∑> 1
+nun−1 pn et φ′′(u) = n∑> 2
+n(n − 1)un−2 pn. (4.10)
+Par l’hypothèse (4.8), on sait que p0 + p1 < 1 et donc φ′′(u) > 0 sur [0, 1[. Ainsi, la fonction φ est strictement convexe et elle va intersecter la droite x → x uniquement en 1 si φ′(1) 6 1 et en un autre point ρ < 1 si φ′(1) > 1 (cf. figure 4.5). La stricte convexité de
+
+
+68 CHAPITRE 4. ESPACES D’ÉTATS DÉNOMBRABLES
+φ implique l’unicité d’un tel point ρ. Comme μ < ∞, l’identité (4.10) permet d’identifier la dérivée
+φ′(1) = n∑> 0
+n pn = μ.
+Il n’existe donc que deux comportements possibles
+tli→m∞ xt =
+{
+1, si μ 6 1
+ρ, si μ > 1
+On sait que
+{T0 < ∞} =
+∞
+⋃
+t=0
+{Zt = 0}
+qui est une réunion croissante d’évènements car {Zt = 0} ⊂ {Zt+1 = 0}. On en déduit que
+P
+(T0 < ∞) = tli→m∞ P(Zt = 0) =
+{
+1, si μ 6 1
+ρ, si μ > 1
+Si μ > 1, la probabilité que la population ne s’éteigne jamais est P(T0 = ∞) = 1 − ρ et comme les états non nuls sont transitoires la taille de la population diverge avec probabilité 1 − ρ.
+Le comportement asymptotique des arbres peut être étudié plus précisément. Nous reviendrons sur le comportement asymptotique du cas sur-critique au chapitre 12.
+4.4.2 Graphes aléatoires d’Erdös-Rényi
+Les graphes aléatoires interviennent dans des contextes variés pour modéliser par exemple des réseaux sociaux, le réseau internet ou des réseaux neuronaux. Selon les applications, les détails de chaque graphe aléatoire diffèrent mais il est intéressant de classifier ces graphes en fonction de structures invariantes et de propriétés communes. Dans cette section, nous allons considérer un modèle spécifique de graphes aléatoires qui a été inventé par Erdös et Rényi en 1959 [11] et montrer que les propriétés de ces graphes peuvent s’analyser à l’aide d’un processus de branchement.
+Pour N un entier donné, on considère S = {1, . . . , N} un ensemble de sites reliés aléatoirement selon la procédure suivante. Soit λ > 0, on définit N(N − 1)/2 variables aléatoires de Bernoulli indépendantes indexées par les couples (x, y) ∈ S2 avec x 6= y
+P
+(
+ηx,y = 1) = 1 − P(
+ηx,y = 0) = λ
+N . (4.11)
+On supposera que N est très grand et donc que λ < N. On ne distingue pas l’orientation des arêtes (x, y) et on pose ηx,y = ηy,x. Étant donnée une réalisation {ηx,y}(x,y)∈S2, on
+construit un graphe G = (S, E ) dont les arêtes relient uniquement les sites x et y de S tels que ηx,y = 1. Ce procédé permet de générer un graphe aléatoire d’Erdös-Rényi à N sites (cf. figure 4.6). Deux sites x et y sont connectés dans G s’il existe une suite d’arêtes allant de x à y, c’est-à-dire k sites de S avec k 6 N tels que ηx,x1 = ηx1,x2 = · · · = ηxk−1,xk = ηxk,y = 1.
+
+
+4.4. APPLICATION : BRANCHEMENT ET GRAPHES ALÉATOIRES 69
+FIGURE 4.6 – Toutes les parties connexes d’un graphe aléatoire d’Erdös-Rényi sont représentées : au-dessus la partie connexe principale et en dessous les plus petites composantes connexes (certaines sont réduites à un seul site).
+Pour tout x dans S, on définit C(x) la composante connexe de x comme l’ensemble des sites y connectés à x.
+Nous allons étudier la structure des connections dans les graphes d’Erdös-Rényi en fonction de la valeur du paramètre λ. Étant donnée une réalisation du graphe, on note C? le cardinal de la plus grande de ses composantes connexes (il se peut qu’il y ait plusieurs composantes connexes de taille C?). La figure 4.7 représente une simulation numérique de la densité de la composante connexe maximale λ → E(C?)/N pour différentes valeurs de N. Pour obtenir une approximation de l’espérance (λ et N étant fixés), on simule un grand nombre K de réalisations de graphes et on prend la moyenne des tailles {C?
+i }i 6 K
+des composantes maximales de chacun de ces graphes
+E(C?) ' 1
+K
+K
+∑
+i=1
+C?
+i.
+La loi des grands nombres permet d’affirmer que l’approximation est correcte quand K tend vers l’infini. Les simulations de la figure 4.7 ont été faites pour K = 1000 et des fluctuations persistent. On remarque que pour λ < 1 cette densité semble tendre vers 0 quand N augmente. Ceci veut dire qu’aucune composante connexe ne recouvre une fraction d’ordre N des sites. Nous allons montrer que pour λ < 1, les composantes connexes typiques d’un graphe d’Erdös-Rényi sont de taille finie même quand N tend vers l’infini. Dans ce cas, le graphe n’est qu’une collection de petits sous-graphes disjoints voire même de sites isolés. Pour λ > 1, le comportement change radicalement et la plus grande composante contient une densité positive de sites. On dit qu’il y a une transition de phase au point critique λc = 1. La figure 4.6 représente une réalisation d’un graphe pour λ > 1. On remarque qu’il existe une composante connexe principale qui relie une grande partie des
+
+
+70 CHAPITRE 4. ESPACES D’ÉTATS DÉNOMBRABLES
+sites et que les autres composantes connexes sont beaucoup plus petites. Il existe un lien entre les composantes connexes et les arbres de Galton-Watson, en particulier on peut observer que la composante principale du graphe ressemble à un arbre au voisinage de chaque site, même si à une plus grande échelle des boucles se forment.
+0.5 1.0 1.5 2.0 2.5 3.0
+0.2
+0.4
+0.6
+0.8
+FIGURE 4.7 – Densité moyenne de la composante connexe maximale d’un graphe aléatoire d’Erdös–Rényi pour λ variant entre 0 et 3 avec N = 50 pour la courbe bleue, N = 100 pour la courbe violette, N = 200 pour la courbe verte.
+Théorème 4.11. Pour λ < 1, la composante connexe associée au site 1 a une taille moyenne bornée uniformément en N
+E
+(|C(1)|) 6 1
+1−λ
+où |C(1)| est le cardinal de C(1).
+Démonstration. L’idée de la preuve consiste à remarquer qu’un site a en moyenne λ N−1
+N
+voisins car
+∑
+y∈V\{x}
+E(ηx,y) = (N − 1) λ
+N.
+Ses voisins eux-mêmes seront reliés à environ λ voisins et ainsi de suite. Cette structure ressemble à celle d’un arbre de Galton-Watson et elle permet de prédire l’existence de comportements différents selon que λ est plus grand ou plus petit que 1. Cependant la topologie des graphes est plus complexe que celle des arbres car il peut exister des boucles et il faut une preuve spécifique pour préciser cette analogie.
+Nous allons explorer la composante connexe C(1) à la manière d’un arbre. Au temps initial t = 0, on pose A0 = {1}, I0 = {2, 3, . . . , N} et R0 = ∅. Les trois ensembles vont évoluer au cours du temps selon la règle suivante (cf. figure 4.8)
+
+ 
+ 
+Rt+1 = Rt ∪ At
+At+1 = ⋃
+x∈At
+{y ∈ It; ηx,y = 1}
+It+1 = It \ At+1
+(4.12)
+L’ensemble At représente les sites actifs au temps t, ceux-ci vont s’apparier avec les sites inactifs de It qui sont liés à At dans le graphe d’Erdös-Rényi. Ces nouveaux sites deviennent actifs au temps t + 1 et les sites de At viennent grossir l’ensemble Rt+1. Ainsi
+
+
+4.4. APPLICATION : BRANCHEMENT ET GRAPHES ALÉATOIRES 71
+la composante connexe C(1) est explorée entièrement au cours de ce processus qui se termine au temps τ 6 N quand Aτ = ∅ et C(1) = Rτ.
+It
+At
+Rt
+FIGURE 4.8 – La composante connexe C(1) est explorée en découvrant les sites voisins à chaque étape. Les sites actifs At sont représentés en rouge à distance 2 et ils sont connectés aux sites de It marqués en blanc. On remarque que cette exploration peut conduire à découvrir le même site de It s’il est relié à plusieurs sites de At. Contrairement aux arbres, les composantes connexes du graphe peuvent donc avoir des boucles.
+Le processus d’exploration Rt ressemble à un arbre de Galton-Watson. La différence étant que la distribution des descendants des sites actifs dépend de t car les descendants sont choisis dans l’ensemble It qui se réduit au cours du temps. Nous allons montrer que l’arbre de Galton-Watson permet de contrôler la croissance du processus d’exploration. On se donne une collection de variables aléatoires indépendantes {ζtx,y} avec t > 1,
+x > 1 et y ∈ {1, . . . , N}. Ces variables sont identiquement distribuées selon une loi de Bernoulli
+P
+(
+ζtx,y = 1) = 1 − P(
+ζtx,y = 0) = λ
+N.
+On définit U0 = 1 et on construit l’arbre de Galton-Watson dont la population au temps t + 1 est donnée par
+Ut+1 = ∑
+x∈At, y∈It
+ηx,y + ∑
+x∈At, y∈Itc
+ζtx,y +
+N +Ut −|At |
+∑
+x=N+1
+N
+∑
+y=1
+ζtx,y (4.13)
+où |At| désigne le cardinal de At. Le second terme ajoute des descendants fictifs dans {1, . . . , N} \ It pour compenser la réduction du cardinal de It à chaque pas. Ces descendants fictifs ont ensuite eux-même une descendance qui est prise en compte dans le troisième terme de (4.13). Par conséquent {Ut} est un processus de branchement dont la loi de reproduction est une loi binomiale de paramètres (N, λ
+N ), i.e. que la distribution des
+enfants de chaque site a la même loi que ∑iN=1 ωi où les ωi sont des variables de Bernoulli indépendantes de paramètre λ/N. Il est important de remarquer que quand N tend vers l’infini la loi de reproduction converge vers une loi de Poisson de paramètre λ.
+P
+(N
+∑
+i=1
+ωi = k
+)
+=
+(N
+k
+)(
+λ
+N
+)k (
+1− λ
+N
+)N−k N→∞
+−−−→ exp(−λ) λk
+k! .
+On s’attend donc à ce que de très grands systèmes (N → ∞) convergent vers une structure limite et soient bien décrits par des arbres de Galton-Watson de loi de reproduction
+
+
+72 CHAPITRE 4. ESPACES D’ÉTATS DÉNOMBRABLES
+donnée par cette loi de Poisson. La moyenne de la loi de reproduction est λ. Si λ < 1, le théorème 4.10 implique que les arbres seront finis presque sûrement. Comme le processus {Ut} est construit en ajoutant des sites fictifs (4.13) par rapport à ceux existant dans la composante C(1) du graphe, son cardinal domine toujours le cardinal de C(1). On en déduit que
+E
+(|C(1)|) =
+∞
+∑
+t=0
+E(|At|) 6
+∞
+∑
+t=0
+E(Ut) =
+∞
+∑
+t=0
+λt = 1
+1 − λ (4.14)
+car l’identité (4.9) implique que E(Ut) = λt. Ceci conclut le théorème.
+Pour λ > 1, la comparaison avec un arbre permet de montrer qu’il existe une composante connexe contenant une proportion de sites proportionnelle à N. Le nombre moyen d’enfants étant égal à λ, la population de l’arbre a une probabilité positive de diverger ce qui indique que la composante connexe C(1) doit être très grande. La preuve est délicate car la comparaison entre un arbre et le processus d’exploration de C(1) (décrit dans la preuve du théorème 4.11) n’est plus valable quand la composante connexe explorée Rt est trop grande : les boucles ne peuvent plus être négligées et l’ajout des sites fictifs devient trop important. La preuve complète est faite dans le livre de R. Durrett [11].
+La structure des graphes d’Erdös-Rényi est très bien comprise mathématiquement. On peut par exemple montrer que pour λ > 1, deux sites appartenant à la composante connexe principale sont typiquement à distance log N (bien que cette composante contienne un nombre de sites proportionnel à N). Une application possible est d’interpréter un graphe aléatoire comme un ensemble d’agents en interaction (réseau informatique, système financier) et d’étudier la résistance de ce graphe à une perturbation (virus informatique, défaut de paiement). Un exemple simple consiste à retirer aléatoirement des liens avec une probabilité p et à les garder avec probabilité (1 − p). On souhaite déterminer s’il existera toujours une composante connexe d’ordre N après cette modification du réseau. Dans le cas particulier des graphes d’Erdös-Rényi, le réseau modifié reste équivalent à un graphe d’Erdös-Rényi de paramètre (1 − p)λ. Si (1 − p)λ est plus grand que 1 alors le graphe restera fortement connecté, sinon la composante connexe principale sera décomposée en une multitude de composantes disjointes. Un autre type de graphes aléatoires sera construit au chapitre 12 et de nombreux autres modèles de graphes aléatoires figurent dans le livre [11].
+
+
+Chapitre 5
+Ergodicité et convergence des chaînes
+de Markov
+L’étude des comportements asymptotiques de variables aléatoires constitue un aspect essentiel des probabilités. La loi des grands nombres et le théorème central limite en sont deux exemples très importants. Ce chapitre décrit les comportements asymptotiques des chaînes de Markov pour lesquels les mesures invariantes jouent un rôle clef.
+5.1 Ergodicité
+Soient {Yn}n > 0 des variables aléatoires indépendantes et identiquement distribuées à valeurs dans R telles que l’espérance E(| f (Y0)|) soit finie pour une fonction f donnée. Le théorème de la loi des grands nombres implique la convergence presque sûre
+1 n
+n−1
+∑
+i=0
+f (Yi) n→∞
+−−−→ E( f (Y0)). (5.1)
+Ce théorème se généralise aux chaînes de Markov récurrentes positives et on parle alors de théorème ergodique.
+5.1.1 Théorème ergodique
+Théorème 5.1. Soit {Xn}n > 0 une chaîne de Markov irréductible, récurrente positive sur un espace d’états E dénombrable. On notera π son unique mesure de probabilité invariante. Soit F une fonction de E dans R dont l’espérance sous π est finie Eπ(|F|) = ∑x∈E |F(x)|π(x) < ∞. On suppose que la donnée initiale X0 est distribuée selon une mesure de probabilité μ sur E. Les moyennes le long des trajectoires convergent presque sûrement
+1 n
+n−1
+∑
+i=0
+F(Xi) n→∞
+−−−→ Eπ(F). (5.2)
+Si F(x, y) est une fonction de E × E dans R telle que ∑x,y∈E π(x)P(x, y)|F(x, y)| est finie alors
+1 n
+n
+∑
+i=1
+F(Xi−1, Xi) n→∞
+−−−→ Eπ
+(F(X0, X1)) = x,y∑∈E
+π(x)P(x, y)F(x, y). (5.3)
+73
+
+
+74 CHAPITRE 5. ERGODICITÉ ET CONVERGENCE
+Démonstration. Supposons que la chaîne parte initialement d’un état x de E fixé, i.e. que μ = δx. Cet état x va servir d’état de référence pour représenter l’unique mesure invariante π associée à cette chaîne de Markov récurrente positive
+∀y ∈ E, π(y) = ∑n > 0 Px
+(
+Xn = y, Tx+ > n
+)
+Ex
+(
+Tx+
+)=
+Ex
+(
+∑ Tx+ −1
+n=0 1Xn=y
+)
+Ex
+(
+Tx+
+) . (5.4)
+Contrairement à l’expression (4.4), le facteur 1/Ex
+(
+Tx+
+)
+sert à normaliser la mesure. La
+probabilité π(y) décrit la statistique des passages dans l’état y pendant une excursion de la chaîne de Markov. Par ailleurs, les différentes excursions (cf. figure 5.1) sont indépendantes par la propriété de Markov forte. Nous allons donc décomposer les trajectoires de la chaîne de Markov en excursions pour établir la correspondance avec π.
+Tx(0) Tx(1)
+Tx(2)
+Tx(3) N
+FIGURE 5.1 – Décomposition de la trajectoire d’une chaîne de Markov en trois excursions entre les passages en x. Le dernier segment jusqu’au temps N n’est pas une excursion complète.
+Rappelons les notations sur les temps de retour. Pour tout entier k > 1, on définit le kième temps de retour en x par
+T(k)
+x = inf {n > T(k−1)
+x + 1; Xn = x} ∈ N ∪ {∞}
+où T(0)
+x = 0 et T(1)
+x coïncide avec Tx+. Par hypothèse, la chaîne est récurrente et tous les
+temps d’arrêt sont finis presque sûrement. On définit les variables aléatoires {Yk}k > 0 associées à la contribution de chaque excursion
+Yk =
+T(k+1)
+x −1
+∑
+`=T(k)
+x
+F(X`).
+Par la propriété de Markov forte démontrée au théorème 2.5, les variables {Yk} sont indépendantes et identiquement distribuées. Leur espérance s’écrit en fonction de la mesure invariante
+E(Y1) = Ex
+(Tx+ −1
+∑
+`=0
+F(X`)
+)
+= Ex
+(Tx+ −1
+∑
+`=0
+∑
+y∈E
+F(y)1X`=y
+)
+= y∈∑E
+F(y)Ex
+(Tx+ −1
+∑
+`=0
+1X`=y
+)
+= Ex
+(
+Tx+
+)
+∑
+y∈E
+F(y)π(y) = Ex
+(
+Tx+
+)
+Eπ ( F)
+
+
+5.1. ERGODICITÉ 75
+où l’hypothèse Eπ(|F|) < ∞ nous a permis d’utiliser le théorème de Fubini pour permuter la somme et l’espérance. La loi des grands nombres (5.1) pour les variables indépendantes implique la convergence presque sûre
+1 k
+T(k)
+x −1
+∑
+`=0
+F(X`) = 1
+k
+k−1
+∑
+i=0
+Yi
+k→∞
+−−→ Ex
+(
+Tx+
+)
+Eπ ( F).
+Ce résultat appliqué à F = 1 permet d’écrire
+T(k)
+x
+k
+k→∞
+−−→ Ex
+(
+Tx+
+)
+. (5.5)
+Par conséquent en indexant la trajectoire par les temps de retours, on a prouvé la convergence presque sûre
+1
+T(k)
+x
+T(k)
+x −1
+∑
+`=0
+F(X`) k→∞
+−−→ Eπ(F). (5.6)
+Pour obtenir le théorème ergodique, il suffit de contrôler la contribution de la trajectoire après le dernier passage en x et de montrer qu’elle ne joue aucun rôle à la limite (cf. figure 5.1). On note Nn le nombre de passages en x avant le temps n, c’est-à-dire
+Nn =
+n
+∑
+`=1
+1X`=x ⇒ T(Nn)
+x 6 n < T(Nn+1)
+x.
+La chaîne étant récurrente Nn diverge quand n tend vers l’infini. On peut décomposer
+F en une partie positive et négative F = F+ − F− et traiter chaque terme séparément. Supposons donc que F soit positive, alors
+T (Nn )
+x
+T (Nn +1)
+x
+1
+T (Nn )
+x
+T (Nn )
+x −1
+∑
+`=0
+F(X`) 6 1
+n
+n−1
+∑
+`=0
+F(X`) 6 T(Nn+1)
+x
+T (Nn )
+x
+1
+T (Nn +1)
+x
+T (Nn +1)
+x −1
+∑
+`=0
+F(X`),
+où on a utilisé
+T (Nn )
+x
+T (Nn +1)
+x
+6 T(Nn)
+x
+n et T(Nn+1)
+x
+n 6 T(Nn+1)
+x
+T (Nn )
+x
+.
+La convergence de (5.5) implique que presque sûrement
+T (Nn )
+x
+T (Nn +1)
+x
+n→∞
+−−−→ 1.
+Il suffit donc d’appliquer (5.6) pour conclure que pour une donnée initiale X0 = x
+1 n
+n−1
+∑
+`=0
+F(X`) n→∞
+−−−→ Eπ(F).
+La limite ne dépend pas de l’état de référence x choisi. Par conséquent, si la donnée initiale X0 est choisie selon une mesure μ, il suffit de sommer sur la probabilité de chaque état initial et d’appliquer la relation précédente.
+
+
+76 CHAPITRE 5. ERGODICITÉ ET CONVERGENCE
+Pour la seconde partie du théorème, il suffit de remarquer que Zn = (Xn−1, Xn) est une chaîne de Markov à valeurs dans un sous-ensemble Γ de E × E de matrice de transition
+P
+(Z2 = (y1, y2) ∣
+∣Z1 = (x1, x2)) = 1y1=x2 P(x2, y2)
+et de mesure de probabilité invariante π ̃ (x, y) = π(x)P(x, y). Insistons sur le fait que la chaîne de Markov {Zn}n > 1 n’est pas irréductible sur E × E mais seulement sur le sousensemble Γ où elle prend ses valeurs. La limite (5.3) se déduit du théorème ergodique (5.2) appliqué à la chaîne {Zn}n > 1. Le résultat se généralise facilement aux fonctions F à k variables.
+Pour une chaîne de Markov récurrente positive, le théorème ergodique (5.2) appliqué à la fonction F(y) = 1y=x permet d’interpréter la mesure invariante π comme la fréquence de visites des états par la chaîne de Markov
+1 n
+n−1
+∑
+`=0
+1X`=x
+n→∞
+−−−→ π(x) = 1
+Ex
+(Tx+
+) presque sûrement.
+Cette convergence reste vraie pour les chaînes de Markov récurrentes nulles et transitoires pour lesquelles Ex
+(Tx+
+) = ∞.
+Théorème 5.2. Soit {Xn}n > 0 une chaîne de Markov récurrente nulle ou transitoire à valeurs dans E dénombrable alors pour tout x de E
+1 n
+n−1
+∑
+`=0
+1X`=x
+n→∞
+−−−→ 0 presque sûrement. (5.7)
+Démonstration. Si la chaîne de Markov est transitoire alors elle ne repassera qu’un nombre
+fini de fois par un état par conséquent ∑`∞=0 1X`=x est fini presque sûrement et (5.7) est vérifié.
+On rappelle que pour une fonction f positive, la loi des grands nombres (5.1) reste vraie même si E( f (Y0)) = ∞ (cf. corollaire B.22)
+1 n
+n
+∑
+i=0
+f (Yi) n→∞
+−−−→ ∞.
+Pour le démontrer, il suffit d’appliquer la loi des grands nombres à la fonction tronquée inf{ f , K} puis de faire tendre K vers l’infini. Si la chaîne de Markov est récurrente nulle, on peut appliquer la preuve du théorème 5.1 pour obtenir par (5.5) la convergence presque sûre
+T(k+1)
+x
+k
+k→∞
+−−→ ∞.
+En utilisant les notations du théorème 5.1 et le fait que T(Nn)
+x 6 n, on peut écrire
+1 n
+n
+∑
+`=0
+1X`=x = Nn
+n 6 Nn
+T (Nn )
+x
+n→∞
+−−−→ 0
+car la chaîne de Markov est récurrente et Nn converge presque sûrement vers l’infini.
+
+
+5.1. ERGODICITÉ 77
+La décomposition des trajectoires en excursions indépendantes permet aussi de démontrer l’analogue du théorème central limite pour des chaînes de Markov récurrentes positives. Une preuve différente du théorème central limite sera faite au chapitre 11.
+5.1.2 Application : algorithme PageRank de Google
+Le principe du moteur de recherche Google consiste à indexer les pages du web par des robots (web crawler). Ces logiciels sondent et conservent automatiquement le contenu de chaque site web dans un immense catalogue qui indexe un nombre de pages web de taille gigantesque, de l’ordre de 3 · 1013 (d’après Google). La difficulté consiste ensuite à attribuer un ordre de priorité dans cette masse d’informations pour satisfaire au mieux les différentes requêtes des internautes. Un élément clef utilisé par le moteur de recherche Google pour hiérarchiser l’importance des données est l’algorithme PageRank. Celui-ci a été développé à l’Université de Stanford dans le cadre d’un projet de recherche commencé en 1995 par Larry Page et rejoint plus tard par Sergey Brin. L’information disponible sur le web n’est pas structurée sur le modèle des bases de données traditionnelles, elle s’est plutôt auto-organisée au fil du temps. De plus, la taille gigantesque du web ne permet pas d’utiliser les méthodes classiques de recherche documentaire. Le principe de PageRank consiste à laisser faire le hasard pour découvrir les pages web aléatoirement sans utiliser une approche déterministe comme on pourrait le faire dans un environnement bien structuré. Cet algorithme a complètement révolutionné le fonctionnement des moteurs de recherche.
+Nous allons décrire le principe de fonctionnement de PageRank en gardant à l’esprit que de nombreuses améliorations ont été introduites depuis afin de répondre aux divers détournements des utilisateurs. L’objectif est d’associer à une page web i un indice de popularité π(i). L’idée est de dire qu’une page web i est importante si de nombreux liens pointent sur cette page. En particulier si un site j très populaire pointe sur la page i, il va générer beaucoup de connections sur i et ainsi augmenter la popularité de i. Cette règle empirique conduit à la relation suivante
+π(i) = ∑
+j→i
+1
+deg(j) π(j)
+où on note j → i si la page j pointe sur la page i et deg(j) le nombre de liens partant de la page j. La page j transmet son indice de popularité proportionnellement entre les deg(j) pages web auxquelles elle renvoie. Cette relation définit la mesure invariante d’une marche aléatoire sur le graphe G = (S, E ) dont les sites S sont indexés par les pages web et les arêtes E par les liens entre les sites. Quand les liens du graphe ne sont pas
+orientés, une telle marche a été définie en (3.1) et sa probabilité invariante π(x) = deg(x)
+2|E | calculée en (3.2). Pour évaluer π, une possibilité est d’indexer de façon systématique tous les liens, mais le graphe du web est compliqué et il évolue sans cesse. L’option retenue par l’algorithme PageRank consiste à laisser faire le hasard en suivant des marches aléatoires qui évoluent de pages en pages selon les liens et en indexant le contenu à chaque fois. Le théorème ergodique 5.1 permet ensuite de retrouver la mesure invariante π, i.e. les indices de popularité, en moyennant sur les trajectoires des marcheurs.
+
+
+78 CHAPITRE 5. ERGODICITÉ ET CONVERGENCE
+La vitesse de convergence d’un algorithme est fondamentale dans les applications industrielles. Pour cette raison, Brin et Page ont introduit la matrice de transition de Google G de composantes
+G(i, j) = α 1
+deg(i) 1i→j + (1 − α) 1
+N pour tous i, j ∈ S, (5.8)
+où N est le cardinal de S et α un paramètre dans ]0, 1[ appelé facteur d’amortissement. Avec probabilité 1 − α, les marches aléatoires sont relancées sur un site choisi au hasard parmi les N sites de S. Cette modification de la matrice de transition rappelle le comportement de l’internaute qui suit quelques liens puis au bout d’un moment (avec une probabilité 1 − α) se dirige vers un de ses liens favoris que l’on suppose distribués uniformément sur l’ensemble des pages. Le choix de la valeur du paramètre α est délicat. Le souci de rapidité de la convergence de l’algorithme nous pousse à choisir α proche de 0, mais ceci conduirait à une mesure invariante qui ne refléterait plus la vraie structure du web (toutes les pages auraient la même probabilité 1/N). La valeur exacte du paramètre α est un secret gardé de Google.
+5.2 Convergence
+Reprenons l’exemple de la chaîne de Markov irréductible à deux états {1, 2} (cf. figure 3.2 et équation (3.3)) dont la matrice de transition et la mesure invariante π sont données par
+P=
+( 1−p p q 1−q
+)
+, π(1) = q
+p + q , π(2) = p
+p+q
+avec p, q ∈]0, 1[. Cette matrice de transition se diagonalise facilement
+P=
+( 1 −π(2) 1 π(1)
+)(1 0
+0 1−p−q
+)(
+π(1) π(2) −1 1
+)
+et peut être multipliée n fois
+Pn =
+( 1 −π(2) 1 π(1)
+)(1 0
+0 (1 − p − q)n
+)(
+π(1) π(2) −1 1
+)
+n→∞
+−−−→
+(
+π(1) π(2) π(1) π(2)
+)
+.
+Quand le temps tend vers l’infini, les probabilités de transition convergent exponentiellement vite vers la mesure invariante
+∀x, y ∈ {1, 2}, nli→m∞ Px(Xn = y) = π(y).
+L’état initial n’apparaît plus dans la limite.
+L’enjeu de cette section est de démontrer que la convergence en temps long vers la mesure invariante est une propriété très générale des chaînes de Markov récurrentes positives et de quantifier la vitesse de convergence.
+
+
+5.2. CONVERGENCE 79
+5.2.1 Apériodicité et convergence
+Une conséquence du théorème ergodique 5.1 est la convergence pour tout état initial x de
+1 n
+n
+∑
+`=0
+Px
+(X` = y) n→∞
+−−−→ π(y).
+Ceci ne suffit pas à impliquer que limn→∞ Px
+(Xn = y) = π(y). Pour s’en convaincre, considérons la chaîne de Markov irréductible à deux états de matrice de transition
+P=
+(0 1 10
+)
+dont le comportement est périodique P1
+(Xn = 1) = 1 − P1
+(Xn = 2) = (1 + (−1)n)/2. Un autre exemple est la marche aléatoire sur le domaine périodique {1, . . . , 2L} avec un nombre pair de sites (cf. figure 5.2). Si la marche part de 1 au temps 0, elle ne pourra atteindre un site pair qu’à des temps impairs.
+20 40 60 80 100
+-15
+-10
+-5
+5
+10
+15
+FIGURE 5.2 – La marche aléatoire sur l’intervalle périodique {1, . . . , 2L} reste sur les sites noirs au temps pairs si elle est partie d’un site noir. Le schéma de droite représente 3 réalisations d’une même chaîne de Markov. Sous les hypothèses du théorème 5.5, la mesure invariante peut s’obtenir en moyennant les valeurs de plusieurs trajectoires à un temps donné.
+Pour démontrer la convergence, il faut restreindre la classe des matrices de transition aux chaînes de Markov apériodiques.
+Définition 5.3. Une chaîne de Markov irréductible sur E est apériodique si pour tous x, y de E il existe n(x, y) ∈ N tel que la probabilité Px
+(Xn = y) = Pn(x, y) est strictement positive dès que n > n(x, y).
+Cette définition permet d’éviter les pathologies décrites précédemment car une chaîne de Markov apériodique a une probabilité positive de connecter 2 états dès que le temps est assez grand. On peut facilement se ramener à des chaînes de Markov apériodiques en transformant la matrice de transition. La matrice Q = (I + P)/2 est associée à la version "fainéante" de la chaîne de Markov : avec probabilité 1/2 la chaîne reste sur place et avec probabilité 1/2 elle fait un saut selon la matrice P. La matrice Q a la même probabilité invariante que P et donc un comportement asymptotique similaire.
+
+
+80 CHAPITRE 5. ERGODICITÉ ET CONVERGENCE
+Lemme 5.4. Si la chaîne de Markov sur E est irréductible et si un état x est apériodique, c’est-àdire qu’il vérifie
+Px
+(Xn = x) = Pn(x, x) > 0 dès que n est suffisamment grand
+alors la chaîne est apériodique.
+Démonstration. Soient y, z deux états de E. Comme la chaîne est irréductible, il existe deux entiers r et s tels que Pr(y, x) > 0 et Pr(x, z) > 0, on en déduit que pour tout n suffisamment grand
+Pr+n+s(y, z) > Pr(y, x)Pn(x, x)Ps(x, z) > 0.
+La chaîne est donc apériodique.
+La définition 5.3 n’est pas la seule caractérisation des chaînes apériodiques et nous reviendrons par la suite sur cette notion. Pour le moment, nous allons montrer une conséquence importante de l’apériodicité.
+Théorème 5.5. Soit {Xn}n > 0 une chaîne de Markov irréductible et apériodique de mesure de probabilité invariante π sur un espace d’états E dénombrable. Pour toute distribution initiale μ0 sur E, la distribution de {Xn}n > 0 converge vers π quand n tend vers l’infini
+nli→m∞ Pμ0
+(Xn = x) = π(x).
+Ce théorème peut s’interpréter de la façon suivante. Pour n très grand, la mesure invariante est bien approchée par Pμ
+(Xn = x) et cette distribution au temps n peut elle même être obtenue par la loi des grands nombres en simulant plusieurs réalisations indépendantes de la chaîne de Markov
+π(x) ' Pμ
+(Xn = x) = Kli→m∞
+1 K
+K
+∑
+k=1
+1{X(k)
+n =x}
+où {X(k)
+n }n > 0 sont des réalisations indépendantes de la chaîne de Markov. Il y a donc deux approches complémentaires pour estimer π(x) : on moyenne la fréquence de passage en x le long d’une trajectoire (c’est le théorème ergodique 5.1 ) ou on fixe un temps n et on construit un histogramme à partir de plusieurs simulations indépendantes (cf. figure 5.2).
+Démonstration. La preuve repose sur une méthode de couplage et nécessite plusieurs étapes. On considère {Xn}n > 0 et {Yn}n > 0 deux réalisations indépendantes de la chaîne de Markov dont les états initiaux diffèrent : X0 = x et Y0 a pour distribution initiale la mesure invariante π.
+Étape 1 : La chaîne de Markov jointe Wn = (Xn, Yn) est irréductible et récurrente positive.
+On voit facilement que processus Wn = (Xn, Yn) est une chaîne de Markov dans E × E de matrice de transition
+̂P
+(
+(x1, y1), (x2, y2)
+)
+= P(x1, x2)P(y1, y2).
+
+
+5.2. CONVERGENCE 81
+L’irréductibilité est une conséquence de l’apériodicité car pour tous les (x1, y1) et (x2, y2) dans E × E
+̂Pn (
+(x1, y1), (x2, y2)
+)
+= Pn(x1, x2)Pn(y1, y2) > 0
+dès que n est assez grand. L’apériodicité de la chaîne est essentielle pour prouver l’irréductibilité, en effet si {Xn}n > 0 et {Yn}n > 0 étaient deux réalisations d’une marche aléatoire sur {1, . . . , 2L} (cf. figure 5.2) l’une partant d’un nombre pair et l’autre d’un nombre impair, alors le couple formé par Wn ne pourra jamais atteindre tous les sites {1, ..., 2L}2 et en particulier les trajectoires {Xn}n > 0 et {Yn}n > 0 ne se rencontreront jamais. Comme Xn et Yn ont pour mesure invariante π, il est facile de vérifier que {Wn}n > 0 a pour mesure invariante la mesure produit
+∀(x, y) ∈ E × E, π ⊗ π (x, y) = π(x)π(y).
+Par le théorème 4.6, la chaîne {Wn}n > 0 est donc récurrente positive.
+T
+y
+x
+FIGURE 5.3 – Le schéma représente un couplage entre 2 trajectoires issues des états x et y. Leur partie commune après le temps T est dessinée en pointillés.
+Étape 2 : Construction d’un couplage.
+On définit le temps d’arrêt T comme le premier temps où les chaînes Xn, Yn se touchent (cf. figure 5.3)
+T = inf
+{
+n > 0; Xn = Yn
+}
+= inf
+{
+n > 0; Wn ∈ A
+}
+avec A = {(x, x); x ∈ E} ⊂ E × E. Ainsi T peut s’interpréter comme un temps d’atteinte pour la chaîne Wn. Comme Wn est irréductible et récurrente, T est fini presque sûrement. On définit le processus
+Zn =
+{
+Xn, si n < T
+Yn, si n > T
+Nous allons vérifier que {Zn}n > 0 est une chaîne de Markov et a la même distribution que {Xn}n > 0. Par la propriété de Markov forte démontrée au théorème 2.5, la chaîne de Markov décalée en temps {WT+n}n > 0 est indépendante de {(X0, Y0), . . . , (XT, YT)} conditionnellement à (XT, YT). Comme leurs données initiales coïncident les chaînes de
+
+
+82 CHAPITRE 5. ERGODICITÉ ET CONVERGENCE
+Markov {XT+n}n > 0 et {YT+n}n > 0 ont la même loi et il est donc équivalent de suivre la trajectoire associée à YT+n plutot que celle de XT+n. Par conséquent {Zn}n > 0 est bien une chaîne de Markov de même loi que {Xn}n > 0.
+Étape 3 : Convergence.
+Les données initiales sont X0 = x et la mesure invariante π pour Y0, on peut donc écrire pour tout état y de E
+Px
+(Xn = y) − π(y) = Px
+(Xn = y) − Pπ
+(Yn = y).
+Par l’étape 2, la chaîne {Zn}n > 0 a la même loi que {Xn}n > 0
+Px
+(Xn = y) = Px
+(Zn = y) = ̂P(Xn = y, T > n) + ̂P(Yn = y, T 6 n),
+où ̂P fait référence à la mesure jointe des trajectoires {Xn} et {Yn}. On en déduit que
+∣
+∣
+∣Px
+(Xn = y) − π(y)
+∣
+∣
+∣=
+∣ ∣
+∣ ̂P(Xn = y, T > n) − ̂P(Yn = y, T > n)
+∣ ∣
+∣ 6 ̂P(T > n).
+D’après la première étape, la chaîne {Wn}n > 0 est récurrente positive. Par conséquent le temps d’arrêt T est fini presque sûrement et P(T > n) tend vers 0 quand n tend vers l’infini. Ceci conclut la preuve du théorème.
+La définition 5.3 de l’apériodicité est particulièrement bien adaptée pour les preuves. Il existe un autre point de vue complémentaire qui justifie le choix du mot apériodique et que nous présentons dans la suite. Cette partie peut être omise en première lecture.
+Pour tout état x ∈ E, on définit
+p(x) = PGCD[I(x)] où I(x) = {n > 1; Pn(x, x) > 0}
+où PGCD désigne le plus grand commun diviseur.
+Proposition 5.6. Soit {Xn}n > 0 une chaîne de Markov irréductible sur l’espace d’états E. Alors la fonction x → p(x) est constante sur E.
+Démonstration. Soient x, y ∈ E deux états. Comme la chaîne de Markov est irréductible, il existe deux entiers i, j tels que Pi(x, y) > 0 et Pj(y, x) > 0. La propriété de Markov implique que pour tout r ∈ I(y)
+Pi+j(x, x) > 0 et Pi+j+r(x, x) > 0.
+Ainsi p(x) divise i + j et i + j + r et donc p(x) divise la différence r de ces deux entiers. Comme r est arbitraire dans I(y), on déduit que p(x) divise p(y). En inversant les rôles de x et y, on montre l’égalité p(x) = p(y).
+Pour la marche aléatoire de la figure 5.3, la période est égale à 2. Nous donnons maintenant une seconde définition de l’apériodicité équivalente à celle de la définition 5.3
+Définition 5.7. Une chaîne de Markov irréductible {Xn}n > 0 est dite apériodique si tout état x vérifie p(x) = 1.
+
+
+5.2. CONVERGENCE 83
+Le lemme qui suit permet de faire le lien entre les deux définitions.
+Lemme 5.8. Soit une chaîne de Markov irréductible de matrice de transition P sur E. Pour tout x dans E, les deux assertions suivantes sont équivalentes : (i) p(x) = 1, (ii) il existe n(x) > 1 tel que Pn(x, x) > 0 pour tout n > n(x).
+Démonstration. L’implication (ii) ⇒ (i) est immédiate. Pour établir la réciproque, on fixe x tel que p(x) = 1. Considérons des entiers n1, . . . , nk dans I(x) tels que PGCD[n1, . . . , nk] = 1. Le théorème de Bézout assure l’existence de q1, . . . , qk ∈ Z vérifiant
+k
+∑
+i=1
+qini = 1. (5.9)
+En utilisant la notation q+
+i = max(qi, 0) et q−
+i = − min(qi, 0), on définit deux entiers
+a=
+k
+∑
+i=1
+q+
+i ni et b =
+k
+∑
+i=1
+q−
+i ni
+qui satisfont a − b = 1 d’après (5.9). Remarquons que si b = 1 alors l’assertion (ii) est vérifiée car un des entiers n1, . . . , nk doit être égal à 1 et donc P(x, x) > 0. De même (ii) est vraie si b = 0 car alors a = 1. Par conséquent, il suffit de considérer le cas b > 1. Posons
+n(x) = b2 − 1 > 0.
+Alors pour tout n > n(x), la division euclidienne de n par b(x) s’écrit
+n = d b + r avec d > r et 0 6 r 6 b(x) − 1
+Par la relation a − b = 1, on peut réécrire n comme combinaison linéaire de n1, . . . , nk à coefficients dans N
+n = (d − r) b + r a = (d − r)
+k
+∑
+i=1
+q−
+i ni + r
+k
+∑
+i=1
+q+
+i ni.
+Comme Pni (x, x) > 0 pour tout i 6 k, on en déduit que Pn(x, x) > 0.
+5.2.2 Distance en variation et couplage
+Dans les applications, il est important de quantifier la vitesse de relaxation de la mesure {Pμ(Xn = y)}y∈E vers la mesure invariante π. Il faut donc préciser la convergence du théorème 5.5. Pour cela nous commencerons par définir une distance entre les mesures sur E.
+Définition 5.9. Soient μ et ν deux mesures de probabilité sur un espace dénombrable E. On définit la distance en variation totale entre ces deux mesures par
+‖μ − ν‖VT = 1
+2 x∈∑E
+∣
+∣μ(x) − ν(x)∣
+∣.
+
+
+84 CHAPITRE 5. ERGODICITÉ ET CONVERGENCE
+12
+3
+ν
+μ
+A Ac
+FIGURE 5.4 – Les densités des mesures μ et ν sont représentées. Leur partie commune est dessinée en gris et la distance en variation est proportionnelle à l’aire des zones blanches 1 et 2. Si les 2 mesures étaient identiques les zones 1 et 2 n’existeraient pas et leur distance en variation serait nulle. Inversement, si les supports des mesures sont disjoints leur distance est maximale.
+Cette distance s’interprète comme la moitié de l’aire des régions 1 et 2 sur la figure 5.4. Le point clef de la preuve de convergence du théorème 5.5 résidait dans la construction d’un couplage entre les trajectoires. Nous allons maintenant revenir sur la notion de couplage et montrer qu’elle est intimement liée à la distance en variation totale.
+Un couplage entre les deux mesures de probabilité μ et ν est une paire de variables aléatoires (X, Y) telles que X ait pour distribution μ et Y pour distribution ν
+P(X = x) = y∈∑E
+̂P(X = x, Y = y) = μ(x) (5.10)
+P(Y = y) = x∈∑E
+̂P(X = x, Y = y) = ν(y) (5.11)
+où ̂P est la probabilité jointe des deux variables X et Y. Il existe de multiples façons de coupler deux mesures. Supposons par exemple que μ = ν = 1
+2 (δ0 + δ1). Un couplage
+possible est de choisir X et Y indépendamment
+∀x, y ∈ {0, 1}, ̂P(X = x, Y = y) = 1
+4 ⇒ ̂P(X 6= Y) = 1
+2.
+Un autre couplage consiste à corréler fortement les 2 variables en choisissant X selon une loi de Bernoulli de paramètre 1/2 puis en posant Y = X
+∀x, y ∈ {0, 1}, ̂P(X = x, Y = y) = 1
+2 1y=x ⇒ ̂P(X 6= Y) = 0.
+Les deux couplages respectent la propriété des lois marginales (5.10), mais leurs lois jointes sont très différentes. Certains couplages sont plus intéressants que d’autres comme le montre le lemme qui suit.
+Lemme 5.10. Soient μ et ν deux mesures de probabilité sur un espace dénombrable E, alors
+‖μ − ν‖VT = max
+B⊂E
+∣
+∣μ(B) − ν(B)∣
+∣ (5.12)
+= inf
+{
+̂P(X 6= Y); (X, Y) est un couplage de μ et ν
+}
+(5.13)
+
+
+5.2. CONVERGENCE 85
+où l’infimum est pris sur tous les couplages possibles de μ et ν. Les couplages qui réalisent l’égalité sont dits optimaux.
+Dans l’exemple précédent des mesures μ = ν = 1
+2 (δ0 + δ1), le second couplage est optimal mais pas le premier. Dans la suite du cours, seule l’identité (5.13) sera utilisée.
+Démonstration. Commençons par montrer l’identité (5.12). On définit le sous-ensemble A (cf. figure 5.4) comme
+A = {x ∈ E; μ(x) > ν(x)}.
+On a
+‖μ − ν‖VT = 1
+2 x∈∑E
+∣
+∣μ(x) − ν(x)∣
+∣= 1
+2 x∈∑A
+μ(x) − ν(x) − 1
+2 x∈∑Ac
+μ(x) − ν(x)
+=1
+2
+(
+μ(A) − ν(A) − μ(Ac) + ν(Ac)
+)
+= μ(A) − ν(A) = −μ(Ac) + ν(Ac)
+où on a utilisé 1 = μ(A) + μ(Ac) = ν(A) + ν(Ac). Par ailleurs pour tout B ⊂ E
+μ(B) − ν(B) 6 μ(B ∩ A) − ν(B ∩ A) 6 μ(A) − ν(A)
+et aussi
+ν(B) − μ(B) 6 ν(Ac) − μ(Ac).
+On en déduit que
+max
+B⊂E
+∣
+∣μ(B) − ν(B)∣
+∣ = μ(A) − ν(A) = ‖μ − ν‖VT. (5.14)
+Pour montrer (5.13), vérifions d’abord que
+‖μ − ν‖VT 6 inf
+{
+̂P(X 6= Y); (X, Y) est un couplage de μ et ν
+}
+. (5.15)
+Soit B un sous-ensemble de E
+μ(B) − ν(B) = P(X ∈ B) − P(Y ∈ B)
+=
+̂P(X ∈ B, Y 6∈ B) + ̂P(X ∈ B, Y ∈ B) − P(Y ∈ B)
+6
+̂P(X ∈ B, Y 6∈ B) 6 ̂P(X 6= Y) .
+Par symétrie
+ν(B) − μ(B) 6 ̂P(X 6= Y) .
+Il suffit d’utiliser l’identité (5.12) pour en déduire l’inégalité (5.15).
+Pour montrer la réciproque, il suffit de construire un couplage qui réalise l’égalité dans (5.13). On définit
+p = x∈∑E
+inf{μ(x), ν(x)}
+
+
+86 CHAPITRE 5. ERGODICITÉ ET CONVERGENCE
+qui s’interprète comme l’aire de la région 3 dans la figure 5.4. En utilisant la relation (5.14), on peut réécrire p sous la forme
+p = x∈ ∑E
+μ(x) 6 ν(x)
+μ(x) + x∈ ∑E
+μ(x)>ν(x)
+ν(x) = 1 + x∈ ∑E
+μ(x)>ν(x)
+ν(x) − μ(x) = 1 − (
+μ(A) − ν(A))
+= 1 − ‖μ − ν‖VT.
+Le couplage consiste à choisir une variable B de loi de Bernoulli
+P(B = 0) = p, P(B = 1) = 1 − p
+et à construire X, Y en fonction de la valeur de B.
+(i) Si B = 0, alors on choisit une variable Z selon la probabilité sur E
+m3(x) = 1
+p inf{μ(x), ν(x)}
+qui est concentrée dans la région 3 de la figure 5.4. On pose ensuite X = Y = Z. Remarquons que si p = 0 alors B n’est jamais égal à 0.
+(ii) Si B = 1, alors on choisit X selon la probabilité
+m1(x) =
+{ μ(x)−ν(x)
+‖μ−ν‖VT si μ(x) > ν(x)
+0 sinon
+et Y est choisi indépendamment selon la probabilité
+m2(x) =
+{ ν(x)−μ(x)
+‖μ−ν‖VT si ν(x) > μ(x)
+0 sinon
+La relation (5.14) permet de vérifier que les 2 mesures sont normalisées par 1.
+Cette procédure construit bien un couplage car X et Y ont les bonnes lois marginales
+pm3(x) + (1 − p)m1(x) = μ(x) et pm3(x) + (1 − p)m2(x) = ν(x).
+Les mesures m1 et m2 ont des supports disjoints (associés aux régions 1 et 2 de la figure 5.4). Par conséquent X 6= Y si et seulement si B = 1. L’égalité dans (5.13) est donc bien vérifiée car
+̂P(X 6= Y) = P(B = 1) = 1 − p = ‖μ − ν‖VT.
+Le Lemme 5.10 va nous permettre de renforcer le théorème 5.5 sous une hypothèse introduite par Doeblin.
+
+
+5.2. CONVERGENCE 87
+Théorème 5.11. Soit {Xn}n > 0 une chaîne de Markov irréductible, apériodique sur un espace E dénombrable. On suppose que sa matrice de transition vérifie la condition de Doeblin, i.e. qu’il existe r > 1, δ > 0 et une mesure de probabilité ν sur E tels que
+Pr(x, z) > δ ν(z) pour tous x, z dans E. (5.16)
+Alors la chaîne de Markov admet une mesure de probabilité invariante π vers laquelle la distribution de la chaîne de Markov converge exponentiellement vite (uniformément par rapport aux états initiaux)
+sup
+x∈E
+∥
+∥Pn(x, ·) − π
+∥
+∥VT = 1
+2 sup
+x∈E y∈∑E
+∣
+∣Pn(x, y) − π(y)∣
+∣ 6 (1 − δ)bn/rc
+où Pn(x, ·) est la distribution au temps n en partant de x et b·c représente la partie entière. Pour une chaîne de Markov distribuée initialement selon μ, on a aussi
+∥ ∥
+∥ x∈∑E
+μ(x)Pn(x, ·) − π(·)
+∥ ∥
+∥VT = 1
+2 y∈∑E
+∣
+∣Pμ
+(Xn = y) − π(y)∣
+∣ 6 (1 − δ
+)bn/rc. (5.17)
+Dans une chaîne de Markov irréductible, tous les états communiquent mais la probabilité de passer d’un état vers un autre peut être arbitrairement petite (3.6). La condition de Doeblin (5.16) impose une borne inférieure uniforme sur les probabilités de transition entre 2 états. En particulier, si l’espace d’états E est fini, une chaîne de Markov irréductible et apériodique satisfait toujours la condition de Doeblin. En effet, il existe r > 1 tel que pour tout couple x, y de E, on ait Pr(x, y) > 0. Il suffit de choisir
+δ = y∈∑E
+min
+x∈E Pr(x, y) > 0 et ν(y) = 1
+δ min
+x∈E Pr(x, y). (5.18)
+Démonstration. La preuve se décompose en 3 temps.
+Étape 1. Existence d’une mesure invariante.
+Vérifions d’abord que la condition de Doeblin (5.16) implique l’existence d’une mesure invariante. Comme il existe au moins un état z tel que ν(z) > 0, on peut majorer la probabilité de ne pas repasser en z avant un temps kr. En utilisant successivement la propriété de Markov au temps (k − 1)r et la condition de Doeblin (5.16), on obtient la décroissance exponentielle
+Pz
+(Tz+ > kr) = x∈∑E
+Pz
+(
+Tz+ > (k − 1)r, X(k−1)r = x
+)
+P
+(
+Tz+ > r
+∣ ∣
+∣ X0 = x
+)
+6 x∈∑E
+Pz
+(
+Tz+ > (k − 1)r, X(k−1)r = x
+)
+(1 − δν(z))
+6 Pz
+(
+Tz+ > (k − 1)r
+)
+(1 − δν(z)) 6 (1 − δν(z))k.
+Ceci implique que l’état z est récurrent positif car
+Ez
+(Tz+
+) = n∑> 1
+Pz
+(Tz+ > n) 6 r ∑
+k>0
+Pz
+(Tz+ > kr) < ∞
+
+
+88 CHAPITRE 5. ERGODICITÉ ET CONVERGENCE
+et par le théorème 4.6 qu’il existe une mesure invariante.
+Étape 2. Convergence pour une condition de Doeblin simplifiée.
+Pour démontrer la convergence, nous supposerons d’abord que (5.16) est vraie avec r = 1, c’est-à-dire P(x, z) > δ ν(z) pour tous x, z dans E.
+La borne inférieure δ ν(z) peut être interprétée comme la région grise de la figure 5.4 : c’est la partie commune des mesures de probabilité P(x, ·) pour différentes valeurs de x. Nous allons construire un couplage qui s’inspire de la preuve du lemme 5.10. Soient {Xn}n > 0 et {Yn}n > 0 deux réalisations de la chaîne de Markov, la première partant de x et l’autre de y. Supposons que les deux trajectoires soient construites jusqu’au temps n. Si Xn = Yn, on préserve l’égalité au temps n + 1 (cf. figure 5.3) et on pose
+̂P(Xn+1 = xn+1, Yn+1 = yn+1
+∣
+∣Xn = xn, Yn = xn
+) = P(xn, xn+1) 1{yn+1=xn+1}.
+Si Xn 6= Yn alors au pas de temps n + 1, on tire au hasard une variable aléatoire Bn+1 de Bernoulli de paramètre 1 − δ (indépendante de tout le passé)
+P(Bn+1 = 1) = 1 − δ, P(Bn+1 = 0) = δ.
+— Si Bn+1 = 0, on choisit un site z de E selon la loi ν et on pose
+Xn+1 = Yn+1 = z.
+Ce choix ne dépend pas des valeurs de Xn et Yn. — Si Bn+1 = 1, Xn+1 et Yn+1 sont choisis indépendamment en fonction de lois qui dépendent des valeurs Xn et Yn
+̂P(Xn+1 = xn+1
+∣
+∣Xn = xn, Bn+1 = 1) = 1
+1 − δ (P(xn, xn+1) − δν(xn+1))
+̂P(Yn+1 = yn+1
+∣
+∣Yn = yn, Bn+1 = 1) = 1
+1 − δ (P(yn, yn+1) − δν(yn+1))
+On remarque que la matrice modifiée est bien une matrice de transition car ses termes sont positifs et
+∀z1 ∈ E, z2∑∈E
+1
+1 − δ (P(z1, z2) − δν(z2)) = 1.
+De plus les processus {Xn}n > 0 et {Yn}n > 0 sont chacun des chaînes de Markov de matrice de transition P car
+P
+(Xn+1 = xn+1
+∣
+∣Xn = xn
+)
+= δP(Xn+1 = xn+1
+∣
+∣Xn = xn, Bn+1 = 0)
++ (1 − δ)P(Xn+1 = xn+1
+∣
+∣Xn = xn, Bn+1 = 1)
+= δν(xn+1) + (P(xn, xn+1) − δν(xn+1)) = P(xn, xn+1).
+
+
+5.2. CONVERGENCE 89
+Le couplage étant construit, il ne reste plus qu’à estimer le temps d’arrêt T quand les marches se rejoignent (cf. figure 5.3)
+T = inf
+{
+n > 0; Xn = Yn
+}
+.
+La condition de Doeblin (5.16) assure que pour tous x0 6= y0 dans E
+̂P(T = 1) = ̂P
+(
+X1 = Y1
+∣ ∣
+∣ X0 = x0, Y0 = y0
+)
+> P(B1 = 0) > δ.
+En utilisant la propriété de Markov et cette borne inférieure, on obtient
+̂P(T > n) = ∑
+z,z′ ∈E
+z6=z′
+̂P (T > (n − 1), Xn−1 = z, Yn−1 = z′)
+̂P
+(
+T>1
+∣ ∣
+∣ X0 = z, Y0 = z′)
+6
+̂P(T > (n − 1)) (1 − δ
+) 6 (1 − δ
+)n.
+Il est important de remarquer que cette borne est uniforme pour tous les états de départ x et y de E. Pour estimer l’écart entre les distributions au temps n, il ne reste plus qu’à utiliser le lemme 5.10 en choisissant le couplage que nous venons de construire
+∥ ∥
+∥Pn(x, ·) − Pn(y, ·)
+∥ ∥
+∥VT 6 ̂P(Xn 6= Yn) = ̂P(T > n) 6 (1 − δ
+)n. (5.19)
+Si la chaîne de Markov {Yn}n > 0 était issue de la mesure invariante π alors sa distribution à tout temps serait égale à π
+∀y ∈ E, π(y) = Pπ
+(Yn = y) = z∈∑E
+π(z)Pn(z, y).
+Pour conclure le théorème, il suffit de considérer un couplage entre {Xn}n > 0 partant de X0 = x et {Yn}n > 0 distribuée initialement sous π. Plus généralement si X0 est distribuée sous la mesure μ, on obtient par le même argument de couplage l’inégalité (5.17).
+Étape 3. Cas général.
+Supposons maintenant que la condition de Doeblin (5.16) soit satisfaite avec un paramètre r > 1. On remarque que la chaîne de Markov {X ̃ k = Xkr}k > 0 a pour matrice
+de transition Pr et pour mesure invariante π. On peut décomposer tout entier n sous la forme n = kr + ` avec ` ∈ {0, . . . , r − 1} et écrire la distribution au temps n d’une chaîne partant de x comme la distribution de X ̃ k partant initialement de la mesure P`(x, .)
+Px(Xn = y) = z∈∑E
+P`(x, z)Pz
+(X ̃ k = y).
+Cette égalité est une simple réécriture de l’équation de Chapman-Kolmogorov Pn = P`Pkr. La chaîne {X ̃ k}k > 0 vérifie le critère de Doeblin pour r = 1, il suffit donc d’appli
+quer à {X ̃ k}k > 0 le résultat de la seconde étape pour établir la convergence exponentielle
+de la distribution Pn(x, ·).
+
+
+90 CHAPITRE 5. ERGODICITÉ ET CONVERGENCE
+5.2.3 Vitesses de convergence
+Dans de nombreuses applications (cf. chapitre 6) la vitesse de convergence vers la mesure d’équilibre est fondamentale, car elle permet de déterminer le temps nécessaire pour qu’une simulation donne un résultat avec la précision voulue. La condition de Doeblin définie au théorème 5.11 est importante, car elle fournit un cadre théorique simple pour montrer une convergence exponentielle. Cependant, de meilleures vitesses de convergence peuvent souvent être prouvées par une étude spécifique de chaque modèle. Nous allons l’illustrer sur un exemple.
+Marche aléatoire.
+Considérons une marche aléatoire fainéante symétrique sur le domaine périodique E = {1, . . . , L} de matrice de transition P donnée par
+∀i ∈ E, P(i, i + 1) = P(i, i − 1) = 1/4, P(i, i) = 1/2
+où on identifie L + 1 ≡ 1 et 0 ≡ L. Comme la probabilité de rester sur place est non nulle, cette chaîne de Markov est apériodique. On construit le couplage (Yn1, Yn2) sur E × E partant initialement de (x, y). Au temps
+n, si Yn1 = Yn2 alors les 2 coordonnées évoluent de la même manière selon la matrice
+de transition P et on a Yn1+1 = Yn2+1 (cf. figure 5.3). Si Yn1 6= Yn2, on choisit une variable
+Bn+1 ∈ {1, 2} avec probabilité 1/2, puis seule la coordonnée Bn+1 est mise à jour et saute à droite ou à gauche avec probabilité 1/2 : YBn+1
+n+1 = YBn+1
+n ± 1.
+On note T le premier temps où les deux trajectoires se rencontrent. En appliquant le lemme 5.10, on peut donc contrôler la convergence en fonction de T
+‖Pn(x, ·) − Pn(y, ·)‖VT 6 ̂P(T > n) 6 1
+n
+̂E(T)
+où ̂E correspond à l’espérance pour la mesure jointe du couplage (Yn1, Yn2).
+Supposons x > y et analysons la différence Zn = Yn1 − Yn2. On constate que {Zn}n > 0
+est une marche aléatoire partant de x − y et sautant à chaque pas de temps à gauche ou à droite avec probabilité 1/2 tant qu’elle n’a pas atteint 0 ou L, c’est-à-dire tant que les marches Yn1, Yn2 ne se sont pas rejointes. Le temps d’arrêt T correspond donc au moment où le processus Zn est absorbé en 0 ou en L, c’est l’analogue du temps défini dans la ruine du joueur dont l’espérance a été calculée section 2.5.2 en (2.31)
+̂E(T) = (x − y)(L − (x − y)).
+On obtient donc uniformément en x et y
+‖Pn(x, ·) − Pn(y, ·)‖VT 6 L2
+4n .
+Ceci montre que pour une taille L assez grande, la chaîne de Markov sera proche de l’équilibre dès que le temps est de l’ordre de L2. Cet ordre de grandeur est optimal comme l’indique le théorème central limite : une marche aléatoire au temps n visite des
+régions de taille √n, par conséquent pour recouvrir le domaine {1, . . . , L}, il faudra au moins attendre des temps de l’ordre L2.
+
+
+5.2. CONVERGENCE 91
+Comparons maintenant ce résultat avec celui donné par le théorème 5.11. La condition de Doeblin (5.16) suppose de trouver un paramètre r tel que tous les états puissent être connectés en r sauts. Il faut au minimum choisir r > L/2. Pour r = L/2, la constante δ est alors de l’ordre 1
+4L/2 . Pour ces valeurs, le théorème 5.11 implique
+sup
+x∈E
+∥
+∥Pn(x, ·) − π
+∥
+∥VT 6
+(
+1− 1
+4L/2
+)b n
+L/2 c
+' exp
+(
+−c n
+2L L
+)
+où la dernière égalité est un équivalent pour L grand et c est une constante. Dans cet exemple la condition de Doeblin assure seulement la convergence pour des temps de l’ordre 2L L et d’un point de vue pratique, elle n’est pas pertinente car elle ne prédit pas l’ordre L2.
+Considérons maintenant une marche modifiée qui au lieu de rester sur place avec probabilité 1/2 peut sauter uniformément sur tous les sites selon la probabilité de transition
+∀i, j ∈ E, P(i, j) = 1
+4 1{j=i±1} + 1
+2L où on identifie L + 1 ≡ 1 et 0 ≡ L. Dans ce cas la condition de Doeblin s’applique avec r = 1, δ = 1/2 et ν(y) = 1/L. Par le théorème 5.11, on obtient
+sup
+x∈E
+∥
+∥Pn(x, ·) − π
+∥
+∥VT 6 1
+2n .
+Cette fois la convergence est beaucoup plus rapide, elle ne dépend plus de L et la condition de Doeblin fournit une information précise. Cette modification des probabilités de transition est en fait identique à celle introduite dans la matrice de transition de Google (5.8) afin d’accélérer la vitesse de convergence.
+Mélange de cartes.
+Pour mélanger un jeu de N cartes, on répète plusieurs fois la procédure suivante : une carte est choisie au hasard et est déplacée en haut du paquet (si la carte en haut du paquet est choisie, elle reste sur place). Les cartes sont numérotées de 1 à N et cette procédure définit une chaîne de Markov {Σk}k > 0 sur l’ensemble des permutations SN
+de N éléments. On notera P sa matrice de transition et Pk(Id, ·) la distribution au temps k de la chaîne partant de la configuration Id = {1, . . . , N} de SN. L’exemple ci-dessous représente un jeu de 5 cartes après deux pas de temps. Les cartes 4 et 1 ont été choisies successivement avec probabilité 1/5.
+Σ0 =
+∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣
+1 2 3 4 5
+∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣
+carte 4
+−−−−→
+déplacée Σ1 =
+∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣
+4 1 2 3 5
+∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣
+carte 1
+−−−−→
+déplacée Σ2 =
+∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣
+1 4 2 3 5
+∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣
+La mesure invariante π de cette chaîne de Markov est uniforme sur les N! permutations possibles. Pour le voir il suffit de remarquer qu’une permutation σ donnée a exactement N antécédents possibles et que chacun peut atteindre σ avec probabilité 1/N
+π(σ) = ∑
+η∈SN
+π(η)P(η, σ) = 1
+N! ∑
+η∈SN
+P(η, σ) = 1
+N!.
+
+
+92 CHAPITRE 5. ERGODICITÉ ET CONVERGENCE
+La proposition suivante permet d’estimer la vitesse de convergence pour des jeux de cartes de grande taille (proche de l’infini !)
+Proposition 5.12. Pour tout ε > 0, il suffit de mélanger kN > (1 + ε)N log N fois un paquet de N cartes pour que sa distribution soit uniforme (quand N est très grand)
+Nli→m∞
+∥
+∥PkN (Id, ·) − π
+∥
+∥VT = 0. (5.20)
+Inversement, il ne faut pas mélanger moins de fois le paquet car pour toute suite `N 6 (1 − ε)N log N la distribution au temps `N est encore très loin de π
+Nli→m∞
+∥
+∥P`N (Id, ·) − π
+∥
+∥VT = 1. (5.21)
+Cette proposition illustre un phénomène de seuil (ou cutoff) que l’on retrouve dans de nombreuses chaînes de Markov : la convergence pour la norme en variation totale ne s’opère pas régulièrement au cours du temps. Dans l’exemple du jeu de cartes, la distribution de la chaîne de Markov reste très loin de la mesure invariante avant le temps N log N, puis devient très proche après N log N. La convergence se produit très rapidement autour de N log N dans un intervalle de temps plus court que εN log N (cf. figure 5.5).
+εN log N
+1 N log N
+k
+FIGURE 5.5 – Distance en variation en fonction du temps k entre Pk(Id, ·) et la mesure invariante. La convergence est localisée autour de N log N.
+Démonstration. Commençons par prouver la convergence vers l’équilibre, i.e. la limite (5.20). Pour cela, construisons un couplage entre deux trajectoires de la chaîne {Σk1} et
+{Σk2}. La première a pour donnée initiale Σ10 = Id et l’état initial Σ20 de la seconde est choisi selon π. À chaque pas de temps, on tire un numéro de carte au hasard entre 1 et N et cette carte est posée en haut du paquet dans les deux jeux.
+Σ10 =
+∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣
+1 2 3 4 5
+∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣
+et Σ20 =
+∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣
+5 4 1 3 2
+∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣
+une étape
+−−−−−−→
+de mélange Σ11 =
+∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣
+3 1 2 4 5
+∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣
+et Σ21 =
+∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣
+3 5 4 1 2
+∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣ ∣
+Dans l’exemple ci-dessus la carte 3 a été déplacée dans les deux configurations. Chacun des jeux évolue selon la bonne probabilité de transition. Si une carte est choisie au temps
+
+
+5.2. CONVERGENCE 93
+k alors elle occupera la même position dans les deux jeux à tous les temps suivants. En effet, elle sera mise au-dessus du paquet au temps k puis descendra dès que d’autres cartes seront ajoutées. Elle pourra se retrouver encore au-dessus du paquet si elle est choisie une seconde fois, mais tous ses déplacements seront les mêmes dans les deux jeux. Par conséquent si toutes les cartes ont été choisies au moins une fois, les deux jeux sont identiques. On définit le temps d’arrêt
+τ = inf {k > 0, toutes les cartes ont été choisies au moins une fois au temps k}
+qui permet de borner le temps de couplage
+T = inf {k > 0, Σk1 = Σk2
+} 6 τ.
+Pour estimer la vitesse de convergence, il suffit donc de contrôler τ
+‖Pk(Id, ·) − π‖VT 6 ̂P(T > k) 6 ̂P(τ > k). (5.22)
+Le temps d’arrêt τ se décompose facilement en
+τ = τ1 + τ2 + · · · + τN (5.23)
+où τi est le temps nécessaire pour obtenir la ième nouvelle carte sachant qu’on a déjà i − 1 cartes différentes. La première étape est très simple τ1 = 1. Supposons que i − 1 cartes différentes ont été trouvées, la probabilité de découvrir une nouvelle carte au temps k suit une loi géométrique de paramètre 1 − (i − 1)/N
+P
+(
+τi = k) =
+(i − 1 N
+)k−1 (
+1− i−1
+N
+)
+car la probabilité de trouver une nouvelle carte est 1 − i−1
+N . On en déduit que
+E(τN−i) = N
+i + 1 et Var(τN−i) = E(τ2N−i) − E(τN−i)2 = N(N − i − 1)
+(i + 1)2 6 N2
+(i + 1)2 .
+Ceci permet de calculer l’espérance asymptotique de τ quand N est grand
+E(τ) =
+N
+∑
+i=1
+E(τi) =
+N−1
+∑
+i=0
+N
+i + 1 ' N log N
+ainsi qu’une borne sur sa variance car les τi sont indépendants
+Var(τ) = E((τ − E(τ))2) =
+N
+∑
+i=1
+Var(τi) 6
+N−1
+∑
+i=0
+N2
+(i + 1)2 6 cN2
+où c est une constante. Supposons que k > E(τ) alors l’inégalité de Tchebyshev permet d’écrire
+P
+(
+τ > k) = P(
+τ − E(τ) > k − E(τ)) 6 E((τ − E(τ))2)
+(k − E(τ))2 6 cN2
+(k − E(τ))2 .
+
+
+94 CHAPITRE 5. ERGODICITÉ ET CONVERGENCE
+En utilisant (5.22), ce résultat fournit une vitesse de convergence vers la mesure invariante pour N fixé
+‖Pk(Id, ·) − π‖VT 6 cN2
+(k − E(τ))2 .
+Pour N grand, si kN > (1 + ε)N log N > E(τ), on en déduit que
+‖PkN (Id, ·) − π‖VT 6 c(ε)N2
+(N log N)2 6 c(ε)
+( log N)2
+où c(ε) est une constante dépendante de ε. Quand N tend vers l’infini, on retrouve la limite (5.20).
+Pour estimer la borne inférieure (5.21) sur le temps de mélange, il suffit de remarquer que pour un temps `N 6 (1 − ε)N log N moins de N1− ε
+2 cartes auront été déplacées. Ceci veut dire que le paquet contiendra un nombre important de cartes ayant conservé leur ordre initial et la convergence complète n’aura pas eu lieu. En utilisant la notation (5.23), on peut estimer le temps nécessaire pour que N1− ε
+2
+cartes aient été choisies. On notera ce temps
+̂τ = τ1 + · · · + τN1− 2ε .
+L’espérance et la variance de ce temps se comportent asymptotiquement en N comme
+E(̂τ) ' (1 − ε
+2 )N log N et E(̂τ2) − E(̂τ)2 6 cN2 (5.24)
+Nous allons montrer que l’espérance est une bonne estimation du temps nécessaire pour découvrir N1− ε
+2 et en particulier qu’avec grande probabilité ̂τ sera plus grand que (1 − ε)N log N. Pour cela définissons
+τ ̃ = ̂τ − (1 − ε)E(̂τ)
+et utilisons la borne du second moment (prouvée dans le lemme 5.13 ci-dessous) qui implique pour λ = 0 que
+P
+(
+τ ̃ > 0
+)
+> E(τ ̃)2
+E(τ ̃2) = ε2E(̂τ)2
+ε2E(̂τ)2 + E(̂τ2) − E(̂τ)2 .
+Par les estimations (5.24), le terme de droite tend vers 1 quand N tend vers l’infini et on en déduit que
+Nli→m∞ P
+(
+̂τ > (1 − ε)(1 − ε
+2 )N log N
+)
+= 1.
+Supposons qu’exactement K cartes n’aient pas été choisies, alors les N − K autres ont été déplacées en haut du paquet. Ces K cartes ont conservé leur ordre initial i1 < i2 < · · · < iK et se trouvent au bas du paquet. Le nombre d’arrangements possibles pour un tel évènement est (N
+K
+)
+(N − K)! = N!
+K! .
+
+
+5.2. CONVERGENCE 95
+Par conséquent la probabilité d’un tel évènement est 1
+K! . Soit AN l’ensemble des permu
+tations telles qu’au moins N/2 cartes soient ordonnées au bas du paquet. La probabilité π(AN) d’un tel évènement tend donc vers 0 quand N tend vers l’infini. Il suffit maintenant d’associer les deux résultats précédents pour en déduire la borne inférieure. Pour toute suite de temps {`N} telle que `N 6 (1 − ε)N log N, il y aura eu
+au plus N1−ε/2 cartes déplacées. Par conséquent avec grande probabilité, la chaîne de Markov Σ`N sera dans l’ensemble AN et
+Nli→m∞ PId
+(Σ`N ∈ AN
+) − π(AN) = 1.
+Par l’identité (5.12)
+∥
+∥P`N (Id, ·) − π
+∥
+∥ > PId
+(Σ`N ∈ AN
+) − π(AN).
+On en déduit la borne inférieure (5.21).
+Lemme 5.13 (Inégalité du second moment). Soit X une variable aléatoire telle que E(X) > 0, alors
+0 6 λ 6 1, P
+(
+X > λE(X)
+)
+> (1 − λ)2 E(X)2
+E(X2) .
+Démonstration. Pour le voir, on remarque que
+E(X) = E(X 1{X>λE(X)}) + E(X 1{X 6 λE(X)}) 6 E(X 1{X>λE(X)}) + λE(X).
+Par conséquent
+(1 − λ)E(X) 6 E(X 1{X>λE(X)}).
+On conclut par l’inégalité de Cauchy-Schwarz
+(1 − λ)2E(X)2 6 E(X2) E(1{X>λE(X)}).
+
+
+
+
+Chapitre 6
+Application aux algorithmes
+stochastiques
+6.1 Optimisation
+Dans de nombreuses applications, on souhaite minimiser une fonction V : RK → R dont la structure est souvent complexe et dépend d’un grand nombre de paramètres K 1 selon le problème à modéliser. Cette fonction sert par exemple à quantifier un coût en économie ou un rendement dans une réaction chimique, à optimiser des échanges dans un réseau informatique ou à déterminer des estimateurs en statistique (maximum de vraisemblance). On cherche aussi à identifier les valeurs où cette fonction prend son minimum Argmin V = {x ∈ RK; V(x) = inyf V(y)}.
+Ce problème d’optimisation est purement déterministe et il peut être résolu par des méthodes analytiques. En particulier, les méthodes de programmation linéaire sont optimales pour résoudre des problèmes avec des contraintes linéaires. Dans le cas d’une fonction V strictement convexe, une méthode de descente de gradient [4] permet de déterminer le point x? où la fonction atteint son minimum en suivant le flot de l’équation
+∀t > 0, x ̇t = −V′(xt) alors tli→m∞ xt = x?.
+Par contre si la fonction V possède de nombreux minima locaux une telle méthode ne permettra pas de déterminer le minimum global facilement car la limite de xt dépendra de l’état initial x0 (cf. figure 6.1).
+De nombreux problèmes d’optimisation nécessitent d’étudier des fonctions V particulièrement complexes, dépendant de multiples paramètres. Pour fixer les idées, considérons le cas d’école du problème du voyageur de commerce. Un voyageur de commerce doit visiter K clients dans K villes différentes et revenir à son point de départ en ne visitant chaque ville qu’une seule fois. Étant données les distances entre toutes les villes {d(i, j)} 1 6 i 6 K
+1 6 j 6 K , l’objectif est de minimiser le trajet à parcourir, c’est-à-dire
+min
+σ∈SK
+{V(σ)} avec V(σ) =
+K
+∑
+i=1
+d
+(
+σ(i), σ(i + 1)) (6.1)
+97
+
+
+98 CHAPITRE 6. APPLICATION AUX ALGORITHMES STOCHASTIQUES
+V (x)
+x
+FIGURE 6.1 – Le schéma représente un potentiel V(x) avec plusieurs minima locaux qui rendent la méthode de descente de gradient inefficace. Les algorithmes stochastiques permettent de franchir les barrières de potentiel (cf. la flèche en pointillés) pour atteindre le minimum global. Quand T est petit la mesure μT va se concentrer principalement autour des valeurs les plus basses de V par exemple sur le schéma sur les points situés sous la droite en pointillés.
+où σ appartient à l’ensemble SK des permutations de {1, . . . , K}. Chaque permutation σ correspond à un trajet entre les villes selon un certain ordre et comme le voyageur revient à son point de départ, on pose σ(K + 1) = σ(1). Une méthode de recherche systématique du minimum consisterait à explorer tous les chemins possibles et à comparer leurs longueurs. Ceci conduirait à une complexité numérique gigantesque car l’ensemble des trajets entre les K villes est équivalent aux permutations d’un ensemble à K éléments. Il faudrait donc évaluer les longueurs des K! trajets, ce qui est impossible numériquement dès que K devient grand. Ce problème appartient à la classe des problèmes NP-complets et il n’existe pas d’algorithme qui permette de le résoudre en un temps polynomial en K (sous l’hypothèse P 6= NP). Le problème du voyageur de commerce est un problème théorique qui sert souvent de référence pour tester des stratégies d’optimisation. Dans la pratique, il existe de nombreux problèmes d’optimisation similaires pour lesquels il est impossible d’obtenir la solution exacte en un temps raisonnable mais qui peuvent être résolus de manière approchée par des méthodes stochastiques. Nous reviendrons sur le problème du voyageur de commerce section 6.4.1.
+Ce chapitre décrit des méthodes probabilistes pour déterminer le minimum d’une fonction V sur un espace discret E fini mais de cardinal très grand. Pour construire une solution approchée à ce problème déterministe, nous définissons μT la mesure de Gibbs associée au potentiel V et au paramètre T > 0
+∀x ∈ E, μT(x) = 1
+ZT
+exp
+(
+−1
+T V(x)
+)
+avec ZT = y∈∑E
+exp
+(
+−1
+T V(y)
+)
+.
+(6.2) La mesure μT attribue une probabilité à chaque site de E et se concentre sur les minima de V quand T tend vers 0. Le résultat suivant est attribué à Pierre-Simon Laplace.
+Lemme 6.1. Si M désigne l’ensemble des points de E où V atteint son minimum, on a
+∀x ∈ E, lTi→m0 μT(x) =
+{1
+Card(M) si x ∈ M 0 si x 6∈ M
+
+
+6.2. ALGORITHMES STOCHASTIQUES 99
+ÊÊÊÊÊ
+‡
+‡
+‡ ‡
+‡
+012345
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+FIGURE 6.2 – On considère l’espace E = {1, . . . , 5} et la fonction V(1) = 87, V(2) = 4, V(3) = 55, V(4) = 99, V(5) = 25. La distribution de la probabilité μT est représentée par des cercles pour
+T = 104 et des carrés pour T = 2. Quand T est très grand la mesure est presque distribuée uniformément, par contre pour T plus petit les valeurs les plus basses de V deviennent prépondérantes (cf. lemme 6.1).
+Démonstration. Soit V? le minimum de V, on peut réécrire la mesure de Gibbs (6.2)
+∀x ∈ E, μT(x) = 1
+∑y∈E exp (− 1
+T [V(y) − V?]) exp
+(
+−1
+T [V(x) − V?]
+)
+.
+Dès que x 6∈ M, on a V(x) − V? > 0 et comme E est fini, seuls les termes dans M contribuent quand T tend vers 0.
+La figure 6.2 illustre ce lemme et montre que pour T proche de 0, la mesure μT se concentre sur les points où V est minimum. Par conséquent en simulant des réalisations de la mesure μT pour T proche de 0, on obtiendra avec une grande probabilité une approximation de l’ensemble M où V atteint son minimum. La simulation de la mesure de probabilité μT sera l’objet de la section suivante.
+6.2 Algorithmes stochastiques
+6.2.1 Algorithme de Metropolis-Hastings
+À première vue, la simulation de la mesure de Gibbs (6.2) suppose de calculer la distribution μT et donc d’évaluer ZT = ∑y∈E exp (− 1
+T V(y)). Dans la pratique, ceci est impossible à implémenter car il faudrait calculer toutes les valeurs de V pour un ensemble E de cardinal trop important. La méthode proposée en 1953 dans l’article [20] et améliorée par W. Hastings [15] en 1970 permet d’éviter cet écueil en simulant la mesure de Gibbs à l’aide d’une chaîne de Markov.
+L’algorithme de Metropolis-Hastings permet de simuler une variable aléatoire sous une mesure de probabilité quelconque sur E. On note π cette mesure et on suppose que π(x) > 0 pour tout x de E. Pour réaliser la simulation, il faut se donner une matrice de transition Q irréductible sur E satisfaisant pour tous x, y de E
+Q(x, y) > 0 ⇒ Q(y, x) > 0 (6.3)
+
+
+100 CHAPITRE 6. APPLICATION AUX ALGORITHMES STOCHASTIQUES
+et une fonction croissante h :]0, ∞[→]0, 1] vérifiant h(u) = uh(1/u). Par exemple on peut choisir
+h(u) = inf{1, u} ou h(u) = u
+1 + u.
+Pour x 6= y, on pose
+R(x, y) =
+{
+h
+( π(y)Q(y,x) π(x)Q(x,y)
+)
+si Q(x, y) 6= 0
+0 sinon (6.4)
+Ceci permet de construire la matrice de transition P définie par
+{
+P(x, y) = Q(x, y)R(x, y) si x 6= y
+P(x, x) = 1 − ∑y6=x P(x, y) (6.5)
+L’algorithme de Metropolis-Hastings, décrit ci-dessous, permet de simuler une chaîne de Markov {Xn}n > 0 de matrice de transition P :
+Étape 0. Initialiser X0
+Étape n + 1.
+Choisir y selon la loi Q(Xn, y) Choisir Un+1 uniformément dans [0, 1] (et indépendamment du passé) Si Un+1 < R(Xn, y) poser Xn+1 = y, sinon poser Xn+1 = Xn
+Supposons que π(x) > 0 pour tous les états x de E, on montre alors
+Théorème 6.2. La matrice de transition P définie en (6.5) est irréductible et réversible pour la mesure π qui est donc son unique mesure invariante. Si de plus h < 1 alors P est apériodique.
+Démonstration. L’irréductibilité de Q implique immédiatement celle de P. Pour montrer que P est réversible, il suffit d’utiliser l’identité h(u) = uh(1/u)
+x 6= y, π(x)P(x, y) = π(x)Q(x, y)h
+(
+π(y)Q(y, x) π(x)Q(x, y)
+)
+= π(y)Q(y, x) π(x)Q(x, y)
+π(y)Q(y, x) h
+(
+π(y)Q(y, x) π(x)Q(x, y)
+)
+= π(y)Q(y, x)h
+(
+π(x)Q(x, y) π(y)Q(y, x)
+)
+= π(y)P(y, x).
+Le théorème 3.11 permet d’en déduire que π est bien la mesure invariante. Si h < 1, alors P(x, x) > 0 pour tout x de E et la matrice P est bien apériodique. On peut aussi vérifier facilement que si Q est apériodique alors P le sera même si h 6 1.
+L’intérêt de l’algorithme de Métropolis est évident pour simuler la mesure de Gibbs μT (6.2), en effet la matrice de transition P s’écrit pour x 6= y
+P(x, y) = Q(x, y) h
+(
+exp
+(1
+T
+[V(x) − V(y)]
+) Q(y, x) Q(x, y)
+)

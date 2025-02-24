@@ -1,0 +1,3275 @@
+CentraleSupelec
+1ère ANNÉE D’ÉTUDES
+Programme Ingénieur CentraleSupélec
+1EL9000
+THERMODYNAMIQUE
+Didier JAMET
+2020 - 2021
+Réservé uniquement aux Enseignants, Élèves et Anciens Élèves de CentraleSupelec. Reproduction interdite.
+Ce polycopié contient des reproductions d’œuvres protégées effectuées par CentraleSupelec avec l’autorisation du CFC (20, rue des Grands Augustins - 75006 Paris).
+
+
+1
+Avant-propos
+Comment optimiser les systèmes énergétiques pour économiser les ressources naturelles ? Cette question est un enjeu majeur de notre société pour préparer et préserver son avenir économique et écologique. Les scientifiques et les ingénieurs sont et seront au cœur de cet enjeu en apportant des réponses concrètes et innovantes, la connaissance étant l’un des ressorts majeurs de l’innovation. La thermodynamique peut être définie comme la science des transformations de l’énergie. Par conséquent, comprendre et maîtriser la thermodynamique, ses principes fondateurs et donc les grands principes de transformation de l’énergie et leur mise en applications concrètes est une nécessité pour répondre aux enjeux énergétiques auxquels notre société doit et devra faire face. Sans ces connaissances, les solutions nécessaires ne pourront pas émerger et être déployées de façon viable.
+La thermodynamique est une science développée principalement au cours du dix-neuvième siècle et a été un élément important de la révolution industrielle. Elle est une science de l’ingénieur par excellence : une théorie scientifique à part entière (encore active) au cœur d’enjeux industriels et sociétaux majeurs d’aujourd’hui et de demain. De ce fait, ceux qui sauront proposer des solutions innovantes, ingénieuses et viables économiquement permettant d’économiser l’énergie et les matières premières pourront développer des activités économiques et industrielles fleurissantes.
+Comprendre pleinement ces enjeux et pouvoir proposer des solutions innovantes nécessite de comprendre les éléments fondamentaux de la thermodynamique appliquée. Tel est l’objectif principal de ce cours. Pour cela, il est nécessaire de comprendre les fondements de la thermodynamique afin de comprendre les éléments d’analyse et d’optimisation des systèmes de conservation d’énergie.
+Ce cours n’est pas un cours d’introduction à la thermodynamique et il est nécessaire de connaître les notions fondamentales de la thermodynamique classique. Ces notions seront cependant rappelées sous une forme volontairement appliquée et non pas axiomatique afin d’en privilégier l’interprétation physique.
+
+
+Table des matières
+1 Quelques rappels de thermodynamique 6 1.1 État, équation d’état et cohérence thermodynamique . . . . . . . . . . . . . . . . . 6 1.1.1 Quelques définitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6 1.1.2 États et équations d’état . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7 1.1.3 Exemples d’équations d’état d’un corps pur monophasique . . . . . . . . 7 1.1.3.1 Gaz parfait . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8 1.1.3.2 Gaz réels . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8 1.1.3.3 Liquides . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8 1.1.4 Principales fonctions d’état et différentielles . . . . . . . . . . . . . . . . . 9 1.1.5 Relations de Maxwell . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10 1.1.6 Capacités calorifiques . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10 1.1.7 Quelques propriétés des gaz parfaits . . . . . . . . . . . . . . . . . . . . . . 12 1.1.8 Quelques propriétés des liquides . . . . . . . . . . . . . . . . . . . . . . . . 14 1.1.9 Cohérence thermodynamique . . . . . . . . . . . . . . . . . . . . . . . . . . 15 1.1.9.1 Position du problème . . . . . . . . . . . . . . . . . . . . . . . . . 15 1.1.9.2 Détermination de données thermodynamiques cohérentes . . . 16 1.2 Equilibre thermodynamique . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17 1.2.1 Différentes catégories d’équilibre . . . . . . . . . . . . . . . . . . . . . . . . 17 1.2.2 Critère de stabilité thermodynamique . . . . . . . . . . . . . . . . . . . . . 18 1.2.3 Interprétations du critère de stabilité thermodynamique . . . . . . . . . . 19 1.2.3.1 Pression . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19 1.2.3.2 Energie libre massique . . . . . . . . . . . . . . . . . . . . . . . . 20 1.2.3.3 Enthalpie libre massique . . . . . . . . . . . . . . . . . . . . . . . 20 1.2.4 Conditions d’équilibre liquide-vapeur d’un corps pur . . . . . . . . . . . . 20 1.2.4.1 Interprétation en énergie libre massique . . . . . . . . . . . . . . 22 1.2.4.2 Interprétation en enthalpie libre massique . . . . . . . . . . . . . 24 1.2.4.3 Relation de Clapeyron . . . . . . . . . . . . . . . . . . . . . . . . 26 1.2.4.4 Interprétation en pression . . . . . . . . . . . . . . . . . . . . . . 26 1.2.4.5 Courbes binodale et spinodale . . . . . . . . . . . . . . . . . . . . 28 1.2.5 Chaleur latente de changement de phase . . . . . . . . . . . . . . . . . . . 31 1.2.5.1 Chaleur latente . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31 1.2.5.2 Titre de vapeur . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32 1.2.5.3 Changement de phase isobare . . . . . . . . . . . . . . . . . . . . 33 1.3 Principaux diagrammes thermodynamiques . . . . . . . . . . . . . . . . . . . . . 34 1.3.1 Diagramme de Clapeyron P − v . . . . . . . . . . . . . . . . . . . . . . . . 34 1.3.2 Diagramme T − s . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35 1.3.3 Diagramme de Mollier h − s . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+2
+
+
+TABLE DES MATIÈRES 3
+2 Bilan d’énergie appliqué aux systèmes ouverts 39 2.1 Différentes formes d’énergie . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 39 2.1.1 Energies propres au système . . . . . . . . . . . . . . . . . . . . . . . . . . 39 2.1.2 Energies échangées . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40 2.1.3 Puissance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41 2.2 Premier principe de la thermodynamique appliqué aux systèmes fermés . . . . . 41 2.3 Premier principe de la thermodynamique appliqué aux systèmes ouverts . . . . 42 2.3.1 Position du problème . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42 2.3.2 Bilan de masse d’un système ouvert unidimensionnel . . . . . . . . . . . . 43 2.3.3 Bilan d’énergie d’un système ouvert unidimensionnel . . . . . . . . . . . . 47 2.3.4 Interprétations graphiques des échanges énergétiques . . . . . . . . . . . 49 2.4 Forme générale d’un bilan . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50 2.5 Application à quelques machines élémentaires . . . . . . . . . . . . . . . . . . . . 51 2.5.1 Tuyère . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51 2.5.2 Turbine . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 53 2.5.3 Compresseur . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55 2.5.4 Echangeurs thermiques . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56 2.5.4.1 Echangeurs à co-courant . . . . . . . . . . . . . . . . . . . . . . . 57 2.5.4.2 Echangeurs à contre-courant . . . . . . . . . . . . . . . . . . . . . 58 2.5.5 Générateur de vapeur . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59 2.5.6 Condenseur . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 61
+3 Bilan d’entropie appliqué aux systèmes ouverts 62 3.1 Premiers énoncés du second principe . . . . . . . . . . . . . . . . . . . . . . . . . 63 3.1.1 Enoncé de Kelvin . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63 3.1.2 Enoncé de Clausius . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 63 3.1.3 Equivalence des deux énoncés . . . . . . . . . . . . . . . . . . . . . . . . . 64 3.2 Cycle de Carnot . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65 3.2.1 Transformations réversibles et irréversibles . . . . . . . . . . . . . . . . . . 65 3.2.2 Description du cycle de Carnot . . . . . . . . . . . . . . . . . . . . . . . . . 66 3.2.3 Machine de Carnot pour un gaz parfait . . . . . . . . . . . . . . . . . . . . 66 3.2.4 Suite de portions de « cycles » de Carnot . . . . . . . . . . . . . . . . . . . 68 3.2.5 Machine de Carnot pour un fluide quelconque . . . . . . . . . . . . . . . . 68 3.2.6 Performances d’une machine de Carnot . . . . . . . . . . . . . . . . . . . . 69 3.2.7 Théorème de Carnot . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 70 3.3 Entropie . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71 3.3.1 Inégalité de Clausius . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 71 3.3.2 Machines thermiques quelconques . . . . . . . . . . . . . . . . . . . . . . . 72 3.3.3 Introduction d’une fonction d’état . . . . . . . . . . . . . . . . . . . . . . . 72 3.3.4 Transformation irréversible . . . . . . . . . . . . . . . . . . . . . . . . . . . 73 3.3.5 Sources d’irréversibilités . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74 3.3.5.1 Irréversibilités externes . . . . . . . . . . . . . . . . . . . . . . . . 74 3.3.5.2 Irréversibilités internes . . . . . . . . . . . . . . . . . . . . . . . . 74 3.4 Bilan d’entropie appliqué à un système ouvert . . . . . . . . . . . . . . . . . . . . 75 3.5 Réversibilité et efficacité d’une machine . . . . . . . . . . . . . . . . . . . . . . . . 77 3.5.1 Travail maximum . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77 3.5.2 Rendement isentropique . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 78 3.5.2.1 Compression adiabatique . . . . . . . . . . . . . . . . . . . . . . . 78 3.5.2.2 Détente adiabatique . . . . . . . . . . . . . . . . . . . . . . . . . . 79 3.6 Notion d’exergie . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 79 3.6.1 Puissance mécanique maximale récupérable . . . . . . . . . . . . . . . . . 79 3.6.1.1 Transformation infinitésimale . . . . . . . . . . . . . . . . . . . . 80
+
+
+TABLE DES MATIÈRES 4
+3.6.1.2 Transformation finie . . . . . . . . . . . . . . . . . . . . . . . . . . 80 3.6.2 Contenu exergétique de différentes formes d’énergie . . . . . . . . . . . . 81 3.6.3 Interprétation de l’exergie . . . . . . . . . . . . . . . . . . . . . . . . . . . . 82 3.6.3.1 Représentation graphique de l’exergie . . . . . . . . . . . . . . . 82 3.6.3.2 Analyse physique de l’exergie . . . . . . . . . . . . . . . . . . . . 83 3.6.3.3 Quelques conséquences . . . . . . . . . . . . . . . . . . . . . . . . 85 3.6.4 Bilan d’exergie . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 87 3.6.5 Rendement exergétique . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 88 3.6.5.1 Définitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 88 3.6.5.2 Machine motrice ditherme . . . . . . . . . . . . . . . . . . . . . . 89 3.6.6 Analyse exergétique de quelques machines élémentaires . . . . . . . . . . 90 3.6.6.1 Compresseur adiabatique . . . . . . . . . . . . . . . . . . . . . . . 90 3.6.6.2 Turbine adiabatique . . . . . . . . . . . . . . . . . . . . . . . . . . 91 3.6.6.3 Echangeur de chaleur . . . . . . . . . . . . . . . . . . . . . . . . . 91
+4 Cycles thermodynamiques 93 4.1 Quelques hypothèses de modélisation . . . . . . . . . . . . . . . . . . . . . . . . . 93 4.1.1 Idéalisation des cycles thermodynamiques . . . . . . . . . . . . . . . . . . 93 4.1.2 Quelques hypothèses générales . . . . . . . . . . . . . . . . . . . . . . . . . 94 4.2 Cycles sans circulation de fluide . . . . . . . . . . . . . . . . . . . . . . . . . . . . 95 4.2.1 Cycle de Carnot . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 95 4.2.1.1 Rappels . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 95 4.2.1.2 Bilan énergétique . . . . . . . . . . . . . . . . . . . . . . . . . . . 95 4.2.1.3 Bilan entropique . . . . . . . . . . . . . . . . . . . . . . . . . . . . 95 4.2.1.4 Bilan exergétique . . . . . . . . . . . . . . . . . . . . . . . . . . . 96 4.2.1.5 Rendements . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 96 4.2.2 Cycle d’Otto . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 97 4.2.2.1 Description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 97 4.2.2.2 Bilan énergétique . . . . . . . . . . . . . . . . . . . . . . . . . . . 98 4.2.2.3 Bilan entropique . . . . . . . . . . . . . . . . . . . . . . . . . . . . 99 4.2.2.4 Rendement énergétique . . . . . . . . . . . . . . . . . . . . . . . . 99 4.2.3 Cycle de Diesel . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 100 4.2.3.1 Description . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 100 4.2.3.2 Bilan énergétique . . . . . . . . . . . . . . . . . . . . . . . . . . . 100 4.2.3.3 Bilan entropique . . . . . . . . . . . . . . . . . . . . . . . . . . . . 101 4.2.3.4 Rendement énergétique . . . . . . . . . . . . . . . . . . . . . . . . 101 4.3 Cycles avec circulation de fluide . . . . . . . . . . . . . . . . . . . . . . . . . . . . 102 4.3.1 Cycle d’Ericsson . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 102 4.3.1.1 Présentation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 102 4.3.1.2 Bilan énergétique . . . . . . . . . . . . . . . . . . . . . . . . . . . 103 4.3.1.3 Bilan entropique . . . . . . . . . . . . . . . . . . . . . . . . . . . . 104 4.3.1.4 Rendement énergétique . . . . . . . . . . . . . . . . . . . . . . . . 104 4.3.2 Cycle de Brayton . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 105 4.3.2.1 Présentation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 105 4.3.2.2 Bilan énergétique . . . . . . . . . . . . . . . . . . . . . . . . . . . 105 4.3.2.3 Bilan entropique . . . . . . . . . . . . . . . . . . . . . . . . . . . . 106 4.3.2.4 Rendement énergétique . . . . . . . . . . . . . . . . . . . . . . . . 106 4.3.2.5 Optimisation du cycle de Brayton . . . . . . . . . . . . . . . . . . 107 4.3.3 Cycle de Rankine . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 109 4.3.3.1 Présentation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 109 4.3.3.2 Bilan énergétique . . . . . . . . . . . . . . . . . . . . . . . . . . . 109 4.3.3.3 Améliorations possibles de l’efficacité du cycle de Rankine . . . 110
+
+
+TABLE DES MATIÈRES 5
+Annexes 113
+A Compléments sur les rappels de thermodynamique 114 A.1 Fonctions homogènes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 114 A.2 Principales fonctions thermodynamiques et leurs différentielles . . . . . . . . . . 114 A.2.1 Energie interne U . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 114 A.2.2 Enthalpie H . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 115 A.2.3 Energie libre F . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 116 A.2.4 Enthalpie libre G . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 116 A.3 Relation générale entre les capacités calorifiques à volume constant et pression constante . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 117 A.4 Critères de stabilité de l’équilibre thermodynamique . . . . . . . . . . . . . . . . . 118 A.4.1 Critères de stabilité de Gibbs-Duhem . . . . . . . . . . . . . . . . . . . . . 118 A.4.2 Conditions de stabilité d’une phase fluide . . . . . . . . . . . . . . . . . . . 120 A.5 Conditions de stabilité thermodynamique en variables T et v . . . . . . . . . . . . 122 A.5.1 Expression de (
+∂2u/∂s2) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 122 A.5.2 Expression de (
+∂2u/∂s ∂v) . . . . . . . . . . . . . . . . . . . . . . . . . . . . 122 A.5.3 Expression de (
+∂2u/∂v2) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 122 A.5.4 Forme quadratique . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 123 A.6 Quelques fonctions d’état caractéristiques de l’eau . . . . . . . . . . . . . . . . . . 124 A.7 Changement de phase isobare . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 125
+B Compléments sur le bilan d’entropie appliqué aux systèmes ouverts 127 B.1 Exemple de lien entre sources interne et externe . . . . . . . . . . . . . . . . . . . 127 B.2 Travail maximum récupérable pour un système fermé . . . . . . . . . . . . . . . . 128 B.3 Sources volumiques d’entropie dues à la conduction thermique et à la viscosité . 129
+
+
+Chapitre 1
+Quelques rappels de thermodynamique
+L’objectif de ce chapitre est de rappeler les principales notions de thermodynamique et relations qui seront utiles pour la suite du cours. Il n’est cependant pas question de faire une présentation exhaustive et poussée de toutes ces notions et le lecteur intéressé pourra se reporter aux cours de thermodynamique de premier cycle universitaire pour approfondir ces notions.
+1.1 État, équation d’état et cohérence thermodynamique
+1.1.1 Quelques définitions
+On appelle système la partie de l’univers étudiée. En thermodynamique, ce système sera constitué d’un « grand nombre » de particules élémentaires. Ce nombre est tel que la limite thermodynamique de la physique statistique est justifiée (cf. cours de physique statistique). Différents types de systèmes existent suivant leurs caractéristiques. Un système matériel est caractérisé à la fois par ses constituants (quantité et nature de la matière constitutive du système) et par le domaine géométrique qu’il occupe. Ce système est constitué d’un grand nombre de particules microscopiques contenues dans une surface fermée, fixe ou mobile, à travers laquelle sont susceptibles de s’effectuer des échanges d’énergie et de matière avec l’extérieur, c’est-à-dire le reste de l’univers.
+Par convention, on notera positivement ce qui est reçu par le système et négativement ce qui est cédé par le système (cf. Fig. 1.1).
+Dans ce cours, on considérera toujours les énergies reçues algébriquement par le système et le signe de ces énergies déterminera le sens des échanges : positive si elle est reçue et négative si elle est cédée.
+n
+Ω
+W>0
+Q<0
+Q>0
+W<0
+FIGURE 1.1 – Convention du signe des échanges entre le système Ω et l’extérieur ; n est le vecteur unitaire normal à la surface du système Ω orienté vers l’extérieur de Ω.
+Convention de signe des échanges
+6
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 7
+Tout système est susceptible d’évoluer notamment en fonction des interactions qu’il peut avoir avec l’extérieur et peut vérifier certaines propriétés remarquables.
+Système fermé Il n’échange pas de matière avec l’extérieur.
+Système ouvert Le flux de matière avec l’extérieur est non nul.
+Système isolé L’échange d’énergie avec l’extérieur est nul.
+Système homogène La nature de ses constituants est égale en tout point.
+Système uniforme Ses caractéristiques sont égales en tout point.
+1.1.2 États et équations d’état
+La caractérisation d’un système à un instant donné caractérise son état et les variables qui le décrivent s’appellent les variables d’état. Il est important de noter que le choix des variables d’état permettant de décrire un système dépend de la nature du problème traité. Par ailleurs, l’ensemble des variables d’état décrivant un système correspond en partie à un choix du modélisateur, ce choix étant dicté par la nature du système considéré et de ses transformations et par des aspects pratiques. Par exemple, pour les fluides, on peut choisir de décrire le système par son enthalpie libre massique g et son entropie massique s, mais, pour des raisons pratiques et d’intuition physique, on préfèrera sans doute choisir la pression P et la température T. On peut classer les variables d’état en deux grandes catégories : — les variables extensives dont la valeur est proportionnelle à la masse du système (par ex. masse, volume, énergie, entropie, etc.) ; — les variables intensives dont la valeur est indépendante de la quantité de matière contenue dans le système (par ex. température, pression, masse volumique, etc.) Pour un système homogène, il peut être commode de ramener les variables extensives à l’unité de masse. On parle alors de grandeur massique ou spécifique.
+Une fonction d’état est une relation entre les variables d’état. Par exemple, un fluide uniforme au repos peut être caractérisé par sa pression P, son volume V et sa température T et vérifie une loi d’état de la forme f (P, V, T) = 0. Il existe une multitude de variables d’état (pression, masse, énergie, entropie, enthalpie, température, volume, etc.) et si elles sont utiles à la description du système, elles ne sont pas forcément toutes nécessaires à la définition de son état. Il est alors possible de définir un jeu de variables indépendantes nécessaires à la définition de l’état d’un système ; toutes les autres variables complémentaires sont alors des fonctions de ces variables indépendantes. Le nombre de variables indépendantes nécessaires à la définition de l’état d’un système est appelé variance du système. Par exemple, un fluide pur sous forme monophasique est divariant : il suffit de deux variables pour décrire l’état de ce fluide, par exemple sa température et son volume, et toutes les autres variables d’état de ce fluide, par exemple sa pression ou son énergie interne, sont des fonctions de ces variables indépendantes.
+1.1.3 Exemples d’équations d’état d’un corps pur monophasique
+On considère un corps pur sous forme monophasique à l’équilibre thermodynamique. Si l’on considère les trois variables d’état pression P, volume V et température T, la variance du système étant de deux, ces variables sont reliées entre elles par une relation générale du type f (P, V, T) = 0 que l’on appelle « équation d’état ». Dans la suite, on donne quelques exemples d’équations d’état classiques et communément utilisées.
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 8
+1.1.3.1 Gaz parfait
+L’équation d’état d’un gaz parfait s’écrit
+PV = N RT
+où P [Pa] est la pression, V [m3] est le volume, N [mol] est le nombre de moles, T [K] est la température et R = 8.314 J/mol.K est la constante des gaz parfaits, cette constante étant indépendante de la nature du fluide considéré. Cette fonction d’état prend différentes formes suivant les habitudes des disciplines de la physique et, en mécanique des fluides, on préfère souvent l’écrire sous la forme (équivalente) suivante : P = ρ r T (1.1)
+où ρ [kg/m3] est la masse volumique et r = R/m [J/kg.K] où m [kg/mol] est la masse molaire du fluide considéré ; la valeur de r dépend donc de la nature du fluide considéré.
+La loi d’état est le reflet d’une modélisation du mouvement à l’échelle microscopique des molécules qui composent ce gaz. Dans le cas des gaz parfaits, cette modélisation est particulièrement simple puisqu’elle ne prend en compte que le mouvement des molécules qui sont supposées ne pas interagir entre elles en dehors des chocs supposés avoir lieu sur une distance caractéristique négligeable par rapport à la distance intermoléculaire moyenne (cf. cours de physique statistique).
+1.1.3.2 Gaz réels
+Souvent, les hypothèses microscopiques sous-jacentes nécessaires à l’application de la loi d’état des gaz parfaits ne sont pas vérifiées et il est donc nécessaire de prendre en compte l’effet des interactions moléculaires. Un grand nombre de lois d’état issues de modélisations microscopiques plus ou moins avancées existent. A titre d’exemple, on peut citer l’équation de van der Waals et l’équation du viriel.
+L’équation de van der Waals s’écrit
+(
+P+ a
+V2
+)
+(V − b) = R T (1.2)
+où V [m3/mol] est le volume molaire et a [Pa·m6/mol2] et b [m3/mol] sont deux constantes positives traduisant l’effet des interactions intermoléculaires : a (appelé pression de cohésion) représente l’effet d’attraction intermoléculaire et b (appelé covolume) représente l’effet des forces de répulsion à une distance intermoléculaire non nulle. Les valeurs des paramètres a et b dépendent du corps considéré.
+L’équation du Viriel s’écrit
+PV
+RT =1+
+∞
+∑
+i=2
+Bi ( T )
+Vi−1
+où les fonctions Bi(T) peuvent se calculer en fonction de la donnée des potentiels d’interaction intermoléculaires (cf. cours de physique statistique).
+1.1.3.3 Liquides
+Dans de nombreux cas, on peut considérer avec une bonne approximation que les liquides (et les solides) sont incompressibles ((∂ρ/∂P)T = 0) et indilatables ((∂ρ/∂T)P = 0) ce qui signifie que leur masse volumique est constante :
+ρ = cte
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 9
+Cependant, dans certains cas, il est nécessaire de prendre en compte les effets de dilatation thermique, par exemple si l’on souhaite décrire les mouvements de convection naturelle dont le moteur même est la variation spatiale de la masse volumique du fluide due à la variation spatiale de sa température. Pour caractériser les fluides incompressibles faiblement dilatables, on utilise l’approximation de Boussinesq qui consiste à faire un développement limité de la fonction ρ(T) à l’ordre 1 :
+ρ(T) = ρ0 [1 − α (T − T0)]
+où ρ0 est la masse volumique à la température de référence T0 et α [K−1] est une constante positive appelée coefficient de dilatation à pression constante.
+1.1.4 Principales fonctions d’état et différentielles
+Par convention, on note par des majuscules rondes les variables extensives d’un système (par ex. E ), par des majuscules droites les variables volumiques (par ex. E = E /V) et par des minuscules les variables massiques (par ex. e = E /M = E/ρ).
+Les principales fonctions thermodynamiques et leurs différentielles sont données en annexe A.2, page 114. On rappelle ici uniquement les différentielles des énergies massiques et certaines interprétations graphiques utiles.
+L’enthalpie massique h, l’énergie libre massique f et l’enthalpie libre massique g sont définies à partir de l’énergie interne massique u respectivement par :
+h = u + P v (1.3)
+f = u − T s (1.4)
+g = u + P v − T s (1.5)
+Les différentielles de u, h, f et g sont données respectivement par :
+du = T ds − P dv (1.6)
+dh = T ds + v dP (1.7)
+d f = −s dT − P dv (1.8)
+dg = −s dT + v dP (1.9)
+Principales fonctions thermodynamiques
+Quelques caractéristiques de ces fonctions et interprétations graphiques sont représentées sur la Fig. 1.2 et sont détaillées en annexe A.2, page 114.
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 10
+s
+u
+T0
+v = v0 = cte
+u0
+f0
+s0
+(a) Isochore - u(s, v0)
+s
+h
+T
+P = cte
+g
+(b) Isobare - h(s, P0)
+v
+f
+−P
+g
+T = cte
+(c) Isotherme - f (v, T0)
+P
+g
+fv
+T = cte
+(d) Isotherme - g(P, T0)
+FIGURE 1.2 – Interprétation graphique de quelques fonctions thermodynamiques
+1.1.5 Relations de Maxwell
+Soit ψ une fonction d’état quelconque fonction de deux variables d’état X et Y. On a alors
+dψ = ψX dX + ψY dY
+où ψX et ψY sont les dérivées partielles de ψ par rapport à X et Y respectivement. On a alors (
+∂ψX
+∂Y
+)
+X
+=
+(
+∂2ψ
+∂X∂Y
+)
+=
+(
+∂ψY
+∂X
+)
+Y
+La relation
+(
+∂ψX
+∂Y
+)
+X
+=
+(
+∂ψY
+∂X
+)
+Y
+est appelée relation de Maxwell.
+Il existe de nombreuses relations de Maxwell et elles sont centrales pour la cohérence des données thermodynamiques utilisées (cf. § 1.1.9).
+1.1.6 Capacités calorifiques
+La capacité calorifique massique à volume constant [J/kg·K] est définie par
+Cv =
+(
+∂u
+∂T
+)
+v
+(1.10)
+Elle représente l’énergie à fournir à une unité de masse pour élever sa température de 1 K lorsque le volume est maintenu constant. La différentielle de u (1.6) peut se mettre sous la forme suivante :
+du = T
+(
+∂s
+∂T
+)
+v
+dT +
+[
+T
+(
+∂s
+∂v
+)
+T
+−P
+]
+dv
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 11
+ce qui montre en particulier que
+Cv = T
+(
+∂s
+∂T
+)
+v
+(1.11)
+Or, la relation de Maxwell appliquée à la fonction f (v, T) (cf. différentielle (1.8)) implique
+(
+∂s
+∂v
+)
+T
+=
+(
+∂P
+∂T
+)
+v
+On a par conséquent
+du = Cv dT +
+[
+T
+(
+∂P
+∂T
+)
+v
+−P
+]
+dv
+La capacité calorifique massique à pression constante [J/kg·K] est définie par
+Cp =
+(
+∂h
+∂T
+)
+P
+(1.12)
+Elle représente l’énergie à fournir à une unité de masse pour élever sa température de 1 K lorsque la pression est maintenue constante. Notons que la différentielle de h (1.7) permet de montrer la relation utile suivante :
+Cp = T
+(
+∂s
+∂T
+)
+P
+(1.13)
+En suivant la même démarche que celle suivie au-dessus sur la différentielle de u, on montre facilement la relation suivante :
+dh = Cp dT +
+[
+v−T
+(
+∂v
+∂T
+)
+P
+]
+dP
+On peut montrer (cf. annexe A.3 p. 117) que Cp et Cv sont reliés par la relation générale suivante :
+Cp − Cv = − T (∂P/∂T)2v
+(∂P/∂v)T
+>0
+Les capacités calorifiques à volume constant Cv et à pression constante Cp sont telles que
+du = Cv dT +
+[
+T
+(
+∂P
+∂T
+)
+v
+−P
+]
+dv (1.14)
+dh = Cp dT +
+[
+v−T
+(
+∂v
+∂T
+)
+P
+]
+dP (1.15)
+Cp − Cv = − T (∂P/∂T)2v
+(∂P/∂v)T
+> 0 (1.16)
+Ces relations sont générales et s’appliquent donc à tous les fluides, quels que soient leurs comportements thermodynamiques.
+Capacités calorifiques
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 12
+1.1.7 Quelques propriétés des gaz parfaits
+En introduction à cette section, il est important de noter que les gaz n’ont pas toujours un comportement de gaz parfait et il convient de considérer que l’approximation de gaz parfait est une exception plutôt qu’une règle. Bien qu’elle soit a priori fausse, nous verrons que l’on fait pourtant souvent cette approximation. La raison principale tient au caractère très simple de cette équation d’état qui permet de mener à bien facilement des calculs analytiques. Du fait de son importance théorique, il convient donc de bien rappeler les propriétés des gaz parfaits.
+Nous avons déjà indiqué à la section 1.1.3.1, page 8, qu’un gaz parfait est caractérisé par l’équation d’état
+P = ρrT = rT
+v (1.17)
+où v = 1/ρ [m3/kg] est le volume massique.
+Une autre propriété remarquable des gaz parfaits est que leur énergie interne massique ne dépend que de la température : u(T). Cette propriété découle directement de la forme de l’équation d’état (1.17). En effet, pour un gaz parfait, le facteur de dv de la relation (1.14) s’annule, ce qui montre que u est indépendant de v et qu’il ne dépend que de T. Pour un gaz parfait, on a donc
+du = Cv(T) dT
+On insiste sur le fait que cette relation n’est pas générale et qu’elle ne s’applique donc pas à un fluide quelconque mais uniquement à un gaz parfait.
+Une conséquence directe est que l’enthalpie d’un gaz parfait ne dépend que de sa température. Cette propriété se montre immédiatement :
+h = u + P v = u(T) + r T
+Pour un gaz parfait, on a donc
+dh = Cp(T) dT
+Là aussi, cette relation ne s’applique pas à un fluide quelconque mais uniquement à un gaz parfait.
+De plus, pour un gaz parfait, il est aisé de montrer que la relation générale (1.16) se simplifie en
+Cp(T) − Cv(T) = r (1.18)
+Si, en outre, on peut faire l’approximation que Cv est constant, alors
+u − u0 = Cv0 (T − T0)
+h − h0 = Cp0 (T − T0)
+Dans ces conditions, on a
+du = Cv0 dT = T ds − P dv
+soit
+ds = Cv0
+T dT + r
+v dv
+Cette relation peut facilement s’intégrer pour obtenir
+s(v, T) − s0 = Cv0 ln
+(T
+T0
+)
++ r ln
+(v
+v0
+)
+(1.19)
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 13
+En utilisation l’équation d’état du gaz parfait (1.17) pour exprimer v(P, T) et en tenant compte de la relation (1.18), on montre facilement que
+s(P, T) − s0 = Cp0 ln
+(T
+T0
+)
+− r ln
+(P
+P0
+)
+(1.20)
+Ces deux relations montrent qu’une isentropique (s = cte) d’un gaz parfait à Cv constant est telle que T vγ−1 = cte (1.21)
+Pγ−1
+Tγ = cte (1.22)
+ou encore
+P vγ = cte (1.23)
+où
+γ = Cp0
+Cv0
+(1.24)
+Toutes les relations suivantes sont spécifiques aux gaz parfaits et ne doivent donc pas être utilisées pour un fluide quelconque. Avant de les utiliser, il convient donc de vérifier que l’on peut effectivement bien utiliser l’approximation de gaz parfait.
+P(ρ, T) = ρ r T (1.25)
+du = Cv(T) dT (1.26)
+dh = Cp(T) dT (1.27)
+Cp(T) − Cv(T) = r (1.28)
+Si on peut en plus faire l’hypothèse que Cv est constant (et donc Cp constant également), on a : u(T) = u0 + Cv0 (T − T0) (1.29)
+h(T) = h0 + Cp0 (T − T0) (1.30)
+s(v, T) = s0 + Cv0 ln
+(T
+T0
+)
++ r ln
+(v
+v0
+)
+(1.31)
+s(P, T) − s0 = Cp0 ln
+(T
+T0
+)
+− r ln
+(P
+P0
+)
+(1.32)
+Une transformation isentropique (d’un gaz parfait à Cv constant) est caractérisée par
+T vγ−1 = cte (1.33)
+Pγ−1
+Tγ = cte (1.34)
+P vγ = cte (1.35)
+Quelques propriétés des gaz parfaits
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 14
+1.1.8 Quelques propriétés des liquides
+On considère tout d’abord le cas d’un liquide incompressible et indilatable : sa masse volumique ρ est constante. ρ ne peut alors plus être prise comme variable d’état (car elle n’est plus caractéristique de son état variable) et il est préférable de considérer sa pression P. On rappelle que l’on a
+dg = −s dT + 1
+ρ dP
+La relation de Maxwell appliquée à cette différentielle implique
+(
+∂(−s)
+∂P
+)
+T
+=
+(
+∂(1/ρ)
+∂T
+)
+P
+=0
+car le fluide est indilatable. L’entropie est donc indépendante de la pression et, du fait de la relation (1.13), Cp doit être indépendant de P et ne dépend donc que de T. On peut par exemple prendre le cas particulier où Cp est constant. Par intégration de la relation (1.13), on obtient
+s(T) = s0 + Cp0 ln
+(T
+T0
+)
+Cette relation peut de nouveau être intégrée pour déterminer l’expression de g(P, T) :
+g(P, T) = g0 − s0 (T − T0) − Cp0
+[
+T ln
+(T
+T0
+)
+− (T − T0)
+]
++ ψ(P)
+où ψ(P) est une fonction d’intégration à déterminer. Pour cela, il suffit de considérer la relation
+générale
+(
+∂g
+∂P
+)
+T
+=1 ρ
+qui donne dans ce cas particulier
+dψ
+dP = 1
+ρ
+Puisque ρ est constant, cette relation s’intègre immédiatement (la constante d’intégration est déterminée pour que g(P0, T0) = g0) :
+ψ(P) = P − P0
+ρ
+On a finalement :
+g(P, T) = g0 − s0 (T − T0) − Cp0
+[
+T ln
+(T
+T0
+)
+− (T − T0)
+]
++ P − P0
+ρ
+On considère à présent le cas d’un fluide dilatable dans l’approximation de Boussinesq. Cela signifie que son volume massique v = 1/ρ est indépendant de la pression mais qu’il dépend linéairement de la température :
+v(P, T) = v0 (1 + β0 (T − T0))
+où β0 est constant dans le cadre de l’approximation de Boussinesq. En suivant un raisonnement analogue à celui suivi dans le cas d’un fluide incompressible et indilatable, on montre facilement que l’expression de g(P, T) est la suivante :
+g(P, T) = g0 − s0 (T − T0) − Cp0
+[
+T ln
+(T
+T0
+)
+− (T − T0)
+]
++ v0 [1 + β0 (T − T0)] (P − P0)
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 15
+La démonstration est laissée à la charge du lecteur en guise d’exercice. Toutes les autres équations d’état se déduisent de celle-ci.
+Les relations suivantes sont spécifiques aux liquides incompressibles et faiblement dilatables et à C p constant.
+g(P, T) = g0 − s0 (T − T0) − Cp0
+[
+T ln
+(T
+T0
+)
+− (T − T0)
+]
++ v0 [1 + β0 (T − T0)] (P − P0)
+(1.36) v(P, T) = v0 (1 + β0 (T − T0)) (1.37)
+s(P, T) = s0 + Cp0 ln
+(T
+T0
+)
+− v0 β0 (P − P0) (1.38)
+h(P, T) = h0 + Cp0 (T − T0) + v0 (1 − β0 T0) (P − P0) (1.39)
+u(P, T) = u0 + Cp0 (T − T0) − v0 β0 (P T − P0 T0) (1.40)
+Une transformation isentropique est caractérisée par
+Cp0 ln (T) − v0 β0 P = cte (1.41)
+Quelques propriétés des liquides incompressibles et faiblement dilatables
+1.1.9 Cohérence thermodynamique
+1.1.9.1 Position du problème
+Pour beaucoup de problèmes pratiques, on a besoin de disposer des données thermodynamiques du fluide étudié. Il n’est pas toujours évident de trouver toutes les données dont on a besoin. C’est pourquoi on est parfois amené à utiliser plusieurs sources d’information. Or, ces sources ne sont pas toujours cohérentes entre elles, ce qui peut conduire à des résultats contradictoires.
+Prenons un exemple pratique pour illustrer ce propos. On souhaite étudier la compression d’un gaz initialement à 20 bar et 150°C. Le facteur de compression est de 10, on suppose que cette compression est isentropique et on souhaite connaître la température du gaz à la sortie du compresseur. Supposons que, pour le gaz considéré, l’équation d’état de van der Waals (1.2) s’avère être une bonne approximation (avec les valeurs adaptées de r, a et b). Mais la seule donnée de la relation P(v, T) ne suffit pas à connaître le comportement thermodynamique du fluide et notamment sa capacité calorifique. Une recherche (par exemple sur Internet) permet de connaître des valeurs de Cv à différentes valeurs de v et T. L’analyse de ces données permet de se rendre compte qu’il est possible de les approcher par la fonction suivante :
+Cv(v, T) = Cv0 + c (T − T0) + d (v − v0) (1.42)
+où Cv0, T0, v0, c et d sont cinq constantes. Cherchant à déterminer les caractéristiques d’une isentropique, il est nécessaire de déterminer l’entropie du fluide. La différentielle de f (1.8) montre que
+(
+∂s
+∂v
+)
+T
+=
+(
+∂P
+∂T
+)
+v
+(1.43)
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 16
+Par intégration de l’équation d’état de van der Waals, on obtient
+s(v, T) = ψ1(T) + r ln
+(
+v− b
+m
+)
+(1.44)
+où ψ1(T) est une fonction qui reste à être déterminée. Pour cela, on utilise la relation (1.11) et par intégration (en utilisant l’équation (1.42)), on obtient
+s(v, T) = ψ2(v) + (Cv0 − c T0) ln T + c T + d (v − v0) ln T (1.45)
+Le dernier terme de cette équation est incompatible avec la première expression de s(v, T) (1.44). Cela signifie donc que l’on ne peut pas déterminer la fonction s(v, T). Il est alors impossible d’étudier les caractéristiques d’une isentropique et on ne peut finalement pas déterminer la température du gaz à la sortie du compresseur recherchée. Cette impossibilité est due au fait que les données thermodynamiques ne sont pas cohérentes entre elles. En effet, d’après les relations (1.43) et (1.11), on a
+∂2s
+∂v∂T = 1
+T
+(
+∂Cv
+∂v
+)
+T
+=
+(
+∂2 P ∂T2
+)
+Or, avec l’équation de van der Waals (1.2) et l’expression (1.42), la dernière égalité ci-dessus n’est pas vérifiée, ce qui montre effectivement l’incohérence des données thermodynamiques utilisées ayant pour conséquence l’impossibilité de résoudre le problème posé.
+En général les incohérences des données thermodynamiques conduisent à des incohérences des résultats, voire à l’impossibilité d’obtenir des résultats. Cela peut également se traduire par la non convergence de calculs numériques.
+1.1.9.2 Détermination de données thermodynamiques cohérentes
+Pour assurer l’utilisation de données thermodynamiques cohérentes, il faut s’assurer que les fonctions utilisées dérivent toutes d’une même fonction. Le choix de la fonction « maîtresse » dépend des variables primaires choisies pour décrire le système (et également de la faciliter d’exprimer ces fonctions). On illustre cette recommandation sur deux cas : le premier avec le choix de variables (v, T) et le second avec le choix (P, T). La nécessité de cohérence thermodynamique des fonctions thermodynamiques utilisées est illustré sur les schémas des Figs. 1.3 et 1.4. La Fig. 1.3 montre ainsi que si l’on se donne la fonction f (v, T), toutes les autres propriétés thermodynamiques classiques telles que l’équation d’état P(v, T) ou la capacité calorifique massique à volume constant Cv(v, T) peuvent se déduire par dérivées successives. Elle illustre également la difficulté à rendre cohérente des fonctions thermodynamiques qui ne sont que des dérivées de f (v, T) comme le cas considéré dans l’exemple introductif où l’on se donne les fonctions P(v, T) et Cv(v, T) indépendemment l’une de l’autre.
+∂/∂v
+f (v, T)
+∂/∂T
+−s(v, T)
+∂/∂T ∂/∂v ∂/∂T ∂/∂v
+−Cv(v, T)/T −β(v, T) P
+−P(v, T)
+[χT(v, T) v]−1
+FIGURE 1.3 – Illustration de la cohérence des données thermodynamiques dans le cas du choix des variables (v, T).
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 17
+∂/∂P
+g(P, T)
+∂/∂T
+∂/∂T ∂/∂P ∂/∂T ∂/∂P
+−s 1/ρ
+−Cp/T α/ρ −1/(ρ cT)2
+FIGURE 1.4 – Illustration de la cohérence des données thermodynamiques dans le cas du choix des variables (P, T).
+Il est important de noter que les tables thermodynamiques de référence sont basées sur ce principe car il permet de garantir la cohérence et donc la compatibilité des données thermodynamiques utilisées.
+Pour s’assurer d’obtenir des résultats cohérents, il est nécessaire que l’ensemble des données thermodynamiques utilisées soient cohérentes entre elles. Cette cohérence est assurée par la possibilité d’exprimer un potentiel thermodynamique. Le choix de ce potentiel thermodynamique dépend des variables thermodynamiques principales choisies, en général pour des raisons pratiques ; par exemple f (v, T) ou g(P, T). Une fois ces fonctions déterminées, toutes les autres grandeurs thermodynamiques s’en déduisent par dérivations successives (cf. Figs. 1.3 et 1.4).
+Cohérence thermodynamique
+1.2 Equilibre thermodynamique
+1.2.1 Différentes catégories d’équilibre
+Un système est dans un état d’équilibre s’il ne présente aucune tendance non compensée à un changement d’état. A contrario, un système n’est pas dans un état d’équilibre si un changement d’état peut survenir spontanément, soit par des perturbations finies ou infinitésimales imposées au système soit par des perturbations internes au système (fluctuations de la densité par exemple). On peut faire une analogie avec la mécanique. En mécanique, on étudie la fonction énergie potentielle qui doit être minimum à l’équilibre (cf. Fig. 1.5) et en thermodynamique, on étudie l’équilibre via des considérations sur les potentiels thermodynamiques.
+A
+E
+x
+D
+C
+B
+FIGURE 1.5 – Différents états d’équilibre mécanique
+Si l’on poursuit cette analogie, on voit qu’il existe différents types d’équilibre :
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 18
+— stables, c’est-à-dire correspondant à un minimum global d’énergie (point A de la Fig. 1.5) — instables, c’est-à-dire tels que pour toute perturbation infinitésimale autour de la position d’équilibre le système a tendance à s’éloigner de celle-ci (point B de la Fig. 1.5) — métastables, c’est-à-dire localement stables mais globalement instables (point C de la Fig. 1.5), ce qui signifie que si la perturbation autour de la position d’équilibre n’est pas trop importante, le système retourne vers cet état d’équilibre, mais que si la perturbation est trop importante, le système évolue vers un autre état d’équilibre plus stable (point A de la Fig. 1.5) — stables contraints, c’est-à-dire que le système est stable grâce à l’application d’une contrainte extérieure, mais qu’il devient instable si cette contrainte est relaxée (point D de la Fig. 1.5) Les perturbations dont on parle pour écarter le système de son état d’équilibre initial peuvent correspondre soit à des forces extérieures (pression par exemple liée à des vibrations), soit à des variations locales spontanées d’une variable thermodynamique autour de sa valeur à l’équilibre (température par exemple).
+1.2.2 Critère de stabilité thermodynamique
+Un système dans un état d’équilibre stable est tel qu’il ne peut pas évoluer spontanément. Or, le second principe de la thermodynamique caractérise la possibilité ou non que certains échanges, et donc certaines évolutions, puissent se produire de manière spontanée ou pas (cf. chapitre 3). C’est pourquoi la démonstration du critère de stabilité thermodynamique d’une phase se base sur l’application du second principe et s’exprime sous la forme d’une inégalité. La démonstration est présentée en annexe A.4, page 118, et l’on ne donne ici que les résultats principaux.
+Le critère général de Gibbs-Duhem de stabilité d’une phase (d’une unité de masse) en contact avec un réservoir à pression P0 et température T0 est
+∆u − T0 ∆s + P0 ∆v ≥ 0
+où ∆· représente l’écart à l’équilibre.
+Suivant les contraintes imposées au système, ce critère général se décline en différents critères particuliers faisant intervenir différents potentiels thermodynamiques, ces potentiels dépendant des contraintes imposées (cf. annexe A.4). Ainsi, pour un système fermé isolé (∆u = 0 = ∆v), le critère général devient ∆s ≤ 0, ce qui signifie que l’entropie est maximum à l’équilibre.
+Pour un système à volume constant et isotherme, le critère général devient ∆ f ≥ 0, où f = u − T0 s, est l’énergie libre massique du fluide ; cette condition signifie que l’énergie libre est minimum à l’équilibre.
+On montre que, pour un fluide, ce critère de stabilité s’exprime par les conditions suivantes (cf. annexe A.4).
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 19
+Une phase fluide est thermodynamiquement stable si les deux conditions suivantes sont vérifiées : Cv ≥ 0 (1.46)
+(
+∂P
+∂v
+)
+T
+≤ 0 (1.47)
+En pratique, la première condition est toujours vérifiée et seule la seconde condition caractérise donc la stabilité thermodynamique d’une phase fluide.
+Conditions de stabilité d’une phase fluide
+1.2.3 Interprétations du critère de stabilité thermodynamique
+Dans cette section, on étudie différentes interprétations de la condition de stabilité d’une phase fluide (1.47).
+1.2.3.1 Pression
+Si l’on considère par exemple le cas d’un fluide de van der Waals, son équation d’état est donnée par la relation (1.2). Si l’on se place à une température suffisamment faible (i.e. inférieure à la température critique), l’allure de la variation de P en fonction de v est donnée sur la Fig. 1.6. D’après la condition (1.47) la portion de courbe où (∂P/∂v)T ≥ 0 correspond à une phase thermodynamiquement instable. Cela signifie qu’une unité de masse placée dans un volume tel que le volume massique moyen v est compris entre vm
+l et vvm (cf. Fig. 1.6) ne peut pas exister sous forme monophasique. Ce système thermodynamique va par conséquent spontanément évoluer vers un autre état thermodynamique qui sera stable (cet état thermodynamique restant à déterminer).
+phase instable phase stable
+vlm vvm
+P
+v
+FIGURE 1.6 – Zone de stabilité thermodynamique d’un fluide de van der Waals
+Remarquons que la portion de la courbe P(v) telle que v < vm
+l correspond à la phase li
+quide du fluide (faible volume massique) et que la portion de la courbe P(v) telle que v > vvm correspond à la phase vapeur du fluide (grand volume massique).
+Il faut remarquer que, dans l’analyse précédente, on a supposé que la température du système est donnée et cette dernière doit par conséquent être vue comme un paramètre des résultats obtenus. En particulier les volumes massiques vm
+l et vvm caractéristiques de la limite de stabilité des phases liquide et vapeur respectivement dépendent de la température du système.
+L’étude précédente se base sur l’équation d’état de van der Waals dont la forme est très simple. Si cette équation d’état n’est pas forcément suffisamment précise pour décrire quantitativement le comportement thermodynamique de tous les fluides, elle présente l’avantage de posséder toutes les propriétés générales qui expliquent le fait qu’un fluide ne peut pas exister sous la même phase dans toutes les conditions thermodynamiques. Ainsi, toute équation d’état prétendant pouvoir décrire les limites de stabilité thermodynamique des phases liquide et vapeur doit avoir la forme générale représentée sur la Fig. 1.6.
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 20
+1.2.3.2 Energie libre massique
+La différentielle de f donnée par l’équation (1.8) montre que
+P=−
+(
+∂f
+∂v
+)
+T
+(1.48)
+La condition de stabilité thermodynamique (1.47) peut donc s’écrire
+(
+∂2 f ∂v2
+)
+T
+≥ 0 (1.49)
+La forme de la courbe f (v) à une température donnée ainsi que les limites de stabilité des phases liquide et vapeur sont données sur la Fig. 1.7.
+phase instable phase stable
+f
+vlm vvm v
+FIGURE 1.7 – Allure de la fonction f (v) et zone de stabilité des phases
+1.2.3.3 Enthalpie libre massique
+La différentielle de g donnée par la relation (1.9) montre que
+(
+∂v
+∂P
+)
+T
+=
+(
+∂2 g ∂P2
+)
+T
+(1.50)
+La condition de stabilité thermodynamique (1.47) peut donc s’écrire
+(
+∂2 g ∂P2
+)
+T
+≤ 0 (1.51)
+Pour un fluide de van der Waals, il est possible de connaître la fonction g(P) dont l’allure est donnée sur la Fig. 1.8 où sont représentées les limites de stabilité des phases.
+phase instable
+g
+Pvm P
+phase stable
+Plm
+FIGURE 1.8 – Allure de la fonction g(P) et zone de stabilité des phases
+1.2.4 Conditions d’équilibre liquide-vapeur d’un corps pur
+On suppose dans cette partie que le fluide peut exister sous forme diphasique liquide - vapeur. Chaque phase (liquide ou vapeur) prise séparément est alors un système ouvert puisque de la matière et de l’énergie peuvent être échangées entre les deux phases. Les variables extensives des deux sous-systèmes sont par conséquent susceptibles de varier : la masse, le volume, l’énergie, l’entropie, etc. des deux phases sont variables.
+On a montré que l’équilibre thermodynamique d’un système fermé isolé correspond à un maximum d’entropie. On calcule donc la variation d’entropie de ce système diphasique fermé isolé.
+VM1 1
+VM2 2
+Soient M la masse totale du système diphasique liquide-vapeur, M1 la masse de la phase liquide et M2 celle de la phase vapeur. On a alors
+M = M1 + M2
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 21
+De même, si l’on considère le volume V, l’énergie interne U et l’entropie S, on a
+V = V1 + V2
+U = U1 + U2
+S = S1 + S2
+Puisque l’on a supposé que le système est fermé et isolé, V, M et U ne peuvent pas varier. On a par conséquent
+dV1 + dV2 = 0
+dM1 + dM2 = 0
+dU1 + dU2 = 0
+D’après la relation (A.2), page 114, on a
+dUi = Ti dSi − Pi dVi + gi dMi, i ∈ {1; 2}
+L’entropie étant maximum à l’équilibre, il est donc caractérisé par
+dS = 0
+L’ensemble de ces relations permet de montrer facilement que, à l’équilibre, on a
+(T1 − T2) dS1 − (P1 − P2) dV1 + (g1 − g2) dM1 = 0
+Cette relation doit être vérifiée quelle que soit l’évolution considérée. Elle doit donc être en particulier vérifiée pour une transformation sans transfert de masse ni transfert d’entropie entre les phases mais avec un transfert de volume non nul ; dans ce cas, la relation ci-dessus devient simplement
+(P1 − P2) dV1 = 0
+et cette relation doit être vérifiée quelle que soit la valeur de dV1, ce qui implique
+P1 = P2
+Le même raisonnement peut être suivi pour les autres variables extensives (par ex. dS1 = 0, dV1 = 0 mais dM1 6= 0), ce qui conduit aux relations d’équilibre supplémentaires suivantes :
+T1 = T2
+g1 = g2
+Les conditions d’équilibre thermodynamique entre une phase liquide et une phase vapeur sont P1 = P2 (1.52)
+T1 = T2 (1.53)
+g1 = g2 (1.54)
+L’égalité des pressions traduit le fait qu’il n’y a pas d’échange de volume et donc de travail entre les deux phases. L’égalité des températures traduit le fait qu’il n’y a pas de transfert de chaleur et donc d’entropie entre les deux phases. L’égalité des enthalpies libres massiques traduit le fait qu’il n’y a pas d’échange de masse entre les deux phases.
+Conditions d’équilibre liquide-vapeur
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 22
+On peut noter que la condition d’égalité des enthalpies libres massiques se généralise dans le cas de phases contenant plusieurs constituants. On trouve alors que l’équilibre thermodynamique est caractérisé par l’égalité des potentiels chimiques de chaque constituant des phases. Ces conditions traduisent qu’aucune masse d’aucun constituant n’est transféré d’une phase à l’autre. On comprend donc le rôle de potentiel de ces grandeurs thermodynamiques. De même, les pressions et les températures jouent le rôle de potentiel pour les échanges de volume (travail) et d’entropie (chaleur).
+1.2.4.1 Interprétation en énergie libre massique
+On considère un système diphasique à une température T donnée. Soient M1 et M2 les masses des deux phases. L’énergie libre F du système peut alors se mettre sous la forme
+F = M1 f1 + M2 f2
+et son énergie libre massique f est
+f = M1 f1 + M2 f2
+M1 + M2
+Si l’on introduit les volumes V, V1 et V2 et les volumes massiques correspondant, on montre aisément que
+f = (v − v1) f2 − (v − v2) f1
+v2 − v1
+Cette relation montre que, sur un diagramme (v, f ), le point représentatif d’un système constitué de deux phases, dont les points représentatifs de chaque phase sont (v1, f1) et (v2, f2), se situe sur la droite joignant ces deux points et dont l’abscisse v représente le volume massique moyen du système, à savoir
+v = V1 + V2
+M1 + M2
+f
+v1 v2 v
+v
+systéme monophasique
+systéme diphasique
+FIGURE 1.9 – Energie libre massique d’un système diphasique
+Une illustration est donnée sur la Fig. 1.9. Cette figure illustre également pourquoi la condition de stabilité de l’équilibre thermodynamique d’une phase fait intervenir la dérivée seconde de la fonction f (v) (cf. relation (1.49)). En effet, si une phase caractérisée par un volume massique (uniforme) v doit transitionner, le système doit se mettre sous la forme de deux phases dont les volumes massiques doivent, au moins au début de la transition, être voisins de v. Si (∂2 f /∂v2) ≥ 0, comme c’est le cas sur la Fig. 1.9, l’énergie du système sous forme diphasique est supérieure à l’énergie du système sous forme monophasique et le système monophasique n’a donc pas « intérêt » à transitionner. En revanche, si (∂2 f /∂v2) ≤ 0, tout système sous forme diphasique dont les points caractéristiques des phases sont voisins du point caractéristique
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 23
+du système monophasique initial a une énergie inférieure et le système monophasique a par conséquent « intérêt » à transitionner et à devenir diphasique. Vers quel système diphasique le système évolue-t-il ?
+liquide métastable
+f
+vlsat vsvat v
+v
+vapeur métastable
+M
+L
+V
+Lm
+Vm
+I
+FIGURE 1.10 – Energie libre massique et équilibre liquide-vapeur
+Pour répondre à cette question, on considère un système monophasique initialement instable représenté par le point I sur la Fig. 1.10. Le point représentatif de tout système diphasique est la projection verticale du point I sur la droite reliant les points représentatifs des deux phases du système diphasique (point M de la Fig. 1.10). Puisque le système tend à minimiser son énergie, il est aisé de se convaincre que le minimum d’énergie du système diphasique est atteint si cette droite est la bitangente à la courbe f (v). Ainsi, les points de bitangence de la courbe représentative de f (v) (L et V sur la Fig. 1.10) sont les points représentatifs des phases liquide et vapeur à saturation.
+Métastabilité
+Remarquons que la portion de la courbe f (v) telle que v ∈ [vsat
+l ; vsvat] et (∂2 f /∂v2) ≥ 0 est particulière. En effet, si le volume massique d’une phase est tel que son point représentatif se situe sur cette portion de courbe (points Lm et Vm sur la Fig. 1.10), le critère de stabilité thermodynamique (1.49) est vérifié et cette phase est donc thermodynamiquement stable. Pourtant, un système diphasique constitué des phases liquide et vapeur à saturation a une énergie plus faible. C’est la raison pour laquelle une telle phase est dite métastable : elle est localement stable puisque le critère de stabilité thermodynamique est vérifié, mais elle est globalement instable puisqu’il existe un système diphasique dont l’énergie est inférieure. Une telle phase peut donc exister, à condition qu’elle ne soit pas trop perturbée. Pour faire le lien avec la représentation graphique de la métastabilité donnée sur la Fig. 1.5, la phase est effectivement métastable car, dans les premiers instants de sa transition, elle doit passer par des états diphasiques intermédiaires dont l’énergie est supérieure à celle du système monophasique initial (cf. Fig. 1.9).
+Revenons à présent sur les conditions d’équilibre d’un système diphasique liquide-vapeur (1.52)-(1.54). Puisque l’on a supposé jusqu’à présent que la température du système est fixée, on s’intéresse à l’interprétation des conditions (1.52) et (1.54). D’après la relation (1.48) et la Fig. 1.2c, page 10, la première condition s’interprète comme le fait que les pentes des tangentes à la courbe f (v) aux points représentatifs des deux phases à l’équilibre sont les mêmes :
+(
+∂f
+∂v
+)
+1
+=
+(
+∂f
+∂v
+)
+2
+(1.55)
+D’après les définitions de f et g (ou la Fig. 1.2c), la deuxième condition d’équilibre (1.54) s’interprète comme le fait que les deux tangentes à la courbe f (v) aux points représentatifs des
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 24
+deux phases à l’équilibre ont la même ordonnée à l’origine :
+f1 −
+(
+∂f
+∂v
+)
+1
+v1 = f2 −
+(
+∂f
+∂v
+)
+2
+v2 (1.56)
+Les conditions (1.55) et (1.56) signifient que les deux tangentes sont confondues ; il s’agit donc de la bitangente à la courbe f (v). Par conséquent, on retrouve le fait que les points représentatifs des phases à saturation sont les points d’intersection de la courbe f (v) et de sa bitangente.
+1.2.4.2 Interprétation en enthalpie libre massique
+Puisque la pression et la température des phases liquide et vapeur sont égales à l’équilibre, on note P et T la pression et la température du système diphasique. On a montré que l’enthalpie libre massique g d’une phase ne dépend que de P et de T. La condition d’équilibre (1.54) se met donc sous la forme g1(P, T) = g2(P, T) (1.57)
+Cette équation définit une relation entre P et T représentée par une courbe dans le plan (P, T) le long de laquelle l’équilibre entre un liquide et sa vapeur est possible. Cette courbe est illustrée sur la Fig. 1.11. Cette courbe définit les conditions thermodynamiques pour lesquelles un fluide peut exister sous forme diphasique liquide-vapeur et est appelée courbe de saturation.
+g1
+g
+P
+g2
+T
+Psat (T)
+FIGURE 1.11 – Relation entre P et T à l’équilibre entre les phases liquide et vapeur
+La courbe de saturation traduit le fait que, pour une pression donnée, l’équilibre diphasique liquide-vapeur ne peut exister qu’à une certaine température. C’est la raison pour laquelle, à pression atmosphérique, l’eau commence à bouillir à une température bien précise, i.e. 100°C. Si l’on change la pression, en montant en altitude par exemple, on change la température à laquelle l’équilibre liquide-vapeur peut avoir lieu. La courbe Psat(T) étant croissante, la température d’ébullition de l’eau est plus faible en altitude (et le thé moins bon...).
+Métastabilité
+On a montré que, pour qu’un fluide existe sous deux phases liquide et vapeur en équilibre, il faut se situer sur une courbe particulière dans le plan (P, T). Mais que se passe-t-il lorsque l’on ne se situe pas le long de cette courbe ?
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 25
+Pour répondre à cette question, on se donne P et T quelconques et on suppose que le système est diphasique liquide-vapeur 1. Soient M1 et M2 les masses des deux phases. L’enthalpie libre G du système peut alors se mettre sous la forme
+G = M1 g1(P, T) + M2 g2(P, T)
+Or on a montré que, à P et T donnés, l’équilibre est stable à condition que G soit minimum (cf. (A.39)). Puisque les enthalpies libres massiques ne dépendent que de P et de T, leurs valeurs sont fixées. Si l’on a par exemple g1 < g2 (cf. Fig. 1.12), le minimum de G est obtenu pour M1 maximum et M2 minimum, c’est-à-dire pour M1 = M et M2 = 0, c’est-à-dire si la phase vapeur (indicée 2) n’existe pas.
+g1
+T
+g2
+g
+L
+V
+P
+(P; T)
+FIGURE 1.12 – Illustration de la stabilité de la phase liquide
+De manière équivalente, si l’on choisit un couple (P, T) situé de l’autre côté de la courbe de saturation, i.e. telle que g2 < g1, le minimum d’enthalpie libre correspond à la non existence de la phase liquide.
+Remarquons que, sur la Fig. 1.12, pour le couple (P, T) choisi, il existe un point sur la surface g2 (point V sur la Fig. 1.12) dont l’énergie est supérieure à celle du point correspondant sur la surface g1 (point L sur la Fig. 1.12) et qui correspond à l’état le plus stable thermodynamiquement, comme on vient de le montrer. Pourtant, au point V, la condition de stabilité thermodynamique (1.51) est vérifiée. En fait, cette phase vapeur est métastable puisqu’elle est localement stable et qu’il existe un autre état du système, liquide, également localement stable et dont l’énergie est inférieure. Ainsi, si cette phase vapeur est suffisamment perturbée (variations locales de pression ou de température), elle va transitionner vers l’état thermodynamique le plus stable qui est l’état liquide.
+Par rapport au cas du paragraphe précédent (§ 1.2.4.1) où le raisonnement a été suivi sur l’énergie libre, on voit que, partant d’un même état métastable vapeur, l’état thermodynamique le plus stable correspond à un état monophasique liquide et non pas à un état diphasique liquide-vapeur. Cette différence provient du fait que les contraintes imposées au système thermodynamique ne sont pas les mêmes : à une température donnée, on impose ici au système de rester à pression constante (son volume pouvant varier), alors que, au paragraphe précédent, on imposait au système de rester à volume constant (sa pression pouvant varier). Ceci illustre l’importance du choix des potentiels thermodynamiques à utiliser en fonction des contraintes imposées au système.
+1. On peut se donner une seule valeur de P et T pour tout le système diphasique car on a montré qu’à l’équilibre la pression et la température des deux phases sont égales.
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 26
+1.2.4.3 Relation de Clapeyron
+Considérons un système liquide-vapeur à l’équilibre à une température T (et donc une pression égale à la pression de saturation correspondante Psat(T)) et modifions la température du système de dT en imposant au système de rester sous forme diphasique, ce qui impose une modification de la pression de dPsat pour rester le long de la courbe de saturation. L’équilibre étant caractérisé, pour toute température, par l’égalité des enthalpies libres massiques des phases, on a:
+gl(Psat(T), T) = gv(Psat(T), T)
+gl(Psat(T) + dPsat, T + dT) = gv(Psat(T) + dPsat, T + dT)
+où les indices l et v représentent respectivement les phases liquide et vapeur. Si l’on effectue un développement limité à l’ordre 1 en dT de cette dernière relation, et en tenant compte de (1.9), on obtient :
+dPsat
+dT = ssvat − ssat
+l
+vsvat − vsat
+l
+(1.58)
+Remarquons que ssat
+v,l et vsat
+v,l sont les entropies massiques et les volumes massiques des phases liquide et vapeur à saturation et dépendent par conséquent de T. Si l’on introduit la chaleur latente de vaporisation Lv définie par
+Lv(T) = T (ssvat − ssat
+l
+) (1.59)
+on obtient dPsat
+dT = Lv
+T
+(vsvat − vsat
+l
+) (1.60)
+Cette relation est la relation de Clapeyron. Cette relation peut être vue comme une équation différentielle permettant de décrire la courbe de saturation Psat(T).
+Notons que Lv est appelée chaleur latente de changement de phase car c’est la quantité d’énergie qu’il faut fournir à une unité de masse liquide à saturation pour la transformer entièrement en vapeur à saturation (cf. § 1.2.5).
+Les conditions d’équilibre thermodynamique entre le liquide et la vapeur d’un corps pur ne peuvent avoir lieu que dans des conditions particulières de pression et de température représentées par une courbe croissante sur un diagramme (P − T). Cette courbe Psat(T) est appelée courbe de saturation.
+Elles est caractérisée par la relation de Clapeyron
+dPsat
+dT = Lv(T)
+T
+(vsvat(T) − vsat
+l (T))
+Courbe de saturation
+1.2.4.4 Interprétation en pression
+Plaçons-nous à une température T. On a montré dans le paragraphe précédent qu’un fluide ne peut exister sous forme diphasique liquide-vapeur que si sa pression a une valeur particulière, que l’on nomme pression de saturation Psat(T).
+On a également montré que l’allure de la courbe représentative de la fonction P(v) est celle donnée sur la Fig. 1.6. On cherche à déterminer les conditions qui définissent les phases à
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 27
+saturation à partir de la donnée de cette courbe. Il est aisé de montrer à partir de la condition de bitangence à la courbe f (v) (1.55) et (1.56) que l’on a la propriété suivante 2 :
+ˆ v2
+v1
+(P(v) − Psat) dv = 0 (1.61)
+Cette condition signifie que l’aire (algébrique) entre la courbe P(v) et la droite horizontale Psat doit être nulle. C’est ce que l’on appelle la règle des aires de Maxwell illustrée sur la Fig. 1.13. Cette règle permet de déterminer à la fois la pression de saturation et les volumes massiques des phases à saturation.
+v
+T0
+vsvat
+Lsat Vsat
+P
+Vm
+Psat
+vlsat
+Lm
+FIGURE 1.13 – Règle des aires de Maxwell
+Les phases telles que v ∈ [vsat
+l ; vsvat] et qui sont thermodynamiquement stables (i.e. (∂P/∂v) ≤
+0) sont en fait métastables. Les points Lm et Vm de la Fig. 1.13 sont représentatifs de phases métastables respectivement liquide et vapeur.
+v
+Lm Vs
+métastable stable
+T sat ( P0 )
+P
+P0
+T2
+Psat (T2 )
+Lsat Vsat
+Lsat Vsat
+FIGURE 1.14 – Exemple de liquide surchauffé
+2. Cette propriété se montre en remplaçant P par son expression (1.48), en utilisant le fait que Psat = P(v1) = P(v2) et en tenant compte des propriétés de bitangence (1.55) et (1.56).
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 28
+Il est possible d’atteindre un état métastable en faisant varier, non pas le volume du système en maintenant sa température constante, mais en faisant varier sa température en maintenant se pression constante, ce qui est par ailleurs plus simple à réaliser expérimentalement. Considérons une masse de liquide initialement à une pression P0 et à saturation, i.e. à la température Tsat(P0). Le point représentatif de cette phase sur un diagramme (P, v) est le point d’intersection de la courbe P(v) et de la droite horizontale d’ordonnée P0 correspondant à la plus faible valeur de v (la phase étant supposée liquide). Augmentons la température du système à une valeur T2 > Tsat(P0) en maintenant la pression constante à P0. Le point représentatif de la phase pouvant exister est le point d’intersection de la courbe P(v) correspondant à la température T2 avec la droite horizontale d’ordonnée P0 (cf. Fig. 1.14). Il existe trois points d’intersection : un correspondant à une phase liquide (Lm sur la Fig. 1.14), un qui ne peut pas exister physiquement car situé dans la zone d’instabilité thermodynamique et un correspondant à une phase vapeur (Vs sur la Fig. 1.14). Le point Lm se situe dans la zone liquide de métastabilité thermodynamique pour la température T2 alors que le point Vs se situe dans la zone vapeur de stabilité thermodynamique. Le liquide ainsi obtenu est par conséquent métastable et sa température est supérieure à la température de saturation correspondant à la pression imposée ; on dit que ce liquide est surchauffé. De même, en partant d’une phase vapeur à saturation et en diminuant la température en maintenant la pression constante, on obtient une phase vapeur métastable dont la température est inférieure à la température de saturation correspondant à la pression imposée ; on dit que la vapeur est sous-refroidie.
+C’est la raison pour laquelle on parle généralement des zones de métastabilité comme des zones de surchauffe du liquide et de sous-refroidissement de la vapeur. Ces zones sont schématisées sur la Fig. 1.15 sur un diagramme (P − T).
+T
+P
+vapeur
+stable
+liquide
+stable
+équilibre
+liquide-vapeur
+Psat (T)
+métastabilité
+limites de
+métastable
+liquide
+métastable
+vapeur
+FIGURE 1.15 – Equilibre liquide-vapeur et stabilité des phases sur un diagramme (P − T)
+1.2.4.5 Courbes binodale et spinodale
+On a vu que, sur un diagramme (P, v), à une température donnée, il existe quatre points particuliers : les points représentatifs des phases liquide et vapeur à saturation (cf. Fig. 1.13) et les points représentatifs des phases liquide et vapeur à leur limite de stabilité thermodynamique (cf. Fig. 1.6). Si l’on augmente la température du système et que l’on rejoint ces points caractéristiques entre eux, on obtient quatre courbes, comme illustré sur la Fig. 1.16.
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 29
+v
+T2
+T0
+LV
+vsLat vsVat
+Psat
+P
+FIGURE 1.16 – Construction des courbes binodale et spinodale. Les points de la courbe spinodale sont ici la projection sur la droite P = Psat(T) des points de limites de métastabilité des phases à la température T.
+Lorsque l’on augmente la température, on observe expérimentalement que ces quatre courbes se rejoignent en un point particulier, appelé point critique (noté C sur la Fig. 1.17), cette jonction se produisant à une température appelée température critique. Comme le montre la Fig. 1.17, la température critique TC est la température à partir de laquelle le fluide ne peut plus exister sous la forme de deux phases distinctes liquide et vapeur en équilibre ; les points caractéristiques des phases liquide et vapeur sont en effet confondus. On voit en particulier que si la température est supérieure à la température critique (T4 sur la Fig. 1.17), la courbe P(v) est monotone décroissante et ne présente plus de zone pour laquelle une phase sous forme monophasique est thermodynamiquement instable. Le système n’a donc plus « besoin » de transitionner pour être thermodynamiquement stable comme c’est le cas pour des températures inférieures à la température critique.
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 30
+v
+T3
+T2
+TC
+T0
+T4
+PC C
+P
+FIGURE 1.17 – Point critique
+Les quatre courbes précédemment décrites se rejoignant toutes au point critique, la courbe caractéristique des phases à saturation est continue et il en est de même de celle des phases à la limite de stabilité thermodynamique. Ces deux courbes caractéristiques sont appelées respectivement courbe binodale et courbe spinodale et sont illustrées sur la Fig. 1.18. Pour comprendre l’intérêt de ces courbes, on considère un système monophasique qui possède un point représentatif sur le diagramme (P, v). Trois cas sont à considérer : — si ce point est situé à l’intérieur de la courbe spinodale, il est thermodynamiquement instable et transitionne spontanément vers un système liquide-vapeur — s’il est situé à l’extérieur de la courbe binodale, il est thermodynamiquement stable
+— s’il est situé entre la courbe binodale et la courbe spinodale, il est thermodynamiquement métastable et est susceptible de transitionner vers un système liquide-vapeur s’il est soumis à des perturbations suffisamment importantes.
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 31
+Courbe binodale Courbe spinodale
+v
+P
+FIGURE 1.18 – Courbes binodale et spinodale
+Remarquons enfin qu’un état métastable se rencontre très souvent. À titre d’exemple, lorsque l’on fait bouillir de l’eau, les interfaces des bulles formées sur la paroi chauffée sont à des conditions thermodynamiques extrêmement proches de la saturation. Certaines de ces interfaces sont en contact avec la paroi chauffée. Si l’on considère le liquide en contact avec la paroi et au voisinage de ces interfaces, il est surchauffé. Dans ce cas, la surchauffe est de quelques degrés environ.
+1.2.5 Chaleur latente de changement de phase
+1.2.5.1 Chaleur latente
+On a défini la chaleur latente par la relation (1.59), page 26. On s’intéresse ici à son interprétation physique.
+Considérons comme système une unité de masse de liquide que l’on cherche à évaporer. On suppose que cette transformation a lieu à pression constante. L’énergie thermique à fournir au système pour le transformer en vapeur est la chaleur latente de vaporisation. Pour déterminer sa valeur, on applique le premier principe de la thermodynamique à la transformation (cf. chapitre 2) :
+du = δq + δw
+où δq et δw sont les énergies fournies au système sous forme de chaleur et de travail respectivement. La pression extérieure étant fixée, on a
+δw = −P0 dv
+Par conséquent :
+δq = du + P0 dv
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 32
+Par intégration entre l’état initial et l’état final (où le système se transforme de liquide à saturation à vapeur à saturation à la pression P0), on a :
+q = (usvat + P0 vsvat
+) − (usat
+l + P0 vsat
+l
+)
+Or, dans les deux états à saturation, le système est à l’équilibre mécanique avec l’extérieur, si bien que la pression du fluide est est égal à la pression P0. La relation précédente devient donc :
+q = hsvat − hsat
+l
+Par ailleurs, la relation (1.3) appliquée à la saturation donne :
+hsvat = T ssvat + gsvat
+hsat
+l = T ssat
+l + gsat
+l
+En soustrayant ces deux relations et en tenant compte du fait que gsvat = gsat
+l , on obtient
+immédiatement
+hsvat − hsat
+l = T (ssvat − ssat
+l
+) = Lv
+et on a donc
+q = Lsvat
+La chaleur latente de vaporisation
+Lv(T) = hsvat(T) − hsat
+l (T) = T (ssvat(T) − ssat
+l (T)) (1.62)
+est l’énergie à fournir à une unité de masse de liquide à saturation pour la transformer en vapeur à saturation.
+Chaleur latente
+1.2.5.2 Titre de vapeur
+Soit M la masse d’un système fluide initialement composé de liquide à saturation à la pression fixée P0. On suppose que l’on chauffe ce système en lui fournissant une énergie qui n’est pas suffisante pour vaporiser tout le liquide. Le système se trouve alors sous forme diphasique liquide-vapeur. Les deux phases liquide et vapeur étant en équilibre, elles sont dans leur état à saturation, respectivement liquide et vapeur. L’enthalpie étant une grandeur extensive, l’enthalpie H du système est donnée par
+H = Ml hsat
+l + Mv hsvat (1.63)
+où Ml et Mv sont les masses des phases liquide et vapeur respectivement. On définit le titre de vapeur x par
+x = Mv
+M
+qui représente donc la masse relative de vapeur d’un système diphasique liquide-vapeur à saturation.
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 33
+En divisant la relation (1.63) par M, on déduit :
+h = x hsvat + (1 − x) hsat
+l = hsat
+l + x Lv
+soit
+x = h − hsat
+l
+hsvat − hsat
+l
+Cette relation s’interprète facilement géométriquement comme illustré sur la figure ci-contre.
+h
+100◦ C
+hsvat
+h
+hlsat
+x Lv
+T
+Lv
+On montre facilement que cette relation est vraie pour tout type de grandeur extensive et on a en particulier
+x = s − ssat
+l
+ssvat − ssat
+l
+et
+s = x ssvat + (1 − x) ssat
+l
+Le titre vapeur est défini comme la masse relative de vapeur d’un système diphasique liquide-vapeur :
+x = Mv
+M (1.64)
+L’enthalpie massique et l’entropie massique du système diphasique sont donnés par
+h = x hsvat + (1 − x) hsat
+l (1.65)
+s = x ssvat + (1 − x) ssat
+l (1.66)
+soit
+x = h − hsat
+l
+hsvat − hsat
+l
+= s − ssat
+l
+ssvat − ssat
+l
+(1.67)
+Ces relations sont généralisables à toute grandeur thermodynamique extensive.
+Titre vapeur
+1.2.5.3 Changement de phase isobare
+On illustre l’évolution des caractéristiques thermodynamiques d’un corps pur initialement sous forme liquide et qui s’évapore par chauffage à pression constante P0. On suppose que
+le système est chauffé par une puissance calorifique constante Q ̇ et que la transformation est réversible. L’analyse détaillée de cette transformation est donné en annexe A.7, page 125. Les principaux résultats sont illustrés sur la Fig. 1.19
+Les caractéristiques principales de cette évolution sont schématisées sur la Fig. 1.19. Tant que la température est inférieure à la température de saturation, le système reste sous forme monophasique liquide et sa température augmente de manière régulière sous l’effet de la chaleur fournie. Une fois la température de saturation atteinte, le liquide commence à s’évaporer 3. Durant toute la phase d’évaporation du liquide, le système est diphasique liquide-vapeur et sa
+3. On suppose que le système se met sous sa forme la plus stable thermodynamiquement et que le liquide n’est donc pas surchauffé.
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 34
+température reste constante égale à la température de saturation (à la pression P0). La chaleur fournie sert à transformer le liquide en vapeur, ce qui se traduit par l’augmentation régulière du titre de vapeur. Une fois le liquide entièrement évaporé, le système est monophasique vapeur et la chaleur fournie fait augmenter la température de la vapeur.
+T
+t
+vapeur
+liquide
+T sat ( P0 )
+(a) T(t)
+x
+t
+liquide
+vapeur
+0
+1
+(b) x(t)
+h
+Tsat(P0) T
+vapeur
+liquide
+Cp
+Lv
+(c) h(T)
+FIGURE 1.19 – Illustration d’évolutions caractéristiques de grandeurs thermodynamiques lors d’un changement de phase isobare.
+1.3 Principaux diagrammes thermodynamiques
+Dans cette partie, on présente quelques caractéristiques des principaux diagrammes thermodynamiques utilisés pour l’étude des transformations thermodynamiques et plus particulièrement des cycles thermodynamiques. Plusieurs diagrammes sont présentés car ils présentent tous des avantages et des inconvénients suivant les transformations étudiées. L’utilisation de tel ou tel diagramme dépend également d’habitudes et il convient donc d’en connaître les principales caractéristiques.
+1.3.1 Diagramme de Clapeyron P − v
+L’allure générale du diagramme P − v est donnée sur la Fig. 1.20. L’allure des isothermes et isentropes est représentée pour la phase vapeur au voisinage de la saturation.
+Le titre de vapeur est donné graphiquement par
+x = ML
+VL
+En supposant que le comportement de la vapeur peut être approché par celui d’un gaz parfait à Cp constant, les principales caractéristiques de ce diagramme sont les suivantes : — isothermes : P ∝ v−1 — isentropes : P ∝ v−γ Par ailleurs, pour un gaz parfait, les isothermes sont des isenthalpes.
+P
+v
+T = cte
+Psat
+point critique
+binodale
+liquide s = cte
+vapeur L MV
+x = cte
+FIGURE 1.20 – Principales caractéristique du diagramme de Clapeyron P − v.
+Le diagramme de Clapeyron est souvent utilisé car il permet d’avoir accès facilement au travail réversible des forces de pression. Il est également pratique pour la représentation des
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 35
+cycles avec changement de phase du fait de la simplicité de la représentation de la zone diphasique.
+La Fig. 1.21 donne le diagramme de Clapeyron de l’eau.
+FIGURE 1.21 – Diagramme de Clapeyron de l’eau.
+1.3.2 Diagramme T − s
+L’allure générale du diagramme T − s est donnée sur la Fig. 1.22. L’allure des isobares et isochores est représentée pour la phase vapeur au voisinage de la saturation.
+Le titre de vapeur est donné graphiquement par
+x = ML
+VL
+En supposant que le comportement de la vapeur peut être approché par celui d’un gaz parfait à Cp constant, les principales caractéristiques de ce diagramme sont les suivantes :
+— isobares : T = T0 exp
+( s−s0 Cp
+)
+— isochores : T = T0 exp ( s−s0
+Cv
+)
+T
+s
+binodale
+Tsat
+P = cte
+liquide
+vapeur
+point critique v = cte
+x = cte
+L MV
+FIGURE 1.22 – Principales caractéristique du diagramme T − s.
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 36
+La Fig. 1.23 donne le diagramme de T − s de l’eau.
+FIGURE 1.23 – Diagramme T − s de l’eau.
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 37
+1.3.3 Diagramme de Mollier h − s
+L’allure générale du diagramme h − s est donnée sur la Fig. 1.24. L’allure des isothermes et isobares est représentée pour la phase vapeur au voisinage de la saturation.
+Le titre de vapeur est donné graphiquement par
+x = ML
+VL
+Il faut également noter que la pente d’une isobare dans la zone diphasique (i.e. intérieur de la courbe binodale) est la température (cf. équation (1.7)).
+En supposant que le comportement de la vapeur peut être approché par celui d’un gaz parfait à Cp constant, les principales caractéristiques de ce diagramme sont les suivantes : — isobares : h = h0 + Cp T0
+[
+exp
+( s−s0 Cp
+)
+−1
+]
+— isothermes : h = h0
+h
+s
+binodale liquide
+P = cte
+point critique T = cte
+x = cte
+L
+M
+V
+vapeur
+FIGURE 1.24 – Principales caractéristique du diagramme de Mollier h − s.
+Le diagramme de Mollier est souvent utilisé pour l’étude des systèmes ouverts (i.e. dans lesquels le fluide circule) car il fait apparaître directement l’enthalpie. Il est cependant utilisé essentiellement pour les cycles à gaz et assez peu pour les cycles avec changement de phase du fait de la complexité de ce diagramme pour la partie diphasique.
+La Fig. 1.25 donne le diagramme de Mollier de l’eau.
+
+
+CHAPITRE 1. QUELQUES RAPPELS DE THERMODYNAMIQUE 38
+FIGURE 1.25 – Diagramme de Mollier de l’eau.
+
+
+Chapitre 2
+Bilan d’énergie appliqué aux systèmes
+ouverts
+2.1 Différentes formes d’énergie
+Bien que difficile à appréhender, l’énergie est un concept fondamental de la physique. C’est une « quantité », c’est-à-dire un scalaire, qui se conserve lors de l’évolution d’un système. Mais encore faut-il savoir comment définir cette grandeur scalaire, c’est-à-dire compter toutes les énergies du système ou encore tenir compte des différentes formes d’énergie du système. Il existe différentes manières de classer ces formes d’énergie et l’on choisit ici de les distinguer suivant deux grandes familles : — les énergies propres au système ; — les énergies échangées.
+2.1.1 Energies propres au système
+Par définition, les énergies propres à un système thermodynamique dépendent de l’état de ce système et sont donc des fonctions d’état. On peut distinguer deux grandes familles d’énergies propres au système : l’énergie externe et l’énergie interne.
+Energie externe
+L’énergie externe est caractérisée directement par des grandeurs observables à l’échelle macroscopique telles que la position ou la vitesse. Les principales énergies sont l’énergie cinétique et l’énergie potentielle. L’énergie cinétique est définie par
+Ec =
+ˆ
+Ω
+1
+2 ρv2 dV
+où v est le vecteur vitesse local. On rappelle que l’énergie potentielle Ep est telle que la force f extérieure au système vérifie
+f = −∇Ep
+Son utilisation n’est alors qu’une commodité puisque l’influence de ces forces peut être prise en compte par leur travail, ce qui est équivalent :
+dEp = ∇Ep · dl = − f · dl
+39
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 40
+Energie interne
+L’énergie interne U est caractérisée par des grandeurs « observables » à l’échelle microscopique. Cette énergie interne est en effet essentiellement liée à l’agitation thermique et correspond à l’énergie des particules à l’échelle microscopique : énergies de translation, de rotation, de vibration et énergie d’interaction entre particules. Il s’agit donc intrinsèquement d’une grandeur qui ne peut a priori pas être décrite à l’échelle macroscopique. Cependant, le premier principe de la thermodynamique permet de relier les variations de cette énergie interne à des grandeurs macroscopiques. Par ailleurs, des modèles permettent de passer d’une description microscopique à une description macroscopique, c’est-à-dire ne faisant appel qu’à des grandeurs observables à l’échelle macroscopique (cf. cours de physique statistique).
+Energie totale
+L’énergie totale d’un système est la somme de toutes ces énergies :
+E = U + Ep + Ec
+Elle rend compte de l’ensemble des contributions décrites au-dessus et est donc caractéristique de l’énergie stockée par le système sous quelque forme que ce soit.
+2.1.2 Energies échangées
+Il existe deux principaux modes d’échange d’énergie d’un système avec l’extérieur : — le travail ; — la chaleur.
+Travail Le travail rend compte de l’énergie macroscopique transférée au système.
+Un travail existe dès lors qu’une force agit sur une distance non nulle. Par définition, le travail élémentaire est donné par la relation
+δW = F dl
+où F est la composante de la force agissant le long du déplacement élémentaire dl (par convention le travail est positif lorsque la force est dirigée dans le sens du déplacement et négatif lorsqu’elle est dirigée en sens inverse). Dans la majeure partie des systèmes thermodynamiques et en tout cas dans ceux considérés dans ce cours, le travail à considérer est celui des forces de pression. Dans ce cas, le travail élémentaire fourni au fluide est :
+δW = −P dV
+où P est la pression extérieure appliquée au système et dV est la variation du volume du système. Notons que δW est le travail des forces extérieures appliquées au système. Ainsi, dans le cas classique d’un gaz contenu dans un cylindre et comprimé par un piston mobile, c’est bien la pression exercée par le piston sur le gaz qu’il convient de considérer dans l’expression de δW, cette pression n’étant égale à la pression du gaz que si l’on peut faire l’hypothèse que la transformation est réversible, c’est-à-dire que la pression du système (le gaz) est constamment égale à la pression sur la paroi du piston.
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 41
+P
+v
+W>0
+2
+PA 1
+dl
+(a) Le travail fourni par l’extérieur au fluide est positif
+P
+v
+1
+PA W <0 2
+dl
+(b) Le travail fourni par l’extérieur au fluide est négatif
+FIGURE 2.1 – Travail des forces de pression.
+Par convention, s’il existe des forces dérivant d’un potentiel et que l’énergie potentielle correspondante est prise en compte dans l’énergie totale du système, le travail des autres forces est noté W′.
+Chaleur
+Tout comme le travail, la chaleur ne peut être qu’échangée entre deux systèmes (l’un des systèmes pouvant être l’extérieur). La chaleur est échangée à une échelle microscopique. Par exemple, lorsque deux solides à des températures différentes sont mis en contact l’un avec l’autre, les particules les plus agitées cèdent une partie de leur énergie (interne) au profit des particules les moins agitées via des processus d’interaction complexes se produisant à l’échelle microscopique (cf. cours de physique statistique).
+2.1.3 Puissance
+Par définition, la puissance est l’énergie échangée (travail ou chaleur) ramenée à l’unité de temps.
+On notera
+W ̇ = δW
+δt
+Q ̇ = δQ
+δt
+les puissances respectivement mécanique et calorifique.
+2.2 Premier principe de la thermodynamique appliqué aux systèmes fermés
+Le premier principe de la thermodynamique exprime la conservation de l’énergie de l’ensemble constitué du système étudié et du milieu extérieur, le système étudié étant fermé et limité par une surface à travers laquelle peuvent s’effectuer des échanges énergétiques avec l’extérieur.
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 42
+Dans un repère galiléen, la variation de l’énergie totale d’un système fermé entre deux états E1 et E2 est égale à la somme des travaux et chaleurs reçus par le système pendant son évolution entre ces deux états :
+E2 − E1 = W1→2 + Q1→2
+Soit, de manière plus condensée : ∆E = W + Q (2.1)
+Enoncé du premier principe de la thermodynamique
+Si l’on explicite les différentes formes d’énergie et si certaines forces appliquées au système dérivent d’un potentiel, le premier principe s’exprime sous la forme équivalente suivante :
+∆U + ∆Ec + ∆Ep = W′ + Q
+En considérant une variation temporelle élémentaire entre les instants t et (t + dt) du système fermé, on en déduit immédiatement le bilan d’énergie de ce système.
+Dans un repère galiléen, la variation temporelle de l’énergie totale d’un système fermé est égale à la somme des puissances mécanique et calorique reçues par le système :
+dE
+dt = d (U + Ec + Ep
+)
+dt = W ̇ ′ + Q ̇ (2.2)
+Bilan d’énergie appliqué à un système fermé
+2.3 Premier principe de la thermodynamique appliqué aux systèmes ouverts
+2.3.1 Position du problème
+Dans la plupart des applications courantes, en particulier industrielles, mettant en jeu des échanges de travail et de chaleur, des fluides circulent dans des canalisations ou à travers les différents systèmes d’échange (mécanique ou thermique) d’un circuit, par exemple une pompe ou un échangeur.
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 43
+Pour prendre un exemple de la vie quotidienne, il suffit de penser à un circuit de chauffage : le fluide caloporteur est mis en mouvement dans une canalisation par l’intermédiaire d’une pompe (fourniture d’un travail), il est chauffé (fourniture de chaleur dans une chaudière) et il cède de l’énergie aux pièces de l’habitation devant être réchauffées (la chaleur « fournie » au fluide caloporteur est négative). Dans ce cas, on va chercher, par exemple, à déterminer la variation de température du fluide caloporteur entre son entrée et sa sortie de l’habitation, en particulier pour dimensionner la chaudière et la pompe de l’installation. Or, comme illustré sur la Fig. 2.2, le système recevant la chaleur (négative dans ce cas) est ouvert : le fluide contenu dans la canalisation entre l’entrée et la sortie ne cesse de se renouveler au cours du temps. Et l’on cherche à déterminer la variation d’énergie du fluide entre l’entrée et la sortie de cette portion de canalisation.
+Qe < 0
+Te Ts
+FIGURE 2.2 – Illustration d’un fluide circulant dans une canalisation et chauffée par échange de chaleur avec l’extérieur.
+C’est pourquoi il est nécessaire de déterminer une forme du bilan d’énergie adaptée aux systèmes ouverts.
+Avant cela, on commence par déterminer le bilan de masse d’un système ouvert unidimensionnel.
+2.3.2 Bilan de masse d’un système ouvert unidimensionnel
+On cherche à déterminer le bilan de masse du système ouvert représenté sur la Fig. 2.3.
+S3
+P1
+ρ1
+T1
+P2
+ρ2
+T2
+FIGURE 2.3 – Système ouvert S3.
+Pour cela, on considère le système fermé à l’instant t représenté sur la Fig. 2.4a que l’on suit dans son mouvement jusqu’à l’instant (t + dt) (cf. Fig. 2.4b). Le système fermé choisi est tel que le système ouvert étudié 3 correspond à l’intersection du système fermé entre les instants t et (t + dt) (cf. Fig. 2.5).
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 44
+(a) instant t (cliquer pour animation)
+t + dt
+P1
+ρ1
+T1
+P2
+ρ2
+T2
+(b) instant (t + dt)
+FIGURE 2.4 – Variation temporelle du système fermé.
+S3
+P1
+ρ1
+T1
+P2
+ρ2
+T2
+FIGURE 2.5 – Système ouvert S3 et système fermé correspondant.
+Le fluide que l’on suit dans son mouvement entre les instants t et (t + dt) est un système fermé dont la masse est, par définition, conservée. Aux instants t et (t + dt), la masse de fluide du système fermé est
+M(t) = dM1 + M3(t) (2.3)
+M(t + dt) = M3(t + dt) + dM2 (2.4)
+où M3 est la masse du système ouvert (susceptible de varier dans le temps), dM1 est la masse qui entre à travers la frontière du système ouvert entre les instants t et (t + dt) et dM2 est la masse qui en sort (cf. Fig. 2.6).
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 45
+(a) instant t (cliquer pour animation)
+M3(t + dt)
+dM2
+t + dt
+P1
+ρ1
+T1
+P2
+ρ2
+T2
+v1 v2
+(b) instant (t + dt)
+FIGURE 2.6 – Variation temporelle de la masse du système fermé.
+Déterminons les expressions de dM1 et dM2.
+Commençons par calculer la masse dM1. On a :
+dM1 = ρ1 dV1 (2.5)
+où ρ1 est la masse volumique du fluide et dV1 est le volume du fluide entrant dans le système ouvert exprimé par (cf. Fig. 2.7)
+dV1 = A1 dx1 = A1 (−n1 · v1) dt (2.6)
+où A1 est l’aire de la surface entrante, n1 est le vecteur unitaire normal à cette surface et sortant du volume du système et v1 est le vecteur vitesse du fluide à cette surface.
+De même, on a (cf. Fig. 2.7) :
+dM2 = ρ2 dV2 (2.7)
+dV2 = A2 dx2 = A2 (n2 · v2) dt (2.8)
+dx1
+dV1
+n1 v1
+A1
+v2
+n2
+dx2
+dV2
+A2
+FIGURE 2.7 – Volumes de fluide entrant et sortant du système ouvert entre les instants t et (t + dt).
+Il faut noter que l’on a fait l’hypothèse que la vitesse du fluide ne varie pas sur les surfaces entrante et sortante et que l’écoulement est donc unidimensionnel dans la direction de la canalisation, les variations dans les deux directions orthogonales étant négligées.
+En soustrayant les équations (2.4) et (2.3) et en utilisation les relations (2.5) à (2.8), on montre facilement la relation suivante :
+dM
+dt = dM3
+dt + [ρ1 n1 · v1 A1 + ρ2 n2 · v2 A2]
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 46
+Or, d’après le principe de conservation de la masse, la variation de la masse du système fermé est nulle : dM
+dt = 0
+On en déduit donc immédiatement l’expression suivante de la variation temporelle de la masse du système ouvert :
+dM3
+dt = −ρ1 n1 · v1 A1 − ρ2 n2 · v2 A2 (2.9)
+Dans cette expression, le premier terme du membre de droite
+m ̇ 1 = −ρ1 n1 · v1 A1 (2.10)
+représente le débit de masse entrant (kg · s−1) dans le système (m ̇ 1 > 0) tandis que le deuxième terme m ̇ 2 = ρ2 n2 · v2 A2 (2.11)
+représente le débit de masse sortant du système (m ̇ 2 > 0). Le bilan de masse (2.9) peut alors se réécrire
+dM3
+dt = m ̇ 1 − m ̇ 2 (2.12)
+Cette équation exprime simplement le fait que la variation de la masse du système ouvert est la somme algébrique des débits de masse entrant et sortant : sa masse augmente du fait du débit de masse qui y entre et diminue du fait du débit de masse qui en sort.
+Le raisonnement suivi au-dessus pour une seule entrée et une seule sortie peut être facilement généralisé à un nombre quelconque d’entrées et de sorties.
+La variation temporelle de la masse M d’un système ouvert est égale à la somme algébrique des débits de masses m ̇ entrant (indice e) et sortant (indice s) à travers ses frontières
+(immobiles) :
+dM
+dt = ∑e
+m ̇ e − ∑s
+m ̇ s = − s∑−e
+m ̇ (2.13)
+Bilan de masse d’un système ouvert
+Dans le cas particulier d’un écoulement stationnaire, la variation temporelle de la masse du système ouvert est nulle (par définition de la stationnarité) et l’équation (2.13) dégénère en
+∑
+s
+m ̇ s = ∑e
+m ̇ e (2.14)
+Cela signifie que toute la masse entrant dans le système en ressort. Si tel n’était pas le cas, la masse se conservant, elle s’accumulerait à l’intérieur du système, ce qui conduirait à une variation temporelle non nulle de la masse du système (ouvert).
+Dans le cas d’une seule entrée et d’une seule sortie (par ex. canalisation), on a donc
+m ̇ s = m ̇ e = cte = m ̇ (2.15)
+ce qui signifie que le débit de masse est uniforme.
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 47
+2.3.3 Bilan d’énergie d’un système ouvert unidimensionnel
+On considère le même système et la même transformation que dans le cas de l’établissement du bilan de masse représentés sur les Figs. 2.3 à 2.5 et récapitulés sur la Fig. 2.8.
+dE1
+E3
+dE2
+S3
+P1
+ρ1
+T1
+P2
+ρ2
+T2
+v1 v2
+Qe
+We
+FIGURE 2.8 – Système ouvert et système fermé correspondant recevant de l’extérieur du travail et de la chaleur.
+On suit dans son mouvement le système fermé entre les instants t et (t + dt) et on détermine la variation temporelle de l’énergie totale de ce système. Aux instants t et (t + dt), l’énergie du système fermé est donnée respectivement par
+E (t) = dE1 + E3(t) (2.16)
+E (t + dt) = E3(t + dt) + dE2 (2.17)
+L’expression de l’énergie dE1 est :
+dE1 = (ρ1 e1) dV1
+où e est l’énergie massique totale du fluide.
+En utilisant l’expression (2.6) de dV1, on en déduit
+dE1 = (ρ1 e1) A1 (−n1 · v1) dt (2.18)
+De même, on a dE2 = (ρ2 e2) A2 (n2 · v2) dt (2.19)
+En soustrayant les équations (2.17) et (2.16) et en utilisant les relations (2.18) et (2.19), on montre facilement la relation suivante :
+dE
+dt = dE3
+dt + [(ρ1 e1) n1 · v1 A1 + (ρ2 e2) n2 · v2 A2]
+Cette équation relie la variation de l’énergie du système ouvert, que l’on cherche, à celle du système fermé, que l’on connaît. En effet, l’application du bilan d’énergie au système fermé (2.2) donne dE
+dt = W ̇ ′ + Q ̇
+et on a donc dE3
+dt = W ̇ ′ + Q ̇ − [(ρ1 e1) n1 · v1 A1 + (ρ2 e2) n2 · v2 A2] (2.20)
+Dans cette expression W ̇ ′ représente la puissance de l’ensemble des forces extérieures appliquées au système fermé (et ne dérivant pas d’un potentiel). Cette puissance doit donc prendre
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 48
+en compte, d’une part, la puissance fournie par l’extérieur W ̇ ′e mais également la puissance des
+forces de pression appliquées au fluide en entrée et en sortie W ̇ P :
+W ̇ ′ = W ̇ ′e + W ̇ P (2.21)
+avec 1
+W ̇ P = +P1
+dV1
+dt − P2
+dV2 dt
+En utilisant les relations (2.6) et (2.8), cette relation devient :
+W ̇ P = − (P1 n1 · v1 A1 + P2 n2 · v2 A2) (2.22)
+Par ailleurs, la seule source de chaleur est celle provenant de l’extérieur :
+Q ̇ = Q ̇ e (2.23)
+En utilisation les relations (2.21) à (2.23), l’équation (2.20) devient :
+dE3
+dt = W ̇ ′e + Q ̇ e − [
+ρ1 ht1 n1 · v1 A1 + ρ2 ht2 n2 · v2 A2
+] (2.24)
+où ht est l’enthalpie massique totale définie par
+ht = e + P
+ρ
+=u+ P
+ρ
++ ep + ec = h + ep + ec (2.25)
+En introduisant les débits de masse m ̇ 1 et m ̇ 2 (cf. équations (2.10) et (2.11)), l’expression (2.24) devient : dE3
+dt = W ̇ ′e + Q ̇ e + m ̇ 1 ht1 − m ̇ 2 ht2 (2.26)
+Cette équation constitue le bilan d’énergie d’un système ouvert.
+Tout comme pour le bilan de masse, le raisonnement qui vient d’être suivi se généralise aisément au cas d’un nombre quelconque d’entrées et de sorties.
+La variation temporelle de l’énergie totale E (= U + Ec + Ep) d’un système ouvert est égale à la somme algébrique des débits d’enthalpie totale m ̇ ht entrant (indice e) et sortant (indice s) à travers ses frontières (immobiles) et des puissances mécanique et calorique reçues par le système :
+dE
+dt = − s∑−e
+m ̇ (h + ec + ep
+) + W ̇ ′ + Q ̇ (2.27)
+Bilan d’énergie d’un système ouvert
+Dans cette équation le premier terme du membre de droite représente les débits d’énergie entrant et sortant du système ouvert induits par les débits de masse : lorsque du fluide entre dans le système (débit de masse entrant), il apporte de l’énergie au système (terme proportionnel à m ̇ 1) alors que lorsqu’il en sort, il retire de l’énergie au système (terme proportionnel à m ̇ 2). Ce transfert d’énergie est appelé transfert convectif (cf. cours de transferts thermiques).
+Il est cependant important de remarquer que les termes convectifs de l’équation (2.27) ne font pas intervenir l’énergie totale mais l’enthalpie totale. La raison provient du fait que la
+1. Notons que, par convention, on a considéré dV1 > 0 et dV2 > 0 (cf. Fig. 2.7).
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 49
+puissance des forces de pression en entrée et sortie du système est prise en compte dans ce terme convectif car cette puissance est proportionnelle au débit de masse (plus le débit est important, plus la puissance des forces de pression est importante) ; l’expression (2.22) se met en effet sous la forme :
+W ̇ P = m ̇ 1
+P1
+ρ1
+− m ̇ 2
+P2
+ρ2
+(2.28)
+Cette puissance W ̇ P est appelée parfois puissance de transvasement.
+Dans le cas particulier d’un écoulement stationnaire, la variation temporelle de l’énergie du système ouvert est nulle et le bilan d’énergie (2.27) dégénère en
+∑
+s−e
+m ̇ (h + ec + ep
+) = W ̇ ′ + Q ̇ (2.29)
+Dans le cas d’une seule entrée et une seule sortie, on obtient (à l’aide de la relation (2.15)) :
+m ̇ (hts − hte
+) = W ̇ ′ + Q ̇ (2.30)
+Il convient de remarquer que, pour les systèmes ouverts, c’est la variation de l’enthalpie (totale) qui intervient et non pas celle de l’énergie interne (totale). La raison tient au fait que, du fait de l’existence de l’écoulement, toute l’énergie du fluide, c’est-à-dire son énergie totale, n’est pas disponible pour effectuer des échanges avec l’extérieur, contrairement au cas d’un système fermé : une partie de cette énergie, W ̇ P (cf. équation (2.28)), est utilisée pour faire écouler le fluide. La partie de l’énergie qui subsiste pour échanger avec l’extérieur est l’enthalpie totale.
+2.3.4 Interprétations graphiques des échanges énergétiques
+Pour un système unidimensionnel stationnaire, le bilan d’énergie (2.30) appliqué à une transformation élémentaire donne :
+m ̇ dht = δW ̇ ′ + δQ ̇
+Si les variations d’énergies cinétique et potentielle sont négligeables, on a alors
+m ̇ dh = δW ̇ ′ + δQ ̇
+Or
+dh = T ds + v dP
+donc
+m ̇ (T ds + v dP) = δW ̇ ′ + δQ ̇
+Si la transformation est en outre supposée être réversible, on a (cf. bilan d’entropie (3.31), page 77)
+δQ ̇ rev = m ̇ T ds (2.31)
+et donc
+δW ̇ ′rev = m ̇ v dP (2.32)
+L’interprétation graphique des puissances mécanique et calorifique massiques réversibles est illustrée sur la Fig. 2.9. On remarque en particulier que plus le volume massique v est grand, plus la puissance mécanique est grande (en valeur abolue). Pour la conception des cycles thermodynamiques, cela a pour conséquence que l’on cherche à augmenter le volume massique du
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 50
+fluide à partir duquel on souhaite récupérer de la puissance mécanique (W ̇ ′ < 0) et à diminuer son volume massique lorsque l’on doit fournir de la puissance mécanique au fluide (W ̇ ′ > 0).
+P
+v
+2
+1
+W ̇ ′rev
+m ̇ > 0
+T
+s
+2
+Q ̇ rev
+1 m ̇ > 0
+FIGURE 2.9 – Représentation sur les diagrammes P − v et T − s des puissances mécanique et calorifique réversible mises en jeu pour un système ouvert.
+Bien que ces interprétations ne soient strictement valables que pour des transformations réversibles, les conclusions principales restent vraies pour des transformations réelles irréversibles.
+2.4 Forme générale d’un bilan
+Dans cette section, on établit la forme générale de l’équation de bilan d’une grandeur physique quelconque appliqué à un système ouvert de forme quelconque.
+On considère un système ouvert immobile de volume V traversé par un écoulement quelconque de fluide comme illustré sur la Fig. 2.10. Soit R une grandeur physique extensive quelconque (masse, quantité de mouvement, énergie, entropie, etc.). L’objectif est de déterminer la variation temporelle de cette grandeur dans le volume V.
+V
+FIGURE 2.10 – Système ouvert immobile de forme quelconque traversé par un écoulement tridimensionnel.
+La variation temporelle de R au sein du système ouvert est due à trois contributions : — une source volumique notée  ̇σR (par ex. une puissance fournie par l’extérieur dans le cas de l’énergie) ; — l’apport par convection ; — l’apport par un flux qR autre que convectif à travers la surface extérieure du volume. Mathématiquement, cela s’écrit :
+dR
+dt = d
+dt
+ˆ
+V
+R dV =  ̇σR + convR −
+ˆ
+∂V
+qR · n dA
+où V représente le volume du système ouvert et ∂V sa frontière.
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 51
+Chaque volume élémentaire dV entrant (algébriquement) dans le système ouvert pendant dt contient la quantité (ρ r dV) de R, où r est R ramenée à l’unité de masse. Or, l’expression de dV est (cf. Fig. 2.11)
+dV = −n · v dt dA
+Cette expression n’est autre qu’une généralisation en trois dimensions des relations (2.6) et (2.8) établies dans le cas unidimensionnel. Par conséquent, la quantité de R entrant dans le système (algébriquement) par convection pendant dt est
+convR = −
+ˆ
+∂V
+ρ r n · v dt dA
+v dt
+v dt
+n
+n
+t
+t + dt
+dV dA
+FIGURE 2.11 – Schématisation des volumes de fluide entrant et sortant par convection du système ouvert pendant dt.
+L’expression du bilan d’une grandeur extensive quelconque R d’un système ouvert s’écrit sous la forme générale suivante :
+dR
+dt = d
+dt
+ˆ
+V
+R dV =  ̇σR −
+ˆ
+∂V
+ρ r v · n dA −
+ˆ
+∂V
+qR · n dA (2.33)
+Forme générale de l’équation de bilan pour un système ouvert
+On montre facilement que cette expression générale redonne bien les expressions (2.13) et (2.27) dans le cas où R est la masse et l’énergie respectivement et où l’écoulement est unidimensionnel. La démonstration est laissée au lecteur en guise d’exercice.
+2.5 Application à quelques machines élémentaires
+Dans cette section, on applique les bilans de masse et d’énergie à quelques machines élémentaires.
+2.5.1 Tuyère
+Les tuyères sont des dispositifs utilisés pour (en général) accélérer le fluide, permettant ainsi de transformer l’énergie interne d’un fluide en énergie cinétique. C’est ce principe général qui est utilisé sur les moteurs d’avion ou de fusée par exemple (le ballon de baudruche aussi. . . ). L’analyse détaillée du fonctionnement des tuyères dépasse le périmètre de ce cours et nécessite des notions avancées de mécanique des fluides compressibles (cf. cours de mécanique des fluides). On s’intéresse donc ici uniquement au cas très simple (et limité) d’une tuyère convergente subsonique, c’est-à-dire dans laquelle la vitesse du fluide ne dépasse jamais la vitesse du son.
+Les principales caractéristiques de l’écoulement sont les suivantes : — unidimensionnel ; — stationnaire ; — variation d’énergie potentielle négligeable ; — adiabatique ; — pas d’apport de travail extérieur.
+Ae
+As
+FIGURE 2.12 – Schéma d’une tuyère convergente.
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 52
+Bilan de masse
+L’application du bilan de masse (2.13) donne
+0 dM
+dt = − s∑−e
+m ̇
+soit
+m ̇ s = m ̇ e = m ̇
+En utilisation la définition du débit de masse (en 1D) (2.10), on a :
+m ̇ e = ρe ve Ae = ρs vs As = m ̇ s
+On en déduit la relation importante suivante
+ρs vs
+ρe ve
+= Ae
+As
+qui montre que la quantité de mouvement augmente en diminuant la section de passage du fluide.
+Bilan d’énergie
+L’application du bilan d’énergie (2.27) donne
+0 dE
+dt = − s∑−e
+m ̇
+(
+h + ec + 0
+ep
+)
++ >0
+W ̇ ′ + 7
+0 Q ̇
+0 = −m ̇ s (hs + ecs) + m ̇ e (he + ece)
+soit
+hs + ecs = he + ece = hi
+où hi est appelée enthalpie d’arrêt.
+Cette relation montre que l’enthalpie du fluide diminue lorsque son énergie cinétique augmente. Une tuyère est donc un dispositif permettant de transformer de l’énergie interne microscopique en énergie cinétique macroscopique.
+Remarque
+Les équations de bilan de masse et d’énergie ne suffisent pas à déterminer l’état du fluide en sortie connaissant son état en entrée. En effet, l’état du fluide est caractérisé par les trois variables (P, T, v), où v est ici la vitesse, alors que les équations de bilan de masse et d’énergie ne fournissent que deux équations pour déterminer (Ps, Ts, vs) :
+ρ(Ps, Ts) vs = ρ(Pe, Te) ve
+Ae
+As
+h(Ps, Ts) + vs2
+2 = h(Pe, Te) + ve2
+2
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 53
+Classiquement, l’information manquante est fournie en faisant une hypothèse supplémentaire sur la transformation thermodynamique : on suppose en première approximation que la transformation est isentropique :
+s(Ps, Ts) = s(Pe, Te)
+On peut alors aisément représenter la transformation sur un diagramme de Mollier (cf. Fig. 2.13) grâce auquel on peut visualiser les différentes contributions énergétiques de la transformation du fluide. On voit en particulier le transfert d’enthalpie en énergie cinétique.
+h
+ss = se s
+hs
+he
+hi
+Pe
+ece
+ecs
+Ps
+FIGURE 2.13 – Schématisation de la transformation du fluide dans une tuyère sur un diagramme de Mollier.
+2.5.2 Turbine
+Une turbine est un dispositif permettant de transformer de l’énergie interne du fluide en énergie mécanique par rotation. Cette énergie mécanique peut être directement utilisée ou être transformée en énergie électrique en couplant l’arbre de la turbine à un alternateur.
+Un élément fondamental de la constitution d’une turbine est l’aube : les aubes sont des obstacles profilés plongés dans l’écoulement. On appelle grille d’aubes un ensemble d’aubes, soit fixe, soit mobile (les positions des aubes d’une grille se déduisent les unes des autres par une rotation de (2 π/Naubes), où Naubes est le nombre d’aubes d’une grille). Ces aubes profilées dévient l’écoulement rentrant, ce qui engendre une force radiale faisant tourner la grille d’aubes mobile et créant ainsi une énergie cinétique de rotation de la grille d’aubes mobile. Cette énergie cinétique de rotation transmise par le fluide à la grille tournante engendre une perte d’énergie interne du fluide (plus précisément d’enthalpie) se traduisant en particulier par une baisse de pression (détente).
+V2
+V3
+W3
+U
+W2
+U V1
+grille fixe grille mobile
+FIGURE 2.14 – Schématisation d’une turbine élémentaire. U est la vitesse de la grille mobile, V est la vitesse du fluide dans le repère fixe et W est la vitesse du fluide dans le repère mobile.
+Un étage de turbine (que l’on peut qualifier de turbine élémentaire) est un ensemble de grilles d’aubes capables d’échanger un travail mécanique avec le fluide et est très généralement constitué de la juxtaposition d’une grille mobile (aussi appelée rotor) et d’une grille fixe (aussi appelée stator). A la sortie de la grille mobile (tournante), le fluide a un mouvement de rotation (dû à la déviation engendrée par les aubes). Afin que cette énergie cinétique de rotation du fluide ne soit pas dissipée par frottement dans la canalisation en aval de la turbine et ne pouvant ainsi pas être valorisée (cf. chapitre 3), il convient de redresser l’écoulement, ce qui est fait par le biais d’une grille fixe. Une turbine est généralement constituée de la succession de plusieurs étages (ou turbines élémentaires). Les grilles mobiles sont solidaires entre elles et tournent donc toutes à la même
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 54
+vitesse. Les aubes des grilles fixes intermédiaires servent à orienter l’écoulement pour que le fluide ait l’angle attendu en aval, donc en amont de la grille mobile suivante. Les grilles fixes peuvent donc également se situer en amont des grilles, ce qui est d’ailleurs le cas de la majorité des turbines (cf. Fig. 2.14). Il faut souligner que si le travail mécanique a lieu uniquement dans les grilles mobiles, la variation de pression a généralement lieu dans des deux types de grille : la fixe contribue aussi à la détente et souvent de manière significative.
+Ainsi, à travers une turbine, le fluide cède une partie de son enthalpie pour fournir du travail (de rotation) à l’arbre de la turbine.
+Les principales caractéristiques de l’écoulement à la traversée d’une turbine sont les suivantes : — unidimensionnel ; — stationnaire ; — variation d’énergies cinétique et potentielle négligeables ; — adiabatique.
+Wt′ < 0
+Pe
+Ps < Pe
+FIGURE 2.15 – Schéma d’une turbine.
+Bilan de masse
+L’application du bilan de masse (2.13) donne
+0 dM
+dt = − s∑−e
+m ̇
+soit
+m ̇ s = m ̇ e = m ̇
+Bilan d’énergie
+L’application du bilan d’énergie (2.27) donne
+0 dE
+dt = − s∑−e
+m ̇
+(
+h+ 0
+ec + 0
+ep
+)
++ W ̇ ′t + 7
+0 Q ̇
+avec W ̇ ′t < 0 (car la puissance mécanique est fournie à la turbine et la puissance fournie au fluide est donc négative), soit
+hs − he = W ̇ ′t
+m ̇
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 55
+Cette seule relation ne suffit pas à déterminer l’état du fluide en sortie de turbine si l’on connaît son état à l’entrée. Si la transformation peut être supposée isentropique, on a alors la relation supplémentaire :
+s(Ps, Ts) = s(Pe, Te)
+Dans le cas particulier où le gaz peut être assimilé à un gaz parfait à Cp constant, on rappelle que la transformation isentropique est caractérisée par la relation (1.34), page 13 :
+( Ts
+Te
+)γ
+=
+( Ps
+Pe
+)γ−1
+Cette relation permet de déterminer Ts en fonction de l’état d’entrée (Pe, Te) et de la pression de sortie Ps.
+La puissance fournie par la turbine se représente facilement sur un diagramme de Mollier comme le montre la Fig. 2.16 ; remarquons que cette puissance est bien négative.
+h
+ss = se s
+hs
+he
+Pe
+W ̇ t′ m ̇
+Ps
+FIGURE 2.16 – Schématisation de la transformation du fluide à la traversée d’une turbine sur un diagramme de Mollier.
+Au cours de la transformation, la pression chute (on parle de détente) mais également la température. Ainsi, pour un gaz parfait à Cp constant, on peut facilement déduire la variation de l’enthalpie :
+hs − he = Cp (Ts − Te)
+Il faut noter que le travail réversible élémentaire est (v dP) et pour augmenter le travail récupéré, pour une même variation de pression, il faut augmenter le volume massique v du fluide et donc augmenter sa température.
+2.5.3 Compresseur
+Un compresseur a l’effet inverse d’une turbine : une machine tournante fournissant du travail permet d’augmenter la pression du gaz. Tout comme les turbines, les compresseurs à gaz sont constitués de plusieurs étages constitués chacun d’une grille d’aubes tournante et d’une grille d’aubes fixe.
+Les principales caractéristiques de l’écoulement à la traversée d’un compresseur sont identiques à celle d’une turbine : — unidimensionnel ; — stationnaire ; — variation d’énergies cinétique et potentielle négligeables ; — adiabatique.
+W ̇ c′ > 0
+Pe
+Ps > Pe
+FIGURE 2.17 – Schéma d’un compresseur.
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 56
+La modélisation est également identique.
+Bilan de masse
+m ̇ s = m ̇ e = m ̇
+Bilan d’énergie
+hs − he = W ̇ ′c
+m ̇
+avec W ̇ ′c > 0.
+Si la transformation peut être supposée isentropique, et dans le cas particulier où le gaz peut être assimilé à un gaz parfait à Cp constant, on a :
+( Ts
+Te
+)γ
+=
+( Ps
+Pe
+)γ−1
+La température augmente au cours de la compression. La puissance fournie au fluide par le compresseur se représente facilement sur un diagramme de Mollier comme le montre la Fig. 2.18 ; remarquons que cette puissance est bien positive.
+h
+ss = se s
+W ̇ c′ m ̇
+Ps
+hs
+he
+Pe
+FIGURE 2.18 – Schématisation de la transformation du fluide à la traversée d’un compresseur sur un diagramme de Mollier.
+Pour minimiser la puissance à fournir à la pompe, on cherche à diminuer autant que possible le volume massique du fluide et donc à faire en sorte que sa température en entrée de compresseur soit la plus basse possible.
+2.5.4 Echangeurs thermiques
+Un échangeur est un dispositif permettant de transmettre la chaleur d’un fluide chaud vers un fluide plus froid. Ces dispositifs sont très largement utilisés dans l’industrie et la vie quotidienne. Un radiateur de chauffage central est un échangeur : l’eau chaude cède une partie de son énergie à l’air plus froid de la pièce. Il existe différents types d’échangeurs, le plus connu dans l’industrie étant sans doute l’échangeur à tubes et calandre pour son efficacité et sa compacité. Les échangeurs à plaques sont également utilisés pour leur plus grande compacité. Il existe deux grandes catégories d’échangeurs : à co-courant et à contre-courant.
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 57
+2.5.4.1 Echangeurs à co-courant
+Dans les échangeurs à co-courant, les fluides chaud et froid circulent dans le même sens comme illustré sur la Fig. 2.19. Pour l’étude thermodynamique des échangeurs, le système étudié est constitué de l’ensemble des deux fluides (chaud et froid) contenu à l’intérieur de l’échangeur (entre l’entrée 1 et la sortie 2 de la Fig. 2.19). Les principales caractéristiques de l’écoulement des fluides à la traversée de l’échangeur sont les suivantes : — unidimensionnel ; — stationnaire ; — absence de travail externe ; — pas de source de chaleur externe (l’échange d’énergie entre les fluides est interne au système) ; — variation d’énergies cinétique et potentielle négligeable ; — l’écoulement est isobare.
+m ̇ c
+chaud
+m ̇ f froid
+12
+FIGURE 2.19 – Schéma d’un échangeur à cocourant.
+Dans la suite, on note par les indices c et f les grandeurs relatives aux fluides respectivement chaud et froid.
+Bilan de masse
+On considère tout d’abord comme système le fluide chaud compris à l’intérieur de l’échangeur. L’application du bilan de masse (2.13) donne
+0 dMc
+dt = − ∑
+2−1
+m ̇ c
+soit m ̇ c2 = m ̇ c1 = m ̇ c (2.34)
+De même, l’application du bilan de masse au fluide froid donne
+m ̇ f 2 = m ̇ f 1 = m ̇ f (2.35)
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 58
+Bilan d’énergie
+L’application du bilan d’énergie (2.27) au système donne
+0 dE
+dt = − ∑
+2−1
+m ̇
+(
+h+ 0
+ec + 0
+ep
+)
++ >0
+W ̇ ′ + 7
+0 Q ̇
+soit
+0 = −m ̇ c2 hc2 − m ̇ f 2 h f 2 + m ̇ c1 hc1 + m ̇ f 1 h f 1
+soit, en utilisant les bilans de masse (2.34) et (2.35)
+m ̇ f
+(hf2 − hf1
+) = m ̇ c (hc1 − hc2)
+Les évolutions de l’état des fluides chaud et froid à travers l’échangeur sont schématisées sur les Figs. 2.20 et 2.21 ci-contre ; on a choisi arbitrairement un cas où m ̇ f < m ̇ c. Ces figures montrent que le fluide chaud perd de l’enthalpie au profit du fluide froid. La variation de ces enthalpies est proportionnelle à la chaleur échangée entre les deux fluides. En effet, si l’on note Q ̇ c f la puissance calorifique échangée entre le fluide chaud et le fluide froid (Q ̇ c f > 0), l’application du bilan d’énergie aux fluides chaud et froid donne respectivement :
+m ̇ c (hc1 − hc2) = Q ̇ c f = m ̇ f
+(hf2 − hf1
+)
+L’échange de chaleur est généralement proportionnel à la différence de température. Or, dans le cas isobare, les variations d’enthalpie sont quasiment proportionnelles aux variations de température (elles le sont si l’on néglige les variations de Cp). La Fig. 2.21 montre alors que l’échange de chaleur local entre les fluides chaud et froid est maximum à l’entrée de l’échangeur et minimum à sa sortie. La température du fluide chaud est par ailleurs toujours supérieure à celle du fluide froid (et pas seulement localement).
+h
+s
+hc1
+hc2
+hf2
+hf1
+FIGURE 2.20 – Schématisation de la transformation des fluides chaud et froid à la traversée d’un échangeur à co-courant sur un diagramme de Mollier.
+h
+x
+hc1
+hc2
+hf2
+hf1
+FIGURE 2.21 – Schématisation de la variation spatiale des enthalpies des fluides chaud et froid à à la traversée d’un échangeur à cocourant.
+2.5.4.2 Echangeurs à contre-courant
+Dans les échangeurs à contre-courant, les fluides chaud et froid circulent en sens inverse l’un de l’autre comme illustré sur la Fig. 2.22 ci-contre. Toutes les autres caractéristiques sont identiques à celles d’un échangeur à co-courant et les hypothèses concernant l’écoulement des fluides chaud et froid sont en particulier identiques.
+chaud
+froid
+m ̇ c
+m ̇ f
+12
+FIGURE 2.22 – Schéma d’un échangeur à contre-courant.
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 59
+En faisant une analyse similaire à celle d’un échangeur à co-courant, on montre facilement que le bilan d’énergie s’écrit
+m ̇ f
+(hf2 − hf1
+) = m ̇ c (hc2 − hc1)
+Dans cette relation, la seule différence par rapport au cas de l’échangeur à co-courant est que le fluide froid est plus chaud en 2 qu’en 1 (hc2 > hc1 alors que hc2 < hc1 dans le cas co-courant, cf. Fig. 2.21).
+L’évolution des états des fluides chaud et froid est représentée sur la Fig. 2.23 sur un diagramme de Mollier dans le cas particulier où les débits massiques sont égaux (m ̇ f = m ̇ c, ce qui a pour conséquence que (h f 2 − h f 1
+) = (hc2 − hc1), cf. relation cidessus). Dans ce même cas particulier, la Fig. 2.24 schématise l’évolution des enthalpies des fluides en espace. Elle montre en particulier que si l’enthalpie du fluide chaud est localement toujours supérieure à celle du fluide froid, l’enthalpie la plus faible du fluide chaud hc1 peut être inférieure à l’enthalpie la plus élevée du fluide froid h f 2. Par ailleurs, cette figure montre que la chaleur échangée entre les deux fluides (en première approximation proportionnelle à la différence d’enthalpie des fluides chaud et froid) est relativement homogène comparée au cas d’un échange à co-courant.
+Dans le cas où les débits massiques des deux fluides sont différents, l’analyse est plus complexe mais les principales conclusions demeurent (cf. cours de transferts thermiques).
+h
+s
+hf1
+hc1
+hc2
+hf2
+FIGURE 2.23 – Schématisation de la transformation des fluides chaud et froid à la traversée d’un échangeur à contre-courant sur un diagramme de Mollier dans le cas où les débits massiques des deux fluides sont égaux.
+h
+x
+hf1
+hc1
+hc2
+hf2
+FIGURE 2.24 – Schématisation de la variation spatiale des enthalpies des fluides chaud et froid à à la traversée d’un échangeur à contrecourant dans le cas où les débits massiques des deux fluides sont égaux.
+2.5.5 Générateur de vapeur
+Un générateur de vapeur est un composant dans lequel le fluide entre sous forme monophasique liquide et y est vaporisé pour en sortir sous forme monophasique vapeur. C’est un élément important d’un grand nombre de systèmes énergétiques tels que les centrales nucléaires par exemple : la vapeur y est produite pour ensuite faire tourner une turbine à vapeur où l’électricité est produite. Il peut être schématisé comme représenté sur la Fig. 2.25 ci-dessous. La puissance calorifique fournie au fluide Q ̇ peut par exemple être fournie par un fluide plus chaud. Le générateur de vapeur est alors un échangeur particulier dans lequel le fluide le plus froid s’évapore. C’est le cas des générateurs de vapeur des centrales nucléaires.
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 60
+Les principales caractéristiques de l’écoulement du fluide à la traversée du générateur de vapeur sont les suivantes : — unidimensionnel ; — stationnaire ; — absence de travail externe ; — variation d’énergies cinétique et potentielle négligeable ; — l’écoulement est quasiment isobare.
+Q ̇ > 0
+liquide
+vapeur
+FIGURE 2.25 – Schéma d’un générateur de vapeur.
+Bilan de masse
+Le bilan de masse s’écrit
+m ̇ e = m ̇ s = m ̇ (2.36)
+Bilan d’énergie
+Moyennant les hypothèses de modélisation énoncées au-dessus, l’application du bilan d’énergie (2.27) permet de montrer facilement la relation suivante : m ̇ (hs − he) = Q ̇ (2.37)
+Tsat
+T
+V
+L
+P = cte
+Te
+Ts
+s
+FIGURE 2.26 – Schématisation de la transformation du fluide à la traversée d’un générateur de vapeur sur un diagramme T − s.
+Supposons à présent que l’on souhaite connaître la température de sortie Ts du fluide sachant que sa température d’entrée Te est inférieure à la température de saturation à la pression considérée (supposée constante) Tsat. On peut écrire
+hs − he = (hs − hsvat
+) + (hsvat − hsat
+l
+) + (hsat
+l − he
+)
+La pression étant supposée constante, et le fluide à l’entrée et à la sortie étant supposé être sous forme monophasique (respectivement liquide et vapeur), on peut écrire
+hs − hsvat =
+ˆ Ts
+Tsat
+Cpv(τ) dτ
+hsat
+l − he =
+ˆ Tsast
+Te
+Cpl(τ) dτ
+Si l’on peut négliger les variations des capacités calorifiques du liquide et de la vapeur (respectivement Cpl et Cpv) sur les plages de températures considérées, on a alors
+hs − he = Cpv
+(Ts − Tsat) + Lv + Cpl
+(Tsat − Te
+)
+où Lv est la chaleur latente de vaporisation à la pression considérée. La combinaison de cette relation avec le bilan d’énergie (2.37) permet d’obtenir la relation suivante
+C pv
+(Ts − Tsat) + Lv + Cpl
+(Tsat − Te
+) = Q ̇
+m ̇
+qui permet de déterminer la température de la vapeur en sortie Ts connaissant la température du liquide en entrée Te (cf. Fig. 2.26).
+
+
+CHAPITRE 2. BILAN D’ÉNERGIE APPLIQUÉ AUX SYSTÈMES OUVERTS 61
+2.5.6 Condenseur
+Un condenseur est « l’inverse » d’un générateur de vapeur : le fluide y entre sous forme vapeur (potentiellement légèrement humide, c’est-à-dire contenant un peu de liquide, i.e. x . 1) et en ressort sous forme monophasique liquide. Il peut être schématisé comme représenté sur la Fig. 2.27. La puissance calorifique retirée au fluide Q ̇ < 0 peut par exemple être retirée par un fluide plus froid. Le condenseur est alors un échangeur particulier dans lequel le fluide le plus chaud se condense.
+Les principales caractéristiques de l’écoulement du fluide à la traversée du condenseur sont les mêmes que celles d’un générateur de vapeur : — unidimensionnel ; — stationnaire ; — absence de travail externe ; — variation d’énergies cinétique et potentielle négligeable ; — l’écoulement est quasiment isobare.
+Q ̇ < 0
+liquide
+vapeur humide
+FIGURE 2.27 – Schéma d’un condenseur.
+L’analyse thermodynamique d’un condenseur est très similaire à celle d’un générateur de vapeur et n’est donc pas détaillée ici ; il suffit de se reporter à la section précédente pour les détails. On montre alors facilement que l’on a :
+m ̇ (hs − he) = Q ̇ (2.38)
+Si l’on suppose que le fluide en entrée est sous forme diphasique majoritairement vapeur avec un titre vapeur x et si l’on peut supposer que la capacité calorifique du liquide varie peu sur la plage de température [Ts; Tsat], on montre facilement que la température du liquide Ts à la sortie du condenseur s’exprime par la relation suivante (les détails de l’analyse sont laissées à la charge du lecteur à titre d’exercice) :
+C pl
+(Ts − Tsat) − x Lv+ = Q ̇
+m ̇
+Tsat
+T
+V
+L
+s
+Ts
+x = cte
+FIGURE 2.28 – Schématisation de la transformation du fluide à la traversée d’un condenseur sur un diagramme T − s.
+
+
+Chapitre 3
+Bilan d’entropie appliqué aux systèmes
+ouverts
+Le premier principe de la thermodynamique est un principe fondamental de la physique et constitue un outil d’ingénierie important pour l’analyse des systèmes énergétiques. Il n’est cependant pas suffisant. En effet, le premier principe permet de déterminer les transferts d’énergie se produisant lors d’une transformation, mais il ne donne aucune information quant à la réalité effective de cette transformation ; il ne dit pas si la transformation considérée est possible ou non. Or, la vie quotidienne nous montre que toutes les transformations ne sont pas possibles. Prenons le cas très simple de l’expérience de Joule (1845) schématisée sur la Fig. 3.1. Dans cette expérience, la chute d’un poids fait tourner un axe sur lequel sont fixées des pales immergées dans un fluide. Joule a montré que, dans cette expérience, la température du fluide augmente, ce qui a permis de montrer le transfert de l’énergie mécanique (travail de la force de pesanteur) en énergie thermique (énergie interne du fluide). Si cette transformation est effectivement possible, la transformation inverse ne l’est pas : on ne verra jamais le poids monter avec une baisse simultanée de la température du fluide et ce de manière spontanée. Pourtant, on peut toujours écrire le premier principe de la thermodynamique pour cette transformation même si elle n’est pas possible.
+FIGURE 3.1 – Principe de la machine de Joule ayant permis de montrer l’équivalence entre travail et chaleur.
+La question qui se pose est alors de savoir quelles transformations thermodynamiques sont possibles et lesquelles sont impossibles. Cette question est à la fois fondamentale et pratique. D’un point de vue fondamental, la question est de savoir pourquoi certaines transformations sont possibles et pas d’autres. D’un point de vue pratique, la question est de savoir si certaines transformations sont possibles ou non pour pouvoir concevoir des systèmes qui fonctionnent effectivement. Ainsi, il est important de savoir quelle machine concevoir pour pouvoir effectivement transformer de la chaleur en travail : si le dispositif de Joule ne le permet pas, quel
+62
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 63
+dispositif pourrait le permettre, peut-on l’optimiser et comment ? La réponse à ces questions repose sur le second principe de la thermodynamique.
+3.1 Premiers énoncés du second principe
+Il existe plusieurs énoncés du second principe de la thermodynamique. Cependant, les plus simples et intuitifs sont sans doute ceux de Kelvin et de Clausius qui ne font intervenir que des concepts simples et que l’on peut facilement appréhender d’un point de vue intuitif. Ils énoncent en effet une réalité observable et le transforment en un principe général dont on peut étudier les conséquences.
+3.1.1 Enoncé de Kelvin
+L’énoncé de Kelvin érige en principe général l’observation décrite en introduction selon laquelle une transformation spontanée de l’énergie thermique en énergie mécanique est impossible alors que la transformation inverse est possible.
+Il est impossible de prendre de la chaleur à un système et de la convertir en travail sans quelque autre changement simultané dans le système. En revanche, l’inverse est possible.
+Système
+Source
+Q>0 Q≤0
+Source
+W≥0
+Système
+W<0
+FIGURE 3.2 – Schématisation de l’énoncé de Kelvin.
+Enoncé de Kelvin du second principe
+3.1.2 Enoncé de Clausius
+Une autre observation commune est que l’énergie ne se transfert pas spontanément d’une source froide à une source chaude alors que l’inverse est vrai. L’énoncé de Kelvin consiste à ériger cette observation en principe général. Il faut cependant noter qu’un tel transfert est possible à condition d’apporter du travail extérieur au système : c’est ainsi que fonctionne un réfrigérateur.
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 64
+La chaleur ne passe pas d’elle-même d’une source froide à une source chaude.
+Q2 < 0
+Q1 > 0
+Q2 > 0
+Q1 < 0
+W≤0
+Q2 < 0
+Q1 > 0
+W>0
+Sce chaude Sce chaude Sce chaude
+Système
+Sce froide
+Système
+Sce froide
+Système
+Sce froide
+FIGURE 3.3 – Schématisation de l’énoncé de Clausius.
+Enoncé de Clausius du second principe
+3.1.3 Equivalence des deux énoncés
+Les deux énoncés de Kelvin et de Clausius sont en fait équivalents, ce que l’on montre dans cette section.
+Commençons par montrer que si l’énoncé de Clausius est faux alors l’énoncé de Kelvin est également faux. Pour cela, on considère une machine frigorifique en contact avec une source froide et une source chaude qui viole le principe Clausius (cf. Fig. 3.4). On considère alors une machine motrice qui est telle qu’elle restitue à la source froide exactement la chaleur qui est retirée par la machine frigorifique. Un travail négatif W < 0 est fourni à cette machine motrice et une quantité de chaleur Q′
+2 > 0 est transférée de la source chaude à la machine motrice (afin de ne pas violer le principe de Clausius, cf. Fig. 3.3). L’ensemble constitué par les machines frigorifique et motrice est un système thermodynamique. Ce système fournit à l’extérieur un travail (−W) positif en ponctionnant de la chaleur à la source chaude et sans transférer de chaleur à la source froide 1. Il viole donc le principe Kelvin.
+Q′
+2 − Q1 > 0
+≡ Système
+Q2 = −Q1 < 0
+W<0
+Q1 > 0
+Frigo Moteur
+Q′
+2>0
+−Q1 < 0
+W<0
+Sce chaude Sce chaude
+Sce froide Sce froide
+FIGURE 3.4 – Si l’énoncé de Clausius est faux, celui de Kelvin l’est également.
+Montrons à présent que si l’énoncé de Kelvin est faux alors l’énoncé de Clausius est également faux.
+1. Se montre par un bilan d’énergie sur le système : W = − (Q′
+2 − Q1
+) ; or W < 0.
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 65
+Pour cela, on considère une machine motrice en contact avec une source chaude qui viole le principe de Kelvin (cf. Fig. 3.5), c’est-à-dire qu’elle fournit du travail W > 0 en prélevant une énergie sous forme de chaleur Q′
+2 > 0 à la source chaude sans transférer de chaleur à une source froide. On utilise alors ce travail W pour faire fonctionner une machine frigorifique prélevant une quantité de chaleur Q1 > 0 à une source froide. Par application du premier principe à la machine motrice puis à la machine frigorifique, on montre facilement que la quantité de chaleur Q2 transférée de la source chaude à la machine frigorifique est
+Q2 = − (Q′
+2 + Q1
+)<0
+On peut alors considérer comme système thermodynamique les machines motrice et frigorifique couplées, le transfert de travail entre les deux étant un processus interne. Ce système n’échange pas de travail avec l’extérieur, une quantité de chaleur Q1 > 0 provient de la source froide et est transférée à la source chaude. Ce système viole alors l’énoncé de Clausius.
+−Q1 < 0
+≡
+Q1 > 0 Q1 > 0
+Q2 = −(Q′
+2 + Q1) < 0
+W
+Q′
+2>0
+Frigo
+Sce chaude
+Sce froide Sce froide
+Sce chaude
+Moteur Système
+FIGURE 3.5 – Si l’énoncé de Kelvin est faux, celui de Clausius l’est également.
+On vient de montrer l’équivalence de ces deux principes qui sont assez intuitifs et cohérents avec l’observation de processus physiques communs. Dans la suite de ce chapitre, on montre toutes les conséquences fondamentales et pratiques de ces principes. On montre en particulier qu’ils permettent de montrer l’existence d’une nouvelle grandeur thermodynamique fondamentale : l’entropie.
+3.2 Cycle de Carnot
+Le cycle de Carnot joue un rôle fondamental en thermodynamique et c’est pourquoi il convient de le décrire. Il joue également un rôle central dans la démonstration de l’existence de l’entropie. Comme on le verra dans la suite de ce cours, c’est le cycle thermodynamique limite de tout autre cycle réel.
+3.2.1 Transformations réversibles et irréversibles
+Par définition, une transformation réversible est une transformation thermodynamique au cours de laquelle à tout instant, on peut effectuer la transformation inverse en repassant exactement par les mêmes états du système thermodynamique. La réversibilité est une notion très théorique car la vie quotidienne nous montre que les transformations sont rarement réversibles.
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 66
+3.2.2 Description du cycle de Carnot
+Le cycle de Carnot est constitué de deux isothermes et de deux adiabatiques comme représenté sur la Fig. 3.6. Les transferts de chaleur avec les sources froide et chaude se font le long des isothermes respectivement froide et chaude aux températures T1 et T2 respectivement.
+A
+C
+D
+B
+T = T2
+T = T1
+Adiabatique
+Q2
+Q1
+V
+P
+FIGURE 3.6 – Description du cycle de Carnot.
+3.2.3 Machine de Carnot pour un gaz parfait
+Dans cette section, on étudie analytiquement le cycle de Carnot d’un gaz parfait dont les capacités calorifiques sont constantes. On considère donc une unité de masse de ce gaz parfait qui subit les transformations réversibles successives caractéristiques du cycle de Carnot dans le sens moteur ABCD (cf. Fig. 3.6).
+Transformation B → C
+L’application du premier principe au système fermé s’écrit :
+du = δq + δw
+Le gaz étant parfait, son énergie interne ne dépend que de la température qui est constante sur l’isotherme T2 ; on a donc du = 0. La transformation étant réversible, le travail des forces de pression s’écrit δw = −P dv. Le gaz étant parfait, on a P v = r T2. On a finalement :
+δq = r T2
+dv v
+Par intégration le long de l’isotherme B → C, on a :
+Q2 = r T2 ln
+( vC
+vB
+)
+(3.1)
+Transformation D → A
+De la même manière, on montre facilement que, pour la transformation isotherme à la température T1, on a :
+Q1 = r T1 ln
+( vA
+vD
+)
+(3.2)
+Les relations (3.1) et (3.2) montrent que le rapport Q1/Q2 est donné par
+Q1
+Q2
+= T1
+T2
+ln (vA/vD)
+ln (vC/vB) (3.3)
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 67
+Transformation A → B
+Cette transformation étant adiabatique réversible et appliquée à un gaz parfait dont les capacités calorifiques sont constantes, on peut appliquer la relation (1.33), page 13 2 :
+T1
+T2
+=
+( vB
+vA
+)γ−1
+(3.4)
+Transformation C → D
+De même, on montre que
+T2
+T1
+=
+( vD
+vC
+)γ−1
+(3.5)
+Les relations (3.4) et (3.5) montrent alors que
+vA
+vD
+= vB
+vC
+(3.6)
+La combinaison des relations (3.3) et (3.6) permet de montrer la relation suivante :
+Q1
+T1
++ Q2
+T2
+= 0 (3.7)
+Travail fourni au gaz parfait au cours du cycle
+Par application du bilan d’énergie (2.1), page 42, au système fermé constitué par le fluide au cours du cycle complet, on a
+∆u = 0 = W + Q1 + Q2
+où W est le travail extérieur fourni au fluide. En utilisant la relation (3.7), la relation précédente peut se mettre sous la forme suivante :
+W = −Q2
+(
+1 − T1
+T2
+)
+(3.8)
+Cette relation exprime le travail fourni par l’extérieur en fonction de la quantité de chaleur fournie par la source chaude Q2 > 0. Elle montre en particulier que le travail est proportionnel à la chaleur transmise par la source chaude. Elle montre également que toute la chaleur transmise par la source chaude n’est pas convertie en travail : seule la portion (1 − T1/T2) de la chaleur transmise par la source chaude est transformée en travail, la portion complémentaire (T1/T2) étant transférée à la source froide (cf. relation (3.7)). Ce résultat est conforme au principe de Kelvin du second principe et la relation (3.8) le précise quantitativement dans le cas particulier d’une machine de Carnot réversible fonctionnant avec un gaz parfait. Il est important de remarquer que plus le rapport des températures des sources chaude et froide est élevé, plus le travail créé est élevé pour une même valeur de la chaleur fournie par la source froide. D’un point de vue pratique, cela signifie que si la température de la source froide est une constante (par exemple l’air ambiant), pour maximiser le travail fourni par la machine, on a intérêt à ce que le transfert de chaleur avec la source chaude se fasse à température élevée.
+2. A noter que bien que cette relation ait été démontrée au chapitre 1 en utilisant l’entropie (non encore introduite à ce stade de la présentation du second principe), elle peut être démontrée en ne faisant appel qu’à la notion de travail réversible des forces de pression (−P dv). La démonstration est laissée au lecteur en guise d’exercice.
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 68
+Machine frigorifique
+L’analyse présentée au-dessus concerne une machine motrice. Cependant, la machine étant réversible, elle peut fonctionner dans le sens inverse en suivant exactement le même cycle. On montre alors facilement que les relations (3.7) et (3.8) restent valables ; seuls les signes de Q1, Q2 et W sont différents : dans le cas d’une machine frigorifique, on a W > 0, Q1 > 0 et Q2 < 0. Là encore, les résultats sont cohérents avec l’énoncé de Clausius du second principe et le précisent quantitativement. Ils montrent en particulier que la chaleur transmise à la source chaude est supérieure à la chaleur soutirée à la source froide, le complément correspondant au travail fourni à la machine. En d’autres termes, une machine frigorifique réchauffe plus la source chaude qu’elle ne refroidit la source froide. Ou encore, le coût énergétique à payer sous forme de travail pour soutirer l’énergie Q1 à la source froide est W = Q1 (T2/T1 − 1). Cette relation montre en particulier que plus le rapport (T2/T1) est élevé, plus le travail à fournir est élevé ; le coût énergétique est donc d’autant plus élevé que la température de la source froide est faible par rapport à celle de la source chaude.
+3.2.4 Suite de portions de « cycles » de Carnot
+On peut considérer un cycle suivant une succession de transformations réversibles isotherme puis adiabatique comme illustré sur la Fig. 3.7 avec trois portions. En appliquant la même analyse que celle de la section précédente, on montre que la relation suivante est vérifiée (la démonstration est laissée au lecteur en guise d’exercice) :
+Q1
+T1
++ Q2
+T2
++ Q3
+T3
+=0
+AB
+C
+F
+V
+P
+Q1
+Q3
+T3
+T2
+T1
+E
+D
+Q2
+FIGURE 3.7 – Schématisation d’un cycle suivant des portions de cycle de Carnot.
+Cette relation peut être généralisée à un nombre n quelconque de successions d’isothermes réversibles et d’adiabatiques réversibles et on montre que le cycle est alors caractérisé par la
+relation suivante :
+n
+∑
+i=1
+Qi
+Ti
+= 0 (3.9)
+3.2.5 Machine de Carnot pour un fluide quelconque
+On montre dans cette section que les échanges d’énergie dans une machine de Carnot sont indépendants de la nature du système et qu’ils dépendent uniquement de la température des sources chaude et froide.
+La démonstration de ce résultat repose sur le couplage d’une machine de Carnot réversible fonctionnant avec un gaz parfait avec une deuxième machine de Carnot réversible également mais fonctionnant avec un fluide quelconque. On considère tout d’abord une machine de Carnot motrice telle que schématisée sur la Fig. 3.8. Les chaleurs Q′
+1 et Q′
+2 sont fournies (algébriquement) à cette machine par les sources froide et chaude respectivement. Le travail de cette machine motrice est fourni à une machine de Carnot à gaz parfait (cf. Fig. 3.8). Le système constitué par l’ensemble des deux machines de Carnot constitue un système couplé qui n’échange pas de travail avec l’extérieur. Ce système doit donc respecter le principe de Clausius et on a donc les inégalités suivantes :
+Q′
+2 − Q2 ≥ 0
+Q′
+1 − Q1 ≤ 0
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 69
+−Q2 < 0 Q′
+2 − Q2 ≥ 0
+Q′
+1 − Q1 ≤ 0
+W
+−Q1 > 0
+Q′
+2>0
+Q′
+1<0
+≡ Système
+Sce chaude
+Sce froide
+Sce chaude
+Sce froide
+Carnot Carnot GP
+FIGURE 3.8 – Machine de Carnot réversible motrice couplée à une machine de Carnot réversible à gaz parfait.
+Les deux machines de Carnot étant réversibles, on peut inverser le sens des échanges entre ces deux machines ; la machine de Carnot à gaz parfait devient alors motrice (cf. Fig. 3.9). Le système couplé doit également respecter le principe de Clausius et on a donc
+−Q′
+2 + Q2 ≥ 0
+−Q′
+1 + Q1 ≤ 0
+Q2 > 0 −Q′
+2 + Q2 ≥ 0
+−Q′
+1 + Q1 ≤ 0
+W
+Q1 < 0
+≡
+−Q′
+2<0
+−Q′
+1>0
+Système
+Sce chaude
+Carnot Carnot GP
+Sce froide Sce froide
+Sce chaude
+FIGURE 3.9 – Machine de Carnot réversible réceptrice couplée à une machine de Carnot réversible à gaz parfait.
+Les deux machines étant réversibles, les deux couplages sont possibles et on a par conséquent
+Q′
+1 = Q1
+Q′
+2 = Q2
+Or la machine de Carnot réversible à gaz parfait vérifiant la relation (3.7), la machine de Carnot réversible fonctionnant avec un fluide quelconque vérifie donc la relation suivante :
+Q′
+1 T1
++ Q′
+2 T2
+= 0 (3.10)
+L’expression (3.8) est donc valable pour une machine de Carnot réversible fonctionnant avec un fluide quelconque.
+3.2.6 Performances d’une machine de Carnot
+Rendement d’une machine motrice
+Une machine motrice fournit du travail, ce qui signifie que W < 0, en consommant la chaleur Q2 > 0 provenant de la source chaude. Le rendement énergétique est alors
+η = |W|
+Q2
+= −W
+Q2
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 70
+Les relations (3.7) et (3.8) étant valables pour toute machine de Carnot, le rendement d’un moteur de Carnot est donné par
+ηCarnot = 1 − T1
+T2
+(3.11)
+Cette relation montre que le rendement d’un moteur de Carnot dépend uniquement des températures des sources froide et chaude avec lesquelles se font les transferts de chaleur. Ce résultat montre que le rendement énergétique est d’autant plus élevé que la température de la source chaude est élevée.
+Rendement d’un moteur de Carnot
+Performance d’une machine frigorifique
+Une machine frigorifique retire la chaleur Q1 > 0 à la source froide en fournissant le travail W > 0. La performance énergétique est alors
+ω = Q1
+W
+Les relations (3.7) et (3.8) étant valables pour toute machine de Carnot, la performance d’une machine frigorifique de Carnot est donnée par
+ωCarnot = T1
+T2 − T1
+(3.12)
+Performance d’une machine frigorifique de Carnot
+Il faut remarquer que, contrairement au cas du rendement d’une machine motrice, la performance d’une machine frigorifique peut être supérieure à 1 ; c’est pourquoi on ne l’appelle pas rendement mais performance.
+3.2.7 Théorème de Carnot
+On considère une machine réelle quelconque non réversible et une machine de Carnot fonctionnant toutes deux entre les deux mêmes sources et fournissant le même travail. Sur un cycle, on a donc pour les machines de Carnot et réelle respectivement :
+W + Q1 + Q2 = 0
+W + Q′
+1 + Q′
+2=0
+et les rendements énergétiques suivants :
+ηCarnot = − W
+Q2
+ηre ́el = − W
+Q′
+2
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 71
+soit
+ηre ́el = ηCarnot
+Q2 Q′
+2
+(3.13)
+On inverse alors la machine de Carnot (réversible) et on la couple à la machine réelle tel que schématisé sur la Fig. 3.10. Le système couplé doit alors vérifier le principe de Clausius et les inégalités suivantes doivent donc être satisfaites :
+Q′
+2 − Q2 ≥ 0
+Q′
+1 − Q1 ≤ 0
+La première inégalité montre donc que
+Q2 Q′
+2
+≤ 1 (3.14)
+−Q2 < 0 Q′
+2 − Q2 ≥ 0
+Q′
+1 − Q1 ≤ 0
+W
+Q′ −Q1 > 0
+1<0
+≡ Système
+Q′
+2>0
+Sce chaude
+Réelle Carnot
+Sce froide Sce froide
+Sce chaude
+FIGURE 3.10 – Machine réelle irréversible couplée à une machine de Carnot.
+Les relations (3.13) et (3.14) montrent alors
+ηre ́el ≤ ηCarnot = 1 − T1
+T2
+(3.15)
+Cette inégalité montre qu’aucune machine motrice ne peut être aussi efficace énergétiquement qu’un moteur de Carnot.
+Théorème de Carnot
+3.3 Entropie
+3.3.1 Inégalité de Clausius
+Pour une machine motrice ditherme, le théorème de Carnot (3.15) s’écrit
+ηre ́el = Q′
+1 + Q′
+2 Q′
+2
+≤ ηCarnot = 1 − T1
+T2
+qui peut se réécrire
+Q′
+1 T1
++ Q′
+2 T2
+≤0
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 72
+On peut vérifier que la même relation est vérifiée dans le cas d’une machine frigorifique.
+Le même raisonnement peut être généralisé au cas de n transformations isothermes et adiabatiques successives et l’on obtient alors l’inégalité suivante :
+n
+∑
+i=1
+Q′
+i Ti
+≤ 0 (3.16)
+Cette relation est appelée inégalité de Clausius.
+3.3.2 Machines thermiques quelconques
+Tout cycle thermodynamique peut être approché par un cycle s’appuyant sur une succession de portions d’isothermes réversibles et d’adiabatiques réversibles comme représenté sur la Fig. 3.11 ci-contre. Pour un nombre fini n de telles portions, on peut appliquer l’inégalité de Clausius (3.16). En passant à la limite infinie, on obtient, pour un cycle quelconque :  ̨
+rev
+δQ
+T ≤ 0 (3.17)
+L’égalité est vérifiée pour un cycle réversible et l’inégalité stricte est vérifiée pour un cycle irréversible.
+P
+V
+FIGURE 3.11 – Cycle quelconque approché par des portions de cycle de Carnot.
+3.3.3 Introduction d’une fonction d’état
+On considère deux étatsE1 etE2 reliés par deux
+transformations réversibles Γ et Γ′ telles que représentées sur la Fig. 3.12. Ces deux chemins forment un cycle réversible sur lequel on a  ̨ δQ
+T =0
+L’intégrale peut être scindée :
+ ̨ δQ
+T=
+ˆ
+Γ12
+δQ
+T+
+ˆ
+Γ′
+21
+δQ T
+Γ′
+E2
+Γ
+E1
+FIGURE 3.12 – Transformations réversibles reliant deux états.
+La transformation Γ′
+21 étant réversible, si on inverse cette transformation, on a ˆ
+Γ′
+21
+δQ
+T =−
+ˆ
+Γ′
+12
+δQ T
+On a par conséquent ˆ
+Γ12
+δQ
+T=
+ˆ
+Γ′
+12
+δQ T
+Cette relation montre que, pour une transformation réversible, l’intégrale de (δQ/T) est indépendante de la transformation considérée (à condition qu’elle soit réversible). Ce résultat
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 73
+amène donc à introduire une nouvelle grandeur thermodynamique ne dépendant que de l’état du système, appelée entropie et notée S, et telle que
+ˆ2
+1 rev
+δQ
+T = S2 − S1
+soit encore, pour une transformation élémentaire réversible
+dS =
+(
+δQ T
+)
+rev
+3.3.4 Transformation irréversible
+On considère à présent deux transformations, l’une Γrev réversible et l’autre Γ′
+irrev irréversible, reliant
+les états E1 et E2 telles que représentées sur la Fig. 3.13. Le cycle étant globalement irréversible, d’après l’inégalité de Clausius (3.17), on a
+ ̨ δQ
+T <0
+soit ˆ
+Γ′
+12
+δQ
+T <−
+ˆ
+Γ21
+δQ T
+E2
+E1
+Γ′
+irrev
+Γrev
+FIGURE 3.13 – Transformations réversible et irréversible reliant deux états.
+La transformation Γ21 étant réversible, on a
+ˆ
+Γ21
+δQ
+T = S1 − S2
+et donc ˆ 2
+1 irrev
+δQ
+T < S2 − S1
+soit encore, pour une transformation élémentaire réversible
+dS >
+(
+δQ T
+)
+irrev
+Ces résultats permettent alors d’exprimer le second principe de la thermodynamique avec l’entropie.
+Il existe une fonction d’état S appelée entropie telle que, pour toute transformation infinitésimale d’un système fermé, on a
+dS = δQ
+T + δSi (3.18)
+avec δSi ≥ 0 (3.19)
+et δSi = 0 pour une transformation réversible.
+Entropie et second principe
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 74
+Une conséquence directe du second principe est que l’entropie d’un système fermé isolé (δQ = 0) ne peut que croître (dS = δSi ≥ 0).
+3.3.5 Sources d’irréversibilités
+Il existe principalement deux sources d’irréversibilités : externes et internes.
+3.3.5.1 Irréversibilités externes
+Les irréversibilités externes caractérisent les irréversibilité des échanges énergétiques entre le système considéré et l’extérieur. Elles ont lieu lorsque deux systèmes, ou un système et le milieu extérieur, sont mis en relation alors qu’ils sont à des potentiels différents. Cette différence de potentiel engendre non seulement un échange mais est aussi à l’origine d’irréversibilités. Ces irréversibilités sont appelées externes car elles sont dues à un déséquilibre avec le milieu extérieur (le déséquilibre étant dû au fait que les deux potentiels sont différents).
+A titre d’exemple, on considère le cas d’un échange thermique entre un système à une température Tf plus basse que le milieu extérieur à une température Tc > Tf . Du fait de cette différence de température, un échange d’énergie sous forme de chaleur aura lieu du milieu extérieur chaud vers le système froid. L’échange de chaleur δQ s’accompagne de variations d’entropie.
+Tf
+Tc
+δQ
+FIGURE 3.14 – Irréversibilité externe.
+Les variations d’entropie du système et de l’extérieur sont respectivement
+dSf = δQ
+Tf
+dSc = −δQ
+Tc
+Par conséquent, la variation d’entropie totale est
+dS = dSf + dSc = δQ
+(1
+Tf
+−1
+Tc
+)
+(3.20)
+Cette variation d’entropie est strictement positive dès lors que Tc > Tf , c’est-à-dire dès que les températures sont différentes.
+On peut montrer qu’il existe une telle source d’irréversibilité externe pour d’autres potentiels. Par exemple si la pression externe est différente de la pression du fluide pour le travail des forces de pression.
+3.3.5.2 Irréversibilités internes
+Les irréversibilités internes sont dues à des déséquilibres internes au système.
+Par exemple, dans le cas d’un fluide circulant à travers les différents composants d’un cycle thermodynamique (y compris les canalisations), le champ de température de ce fluide n’est pas uniforme en espace et présente des fluctuations spatiales. Ces déséquilibres internes de température conduisent à des échanges d’énergie internes locaux qui sont à l’origine d’irréversibilités. Ces irréversibilités internes se traduisant par une source d’entropie locale positive. Dans le cas considéré, les échanges thermiques locaux se font par conduction : un gradient de température local engendre un flux local d’énergie opposé à ce gradient. On a donc
+q = −k ∇T (3.21)
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 75
+où k [W/(K.m)] est un coefficient positif appelé conductivité thermique (cf. cours de transferts thermiques). On peut montrer que ces échanges internes locaux (traduits par le gradient local de température) conduisent à une source volumique d’entropie par unité de temps se mettant sous la forme suivante :
+ ̇σcond = k (∇T)2
+T2 (3.22)
+On remarque que  ̇σcond ≥ 0 et que cette formule est cohérente avec celle correspondant aux échanges externes : un développement limité de la relation (3.20) dans le cas où Tf ' Tc redonne bien une source d’entropie cohérente avec la formule (3.22).
+Outre le déséquilibre local de température, une autre source importante d’irréversibilité interne provient du déséquilibre local en vitesse. En effet, même au sein d’une canalisation, le champ de vitesse local n’est pas uniforme mais présente des variations locales (cf. cours de mécanique des fluides). Ces variations locales du champ de vitesse engendrent des frottements locaux : un filet fluide allant plus vite qu’un filet fluide voisin engendre un frottement local. Lorsqu’il existe un gradient local du champ de vitesse v, cela engendre un tenseur de force de frottement local τ qui, pour un fluide Newtonien incompressible, se met sous la forme (cf. cours de mécanique des fluides)
+τ=μ
+(∇v + ∇tv) (3.23)
+où μ [kg/(m.s)] est un coefficient positif appelé viscosité dynamique. On peut montrer que ces frottements internes locaux conduisent à une source volumique d’entropie par unité de temps se mettant sous la forme suivante :
+ ̇σvisc = μ (∇v : ∇v)
+T (3.24)
+On peut montrer que le numérateur est toujours positif (cf. cours de mécanique des fluides).
+Une autre source d’irréversibilité interne est liée aux transferts de masse et aux réactions chimiques. Là encore, on peut montrer que la source volumique d’entropie est strictement positive et liée à des processus locaux.
+A l’annexe B.1, on montre sur un exemple particulier qu’il est possible de relier les sources d’entropie dues aux irréversibilités externes à des processus de transferts locaux, eux-mêmes irréversibles.
+3.4 Bilan d’entropie appliqué à un système ouvert
+Le bilan d’entropie d’un système ouvert s’obtient en appliquant l’expression générale (2.33), page 51, d’un bilan sur un système ouvert avec les substitutions suivantes : — la grandeur R est l’entropie S : R = S ; — la source volumique d’entropie n’est autre que la source irréversible d’entropie qui est positive ou nulle suivant que la transformation est irréversible ou réversible :  ̇σSi ≥ 0 ; — le flux surfacique d’entropie qS s’exprime à partir de la puissance calorifique locale δq ̇ transférée à travers la paroi à la température locale du système Tp échangeant de la chaleur avec une source extérieure et suivant la normale n à cette paroi : qS = −δq ̇/Tp n. L’application de l’expression (2.33) donne alors
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 76
+dS
+dt = d
+dt
+ˆ
+V
+S dV =  ̇σSi −
+ˆ
+∂V
+ρ s v · n dA +
+ˆ
+∂V
+δq ̇
+Tp
+dA (3.25)
+où  ̇σSi ≥ 0 (3.26)
+est la source d’entropie due aux irréversibilités internes.
+Bilan d’entropie appliqué à un système ouvert quelconque
+Il est important de noter que, dans la relation (3.25), la température Tp est la température du système (par ex. du fluide) en contact avec la paroi où se produit l’échange de puissance calorifique δq ̇. Cette température étant locale et interne au système, il est généralement difficile de la connaître. C’est pourquoi il peut être plus aisé d’utiliser la température d’échange du milieu extérieure, Tech, qui peut être plus simple à déterminer. On a alors
+δq ̇
+Tp
+= δq ̇
+Tech
++ δq ̇
+(1
+Tp
+−1
+Tech
+)
+Or, le dernier terme de cette équation est toujours positif ou nul et correspond à la source d’entropie externe (cf. § 3.3.5.1). C’est pourquoi le bilan d’entropie (3.25) peut se mettre sous la forme équivalente suivante.
+dS
+dt = d
+dt
+ˆ
+V
+S dV = −
+ˆ
+∂V
+ρ s v · n dA +
+ˆ
+∂V
+δq ̇
+Tech
+dA +  ̇σS +  ̇σSe (3.27)
+avec  ̇σS =  ̇σSi +  ̇σSe (3.28)
+où  ̇σSi ≥ 0 (3.29)
+ ̇σSe ≥ 0 (3.30)
+sont les sources d’entropie dues aux irréversibilités respectivement internes et externe.
+Autre forme du bilan d’entropie
+Considérons à présent le cas particulier d’écoulements unidimensionnels. Dans ce cas, le flux convectif d’entropie à travers une surface Ai est donné par ˆ
+Ai
+ρ s v · n dA = ρi sivi · ni Ai = m ̇ i si
+Notons que m ̇ i > 0 lorsque le fluide est sortant. Par ailleurs, si les échanges de chaleur avec l’extérieur se font avec une température extérieur d’échange unique, on a
+ˆ
+∂V
+δq ̇
+Tech
+dA = Q ̇
+Tech
+si m ̇ i
+Q ̇
+Tech
+3
+FIGURE 3.15 – Bilan d’entropie d’un système ouvert.
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 77
+dS
+dt = − s∑−e
+m ̇ s + Q ̇
+Tech
++  ̇σS (3.31)
+où  ̇σS ≥ 0 (3.32)
+est la source d’entropie due aux irréversibilités internes et externe.
+Bilan d’entropie appliqué à un système ouvert unidimensionnel
+3.5 Réversibilité et efficacité d’une machine
+Dans cette section, on montre l’intérêt de l’entropie du point de vue de l’ingénieur et plus particulièrement l’intérêt de rechercher à minimiser les sources d’entropie liées aux irréversibilités pour optimiser un système énergétique.
+3.5.1 Travail maximum
+On considère un système unidimensionnel stationnaire schématisé sur la Fig. 3.16 dans lequel le fluide qui y circule subit une transformation infinitésimale dans laquelle l’enthalpie et l’entropie du fluide varient respectivement de dh et ds (pour simplifier, on néglige les variations d’énergies potentielle et cinétique).
+he se
+hs = he + dh ss = se + ds
+δq
+δw
+FIGURE 3.16 – Système unidimensionnel élémentaire.
+L’application du bilan d’énergie (2.27), page 48, donne
+m ̇ dh = δw ̇ + δq ̇
+L’application du bilan d’entropie (3.31) donne
+m ̇ ds = δq ̇
+T + δ  ̇σS
+On montre alors facilement que
+δw ̇ = m ̇ (dh − T ds) + T δ  ̇σS
+soit, en utilisant l’expression générale (1.7) de la différentielle de h :
+δw ̇ = m ̇ v dP + T δ  ̇σS
+Si la transformation est réversible, cette relation montre que le travail fourni par l’extérieur est
+δw ̇ rev = m ̇ v dP
+Ces deux relations montrent donc que pour une transformation irréversible (δ  ̇σS > 0), le travail fourni par l’extérieur δw ̇ irrev est tel que
+δw ̇ irrev > δw ̇ rev (3.33)
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 78
+Cette relation signifie que les irréversibilités augmentent la puissance mécanique à fournir au système. Suivant le signe de la puissance mécanique fournie δw ̇ , c’est-à-dire que la machine soit motrice (δw ̇ < 0) ou réceptrice (δw ̇ > 0), on montre que cette inégalité va toujours dans le « mauvais sens » pour l’ingénieur : on récupère moins de puissance ou on doit fournir plus de puissance qu’il ne le souhaiterait.
+À noter que l’on vient en particulier de montrer les relations suivantes :
+δw ̇ = m ̇ v dP + T δ  ̇σs = δw ̇ rev + T δ  ̇σs
+δq ̇ = m ̇ T ds − T δ  ̇σs = δq ̇rev − T δ  ̇σs
+3.5.2 Rendement isentropique
+Pour l’étude des compressions et détentes adiabatiques, on utilise souvent la notion de rendement isentropique pour caractériser leur efficacité énergétique.
+3.5.2.1 Compression adiabatique
+On considère une compression adiabatique permettant de porter la pression du fluide de Pe à l’entrée à une pression de sortie Ps > Pe. On considère en fait deux compressions, la première réversible et la seconde irréversible. Ces deux transformations sont schématisées sur la Fig. 3.17 sur un diagramme de Mollier. La transformation réversible est isentropique (car adiabatique réversible) alors que, pour la transformation irréversible, l’entropie du fluide augmente (cf. application des relations (3.31) et (3.32)).
+h
+s
+hrsev
+he
+Ps
+hisrrev
+ss = se
+W ̇ cirrev
+m ̇
+ss > se
+Pe
+W ̇ crev
+m ̇
+FIGURE 3.17 – Compression adiabatique.
+La Fig. 3.17 et l’application du bilan d’énergie montrent alors que
+hirrev
+s > hrsev
+W ̇ irrev
+c > W ̇ crev
+En d’autres termes, plus la transformation est irréversible, plus la puissance à fournir (W ̇ c > 0) pour augmenter la pression du fluide est importante, la puissance minimale étant obtenue pour une transformation réversible. L’efficacité d’une compression peut alors être caractérisée par le rendement isentropique de compression.
+ηicsomp = hrsev − he
+hirrev
+s − he
+= W ̇ crev
+W ̇ irrev
+c
+≤ 1 (3.34)
+Rendement isentropique de compression
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 79
+3.5.2.2 Détente adiabatique
+Un raisonnement similaire peut être suivi dans le cas d’une détente amenant le fluide d’une pression d’entrée Pe à une pression de sortie Ps < Pe. Les transformations réversible et irréversible sont schématisées sur la Fig. 3.18 sur un diagramme de Mollier. Cette figure montre que
+hirrev
+s > hrsev
+∣ ∣
+∣W ̇ irrev
+d
+∣ ∣
+∣<∣
+∣W ̇ rev
+d
+∣ ∣
+h
+s
+Pe
+ss = se ss > se
+hrsev
+he
+hisrrev
+W ̇ dirrev
+m ̇
+Ps
+W ̇ drev
+m ̇
+FIGURE 3.18 – Détente adiabatique.
+Cela signifie que, plus la transformation est irréversible, plus la puissance récupérée (W ̇ d < 0) par la détente du fluide est faible, la puissance maximale récupérée étant obtenue pour une transformation réversible. L’efficacité d’une détente peut alors être caractérisée par le rendement isentropique de détente.
+ηis
+det = he − hirrev
+s
+he − hrsev
+= W ̇ irrev
+d
+W ̇ rev
+d
+≤ 1 (3.35)
+Rendement isentropique de détente
+3.6 Notion d’exergie
+L’exergie est introduite essentiellement pour pouvoir traduire les sources d’entropie (en W/K) en perte directe de puissance (en W) qui est d’un intérêt pour l’ingénieur, en particulier pour chercher à optimiser les systèmes énergétiques.
+3.6.1 Puissance mécanique maximale récupérable
+Comme on l’a vu précédemment (cf. relation (3.33)), les irréversibilités se traduisent par le fait de devoir fournir (au sens algébrique) plus de puissance mécanique et donc par des pertes nettes d’énergie. Avec l’exergie, on cherche à généraliser cette notion en introduisant la notion de puissance mécanique maximale récupérable.
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 80
+3.6.1.1 Transformation infinitésimale
+Considérons une transformation élémentaire réversible telle que schématisée sur la Fig. 3.19. Le fluide échange avec l’extérieur la puissance mécanique élémentaire δw ̇ t et la puissance calorifique élémentaire δq ̇. La transformation étant réversible, δw ̇ t est la puissance mécanique maximale récupérable.
+On cherche alors à optimiser le système en valorisant la puissance calorifique δq ̇ sous forme de puissance mécanique. Le théorème de Carnot (3.15) nous indique que la puissance mécanique maximale récupérable à partir de cette puissance calorifique est obtenue avec une machine de Carnot. Cette machine de Carnot doit cependant échanger de la puissance calorifique avec une source froide.
+1© 2©
+δwt
+Machine de Carnot
+Milieu Ambiant (Ta)
+δq
+δqa
+δwC
+FIGURE 3.19 – Travail maximum récupérable.
+On introduit alors comme source froide le milieu ambiant à température Ta. Ce milieu ambiant est introduit car il ne « coûte rien » (d’un point de vue énergétique). La puissance mécanique maximale récupérable à partir de la puissance calorifique δq ̇ est (cf. relation (3.11)) :
+δw ̇ C =
+(
+1 − Ta
+T
+)
+δq ̇
+La puissance mécanique totale maximale récupérable est donc
+δw ̇ max = δw ̇ t + δw ̇ C = δw ̇ t +
+(
+1 − Ta
+T
+)
+δq ̇
+Par ailleurs, le bilan d’énergie appliqué au système fluide donne :
+m ̇ d (h + ec + ep
+) = m ̇ dht = δw ̇ t + δq ̇
+et le bilan d’entropie donne (on rappelle que la transformation est supposée être réversible) :
+m ̇ ds = δq ̇
+T
+On montre alors facilement que
+δw ̇ max = m ̇ (dht − Ta ds) (3.36)
+Cette relation montre que la puissance maximale récupérable s’exprime simplement à partir de l’enthalpie totale, de l’entropie et de la température ambiante.
+3.6.1.2 Transformation finie
+Soit un fluide dans un état donné quelconque. On cherche à déterminer la puissance maximale que l’on peut récupérer à partir de ce fluide. Pour cela, on considère une transformation amenant le fluide de cet état à un état en équilibre avec le milieu ambiant à la température Ta et à la pression Pa ; toutes les autres grandeurs thermodynamiques à cette température et à cette pression sont notées par l’indice a (par ex. ha = h(Pa; Ta)).
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 81
+Pour cela, il suffit de considérer une succession de transformations élémentaires telles que décrites dans la section précédente. On a donc
+W ̇ max =
+ˆ ambiant
+courant
+δw ̇ max =
+ˆ (Pa,Ta)
+(P,T)
+m ̇ (dht − Ta ds)
+W ̇ max = m ̇ [hta − ht − Ta (sa − s)] (3.37)
+Il faut noter que, dans le raisonnement suivi, on a considéré que la puissance mécanique est positive si le fluide reçoit cette puissance (conformément à la convention de signe). Or, comme on est intéressé par la puissance récupérable, cette puissance doit être positive si la puissance mécanique fournie au fluide est négative : le fluide fournit alors effectivement de la puissance mécanique à l’extérieur. C’est pourquoi on considère l’opposé de l’expression (3.37) qui définit l’exergie.
+L’exergie massique d’un fluide dans un état quelconque est définie par
+ex = ht − Ta s (3.38)
+où Ta est la température du milieu ambiant. C’est une fonction d’état (dépendant également de la température ambiante).
+L’énergie massique maximale sous forme de travail que l’on peut retirer d’un fluide qui évolue d’un état quelconque vers son état en équilibre avec le milieu ambiant à la pression Pa et la température Ta est donnée par la variation de son exergie massique :
+wmax = ex − exa (3.39)
+La puissance mécanique maximale récupérable est donnée par :
+W ̇ max = m ̇ (ex − exa) (3.40)
+Exergie
+L’anergie an est définie comme la part minimale de l’énergie massique qui ne pourra jamais être valorisée sous forme de travail mécanique :
+an = ht − ex (3.41)
+3.6.2 Contenu exergétique de différentes formes d’énergie
+Du point de vue de l’ingénieur, toutes les énergies ne se valent pas ; elles n’ont pas toutes la même « valeur » dans le sens où elles ne peuvent pas toutes être valorisées sous forme de travail mécanique avec la même efficacité. Le théorème de Carnot (3.15) nous indique que plus un échange thermique se fait à température élevée, plus le rendement énergétique maximum est grand. En d’autres termes, un Joule échangé à haute température ou un Joule échangé à basse température ne sont pas « équivalents » du point de vue de l’énergie valorisable sous forme de travail mécanique.
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 82
+Energie mécanique
+L’énergie mécanique est de l’exergie pure (par définition). De même, l’énergie potentielle est de l’exergie pure.
+Energie thermique
+L’énergie thermique n’est pas de l’exergie pure mais un « mélange » d’exergie (valorisable mécaniquement) et d’anergie (non valorisable mécaniquement). La machine de Carnot étant celle qui permet de valoriser le mieux l’énergie thermique en énergie mécanique, le contenu exergétique de l’énergie calorifique δq est
+δw =
+(
+1 − Ta
+T
+)
+δq
+Cette relation montre que plus la température T du fluide est élevée, plus son contenu exergétique est grand. En d’autres termes, plus la température du fluide est élevée, plus son énergie peut être valorisée sous forme de travail.
+3.6.3 Interprétation de l’exergie
+3.6.3.1 Représentation graphique de l’exergie
+Le diagramme de Mollier h − s est assez commode pour interpréter graphiquement l’exergie. Pour une raison de simplicité de représentation graphique, on considère ici le cas de transformations dans le domaine gazeux.
+Soit un état du fluide quelconque représenté sur un diagramme h − s par le point e de la Fig. 3.20. Sur cette même figure, le point a représente l’état du fluide en équilibre avec l’état ambiant. Par définition de l’exergie (cf. relation (3.38)), on a :
+ex − exa = (ht − ha) − Ta (s − sa)
+Si, pour simplifier l’interprétation graphique, on suppose que les énergies cinétique et potentielle du fluide sont négligeables, alors ht = h et donc
+ex − exa = (h − ha) − Ta (s − sa)
+dont l’interprétation graphique est donnée sur la Fig. 3.20.
+sa s
+h
+Pa
+P
+a
+s
+e
+Ta
+ex − exa
+an − ana
+h − ha
+(ex − exa) = 0
+FIGURE 3.20 – Interprétation graphique de (ex − exa).
+Il faut noter que le long de la tangente à l’isobare P = Pa passant par le point a, l’exergie du fluide est constante et égale à exa. Cette droite est parfois appelée « droite d’exergie nulle » dans le sens où, le long de cette droite (ex − exa) = 0.
+On considère un fluide dans un étatE (représenté par le point e sur la Fig. 3.20). Ce fluide traverse un ensemble de composants à travers lesquels il échange de l’énergie avec l’extérieur. Il ressort dans un étatEa en équilibre avec le milieu ambiant (état représenté par le point a sur la Fig. 3.20). Quels que soient les composants traversés et les échanges d’énergie effectués à travers ces composants, entre l’entrée et la sortie le bilan d’énergie s’écrit (le système est supposé unidimensionnel et les variations d’énergies potentielle et cinétique sont négligeables) :
+m ̇ (ha − h) = W ̇ ′ + Q ̇
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 83
+(h − ha) représente donc l’énergie massique échangée que l’échange se fasse sous forme de travail ou de chaleur. Cependant, suivant les composants et échanges considérés, les parts relatives de la puissance mécanique W ̇ ′ et de la puissance calorifique Q ̇ dans l’échange global sont différentes. La part (ex − exa) est la part maximale de l’énergie totale pouvant être échangée sous forme de travail. La part (an − ana) représente la part minimale de l’énergie totale devant être échangée sous forme de chaleur.
+3.6.3.2 Analyse physique de l’exergie
+Dans cette section, on exhibe un ensemble de transformations permettant d’interpréter l’exergie et donc la manière dont on peut récupérer le maximum de puissance mécanique en amenant le fluide d’un état quelconqueE à l’étatEa en équilibre avec le milieu ambiant.
+On considère la succession suivante de transformations schématisée sur la Fig. 3.21 : — détente adiabatique réversible permettant de faire passer la pression du fluide de P à la pression ambiante Pa ; la température passe de la température initiale T à la température T1 ; on a montré que pour une détente adiabatique, c’est la transformation réversible qui maximise la puissance mécanique récupérable ; — succession d’échangeurs thermiques élémentaires isobares permettant de faire passer progressivement la température du fluide de T1 à Ta ; chaque échangeur thermique élémentaire est couplé à une machine de Carnot élémentaire permettant de maximiser la puissance mécanique récupérée à partir de la chaleur extraite de l’échangeur.
+Il faut noter que l’on considère une succession d’échangeurs élémentaires et non pas un unique échangeur pour minimiser la source d’entropie externe en supposant que le fluide est à une température quasiment constante au cours de la transformation.
+Carnot1 Carnoti Carnotn
+Ambiant
+(P, T) (Pa, T1) (Pa, Ti) (Pa, Ti+1) (Pa, Ta)
+δQ ̇ 21 δQ ̇ 2i δQ ̇ 2n
+δW ̇ C1 δW ̇ Ci δW ̇ Cn
+W ̇ dmax
+δQ ̇ 11 δQ ̇ 1i δQ ̇ 1n
+FIGURE 3.21 – Travail maximum récupérable.
+La représentation de ces transformations sur un diagramme de Mollier est donnée sur la Fig. 3.21.
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 84
+e
+Ta
+sa s
+h
+Pa
+P
+1
+a
+s
+W ̇ dmax
+i
+ex − exa
+Q ̇ 2
+W ̇ C
+an − ana = −Q ̇ 1
+FIGURE 3.22 – Interprétation graphique des différentes contributions des échanges d’énergie correspondant aux transformations de la Fig. 3.21 ; pour simplifier le graphique, on suppose que m ̇ = 1. La détente adiabatique réversible est représentée par le segment reliant les points e et 1 ; la succession d’échangeurs élémentaires est représentée par la portion de courbe reliant les points 1 et a (un état intermédiaire i étant représenté sur cette courbe).
+Dans la suite, on étudie ces transformations.
+Détente adiabatique réversible
+Les bilans d’énergie et d’entropie s’écrivent :
+m ̇ (ht1 − ht) = W ̇ max
+d
+m ̇ (s1 − s) = 0
+La puissance mécanique W ̇ max
+d est représentée sur la Fig. 3.22.
+Echangeur élémentaire couplé à une machine de Carnot Les bilans d’énergie et d’entropie s’écrivent :
+m ̇ dhit = −δQ ̇ 2i
+m ̇ dsi = − δQ ̇ 2i
+Ti
+Pour chaque machine de Carnot élémentaire, la puissance mécanique fournie à la machine de Carnot est donnée par
+δW ̇ Ci = −
+(
+1 − Ta
+Ti
+)
+δQ ̇ 2i = −δQ ̇ 2i − m ̇ Ta dsi
+Ensemble d’échangeurs
+Par intégration des bilans d’énergie élémentaires sur l’ensemble des échangeurs élémentaires, on obtient l’expression suivante de la puissance calorifique totale transmise par l’ensemble de ces échangeurs élémentaires :
+Q ̇ 2 = −m ̇ (hta − ht1
+)
+La puissance calorifique Q ̇ 2 est représentée sur la Fig. 3.22. Par intégration des puissances mécaniques élémentaires reçues par les machines de Carnot, on obtient la puissance mécanique totale maximale reçue par l’ensemble des machines de Carnot :
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 85
+W ̇ C =
+ˆ (Pa,Ta)
+( Pa ,T1 )
+δW ̇ Ci = −Q ̇ 2 − m ̇ Ta (sa − s1) = −Q ̇ 2 − m ̇ Ta (sa − s)
+Cette puissance mécanique est représentée sur la Fig. 3.22 et correspond effectivement à une fraction de la puissance calorifique Q ̇ 2. La puissance calorifique totale fournie par le milieu ambiant est
+Q ̇ 1 = m ̇ Ta (sa − s)
+Transformation totale
+La puissance mécanique totale fournie par l’extérieur est
+W ̇ max = W ̇ max
+d + W ̇ C
+soit
+W ̇ max = W ̇ max
+d − Q ̇ 2 − m ̇ Ta (sa − s)
+W ̇ max = m ̇ [(ht1 − ht) + (hta − ht1
+) − Ta (sa − s)]
+On obtient finalement :
+W ̇ max = m ̇ [(hta − ht) − Ta (sa − s)] = m ̇ (exa − ex) (3.42)
+Or, cette puissance mécanique est celle fournie par l’extérieur, alors que l’ingénieur est plus intéressé par la puissance mécanique qui peut être récupérée et qui correspond donc à l’opposé de l’expression ci-dessus. La puissance mécanique maximale pouvant être récupérée (c’est-àdire fournie à l’extérieur) est donc :
+W ̇ max
+recup = −W ̇ max = m ̇ [(ht − hta
+) − Ta (s − sa)] = m ̇ (ex − exa) (3.43)
+On retrouve bien l’expression (3.40) dont l’interprétation graphique est donnée sur la Fig. 3.22.
+Il faut remarquer que si la puissance mécanique W ̇ max
+d provient directement du fluide consi
+déré, récupérer la puissance mécanique W ̇ C nécessite la transformation d’autres fluides : ceux utilisés dans les différentes machines de Carnot.
+Notons enfin que la part de la puissance disponible m ̇ (ht − hta
+) ne pouvant pas être récupérée sous forme mécanique est la puissance calorifique échangée avec la sources froide Q ̇ 1 dont l’interprétation graphique est également donnée sur la Fig. 3.22 ; cette part correspond à l’anergie.
+3.6.3.3 Quelques conséquences
+Augmentation d’enthalpie et d’exergie
+La Fig. 3.22 montre que si l’entropie du fluide est différente de son entropie correspondant aux conditions ambiantes (c’est-à-dire si s 6= sa), alors toute l’énergie du fluide ne peut pas être récupérée sous forme de travail. Cela correspond au fait que pour ramener l’entropie du fluide à l’entropie ambiante, il est nécessaire d’effectuer des échanges sous forme de chaleur (dans le cas où les transformations sont réversibles, ce qui est nécessaire pour espérer pouvoir récupérer de l’énergie sous forme de travail) et que, d’après le théorème de Carnot, toute la chaleur ne peut pas être transformée en travail.
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 86
+Cela a pour conséquence que ce n’est pas parce que l’enthalpie du fluide augmente que la puissance mécanique maximale récupérable augmente nécessairement ; tout dépend de la « qualité » (au sens de l’exergie) du surcroît d’enthalpie. La Fig. 3.23 illustre un cas où, entre les étatsE1 et E2 représentés respectivement par les points 1 et 2, l’enthalpie du fluide augmente mais son exergie diminue. Ceci est dû au fait que l’anergie augmente plus que l’enthalpie. Si l’on revient aux transformations considérés à la section précédente, la diminution de la puissance mécanique récupérée à la détente n’est pas compensée par l’augmentation de la puissance mécanique récupérée par les machines de Carnot.
+s
+h
+a
+Ta
+Pa
+2
+1
+sa
+ex2 − exa
+ex1 − exa
+FIGURE 3.23 – Diminution de l’exergie malgré l’augmentation de l’enthalpie.
+La Fig. 3.23 montre que le critère pour que l’augmentation d’enthalpie s’accompagne d’une augmentation d’exergie est
+∆h
+∆s > Ta
+Cette condition peut bien entendu se montrer directement à partir des relations (3.38) et (3.40).
+Enthalpie inférieure à l’enthalpie de l’état ambiant
+On montre ici que l’enthalpie peut être inférieure à celle de l’état en équilibre avec le milieu ambiant et l’exergie pourtant supérieure.
+En effet, si l’on considère l’étatE représenté par le point e sur la Fig. 3.24, son enthalpie est inférieure à celle de son étatEa en équilibre avec le milieu ambiant (h < ha), ce qui signifie que pour se transformer de l’étatE à l’étatEa , le fluide doit recevoir de l’énergie de l’extérieur. Et pourtant, son exergie est supérieure à celle de l’étatEa , ce qui signifie que le fluide peut fournir du travail à l’extérieur. Pour comprendre cette apparente contradiction, il suffit de se reporter à l’interprétation de la Fig. 3.21. A l’issue de la détente isentropique qui fournit effectivement du travail à l’extérieur, le fluide se trouve dans l’état représenté par le point 1 de la Fig. 3.24 dont la température T1 est inférieure à celle de l’état ambiant.
+Ta
+s
+h Pa
+T1
+a
+ex − exa
+1
+h − ha
+an − ana
+e
+FIGURE 3.24 – Enthalpie inférieure à celle de l’état en équilibre avec le milieu ambiant et exergie positive.
+Dans ce cas, le milieu ambiant joue le rôle de source chaude des machines de Carnot élémentaires et les échangeurs jouent le rôle de source froide comme représenté sur la Fig. 3.25. Une analyse de ces transformations montre les relations suivantes qui sont facilement interprétables sur la Fig. 3.24 (cf. Fig. 3.22) :
+W ̇ max
+d = m ̇ (h1 − h) < 0
+Q ̇ 1 = m ̇ Ta (sa − s1) = m ̇ Ta (sa − s) = −m ̇ (an − ana) > 0
+Q ̇ 2 = −m ̇ (ha − h1) < 0
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 87
+W ̇ C = m ̇ (ha − h1) − m ̇ Ta (sa − s1) < 0
+Par conséquent, la puissance mécanique totale fournie à l’extérieure est bien positive et correspond bien à la variation d’exergie telle que représentée sur la Fig. 3.24 :
+W ̇ recup = −W ̇ max
+d − W ̇ C = m ̇ (ex − exa) > 0
+(P, T) (Pa, T1) (Pa, Ta)
+Carnot(s)
+Ambiant
+Q ̇ 1 > 0
+Q ̇ 2 < 0
+W ̇ C < 0
+W ̇ dmax < 0
+FIGURE 3.25 – Pour simplifier, l’ensemble des échangeurs élémentaires est représenté par un seul échangeur « moyen » et l’ensemble des machines de Carnot élémentaires a été remplacé par une seule machine de Carnot.
+3.6.4 Bilan d’exergie
+Les bilans d’énergie et d’entropie d’un système ouvert unidimensionnel sont donnés respectivement par les relations (2.27), page 48 et (3.31), page 77. En multipliant la seconde équation par Ta et en soustrayant l’équation ainsi obtenue de la première équation, on obtient le bilan d’exergie.
+d
+(U + Ec + Ep − Ta S )
+dt = − s∑−e
+m ̇ ex + W ̇ ′ + Q ̇
+(
+1 − Ta
+Tech
+)
+− D ̇ a (3.44)
+où D ̇ a = Ta  ̇σS (3.45)
+est la dissipation d’exergie due aux irréversibilités.
+Bilan d’exergie d’un système ouvert
+Il faut remarquer que le bilan d’exergie n’est autre qu’une combinaison linéaire des bilans d’énergie et d’entropie, ce qui signifie donc qu’il apporte une information équivalente à celle du bilan d’entropie. Il présente cependant l’avantage, par rapport au bilan d’entropie, de mesurer les irréversibilités dans la même unité que l’énergie et qu’elle est donc directement utilisable par l’ingénieur : en calculant la dissipation d’exergie, on sait directement la puissance mécanique perdue du fait des irréversibilités du système thermodynamique étudié.
+Le terme apparaissant dans le membre de gauche de l’équation (3.44) est également appelé exergie. On peut montrer qu’elle représente le travail mécanique maximum pouvant être produit dans une transformation amenant le fluide de l’état courant à l’état en équilibre avec le milieu ambiant lorsque le système est fermé (cf. annexe B.2, page 128).
+Pour un écoulement stationnaire avec une seule entrée et une seule sortie, le bilan d’exergie (3.44) devient :
+m ̇ (exs − exe) = W ̇ ′ + Q ̇
+(
+1 − Ta
+Tech
+)
+− D ̇ a
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 88
+Dans cette relation, le deuxième terme du membre de droite représente la puissance mécanique maximale valorisable à partir des puissances calorifiques échangées. Le dernier terme représente la puissance qui ne pourra pas être valorisée sous forme de puissance mécanique du fait des irréversibilités. L’optimisation des systèmes énergétiques passe par la minimisation de D ̇ a. On cherche en particulier à améliorer en priorité les composants ayant une dissipation exergétique élevée.
+3.6.5 Rendement exergétique
+3.6.5.1 Définitions
+Le rendement exergétique est le rapport entre le produit exergétique (c’est-à-dire l’exergie produite par le système) et la ressource exergétique (c’est-à-dire l’exergie disponible).
+ηex = produit (exergétique)
+ressource (exergétique) (3.46)
+Rendement exergétique
+On a montré qu’une partie de l’énergie disponible ne peut plus être valorisée sous forme de travail à partir du moment où des irréversibilités existent. Pour mesurer cette part d’exergie perdue du fait des irréversibilités, on définit le facteur dissipatif ξ par
+ξ = irréversibilités
+ressource (exergétique) (3.47)
+Le rendement énergétique d’un système permet de déterminer la part de puissance effectivement utilisée (pour une utilisation donnée) à partir de la puissance disponible. Cependant, le théorème de Carnot nous indique que ce rendement ne peut pas être de 100% et qu’il est limité par le rendement de Carnot. Ainsi, il n’est pas possible de savoir si un rendement énergétique de 30% est un bon rendement ou pas : tout dépend de la limite maximale possible. C’est pourquoi il est intéressant de déterminer la part de la puissance qui est perdue alors qu’elle pourrait être valorisée. C’est en cela que le rendement exergétique et le facteur dissipatif sont intéressants. Ils permettent de mesurer la part de puissance qui pourraient effectivement être valorisée, ce qui n’est pas le cas du rendement énergétique car une part de la puissance ne peut jamais être valorisée ; c’est ce que nous indique le second principe via le théorème de Carnot. Nous illustrons cela dans la section suivante.
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 89
+3.6.5.2 Machine motrice ditherme
+On considère une machine ditherme telle que représentée sur la Fig. 3.26. Cette machine peut être complexe avec plusieurs composants et un fluide circulant en circuit fermé qui permet d’effectuer les différents échanges d’énergie avec l’extérieur. Mais on ne s’intéresse pas ici aux détails de fonctionnement de cette machine mais uniquement à son fonctionnement général. Le système thermodynamique est fermé et stationnaire. Le bilan d’exergie (3.44) s’écrit alors :
+0 = 0 + W ̇ ′ + Q ̇ C
+(
+1 − Ta
+TC
+)
++ Q ̇ F
+(
+1 − Ta
+TF
+)
+− D ̇ a
+Q ̇ C > 0
+Q ̇ F < 0
+Machine
+Sce chaude
+Sce froide
+W ̇ ′ < 0
+TF
+TC
+FIGURE 3.26 – Machine motrice ditherme.
+La perte d’exergie due aux irréversibilités est donc
+D ̇ a = W ̇ ′ + Q ̇ C
+(
+1 − Ta
+TC
+)
++ Q ̇ F
+(
+1 − Ta
+TF
+)
+Pour ce système thermodynamique, la ressource d’exergie est apportée par la puissance calorifique provenant de la source chaude et est donc
+Rex =
+(
+1 − Ta
+TC
+)
+Q ̇ C
+Le produit exergétique est quant à lui lié à la puissance mécanique fournie par le système soit
+Pex = −W ̇ ′
+Par conséquent, le rendement exergétique et le facteur dissipatif sont donnés par
+ηex = −W ̇ ′
+(
+1 − Ta
+TC
+) Q ̇ C
+ξ = D ̇ a
+(
+1 − Ta
+TC
+) Q ̇ C
+(3.48)
+On a donc
+ηex = 1 − ξ +
+Q ̇ F
+(
+1 − Ta
+TF
+)
+Q ̇ C
+(
+1 − Ta
+TC
+) (3.49)
+Dans le cas où la source froide est à la température du milieu ambiant, c’est-à-dire si TF = Ta, la relation ci-dessus devient ηex = 1 − ξ (3.50)
+ce qui montre bien que le rendement exergétique est maximum lorsque les irréversibilités sont nulles. En d’autres termes, on a
+ηex = −W ̇ ′
+−W ̇ ′max
+Par ailleurs, les relations (3.48) et (3.50) montrent que l’exergie permet bien de transformer la dissipation d’entropie (relativement abstraite) en une grandeur directement utile à l’ingénieur, c’est-à-dire un rendement.
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 90
+Toujours dans la cas où TF = Ta, il est également possible de relier le rendement exergétique au rendement énergétique ; on a en effet :
+ηen = −W ̇ ′
+Q ̇ C
+alors que le rendement énergétique maximum est donné par
+ηmax
+en = 1 − Ta
+TC
+= −W ̇ ′max
+Q ̇ C
+On a par conséquent
+ηex = ηen
+ηmax
+en
+Cette relation montre explicitement que le rendement exergétique exprime le rendement effectif d’un système thermodynamique, c’est-à-dire qu’il exprime bien un rendement par rapport au maximum que l’on peut obtenir d’un point de vue thermodynamique.
+3.6.6 Analyse exergétique de quelques machines élémentaires
+3.6.6.1 Compresseur adiabatique
+On considère un compresseur adiabatique schématisé sur la Fig. 3.27 permettant d’augmenter la pression du fluide le traversant de Pe à Ps > Pe, ce qui re
+quiert de fournir une puissance mécanique W ̇ c′ > 0.
+W ̇ c′ > 0
+Pe
+Ps > Pe
+FIGURE 3.27 – Compresseur adiabatique.
+Les caractéristiques de la transformation sont les suivantes : — écoulement unidimensionnel ; — écoulement stationnaire ; — variations d’énergies cinétique et potentielle négligeables ; — adiabatique.
+Etant données ces caractéristiques, on montre facilement que le bilan d’exergie (3.44) devient :
+m ̇ (exs − exe) = W ̇ ′
+c − D ̇ a
+Le rendement exergétique et le facteur dissipatif sont donnés par :
+ηex = m ̇ (exs − exe)
+W ̇ c′
+ξ = D ̇ a
+W ̇ c′
+ce qui montre que
+ηex = 1 − ξ
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 91
+3.6.6.2 Turbine adiabatique
+On considère une turbine adiabatique schématisée sur la Fig. 3.28 permettant de diminuer la pression du fluide le traversant de Pe à Ps < Pe, ce qui permet
+ainsi de récupérer de la puissance mécanique : W ̇ t′ < 0.
+Wt′ < 0
+Pe
+Ps < Pe
+FIGURE 3.28 – Détente adiabatique.
+Les caractéristiques de la transformation sont les suivantes : — écoulement unidimensionnel ; — écoulement stationnaire ; — variations d’énergies cinétique et potentielle négligeables ; — adiabatique.
+Etant données ces caractéristiques, on montre facilement que le bilan d’exergie (3.44) devient :
+m ̇ (exs − exe) = W ̇ ′
+t − D ̇ a
+Le rendement exergétique et le facteur dissipatif sont donnés par :
+ηex = W ̇ t′
+m ̇ (exs − exe)
+ξ = D ̇ a
+|m ̇ (exs − exe)|
+ce qui montre que
+ηex = 1 − ξ
+3.6.6.3 Echangeur de chaleur
+On considère un échangeur à contre-courant schématisé sur la Fig. 3.29 qui est globalement adiabatique : les échanges thermiques sont internes à l’échangeur et ont lieu uniquement du fluide chaud vers le fluide froid mais pas vers l’extérieur.
+chaud
+froid
+m ̇ c
+m ̇ f
+12
+FIGURE 3.29 – Echangeur à contre-courant.
+Les caractéristiques de la transformation sont les suivantes : — écoulement unidimensionnel ; — écoulement stationnaire ; — variations d’énergies cinétique et potentielle négligeables ; — adiabatique ; — pas d’échange de puissance mécanique avec l’extérieur.
+Avec ces caractéristiques, le bilan d’exergie (3.44) devient :
+m ̇ f
+(ex f2 − ex f1
+) − m ̇ c (exc2 − exc1) = −D ̇ a
+Dans le cas de cet échangeur, la source d’exergie est celle provenant du fluide chaud. Par conséquent, le facteur dissipatif est
+ξ = D ̇ a
+m ̇ c
+(ex f2 − ex f1
+)
+
+
+CHAPITRE 3. BILAN D’ENTROPIE APPLIQUÉ AUX SYSTÈMES OUVERTS 92
+et le rendement exergétique est donné par
+ηex = 1 − ξ = m ̇ f
+(ex f2 − ex f1
+)
+m ̇ c (exc2 − exc1)
+
+
+Chapitre 4
+Cycles thermodynamiques
+On rappelle que, par définition, un cycle thermodynamique est un ensemble de transformations d’un système qui passe par un certain nombre d’états avant de revenir à son état initial. Dans ce chapitre, on présente les principaux cycles thermodynamiques. Ces cycles sont le plus souvent idéaux et servent de base théorique à l’étude de cycles plus complexes et à la modélisation de cycles réels.
+4.1 Quelques hypothèses de modélisation
+4.1.1 Idéalisation des cycles thermodynamiques
+L’étude des cycles thermodynamiques réels est difficile car les phénomènes physiques que le système subit sont nombreux et complexes. Ainsi les écoulements sont généralement turbulents et l’homogénéité des grandeurs physiques n’est pour ainsi dire jamais atteinte : par exemple, la vitesse, la pression et la température sont généralement variables dans une section droite de canalisation. Par ailleurs, le comportement thermodynamique des fluides est souvent complexe (par ex., l’hypothèse de gaz parfait n’est pas nécessairement une approximation suffisante de modélisation) et sont irréversibles. Or, les irréversibilités proviennent de phénomènes physiques locaux qu’il est très difficile de modéliser à l’échelle macroscopique qui est celle de l’étude des cycles.
+Mais on souhaite néanmoins pouvoir étudier les caractéristiques principales d’un cycle réel. Pour cela, il est nécessaire d’en faire une idéalisation. Cette idéalisation consiste à approcher au mieux le cycle réel pour en garder les caractéristiques principales tout en le simplifiant pour pouvoir l’étudier analytiquement. Cette idéalisation constitue le processus de modélisation qui est inhérent à toute discipline de la physique, des théories les plus complexes à l’étude d’ingénierie ou plus généralement à la compréhension de tout phénomène physique.
+Une illustration d’une telle idéalisation est présentée sur la Fig. 4.1. Dans ce cas, le cycle réel est idéalisé par deux isochores et deux isentropes. Ce cycle idéal est le cycle d’Otto dont on peut facilement déterminer les caractéristiques (cf. § 4.2.2, page 97). Les caractéristiques du cycle idéal d’Otto pourront alors être considérées comme ayant les caractéristiques principales du cycle réel et certaines conclusions tirées de l’étude du cycle idéal pourront s’appliquer au cycle réel.
+V
+P idéalisation
+cycle réel
+FIGURE 4.1 – Idéalisation d’un cycle thermodynamique réel.
+Il faut cependant garder à l’esprit que l’on ne pourra tirer de l’analyse du cycle idéal que de
+93
+
+
+CHAPITRE 4. CYCLES THERMODYNAMIQUES 94
+grandes tendances sur le cycle réel car cette idéalisation ne reste qu’une approximation du cycle réel. Néanmoins, la caractérisation analytique du cycle idéal doit permettre de déterminer les caractéristiques principales du cycle réel. Par exemple, dans le cas illustré sur la Fig. 4.1, l’idéalisation du cycle réel doit permettre de connaître l’effet de l’augmentation du volume maximum sur le rendement du cycle réel.
+4.1.2 Quelques hypothèses générales
+On peut distinguer deux grandes classes de cycles : — les cycles sans circulation de fluide ; — les cycles avec circulation de fluide. Les cycles sans circulation de fluide sont tels que, à chaque instant, l’ensemble du fluide subit une seule transformation ; on effectue alors des bilans sur un système fermé. Dans les cycles avec circulation, le fluide circule à travers différents composants (compresseur, échangeur, etc.) séparés par des canalisations. Ainsi, si l’on considère le fluide de l’ensemble du circuit, toutes les transformations ont lieu en même temps mais à différents endroits : une partie est comprimée dans un compresseur et, en même temps, une autre partie est chauffée dans un échangeur par exemple. Le fluide circule donc à travers chaque composant et on effectue alors des bilans sur des systèmes ouverts constitués d’une partie du fluide présent entre l’entrée et la sortie d’un composant du circuit.
+Pour l’étude des cycles et leur idéalisation, les hypothèses suivantes sont généralement faites : — on néglige les déséquilibres internes au système : on suppose par exemple que la masse volumique est constante dans tout le volume lors de processus d’expansion ou de compression ; — les irréversibilités sont négligés ; — la combustion interne est remplacée par une source de chaleur externe ; dans ce cas, on peut être amené à négliger l’effet de la modification de la nature du fluide lié à la combustion ; — pour les cycles à gaz, le gaz est supposé avoir un comportement de gaz parfait, ce qui permet de simplifier grandement les calculs analytiques ; — les capacités calorifiques sont souvent supposées constantes, ce qui permet aussi de simplifier les calculs. Par ailleurs, pour les cycles avec circulation de fluide, un certain nombre d’hypothèses supplémentaires sont généralement faites : — les canalisations sont supposées être parfaitement adiabatiques : pas de perte de chaleur ; — les frottements sont généralement négligés : pas de perte de pression par frottement dans les canalisations et les échangeurs de chaleur ; — l’écoulement est stationnaire ; — les variations d’énergies potentielle et cinétique sont généralement négligées ; si cette hypothèse est généralement raisonnable, dans certains cas, elle peut ne pas l’être du tout ; — certaines transformations ne suivent pas un véritable cycle (réacteur d’avion par exemple) et on peut être amené à fermer le cycle « artificiellement » (cela fait en fait partie du processus de modélisation) et la fermeture « artificielle » du cycle est modélisée comme un processus de simple échange de chaleur permettant de ramener le fluide (modèle) à son état initial pour fermer le cycle idéal.
+
+
+CHAPITRE 4. CYCLES THERMODYNAMIQUES 95
+4.2 Cycles sans circulation de fluide
+4.2.1 Cycle de Carnot
+Comme on l’a montré au chapitre 3, le cycle de Carnot revêt une importance capitale en thermodynamique, y compris pour les applications, en particulier via le théorème de Carnot (cf. § 3.2.7, page 70). Dans cette section, on présente l’analyse complète de ce cycle.
+4.2.1.1 Rappels
+Le cycle de Carnot est constitué de deux isothermes réversibles et de deux adiabatiques réversibles telles que représentées sur la Fig. 4.2.
+1
+3
+4
+2
+T = T2
+T = T1
+Adiabatique
+Q2
+Q1
+V
+P
+(a) Diagramme de Clapeyron
+s
+T Adiabatique
+T1 1 4
+23 T2 Q2
+Q1
+(b) Diagramme T − s
+FIGURE 4.2 – Cycle de Carnot.
+4.2.1.2 Bilan énergétique
+Le système étant fermé, pour chaque étape du cycle, entre les états i et j, on a
+Uj − Ui = Wji + Qji
+En considérant les différentes caractéristiques des étapes du cycle, on a
+U2 − U1 = W21
+U3 − U2 = W32 + Q2
+U4 − U3 = W43
+U1 − U4 = W14 + Q1
+Sur le cycle complet, on a donc
+0 = Q2 + Q1 + W
+4.2.1.3 Bilan entropique
+Le système étant fermé et les transformations étant réversibles, pour chaque étape du cycle, entre les états i et j, on a
+Sj − Si = Qji
+Tk
+
+
+CHAPITRE 4. CYCLES THERMODYNAMIQUES 96
+En considérant les différentes caractéristiques des étapes du cycle, on a
+S2 − S1 = 0
+S3 − S2 = Q2
+T2 S4 − S3 = 0
+S1 − S4 = Q1
+T1
+Sur le cycle complet, on a donc
+0 = Q2
+T2
++ Q1
+T1
+4.2.1.4 Bilan exergétique
+Le système étant fermé, pour chaque étape du cycle, entre les états i et j, on a
+Da ji = Ta
+(Sj − Si
+) − Qji
+Ta
+Tk
+En considérant les différentes caractéristiques des étapes du cycle, on a
+Da21 = Ta (S2 − S1) = 0
+Da32 = Ta (S3 − S2) − Q2
+Ta
+T2
+=0
+Da43 = Ta (S4 − S3) = 0
+Da14 = Ta (S1 − S4) − Q1
+Ta
+T1
+=0
+Sur le cycle complet, on a donc
+Da = Da21 + Da32 + Da43 + Da14 = 0
+Cette relation montre que le cycle est effectivement réversible.
+4.2.1.5 Rendements
+Rendement énergétique
+Dans le sens 1234, le cycle est moteur et le rendement énergétique est donc
+ηen = |W|
+Q2
+Les résultats précédents permettent de montrer que l’on peut exprimer ce rendement par
+ηen = 1 − T1
+T2
+(4.1)
+Rendement exergétique
+Le rendement exergétique (3.46) s’écrit ici
+ηex = |W| Q2
+(
+1 − Ta
+T2
+)
+Les résultats précédents permettent de montrer que l’on peut exprimer ce rendement par
+ηex = T2 − T1
+T2 − Ta
+Cette relation montre en particulier que si la source froide (à la température T1) est en équilibre avec le milieu ambiant (à la température Ta), alors le rendement exergétique vaut 1. Ceci est bien cohérent avec le théorème de Carnot.
+
+
+CHAPITRE 4. CYCLES THERMODYNAMIQUES 97
+4.2.2 Cycle d’Otto
+4.2.2.1 Description
+Cycle du moteur à essence
+Le cycle d’Otto est une idéalisation du moteur à essence dont on décrit brièvement le principe schématisé sur la Fig. 4.3.
+Compression Détente Echappement Entrée
+Piston
+d’admission
+Soupape
+d’échappement
+Soupape
+FIGURE 4.3 – Principe de fonctionnement d’un cycle de moteur à essence.
+Dans la phase de compression, les deux soupapes sont fermées, le piston monte et le fluide est comprimé. Ce fluide est constitué d’un mélange d’air et d’essence. Lorsque le piston est en fin de course vers le haut, une étincelle est créée, ce qui fait brûler le mélange et provoque l’échauffement du fluide ainsi que l’augmentation de sa pression. Le fluide est alors constitué des gaz de combustion. Le piston est alors poussé vers le bas et le gaz se détend. Lorsque le piston arrive en bout de course vers le bas, la soupape d’échappement s’ouvre laissant ainsi les gaz de combustion s’échapper lors de la remontée du piston. Arrivé en bout de course vers le haut, la soupape d’échappement se ferme et la soupape d’admission s’ouvre pour laisser entrer les gaz frais constitué d’un mélange d’air et d’essence pendant la course du piston vers le bas. La soupape d’admission se ferme lorsque le piston est en bout de course vers le bas. Le cycle peut alors recommencer. Une représentation réaliste de ce cycle sur un diagramme de Clapeyron est donnée sur la Fig. 4.4.
+
+
+CHAPITRE 4. CYCLES THERMODYNAMIQUES 98
+V
+P
+ouverture soupape sortie
+allumage
+soupape entrée
+ouverture
+fin combustion
+compression
+détente
+FIGURE 4.4 – Représentation d’un cycle de moteur à essence sur un diagramme de Clapeyron.
+Cycle d’Otto
+Le cycle d’Otto est une idéalisation du cycle du moteur à essence. Il est constitué de deux isochores réversibles et de deux adiabatiques réversibles telles que représentées sur la Fig. 4.5. Notons que, dans cette idéalisation, les phases d’échappement et d’admission sont modélisées par un échange de chaleur isochore ; le travail de pression est négligé (l’aire de cette partie du cycle sur le diagramme de Clapeyron de la Fig. 4.4 est négligeable).
+1
+4
+2
+3
+s=cte
+s=cte
+Q1
+Q2
+P
+v
+(a) Diagramme de Clapeyron
+T
+s
+1
+Q2
+Q1
+4
+3
+2 v=cte
+v=cte
+(b) Diagramme T − s
+FIGURE 4.5 – Cycle d’Otto.
+La phase 1-2 est une compression adiabatique réversible et modélise la phase de compression. La phase de combustion 2-3 est modélisée par un apport de chaleur isochore. La phase 3-4 est une détente adiabatique réversible et modélise la détente des gaz de combustion. La phase 4-1 est un échange de chaleur isochore modélisant les phases d’échappement et d’admission du cycle du moteur à essence. On suppose par ailleurs que la nature du gaz ne varie pas au cours du cycle et que ce gaz constitue donc un système thermodynamique fermé.
+4.2.2.2 Bilan énergétique
+Le système thermodynamique est constitué du gaz compris dans le cylindre. Ce gaz est modélisé comme un gaz parfait dont les capacités calorifiques sont constantes. Etant un système fermé, au cours de chaque phase du cycle, le bilan d’énergie s’écrit
+∆U = M Cv ∆T = Q + W
+où M est la masse de gaz. En considérant les différentes caractéristiques des étapes du cycle, on a
+U2 − U1 = M Cv (T2 − T1) = W21
+U3 − U2 = M Cv (T3 − T2) = Q2
+U4 − U3 = M Cv (T4 − T3) = W43
+U1 − U4 = M Cv (T1 − T4) = Q1
+
+
+CHAPITRE 4. CYCLES THERMODYNAMIQUES 99
+Sur le cycle complet, on a donc
+0 = W + Q2 + Q1
+4.2.2.3 Bilan entropique
+Les compression et détente étant adiabatiques réversibles, elles sont isentropiques. On a donc
+S2 − S1 = 0
+S4 − S3 = 0
+Le gaz étant parfait à Cv constant, ces conditions se traduisent par les relations suivantes entre les volumes et les températures :
+T4
+T3
+=
+( V3
+V4
+)γ−1
+=
+( V2
+V1
+)γ−1
+= T1
+T2
+soit T4
+T3
+= T1
+T2
+4.2.2.4 Rendement énergétique
+Le cycle étant moteur, le rendement énergétique est donné par
+ηen = −W
+Q2
+D’après les résultats précédents, on peut facilement déterminer l’expression analytique de ce rendement :
+ηen = 1 + Q1
+Q2
+= 1 + T1 − T4
+T3 − T2
+= 1 − T1
+T2
+T4/T1 − 1 T3/T2 − 1
+soit
+ηen = 1 − 1
+( V1
+V2
+)γ−1 (4.2)
+Ce résultat montre que le rendement énergétique du cycle d’Otto dépend uniquement du rapport de compression a (V1/V2) et du rapport des capacités calorifiques du gaz γ : le rendement énergétique augmente lorsque le rapport de compression augmente. Or, le rapport de compression est une donnée directement accessible technologiquement : il suffit d’augmenter la hauteur de la course du piston pour augmenter le rapport de compression. Il faut noter que ce résultat, obtenu sur le cycle d’Otto est vérifié sur les moteurs à essence réels.
+a. Bien que ce rapport soit un rapport de volumes, il est appelé « rapport de compression ». Ce rapport de compression ne doit pas être confondu avec le rapport de compression d’un compresseur qui correspond effectivement à un rapport de pressions.
+Rendement énergétique du cycle d’Otto
