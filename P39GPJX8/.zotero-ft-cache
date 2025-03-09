@@ -1,0 +1,1762 @@
+A Model-Based Engineering
+Method for System, Software and
+Hardware Architectural Design
+A method best-supported by
+jean-luc.voirin@fr.thalesgroup.com stephane.bonnet@thalesgroup.com daniel.exertier@thalesgroup.com
+January 15th, 2015
+
+
+1/
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Foreword
+This set of slides is a light introduction to Arcadia. The method is today extensively detailed through different Thales documents which are not publicly available: Reference guide, practitioner’s guide, encyclopedia of concepts, etc. Fully publishing publicly the detailed Arcadia method is a major objective of the 3-years Clarity consortium. This will however not be immediate, as a significant work is necessary to remove Thales references and find the best support (books, standardization technical reports, etc.).
+The public publishing process will also probably lead to an adaptation of some of the Arcadia existing terminology. Without changing the goals and semantics of the Arcadia current content, a few concepts will most likely be renamed.
+For any question about the method and its usage within Thales or to directly exchange with us, please contact arcadia-contact@thalesgroup.com
+
+
+2/
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Contents
+ Current Engineering Practices and Gaps
+ ARCADIA Goals and Action Means
+ ARCADIA Concepts
+ Examples
+ Capella, a workbench supporting the method
+ Engineering Steps OA SA LA PA EPBS
+ Focus on Functional Analysis
+ Focus on Justification and Impact Analysis
+ Focus on Early Validation
+ARCADIA Methodological Approaches
+ Transitions, Requirements, IV&V
+ARCADIA wrt Standards: xAF, SysML, AADL...
+Benefits of ARCADIA
+
+
+Current Engineering Practices and Gaps
+Engineering practices and their limits
+
+
+4/
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+The System Engineering « Ecosystem » Challenge: Collaboration
+* RAMT: Reliability Availability Maintainability Testability
+
+
+5/
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+The System Engineering « Ecosystem » Challenge: Collaboration
+* RAMT: Reliability Availability Maintainability Testability
+
+
+6/
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Seven Deadly Sins* in System Engineering
+ “Full Requirements driven approach weaknesses”
+ Bad understanding of CONOPS/CONUSE**
+ Incoherent reference & decisions between engineering specialties
+ Poor continuity between engineering levels
+ Late discovery of problems in definition & architecture
+ Underestimated Architectural Design impact / benefit
+ No anticipation of IV&V, no functional mastering
+ No justification, no capitalisation for reuse/product line
+* Deadly Sins: Péchés capitaux ** CONcepts of OPerationS, CONcepts of USE *** IV&V : integration, verification, validation
+
+
+7/
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Limits of Textual Requirements-Driven Engineering
+ Textual requirements are today the main vector of technical management contract with the customer
+ However they have significant limitations:
+ Informally described and not adapted to validation by formal methods
+ Inadequate to support Design
+ Unable to describe a solution
+ Traceability links Creation process unclear and hard to formalize
+ Traceability links unverifiable
+ Difficulties to securely reuse requirements alone
+...
+Tests description
+Change Requests
+?
+Product Breakdown
+Requirements
+
+
+8/
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Requirement-Based Approach
+Tests description
+Product Breakdown
+Subsystem Design
+Coherency?
+Definition and subsystem specification
+Customer Textual Requirements
+System Requirements
+Sub-Contractor Textual Requirements
+Un-formalised Design
+Requirement validation process
+IV&V : integration, verification, validation
+Requirements IV&V Management
+Test Test Results Campaign
+Text Req
+Text Req
+Test Case
+Test Case
+
+
+
+
+9/
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Some Consequences on Engineering
+ No solution is described, only requirements allocation
+ Definition of suppliers delivery is weak and not sufficient
+ Checking quality of the definition is not possible before IV&V
+ Thus, justification of definition is poor and unreliable
+ Components functional contents, behaviour, interface definition...
+ Examples of consequences in IV&V :
+ Poor control of versioning and complexity
+ Missing components when verifying a requirement
+ No mastering of the consequences of non-maturities (PCR ...)
+ Poor mastering of behaviour(startup, non nominal states ...)
+ Difficulty in organizing / optimizing regression tests
+ Difficulty of locating faults and impact analysis ...
+ These problems increase along with system or project complexity
+IVV : integration, verification, validation
+
+
+ARCADIA Goals and Action Means
+Solving the walls issue
+
+
+11 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+What ARCADIA Is
+ Improve efficiency and quality of System Engineering
+ Master complexity of products
+ Foster and secure collaborative work of engineering stakeholders
+ Reduce development Costs & Schedule
+A tooled method devoted to systems, software and hardware Architecture Engineering
+ To understand the real customer need,
+ To define and share the system architecture among stakeholders,
+ To early validate system design and justify it,
+ To ease and master IVVQ (Integration, Validation, Verification, Qualification).
+
+
+12 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+ARCADIA Action Means – Engineering Collaboration
+Need & Architecture driving IVVQ
+Specialty engineering: safety, perf, security, ...
+Specialities know-how confronted to architecture
+One Need Definition for all
+One global method, adaptable/adapted to each domain
+
+
+13 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+JLV
+Seven Cardinal Virtues in System Engineering
+ Badunderstandingof
+operationaluse Analyse and formalise stakeholders need:
+operational scenarios & processes, functional & non-functional need
+Incoherentreference& decisionsbetween engineeringspecialties
+Drive specialties through a unique, shared reference;
+coordinate and evaluate global impact of decisions on it
+Poorcontinuitybetween
+engineeringlevels Share reference between engineering levels;
+secure its application for impact analysis
+Latediscoveryof definition&architecture problems
+Early check the technical solution
+against Oper/Funct/NF need as well as against engineering constraints
+Underestimated Architectureimpact/ benefit
+Use architecture to strengthen engineering
+according to engineering stakes
+NoanticipationofIVVQ,
+nofunctionalmastering Manage IV&V using the common functional
+reference to schedule, define and master it
+Nojustification,no capitalisationfor reuse/productline
+Capitalise by formalising definition and design, including
+decisions & justifications
+
+
+14 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+What Arcadia Is and Is Not
+ARCADIA is NOT... ARCADIA is...
+Anacademicworkoratoolvendoroffer;Testedontoy problems
+A set of practices specified and tested by real projects engineers wanting to address their top priority needs
+Designedfortraditional,topdown,waterfallor«V» lifecycle
+Designed for adaptation to most processes and lifecycle constraints : bottom-up, legacy reuse, incremental, iterative, partial...
+Onlyforlarge/complex projects
+Used for bids and partial problems, down-scalable
+Onlyforprojectsstartingfrom scratch
+Dealing with reuse, reverse engineering, evolution mastering, hot spots addressing
+Onlyforsoftwaredominant,or largesystemengineering,or...
+Used for thermal and power as well as information systems or software... architectures
+Costlyandcomplextosetand use
+Adjustable: Focus on your major problems first and you will get ROI
+Restrictedtosystemdefinition phase
+Also addressing & easing IV&V (integration verification validation) Tooun-maturetobeusedyet Tested in tens of operational contexts
+
+
+15 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Needs to Support Collaborative Architecture Building
+3. Architecture Analysis Capability & Tools
+SPECIALTY TOOL
+CAPELLA
+1. Common unified concepts to structure engineering :
+Product-centric description & capitalisation
+Shared Architecture Models
+2. Collaborative workflow
+Based on shared description
+and unique reference
+System Architects
+SW/HW Designers & Developers
+Customers
+Requirements Manager Support Engineers
+IVVQ Manager
+Others
+
+
+16 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+From Requirements Allocation to Architecture Mastering
+Requirements
+« Requirement to Box allocation »
+Late discovery of design issues during IVV
+(Integration, Verification, Validation)
+Nonfunctional Constraints
+Architecture building & Justification
+Operational Need
+Functional Need
+Reqs
+Tradeoff
+Architecture
+Early validation of the architecture
+Mastering and optimisation of product and IV&V
+
+
+17 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Adaptation
+to Real Life
+Methods,
+Processes
+The Long Way to Master Complexity...
+Complex Systems Design & Management 2011 17
+Tools
+Integration
+Formalism, Language
+ToolTsools
+Tools
+Safety
+SecurityPerf.
+Cost
+Flexibility
+Common Solution
+Usability
+Domain-Specific
+Know-How
+Many focus
+too much
+on this...
+... while major challenges
+and benefits lie here
+and here
+
+
+ARCADIA Concepts
+Examples
+
+
+19 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+ARCADIA Concepts: Radio Set Example
+1. What the users of the system need to accomplish
+Receive radio signal
+Select radio frequency
+Display radio name
+Extract radio RDS name
+Environment
+Play radio signal
+EM waves
+Radio signal
+Sound level
+Frequency Frequency
+Radio name Radio name
+Select Sound volume
+Audio sound
+Volume
+User
+Frequency tuning 2. What the system
+has to accomplish for the users
+Radio Receiver
+Radio control User interface
+Receive radio signal
+Select radio frequency
+Display radio name
+Extract radio RDS name
+Environment
+Play radio signal
+EM waves
+Radio signal
+Sound level
+Frequency Frequency
+Radio name Radio name
+Select Sound volume
+Audio sound
+Volume
+User
+Frequency tuning
+3. How the system will work so as to fulfil expectations
+5. What is expected from each designer / sub-contractor
+Keyboard processor
+Micro controller
+Audio processor
+Analog board
+HF Receiver
+RDS manager Display generation
+demodulator
+Audio processing User input processing
+Serial RS232
+Serial RS232
+Serial RS232
+RCA audio cable
+Speaker
+Display
+VGA video cable
+Discrete I/O
+RCA audio cable
+User
+Display radio name
+Extract radio name
+Select radio frequency
+Play radio signal
+Serial RS232
+4. How the system
+will be developed & built
+
+
+20 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Method Steps
+Receive radio signal
+Select radio frequency
+Display radio name
+Extract radio RDS name
+Environment
+Play radio signal EM waves
+Radio signal
+Sound level
+Frequency Frequency
+Radio name Radio name
+Select Sound volume Audio sound
+Volume
+User
+Frequency tuning
+Receive radio signal
+Select radio frequency
+Display radio name
+Extract radio RDS name
+Environment
+Play radio signal EM waves
+Radio signal
+Sound level
+Frequency Frequency
+Radio name Radio name
+Select Sound volume Audio sound
+Volume
+User
+Frequency tuning
+User Need
+System Need
+Notional Solution
+Final Solution
+Sub-contractors input
+EPBS – End Product Breakdown Structure
+
+
+21 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Playing videos on demand
+Listening to music
+Surfing the web
+Gaming...
+An Example of
+Modelling & Early Validation:
+In-Flight Entertainment System
+
+
+22 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Operational Analysis: Example
+What the users
+of the system
+need to accomplish
+Nonfunctional Constraints
+Nonfunctional Viewpoints Trade-off
+Extensions
+Transition to sub-,SW,HW
+System Need Analysis
+Logical Architecture
+Physical Architecture EPBS
+Operational Analysis
+Actors & Users Activities, missions, capabilities Dynamic behaviour
+Actor/user User Activity
+Interaction
+
+
+23 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Functional Need Analysis - Example
+Actors & System Functional dataflow interfaces Dynamic behaviour
+What the system
+has to accomplish
+for the Users
+Nonfunctional Constraints
+Nonfunctional Viewpoints Trade-off
+Extensions
+Transition to sub-,SW,HW
+System Need Analysis
+Logical Architecture
+Physical Architecture EPBS
+Operational Analysis
+Actor/user System function
+Data exchange
+System
+Modes & States
+Scenarios
+Dynamic Behaviour
+
+
+24 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Logical Architecture - Example
+How the system will work
+so as to fulfil expectations
+Functional allocation to components First trade-off analysis (see multi-viewpoints)
+Nonfunctional Constraints
+Nonfunctional Viewpoints Trade-off
+Extensions
+Transition to sub-,SW,HW
+System Need Analysis
+Logical Architecture
+Physical Architecture EPBS
+Operational Analysis
+System component
+Sub-components
+Allocated functions
+
+
+25 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Software Vs Hardware allocation Functional allocation check Interface definition/justification Trade-off analysis (see multi-viewpoints)
+Physical Architecture
+Nonfunctional Constraints
+Nonfunctional Viewpoints Trade-off
+Extensions
+Transition to sub-,SW,HW
+System Need Analysis
+Logical Architecture
+Physical Architecture EPBS
+Operational Analysis
+How the system
+will be developed and built
+EPBS: End Product Breakdown Structure
+Behavioural components
+(e.g. software)
+Implementation components
+(e.g. hardware)
+Allocated functions
+
+
+26 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+EPBS and Components Integration Contracts
+Nonfunctional Constraints
+Nonfunctional Viewpoints Trade-off
+Extensions
+Transition to sub-,SW,HW
+System Need Analysis
+Logical Architecture
+Physical Architecture EPBS
+Operational Analysis
+SubContract
+EPBS: End Product Breakdown Structure
+SubContract
+•Requirements •Interfaces •Operational use case scenarios •Expected behaviour & functional dataflow •Allocated non-functional constraints (latency, criticality...) •Allowed implementation resources •...
+What is expected from
+each designer / sub-contractor
+
+
+27 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Self-Protection System Example (Bird Eye)
+June2010: 40 op. act. 150 functions 400 components 130 diagrams
+4men.months
+Operational Analysis
+Logical & Physical Architectures
+System Analysis
+Data & Interface Analysis
+
+
+28 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Exampe of Physical Architecture Overview
+Part of Physical Architecture
+
+
+ARCADIA Concepts
+Introduction to Arcadia engineering steps
+
+
+30 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Operational Analysis Model
+System Functional and Non-Functional Need Model
+Logical Architecture Model
+Physical Architecture Model
+Product Breakdown
+Activities (and Entities) layer
+Functions layer
+Functions layer
+« Logical » component layer
+Functions layer
+« Behavioural » component layer
+« Implementation » component layer
+Concepts, Shared Assets and Justification Links
+
+
+31 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Behaviour Description Means
+Function
+decision
+Fork
+Join
+Dataflow: Functions, op. activities interactions & exchanges
+decision
+Fork
+Join
+Functional chains, Operational processes
+through functions & op. activities
+Scenarios: Actors, system, components interactions & exchanges
+Mode1
+Mode3
+Mode2
+Start
+End
+Modes & states: Of actors, system, components
+Soundprofile
+basslevel
+trebblelevel
+loudness
+uses
+is kind of
+is composed of
+Filtervalue Values: From –50 to +50 Unit: dB
+FrequencyBand Values: 0.1, 0.2, 3.0, 6.0 Unit: KHz
+DATA MODEL
+TuningValue Values: From 0 to +100
+Frequency Values: From 88 to +108 Unit: MHz
+Data model: Dataflow & scenario contents; Definition & justification of interfaces
+Receive radio signal
+Select radio frequency
+Display radio name
+Extract radio RDS name
+Environment
+Play radio signal EM waves
+Radio signal Sound level
+Frequency Frequency
+Radio name Radio name
+Select Sound volume Audio sound
+Volume
+User
+Frequency tuning
+Receive radio signal
+Select radio frequency
+Display radio name
+Extract radio RDS name
+Environment
+Play radio signal EM waves
+Radio signal Sound level
+Frequency Frequency
+Radio name Radio name
+Select Sound volume Audio sound
+Volume
+User
+Frequency tuning
+System Functional & NF Need
+Logical Architecture
+Physical Architecture
+Operational Analysis
+Product Breakdown
+
+
+32 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Behaviour Description Means
+System
+Mode
+Mode
+Function Function
+Function
+test
+User System
+Data or Attribute modification
+User
+Mode or State transition
+trigger
+enable/ disable
+Change value
+Change value Data
+same exchange
+Change value
+Data
+Change value
+Change value
+Receive radio signal
+Select radio frequency
+Display radio name
+Extract radio RDS name
+Environment
+Play radio signal EM waves
+Radio signal Sound level
+Frequency Frequency
+Radio name Radio name
+Select Sound volume Audio sound
+Volume
+User
+Frequency tuning
+Receive radio signal
+Select radio frequency
+Display radio name
+Extract radio RDS name
+Environment
+Play radio signal EM waves
+Radio signal Sound level
+Frequency Frequency
+Radio name Radio name
+Select Sound volume Audio sound
+Volume
+User
+Frequency tuning
+System Functional & NF Need
+Logical Architecture
+Physical Architecture
+Operational Analysis
+Product Breakdown
+
+
+33 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Architecture Description Means
+Allocation:
+• op. activities to actors, • functions to components, • behav. Components to impl. Components • dataflows to interfaces, • elements to configuration items
+Component
+wiring: All kinds of components
+Breakdown : Of all concepts
+Receive radio signal
+Select radio frequency
+Display radio name
+Extract radio RDS name
+Environment
+Play radio signal EM waves
+Radio signal Sound level
+Frequency Frequency
+Radio name Radio name
+Select Sound volume Audio sound
+Volume
+User
+Frequency tuning
+Receive radio signal
+Select radio frequency
+Display radio name
+Extract radio RDS name
+Environment
+Play radio signal EM waves
+Radio signal Sound level
+Frequency Frequency
+Radio name Radio name
+Select Sound volume Audio sound
+Volume
+User
+Frequency tuning
+System Functional & NF Need
+Logical Architecture
+Physical Architecture
+Operational Analysis
+Product Breakdown
+Dataflow: Functions, op. activities interactions & exchanges
+
+
+34 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+The Engineering Triptych, ‘Three Legs Better Than One’
+Requirements Management
+Architecture Building
+Need Analysis & Modelling
+Component Requirements
+Components Requirements
+System/SW Requirements
+Customer/Stakeholders Requirements
+User operational Requirements
+Component IVVQ Scenarios
+System/SW IVVQ Scenarios
+System/SW Scenarios
+System/SW Scenarios
+Operational Scenarios
+Configuration Items
+Physical components
+Logical components
+Component allocated Functions
+System/SW design Functions
+System/SW design Functions
+System/SW need
+Functions
+Operational Capabilities & Activities
+Traceability/allocation
+Allocation
+Traceability/justification
+Traceability/justification
+EPBS – End Product Breakdown Structure
+
+
+ARCADIA Concepts
+Capella workbench, a tooled
+supporting the method
+
+
+36 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+ARCADIA Support by Capella Workbench (1/2)
+
+
+37 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+ARCADIA Support by Capella Workbench (2/2)
+* COTS: Commercial Off The Shelf * OSS: Open Source Software
+Capella solves some of the weaknesses of COTS* or OSS*:
+ ARCADIA Method support & guidance for modelling
+ Method Steps, encyclopaedia, rules, diagrams...
+ User-oriented Semantics
+ Engineer concepts rather than abstract/profiled language
+ Support for « modelling in the large »
+ Performance on large models, ergonomics, modelling aids...
+ Support for viewpoint extensions, modelling & analysis
+ Model extensions, diagrams extensions, viewpoint management...
+ « Semantic » Import/export capabilities (excel, SysML, AF, ...)
+ Yet ARCADIA is also deployed using other tools
+ Excel/Access, Rhapsody, System Architect/DoDAF...
+ with reduced capabilities, however
+
+
+ARCADIA Concepts
+Operational Analysis
+
+
+39 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Operational Analysis - Overview
+ Focuses on analysing the needs and goals, expected missions & activities
+ Is expected to ensure good adequacy of System definition with regards to its real operational use – and define IVVQ conditions
+ Outputs : Operational Needs Analysis
+ Needs, in terms of actors/users,
+ Operational capabilities and activities,
+ Operational use scenarios (dimensioning parameters, operational constraints including safety, security, system life cycle....)
+
+
+40 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Operational Analysis: Main Concepts (1/2)
+ Operational Capability
+ A capability is the ability of an organisation to provide a service that supports the achievement of high-level operational goals.
+ Operational Activity
+ Process step or function performed toward achieving some objective, by entities that could necessitate to use the future system for this
+ e.g. Control traffic, go along a place, detect a threat
+ Operational Entity
+ An operational Entity is a real world entity (other system, device, group or organisation...), interacting with the system (or software, equipment, hardware...) under study, or with its users
+ Operational Actor
+ An actor is a [usually human] non decomposable operational Entity
+
+
+41 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Operational Analysis: Main Concepts (2/2)
+ Operational Interaction
+ Set of Operational services invocations or flows exchanged between Operational Activities, (e.g. Operational Interactions can be composed of Operational data, events...).
+ Operational Process
+ A logical organization of Interactions and Activities to fulfil an Operational Capability
+ Operational Scenario
+ A scenario describes the behaviour of a given Operational Capability
+
+
+42 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Define Operational Activity Scenarios
+Define the Operational Activities
+Define the Operational Entities
+Define Operational Capabilities
+Define the Interactions between Operational Activities
+Define Operational Entity Scenarios
+Allocate Operational Activities to Operational Entities
+Operational Analysis Workflow and Main Diagrams
+Operational Analysis
+Define Operational Processes
+
+
+ARCADIA Concepts
+System Need Analysis
+
+
+44 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+System Analysis - Overview
+ Define how the system can satisfy the former operational needs:
+ System functions to be supported & related exchanges
+ Non functional constraints (safety, security...)
+ Performances allocated to system functional chains
+ Role sharing and interactions between system and operators
+ Checks for feasibility (including cost, schedule and technology readiness) of customer requirements
+ Outputs: System Functional Analysis description
+ Interoperability and interaction with the users and external systems (functions, exchanges plus non-functional constraints), and system requirements
+
+
+45 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+System Analysis: Main Concepts (1/2)
+ System
+ An organized set of elements functioning as a unit.
+ An aggregation of end products and enabling products to achieve a given purpose.
+ System Actor
+ External actor interacting with the system via its interfaces
+ System Mission
+ A mission describes a major functionality of the system from a very high level point of view. It is a reason why the system is developed.
+ high-level operational goal
+ System Capability
+ A capability is the ability of a system to provide a service that supports the achievement of high-level operational goals
+ System Function
+ Function at System level
+ A function is an action, an operation or a service fulfilled by the system or by an actor when interacting with the system
+ e.g. ‘measure the altitude’, ‘provide the position’
+
+
+46 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+System Analysis: Main Concepts (2/2)
+ Exchange and Port
+ An Exchange is an interaction between some entities such as actors, the system, functions or components, which is likely to influence their behaviour.
+ e.g. tuning frequency, radio selection command...
+ The connection point of an exchange on an entity is called a port.
+ Functional Exchange
+ Piece of interaction between functions that is composed of data, events, signals, etc. A Flow Port is an interaction point between a Function and its environment that supports Exchanges with other ports
+ Scenario
+ A scenario describes the behaviour of the system in a given Capability.
+ Scenarios permit to specify the dynamical behaviour of the system by showing interaction sequences performed by the actors and by the system
+ State
+ a physical and operational environment condition
+ Mode
+ a type of operation in a given state of the system, or the performance level within a state
+
+
+47 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Assign Functions To System and Actors
+Transition from Operational Analysis
+System Analysis Workflow and Main Diagrams
+Describe Function Data Flows
+Refine System Functions
+Define the Data Model
+System Analysis
+Define System Capabilities
+Define Functional Chains
+Define Scenarios
+Define the States and Modes
+
+
+ARCADIA Concepts
+Logical Architecture
+
+
+49 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Logical Architecture - Overview
+ Intends to identify the system components, their contents, relationships and properties, excluding implementation or
+technical/technological issues. This constitutes the system logical architecture.
+ All major [non-functional] constraints (safety, security, performance, IVV...) are taken into account so as to find the best compromise between them.
+ Outputs : selected logical architecture:
+ Components & interfaces definition, including formalisation of all viewpoints and the way they are taken into account in the components design.
+ Links with requirements and operational scenarios are also produced
+
+
+50 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Logical Architecture Design: Managed Entities
+ Logical Function
+ Function applied at Logical level
+ Logical Component
+ Logical Components are the artefacts enabling a notional decomposition of the system as a "white box", independently from any technological solutions, but dealing with major system decomposition constraints
+ Logical components are identified according to logical abstractions (i.e. functional grouping, logical interfaces)
+ Functional Exchange
+ Piece of interaction between functions that is composed of data, events, signals, etc. A Flow Port is an interaction point between a Function and its environment that supports Exchanges with other ports
+ Component Exchange
+ Represent the interactions between Logical Components
+
+
+51 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Logical Architecture Workflow and Main Diagrams
+Define Logical Components
+Transition from System Analysis
+Describe Logical Data Flows
+Refine Logical Functions
+Refine Functional Chains
+Assign Functions To Components
+Describe Data Flow Scenarios
+Logical Architecture
+
+
+ARCADIA Concepts
+Physical Architecture
+
+
+53 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Physical Architecture - Overview
+ Intends to identify the system components, their contents, relationships and properties, including implementation or technical/technological issues
+ Introduces rationalisation, architectural patterns, new technical services and components
+ Makes the logical architecture evolve according to implementation, technical & technological constraints & choices (at this level of engineering)
+ The same ‘Viewpoints-driven’ method as for logical architecture design is used for physical architecture definition
+ Outputs : selected Physical Architecture:
+ Physical Components, including formalisation of all viewpoints and the way they are taken into account in the components design
+ Links with requirements and operational scenarios
+
+
+54 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+ Physical Function
+ Function applied at physical level
+ Physical Component
+ Physical Components are the artefacts enabling to describe physical decomposition of the system to satisfy the logical architecture identified at the upper abstraction level. Physical components are identified according to physical rationale (i.e. components reuse, available COTS, non functional constraints...).
+ Two natures of components :
+ Behaviour
+ physical component in charge of implementing / realising part of the functions allocated to the system
+ e.g. operational software, radar antenna, ...
+ Node or implementation
+ material physical component, resource embedding some behavioural components, and necessary to their expected behaviour
+ e.g. motherboard, units of memory, middleware's and operating systems ...
+Physical Architecture Design: Main Concepts (1/2)
+
+
+55 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Physical Architecture Design: Main Concepts (2/2)
+ Component Exchanges are meant to be used between Behaviour Components.
+ They are identical to the Component Exchanges of the System Analysis and the Logical Architecture
+ Physical Links are non-oriented material connections between Node Components, through Physical Ports.
+ They realize Component Exchanges, and appear in red on the diagram
+
+
+56 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Physical Architecture Workflow and Main Diagrams
+Define Physical Components
+Transition from Logical Architecture
+Describe Physical Data Flows
+Refine Physical Functions
+Refine Functional Chains
+Assign Functions To Components
+Describe Data Flow Scenarios
+Physical Architecture
+
+
+ARCADIA Concepts
+End-Product Breakdown Structure
+
+
+58 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Define the End-Product Breakdown Structure
+ At this step, Configuration Items (CI) contents are to be defined in order to build a Product Breakdown Structure (PBS)
+ By grouping various former components in a bigger CI easier to manage,
+ Or by federating various similar components in a single implementation CI that will be instantiated multiple times at deployment
+ Defines the “final” architecture of the system at this level of engineering, ready to develop (by lower engineering levels)
+ Allocation of requirements on configuration items
+ Consideration of industrial & subcontracting constraints
+ Outputs
+ EPBS
+
+
+ARCADIA Concepts
+Focus on Functional Analysis, different
+engineering approaches
+
+
+60 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Top-down functional breakdown:
+ Describe need as a few interrelated high level functions
+ Refine each function, and associated exchanges
+ Hierarchical, recursive approach
+Bottom-up requirement-driven:
+ Often used to formalise textual requirements
+ “translate” each requirement into elementary functions, exchanges, and constraints on them
+ Then synthesise higher level views by grouping elementary (leaf) functions into mother functions
+ And synthesise exchanges by grouping them into categories
+Different Ways to Build a Functional Analysis: Examples
+1
+2
+2
+1
+Function
+decision
+Fork
+Join
+
+
+61 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Use case - driven:
+ Start building scenarios to illustrate system use & external interactions (or components and internal interactions)
+ Then define functions at each end of exchanges
+ Then enter a bottom-up approach to synthesise functions
+Operational analysis – driven:
+ For each operational activity or interaction, consider system and actor functions to support it
+Different Ways to Build a Functional Analysis: Examples
+1- 2- 3
+
+
+62 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Different Ways to Build a Functional Analysis: Examples
+Functional Chain – driven:
+ Define major system traversal expectations
+ Deduce associated functional chains, populate them with functions
+ Enrich functional analysis, reusing and linking existing functions
+ Then enter a bottom-up approach to synthesise functions
+Several ways could (should?) be mixed and interleaved
+ Other ways can be considered as well
+All ways should converge to the same final model contents, no matter how the building steps were ordered
+1- System 2- System 3
+
+
+63 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+What Kind of Functional Analysis?
+?
+Architecture Frameworks / IDEF0 -like?
+ Uses of a same function in different diagrams may
+differ or oppose each other (eg, Enterprise Architect)
+ No explicit definition of inputs and outputs independently from diagrams
+ Poorly adapted to Reuse of functions & Use case consolidation
+ Definition of in/out ports on functions, to express “direction for use” of the function
+ Function/Ports definition is shared among all uses & diagrams
+Functional exchanges are also shared
+
+
+64 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+What Kind of Functional Analysis?
+F2 F21 F211 F212
+F22
+F1
+F2 F21
+F22
+F1
+F1 F2
+Any function can be linked to any other
+Functional exchanges of the parent are just moved (drag & drop) towards the relevant child function in charge of managing the exchange
+Automated graphical synthesis at parent level
+SysML blocks concept -like?
+ Huge work to manage & update delegation of ports
+ No direct link between feaf functions
+ Not adapted to bottom-up approaches and model evolution
+
+
+65 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Data Flows or Activity Diagrams?
+Activity diagrams?
+ Mix data flow and sequence flow
+ Same limits as IDEF0
+ Poorly adapted to Architecture Definition (no control flow in interfaces!)
+ Control flow depends on context, while dataflow is intangible
+Restriction to “Dataflow” concept and diagrams:
+Dependencies between functions, as expressed by
+(oriented) functional exchanges linking their ports,
+Nature of data, information, signals, and flows...
+exchanged between functions specified on exchanges.
+No pure sequence flow if no data is exchanged
+Scenarios (sequence diagrams) can express context-dependent ordering or precedence constraints
+Function
+decision
+Fork
+Join
+
+
+ARCADIA Concepts
+Focus on consistency and impact analysis,
+interface definition and justification
+
+
+67 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Interface Definition and Justification: Ports & Exchanges
+Connect elements
+In a coherent manner!
+« Realises »
+« deploys »
+
+
+68 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Interface Definition and Justification: Delegation & Physical Links
+Routing data inside Components
+Physical Link
+Physical Link
+Physical Link
+Physical Link
+Physical Link
+
+
+69 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Interface Definition and Justification: Linking Data & Ports/Exchanges
+Audio profile ExchangeItem: - Sound profile - balance - volume
+Process audio signal
+Sound profile: - bass level - trebble level - loudness
+DATA MODEL
+A udio profile ExchangeItem: - Soundprofile - balance - v olume
+Process audio signal
+C usto mise sound parameters
+reference
+Possibly for several similar uses
+ExchangeItems group data to be used together
+(e.g. message)
+EI1 (d11, d12)
+EIF2 (d21)
+EI3 (d31, d32)
+EI1 (d11, d12)
+EI2 (d21)
+EI3 (d31, d32)
+EI3 (d31, d32)
+EI1 (d11, d12)
+Coherency
+required!
+
+
+70 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Same for Components, adding Interfaces
+in order to group exchangeItems
+Radio tuning Interface:
+Component
+Provides or requires
+select station by name (stationName) ExchangeItem
+select station by frequency (stationFrequency) ExchangeItem
+References
+F r e q u e n cy
+DATA MODEL
+Tw e lve Ch a r sNa me
+References
+Sharing Interfaces
+Coherency required!
+Interface Definition and Justification: Linking Data & Ports/Exchanges
+
+
+ARCADIA Concepts
+Early Validation: Multi-viewpoint approach for
+collaborative engineering and non-functional analysis
+
+
+72 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Architecture Building & Design: the Art of Compromise
+The Product Architecture must deal with potentially contradictory Constraints, which impact Breakdown:
+ Safety
+ Performances
+ Complexity of internal interfaces
+ Ease of System Integration
+ Cost, sub-contracting
+...
+ Building an appropriate Architecture
+means finding the most acceptable Compromise between these Viewpoints
+Solution Architecture
+ Fine-grain Analysis per viewpoint must
+- start from architecture model, and - update/validate first hypotheses
+Then a detailed design & check according to each viewpoint is required
+Safety, Dependability / Fault Tolerance, Certification...
+Performances (reaction time & critical paths, processing capacities...) Maintainability, Reliability
+Mapping on [existing] hardware, middleware, reference Architecture... Functional grouping Consistency Weight, thermal dissipation, power consumption Cost, time schedule, skills Complexity of internal interfaces Human Factors Dependency in System Integration Security Ease of sub-contracting Reuse, existing Legacy, Product Line Policy Modularity, Ability to evolve Available technologies, COTS...
+
+
+73 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Early Validation: Specialities Know-how Confronted to Architecture
+Specialty engineering: safety, perf, security, ...
+Subcontractors
+Architect
+Solution Architecture
+Components
+Evaluation Rules
+ViewPoints
+Functions Safety
+Security
+Performance
+Human Factors
+IVVQ, Product Line, Cost...
+Multi-viewpoint trade-off analysis (see ISO 42010 standard)
+
+
+74 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Architecture Definition Lifecycle Process
+Operational Need Analysis
+System Functional & NF Analysis
+Architecture Design (Logical, Physical)
+Architecture Early Validation (resource cons , perf, fault propagation...)
+Global Architecture Design & Coherency Mastering
+Check
+Check Dedicated Analysis Means (RAMST...)
+Simulation Means
+IVVQ Means
+Close the Loops!
+
+
+75 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Method Adaptation to Each Domain: Know-how Capture
+System
+Functional & NF Need Model
+Operational Analysis
+Model
+Compromise
+Criteria
+Design Rules
+Architectural Patterns & Rules
+Verification / Validation Criteria
+Viewpoints
+e.g. : •interfaces, data model •Performance •Safety •Security •IVVQ •Reuse/product line...
+ Capture domain know-how on common architecture for each Viewpoint:
+o Dedicated concepts (model extensions)
+o Architecture checking rules & algorithms
+o Dedicated diagrams and graphical annotations
+ Analyse each candidate architecture against all viewpoints, locate defects and correct
+Quickly Iterate
+Supported in Capella
+Supportofmulti-viewpointTrade-offAnalysis
+ Express N-F constraints & Need inside operational/functional need models
+
+
+76 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Performance Non-Functional Viewpoint
+Nonfunctional Constraints
+Nonfunctional Viewpoints Trade-off
+Extensions
+Transition to sub-,SW,HW
+System Need Analysis
+Logical Architecture
+Physical Architecture EPBS
+Operational Analysis
+1. Automatic analysis - CPU overloaded - Bus overloaded - Latency too high
+2. Causal analysis - Tool locates problems - Quantitative analysis
+3. Architecture
+improvement
+- Lighter protocols - Higher bandwidth - Hardware processing
+RequireadditionalCapellaviewpoints
+
+
+77 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+3. Architecture
+improvement:
+-Second redundant server
+- Failure propagation algorithm
+Safety Non-Functional Viewpoint
+1° Automatic
+analysis:
+- Rule: “Nosinglesource formajorfailurecondition” - Not met for video
+2. Causal analysis - Tool locates problems
+Nonfunctional Constraints
+Nonfunctional Viewpoints Trade-off
+Extensions
+Transition to sub-,SW,HW
+System Need Analysis
+Logical Architecture
+Physical Architecture EPBS
+Operational Analysis
+RequireadditionalCapellaviewpoints
+
+
+78 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Multi-Viewpoints Trade-off
+Confrontation rules for multi-viewpoints trade-off
+Nonfunctional Constraints
+Nonfunctional Viewpoints Trade-off
+Extensions
+Transition to sub-,SW,HW
+System Need Analysis
+Logical Architecture
+Physical Architecture EPBS
+Operational Analysis
+HistogramviewwillbeavailableinCapellain2015(seeKitalpha)
+
+
+79 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Energy & Thermal system
+Of a commercial Aircraft
+Other example of
+Modelling & Validation:
+On-board Electrical Power System
+
+
+80 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Command & Control Model
+(coming soon)
+Interfacing & computing units...
+Data
+Three Interleaved, Multi-Physics Models
+Thermal Model Turbines, Compressors,
+heat exchangers, valves...
+Thermal Power
+-Conditioning -Pressurisation -Equipments Cooling
+Power Model
+Electrical Generators, Loads, converters, bus bars...
+Electrical power
+-Generation -Distribution
+
+
+81 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Power Systems Example: Dedicated Viewpoints
+Power & Thermal performance
+depending on flight phase consumption, incl. Overloaded components detection based on power computation, linked to thermal Model
+Safety / Integrity
+incl. Failure containment, redundancy rules & analysis, failure scenarios & propagation, monitoring efficiency, shielding...
+Reliability & Availability
+incl. Reliability computing, reconfiguration issues, flight delay...
+And also: Mass, Cost, Reliability...
+Spatial (3D) arrangement
+Early identification of spatial arrangement constraints impacting the architecture
+
+
+82 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+« Model Once, Use Many »: The Blue Line Vision
+One model, many users...
+...and many other uses...
+Engineering documents: SSS, IRS, SSDD, ICD, SRS, ...
+User & Maintenance Documents
+Test bench specification
+Metrics, Risk Management
+3D Computer Aided Design
+Wiring, Development & Production Means...
+Electronic Interface & data generation
+...and more
+
+
+ARCADIA Methodological Approaches
+Transition, relationship to requirements, IV&V
+
+
+84 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Support of Consistency Between Engineering Levels
+ Automated Transition between Engineering Levels
+ Iterative, conservative
+ Coherency control
+ Mastering complexity through multiple abstraction levels
+
+
+85 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Recursive Application to Each Engineering Level
+Level n+1
+Level n 3
+1-Operational Need Analysis
+2-System/SW Need Analysis
+3.1-Logical Architecture
+3.2-Physical Architecture
+4 – Contracts & IVVQ Definition
+3
+1-Need Analysis
+2-Requirements Feasibility
+3.1-Logical Architecture
+3.2-Physical Architecture
+4 – Contracts & IVVQ
+3
+1-Operational Need Analysis
+2-System/SW Need Analysis
+3.1-Logical Architecture
+3.2-Physical Architecture
+4 – Contracts & IVVQ Definition
+Component Situation in Level n Physical Architecture
+Component Integration Contract
+Need Analysis restricted to component
+Constraints
+Breakdown Process
+
+
+86 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Top-Down Vs Bottom-Up, Incremental, Iterative...
+Example of progressive building
+1. At bid time to sketch price: • Quick functional analysis • First sizing of I/O needs
+2. At bid time to secure price: • Coarse-grain architecture to evaluate risk, reuse opportunities
+3. At product line level to find competitive advantage: • Operational & capability analysis to enrich product
+5. At detailed design time: • Completion & link of models where risky • Fine grain analysis
+6. At development time: • Generation of interface files & wiring data • Allocation of resources to components...
+4. At design time to secure Bid architecture: • Functional to components mapping • Multi-viewpoint analysis (safety, perf., IVV...) • Check with operational need
+
+
+87 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+IV&V : A New Approach is Required for Engineering
+ New model-based engineering approaches such as ARCADIA seek (among others) to overcome textual requirements limitations
+ The need is formalized in a shareable form, that can easily be analyzed and validated
+ Operational and functional analysis
+ Traceability links with textual requirements
+ Textual requirements are complemented (and not replaced) and validated by models and their use
+ The solution is formalized, traced and justified (partially validated) by the model architecture
+ Previous traceability links are now based on a unifying model and an explicit and verifiable process that secures engineering
+IV&V : integration, verification, validation
+
+
+88 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Scoping and Articulation with Textual Requirements
+For Customers who require it, textual requirements are still the main vector
+ For the Customer, Functional description is an explanation and / or additional support deepening specifications
+ Traceability towards engineering artifacts (architecture, tests ...) is still ensured by User Requirements (UR)
+ It is made internally through the model: requirements <-> model <-> artifacts
+ System Requirements (SR) add to the UR only those requirements that are strictly necessary to communicate and validate the need
+ Based on the model as a negotiation support
+
+
+89 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Scoping and Articulation with Textual Requirements
+Internally, models carry most of the description of need and solution
+ Anything that can be efficiently expressed in the model is formalized that way (“modeled requirements”)
+ In this case, it is unnecessary to create or refine textual requirements (would be redundant)
+ Internal requirements (textual) are added where necessary:
+ Either to express a constraint or an expectation, more precisely than the model,
+ Or if it is difficult to represent and capture a specific need in the model
+ The customer requirements (UR) remain traced in the model and towards engineering artifacts, for justification purposes
+ Engineering, subcontracting and IVVQ are driven by the model
+ (To be adjusted according to the maturity of subcontractors)
+ A posteriori check of coverage / satisfaction of these requirements is done
+
+
+90 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Tests description
+Product Breakdown
+Subsystem Design
+Customer Textual Requirements
+System Requirements
+Sub-Contractor Textual Requirements
+Un-formalised Design
+Comparing Approaches for Requirement Engineering
+Textual Requirements driven
+Coherency?
+System Model
+Tests description
+Product Breakdown
+Need
+(Derived, reconstructedlink)
+Textual Reqs + Model driven
+Requirements
+Solution
+Reqs
+Subsystem Model
+Need
+Solution
+Sub-Contractor Textual Requirements
+
+
+91 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Test, Integration, Verification, Validation Principles
+ Test campaigns are constructed from model scenarios and functional chains
+ Refinement (detailed scenarios, not nominal ...), complements, details (ranges, expected results ...)
+ Traceability links
+ Between test campaigns and delivery versions
+ Between tests and scenarios / functional chains
+ Validation of textual customer requirements is achieved by exploiting the indirect links
+ Tests - scenarios / CF - functions – requirements
+
+
+92 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Test Test Results Campaign
+Test, Integration, Verification, Validation Principles
+(Derived, reconstructed link)
+Text Req
+Text Req
+Requirements Model IVV Management
+Test Case
+Test Case
+
+
+Function
+Function
+Function
+Capability IVV
+Version (RV/DV)
+Functional Chain
+Scenario
+
+
+93 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Using ARCADIA Engineering Models to Drive IV&V
+Operational Need, Functional Contents
+System Components
+Focus on Functional Content and Architecture
+Define IVV Strategy
+Master Development Ups and Downs
+Control Maturity of Deliveries
+Test Benches
+Mission System Radar Receiver Software/HW
+Optimize IVVQ Globally
+(incl. Enabling Systems / Test Means)
+
+
+ARCADIA wrt Standards:
+xAF, SysML, AADL...
+Yet another Formalism?
+
+
+95 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Operational Analysis
+System Need Analysis
+Logical Architecture
+Physical Architecture
+EPBS
+Nonfunctional Constraints
+Nonfunctional Viewpoints Trade-off
+Extensions
+Transition to sub-system,SW,HW
+ARCADIA goes beyond Formalisms & Languages:
+ Method defining full model design & conformance rules
+ How to define elements
+ How to link and relate them to each other
+ How to justify and check definition
+ Operational Analysis & Capability integration
+ Modelling Viewpoints for non-functional constraints support
+ Safety, Performance, HF, RAMST, Cost...
+ARCADIA Scope & Coverage (1/2)
+
+
+96 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+ARCADIA Scope & Coverage (2/2)
+ARCADIA goes beyond Formalisms & Languages:
+ Semantic architecture Validation through Engineering Rules formalisation
+ Multi-viewpoints analysis coupled with fine-grained tuning
+ Extensible: viewpoints, model, diagrams & rules
+
+
+97 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+ARCADIA Formalism Vs DoDAF, NAF...
+Operational Analysis
+System Need Analysis
+Logical Architecture
+Physical Architecture
+EPBS
+Nonfunctional Constraints
+Nonfunctional Viewpoints Trade-off
+Extensions
+Transition to sub-system,SW,HW
+Common or Similar Concepts:
+•Operational Entities, Actors, Roles •Operational Activities, Processes •Services (extension) •States & modes •Functions, dataflows •System Nodes, equipment (generalised) •Operational & system data... •Traceability between operational & system
+DoDAF, NAF...
+Similar Capella Diagrams:
+•OV2, OV4, OV5, OV6, OV7; •SOV; •SV1, SV2, SV4, SV5, SV10...
+
+
+98 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+ARCADIA Formalism Vs UML2, SysML, AADL...
+Operational Analysis
+System Need Analysis
+Logical Architecture
+Physical Architecture
+EPBS
+Nonfunctional Constraints
+Nonfunctional Viewpoints Trade-off
+Extensions
+Transition to sub-system,SW,HW
+Common or Similar Concepts:
+•Blocks, parts, (sub)components •Data, constraint properties •Ports, flows •States & modes •Profiles & libraries... •Bus, connection •Processors, Memory... (extension) •Threads, processes... (extension)
+SysML, UML2
+Similar Capella Diagrams:
+•Activity diagram, •Block Definition diagram, •Internal Block diagram , •Package diagram, •Requirement diagram, •Sequence diagram , •State Machine diagram , •Use Case diagram , •Allocation tables...
+AADL
+AADL
+MARTE
+
+
+99 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+ARCADIA Vs Architecture Languages
+ARCADIA concepts are directly compatible with architecture languages such as
+ DODAF/NAF Architecture Frameworks,
+ UML2 & SysML,
+ AADL, ...
+These formalisms can interoperate with ARCADIA, it is just a matter of import/export tooling:
+ Export tooling can (will) be developed,
+ Selective Import can (will) be developed (e.g. functional analysis, components...)
+ Global Import could be possible under method conformance conditions
+
+
+Benefits of ARCADIA
+A quick summary of features and capabilities
+
+
+101 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Requirements
+System
+Functional & NF Need Model
+Logical Architecture
+Model
+Physical Architecture
+Model
+Operational Analysis
+Model
+Product Breakdown
+Early Validation: How to Validate Architecture vs Need
+Need consistency & coherency Traceability links
+Impact analysis: Architecture vs operational & functional need confrontation Traceability & implementation links
+Architecture Vs non-functional need confrontation Viewpoint analysis traceability & implementation links
+Solution Architecture Components
+Evaluation Rules
+ViewPoints
+Functions Safety
+Securit y
+Performance Interfaces
+IVVQ, Product Line, Cost...
+
+
+102 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Requirements
+System
+Functional & NF Need Model
+Logical Architecture
+Model
+Physical Architecture
+Model
+Operational Analysis
+Model
+Product Breakdown
+Need & Architecture Driving Integration Verification Validation
+Deliveries definition based on operational & functional capabilities
+Definition of test benches & simulation needs
+Non-regression optimisation & mastering
+Impact analysis Need evolution Component delivery delay Integration trouble...
+Definition of test & IV&V Scenarios
+
+
+103 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Summary of Expected Benefits
+SSS
+PIDS
+ICD
+SSDD
+IRS SRS
+ECR
+PCR
+Definition & Design IVVQ
+Better adequacy to need
+Less rework on architecture
+Capitalisation and reuse
+Less problems / change reports
+Less engineering change requests
+Better development management
+Less rework
+Less rework
+SSS
+PIDS
+ICD
+SSDD
+SRS
+
+
+104 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Summary of Contribution to Expected Benefits
+Better adequacy to need
+Less rework on architecture
+Capitalisation and reuse
+Less problems / change reports
+Less engineering change requests
+Better development management
+Less rework
+
+
+105 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+ARCADIA full scope
+Operational Analysis
+System Analysis
+Logical Architecture
+Physical Architecture
+EPBS
+Nonfunct. Constr aints
+Nonfunct. View points
+Extensions
+Transition SS,SW,HW
+Different purposes & steps in ARCADIA deployment
+Increasing ROI & Engineering Strength
+Sharing & capitalizing Product Definition & Design
+System Analysis
+Logical Architecture
+Physical Architecture
+Supporting & Easing Dedicated Engineering (safety, perf., RAMST...)
+Logical Architecture
+Physical Architecture
+EPBS
+Nonfunct. View points
+And more...
+Extensions
+Transition SS,SW,HW
+Checking product Architecture
+Non-funct. Constraints
+Non-funct. Viewpoints
+Improving Need understanding
+Innovating in Customer Satisfaction
+Operational Analysis
+System Analysis
+priorities
+ARCADIA Features
+Supporting & Easing
+IVVQ Physical Architecture
+EPBS
+Operational Analysis
+System Analysis
+Check your own prorities and select!
+Then think about full-scale
+
+
+106 /
+Ce document est la propriété de Thales Group et il ne peut être reproduit ou communiqué sans autorisation écrite de Thales S.A.
+Some ARCADIA Golden Rules
+ Do not model anything if you don’t know for what purpose
+ Build models according to the way you will exploit them
+ And according to users / addressees
+ Do not model in details if you are not able to keep the model up to date
+ Adjust stopping criteria accordingly
+ If you want quick Return on Invest, keep focussed on your major problems / challenges first
+ Favor modelling for several usages - “Model once, use many”
+ In order to maximise ROI and motivate for maintenance
