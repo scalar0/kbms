@@ -1,0 +1,3407 @@
+Polycopié du cours de la 3ème année, MOA
+“Analyse Fonctionnelle”
+A. Rozanova-Pierrat
+11 octobre 2019
+
+
+
+
+Contents
+Introduction v
+1 Notations 1
+2 Reminders on the topology in metric and normed spaces 3 2.1 Distance or metric . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3 2.1.1 Definitions and examples . . . . . . . . . . . . . . . . . . . . . . . . . 3 2.2 Underlying topology to a metric space. Completeness . . . . . . . . . . . . . 7 2.2.1 Topology in a metric space . . . . . . . . . . . . . . . . . . . . . . . . 7 2.2.2 Convergence and continuity . . . . . . . . . . . . . . . . . . . . . . . 9 2.2.3 Dense subsets of metric spaces . . . . . . . . . . . . . . . . . . . . . . 10 2.2.4 Complete metric spaces . . . . . . . . . . . . . . . . . . . . . . . . . . 11 2.2.5 Completion of a metric space . . . . . . . . . . . . . . . . . . . . . . 13 2.2.6 Separable spaces . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13 2.3 Compactness in metric spaces . . . . . . . . . . . . . . . . . . . . . . . . . . 14 2.4 Normed vector spaces . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22 2.4.1 Definition and examples . . . . . . . . . . . . . . . . . . . . . . . . . 22 2.4.2 Converging sequences and continuous applications . . . . . . . . . . . 24 2.5 Underlying metric and topology to a normed space . . . . . . . . . . . . . . 24 2.5.1 Metric and a norm . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25 2.5.2 Equivalent norms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 25 2.5.3 Compactness . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27 2.6 Banach spaces . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+3 Linear operators 33 3.1 Definition of a linear continuous and bounded operator in normed spaces . . 33 3.2 L(X, Y ): The space of linear continuous operators . . . . . . . . . . . . . . . 37 3.2.1 Definition of the dual space . . . . . . . . . . . . . . . . . . . . . . . 39 3.3 Bounded operators and theorem of Banach-Steinhaus . . . . . . . . . . . . . 39 3.4 Hahn-Banach theorem and its corollaries . . . . . . . . . . . . . . . . . . . . 41 3.5 Reflexivity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+4 Hilbert spaces 47 4.1 Sesquilinear and bilinear forms . . . . . . . . . . . . . . . . . . . . . . . . . . 47 4.2 Pre-Hilbert spaces . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50 4.2.1 Main properties and definitions . . . . . . . . . . . . . . . . . . . . . 50 4.2.2 Fourier series and orthonormal systems in a Pre-Hilbert space . . . . 52 4.3 Hilbert spaces . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54
+
+
+ii Table of content
+4.4 Hilbertian basis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 54 4.5 Orthogonal projection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58 4.6 Riesz representation theorem . . . . . . . . . . . . . . . . . . . . . . . . . . . 64 4.7 Operators defined by a sesquilinear/bilinear form . . . . . . . . . . . . . . . 66 4.8 Continuity and coercivity of a sesquilinear form . . . . . . . . . . . . . . . . 69 4.9 Lax Milgram Lemma . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 69
+5 Weak and Weak∗ convergences 73 5.1 Weak convergence in a Banach space . . . . . . . . . . . . . . . . . . . . . . 73 5.2 Weak∗ convergence in a Banach space . . . . . . . . . . . . . . . . . . . . . . 78 5.3 Strong and weak convergence in a Hilbert space . . . . . . . . . . . . . . . . 81
+6 Compact operators and spectral theory 85 6.1 Compact operators . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 85 6.2 Adjoint operator on Banach spaces . . . . . . . . . . . . . . . . . . . . . . . 87 6.3 Spectral properties of compact operators in a Hilbert space . . . . . . . . . . 88 6.4 Spectrum and resolvent of a linear operator. . . . . . . . . . . . . . . . . . . 93
+7 Distributions 97 7.1 Space D(Ω) of “test functions” . . . . . . . . . . . . . . . . . . . . . . . . . . 97 7.1.1 Mollifiers . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 100 7.1.2 Density of D(Ω) in Lp(Ω). . . . . . . . . . . . . . . . . . . . . . . . . 104 7.1.3 Completeness of D(Ω) . . . . . . . . . . . . . . . . . . . . . . . . . . 105 7.1.4 Lemma of du Bois-Reymond . . . . . . . . . . . . . . . . . . . . . . . 107 7.2 Dual space of D(Ω). Distributions . . . . . . . . . . . . . . . . . . . . . . . . 110 7.2.1 Direct product of distributions . . . . . . . . . . . . . . . . . . . . . . 113 7.2.2 Convolution in D′(Ω) . . . . . . . . . . . . . . . . . . . . . . . . . . . 115
+8 Sobolev spaces 117 8.1 Weak derivatives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 117 8.2 W m,p Spaces . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 118 8.2.1 Definition and main properties . . . . . . . . . . . . . . . . . . . . . . 118 8.2.2 Sobolev spaces W m,p(Ω) for bounded domains with a regular boundary ∂Ω . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 121 8.3 Hm Spaces . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 122 8.3.1 Definition and properties . . . . . . . . . . . . . . . . . . . . . . . . . 122 8.3.2 Dual space (Hm(Ω))∗ . . . . . . . . . . . . . . . . . . . . . . . . . . . 122 8.4 Continuity and compactness of the extension and trace operators on d-sets . 124 8.4.1 Spaces H0m(Ω) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 130
+A Topology 133 A.1 Open sets and topology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 133 A.1.1 Definition and examples . . . . . . . . . . . . . . . . . . . . . . . . . 133 A.1.2 Comparison of topologies . . . . . . . . . . . . . . . . . . . . . . . . . 136 A.1.3 Dense subsets and connected topological spaces . . . . . . . . . . . . 137 A.2 Convergence and continuity . . . . . . . . . . . . . . . . . . . . . . . . . . . 138 A.2.1 Continuous mappings. Homeomorphism . . . . . . . . . . . . . . . . 138 A.2.2 Converging sequences in (X, T ) . . . . . . . . . . . . . . . . . . . . . 140 A.3 Initial topology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 141
+
+
+Table of content iii
+A.4 What a topology “sees” and does not “see”. Separation of topological spaces 142 A.5 Weak and Weak∗ topologies . . . . . . . . . . . . . . . . . . . . . . . . . . . 145 A.5.1 Weak topology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 145 A.5.2 Weak∗ topology . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 145
+B More about compactness 147 B.1 Compact topological spaces . . . . . . . . . . . . . . . . . . . . . . . . . . . 147 B.2 Continuous mappings of compact spaces . . . . . . . . . . . . . . . . . . . . 150 B.3 Relatively compact subsets . . . . . . . . . . . . . . . . . . . . . . . . . . . . 150
+C General theory of Hilbert spaces 153 C.1 Series with any (countable or not) index sets . . . . . . . . . . . . . . . . . . 153 C.2 Hilbertian basis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 156
+D Lp spaces: reflexivity, separability, dual spaces 159 D.1 Definition . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 159 D.1.1 Applications of Hölder’s inequality . . . . . . . . . . . . . . . . . . . 161 D.1.2 Completeness of Lp spaces . . . . . . . . . . . . . . . . . . . . . . . . 162 D.2 Study of Lp (1 < p < ∞) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 165 D.2.1 Reflexivity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 165 D.2.2 Dual space . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 167 D.2.3 Separability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 168 D.3 Study of L1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 169 D.3.1 Separability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 169 D.3.2 Dual space . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 169 D.3.3 Reflexivity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 172 D.4 Study of L∞ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 173 D.4.1 Reflexivity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 173 D.4.2 Separability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 173 D.5 Recap . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 174
+E General Sobolev embedding theorems 175 E.1 Sobolev embeddings . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 175
+F Examples for elliptic PDEs 177 F.1 Dirichlet boundary-valued problem for the Poisson equation . . . . . . . . . 177 F.2 Robin boundary-valued problem for the Poisson equation . . . . . . . . . . . 180
+Bibliographie 183
+Index 185
+
+
+
+
+Introduction
+The Functional Analysis, apeared in the beginning of last century from more old mathematical fields as the variational calculus, the theory of partial differential equations, the numerical analysis and the theory of integral equations, can be considered as a generalization and a geometrical interpretation of the mathematical analysis (calculus). Functions with some chosen caracteristic properties are considered as points or vectors of “functional spaces”, in the most cases, infinite dimensional. Therefore, the notion of covergence from the calculus was generalized for the abstract functional spaces and it was related with topological properties of the functional spaces.
+Let X be a set. There are two equivalent ways to define topological properties of a set X:
+1. to define a convergence on X (which will implies the corresponding definition of a topology on X)
+2. to define, in an axiomatic way, a topology on X, i.e. to define all open sets on X.
+In the framework of this course we will be essentially restricted on the theory of metric spaces and the topology induced by a distance. An introduction of abstract topological spaces is given in Appendix A and can be consulted as a suplemental material. However, the most usefull questions - comparison of topologies, convergence, continuity and compactness- are advised to be read for having a more complete vision of the Functional Analysis.
+Once the open sets are defined in X, the closed sets are their completions:
+U ⊂ X is open iff X \ U is closed.
+In addition to the open and closed sets in X, we need to define a neighborhood of an element x ∈ X. For the clearity, we will consider only open neighborhoods of x (see Appendix A for Definition A.1.6 and for the discussion about), i.e. open sets in X containing the point (element) x. The set of all open neighborhoods of x is denoted by O(x).
+We will keep in mind (see Problem A.1.2 Appendix A) that a subset M of X (a topological space) is open if and only if every point x ∈ A has a open neighborhood contained in A.
+Now, we can define the convergence in our topology:
+Definition 0.0.1 Let (xn) be a sequence of elements of X. We say that (xn) converges to x ∈ X if
+∀V ∈ O(x), ∃N ∈ N such that ∀n ≥ N ⇒ xn ∈ V.
+We see that the convergence is uniquely defined by open sets, i.e. the topology on X. Therefore, if we define the convergence, we fixe a topology on X.
+
+
+vi Table of content
+In Chapter 2 we will introduce on X a distance (a metric) and a norm. Each time, it will modify the definition of open sets, but not the definition of the convergence. Abstract topological spaces are the most general spaces, which include metric spaces. Again, the metric spaces include all normed spaces, which include all pre-Hilbert spaces. In other words, all inner products define a norm, all norms define a distance, all distances define a topology, but not inverse! We will see an example of a convergence (weak convergence) which defines a nonmetrizable topology (cannot be associated with a distance). An other example is the space of infinitely differentiable and continuous functions with compact support (see Section 7.1), which is a topological space which cannot be metrizable too.
+After the convergence, the property almost the most studied and important in Functional Analysis is the compactness. We refere to Appendix B for the compactness in the topological spaces. From this abstract theory we need to know at least the main definitions and results, which will be updated and precised in the framework of metric spaces in Section 2.3. Actually, one of the main goals of this course is to clearly understand why and in what the compactness property is important and to be able to distinct it in the framework of different topologies as strong, weak and weak∗ (see Chapter 5).
+We will be also particularly focused on the theory of linear operators on Banach and Hilbert spaces, considered in Chapters 3 and 4 in the aim to consider in Chapter 6 spectral properties of compact operators, which are important in various applications, for instance in solving boundary valued problems for partial differential equations (PDEs). To be able to solve them, it is also important to be familar with the general theory of distributions, Chapter 7, and Sobolev spaces, Chapter 8. Two typical examples for solving the Poisson equation is given in Appendix F and the spectral properties of the Laplacian is considered in the class (see “TD 7”).
+The Lp spaces are supposed to be assumed in the course “Analyse” of Lionel Gabet [8] and we also refere to Appendix D for the additional study of these spaces. The results on Lp spaces can be assumed without proof but need to be known and will be used in numerous examples.
+In the framework of this course, the generalities on the Hilbert and Sobolev spaces for Appendixes C and E can be omitted.
+
+
+Chapter 1
+Notations
+X is a set or a space.
+∅ is the empty set.
+T is a topology.
+(X, T ) is a topological space: a set X equiped with a fixed topology T (i.e. a defined family of open sets on X, see Definition A.1.1)) is called the topological space (X, T ).
+O(x) is the set of all open neighborhoods of x.
+XG is the closure of a set X in the space G.
+M if M a subset or subspace of X, M is the closure of M in the topology of X.
+a if a is a complexe number or a complexe valued matrix, then a is its complexe conjugated, i.e for a = 1 + 2i we have a = 1 − 2i.
+A ⊂ B means that a set A is a subset of a set B and A can be equal to B.
+A ( B means a set A is a proper subset of B (A 6= B).
+Im A is the image of an operator A.
+Ker A is the kernel of an operator A.
+⇒ means the uniform convergence.
+→ means the strong convergence.
+⇀ means the weak convergence.
+∗⇀ means the weak∗ convergence.
+supp f means the support of a function f (see Chapter 7).
+(X, dX ) is a metric space: a set X equiped with a distance dX.
+dX(x, y) denotes a distance between two elements x and y in the metric space (X, dX).
+Br(a) is an open ball of radius r centered in the point a.
+Brc(a) is a closed ball of radius r centered in the point a. In a normed space Brc(a) = Br(a),
+but it can be not true in a metric space.
+
+
+2 Chapter 1. Notations
+‖ · ‖X is a norm on a vector space X.
+H is usualy used to denote a Hilbert space.
+L(X, Y ) is the space of all linear continuous operators from X to Y .
+X∗ is the dual space to X: X∗ = L(X, R).
+〈f, g〉 can be an inner product if f, g ∈ X and X is a Pre-Hilbert space. If X is not a Pre-Hilbert space, then it means that f ∈ X∗, g ∈ X and 〈f, g〉 = f (g) (the value of the functional f on the element g).
+Span(e) is the set of finite linear combinations of elements of e.
+I is the identity operator I(x) = x.
+D′ is the dual space to the space D = C0∞, named the space of distributions.
+Tf is a regular distribution defined by a function f ∈ Ll1oc.
+Dα is the derivative in the sense of distribution (α ∈ Nn).
+
+
+Chapter 2
+Reminders on the topology in metric
+and normed spaces
+2.1 Distance or metric
+2.1.1 Definitions and examples
+Definition 2.1.1 Let X be a set and d : X × X → R be a function. d is a distance (metric) on X if:
+1. ∀(x, y) ∈ X × X, d(x, y) ≥ 0; (positivity)
+2. ∀(x, y) ∈ X × X, d(x, y) = 0 if and only if x = y; (identity of indiscernibles)
+3. ∀(x, y) ∈ X × X, d(x, y) = d(y, x); (symmetry)
+4. ∀(x, y, z) ∈ X × X × X, d(x, y) ≤ d(x, z) + d(z, y) (triangular inequality).
+If point 2 does not hold, d is called a pseudodistance. If point 3 does not hold, d is called a quasidistance.
+The first condition of the positivity follows from the last three conditions, since
+∀x, y ∈ X × X d(x, y) + d(y, x) ≥ d(x, x) (by triangle inequality) =⇒ d(x, y) + d(x, y) ≥ d(x, x) (by symmetry) =⇒ 2d(x, y) ≥ 0 (by identity of indiscernibles)
+=⇒ d(x, y) ≥ 0.
+Definition 2.1.2 Set X with a given distance defined on it, i.e. the pair (X, d), is a metric space (if there no ambiguity in the notations, we will also use simply X instead of (X, d)). If d is a pseudodistance on X, then (X, d) is a pseudometric space. If d is a quasidistance on X, then (X, d) is a quasimetric space (by a quasidistance d it is possible to define a distance d′ by the formula d′(x, y) = (d(x, y) + d(y, x))/2).
+
+
+4 Chapter 2. Reminders on the topology in metric and normed spaces
+Remark 2.1.1 If (X, d) is a metric space and if M ⊂ X is a subset of X, we can consider the restriction of d to M, what allows to equipe M with the structure of a metric space. In this case the metric on M is called the induced metric on M.
+Example 2.1.1 Setting
+d(x, y) =
+{ 0 if x = y, 1 if x 6= y,
+where x and y are elements of an arbitrary set X, we obtain a metric space (X, d) (a discrete space or space of isolated points). Indeed, by definition of d, the first three points of Definition 2.1.1 are satisfied. For the last point we have
+1. If x = y the triangle inequality becomes:
+0 ≤ 2 if z 6= x or 0 ≤ 0 if z = x.
+2. If x 6= y the triangle inequality becomes:
+1 ≤ 2 if z 6= x and z 6= y or 1 ≤ 1 if z = x or z = y.
+Therefore the triangle inequality is satisfied.
+Example 2.1.2 Consider the space C([0, 1]) of all continuous functions on [0, 1]. Let us verify that
+d(f, g) = max
+x∈[0,1] |f (x) − g(x)|
+is a distance on C([0, 1]):
+1. As the modulus is a positive function on R:
+∀x ∈ R |x| ≥ 0,
+we have that
+∀(f, g) ∈ C([0, 1]) × C([0, 1]), d(f, g) ≥ 0.
+2. We have for all (f, g) ∈ C([0, 1]) × C([0, 1])
+d(f, g) = 0 ⇐⇒ max
+x∈[0,1] |f (x) − g(x)| = 0 ⇐⇒ ∀x ∈ [0, 1] 0 ≤ |f (x) − g(x)| ≤ 0
+⇐⇒ ∀x ∈ [0, 1] |f (x) − g(x)| = 0 ⇐⇒ ∀x ∈ [0, 1] f (x) = g(x).
+3. For all (f, g) ∈ C([0, 1]) × C([0, 1]) we have
+d(f, g) = max
+x∈[0,1] |f (x) − g(x)| = max
+x∈[0,1] | − [f (x) − g(x)]| = max
+x∈[0,1] |g(x) − f (x)| = d(g, f ).
+
+
+2.1. Distance or metric 5
+4. For all (f, g, h) ∈ C([0, 1]) × C([0, 1]) × C([0, 1]) we have
+d(f, g) = max
+x∈[0,1] |f (x) − g(x)| = max
+x∈[0,1] |f (x) − h(x) + h(x) − g(x)|
+≤ max
+x∈[0,1] (|f (x) − h(x)| + |h(x) − g(x)|) ≤ max
+x∈[0,1] |f (x) − h(x)| + max
+x∈[0,1] |h(x) − g(x)|
+= d(f, h) + d(h, g).
+We conclude that (C([0, 1]), d) is a metric space.
+Example 2.1.3 Consider X = Rn with n ∈ N∗ and p ∈ [1, ∞[. Let’s define for x = (x1, . . . , xn) ∈ X and y = (y1, . . . , yn) ∈ X
+dp(x, y) =
+(n
+∑
+i=1
+|xi − yi|p
+)1
+p
+and d∞(x, y) = max
+i∈[1,...,n] |xi − yi|.
+1. We can easily see that d∞ satisfies the assertions of Definition 2.1.1 and hence, d∞ is a metric in Rn.
+2. Let us prove that dp is a metric. It is obvious that points 1-3 are true for dp for all
+p ∈ [1, ∞[. We need to prove the triangle inequality 4.
+Let x, y, z be three points in Rn and let A = x − z, B = z − y. Then x − y = A + B and the triangle inequality 4 takes the form of Minkowski’s inequality
+(n
+∑
+i=1
+|Ai + Bi|p
+)1
+p
+≤
+(n
+∑
+i=1
+|Ai|p
+)1
+p+
+(n
+∑
+i=1
+|Bi|p
+)1
+p
+. (2.1)
+The inequality is obvious for p = 1. Suppose that p > 1. To prove Minkowski’s inequality (2.1), we use Hölder’s inequality:
+n
+∑
+i=1
+|AiBi| ≤
+(n
+∑
+i=1
+|Ai|p
+)1
+p( n
+∑
+i=1
+|Bi|p′
+)1
+p′
+, (2.2)
+where 1
+p+ 1
+p′ = 1, and the following indentity for any a and b in R or C:
+(|a| + |b|)p = |a|(|a| + |b|)p−1 + |b|(|a| + |b|)p−1.
+Thus, we can write
+n
+∑
+i=1
+(|Ai| + |Bi|)p =
+n
+∑
+i=1
+|Ai|(|Ai| + |Bi|)p−1 +
+n
+∑
+i=1
+|Bi|(|Ai| + |Bi|)p−1.
+We apply Hölder’s inequality to each sum in the right-hand part of the equality, using
+
+
+6 Chapter 2. Reminders on the topology in metric and normed spaces
+the fact that (p − 1)p′ = p:
+n
+∑
+i=1
+|Ai|(|Ai| + |Bi|)p−1 ≤
+(n
+∑
+i=1
+|Ai|p
+)1
+p( n
+∑
+i=1
+(|Ai| + |Bi|)(p−1)p′
+)1
+p′
+=
+(n
+∑
+i=1
+|Ai|p
+)1
+p( n
+∑
+i=1
+(|Ai| + |Bi|)p
+)1
+p′
+, (2.3)
+from where with
+n
+∑
+i=1
+|Bi|(|Ai| + |Bi|)p−1 ≤
+(n
+∑
+i=1
+|Bi|p
+)1
+p( n
+∑
+i=1
+(|Ai| + |Bi|)p
+)1
+p′
+,
+we find that
+n
+∑
+i=1
+(|Ai| + |Bi|)p ≤
+(n
+∑
+i=1
+(|Ai| + |Bi|)p
+)1
+p′
+
+
+[n
+∑
+i=1
+|Ai|p
+]1
+p+
+[n
+∑
+i=1
+|Bi|p
+]1
+p
+
+.
+Dividing both sides of this inequality by (∑in=1(|Ai| + |Bi|)p) 1
+p′ , and noticing that 1 −
+1
+p′ = 1
+p we finally obtain that
+(n
+∑
+i=1
+(|Ai| + |Bi|)p
+)1
+p
+≤
+[n
+∑
+i=1
+|Ai|p
+]1
+p+
+[n
+∑
+i=1
+|Bi|p
+]1
+p
+.
+To finish the proof, we use the fact that |Ai+Bi| ≤ |Ai|+|Bi| for all i and consequently we have (2.1).
+3. Consider X = Rn with the metric
+d2(x, y) =
+(n
+∑
+i=1
+(xi − yi)2
+)1
+2
+.
+This metric is the Euclidean distance function.
+4. Consider X = { functions from R to R defined in 0}. For f and g in X, we define
+d(f, g) = |g(0) − f (0)|.
+Let us prove that d is a pseudodistance. For f (x) = x2 and g(x) = x3 (f 6= g), by definition of d, d(f, g) = 0, so point 2 of Definition 2.1.1 does not hold. Points 1, 3 and 4 are true thanks to the properties of the modulus. Hence we conclude that d is a pseudodistance.
+Problem 2.1.1 1. Prove the inequality
+ab ≥ ap
+p + bp′
+p′ ,
+where a ≥ 0, b > 0, p ∈]0, 1[ and p′ = p
+p−1 < 0.
+
+
+2.2. Underlying topology to a metric space. Completeness 7
+2. Consider dp for p ∈]0, 1[. Is it a metric on Rn?
+Definition 2.1.3 Let (X, d) be a metric space. Let A ⊂ X. The distance between a set A and a point x ∈ X is defined by d(A, x) = infa∈A d(a, x).
+Remark 2.1.2 If A is closed (A = A), then
+d(x, A) = 0 ⇐⇒ x ∈ A.
+Problem 2.1.2 Let there be two subsets of a metric space (X, d).Then the number
+z(A, B) = inf
+(a,b)∈A×B d(a, b)
+is called the distance between A and B. Show that z(A, B) = 0 if A ∩ B 6= ∅, but not conversely. Hence, z(A, B) is not a distance on P(X), the set of all subsets of X. (A ∈/ X but A ( X, thus A ∈ P(X)).
+Show that for A and B two non-empty closed subsets of a metric space (X, d), the following function
+dH(A, B) = max{ sup
+a∈A
+inf
+b∈B d(a, b), sup
+b∈B
+inf
+a∈A d(a, b) },
+is a distance on the set of all closed subsets in X (dH is a pseudodistance in X). Note that
+dH(A, B) is called Hausdorff distance.
+2.2 Underlying topology to a metric space. Completeness
+2.2.1 Topology in a metric space
+Definition 2.2.1 Let (X, d) be a metric space. Given x in X, define the open ball around x with radius r > 0 by
+Br(x) = {y ∈ X| d(x, y) < r}.
+The set Brc(x) = {y ∈ X| d(x, y) ≤ r} is called the closed ball around x with radius r > 0.
+A subset U of X is called open in (X, d), if for all x ∈ U there exists a radius r > 0, such that Br(x) ⊂ U. The set of all open sets in (X, d) is called the topology associated to the metric d, denoted by Td.
+Attention : The same notation Td in Appendix A is used for the discrete topology.
+Let us also recall (see Appendix A and [8]) that
+• A finite intersection and an arbitrary union of open sets in (X, d) are open in (X, d),
+• A finite union and an arbitrary intersection of closed sets in (X, d) (the completions in X of open sets) are closed in (X, d).
+Problem 2.2.1 Let Y ⊂ X be a subset of a metric space (X, d). Prove that V ⊂ Y is open in (Y, d) (i.e., in the reduced topology on Y ) if and only if there exists a open set U ⊂ X of (X, d) such that V = U ∩ Y .
+
+
+8 Chapter 2. Reminders on the topology in metric and normed spaces
+Example 2.2.1 Let us consider on Z the distance d(x, y) = |x − y| induced by the usual distance on R. For all x ∈ Z the set {x} is in the same time a open and a closed set in (Z, d). More generally, all subset of Z is open and closed in the same time in (Z, d).
+We adopt the following definition of a closure of a set in a metric space:
+Definition 2.2.2 The closure of a subset M ⊂ X in a metric space (X, d), denoted by M , is called the smallest closed set containing M which can be also defined by the intersection of all closed sets containing M:
+M = ∩V closed,M⊂V V.
+Its more general version is given in Definition A.1.6 and for its properties see Problem A.1.3 and Theorem A.1.1.
+Attention : Since, by definition, the open ball Br(x) ⊂ Brc(x) we have all times the
+inclusion Br(x) ⊂ Brc(x), but not necessary the equality, i.e. the closure of the open ball
+can be different to the closed ball taken in the same point with the same radius. For example, if we take (Z, d), defined in Example 2.2.1, then B1(0) = {0} and B1(0) = {0}
+but B1c(0) = {−1, 0, 1}.
+Definition 2.2.3 Let (X, dx) and (Y, dY ) be two metric spaces. A map f : X → Y is called an isometry or distance preserving if for any a, b ∈ X it holds
+dY (f (a), f (b)) = dX(a, b).
+An isometry is automatically injective.
+A global isometry, isometric isomorphism, is a bijective isometry.
+Definition 2.2.4 Two metric spaces (X, dx) and (Y, dY ) are called isometric if there is a bijective isometry from X to Y .
+Problem 2.2.2 Give an example of two isometric metric spaces.
+Definition 2.2.5 Given two metric spaces (X, dX) and (Y, dY ), the function f : X → Y
+is said to be Lipschitz continuous if there exists a constant K ≥ 0, called a Lipschitz constant such that,
+∀x1, x2 ∈ X, dY (f (x1), f (x2)) ≤ KdX(x1, x2).
+If 0 ≤ K < 1 the function is called a contraction.
+Example 2.2.2 If f : X → Y is a bijection of two metric spaces (X, dX) and (Y, dY ) and, in addition, f and f −1 are Lipschitz continuous (f is bi-Lipschitz):
+∃K1 > 0 and K2 > 0 : K1dX(x1, x2) ≤ dY (f (x1), f (x2)) ≤ K2dX(x1, x2) ∀x1, x2 ∈ X,
+then f is isomorphism of (X, dX) on (Y, dY ). If, in addition, K2 = K1 = 1, then f is an isometry.
+Definition 2.2.6 Two distances are equivalent if they define the same topology (the same open and closed sets).
+
+
+2.2. Underlying topology to a metric space. Completeness 9
+Example 2.2.3 Let us consider two different metrics on X: d1 and d2. Thus we have
+two metric spaces (X, d1) and (X, d2). If the mapping f : (X, d1) → (X, d2), for example
+f (x) = 3x, is bi-Lipschitz, then two metrics d1 and d2 are equivalent.
+Example 2.2.4 (Product of two metric spaces) If (X, dX) and (Y, dY ) are two metric spaces, we can define on the product space X × Y the sum distance ds given by
+ds((x1, y1), (x2, y2)) = dX(x1, x2) + dY (y1, y2),
+and the product distance dp given by
+dp((x1, y1), (x2, y2)) = max(dX(x1, x2), dY (y1, y2)).
+We can see that ds and dp verify Definition 2.1.1 and allow to define the metric structure on X × Y . In addition, they verify
+∀z, w ∈ X × Y dp(z, w) ≤ ds(z, w) ≤ 2dp(z, w),
+Then, by Examples 2.2.2 and 2.2.3, the metrics ds and dp are equivalent (define the same
+topology). In addition, the set OX × OY , the product of a open set OX in (X, dX) and of a
+open set OY in (Y, dY ), is an open set in (X × Y, dp).
+2.2.2 Convergence and continuity
+The definition of the convergence introduced for abstract topological spaces (see Definition 0.0.1) can be now updated for a topology induced by a metric:
+Definition 2.2.7 A sequence of points (xn) in a metric space (X, d) converges to a point
+x ∈ X if every open ball Bǫ(x) of x contains all points xn starting from a certain index:
+∀ǫ > 0 ∃N ∈ N, n ≥ N ⇒ d(xn, x) < ǫ.
+The continuity of an application between two metric spaces (see also Appendix A Section A.2) is given by:
+Definition 2.2.8 Let (X, dX) and (Y, dY ) be two metric spaces. A function f : X → Y is
+called continuous at the point x0 ∈ X if for all ǫ > 0 there exists δ > 0 such that
+dX(x0, x) < δ ⇒ dY (f (x0), f (x)) < ǫ.
+The function f is called continuous on X if f is continuous at every point of X.
+Now, we refer to theorems of continuous mappings in topological spaces from Section A.2).
+Clearly, in a metric space
+Proposition 2.2.1 1. (xn) converges to x in a metric space (X, d) if and only if
+nli→m∞ d(xn, x) = 0.
+2. a function f : (X, dX) → (Y, dY ) is continuous, if from xn → x for n → ∞ in X
+follows that f (xn) → f (x) for n → ∞ in Y .
+
+
+10 Chapter 2. Reminders on the topology in metric and normed spaces
+It is an immediate consequence of the definition of a limit that
+1. No sequence can have two distinct limits;
+2. If a sequence (xn) converges to a point x, then so does every subsequence of (xn).
+Problem 2.2.3 Let (X, dX) and (Y, dy) be two metric spaces and f : X → Y . Prove that
+1. If f is an isometry, then f is continuous.
+2. If f is a Lipschitz continous function, then f is continuous.
+3. If f is a contraction, then f is continuous.
+Let us precise the closed sets and the closure of a set in a metric space using the notion of the convergent sequence:
+Proposition 2.2.2 A subset M ⊂ X is closed in (X, d) if and only if the limit of any sequence of elements of M, which converges in X, belongs to M:
+M is closed in (X, d) ⇐⇒ ∀(xn) ⊂ M : xn → x in X, x ∈ M.
+Example 2.2.5 To prove that Q is not closed in R equiped with the usual distance, we can
+construct the decimal approximations of √2, i.e. a sequence of rational numbers converging
+toward √2 in R and √2 ∈/ Q.
+Proposition 2.2.3 The closure in (X, d) of a set M ⊂ X is equal to:
+1. the set of limits of all sequences of elements of M;
+2. the set of x ∈ X such that for all ǫ > 0 M ∩ Bǫ(x) 6= ∅.
+2.2.3 Dense subsets of metric spaces
+The notion of the density is general and can be formulated in the case of abstract topological spaces (see A.1.3). Restricted to the metric spaces, we have
+Definition 2.2.9 Let M ⊂ X be a subset of a metric space (X, d). The set M is dense in X if M = X. Equivalently, M is dense in (X, d) if M meets all nonempty open sets of (X, d).
+Thanks to Proposition 2.2.3, we can caracterize the dense subsets of a metric space in the following way:
+Proposition 2.2.4 A subset M ⊂ X is dense in (X, d) if and only if
+∀x ∈ X, ∀ǫ > 0, M ∩ Bǫ(x) 6= ∅.
+This means, that M is dense in (X, d) if and only if M meets all nonempty open balls of (X, d).
+We also have
+Proposition 2.2.5 A subset M ⊂ X is dense in (X, d) if and only if for all element x ∈ X there exists a sequence (yn) of elements of M such that limn→+∞ d(x, yn) = 0. This means,
+that M is dense in (X, d) if and only if any element x ∈ X is the limit of a sequence of elements of M.
+
+
+2.2. Underlying topology to a metric space. Completeness 11
+Example 2.2.6 The set of all rational numbers Q is dense in R for the usual distance.
+During our course we will see a lot of examples of dense subsets in different metric spaces.
+2.2.4 Complete metric spaces
+Definition 2.2.10 In a metric space (X, d), we call Cauchy sequence, a sequence (un) such that
+∀ǫ > 0, ∃N > 0, ∀m, n > N ⇒ d(um, un) < ǫ.
+Remark 2.2.1 In the equivalent way, which sometimes more useful, a Cauchy sequence (un) satisfies
+∀ǫ > 0, ∃N > 0, ∀m, n > N ⇒ d(un+m, un) < ǫ.
+Definition 2.2.11 A metric space (X, d) is called complete if all Cauchy sequences of elements of X converge in X.
+Example 2.2.7 1. R is complete. Q isn’t.
+2. (C([a, b]), d∞) is complete. (C([a, b]), d2) isn’t. Here d∞ is the distance from Exam
+ple 2.1.2 and d2(x, y) = √
+∫b
+a |x(t) − y(t)|2dt (see also Example 2.1.3).
+Proposition 2.2.6 1. Every convergent sequence (xn) in (X, d) is a Cauchy sequence
+in (X, d).
+2. If (xn) is the Cauchy sequence in (X, d) and if there exists a subsequence (xnk ) such
+that xnk → x for k → +∞ in (X, d), then xn → x for n → +∞ in (X, d).
+Proof. Ideas for the proof are given in Figure 2.1.
+x
+x
+xn
+xm
+xnk
+xk
+ǫ>
+ǫ > < ǫ < 2ǫ
+< 2ǫ ǫ >
+Figure 2.1 – As distances d(xn, x) < ǫ and d(x, xm) < ǫ, then by the triangle inequality d(xn, xm) < 2ǫ (the left-hand schema). As d(xnk , xk) < ǫ and d(xnk , x) < ǫ, then by the triangle inequality d(xk, x) < 2ǫ (the right-hand schema).
+Lemma 2.2.1 The product of two complete metric spaces (X, dX ) and (Y, dY ) equiped with the sum distance ds or the product distance dp (see Example 2.2.4) is a complete metric space.
+Proof. Let dp be the product distance on X × Y . We notice that if (xn, yn)n∈N is a Cauchy
+sequence in (X × Y, dp), then the sequences (xn)n∈N and (yn)n∈N are Cauchy sequences in
+(X, dX) and (Y, dY ) respectively. Since (X, dX) and (Y, dY ) are complete, the sequences
+(xn)n∈N and (yn)n∈N converge to a limit:
+xn → x ∈ X and yn → y ∈ Y.
+
+
+12 Chapter 2. Reminders on the topology in metric and normed spaces
+Therefore, the sequence (xn, yn)n∈N converges toward (x, y) in (X, Y ). This finishes the
+proof.
+Let us prove the following very important two theorems:
+Theorem 2.2.1 (Nested sphere theorem) A metric space (X, d) is complete if and only if every nested sequence of closed balls in (X, d)
+B1 = Brc1(x1) ⊃ B2 = Brc2(x2) ⊃ . . . ⊃ Bn = Brcn(xn) ⊃ . . . ,
+such that rn → 0 as n → ∞ has a nonempty intersection in X:
+∩n∞=1Bn = {x} for a x ∈ X (d(xn, x) → 0, n → +∞).
+Proof ⇒ Let (X, d) be complete and (Bn) be any nested sequence of closed balls in (X, d)
+such that for all n ∈ N rn is the radius and xn is the center of the ball Bn. Then the
+sequence (xn) of centers of the balls is a Cauchy sequence, since d(xn, xm, ) < rn for m > n
+and rn → 0 as n → ∞. Since (X, d) is complete, the Cauchy sequence (xn) has a (unique!)
+limit in X, denoted by x. Then x ∈ ∩n∞=1Bn. In fact, Bn contains every point of the
+sequence (xn) except possibly the points x1, x2, . . . xn−1, and hence x is a limit point (see
+Definition A.1.6) of every ball Bn. But Bn is closed, and hence x ∈ Bn for all n.
+Let us proof the unicity of the point which belongs to the intersection of Bn. If x and y
+belong to ∩n∞=1Bn, then for all n rn ≥ d(x, y) and thus d(x, y) = 0 which implies that x = y.
+⇐ Conversely, suppose every nested sequence of closed balls in (X, d) with radius converging to zero has a nonempty intersection. Let (xn) be any Cauchy sequence in (X, d). Let us
+prove that then (xn) converges in (X, d).
+By definition of the Cauchy sequence, we can choose a term xn1 of the sequence (xn) such
+that
+∀n ≥ n1 d(xn, xn1) < 1
+2.
+Let B1 be the closed ball of the radius 1 with center xn1. Then we choose a term xn2 of
+(xn) such that
+n2 > n1 and ∀n ≥ n2 d(xn, xn2) < 1
+22 .
+Let B2 be the closed ball of the radius 1
+2 with center xn2. Continue this construction
+indefinitely, i.e., once having chosen terms xn1, xn2, . . . , xnk (n1 < n2 < . . . < nk), choose a
+term xnk+1 such that
+nk+1 > nk and ∀n ≥ nk+1 d(xn, xnk+1) < 1
+2k+1 ,
+which defines the center of the closed ball Bk+1 of radius 1
+2k , and so on. This construction
+gives a nested sequence (Bk) of closed balls with the raduis rk = 1
+2k−1 converging to zero. By
+hypothesis, these balls have a non-nonempty intersection, i.e., there is a point x ∈ ∩k∞=1Bk.
+This point is obviously the limit of the sequence (xnk). But if a Cauchy sequence contains
+a converging subsequence, then the sequence itself must converge to the same limit (see Proposition 2.2.6), i.e., toward x.
+
+
+2.2. Underlying topology to a metric space. Completeness 13
+Definition 2.2.12 A subset M of a metric space (X, d) is said to be nowhere dense in (X, d) if it is dense in no (open) ball at all, or equivalently, if all open balls B in X contains an other non trivial ball S such that S ∩ M = ∅ (check the equivalence).
+Remark 2.2.2 If a subset M of a metric space (X, d) is not nowhere dense in (X, d), then there exists r > 0 and x ∈ X such that the open ball Br(x) ⊂ M. But if M is nowhere
+dense in (X, d), it means that M does not contain any non trivial open ball in (X, d).
+This concept plays an important role in Baire’s Theorem:
+Theorem 2.2.2 (Baire) A complete metric space (X, d) cannot be represented as the union of a countable number of nowhere dense sets.
+Proof. Suppose to the contrary that
+X = ∪n∞=1Mn,
+where every set Mn is nowhere dense in (X, d). Let B0 be a closed ball of radius 1. Since
+M1 is nowhere dense in B0, being nowhere dense in X, there is a closed ball B1 of radius
+less than 1
+2 such that
+B1 ⊂ B0 and B1 ∩ M1 = ∅.
+Since M2 is nowhere dense in B1, being nowhere dense in B0, there is a closed ball B2
+of radius less than 1
+3 such that B2 ∩ M2 = ∅, and so on. By this way, we get a nested
+sequence of closed balls (Bn) with radius converging to zero such that Bn ∩ Mn = ∅
+(n = 1, 2, . . .). By the nested sphere theorem, the intersection ∩n∞=1Bn contains a point
+x ∈ X. By construction, x cannot belong to any of the sets Mn, and thus x ∈/ ∪n∞=1Mn. It
+follows that, contrary to the assumsion, X 6= ∪n∞=1Mn.
+We will see in Chapters 3 and 5 the importance of Baire’s Theorem.
+2.2.5 Completion of a metric space
+Definition 2.2.13 Let (X, d) be a metric space. A complete metric space (G, d) is called a completion of X if X ⊂ G and its closure XG = G, i.e., if X is a dense subset of G.
+Example 2.2.8 The space of all real numbers R is the completion of the space of all rational numbers Q.
+Theorem 2.2.3 Every metric space (X, d) has a completion. This completion is unique in the following sense: if there are two completions E1 and E2, then they are isometric.
+For the proof see [16] (can be omitted).
+2.2.6 Separable spaces
+Definition 2.2.14 A metric space is said to be separable if it has a countable dense subset.
+Example 2.2.9 • Rn for n ∈ N∗ contains the countable dense set of all points x = (x1, . . . , xn) with rational coordinates.
+• Let us consider the space of sequences l2 such that for all x = (x1, . . .) ∈ l2 and
+y = (y1, . . .) ∈ l2 the distance d2(x, y)2 = ∑
+i≥1 |xi − yi|2 < ∞. The space l2 contains
+
+
+14 Chapter 2. Reminders on the topology in metric and normed spaces
+the countable dense set of all points x = (x1, . . .) with only finit number of nonzero coordiantes, which are rational.
+• The space C([a, b]) of all continuous functions on [a, b] with a metric
+d(g, f ) = max
+x∈[a,b] |g(x) − f (x)|
+contains the countable dense set of polynomials with rational coefficients.
+• Let l∞ = {bounded sequences x = (x1, . . .)| d∞(x, y) = sup
+k
+|xk − yk|}.
+l∞ is an example of a nonseparable space. Let us show that l∞ contains an uncountable dense set.
+In fact, consider the set F of all sequences consisting exclusively of zeros and ones. In this case, F has the power of the continuum, since there is a bijection between F and the set of all subsets of the set of natural numbers N: for all A ( N we associate xA = xn such that
+xn =
+{ 1, if n ∈ A, 0, if n ∈/ A.
+We note that the distance between any two points of F equals 1:
+d∞(xA, xB) = 1 if A 6= B.
+Suppose we surround each point of F by an open sphere of radius 1
+2, thereby obtaining
+an uncountably infinite family of pairwise disjoint spheres. Then if some set M is dense in l∞, there must be at least one point of M in each of the spheres. It follows that M cannot be countable and hence that l∞ cannot be separable.
+2.3 Compactness in metric spaces
+Since metric spaces are topological spaces, all results and definitions of the compactness in the topological spaces (see Definition B.1.2) hold for metric spaces as well. Let us just detail the specific properties of compactness in metric spaces.
+Since all open sets in a metric space are defined by the open balls (by their (arbitrary) union and by a finite intersection), we can update the notion of the open cover (see Definition B.1.1) in the framework of the metric spaces:
+Definition 2.3.1 Let (X, d) be a metric space containing a subset M and ǫ > 0. A set A ⊂ X is said to be an ǫ-net for the set M if,
+∀x ∈ M there is at least one point a ∈ A such that d(x, a) < ǫ.
+In particular, M can be equal to X.
+It is possible that A ∩ M = ∅, but if A is an ǫ-net for M, it is possible to construct 2ǫ-set B ⊂ M.
+
+
+2.3. Compactness in metric spaces 15
+Example 2.3.1 The set of all points with integer coordinates is a √12 -net of R2.
+Definition 2.3.2 In a metric space (X, d) a subset M is called totally bounded if for all ǫ > 0 there exists a finite ǫ-net of M.
+ai
+ǫ
+M
+Figure 2.2 – An example of a finite ǫ-net for a set M ( R2.
+Example 2.3.2 Let us illustrate the existence of a finite ǫ-net using Fig. 2.2 with an example of a (compact) set M in R2. We see that Aǫ = {a1, . . . , a6} is the ǫ-net of M and in
+particular that M ⊂ ∪i6=1Bǫ(ai).
+Remark 2.3.1 If a metric space (X, d) is totally bounded, then (X, d) is separable.
+Indeed, for all n ∈ N we have a finite 1
+n -net, denoted by An. Thus ∪n∈NAn is a countable
+dense set in X.
+We notice that:
+1. If a set M is totally bounded, then its closure M is also totally bounded.
+2. Every subset of a totally bounded set is itself totally bounded.
+Every totally bounded set is bounded, being the union of a finite number of bounded sets. The converse is not true, as shown in the following example:
+Example 2.3.3 The unit sphere S in the space l2
+S = {x = (x1, . . . , xn, . . .) ∈ l2|d2(x, 0) =
+∞
+∑
+n=1
+x2n = 1}
+
+
+16 Chapter 2. Reminders on the topology in metric and normed spaces
+is bounded but not totally bounded. In fact, let us consider in S the points
+e1 = (1, 0, 0, . . . , 0, 0, . . .),
+e2 = (0, 1, 0, . . . , 0, 0, . . .),
+........................
+en = (0, 0, 0, . . . , 1, 0, . . .),
+........................,
+where the nth coordinate of en is one and the others are all zero. The distance between any
+two points en and em (n 6= m) is √2. Hence S cannot have a finite ǫ-net with ǫ <
+√2
+2.
+Example 2.3.4 In the Euclidean space Rn, total boundedness is equivalent to boundedness. In fact, if M is bounded in Rn, then M is contained in some sufficiently large cube Q. Partitioning Q into smaller cubes of side ǫ, we find that the vertices of the little cubes form
+a finite ( √nǫ
+2 )-net for Q and hence for any set contained in Q.
+Example 2.3.5 Let P be the set of points x = (x1, x2, . . . , xn, . . .) in l2 satisfying the inequalities
+|x1| ≤ 1, |x2| ≤ 1
+2 , . . . , |xn| ≤ 1
+2n−1 , . . .
+The set P , called the Hilbert cube, gives an example of an infinite dimensional totally bounded set. Let us prove it. Given any ǫ > 0, we choose n such that
+1
+2n−1 < ǫ
+2.
+We associate each point x = (x1, . . . , xn, . . .) in P with the point
+x∗ = (x1, x2, . . . , xn, 0, 0, . . .) ∈ P. (2.4)
+Then
+d(x, x∗) =
+√ √ √ √
+∞
+∑
+i=n+1
+xi2 ≤
+√ √ √ √
+∞
+∑
+i=n
+1
+4i < 1
+2n−1 < ǫ
+2.
+The set P ∗ of all points in P of the form (2.4) is a bounded set in the n-dimentional space, and, consequently, P ∗ is totally bounded. Let A be a finite (ǫ/2)-net in P ∗. Then A is a finite ǫ-net for the whole set P .
+We give now the main theorems on the compactness in the metric spaces. The proofs can be found, for example, in [16].
+In a metric space, compact (see Definition B.1.2) and sequentially compact (see Definition B.1.5) are equivalent:
+Theorem 2.3.1 Let (X, d) be a metric space. Then a subset M is compact if and only if it is sequentially compact.
+In particular for the finite dimensional spaces there is the Theorem of Heine-Borel
+
+
+2.3. Compactness in metric spaces 17
+Theorem 2.3.2 (Heine-Borel) In Rn (or Cn ) a set is compact if and only if it is bounded and closed.
+What can we say about the infinite dimensional case? To understand it, let us prove
+Theorem 2.3.3 Let (X, d) be a compact metric space. Then X is totally bounded.
+Proof. Let X be a compact. By Theorem 2.3.1, X is sequentially compact. Let us suppose that X is not totally bounded:
+∃ǫ0 > 0 : ∄ a finite ǫ0 − net Aǫ0 of X.
+Let a1 ∈ X. Thus, there exists (at least one point) a2 ∈ X such that d(a1, a2) > ǫ0
+(otherwise a2 ∈ Aǫ0). Thus, there exists a3 ∈ X such that
+d(a1, a3) > ǫ0 and d(a2, a2) > ǫ0 (otherwise, a1, a2 ∈ Aǫ0).
+Given a1, . . . , ak, we chose ak+1 ∈ X such that
+∀i = 1, . . . , k, d(ai, ak+1) > ǫ0.
+This construction gives an infinite sequence of distinct points a1, a2, . . . in X with no limit
+points, since
+d(ai, aj) > ǫ0 if i 6= j.
+But then X cannot be sequentially compact.
+Example 2.3.6 The total boundedness is a necessary condition for a metric space to be compact (see Theorem 2.3.3), but not sufficient. For example, let
+X = {q ∈ Q|q ∈ [0, 1]}, ∀q1, q2 ∈ X d(q1, q2) = |q1 − q2|.
+The metric space (X, d) is totally bounded, but not compact. In fact, the sequence of decimal
+approximations of the irrational number √2 − 1
+0, 0.4, 0.41, 0.414, 0.4142, . . .
+is a sequence in (X, d), which does not converge in X (has no limit point in X).
+Necessary and sufficient conditions for compactness of a metric space are given by
+Theorem 2.3.4 A metric space (X, d) is compact if and only if it is totally bounded and complete.
+Proof.
+⇒
+Let (X, d) be compact. Then, by Theorem 2.3.3, (X, d) is totally bounded. Let us prove that (X, d) is complete. As (X, d) is compact, thus all sequences in (X, d) have a convergent subsequence. Let (xn) be a Cauchy sequence in X. By the compactness of X, there exists
+a subsequence (xnk) which converges to a x ∈ X. Thanks to Proposition 2.2.6 point 2, it
+implies that xn → x for n → ∞ in X. Hence, all Cauchy sequences in X converge in X,
+and thus (X, d) is complete.
+
+
+18 Chapter 2. Reminders on the topology in metric and normed spaces
+⇐
+Let (X, d) be totally bounded and complete. We want to prove that (X, d) is compact. Let (xn) be any infinite sequence of distinct points in X.
+Let us consider the 1-net of X (in X!) A1 = {y1, . . . , yn1}. By definition of a total bounded
+set, n1 is finite and X = ∪in=11B1(yi).
+Thus, there exists i0 (1 ≤ i0 ≤ n1) such that the ball B1(yi0), denoted by S1, contains an
+infinite subsequence (x(1)
+k ) of the sequence (xn).
+As S1 is a subset of a totally bounded set X, then S1 is itself totally bounded.
+Let A 1
+2 = {z1, . . . , zn2} be the 1
+2 -net of S1. Then
+n2 is finite and S1 ⊂ ∪in=21B 1
+2 (zi).
+As previously, it follows, that there exists a closed ball B 1
+2 (zj0) (1 ≤ j0 ≤ n2), denoted by
+S2, which contains an infinite subsequence (x(2)
+k ) of the sequence (x(1)
+k ).
+Let A 1
+4 be the 1
+4 -net of S2. Then there exists a closed ball S3 of radius 1
+4 containing an
+infinite subsequence (x(3)
+k ) of the sequence (x(2)
+k ).
+Continue this construction indefinitely, we find a sequence of closed balls Sn of radius 1
+2n−1
+containing an infinite number of terms of the sequence (xn).
+Let Vn be the closed ball with the same center as Sn but with a radius rn twice as large
+(i.e., equal to 2
+2n−1 ). Then clearly
+V1 ) V2 ) V3 ) . . . ) Vn ) . . .
+and moreover rn = 2
+2n−1 → 0 as n → ∞. Since X is complete, it follows (by the nested
+sphere theorem) that
+∩n∞=1Vn 6= ∅
+and thus there exists x ∈ X such that
+∩n∞=1Vn = {x}.
+Consequently, x is a limit point of the original sequence (xn), since every neighborhood of x contains some ball Sj and hence some infinite subsequence (x(j)
+k ). Therefore every infinite
+sequence (xn) of distinct points of X has a limit point in X. It follows that X is countably
+compact and hence sequentially compact and hence compact, by Theorem 2.3.1.
+For the relatively compactness (see Definition B.3.1) we have the following result:
+Theorem 2.3.5 A subset M of a complete metric space (X, d) is relatively compact if and only if it is totally bounded.
+Proof.
+We notice that M is a closed subset of a complete metric space (X, d). Thus, (M , d) is a complete metric space. Consequently, according to Theorem 2.3.4, M is compact iff M is totally bounded. Moreover, M is totally bounded iff M is totally bounded.
+
+
+2.3. Compactness in metric spaces 19
+Example 2.3.7 Any bounded subset of Rn is totally bounded and hence relatively compact (this is a version of the Bolzano-Weierstrass theorem).
+Example 2.3.8 (Relatively compact sets in C([a, b])). If (X, d) = (C([a, b]), d∞) there is a criterion for relative compactness, called Arzela’s theorem.
+Theorem 2.3.6 (Arzela’s theorem) A set Φ of continuous functions defined on a closed interval [a, b] is relatively compact in (C([a, b]), d∞) if and only if Φ is uniformly bounded:
+∃C ≥ 0 such that ∀x ∈ [a, b] and ∀φ ∈ Φ |φ(x)| < C,
+and uniformly equicontinuous:
+∀ǫ > 0 ∃δ > 0 such that 1) ∀φ ∈ Φ
+2) ∀x1, x2 ∈ [a, b] such that d(x1, x2) < δ |φ(x1)−φ(x2)| < ǫ.
+Example 2.3.9 1. Arzela’s theorem says that Φ can contain a subsequence, uniformly converging to a continuous function, but not necessary from Φ. For example, let
+Φ = {φn(x) = 1
+n | x ∈ [0, 1], n ∈ N∗}.
+Then φn(x) ⇒ 0, but 0 ∈/ Φ.
+2. Let
+Φ = {cos(nx), x ∈ [0, 1], n ∈ N}.
+Φ is uniformly bounded, since for all x and n | cos(nx)| ≤ 1, but not uniformly equicontinuous.
+Let ǫ = 1. Then
+∀δ > 0 ∃n ∈ N and ∃x1, x2 ∈ [0, 1] : | cos(nx1) − cos(nx2)| = 2 > ǫ.
+3. Let L > 0 and α ∈]0, 1] be fixed. The set
+Φ = {φ : [0, 1] → R| |φ(x1) − φ(x2)| ≤ L|x1 − x2|α}
+contains all constant functions, thus Φ is not uniformly bounded. But Φ is uniformly equicontinuous: ∀ǫ > 0 ∃δ > 0, which can be found from Lδα < ǫ, such that
+1) ∀φ ∈ Φ
+2) ∀x1, x2 ∈ [a, b] such that d(x1, x2) < δ |φ(x1) − φ(x2)| < ǫ.
+Proof of Arzela’s theorem.
+⇒
+Let Φ be a relatively compact set in C([a, b]). We recall that (C([a, b]), d∞) is a complete
+metric space. By Theorem 2.3.5,
+∀ǫ > 0 ∃ a finite ǫ
+3 − net of Φ,
+
+
+20 Chapter 2. Reminders on the topology in metric and normed spaces
+denoted by Aǫ = {φ1, . . . , φk} ( C([a, b]). Therefore, for all i = 1, . . . , k φi is bounded on
+[a, b]:
+|φi(x)| ≤ Ki.
+We denote
+K = max
+1≤i≤k Ki + ǫ
+3.
+By definition of a ǫ
+3 -net, we have
+∀φ ∈ Φ ∃φi : d∞(φ, φi) = max
+x∈[a,b] |φ(x) − φi(x)| < ǫ
+3 . (2.5)
+Then
+|φ(x)| = |φ(x) − φi(x) + φi(x)| ≤ |φ(x) − φi(x)| + |φi(x)| ≤ |φi(x)| + ǫ
+3 ≤ Ki + ǫ
+3 ≤ K.
+The inequality |φ(x)| ≤ K holds for all φ ∈ Φ and all x ∈ [a, b]. Thus Φ is uniformly bounded.
+Let us prove that Φ is uniformly equicontinuous.
+As for all i = 1, . . . , k φi are continuous on a compact [a, b] ( R functions, it follows that
+φi are uniformly continuous on [a, b]:
+∀ǫ > 0 ∃δi(ǫ) > 0 : |x1 − x2| < δi ⇒ |φi(x1) − φi(x2)| < ǫ
+3.
+We take δ = min1≤i≤k δi and for all i (1 ≤ i ≤ k) we have
+∀ǫ > 0 ∃δ(ǫ) > 0 : |x1 − x2| < δ ⇒ |φi(x1) − φi(x2)| < ǫ
+3.
+Using (2.5), we obtain for |x1 − x2| < δ
+|φ(x1) − φ(x2)| = |φ(x1) − φi(x1) + φi(x1) − φi(x2) + φi(x2) − φ(x2)|
+≤ |φ(x1) − φi(x1)| + |φi(x1) − φi(x2)| + |φi(x2) − φ(x2)| < ǫ
+3+ǫ
+3+ǫ
+3 = ǫ,
+from where it follows that Φ is uniformly equicontinuous.
+⇐
+Let Φ be uniformly bounded and uniformly equicontinuous subset of C([a, b]). Let us prove that Φ is relatively compact in C([a, b]). By Theorem 2.3.5 we need to prove that Φ is totally bounded: for all ǫ > 0 there exists a finite ǫ-net.
+From the uniform boundedness of Φ we have
+∀φ ∈ Φ, ∀x ∈ [a, b] |φ(x)| ≤ K,
+and from the uniform equicontinuity of Φ we have
+∀ǫ > 0 ∃δ > 0 : ∀φ ∈ Φ, |x1 − x2| < δ ⇒ |φ(x1) − φ(x2)| ≤ ǫ
+5.
+
+
+2.3. Compactness in metric spaces 21
+We divide the interval [a, b] along the x-axis into subintervals of length less than δ, by introducing points of subdivision x0, x1, x2, . . . , xn such that
+a = x0 < x1 < x2 < . . . < xn = b,
+and then draw a vertical line through each of these points. Similarly, we divide the interval [−K, K] along the y-axis into subintervals of length less than ǫ
+5, by introducing points of
+subdivision y0, y1, y2, . . . , ym such that
+−K = y0 < y1 < y2 < . . . < ym = K,
+and then draw a horizontal line through each of these points. In this way, the rectangle [a, b] × [−K, K] is divided into nm cells of horizontal side length less than δ and vertical side length less than ǫ
+5.
+We now associate with each function φ ∈ Φ a polygonal line y = ψ(x) which has vertices at points of the form (xk, yj) and differs from the function φ by less than ǫ
+5 at every point
+xk (see Fig. 2.3):
+∀k |φ(xk) − ψ(xk)| < ǫ
+5.
+y
+ǫ 5
+δ
+−K
+K
+0 x
+ab
+Figure 2.3 – An example of a φ ∈ Φ in red and of its approximation ψ in green.
+Since by our construction
+|φ(xk) − ψ(xk)| < ǫ
+5 , |φ(xk+1) − ψ(xk+1)| < ǫ
+5 , |φ(xk) − φ(xk+1)| < ǫ
+5,
+we find that
+|ψ(xk) − ψ(xk+1)| < 3ǫ
+5.
+Since ψ(x) is linear on [xk, xk+1], then
+∀x ∈ [xk, xk+1] |ψ(xk) − ψ(x)| < 3ǫ
+5.
+
+
+22 Chapter 2. Reminders on the topology in metric and normed spaces
+Let x ∈ [a, b] and k be such that |xk − x| = min0≤i≤n |xi − x|, i.e., let xk be the nearest
+point on the left to x for 0 ≤ k ≤ n. Then
+|φ(x) − ψ(x)| ≤ |φ(x) − φ(xk)| + |φ(xk) − ψ(xk)| + |ψ(xk − ψ(x)| < ǫ
+5+ǫ
+5 + 3ǫ
+5 = ǫ.
+Consequently, the set of polygonal lines (ψ(x)) forms an ǫ-net for Φ. But there is exists only a finite number of such lines. Therefore Φ is totally bounded.
+Analysis of the proof of Arzela’s Theorem shows that it is not really important that all functions are defined on an interval [a, b], but it is crucial that the interval [a, b] is compact in R. Thus, it holds the following Theorem (the proof is almost the same as for Arzela’s Theorem):
+Theorem 2.3.7 (Ascoli-Arzela Theorem) A set Φ of continuous complex-valued functions functions defined on a compact metric space K is relatively compact in (C(K), d∞) if
+and only if Φ is uniformly bounded and uniformly equicontinuous.
+2.4 Normed vector spaces
+2.4.1 Definition and examples
+Definition 2.4.1 Let X be a vector space and N : X → R a function. N is called a norm on X if
+1. ∀x ∈ X, N(x) = 0 ⇐⇒ x = 0
+2. ∀(x, λ) ∈ X × C, N(λx) = |λ|N(x)
+3. ∀(x, y) ∈ X × X, N(x + y) ≤ N(x) + N(y) (triangular inequality)
+If point 1 does not hold, (nevertheless, assertion 2 implies N(0) = 0) N is called a seminorm.
+Remark 2.4.1 1. Assertions 1 and 3 imply N(x) ≥ 0 for all x in X (take y = −x in assertion 3).
+2. By the mathematical induction from assertion 3, it follows that
+N (x1 + . . . + xn) ≤ N (x1) + . . . + N (xn).
+From a geometrical point of view, the last inequality can be interpeted as the length of a segment between two points x1 and x1 + x2 + . . . + xn is smaller than the length of
+the broken line based on the points yi = x1 + . . . + xi for i = 1, . . . , n (see Fig. 2.4).
+x1 x1 + . . . + xn
+x2
+Figure 2.4 – Generalized triangular inequality
+
+
+2.4. Normed vector spaces 23
+Definition 2.4.2 Let N be a norm on a vector space X. The couple (X, N) is called a normed vector space. For elements x in X N(x) is usually noted ‖x‖X .
+Example 2.4.1 1. The modulus of a linear function f : X → R is a seminorm in X:
+for x ∈ X N(x) = |f (x)| satisfies 2) and 3), but not 1) in Definition 2.4.1.
+In particular, if X = R (or C), the seminorm N(x) = |x| is a norm in X (here it is important that the dimension of X equals to 1). Thus, the notion of a norm can be considered as a generalization of the notion of modulus.
+2. In Rn ‖ · ‖lp and ‖ · ‖l∞ for 1 ≤ p < ∞ also define the norms. For p = 2 we find the Euclidean norm
+‖x‖ =
+√ √ √ √
+n
+∑
+k=1
+|xk |2 .
+3. Consider X = l∞ introduced in Example 2.2.9. For u ∈ X, define N (u) = supi∈N |ui|.
+Then N (u) is a norm on l∞.
+4. Let us consider the space of sequences lp = {x = (x1, . . .)| ∑
+i≥1 |xi|p < ∞} for
+1 ≤ p < ∞. Then ‖x‖lp = (
+∑
+i≥1 |xi|p) 1
+p is a norm on lp.
+5. For the space C([a, b]) of continuous functions on [a, b] we can consider
+N∞(f ) = ‖f ‖∞ = max
+a≤x≤b |f (x)|, Np(f ) = ‖f ‖p =
+(
+∫b
+a |f (x)|pdx
+)1
+p
+,
+where 1 ≤ p < ∞. Then the spaces (C([a, b]), N∞) and (C([a, b]), Np) are normed spaces.
+6. Let us consider the space Lip of all Lipschitz continuous functions f from a normed space X to R. We can define the norm by
+‖f ‖Lip = |f (x0)| + sup
+x6=y
+|f (x) − f (y)|
+‖x − y‖ .
+We can directly verify that
+Proposition 2.4.1 Let (X, ‖ · ‖) be a linear vector normed space. Then the ball
+Brc(0) = {x ∈ X| ‖x‖ ≤ r}
+is convex and symmetric set in X.
+Problem 2.4.1 Prove that a function N(x) : X → R is a norm if it satisfies:
+1. N(x) is a positive homogeneous function :
+N(λx) = |λ|N(x) ∀λ ∈ R.
+2. The set {x ∈ X|N(x) ≤ 1} is convex.
+
+
+24 Chapter 2. Reminders on the topology in metric and normed spaces
+3. N(x) > 0 if x 6= 0.
+(If we don’t have 3), then N is a semi-norm.)
+Remark 2.4.2 Using Problem 2.4.1, it is easy to verify that ‖ · ‖p is a norm on C([a, b]):
+|x|p for p > 1 is a positive homogeneous function, which is convex and strictly positive if x 6= 0, what implies that ‖ · ‖p is a norm.
+We can see that in the same linear vector space X we can define different norms. In the next Section we will answere the question: if there are two different norms ‖ · ‖1 and ‖ · ‖2
+on X, what about the properties of (X, ‖ · ‖1) and (X, ‖ · ‖2)?
+2.4.2 Converging sequences and continuous applications
+Let us precise the notions of the convergence and the continuity in the framework of normed spaces:
+Definition 2.4.3 1. (X, ‖ · ‖) be a normed linear vector space and (xn) be a sequence
+of elements of X. We say that (xn) converges to x ∈ X if
+d(xn, x) = ‖xn − x‖ → 0 for n → +∞.
+2. Let f be a mapping of a normed space (X, ‖ · ‖) to a normed space (Y, ‖ · ‖). The mapping f is continuous if from the convergence of xn to x in X for n → +∞ follows
+that the sequence (f (xn))n∈N converge to f (x) in Y :
+‖xn − x‖X → 0 for n → +∞ ⇒ ‖f (xn) − f (x)‖Y → 0 for n → +∞ (2.6)
+Example 2.4.2 Let (X, ‖ · ‖X) be a normed linear vector space. The norm ‖ · ‖X is a continuous function on X:
+if ‖xn − x‖X → 0 for n → +∞ ⇒ ‖xn‖X → ‖x‖X for n → +∞.
+To prove it is sufficient to notice that for all x and y in X it holds the following inequality:
+| ‖x‖X − ‖y‖X| ≤ ‖x − y‖X.
+Therefore, we have that
+| ‖x‖X − ‖xn‖X| ≤ ‖x − xn‖X
+and, since ‖x − xn‖X → 0 for n → +∞, it implies that ‖x‖X − ‖xn‖X → 0 for n → +∞.
+Remark 2.4.3 Any linear continuous mapping f : (X, ‖ · ‖X ) → (Y, ‖ · ‖Y ) is Lipschitz continuous:
+∃K ≥ 0 ‖f (x) − f (y)‖Y ≤ K‖x − y‖X ∀x, y ∈ X.
+If in addition, K < 1, f is a contraction.
+2.5 Underlying metric and topology to a normed space
+We can recognize in Example 2.4.1 the formulas of the metrics given in Example 2.1.3 written for a distance between x and 0.
+
+
+2.5. Underlying metric and topology to a normed space 25
+2.5.1 Metric and a norm
+Proposition 2.5.1 Let (X, ‖ · ‖) be a normed space. Then the function
+ρ(x, y) = ‖x − y‖ for (x, y) ∈ X × X (2.7)
+is a metric in X. Moreover, the metric ρ is absolutely homogenous, i.e.
+ρ(λx, λy) = |λ|ρ(x, y) for (x, y, λ) ∈ X × X × C, (2.8)
+and invariant by translation (see Fig. 2.5)
+ρ(x + z, y + z) = ρ(x, y). (2.9)
+x
+x
+y
+y
+z
+0
+Figure 2.5 – Translation of two vectors x and y by a vector z.
+Proposition 2.5.2 A metric d in a space X is defined by a norm in X by formula (2.7) if and only if d satisfies (2.8) and (2.9).
+Problem 2.5.1 If d satisfies (2.8) and (2.9), prove that N(x) = d(x, 0) is a norm.
+This time the closure of an open ball is equal to the coresponding closed ball:
+Proposition 2.5.3 Let (X, ‖ · ‖) be a normed space. Then
+Br(x) = Brc(x).
+Proof. See [9] p.19 (can be omitted).
+2.5.2 Equivalent norms
+Definition 2.5.1 Let ‖ · ‖1 and ‖ · ‖2 be two norms in a vector space X. The norm ‖ · ‖2
+is called stronger than the norm ‖ · ‖1 if there exists a positive constant C > 0 such that
+∀x ∈ X ‖x‖1 ≤ C‖x‖2.
+Example 2.5.1 Let us consider the space C([a, b]) of continuous functions on [a, b] with two following norms:
+‖f ‖∞ = max
+a≤x≤b |f (x)|, ‖f ‖2 =
+(
+∫b
+a |f (x)|2dx
+)1
+2
+
+
+26 Chapter 2. Reminders on the topology in metric and normed spaces
+We find that ‖ · ‖∞ is stronger than ‖ · ‖2:
+‖f ‖2 ≤
+(
+∫b
+a 1dx
+)1
+2 max
+a≤x≤b |f (x)| = √b − a‖f ‖∞.
+A stronger norm will provide a stronger topology, i.e. more open/closed sets. If there are two norms ‖ · ‖1 and ‖ · ‖2 on X and ‖ · ‖2 is stronger than ‖ · ‖1, it means that
+1. the convergence in (X, ‖ · ‖2) implies the convergence in (X, ‖ · ‖1) (but not converse!)
+2. if a set F is dense in (X, ‖ · ‖2) then F is also dense in (X, ‖ · ‖1) (but not converse!)
+Definition 2.5.2 Let ‖ · ‖1 and ‖ · ‖2 be two norms in a vector space X. The norms are
+called equivalent if there exist two positive constants c > 0 and C > 0 such that
+∀x ∈ X c‖x‖2 ≤ ‖x‖1 ≤ C‖x‖2.
+We notice that norms are equivalent iff associated balls can be included in one another (after a possible homothetic transformation).
+Theorem 2.5.1 If X is a finite-dimensional vector space dim(X) < ∞, then all norms in X are equivalent.
+Proof. Since X is a finite-dimensional vector space, there exists a basis {ui, 1 ≤ i ≤ n}
+such that for all x ∈ X there exist unique αi (i = 1, . . . , n) such that
+x=
+n
+∑
+i=1
+αiui.
+Let us denote by ‖ · ‖2 the usual Euclidean norm:
+‖x‖2 = ‖
+n
+∑
+i=1
+αiui‖2 =
+(n
+∑
+i=1
+|αi|2
+)1
+2
+.
+We want to prove that any norm ‖ · ‖ in X is equivalent to the Euclidean norm ‖ · ‖2. We
+start with the proof of the existence of c > 0 such that c‖x‖ ≤ ‖x‖2. Using the triangular
+inequality, we have that
+‖x‖ = ‖
+n
+∑
+i=1
+αiui‖ ≤
+n
+∑
+i=1
+|αi|‖ui‖.
+As for all i ‖ui‖ are positive numbers, we apply the Cauchy-Schwartz inequality in Rn,
+‖x‖ ≤
+n
+∑
+i=1
+|αi|‖ui‖ ≤
+(n
+∑
+i=1
+|αi|2
+)1
+2( n
+∑
+i=1
+‖ui‖2
+)1
+2 = ‖x‖2
+(n
+∑
+i=1
+‖ui‖2
+)1
+2
+.
+We set c = (∑in=1 ‖ui‖2)− 1
+2 and finally obtain that
+c‖x‖ ≤ ‖x‖2.
+Let us justify the existence of C > 0 such that ‖x‖2 ≤ C‖x‖. The inequality c‖x‖ ≤ ‖x‖2
+implies that if a sequence (xn) converges with respect to ‖ · ‖2, then (xn) converges with
+
+
+2.5. Underlying metric and topology to a normed space 27
+respect to ‖ · ‖ too. Consequently, the norm ‖ · ‖ is continuous in (X, ‖ · ‖2) (as application
+from X to R+) and attains its minimum m > 0 on the unit sphere
+S1(0) = {x ∈ X| ‖x‖2 = 1},
+(which is compact by the Heine-Borel theorem):
+min
+‖x‖2=1 ‖x‖ = m > 0.
+We can thus write that for ‖x‖2 = 1
+‖x‖2m = 1 · m ≤ ‖x‖. (2.10)
+Suppose now that x = y
+‖y‖2 , i. e. ‖x‖2 = 1, but y is not necessary in S1(0). Consequently,
+from (2.10) we find using the linear property of the norm that
+‖y‖2 ≤ 1
+m ‖x‖‖y‖2 = 1
+m
+∥ ∥ ∥ ∥ ∥
+y ‖y‖2
+∥ ∥ ∥ ∥ ∥
+‖y‖2 = 1
+m‖y‖ ‖y‖2
+‖y‖2
+=1
+m ‖y‖.
+Now we choose C = 1/m.
+Corollary 2.5.1 Let X be a finite-dimensional vector space. There is only one topology induced by the norms.
+2.5.3 Compactness
+There is a very important statement about the compactness of unit balls in normed spaces:
+Theorem 2.5.2 Let (X, ‖ · ‖) be a normed linear vector space of infinite dimension. Then the closed unit ball B1c(0) = {x ∈ X|‖x‖ ≤ 1} is not compact.
+To prove it, we need the following Lemma of Riesz about the quasi-perpendicular:
+Lemma 2.5.1 (Riesz, quasi-perpendicular) Let E be a closed subspace of a normed space (X, ‖ · ‖), such that E 6= X. Then
+∀ǫ ∈]0, 1[ ∃zǫ ∈/ E, ‖zǫ‖ = 1 such that d(zǫ, E) > 1 − ǫ,
+where d(zǫ, E) = infu∈E ‖zǫ − u‖.
+Remark 2.5.1 Let X = R3, E be a plane containing zero and let z ∈ X be a perpendicular vector to E with ‖z‖ = 1. Then for all u ∈ E we have (see Fig. 2.6)
+‖u − z‖ > ‖z‖ = 1.
+Proof. Let x ∈/ E (since E 6= X then ∃x ∈/ E). We denote infu∈E ‖x − u‖ = d. As x ∈/ E
+and, in addition, E is a closed subspace of X, then d > 0. Moreover, by the definition of the infinum, we have
+∀ǫ ∈]0, 1[ ∃uǫ ∈ E such that d ≤ ‖uǫ − x‖ < d
+1 − ǫ.
+We consider
+zǫ = uǫ − x
+‖uǫ − x‖ , ‖zǫ‖ = 1.
+
+
+28 Chapter 2. Reminders on the topology in metric and normed spaces
+0
+z u−z
+u E
+Figure 2.6 – For all vector u in E we have ‖u − z‖ > ‖z‖ = 1, since the length of the perpendicular z is smaller than the length of any vector u − z.
+Let us prove that zǫ ∈/ E:
+if zǫ ∈ E, then uǫ − x ∈ E and consequently, x ∈ E, what is the contradiction.
+Finally, let us prove that d(zǫ, E) > 1 − ǫ:
+for all u ∈ E
+‖zǫ − u‖ =
+∥ ∥ ∥ ∥ ∥
+uǫ − x
+‖uǫ − x‖ − u
+∥ ∥ ∥ ∥ ∥
+=1
+‖uǫ − x‖ ‖x − (uǫ − u‖uǫ − x‖)‖,
+and, since uǫ − u‖uǫ − x‖ ∈ E and, in addition, ‖x − w‖ ≥ d for all w ∈ E, we obtain
+‖zǫ − u‖ > d(1 − ǫ)
+d = 1 − ǫ.
+Let now prove Theorem 2.5.2.
+Proof (Theorem 2.5.2)
+Let y1 ∈ B1c(0) such that ‖y1‖ = 1. Suppose y1, . . . , yn−1 ∈ B1c(0) such that
+∀i ‖yi‖ = 1 and En−1 = Span(y1, . . . , yn−1), dim En−1 = n − 1 < ∞.
+Since En−1 is finite dimensional, then it is a closed proper subspace of X (En−1 6= X). By
+Riesz Lemma, it follows that
+∃yn ∈/ En−1 ‖yn‖ = 1 : ∀i = 1, . . . n − 1 ‖yi − yn‖ > 1
+2.
+Consequently, there exists a sequence (yi)i∈N ⊂ B1c(0) such that for all i 6= j it holds
+‖yi −yj‖ > 1
+2 . Therefore, the sequence (yi)i∈N does not contain any convergent subsequence,
+what implies that B1c(0) is not compact.
+The following proposition is a direct corollary of the non compactness of the balls in an infinite dimensional normed space:
+Proposition 2.5.4 A subspace E of a normed space (X, ‖ · ‖) is locally compact (the intersection of E with any closed ball in X is compact) if and only if E is finite dimensional.
+We finish with the following corollary:
+Corollary 2.5.2 Let (X, ‖ · ‖) be infinite dimensional normed space. Then all compact sets in (X, ‖ · ‖) are nowhere dense in X:
+if M is compact, then for any open ball B ⊂ X there exists a non trivial ball S ⊂ B such that S ∩ M = ∅.
+
+
+2.6. Banach spaces 29
+Proof. Let M be a compact in an infinite dimensional normed space (X, ‖ · ‖). Suppose the converse, that M is not nowhere dense in X: there exists a ball Br(a) in X such that
+any ball containing in Br(a) has a nonempty intersection with M. Let us show that in this
+case M ⊃ Br(a).
+We take x0 ∈ Br(a) and consider a sequence of balls Brn(x0) with rn = r−‖x0−a‖
+n , n ∈ N∗.
+If ‖x − x0‖ < rn, then
+‖x − a‖ ≤ ‖x − x0‖ + ‖x0 − a‖ < rn + ‖x0 − a‖ ≤ r.
+Consequently, Brn(x0) ⊂ Br(a) and then, by the assumption, for all n ∈ N∗
+Brn(x0) ∩ M 6= ∅.
+Let xn ∈ Brn(x0) ∩ M . Obviously, xn → x0 for n → +∞ in (X, ‖ · ‖). Since for all n ≥ 1
+xn ∈ M, then x0 ∈ M . Thus, Br(a) ⊂ M and hence Br(a) ⊂ M. As M is compact, then
+M and Br(a) are compact too. Therefore, using Proposition 2.5.4, the compacteness of the
+ball Br(a) implies that X is finite dimensional, contrary to the assumption.
+2.6 Banach spaces
+Definition 2.6.1 A normed vector space that is complete is called a Banach space.
+Example 2.6.1 1. Rn is a Banach space for any norm defined on it.
+2. (C([a, b], ‖ · ‖L2) is not a Banach space.
+3. (C([a, b], ‖ · ‖∞) is a Banach space (‖f ‖∞ = maxa≤x≤b |f (x)|).
+4. for p ∈ [1, ∞], Ω ⊂ Rn, Lp(Ω) with the Lp-norm is a Banach space (see Fischer-Riesz Theorem in Subsection D.1.2).
+See ’TD1’ for the proofs and more examples.
+Problem 2.6.1 Prove that the space C([0, 2]) of continuous function on [0, 2] equiped with the norm
+‖f ‖ =
+(∫ 2
+0 |f (t)|2dt
+)1
+2
+is not a Banach space.
+Indication: Consider the limit of the sequence (fn) of elements of C([0, 2]) defined by
+fn(t) =
+
+ 
+ 
+0, 0 ≤ t < 1 − 1
+n
+1 + n(t − 1), 1 − 1
+n ≤t<1
+1, 1 ≤ t ≤ 2
+.
+Definition 2.6.2 We say that
+1. ∑k∞=1 xk is convergent in X if there exists x ∈ X such that Sn → x for n → ∞ in
+X: ‖Sn − x‖X → 0 n → ∞.
+2. ∑k∞=1 xk is absolutely convergent in X if ∑k∞=1 ‖xk‖X < ∞.
+
+
+30 Chapter 2. Reminders on the topology in metric and normed spaces
+Thus it holds
+Theorem 2.6.1 The normed space (E, ‖ · ‖E) is complete if and only if every absolutely convergent series in E, i.e. xn ∈ E : ∑
+n
+‖xn‖E < ∞,
+converges in E.
+Proof. ⇒ If E is complete and (xn) is absolutely convergent, let show that the sequence
+of partial sums Sn = ∑kn=1 xk is a Cauchy sequence in E.
+Indeed, thanks to the absolute convergence,
+∀ǫ > 0 ∃n0(ǫ) ∈ N : ∀n, p > n0(ǫ)
+‖Sn+p − Sn‖E = ‖xn+1 + . . . + xn+p‖E ≤ ‖xn+1‖E + . . . + ‖xn+p‖E ≤ ǫ.
+Thus, (Sn) is a Cauchy sequence in E. As E is complete, it implies that (Sn) converges in
+E.
+⇐ To show that if every absolutely convergent series xn ∈ E converges in E then E is
+complete, first, we see that (xn) is a Cauchy sequence in E. Consequently, it is possible to
+extract for a fixed ǫ > 0 a subsequence (xnk ) such that
+‖xnk − xnk+1 ‖ ≤ ǫ
+2k .
+Indeed, we define n1 such that
+‖xn1 − xn‖ ≤ ǫ for all n ≥ n1 = n0(ǫ),
+we define n2 ≥ n1 such that
+‖xn2 − xn‖ ≤ ǫ
+2 for all n ≥ n2 = n0( ǫ
+2 ),
+and so on.
+Let also introduce the following sequence:
+y1 = xn1 ,
+y2 = xn2 − xn1 ,
+... ... ...
+yp = xnp − xnp−1 ,
+... ... ...
+Let show, thanks to the absolute convergence of (xnp), that the partial sums of the sequence
+(yn) converge in E and consequently (xnp) converges in E.
+Firstly we notice that by our construction
+Yp = y1 + y2 + . . . + yp = xnp and ‖y1‖ ≤ ǫ, ‖y2‖ ≤ ǫ
+2 , . . . , ‖yp‖ ≤ ǫ
+2p .
+
+
+2.6. Banach spaces 31
+Thus, as (xnp) is absolutely convergent,
+∞
+∑
+k=1
+yk
+is absolutely convergent too: ∞
+∑
+k=1
+‖yk‖ ≤
+∞
+∑
+k=1
+ǫ
+2k ,
+where ( ǫ
+2k ) is a geometrical sequence. By the assumption, it follows that ∑k∞=1 yk converges
+in E, which implies that
+m
+∑
+k=1
+yk = xnm → x ∈ E m → ∞.
+To conclude, we use the fact that if (xn) is a Cauchy sequence containing a convergent (in
+E) subsequence, then the sequence converges in E.
+
+
+
+
+Chapter 3
+Linear operators
+3.1 Definition of a linear continuous and bounded operator in normed spaces
+Definition 3.1.1 (Linear and densely defined operator) Let (X, ‖ · ‖) and (Y, ‖ · ‖) be two normed vector spaces. Let D be a vector subspace of X.
+A mapping A : D ⊂ X → Y is called a linear operator (or a linear function, or a linear mapping) if for all u and v in D and all λ in R
+A(u + v) = A(u) + A(v)
+A(λu) = λA(u)
+D is called the domain of A. We say that A is densely defined if D is dense in X.
+−1 −0.8 −0.6 −0.4 −0.2 0 0.2 0.4 0.6 0.8 1
+0
+0.05
+0.1
+0.15
+0.2
+0.25
+0.3
+0.35
+0.4
+Figure 3.1 – Graphe of the function g(t) = e−1/(1−t2) if |t| < 1 and 0 if |t| ≥ 1.
+Example 3.1.1 Let X = L1(R) and Y = L∞(R).
+Define g(t) = e−1/(1−t2) if |t| < 1 and 0 if |t| ≥ 1 (see Fig 3.1). The function g is in C∞
+We define the convolution operator
+F :X→Y
+f → R→R
+x 7→ ∫
+R f (y)g(x − y)dy
+,
+
+
+34 Chapter 3. Linear operators
+which can briefly be written as
+F (f ) = (f ∗ g)(x) =
+∫
+R g(x − y)f (y)dy. (3.1)
+F is a linear form or a linear functional.
+Let us justify that f ∗ g ∈ L∞(R).
+It is easy to see that g ∈ C∞(R) and bounded. Thus, g ∈ L∞(R). Therefore,
+|(f ∗ g)(x)| ≤
+∫
+R |g(x − y)||f (y)|dy ≤ max
+x∈R |g(x)|
+∫
+R |f (y)|dy ≤ ‖g‖L∞‖f ‖L1.
+Definition 3.1.2 (Bounded operator) A set X is bounded if there exists r > 0, such that X ⊂ Br(0).
+Let X and Y be two normed vector spaces. Let A : D ⊂ X → Y be a linear operator. We say that A is bounded if the image of any bounded set in X is a bounded set in Y .
+Remark 3.1.1 Linear operator A : X → Y is bounded if and only if A is bounded on a non-trivial ball Br(0) centered in 0 in X.
+Proof. If A is bounded, it is obvious that ABr(0) is bounded for all r > 0. (Note that
+ABr(0) means A applied to Br(0)).
+Suppose that A is bounded on Br(0) for a fixed r 6= 0. We proceed in two steps:
+• Let R > 0 and R 6= r. For BR(0) = λBr(0) with λ = R
+r , we see that ABR(0) is
+bounded.
+• Let M be a bounded set in X. Thus
+∃R > 0 : M ⊂ BR(0)
+and therefore, AM ⊂ ABR(0). Since ABR(0) is bounded, it implies that AM is
+bounded too.
+Proposition 3.1.1 Let X and Y be two normed vector spaces. For a linear operator A : X → Y the following assertions are equivalent:
+1. A is continuous,
+2. A is bounded,
+3. ∃C ≥ 0 : ‖Ax‖Y ≤ C‖x‖X ∀x ∈ X.
+Proof. (1) ⇒ (2) Let A be continuous. Thus, in particular, A is continuous in 0:
+∀ǫ > 0 ∃δ = δ(ǫ) > 0 : ‖x‖X ≤ δ ⇒ ‖Ax‖Y < ǫ,
+where we have used A0 = 0, since A is linear. Thus, A is bounded on Bδ(0) and hence A
+is bounded.
+(2) ⇒ (3) Let A be bounded. If x = 0 (3) is obvious. Let x 6= 0. We normalize it by introducing
+x0 = x
+‖x‖X
+⇒ ‖x0‖X = 1 ⇒ x0 ∈ B1(0).
+
+
+3.1. Definition of a linear continuous and bounded operator in normed spaces 35
+Since B1(0) is bounded, AB1(0) is bounded too. Consequently,
+∃C ≥ 0 : ‖Ax0‖Y ≤ C,
+or equivalently, by the linearity of A and the norm,
+‖Ax0‖Y =
+∥ ∥ ∥ ∥ ∥
+A
+(x
+‖x‖X
+)∥ ∥ ∥ ∥
+∥Y
+=
+∥ ∥ ∥ ∥ ∥
+1 ‖x‖X
+Ax
+∥ ∥ ∥ ∥
+∥Y
+= ‖Ax‖Y
+‖x‖X
+≤ C,
+which gives (3).
+(3) ⇒ (1) Let xn → x for n → ∞ in X . We have, due to the linearity of A, that
+‖Axn − Ax‖Y = ‖A(xn − x)‖Y ≤ C‖xn − x‖X → 0 n → ∞,
+what implies that ‖Axn − Ax‖Y → 0 for n → ∞, i.e. Axn → Ax for n → ∞ in Y .
+Remark 3.1.2 Linear operator A : (X, ‖ · ‖X) → (Y, ‖ · ‖Y ) is continuous if and only if A
+is continuous in 0.
+Problem 3.1.1 Let X and Y be two normed vector spaces. Prove that a linear operator A : X → Y is continuous on X if and only if A is continuous at 0. (Note that A0 = 0!)
+Example 3.1.2 (Linear bounded operators, Fredholm operators)
+1. Let X = Y = C([a, b]) with its usual norm: ‖f ‖C([a,b] = maxa≤x≤b |f (x)|. We define the operator A by the formula:
+f ∈ C([a, b]) 7→
+[
+t 7→ y(t) =
+∫b
+a K(t, s)f (s)ds ∈ C([a, b])
+]
+where Af = y and K, called kernel of A, is a fixed continuous function on [a, b] × [a, b]. The operator A is called the Fredholm operator.
+By its definition A is linear. Let us show that A is bounded, or equivalently, continuous:
+|y(t)| ≤
+∫b
+a |K(t, s)f (s)|ds ≤ M (b − a)‖f ‖C([a,b] ∀t ∈ [a, b],
+where we have used
+• As K is a continuous function on the compact [a, b] × [a, b], K is bounded on [a, b] × [a, b]:
+∃M > 0 |K(t, s)| ≤ M ∀(t, s) ∈ [a, b] × [a, b].
+• |f (s)| ≤ ‖f ‖C([a,b] ∀s ∈ [a, b].
+Thus, we obtain for C = M(b − a) that
+‖y‖C([a,b]) ≤ C‖f ‖C([a,b]).
+
+
+36 Chapter 3. Linear operators
+2. Let X = Y = L2(]a, b[). We define the Fredholm operator A such that
+y(t) = A(f (s)) =
+∫b
+a K(t, s)f (s)ds ∈ L2(]a, b[),
+where the kernel K ∈ L2(]a, b[×]a, b[):
+∫
+]a,b[×]a,b[ |K(t, s)|2dt ds = M 2 < ∞.
+Let us show that A is bounded, or equivalently, continuous. We use the CauchySchwartz inequality (or the Hölder inequality for p = 2):
+|y(t)| ≤
+∫b
+a |K(t, s)||f (s)|ds ≤
+√
+∫b
+a |K(t, s)|2ds
+√
+∫b
+a |f (s)|2ds.
+Therefore
+|y(t)|2 ≤
+√
+∫b
+a |K(t, s)|2ds‖f ‖2L2,
+and integrating the last inequality over ]a, b[ on t, we obtain
+‖y‖2L2 ≤
+∫b
+a
+∫b
+a |K(t, s)|2dsdt‖f ‖2L2.
+Since ‖K‖L2(]a,b[×]a,b[) = M , we conclude that
+‖y‖L2 ≤ M ‖f ‖L2.
+Example 3.1.3 (Unbounded operator)
+Let us consider
+A= d
+dt : D ( L2(]0, 2π[) → L2(]0, 2π[)
+with domain D = C1(]0, 2π[). We note that A is not defined for all f ∈ L2(]0, 2π[), but its domain D is dense in L2(]0, 2π[).
+Let us take xn ∈ D such that
+xn(t) = √12π eint, n ∈ Z.
+Then
+‖xn‖L2(]0,2π[) =
+√ √ √ √
+∫
+]0,2π[
+∣ ∣ ∣ ∣ ∣
+√12π eint
+∣ ∣ ∣ ∣ ∣
+2
+dμ = 1, ⇒ xn ∈ B1(0),
+but
+‖Axn‖L2(]0,2π[) = |n|‖xn‖L2(]0,2π[) = |n| → ∞ n → ∞.
+Therefore, A is not bounded.
+
+
+3.2. L(X, Y ): The space of linear continuous operators 37
+3.2 L(X, Y ): The space of linear continuous operators
+Proposition 3.2.1 Let X and Y be two normed vector spaces. For a linear operator A : X → Y we define:
+α = sup
+x6=0
+‖Ax‖Y ‖x‖X
+, β = sup
+‖x‖X ≤1
+‖Ax‖Y , γ = sup
+‖x‖X =1
+‖Ax‖Y ,
+δ = inf{C ∈ R+|‖Ax‖Y ≤ C‖x‖X ∀x ∈ X}.
+Then α = β = γ = δ.
+Proof. Let Mr = sup‖x‖X=r ‖Ax‖Y . Then M1 = γ and Mr = rM1 = rγ.
+1. α = γ:
+α = sup
+r>0
+sup
+‖x‖X =r
+‖Ax‖Y ‖x‖X
+= sup
+r>0
+Mr
+r = M1 = γ.
+2. β = γ: β = sup
+0<r≤1
+Mr = M1 sup
+0<r≤1
+r = M1 = γ.
+3. α = δ: Let φ(x) = ‖Ax‖Y
+‖x‖X . As φ ≥ 0, by definition of the supremum, we have
+α = sup
+x6=0
+φ(x) = inf{C ∈ R+|φ(x) ≤ C} = δ.
+Corollary 3.2.1 A linear operator A is bounded if and only if one of α, β, γ or δ is finite.
+Definition 3.2.1 (Space L(X, Y )) Let X and Y be two normed vector spaces.
+The set of linear and continuous operators from X to Y is denoted L(X, Y ).
+It is easy to verify that L(X, Y ) is a linear vector space.
+Definition 3.2.2 Let A ∈ L(X, Y ). The norm of A in L(X, Y ) is defined by
+‖A‖L(X,Y ) = sup
+x6=0
+‖Ax‖Y ‖x‖X
+= sup
+‖x‖X ≤1
+‖Ax‖Y = sup
+‖x‖X =1
+‖Ax‖Y
+= inf{C ∈ R+|‖Ax‖Y ≤ C‖x‖X ∀x ∈ X}.
+Therefore, (L(X, Y ), ‖ · ‖L(X,Y )) is a normed vector space.
+Problem 3.2.1 Prove that ‖ · ‖L(X,Y ) is a norm in L(X, Y ).
+Remark 3.2.1 L(X, X) is a normed algebra: for a product AB of linear continuous operators, defined as (AB)x = A(Bx), we have ‖AB‖ ≤ ‖A‖‖B‖ (if A and B are linear continuous, then AB is linear continuous as a composition of two linear continuous mappings).
+Theorem 3.2.1 If Y is a Banach space, then L(X, Y ) is a Banach space.
+Proof. Let (An) be a Cauchy sequence in L(X, Y ), i.e.,
+∀ǫ > 0 ∃N (ǫ) > 0 ∀m, n ≥ N (ǫ) ‖An − Am‖L(X,Y ) ≤ ǫ. (3.2)
+
+
+38 Chapter 3. Linear operators
+We need to show that there exists A ∈ L(X, Y ) such that An → A for n → ∞ in L(X, Y ).
+Let us use γ for the definition of the norm:
+‖An − Am‖L(X,Y ) < ǫ ⇔ sup
+‖x‖X =1
+‖Anx − Amx‖Y ≤ ǫ.
+Moreover, we have for all m, n ≥ N(ǫ)
+sup
+‖x‖X =1
+‖Anx − Amx‖Y ≤ ǫ ⇔ ‖Anx − Amx‖Y ≤ ǫ ∀x : ‖x‖X = 1, (3.3)
+in other words, (Anx) is a Cauchy sequence in Y . Y is a Banach space, thus (Anx) is
+convergent in Y : there exists an element y ∈ Y such that y = limn→∞ Anx. Let us note it
+as Ax: y = Ax. Then we obtain:
+1. A is linear: the limit limn→∞ is linear and An are linear for all n.
+2. An → A for n → ∞ in L(X, Y ): in (3.3) we fix x and n and pass to m → ∞, thus
+we find with the limit that
+∀n ≥ N (ǫ) ‖(An − A)x‖Y = ‖Anx − Ax‖ ≤ ǫ for ‖x‖ = 1.
+Taking a supremum on x (note that N does not depend on x!) we obtain
+‖An − A‖L(X,Y ) ≤ ǫ.
+3. A ∈ L(X, Y ): as ‖An − A‖L(X,Y ) < ǫ for n ≥ N (ǫ) then An − A is bounded for
+n ≥ N (ǫ), therefore, A = An + (A − An) ∈ L(X, Y ) as a sum of linear bounded
+operators.
+Corollary 3.2.2 If X is a Banach space, then L(X, X) is complete.
+An important corollary from the equivalence of norms in a finite dimensional space is that, given X a finite dimensional normed vector space and Y a normed vector space, all linear mapping from X to Y is continuous.
+Proposition 3.2.2 Let (X, ‖ · ‖X) be finite dimensional normed vector space and (Y, ‖ · ‖Y )
+be normed vector space. Then the space L(X, Y ) is equal to the space of all linear mappings from X to Y .
+Proof. As (X, ‖·‖X) is finite dimensional, then all norms on it are equivalent. Consequently,
+if (e1, . . . , eN ) is a base of X, we can consider in X the norm:
+‖x‖X =
+∥ ∥ ∥ ∥ ∥
+N
+∑
+i=1
+xiei
+∥ ∥ ∥ ∥
+∥X
+de=f sup
+i=1,...,N
+|xi|.
+Let A be any linear mapping of X to Y . By the linearity of A and by the triangle inequality, we find
+‖Ax‖Y =
+∥ ∥ ∥ ∥ ∥
+A
+(N
+∑
+i=1
+xiei
+)∥ ∥ ∥ ∥
+∥Y
+≤
+N
+∑
+i=1
+|xi|‖Aei‖Y ≤
+(N
+∑
+i=1
+‖Aei‖Y
+)
+‖x‖X ,
+which proves the continuity of A.
+We refer to [9] for more examples of linear but not continuous operators in infinite dimensional normed spaces (see p. 27 and 28).
+We give now the BLT-theorem (see [4] and [23] p.31):
+
+
+3.3. Bounded operators and theorem of Banach-Steinhaus 39
+Theorem 3.2.2 (BLT: Bounded Linear Transformation) Let X be a normed vector space, D be a dense subspace of X and Y be a Banach space. Let B : D ( X → Y be a densely-defined linear continuous operator. There exists a unique continuous linear operator A : X → Y that extends B and that has the same norm.
+For the proof of the BLT-theorem see TD2.
+3.2.1 Definition of the dual space
+Definition 3.2.3 A linear mapping f of a normed space X to R is called functional or a linear form on X.
+Definition 3.2.4 We note X∗ = L(X, R) the space of linear continuous functionals on X. It is called the dual space of X.
+The norm on X∗ is defined by
+∀f ∈ X∗ ‖f ‖ = sup
+x6=0
+|f (x)|
+‖x‖ .
+Remark 3.2.2 X∗ is always a Banach space (whether X is a Banach space or not).
+Definition 3.2.5 We denote the value of f ∈ X∗ on x ∈ X by 〈f, x〉 = f (x).
+3.3 Bounded operators and theorem of Banach-Steinhaus
+Proposition 3.3.1 Let X and Y be two normed spaces and A : X → Y be a linear operator. Then A is continuous if and only if fA(x) = ‖Ax‖Y is continuous on X.
+Proof. We see that
+A is continuous ⇐⇒ ∃C > 0 : ∀x ∈ X ‖Ax‖Y ≤ C‖x‖X ⇐⇒ fA(x) is bounded for ‖x‖X bounded ⇐⇒ fA(x) is continuous.
+Definition 3.3.1 (Graph of an operator) Let X and Y be two normed vector spaces and A : X → Y be a linear operator. A set
+GA = {(x, Ax)| x ∈ X} ⊂ X × Y
+is called graph of the operator A.
+Definition 3.3.2 (Closed operator) Let X and Y be two normed vector spaces and A : X → Y be linear. Then the operator A is called closed (operator), if its graph is closed (set):
+if
+(
+(xn, Axn)
+)
+n∈N ⊂ GA and for n → +∞ (xn, Axn) → (x, y) ∈ GA, then y = Ax.
+Remark 3.3.1 Operator A : (X, ‖ · ‖X) → (Y, ‖ · ‖Y ) is closed, then
+xn → x in X
+Axn → y in Y ⇒ y = Ax.
+
+
+40 Chapter 3. Linear operators
+We give the following important theorem without proof:
+Theorem 3.3.1 (Closed graph) Let X, Y be Banach spaces. Linear operator A : X → Y is continuous iff A is closed.
+Using the definition of the graph of an operator we prove the theorem of the continuous inverse operator:
+Theorem 3.3.2 (Banach, continuous inverse operator) Let X and Y be Banach spaces, A be a linear bijection X → Y and, in addition, let A be continuous. Then its inverse A−1 : Y → X is also a (linear) continuous operator.
+Proof. Let us compare two graphs:
+GA = {(x, Ax)| x ∈ X} ⊂ X × Y
+GA−1 = {(y, A−1y)| y ∈ Y } ⊂ Y × X.
+We notice that, actually, y = Ax and A−1y = x, hence (y, A−1y) = (Ax, x).
+In addition, we define the operator J : X × Y → Y × X by the formula
+J(x, y) = (y, x)
+in the way, that GA−1 = JGA. We recall (see Chapter 2) that the normed space X × Y
+has the norm ‖(x, y)‖X×Y = ‖x‖X + ‖y‖Y . By its definition, J is a bijection of two
+normed spaces, J and J−1 are continuous, and consequently, J is a homeomorphism (see Definition A.2.3).
+Since, A is continuous and X, Y are Banach spaces, then we apply the Closed graph theorem to conclude that A is closed. Therefore, GA is closed, thus, as a homeomorphism
+maps closed sets to closed sets (see Theorem A.2.4), GA−1 is also closed. Then, A−1 is
+closed. Since X and Y are Banach spaces, by the Closed graph theorem, we obtain that A−1 is continuous.
+The following notions of bounded operators which we will use in Chapter 5:
+Definition 3.3.3 Let X and Y be two normed spaces. A set of bounded linear operators (Ai)i∈I ⊂ L(X, Y ) is said to be bounded on a vector x ∈ X, if
+‖Aix‖ ≤ C ∀i ∈ I, where C = C(x) ≥ 0.
+Definition 3.3.4 A set of linear bounded operators (Ai)i∈I ⊂ L(X, Y ) is uniformly bounded if
+‖Ai‖L(X,Y ) ≤ C ∀i ∈ I.
+We notice that if (Ai)i∈I ⊂ L(X, Y ) is uniformly bounded then
+‖Aix‖Y ≤ C‖x‖X ∀x ∈ X ∀i ∈ I.
+Theorem 3.3.3 (Banach-Steinhaus) Let X be a Banach space and Y be a normed space. Let (Ai)i∈I ⊂ L(X, Y ) be a set of linear bounded operators. (Ai)i∈I is uniformly
+bounded if and only if (Ai)i∈I is bounded on all vectors x from X.
+
+
+3.4. Hahn-Banach theorem and its corollaries 41
+Proof. ⇒ Obvious.
+⇐ Let for all i ∈ I and for all x ∈ X ‖Aix‖Y ≤ C(x), where by C(x) is denoted the
+constant depending on x.
+Let
+Xn = {x ∈ X| ∀i ∈ I ‖Aix‖Y ≤ n} = ∩i∈I {x ∈ X| ‖Aix‖Y ≤ n}
+As Ai are continuous operators and by the continuity of the norm, Xn is an intersection
+of closed sets (by inverse image of continuous mappings), hence, Xn is closed in X. In
+addition, for all x ∈ X, x ∈ Xn if n ≥ C(x). In particular, ∪n∈NXn = X. Since X is a
+Banach space, by Baire’s Theorem, there exists n ∈ N such that at least one Xn contains
+a ball of positive raduis: Bǫ(x0) ⊂ Xn. We also have for all y ∈ Bǫ(0) ⊂ X that, by the
+linearity of Ai,
+‖Aiy‖Y = ‖Ai(y + x0 − x0)‖Y = ‖Ai(y + x0) − Aix0‖Y ≤ ‖Ai(y + x0)‖Y + ‖Aix0‖Y
+≤ n + ‖Aix0‖Y ≤ n + C(x0).
+We set y = ǫ x
+‖x‖X ∈ X and find
+∥ ∥ ∥ ∥ ∥
+Ai
+(
+ǫx
+‖x‖X
+)∥ ∥ ∥ ∥
+∥Y
+=ǫ
+‖x‖X
+‖Aix‖Y ≤ n + C(x0),
+and thus
+∀x ∈ X ∀i ∈ I ‖Aix‖Y ≤ ‖x‖X
+n + C(x0)
+ǫ.
+3.4 Hahn-Banach theorem and its corollaries
+We give without proof the following theorem (see [4]):
+Theorem 3.4.1 (Hahn-Banach) Let X be a real vector space and φ : X → R+ be a semi-norm. In addition, let L be a subspace of X and l : L → R be a linear functional on L such that
+l(x) ≤ φ(x) ∀x ∈ L.
+Then there exists a linear functional Λ : X → R such that
+1. Λ(x) = l(x) ∀x ∈ L (Λ|L = l)
+2. Λ(x) ≤ φ(x) ∀x ∈ X.
+There is a direct corollary of the Hahn-Banach theorem:
+Corollary 3.4.1 Given a real normed linear space X, let L be a subspace of X and l a bounded linear functional on L. Then l can be extended to a bounded linear functional Λ on the whole space X without increasing its norm, ‖l‖L(L,R) = ‖Λ‖L(X,R).
+In what follows we use three corollaries from the Hahn-Banach theorem (see TD2 for the proof in the case of a separable normed space X):
+
+
+42 Chapter 3. Linear operators
+Corollary 3.4.2 Let X be a normed vector space, x ∈ X and x 6= 0. Then there exists a linear continuous functional f ∈ X∗ such that
+‖f ‖L(X,R) = 1 and 〈f, x〉 = ‖x‖.
+Proof. We apply Corollary 3.4.1 of the Hahn-Banach theorem for L = {tx|t ∈ R} ⊂ X and f0 ∈ L∗ defined as
+f0(tx) = t‖x‖.
+We notice that
+f0(x) = ‖x‖
+and if y = tx then
+|f0(y)| = |t|‖x‖ = ‖tx‖ = ‖y‖ ⇒ ‖f0‖L(L,R) = 1.
+Therefore, by Corollary 3.4.1 of the Hahn-Banach theorem, there exists f ∈ X∗ such that f (x) = ‖x‖ and ‖f ‖ = 1.
+Corollary 3.4.3 Let X be a normed vector space, L be a subspace of X and x0 ∈/ L such
+that d(L, x0) = d > 0. Then there exists f ∈ X∗ such that
+1. f (x) = 0 ∀x ∈ L,
+2. f (x0) = 1,
+3. ‖f ‖ = 1
+d.
+Proof. Let us take L1 = L+ < x0 >, where < x0 > is a linear space constructed on x0
+taking all its linear combinations. Thus,
+∀y ∈ L1 ∃!x ∈ L and ∃!t ∈ R : y = x + tx0 ∀y ∈ L1.
+We define f0 ∈ (L1)∗ by the formula:
+f0(y) = t.
+Therefore, if y ∈ L it follows that f0(y) = 0 (thus point 1) ), and we also have f0(x0) = 1
+(thus point 2) ).
+Let us show that ‖f0‖ = 1
+d. On the one hand,
+|f0(y)| = |t| = |t|‖y‖
+‖y‖ = ‖y‖
+∥ ∥ ∥
+x
+t + x0
+∥ ∥ ∥
+≤ ‖y‖
+d,
+since ∥
+∥ ∥ ∥
+x
+t + x0
+∥ ∥ ∥
+∥ = ‖x0 −
+(
+−x
+t
+)
+‖ ≥ d (as − x
+t ∈ L).
+Hence, we find that ‖f0‖ ≤ 1
+d.
+On the other hand, we show that ‖f0‖ ≥ 1
+d.
+Since d = infx∈L ‖x0 − x‖, it follows that
+∃(xn) ∈ L such that d = nli→m∞ ‖x0 − xn‖.
+
+
+3.5. Reflexivity 43
+As
+1 = f0(x0 − xn) ≤ ‖f0‖‖x0 − xn‖,
+we obtain for n → ∞ that ‖f0‖ ≥ 1
+d.
+From ‖f0‖ ≤ 1
+d and ‖f0‖ ≥ 1
+d we conclude ‖f0‖ = 1
+d . Thanks to Corollary 3.4.1 of the
+Hahn-Banach theorem, we expand f0 to f ∈ X∗ which satisfies all three conditions.
+Corollary 3.4.4 Let X be a Banach space, L be a subspace of X. L is not dense in X if and only if ∃f ∈ X∗ f 6= 0 such that f (x) = 0 ∀x ∈ L.
+Proof.⇒ Let L be not dense in X:
+L 6= X.
+Thus, there exists x0 ∈ X such that d(x0, L) = d > 0. Applying Corollary 3.4.3,
+∃f ∈ X∗ : f (x0) = 1 (f 6= 0) and f (x) = 0 ∀x ∈ L.
+⇐ Let L = X, i.e.,
+∀x ∈ X ∃(xn) ⊂ L : xn → x n → ∞.
+Then, by the assumption,
+∃f ∈ X∗ (f 6= 0) such that f (y) = 0 ∀y ∈ L,
+from where we find, by the continuity of f , that
+∀x ∈ X f (x) = nli→m∞ f (xn) = 0 ⇒ f = 0.
+This is the contradiction with f 6= 0. Therefore, L 6= X.
+Remark 3.4.1 1. 〈f, x〉 = 0 ∀x ∈ X implies f = 0.
+2. 〈f, x〉 = 0 ∀f ∈ X∗ implies x = 0.
+Proof Let’s assume the converse. If x 6= 0, by Corollary 3.4.2, there exists f ∈ X∗ such that f 6= 0 and 〈f, x〉 = ‖x‖ 6= 0. It is the contradiction.
+Remark 3.4.2 Can we consider the notation 〈f, x〉 as an “inner product” between elements of two spaces X∗ and X? It is obvious bilinear and continuous with respect to x ∈ X. Is it continuous with respect to f too?
+3.5 Reflexivity
+Definition 3.5.1 The bidual space of X is noted by X∗∗ and defined by
+X∗∗ = (X∗)∗.
+It is the normed space of a linear continuous functional from X∗ to R with the norm:
+‖F ‖L(X∗,R) = sup
+f ∈X∗,‖f ‖L(X,R)≤1
+|〈F, f 〉|.
+
+
+44 Chapter 3. Linear operators
+Let us fix x ∈ X. Then for f ∈ X∗ the mapping Fx : X∗ → R such that f 7→ 〈f, x〉 is a
+linear continuous functional on X∗.
+There is a natural injection Φ from X to X∗∗. Given x ∈ X, associate Φ(x) = Fx ∈ X∗∗
+defined by a linear continuous functional on X∗: Fx : f ∈ X∗ 7→ 〈f, x〉 ∈ R. Thus we have
+the equality:
+〈Fx, f 〉X∗∗,X∗ = 〈f, x〉X∗,X ∀x ∈ X, ∀f ∈ X∗.
+The notation 〈x, y〉X,Y means that x ∈ X, y ∈ Y and 〈x, y〉 = x(y).
+Proposition 3.5.1 Let X be a normed space. Then the natural injection Φ : X → X∗∗ is a linear isometric (thus continuous) operator.
+Proof. The linearity is obvious. Let us prove that
+‖Fx‖X∗∗ = ‖x‖X .
+We find that
+‖Fx‖X∗∗ = sup
+‖f ‖≤1
+|〈Fx, f 〉| = sup
+‖f ‖≤1
+|〈f, x〉| = ‖x‖X.
+We need to justify that sup‖f‖≤1 |〈f, x〉| = ‖x‖X.
+Let x 6= 0. We see that
+sup
+‖f ‖≤1
+|〈f, x〉| ≤ ‖x‖X ⇐⇒ sup
+x6=0
+|〈f, x〉| ‖x‖X
+≤ 1 ⇐⇒ |〈f, x〉| ≤ ‖x‖X.
+In addition, thanks to Corollary 3.4.2,
+∀x0 ∈ X ∃f0 ∈ X∗ : ‖f0‖ = 1 〈f0, x0〉 = ‖x0‖.
+Thus, sup‖f‖≤1 |〈f, x〉| = ‖x‖X.
+As Φ is isometric, it means that X ≈ Φ(X) ⊂ X∗∗, where Φ(X) is a subspace of X∗∗. If Φ is surjective (and then bijective), X and X∗∗ can be identified.
+Definition 3.5.2 We say that X is reflexive if Φ(X) = X∗∗. In this case we write X = X∗∗ understanding the isometric equivalence.
+Example 3.5.1 1. Rn is a reflexive space.
+2. lp and Lp for 1 < p < ∞ are reflexive spaces (see Appendix D for the proof).
+3. Let c0 be the space of all sequences x = (x1, . . . , xk, . . .) converging to zero, with the norm (see Chapter 2)
+‖x‖ = sup
+k
+|xk|.
+Then the space c∗0 is isomorphic to the space l1 of all absolutely summable sequences.
+So c∗0 = l1, and (l1)∗ = l∞. Therefore, c0 6= c∗0∗.
+4. L∞ and L1 are not reflexive spaces (see Appendix D for the proof).
+Let us mention without proof the following results (see [4] for the proof):
+
+
+3.5. Reflexivity 45
+Theorem 3.5.1 Let X be a Banach space. X is reflexive if and only if X∗ is reflexive.
+Definition 3.5.3 (Uniformly convex) A Banach space X is uniformly convex if for all ǫ > 0, there exists δ > 0 such that
+∀x ∈ X and y ∈ X : ‖x‖ ≤ 1, ‖y‖ ≤ 1 and ‖x − y‖ > ǫ ⇒ ‖x + y‖
+2 < 1 − δ.
+Theorem 3.5.2 (Milman-Pettis) Let X be a uniformly convex Banach space. Then X is reflexive.
+
+
+
+
+Chapter 4
+Hilbert spaces
+4.1 Sesquilinear and bilinear forms
+A vector space X can be defined on C or on R. If it is not specified, that X is a real vector space, it is supposed that X is defined on C. However, there is some difference in the terminology for the real and the complex spaces. For instance,
+Definition 4.1.1 A mapping A : X → Y of a complex vector space X to a complex vector space Y is called antilinear if A satisfies
+∀λ, μ ∈ C ∀x, y ∈ X A(λx + μy) = λA(x) + μA(y).
+Definition 4.1.2 (Real vector space) Let X be a vector space on R. We call bilinear form on X a function a : X × X → R such that, for all u, v, w in X and λ, μ in R, we have:
+1. a(λu + μv, w) = λa(u, w) + μa(v, w),
+2. a(u, λv + μw) = λa(u, v) + μa(u, w).
+It is symmetric if a(u, v) = a(v, u) for all u, v in X.
+Definition 4.1.3 (Complex vector space) Let X be a vector space on C. We call sesquilinear form on X a function a : X × X → C such that, for all u, v, w in X and λ, μ in C, we have:
+1. a(λu + μv, w) = λa(u, w) + μa(v, w),
+2. a(u, λv + μw) = λa(u, v) + μa(u, w).
+Definition 4.1.4 Let X be a vector space on C or R. A sesquilinear/bilinear form is positive if a(u, u) ≥ 0 for all u in X.
+It is definite positive if a(u, u) > 0 for all u in X \ {0}.
+It is hermitian if a is sesquilinear and if a(u, v) = a(v, u) for all u, v in X. In particular, a(u, u) is real for all u ∈ X.
+
+
+48 Chapter 4. Hilbert spaces
+Example 4.1.1 Let us consider the space L2(]a, b[).The function:
+a(u, v) =
+∫
+]a,b[ uvdμ ∀(u, v) ∈ L2(]a, b[) × L2(]a, b[)
+is a bilinear form, which is symmetric, positive and definite positive, since ‖u‖2L2 = a(u, u).
+Definition 4.1.5 Let X be a vector space on C (respectively on R).
+We call inner product on X, a definite positive hermitian (respectively symmetric bilinear) form on X. We usually note it 〈u, v〉 or (u, v).
+We say that u and v are orthogonal if 〈u, v〉 = 0 and we note u ⊥ v.
+Problem 4.1.1 Let X = Rn and a(x, y) = ∑in,j=1 aijxiyj be a bilinear form associated to
+the real matrice A = (aij)i,j=1,...,n:
+a(x, y) =
+n
+∑
+i,j=1
+aijxiyj = 〈Ax, y〉,
+where 〈x, y〉 = ∑in=1 xiyi is the inner product in Rn (prove it!).
+Prove that
+1. a is symmetric iff A is symmetric, i.e. A = At.
+2. a is an inner product in Rn iff A is strictly positive defined:
+∀x ∈ Rn ∃α > 0 : 〈Ax, x〉 ≥ α〈x, x〉, and 〈Ax, x〉 = 0 ⇐⇒ x = 0.
+Remark 4.1.1 If 〈·, ·〉 is an inner product on a vector space X, then
+‖u‖ = √
+〈u, u〉 ∀u ∈ X
+is a norm on X. All inner products 〈·, ·〉 are associated with a norm ‖u‖ defined as
+√
+〈u, u〉.
+The converse is not true at all times:
+A norm ‖ · ‖X is associated with an inner product iff it satisfies the parallelogram law:
+‖f + g‖2X + ‖f − g‖2X = 2(‖f ‖2X + ‖g‖2X) ∀(f, g) ∈ X × X. (4.1)
+In this case, the norm ‖·‖X defines the inner product which can be introduced by the formula:
+〈f, g〉 = 1
+4(‖f + g‖2X − ‖f − g‖2X) + i
+4 (‖x + iy‖2 − ‖x − iy‖2),
+where i = √−1.
+See, for example,[23] p.27.
+We add the usual definitions of parallel vectors and normalized vectors:
+
+
+4.1. Sesquilinear and bilinear forms 49
+Definition 4.1.6 Let X be a vector space on R with an inner product 〈·, ·〉.
+We say that u ∈ X and v ∈ X are collinear if there exists λ ∈ R such that u = λv.
+We say that u ∈ X is normalized or unit if ‖u‖ = √
+〈u, u〉 = 1.
+Theorem 4.1.1 (Pythagorean theorem) Let X be a vector space with an inner product 〈·, ·〉. If 〈u, v〉 = 0, then for the norm defined by the inner product (‖u‖ = √
+〈u, u〉) we have
+‖u + v‖2 = ‖u‖2 + ‖v‖2.
+Proof. Using the properties of the inner product, we find
+‖u + v‖2 = 〈u + v, u + v〉 = 〈u, u + v〉 + 〈v, u + v〉
+= 〈u, u〉 + 〈u, v〉 + 〈v, u〉 + 〈v, v〉 = ‖u‖2 + ‖v‖2,
+since 〈u, v〉 = 〈v, u〉 = 0.
+x
+u
+0
+x⊥
+P (x)
+Figure 4.1 – Projection of x (in red) on the direction of u (in blue). x⊥ is in black and P (x) is in green.
+Definition 4.1.7 Let X be a vector space with an inner product 〈·, ·〉.
+Let u be a normalized vector in X. Then we say that P (x) (P : X → X, x 7→ P (x)) is a projection of x ∈ X on the direction defined by u (see Fig. 4.1) if:
+1. x⊥ = x − P (x) ⊥ u,
+2. P (x) = λu.
+In addition, we find that λ = 〈x, u〉:
+〈u, x⊥〉 = 〈u, x − λu〉 = 〈u, x〉 − λ〈u, u〉 = 〈u, x〉 − λ = 0 ⇐⇒ λ = 〈u, x〉.
+Let us also introduce the definition of an orthogonal subspace:
+Definition 4.1.8 Given U a subspace of X, the orthogonal of U is the set of vectors of X that are orthogonal to all of the vectors in U. It is noted U⊥.
+Given U and V two subspaces of X, we say theses spaces are orthogonal if for any u in U and any v in V , one has u ⊥ v.
+
+
+50 Chapter 4. Hilbert spaces
+Remark 4.1.2 We will see later that for all subsets U of X, its orthogonal U⊥ is a closed vector subspace of X.
+4.2 Pre-Hilbert spaces
+4.2.1 Main properties and definitions
+Definition 4.2.1 A Pre-Hilbert space (or inner product space) is a vector space with an inner-product.
+Example 4.2.1 1. Let us consider for p ≥ 1 the normed vector space lp of infinite sequences x = (a1, a2, . . .) with the norm (see Chapter 2)
+‖x‖lp =
+( ∑
+k
+|ak |p
+)1
+p
+< ∞.
+Using the parallelogram law (4.1), we can show that the norm ‖ · ‖lp is associated to
+an inner product only for p = 2:
+Let us take two sequences in lp
+f = (1, 1, 0, 0, . . . , 0, . . .) and g = (1, −1, 0, 0, . . . , 0, . . .).
+Thus,
+f + g = (2, 0, 0, . . . , 0, . . .) and f − g = (0, 2, 0, . . . , 0, . . .)
+‖f ‖lp = ‖g‖lp = 2 1
+p and ‖f + g‖lp = ‖f − g‖lp = 2.
+Equation (4.1) becomes
+4 + 4 = 4 · 22
+p ⇐⇒ p = 2.
+We conclude that only l2 can be a Pre-Hilbert space. In addition we verify that
+〈x, y〉 = ∑ aibi, where x = (a1, a2, . . .) ∈ l2
+y = (b1, b2, . . .) ∈ l2 ,
+is an inner product. Let us also notice that l2 is complete.
+2. In analogous way, Lp([a, b]) space for p ≥ 1 is a Pre-Hilbert space iff p = 2. The inner product in L2([a, b]) is given by
+〈f, g〉 =
+∫
+[a,b] f gdμ ∀(f, g) ∈ L2([a, b]) × L2([a, b]).
+L2([a, b]) is also an example of a complete Pre-Hilbert space.
+
+
+4.2. Pre-Hilbert spaces 51
+3. The space C([0, π
+2 ]) of all continuous functions on [0, π
+2 ] with the norm
+‖f ‖ = max
+0≤t≤ π
+2
+|f (t)|
+is not a Pre-Hilbert space (take f (t) = cos t and g(t) = sin t, then ‖f ‖ = ‖g‖ = 1,
+‖f + g‖ = √2, ‖f − g‖ = 1, and consequently, (4.1) fails), but it is a Banach space.
+4. The space C([0, π
+2 ]) of all continuous functions on [0, π
+2 ] with the norm
+‖f ‖ =
+(
+∫π
+2
+0 |f (t)|2dt
+)1
+2
+is not complete, but it is a Pre-Hilbert space with the inner product
+〈f, g〉 =
+∫π
+2
+0 f (t)g(t)dt.
+Theorem 4.2.1 (Cauchy-Schwartz-Bunjakowski) Let E be a Pre-Hilbert space. Then it holds
+|〈x, y〉| ≤ ‖x‖‖y‖ ∀(x, y) ∈ E × E, (4.2)
+where ‖x‖ = √
+〈x, x〉.
+Proof. Let us prove it for a real Pre-Hilbert space E. The proof for a complex Pre-Hilbert space E can be found in [9] p. 187. Thus for all λ ∈ R
+〈x − λy, x − λy〉 = ‖x‖2 − 2λ〈x, y〉 + λ2‖y‖2 ≥ 0
+⇐⇒ ∆ = |〈x, y〉|2 − ‖x‖2‖y‖2 ≤ 0,
+which gives directely that |〈x, y〉| ≤ ‖x‖‖y‖. Here we have considered
+‖x‖2 − 2λ〈x, y〉 + λ2‖y‖2 ≥ 0
+as a quadratique function of λ.
+The Cauchy-Schwartz-Bunjakowski inequality has two important corollaries:
+Corollary 4.2.1 Let E be a Pre-Hilbert space and for all x ∈ E ‖x‖ = √
+〈x, x〉. Then the ‖ · ‖ of x ∈ E can be also found by the formula
+‖x‖ = max
+‖y‖=1 |〈x, y〉|.
+Proof. Set ‖y‖ = 1. By Theorem 4.2, we have
+|〈x, y〉| ≤ ‖x‖‖y‖ = ‖x‖ ∀x ∈ X,
+i.e., |〈x, y〉| is bounded by ‖x‖.
+Let us take now y = x
+‖x‖ for x 6= 0. We find the equality:
+〈x, x〉
+‖x‖ = ‖x‖.
+Thus ‖x‖ is the maximum of |〈x, y〉| over all y, such that ‖y‖ = 1.
+
+
+52 Chapter 4. Hilbert spaces
+Problem 4.2.1 Let E be a Pre-Hilbert space. Prove (using Corollary 4.2.1) that the function
+‖x‖ = √
+〈x, x〉
+is a norm in E. Therefore, each Pre-Hilbert space is a normed space.
+Corollary 4.2.2 The inner product is continuous as a function of variables of 〈x, ·〉, 〈·, y〉 and as a function of two variables: 〈·, ·〉, i.e. if xn → x and yn → y in E, then 〈xn, yn〉 → 〈x, y〉.
+Problem 4.2.2 Prove Corollary 4.2.2.
+Proposition 4.2.1 Let X be a Pre-Hilbert space.
+A sesquilinear (respectively bilinear) form a : X × X → C (respectively R) is continuous if there exists a constant C > 0 such that
+∀(x, y) ∈ X, |a(x, y)| ≤ C‖x‖‖y‖.
+Problem 4.2.3 Prove Proposition 4.2.1.
+Note that a sesquilinear (bilinear) form is always continuous if X has a finite dimension.
+Definition 4.2.2 Let X be a Pre-Hilbert space. We say that a sesquilinear (bilinear) form a : X × X → C (R) is coercive (or elliptic) if there exists a constant α > 0 such that
+∀x ∈ X a(x, x) ≥ α‖x‖2.
+Remark 4.2.1 A coercive sesquilinear (bilinear) form is definite positive.
+4.2.2 Fourier series and orthonormal systems in a Pre-Hilbert space
+Definition 4.2.3 Let X be a Pre-Hilbert space. Let {vi, i ∈ I} be a family of elements of X. We say this family is orthogonal if
+∀i ∈ I, j ∈ I, i 6= j, 〈vi, vj〉 = 0.
+We say this family is orthonormal if, additionally,
+∀i ∈ I, 〈vi, vi〉 = 1.
+Example 4.2.2 Let X = l2. Let us define for i ∈ N the sequence vi = (0, . . . , 0, 1, 0, . . .),
+where only one coordinate of vi, the coordinate number i is not zero and equal to 1. The
+sequence (vi)i∈N is an orthonormal family in l2.
+Definition 4.2.4 Let {vi, i ∈ I} be an orthonormal system in a Pre-Hilbert space X. Let f ∈ X. The numbers
+ci = 〈f, vi〉, i ∈ I, (4.3)
+are called Fourier coefficients of f with respect to the system {vi, i ∈ I}.
+The series ∑
+i∈I civi is called the Fourier series of f with respect to the system {vi, i ∈ I}.
+
+
+4.2. Pre-Hilbert spaces 53
+Remark 4.2.2 In what follows we will answer to the question:
+When does the Fourier series of f converge to f in X?
+Let us show that the Fourier coefficients of f minimise the distance between f and the finite dimentional subspace Sn = Span(v1, . . . , vn), i.e. g = ∑in=1 civi is the orthogonal projection of f on Sn.
+Any element of Sn can be written as sn = ∑in=1 αivi for some αi ∈ R.
+As (vi)i∈N is orthonormal system in X, we explicitly find
+‖f − sn‖2 = 〈f −
+n
+∑
+k=1
+αkvk, f −
+n
+∑
+j=1
+αj vj 〉
+= 〈f, f 〉 − 2〈f,
+n
+∑
+k=1
+αkvk〉 + 〈
+n
+∑
+k=1
+αk vk ,
+n
+∑
+j=1
+αj vj 〉
+= ‖f ‖2 − 2
+n
+∑
+k=1
+αkck +
+n
+∑
+k=1
+|αk|2
+= ‖f ‖2 −
+n
+∑
+k=1
+|ck|2 +
+n
+∑
+k=1
+|αk − ck|2,
+from where follows the result
+0 ≤ d(f, Sn)2 = min
+αk∈R ‖f −
+n
+∑
+k=1
+αkvk‖2 = ‖f −
+n
+∑
+k=1
+〈f, vk〉vk‖2 = ‖f ‖2 −
+n
+∑
+k=1
+|〈f, vk〉|2.
+Therefore, n
+∑
+i=1
+|ci|2 ≤ ‖f ‖2
+independently of n. Thus, for n → +∞ we obtain the Bessel inequality:
++∞
+∑
+i=1
+|ci|2 ≤ ‖f ‖2. (4.4)
+Let us also notice
+Corollary 4.2.3 1. Let c1, . . . , cn, . . . be a numerical sequence. The necessary condition for the numerical sequence to be a sequence of Fourier coefficients for an element
+f ∈ X, is that
++∞
+∑
+i=1
+|ci|2 < ∞.
+2. Let (ci)i∈N be a sequence of Fourier coefficients for an element f ∈ X with respect to
+the orthonormal system {vi, i ∈ N}. Then ci → 0 for i → +∞.
+Remark 4.2.3 The second point of Corollary 4.2.3 follows from the convergence of
++∞
+∑
+i=1
+|ci|2 < ∞.
+To prove the existence of the limit of the Fourier series, we need to have a complete PreHilbert space, i.e., a Hilbert space.
+
+
+54 Chapter 4. Hilbert spaces
+4.3 Hilbert spaces
+Definition 4.3.1 A Hilbert space is a complete Pre-Hilbert space.
+Subsequently, a Hilbert Space is a Banach space with an inner product. We recall the relations between different spaces in Fig. 4.2
+Figure 4.2 – Recap of the different types of spaces. The notation A → B means that A is more general that B and that B is a particular case of A.
+Example 4.3.1 Rn, L2, l2 are Hilbert spaces.
+4.4 Hilbertian basis
+All results of this section are true for the complex Hilbert spaces. For the clearity, all proofs are given for the real case.
+Definition 4.4.1 (Hilbertian basis) Let H be a Hilbert space. Let e = {ei, i ∈ I} be an orthonormal system in H. The system e is called a basis of H, if
+∀u ∈ H u = ∑
+i∈I
+〈u, ei〉ei,
+where 〈u, ei〉 = ci are the Fourier coefficients of u with respect to e.
+Remark 4.4.1 In Definition 4.4.1 the sum is finite or countable.
+Contrary to the basis in an finite dimentional vector space, u does not need to be equal to a linear combination of elements of the basis. But u needs to be approached (as close as desired) by a linear combination of elements of the basis:
+∥ ∥ ∥ ∥ ∥
+n
+∑
+i=1
+〈u, ei〉ei − u
+∥ ∥ ∥ ∥
+∥H
+→ 0 for n → +∞,
+where ‖u‖H = √
+〈u, u〉H.
+
+
+4.4. Hilbertian basis 55
+Corollary 4.4.1 Let H be a Hilbert space. Let e = {ei, i ∈ I} be an orthonormal system in H. The system e is an orthonormal basis in H iff it holds the Parseval equality:
+∀u ∈ H ∑
+i∈I
+|〈u, ei〉|2 = ‖u‖2.
+Proof. Let e be an othonormal basis in H, i.e.,
+∀u ∈ H u = ∑
+i∈N
+〈u, ei〉ei.
+We take the inner product of the lust equality with u and thus obtain the Parseval equality. Let now e be an orthonormal system in H such that
+∀u ∈ H ∑
+i∈N
+|〈u, ei〉|2 = ‖u‖2.
+It means (see Pythagorean Theorem 4.1.1) that
+‖u − ∑
+i∈N
+〈u, ei〉ei‖2 = ‖u‖2 − ∑
+i∈N
+|〈u, ei〉|2 = 0,
+which implies that u = ∑
+i∈N〈u, ei〉ei in H.
+Remark 4.4.2 Let us notice that for all subset e ⊂ H of a Hilbert space H we always have
+1. e⊥ = Span(e)⊥
+2. Span(e) ⊕ e⊥ = H (see Definition 4.5.2).
+Definition 4.4.2 Let H be a Hilbert space. Let e = {ei, i ∈ I} be an orthonormal system
+in H. We say that e is total if Span(e) is dense in H:
+Span(e) = H.
+Theorem 4.4.1 Let H be a Hilbert space.
+For an orthonormal system e = {ei, i ∈ I} in H the following assertions are equivalent:
+1. e is total,
+2. e⊥ = {0} :
+∀i ∈ I 〈ei, x〉 = 0 ⇒ x = 0, (4.5)
+3. e is an orthonormal basis.
+Proof. See the proof in the general case, presented by Theorem C.2.1.
+Definition 4.4.3 Hilbert space H is called isometric (or unitary equivalent) to an Hilbert space Z if there exists a surjective isometry B : H → Z.
+Remark 4.4.3 For Hilbert spaces H and Z a surjective isometry B is a linear bijective operator which preserves the inner product:
+∀(x, y) ∈ H × H 〈x, y〉H = 〈Bx, By〉Z.
+Theorem 4.4.2 Let H be a separable Hilbert space (see Section 2.2.6). Then
+
+
+56 Chapter 4. Hilbert spaces
+1. There exists an orthonormal countable basis.
+2. The real Hilbert space H is isometric to Rn if the dimension of H is finite and equal to n. If H is an infinite dimentional space, H is isometric to l2. (If the Hilbert space is complex, it is isometric to Cn for the finite dimentional case, or to the complex space l2 for the infinite dimentional case.)
+Proof.
+1. There exists an orthonormal countable basis: Let v = {v1, . . . , vn, . . .} be a countable
+set dense in H (it exists since H is separable.) Let us take a maximal subset f = {vn1, vn2, . . .} of linear independant elements of v (∑
+i αivni = 0 ⇒ ∀i αi = 0.)
+We can construct f in the following way:
+n1 = min{i : vi 6= 0},
+n2 = min{i : vi ∈/ Span(vn1)},
+n3 = min{i : vi ∈/ Span(vn1, vn2)},
+...
+If f is a maximal subset of linear independant elements of v, then
+Span(v) = Span(f ) and Span(f ) = H,
+since v is dense in H. Let us orthogonalize f by the orthogonalization of GrammSchmitt. We denote fk = vnk . Thus we define
+e1 = f1
+‖f1‖ ⇒ ‖e1‖ = 1,
+e2 = f2 − 〈f2, e1〉e1
+‖f2 − 〈f2, e1〉e1‖ ⇒ ‖e2‖ = 1 and e2 ⊥ e1,
+...
+en = fn − ∑n−1
+j=1 〈fn, ej〉ej ‖fn − ∑n−1
+j=1 〈fn, ej〉ej‖ ⇒ ‖en‖ = 1 and en ⊥ {e1, . . . , en−1}
+...
+We obtain the orthonormal system e = {e1, e2, . . .}, such that Span(f ) = Span(e),
+and therefore, Span(e) = H. It means that e is a closed, thus total, orthonormal system in H. Consequently, e is an orthonormal basis of H.
+2. H is isometric to Rn or l2: We know that l2 is a Hilbert space with the inner product
+〈x, y〉 = ∑ xiyi, where x = (x1, x2, . . .) ∈ l2
+y = (y1, y2, . . .) ∈ l2 .
+We suppose in our proof that l2 and H are real vector spaces.
+Since H is separable, by the first point of the Theorem, there exists an orthonormal countable basis e = {e1, e2, . . .} such that
+∀f ∈ H f =
+∞
+∑
+i=1
+〈f, ei〉ei.
+
+
+4.4. Hilbertian basis 57
+The sequence of the Fourier coefficients of f , denoted by
+cf = (〈f, ei〉)i∈N∗,
+and which is uniquely defined for all f ∈ H, is an element of l2: by the Bessel inequality ∑i∞=1 |〈f, ei〉|2 < ∞. Thus, for all f ∈ H there exists unique cf ∈ l2.
+The converse is also true: by Lemma C.1.3, for all elements c in l2 there exists a unique element y ∈ H.
+Let us define an operator
+F : H → l2 ∀f ∈ H F (f ) = cf .
+We have proved that F is a bijection. Let us prove that
+∀(f, g) ∈ H × H 〈f, g〉H = 〈F (f ), F (g)〉l2 = 〈cf , cg〉l2 = ∑
+i
+〈f, ei〉〈g, ei〉.
+For (f, g) ∈ H × H we have
+f=
+∞
+∑
+i=1
+〈f, ei〉Hei, g =
+∞
+∑
+j=1
+〈g, ej〉H ej,
+from where
+〈f, g〉H = 〈
+∞
+∑
+i=1
+〈f, ei〉H ei,
+∞
+∑
+j=1
+〈g, ej〉Hej〉 =
+∞
+∑
+i=1
+〈f, ei〉〈g, ei〉.
+Let us give some examples of Hilbertian basis:
+Example 4.4.1 1. In l2 the set of sequences
+e1 = (1, 0, 0, . . . , 0, 0, . . .),
+e2 = (0, 1, 0, . . . , 0, 0, . . .),
+........................
+en = (0, 0, 0, . . . , 1, 0, . . .),
+........................,
+where the nth coordinate of en is one and the others are all zero, is an orthonormal basis.
+2. For n ∈ N∗ functions
+1, cos x, sin x, cos 2x, sin 2x, . . . , cos nx, sin nx, . . .
+is an orthogonal basis (which can be normalized) of L2([−π, π]).
+3. Chebyshev’s polynomials
+Tn(x) =
+√2
+π cos(n arccos x), n ∈ N∗
+form an orthonormal basis in the space X = {f | f2
+√1−x2 ∈ L1([−1, 1])} endowed with
+
+
+58 Chapter 4. Hilbert spaces
+the following inner product:
+〈f, g〉 =
+∫
+[−1,1]
+f (x)g(x)
+√1 − x2 dx.
+4. Hermite’s polynomials
+Hn(x) = (−1)nex2 dn
+dxn
+(
+e−x2 )
+, n ∈ N∗
+form an orthonormal basis in the space X = {f | e−x2f 2 ∈ L1(R)} endowed with the following inner product:
+〈f, g〉 =
+∫
+R e−x2f gdx.
+Remark 4.4.4 When we write ∫
+Ω f (x)dx, it means that it is the Lebesgue integral of f
+over Ω.
+Problem 4.4.1 Prove that the set of all polynomials with rational coefficients on ]a, b[ is dense in the set of all polynomials with real coefficients on ]a, b[, which is dense in L2(]a, b[).
+Example 4.4.2 Since L2 is separable, L2 is isometric to l2.
+4.5 Orthogonal projection
+We refer to Definition 2.1.3 of the distance between a set and a point in a metric space. See also Remark 2.1.2.
+We also recall:
+Definition 4.5.1 Let X be a vector space. A ⊂ X is convex if
+∀(x, y) ∈ A × A Ax,y = {z = tx + (1 − t)y : 0 ≤ t ≤ 1} ⊂ A.
+See Fig. 4.3 for an example of a convex and non convex sets.
+AB
+Figure 4.3 – Example of a convex set A and a non convex set B. Red lines represent Ax,y and Bx,y for fixed x and y.
+Theorem 4.5.1 (Projection) Let H be a Hilbert space and A ( H be convex and a closed subset of H. Then for all x ∈ H there exists a unique x∗ ∈ A, called the projection of x on A, such that ‖x − x∗‖ = d(x, A).
+
+
+4.5. Orthogonal projection 59
+Proof. Existence
+Let δ = d(x, A) = infy∈A d(x, y). By definition of infinimum, we have
+∃(xn)n∈N ∈ A : d(x, xn) ց δ
+or equivalently, ∃(ǫn)n∈N ∈ R+ : d(x, xn) = δ + ǫn, and ǫn ց 0.
+Without loss of generality, let us suppose that x = 0. (We move all by the vector −x and
+instead of A we consider A ̃ = A − x, as it is shown in Figure 4.4).
+A A ̃ = A − x
+0
+x
+−x
++x
+xn x ̃n = xn − x
+Figure 4.4 – Moving of A and x on the vector −x.
+For x = 0 we have that d(0, xn) = ‖xn‖ ց δ. Using the parallelogram law (4.1), we find
+that
+‖xn − xm‖2 = 2(‖xn‖2 + ‖xm‖2) − ‖xn + xm‖2.
+We can write
+‖xn‖2 = δ2 + ǫ′n, ‖xm‖2 = δ2 + ǫ′m, for ǫ′n ց 0.
+Let us now estimate the term ‖xn + xm‖2.
+Since A is convex, it follows that
+∀(x, y) ∈ A × A ⇒ z = x + y
+2 ∈ A.
+Thus,
+∥ ∥ ∥ ∥
+xn + xm 2
+∥ ∥ ∥ ∥
+2
+≥ δ2 ⇒ −‖xn + xm‖2 ≤ −4δ2.
+Therefore, we can estimate
+‖xn−xm‖2 = 2(‖xn‖2+‖xm‖2)−‖xn+xm‖2 ≤ 4δ2+2ǫ′n+2ǫ′m−4δ2 = 2ǫ′n+2ǫ′m → 0 m, n → +∞.
+Consequently, we obtain that ‖xn − xm‖ → 0 for m, n → +∞, from where it follows that
+(xn) is a Cauchy sequence in H.
+H is complete, thus there exists x∗ ∈ H such that ‖xn − x∗‖ → 0 for n → +∞. But (xn)
+is a convergent sequence of elements of A, which is closed, thus x∗ ∈ A.
+Moreover, by the continuity of the norm, we have
+‖x∗‖ = nli→m∞ ‖xn‖ = δ.
+
+
+60 Chapter 4. Hilbert spaces
+Hence, we have proven that
+∀x ∈ H ∃x∗ ∈ A : ‖x − x∗‖ = d(x, A).
+Uniqueness
+Let x∗ ∈ A and y∗ ∈ A be such that
+‖x∗‖ = δ, ‖y∗‖ = δ.
+Then we find by the parallelogram law (4.1) that
+‖x∗ − y∗‖2 = 2(‖x∗‖2 + ‖y∗‖2) − ‖x∗ + y∗‖2 ≤ 4δ2 − 4δ2 = 0.
+Here we have used that A is convex, thus x∗+y∗
+2 ∈ A which implies that
+∥ ∥ ∥ ∥
+x∗ + y∗ 2
+∥ ∥ ∥ ∥
+2
+≥ δ2 ⇒ −‖x∗ + y∗‖2 ≤ −4δ2.
+We have 0 ≤ ‖x∗ − y∗‖ ≤ 0 from where it follows that ‖x∗ − y∗‖ = 0 and hence y∗ = x∗.
+Therefore we can reformulate Theorem 4.5.1 in the following form:
+Corollary 4.5.1 Let X be a Hilbert space and S ⊂ X be a closed subspace.
+For any x ∈ X, there exists a unique x∗ ∈ S such that ‖x − x∗‖ = d(x, S).
+In addition, x∗ is the orthogonal projection of x on S:
+‖x − x∗‖ = d(x, S) iff ∀y ∈ S (x − x∗) ⊥ y. (4.6)
+Proof. Direct: Let x ∈ X. Let x∗ ∈ S satisfy ‖x − x∗‖ = d(x, S).
+Let’s take y ∈ S and λ > 0, then, as S is a subspace, x∗ − λy ∈ S. We have
+‖x − x∗‖2 ≤ ‖x − (x∗ − λy)‖2 = 〈x − (x∗ − λy), x − (x∗ − λy)〉
+= ‖x − x∗‖2 + 2λ〈x − x∗, y〉 + λ2‖y‖2,
+from where, dividing by 2λ 6= 0, we find
+λ
+2 ‖y‖2 + 〈x − x∗, y〉 ≥ 0.
+The term 〈x − x∗, y〉 does not depend on λ and the inequality holds for all λ 6= 0. Thus, we can consider the function f (λ) = c1λ + c2 with constant coefficients (c1 = 1
+2 ‖y‖2 and
+c2 = 〈x − x∗, y〉) which is linear and continuous on λ. Therefore, passing to the limit for
+λ → 0, we obtain that
+∀y ∈ S 〈x − x∗, y〉 ≥ 0.
+Since S is a subspace, if y ∈ S, then −y ∈ S:
+∀y ∈ S 〈x − x∗, −y〉 ≥ 0.
+This implies that
+∀y ∈ S 〈x − x∗, y〉 = 0 ⇐⇒ ∀y ∈ S (x − x∗) ⊥ y.
+
+
+4.5. Orthogonal projection 61
+Converse: Let x ∈ X. Let x∗ ∈ S be such that
+∀y ∈ S (x − x∗) ⊥ y.
+We have
+‖x − y‖2 = ‖x − x∗ + x∗ − y‖2 = 〈x − x∗ + x∗ − y, x − x∗ + x∗ − y〉
+= ‖x − x∗‖2 + 2〈x − x∗, x∗ − y〉 + ‖x∗ − y‖2 ≥ ‖x − x∗‖2,
+where we use the following facts:
+1. Since x∗ and y are in S, then x∗ − y ∈ S and consequently 2〈x − x∗, x∗ − y〉 = 0.
+2. ‖x∗ − y‖2 ≥ 0.
+Let us take infy∈S of the inequality ‖x−y‖ ≥ ‖x−x∗‖ (the right-hand part does not depend
+on y):
+d(x, S) ≥ ‖x − x∗‖.
+In addition, x∗ ∈ S implies that
+‖x − x∗‖ ≥ d(x, S),
+from where we conclude that ‖x − x∗‖ = d(x, S).
+Remark 4.5.1 We can give another proof of Corollary 4.5.1: Let’s take y ∈ S and λ ∈ R, then, as S is a subspace, x∗ − λy ∈ S. Let us define a function h of λ by the formula:
+h(λ) = ‖x − (x∗ − λy)‖2 = ‖x − x∗‖2 + 2λ〈x − x∗, y〉 + λ2‖y‖2.
+Thus
+∀λ ∈ R h(0) = ‖x − x∗‖2 ≤ h(λ),
+which implies that h takes its minimum value at the point λ = 0. We also notice that h(λ) is a quadratic function on λ.
+Therefore, by the property of the extremal point (the minimum point here)
+h′(0) = 2〈x − x∗, y〉 = 0,
+which holds for all y ∈ S and means that x − x∗ ⊥ S.
+Inversely, if for all y ∈ S 〈x − x∗, y〉 = 0, then for all y 6= 0 in S
+h(0) < h(1).
+It means that
+∀y ∈ S \ {0} ‖x − x∗‖ < ‖x − (x∗ − y)‖,
+or, since for all y ∈ S \ {0} x∗ − y defines an element z ∈ S \ {x∗} (S is a linear space and x∗ ∈ S and y ∈ S), it means that x∗ is the strict global (in S) minimum point and thus unique.
+Proposition 4.5.1 Let H be a Hilbert space and A be its subset. Then A⊥ is a closed vector subspase in H.
+
+
+62 Chapter 4. Hilbert spaces
+Proof A⊥ is a vector subspace because all linear combinations of elements of A⊥ keep the orthogonal property and thus gives an element of A⊥ (by the linearity of the inner product).
+A⊥ is closed, since for any convergent sequence of elements in A⊥ its limit is orthogonal to A by the continuity of the inner product.
+Definition 4.5.2 Let H1, . . . , Hn are Hilbert spaces. Set H1 × . . . × Hn is denoted by H1 ⊕ . . . ⊕ Hn endowed with the inner product given by the formula
+∀x = (x1, . . . , xn) ∀y = (y1, . . . , yn) 〈x, y〉H1⊕...⊕Hn = 〈x1, y1〉H1 + . . . + 〈xn, yn〉Hn,
+where if x ∈ H1 ⊕ . . . ⊕ Hn, it means that x = (x1, . . . , xn) and xi ∈ Hi for all i. Vector operations are defined for each coordinate of x.
+Problem 4.5.1 Prove that H = H1 × . . . × Hn is a Hilbert space:
+• 〈x, y〉H = 〈x1, y1〉H1 + . . . + 〈xn, yn〉Hn is an inner product on H
+• H is complete.
+Remark 4.5.2 H is called the orthogonal direct sum of the spaces H1, . . . , Hn. Why is the sum is called orthogonal?
+Let H = H1 ⊕ H2, x ∈ H1 and y ∈ H2. Then x = (a, 0) ∈ H and y = (0, b) ∈ H. Thus
+〈x, y〉H = 〈a, 0〉H1 + 〈0, b〉H2 = 0,
+and consequently H1 ⊥ H2. In the general case, Hi ⊥ Hj for i 6= j.
+Remark 4.5.3 For all x ∈ H = H1 × . . . × Hn there exists unique xi ∈ Hi (i = 1, . . . , n)
+such that x = (x1, . . . , xn).
+Definition 4.5.3 Let P be an operator from a normed space X to a normed space Y . The kernel of P , denoted by Ker P, is called the set
+Ker P = {x ∈ X| P x = 0}.
+Let us prove the following theorem:
+Theorem 4.5.2 Let H be a real Hilbert space and S ⊂ H be a closed subspace. The operator P from H to S defined by P (x) = x∗ (where x∗ is the orthogonal projection of x on S) has these properties:
+1. P is a linear operator.
+2. P 2 = P : ∀x ∈ H P (P (x)) = P (x). In addition, Im(P ) = S.
+3. If P 6= 0, then ‖P ‖ = 1.
+4. P is continuous.
+5. Its kernel is Ker P = S⊥.
+6. H = S ⊕ S⊥ and S 6= H iff S⊥ 6= {0}.
+Proof.
+
+
+4.5. Orthogonal projection 63
+1. P is a linear operator:
+Let us show that
+∀λ ∈ R ∀x ∈ H P (λx) = λP (x). (4.7)
+Indeed, since, by definition of P , P (x) = x∗ is the orthogonal projection of x on S, then, thanks to Corollary 4.5.1,
+∀y ∈ S 〈x − P (x), y〉 = 0.
+Thus, by linearity of the inner product:
+∀λ ∈ R ∀y ∈ S 〈λx − λP (x), y〉 = 0.
+On the other hand, for (λx) ∈ H we have
+∀y ∈ S 〈λx − P (λx), y〉 = 0.
+Since the orthogonal projection of λx is unique, we find (4.7). Let us show that
+∀x1 ∈ H ∀x2 ∈ H P (x1 + x2) = P (x1) + P (x2). (4.8)
+For all x1 ∈ H and for all x2 ∈ H we have
+∀y ∈ S 〈xi − P (xi), y〉 = 0 for i = 1, 2.
+By linearity of the inner product, we find
+∀y ∈ S 〈x1 + x2 − (P (x1) + P (x2)), y〉 = 0.
+For the element x1 + x2 of H we also have
+∀y ∈ S 〈x1 + x2 − P (x1 + x2), y〉 = 0.
+Thanks to the uniqueness of the orthogonal projection of x1 +x2 on S, we obtain (4.8).
+2. P 2 = P : ∀x ∈ H P (P (x)) = P (x). Im(P ) = S:
+By definition of P , for all x ∈ H P (x) ∈ S. Moreover, if x ∈ S, then d(x, S) = 0 and P (x) = x. Consequently, P 2 = P and Im(P ) = S.
+3. If P 6= 0, then ‖P ‖ = 1:
+Let us notice that as for all x ∈ H its projection P (x) ∈ S, we can take y = P (x) in (4.6) and obtain that
+∀x ∈ H 〈x − P (x), P (x)〉 = 0.
+Using Pythagorean Theorem (Theorem 4.1.1), we have
+‖x‖2 = ‖P (x)‖2 + ‖x − P (x)‖2.
+Therefore,
+∀x ∈ H ‖P (x)‖ ≤ ‖x‖,
+which implies that ‖P ‖ ≤ 1.
+If P 6= 0, there exists x 6= 0 in S. Thus P (x) = x and ‖P (x)‖ = ‖x‖. Then we conclude that ‖P ‖ = 1.
+
+
+64 Chapter 4. Hilbert spaces
+4. P is continuous:
+Since P is linear and its norm is finite (equal to 1), then P is continuous.
+5. Its kernel is S⊥:
+Thanks to Corollary 4.5.1, we directely find
+x ∈ Ker P ⇐⇒ P (x) = 0 ⇐⇒ x∗ = 0 ⇐⇒ x ⊥ S ⇐⇒ x ∈ S⊥.
+6. H = S ⊕ S⊥ and S 6= H iff S⊥ 6= {0} :
+Thanks to the previous point, we can also write that H = Im(P ) ⊕ Ker P . Thus we directely see that
+Im(P ) = S 6= H ⇐⇒ S⊥ = Ker P 6= {0}.
+Let us prove that H = S ⊕ S⊥. For all x ∈ H
+x = (x − P (x)) + P (x), (4.9)
+where P (x) ∈ S = Im(P ). Let us show that (x − P (x)) ∈ S⊥ = Ker P :
+P (x − P (x)) = P (x) − P (P (x)) = P (x) − P (x) = 0.
+In addition Im(P ) ⊥ Ker P and decomposition (4.9) is unique by the uniqueness of the orthogonal projection.
+4.6 Riesz representation theorem
+Theorem 4.6.1 (Riesz representation) Let H be a Hilbert space. Any linear continuous functional on H can be uniquely presented by the inner product in H:
+∀f ∈ H∗ ∃! y ∈ H : ∀x ∈ H f (x) = 〈x, y〉, (4.10)
+and moreover, ‖f ‖H∗ = ‖x‖H . (In other words, any Hilbert space is isometric to its dual.)
+Remark 4.6.1 The Riesz representation theorem states that
+1. For any (fixed) y in H, the linear form fy : H → C defined by
+∀x ∈ H fy(x) = 〈x, y〉
+is a linear continuous form on H (fy ∈ H∗) and
+‖fy‖H∗ = ‖y‖H. (4.11)
+2. The function F : H → H∗ defined by F (y) = fy is an isometric isomorphism from H to H∗.
+
+
+4.6. Riesz representation theorem 65
+Proof. Let us prove (4.10) for a real Hilbert space H.
+Let f be a linear continuous function on H: f ∈ H∗. Let’s consider
+H0 = Ker f = {x ∈ H : f (x) = 0} = f −1({0}).
+For H0 we have:
+• Since Ker f is a vector space (if f (x) = f (y) = 0 then for all α and β in R f (αx+βy) = αf (x) + βf (y) = 0), H0 is a subset of H.
+• Since f is continuous and the one point set {0} is closed in R, then the inverse image of {0} is closed in H (see Apendix A.2). Therefore, H0 is a closed subspace of H.
+Let us prove that dim H0⊥ = 1.
+We fix x0 ∈/ Ker f , i.e. x0 ∈ H0⊥ (indeed, Ker f = H0 is a closed subspace of H, thus
+H = H0 ⊕ H0⊥ implies that x0 ∈ H0⊥) and f (x0) 6= 0. Such x0 exists if f 6= 0 (if f ≡ 0 then
+f obviously has the representation (4.10) with x = 0 and in this case ‖x‖ = ‖f ‖ = 0). We also notice that x0 6= 0 since f (0) = 0 (as f is linear continuous, it is continuous in 0).
+Let x ∈ H. For y = x − f (x) x0
+f(x0) we find that
+f (y) = f
+(
+x − f (x) x0
+f (x0)
+)
+= f (x) − f (x) f (x0)
+f (x0) = f (x) − f (x) = 0,
+i.e. y ∈ H0.
+For a fixed x0 in H0⊥ the representation of x by the formula
+x = y + αx0, where y ∈ H0, and α ∈ R,
+is unique.
+Indeed, let x = y + αx0 for y ∈ H0 and x = y′ + α′x0 for y′ ∈ H0. Then
+(α − α′)x0 = y′ − y.
+If α = α′ it implies that y′ = y. If α 6= α′, it implies that
+x0 = y′ − y
+α − α′ ∈ H0,
+which is a contradiction with the assumption that x0 ∈ H0⊥.
+Consequently, for α = f(x)
+f(x0) ∈ R we have that any vector x ∈ H can be uniquely presented
+by
+x = y + αx0, y ∈ H0, x0 ∈ H0⊥. (4.12)
+Thus H = H0 ⊕ H0⊥ and H0⊥ = 〈x0〉 with dim H0⊥ = 1.
+Let us show that there exists a unique y ∈ H such that for all x ∈ H f (x) = 〈x, y〉.
+Let us consider (4.12) with a normalized vector x0: ‖x0‖ = 1.
+We apply to (4.12) f : f (x) = 0 + αf (x0),
+
+
+66 Chapter 4. Hilbert spaces
+and we take the inner product of (4.12) with x0:
+〈x, x0〉 = 0 + α〈x0, x0〉 = α.
+Therefore,
+∀x ∈ H f (x) = 〈x, x0〉f (x0) = 〈x, y〉, where y = f (x0)x0.
+Let us prove the uniqueness of y ∈ H such that f (x) = 〈x, y〉 for all x ∈ H. Suppose that there exist y1 and y2 such that for all x ∈ H
+f (x) = 〈x, y1〉 and f (x) = 〈x, y2〉.
+Then
+∀x ∈ H 〈x, y1 − y2〉 = 0 ⇐⇒ (y1 − y2) ⊥ H,
+which implies that y1 − y2 = 0.
+Let us prove (4.11): In fact, by Cauchy-Schwartz-Bunjakowski inequality
+|f (x)| = |〈x, y〉| ≤ ‖x‖‖y‖,
+but f (y) = ‖y‖2, thus we have (4.11).
+Thanks to H = H∗, we find that a Hilbert space is reflexive. But sometimes (see [4] and Section 8.3.2) we does not identify H with its dual to obtain good inclusions of functional spaces. However, H is always isometric to H∗.
+4.7 Operators defined by a sesquilinear/bilinear form
+Theorem 4.7.1 Let H be a Hilbert space. Let a : H × H → C be a continuous sesquilinear form. Then there exists a unique linear bounded operator A : H → H such that
+∀(x, y) ∈ H, a(x, y) = 〈x, Ay〉.
+Proof. By the continuity hypothesis, for any fixed y ∈ H the linear form x 7→ a(x, y) is continuous. We denote it by fy(x) = a(x, y) for a fixed y ∈ H. By Riesz representation
+theorem, there exists unique z ∈ H such that fy(x) = 〈x, z〉.
+Therefore, for any y ∈ H, there exists unique z ∈ H such that a(x, y) = 〈x, z〉. Define A : H → H by Ay = z. A is linear (the unicity in Riesz representation theorem and the sesquilinearity of a(·, ·)). In addition,
+‖Ay‖2 = 〈Ay, Ay〉 = a(Ay, y) ≤ C‖Ay‖‖y‖.
+Thus
+‖Ay‖ ≤ C‖y‖,
+from where we conclude that A is a bounded linear operator.
+Definition 4.7.1 Let A : H → H be a linear bounded operator. Let a : H × H → R be the associated bilinear/sesquilinear form.
+We note A ≥ 0 if a is positive. We note A ≥ B if A − B ≥ 0.
+
+
+4.7. Operators defined by a sesquilinear/bilinear form 67
+Theorem 4.7.2 (Adjoint operator) Let H be a Hilbert space. For all A ∈ L(H, H) there exists unique A∗ ∈ L(H, H), which satisfies
+∀x, y ∈ H 〈Ax, y〉 = 〈x, A∗y〉. (4.13)
+Moreover, ‖A‖ = ‖A∗‖.
+A∗ is called the adjoint operator of A.
+Proof. Let A : H → H be a linear bounded operator (x 7→ Ax). From A, let us define a : H × H → R by a(x, y) = 〈Ax, y〉. It is a continuous sesquilinear form (since A is continuous and the inner product is continuous). By Theorem 4.7.1 there exists a unique bounded operator A∗ : H → H such that
+∀(x, y) ∈ H, a(x, y) = 〈x, A∗y〉.
+Let us prove that ‖A‖ = ‖A∗‖.
+For a fixed y in H, fy(x) = 〈Ax, y〉 is a linear continuous form on H. Thanks to the Riesz
+representation theorem,
+‖A∗y‖ = ‖fy‖,
+and therefore, by definition of the norm of a linear functional
+‖fy‖ = sup
+x6=0
+|fy(x)|
+‖x‖ ,
+we have
+‖A∗‖ = sup
+y6=0
+‖A∗y‖
+‖y‖ = sup
+x,y6=0
+|〈x, A∗y〉|
+‖x‖‖y‖ = sup
+x,y6=0
+|〈Ax, y〉|
+‖x‖‖y‖ = ‖A‖.
+Problem 4.7.1 Prove that the mapping A 7→ A∗ satisfies the following properties:
+1. (λA)∗ = λA∗, (antilinear)
+2. (A + B)∗ = A∗ + B∗,
+3. (AB)∗ = B∗A∗,
+4. A∗∗ = A.
+Definition 4.7.2 Let H be a Hilbert space. Operator A ∈ L(H, H) is
+• auto-adjoint (also hermitian for H over C and symmetric for H over R) if A∗ = A,
+• antihermitian (antisymmetric for H over R) if A∗ = −A,
+• unitary ( orthogonal for H over R) if A∗A = I (by I we denote the identity operator).
+Proposition 4.7.1 Let H be a Hilbert space and A ∈ L(H, H). The following assertions are equivalent:
+• A is hermitian.
+• The form fA(x, y) = 〈Ax, y〉 is hermitian (fA(x, y) = fA(y, x)).
+
+
+68 Chapter 4. Hilbert spaces
+• The quadratic form φA(x) = 〈Ax, x〉 is real.
+In addition, we have
+‖A‖ = sup
+x6=0
+|〈Ax, x〉| ‖x‖2H
+.
+Problem 4.7.2 Prove Proposition 4.7.1
+Proposition 4.7.2 Let H be a Hilbert space.
+1. Mapping A 7→ iA is a bijection between all hermitian operators and antihermitian operators on L(H, H).
+2. For all A ∈ L(H, H) there exist unique hermitian operators B and C in L(H, H) such that
+A = B + iC.
+Proof.
+1. Let A ∈ L(H, H) be a hermitian operator. We define B = iA and thus B∗ = −iA∗. As A is hermitian, then A∗ = A, from where we obtain that B∗ = −B and hence B is antihermitian. Doing the proof in the inverse way, we obtain that if B = iA is antihermitian, then A is hermitian.
+2. We fixe A ∈ L(H, H). Let define B = A+A∗
+2 and C = A−A∗
+2i . We verify that B and C
+are hermitian operators. Moreover, A∗ = B − iC and then A = B + iC.
+Proposition 4.7.3 Let H be a Hilbert space. For an operator U ∈ L(H, H) the following assertions are equivalent:
+• U is an unitary operator.
+• For all x, y in H 〈Ux, Uy〉 = 〈x, y〉 and U is onto.
+• U is an isometry (global) of H to H.
+Proof. 1) ⇒ 2)
+Since U is a unitary operator, then U ∗ = U −1 and then
+∀(x, y) ∈ H × H 〈U x, U y〉 = 〈x, U ∗U y〉 = 〈x, U −1U y〉 = 〈x, y〉.
+2) ⇒ 1)
+We have
+∀(x, y) ∈ H × H 〈Ux, Uy〉 = 〈x, y〉.
+Thus,
+∀(x, y) ∈ H × H 〈x, U ∗y〉 = 〈U x, y〉 = 〈U x, U U −1y〉 = 〈x, U −1y〉,
+which implies that for all y ∈ H U ∗y = U −1y and finally U ∗ = U −1.
+U ∗U = I, and then
+2) ⇒ 3)
+As
+‖U x‖2 = ‖x‖2,
+
+
+4.8. Continuity and coercivity of a sesquilinear form 69
+U is a isometry. Since there exists U−1, then U is a bijection, and thus U is a global isometry of H to H.
+3) ⇒ 2)
+Since U is a global isometry of H to H, U is bijection (⇒ ∃U−1) and ‖Ux‖ = ‖x‖.
+Problem 4.7.3 Let H be a Hilbert space and A ∈ L(H, H). Prove that if A = A∗, then
+the operator U = eiA is a unitary operator on H (i = √−1).
+Proposition 4.7.4 Let H be a Hilbert space and A : H → H a linear continuous operator (A ∈ L(H, H)). If A = A∗, then H = KerA ⊕ ImA.
+Attention : ImA means the closure of ImA. For the proof of Proposition 4.7.4 see TD3.
+Corollary 4.7.1 The operator P of the orthogonal projection on a closed subspace S of a Hilbert space H is symmetric.
+See TD3 for the proof.
+4.8 Continuity and coercivity of a sesquilinear form
+Let us show the important fact:
+Proposition 4.8.1 Let H be a Pre-Hilbert space. Let 〈·, ·〉 be the inner product on H and ‖ · ‖ be the norm corresponding to this inner product.
+Let a(·, ·) be a sesquilinear/bilinear form on H which is continuous and coercive.
+Then a(·, ·) defines an inner product equivalent to 〈·, ·〉 iff a(·, ·) is hermitian/symmetric.
+Proof. By definition of an inner product, it is a definite positive hermitian sesquilinear form. Let a(·, ·) be a sesquilinear form on H such that
+1. a(·, ·) is continuous: ∃C > 0 : ∀(x, y) ∈ H2, |a(x, y)| ≤ C‖x‖‖y‖,
+2. a(·, ·) is coercive: ∃α > 0 : ∀x ∈ H a(x, x) ≥ α‖x‖2.
+From the coercivity of a(·, ·) follows that a(·, ·) is definite positive. If a(·, ·) is hermitian, then a(·, ·) is an inner product on H. Let us define the norm corresponding to the inner product a(·, ·):
+∀x ∈ H ‖x‖a = √
+a(x, x).
+Let now prove that the norms ‖ · ‖ and ‖ · ‖a are equivalent in H. Thanks to the continuity
+and the coercivity of a(·, ·), we have
+α‖x‖2 ≤ ‖x‖2a = a(x, x) ≤ C‖x‖2.
+4.9 Lax Milgram Lemma
+Remark 4.9.1 Let us define the identical operator I or Id which maps all x ∈ H to itself: I(x) = x.
+
+
+70 Chapter 4. Hilbert spaces
+Theorem 4.9.1 (Bounded inverse) Let H be a real Hilbert space. Let α > 0 and A : H → H be a linear bounded operator such that (see Definition 4.7.1)
+A ≥ αI.
+Then it holds
+1. A is bijective,
+2. A−1 is bounded,
+3. ‖A−1‖ ≤ 1
+α.
+Proof. A is injective:
+Let A : H → H and x be in H. Since A ≥ αI, it means that
+∀x ∈ H 〈x, (A − αI)x〉 ≥ 0,
+and thus, using the linearity and symmetry of the inner product,
+∀x ∈ H 〈Ax, x〉 ≥ α〈x, x〉.
+Thus, by Cauchy-Schwartz-Bunjakowski inequality,
+α‖x‖2 ≤ 〈Ax, x〉 ≤ ‖Ax‖‖x‖.
+We devide by ‖x‖ to obtain
+α‖x‖ ≤ ‖Ax‖ ( and ‖x‖ ≤ ‖Ax‖
+α ).
+If Ax = 0, then ‖Ax‖ = 0, from where, due to the last estimation, 0 ≤ ‖x‖ ≤ 0, i.e., ‖x‖ = 0, and then x = 0. Thus A is injective.
+A is surjective:
+Let z ∈ Im(A)⊥. Then, for any y ∈ Im(A), we have 〈y, z〉 = 0. Since
+Az ∈ Im(A),
+it follows that
+〈Az, z〉 = 0.
+Thus
+α〈z, z〉 ≤ 〈Az, z〉 = 0
+and then ‖z‖ = 0. Hence Im(A)⊥ = {0}. Consequently,
+Im(A) = H.
+Let us show that Im(A) = Im(A),
+i.e., it is closed:
+if Axn → y ⇒ ∃x ∈ H : y = Ax.
+
+
+4.9. Lax Milgram Lemma 71
+Indeed, if Axn → y, then (Axn) is a Cauchy sequence. It implies that (xn) is a Cauchy
+sequence in H as we have
+∀p ≥ n α‖xn − xp‖ < ‖Axn − Axp‖.
+Since H is complete, there exists x ∈ H such that xn → x. Thanks to the continuity of A
+(a linear bounded operator is continuous), we have
+Axn → Ax.
+By the unicity of the limit, we obtain that Ax = y.
+Therefore, all limit points of Im(A) are in Im(A), hence Im(A) is closed and we conclude that Im(A) = H.
+A−1 is bounded: As A is bijective, there exists A−1.
+Let y ∈ Im(A) = H and note x = A−1y.
+We have
+‖A−1y‖ = ‖x‖ ≤ ‖Ax‖
+α =1
+α ‖y‖
+Thus A−1 is bounded and its norm is bounded by (1/α).
+Theorem 4.9.2 (Lax Milgram Theorem) Let H be a real Hilbert space. Let a(·, ·) be a continuous and coercive bilinear form. Let f ∈ H∗.
+• The equation: for all u ∈ H, a(x, u) = f (u) has one and only one solution x ∈ H.
+• The application that associates f to x is linear and continuous from H∗ to H.
+Proof.
+By the Riesz representation theorem, there exists an unique z in H such that 〈z, u〉 = f (u), and moreover, the application f 7→ z is linear and continuous (‖z‖ = ‖f ‖).
+For all u ∈ H, a(x, u) = f (u) is equivalent to
+∀u ∈ H, a(x, u) = 〈z, u〉,
+where z is defined from f by the Riesz representation theorem.
+Since a : H × H → R is a continuous bilinear form, by Theorem 4.7.1, there exists an unique bounded operator A : H → H such that:
+∀(x, u) ∈ H × H a(x, u) = 〈Ax, u〉.
+Therefore Ax = z.
+Since a(·, ·) is coercive, there exists α > 0 such that A ≥ αI. Thus A−1 is a linear bounded operator (see Theorem 4.9.1) and then x = A−1z. Thus the application f 7→ x is linear and continuous:
+‖x‖ < 1
+α‖z‖ = 1
+α‖f ‖.
+Remark 4.9.2 If we add in the statement of Lax-Milgram Theorem the assumption that a(·, ·) is symmetric, then, by Proposition 4.8.1, the bilinear form a(·, ·) defines an inner product on H. In this case, to prove the unique existence of the solution we can directely apply the Riesz representation theorem on H equipped with the inner product a(·, ·).
+
+
+
+
+Chapter 5
+Weak and Weak∗ convergences
+We have seen that a unit ball in a infinite dimensional normed space is not compact. It is due to to the definition of the convergence (or the topology). Let us change the type of the convergence, to see if it is possible to make it compact.
+5.1 Weak convergence in a Banach space
+Let us define weak convergence (for the definition of the weak topology, see Appendix A Section A.5.1):
+Definition 5.1.1 Let (xn) be a sequence of elements of X. We say that (xn) converges
+weakly to x, noted xn ⇀ x, if for all f in X∗, f (xn) converges to f (x).
+The weak convergence define the weak topology, denoted by σ(X, X∗).
+Definition 5.1.2 The convergence in the topology, defined by the norm in X, is called strong convergence:
+(xn) ⊂ (X, ‖ · ‖X), ‖xn − x‖X → 0 ⇒ xn → x strongly.
+There are fewer open sets in the weak topology. Hence, if a sequence strongly converges, then it weakly converges.
+An open neighborhood of zero in strong topology on X can be given by
+Br(0) = {x ∈ X| ‖x‖X < r} (r > 0).
+What is an open neighborhood of zero in a weak topology on X?
+Given any ǫ > 0 and any finite set of continuous linear functionals
+f1, . . . , fn ∈ X∗,
+let us consider the set
+U = Uf1,...,fn;ǫ = {x ∈ X| |fi(x)| < ǫ, i = 1, . . . , n}. (5.1)
+
+
+74 Chapter 5. Weak and Weak∗ convergences
+The set U is open in X and contains the point zero, i.e., U is a neighborhood of zero.
+The intersection of two such neighborhoods contains a set of the same type as U (5.1). Therefore, the system of all sets of the form (5.1) generates a topology, the weak topology on X (see [4] for the proof, it can be omitted).
+Every subset of X which is open (respectively closed) in the weak topology is also open (respectively closed) in the strong topology of X, but the converse may not be true. As we will see in Theorem 5.1.2, it is true when X is a finite dimensional.
+Let X be an infinite dimensional normed space. Then, in particular,
+1. the set S = {x ∈ X| ‖x‖X = 1} is never closed in a weak topology σ(X, X∗):
+if we denote by Sσ(X,X∗) the closure of S in the topology σ(X, X∗), then
+Sσ(X,X∗) = {x ∈ X| ‖x‖X ≤ 1}.
+The proof can be found in [4], based on the fact that in infinite dimensional space each neighborhood (in the topology σ(X, X∗)) U of a point x0 contains a straight line
+passing by x0.
+2. the set B1(0) = {x ∈ X| ‖x‖X < 1} is never open in a weak topology σ(X, X∗).
+Let us verify that the set of interior points of B1(0) in σ(X, X∗) is empty. Suppose
+the inverse, that there exists x0 ∈ B1(0) and a neighborhood V of x0 for σ(X, X∗)
+such that V ⊂ B1(0). Therefore, V contains a straight line passing by x0. This is a
+contradiction with V ⊂ B1(0).
+All closed sets for the weak topology σ(X, X∗) are closed for the strong topology. For the convex sets the notions are equivalent:
+Theorem 5.1.1 Let X be a Banach space and let A ⊂ X be a convex set. Then A is closed in σ(X, X∗) (or weakly closed) iff A is closed in the strong topology on X (strongly closed).
+Let us now consider the properties of the weak convergence:
+Proposition 5.1.1 Let X be a Banach space.
+1. Weak limit is unique.
+2. If xn → x, n → ∞ strongly in X, then xn ⇀ x, n → ∞ weakly in X (the converse is false).
+3. If (xk) converges weakly to x, then (xk) is (strongly) bounded:
+∃C > 0 : ‖xn‖X < C and ‖x‖ ≤ lim inf ‖xn‖X ,
+where lim inf ‖xn‖X = limn→∞(infm≥n xm).
+4. xn ⇀ x0 ⇐⇒
+(a) (‖xn‖) is bounded,
+(b) 〈f, xn〉 → 〈f, x0〉 ∀f ∈ E, E = X∗
+
+
+5.1. Weak convergence in a Banach space 75
+5. If xn ⇀ x0 in X and if fn → f strongly in X∗ (i.e. ‖fn − f ‖L(X,R) → 0), then
+〈fn, xn〉 → 〈f, x〉.
+Proof.
+1. Let (xn) be a sequence in X such that
+xn ⇀ x and xn ⇀ x ̃ n → ∞.
+Then for all f ∈ X∗, since f is continuous,
+〈f, x〉 = 〈f, x ̃〉.
+Therefore, since f is linear,
+∀f ∈ X∗ 〈f, x − x ̃〉 = 0.
+Thus, using Corollary 3.4.2 from the Hahn-Banach theorem, we obtain that x = x ̃.
+2. We use the estimate:
+|〈f, xn〉 − 〈f, x〉| = |〈f, xn − x〉| ≤ ‖f ‖L(X,R)‖xn − x‖X.
+We will show that the converse is false: see Example 5.1.1 and 5.3.1.
+3. For all f ∈ X∗ the sequence (〈f, xn〉) is bounded. But xn ∈ X ⊂ X∗∗ can be
+considered as an element of the space X∗∗, i.e. the linear functional. Thus, by the theorem of Banach-Steinhaus, the sequence (‖xn‖) is bounded.
+In addition,
+|〈f, xn〉| ≤ ‖f ‖L(X,R)‖xn‖X = C(f ),
+thus for n → +∞ we have
+|〈f, x〉| ≤ ‖f ‖L(X,R) lim inf ‖xn‖X.
+Finally, ‖x‖X = sup
+‖f ‖≤1
+|〈f, x〉| ≤ lim inf ‖xn‖X.
+4. It is the corollary of the theorem of Banach-Steinhaus if we consider xn as linear
+functionals on X∗.
+5. It is the corollary of the following estimation:
+|〈fn, xn〉 − 〈f, x〉| ≤ |〈fn − f, xn〉| + |〈f, xn − x〉|
+≤ ‖fn − f ‖‖xn‖ + |〈f, xn − x〉| = ‖fn − f ‖‖xn‖ + |〈f, xn〉 − 〈f, x〉|.
+Definition 5.1.3 A set M ⊂ X of a normed space X is called weakly bounded if for all f ∈ X∗ the numerical set
+{〈f, x〉, x ∈ M}
+is bounded.
+
+
+76 Chapter 5. Weak and Weak∗ convergences
+If M is a bounded (strongly) in X, then M is weakly bounded.
+Proposition 5.1.2 If X is a Banach space and its subset M is weakly bounded, then M is bounded in X.
+Proof. Suppose M is not bounded:
+∃(xn) ⊂ M ⊂ X : ‖xn‖ > n2.
+We consider the sequence ( xn
+n ):
+∀f ∈ X∗ |〈f, xn
+n 〉| ≤ 1
+n sup
+x∈M
+|〈f, x〉| ≤ c
+n → 0 n → +∞.
+Then xn
+n ⇀ 0 for n → +∞,
+and, thanks to Proposition 5.1.1, (xn
+n ) is bounded, i.e.
+∃C > 0 : ∀n ∈ N
+∥ ∥ ∥ ∥
+xn n
+∥ ∥ ∥
+∥ < C,
+which gives the contradiction with our assumption.
+Theorem 5.1.2 If dim X = m < ∞, X is a normed space and xn ⇀ x0 weakly in X, then xn −→ x0 strongly in X.
+Proof. Let {en}im=1 be a basis of X. Then
+xn =
+m
+∑
+i=1
+α(n)
+i ei, x0 =
+m
+∑
+i=1
+α(0)
+i ei.
+We define fi ∈ X∗ such that
+〈fi, ej〉 = δi,j =
+{ 1 i=j
+0 i 6= j .
+Therefore,
+α(n)
+i = 〈fi, xn〉 → 〈fi, x0〉 = αi0 n → ∞,
+and consequently,
+xn = (α(n)
+1 , . . . , α(mn)) → x0 = (α10, . . . , α0m) n → ∞,
+what implies that xn → x0 strongly in X. (As all norms are equivalent in X, it is sufficient
+to show that xn → x0 by ‖ · ‖l∞).
+Example 5.1.1 Consider the space C([a, b]) of all functions continuous on [a, b] equipped with the norm
+‖f ‖∞ = max
+a≤x≤b |f (x)|.
+If ‖fn − f ‖∞ → 0 in C([a, b]), it follows that the sequence (fn) converges uniformly to f on
+[a, b]. Thus the strong convergence in C([a, b]) means the uniform convergence.
+Let us now consider the weak convergence in C([a, b]). Let (fn) be a sequence of functions
+in C([a, b]) converging weakly to a function f ∈ C([a, b]). Among the continuous linear functionals on C([a, b]), we have the functionals δx0, a < x0 < b, named the Dirac delta
+functions, which assign to each function f (x) ∈ C([a, b]) its value at some fixed point
+
+
+5.1. Weak convergence in a Banach space 77
+x0 ∈ [a, b].
+Let us show that δx0 ∈ C∗([a, b]). Indeed, by definition δx0 is linear mapping from C([a, b])
+to R:
+δx0(αf + βg) = αf (x0) + βg(x0) = αδx0(f ) + βδx0(g) ∀f, g ∈ C([a, b]), ∀α, β ∈ R,
+and in addition we have
+|δx0(f )| = |f (x0)| ≤ max
+a≤x≤b |f (x)| = ‖f ‖∞,
+where equality holds if f (x) = const. Hence δx0 is bounded, thus it is continuous, with norm
+‖δx0 ‖L(C([a,b]),R) = 1.
+From
+δx0(fn) → δx0 (f )
+follows by the definition of the functional δx0 that
+fn(x0) → f (x0).
+Hence, if the sequence (fn) is weakly convergent in C([a, b]), then
+1. (fn) is uniformly bounded on [a, b], i.e., there is a constant C ≥ 0 such that
+|fn(x)| ≤ C ∀n ∈ N ∀x ∈ [a, b],
+2. (fn) is pointwise convergent on [a, b], i.e., (fn(x)) is a convergent numerical sequence
+for every fixed x ∈ [a, b].
+We can see that the strong convergence in C([a, b]) implies the weak convergence, but not the converse.
+We give without proof the following result:
+Theorem 5.1.3 Let X be a Banach space. X is reflexive if and only if each bounded sequence in X contains a subsequence which converges weakly in X.
+When there are fewer open sets, thus it is more easy to be convergent, and thus to be compact too (the compact sets are very important for theorems of existence):
+Theorem 5.1.4 (Kakutani) Let X be a Banach space. X is reflexive iff the closed unit ball associated to the norm B1(0) = {x ∈ X| ‖x‖ ≤ 1} is compact in the weak topology
+σ(X, X∗) .
+Remark 5.1.1 As any Hilbert space H is reflexive, then the closed unit ball in a Hilbert space is weakly compact.
+Remark 5.1.2 Moreover, for the infinite dimensional case, we saw that a closed unit ball B1(0) is not compact in the strong topology. Theorem of Kakutani states that B1(0) is compact in the weak topology iff X is a reflexive Banach space. Can we find a topology for
+
+
+78 Chapter 5. Weak and Weak∗ convergences
+which B1(0) is compact even if X is not reflexive?
+5.2 Weak∗ convergence in a Banach space
+Let X be a Banach space. Let X∗ be its dual. Let X∗∗ be its bidual (containing X). In X we can define
+• the strong topology, defined by the norm ‖ · ‖X in X;
+• the weak topology, defined by the weak convergence.
+As we know, for all normed spaces X, its dual space X∗ is a Banach space with the norm:
+‖f ‖L(X,R) = sup
+x∈X,‖x‖X ≤1
+|〈f, x〉|.
+Thus, X∗ can be equipped with:
+• the strong topology on X∗ (defined by the convergence by the norm on X∗);
+• the weak topology on X∗ (defined by the weak convergence on X∗, that is, in notations of Appendix A, σ(X∗, X∗∗)).
+In fact, there are two ways of regarding the space X∗ of continuous linear functionals on a given space X:
+1. as an "original space" in its own right, with conjugate space X∗∗,
+2. as the space conjugate to the original space X.
+These two points of view gives two different topologies (convergences):
+• the weak topology on X∗ (that is σ(X∗, X∗∗));
+• the weak∗ topology on X∗ defined by σ(X∗, X) (the weak∗ convergence is denoted by
+∗⇀).
+Definition 5.2.1 Let (fn) be a sequence in X∗, the dual space to the normed space X. We
+say that the sequence of functionals (fn) converges weakly∗ to f ∈ X∗, denoted by fn
+∗⇀ f , if
+〈fn, x〉 → 〈f, x〉 ∀x ∈ X.
+The corresponding topology is called weak∗ topology, noted by σ(X∗, X) (see also Defininition A.5.2).
+Since X ⊂ X∗∗, the weak∗ topology σ(X∗, X) is weaker than the weak topology σ(X∗, X∗∗), which is weaker than the strong topology, i.e. on X∗ we always have
+→ ⇒ ⇀ ⇒ ∗⇀ ,
+but not converse.
+Problem 5.2.1 Show that for all finite sets A ⊂ X
+UA,ǫ = {f ∈ X∗| |f (x)| < ǫ for all finite A}
+is an open neighborhood of zero in the weak∗ topology σ(X∗, X).
+
+
+5.2. Weak∗ convergence in a Banach space 79
+Clearly, the weak convergence and the weak∗ convergence on X∗ be the same if and only if X is reflexive. In particular, if X is a Hilbert space then X∗∗ = X, therefore the weak∗ topology and the weak topology coincide.
+Proposition 5.2.1 Let (fn) be a sequence in X∗, the dual space to the Banach space X. We have
+1. The weak∗ limit is unique.
+2. fn
+∗⇀ f in σ(X∗, X) iff 〈fn, x〉 → 〈f, x〉 ∀x ∈ X
+3. If fn → f , n → ∞ strongly in X∗, then fn ⇀ f , n → ∞ weakly in σ(X∗, X∗∗).
+4. If fn ⇀ f , n → ∞ weakly in σ(X∗, X∗∗), then fn
+∗⇀ f in σ(X∗, X).
+5. If fn
+∗⇀ f in σ(X∗, X), then ‖fn‖ is bounded:
+∃C > 0 : ∀n ‖fn‖X∗ < C and ‖f ‖ ≤ lim inf ‖fn‖X∗,
+where lim inf ‖fn‖X∗ = limn→∞(infm≥n ‖fm‖X∗).
+6. fn
+∗⇀ f ⇐⇒
+(a) (‖fn‖) is bounded,
+(b) 〈fn, x〉 → 〈f, x〉 ∀x ∈ E, E = X
+7. If fn
+∗⇀ f in σ(X∗, X) and if xn → x strongly in X, then
+〈fn, xn〉 → 〈f, x〉.
+Remark 5.2.1 We recall that the notation 〈f, x〉 means the value of f at x: f (x).
+The proof of Proposition 5.2.1 follows the proof of Proposition 5.1.1.
+Let us prove Point 6). ⇒ It is obvious.
+⇐ If z is a linear combination of elements in E, then 〈fn, z〉 → 〈f, z〉.
+Let x now be an arbitrary element of X, and let (zk) be a sequence of linear combinations
+of elements of E converging to x in X (such a sequence exists, since E is dense in X). Let us show that 〈fn, x〉 → 〈f, x〉.
+Let C be such that
+‖fn‖ ≤ C ∀n ∈ N and ‖f ‖ ≤ C.
+Moreover, given any ǫ > 0, choose k large enough so that
+|〈fn, zk〉 − 〈f, zk〉| < ǫ
+(this is possible, since 〈fn, z〉 → 〈f, z〉 for all z in E).
+Then
+|〈fn, x〉 − 〈f, x〉| ≤ |〈fn, x〉 − 〈fn, zk〉| + |〈fn, zk〉 − 〈f, zk〉|
++|〈f, zk〉 − 〈f, x〉| ≤ ‖fn‖‖x − zk‖ + ǫ + ‖f ‖‖zk − x‖ ≤ ǫ(1 + 2C).
+Therefore fn
+∗⇀ f .
+Let us finish by
+
+
+80 Chapter 5. Weak and Weak∗ convergences
+Theorem 5.2.1 (Banach-Alaoglu-Bourbaki) Let X be a normed space. The set BX∗ =
+{f ∈ X∗| ‖f ‖ ≤ 1} is compact in the weak∗ topology σ(X∗, X).
+Instead of this general result, let us prove
+Theorem 5.2.2 Let X be a separable Banach space. Every bounded sequence (fn) of linear bounded functionals, fn ∈ X∗, contains a weakly∗ convergent subsequence.
+Proof. Since X is separable, there is a countable set of points
+x1, x2, . . . , xn, . . .
+dense in X.
+Suppose the sequence (fn) of functionals in X∗, i.e., continuous linear functionals on X, is
+bounded (in norm).
+Then the numerical sequence
+f1(x1), f2(x1), . . . , fn(x1), . . .
+is bounded, and hence, by the Bolzano-Weierstrass theorem, (fn) contains a subsequence
+f (1)
+1 , f (1)
+2 , . . . , fn(1), . . .
+such that the numerical sequence
+f (1)
+1 (x1), f (1)
+2 (x1), . . . , fn(1)(x1), . . .
+converges.
+By the same token, the subsequence (fn(1)) in turn contains a subsequence
+f (2)
+1 , f (2)
+2 , . . . , fn(2), . . .
+such that the sequence
+f (2)
+1 (x2), f (2)
+2 (x2), . . . , fn(2)(x2), . . .
+converges. Continuing this construction, we get a system of subsequences (fn(k)), k = 1, 2, . . .
+such that
+• (f (k+1)
+n ) is a subsequence of (fn(k)) for all k = 1, 2, . . . ;
+• (fn(k)) converges at the points x1, x2, . . . , xk.
+Hence, taking the “diagonal sequence”
+f (1)
+1 , f (2)
+2 , . . . , fn(n), . . . ,
+we get a sequence of continuous linear functionals on X such that
+f (1)
+1 (xn), f (2)
+2 (xn), . . . , fn(n)(xn), . . . ,
+converges for all n. But then, by Proposition 5.2.1 point 6, the sequence
+f (1)
+1 (x), f (2)
+2 (x), . . . , fn(n)(x), . . . ,
+converges for all x ∈ X.
+
+
+5.3. Strong and weak convergence in a Hilbert space 81
+Remark 5.2.2 Let X be a separable normed linear space. Let B and B∗ be the unit closed balls in X and X∗ respectively. Then the topology induced in B∗ by the weak∗ topology in X∗ is metrizable by the metric
+d(f, g) =
+∞
+∑
+n=1
+2−n|〈f − g, xn〉|,
+where {x1, . . . , xn, . . .} is any fixed countable dense set in B.
+As in metric space the sequentially compactness is equivalent to the compactness, then, thanks to Theorem 5.2.2, we can conclude that B∗ is compact in σ(X∗, X) if we prove that B∗ is bounded in σ(X∗, X).
+Consequently, let us prove
+Theorem 5.2.3 Let X be a separable normed linear space. Every closed ball in the space X∗ (closed by the strong topology in X∗) is compact in the weak∗ topology.
+Proof Let us prove actually that
+Every closed ball in the space X∗ (closed by the strong topology in X∗) is closed in the weak∗ topology.
+In fact, since a shift in X∗ carries every closed set (in the weak∗ topology) into another closed set, we need only prove the assertion for every ball of the form
+Br∗ = {f ∈ X∗|‖f ‖ ≤ r}.
+Suppose f0 ∈/ Br∗. Then, by the definition of the norm of the functional f0, there is an
+element x ∈ X such that ‖x‖ = 1 and f0(x) = α > r.
+But then the set
+U=
+{
+f ∈ X∗|f (x) > α + r
+2
+}
+is a weak∗ neighborhood of f0 containing no elements of Br∗. Therefore, Br∗ is closed in the
+weak∗ topology.
+By Theorem 5.2.2 and by the fact (without proof, see Remark 5.2.2) that any closed ball in X∗ is a metric space for σ(X∗, X), we conclude that Br∗ is compact in σ(X∗, X). .
+5.3 Strong and weak convergence in a Hilbert space
+Thanks to the Riesz Representation Theorem (see Chapter 4), all linear continuous functionals on H can be uniquely presented by the inner product in H. Therefore, a sequence (xn) converges weakly to x in a Hilbert space H, if
+∀v ∈ H nli→m∞〈xn, v〉 = 〈x, v〉,
+where 〈·, ·〉 is the inner product in H.
+In addition, if H is a Hilbert space, then H is reflexive, since H∗ is isometric to H. Thus, the weak topology on H is equal to the weak∗ topology on H. Thanks to the Kakutani
+
+
+82 Chapter 5. Weak and Weak∗ convergences
+Theorem, every bounded set in H (in strong topology) is weakly compact: from a bounded sequence (xn) in H one can extract a subsequence weakly converging in H.
+However, the weak topology in H is still coarser than the strong topology:
+Example 5.3.1 (⇀ ;−→) Let H be a Hilbert space and (ek) be its orthonormal basis. Then
+∀x ∈ H 〈x, ek〉 → 0 k → ∞
+since 〈x, ek〉 are Fourrier coefficients of x. Consequently, ek ⇀ 0. But if n 6= m ‖en−em‖2 =
+〈en − em, en − em〉 = 2, thus (ek) is not a Cauchy sequence in H and then (ek) does not converge.
+We know that the inner product is continuous by the strong convergence in H:
+xn → x, yn → y ⇒ 〈xn, yn〉 → 〈x, y〉.
+If xn ⇀ x, yn ⇀ y, it does not imply that 〈xn, yn〉 → 〈x, y〉. Let us give an exam
+ple:
+Example 5.3.2 Let (en) be an orthonormal sequence in H and xn = yn = en. Then en ⇀ 0 and
+〈en, en〉 = ‖en‖2 = 1 9 0 = 〈0, 0〉.
+Proposition 5.3.1 Let H be a Hilbert space. If xn → x and yn ⇀ y in H, then
+〈xn, yn〉 → 〈x, y〉.
+Proof. Since yn ⇀ y in H, for all n ∈ N the norms ‖yn‖ are bounded. Let
+M = sunp ‖yn‖.
+Then, by the Cauchy-Schwartz inequality, we have
+|〈xn, yn〉 − 〈x, y〉| ≤ |〈xn − x, yn〉| + |〈x, yn − y〉| ≤ M ‖xn − x‖ + |〈x, yn − y〉|.
+Since yn ⇀ y in H, then |〈x, yn − y〉| → 0, and since xn → x, then ‖xn − x‖ → 0. Therefore,
+we conclude that |〈xn, yn〉 − 〈x, y〉| → 0.
+Let us give an example for the following property of weak convergence: if (xn) converges
+weakly, then (xn) is bounded:
+∃C > 0 : ‖xn‖H < C and ‖x‖ ≤ lim inf ‖xn‖H .
+Example 5.3.3 Let us consider L2([0, 1]) and
+xn(t) = √2 sin(πnt).
+The sequence (xn) is an orthonormal basis of L2([0, 1]). We have
+‖xn‖ = 1 ⇒ linm ‖xn‖ = 1.
+
+
+5.3. Strong and weak convergence in a Hilbert space 83
+For α(t) ∈ L2([0, 1]) we define, with notation cn for Fourier coefficients,
+f (xn) = √2
+∫1
+0 α(t) sin(πnt)dt = √2cn
+such that
+f (xn) → 0, n → ∞, and xn ⇀ 0.
+Thus, the limit x = 0 and
+‖x‖ = 0 < 1 = linm ‖xn‖.
+In a real Hilbert space it holds
+Proposition 5.3.2 Let H be a real Hilbert space. Let (xn) be a weakly converging sequence
+to x. Further assume that ‖xn‖ converges to ‖x‖. Then (xn) converges strongly to x.
+Proof. We have
+〈xn − x, xn − x〉 = 〈xn, xn〉 − 〈xn, x〉 − 〈x, xn〉 + 〈x, x〉.
+For n → ∞, we find that nli→m∞ 〈xn − x, xn − x〉 = 0,
+which means that ‖xn − x‖ → 0, i.e. xn → x in H.
+We can also obtain the strong convergence from the weak convergence in a Banach space in the following way:
+Theorem 5.3.1 Let X be a Banach space. Let (xn) be a sequence of elements of X such that
+xn ⇀ x in X.
+Then there exists a subsequence of linear combinations of the elements of (xn), denoted by
+
+
+kn
+∑
+k=1
+c(n)
+k xk
+
+,
+which converges strongly to x in X.
+Proof. Let’s notice that theorem states that x belongs to a linear closed subspace L = Span((xn )n∈N∗ ).
+Suppose the converse, that x ∈/ L. Then, thanks to Corollary 3.4.3 of the Hahn-Banach Theorem from Chapter 3, there exists f ∈ X∗ such that
+f (x) = 1, and ∀n f (xn) = 0.
+But it means that f (xn) 9 f (x), which is in contradiction with the assumption that xn ⇀ x
+in X.
+Problem 5.3.1 Give an example of a compact and a weakly compact set in a Hilbert space H.
+
+
+
+
+Chapter 6
+Compact operators and spectral
+theory
+6.1 Compact operators
+Definition 6.1.1 Let X and Y be Banach spaces. A linear operator A : X → Y is compact, if it maps all bounded sets of the space X to a relatively compact set of the space Y.
+Remark 6.1.1 We recall that M ⊂ Y is a relatively compact set of the space (Y, ‖ · ‖) if its closure M is compact in (Y, ‖ · ‖).
+Remark 6.1.2 Let B1 = {f ∈ X|‖f ‖X ≤ 1} be the closed unit ball in X. The operator A is compact iff AB1 is a relatively compact set in Y .
+Indeed, if A is compact operator, then obviously AB1 is a relatively compact set in Y .
+Conversely, let AB1 be a relatively compact set in Y . For all bounded sets M in X there
+exist r > 0, the radius of the ball including M:
+M ⊂ Br = rB1.
+Consequently, using the linearity of A,
+AM ⊂ rAB1.
+Since AB1 is a relatively compact set, thus rAB1 too, what implies that AM is relatively compact (see Corollary B.1.1 and Theorem B.1.2).
+Remark 6.1.3 Let us denote by K(X, Y ) the set of all compact operators from X to Y (X and Y are Banach spaces).
+• All compact operators from (X, ‖ · ‖X) to (Y, ‖ · ‖Y ) are bounded operators:
+K(X, Y ) ⊂ L(X, Y ).
+Indeed, it is sufficient to notice that if AB1 is relatively compact, then AB1 is bounded.
+
+
+86 Chapter 6. Compact operators and spectral theory
+• If dim X < ∞ or dim Y < ∞, then the compactness of the operators is equivalent to the boundness:
+K(X, Y ) = L(X, Y ).
+Indeed, let dim X < ∞, then AX is finite dimensional. In addition, AB1 ⊂ AX and
+all bounded set in AX is relatively compact in Y . If dim Y < ∞, we have AB1 ⊂ Y and there is no difference between the relatively compactness and the boundness in the final dimensional space.
+Theorem 6.1.1 Let X and Y be Banach spaces. The set of all compact operators from (X, ‖ · ‖X) to (Y, ‖ · ‖Y ), denoted by K(X, Y ), is a closed vector subspace of L(X, Y ). In
+addition, K(X, X) forms a closed ideal in L(X, X), i.e if A is a compact operator and S is a bounded operator, then the operators AS and SA are compact.
+Proof.
+1. A is a compact operator ⇒ ∀λ ∈ C λA is compact operator.
+It is obvious.
+2. A and S are compact operators ⇒ A + S is compact operator.
+We have
+(A + S)B1 = {Ax + Sx| x ∈ B1} ⊂ AB1 + SB1 = {Ax + Sy| x, y ∈ B1}.
+Sets AB1 and SB1 are relatively compact in Y . In addition, the function f (x, y) =
+x + y is continuous as a mapping (x, y) ∈ Y 2 7→ x + y ∈ Y , which implies that AB1 + SB1 = f (AB1, SB1) is also relatively compact in Y (see Theorem B.2.1).
+3. (An) is a sequence of compact operators such that An → A in L(X, Y ) ⇒ A is
+compact operator.
+We suppose that for all n ∈ N the sets AnB1 are relatively compact. We want to
+prove that AB1 is a relatively compact set. Let us define for a fixed x ∈ B1
+y = Ax ∈ AB1, yn = Anx ∈ AnB1.
+Thus we have, using A, An ∈ L(X, Y ), that for all x ∈ B1
+‖y − yn‖Y = ‖(A − An)x‖Y ≤ ‖A − An‖L(X,Y )‖x‖X ≤ ‖A − An‖L(X,Y ).
+Therefore, uniformly on x ∈ B1, we have
+∀ǫ > 0 ∃n0(ǫ) ∈ N : ∀n ≥ n0(ǫ) ‖y − yn‖Y ≤ ǫ. (6.1)
+Now, we use Theorem 2.3.4 of Chapter 2: A subset M of a complete metric space (E, d) is relatively compact if and only if it is totally bounded. Thus, M is relatively compact in a complete metric space (E, d) iff for all ǫ > 0 there exists a finite ǫ-net of M, or equivalently,
+∀ǫ > 0 ∃m ∈ N and z1, . . . , zm ∈ E : M ⊂ ∪im=1Bǫ(zi),
+where Bǫ(zi) = {x ∈ E| d(x, zi) ≤ ǫ}.
+
+
+6.2. Adjoint operator on Banach spaces 87
+Let us fixe n ≥ n0(ǫ) with n0(ǫ) defined previously in the convergence of An to A.
+Let us prove that the existence of the ǫ-net for AnB1, which is relatively compact by
+the assumption, implies the existence of the 2ǫ-net for AB1:
+AnB1 ⊂ ∪im=1Bǫ(zi) ⇒ AB1 ⊂ ∪im=1B2ǫ(zi).
+Indeed, given x ∈ B1 we define as previously y = Ax ∈ AB1, and yn = Anx ∈ AnB1.
+For yn there exists i ∈ [1, . . . , m] such that
+‖yn − zi‖Y ≤ ǫ,
+by the definition of the ǫ-net. Consequently, we also have
+‖y − zi‖Y ≤ ‖y − yn‖Y + ‖yn − zi‖Y ≤ ǫ + ǫ = 2ǫ,
+where ‖y − yn‖Y ≤ ǫ thanks to (6.1). Hence, ∪im=1B2ǫ(zi) is the 2ǫ-net of AB1 and
+consequently, AB1 is relatively compact by Theorem 2.3.5. Thus we conclude that A
+is compact.
+4. A ∈ K(X, X), S ∈ L(X, X) ⇒ AS and SA are compact operators.
+By AS and SA we understand A ◦ S and S ◦ A respectively. Since S maps bounded sets to bounded sets, we have that there exists r > 0 such that
+(AS)B1 = A(SB1) ⊂ ABr,
+and since A is compact and Br is bounded, thus ABr is relatively compact. In other
+hand, (SA)B1 = S(AB1), where AB1 is relatively compact. Since S ∈ L(X, X),
+S is continuous and thus preserve the property of the relatively compactness (see Theorem B.2.1).
+Corollary 6.1.1 A compact operator A mapping a Banach space X into itself cannot have a bounded inverse A−1 if X is infinite-dimensional.
+Proof. If A−1 were bounded, then, by Theorem 6.1.1, the identity operator I = A−1A would be compact. But the unit ball is not relatively compact in an infinite-dimensional Banach space.
+6.2 Adjoint operator on Banach spaces
+Definition 6.2.1 Let X and Y be normed vector spaces and A ∈ L(X, Y ). The operator A∗ : Y ∗ → X∗, A∗ ∈ L(Y ∗, X∗) is called the adjoint operator to A if it is defined by
+∀x ∈ X ∀f ∈ Y ∗ 〈f, Ax〉 = 〈A∗f, x〉,
+where the notation 〈f, x〉 means the value of f on x, f (x).
+Theorem 6.2.1 Let A be a compact operator mapping a Banach space X into itself. Then the adjoint operator A∗ is also compact.
+Proof. As A : X → X, then A∗ : X∗ → X∗. Let B1∗ be a closed unit ball in X∗. Let us
+prove that the set A∗B1∗ is relatively compact in X∗. Now suppose we consider the elements
+of X∗ as functionals not on the whole space X, but only on the compact set AB1, where,
+
+
+88 Chapter 6. Compact operators and spectral theory
+in our notations, AB1 is the closure of the image of the closed unit ball in X under the
+operator A. We define the set of functionals
+Φ ⊂ X∗, Φ = {f ∈ (AB1)∗| ‖f ‖X∗ ≤ 1}.
+Thus Φ is uniformly bounded and uniformly equicontinuous (see Ascoli-Arzela’s theorem, Theorem 2.3.7), since for all f ∈ Φ (thus ‖f ‖X∗ ≤ 1)
+sup
+x∈AB1
+|f (x)| = sup
+x∈AB1
+|f (x)| = sup
+x∈AB1,x6=0
+( |f (x)| ‖x‖X
+‖x‖X
+)
+≤ sup
+x∈AB1 ,x6=0
+( |f (x)| ‖x‖X |
+)
+sup
+x∈AB1
+‖x‖X ≤ sup
+x∈X,x6=0
+(|f (x)| ‖x‖X
+)
+sup
+x∈B1
+‖Ax‖X = ‖f ‖X∗‖A‖ ≤ ‖A‖,
+and
+|f (x1) − f (x2)| ≤ ‖f ‖X∗‖x1 − x2‖X ≤ ‖x1 − x2‖X.
+Consequently, thanks to Ascoli-Arzela’s theorem, the set Φ is relatively compact in C(AB1).
+Let us prove that the set Φ with the metric induced by the usual metric of the space of continuous functions C(AB1), is isometric to the set A∗B1∗, with the metric induced by the
+norm of the space X∗.
+In fact, if f1, f2 ∈ B1∗, then
+‖A∗f1 − A∗f2‖X∗ = sup
+x∈B1
+|〈A∗f1 − A∗f2, x〉| = sup
+x∈B1
+|〈f1 − f2, Ax〉|
+= sup
+z∈AB1
+|〈f1 − f2, z〉| = sup
+z∈AB1
+|〈f1 − f2, z〉| = dC(AB1)(f1, f2).
+Being relatively compact, the set Φ is totally bounded, by Theorem ??. Therefore the set A∗B1∗ isometric to Φ is also totally bounded, and hence relatively compact, by the same
+theorem.
+6.3 Spectral properties of compact operators in a Hilbert space
+First we notice that
+1. Let X be a normed vector space and A ∈ L(X, X), then the norm of A is defined by
+‖A‖ = sup
+x6=0
+‖Ax‖
+‖x‖ .
+2. Let H be a Hilbert space and A ∈ L(H, H), then
+‖A‖ = sup
+x,y6=0
+|〈Ax, y〉|
+‖x‖‖y‖ .
+Theorem 6.3.1 Let H be a Hilbert space. For all self-adjoint operator A ∈ L(H, H) we have
+‖A‖ = sup
+x6=0
+|〈Ax, x〉|
+‖x‖2 . (6.2)
+
+
+6.3. Spectral properties of compact operators in a Hilbert space 89
+Proof. Let
+α = sup
+‖x‖=1
+|〈Ax, x〉|, β = sup
+‖x‖=‖y‖=1
+|〈Ax, y〉| = ‖A‖.
+We see that
+α≤β
+since
+|〈Ax, x〉| ≤ ‖Ax‖‖x‖ ≤ ‖A‖‖x‖2,
+where we take the supremum over all x with ‖x‖ = 1.
+Let us prove that β ≤ α.
+We define
+f (x, y) = 〈Ax, y〉, φ(x) = 〈Ax, x〉,
+where φ is real and quadratic form. Since A = A∗, we verify that the real part of f can be found by
+Re f (x, y) = 1
+4 [φ(x + y) − φ(x − y)].
+(By information, the imaginary part is given by Im f (x, y) = 1
+4[−φ(x + iy) + φ(x − iy)].)
+Let us show that
+∀x ∈ H φ(x) = 〈Ax, x〉 ≤ α‖x‖2.
+Indeed, for ‖x‖ ≤ 1, thanks to the definition of α, it holds
+|〈Ax, x〉| ≤ α.
+Thus, for x 6= 0 we have
+〈A x
+‖x‖ , x
+‖x‖ 〉 ≤ α,
+which gives 〈Ax, x〉 ≤ α‖x‖2.
+We fixe x and y and write
+〈Ax, y〉 = ρeiμ,
+where i = √−1 and ρ and μ are corresponding real numbers. Thus, since φ(x) ≤ α‖x‖2, we have
+|〈Ax, y〉| = ρ = 〈Ax, ye−iμ〉 = 1
+4 [φ(x + ye−iμ) − φ(x − ye−iμ)]
+≤α
+4 [‖x + ye−iμ‖2 + ‖x − ye−iμ‖2].
+We use the parallelogram law for the norm ‖ · ‖ = √
+〈·, ·〉 in H:
+‖x + y‖2 + ‖x − y‖2 = 2(‖x‖2 + ‖y‖2)
+and we obtain
+|〈Ax, y〉| ≤ α
+4 [‖x + ye−iμ‖2 + ‖x − ye−iμ‖2]
+=α
+2 (‖x‖2 + ‖y‖2) = α for ‖x‖ = ‖y‖ = 1.
+Consequently, we proved that β ≤ α, hence α = β.
+
+
+90 Chapter 6. Compact operators and spectral theory
+Definition 6.3.1 Let A be a linear operator mapping a topological linear space X into itself. Then a number λ is called an eigenvalue of A if the equation Ax = λx has at least one nonzero solution, and every such solution x is called an eigenfunction (or eigenvector) of A (corresponding to the eigenvalue λ).
+Theorem 6.3.2 Let H 6= {0} be a Hilbert space and A : H → H be a compact self-adjoint operator on H. Then at least one of the numbers +‖A‖ or −‖A‖ is an eigenvalue of A.
+Proof. We notice that
+‖A‖ = sup
+‖x‖=1
+|〈Ax, x〉|, |〈Ax, x〉| ≤ ‖Ax‖‖x‖ ≤ ‖A‖‖x‖2.
+Consequently, there exists a sequence (xn) such that ‖xn‖ = 1 for all n and
+|〈Axn, xn〉| → ‖A‖.
+In addition, it implies that ‖Axn‖ → ‖A‖. Therefore, there exists a subsequence (xnk ) such
+that
+〈Axnk, xnk〉 → +‖A‖ or − ‖A‖.
+To avoid the confusion, we denote the limit by α: 〈Axnk , xnk〉 → α. To simplify the nota
+tions, we also write xk instead of xnk . Thus, we have
+‖Axn − αxn‖2 = ‖Axn‖2 − α〈Axn, xn〉 − α〈xn, Axn〉 + α2‖xn‖2 → α2 − 2α2 + α2 = 0,
+i.e. zn = Axn − αxn → 0 in H. We denote Axn = yn. Since for all n ‖xn‖ = 1, thus (xn) is
+a bounded set in H. As A is a compact operator, then (Axn) is a relatively compact set in
+H. Moreover, there exists a subsequence (Axnj ) which converges in H. We denote by y its
+limit:
+Axnj = ynj → y j → ∞.
+In addition,
+αxnj = ynj − znj → y.
+If α = 0, it means that A = 0 and all vectors x ∈ H are the eigenvectors of A. If α 6= 0, we devide by α and obtain
+xnj → y
+α
+de=f x.
+Thus we have that there is a sequence (xn) with ‖xn‖ = 1 for n ∈ N such that
+xn → x in H and yn = Axn → y.
+Since A is continuous (and thus closed), it follows that y = Ax and therefore, Ax = αx with ‖x‖ = 1.
+Example 6.3.1 (Importance of compactness) Let H = L2([a, b]) and Ax(t) = tx(t) for t ∈ [a, b] ⊂ R. This operator is self-adjoint but not compact. We can see that if
+(t − λ)x(t) = 0 a.e. in [a, b]
+and t 6= λ then x(t) = 0 a.e. in [a, b], thus ‖x‖ = 0, which implies that x = 0 in H. Consequently, A does not have eigenvectors in H.
+
+
+6.3. Spectral properties of compact operators in a Hilbert space 91
+Let us prove
+Lemma 6.3.1 Let H be a Hilbert space and A : H → H, A ∈ L(H, H) be a self-adjoint operator in H. Then
+1. all eigenvalues of A are real.
+2. If x and y are eigenvectors of A corresponding to the eigenvalues λ and μ respectively, such that λ 6= μ, then x is orthogonal to y in H.
+3. If H0 is a subspace of H and AH0 ⊂ H0, then AH0⊥ ⊂ H0⊥.
+Proof.
+1. Let x 6= 0 be a eigenvector of A corresponding to λ:
+Ax = λx.
+It implies that
+〈Ax, x〉 = λ〈x, x〉.
+As A is self-adjoint, its quadratic form 〈Ax, x〉 is real. In addition, 〈x, x〉 is real too and 〈x, x〉 6= 0. Therefore, λ = 〈Ax,x〉
+〈x,x〉 is a real number.
+2. We have Ax = λx and Ay = μy. Thus
+〈Ax, y〉 = λ〈x, y〉, 〈x, Ay〉 = 〈x, μy〉.
+Since μ is real, 〈x, Ay〉 = μ〈x, y〉, and we also have 〈Ax, y〉 = 〈x, Ay〉, since A is selfadjoint. Consequently, (λ − μ)〈x, y〉 = 0 which implies, since λ 6= μ, that 〈x, y〉 = 0, which means that x ⊥ y in H.
+3. Let x ∈ H0, z ∈ H0⊥, y = Ax ∈ AH0 ⊂ H0. Then
+〈y, z〉 = 0, ⇐⇒ 〈x, Az〉 = 0,
+where Az ∈ AH0⊥. Hence, AH0⊥ ⊂ H0⊥.
+Theorem 6.3.3 (Hilbert-Schmidt) Let H 6= {0} be a Hilbert space and A : H → H be a compact self-adjoint operator in H. Then there is an orthonormal system φ1, φ2, . . . of eigenvectors of A which forms an orthonormal basis in H. In addition,
+1. All nonzero eigenvalues λ 6= 0 of A have a finite multiplicity.
+2. The set of different eigenvalues of A is finite or countable.
+3. If the set of eigenvalues of A is countable, then the eigenvalues form a sequence (λn)
+which converges toward 0.
+Proof. Eigenvectors of A form an orthonormal basis in H:
+We denote by
+Hλ = {x ∈ H| Ax = λx}
+a closed subspace of H, which is nonzero iff λ is an eigenvalue of the operator A. Thanks to Lemma 6.3.1, for λ 6= μ we have Hλ ⊥ Hμ, thus we can define a subspace of H
+H∗ = ⊕λHλ.
+
+
+92 Chapter 6. Compact operators and spectral theory
+We fixe an orthonormal basis Sλ in Hλ and define
+S = ∪λSλ.
+Hence, H∗ = Span(S).
+Let us notice, that, by the linearity of A, A(span(S)) ⊂ span(S) what implies, using the continuity of A, that AH∗ ⊂ H∗. Thanks to point 3 of Lemma 6.3.1, it follows that
+AH∗⊥ ⊂ H∗⊥.
+Let us suppose that H∗⊥ 6= {0}. Then, by Theorem 6.3.2, there exist x 6= 0 in H∗⊥ and
+α 6= 0 in R such that Ax = αx. This implies that x ∈ Hα ⊂ H∗, thus x ⊥ x and hence
+x = 0, what contradicts our assumption x 6= 0. Thus, H∗⊥ = {0}. Consequently,
+H = H∗ = ⊕λHλ
+and thus S is an orthonormal basis in H and all vectors of S are eigenvectors of A.
+1. Eigenvalues λ 6= 0 of A have a finite multiplicity
+Let λ 6= 0 be a eigenvalue of A and dim Hλ = ∞. Let (en)n∈N be an orthonormal
+subsequence of the basis Sλ of Hλ. Thus for all m and n in N (m 6= n) we have
+‖Aen − Aem‖2 = ‖λen − λem‖2 = 2λ2.
+Thus, the distance d(Aen, Aem) = ‖Aen − Aem‖ = √2|λ| 6= 0. Therefore, from the
+sequence (Aen) it is not possible to extract a convergent subsequence, what implies
+that the set AB1 is not relatively compact. This is the contradiction with the as
+sumption that A is compact. Then the basis Sλ has a finite number of eigenvectors
+of A.
+2. The set of different eigenvalues of A is finite or countable.
+Let S(δ) = ∪|λ|≥δSλ (δ > 0).
+Let us suppose that the set S(δ) is infinite. Then for any en and em from S(δ) we
+have
+Aen = λen, Aem = μem, en ⊥ em,
+‖Aen − Aem‖2 = ‖λen − μem‖2 = λ2 + μ2 ≥ 2δ2.
+We repeat the argument of the proof of point 1 and obtain the contradiction with the compactness of A. Thus the set S(δ) is finite. For all neighborhood U of 0 in R, in R \ U there exist a finite number of eigenvalues of A. Thus, for δ → 0, in the limit, the set of eigenvalues of A is countable or finite.
+3. If the set of eigenvalues of A is countable, then the eigenvalues form a sequence (λn)
+which converges toward 0. Using the proof of the previous point, we see that there exists only one point which can be a limit point, which is 0. Moreover, if there exists an infinite number of eigenvalues of A (λn), it implies that λn → 0.
+Remark 6.3.1 If λ = 0 is the eigenvalue of A, it implies that Ker(A) 6= {0} and Ker(A) is a closed linear subspace of H. For A ≡ 0 in H (A is compact and self-adjoint), we have H = H0 = Ker(A).

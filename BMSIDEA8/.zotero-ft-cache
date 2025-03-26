@@ -1,0 +1,189 @@
+Large Scale Graph Mining
+GRAPH NEURAL NETWORK
+Nacéra Seghouani
+Computer Science Department, CentraleSupélec Laboratoire Interdisciplinaire des Sciences du Numérique, LISN nacera.seghouani@centralesupelec.fr
+2024-2025
+1/16
+
+
+Motivation & Challenges
++ The node embedding approaches discussed before use a shallow embedding approach to generate representations of nodes. Encoder is just an embedding lookup.
+X Every node has its own embedding. X Do not incorporate node features. X No parameters shared between nodes. X Cannot generate embeddings for nodes that are not seen during training
+2/16
+
+
+Motivation & Challenges
++ Focus on more complex encoder models. Graph Neural Networks (GNNs) is a general framework for defining deep neural networks on graph data.
++ The key idea is to learn representations of nodes that actually depend on the structure of the graph, as well as any feature information we might have.
++ Tasks: X Node classification X Link prediction X Community detection (Identify densely linked clusters of nodes) X Network similarity (How similar are two (sub)networks)
++ The primary challenge is related to how to define complex encoders for graph-structured data.
++ Usual deep learning such as Convolutional Neural Networks (CNNs) well-defined for grid-structured inputs (ex. images) and Recurrent Neural Networks (RNNs) well-defined for sequences (ex. text) are not relevant for graph data.
+3/16
+
+
+Motivation & Challenges
++ Networks are far more complex X Arbitrary size and complex topological structure (i.e.,no spatial locality like grids) X There no fixed notion of window sliding or locality on the graph. No fixed node ordering or reference point X Often dynamic and have multimodal features
++ Need to define a new deep learning architecture: ENC(v ) is multiple layers of non linear transformations based on graph structure
+4/16
+
+
+Deep Neural Network Basics
++ Loss function: MinθL(y, σθ(x)) where σ is a linear layer or no linear such as MLP (a multilayer perceptron), x a minibach sample of input data Pick θ that minimises the loss L
++ Forward propagation: Compute L given x (epoch=forward pass)
++ Back-propagation: Compute/estimate gradient ∇θL using a chain rule. Update θ
++ Stochastic gradient descent (SGD) to minimise L for weights θ over many iterations.
+5/16
+
+
+Permutation Invariance and Equivariance
++ One naive approach to define a deep neural network over graphs would be to simply use the adjacency matrix as input to a deep neural network.
+X For example, to generate an embedding of an entire graph we could simply flatten the adjacency matrix and feed the result to a multi-layer perceptron (MLP): zG = MLP(A1 ⊕ A2 ⊕ ... ⊕ A|V |) where Ai ∈ R|V | denotes a row of the adjacency matrix. ⊕ is vector concatenation (don’t confuse with direct sum)
++ The issue is that depends on the order of nodes in A.
+6/16
+
+
+Permutation Invariance and Equivariance
++ In mathematical terms, any function f that takes (A, X) as input (resp. adjacency matrix and node features vector) should ideally satisfy one of the two following properties:
+X Permutation Invariance: permute the input, the output stays the same
+f (PAPT , PX) = f (A, X)
+X Permutation Equivariance: permute the input, output also permutes accordingly
+f (PAPT , PX) = Pf (A, X)
+where P is a permutation matrix.
++ The shallow encoders discussed are examples of permutation equivariant functions.
++ Graph neural networks consist of multiple permutation equivariant / invariant functions.
+7/16
+
+
+Problem Definition
++ Given G (V , E), its adjacency matrix A ∈ Rn and feature matrix X ∈ Rn×F A graph, Node attributes/feature vectors, (part of nodes are labeled).
++ Examples: Social networks (user profile), Biological networks (gene expression profiles, gene interactions), . . .
++ Idea: Homophily. Connected nodes are informative nodes ⇒ Node’s neighbourhood needs a subgraph computation.
+⇒ Learn how to propagate information across the graph to compute node features
+8/16
+
+
+Problem Definition
++ Generate node embeddings based on local neighbourhoods
++ Aggregate information from neighbours using neural network
+9/16
+
+
+Problem Definition
++ Model of arbitrary depth
++ Layer-k embeddings gets information from nodes that are k hops away
+10/16
+
+
+Neural Message Passing
+Design graph neural networks that are permutation invariant / equivariant by passing and aggregating information from neighbours
++ Recursively update the node features by aggregating information from their neighbouring nodes.
+X The process performs series of message passing steps, where each node sends a message to its neighbors, which are then aggregated to produce an updated feature representation for each node. X At each iteration, every node aggregates information from its local neighborhood, and as these iterations progress each node embedding contains more and more information from further reaches of the graph. X After iteration After k iterations every node embedding contains information about its k -hop neighborhood.
++ But what kind of “information” do these node embeddings actually encode? Generally, this information comes in two forms:
+X On the one hand there is structural information about the graph: after GNN (k) message passing, the embedding hu of u might encode information about the degrees of all the nodes in u’s k -hop neighborhood. X The other key kind of information captured by GNN node embedding is feature- based. Each node also encode information about all the features in their k -hop neighborhood, and possibly edge representations.
+11/16
+
+
+Neural Message Passing
++ hku embedding of u at k -th layer
+h(k +1)
+u = g(k) (
+h(k )
+u , f(k)({h(k)
+v , ∀v ∈ N (u)})
+)
+= g(k) (
+h(k )
+u , m(k)
+u
+)
+where f(k) and g(k) are resp. aggregation and transformation (update) function at k -layer, differentiable functions (i.e., neural networks) and m(k)
+u is the message that is aggregated from u’s N (u). X The initial embeddings at k = 0 are set to the input features for all the nodes, i.e., h0u . After running K iterations of the GNN message passing, we can use the output of the final layer to define the embeddings for each node, i.e., zu = huK , ∀u ∈ V X For ex., rich node features to use are gene expression features in biological networks or text features in social networks. However, where no node features there are several options using node statistics using metrics discussed before.
+12/16
+
+
+The basic GNN message passing
+h(k )
+u =σ
+(
+W (k)
+self h(k−1)
+u + W (k)
+neigh ∑
+v ∈Nu
+h(k −1)
+v + b(k)
+)
+where Wself , Wneigh ∈ Rdxd are trainable parameter matrices and σ denotes an element wise non-linearity (e.g., a tanh or ReLU). The bias term b(k) ∈ Rd (omitted for notation simplicity)
+Basic GNN:
+m(k )
+u =∑
+v ∈Nu
+h(k )
+v
+g(hu, mu) = σ
+(Wself hu + Wneighmu
+)
+H(k) = σ
+(
+H(k−1)W (k)
+self + AH(k−1)W (k)
+neigh
+)
+where H(k) ∈ R|V |xd
+13/16
+
+
+The basic GNN message passing
+Message Passing with Self-loops: add to the neighbours the node itself for aggregation. No need to define an explicit update, as it is implicitly included in the aggregation.
+mu = ∑
+v ∈Nu
+h(k )
+v
+Adding self-loops is equivalent to sharing parameters between the Wself and Wneigh matrices:
+H(k) = σ
+(
+H(k−1)W (k) + AH(k−1)W (k))
+where H(k) ∈ R|V |xd
+Simplifying the message passing alleviates overfitting, but also limits the GNN expressivity, as the information coming from the node’s neighbours cannot be differentiated from the one coming from the node itself.
+14/16
+
+
+Simplified GCN
++ Need to normalize
+m(k )
+u= 1
+|Nu| ∑
+v ∈Nu
+h(k )
+v
++ Symmetric normalization
+m(k )
+u =∑
+v ∈Nu
+h(k )
+v
+√|Nu||Nv |
+h(k) = σ
+(
+W (k) ∑
+v ∈Nu
+h(k )
+v
+√|Nu||Nv |
+)
++ More sophisticated aggregation: Set pooling, . . .
++ Neighbourhood attention strategy to improve the aggregation by assigning an attention weight or importance/influence to each neighbour.
+15/16
+
+
+R-GCN Multi-relational Graphs
++ Commonly known approach is Relational Graph Convolutional Network (R-GCN, Schlichtkrul et al, 2017):
++ augment the aggregation to accommodate multiple relation types by specifying a separate transformation matrix per relation type:
+m(k )
+u = r∈∑R ∑
+v ∈Nu (r )
+Wr hu
+fnorm(Nu , Nv )
+fnorm is normalisation function, depends on the neighbourhood of u as well as v being aggregated over. Several normalisation strategies analogous to those discussed earlier.
++ Drawback: The number of parameters to learn (one matrix to learn per relation) increases ⇒ overfitting on rare relations and slow learning. ⇒a separate aggregation parameter per relation, is applicable for discrete edge features. Otherwise we can leverage these features in attention or by concatenating this information with the neighbour embeddings
+16/16

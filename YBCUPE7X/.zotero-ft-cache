@@ -1,0 +1,163 @@
+LARGE SCALE GRAPH MINING
+RANDOM WALK ON GRAPHS
+Nacéra Seghouani
+Computer Science Department, CentraleSupélec Laboratoire Interdisciplinaire des Sciences du Numérique, LISN nacera.seghouani@centralesupelec.fr
+2024-2025
+1/14
+
+
+First Perron-Frobenius Theory
++ Perron-Frobenius vector for non-negative matrices leads to the characterization of non-negative primary eigenvectors, such as stationary distributions of Markov chains and Google’s PageRank.
+→ Note that positive or non negative matrix iff Aij > 0 resp. Aij ≥ 0 is different from positive definite or semi-positive definite matrix
++ Perron theorem for positive matrix Aij > 0 X ∃λ∗ > 0, v∗ > 0, ||v∗||2 = 1 s.t Av∗ = λ∗v∗ right column eigenvector ∃λ∗ > 0, w > 0, ||w||2 = 1 s.t wA = λ∗w left row eigenvector X ∀λ other eigenvalue of A, |λ| < λ∗, dominant eigenvalue (the largest absolute value) X λ∗ is simple (multiplicity 1) and v∗ is unique (up to rescaling). Such eigenvectors will be called Perron vectors.
++ Perron Theorem for non negative Matrix: v∗ are non negative rather than positive and the uniqueness of v∗ is not guaranteed
+2/14
+
+
+First Perron-Frobenius Theory
++ Definition: Irreducible
+Connected graph G (V , E) ⇔ for any 1 ≤ i, j ≤ |V |, ∃k ∈ N∗, Ak
+ij > 0
++ Definition: Primitive
+strengths this condition to k -connected, i.e. every pair of nodes are connected by a path of length k ⇒ λ∗ is unique and λ∗ = max|λ| X A is connected (irreducible) and Aii > 0 for some i is sufficient for primitivity but not necessary
++ Definition: Primitive + Non-negative
+X ∃λ∗ > 0, v∗ > 0, ||v∗||2 = 1 s.t Av∗ = λ∗v∗ right column eigenvector ∃w > 0, ||w||2 = 1 s.t wA = λ∗w left row eigenvector X ∀λ other eigenvalue of A, |λ| < λ∗, dominant eigenvalue (the largest absolute value) X v∗ is unique (up to rescaling).
+3/14
+
+
+Random walks on graphs
++ A random walk on a graph G (E, V ) is a random process that starts from some vertex vi , and repeatedly moves to a neighbor vj chosen uniformly at random. ξt is a random variable describing the position of a random walk after t steps.
+Pij = P(ξt+1 = j|ξt = i)
++ The sequence can be regarded as a category of Markov chain (discrete time stochastic process) where the position ξ0 is the initial state according to the distribution P0 and next state depends only on the current state. The t steps transition probability is:
+Pt
+ij = P(ξt = j|ξ0 = i)
++ Some examples: path traced by a molecule in a liquid or a gas (Brownian motion) , the price of a fluctuating stock, the financial status of a gambler, ... The term random walk was first introduced by Karl Pearson in 1905.
+4/14
+
+
+Random walks on graphs: Example
+5/14
+
+
+Random walks on graphs
++ Consider a random walk with Pij = P(ξt+1 = j|ξt = i) ≥ 0, thus P is a row-stochastic or row-Markov matrix:
+j∑
+Pij = 1, P × 1 = 1 ∈ Rn right Perron eigenvector > 0
++ From Perron theorem for non-negative matrices, we know: X v∗ = 1 is a right Perron eigenvector of P X |λ| ≤ λ∗ = 1, is a Perron eigenvalue X ∃ left Perron row eigenvector πP = π X P is primitive ⇒ π is unique
+6/14
+
+
+Random walks on graphs: Stationary distribution
++ Let be πt the row vector giving the probability distribution of ξt . πt
+i be the probability that a walk is on vi at t.
+πt+1 = πt P
+πt+1 = π0Pt
+limt→∞πt+1 = limt→∞πt P
+λπ = πP with λ = 1
++ This means if we take powers of P, i. e., Pk , all rows will converge to the stationary distribution π if primitivity holds.
+7/14
+
+
+Random walks on graphs
++ What does "random" mean? If the walk is on i at t, the single step transition probability refers to the uniform probability that the random walk moves to j at t + 1.
+Pij = P(ξt+1 = j|ξt = i) =
+{1
+di ∀vi , vj ∈ V
+0 otherwise (1)
+Pij = Aij
+∑vj ∈V Aij
+= Aij
+di
+= D−1
+ii Aij
++ The random sequence of vertices ξ0, ξ1, ...ξt , ξt+1, ... visited on G (E, V ) is a Markov chain with state space V and matrix transition probabilities
+P = D−1A
+8/14
+
+
+Random walks on graphs
+
+      
+001000 0 0 1/3 1/3 1/3 0 1/4 1/4 0 1/4 1/4 0 0 1/4 1/4 0 1/4 1/4 0 1/4 1/4 1/4 0 1/4 0 0 0 1/2 1/2 0
+
+      
+9/14
+
+
+Random walks on graphs: Balance condition
+X If we find a probability distribution π which satisfies balance condition, then:
+πi Pij = πj Pji ∀vi , vj ∈ V
+πi
+Aij
+di
+= πj
+Aji
+dj
+⇒ πi
+di
+= πj
+dj
+= const
+⇒ j∑
+πj = j∑
+πi
+di
+dj = const j∑
+dj = 1
+πi = di
+∑j dj
+= di
+2|E |
+The stationary probabilities are proportional to the degrees of the vertices.
+10/14
+
+
+Random walks on graphs: Balance condition
+X In particular, if G is d-regular (nodes with equal degrees d),
+πi = d
+2m = 1
+n ∀vi ∈ V
+is the uniform distribution: a random walk moves along every edge with the same frequency.
+X The balance condition implies time-reversibility. The reversed walk is also a Markov chain. Suppose that the random walk has the stationary distribution and consider the reversed walk ρt = ξr−t with r = 0, ..., t
+11/14
+
+
+Random walks on graphs: Lazy random walk
++ Lazy random walk: either stay on the current node with the probability 1
+2 or walk on a neighbor
++ Give the matrix form Pt and Pt+1. What do you observe comparing to simple random walk.
+12/14
+
+
+Random walks on graphs: Lazy random walk
++ Lazy random walk: either stay on the current node with the probability 1
+2 or walk on a neighbor
+Pt +1
+j =1
+2 Pt
+j+1
+2 i∑
+Aij
+di
+Pt
+i
++ Matrix Form
+Pt+1 = 1
+2 Pt (I + D−1A)
++ Convervges to the same stationary distribution
+(2λ − 1)π = π(D−1A)
+λ = 1 is the eingenvalue
+13/14
+
+
+PageRank
++ Formalize the problem in the case of directed graph by taking into account only out going edges + The web is very heterogeneous by its nature, and certainly huge, we do not expect its graph to be connected. The solution of Page and Brin: fix a positive constant p between 0 and 1, called the damping factor (a typical value for p is 0.15). Define the Page Rank matrix
+Pg = (1 − p)P + pB where B = 1
+n
+
+  
+1 1 ... 1 1 1 ... 1 ... ... ... ... 1 1 ... 1
+
+  
+Most of the time, a surfer will follow the outgoing links and move on to one of the neighbors. A smaller percentage of the time, the surfer will dump the current page and choose arbitrarily a different page from the web. The damping factor p reflects the probability that the surfer quits the current page and jump to a new one . + Prove that Pg remains stochastic.
+14/14

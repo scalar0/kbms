@@ -1,0 +1,226 @@
+LE THÉORÈME DE DÉRIVATION DE LEBESGUE
+Dans ces notes, on fixe n ≥ 1 un entier et on travaille dans l’espace euclidien Rn muni de sa norme euclidienne notée ∣ ⋅ ∣. Dans l’ensemble de ce texte, une boule (fermée, non dégénérée), est un ensemble de la forme :
+B[x, r] = {y ∈ Rn ∶ ∣y − x∣ ≤ r},
+où x ∈ Rn et r > 0 sont donnés ; on appelle x le centre de B et r son rayon. Étant donné une boule B, on note r(B) son rayon. Si B = B[x, r] est une boule (avec x ∈ Rn et r > 0), on note Bˆ ∶= B[x, 5r] la boule de même centre que B et de rayon égal au quintuple de celui de B. Dans ce texte, on substituera le symbole ⊔ au symbole ∪ lorsque les parties dont on forme la réunion sont deux à deux disjointes. Si E ⊆ Rn est donné, on note ∣E∣ sa mesure extérieure de Lebesgue (rappelons au passage que la restriction aux ensembles Lebesgue-mesurables, de la mesure extérieure de Lebesgue, est une mesure appelée la mesure de Lebesgue) ; rappelons que la mesure extérieure de Lebesgue est invariante par translations et que l’on a, pour λ ≥ 0 un réel et E ⊆ Rn, ∣λE∣ = λn∣E∣. En particulier, il vient ∣B[x, λr]∣ = λn∣B[x, r]∣ pour tous x ∈ Rn, r > 0 et λ > 0 ; en notant ωn ∶= ∣B[0, 1]∣ la mesure de Lebesgue de la boule unité de Rn, on en déduit en particulier que l’on a ∣B[x, r]∣ = ∣B[0, r]∣ = rnωn pour tous x ∈ Rn et r > 0. Étant donné une fonction f ∶ Rn → R localement intégrable, x ∈ Rn et r > 0, on notera parfois :
+⨏B[x,r]
+f ∶= 1
+∣B[x, r]∣ ∫B[x,r]
+f,
+la moyenne de f sur B[x, r] (l’intégration se faisant ici, et dans l’ensemble de ce texte, par rapport à la mesure de Lebesgue sur Rn). Au cours du 9 ou du 16 octobre 2023, nous démontrerons formellement le théorème de recouvrement de Vitali.
+Théorème 1 (Vitali). — Soit B une famille de boules (fermées, non dégénérées) vérifiant :
+sup
+B∈B
+r(B) < +∞.
+Dans ces conditions, il existe une famille au plus dénombrable B′ ⊆ B constituée de boules deux à deux disjointes et telle que l’on ait :
+∪B ⊆ ⋃
+B∈B′
+Bˆ .
+
+
+LE THÉORÈME DE DÉRIVATION DE LEBESGUE 2
+1. La fonction maximale de Hardy-Littlewood
+Étant donné une fonction localement intégrable f ∶ Rn → R, on note M f sa fonction maximale de Hardy-Littlewood définie pour x ∈ Rn par :
+M f (x) ∶= sup
+r>0 ⨏B[x,r]
+∣f ∣.
+Cette fonction n’est, en général, pas intégrable sur Rn si f l’est ; elle vérifie néanmoins une propriété intéressante, appelée inégalité faible (1, 1).
+Lemme 1. — Étant donné une fonction intégrable f ∶ Rn → R et un réel positif λ > 0, on a :
+∣{x ∈ Rn ∶ M f (x) > λ}∣ ≤ 5n
+λ ∫Rn ∣f ∣. (1)
+Démonstration. — Soient f et λ > 0 comme dans l’énoncé. Commençons par observer que si x ∈ Rn et r > 0 sont donnés, on a :
+⨏B[x,r]
+∣f ∣ = 1
+∣B[x, r]∣ ∫B[x,r]
+∣f ∣ ≤ 1
+ωnrn ∫Rn ∣f ∣.
+Or il est clair que l’on a limr→∞ 1
+ωnrn ∫Rn ∣f ∣ = 0 ; il s’ensuit qu’il existe un réel positif R > 0 tel
+que, pour tout r ≥ R, on ait 1
+ωnrn ∫Rn ∣f ∣ ≤ λ et donc aussi, pour tout x ∈ Rn et tout r ≥ R :
+⨏B[x,r]
+∣f ∣ ≤ λ. (2)
+Posons à présent E ∶= {x ∈ Rn ∶ M f (x) > λ}. Pour chaque x ∈ E, il existe, par définition de M f (x), un réel rx > 0 tel que l’on ait :
+1
+∣B[x, rx]∣ ∫B[x,rx]
+∣f ∣ = ⨏B[x,rx]
+∣f ∣ > λ.
+Il résulte par ailleurs de (2) que, pour chaque x ∈ E, on a rx ≤ R. Si on pose :
+B ∶= {B[x, rx] ∶ x ∈ E},
+on voit donc que B est une famille de boules (fermées, non dégénérés) vérifiant :
+sup
+B∈B
+r(B) = sup
+x∈E
+rx ≤ R < +∞ ;
+pour chaque B ∈ B, on a en outre par définition de B :
+1
+∣B∣ ∫B
+∣f ∣ = ⨏B
+∣f ∣ > λ. (3)
+Le théorème de recouvrement de Vitali (Théorème 1 ci-dessus) assure l’existence d’une famille au plus dénombrable B′ ⊆ B telle que l’on ait :
+∪B ⊆ ⋃
+B∈B′
+Bˆ .
+Comme on a évidemment E ⊆ ⋃x∈E B[x, rx] = ∪B, on peut donc écrire :
+∣E∣ ≤ ∣ ∪ B∣ ≤ ∣ ⋃
+B∈B′
+Bˆ∣ ≤ ∑
+B∈B′
+∣Bˆ∣ = 5n ∑
+B∈B′
+∣B∣,
+
+
+LE THÉORÈME DE DÉRIVATION DE LEBESGUE 3
+en utilisant le fait que B′ est au plus dénombrable et la sous-additivité de la mesure extérieure de Lebesgue. En utilisant (3), on trouve donc :
+∣E∣ ≤ 5n
+λ∑
+B∈B′ ∫B
+∣f ∣.
+Puisque les boules de B′ sont deux à deux disjointes, il vient finalement (en utilisant l’additivité complète de l’intégrale de Lebesgue) :
+∣E∣ ≤ 5n
+λ ∫⊔B′ ∣f ∣ ≤ 5n
+λ ∫Rn ∣f ∣,
+c’est-à-dire la thèse. ∎
+Remarque 1. — L’inégalité (1) rappelle la forme de l’inégalité de Markov, laquelle assure que si f ∶ Rn → R est intégrable, alors on a pour tout λ > 0 :
+∣{x ∈ Rn ∶ ∣f (x)∣ > λ}∣ ≤ 1
+λ ∫Rn ∣f ∣.
+Cette dernière inégalité s’obtient facilement en observant que, en posant Aλ ∶= {x ∈ Rn∣f (x)∣ > λ} (qui est évidemment Lebesgue-mesurable), on a, sur Rn :
+λχAλ ≤ ∣f ∣,
+et donc aussi, en intégrant les deux membres de l’inégalité précédente par rapport à la mesure de Lebesgue sur Rn :
+λ∣Aλ∣ = ∫Rn λχAλ ≤ ∫Rn ∣f ∣.
+2. Le théorème de dérivation de Lebesgue
+On va démontrer le résultat suivant.
+Théorème 2 (Lebesgue). — Si f ∶ Rn → Rn est intégrable, alors pour presque tout x ∈ Rn, on a:
+f (x) = lri→>m0
+⨏B[x,r]
+f.
+Afin de démontrer ce théorème, on introduit, étant donné une fonction localement intégrable f ∶ Rn → R, x ∈ Rn et r > 0, les notations suivantes :
+ωf (x, r) ∶= ⨏B[x,r]
+∣f (x) − f ∣,
+et
+ωf (x) ∶= lri→>m0
+ωf (x, r) = lδi→>m0
+sup
+0<r≤δ ⨏B[x,r]
+∣f (x) − f ∣.
+Remarque 2. — Pour démontrer le théorème de dérivation de Lebesgue, il suffit de montrer qu’étant donné une fonction intégrable f ∶ Rn → R, on a ωf (x) = 0 pour presque tout x ∈ Rn. Dans ces conditions, en effet, on écrit pour x ∈ Rn et r > 0 (en utilisant le fait que l’on a ⨏B[x,r] 1 = 1) :
+∣f (x) − ⨏B[x,r]
+f ∣ = ∣⨏B[x,r]
+f (x) dy − ⨏B[x,r]
+f (y) dy∣
+= ∣⨏B[x,r]
+[f (x) − f (y)] dy∣ ≤ ⨏B[x,r]
+∣f (x) − f (y)∣ dy = ωf (x, r).
+
+
+LE THÉORÈME DE DÉRIVATION DE LEBESGUE 4
+Il vient donc, pour x ∈ Rn :
+lri→>m0
+∣f (x) − ⨏B[x,r]
+f ∣ ≤ lri→>m0
+ωf (x, r) = ωf (x).
+Si l’on a ωf (x) = 0 pour un x ∈ Rn, alors pour chaque ε > 0 il existe un réel δ > 0 tel que, pour tout 0 < r ≤ δ, on ait :
+∣f (x) − ⨏B[x,r]
+f∣ ≤ ε ;
+autrement dit, il vient f (x) = limr→>0 ⨏B[x,r] f . Pour montrer le théorème de dérivation de Le
+besgue, il suffit donc bien de montrer que l’on a ωf (x) = 0 pour presque tout x ∈ Rn.
+Affirmation 1. — Étant donné une fonction continue f ∶ Rn → R, on a ωf (x) = 0 pour tout x ∈ Rn.
+Démonstration. — Pour démontrer cette première affirmation, fixons f ∶ Rn → R continue et soit x ∈ Rn. Fixons ε > 0. Il existe par hypothèse un réel δ > 0 tel que l’on ait ∣f (y) − f (x)∣ ≤ ε pour tout y ∈ B[x, δ]. Mais il vient alors, pour tout 0 < r ≤ δ :
+ωf (x, r) ∶= ⨏B[x,r]
+∣f (x) − f (y)∣ dy ≤ ε ⨏B[x,r]
+1 = ε.
+En particulier, on trouve ωf (x) ∶= limr→>0
+ωf (x, r) ≤ ε. Comme ε > 0 est arbitraire, il vient donc
+ωf (x) = 0 et l’affirmation est démontrée. ∎
+Affirmation 2. — Étant donné une fonction localement intégrable f ∶ Rn → R et une fonction continue g ∶ Rn → Rn, on a ωf = ωf−g partout sur Rn.
+Démonstration. — Remarquons pour commencer qu’il est facile de voir que l’on a ωf1+f2 ≤ ωf1 + ωf2 sur Rn pour toute paire de fonctions localement intégrables f1, f2 sur Rn. Il vient donc d’une part, sur Rn :
+ωf = ωf−g+g ≤ ωf−g + ωg = ωf−g,
+puisque l’Affirmation 1 assure que l’on a ωg = 0 sur Rn. On calcule de même :
+ωf−g = ωf+(−g) ≤ ωf + ω−g = 0,
+puisqu’il suit de l’Affirmation 1 et de la continuité de −g que l’on a ω−g = 0 sur Rn. La preuve de l’affirmation est complète. ∎
+Affirmation 3. — Étant donné une fonction localement intégrable f ∶ Rn → R, on a, sur Rn :
+ωf ≤ ∣f ∣ + M f,
+où M f est la fonction maximale de Hardy-Littlewood de f (voir la section 1).
+Démonstration. — Fixons x ∈ Rn et observons que l’on a pour r > 0 :
+ωf (x, r) ∶= ⨏B[x,r]
+∣f (x) − f ∣ = 1
+∣B[x, r]∣ ∫B[x,r]
+∣f (x) − f (y)∣ dy
+≤1
+∣B[x, r]∣ [∫B[x,r]
+∣f (x)∣ dy + ∫B[x,r]
+∣f (y)∣ dy] = ∣f (x)∣ + ⨏B[x,r]
+∣f ∣ ≤ ∣f (x)∣ + M f (x).
+Il vient donc aussi :
+ωf (x) ∶= lri→>m0
+ωf (x, r) ≤ ∣f (x)∣ + M f (x),
+
+
+LE THÉORÈME DE DÉRIVATION DE LEBESGUE 5
+c’est-à-dire la thèse puisque x ∈ Rn est arbitraire. ∎
+Nous sommes à présent prêts pour démontrer le théorème de dérivation de Lebesgue.
+Preuve du Théorène 2. — Fixons une fonction intégrable f ∶ Rn → R. Nous avons vu (voir la Remarque 2) qu’il suffit de démontrer que l’on a ωf = 0 presque partout sur Rn. À cet effet, fixons λ > 0 et commençons par montrer que l’ensemble Eλ ∶= {x ∈ Rn ∶ ωf (x) > λ}, est négligeable. Pour ce faire, fixons ε > 0 et choisissons une fonction continue et intégrable g ∶ Rn → R telle que l’on ait ∫Rn ∣f − g∣ ≤ ε. Il suit de l’Affirmation 2 que l’on a ωf = ωf−g sur Rn.
+Si x ∈ Eλ est donné, alors on a, en vertu de l’Affirmation 3 :
+M (f − g)(x) + ∣(f − g)(x)∣ ≥ ωf−gf (x) = ωf (x) > λ.
+Il vient donc nécessairement soit M (f − g)(x) > λ/2, soit ∣(f − g)(x)∣ > λ/2 (sans quoi on aurait ∣(f − g)(x)∣ + M (f − g)(x) ≤ λ/2 + λ/2 = λ). Autrement dit, on a :
+Eλ ⊆ {x ∈ Rn ∶ M (f − g)(x) > λ
+2 } ∪ {x ∈ Rn ∶ ∣(f − g)(x)∣ > λ
+2}.
+Il vient donc en particulier :
+∣Eλ∣ ≤ ∣{x ∈ Rn ∶ M (f − g)(x) > λ
+2 }∣ + ∣{x ∈ Rn ∶ ∣(f − g)(x)∣ > λ
+2 }∣ .
+Or on a, en vertu du Lemme 1 :
+∣{x ∈ Rn ∶ M (f − g)(x) > λ
+2 }∣ ≤ 2 ⋅ 5n
+λ ∫Rn ∣f − g∣ ≤ 2 ⋅ 5nε
+λ,
+tandis qu’il résulte de l’inégalité de Markov (voir la Remarque 1) que l’on a :
+∣{x ∈ Rn ∶ ∣(f − g)(x)∣ > λ
+2 }∣ ≤ 2
+λ ∫Rn ∣f − g∣ ≤ 2ε
+λ.
+Il vient donc finalement :
+∣Eλ∣ ≤ 2ε ⋅ 1 + 5n
+λ.
+Comme ε > 0 est arbitraire dans l’inégalité précédente, on trouve par conséquent ∣Eλ∣ = 0. Écrivons à présent :
+{x ∈ Rn ∶ ωf (x) > 0} = ⋃
+k∈N
+{x ∈ Rn ∶ ωf (x) > 2−k} = ⋃
+n∈N
+E2−k .
+La sous-additivité de la mesure extérieure de Lebesgue assure dès lors que l’on a :
+∣{x ∈ Rn ∶ ωf (x) > 0}∣ ≤
+∞
+∑
+k=0
+∣E2−k ∣ = 0,
+c’est-à-dire que l’on a ωf = 0 hors d’un sous-ensemble négligeable de Rn. C’est ce qu’il nous fallait démontrer. ∎
+La dérivation étant une opération locale, on peut démontrer une version plus forte du théorème de dérivation de Lebesgue.
+Théorème 3 (Lebesgue, version forte). — Si f ∶ Rn → Rn est localement intégrable, alors pour presque tout x ∈ Rn, on a :
+f (x) = lri→>m0
+⨏B[x,r]
+f.
+
+
+LE THÉORÈME DE DÉRIVATION DE LEBESGUE 6
+Démonstration. — Pour chaque k ∈ N, notons Uk ∶= {x ∈ Rn ∶ ∣x∣ < k} la boule ouverte centrée en 0 et de rayon k, et posons :
+fk ∶= f χUk .
+Fixons k ∈ N. Comme f est localement intégrable, on voit que fk est intégrable sur Rn. Il existe donc, en vertu du théorème de dérivation de Lebesgue, un ensemble négligeable Nk ⊆ Rn tel que, pour tout x ∈ Rn ∖ Nk, on ait :
+fk(x) = lri→>m0
+⨏B[x,r]
+fk.
+Si x ∈ Uk ∖ Nk est donné, observons que cela implique (puisque l’on aura B[x, r] ⊆ Uk pour r > 0 assez petit, et donc aussi fk = f sur B[x, r] pour r > 0 assez petit) :
+f (x) = fk(x) = lri→>m0
+⨏B[x,r]
+fk = lri→>m0
+⨏B[x,r]
+f.
+Posons à présent N ∶= ⋃k∈N Nk, observons que N est négligeable et fixons x ∈ Rn ∖ N . Si k ∈ N est assez grand pour que l’on ait x ∈ Uk, il vient alors x ∈ Uk ∖ N ⊆ Uk ∖ Nk, et donc aussi, en vertu de ce qui précède :
+f (x) = lri→>m0
+⨏B[x,r]
+f.
+La version forte du théorème de dérivation de Lebesgue est donc établie. ∎
+Le 2 octobre 2024
+● E-mail : Laurent.Moonens@centralesupelec.fr

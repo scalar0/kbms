@@ -1,0 +1,1881 @@
+APPROXIMATIONS DE L’IDENTITÉ, INÉGALITÉS MAXIMALES
+ET LE PRINCIPE DE SAWYER-STEIN
+Résumé. — Dans ce texte, on s’intéressera aux suites de fonctions (φk) ⊆ L1(R) ayant la propriété d’approcher l’identité au sens où l’on a ∥φk ∗ u − u∥1 → 0, k → ∞. Appelées approximations de l’identité, ces suites se caractérisent (au moins dans le cas positif) par des propriétés simples. Elles donnent aussi lieu à l’existence de sous-suites universelles pour la convergence presque partout dans L2(R) ou L1(R).
+Nous travaillerons, dans la suite, avec les espaces de fonctions Lp(R), 1 ≤ p ≤ ∞ et les espaces de classes d’équivalence Lp(R).
+On note M(R) l’espace des fonctions Lebesgue-mesurables sur R. Pour 1 ≤ p < ∞, on définit :
+Lp(R) ∶= {u ∈ M(R) ∶ ∣u∣p est L-intégrable sur R}:
+Cet espace est muni de la semi-norme ∥ ⋅ ∥p définie par :
+∥u∥p ∶= (∫R
+∣u∣p)
+1/p
+:
+On note également :
+L∞(R) ∶= {u ∈ M(R) ∶ il existe N ∈ N tel que u soit bornée sur R ∖ N };
+et on munit cet espace de la semi-norme ∥ ⋅ ∥∞ définie par :
+∥u∥∞ ∶= inf
+N∈N sup
+R∖N
+∣u∣ = inf{c ∈ R+ ∶ ∣u∣ ≤ c presque partout sur R}:
+Étant donné 1 < p < ∞, on note 1 < p′ < ∞ l’exposant conjugé de p défini par la relation 1
+p+ 1
+p′ = 1.
+On pose aussi 1′ = ∞ et ∞′ = 1. Étant donné 1 ≤ p ≤ ∞, l’inégalité de Hölder assure que si f ∈ Lp(R) et g ∈ Lp′(R) sont données, alors leur produit f g vérifie f g ∈ L1(R) ainsi que :
+∥f g∥1 ≤ ∥f ∥p∥g∥p′:
+Pour 1 ≤ p ≤ ∞, on note ∼p la relation d’équivalence définie sur Lp(R) de la façon suivante : f ∼p g si et seulement si f = g presque partout sur R. Étant donné f; g ∈ Lp(R) vérifiant f ∼p g, on a ∥f ∥p = ∥g∥p. Il s’ensuit que la semi-norme ∥ ⋅ ∥p induit une semi-norme (notée également ∥ ⋅ ∥p) sur le quotient Lp(R) ∶= Lp(R)/ ∼p ; cette semi-norme est par ailleurs une norme sur Lp(R), comme cela suit aisément du fait qu’une fonction positive de L-intégrale nulle sur R, y est nulle presque partout. On rappelle que l’espace K(R) des fonctions continues à support compact dans R, est dense dans Lp(R) pour tout 1 ≤ p < ∞.
+Exercice 1 (Approximation dans Lp par des fonctions étagées). — Dans cet exercice, on fixe 1 ≤ p < ∞ et f ∈ Lp(R). Montrer que, pour tout " > 0, il existe une fonction étagée g pour laquelle on a ∥f − g∥p ≤ ".
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 2
+Exercice 2 (Approximation dans Lp par des fonctions régulières). — Dans cet exercice, on fixe 1 ≤ p < ∞ et f ∈ Lp(R). Montrer que, pour tout " > 0, il existe une fonction lipschitzienne g ∶ R → R pour laquelle on a ∥f − g∥p ≤ ". Indication. On commencera par traiter le cas où f = B avec B une partie Lebesgue-mesurable vérifiant ∣B∣ < +∞ ; on pourra à cet effet utiliser la régularité extérieure de la mesure extérieure de Lebesgue et observer que si U est un ouvert de R, et que l’on pose, pour x ∈ R :
+dist(x; ∁ U ) ∶= inf{∣x − y∣ ∶ y ∈ ∁ U };
+alors pour chaque k ∈ N la fonction fk ∶ R → R définie par :
+fk(x) ∶= min[1; 2k dist(x; ∁ U )];
+est une fonction lipschitzienne sur R, et que la suite (fk)k∈N converge ponctuellement sur R vers U . On pourra généraliser ensuite au cas où f est une fonction étagée, puis au cas général en utilisant l’exercice précédent.
+Exercice 3 (Densité de K(R) dans Lp(R)). — Étant donné 1 ≤ p < ∞, utiliser l’exercice précédent pour montrer que K(R) est dense dans Lp(R).
+Finalement, étant donné 1 ≤ p ≤ ∞ on utilisera la notation Lp
++(R) (resp. Lp
++(R)) pour désigner les fonctions (resp. les classes d’équivalences de fonctions) presque partout positives issues de Lp(R) (resp. Lp(R)).
+Avant de pouvoir même formuler la définition d’une approximation de l’identité, il convient de revenir brièvement sur le produit de convolution de deux fonctions.
+1. Convolution
+Le résultat suivant constitue une définition du produit de convolution de deux fonctions f ∈ L1(R) et g ∈ Lp(R) pour 1 ≤ p ≤ ∞.
+Théorème 1.1. — Soient 1 ≤ p ≤ ∞, f ∈ L1(R) et g ∈ Lp(R). L’ensemble I des réels x pour lesquels la fonction y ↦ f (x − y)g(y) est L-intégrable sur R, vérifie ∣R ∖ I∣ = 0 ; on définit alors, pour x ∈ R :
+f ∗ g(x) ∶= {∫R f (x − y)g(y) dy si x ∈ I;
+0 sinon.
+La fonction f ∗ g vérifie f ∗ g ∈ Lp(R) et on a :
+(1) ∥f ∗ g∥p ≤ ∥f ∥1∥g∥p:
+Démonstration. — Le résultat étant clair si g est bornée, il suffit de traiter le cas où l’on a 1 ≤ p < ∞.
+On commencera par supposer p = 1. On pose, pour x; y ∈ R, F (x; y) ∶= f (x − y)g(y). On observe que F est Lebesgue-mesurable sur R2 et que l’on a, pour tout y ∈ R :
+∫R
+∣F (x; y)∣ dx = ∣g(y)∣ ∫R
+∣f (x − y)∣ dx = ∣g(y)∣ ∫R
+∣f (z)∣ dz = ∣g(y)∣∥f ∥1:
+Il vient en outre :
+∫R
+dy ∫R
+∣F (x; y)∣ dx ≤ ∥f ∥1 ∫R
+∣g(y)∣ dy = ∥f ∥1∥g∥1 < +∞:
+Il suit dès lors du théorème de Tonelli que F est L-intégrable sur R2 ; le théorème de Fubini assure alors l’existence d’une partie Lebesgue-négligeable N de R telle que, pour tout x ∈ R∖N , la fonction
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 3
+y ↦ F (x; y) = f (x − y)g(y) soit L-intégrable sur R et que la fonction f ∗ g définie ci-dessus soit L-intégrable (et donc aussi Lebesgue-mesurable) sur R. On calcule par ailleurs, à l’aide du théorème de Fubini :
+∫R
+∣f ∗ g(x)∣ dx ≤ ∫R2 ∣F ∣ = ∫R
+dy ∫R
+∣F (x; y)∣ dx = ∥f ∥1∥g∥1:
+Le théorème s’ensuit dans ce cas particulier.
+Dans le cas où l’on a 1 < p < ∞, on sait (par le cas précédent, puisque la fonction y ↦ ∣g(y)∣p est L-intégrable sur R par hypothèse) que la fonction y ↦ ∣f (x − y)∣∣g(y)∣p est L-intégrable sur R pour presque tout x ∈ R. Autrement dit, pour presque tout x ∈ R, la fonction y ↦ ∣f (x − y)∣1/p∣g(y)∣ est dans Lp(R). Notant p′ ∈]1; ∞[ l’exposant conjugué de p vérifiant, par définition, 1
+p+ 1
+p′ = 1, on observe que la
+fonction y ↦ ∣f (x; y)∣1/p′ est évidemment dans Lp′(R) pour presque tout x ∈ R. Pour presque tout x ∈ R, l’inégalité de Hölder appliquée a ux ∈ Lp(R) et vx ∈ Lp′(R) définies par
+ux(y) ∶= ∣f (x; y)∣1/p∣g(y)∣ et vx(y) ∶= ∣f (x; y)∣1/p′, assure que l’on a uxvx ∈ L1(R) avec :
+∫R
+∣f (x; y)∣ 1
+p+ 1
+p′ dy ≤ ∥ux∥p∥vx∥p′:
+Or on calcule, pour presque tout x ∈ R :
+∥ux∥p
+p = ∫R
+∣f (x; y)∣∣g(y)∣p dy = (∣f ∣ ∗ ∣g∣p)(x);
+et :
+∥vx∥p′
+p′ = ∫R
+∣f (x − y)∣ dy = ∥f ∥1:
+Il vient aussi, pour tous x ∈ R et y ∈ R, ∣f (x − y)g(y)∣ ≤ ux(y)vx(y). On tire de ce qui précède qu’il vient, pour presque tout x ∈ R :
+∫R
+∣f (x − y)g(y)∣ dy ≤ ∥f ∥1/p′
+1 [(∣f ∣ ∗ ∣g∣p)(x)]1/p < +∞:
+Il en résulte que f ∗ g est bien définie et que l’on a :
+∫R
+∣f ∗ g(x)∣p dx ≤ ∥f ∥p/p′
+1 ∫R
+(∣f ∣ ∗ ∣g∣p)(x) dx
+≤ ∥f ∥p/p′
+1 ∥∣f ∣ ∗ ∣g∣p∥1 ≤ ∥f ∥p/p′∥f ∥1∥∣g∣p∥1 = ∥f ∥1+ p
+p′
+1 ∥g∥p
+p;
+où l’on a utilisé l’inégalité obtenue dans le cas précédent. Il vient donc f ∗ g ∈ Lp(R) ainsi que :
+∥f ∗ g∥p ≤ ∥f ∥
+1
+p+ 1
+p′
+1 ∥g∥p = ∥f ∥1∥g∥p:
+La démonstration est complète. ∎
+Exercice 4. — Montrer que, pour f; g ∈ L1(R), on a f ∗ g = g ∗ f presque partout sur R.
+Exercice 5. — Soit 1 ≤ p ≤ ∞. Montrer que si 1 ≤ p ≤ ∞ est un réel donné et que f; f~ ∈ L1(R) et g; g~ ∈ Lp(R) vérifient f = f~ et g = g~ presque partout sur R, alors on a f ∗ g = f~ ∗ g~ presque partout sur R. En déduire que si u ∈ L1(R) et v ∈ Lp(R) sont donnés, alors le produit de convolution u ∗ v ∈ L1(R) est bien défini et vérifie ∥u ∗ v∥p ≤ ∥u∥1∥v∥p.
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 4
+2. Un théorème de F. Riesz
+Le résultat suivant, qui implique en particulier la complétude de Lp(R), nous sera utile dans la suite.
+Théorème 2.1. — Soit 1 ≤ p < ∞, (uk) ⊆ Lp(R) une suite de Cauchy dans Lp(R). Dans ces conditions, il existe une sous-suite (ukl) ⊆ (uk) et des fonctions u ∈ Lp(R) et f ∈ Lp(R) telles que l’on ait :
+(i) uk → u dans Lp(R) ; (ii) ukl → u presque partout sur R ; (iii) ∣ukl∣ ≤ f presque partout sur R, pour tout l ∈ N.
+Démonstration. — Puisque (uk) est de Cauchy dans Lp(R), il existe une sous-suite (ukl) ⊆ (uk) vérifiant ∥ukl+1 − ukl∥p ≤ 2−l pour chaque l ∈ N. Posons, pour alléger les notations, vl ∶= ukl dans la suite. Définissons, pour tout n ∈ N :
+gn ∶=
+n
+∑
+l=0
+∣vl+1 − vl∣:
+On trouve, en vertu de l’inégalité de Minkowski, pour tout n ∈ N :
+∥gn∥p ≤
+n
+∑
+l=0
+∥vl+1 − vl∥p < 1:
+Il vient donc :
+sup
+n∈N ∫R
+gp
+n ≤ 1:
+Comme la suite (gp
+n)n∈N est une suite croissante de fonctions positives, il suit du théorème de convergence monotone (pour l’intégrale de Lebesgue) qu’il existe une fonction h, L-intégrable et positive sur R, telle que l’on ait gp
+n → h, n → ∞ presque partout sur R ainsi que ∫R h = limn→∞ ∫R gp
+n. On en tire l’existence d’un ensemble négligeable N ⊆ R tel que, pour tout x ∈ R ∖ N , la suite (gn(x))n∈N converge, i.e. tel que, pour tout x ∈ R ∖ N , la série réelle :
+∑
+l∈N
+[vl+1(x) − vl(x)]
+soit absolument convergente. On peut donc définir une fonction Lebesgue-mesurable g ∶ R → R en posant, pour x ∈ R :
+g(x) ∶= {∑∞
+l=0 ∣vl+1(x) − vl(x)∣ si x ∈ R ∖ N;
+0 sinon.
+Comme il vient gp = limn→∞ gp
+n = h presque partout sur R, il s’ensuit que gp est L-intégrable sur R, et que l’on a donc g ∈ Lp(R). Or on a a par ailleurs, pour tout n ∈ N∗ et tout x ∈ R :
+(2) vn(x) = v0(x) +
+n−1
+∑
+l=0
+[vl+1(x) − vl(x)]:
+Il s’ensuit d’abord que, pour tout n ∈ N∗, on a, presque partout sur R :
+∣vn∣ ≤ ∣v0∣ +
+n−1
+∑
+l=0
+∣vl+1 − vl∣ ≤ ∣v0∣ + g;
+par définition de g. En posant f ∶= ∣v0∣ + g ∈ Lp(R), on voit donc que l’on a bien ∣ukl∣ = ∣vl∣ ≤ f presque partout sur R, pour tout l ∈ N, ce qui démontre (iii).
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 5
+De l’égalité (2), il résulte aussi que la suite réelle (vn(x))n∈N converge pour tout x ∈ R ∖ N . On peut donc définir une fonction Lebesgue-mesurable u ∶ R → R en posant, pour x ∈ R :
+u(x) ∶= {liml→∞ vl(x) si x ∈ R ∖ N;
+0 sinon ;
+on a évidemment u = liml→∞ vl = liml→∞ ukl presque partout sur R. Pour démontrer (ii), il reste donc à vérifier que l’on a u ∈ Lp(R). Or on calcule, pour des entiers l < m (en utilisant à nouveau l’inégalité de Minkowski) :
+∫R
+∣vm − vl∣p = ∥vm − vl∥p
+p=
+XXXXXXXXXXX
+m−1
+∑
+j=l
+[vj+1 − vj]
+XXXXXXXXXXX
+p
+≤⎛
+⎝
+m−1
+∑
+j=l
+∥vj+1 − vj∥p
+⎞
+⎠
+p
+≤ 2−p(l−1):
+Puisque, pour tout l ∈ N, il vient ∣u − vl∣p = limm→∞ ∣um − vl∣ presque partout sur R, le lemme de Fatou assure que l’on a :
+(3) ∫R
+∣u − vl∣p ≤ lim
+m→∞ ∫R
+∣um − ul∣p ≤ 2−p(l−1);
+et qu’il vient donc u − vl ∈ Lp(R). En particulier, il vient u = u − vl + vl ∈ Lp(R), et (ii) est démontré.
+Finalement, il vient pour l ∈ N (en utilisant l’inégalité (3) ci-dessus et la définition de vl) :
+∥u − ul∥p ≤ ∥u − vl∥p + ∥vl − ul∥p ≤ 21−l + ∥ukl − ul∥p:
+Puisque (uk) est de Cauchy dans Lp(R), il vient ∥ukl − ul∥p → 0, l → ∞ ; il s’ensuit que l’on a ∥u − ul∥p → 0, l → ∞, ce qui prouve (i). ∎
+Nous aurons besoin, avant d’étudier les approximations de l’identité, de quelques outils d’analyse parmi lesquels le théorème de Banach-Steinhaus aussi appelé principe de la borne uniforme.
+3. Le principe de la borne uniforme
+Étant donné X et Y des espaces (semi-)normés, on définit L(X; Y ) comme l’espace des applications linéaires continues de X vers Y , i.e. des applications linéaires T ∶ X → Y vérifiant :
+∥T ∥ ∶= sup{∥T (u)∥ ∶ u ∈ X; ∥u∥ = 1} < +∞:
+On appelle ∥T ∥ la norme (d’opérateur) de T .
+Pour une suite d’applications linéaires continues définies sur un espace de Banach, le théorème de Banach-Steinhaus assure qu’elle est bornée en norme (i.e. uniformément bornée sur la sphère unité) dès qu’elle est bornée en chaque point.
+Théorème 3.1 (Banach-Steinhaus, principe de la borne uniforme). — Soient X un espace (semi-)normé complet, Y un espace (semi-)normé et (Tk) ⊆ L(X; Y ) une suite d’applications linéaires continues de X vers Y . Si, pour tout u ∈ X, on a supk ∥Tk(u)∥ < +∞, alors (Tk) est bornée en norme, i.e. on a supk ∥Tk∥ < +∞.
+Démonstration. — Procédons par contraposition, et supposons que l’on ait supk ∥Tk∥ = +∞. Posons alors, pour l ∈ N :
+Fl ∶= ⋂
+k∈N
+{u ∈ X ∶ ∥Tku∥ ≤ l}:
+Il est facile de voir (puisque, pour chaque k ∈ N, l’application X → R; u ↦ ∥Tku∥ est continue) que Fl est fermé pour chaque l ∈ N. Montrons que Fl est également d’intérieur vide pour chaque l ∈ N. À cet effet, fixons l ∈ N et B = B[u; r] une boule fermée dans X, avec u ∈ X et r > 0. Si on a u ∉ Fl, alors il est clair que l’on a B ⊈ Fl. Sinon, il vient donc ∥Tku∥ ≤ l pour tout k ∈ N. Mais par
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 6
+hypothèse, on sait qu’il existe k0 ∈ N pour lequel on a ∥Tk0∥ > 2l
+r . Il existe dès lors v ∈ X vérifiant
+∥v∥ = 1 et ∥Tk0v∥ > 2l
+r , et on trouve alors :
+∥Tk0(u + rv)∥ ≥ r∥Tk0v∥ − ∥Tk0u∥ > 2l − l = l:
+Il vient par conséquent u + rv ∈ B(u; r) ∖ Fl = B ∖ Fl, c’est-à-dire B ⊈ Fl. Autrement dit, Fl est d’intérieur vide. Le théorème de Baire assure à présent que l’ensemble ⋃l∈N Fl est d’intérieur vide. En particulier, il existe u0 ∈ X ∖ ⋃l∈N Fl = ⋂l∈N (X ∖ Fl). On a donc, pour tout l ∈ N, u0 ∉ Fl. Pour tout l ∈ N, il existe donc k ∈ N tel que l’on ait ∥Tku0∥ > l ; on en tire aussitôt que l’on a :
+sup
+k∈N
+∥Tku0∥ = +∞;
+et la démonstration est complète. ∎
+Remarque 3.2. — On observera que le théorème de Baire, invoqué dans la démonstration précédente, demeure en effet valable dans un espace semi-normé complet (on n’utilise nulle part dans sa démonstration une propriété d’unicité de la limite).
+Il n’est pas nécessaire qu’un espace (semi-)normé soit complet pour qu’y soit vrai un principe de la borne uniforme ; on va le montrer dans la série d’exercices suivante.
+Exercices : espaces tonnelés et principe de la borne uniforme. — Une partie E d’un espace vectoriel X est dite :
+(i) absorbante si, pour tout u ∈ X, il existe > 0 tel que l’on ait u ∈ S ; (ii) équilibrée si, pour tout u ∈ S et tout ∈ [−1; 1], on a u ∈ S ; (iii) symétrique si, pour tout u ∈ S, on a −u ∈ S ; (iv) convexe si, pour tous u; v ∈ S et tout ∈ [0; 1], on a (1 − )u + v ∈ S.
+On observe qu’une partie convexe de X est équilibrée si et seulement si elle est symétrique. Un tonneau de X est une partie convexe, équilibrée, absorbante et fermée de X. Finalement, un espace (semi-)normé X est dit tonnelé si tout tonneau de X est un voisinage de 0.
+Exercice 6 (complétude et caractère tonnelé). — Soit X un espace (semi-)normé complet. On va montrer que X est tonnelé. À cet effet, fixer S un tonneau de X ; on pourra procéder comme suit pour montrer que S est un voisinage de 0.
+1. Montrer que l’on a X = ⋃k∈N(kS). 2. Montrer qu’il existe un entier k0 ∈ N, un point x0 ∈ X et un réel r0 > 0 tels que l’on ait B(x0; r0) ⊆ k0S.
+3. En déduire que l’on a B(−x0; r0) ⊆ k0S puis B(0; r0) ⊆ k0S et conclure.
+Exercice 7 (Principe de la borne uniforme). — Montrer que l’énoncé du principe de la borne uniforme (Théorème 3.1) demeure valide si on y remplace le mot “complet” par “tonnelé”. À cet effet, on pourra (en conservant les notations de cet énoncé) poser, pour k ∈ N :
+Sk ∶= {u ∈ X ∶ ∥Tk(u)∥ ≤ 1};
+ainsi que S ∶= ⋂k∈N Sk, et procéder comme suit.
+1. Montrer que S est convexe, équilibré et fermé. 2. Pour montrer que S est absorbant, fixer u ∈ X et poser c(u) ∶= supk∈N ∥Tk(u)∥ ; on sait que l’on a 0 ≤ c(u) < +∞ par hypothèse. Si l’on a c(u) > 0, montrer qu’il vient alors u/c(u) ∈ S. Conclure que S est absorbant. 3. En utilisant le caractère tonnelé de X, montrer que l’on a supk∈N ∥Tk∥ < +∞.
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 7
+Nous sommes à présent prêts pour introduire et étudier les approximations de l’identité.
+4. Approximations de l’identité : définition et premiers exemples
+Une approximation de l’identité est une suite de fonctions L-intégrables qui, par convolution, permet d’approcher l’identité en moyenne (i.e. en norme L1).
+Définition 4.1. — Une approximation de l’identité est une suite (φk) ⊆ L1(R) telle que, pour chaque u ∈ L1(R), la suite (φk ∗ u) converge vers u dans L1, i.e. telle que l’on ait ∥φk ∗ u − u∥1 → 0, k → ∞.
+Les définitions suivantes faciliteront la formulation des résultats dans la suite.
+Définition 4.2. — Soit (φk) ⊆ L1(R) une suite de fonctions L-intégrables sur R. (i) On dit que (φk) est normalisée si on a ∥φk∥1 = 1 pour tout k ∈ N.
+(ii) On dit que (φk) est asymptotiquement normalisée si on a ∥φk∥1 → 1, k → ∞.
+(iii) On dit que (φk) est asymptotiquement locale si, pour tout > 0, on a ∫R∖[− ; ] ∣φk∣ → 0,k → ∞.
+La proposition suivante assure que toute suite asymptotiquement locale et asymptotiquement normalisée de fonctions intégrables, est une approximation de l’identité.
+Proposition 4.3. — Soit (φk) ⊆ L1+(R) une suite de fonctions L-intégrables positives, asymptotiquement normalisée et asymptotiquement locale. Dans ces conditions, (φk) est une approximation de l’identité.
+Démonstration. — On va commencer par démontrer la convergence uniforme de φk ∗ v vers v pour tout v ∈ K(R).
+Affirmation 1. — Si v ∈ K(R) est une fonction continue à support compact dans R, alors (φk ∗ v) converge uniformément vers v sur R.
+Pour démontrer cette affirmation, commençons par observer que, v ∈ K(R) étant donnée, la fonction y ↦ φk(x − y)v(y) est L-intégrable sur R pour tout x ∈ R et tout k ∈ N ; on peut donc écrire, pour tout k ∈ N et tout x ∈ R :
+φk ∗ v(x) = ∫R
+φk(x − y)v(y) dy:
+En outre, v étant continu et à support compact dans R, le théorème de Heine assure qu’il est aussi uniformément continu sur R. On va montrer à présent que (φk ∗ v) converge uniformément sur R vers v. À cet effet, commençons par supposer que (φk) soit normalisée, auquel cas il vient, pour tout k ∈ N et tout x ∈ R :
+1 = ∫R
+φk(t) dt = ∫R
+φk(x − y) dy;
+en utilisant le changement de variables t = x − y. On trouve donc, pour tous k ∈ N et x ∈ R :
+v(x) = ∫R
+φk(x − y)v(x) dy:
+Il vient donc aussi, pour tous k ∈ N et x ∈ R :
+∣φk ∗ v(x) − v(x)∣ = ∣∫R
+φk(x − y)[v(y) − v(x)] dx∣ ≤ ∫R
+φk(x − y)∣v(y) − v(x)∣ dy:
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 8
+En effectuant à nouveau le changement de variables t = x − y, il vient donc, pour k ∈ N et x ∈ R :
+∣φk ∗ v(x) − v(x)∣ ≤ ∫R
+φk(t)∣v(x − t) − v(x)∣ dt:
+Fixons à présent " > 0, et soit > 0 un réel tel que si x; y ∈ R vérifient ∣x − y∣ ≤ , on ait ∣v(x) − v(y)∣ ≤ " (rappelons que v est uniformément continu sur R). Soit M > 0 un réel tel que l’on ait ∣v∣ ≤ M sur R. Pour k ∈ N et x ∈ R, on calcule alors :
+∣φk ∗ v(x) − v(x)∣ ≤ 2M ∫R∖[− ; ]
+φk + " ∫[− ; ]
+φk ≤ " + 2M ∫R∖[− ; ]
+φk;
+en utilisant le fait que, pour tout t ∈ [− ; ], on a ∣v(x−t)−v(x)∣ ≤ ", et que l’on a ∫[− ; ] φk ≤ ∫R φk = 1. Il vient donc, pour tout k ∈ N :
+sup
+R
+∣φk ∗ v − v∣ ≤ " + 2M ∫R∖[− ; ]
+φk:
+En utilisant le fait que (φk) est asymptotiquement locale, on trouve donc :
+kli→m∞ (sup
+R
+∣φk ∗ v − v∣) ≤ " + 2M kli→m∞ ∫R∖[− ; ]
+φk = ":
+Puisque " > 0 est arbitraire dans l’inégalité précédente, il vient finalement :
+0 ≤ lim
+k→∞
+(sup
+R
+∣φk ∗ v − v∣) ≤ kli→m∞ (sup
+R
+∣φk ∗ v − v∣) ≤ 0;
+ce qui montre que l’on a :
+kli→m∞ (sup
+R
+∣φk ∗ v − v∣) = 0;
+c’est-à-dire que (φk ∗ v) converge uniformément sur R vers v. Si (φk) est asymptotiquement normalisée, on a limk→∞ ∥φk∥1 = 1 ; il existe donc k0 ∈ N tel que l’on ait ∥φk∥1 ≥ 1
+2 pour tout k ≥ k0. Posons alors, pour k ∈ N :
+k ∶= { [0;1] si k < k0;
+∥φk∥−1φk si k ≥ k0:
+Il est clair que ( k) est normalisée ; par ailleurs, on calcule, pour > 0 et k ≥ k0 :
+0 ≤ ∫R∖[− ; ] k = ∥φk∥1 ∫R∖[− ; ]
+φk ≤ 2 ∫R∖[− ; ]
+φk:
+Il s’ensuit que l’on a limk→∞ ∫R∖[− ; ] k = 0 pour tout > 0. La suite ( k) est donc normalisée et asymptotiquement locale ; par conséquent, il résulte de ce qui précède que ( k ∗ v) converge uniformément sur R vers v. Utilisant le fait que ∥φk∥1 → 1, k → ∞ et, pour k ≥ k0, l’écriture :
+φk ∗ v = ∥φk∥1 ⋅ ( k ∗ v);
+on voit que (φk ∗ v) converge uniformément vers v sur R, ce qui achève la preuve de l’affirmation.
+Affirmation 2. — Pour tout v ∈ K(R), la suite (φk ∗ v) converge vers v dans L1(R).
+Pour démontrer cette affirmation, fixons v ∈ K(R) et fixons a ≥ 0 un réel tel que l’on ait v = 0 hors de [−a; a]. Fixons également " > 0 et choisissons un entier k0 ∈ N tel que, pour tout k ≥ k0, on ait ∥v∥1 ∫R∖[−1;1] φk ≤ "/2. On calcule alors, pour tout x ∈ R ∖ [−a − 1; a + 1] et k ∈ N :
+φk ∗ v(x) = ∫R
+φk(t)v(x − t) dt = ∫R∖[−1;1]
+φk(t)v(x − t) dt;
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 9
+puisque, pour t ∈ [−1; 1], il vient v(x − t) = 0. Il vient donc, en utilisant le théorème de Fubini :
+∫R∖[−a−1;a+1]
+∣φk ∗ v∣ ≤ ∫R∖[−a−1;a+1]
+dx ∫R∖[−1;1]
+φk(t)∣v(x − t)∣ dt
+= ∫R∖[−1;1]
+dt φk(t) ∫R∖[−a−1;a+1]
+∣v(x − t)∣ dx ;
+comme on a, pour tout t ∈ R, ∫R∖[−a−1;a+1] ∣v(x − t)∣ dx ≤ ∫R ∣v(x − t)∣ dx = ∥v∥1, on obtient en conséquence, pour k ≥ k0 :
+∫R∖[−a−1;a+1]
+∣φk ∗ v∣ ≤ ∥v∥1 ∫R∖[−1;1]
+φk(t) dt ≤ "
+2:
+À l’aide de l’Affirmation 1, choisissons maintenant un entier k1 ≥ k0 tel que, pour tout k ≥ k1, on ait :
+sup
+R
+∣φk ∗ v − v∣ ≤ "
+4a + 4:
+On calcule alors, pour k ≥ k1 (en observant pour commencer que l’on a v = 0 sur R ∖ [−a − 1; a + 1]) :
+∥φk ∗ v − v∥1 = ∫R∖[−a−1;a+1]
+∣φk ∗ v∣ + ∫[−a−1;a+1]
+∣φk ∗ v − v∣ ≤ "
+2 + (2a + 2) ⋅ sup
+R
+∣φk ∗ v − v∣ ≤ ":
+Ceci conclut la preuve de l’affirmation.
+Pour achever la preuve de la proposition, fixons u ∈ L1(R) et " > 0. Il existe, par la densité de K(R) dans L1(R), un v ∈ K(R) vérifiant ∥u − v∥1 ≤ "
+2 . On calcule alors, pour k ∈ N :
+∥φk ∗ u − u∥1 ≤ ∥φk ∗ u − φk ∗ v∥1 + ∥φk ∗ v − v∥1 + ∥v − u∥1:
+Or on a, en utilisant l’inégalité (1) du Théorème 1.1 :
+∥φk ∗ u − φk ∗ v∥1 = ∥φk ∗ (u − v)∥1 ≤ ∥φk∥1∥u − v∥1 ≤ "
+2 ∥φk∥1:
+Il vient donc, pour k ∈ N :
+∥φk ∗ u − u∥1 ≤ "
+2 (1 + ∥φk∥1) + ∥φk ∗ v − v∥1:
+En utilisant l’Affirmation 2 et le fait que (φk) est asymptotiquement normalisée, on trouve dès lors :
+kli→m∞ ∥φk ∗ u − u∥1 ≤ ":
+Comme ceci est valable quel que soit " > 0, il vient :
+0 ≤ lim
+k→∞
+∥φk ∗ u − u∥1 ≤ kli→m∞ ∥φk ∗ u − u∥1 ≤ 0;
+c’est-à-dire limk→∞ ∥φk ∗ u − u∥1 = 0. La proposition est démontrée. ∎
+Exemple 4.4 (Approximations de l’identité usuelles). — Soit (φk) ⊆ L1(R) une suite de fonctions intégrables vérifiant les conditions suivantes :
+(AI1) φk ≥ 0 presque partout sur R pour tout k ∈ N ; (AI2) ∫R φk = 1 pour tout k ∈ N ;
+(AI3) pour tout > 0, il existe k0 ∈ N tel que, pour tout k ≥ k0, on ait φk = 0 presque partout hors de [− ; ].
+Dans ces conditions, (φk) est une approximation de l’identité. Cela résulte immédiatement de la proposition précédente.
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 10
+Exemple 4.5 (Dérivation de Lebesgue). — Définissons, pour chaque k ∈ N, une fonction k ∈ L1+(R) par k ∶= 2k−1 [−2−k;2−k]. Il résulte immédiatement de la proposition précédente que ( k) est une approximation de l’identité. Autrement dit, il vient, pour tout u ∈ L1(R) :
+k ∗ u → u; k → ∞ dans L1(R):
+Exemple 4.6 (Suites régularisantes). — Soient ∈ Cc∞(R) une fonction indéfiniment dérivable et à support compact dans R. Supposons que l’on ait ≥ 0 sur R, = 0 hors de [−1; 1] et ∫[−1;1] = 1. Dans ces conditions, la suite ( k) ⊆ Cc∞(R) définie pour k ∈ N et x ∈ R par :
+φk(x) ∶= 2kφ(2kx);
+est une approximation de l’identité. Les suites régularisantes permettent de démontrer la densité de Cc∞(R) dans Lp(R) pour tout 1 < p < ∞.
+On traitera cet exemple en détails dans l’Exercice 9 ci-dessous.
+5. Approximations de l’identité : conditions nécessaires
+Étant donné u ∈ L1(R), rappelons qu’on appelle transformée de Fourier de u la fonction continue et bornée u^ définie par :
+u^( ) ∶= ∫R
+u(x)e−2i x dx:
+On a évidemment, pour tout ∈ R (puisqu’il vient ∣e−2i x∣ = 1 pour tout x ∈ R) :
+(4) ∣u^( )∣ ≤ ∫R
+∣u(x)∣ dx = ∥u∥1:
+Il vient donc supR ∣u^∣ ≤ ∥u∥1 pour tout u ∈ L1(R). Le lemme de Riemann-Lebesgue assure que, pour tout u ∈ L1(R), on a ∣u^( )∣ → 0 lorsque ∣ ∣ → ∞. On rappelle également que si deux fonctions u ∈ L1(R) et v ∈ L1(R) sont données, alors on a ̂u ∗ v = u^ ⋅ v^ partout sur R. Étant donné u ∈ L1(R) ∩ L2(R), on montre que l’on a u^ ∈ L2(R) et ∥u^∥2 = ∥u∥2. Puisque L1(R)∩L2(R) est dense dans L2(R) (ce sous-espace contient en particulier K(R)), il s’ensuit que la transformation L1(R) ∩ L2(R) → L2(R), u ↦ u^ possède une unique extension par densité à L2(R) notée :
+F ∶ L2(R) → L2(R);
+et vérifiant, pour tout u ∈ L2(R), ∥F (u)∥2 = ∥u∥2 ; cette dernière égalité est appelée l’identité de Plancherel.
+Si on note S (R) l’espace des fonctions à décroissance rapide défini par :
+S (R) ∶= {v ∈ C ∞(R) ∶ sup
+x∈R
+∣x∣k∣v(l)(x)∣ < +∞ pour tous k; l ∈ N} ;
+on a S (R) ⊆ L p(R) pour tout 1 ≤ p ≤ ∞, et la restriction de la transformée de Fourier à S (R) est une bijection de S (R) dans S (R). En outre, si f ∈ L1(R) et u ∈ L2(R) sont données, on a F (f ∗ u) = f^F (u) presque partout sur R.
+Les approximations de l’identité positives sont nécessairement asymptotiquement normalisées et asymptotiquement locales. C’est ce qu’exprime la proposition suivante.
+Proposition 5.1. — Soit (φk) ⊆ L1+(R) une approximation de l’identité positive. Dans ces conditions, (φk) est toujours asymptotiquement normalisée et asymptotiquement locale.
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 11
+Démonstration. — Commençons par montrer que (φk) est asymptotiquement normalisée. À cet effet, observons que l’on a, pour k ∈ N :
+∥φk∥1 = ∫R
+φk = φ^k(0):
+Posons f ∶= [0;1]. Il vient aussi f^(0) = ∫R f = 1.
+On trouve donc, pour tout k ∈ N, en utilisant l’égalité ̂φk ∗ f = φ^kf^ et l’inégalité (4) ci-dessus :
+∣∥φk∥1 − 1∣ = ∣φ^k(0)f^(0) − f^(0)∣ = ∣ ̂φk ∗ f (0) − f^(0)∣ ≤ ∥φk ∗ f − f ∥1:
+Comme on a, par hypothèse, ∥φk ∗ f − f ∥1 → 0, k → ∞, cela montre que (φk) est asymptotiquement normalisée.
+Pour montrer que (φk) est asymptotiquement locale, fixons > 0 et posons g ∶= [− /2; /2]. Fixons aussi k ∈ N et observons que l’on a g = 0 hors de [− /2; /2] et que l’on peut donc écrire :
+∥φk ∗ g − g∥1 = ∫R
+∣φk ∗ g − g∣ ≥ ∫R∖[− ; ]
+∣φk ∗ g − g∣ = ∫R∖[− ; ]
+φk ∗ g:
+On a, par définition :
+∫R∖[− ; ]
+φk ∗ g = ∫R∖[− ; ]
+dx ∫R
+φk(t)g(x − t) dt:
+Or, étant donné x ∈ R ∖ [− ; ] et t ∈ [− /2; /2], il vient ∣x − t∣ > ∣x∣ − ∣t∣ > /2 et donc g(x − t) = 0 ; il en résulte que l’on peut écrire :
+∫R∖[− ; ]
+dx ∫R
+φk(t)g(x − t) dt = ∫R∖[− ; ]
+dx ∫R∖[− δ
+2;δ
+2]
+φk(t)g(x − t) dt:
+En utilisant le théorème de Fubini, on calcule :
+∫R∖[− ; ]
+dx ∫R∖[− δ
+2;δ
+2]
+φk(t)g(x − t) dt = ∫R∖[− δ
+2;δ
+2]
+dt φk(t) ∫R∖[− ; ]
+g(x − t) dx
+≥ ∫R∖[− ; ]
+dt φk(t) ∫R∖[− ; ] [− δ
+2;δ
+2 ](x − t) dx:
+Puisque, étant donné t ∈ R∖[− ; ], il vient [− δ
+2;δ
+2 ](x−t) = 1 si et seulement si on a t− /2 ≤ x ≤ t+ /2,
+on peut encore écrire :
+∫R∖[− ; ]
+dt φk(t) ∫R∖[− ; ] [− δ
+2;δ
+2 ](x − t) dx = ∫R∖[− ; ]
+dt φk(t) ∫R∖[− ; ] [t− δ
+2 ;t+ δ
+2 ](x) dx
+= ∫R∖[− ; ]
+φk(t) ⋅ ∣(R ∖ [− ; ]) ∩ [t − 2 ; t + 2 ]∣ dt:
+Étant donné qu’il est clair que, pour tout t ∈ R ∖ [− ; ], l’ensemble (R ∖ [− ; ]) ∩ [t − 2 ; t + 2 ] contient toujours un intervalle de longueur /2, on obtient :
+∫R∖[− ; ]
+φk(t) ⋅ ∣(R ∖ [− ; ]) ∩ [t − 2 ; t + 2 ]∣ dt ≥ 2 ∫R∖[− ; ]
+φk:
+Il suit donc de la série de calculs ci-dessus que l’on a, pour tout k ∈ N :
+∫R∖[− ; ]
+φk ≤ 2 ∥φk ∗ g − g∥1:
+Puisque (φk) est une approximation de l’identité, il vient ∥φk ∗ g − g∥1 → 0, k → ∞ et on trouve finalement :
+kli→m∞ ∫R∖[− ; ]
+φk = 0:
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 12
+La démonstration est complète. ∎
+En combinant les Propositions 4.3 et 5.1, on obtient une caractérisation particulièrement simple des approximations de l’identité positives dans L1(R).
+Corollaire 5.2. — Soit (φk) ⊆ L1+(R) une suite de fonctions L-intégrables et positives sur R. Les conditions suivantes sont équivalentes :
+(i) (φk) est une approximation de l’identité ; (ii) (φk) est asymptotiquement normalisée et asymptotiquement locale.
+L’exercice suivant montre que les approximations de l’identité non positives peuvent n’être ni asymptotiquement normalisées ni asymptotiquement locales.
+Exercice 8. — Définissons, pour k ∈ N, des fonctions k, k et k par les formules :
+k ∶= 2k
+[0;2−k]; k ∶= 2k
+[1−2−k;1] et k ∶= 2k
+[1;1+2−k ] :
+Posons aussi φk ∶= k + k − k pour k ∈ N.
+1. Montrer que l’on a, pour u ∈ L1(R) :
+φk ∗ u = k ∗ u + k ∗ 1u − k ∗ 1u;
+où, étant donné une fonction f ∈ L1(R) et h ∈ R, la symétrisée f de f et la translatée hf de f par h sont définies, pour x ∈ R, par f (x) ∶= f (−x) et hu(x) ∶= u(x − h). 2. Montrer que ( k) et ( k) sont des approximations de l’identité. 3. En déduire que (φk) est une approximation de l’identité. 4. Montrer que (φk) n’est ni asymptotiquement normalisée, ni asymptotiquement locale.
+6. Approximations de l’identité et convergence en norme Lp
+Commençons par un lemme qui nous sera utile dans un instant.
+Lemme 6.1. — Étant donné f ∈ L1(R), l’application linéaire Tf ∶ L1(R) → L1(R) définie par :
+Tf (u) ∶= f ∗ u;
+est continue et vérifie ∥Tf ∥ = ∥f ∥1.
+Démonstration. — Commençons par observer qu’il suit de l’inégalité (1) que l’on a, pour u ∈ L1(R) vérifiant ∥u∥1 = 1 :
+∥Tf (u)∥ ≤ ∥f ∥1∥u∥1 = ∥f ∥1:
+Il s’ensuit que Tf est continue et que l’on a ∥Tf ∥ ≤ ∥f ∥1. Soit à présent ( k) l’approximation de l’identité introduite dans l’Exemple 4.5 (ou n’importe quelle approximation de l’identité normalisée). Il vient, pour tout k ∈ N (puisque l’on a ∥ k∥1 = 1) :
+∥Tf ( k)∥1 ≤ ∥Tf ∥:
+Or on a, pour k ∈ N (en utilisant l’Exercice 4) :
+Tf ( k) = f ∗ k = k ∗ f → f; k → ∞ dans L1(R):
+Il s’ensuit que l’on a :
+∥Tf ∥ ≥ kli→m∞ ∥Tf ( k)∥1 = kli→m∞ ∥ k ∗ f ∥1 = ∥f ∥1:
+Le lemme est ainsi démontré. ∎
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 13
+À l’aide du lemme précédent et du principe de la borne uniforme, on peut montrer que, si une approximation de l’identité non positive n’est pas toujours asymptotiquement normalisée, elle est néanmoins toujours bornée en (semi-)norme L1.
+Proposition 6.2. — Soit (φk) ⊆ L1(R) une approximation de l’identité. Dans ces conditions, on a toujours :
+sup
+k∈N
+∥φk∥1 < +∞:
+Démonstration. — Définissons, pour chaque k ∈ N, un opérateur linéaire et continu Tk ∈ L(L1(R); L1(R)) par Tk(u) ∶= φk ∗ u. Si u ∈ L1(R) est fixée, on sait que (φk ∗ u) converge dans L1(R) vers u ; il s’ensuit que cette suite est bornée dans L1(R), i.e. que l’on a :
+sup
+k∈N
+∥Tk(u)∥1 = sup
+k∈N
+∥φk ∗ u∥1 < ∞:
+Le principe de la borne uniforme (Théorème 3.1) assure dès lors (puisque L1(R) est complet) que l’on a :
+M ∶= sup
+k∈N
+∥Tk∥ < +∞:
+En vertu du Lemme 6.1, on trouve donc :
+sup
+k∈N
+∥φk∥1 = sup
+k∈N
+∥Tk∥ = M < +∞:
+La démonstration est complète. ∎
+Étant donné une approximation de l’identité (φk), il suit du Théorème 1.1 que φk ∗ u est bien défini pour tout u ∈ Lp(R) avec 1 ≤ p ≤ ∞. Nous allons montrer que, si on a 1 ≤ p < ∞, alors ( k ∗ u) converge vers u aussi en (semi-)norme Lp.
+Proposition 6.3. — Soient (φk) une approximation de l’identité et 1 ≤ p < ∞ un réel. Pour tout u ∈ Lp(R), la suite (φk ∗ u) converge vers u dans Lp(R), i.e. on a :
+∥φk ∗ u − u∥p → 0; k → ∞:
+Démonstration. — On peut évidemment supposer que l’on a 1 < p < ∞. On sait, au vu de la Proposition 6.2, que l’on a :
+K ∶= sup
+k∈N
+∥φk∥1 < +∞:
+Affirmation 3. — Pour tout v ∈ K(R), la suite (φk ∗ v) converge vers v dans Lp(R).
+Pour démontrer cette affirmation, fixons v ∈ K(R) et soit M ≥ 0 un réel tel que l’on ait ∣v∣ ≤ M sur R. On calcule, pour k ∈ N et tout x ∈ R :
+∣φk ∗ v(x)∣ ≤ ∫R
+∣φk(x − y)∣∣v(y)∣ dy ≤ M ∫R
+∣φk(x − y)∣ dy ≤ M ∥φk∥1 ≤ KM:
+Pour k ∈ N et x ∈ R, on écrit donc :
+∣φk ∗ v(x) − v(x)∣p = ∣φk ∗ v(x) − v(x)∣p−1 ⋅ ∣φk ∗ v(x) − v(x)∣ ≤ (K + 1)p−1M p−1∣φk ∗ v(x) − v(x)∣:
+Il vient donc, pour k ∈ N :
+∥φk ∗ v − v∥p
+p ≤ (K + 1)p−1M p−1∥φk ∗ v − v∥1;
+et il résulte dès lors aussitôt de ce que (φk) est une approximation de l’identité, que l’on a ∥φk ∗ v − v∥p → 0, k → ∞. L’affirmation est donc démontrée.
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 14
+Pour achever la preuve de la proposition, fixons u ∈ Lp(R) et " > 0. Il existe, par la densité de K(R) dans Lp(R), un v ∈ K(R) vérifiant ∥u − v∥p ≤ "
+K+1 . On calcule alors, pour k ∈ N :
+∥φk ∗ u − u∥p ≤ ∥φk ∗ u − φk ∗ v∥p + ∥φk ∗ v − v∥p + ∥v − u∥p:
+Or on a, en utilisant l’inégalité (1) du Théorème 1.1 :
+∥φk ∗ u − φk ∗ v∥p = ∥φk ∗ (u − v)∥p ≤ ∥φk∥1∥u − v∥p ≤ "
+K + 1 ⋅ ∥φk∥1 ≤ " ⋅ K
+K + 1 ≤ ":
+Il vient donc, pour k ∈ N :
+∥φk ∗ u − u∥p ≤ " + ∥φk ∗ v − v∥p:
+On trouve alors, en vertu de l’Affirmation 3 :
+kli→m∞ ∥φk ∗ u − u∥p ≤ ":
+Comme ceci est valable quel que soit " > 0, il vient :
+0 ≤ lim
+k→∞
+∥φk ∗ u − u∥p ≤ kli→m∞ ∥φk ∗ u − u∥p ≤ 0;
+i.e. limk→∞ ∥φk ∗ u − u∥p = 0 ; c’est ce qu’il fallait démontrer. ∎
+Exercice 9 (Régularisation). — 1. Soient 1 ≤ p < ∞ un réel, φ ∈ Cc∞(R) une fonction indéfiniment dérivable et à support compact ainsi que u ∈ Lp(R). Montrer que φ ∗ u est de classe C ∞ sur R et que l’on a, pour tout k ∈ N∗ :
+(φ ∗ u)(k) = φ(k) ∗ u:
+Indication. Commencer par supposer que k = 1 et calculer, pour x ∈ R et h ≠ 0, le quotient
+différentiel :
+φ ∗ u(x + h) − φ ∗ u(x)
+h:
+2. Soit ( k) une suite régularisante comme dans l’Exemple 4.6. Montrer que l’on a k∗u ∈ Lp(R)∩ C ∞(R) pour tout k ∈ N. 3. Conclure que Lp(R) ∩ C ∞(R) est dense dans Lp(R), puis que Cc∞(R) est dense dans Lp(R).
+L’approximation de l’identité introduite dans l’Exemple 4.5 donne aussi lieu à la convergence presque partout dans Lp(R).
+Proposition 6.4. — Soit ( k) l’approximation de l’identité introduite dans l’Exemple 4.5. Pour tout 1 ≤ p ≤ ∞ et tout u ∈ Lp(R), on a :
+k ∗ u → u; k → ∞ presque partout sur R:
+Démonstration. — Fixons u ∈ Lp(R) et commençons par observer qu’il résulte de l’inégalité de Hölder que u est localement intégrable : si K est compact, on a en effet u = u K sur K, et il est clair
+que l’on a u ∈ Lp(K) et K ∈ Lp′(K) où l’on a défini 1 ≤ p′ ≤ ∞ par 1/p + 1/p′ = 1. La proposition résulte alors de la version forte du théorème de dérivation de Lebesgue puisque l’on écrit, pour x ∈ Rn et k ∈ N :
+k ∗ u(x) ∶= 2k−1 ∫R [−2−k;2−k](x − y)u(y) dy
+= 2k−2 ∫R [x−2−k;x+2−k](y)u(y) dy = 1
+∣[x − 2−k; x + 2−k] ∫[x−2−k;x+2−k]
+u;
+en utilisant le fait que l’on a x − y ∈ [−2−k; 2−k] si et seulement si l’on a y ∈ [x − 2−k; x + 2−k]. ∎
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 15
+Remarque 6.5. — En général, étant donné une approximation de l’identité (φk), un réel 1 ≤ p < ∞ et u ∈ Lp(R), on sait que (φk ∗ u) converge dans Lp(R) vers u ; il s’ensuit qu’il existe une suite strictement croissante d’entiers (kl) telle que (φkl ∗u) converge presque partout vers u ; en revanche, cette sous-suite dépend généralement de u.
+L’approximation de l’identité que nous avons appelée dérivation de Lebesgue a cette propriété supplémentaire que ( k ∗ u) converge presque partout vers u pour tout u ∈ Lp(R). Nous allons voir, dans la section suivante, que pour p = 2, toute approximation de l’identité (positive ou non) contient une sous-suite donnant lieu à la convergence presque partout pour toute fonction de L2(R) ; cette suite sera dite universelle au sens où elle ne dépend pas de la fonction choisie.
+7. Un théorème de J. Rosenblatt
+Nous avons annoncé le théorème suivant ; il a été démontré en 2008 par J.M. Rosenblatt.
+Théorème 7.1 (Rosenblatt, 2008). — Si (φk) ⊆ L2(R) est une approximation de l’identité (non nécessairement positive), alors il existe une suite croissante d’entiers (kl) telle que, pour tout u ∈ L2(R), on ait : φkl ∗ u → u; l → ∞; presque partout sur R:
+Démonstration. — Commençons par poser K ∶= supk∈N ∥φk∥1 < +∞ (on sait que cette borne supérieure est finie en vertu de la Proposition 6.2).
+Affirmation 4. — La suite (φ^k) converge uniformément vers 1 sur tout intervalle fermé borné de R.
+Fixons n ∈ N et choisissons vn ∈ S (R) vérifiant vn = 1 sur [−n; n]. Il existe donc fn ∈ S (R) ⊆ L1(R) vérifiant f^n = vn sur R ; on a donc f^n = 1 sur [−n; n]. On a alors, en utilisant l’inégalité (4) :
+sup
+[−n;n]
+∣φ^k − 1∣ = sup
+[−n;n]
+∣φ^kf^n − f^n∣ ≤ sup
+R
+∣ ̂φk ∗ fn − f^n∣ ≤ ∥φk ∗ fn − fn∥1:
+Puisque (φk) est une approximation de l’identité, il vient ∥φk ∗ fn − fn∥1 → 0, k → ∞ ; il s’ensuit que (φ^k) converge uniformément vers 1 sur [−n; n], ce qui achève la démonstration de l’affirmation.
+Notons à présent, pour k ∈ N, dk ∶= φk − k, où ( k) est l’approximation de l’identité définie dans l’Exemple 4.5. En appliquant à (φk) et ( k) l’affirmation précédente, on voit que (d^k) converge uniformément vers zéro sur tout intervalle fermé borné de R. En outre, il vient, pour k ∈ N :
+∥dk∥1 ≤ ∥φk∥1 + ∥ k∥ ≤ K + 1:
+On a donc supk∈N ∥dk∥1 ≤ K + 1.
+Affirmation 5. — Il existe une suite strictement croissante d’entiers (kl)l telle que l’on ait, sur R :
+∞
+∑
+l=0
+∣d^kl∣2 ≤ (K + 2)2:
+Pour démontrer cette affirmation, on se propose de construire inductivement une suite (kl) d’entiers tels que l’on ait, pour tout m ∈ N :
+sup
+R
+m
+∑
+l=0
+∣d^kl∣2 ≤ [K + 2 − ( 1
+2)
+m
+]
+2
+:
+Posons, pour simplifier les notations, Km ∶= [K + 2 − ( 1
+2 )m]2 pour chaque m ∈ N ; il est clair que (Km)m∈N est croissante, que l’on a K0 = (K + 1)2 et Km > (K + 1)2 pour tout m ∈ N∗.
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 16
+Pour construire la suite (kl), commençons par observer que l’on a, en vertu de l’inégalité (4) :
+sup
+R
+∣d^0∣2 ≤ ∥d0∥2
+1 ≤ (K + 1)2 = K0;
+on peut donc prendre k0 = 0. Supposant, pour m ∈ N, que l’on ait construit des entiers k0 < k1 < k2 < ⋅ ⋅ ⋅ < km ayant la propriété voulue, commençons par choisir, en vertu du lemme de Riemann-Lebesgue, un intervalle fermé borné I de R tel que l’on ait :
+sup
+R∖I
+m
+∑
+l=0
+∣d^kl∣2 ≤ Km+1 − (K + 1)2:
+Puisque la suite (d^k)k∈N converge uniformément sur I vers 0, choisissons également un entier km+1 > km tel que l’on ait :
+sup
+I
+∣d^km+1 ∣ ≤
+√
+Km+1 − Km:
+Observons à présent que si x ∈ I est donné, on a :
+m+1
+∑
+l=0
+∣d^kl(x)∣2 =
+m
+∑
+l=0
+∣d^kl(x)∣2 + ∣d^km+1(x)∣2 ≤ Km + Km+1 − Km = Km+1:
+Si, d’autre part, x ∈ R ∖ I est donné, il vient :
+m+1
+∑
+j=0
+∣d^kl(x)∣2 =
+m
+∑
+l=0
+∣d^kl(x)∣2 + ∣d^km+1(x)∣2
+≤ Km+1 − (K + 1)2 + (sup
+R
+∣d^km+1 ∣)
+2
+≤ Km+1 − (K + 1)2 + ∥dkm+1 ∥2
+1 ≤ Km+1;
+de sorte que km+1 jouit de la propriété requise. La démonstration de l’affirmation est donc complète.
+Revenant à la démonstration du théorème, fixons u ∈ L2(R) et posons, pour m ∈ N :
+Sm ∶=
+m
+∑
+l=0
+∣dkl ∗ u∣2:
+Utilisant l’égalité F (dkl ∗ u) = d^klF (u) valable presque partout sur R pour tout l ∈ N ainsi que l’identité de Plancherel à plusieurs reprises, on trouve pour tout m ∈ N :
+∫R
+m
+∑
+l=0
+∣dkl ∗ u∣2 =
+m
+∑
+l=0
+∫R
+∣F (dkl ∗ u)∣2 = ∫R
+(
+m
+∑
+l=0
+d^2
+kl) ∣F (u)∣2
+≤ (K + 2)2 ∫R
+∣F (u)∣2 = (K + 2) ∫R
+∣u∣2 < +∞;
+Il suit dès lors du théorème de convergence monotone que la série ∑l∈N ∣dkl ∗ u∣2 converge presque partout sur R vers une fonction intégrable ; puisque le terme général d’une série convergente tend vers zéro, il vient donc, presque partout sur R :
+lli→m∞ dkl ∗ u = 0:
+Or on a, presque partout sur R, pour tout l ∈ N :
+φkl ∗ u = dkl ∗ u + kl ∗ u:
+Comme on sait, en vertu de la Proposition 6.4, que l’on a kl ∗ u → u, l → ∞ presque partout sur R, il résulte des deux égalités précédentes que l’on a :
+φkl ∗ u → u; l → ∞ presque partout sur R:
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 17
+La démonstration est complète. ∎
+Remarque 7.2. — J. Rosenblatt a montré que le résultat précédent possédait un analogue dans Lp(R) pour tout 1 < p < ∞. Pour p = 1, et pour les approximations de l’identité positives, un énoncé du même type demeure vrai ; cela a été établi, indépendamment, par S. Kostyukovsky et A. Olevskii en 2005/2006, et par P. LaVictoire en 2010 (et en utilisant des techniques légèrement différentes). Bien sûr, le cas p = 2 est particulier (et plus simple à exposer) grâce à l’efficacité des techniques hilbertiennes. Les sections suivantes sont destinées à nous permettre d’établir le théorème de Kostyukovsky-Olevskii et LaVictoire.
+8. Un théorème de Sawyer-Stein pour les approximations de l’identité positives
+Étant donné une approximation de l’identité positive (φk) ⊆ L1+(R), il existe un lien intime entre la convergence presque partout de la suite (φk ∗ u) pour tout u ∈ Lp(R), et la fonction maximale associée à cette approximation de l’identité. Ce lien est exprimé par le principe de Sawyer-Stein cidessous (voir le Théorème 8.10). Avant d’arriver à ce résultat, identifions déjà un lien entre cette fonction maximale et la convergence presque partout de (φk ∗ u) pour tout u ∈ Lp(R), dont la preuve rappellera celle du théorème de dérivation de Lebesgue.
+Définition 8.1. — Étant donné une approximation de l’identité (φk)k∈N ⊆ L1(R) et u ∈ Lp(R) pour 1 ≤ p ≤ ∞, on appelle fonction maximale à cette approximation de l’identité la fonction Mφu définie pour x ∈ R par :
+(5) Mφu(x) ∶= sup
+k∈N
+∣φk ∗ u(x)∣:
+Il est clair que cette fonction, obtenue comme la borne supérieure d’une suite de fonctions Lebesguemesurables sur R, est Lebesgue-mesurable sur R.
+Proposition 8.2. — Soient (φk) ⊆ L1+(R) une approximation de l’identité positive et 1 ≤ p < ∞ un réel. S’il existe une constante C > 0 telle que l’on ait, pour tout u ∈ Lp(R) et tout > 0 :
+(6) ∣{x ∈ R ∶ Mφu(x) > }∣ ≤ C ∥u∥p
+p;
+où Mφu désigne la fonction maximale de u associée à (φk) par (5), alors, pour tout u ∈ Lp(R), la suite (φk ∗ u) converge presque partout sur R vers u.
+Remarque 8.3. — L’inégalité (6) est souvent appelée une inégalité de type faible (p; p). Elle rappelle l’inégalité de Markov et l’inégalité de Tchebytcheff, qui assure que si 1 ≤ p < ∞, un ensemble Lebesgue-mesurable A ⊆ R, une fonction mesurable f ∶ R → R et > 0 sont donnés, alors on a :
+(7) ∣{x ∈ A ∶ ∣f (x)∣ > }∣ ≤ 1
+p ∫A
+∣f ∣p;
+où l’intégrale s’interprète comme +∞ lorsque ∣f ∣p n’est pas intégrable sur A (auquel cas l’inégalité ci-dessus n’apporte aucune information). En posant A ∶= {x ∈ A ∶ ∣f (x)∣ > } (qui est évidemment Lebesgue-mesurable), cette inégalité suit immédiatement du fait que l’on a, sur R, p Aλ ≤ ∣f ∣p A et donc aussi, par intégration de cette dernière inégalité sur R dans le cas où ∣f ∣p est intégrable sur A :
+p∣A ∣ ≤ ∫A
+∣f ∣p = ∥f ∥p
+p:
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 18
+Démonstration. — Pour f ∈ Lp(R), on définit une fonction !f ∶ R → [0; +∞] pour x ∈ R par :
+!f (x) ∶= kli→m∞ ∣f (x) − φk ∗ f (x)∣:
+Il suit immédiatement de cette définition que l’on a !f ≤ ∣f ∣ + M f pour tout f ∈ Lp(R), où M f ∶= Mφf est la fonction maximale de f associée à (φk) par la formule (5) (on omettra, dans la suite de cette démonstration, l’indice φ). En outre, puisque (φk) est une approximation de l’identité positive, il suit de la Proposition 5.1 que (φk) est asymptotiquement normalisée et asymptotiquement locale. Par l’Affirmation 1 dans la démonstration de la Proposition 4.3, on sait donc que (φk ∗ g) converge uniformément vers g pour tout g ∈ K(R). Il s’ensuit que l’on a !g = 0 partout sur R pour tout g ∈ K(R). Finalement, comme il est facile de voir que pour tous f; g ∈ Lp(R) on a !f+g ≤ !f + !g sur R, il vient sur R, pour f ∈ Lp(R) et g ∈ K(R) :
+!f = !f−g+g ≤ !f−g + !g = !f−g et !f−g ≤ !f + !−g = !f ;
+puisque l’on a !g = 0 partout sur R ; on a donc, sur R, !f = !f−g. Fixons à présent u ∈ Lp(R). On va montrer que l’on a !u = 0 presque partout sur R, ce qui suffira à conclure. Pour cela, commençons par fixer > 0 et montrons que l’on a ∣{x ∈ R ∶ !u(x) > }∣ = 0. À cet effet, posons E ∶= {x ∈ R ∶ !u(x) > }, fixons " > 0 et choisissons, par densité de K(R) dans Lp(R) (voir l’Exercice 3), une fonction v ∈ K(R) vérifiant ∥u − v∥p ≤ ". On vient de voir que l’on a !u = !u−v sur R. Si x ∈ E est donné, alors on a, puisque l’on a !u−v ≤ ∣u − v∣ + M (u − v) sur R :
+M (u − v)(x) + ∣(u − v)(x)∣ ≥ !u−vf (x) = !f (x) > :
+Il vient donc nécessairement soit M (u − v)(x) > /2, soit ∣(u − v)(x)∣ > /2 (sans quoi on aurait ∣(u − v)(x)∣ + M (u − v)(x) ≤ /2 + /2 = ). Autrement dit, on a :
+E ⊆ {x ∈ R ∶ M (u − v)(x) > 2 } ∪ {x ∈ R ∶ ∣(u − v)(x)∣ > 2 } :
+Il vient donc en particulier :
+∣E ∣ ≤ ∣{x ∈ R ∶ M (u − v)(x) > 2 }∣ + ∣{x ∈ R ∶ ∣(u − v)(x)∣ > 2 }∣ :
+Or on a, par l’hypothèse (6) :
+∣{x ∈ R ∶ M (u − v)(x) > 2 }∣ ≤ 2C
+p ∥u − v∥p
+p ≤ 2C"p
+p;
+tandis qu’il résulte de l’inégalité de Markov (voir l’équation (7) dans la Remarque 8.3 ci-dessus) que l’on a :
+∣{x ∈ R ∶ ∣(u − v)(x)∣ > 2 }∣ ≤ 2
+p ∥u − v∥p
+p ≤ 2"p
+p:
+Il vient donc finalement :
+∣E ∣ ≤ 2"p ⋅ 1 + C
+p:
+Comme " > 0 est arbitraire dans l’inégalité précédente, on trouve par conséquent ∣E ∣ = 0. Il vient finalement :
+{x ∈ R ∶ !u(x) > 0} = ⋃
+k∈N
+{x ∈ R ∶ !u(x) > 2−k} = ⋃
+n∈N
+E2−k :
+La sous-additivité de la mesure extérieure de Lebesgue assure dès lors que l’on a :
+∣{x ∈ R ∶ !u(x) > 0}∣ ≤
+∞
+∑
+k=0
+∣E2−k ∣ = 0;
+c’est-à-dire que l’on a !u = 0 hors d’un sous-ensemble négligeable de R. C’est ce qu’il nous fallait démontrer. ∎
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 19
+La Proposition 8.2 admet une réciproque lorsque l’approximation de l’identité (φk) est localisée (au sens où il existe un compact hors duquel toutes les fonctions φk sont nulles presque partout), comme nous le verrons ci-dessous. Avant de pouvoir l’établir, il nous faut énoncer et démontrer quelques résultats préliminaires.
+Lemme 8.4. — Soient (ak) ⊆ R∗+ et (bk) ⊆ R∗+ deux suites de réels positifs. On suppose en outre que (bk) est bornée et que l’on a limk→∞
+bk
+ak = +∞. Dans ces conditions, il existe une suite strictement
+croissante d’entiers (kl)l ⊆ N et une suite d’entiers non nuls (ml)l ⊆ N∗ telles que l’on ait :
+∞
+∑
+l=0
+mlakl < +∞ et
+∞
+∑
+l=0
+mlbkl = +∞:
+Démonstration. — Choisissons une suite (kl)l ⊆ N strictement croissante de sorte que l’on ait, pour tout l ∈ N :
+bkl
+akl
+≥ (l + 1)2:
+Pour l ∈ N, on choisit ml ∈ N∗ un entier non nul vérifiant :
+1
+(l + 1)3akl
+≤ ml ≤ 2 + 1
+(l + 1)3akl
+:
+Il est facile, à présent, de montrer que (kl) et (ml) vérifient les conditions demandées. ∎
+Lemme 8.5. — Soient A ⊆ [0; 1] et B ⊆ [0; 1] deux ensembles Lebesgue-mesurables. Dans ces conditions, il existe x ∈ R tel que l’on ait :
+∣A ∩ (x + B)∣ ≥ 1
+3 ∣A∣∣B∣:
+Démonstration. — Comme le résultat est clair si l’on a ∣A∣ = 0 ou ∣B∣ = 0, on peut supposer que l’on a ∣A∣ > 0 et ∣B∣ > 0.
+Définissons une fonction intégrable sur R par ∶= −B ∗ A. Il résulte des théorèmes de Tonelli et Fubini et d’un changement de variable que l’on a :
+∫R
+= ∫R
+dy A(y) ∫R −B(x − y) dx = ∫R
+dy A(y) ∫R −B(z) dz = ∣A∣∣B∣:
+En outre, on voit facilement que l’on a = 0 hors de [−1; 1] (si on a ∣x∣ > 1, alors il vient A(y) −B(x− y) = 0 pour tout y ∈ R). Si l’on avait (x) ≤ 1
+3 ∣A∣∣B∣ pour tout x ∈ R, il viendrait alors :
+∣A∣∣B∣ = ∫R
+= ∫[−1;1]
+≤2
+3 ∣A∣∣B∣;
+ce qui serait absurde. Il existe donc x ∈ R tel que l’on ait (x) > 1
+3 ∣A∣∣B∣. Il vient alors :
+1
+3 ∣A∣∣B∣ < (x) = ∫R A(y) −B(x − y) dy = ∫A x+B(y) dy = ∣A ∩ (x + B)∣;
+et la démonstration est complète. ∎
+Lemme 8.6. — Soit (Ak)k∈N une suite de parties Lebesgue-mesurables contenues dans [0; 1] et qui
+vérifient ∑∞
+k=0 ∣Ak∣ = ∞. Dans ces conditions, il existe une suite (xk) ⊆ R telle que l’on ait :
+∣[0; 1] ∖ ⋃
+k∈N
+(xk + Ak)∣ = 0:
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 20
+Démonstration. — Pour démontrer ce lemme, construisons la suite (xk) de proche en proche. À cet effet, posons x0 ∶= 0 ; si x0; : : : ; xn ont été construits pour un entier n ∈ N, soit xn+1 ∈ R un réel
+associé à A ∶= [0; 1] ∖ ⋃n
+k=0(xk + Ak) et B ∶= An+1 par le Lemme 8.5. Pour n ∈ N, notons pn la proportion de points de [0; 1] recouverte par les xk + Ak, 0 ≤ k ≤ n :
+pn ∶= ∣[0; 1] ∩
+n
+⋃
+k=0
+(xk + Ak)∣ :
+On écrit alors, pour n ∈ N :
+pn+1 = pn + ∣[[0; 1] ∖
+n
+⋃
+k=0
+(xk + Ak)] ∩ (xn+1 + An+1)∣
+≥ pn + 1
+3 ∣[0; 1] ∖
+n
+⋃
+k=0
+(xk + Ak)∣ ∣xn+1 ∩ An+1∣ = pn + 1
+3 (1 − pn)∣An+1∣;
+c’est-à-dire :
+pn+1 − pn ≥ 1
+3 (1 − pn)∣An+1∣:
+Il est clair que (pn)n∈N, croissante et majorée par 1, est convergente ; posons p ∶= limn→∞ pn, de sorte que l’on a 0 ≤ p ≤ 1. Si l’on avait p < 1, alors on trouverait, pour chaque n ∈ N :
+pn+1 − pn ≥ 1
+3 (1 − p)∣An+1∣;
+et la série ∑n∈N(pn+1 − pn) serait divergente puisque ∑k∈N ∣Ak∣ l’est ; c’est absurde puisque (pn)n∈N converge. On a donc p = 1, c’est-à-dire :
+1 = nli→m∞ pn = nli→m∞ ∣[0; 1] ∩
+n
+⋃
+k=0
+(xk + Ak)∣ = ∣[0; 1] ∩ ⋃
+k∈N
+(xk + Ak)∣ ;
+il vient donc, comme annoncé :
+∣[0; 1] ∖ ⋃
+k∈N
+(xk + Ak)∣ = 1 − ∣[0; 1] ∩ ⋃
+k∈N
+(xk + Ak)∣ = 0:
+∎
+Lemme 8.7. — Soit (Ak)k∈N une suite de parties Lebesgue-mesurables contenues dans [0; 1] et qui
+vérifient ∑∞
+k=0 ∣Ak∣ = ∞ et soit I ⊆ R un intervalle de longueur 1. Dans ces conditions, il existe une suite (xk) ⊆ R et un ensemble Lebesgue-négligeable N ⊆ I tels que l’on ait :
+(8) I ∖ N ⊆ ⋂
+n∈N
+⋃
+k≥n
+(xk + Ak):
+Démonstration. — On peut évidemment supposer que l’on a I = [0; 1]. Notons b ∶ N × N → N une bijection telle que, pour chaque j ∈ N, on ait ∑∞
+l=0 ∣Ab(j;l)∣ = +∞. Étant
+donné j ∈ N, on sait, par le Lemme 8.6, qu’il existe une suite (x′
+j;l)l∈N telle que l’on ait ∣Nj∣ = 0, où l’on a posé :
+Nj ∶= [0; 1] ∖ ⋃
+l∈N
+(x′
+j;l + Ab(j;l)):
+On pose ensuite N ∶= ⋃j∈N Nj et, pour k ∈ N, xk ∶= x′
+b−1(k). Pour voir que N et (xk) vérifient
+l’équation (8), fxons x ∈ [0; 1] ∖ N et n ∈ N. Pour chaque j ∈ N, on a x ∈ [0; 1] ∖ Nj, et il existe donc lj ∈ N tel que l’on ait x ∈ x′
+j;lj + Ab(j;lj). Or l’ensemble :
+{b(j; lj) ∶ j ∈ N} ⊆ N
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 21
+est infini, et il existe donc j ∈ N tel que l’on ait k ∶= b(j; lj) ≥ n. Mais il vient alors :
+x ∈ x′
+j;lj + Ab(j;lj) = x′
+b−1(k) + Ak = xk + Ak;
+et le lemme est démontré. ∎
+La proposition suivante est un résultat de presque recouvrement « infiniment souvent ».
+Proposition 8.8. — Soit (Ak)k∈N une suite de parties Lebesgue-mesurables dont la réunion est bor
+née, et qui vérifient ∑∞
+k=0 ∣Ak∣ = ∞. Dans ces conditions, il existe une suite (xk)k∈N de réels telle que, pour presque tout x ∈ R, on ait x ∈ xk + Ak infiniment souvent, c’est-à-dire telle que, pour un ensemble Lebesgue-négligeable N ⊆ R, on ait :
+R∖N ⊆ ⋂
+n∈N
+⋃
+k≥n
+(xk + Ak):
+Démonstration. — Pour fixer les idées, supposons que l’on ait Ak ⊆ [0; 1] pour tout k ∈ N (on peut toujours ce ramener à cette situation à l’aide d’une similitude). Notons alors b ∶ N × N → N une bijection telle que, pour chaque j ∈ N, on ait ∑∞
+l=0 ∣Ab(j;l)∣ = +∞.
+Soit également (Ij)j∈N une suite d’intervalles de longueur 1 telle que l’on ait R = ⋃j∈N Ij. Par le Lemme 8.7, il existe pour chaque j ∈ N, une suite (x′
+j;k)k∈N ⊆ R et un ensemble Lebesgue-négligeable Nj ⊆ Ij tels que l’on ait :
+(9) Ij ∖ Nj ⊆ ⋂
+n∈N
+⋃
+l≥n
+(x′
+j;l + Ab(j;l)):
+On pose à présent N ∶= ⋃j∈N Nj et, pour k ∈ N, xk ∶= x′
+b−1(k). On a alors :
+R∖N ⊆ ⋃
+n∈N
+⋃
+k≥n
+(xk + Ak):
+Pour voir cela, fixons x ∈ R ∖ N et n ∈ N. Il existe évidemment un entier j ∈ N tel que l’on ait x ∈ Ij. On a alors x ∈ Ij ∖ N ⊆ Ij ∖ Nj. Il résulte dès lors de l’inclusion (9) que l’ensemble :
+{l ∈ N ∶ x ∈ x′
+j;l + Ab(j;l)}
+est infini. Par conséquent, l’ensemble :
+{k ∈ N ∶ x ∈ x′
+b−1(k) + Ak} ⊇ {b(j; l) ∶ l ∈ N; x ∈ x′
+j;l + Ab(j;l)}
+est infini lui aussi ; il existe donc k ≥ n tel que l’on ait x ∈ x′
+b−1(k) + Ak = xk + Ak, et la proposition est démontrée. ∎
+La proposition suivante est une forme de « réciproque » à la Proposition 8.2 sous l’hypothèse de « localisation » de l’approximation de l’identité en jeu.
+Proposition 8.9. — Soit (φk) ⊆ L1+(R) une approximation de l’identité positive et 1 ≤ p < ∞ un réel. On suppose qu’il existe un intervalle borné en dehors duquel on a φk = 0 presque partout pour tout k ∈ N, et que, pour chaque u ∈ Lp(R), la fonction maximale Mφu de u associée à (φk) par la formule (5), vérifie Mφu < +∞ sur un ensemble de mesure (extérieure) de Lebesgue strictement positive. Dans ces conditions, il existe une constante C > 0 telle que, pour tout u ∈ Lp(R) et tout > 0, on ait :
+∣{x ∈ R ∶ Mφu(x) > }∣ ≤ C
+p ∥u∥p
+p:
+Démonstration. — Pour alléger les notations, on écrira, dans cette démonstration, M u au lieu de Mφu.
+Commençons par nous restreindre aux cas où u est localisée dans un intervalle de longueur 1. Plus précisément, montrons l’affirmation suivante.
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 22
+Affirmation 6. — Soit K un intervalle de longueur 1. Il existe une constante c > 0 telle que, pour tout u ∈ Lp(R) vérifiant u = 0 presque partout hors de K, et tout > 0, on ait :
+∣{x ∈ R ∶ M u(x) > }∣ ≤ c
+p ∥u∥p
+p:
+Pour démontrer cette affirmation, commençons par remarquer que l’on peut supposer, sans perte de généralité, que l’on a K = [0; 1]. Rappelons aussi qu’il existe, par hypothèse, un intervalle borné hors duquel on a φk = 0 presque partout pour chaque k ∈ N. Il est alors facile de voir que l’on peut trouver un entier N ∈ N tel que l’on ait φk ∗ u = 0 partout hors de l’intervalle I ∶= [−N; N ], pour tout k ∈ N et toute fonction u ∈ Lp(R) vérifiant u = 0 presque partout hors de [0; 1]. Si u ∈ Lp(R) est une telle fonction et que > 0 est donné, on a alors :
+{x ∈ R ∶ M u(x) > } = {x ∈ I ∶ M u(x) > }:
+Procédons par l’absurde, et supposons que l’Affirmation 6 soit fausse. Pour chaque k ∈ N, il existerait donc un réel k > 0 et une fonction vk ∈ Lp(R) vérifiant vk = 0 hors de [0; 1] et tels que l’on ait, pour tout k ∈ N :
+∣{x ∈ I ∶ M vk(x) > k}∣ = ∣{x ∈ R ∶ M vk(x) > k}∣ > 3kp
+p k
+∥vk∥p
+p:
+Quitte à remplacer, pour chaque k ∈ N, vk par ∣vk∣ et à tirer profit de l’inégalité M ∣vk∣ ≥ M vk, aisée à
+vérifier sur R, on peut supposer que l’on a vk ∈ Lp
++(R) pour tout k ∈ N, i.e. que (vk) est en outre une suite de fonctions positives. Pour tout k ∈ N, cette inégalité se récrit, en posant wk ∶= 2k −1
+k vk ∈ Lp
++(R) :
+∣{x ∈ I ∶ M wk(x) > 2k}∣ > ( 3p
+2p )
+k
+∥wk∥p
+p;
+remarquons au passage que cette inégalité implique en particulier que l’on a ∥wk∥p > 0 (sans quoi wk serait nulle presque partout, et l’inégalité précédente se lirait 0 > 0, ce qui serait absurde). Les suites de réels (strictement) positifs (ak) et (bk) définies pour k ∈ N par :
+ak ∶= ∥wk∥p
+p et bk ∶= ∣{x ∈ I ∶ M wk(x) > 2k}∣;
+vérifient donc les hypothèses du Lemme 8.4. Il existe donc, en vertu de ce dernier lemme, une suite strictement croissante d’entiers (kl)l ⊆ N et une suite d’entiers non nuls (ml) ⊆ N telles que l’on
+ait ∑∞
+l=0 mlakl < +∞ et ∑∞
+l=0 mlbkl = +∞. Définissons alors une suite (uk)k∈N ⊆ Lp
++(R) en posant uk ∶= wk0 pour 0 ≤ k ≤ m0 − 1 et, si l ∈ N est donné :
+uk ∶= wkl+1 pour
+l
+∑
+j=0
+mj ≤ k ≤ (
+l+1
+∑
+j=0
+mj) − 1:
+Autrement dit, (uk) est la suite :
+wk0; : : : ; wk0
+ ́11111111111111111111111111 ̧11111111111111111111111111¶
+m0 fois
+; wk1; : : : ; wk1
+ ́11111111111111111111111111 ̧11111111111111111111111111¶
+m1 fois
+; wk2; : : : ; wk2
+ ́11111111111111111111111111 ̧11111111111111111111111111¶
+m2 fois
+;:::
+où chaque fonction vkl, l ∈ N est répétée ml fois. Il vient par conséquent :
+(10)
+∞
+∑
+k=0
+∥uk∥p
+p=
+∞
+∑
+l=0
+ml∥wkl ∥p
+p=
+∞
+∑
+l=0
+mlakl < +∞:
+Définissons aussi une suite ( k) ⊆ R∗+ en posant k ∶= 2k0 pour 0 ≤ k ≤ m0 − 1 et, si l ∈ N est donné :
+k ∶= 2kl+1 pour
+l
+∑
+j=0
+mj ≤ k ≤ (
+l+1
+∑
+j=0
+mj) − 1:
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 23
+Il vient alors limk→∞ k = +∞ et on écrit, en posant Ak ∶= {x ∈ I ∶ M uk(x) > k} pour chaque k∈N:
+(11)
+∞
+∑
+k=0
+∣Ak∣ =
+∞
+∑
+k=0
+∣{x ∈ I ∶ M uk(x) > k}∣ =
+∞
+∑
+l=0
+ml ∣{x ∈ I ∶ M wkl(x) > 2kl}∣ = +∞:
+Observons aussi que l’ensemble Ak est Lebesgue-mesurable pour tout k ∈ N. Choisissons à présent, en vertu de la Proposition 8.8, une suite (xk) ⊆ R de nombres réels tels et un ensemble Lebesgue-négligeable N ⊆ R tels que l’on ait :
+Rn ∖ N ⊆ ⋂
+n∈N
+⋃
+k≥n
+(xk + Ak):
+Définissons aussi, pour chaque k ∈ N, une fonction u~k ∈ Lp
++(R) par la formule suivante pour x ∈ R :
+u~k(x) ∶= uk(x − xk):
+Définissons à présent une fonction u~ sur R en posant, pour x ∈ R :
+u~(x) ∶= {supk∈N u~k(x) si (u~k(x))k∈N est bornée,
+0 sinon.
+Il vient, sur R :
+0 ≤ u~p ≤
+∞
+∑
+k=0
+u~p
+k:
+Or on a, pour tout n ∈ N, en utilisant le théorème du changement de variables :
+∫R
+n
+∑
+k=0
+u~p
+k=
+n
+∑
+k=0
+∫R
+up
+k=
+m
+∑
+k=0
+∥uk∥p
+p≤
+∞
+∑
+k=0
+∥uk∥p
+p < ∞:
+Il suit donc du théorème de convergence monotone que la série de fonctions ∑k∈N u~p
+k converge presque
+partout sur R vers une fonction intégrable ; le théorème de comparaison assure dès lors que u~p est
+intégrable sur R, c’est-à-dire que l’on a u~ ∈ Lp
++(R).
+Si k ∈ N et x ∈ xk + Ak sont donnés, écrivons x = xk + y avec y ∈ Ak. On calcule alors, pour l ∈ N, en effectuant un changement de variable :
+φl ∗ u~k(x) = ∫R
+φl(x − z)u~k(z) dz = ∫R
+φl(x − z)uk(z − xk) dz
+= ∫R
+φl(x − xk − t)uk(t) dt = ∫R
+φk(y − t)uk(t) dt = φl ∗ uk(y):
+Il vient donc :
+M u~(x) ≥ M u~k(x) ≥ sup
+l∈N
+φl ∗ u~k(x) = sup
+l∈N
+φl ∗ uk(y) > k;
+puisque l’on a y ∈ Ak. Finalement, si x ∈ R ∖ N est donné, on sait que pour tout n ∈ N, il existe k ≥ n tel que l’on ait x ∈ xk + Ak et donc aussi :
+M u~(x) ≥ k:
+Comme on a k → ∞, k → ∞, ceci montre que l’on a M u~(x) = +∞. Il vient donc M u~ = +∞ presque partout sur R, ce qui contredit les hypothèses de la proposition et achève la preuve de l’affirmation.
+Pour démontrer la proposition dans le cas général, fixons u ∈ Lp(R) et > 0 et observons que l’on a, partout sur R :
+u=
+∞
+∑
+j=−∞
+u ]j;j+1]:
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 24
+Posons alors, pour j ∈ Z, uj ∶= u ]j;j+1]. On a donc u = ∑∞
+j=−∞ uj sur R, mais aussi, sur R :
+up =
+∞
+∑
+j=−∞
+up
+j;
+d’où l’on tire également ∥u∥p
+p = ∑∞
+j=−∞ ∥uj ∥p
+p. Posons par ailleurs, pour j ∈ Z, Ij ∶= j + I. Il est clair que l’on a M uj = 0 hors de Ij pour tout j ∈ Z et on voit sans difficulté que l’on a aussi, sur R :
+Mu ≤
+∞
+∑
+j=−∞
+M uj:
+En outre, observons que, pour tout x ∈ R, l’ensemble {j ∈ Z ∶ x ∈ Ij} contient au maximum 4N + 2 éléments (rappelons que l’on a I = [−N; N ] et qu’il vient donc Ij ∩ Ik = (j + I) ∩ (k + I) = ∅ si ∣j − k∣ > 2N ). Si x ∈ Rn est tel que l’on ait M u(x) > , il vient alors :
+< M u(x) ≤
+∞
+∑
+j=−∞
+M uj(x) = ∑
+j∈Z x∈Ij
+M uj(x) ;
+comme la dernière somme compte au maximum 4N + 2 termes, il existe donc au moins un j ∈ Z vérifiant x ∈ Ij et M uj(x) > 4N+2 . Il vient donc, pour résumer ce qui précède :
+{x ∈ R ∶ M u(x) > } ⊆ ⋃
+j∈Z
+{x ∈ R ∶ M uj(x) > 4N + 2 } :
+En utilisant alors la sous-additivité de la mesure (extérieure) de Lebesgue et l’Affirmation 6 pour chaque fonction uj, j ∈ Z, on trouve dès lors :
+∣{x ∈ R ∶ M u(x) > }∣ ≤
+∞
+∑
+j=−∞
+∣{x ∈ R ∶ M uj(x) > 4N + 2 }∣
+≤ c(4N + 2)p
+p
+∞
+∑
+j=−∞
+∥uj ∥p
+p = c(4N + 2)p
+p ∥u∥p
+p:
+La proposition s’en déduit avec C = c(4N + 2)p. ∎
+Le théorème suivant résume ce que nous avons établi dans cette section.
+Théorème 8.10 (Principe de Sawyer-Stein pour les approximations de l’identité positives)
+Soit (φk) ⊆ L1+(R) une approximation de l’identité positive et 1 ≤ p < ∞ un réel. On suppose qu’il existe un intervalle borné en dehors duquel on a φk = 0 presque partout pour tout k ∈ N. Les conditions suivantes sont équivalentes (on note Mφu la fonction maximale de u associée à (φk) par la formule (5)) :
+(i) pour tout u ∈ Lp(R), la suite (φk ∗ u) converge presque partout sur R vers u ; (ii) pour tout u ∈ Lp(R), on a Mφu < +∞ presque partout sur R ; (iii) pour tout u ∈ Lp(R), on a Mφu < +∞ sur un ensemble de mesure de Lebesgue strictement positive ; (iv) il existe C > 0 tel que, pour tout u ∈ Lp(R) et tout > 0, on ait :
+∣{x ∈ R ∶ Mφu(x) > }∣ ≤ C
+p ∥u∥p
+p:
+Démonstration. — Que (i) implique (ii) résulte du fait que si (φk ∗ u) converge presque partout sur R pour u ∈ Lp(R), alors pour presque tout x ∈ R, la suite convergente (φk ∗ u(x))k est bornée, de sorte que l’on a :
+Mφu(x) ∶= sup
+k∈N
+∣φk ∗ u(x)∣ < +∞:
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 25
+Il est clair que (ii) implique (iii). La Proposition 8.9 affirme précisément que (iii) implique (iv). Finalement, il résulte de la Proposition 8.2 que (iv) entraîne (i). ∎
+Le dernier résultat de cette section permet souvent de ramener un problème de convergence presque partout pour une approximation de l’identité (positive) donnée, au problème correspondant pour une approximation de l’identité « proche » de la suite initiale.
+Lemme 8.11. — Soient (φk) ⊆ L1+(R) et ( k) ⊆ L1+(R) deux approximations de l’identité et 1 ≤ p < ∞ un réel. On suppose qu’il existe un intervalle borné en dehors duquel on a k = 0 presque partout et que l’on a :
+(12)
+∞
+∑
+k=0
+∥φk − k∥1 < +∞:
+Supposons en outre que l’une des conditions équivalentes suivantes soit vérifiée (on note M u la fonction maximale de u associée à l’approximation de l’identité ( k) par la formule (5)) :
+(i) pour tout u ∈ Lp(R), la suite ( k ∗ u) converge presque partout sur R vers u ; (ii) pour tout u ∈ Lp(R), on a M u < +∞ presque partout sur R ; (iii) pour tout u ∈ Lp(R), on a M u < +∞ sur un ensemble de mesure de Lebesgue strictement positive ; (iv) il existe C > 0 tel que, pour tout u ∈ Lp(R) et tout > 0, on ait :
+∣{x ∈ R ∶ M u(x) > }∣ ≤ C
+p ∥u∥p
+p:
+Dans ces conditions, chacune des conditions suivantes est vérifiée (on note Mφu la fonction maximale de u associée à (φk) par la formule (5)) :
+(a) pour tout u ∈ Lp(R), la suite (φk ∗ u) converge presque partout sur R vers u ; (b) pour tout u ∈ Lp(R), on a Mφu < +∞ presque partout sur R ; (c) il existe C′ > 0 tel que, pour tout u ∈ Lp(R) et tout > 0, on ait :
+∣{x ∈ R ∶ Mφu(x) > }∣ ≤ C′
+p ∥u∥p
+p:
+Démonstration. — On sait, par le principe de Sawyer-Stein (Théorème 8.10) que les conditions (i) à (iv) sont équivalentes. Si l’une d’entre elles est satisfaite, on sait donc qu’il existe une constante C > 0 telle que, pour tous u ∈ Lp(R) et tout > 0, on ait :
+(13) ∣{x ∈ R ∶ M u(x) > }∣ ≤ C
+p ∥u∥p
+p:
+Fixons à présent u ∈ Lp(R). On a, pour tout x ∈ R :
+∣φk ∗ u(x)∣ ≤ ∣(φk − k) ∗ u(x)∣ + ∣ k ∗ u(x)∣
+≤ ∣φk − k∣ ∗ ∣u∣(x) + M u(x) ≤ ∆ ∗ ∣u∣(x) + M u(x);
+où ∆ ∈ L1+(R) est donnée pour presque tout x ∈ R par ∆(x) = ∑∞
+k=0 ∣ k(x) − φk(x)∣ et vérifie
+∥∆∥1 = ∑∞
+k=0 ∥φk− k∥1 < +∞ (le fait qu’il existe une telle fonction ∆ ∈ L1+(R) étant une conséquence immédiate de l’hypothèse (12) et du théorème de convergence monotone). Il vient donc, pour x ∈ R :
+Mφu(x) ≤ ∆ ∗ ∣u∣(x) + M u(x):
+Fixons à présent u ∈ Lp(R) et > 0. Observons que si x ∈ R vérifie Mφu(x) > , il vient alors soit ∆ ∗ ∣u∣(x) > /2, soit M u(x) > /2, de sorte que l’on peut écrire :
+∣{x ∈ R ∶ Mφu(x) > }∣ ≤ ∣{x ∈ R ∶ ∆ ∗ ∣u∣(x) > 2 }∣ + ∣{x ∈ R ∶ M u(x) > 2 }∣ :
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 26
+Or il résulte de l’inégalité de Markov (voir la Remarque 8.3 ci-dessus) que l’on a :
+∣{x ∈ R ∶ ∆ ∗ ∣u∣(x) > 2 }∣ ≤ 2p
+p ∥∆ ∗ ∣u∣∥p
+p ≤ 2p
+p ∥∆∥p
+1∥∣u∣∥p
+p = 2p∥∆∥p
+1
+p ∥u∥p
+p:
+D’autre part, il résulte de (13) que l’on a :
+∣{x ∈ R ∶ M u(x) > 2 }∣ ≤ 2pC
+p ∥u∥p
+p:
+On trouve donc finalement :
+∣{x ∈ R ∶ Mφu(x) > }∣ ≤ 2p(C + ∥∆∥p
+1)
+p ∥u∥p
+p:
+La condition (b) est donc satisfaite avec C′ = 2p(C + ∥∆∥p
+1). Il résulte à présent de la Proposition 8.2 que la condition (a) est satisfaite. Comme (a) entraîne facilement (b), la démonstration est complète. ∎
+Lemme 8.12. — Soient (φk) ⊆ L1+(R) et ( k) ⊆ L1+(R) deux approximations de l’identité et 1 ≤ p < ∞ un réel. On suppose qu’il existe un intervalle borné en dehors duquel on a φk = 0 et k = 0 presque partout, et que l’on a :
+(14)
+∞
+∑
+k=0
+∥φk − k∥1 < +∞:
+Dans ces conditions, les deux propriétés suivantes sont équivalentes :
+(i) la suite (φk ∗ u) converge presque partout vers u pour tout u ∈ Lp(R) ; (ii) la suite ( k ∗ u) converge presque partout vers u pour tout u ∈ Lp(R).
+Démonstration. — Il suffit évidemment de prouver que (i) entraîne (ii), quitte à intervertir les rôles de (φk) et ( k). Supposons donc que la propriété (i) soit satisfaite, et notons, pour tout u ∈ Lp(R), Mφu la fonction maximale de u associée à l’approximation de l’identité (φk) par la formule (5), et M u la fonction maximale de u associée à ( k) et définie pour x ∈ R par la formule :
+M u(x) ∶= sup
+k∈N
+∣ k ∗ u(x)∣:
+Puisque (i) est satisfaite, il est clair que pour tout u ∈ Lp(R) et presque tout x ∈ R, la suite (φk∗u(x))k est convergente, et donc bornée, c’est-à-dire que l’on a Mφu(x) < +∞ pour presque tout x ∈ R. Fixons à présent u ∈ Lp(R). On a, pour tout x ∈ R :
+∣ k ∗ u(x)∣ ≤ ∣( k − φk) ∗ u(x)∣ + ∣φk ∗ u(x)∣
+≤ ∣ k − φk∣ ∗ ∣u∣(x) + Mφu(x) ≤ ∆ ∗ ∣u∣(x) + Mφu(x);
+où ∆ ∈ L1+(R) est donnée pour presque tout x ∈ R par ∆(x) = ∑∞
+k=0 ∣ k(x) − φk(x)∣ et vérifie
+∥∆∥1 = ∑∞
+k=0 ∥φk− k∥1 < +∞ (le fait qu’il existe une telle fonction ∆ ∈ L1+(R) étant une conséquence immédiate de l’hypothèse (12) et du théorème de convergence monotone). Il vient donc, pour x ∈ R :
+M u(x) ≤ ∆ ∗ ∣u∣(x) + Mφu(x):
+Puisque l’on a Mφu(x) < +∞ pour presque tout x ∈ R, il vient donc aussi M u(x) < +∞ pour presque tout x ∈ R. On vient d’établir que, pour tout u ∈ Lp(R) et presque tout x ∈ R, on a M u(x) < +∞. Il résulte dès lors du principe de Sawyer-Stein (Théorème 8.10) que ( k ∗ u) converge presque partout vers u pour tout u ∈ Lp(R). ∎
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 27
+On se propose à présent de montrer, à titre d’exercice, que le principe de Sawyer-Stein a un équivalent dans les espaces probabilisés, et en particulier pour les approximations de l’identité dans Lp(T).
+Dans la suite, on travaille avec un espace probabilisé (Ω; F ; ) et 1 ≤ p < ∞. On pose, pour alléger les notations, Lp(Ω) ∶= Lp(Ω; F ; ). On dit qu’un opérateur linéaire T ∶ Lp(Ω) → Lp(Ω) est continu en mesure s’il satisfait la condition suivante :
+(CM) si (uk) ⊆ Lp(Ω) et u ∈ Lp(Ω) vérifient ∥uk − u∥p → 0, k → ∞, alors pour tout " > 0 on a :
+({x ∈ Ω ∶ ∣T uk(x) − T u(x)∣ ≥ "}) → 0; k → ∞:
+Exercice 10 (Principe de Banach). — On fixe à présent une suite (Tk) d’opérateurs linéaires continus en mesure sur Lp(Ω) et on pose, pour u ∈ Lp(Ω) et l ∈ N :
+T ∗u(x) ∶= sup
+k∈N
+∣Tku(x)∣ et T ∗
+l u(x) ∶= sup
+0≤k≤l
+∣Tk(x)∣:
+On se propose de montrer que, dans ces conditions, on obtient l’énoncé suivant.
+Théorème 8.13. — Si, pour tout u ∈ Lp(Ω), on a T ∗u(x) < +∞ pour -presque tout x ∈ Ω, alors il existe une fonction décroissante C ∶]0; ∞[→]0; ∞[ vérifiant C( ) → 0, → ∞, telle que l’on ait, pour tout u ∈ Lp(Ω) et tout > 0 :
+(15) ({x ∈ Ω ∶ T ∗u(x) > ∥u∥}) ≤ C( ):
+On pourra, à cet effet, supposer désormais que l’on a T ∗u(x) < +∞ -presque partout sur Ω, pour chaque u ∈ Lp(Ω), et procéder comme suit.
+1. Fixer " > 0 et montrer que l’on a :
+Lp(Ω) = ⋃
+n∈N
+{u ∈ Lp(Ω) ∶ ({x ∈ Ω ∶ T ∗u(x) > n}) ≤ "}:
+2. Montrer que, pour chaque n ∈ N, l’ensemble
+Fn ∶= {u ∈ Lp(Ω) ∶ ({x ∈ Ω ∶ T ∗u(x) > n}) ≤ "}
+est fermé. Indication. Démontrer (et utiliser) le fait que, pour chaque l ∈ N, l’opérateur T ∗
+l est continu en
+mesure en récrivant Fn à l’aide des opérateurs T ∗
+l.
+3. Montrer qu’il existe par conséquent un entier n0 ∈ N, ainsi que u0 ∈ Lp(Ω) et > 0 tels que l’on ait :
+({x ∈ Ω ∶ T ∗(u0 + v)(x) > n0}) ≤ ";
+pour chaque v ∈ Lp(Ω) vérifiant ∥v∥p ≤ 1. 4. En déduire que l’on a :
+({x ∈ Ω ∶ T ∗v(x) > 2n0 }) ≤ 2";
+pour tout v ∈ Lp(Ω) vérifiant ∥v∥p ≤ 1. 5. Conclure.
+Exercice 11. — Lorsqu’une suite (Tk) d’opérateurs linéaires et continus en mesure sur Lp(Ω) vérifie une condition du type (15), la convergence -presque partout sur Ω de la suite de fonctions (Tku) est assurée pour chaque u ∈ Lp(Ω) dès qu’on la sait vérifiée sur une partie dense de Lp(Ω). Le théorème suivant le montre.
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 28
+Théorème 8.14. — Soit (Tk) une suite d’opérateurs linéaires et continus en mesure sur Lp(Ω) vérifiant l’inégalité (15) pour une fonction décroissante C ∶]0; ∞[→]0; ∞[ vérifiant C( ) → 0, → ∞. Alors l’ensemble
+C ∶= {u ∈ Lp(Ω) ∶ (Tku) converge -presque partout sur Ω}
+est fermé.
+Pour prouver ce théorème, on pourra procéder comme suit.
+1. Poser, pour u ∈ Lp(Ω) et x ∈ Ω :
+R(x; u) ∶= lim
+j;k→∞ ∣Tju(x) − Tku(x)∣
+et montrer que l’on a R(x; u) ≤ 2T ∗u(x). 2. En déduire que l’on a, pour u ∈ Lp(Ω) :
+({x ∈ Ω ∶ R(x; u) > ∥u∥p} ≤ C ( 2 ) ;
+pour tout > 0. 3. En déduire que pour u ∈ Lp(Ω) et v ∈ C, on a :
+({x ∈ Ω ∶ R(x; u) > ∥u − v∥p} ≤ C ( 2 ) ;
+4. Déduire de ce qui précède que si u ∈ adhLp(Ω) C est donné, alors on a pour tout " > 0 :
+({x ∈ Ω ∶ R(x; u) > "}) ≤ C ( 1
+2") :
+5. Conclure que (Tku) est -presque partout convergente.
+Exercice 12. — Déduire des deux exercices précédents que si (Tk) est une suite d’opérateurs admissibles sur Lp(Ω) telle qu’il existe D ⊆ Lp(Ω), dense dans Lp(Ω) avec la propriété que (Tku) soit -presque partout convergente sur Ω pour tout u ∈ D, alors les conditions suivantes sont équivalentes :
+(i) (Tku) est -presque partout convergente sur Ω, pour tout u ∈ Lp(Ω) ; (ii) la suite (Tk) vérifie une condition du type (15), avec C ∶]0; ∞[→]0; ∞[ décroissante et telle que C( ) → 0, → ∞.
+On suppose à présent que Ω est muni d’une famille E de transformations -mesurables E ∶ Ω → Ω vérifiant (E−1A) = (A) pour tout A ∈ F ; on suppose également que E mélange Ω au sens suivant :
+(∀ > 1)(∀A; B ∈ F )(∃E ∈ E ) ∶ (A ∩ E−1B) ≤ (A) (B):
+On pose, pour E ∈ E et u ∈ Lp(Ω), Eu = u ○ E. On se donne, comme précédemment, une suite d’opérateurs linéaires continus en mesure Tk ∶ Lp(Ω) → Lp(Ω) et on suppose en outre que :
+– Tk est positif pour tout k ∈ N (i.e. on a T u ≥ 0 -p.p. pour tout u ∈ Lp(Ω) vérifiant u ≥ 0 -p.p.) ; – pour tous u ∈ Lp(Ω) et E ∈ E , on a T ∗(Eu) ≥ E(T ∗u).
+Exercice 13 (Principe de Sawyer-Stein dans les espaces probabilisés)
+On se propose de démontrer que, dans les conditions précédentes, les deux propriétés suivantes sont équivalentes :
+(i) T ∗u < +∞ -presque partout pour tout u ∈ Lp(Ω) ;
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 29
+(ii) il existe 0 < C < ∞ tel que, pour tout u ∈ Lp(Ω) et tout > 0, on ait :
+({u ∈ Lp(Ω) ∶ T ∗u(x) > }) ≤ C
+p ∥u∥p
+p:
+On pourra, pour démontrer que (i) implique (ii), procéder comme suit.
+1. Utiliser le fait que E mélange Ω pour montrer que, si l ∈ N et A ∈ F vérifient (l + 1) (A) ≥ 1, alors il existe E0; E1; : : : ; El ∈ E pour lesquels on a :
+(
+l
+⋃
+k=0
+E −1
+k A) ≥ 1
+2:
+On fixe désormais u ∈ Lp(Ω) vérifiant ∥u∥p = 1 et u ≥ 0, -p.p. et on pose, pour > 0 donné :
+A ∶= {x ∈ Ω ∶ T ∗u(x) > }:
+2. Étant donné l ∈ N, E0; : : : ; El ∈ E et M > 0 vérifiant M p ≥ l +1, posons uk ∶= Eku pour 0 ≤ k ≤ l ainsi que :
+F ∶= 1
+M max
+0≤k≤l uk:
+Montrer que l’on a alors ∥F ∥ ≤ 1 et :
+l
+⋃
+k=0
+E −1
+k A ⊆ {x ∈ Ω ∶ T ∗F (x) ≥ M } :
+3. En utilisant le principe de Banach, montrer qu’il existe un choix de l du type l ≃ C p (et un choix de M correspondant) tel que l’on ait, pour tout choix de E0; : : : ; El ∈ E (en conservant les notations utilisées au point précédent) :
+(
+l
+⋃
+k=0
+E −1
+k A) < 1
+2:
+4. En déduire que l’on a alors, pour un bon choix de C > 0 (indépendant de u et ) :
+({x ∈ Ω ∶ T ∗u(x) > }) ≤ C
+p:
+5. Conclure.
+On travaille à présent dans l’espace probabilisé T ∶= R/Z (identifié au besoin avec un intervalle de longueur 1) muni de la mesure extérieure de Lebesgue et on fixe 1 ≤ p < ∞.
+Exercice 14. — On pose T ∶= { h ∶ h ∈ R} où, pour h ∈ R, h ∶ T → T est défini par h(x) ∶= (x+h) mod 1. Montrer que T mélange T.
+Exercice 15. — Soit ( k) une approximation de l’identité positive sur T, i.e. une suite ( k) ⊆ L1(T) vérifiant les conditions suivantes :
+– k ≥ 0 presque partout, pour tout k ∈ N ; – ∥ k∥1 → 1, k → ∞ ; – pour tout 0 < < 1
+2 , on a :
+kli→m∞ ∫
+1−
+k(x) dx = 0:
+Étant donné u ∈ Lp(T), définissons aussi une fonction mesurable P u sur T en posant, pour x ∈ T :
+P u(x) ∶= sup
+k
+∣ k ∗ u(x)∣:
+Montrer que les conditions suivantes sont équivalentes :
+(i) ( k ∗ u) converge presque partout pour tout u ∈ Lp(T) ;
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 30
+(ii) pour tout u ∈ Lp(T), on a :
+P u(x) < +∞ pour presque tout x ∈ T;
+(iii) il existe 0 < C < ∞ telle que, pour tout u ∈ Lp(T) et tout > 0, on ait :
+∣{x ∈ T ∶ P u(x) > }∣ ≤ C
+p ∥u∥p:
+Exercice 16. — Soient ∶ T → T une application mesurable et inversible vérifiant ∣ −1A∣ = ∣A∣ pour toute partie mesurable A de T, (nk)k∈N ⊆ Z et (lk)k∈N deux suites d’entiers avec limk lk = +∞. On définit, pour k ∈ N et u ∈ Lp(T), une fonction Mku ∈ Lp(T) en posant, pour x ∈ T :
+Mku(x) ∶= 1
+lk + 1
+lk
+∑
+l=0
+u ( nk+lx) :
+Étant donné u ∈ Lp(T), on définit encore une fonction mesurable M u sur T en posant, pour x ∈ T :
+M u(x) ∶= sup
+k
+∣Mku(x)∣:
+Montrer que les conditions suivantes sont équivalentes si est ergodique (i.e. si les seules fonctions mesurables -invariantes sont les constantes) :
+(i) (Mku) converge presque partout pour tout u ∈ Lp(T) ; (ii) pour tout u ∈ Lp(T), on a :
+M u(x) < +∞ pour presque tout x ∈ T;
+(iii) il existe 0 < C < ∞ telle que, pour tout u ∈ Lp(T) et tout > 0, on ait :
+∣{x ∈ T ∶ M u(x) > }∣ ≤ C
+p ∥u∥p:
+Indication. On pourra étudier le comportement de Mku(x) pour u de la forme v − v ○ + c avec v ∈ L∞(T) et c ∈ R.
+9. Intervalles et fonction maximale dyadiques
+Les intervalles dyadiques sont très utiles en analyse.
+Définition 9.1. — Un intervalle dyadique de génération k ∈ Z est un intervalle I ⊆ R de la forme :
+I = [j2k; (j + 1)2k[;
+pour un entier j ∈ Z ; on note Dk la collection des intervalles dyadiques de génération k. On pose aussi D ∶= ⋃k∈Z Dk et on appelle intervalle dyadique tout élément de D ; observons que D est dénombrable. Étant donné I ∈ D, on note gen(I) ∈ Z l’unique entier k ∈ Z pour lequel on a I ∈ Dk (on l’appelle la génération de I) ; il vient évidemment ∣I∣ = 2gen(I) pout tout I ∈ D. Finalement, si I ∈ D est donné, on note I^ l’unique intervalle dyadique de génération gen(I) + 1 tel que l’on ait I ⊆ I^; on l’appelle le parent de I.
+Remarque 9.2. — Si I; J ∈ D sont deux intervalles dyadiques, on a soit I ⊆ J, soit J ⊆ I, soit I ∩ J = ∅.
+En outre, si I; J ∈ D vérifient I ⊊ J, on a nécessairement ∣J∣ ≥ 2∣I∣.
+Isoler, dans une collection d’intervalles dyadiques, les éléments maximaux est un outil clef en analyse réelle.
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 31
+Lemme 9.3. — Si C ⊆ D est une collection d’intervalles dyadiques et que l’on a :
+sup
+I ∈C
+∣I∣ < +∞;
+alors il existe une famille au plus dénombrable C ∗ ⊆ C vérifiant ∪C ∗ = ∪C , constituée d’intervalles deux à deux disjoints et maximaux (pour l’inclusion) dans C au sens suivant : si I ∈ C ∗ et J ∈ C vérifient I ⊆ J, on a nécessairement I = J.
+Démonstration. — Commençons par observer que l’hypothèse se récrit supI∈C gen(I) < +∞. Il
+existe donc un entier k0 ∈ Z tel que l’on ait C ⊆ ⋃k0
+k=−∞ Dk. Par conséquent C admet des éléments
+maximaux pour l’inclusion. Pour le voir, on peut observer, par exemple, que C muni de l’inclusion est un ensemble ordonné inductif (en montrant que si E ⊆ C est totalement ordonné par l’inclusion, alors ∪E est un intervalle dyadique qui contient tous les éléments de E ) et appliquer le lemme de Zorn, ou raisonner par l’absurde comme suit. Supposons que C n’admette aucun élément maximal et fixons I0 ∈ C . Comme I0 n’est pas maximal, il existe I1 ∈ C vérifiant I1 ⊋ I0 ; mais alors on a ∣I1∣ ≥ 2∣I0∣ en vertu de la Remarque 9.2. De proche en proche, on construit une suite (Ik)k∈N ⊆ C d’intervalles dyadiques vérifiant Ik ⊊ Ik+1 pour tout k ∈ N et ∣Ik∣ ≥ 2k∣I0∣. C’est impossible puisqu’il viendrait alors supI∈C ∣I∣ ≥ supk∈N ∣Ik∣ = +∞. Notons à présent C∗ la collection des éléments maximaux de C pour l’inclusion ; elle est au plus dénombrable puisque l’on a (évidemment) C∗ ⊆ D et que D est dénombrable. Pour commencer, montrons que C∗ est constituée d’intervalles deux à deux disjoints. À cet effet, fixons I; J ∈ C avec I ≠ J. On sait que l’on a soit I ⊆ J, soit J ⊆ I, soit I ∩J = ∅. Les deux premières possibilités conduisant à avoir I = J par maximalité de I et J, il vient nécessairement I ∩ J = ∅. Pour montrer à présent que l’on a ∪C∗ = ∪C , fixons I ∈ C ∖ C∗ et montrons que l’on a I ⊆ ∪C∗. Puisque I n’est pas maximal dans C pour l’inclusion, il existe donc I0 ∈ C vérifiant I0 ⊋ I. Si on a I0 ∈ C∗, alors on a I ⊊ I0 ⊆ ∪C∗ et l’inclusion souhaitée est démontrée. Sinon, on construit de proche en proche, tant que l’on a Ik ∈ C ∖ C∗, un intervalle dyadique Ik+1 ∈ C vérifiant Ik+1 ⊋ Ik pour tout k et ∣Ik+1∣ ≥ 2k+1∣I0∣. Cette procédure ne peut continuer indéfiniment, sans quoi on aurait à nouveau supI∈C ∣I∣ ≥ supk∈N ∣Ik∣ = +∞. Il existe donc un entier k0 ∈ N tel que l’on ait Ik0+1 ∈ C∗, d’où il résulte que l’on a I ⊆ Ik0+1 ⊆ ∪C∗. La démonstration est complète. ∎
+La fonction maximale dyadique rappelle la fonction maximale de Hardy-Littlewood.
+Définition 9.4. — Si f ∶ R → R est localement intégrable, on définit la fonction maximale dyadique M∆f de f en posant, pour x ∈ R :
+M∆f (x) ∶= sup
+II∈∋Dx
+⨏I
+∣f ∣ = sup
+II∈∋Dx
+1
+∣I∣ ∫I
+∣f ∣:
+Comme la fonction maximale de Hardy-Littlewood, la fonction maximale dyadique vérifie une inégalité faible ; il n’est toutefois pas nécessaire, avec la fonction maximale dyadique, d’introduire une constante 5 dans cette inégalité.
+Proposition 9.5. — Étant donné u ∈ L1(R) et > 0, on a :
+∣{x ∈ R ∶ M∆u(x) > }∣ ≤ 1 ∥u∥1:
+Démonstration. — Fixons u ∈ L1(R) et > 0 et posons E ∶= {x ∈ R ∶ M∆u(x) > }. Commençons par observer que si I ∈ D est un intervalle dyadique, alors on a :
+⨏I
+∣u∣ = 1
+∣I∣ ∫I
+∣u∣ ≤ 1
+∣I∣ ∫R
+∣u∣ = ∥u∥1
+∣I∣ :
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 32
+Si I ∈ D vérifie ∣I∣ ≥ ∥u∥1/ , il viendra dès lors ⨏I ∣u∣ ≤ . Posons à présent :
+C ∶= {I ∈ D ∶ ⨏I
+∣u∣ > } :
+Par ce que nous venons d’observer, il est clair que l’on a :
+sup
+I ∈C
+∣I∣ ≤ ∥u∥1 < +∞:
+Le Lemme 9.3 fournit dès lors une famille au plus dénombrable C∗ ⊆ C vérifiant ∪C∗ = ∪C , constituée d’intervalles deux à deux disjoints et maximaux pour l’inclusion dans C . Observons que l’on a E = ∪C . Si, en effet, x ∈ E est donné, alors on a M∆u(x) > et il existe donc par définition un intervalle dyadique I ∈ D tel que l’on ait ⨏I ∣u∣ > , d’où l’on tire I ∈ C et
+donc aussi x ∈ I ⊆ ∪C . Réciproquement, si I ∈ C est donné, alors on a ⨏I ∣u∣ > et donc il vient
+M∆u(x) ≥ ⨏I ∣u∣ > pour tout x ∈ I, c’est-à-dire I ⊆ E . Il vient donc, puisque l’on a ∪C∗ = ∪C et
+que les intervalles de C sont deux à deux disjoints :
+∣E ∣ = ∣ ∪ C ∣ = ∣ ∪ C∗∣ = ∑
+I ∈C∗
+∣I∣ ≤ 1 ∑
+I ∈C∗
+∫I
+∣u∣ < 1 ∥u∥1;
+où l’on a utilisé que les éléments de C∗ ⊆ C vérifient 1
+∣I∣ ∫I ∣u∣ = ⨏I ∣u∣ > . C’est l’inégalité annoncée.
+∎
+L’inégalité maximale précédente a une conséquence qui rappelle le théorème de dérivation de Lebesgue.
+Proposition 9.6. — Étant donné u ∈ L1(R), on a, pour presque tout x ∈ R :
+(16) u(x) = lim
+x∈I ∈D
+∣I ∣→0
+⨏I
+u:
+Remarque 9.7. — Dans l’énoncé de la proposition précédente, (16) signifie que, pour tout " > 0, il existe un > 0 tel que si I ∈ D vérifie I ∋ x et ∣I∣ ≤ , alors on a ∣u(x) − ⨏I u∣ ≤ ".
+Démonstration. — Pour f ∈ L1(R) et > 0, on pose pour x ∈ R :
+!f (x; ) ∶= sup {∣f (x) − ⨏I
+f ∣ ∶ I ∈ D; I ∋ x; ∣I∣ ≤ } :
+Il est clair que l’on a, pour tous f ∈ L1(R), > 0 et x ∈ R :
+!f (x; ) ≤ ∣f (x)∣ + sup {⨏I
+∣f ∣ ∶ I ∈ D; I ∋ x; ∣I∣ ≤ } ≤ ∣f (x)∣ + M∆f (x):
+On pose finalement, pour f ∈ L1(R) et x ∈ R :
+!f (x) ∶= in>0f !f (x; ) = li→>m0
+!f (x; ):
+Il suit de ce qui précède que l’on a !f ≤ ∣f ∣ + M∆f partout sur R. Il est par ailleurs facile de voir que l’on a !g = 0 partout sur R pour tout g ∈ K(R) et que, pour tous f; g ∈ L1(R) on a !f+g ≤ !f + !g sur R. Il vient donc, sur R, pour f ∈ L1(R) et g ∈ K(R) :
+!f = !f−g+g ≤ !f−g + !g = !f−g et !f−g ≤ !f + !−g = !f ;
+puisque l’on a !g = 0 partout sur R ; on a donc, sur R, !f = !f−g. Fixons à présent u ∈ L1(R). On va montrer que l’on a !u = 0 presque partout sur R, ce qui suffira à conclure. À cette fin, commençons par fixer > 0 et montrons que l’on a ∣{x ∈ R ∶ !u(x) > }∣ = 0.
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 33
+À cet effet, posons E ∶= {x ∈ R ∶ !u(x) > }, fixons " > 0 et choisissons, par densité de K(R) dans L1(R) (voir l’Exercice 3), une fonction v ∈ K(R) vérifiant ∥u − v∥1 ≤ ". On vient de voir que l’on a !u = !u−v sur R. Si x ∈ E est donné, alors on a, puisque l’on a !u−v ≤ ∣u − v∣ + M∆(u − v) sur R :
+M∆(u − v)(x) + ∣(u − v)(x)∣ ≥ !u−vf (x) = !f (x) > :
+Il vient donc nécessairement soit M∆(u − v)(x) > /2, soit ∣(u − v)(x)∣ > /2 (sans quoi on aurait ∣(u − v)(x)∣ + M∆(u − v)(x) ≤ /2 + /2 = ). Autrement dit, on a :
+E ⊆ {x ∈ R ∶ M∆(u − v)(x) > 2 } ∪ {x ∈ R ∶ ∣(u − v)(x)∣ > 2 } :
+Il vient donc en particulier :
+∣E ∣ ≤ ∣{x ∈ R ∶ M∆(u − v)(x) > 2 }∣ + ∣{x ∈ R ∶ ∣(u − v)(x)∣ > 2 }∣ :
+Or la Proposition 9.5 assure que l’on a d’une part :
+∣{x ∈ R ∶ M∆(u − v)(x) > 2 }∣ ≤ 2 ∥u − v∥1 ≤ 2" ;
+tandis qu’il résulte de l’inégalité de Markov (voir l’équation (7) dans la Remarque 8.3 ci-dessus) que l’on a :
+∣{x ∈ R ∶ ∣(u − v)(x)∣ > 2 }∣ ≤ 2 ∥u − v∥1 ≤ 2" :
+Il vient donc finalement :
+∣E ∣ ≤ " ⋅ 4 :
+Comme " > 0 est arbitraire dans l’inégalité précédente, on trouve par conséquent ∣E ∣ = 0. Il vient finalement :
+{x ∈ R ∶ !u(x) > 0} = ⋃
+k∈N
+{x ∈ R ∶ !u(x) > 2−k} = ⋃
+n∈N
+E2−k :
+La sous-additivité de la mesure extérieure de Lebesgue assure dès lors que l’on a :
+∣{x ∈ R ∶ !u(x) > 0}∣ ≤
+∞
+∑
+k=0
+∣E2−k ∣ = 0;
+c’est-à-dire que l’on a !u = 0 hors d’un sous-ensemble négligeable de R. C’est ce qu’il nous fallait démontrer. ∎
+10. Décompositions de Calderón-Zygmund
+Les décompositions de Calderón-Zygmund sont un outil fondamental en analyse harmonique ; nous les utiliserons, dans la section suivante, pour démontrer un théorème de convergence presque partout de sous-suites universelles d’une approximation de l’identité positive dans L1(R).
+Théorème 10.1 (Décomposition de Calderón-Zygmund). — Soient u ∈ L1(R) et > 0. Il existe v ∈ L1(R) ∩ L∞(R), une famille au plus dénombrable B ⊆ D d’intervalles dyadiques deux à deux disjoints et, pour chaque I ∈ B, une fonction bI ∈ L1(R) tels que l’on ait :
+u=v+ ∑
+I ∈B
+bI
+presque partout sur R, ainsi que les propriétés suivantes :
+(i) ∥v∥∞ ≤ ;
+(ii) pour tout I ∈ B, on a bI = 0 hors de I ;
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 34
+(iii) pour tout I ∈ B, on a ∥bI∥1 ≤ ∣I∣ ; (iv) pour tout I ∈ B, on a ∫R bI = 0 ;
+(v) ∑I∈B ∣I∣ ≤ 4 ∥u∥1.
+Démonstration. — Remarquons pour commencer, comme dans la preuve de la Proposition 9.5, que l’on aura ⨏I ∣u∣ ≤ /4 dès que I ∈ D vérifie ∣I∣ ≥ 4∥u∥1/ . Posons à présent :
+C ∶= {I ∈ D ∶ ⨏I
+∣u∣ > 4 } :
+Nous venons d’observer que l’on doit avoir :
+sup
+I ∈C
+∣I∣ < 4∥u∥1 < +∞:
+Il existe donc, en vertu du Lemme 9.3, une famille au plus dénombrable B ⊆ C vérifiant ∪B = ∪C , constituée d’intervalles deux à deux disjoints et maximaux pour l’inclusion dans C . On définit alors des fonctions Lebesgue-mesurables v ∶ R → R et, pour tout I ∈ B, bI ∶ R → R en posant pour x ∈ R :
+v(x) ∶= {u(x) si x ∉ ∪B;
+⨏I u si x ∈ I ∈ B:
+et, pour I ∈ B :
+bI(x) ∶= {u(x) − v(x) = u(x) − ⨏I u si x ∈ I;
+0 sinon.
+Il est clair que l’on a u = v + ∑I∈B bI sur R.
+Pour prouver (i), commençons par noter N ⊆ R un ensemble Lebesgue-négligeable tel que, pour tout x ∈ R ∖ N , on ait :
+∣u(x)∣ = lim
+x∈I ∈D
+∣I ∣→0
+⨏I
+∣u∣:
+Si x ∈ ∪B est donné, alors il ne peut exister aucun intervalle dyadique I ∈ D contenant x qui vérifie ⨏I ∣u∣ > 4 : si un tel intervalle dyadique I ∈ D existait, il viendrait I ∈ C et on aurait dès lors x ∈ I ⊆ ∪C = ∪B, ce qui est absurde. Par conséquent, il vient ⨏I ∣u∣ ≤ 4 pour tout intervalle dyadique
+I ∈ D contenant x. Si, en outre, on a x ∉ N , alors on trouvera par conséquent :
+∣v(x)∣ = ∣u(x)∣ = lim
+x∈I ∈D
+∣I ∣→0
+⨏I
+∣u∣ ≤ 4 :
+Il vient donc ∣v∣ ≤ /4 presque partout sur R ∖ ∪B. Si x ∈ I ∈ B est donné, alors on calcule :
+∣v(x)∣ = ∣⨏I
+u∣ ≤ 1
+I ∫I
+∣u∣ ≤ 1
+∣I∣ ∫I^
+∣u∣ = ∣I^∣
+∣I∣ ⨏I^
+∣u∣ = 2 ⨏I^
+∣u∣;
+où I^ ∈ Dgen(I)+1 est le parent de I (voir la Définition 9.1 ci-dessus). Or comme I est maximal pour
+l’inclusion dans C et que l’on a I ⊊ I^, il vient nécessairement I^ ∉ C , c’est-à-dire ⨏I^ ∣u∣ ≤ 4 . L’inégalité ci-dessus donne alors :
+∣v(x)∣ ≤ 2 ⨏I^
+∣u∣ ≤ 2 :
+Il vient donc ∣v∣ ≤ /2 partout sur ∪B.
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 35
+La propriété (i) s’ensuit aussitôt puisque l’on a montré l’inégalité ∣v∣ ≤ (et même ∣v∣ ≤ /2) presque partout sur R. Il vient en particulier v ∈ L∞(R). Fixons I ∈ B. Il est clair, par définition, que l’on a bI = 0 hors de I (ce qui établit (ii)). Il vient dès lors :
+∫R
+bI = ∫I
+(u − ⨏I
+u) = ∫I
+u − ∣I∣ ⨏I
+u = ∫I
+u − ∫I
+u = 0;
+ce qui démontre (iv). Mais on calcule aussi :
+∥bI ∥1 = ∫I
+∣u − ⨏I
+u∣ ≤ ∫I
+∣u∣ + ∣I∣ ∣⨏I
+u∣ ≤ ∫I
+∣u∣ + ∫I
+∣u∣
+= 2 ∫I
+∣u∣ ≤ 2 ∫I^
+∣u∣ = 2∣I^∣ ⨏I^
+∣u∣ ≤ 4∣I∣ ⋅ 4 = ∣I∣;
+puisque l’on a à nouveau I^ ∉ C et donc ⨏I^ ∣u∣ ≤ /4. Le point (iii) est ainsi vérifié.
+Finalement, puisque l’on a B ⊆ C et qu’il vient donc ⨏I ∣u∣ > /4, c’est-à-dire ∣I∣ ≤ 4 ∫I ∣u∣ pour
+tout I ∈ B, on écrit :
+∑
+I ∈B
+∣I∣ ≤ 4 ∑
+I ∈B
+∫I
+∣u∣ ≤ 4 ∫R
+∣u∣ = 4 ∥u∥1;
+puisque les intervalles de B sont deux à deux disjoints. La propriété (v) est ainsi vérifiée à son tour. Comme il résulte par ailleurs de (iv) et (v) que l’on a :
+∑
+I ∈B
+∥bI ∥1 ≤ ∑
+I ∈B
+∣I∣ ≤ 4∥u∥1;
+on voit que la fonction b définie sur R par b ∶= ∑I∈B bI, vérifie b ∈ L1(R), et on a donc aussi v = u − b ∈ L1(R). La démonstration est complète. ∎
+11. Sous-suites « universelles » pour la convergence presque partout dans L1(R)
+Commençons par deux résultats d’approximation. Le premier affirme la possibilité d’approcher en moyenne une approximation de l’identité positive par une approximation de l’identité (positive) normalisée et localisée autour de 0.
+Lemme 11.1. — Soit (φk) ⊆ L1+(R) une approximation de l’identité positive. Il existe une approximation de l’identité positive et normalisée ( k)k∈N vérifiant ∥φk − k∥1 → 0, k → ∞ et pour laquelle il existe une suite ( k) ⊆ R∗+ de réels (strictement) positifs vérifiant les propriétés suivantes :
+(i) k = 0 hors de [− k; k] ; (ii) limk→∞ k = 0.
+Démonstration. — Par la Proposition 5.1, on sait déjà que (φk) est asymptotiquement normalisée, i.e. que l’on a ∥φk∥1 → 1, k → ∞, et asymptotiquement locale, i.e. que, pour tout > 0, on a ∫R∖[− ; ] φk → 0, k → ∞.
+Il existe donc un entier k0 ∈ N tel que, pour tout k ∈ N vérifiant k ≥ k0, on ait ∫R∖[−1;1] φk ≤ 1. De proche en proche, si k0 < ⋯ < kj sont construits pour j ∈ N, on choisit kj+1 ∈ N un entier vérifiant kj+1 > kj et tel que, pour tout k ∈ N vérifiant k ≥ kj+1, on ait ∫R∖[−2−j−1;2−j−1] φk ≤ 2−j−1. On définit alors une suite ( k)k∈N ⊆ R∗+ de réels (strictement) positifs décroissant vers 0 en posant, pour k ∈ N :
+k ∶= {1 si k < k1;
+2−j si kj ≤ k < kj+1 pour un j ∈ N:
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 36
+Par construction, il vient évidemment ∫R∖[− k; k] φk → 0, k → ∞ et donc aussi, puisque (φk) est normalisée :
+kli→m∞ ∫[− k; k]
+φk = kli→m∞ (∫R
+φk − ∫R∖[− k; k]
+φk) = 1 − 1 = 0:
+Pour k ∈ N, posons alors k ∶= ∫[− k; k] φk, choisissons un entier l ∈ N tel que l’on ait k > 0 pour tout k ∈ N vérifiant k ≥ l et définissons une fonction k ∈ L1+(R) de la façon suivante :
+k ∶= { [0;1] si k < l;
+−1
+k φk [− k; k] si k ≥ l:
+Il est clair que ( k) ⊆ L1+(R) est normalisée et asymptotiquement locale (c’est donc une approximation de l’identité par la Proposition 4.3) et que l’on a, pour k ∈ N vérifiant k ≥ l :
+∥φk − k∥1 = −1
+k ∫R∖[− k; k]
+φk + ∣1 − −1
+k ∣ ∫[− k; k]
+φk:
+Comme on a k → 1, k → ∞ et ∫[− k; k] φk → 0, k → ∞, il vient bien ∥φk − k∥1 → 0, k → ∞. ∎
+Le lemme suivant est encore plus spécifique puisque l’approximation de l’identité par laquelle on approche l’approximation de l’identité initiale y est constituée de fonctions en escalier.
+Lemme 11.2. — Soit (φk) ⊆ L1+(R) une approximation de l’identité positive. Il existe une approximation de l’identité positive et normalisée ( k)k∈N vérifiant ∥φk − k∥1 → 0, k → ∞ et telle que, pour chaque k ∈ N, k soit de la forme :
+(17) k = r−1
+k
+Rk
+∑
+i=−Rk
+ci;k [irk;(i+1)rk[;
+avec rk > 0, Rk ∈ N∗ pour tout k ∈ N ainsi que :
+(a) ci;k ≥ 0 pour tous k ∈ N et −Rk ≤ i ≤ Rk − 1 ;
+(b) ∑Rk−1
+i=−Rk ci;k = 1 ;
+(c) Rkrk → 0, k → ∞.
+Démonstration. — Le Lemme 11.1 permet de supposer, sans perte de généralité, que (φk) est normalisée et qu’il existe une suite ( k) ⊆ R∗+ de réels (strictement) positifs vérifiant k → 0, k → ∞ et telle que l’on ait φk = 0 hors de [− k; k]. Pour chaque k ∈ N, il existe par densité (voir l’Exercice 3) une fonction ~k ∈ K(R) vérifiant ∥φk − ~k∥1 ≤ 2−k−1. Comme on a φk(x) ≥ 0 pour tout x ∈ R, il est clair que l’on a ∣φk(x) − ~k(x)∣ ≥ ∣φk (x)− ~+
+k (x)∣ pour tout x ∈ R (où l’on a posé ~+
+k ∶= max(~k; 0)) et donc aussi ∥φk−~+
+k ∥1 ≤ ∥φk−~k∥1 ≤
+2−k−1. Quitte à remplacer ~k par ~+
+k si nécessaire, on peut donc supposer que l’on a ~k ≥ 0 sur R pour chaque k ∈ N. Pour k ∈ N, posons alors k ∶= ~k k ∈ K+(R), où k ∈ K+(R) est définie par :
+k ∶= min {0; max [1; 1
+k
+(2 k − ∣x∣)]} ;
+de sorte que l’on ait 0 ≤ k ≤ [−2 k;2 k] ≤ 1 sur R et k = 1 sur [− k; k] ; il vient par conséquent k = 0 hors de [−2 k; 2 k] et on a :
+∥φk − k∥1 = ∫R∖[− k; k]
+~k k +∫[− k; k]
+∣φk − ~k∣ ≤ ∫R∖[− k; k]
+~k +∫[− k; k]
+∣φk − ~k∣ = ∥φk − ~k∥1 ≤ 2−k−1:
+Comme on a ∥φk − k∥1 → 0, k → ∞ et que l’on a ∥φk∥1 = 1 pour tout k ∈ N, il vient en particulier ∥ k∥1 → 1, k → ∞.
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 37
+Fixons à présent k ∈ N. Puisque k est uniformément continue sur [−2 k; 2 k], il existe k > 0 tel que, pour tous x; y ∈ [−2 k; 2 k] vérifiant ∣x − y∣ ≤ k, on ait ∣ k(x) − k(y)∣ ≤ 2−k−3/ k. Choisissons à présent un entier Rk ∈ N∗ tel que l’on ait rk ∶= 2 k/Rk ≤ k, observons qu’il vient Rkrk = 2 k et posons :
+~k ∶=
+Rk −1
+∑
+i=−Rk
+k(irk) [irk;(i+1)rk[;
+de sorte que l’on ait sup[−2 k;2 k] ∣ ~k − k∣ ≤ 2−k−3/ k. Il vient dès lors :
+∥ ~k − k∥1 = ∫[−2 k;2 k]
+∣ ~k − k∣ ≤ 4 k ⋅ 2−k−3
+k
+= 2−k−1:
+Comme on sait que l’on a ∥ k∥1 → 1, k → ∞ et qu’il vient ∥ k − ~k∥1 → 0, k → ∞, on trouve aussi ∥ ~∥1 → 1, k → ∞. Comme k est positive sur R, on calcule par ailleurs :
+(18) ∥ ~k∥1 = rk
+Rk −1
+∑
+i=−Rk
+k(irk):
+Choisissons désormais un entier l ∈ N tel que l’on ait ∥ ~k∥1 > 0 pour tout k ∈ N vérifiant k ≥ l, et définissons pour chaque k ∈ N, une fonction k ∈ L1+(R) par la formule :
+k ∶= { [−1/2;1/2[ = 2 ⋅ ( 1
+2 [−1/2;0[ + 1
+2 [0;1/2[) si k < l;
+∥ ~k∥−1
+1 ~k si k ≥ l:
+Il est clair que, pour k ∈ N vérifiant k < l, k est de la forme (17) à condition de poser Rk ∶= 1,
+ck;−1 = ck;0 = 1
+2 et rk = 1
+2 . Si au contraire k ∈ N vérifie k ≥ l, alors k est de la forme (17) avec
+Rk ∈ N∗ et rk > 0 précédemment définis, et pour −Rk ≤ i ≤ Rk − 1 :
+ci;k = rk k(irk)
+∥ ~k∥1
+:
+Il est clair que l’on a ci;k ≥ 0 pour tout −Rk ≤ i ≤ Rk − 1 et il vient :
+Rk
+∑
+i=−Rk
+ci;k = ∥ ~k∥−1
+1 rk
+Rk −1
+∑
+i=−Rk
+k(irk) = 1;
+en utilisant l’égalité (18) ci-dessus. Finalement, puisqu’il vient Rkrk = k pour tout k ∈ N vérifiant k ≥ l, il est clair que l’on a également Rkrk → 0, k → ∞, ce qui conclut la démonstration. ∎
+Le résultat suivant, dû indépendamment à S. Kostyukovsky et A. Olevskii et à P. LaVictoire, est un résultat d’existence d’une sous-suite universelle pour la convergence presque partout dans L1(R) des approximations de l’identité positives. La preuve que nous en présentons ci-dessous est due à P. LaVictoire.
+Théorème 11.3 (LaVictoire). — Si (φk)k∈N ⊆ L1+(R) est une approximation de l’identité positive, alors il existe une suite strictement croissante d’entiers (kl)k∈N telle que, pour tout u ∈ L1(R), on ait φkl ∗ u → u, l → ∞ presque partout sur R.
+Démonstration. — Commençons par remarquer qu’il existe, en vertu du Lemme 11.2, une approximation de l’identité positive ( k)k∈N ⊆ L1+(R) vérifiant ∥φk − k∥1 → 0, k → ∞ et telle que, pour chaque k ∈ N, k soit de la forme :
+k = r−1
+k
+Rk −1
+∑
+i=−Rk
+ci;k [irk;(i+1)rk[;
+avec rk > 0, Rk ∈ N∗ pour tout k ∈ N ainsi que :
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 38
+(a) ci;k ≥ 0 pour tous k ∈ N et −Rk ≤ i ≤ Rk − 1 ;
+(b) ∑Rk−1
+i=−Rk ci;k = 1 ;
+(c) Rkrk → 0, k → ∞.
+Quitte à extraire une sous-suite de (φk) et ( k), on peut supposer que l’on a en outre :
+(d) Rk+1rk+1 ≤ 1
+2 R−1
+k rk pour tout k ∈ N ;
+(e) ∑∞
+k=0 ∥φk − k∥1 < +∞.
+On va prouver que, sous les conditions précédentes, il existe une constante C > 0 telle que, pour tout u ∈ L1(R) et tout > 0, on ait :
+∣{x ∈ R ∶ M u(x) > 2 }∣ ≤ C ∥u∥1:
+Il résultera dès lors du Lemme 8.11 que, pour tout u ∈ L1(R), la suite (φk ∗ u) convergera presque partout sur R vers u. Pour ce faire, fixons u ∈ L1(R), > 0 et soit v +∑I∈B bI une décomposition de Calderón-Zygmund de u associée à par le Théorème 10.1. On pose également b ∶= ∑I∈B bI = u − v ∈ L1(R). Dans la suite de cette démonstration, étant donné I ∈ B, I∗ désignera l’intervalle fermé de même milieu que I mais ayant trois fois sa longueur, i.e. l’intervalle I∗ ∶= [min I − ∣I∣; sup I + ∣I∣], et on pose B∗ ∶= {I∗ ∶ I ∈ B}. Commençons par observer que l’on a ∥v∥∞ ≤ , et donc ∣v∣ ≤ presque partout sur R. Il s’ensuit que, pour tout k ∈ N, on a ∣ k ∗ v∣ ≤ presque partout sur R et donc aussi M v ≤ presque partout sur R. Il vient donc, presque partout sur R :
+M u ≤ M v + M b ≤ + M b:
+Pour presque tout x ∈ R vérifiant M u(x) > 2 , on a donc M b(x) > et, en particulier :
+∞
+∑
+k=0
+∣ k ∗ b(x)∣ ≥ sup
+k∈N
+∣ k ∗ b(x)∣ = M b(x) > :
+En d’autres termes, on a :
+∣{x ∈ R ∶ M u(x) > 2 }∣ ≤ ∣{x ∈ R ∶
+∞
+∑
+k=0
+∣ k ∗ b(x)∣ > }∣ :
+Or il vient évidemment :
+∣{x ∈ R ∶
+∞
+∑
+k=0
+∣ k ∗ b(x)∣ > }∣ ≤ ∣ ∪ B∗∣ + ∣{x ∈ R ∖ ∪B∗ ∶
+∞
+∑
+k=0
+∣ k ∗ b(x)∣ > }∣ :
+Mais on a d’une part, en utilisant la propriété (v) du Théorème 10.1 :
+∣ ∪ B∗∣ ≤ ∑
+I ∈B
+∣I∗∣ = 3 ∑
+I ∈B
+∣I∣ ≤ 12 ∥u∥1;
+et d’autre part, en vertu de l’inégalité de Markov (voir la Remarque 8.3 ci-dessus) :
+∣{x ∈ R ∖ ∪B∗ ∶
+∞
+∑
+k=0
+∣ k ∗ b(x)∣ > }∣ ≤ 1 ∫R∖∪B∗
+∞
+∑
+k=0
+∣ k ∗ b∣
+≤1∑
+I ∈B
+∞
+∑
+k=0
+∫R∖∪B∗ ∣ k ∗ bI ∣ ≤ 1 ∑
+I ∈B
+∞
+∑
+k=0
+∫R∖I∗ ∣ k ∗ bI ∣;
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 39
+où les intégrales sont interprétées (à ce stade) au sens large. Si l’on peut montrer que, pour chaque I ∈ B, on a :
+(19)
+∞
+∑
+k=0
+∫R∖I∗ ∣ k ∗ bI ∣ ≤ C∥bI ∥1;
+où C > 0 est une constante positive indépendante de I et de k, alors le résultat s’ensuivra puisque l’on pourra écrire, en vertu des propriétés (iii) et (v) dans le Théorème 10.1 :
+1∑
+I ∈B
+∞
+∑
+k=0
+∫R∖I∗ ∣ k ∗ bI ∣ ≤ C ∑
+I ∈B
+∥bI ∥1 ≤ C ∑
+I ∈B
+∣I∣ ≤ 4C ∥u∥1:
+C’est donc à la preuve de (19) que nous allons consacrer le reste de la démonstration. Fixons donc I ∈ B ; s’il existe un entier k ∈ N tel que l’on ait ∣I∣ ≤ Rkrk, alors on pose :
+k(I) ∶= max{k ∈ N ∶ Rkrk ≥ ∣I∣} ;
+sinon, on pose k(I) ∶= −1.
+Affirmation 7. — Pour tout k ∈ N vérifiant k > k(I), on a k ∗ bI = 0 hors de I∗.
+Écrivons en effet, pour k ∈ N vérifiant k > k(I) et x ∈ R ∖ I∗ :
+k ∗ bI(x) = ∫I k(x − y)bI(y) dy = 0;
+puisque l’on a ∣x − y∣ ≥ ∣I∣ > Rkrk et donc aussi k(x − y) = 0 pour tout y ∈ I (rappelons que l’on a x ∉ I∗ !).
+Affirmation 8. — Si k ∈ N vérifie k ≤ k(I) et que x ∈ R et −Rk ≤ i ≤ Rk − 1 sont donnés, alors on a k ∗ bI(x) = 0 dès que l’on a x − I ⊆ [irk; (i + 1)rk].
+Dans les conditions de l’affirmation, on écrit en effet :
+k ∗ bI (x) = ∫R
+bI (x − y) k(y) dy = ∫x−I
+bI(x − y) k(y) dy
+= r−1
+k ci;k ∫x−I
+bI (x − y) dy = r−1
+k ci;k ∫I
+bI = 0;
+en utilisant la forme de k et le la propriété (iv) du Théorème 10.1.
+Si k ∈ N vérifiant k ≤ k(I) et x ∈ R sont donnés, et que l’on a :
+0 ≠ k ∗ bI (x) = ∫x−I
+bI(x − y) k(y) dy;
+alors il est clair que x − I doit rencontrer au moins l’un des intervalles [irk; (i + 1)rk] pour −Rk ≤ i ≤ Rk − 1 ; comme il n’est pas possible, en vertu de l’affirmation précédente, que x − I soit inclus dans l’un d’eux, il doit exister un entier −Rk ≤ i ≤ Rk tel que l’on ait x − I ⊆ [irk − ∣I∣; irk + ∣I∣], et on doit donc avoir :
+x∈I+
+Rk
+⋃
+i=−Rk
+[irk − ∣I∣; irk + ∣I∣] ⊆ min I +
+Rk
+⋃
+i=−Rk
+[irk − ∣I∣; irk + 2∣I∣]:
+Il vient donc :
+(20) ∣{x ∈ R ∶ k ∗ bI(x) ≠ 0}∣ ≤
+Rk
+∑
+i=−Rk
+∣[irk − ∣I∣; irk + 2∣I∣]∣ = 3(2Rk + 1)∣I∣ ≤ 9Rk∣I∣:
+
+
+APPROXIMATIONS DE L’IDENTITÉ ET INÉGALITÉS MAXIMALES 40
+D’un autre côté, on peut calculer, pour x ∈ R et k ∈ N :
+∣ k ∗ bI (x)∣ ≤ r−1
+k
+Rk −1
+∑
+i=−Rk
+ci;k ∫[irk;(i+1)rk]
+∣bI (x − y)∣ dy ≤ r−1
+k
+Rk −1
+∑
+i=−Rk
+ci;k∥bI ∥1 = r−1
+k ∥bI ∥1;
+en utilisant la propriété (b) ci-dessus. Autrement dit, on a ∥ k ∗ bI∥∞ ≤ r−1
+k ∥bI∥1 pour tout k ∈ N.
+Si k(I) = −1, il suit clairement de l’Affirmation 7 que l’on a ∑∞
+k=0 ∫R∖I∗ ∣ k ∗ bI ∣ = 0, et la démons
+tration est complète puisque cela établit (19). Sinon, on écrit, en utilisant l’Affirmation 7 :
+∞
+∑
+k=0
+∫R∖I∗ ∣ k ∗ bI ∣ ≤ ∥ k(I) ∗ bI ∥1 + ∑
+k<k(I )
+∥ k ∗ bI ∥1 ≤ ∥ k(I)∥1∥bI ∥1
++∑
+k<k(I )
+∥ k ∗ bI∥∞∣{x ∈ R ∶ k ∗ bI(x) ≠ 0}∣ ≤ ⎛
+⎝1 + 9∣I∣ ∑
+k<k(I )
+Rk r−1
+k
+⎞
+⎠ ⋅ ∥bI ∥1:
+Or on a, en utilisant (d) :
+∑
+k<k(I )
+Rk r−1
+k ≤1
+2∑
+k<k(I )
+1
+Rk+1rk+1
+:
+Mais il vient aussi, pour k < k(I) :
+Rk+1rk+1 ≤ 1
+2 R−1
+k rk ≤ 1
+2 Rkrk;
+puisque Rk ∈ N∗ est un entier ; on a donc, pour tout k < k(I) :
+1
+Rk rk
+≤1
+2
+1
+Rk+1rk+1
+:
+On calcule par suite :
+∑
+k<k(I )
+1
+Rk+1rk+1
+≤
+k(I )
+∑
+k=1
+(1
+2)
+k(I)−k 1
+Rk(I ) rk(I )
+≤2
+Rk(I ) rk(I )
+:
+Il vient alors, pour finir :
+∞
+∑
+k=0
+∫R∖I∗ ∣ k ∗ bI ∣ ≤ (1 + 9∣I∣
+Rk(I ) rk(I )
+) ∥bI ∥1 ≤ 10∥bI ∥1;
+puisque l’on a Rk(I)rk(I) ≥ ∣I∣. La démonstration est complète. ∎
+Laurent Moonens, le 23 octobre 2024
+● E-mail : Laurent.Moonens@centralesupelec.fr

@@ -1,0 +1,280 @@
+Large Scale Graph Mining
+GRAPH EMBEDDING APPROACHES - PART I
+Nacéra Seghouani
+Computer Science Department, CentraleSupélec Laboratoire Interdisciplinaire des Sciences du Numérique, LISN nacera.seghouani@centralesupelec.fr
+2024-2025
+1/24
+
+
+Motivation & Challenges
++ Embedding is a way of mapping a document, an image, a graph into a fixed length vector or matrix that captures key features while reducing dimensionality. It’s a projection into a given dimensional space
++ Embeddings are more practical than the adjacency matrix since they pack node properties in a vector with a smaller dimension.
++ Visualization, clustering, community detection, link prediction, node classification, subgraph pattern discovery.
++ Need to make sure that embeddings well describe the properties of the graphs: topology, node connections and features. The performance of prediction depends on the quality of embeddings.
++ The size of the network should not decrease the speed of the embedding process. A good embedding approach needs to be efficient on large graphs.
++ Make a trade-off based on the requirements.
+2/24
+
+
+Kind of Approaches
++ Spectral methods - Laplacian-based approaches
+X Belkin & Niyogi 2003 ; von Luxburg 2007 .
++ Random walk based methods
+X DeepWalk, Perozzi et al, 2014 X Node2Vec Grover & Leskovec 2016
++ Embedding approaches for multi-relational graphs (later).
++ Neural network based approaches (later).
+3/24
+
+
+Graph embedding
++ Goal is to learn a new representation (enc), which projects nodes to a low-dimensional space. These embeddings are optimized so that distances in the embedding space reflect the relative positions of the nodes in the original graph.
++ Embedding should capture the graph topology, vertex-to-vertex relationship, neighbourhood, connectivity, and other relevant information about graphs, subgraphs, and vertices.
+4/24
+
+
+Graph Laplacians and Spectral Methods
++ Adjacency matrix represent a graph without any loss of information. Laplacian matrix is an alternative representation: L = D − A where D is the degree matrix of A where Dii = ∑j Aij . L is symmetric L = LT
+Lij :=
+
+ 
+ 
+Dii if i = j
+−1 if i 6= j and (vi , vj ) ∈ E
+0 otherwise,
++ What happens when we multiply a vector X ∈ R|V | by L:
+(LX)i = Dii Xi − ∑(vi ,vj )∈E Xi = ∑(vi ,vj )∈E (Xi − Xj )
+XT LX = 1
+2 vi ∈∑V vj ∈∑V
+Aij (Xi − Xj )2 = ∑
+(vi ,vj )∈E
+(Xi − Xj )2
+XT LX ≥ 0 is the sum of the squares of the differences between the values of neighboring nodes. Every eigenvalue of LX = λX is non negative as XT LX = λXT X.
++ L has |V | non negative eigenvalues 0 = λ1 ≤ λ2... ≤ λ|V |. L is positive semi-definite. Since L is symmetric its eigenvectors are orthogonal.
+5/24
+
+
+Graph Laplacians and Spectral Methods
++ The Laplacian and connected components: for any eigenvector X of eigenvalue 0 XT LX = 0 we have ∑(vi ,vj )∈E (Xi − Xj )2 = 0. Then Xi is the same value for all nodes related to vi
++ If the graph is composed of k connected components then XT LX = 0 holds independently on each of the k blocks of the Laplacian.
++ Eigenvalues of L are the union of the eigenvalues of the Lk matrices and the eigenvectors of L are the union of the eigenvectors of all the Lk matrices with 0 values filled at the positions of the other blocks.
++ Theorem: The geometric multiplicity of the 0 eigenvalue of the Laplacian L corresponds to the number of connected components in the graph.
+6/24
+
+
+Graph Laplacians and Spectral Methods
++ Eigenvectors of eigenvalue 0 of the Laplacian can be used to assign nodes to clusters based on which connected component they belong to. However, this approach only allows us to represent nodes that are already in disconnected components, which is trivial.
++ Normalised Laplacians In addition to the unnormalised Laplacian there are also two popular normalised variants of the Laplacian.
++ The symmetric normalised Laplacian is defined as Lsym = D− 1
+2 LD− 1
+2
++ The random walk Laplacian is defined as Lrw = D−1L
++ Exercise 1: what are the properties of the normalised laplacians defined above Lsym and Lrw .
+7/24
+
+
+Laplacian Eigenmaps
++ Generalized spectral clustering: This general idea can be extended to an arbitrary number of k clusters by examining the k smallest eigenvectors of the Laplacian. The steps of this general approach are as follows:
++ Find the k smallest eigenvalues of L (excluding the smallest one)
++ Form the matrix U ∈ R|V |x(k) with the eigenvectors from Step 1 as columns.
++ Represent each node by its corresponding row in the matrix U, i.e., Z[v ] = U[v ]∀v ∈ V
++ k -means clustering can be run on the embeddings
++ Exercise 2: Compare the different clusterings using different laplacian eigenmaps.
+8/24
+
+
+Graph Laplacians and Spectral Methods
++ Graph Cuts and Clustering: Given a partitioning of the graph into K non-overlapping subsets
+cut(V1, ..., Vk ) = 1
+2
+k
+1 ∑
+|{(u, v ) ∈ E : u ∈ Vi , v ∈ Vi }|
+the cut is simply the count of how many edges cross the boundary between the partition of nodes.
++ Now, one option to define an optimal clustering of the nodes into K clusters would be to select a partition that minimizes this cut value. Instead of simply minimizing the cut we minimize the cut while having reasonably large partitions.
+RatioCut(V1, ..., Vk ) = 1
+2
+k
+1 ∑
+|{(u, v ) ∈ E : u ∈ Vi , v ∈ Vi }| |Vi |
+which penalizes the solution for choosing small cluster sizes.
++ Another popular solution is to minimize is the Normalized Cut (NCut):
+NCut(V1, ..., Vk ) = 1
+2
+k
+1 ∑
+|{(u, v ) ∈ E : u ∈ Vi , v ∈ Vi }| vol(Vk )
+where vol(Vk ) = ∑vi ∈Vk di
+9/24
+
+
+Graph Laplacians and Spectral Methods
++ Find a cluster assignment that minimizes the RatioCut using the Laplacian spectrum. Consider the case where we k = 2, because the relaxation is easiest to understand in this setting: minA⊂V RatioCut(A, A). To rewrite this problem in a more convenient way, we define
+a vector X ∈ R|V |
+Xi =
+
+  
+  
+√
+|A |
+|A| if vi ∈ A
+−
+√
+|A |
+|A| if vi ∈ A,
++ Combining this vector with Laplacian graph properties
+XT LX = ∑
+(vi ,vj )∈E,vi ∈A,vj ∈A
+(Xi − Xj )2 = |V |RatioCut(A, A)
+10/24
+
+
+Graph Laplacians and Spectral Methods
++ Unfortunately, this is an NP-hard problem. The obvious relaxation is to remove this discreteness condition and simplify to the optimisation problem:
+minX∈R|V| XT LX st. i∑
+X2
+i = n, i∑
+Xi = 0
+By the Rayleigh-Ritz Theorem, the solution to this optimisation problem is given by the eigenvector corresponding to the second-smallest eigenvalue of L (also known as Fiedler eigenvalue). An analogous result for approximating the NCut value, but it relies on the second-smallest eigenvector of the normalized Laplacian.
++ Exercise 3: Give the formalisation for approximating the RatioCut for an arbitrary k .
+11/24
+
+
+Learning Node Embedding
++ Encoder function maps nodes v ∈ V to vector embeddings Z[v ] ∈ Rd
+ENC : V → Rd
+ENC(v ) = Z[v ] relies on an embedding approach, Z ∈ R|V |•d is a matrix containing the embedding vectors for all nodes
++ Decoder function reconstructs certain graph statistics from the node embeddings generated by the encoder. DEC : Rd xRd → R+
+12/24
+
+
+Learning Node Embedding
++ Pairwise decoders can be interpreted as predicting the relationship or similarity between pairs of nodes. For instance, a simple pairwise decoder could predict whether two nodes are neighbors in the graph.
++ The goal is optimize the encoder and decoder to minimize the reconstruction loss so that:
+DEC(ENC(u), ENC(v )) = DEC(Z[u], Z[v ]) ≈ S[u, v ]
++ Here, we assume that S[u, v ] is a graph-based similarity measure between nodes. For example, the simple reconstruction objective of predicting whether two nodes are neighbors would correspond to S[u, v ] = A[u, v ]. However, one can define S[u, v ] in more general ways as well, for ex., by leveraging any of the pairwise neighborhood overlap statistics.
++ To achieve the reconstruction objective, we minimize the reconstruction loss L over a set of training node pairs D, using for instance stochastic gradient descent:
+L= ∑
+(u,v )inD
+l(DEC(Z[u], Z[v ]), S[u, v ])
+where l : R × R → R is a loss function measuring the discrepancy between the decoded (i.e., estimated) similarity values DEC(Z[u], Z[v ]) and the true values S[u, v ]).
+13/24
+
+
+Learning Node Embedding
++ To achieve the reconstruction objective, we minimize the reconstruction loss L over a set of training node pairs D, using for instance stochastic gradient descent:
+L= ∑
+(u,v )inD
+l(DEC(Z[u], Z[v ]), S[u, v ])
+where l : R × R → R is a loss function measuring the discrepancy between the decoded (i.e., estimated) similarity values DEC(Z[u], Z[v ]) and the true values S[u, v ]).
++ Several well known embedding methods exist, the encoder-decoder framework allows to define and compare different embedding methods based on (i) their decoder function, (ii) their graph-based similarity measure, and (iii) their loss function.
+14/24
+
+
+Learning Node Embedding - Laplacian eigenmaps
++ The intuition behind is that L penalizes the model when very similar nodes have embeddings that are far apart.
+L= ∑
+(u,v )∈D
+DEC(Z[u], Z[v ]) • S[u, v ]
+DEC(Z[u], Z[v ]) = ||Z[u] − Z[v ]||2
+2
+X If S is constructed so that it satisfies the properties of a Laplacian matrix, then the node embeddings that minimize the loss are identical to the solution for spectral clustering, discussed before. In particular, if we assume the embeddings Z[u] are d-dimensional, then the optimal solution is given by the d smallest eigenvectors of the Laplacian (excluding the eigenvector of all ones).
+15/24
+
+
+Learning Node Embedding - Inner-product methods
++ more recent work generally employs an inner-product based decoder, defined as follows:
+DEC(Z[u], Z[v ]) = Z[u]T • Z[v ]
+Here, we assume that the similarity between two nodes, the overlap between their local neighborhood is proportional to the dot product of their embeddings.
+L= ∑
+(u,v )∈D
+||DEC(Z[u], Z[v ]) − S[u, v ]||2
+2
++ Some examples of this style of node embedding algorithms include the Graph Factorization (GF) (Ahmed et al., 2013), GraRep (Cao et al., 2015), and HOPE (Ou et al., 2016). All three of these methods combine the inner-product decoder with the mean-squared error
+16/24
+
+
+Learning Node Embedding: Node2Vec
++ Node2Vec
++ Random walk is a stochastic algorithm to visit graph nodes using a distribution probability used in different algorithms.
++ Many random walk strategies for sampling a network exist (BFS, DFS, probability distribution hypothesis, ...). S denotes the strategy used.
++ Estimate the probability to visit a node v starting from u by some random walks strategy P(v /u). How much u and v co-occur on the same walk of some length?
++ Higher P(v /u) (because nodes are near to each other) higher is the similarity between their resp. embeddings Z[u], Z[v ]
++ The purpose is to learn the node encodings in such a way the decodings are close to random walk statistics
+17/24
+
+
+Learning Node Embedding: Node2Vec
+2 main assumptions:
++ Conditional independence: the likelihood of observing a source node neighborhood is independent of observing any other node neighborhood given the feature representation of that source:
+P(NS ,u/f (u)) = ∏
+v ∈NS,u
+P(v/f (u)) = ∑
+v ∈NS,u
+log(P(v /f (u)))
+where f (u) is the u’s feature vector and NS,u is a network neighborhood of node u generated
+through S
++ Symmetry in feature space: source node and neighborhood node have a symmetric effect over each other in feature space. Non-linear functions used to produce predicted probabilities: X Softmax function turns a vector of k real values into k probabilities over those values that sum to 1. The higher probability the higher is its exponential, then normalisation.
+P(v /f (u)) ≈ ef (u)f (v)
+∑w∈V ef (u)f (w)
+18/24
+
+
+Learning Node Embedding: Node2Vec
++ With these assumptions, the objective is to determine f such that the probability of observing a network neighborhood NS,u for a node u conditioned on its feature representation, given by f :
+Maxf u ∏
+P(NS,u/f (u)) = Maxf u ∏ ∏
+v ∈NS,u
+P(v /f (u))
+Maxf u ∏ ∏
+v ∈NS,u
+ef (u)f (v)
+∑w∈V ef (u)f (w)
+Maxf u∑ ∑
+v ∈NS,u
+f (u)f (v ) − log w∑∈V
+ef (u)f (w)
+19/24
+
+
+Learning Node Embedding: Node2Vec
++ The decoder: is the estimated probability of visiting v on a length l random walk starting at u, usually l ∈ {2, ..., 10}
+DEC (Z[u], Z[v ]) : eZT
+u Zv
+∑w∈V eZuT Zw
++ The loss function to minimise is the following cross-entropy loss
+L= ∑
+(u,v )∈D
+−S[u, v ]log(DEC (Z[u], Z[v ]))
+20/24
+
+
+Learning Node Embedding: Node2Vec
++ Phase 1: preprocessing to compute transition probabilities, Skip-gram model was used.
++ Phase 2: random walk simulations using a strategy S : run r iterations for l-length (usually from 2 to 10) random walk starting from each node u ∈ V . For each node u collect NS,u, the set of visited nodes starting from u
++ Phase 3: Initialize f (u) then call Stochastic Gradient Descent optimizer (SGD) with as main input walks and dimension d to minimise the loss.
+X Linear complexity All steps are individually parallelisable
+21/24
+
+
+Learning Node Embedding - Overview of the
+Encoder-Decoder Approach
++ The challenge of decoding local neighbourhood structure from a node’s embedding is closely related to reconstructing entries in the graph adjacency matrix.
+Exercise 4: Study deeply node2vec paper. Compare its embeddings to Laplace eigenmaps.
+22/24
+
+
+Learning Node Embedding - Overview of the
+Encoder-Decoder Approach
++ Many of the encoder-decoder approaches employ deterministic measures of node similarity. Decoders are optimised using cosine or L2-distance measures.
++ The key innovation in random walk based embedding approaches is that node embeddings are optimized so that two nodes have similar embeddings if they tend to co-occur on short random walks over the graph.
+X Instead of directly reconstructing the adjacency matrix A or some deterministic function of A random walk based embedding optimizes embeddings to encode the statistics of random walks.
+23/24
+
+
+Shallow Embedding Methods
++ In shallow embedding methods, the encoder model is simply an embedding lookup which trains a unique embedding for each node in the graph. This approach has achieved many successes in the past decade.
++ The first issue is that shallow embedding methods do not share any parameters between nodes in the encoder, since the encoder directly optimizes a unique embedding vector for each node. This lack of parameter sharing is both statistically and computationally inefficient.
++ A second key issue with shallow embedding approaches is that they do not leverage node features in the encoder. Many graph datasets have rich feature information, which could potentially be informative in the encoding process.
++ Lastly and perhaps most importantly shallow embedding methods are inherently transductive, they can only generate embeddings for nodes that were present during the training phase.
++ To alleviate these limitations, shallow encoders can be replaced with more sophisticated encoders that depend more generally on the structure and attributes of the graph, graph neural networks (GNNs).
+24/24

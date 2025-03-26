@@ -1,0 +1,2421 @@
+Polycopié du cours de la 2ème année, ST5-57, MDS
+“Contrôle des Ondes”
+Voie “Analyse Théorique”
+A. Rozanova-Pierrat
+9 septembre 2024
+
+
+
+
+Contents
+Introduction v 0.1 Main physical highlights for the optimal control of waves . . . . . . . . . . . . . vi 0.2 Notations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . vii
+1 Introduction to Partial Differential Equations (PDE) 1 1.1 Domain and its boundary . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 1.2 Differential operators . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 1.2.1 Derivation in the classical sense . . . . . . . . . . . . . . . . . . . . . . . 2 1.2.2 Derivation in the sense of distributions . . . . . . . . . . . . . . . . . . . 4 1.3 Integration by parts or Green’s formulas . . . . . . . . . . . . . . . . . . . . . . 5 1.3.1 One dimensional case (1D) . . . . . . . . . . . . . . . . . . . . . . . . . . 5 1.3.2 2D and general case . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6 1.4 Multidimensional boundary valued problems for the Poisson equation . . . . . . 13 1.4.1 Definitions of different boundary type problems and recall of a definition of a well posed by Hadamard problem . . . . . . . . . . . . . . . . . . . 13 1.4.2 Poisson equation with Dirichlet boundary conditions: from 1D to nD . 14 1.4.3 Poisson equation with an homogeneous Robin boundary condition . . . 16 1.4.4 Poisson equation with mixed boundary conditions . . . . . . . . . . . . 17 1.5 Regularity of the boundary: why it is important? . . . . . . . . . . . . . . . . . . 18 1.5.1 Interior regularity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18 1.5.2 Regularity up to the boundary . . . . . . . . . . . . . . . . . . . . . . . . 18
+2 Fractals and applications 23 2.1 Self-similar fractals . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23 2.2 Applications of fractals to the control of the waves . . . . . . . . . . . . . . . . . 25 2.3 Example of “Fractal” TM wall . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26 2.4 PDEs on domains with fractal boundaries . . . . . . . . . . . . . . . . . . . . . . 27
+3 Models of wave propagation 31 3.1 Wave equation and Helmholtz equations . . . . . . . . . . . . . . . . . . . . . . 32 3.1.1 Linear wave equation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32 3.1.2 Helmholtz equation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35 3.2 Absorption phenomena . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36 3.2.1 Porous materials . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36 3.2.2 Damping in volume . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37 3.2.3 Damping by the boundary . . . . . . . . . . . . . . . . . . . . . . . . . . 41 3.2.4 Calculation of the complex coefficient α in the Robin boundary condition for a fixed porous material . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+
+
+ii Table of content
+4 Localization phenomena 49 4.1 Spectral problems for −∆ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49 4.2 Localization phenomena . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50 4.3 Localization and increased damping of the waves . . . . . . . . . . . . . . . . . 53 4.3.1 Case of the absorption in the volume: astride localization [28] . . . . . . 53 4.3.2 Localization of frequency waves on the boundary . . . . . . . . . . . . . 56 4.3.3 Characterization of the localization and of losses . . . . . . . . . . . . . 57 4.3.4 Remarks on the wave propagation for the Helmholtz mixed boundary valued problem with a complex Robin boundary condition . . . . . . . . 59
+5 Control of the waves 65 5.1 Control theory: from ordinary to partial differential equations . . . . . . . . . . 65 5.1.1 Controllability of models described by ODEs . . . . . . . . . . . . . . . . 65 5.1.2 Controllability of models described by PDEs . . . . . . . . . . . . . . . . 66 5.2 Controllability problems for the propagation of waves . . . . . . . . . . . . . . . 67 5.2.1 Exact controllability . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67 5.3 High frequency waves propagation by rays . . . . . . . . . . . . . . . . . . . . . 68 5.3.1 Problem with a dissipation on a (part of) boundary . . . . . . . . . . . . 68 5.3.2 Interest of stable periodic rays . . . . . . . . . . . . . . . . . . . . . . . . 70 5.4 Geometrical optimal control for a fixed frequency . . . . . . . . . . . . . . . . . 71 5.4.1 Model and admissible shapes . . . . . . . . . . . . . . . . . . . . . . . . 72 5.4.2 Remarks about the existence of an optimal shape . . . . . . . . . . . . . 74 5.5 Non unicity of an optimal shape . . . . . . . . . . . . . . . . . . . . . . . . . . . 75 5.6 Engineering acoustical energy control on a range of frequencies . . . . . . . . . 76
+6 Compactness 81 6.1 Compact sets in the normed vector spaces . . . . . . . . . . . . . . . . . . . . . 81 6.1.1 Definitions and examples . . . . . . . . . . . . . . . . . . . . . . . . . . 81 6.1.2 Weak convergence in a Hilbert space . . . . . . . . . . . . . . . . . . . . 82 6.2 Compact operators . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 86 6.3 Strong and weak continuity of the linear operators in a Hilbert space . . . . . . 90 6.4 Spectral properties of compact operators in a Hilbert space . . . . . . . . . . . . 91 6.5 Compactness of the injection of H1(Ω) to L2(Ω) and of the trace operator . . . 92
+7 Parametric optimization 95 7.1 Reflexivity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 95 7.2 Compacts in non reflexive spaces . . . . . . . . . . . . . . . . . . . . . . . . . . 96 7.3 Parametric optimization problem . . . . . . . . . . . . . . . . . . . . . . . . . . 98 7.4 Existence of an optimal shape . . . . . . . . . . . . . . . . . . . . . . . . . . . . 98 7.4.1 Some generalities on an optimization problem . . . . . . . . . . . . . . . 98 7.4.2 Existence of an optimal distribution χ minimizing the acoustical energy 99 7.4.3 Relaxation method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 101 7.5 Derivative of the energy . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 107 7.5.1 Fréchet derivative . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 108 7.5.2 Application to parametric optimization . . . . . . . . . . . . . . . . . . . 110 7.6 Numerical algorithm . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 116 7.7 Several numerical results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 117 7.7.1 Optimization on a single frequency . . . . . . . . . . . . . . . . . . . . . 121
+
+
+Table of content iii
+7.7.2 Optimization on several frequencies . . . . . . . . . . . . . . . . . . . . 126
+A Remarks on the well-posedness of the Helmholtz problem 129 A.1 Fredholm theory and theorems . . . . . . . . . . . . . . . . . . . . . . . . . . . . 130
+B Centered Finite Differences for the Helmholtz problem 133
+Bibliographie 135
+Index 140
+
+
+
+
+Introduction
+It is the coursebook of the 2nd year CentraleSupélec courses “Contrôle des ondes, voie Analyse Théorique”.
+We are focused on the engineering problem: a conception of the most efficient anti-noise absorbing barrier, especially for the low frequencies. It is known that in acoustics, an absorbing material is a porous material. As any realistic problem, it is a complex problem, mixing the construction constraints, the physics (of the wave propagation in the air and the porous materials), the choice of absorbent material and its properties, the modeling of the problem, the choice of the model adapted for a fixed application. Then we consider the mathematical analysis of this model and its properties, make the choice of a method allowing the optimization, and in the end, perform the visualization, at least numerically, of an optimal shape of the barrier, and, ideally, the comparison with the experimental measurements.
+The complexity of the problem is also related to a vast number of theoretical questions, which are partially shown in this coursebook, which are still entirely or partially open.
+Taking the main ideas coming from physics and numerics, we explain how the mathematical methods can treat this shape optimization problem and how some engineer concepts could be explained or improved using a mathematical approach.
+We make attention that the course does not pretend to give the best solution to this problem but explain some mathematical methods on the most simple models and show that modern mathematics can help develop and solve engineer problems on this particular example. At the same time, we will also see the limits of the known up of today’s mathematical results, posing numerous open problems.
+Therefore, it is crucial to understand “what happens” useful in modern mathematics to solve this engineering problem, understand the main physical ideas, and then apply them to conceive an optimal shape of an absorbent acoustical or electromagnetic wall.
+Almost all modern mathematics methods, especially models described by a partial differential equation, are based on Functional Analysis. For instance, some notions of it, the Lebesgue and Sobolev spaces, have been seen in the 1st year. The course subject is presented in 7 Chapters, and some formulated theorems are proven on TDs.
+These 7 Chapters and TDs with a numerical project on the eigenmodes localization are sufficient and necessary for the final exam and the “EI” one-week project.
+In Chapter 1, we recall the main facts from the 1st year course “EDPs” and show the passage from the one-dimensional case to the multidimensional case with the importance of the boundary regularity on PDE’s solution.
+
+
+vi Table of content
+In Chapter 2, we show from one hand the importance of fractal geometry as an efficient model and, on the other hand, how to solve the PDEs on domains with fractal boundaries.
+In Chapter 3, we present the main wave propagation models with energy dissipation and the models of the wave propagation in the porous medium. Different experimental parameters of the porous media are also given.
+In Chapter 4, we introduce the localization phenomena of eigenmodes for domains with “irregular” boundaries and relate them with the energy dissipation.
+In Chapter 5, we give a small survey of what it is the controllability of the PDEs and then of wave propagation problems. In Chapter 5, we also relate this course, on the optimal control of the waves, with the commune course “Automatique et contrôle”. This chapter can be viewed as the last introductory chapter.
+Chapter 6 is deduced to introduce all needed new notions of Functional Analysis, not seen in the 1st year, which we use not only for the well-posedness questions, but also to be able to start the parametric (in Chapter 7) shape optimization for a fixed frequency and on a fixed frequency range.
+In Chapter 7, the parametric optimization is adapted, for instance, for the optimization of perforated panels, and the geometrical shape optimization is adapted to find an optimal shape of an absorbing wall. We show the existence of optimal distributions theoretically. The theory is illustrated by several numerical results of given numerical algorithms. For an example of a partially absorbing wall filled with 50% of absorbing material, we show (numerically) that there exists a distribution of porous material that absorbs more efficiently (≈ 31% better) the acoustical energy than the totally absorbent wall (filled with 100% of absorbing material, see Subsection 7.7.2).
+As the practical problem is to have an efficient anti-noise wall in a range of frequencies, we investigate this question physically and numerically. We also give an example of the most absorbing wall for the highway, called ’Fractal Wall’ TM.
+Attention: Please be aware that it is impossible to give all mathematical proofs during the course. However, if it is not presented as an open problem, all proof can be found in the literature. If you are interested, you are welcome to explore the given 69 references and to go to others. I will be pleased to discuss them with you outside the contributed time for the course. Please send me an email. The attributed hours for this course will mainly allow for presenting the essential ideas and not too complicated proofs, formulating methods, and discussing their applications. All the most technical proofs will be done during TDs. For a more detailed functional analysis presentation, you can read my other course book, “Functional Analysis,” available on Edunao. All these additional studies are not required by the program of the exam.
+0.1 Main physical highlights for the optimal control of waves
+1. If we change the shape of an absorbing wall, it will modify the wave absorption.
+
+
+Table of content vii
+2. To have an optimal interaction between a wave of the wavelength λ and the absorbing wall, the size of the wall’s fragments must be equal to λ/2.
+3. To be efficient at different frequencies, the absorbing wall must have multiscaling structures (with sizes related to the half wavelengths).
+4. Fractal or pre fractal shapes give examples of a model of multiscaling structures.
+5. High-frequency wave propagation can be modeled by the laws of the geometrical optic. Thus, structures, which could capture the rays or make significant the number of the wave interactions with the absorbing wall, are efficient in the high-frequency energy absorption.
+6. Porous media are natural media of high-frequency acoustical wave absorption when its wavelength becomes comparable to the sizes of the holes/inhomogeneities in the porous media.
+7. For low frequencies, the wavelengths λ = 2π
+ω can become too important, which makes
+irrealistic the construction of an absorbing wall with fragments of the size λ/2. Generally, the low frequencies are the most difficult for the efficient absorption.
+0.2 Notations
+X is a set or a space.
+∅ is the empty set.
+XG is the closure of a set X in the space G (if G is a vector normed space, the closure is by a norm of G).
+M if M a subset or subspace of X, M is the closure of M in the topology of X (fixing a convergence in X, we add all limits to M of sequences of elements from M).
+a if a is a complex number or a complex valued matrix, then a is its complex conjugated, i.e for a = 1 + 2i we have a = 1 − 2i.
+A ⊂ B means that a set A is a subset of a set B and A can be equal to B.
+A ( B means a set A is a proper subset of B (A 6= B).
+Im A is the image of an operator A.
+Ker A is the kernel of an operator A.
+⇒ means the uniform convergence.
+→ means the strong convergence.
+⇀ means the weak convergence.
+∗⇀ means the weak∗ convergence.
+supp f means the support of a function f , i.e. the closure of the set {x ∈ Rn| f (x) = 0}.
+(X, dX ) is a metric space: a set X equipped with a distance dX.
+‖ · ‖X is a norm on a vector space X.
+
+
+viii Table of content
+(X, ‖ · ‖X ) is a vector normed space: a linear vector space X equipped with a norm ‖ · ‖X .
+dX(x, y) denotes a distance between two elements x and y in the metric space (X, dX). An example of a distance in the normed vector space ‖ · ‖X is dX(x, y) = ‖x − y‖X.
+Br(a) is an open ball of radius r centered in the point a. If (X, ‖ · ‖) is a normed space and Br(a) ⊂ X, then
+Br(a) = {x ∈ X|‖x − a‖X < r}.
+Br(a) is a closed ball of radius r centered in the point a of a vector normed space (X, ‖ · ‖):
+Br(a) = {x ∈ X|‖x − a‖X ≤ r}.
+H is usually used to denote a Hilbert space.
+L(X, Y ) is the space of all linear continuous operators from X to Y .
+X∗ is the dual space to X: X∗ = L(X, R).
+〈f, g〉X∗,X is f (g) (the value of the functional f ∈ X∗ on the element g ∈ X).
+(f, g)H is the inner product in H.
+Span(e) is the set of finite linear combinations of elements of e.
+I is the identity operator I(x) = x.
+D′(Ω) is the dual space to the space D(Ω) = C0∞(Ω), named the space of distributions.
+Dα is the derivative in the sense of distribution (α ∈ Nn).
+∇u · ∇v by · it is denoted the inner product of two vectors of Rn: ∇u · ∇v = ∑in=1 ∂xiu∂xiv.
+Ω is a domain (open connected set) of Rn.
+∂Ω is the boundary of Ω.
+μ is a measure on the boundary ∂Ω.
+ν is the external normal to the boundary.
+ΓDir is a part of the boundary ∂Ω on which the Dirichlet boundary condition is imposed.
+ΓNeum is a part of the boundary ∂Ω on which the Neumann boundary condition is imposed.
+ΓRob or simply Γ is a part of the boundary ∂Ω on which the Robin boundary condition is imposed (in the geometrical shape optimization it is a moving part of ∂Ω).
+
+
+Chapter 1
+Introduction to Partial Differential
+Equations (PDE)
+1.1 Domain and its boundary
+We consider a domain Ω ⊂ Rn for n = 1, 2, 3 or even it is possible formally to take n ∈ N∗. Here N is the set of all natural numbers. N∗ means that 0 is not included.
+When we say that Ω is a domain this means:
+Definition 1.1.1. A subset Ω of Rn is called a domain if Ω is open and connected (any two points of Ω can be joined by a path, actually, by a continuous line belonging to Ω.1 See Fig. 1.1.
+Ω
+x
+y
+Figure 1.1 – Example of a connected set Ω: all points x and y in Ω can be joined by a continuous line (in red) belonging to Ω.
+We notice that D is an open set in Rn if for all point x belonging to D there exists a radius r > 0 of an open ball Br(x) centered at x such that
+Br(x) ⊂ D.
+By an open ball in Rn it is understood
+Br(x) = {y ∈ Rn| ‖x − y‖Rn < r}.
+1Rn endowed with its natural topology is an example of a topological space where there is no difference between the notion “connected” and “connected by arcs”. It is used in definition 1.1.1.
+
+
+2 Chapter 1. Introduction to Partial Differential Equations (PDE)
+If there is not a special precision, by the norm ‖x‖Rn is understood the Euclidean norm
+x = (x1, . . . , xn) ∈ Rn ‖x‖Rn =
+(n
+∑
+i=1
+xi2
+)1
+2
+.
+A set S ⊂ Rn is called closed if its complement Rn \ S is an open set.
+In what follows, we always suppose that Ω is a domain in Rn.
+If Ω is bounded (bounded in the sense that there exists a non trivial ball Br(x) in Rn such that Ω ⊂ Br(x), i.e. of a finite n-dimensional volume), then it has a boundary:
+Definition 1.1.2. The intersection of the closure of Ω with the closure of its complement Rn \ Ω is called boundary of Ω and denoted by ∂Ω = Ω ∩ Rn \ Ω. A point x ∈ ∂Ω is called boundary point of Ω.
+Example 1.1.1. • In R, the domain ]0, 1[ has two boundaries points 0 and 1. The set {0}∪{1} is the boundary of ]0, 1[.
+• In R2, let Ω = {(x, y) ∈ R2|x2 + y2 < 1}. Then ∂Ω = {(x, y) ∈ R2|x2 + y2 = 1}.
+Remark: If U is an open set of Rn, then U is a closed set of Rn.
+In section 1.5 we will see that the form or the regularity of the boundary it is important for the properties of solutions of the PDEs.
+1.2 Differential operators
+1.2.1 Derivation in the classical sense
+Considering x ∈ Rn we write in different notations
+∆ = ∂2
+∂x1
++ . . . ∂2
+∂xn
+= ∂x21 + . . . + ∂x2n = div∇,
+the Laplacian operator, which if we apply to a scalar valued function u : Rn → R which in addition u ∈ C2(Rn) (two times continuously differentiable over all variables), then ∆u ∈ C(Rn) and the derivation is done in the usual classical sense.
+Here ∇ and div are first order derivative operators: for a scalar valued function u : Rn → R ∇u is the vector function Rn → Rn:
+∇u = (∂x1u, ∂x2u, . . . , ∂xnu)t.
+The divergence operator div take a vector of functions (v1, . . . , vn)t and associates a scalar function ∂x1v1 + ∂x2v2 + . . . + ∂xnvn. Thus, it is easy to see, that for a scalar function u : Rn → R (or to the complex numbers C) div∇u = ∆u.
+To be able to derive a function, it must have the necessary properties to be derivable. These properties are usually described by an assumption on the function to belong (or not) to a functional
+
+
+1.2. Differential operators 3
+space. It means we define a set of functions having all the same property: as previously, C2(Rn) is the set of all functions from Rn to R (or C) which are two times continuously differentiable. This set is a normed vector space with the norm
+‖u‖C2(Rn) = max
+i=1,2,3 sup
+x∈Rn |∂i−1
+xj u(x)|.
+If we have a bounded domain Ω, then to have the first derivatives of a function u in a classical sense we need to ensure that u ∈ C1(Ω), i.e u must be a differentiable function up to the boundary.
+Remarks on the spaces of continuous functions on compacts or not
+Attention: If Ω is a bounded domain, it means that Ω is a compact of Rn. As Rn is a finitedimensional space (of the dimension n), then, thanks to the Heine-Borel theorem, a set of Rn is compact if and only if it is closed and bounded. In addition, the continuity of a function u on a compact ensures that 1. it is bounded on it (there exists its minimal and maximal values), 2. it is uniformly continuous: if u : Ω → R
+∀ǫ > 0 ∃δ > 0 : ∀x1, x2 ∈ Ω such that ‖x1 − x2‖Rn < δ, |u(x1) − u(x2)| < ǫ.
+Thus, for bounded domains, the functions of the space C(Ω) are all bounded and uniformly continuous functions on the compact Ω.
+If we consider a function f from C(Ω), this time Ω is an open set, then we only know that f is continuous on Ω. It can be unbounded, and it cannot be uniformly continuous on Ω.
+Example 1.2.1. For instance, it is easy to see that for Ω =]0, 1[, n = 1, the functions
+f1(x) = 1
+x : is not bounded and not uniformly continuous ⇒ f1 ∈ C(Ω), f1 ∈/ C(Ω)
+f2(x) = sin 1
+x : is bounded but not uniformly continuous ⇒ f2 ∈ C(Ω), f2 ∈/ C(Ω).
+We have
+Proposition 1.2.1. Let K be a compact of Rn. The space C(K) of all continuous functions on K endowed with the norm
+‖f ‖∞ = sup
+x∈K
+|f (x)| ∀f ∈ C(K),
+is the Banach space (a complete vector normed space): any Cauchy sequence (fj)j∈N converges by this norm, more precisely, uniformly converges, to a element of C(K).
+We use ⇒ for the uniform convergence of functions.
+
+
+4 Chapter 1. Introduction to Partial Differential Equations (PDE)
+1.2.2 Derivation in the sense of distributions
+There are two ways to define a derivative of a function. If we need to derive it once on xj and it is continuously differentiable on Ω, then there exists its derivation on xj in the classical or strong sense. Nevertheless, if it is less regular, for instance, from L2(Ω) (see the first-year course CIP), it is also possible to define its derivative, but this time in a weak sense.
+It is known that it is possible to derive infinitely many times any element of L2(Ω) in the sense of distributions (see the first-year course EDP). However, for the solving of the PDEs, it is crucial to work in a Hilbert space. For example, we need to work in Hilbert space to apply the Riesz representation theorem or the Lax-Milgram Lemma. Thus, we also need to impose some regularity on the derivatives, even if it is L2(Ω) regularity, to have, if possible, a Hilbert space. This goal restricts the space of infinitely differentiable distributions D′(Ω) to much smaller spaces as H1(Ω) or to its subsets H01(Ω), H2(Ω) and others.
+Remark: The spaces Lp(Ω, μ) were introduced in the first year course CIP: if μ is a positive measure, σ-additive and Ω ⊂ Rn, then
+Lp(Ω, μ) = {μ − measurables classes of functions f : Ω → C| ‖f ‖Lp(Ω) =
+(∫
+Ω |f (x)|pdμ
+)1
+p },
+where it is supposed that all two functions equal μ-almost everywhere belong to the same class and thus associate to the same element of Lp(Ω, μ). In what follows, we will use these spaces referring to CIP course and use them not only on the whole domain Ω but also on its boundary ∂Ω, on which we will specify the measure μ as a d-dimensional measure (see Chapter 2). The advantage of working in L2(Ω, μ) is that it is a Hilbert space endowed with the inner product:
+〈u, v〉L2(Ω,μ) =
+∫
+Ω uvdμ, ∀u, v ∈ L2(Ω, μ),
+where by v is denoted the complex conjugate of v.
+Space H1(Ω), or equivalently H1(Ω), is the Sobolev space introduced in the first year course EDPs: H1(Ω) = {u ∈ L2(Ω)| the distibution∇u belongs to [L2(Ω)]n}.
+We recall that u ∈ L2(Ω) ⊂ Ll1oc(Ω) (and thus it is a regular distribution) has in the sense of
+distributions the first order derivatives ∇u ∈ [L2(Ω)]n (here we impose the regularity L2 for all distributions defining the first derivatives of u), if
+∀φ ∈ D(Ω)
+∫
+Ω ∂xiuφdx = −
+∫
+Ω u∂xiφ, i = 1, . . . , n.
+Remark: If the derivative exists in the classical sense, then the derivative in the sense of distributions is equal to the classical one.
+For more details on the distributions, see the first-year course EDP.
+
+
+1.3. Integration by parts or Green’s formulas 5
+Attention: For any domain Ω (bounded or not) we obviously have
+H1(Ω) ⊂ L2(Ω) ⊂ Ll1oc(Ω) ⊂ D′(Ω).
+with all strict inclusions.
+The usual norm on H1(Ω) is defined by
+‖v‖H1(Ω) = (
+∫
+Ω |v|2dx +
+∫
+Ω |∇v|2) 1
+2 = (‖v‖2L2(Ω) + ‖∇v‖2L2(Ω)) 1
+2 (1.1)
+and it is associated with the inner product
+〈u, v〉H1(Ω) = 〈u, v〉L2(Ω) + 〈∇u, ∇v〉L2(Ω).
+With this inner product, H1(Ω) is a Hilbert space.
+Attention: If Ω ⊂ R, i.e. in the one-dimensional case n = 1, it is known that H1(Ω) ⊂ C(Ω). But it is not true any more for n ≥ 2!
+However, for all domains Ω of Rn, n ∈ N∗ the space C∞(Ω) is dense in H1(Ω).
+1.3 Integration by parts or Green’s formulas
+1.3.1 One dimensional case (1D)
+If f and g are functions defined on ]a, b[⊂ R (for a simplicity we suppose that ]a, b[ is bounded), the integration by parts formulas
+∫
+]a,b[ f ′gdx = f g|x=b
+x=a −
+∫
+]a,b[ f g′dx (1.2)
+holds if f and g are C1([a, b]) functions (continuously differentiable and continuous on the compact [a, b]). Thus the Lebesgue integrals are equal to the Riemann integrals (see course CIP of the first year).
+For the well posedness of Lebesgue integrals, it is sufficient to impose f ′ and g from L2(]a, b[) to ensure the well posedness of ∫
+]a,b[ f ′gdx (the well posedness here means that the integral exists, i.e. it is finite). In the same way, we need to have f and g′ in L2(]a, b[) to ensure the well posedness of ∫
+]a,b[ f g′dx. Indeed, by the Cauchy-Schwarz inequality, as soon as f and g′ in
+L2(]a, b[),
+∫
+]a,b[ f g′dx ≤ ‖f ‖L2(]a,b[)‖g′‖L2(]a,b[) < ∞.
+More briefly, we need to have f and g from H1(]a, b[). But we also need to now the values on the boundary of f and g, since in (1.2) we need to calculate f (b)g(b) − f (a)g(a). As in the one
+
+
+6 Chapter 1. Introduction to Partial Differential Equations (PDE)
+dimensional case all elements of H1(]a, b[) are continuous up to the boundary (H1(]a, b[) ⊂ C([a, b])), then f (b)g(b) − f (a)g(a) is well defined as involves the finite values of a bounded and continuous on the compact [a, b] functions.
+Remark: Knowing the function f (and g) only on ]a, b[, it is possible to define the values in points a and b by the continuity. These values of f are called a trace of the function f on the boundary {a} ∪ {b}.
+1.3.2 2D and general case
+Let Ω ⊂ R2 be a bounded domain with a compact boundary ∂Ω. This time ∂Ω is a curve of R2 (or more generally a subset of R2 those 2-dimensional Lebesgue measure is equal to 0). Considering, u and v on Ω, there is a question how to define them on ∂Ω. If u and v are in C(Ω) the question can be solved as in the one dimensional case. The main problem is when we consider elements of H1(Ω) in Rn with n ≥ 2. As it was mentioned previously, it is the case when the embedding H1(Ω) ⊂ C(Ω) does not hold.
+In this situation, we need to generalize the notion of the trace of a continuous function to a trace of an element of Ll1oc(Ω). This means to define the trace for regular distributions.
+In the classical sense
+Let us start by the classical case when u and v belong to C2(Ω). In particular, we also suppose that the boundary can be locally described by a non-trivial twice time continuously differentiable function. Here “locally” means that for all boundary points x ∈ ∂Ω there exists a non trivial ball Br containing x, such that ∂Ω ∩ Br is a graph of a C2 function:
+Definition 1.3.1. The boundary ∂Ω is called a regular boundary of the class Ck (k ≥ 1, see Fig. 1.2), if for all x0 ∈ ∂Ω there exist r > 0 and f (x) ∈ Ck(Br(x0)) such that
+{x ∈ Br(x0)| f (x) = 0} = ∂Ω ∩ Br(x0), df |Br(x0) 6= 0.
+By df |Br(x0) is denoted the differential of f considered only on Br(x0) (i.e. only for x ∈ Br(x0)).
+∂Ω
+Br(x0)
+x0 f (x) = 0
+Figure 1.2 – Example of a regular boundary from Definition 1.3.1.
+
+
+1.3. Integration by parts or Green’s formulas 7
+In addition we define the (locally) Lipschitz boundaries (see also [41, Definition 2.4.5]) with a geometrical parametrization):
+Definition 1.3.2. Let Ω be a bounded domain of Rn. Its boundary ∂Ω is (locally) Lipschitz if
+∀x ∈ ∂Ω ∃ neighborhood Ux : ∂Ω ∩ Ux is the graph of a Lipschitz continuous function f,
+and, Ω lies on one side of its boundary.
+Remark: Here by a Lipschitz continuous function we understand f : Rn−1 → R which is continuous and there exists M > 0 such that
+∀x, y ∈ Rn−1 |f (x) − f (y)| ≤ M ‖x − y‖Rn−1.
+Example 1.3.1. A typical example of a Lipschitz boundary is a polygon domain, i.e. a piecewise regular boundary with angle points. The other example is a prefractal domain constructed with a finite number of fractal generations, as shown in Fig. 1.3. In the angle points, the first derivative does not exist in the classical sense. It is the case when the first derivative (and also the normal unit vector) exists almost everywhere: for all x ∈ ∂Ω except for a finite number of points (or more generally of a zero measure set of points).
+Figure 1.3 – Example of Lipschitz boundaries for a prefractal domain for a shape which, if the prefractal iterations are repeated infinitely many times, is called fractal of Minkowski or the square Koch curve. These shapes’ main property is that they are symmetrical and thus keep the initial volume a2 constant for each new prefractal iteration. The figure is by B. Sapoval.
+For C1 boundary ∂Ω it is possible to define the unit normal vector and the normal derivative in the following strong sense:
+Definition 1.3.3. If ∂Ω is C1, then for any point x0 ∈ ∂Ω is defined the outward pointing unit normal vector field ν(x0) = (ν1, . . . , νn), the vector of the norm ‖ν(x0)‖Rn = 1 perpendicular to the tangent plane to ∂Ω at the point x0 and oriented outside of Ω (see Fig. 1.4).
+
+
+8 Chapter 1. Introduction to Partial Differential Equations (PDE)
+∂Ω
+Ω
+ν outward (external) normal
+Figure 1.4 – A ball gives an example of domain with a C∞ boundary on which exists the outward unit normal for all x ∈ ∂Ω.
+Definition 1.3.4. If u ∈ C1(Ω), then we call ∂u
+∂ν (x0) := ν(x0) · ∇u for x0 ∈ ∂Ω the (outward)
+normal derivative of u on ∂Ω.
+We notice that the differential operator ∆ can be defined in the classical sense from C2(Ω) to C (Ω).
+Thus there holds the following Green’s formulas or integration by parts:
+Theorem 1.3.1. Let u ∈ C2(Ω), v ∈ C1(Ω) and μ be the boundary measure on ∂Ω. Then
+∫
+Ω ∆uvdx =
+∫
+∂Ω
+∂u
+∂ν vdμ −
+∫
+Ω ∇u · ∇vdx. (1.3)
+For u, v ∈ C1(Ω) it holds the usual integration-by-parts formula:
+∫
+Ω(∂xiu)vdx =
+∫
+∂Ω uvνidμ −
+∫
+Ω u(∂xiv)dx (i = 1, . . . , n). (1.4)
+In the weak sense
+If ∂Ω is Lipschitz, then the normal vector exists almost everywhere on the boundary. If ∂Ω is a self-similar fractal, i.e. the limit boundary obtained by infinitely many pre-fractal Lipschitz generations, then there does not exists a boundary point in which it is possible to construct the normal vector by Definition 1.3.3. All points in a fractal ∂Ω are irregular in the classical sense: the classical derivative does not exist. Thus, we need to use the notion of the derivative in the sense of distribution. It is also possible to define the normal derivative on an irregular boundary, but this time in the weak or distributional sense. For more information about fractal boundaries, see Chapter 2. Here we don’t care about the form or kind of fractal boundary and how it could be constructed, but we only use the fact that it has a known dimension d (n−1 ≤ d < n, d ∈ R).
+
+
+1.3. Integration by parts or Green’s formulas 9
+Remark:
+• If ∂Ω ∈ C∞ or in Ck (k ∈ N) or is Lipschitz, then its dimension is equal to n − 1. These are examples of (n − 1)-sets. The typical measure on them is the (n − 1)-dimensional Lebesgue measure. • If ∂Ω has a bigger dimension, equal to a real number d (n − 1 < d < n), then ∂Ω is a non-Lipschitz (possibly fractal) boundary, given by a d-set. On a d-set boundary with d > n − 1 the (n − 1)-dimensional Lebesgue measure is not finite: the length of a fractal curve in 2D is infinite. But any d-dimensional measure on a d-set is finite. An example of a d-measure is the d-dimensional Hausdorff measure md (its definition is not considered in this course, but it is useful just to mention its existence) [48].
+This is a rigorous definition of a d-set:
+Definition 1.3.5 (Ahlfors d-regular set or d-set [49, 50, 69, 68]). Let F be a Borel non-empty subset of Rn. The set F is is called a d-set, or a d-dimensional set, (0 < d ≤ n) if there exists a d-measure μ on F , i.e. a positive Borel measure (defined for all Borel sets) with support F (supp μ = F , i.e. for all A ⊂ Rn A ∩ F = ∅ μ(A) = 0) such that there exist constants c1, c2 > 0,
+c1rd ≤ μ(F ∩ Br(x)) ≤ c2rd, for ∀ x ∈ F, 0 < r ≤ 1,
+where Br(x) = {y ∈ Rn| ‖x − y‖Rn ≤ r} denotes the closed Euclidean ball centered at x and of radius r.
+Remark: By [49, Prop. 1, p 30] all d-measures on a fixed d-set F are equivalent. It is also possible to define a d-set by the d-dimensional Hausdorff measure md (we don’t consider the definition of the Hausdorff measure in this course). In particular, F has the Hausdorff dimension d in the neighborhood of each point of F [49, p.33].
+More precisely, let Ω be a bounded domain, and ∂Ω be its Ahlfors d-regular boundary (for more general boundaries see [44, 45]).
+Let in addition μ be a positive finite (in the sense that μ(∂Ω) < ∞) d-measure on the boundary ∂Ω (if ∂Ω is Lipschitz, then μ is the usual (n − 1)−dimensional Lebesgue measure). Then it is possible to define as in Remark 1.2.2
+L2(∂Ω, μ) = {μ − measurables classes of functions f : ∂Ω → C|
+‖f ‖L2(∂Ω,μ) =
+(∫
+∂Ω |f (x)|2dμ
+)1
+2 < ∞}, (1.5)
+where, as usually, it is supposed that all two functions equal μ-almost everywhere belong to the same class and thus associate to the same element of L2(∂Ω, μ).
+A particular example of a d-set boundary is a self-similar fractal of the dimension d (not all d-sets are self-similar). In what follows, we always suppose that we work with bounded domains Ω ⊂ Rn with a self-similar fractal d-set boundary (d ∈]n − 1, n[) or Lipschitz boundary if d = n − 1.
+
+
+10 Chapter 1. Introduction to Partial Differential Equations (PDE)
+Remark: This choice is motivated by the fact [17, 66, 69] that these kind of domains are examples of H1-extension domains [37]: i.e. there exists a bounded linear extension operator E : H1(Ω) → H1(Rn):
+(i) ∀u ∈ H1(Ω), Eu|Ω = u,
+(ii) ∀u ∈ H1(Ω), ‖Eu‖H1(Rn) ≤ C‖u‖H1(Ω), where C > 0 depends only on Ω. Initially, it was known that the Lipschitz domains are H1-extension domains [17, 66]. Then, it was generalized by [47] for n = 2 and by [37] for all n for a more general class of domains containing not only Lipschitz domains, but also domains with fractal boundaries. Thanks to [37], it is known that all H1-extension domains are n-sets (a d-set with d = n):
+∃c > 0 ∀x ∈ Ω, ∀r ∈]0, δ[∩]0, 1] λn(Br(x) ∩ Ω) ≥ Cλn(Br(x)) = crn,
+where λn(A) denotes the (n-dimensional) Lebesgue measure of a set A in Rn. This property is also called the measure density condition [37]. Let us notice that an n-set Ω cannot be “thin” close to its boundary ∂Ω, since it must all times contain a non trivial ball in its neighborhood.
+If we have an element of u ∈ H1(Ω) it is possible to define its trace on ∂Ω locally (point by point) μ-almost everywhere (a.e.) in the following way (a definition-theorem by Wallin (1991) [69] and also by a more recent work [22]):
+Definition 1.3.6. For a domain Ω of Rn with a self-similar or Lipschitz boundary ∂Ω defined as the support of a d-measure μ, the trace operator Tr : H1(Ω) → L2(∂Ω, μ) is defined μ-a.e. by
+Tru(x) = lri→m0
+1
+λn(Ω ∩ Br(x))
+∫
+Ω∩Br(x) u(y)dy, x ∈ ∂Ω.
+Here, as previously, λn is the n-dimensional Lebesgue measure.
+In the last definition we take a function u defined for x ∈ Ω and define its values, i.e. its trace on the boundary ∂Ω by formula (1.3.6).
+Therefore, it is possible to consider the trace of elements of H1(Ω) without taking into account if these elements are continuous or not.
+Definition 1.3.7. The space B(∂Ω) := T r(H1(Ω)) is the image of the trace operator considered from H1(Ω).
+In what follows we use without proof the following particular case of the trace theorem due to Jonsson and Wallin in the years of 1990:
+Theorem 1.3.2. Let Ω be a bounded domain in Rn with a self-similar or Lipschitz boundary ∂Ω defined as the support of a d-measure μ, n − 1 ≤ d < n. Then
+1. The space B(∂Ω) is the proper (dense) Hilbert subspace of L2(∂Ω, μ), endowed with the norm
+‖φ‖B(∂Ω) := min{‖g‖H1(Ω) | φ = Tr g}. (1.6)
+2. Ker Tr = H01(Ω) = C0∞(Ω)H1
+is the closure in H1 of the set of indefinitely differentiable functions with compact support in Ω.
+
+
+1.3. Integration by parts or Green’s formulas 11
+3. The trace operator Tr : H1(Ω) → B(∂Ω) is linear continuous and, in particular, there exists a constant C > 0 (depending only on n and d) such that for all u ∈ H1(Ω)
+‖Tru‖L2(∂Ω,μ) ≤ C‖u‖H1(Ω). (1.7)
+4. There exists a continuous linear extension operator E : B(∂Ω) → H1(Rn) such that Tr(Ef ) = f , f ∈ B(∂Ω) (the right inverse of the trace operator).
+Remark:
+1. Since, B(∂Ω) ⊂ L2(∂Ω, μ) then for some constant C > 0
+‖Tru‖L2(∂Ω,μ) ≤ C‖Tru‖B(∂Ω).
+2. The continuity of the trace operator Tr : H1(Ω) → B(∂Ω) reads (by using (1.6)):
+‖Tru‖B(∂Ω) ≤ ‖u‖H1(Ω) (1.8)
+Combining these two points we have estimate (1.7).
+More generally, we take in mind that
+Remark:
+1. If A is a linear continuous operator from a normed vector space X to a vector normed space Y , then its continuity is equivalent to its boundness, i.e. there exists a constant C > 0 such that for all x ∈ X
+‖Ax‖Y ≤ C‖x‖X .
+The infinum of the possible constants C gives the operator norm of A, denoted by ‖A‖L(X,Y ). For more details see TD 1 Problème 6. 2. Any operator considered on its image is surjective. 3. The trace operator on the boundary is not injective:
+Ker(Tr(H1(Ω)) = H01(Ω) = {u ∈ H1(Ω)| Tr u = 0 on ∂Ω}.
+4. The extension operator E : B(∂Ω) → H1(Rn) is also called the right inverse operator because of only one identity Tr ◦E = Id (since Ker(Tr(H1(Ω)) 6= {0}, the identity E ◦ Tr = Id does not hold). 5. Let V1(Ω) be the orthogonal complement space to H01(Ω) (the kernel of the trace operator)
+in H1(Ω): H1(Ω) = H01(Ω) ⊕ V1(Ω).
+Then, the restriction of the trace operator on V1(Ω) Tr|V1(Ω) : V1(Ω) → B(∂Ω) is bijective
+(and, as previously, linear continuous). The space V1(Ω) = {u ∈ H1(Ω)| − ∆u + u = 0 in D′(Ω)} is the space of 1-harmonic functions.
+Definition 1.3.8. The set B′(∂Ω) = L(B(∂Ω), C) is the dual space to B(∂Ω), i.e. the set of all linear continuous functionals (or forms) from B(∂Ω) → C. We denote the value of F ∈ B′(∂Ω)
+
+
+12 Chapter 1. Introduction to Partial Differential Equations (PDE)
+on an element u of B(∂Ω) by
+〈F, u〉(B′(∂Ω),B(∂Ω)) := F (u) ∈ C.
+As F is a linear continuous (or bounded) functional, then there exists a constant C > 0 such that for all u ∈ B(∂Ω)
+|〈F, u〉(B′(∂Ω),B(∂Ω))| ≤ C‖u‖B(∂Ω).
+In addition, there holds
+B(∂Ω) ⊂ L2(∂Ω, μ) ⊂ B′(∂Ω). (1.9)
+Knowing the properties of the trace operator, it is possible to generalize the Green formulas of Theorem 1.3.2 in the following weak sense (initially due to Lancia in the years of 2000).
+Proposition 1.3.1. Let Ω be a bounded domain in Rn with a d-set compact boundary ∂Ω on which it is defined a d-measure μ, n − 1 ≤ d < n. Then
+1. for all u ∈ H1(Ω) with ∆u ∈ L2(Ω) we can define a bounded linear functional ∂u
+∂ν ∈ B′(∂Ω)
+by
+〈∂u
+∂ν , Trv〉(B′(∂Ω),B(∂Ω)) :=
+∫
+Ω(∆u)vdx +
+∫
+Ω ∇u · ∇vdx, (1.10)
+v ∈ H1(Ω).
+2. Similarly, for any u ∈ H1(Ω) and 1 ≤ i ≤ n, we can define a bounded linear functional u · νi ∈ B′(∂Ω) by
+〈u · νi, Trv〉(B′(∂Ω),B(∂Ω)) :=
+∫
+Ω
+∂u ∂xi
+vdx +
+∫
+Ω u ∂v
+∂xi
+dx, (1.11)
+v ∈ H1(Ω).
+Proof
+(it could be omitted)
+The statement of proposition follows, thanks to Theorem 1.3.2, from the surjectivity of the linear continuous trace operator Tr : H1(Ω) → B(∂Ω). Indeed, let us take v ∈ H1(Ω). By Theorem 1.3.2, there exists Tr v ∈ B(∂Ω) and it holds (1.8).
+We define for a fixed u ∈ H1(Ω) with ∆u ∈ L2(Ω) the linear functional
+L : w ∈ B(∂Ω) 7→ L(w) =
+∫
+Ω Ew∆udx +
+∫
+Ω ∇(Ew) · ∇udx ∈ C,
+where by Theorem 1.3.2 the operator E : B(∂Ω) → H1(Rn) is the linear bounded extension operator such that Tr(Ew) = w μ a.e. Hence, we denote 1ΩEw ∈ H1(Ω) by v. Then, by the continuity of the extension operator, we state that L is continuous:
+|L(w)| ≤
+∣ ∣ ∣ ∣
+∫
+Ω v∆udx
+∣ ∣ ∣
+∣+
+∣ ∣ ∣ ∣
+∫
+Ω ∇v · ∇udx
+∣ ∣ ∣ ∣
+≤
+(
+‖∆u‖L2(Ω) + ‖∇u‖L2(Ω)
+)
+‖v‖H1(Ω) ≤ C
+(
+‖∆u‖L2(Ω) + ‖∇u‖L2(Ω)
+)
+‖w‖B(∂Ω).
+Hence, as Tr v = w, with notations L(w) = 〈 ∂u
+∂ν , Trv〉(B′(∂Ω),B(∂Ω)) we exactly obtain the gener
+alized Green formula (1.10).
+
+
+1.4. Multidimensional boundary valued problems for the Poisson equation 13
+1.4 Multidimensional boundary valued problems for the Poisson equation
+1.4.1 Definitions of different boundary type problems and recall of a definition of a well posed by Hadamard problem
+If Ω ⊂ Rn is a bounded domain, to define correctly a PDE problem on it (especially for ensuring its well posedness in the sense of Hadamard), we need to specify a boundary condition for x ∈ ∂Ω.
+Considering the example of the Poisson equation −∆u = f , there is the list of the most commun types of boundary conditions:
+Definition 1.4.1. Let φ(x) be a given function. We specially distinct three types of boundary conditions for u(x) with x ∈ ∂Ω.
+1. Dirichlet boundary conditions or boundary conditions of the first kind:
+u|∂Ω = φ(x). (1.12)
+If φ = 0, condition (1.12) is named the homogeneous Dirichlet condition: u|∂Ω = 0.
+2. Neumann boundary conditions or boundary conditions of the second kind:
+∂u ∂ν
+∣ ∣ ∣ ∣
+∣∂Ω
+= φ(x). (1.13)
+The homogeneous Neumann boundary condition is ∂u
+∂ν |∂Ω = 0.
+3. Robin boundary conditions or boundary conditions of the third kind:
+(∂u
+∂ν + αu
+)∣ ∣ ∣ ∣
+∣∂Ω
+= φ(x), (1.14)
+where α is a known parameter or a function.
+The problem to find u satisfying for x ∈ Ω the Poisson equation (or an other PDE) and one of the three boundary conditions above is called the boundary valued problem.
+Let us also recall what it is a well-posed problem in the sense of Hadamard. Jacques Hadamard named the “good” mathematical models by well-posed problems defined in the following way.
+Definition 1.4.2. We say that a given problem for a partial differential equation is well-posed (by Hadamard) if
+a) the problem in fact has a solution;
+b) this solution is unique;
+c) the solution depends continuously on the data given in the problem (the solution is stable).
+If one of these conditions does not hold, the problem is called ill-posed.
+
+
+14 Chapter 1. Introduction to Partial Differential Equations (PDE)
+Obviously not all boundary valued problems are well posed.
+The stability is particularly important for problems arising from physical applications: the conditions specifying the problem (initial or/and boundary conditions) are often obtained from the measurements which can never be exact. Therefore, we would prefer that small variations of data in initial or/and boundary conditions correspond to small changes of the unique solution. If a small error in data implies a big difference in solutions, we cannot conclude about a reasonable solvability of the model.
+Example 1.4.1. There is an example of an ill-posed problem of Hadamard for an elliptic equation (the Laplace equation, which is actually the Poisson equation with f = 0).
+△u = 0 for (x, y) ∈ (−∞, +∞) × (0, δ),
+u|y=0 = φ(x), ∂u
+∂y
+∣ ∣ ∣ ∣
+∣y=0
+= 0 with φ(x) = cos x
+k.
+The solution of this problem is u(x, y) = cos kx cosh ky
+k . For large k the function φ is small, but u is
+not.
+Example 1.4.1 shows that if we add initial conditions to an elliptic equation, it is possible to get an ill-posed problem.
+1.4.2 Poisson equation with Dirichlet boundary conditions: from 1D to nD
+Let Ω be a bounded domain of Rn. Let us consider the Poisson equation
+−∆u = f, on Ω (1.15)
+with for instance the Dirichlet homogeneous boundary conditions:
+u|∂Ω = 0. (1.16)
+For n = 1 the problem becomes
+− u′′ = f, on ]a, b[⊂ R (1.17)
+u(a) = u(b) = 0, (1.18)
+which has the unique explicit solution. Suppose we chose Ω as a product of intervals, a parallelepiped, or a cylindrical domain or a sphere. In that case, it is possible to express the solution using the method of separation of variables. This time the solution is less explicit since it is given by series. Nevertheless, if the domain Ω is different from these cases, it is no longer possible. However, for the general case of an arbitrary domain Ω of Rn, there is a possibility to prove the existence of a unique weak solution u depending continuously from the initial data (f here).
+Indeed, if we take f ∈ L2(Ω), then from (1.15) it follows that ∆u ∈ L2(Ω). We take u, v ∈ H01(Ω)
+and apply (1.10) to obtain the following variational form:
+∀v ∈ H01(Ω)
+∫
+Ω ∇u∇vdx =
+∫
+Ω f vdx. (1.19)
+
+
+1.4. Multidimensional boundary valued problems for the Poisson equation 15
+We recall that
+H01(Ω) = D(Ω)‖·‖H1(Ω) = {u ∈ H1(Ω)| Tr u = 0 on ∂Ω}
+is a proper Hilbert subspace of H1(Ω) (it is equal to H1(Ω) only if Ω = Rn, but here it is not allowed as Ω is supposed to be bounded). From the first year course EDP it is known that H01(Ω)
+is a Hilbert space endowed with the inner product
+(u, v)H01(Ω) =
+∫
+Ω ∇u · ∇vdx ∀u, v ∈ H01(Ω). (1.20)
+This inner product is associated with the norm ‖u‖H01(Ω) := ‖∇u‖L2(Ω), which is equivalent to
+the usual norm of H1(Ω) given in (1.1): there exist constants C1 > 0 and C2 > 0 such that for all u ∈ H01(Ω)
+C1‖u‖H1(Ω) ≤ ‖u‖H01(Ω) ≤ C2‖u‖H1(Ω).
+Attention: This norm equivalence is due to the Poincaré inequality: for all u ∈ H01(Ω)
+‖u‖L2(Ω) ≤ CP ‖∇u‖L2(Ω) (1.21)
+for a constant CP > 0 depending only on the diameter of Ω. It is important to understand that Poincaré inequality does not hold on H1(Ω), which contains all constant functions on Ω. If we take u = 1 on Ω then from (1.21) it follows
+Vol(Ω) ≤ 0.
+Since the volume of Ω is strictly positive, we obtain a contradiction. Working on H01(Ω), we only have access to the 0 constant, for which the inequality obviously
+holds. But it is also held if we impose to have zero traces only on a part of the boundary ∂Ω, since, in this case, all constants, except 0, are again excluded.
+Thus the variational formulation (1.19) can be written using the inner product of H01(Ω):
+∀v ∈ H01(Ω) (u, v)H01(Ω) = (f, v)L2(Ω). (1.22)
+The data f is fixed in L2(Ω). For all v ∈ H01(Ω) the map v ∈ H01(Ω) 7→ (f, v)L2(Ω) ∈ C is a
+linear continuous functional on H01(Ω) (a Hilbert space):
+|(f, v)L2(Ω)| ≤ ‖f ‖L2(Ω)‖v‖L2(Ω) ≤ CP ‖f ‖L2(Ω)‖v‖H01(Ω). (1.23)
+Thus we apply the Riesz representation theorem to obtain that there exists unique u ∈ H01(Ω)
+solving (1.19) and in addition it satisfies the a priori estimate (taking v = u in (1.22) and combining with (1.23))
+‖u‖2
+H01(Ω) = (f, u)L2(Ω) ≤ CP ‖f ‖L2(Ω)‖u‖H01(Ω) ⇒ ‖u‖H01(Ω) ≤ CP ‖f ‖L2(Ω).
+This is the stability estimate ensuring the continuous dependence of the solution u from the data f : if there is a small error in the input data these implies a small error of the solution.
+Thus we have proved
+
+
+16 Chapter 1. Introduction to Partial Differential Equations (PDE)
+Theorem 1.4.1. For an arbitrary bounded domain Ω of Rn and all f ∈ L2(Ω) there exists unique weak solution u ∈ H01(Ω) of the homogeneous Dirichlet problem in the sense of (1.22). In addition, it satisfies
+‖u‖H01(Ω) ≤ CP ‖f ‖L2(Ω),
+where CP > 0 is the constant from the Poincaré inequality.
+Remark: Here we don’t care at all about the regularity of the boundary of Ω. The only important thing which was used is that Ω is bounded. For the validity of the Poincaré inequality, the domain must be bounded at least in one direction of Rn.
+The importance of the boundary regularity comes when we need more regularity of the solution u. Two typical regularities are to be the classical solution, i.e. u ∈ C2(Ω)∩C(Ω), or to be simply in C(Ω). Let us discuss it in detail in the next section.
+1.4.3 Poisson equation with an homogeneous Robin boundary condition
+Let us consider the Poisson equation with this time the homogeneous Robin boundary condition on ∂Ω with a real constant αR:
+∂u
+∂ν + αRu = 0.
+We notice that if αR = 0, then we obtain the homogeneous Neumann boundary condition. For these two types of conditions the trace of the solution u is not fixed on ∂Ω as it is in the case of the Dirichlet boundary condition. Thus, we consider all elements of the Hilbert space H1(Ω) are convenient for the weak formulation. As previously, we take f ∈ L2(Ω), which ensures that −∆u ∈ L2(Ω). We know that for a d-set compact boundary ∂Ω on which it is defined a d-measure μ if we consider a trace of u ∈ H1(Ω), then Tru ∈ L2(∂Ω, μ) (see Theorem 1.3.2). Therefore, with the help of the Green formula (1.10) we obtain the following variational problem for the homogeneous Robin boundary problem: to find u ∈ H1(Ω) such that
+∀v ∈ H1(Ω)
+∫
+Ω ∇u∇vdx +
+∫
+∂Ω αR Tr uTr vdμ =
+∫
+Ω f vdx. (1.24)
+If α > 0 then it is possible to show that
+∫
+Ω ∇u∇vdx +
+∫
+∂Ω αR Tr uTr vdμ =: {u, v}
+is an equivalent inner product on H1(Ω) (see TD 2), and thus to apply as previously the Riesz representation theorem to deduce its well posedness.
+
+
+1.4. Multidimensional boundary valued problems for the Poisson equation 17
+Attention: If α = 0, i.e. in the case of the Neumann homogeneous condition, ‖∇u‖L2(Ω) is only a semi-norm on H1(Ω): if u ∈ H1(Ω) and ‖∇u‖L2(Ω) = 0, it does not implies that u = 0 almost everywhere on Ω, but only that u = constant (not necessary equal to zero) almost everywhere on Ω. Thus it is not possible to apply the Riesz representation theorem, and moreover, it is easy to see for f = 0, that any constant on Ω solves the problem (there is no unicity). One of the ways to avoid this ill-posedness it is to impose in a part of the boundary a Dirichlet boundary condition or a Robin boundary condition with αR > 0. If αR < 0 then the Robin boundary problem becomes also ill-posed.
+1.4.4 Poisson equation with mixed boundary conditions
+In this course for the wave control applications, we specially interested in the mixed boundary conditions, i.e. when the boundary ∂Ω of the domain Ω is divided in three parts ∂Ω = ΓDir ∪
+ΓNeum ∪ ΓRob:
+1. ΓDir on which it is imposed a Dirichlet boundary condition;
+2. ΓNeum on which it is imposed a Neumann boundary condition;
+3. ΓRob on which it is imposed a Robin boundary condition.
+To be able to define the traces TrΓDir : H1(Ω) → L2(ΓDir, μ) and TrΓRob : H1(Ω) → L2(ΓRob, μ) separately in the same way as in Theorem 1.3.2 the trace on all boundary, we suppose each time for the convenience that
+ΓDir and ΓRob are themselves compact d-sets as ∂Ω (i.e. they are closed subsets of ∂Ω with the same d-measure μ). We also assume that
+μ(ΓNeu ∩ ΓDir) = μ(ΓNeu ∩ ΓRob) = μ(ΓDir ∩ ΓRob) = 0. (1.25)
+Remark: (could be omitted) If ΓNeum = ∅, then it is still possible to modify ΓDir and ΓRob on a set of measure zero, that they will be still compacts separated by a set of zero measure. Since the trace and the boundary conditions are imposed in the sense of L2(∂Ω, μ), there is no problem to say that ∂Ω = ΓDir ∪ S ∪ ΓRob for a set S ⊂ ∂Ω having μ(S) = 0 on which we don’t define any boundary condition.
+In the case of the homogeneous mixed boundary conditions, we need have a “mixed” approach from the treatments of the homogeneous Dirichlet and Robin boundary conditions. More precisely, considering the Poisson problem for αR > 0
+
+    
+    
+−∆u = f on Ω,
+u = 0 on ΓDir,
+∂u
+∂n = 0 on ΓNeu,
+∂u
+∂n + αRu = 0 on ΓRob,
+(1.26)
+
+
+18 Chapter 1. Introduction to Partial Differential Equations (PDE)
+we need to fix the zero traces of elements of H1(Ω) on the Dirichlet part of ∂Ω by defining
+V (Ω) = {u ∈ H1(Ω)|T rΓDiru = 0}, (1.27)
+with the norm taking into account the presence of the Robin boundary condition
+‖u‖2V (Ω) =
+∫
+Ω |∇u|2dx + αR
+∫
+ΓRob
+|T r∂Ωu|2dμ (1.28)
+associated as previously with the inner product
+(u, v)V (Ω) =
+∫
+Ω ∇u ∇v dx + αR
+∫
+ΓRob
+T r∂Ωu T r∂Ωvdμ. (1.29)
+As it was previously noticed, on V (Ω), as there is a boundary part with zero traces, it holds the Poincaré inequality: there exists a constant CP > 0 depending only on the diameter of Ω such that for all u ∈ V (Ω) it holds (1.21).
+1.5 Regularity of the boundary: why it is important?
+Let Ω be a bounded domain of Rn. We have seen that in the framework of weak solutions, the Dirichlet boundary valued problem for the Poisson equation is understood in the following variational form (1.19) in which there is no more any boundary influence (to compare with (1.24)). Therefore, the unique weak solution u ∈ H01(Ω) exists for an arbitrary bounded domain Ω by a
+simple application of the Riesz representation theorem.
+There are two notions for the regularity question of the solution: the interior regularity and the regularity up to the boundary.
+1.5.1 Interior regularity
+Thanks to Evans [25] Theorem 2 p. 304 and Theorem 3 p. 316, we have (even for solutions in H1(Ω) and thus for different boundary conditions) the interior regularity of the weak solution.
+Definition 1.5.1. Let Ω be a domain of Rn and K be a subset compactly included in Ω, K ⊂⊂ Ω. The weak solution on Ω has the interior regularity, if it has on K the same regularity as for a domain with regular boundaries.
+For instance, in our example of the Poisson equation with homogeneous Dirichlet boundary conditions, if f ∈ C∞(Ω) then u ∈ C∞(Ω) ∩ H01(Ω) independently on the shape of ∂Ω. The
+key point here that Ω is open.
+1.5.2 Regularity up to the boundary
+The property to be in C(Ω) is much more restrictive, since the continuity on a compact requires from u to be bounded and equicontinuous, and does not hold for arbitrary shapes of ∂Ω [23].
+By very technical results of Nyström [58], the necessary condition for Ω is to be a non-tangentially accessible domain (a NTA domain), which we give here the definition for a possible curiosity.
+
+
+1.5. Regularity of the boundary: why it is important? 19
+a) b) c) d)
+Figure 1.5 – Examples of “bad” domains, which are not NTA domains, as soon as at least one of Ω and Rn \ Ω becomes infinitely thing closed to the boundary. From left to right: a) a domain with incoming cusp, b) a domain with outgoing cusp, c) two types of collapsing domains, d) infinite fractal trees with parts becoming infinitely thin.
+Attention: The definition of the NTA domain is not required to be read or understood. However, it is important to know that such domains exist and that they are called NTA domains. As examples, they contain domains with Lipschitz and self-similar von Koch fractal boundaries; hence they are rather general.
+Definition 1.5.2 (NTA domain). [46] A bounded domain Ω ⊂ Rn is called NTA when there exists constants M and r0 such that:
+1. Corkscrew condition: For any point Q ∈ ∂Ω, r < r0, there exists a point A = Ar(Q) ∈ Ω such that M −1r < |A − Q| < r and d(A, ∂Ω) > M −1r.
+2. Rn \ Ω satisfies the Corkscrew condition.
+3. Harnack chain condition: If ǫ > 0 and points P1 and P2 belongs to Ω, d(Pj; ∂Ω) > ǫ and |P1 − P2| < Cǫ, then there exists a Harnack chain from P1 to P2 whose length depends on C and not on ǫ.
+For P1, P2 in Ω, a Harnack chain from P1 to P2 in Ω is a sequence of M non-tangential balls such that the first ball contains P1, the last contains P2, and such that consecutive balls have non empty intersections. Finally, a M non-tangential ball in a domain Ω is a ball B(A, r) in Ω whose distance from ∂Ω is comparable to its radius:
+Mr > d(B(A, r), ∂Ω) > M−1r.
+The main property of a NTA domain that Ω and its complement Rn \ Ω cannot be “thin” close to its boundary ∂Ω.
+Example 1.5.1. We give in Fig. 1.5 the examples of “bad” domains, which are not NTA domains, as soon as at least one of Ω and Rn \ Ω becomes infinitely thin close to the boundary.
+For C2 boundaries it is also known the H2-regularity [25, Thm. 4, p. 317] of the weak solutions:
+if f ∈ L2(Ω) and ∂Ω ∈ C2, then the weak solution of (1.19) u ∈ H2(Ω) ∩ H01(Ω) (see also
+Theorem 5 p. 323 [25] for higher boundary regularity).
+
+
+20 Chapter 1. Introduction to Partial Differential Equations (PDE)
+But it is no more true in the general class of NTA domains. It is important to cite here the theorem of Nyström [58]:
+Theorem 1.5.1. Let Ω ⊂ R2 be von Koch’s snowflake (see Fig. 1.6). Let f ∈ D(Ω) be non negative and non identically zero. Let u ∈ H01(Ω) be the weak solution of the Poisson problem with homogeneous Dirichlet boundary condition. Then
+u ∈ H01(Ω) ∩ C∞(Ω) and u ∈ C(Ω),
+but
+u ∈/ H2(Ω).
+Figure 1.6 – von Koch’s snowflake (5th generation). For its generation and geometrical definition see Chapter 2.
+However, it holds for the convex polygonal domains [36]. The convexity condition does not allow the incoming angles, which create the singularities. This is an example treated on TD1, which we state briefly here.
+Let Ω be the “camembert” (see Fig. 1.7) defined in the polar coordinates by
+Ω = {(r, θ) / r < 1, 0 < θ < α},
+bounded by an arc of circle
+Γ0 = {(1, θ), 0 ≤ θ ≤ α}
+and the rays
+Γ1 = {(r, 0), 0 ≤ r ≤ 1} ∪ {(r, α), 0 ≤ r ≤ 1}.
+Let g ∈ C(Γ0) be such that g(0) = g(α) = 0. We consider the boundary valued problem
+
+
+ 
+−∆u = 0 on Ω, u = g on Γ0, u = 0 on Γ1.
+(1.30)
+We suppose that α > π. The gradient in the polar coordinates is given by
+
+
+1.5. Regularity of the boundary: why it is important? 21
+Ω
+α
+Figure 1.7 – Domain “camembert” on the left. On the right, the divergence on the coin point of the modulus of the gradient (by P. Laurent).
+∇u =
+(∂u
+∂r , 1
+r
+∂u ∂θ
+)t
+.
+Using decomposition of the solution in a series, it thus possible to show that
+∇u =
+(∂u
+∂r , 1
+r
+∂u ∂θ
+)t
+=
+(∑
+k ak kπ
+α r kπ
+α −1 sin( kπ
+α θ)
+∑
+k ak kπ
+α r kπ
+α −1 cos( kπ
+α θ)
+)
+diverge pour π < α < 2π quand r → 0. Moreover we show:
+Proposition 1.5.1. The point of an entering corner is a singular point of the classical solution of Laplace’s equation in that the gradient of the solution tends to infinity at that point (see Fig. 1.7 on the right). So we have
+u ∈ C(Ω) ∩ C2(Ω), but u ∈/ C1(Ω).
+
+
+
+
+Chapter 2
+Fractals and applications
+The interest to the irregular geometries, and in particular, to fractals, initially comes from a goal to model the complexity of the natural structures of different kinds [55, 56], as the coast of Britain, human lung, intestine, the microstructure of electrodes, porous materials. . . The fractal models present a particular case of boundaries or objects themselves of "complicated" multi-scale structures with a bigger dimension than regular shapes. This higher dimension can model, for instance, objects with "thick" boundaries, as vascularized tumors, and be a way to create models favoring energy exchanges between two media [21, 63, 8] for the diffusion process, and [28, 61] for the wave propagation. From physical experiments [51, 26], the impact of the irregularity compared to the smooth geometry is known to be huge. It is also in the origin of the energy localization [27] explained by spectral problems (see Chapter 4). Recently, mathematically, it was shown that the irregular geometries, describing by measures with higher dimensions to compare to the regular, typically Lipschitz, boundaries, are energy minimizers. For instance, in applications of the absorbing anti-noise barriers near highways, non-Lipschitz shapes minimize the acoustical energy [43]. Non-Lipschitz shapes are also the most stables architecture structures under loads when investigating deformation of roofs under snow [44]. In addition, it is shown that the minimum of the energy generally can not be reached by Lipschitz shapes [53]. Since fractals are ideal mathematical shapes, not able to be represented numerically, the question of approximation of optimal irregular shapes by more regular ones is essential from the theoretical and numerical point of view. Irregular geometries appear, going from applications to mathematics, and also going from mathematics to applications.
+2.1 Self-similar fractals
+There are two types of fractals: fractal domain itself as in Fig. 2.1 and domains with a fractal boundary as in Fig. 2.2. The common to these fractals that the self-similar principle constructs them, i.e., by applying to each basic element of a previous fractal generation a chosen number of contractive similitudes (transformations) to obtain the next generation of fractal (see also Fig. 2.3, for more examples and more details see [56]). As it is shown in Fig. 2.1, if we zoom on a fragment of a fractal, this fragment is the same fractal itself, and we can zoom infinitely many times, and each time we find the same shape as previously.
+The paradox of the Serpinski gasket is that by its construction it has the surface equal to 0 and
+
+
+24 Chapter 2. Fractals and applications
+Figure 2.1 – Example of a fractal domain: Sierpinski gasket in R2 (fractal dimension d = log 3/ log 2) and Menger sponge in R3. (E. Akkerman and Wikipedia)
+Figure 2.2 – Five first generations of von Koch’s snowflake fragment of boundary (fractal dimension 1 < d = log 4/ log 3 ≈ 1.26 < 2). (Wikipedia)
+a boundary length equal to +∞:
+S = S0(1 − 1
+4− 3
+42 − 9
+43 − . . .) = 0,
+L = 3L0(1 + 1
+2+ 3
+22 + 9
+23 + . . .) = +∞,
+but considered with its d-measure, it has a finite strictly positive measure and it is a bounded set of R2. Without entering in details how to find the dimension of a fractal, we can notice that each time d is a real number strictly bigger than n − 1 and less than n for a domain of Rn. Roughly speaking, each time d = log(j)/ log(m), where j is equal to the number of elements/fragments in the first generation and m is equal to the number of times that the fragments of the next generation are smaller than the same fragments on the previous generation (the inverse of the contraction number). For example, for von Koch’s snowflake d = log 4/ log 3. In this case, 4 is the number of elements of the first generation, and 3 corresponds to the scaling factor 1/3 for
+
+
+2.2. Applications of fractals to the control of the waves 25
+Figure 2.3 – First generations of 3D domains with fractal boundary of von Koch type. On the top, the fractal dimension 2 < d = log(6)/ log(2) ≈ 2.59 < 3 and on the bo om the fractal dimension 2 < d = log(13)/ log(3) ≈ 2.33 < 3. (Wikipedia)
+the sizes to obtain the next generation. Formally, the dimension d is the solution of the equation
+4
+(1
+3
+)d = 1.
+The Sierpinski gasket and the Menger sponge of Figs 2.1 give us the examples of fractal domains, which are d-sets itself. Figs. 2.2 and 2.3 give the examples of domains with a d-set boundary, the case which we will study in detail.
+Remark: There are also other examples of fractals, as the fractals created by Brownian motion or fractal trees, which for instance, could be useful to model the lungs or trees themselves. We don’t consider these types of fractals in this course, as they are not helpful for our control of waves subject with applications in the noise-absorbing barriers. Besides, the fractal trees need a completely different functional analysis treatment, since they are not d-sets and not NTA domains [1].
+2.2 Applications of fractals to the control of the waves
+As we can notice from the previous section, all fractal’s common property is to have multiscaling sizes/lengths. From physics, it is known that the interaction of a wave with a medium/obstacle depends on the geometrical shape of the medium to compare to the wavelength of the wave.
+The noise (of cars, trains, planes, instruments ...) presents a source containing a complex combination of different acoustical frequencies corresponding to different wavelengths. It is complicated to model it precisely, but it is simpler to define the ranges of frequencies and wavelengths possibly, or even better, the most frequently emitted by the source. Thus the problem is to absorb the noise created by a chosen source in the most efficient way, hence on all frequency range
+
+
+26 Chapter 2. Fractals and applications
+of the interest. As the optimality of the absorption depends on the ratio geometrical size of a fragment of an absorbing wall
+wavelength of the wave ≈ 1
+2 , (2.1)
+for large frequency ranges we need to have different geometrical lengths in the shape of the absorbing wall and to privilege the multiscaling geometries. Therefore, ideally, if we want to be optimal (or as close as possible to the optimal) in an infinite range of frequencies, we need to have infinitely many geometrical scaling. Hence this could be naturally modeled by a fractal boundary. However, the audible frequencies don’t go to infinity, and hence practically a prefractal shape could be rather efficient too. On Fig. 2.4, we can see the multiscaling forms of absorbing material in the acoustical and electromagnetic anechoic chambers constructed to dissipate a wide range of frequencies. The acoustical anechoic chamber of Microsoft has −20dB noise level and can be considered as the quietest place on earth. We also have an example in Fig. 2.5 of the most efficient between existing acoustical road anti-noise walls “Fractal wall”(TM), designed by B. Sapoval and M. Filoche, patent École Polytechnique and Colas, created from the cement-wood porous material with a multiscale shape (see Subsection 2.3). For a more detailed discussion about the control of the waves by the shape of a wall, see Chapter 5.
+Figure 2.4 – On the left: the anechoic chamber of Microsoft: −20dB noise level (Alpha Acoustics). On the right: the electromagnetic anarchic chamber of Thales (D. Lecoint).
+Figure 2.5 – “Fractal wall” (TM) Brevet Colas-École Polytechnique 03/00881 US patent 7308965B2.
+From another point of view, to absorb the energy of an acoustical wave, the barrier or the wall need to be constructed with a porous medium (see for examples Fig. 2.6), which by its complicity could be modeled as a fractal domain, for instance as Menger sponge. Nevertheless, we prefer to avoid this additional difficulty, knowing by the experimental measurements on a chosen porous material its essential macroscopic properties, from which it is possible to define the corresponding energy losses (see Chapter 3).
+2.3 Example of “Fractal” TM wall
+For an introduction to experimental acoustical framework of auto traffic noise see section 2 of [4].
+
+
+2.4. PDEs on domains with fractal boundaries 27
+Figure 2.6 – Fractals as multiscales porous materials (D. Grebenkov).
+Ideas of creation of a bigger interaction of the wave with the absorbent media by a multiscale geometry favored the eigenmodes localization phenomena [27] were successfully applied in the construction of the anti-noise barrier named Fractal Wall1 by B. Sapoval and M. Filoche (PMC, CNRS, École Polytechnique), the most efficient wall in the absorption of low-frequency traffic of highways (see Fig. 2.5). It is made with a porous material cement with wood inclusions and has a multiscale shape to capture the lower frequency waves. The construction of one panel performs by demolding. The demolding procedure of small fragments of the wall is delicate, as they can be easily broken. This complication of its construction makes the Fractal Wall expensive compare to classical, less efficient walls. In Fig. 2.7, it is shown the coefficient of the absorption of the Fractal Wall to compare to the wall with the plane shape. This coefficient is measured experimentally (in a reverberant chamber). It is denoted here by α, but it is not the complex coefficient in the Robin boundary condition of (5.7).
+Considering the decibel performances of the wall, it is possible to introduce the efficiency coefficient by EU norm 20354. Discretizing the range of frequencies and taking the average of the traffic noise intensity in these frequencies, the efficiency coefficient is defined by the formula:
+DLα = −10 log10
+
+1 −
+∑
+i αiI (A)
+i
+∑
+i I (A)
+i
+
+ = 17dB(A).
+The best wall in the European market before had 11dB(A).
+2.4 PDEs on domains with fractal boundaries
+As it was mentioned in Chapter 1, fo the simplicity, to avoid too much abstract framework, in this course we only suppose that
+1. for d = n − 1 the boundary ∂Ω is Lipschitz (see Definition 1.3.2);
+2. for d ∈]n − 1, n[ the boundary ∂Ω is a self-similar fractal (for examples see Section 2.1).
+For the treatment of more general boundaries, see [5, 62, 53, 43, 44].
+There is the following important theorem, which is admitted without proof, but it is very important to know, as we will use it many times in what following:
+1product of Colas Inc., French patent N0- 203404; U.S. patent 10”508,119.
+
+
+28 Chapter 2. Fractals and applications
+Figure 2.7 – B. Sapoval: The experimental coefficient of absorption (measured in a reverberant chamber) of anti-noise barrier ’Fractal Wall’ TM, Colas-École Plytechnique (French patent N0203404; U.S. patent 10”508,119), compared with the plane wall of the same volume and made of the same porous material (cement with wood inclusions). The main performance of the fractal wall is in the lower frequencies.
+Theorem 2.4.1. Let Ω be a bounded domain in Rn with a d-set compact boundary ∂Ω, Lipschitz for d = n − 1 or self-similar fractal for d ∈]n − 1, n[, on which it is defined a d-measure μ, n − 1 ≤ d < n. Then,
+1. H1(Ω) is compactly embedded in L2(Ω);
+2. TrΩ : H1(Rn) → H1(Ω) is a linear continuous and surjective operator with linear bounded right inverse (the extension operator EΩ : H1(Ω) → H1(Rn));
+3. the operators Tr : H1(Rn) → L2(∂Ω, μ), and Tr∂Ω : H1(Ω) → L2(∂Ω, μ) are linear compact operators;
+4. the usual norm ‖ · ‖H1(Ω) is equivalent to
+‖u‖Tr =
+(∫
+Ω |∇u|2dx +
+∫
+∂Ω |Tru|2dμ
+)1
+2 (2.2)
+for all u ∈ H1(Ω).
+We will prove the equivalence of the norms on TD 2. This theorem is useful to establish the wellposedness of the Poisson or the Helmholtz problems with Robin or mixed boundary conditions
+
+
+2.4. PDEs on domains with fractal boundaries 29
+Figure 2.8 – On the left the coefficient of the absorption of the Fractal Wall and on the right the traffic noise spectrum and the normalized traffic noise spectrum (B. Sapoval).
+on d-sets. But before to do it, we need to understand what it is a compact set and a compact operator, explained in Chapter 6.
+As mentioned previously, the fractal boundary allows all notions as the normal derivative and the integration by parts only in the weak sense.
+
+
+
+
+Chapter 3
+Models of wave propagation
+In this course, we chose the simplest possible models of the wave propagation useful for our typical acoustic problem: to absorb most efficiently the noise of a source by a wall of a fixed porous material (and of fixed quantity). We notice that the porous materials are acoustical absorbent. For the electromagnetic waves, the absorbent materials are different (ferromagnetic foams) because of the different nature of the wave, and they were presented in the introductory part of this course. The “efficient absorption” is supposed to be ensured by a wide choice of wall’s shape, which acoustical performances are considered in the comparison of a plane wall with the same quantity of the porous material (of the same volume). This problem is a complex physical problem schematically presented in Fig. 3.1. We will discuss it in detail for an example
+Reflected Diffused
+Diffracted
+Absorbed
+Transmitted
+Wall
+Ground
+Ground effect
+Source
+Figure 3.1 – The complexity of the wave (acoustical or electromagnetic) propagation problem to model.
+in the acoustical framework.
+
+
+32 Chapter 3. Models of wave propagation
+3.1 Wave equation and Helmholtz equations
+3.1.1 Linear wave equation
+Let us say several words about the derivation of the linear wave equation (how it could be obtained).
+For instance, it could be obtained by a linearization (by performing small perturbations around a constant state with the choice to keep only the largest terms) of a very general thermo-elastic dynamical system given by compressible Navier-Stokes equations with the assumption [60] of the potential motion and initially small viscosity effects of the medium.
+For simplicity, let us demonstrate the derivation of the wave equation from the isentropic (i.e independent of entropy) evolution of the thermo-elastic non-viscous media described by the following Euler system:
+∂tρ + div(ρv) = 0 , ρ(∂tv + v · ∇v) = −∇p(ρ) . (3.1)
+Here the ρ is the density, v is the velocity and p is the pressure, supposed to be a function of ρ. Any constant state (ρ0, v0) is a stationary solution of system (3.1). Linearization near this state introduces the perturbations with the same order ǫ (a dimensional parameter much smaller than 1)
+ρ = ρ0 + ǫρ ̃, v = v0 + ǫv ̃.
+Taking v0 = 0 and putting the last expressions in (3.1), we obtain the acoustic system:
+∂tρ ̃ + ρ0∇.v ̃ = 0 , ρ0∂tv ̃ + p′(ρ0)∇ρ ̃ = 0. (3.2)
+System (3.2) is equivalent to the wave equation:
+1
+c2 ∂t2ρ ̃ − ∆ρ ̃ = 0 , ∂tv ̃ = − p′(ρ0)
+ρ0
+∇ρ ̃, (3.3)
+where c =
+√
+p′(ρ0) is the speed of sound in the unperturbed media. The linear wave equation can be also obtain for the velocity or for the pressure of the wave.
+Actually, the linear wave equation appears from (3.1) if we consider only the terms of the zero order on ε:
+∂t2u − c2∆u = 0. (3.4)
+The second partial time derivative ∂2u
+∂t2 in the wave equation requires two initial data:
+u|t=0
+no=te u(0, x) = u0(x), x ∈ Ω (3.5) ∂u ∂t
+∣ ∣ ∣ ∣
+∣t=0
+no=te ∂u
+∂t (0, x) = u1(x), x ∈ Ω (3.6)
+where u0 and u1 are given functions of x which describe the initial wave propagation in time t = 0. Without the initial data u0 and u1 the propagation process is undefined.
+
+
+3.1. Wave equation and Helmholtz equations 33
+Remark: Compare the difference between the solution of the ordinary differential equation of the second order d2y
+dx2 − 3 dy
+dx + 2y = ex
+and of its Cauchy problem
+d2y
+dx2 − 3 dy
+dx + 2y = ex,
+y(0) = 0, dy
+dx (0) = 0.
+Problem (3.4)–(3.6) posed for x ∈ Rn is called the Cauchy problem for the wave equation.
+But if we search a solution of the problem in a domain Ω ⊂ Rn with a boundary ∂Ω 6= ∅, we need to identify the boundary conditions as well (see Subsection 1.4.1).
+In the acoustical wave propagation framework, the boundary conditions of Subsection 1.4.1 considered for the linear wave equation could have the following physical interpretation:
+1. the Dirichlet boundary condition u|ΓDir = φ(t, x), x ∈ ΓDir, t ≥ 0 models the source of a sound or noise projected to the boundary ΓDir;
+2. the homogeneous Neumann boundary condition ∂u
+∂ν |ΓNeu = 0 for t ≥ 0 models the reflec
+tive surfaces or sometimes the surfaces with very small and negligible absorption.
+3. the homogeneous Robin boundary condition ∂u
+∂ν + αu|ΓRob = 0 models more precisely the
+reflective/absorption phenomena depending on the values of the parameter α. We will consider this boundary condition in the next section.
+If we would like to model the linear wave propagation in an open or a partially open situation as in Fig. 3.1, then especially for numerics, we need to limit the computations of the solution to a bounded domain. In this situation, we need to impose artificial boundary with some absorbent boundary conditions, which are maximum possibly non-reflective. If it is the case, the wave, absorbed by this artificial boundary, is not reflected and hence does not affect any propagation changes inside the domain. Thus, the obtained solution inside the bounded domain can be considered by the desired solution of the initial open space problem, since the main property, to have outgoing waves never returning back, is (at least approximatively) respected.
+There is a lot of literature, theoretical and numerical, on this subject. Numerically, it is sometimes more convenient to create not an artificial boundary, but an artificial region or a part of the domain, called Perfect Matched Layers (PML) on which the wave is (artificially) exponentially attenuated (see, for instance, the references given in the introduction of this article [52]).
+In this course, we mainly consider the damping of the waves modeling by the Robin type boundary condition and, in particular, the artificial boundary conditions for the Helmholtz equation named the Sommerfeld radiation conditions for the scattering problems.
+The problem to find u satisfying for all x ∈ Ω and t ≥ 0 the linear wave equation (3.4), the initial conditions (3.5)–(3.6) and some boundary conditions discussed above is called the initial
+
+
+34 Chapter 3. Models of wave propagation
+boundary valued problem for the wave equation.
+Let us just consider for an example the homogeneous Dirichlet initial-boundary valued problem for some initial data u0 ∈ H1(Ω) and u1 ∈ L2(Ω).
+Multiplying formally the linear wave equation (3.4) by ∂tu and integrating over Ω, we have
+∫
+Ω(∂t2u − c2∆u)∂tudx = 0.
+To able to integrate by parts using Proposition 1.3.1 we need to have u ∈ H01(Ω) and ∆u in
+L2(Ω). For the well posedness of ∫
+Ω ∂t2u∂tudx we also need to have ∂t2u and ∂tu in L2(Ω).
+Thus, for the simplicity we suppose that u ∈ C2([0, T ], Hˆ01(Ω)) with the notation
+Hˆ01(Ω) = {u ∈ H01(Ω)| ∆u ∈ L2(Ω)}.
+Remark: To say ∆u ∈ L2(Ω) for u ∈ H01(Ω), it means to say that there exists an element
+f ∈ L2(Ω) such that ∆u = f (in the distributional sense of D′(Ω)). As u ∈ H01(Ω), it means
+that u is the weak solution of the Poisson problem with the homogeneous Dirichlet boundary condition:
+∀v ∈ H01(Ω)
+∫
+Ω ∇u∇vdx =
+∫
+Ω f vdx.
+It is known, by the Lax-Milgram Theorem or the Riesz Representation Theorem, that for all f ∈ L2(Ω) there exists a unique solution u ∈ H01(Ω). Consequently, the mapping
+f (= ∆u) ∈ L2(Ω) 7→ the weak solution u ∈ H01(Ω)
+is bijective.
+Thus, the space Hˆ01(Ω) with the norm ‖u‖2Hˆ01(Ω) = ‖u‖2
+H01(Ω) + ‖∆u‖2L2(Ω) is a (closed!) subspace
+of H01(Ω) of all weak solutions of the homogeneous Dirichlet Poisson problem.
+Remark: If w ∈ Hˆ01(Ω) for Ω ⊂ Rn, n ≥ 2, then it does not follow that w ∈ H2(Ω) or w ∈
+H02(Ω). The existence of w, its first order weak derivatives and its weak Laplacian ∂x21 +. . .+∂x2n
+in L2(Ω) is not enough to ensure in addition the existence of all weak derivatives of the second order in L2(Ω). Indeed,
+H02(Ω) ( Hˆ01(Ω).
+The space Hˆ01(Ω) is the natural space to provide the validity of the Green formula and formula of
+integration by parts. Hence, it is a natural space [22] to consider the weak solutions of different models involving the Laplacian in general domains without a regular boundary, which could ensure H2-regularity of the weak solutions of the Poisson boundary value problem.
+In this case, we can apply the Green formula on the term with the Laplacian and also change the integration over Ω and the time derivative (by the Theorem of the derivation under the integral from CIP and EDP courses of the first year).
+Indeed, by the integration by parts, and taking into account that ∂tu ∈ H01(Ω) (i.e. its trace on
+
+
+3.1. Wave equation and Helmholtz equations 35
+∂Ω is zero), we firstly have
+∫
+Ω ∂tu∂t2udx +
+∫
+Ω c2∇u.∂t∇udx = 0.
+Then we notice that
+∂tu∂t2u = ∂t
+|∂tu|2
+2 and ∇u.∂t∇u = ∂t
+|∇u|2
+2.
+Consequently, writing
+∫
+Ω ∂t
+|∂tu|2
+2 dx = d
+dt
+∫
+Ω
+|∂tu|2
+2 dx, (3.7)
+∫
+Ω c2∂t
+|∇u|2
+2 dx = d
+dt
+∫
+Ω c2 |∇u|2
+2 dx, (3.8)
+we conclude that d
+dt
+(∫
+Ω[|ut|2 + c2|∇u|2](t, x)dx
+)
+= 0.
+We recognize in this quantity the total energy of the wave problem given by the sum of the kinetic and potential energy:
+E(t) =
+∫
+Ω[|ut|2 + c2|∇u|2](t, x)dx. (3.9)
+Therefore, we obtained the conservation of the energy of our initial-boundary valued problem with the homogeneous Dirichlet boundary condition:
+d
+dtE(t) = 0.
+Let us just notice that this equivalent to
+∀t ≥ 0 E(t) = E(0) =
+∫
+Ω[|u1|2 + c2|∇u0|2](x)dx.
+Question: Do we have a conservation of the energy if we replace the Dirichlet condition by the homogeneous Neumann boundary condition? What will change if we consider the homogeneous Robin boundary condition with α > 0? What is happening in the case when α < 0?
+3.1.2 Helmholtz equation
+Let us consider a non homogeneous wave equation
+∂t2u − c2∆u = f (x, t)
+with a source term f periodic with a frequency ω on time and with the spatial amplitude c2f (x),
+f (x, t) = c2f (x)e−iωt.
+Therefore, if we search the solutions in the form u(x, t) = U(x)e−iωt with the unknown amplitude U(x), then for the function U(x) no=te u(x) we obtain a stationary equation
+△u + k2u = −f (x), with the wave number k = ω
+c . (3.10)
+Equation (3.10) is called the Helmholtz equation.
+
+
+36 Chapter 3. Models of wave propagation
+Sommerfeld radiation conditions for the sca ering problems
+ν
+G
+a(·, ·)
+v(x)
+S
+Figure 3.2 – Example of the bounded obstacle G with a boundary S.
+An example of the boundary-valued problem for the Helmholtz equation is the scattering problem.
+For x ∈ R2 or R3, suppose that the incoming (from infinity) plane wave eik(a,x), |a| = 1, k > 0 is modified due to the presence of some obstacles on the boundary S of the bounded region G (Fig. 4.5). The obstacle can be defined, for example, using the boundary condition (see Subsection 1.4.1)
+u|S = 0 or ∂u
+∂ν
+∣ ∣ ∣ ∣
+∣S
+= 0.
+This obstacle generates a scattered wave v(x). Far from the scattering centers this wave will be close to the outgoing spherical wave
+v(x) = f
+(x
+|x|
+) eik|x|
+|x| + o
+(1
+|x|
+)
+.
+Therefore, for |x| → ∞ the wave v(x) must satisfy the following conditions
+v(x) = O
+(1
+|x|
+)
+, ∂v(x)
+∂|x| − ikv(x) = o
+(1
+|x|
+)
+, (3.11)
+called Sommerfeld radiation conditions. The function f (s), s = x
+|x|, is called the amplitude of
+the scattering. The total wave perturbation u outside of G (in Rn \ G) is given by the sum of the plane and the scattered waves:
+u(x) = eik(a,x) + v(x).
+3.2 Absorption phenomena
+As it was mentioned, the porous materials are acoustical absorbents.
+3.2.1 Porous materials
+We give several examples of porous or fibrous materials which are used in the interior isolation of buildings on Fig. 3.3. As it is could easily seen from these examples (see also Chapter 2) that
+
+
+3.2. Absorption phenomena 37
+Figure 3.3 – Example of heterogeneous and anisotropic porous or fibrous materials which are used in the interior isolation of buildings (ANR “Silent wall”).
+the porous materials have very complicated micro structure filled with the air. The complexity of a porous material and its dissipative properties can be described by these physical macroscopic characteristics:
+1. the porosity φ (dimensionless),
+2. the tortuosity αh (dimensionless)
+3. the resistivity to the passage of air σ (N.m−4.s, i.e. depends on the size of the tested material).
+The experimental data for the fibrous materials given partially on Fig. 3.3, named Isorel, ITFH, B4 and B5 of these physical characteristics are given on Fig. 3.4 and their experimental absorption coefficients are presented on Fig. 3.5.
+Question: How depends the coefficient of absorption for a fixed porous materials from the thickness of a sample? How it could explained? Which material could be more interesting in the sound absorption problem and why (give different scenarios with an argumentation).
+3.2.2 Damping in volume
+There are two possibilities to describe the acoustic wave absorption by a porous medium. The first one is to consider wave propagation in two media, typically air and a wall, which corresponds to damping in the volume. The most common mathematical model for this is the damped
+
+
+38 Chapter 3. Models of wave propagation
+Figure 3.4 – Physical macroscopic characteristics σ, φ, αh of four types of porous materials for samples of different thickness (LAUM, ANR “Silent wall”).
+wave equation [7]. The second one is to consider only one lossless medium, air, and to model energy dissipation by a damping condition on the boundary. In both cases, we need to ensure the same order of energy damping corresponding to the physical characteristics of the chosen porous medium as its porosity φ, tortuosity αh, and resistivity to the passage of air σ [38].
+Thanks to Ref. [38], we can define the coefficients in the damped wave equation (damping in volume) as functions of the characteristics mentioned above. More precisely, for a regular bounded domain Ω ⊂ R2 (for instance ∂Ω ∈ C1) composed of two disjoint parts Ω = Ωair ∪ Ωwall of two homogeneous media, the air in Ωair and a porous material in Ωwall, separated by an internal boundary Γ, we consider the following boundary value problem (for the pressure of the wave)
+
+
+ 
+ξ(x)∂t2u + a(x)∂tu − ∇ · (η(x)∇u) = 0 in Ω,
+∂u
+∂n |Rt×∂Ω ≡ 0, [u]Γ = [η∇u · n]Γ = 0,
+u|t=0 = u01Ωair , ∂tu|t=0 = u11Ωair ,
+(3.12)
+with ξ(x) = 1
+c20 , a(x) = 0, η(x) = 1 in air, i.e., in Ωair, and
+ξ(x) = φγp
+c20
+, a(x) = σ φ2γp
+c20ρ0αh
+, η(x) = φ
+αh
+in the porous medium, i.e., in Ωwall. The external boundary ∂Ω is supposed to be rigid, i.e., Neumann boundary condition are applied, and on the internal boundary Γ we have no-jump conditions on u and η∇u · ν, where ν denotes the normal unit vector to Γ. Here, c0 and ρ0 denote respectively the sound velocity and the density of air, whereas γp = 7/5 denotes the ratio of specific heats.
+If we repeat the procedure of finding the energy of the wave equation for the damped wave equation, we obtain
+d
+dtE(t) = −2
+∫
+Ωwall
+a(x)|∂tu|2dx < 0,
+as soon as a(x) > 0 in Ωwall. This ensures that the energy decays in time. We can notice that if there is no porous material, i.e. a ≡ 0 on Ω, then as previously, we have the energy conservation. The question about is it possible to maximize the speed of the energy decay to have, for instance, exponential decay of energy in time, is actually the question of the theory of control of the waves. For a constant volume of the wall, constructed with a fixed porous material, the maximization
+
+
+3.2. Absorption phenomena 39
+Figure 3.5 – Coefficient of absorption experimentally measured for samples of different thickness, from top to bo om, for Isorel, for ITFH and for B5.
+of the energy decay depends exclusively on the shape of the wall and its location corresponding to the wave’s source. These questions are discussed in Chapter 5.
+This model is obtained in the assumption that the wave all times propagates in the air, involving the air in the porous medium’s pores. The damped wave equation is the simplest model of this propagation, and there are other models known to be more precise but more complicated too [38, 32].
+
+
+40 Chapter 3. Models of wave propagation
+Time dependent energy decay We consider the three cavities Ω = Ω0 ⊔Ω1 =]0, 1[×]−2, 2[, partially shown on Fig. 3.6 with two homogeneous media, air (lower part) and a porous material (upper part), separated by an internal boundary Γi, i = 0, 1, 2. To preserve the volume of each medium and to model the increasing irregularity of the interface, as compared to the plane Γ0 (at y = 0), we choose Γ1 and Γ2 as the first two fractal generations of a symmetric element. The external boundary ∂Ω is supposed to be perfectly rigid (Neumann boundary condition). Air is considered as a loss-less medium, and the porous medium (ISOREL) is considered as a dissipative homogeneous medium. As it was mentioned in Chapter 3, using the ideas of Hamet [38], we can describe the wave propagation in the porous material by a damped wave equation involving the physical characteristics of the material: the porosity φ, the tortuosity αh, and the resistivity to the passage of air σ. Denoting by c0 and ρ0 the sound velocity and the density in the air, and by γp = 7/5 the ratio of specific heats, the equations of wave propagation in Ω are given by
+0
+1
+2
+0.1
+1
+0.01 0.1 Time
+Energy
+Γ
+Γ
+Γ
+Figure 3.6 – Pressure contours at t = 0.01 in cavities with an internal boundary of different Minkowski fractal generations (from left to right and top to bo om: Γ0 (flat), Γ1 and Γ2) and the corresponding energy damping. The size of the mesh is 128 × 512.
+ξ(x)∂t2u + a(x)∂tu − ∇ · (η(x)∇u) = 0 in Ω = Ω0 ⊔ Ω1, (3.13)
+with ξ(x) = 1
+c20 , a(x) = 0, η(x) = 1 in the air and ξ(x) = φγp
+c20 , a(x) = σ φ2γp
+c20ρ0αh , η(x) = φ
+αh
+in the porous medium. Equation (3.13) is supplemented with the following no-jump conditions through Γi
+[u]Γi = [η∇u · ν]Γi = 0
+and with an initial data chosen as a Gaussian, centered in a fixed point x0 = (0.75, −1.5) of Ω0:
+u|t=0 = 1
+δ√2π e− |x−x0|2
+2δ2 , ∂tu|t=0 = 0,
+
+
+3.2. Absorption phenomena 41
+where δ = 0.1. Such a choice of δ ensures that supp(u|t=0) is extremely small outside Ω0. Equation (3.13) is the wave equation in the air (a = 0), and is the damped wave equation [7, 18] (a 6= 0) in the porous medium. This provides the energy decay (see TD1):
+1 2
+d dt
+(∫
+Ω
+[
+ξ(∂tu)2 + (μ∇u) · ∇u
+]
+dx
+)
+=−
+∫
+Ω a(∂tu)2dx. (3.14)
+We discretize Eq. (3.13) in a way which mimics the energy dissipation (3.14), and which is an adaptation to damped acoustic waves of the finite volume method presented in Ref. [42]. Let uin
+be the discretized pressure in the control volume i at time n∆t, then we write
+ξ un+1
+i − 2uin + un−1
+i
+∆t2 + a un+1
+i − un−1
+i
+2∆t − [∇ · (μ∇un)]i = 0,
+so that the energy like functional
+En+1/2 := 1
+2
+(∫
+Ωξ
+( un+1 − un
+∆t
+)2dx +
+∫
+Ω μ∇un · ∇un+1dx
+)
+is damped as
+1 ∆t
+(
+En+1/2 − En−1/2)
+=−
+∫
+Ω1
+a
+( un+1 − un−1
+2∆t
+)2
+dx.
+Fig. 3.6 shows that an irregular shape of the internal boundary can significantly increase the dissipation properties of the porous medium (Γ1,2 as compared to Γ0). The energy damping by Γ1, compared to the damping performances of Γ0, is much better, and we notice that the wavelength λ of the wave, created by the initial data, is comparable (twice bigger) to the characteristic length scale size of the geometry Γ1. At the same time, the small difference in the energy decays corresponding to the internal boundaries Γ1 and Γ2 confirms that the optimal iteraction of the wave with the wall happens for the geometric fragments of the size λ/2. We see that the wave does not penetrate in the smallest geometry parts of size λ/8, but the wave still keeps a good penetration for the scales of the order λ/2 as for Γ1. This finally implies that the shape of the internal boundary does not need to be “too complicated” for being an efficient acoustic absorbent for a fixed frequency.
+3.2.3 Damping by the boundary
+Instead of energy absorption in volume, we can also consider the following frequency model of damping by the boundary. Let Ω be a connected bounded domain of R2 with a Lipschitz boundary ∂Ω.
+We suppose that the boundary ∂Ω is divided into three parts ∂Ω = ΓDir ∪ ΓNeu ∪ Γ (see Fig. 3.7 for an example of Ω) and consider
+
+
+
+△u + ω2u = f (x), x ∈ Ω,
+u = g(x) on ΓDir, ∂u
+∂n = 0 on ΓNeu, ∂u
+∂n + α(x)u = Trh(x) on Γ, (3.15)
+where α(x) is a complex-valued regular function with a strictly positive real part (Re(α) > 0) and a strictly negative imaginary part (Im(α) < 0).
+
+
+42 Chapter 3. Models of wave propagation
+Γ
+ΓN eu
+ΓN eu
+ΓDir Ω Porous
+Figure 3.7 – Example of a domain Ω in R2, shown in blue, with three types of boundaries: ΓDir, where there is a source of the noise and ΓNeu for the reflective part (for instance of a room or of a tunnel) and Γ on which we impose an absorbing boundary condition giving an equivalent energy decay as for the model with damping in the volume.
+Remark: This particular choice of the signs of the real and the imaginary parts of α are needed for the well-posedness properties [30] and the energy decay of the corresponding timedependent problem. In addition, as the frequency ω > 0 is supposed to be fixed, α can contain a dependence on ω, i.e., α ≡ α(x, ω).
+Problem (5.7) is a frequency version of the following time-dependent wave propagation problem with U (t, x) = e−iωtu(x), considered in Ref. [10] for g = 0 on ΓDir:
+∂t2U − △U = −e−iωtf (x), (3.16)
+U |t=0 = U0, ∂tU |t=0 = U1, (3.17)
+U |ΓDir = g, ∂U
+∂n
+∣ ∣ ∣ ∣
+∣ΓN eu
+= 0, (3.18)
+∂U
+∂n − Im(α(x))
+ω ∂tU + Re(α(x))U |Γ = 0. (3.19)
+To show the energy decay, we follow [10] and introduce the Hilbert space X0(Ω), defined as the Cartesian product of the set of functions u ∈ H1(Ω), which vanish on ΓDir with the space L2(Ω). The equivalent norm on X0(Ω) is defined by
+‖(u, v)‖2X0(Ω,μ) =
+∫
+Ω
+(
+|∇xu|2 + |v|2)
+dx +
+∫
+Γ Re(α(x))|Tru|2dμ
+with the corresponding inner product
+〈(u1, u2), (v1, v2)〉 =
+∫
+Ω (∇xu1∇xv1 + u2v2) dx +
+∫
+Γ Re(α(x))Tru1Trv1dμ. (3.20)
+Here μ is a finite positive d-measure on Γ (n − 1 ≤ d < n), which in the case of a regular Γ (at least Lipschitz), if there are no specific assumptions, is equal to the Lebesgue measure on Γ, and in this case is denoted by λ.
+
+
+3.2. Absorption phenomena 43
+The advantage of this norm is that the energy balance of the homogeneous problem (3.16)(3.19) has the form (see TD 1)
+∂t
+(
+‖(U, ∂tU )‖2X0(Ω,μ)
+)
+=2
+ω
+∫
+Γ Im(α(x))|Tr∂tU |2dμ.
+Therefore, for Im(α) < 0 on Γ, the energy decays in time. We also notice that the positive real part of α add a positive term in the definition of the energy and thus describe the reflection of Γ. For the case of a smooth boundary ∂Ω (at least Lipschitz), we have the well-posedness of both models. Thanks to [10], for all f ∈ L2(Ω), (U0, U1) ∈ X0(Ω) there exists a unique solution (U, Ut) ∈ C(]0, ∞[, X0(Ω)) of system (3.16)–(3.19) under the assumption that Re(α(x)) > 0 and Im(α(x)) < 0 are continuous functions.
+But it is also possible to have the well posedness on domains with a d-set self-similar fractal boundaries n − 1 ≤ d < n. (See TD3 or for more details [53]). More precisely, for g = 0 we have (the result will be partially proved in TDs)
+Theorem 3.2.1. Let Ω ⊂ Rn be a bounded domain with a (compact) Lipschitz or self-similar d-set boundary ∂Ω (n − 1 < d < n) with a d-measure μ. Assume ∂Ω = ΓDir ∪ ΓNeu ∪ Γ such that it holds (1.25), μ(Γ) > 0, Γ ⊆ ∂Ω and ΓDir and Γ are also compact with the same properties as ∂Ω itself. Let in addition g = 0 and Re(α) > 0, Im(α) < 0 on Γ (α is a continuous function or simply a constant).
+Then for all f ∈ L2(Ω), h ∈ L2(Γ, μ), and ω > 0 (or equivalently, k > 0) there exists a unique solution u ∈ V (Ω) (the space V (Ω) is defined in (1.27)) of the Helmholtz problem (3.15)in the following sense: for all v ∈ V (Ω) it holds (see also (7.8))
+∫
+Ω ∇u · ∇v ̄dx − ω2
+∫
+Ω uv ̄dx +
+∫
+Γ α Tr u Tr v ̄ dμ = −
+∫
+Ω f v ̄dx +
+∫
+Γ Tr h Tr v ̄ dμ. (3.21)
+Moreover, the solution of problem (3.21) u ∈ V (Ω), continuously depends on the data: there exists a constant C > 0, depending only on ‖Tr‖L(V (Ω),L2(Γ,μ)), CP (Ω) (the Poincaré constant associated to Ω), α and ω, such that
+‖u‖V (Ω) ≤ C
+(
+‖f ‖L2(Ω) + ‖h‖L2(Γ,μ)
+)
+. (3.22)
+In addition, if, for m ∈ N∗, ∂Ω ∈ Cm+2 (hence μ is an (n − 1)-measure on ∂Ω), f ∈ Hm(Ω), h = 0, then the solution u belongs to Hm+2(Ω).
+For the treatment of the non homogeneous Dirichlet boundary condition see Remark 7.4.3.
+Remark: Going back to the situation of Fig. 3.1 we could imagine the following configuration presented on Fig. 3.8.
+3.2.4 Calculation of the complex coefficient α in the Robin boundary condition for a fixed porous material
+We know the macroscopic physical characteristics of a fixed porous medium as porosity φ, tortuosity αh and resistivity to the passage of air σ. We then know how to define the corresponding
+
+
+44 Chapter 3. Models of wave propagation
+∂u
+∂n |ΓNeu = 0
+∂u
+∂n − iku|Γabs = 0
+∂u
+∂n + α(ω)u|Γ = 0
+u|ΓDir = g(y) ∆u + k2u = 0 on Ω, k = ω
+c >0
+Figure 3.8 – Typical model for the situation of Fig. 3.1.
+energy decay from the damped wave equation. But mostly for the numerical simplifications, we would like to work with a model of the wave propagation in the air with a boundary giving us the shape of an absorbing wall and on which we impose a Robin type complex boundary condition ∂u
+∂n + α(ω)u|Γ = 0,
+ensuring the same wave propagation behavior as for the case of damping in the volume (see Fig. 3.9).
+Air Air Porous
+Figure 3.9 – We want to find a condition on the boundary of the wall which ensures that the solution of the one medium problem is almost the same as the solution in the air of the two media problem.
+In other words we need to find the coefficient α from the following minimization problem, once again for the simplicity considered for a plane shape of the wall:
+
+             
+            
+in Ωair :
+∇ · (η0∇u0) + ω2ξ0u0 = 0 in Ωwall :
+∇ · (η1∇u1) + ω2ξ1
+(
+1 + ai
+ξ1ω
+)
+u1 = 0 on Γ :
+u0 = u1 and η0∇u0 · ν = η1∇u1 · ν on the left boundary: u0(−L, y) = g(y)
+
+            
+           
+in Ωair :
+∇ · (η0∇u2) + ω2ξ0u2 = 0
+on Γ :
+η0∇u2 · ν + αu2 = 0 on the left boundary: u2(−L, y) = g(y)
+
+
+3.2. Absorption phenomena 45
+Find α such that for constants A ≥ 0 and B ≥ 0
+A||u0 − u2||2L2(Ωair) + B||∇(u0 − u2)||2L2(Ωair) → min .
+Thus it is possible to solve this problem numerically, using the formulas of the following Theorem (the proof is given in [53], we don’t ask for it in this course):
+Theorem 3.2.2. Let Ω =] − L, L[ × ] − l, l[ be a domain with a simply connected sub-domain Ωair, whose boundaries are ]−L, 0[ ×{l}, {−L} × ]−l, l[, ]−L, 0[ ×{−l} and another boundary, denoted by Γ, which is the straight line starting in (0, −l) and ending in (0, l). In addition let Ωwall be the supplementary domain of Ωair in Ω, so that Γ is the common boundary of Ωair and Ωwall. The length L is supposed to be large enough.
+Let the original problem (the frequency version of the wave damped problem (3.12)) be
+−∇ · (η0∇u0) − ω2ξ0u0 = 0 in Ωair, (3.23)
+−∇ · (η1∇u1) − ω2ξ ̃1u1 = 0 in Ωwall, (3.24)
+with
+ξ ̃1 = ξ1
+(
+1 + ai
+ξ1ω
+)
+,
+together with boundary conditions on Γ
+u0 = u1 and η0∇u0 · ν = η1∇u1 · ν, (3.25)
+and the condition on the left boundary
+u0(−L, y) = g(y), (3.26)
+and some other boundary conditions. Let the modified problem be
+−∇ · (η0∇u2) − ω2ξ0u2 = 0 in Ωair (3.27)
+with boundary absorption condition on Γ
+η0∇u2 · ν + αu2 = 0 (3.28)
+and the condition on the left boundary
+u2(−L, y) = g(y). (3.29)
+Let u0, u1, u2 and g be decomposed into Fourier modes in the y direction, denoting by k the associated wave number. Then the complex parameter α, minimizing the following expression
+A||u0 − u2||2L2(Ωair) + B||∇(u0 − u2)||2L2(Ωair)
+can be found from the minimization of the error function
+e(α) := ∑
+k= nπ
+l ,n∈Z
+ek(α),
+
+
+46 Chapter 3. Models of wave propagation
+where ek are given by
+ek(α) = (A + B|k|2)
+(1
+2λ0
+{
+|χ|2 [1 − exp(−2λ0L)]
++|γ|2 [exp(2λ0L) − 1]
+}
++ 2LRe (χγ ̄)
+)
++ B λ0
+2
+{
+|χ|2 [1 − exp(−2λ0L)] + |γ|2 [exp(2λ0L) − 1]
+}
+− 2Bλ20LRe (χγ ̄)
+if k2 ≥ ξ0
+η0 ω2 or
+ek(α) = (A + B|k|2)
+(
+L(|χ|2 + |γ|2) + i
+λ0
+Im {χγ ̄ [1 − exp(−2λ0L)]}
+)
++BL|λ0|2 (
+|χ|2 + |γ|2)
++ iBλ0Im {χγ ̄ [1 − exp(−2λ0L)]}
+if k2 < ξ0
+η0 ω2, in which
+f (x) = (λ0η0 − x) exp(−λ0L) + (λ0η0 + x) exp(λ0L),
+χ(k, α) = gk
+( λ0η0 − λ1η1
+f (λ1η1) − λ0η0 − α
+f (α)
+)
+,
+γ(k, α) = gk
+( λ0η0 + λ1η1
+f (λ1η1) − λ0η0 + α
+f (α)
+)
+,
+where 
+
+
+λ0 =
+√
+k2 − ξ0
+η0 ω2 if k2 ≥ ξ0
+η0 ω2,
+λ0 = i
+√ ξ0
+η0 ω2 − k2 if k2 ≤ ξ0
+η0 ω2. (3.30)
+0123 x 104
+20
+40
+60
+ω
+Real(α)
+(a) Re(α)
+0123 x 104
+−100
+−80
+−60
+−40
+−20
+ω
+Imag(α)
+(b) Im(α)
+0123 x 104
+0
+2
+4
+6 x 10−4
+ω
+error
+(c) error
+Figure 3.10 – The real (top left) and imaginary (top right) parts of α and the sum of the errors e∆x (in the bo om) as function of frequencies ω ∈ [600, 30000] calculated for the ISOREL porous material.
+Since the minimization will be done numerically and since the sequence (z, −z, z − z, · · · ) = z(exp(i(j∆x)/∆x)) is the highest frequency mode that can be reached on a grid of size ∆x, then, in practice, the sum may be truncated to
+e∆x(α) := ∑
+k= nπ
+l ,n∈Z,− L
+∆x ≤n≤ L
+∆x
+ek(α).
+For the equations (3.23)– (3.24), we use the same coefficients as for problem (3.12) and take the values corresponding to a porous medium, called ISOREL, using in building insulation. More
+
+
+3.2. Absorption phenomena 47
+precisely we assume: φ = 0.7, γp = 1.4, σ = 142300N.m−4.s, ρ0 = 1.2kg/m3, αh = 1.15, c0 = 340m.s−1. We could find the value of α presented in Fig. 3.10.
+Remark: Fig. 3.10 allows us to compare the difference between two considered time-dependent models for the damping in the volume and for the damping on the boundary. We see that Re(α) is not a constant in general, but for ω → +∞ Im(α) is a linear function of ω. In this sense, the damping properties of two models are almost the same, but the reflection is more accurately considered by the damping wave equation in the volume.
+
+
+
+
+Chapter 4
+Localization phenomena
+The localization of the waves, their energy, the eigenmodes, and their role in the exchange of energy and absorption are fundamental questions in physics and their applications. From a mathematical point of view, most of these questions are not yet really understood and mathematically analyzed. However, there are some partial results. A relatively complete survey about the localization phenomena is given in [35]. For the mathematical explication of the localization for elliptic operators and the Anderson localization in the homogeneous Dirichlet boundary condition framework, see [29].
+In this course we will briefly see what it is mostly numerically and physically known for the localization phenomena. In particular, we will discuss how they are related to the shape optimization for more efficient absorption of a wave’s energy. Our goal is to understand that we need to create the localization for efficient absorption.
+4.1 Spectral problems for −∆
+Let us start by introducing the spectral problems for −∆, which can be considered with different types of homogeneous boundary conditions, as the Dirichlet, the Neumann, the Robin or mixed type boundary conditions (see Chapter 1).
+For instance, let us start with the Dirichlet Laplacian on a domain Ω ⊂ Rn:
+
+
+
+−△u = λu in Ω,
+u|∂Ω = 0. (4.1)
+This spectral problem (see Definition 6.4.1) is usually understood in the weak sense:
+∀v ∈ H01(Ω)
+∫
+Ω ∇u · ∇vdx = λ
+∫
+Ω uvdx. (4.2)
+This problem is solved in TD 3 (for the Robin Laplacian see Section 2 of TD 3) using the HilbertSchmidt Theorem 6.4.1 for the compact auto-adjoint operators on a Hilbert space. Adding the results of [24] (Section 6.5.1 p. 334) we can summarize the results in the following theorem:
+Theorem 4.1.1. Let Ω be a bounded arbitrary domain in Rn (n ≥ 2). Then the spectral problem for −∆ with homogeneous Dirichlet boundary conditions (4.2) has the following properties:
+1. The eigenvalues of −∆ are at most countable, of finite multiplicity and strictly positive.
+
+
+50 Chapter 4. Localization phenomena
+2. If we repeat each eigenvalue according to its multiplicity, we have the sequence
+0 < λ1 ≤ λ2 ≤ λ3 ≤ · · ·
+with
+λk → +∞ for k → +∞.
+3. The corresponding sequence of eigenfunctions {φk}k∞=1 forms an orthonormal basis of L2(Ω),
+an orthogonal basis of H01(Ω) and for all k ∈ N φk ∈ H01(Ω) ∩ C∞(Ω).
+Remark: The key point to work on arbitrary domain is the compactness of the embedding of H01(Ω) into L2(Ω) [24]. In TD3 it was shown that {φk}k∞=1 is an orthogonal basis of H01(Ω) with
+‖φk‖L2(Ω) = 1. Thus, it is sufficient to notice that H01(Ω) is dense in L2(Ω) to conclude that
+{φk}k∞=1 forms an orthonormal basis of L2(Ω).
+If we consider (4.2) for all φ ∈ H1(Ω) we obtain the spectral problem of the Neumann Laplacian. This time the compactness of the embedding H1(Ω) into L2(Ω) needs some geometrical restrictions on ∂Ω (typically Ω should be an NTA-domain (see Chapter 1), or more generally an extension domain, but we don’t study it in this course [5]). The same assumption on Ω is needed for the Robin or mixed Laplacian. In the case of this “regular” Ω, the spectral problem for the Neumann Laplacian has the same properties as the Dirichlet Laplacian, except that λ1 = 0 and the corresponding eigenfunction w1 is constant on Ω (independently on Ω).
+It is important to notice that all eigenfunctions are C∞(Ω) (independently on the cited boundary conditions).
+Physicists prefer to call eigenfunctions by eigenmodes.
+Knowing that it is possible for the Dirichlet Laplacian to solve the eigenvalue problem (4.2) for all arbitrary shapes of ∂Ω, the eigenmodes depend considerably from the shape of the boundary. Actually, the shape of the boundary may or may not provide localization of some eigenmodes.
+4.2 Localization phenomena
+There is no a strict mathematical definition of the localization of the eigenmodes, but it rather intuitive (see Fig. 4.1), and could be characterized by a simple phrase “Localized eigenfunctions: here you see them, there you don’t” [40].
+More precisely, we could say that a localization of an eigenfunction φ is the existence of a subdomain Ωloc in Ω such that the values of the eigenfunction in the closer of this subdomain Ωloc are “much” or “considerably” larger by modulus than in its complement, i.e. in Ω \ Ωloc. In other words, in Ω \ Ωloc the eigenfunction is considerably smaller by modulus than in Ωloc:
+max
+x∈Ωloc
+|φ(x)| ≫ max
+x∈Ω\Ωloc
+|φ(x)|.
+In the most cases in addition, it is supposed that the volume of Ωloc is much smaller than the initial volume of Ω.
+It is clear that not for all Ω a such subdomain Ωloc exists, as it is known from the explicit calculation of eigenfunctions of −∆ with the Neumann or the Dirichlet boundary conditions on a
+
+
+4.2. Localization phenomena 51
+Figure 4.1 – Localization examples by M. Filoche. On the left, it is an eigenfunction of the Neumann Laplacian, and on the right, it is an eigenfunction of the Dirichlet Laplacian.
+Figure 4.2 – Example of a non localization on a rectangular domain (by M. Filoche).
+rectangular domain Ω (see the example of Fig. 4.2). Moreover, in all cases, if Ω allows a localization, not all eigenfunctions are localized: there are two families of eigenfunctions - localized and delocalized, as shown on Figs. 4.5 and 4.6.
+In addition, it is not possible to say that Ωloc is the support of a localized eigenfunction φ (i.e. that Ωloc = {x ∈ Ω|φ(x) = 0}) since the eigenfunctions cannot be equal to 0 in a subdomain of Ω:
+Theorem 4.2.1. If φ is an eigenmode of the Dirichlet (or Neumann, or Robin, or mixed) Laplacian then φ 6= 0 a.e. in Ω.
+Actually, if φ ≡ 0 in a subdomain Ω0 ⊂ Ω then φ ≡ 0 in Ω and hence is not an eigenmode.
+Therefore, outside of Ωloc the eigenmode can be small but not identically equal (almost everywhere) to 0. Let φ be a localized eigenmode. Typically Ωloc contains the maximum value of |φ|. Thus, passing outside the boundary of Ωloc, there is a decreasing of the modulus of a localized eigenmode.
+By the speed of this decreasing of the modulus of a localized eigenfunction, there are notions of
+• the strong localization, when the amplitude decrease exponentially or even faster than the exponential decay by works of M. Lapidus (see Fig. 4.3),
+• the weak localization, when then the amplitude decrease polynomially (see for example Figs. 4.5, 4.6 and 4.7).
+
+
+52 Chapter 4. Localization phenomena
+Figure 4.3 – On the top from left to right: the first eigenfunction of the Dirichlet Laplacian on a prefractal Minkowski domain and the modulus of its gradient. On the bo om, the logarithm of the corresponding amplitudes. It is an example of a strong localization (M. Lapidus).
+After it, there is a high-frequency localization and low-frequency localization [35]. The highfrequency localization is more understood from the mathematical point of view. However, it is not interesting for us, as in our framework, the high frequencies are naturally absorbed by the microstructure of a porous material, but what is more important and very difficult to do, is to absorb the low frequencies optimally.
+So we consider only the low-frequency localization.
+The question of how to characterize a domain, or mainly its boundary, in which there are localized eigenfunctions is mathematically open. From the numerics and experiments (see Fig. 4.4), mainly for the two-dimensional case, we have different examples of domains with some geometrical irregularity as prefractal domains, for which there exist localized eigenmodes in low frequencies. In the Dirichlet boundary case it is more understood [29, 67]
+For the Dirichlet boundary case, the subdomains of localization are pouched inside Ω by the constraint to be equal 0 on ∂Ω, and going closer to ∂Ω, there is a decay faster than exponential. In this situation, one of the ideas, why a localization could happen, is related with the idea that it depends on the capacity of the geometry to capture rays (see Chapter 5) or Brownian motion [67]. The localization regions can be defined from the corresponding Green function [29] (we don’t go in more details). If this localization region is considered as a separate domain Ωloc with the same type boundary conditions, then the localized in Ωloc eigenfunction for −∆ on Ω is closed (rather similar) to an eigenfunction found on the domain Ωloc [29] (see Fig. 4.8).
+For the Neumann or Robin boundary condition, the maximum of a localized eigenmode is situated on the boundary and the localization subdomain is located near the boundary of Ω (see, for example, Figs. 4.5 and 4.6).
+
+
+4.3. Localization and increased damping of the waves 53
+Numerical Experimental
+Figure 4.4 – Comparison of the localization of eigenmodes of Dirichlet Laplacian by the numerics and the experience in prefractals [26].
+Figure 4.5 – Examples of a delocalized (on the left) and of a localized (on the right) eigenfunctions of the Neumann Laplacian on the second prefractal Minkowski generation [65].
+4.3 Localization and increased damping of the waves
+4.3.1 Case of the absorption in the volume: astride localization [28]
+Astride localization (“à cheval”) Considering the damping in the volume, there are different more or less dissipative models [38]. In Chapter 3, we have discussed the simplest model for
+
+
+54 Chapter 4. Localization phenomena
+Figure 4.6 – Other examples of a weak localization for the Neumann Laplacian [27]. From the left to the right: the domain geometry, a delocalized eigenmode, a localized eigenmode.
+Figure 4.7 – Localization of eigenmodes in prefractals and other type of geometrical irregularities [27]. Two columns on the left (for a Minkowski prefractal part of the boundary), there are examples of eigenfunctions for the Dirichlet Laplacian. Three columns on the right there are examples of eigenfunctions for the Neumann Laplacian.
+the propagation in time by the damped wave equation. If we don’t consider the propagation in time, but only the frequency models, we can directly consider the following damping eigenvalue problem for Ω = Ωair ⊔ Ωwall (see Fig. 4.9), proposed by J.F. Hamet [38]1:
+1By its derivation, this model is more dissipative than the frequency variant of the damping wave equation.
+
+
+4.3. Localization and increased damping of the waves 55
+Figure 4.8 – Two predicted area of the localization for the Dirichlet Laplacian. [29] The localized parts are similar to the first eigenmodes on the corresponding subdomains with Dirichlet boundary condition.
+− △φk = λjφk in Ωair,
+− div
+(1
+ρR + iρI
+∇φk
+)
+= λk
+1
+KR + iKI
+φk in Ωwall,
+∂φk
+∂ν = 0 on ∂Ω,
+φk|Γ− = φk|Γ+
+∂φk ∂ν
+∣ ∣ ∣ ∣
+∣Γ−
+=− 1
+ρR + iρI
+∂φk ∂ν
+∣ ∣ ∣ ∣
+∣Γ+
+where ρR + iρI and KR + iKI are effective parameters describing the attenuation of the wave in the air of the porous wall. On the interior boundary Γ between two media we suppose that the eigenfunctions of the problem are continuous and have the gradient jump ensuring that if φk|Ωair ∈ H1(Ωair) and φk|Ωwall ∈ H1(Ωwall) then φk ∈ H1(Ω). The notations Γ− and Γ+ show
+the change of the direction of the external normal on Γ outside of Ωair and Ωwall respectively.
+Ωwall
+Ωair
+Γ
+Figure 4.9 – Domain Ω = Ωair ⊔ Ωwall with the plane shape of the wall. The volume of the wall is supposed to be two times smaller than the volume of the air part Ωair [28].
+This spectral problem was solved numerically for three shapes of Γ: the plane shape, the first and the second generations of the Minkowski fractal. The wall is supposed to be done with Isorel. As the shapes of the first and the second generations of the Minkowski fractal are symmetrical, then in three considered examples, the volume of the wall (and of the air) is constant. This allows us to compare the absorption properties of these three shapes of the wall. For all considered shapes of Γ there are two families of eigenmodes:
+
+
+56 Chapter 4. Localization phenomena
+1. a family localized in the air, corresponding to the eigenvalues with the smallest imaginary parts (closed to the real line),
+2. a family localized in the wall, corresponding to the eigenvalues with the imaginary parts the most closed to the imaginary parts of the eigenvalues found only for one dissipative medium.
+It was also noticed that more the interior boundary Γ becomes irregular (see Figs. 4.10 and 4.11), more there are eigenmodes taking there maximum on Γ, i.e. localized astride between the two media. These astride modes correspond to the eigenvalues “in the middle” between the less dissipative and the most dissipative eigenvalues. Actually, the astride localized modes increase the coupling between two media and contribute to a better wave absorption by the geometry [28]. Nevertheless, there are no schematic studies of this type of localization, and there are many related open questions.
+Figure 4.10 – The red lines correspond to the sets containing the eigenfunctions of the spectral problem for only one medium: air (in this case all eigenvalue are strictly positive and real, hence non dissipative) or wall (the non zero imaginary part ensures the dissipative properties). The eigenvalues of the spectral problem for two media are shown by blue stars. We can typically notice that there are two families of eigenfunctions: the family of eigenfunctions corresponding to eigenvalues closed to the real axis, i.e. non-dissipative modes localized in the air, and the second family of eigenfunctions corresponding to eigenvalues closed to the dissipative spectral red line, i.e. dissipative modes localized in the wall. Here kn are λk in our notations.
+4.3.2 Localization of frequency waves on the boundary
+Sometimes [27], to simplify the problem, the physicists consider that the homogeneous Neumann boundary condition models the wave’s iteration with a medium with a very small dissipation. For this “pseudo” absorbing boundary, if we consider the solutions of the Helmholtz system with the Neumann boundary condition, we can see [27] on Fig. 4.12 the examples of the localisation on the boundary of the stationary waves.
+
+
+4.3. Localization and increased damping of the waves 57
+Figure 4.11 – The eigenvalues of two media spectral problem for the first and second generation of the Minkowski fractal denoted by the green circles and red triangles respectively. For the second prefractal shape we distinguish this time three families of eigenfunctions: eigenfunctions, localized in the air, as for the case of the plane shape, with the eigenvalues close to the real line, the second family of eigenfunctions, localized in the wall, also as for the case of the plane shape with the eigenvalues closed to the theoretical line of the eigenvalues for only one dissipative media, but also the third family of eigenfunctions which are localized “astride” (à cheval) between two media, i.e. on the interface Γ, and which correspond to the eigenvalues “in the middle” between the eigenvalues of the pure air and pure wall configurations. Here kn are λk in our notations.
+4.3.3 Characterization of the localization and of losses
+Let Ω ⊂ R2 be a bounded domain. To characterize more quantitatively the localization of the eigenfunctions, it was introduced by B. Sapoval and of his co-authors the existence surface of an normalized in L2(Ω) eigenmode uk:
+Sk = 1
+∫
+Ω |uk|4dx for
+∫
+Ω |uk|2dx = 1. (4.3)
+The motivation of this definition and the notion of the existence surface comes from the following remark valid for a constant on Ω function u. Indeed, let
+u=
+{ F on Ω 0 on R2 \ Ω
+Then, with the notation S for the surface area of Ω,
+∫
+Ω F 2dx = F 2S = 1 ⇒ F = 1
+S
+1 2
+⇒1
+∫
+Ω |u|4dxdy = 1
+F 4S = 1
+1
+S2 S = S,
+
+
+58 Chapter 4. Localization phenomena
+Figure 4.12 – Localization examples of the stationary waves on the boundary modeled by the homogeneous Neumann boundary condition [27].
+where we recognize formula (4.3). Therefore, if we normalize the existence surface of an eigenmode number k by the total surface of Ω, we obtain a value Sk
+S between 0 and 1. Actually, Sk
+S =1
+for a constant mode (“living” on all Ω) and we obtain small values near zero for a localized mode in a small are of Ω. Clearly, smaller the value of Sk
+S , more the eigenmode number k is localized.
+On Fig. 4.13, we see that the localization phenomena become stronger and stronger for more and more irregular shapes:
+Now, let us suppose that a part of the boundary Γ provides an absorption (in [27] it is modeled with the homogeneous Neumann boundary condition) and that Γ has the perimeter equal to L.
+Then the energy losses of a L2-normalized mode φk is defined [27] by
+wk =
+∫
+Γ |φk|2dσ.
+As the fundamental mode (the first eigenfunction of −∆ with the Neumann boundary condition corresponding to the eigenvalue λ0 = 0) φ0 = √1S (hence, S0 = S), then by the analogy, the
+
+
+4.3. Localization and increased damping of the waves 59
+Figure 4.13 – Example of the influence of the irregularity of the Neumann boundary on the localization of eigenmodes of −∆ [27]. On the abscissa axis, there are (normalized) eigenvalues (here kn are λk in our notations), and on the ordinate axis, the values of the normalized surface existence for each mode (here Sn corresponds to Sk in our notations) are calculated for three given geometries.
+eigenmode φk is approximated by √1Sk . Thus,
+wk =
+∫
+Γ |φk|2dσ ≈ Lk
+Sk
+,
+where Lk is the perimeter of a part of boundary on which the mode φk is localized (Lk ≤ L). Then we can directly see with the help of Fig. 4.14, that a localized modes exhibit larger losses:
+L
+S ≪ Lk
+Sk . Besides, Fig. 4.15 shows that the increasing irregularity of a boundary, we increase the
+losses of the eigenmodes.
+Moreover, the losses of the eigenmodes are directly related to their localization: the more the mode is localized, the more important it provides losses (see Fig. 4.16).
+4.3.4 Remarks on the wave propagation for the Helmholtz mixed boundary valued problem with a complex Robin boundary condition
+Let us go back to our Helmholtz problem with mixed boundary conditions and try to understand what happens with the localization in this case and how it is related to wave absorption.
+So, let Ω be a bounded domain with a Lipschitz or a self-similar fractal d-set boundary in Rn. Let in addition, ∂Ω = ΓDir ∪ ΓNeu ∪ ΓRob as supposed in subsection 1.4.4.
+We consider the following eigenvalue problem for ∆ + ω2 with the mixed boundary conditions,
+
+
+60 Chapter 4. Localization phenomena
+Figure 4.14 – Localized modes exhibit larger losses: L
+S < LSkk [27]. For this example we could suppose for
+the simplicity the domain is the union of a big and of a small square, i.e. that L = 4a+2b, S = a2 + b2, Lk = 3b and Sk = b2. From where, for instance with a = 1 and b < 1
+4a = 1
+4,
+we directly obtain that L
+S ≪ LSkk .
+Figure 4.15 – Let for the square cavity w0s0 = L
+S=4
+a . The values 1
+w0s0
+∫
+Γ |φk|2dσ as the functions of the eigenvalues of different more and more irregular domains [27]. In our notations: kn are λk .
+ω > 0 et α ∈ C with Re α > 0 and Im α < 0:
+
+     
+     
+∆u + ω2u = λu dans Ω,
+u = 0 sur ΓDir,
+∂u
+∂n = 0 sur ΓNeu,
+∂u
+∂n + αu = 0 sur ΓRob.
+(4.4)
+AS α is complex, the solutions (λ, u) are also complex valued.
+As in subsection 1.4.4 we define the Hilbert space V (Ω) by (1.27) with norm (1.28) and the corresponding inner product (1.29).
+
+
+4.3. Localization and increased damping of the waves 61
+Figure 4.16 – Losses of the modes as the function of their surface existence: more irregular boundaries provide more localization, and a more strong localization provides more energy losses [27].
+Definition 4.3.1. We say that (λ, φ) ∈ C × V (Ω) is a weak solution of problem (4.4) if φ 6= 0 on Ω, ‖φ‖L2(Ω) = 1 and
+∀v ∈ V (Ω) −
+∫
+Ω ∇φ · ∇v ̄dx + ω2
+∫
+Ω φv ̄dx −
+∫
+Γ α Tr φ Tr v ̄dμ =
+∫
+Ω λφv ̄dx. (4.5)
+Definition 4.3.2. We say that (λ, ψ) ∈ C×V (Ω) is a weak solution of the adjoint problem to (4.4) if ψ 6= 0 on Ω, ‖ψ‖L2(Ω) = 1 and
+∀v ∈ V (Ω) −
+∫
+Ω ∇ψ · ∇v ̄dx + ω2
+∫
+Ω ψv ̄dx −
+∫
+Γ α Tr ψ Tr v ̄dμ =
+∫
+Ω λψv ̄dx. (4.6)
+It is known that
+Theorem 4.3.1. The spectral problem (4.5) admits a countable number of eigenvalues with Im λk 6= 0 (R does not belong to the spectrum of ∆, or equivalently, there are no real eigenvalues of ∆ with the mixed complex conditions) with Re λk < 0. If (φk)k∈N∗ are eigenfunctions associated to the eigenvalues (λk)k∈N∗ and (ψk)k∈N∗ are eigenfunctions associated to the eigenvalues (λk)k∈N∗ of the adjoint problem (4.6), then the sequence (φk, ψk)k∈N∗ forms an orthonormal basis of L2(Ω):
+(φj , ψk)L2(Ω) = δjk.
+If Im α = 0, then the eigenvalues of ∆ are all strictly negative (therefore real) and in this case there is no energy absorption. So the real part of λk influences the reflection.
+At the same time, more larger is the value of | Im λk|, more dissipative the eigenfunction is. So we are interested in fixing ω and in finding the least dissipative eigenmodes (functions) and the most dissipative eigenfunctions.
+
+
+62 Chapter 4. Localization phenomena
+Let us give a remark on the classical decomposition of a solution of a non dissipative wave equation over the eigenfunctions of −∆:
+Remark: Let us consider for example the wave equation for the initial data u0 and u1 and with the simple homogeneous Dirichlet boundary condition:
+
+ 
+  
+∂t2u − △u = F (x, t) (x, t) ∈ Ω×]0, T [
+u|t=0 = u0(x), ∂tu|t=0 = u1(x)
+u|∂Ω = 0, t ∈ [0, T ]
+Let (φk, λk)k∈N be L2-orthonormal solutions of the eigenvalue problem of the Dirichlet Laplacian −△D (auto-adjoint strictly positive operator).
+With notations ωk = √λk and fk(t) = ∫
+Ω F (x, t)φk(x)dx it holds
+u(x, t) =
+∞
+∑
+k=1
+cos(ωkt)(u0, φk)L2(Ω)φk + sin(ωkt)(u1, φk)L2(Ω)
+ωk
+φk
++
+∫t
+0 fk(τ ) sin ωk(t − τ )
+ωk
+dτ φk.
+For F = u1 ≡ 0 we have
+u(x, t) =
+∞
+∑
+k=1
+cos(ωkt)(u0, φk)L2(Ω)φk.
+As (φk)k∈N is an orthonormal basis of L2(Ω)
+∫
+Ω |u|2dx =
+∫
+Ω
+(∞
+∑
+k=1
+cos(ωkt)(u0, φk)L2(Ω)φk
+)2
+dx
+=
+∞
+∑
+k=1
+cos(ωkt)2(u0, φk)2L2(Ω).
+We say that (u0, φk)2L2(Ω) is the coupling of the source u0 with the eigenmode φk.
+To better understand the role of the localized eigenmodes (here on Γ), one can review the associated temporal problem without forgetting that Re(α) > 0 and Im(α) < 0:
+
+          
+          
+∂t2u − △u = 0,
+u|ΓDir = 0, ∂u
+∂n
+∣ ∣ ∣ ∣
+∣ΓN eu
+= 0,
+∂u
+∂n − 1
+ω Im(α(x))∂tu + Re(α(x))u|Γ = 0,
+u|t=0 = u0, ∂tu|t=0 = 0
+which gives (see TD 1), if we work in the space
+X0(Ω) =
+{
+u ∈ H1(Ω)| Tr u|ΓDir = 0
+}
+× L2(Ω)
+
+
+4.3. Localization and increased damping of the waves 63
+with
+‖(u, v)‖2X0(Ω) =
+∫
+Ω
+(
+|∇xu|2 + |v|2)
+dx +
+∫
+Γ
+Re(α(x))| Tr u|2dμ,
+that
+∂t
+(
+‖(u, ∂tu)‖2X0(Ω)
+)
+= −2
+ω
+∫
+Γ |Im(α(x))|| Tr ∂tu|2dμ.
+By this formula the decreasing of the energy depends of the values of 2
+ω
+∫
+Γ |Im(α(x))|| Tr ∂tu|2dμ.
+We notice that this time −∆ has complex-valued boundary conditions and that it is not an auto-adjoint operator.
+Assuming that (Tr φk)k∈N is an orthogonal system of L2(Γ) and without detailing the functions which depend only on λk and t, we formally obtain that
+∫
+Γ | Tr ∂tu|2dμ =
+∫
+Γ
+∣ ∣ ∣ ∣ ∣
+∞
+∑
+k=1
+g(λk, t)(u0, ψk)L2(Ω) Tr φk
+∣ ∣ ∣ ∣ ∣
+2
+dμ
+=
+∞
+∑
+k=1
+|g(λk, t)|2|(u0, ψk)L2(Ω)|2
+∫
+Γ | Tr φk|2dμ.
+Therefore, to increase the speed of energy absorption we need to increase
+1. the value of the coefficient (u0, ψk)L2(Ω) (the coupling with the eigenmode of the adjoin problem with the source, here with the initial data u0),
+2. the value of ∫
+Γ | Tr φk|2dμ (thus favor the localization of the eigenmodes on the boundary
+Γ).
+So, it would be ideal to excite with the source the eigenmodes which are localized on the boundary, or in other words, which have their maximum values on the boundary Γ. The existence and the number of the eigenmodes localized on the boundary Γ depend on its form.
+We finalize this chapter by the following empirical conclusion:
+1. Geometrical irregularity increases the localization of eigenmodes.
+2. Perturbed localized eigenmodes increase energy dissipation.
+
+
+
+
+Chapter 5
+Control of the waves
+5.1 Control theory: from ordinary to partial differential equations
+5.1.1 Controllability of models described by ODEs
+In the course “Automatique et contrôle” of D. Dumur (see p. 138 of the coursebook) we can see the following control problem for a process described by a general ordinary differential system or dynamic system
+
+
+
+d
+dt x(t) = f (x(t), u(t), t), 0 ≤ t ≤ T
+y(t) = ψ(x(t), u(t), t). (5.1)
+Here
+• y(t) =
+
+ 
+y1(t) ... yl(t)
+
+
+ is a function of measurements or observation (actually it also contains
+the initial data x(0) = x0),
+• u(t) =
+
+ 
+u1(t) ... um(t)
+
+
+ is a control,
+• x(t) =
+
+ 
+x1(t) ... xn(t)
+
+
+ is the state of the dynamic system.
+It is an ordinary differential equation, as all vector functions depend only on one variable, the time t.
+The general aim is to find a control u(t) such that the state x(t) satisfies (5.1) (for the given and fixed y(t) and f ).
+If the state (or simply the solution) x depends not only on time but also from the space variables, then we obtain a process described by a partial differential system. Actually, suppose we discretize the PDE problem on the space variables (by the finite differences or the finite elements). In that case, we obtain the dynamic system of type (5.1) involving only the time variable.
+
+
+66 Chapter 5. Control of the waves
+5.1.2 Controllability of models described by PDEs
+Let Ω ⊂ Rn be a domain and x = (x1, . . . , xn) ∈ Ω. We consider a state v(t, x) : [0, T ]×Ω → R.
+In the control theory for PDEs, there are mainly two types of problems, corresponding to what we require from our controlled solution v(t, x)
+1. the exact or final controllability,
+2. the controllability of moments or the integral overdetermination.
+If we take the example of the initial boundary valued problem for the heat equation
+
+ 
+  
+∂tv − D∆v = u(x, t)h(x, t), (x, t) ∈ Ω×]0, T [,
+v|t=0 = v0(x), x ∈ Ω,
+v|∂Ω = 0, t ∈ [0, T ],
+(5.2)
+where the coefficient h, the initial temperature distribution v0 and the diffusion coefficient D > 0 are fixed and known, but u(x, t) : [0, T ] × Ω → R is a control which allow to ensure that the solution v satisfies one of the following overdetermination conditions:
+1. the final overdetermination condition
+v|t=T = f (x) x ∈ Ω (5.3)
+for a given f .
+2. the integral overdetermination condition:
+∫
+Ω v(t, x)ω(x)dx = χ(t) t ∈ [0, T ], (5.4)
+presented by the space integral over Ω with ω(x) and χ(t) are given functions, or
+∫T
+0 v(t, x)ωˆ(t)dt = χˆ(x) x ∈ Ω, (5.5)
+presented by the time integral with given functions ωˆ(t) and χˆ(x).
+Actually, if u is known and there are no any condition of overdetermination, then v is the usual solution of the direct problem. But here, we don’t want any solution v, but a such solution v, that it satisfies our additional condition (5.3) or (5.4) or (5.5) (as the condition is additional it is named a condition of overdetermination). To be able to ensure it, we need to find a control (the function u here). In other words, the control is also an unknown as v.
+So, we have
+• system (5.2) with (5.3) is the final or exact controllability problem: we are searching a control u which allows at a final time T to have exactly the heat distribution f (x), knowing that initially for t = 0 it was equal to v0(x). Equivalently, we move our process from the initial state to a final imposed state for a finite time. In many cases, the problem is to move the solution from an initial state to 0 (for a finite time).
+
+
+5.2. Controllability problems for the propagation of waves 67
+• system (5.2) with (5.4) or with (5.5) is a problem of the controllability of moments, where the integral overdetermination could be interpreted as the space or time mean values of the solutions following the evolution in time given by χ(t) (for instance, for the nuclear reactor it is important to keep the mean temperature constant or very slowly evaluated in time) or to have the same space distribution as χˆ(x) (for instance, to be mainly localized in one specific subregion of Ω).
+Remark: If we discretize problem (5.2) on x, then v(x, t) 7→ V (t) =
+
+ 
+v1(t) ... vN (t)
+
+
+ for which the
+described controllability problems become of the same form as (5.1). ODEs can be seen as approximations of PDEs.
+The other type of controllability problems is the optimal control problems, i.e. the problems, where we want to find a control u such that the corresponding solution minimizes or maximizes a functional, for example, the energy of the system.
+A special case of optimal control problems is the shape optimization problems, which we consider in detail here for the Helmholtz equation (see Chapter 7, where χ describing the presence or absence of porous material in the Robin boundary condition is a control). The solution of a PDE, for instance of the Helmholtz equation, v depends on the shape of the domain Ω on which it has been found: for different Ω1 and Ω2 the corresponding solutions are different. Thus, the shape of the domain could be a control such that the solution v, found for this shape, minimizes a given functional, for instance, the energy of the wave (see Section 5.4).
+5.2 Controllability problems for the propagation of waves
+5.2.1 Exact controllability
+Let Ω be a rectangular domain in R2 (see Fig. 5.1). In [39] it was considered the following exact
+Ω
+Br(x)
+Figure 5.1 – The rectangular domain with a control supported inside on a ball.
+
+
+68 Chapter 5. Control of the waves
+controllability problem for the wave equation
+∂t2u − ∆u = h(t, x) ]0, T [×Ω,
+u = 0 on [0, T ] × ∂Ω,
+u|t=0 = u0(x) x ∈ Ω,
+∂tu|t=0 = u1(x) x ∈ Ω,
+u(T, x) = ∂tu(T, x) = 0 x ∈ Ω ,
+where the initial conditions u0 and u1 are given and h is the unknown control with a compact support inside Ω. The question is to find h such that at a final time T the wave completely disappears, i.e. u(T, x) = ∂tu(T, x) = 0 for all x ∈ Ω. Thanks to [39] we have the following theorem
+Theorem 5.2.1. For all T > 0 sufficiently large and for all (u0, u1) ∈ H01(Ω) × L2(Ω) given,
+there exists a control h ∈ L2([0, T ] × Ω) with supp(h) ⊂ [0, T ] × Br(x).
+5.3 High frequency waves propagation by rays
+The most understood mathematically area of the controllability of waves is for the high frequency limit, when the wave propagation is comparable to the propagation of rays with laws of geometrical optic (while for the low or middle frequencies there are no a general mathematical results).
+Let us cite these several famous (but very difficult and not required in our course) works of Ralston [59], Russell [64], Bardos-Lebeau-Rauch [9] and Bardos-Rauch [10], which are now classical in the control theory of the high frequency wave propagation. We will only mention the main and useful for us ideas.
+5.3.1 Problem with a dissipation on a (part of) boundary
+We start with following very important and general result for the wave propagation inside a bounded domain with a dissipative part of boundary [64]:
+Theorem 5.3.1 (D. L. Russell). Let Ω be a bounded domain. If there exists a dissipative part of the boundary, then the acoustical energy decrease to 0 for t → +∞.
+In the same time we have
+Theorem 5.3.2. The rate of energy decay depends on the geometry of the boundary of Ω.
+The rate of energy decay can be different, as, for instance, it can be arbitrarily small, and it can be exponential. For the most efficient energy absorption, we are interesting to characterize the geometries of ∂Ω for which it holds the exponential energy decay in time.
+In the high frequencies, it is common to consider the wave propagation as the propagation of rays following [59]
+Theorem 5.3.3 (J. Ralston). Wave equations have solutions that are localized near curves (t, x(t)) in space-time. The curves are called rays. More precisely,
+∀ǫ ∈]0, 1[ and T > 0 there exists a solution so that
+
+
+5.3. High frequency waves propagation by rays 69
+the fraction of the energy located at a distance greater than ǫ from the ray is smaller then 1 − ǫ for 0 ≤ t ≤ T (i.e. it is negligibly small).
+For ∂Ω ∈ C∞ (or at least C3 [12]), then [9] it is possible to have diffractive points as presented on Fig. 5.2, i.e. the points of the geometry in which the coming ray does not change its direction. These points are to avoid, as in this points the rays do not interact with the boundary in an
+Figure 5.2 – If the ray does not change its direction, then it is a diffractive point [9].
+efficient way [9]:
+Theorem 5.3.4 (Bardos-Lebeau-Rauch). To have the exponential decay of the energy it is necessary that any ray meets for t < T a dissipative part of the edge at least once at the non-diffractive point.
+As a corollary of this theorem, for these type of geometry the wave propagation system is exactly controllable to 0 at a (sufficiently large) finite time T , i.e. we have Theorem 5.2.1.
+In the same time, for some geometry of the boundary, there are stable rays [9]:
+Figure 5.3 – The ray is “captured” by the geometry [9].
+Fig. 5.4 give us some examples with a dissipative parts of the boundaries for which it holds the Bardos-Lebeau-Rauch Theorem. The question of non-diffractive points is precised for C3 boundaries by [12]:
+Lemma 5.3.1. Let Ω ⊂ Rn be a bounded domain with a smooth C3 boundary. Then every ray hits the boundary at a non-diffractive point.
+The Bardos-Lebeau-Rauch Theorem can be generalized also for geometries with with “curved” angles [16], but what happens in a fractal boundary case it does not known. Actually it is not clear how to define the direction of the reflected ray by a fractal boundary.
+
+
+70 Chapter 5. Control of the waves
+Figure 5.4 – Examples with dissipative parts on the boundary (the thin lines correspond to the non dissipative parts), for which there is an exponential energy decay [9].
+5.3.2 Interest of stable periodic rays
+If a stable ray occurs between non-dissipative points of the boundaries, then the energy dissipates arbitrarily slowly. But suppose the stable ray is created between dissipative points of the boundary. In that case, this provides the exponential energy decay, since each interaction of the ray with a dissipative surface diminishes the energy. This idea can be expressed as a capture of the wave by a dissipative boundary (see forms of the anechoic chambers on Fig. 2.4). More there are interactions of the ray with the absorbing boundary, more effective absorption is (see, for example, Fig. 5.5).
+Figure 5.5 – Example of a ray propagating between two absorbing cones, which increases the number of its interaction to compare to the plane absorbing wall.
+In [10] it was found the geometrical condition on the boundary shape which creates a captive ray (see Fig. 5.6):
+Lemma 5.3.2 (Bardos-Rauch). Let k1 and k2 be the curvatures at the two points of contact, and 2R be the distance between the contact points.
+The ray is stable if and only if
+∣ ∣ ∣ ∣ ∣
+(k1σ2 + k2σ1)2 − (k12 + k22) 2k1k2
+∣ ∣ ∣ ∣ ∣
+< 1, σj = 1 − 2kjR.
+For more complicated geometries as on Fig. 5.8 for prefractal examples, there are also results about stable rays [57], which also called billard’s orbits.
+
+
+5.4. Geometrical optimal control for a fixed frequency 71
+2R
+k1
+k2
+Figure 5.6 – Captive geometry creating the stable periodic rays [10].
+Figure 5.7 – The minor axis of an ellipse provide a stable ray and the major axis is unstable. The parallel plane parts of boundary as for the rectangular provide stable rays [10].
+Figure 5.8 – Stable periodic rays in prefractals (billard’s orbits) [57].
+5.4 Geometrical optimal control for a fixed frequency
+Let us suppose that all wall is absorbing, and it is constructed with the same fixed porous material. The question is to find for a fixed frequency of a source an optimal shape of the wall, which minimizes the acoustical energy. The problem is naturally related to different constraints of building such wall, coming from its concrete application, as:
+1. what it is the volume of the wall (the question is related with the quantity of the porous material and the final price of the wall),
+
+
+72 Chapter 5. Control of the waves
+2. the dimensions of the wall, which could be viewed as the area occupied by the wall (for instance for a barrier for the highways, its shape cannot be too closed to the cars),
+3. which is the complicity of the shapes could be constructed by the chosen technology (for example, the demolding method of construction limits much more geometrical possible shapes of the wall than the 3D printing, but in any case, it would be appreciated to have an efficient shape the most simple as possible).
+These restrictions on the shape of the wall define the class of admissible shapes of Γ (or equivalently of Ω) on which we are searching to minimize the acoustical energy in the framework of the initial problem Fig. 3.1:
+Uad := the classe of admissible shapes Γ.
+Let us fixed the volume V0 of the wall with a plane shape, which we consider as the initial wall of reference (as a wall with the simplest shape), and the acoustical performances of all new shapes of walls are usually compared to the plane shape of the wall.
+Mathematically these practical points could be traduced in the following way (see Fig. 5.9):
+1. we need to impose that for all admissible walls its volume kept identical to the initial wall with a plane shape V0 = hL (see Fig. 5.9; it is rather natural to ask more performances for a fixed quantity of material, making it possible to compare the walls of different shapes with the wall of the plane shape).
+2. we need to restrict the area where the shape of the wall can change, denoted by G (i.e. for all admissible shapes Γ ⊂ G).
+3. we need to ensure the “simplicity” of the shapes which we consider, i.e. to impose that all admissible Γ
+• are of a finite length less or equal to M (uniformly for all Γ, and naturally, the length of Γ is not less than the length of the plane shape Γ0.)
+• are (uniformly) Lipschitz and are locally not too complicated: for a fixed constant cˆ > 0 it holds the following condition
+∀x ∈ Γ
+∫
+Γ∩Br(x) dσ ≤ cˆr. (5.6)
+5.4.1 Model and admissible shapes
+We consider a case of a tunnel with an absorbing barrier (see Fig. 3.7) and model it with the Helmholtz system (5.7) with an absorbing boundary condition
+
+      
+      
+△u + ω2u = f (x) x ∈ Ω,
+u = g(x) sur ΓDir, ∂u
+∂n = 0 sur ΓNeu,
+∂u
+∂n + α(x, ω)u = 0 sur Γ, Re(α) > 0 et Im(α) < 0.
+(5.7)
+
+
+5.4. Geometrical optimal control for a fixed frequency 73
+Air
+h
+L
+Γ
+Sol
+G
+Source
+Figure 5.9 – Illustration for the volume and area G constraints on the admissible class of walls.
+We consider the two-dimensional shape design problem, which consists of optimizing the shape of Γ with the Robin dissipative condition to minimize the acoustic energy of system (5.7). The boundaries with the Neumann and Dirichlet conditions ΓDir and ΓNeu are supposed to be fixed.
+We also define a fixed open set D with a Lipschitz boundary, containing all domains Ω. Even if we consider the case of Fig. 5.9 we also need to restrict our problem to a global fixed bounded domain D (since even from the numerical point of view is not possible to work in all Rn). Actually, as only a part of the boundary (precisely Γ) changes its shape, we also impose, as mentioned previously, that the changing part always lies inside of the closure of a fixed open set G with a Lipschitz boundary: Γ ⊂ G. The set G forbids Γ to be too close to ΓDir, making the idea of an
+Ω
+G
+D
+ΓN eu
+ΓN eu
+ΓDir Γ
+Figure 5.10 – Example of a domain Ω in R2 with three types of boundaries: ΓDir and ΓNeu are fixed and Γ can be changed in the restricted area G. Here Ω ∪ G = D and obviously Ω ⊂ D.
+acoustical wall more realistic (for an example, see Fig. (5.10)).
+The admissible class of domains [53] includes all domains, subsets of a fixed Lipschitz domain D and containing Γ in a fixed compact set G in D
+Uad(Ω0, Lip, cˆ, M, G) ={Ω ∈ Lip | ΓDir ∪ ΓNeu ⊂ ∂Ω, Γ ⊂ G,
+0 < Vol(Γ) =
+∫
+Γ dσ ≤ M < +∞,
+∫
+Ω dx = Vol(Ω0)}, (5.8)
+where Lip the class of all domains Ω ⊂ D with (uniformly) Lipschitz boundaries of a bounded length M > 0 and supposed to be not too complicated by the local condition (5.6).
+
+
+74 Chapter 5. Control of the waves
+Let us notice that the values of M, or more precisely its lower bound, influence the minimal acoustical energy value. For instance, naturally, if Γ0 is the plane shape, then all Γ are such that Vol(Γ) ≥ Vol(Γ0) > 0, which gives us a reasonable restriction to impose M ≥ Vol(Γ0) > 0: if M = Vol(Γ0) the unique solution is the plane shape, as soon as it is impossible to relate two fixed points in the plane by a curve shorter than the line. However, the more interesting problem is to take M still finite but “sufficient bigger” than Vol(Γ0).
+5.4.2 Remarks about the existence of an optimal shape
+From a numerical point of view, the finite-dimensional optimization problems all times have at least one optimal shape, i.e. all times have a solution. It could be understood in the sense that a discretized domain is given by a finite mesh, which defines a finite number of possible changes of its boundary satisfying all desired restriction criteria. Hence, between these finite number of possibilities, it is all times possible to find at least one optimal shape. It is not surprising, as soon as for numerics, the infinite sequences do not exist, and, roughly speaking, all possible nonexistence results and other counter-examples usually come from the passage to the limit.
+From a mathematical point of view, when the domains are not discretized and are subsets of Rn and a considered on it model has a solution from a space of infinite dimension, this question of the existence of an optimal shape is not trivial at all. For instance, we can cite different classical examples of shape optimization problems for which the desired optimal shape does not exist [41, Sec. 4.2, p. 137].
+From the theoretical point of view, if we consider the admissible shapes defined in subsection 5.4.1, as (uniformly) Lipschitz boundary with the usual Lebesgue measure, then for the shape optimization problem
+inf
+Ω∈Uad(Ω0,Lip,cˆ,M,G) J (Ω, u(Ω))
+there exists an optimal shape Ωopt ∈ Uad(Ω0, Lip, cˆ, M, G) providing the infinum of J (it also could provide a minimum, but as soon as we don’t know sufficiently the properties of the minimizing sequence of (Ωk)k∈N∗ ⊂ Uad(Ω0, Lip, cˆ, M, G) is not possible to conclude it). This infinum is realized for the weak solution of the Helmholtz problem on Ωopt ∈ Uad(Ω0, Lip, cˆ, M, G), i.e. on a domain with a Lipschitz shape Γopt, but with possibly different measure on it (a measure equivalent to the Lebesgue measure).
+The problem occurs from the fact that the uniformly bounded (by M) perimeters are not continuous (only lower continuous [41]): if Γk → Γopt (actually in the Hausdorff sense), this does not imply that
+∀φ ∈ C(D)
+∫
+Γk
+φdσ →
+∫
+Γopt
+φdσ,
+and the only possibility that we have is to say that there exists a finite measure μ∗ on Γopt, such that
+∀φ ∈ C(D)
+∫
+Γk
+φdσ →
+∫
+Γopt
+φdμ∗.
+Suppose μ∗(Γopt) = ∫
+Γopt 1dσ (unfortunately not guaranteed). In that case, we can establish the
+existence of the minimum of our optimization problem, since we stay in the same admissible class with the same fixed usual Lebesgue measure. Otherwise, and it is the general situation, we can only conclude the existence of an optimal shape Ωopt realizing the infinium of J on Uad(Ω0, Lip, cˆ, M, G). For more details (not required in the framework of this course), see [53].
+
+
+5.5. Non unicity of an optimal shape 75
+It is similar to the situation of the parametric optimization, where it is not generally possible to find its minimum on Uad(β), but only its infinium. A relaxation problem consists of allowing different measures on the boundary Γ and passing from the uniformly bounded perimeter shapes to the shapes with uniformly bounded measures. Roughly speaking, this can be viewed as a class of shapes with bounded dimensions n − 1 ≤ d < n, involving d-dimensional fractals, Lipschitz boundaries, and their mixtures and other generalizations [43, 44]. In this class of admissible shapes, there is the existence of the minimum of J.
+5.5 Non unicity of an optimal shape
+For a fixed frequency and even on a fixed range of frequencies, different absorbing shapes can provide the same values of energy.
+It comes [31, 33, 34] from the identical spectral properties for different shapes, i.e. the eigenvalues.
+For example, Fig. 5.11 shows two domains for which −∆ has the same eigenvalues. We don’t
+Figure 5.11 – Carolyn Gordon, David Webb and Sco Wolpert (1992): two examples of domains with the same spectrum.
+have the uniqueness of the optimal shape, since different shapes can have the same spectrum and be identically efficient in the dissipation of the energy in the fixed range of frequency.
+We can illustrate it numerically on Fig. 5.12. We take as a reference domain Ωflat =]0, 2[×]0, 1[ with a flat boundary Γ0 fixed at x = 2. The characteristic lengths of Ωflat are l = 1 and L = 2l.
+The Helmholtz equation is considered with a wave number k = ω
+c0 , i.e,
+∆u + k2u = −f,
+where c0 is the sound speed in air. We take
+f = 0, g = 1
+σ√2π exp
+(
+−(y − 1/2)2
+2σ2
+)
+
+
+76 Chapter 5. Control of the waves
+with σ = 1 in the Helmholtz boundary value problem. For the chosen σ, the smallest wavelength, excited by g, is λ = l
+2. The parameter α in the Robin boundary condition depends on
+the value of the frequency ω. The parameter α is calculated for ISOREL porous medium, using a minimization of the difference between the solution of the problem with a volume dissipation (described by a damped wave equation) and the solution of the problem with the boundary dissipation for the flat shape boundary (see Theorem B.1 [53]). We solve the Helmholtz boundary value problem on a fine mesh with the size h = l
+64 (see Appendix B). For waves with the wave
+length equal to l
+2 , this typically gives dispersion errors of the order 10−3, since the dispersion
+error due to the centered finite difference approximation of the Laplacian is known to be (kh)2
+24 ,
+with kh = 2π
+32 here. We fix the frequency ω0 = 3170, which is a local maximum of
+J(ω, Ω) =
+∫
+Ω |u|2dx,
+calculated for Ωflat =]0, 2[×]0, 1[ in a range of frequencies ω ∈ [3000, 6000].
+(a) Ωflat (b) Ωflat
+optimal (c) Ωc
+optimal
+0
+0.5
+1
+2400 2600 2800 3000 3200 3400 3600 3800 4000
+0
+1
+2
+3
+4
+5
+ω
+objective function
+J(Ωflat)
+J(Ωflat
+optimal) J(Ωc
+optimal)
+(e) Energies for these three domains
+Figure 5.12 – The values of |u|2 are presented on the domain with the flat boundary shape and two optimal domains for the fixed frequency ω0 = 3170. Numerical values of J(ω, Ω) =
+‖u(ω, Ω)‖2L2 at ω0 = 3170 are almost the same: J(Ωoflpatt) = 0.1654 and J(Ωcopt) = 0.1659.
+The graphs of J (ω, Ωoflpattimal) and J (ω, Ωcoptimal) are almost the same for the chosen range
+of frequencies.
+5.6 Engineering acoustical energy control on a range of frequencies
+From the engineering point of view the most important question is to find “range-optimal” shape, i.e. a shape of an absorbing wall, the most efficient on a fixed range of frequencies. An
+
+
+5.6. Engineering acoustical energy control on a range of frequencies 77
+other optimality could be related with the geometrical complexity and ability to be constructed.
+Numerically we start by finding of a “range-optimal” shape in absorption and after we simplify it and compare two performances.
+Once we know how to find numerically an optimal shape for one fixed frequency, we can develop an algorithm of the energy minimization on a range of frequencies. For the Helmoltz model
+(a) Ω0 (b) Ω1 (c) Ω2 (d) Ω3
+(e) Ω4 (f) Ω5 (g) Ω6 (h) Ω7
+Figure 5.13 – Shapes, which are used in the optimization algorithm process: from left to right in the top line - Ω0 (the initial shape), Ωk, k = 1, 2, 3, and from left to right in the bo om line - Ωk, k = 4, 5, 6, 7. The domain Ω7 is generated manually in the aim to simplify Ω6 (the final “range-optimal” shape).
+described above, we minimize the acoustical energy J(ω, Ω) = ∫
+Ω |u(ω, Ω)|2dx in the range
+ω ∈ [3000, 6000].
+As previously, we fix the frequency ω0 = 3170 of a local maximum of J on Ωflat =]0, 2[×]0, 1[. We perform the shape optimization algorithm for this frequency, taking as the initial shape Ω0, given on Fig. 5.13, and we obtain Ω1, optimal at ω = 3170. Noticing that all local maxima of J(Ω1) are smaller than the local maxima of J(Ωflat) (see Fig. 5.14), we choose Ω1 as the initial domain and restart the optimization algorithm, minimizing in the neighborhood of Ω1 the sum
+of functionals ∑3k=1 J(Ω)(ωk), where ω1 = 3410, ω2 = 4025 and ω3 = 4555 are the local
+maxima of J(Ω1). This minimization gives the optimal shape Ω2, such that
+1. Ω2 is “range-optimal” in the neighborhood of ωk for k = 0, 1, 2, 3;
+2. all local maxima of J(Ω2) are smaller than the local maxima of J(Ω1).
+Choosing ω4 = 3625 and ω5 = 4240, corresponding to the local maxima of J(Ω2), we take Ω2 as the initial domain and restart the optimization algorithm, minimizing J(Ω)(ω4) + J(Ω)(ω5) to obtain the optimal shape Ω3, such that
+1. Ω3 is “range-optimal” in the neighborhood of ωk for k = 0, . . . , 5;
+2. all local maxima of J(Ω3) are smaller than the local maxima of J(Ω2).
+
+
+78 Chapter 5. Control of the waves
+3000 3500 4000 4500 5000 5500 6000
+0
+0.5
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+ω
+objective function
+J(Ωflat) J(Ω1)
+J(Ω2)
+J(Ω3)
+J(Ω4)
+J(Ω5)
+J(Ω6)
+Figure 5.14 – The values of the objective function J(Ω0) (A = 1, B = 0, C = 0) for the flat shape as a function of ω ∈ [3000, 6000] are presented by the line with circles, the values of J(Ω1) (see Fig. 5.13 for the shape of Ω1) are presented by the line with squares, of the values J(Ω2) by the line with stars, those of J(Ω3) by the line with empty rhombus, those of J(Ω4) by the line with arrows, those of J(Ω5) by the line with full rhombus, and those of J(Ω6) by the black dashed line.
+3000 3500 4000 4500 5000 5500 6000
+0
+0.5
+1
+1.5
+2
+2.5
+3
+3.5
+4
+4.5
+ω
+objective function
+J(Ωflat) J(Ω6)
+J(Ω7)
+Figure 5.15 – Comparison of the dissipative properties of the flat shape Ωflat, the optimal Ω6 and of its simplification Ω7. The values of J(Ωflat), of J(Ω6) and of J(Ω7) (A = 1, B = 0, C = 0) as functions of ω ∈ [3000, 6000] are given by the lines with circles, squares and stars respectively.
+We iterate this process up to Ω6, and we are stopped by the restriction that Γ must be contained by the area G = [ 3
+2 , 3] × [0, 1].
+The shape of Ω6 contains multiscale details, which ensures the dissipative performances of the wall in a large range of frequencies (see Fig. 5.14). Thinking about the demolding process of wall construction, we simplify the geometry of Ω6, deleting the multi scales, and keeping only the largest characteristic scale of Ω6 (see the domain Ω7, generated by hand, on Fig. 5.13). As we
+
+
+5.6. Engineering acoustical energy control on a range of frequencies 79
+can see from Fig. 5.15, since we have kept almost unchanged the largest characteristic geometric size for Ω6 and Ω7, the energy dissipation is also almost the same in the corresponding range of frequencies (see red and green lines for [3000, 3700] on Fig. 5.15). As all smaller-scale details have been deleted, the shape of Ω7 is not as good as the shape of Ω6 to dissipate higher frequencies (see lines with squares and stars for [3700, 6000] on Fig. 5.15). Hence, Fig. 5.15 shows that the compromises between two desired properties “to be the most dissipative” (as Ω6 here) and “to be simple to construct” (on the example of Ω7) is not too bad, especially if we know the most critical frequencies to dissipate.
+
+
+
+
+Chapter 6
+Compactness
+6.1 Compact sets in the normed vector spaces
+6.1.1 Definitions and examples
+Definition 6.1.1. Let (X, ‖ · ‖X ) be a normed vector space. A set M ⊂ X is called compact, if any sequence of M contains a sub sequence converging to an element of M:
+∀(xn)n∈N ⊂ M ∃(xnk )k∈N ⊂ (xn)n∈N and ∃x ∈ M such that
+xnk → x in X, i.e. ‖xnk − x‖X → 0, k → +∞.
+In particular for the finite dimensional spaces there is the Theorem of Heine-Borel
+Theorem 6.1.1. (Heine-Borel) In Rn (or Cn ) a set is compact if and only if it is bounded and closed.
+Attention: If the space (X, ‖ · ‖X) has an infinite dimension (dimX = +∞), as for example the spaces L2(Ω), H1(Ω) and C(Ω), the condition
+“bounded + closed ” ⇒ compact
+does not true anymore. We only have the statement
+compact ⇒ “bounded + closed ”.
+The following example is actually a very important theorem:
+Example 6.1.1. Let (X, ‖ · ‖X ) be a normed linear vector space of infinite dimension. Then the closed unit ball B1(0) = {x ∈ X|‖x‖X ≤ 1} is not compact.
+But it is more easy to prove it in the case of a Hilbert space:
+
+
+82 Chapter 6. Compactness
+Example 6.1.2. Let H be a separable Hilbert space (there exists a countable orthonormal basis) of infinite dimension. Let us denote this basis (en)n∈N∗ ⊂ H. By its definition
+(ek, em)H = δk,m =
+{ 1, k = m 0, k 6= m.
+Thus we compute
+‖ek − em‖2H = (ek − em, ek − em)H = 2,
+which means that the distance
+dH(ek, em) = ‖ek − em‖H = √2 ∀k 6= m.
+In other words, the elements ek and em are all separated by the distance equal to √2. Thus this sequence cannot have any convergent sub sequence in H (there are no an accumulation point). Thus we have taken a sequence of the closed unit ball of H and it dose not have a convergent sub sequence. Thus the closed unit ball in H is not compact.
+Let us now give an example of compact sets:
+Example 6.1.3. Let (xn)nN be a convergent sequence in a normed vector space (X, ‖ · ‖X) (i.e. there exists x ∈ X such that xn → x for n → +∞ in X). This sequence (xn))nN with x forms a compact set.
+More generally, the compact sets cannot contain any non trivial closed ball of X (these kind of sets are called nowhere dense sets in X).
+Definition 6.1.2. (Strong convergence) Let (X, ‖ · ‖X) be a normed linear vector space. We say that a sequence (xn)n∈N ⊂ X converges strongly to x ∈ X if it converges by the norm of X (xn → x in X if ‖xn − x‖X → 0 for n → +∞).
+So, we have seen that the closed ball in the infinite dimensional vector normed space is not compact for the strong type of convergence.
+Question: Is it possible to make Br(x) compact in (an infinite dimensional) Hilbert space?
+To do it, we need to consider the weak convergence.
+6.1.2 Weak convergence in a Hilbert space
+In this subsection we suppose to work in a Hilbert space of infinite dimension.
+Definition 6.1.3. (Weak convergence) Let H be a Hilbert space. We say that (xn)n∈N ⊂ H converges weakly to x ∈ H and write xn ⇀ x in H if
+∀v ∈ H (xn, v)H → (x, v)H, (6.1)
+where, as previously, (·, ·)H is an inner product in H.
+
+
+6.1. Compact sets in the normed vector spaces 83
+Attention: The sequence ((xn, v)H)n∈N ⊂ C is a numerical sequence.
+Properties of the weak convergence
+Let us now consider the properties of the weak convergence:
+Proposition 6.1.1. Weak limit is unique.
+Proof
+Let us suppose the converse. Let (xn) be a sequence in H such that
+xn ⇀ x and xn ⇀ x ̃ n → ∞.
+Then for all v ∈ H,
+(xn, v)H → (x, v)H, and (xn, v)H → (x ̃, v)H.
+Thus, the numerical sequence ((xn, v)H)n∈N is convergent in C (or R). Consequently, there exists only one limit of this numerical sequence:
+∀v ∈ H (x, v)H = (x ̃, v)H.
+Therefore,
+∀v ∈ H (v, x − x ̃)H = 0.
+It means that the vector x − x ̃ is orthogonal to all space H, including itself. From x − x ̃ ⊥ x − x ̃ it follows that x − x ̃ = 0. The contradiction.
+Proposition 6.1.2. The strong convergence implies the weak convergence, but in the infinite dimensional case generally the weak convergence does not implies the strong one:
+−→ ⇒ ⇀ , but ⇀ ; −→ .
+However, if dimH = m < ∞, then (H is isomorph to Rm or Cm) the weak convergence implies the strong convergence and thus two convergences are equivalent.
+Proof
+Let us prove −→ ⇒ ⇀ . If xn → x in H, then ‖xn − x‖H → 0 in H and hence, by the Cauchy-Swartz inequality, for all v ∈ H
+|(xn, v)H − (x, v)H| = |(xn − x, v)H| ≤ ‖v‖H‖xn − x‖H → 0.
+Then, by Definition 6.1.3, we conclude that xn ⇀ x in H.
+Let us now give an example of a sequence which converges weakly but not strongly in an infinite dimensional Hilbert space.
+Let (ek) be orthonormal basis in H. Then every vector can be approximated by its Fourier series:
+∀x ∈ H x = ∑
+k∈N
+(x, ek)H ek, i.e. ‖x −
+k
+∑
+i=1
+(x, ek)Hek‖H → 0 for k → +∞.
+
+
+84 Chapter 6. Compactness
+Here ((x, ek)H)k∈N are the coefficients of Fourier of x corresponding to the basis (ek)k∈N. We recall that it holds the Parseval identity:
+∀x ∈ H ‖x‖2H = ∑
+k∈N
+|(x, ek)H |2,
+which actually means that the numerical series ∑
+k∈N |(x, ek)H |2 converges. Then
+∀x ∈ H 〈x, ek〉 → 0 k → ∞.
+Consequently, ek ⇀ 0. But if n 6= m ‖en − em‖2 = 〈en − em, en − em〉 = 2, thus (ek) is not a Cauchy sequence in H and then (ek)k∈N does not converge.
+The equivalence of the weak and strong convergences in a finite dimensional space follows from the fact that all norms in this case are equivalent. We omit the proof.
+Proposition 6.1.3. If xn ⇀ x in H, then (xn)n∈N is bounded (by norm) in H:
+∃C > 0 : ‖xn‖H < C and ‖x‖H ≤ lim inf ‖xn‖H,
+where lim inf ‖xn‖H = limn→∞(infm≥n xm).
+Instead of the proof let us give an example:
+Example 6.1.4. Let us consider L2([0, 1]) and
+xn(t) = √2 sin(πnt).
+The sequence (xn) is an orthonormal basis of L2([0, 1]). We have
+‖xn‖ = 1 ⇒ linm ‖xn‖ = 1.
+For α(t) ∈ L2([0, 1]) we define, with notation cn for Fourier coefficients,
+f (xn) = √2
+∫1
+0 α(t) sin(πnt)dt = √2cn
+such that
+f (xn) → 0, n → ∞, and xn ⇀ 0.
+Thus, the limit x = 0 and
+‖x‖ = 0 < 1 = linm ‖xn‖.
+In addition we have the following characterization of the weak convergence:
+Proposition 6.1.4. A sequence xn ⇀ x in H for n → +∞ if and only if
+1. (‖xn‖)n∈N is bounded,
+2. For n → +∞, (v, xn) → (v, x) ∀v ∈ E, E = H.
+We know that the inner product is continuous by the strong convergence in H:
+xn → x, yn → y ⇒ (xn, yn) → (x, y).
+If xn ⇀ x, yn ⇀ y, it does not imply that (xn, yn) → (x, y). Let us give an example:
+
+
+6.1. Compact sets in the normed vector spaces 85
+Example 6.1.5. Let (en) be an orthonormal sequence in H and xn = yn = en. Then en ⇀ 0 and
+(en, en) = ‖en‖2 = 1 9 0 = (0, 0).
+Proposition 6.1.5. Let H be a Hilbert space. If xn → x and yn ⇀ y in H, then
+(xn, yn) → (x, y).
+Proof. Since yn ⇀ y in H, for all n ∈ N the norms ‖yn‖ are bounded. Let
+M = sunp ‖yn‖.
+Then, by the Cauchy-Schwartz inequality, we have
+|(xn, yn) − (x, y)| ≤ |(xn − x, yn)| + |(x, yn − y)| ≤ M ‖xn − x‖ + |(x, yn − y)|.
+Since yn ⇀ y in H, then |(x, yn − y)| → 0, and since xn → x, then ‖xn − x‖ → 0. Therefore, we conclude that |(xn, yn) − (x, y)| → 0.
+Remark: Hence, it is important to have at least one of two sequence converging strongly. If we have two weak convergent sequences, it is not enough to have the convergence of the corresponding inner products.
+The following proposition is really very useful.
+Proposition 6.1.6. Let H be a real Hilbert space. Let (xn)n∈N be a weakly converging sequence to x. Further assume that ‖xn‖ converges to ‖x‖ for n → +∞. Then (xn)n∈N converges strongly to x.
+Proof. We have
+(xn − x, xn − x) = (xn, xn) − (xn, x) − (x, xn) + (x, x).
+For n → ∞, we find that
+nli→m∞ (xn − x, xn − x) = 0,
+which means that ‖xn − x‖ → 0, i.e. xn → x in H.
+Weak compactness of the closed balls
+Theorem 6.1.2. Let H be a Hilbert space. Then the closed non-trivial ball Br(0) is weakly compact:
+∀(xn)n∈N ⊂ Br(0) ∃(xnk )k∈N ⊂ (xn)n∈N : ∃x ∈ Br(0) such that xnk ⇀ x k → +∞.
+
+
+86 Chapter 6. Compactness
+Attention: As a direct corollary of this theorem we have that all bounded sequence contains a weakly convergent subsequence:
+‖xn‖ ≤ C ∀n ⇒ ∃(xnk )k∈N ⊂ (xn)n∈N : xnk ⇀ x in H.
+6.2 Compact operators
+Definition 6.2.1. A set M ⊂ Y of a normed vector space (Y, ‖ · ‖Y ) is called relatively compact set (in French pré-compact), if its closure M in Y is a compact set in (Y, ‖ · ‖Y ).
+Definition 6.2.2. Let X and Y be Banach spaces. A linear operator A : X → Y is compact, if it maps all bounded sets of the space X to a relatively compact set of the space Y .
+M bounded
+A
+X
+Y
+AM
+Figure 6.1 – Operator A maps a bounded set M of X in a set AM in Y . If AM is bounded, then A is bounded/continuous operator. If AM is relatively compact then A is compact operator (and also bounded).
+Let us denote B1 = B1(0) = {f ∈ X|‖f ‖X ≤ 1} the closed unit ball in X.
+Remark: The operator A is compact iff AB1 is a relatively compact set in Y . Indeed, if A is compact operator, then obviously AB1 is a relatively compact set in Y . Conversely, let AB1 be a relatively compact set in Y . For all bounded sets M in X there exist r > 0, the radius of the ball including M:
+M ⊂ Br = rB1.
+Consequently, using the linearity of A,
+AM ⊂ rAB1.
+Since AB1 is a relatively compact set, thus rAB1 too, what implies that AM is relatively compact (any subset of a relatively compact set is relatively compact itself).
+
+
+6.2. Compact operators 87
+Remark: Let us denote by K(X, Y ) the set of all compact operators from X to Y (X and Y are Banach spaces). We also recall that L(X, Y ) is the normed vector space of all bounded operators from X to Y with a norm
+‖A‖L(X,Y ) = sup
+x6=0
+‖Ax‖Y ‖x‖X
+= sup
+‖x‖X ≤1
+‖Ax‖Y = sup
+‖x‖X =1
+‖Ax‖Y
+= inf{C ∈ R+|‖Ax‖Y ≤ C‖x‖X ∀x ∈ X}.
+We notice that • All compact operators from (X, ‖ · ‖X) to (Y, ‖ · ‖Y ) are bounded operators:
+K(X, Y ) ⊂ L(X, Y ).
+Indeed, it is sufficient to notice that if AB1 is relatively compact, then AB1 is bounded. • If dim X < ∞ or dim Y < ∞, then the compactness of the operators is equivalent to the boundness:
+K(X, Y ) = L(X, Y ).
+Indeed, let dim X < ∞, then AX is finite dimensional. In addition, AB1 ⊂ AX and all bounded set in AX is relatively compact in Y . If dim Y < ∞, we have AB1 ⊂ Y and there is no difference between the relatively compactness and the boundness in the final dimensional space.
+Example 6.2.1. The dual space X∗ = L(X, R) = K(X, R), i.e. all linear continuous functionals on X are compact operators from X to R.
+Attention: M is a relatively compact set in a normed vector space of finite dimension if and only if M is a bounded set.
+Theorem 6.2.1. Let X and Y be Banach spaces. The set of all compact operators from (X, ‖ · ‖X) to (Y, ‖ · ‖Y ), denoted by K(X, Y ), is a closed vector subspace of L(X, Y ):
+1. A is a compact operator ⇒ ∀λ ∈ C λA is compact operator.
+2. A and S are compact operators ⇒ A + S is compact operator.
+3. (An) is a sequence of compact operators such that An → A in L(X, Y ) ⇒ A is compact operator.
+In addition, K(X, X) forms a closed ideal in L(X, X), i.e if A is a compact operator and S is a bounded operator, then the operators AS and SA are compact.
+Proof
+The first statement is admitted without proof. Let now prove
+
+
+88 Chapter 6. Compactness
+A ∈ K(X, X), S ∈ L(X, X) ⇒ AS and SA are compact operators.
+By AS and SA we understand A ◦ S and S ◦ A respectively. Since S maps bounded sets to bounded sets, we have that there exists r > 0 such that
+(AS)B1 = A(SB1) ⊂ ABr,
+and since A is compact and Br is bounded, thus ABr is relatively compact. In other hand, (SA)B1 = S(AB1), where AB1 is relatively compact. Since S ∈ L(X, X), S is continuous and thus preserve the property of the relatively compactness.
+Corollary 6.2.1. A compact operator A mapping a Banach space X into itself cannot have a bounded inverse A−1 if X is infinite-dimensional.
+Proof
+If A−1 were bounded, then, by Theorem 6.2.1, the identity operator I = A−1A would be compact. But the unit ball is not relatively compact in an infinite-dimensional Banach space.
+We also mention the following property of the compact operators:
+Proposition 6.2.1. Let X be a Banach space and A ∈ L(X, X) a compact operator. Then Im(I − A) is a closed subspaces in X. Here, by I is denoted the identity operator.
+Proof
+Let (yn) belong to Im(I − A). Then for all n ∈ N there exists xn ∈ X such that
+xn − Axn = yn.
+Let yn → y in X for n → ∞. Let us prove that y ∈ Im(I − A). We consider the following cases:
+1. Let (xn) be bounded in X. Then the set (Axn) is relatively compact. Moreover, since
+xn = yn + Axn,
+where (yn) converges and (Axn) is relatively compact, we conclude that (xn) is also relatively compact (by the composition of a continuous function x + y with a bounded and a compact operators). Thus, there exists a subsequence (xnk) which converges in X. We denote its limit by x ∈ X. We pass to the limit for nk → ∞ in the equation
+xnk − Axnk = ynk
+and obtain, using the continuity of A, that
+x − Ax = y,
+i.e. y ∈ Im(I − A).
+2. Let (xn) be unbounded in X.
+Let V be a subspace of X equal to Ker(I − A):
+V = Ker(I − A) = {z ∈ X| z − Az = 0}.
+We define the distance
+dn = d(xn, V ) = inf
+z∈V ‖xn − z‖X .
+
+
+6.2. Compact operators 89
+By the definition of the infinimum, there exists zn ∈ V such that
+dn ≤ ‖xn − zn‖X ≤
+(
+1+ 1
+n
+)
+dn. (6.2)
+In addition,
+(I − A)(xn − zn) = yn.
+If (dn) is bounded, then (xn −zn) is bounded and hence, as previos, changing xn to xn −zn, we obtain that y ∈ Im(I − A).
+Let us show that (dn) cannot be unbounded. If it is, then there exists a subsequence, also denoted by (dn), such that
+dn → ∞, n → ∞.
+We consider
+un = xn − zn
+‖xn − zn‖X
+.
+Then
+∀n ∈ N ‖un‖X = 1 and (I − A)un = yn
+‖xn − zn‖X
+→ 0, n → ∞,
+since
+∥ ∥ ∥ ∥ ∥
+yn
+‖xn − zn‖X
+∥ ∥ ∥ ∥
+∥X
+= ‖yn‖X
+‖xn − zn‖X
+≤ supn ‖yn‖X
+dn
+→ 0.
+Therefore, by the previos argument, it follows that there exists a subsequence (unk) such that unk → u for a u ∈ V . In other hand,
+xnk − znk − ‖xnk − znk ‖u = (unk − u)‖xnk − znk ‖,
+and in addition
+znk + ‖xnk − znk ‖X u ∈ V.
+Consequently, thanks to inequality (6.2), we have
+‖unk − u‖X
+(
+1+ 1
+nk
+)
+dnk ≥ ‖(unk − u)‖xnk − znk ‖X ‖X
+= ‖xnk − (znk + ‖xnk − znk ‖X u)‖X ≥ dnk ,
+from where
+‖unk − u‖X ≥ nk
+nk + 1 , lim
+nk →∞
+nk
+nk + 1 = 1,
+but this is a contradiction with ‖unk − u‖ → 0 for nk → ∞. Hence, (dn) is bounded and the boundeness of Im(I − A) is proved.
+
+
+90 Chapter 6. Compactness
+6.3 Strong and weak continuity of the linear operators in a Hilbert space
+Let H be a Hilbert space and A : H → H be a linear operator on H.
+Let us recall that if A is continuous (bounded) operator on H, then
+xn → x in H =⇒ Axn → Ax in H,
+i.e. every strongly convergent sequence in H a bounded (or continuous) operator maps to a strongly convergent sequence in H.
+Let us give now a very important theorem for the weak convergent sequences:
+Theorem 6.3.1. Let H be a Hilbert space, A : H → H be a linear operator on H and a sequence (xk)k∈N ⊂ H converge weakly to x in H.
+Then
+1. if A is continuous, then Axk ⇀ Ax for k → +∞ in H (a continuous operator preserves the weak convergence and can be called also weakly continuous);
+2. if A is compact, then Axk → Ax for k → +∞ in H (a compact operator maps a weak convergent sequence to a strongly convergent sequence).
+Proof
+The proof is given for the completeness, but it can be omitted.
+1. Using the linearity, it is sufficient to consider the case x = 0. Since A ∈ L(H, H), then there exists A∗ ∈ L(H, H). Therefore, if xk ⇀ 0 in H, then
+∀y ∈ H, 〈Axk, y〉 = 〈xk, A∗y〉 → 0.
+2. Let (xk)k∈N be a sequence converging weakly to 0. Thus it is bounded in H.
+Let us suppose that the statement is false:
+‖Axk‖H 9 0 for k → +∞.
+Thus, there exists ǫ > 0 and a subsequence xkj such that
+‖Axkj ‖ ≥ ǫ.
+As (xkj ) is a bounded set in H, the compactness of A implies that there exist y ∈ H and a subsequence (xkm) of the sequence (xkj ) such that
+‖Axkm − y‖ → 0.
+Since xkm ⇀ 0 and A is continuous, then the first point implies that y = 0, and hence
+lim
+m→∞ ‖Axkm ‖ = 0,
+which is a contradiction.

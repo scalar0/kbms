@@ -1,0 +1,2721 @@
+Probabilistic
+Artificial Intelligence
+Andreas Krause, Jonas Hübotter
+Institute for Machine Learning Department of Computer Science
+arXiv:2502.05244v1 [cs.AI] 7 Feb 2025
+
+
+Compiled on February 11, 2025.
+This manuscript is based on the course Probabilistic Artificial Intelligence (263-5210-00L) at ETH Zürich.
+This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+© 2025 ETH Zürich. All rights reserved.
+
+
+Preface
+Artificial intelligence commonly refers to the science and engineering of artificial systems that can carry out tasks generally associated with requiring aspects of human intelligence, such as playing games, translating languages, and driving cars. In recent years, there have been exciting advances in learning-based, data-driven approaches towards AI, and machine learning and deep learning have enabled computer systems to perceive the world in unprecedented ways. Reinforcement learning has enabled breakthroughs in complex games such as Go and challenging robotics tasks such as quadrupedal locomotion.
+A key aspect of intelligence is to not only make predictions, but reason about the uncertainty in these predictions, and to consider this uncertainty when making decisions. This is what “Probabilistic Artificial Intelligence” is about. The first part covers probabilistic approaches to machine learning. We discuss the differentiation between “epistemic” uncertainty due to lack of data and “aleatoric” uncertainty, which is irreducible and stems, e.g., from noisy observations and outcomes. We discuss concrete approaches towards probabilistic inference, such as Bayesian linear regression, Gaussian process models and Bayesian neural networks. Often, inference and making predictions with such models is intractable, and we discuss modern approaches to efficient approximate inference.
+The second part of the manuscript is about taking uncertainty into account in sequential decision tasks. We consider active learning and Bayesian optimization — approaches that collect data by proposing experiments that are informative for reducing the epistemic uncertainty. We then consider reinforcement learning, a rich formalism for modeling agents that learn to act in uncertain environments. After covering the basic formalism of Markov Decision Processes, we consider modern deep RL approaches that use neural network function approximation. We close by discussing modern approaches in model-based RL, which harness epistemic and aleatoric uncertainty to guide exploration, while also reasoning about safety.
+
+
+iv
+Guide to the Reader
+The material covered in this manuscript may support a one semester graduate introduction to probabilistic machine learning and sequential decision-making. We welcome readers from all backgrounds. However, we assume familiarity with basic concepts in probability, calculus, linear algebra, and machine learning (e.g., neural networks) as covered in a typical introductory course to machine learning. In Chapter 1, we give a gentle introduction to probabilistic inference, which serves as the foundation for the rest of the manuscript. As part of this first chapter, we also review key concepts from probability theory. We provide a chapter reviewing key concepts of further mathematical background in the back of the manuscript.
+Throughout the manuscript, we focus on key concepts and ideas rather than their historical development. We encourage you to consult the provided references for further reading and historical context to delve deeper into the covered topics.
+Finally, we have included a set of exercises at the end of each chapter. When we highlight an exercise throughout the text, we use this question mark: ? — so don’t be surprised when you stumble upon it. You Problem 1.1 will find solutions to all exercises in the back of the manuscript.
+We hope you will find this resource useful.
+Contributing
+We encourage you to raise issues and suggest fixes for anything you think can be improved. We are thankful for any such feedback! Contact: pai-script@lists.inf.ethz.ch
+Acknowledgements
+We are grateful to Sebastian Curi for creating the original Jupyter notebooks that accompany the course at ETH Zürich and which were instrumental in the creation of many figures. We thank Hado van Hasselt for kindly contributing Figure 12.1, and thank Tuomas Haarnoja (Haarnoja et al., 2018a) and Roberto Calandra (Chua et al., 2018) for kindly agreeing to have their figures included in this manuscript. Furthermore, many of the exercises in these notes are adapted from iterations of the course at ETH Zürich. Special thanks to all instructors that contributed to the course material over the years. We also thank all students of the course in the Fall of 2022, 2023, and 2024 who provided valuable feedback on various iterations of this manuscript and corrected many
+
+
+v
+mistakes. Finally, we thank Zhiyuan Hu, Shyam Sundhar Ramesh, Leander Diaz-Bone, Nicolas Menet, and Ido Hakimi for proofreading parts of various drafts of this text.
+
+
+
+
+Contents
+1 Fundamentals of Inference 1
+1.1 Probability 2 1.2 Probabilistic Inference 15 1.3 Supervised Learning and Point Estimates 22 1.4 Outlook: Decision Theory 29
+I Probabilistic Machine Learning 35
+2 Linear Regression 39
+2.1 Weight-space View 40 2.2 Aleatoric and Epistemic Uncertainty 44 2.3 Non-linear Regression 45 2.4 Function-space View 45
+3 Filtering 51
+3.1 Conditioning and Prediction 53 3.2 Kalman Filters 54
+4 Gaussian Processes 59
+4.1 Learning and Inference 60 4.2 Sampling 61 4.3 Kernel Functions 62 4.4 Model Selection 67 4.5 Approximations 70
+
+
+viii
+5 Variational Inference 83
+5.1 Laplace Approximation 83 5.2 Predictions with a Variational Posterior 87 5.3 Blueprint of Variational Inference 88 5.4 Information Theoretic Aspects of Uncertainty 89 5.5 Evidence Lower Bound 100
+6 Markov Chain Monte Carlo Methods 113
+6.1 Markov Chains 114 6.2 Elementary Sampling Methods 121 6.3 Sampling using Gradients 124
+7 Deep Learning 139
+7.1 Artificial Neural Networks 139 7.2 Bayesian Neural Networks 142 7.3 Approximate Probabilistic Inference 144 7.4 Calibration 152
+II Sequential Decision-Making 157
+8 Active Learning 161
+8.1 Conditional Entropy 161 8.2 Mutual Information 163 8.3 Submodularity of Mutual Information 166 8.4 Maximizing Mutual Information 168 8.5 Learning Locally: Transductive Active Learning 172
+9 Bayesian Optimization 177
+9.1 Exploration-Exploitation Dilemma 177 9.2 Online Learning and Bandits 178 9.3 Acquisition Functions 180
+10 Markov Decision Processes 197
+10.1 Bellman Expectation Equation 199 10.2 Policy Evaluation 201
+
+
+ix
+10.3 Policy Optimization 203 10.4 Partial Observability 209
+11 Tabular Reinforcement Learning 217
+11.1 The Reinforcement Learning Problem 217 11.2 Model-based Approaches 219 11.3 Balancing Exploration and Exploitation 220 11.4 Model-free Approaches 224
+12 Model-free Reinforcement Learning 233
+12.1 Tabular Reinforcement Learning as Optimization 233 12.2 Value Function Approximation 235 12.3 Policy Approximation 238 12.4 On-policy Actor-Critics 244 12.5 Off-policy Actor-Critics 251 12.6 Maximum Entropy Reinforcement Learning 256 12.7 Learning from Preferences 260
+13 Model-based Reinforcement Learning 273
+13.1 Planning 274 13.2 Learning 281 13.3 Exploration 287
+A Mathematical Background 299
+A.1 Probability 299 A.2 Quadratic Forms and Gaussians 301 A.3 Parameter Estimation 302 A.4 Optimization 313 A.5 Useful Matrix Identities and Inequalities 319
+B Solutions 321
+Bibliography 385
+Summary of Notation 393
+
+
+x
+Acronyms 399
+Index 401
+
+
+1
+Fundamentals of Inference
+Boolean logic is the algebra of statements which are either true or false. Consider, for example, the statements
+“If it is raining, the ground is wet.” and “It is raining.”
+A quite remarkable property of Boolean logic is that we can combine these premises to draw logical inferences which are new (true) statements. In the above example, we can conclude that the ground must be wet. This is an example of logical reasoning which is commonly referred to as logical inference, and the study of artificial systems that are able to perform logical inference is known as symbolic artificial intelligence.
+But is it really raining? Perhaps it is hard to tell by looking out of the window. Or we have seen it rain earlier, but some time has passed since we have last looked out of the window. And is it really true that if it rains, the ground is wet? Perhaps the rain is just light enough that it is absorbed quickly, and therefore the ground still appears dry.
+This goes to show that in our experience, the real world is rarely black and white. We are frequently (if not usually) uncertain about the truth of statements, and yet we are able to reason about the world and make predictions. We will see that the principles of Boolean logic can be extended to reason in the face of uncertainty. The mathematical framework that allows us to do this is probability theory, which — as we will find in this first chapter — can be seen as a natural extension of Boolean logic from the domain of certainty to the domain of uncertainty. In fact, in the 20th century, Richard Cox and Edwin Thompson Jaynes have done early work to formalize probability theory as the “logic under uncertainty” (Cox, 1961; Jaynes, 2002).
+In this first chapter, we will briefly recall the fundamentals of probability theory, and we will see how probabilistic inference can be used
+
+
+2 probabilistic artificial intelligence
+to reason about the world. In the remaining chapters, we will then discuss how probabilistic inference can be performed efficiently given limited computational resources and limited time, which is the key challenge in probabilistic artificial intelligence.
+1.1 Probability
+Probability is commonly interpreted in two different ways. In the frequentist interpretation, one interprets the probability of an event (say a coin coming up “heads” when flipping it) as the limit of relative frequencies in repeated independent experiments. That is,
+Probability = Nli→m∞
+# events happening in N trials
+N.
+This interpretation is natural, but has a few issues. It is not very difficult to conceive of settings where repeated experiments do not make sense. Consider the outcome:
+“Person X will live for at least 80 years.”
+There is no way in which we could conduct multiple independent experiments in this case. Still, this statement is going to turn out either true or false, as humans we are just not able to determine its truth value beforehand. Nevertheless, humans commonly have beliefs about statements of this kind. We also commonly reason about statements such as
+“The Beatles were more groundbreaking than The Monkees.”
+This statement does not even have an objective truth value, and yet we as humans tend to have opinions about it.
+While it is natural to consider the relative frequency of the outcome in repeated experiments as our belief, if we are not able to conduct repeated experiments, our notion of probability is simply a subjective measure of uncertainty about outcomes. In the early 20th century, Bruno De Finetti has done foundational work to formalize this notion which is commonly called Bayesian reasoning or the Bayesian interpretation of probability (De Finetti, 1970).
+We will see that modern approaches to probabilistic inference often lend themselves to a Bayesian interpretation, even if such an interpretation is not strictly necessary. For our purposes, probabilities will be a means to an end: the end usually being solving some task. This task may be to make a prediction or to take an action with an uncertain outcome, and we can evaluate methods according to how well they perform on this task. No matter the interpretation, the mathematical
+
+
+fundamentals of inference 3
+framework of probability theory which we will formally introduce in the following is the same.
+1.1.1 Probability Spaces
+A probability space is a mathematical model for a random experiment. The set of all possible outcomes of the experiment Ω is called sample space. An event A ⊆ Ω of interest may be any combination of possible outcomes. The set of all events A ⊆ P (Ω) that we are interested in
+is often called the event space of the experiment.1 This set of events is 1 We use P(Ω) to denote the power set (set of all subsets) of Ω.
+required to be a σ-algebra over the sample space.
+Definition 1.1 (σ-algebra). Given the set Ω, the set A ⊆ P (Ω) is a σ-algebra over Ω if the following properties are satisfied:
+1. Ω ∈ A;
+2. if A ∈ A, then A ∈ A (closedness under complements); and
+3. if we have Ai ∈ A for all i, then Si∞=1 Ai ∈ A (closedness under countable unions).
+Note that the three properties of σ-algebras correspond to characteristics we universally expect when working with random experiments. Namely, that we are able to reason about the event Ω that any of the possible outcomes occur, that we are able to reason about an event not occurring, and that we are able to reason about events that are composed of multiple (smaller) events.
+Example 1.2: Event space of throwing a die
+The event space A can also be thought of as “how much information is available about the experiment”. For example, if the experiment is a throw of a die and Ω is the set of possible values on the die: Ω = {1, . . . , 6}, then the following A implies that the observer cannot distinguish between 1 and 3:
+A .= {∅, Ω, {1, 3, 5}, {2, 4, 6}}.
+Intuitively, the observer only understands the parity of the face of the die.
+Definition 1.3 (Probability measure). Given the set Ω and the σ-algebra A over Ω, the function
+P:A→R
+is a probability measure on A if the Kolmogorov axioms are satisfied:
+1. 0 ≤ P(A) ≤ 1 for any A ∈ A; 2. P(Ω) = 1; and
+
+
+4 probabilistic artificial intelligence
+3. P(Si∞=1 Ai) = ∑i∞=1 P(Ai) for any countable set of mutually disjoint
+events {Ai ∈ A}i.2 2 We say that a set of sets {Ai}i is disjoint
+if for all i ̸= j we have Ai ∩ Aj = ∅. Remarkably, all further statements about probability follow from these three natural axioms. For an event A ∈ A, we call P(A) the probability of A. We are now ready to define a probability space.
+Definition 1.4 (Probability space). A probability space is a triple (Ω, A, P) where
+• Ω is a sample space, • A is a σ-algebra over Ω, and • P is a probability measure on A.
+Example 1.5: Borel σ-algebra over R
+In our context, we often have that Ω is the set of real numbers R or a compact subset of it. In this case, a natural event space is the σ-algebra generated by the set of events
+Ax .= {x′ ∈ Ω : x′ ≤ x}.
+The smallest σ-algebra A containing all sets Ax is called the Borel σ-algebra. A contains all “reasonable” subsets of Ω (except for some pathological examples). For example, A includes all singleton sets {x}, as well as all countable unions of intervals.
+In the case of discrete Ω, in fact A = P (Ω), i.e., the Borel σalgebra contains all subsets of Ω.
+1.1.2 Random Variables
+The set Ω is often rather complex. For example, take Ω to be the set of all possible graphs on n vertices. Then the outcome of our experiment is a graph. Usually, we are not interested in a specific graph but rather a property such as the number of edges, which is shared by many graphs. A function that maps a graph to its number of edges is a random variable.
+Definition 1.6 (Random variable). A random variable X is a function
+X:Ω→T
+where T is called target space of the random variable,3 and where X 3 For a random variable that maps a graph to its number of edges, T = N0. For our purposes, you can generally assume T ⊆ R.
+respects the information available in the σ-algebra A. That is,4
+4 In our example of throwing a die, X should assign the same value to the outcomes 1, 3, 5.
+∀S ⊆ T : {ω ∈ Ω : X(ω) ∈ S} ∈ A. (1.1)
+
+
+fundamentals of inference 5
+Concrete values x of a random variable X are often referred to as states or realizations of X. The probability that X takes on a value in S ⊆ T is
+P(X ∈ S) = P({ω ∈ Ω : X(ω) ∈ S}). (1.2)
+1.1.3 Distributions
+Consider a random variable X on a probability space (Ω, A, P), where Ω is a compact subset of R, and A the Borel σ-algebra.
+In this case, we can refer to the probability that X assumes a particular state or set of states by writing
+pX(x) .= P(X = x) (in the discrete setting), (1.3)
+PX(x) .= P(X ≤ x). (1.4)
+Note that “X = x” and “X ≤ x” are merely events (that is, they characterize subsets of the sample space Ω satisfying this condition) which are in the Borel σ-algebra, and hence their probability is well-defined.
+Hereby, pX and PX are referred to as the probability mass function (PMF) and cumulative distribution function (CDF) of X, respectively. Note that we can also implicitly define probability spaces through random variables and their associated PMF/CDF, which is often very convenient.
+We list some common examples of discrete distributions in Appendix A.1.1. Further, note that for continuous variables, P(X = x) = 0. Here, instead we typically use the probability density function (PDF), to which we (with slight abuse of notation) also refer with pX. We discuss densities in greater detail in Section 1.1.4.
+We call the subset S ⊆ T of the domain of a PMF or PDF pX such that all elements x ∈ S have positive probability, pX(x) > 0, the support of the distribution pX. This quantity is denoted by X(Ω).
+1.1.4 Continuous Distributions
+As mentioned, a continuous random variable can be characterized by its probability density function (PDF). But what is a density? We can derive some intuition from physics.
+Let M be a (non-homogeneous) physical object, e.g., a rock. We commonly use m(M) and vol(M) to refer to its mass and volume, respectively. Now, consider for a point x ∈ M and a ball Br(x) around x with radius r the following quantities:
+rli→m0 vol(Br(x)) = 0 rli→m0 m(Br(x)) = 0.
+
+
+6 probabilistic artificial intelligence
+They appear utterly uninteresting at first, yet, if we divide them, we get what is called the density of M at x.
+rli→m0
+m( Br ( x)) vol( Br ( x))
+.= ρ(x).
+We know that the relationship between density and mass is described by the following formula:
+m(M) =
+Z
+M ρ(x) dx.
+In other words, the density is to be integrated. For a small region I around x, we can approximate m(I) ≈ ρ(x) · vol(I).
+Crucially, observe that even though the mass of any particular point x is zero, i.e., m({x}) = 0, assigning a density ρ(x) to x is useful for integration and approximation. The same idea applies to continuous random variables, only that volume corresponds to intervals on the real line and mass to probability. Recall that probability density functions are normalized such that their probability mass across the entire real line integrates to one.
+−2 0 2 x
+0.0
+0.1
+0.2
+0.3
+0.4
+N (x; 0, 1)
+Figure 1.1: PDF of the standard normal distribution. Observe that the PDF is symmetric around the mode.
+Example 1.7: Normal distribution / Gaussian
+A famous example of a continuous distribution is the normal distribution, also called Gaussian. We say, a random variable X is normally distributed, X ∼ N (μ, σ2), if its PDF is
+N (x; μ, σ2) .= 1
+√2πσ2 exp − (x − μ)2
+2σ2 . (1.5)
+We have E[X] = μ and Var[X] = σ2. If μ = 0 and σ2 = 1, this distribution is called the standard normal distribution. The Gaussian CDF cannot be expressed in closed-form.
+Note that the mean of a Gaussian distribution coincides with the maximizer of its PDF, also called mode of a distribution.
+We will focus in the remainder of this chapter on continuous distributions, but the concepts we discuss extend mostly to discrete distributions simply by “replacing integrals by sums”.
+1.1.5 Joint Probability
+A joint probability (as opposed to a marginal probability) is the probability of two or more events occurring simultaneously:
+P(A, B) .= P(A ∩ B). (1.6)
+
+
+fundamentals of inference 7
+In terms of random variables, this concept extends to joint distributions. Instead of characterizing a single random variable, a joint distribution is a function pX : Rn → R, characterizing a random vector
+X .= [X1 · · · Xn]⊤. For example, if the Xi are discrete, the joint distribution characterizes joint probabilities of the form
+P(X = [x1, . . . , xn]) = P(X1 = x1, . . . , Xn = xn),
+and hence describes the relationship among all variables Xi. For this reason, a joint distribution is also called a generative model. We use Xi:j to denote the random vector [Xi · · · Xj]⊤.
+We can “sum out” (respectively “integrate out”) variables from a joint distribution in a process called “marginalization”:
+Fact 1.8 (Sum rule). We have that
+p(x1:i−1, xi+1:n) =
+Z
+Xi(Ω) p(x1:i−1, xi, xi+1:n) dxi. (1.7)
+1.1.6 Conditional Probability
+Conditional probability updates the probability of an event A given some new information, for example, after observing the event B.
+Definition 1.9 (Conditional probability). Given two events A and B such that P(B) > 0, the probability of A conditioned on B is given as
+P(A | B) .= P(A, B)
+P(B) . (1.8)
+A B Ω
+Figure 1.2: Conditioning an event A on another event B can be understood as replacing the universe of all possible outcomes Ω by the observed outcomes B. Then, the conditional probability is simply expressing the likelihood of A given that B occurred.
+Simply rearranging the terms yields,
+P(A, B) = P(A | B) · P(B) = P(B | A) · P(A). (1.9)
+Thus, the probability that both A and B occur can be calculated by multiplying the probability of event A and the probability of B conditional on A occurring.
+We say Z ∼ X | Y = y (or simply Z ∼ X | y) if Z follows the conditional distribution
+pX|Y(x | y) .= pX,Y(x, y)
+pY(y) . (1.10)
+If X and Y are discrete, we have that pX|Y(x | y) = P(X = x | Y = y) as one would naturally expect.
+Extending Equation (1.9) to arbitrary random vectors yields the product rule (also called the chain rule of probability):
+
+
+8 probabilistic artificial intelligence
+Fact 1.10 (Product rule). Given random variables X1:n,
+p(x1:n) = p(x1) ·
+n
+∏
+i=2
+p(xi | x1:i−1). (1.11)
+Combining sum rule and product rule, we can compute marginal probabilities too:
+p(x) =
+Z
+Y(Ω) p(x, y) dy =
+Z
+Y(Ω) p(x | y) · p(y) dy first using the sum rule (1.7) then the
+product rule (1.11)
+(1.12)
+This is called the law of total probability (LOTP), which is colloquially often referred to as conditioning on Y. If it is difficult to compute p(x) directly, conditioning can be a useful technique when Y is chosen such that the densities p(x | y) and p(y) are straightforward to understand.
+1.1.7 Independence
+Two random vectors X and Y are independent (denoted X ⊥ Y) if and only if knowledge about the state of one random vector does not affect the distribution of the other random vector, namely if their conditional CDF (or in case they have a joint density, their conditional PDF) simplifies to
+PX|Y(x | y) = PX(x), pX|Y(x | y) = pX(x). (1.13)
+For the conditional probabilities to be well-defined, we need to assume that pY(y) > 0.
+The more general characterization of independence is that X and Y are independent if and only if their joint CDF (or in case they have a joint density, their joint PDF) can be decomposed as follows:
+PX,Y(x, y) = PX(x) · PY(y), pX,Y(x, y) = pX(x) · pY(y). (1.14)
+The equivalence of the two characterizations (when pY(y) > 0) is easily proven using the product rule: pX,Y(x, y) = pY(y) · pX|Y(x | y).
+A “weaker” notion of independence is conditional independence.5 5 We discuss in Remark 1.11 how “weaker” is to be interpreted in this context.
+Two random vectors X and Y are conditionally independent given a random vector Z (denoted X ⊥ Y | Z) iff, given Z, knowledge about the value of one random vector Y does not affect the distribution of the other random vector X, namely if
+PX|Y,Z(x | y, z) = PX|Z(x | z), (1.15a)
+pX|Y,Z(x | y, z) = pX|Z(x | z). (1.15b)
+
+
+fundamentals of inference 9
+Similarly to independence, we have that X and Y are conditionally independent given Z if and only if their joint CDF or joint PDF can be decomposed as follows:
+PX,Y|Z(x, y | z) = PX|Z(x | z) · PY|Z(y | z), (1.16a)
+pX,Y|Z(x, y | z) = pX|Z(x | z) · pY|Z(y | z). (1.16b)
+Remark 1.11: Common causes
+How can conditional independence be understood as a “weaker” notion of independence? Clearly, conditional independence does not imply independence: a trivial example is X ⊥ X | X ≠ ⇒ X ⊥ X.6 Neither does independence imply conditional independence: 6 X ⊥ X | X is true trivially.
+for example, X ⊥ Y ≠ ⇒ X ⊥ Y | X + Y.7 7 Knowing X and X + Y already implies the value of Y, and hence, X ̸⊥ Y | X + Y.
+When we say that conditional independence is a weaker notion we mean to emphasize that X and Y can be “made” (conditionally) independent by conditioning on the “right” Z even if X and Y are dependent. This is known as Reichenbach’s common cause principle which says that for any two random variables X ̸⊥ Y there exists a random variable Z (which may be X or Y) that causally influences both X and Y, and which is such that X ⊥ Y | Z.
+1.1.8 Directed Graphical Models
+Directed graphical models (also called Bayesian networks) are often used to visually denote the (conditional) independence relationships of a large number of random variables. They are a schematic representation of the factorization of the generative model into a product of conditional distributions as a directed acyclic graph. Given the sequence of random variables {Xi}in=1, their generative model can be expressed as
+p(x1:n) =
+n
+∏
+i=1
+p(xi | parents(xi)) (1.17)
+where parents(xi) is the set of parents of the vertex Xi in the directed graphical model. In other words, the parenthood relationship encodes a conditional independence of a random variable X with a random variable Y given their parents:8
+8 More generally, vertices u and v are conditionally independent given a set of vertices Z if Z d-separates u and v, which we will not cover in depth here.
+X ⊥ Y | parents(X), parents(Y). (1.18)
+Equation (1.17) simply uses the product rule and the conditional independence relationships to factorize the generative model. This can greatly reduce the model’s complexity, i.e., the length of the product.
+Y
+c
+X1 · · · Xn
+a1 an
+Figure 1.3: Example of a directed graphical model. The random variables X1, . . . , Xn are mutually independent given the random variable Y. The squared rectangular nodes are used to represent dependencies on parameters c, a1, . . . , an.
+
+
+10 probabilistic artificial intelligence
+An example of a directed graphical model is given in Figure 1.3. Circular vertices represent random quantities (i.e., random variables). In contrast, square vertices are commonly used to represent deterministic quantities (i.e., parameters that the distributions depend on). In the given example, we have that Xi is conditionally independent of all other Xj given Y. Plate notation is a condensed notation used to represent repeated variables of a graphical model. An example is given in Figure 1.4.
+Y c
+Xi
+ai
+i∈1:n
+Figure 1.4: The same directed graphical model as in Figure 1.3 using plate notation.
+1.1.9 Expectation
+The expected value or mean E[X] of a random vector X is the (asymptotic) arithmetic mean of an arbitrarily increasing number of indepen
+dent realizations of X. That is,9 9 In infinite probability spaces, absolute convergence of E[X] is necessary for the existence of E[X].
+E[X] .=
+Z
+X(Ω) x · p(x) dx (1.19)
+A very special and often used property of expectations is their linearity, namely that for any random vectors X and Y in Rn and any A ∈ Rm×n, b ∈ Rm it holds that
+E[AX + b] = AE[X] + b and E[X + Y] = E[X] + E[Y]. (1.20)
+Note that X and Y do not necessarily have to be independent! Further, if X and Y are independent then
+E
+h
+XY⊤i
+= E[X] · E[Y]⊤. (1.21)
+The following intuitive lemma can be used to compute expectations of transformed random variables.
+Fact 1.12 (Law of the unconscious statistician, LOTUS).
+E[g(X)] =
+Z
+X(Ω) g(x) · p(x) dx (1.22)
+where g : X(Ω) → Rn is a “nice” function10 10 g being a continuous function, which is either bounded or absolutely integrable (i.e., R |g(x)| p(x) dx < ∞), is sufficient. This is satisfied in most cases.
+and X is a continuous random vector. The analogous statement with a sum replacing the integral holds for discrete random variables.
+This is a nontrivial fact that can be proven using the change of variables formula which we discuss in Section 1.1.11.
+Similarly to conditional probability, we can also define conditional expectations. The expectation of a continuous random vector X given that Y = y is defined as
+E[X | Y = y] .=
+Z
+X(Ω) x · pX|Y(x | y) dx. (1.23)
+
+
+fundamentals of inference 11
+Observe that E[X | Y = ·] defines a deterministic mapping from y to E[X | Y = y]. Therefore, E[X | Y] is itself a random vector:
+E[X | Y](ω) = E[X | Y = Y(ω)] (1.24)
+where ω ∈ Ω. This random vector E[X | Y] is called the conditional expectation of X given Y.
+Analogously to the law of total probability (1.12), one can condition an expectation on another random vector. This is known as the tower rule or the law of total expectation (LOTE):
+Theorem 1.13 (Tower rule). Given random vectors X and Y, we have
+EY[EX[X | Y]] = E[X]. (1.25)
+Proof sketch. We only prove the case where X and Y have a joint density. We have
+E[E[X | Y]] =
+ZZ
+x · p(x | y) dx p(y) dy
+=
+ZZ
+x · p(x, y) dx dy by definition of conditional densities (1.10)
+=
+Z
+x
+Z
+p(x, y) dy dx by Fubini’s theorem
+=
+Z
+x · p(x) dx using the sum rule (1.7)
+= E[X].
+1.1.10 Covariance and Variance
+Given two random vectors X in Rn and Y in Rm, their covariance is defined as
+Cov[X, Y] .= E
+h
+(X − E[X])(Y − E[Y])⊤i
+(1.26)
+=E
+h
+XY⊤i
+− E[X] · E[Y]⊤ (1.27)
+= Cov[Y, X]⊤ ∈ Rn×m. (1.28)
+Covariance measures the linear dependence between two random vectors since a direct consequence of its definition (1.26) is that given lin
+ear maps A ∈ Rn′×n, B ∈ Rm′×m, vectors c ∈ Rn′ , d ∈ Rm′ and random vectors X in Rn and Y in Rm, we have that
+Cov[AX + c, BY + d] = ACov[X, Y]B⊤. (1.29)
+Two random vectors X and Y are said to be uncorrelated if and only if Cov[X, Y] = 0. Note that if X and Y are independent, then Equation (1.21) implies that X and Y are uncorrelated. The reverse does not hold in general.
+
+
+12 probabilistic artificial intelligence
+Remark 1.14: Correlation
+The correlation of the random vectors X and Y is a normalized covariance,
+Cor[X, Y](i, j) .= Cov Xi, Yj
+q
+Var[Xi]Var Yj
+∈ [−1, 1]. (1.30)
+Two random vectors X and Y are therefore uncorrelated if and only if Cor[X, Y] = 0.
+There is also a nice geometric interpretation of covariance and correlation. For zero mean random variables X and Y, Cov[X, Y] is an inner product.11 11 That is, • Cov[X, Y] is symmetric, • Cov[X, Y] is linear (here we use EX = EY = 0), and • Cov[X, X] ≥ 0.
+The cosine of the angle θ between X and Y (that are not deterministic) coincides with their correlation,
+cos θ = Cov[X, Y]
+∥X∥ ∥Y∥ = Cor[X, Y]. using the Euclidean inner product
+formula, Cov[X, Y] = ∥X∥ ∥Y∥ cos θ
+(1.31)
+cos θ is also called a cosine similarity. Thus,
+θ = arccos Cor[X, Y]. (1.32)
+For example, if X and Y are uncorrelated, then they are orthogonal in the inner product space. If Cor[X, Y] = −1 then θ ≡ π (that is, X and Y “point in opposite directions”), whereas if Cor[X, Y] = 1 then θ ≡ 0 (that is, X and Y “point in the same direction”).
+The covariance of a random vector X in Rn with itself is called its variance:
+Var[X] .= Cov[X, X] (1.33)
+=E
+h
+(X − E[X])(X − E[X])⊤i
+(1.34)
+=E
+h
+XX⊤i
+− E[X] · E[X]⊤ (1.35)
+=
+
+  
+Cov[X1, X1] · · · Cov[X1, Xn]
+... . . . ...
+Cov[Xn, X1] · · · Cov[Xn, Xn]
+
+  
+. (1.36)
+The scalar variance Var[X] of a random variable X is a measure of uncertainty about the value of X since it measures the average squared deviation from E[X]. We will see that the eigenvalue spectrum of a covariance matrix can serve as a measure of uncertainty in the multi
+variate setting.12 12 The multivariate setting (as opposed to the univariate setting) studies the joint distribution of multiple random variables.
+
+
+fundamentals of inference 13
+Remark 1.15: Standard deviation
+The length of a random variable X in the inner product space described in Remark 1.14 is called its standard deviation,
+∥X∥ =
+q
+Cov[X, X] =
+q
+Var[X] .= σ[X]. (1.37)
+That is, the longer a random variable is in the inner product space, the more “uncertain” we are about its value. If a random variable has length 0, then it is deterministic.
+The variance of a random vector X is also called the covariance matrix of X and denoted by ΣX (or Σ if the correspondence to X is clear from context). A covariance matrix is symmetric by definition due to the symmetry of covariance, and is always positive semi-definite ? . Problem 1.4
+Two useful properties of variance are the following:
+• It follows from Equation (1.29) that for any linear map A ∈ Rm×n and vector b ∈ Rm,
+Var[AX + b] = AVar[X]A⊤. (1.38)
+In particular, Var[−X] = Var[X]. • It follows from the definition of variance (1.34) that for any two random vectors X and Y,
+Var[X + Y] = Var[X] + Var[Y] + 2Cov[X, Y]. (1.39)
+In particular, if X and Y are independent then the covariance term vanishes and Var[X + Y] = Var[X] + Var[Y].
+Analogously to conditional probability and conditional expectation, we can also define conditional variance. The conditional variance of a random vector X given another random vector Y is the random vector
+Var[X | Y] .= E
+h
+(X − E[X | Y])(X − E[X | Y])⊤ Y
+i
+. (1.40)
+Intuitively, the conditional variance is the remaining variance when we use E[X | Y] to predict X rather than if we used E[X]. One can also condition a variance on another random vector, analogously to the laws of total probability (1.12) and expectation (1.25).
+Theorem 1.16 (Law of total variance, LOTV).
+Var[X] = EY[VarX[X | Y]] + VarY[EX[X | Y]]. (1.41)
+Here, the first term measures the average deviation from the mean of X across realizations of Y and the second term measures the uncertainty
+
+
+14 probabilistic artificial intelligence
+in the mean of X across realizations of Y. In Section 2.2, we will see that both terms have a meaningful characterization in the context of probabilistic inference.
+Proof sketch of LOTV. To simplify the notation, we present only a proof for the univariate setting.
+Var[X] = E
+h
+X2i
+− E[X]2
+=E
+h
+E
+h
+X2 | Y
+ii
+− E[E[X | Y]]2 by the tower rule (1.25)
+=E
+h
+Var[X | Y] + E[X | Y]2i
+− E[E[X | Y]]2 by the definition of variance (1.35)
+= E[Var[X | Y]] + E
+h
+E[X | Y]2i
+− E[E[X | Y]]2
+= E[Var[X | Y]] + Var[E[X | Y]]. by the definition of variance (1.35)
+1.1.11 Change of Variables
+It is often useful to understand the distribution of a transformed random variable Y = g(X) that is defined in terms of a random variable X, whose distribution is known. Let us first consider the univariate setting. We would like to express the distribution of Y in terms of the distribution of X, that is, we would like to find
+PY(y) = P(Y ≤ y) = P(g(X) ≤ y) = P X ≤ g−1(y) . (1.42)
+When the random variables are continuous, this probability can be expressed as an integration over the domain of X. We can then use the substitution rule of integration to “change the variables” to an integration over the domain of Y. Taking the derivative yields the density
+pY.13 There is an analogous change of variables formula for the multi- 13 The full proof of the change of variables formula in the univariate setting can be found in section 6.7.2 of “Mathematics for machine learning” (Deisenroth et al., 2020).
+variate setting.
+Fact 1.17 (Change of variables formula). Let X be a random vector in Rn with density pX and let g : Rn → Rn be a differentiable and invertible function. Then Y = g(X) is another random variable, whose density can be computed based on pX and g as follows:
+pY(y) = pX(g−1(y)) · det Dg−1(y) (1.43)
+where Dg−1(y) is the Jacobian of g−1 evaluated at y.
+Here, the term det Dg−1(y) measures how much a unit volume changes when applying g. Intuitively, the change of variables swaps the coordinate system over which we integrate. The factor det Dg−1(y) corrects for the change in volume that is caused by this change in coordinates.
+
+
+fundamentals of inference 15
+Intuitively, you can think of the vector field g as a perturbation to X, “pushing” the probability mass around. The perturbation of a density pX by g is commonly denoted by the pushforward
+g♯ pX
+.= pY where Y = g(X). (1.44)
+This concludes our quick tour of probability theory, and we are wellprepared to return to the topic of probabilistic inference.
+1.2 Probabilistic Inference
+Recall the logical implication “If it is raining, the ground is wet.” from the beginning of this chapter. Suppose that we look outside a window and see that it is not raining: will the ground be dry? Logical reasoning does not permit drawing an inference of this kind, as there might be reasons other than rain for which the ground could be wet (e.g., sprinklers). However, intuitively, by observing that it is not raining, we have just excluded the possibility that the ground is wet because of rain, and therefore we would deem it “more likely” that the ground is dry than before. In other words, if we were to walk outside now and the ground was wet, we would be more surprised than we would have been if we had not looked outside the window before.
+As humans, we are constantly making such “plausible” inferences of our beliefs: be it about the weather, the outcomes of our daily decisions, or the behavior of others. Probabilistic inference is the process of updating such a prior belief P W to a posterior belief P W | R upon observing R where — to reduce clutter — we write W for “The ground is wet” and R for “It is raining”.
+The central principle of probabilistic inference is Bayes’ rule:
+Theorem 1.18 (Bayes’ rule). Given random vectors X in Rn and Y in Rm, we have for any x ∈ Rn, y ∈ Rm that
+p(x | y) = p(y | x) · p(x)
+p(y) . (1.45)
+Proof. Bayes’ rule is a direct consequence of the definition of conditional densities (1.10) and the product rule (1.11).
+Let us consider the meaning of each term separately:
+• the prior p(x) is the initial belief about x, • the (conditional) likelihood p(y | x) describes how likely the observations y are under a given value x,
+
+
+16 probabilistic artificial intelligence
+• the posterior p(x | y) is the updated belief about x after observing y, • the joint likelihood p(x, y) = p(y | x)p(x) combines prior and likelihood, • the marginal likelihood p(y) describes how likely the observations y are across all values of x.
+The marginal likelihood can be computed using the sum rule (1.7) or the law of total probability (1.12),
+p(y) =
+Z
+X(Ω) p(y | x) · p(x) dx. (1.46)
+Note, however, that the marginal likelihood is simply normalizing the conditional distribution to integrate to one, and therefore a constant with respect to x. For this reason, p(y) is commonly called the normalizing constant.
+Example 1.19: Plausible inferences
+Let us confirm our intuition from the above example. The logical implication “If it is raining, the ground is wet.” (denoted R → W) can be succinctly expressed as P(W | R) = 1. Since P(W) ≤ 1, we know that
+P(R | W) = P(W | R) · P(R)
+P(W) = P(R)
+P(W) ≥ P(R).
+That is, observing that the ground is wet makes it more likely to be raining. From P(R | W) ≥ P(R) we know P R | W ≤ P R ,14 14 since P X = 1 − P(X) which leads us to follow that
+P W | R = P R | W · P(W)
+P R ≤ P(W),
+that is, having observed it not to be raining made the ground less likely to be wet.
+Example 1.19 is called a plausible inference because the observation of R does not completely determine the truth value of W, and hence, does not permit logical inference. In the case, however, that logical inference is permitted, it coincides with probabilistic inference.
+Example 1.20: Logical inferences
+For example, if we were to observe that the ground is not wet, then logical inference implies that it must not be raining: W → R. This is called the contrapositive of R → W.
+
+
+fundamentals of inference 17
+Indeed, by probabilistic inference, we obtain analogously
+P R | W = P W | R · P(R)
+P W = (1 − P(W | R)) · P(R)
+P W = 0. as P(W | R) = 1
+Observe that a logical inference does not depend on the prior P(R): Even if the prior was P(R) = 1 in Example 1.20, after observing that the ground is not wet, we are forced to conclude that it is not raining to maintain logical consistency. The examples highlight that while logical inference does not require the notion of a prior, plausible (probabilistic!) inference does.
+1.2.1 Where do priors come from?
+Bayes’ rule necessitates the specification of a prior p(x). Different priors can lead to the deduction of dramatically different posteriors, as one can easily see by considering the extreme cases of a prior that is a
+point density at x = x0 and a prior that is “uniform” over Rn.15 In the 15 The latter is not a valid probability distribution, but we can still derive meaning from the posterior as we discuss in Remark 1.22.
+former case, the posterior will be a point density at x0 regardless of the likelihood. In other words, no evidence can alter the “prior belief” the learner ascribed to x. In the latter case, the learner has “no prior belief”, and therefore the posterior will be proportional to the likelihood. Both steps of probabilistic inference are perfectly valid, though one might debate which prior is more reasonable.
+Someone who follows the Bayesian interpretation of probability might argue that everything is conditional, meaning that the prior is simply a posterior of all former observations. While this might seem natural (“my world view from today is the combination of my world view from yesterday and the observations I made today”), this lacks an explanation for “the first day”. Someone else who is more inclined towards the frequentist interpretation might also object to the existence of a prior belief altogether, arguing that a prior is subjective and therefore not a valid or desirable input to a learning algorithm. Put differently, a frequentist “has the belief not to have any belief”. This is perfectly compatible with probabilistic inference, as long as the prior is chosen to be noninformative:
+p(x) ∝ const. (1.47)
+Choosing a noninformative prior in the absence of any evidence is known as the principle of indifference or the principle of insufficient reason, which dates back to the famous mathematician Pierre-Simon Laplace.
+
+
+18 probabilistic artificial intelligence
+Example 1.21: Why be indifferent?
+Consider a criminal trial with three suspects, A, B, and C. The collected evidence shows that suspect C can not have committed the crime, however it does not yield any information about suspects A and B. Clearly, any distribution respecting the data must assign zero probability of having committed the crime to suspect C. However, any distribution interpolating between (1, 0, 0) and (0, 1, 0) respects the data. The principle of indifference suggests that the desired distribution is ( 1
+2, 1
+2 , 0), and indeed, any alternative distribution seems unreasonable.
+Remark 1.22: Noninformative and improper priors
+It is not necessarily required that the prior p(x) is a valid distribution (i.e., integrates to 1). Consider for example, the noninformative prior p(x) ∝ 1{x ∈ I} where I ⊆ Rn is an infinitely large interval. Such a prior which is not a valid distribution is called an improper prior. We can still derive meaning from the posterior of a given likelihood and (improper) prior as long as the posterior is a valid distribution.
+Laplace’s principle of indifference can be generalized to cases where some evidence is available. The maximum entropy principle, originally proposed by Jaynes (1968), states that one should choose as prior from all possible distributions that are consistent with prior knowledge, the one that makes the least “additional assumptions”, i.e., is the least “informative”. In philosophy, this principle is known as Occam’s razor or the principle of parsimony. The “informativeness” of a distribution p is quantified by its entropy which is defined as
+H[p] .= Ex∼p[− log p(x)]. (1.48)
+The more concentrated p is, the less is its entropy; the more diffuse p
+is, the greater is its entropy.16 16 We give a thorough introduction to entropy in Section 5.4. In the absence of any prior knowledge, the uniform distribution has
+the highest entropy,17 and hence, the maximum entropy principle sug- 17 This only holds true when the set of possible outcomes of x finite (or a bounded continuous interval), as in this case, the noninformative prior is a proper distribution — the uniform distribution. In the “infinite case”, there is no uniform distribution and the noninformative prior can be attained from the maximum entropy principle as the limiting solution as the number of possible outcomes of x is increased.
+gests a noninformative prior (as does Laplace’s principle of indifference). In contrast, if the evidence perfectly determines the value of x, then the only consistent explanation is the point density at x. The maximum entropy principle characterizes a reasonable choice of prior for these two extreme cases and all cases in between. Bayes’ rule can in fact be derived as a consequence of the maximum entropy principle in the sense that the posterior is the least “informative” distribution among all distributions that are consistent with the prior and the ob
+
+
+fundamentals of inference 19
+servations ? . Problem 5.7
+1.2.2 Conjugate Priors
+If the prior p(x) and posterior p(x | y) are of the same family of distributions, the prior is called a conjugate prior to the likelihood p(y | x). This is a very desirable property, as it allows us to recursively apply the same learning algorithm implementing probabilistic inference. We will see in Chapter 2 that under some conditions the Gaussian is self-conjugate. That is, if we have a Gaussian prior and a Gaussian likelihood then our posterior will also be Gaussian. This will provide us with the first efficient implementation of probabilistic inference.
+Example 1.23: Conjugacy of beta and binomial distribution
+As an example for conjugacy, we will show that the beta distribution is a conjugate prior to a binomial likelihood. Recall the PMF of the binomial distribution
+Bin(k; n, θ) = n
+k θk(1 − θ)n−k (1.49)
+and the PDF of the beta distribution,
+Beta(θ; α, β) ∝ θα−1(1 − θ)β−1, (1.50)
+We assume the prior θ ∼ Beta(α, β) and likelihood k | θ ∼ Bin(n, θ). Let nH = k be the number of heads and nT = n − k the number of tails in the binomial trial k. Then,
+p(θ | k) ∝ p(k | θ)p(θ) using Bayes’ rule (1.45)
+∝ θnH (1 − θ)nT θα−1(1 − θ)β−1
+= θα+nH−1(1 − θ)β+nT−1.
+Thus, θ | k ∼ Beta(α + nH, β + nT).
+This same conjugacy can be shown for the multivariate generalization of the beta distribution, the Dirichlet distribution, and the multivariate generalization of the binomial distribution, the multinomial distribution.
+1.2.3 Tractable Inference with the Normal Distribution
+Using arbitrary distributions for learning and inference is computationally very expensive when the number of dimensions is large even in the discrete setting. For example, computing marginal distributions using the sum rule yields an exponentially long sum in the
+
+
+20 probabilistic artificial intelligence
+size of the random vector. Similarly, the normalizing constant of the conditional distribution is a sum of exponential length. Even to represent any discrete joint probability distribution requires space that is exponential in the number of dimensions (cf. Figure 1.5).
+X1 · · · Xn−1 Xn P(X1:n)
+0 · · · 0 0 0.01 0 · · · 0 1 0.001 0 · · · 1 0 0.213
+...
+...
+...
+...
+1 · · · 1 1 0.0003
+Figure 1.5: A table representing a joint distribution of n binary random variables. The table has 2n rows. The number of parameters is 2n − 1 since the final probability is determined by all other probabilities as they must sum to one.
+One strategy to get around this computational blowup is to restrict the class of distributions. Gaussians are a popular choice for this purpose since they have extremely useful properties: they have a compact representation and — as we will see in Chapter 2 — they allow for closed-form probabilistic inference.
+In Equation (1.5), we have already seen the PDF of the univariate Gaussian distribution. A random vector X in Rn is normally distributed, X ∼ N (μ, Σ), if its PDF is
+N (x; μ, Σ) .= 1
+pdet(2πΣ) exp − 1
+2 (x − μ)⊤Σ−1(x − μ) (1.51)
+where μ ∈ Rn is the mean vector and Σ ∈ Rn×n the covariance matrix ? . We call Λ .= Σ−1 the precision matrix. X is also called a Gaussian Problem 1.11 random vector (GRV). N (0, I) is the multivariate standard normal distribution. We call a Gaussian isotropic if its covariance matrix is of the form Σ = σ2 I for some σ2 ∈ R. In this case, the sublevel sets of the PDF are perfect spheres as can be seen in Figure 1.6.
+x
+−2
+0 2
+y
+−2
+0
+2
+0.0
+0.1
+0.2
+x
+−2
+0 2
+y
+−2
+0
+2
+0.0
+0.2
+0.4
+Figure 1.6: Shown are the PDFs of twodimensional Gaussians with mean 0 and covariance matrices
+Σ1
+.= 1 0
+0 1 , Σ2
+.= 1 0.9
+0.9 1
+respectively.
+Note that a Gaussian can be represented using only O n2 parameters. In the case of a diagonal covariance matrix, which corresponds to n independent univariate Gaussians ? , we just need O(n) parameters. Problem 1.8
+In Equation (1.51), we assume that the covariance matrix Σ is invertible, i.e., does not have the eigenvalue 0. This is not a restriction since it can be shown that a covariance matrix has a zero eigenvalue if and only if there exists a deterministic linear relationship between some variables in the joint distribution ? . As we have already seen that a Problem 1.6
+
+
+fundamentals of inference 21
+covariance matrix does not have negative eigenvalues ? , this ensures Problem 1.4
+that Σ and Λ are positive definite.18 18 The inverse of a positive definite matrix is also positive definite. An important property of the normal distribution is that it is closed under marginalization and conditioning.
+Theorem 1.24 (Marginal and conditional distribution). ? Con- Problem 1.9 sider the Gaussian random vector X and fix index sets A ⊆ [n] and B ⊆ [n]. Then, we have that for any such marginal distribution,
+XA ∼ N (μA, Σ AA), By μA we denote [μi1 , . . . , μik ] where A = {i1, . . . ik}. Σ AA is defined analogously.
+(1.52)
+and that for any such conditional distribution,
+XA | XB = xB ∼ N (μA|B, Σ A|B) where (1.53a)
+μA|B
+.= μA + Σ ABΣ−1
+BB(xB − μB), Here, μA characterizes the prior belief
+and Σ ABΣ−1
+BB(xB − μB) represents “how different” xB is from what was expected.
+(1.53b)
+Σ A|B
+.= Σ AA − Σ ABΣ−1
+BBΣBA. (1.53c)
+Theorem 1.24 provides a closed-form characterization of probabilistic inference for the case that random variables are jointly Gaussian. We will discuss in Chapter 2, how this can be turned into an efficient inference algorithm.
+Observe that upon inference, the variance can only shrink! Moreover, how much the variance is reduced depends purely on where the observations are made (i.e., the choice of B) but not on what the observations are. In contrast, the posterior mean μA|B depends affinely on μB. These are special properties of the Gaussian and do not generally hold true for other distributions.
+It can be shown that Gaussians are additive and closed under affine transformations ? . The closedness under affine transformations (1.78) Problem 1.10 implies that a Gaussian X ∼ N (μ, Σ) is equivalently characterized as
+X = Σ1/2Y + μ. (1.54)
+where Y ∼ N (0, I) and Σ1/2 is the square root of Σ.19 Importantly, this 19 More details on the square root of a symmetric and positive definite matrix can be found in Appendix A.2.
+implies together with Theorem 1.24 and additivity (1.79) that:
+Any affine transformation of a Gaussian random vector is a Gaussian random vector.
+A consequence of this is that given any jointly Gaussian random vectors XA and XB, XA can be expressed as an affine function of XB with added independent Gaussian noise. Formally, we define
+XA
+.= AXB + b + ε where (1.55a)
+
+
+22 probabilistic artificial intelligence
+A .= Σ ABΣ−1
+BB, (1.55b)
+b .= μA − Σ ABΣ−1
+BBμB, (1.55c)
+ε ∼ N (0, Σ A|B). (1.55d)
+It directly follows from the closedness of Gaussians under affine transformations (1.78) that the characterization of XA via Equation (1.55) is equivalent to XA ∼ N (μA, Σ AA), and hence, any Gaussian XA can be modeled as a so-called conditional linear Gaussian, i.e., an affine function of another Gaussian XB with additional independent Gaussian noise. We will use this fact frequently to represent Gaussians in a compact form.
+1.3 Supervised Learning and Point Estimates
+Throughout the first part of this manuscript, we will focus mostly on the supervised learning problem where we want to learn a function
+f⋆ : X → Y
+from labeled training data. That is, we are given a collection of labeled examples, Dn .= {(xi, yi)}in=1, where the xi ∈ X are inputs and the
+yi ∈ Y are outputs (called labels), and we want to find a function fˆ that best-approximates f ⋆. It is common to choose fˆ from a parameterized function class F (Θ), where each function fθ is described by some parameters θ ∈ Θ.
+F
+f⋆
+fˆ
+f
+Figure 1.7: Illustration of estimation error and approximation error. f ⋆ denotes the true function and fˆ is the best approximation from the function class F . We do not specify here, how one could quantify “error”. For more details, see Appendix A.3.5.
+Remark 1.25: What this manuscript is about and not about
+As illustrated in Figure 1.7, the restriction to a function class leads to two sources of error: the estimation error of having “incorrectly” determined fˆ within the function class, and the approximation error of the function class itself. Choosing a “good” function class / architecture with small approximation error is therefore critical for any practical application of machine learning. We will discuss various function classes, from linear models to deep neural networks, however, determining the “right” function class will not be the focus of this manuscript. To keep the exposition simple, we will assume in the following that f ⋆ ∈ F (Θ) with parameters θ⋆ ∈ Θ.
+Instead, we will focus on the problem of estimation/inference within a given function class. We will see that inference in smaller function classes is often more computationally efficient since the search space is smaller or — in the case of Gaussians — has a known tractable structure. On the other hand, larger function
+
+
+fundamentals of inference 23
+classes are more expressive and therefore can typically better approximate the ground truth f ⋆.
+We differentiate between the task of regression where Y .= Rk,20 and 20 The labels are usually scalar, so k = 1. the task of classification where Y .= C and C is an m-element set of classes. In other words, regression is the task of predicting a continuous label, whereas classification is the task of predicting a discrete class label. These two tasks are intimately related: in fact, we can think of classification tasks as a regression problem where we learn a probability distribution over class labels. In this regression problem, Y .= ∆C where ∆C denotes the set of all probability distributions over the set of classes C which is an (m − 1)-dimensional convex polytope in the m-dimensional space of probabilities [0, 1]m (cf. Appendix A.1.2).
+For now, let us stick to the regression setting. We will assume that the observations are noisy, that is, yi
+ii∼d p(· | xi, θ⋆) for some known
+conditional distribution p(· | xi, θ) but unknown parameter θ⋆.21 Our 21 The case where the labels are deter
+ministic is the special case of p(· | xi, θ⋆)
+being a point density at f ⋆(xi).
+assumption can equivalently be formulated as
+yi = fθ(xi)
+| {z }
+signal
++ εi(xi)
+| {z }
+noise
+(1.56)
+where fθ(xi) is the mean of p(· | xi, θ) and εi(xi) = yi − fθ(xi) is some independent zero-mean noise, for example (but not necessarily) Gaus
+sian.22 When the noise distribution may depend on xi, the noise is said 22 It is crucial that the assumed noise distribution accurately reflects the noise of the data. For example, using a (lighttailed) Gaussian noise model in the presence of heavy-tailed noise will fail! We discuss the distinction between light and heavy tails in Appendix A.3.2.
+to be heteroscedastic and otherwise the noise is called homoscedastic.
+1.3.1 Maximum Likelihood Estimation
+A common approach to finding fˆ is to select the model f ∈ F (Θ) under which the training data is most likely. This is called the maximum likelihood estimate (or MLE):
+θˆMLE
+.= arg max θ∈Θ
+p(y1:n | x1:n, θ) (1.57)
+= arg max θ∈Θ
+n
+∏
+i=1
+p(yi | xi, θ). using the independence of the training data (1.56)
+Such products of probabilities are often numerically unstable, which is why one typically takes the logarithm:
+= arg max θ∈Θ
+n
+∑
+i=1
+log p(yi | xi, θ)
+| {z }
+log-likelihood
+. (1.58)
+We will denote the negative log-likelihood by lnll(θ; Dn).
+
+
+24 probabilistic artificial intelligence
+The MLE is often used in practice due to its desirable asymptotic properties as the sample size n increases. We give a brief summary here and provide additional background and definitions in Appendix A.3. To give any guarantees on the convergence of the MLE, we neces
+sarily need to assume that θ⋆ is identifiable.23 If additionally, lnll is 23 That is, θ⋆ ̸= θ =⇒ f ⋆ ̸= fθ for any
+θ ∈ Θ. In words, there is no other parameter θ that yields the same function fθ as θ⋆.
+“well-behaved” then standard results say that the MLE is consistent and asymptotically normal (Van der Vaart, 2000):
+θˆMLE
+P → θ⋆ and θˆMLE
+D → N (θ⋆, Sn) as n → ∞. (1.59)
+Here, we denote by Sn the asymptotic variance of the MLE which
+can be understood as measuring the “quality” of the estimate.24 This 24 A “smaller” variance means that we can be more confident that the MLE is close to the true parameter.
+implies in some sense that the MLE is asymptotically unbiased. Moreover, the MLE can be shown to be asymptotically efficient which is to say that there exists no other consistent estimator with a “smaller” asymptotic variance.25 25 see Appendix A.3.4.
+The situation is quite different in the finite sample regime. Here, the MLE need not be unbiased, and it is susceptible to overfitting to the (finite) training data as we discuss in more detail in Appendix A.3.5.
+1.3.2 Using Priors: Maximum a Posteriori Estimation
+We can incorporate prior assumptions about the parameters θ⋆ into the estimation procedure. One approach of this kind is to find the mode of the posterior distribution, called the maximum a posteriori estimate (or MAP estimate):
+θˆMAP
+.= arg max θ∈Θ
+p(θ | x1:n, y1:n) (1.60)
+= arg max θ∈Θ
+p(y1:n | x1:n, θ) · p(θ) (1.61) by Bayes’ rule (1.45)
+= arg max θ∈Θ
+log p(θ) +
+n
+∑
+i=1
+log p(yi | xi, θ) (1.62) taking the logarithm
+= arg min θ∈Θ
+− log p(θ)
+| {z }
+regularization
++ lnll(θ; Dn)
+| {z }
+quality of fit
+. (1.63)
+Here, the log-prior log p(θ) acts as a regularizer. Common regularizers are given, for example, by
+• p(θ) = N (θ; 0, (2λ)−1 I) which yields − log p(θ) = λ ∥θ∥2
+2 + const,
+• p(θ) = Laplace(θ; 0, λ−1) which yields − log p(θ) = λ ∥θ∥1 + const, • a uniform prior (cf. Section 1.2.1) for which the MAP is equivalent to the MLE. In other words, the MLE is merely the mode of the posterior distribution under a uniform prior.
+The Gaussian and Laplace regularizers act as simplicity biases, preferring simpler models over more complex ones, which empirically
+
+
+fundamentals of inference 25
+tends to reduce the risk of overfitting. However, one may also encode more nuanced information about the (assumed) structure of θ⋆ into the prior.
+An alternative way of encoding a prior is by restricting the function class to some Θe ⊂ Θ, for example to rotation- and translation-invariant models as often done when the inputs are images. This effectively sets p(θ) = 0 for all θ ∈ Θ \ Θe but is better suited for numerical optimization than to impose this constraint directly on the prior.
+Encoding prior assumptions into the function class or into the parameter estimation can accelerate learning and improve generalization performance dramatically, yet importantly, incorporating a prior can also inhibit learning in case the prior is “wrong”. For example, when the learning task is to differentiate images of cats from images of dogs, consider the (stupid) prior that only permits models that exclusively use the upper-left pixel for prediction. No such model will be able to solve the task, and therefore starting from this prior makes the learning problem effectively unsolvable which illustrates that priors have to be chosen with care.
+1.3.3 When does the prior matter?
+We have seen that the MLE has desirable asymptotic properties, and that MAP estimation can be seen as a regularized MLE where the type of regularization is encoded by the prior. Is it possible to derive similar asymptotic results for the MAP estimate?
+To answer this question, we will look at the asymptotic effect of the prior on the posterior more generally. Doob’s consistency theorem states
+that assuming parameters are identifiable,26 there exists Θe ⊆ Θ with 26 This is akin to the assumption required for consistency of the MLE, cf. Equation (1.59).
+p(Θe ) = 1 such that the posterior is consistent for any θ⋆ ∈ Θe (Doob,
+1949; Miller, 2016, 2018):
+θ | Dn
+P → θ⋆ as n → ∞. (1.64)
+In words, Doob’s consistency theorem tells us that for any prior distribution, the posterior is guaranteed to converge to a point density in the (small) neighborhood θ⋆ ∈ B of the true parameter as long as
+p(B) > 0.27 We call such a prior a well-specified prior. 27 B can for example be a ball of radius ε
+around θ⋆ (with respect to some geometry of Θ). Remark 1.26: Cromwell’s rule
+In the case where |Θ| is finite, Doob’s consistency theorem strongly suggests that the prior should not assign 0 probability (or probability 1 for that matter) to any individual parameter θ ∈ Θ, unless we know with certainty that θ⋆ ̸= θ. This is called Cromwell’s rule,
+
+
+26 probabilistic artificial intelligence
+and a prior obeying by this rule is always well-specified.
+Under the same assumption that the prior is well-specified (and reg
+ularity conditions28), the Bernstein-von Mises theorem, which was first 28 These regularity conditions are akin to the assumptions required for asymptotic normality of the MLE, cf. Equation (1.59).
+discovered by Pierre-Simon Laplace in the early 19th century, establishes the asymptotic normality of the posterior distribution (Van der Vaart, 2000; Miller, 2016):
+θ | Dn
+D → N (θ⋆, Sn) as n → ∞ (1.65)
+and where Sn is the same as the asymptotic variance of the MLE.29 29 This has also been called the “Bayesian central limit theorem”, which is a bit of a misnomer since the theorem also applies to likelihoods (when the prior is noninformative) which are often used in frequentist statistics.
+These results link probabilistic inference to maximum likelihood estimation in the asymptotic limit of infinite data. Intuitively, in the limit of infinite data, the prior is “overwhelmed” by the observations and the posterior becomes equivalent to the limiting distribution of
+the MLE.30 One can interpret the regime of infinite data as the regime 30 More examples and discussion can be found in section 17.8 of Le Cam (1986), chapter 8 of Le Cam and Yang (2000), chapter 10 of Van der Vaart (2000), and in Tanner (1991).
+where computational resources and time are unlimited and plausible inferences evolve into logical inferences. This transition signifies a shift from the realm of uncertainty to that of certainty. The importance of the prior surfaces precisely in the non-asymptotic regime where plausible inferences are necessary due to limited computational resources and limited time.
+1.3.4 Estimation vs Inference
+You can interpret a single parameter vector θ ∈ Θ as “one possible explanation” of the data. Maximum likelihood and maximum a posteriori estimation are examples of estimation algorithms which return a one such parameter vector — called a point estimate. That is, given the training set Dn, they return a single parameter vector θˆn. We give a more detailed account of estimation in Appendix A.3.
+Example 1.27: Point estimates and invalid logical inferences
+To see why point estimates can be problematic, recall Example 1.19. We have seen that the logical implication
+“If it is raining, the ground is wet.”
+can be expressed as P(W | R) = 1. Observing that “The ground is wet.” does not permit logical inference, yet, the maximum likelihood estimate of R is Rˆ MLE = 1. This is logically inconsistent since there might be other explanations for the ground to be wet, such as a sprinkler! With only a finite sample (say independently observing n times that the ground is wet), we cannot rule out with
+
+
+fundamentals of inference 27
+certainty that the ground is wet for other reasons than rain.
+In practice, we never observe an infinite amount of data. Example 1.27 demonstrates that on a finite sample, point estimates may perform invalid logical inferences, and can therefore lure us into a false sense of certainty.
+Remark 1.28: MLE and MAP are approximations of inference
+The MLE and MAP estimate can be seen as a naive approximation of probabilistic inference, represented by a point density which “collapses” all probability mass at the mode of the posterior distribution. This can be a relatively decent — even if overly simple — approximation when the distribution is unimodal, symmetric, and light-tailed as in Figure 1.8, but is usually a very poor approximation for practical posteriors that are complex and multimodal.
+−2 0 2
+θ
+0.0
+0.1
+0.2
+0.3
+0.4
+p(θ | D)
+Figure 1.8: A the MLE/MAP are point estimates at the mode θˆ of the posterior distribution p(θ | D).
+In this manuscript, we will focus mainly on algorithms for probabilistic inference which compute or approximate the distribution p(θ | x1:n, y1:n) over parameters. Returning a distribution over parameters is natural since this acknowledges that given a finite sample with noisy observations, more than one parameter vector can explain the data.
+1.3.5 Probabilistic Inference and Prediction
+The prior distribution p(θ) can be interpreted as the degree of our belief that the model parameterized by θ “describes the (previously seen) data best”. The likelihood captures how likely the training data is under a particular model:
+p(y1:n | x1:n, θ) =
+n
+∏
+i=1
+p(yi | xi, θ). (1.66)
+The posterior then represents our belief about the best model after seeing the training data. Using Bayes’ rule (1.45), we can write it as31 31 We generally assume that
+p(θ | x1:n) = p(θ).
+For our purposes, you can think of the inputs x1:n as fixed deterministic parameters, but one can also consider inputs drawn from a distribution over X .
+p(θ | x1:n, y1:n) = 1
+Z p(θ)
+n
+∏
+i=1
+p(yi | xi, θ) where (1.67a)
+Z .=
+Z
+Θ p(θ)
+n
+∏
+i=1
+p(yi | xi, θ) dθ (1.67b)
+is the normalizing constant. We refer to this process of learning a model from data as learning. We can then use our learned model for prediction at a new input x⋆ by conditioning on θ,
+p(y⋆ | x⋆, x1:n, y1:n) =
+Z
+Θ p(y⋆, θ | x⋆, x1:n, y1:n) dθ by the sum rule (1.7)
+
+
+28 probabilistic artificial intelligence
+=
+Z
+Θ p(y⋆ | x⋆, θ) · p(θ | x1:n, y1:n) dθ. by the product rule (1.11) and
+y⋆ ⊥ x1:n, y1:n | θ
+(1.68)
+Here, the distribution over models p(θ | x1:n, y1:n) is called the posterior and the distribution over predictions p(y⋆ | x⋆, x1:n, y1:n) is called the predictive posterior. The predictive posterior quantifies our posterior uncertainty about the “prediction” y⋆, however, since this is typically a complex distribution, it is difficult to communicate this uncertainty to a human. One statistic that can be used for this purpose is the smallest set Cδ(x⋆) ⊆ R for a fixed δ ∈ (0, 1) such that
+P(y⋆ ∈ Cδ(x⋆) | x⋆, x1:n, y1:n) ≥ 1 − δ. (1.69)
+That is, we believe with “confidence” at least 1 − δ that the true value
+of y⋆ lies in Cδ(x⋆). Such a set Cδ(x⋆) is called a credible set. 0 5
+y⋆
+0.00
+0.05
+0.10
+0.15
+0.20
+p(y⋆ | x⋆, D)
+C(x⋆)
+Figure 1.9: Example of a 95% credible set at x⋆ where the predictive posterior is Gaussian with mean μ(x⋆) and standard deviation σ(x⋆). In this case, the gray area integrates to ≈ 0.95 for
+C0.05(x⋆) = [μ(x⋆) ± 1.96σ(x⋆)].
+We have seen here that the tasks of learning and prediction are intimately related. Indeed, “prediction” can be seen in many ways as a natural by-product of “reasoning” (i.e., probabilistic inference), where we evaluate the likelihood of outcomes given our learned explanations for the world. This intuition can be read off directly from Equation (1.68) where p(y⋆ | x⋆, θ) corresponds to the likelihood of an outcome given the explanation θ and p(θ | x1:n, y1:n) corresponds to our inferred belief about the world. We will see many more examples of this link between probabilistic inference and prediction throughout this manuscript.
+The high-dimensional integrals of Equations (1.67b) and (1.68) are typically intractable, and represent the main computational challenge in probabilistic inference. Throughout the first part of this manuscript, we will describe settings where exact inference is tractable, as well as modern approximate inference algorithms that can be used when exact inference is intractable.
+1.3.6 Recursive Probabilistic Inference and Memory
+We have already alluded to the fact that probabilistic inference has a recursive structure, which lends itself to continual learning and which often leads to efficient algorithms. Let us denote by
+p(t)(θ) .= p(θ | x1:t, y1:t) (1.70)
+the posterior after the first t observations with p(0)(θ) = p(θ). Now, suppose that we have already computed p(t)(θ) and observe yt+1. We can recursively update the posterior as follows,
+p(t+1)(θ) = p(θ | y1:t+1)
+∝ p(θ | y1:t) · p(yt+1 | θ, y1:t) using Bayes’ rule (1.45)
+
+
+fundamentals of inference 29
+= p(t)(θ) · p(yt+1 | θ). (1.71) using yt+1 ⊥ y1:t | θ, see Figure 2.3
+Intuitively, the posterior distribution at time t “absorbs” or “summarizes” all seen data.
+By unrolling the recursion of Equation (1.71), we see that regardless of the philosophical interpretation of probability, probabilistic inference is a fundamental mechanism of learning. Even the MLE which performs naive approximate inference without a prior (i.e., a uniform prior), is based on p(n)(θ) ∝ p(y1:n | x1:n, θ) which is the result of n individual plausible inferences, where the (t + 1)-st inference uses the posterior of the t-th inference as its prior.
+So far we have been considering the supervised learning setting, where all data is available a-priori. However, by sequentially obtaining the new posterior and replacing our prior, we can also perform probabilistic inference as data arrives online (i.e., in “real-time”). This is analogous to recursive logical inference where derived consequences are repeatedly added to the set of propositions to derive new consequences. This also highlights the intimate connection between “reasoning” and “memory”. Indeed, the posterior distribution p(t)(θ) can be seen as a form of memory that evolves with time t.
+1.4 Outlook: Decision Theory
+How can we use our predictions to make concrete decisions under uncertainty? We will study this question extensively in Part II of this manuscript, but briefly introduce some fundamental concepts here. Making decisions using a probabilistic model p(y | x) of output y ∈ Y given input x ∈ X , such as the ones we have discussed in the previous section, is commonly formalized by
+• a set of possible actions A, and • a reward function r(y, a) ∈ R that computes the reward or utility of taking action a ∈ A, assuming the true output is y ∈ Y.
+Standard decision theory recommends picking the action with the largest expected utility:
+a⋆(x) .= arg max a∈A
+Ey|x[r(y, a)]. (1.72)
+Here, a⋆ is called the optimal decision rule because, under the given probabilistic model, no other rule can yield a higher expected utility.
+Let us consider some examples of reward functions and their corresponding optimal decisions:
+
+
+30 probabilistic artificial intelligence
+Example 1.29: Reward functions
+Under the decision rule from Equation (1.72), different reward functions r can lead to different decisions. Let us examine two reward functions for the case where Y = A = R ? . Problem 1.13
+• Alternatively to considering r as a reward function, we can interpret −r as the loss of taking action a when the true output is y. If our goal is for our actions a to “mimic” the output y, a natural choice is the squared loss, −r(y, a) = (y − a)2. It turns out that under the squared loss, the optimal decision is simply the mean: a⋆(x) = E[y | x]. • To contrast this, we consider the asymmetric loss,
+−r(y, a) = c1 max{y − a, 0}
+| {z }
+underestimation error
++ c2 max{a − y, 0}
+| {z }
+overestimation error
+,
+which penalizes underestimation and overestimation differently. When y | x ∼ N (μx, σx2) then the optimal decision is
+a⋆(x) = μx + σx · Φ−1 c1
+c1 + c2
+| {z }
+pessimism / optimism
+where Φ is the CDF of the standard normal distribution.32 32 Recall that the CDF Φ of the standard normal distribution is a sigmoid with its inverse satisfying
+Φ−1 (u)
+
+ 
+ 
+< 0 if u < 0.5, = 0 if u = 0.5, > 0 if u > 0.5.
+Note that if c1 = c2, then the second term vanishes and the optimal decision is the same as under the squared loss. If c1 > c2, the second term is positive (i.e., optimistic) to avoid underestimation, and if c1 < c2, the second term is negative (i.e., pessimistic) to avoid overestimation. We will find these notions of optimism and pessimism to be useful in many decision-making scenarios.
+While Equation (1.72) describes how to make optimal decisions given a (posterior) probabilistic model, it does not tell us how to learn or improve this model in the first place. That is, these decisions are only optimal under the assumption that we cannot use their outcomes and our resulting observations to update our model and inform future decisions. When we start to consider the effect of our decisions on future data and future posteriors, answering “how do I make optimal decisions?” becomes more complex, and we will study this in Part II on sequential decision-making.
+Discussion
+In this chapter, we have learned about the fundamental concepts of probabilistic inference. We have seen that probabilistic inference is the
+
+
+fundamentals of inference 31
+natural extension of logical reasoning to domains with uncertainty. We have also derived the central principle of probabilistic inference, Bayes’ rule, which is simple to state but often computationally challenging. In the next part of this manuscript, we will explore settings where exact inference is tractable, as well as modern approaches to approximate probabilistic inference.
+Overview of Mathematical Background
+We have included brief summaries of the fundamentals of parameter estimation (mean estimation in particular) and optimization in Appendices A.3 and A.4, respectively, which we will refer back to throughout the manuscript. Appendix A.2 discusses the correspondence of Gaussians and quadratic forms. Appendix A.5 comprises a list of useful matrix identities and inequalities.
+Problems
+1.1. Properties of probability.
+Let (Ω, A, P) be a probability space. Derive the following properties of probability from the Kolmogorov axioms:
+1. For any A, B ∈ A, if A ⊆ B then P(A) ≤ P(B). 2. For any A ∈ A, P A = 1 − P(A). 3. For any countable set of events {Ai ∈ A}i,
+P
+∞
+[
+i=1
+Ai
+!
+≤
+∞
+∑
+i=1
+P(Ai). (1.73)
+which is called a union bound.
+1.2. Random walks on graphs.
+Let G be a simple connected finite graph. We start at a vertex u of G. At every step, we move to one of the neighbors of the current vertex uniformly at random, e.g., if the vertex has 3 neighbors, we move to one of them, each with probability 1/3. What is the probability that the walk visits a given vertex v eventually?
+1.3. Law of total expectation.
+Show that if {Ai}ik=1 are a partition of Ω and X is a random vector,
+E[X] =
+k
+∑
+i=1
+E[X | Ai] · P(Ai). (1.74)
+
+
+32 probabilistic artificial intelligence
+1.4. Covariance matrices are positive semi-definite.
+Prove that a covariance matrix Σ is always positive semi-definite. That is, all of its eigenvalues are greater or equal to zero, or equivalently, x⊤Σx ≥ 0 for any x ∈ Rn.
+1.5. Probabilistic inference.
+As a result of a medical screening, one of the tests revealed a serious disease in a person. The test has a high accuracy of 99% (the probability of a positive response in the presence of a disease is 99% and the probability of a negative response in the absence of a disease is also 99%). However, the disease is quite rare and occurs only in one person per 10 000. Calculate the probability of the examined person having the identified disease.
+1.6. Zero eigenvalues of covariance matrices.
+We say that a random vector X in Rn is not linearly independent if for some α ∈ Rn \ {0}, α⊤X = 0.
+1. Show that if X is not linearly independent, then Var[X] has a zero eigenvalue. 2. Show that if Var[X] has a zero eigenvalue, then X is not linearly independent.
+Hint: Consider the variance of λ⊤X where λ is the eigenvector corresponding to the zero eigenvalue.
+Thus, we have shown that Var[X] has a zero eigenvalue if and only if X is not linearly independent.
+1.7. Product of Gaussian PDFs.
+Let μ1, μ2 ∈ Rn be mean vectors and Σ1, Σ2 ∈ Rn×n be covariance matrices. Prove that
+N (x; μ, Σ) ∝ N (x; μ1, Σ1) · N (x; μ2, Σ2) (1.75)
+for some mean vector μ ∈ Rn and covariance matrix Σ ∈ Rn×n. That is, show that the product of two Gaussian PDFs is proportional to the PDF of a Gaussian.
+1.8. Independence of Gaussians.
+Show that two jointly Gaussian random vectors, X and Y, are independent if and only if X and Y are uncorrelated.
+1.9. Marginal / conditional distribution of a Gaussian.
+Prove Theorem 1.24. That is, show that
+1. every marginal of a Gaussian is Gaussian; and
+
+
+fundamentals of inference 33
+2. conditioning on a subset of variables of a joint Gaussian is Gaussian
+by finding their corresponding PDFs.
+Hint: You may use that for matrices Σ and Λ such that Σ−1 = Λ,
+• if Σ and Λ are symmetric,
+"
+xA
+xB
+#⊤ "
+ΛAA ΛAB
+ΛBA ΛBB
+#"
+xA
+xB
+#
+= x⊤AΛAA xA + x⊤AΛAB xB + xB⊤ΛBA xA + xB⊤ΛBB xB
+= x⊤A (ΛAA − ΛABΛ−1
+BBΛBA)xA+
+(xB + Λ−1
+BBΛBA xA)⊤ΛBB(xB + Λ−1
+BBΛ B A x A ),
+• Λ−1
+BB = ΣBB − ΣBAΣ−1
+AAΣ AB,
+• Λ−1
+BBΛBA = −ΣBAΣ−1
+AA.
+The final two equations follow from the general characterization of the inverse of a block matrix (Petersen et al., 2008, section 9.1.3).
+1.10. Closedness properties of Gaussians.
+Recall the notion of a moment-generating function (MGF) of a random vector X in Rn which is defined as
+φX(t) .= E exp t⊤X , for all t ∈ Rn. (1.76)
+An MGF uniquely characterizes a distribution. The MGF of the multivariate Gaussian X ∼ N (μ, Σ) is
+φX(t) = exp t⊤μ + 1
+2 t⊤Σt . (1.77)
+This generalizes the MGF of the univariate Gaussian from Equation (A.40).
+Prove the following facts.
+1. Closedness under affine transformations: Given an n-dimensional Gaussian X ∼ N (μ, Σ), and A ∈ Rm×n and b ∈ Rm,
+AX + b ∼ N (Aμ + b, AΣ A⊤). (1.78)
+2. Additivity: Given two independent Gaussian random vectors X ∼ N (μ, Σ) and X′ ∼ N (μ′, Σ′) in Rn,
+X + X′ ∼ N (μ + μ′, Σ + Σ′). (1.79)
+These properties are unique to Gaussians and a reason for why they are widely used for learning and inference.
+
+
+34 probabilistic artificial intelligence
+1.11. Expectation and variance of Gaussians.
+Derive that E[X] = μ and Var[X] = Σ when X ∼ N (μ, Σ).
+Hint: First derive the expectation and variance of a univariate standard normal random variable.
+1.12. Non-affine transformations of Gaussians.
+Answer the following questions with yes or no.
+1. Does there exist any non-affine transformation of a Gaussian random vector which is Gaussian? If yes, give an example.
+2. Let X, Y, Z be independent standard normal random variables. Is
+X+YZ
+√1+Z2 Gaussian?
+1.13. Decision theory.
+Derive the optimal decisions under the squared loss and the asymmetric loss from Example 1.29.
+
+
+part I
+Probabilistic Machine Learning
+
+
+
+
+Preface to Part I
+As humans, we constantly learn about the world around us. We learn to interact with our physical surroundings. We deepen our understanding of the world by establishing relationships between actors, objects, and events. And we learn about ourselves by observing how we interact with the world and with ourselves. We then continuously use this knowledge to make inferences and predictions, be it about the weather, the movement of a ball, or the behavior of a friend.
+With limited computational resources, limited genetic information, and limited life experience, we are not able to learn everything about the world to complete certainty. We saw in Chapter 1 that probability theory is the mathematical framework for reasoning with uncertainty in the same way that logic is the mathematical framework for reasoning with certainty. We will discuss two kinds of uncertainty: “aleatoric” uncertainty which cannot be reduced under computational constraints, and “epistemic” uncertainty which can be reduced by observing more data.
+An important aspect of learning is that we do not just learn once, but continually. Bayes’ rule allows us to update our beliefs and reduce our uncertainty as we observe new data — a process that is called probabilistic inference. By taking the former posterior as the new prior, probabilistic inference can be performed continuously and repeated indefinitely as we observe more and more data.
+world
+perception
+prior p(θ)
+model p(θ | D)
+D
+Figure 1.10: A schematic illustration of probabilistic inference in the context of the (supervised) learning of a model θ from perceived data D. The prior model p(θ) can equip the model with anything from substantial, to little, to no prior knowledge.
+Our sensory information is often noisy and imperfect, which is another source of uncertainty. The same is true for machines, even if they can sometimes sense aspects of the world more accurately than humans. We discuss how one can infer latent structure of the world from sensed data, such as the state of a dynamical system like a car, in a process that is called filtering.
+In this first part of the manuscript, we examine how we can build machines that are capable of (continual) learning and inference. First, we introduce probabilistic inference in the context of linear models which
+
+
+38 probabilistic artificial intelligence
+make predictions based on fixed (often hand-designed) features. We then discuss how probabilistic inference can be scaled to kernel methods and Gaussian processes which use a large (potentially infinite) number of features, and to deep neural networks which learn features dynamically from data. In these models, exact inference is typically intractable, and we discuss modern methods for approximate inference such as variational inference and Markov chain Monte Carlo. We highlight a tradeoff between curiosity (i.e., extrapolating beyond the given data) and conformity (i.e., fitting the given data), which surfaces as a fundamental principle of probabilistic inference in the regime where the data and our computational resources are limited.
+
+
+2
+Linear Regression
+As a first example of probabilistic inference, we will study linear mod
+els for regression1 which assume that the output y ∈ R is a linear 1 As we have discussed in Section 1.3, regression models can also be used for classification. The canonical example of a linear model for classification is logistic regression, which we will discuss in Section 5.1.1.
+function of the input x ∈ Rd:
+y ≈ w⊤x + w0
+where w ∈ Rd are the weights and w0 ∈ R is the intercept. Observe
+that if we define the extended inputs x′ .= (x, 1) and w′ .= (w, w0), then w′⊤x′ = w⊤x + w0, implying that without loss of generality it suffices to study linear functions without the intercept term w0. We will therefore consider the following function class of linear models
+f (x; w) .= w⊤x.
+−2 0 2 x
+−2
+0
+2
+y
+Figure 2.1: Example of linear regression with the least squares estimator (shown in blue).
+We will consider the supervised learning task of learning weights w from labeled training data {(xi, yi)}in=1. We define the design matrix,
+X .=
+
+  
+x...1⊤
+xn⊤
+
+  
+∈ Rn×d, (2.1)
+as the collection of inputs and the vector y .= [y1 · · · yn]⊤ ∈ Rn as the collection of labels. For each noisy observation (xi, yi), we define the value of the approximation of our model, fi
+.= w⊤xi. Our model at
+the inputs X is described by the vector f .= [ f1 · · · fn]⊤ which can be expressed succinctly as f = Xw.
+The most common way of estimating w from data is the least squares estimator,
+wˆ ls
+.= arg min w∈Rd
+n
+∑
+i=1
+(yi − w⊤xi)2 = arg min w∈Rd
+∥y − Xw∥2
+2 , (2.2)
+
+
+40 probabilistic artificial intelligence
+minimizing the squared difference between the labels and predictions of the model. A slightly different estimator is used for ridge regression,
+wˆ ridge
+.= arg min w∈Rd
+∥y − Xw∥2
+2 + λ ∥w∥2
+2 (2.3)
+where λ > 0. The squared L2 regularization term λ ∥w∥2
+2 penalizes large w and thus reduces the “complexity” of the resulting model.2
+2 Ridge regression is more robust to multicollinearity than standard linear regression. Multicollinearity occurs when multiple independent inputs are highly correlated. In this case, their individual effects on the predicted variable cannot be estimated well. Classical linear regression is highly volatile to small input changes. The regularization of ridge regression reduces this volatility by introducing a bias on the weights towards 0.
+It can be shown that the unique solutions to least squares and ridge regression are given by
+wˆ ls = (X⊤X)−1X⊤y and (2.4)
+wˆ ridge = (X⊤X + λI)−1X⊤y, (2.5)
+respectively if the Hessian of the loss is positive definite (i.e., the loss is strictly convex) ? which is the case as long as the columns of X Problem 2.1 (1) are not linearly dependent. Least squares regression can be seen as finding the orthogonal projection of y onto the column space of X, as is illustrated in Figure 2.2 ? . Problem 2.1 (2) y
+Xwˆ ls
+span{X }
+Figure 2.2: Least squares regression finds the orthogonal projection of y onto span{X} (here illustrated as the plane).
+2.0.1 Maximum Likelihood Estimation
+Since our function class comprises linear functions of the form w⊤x, the observation model from Equation (1.56) simplifies to
+yi = w⋆⊤xi + εi (2.6)
+for some weight vector w, where for the purpose of this chapter we will additionally assume that εi ∼ N (0, σn2) is homoscedastic Gaussian noise.3 This observation model is equivalently characterized by the
+3 εi is called additive white Gaussian noise.
+Gaussian likelihood,
+yi | xi, w ∼ N (w⊤xi, σn2). (2.7) using Equation (1.55)
+Based on this likelihood we can compute the MLE (1.57) of the weights:
+wˆ MLE = arg max w∈Rd
+n
+∑
+i=1
+log p(yi | xi, w) = arg min w∈Rd
+n
+∑
+i=1
+(yi − w⊤ xi)2. plugging in the Gaussian likelihood and simplifying
+Note that therefore wˆ MLE = wˆ ls.
+In practice, the noise variance σn2 is typically unknown and also has to be determined, for example, through maximum likelihood estimation. It is a straightforward exercise to check that the MLE of σn2 given fixed
+weights w is ˆσn2 = 1n ∑in=1(yi − w⊤xi)2 ? . Problem 2.2
+2.1 Weight-space View
+The most immediate and natural probabilistic interpretation of linear regression is to quantify uncertainty about the weights w. Recall
+
+
+linear regression 41
+that probabilistic inference requires specification of a generative model comprised of prior and likelihood. Throughout this chapter, we will use the Gaussian prior,
+w ∼ N (0, σp2 I), (2.8)
+and the Gaussian likelihood from Equation (2.7). We will discuss possible (probabilistic) strategies for choosing hyperparameters such as the prior variance σp2 and the noise variance σn2 in Section 4.4.
+w
+σn2
+yi
+σp2
+xi
+i∈1:n
+Figure 2.3: Directed graphical model of Bayesian linear regression in plate notation.
+Remark 2.1: Why a Gaussian prior?
+The choice of using a Gaussian prior may seem somewhat arbitrary at first sight, except perhaps for the nice analytical properties of Gaussians that we have seen in Section 1.2.3 and which will prove useful. The maximum entropy principle (cf. Section 1.2.1) provides a more fundamental justification for Gaussian priors since turns out that N has the maximum entropy among all distributions on Rd with known mean and variance ? . Problem 5.6
+Next, let us derive the posterior distribution over the weights.
+log p(w | x1:n, y1:n)
+= log p(w) + log p(y1:n | x1:n, w) + const by Bayes’ rule (1.45)
+= log p(w) +
+n
+∑
+i=1
+log p(yi | xi, w) + const using independence of the samples
+= −1
+2
+"
+σp−2 ∥w∥2
+2 + σn−2
+n
+∑
+i=1
+(yi − w⊤xi)2
+#
++ const using the Gaussian prior and likelihood
+= −1
+2
+h
+σp−2 ∥w∥2
+2 + σn−2 ∥y − Xw∥2
+2
+i
++ const using ∑in=1(yi − w⊤ xi)2 = ∥y − Xw∥2
+2
+= −1
+2
+h
+σp−2w⊤w + σn−2 w⊤X⊤Xw − 2y⊤Xw + y⊤y
+i
++ const
+= −1
+2
+h
+w⊤(σn−2X⊤X + σp−2 I)w − 2σn−2y⊤Xw
+i
++ const. (2.9)
+Observe that the log-posterior is a quadratic form in w, so the posterior distribution must be Gaussian:
+w | x1:n, y1:n ∼ N (μ, Σ) (2.10a) see Equation (A.12)
+where we can read off the mean and variance to be
+μ .= σn−2ΣX⊤y, (2.10b)
+Σ .= σn−2X⊤X + σp−2 I −1. (2.10c)
+This also shows that Gaussians with known variance and linear likelihood are self-conjugate, a property that we had hinted at in Section 1.2.2. It can be shown more generally that Gaussians with known
+
+
+42 probabilistic artificial intelligence
+variance are self-conjugate to any Gaussian likelihood (Murphy, 2007). For other generative models, the posterior can typically not be expressed in closed-form — this is a very special property of Gaussians!
+2.1.1 Maximum a Posteriori Estimation
+Computing the MAP estimate for the weights,
+wˆ MAP = arg max
+w
+log p(y1:n | x1:n, w) + log p(w)
+= arg min
+w
+∥y − Xw∥2
+2 + σn2
+σp2
+∥w∥2
+2 , using that the likelihood and prior are
+Gaussian
+(2.11)
+we observe that this is identical to ridge regression with weight decay λ .= σn2/σp2: wˆ MAP = wˆ ridge. Equation (2.11) is simply the MLE loss with an additional L2-regularization (originating from the prior) that encourages keeping weights small. Recall that the MAP estimate corresponds to the mode of the posterior distribution, which in the case of a Gaussian is simply its mean μ. As to be expected, μ coincides with the analytical solution to ridge regression from Equation (2.5).
+−1 0 1
+θ1
+−1.0
+−0.5
+0.0
+0.5
+1.0
+θ2
+Figure 2.4: Level sets of L2- (blue) and L1-regularization (red), corresponding to Gaussian and Laplace priors, respectively. It can be seen that L1regularization is more effective in encouraging sparse solutions (that is, solutions where many components are set to exactly 0).
+Example 2.2: Lasso as the MAP estimate with a Laplace prior
+One problem with ridge regression is that the contribution of nearly-zero weights to the L2-regularization term is negligible. Thus, L2-regularization is typically not sufficient to perform variable selection (that is, set some weights to zero entirely), which is often desirable for interpretability of the model.
+A commonly used alternative to ridge regression is the least absolute shrinkage and selection operator (or lasso), which regularizes with the L1-norm:
+wˆ lasso
+.= arg min w∈Rd
+∥y − Xw∥2
+2 + λ ∥w∥1 . (2.12)
+It turns out that lasso can also be viewed as probabilistic inference, using a Laplace prior w ∼ Laplace(0, h) with length scale h instead of a Gaussian prior.
+Computing the MAP estimate for the weights yields,
+wˆ MAP = arg max
+w
+log p(y1:n | x1:n, w) + log p(w)
+= arg min
+w
+n
+∑
+i=1
+(yi − w⊤xi)2 + σn2
+h ∥w∥1 using that the likelihood is Gaussian
+and the prior is Laplacian
+(2.13)
+which coincides with the lasso with weight decay λ .= σn2/h.
+
+
+linear regression 43
+To make predictions at a test point x⋆, we define the (model-)predicted point f ⋆ .= wˆ ⊤MAPx⋆ and obtain the label prediction
+y⋆ | x⋆, x1:n, y1:n ∼ N ( f ⋆, σn2). (2.14)
+Here we observe that using point estimates such as the MAP estimate does not quantify uncertainty in the weights. The MAP estimate simply collapses all mass of the posterior around its mode. This can be harmful when we are highly unsure about the best model, e.g., because we have observed insufficient data.
+2.1.2 Probabilistic Inference
+Rather than selecting a single weight vector wˆ to make predictions, we can use the full posterior distribution. This is known as Bayesian linear regression (BLR) and illustrated with an example in Figure 2.5.
+−0.5 0.0 0.5 1.0 1.5 x
+−1
+0
+1
+2
+3
+y
+−0.5 0.0 0.5 1.0 1.5 x
+−4
+−2
+0
+2
+4
+6
+y Figure 2.5: Comparison of linear regression (MLE), ridge regression (MAP estimate), and Bayesian linear regression when the data is generated according to
+y | w, x ∼ N (w⊤ x, σn2).
+The true mean is shown in black, the MLE in blue, and the MAP estimate in red. The dark gray area denotes the epistemic uncertainty of Bayesian linear regression and the light gray area the additional homoscedastic noise. On the left, σn = 0.15. On the right, σn = 0.7.
+To make predictions at a test point x⋆, we let f ⋆ .= w⊤x⋆ which has the distribution
+f ⋆ | x⋆, x1:n, y1:n ∼ N (μ⊤ x⋆, x⋆⊤Σx⋆). using the closedness of Gaussians under linear transformations (1.78)
+(2.15)
+Note that this does not take into account the noise in the labels σn2. For
+the label prediction y⋆, we obtain
+y⋆ | x⋆, x1:n, y1:n ∼ N (μ⊤ x⋆, x⋆⊤Σx⋆ + σn2). (2.16) using additivity of Gaussians (1.79)
+2.1.3 Recursive Probabilistic Inference
+We have already discussed the recursive properties of probabilistic inference in Section 1.3.6. For Bayesian linear regression with a Gaussian prior and likelihood, this principle can be used to derive an efficient online algorithm since also the posterior is a Gaussian,
+p(t)(w) = N (w; μ(t), Σ(t)), (2.17)
+which can be stored efficiently using only O d2 parameters. This leads to an efficient online algorithm for Bayesian linear regression
+
+
+44 probabilistic artificial intelligence
+with time-independent(!) memory complexity O(d) and round complexity O d2 ? . The interpretation of Bayesian linear regression as an Problem 2.5 online algorithm also highlights similarities to other sequential models such as Kalman filters, which we discuss in Chapter 3. In Example 3.5, we will learn that online Bayesian linear regression is, in fact, an example of a Kalman filter.
+2.2 Aleatoric and Epistemic Uncertainty
+The predictive posterior distribution from Equation (2.16) highlights a decomposition of uncertainty wherein x⋆⊤Σx⋆ corresponds to the uncertainty about our model due to the lack of data (commonly referred to as the epistemic uncertainty) and σn2 corresponds to the uncertainty about the labels that cannot be explained by the inputs and any model from the model class (commonly referred to as the aleatoric uncertainty, “irreducible noise”, or simply “(label) noise”) ? . Problem 2.6
+A natural probabilistic approach is to represent epistemic uncertainty with a probability distribution over models. Intuitively, the variance of this distribution measures our uncertainty about the model and its mode corresponds to our current best (point) estimate. The distribution over weights of a linear model is one example, and we will continue to explore this approach for other models in the following chapters.
+It is a practical modeling choice how much inaccuracy to attribute to epistemic or aleatoric uncertainty. Generally, when a poor model is used to explain a process, more inaccuracy has to be attributed to irreducible noise. For example, when a linear model is used to “explain” a nonlinear process, most uncertainty is aleatoric as the model cannot explain the data well. As we use more expressive models, a larger portion of the uncertainty can be explained by the data.
+Epistemic and aleatoric uncertainty can be formally defined in terms of the law of total variance (1.41),
+Var[y⋆ | x⋆] = Eθ Vary⋆ [y⋆ | x⋆, θ]
+| {z }
+aleatoric uncertainty
++ Varθ Ey⋆ [y⋆ | x⋆, θ]
+| {z }
+epistemic uncertainty
+. (2.18)
+Here, the mean variability of predictions y⋆ averaged across all models θ is the estimated aleatoric uncertainty. In contrast, the variability of the mean prediction y⋆ under each model θ is the estimated epistemic uncertainty. This decomposition of uncertainty will appear frequently throughout this manuscript.
+
+
+linear regression 45
+2.3 Non-linear Regression
+We can use linear regression not only to learn linear functions. The trick is to apply a nonlinear transformation φ : Rd → Re to the features xi, where d is the dimension of the input space and e is the dimension of the designed feature space. We denote the design matrix comprised of transformed features by Φ ∈ Rn×e. Note that if the feature transformation φ is the identity function then Φ = X.
+−2 0 2 x
+−5
+0
+5
+10
+y
+Figure 2.6: Applying linear regression with a feature space of polynomials of degree 10. The least squares estimate is shown in blue, ridge regression in red, and lasso in green.
+Example 2.3: Polynomial regression
+Let φ(x) .= [x2, x, 1] and w .= [a, b, c]. Then the function that our model learns is given as
+f = ax2 + bx + c.
+Thus, our model can exactly represent all polynomials up to degree 2.
+However, to learn polynomials of degree m in d input dimensions, we need to apply the nonlinear transformation
+φ(x) = [1, x1, . . . , xd, x12, . . . , xd2, x1 · x2, . . . , xd−1 · xd,
+...,
+xd−m+1 · · · · · xd].
+Note that the feature dimension e is ∑im=0 (d+i−1
+i ) = Θ(dm).4 4 Observe that the vector contains (d+i−1
+i) monomials of degree i as this is the number of ways to choose i times from d items with replacement and without consideration of order. To see this, consider the following encoding: We take a sequence of d + i − 1 spots. Selecting any subset of i spots, we interpret the remaining d − 1 spots as “barriers” separating each of the d items. The selected spots correspond to the number of times each item has been selected. For example, if 2 items are to be selected out of a total of 4 items with replacement, one possible configuration is “◦ || ◦ |” where ◦ denotes a selected spot and | denotes a barrier. This configuration encodes that the first and third item have each been chosen once. The number of possible configurations — each encoding a unique outcome — is therefore (d+i−1
+i ).
+Thus, the dimension of the feature space grows exponentially in the degree of polynomials and input dimensions. Even for relatively small m and d, this becomes completely unmanageable.
+The example of polynomials highlights that it may be inefficient to keep track of the weights w ∈ Re when e is large, and that it may be useful to instead consider a reparameterization which is of dimension n rather than of the feature dimension.
+2.4 Function-space View
+Let us now look at Bayesian linear regression through a different lens. Previously, we have been interpreting it as a distribution over the weights w of a linear function f = Φw. The key idea is that for a finite set of inputs (ensuring that the design matrix is well-defined), we can equivalently consider a distribution directly over the estimated function values f . We call this the function-space view of Bayesian linear regression.
+
+
+46 probabilistic artificial intelligence
+Instead of considering a prior over the weights w ∼ N (0, σp2 I) as we have done previously, we now impose a prior directly on the values of our model at the observations. Using that Gaussians are closed under linear maps (1.78), we obtain the equivalent prior
+f | X ∼ N (ΦE[w], ΦVar[w]Φ⊤) = N (0, σp2ΦΦ⊤
+| {z }
+K
+) (2.19)
+where K ∈ Rn×n is the so-called kernel matrix. Observe that the entries of the kernel matrix can be expressed as K(i, j) = σp2 · φ(xi)⊤φ(xj).
+x1 xn
+x
+−4
+−2
+0
+2
+y
+f1
+fn
+Figure 2.7: An illustration of the function-space view. The model is described by the points (xi, fi).
+You may say that nothing has changed, and you would be right that is precisely the point. Note, however, that the shape of the kernel matrix is n × n rather than the e × e covariance matrix over weights, which becomes unmanageable when e is large. The kernel matrix K has entries only for the finite set of observed inputs. However, in principle, we could have observed any input, and this motivates the definition of the kernel function
+k(x, x′) .= σp2 · φ(x)⊤φ(x′) (2.20)
+for arbitrary inputs x and x′. A kernel matrix is simply a finite “view” of the kernel function,
+K=
+
+  
+k(x1, x1) · · · k(x1, xn)
+... . . . ...
+k(xn, x1) · · · k(xn, xn)
+
+  
+(2.21)
+Observe that by definition of the kernel matrix in Equation (2.19), the kernel matrix is a covariance matrix and the kernel function measures the covariance of the function values f (x) and f (x′) given inputs x and x′:
+k(x, x′) = Cov f (x), f (x′) . (2.22)
+Moreover, note that we have reformulated5 the learning algorithm 5 we often say “kernelized” such that the feature space is now implicit in the choice of kernel, and the kernel is defined by inner products of (nonlinearly transformed) inputs. In other words, the choice of kernel implicitly determines the class of functions that f is sampled from (without expressing the functions explicitly in closed-form), which encodes our prior beliefs. This is known as the kernel trick.
+2.4.1 Learning and Predictions
+We have already kernelized the Bayesian linear regression prior. The posterior distribution f | X, y is again Gaussian due to the closedness
+
+
+linear regression 47
+properties of Gaussians, analogously to our derivation of the prior kernel matrix in Equation (2.19).
+It remains to show that we can also rely on the kernel trick for predictions. Given the test point x⋆, we define
+Φ ̃ .=
+"
+Φ
+φ(x⋆)⊤
+#
+, y ̃ .=
+"
+y y⋆
+#
+, f ̃ .=
+"
+f f⋆
+#
+.
+We immediately obtain f ̃ = Φ ̃ w. Analogously to our analysis of predictions from the weight-space view, we add the label noise to obtain the estimate y ̃ = f ̃ + ε ̃ where ε ̃ .= [ε1 · · · εn ε⋆]⊤ ∼ N (0, σn2 I) is the independent label noise. Applying the same reasoning as we did for the prior, we obtain
+f ̃ | X, x⋆ ∼ N (0, K ̃ ) (2.23)
+where K ̃ .= σp2Φ ̃ Φ ̃ ⊤. Adding the label noise yields
+y ̃ | X, x⋆ ∼ N (0, K ̃ + σn2 I). (2.24)
+Finally, we can conclude from the closedness of Gaussian random vectors under conditional distributions (1.53) that the predictive posterior y⋆ | x⋆, X, y follows again a normal distribution. We will do a full derivation of the posterior and predictive posterior in Section 4.1.
+2.4.2 Efficient Polynomial Regression
+But how does the kernel trick address our concerns about efficiency raised in Section 2.3? After all, computing the kernel for a feature space of dimension e still requires computing sums of length e which is prohibitive when e is large. The kernel trick opens up a couple of new doors for us:
+1. For certain feature transformations φ, we may be able to find an easier to compute expression equivalent to φ(x)⊤φ(x′). 2. If this is not possible, we could approximate the inner product by an easier to compute expression. 3. Or, alternatively, we may decide not to care very much about the exact feature transformation and simply experiment with kernels that induce some feature space (which may even be infinitely dimensional).
+We will explore the third approach when we revisit kernels in Section 4.3. A polynomial feature transformation can be computed efficiently in closed-form.
+Fact 2.4. For the polynomial feature transformation φ up to degree m from Example 2.3, it can be shown that up to constant factors,
+φ(x)⊤φ(x′) = (1 + x⊤x′)m. (2.25)
+
+
+48 probabilistic artificial intelligence
+For example, for input dimension 2, the kernel (1 + x⊤x′)2 corre
+sponds to the feature vector φ(x) = [1 √2x1
+√2x2
+√2x1x2 x12 x22]⊤.
+Discussion
+We have explored a probabilistic perspective on linear models, and seen that classical approaches such as least squares and ridge regression can be interpreted as approximate probabilistic inference. We then saw that we can even perform exact probabilistic inference efficiently if we adopt a Gaussian prior and Gaussian noise assumption. These are already powerful tools, which are often applied also to nonlinear models if we treat the latent feature space — which was either human-designed or learned via deep learning — as fixed. In the next chapter, we will digress briefly from the storyline on “learning” to see how we can adopt a similar probabilistic perspective to track latent states over time. Then, in Chapter 4, we will see how we can use the function-space view and kernel trick to learn flexible nonlinear models with exact probabilistic inference, without ever explicitly representing the feature space.
+Problems
+2.1. Closed-form linear regression.
+1. Derive the unique solutions to least squares and ridge regression from Equations (2.4) and (2.5). 2. For an n × m matrix A and vector x ∈ Rm, we call ΠAx the orthogonal projection of x onto span{A} = {Ax′ | x′ ∈ Rm}. In particular, an orthogonal projection satisfies x − ΠAx ⊥ Ax′ for all x′ ∈ Rm. Show that wˆ ls from Equation (2.4) is such that Xwˆ ls is the unique closest point to y on span{X}, i.e., it satisfies Xwˆ ls = ΠX y.
+2.2. MLE of noise variance.
+Show that the MLE of σn2 given fixed weights w is
+ˆσn2 = 1
+n
+n
+∑
+i=1
+(yi − w⊤xi)2. (2.26)
+2.3. Variance of least squares around training data.
+Show that the variance of a prediction at the point [1 x⋆]⊤ is smallest when x⋆ is the mean of the training data. More formally, show that if inputs are of the form xi = [1 xi]⊤ where xi ∈ R and wˆ ls is
+the least squares estimate, then Var y⋆ | [1 x⋆]⊤, wˆ ls is minimized for x⋆ = 1n ∑in=1 xi.
+
+
+linear regression 49
+2.4. Bayesian linear regression.
+Suppose you are given the following observations
+X=
+
+   
+11 12 21 22
+
+   
+, y=
+
+   
+2.4 4.3 3.1 4.9
+
+   
+and assume the data follows a linear model with homoscedastic noise N (0, σn2) where σn2 = 0.1.
+1. Find the maximum likelihood estimate wˆ MLE given the data. 2. Now assume that we have a prior p(w) = N (w; 0, σp2 I) with σp2 = 0.05. Find the MAP estimate wˆ MAP given the data and the prior. 3. Use the posterior p(w | X, y) to get a posterior prediction for the label y⋆ at x⋆ = [3 3]⊤. Report the mean and the variance of this prediction. 4. How would you have to change the prior p(w) such that
+wˆ MAP → wˆ MLE?
+2.5. Online Bayesian linear regression.
+1. Can you design an algorithm that updates the posterior (as opposed to recalculating it from scratch using Equation (2.10)) in a smarter way? The requirement is that the memory should not grow as O(t). 2. If d is large, computing the inverse every round is very expensive. Can you use the recursive structure you found in the previous question to bring down the computational complexity of every round to O d2 ?
+The resulting efficient online algorithm is known as online Bayesian linear regression.
+2.6. Aleatoric and epistemic uncertainty of BLR.
+Prove for Bayesian linear regression that x⋆⊤Σx⋆ is the epistemic uncertainty and σn2 the aleatoric uncertainty in y⋆ under the decomposition of Equation (2.18).
+2.7. Hyperpriors.
+We consider a dataset {(xi, yi)}in=1 of size n, where xi ∈ Rd denotes the feature vector and yi ∈ R denotes the label of the i-th data point. Let εi be i.i.d. samples from the Gaussian distribution N (0, λ−1) for a given λ > 0. We collect the labels in a vector y ∈ Rn, the features in a matrix X ∈ Rn×d, and the noise in a vector ε ∈ Rn. The labels are generated according to y = Xw + ε.
+
+
+50 probabilistic artificial intelligence
+To perform Bayesian Linear Regression, we consider the prior distribution over the parameter vector w to be N (μ, λ−1 Id), where Id denotes the d-dimensional identity matrix and μ ∈ Rd is a hyperparameter.
+1. Given this Bayesian data model, what is the conditional covariance matrix Σy
+.= Var[y | X, μ, λ]? 2. Calculate the maximum likelihood estimate of the hyperparameter μ. 3. Since we are unsure about the hyperparameter μ, we decide to model our uncertainty about μ by placing the “hyperprior” μ ∼ N (0, Id). Is the posterior distribution p(μ | X, y, λ) a Gaussian distribution? If yes, what are its mean vector and covariance matrix? 4. What is the posterior distribution p(λ | X, y, μ)?
+Hint: For any a ∈ R, A ∈ Rn×n it holds that det(aA) = andet(A).
+
+
+3
+Filtering
+Before we continue in Chapter 4 with the function-space view of regression, we want to look at a seemingly different but very related problem. We will study Bayesian learning and inference in the state space model, where we want to keep track of the state of an agent over time based on noisy observations. In this model, we have a sequence of (hidden) states (Xt)t∈N0 where Xt is in Rd and a sequence of observations (Yt)t∈N0 where Yt is in Rm.
+The process of keeping track of the state using noisy observations is also known as Bayesian filtering or recursive Bayesian estimation. Figure 3.1 illustrates this process, where an agent perceives the current state of the world and then updates its beliefs about the state based on this observation.
+perception
+model p(θ | D1:t)
+Dt
+perception
+model p(θ | D1:t+1)
+Dt+1
+worldt worldt+1
+Figure 3.1: Schematic view of Bayesian filtering: An agent perceives the current state of the world and updates its belief accordingly.
+We will discuss Bayesian filtering more broadly in the next section. A Kalman filter is an important special case of a Bayes’ filter, which uses a Gaussian prior over the states and conditional linear Gaussians to describe the evolution of states and observations. Analogously to the
+
+
+52 probabilistic artificial intelligence
+previous chapter, we will see that inference in this model is tractable due to the closedness properties of Gaussians.
+Definition 3.1 (Kalman filter). A Kalman filter is specified by a Gaussian prior over the states,
+X0 ∼ N (μ, Σ), (3.1)
+and a conditional linear Gaussian motion model and sensor model,
+Xt+1
+.= FXt + εt F ∈ Rd×d, εt ∼ N (0, Σx), (3.2)
+Yt .= HXt + ηt H ∈ Rm×d, ηt ∼ N (0, Σy), (3.3)
+respectively. The motion model is sometimes also called transition model or dynamics model. Crucially, Kalman filters assume that F and H are known. In general, F and H may depend on t. Also, ε and η may have a non-zero mean, commonly called a “drift”.
+X1 X2 X3 · · ·
+Y1 Y2 Y3
+Figure 3.2: Directed graphical model of a Kalman filter with hidden states Xt and observables Yt.
+Because Kalman filters use conditional linear Gaussians, which we have already seen in Equation (1.55), their joint distribution (over all variables) is also Gaussian. This means that predicting the future states of a Kalman filter is simply inference with multivariate Gaussians. In Bayesian filtering, however, we do not only want to make predictions occasionally. In Bayesian filtering, we want to keep track of states, that
+is, predict the current state of an agent online.1 To do this efficiently, 1 Here, online is common terminology to say that we want to perform inference at time t without exposure to times t + 1, t + 2, . . . , so in “real-time”.
+we need to update our belief about the state of the agent recursively, similarly to our recursive Bayesian updates in Bayesian linear regression (see Section 2.1.3).
+From the directed graphical model of a Kalman filter shown in Figure 3.2, we can immediately gather the following conditional indepen
+dence relations,2 2 Alternatively, they follow from the definition of the motion and sensor models as linear updates.
+Xt+1 ⊥ X1:t−1, Y1:t−1 | Xt, (3.4)
+Yt ⊥ X1:t−1 | Xt (3.5)
+Yt ⊥ Y1:t−1 | Xt−1. (3.6)
+The first conditional independence property is also known as the Markov property, which we will return to later in our discussion of Markov chains and Markov decision processes. This characterization of the Kalman filter, yields the following factorization of the joint distribution:
+p(x1:t, y1:t) =
+t
+∏
+i=1
+p(xi | x1:i−1)p(yi | x1:t, y1:i−1) using the product rule (1.11)
+= p(x1)p(y1 | x1)
+t
+∏
+i=2
+p(xi | xi−1)p(yi | xi). using the conditional independence properties from (3.4), (3.5), and (3.6)
+(3.7)
+
+
+filtering 53
+3.1 Conditioning and Prediction
+We can describe Bayesian filtering by the following recursive scheme with the two phases, conditioning (also called “update”) and prediction:
+Algorithm 3.2: Bayesian filtering
+1 start with a prior over initial states p(x0) 2 for t = 1 to ∞ do
+3 assume we have p(xt | y1:t−1) 4 conditioning: compute p(xt | y1:t) using the new observation yt 5 prediction: compute p(xt+1 | y1:t)
+Let us consider the conditioning step first:
+p(xt | y1:t) = 1
+Z p(xt | y1:t−1)p(yt | xt, y1:t−1) using Bayes’ rule (1.45)
+=1
+Z p(xt | y1:t−1)p(yt | xt). using the conditional independence
+structure (3.6)
+(3.8)
+For the prediction step, we obtain,
+p(xt+1 | y1:t) =
+Z
+p(xt+1, xt | y1:t) dxt using the sum rule (1.7)
+=
+Z
+p(xt+1 | xt, y1:t)p(xt | y1:t) dxt using the product rule (1.11)
+=
+Z
+p(xt+1 | xt)p(xt | y1:t) dxt. using the conditional independence structure (3.4)
+(3.9)
+In general, these distributions can be very complicated, but for Gaussians (i.e., Kalman filters) they can be expressed in closed-form.
+Remark 3.3: Bayesian smoothing
+Bayesian smoothing is a closely related task to Bayesian filtering. While Bayesian filtering methods estimate the current state based only on observations obtained before and at the current time step, Bayesian smoothing computes the distribution of Xk | y1:t where t > k. That is Bayesian smoothing estimates Xk based on data until and beyond time k. Note that if k = t, then Bayesian smoothing coincides with Bayesian filtering.
+Analogously to Equation (3.8),
+p(xk | y1:t) ∝ p(xk | y1:k)p(yk+1:t | xk). (3.10)
+If we assume a Gaussian prior and conditional Gaussian transition and dynamics models (this is called Kalman smoothing), then
+
+
+54 probabilistic artificial intelligence
+by the closedness properties of Gaussians, Xk | y1:t is a Gaussian. Indeed, all terms of Equation (3.10) are Gaussian PDFs and as seen in Equation (1.75), the product of two Gaussian PDFs is again proportional to a Gaussian PDF.
+The first term, Xk | y1:k, is the marginal posterior of the hidden states of the Kalman filter which can be obtained with Bayesian filtering.
+By conditioning on Xk+1, we have for the second term,
+p(yk+1:t | xk) =
+Z
+p(yk+1:t | xk, xk+1)p(xk+1 | xk) dxk+1 using the sum rule (1.7) and product rule (1.11)
+=
+Z
+p(yk+1:t | xk+1)p(xk+1 | xk) dxk+1 using the conditional independence structure (3.5)
+=
+Z
+p(yk+1 | xk+1)p(yk+2:t | xk+1)p(xk+1 | xk) dxk+1 using the conditional independence structure (3.6)
+(3.11)
+Let us have a look at the terms in the product:
+• p(yk+1 | xk+1) is obtained from the sensor model, • p(xk+1 | xk) is obtained from the transition model, and • p(yk+2:t | xk+1) can be computed recursively backwards in time.
+This recursion results in linear equations resembling a Kalman filter running backwards in time.
+Thus, in the setting of Kalman smoothing, both factors of Equation (3.10) can be computed efficiently: one using a (forward) Kalman filter; the other using a “backward” Kalman filter. More concretely, in time O(t), we can compute the two factors for all k ∈ [t]. This approach is known as two-filter smoothing or the forward-backward algorithm.
+3.2 Kalman Filters
+Let us return to the setting of Kalman filters where priors and likelihoods are Gaussian. Here, we will see that the update and prediction steps can be computed in closed form.
+3.2.1 Conditioning
+The conditioning operation in Kalman filters is also called the Kalman update. Before introducing the general Kalman update, let us consider a simpler example:
+
+
+filtering 55
+Example 3.4: Random walk in 1d
+We use the simple motion and sensor models,3 3 This corresponds to F = H = I and a drift of 0. Xt+1 | xt ∼ N (xt, σx2), (3.12a)
+Yt | xt ∼ N (xt, σy2). (3.12b)
+Let Xt | y1:t ∼ N (μt, σt2) be our belief at time t. It can be shown that Bayesian filtering yields the belief Xt+1 | y1:t+1 ∼ N (μt+1, σt2+1) at time t + 1 where ? Problem 3.1
+μt+1
+.= σy2μt + (σt2 + σx2)yt+1
+σt2 + σx2 + σy2
+, σt2+1
+.= (σt2 + σx2)σy2
+σt2 + σx2 + σy2
+. (3.13)
+Although looking intimidating at first, this update has a very natural interpretation. Let us define the following quantity,
+λ .= σt2 + σx2
+σt2 + σx2 + σy2
+= 1 − σy2
+σt2 + σx2 + σy2
+∈ [0, 1]. (3.14)
+Using λ, we can write the updated mean as a convex combination of the previous mean and the observation,
+μt+1 = (1 − λ)μt + λyt+1 (3.15)
+= μt + λ(yt+1 − μt). (3.16)
+Intuitively, λ is a form of “gain” that influences how much of the new information should be incorporated into the updated mean. For this reason, λ is also called Kalman gain.
+The updated variance can similarly be rewritten,
+σt2+1 = λσy2 = (1 − λ)(σt2 + σx2). (3.17)
+In particular, observe that if μt = yt+1 (i.e., we observe our prediction), we have μt+1 = μt as there is no new information. Similarly, for σy2 → ∞ (i.e., we do not trust our observations), we have
+λ → 0, μt+1 = μt, σt2+1 = σt2 + σx2.
+In contrast, for σy2 → 0, we have
+λ → 1, μt+1 = yt+1, σt2+1 = 0.
+123456 t
+x
+Figure 3.3: Hidden states during a random walk in one dimension.
+The general formulas for the Kalman update follow the same logic as in the above example of a one-dimensional random walk. Given the
+
+
+56 probabilistic artificial intelligence
+prior belief Xt | y1:t ∼ N (μt, Σt), we have
+Xt+1 | y1:t+1 ∼ N (μt+1, Σt+1) where (3.18a)
+μt+1
+.= Fμt + Kt+1(yt+1 − H Fμt), (3.18b)
+Σ t+1
+.= (I − Kt+1 H)(FΣt F⊤ + Σx). (3.18c)
+Hereby, Kt+1 is the Kalman gain,
+Kt+1
+.= (FΣt F⊤ + Σx)H⊤(H(FΣt F⊤ + Σx)H⊤ + Σy)−1 ∈ Rd×m. (3.18d)
+Note that Σt and Kt can be computed offline as they are independent of the observation yt+1. Fμt represents the expected state at time t + 1, and hence, H Fμt corresponds to the expected observation. Therefore, the term yt+1 − H Fμt measures the error in the predicted observation and the Kalman gain Kt+1 appears as a measure of relevance of the new observation compared to the prediction.
+Example 3.5: Bayesian linear regression as a Kalman filter
+Even though they arise from a rather different setting, it turns out that Kalman filters are a generalization of Bayesian linear regression! To see this, recall the online Bayesian linear regression algorithm from Section 2.1.3. Observe that by keeping attempting to estimate the (hidden) weights w⋆ from sequential noisy observations yt, this algorithm performs Bayesian filtering! Moreover, we have used a Gaussian prior and likelihood. This is precisely the setting of a Kalman filter!
+Concretely, we are estimating the constant (i.e., F = I, ε = 0) hidden state xt = w(t) with prior w(0) ∼ N (0, σp2 I).
+Our sensor model is time-dependent, since in each iteration we observe a different input xt. Furthermore, we only observe a
+scalar-valued label yt.4 4 That is, m = 1 in our general Kalman filter formulation from above.
+Formally, our sensor model is characterized by ht = xt⊤ and noise ηt = εt with εt ∼ N (0, σn2).
+You will show in ? that the Kalman update (3.18) is the online Problem 3.2 equivalent to computing the posterior of the weights in Bayesian linear regression.
+3.2.2 Predicting
+Using now that the marginal posterior of Xt is a Gaussian due to the closedness properties of Gaussians, we have
+Xt+1 | y1:t ∼ N (μˆt+1, Σˆ t+1), (3.19)
+
+
+filtering 57
+and it suffices to compute the prediction mean μˆt+1 and covariance matrix Σˆ t+1.
+For the mean,
+μˆt+1 = E[xt+1 | y1:t]
+= E[F xt + εt | y1:t] using the motion model (3.2)
+= FE[xt | y1:t] using linearity of expectation (1.20) and E[εt] = 0
+= Fμt. (3.20) using the mean of the Kalman update
+For the covariance matrix,
+Σˆ t+1 = E
+h
+(xt+1 − μˆ t+1)(xt+1 − μˆ t+1)⊤ y1:t
+i
+using the definition of the covariance matrix (1.36)
+= FE
+h
+(xt − μt)(xt − μt)⊤ y1:t
+i
+F⊤ + E
+h
+εt εt⊤
+i
+using (3.20), the motion model (3.2) and that εt is independent of the observations
+= FΣt F⊤ + Σx. (3.21)
+Optional Readings
+Kalman filters and related models are often called temporal models. For a broader look at such models, read chapter 15 of “Artificial intelligence: a modern approach” (Russell and Norvig, 2002).
+Discussion
+In this chapter, we have introduced Kalman filters as a special case of probabilistic filtering where probabilistic inference can be performed in closed form. Similarly to Bayesian linear regression, probabilistic inference is tractable due to assuming Gaussian priors and likelihoods. Indeed, learning linear models and Kalman filters are very closely related as seen in Example 3.5, and we will further explore this relationship in Problem 4.3. We will refer back to filtering in the second part of this manuscript when we discuss sequential decision-making with partial observability of the state space. Next, we return to the storyline on “learning” using exact probabilistic inference.
+Problems
+3.1. Kalman update.
+Derive the predictive distribution Xt+1 | y1:t+1 (3.13) of the Kalman filter described in the above example using your knowledge about multivariate Gaussians from Section 1.2.3.
+Hint: First compute the predictive distribution Xt+1 | y1:t.
+
+
+58 probabilistic artificial intelligence
+3.2. Bayesian linear regression as a Kalman filter.
+Recall the specific Kalman filter from Example 3.5. With this model the Kalman update (3.18) simplifies to
+kt = Σt−1xt
+xt⊤Σt−1xt + σn2
+, (3.22a)
+μt = μt−1 + kt(yt − xt⊤μt−1), (3.22b)
+Σt = Σt−1 − ktxt⊤Σt−1, (3.22c)
+with μ0 = 0 and Σ0 = σp2 I. Note that the Kalman gain kt is a vector in Rd. We assume σn2 = σp2 = 1 for simplicity.
+Prove by induction that the (μt, Σt) produced by the Kalman update are equivalent to (μ, Σ) from the posterior of Bayesian linear regression (2.10) given x1:t, y1:t. You may use that Σt−1kt = xt.
+Hint: In the inductive step, first prove the equivalence of Σt and then expand Σt−1μt to prove the equivalence of μt.
+3.3. Parameter estimation using Kalman filters.
+Suppose that we want to estimate the value of an unknown constant π using uncorrelated measurements
+yt = π + ηt, ηt ∼ N (0, σy2).
+1. How can this problem be formulated as a Kalman filter? Compute closed form expressions for the Kalman gain and the variance of the estimation error σt2 in terms of t, σy2, and σ02. 2. What is the Kalman filter when t → ∞? 3. Suppose that one has no prior assumptions on π, meaning that μ0 = 0 and σ02 → ∞. Which well-known estimator does the Kalman filter reduce to in this case?
+
+
+4
+Gaussian Processes
+Let us remember our first attempt from Chapter 2 at scaling up Bayesian linear regression to nonlinear functions. We saw that we can model nonlinear functions by transforming the input space to a suitable higherdimensional feature space, but found that this approach scales poorly if we require a large number of features. We then found something remarkable: by simply changing our perspective from a weight-space view to a function-space view, we could implement Bayesian linear regression without ever needing to compute the features explicitly. Under the function-space view, the key object describing the class of functions we can model is not the features φ(x), but instead the kernel function which only implicitly defines a feature space. Our key observation in this chapter is that we can therefore stop reasoning about feature spaces, and instead directly work with kernel functions that describe “reasonable” classes of functions.
+We are still concerned with the problem of estimating the value of a function f : X → R at arbitrary points x⋆ ∈ X given training data {xi, yi}in=1, where the labels are assumed to be corrupted by ho
+moscedastic Gaussian noise with variance σn2,
+yi = f (xi) + εi, εi ∼ N (0, σn2).
+As in Chapter 2 on Bayesian linear regression, we denote by X the design matrix (collection of training inputs) and by y the vector of training labels. We will represent the unknown function value at a point x ∈ X by the random variable fx
+.= f (x). The collection of these random variables is then called a Gaussian process if any finite subset of them is jointly Gaussian:
+Definition 4.1 (Gaussian process, GP). A Gaussian process is an infinite set of random variables such that any finite number of them are jointly
+Gaussian and such that they are consistent under marginalization.1 1 That is, if you take a joint distribution for n variables and marginalize out one of them, you should recover the joint distribution for the remaining n − 1 variables.
+
+
+60 probabilistic artificial intelligence
+The fact that with a Gaussian process, any finite subset of the random variables is jointly Gaussian is the key property allowing us to perform exact probabilistic inference. Intuitively, a Gaussian process can be interpreted as a normal distribution over functions — and is therefore often called an “infinite-dimensional Gaussian”.
+x p( f (x))
+y f (x)
+Figure 4.1: A Gaussian process can be interpreted as an infinite-dimensional Gaussian over functions. At any location x in the domain, this yields a distribution over values f (x) shown in red. The blue line corresponds to the MAP estimate (i.e., mean function of the Gaussian process), the dark gray region corresponds to the epistemic uncertainty and the light gray region denotes the additional aleatoric uncertainty.
+A Gaussian process is characterized by a mean function μ : X → R and a covariance function (or kernel function) k : X × X → R such that for any set of points A .= {x1, . . . , xm} ⊆ X , we have
+fA
+.= [ fx1 · · · fxm ]⊤ ∼ N (μA, KAA) (4.1)
+where
+μA
+.=
+
+  
+μ(x1)
+...
+μ(xm)
+
+  
+, KAA
+.=
+
+  
+k(x1, x1) · · · k(x1, xm)
+... . . . ...
+k(xm, x1) · · · k(xm, xm)
+
+  
+. (4.2)
+We write f ∼ GP (μ, k). In particular, given a mean function, covariance function, and using the homoscedastic noise assumption,
+y⋆ | x⋆ ∼ N (μ(x⋆), k(x⋆, x⋆) + σn2). (4.3)
+Commonly, for notational simplicity, the mean function is taken to be zero. Note that for a fixed mean this is not a restriction, as we can simply apply the zero-mean Gaussian process to the difference
+between the mean and the observations.2 2 For alternative ways of representing a mean function, refer to section 2.7 of “Gaussian processes for machine learning” (Williams and Rasmussen, 2006).
+4.1 Learning and Inference
+First, let us look at learning and inference in the context of Gaussian processes. With slight abuse of our previous notation, let us denote the set of observed points by A .= {x1, . . . , xn}. Given a prior f ∼ GP (μ, k) and the noisy observations yi = f (xi) + εi with εi ∼ N (0, σn2), we can then write the joint distribution of the observations y1:n and the noisefree prediction f ⋆ at a test point x⋆ as
+"
+y f⋆
+#
+| x⋆, X ∼ N (μ ̃, K ̃ ), where (4.4)
+μ ̃ .=
+"
+μA
+μ(x⋆)
+#
+, K ̃ .=
+"
+KAA + σn2 I kx⋆,A
+kx⊤⋆,A k(x⋆, x⋆)
+#
+, kx,A
+.=
+
+  
+k(x, x1)
+...
+k(x, xn)
+
+  
+.
+(4.5)
+Deriving the conditional distribution using (1.53), we obtain that the Gaussian process posterior is given by
+f | x1:n, y1:n ∼ GP (μ′, k′), where (4.6)
+
+
+gaussian processes 61
+μ′(x) .= μ(x) + kx⊤,A(KAA + σn2 I)−1(yA − μA), (4.7)
+k′(x, x′) .= k(x, x′) − kx⊤,A(KAA + σn2 I)−1kx′,A. (4.8)
+Observe that analogously to Bayesian linear regression, the posterior covariance can only decrease when conditioning on additional data, and is independent of the observations yi.
+We already studied inference in the function-space view of Bayesian linear regression, but did not make the predictive posterior explicit. Using Equation (4.6), the predictive posterior at x⋆ is simply
+f ⋆ | x⋆, x1:n, y1:n ∼ N (μ′(x⋆), k′(x⋆, x⋆)). (4.9)
+4.2 Sampling
+Often, we are not interested in the full predictive posterior distribution, but merely want to obtain samples of our Gaussian process model. We will briefly examine two approaches.
+1. For the first approach, consider a discretized subset of points
+f .= [ f1, . . . , fn]
+that we want to sample.3 Note that f ∼ N (μ, K). We have already 3 For example, if we want to render the function, the length of this vector could be guided by the screen resolution.
+seen in Equation (1.54) that
+f = K1/2ε + μ (4.10)
+where K1/2 is the square root of K and ε ∼ N (0, I) is standard
+Gaussian noise.4 However, computing the square root of K takes 4 We discuss square roots of matrices in Appendix A.2.
+O n3 time. 2. For the second approach, recall the product rule (1.11),
+p( f1, . . . , fn) =
+n
+∏
+i=1
+p( fi | f1:i−1).
+That is the joint distribution factorizes neatly into a product where each factor only depends on the “outcomes” of preceding factors. We can therefore obtain samples one-by-one, each time conditioning on one more observation:
+f1 ∼ p( f1)
+f2 ∼ p( f2 | f1)
+f3 ∼ p( f3 | f1, f2)
+...
+(4.11)
+This general approach is known as forward sampling. Due to the matrix inverse in the formula of the GP posterior (4.6), this approach also takes O n3 time.
+We will discuss more efficient approximate sampling methods in Section 4.5.
+
+
+62 probabilistic artificial intelligence
+4.3 Kernel Functions
+We have seen that kernel functions are the key object describing the class of functions a Gaussian process can model. Depending on the kernel function, the “shape” of functions that are realized from a Gaussian process varies greatly. Let us recap briefly from Section 2.4 what a kernel function is:
+Definition 4.2 (Kernel function). A kernel function k : X × X → R satisfies
+• k(x, x′) = k(x′, x) for any x, x′ ∈ X (symmetry), and • KAA is positive semi-definite for any A ⊆ X .
+The two defining conditions ensure that for any A ⊆ X , KAA is a valid covariance matrix. We say that a kernel function is positive definite if KAA is positive definite for any A ⊆ X .
+Intuitively, the kernel function evaluated at locations x and x′ describes how f (x) and f (x′) are related, which we can express formally as
+k(x, x′) = Cov f (x), f (x′) . (4.12)
+If x and x′ are “close”, then f (x) and f (x′) are usually taken to be positively correlated, encoding a “smooth” function.
+In the following, we will discuss some of the most common kernel functions, how they can be combined to create “new” kernels, and how we can characterize the class of functions they can model.
+4.3.1 Common Kernels
+x
+f (x)
+Figure 4.2: Functions sampled according to a Gaussian process with a linear kernel and φ = id.
+f (x)
+x
+Figure 4.3: Functions sampled according to a Gaussian process with a linear kernel and φ(x) = [1, x, x2] (left) and φ(x) = sin(x) (right).
+First, we look into some of the most commonly used kernels. Often an additional factor σ2 (output scale) is added, which we assume here to be 1 for simplicity.
+1. The linear kernel is defined as
+k(x, x′; φ) .= φ(x)⊤φ(x′) (4.13)
+where φ is a nonlinear transformation as introduced in Section 2.3 or the identity.
+Remark 4.3: GPs with linear kernel and BLR
+A Gaussian process with a linear kernel is equivalent to Bayesian linear regression. This follows directly from the function-space view of Bayesian linear regression (see Section 2.4) and comparing the derived kernel function (2.20) with the definition of the linear kernel (4.13).
+
+
+gaussian processes 63
+2. The Gaussian kernel (also known as squared exponential kernel or radial basis function (RBF) kernel) is defined as
+k(x, x′; h) .= exp − ∥x − x′∥2
+2
+2h2
+!
+(4.14)
+where h is its length scale. The larger the length scale h, the smoother the resulting functions.5 Furthermore, it turns out that the feature
+5 As the length scale is increased, the exponent of the exponential increases, resulting in a higher dependency between locations.
+space (think back to Section 2.4!) corresponding to the Gaussian kernel is “infinitely dimensional”, as you will show in ? . So the Problem 4.1 Gaussian kernel already encodes a function class that we were not able to model under the weight-space view of Bayesian linear regression.
+f (x)
+x
+Figure 4.4: Functions sampled according to a Gaussian process with a Gaussian kernel and length scales h = 5 (left) and h = 1 (right).
+−2 0 2 x − x′
+0.00
+0.25
+0.50
+0.75
+1.00
+k(x − x′)
+Figure 4.5: Gaussian kernel with length scales h = 1, h = 0.5, and h = 0.2.
+3. The Laplace kernel (also known as exponential kernel) is defined as
+k(x, x′; h) .= exp − ∥x − x′∥2
+h . (4.15)
+As can be seen in Figure 4.7, samples from a GP with Laplace kernel are non-smooth as opposed to the samples from a GP with Gaussian kernel.
+−2 0 2 x − x′
+0.00
+0.25
+0.50
+0.75
+1.00
+k(x − x′)
+Figure 4.6: Laplace kernel with length scales h = 1, h = 0.5, and h = 0.2.
+f (x)
+x
+Figure 4.7: Functions sampled according to a Gaussian process with a Laplace kernel and length scales h = 10 000 (left) and h = 10 (right).
+4. The Matérn kernel trades the smoothness of the Gaussian and the Laplace kernels. As such, it is frequently used in practice to model
+
+
+64 probabilistic artificial intelligence
+“real world” functions that are relatively smooth. It is defined as
+k(x, x′; ν, h) .= 21−ν
+Γ(ν)
+√2ν ∥x − x′∥2 h
+!ν
+Kν
+√2ν ∥x − x′∥2 h
+!
+(4.16)
+where Γ is the Gamma function, Kν the modified Bessel function of the second kind, and h a length scale parameter. For ν = 1/2, the Matérn kernel is equivalent to the Laplace kernel. For ν → ∞, the Matérn kernel is equivalent to the Gaussian kernel. The resulting
+functions are ⌈ν⌉ − 1 times mean square differentiable.6 In partic- 6 Refer to Remark A.12 for the definitions of mean square continuity and differentiability.
+ular, GPs with a Gaussian kernel are infinitely many times mean square differentiable whereas GPs with a Laplace kernel are mean square continuous but not mean square differentiable.
+4.3.2 Composing Kernels
+Given two kernels k1 : X × X → R and k2 : X × X → R, they can be composed to obtain a new kernel k : X × X → R in the following ways:
+• k(x, x′) .= k1(x, x′) + k2(x, x′),
+• k(x, x′) .= k1(x, x′) · k2(x, x′),
+• k(x, x′) .= c · k1(x, x′) for any c > 0,
+• k(x, x′) .= f (k1(x, x′)) for any polynomial f with positive coefficients or f = exp.
+For example, the additive structure of a function f (x) .= f1(x) + f2(x) can be easily encoded in GP models. Suppose that f1 ∼ GP (μ1, k1) and f2 ∼ GP (μ2, k2), then the distribution of the sum of those two
+functions f = f1 + f2 ∼ GP (μ1 + μ2, k1 + k2) is another GP.7 7 We use f .= f1 + f2 to denote the func
+tion f (·) = f1(·) + f2(·). Whereas the addition of two kernels k1 and k2 can be thought of as an OR operation (i.e., the kernel has high value if either k1 or k2 have high value), the multiplication of k1 and k2 can be thought of as an AND operation (i.e., the kernel has high value if both k1 and k2 have high value). For example, the product of two linear kernels results in functions which are quadratic.
+As mentioned previously, the constant c of a scaled kernel function k′(x, x′) .= c · k(x, x′) is generally called the output scale of a kernel, and it scales the variance Var[ f (x)] = c · k(x, x) of the predictions f (x) from GP (μ, k′).
+Optional Readings
+For a broader introduction to how kernels can be used and combined to model certain classes of functions, read
+
+
+gaussian processes 65
+• chapter 2 of “Automatic model construction with Gaussian processes” (Duvenaud, 2014) also known as the “kernel cookbook”, • chapter 4 of “Gaussian processes for machine learning” (Williams and Rasmussen, 2006).
+4.3.3 Stationarity and Isotropy
+Kernel functions are commonly classified according to two properties:
+Definition 4.4 (Stationarity and isotropy). A kernel k : Rd × Rd → R is called
+• stationary (or shift-invariant) if there exists a function k ̃ such that k ̃(x − x′) = k(x, x′), and • isotropic if there exists a function k ̃ such that k ̃(∥x − x′∥) = k(x, x′) with ∥·∥ any norm.
+Note that stationarity is a necessary condition for isotropy. In other words, isotropy implies stationarity.
+Example 4.5: Stationarity and isotropy of kernels
+stationary isotropic
+linear kernel no no
+Gaussian kernel yes yes
+k(x, x′) .= exp(− ∥x − x′∥2
+M)
+where M is positive semi-definite yes no ∥·∥M denotes the Mahalanobis norm
+induced by matrix M
+For x′ = x, stationarity implies that the kernel must only depend on 0. In other words, a stationary kernel must depend on relative locations only. This is clearly not the case for the linear kernel, which depends on the absolute locations of x and x′. Therefore, the linear kernel cannot be isotropic either.
+For the Gaussian kernel, isotropy follows immediately from its definition.
+The last kernel is clearly stationary by definition, but not isotropic for general matrices M. Note that for M = I it is indeed isotropic.
+Stationarity encodes the idea that relative location matters more than absolute location: the process “looks the same” no matter where we shift it in the input space. This is often appropriate when we believe the same statistical behavior holds across the entire domain (e.g., no region is special). Isotropy goes one step further by requiring that
+
+
+66 probabilistic artificial intelligence
+the kernel depends only on the distance between points, so that all directions in the space are treated equally. In other words, there is no preferred orientation or axis. This is especially useful in settings where we expect uniform behavior in every direction (as with the Gaussian kernel). Such kernels are simpler to specify and interpret since we only need a single “scale” (like a length scale) rather than multiple parameters or directions.
+4.3.4 Reproducing Kernel Hilbert Spaces
+We can characterize the precise class of functions that can be modeled by a Gaussian process with a given kernel function. This corresponding function space is called a reproducing kernel Hilbert space (RKHS), and we will discuss it briefly in this section.
+Recall that Gaussian processes keep track of a posterior distribution f | x1:n, y1:n over functions. We will in fact show later that the corresponding MAP estimate fˆ corresponds to the solution to a regularized optimization problem in the RKHS space of functions. This duality is similar to the duality between the MAP estimate of Bayesian linear regression and ridge regression we observed in Chapter 2. So what is the reproducing kernel Hilbert space of a kernel function k?
+Definition 4.6 (Reproducing kernel Hilbert space, RKHS). Given a kernel k : X × X → R, its corresponding reproducing kernel Hilbert space is the space of functions f defined as
+Hk(X ) .=
+(
+f (·) =
+n
+∑
+i=1
+αik(xi, ·) : n ∈ N, xi ∈ X , αi ∈ R
+)
+. (4.17)
+The inner product of the RKHS is defined as
+⟨ f , g⟩k
+.=
+n
+∑
+i=1
+n′
+∑
+j=1
+αiα′jk(xi, x′j), (4.18)
+where g(·) = ∑n′
+j=1 α′jk(x′j, ·), and induces the norm ∥ f ∥k = p⟨ f , f ⟩k. You can think of the norm as measuring the “smoothness” or “com
+plexity” of f . ? Problem 4.4 (2)
+It is straightforward to check that for all x ∈ X , k(x, ·) ∈ Hk(X ). Moreover, the RKHS inner product ⟨·, ·⟩k satisfies for all x ∈ X and f ∈ Hk(X ) that f (x) = ⟨ f (·), k(x, ·)⟩k which is also known as the reproducing property ? . That is, evaluations of RKHS functions f are Problem 4.4 (1) inner products in Hk(X ) parameterized by the “feature map” k(x, ·).
+The representer theorem (Schölkopf et al., 2001) characterizes the solution to regularized optimization problems in RKHSs:
+
+
+gaussian processes 67
+Theorem 4.7 (Representer theorem). ? Let k be a kernel and let λ > 0. Problem 4.5 For f ∈ Hk(X ) and training data {(xi, f (xi))}in=1, let L( f (x1), . . . , f (xn)) ∈ R ∪ {∞} denote any loss function which depends on f only through its evaluation at the training points. Then, any minimizer
+fˆ ∈ arg min f ∈Hk(X )
+L( f (x1), . . . , f (xn)) + λ ∥ f ∥2
+k (4.19)
+admits a representation of the form
+fˆ(x) = ˆα⊤kx,{xi}in=1 =
+n
+∑
+i=1
+ˆαik(x, xi) for some ˆα ∈ Rn. (4.20)
+This statement is remarkable: the solutions to general regularized optimization problems over the generally infinite-dimensional space of functions Hk(X ) can be represented as a linear combination of the kernel functions evaluated at the training points. The representer theorem can be used to show that the MAP estimate of a Gaussian process corresponds to the solution of a regularized linear regression problem in the RKHS of the kernel function, namely, ? Problem 4.6
+fˆ .= arg min f ∈Hk(X )
+− log p(y1:n | x1:n, f ) + 1
+2 ∥ f ∥2
+k . (4.21)
+Here, the first term corresponds to the likelihood, measuring the “quality of fit”. The regularization term limits the “complexity” of fˆ. Regularization is necessary to prevent overfitting since in an expressive RKHSs, there may be many functions that interpolate the training data perfectly. This shows the close link between Gaussian process regression and Bayesian linear regression, with the kernel function k generalizing the inner product of feature maps to feature spaces of possibly “infinite dimensionality”. Because solutions can be represented as linear combinations of kernel evaluations at the training points, Gaussian processes remain computationally tractable even though they can model functions over “infinite-dimensional” feature spaces.
+4.4 Model Selection
+We have not yet discussed how to pick the hyperparameters θ (e.g., parameters of kernels). A common technique in supervised learning is to select hyperparameters θ, such that the resulting function estimate fˆθ leads to the most accurate predictions on hold-out validation data. After reviewing this approach, we contrast it with a probabilistic approach to model selection, which avoids using point estimates of fˆθ and rather utilizes the full posterior.
+
+
+68 probabilistic artificial intelligence
+4.4.1 Optimizing Validation Set Performance
+A common approach to model selection is to split our data D into separate training set Dtrain .= {(xtrain
+i , ytrain
+i )}in=1 and validation sets
+Dval .= {(xival, yival)}im=1. We then optimize the model for a parameter candidate θj using the training set. This is usually done by picking a point estimate (like the MAP estimate),
+fˆj
+.= arg max
+f
+p( f | xtrain
+1:n , ytrain
+1:n ). (4.22)
+Then, we score θj according to the performance of fˆj on the validation set,
+θˆ .= arg max
+θj
+p(y1v:aml | x1v:aml , fˆj). (4.23)
+This ensures that fˆj does not depend on Dval.
+Remark 4.8: Approximating population risk
+Why is it useful to separate the data into a training and a validation set? Recall from Appendix A.3.5 that minimizing the empirical risk without separating training and validation data may lead to overfitting as both the loss and fˆj depend on the same data D. In contrast, using independent training and validation sets, fˆj does not depend on Dval, and we have that
+1 m
+m
+∑
+i=1
+l(yival | xival, fˆj) ≈ E(x,y)∼P
+h
+l(y | x, fˆj)
+i
+, (4.24)
+using Monte Carlo sampling.8 8 We generally assume D ii∼d P, in particular, we assume that the individual samples of the data are i.i.d.. Recall that in this setting, Hoeffding’s inequality (A.41) can be used to gauge how large m should be.
+In words, for reasonably large m, minimizing the empirical risk as we do in Equation (4.23) approximates minimizing the population risk.
+While this approach often is quite effective at preventing overfitting as compared to using the same data for training and picking θˆ, it still collapses the uncertainty in f into a point estimate. Can we do better?
+4.4.2 Maximizing the Marginal Likelihood
+We have already seen for Bayesian linear regression, that picking a point estimate loses a lot of information. Instead of optimizing the effects of θ for a specific point estimate fˆ of the model f , maximizing the marginal likelihood optimizes the effects of θ across all realizations of f . In this approach, we obtain our hyperparameter estimate via
+θˆMLE
+.= arg max
+θ
+p(y1:n | x1:n, θ) using the definition of marginal likelihood in Bayes’ rule (1.45)
+(4.25)
+
+
+gaussian processes 69
+= arg max
+θ
+Z
+p(y1:n, f | x1:n, θ) d f by conditioning on f using the sum rule (1.7)
+= arg max
+θ
+Z
+p(y1:n | x1:n, f , θ)p( f | θ) d f . (4.26) using the product rule (1.11)
+Remarkably, this approach typically avoids overfitting even though we do not use a separate training and validation set. The following table provides an intuitive argument for why maximizing the marginal likelihood is a good strategy.
+likelihood prior
+“underfit” model
+(too simple θ) small for “almost all” f large
+“overfit” model (too complex θ)
+large for “few” f
+small for “most” f small
+“just right” moderate for “many” f moderate
+Table 4.1: The table gives an intuitive explanation of effects of parameter choices θ on the marginal likelihood. Note that words in quotation marks refer to intuitive quantities, as we have infinitely many realizations of f .
+all possible data sets
+marginal likelihood
+simple
+intermediate
+complex
+Figure 4.8: A schematic illustration of the marginal likelihood of a simple, intermediate, and complex model across all possible data sets.
+For an “underfit” model, the likelihood is mostly small as the data cannot be well described, while the prior is large as there are “fewer” functions to choose from. For an “overfit” model, the likelihood is large for “some” functions (which would be picked if we were only minimizing the training error and not doing cross validation) but small for “most” functions. The prior is small, as the probability mass has to be distributed among “more” functions. Thus, in both cases, one term in the product will be small. Hence, maximizing the marginal likelihood naturally encourages trading between a large likelihood and a large prior.
+In the context of Gaussian process regression, recall from Equation (4.3) that
+y1:n | x1:n, θ ∼ N (0, K f ,θ + σn2 I) (4.27)
+where K f ,θ denotes the kernel matrix at the inputs x1:n depending on the kernel function parameterized by θ. We write Ky,θ
+.= K f ,θ + σn2 I. Continuing from Equation (4.25), we obtain
+θˆMLE = arg max
+θ
+N (y; 0, Ky,θ)
+= arg min
+θ
+1
+2 y⊤K−1
+y,θy + 1
+2 log det Ky,θ + n
+2 log 2π (4.28) taking the negative logarithm
+= arg min
+θ
+1
+2 y⊤K−1
+y,θy + 1
+2 log det Ky,θ (4.29) the last term is independent of θ
+The first term of the optimization objective describes the “goodness of fit” (i.e., the “alignment” of y with Ky,θ). The second term characterizes the “volume” of the model class. Thus, this optimization naturally trades the aforementioned objectives.
+
+
+70 probabilistic artificial intelligence
+Marginal likelihood maximization is an empirical Bayes method. Often it is simply referred to as empirical Bayes. It also has the nice property that the gradient of its objective (the MLL loss) can be expressed in closed-from ? , Problem 4.7
+∂
+∂θj
+log p(y1:n | x1:n, θ) = 1
+2 tr (αα⊤ − K−1
+y,θ) ∂Ky,θ
+∂θj
+!
+(4.30)
+where α .= K−1
+y,θy and tr(M) is the trace of a matrix M. This optimization problem is, in general, non-convex. Figure 4.10 gives an example of two local optima according to empirical Bayes. 0 100 200
+# of iterations
+0.0
+0.5
+1.0
+MLL loss
+Figure 4.9: An example of model selection by maximizing the log likelihood (without hyperpriors) using a linear, quadratic, Laplace, Matérn (ν = 3/2), and Gaussian kernel, respectively. They are used to learn the function
+x 7→ sin(x)
+x + ε, ε ∼ N (0, 0.01)
+using SGD with learning rate 0.1.
+Taking a step back, observe that taking a probabilistic perspective on model selection naturally led us to consider all realizations of our model f instead of using point estimates. However, we are still using point estimates for our model parameters θ. Continuing on our probabilistic adventure, we could place a prior p(θ) on them too.9 We
+9 Such a prior is called hyperprior.
+could use it to obtain the MAP estimate (still a point estimate!) which adds an additional regularization term
+θˆMAP
+.= arg max
+θ
+p(θ | x1:n, y1:n) (4.31)
+= arg min
+θ
+− log p(θ) − log p(y1:n | x1:n, θ). using Bayes’ rule (1.45) and then taking the negative logarithm
+(4.32)
+An alternative approach is to consider the full posterior distribution over parameters θ. The resulting predictive distribution is, however, intractable,
+p(y⋆ | x⋆, x1:n, y1:n) =
+ZZ
+p(y⋆ | x⋆, f ) · p( f | x1:n, y1:n, θ) · p(θ) d f dθ.
+(4.33)
+Recall that as the mode of Gaussians coincides with their mean, the MAP estimate corresponds to the mean of the predictive posterior.
+As a final note, observe that in principle, there is nothing stopping us from descending deeper in the probabilistic hierarchy. The prior on the model parameters θ is likely to have parameters too. Ultimately, we need to break out of this hierarchy of dependencies and choose a prior.
+4.5 Approximations
+To learn a Gaussian process, we need to invert n × n matrices, hence the computational cost is O n3 . Compare this to Bayesian linear regression which allows us to learn a regression model in O nd2 time (even online) where d is the feature dimension. It is therefore natural to look for ways of approximating a Gaussian process.
+
+
+gaussian processes 71
+−5.0 −2.5 0.0 2.5 5.0 x
+−2
+−1
+0
+1
+2
+f (x)
+−5.0 −2.5 0.0 2.5 5.0 x
+−2
+−1
+0
+1
+2
+100 101 lengthscale h
+10−1
+100
+101
+noise standard deviation σn
+Figure 4.10: The top plot shows contour lines of an empirical Bayes with two local optima. The bottom two plots show the Gaussian processes corresponding to the two optimal models. The left model with smaller lengthscale is chosen within a more flexible class of models, while the right model explains more observations through noise. Adapted from figure 5.5 of “Gaussian processes for machine learning” (Williams and Rasmussen, 2006).
+
+
+72 probabilistic artificial intelligence
+4.5.1 Local Methods
+Recall that during forward sampling, we had to condition on a larger and larger number of previous samples. When sampling at a location x, a very simple approximation is to only condition on those samples x′ that are “close” (where |k(x, x′)| ≥ τ for some τ > 0). Essentially, this method “cuts off the tails” of the kernel function k. However, τ has to be chosen carefully as if τ is chosen too large, samples become essentially independent.
+This is one example of a sparse approximation of a Gaussian process. We will discuss more advanced sparse approximations known as “inducing point methods” in Section 4.5.3.
+4.5.2 Kernel Function Approximation
+Another method is to approximate the kernel function directly. The idea is to construct a “low-dimensional” feature map φ : Rd → Rm that approximates the kernel,
+k(x, x′) ≈ φ(x)⊤φ(x′). (4.34)
+Then, we can apply Bayesian linear regression, resulting in a time complexity of O nm2 + m3 .
+One example of this approach are random Fourier features, which we will discuss in the following.
+01 Re
+0
+i
+Im
+φ
+cos φ
+sin φ
+eiφ
+Figure 4.11: Illustration of Euler’s formula. It can be seen that eiφ corresponds to a (counter-clockwise) rotation on the unit circle as φ varies from 0 to 2π.
+Remark 4.9: Fourier transform
+First, let us remind ourselves of Fourier transformations. The Fourier transform is a method of decomposing frequencies into their individual components.
+Recall Euler’s formula which states that for any x ∈ R,
+eix = cos x + i sin x (4.35)
+where i is the imaginary unit of complex numbers. The formula is illustrated in Figure 4.11. Note that e−i2πx corresponds to rotating clockwise around the unit circle in R2 — completing a rotation whenever x ∈ R reaches the next natural number.
+We can scale x by a frequency ξ: e−i2πξx. If x ∈ Rd, we can also scale each component j of x by a different frequency ξ(j). Multiplying a function f : Rd → R with the rotation around the unit circle with given frequencies ξ, yields a quantity that describes the
+
+
+gaussian processes 73
+amplitude of the frequencies ξ,
+fˆ(ξ) .=
+Z
+Rd f (x)e−i2πξ⊤x dx. (4.36)
+fˆ is called the Fourier transform of f . f is called the inverse Fourier transform of fˆ, and can be computed using
+f (x) =
+Z
+Rd
+fˆ(ξ)ei2πξ⊤x dξ. (4.37)
+It is common to write ω .= 2πξ. See Figure 4.12 for an example.
+Refer to “But what is the Fourier Transform? A visual introduction” (Sanderson, 2018) for a visual introduction.
+−1 1 x
+0
+1
+f (x)
+−π π ω
+0
+2
+fˆ(ω)
+Figure 4.12: The Fourier transform of a rectangular pulse,
+f (x) .=
+(
+1 x ∈ [−1, 1] 0 otherwise,
+is given by
+fˆ(ω) =
+Z1
+−1
+e−iωx dx = 1
+iω eiω − e−iω
+= 2 sin(ω)
+ω.
+Because a stationary kernel k : Rd × Rd → R can be interpreted as a function in one variable, it has an associated Fourier transform which we denote by p(ω). That is,
+k(x − x′) =
+Z
+Rd p(ω)eiω⊤(x−x′) dω. (4.38)
+Fact 4.10 (Bochner’s theorem). A continuous stationary kernel on Rd is positive definite if and only if its Fourier transform p(ω) is non-negative.
+Bochner’s theorem implies that when a continuous and stationary kernel is positive definite and scaled appropriately, its Fourier transform p(ω) is a proper probability distribution. In this case, p(ω) is called the spectral density of the kernel k.
+Remark 4.11: Eigenvalue spectrum of stationary kernels
+When a kernel k is stationary (i.e., a univariate function of x − x′), its eigenfunctions (with respect to the usual Lebesgue measure) turn out to be the complex exponentials exp(iω⊤(x − x′)). In simpler terms, you can think of these exponentials as “building blocks” at different frequencies ω. The spectral density p(ω) associated with the kernel tells you how strongly each frequency contributes, i.e., how large the corresponding eigenvalue is.
+A key insight of this analysis is that the rate at which these magnitudes p(ω) decay with increasing frequency ω reveals the smoothness of the processes governed by the kernel. If a kernel allocates more “power” to high frequencies (meaning the spectral density decays slowly), the resulting processes will appear “rougher”. Conversely, if high-frequency components are suppressed, the process will appear “smoother”.
+
+
+74 probabilistic artificial intelligence
+For an in-depth introduction to the eigenfunction analysis of kernels, refer to section 4.3 of “Gaussian processes for machine learning” (Williams and Rasmussen, 2006).
+Example 4.12: Spectral density of the Gaussian kernel
+The Gaussian kernel with length scale h has the spectral density
+p(ω) =
+Z
+Rd k(x − x′; h)e−iω⊤(x−x′) d(x − x′) using the definition of the Fourier
+transform (4.36)
+=
+Z
+Rd exp − ∥x∥2
+2
+2h2 − iω⊤x
+!
+dx using the definition of the Gaussian kernel (4.14)
+= (2h2π)d/2 exp −h2 ∥ω∥2
+2
+2
+!
+. (4.39)
+The key idea is now to interpret the kernel as an expectation,
+k(x − x′) =
+Z
+Rd p(ω)eiω⊤(x−x′) dω from Equation (4.38)
+= Eω∼p
+h
+eiω⊤(x−x′)i
+by the definition of expectation (1.19)
+= Eω∼p
+h
+cos(ω⊤x − ω⊤x′) + i sin(ω⊤x − ω⊤x′)
+i
+. using Euler’s formula (4.35)
+Observe that as both k and p are real, convergence of the integral implies Eω∼p sin(ω⊤x − ω⊤x′) = 0. Hence,
+= Eω∼p
+h
+cos(ω⊤x − ω⊤x′)
+i
+= Eω∼pEb∼Unif([0,2π])
+h
+cos((ω⊤x + b) − (ω⊤x′ + b))
+i
+expanding with b − b
+= Eω∼pEb∼Unif([0,2π])
+h
+cos(ω⊤x + b) cos(ω⊤x′ + b)
++ sin(ω⊤x + b) sin(ω⊤x′ + b)
+i
+using the angle subtraction identity, cos(α − β) = cos α cos β + sin α sin β
+= Eω∼pEb∼Unif([0,2π])
+h
+2 cos(ω⊤x + b) cos(ω⊤x′ + b)
+i
+using
+Eb[cos(α + b) cos(β + b)]
+= Eb[sin(α + b) sin(β + b)]
+for b ∼ Unif([0, 2π])
+= Eω∼p,b∼Unif([0,2π]) zω,b(x) · zω,b(x′) (4.40)
+where zω,b(x) .= √2 cos(ω⊤x + b),
+≈1
+m
+m
+∑
+i=1
+zω(i),b(i) (x) · zω(i),b(i) (x′) using Monte Carlo sampling to estimate
+the expectation, see Example A.6
+(4.41)
+for independent samples ω(i) ii∼d p and b(i) ii∼d Unif([0, 2π]),
+= z(x)⊤z(x′) (4.42)
+where the (randomized) feature map of random Fourier features is
+z(x) .= √1m [zω(1),b(1) (x), . . . , zω(m),b(m) (x)]⊤. (4.43)
+
+
+gaussian processes 75
+Intuitively, each component of the feature map z(x) projects x onto a random direction ω drawn from the (inverse) Fourier transform p(ω) of k(x − x′), and wraps this line onto the unit circle in R2. After transforming two points x and x′ in this way, their inner product is an unbi
+ased estimator of k(x − x′). The mapping zω,b(x) = √2 cos(ω⊤x + b) additionally rotates the circle by a random amount b and projects the points onto the interval [0, 1]. −5.0 −2.5 0.0 2.5 5.0
+0
+2
+4
+f (x)
+−5.0 −2.5 0.0 2.5 5.0 x
+−1
+0
+1
+2
+Figure 4.13: Example of random Fourier features with where the number of features m is 5 (top) and 10 (bottom), respectively. The noise-free true function is shown in black and the mean of the Gaussian process is shown in blue.
+Rahimi et al. (2007) show that Bayesian linear regression with the feature map z approximates Gaussian processes with a stationary kernel:
+Theorem 4.13 (Uniform convergence of Fourier features). Suppose M is a compact subset of Rd with diameter diam(M). Then for a stationary kernel k, the random Fourier features z, and any ε > 0 it holds that
+P sup x,x′ ∈M
+z(x)⊤z(x′) − k(x − x′) ≥ ε
+!
+≤ 28 σpdiam(M)
+ε
+2
+exp − mε2
+8(d + 2)
+(4.44)
+where σp2
+.= Eω∼p ω⊤ω is the second moment of p, m is the dimension
+of z(x), and d is the dimension of x. ? Problem 4.8
+Note that the error probability decays exponentially fast in the dimension of the Fourier feature space.
+4.5.3 Data Sampling
+Another natural approach is to only consider a (random) subset of the training data during learning. The naive approach is to subsample uniformly at random. Not very surprisingly, we can do much better. −5 0 5 x
+0
+1
+2
+f (x)
+Figure 4.14: Inducing points u are shown as vertical dotted red lines. The noisefree true function is shown in black and the mean of the Gaussian process is shown in blue. Observe that the true function is approximated “well” around the inducing points.
+One subsampling method is the inducing points method (QuinoneroCandela and Rasmussen, 2005). The idea is to summarize the data around so-called inducing points.10 For now, let us consider an arbi
+10 The inducing points can be treated as hyperparameters.
+trary set of inducing points,
+U .= {x1, . . . , xk}.
+Then, the original Gaussian process can be recovered using marginalization,
+p( f ⋆, f ) =
+Z
+Rk p( f ⋆, f , u) du =
+Z
+Rk p( f ⋆, f | u)p(u) du, using the sum rule (1.7) and product
+rule (1.11)
+(4.45)
+where f .= [ f (x1) · · · f (xn)]⊤ and f ⋆ .= f (x⋆) at some evaluation
+point x⋆ ∈ X . We use u .= [ f (x1) · · · f (xk)]⊤ ∈ Rk to denote the predictions of the model at the inducing points U. Due to the marginalization property of Gaussian processes (4.1), we have that u ∼ N (0, KUU).
+
+
+76 probabilistic artificial intelligence
+The key idea is to approximate the joint prior, assuming that f ⋆ and f are conditionally independent given u,
+p( f ⋆, f ) ≈
+Z
+Rk p( f ⋆ | u)p( f | u)p(u) du. (4.46)
+Here, p( f | u) and p( f ⋆ | u) are commonly called the training conditional and the testing conditional, respectively. Still denoting the observations by A = {x1, . . . , xn} and defining ⋆ .= {x⋆}, we know, using the closed-form expression for conditional Gaussians (1.53),
+p( f | u) ∼ N ( f ; KAUK−1
+UU u, KAA − QAA), (4.47a)
+p( f ⋆ | u) ∼ N ( f ⋆; K⋆UK−1
+UU u, K⋆⋆ − Q⋆⋆) (4.47b)
+where Qab
+.= KaU K−1
+UUKUb. Intuitively, KAA represents the prior covariance and QAA represents the covariance “explained” by the induc
+ing points.11 11 For more details, refer to section 2 of “A unifying view of sparse approximate Gaussian process regression” (Quinonero-Candela and Rasmussen,
+2005).
+Computing the full covariance matrix is expensive. In the following, we mention two approximations to the covariance of the training conditional (and testing conditional).
+Example 4.14: Subset of regressors
+The subset of regressors (SoR) approximation is defined as
+qSoR( f | u) .= N ( f ; KAU K−1
+UUu, 0), (4.48a)
+qSoR( f ⋆ | u) .= N ( f ⋆; K⋆U K−1
+UUu, 0). (4.48b)
+Comparing to Equation (4.47), SoR simply forgets about all variance and covariance.
+−5.0 −2.5 0.0 2.5 5.0
+−1
+0
+1
+2
+3
+f (x)
+−5.0 −2.5 0.0 2.5 5.0 x
+−2
+0
+2
+Figure 4.15: Comparison of SoR (top) and FITC (bottom). The inducing points u are shown as vertical dotted red lines. The noise-free true function is shown in black and the mean of the Gaussian process is shown in blue.
+Example 4.15: Fully independent training conditional
+The fully independent training conditional (FITC) approximation is defined as
+qFITC( f | u) .= N ( f ; KAU K−1
+UUu, diag{KAA − QAA}), (4.49a)
+qFITC( f ⋆ | u) .= N ( f ⋆; K⋆U K−1
+UUu, diag{K⋆⋆ − Q⋆⋆}). (4.49b)
+In contrast to SoR, FITC keeps track of the variances but forgets about the covariance.
+The computational cost for inducing point methods SoR and FITC is dominated by the cost of inverting KUU. Thus, the time complexity is cubic in the number of inducing points, but only linear in the number of data points.
+
+
+gaussian processes 77
+Discussion
+This chapter introduced Gaussian processes which leverage the functionspace view on linear regression to perform exact probabilistic inference with flexible, nonlinear models. A Gaussian process can be seen as a non-parametric model since it can represent an infinite-dimensional parameter space. Instead, as we saw with the representer theorem, such non-parametric (i.e., “function-space”) models are directly represented as functions of the data points. While this can make these models more flexible than a simple linear parametric model in input space, it also makes them computationally expensive as the number of data points grows. To this end, we discussed several ways of approximating Gaussian processes.
+Nevertheless, for today’s internet-scale datasets, modern machine learning typically relies on large parametric models that learn features from data. These models can effectively amortize the cost of inference during training by encoding information into a fixed set of parameters. In the following chapters, we will start to explore approaches to approximate probabilistic inference that can be applied to such models.
+Problems
+4.1. Feature space of Gaussian kernel.
+1. Show that the univariate Gaussian kernel with length scale h = 1 implicitly defines a feature space with basis vectors
+φ(x) =
+
+  
+φ0(x) φ1(x)
+...
+
+  
+with φj(x) = 1
+pj! e− x2
+2 xj.
+Hint: Use the Taylor series expansion of the exponential function, ex = ∑j∞=0 xj
+j! .
+2. Note that the vector φ(x) is ∞-dimensional. Thus, taking the function-space view allows us to perform regression in an infinitedimensional feature space. What is the effective dimension when regressing n univariate data points with a Gaussian kernel?
+4.2. Kernels on the circle.
+Consider a dataset {(xi, yi)}in=1 with labels yi ∈ R and inputs xi which
+lie on the unit circle S ⊂ R2. In particular, any element of S can be identified with points in R2 of form (cos(θ), sin(θ)) or with the respective angles θ ∈ [0, 2π).
+You now want to use GP regression to learn an unknown mapping from S to R using this dataset. Thus, you need a valid kernel k :
+
+
+78 probabilistic artificial intelligence
+S × S → R. First, we look at kernels k which can be understood as analogous to the Gaussian kernel.
+1. You think of the “extrinsic” kernel ke : S × S → R defined by
+ke(θ, θ′) .= exp − ∥x(θ) − x(θ′)∥22
+2κ2
+!
+,
+where x(θ) .= (cos(θ), sin(θ)). Is ke positive semi-definite for all values of κ > 0? 2. Then, you think of an “intrinsic” kernel ki : S × S → R defined by
+ki(θ, θ′) .= exp − d(θ, θ′)2
+2κ2
+where d(θ, θ′) .= min(|θ − θ′|, |θ − θ′ − 2π|, |θ − θ′ + 2π|) is the standard arc length distance on the circle S. You would now like to test whether this kernel is positive semidefinite. We pick κ = 2 and compute the kernel matrix K for the points corresponding to the angles {0, π/2, π, 3π/2}. This kernel matrix K has eigenvectors (1, 1, 1, 1) and (−1, 1, −1, 1). Now compute the eigenvalue corresponding to the eigenvector (−1, 1, −1, 1). 3. Is ki positive semi-definite for κ = 2? 4. A mathematician friend of yours suggests to you yet another kernel for points on the circle S, called the heat kernel. The kernel itself has a complicated expression but can be accurately approximated by
+kh(θ, θ′) .= 1
+Cκ
+1+
+L−1
+∑
+l=1
+e− κ2
+2 l2 2 cos(l(θ − θ′))
+!
+,
+where L ∈ N controls the quality of approximation and Cκ > 0 is a normalizing constant that depends only on κ. Is kh is positive semi-definite for all values of κ > 0 and L ∈ N? Hint: Recall that cos(a − b) = cos(a) cos(b) + sin(a) sin(b).
+4.3. A Kalman filter as a Gaussian process.
+Next we will show that the Kalman filter from Example 3.4 can be seen as a Gaussian process. To this end, we define
+f : N0 → R, t 7→ Xt. (4.50)
+Assuming that X0 ∼ N (0, σ02) and Xt+1
+.= Xt + εt with independent noise εt ∼ N (0, σx2), show that
+f ∼ GP (0, kKF) where (4.51)
+kKF(t, t′) .= σ02 + σx2 min{t, t′}. (4.52)
+This particular kernel k(t, t′) .= min{t, t′} but over the continuous-time domain defines the Wiener process (also known as Brownian motion).
+
+
+gaussian processes 79
+4.4. Reproducing property and RKHS norm.
+1. Derive the reproducing property.
+Hint: Use k(x, x′) = ⟨k(x, ·), k(x′, ·)⟩k.
+2. Show that the RKHS norm ∥·∥k is a measure of smoothness by proving that for any f ∈ Hk(X ) and x, y ∈ X it holds that
+| f (x) − f (y)| ≤ ∥ f ∥k ∥k(x, ·) − k(y, ·)∥k .
+4.5. Representer theorem.
+With this, we can now derive the representer theorem (4.20).
+Hint: Recall
+1. the reproducing property f (x) = ⟨ f , k(x, ·)⟩k with k(x, ·) ∈ Hk(X ) which holds for all f ∈ Hk(X ) and x ∈ Hk(X ), and 2. that the norm after projection is smaller or equal the norm before projection.
+Then decompose f into parallel and orthogonal components with respect to span{k(x1, ·), . . . , k(xn, ·)}.
+4.6. MAP estimate of Gaussian processes.
+Let us denote by A = {x1, . . . , xn} the set of training points. We will now show that the MAP estimate of GP regression corresponds to the solution of the regularized linear regression problem in the RKHS stated in Equation (4.21):
+fˆ .= arg min f ∈Hk(X )
+− log p(y1:n | x1:n, f ) + 1
+2 ∥ f ∥2
+k.
+In the following, we abbreviate K = KAA. We will also assume that the GP has a zero mean function.
+1. Show that Equation (4.21) is equivalent to
+ˆα .= arg min α∈Rn
+∥y − Kα∥2
+2 + λ ∥α∥2
+K (4.53)
+for some λ > 0 which is also known as kernel ridge regression. Determine λ. 2. Show that Equation (4.53) with the λ determined in (1) is equivalent to the MAP estimate of GP regression.
+Hint: Recall from Equation (4.6) that the MAP estimate at a point x⋆ is E[ f ⋆ | x⋆, X, y] = kx⊤⋆,A(K + σn2 I)−1y.
+4.7. Gradient of the marginal likelihood.
+In this exercise, we derive Equation (4.30).
+Recall that we were considering a dataset (X, y) of noise-perturbed evaluations yi = f (xi) + εi where εi ∼ N (0, σn2) and f is an unknown
+
+
+80 probabilistic artificial intelligence
+function. We make the hypothesis f ∼ GP (0, kθ) with a zero mean function and the covariance function kθ. We are interested in finding the hyperparameters θ that maximize the marginal likelihood p(y | X, θ).
+1. Derive Equation (4.30).
+Hint: You can use the following identities: (a) for any invertible matrix M,
+∂
+∂θj
+M−1 = −M−1 ∂M
+∂θj
+M−1 and (4.54)
+(b) for any symmetric positive definite matrix M,
+∂
+∂θj
+log det(M) = tr M−1 ∂M
+∂θj
+!
+. (4.55)
+2. Assume now that the covariance function for the noisy targets (i.e., including the noise contribution) can be expressed as
+ky,θ(x, x′) = θ0k ̃(x, x′)
+where k ̃ is a valid kernel independent of θ0.12 12 That is, Ky,θ(i, j) = ky,θ(xi, xj). Show that ∂
+∂θ0 log p(y | X, θ) = 0 admits a closed-form solution for
+θ0 which we denote by θ0⋆.
+3. How should the optimal parameter θ0⋆ be scaled if we scale the labels y by a scalar s?
+4.8. Uniform convergence of Fourier features.
+In this exercise, we will prove Theorem 4.13.
+Let s(x, x′) .= z(x)⊤z(x′) and f (x, x′) .= s(x, x′) − k(x, x′). Observe that both functions are shift invariant, and we will therefore denote them as univariate functions with argument ∆ ≡ x − x′ ∈ M∆. Notice that our goal is to bound the probability of the event sup∆∈M∆ | f (∆)| ≥ ε.
+1. Show that for all ∆ ∈ M∆, P(| f (∆)| ≥ ε) ≤ 2 exp − mε2
+4.
+What we have derived in (1) is known as a pointwise convergence guarantee. However, we are interested in bounding the uniform convergence over the compact set M∆.
+Our approach will be to “cover” the compact set M∆ using T balls of radius r whose centers we denote by {∆i}iT=1. It can be shown that
+this is possible for some T ≤ (4 diam(M)/r)d. It can furthermore be shown that
+∀i. | f (∆i)| < ε
+2 and ∥∇ f (∆⋆)∥2 < ε
+2r =⇒ sup
+∆∈M∆
+| f (∆)| < ε
+where ∆⋆ = arg max∆∈M∆ ∥∇ f (∆)∥2.
+
+
+gaussian processes 81
+2. Prove P ∥∇ f (∆⋆)∥2 ≥ ε
+2r ≤ 2rσp
+ε
+2.
+Hint: Recall that the random Fourier feature approximation is unbiased, i.e., E[s(∆)] = k(∆).
+3. Prove P SiT=1 | f (∆i)| ≥ ε
+2 ≤ 2T exp − mε2
+16 .
+4. Combine the results from (2) and (3) to prove Theorem 4.13. Hint: You may use that
+(a) αr−d + βr2 = 2β
+d
+d+2 α
+2
+d+2 for r = (α/β) 1
+d+2 and (b) σpdiam(M)
+ε ≥ 1.
+5. Show that for the Gaussian kernel (4.14), σp2 = d
+h2 .
+Hint: First show σp2 = −tr(H∆k(0)).
+4.9. Subset of regressors.
+1. Using an SoR approximation, prove the following:
+qSoR( f , f ⋆) = N
+"
+f f⋆
+#
+; 0,
+"
+QAA QA⋆
+Q⋆A Q⋆⋆
+#!
+(4.56)
+qSoR( f ⋆ | y) = N ( f ⋆; Q⋆AQ ̃ −1
+AAy, Q⋆⋆ − Q⋆AQ ̃ −1
+AAQA⋆) (4.57)
+where Q ̃ ab
+.= Qab + σn2. 2. Derive that the resulting model is a degenerate Gaussian process with covariance function
+kSoR(x, x′) .= kx⊤,U K−1
+UU kx′,U. (4.58)
+
+
+
+
+5
+Variational Inference
+We have seen how to perform (efficient) probabilistic inference with Gaussians, exploiting their closed-form formulas for marginal and conditional distributions. But what if we work with other distributions?
+In this and the following chapter, we will discuss two methods of approximate inference. We begin by discussing variational (probabilistic) inference, which aims to find a good approximation of the posterior distribution from which it is easy to sample. In Chapter 6, we discuss Markov chain Monte Carlo methods, which approximate the sampling from the posterior distribution directly.
+The fundamental idea behind variational inference is to approximate the true posterior distribution using a “simpler” posterior that is as close as possible to the true posterior:
+p(θ | x1:n, y1:n) = 1
+Z p(θ, y1:n | x1:n) ≈ q(θ | λ) .= qλ(θ) (5.1)
+where λ represents the parameters of the variational posterior qλ, also called variational parameters. In doing so, variational inference reduces probabilistic inference — where the fundamental difficulty lies in solving high-dimensional integrals — to an optimization problem. Optimizing (stochastic) objectives is a well-understood problem with effi
+cient algorithms that perform well in practice.1 1 We provide an overview of first-order methods such as stochastic gradient descent in Appendix A.4.
+5.1 Laplace Approximation
+Before introducing a general framework of variational inference, we discuss a simpler method of approximate inference known as Laplace’s method. This method was proposed as a method of approximating integrals as early as 1774 by Pierre-Simon Laplace. The idea is to use a Gaussian approximation (that is, a second-order Taylor approxima
+
+
+84 probabilistic artificial intelligence
+tion) of the posterior distribution around its mode. Let
+ψ(θ) .= log p(θ | x1:n, y1:n) (5.2)
+denote the log-posterior. Then, using a second-order Taylor approximation (A.53) around the mode θˆ of ψ (i.e., the MAP estimate), we obtain the approximation ψˆ which is accurate for θ ≈ θˆ:
+ψ(θ) ≈ ψˆ(θ) .= ψ(θˆ) + (θ − θˆ)⊤∇ψ(θˆ) + 1
+2 (θ − θˆ)⊤ Hψ(θˆ)(θ − θˆ)
+= ψ(θˆ) + 1
+2 (θ − θˆ)⊤ Hψ(θˆ)(θ − θˆ). (5.3) using ∇ψ(θˆ) = 0
+Compare this expression to the log-PDF of a Gaussian:
+log N (θ; θˆ, Λ−1) = − 1
+2 (θ − θˆ)⊤Λ(θ − θˆ) + const. (5.4)
+Since ψ(θˆ) is constant with respect to θ,
+ψˆ(θ) = log N (θ; θˆ, −Hψ(θˆ)−1) + const. (5.5)
+The Laplace approximation q of p is
+q(θ) .= N (θ; θˆ, Λ−1) ∝ exp(ψˆ(θ)) where (5.6a)
+Λ .= −Hψ(θˆ) = −Hθ log p(θ | x1:n, y1:n) θ=θˆ. (5.6b)
+Recall that for this approximation to be well-defined, the covariance matrix Λ−1 (or equivalently the precision matrix Λ) needs to be symmetric and positive semi-definite. Let us verify that this is indeed the
+case for sufficiently smooth ψ.2 In this case, the Hessian Λ is sym- 2 ψ being twice continuously differen
+tiable around θˆ is sufficient.
+metric since the order of differentiation does not matter. Moreover, by the second-order optimality condition, Hψ(θˆ) is negative semi-definite since θˆ is a maximum of ψ, which implies that Λ is positive semidefinite.
+Example 5.1: Laplace approximation of a Gaussian
+Consider approximating the Gaussian density p(θ) = N (θ; μ, Σ) using a Laplace approximation.
+We know that the mode of p is μ, which we can verify by computing the gradient,
+∇θ log p(θ) = − 1
+2 (2Σ−1θ − 2Σ−1μ) != 0 ⇐⇒ θ = μ. (5.7)
+For the Hessian of log p(θ), we get
+Hθ log p(θ) = (Dθ(Σ−1μ − Σ−1θ))⊤ = −(Σ−1)⊤ = −Σ−1. using (A−1)⊤ = (A⊤)−1 and symmetry of Σ
+(5.8)
+
+
+variational inference 85
+We see that the Laplace approximation of a Gaussian p(θ) is exact, which should not come as a surprise since the second-order Taylor approximation of log p(θ) is exact for Gaussians.
+−2 0 2 4 6 x
+0.0
+0.2
+0.4
+0.6
+0.8
+q
+p
+pˆ
+Figure 5.1: The Laplace approximation q greedily selects the mode of the true posterior distribution p and matches the curvature around the mode pˆ. As shown here, the Laplace approximation can be extremely overconfident when p is not approximately Gaussian.
+The Laplace approximation matches the shape of the true posterior around its mode but may not represent it accurately elsewhere — often leading to extremely overconfident predictions. An example is given in Figure 5.1. Nevertheless, the Laplace approximation has some desirable properties such as being relatively easy to apply in a post-hoc manner, that is, after having already computed the MAP estimate. It preserves the MAP point estimate as its mean and just “adds” a little uncertainty around it. However, the fact that it can be arbitrarily different from the true posterior makes it unsuitable for approximate probabilistic inference.
+5.1.1 Example: Bayesian Logistic Regression
+As an example, we will look at Laplace approximation in the context of Bayesian logistic regression. Logistic regression learns a classifier that decides for a given input whether it belongs to one of two classes. A sigmoid function, typically the logistic function,
+−5 0 5 z
+0.00
+0.25
+0.50
+0.75
+1.00
+σ(z)
+Figure 5.2: The logistic function
+squashes the linear function w⊤ x onto the interval (0, 1).
+σ(z) .= 1
+1 + exp(−z) ∈ (0, 1), z = w⊤x, (5.9)
+is used to obtain the class probabilities. Bayesian logistic regression cor
+−2 0 2 x1
+−5
+0
+5
+10
+x2
+w
+Figure 5.3: Logistic regression classifies data into two classes with a linear decision boundary.
+responds to Bayesian linear regression with a Bernoulli likelihood,
+y | x, w ∼ Bern(σ(w⊤x)), (5.10)
+where y ∈ {−1, 1} is the binary class label.3 Observe that given a data
+3 The same approach extends to Gaussian processes where it is known as Gaussian process classification, see Problem 5.2 and Hensman et al. (2015).
+point (x, y), the probability of a correct classification is
+p(y | x, w) =
+
+
+
+σ(w⊤x) if y = 1
+1 − σ(w⊤x) if y = −1 = σ(yw⊤x), (5.11)
+as the logistic function σ is symmetric around 0. Also, recall that Bayesian linear regression used the prior
+p(w) = N (w; 0, σp2 I) ∝ exp − 1
+2σp2
+∥w∥2
+2
+!
+.
+Let us first find the posterior mode, that is, the MAP estimate of the weights:
+wˆ = arg max
+w
+p(w | x1:n, y1:n)
+
+
+86 probabilistic artificial intelligence
+= arg max
+w
+p(w)p(y1:n | x1:n, w) using Bayes’ rule (1.45)
+= arg max
+w
+log p(w) + log p(y1:n | x1:n, w) taking the logarithm
+= arg max
+w
+−1
+2σp2
+∥w∥2
+2+
+n
+∑
+i=1
+log σ(yiw⊤ xi) using independence of the observations and Equation (5.11)
+= arg min
+w
+1
+2σp2
+∥w∥2
+2+
+n
+∑
+i=1
+log(1 + exp(−yiw⊤xi)). (5.12) using the definition of σ (5.9)
+Note that for λ = 1/2σp2, the above optimization is equivalent to standard (regularized) logistic regression where
+llog(w⊤x; y) .= log(1 + exp(−yw⊤x)) (5.13)
+is called logistic loss. The gradient of the logistic loss is given by ? Problem 5.1 (1)
+∇w llog(w⊤x; y) = −yx · σ(−yw⊤x). (5.14)
+Recall that due to the symmetry of σ around 0, σ(−yw⊤x) is the probability that x was not classified as y. Intuitively, if the model is “surprised” by the label, the gradient is large.
+We can therefore use SGD with the (regularized) gradient step and with batch size 1,
+w ← w(1 − 2ληt) + ηtyxσ(−yw⊤x), (5.15)
+for the data point (x, y) picked uniformly at random from the training data. Here, 2ληt is due to the gradient of the regularization term, in effect, performing weight decay.
+Example 5.2: Laplace approx. of Bayesian logistic regression
+We have already found the mode of the posterior distribution, wˆ .
+Let us denote by
+πi
+.= P(yi = 1 | xi, wˆ ) = σ(wˆ ⊤xi) (5.16)
+the probability of xi belonging to the positive class under the model given by the MAP estimate of the weights. For the precision matrix, we then have
+Λ = − Hw log p(w | x1:n, y1:n)|w=wˆ
+= − Hw log p(y1:n | x1:n, w)|w=wˆ − Hw log p(w)|w=wˆ
+=
+n
+∑
+i=1
+Hwllog(w⊤ xi; yi) w=wˆ + σp−2 I using the definition of the logistic loss
+(5.13)
+=
+n
+∑
+i=1
+xi xi⊤πi(1 − πi) + σp−2 I using the Hessian of the logistic loss
+(5.73) which you derive in Problem 5.1 (2)
+
+
+variational inference 87
+= X⊤diagi∈[n]{πi(1 − πi)}X + σp−2 I. (5.17)
+Observe that πi(1 − πi) ≈ 0 if πi ≈ 1 or πi ≈ 0. That is, if a training example is “well-explained” by wˆ , then its contribution to the precision matrix is small. In contrast, we have πi(1 − πi) = 0.25 for πi = 0.5. Importantly, Λ does not depend on the normalization constant of the posterior distribution which is hard to compute.
+In summary, we have that N (wˆ , Λ−1) is the Laplace approximation of p(w | x1:n, y1:n).
+5.2 Predictions with a Variational Posterior
+How can we make predictions using our variational approximation? We simply approximate the (intractable) true posterior with our variational posterior:
+p(y⋆ | x⋆, x1:n, y1:n) =
+Z
+p(y⋆ | x⋆, θ)p(θ | x1:n, y1:n) dθ using the sum rule (1.7)
+≈
+Z
+p(y⋆ | x⋆, θ)qλ(θ) dθ. (5.18)
+A straightforward approach is to observe that Equation (5.18) can be viewed as an expectation over the variational posterior qλ and approximated via Monte Carlo sampling:
+= Eθ∼qλ [p(y⋆ | x⋆, θ)] (5.19)
+≈1
+m
+m
+∑
+j=1
+p(y⋆ | x⋆, θj) (5.20)
+where θj
+ii∼d qλ.
+Example 5.3: Predictions in Bayesian logistic regression
+In the case of Bayesian logistic regression with a Gaussian approximation of the posterior, we can obtain more accurate predictions.
+Observe that the final prediction y⋆ is conditionally independent of the model parameters w given the “latent value” f ⋆ = w⊤x⋆:
+p(y⋆ | x⋆, x1:n, y1:n) ≈
+Z
+p(y⋆ | x⋆, w)qλ(w) dw
+=
+ZZ
+p(y⋆ | f ⋆)p( f ⋆ | x⋆, w)qλ(w) dw d f ⋆ once more, using the sum rule (1.7)
+=
+Z
+p(y⋆ | f ⋆)
+Z
+p( f ⋆ | x⋆, w)qλ(w) dw d f ⋆. rearranging terms
+(5.21)
+
+
+88 probabilistic artificial intelligence
+The outer integral can be readily approximated since it is only one-dimensional! The challenging part is the inner integral, which is a high-dimensional integral over the model weights w. Since the posterior over weights qλ(w) = N (w; wˆ , Λ−1) is a Gaussian, we have due to the closedness properties of Gaussians (1.78) that
+Z
+p( f ⋆ | x⋆, w)qλ(w) dw = N (wˆ ⊤x⋆, x⋆⊤Λ−1x⋆). (5.22)
+Crucially, this is a one-dimensional Gaussian in function-space as opposed to the d-dimensional Gaussian qλ in weight-space!
+As we have seen in Equation (5.11), for Bayesian logistic regression, the prediction y⋆ depends deterministically on the predicted latent value f ⋆: p(y⋆ | f ⋆) = σ(y⋆ f ⋆). Combining Equations (5.21) and (5.22), we obtain
+p(y⋆ | x⋆, x1:n, y1:n) ≈
+Z
+σ(y⋆ f ⋆) · N ( f ⋆; wˆ ⊤x⋆, x⋆⊤Λ−1x⋆) d f ⋆.
+(5.23)
+We have replaced the high-dimensional integral over the model parameters θ by the one-dimensional integral over the prediction of our variational posterior f ⋆. While this integral is generally still intractable, it can be approximated efficiently using numerical quadrature methods such as the Gauss-Legendre quadrature or alternatively with Monte Carlo sampling.
+5.3 Blueprint of Variational Inference
+General probabilistic inference poses the challenge of approximating the posterior distribution with limited memory and computation, resource constraints also present in humans and other intelligent systems. These resource constraints require information to be compressed, and as we will see, such a compression poses a fundamental tradeoff between model accuracy (on the observed data) and model complexity (to avoid overfitting).
+Laplace approximation approximates the true (intractable) posterior with a simpler one, by greedily matching mode and curvature around it. Can we find “less greedy” approaches? We can view variational probabilistic inference more generally as a family of approaches aiming to approximate the true posterior distribution by one that is closest (according to some criterion) among a “simpler” class of distributions. To this end, we need to fix a class of distributions and define suitable criteria, which we can then optimize numerically. The key ben
+
+
+variational inference 89
+efit is that we can reduce the (generally intractable) problem of highdimensional integration to the (often much more tractable) problem of optimization.
+Definition 5.4 (Variational family). Let P be the class of all probability distributions. A variational family Q ⊆ P is a class of distributions such that each distribution q ∈ Q is characterized by unique variational parameters λ ∈ Λ.
+Q P
+p q⋆
+Figure 5.4: An illustration of variational inference in the space of distributions P. The variational distribution q⋆ ∈ Q is the optimal approximation of the true posterior p.
+Example 5.5: Family of independent Gaussians
+A straightforward example for a variational family is the family of independent Gaussians,
+Q .=
+n
+q(θ) = N (θ; μ, diagi∈[d]{σi2})
+o
+, (5.24)
+which is parameterized by λ .= [μ1:d, σ12:d]. Such a multivariate distribution where all variables are independent is called a mean-field distribution. Importantly, this family of distributions is characterized by only 2d parameters!
+Note that Figure 5.4 is a generalization of the canonical distinction between estimation error and approximation error from Figure 1.7, only that here, we operate in the space of distributions over functions as opposed the space of functions. A common notion of distance between two distributions q and p is the Kullback-Leibler divergence KL(q∥p) which we will define in the next section. Using this notion of distance, we need to solve the following optimization problem:
+q⋆ .= arg min q∈Q
+KL(q∥p) = arg min λ∈Λ
+KL(qλ∥p). (5.25)
+In Section 5.4, we introduce information theory and the KullbackLeibler divergence. Then, in Section 5.5, we discuss how the optimization problem of Equation (5.25) can be solved efficiently.
+5.4 Information Theoretic Aspects of Uncertainty
+One of our main objectives throughout this manuscript is to capture the “uncertainty” about events A in an appropriate probability space. One very natural measure of uncertainty is their probability, P(A). In this section, we will introduce an alternative measure of uncertainty, namely the so-called “surprise” about the event A.
+
+
+90 probabilistic artificial intelligence
+5.4.1 Surprise
+The surprise about an event with probability u is defined as
+S[u] .= − log u. (5.26)
+Observe that the surprise is a function from R≥0 to R, where we let S[0] ≡ ∞. Moreover, for a discrete random variable X, we have that p(x) ≤ 1, and hence, S[p(x)] ≥ 0. But why is it reasonable to
+measure surprise by − log u?
+0.00 0.25 0.50 0.75 1.00 u
+0
+2
+4
+S[u]
+Figure 5.5: Surprise S[u] associated with an event of probability u.
+Remarkably, it can be shown that the following natural axiomatic characterization leads to exactly this definition of surprise.
+Theorem 5.6 (Axiomatic characterization of surprise). The axioms
+1. S[u] > S[v] =⇒ u < v (anti-monotonicity) we are more surprised by unlikely events
+2. S is continuous, no jumps in surprise for infinitesimal changes of probability 3. S[uv] = S[u] + S[v] for independent events, the surprise of independent events is additive
+characterize S up to a positive constant factor.
+Proof. Observe that the third condition looks similar to the product rule of logarithms: log(uv) = log v + log v. We can formalize this intuition by remembering Cauchy’s functional equation, f (x + y) = f (x) + f (y), which has the unique family of solutions { f : x 7→ cx : c ∈ R} if f is required to be continuous. Such a solution is called an “additive function”. Consider the function g(x) .= f (ex). Then, g is additive if and only if
+f (exey) = f (ex+y) = g(x + y) = g(x) + g(y) = f (ex) + f (ey).
+This is precisely the third axiom of surprise for f = S and ex = u! Hence, the second and third axioms of surprise imply that g must be additive and that g(x) = S[ex] = cx for any c ∈ R. If we replace ex by u, we obtain S[u] = c log u. The first axiom of surprise implies that c < 0, and thus, S[u] = −c′ log u for any c′ > 0.
+Importantly, surprise offers a different perspective on uncertainty as opposed to probability: the uncertainty about an event can either be interpreted in terms of its probability or in terms of its surprise, and the two “spaces of uncertainty” are related by a log-transform. This relationship is illustrated in Figure 5.6. Information theory is the study of uncertainty in terms of surprise.
+−log
+P(A)
+S[P(A)]
+“surprise”
+“probability”
+probability
+theory
+information
+theory
+Figure 5.6: Illustration of the probability space and the corresponding “surprise space”.
+Throughout this manuscript we will see many examples where modeling uncertainty in terms of surprise (i.e., the information-theoretic interpretation of uncertainty) is useful. One example where we have

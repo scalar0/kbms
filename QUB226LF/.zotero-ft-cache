@@ -1,0 +1,4756 @@
+Cours de 3ème année
+Processus et calcul stochastique
+Sarah Lemler
+École CentraleSupélec
+
+
+2
+
+
+Table des matières
+1 Quelques rappels sur les processus 7 1.1 Notion de processus . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7 1.2 Processus gaussiens . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7 1.2.1 Variables aléatoires gaussiennes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7 1.2.2 Vecteur gaussien : . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8 1.2.3 Processus gaussien : . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9 1.3 Espérances conditionnelles de variables aléatoires réelles . . . . . . . . . . . . . . . . . . . . . . . . 11 1.4 Filtration, temps d’arrêt et martingales indexés par N . . . . . . . . . . . . . . . . . . . . . . . . . . . 13 1.4.1 Filtration . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13 1.4.2 Temps d’arrêt . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13 1.4.3 Martingales . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+2 Le mouvement brownien 15 2.1 Définition, propriétés . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15 2.2 Propriétés asymptotiques du mouvement brownien standard . . . . . . . . . . . . . . . . . . . . . . 16 2.3 Mouvement brownien par rapport à une filtration . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18 2.3.1 Quelques définitions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18 2.3.2 Ft − P−mouvement brownien . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+3 Intégrales de processus gaussiens à trajectoires continues 23 3.1 Quelques résultats préliminaires . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23 3.2 Intégrales de processus gaussiens à trajectoires continues . . . . . . . . . . . . . . . . . . . . . . . . 24
+4 Intégrale de Wiener 27 4.1 Quelques définitions et résultats préliminaires . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27 4.2 Intégrales des fonctions en escalier . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28 4.3 Intégrales de Wiener d’une fonction de L2(R+) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30 4.4 Approximation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31 4.5 Première formule d’intégration par parties (Itô) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31 4.6 Propriétés des intégrales de Wiener . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 33 4.7 Le processus d’Ornstein-Uhlenbeck . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+5 Intégrale stochastique d’Itô 37 5.1 Cas des processus étagés . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37 5.2 Temps d’arrêt. Martingales locales . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42 5.2.1 Temps d’arrêt . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43 5.2.2 Théorème d’arrêt . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 44 5.2.3 Martingale locale . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48 5.3 Extension/généralisation de l’intégrale stochastique . . . . . . . . . . . . . . . . . . . . . . . . . . . 53 5.4 Processus d’Itô . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+3
+
+
+4 TABLE DES MATIÈRES
+5.5 Cas multidimensionnel . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
+6 Equations différentielles stochastiques 65 6.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65 6.2 Résultats préliminaires . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66 6.2.1 Processus à valeurs matricielles . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66 6.2.2 Processus d’Itô vectoriel . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67 6.3 Existence et unicité de la solution . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68 6.3.1 Position du problème . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68 6.3.2 Existence et unicité trajectorielles dans le cas lipschitzien . . . . . . . . . . . . . . . . . . . . 69
+
+
+Introduction
+Le calcul stochastique est l’étude de phénomènes aléatoires dépendant du temps. L’objectif de ce cours est de donner des outils pour étudier des équations différentielles stochastiques (EDS), faisant intervenir à la fois le facteur temps et le facteur aléatoire et qui sont très utilisés dans différents domaines d’application tels qu’en biologie, en mathématiques financières, en mécanique quantique, en traitement du signal, en chimie, en météorologie et même en musique.
+5
+
+
+6 TABLE DES MATIÈRES
+
+
+Chapitre 1
+Quelques rappels sur les processus
+Dans ce cours, T désignera un ensemble d’indices, représentant le temps. Classiquement, nous prendrons T = N, R+, [a, b]. On s’intéressera le plus souvent aux deux dernières situations, en s’appuyant sur des résultats ou notions analogues à ceux abordés dans le cas T = N. On notera alors X = (Xt )t∈T le processus aléatoire indexé par les t dans T . Dans la suite, on se place sur l’espace de probabilités (Ω, F , P).
+1.1 Notion de processus
+Définition 1.1. On appelle processus d’espace d’états (E , E), toute famille de variables aléatoires (Xt )t∈T définies sur un même espace de probabilités (Ω, F , P) et à valeurs dans (E , E).
+Définition 1.2. Soit (E , d ) un espace métrique et E sa tribu borélienne. Soit (Xt )t≥0 un processus défini sur (Ω, F , P) et à valeur dans E . On dit que (Xt )t≥0 est continu (ou à trajectoires continues) si pour tout ω ∈ Ω, t ↦ Xt (ω) est continue.
+Rappel :
+1. La tribu borélienne sur un espace topologique E est la plus petite tribu sur E contenant tous les ensembles ouverts.
+2. On appelle tribu F sur E , un ensemble F de parties de E telles que :
+(a) ∅ ∈ F
+(b) si A ∈ F , Ac ∈ F
+(c) si ∀n ∈ N, An ∈ F , alors ⋃n∈N An ∈ F
+1.2 Processus gaussiens
+1.2.1 Variables aléatoires gaussiennes
+Une variable aléatoire X ∶ Ω → R est gaussienne si et seulement si sa loi a pour densité
+fμ,σ2 (x) = 1
+√2πσ exp − (x − μ)2
+2σ2 ∀x ∈ R,
+avec E(X ) = μ et Var(X ) = E[(X − μ)2] = σ2.
+Remarque 1.3. Une variable nulle P-p.s. est vue comme une variable aléatoire suivant une loi gaussienne centrée de variance nulle.
+7
+
+
+8 CHAPITRE 1. QUELQUES RAPPELS SUR LES PROCESSUS
+Proposition 1.4.
+1. X ∼ N (μ, σ2) ⇔ Y = X −μ
+σ ∼ N (0, 1).
+2. Si X ∼ N (μ, σ2), sa fonction caractéristique (=transformée de Fourier de sa loi) est :
+∀t ∈ R, ΦX (t ) = E[ei t X ] = exp i t μ − σ2t2
+2 . La fonction caractéristique caractérise la loi d’une variable
+aléatoire.
+3. Si X ∼ N (μ, σ2), la transformée de Laplace de sa loi est :
+∀λ ∈ R, ΨX (λ) = E[eλX ] = exp λμ + σ2λ2
+2.
+Preuve : en TD
+1.2.2 Vecteur gaussien :
+Définition 1.5. Soient X1, . . . , Xn des variables aléatoires de (Ω, F , P) dans (R, B(R)). On dit que X = (X1, . . . , Xn) est un vecteur gaussien si toute combinaison linéaire de ses composantes suit une loi gaussienne, i.e. si pour tout (α1, . . . , αn) ∈ Rn, α1 X1 + ⋅ ⋅ ⋅ + αn Xn suit une loi gaussienne.
+Un vecteur gaussien X = (X1, . . . , Xn) est entièrement déterminé par sa moyenne μ = E(X ) = (E(X1), . . . , E(Xn)) et sa matrice de covariance Σ = Cov(X ) = (Cov(Xi , X j ))1≤i,j ≤n.
+Remarque 1.6. Si X est un vecteur gaussien, alors pour tout i ∈ {1 . . . n}, Xi est une variable aléatoire gaussienne. La réciproque est fausse : il existe des variables aléatoires gaussiennes X1, . . . Xn telles que X = (X1, . . . , Xn) ne soit pas un vecteur gaussien.
+Contre-exemple 1.7. Soient X ∼ N (0, 1) et a > 0, alors si on pose Y = X si SX S ≤ a
+−X si SX S > a, Y ∼ N (0, 1) (calculer
+sa fonction caractéristique), mais X + Y = 2X 1SX S≤a n’est pas une variables aléatoire gaussienne, donc (X , Y ) n’est pas gaussien.
+Théorème 1.8. Soit X = (X1, . . . , Xn) un vecteur aléatoire de moyenne μ et de matrice de covariance Σ. Le vecteur est gaussien si et seulement si sa fonction caractéristique vaut :
+∀t = (t1, . . . , tn) ∈ Rn, ΦX (t ) = E[ei⟨t,X ⟩] = exp i ⟨t , μ⟩ − 1
+2 ⟨t , Σt ⟩ , avec ⟨t , m⟩ = t T m.
+Vecteurs gaussiens et indépendance :
+Proposition 1.9. Soit X = (X1, . . . , Xn) un vecteur gaussien. Les variables X1, . . . , Xn sont indépendantes si et
+seulement si la matrice de covariance est diagonale (⇔ orthogonalité) : Cov(X ) = diag(σ21, . . . , σ2n).
+Preuve : ⇒ Il est évident que si les variables aléatoires X1, . . . , Xn sont indépendantes, la matrice de covariance (Cov(X j , Xk ))j,k=1,...,n est diagonale.
+⇐ Supposons que la matrice de covariance est diagonale. Soit (e1, . . . , en) une BON dans Rn. La décomposition
+de X dans cette base est X = ∑n
+j =1 X j e j . On a alors pour u1, . . . , un ∈ R,
+Var
+n
+jQ=1
+ujXj =
+n
+Q
+j ,k=1
+u j uk Cov(X j , Xk ) =
+n
+jQ=1
+u2
+j Var(X j ).
+
+
+1.2. PROCESSUS GAUSSIENS 9
+On en déduit que pour u = (u1, . . . , un),
+Φ
+(X1,...,Xn)(u) = E[ei ⟨u,X ⟩] = E exp i
+n
+jQ=1
+u j X j = exp i
+n
+jQ=1
+u j E[X j ] − 1
+2 Var
+n
+jQ=1
+uj Xj
+= exp i
+n
+jQ=1
+u j E[X j ] − 1
+2
+n
+jQ=1
+u2
+j Var(X j )
+=
+n
+jM=1
+exp i u j E[X j ] − u2
+j
+2 Var(X j )
+=
+n
+jM=1
+E[exp(i u j X j )] =
+n
+jM=1
+ΦX j (u j ).
+On obtient donc l’indépendance (la fonction caractéristique de la combinaison linéaire des Xi est le produit des fonctions caractéristiques des Xi ).
+BL’hypothèse X vecteur gaussien est essentielle.
+BLes vecteurs gaussiens ne sont pas toujours à densité, mais si Σ = Cov(X ) est inversible, la loi de X admet
+la densité par rapport à la mesure de Lebesgue sur Rn suivante :
+fμ,Σ(x) = 1
+(2π)n~2√det Σ exp − 1
+2 bx − μ, Σ−1(x − μ)g
+1.2.3 Processus gaussien :
+Définition 1.10. Un processus (Xt )t∈T est gaussien si pour tout (t1, . . . , tn) ∈ T n, (Xt1 , . . . , Xtn ) est une vecteur gaussien. On définit alors sa (fonction) moyenne μ par μ(t ) ∶= E(Xt ) et sa (fonction de) covariance Σ par Σ(s, t ) ∶=
+E[(Xs − μ(s))(Xt − μ(t ))] = E(Xs Xt ) − μ(s)μ(t ).
+Remarque 1.11. La loi d’un processus étant caractérisée par ses lois fini-dimensionnelles, on en déduit que la loi d’un processus gaussien est caractérisée par sa fonction moyenne et sa fonction de covariance.
+Proposition 1.12. Soient s, t ∈ T et Σ(s, t ) la fonction de covariance d’un processus gaussien X = (Xt )t≥0. Alors :
+1. Σ(s, t ) est symétrique : Σ(s, t ) = Σ(t , s)
+2. Σ(s, t ) est semi-définie positive : ∀α1, . . . , αn ∈ R et ∀(t1, . . . , tn) ∈ T n, ∑n
+i ,j =1 αi Σ(ti , t j )αj ≥ 0
+Preuve :
+1. La symétrie est claire.
+2. ∑n
+i ,j =1 αi Σ(ti , t j )αj = ∑n
+i,j =1 αi αj E[(Xti − μ(ti ))(Xtj − μ(t j ))] = E ∑n
+i=1 αi (Xti − μ(i ))
+2
+≥ 0.
+Proposition 1.13. Soient μ ∶ T → R une fonction (quelconque) et Σ ∶ T × T → R une fonction symétrique, semidéfinie positive. Il existe un processus gaussien (unique en loi) de moyenne μ et de fonction de covariance Σ.
+Preuve : [cf. polycopié Probabilités avancées, Erick Herbin] Appliquer le théorème de Kolmogorov. La preuve de ce résultat repose sur le résultat analogue pour les vecteurs gaussiens. On montre le résultat dans le cas où μ = 0. On montre ainsi l’existence d’un processus gaussien centré {X ̃t ; t ∈ T } de fonction de
+covariance Σ. Le processus final est défini par Xt = X ̃t + μ(t ) pour tout t ∈ T . Sans perte de généralité, on
+
+
+10 CHAPITRE 1. QUELQUES RAPPELS SUR LES PROCESSUS
+suppose dans la suite μ = 0. Pour tout sous-ensemble fini I = {t1, . . . , tn} de T , on considère la matrice ΣI de taille n × n définie par
+∀i , j ∈ {1, . . . , n}, ΣI (i , j ) = Σ(ti , t j ).
+La matrice ΣI est symétrique et définie positive, donc on peut construire un vecteur gaussien ZI de taille n suivant la loi N (0, ΣI ). En effet, soit (ε1, . . . , εn) une base orthonormée dans laquelle ΣI est diagonale : Σ(εi , εj ) = λi δi j , 1 ≤ i , j ≤ n. On définit alors Yt1 , . . . , Ytn des variables aléatoires gaussiennes centrées, indé
+pendantes et telles que Var(Ytj ) = λj , 1 ≤ j ≤ n. On pose alors ZI = ∑n
+j =1 Ytj εj qui est un vecteur gaussien centré tel que ΣI (i , j ) = Σ(εi , εj ) = λi δi j .
+On considère alors la mesure de probabilité μI sur (Rn, B(Rn))
+∀A ∈ B(Rn), μI (A) = PZI (A) = P (ZI ∈ A).
+μI est la loi de ZI . Supposons maintenant n > 1 et posons I1 = {t1, t2, . . . , tn−1}. On a I1 ⊂ I et ZI1 a la même loi que les n − 1 premières coordonnées de ZI . Il s’ensuit que
+∀A1, . . . , An−1 ∈ B(R), μI1 (A1 × ⋅ ⋅ ⋅ × An−1) = μI (A1 × ⋅ ⋅ ⋅ × An−1 × R).
+La famille de mesures de probabilité (μI ; I ⊂ T fini) vérifie donc les conditions de compatibilité du théorème d’extension de Kolmogorov. Il existe donc un processus {Xt ; t ∈ T } dont les distributions fini-dimensionnelles sont les (μI ; I ∈ T fini). X est un processus gaussien de moyenne nulle et de fonction de covariance Σ.
+Rappel : Théorème d’extension de Kolmogorov Supposons que E = RN muni de la tribu borélienne E = B(RN ).
+Toute famille (μI )I⊂T de probabilités sur (E I , E⊗I ) indicée par les parties finies de T vérifiant la relation de compatibilité suivante : si I est une partie finie de T et si t ∈ T I , alors
+∀A ∈ E ⊗I ; μI∪{t}(A × E ) = μI (A),
+est la famille des distributions fini-dimensionnelles d’une (unique) probabilité sur (E T , G).
+Théorème 1.14. Soit X = (Xt )t≥0 un processus gaussien. Il y a équivalence entre
+i) le processus est stationnaire au sens strict ⇔ ∀t1, . . . , tn ∈ R+, s ∈ R+, Xt1 , . . . , Xtn a même loi que Xt1+s , . . . , Xtn+s
+ii) le processus est stationnaire à l’ordre 2 (ou au sens large) ⇔ μ(t ) ≡ μ, ∀t ≥ 0 et Σ(s, t ) = γ(t − s), ∀0 ≤ s ≤ t , où γ est une fonction quelconque.
+Preuve : i) ⇒ ii) toujours vrai.
+ii) ⇒ i) les processus gaussiens sont déterminés par μ et Σ.
+Définition 1.15. Soit X = (Xt )t≥0 un processus réel quelconque. On dit qu’il est à accroissements indépendants (PAI) si pour tout s, t tels que 0 ≤ s ≤ t , Xt − Xs est indépendant de σ(Xu, 0 ≤ u ≤ s).
+Proposition 1.16. Soit X = (Xt )t≥0 un PAI gaussien de moyenne μ(t ) et de covariance Σ(s, t ). Alors :
+1. Σ(s, t ) = Σ(t ∧ s, t ∧ s), ∀s, t ∈ R+,
+2. Σ(t , t ) − Σ(s, s) ≥ 0, ∀s ≤ t .
+Preuve : Pour simplifier, on centre le processus (sans perte de généralité) : Xt ↝ Xt − μ(t ), ∀t ≥ 0. Soit t ≥ s ≥ 0,
+1. Σ(s, t ) = E[Xs Xt ] = E[Xs (Xt − Xs + Xs )] = E[Xs (Xt − Xs )] + E[Xs2] P=AI E(Xs )E(Xt − Xs ) + Σ(s, s) =
+X centré
+Σ(s, s), donc Σ(s, t ) = Σ(t ∧ s, t ∧ s).
+2. Σ(t , t ) − Σ(s, s) = E[(Xt − Xs )2] ≥ 0.
+
+
+1.3. ESPÉRANCES CONDITIONNELLES DE VARIABLES ALÉATOIRES RÉELLES 11
+1.3 Espérances conditionnelles de variables aléatoires réelles
+La plupart des preuves se trouvent dans le polycopié de 2ème année de probabilités avancées.
+Définition 1.17. Dans l’espace de probabilité (Ω, F , P), soit X une variable aléatoire réelle dans L1(Ω, F , P) et soit G une sous-tribu de F . On appelle espérance conditionnelle de X sachant G, la variable aléatoire réelle Y vérifiant les deux conditions suivantes :
+(i) Y est dans L1(Ω, G, P), i.e. Y est G−mesurable ;
+(ii) Pour tout A ∈ G,
+SA
+X dP = SA
+Y dP,
+⇔ E[X 1A] = E[Y 1A],
+⇔ E[X Z ] = E[Y Z ], ∀Z G − mesurable bornée.
+L’espérance conditionnelle est unique presque sûrement et notée E[X SG].
+Définition 1.18. Soit X une variable aléatoire réelle dans L2(Ω, F , P) et soit G une sous-tribu de F . L’espérance
+conditionnelle de X sachant G est définie comme la variable aléatoire Y ∈ L2(Ω, G, P) telle que
+∀Z ∈ L2(Ω, G, P) E[X Z ] = E[Y Z ].
+L’espérance conditionnelle est unique (modulo égalité dans L2(Ω, F , P)) et notée E[X SG].
+Remarque 1.19. Dans le cas particulier où X ∈ L2(Ω, F , P), l’espérance conditionnelle E[X SG] est la projection
+orthogonale de X sur le sous-espace L2(Ω, G, P).
+Propriété 1.20. Soit X une variable aléatoire réelle dans L1(Ω, F , P) (resp. L2(Ω, F , P)) et soit G un sous-tribu de F . Alors
+1. L’application X ↦ E[X SG] est linéaire dans L1(Ω, F , P) (resp. L2(Ω, F , P)).
+2. Si X ≥ 0 p.s., alors E[X SG] ≥ 0 p.s.
+3. E[E(X SG)] = E(X ).
+4. X G−mesurable ⇔ E[X SG] = X p.s.
+5. Si X est indépendante de G, alors E[X SG] = E(X ).
+Proposition 1.21 (Emboîtement de tribus). Soient G et H deux sous-tribus de F telles que G ⊂ H. Alors, pour
+toute variable aléatoire X dans L1(Ω, F , P), on a
+E(E[X SH]SG) = E[X SG] p.s.
+Remarque 1.22. Soit X une variable aléatoire réelle sur (Ω, F , P) et soit G la sous-tribu de F engendrée par une variable aléatoire Y ∶ (Ω, F ) → (E , E). Alors on note E[X SY ] à la place de E[X SG] et il existe une application borélienne h ∶ E → R telle que
+E[X SY ] = h(Y ).
+Preuve : Soit A ∈ G = σ(Y ). Par définition de la tribu engendrée, il existe B ∈ E tel que A = Y −1(B ) = {ω ∈ Ω, Y (ω) ∈ B } et on en déduit que 1A = 1B (Y ). Par linéarité, toute fonction étagée G−mesurable s’écrit comme
+fonction étagée E−mesurable de Y . Par densité, si Z est une variable aléatoire réelle dans L1(Ω, G, P), Z s’écrit Z = h(Y ) où h ∶ E → R application borélienne. En prenant Z = E[X SY ], on obtient le résultat.
+
+
+12 CHAPITRE 1. QUELQUES RAPPELS SUR LES PROCESSUS
+Théorème 1.23. Soit (Y1, . . . , Yn, X ) un vecteur gaussien centré. Alors E(X SY1, . . . , Yn) coïncide avec la projection orthogonale de X sur l’espace vectoriel engendré par (Y1, . . . , Yn). Il existe λ1, . . . , λn réels tels que E(X SY1, . . . , Yn) =
+∑n
+j =1 λj Y j . De plus, pour toute fonction h ∶ R → R borélienne et y1, . . . , yn ∈ R
+E [h(X )S(Y1, . . . , Yn) = (y1, . . . , yn)] = SR
+h(x) f(∑n
+j=1 λj y j ,σ2)(x)dx,
+où σ2 = E[(X − ∑n
+j =1 λj y j )2] et f(μ,σ2)(x) = 1
+√2πσ exp − (x − μ)2
+2σ2 .
+La loi conditionnelle de X sachant (Y1, . . . , Yn) = (y1, . . . , yn) est une loi gaussienne de moyenne
+E[X S(Y1, . . . , Yn) = (y1, . . . , yn)] =
+n
+jQ=1
+λj yj
+et de variance
+σ2 = E[(X −
+n
+jQ=1
+λj y j )2].
+Preuve : ● Prenons n = 1. Cherchons λ ∈ R, tel que Z = X − λY soit indépendant de Y . (Z , Y ) est obtenu à partir du couple gaussien centré (X , Y ), il est donc gaussien centré, donc on a l’équivalence suivante :
+Z O Y ⇔ Cov(Z , Y ) = 0 ⇔ E[Z Y ] = 0.
+Or
+E[Z Y ] = E[X Y ] − λE[Y 2] = 0 ⇒ λ = E[X Y ]
+E[Y 2] = Cov(X , Y )
+Var(Y ) ∈ R.
+On a alors
+E[X SY ] = E[Z SY ] + E[λY SY ]
+= E[Z ] + λY car Z O Y
+= λY car E[Z ] = 0.
+● Montrons que E[X SY1, . . . , Yn] coïncide avec la projection orthogonale de X sur l’espace vectoriel engendré par {Y1, . . . , Yn}. Notons F = Vect{Y1, . . . , Yn} et pF (X ) la projection orthogonale de X sur F (pour le produit scalaire associé à l’espérance). Alors E[(X − pF (X ))Z ] = 0 pour tout Z ∈ F . (X − pF (X ), Y1, . . . , Yn) est gaussien centré. On a
+E[(X − pF (X ))Z ] = 0 ⇒ Cov(X − pF (X ), Z ) = 0 ∀Z ∈ F
+⇒ X − pF (X ) O(Y1, . . . , Yn),
+en prenant Z = Yi pour i ∈ {1, . . . , n}. Donc en posant U = X − pF (X ),
+X = ∐U®F
++pF (X )
+ ́1111111 ̧111111¶
+∈F
+⇒ E[X SY1, . . . , Yn] = E[U ]
+±
+=0
++pF (X )
+⇒ E[X SY1, . . . , Yn] = pF (X ).
+● En pratique, E[X SY1, . . . , Yn] = ∑n
+j =1 λj Y j où les λj pour j = 1, . . . , n sont déterminés à partir de la condition d’orthogonalité
+∀ j E[(X − E[X SY1, . . . , Yn])Y j ] = 0 ⇔ E X −
+n
+jQ=1
+λj Y j Y j = 0.
+
+
+1.4. FILTRATION, TEMPS D’ARRÊT ET MARTINGALES INDEXÉS PAR N 13
+● Posons U = X − ∑n
+j =1 λj Y j , alors U ∼ N (0, σ2) avec σ2 = Var(X − ∑n
+j =1 λj Y j ). On a alors
+E[h(X )S(Y1, . . . , Yn) = (y1, . . . , yn)] = SR
+h(u +
+n
+jQ=1
+λj y j )μU SY1,...,Yn (du) =
+U ∐(Y1,...,Yn ) SR
+h(u +
+n
+jQ=1
+λj y j )μU (du)
+= SR
+h(u +
+n
+jQ=1
+λj yj) 1
+√2πσ exp − u2
+2σ2 du
+=
+v =u +∑n
+j =1 λj y j SR
+h(v) 1
+√2πσ exp − (v − ∑n
+j =1 λj y j )2
+2σ2 dv.
+On en déduit que X S(Y1, . . . , Yn) = (y1, . . . , yn) ∼ N (∑n
+j =1 λj y j , σ2) avec σ2 = E[(X − ∑n
+j =1 λj y j )2].
+1.4 Filtration, temps d’arrêt et martingales indexés par N
+Dans ce paragraphe, nous considérons le cas où T = N.
+1.4.1 Filtration
+Définition 1.24. On appelle filtration de l’espace de probabilité (Ω, F , P) une suite croissante (Fn)n∈N de soustribus de F . On dit que (Ω, F , (Fn)n∈N, P) est un espace de probabilité filtré.
+Définition 1.25. Un processus {Xn, n ∈ N} est dit adapté à la filtration (Fn)n∈N si pour tout n ∈ N, Xn est mesurable par rapport à la tribu Fn.
+Définition 1.26. Un processus {Xn, n ∈ N} est dit prévisible pour la filtration (Fn)n∈N si pour tout n ≥ 1, Xn est mesurable par rapport à la tribu Fn−1.
+Exemple 1.27. Si X = {Xn, n ∈ N} est un processus aléatoire, alors on peut définir pour tout n ∈ N, la tribu
+FX
+n = σ(X0, X1, . . . , Xn).
+C’est la plus petite sous-tribu de F qui rende X mesurable. La collection (FnX )n∈N est alors une filtration, appelée filtration naturelle de X . X est adapté à sa filtration naturelle.
+1.4.2 Temps d’arrêt
+Définition 1.28. Une variable aléatoire T ∶ Ω → N ∪ {+∞} est appelée temps d’arrêt pour la filtration (Fn)n∈N si
+∀n ∈ N, {T = n} ∈ Fn,
+ou de manière équivalente si
+∀n ∈ N, {T ≤ n} ∈ Fn.
+Exemple 1.29. Soit X = {Xn, n ∈ N} un processus discret à valeurs dans R. On définit le temps aléatoire T par
+T (ω) = inf{n ∈ N ∶ Xn(ω) ≥ 1}.
+T est un temps d’arrêt pour la filtration naturelle de X , car il ne dépend que des valeurs des Xn pour n ≤ T . De manière rigoureuse, on peut écrire
+{T ≤ n} =
+0≤k ≤n
+{Xk ≥ 1}
+ ́1111111111111 ̧1111111111111¶
+∈Fk ⊂Fn
+∈ Fn
+En revanche, le temps aléatoire S = sup{n ∶ Xn ≥ 1} n’est pas un temps d’arrêt pour la filtration naturelle de X . Il est nécessaire de connaître l’ensemble des réalisations des Xn pour définir la valeur de S.
+
+
+14 CHAPITRE 1. QUELQUES RAPPELS SUR LES PROCESSUS
+Définition 1.30. Soit (Fn)n∈N une filtration sur l’espace (Ω, F , P), et soit T un temps d’arrêt. La collection
+FT = {A ∈ F ∶ ∀n ∈ N, A ∩ {T ≤ n} ∈ Fn}
+est une tribu appelée tribu du temps d’arrêt T .
+1.4.3 Martingales
+Définition 1.31. On appelle martingale (resp. sous-martingale, surmartingale) le processus X = {Xn, n ∈ N} muni d’une filtration (Fn)n∈N vérifiant les trois conditions suivantes :
+(i) mesurabilité : X est adapté, i.e. Xn est Fn−mesurable pour tout n ∈ N ;
+(ii) intégrabilité : pour tout n ∈ N, Xn ∈ L1(Ω, F , P) ;
+(iii) relation de martingale : ∀n ∈ N, Xn = E[Xn+1SFn] p.s.
+(resp. Xn ≤ E[Xn+1SFn] p.s., Xn ≥ E[XmSFn] p.s.).
+Remarque 1.32. La 3ème condition est équivalente à
+∀n, m ∈ N tels que n ≤ m, Xn = E[XmSFn] p.s.
+
+
+Chapitre 2
+Le mouvement brownien
+Le mouvement brownien est associé à l’analyse de mouvements qui évoluent au cours du temps de manière si désordonnée qu’il semble difficile de prévoir leurs évolutions, même dans un intervalle de temps très court. Il joue un rôle central dans la théorie des processus stochastiques car dans de nombreux problèmes théoriques ou appliqués, le mouvement brownien ou les diffusions qui lui sont associées fournissent des modèles simples sur lesquels de nombreux calculs peuvent être faits. Le mouvement brownien a été introduit en 1827 par le botaniste écossais Robert Brown (1773-1858) pour décrire le mouvement de fines particules organiques en suspension dans un gaz ou un fluide. En 1905, Albert Einstein construit un modèle probabiliste pour décrire le mouvement d’une particule qui diffuse : il trouve que la loi de la position à l’instant t de la particule sachant que l’état initial est x admet une densité qui vérifie l’équation de la chaleur et de ce fait est gaussienne. En 1923, Norbert Wiener construit rigoureusement la fonction aléatoire du mouvement brownien. Il établit que les trajectoires sont continues. Le français Paul Lévy découvre ensuite avec d’autres mathématiciens de nombreuses propriétés du mouvement brownien et introduit une première forme des équations différentielles stochastiques (EDS) dont l’étude sera ensuite systématisée par le japonais Kiyoshi Itô.
+2.1 Définition, propriétés
+Définition 2.1. On appelle mouvement brownien standard tout processus gaussien B = (Bt )t≥0 à trajectoires continues, de fonction moyenne nulle et de fonction de covariance
+Σ(s, t ) = s ∧ t , ∀s, t ≥ 0. (2.1)
+Remarque 2.2. L’existence d’un mouvement brownien est assurée par la Proposition 1.13. En effet, la fonction de covariance (2.1) est symétrique : on remarque que Σ(s, t ) = λ([0, s] ∩ [0, t ]), où λ désigne la mesure de Lebesgue.
+Remarque 2.3. Si (Bt )t≥0 est un mouvement brownien, E(B0) = 0 = Var(B0), d’où E(B02) = 0 et B0 = 0 P-p.s.
+Définition 2.4. On dit que (Yt )t≥0 est un mouvement brownien issu de x ∈ R si pour tout t ≥ 0, Yt = Bt + x avec (Bt )t≥0 un mouvement brownien (issu de 0). De façon équivalente, (Yt )t≥0 est un processus gaussien de fonction de covariance Σ(s, t ) = s ∧ t et de moyenne x.
+Proposition 2.5. Soit (Bt )t≥0 un mouvement brownien. Alors
+i) Les accroissements de (Bt )t≥0 sont indépendants, i.e. pour tous 0 ≤ t0 < ⋅ ⋅ ⋅ < tn, les variables (Btk+1 − Btk )0≤k≤n−1 sont indépendantes.
+ii) Les accroissements de (Bt )t≥0 sont stationnaires, i.e. pour tout u > 0, les variables (Bu+t − Bt )t≥0 ont la même loi, à savoir N (0, u).
+15
+
+
+16 CHAPITRE 2. LE MOUVEMENT BROWNIEN
+Preuve :
+i) Le processus (Btk+1 − Btk )0≤k≤n est un processus gaussien. Il suffit donc de vérifier que pour tous 0 ≤ tl < tl+1 < tk < tk+1, E[(Btk+1 − Btk )(Btl+1 − Btl )] = 0.
+ii) Immédiat. (Bu+t − Bt est une variables aléatoire gaussienne et Var(Bu+t − Bt ) = u + t − 2Σ(u + t , t ) + t = u + t − 2t + t = u)
+Remarque 2.6. La propriété i) est équivalente au fait que pour tout u > 0, les variables (Bu+t − Bu)t≥0 est indépendant de la tribu σ{Bs , 0 ≤ s ≤ u}. De plus, le processus (Bu+t − Bu)t≥0 est un mouvement brownien.
+Remarque 2.7. Le mouvement brownien standard admet donc deux caractérisations. Le processus (Bt )t≥0 un mouvement brownien standard si i) ses trajectoires sont continues : ω ∈ Ω, t ↦ Bt (ω) est continue ii) B0 = 0 iii) PAI tel que Bt − Bs ∼ N (0, t − s) iii’) processus gaussien centré de covariance Σ(s, t ) = s ∧ t
+Exercice 2.8.
+1. Quelle est la loi de Bt − Bs , 0 ≤ s ≤ t ? Donner sa densité.
+2. Que vaut E[(Bt − Bs )Sσ(Bu, 0 ≤ u ≤ s)] ?
+3. Calculer E(Bt SBs ), ∀0 ≤ s ≤ t .
+Proposition 2.9. Soit B = (Bt )t≥0 un mouvement brownien standard. Les processus suivants sont également des mouvements browniens standards :
+i) Xt1 = −Bt , t ≥ 0 (propriété de symétrie)
+ii) ∀γ > 0, Xt2 = 1
+γ Bγ2t , t ≥ 0 (propriété d’auto-similarité)
+iii) X03 = 0 et Xt3 = t B 1
+t , t > 0.
+Preuve : À faire en exercice.
+Proposition 2.10. On a
+X3
+t tÐ→→0 0.
+Remarque 2.11. Un mouvement brownien n’a pas de limite en +∞, son comportement est en √t (Var(Bt ) = t ).
+2.2 Propriétés asymptotiques du mouvement brownien standard
+Nous commençons par énoncer un résultat préliminaire.
+Théorème 2.12 (Loi du 0 − 1 de Blumenthal). Soit (Bt )t≥0 un mouvement brownien et Ft ∶= σ{Bs ∶ s ≤ t } pour tout t > 0. On pose F0+ ∶= ⋂t>0 Ft . Alors, pour tout A ∈ F0+ , P(A) ∈ {0, 1}.
+Preuve :
+Soient 0 < t1 < ⋅ ⋅ ⋅ < tk , g ∶ Rk → R une fonction continue bornée et A ∈ F0+ . Par continuité (des trajectoires de B et sous le signe intégral), on a
+E[1A g (Bt1 , . . . , Btk )] = lεi→m0 E[1A g (Bt1 − Bε, . . . , Btk − Bε)].
+
+
+2.2. PROPRIÉTÉS ASYMPTOTIQUES DU MOUVEMENT BROWNIEN STANDARD 17
+Dès lors que ε < t1, alors les variables Bt1 −Bε, . . . , Btk −Bε sont indépendantes de Fε (car B est un PAI), et comme F0+ ⊂ Fε, elles sont aussi indépendantes de F0+ . On peut donc écrire
+E[1A g (Bt1 , . . . , Btk )] = lεi→m0 P(A)E[g (Bt1 − Bε, . . . , Btk − Bε)]
+= P(A)E[g (Bt1 , . . . , Btk )],
+et donc F0+ est indépendante de σ(Bt1 , . . . , Btk ). Ceci étant vrai pour toute famille finie {t1, . . . , tk }, on en déduit que F0+ est indépendante de σ(Bt , t > 0). Par continuité de B en 0, (tli→m0Bt = B0), on a donc σ(Bt , t > 0) =
+σ(Bt , t ≥ 0) et comme F0+ ⊂ σ(Bt , t ≥ 0), on en déduit que F0+ est indépendante d’elle-même. Cela entraîne
+que pour tout A ∈ F0+ , P(A ∩ A) = P(A)2 et comme P(A ∩ A) = P(A), on en déduit que P(A) ∈ {0, 1}.
+Remarque 2.13. Il n’est a priori pas évident que sup0≤s≤εBs soit mesurable : c’est le supremum non dénombrable de fonctions mesurables. Les trajectoires de B étant continues, on peut se restreindre aux valeurs rationnelles de s ∈ [0, ε] et on obtient un supremum dénombrable de variables aléatoires. C’est ce que nous utiliserons implicitement dans la suite.
+Proposition 2.14. Soit (Bt )t≥0 un mouvement brownien standard. Pour tout ε > 0 on a :
+i) sup
+0≤s≤ε
+Bs > 0 p.s et inf
+0≤s≤ε Bs < 0 p.s
+ii) lim sup
+t →+∞
+Bt = +∞ p.s et lim inf
+t →+∞
+Bt = −∞ p.s.
+Preuve :
+i) Soit (εn)n≥1 une suite décroissante de limite nulle. L’événement A ∶= ∩n≥1{supm≥n Bεm > 0} est clairement F0+ -mesurable, donc P(A) ∈ {0, 1}. Par ailleurs, P(A) = limn→+∞ P(supm≥n Bεm > 0) et P(supm≥n Bεm > 0) ≥ P(Bεn > 0) = 1~2. D’où P(A) = 1 et le premier point est prouvé.
+ii) D’après ce qui précède,
+lim
+p →+∞
+P sup
+0≤t ≤1,t ∈Q
+Bt > 1~p = 1.
+D’après la proposition 2.9.ii), (Bp2t ~p)t≥0 est un mouvement brownien. Donc
+P sup
+0≤t ≤1,t ∈Q
+Bt > 1~p = P sup
+0≤t ≤1,t ∈Q
+Bp2t ~p > 1~p = P sup
+0≤t ≤p2,t ∈Q
+Bt > 1 .
+En faisant tendre p vers +∞, il vient P supt∈Q+ Bt > 1 = 1. Une nouvelle application de la proposition
+2.9.ii) donne P supt∈Q+ Bt > m = 1, pour tout m ∈ N.
+Proposition 2.15. Soit (Bt )t≥0 un mouvement brownien standard. On a
+i) lim sup
+t →+∞
+√Btt = +∞, lim inf
+t →+∞
+√Btt = −∞ p.s.
+ii) t l→i+m∞
+Bt
+t = 0 p.s.
+iii) lim sup
+t →0
+√Btt = +∞, lim inf
+t →0
+√Btt = −∞ p.s.
+Corollaire 2.16. Presque sûrement, le mouvement brownien standard change une infinité de fois de signe sur [0, t ], t > 0.
+
+
+18 CHAPITRE 2. LE MOUVEMENT BROWNIEN
+Preuve : D’après la Proposition 2.14i), on peut construire une suite (sn(ω))n∈N∗ strictement décroissante, de limite 0 telle que ∀k ∈ N∗, Bs2k−1(ω)(ω) > 0 et Bs2k (ω)(ω) < 0.
+Corollaire 2.17.
+i) P− p.s., le mouvement brownien (Bt )t≥0 passe une infinité de fois par tout point.
+ii) Le mouvement brownien (Bt )t≥0 n’est dérivable ni à droite, ni à gauche en tout point s > 0. Il est non dérivable à droite en s = 0.
+Preuve :
+i) Raisonner par l’absurde, utiliser le fait que les trajectoires sont continues et la proposition 2.14.ii).
+ii) Si
+Bt −B0
+t tÐ→0→+ ` (dérivabilité à droite en 0)
+alors √Btt = Bt
+t
+√t tÐ→→0 0,
+ce qui est contradictoire.
+Exercice 2.18. Le faire en tout point : Bt − Bs
+t−s .
+Remarque 2.19. En finance, on appelle mouvement brownien réel issu de x ∈ R de dérive θ ∈ R et de variabilité σ > 0, le processus Xt = x + θt + σBt , où (Bt )t≥0 est le mouvement brownien standard.
+Exercice 2.20. Montrer que (Xt )t≥0 est un processus gaussien. Calculer sa moyenne et sa fonction de covariance.
+2.3 Mouvement brownien par rapport à une filtration
+Soit (Ω, F , P) un espace probabilisé.
+2.3.1 Quelques définitions
+Définition 2.21. On appelle filtration toute famille croissante (Ft )t≥0 de sous-tribus de F .
+Remarque 2.22. Ft ="événements qui peuvent arriver avant t ".
+On note (Ω, F , (Ft )t≥0, P) l’espace de probabilité filtré.
+Définition 2.23. On dit que le processus X = (Xt )t≥0 est Ft −adapté si ∀t ≥ 0, Xt est Ft −mesurable :
+∀t ≥ 0 ∀B ∈ B(R), X −1
+t (B ) ∈ Ft
+Exemple 2.24 (Filtration "canonique", "naturelle", "propre" d’un processus). Soit X = (Xt )t≥0 un processus, sa filtration canonique (naturelle ou propre) est définie par
+FX
+t = σ{Xs ∶ 0 ≤ s ≤ t }.
+Proposition 2.25. Un processus est toujours adapté à sa filtration canonique.
+Définition 2.26. Soient (Ω, F , (Ft )t≥0, P) un espace de probabilité filtré et X = (Xt )t≥0 un processus. On dit que X est
+1. une Ft − P−martingale si :
+
+
+2.3. MOUVEMENT BROWNIEN PAR RAPPORT À UNE FILTRATION 19
+(a) Xt est Ft -mesurable (⇔ X est Ft −adapté)
+(b) E[SXt S] < +∞ ∀t ≥ 0 (⇔ X ∈ L1(Ω, F , P), intégrabilité)
+(c) E[Xt SFs ] = Xs , ∀t ≥ s,
+2. une Ft − P−sous-martingale si : (a), (b) et (c’) E[Xt SFs ] ≥ Xs , ∀t ≥ s,
+3. une Ft − P−sur-martingale si : (a), (b) et (c”) E[Xt SFs ] ≤ Xs , ∀t ≥ s.
+Exemple 2.27. Le mouvement brownien standard B = (Bt )t≥0 est une Ft − P−martingale pour sa filtration
+propre, FtB = σ{Bu, 0 ≤ u ≤ t } :
+1. Ok (un processus est toujours mesurable par rapport à sa filtration propre),
+2. E[SBt S] =
+3⁄42
+π
+√t ,
+3. E[Bt SFsB ] − Bs = E[(Bt − Bs )SFsB ] = E(Bt − Bs ) = 0.
+2.3.2 Ft − P−mouvement brownien
+Définition 2.28. Soit (Ω, F , (Ft )t≥0, P) un espace de probabilité filtré. Soit B = (Bt )t≥0 un processus réel adapté à (Ft )t≥0. Alors B = (Bt )t≥0 est un Ft − P−mouvement brownien réel standard si :
+1. B0 = 0,
+2. les trajectoires sont continues,
+3. ∀0 ≤ s ≤ t , Bt − Bs est indépendant de Fs et Bt − Bs ∼ N (0, t − s).
+Remarque 2.29. Ft n’est pas forcément la filtration propre de B .
+Proposition 2.30. Un Ft −mouvement brownien est un mouvement brownien pour sa filtration propre.
+Proposition 2.31. Soit X = (Xt )t≥0 un processus réel adapté à la filtration (Ft )t≥0, nul en 0 et à trajectoires continues. Alors
+X est un Ft − P − mouvement brownien standard
+⇔∀a ∈ R, Z a
+t = exp i a Xt + 1
+2 a2t est une Ft − P − martingale.
+Preuve : ⇒ Soit X un Ft − P−mouvement brownien. Soit
+Za
+t = exp i a Xt + 1
+2 a2t , ∀a ∈ R.
+Montrons que c’est une Ft − P−martingale.
+1. Zta est Ft −mesurable car l’image par l’application continue exp(i a.) exp 1
+2 a2t d’un processus mesurable est mesurable,
+2. E[SZtaS] = E U exp i a Xt + 1
+2 a2t U = e a2
+2 t < +∞,
+3. Montrons que E[(Zta − Zsa)SFs ] = 0, ∀0 ≤ s ≤ t .
+Za
+t −Za
+s = exp i a Xt + a2t
+2 − exp i a Xs + a2s
+2
+= exp i a Xs + a2s
+2 exp i a(Xt − Xs ) + a2
+2 (t − s) − 1
+
+
+20 CHAPITRE 2. LE MOUVEMENT BROWNIEN
+E[(Z a
+t −Za
+s )SFs ] = E exp i a Xs + a2s
+2 exp i a(Xt − Xs ) + a2
+2 (t − s) − 1 SFs
+= Za
+s E exp i a(Xt − Xs ) + a2
+2 (t − s) − 1SFs
+=
+Xt −Xs ∐ Fs
+Za
+S E exp i a(Xt − Xs ) + a2
+2 (t − s) − 1
+E[exp(i a(Xt − Xs ))] est la fonction caractéristique de Xt − Xs et Xt − Xs ∼ N (0, t − s), on a donc
+E[exp(i a(Xt − Xs ))] = e− a2
+2 (t−s).
+On obtient donc finalement
+E[(Z a
+t −Za
+s )SFs ] = 0.
+⇐ Supposons que ∀a ∈ R, Zta est une Ft − P−martingale. On a donc :
+E[exp(i a(Xt − Xs ))SFs ] = e− a2
+2 (t−s)
+et en passant à l’espérance, on obtient
+E[exp(i a(Xt − Xs ))] = e− a2
+2 (t−s),
+donc Xt −Xs ∼ N (0, t −s) (car on reconnaît la fonction caractéristique d’une loi N (0, 1)). Soit enfin a, b ∈ R et Y une variable aléatoire Fs −mesurable alors d’après la propriété martingale, on en déduit que
+E[exp(i a(Xt − Xs ) + i bY )SFs ] = e
+−a2 (t −s)
+2 ei bY
+en prenant l’espérance, on obtient
+Φ
+(Xt −Xs,Y )(a, b) = E[exp(i a(Xt − Xs ) + i bY )] = E[ei a(Xt −Xs)]E[eibY ].
+On en déduit que pour toute variable aléatoire Y Fs −mesurable, Xt − Xs est indépendante de Y donc Xt − Xs est indépendante de Fs . X vérifie les trois caractérisations d’un Ft − P− mouvement brownien standard, c’est donc un Ft − P−mouvement brownien standard.
+Proposition 2.32. Soit B = (Bt )t≥0 un Ft − P−mouvement brownien standard. Alors
+1. Bt2 est une Ft − P−sous-martingale,
+2. Bt2 − t est une Ft − P−martingale.
+Preuve :
+1. La fonction x ↦ x2 est convexe. On peut donc appliquer l’inégalité de Jensen :
+E[B 2
+t SFs ] ≥ (E[Bt SFs ])2 = B 2
+s,
+car Bt est un Ft − P−martingale.
+
+
+2.3. MOUVEMENT BROWNIEN PAR RAPPORT À UNE FILTRATION 21
+2. On a
+E[(Bt − Bs )2SFs ] = E[(Bt − Bs )2] = t − s
+⇔E[(B 2
+t − 2Bs Bt + B 2
+s )SFs ] = t − s
+⇔E[B 2
+t SFs ] − 2E[Bs Bt SFs ] + E[B 2
+s SFs ] = t − s
+⇔E[B 2
+t SFs ] − 2Bs E[Bt SFs ] + B 2
+s =t−s
+⇔E[B 2
+t SFs ] − B 2
+s =t−s
+⇔E[(B 2
+t − t )SFs ] = B 2
+s −s
+Remarque 2.33. On dit que t est le processus croissant associé à la martingale Bt , il est tel que Bt2 − t soit une martingale.
+Plus généralement : Soit M = (Mt )t≥0 une Ft − P−martingale à trajectoires continues, il existe un processus
+croissant unique, adapté, partant de 0, noté ⟨M ⟩ = (⟨M ⟩t )t≥0 tel que Mt2 − ⟨M ⟩t soit une Ft − P−martingale (⟨B ⟩t = t ).
+Exercice 2.34. Soit Xt = Bt2, avec B = (Bt )t≥0 le mouvement brownien standard. On définit la filtration naturelle de B par Ft = σ{Bu, 0 ≤ u ≤ t }.
+1. Quelle est la loi de Xt ? Donner son espérance, sa variance et sa covariance.
+2. Est-ce un processus gaussien ?
+3. Est-ce une Ft −martingale ?
+
+
+22 CHAPITRE 2. LE MOUVEMENT BROWNIEN
+
+
+Chapitre 3
+Intégrales de processus gaussiens à
+trajectoires continues
+3.1 Quelques résultats préliminaires
+Proposition 3.1. Soit X = (Xt )t≥0 un processus à trajectoires continues. Alors
+Y : (Ω × R+, F ⊗ B(R+)) Ð→ (R, B(R))
+(ω, t ) ↦ Xt (ω)
+est mesurable par rapport au couple (ω, t ) :
+∀A ∈ B(R), Y −1(A) ∈ F ⊗ B(R+).
+Preuve : On pose
+Xn
+t (ω) = X k
+2n (ω) si t ∈ k
+2n , k + 1
+2n , k ∈ N
+On a alors
+Xn
+t (ω) =
++∞
+Q
+k =0
+Xk
+2n (ω)1 k
+2n , k+1
+2n (t ),
+qui est mesurable par rapport au couple (ω, t ) comme produit de deux fonctions mesurables par rapport
+à chaque variable. Donc (ω, t ) ↦ Xtn(ω) définie sur Ω × R+ est mesurable pour Ft ⊗ B(R+). On a Xtn(ω) =
+Xtn (ω) = Y (ω, tn) avec tn = [2n t ]~2n. Or tn Ð→
+n→+∞
+t et comme X est un processus à trajectoires continues, on
+en déduit que Xtn (ω) Ð→
+n→+∞
+Xt (ω) pour tout (t , ω) ∈ R+ × Ω. Une limite simple de fonctions mesurables étant
+mesurable, la même propriété de mesurabilité reste vraie pour l’application (ω, t ) ↦ Xt (ω) = Y (ω, t ) définie sur Ω × R+. Et donc Y est mesurable en (ω, t ).
+Proposition 3.2. Soit X = (Xt )t≥0 un processus gaussien à trajectoires continues. Alors : ● R+ → R
+t ↦ μ(t ) = E(Xt )
+et sont continues. ● (R+, R+) → R
+(s, t ) ↦ Σ(s, t ) = Cov(Xs , Xt )
+23
+
+
+24 CHAPITRE 3. INTÉGRALES DE PROCESSUS GAUSSIENS À TRAJECTOIRES CONTINUES
+Preuve : Soit (tn)n∈N une suite réelle telle que tn Ð→
+n→+∞
+t . Alors Xtn
+p.s.
+Ð→
+n→+∞
+Xt par continuité des trajectoires.
+Comme la convergence presque sûre implique la convergence en loi et que pour une variable gaussienne, d’après l’exercice 4 du TD1, on en déduit que
+E(Xtn ) = μ(tn) Ð→
+n→+∞
+μ(t ) = E(Xt ) (convergence dans L1)
+Var(Xtn ) Ð→
+n→+∞
+Var(Xt ) (convergence dans L2)
+(Plus généralement, pour des variables aléatoires gaussiennes, si la convergence a lieu presque sûrement, elle
+a lieu pour tous les Lp , p ≥ 1 : Xtn
+Lp
+Ð→
+n→+∞
+Xt .)
+Soient (sn)n∈N et (tn)n∈N deux suites réelles telles que sn Ð→
+n→+∞
+s et tn Ð→
+n→+∞
+t . Alors
+Σ(sn , tn ) = Cov(Xsn , Xtn ) = E(Xsn Xtn ) − E(Xsn )E(Xtn ).
+On sait déjà que E(Xsn )E(Xtn ) Ð→
+n→+∞
+μ(s)μ(t ). Il reste à montrer que E(Xsn Xtn ) Ð→
+n→+∞
+E(Xs Xt ) :
+SE(Xsn Xtn ) − E(Xs Xt )S = SE((Xsn − Xs )Xtn ) + E((Xtn − Xt )Xs )S ≤ SE((Xsn − Xs )Xtn )S + SE((Xtn − Xt )Xs )S
+C≤−S E[(Xsn − Xs )2]
+ ́11111111111111111111111111111111111 ̧11111111111111111111111111111111111¶
+n→Ð+→∞0
+1~2 E[X 2
+tn ]
+ ́111111 ̧11111¶
+n→Ð+→∞Var(Xt )+(μ(t ))2
+1~2 + E[(Xtn − Xt )2]
+ ́11111111111111111111111111111111111 ̧1111111111111111111111111111111111¶
+n→Ð+→∞0
+1~2 E[X 2
+s]
+2
+=Var(Xs )+(μ(s))2
+1~2,
+donc Σ est continue.
+3.2 Intégrales de processus gaussiens à trajectoires continues
+Proposition 3.3. Soit f ∶ R+ → R une fonction continue et X = (Xt )t≥0 un processus gaussien à trajectoires continues. On pose
+Zt = S
+t
+0
+f (s)Xs ds, t ≥ 0.
+Alors Z = (Zt )t≥0 est un processus gaussien à trajectoires continues et dérivable et tel que
+μ(t ) = E(Zt ) = S
+t
+0
+f (s)E(Xs )ds
+et
+E(Zs Zt ) = S0≤v≤t S0≤u≤s
+f (u) f (v)E[Xu Xv ]dudv.
+Preuve : ● Pour tout ω ∈ Ω, la fonction s ∈ R+ ↦ f (s)Xs (ω) est une fonction continue, elle est donc continue sur
+[0, t ], pour tout t ≥ 0. L’intégrale ∫ t
+0 f (s)Xs (ω)ds est une intégrale de Riemann sur [0, t ], pour tout ω ∈ Ω :
+Zt (ω) = S
+t
+0
+f (s)Xs(ω)ds = S
+t
+0
+f (s)Xs ds (ω).
+D’après le théorème de dérivation sous le signe intégral d’une fonction continue :
+dZt
+dt = f (t)Xt .
+Soit
+Zn(ω) = t
+n
+n
+i =Q1
+f it
+n X it
+n (ω)
+
+
+3.2. INTÉGRALES DE PROCESSUS GAUSSIENS À TRAJECTOIRES CONTINUES 25
+une variable aléatoire gaussienne car X est un processus gaussien, donc toute combinaison linéaire finie de ses composantes est une variable aléatoire gaussienne. On a Zn Ð→ Zt
+n→+∞
+p.s., donc Zt est une variable aléatoire gaus
+sienne (car la convergence p.s. implique la convergence en loi). Il nous faut encore montrer que Z = (Zt )t≥0 est
+un processus gaussien : ∀a1, . . . an, t1, . . . , tn,, ∑n
+i=1 ai Zti peut s’écrire comme la limite d’une variable aléatoire gaussienne, c’est donc une gaussienne et on en déduit que (Zt )t≥0 est bien un processus gaussien. Calcul de E(Zt ) et E(Zs Zt ) : 2 méthodes
+1. comme limites de E(Ztn ) et E(Zsn Ztn )
+2. en utilisant le théorème de Fubini
+Nous allons appliquer la 2ème méthode et appliquer le théorème de Fubini.
+● E(Zt ) = E ∫ t
+0 f (s)Xs ds = ∫Ω ∫ t
+0 f (s)Xs (ω)ds dP(ω) Pour pouvoir intervertir les deux intégrales, il faut
+vérifier que l’intégrale double est absolument convergente :
+S
+t
+0 SΩ S f (s)Xs (ω)SdP(ω) ds < +∞ car E(SXs S) =
+3⁄42
+π (Var(Xs ))1~2 < +∞.
+On peut donc appliquer le théorème de Fubini et on a donc bien
+E(Zt ) = S
+t
+0
+f (s)E(Xs )ds.
+● On a :
+E(Zs Zt ) = E S
+s
+0
+f (u)Xudu S
+t
+0
+f (v)Xv dv
+= E S0≤u≤s S0≤v≤t
+f (u) f (v)Xu Xv dudv
+On peut facilement montrer que S f (u)SS f (v)SSXu Xv S est mesurable sur un pavé et donc
+E S0≤u≤s S0≤v≤t S f (u)SS f (v)SSXu Xv Sdudv
+existe bien. Il reste à vérifier qu’elle est finie. Or
+E(SXu Xv S) ≤ »E(SXuS2)E(SXv S2) < +∞.
+L’intégrale est donc absolument convergente et par le théorème de Fubini, on peut intervertir l’espérance et les intégrales :
+E(Zs Zt ) = S0≤v≤t S0≤u≤s
+f (u) f (v)E[Xu Xv ]dudv.
+Calcul de la covariance :
+Cov(Zs , Zt ) = S0≤v≤t S0≤u≤s
+f (u) f (v) Cov(Xu, Xv )dudv.
+Exercice 3.4. Soit X = (Xt )t≥0 un processus gaussien à trajectoires continues. Soient f , g , h ∶ R+ → R des fonctions continues. Soit
+Yt = f (t) + g (t)S
+t
+0
+h(s )X s ds.
+1. Montrer que Y = (Yt )t≥0 est un processus gaussien à trajectoires continues.
+
+
+26 CHAPITRE 3. INTÉGRALES DE PROCESSUS GAUSSIENS À TRAJECTOIRES CONTINUES
+2. Calculer μ(t ) = E(Yt ) et Cov(Ys , Yt ).
+Exercice 3.5. Soit (Bt )t≥0 un mouvement brownien standard. Quelle est la loi jointe de (Bt , ∫ t
+0 Bsds)?
+Exercice 3.6. Soient (Bt )t≥0 un mouvement brownien standard et Zt = Bt − t B1 pour 0 ≤ t ≤ 1 (on appelle ce processus le pont brownien).
+1. Montrer que Z est un processus gaussien indépendant de B1.
+2. Calculer E(Zt ) et Cov(Zs , Zt ).
+
+
+Chapitre 4
+Intégrale de Wiener
+4.1 Quelques définitions et résultats préliminaires
+Soient f ∶ R+ → R et B = (Bt )t≥0 le mouvement brownien standard. On va définir l’intégrale de Wiener par
+"S
+t
+0
+f (s)dBs ".
+Remarque 4.1. Si B était à variation finie (ou bornée), ce serait une intégrale de Stieljes.
+Définition 4.2. Soient g ∶ [a, b] ⊂ R → R, et σ = {a = x0 < x1 < ⋅ ⋅ ⋅ < xn = b} une partition de [a, b]. La variation de g sur [a, b] pour la subdivision σ est
+V (g , σ) =
+n
+i =Q1
+Sg (xi ) − g (xi−1)S
+et on définit Va,b(g ) = sup
+σ
+V (g , σ). On dit que g est à variation finie si Va,b(g ) < +∞.
+Définition 4.3. Soient f ∶ R+ → R une fonction continue et g ∶ R+ → R une fonction à variation finie. On définit alors l’intégrale de Stieljes par
+S
+b
+a
+f (s)dg (s) = lim
+pas σ↘0
+n
+i =Q1
+f (xi )[g (xi ) − g (xi−1)], avec pas σ = sup
+i =1,...,nSxi − xi −1S.
+Mais B n’est pas à variation finie, ce n’est donc pas une intégrale de Stieljes.
+Proposition 4.4. Soit B = (Bt )t≥0 le mouvement brownien standard. On a
+2n
+i =Q1
+SBti − Bti−1 S2 L2 et p.s.
+Ð→
+n→+∞
+t , où ti = i t
+2n .
+27
+
+
+28 CHAPITRE 4. INTÉGRALE DE WIENER
+Preuve : ● On commence par montrer la convergence dans L2 :
+E
+2n
+i =Q1
+SBti − Bti−1 S2 − t
+2
+=E
+2n
+i =Q1
+(SBti − Bti−1 S2 − (ti − ti −1))
+2
+=E
+2n
+i =Q1
+SBti − Bti−1 S2 − E
+2n
+i =Q1
+SBti − Bti−1 S2 2
+= Var
+2n
+i =Q1
+SBti − Bti−1 S2
+=
+2n
+i =Q1
+E[SBti − Bti−1 S4] − (E[SBti − Bti−1 S2])2
+=
+2n
+i =Q1
+3t 2
+22n − t 2
+22n car E[(Bti − Bti−1 )4] = 3t 2
+22n
+= 2t2
+2n .
+On vient donc de prouver la convergence dans L2. ● Soit ε > 0, on a d’après l’inégalité de Bienaymé-Tchebichev
+PU
+2n
+i =Q1
+SBti − Bti−1 S2 − t U > ε ≤ Var(∑2n
+i =1 SBti − Bti−1 S2)
+ε2 = 2t 2
+2n ε2 ,
+car E[∑2n
+i =1 SBti − Bti−1 S2] = t et Var(∑2n
+i =1 SBti − Bti−1 S2) = 2t 2
+2n . Donc ∑n P U ∑2n
+i=1 SBti − Bti−1 S2 − t U > ε converge et
+d’après le lemme de Borel-Cantelli, (∑n P(An) < +∞ ⇒ P(lim sup An) = 0),
+P lim sup
+n→+∞
+U
+2n
+i =Q1
+SBti − Bti−1 S2 − t U > ε = 0
+(⇔ P n⋂≥0m⋃≥nU ∑2m
+i=1 SBti − Bti−1 S2 − t U > ε = 0 ∀ε > 0). On en déduit la convergence presque sûre.
+Remarque 4.5. Il en découle que le mouvement brownien n’est p.s. pas à variations finies. En effet, si V (B, [0, t ]) <
++∞, alors sup
+σ
+2n
+i =Q1
+SBti − Bti−1 S < +∞. Ceci implique que
+2n
+i =Q1
+SBti − Bti−1 S2 ≤ sup
+i =1,...,2n SBti − Bti−1 S
+ ́111111111111111111111111111111111111111111111111 ̧11111111111111111111111111111111111111111111111¶
+n→Ð+→∞0
+2n
+i =Q1
+SBti − Bti−1 S
+ ́111111111111111111111111111111111 ̧11111111111111111111111111111111¶
+<+∞
+Ð→
+n→+∞
+0 ☇.
+Une fonction à variation quadratique non nulle ne peut pas être à variation finie.
+4.2 Intégrales des fonctions en escalier
+Définition 4.6. Une fonction en escalier à support compact de R+ dans R est telle que
+f (t) =
+N
+i =Q1
+fi 1[ti−1,ti [(t ), avec t0 = 0 < t1 < ⋅ ⋅ ⋅ < tN < +∞ et fi constantes ∀i .
+
+
+4.2. INTÉGRALES DES FONCTIONS EN ESCALIER 29
+Soit l’espace vectoriel E = { f ∶ R+ → R, f fonction en escalier à support compact}.
+● E est un sous-espace vectoriel de L2(R+) :
+SS f SS2
+2=S
++∞
+0 S f (t )S2dt
+=S
++∞
+0
+N
+i =Q1
+fi 1[ti−1,ti [(t )
+2 dt
+=
+N
+i =Q1 S
++∞
+0
+f2
+i 12
+[ti−1,ti [(t )dt (intervalles disjoints)
+=
+N
+i =Q1
+f2
+i (ti − ti−1) < +∞.
+● E est dense dans L2(R+).
+Définition 4.7. Soit f ∈ E , on définit
+I(f )=S
++∞
+0
+f (s)dBs =
+N
+i =Q1
+fi (Bti − Bti−1 ).
+Proposition 4.8. I ( f ) est une variable aléatoire gaussienne, centrée, de variance
+E[(I ( f ))2] = S
++∞
+0 S f 2(s)Sds = SS f SS2
+2.
+Preuve :
+● I (f ) = ∑N
+i=1 fi (Bti − Bti−1 ) = ∑j αj Btj (combinaison linéaire d’un processus gaussien) est une variable aléatoire gaussienne.
+● E[I ( f )] = 0(= ∑j αj E[Btj ]))
+● Enfin, on a
+Var[I ( f )] = Var
+N
+i =Q1
+fi (Bti − Bti−1 )
+=
+N
+i =Q1
+f2
+i Var(Bti − Bti−1 )
+=
+N
+i =Q1
+f2
+i (ti − ti−1)
+= SS f SS2
+2.
+Propriété 4.9. L’application E → L2(Ω, F , P)
+f ↦ I ( f ) est donc une isométrie : E[(I ( f ))2] = SS f SS22.
+Propriété 4.10. I est linéaire : f , g ∈ E , λ, μ ∈ R I (λ f + μg ) = λI ( f ) + μI (g ).
+Propriété 4.11. Pour tout g1, . . . , gk ∈ E ,
+S
++∞
+0
+g1(s)dBs , . . . , S
++∞
+0
+gk (s)dBs
+est un vecteur gaussien centré de covariance
+Cov(I (gk ), I (gl )) = S
++∞
+0
+gk (s)gl (s)ds = ⟨gk , gl ⟩L2 .
+Preuve : À faire en exercice.
+
+
+30 CHAPITRE 4. INTÉGRALE DE WIENER
+4.3 Intégrales de Wiener d’une fonction de L2(R+)
+Définition 4.12. Soit f ∈ L2(R+), on définit
+I ( f ) d=ef S
++∞
+0
+f (s)dBs ∶= lim
+n→+∞ S
++∞
+0
+fn(s)dBs ,
+où ( fn)n∈N est une suite de fonctions de E telle que fn
+L2
+Ð→
+n→+∞
+f.
+Proposition 4.13. I ( f ) est une variable aléatoire gaussienne, centrée, de variance Var(I ( f )) = SS f SS22 et si f , g ∈
+L2(R+)
+Cov(I ( f ), I (g )) = E[I ( f )I (g )] = S
++∞
+0
+f (s)g (s)ds = ⟨ f , g ⟩L2 .
+Preuve : Soit f ∈ L2(R+), alors comme E est dense dans L2(R+), il existe une suite ( fn)n∈N de fonctions de E
+( fn ∈ E , ∀n ∈ N), telle que fn
+L2
+Ð→
+n→+∞
+f , i.e. SS fn − f SS2 Ð→
+n→+∞
+0. Soit n, m ∈ N,
+E[(I ( fn) − I ( fm))2] = E[(I ( fn − fm))2] = SS fn − fmSS2
+2 Ð→
+n,m→+∞
+0,
+la limite vers 0 vient du fait que SS fn − f SS2 Ð→
+n→+∞
+0, donc ( fn)n est une suite de Cauchy dans L2(R+) qui est
+complet. La suite (I ( fn))n∈N est donc une suite de Cauchy dans L2(Ω, F , P) qui est complet, donc la suite
+(I ( fn))n∈N converge vers I ( f ) gaussienne (comme limite de gaussienne), centrée car E[I ( fn)] Ð→
+n→+∞
+E[I ( f )], enfin
+Var(I ( f )) = lim
+n→+∞
+Var(I ( fn)) = lim
+n→+∞SS fnSS2 = SS f SS2
+2.
+On a donc prolongé I ( f ) à L2(R+) :
+L2(R+) → L2(Ω, F , P)
+f ↦ I ( f ) = ∫ +∞
+0 f (s)dBs
+linéaire, isométrique, I ( f ) ∼ N (0, SS f SS22) et E[I ( f )I (g )] = ⟨ f , g ⟩L2 .
+Plus généralement, si f ∈ L2
+Loc (R+)(⇔ ∫ t
+0 S f (s)S2ds < +∞, ∀t ≥ 0), on définit pour tout t ≥ 0
+S
+t
+0
+f (s)dBs = S
++∞
+0
+f (s)1]0,t](s)dBs .
+Si on pose g(t)(s) = f (s)1]0,t](s) ∈ L2(R+), on a :
+S
++∞
+0 Sg(t)(s)Sds = S
+t
+0 S f (s)Sds < +∞,
+on en déduit que pour un t fixé,
+S
+t
+0
+f (s)dBs ∼ N 0, S
+t
+0 S f (s)S2ds ,
+et pour tout s, t ≥ 0,
+Cov S
+t
+0
+f (u)dBu, S
+s
+0
+g (v)dBv = S
+s∧t
+0
+f (u)g (u)du.
+En particulier,
+S
+s∧t
+0
+f (u)g (u)du = 0 ⇒ S
+t
+0
+f (u)dBu et S
+t
+0
+g (v)dBv indépendantes (car gaussiennes).
+
+
+4.4. APPROXIMATION 31
+4.4 Approximation
+Soit f ∶ R+ → R continue.
+Proposition 4.14.
+n
+i =Q1
+f (ti −1)(Bti − Bti−1 ) L2
+Ð→
+n→+∞ S
+t
+0
+f (s)dBs , ti = i t
+n.
+Rappel : f continue ⇒ ∫ t
+0 S f (s)S2ds < +∞, ∀t ≥ 0.
+Preuve : Posons
+ω [0, t ], f , t
+n = sup
+0≤s ,s ′ ≤t Ss−s′S≤ t
+n
+S f (s) − f (s′)S = ωn
+f continue sur [0, t ] ⇒ f uniformément continue sur [0, t ] ⇒ ωn Ð→
+n→+∞
+0. On peut écrire
+n
+i =Q1
+f (ti −1)(Bti − Bti−1 ) − S
+t
+0
+f (s)dBs = S
+t
+0 ( fn(s) − f (s))dBs ,
+où
+fn(s) =
+n
+i =Q1
+f (i − 1)t
+n 1] (i−1)t
+n ,it
+n ](s) ∈ L2(R+).
+On en déduit
+E
+n
+i =Q1
+f (ti −1)(Bti − Bti−1 ) − S
+t
+0
+f (s)dBs
+2
+=
+isométrie S
+t
+0 S fn(s) − f (s)S2ds
+≤
+n
+i =Q1 S
+ti
+ti −1
+S f (ti−1) − f (s)S2ds
+≤ ω2
+n×n× t
+n Ð→
+n→+∞
+0
+4.5 Première formule d’intégration par parties (Itô)
+Proposition 4.15. Soit t ≥ 0 fixé. Soit f de classe C 1 sur [0, t ]. Alors
+S
+t
+0
+f (s)dBs = f (t )Bt − S
+t
+0
+f ′(s)Bs ds.
+Preuve : ∫ t
+0 f (s)dBs est bien une intégrale de Wiener car f est C 1 donc f ∈ L2
+Loc (R+), ∫ t
+0 f ′(s)Bs ds intégrale du
+processus gaussien à trajectoire continue f ′(s)Bs . Soit
+fn(s) =
+n
+i =Q1
+f (ti −1)1]ti−1,ti ](s), ti = i t
+n.
+Par isométrie de l’intégrale de Wiener et le résultat d’approximation, on a
+S
+t
+0 S fn(s) − f (s)S2ds = E S
+t
+0
+fn(s)dBs − S
+t
+0
+f (s)dBs
+2
+Ð→
+n→+∞
+0.
+
+
+32 CHAPITRE 4. INTÉGRALE DE WIENER
+On peut écrire
+S
+t
+0
+fn(s)dBs =
+n
+i =Q1
+f (ti −1)(Bti − Bti−1 )
+= f (0)(Bt1 − B0) + f (t1)(Bt2 − Bt1 ) + ⋅ ⋅ ⋅ + f (tn−1)(Btn − Btn−1 ) = Bt1 ( f (0) − f (t1)) + Bt2 ( f (t1) − f (t2)) + ⋅ ⋅ ⋅ + Btn−1 ( f (tn−2) − f (tn−1) + f (tn−1)Btn .
+Quand n → +∞,
+f (n − 1)t
+n Ð→
+n→+∞
+f (t ) car f est de classe C 1
+Btn = Bt ,
+et on peut écrire
+( f (ti−1) − f (ti ))Bti = − S
+ti
+ti −1
+f ′(s)ds Bti .
+On trouve donc
+S
+t
+0
+fn (s)dBs = f (tn−1)Btn
+ ́11111111111111111111111 ̧11111111111111111111111¶
+n→Ð+→∞ f (t )Bt
+−
+n−1
+i =Q1 S
+ti
+ti −1
+( f ′(s)Bti )ds.
+Il reste à montrer que
+n−1
+i =Q1 S
+ti
+ti −1
+f ′(s)Bti ds Ð→
+n→+∞ S
+t
+0
+f ′(s)Bs ds p.s.
+On a
+S
+t
+0
+f ′(s)Bs ds −
+n−1
+i =Q1 S
+ti
+ti −1
+f ′(s)Bti ds =
+n−1
+i =Q1 S
+ti
+ti −1
+f ′(s)(Bs − Bti )ds + S
+t
+tn−1
+f ′(s)Bs ds
+⇒U S
+t
+0
+f ′(s)Bs ds −
+n−1
+i =Q1 S
+ti
+ti −1
+f ′(s)Bti dsU ≤
+n−1
+i =Q1 S
+ti
+ti −1
+S f ′(s)SSBs − Bti Sds + S
+t
+tn−1 S f ′(s)Bs Sds
+≤ sup
+s∈[ti−1,ti ] i =1,...,n
+SBs − Bti S
+ ́11111111111111111111111111111111111111111111 ̧1111111111111111111111111111111111111111111¶
+n→Ð+→∞0
+S
+tn−1
+0 S f ′(s)Sds
+ ́1111111111111111111111111111111111111111 ̧111111111111111111111111111111111111111¶
+n→Ð+→∞∫
+t
+0 S f ′(s)Sds<+∞
++S
+t
+tn−1 S f ′(s)Bs Sds
+ ́1111111111111111111111111111111111111111111 ̧1111111111111111111111111111111111111111111¶
+n→Ð+→∞0
+,
+par continuité de B . On conclut que
+S
+t
+0
+f (s)dBs = f (t )Bt − S
+t
+0
+f ′(s)Bs ds.
+Corollaire 4.16. t ↦ ∫ t
+0 f (s)dBs est à trajectoires continues.
+Exemple 4.17. La formule d’Itô est souvent utilisée à l’envers :
+S
+t
+0
+sBsds = t2
+2 Bt −S
+t
+0
+s2
+2 dBs = S
+t
+0
+t2
+2 − s2
+2 dBs .
+Exercice 4.18. Soit B = (Bt )t≥0 un mouvement brownien standard. Soit
+X =S
+1
+0
+t dBt et Y = S
+1
+0
+t 2dBt .
+Déterminer la loi jointe de (X , Y ).
+
+
+4.6. PROPRIÉTÉS DES INTÉGRALES DE WIENER 33
+Exercice 4.19. Soient (Bt )t≥0 un mouvement brownien standard et Zt = Bt − t B1, avec 0 ≤ t ≤ 1. On note Ft = σ(Bs , 0 ≤ s ≤ t ).
+1. Z = (Zt )0≤t≤1 est-il Ft -adapté ?
+2. Montrer que B1 et ∫ 1
+0 Zudu sont des variables aléatoires gaussiennes indépendantes. Calculer la loi de
+∫1
+0 Zu du.
+4.6 Propriétés des intégrales de Wiener
+Soit B = (Bt )t≥0 un Ft − P−mouvement brownien standard. Soit f ∈ L2
+Loc (R+). On définit
+I(f )=S
+t
+0
+f (s)dBs = lim
+n→+∞,L2
+n
+i =Q1
+f (ti −1)(Bti − Bti−1 )
+ ́11111111111111111111111111111111111111111111111111111111111111111 ̧1111111111111111111111111111111111111111111111111111111111111111¶
+quantités qui sont toutes Ft −mesurables
+,0 = t0 < t1 < ⋅⋅⋅ < tn = t ,
+I ( f ) est donc adapté.
+Proposition 4.20. Soit f ∈ L2
+Loc (R+), de classe C 1. Soit M f
+t =∫ t
+0 f (s)dBs .
+1. (M f
+t )t≥0 est un processus gaussien à trajectoires continues tel que
+μ(t ) = E(M f
+t ) = 0 et Σ(s, t ) = Cov(M f
+t ,Mf
+s )=S
+s∧t
+0
+f 2(u)du.
+2. (M f
+t )t≥0 est une Ft − P−martingale.
+3. ∀a ∈ R, Zta = exp aM f
+t − a2
+2S
+t
+0
+f 2(s)ds est une Ft − P−martingale.
+Preuve :
+1. Soient 0 ≤ t1 < ⋅ ⋅ ⋅ < tn, a1 et . . . , an ∈ R, alors ∑n
+i =1 ai M f
+ti = lim ∑ αj Btj est bien une variable aléatoire gaussienne car B est un processus gaussien. La formule d’intégration par parties implique que les trajectoires sont continues :
+Mf
+t = Bt f (t) − S
+t
+0
+Bs f ′(s)ds.
+2. (i) M f
+t est Ft −mesurable.
+(ii) E[SM f
+t S] C≤-S
+√t (E[SM f
+t S2])1~2 = √t SS f SS2 par isométrie, donc M f
+t est bien intégrable.
+(iii) Soient 0 ≤ s ≤ t , E[M f
+t −M f
+s SFs ] = E ∫ t
+s f (u)dBuUFs ]. On peut approcher f par une suite de fonction
+( fn)n∈N en escaliers dans L2 et on a
+lim
+n→+∞ S
+t
+s
+fn(u)dBu = S
+t
+s
+f (u)dBu,
+dans L2 donc dans L1. On a donc
+E VE S
+t
+s
+fn(u)dBuUFs − E S
+t
+s
+f (u)dBuUFs V = E VE S
+t
+s ( fn(u) − f (u))dBuUFs V
+≤ E E VS
+t
+s ( fn(u) − f (u))dBuV UFs
+≤ E VS
+t
+s
+fn(u)dBu − S
+t
+s
+f (u)dBuV Ð→
+n→+∞
+0.
+
+
+34 CHAPITRE 4. INTÉGRALE DE WIENER
+Donc
+ES
+t
+s
+f n (u )dBu UFs
+L1
+Ð→
+n→+∞
+ES
+t
+s
+f (u)dBuUFs .
+Or on a pour s = t0 < t1 < ⋅ ⋅ ⋅ < tN = t ,
+E[I ( fn)SFs] = E[
+N
+i =Q1
+fi (Bti − Bti−1 )SFs ] =
+N
+i =Q1
+fi E[Bti − Bti−1
+ ́111111111111111111 ̧11111111111111111¶
+∐ Fs
+SFs] =
+N
+i =Q1
+fi E[Bti − Bti−1 ] = 0.
+On en déduit que E[M f
+t −Mf
+s SFs ] = E ∫ t
+s f (u)dBuSFs = 0.
+3. (i) Zta = exp aM f
+t − a2
+2 ∫t
+0 S f (s)S2ds est Ft −adapté (car image par une application continue d’un pro
+cessus Ft −adapté).
+(ii) E U exp aM f
+t − a2
+2 ∫t
+0 S f (s)S2ds U = E exp aM f
+t − a2
+2 ∫t
+0 S f (s)S2ds = 1, car M f
+t ∼ N (0, SS f SS22) et
+E[eaM f
+t ] = e a2
+2 SS f SS2
+2.
+(iii) On a
+Za
+t −Za
+s = exp aM f
+t − a2
+2S
+t
+0 S f 2(s)Sds − exp aM f
+s − a2
+2S
+s
+0 S f (u)S2du
+= Za
+s exp a (M f
+t −Mf
+s)
+ ́111111111111111111111111 ̧11111111111111111111111¶
+=∫
+t
+s f (u)dBu
+− a2
+2S
+t
+s S f (u)S2du − 1 .
+On obtient donc
+E[Z a
+t −Za
+s SFs ] = Z a
+s E exp a S
+t
+s
+f (u)dBu
+ ́1111111111111111111111111111111 ̧1111111111111111111111111111111¶
+∐ Fs
+− a2
+2S
+t
+s S f (u)S2du − 1 UFs
+et finalement,
+E[Z a
+t −Za
+s SFs ] = Z a
+s E exp a S
+t
+s
+f (u)dBu
+ ́1111111111111111111111111111111 ̧1111111111111111111111111111111¶
+∐ Fs
+− a2
+2S
+t
+s S f (u)S2du − 1 = Z a
+s (1 − 1) = 0.
+car ∫ t
+s f (u)dBu ∼ N 0, ∫ t
+s S f (u)S2du .
+4.7 Le processus d’Ornstein-Uhlenbeck
+Problématique : Existe-t-il un processus réel aléatoire (Xt )t≥0 à trajectoires continues tel que :
+Xt = X0 +θS
+t
+0
+Xs ds + σBt , (4.1)
+où B = (Bt )t≥0 est le mouvement brownien standard, X0 une variable aléatoire, θ ∈ R et σ > 0 ?
+● Si σ = 0, dXt
+dt = θXt , qui a pour solution Xt = X0eθt .
+
+
+4.7. LE PROCESSUS D’ORNSTEIN-UHLENBECK 35
+● S’il y a du "bruit", dXt
+dt = θXt + σ "dBt "
+dt .
+Comment donner un sens à (4.1) ? Supposons que θ ≠ 0 (sinon Xt = X0 + σBt ). On cherche X = (Xt )t≥0 tel que
+Xt −θS
+t
+0
+Xs ds = X0 + σBt .
+On multiplie de part et d’autre par e−θt :
+e−θt Xt − θ S
+t
+0
+Xs ds = e−θt (X0 + σBt )
+⇔d
+dt e−θt S
+t
+0
+Xs ds = e−θt (X0 + σBt )
+⇔e−θt S
+t
+0
+Xsds = S
+t
+0
+e−θs (X0 + σBs )ds
+⇔e−θt S
+t
+0
+Xsds = X0
+e−θs
+−θ
+t
+0 +σS
+t
+0
+e−θs Bs ds
+⇔e−θt S
+t
+0
+Xsds = X0
+θ (1 − e−θt ) + σ S
+t
+0
+e−θs Bs ds
+⇔S
+t
+0
+Xsds = X0
+θ (eθt − 1) + σ S
+t
+0
+eθ(t−s)Bs ds
+On dérive la dernière égalité pour obtenir :
+Xt = X0eθt + σθ S
+t
+0
+eθ(t−s)Bs ds + σBt .
+La formule d’intégration par parties pour l’intégrale de Wiener donne :
+S
+t
+0
+e−θs dBs = e−θt Bt + S
+t
+0 θe−θs Bs ds.
+En remplaçant dans l’équation précédente, on obtient :
+Xt = X0eθt + σeθt S
+t
+0
+e−θs dBs − e−θt Bt + σBt
+⇔Xt = X0eθt + σ S
+t
+0
+eθ(t−s)dBs . (4.2)
+Xt est un processus à trajectoires continues vérifiant (4.1).
+Théorème 4.21. L’équation Xt = X0 + θ ∫ t
+0 Xs ds + σBt admet pour unique solution Xt = X0eθt + σ ∫ t
+0 eθ(t−s)dBs ,
+où X = (Xt )t≥0 est un processus gaussien à trajectoires continues de moyenne si X0 ≡ x0 (variable déterministe)
+μ(t ) = E[Xt ] = x0eθt et de variance σ2
+2θ (e2θt − 1). X est appelé processus d’Ornstein-Uhlenbeck.
+Preuve : Si X 1 et X 2 sont deux solutions de l’équation (4.1), alors Z = X 1 − X 2 vérifie l’EDO
+Zt = θ S
+t
+0
+Zs ds,
+dont l’unique solution est zéro (cette équation s’écrit Z ′(t ) = θZ (t ), Z (0) = 0). Ainsi X 1 ≡ X 2 et l’équation (4.1)
+a bien une unique solution qui est d’après ce qui précède Xt = X0eθt + σ ∫ t
+0 eθ(t−s)dBs .
+
+
+36 CHAPITRE 4. INTÉGRALE DE WIENER
+De plus,
+Xt = processus déterministe + σeθt S
+t
+0
+e−θs dBs
+ ́111111111111111111111111111 ̧11111111111111111111111111¶
+intégrale de Wiener
+est un processus gaussien avec
+μ(t ) = E(Xt ) = E X0eθt + σeθt S
+t
+0
+e−θs dBs .
+Supposons que X0 ≡ x0 déterministe,
+μ(t ) = x0eθt + σeθt E S
+t
+0
+e−θs dBs
+ ́1111111111111111111111111111111111111111 ̧111111111111111111111111111111111111111¶
+=0
+= x0eθt
+et
+Var(Xt ) = E[(Xt − μ(t ))2]
+= E σeθt S
+t
+0
+e−θs dBs
+2
+= σ2e2θt E S
+t
+0
+e−θs dBs
+2
+ ́1111111111111111111111111111111111111111111111111111 ̧1111111111111111111111111111111111111111111111111111¶
+=∫
+t
+0 e−2θs ds
+par isométrie canonique de l’intégrale de Wiener
+= σ2e2θt (1 − e−2θt )
+2θ = σ2
+2θ (e2θt − 1).
+Exercice 4.22. Soit X = (Xt )t≥0 un processus d’Ornstein-Uhlenbeck.
+1. Calculer K (s, t ) = Cov(Xs , Xt ) si X0 ≡ x0.
+2. Supposons que X0 ∼ N (m, σ20) indépendante de B = (Bt )t≥0. Calculer μ(t ) = E[Xt ] et K (s, t ) = Cov(Xs , Xt ).
+Exercice 4.23 (Le processus de Vasicek).
+1. Déterminer la solution Y = (Yt )t≥0 de l’équation
+Yt = Y0 + S
+t
+0
+a(Ys − b)ds + σBt , a, b ∈ R, σ > 0.
+2. Si X0 ∼ N (m, σ20) et si X0 est indépendante de B = (Bt )t≥0„ calculer la fonction espérance μ(t ) = E[Yt ] et la fonction de covariance Σ(s, t ) = Cov(Ys , Yt ).
+3. Montrer que pour s ≤ t , on a
+Yt = b + (Ys − b)ea(t−s) + σ S
+t
+s
+ea(t−u)dBu .
+4. Considérons la filtration (Ft )t≥0 définie par Ft = FtB ∨ σ{Y0}, où FtB est la filtration naturelle de B . Pour tout 0 ≤ s ≤ t , déterminer E[Yt SFs ]
+
+
+Chapitre 5
+Intégrale stochastique d’Itô
+Soient (Ω, F , P) un espace probabilisé et B = (Bt )t≥0 le mouvement brownien standard. On définit Ft = σ{Bu, 0 ≤ u ≤ t } la filtration naturelle de B . On veut donner un sens à dXt
+dt = f (Xt ) + g (Xt ) "dBt "
+dt . (5.1)
+On écrira (5.1) :
+dXt = f (Xt )dt + g (Xt )dBt .
+Cette équation n’a de sens que si on en donne un à
+Xt = X0 +S
+t
+0
+f (Xs )ds + S
+t
+0
+g (Xs )dBs .
+5.1 Cas des processus étagés
+Soit E l’espace des processus étagés adaptés :
+E = Φ = (Φt )t≥0 ∶ Φt =
+n−1
+i =Q0
+Ui 1]ti ,ti+1](t ),Ui ∈ B(Fti ) bornés ∀i = 0, . . . , n − 1, SUi S ≤ k et Ui Fti − mesurables
+Définition 5.1. Pour tout Φ ∈ E, on pose pour t ≥ 0,
+S
+t
+0 Φs dBs =
+n−1
+i =Q0
+Ui (Bti+1∧t − Bti ∧t ) ∀t ≥ 0,
+Si 0 = t0 < t1 < t2 < ⋅ ⋅ ⋅ < tm < t < tm+1 < ⋅ ⋅ ⋅ < tn,
+S
+t
+0 Φs dBs =
+m−1
+i =Q0
+Ui (Bti+1 − Bti ) +Um (Bt − Btm ).
+Théorème 5.2. Soit Φ ∈ E, M = (Mt )t≥0 tel que
+Mt = S
+t
+0 Φs dBs .
+1. M est une Ft -martingale d’espérance nulle :
+ES
+t
+0 Φs dBs = 0 ∀t ≥ 0,
+37
+
+
+38 CHAPITRE 5. INTÉGRALE STOCHASTIQUE D’ITÔ
+2. Mt2 − ∫ t
+0 Φs2ds est une Ft -martingale et en particulier
+ES
+t
+0 Φs dBs
+2
+=E S
+t
+0 SΦ2
+s Sds t ≥ 0.
+Preuve :
+1. Montrons que M est une Ft −martingale d’espérance nulle.
+(i) M est (Ft )t≥0-adapté ⇔ ∀t ≥ 0, Mt est Ft -mesurable.
+(ii) ∀t ≥ 0, Mt est intégrable :
+E[SMt S] = E U
+m−1
+i =Q0
+Ui (Bti+1 − Bti ) +Um (Bt − Btm )U
+≤
+m−1
+i =Q0
+ES ∈B(U ̄Fi ti )
+(Bti+1 − Bti )
+ ́11111111111111111111111111 ̧1111111111111111111111111¶
+∐ Fti
+S + E[ SUmS
+±
+∈B(Ftm )
+SBt − Btm S
+ ́1111111111111111 ̧111111111111111¶
+∐ Ftm
+]
+≤
+SUi S≤k∀i
+k
+m−1
+i =Q0
+3⁄42
+π (ti+1 − ti ) + k
+3⁄42
+π
+√t − tm
+(iii) Soit 0 ≤ s ≤ t < +∞ tels que 0 = t0 ≤ t1 ≤ ⋅ ⋅ ⋅ ≤ ti ≤ s ≤ ti+1 ≤ ⋅ ⋅ ⋅ ≤ t j ≤ t ≤ t j+1 ≤ ⋅ ⋅ ⋅ ≤ tn. Montrons que E[(Mt − Ms )SFs ] = 0. On a
+Mt = S
+t
+0 Φu dBu =
+j −1
+Q
+k =0
+Uk (Btk+1 − Btk ) +U j (Bt − Bt j )
+Ms = S
+s
+0 Φu dBu =
+i −1
+Q
+l =0
+Ul (Btl+1 − Btl ) +Ui (Bs − Bti ),
+on en déduit que
+Mt − Ms =
+j −1
+Q
+k=i +1
+Uk (Btk+1 − Btk ) +U j (Bt − Bt j ) +Ui (Bti+1 − Bs ).
+En passant à l’espérance conditionnelle, on obtient
+E[(Mt − Ms )SFs ] = E
+j −1
+Q
+k=i +1
+Uk (Btk+1 − Btk )SFs + E[U j (Bt − Btj )SFs ] + E[Ui (Bti+1 − Bs )SFs ].
+Concernant le premier terme, on a pour k ∈ {i + 1, . . . , j − 1},
+E Uk (Btk+1 − Btk )SFs = E[E[Uk (Btk+1 − Btk )SFtk ]SFs ] (emboîtement des tribus)
+= E[Uk E[Btk+1 − Btk SFtk ]SFs ] car Uk est Ftk − mesurable et Fs ⊂ Ftk
+= E[Uk E[Btk+1 − Btk ]SFs ] = 0 car Btk+1 − Btk O Ftk .
+De même,
+E[U j (Bt − Btj )SFs ] = 0 conditionner par rapport à Ftj
+E[Ui (Bti+1 − Bs )SFs ] = 0.
+On en déduit donc que E[(Mt − Ms )SFs ] = 0 et donc M = (Mt )t≥0 est une Ft −martingale et E(Mt ) = E(M0) = 0.
+
+
+5.1. CAS DES PROCESSUS ÉTAGÉS 39
+2. Montrons que Mt2 − ∫ t
+0 Φs2ds est une Ft -martingale. Soit 0 = t0 ≤ t1 ≤ ⋅ ⋅ ⋅ ≤ ti ≤ s ≤ ti+1 ≤ ⋅ ⋅ ⋅ ≤ t j ≤ t ≤ t j +1 ≤
+⋅ ⋅ ⋅ ≤ tn. On peut écrire
+E[(Mt − Ms )2SFs ] = E[(M 2
+t − 2Mt Ms + M2
+s )SFs ]
+= E(M 2
+t SFs ) − 2Ms E(Mt SFs )
+ ́11111111111111111 ̧11111111111111111¶
+=Ms
++M 2
+s
+= E[M 2
+t SFs ] − M 2
+s
+= E[M 2
+t −M2
+s SFs ].
+On a donc
+E[M 2
+t −M2
+s SFs ] = E[(Mt − Ms )2SFs ]
+=E
+j −1
+Q
+k=i +1
+Uk (Btk+1 − Btk ) +U j (Bt − Bt j ) +Ui (Bti+1 − Bs )
+2
+SFs
+Calculons l’un des termes croisés pour k ∈ {i + 1, . . . , j − 1} :
+E[UkU j (Btk+1 − Btk )(Bt − Btj )SFs ] = E[E(UkU j (Btk+1 − Btk )(Bt − Btj )SFtj )SFs ]
+= E[UkU j (Btk+1 − Btk )
+ ́111111111111111111111111111111111111111111111111 ̧111111111111111111111111111111111111111111111111¶
+Ft j −mesurable tk <t j ⇒Ftk ⊂Ft j
+E[(Bt − Btj )SFtj ]
+ ́11111111111111111111111111111111111111111111 ̧1111111111111111111111111111111111111111111¶
+=0
+SFs] = 0,
+il en est de même pour tous les termes croisés.
+Calculons les termes carrés :
+E[(M 2
+t −M2
+s )SFs ] =
+j −1
+Q
+k=i +1
+E[U 2
+k (Btk+1 − Btk )2SFs ] + E[U 2
+j (Bt − Btj )2SFs ] + E[U 2
+i (Bti+1 − Bs )2SFs ],
+en conditionnant la première espérance par Ftk , on a
+E[U 2
+k (Btk+1 − Btk )2SFs ] = E[E[U 2
+k (Btk+1 − Btk )2SFtk ]SFs ] = E[U 2
+k E[(Btk+1 − Btk )2]SFs ] = E[U 2
+k (tk+1 − tk )SFs ],
+de la même manière, on conditionne le deuxième terme par Ftj et le troisième terme par Fti . On obtient
+
+
+40 CHAPITRE 5. INTÉGRALE STOCHASTIQUE D’ITÔ
+alors
+E[(M 2
+t −M2
+s )SFs ] =
+j −1
+Q
+k=i +1
+E[U 2
+k SFs ](tk+1 − tk ) + E[U 2
+j SFs ](t − t j ) + E[U 2
+i SFs ](ti+1 − s)
+=E
+j −1
+Q
+k=i +1 S
+tk+1
+tk
+U2
+k du + S
+t
+tj
+U2
+j du + S
+ti +1
+s
+U2
+i du SFs
+=E
+j −1
+Q
+k=i +1 S
+t
+s
+U2
+k 1]tk ,tk+1](u)du + S
+t
+s
+U2
+j 1]tj ,t](u)du + S
+t
+s
+U2
+i 1]s,ti+1] SFs
+=E
+j
+Q
+k=i S
+t
+s
+U2
+k 1]tk ,tk+1](u)duSFs
+=E S
+t
+s
+n−1
+Q
+k =0
+U2
+k 1]tk ,tk+1](u)duSFs car ti ≤ s ≤ t j ≤ t
+=E S
+t
+s
+Φ2
+u duSFs
+=E S
+t
+0 Φ2
+udu − S
+s
+0 Φ2
+u du SFs .
+On a donc
+E M2
+t −S
+t
+0 Φ2
+u duSFs = M 2
+s −S
+s
+0 Φ2
+u du
+et Mt2 − ∫ t
+0 Φ2udu est donc bien une Ft −martingale d’espérance nulle, et on a
+E M2
+t −S
+t
+0 Φ2
+u du = E M 2
+0 −S
+0
+0 Φ2
+udu = 0 ⇒ E S
+t
+0 Φu dBu
+2
+=E S
+t
+0 Φ2
+u du .
+Remarque 5.3. 1. On peut définir l’intégrale stochastique de Φ jusqu’à l’infini :
+Φ ∈ E, SS.SS = E ∫ +∞
+0 Φ2u du
+1~2
+→ L2(Ω)
+Φ ↦ I (Φ) = ∫ +∞
+0 Φu dBu .
+2. On a sup t
+E(Mt2) < +∞ car
+E(M 2
+t)≤E S
++∞
+0 Φ2
+udu =
+n−1
+i =Q0
+E(U 2
+i )(ti+1 − ti ) < +∞.
+La "bonne" notion de mesurabilité pour les processus dont on définira l’intégrale stochastique sont les processus "progressifs".
+Définition 5.4. Un processus Φ = (Φt )t≥0 réel est dit "progressif" (ou progressivement mesurable) si ∀T > 0
+([0, T ] × Ω, B([0, T ]) ⊗ FT ) = → (R, B(R)) (t , ω) ↦ Φt (ω)
+est mesurable (par rapport au couple (t , ω)).
+En particulier, les processus continus à gauche et les processus continus à droite sont progressifs. Et si Φ ∈ E, alors Φ est progressif.
+
+
+5.1. CAS DES PROCESSUS ÉTAGÉS 41
+Définition 5.5. Soit
+Λ2 = Ψ = (Ψt )t≥0 processus réel, progressif tel que E S
++∞
+0 SΨs S2ds < +∞ .
+Proposition 5.6. E est dense dans Λ2.
+Preuve : Λ2 est un espace de Hilbert, pour montrer que E est dense dans Λ2, il suffit de montrer que si K ∈ Λ2
+est orthogonal à E, alors K = 0. Supposons donc que K ∈ Λ2 soit orthogonal à E. Soient 0 ≤ s < t et F une variable aléatoire Fs − mesurable bornée. Avec H = F 1]s,t] ∈ E, on a
+E FS
+t
+s
+Kudu = ⟨H , K ⟩Λ2 = 0. (5.2)
+En posant
+Xt = S
+t
+0
+Kudu, t ≥ 0,
+(5.2) se réécrit : E[F (Xt − Xs )] = 0 pour tout s < t et toute variable Fs −mesurable F bornée, i.e. X = (Xt )t≥t est
+une martingale et Xt ∈ L1(Ω) pour tout t ≥ 0. De plus, X est à variation finie. On peut donc appliquer le résultat suivant : si M est une martingale continue à variation finie, alors pour tout t ≥ 0, Mt = M0 p.s. (ce résultat est montré en TD). On obtient donc
+S
+t
+0
+Kudu = 0, ∀t ≥ 0 p.s.
+Comme 0 = ∫ t
+0 Kudu = ∫R Ku1[0,t](u)du pour tout t ≥ 0, on en déduit que K = 0 dans Λ2.
+Λ2 est un espace de Hilbert pour SSΦSS =
+1⁄2
+E ∫ +∞
+0 SΦs S2ds et E SS.SS = Λ2, où E est la fermeture de E .
+Théorème 5.7 (Théorème-définition). Pour tout Ψ ∈ Λ2, il existe une unique variable aléatoire de L2 notée
+∫
++∞
+0 Ψs dBs , appelée "intégrale stochastique de Ψ par rapport à B " telle que
+ES
++∞
+0 Ψs dBs = 0 et E S
++∞
+0 Ψs dBs
+2
+=E S
++∞
+0 Ψ2
+s ds .
+Preuve : Soit Ψ ∈ Λ2, il existe une suite Ψn ∈ E telle que Ψn Λ2
+Ð→
+n→+∞
+Ψ, i.e.
+ES
++∞
+0 (Ψn
+s − Ψs )2ds Ð→
+n→+∞
+0.
+La suite (Ψn)n≥0 est de Cauchy (car convergente) :
+lim
+n,m→+∞
+ES
++∞
+0 (Ψn
+s − Ψm
+s )2ds = 0
+Or par isométrie, on a
+lim
+n,m→+∞
+ES
++∞
+0 (Ψn
+s − Ψm
+s )2ds = lim
+n,m→+∞
+ES
++∞
+0 (Ψn
+s − Ψm
+s )dBs
+2
+= lim
+n,m→+∞SSI (Ψn ) − I (Ψm )SS2
+L2 = 0,
+où
+I (Ψn) = S
++∞
+0 Ψn
+s dBs et I (Ψm) = S
++∞
+0 Ψm
+s dBs .
+Donc la suite I (Ψn) est de Cauchy dans L2 qui est un espace de Hilbert, donc I (Ψn) admet une limite :
+I (Ψn ) L2
+Ð→
+n→+∞
+I (Ψ) = S
++∞
+0 Ψs dBs .
+
+
+42 CHAPITRE 5. INTÉGRALE STOCHASTIQUE D’ITÔ
+On vient de montrer l’existence d’une limite à I (Ψn), montrons maintenant l’unicité.
+Soit donc une deuxième suite g n ∈ E telle que g n Λ2
+Ð→
+n→+∞
+Ψ et Ψn Λ2
+Ð→
+n→+∞
+Ψ. Alors
+SSg n − ΨnSSΛ2 ≤ SSg n − ΨSSΛ2 + SSΨ − ΨnSSΛ2 Ð→
+n→+∞
+0.
+Or SSg n − Ψn SSΛ2 = E ∫ +∞
+0 (gsn − Ψsn )dBs
+2
+= SSI (g n) − I (Ψn)SSL2 . Donc I (g n) L2
+Ð→
+n→+∞
+I (Ψ).
+B On n’écrit pas (hh(h(h(h(h(h(h(h(
+∫
++∞
+0 Ψs (ω)dBs (ω) mais ∫ +∞
+0 Ψs dBs (ω).
+Remarque 5.8. Si Ψ est un processus étagé, l’intégrale est une intégrale de Wiener et on a donc
+S
++∞
+0 Ψs dBs = iQ
+Ui (Bti+1 − Bti ).
+Localisation : Soit T > 0, Λ2[0, T ] = {Ψ = (Ψt )t∈[0,T ] progressif tel que E[∫ T
+0 Ψs2ds] < +∞} et soit Φ ∈ Λ2[0, T ],
+Φt 1[0,T ](t ) ∈ Λ2, on pose
+S
+T
+0 Φs dBs = S
++∞
+0 Φs 1[0,T ](s)dBs .
+On a donc
+ES
+T
+0 Φs dBs
+2
+=E S
+T
+0 Φ2
+s ds et E S
+T
+0 Φs dBs = 0.
+Si Φ ∈ Λ2
+loc = {Φ = (Φt )t≥0 progressif tel que E[∫ t
+0 Φs2ds] < +∞, ∀t ≥ 0}, alors
+1. M = (Mt )t≥0, avec Mt = ∫ t
+0 Φs dBs est un processus,
+2. M est une Ft −martingale dans Λ2,
+3. Mt2 − ∫ t
+0 Φs2ds est une Ft −martingale dans Λ2,
+4. on note ⟨M ⟩t le processus croissant associé à M : ⟨M ⟩t = ∫ t
+0 Φs2ds.
+Exemple 5.9. L’intégrale ∫ t
+0 Bs dBs a bien un sens car
+ES
+t
+0
+B2
+s ds Fub=ini S
+t
+0 E(B 2
+s )ds = S
+t
+0
+sds = t2
+2 < +∞,
+et on a donc B ∈ Λ2
+loc . Le processus ∫ t
+0 Bs dBs est une Ft −martingale et
+S
+t
+0
+Bs dBs = 1
+2 (B 2
+t − t ).
+B ∫ +∞
+0 Bs dBs n’a pas de sens puisque E ∫ +∞
+0 Bs2ds = +∞.
+5.2 Temps d’arrêt. Martingales locales
+Soit (Ft )t≥0 une filtration.
+
+
+5.2. TEMPS D’ARRÊT. MARTINGALES LOCALES 43
+5.2.1 Temps d’arrêt
+Définition 5.10. Une variable aléatoire réelle T ∶ Ω → R+ = R+ ∪ {+∞} est un Ft −temps d’arrêt si ∀t ≥ 0, {T ≤
+t} ∈ Ft .
+Exemple 5.11. Soit X = (Xt )t≥0 un processus réel Ft −adapté à trajectoires continues. Soit B un fermé de R, alors TB = inf{t ≥ 0 ∶ Xt ∈ B } est un temps d’arrêt (convention inf ∅ = +∞).
+Propriété 5.12. Soit X = (Xt )t≥0 un processus Ft −adapté et T un Ft −temps d’arrêt.
+1. Si T < +∞ p.s., XT est FT −mesurable où
+FT = {A ∈ F ∶ ∀t ≥ 0A ∩ {T ≤ t } ∈ Ft }.
+2. Si T et S sont deux temps d’arrêt, alors T + S et T ∧ S sont des temps d’arrêt.
+Exemple 5.13 (Exemple fondamental). Soit X = (Xt )t≥0 un processus continu adapté partant de 0. Pour tout n ≥ 1, on définit
+Rn = inf{t ≥ 0 ∶ SXt S ≥ n} (avec inf ∅ = +∞).
+C’est un temps d’arrêt. C’est le temps d’entrée dans le fermé ] − ∞, −n] ∪ [n, +∞[ par X , processus continu et adapté.
+a) Rn Ð→
+n→+∞ +∞ p.s.
+En effet, SXt S ≥ n + 1 ⇒ SXt S ≥ n ⇒ Rn ≤ Rn+1 et {Rn ≤ a} = { sup
+t ∈[0,a]
+SXt S ≥ n}. Par continuité des trajectoires
+donc uniforme continuité sur les compacts, on a Za = sup
+t ∈[0,a]
+SXt S < +∞ p.s. Donc
+P(Rn ≤ a) = P(Za ≥ n) Ð→
+n→+∞
+0.
+On en déduit que Rn
+ÐP→
+n→+∞ +∞ ce qui entraîne Rn Ð→
+n→+∞ + ∞ p.s.
+(il existe une φ ∶ N → N une suite croissante telle que Rφ(n)
+p.s.
+Ð→ +∞ (i.e. il existe A ∈ F tel que P(A) = 1 et
+pour tout ω ∈ A, lim
+n→+∞
+Rφ(n)(ω) = +∞), comme la suite (Rn)n est croissante, pour tout m ≥ φ(n) et ω ∈ A,
+Rm(ω) ≥ Rφ(n)(ω). Soit K > 0, il existe n0 ∈ N tel que pour tout ω ∈ A, Rφ(n0)(ω) > K et donc pour tout
+n > φ(n0) et ω ∈ A, Rn(ω) > Rφ(n0)(ω) > K , on en déduit que Rn
+Ðp.s→ +∞.)
+b) Pour tout t ≥ 0, SXt∧Rn S ≤ n et SXRn S = n (ce serait faux pour un processus non continu).
+Proposition 5.14. Soit T un temps d’arrêt et S une variable aléatoire FT −mesurable telle que S ≥ T . Alors S est aussi un temps d’arrêt. En particulier, si T est un temps d’arrêt
+Tn =
++∞
+Q
+k =0
+k +1
+2n 1{k2−n <T ≤(k+1)2−n } + (+∞)1{T =+∞},
+est une suite de temps d’arrêt qui décroît vers T .
+Preuve : On peut écrire {S ≤ t } = {S ≤ t } ∩ {T ≤ t } ∈ Ft car {S ≤ t } ∈ FT (S est FT -mesurable). La deuxième partie en découle facilement puisque Tn ≥ T et on peut montrer que Tn est FT −mesurable. En effet, Tn est FT -mesurable si pour tout u ≥ 0, {Tn ≤ u} ∈ FT . Pour cela, il faut voir que pour tout t ≥ 0, on a {Tn ≤ u} ∩ {T ≤ t } ∈ Ft . Or on peut écrire
+{Tn ≤ u} = Tn ≤ [2nu]
+2n =
+[2n u]−1
+k =0
+Tn = k + 1
+2n =
+[2n u]−1
+k =0
+T∈ k
+2n , k + 1
+2n = T ≤ [2nu]
+2n .
+On a donc {Tn ≤ u} ∩ {T ≤ t } = T ≤ t ∧ [2nu]
+2n ∈ Ft ∧ [2n u]
+2n ⊂ Ft .
+
+
+44 CHAPITRE 5. INTÉGRALE STOCHASTIQUE D’ITÔ
+Proposition 5.15. Soit X = (Xt )t≥0 un processus progressif et T un temps d’arrêt. Alors XT 1{T <+∞} est FT −mesurable.
+Preuve : On commence par montrer que Y ∶ Ω → R est FT −mesurable si et seulement si pour tout t ≥ 0, Y 1T ≤t est Ft −mesurable. En effet, si Y 1T ≤t est Ft −mesurable, alors ∀A ∈ B(R), on a
+{Y ∈ A} ∩ {T ≤ t } = {Y 1{T ≤t} ∈ A} ∩ {T ≤ t } ∈ Ft ,
+donc {Y ∈ A} ∈ FT . Inversement, si Y est FT −mesurable, alors {Y 1{T ≤t} ∈ A} = ({Y ∈ A} ∩ {T ≤ t }) ∪ ({0 ∈
+A} ∩ {T > t }) ∈ Ft .
+On vérifie la FT −mesurabilité de Y = XT 1{T <+∞} en montrant que pour tout t ≥ 0,
+Y 1{T ≤t} = XT 1{T ≤t} = XT ∧t 1{T ≤t}
+est Ft −mesurable. En effet, XT ∧t est la composition de deux applications mesurables :
+(Ω, Ft ) → ([0, t ] × Ω, B([0, t ]) ⊗ Ft )
+ω ↦ (T (ω) ∧ t , ω) et ([0, t ] × Ω, B([0, t ]) ⊗ Ft ) → (R, B(R))
+(s, ω) ↦ Xs(ω)
+car T est un temps d’arrêt et X est progressif. On conclut que XT ∧t donc aussi XT ∧t 1{T ≤t} est Ft -mesurable.
+Remarque 5.16. Il est nécessaire de considérer XT 1{T <+∞} plutôt que XT tant que X∞ n’est pas défini. Par contre, si X∞ est défini et est F∞−mesurable alors XT est FT −mesurable. En effet, comme XT = XT 1{T =+∞} + XT 1{T <+∞} avec XT 1T <+∞ FT −mesurable d’après la proposition précédente, il reste à voir que XT 1{T =+∞} est aussi FT −mesurable, i.e. pour tout A ∈ B(R) :
+{XT 1{T =+∞} ∈ A} = ({X∞ ∈ A} ∩ {T = +∞}) ∪ ({0 ∈ A} ∩ {T < +∞}) ∈ FT .
+Pour cela, on a {XT 1{T =+∞} ∈ A} ∩ {T ≤ t } = {0 ∈ A} ∩ {T ≤ t } ∈ Ft quand t < +∞, tandis que pour t = +∞,
+{XT 1{T =+∞}} ∩ {T ≤ +∞} = ({X∞ ∈ A} ∩ {T = +∞}) ⋃({0 ∈ A} ∪ {T < +∞}) ∈ F∞.
+5.2.2 Théorème d’arrêt
+Définition 5.17. Une famille de variables aléatoires (Xt )t≥0 dans L1(Ω, F , P) est dite uniformément intégrable si
+lim
+a→+∞
+sup
+t ≥0
+E[SXt S1{SXt S>a}] = 0.
+La propriété d’uniforme intégrabilité implique d’être borné dans L1(Ω, F , P). La réciproque est fausse.
+Proposition 5.18. Soit (Xt )t≥0 une famille de variables aléatoires dans (Ω, F , P).
+1. Si (Xt )t≥0 est bornée dans Lp (Ω, F , P) pour un certain p > 1, alors elle est uniformément intégrable.
+2. S’il existe une variable aléatoire positive Z telle que SXt S ≤ Z p.s. pour tout t ≥ 0 et E[Z ] < +∞, alors le processus (Xt )t≥0 est uniformément intégrable.
+Preuve :
+1. Pour tout a ≥ 1, on a
+∀x > a, x ≤ xp,
+et on pose φ(a) = sup
+x>a
+x
+xp . On a lima→+∞ φ(a) = 0. On en déduit pour tout t ≥ 0,
+E[SXt S1{SXt S>a}] ≤ φ(a)E[SXt Sp 1{SXt S>a}] ≤ φ(a)E[SXt Sp ].
+Comme (Xt )t≥0 est bornée dans Lp (Ω, F , P) par supt≥0 E[SXt Sp ], l’inégalité
+E[SXt S1{SXt S>a}] ≤ φ(a) sup
+t ≥0
+E[SXt Sp ],
+permet de conclure que le processus (Xt )t≥0 est uniformément intégrable.
+
+
+5.2. TEMPS D’ARRÊT. MARTINGALES LOCALES 45
+2. Pour tout t ≥ 0, comme SXt S ≤ Z p.s., on a
+E[SXt S1{SXt S>a}] ≤ E[SZ S1{SZ S>a}].
+Le théorème de convergence dominée permet alors de conclure que le processus (Xt )t≥0 est uniformément intégrable.
+Quelques rappels sur les processus discrets
+Théorème 5.19 (Théorème d’arrêt de Doob). Soit X = (Xn)n∈N une martingale (surmartingale respectivement) par rapport à une filtration (Fn)n∈N. Si S et T sont deux temps d’arrêt bornés à valeurs dans N ∪ {+∞} tels que S ≤ T p.s., alors E[XT SFS ] = XS p.s.
+(E[XT SFS ] ≤ XS p.s. respectivement).
+Preuve : admis
+Théorème 5.20. Soit (Xn)n∈N une martingale par rapport à la filtration (Fn)n∈N. Alors les trois assertions suivantes sont équivalentes :
+(i) la famille (Xn)n∈N est uniformémement intégrable,
+(ii) Xn converge p.s. et dans L1(Ω, F , P) lorsque n → +∞ vers une variable aléatoire X∞,
+(iii) la martingale (Xn)n∈N est fermée.
+Lorsque l’une de ces assertions est vérifiée, on a pour tout n ∈ N, Xn = E[X∞SFn] p.s.
+Retour aux processus continus
+Définition 5.21 (Martingale fermée). Une surmartingale (Xt )t≥0 est dite fermée par une variable aléatoire X∞ ∈
+L1 si pour tout t ≥ 0, on a Xt ≥ E[X∞SFt ] p.s..
+Une martingale (Xt )t≥0 est dite fermée (comme martingale) par une variable aléatoire X∞ ∈ L1 si pour tout t ≥ 0, on a Xt = E[X∞SFt ] p.s..
+Remarque 5.22. Une martingale peut être fermée en tant que surmartingale mais pas en tant que martingale : considérer par exemple une martingale positive (non nulle), elle est fermée par 0 en tant que surmartingale (Xt ≥ E[0SFt ]), pourtant elle n’est pas nulle.
+Proposition 5.23. Soit X = (Xt )t≥0 une martingale continue à droite. Alors, il y a équivalence entre les assertions suivantes :
+1. X est fermée (par X∞) ;
+2. la famille (Xt )t≥0 est uniformément intégrable ;
+Preuve : admis
+Théorème 5.24 (Théorème d’arrêt de Doob). Soit X une martingale continue à droite fermée par X∞, variable aléatoire F∞−mesurable. Alors, si S et T sont deux temps d’arrêt avec S ≤ T , on a
+XS = E[XT SFS ] p.s.,
+avec la convention XT = X∞ sur {T = +∞}. En particulier, XS = E[X∞SFS ] p.s..
+Preuve : Soit T l’ensemble de tous les temps d’arrêt qui prennent leurs valeurs dans un sous-ensemble fini de
+R ∪ {+∞}.
+
+
+46 CHAPITRE 5. INTÉGRALE STOCHASTIQUE D’ITÔ
+● On commence par montrer que pour tout τ ∈ T, E[Xτ] = E[X0]. Supposons que τ soit à valeurs dans {0 = t1 < ⋅ ⋅ ⋅ < td }, alors on peut écrire
+Xτ = 1≤iQ≤d
+1
+{τ=ti } X ti
+= 1≤iQ<d
+(1{τ≥ti } − 1{τ≥ti+1})Xti + 1{τ≥td } Xtd
+= 1≤iQ≤d
+1
+{τ≥ti } Xti − 1<iQ≤d
+1
+{τ≥ti } X ti−1
+= X0 + 1<iQ≤d
+1
+{τ≥ti }(Xti − Xti−1 )
+Or on a {τ ≥ ti } = {τ ≤ ti−1}c ∈ Fti−1 et X est une martingale, on obtient donc le résultat voulu :
+E[Xτ] = E[X0]. (5.3)
+● (5.3) permet de montrer le résultat dans le cas particulier où S et T sont dans T. Soit A ∈ FS . Posons SSA ∶= S1A + (+∞)1Ac et TSA = T 1A + (+∞)1Ac . Ce sont deux temps d’arrêt : soit s ≥ 0, S1S≤s = (S ∧ s)1S≤s est Fs −mesurable comme produit de deux fonctions mesurables, car S est un temps d’arrêt. Donc d’après la preuve de la proposition 5.15, S est FS −mesurable et donc {SSA ≤ s} = {S ≤ s} ∩ A ∈ Fs . On applique 5.3 à SSA et TSA :
+E[XS 1A] + E[X∞1Ac ] = E[X0] = E[XT 1A] + E[X∞1Ac ],
+on en déduit que XS = E[XT SFS ] p.s. par définition de l’espérance conditionnelle car XS est FS −mesurable.
+● Le cas général repose sur la continuité à droite de X . On introduit les deux suites :
+Sn =
+n2n −1
+Q
+k =0
+k +1
+2n 1{k2−n <S≤(k+1)2−n } + (+∞)1{S≥n}
+Tn =
+n2n −1
+Q
+k =0
+k +1
+2n 1{k2−n <T ≤(k+1)2−n } + (+∞)1{T ≥n}.
+D’après la Proposition (5.14), (Sn)n∈N et (Tn)n∈N sont deux suites de temps d’arrêt qui décroissent vers S et T respectivement et pour tout n ∈ N, Sn ≤ Tn. Sn et Tn appartiennent à T, on a donc
+XSn = E[XTn SFSn ].
+Soit A ∈ FS , on a FS ⊂ FSn donc A ∈ FSn , on peut donc écrire d’après la définition de l’espérance conditionnelle
+E[1A XSn ] = E[1A XTn ].
+Par continuité à droite des trajectoires, on a p.s., XS = lim
+n→+∞
+XSn et XT = lim
+n→+∞
+XTn , et ces limites ont aussi
+lieu dans L1(Ω, F , P) d’après le Théorème (5.20) pour les martingales à temps discrets. On en déduit que
+XS et XT sont dans L1(Ω, F , P), et en passant à la limite, on obtient donc
+E[1A XS ] = E[1A XT ],
+d’où par définition de l’espérance conditionnelle, comme XS est FS mesurable, XS = E[XT SFS ].
+Corollaire 5.25. Si X est une (Ft )t≥0−martingale continue à droite et si S et T sont deux temps d’arrêt tels que S ≤ T ≤ K , K étant une constante finie (S et T sont bornés), alors XT est intégrable et E[XT SFS ] = XS p.s.
+Étant donné un temps d’arrêt T , on définit le processus arrêté X T = (XtT )t≥0 par XtT = Xt∧T , c’est le processus qui vaut (Xt ) tant que t ≤ T puis qu’on arrête à sa valeur en T , XT , pour les dates ultérieures à T .
+
+
+5.2. TEMPS D’ARRÊT. MARTINGALES LOCALES 47
+Corollaire 5.26. Soit X une martingale continue à droite uniformément intégrable et soit T un temps d’arrêt. Alors le processus (XtT )t≥0 est aussi une martingale uniformément intégrable, et
+∀t ≥ 0, X T
+t = E[XT SFt ] p.s. (5.4)
+avec la convention XT = X∞ sur {T = +∞}.
+Preuve : Il suffit d’établir (5.4) : on aura alors une martingale fermée donc uniformément intégrable. Rappelons que XT ∈ L1 d’après le théorème d’arrêt. D’après ce théorème avec S = t ∧ T ≤ T , on a aussi
+XT
+t = XS = E[XT SFS ] = E[XT SFt∧T ] p.s.
+Il reste à voir que E[XT SFt∧T ] = E[XT SFt ] p.s. Puisque XT 1T <+∞ est FT −mesurable (cf. Proposition 5.15), on sait que XT 1T ≤t est Ft −mesurable et aussi FT -mesurable, donc Ft∧T −mesurable. Il en découle que
+E[XT 1{T ≤t}SFt∧T ] = XT 1{T ≤t} = E[XT 1{T ≤t}SFt ] p.s..
+Pour compléter la preuve, il reste à voir que
+E[XT 1{T >t}SFt∧T ] = E[XT 1{T >t}SFt ] p.s.
+Or si A ∈ Ft , on a
+● A ∩ {T > t } ∈ Ft car {T > t } = {T ≤ t }c ∈ Ft ;
+● puis A ∩ {T > t } ∈ FT car A ∩ {T > t } ∩ {T ≤ s} = ∅ ∈ Fs si s ≤ t et A ∩ {T > t } ∩ {T ≤ s} ∈ Fs si t ≤ s car
+{T > t } = {T ≤ t }c ∈ Ft ⊂ Fs et {T ≤ s} ∈ Fs .
+Finalement, A ∩ {T > t } ∈ FT ∩ Ft = Ft∧T et donc pour tout A ∈ Ft :
+E[1A1{T >t} XT ] = E[E[1A1{T >t} XT SFt∧T ]] = E[1A1{T >t}E[XT SFt∧T ]] p.s.
+Par ailleurs,
+E[1A1{T >t} XT ] = E[E[1A1{T >t} XT SFt ]] = E[1AE[1{T >t} XT SFt ]] p.s.
+On a donc
+E[1AE[1{T >t} XT SFt ]] = E[1A1{T >t}E[XT SFt∧T ]] p.s.
+avec E[XT 1{T >t}SFt ] qui est Ft −mesurable. Mais rappelons que Y = E[Z SG] ssi Y est G−mesurable et E[1A Z ] = E[1AY ] pour tout A ∈ G. Finalement,
+E[XT 1T >t SFt∧T ] = E[1{T >t} XT SFt ] p.s.
+Proposition 5.27. Soit X un processus càd et adapté. X est une martingale si et seulement si pour tout temps d’arrêt borné T , la variable XT est intégrable et E[XT ] = E[X0].
+Preuve : ● ⇒ vient du théorème d’arrêt de Doob. ● ⇐ Soient 0 < s < t et A ∈ Fs . Posons T = t 1Ac + s1A. C’est un temps d’arrêt borné. On a donc
+E[X0] = E[XT ] = E[Xt 1Ac ] + E[Xs 1A].
+De même pour tout t ≥ 0, t est un temps d’arrêt borné. On a donc également,
+E[X0] = E[Xt ] = E[Xt 1A] + E[Xt 1Ac ].
+On en déduit que E[Xt 1A] = E [Xs 1A], autrement dit E[Xt SFs ] = Xs .
+
+
+48 CHAPITRE 5. INTÉGRALE STOCHASTIQUE D’ITÔ
+Proposition 5.28. Soient X une martingale càd et T un temps d’arrêt, alors le processus arrêté X T = (XtT )t≥0 est
+une martingale. Si de plus X est uniformément intégrable, alors X T l’est aussi.
+Preuve : Le processus arrêté X T est nécessairement continu à droite. D’après la proposition précédente, il suffit de vérifier que E[X T
+S ] = E[X0T ] pour tout temps d’arrêt borné S. Or X T
+S = XT ∧S , où T ∧ S est un temps d’arrêt
+borné. Encore d’après la proposition précédente, on a E[X T
+S ] = E [XT ∧S ] = E [X0] = E [X0T ]. Donc d’après la pro
+position précédente X T est une martingale.
+Conclusion. Si X est une martingale et T un temps d’arrêt, X T définit bien une martingale appelée martingale arrêtée. Elle est uniformément intégrable si X l’est ou si T est un temps d’arrêt borné.
+5.2.3 Martingale locale
+Définition 5.29. Soit M = (Mt )t≥0 un processus réel adapté à trajectoires continues. On dit que c’est une Ft −martingale locale (continue), s’il existe une suite croissante de temps d’arrêt (Tp )p≥0 tendant vers +∞ p.s. telle que (Mt∧Tp )t≥0 soit une Ft −martingale :
+1. (Mt∧Tp )t≥0 est Ft −adapté,
+2. E[SMt∧Tp S] < +∞, ∀t ≥ 0, ∀p ∈ N,
+3. E[Mt∧Tp SFs ] = Ms∧Tp , ∀0 ≤ s ≤ t , ∀p ∈ N.
+On dit que la suite (Tp )p∈N réduit M .
+BOn n’a pas forcément E[SMt S] < +∞, les martingales locales ne sont pas forcément intégrables.
+Exemple 5.30. Une martingale à trajectoires continues est une martingale locale et la suite Tn = n réduit M . En effet, cela vient du corollaire 5.26 et de ses conséquences avec les temps d’arrêt Tn = n ↗ +∞, plus simplement, il est immédiat que pour s < t : Ms∧n = E[Mt∧n SFs ].
+Proposition 5.31. Si M est une martingale locale continue, pour tout temps d’arrêt T , M T est une martingale locale.
+Preuve : Si Tp réduit M , alors M Tp est une martingale et (M T )Tp = M T ∧Tp = (M Tp )T l’est aussi d’après le corollaire 5.26.
+Proposition 5.32. Si (Tn)n≥0 réduit M et si (Sn)n≥0 est une suite de temps d’arrêt telle que Sn ↗ +∞, alors la suite (Tn ∧ Sn)n≥0 réduit aussi M .
+Preuve : On a (Tn ∧ Sn) ↗ +∞ et M Tn∧Sn = (M Tn )Sn est une martingale. Donc M est une martingale locale et (Sn ∧ Tn )n≥0 réduit M .
+Proposition 5.33. Soit Rn = inf{t ≥ 0 ∶ SMt S ≥ n} avec M une martingale locale continue partant de 0. Alors Mt∧Rn est une martingale uniformément bornée.
+Preuve : Il existe une suite (Tp )p≥0 de temps d’arrêt tendant vers +∞ telle que (Mt∧Tp )t≥0 soit une Ft −martingale. D’après les résultats précédents, Mt∧Tp ∧Rn est une Ft −martingale uniformément bornée par n. On a donc pour
+tout A ∈ Fs , 0 ≤ s ≤ t , E[Mt∧Tp ∧Rn 1A] = E[Ms∧Tp ∧Rn 1A] (définition d’une martingale). Comme Tp Ð→
+p→+∞ +∞,
+Mt∧Tp ∧Rn Ð→
+p →+∞
+Mt∧Rn p.s.
+Ms∧Tp ∧Rn Ð→
+p →+∞
+Ms∧Rn p.s.,
+
+
+5.2. TEMPS D’ARRÊT. MARTINGALES LOCALES 49
+et SMt∧Tp ∧Rn S ≤ n, on peut appliquer le théorème de convergence dominé (Lebesgue) :
+E[Mt∧Tp ∧Rn 1A] = E[Ms∧Tp ∧Rn 1A] Ð→
+p →+∞
+E[Mt∧Rn 1A] = E[Ms∧Rn 1A].
+Donc Ms∧Rn = E[Mt∧Rn SFs ] et (Mt∧Rn )t≥0 est une martingale uniformément bornée par n.
+Théorème 5.34 (Crochet d’une martingale locale). Soit M = (Mt )t≥0 une martingale locale continue. Il existe un processus croissant, noté (⟨M , M ⟩t )t≥0 unique tel que
+M2
+t − ⟨M , M ⟩t (5.5)
+soit une martingale locale continue. De plus, pour tout t > 0, si 0 = t0n < t1n < ⋅ ⋅ ⋅ < trnn = t est une suite de subdivi
+sions emboîtées de [0, t ] de pas tendant vers 0, on a
+rn
+i =Q1
+(Mtn
+i − Mtn
+i−1 )2 ÐP→
+n→+∞ ⟨M , M ⟩t .
+Le processus ⟨M , M ⟩ est appelé la variation quadratique ou crochet de M . On le note aussi ⟨M ⟩.
+Preuve :
+1. L’unicité résulte du résultat suivant :
+Théorème 5.35. Soit M une martingale locale continue issue de 0. Alors si M est un processus à variation finie, M est indistinguable de 0.
+Preuve : Supposons que M est un processus à variation finie et posons pour tout n ∈ N :
+τn = inf{t ≥ 0 ∶ S
+t
+0 SdMs S ≥ n}.
+Les temps τn sont des temps d’arrêt ( car ∫ t
+0 SdMs S = limn→+∞ ∑pn
+i =1 SMtn
+i −Mtn
+i−1 S donc le processus ∫ t
+0 SdMs S
+est continu et adapté). Fixons n ≥ 1 et posons N = M τn . Alors N est une martingale locale telle que
+∫
++∞
+0 SdNs S ≤ n, en particulier, SNt S = S ∫ t∧τn
+0 dMs S ≤ ∫ t∧τn
+0 SdMs S ≤ n. On en déduit que N est une martingale
+bornée. Ensuite, soit t > 0 et soit 0 = t0 < t1 < ⋅ ⋅ ⋅ < tp = t une subdivision de [0, t ]. Alors, on a :
+E[N 2
+t ]=
+p
+i =Q1
+E[N 2
+ti − N 2
+ti−1 ] =
+p
+i =Q1
+E[(Nti − Nti−1 )2]
+≤ E sup
+1≤i ≤pSNti − Nti−1 S
+p
+i =Q1
+SNti − Nti−1 S ≤ nE sup
+1≤i ≤pSNti − Nti−1 S .
+On applique l’inégalité précédente à une suite 0 = t0k < t1k < ⋅ ⋅ ⋅ < tpkk = t de subdivisions de [0, t ] de pas tendant vers 0. En utilisant la continuité des trajectoires, et le fait que N est bornée par n, on a par convergence dominée :
+lim
+k →+∞
+E sup
+1≤i ≤pk
+SNtk
+i − Ntk
+i−1 S = 0
+On conclut alors que E[Nt2] = 0 c’est-à-dire E[Mt2∧τn ] = 0. En faisant ensuite tendre n vers +∞, comme
+τn → +∞, on obtient par le lemme de Fatou :
+E[M 2
+t ] = E lim
+n→+∞
+M2
+t∧τn = E lim inf
+n→+∞
+M2
+t∧τn ≤ lim inf
+n→+∞
+E[M 2
+t∧τn ] = 0.
+
+
+50 CHAPITRE 5. INTÉGRALE STOCHASTIQUE D’ITÔ
+Finalement pour tout t ≥ 0, Mt = 0 p.s. La martingale locale M admet donc 0 comme modification : ∀t ≥ 0, P(Mt = 0) = 1. Pour conclure comme 0 et M sont à trajectoires continues, le processus M est en fait indistinguable de 0 : P(Mt = 0, ∀t ≥ 0) = 1. Retour à l’unicité du crochet. Si A et A′ sont deux processus croissants satisfaisant la condition (5.5), le processus At − A′
+t = (Mt2 − A′
+t ) − (Mt2 − At ) doit être à la fois une martingale locale (car différence de martingales locales) et un processus à variation finie (car différence de tels processus), ce qui exige sa nullité p.s.
+2. Pour l’existence,
+(a) On considère d’abord le cas où M0 = 0 et M est bornée. M est alors une vraie martingale (cf. exercice
+TD). On se fixe t > 0 et 0 = t0n < t1n < ⋅ ⋅ ⋅ < trnn = t une suite de subdivisions emboîtées de [0, t ] de pas
+tendant vers 0. Pour chaque n ≥ 1, on considère le processus X (n) défini par
+Xn
+s=
+rn
+i =Q1
+Mtn
+i−1 (Mt n
+i ∧s − Mtn
+i−1∧s ).
+Lemme 5.36. Le processus X n est une martingale à trajectoires continues.
+Preuve : Le processus X est adapté et à trajectoires continues car la martingale M l’est, il est intégrable car M est bornée. Pour la propriété de martingale, pour s ≤ r , on a
+E[X n
+r SFs ] =
+rn
+i =Q1
+E[M t n
+i−1 (Mt n
+i ∧r − Mt n
+i−1∧r )SFs ]
+=Q
+i ∶tn
+i −1≤r
+E[M t n
+i−1 (Mt n
+i ∧r − Mt n
+i−1∧r )SFs ]
+=Q
+i ∶s≤t n
+i −1≤r
+E[M t n
+i−1 (Mt n
+i ∧r − Mt n
+i−1∧r )SFs ] + Q
+i ∶tn
+i −1≤s≤r
+E[M t n
+i−1 (Mt n
+i ∧r − Mt n
+i−1∧r )SFs ]
+=Q
+i ∶s≤t n
+i −1≤r
+E[M t n
+i−1 E[Mt n
+i ∧r − Mt n
+i−1∧r SFt n
+i−1 ]
+ ́111111111111111111111111111111111111111111111111111111111111111111111111 ̧111111111111111111111111111111111111111111111111111111111111111111111111¶
+=0
+SFs] + Q
+i ∶tn
+i −1≤s≤r
+E[M t n
+i−1 (Mt n
+i ∧r − Mt n
+i−1∧r )SFs ]
+=Q
+i ∶tn
+i −1≤s
+Mtn
+i−1 (Mt n
+i ∧s − Mtn
+i−1∧s ) = X n
+s.
+On a ensuite :
+Lemme 5.37. Les variables aléatoires Xtn, n ≥ 1, vérifient une propriété de Cauchy dans L2(Ω, F , P) :
+Preuve : En utilisant la relation martingale pour m ≤ n, on a
+E[(X n
+t −Xm
+t )2] = E
+rn
+i =Q1
+Mtn
+i−1 (Mt n
+i − Mtn
+i−1 ) −
+rm
+i =Q1
+Mtn
+j −1 (Mt n
+j − Mtn
+j −1 )
+2
+=E
+⎡⎢⎢⎢⎢⎢⎣
+⎛⎜⎝
+rn
+i =Q1 Q
+tm
+j ∈]t n
+i −1,t n
+i]
+(Mtn
+i−1 − Mt m
+j−1 )(Mt n
+j − Mtn
+j−1 )⎞⎟⎠
+2⎤⎥⎥⎥⎥⎥⎦
+(partitions emboîtées)
+=
+rn
+i =Q1
+E
+⎡⎢⎢⎢⎢⎢⎣
+⎛⎜⎝ Q
+tm
+j ∈]t n
+i −1,t n
+i]
+(Mtn
+i−1 − Mt m
+j−1 )(Mt n
+j − Mtn
+j−1 )⎞⎟⎠
+2⎤⎥⎥⎥⎥⎥⎦
+(relation martingale)
+(la relation martingale annule les termes croisés du carré de la somme)
+
+
+5.2. TEMPS D’ARRÊT. MARTINGALES LOCALES 51
+=
+rn
+i =Q1 Q
+tm
+j ∈]t n
+i −1,t n
+i]
+E (Mtn
+i−1 − Mt m
+j−1 )2(Mt n
+j − Mtn
+j−1 )2 (relation martingale)
+(la relation martingale annule à nouveau les termes croisés du carré de la somme)
+=
+rn
+i =Q1 Q
+tm
+j ∈]t n
+i −1,t n
+i]
+E (Mtn
+i−1 − Mt m
+j−1 )2E[((Mtn
+j − Mtn
+j−1 )2SFt m
+j−1 ] (Mt n
+i−1 et Mt m
+j−1 sont Ftm
+j−1 −mesurables)
+=
+rn
+i =Q1 Q
+tm
+j ∈]t n
+i −1,t n
+i]
+E (Mtn
+i−1 − Mt m
+j−1 )2(M 2
+tm
+j −M2
+tm
+j−1 ) (relation martingale)
+≤
+rn
+i =Q1 Q
+tm
+j ∈]t n
+i −1,t n
+i]
+E sup
+i ,j {(Mtn
+i−1 − Mt m
+j−1 )2}(M 2
+tm
+j −M2
+tm
+j −1 )
+≤ E⎡⎢⎢⎢⎣
+sup
+i ,j {(Mtn
+i−1 − Mt m
+j−1 )2}
+rn
+jQ=1
+(M 2
+tm
+j −M2
+tm
+j−1 )⎤⎥⎥⎥⎦
+≤ E sup
+i ,j {(Mtn
+i−1 − Mt m
+j−1 )2}M 2
+t Ð→
+n,m→+∞
+0
+où la dernière convergence vient par convergence dominée en utilisant que M est bornée et
+lim
+n,m→+∞
+sup
+1≤i ≤rn ,1≤ j ≤rm
+(Mtn
+i−1 − Mt m
+j−1 ) = 0
+par continuité des trajectoires de M . On a donc
+lim
+n,m→+∞
+E[(X n
+t −Xm
+t )2] = 0.
+Lemme 5.38 (Inégalité de Doob). Soit M = (Mt )t≥0 une martingale continue. Alors pour p > 1 et T > 0,
+E sup
+0≤t≤T SMt Sp ≤ p
+p −1
+p
+E[SMT Sp ].
+Preuve : Admis.
+Retour à la preuve du théorème. L’inégalité de Doob donne alors avec p = 2 donne
+lim
+n,m→+∞
+E sup
+s≤t (X n
+s −Xm
+s )2 = 0. (5.6)
+On peut alors extraire une sous-suite (nk )k≥0 telle que
+E sup
+s≤t (X snk − X nk+1
+s )2 1~2
+≤1
+2k .
+Avec l’inégalité de Cauchy-Schwarz, on a alors
+E
++∞
+Q
+k =1
+sup
+s≤t SX snk − X nk+1
+s ]≤
++∞
+Q
+k =1
+E sup
+s≤t (X snk − X nk+1
+s )2 1~2
+≤
++∞
+Q
+k =0
+1
+2k < +∞.
+On en déduit que presque sûrement,
++∞
+Q
+k =1
+sup
+s≤t SX snk − X nk+1
+s S < +∞.
+
+
+52 CHAPITRE 5. INTÉGRALE STOCHASTIQUE D’ITÔ
+Presque sûrement, la suite (Xsnk )s∈[0,t] converge donc uniformément sur [0, t ] vers une limite qu’on note (Ys )s∈[0,t]. Sur l’ensemble négligeable où il n’y a pas la convergence, on impose Ys = 0. Le processus limite (Ys )s∈[0,t] a alors des trajectoires continues.
+Comme d’après (5.6), (Xsn)s∈[0,t] est une suite de Cauchy dans L2, on a aussi convergence Xsn → Ys
+dans L2 quand n → +∞. En passant à la limite L2 dans l’égalité martingale pour X n aux temps s et r, Xn
+s = E[X n
+r SFs ], s ≤ r,
+on obtient que Y est une martingale sur [0, t ] :
+Ys = E[Yr SFs ], s ≤ r.
+Finalement, X nk converge p.s. uniformément sur [0, t ] vers un Y = (Ys )0≤s≤t qui est à trajectoires continues. Le processus Y est donc une martingale continue.
+Puis par un calcul simple, pour tout n ≥ 1 et j ∈ {1, ..., rn}, on a
+M2
+tn
+j − 2X n
+tn
+j=
+j
+i =Q1
+(Mtn
+i − Mtn
+i−1 )2. (5.7)
+Donc le processus M 2 − 2X n est croissant le long de la subdivision {t n
+i ∶ 0 ≤ i ≤ rn}. En passant à la limite avec la sous-suite nk → +∞ trouvée précédemment (pour laquelle il y a convergence presque
+sûre), par continuité, la fonction s ∈ [0, t ] ↦ Ms2 − 2Ys est p.s. croissante sur [0, t ].
+On pose alors, pour s ∈ [0, t ], ⟨M , M ⟩s = Ms2 − 2Ys (avec, par convention, ⟨M , M ⟩s = 0 sur l’ensemble
+de probabilité nulle où la fonction t ↦ Mt2 −2Ys n’est pas croissante). Ainsi,⟨M , M ⟩ est un processus
+croissant et Ms2 − ⟨M , M ⟩s = 2Y s est une martingale, sur l’intervalle de temps [0, t ].
+Rappelons que t est fixé depuis le début de la preuve. Pour étendre la définition de ⟨M , M ⟩s à tout s ∈ R+, on applique ce qui précède avec t = k pour tout entier k ≥ 1, en remarquant que, par unicité, le processus obtenu avec t = k doit être la restriction à [0, k] de celui obtenu avec t = k +1. On a ainsi construit un processus ⟨M , M ⟩t , t ≥ 0, croissant vérifiant (5.5).
+La partie unicité montre aussi que le processus ⟨M , M ⟩t ne dépend pas de la suite de subdivisions choisies pour le construire. On déduit alors de (5.7) (avec j = rn) que pour tout t > 0, pour n’importe quelle suite de subdivisions emboîtées de [0, t ] de pas tendant vers 0, on a
+lim
+n→+∞
+rn
+jQ=1
+(Mtn
+j − Mtn
+j−1 )2 = ⟨M , M ⟩t dans L2.
+Cela achève la preuve du théorème dans le cas borné ;
+(b) ● On considère maintenant une martingale locale générale qu’on écrit sous la forme Mt = M0 +
+Nt . On a donc Mt2 = M02 + 2M0Nt + Nt2 et en remarquant que M0Nt est une martingale locale (car N en est une et M0 est F0−mesurable), on ne perd pas en généralité en supposant que M0 = 0. On pose alors
+Tn = inf{t ≥ 0 ∶ SMt S ≥ n},
+et on applique le résultat vu dans le cas borné aux martingales bornées M Tn . Notons An =
+⟨M Tn , M Tn ⟩ le processus associé à M Tn . D’après l’unicité, les processus An+1
+t∧Tn et Atn sont indistinguables. On en déduit qu’il existe un processus croissant A tel que pour tout n, At∧Tn et
+Atn sont indistinguables. Par contruction du cas borné, M 2
+t∧Tn − At∧Tn = (Mt2 − At )Tn est une
+martingale, i.e. Mt2 − At est une martingale locale. On prend alors ⟨M , M ⟩t = At et cela termine la preuve pour la partie existence.
+
+
+5.3. EXTENSION/GÉNÉRALISATION DE L’INTÉGRALE STOCHASTIQUE 53
+● Enfin, la deuxième partie du théorème reste vraie dans le cas d’une martingale locale : en effet,
+si on remplace M et ⟨M , M ⟩t par M Tm et ⟨M Tm , M Tm ⟩t = ⟨M , M ⟩Tm
+t , alors le cas borné assure
+⟨M , M ⟩t∧Tm = lim
+n→+∞
+rn
+i =Q1
+(M Tm
+tn
+i − M Tm
+tn
+i−1 )2 en probabilité.
+On conclut en observant que pour tout t > 0, on a P(Tm ≥ t ) → 1, quand m → +∞.
+5.3 Extension/généralisation de l’intégrale stochastique
+Nous allons définir des intégrales stochastiques avec des intégrands plus généraux que ceux considérés précédemment.
+Notation : Soient Λ0
+loc = {Φ = (Φt )t≥0 progressif tel que ∫ t
+0 Φs2ds < +∞p.s.∀t ≥ 0}.
+On va maintenant définir l’intégrale stochastique pour Φ ∈ Λ0
+loc . Pour cela, on va introduire des temps d’arrêt.
+Lemme 5.39. Soit Φ ∈ Λ0
+loc . Pour n ∈ N, on définit τn par
+τn = inf{t ≥ 0 ∶ S
+t
+0 Φ2
+s ds ≥ n}.
+Alors τn est un temps d’arrêt.
+Preuve : τn est un Ft −temps d’arrêt car c’est le temps d’entrée du processus continu ∫ t
+0 Φs2ds dans le fermé
+[n, +∞[. Plus rigoureusement,
+{τn ≤ t } = sup
+s≤t S
+s
+0 Φ2
+udu ≥ n = ∀k > 0∃s ≤ t S
+s
+0 Φ2
+udu > n − 1
+k=
+k≥1 s∈[0,t ]∩Q S
+s
+0 Φ2
+udu > n − 1
+k ∈ Ft .
+Lemme 5.40. Soit τ un temps d’arrêt. Le processus {1[0,τ](t ); t ≥ 0} est progressivement mesurable.
+Preuve : Soit T > 0, il faut montrer que l’application
+Ψ ∶ Ω × [0, T ] → R (ω, t ) ↦ 1[0,τ(ω)](t )
+est FT ⊗ B([0, T ])−mesurable. Ψ est la composée des deux applications suivantes :
+(Ω × [0, T ], FT ⊗ B([0, T ])) → ([0, T ] × [0, T ], B([0, T ]) ⊗ B([0, T ])) (ω, t ) ↦ (t , τ(ω) ∧ T )
+et
+([0, T ] × [0, T ], B([0, T ]) ⊗ B([0, T ])) → (R, B(R))
+(u, t ) ↦ 1{u<t}.
+Elles sont respectivement FT ⊗B([0, T ])-mesurables et B([0, T ])⊗B([0, T ])−mesurables et Ψ est la composée de ces deux fonctions et est donc elle-même FT ⊗ B([0, T ])-mesurable.
+
+
+54 CHAPITRE 5. INTÉGRALE STOCHASTIQUE D’ITÔ
+Il découle du lemme précédent et du fait que E ∫ τn
+0 Φs2ds ≤ n, que ∀n ∈ N, ∀Φ ∈ Λ0
+l oc ,
+1
+[0,τn ]Φ ∈ Λ2.
+On peut alors définir pour tout n,
+Mn
+t =S
+t
+0 1[0,τn](s)Φs dBs , t ≥ 0.
+Pour n fixé, le processus M n = (Mtn)t≥0 est une martingale et on a ⟨M n⟩t = ∫ t
+0 Φs21[0,τn](s)ds. Il faut donc
+montrer que pour tout T > 0, Mtn converge p.s. uniformément pour t ∈ [0, T ] quand n → +∞. Le processus limite sera alors noté
+Mt = S
+t
+0 Φs dBs , t ≥ 0.
+Lemme 5.41. Soit Φ ∈ Λ2
+loc et τ un temps d’arrêt. Alors 1[0,τ]Φ ∈ Λ2
+loc et pour tout t ≥ 0,
+S
+t
+0 1[0,τ](s)Φs dBs = S
+t ∧τ 0 Φs dBs , p.s.
+Preuve : D’après le Lemma (5.40), 1[0,τ]Φ ∈ Λ2
+loc . L’égalité annoncée est équivalente au même résultat avec le
+temps d’arrêt borné t ∧ τ. Or t ∧ τ est limite décroissante de la suite de temps d’arrêt
+τn =
+N +1
+Q
+k =1
+tk
+n 1{tnk−1<t ∧τ≤tnk }, avec t k
+n= k
+2n ,
+et on note Akn = {tnk−1 < t ∧ τ ≤ tnk }. Il suffit détablir l’égalité suivante :
+S
+t
+0 1[τn,t](s)Φs dBs = S
+t
+t ∧τn
+Φs dBs ,
+qui résulte de
+S
+t
+tnk
+1Akn Φs dBs = 1Akn S
+t
+tnk
+Φs dBs .
+On va donc montrer que pour 0 ≤ s < t , A ∈ Fs et Φ ∈ Λ2
+l oc ,
+S
+t
+s
+1AΦu dBu = 1A S
+t
+s
+Φu dBu .
+Or on a
+ES
+t
+s
+1AΦu dBu − 1A S
+t
+s
+Φu dBu
+2
+SFs = 1AE S
+t
+s (1A − 1)Φu dBu
+2
+SFs + 1Ac E S
+t
+s
+1AΦu dBu
+2
+SFs
+= 1AE S
+t
+s
+1Ac Φ2
+u du + 1Ac E S
+t
+s
+1 A Φ2
+u du
+= 0.
+On a donc pour tout n ∈ N, Mt∧τn = Mtn et (τn)n∈N est une suite croissante de temps d’arrêt qui tend vers +∞ quand n → +∞. La limite sera donc une martingale locale.
+Proposition 5.42. Soient Φ ∈ Λ0
+loc et T > 0, alors Mtn converge p.s. uniformément sur [0, T ] lorsque n → +∞.
+
+
+5.4. PROCESSUS D’ITÔ 55
+Preuve : Soit n < m. Alors τn < τm et le lemme précédent appliqué à 1[0,τm]Φ et τn assure que
+Mn
+t =S
+t
+0 1[0,τn](s)1[0,τm](s)Φs dBs
+=S
+t ∧τn
+0 1[0,τm](s)Φs dBs
+et cette dernière quantité ne dépend pas de m. Fixons T > 0, sur Ωn = {τn ≥ T }, la suite {Mtn; 0 ≤ t ≤ T }, est constante et égale à sa limite. Le résultat découle alors du fait que Ωn ↗ Ω p.s. Nous pouvons résumer les propriétés de l’intégrale d’Itô obtenue.
+Proposition 5.43. Pour tout Φ ∈ Λ0
+loc continu, il existe un processus continu
+Mt = S
+t
+0 Φs dBs , t ≥ 0.
+1. Le processus M = (Mt )t≥0 est une martingale locale.
+2. Le processus croissant associé à M est
+⟨M⟩t = S
+t
+0 Φ2
+s ds.
+C’est le seul processus croissant, continu, adapté, nul en 0 tel que Mt2 − ⟨M ⟩t soit une martingale locale.
+Récapitulatif sur l’intégrale stochastique :
+Soient (Ω, F , (Ft )t≥0, P) un espace de probabilité filtré, (Bt )t≥0 un Ft −mouvement brownien réel et Φ = (Φt )t≥0 un processus progressivement mesurable. On peut définir l’intégrale stochastique de deux manières :
+• E∫ t
+0 Φs2ds < +∞∀t ≥ 0 • ∫ t
+0 Φs2ds < +∞ p.s. ∀t ≥ 0 (condition plus faible)
+Mt = ∫ t
+0 Φs dBs est alors bien définie Mt = ∫ t
+0 Φs dBs est alors bien définie
+M = (Mt )t≥0 processus, Ft −martingale M = (Mt )t≥0 processus, Ft −martingale locale, i.e. de carré intégrable, d’espérance nulle ∃(Tn)n≥0, Tn ↗ +∞, Tn ≤ Tn+1 telle que
+et à trajectoires continues (Mt∧Tn )t≥0 martingale et Tn = inf{t ∶ ∫ t
+0 Φs2ds ≥ n}
+E[Mt∧Tn SFs ] = Ms∧Tn , ∀0 ≤ s ≤ t , ∀n ≥ 0
+E ∫t
+0 Φs dBs = 0 B E ∫ t
+0 Φs dBs = ?
+E ∫t
+0 Φs dBs
+2
+=E ∫ t
+0 Φs2ds , Mt n’est pas forcément intégrable
+⟨M ⟩t unique processus croissant, ⟨M ⟩t unique processus croissant, à trajectoires continues, adapté, à trajectoires continues, adapté, partant de 0 et tel que Mt2 − ⟨M ⟩t Ft −martingale partant de 0 et tel que Mt2 − ⟨M ⟩t Ft −martingale locale
+⟨M⟩t = ∫ t
+0 Φs2ds ⟨M ⟩t = ∫ t
+0 Φs2ds
+⇒
+la réciproque est fausse
+5.4 Processus d’Itô
+Dans cette partie, on donne la formule d’Itô, véritable clef de voûte du calcul stochastique. Celle-ci montre que lorsqu’on applique une application C 2 à une semi-martingale, on conserve une semi-martingale ; elle en donne en plus la décomposition (martingale locale + processus à variation finie).
+
+
+56 CHAPITRE 5. INTÉGRALE STOCHASTIQUE D’ITÔ
+Définition 5.44. Soient (Ω, F , (Ft )t≥0, P) un espace de probabilité filtré et (Bt )t≥0 un Ft −mouvement brownien standard. On appelle processus d’Itô, un processus de la forme
+Xt = X0 +S
+t
+0 Φs dBs + S
+t
+0 αsds,
+où
+• X0 est une variable aléatoire F0−mesurable,
+• Φ processus progressif tel que ∫ t
+0 Φs2ds < +∞ p.s. ∀t ≥ 0, i.e. ∫ t
+0 Φs dBs est une martingale locale,
+• α adapté, ∫ t
+0 Sαs Sds < +∞ p.s. ∀t ≥ 0, i.e. ∫ t
+0 αs ds est un processus à variation finie.
+Définition 5.45. Soient deux processus d’Itô
+Xt = X0 +S
+t
+0 Φs dBs + S
+t
+0 αsds
+Yt = Y0 + S
+t
+0 Ψs dBs + S
+t
+0 βsds.
+On définit le processus
+⟨X ,Y ⟩t = S
+t
+0 ΦsΨsds = bS
+.
+0 Φs dBs , S
+.
+0 Ψs dBs gt
+.
+Remarque 5.46. Le crochet de deux processus d’Itô est par définition le crochet de leurs parties martingales locales.
+Proposition 5.47. Si τn = {0 = t0n < t1n < ⋅ ⋅ ⋅ < trnn = t } avec S pas τnS Ð→
+n→+∞
+0,
+rn −1
+i =Q0
+(Xtn
+i+1 − X t n
+i )(Ytn
+i+1 − Yt n
+i ) ÐP→
+n→+∞ ⟨X , Y ⟩t .
+et
+⟨X ,Y ⟩t = 1
+4 [⟨X + Y ⟩t − ⟨X − Y ⟩t ],
+où ⟨X + Y ⟩t est le seul processus continu, croissant, adapté tel que ∫ t
+0 (Φs + Ψs )dBs
+2
+− ⟨X + Y ⟩t soit une mar
+tingale locale.
+Preuve : admis
+Définition 5.48 (Intégration par rapport à un processus d’Itô). Soit Xt = X0 + ∫ t
+0 Φs dBs + ∫ t
+0 αs ds et U = (Us )s≥0
+tel que ∫ t
+0 (Us2Φs2 + SUs αs S)ds < +∞ p.s. ∀t ≥ 0. Par définition
+S
+t
+0
+UsdXs = S
+t
+0
+Us Φs dBs
+ ́111111111111111111111111111111 ̧111111111111111111111111111111¶
+martingale locale
++S
+t
+0
+Us αs ds
+ ́1111111111111111111111111 ̧111111111111111111111111¶
+processus à variation finie
+.
+Théorème 5.49 (Formule d’Itô, produit de deux processus d’Itô). Soient deux processus d’Itô :
+Xt = X0 +S
+t
+0 Φs dBs + S
+t
+0 αsds
+Yt = Y0 + S
+t
+0 Ψs dBs + S
+t
+0 βsds.
+Alors
+Xt Yt = X0Y0 + S
+t
+0
+Xs dYs + S
+t
+0
+Ys dXs + ⟨X , Y ⟩t . (5.8)
+
+
+5.4. PROCESSUS D’ITÔ 57
+Preuve : • Existence des différents termes :
+∫t
+0 Xs dYs = ∫ t
+0 Xs Ψs dBs + ∫ t
+0 Xs βs ds a un sens car
+S
+t
+0
+X2
+s Ψ2
+s ds ≤ sup
+s∈[0,t ]
+X2
+sS
+t
+0 Ψ2
+s ds < +∞p.s.
+S
+t
+0 SXs βs Sds ≤ sup
+s∈[0,t ]
+SXsSS
+t
+0 Sβs Sds < +∞p.s.,
+car les trajectoires des processus sont continues.
+⟨X , Y ⟩t est l’unique processus continu à variation finie tel que ∫ t
+0 Φs dBs ∫ t
+0 Ψs dBs − ⟨X , Y ⟩t soit une
+Ft −martingale locale. On a
+⟨X ,Y ⟩t = bS
+.
+0 Φs dBs , S
+.
+0 Ψs dBs gt
+⟨X ,Y ⟩t = 1
+4 ⟨X + Y ⟩t − ⟨X − Y ⟩t
+Xt Yt = 1
+4 (Xt + Yt )2 − (Xt − Yt )2
+• Il suffit de montrer (5.8) pour le carré :
+X2
+t =X2
+0 +2S
+t
+0
+XsdXs + ⟨X ⟩t .
+Soit Πn = {0 = t0n < t1n < ⋅ ⋅ ⋅ < trnn = t } avec SΠnS = sup
+i =0,...,rn−1
+St n
+i +1 − t n
+i S Ð→
+n→+∞
+0. On peut alors écrire
+X2
+t −X2
+0=
+rn −1
+i =Q0
+(X 2
+tn
+i+1 − X 2
+tn
+i )=2
+rn −1
+i =Q0
+Xtn
+i (Xtn
+i+1 − X t n
+i)
+ ́111111111111111111111111111111111111111111111111111111111111111 ̧11111111111111111111111111111111111111111111111111111111111111¶
+n→Ð+→∞2 ∫
+t
+0 XsdXs
++
+rn −1
+i =Q0
+(Xtn
+i+1 − X t n
+i )2
+ ́11111111111111111111111111111111111111111111111 ̧1111111111111111111111111111111111111111111111¶
+P
+n→Ð+→∞⟨X ⟩t
+.
+On en déduit que
+X2
+t =X2
+0 +2S
+t
+0
+XsdXs + ⟨X ⟩t
+±
+terme supplémentaire par rapport à l’intégrale de Stieljes, du fait que X ne soit pas à variation finie
+.
+Théorème 5.50 (Formule d’Itô). Soit X = (Xt )t≥0 un processus d’Itô et f ∶ R → R une fonction C 2. Alors ( f (Xt ))t≥0 est un processus d’Itô tel que
+f (Xt) = f (X0)+S
+t
+0
+f ′(Xs )dXs + 1
+2S
+t
+0
+f ′′(Xs )d⟨X ⟩s . (5.9)
+Idée de preuve : Soit Xs = X0 + ∫ s
+0 Φu dBu + ∫ s
+0 αu du. On a
+s ↦ f ′(Xs ) continue,
+s ↦ f ′′(Xs ) continue,
+⟨X ⟩s = S
+s
+0 Φ2
+u du.
+
+
+58 CHAPITRE 5. INTÉGRALE STOCHASTIQUE D’ITÔ
+Il faut se donner une subdivision de [0, t ] et appliquer un développement de Taylor.
+(5.9) ⇔ f (Xt ) = f (X0) + S
+t
+0
+f ′(Xs ) Φs dBs + αs ds + 1
+2S
+t
+0
+f ′′(Xs )Φ2
+s ds
+= f (X0)+S
+t
+0
+f ′(Xs )Φs dBs + S
+t
+0
+f ′(Xs )αs + 1
+2 f ′′(Xs )Φ2
+s ds
+Exemple 5.51. Montrons que Yt = eBt est un processus d’Itô. • t ↦ Bt est un processus d’Itô :
+Bt = B= ̄00
++S
+t
+0
+1 dBs + S
+t
+0
+0 ds
+• f ∶ x ↦ ex est une fonction C 2 de R dans R, f ′(x) = ex et f ′′(x) = ex . On applique la formule d’tô à f (Bt ) :
+f (Bt ) = f (B0) + S
+t
+0
+f ′(Bs )dBs + 1
+2S
+t
+0
+f ′′(Bs )d⟨B ⟩s
+⇔ eBt = 1 + S
+t
+0
+eBs dBs
+ ́11111111111111111111111 ̧1111111111111111111111¶
+martingale locale
++1
+2S
+t
+0
+eBs ds,
+puisque ⟨B ⟩s = ∫ s
+0 12 ds = s.
+Théorème 5.52. Soit X = (Xt )t≥0 un processus d’Itô et f ∈ C 1,2(R+ × R) :
+f ∶ R+ × R → R
+(t , x) ↦ f (t , x) f est C 1 en t et C 2 en x. Alors on a :
+f (t , Xt ) = f (0, X0) + S
+t
+0
+∂f
+∂s (s, Xs )ds + S
+t
+0
+∂f
+∂x (s, Xs )dXs + 1
+2S
+t
+0
+∂2 f
+∂x2 (s, Xs )d⟨X ⟩s . (5.10)
+Remarque 5.53.
+1. Le théorème se démontre à l’aide de la formule de Taylor pour f (t , x).
+2. Yt = (t , Xt ) est un processus d’Itô de dimension 2. En effet, t ↦ t est aussi un processus d’Itô : t = 0+∫ t
+0 0dBs +
+∫t
+0 1 ds
+3. On peut réécrire (5.10) :
+f (t , Xt ) = f (0, X0) + S
+t
+0
+∂f
+∂s (s, Xs )ds + S
+t
+0
+∂f
+∂x (s, Xs )[Φs dBs + αs ds] + 1
+2S
+t
+0
+∂2 f
+∂x2 (s, Xs )Φ2
+s ds
+= f (0, X0) + S
+t
+0
+∂f
+∂x (s, Xs )Φs dBs + S
+t
+0
+∂f
+∂s (s, Xs) + ∂f
+∂x (s, Xs )αs + 1
+2
+∂2 f
+∂x2 (s, Xs )Φ2
+s ds
+Exemple 5.54. Montrons que si Xt = X0 +∫ t
+0 Φs dBs +∫ t
+0 αs ds est un processus d’Itô, Yt = t 2 sin Xt est un processus d’Itô.
+On a (t , Xt ), t ↦ t 2 sin x C 1
+x ↦ t 2 sin x C 2 et
+f (t , x) = t 2 sin x, ∂ f
+∂t (t , x) = 2t sin x,
+∂f
+∂x (t , x) = t 2 cos x, ∂2 f
+∂x2 (t , x) = −t 2 sin x.
+
+
+5.5. CAS MULTIDIMENSIONNEL 59
+On applique donc la formule d’Itô
+t 2 sin Xt = 0 + S
+t
+0
+2s sin Xs ds + S
+t
+0
+s2 cos Xs dXs + 1
+2S
+t
+0 −s2 sin Xs d⟨X ⟩s
+=S
+t
+0
+s2 cos Xs Φs dBs + S
+t
+0 [2s sin Xs + s2 cos Xs αs − 1
+2 s2 sin Xs Φ2
+s ]ds
+Calculer ⟨Y ⟩t (le crochet existe uniquement si Y est un processus d’Itô, pour montrer que c’en est un, il faut utiliser la formule (5.10)). On trouve
+⟨Y ⟩t = S
+t
+0
+s4 cos2 Xs Φ2
+s ds.
+5.5 Cas multidimensionnel
+Définition 5.55. Soit (Ω, F , P) un espace de probabilité. Un mouvement brownien d − d i mensi onnel est un
+processus B = (B 1, . . . , B d ) tel que ∀i = 1, . . . , d , B i = (Bti )t≥0 soit un mouvement brownien et (B 1, . . . , B d ) soient indépendants.
+Définition 5.56. Soit (Ft )t≥0 une filtration sur (Ω, F , P). Un processus B = (Bt )t≥0 = (Bt1, . . . , Btd )t≥0 adapté à (Ft )t≥0 est un Ft −mouvement brownien d −dimensionnel si
+1. B0 = (B01, . . . , B0d ) = (0, . . . , 0),
+2. les trajectoires sont p.s. continues,
+3. ∀0 ≤ s < t , Bt − Bs est indépendant de Fs (B ce n’est pas forcément la filtration propre de B ),
+4. ∀0 ≤ s < t , Bt − Bs ∼ N (0, (t − s)Id ), où Id est la matrice identité de dimension d .
+Proposition 5.57. Soit B = (B 1, . . . , B d ) un Ft −mouvement brownien.
+1. ∀i = 1, . . . , d , (B i )2 = ((Bti )2)t≥0 est une Ft −sous-martingale,
+2. ∀i , j = 1, . . . , d , i ≠ j , B i B j = (Bti B j
+t )t≥0 est une Ft −martingale.
+Preuve :
+1. En appliquant la formule d’Itô, on obtient
+(B i
+t )2 = 2 S
+t
+0
+Bi
+s dB i
+s +t.
+On a
+ES
+t
+0 (B i
+s )2ds = S
+t
+0 E (B i
+s )2 ds = S
+t
+0
+sds = t2
+2 < +∞,
+on en déduit que B ∈ Λ2
+loc et que ∫ t
+0 Bsi dBsi est une martingale de carré intégrable. On a donc pour t > s,
+E[(B i
+t )2SFs ] = E 2 S
+t
+0
+Bi
+u dB i
+u + t UFs
+= 2S
+s
+0
+Bi
+u dB i
+u +t
+= (B i
+s )2 + (t − s)
+> (B i
+s )2.
+(B i )2 = ((Bti )2)t≥0 est donc une Ft −sous-martingale.
+
+
+60 CHAPITRE 5. INTÉGRALE STOCHASTIQUE D’ITÔ
+2. Soient 0 ≤ s < t et i ≠ j , on peut écrire
+Bi
+tBj
+t −Bi
+sBj
+s =Bi
+s (B j
+t −Bj
+s ) + (B i
+t −Bi
+s )B j
+s + (B i
+t −Bi
+s )(B j
+t −Bj
+s ).
+On a donc
+E[(B i
+tBj
+t −Bi
+sBj
+s )SFs ] = E[B i
+s (B j
+t −Bj
+s )SFs ] + E[B j
+s (B i
+t −Bi
+s )SFs ] + E[(B i
+t −Bi
+s )(B j
+t −Bj
+s )SFs ]
+= Bi
+s E[B j
+t −Bj
+s SFs ]
+ ́111111111111111111111111111111111111111111 ̧11111111111111111111111111111111111111111¶
+car Bsi est Fs −mesurable
++ Bj
+s E[B i
+t −Bi
+s SFs ]
+ ́11111111111111111111111111111111111111111 ̧11111111111111111111111111111111111111111¶
+car B j
+s est Fs −mesurable
++E[(B i
+t −Bi
+s )(B j
+t −Bj
+s )SFs ]
+= Bi
+s E[B j
+t −Bj
+s]
+ ́111111111111111111111111111111 ̧11111111111111111111111111111¶
+car B j
+t −B j
+s ∐ Fs
++B j
+s E[B i
+t −Bi
+s]
+ ́11111111111111111111111111111 ̧11111111111111111111111111111¶
+car B i
+t −Bsi ∐ Fs
++ E[B i
+t −Bi
+s SFs ]E[B j
+t −Bj
+s SFs ]
+ ́1111111111111111111111111111111111111111111111111111111111111111111111111111111111 ̧1111111111111111111111111111111111111111111111111111111111111111111111111111111111¶
+car B i
+t −Bsi ∐ B j
+t −B j
+s
+= 0 + 0 + E[B i
+t −Bi
+s ]E[B j
+t −Bj
+s] = 0,
+B i B j = (Bti B j
+t )t≥0 est donc bien une Ft −martingale.
+Corollaire 5.58. Soit B = (B 1, . . . , B d ) un Ft −mouvement brownien d −dimensionnel. Alors,
+1. ⟨B i ⟩t = t , ∀i = 1, . . . , d ,
+2. ⟨B i , B j ⟩t = 0, ∀i , j = 1, . . . , d , i ≠ j .
+Preuve :
+1. On a
+(B i
+t )2 = 2 S
+t
+0
+Bi
+s dB i
+s +t.
+Or ⟨B i ⟩t est l’unique processus croissant adapté à trajectoires continues, partant de 0 tel que (Bti )2−⟨B i ⟩t soit une martingale. On a vu que
+(B i
+t )2 − t = 2 S
+t
+0
+Bi
+s dB i
+s
+est une martingale et
+Bi
+t =0+S
+t
+0
+1dB i
+s +S
+t
+0
+0ds
+est un processus d’Itô. On a donc ⟨B i ⟩t = ∫ t
+0 12ds = t .
+2. (⟨B i , B j ⟩t )t≥0 est l’unique processus à variation finie, à trajectoires continues, partant de 0 tel que Bti B j
+t−
+⟨B i , B j ⟩t soit une martingale locale. Or Bti B j
+t − 0 est une martingale, on en déduit que ⟨B i , B j ⟩t = 0.
+Par extension, pour Φ = (Φs )s≥0 et Ψ = (Ψs )s≥0 deux processus progressivement mesurables réels, tels que
+∫t
+0 (SΦs S2 + SΨs S2)ds < +∞ p.s. pour tout t ≥ 0, i.e. Mt = ∫ t
+0 Φs dBsi et Nt = ∫ t
+0 Ψs dB j
+s sont des martingales locales bien définies, on a
+⟨M, N⟩t = bS
+.
+0 Φs dB i
+s,S
+.
+0 Ψs dB j
+s gt = 0 ∀i , j = 1, . . . , d , i ≠ j.
+Mais
+bS
+.
+0 Φs dB i
+s,S
+.
+0 Ψs dB i
+s gt = S
+t
+0 ΦsΨsds.
+
+
+5.5. CAS MULTIDIMENSIONNEL 61
+Intégrale stochastique par rapport à B = (B 1, . . . , B d ) mouvement brownien d −dimensionnel :
+Λd
+loc = {Φ = (Φs )s≥0 = (Φ1
+s , . . . , Φd
+s ) ∈ Rd , progressivement mesurable tel que S
+t
+0 SΦs S2ds =
+d
+i =Q1 S
+t
+0 SΦi
+s S2ds < +∞}
+On définit
+Mt = S
+t
+0 Φs dBs =
+d
+i =Q1 S
+t
+0 Φi
+s dB i
+s.
+M = (Mt )t≥0 est une martingale locale (∃(Tn)n≥0 suite de temps d’arrêt qui tendent en croissant vers +∞ telle que (Mt∧Tn )t≥0 soit une Ft −martingale). On a
+⟨M⟩t = b
+d
+i =Q1 S
+.
+0 Φi
+s dB i
+s gt = S
+t
+0
+d
+i =Q1
+SΦi
+s S2ds = S
+t
+0 SΦs S2ds,
+avec SxS = 1⁄4x12 + ⋅ ⋅ ⋅ + x2
+d . Pour deux processus Φ et Ψ dans Λd
+loc et B = (B 1, . . . , B d ), on définit pour
+Mt = S
+t
+0 Φs dBs et Nt = S
+t
+0 Ψs dBs ,
+⟨M, N⟩t = S
+t
+0
+d
+i =Q1
+Φi
+s Ψi
+s ds
+et
+⟨M, N⟩t = 1
+4 ⟨M + N⟩t − ⟨M − N⟩t .
+Processus d’Itô :
+Xt = X0 +S
+t
+0 Φs dBs + S
+t
+0 αsds
+avec
+● X0 variable aléatoire réelle F0−mesurable
+● Φ = (Φ1, . . . , Φd ) ∈ Λd
+loc
+● B = (B 1, . . . , B d ) Ft −mouvement brownien d −dimensionnel
+● α adapté et ∫ t
+0 Sαs Sds < +∞ pour tout t ≥ 0 p.s.
+Si X et Y sont deux processus d’Itô avec les conditions précédentes :
+Xt = X0 +S
+t
+0 Φs dBs + S
+t
+0 αsds
+Yt = Y0 + S
+t
+0 Ψs dBs + S
+t
+0 βsds
+On a alors
+⟨X , Y ⟩t = ⟨S
+.
+0 Φs dBs , S
+.
+0 ΨdBs ⟩t =
+d
+i =Q1 S
+t
+0 Φi
+s Ψi
+s ds.
+
+
+62 CHAPITRE 5. INTÉGRALE STOCHASTIQUE D’ITÔ
+Formule d’Itô : Soient Xt = (Xt1, . . . , X p
+t ) p processus d’Itô et f ∶ Rp → R de classe C 2. Alors f (Xt ) est un processus d’Itô et on a
+f (Xt) = f (X0)+
+p
+i =Q1 S
+t
+0
+∂f
+∂x j (Xs )dX j
+s +1
+2
+p
+Q
+j ,k=1 S
+t
+0
+∂2 f
+∂x j ∂xk (Xs )d⟨X j , X k ⟩s .
+Idée de preuve : À j fixé,
+S
+t
+0
+∂f
+∂x j (Xt )dX j
+s =S
+t
+0
+∂f
+∂x j (Xs )[ Φj
+s dBs
+ ́111111 ̧11111¶
+=∑l =1,...,d Φ j ,l
+s dBsl
++α j
+s ds]
+⇒ existence de ∫ t
+0
+∂f
+∂x j (Xt )dX j
+s.
+Exemple 5.59. Soient B 1 = (Bt1)t≥0 et B 2 = (Bt2)t≥0 deux Ft −mouvements browniens standards et f (x1, x2) =
+x12 + x22, fonction de classe C 2. On a
+∂f
+∂x1 (x1, x2) = 2x1 et ∂ f
+∂x2 (x1, x2) = 2x2.
+On en déduit que
+(B 1
+t )2 + (B 2
+t )2 = (B 1
+0 )2 + (B 2
+0 )2
+ ́11111111111111111111111111111111 ̧11111111111111111111111111111111¶
+=0+0
++S
+t
+0 (2B 1
+s dB 1
+s + 2B 2
+s dB 2
+s)+ 1
+2S
+t
+0 (2ds + 2ds)
+= 2S
+t
+0
+B1
+s dB 1
+s +2S
+t
+0
+B2
+s dB 2
+s + 2t.
+Rappel :
+(B 1
+t )2 = 2 S
+t
+0
+B1
+s dB 1
+s +t
+(B 2
+t )2 = 2 S
+t
+0
+B2
+s dB 2
+s +t.
+Corollaire 5.60. Soient Xt = (Xt1, . . . , X p
+t )t≥0 p processus d’Itô et f ∈ C 1,2(R+ × Rp ). Alors,
+f (t , Xt ) = f (0, X0) + S
+t
+0
+∂f
+∂s (s, Xs )ds + S
+t
+0
+p
+i =Q1
+∂f
+∂xi (s, Xs )dX i
+s+1
+2S
+t
+0
+p
+i ,Qj
+∂2 f
+∂xi ∂x j (s, Xs )d⟨X i , X j ⟩s .
+Yt = (t , Xt1, . . . , X p
+t ) est un processus d’Itô de dimension p + 1 et ⟨t , Xti ⟩ = 0 car le processus (t )t≥0 n’admet pas de partie martingale locale.
+Exercice 5.61. Montrer que les processus suivants sont des processus d’Itô, calculer leurs crochets :
+1. Bt2,
+2. t + eBt ,
+3. Bt3 − 3t Bt ,
+4. 1 + 2t + eBt ,
+5. (Bt + t ) exp(−Bt − 1
+2 t ),
+6. et~2 sin Bt .
+
+
+5.5. CAS MULTIDIMENSIONNEL 63
+Exercice 5.62. Soient
+Xt = exp S
+t
+0
+a(s)ds ,
+Yt = Y0 + S
+t
+0
+b(s) exp − S
+s
+0
+a(u)du dBs ,
+où a et b sont des fonctions boréliennes intégrables. Calculer Zt = Xt Yt en tant que processus d’Itô.
+
+
+64 CHAPITRE 5. INTÉGRALE STOCHASTIQUE D’ITÔ
+
+
+Chapitre 6
+Equations différentielles stochastiques
+6.1 Introduction
+Le but de ce chapitre est d’étudier les équations différentielles stochastiques (EDS) de la forme :
+dXt = f (t , Xt )dt + g (t , Xt )dBt
+X0 = x (6.1)
+qui n’a de sens qu’intégré :
+Xt = x +S
+t
+0
+f (s, Xs )ds + S
+t
+0
+g (s, Xs )dBs ,
+où B = (Bt )t≥0 est un mouvement brownien d -dimensionnel. Le coefficient f (t , Xt ) est appelé la dérive et le coefficient g (t , Xt ) est appelé coefficient de diffusion. Nous rechercherons des solutions X = (Xt )t≥0 qui sont des processus r -dimensionnels progressivement mesurables et doivent nécessairement vérifier :
+S
+t
+0 S f (s, Xs )Sds < ∞ et S
+t
+0 Sg (s, Xs )S2ds < ∞ ∀t > 0 p.s..
+On conviendra par la suite que
+f ∶ R+ × Rr → Rr , g ∶ R+ × Rr → Rr ×d
+sont des fonctions mesurables.
+Problématiques :
+1. Existence de solutions
+2. Unicité des solutions
+3. Calcul des solutions
+Notations :
+● Rr muni de la norme SxS = (∑r
+i =1 x2
+i )1~2,
+● M (r, d ) matrices à coefficients réels à r lignes et d colonnes,
+● A ∈ M (r, d ), SAS = »tr(At A) = i=1Q,...,r
+j =1,...,d
+a2
+ij
+1~2
+,
+● A ∈ M (r, d), t A ∈ M (d, r ) et At A ∈ M (r, r ).
+65
+
+
+66 CHAPITRE 6. EQUATIONS DIFFÉRENTIELLES STOCHASTIQUES
+6.2 Résultats préliminaires
+6.2.1 Processus à valeurs matricielles
+Soient (Ω, F , (Ft )t≥0, P) un espace probabilisé filtré et B = (B 1, . . . , B d ) un Ft −mouvement brownien d −dimensionnel. Soit Φ = (Φt )t≥0 un processus progressif à valeurs dans M (r, d ) :
+R+ × Ω → M (r, d)
+(t , ω) ↦ Φt (ω) = Φi,j
+t (ω) 1≤i ≤r 1≤ j ≤d
+Supposons que ∫ t
+0 SΦs S2ds < +∞ p.s. pour tout t ≥ 0.
+On définit la martingale locale vectorielle M = (M 1, . . . , M r ) par
+Mi
+t=
+d
+jQ=1 S
+t
+0 Φi , j
+s dB j
+s = tei Mt = S
+t
+0
+t ei Φs dBs , ∀i = 1, . . . , r.
+où t ei = (0, . . . , 0, ®1
+ième position
+, 0, . . . , 0).
+(0, . . . , 0, 1, 0, . . . , 0)
+ ́111111111111111111111111111111111111111111111111 ̧111111111111111111111111111111111111111111111111¶
+1×r
+Φs
+r × ±d
+= (Φi ,1
+s , Φi ,2
+s , . . . , Φi ,d
+s ).
+On écrit matriciellement Mt = ∫ t
+0 Φs dBs :
+Mt = ⎛⎜⎝
+Mt1
+⋮
+Mtr
+⎞⎟⎠ = S
+t
+0
+⎛⎜⎝
+Φs11 ⋯ Φs1d
+⋮⋮
+Φrs 1 ⋯ Φrsd
+⎞⎟⎠
+⎛⎜⎝
+dBs1
+⋮
+dBsd
+⎞⎟⎠
+et
+⟨M i , M j ⟩t = ⟨S
+.
+0
+t ei Φs dBs , S
+.
+0
+t e j Φs dBs ⟩t
+=S
+t
+0 ( t ei Φs t Φs e j )ds
+=b
+d
+Q
+k=1 S
+.
+0 Φi ,k
+s dB k
+s,
+d
+Q
+l=1 S
+.
+0 Φ j ,l
+s dB l
+s gt
+.
+En utilisant le fait que ⟨B k , B l ⟩ = 0 pour tout k ≠ l , on obtient
+⟨Mi , M j ⟩t =
+d
+Q
+k=1 S
+t
+0 Φi ,k
+s Φ j ,k
+s ds.
+
+
+6.2. RÉSULTATS PRÉLIMINAIRES 67
+Si de plus, E ∫ t
+0 SΦs S2ds < +∞ pour tout t ≥ 0,
+EU S
+t
+0 Φs dBs
+ ́111111111111111111111 ̧11111111111111111111¶
+martingale vectorielle
+U
+2
+=E
+r
+Q
+k =1
+SM k
+t S2
+=
+r
+Q
+k =1
+E[SM k
+t S2]
+=
+r
+Q
+k =1
+E US
+t
+0
+t ek Φs dBs U
+2
+=
+r
+Q
+k =1
+ES
+t
+0 S t ek Φs S2ds
+=E S
+t
+0 SΦs S2ds
+On retrouve bien
+EU S
+t
+0 Φs dBs
+ ́111111111111111111111 ̧11111111111111111111¶
+martingale vectorielle
+U
+2
+=E
+r
+Q
+k =1
+SM k
+t S2 = E S
+t
+0 SΦs S2ds .
+6.2.2 Processus d’Itô vectoriel
+Soient (Ω, F , (Ft )t≥0, P) un espace probabilisé filtré et B = (B 1, . . . , B d ) un mouvement brownien d −dimensionnel.
+Définition 6.1. On appelle processus d’Itô vectoriel un processus X = (Xt )t≥0 à valeurs dans Rr de la forme
+Xt = X0 +S
+t
+0 Φs dBs + S
+t
+0 αsds,
+avec
+● X0 vecteur aléatoire de Rr , F0−mesurable,
+● Φ = (Φt )t≥0 un processus progressif à valeurs dans M (r, d ) tel que ∫ t
+0 SΦs S2ds < +∞ p.s. pour tout t ,
+● α = (αt )t≥0 un processus progressif à valeurs dans Rr tel que ∫ t
+0 Sαs Sds < +∞ p.s. pour tout t .
+B"dXt = Φt dBt + αt dt " n’a de sens qu’intégré.
+Formule d’Itô : Soient f ∈ C 1,2(R+, Rr ) et X un processus d’Itô à valeurs dans Rr .
+f (t , Xt ) = f (0, X0) + S
+t
+0
+∂f
+∂s (s, Xs )ds +
+r
+Q
+k=1 S
+t
+0
+∂f
+∂xk (s, Xs )dX k
+s +1
+2Q
+k,l =1,...,r S
+t
+0
+∂2 f
+∂xk ∂xl (s, Xs )d⟨X k , X l ⟩s
+f (t , Xt ) = f (0, X0)+S
+t
+0
+∂f
+∂s (s, Xs )ds+
+r
+Q
+k=1 S
+t
+0
+∂f
+∂xk (s, Xs )[ t ek Φs dBs +αk
+s ds]+ 1
+2Q
+k,l =1,...,r S
+t
+0
+∂2 f
+∂xk ∂xl (s, Xs) t ek Φs t Φsel ds
+En notant ▽x f = ∂ f
+∂x1
+,..., ∂f
+∂xr
+et Dx2 f = ∂2 f
+∂xi ∂x j 1≤i ,j ≤r
+on peut écrire
+f (t , Xt ) = f (0, X0) + S
+t
+0
+t ▽x f (s, Xs )Φs dBs + S
+t
+0
+∂f
+∂s (s, Xs ) + t ▽x f (s, Xs )αs + 1
+2 tr[D2
+x f (s, Xs )Φt
+sΦs] ds.
+
+
+68 CHAPITRE 6. EQUATIONS DIFFÉRENTIELLES STOCHASTIQUES
+6.3 Existence et unicité de la solution
+Définition 6.2. Soit f ∶ R+ × Rr → M (r, d ) ou Rr . On dit que f est "localement bornée" si ∀T ≥ 0 et K compact de
+Rr , f (t , x) est bornée sur [0, T ] × K .
+6.3.1 Position du problème
+Soient r et d deux entiers positifs, σ et b deux fonctions déterministes, mesurables, localement bornées définies sur R+ × Rr et à valeurs respectivement dans M (r, d ) et Rr :
+(t , ω) ↦ σ(t , ω) = (σi j (t , ω))1≤i≤r
+1≤ j ≤d
+[coefficients de diffusion/volatilité]
+(t , ω) ↦ b(t , ω) = (b1(t , ω), . . . , br (t , ω)) [drift/dérive/tendance]
+Définition 6.3. Une solution de E (σ, b) :
+dXt = σ(t , Xt )dBt + b(t , Xt )dt
+est la donnée de :
+● un espace de probabilité filtré usuel (Ω, F , (Ft )t≥0, P),
+● sur cet espace un Ft − P−mouvement brownien de dimension d , B = (B 1, . . . , B d ),
+● un processus Ft −adapté, continu, à valeurs dans Rr tel que
+Xt = X0 +S
+t
+0 σ(s, Xs )dBs + S
+t
+0
+b(s, Xs )ds
+⎛⎜⎝
+X t1
+⋮
+X tr
+⎞⎟⎠ = ⎛⎜⎝
+X 01
+⋮
+X 0r
+⎞⎟⎠ + S
+t
+0
+⎛⎜⎝
+σ11(s, Xs ) ⋯ σ1d (s, Xs )
+⋮⋮
+σr 1(s, Xs ) ⋯ σrd (s, Xs )
+⎞⎟⎠
+⎛⎜⎝
+dBs1
+⋮
+dBsd
+⎞⎟⎠ + S
+t
+0
+⎛⎜⎝
+b1(s, Xs)
+⋮
+br (s, Xs)
+⎞⎟⎠
+ds
+Si X0 ≡ x ∈ Rr , le processus est solution de Ex (σ, b).
+En pratique (dans les cas simples), pour trouver la solution d’une EDS, on intuite la forme de la solution et on vérifie que l’EDS de départ est bien satisfaite en appliquant la formule d’Itô.
+Exemple 6.4. Les EDS affines admettent des solutions explicites qu’on peut obtenir comme dans le cas déterministe par la méthode de variation de la constante. Le cas affine est important car les EDS affines apparaissent comme des linéarisées d’EDS plus complexes qu’on ne sait pas toujours résoudre. On se place dans le cas réel, i.e. d = r = 1. Considérons l’équation de Langevin définie pour b(t , x) = −ax (a > 0) et σ(t , x) = σ :
+dXt = −a Xt dt + σdBt .
+La solution est donnée par
+Xt = X0e−at + σ S
+t
+0
+e−a(t−s)dBs . (6.2)
+Sans le terme σdBt , l’équation dXt = −a Xt dt se résout immédiatement en Xt = C e−at . Pour tenir compte du terme σdBt , on fait "varier la constante C " :
+dCt e−at − aCt e−at dt = dXt = −a Xt dt + σdBt
+dCt = σeat dBt
+Ct = X0 +S
+t
+0 σeas dBs
+et, avec Xt = Ct e−at , l’expression (6.2) est obtenue. Il s’agit du processus d’Ornstein-Uhlenbeck
+
+
+6.3. EXISTENCE ET UNICITÉ DE LA SOLUTION 69
+Définition 6.5 (Plusieurs notions d’existence et unicité).
+1. On dit qu’il y a existence faible si pour tout x ∈ Rr , il existe une solution de Ex (σ, b).
+2. On dit qu’il y a existence et unicité faibles si x étant fixé, toutes les solutions de Ex (σ, b) ont même loi.
+3. On dit qu’il y a unicité trajectorielle si (Ω, F , (Ft )t≥0, P, B ) étant fixé, deux solutions X et X ′ de Ex (σ, b) telles que X0 = X ′
+0 sont indistingables [P(Xt = X ′
+t , ∀t ≥ 0) = 1].
+4. On dit que X solution de Ex (σ, b) est forte si X est adapté à la filtration canonique de B (FtB = σ(Bs , 0 ≤ s ≤ t )).
+Le théorème suivant relie les différentes notions d’existence et d’unicité.
+Théorème 6.6 (Yamada-Watanabe). S’il y a existence faible et unicité trajectorielle, alors il y a aussi unicité faible. De plus, pour tout choix de l’espace de probabilité filtré (Ω, F , (Ft )t≥0, P) et du (Ft )−mouvement brow
+nien B , il existe pour chaque x ∈ Rr une unique solution forte de Ex (σ, b).
+Nous omettons la preuve car nous n’utiliserons pas ce résultat dans la suite : dans le cadre lipschitzien que nous considérerons, nous pourrons établir directement les propriétés de la conclusion du théorème de Yamada-Watanabe.
+6.3.2 Existence et unicité trajectorielles dans le cas lipschitzien
+Nous donnons ici des résultats généraux d’existence et d’unicité des EDS.
+Hypothèse 6.7.
+1. (t , x) ↦ σ(t , x) et b(t , x) continues sur R+ × Rr
+2. (t , x) ↦ σ(t , x) et b(t , x) lipschitziennes en x : ∃K ≥ 0, ∀t ≥ 0, x, y ∈ Rr ,
+Sσ(t , x) − σ(t , y)S ≤ K Sx − yS et Sb(t , x) − b(t , y)S ≤ K Sx − yS.
+Théorème 6.8. Sous les hypothèses 6.7, il y a unicité trajectorielle pour E (σ, b). De plus, pour tout (Ω, F , (Ft )t≥0, P)
+et tout Ft − P−mouvement brownien B = (B 1, . . . , B d ) dessus, il existe pour chaque x ∈ Rr une (unique) solution forte à Ex (σ, b).
+Le théorème entraîne en particulier qu’il y a existence faible pour E (σ, b).
+Remarque 6.9. On peut affaiblir l’hypothèse de continuité en la variable t , qui n’intervient essentiellement que pour majorer supt∈[0,T ] Sσ(t , x)S et supt∈[0,T ] Sb(t , x)S pour x fixé. On peut aussi localiser l’hypothèse sur le caractère lipschitzien de σ et b (la constante K dépendra du compact sur lequel on considère t et x, y), à condition de conserver une condition de croissance linéraire
+Sσ(t , x)S ≤ K (1 + SxS) et Sb(t , x)S ≤ K (1 + SxS).
+Ce type de condition, qui sert à éviter l’explosion de la solution, intervient déjà dans les équations différentielles ordinaires.
+Avant de démontrer le théorème 6.8, on démontre le lemme suivant :
+Lemme 6.10 (Lemme de Gronwall). Soit T > 0 et g une fonction positive, mesurable et bornée sur [0, T ]. On suppose qu’il existe deux constantes a et b positives telles que pour tout t ∈ [0, T ],
+g (t) ≤ a + b S
+t
+0
+g (s)ds.
+Alors, g (t ) ≤ aebt .
+
+
+70 CHAPITRE 6. EQUATIONS DIFFÉRENTIELLES STOCHASTIQUES
+Preuve :
+g (t) ≤ a + b S
+t
+0
+g (s)ds
+≤ a +bS
+t
+0
+a+bS
+s
+0
+g (u)du ds
+= a + abt +b2 S
+t
+0S
+s
+0
+g (u)du ds
+≤ a + a(bt ) + a (bt )2
+2 + ⋅ ⋅ ⋅ + a (bt )n
+n! + bn+1 S
+t
+0
+ds1 S
+s1
+0
+ds2 ...S
+sn
+0
+g (sn+1)dsn+1
+ ́1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 ̧111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111¶
+reste
+.
+On trouve en utilisant le fait que pour tout t ∈ [0, T ], Sg (t )S ≤ K ,
+reste ≤ bn+1K t n+1
+(n + 1)! Ð→
+n→+∞
+0
+on en déduit que g (t ) ≤ aebt .
+Preuve : [Théorème 6.8] Pour alléger les notations, on traite seulement le cas d = r = 1. La preuve dans le cas général utilise exactement les mêmes arguments.
+1. Unicité trajectorielle : Soient (Ω, F , (Ft )t≥0, P, B = (Bt )t≥0, X = (Xt )t≥0, X ′ = (X ′
+t )t≥0) tels que X0 = X ′
+0 et
+⎧⎪⎪⎪⎨⎪⎪⎪⎩
+Xt = X0 +∫ t
+0 σ(s, Xs )dBs + ∫ t
+0 b(s, Xs )ds
+X′
+t = X0 +∫ t
+0 σ(s, X ′
+s )dBs + ∫ t
+0 b(s, X ′
+s )ds.
+On va montrer que p.s., Xt = X ′
+t , pour tout t ≥ 0. Pour tout M > 0, on pose τ = (τM ) = inf{t ∶ SXt S ≥ M ou SX ′
+t S ≥ M }. Pour t ≤ τ, on a SXt S ≤ M et SX ′
+t S ≤ M . τ est un temps d’arrêt car c’est le temps d’entrée dans le fermé ] − ∞, −M ] ∪ [M , +∞[ et le processus est adapté. On fixe T > 0, alors pour t ∈ [0, T ], on a
+Xt∧τ − X ′
+t∧τ = S
+t ∧τ
+0 [σ(s, Xs ) − σ(s, X ′
+s )]dBs + S
+t ∧τ
+0 [b(s, Xs ) − b(s, X ′
+s )]ds,
+et
+(Xt∧τ − X ′
+t∧τ)2 ≤ 2 S
+t ∧τ
+0 [σ(s, Xs ) − σ(s, X ′
+s )]dBs
+2
++S
+t ∧τ
+0 [b(s, Xs ) − b(s, X ′
+s )]ds
+2
+ ́1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 ̧1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111¶
+≤ C −S
+(t ∧τ) ∫
+t ∧τ
+0 (b(s,Xs )−b(s,Xs′))2ds
+.
+En passant à l’espérance, on obtient pour t ∈ [0, T ]
+E[(Xt∧τ − X ′
+t∧τ)2] ≤ 2E S
+t ∧τ
+0 [σ(s, Xs ) − σ(s, X ′
+s )]dBs
+2
++ 2E (t ∧ τ) S
+t ∧τ
+0 (b(s, Xs ) − b(s, X ′
+s ))2ds .
+On utilise ensuite l’isométrie et on obtient pour t ∈ [0, T ],
+E[(Xt∧τ − X ′
+t∧τ)2] ≤
+isométrie 2E S
+t ∧τ
+0 [σ(s, Xs ) − σ(s, X ′
+s )]2ds + 2E (t ∧ τ) S
+t ∧τ
+0 (b(s, Xs ) − b(s, X ′
+s ))2ds
+σ et b étant lipschitziennes, on a
+Sσ(s, Xs ) − σ(s, X ′
+s )S2 ≤ K 2SXs − X ′
+s S2 et Sb(s, Xs ) − b(s, X ′
+s )S2] ≤ K 2SXs − X ′
+s S2,
+
+
+6.3. EXISTENCE ET UNICITÉ DE LA SOLUTION 71
+et en utilisant le fait que t ∧ τ ≤ T pour tout t ∈ [0, T ], on en déduit que
+E[(Xt∧τ − X ′
+t∧τ)2] ≤ 2K 2E S
+t ∧τ
+0 SXs − X ′
+s S2ds + 2T K 2E S
+t ∧τ
+0 SXs − X ′
+s S2ds ,
+i.e.
+E[(Xt∧τ − X ′
+t∧τ)2] ≤ 2K 2(1 + T )E S
+t ∧τ
+0 SXs − X ′
+s S2ds
+≤ 2K 2(1 + T )E S
+t
+0 SXs∧τ − X ′
+s∧τS2ds .
+On pose h(t ) = E[(Xt∧τ − X ′
+t∧τ)2], on a donc
+h(t ) ≤ 2K 2(1 + T ) S
+t
+0
+h(s)ds
+avec h mesurable, positive, bornée, on peut donc appliquer le lemme de Gronwall avec a = 0 et b =
+2K 2(1 + T ) et on obtient
+h(t ) ≤ 0 × e2K 2(1+T )t .
+On a donc E[(Xt∧τ − X ′
+t∧τ)2] = 0, on en déduit que Xt∧τ = X ′
+t∧τ p.s. pour tout t . En faisant tendre M vers +∞, on conclut que p.s. Xt = X ′
+t pour tout t . On a donc unicité trajectorielle.
+2. Existence forte par les approximation de Picard : nous construisons la solution par la méthode d’approximation de Picard. On définit par récurrence
+X0
+t =x
+X1
+t =x+S
+t
+0 σ(s, X 0
+s )dBs + S
+t
+0
+b(s, X 0
+s )ds
+⋮
+X n+1
+t =x+S
+t
+0 σ(s, X n
+s )dBs + S
+t
+0
+b(s, X n
+s )ds (6.3)
+Les intégrales stochastiques ci-dessus sont bien définies puisque par récurrence, on constate que, pour chaque n, Xtn est continu et adapté à F B donc localement borné si bien que le processus σ(t , Xtn) l’est aussi (hypothèse lipschitzienne) et l’intégrale correspondante bien définie. On fixe maintenant T > 0 et
+on raisonne sur [0, T ]. On prouve par récurrence qu’il existe Cn tel que, pour tout t ∈ [0, T ], E[SXtnS2] ≤ Cn.
+Lemme 6.11. Soit T > 0, alors pour tout n ∈ N, il existe une constante positive Cn telle que pour tout
+t ∈ [0, T ], ESXtnS2 ≤ Cn < +∞.
+Preuve : [Preuve du lemme] Par récurrence :
+● E[SXt0S2] = x2 < +∞
+● on suppose que E[SX n−1
+t S2] ≤ Cn−1
+● rang n ?
+On utilise l’inégalité (a + b + c)2 ≤ 3(a2 + b2 + c2) :
+SX n
+t S2 ≤ 3 SxS2 + U S
+t
+0 σ(s, X n−1
+s )dBs U
+2
++US
+t
+0
+b(s, X n−1
+s )dsU
+2
+ ́111111111111111111111111111111111111111111111111111111 ̧111111111111111111111111111111111111111111111111111111¶
+≤ C −S
+t∫
+t
+0 Sb(s,Xsn−1)S2ds
+
+
+72 CHAPITRE 6. EQUATIONS DIFFÉRENTIELLES STOCHASTIQUES
+Remarque 6.12. Si S f (x) − f (y)S ≤ K Sx − yS, alors
+S f (x)S = S f (x) − f (0) + f (0)S ≤ S f (x) − f (0)S + S f (0)S ≤ K SxS + K ′, K , K ′ ≥ 0.
+On a donc
+Sσ(s, X n−1
+s )S2 ≤ 2K 2SX n−1
+s S2 + 2K ′2 et Sb(s, X n−1
+s )S2 ≤ 2K 2SX n−1
+s S2 + 2K ′2.
+En passant à l’espérance et en utilisant l’hypothèse de récurrence, nous obtenons
+E[Sσ(s, X n−1
+s )S2] ≤ 2K 2E(SX n−1
+s S2) + 2K ′ ≤ 2K 2Cn−1 + 2K ′2 ∀s ∈ [0, T ]
+et de même pour E[Sb(s, X n−1
+s )S2]. On en déduit que ∫ t
+0 σ(s, X n−1
+s )dBs est une martingale de L2 et donc
+E[SX n
+t S2] ≤ 3 SxS2 + S
+t
+0 ESσ(s, X n−1
+s )S2ds + T S
+T
+0 ESb(s, X n−1
+s )S2ds
+≤ 3[SxS2 + T (1 + T )(2K 2Cn−1 + 2K ′2)] =∶ Cn.
+On revient à la preuve du théorème 6.8. On évalue E sup
+s∈[0,t ]
+SX n+1
+s − Xsn S2 :
+(X n+1
+s −Xn
+s )2 ≤ 2U S
+s
+0 (σ(u, X n
+u ) − σ(u, X n−1
+u ))dBuU
+2
++ 2U S
+s
+0 (b(u, X n
+u ) − b(u, X n−1
+u )duU
+2
+ ́1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 ̧1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111¶
+≤2s ∫
+s
+0 Sb(u,Xun )−b(u,Xun−1)S2du
+≤ 2 sup
+0≤s≤t S
+s
+0 (σ(u, X n
+u ) − σ(u, X n−1
+u ))dBu
+2
+ ́11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 ̧11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111¶
+=∶Ms2
++2s S
+s
+0 Sb(u, X n
+u ) − b(u, X n−1
+u )S2du,
+et M est une martingale de L2. On va utiliser l’inégalité de Doob donnée par lemme suivant :
+Lemme 6.13 (Inégalité de Doob). Soit M = (Mt )t≥0 une martingale continue. Alors pour p > 1 et T > 0,
+E sup
+0≤t≤T SMt Sp ≤ p
+p −1
+p
+E[SMT Sp ].
+En appliquant l’inégalité de Doob, on a
+E sup
+s∈[0,t ]
+SMs S2 ≤ 4E[M 2
+t ].
+On a donc par isométrie
+E[ sup
+s∈[0,t ]
+SX n+1
+s −Xn
+s S2] ≤ 8E S
+t
+0 Sσ(u, X n
+u ) − σ(u, X n−1
+u )S2du + 2T E S
+t
+0 Sb(u, X n
+u ) − b(u, X n−1
+u )S2du .
+Et en utilisant le fait que σ et b soient lipschitziennes, on obtient
+E sup
+s∈[0,t ]
+SX n+1
+s −Xn
+s S2 ≤ (8 + 2T )K 2 S
+t
+0 E sup
+s∈[0,u]
+SX n
+s − X n−1
+s S2 du. (6.4)
+
+
+6.3. EXISTENCE ET UNICITÉ DE LA SOLUTION 73
+On pose gn(t ) = E sup
+s∈[0,t ]
+SX n+1
+s − Xsn S2 , on a alors
+gn(t) ≤ CT S
+t
+0
+gn−1(u)du,
+avec CT = (8 + 2T )K 2. Or chacune des fonctions gn est bornée sur [0, T ]. En particulier, il existe une constante C ′
+T telle que g0(t ) ≤ C ′
+T pour t ∈ [0, T ]. Une récurrence simple montre alors que tout n ≥ 0, t ∈ [0, T ]
+gn(t) ≤ C′
+T (CT )n t n
+n! .
+On en déduit que ∑n≥0(gn(T ))1~2 < +∞ et comme
+U
++∞
+nQ=0
+sup
+0≤s≤T SX n+1
+s −Xn
+s SU2 ≤
++∞
+nQ=0
+U sup
+0≤s≤T SX n+1
+s −Xn
+s SU2 = nQ≥0
+(gn(T ))1~2 < +∞, (6.5)
+où la norme S.S2 est définie par SY S2 = »E[Y 2] pour une variable aléatoire Y , cela entraîne que p.s.
++∞
+nQ=0
+sup
+0≤s≤T SX n+1
+s −Xn
+s S < +∞,
+et donc p.s. la suite (Xtn)t∈[0,T ] converge uniformément sur [0, T ] vers un processus limite (Xt )t∈[0,T ] qui
+est continu. Comme par récurrence, chaque processus X n est adapté par rapport à la filtration canonique de B , X l’est aussi. On déduit aussi de (6.5) que (Xtn)t∈[0,T ] est une suite de Cauchy dans L2(Ω, F , P) donc elle converge
+dans L2. On déduit alors de l’isométrie L2 et des hypothèses lipschitziennes que, avec des limites dans L2, on a :
+lim
+n→+∞ S
+t
+0 σ(s, X n
+s )dBs = S
+t
+0 σ(s, Xs )dBs
+lim
+n→+∞ S
+t
+0
+b(s, X n
+s )ds = S
+t
+0
+b(s, Xs )ds
+Finalement, en passant à la limite dans l’équation de récurrence (6.3), on obtient que X est solution forte de Ex (σ, b) sur [0, T ]. Comme T > 0 était arbitraire, la preuve est complète.
+Exemple 6.14. On considère l’équation dXt = (a Xt + b)dt + σXt dBt avec
+σ(s, x) = σx
+b(s, x) = ax + b,
+qui sont continues et lipschitziennes. Alors on a existence et unicité fortes d’une solution à cette équation.
+Extension : Conditions initiales aléatoires On se place sous l’hypothèse 6.7 et on introduit η vecteur aléatoire de dimension r , F0−mesurable et tel
+que E[SηS2] < +∞.
+Théorème 6.15. Il existe une solution unique forte à E (σ, b) telle que X0 = η notée X η = (X η
+t )t≥0 et telle que
+Xη
+t =η+S
+t
+0
+b(s, X η
+s )ds + S
+t
+0 σ(s, X η
+s )dBs .
+Preuve : admis
+
+
+74 CHAPITRE 6. EQUATIONS DIFFÉRENTIELLES STOCHASTIQUES
+Contre-exemple au théorème d’existence et d’unicité forte :
+Il peut y avoir existence et unicité faibles sans qu’il y ait unicité trajectorielle. Pour ce contre-exemple, nous avons besoin d’un résultat sur la martingale exponentielle et du théorème de Lévy. Nous commençons par démontrer le résultat suivant :
+Proposition 6.16. Soit M une martingale locale. Pour tout λ ∈ C, soit
+E(λM )t = exp λMt − λ2
+2 ⟨M⟩t .
+Le processus E(λM )t est une martingale locale.
+Preuve : Si F (t , x) est une fonction de classe C 2 sur R+ × R, la formule d’Itô entraîne que
+F (⟨M ⟩t , Mt ) = F (0, M0) + S
+t
+0
+∂F
+∂x (⟨M ⟩s , Ms )dMs + S
+t
+0
+∂F
+∂s + 1
+2
+∂2F
+∂x2 (⟨M ⟩s , Ms )d⟨M ⟩s .
+Le processus F (⟨M ⟩t , Mt ) est une martingale locale dès que sa partie à variation finie s’annule, i.e. lorsque F
+vérifie la condition :
+∂F
+∂s + 1
+2
+∂2F
+∂x2 = 0.
+Cette condition est satisfaite par la fonction F (t , x) = exp(λx − λ2
+2 t ) (plus précisément par les parties rélle et imaginaire de cette fonction).
+Théorème 6.17 (Théorème de Lévy). Soit X = (X 1, . . . , X d ) un processus continu, Ft −adapté, issu de 0. Il y a équivalence entre
+(i) X est un Ft −mouvement brownien de dimension d ,
+(ii) les processus X i , (i = 1, . . . , d ) sont des Ft −martingales continues tels que
+⟨X i , X j ⟩t = δi j t , avec δi j = 1 si i = j
+0 si i ≠ j.
+Preuve :
+(i ) ⇒ (i i ) déjà fait, (i i ) ⇒ (i ) Soit u ∈ Rd . Alors u.Xt = ∑d
+j =1 u j X j
+t est une martingale de processus croissant
+Q
+j ,k=1,...,d
+u j uk ⟨X j , X k ⟩t =
+d
+jQ=1
+u2
+j t = SuS2t .
+Alors d’après la proposition 6.16, Mt = exp(i u.Xt + 1
+2 SuS2t ) est une martingale locale. Cette martingale locale
+est bornée sur les intervalles [0, T ], T > 0, il s’agit donc d’une vraie martingale. On a donc pour tout 0 ≤ s < t ,
+E exp i u.Xt + 1
+2 SuS2t UFs = exp i u.Xs + 1
+2 SuS2s .
+En particulier pour A ∈ Fs ,
+E[1A exp(i u.(Xt − Xs ))] = E[E[1A exp(i u.(Xt − Xs ))SFs ]]
+= E 1A exp − i u.Xs − 1
+2 SuS2t E exp i u.Xt + 1
+2 SuS2t UFs
+= E 1A exp − i u.Xs − 1
+2 SuS2t exp i u.Xs + 1
+2 SuS2s
+= P(A) exp − 1
+2 SuS2(t − s) .
+
+
+6.3. EXISTENCE ET UNICITÉ DE LA SOLUTION 75
+Avec A = Ω, on en déduit que Xt − Xs ∼ N (0, (t − s)Id ). Ensuite pour A ∈ Fs de probabilité P(A) > 0, en notant PA(.) = P(.SA), on a
+EA[exp(i u.(Xt − Xs ))] = exp − 1
+2 SuS2(t − s) .
+On en déduit que L(Xt − Xs SA) = N (0, (t − s)Id ). Pour toute fonction mesurable positive f sur Rd , on a donc
+EA[ f (Xt − Xs )] = E[ f (Xt − Xs )],
+soit, en multipliant par 1A de part et d’autre et en prenant l’espérance,
+E[1A f (Xt − Xs )] = P(A)E[ f (Xt − Xs )].
+Comme c’est vrai pour tout A ∈ Fs , Xt − Xs est indépendant de Fs . Finalement, pour tout 0 = t0 < t1 < ⋅ ⋅ ⋅ < tp ,
+le vecteur (Xtij − Xtij−1 )1≤i≤d,1≤j ≤p est un vecteur gaussien, car obtenu en regroupant p vecteurs gaussiens in
+dépendants. Par transformation linéaire, (Xtij )1≤i≤d,1≤j ≤p est encore un vecteur gaussien pour tout (t j )1≤j ≤p
+et donc X est un processus gaussien. Comme le vecteur (Xtij − Xtij−1 )1≤i≤d,1≤j ≤p a ses composantes indépendantes, le processus est finalement gaussien, à accroissements indépendants et stationnaires, et par hypothèse à trajectoires continues. Cela justifie que X 1, . . . , X d sont d mouvements browniens indépendants et que X est un Ft −mouvement brownien d -dimensionnel.
+Contre-exemple : Soit sgn ∶ R → {+1, −1}, tel que sgn(x) = 1 si x ≥ 0
+x − 1 si x < 0. Soient (Ω, F , P) un espace de
+probabilité et β = (βt )t≥0 un mouvement brownien standard issu de y ∈ R tel que β0 = y. On pose
+Bt = S
+t
+0
+sgn(βs )dβs .
+● Montrons que cette intégrale stochastique a un sens : 1. (s, ω) ↦ sgn(βs (ω)) progressivement mesurable car continue à droite (sgn est une fonction continue à droite et βs est continu).
+2. ∫ t
+0 (sgn(βs ))2ds = t < +∞.
+● Y-a-t-il existence faible ? On va trouver une EDS pour laquelle on a existence faible d’une solution. Pour appliquer le théorème de Lévy, on s’intéresse à :
+ES
+t
+0 (sgn(βs ))2ds = t < +∞.
+Donc ∫ t
+0 sgn(βs )dβs est une martingale à trajectoires continues avec
+⟨B⟩t = S
+t
+0 (sgn(βs ))2ds = t .
+On en déduit d’après le théorème de Lévy 6.17 que B est un mouvement brownien par rapport à F β
+t= σ{βs , 0 ≤ s ≤ t }.
+On peut écrire dBt = sgn(βt )dβt , en multipliant de part et d’autre par sgn(βt ), on a sgn(βt )dBt = (sgn(βt ))2dβt = dβt d’où
+βt = y + S
+t
+0
+sgn(βs )dBs .
+β est donc solution de l’équation différentielle stochastique (EDS)
+dXt = sgn(Xt )dBt
+X0 = y (∗)
+pour laquelle il y a donc existence faible. (On a construit une solution qui est faible car on ne se donne pas de brownien.) ⇒ Existence faible.
+
+
+76 CHAPITRE 6. EQUATIONS DIFFÉRENTIELLES STOCHASTIQUES
+● Y-a-t-il unicité faible ? S’il y a une autre solution, a-t-elle une loi brownienne ?
+Si on a une autre solution Xt = y +∫ t
+0 sgn(Xs )dBs , alors X est une martingale car E ∫ t
+0 (sgn(Xs ))2ds = t <
++∞, ⟨X ⟩t = t et (sgn(Xs ))s≥0 est un processus progressif car continue à droite) X est donc une martingale continue telle que ⟨X ⟩t = t et d’après le théorème de Lévy 6.17, c’est donc un mouvement brownien. ⇒ Unicité faible.
+● Y-a-t-il unicité trajectorielle ? On prend y = 0 (ne marche pas autrement). On a vu que βt est solution de
+Xt = ∫ t
+0 sgn(Xs )dBs . Mais −β est aussi solution issue de 0 correspondant au même mouvement brownien B:
+−βt = S
+t
+0 − sgn(βs )dBs
+=S
+t
+0 − sgn(βs ) 1{βs ≠0} + 1{βs =0} dBs
+=S
+t
+0
+sgn(−βs )1{βs ≠0}dBs
+car
+It = S
+t
+0
+sgn(βs )1{βs=0}dBs = 0 p.s.,
+en effet, (It )t≥0 est une martingale car son processus croissant est de carré intégrable en espérance et
+E[(It )2] = E S
+t
+0 1{βs =0}ds = S
+t
+0 P(βs = 0)ds = 0.
+Donc It = 0 p.s. et donc
+(−βt ) = S
+t
+0
+sgn(−βs )dBs .
+⇒ Pas d’unicité trajectorielle.
+La fonction sgn n’est pas continue et pas lipschitzienne.
+Exemple 6.18. Considérons l’EDS linéaire avec "bruit additif"
+dXt = a(t )Xt dt + σ(t )dBt , (6.6)
+où a, σ ∶ R+ → R sont des fonctions déterministes continues bornées. Alors on a l’existence et l’unicité forte d’une solution à l’équation (6.6). Dans le cas particulier σ = 0, la solution peut s’écrire simplement
+Xt = X0eα(t) avec α(t ) = S
+t
+0
+a(s)ds.
+Ceci suggère d’appliquer la méthode de la variation de la constante, c’est-à-dire de chercher une solution de la forme Xt = Ct eα(t). La formule d’Itô appliquée à Ct = e−α(t) Xt nous donne
+dCt = −a(t )e−α(t) Xt dt + e−α(t)dXt = e−α(t)σ(t )dBt ,
+d’où en intégrant et en tenant compte du fait que C0 = X0,
+Ct = X0 +S
+t
+0 σ(s)e−α(s)dBs .
+Ceci donne finalement la solution forte de l’équation (6.6)
+Xt = X0eα(t) + S
+t
+0 σ(s)eα(t)−α(s)dBs .
+
+
+6.3. EXISTENCE ET UNICITÉ DE LA SOLUTION 77
+On vérifie effectivement (6.6) en appliquant la formule d’Itô. On notera que si la condition initiale X0 est déter
+ministe, alors Xt suit une loi normale d’espérance E[Xt ] = X0eα(t) et de variance
+Var(Xt ) = S
+t
+0 σ(s)2e2(α(t)−α(s))ds,
+par isométrie.
+Exemple 6.19. Soit l’EDS linéaire avec "bruit multiplicatif"
+dXt = a(t )Xt dt + σ(t )Xt dBt ,
+avec à nouveau a, σ ∶ R+ → R des fonctions déterministes continues et bornées, de sorte qu’il existe une unique solution forte. Supposons que cette solution ne s’annule pas, nous pouvons alors écrire
+dXt
+Xt = a(t )dt + σ(t )dBt .
+En intégrant le membre de gauche, on devrait trouver log(Xt ), mais ceci est-il compatible avec le calcul d’Itô ? Pour s’en assurer posons Yt = log(Xt ) (on suppose ici que la solution est strictement positive). Alors la formule d’Itô donne
+dYt = 1
+Xt
+dXt − 1
+2
+1
+X s2
+d⟨X ⟩t
+=1
+Xt (a(t )Xt dt + σ(t )Xt dBt ) − 1
+2 σ(t )2dt
+= a(t )dt + σ(t )dBt − 1
+2 σ(t )2dt .
+En intégrant et en reprenant l’exponentielle, on obtient donc la solution forte
+Xt = X0 exp S
+t
+0
+a(s) − 1
+2 σ(s)2 ds + S
+t
+0 σ(s)dBs .
+En particulier, si a ≡ 0 et σ ≡ λ, on retrouve la martingale Xt = X0 exp{λBt − λ2t ~2}, appelée mouvement brownien exponentiel.

@@ -1,0 +1,1956 @@
+Reactive Systems
+A reactive system comprises networks of computing components, achieving their goals through interaction among themselves and their environment. Thus even relatively small systems may exhibit unexpectedly complex behaviours. As, moreover, reactive systems are often used in safety critical systems, the need for mathematically based formal methodology is increasingly important. There are many books that look at particular methodologies for such systems. This book offers a more balanced introduction for graduate students and describes the various approaches, their strengths and weaknesses and when they are best used. Milner’s CCS and its operational semantics are introduced, together with the notions of behavioural equivalences based on bisimulation techniques and with recursive extensions of Hennessy-Milner logic. In the second part of the book the presented theories are extended to take timing issues into account. The book has arisen from various courses taught in Denmark and Iceland and is designed to give students a broad introduction to the area, with exercises throughout.
+LUCA ACETO is Professor of Computer Science at Reykjavı ́k University, Iceland, and Aalborg University, Denmark.
+ANNA ING  ́OLFSD  ́OTTIR is Professor of Computer Science at Reykjavı ́k University, Iceland, and Aalborg University, Denmark.
+KIM G. LARSEN is Professor of Computer Science at Aalborg University, Denmark, and Twente University, The Netherlands.
+JI ˇR ́I SRBA is Associate Professor in Computer Science at Aalborg University, Denmark.
+
+
+‘Many modern-day computing systems are reactive in nature; they persist indefinitely, responding to the interactions of users, and updating their internal structures accordingly. Over the last two decades, an elegant theory of these reactive systems has emerged, and is being increasingly applied in industrial settings. And at last we have an accessible textbook for this area, written by a team who have played a central role in the development of the underlying theory, and the software tools which are essential to its successful application. It treats both timed and untimed systems and, although the underlying theory is carefully and methodically explained, the main trust of the book is to engage students with the material via a wealth of thought-provoking examples. The clarity of the exposition is exceptional; it presents the essential ideas clearly, avoiding unnecessary detail, but at the same time has well-chosen pointers to more advanced concepts. The book is destined to become the standard textbook for reactive systems.’
+Matthew Hennessy, Sussex University
+‘A must for anybody interested in formal analysis techniques for computing systems.’
+Wan Fokkink, Vrije Universiteit Amsterdam
+‘This book is a gentle introduction to the basics of theories of interactive systems that starts with an introduction to CCS and its semantic theory and then moves to introducing modal logics and timed models of concurrency. By means of a number of small but intriguing examples and by using software tools based on sound theoretical principles, it leads the reader to appreciating and mastering a number of process algebra-based techniques that are also having a great impact outside academic circles. The authors have managed to concentrate their expertise, enthusiasm and pedagogical ability in less than 300 pages. The presentation is very clear and conveys sufficient intuition to make the book appropriate also for students with limited mathematical background. An excellent advanced undergraduate text.’
+Rocco De Nicola, Universit ́a di Firenze
+‘This book offers an introduction to model-based verification of reactive systems, a technology that is essential to all IT-developers of the future, given the global trend in information technology towards ubiquitous computing. The book is unique in its pedagogical style, introducing the required theory (of models and specification formalisms for reactive systems) motivated carefully with its applications (in the development and use of automated verification tools in practice), and written as a textbook that can be used readily at many different levels of IT-related curricula.’
+Mogens Nielsen, Aarhus University
+
+
+Reactive Systems
+Modelling, Specification and Verification
+Luca Aceto1 2 Anna Ing ́olfsd ́ottir1 2 Kim G. Larsen1 Jiˇr ́ı Srba1
+1 Department of Computer Science, Aalborg University, 9220 Aalborg Ø, Denmark 2 Department of Computer Science, School of Science and Engineering, Reykjavı ́k University, Iceland
+
+
+CAMBRIDGE UNIVERSITY PRESS
+Cambridge, New York, Melbourne, Madrid, Cape Town, Singapore, São Paulo
+Cambridge University Press The Edinburgh Building, Cambridge CB2 8RU, UK
+First published in print format
+ISBN-13 978-0-521-87546-2
+ISBN-13 978-0-511-33535-8
+© L. Aceto, A. Ingolfsdottir, K. G. Larsen and J. Srba 2007
+2007
+Information on this title: www.cambridge.org/9780521875462
+This publication is in copyright. Subject to statutory exception and to the provision of relevant collective licensing agreements, no reproduction of any part may take place without the written permission of Cambridge University Press.
+ISBN-10 0-511-33535-0
+ISBN-10 0-521-87546-3
+Cambridge University Press has no responsibility for the persistence or accuracy of urls for external or third-party internet websites referred to in this publication, and does not guarantee that any content on such websites is, or will remain, accurate or appropriate.
+Published in the United States of America by Cambridge University Press, New York www.cambridge.org
+hardback
+eBook (NetLibrary) eBook (NetLibrary)
+hardback
+
+
+Contents
+Figures and tables page viii Preface x
+I A Classic Theory of Reactive Systems 1
+1 Introduction 1 Aims of this book 1 1.1 What are reactive systems? 2 1.2 Process algebras 5
+2 The language CCS 7 2.1 Some CCS process constructions 7 2.2 CCS, formally 16
+3 Behavioural equivalences 31 3.1 Criteria for good behavioural equivalence 31 3.2 Trace equivalence: a first attempt 34 3.3 Strong bisimilarity 36 3.4 Weak bisimilarity 53 3.5 Game characterization of bisimilarity 65 3.6 Further results on equivalence checking 72
+4 Theory of fixed points and bisimulation equivalence 75 4.1 Posets and complete lattices 75 4.2 Tarski’s fixed point theorem 78 4.3 Bisimulation as a fixed point 85
+5 Hennessy–Milner logic 89 5.1 Introduction to Hennessy–Milner logic 89 5.2 Hennessy–Milner theorem 98
+v
+
+
+vi Contents
+6 HML with recursion 102 Introduction 102 6.1 Examples of recursive properties 107 6.2 Syntax and semantics of HML with recursion 109 6.3 Largest fixed points and invariant properties 113 6.4 A game characterization for HML with recursion 115 6.5 Mutually recursive equational systems 120 6.6 Characteristic properties 125 6.7 Mixing largest and least fixed points 134 6.8 Further results on model checking 139
+7 Modelling mutual exclusion algorithms 142 Introduction 142 7.1 Specifying mutual exclusion in HML 147 7.2 Specifying mutual exclusion using CCS itself 149 7.3 Testing mutual exclusion 152
+II A Theory of Real-time Systems 159
+8 Introduction 159 8.1 Real-time reactive systems 159
+9 CCS with time delays 161 9.1 Intuition 161 9.2 Timed labelled transition systems 163 9.3 Syntax and SOS rules of timed CCS 165 9.4 Parallel composition 169 9.5 Other timed process algebras and discussion 173
+10 Timed automata 175 10.1 Motivation 175 10.2 Syntax of timed automata 176 10.3 Semantics of timed automata 180 10.4 Networks of timed automata 185 10.5 More on timed-automata formalisms 190
+11 Timed behavioural equivalences 193 11.1 Timed and untimed trace equivalence 193 11.2 Timed and untimed bisimilarity 195 11.3 Weak timed bisimilarity 200 11.4 Region graphs 203 11.5 Zones and reachability graphs 214 11.6 Further results on timed equivalences 218
+
+
+Contents vii
+12 Hennessy–Milner logic with time 220 Introduction 220 12.1 Basic logic 221 12.2 Hennessy–Milner logic with time and regions 229 12.3 Timed bisimilarity versus HML with time 232 12.4 Recursion in HML with time 237 12.5 More on timed logics 246
+13 Modelling and analysis of Fischer’s algorithm 248 Introduction 248 13.1 Mutual exclusion using timing 250 13.2 Modelling Fischer’s algorithm 251 13.3 Further exercises on timing-based mutual exclusion algorithms 258
+Appendix A Suggestions for student projects 261 A.1 Alternating-bit protocol 261 A.2 Gossiping girls 262 A.3 Implementation of regions 263
+References 267 Index 281
+
+
+Figures and tables
+Figures
+2.1 The interface for the process CS. page 8 2.2 The interface for the process CM | CS. 10 2.3 The interface for the process CM | CS | CS′. 11 2.4 The interface for the process CM | CS | CM′. 12 2.5 The interface for the process SmUni | CS′. 13 2.6 Labelled transition system with initial state p. 19 3.1 P R Q implies that C[P ] R C[Q]. 33 3.2 A bisimulation showing that B20 ∼ B10 | B10. 51
+3.3 The possible behaviours of (CMb | CS) \ {coin, coffee}. 55 6.1 Two processes, p and q. 103 6.2 A process. 109 6.3 The processes p and pi. 127 6.4 The coffee machine gkm. 128 6.5 Simple infinite process p. 130 10.1 Light switch. 176 10.2 Clock constraint. 182 10.3 A small Jobshop. 183 10.4 The lazy worker and his demanding employer. 189 11.1 A simple timed automaton. 204 11.2 Partitioning of the valuations for the automaton in Figure 11.1. 205 11.3 Symbolic exploration of the timed automaton in Figure 11.1. 217 12.1 A simple timed automaton. 225 12.2 Regions for cx = 2 and cy = 3. 231 13.1 The timed automaton Ai for process i. 251
+viii
+
+
+Listoffiguresandtables ix
+13.2 Erroneous timed automaton Aiw for process i. 256
+A.1 Some of the 18 regions when C = {x, y} and cx = cy = 1. 264 A.2 List representation of some of the regions in Figure A.1. 265 A.3 A simple timed automaton. 266
+Tables
+2.1 An alternative formulation for the process CS page 14 2.2 SOS rules for CCS (α ∈ Act, a ∈ L) 24 3.1 The sender, receiver and medium in (3.8) 59 9.1 SOS rules for TCCS (d, d′ ∈ R≥0) 167
+
+
+Preface
+This book is based on courses that have been held at Aalborg University and at Reykjavı ́k University over the last six years or so. The aim of these semester-long courses has been to introduce computer science students, at an early stage of their M.Sc. degrees or late in their B.Sc. degree studies, to the theory of concurrency and to its applications in the modelling and analysis of reactive systems. This is an area of formal-methods study that is finding increasing application outside academic circles and allows students to appreciate how techniques and software tools based on sound theoretical principles are very useful in the design and analysis of nontrivial reactive computing systems. In order to carry this message across to students in the most effective way, the courses on which the material in this book is based have presented:
+! some prime models used in the theory of concurrency (with special emphasis on state-transition models of computation such as labelled transition systems and timed automata); ! languages for describing actual systems and their specifications (with a focus on classic algebraic process calculi such as Milner’s calculus of communicating systems and logics such modal and temporal logics); and ! the embodiment of these models and languages in tools for the automatic verification of computing systems.
+The use of the theory and the associated software tools in the modelling and analysis of computing systems is a very important component in our courses, since it gives the students hands-on experience in the application of what they have learned and reinforces their belief that the theory they are studying is indeed useful and worth mastering. Once we succeed in awakening an interest in the theory of concurrency and its applications amongst students, it will be more likely that at least some will decide to pursue an in-depth study of the more advanced, and
+x
+
+
+Preface xi
+mathematically sophisticated, aspects of our field – perhaps, during M.Sc. thesis work or at a doctoral level. It has been very satisfying for us to witness a change in attitude in the students taking our courses over the years. Indeed, we have gone from a state in which most students saw very little point in taking the course on which this material is based to one in which the relevance of the material we cover is uncontroversial to many of them! At the time when an early version of our course was elective at Aalborg University, and taken only by a few mathematically inclined individuals, one student remarked in his course evaluation form ‘This course ought to be mandatory for computer science students.’ Now the course is indeed mandatory; it is attended by all M.Sc. students in computer science at Aalborg University, and most of them happily play with the theory and tools we introduce in the course. How did this change in attitude come about? And why do we believe that this is an important change? In order to answer these questions, it might be best to describe first the general area of computer science to which this textbook aims at contributing.
+The correctness problem and its importance Computer scientists build artifacts (implemented in hardware, or software or, as is the case in the fast growing area of embedded and interactive systems, a combination of both) that are supposed to offer some well-defined services to their users. Since these computing systems are deployed in very large numbers, and often control crucial and even safety-critical industrial processes, it is vital that they implement the specification of their intended behaviour correctly. The problem of ascertaining whether a computing system does indeed offer the behaviour described by its specification is called the correctness problem and is one of the most fundamental problems in computer science. The field of computer science that studies languages for the description of (models of) computer systems and their specifications and (possibly automated) methods for establishing the correctness of systems with respect to their specifications is called algorithmicverification. Despite its fundamental scientific and practical importance, however, twentiethcentury computer and communication technology did not pay sufficient attention to the correctness and dependability of systems in its drive toward faster and cheaper products. (See the editorial Patterson (2005) by a former president of the ACM for forceful arguments to this effect.) As a result, system crashes are commonplace, sometimes leading to very costly and even disastrous system failures, such as Intel’s Pentium-II bug in the floating-point division unit Pratt (1995) and the crash of the Ariane-5 rocket due to the conversion of a 64-bit real number to a 16-bit integer (Lions, 1996).
+
+
+xii Preface
+Classic engineering disciplines have a time-honoured and effective approach to building artifacts that meet their intended specifications: before actually constructing the artifacts, engineers develop models of the design to be built and subject them to a thorough analysis. Surprisingly, such an approach has only recently been used extensively in the development of computing systems. This textbook, and the courses we have given over the years based on the material it presents, stem from our deep conviction that every well-educated twentyfirst-century computer scientist should be well versed in the technology of algorithmic model-based verification. Indeed, as recent advances in algorithmic verification and applications of model checking (Clarke, Gruemberg and Peled, 1999) have shown, the tools and ideas developed within these fields can be used to analyse designs of considerable complexity that, until a few years ago, were thought to be intractable using formal analysis and modelling tools. (Companies such as AT&T, Cadence, Fujitsu, HP, IBM, Intel, Motorola, NEC, Siemens and Sun – to mention but a few – are using these tools increasingly in their own designs to reduce the time to market and to ensure product quality.) We believe that the availability of automatic software tools for the model-based analysis of systems is one of the two main factors behind the increasing interest amongst students and practitioners alike in model-based verification technology. Another is the realization that even small reactive systems – for instance, relatively short concurrent algorithms – exhibit very complex behaviours, owing to their interactive nature. Unlike in the setting of sequential software, it is therefore not hard for students to realize that systematic and formal analysis techniques are useful, even when not altogether necessary, in obtaining some level of confidence in the correctness of designs. The tool support that is now available to explore the behaviour of models of systems expressed as collections of interacting state machines of some sort should make the theory presented in this textbook very appealing for many students at several levels of their studies. It is our firmly held belief that only by teaching the beautiful theory of concurrent systems, together with its applications and associated verification tools, to our students shall we be able to transfer the available technology to industry and improve the reliability of embedded software and other reactive systems. We hope that this textbook will offer a small contribution to this pedagogical endeavour.
+Why this book? This book is by no means the first devoted to aspects of the theory of reactive systems. Some books that have been published in this area over the last 20 years or so are Baeten and Weijland (1990), Fokkink (2000), Hennessy (1988), Hoare (1985), Magee and Kramer (1999), Milner (1989), Roscoe (1999), Schneider (1999) and Stirling (2001), to mention but a few. However, unlike all
+
+
+Preface xiii
+the aforementioned books except Fokkink (2000), Magee and Kramer (1999) and Schneider (1999), the present book was written explicitly to serve as a textbook, and it offers a distinctive pedagogical approach to its subject matter that derives from our extensive use in the classroom of the material presented here in book form. In writing this textbook we have striven to transfer to paper the spirit of the lectures on which this text is based. Our readers will find that the style is often colloquial and attempts to mimic the Socratic dialogue with which we try to entice our student audience to take an active part in the lectures and associated exercise sessions. Explanations of the material presented in this textbook are interspersed with questions to our readers and exercises that invite the readers to check straight away whether they understand the material, as it is being presented. We believe that this makes the book suitable for self-study, as well as for use as the main reference text in courses ranging from advanced B.Sc. courses to M.Sc. courses in computer science and related subjects. Of course, it is not up to us to say whether we have succeeded in conveying the spirit of the lectures in the book you now hold in your hands, but we sincerely hope that our readers will experience some of the excitement that we still have in teaching this material and seeing our students appreciate it and we hope that readers will enjoy working with concurrency theory and the tools it offers for the analysis of reactive systems.
+For the instructor We have used much of the material presented in this textbook in several one-semester courses at Aalborg University and at Reykjavı ́k University, amongst others. These courses usually consist of about 30 hours of lectures and a similar number of hours of exercise sessions, where the students solve exercises and work on projects related to the material in the course. As stated above, we believe strongly that these practical sessions play a very important role in enabling students to appreciate the importance of the theory they are learning and to understand it in depth. Examples of recent courses based on this book may be found at the URL
+www.cs.aau.dk/rsbook/.
+There the instructor will find suggested schedules for his or her courses, exercises that can be used to supplement those in the textbook, links to other useful teaching resources available on the web, further suggestions for student projects and electronic slides that can be used for the lectures. (As an example, we usually supplement lectures covering the material in this textbook with from four to six 45-minute lectures on binary decision diagrams (Bryant, 1992), and their use in verification; these are based on Henrik Reif Andersen’s excellent lecture
+
+
+xiv Preface
+notes (Andersen, 1998), which are freely available on the web, and on Randel Bryant’s survey paper (Bryant, 1992).) We recommend that the teaching of the material covered in this book be accompanied by the use of software tools for verification and validation. In our courses, we usually employ the Edinburgh Concurrency Workbench (Cleaveland, Parrow and Steffen, 1993) for the part of the course devoted to classic reactive systems and, not surprisingly, UPPAAL (Behrmann, David and Larsen, 2004) for lectures on real-time systems. Both these tools are freely available and their use makes the theoretical material covered during the lectures come alive for the students. Using these tools the students will be able to analyse systems of considerable complexity, and we suggest that courses based upon this book be accompanied by a couple of practical projects involving the use of these, or similar, tools for verification and validation. We shall maintain a page with all the supporting material and other useful resources for students and instructors alike at the URL
+www.cs.aau.dk/rsbook/.
+In writing this book, we have tried to be at once pedagogical, careful and precise. However, despite our efforts, we are sure that there is still room for improvement in this text and for the correction of any mistake that may have escaped our attention. We shall use the above web page to inform the reader about additions and modifications to this book. We welcome corrections (typographical or otherwise), comments and suggestions from our readers. You can contact us by sending an email to the address
+rsbook@cs.aau.dk
+with subject line ‘RS Book’.
+Historical remarks and acknowledgments As already stated we have used this material in its present form for courses given at several institutions during the last few years. However, the story of its development is much older and goes back at least to 1986. During that year, the third author (Kim G. Larsen, then a freshly minted Ph.D. graduate from Edinburgh University) took up an academic position at Aalborg University. He immediately began designing a course on the theory of concurrency – the branch of theoretical computer science that he had worked on during his doctoral studies, under the supervision of Robin Milner. His aim was to use the course, and the accompanying set of notes and slides, to attract students to his research area by conveying his enthusiasm for it as well as his belief that
+
+
+Preface xv
+the theory of concurrency is important in applications. That material has stood the ‘lecture-room test’ well and forms the basis for the first part of the book. The development of those early courses was strongly influenced by the teaching and supervision of Robin Milner that Kim G. Larsen enjoyed during his doctoral studies in Edinburgh and would not have been possible without them. Even though the other three authors were not Milner’s students themselves, the strong intellectual influence of his work and writings on their view of concurrency theory will probably be evident to the readers of this book. Indeed, the ‘Edinburgh concurrency-theory school’ features prominently in the academic genealogy of each of the authors. For example, Rocco De Nicola and Matthew Hennessy had a strong influence on the view of concurrency theory and/or the work of Luca Aceto and Anna Ingo ́lfsdo ́ttir, and Jiˇrı ́ Srba enjoyed the liberal supervision of Mogens Nielsen. The material upon which the courses we have held at Aalborg University and elsewhere since the late 1980s were based has undergone gradual change before reaching the present form. Over the years, the part of the course devoted to Milner’s calculus of communicating systems and its underlying theory has decreased, and so has the emphasis on some topics of mostly theoretical interest. At the same time, the course material has grown to include models and specification languages for real-time systems. The present material aims at offering a good balance between classic and real-time systems, and between the theory and its applications. Overall, as already stated, the students’ appreciation of the theoretical material covered here has been greatly increased by the availability of software tools based on it. We thank all the developers of the tools we use in our teaching; their work has made our subject matter come alive for our students and has been instrumental in achieving whatever level of success we might have had in our teaching based on this textbook. This book was partly written while Luca Aceto was on leave from Aalborg University at Reykjavı ́k University, Anna Ingo ́lfsdo ́ttir was working at deCODE Genetics and Jirˇı ́ Srba was visiting the University of Stuttgart, sponsored by a grant from the Alexander von Humboldt Foundation. They thank these institutions for their hospitality and excellent working conditions. Luca Aceto and Anna Ingo ́lfsdo ́ttir were partly supported by the project ‘The Equational Logic of Parallel Processes’ (No. 060013021) of The Icelandic Research Fund. Jiˇrı ́ Srba received partial support from a grant of the Ministry of Education of the Czech Republic, project No. 1M0545. We thank Silvio Capobianco, Pierre-Louis Curien, Gudmundur Hreidarson, Rocco De Nicola, Ralph Leibmann, MohammadReza Mousavi, Guy Vidal-Naquet and the students of the Concurrency Course (Concurrence) (number 2-3) 2004–5,
+
+
+xvi Preface
+Master Parisien de Recherche en Informatique, for useful comments on and corrections of drafts of this text. The authors used drafts of the book in courses taught in the spring terms of 2004, 2005 and 2006 and in the autumn term of 2006 at Aalborg University, Reykjavı ́k University and the University of Iceland. The students who took those courses offered valuable feedback on the text and gave us detailed lists of errata. We thank Claus Brabrand for using a draft of the first part of this book in his course ‘Semantics’ (Q1, 2005 and 2006) at Aarhus University. The suggestions from Claus and his students helped us improve the text further. Moreover, Claus and Martin Mosegaard designed and implemented an excellent simulator for Milner’s calculus of communicating systems and the ‘bisimulation-game’ game, which our students can use to experiment with the behaviour of processes written in this language and to play the bisimulation game described in the textbook. Last, but not least, we thank David Tranah at Cambridge University Press for his enthusiasm for our project and also the three anonymous reviewers, who provided useful comments on a draft of this book. Any remaining infelicity is solely our responsibility. Luca Aceto and Anna Ingo ́lfsdo ́ttir dedicate this book to their son Ro ́bert, to Anna’s sons Logi and Ka ́ri and to Luca’s mother, Imelde Diomede Aceto. Kim Larsen dedicates the book to his wife Merete and to his two daughters Mia and Trine. Finally, Jiˇrı ́ Srba dedicates the book to his parents, Jaroslava and Jiˇrı ́ and to his wife, Vanda.
+
+
+Part I
+A Classic Theory of Reactive Systems
+1
+Introduction
+Aims of this book
+The aim of the first part of this book is to introduce three basic notions that we shall use to describe, specify and analyse reactive systems, namely
+! Milner’s calculus of communicating systems (CCS) (Milner, 1989), ! the model known as labelled transition systems (LTSs) (Keller, 1976), and ! Hennessy–Milner logic (HML) (Hennessy and Milner, 1985) and its extension with recursive definitions of formulae (Larsen, 1990).
+We shall present a general theory of reactive systems and its applications. In particular, we intend to show the following:
+1. how to describe actual systems using terms in our chosen models (i.e. either as terms in the process description language CCS or as labelled transition systems); 2. how to offer specifications of the desired behaviour of systems either as terms of our models or as formulae in HML; and 3. how to manipulate these descriptions, possibly (semi-)automatically, in order to analyse the behaviour of the model of the system under consideration.
+In the second part of the book, we shall introduce a similar trinity of basic notions that will allow us to describe, specify and analyse real-time systems – that is, systems whose behaviour depends crucially on timing constraints. There we shall present the formalisms of timed automata (Alur and Dill, 1994) and timed CCS (Yi, 1990, 1991a, b) to describe real-time systems, the model of timed
+1
+
+
+2 Introduction
+labelled transition systems (TLTSs) and a real-time version of Hennessy–Milner logic (Laroussinie, Larsen and Weise, 1995). After having worked through the material in this book, you should be able to describe non-trivial reactive systems and their specifications using the aforementioned models and verify the correctness of a model of a system with respect to given specifications either manually or by using automatic verification tools such as the Edinburgh Concurrency Workbench (Cleaveland, Parrow and Steffen, 1993) and the model checker for real-time systems UPPAAL (Behrmann, David and Larsen, 2004). Our, somewhat ambitious, aim is therefore to present a model of reactive systems that supports their design, specification and verification. Moreover, since many real-life systems are hard to analyse manually, we should like to have computer support for our verification tasks. This means that all the models and languages that we shall use in this book need to have a formal syntax and semantics. (The syntaxof a language consists of the rules governing the formation of statements, whereas its semantics assigns meaning to each of the syntactically correct statements in the language.) These requirements of formality are not only necessary in order to be able to build computer tools for the analysis of system descriptions but are also fundamental in agreeing upon what the terms in our models are actually intended to describe in the first place. Moreover, as Donald Knuth once wrote:
+A person does not really understand something until after teaching it to a computer, i.e. expressing it as an algorithm. . . . An attempt to formalize things as algorithms leads to a much deeper understanding than if we simply try to comprehend things in the traditional way.
+The pay-off from using formal models with an explicit formal semantics to describe our systems will therefore be the possibility of devising algorithms for the animation, simulation and verification of system models. These would be impossible to obtain if our models were specified only in an informal notation. Now that, it is hoped, you know what to expect from this book, it is time to get to work. We shall begin our journey through the beautiful land of concurrency theory by introducing a prototype description language for reactive systems and its semantics. However, before setting off on such an enterprise, we should describe in more detail what we actually mean by the term ‘reactive system’.
+1.1 What are reactive systems?
+The ‘standard’ view of computing systems is that, at a high level of abstraction, these may be considered as black boxes that take inputs and provide
+
+
+1.1. Whatarereactivesystems? 3
+appropriate outputs. This view agrees with the description of algorithmic problems. An algorithmic problem is specified by a collection of legal inputs, and, for each legal input, its expected output. In an imperative setting, an abstract view of a computing system may therefore be given by describing how it transforms an initial state – i.e. a function from variables to their values – to a final state. This function will, in general, be partial, i.e. it may be undefined for some initial states, in order to capture that the behaviour of a computing system may be non-terminating for some input states. For example, the effect of the program
+S = z ← x; x ← y; y ← z
+is described by the function [[S]] from states to states, defined thus:
+[[S]] = λs. s[x "→ s(y), y "→ s(x), z "→ s(x)],
+where the new state s[x "→ s(y), y "→ s(x), z "→ s(x)] is that in which the value of variable x is the value of y in state s and that of variables y and z is the value of x in state s. The values of all the other variables are those they had in state s. This state transformation is a way of describing formally that the intended effect of S is essentially to swap the values of the variables x and y. However, the effect of the program
+U = while true do skip,
+where we use skip to stand for ‘no operation’, is described by the partial function from states to states given by
+[[U ]] = λs. undefined,
+i.e. the always undefined function. This captures the fact that the computation of U never produces a result (final state), irrespective of the initial state. In this view of computing systems, non-termination is a highly undesirable phenomenon. An algorithm that fails to terminate on some inputs is not one the users of a computing system would expect to have to use. A moment of reflection, however, should make us realize that we already use many computing systems whose behaviour cannot be readily described as a function from inputs to outputs – not least because, at some level of abstraction, these systems are inherently meant to be non-terminating. Examples of such computing systems are
+! operating systems, ! communication protocols, ! control programs, and ! software running in embedded system devices such as mobile telephones.
+At a high level of abstraction, the behaviour of a control program can be seen to be governed by the following pseudocode algorithm skeleton:
+
+
+4 Introduction
+loop
+read the sensors’ values at regular intervals depending on the sensors’ values trigger the relevant actuators forever
+These and many others are examples of computing systems that interact with their environment by exchanging information with it. Like the neurons in a human brain, these systems react to stimuli from their computing environment (in the example control program above, these are variations in the values of the sensors) by possibly changing their state or mode of computation and, in turn, influence their environment by sending back some signals to it or initiating some operations that affect the computing environment (this is the role played by the actuators in the example control program). David Harel and Amir Pnueli coined the term reactive system in Harel and Pnueli (1985) to describe a system that, like those mentioned above, computes by reacting to stimuli from its environment. As the above examples and discussion indicate, reactive systems are inherently parallel systems and a key role in their behaviour is played by communication and interaction with their computing environment. A ‘standard’ computing system can also be viewed as a reactive system in which interaction with the environment takes place only at the beginning of the computation (when inputs are fed to the computing device) and at the end (when the output is received). However, all the example systems given before maintain a continuous interaction with their environment, and we may think of the computing system and its environment as parallel processes that communicate with each other. In addition, as again nicely exemplified by the skeleton of a control program given above, non-termination is a desirable feature of some reactive systems. In contrast to the setting of ‘standard’ computing systems, we certainly do not expect the operating systems running on our computers or the control program monitoring a nuclear reactor to terminate! Now that we have an idea of what reactive systems are, and of the key aspects of their behaviour, we can begin to consider what an appropriate abstract model for this class of systems should offer. In particular, such a model should allow us to describe the behaviour of collections of (possibly non-terminating) parallel processes that may compute independently or interact with one another. It should provide us with facilities for the description of well-known phenomena that appear in the presence of concurrency and are familiar to us from the world of operating systems and parallel computation in general (e.g., deadlock, livelock, starvation and so on). Finally, in order to abstract from implementation-dependent issues having to do with, say, scheduling policies, the chosen model should permit a clean description of non-determinism – a most useful modelling tool in computer science.
+
+
+1.2. Processalgebras 5
+Our aim in the remainder of this book will be to present a general-purpose theory that can be used to describe, and reason about, any collection of interacting processes. The approach that we shall present will make use of a collection of models and formal techniques that is often referred to as process theory. The key ingredients in this approach are
+! (process) algebra, ! automata or labelled transition systems, ! structural operational semantics, and ! logic.
+These ingredients give the foundations for the development of (semi-)automatic verification tools for reactive systems that support various formal methods for validation and verification, which can be applied to the analysis of highly non-trivial computing systems. The development of these tools requires in turn advances in algorithmics and via the increasing complexity of the analysed designs feeds back to the theory-development phase by suggesting the invention of new languages and models for the description of reactive systems. Unlike in the setting of sequential programs, where we would often prefer to believe that the development of correct programs can be done without any recourse to ‘formalism’, it is a well-recognized fact of life that the behaviour of even very short parallel programs may be very hard to analyse and understand. Indeed, analyzing these programs requires a careful consideration of issues related to the interactions amongst their components, and even imagining these is often a mindboggling task. As a result, the techniques and tools that we shall present in this book are becoming widely accepted in the academic and industrial communities that develop reactive systems.
+1.2 Process algebras
+The first ingredient in the approach to the theory of reactive systems presented in this book is a prototypical example of a process algebra. Process algebras are prototype specification languages for reactive systems. They have evolved from the insights of many outstanding researchers over the last 30 years, and a brief history of the ideas that led to their development may be found in Baeten (2005). (For an accessible, but more advanced, discussion of the role that algebra plays in process theory, the reader could consult the survey paper Luttik (2006).) A crucial initial observation at the heart of the notion of process algebra is due to Milner, who noticed that concurrent processes have an algebraic structure. For example, once we have built two separate processes P and Q, we can form a new process by
+
+
+6 Introduction
+combining P and Q sequentially or in parallel. The results of these combinations will be new processes whose behaviour depends on that of P and Q and on the operationthat we have used to compose them. This is the first sense in which these description languages are algebraic: they consist of a collection of operations for building new process descriptions from existing ones. Since these languages aim at specifying parallel processes that may interact with one another, a key issue that needs to be addressed is how to describe communication or interaction between processes running at the same time. Communication amounts to information exchange between a process that produces the information (the sender) and a process that consumes it (the receiver). We often think of this communication of information as taking place via a medium that connects the sender and the receiver. If we are to develop a theory of communicating systems based on this view, we have to decide upon the communication medium used in inter-process communication. Several possible choices immediately come to mind. Processes may communicate via, for example, (un)bounded buffers, shared variables, some unspecified ether or the tuple spaces used by Lindalike languages (Gelernter, 1985). Which one do we choose? The answer is not at all clear, and each specific choice may in fact reduce the applicability of our language and the models that support it. A language that can properly describe processes that communicate via, say, FIFO buffers may not readily allow us to specify situations in which processes interact via, say, shared variables. The solution to this riddle is both conceptually simple and general. A crucial original insight of figures such as Hoare and Milner was that we need not distinguish between active components, such as senders and receivers, and passive ones such as the communication media mentioned above. They may all be viewed as processes – i.e. as systems that exhibit behaviour. All these processes can interact via message-passing modelled as synchronizedcommunication, which is the only basic mode of interaction. This is the key idea underlying Hoare’s Communicating Sequential Processes (CSP) (Hoare, 1978, 1985), a highly influential proposal for a programming language for parallel programs, and Milner’s Calculus of Communicating Systems (CCS) (Milner, 1989), the paradigmatic process algebra.
+
+
+2
+The language CCS
+We shall now introduce Milner’s Calculus of Communicating Systems (CCS). We begin by informally presenting the process constructions allowed in this language, and their semantics, in Section 2.1. Then, in Section 2.2, we proceed to put our developments on a more formal footing.
+2.1 Some CCS process constructions
+It is useful to begin by thinking of a CCS process as a black box. This black box may have a name that identifies it, and it has a process interface. This interface describes the collection of communicationports, also referred to as channels, that the process may use to interact with other processes that reside in its environment, together with an indication of whether it uses these ports for inputting or outputting information. For example, the drawing in Figure 2.1 pictures the interface for a process whose name is CS (for computer scientist). This process may interact with its environment via three ports, or communication channels, namely ‘coffee’, ‘coin’ and ‘pub’. The port ‘coffee’ is used by process CS for input, whereas the ports ‘coin’ and ‘pub’ are used for output. In general, given a port name a we use a ̄ for the output on port a. We shall often refer to labels such as coffee or coin as actions. A description like the one given in Figure 2.1 only gives static information about a process. What we are most interested in is the behaviour of the process being specified. The behaviour of a process is described by giving a ‘CCS program’. The idea is that, as we shall soon see, the process constructions that are used in building the program allow us to describe both the structure of the process and its behaviour.
+7
+
+
+8 ThelanguageCCS
+coffee CS
+coin
+pub
+Figure 2.1 The interface for the process CS.
+Inaction, prefixing and recursive definitions Let us begin by introducing the constructs of the language CCS, by means of examples. The most basic process of all is the process 0 (read ‘nil’). This performs no action whatsoever. The process 0 offers the prototypical example of a deadlocked behaviour – one that cannot proceed any further in its computation. The most basic process constructor in CCS is action prefixing. Two example processes built using 0 and action prefixing are a match and a complex match, described by the expressions
+strike.0 and take.strike.0,
+respectively. Intuitively, a match is a process that dies after it has been performed (i.e. that becomes the process 0 after executing the action strike), and a complex match is one that needs to be taken hold of before it can behave like a match. More generally, the formation rule for action prefixing says that
+if P is a process and a is a label then a.P is also a process.
+The idea is that a label such as strike or pub will denote an input or output action on a communication port and that the process a.P is one that begins by performing action a and behaves like P thereafter. We have already mentioned that processes can be given names, very much as procedures can. This means that we can introduce names for (complex) processes and that we can use these names in defining other process descriptions. For instance, we can give the name Match to the complex match defined thus:
+Match d=ef take.strike.0.
+The introduction of names for processes allows us to give recursive definitions of process behaviours – compare with the recursive definition of procedures or methods in your favourite programming language. For instance, we may define the behaviour of an everlasting clock thus:
+Clock d=ef tick.Clock.
+
+
+2.1. SomeCCSprocessconstructions 9
+Note that, since the process name Clock is a short-hand for the term on the righthand side of the above equation, we may repeatedly replace the name Clock with its definition to obtain that
+Clock d=ef tick.Clock
+= tick.tick.Clock
+= tick.tick.tick.Clock
+...
+= tick. . . . .tick
+| {z } n times
+.Clock,
+for each positive integer n. As another recursive process specification, consider that of a simple coffee vending machine:
+CM d=ef coin.coffee.CM. (2.1)
+This is a machine that is willing to accept a coin as input, deliver coffee to its customer and thereafter return to its initial state.
+Choice The CCS constructs that we have presented so far would not allow us to describe the behaviour of a vending machine that allows its paying customer to choose between tea and coffee, say. In order to allow for the description of processes whose behaviour may follow different patterns of interaction with their environment, CCS offers the choice operator, which is written ‘+’. For example, a vending machine offering either tea or coffee may be described thus:
+CTM d=ef coin.(coffee.CTM + tea.CTM). (2.2)
+The idea here is that, after having received a coin as input, the process CTM is willing to deliver either coffee or tea, depending on its customer’s choice. In general, the formation rule for choice states that
+if P and Q are processes then so is P + Q.
+The process P + Q is one that has the initial capabilities of both P and Q. However, choosing to perform initially an action from P will pre-empt the further execution of actions from Q, and vice versa.
+Exercise 2.1 Give a CCS process which describes a clock that ticks at least once and may stop ticking after each clock tick. !
+
+
+10 ThelanguageCCS
+CS
+coin
+pub
+coffee
+coffee
+coin
+CM
+Figure 2.2 The interface for the process CM | CS.
+Exercise 2.2 Give a CCS process which describes a coffee machine that may behave like that given by (2.1) but may also steal the money it receives and fail at any time. !
+Exercise 2.3 A finite process graph T is a quadruple (Q, A, δ, q0), where
+! Q is a finite set of states,
+! A is a finite set of labels,
+! q0 ∈ Q is the start state, and
+! δ : Q × A → 2Q is the transition function.
+Using the operators introduced so far, give a CCS process that describes T . !
+Parallel composition It is well known that a computer scientist working in a research university is a machine for turning coffee into publications. The behaviour of such an academic may be described by the CCS process
+CS d=ef pub.coin.coffee.CS. (2.3)
+As made explicit by the above description, a computer scientist is initially keen to produce a publication – possibly straight from her doctoral dissertation – but she needs coffee to produce her next publication. Coffee is only available through interaction with the departmental coffee machine CM. In order to describe systems consisting of two or more processes running in parallel, and possibly interacting with each other, CCS offers the parallel composition operation, which is written ‘ | ’. For example, the CCS expression CM | CS describes a system consisting of two processes – the coffee machine CM and the computer scientist CS – that run in parallel one with the other. These two processes may communicate via the communication ports they share and use in complementary fashion, namely ‘coffee’ and ‘coin’. By complementary, we mean that one process uses the port for input and the other for output. Potential communications are represented in Figure 2.2 by the solid lines linking complementary ports. The port ‘pub’, however, is used by the computer scientist to communicate with her research environment or, more
+
+
+2.1. SomeCCSprocessconstructions 11
+CS
+coin
+pub
+pub
+coffee
+coffee
+CS ́
+coin
+coffee
+coin
+CM
+Figure 2.3 The interface for the process CM | CS | CS′.
+prosaically, with other processes that may be present in her environment and that are willing to accept input along that port. One important thing to note is that the link between complementary ports in Figure 2.2 denotes that it is possible for the computer scientist and the coffee machine to communicate in the parallel composition CM | CS. However, we do not require that they must communicate with one another. Both the computer scientist and the coffee machine could use their complementary ports to communicate with other reactive systems in their environment. For example, another computer scientist CS′ could use the coffee machine CM and, in so doing, make sure that he can produce publications to enhance his curriculum vitae and thus be a worthy competitor for CS in the next competition for a tenured position. (See Figure 2.3.) Alternatively, the computer scientist may have access to another coffee machine in her environment, as pictured in Figure 2.4. In general, given two CCS expressions P and Q, the process P | Q describes a system in which P and Q
+! may proceed independently, or ! may communicate via complementary ports.
+Restriction and relabelling Since academics such as our computer scientist often live in a highly competitive ‘publish or perish’ environment, it may be fruitful for her to make the coffee machine CM private to her and therefore inaccessible to her competitors. To make this possible, the language CCS offers an operation
+
+
+12 ThelanguageCCS
+CS
+coin
+pub coffee
+coffee
+coin
+CM
+coffee
+coin
+CM ́
+Figure 2.4 The interface for the process CM | CS | CM′.
+called restriction, whose aim is to delimit the scope of channel names in much the same way as variables have a delimited scope in block-structured programming languages. For instance, using the operations \coin and \coffee, we may hide the coin and coffee ports from the environment of the processes CM and CS. Define the process SmUni (for ‘small university’) thus:
+SmUni d=ef (CM | CS) \ coin \ coffee. (2.4)
+As pictured in Figure 2.5, the restricted ‘coin’ and ‘coffee’ ports may now be used only for communication between the computer scientist and the coffee machine and are not available for interaction with their environment. Their scope is restricted to the process SmUni. The only port of SmUni that is visible to its environment, e.g., to the competing computer scientist CS′, is the one via which the computer scientist CS outputs her publications. In general, the formation rule for restriction is as follows:
+if P is a process and L is a set of port names then P \ L is also a process.
+In P \ L, the scope of the port names in L is restricted to P ; these port names can only be used for communication within P . Since a computer scientist cannot live on coffee alone, it is beneficial for her to have access to other types of vending machines offering, say, chocolate, dried figs and crisps. The behaviour of these machines may be easily specified by means of
+
+
+2.1. SomeCCSprocessconstructions 13
+CS pub
+CM
+pub
+coin
+coffee CS
+Figure 2.5 The interface for the process SmUni | CS′.
+minor variations on equation (2.1). For instance, we may define the processes
+CHM d=ef coin.choc.CHM,
+DFM d=ef coin.figs.DFM,
+CRM d=ef coin.crisps.CRM.
+Note, however, that all these vending machines follow a common behavioural pattern and may be seen as specific instances of a generic vending machine that receives a coin as input, dispenses an item and restarts, namely the process
+VM d=ef coin.item.VM.
+All these specific vending machines may be obtained as appropriate ‘renamings’ of VM. For example,
+CHM d=ef VM[choc/item],
+where VM[choc/item] is a process that behaves like VM but outputs chocolate whenever VM dispenses the generic item. In general,
+if P is a process and f is a function from labels to labels satisfying certain requirements that will be made precise in Section 2.2 then P [f ] is a process.
+By introducing the relabelling operation, we have completed our informal tour of the operations offered by the language CCS for the description of process
+
+
+14 ThelanguageCCS
+CS d=ef pub.CS1
+CS1
+d=ef coin.CS2
+CS2
+d=ef coffee.CS
+Table 2.1 An alternative formulation for the process CS
+behaviours. We hope that this informal introduction has given our readers a feeling for the language and that they will agree that CCS is indeed a language based upon very few operations, with an intuitively clear semantic interpretation. In passing, we have also hinted at the fact that CCS processes may be seen as defining automata that describe their behaviour – see Exercise 2.3 above. We shall now expand a little on the connection between CCS expressions and the automata describing their behaviour. The presentation will again be informal, as we plan to highlight the main ideas underlying this connection rather than to focus immediately on the technicalities. The formal connection between CCS expressions and labelled transition labelled transition systems will be presented in Section 2.2, using the tools of structural operational semantics (Plotkin, 1981, 2004b).
+2.1.1 The behaviour of processes
+The key ideas underlying the semantics of CCS are that a process passes through states during its execution and that processes change their state by performing actions. For instance, for the purpose of notational convenience in what follows, let us redefine the process CS, see (2.3), as in Table 2.1. (This is the definition of the process CS that we shall use from now on, both when discussing its behaviour in isolation and in the context of other processes – for instance, as a component of the process SmUni.) Process CS can perform the action ‘pub’ and evolve into a process whose behaviour is described by the CCS expression CS1 in doing so. Process CS1 can then output a coin, thereby evolving into a process whose behaviour is described by the CCS expression CS2. Finally, this process can receive coffee as input and behave like our good old CS all over again. Thus the processes CS, CS1 and CS2 are the only possible states of the computation in process CS. Note, furthermore, that there is really no conceptual difference between processes and their states! By performing an action, a process evolves to another process that describes what remains to be executed of the original process.
+
+
+2.1. SomeCCSprocessconstructions 15
+In CCS, processes change state by performing transitions, and these transitions are labelled by the action that caused them. An example of a state transition is
+CS p→ub CS1,
+which says that CS can perform action pub and will become CS1 in doing so. The operational behaviour of our computer scientist CS is therefore completely described by the following labelled transition system:
+CS pub ! CS1
+coin ! CS2
+coffee
+"
+In much the same way, we can make explicit the set of states of the coffee machine described in (2.1) by rewriting that equation thus:
+CM d=ef coin.CM1,
+CM1
+d=ef coffee.CM.
+Note that in state CS1 the computer scientist is willing to output a coin, as witnessed by the transition
+CS1
+co→in CS2,
+and in its initial state the coffee machine is willing to accept that coin, because of the transition
+CM co→in CM1.
+Therefore, when put in parallel with one another these two processes may communicate and change state simultaneously. The result of the communication should be described as a state transition of the form
+CM | CS1
+→? CM1 | CS2.
+However, we are now faced with an important design decision: what label should we use in place of the question mark labelling the above transition? Should we decide to use a standard label denoting input or output on some port, then a third process might be able to synchronize further with the coffee machine and the computer scientist, leading to multiway synchronization. The choice made by Milner in designing CCS was different. In CCS, communication is via handshake and leads to a state transition that is unobservable, in the sense that it cannot synchronize further. This state transition is labelled by a new label τ . So the above transition is
+
+
+16 ThelanguageCCS
+indicated by
+CM | CS1
+τ→ CM1 | CS2.
+In this way, the behaviour of the process SmUni defined by equation 2.4 can be described by the following labelled transition system:
+SmUni
+pub
+#
+(CM | CS1) \ coin \ coffee
+τ
+#
+(CM1 | CS2) \ coin \ coffee
+τ
+#
+(CM | CS) \ coin \ coffee
+pub
+$
+Since it is supposed that τ -actions are unobservable, the following process would seem to be an appropriate high-level specification of the behaviour exhibited by process SmUni:
+Spec d=ef pub.Spec.
+Indeed, we expect that SmUni and Spec describe the same observable behaviour, albeit at different levels of abstraction. We shall see in the remainder of this book that an important task in process theory is to come up with notions of ‘behavioural equivalence’ between processes which will allow us to establish formally that, for instance, SmUni and Spec do offer the same behaviour. But this is getting ahead of our story.
+2.2 CCS, formally
+Having introduced CCS by example, we now proceed to present formal definitions for its syntax and semantics.
+
+
+2.2. CCS,formally 17
+2.2.1 The model of labelled transition systems
+We have already indicated in our examples how the operational semantics for CCS can be given in terms of automata – which we have called labelled transition systems (LTSs), as is customary in concurrency theory. These we now proceed to define, for the sake of clarity. We first introduce the ingredients of the model of labelled transition systems informally and then provide its formal definition. In this model, processes are represented by the vertices of certain edge-labelled directed graphs (the labelled transition systems themselves) and a change in process state caused by performing an action is understood as moving along an edge, labelled by the action name, that goes out of that state. A labelled transition system consists therefore of a set of states (also referred to as processes or configurations), a set of labels (or actions) and a transition relation → describing changes in process states; if a process p can perform an
+action a and become a process p′, we write p →a p′. Sometimes a state is singled out as the start state in the LTS under consideration. In that case, we say that the labelled transition system is rooted.
+Example 2.1 Let us start with a variation on the classic example of a tea and coffee vending machine. The very simplified behaviour of the process determining the interaction of the machine with a customer can be described as follows. From the initial state, say, p, representing the situation ‘waiting for a request’, two possible actions are enabled. Either the tea button or the coffee button can be pressed (the corresponding action ‘tea’ or ‘coffee’ is executed) and the internal state of the machine changes accordingly to p1 or p2. Formally, this can be described by the transitions
+p te→a p1 and p coffee
+→ p2.
+The target state p1 records that the customer has requested tea, whereas p2 describes the situation in which coffee has been selected. Now the customer is asked to insert the corresponding amount of money, let us say one euro for a cup of tea and two euros for a cup of coffee. This is reflected by corresponding changes in the control state of the vending machine. These state changes can be modelled by the transitions
+p1
+1→=C p3 and p2
+2→=C p3,
+whose target state p3 records that the machine has received payment for the chosen drink.
+
+
+18 ThelanguageCCS
+Finally, the drink is collected and the machine returns to its initial state p, ready to accept the request of another customer. This corresponds to the transition
+p3
+collect
+→ p.
+!
+It is often convenient and suggestive to use a graphical representation for labelled transition systems. The following diagram represents the tea and coffee machine described above:
+p
+tea
+%!!!!!!!!!!!!!!
+coffee
+""""""""""""""&
+p1
+1=C
+"""""""""""""& p2
+2 =C
+%!!!!!!!!!!!!!
+p3
+collect
+'
+Sometimes, when referring only to the process p, we do not have to give names to the other process states (in our example p1, p2 and p3) and it is sufficient to provide the following labelled transition system for the process p:
+p
+•
+tea
+%##############
+coffee
+$$$$$$$$$$$$$$&
+•
+1=C
+$$$$$$$$$$$$$$& •
+2=C
+%##############
+•
+collect
+'
+Remark 2.1 The definition of a labelled transition system permits situations like that in Figure 2.6 (where p is the initial state). In this labelled transition system the state p2, where the action c can be performed in a loop, is irrelevant for the behaviour of the process p since, as you can easily check, p2 can never be reached from p. This motivates us to introduce the notion of reachable states. We say that
+
+
+2.2. CCS,formally 19
+p
+a
+(p1
+b
+)
+p2
+c
+*
+d
++
+Figure 2.6 Labelled transition system with initial state p.
+a state p′ in the transition system representing a process p is reachable from p iff there exists a directed path from p to p′. The set of all such states is called the set of reachable states. In our example this set contains exactly two states, namely p and p1. !
+Definition 2.1 (Labelled transition system) A labelledtransitionsystem (LTS) (at
+times also called a transitiongraph) is a triple (Proc, Act, { α →| α ∈ Act}), where:
+! Proc is a set of states (or processes); ! Act is a set of actions (or labels); and
+! α → ⊆ Proc × Proc is a transitionrelation, for every α ∈ Act. As usual, we shall
+use the more suggestive notation s α → s′ in lieu of (s, s′) ∈ α → and write s α !
+(read ‘s refuses α’) iff s α → s′ for no state s′.
+A labelled transition system is finite if its sets of states and actions are both finite. !
+For example, the LTS for the process SmUni defined by (2.4) (see the end of Section 2.1) is formally specified thus:
+Proc = SmUni, (CM | CS1) \ coin \ coffee, (CM1 | CS2) \ coin \ coffee,
+(CM | CS) \ coin \ coffee ,
+Act = pub, τ ,
+p→ub = { SmUni, (CM | CS1) \ coin \ coffee ,
+(CM | CS) \ coin \ coffee, (CM | CS1) \ coin \ coffee ,
+τ→ = (CM | CS1) \ coin \ coffee, (CM1 | CS2) \ coin \ coffee ,
+(CM1 | CS2) \ coin \ coffee, (CM | CS) \ coin \ coffee .
+As mentioned above, we shall often distinguish a so-called start state (or initial state), which is one selected state in which the system initially starts. For example, the start state for the process SmUni presented above is, not surprisingly, the process SmUni itself.
+
+
+20 ThelanguageCCS
+Remark 2.2 Sometimes the transition relations α → are presented as a ternary rela
+tion → ⊆ Proc × Act × Proc and we write s α → s′ whenever (s, α, s′) ∈ →. This is an alternative way to describe a LTS and it defines the same notion as Definition 2.1. !
+Notation 2.1 Let us now give some useful notation for LTSs.
+! We can extend the transition relation to the elements of Act∗ (the set of all finite strings over Act including the empty string ε). The definition is as follows:
+s →ε s for every s ∈ Proc, and
+s α→w s′ iff there is a state t ∈ Proc such that s α → t and t w → s′, for every s, s′ ∈ Proc, α ∈ Act and w ∈ Act∗.
+In other words, if w = α1α2 · · · αn for α1, α2, . . . , αn ∈ Act then we write
+s w → s′ whenever there exist states s0, s1, . . . , sn−1, sn ∈ Proc such that
+s = s0
+α→1 s1
+α→2 s2
+α→3 s3
+α→4 · · · αn −1
+→ sn−1
+α→n sn = s′.
+For the transition system in Figure 2.6 we have, for example, that p ε→ p, p a→b p
+and p1
+b→ab p.
+! We write s → s′ whenever there is an action α ∈ Act such that s α → s′. For the transition system in Figure 2.6 we have, for example, that p → p1, p1 → p, p2 → p1 and p2 → p2.
+! We use the notation s α → to mean that there is some s′ ∈ Proc such that s α → s′.
+For the transition system in Figure 2.6 we have, for example, that p a→ and
+p1
+b→.
+! We write s →∗ s′ iff s w → s′ for some w ∈ Act∗. In other words, →∗ is the reflexive and transitive closure of the relation →. For the transition system in Figure 2.6 we have, for example, that p →∗ p, p →∗ p1 and p2 →∗ p. !
+Exercise 2.4 Consider the following LTS:
+s a ! s1
+a
+#
+s3
+a
+'
+s2
+a
++
+Define the LTS as a triple (Proc, Act, { α →| α ∈ Act}). Use sketches to illustrate the reflexive closure, symmetric closure and transitive closure of the binary relation
+a→? !
+
+
+2.2. CCS,formally 21
+Definition 2.2 (Reachable states) Let T = (Proc, Act, { α → | α ∈ Act}) be an LTS, and let s ∈ Proc be its initial state. We say that s′ ∈ Proc is reachable in the transition system T iff s →∗ s′. The set of reachable states contains all states reachable in T . !
+In the transition system from Figure 2.6, where p is the initial state, the set of reachable states is equal to {p, p1}.
+Exercise 2.5 Find the set of reachable states in the labelled transition system in Figure 2.6 if its start state is p2. !
+The step from a process denoted by a CCS expression to the LTS describing its operational behaviour is taken using the framework of structural operational semantics (SOS) pioneered by Plotkin (2004b). (The history of the ideas that led to SOS is recounted by Plotkin himself in Plotkin (2004).) The key idea underlying this approach is that the collection of CCS process expressions constitutes the set of states of a (large) LTS, whose actions will be either input or output actions on communication ports or τ -actions and whose transitions will be exactly those that can be proved to hold using a collection of syntax-driven rules. These rules will be seen to capture the informal semantics of the CCS operators presented above in a very simple and elegant way. The operational semantics of a CCS expression is then obtained by selecting that expression as the start state in the LTS for the whole language and restricting ourselves to the collection of CCS expressions that are reachable from it by transitions.
+2.2.2 The formal syntax and semantics of CCS
+The next step in our formal development is to offer the formal syntax for the language CCS. Since the set of ports plays a crucial role in the definition of CCS processes, we begin by assuming a countably infinite collection A of (channel) names. (‘Countably infinite’ means that we have as many names as there are natural numbers.) The set
+A ̄ = { ̄a | a ∈ A}
+is the set of complementary names (or co-names for short). In our informal introduction to the language, we interpreted names as input actions and co-names as output actions. We let
+L = A ∪ A ̄
+be the set of labels and
+Act = L ∪ {τ }
+
+
+22 ThelanguageCCS
+be the set of actions. In our formal developments, we shall use a, b to range over L and α as a typical member of Act, but, as in the previous section, we shall often use more suggestive names for channels in applications and examples. By convention, we assume that  ̄ ̄a = a for each label a. (This also makes sense intuitively because the complement of output is input.) We also assume a given countably infinite collection K of processnamesor processconstants. This ensures that we never run out of names for processes.
+Definition 2.3 The collection P of CCS expressions is given by the following grammar
+P, Q ::= K α.P P
+i∈I Pi P | Q P [f ] P \ L,
+where
+! K is a process name in K,
+! α is an action in Act,
+! I is a possibly infinite index set,
+! f : Act → Act is a relabellingfunction satisfying the constraints
+f (τ ) = τ,
+f ( ̄a) = f (a) for each label a,
+and ! L is a set of labels from L.
+We write 0 for an empty sum of processes, i.e.
+0=X
+i∈∅
+Pi,
+and P1 + P2 for a sum of two processes, i.e.
+P1 + P2 = X
+i∈{1,2}
+Pi.
+Moreover, we assume that the behaviour of each process name K ∈ K is given by a defining equation
+K d=ef P,
+where P ∈ P. As made clear by the previous informal discussion, the constant K may appear in P . !
+We sometimes write [b1/a1, . . . , bn/an], where n ≥ 1, ai, bi ∈ A for each i ∈ {1, . . . , n} and the ai are distinct channel names, for the relabelling [f ]; here f is
+
+
+2.2. CCS,formally 23
+the relabelling function mapping each ai to bi, each ai to bi, i ∈ {1, . . . , n}, and acting as the identity function on all the other actions. For each label a, we often write \a in lieu of \{a}. To avoid the use of too many parentheses in writing CCS expressions, we use the convention that the operators have decreasing binding strength in the following order: restriction and relabelling (the tightest binding), action prefixing, parallel composition and summation. For example, the expression a.0 | b.P \ L + c.0 stands for
+((a.0) | (b.(P \ L))) + (c.0).
+Exercise 2.6 Which of the following expressions are syntactically correct CCS expressions? Why? Assume that A, B are process constants and a, b are channel names.
+a.b.A + B,
+(a.0 + a.A) \ {a, b},
+(a.0 | a.A) \ {a, τ },
+a.B + [a/b],
+τ.τ.B + 0,
+(a.B + b.B)[a/b, b/a],
+(a.B + τ.B)[a/τ, b/a],
+(a.b.A + a.0) | B,
+(a.b.A + a.0).B,
+(a.b.A + a.0) + B, (0 | 0) + 0.
+!
+Readers can easily check that all the processes presented in the previous section are indeed CCS expressions. Another example of a CCS expression is given by a counter, which is defined thus:
+Counter0
+d=ef up.Counter1, (2.5)
+Countern
+d=ef up.Countern+1 + down.Countern−1 (n > 0). (2.6)
+The behaviour of such a process is intuitively clear. For each non-negative integer n, the process Countern behaves like a counter whose value is n; the ‘up’ actions increase the value of the counter by one and the ‘down’ actions decrease it by one. It would also be easy to construct the (infinite-state) LTS for this process on
+
+
+24 ThelanguageCCS
+ACT α.P α → P
+SUMj
+Pj
+α → Pj′
+P
+i∈I Pi
+α → Pj′
+where j ∈ I
+COM1 P α → P ′
+P | Q α → P ′ | Q
+COM2 Q α → Q′
+P | Q α → P | Q′
+COM3 P a→ P ′ Q  ̄a→ Q′
+P | Q τ→ P ′ | Q′
+RES P α → P ′
+P \ L α → P ′ \ L where α, α ̄ )∈ L
+REL P α → P ′
+P [f ] f(α)
+→ P ′[f ]
+CON P α → P ′
+K α → P ′ where K d=ef P
+Table 2.2 SOS rules for CCS (α ∈ Act, a ∈ L)
+the basis of its syntactic description and on the intuitive understanding of process behaviour that we have so far developed. However, intuition alone can lead us to wrong conclusions and, most importantly, cannot be fed into a computer! To capture formally our understanding of the semantics of the language CCS, we therefore introduce the collection of SOS rules given in Table 2.2. These rules are used to generate an LTS whose states are CCS expressions. In that LTS, a transition
+P α → Q holds for CCS expressions P, Q and action α iff it can be proved using the rules in Table 2.2. A rule such as
+α.P α → P
+
+
+2.2. CCS,formally 25
+is an axiom, as it has no premises, i.e. it has no transition above the horizontal line. This means that proving that a process of the form α.P affords the transition
+α.P α → P (the conclusionof the rule) can be done without establishing any further
+subgoal. Therefore each process of the form α.P affords the transition α.P α → P . As an example, we have that the transition
+pub.CS1
+p→ub CS1 (2.7)
+is provable using the above rule for action prefixing. However, a rule like
+P α → P ′
+K α → P ′ where K d=ef P
+has a non-empty set of premises. This rule says that, to establish that constant K affords the transition mentioned in the conclusion of the rule, we have to prove first that the body of the defining equation for K, namely the process P , affords
+the transition P α → P ′. Using this rule, pattern-matching and the transition (2.7), we can prove the transition
+CS p→ub CS1,
+which we derived informally for the version of process CS given in Table 2.1.
+The aforementioned rule for constants has a side condition, namely K d=ef P , which describes a constraint that must be met in order for the rule to be applicable. In this specific example, the side condition states intuitively that the rule may be used to derive an initial transition for constant K if ‘K is declared to have body P ’.
+Another example of a rule with a side condition is that for restriction,
+P α → P ′
+P \ L α → P ′ \ L where α, α ̄ )∈ L.
+This rule states that every transition of a term P determines a transition of the expression P \ L, provided that neither the action producing the transition nor its complement are in L. For example, as you can check, this side condition prevents us from proving the existence of the transition
+(coffee.CS) \ coffee coffee
+→ CS \ coffee.
+
+
+26 ThelanguageCCS
+Finally, note that, when considering the binary version of the summation operator, the family of rules SUMj reduces to the following two rules:
+SUM1
+P1
+α → P1′
+P1 + P2
+α → P1′
+; SUM2
+P2
+α → P2′
+P1 + P2
+α → P2′
+.
+To get a feeling for the power of recursive definitions of process behaviours, consider the process C defined thus:
+C d=ef up.(C | down.0). (2.8)
+What are the transitions that this process affords? Using the rules for constants and action prefixing, you should have little trouble in arguing that the only initial transition for C is
+C u→p C | down.0. (2.9)
+What next? Observing that down.0 down
+→ 0 and using rule COM2 in Table 2.2 we can infer that
+C | down.0 down
+→ C | 0.
+Since it is reasonable to expect that the process C | 0 exhibits the same behaviour as C – and we shall see later on that this does hold true –, the above transition effectively brings our process back to its initial state, at least up to behavioural equivalence. However, this is not all because, as we have already proved transition (2.9), using rule COM1 in Table 2.2 we have that the transition
+C | down.0 u→p (C | down.0) | down.0
+is also possible. You might find it instructive to continue building a little more of the transition graph for process C. As you may begin to notice, the LTS giving the operational semantics of the process expression C looks very similar to that for Counter0, as given in (2.5). Indeed, we shall prove later on that these two processes exhibit the same behaviour in a very strong sense.
+Exercise 2.7 Use the rules of the SOS semantics for CCS to derive the LTS for the process SmUni defined by (2.4). (Use the definition of CS in Table 2.1.) !
+Exercise 2.8 Assume that A d=ef b.a.B. By using the SOS rules for CCS prove the existence of the following transitions:
+(A | b.0) \ {b} τ→ (a.B | 0) \ {b},
+(A | b.a.B) + (b.A)[a/b] →b (A | a.B),
+(A | b.a.B) + (b.A)[a/b] a→ A[a/b].
+!
+
+
+2.2. CCS,formally 27
+Exercise 2.9 Draw (part of) the transition graph for a process A whose behaviour is given by the defining equation
+A d=ef (a.A) \ b.
+The resulting transition graph should have infinitely many states. Can you think of a CCS term that generates a finite LTS that should intuitively have the same behaviour as A? !
+Exercise 2.10 Draw (part of) the transition graph for a process A whose behaviour is given by the defining equation
+A d=ef (a0.A)[f ],
+where we assume that the set of channel names is {a0, a1, a2, . . .} and that f (ai) = ai+1 for each i. The resulting transition graph should (again!) have infinitely many states. Can you give an argument showing that there is no finite-state LTS that could intuitively have the same behaviour as A? !
+Exercise 2.11
+1. Draw the transition graph for a process Mutex1, whose behaviour is given by
+Mutex1
+d=ef (User | Sem) \ {p, v},
+User d=ef p ̄.enter.exit.v ̄.User,
+Sem d=ef p.v.Sem.
+2. Draw the transition graph for the process Mutex2, whose behaviour is given by the defining equation
+Mutex2
+d=ef ((User | Sem) | User) \ {p, v},
+where User and Sem are defined as before. Would the behaviour of the process change if User were defined as
+User d=ef p ̄.enter.v ̄.exit.User?
+3. Draw the transition graph for the process FMutex, whose behaviour is given by the defining equation
+FMutex d=ef ((User | Sem) | FUser) \ {p, v},
+where User and Sem are defined as before, and the behaviour of FUser is given by the defining equation
+FUser d=ef p ̄.enter.(exit.v ̄.FUser + exit.v ̄.0).
+
+
+28 ThelanguageCCS
+Do you think that Mutex2 and FMutex offer the same behaviour? Can you argue informally for your answer?
+!
+2.2.3 Value-passing CCS
+This section may be skipped on first reading as it is meant mainly as a pointer for further reading and self-study. So far, we have introduced only so-called pure CCS, in which communication is pure synchronization and involves no exchange of data. In many applications, however, processes do exchange data when they communicate. To allow for a natural modelling of these examples it is convenient, although theoretically unnecessary, as argued in Milner (1989, Section 2.8), to extend our language to what is usually called value-passingCCS. We shall now introduce the new features in this language, and their operational semantics, by means of examples. In what follows, we will assume for simplicity that the only data type is the set of non-negative integers. Assume that we wish to define a one-place buffer B which has the following behaviour:
+! If B is empty then it is only able to accept one datum as input, along a channel called ‘in’. The received datum is stored for further output. ! If B is full then it is only able to output the successor of the value it stores, and empties itself in doing so.
+This behaviour of B can be modelled in value-passing CCS thus:
+B d=ef in(x).B(x),
+B(x) d=ef out(x + 1).B.
+Note that the input prefix ‘in’ now carries a parameter that is a variable, in this case x, whose scope is the process that is prefixed by the input action. In this example the process is B(x). The intuitive idea is that process B is willing to accept a nonnegative integer n as input, bind the received value to x and thereafter behave like B(n), i.e. like a full one-place buffer storing the value n. The behaviour of the process B(n) is then described by the second equation above, where the scope of the formal parameter x is the whole right-hand side of the equation. Note that output prefixes such as ‘out(x + 1)’ above may carry expressions, the idea being that the value being output is the one that results from evaluation of the expression.
+
+
+2.2. CCS,formally 29
+The general SOS rule for input prefixing now becomes
+a(x).P a(n)
+→ P [n/x] for n ≥ 0,
+where we write P [n/x] for the expression that results from replacing each free occurrence of the variable x in P by n. The general SOS rule for output prefixing is
+ ̄a(e).P a ̄(n)
+→ P n is the result of evaluating e.
+In value-passing CCS, as we have already seen in our definition of the one-place buffer B, process names may be parameterized by value variables. The general form that these parameterized constants may take is A(x1, . . . , xn), where A is a process name, n ≥ 0 and x1, . . . , xn are distinct value variables. The operational semantics for these constants is given by the following rule:
+P [v1/x1, . . . , vn/xn] α → P ′
+A(e1, . . . , en) α → P ′ A(x1, . . . , xn) d=ef P and each ei has value vi.
+To become familiar with these rules, you should apply them to the one-place buffer B and derive its possible transitions. In what follows, we shall restrict ourselves to CCS expressions that have no free occurrences of value variables, i.e. those in which each occurrence of a value variable, say y, is within the scope of an input prefix of the form a(y) or of a parameterized constant A(x1, . . . , xn), with y = xi for some 1 ≤ i ≤ n. For instance, the expression
+a(x).b ̄(y + 1).0
+is disallowed because the single occurrence of the value variable y is bound neither by an input prefixing nor by a parameterized constant. Since processes in value-passing CCS may manipulate data, it is natural to add an ‘if bexp then P else Q’ construct to the language, where bexp is a boolean expression. Assume, by way of example, that we wish to define a one-place buffer Pred that computes the predecessor function on the non-negative integers. This may be defined thus:
+Pred d=ef in(x).Pred(x),
+Pred(x) d=ef if x = 0 then out(0).Pred else out(x − 1).Pred.
+We expect Pred(0) to output the value 0 on channel ‘out’ and Pred(n + 1) to output n on the same channel for each non-negative integer n. The SOS rules for
+
+
+30 ThelanguageCCS
+if bexp then P else Q will allow us to prove this formally. They are the expected ones, namely
+P α → P ′
+if bexp then P else Q α → P ′ bexp is true
+and
+Q α → Q′
+if bexp then P else Q α → Q′ bexp is false.
+Exercise 2.12 Consider a one-place buffer defined by
+Cell d=ef in(x).Cell(x),
+Cell(x) d=ef out(x).Cell.
+Use Cell to define a two-place ‘bag’ and a two-place FIFO queue. (Recall that a bag, also known as a multiset, is a set whose elements have multiplicity.) Give specifications of the expected behaviour of these processes, and use the operational rules given above to convince yourself that your implementations are correct. !
+Exercise 2.13 Consider the process B defined thus:
+B d=ef push(x).(C(x)$B) + empty.B,
+C(x) d=ef push(y).(C(y)$C(x)) + pop(x).D,
+D d=ef o(x).C(x) + e ̄.B,
+where the linking combinator P$Q is given by
+P$Q = (P[ p′/p, e′/e, o′/o] | Q[ p′/push, e′/empty, o′/pop]) \ {p′, o′, e′}.
+Draw the initial part of the transition graph for this process. What behaviour do you think B implements? !
+Exercise 2.14 (For the theoretically minded) Prove that the operational semantics for value-passing CCS that we have given above is in complete agreement with the semantics for this language given via translation into the pure calculus by Milner (1989, Section 2.8). !
+
+
+3
+Behavioural equivalences
+We have previously remarked that CCS, like all other process algebras, can be used to describe both implementations of processes and specifications of their expected behaviours. A language like CCS therefore supports the so-called single-language approach to process theory – that is, the approach in which a single language is used to describe both actual processes and their specifications. An important ingredient of these languages is therefore a notion of behavioural equivalence or behavioural approximation between processes. One process description, say SYS, may describe an implementation and another, say SPEC, may describe a specification of the expected behaviour. To say that SYS and SPEC are equivalent is taken to indicate that these two processes describe essentially the same behaviour, albeit possibly at different levels of abstraction or refinement. To say that, in some formal sense, SYS is an approximation of SPEC means roughly that every aspect of the behaviour of this process is allowed by the specification SPEC and thus that nothing unexpected can happen in the behaviour of SYS. This approach to program verification is also sometimes called implementation verification or equivalence checking.
+3.1 Criteria for good behavioural equivalence
+We have already argued informally that some processes that we have met so far ought to be considered as behaviourally equivalent. For instance, we claimed at the end of Section 2.1 that the behaviour of the process SmUni defined in (2.4) should be considered equivalent to that of the specification
+Spec d=ef pub.Spec,
+31
+
+
+32 Behaviouralequivalences
+and that the process C in (2.8) behaves like a counter. Our order of business now will be to introduce a notion of behavioural equivalence that will allow us to establish these expected equalities and many others. Before doing so, however, it is instructive to consider the criteria that we expect a suitable notion of behavioural equivalence for processes to meet. First of all, we have already used the term ‘equivalence’ several times and, since this is a mathematical notion that some readers may not have met before, it is time to define it precisely.
+Definition 3.1 Let X be a set. A binaryrelation over X is a subset of X × X, the set of pairs of elements of X. If R is a binary relation over X, we often write x R y instead of (x, y) ∈ R. An equivalencerelationover X is a binary relation R that satisfies the following constraints:
+R is reflexive, i.e. x R x for each x ∈ X; R is symmetric, i.e. x R y implies y R x for all x, y ∈ X; and R is transitive, i.e. x R y and y R z imply x R z for all x, y, z ∈ X.
+A reflexive and transitive relation is a preorder. !
+An equivalence relation is therefore a more abstract version of the elementary notion of equality.
+Exercise 3.1 Which of the following relations over the set of non-negative integers N is an equivalence relation?
+! The identity relation I = {(n, n) | n ∈ N}.
+! The universal relation U = {(n, m) | n, m ∈ N}.
+! The standard ≤ relation.
+! The parity relation M2 = {(n, m) | n, m ∈ N, n mod 2 = m mod 2}.
+Can you give an example of a preorder over the set N that is not an equivalence
+relation? !
+Since we expect that each process is a correct implementation of itself, a relation used to support implementation verification should certainly be reflexive. Moreover, as we shall now argue, it should also be transitive – at least if it is to support the stepwise derivation of implementations from specifications. In fact, assume that we wish to derive a correct implementation from a specification via a sequence of refinement steps that are known to preserve some behavioural relation R. In this approach, we might begin from our specification Spec and transform it into an
+
+
+3.1. Criteriaforgoodbehaviouralequivalence 33
+P
+C
+Q
+C
+C(P) C(Q)
+Figure 3.1 P R Q implies that C[P ] R C[Q].
+implementation Imp via a sequence of intermediate stages Speci, 0 ≤ i ≤ n, thus:
+Spec = Spec0 R Spec1 R Spec2 R · · · R Specn = Imp.
+Since each stage preserves the relation R, we would like to conclude that Imp is a correct implementation of Spec with respect to R, i.e. that
+Spec R Imp
+holds. This is guaranteed to be true if the relation R is transitive. From the above discussion, it follows that a relation supporting implementation verification should at least be a preorder. The relations considered in the classic theory of CCS, and in the main body of this book, are also symmetric and are therefore equivalence relations. Another intuitively desirable property for an equivalence relation R that supports implementation verification is that it is a congruence. This means that process descriptions that are related by R can be used interchangeably as parts of a larger process description without affecting the overall behaviour of the later. More precisely, if P R Q and if C[ ] is a program fragment with a ‘hole’ then
+C[P ] R C[Q].
+This is represented pictorially in Figure 3.1. Finally, we expect our notion of relation supporting implementation verification to be based on the observable behaviour of processes, rather than on their structure, the actual name of their states or the number of transitions they afford. Ideally, we should like to identify two processes unless there is some sequence of ‘interactions’ that an ‘observer’ may have with them leading to different ‘outcomes’. The lack of consensus on what constitutes an appropriate notion of observable behaviour for reactive systems has led to a large number of proposals for behavioural equivalences for concurrent processes. (See the study Glabbeek (2001), where van Glabbeek presents the linear time-branching time spectrum a lattice of known behavioural equivalences and preorders over labelled transition systems, ordered by inclusion.) In our search for a reasonable notion of behavioural
+
+
+34 Behaviouralequivalences
+relation to support implementation verification, we shall limit ourselves to presenting a tiny sample of these. So let’s begin our search!
+3.2 Trace equivalence: a first attempt
+Labelled transition systems (LTSs) (Keller, 1976) are a fundamental model of concurrent computation, which is widely used in the light of its flexibility and applicability. In particular, they are the prime model underlying Plotkin’s structural operational semantics (Plotkin, 2004b) and, following Milner’s pioneering work on CCS (Milner, 1989), are now the standard semantic model for various process-description languages. As we have already seen, LTSs model processes by explicitly describing their states and their transitions from state to state, together with the actions that produced these transitions. Since this view of process behaviours is very detailed, several notions of behavioural equivalence and preorder have been proposed for LTSs. The aim of such behavioural semantics is to identify those (states of) LTSs that afford the same ‘observations’, in some appropriate technical sense. Now, LTSs are essentially (possibly infinite-state) automata, and the classic theory of automata suggests a ready-made notion of equivalence for them and thus for the CCS processes that denote them. Let us say that a trace of a process P is a sequence α1 · · · αk ∈ Act∗, k ≥ 0, such that there exists a sequence of transitions
+P = P0
+α→1 P1
+α→2 · · · αk −1
+→ Pk−1
+α→k Pk,
+for some P1, . . . , Pk. We write Traces(P ) for the collection of all traces of P . Since Traces(P ) describes all possible finite sequences of interactions that may take place with process P , it is reasonable to require that our notion of behavioural equivalence relates only processes that afford the same traces. Otherwise we would have a very good way of telling them apart – namely that there would be a sequence of actions that can be performed with one but not the other. This means that, for all processes P and Q, we require that
+if P and Q are behaviourally equivalent then Traces(P ) = Traces(Q). (3.1)
+Taking the point of view of standard automata theory and abstracting from the notion of ‘accept state’, which is missing altogether in our treatment, an automaton may be completely identified by its set of traces, and thus two processes are equivalent iff they afford the same traces.
+
+
+3.2. Traceequivalence: afirstattempt 35
+This point of view is totally justified and natural if we view our LTSs as nondeterministic devices that may generate or accept sequences of actions. However, is it still reasonable if we view our automata as reactive machines, which interact with their environment? To answer these questions, consider the coffee and tea machine CTM defined in (2.2) and compare it with the following machine:
+CTM′ d=ef coin.coffee.CTM′ + coin.tea.CTM′. (3.2)
+You should be able to convince yourself that CTM and CTM′ afford the same traces. (Do so!) However, if you were a user of the coffee and tea machine who loves coffee and hates tea, which machine would you like to interact with? It would certainly be preferable to interact with CTM, as that machine will give us coffee after receiving a coin whereas CTM′ may enter a state in which it will deliver only tea, having accepted our coin! This informal discussion may be directly formalized within CCS by assuming that the behaviour of the coffee-starved user is described by the process
+CA d=ef coin.coffee.CA.
+Consider now the terms
+(CA | CTM) \ {coin, coffee, tea}
+and
+(CA | CTM′) \ {coin, coffee, tea}
+that we obtain by forcing interaction between the coffee addict CA and the two vending machines. Using the SOS rules for CCS, you should convince yourself that the former term can only perform an infinite computation consisting of τ -labelled transitions, whereas the second term can deadlock thus:
+(CA | CTM′) \ {coin, coffee, tea} τ→ (coffee.CA | tea.CTM′) \ {coin, coffee, tea}.
+Note that the target term of this transition captures precisely the deadlock situation that we intuitively expect, namely that the user only wants coffee but the machine is only willing to deliver tea. So trace-equivalent terms may exhibit different deadlock behaviour when made to interact with other parallel processes – a highly undesirable state of affairs. In the light of the above example, we are forced to reject the law
+α.(P + Q) = α.P + α.Q,
+which is familiar from the standard theory of regular languages, for our desired notion of behavioural equivalence. (Can you see why?) Therefore we need to
+
+
+36 Behaviouralequivalences
+refine our notion of equivalence in order to differentiate processes that, like the two vending machines above, exhibit different reactive behaviour while still having the same traces.
+Exercise 3.2 (Recommended) A completed trace of a process P is a sequence α1 · · · αk ∈ Act∗ (k ≥ 0) such that there exists a sequence of transitions
+P = P0
+α→1 P1
+α→2 · · · αk −1
+→ Pk−1
+α→k Pk !,
+for some P1, . . . , Pk. The completed traces of a process may be seen as capturing its deadlock behaviour, as they are precisely the sequences of actions that could lead the process into a state from which no further action is possible.
+1. Do the processes
+(CA | CTM) \ {coin, coffee, tea}
+and
+(CA | CTM′) \ {coin, coffee, tea}
+defined above have the same completed traces? 2. Is it true that if P and Q are two CCS processes affording the same completed traces and L is a set of labels then P \L and Q\L also have the same completed traces?
+You should, of course, argue for your answers. !
+3.3 Strong bisimilarity
+Our aim in this section will be to present a key notion in the theory of processes, namely strong bisimulation. In order to motivate this notion intuitively, let us reconsider once more the two processes CTM and CTM′ that we used above in arguing that trace equivalence is not a suitable notion of behavioural equivalence for reactive systems. The problem was that, as fully formalized in Exercise 3.2, the trace-equivalent processes CTM and CTM′ exhibited different deadlock behaviour when made to interact with a third parallel process, namely CA. In hindsight, this is not overly surprising. In fact, if we look simply at the (completed) traces of a process, we are focusing only on the sequences of actions that the process may perform and are not taking into account the communication capabilities of the intermediate states traversed by the process as it computes. As the above example shows, the communication potential of the intermediate states doesmatter when interaction with the process is allowed at all times. In particular,
+
+
+3.3. Strongbisimilarity 37
+there is a crucial difference in the capabilities of the states reached by CTM and CTM′ after these processes have received a coin as input. Indeed, after accepting a coin the machine CTM always enters a state in which it is able to output both coffee and tea, depending on what its user wants, whereas the machine CTM′ can only enter a state in which it is able to deliver either coffee or tea, but not both. The lesson that we may learn from the above discussion is that a suitable notion of behavioural relation between reactive systems should allow us to distinguish processes that may have different deadlock potentials when made to interact with other processes. Such a notion of behavioural relation must take into account the communication capabilities of the intermediate states that processes may reach as they compute. One way to ensure that this holds is to require that, in order for two processes to be equivalent, not only should they afford the same traces but, in some formal sense, the states that they reach should still be equivalent. You can easily convince yourself that trace equivalence does not meet this latter requirement, as the states that CTM and CTM′ may reach after receiving a coin as input are not trace equivalent. The classic notion of strong bisimulation equivalence, introduced by David Park (1981) and widely popularized by Robin Milner (1989), formalizes the informal requirements introduced above in a very elegant way.
+Definition 3.2 (Strong bisimulation) A binary relation R over the set of states of an LTS is a bisimulation iff whenever s1 R s2 and α is an action:
+if s1
+α → s′1 then there is a transition s2
+α → s′2 such that s′1 R s′2; if s2
+α → s′2 then there is a transition s1
+α → s′1 such that s′1 R s′2.
+Two states s and s′ are bisimilar, written s ∼ s′, iff there is a bisimulation that relates them. Henceforth the relation ∼ will be referred to as strong bisimulation equivalence or strongbisimilarity. !
+Since the operational semantics of CCS is given in terms of an LTS whose states are CCS process expressions, the above definition applies equally well to CCS processes. Intuitively, a strong bisimulation is a kind of invariant relation between processes that is preserved by transitions in the sense of Definition 3.2. Before beginning to explore the properties of strong bisimilarity, let us note one of its most appealing features, namely a proof technique for showing that two processes are strongly bisimilar that it supports. Since two processes are strongly bisimilar if there is a strong bisimulation that relates them, to prove that they are related by ∼ it suffices only to exhibit a strong bisimulation that relates them.
+
+
+38 Behaviouralequivalences
+Example 3.1 Consider the LTS
+(Proc, Act, { α → | α ∈ Act}),
+where
+Proc = {s, s1, s2, t, t1},
+Act = {a, b},
+a→ = {(s, s1), (s, s2), (t, t1)},
+→b = {(s1, s2), (s2, s2), (t1, t1)}.
+Here is a graphical representation of this LTS:
+s
+a
+!!!!!!!!!!!!!!
+a
+"""""""""""""" t
+a
+#
+s1 b $ s2
+b
+% t1
+b
+&
+We will show that s ∼ t. In order to do so, we have to define a strong bisimulation R such that (s, t) ∈ R. Let us define it as
+R = {(s, t), (s1, t1), (s2, t1)}.
+The binary relation R can be depicted graphically by dotted lines, as follows:
+s
+a
+!!!!!!!!!!!!!!
+a
+"""""""""""""" t
+a
+#
+s1 b $ s2
+b
+% t1
+b
+&
+Obviously, (s, t) ∈ R. We have to show that R is a strong bisimulation, i.e. that it meets the requirements stated in Definition 3.2. To this end, for each pair of states from R we have to investigate all possible transitions from one state and see whether they can be matched by corresponding transitions from the other state. Note that a transition from one process under some label can be matched only by a transition from the other process under the same label. We will now present a complete analysis of all the steps needed to show that R is a strong bisimulation, even though they are very simple and tedious.
+
+
+3.3. Strongbisimilarity 39
+! Let us consider first the pair (s, t).
+Transitions from s:
+s →a s1 can be matched by t a→ t1 and (s1, t1) ∈ R;
+s →a s2 can be matched by t a→ t1 and (s2, t1) ∈ R; and these are all the transitions from s. Transitions from t:
+t →a t1 can be matched, e.g. by s a→ s2 and (s2, t1) ∈ R (another possibility
+would be to match it by s a→ s1 but finding one matching transition is enough); and this is the only transition from t.
+! Next we consider the pair (s1, t1).
+Transitions from s1:
+s1
+→b s2 can be matched by t1
+→b t1 and (s2, t1) ∈ R; and this is the only transition from s1. Transitions from t1:
+t1
+b→ t1 can be matched by s1
+→b s2 and (s2, t1) ∈ R; and this is the only transition from t1.
+! Finally we consider the pair (s2, t1).
+Transitions from s2:
+s2
+→b s2 can be matched by t1
+→b t1 and (s2, t1) ∈ R; and this is the only transition from s2. Transitions from t1:
+t1
+b→ t1 can be matched by s2
+→b s2 and (s2, t1) ∈ R; and this is the only transition from t1.
+This completes the proof that R is a strong bisimulation and, since (s, t) ∈ R, we obtain s ∼ t. In order to prove that, for example, s1 ∼ s2 we can use the following relation:
+R = {(s1, s2), (s2, s2)}.
+The reader is invited to verify that R is indeed a strong bisimulation. !
+Example 3.2 In this example we shall demonstrate that it is possible for the initial state of an LTS with infinitely many reachable states to be strongly bisimilar to a state from which only finitely many states are reachable. Consider the LTS
+
+
+40 Behaviouralequivalences
+(Proc, Act, { α → | α ∈ Act}), where
+Proc = {si | i ≥ 1} ∪ {t},
+Act = {a},
+a→ = {(si, si+1) | i ≥ 1} ∪ {(t, t)}.
+Here is a graphical representation of this LTS:
+s1 a $ s2 a $ s3 a $ s4 a $ . . .
+t
+a
+'
+We can now observe that s1 ∼ t because the relation
+R = {(si, t) | i ≥ 1}
+is a strong bisimulation and contains the pair (s1, t). The reader is invited to verify this simple fact. !
+Consider now the two coffee and tea machines in our running example. We can argue that CTM and CTM′ are not strongly bisimilar, thus. Assume, towards a contradiction, that CTM and CTM′ are strongly bisimilar. This means that there is a strong bisimulation R such that
+CTM R CTM′.
+Recall that
+CTM′ co→in tea.CTM′.
+So, by the second requirement in Definition 3.2, there must be a transition
+CTM co→in P
+for some process P such that P R tea.CTM′. A moment of thought should be enough to convince the reader that the only process that CTM can reach by receiving a coin as input is coffee.CTM + tea.CTM. So we are requiring that
+(coffee.CTM + tea.CTM) R tea.CTM′.
+However, now a contradiction is immediately reached. In fact,
+coffee.CTM + tea.CTM coffee
+→ CTM,
+but tea.CTM′ cannot output coffee. Thus the first requirement in Definition 3.2 cannot be met. It follows that our assumption that the two machines were strongly
+
+
+3.3. Strongbisimilarity 41
+bisimilar leads to a contradiction. We may therefore conclude that, as claimed, the processes CTM and CTM′ are not strongly bisimilar.
+Example 3.3 Consider the processes P and Q defined thus:
+P d=ef a.P1 + b.P2,
+P1
+d=ef c.P,
+P2
+d=ef c.P
+and
+Q d=ef a.Q1 + b.Q2,
+Q1
+d=ef c.Q3,
+Q2
+d=ef c.Q3,
+Q3
+d=ef a.Q1 + b.Q2.
+We claim that P ∼ Q. To prove that this holds, it suffices to argue that the following relation is a strong bisimulation:
+R = {(P, Q), (P, Q3), (P1, Q1), (P2, Q2)}.
+You are encouraged to check that this is indeed the case. !
+Exercise 3.3 Consider the processes P and Q defined thus:
+P d=ef a.P1,
+P1
+d=ef b.P + c.P
+and
+Q d=ef a.Q1,
+Q1
+d=ef b.Q2 + c.Q,
+Q2
+d=ef a.Q3,
+Q3
+d=ef b.Q + c.Q2.
+Show that P ∼ Q holds by exhibiting an appropriate strong bisimulation. !
+Exercise 3.4 Consider the processes
+P d=ef a.(b.0 + c.0),
+Q d=ef a.b.0 + a.c.0.
+Show that P and Q are not strongly bisimilar. !
+
+
+42 Behaviouralequivalences
+Exercise 3.5 Consider the following LTS.
+s
+a
+#
+a
+"""""""""""(
+s1
+a
+)!!!!!!!!!!
+b
+""""""""""(s2
+a
+#
+s3
+a
+*
+s4
+a
++t
+a
+#
+a $ t3 a $ t4
+a
+,
+t1
+b
+
+a
+.t2
+a
+/
+Show that s ∼ t by finding a strong bisimulation R containing the pair (s, t). !
+Before looking at a few more examples, we now present some general properties of strong bisimilarity. In particular, we shall see that ∼ is an equivalence relation and that it is preserved by all the constructs in the CCS language. The following result states the most basic properties of strong bisimilarity; it is our first theorem in this book.
+Theorem 3.1 For all LTSs, the relation ∼
+1. is an equivalence relation, 2. is the largest strong bisimulation, and 3. satisfies the following property:
+s1 ∼ s2 iff, for each action α, if s1
+α → s′1 then there is a transition s2
+α → s′2 such that s′1 ∼ s′2; if s2
+α → s′2 then there is a transition s1
+α → s′1 such that s′1 ∼ s′2.
+Proof. Consider an LTS (Proc, Act, { α → | α ∈ Act}). We will prove each of the above statements in turn.
+Proof of 1. In order to show that ∼ is an equivalence relation over the set of states Proc, we need to argue that it is reflexive, symmetric and transitive. (See Definition 3.1.) To prove that ∼ is reflexive, it suffices to provide a bisimulation that contains the pair (s, s) for each state s ∈ Proc. It is not hard to see that the identity relation
+I = {(s, s) | s ∈ Proc}
+is such a relation.
+
+
+3.3. Strongbisimilarity 43
+We now show that ∼ is symmetric. Assume, to this end, that s1 ∼ s2 for some states s1 and s2 contained in Proc. We claim that s2 ∼ s1 also holds. To prove this claim, recall that since s1 ∼ s2 there is a bisimulation R that contains the pair of states (s1, s2). Consider now the relation
+R−1 = {(s′, s) | (s, s′) ∈ R}.
+You should now be able to convince yourself that the pair (s2, s1) is contained in R−1 and that this relation is indeed a bisimulation. Therefore s2 ∼ s1, as claimed. We are therefore left to argue that ∼ is transitive. Assume, to this end, that s1 ∼ s2 and s2 ∼ s3 for some states s1, s2 and s3 contained in Proc. We claim that s1 ∼ s3 also holds. To prove this, recall that since s1 ∼ s2 and s2 ∼ s3 there are two bisimulations R and R′ that contain the pairs of states (s1, s2) and (s2, s3) respectively. Consider now the relation
+S = {(s′1, s′3) | (s′1, s′2) ∈ R and (s′2, s′3) ∈ R′, for some s′2}.
+The pair (s1, s3) is contained in S. (Why?) Moreover, using the fact that R and R′ are bisimulations, you should be able to show that S is also a bisimulation. Therefore s1 ∼ s3, as claimed. Proof of 2. We aim at showing that ∼ is the largest strong bisimulation over the set of states Proc. To this end observe, first of all, that the definition of ∼ states that
+∼= [
+{R | R is a bisimulation}.
+This yields immediately that each bisimulation is included in ∼. We are therefore left to show that the right-hand side of the above equation is itself a bisimulation. This we now proceed to do. Since we have already shown that ∼ is symmetric, it is sufficient to prove that if
+(s1, s2) ∈
+[
+{R | R is a bisimulation} and s1
+α → s′1 (3.3)
+then there is a state s′2 such that s2
+α → s′2 and
+(s′1, s′2) ∈
+[
+{R | R is a bisimulation}.
+Assume, therefore, that (3.3) holds. Since
+(s1, s2) ∈
+[
+{R | R is a bisimulation},
+there is a bisimulation R that contains the pair (s1, s2). As R is a bisimulation and s1
+α → s′1, we have that there is a state s′2 such that s2
+α → s′2 and (s′1, s′2) ∈ R.
+
+
+44 Behaviouralequivalences
+Observe now that the pair (s′1, s′2) is also contained in
+[
+{R | R is a bisimulation}.
+Hence, we have successfully argued that there is a state s′2 such that s2
+α → s′2
+and
+(s′1, s′2) ∈
+[
+{R | R is a bisimulation},
+which was to be shown. Proof of 3. We now aim at proving that ∼ satisfies the following property: s1 ∼ s2 iff, for each action α,
+if s1
+α → s′1 then there is a transition s2
+α → s′2 such that s′1 ∼ s′2; if s2
+α → s′2 then there is a transition s1
+α → s′1 such that s′1 ∼ s′2.
+The implication from left to right is an immediate consequence of the fact that, as we have just shown, ∼ is itself a bisimulation. We are therefore left to prove the implication from right to left. To this end, assume that s1 and s2 are two states in Proc having the following property:
+(∗) for each action α, if s1
+α → s′1 then there is a transition s2
+α → s′2 such that s′1 ∼ s′2; if s2
+α → s′2 then there is a transition s1
+α → s′1 such that s′1 ∼ s′2.
+We shall now prove that s1 ∼ s2 holds by constructing a bisimulation that contains the pair (s1, s2). How can we build the desired bisimulation R? First of all, we must add the pair (s1, s2) to R because we wish to use that relation to prove s1 ∼ s2. Since R is to be a bisimulation, each transition s1
+α → s′1 from s1 must be matched by a transition s2
+α → s′2 from s2, for some state s′2 such that (s′1, s′2) ∈ R. In the
+light of the property (∗), this can be easily achieved by adding to the relation R all the pairs of states contained in ∼! However, since we have already shown that ∼ is itself a bisimulation, no more pairs of states need be added to R. The above discussion suggests that we consider the relation
+R = {(s1, s2)} ∪ ∼ .
+Indeed, by construction, the pair (s1, s2) is contained in R. Moreover, using property (∗) and statement 2 of the theorem, it is not hard to prove that R is a bisimulation. This shows that s1 ∼ s2, as claimed.
+The proof is now complete. !
+Exercise 3.6 Prove that the relations we built in the proof of Theorem 3.1 are indeed bisimulations. !
+
+
+3.3. Strongbisimilarity 45
+Exercise 3.7 In the proof of Theorem 3.1(2), we argued that the union of all the bisimulation relations over an LTS is itself a bisimulation. Use the argument we adopted in the proof of that statement to show that the union of an arbitrary family of bisimulations is always a bisimulation. !
+Exercise 3.8 Is it true that any strong bisimulation must be reflexive, transitive and symmetric? If yes then prove it. If not then give counter-examples, that is:
+! define an LTS and a binary relation over states that is not reflexive but is a strong bisimulation;
+! define an LTS and a binary relation over states that is not symmetric but is a strong bisimulation; and
+! define an LTS and a binary relation over states that is not transitive but is a strong bisimulation.
+Are the relations that you have constructed the largest strong bisimulations over your LTSs? !
+Exercise 3.9 (Recommended) A binary relation R over the set of states of an LTS is a stringbisimulationiff, whenever s1 R s2 and σ is a sequence of actions in Act,
+if s1
+σ→ s′1 then there is a transition s2
+σ→ s′2 such that s′1 R s′2; if s2
+σ→ s′2 then there is a transition s1
+σ→ s′1 such that s′1 R s′2.
+Two states s and s′ are stringbisimilariff there is a string bisimulation that relates them. Prove that string bisimilarity and strong bisimilarity coincide. That is, show that two states s and s′ are string bisimilar iff they are strongly bisimilar. !
+Exercise 3.10 Assume that the defining equation for a constant K is K d=ef P . Show that K ∼ P holds. !
+Exercise 3.11 Prove that two strongly bisimilar processes afford the same traces, and thus that strong bisimulation equivalence satisfies the requirement for behavioural equivalence that we set out in statement (3.1). Hint: Use your solution to Exercise 3.9 to show that, for each trace α1 · · · αk (k ≥ 0),
+P ∼ Q and α1 · · · αk ∈ Traces(P ) imply that α1 · · · αk ∈ Traces(Q).
+Is it true that strongly bisimilar processes have the same completed traces? (See Exercise 3.2 for the definition of a completed trace.) !
+
+
+46 Behaviouralequivalences
+Exercise 3.12 (Recommended) Show that the relations listed below are strong bisimulations:
+{(P | Q, Q | P ) | where P, Q are CCS processes}, {(P | 0, P ) | where P is a CCS process}, {((P | Q) | R, P | (Q | R)) | where P, Q, R are CCS processes}.
+Conclude that, for all P, Q, R,
+P | Q ∼ Q | P, (3.4) P | 0 ∼ P, (3.5)
+(P | Q) | R ∼ P | (Q | R). (3.6)
+Find three CCS processes P, Q, R such that (P + Q) | R )∼ (P | R) + (Q | R). !
+Exercise 3.13 Is it true that, for all CCS processes P and Q,
+(P | Q) \ a ∼ (P \ a) | (Q \ a)?
+Does the following equivalence hold for all CCS processes P and Q and relabelling function f ?
+(P | Q)[f ] ∼ (P [f ]) | (Q[f ]).
+If your answer to the above questions is positive then construct appropriate bisimulations. Otherwise provide a counter-example to the claim. !
+As we saw in Exercise 3.12, parallel composition is associative and commutative modulo strong bisimilarity. Therefore, since the precise bracketing of terms in a parallel composition does not matter, we can use the notation Πik=1Pi, where k ≥ 0
+and the Pi are CCS processes, to stand for
+P1 | P2 | · · · | Pk.
+If k = 0 then by convention, the above term is just 0. As mentioned before, one of the desirable properties for a notion of behavioural equivalence is that it should allow us to ‘replace equivalent processes by equivalent processes’ in any larger process expression without affecting its behaviour. The following theorem states that this is indeed possible for strong bisimilarity.
+Theorem 3.2 Let P, Q, R be CCS processes. Assume that P ∼ Q. Then:
+! α.P ∼ α.Q for each action α;
+! P + R ∼ Q + R and R + P ∼ R + Q for each process R;
+! P | R ∼ Q | R and R | P ∼ R | Q for each process R;
+! P [f ] ∼ Q[f ] for each relabelling f ; and
+! P \ L ∼ Q \ L for each set of labels L.
+
+
+3.3. Strongbisimilarity 47
+Proof. We limit ourselves to showing that ∼ is preserved by parallel composition and restriction. We consider these two operations in turn. In both cases, we assume that P ∼ Q.
+! Let R be a CCS process. We aim at showing that P | R ∼ Q | R. To this end, we shall build a bisimulation R that contains the pair of processes (P | R, Q | R). Consider the relation
+R = {(P ′ | R′, Q′ | R′) | P ′ ∼ Q′ where P ′, Q′, R′ are CCS processes}.
+You should readily be able to convince yourself that the pair of processes (P | R, Q | R) is indeed contained in R and thus that all we are left to do to complete our argument is to show that R is a bisimulation. The proof of this fact will, hopefully, also highlight that the above relation R is not ‘built out of thin air’ and epitomizes the creative process that underlies the building of bisimulation relations. First of all observe that, by symmetry, to prove that R is a bisimulation it is
+sufficient to argue that if (P ′ | R′, Q′ | R′) is contained in R and P ′ | R′ α → S
+for some action α and CCS process S then Q′ | R′ α → T for some CCS process T such that (S, T ) ∈ R. This we now proceed to do.
+Assume that (P ′ | R′, Q′ | R′) is contained in R and P ′ | R′ α → S for some action α and CCS process S. We now proceed with the proof by a case analysis
+on the possible origins of the transition P ′ | R′ α → S. Recall that the transition that we are considering must be provable using the SOS rules for parallel composition given in Table 2.2. Therefore there are three possible forms that the
+transition P ′ | R′ α → S may take, namely:
+1. P ′ is responsible for the transition and R′ ‘stands still’, i.e.
+P ′ | R′ α → S,
+because, by rule COM1 for parallel composition in Table 2.2, P ′ α → P ′′ and S = P ′′ | R′, for some P ′′; 2. R′ is responsible for the transition and P ′ ‘stands still’, i.e.
+P ′ | R′ α → S,
+because, by rule COM2 for parallel composition in Table 2.2, R′ α → R′′ and S = P ′ | R′′ for some R′′; or 3. the transition under consideration is the result of a synchronization between a transition of P ′ and one of R′, i.e.
+P ′ | R′ α → S,
+
+
+48 Behaviouralequivalences
+because, by rule COM3 for parallel composition in Table 2.2, α = τ , and there are a label a and processes P ′′ and R′′ such that P ′ a→ P ′′, R′ a→ ̄ R′′ and S = P ′′ | R′′.
+We now proceed by examining each of these cases in turn.
+Case 1. Since P ′ α → P ′′ and P ′ ∼ Q′, we have that Q′ α → Q′′ and P ′′ ∼ Q′′
+for some Q′′. Using the transition Q′ α → Q′′ as the premise in rule COM1 for parallel composition in Table 2.2, we infer that
+Q′ | R′ α → Q′′ | R′.
+By the definition of the relation R, we have that
+(P ′′ | R′, Q′′ | R′) ∈ R.
+We can therefore take T = Q′′ | R′, and we are done.
+Case 2. In this case, we have that R′ α → R′′. Using this transition as the premise in rule COM2 for parallel composition in Table 2.2, we infer that
+Q′ | R′ α → Q′ | R′′.
+By the definition of the relation R, we have that
+(P ′ | R′′, Q′ | R′′) ∈ R.
+We can therefore take T = Q′ | R′′, and we are done.
+Case 3. Since P ′ a→ P ′′ and P ′ ∼ Q′, we have that Q′ a→ Q′′ and P ′′ ∼ Q′′ for some Q′′. Using the transitions Q′ a→ Q′′ and R′ a→ ̄ R′′ as the premises in rule COM3 for parallel composition in Table 2.2, we infer that
+Q′ | R′ τ→ Q′′ | R′′.
+By the definition of the relation R, we have that
+(P ′′ | R′′, Q′′ | R′′) ∈ R.
+We can therefore take T = Q′′ | R′′, and we are done.
+Therefore the relation R is a bisimulation, as claimed.
+! Let L be a set of labels. We aim at showing that P \ L ∼ Q \ L. To this end, we shall build a bisimulation R that contains the pair of processes (P \ L, Q \ L). Consider the relation
+R = {(P ′ \ L, Q′ \ L) | P ′ ∼ Q′ where P ′, Q′ are CCS processes}.
+You should readily be able to convince yourself that the pair of processes (P \ L, Q \ L) is indeed contained in R. Moreover, following the lines of the proof
+
+
+3.3. Strongbisimilarity 49
+we have just gone through for parallel composition, it is an instructive exercise to show that
+the relation R is symmetric, and
+if (P ′ \ L, Q′ \ L) is contained in R and P ′ \ L α → S for some action α and CCS
+process S, then Q′ \ L α → T for some CCS process T such that (S, T ) ∈ R.
+You are strongly encouraged to fill in the missing details in the proof. !
+Exercise 3.14 Prove that ∼ is preserved by action prefixing, summation and relabelling. !
+Exercise 3.15 (For the theoretically minded) For each set of labels L and process P , we may wish to build a process τL(P ) that is obtained by turning into a τ -action each action α performed by P , with α ∈ L or α ̄ ∈ L. Operationally, the behaviour of the construct τL( ) can be described by the following two rules:
+P α → P ′
+τL(P ) τ→ τL(P ′) if α ∈ L or α ̄ ∈ L,
+P α → P ′
+τL(P ) α → τL(P ′) if α = τ or α, α ̄ )∈ L.
+Prove that τL(P ) ∼ τL(Q) whenever P ∼ Q. Consider the question whether the operation τL( ) can be defined in CCS modulo ∼. That is, can we find a CCS expression CL[ ] with a ‘hole’ (a place holder into which another process can be plugged) such that, for each process P ,
+τL(P ) ∼ CL[P ]?
+Argue for your answer. !
+Now recall that we defined the specification of a counter thus:
+Counter0
+d=ef up.Counter1,
+Countern
+d=ef up.Countern+1 + down.Countern−1 (n > 0).
+Moreover, we stated that we expect this process to be ‘behaviourally equivalent’ to the process C defined by
+C d=ef up.(C | down.0).
+We can now show that, in fact, C and Counter0 are strongly bisimilar. To this end, note that this follows if we can show that the relation R defined by
+{(C | Πik=1Pi, Countern) | (1) k ≥ 0, (2) Pi = 0 or Pi = down.0 for each i,
+(3) the number of is with Pi = down.0 is n}
+
+
+50 Behaviouralequivalences
+is a strong bisimulation. (Can you see why?) The following result states that this does hold true.
+Proposition 3.1 The relation R defined above is a strong bisimulation.
+Proof. Assume that
+(C | Πik=1Pi) R Countern.
+By the definition of the relation R, each Pi is either 0 or down.0, and the number of Pi = down.0 is n. We shall now show that
+1. if C | Πik=1Pi
+α → P for some action α and process P then there is some process Q such that Countern
+α → Q and P R Q, and 2. if Countern
+α → Q for some some action α and process Q then there is some process P such that C | Πik=1Pi
+α → P and P R Q.
+We will establish these two claims separately.
+Claim 1. Assume that C | Πik=1Pi
+α → P for some some action α and process P . Then
+either α = up and P = C | down.0 | Πik=1Pi
+or n > 0, α = down and P = C | Πik=1Pi′, where the sequences of the pro
+cesses P1, . . . , Pk and P1′, . . . , Pk′ differ in exactly one position $ and, at that
+position, P$ = down.0 and P$′ = 0.
+In the former case, argue that the matching transition is
+Countern
+u→p Countern+1.
+In the latter, argue that the matching transition is
+Countern
+down
+→ Countern−1.
+Claim 2. Assume that Countern
+α → Q for some some action α and process Q. Then
+either α = up and Q = Countern+1 or n > 0, α = down and Q = Countern−1.
+Finding matching transitions from C |Πik=1Pi is left as an exercise for the reader.
+We can therefore conclude that R is a strong bisimulation, which was to be shown. !
+Exercise 3.16 Fill in the missing details in the above proof. !
+
+
+3.3. Strongbisimilarity 51
+B20
+in 0
+B10 | B01
+in
+1 in 2
+B21
+in 0
+out
+3
+B11 | B01
+in 2
+out
+4
+B10 | B11
+in 1
+out
+%
+B22
+out
+3
+B11 | B11
+out
+%
+out
+4
+Figure 3.2 A bisimulation showing that B20 ∼ B10 | B10.
+Using CCS, we may specify the desired behaviour of a buffer with capacity one thus:
+B10
+d=ef in.B11,
+B11
+d=ef out.B10.
+The constant B10 stands for an empty buffer with capacity one, that is, a buffer with
+capacity one holding zero items, and B11 stands for a full buffer with capacity one,
+that is, a buffer with capacity one holding one item. By analogy with the above definition, in general we may specify a buffer of capacity n ≥ 1 as follows, where the superscript stands for the maximal capacity of the buffer and the subscript for the number of elements the buffer currently holds:
+B0n
+d=ef in.B1n,
+Bin
+d=ef in.Bin+1 + out.Bin−1 (0 < i < n),
+Bnn
+d=ef out.Bnn−1.
+It seems natural to expect that we may implement a buffer of capacity n ≥ 1 by means of the parallel composition of n buffers of capacity one. This expectation is certainly met when n = 2 because, as you can readily check, the relation depicted in Figure 3.2 is a bisimulation showing that
+B20 ∼ B10 | B10.
+That this holds regardless of the size of the buffer to be implemented is the import of the following result.
+Proposition 3.2 For each natural number n ≥ 1,
+B0n ∼ B10 | B10 | · · · | B10
+| {z } n times
+.
+
+
+52 Behaviouralequivalences
+Proof. Construct the following binary relation, where i1, i2, . . . , in ∈ {0, 1}:
+R=
+8<
+:
+⇣Bin, Bi11 Bi12 · · · Bi1n
+⌘ Xn
+j=1
+ij = i
+9=
+;.
+Intuitively, the above relation relates a buffer of capacity n holding i items to a parallel composition of n buffers of capacity one, provided that exactly i of the latter are full. It is not hard to see that
+! B0n, B10 | B10 | · · · | B10 ∈ R, and
+! R is a strong bisimulation.
+It follows that
+B0n ∼ B10 | B10 | · · · | B10
+| {z } n times
+.
+as required. We encourage you to fill in the details of this proof. !
+Exercise 3.17 (Simulation) Let us say that a binary relation R over the set of states of an LTS is a simulation iff whenever s1 R s2 and α is an action:
+if s1
+α → s′1 then there is a transition s2
+α → s′2 such that s′1 R s′2.
+We say that s′ simulates s, written s ∼ ! s′, iff there is a simulation R for which s R s′. Two states s and s′ are simulationequivalent, written s * s′, iff s ∼ ! s′ and s′ ∼ ! s both hold.
+1. Prove that ∼ ! is a preorder and that * is an equivalence relation. 2. Build simulations showing that
+a.0 ∼ ! a.a.0,
+a.b.0 + a.c.0 ∼ ! a.(b.0 + c.0).
+Do the converse relations hold? 3. Show that strong bisimilarity is included in simulation equivalence, that is, for any two strongly bisimilar states s and s′ it holds that s′ simulates s. Does the converse inclusion also hold?
+Is there a CCS process that can simulate any other CCS process? !
+Exercise 3.18 (Ready simulation) Let us say that a binary relation R over the set of states of an LTS is a readysimulation iff, whenever s1 R s2 and α is an action:
+if s1
+α → s′1 then there is a transition s2
+α → s′2 such that s′1 R s′2, if s2
+α → then s1
+α →.
+
+
+3.4. Weakbisimilarity 53
+We say that s′ ready simulates s, written s ∼ !RS s′, iff there is a ready simulation R for which s R s′. Two states s and s′ are ready-simulation equivalent, written s *RS s′, iff s !∼RS s′ and that s′ !∼RS s both hold.
+1. Prove that ∼ !RS is a preorder and that *RS is an equivalence relation. 2. Do the following relations hold?
+a.0 ∼ !RS a.a.0,
+a.b.0 + a.c.0 ∼ !RS a.(b.0 + c.0).
+3. Show that strong bisimilarity is included in ready-simulation equivalence, that is, for any two strongly bisimilar states s and s′ it holds that s′ ready simulates s. Does the converse inclusion also hold?
+Is there a CCS process that can ready simulate any other CCS process? !
+Exercise 3.19 (For the theoretically minded) Consider the processes
+P d=ef a.b.c.0 + a.b.d.0,
+Q d=ef a.(b.c.0 + b.d.0).
+Argue, first of all, that P and Q are not strongly bisimilar. Next show that:
+1. P and Q have the same completed traces (see Exercise 3.2); 2. for each process R and set of labels L, the processes
+(P | R) \ L and (Q | R) \ L
+have the same completed traces.
+So P and Q have the same deadlock behaviour in all parallel contexts, even though strong bisimilarity distinguishes them. The lesson to be learned from these observations is that more generous notions of behavioural equivalence than bisimilarity may be necessary to validate some desirable equivalences. !
+3.4 Weak bisimilarity
+As we have seen in the previous section, strong bisimilarity affords many properties that we expect a behavioural relation to be used in implementation verification to have. (See the introduction to Chapter 3.) In particular, strong bisimilarity is an equivalence relation that is preserved by all CCS operators, it is the largest strong bisimulation, it supports a very elegant proof technique to demonstrate equivalences between process descriptions and it suffices to establish several natural equivalences. For instance, you used strong bisimilarity in
+
+
+54 Behaviouralequivalences
+Exercise 3.12 to justify the expected equalities
+P | Q ∼ Q | P,
+P | 0 ∼ P,
+(P | Q) | R ∼ P | (Q | R).
+Moreover, a wealth of other ‘structural equivalences’ such as those above may be proved to hold modulo strong bisimilarity. (See Milner (1989, Propositions 7, 8).) Should we look any further for a notion of behavioural equivalence to support implementation verification? Is there any item on our wish list that is not met by strong bisimilarity? You might recall that we stated early on in this book that τ -actions in process behaviours are supposed to be internal and thus unobservable. This is a natural consequence of Milner’s design decision to let τ indicate the result of a successful communication between two processes. Since communication is binary in CCS and since observing the behaviour of a process means communicating with it in some fashion, the unobservable nature of τ -actions is the upshot of the assumption that they cannot be used for further communication. This discussion indicates that a notion of behavioural equivalence should allow us to abstract from such steps in process behaviours. Consider, for instance, the processes a.τ.0 and a.0. Since τ -actions should be unobservable, we intuitively expect these to be observationally equivalent. Unfortunately, however, the processes a.τ.0 and a.0 are not strongly bisimilar. In fact, the definition of strong bisimulation requires that each transition in the behaviour of one process should be matched by a single transition of the other, regardless of whether that transition is labelled by an observable action or by τ , and a.τ.0 affords the trace aτ whereas a.0 does not. In hindsight, this failure of strong bisimilarity to account for the unobservable nature of τ -actions should have been expected, because the definition of strong bisimulation treats internal actions as if they were ordinary observable actions. What we should like to have is a notion of bisimulation equivalence that affords all the good properties of strong bisimilarity and abstracts from τ -actions in the behaviour of processes. However, in order to fulfill this aim, first we need to understand what ‘abstracting from τ -actions’ actually means. Does this simply mean that we can ‘erase’ the τ -actions in the behaviour of a process? This would be enough to show that a.τ.0 and a.0 are equivalent, as the former process is identical to the latter if we ‘erase the τ -prefix’. But would this work in general? To understand the issue better, let us make our old friend from the computer science department, namely the process CS defined in Table 2.1, interact with a nasty variation on the coffee machine CM from (2.1). This latest version of the
+
+
+3.4. Weakbisimilarity 55
+Start
+pub
+#
+(CMb | CS1) \ {coin, coffee}
+τ
+5##################
+τ
+$$$$$$$$$$$$$$$$$$6
+Good
+τ
+7
+Bad
+Figure 3.3 The possible behaviours of (CMb | CS) \ {coin, coffee}:
+Start ≡ (CMb | CS) \ {coin, coffee}, CS d=ef pub.CS1,
+Good ≡ (coffee, CMb | CS2) \ {coin, coffee}, CS1
+d=ef coin.CS2,
+Bad ≡ (CMb | CS2) \ {coin, coffee}, CS2
+d=ef coffee.CS.
+coffee machine delivered to the computer scientist’s office is given by
+CMb
+d=ef coin.coffee.CMb + coin.CMb. (3.7)
+(The subscript b indicates that this version of the coffee machine is bad!) Note that, upon receipt of a coin, the coffee machine CMb can decide to go back to its initial state without delivering the coffee. You should be able to convince yourself that the sequences of transitions in Figure 3.3 describe the possible behaviours of the system (CMb | CS) \ {coin, coffee}. In this figure, for the sake of notational convenience we use Start as a shorthand for the CCS expression
+(CMb | CS) \ {coin, coffee}.
+The shorthands Bad and Good are also introduced in the figure, using the ‘declarations’
+Good ≡ (coffee.CMb | CS2) \ {coin, coffee}, Bad ≡ (CMb | CS2) \ {coin, coffee}.
+Note that there are two possible τ -transitions that stem from the process
+(CMb | CS1) \ {coin, coffee},
+and that one of these, namely
+(CMb | CS1) \ {coin, coffee} τ→ (CMb | CS2) \ {coin, coffee},
+
+
+56 Behaviouralequivalences
+leads to a deadlocked state. Albeit directly unobservable, this transition cannot be ignored in our analysis of the behaviour of this system because it pre-empts the other possible behaviour of the machine. So, unobservable actions cannot be just erased from the behaviour of processes because, in the light of their pre-emptive power in the presence of nondeterministic choices, they may affect what we may observe. Note that the pre-emptive power of internal transitions is unimportant in the standard theory of automata, as there we are concerned only with the possibility to process our input strings correctly. Indeed, as you may recall from courses in the theory of automata, the so-called ε-transitions do not increase the expressive power of nondeterministic finite automata; see, for instance, the textbook (Sipser, 2005, Chapter 1). In a reactive environment, however, this power of internal transitions must be taken into account in a reasonable definition of process behaviour because it may lead to undesirable consequences, for example, the deadlock situation in Figure 3.3. We therefore expect that the behaviour of the process SmUni is not equivalent to that of the process (CMb | CS) \ {coin, coffee} since the latter may deadlock after outputting a publication whereas the former cannot. In order to define a notion of bisimulation that allows us to abstract from internal transitions in process behaviours and to differentiate the process SmUni from (CMb | CS) \ {coin, coffee}, we begin by introducing a new notion of transition relation between processes.
+Definition 3.3 Let P and Q be CCS processes or, more generally, states in an LTS.
+For each action α, we shall write P α ⇒ Q iff
+either α )= τ and there are processes P ′ and Q′ such that
+P ( τ→)∗P ′ α → Q′( τ→)∗Q
+or α = τ and P ( τ→)∗Q,
+where we write ( τ→)∗ for the reflexive and transitive closure of the relation τ→. !
+Thus P α ⇒ Q holds if P can reach Q by performing an α-labelled transition, possibly preceded and followed by sequences of τ -labelled transitions. For example,
+a.τ.0 ⇒a 0 and a.τ.0 a⇒ τ.0 both hold, as well as a.τ.0 τ⇒ a.τ.0. In fact, we have
+P τ⇒ P for each process P .
+
+
+3.4. Weakbisimilarity 57
+In the LTS depicted in Figure 3.3, apart from the obvious one-step pub-labelled transition, we have that
+Start pu⇒b Good,
+Start pu⇒b Bad,
+Start pu⇒b Start.
+Our order of business now will be to use the new transition relations presented above to define a notion of bisimulation that can be used to equate processes that offer the same observable behaviour despite possibly having very different amounts of internal computation. The idea underlying the definition of the new notion of bisimulation is that a transition from a given process can now be matched by a sequence of transitions from another that has the same ‘observational content’ and leads to a state that is bisimilar to that reached by the first process.
+Definition 3.4 (Weak bisimulation and observational equivalence) A binary relation R over the set of states of an LTS is a weakbisimulationiff, whenever s1 R s2 and α is an action (including τ ):
+if s1
+α → s′1 then there is a transition s2
+α ⇒ s′2 such that s′1 R s′2;
+if s2
+α → s′2 then there is a transition s1
+α ⇒ s′1 such that s′1 R s′2.
+Two states s and s′ are observationally equivalent (or weakly bisimilar), written s ≈ s′, iff there is a weak bisimulation that relates them. Henceforth the relation ≈ will be referred to as observationalequivalence or weakbisimilarity. !
+Example 3.4 Let us consider the following LTS:
+s τ $ s1 a $ s2 t a $ t1
+Obviously s )∼ t. However, s ≈ t because the relation
+R = {(s, t), (s1, t), (s2, t1)}
+is a weak bisimulation such that (s, t) ∈ R. It remains to verify that R is indeed a weak bisimulation.
+! Let us examine all possible transitions from the components of the pair (s, t). If
+s τ→ s1 then t τ⇒ t and (s1, t) ∈ R. If t a→ t1 then s a⇒ s2 and (s2, t1) ∈ R. ! Let us examine all possible transitions from (s1, t). If s1
+a→ s2 then t a⇒ t1 and (s2, t1) ∈ R. Similarly if t a→ t1 then s1
+⇒a s2 and again (s2, t1) ∈ R.
+! Consider now the pair (s2, t1). Since neither s2 nor t1 can perform any transition, it is safe to have this pair in R.
+
+
+58 Behaviouralequivalences
+Hence we have shown that each pair from R satisfies the conditions given in Definition 3.4, which means that R is a weak bisimulation, as claimed. !
+We can readily argue that a.0 ≈ a.τ.0 by establishing a weak bisimulation that relates these two processes. (Do so by renaming the states in the LTS and in the bisimulation above!) However, there is no weak bisimulation that relates the process SmUni and the process Start in Figure 3.3. In fact, the process SmUni is observationally equivalent to the process
+Spec d=ef pub.Spec,
+but the process Start is not.
+Exercise 3.20 Prove the claims that we have just made. !
+Exercise 3.21 Prove that the behavioural equivalences claimed in Exercise 2.11 hold with respect to observational equivalence (weak bisimilarity). !
+The definition of weak bisimilarity is so natural, at least to our mind, that it is easy to miss some of its crucial consequences. To highlight some of these, consider the process
+A? d=ef a.0 + τ.B?,
+B? d=ef b.0 + τ.A?.
+Intuitively, this process describes a ‘polling loop’ that may be seen as an implementation of a process that is willing to receive on port a or port b, and then terminate. Indeed, it is not hard to show that
+A? ≈ B? ≈ a.0 + b.0.
+(Prove this!) This seems to be non-controversial until we note that A? and B? have a livelock (that is, a possibility of divergence), owing to the τ -loop
+A? τ→ B? τ→ A?,
+but a.0 + b.0 does not. The above equivalences capture a main feature of observational equivalence, namely the fact that it supports what is called ‘fair abstraction from divergence’. (See Baeten, Bergstra and Klop (1987), where it is shown that a proof rule embodying this idea, namely Koomen’s fair-abstraction rule, is valid with respect to observational equivalence.) This means that observational equivalence assumes that if a process can escape from a loop consisting of internal transitions then it will eventually do so. This property of observational equivalence, which is by no means obvious from its definition, is crucial in using observational
+
+
+3.4. Weakbisimilarity 59
+Send d=ef acc.Sending Rec d=ef trans.Del
+Sending d=ef send.Wait Del d=ef del.Ack
+Wait d=ef ack.Send + error.Sending Ack d=ef ack.Rec
+Med d=ef send.Med′
+Med′ d=ef τ.Err + trans.Med
+Err d=ef error.Med
+Table 3.1 The sender, receiver and medium in (3.8)
+equivalence as a correctness criterion in the verification of communication protocols, since the communication media may lose messages or messages may have to be retransmitted some arbitrary number of times in order to ensure their delivery. Note moreover that 0 is observationally equivalent to the ‘diverge’ process,
+Div d=ef τ.Div.
+This means that a process that can only diverge is observationally equivalent to a deadlocked one. This may also seem odd at first sight. However, you will probably agree that, assuming that we can observe a process only by communicating with it, the systems 0 and Div are observationally equivalent since both refuse each attempt at communicating with them. (They do so for different reasons, but these reasons cannot be distinguished by an external observer.) As an example of an application of observational equivalence to the verification of a simple protocol, consider the process Protocol defined by
+(Send | Med | Rec) \ L (L = {send, error, trans, ack}), (3.8)
+consisting of a sender and a receiver that communicate via a potentially faulty medium. The sender, the receiver and the medium are given in Table 3.1. (In this table, we use the port names ‘acc’ and ‘del’ as shorthand for ‘accept’ and ‘deliver’ respectively.) Note that the potentially faulty behaviour of the medium Med is described abstractly in the defining equation for the process Med′ by means of an internal transition to an ‘error state’. When it has entered this state, the medium informs the sender process that it has lost a message and therefore that the message must be retransmitted. The sender will receive this message when in the state Wait and will proceed to retransmit the message. We expect the protocol to behave like a one-place buffer described thus:
+ProtocolSpec d=ef acc.del.ProtocolSpec.
+
+
+60 Behaviouralequivalences
+Note, however, that inclusion of the possibility of having to retransmit a message some arbitrary number of times before a successful delivery means that the process describing the protocol has a livelock. (Find it!) However, you should be able to prove that
+Protocol ≈ ProtocolSpec,
+by building a suitable weak bisimulation.
+Exercise 3.22 Build the aforementioned weak bisimulation. !
+The following theorem is the counterpart of Theorem 3.1 for the case of weak bisimilarity. It states that ≈ is an equivalence relation and that it is the largest weak bisimulation.
+Theorem 3.3 For all LTSs, the relation ≈ is
+1. an equivalence relation, 2. the largest weak bisimulation, and 3. satisfies the following property: s1 ≈ s2 iff, for each action α,
+if s1
+α → s′1 then there is a transition s2
+α ⇒ s′2 such that s′1 ≈ s′2;
+if s2
+α → s′2 then there is a transition s1
+α ⇒ s′1 such that s′1 ≈ s′2.
+Proof. The proof follows the lines of that of Theorem 3.1 and is therefore omitted. !
+Exercise 3.23 Fill in the details of the proof of the above theorem. !
+Exercise 3.24 Show that strong bisimilarity is included in observational equivalence; that is, prove that any two strongly bisimilar states are also weakly bisimilar. !
+Exercise 3.25 Consider the following LTS:
+s
+τ
+8
+a
+#
+s1
+τ
+8
+τ 9
+b
+#
+s2
+τ ,
+τ
+#
+s3 s4 s5
+t τ$
+a
+!%%%%%%%%%%
+b
+&&&&&&&&&&"t1 τ
+5
+t2 t3
+Show that s ≈ t by finding a weak bisimulation containing the pair (s, t). !
+
+
+3.4. Weakbisimilarity 61
+Exercise 3.26 Show that for all P, Q the following equivalences, which are usually referred to as Milner’s τ-laws, hold:
+α.τ.P ≈ α.P, (3.9)
+P + τ.P ≈ τ.P, (3.10)
+α.(P + τ.Q) ≈ α.(P + τ.Q) + α.Q. (3.11)
+Hint:Buildappropriateweakbisimulations. !
+Exercise 3.27 Show that for all P, Q if P τ⇒ Q and Q τ⇒ P then P ≈ Q. !
+Exercise 3.28 We say that a CCS process is τ-free iff none of the states that it can reach by performing sequences of transitions affords a τ -labelled transition. For
+example, a.0 is τ -free but a.(b.0 |  ̄b.0) is not. Prove that no τ -free CCS process is observationally equivalent to a.0 + τ.0. !
+Exercise 3.29 Prove that, for each CCS process P , the process P \ (Act − {τ }) is observationally equivalent to 0. Does this remain true if we consider processes modulo strong bisimilarity? !
+Exercise 3.30 (Mandatory) Show that observational equivalence is the largest symmetric relation R satisfying that whenever s1 R s2 then, for each action α (including τ ), if s1
+α ⇒ s′1 then there is a transition s2
+α ⇒ s′2 such that s′1 R s′2.
+This means that observational equivalence may be defined in the same way as
+strong bisimilarity but over an LTS whose transitions are α ⇒, where α ranges over a set of actions including τ . !
+Exercise 3.31 For each sequence σ of observable actions in L and states s, t in
+an LTS, define the relation σ⇒ thus:
+s ⇒ε t iff s τ⇒ t, and
+s aσ′
+⇒ t iff s a⇒ s′ σ′
+⇒ t for some s′.
+A binary relation R over the set of states of an LTS is a weak string bisimulation iff whenever s1 R s2 and σ is a (possibly empty) sequence of observable actions in L:
+if s1
+σ⇒ s′1 then there is a transition s2
+σ⇒ s′2 such that s′1 R s′2; if s2
+σ⇒ s′2 then there is a transition s1
+σ⇒ s′1 such that s′1 R s′2.
+Two states s and s′ are weaklystringbisimilar iff there is a weak string bisimulation that relates them. Prove that weak string bisimilarity and weak bisimilarity coincide. That is, show that two states s and s′ are weakly string bisimilar iff they are weakly bisimilar. !
+
+
+62 Behaviouralequivalences
+The notion of observational equivalence that we have just defined seems to meet many of our desiderata. There is, however, one important property that observational equivalence does not enjoy: unlike strong bisimilarity, observational equivalence is not a congruence. This means that, in general, we cannot substitute observationally equivalent processes one for the other in a process context without affecting the overall behaviour of the system. To see this, observe that 0 is observationally equivalent to τ.0. However, it is not hard to see that
+a.0 + 0 )≈ a.0 + τ.0.
+In fact, the transition a.0 + τ.0 τ→ 0 from the process a.0 + τ.0 can be matched
+only by a.0 + 0 τ⇒ a.0 + 0, and the processes 0 and a.0+0 are not observationally equivalent. However, we still have that weak bisimilarity is a congruence with respect to the remaining CCS operators.
+Theorem 3.4 Let P, Q, R be CCS processes. Assume that P ≈ Q. Then
+! α.P ≈ α.Q for each action α,
+! P | R ≈ Q | R and R | P ≈ R | Q for each process R,
+! P [f ] ≈ Q[f ] for each relabelling f , and
+! P \ L ≈ Q \ L for each set of labels L.
+Proof. The proof follows the lines of that of Theorem 3.2 and is left as an exercise for the reader. !
+Exercise 3.32 Prove Theorem 3.4. In the proof of the second claim in the proposition, you may find the following fact useful:
+if Q a⇒ Q′ and R  ̄a→ R′ then Q|R τ⇒ Q′|R′.
+Show this fact by induction on the number of τ -steps in the transition Q a⇒ Q′. !
+Exercise 3.33 Give syntactic restrictions on the syntax of CCS terms such that weak bisimilarity becomes a congruence with respect to the choice operator also. !
+In the light of Theorem 3.4, observational equivalence is very close to being a congruence over CCS. The characterization and the study of the largest congruence relation included in observational equivalence is a very interesting chapter in process theory. It is, however, one that we hardly touch upon in this book; see, however, Exercise 3.36 below for a glimpse of this theory. The interested reader
+
+
+3.4. Weakbisimilarity 63
+is referred to Milner (1989, Chapter 7) and Glabbeek (2005) for an in-depth treatment of this interesting topic.
+Exercise 3.34 (Dijkstra’s dining-philosophers problem) In this exercise, we invite you to use the Edinburgh Concurrency Workbench – a software tool for the analysis of reactive systems specified as CCS processes – to model and analyse the dining-philosophers problem proposed by the late Edsger Dijkstra in his classic paper (Dijkstra, 1971). The problem is usually described as follows. Five philosophers spend their time either eating or thinking. Each philosopher usually keeps thinking, but at any point in time he might become hungry and decide that it is time to eat. The research institute where the philosophers work has a round dining table with a large bowl of spaghetti at the centre of the table. There are five plates on the table and five forks set between the plates. Each philosopher needs two forks to eat, which he picks up one at a time. The funding agency sponsoring the institute is only interested in the thinking behaviour of the philosophers and would like the institute to perform like an ideal think-factory – that is, like a system that produces thinking, rather than eating, forever.
+1. Assume, to begin with, that there are only two philosophers and two forks. Model the philosophers and the forks as CCS processes, assuming that the philosophers and the forks are numbered 1 and 2 and that the philosophers pick the forks up in increasing order (i.e. when he becomes hungry, the second philosopher begins by picking up the second fork and then picks up the first.) Argue that the system has a deadlock by finding a state in the resulting LTS that is reachable from the start state and has no outgoing transitions. We encourage you to find a possible deadlock in the system by yourself, and without using the Workbench. 2. Argue that a model of the system with five philosophers and five forks also exhibits a deadlock. 3. Finally, assume that there are five philosophers and five forks and that the philosophers pick the forks up in increasing order apart from the fifth, who picks up the first fork before the fifth. Use the the Edinburgh Concurrency Workbench to argue that the resulting system is observationally equivalent to the process ThinkFactory specified by
+ThinkFactory d=ef think.ThinkFactory.
+Here we are assuming that each philosopher performs the action ‘think’ when he is thinking and that the funding agency is not interested in knowing which specific philosopher is thinking! !
+
+
+64 Behaviouralequivalences
+Exercise 3.35 (For the theoretically minded) A binary relation R over the set of states of an LTS is a branching bisimulation (Glabbeek and Weijland, 1996) iff it is symmetric and, whenever s R t and α is an action (including τ ):
+if s α → s′ then
+either α = τ and s′ R t
+or there is a k ≥ 0 and a sequence of transitions
+t = t0
+τ→ t1
+τ→ · · · τ→ tk
+α → t′
+such that s R ti for each i ∈ {0, . . . , k} and s′ R t′.
+Two states s and t are branching bisimulation equivalent (or branching bisimilar) iff there is a branching bisimulation that relates them. The largest branching bisimulation is called branchingbisimilarity.
+1. Show that branching bisimilarity is contained in weak bisimilarity. 2. Can you find two processes that are weakly bisimilar but not branching bisimilar? 3. Which of the τ -laws from Exercise 3.26 holds with respect to branching bisimilarity? 4. Is branching bisimilarity a congruence over the language CCS?
+In answering the last question, you may assume that branching bisimilarity is an equivalence relation. In fact, showing that branching bisimilarity is transitive is non-trivial; see, for instance, (Basten, 1996) for a proof. !
+Exercise 3.36 Define the binary relation ≈c over the set of states of an LTS as follows.
+s1 ≈c s2 iff for each action α (including τ ): if s1
+α → s′1 then there is a sequence of transitions s2
+τ⇒ s′2′
+α → s′2′′
+τ⇒ s′2 such
+that s′1 ≈ s′2; if s2
+α → s′2 then there is a sequence of transitions s1
+τ⇒ s′1′
+α → s′1′′
+τ⇒ s′1 such
+that s′1 ≈ s′2.
+Prove the following claims.
+1. The relation ≈c is an equivalence relation. 2. The relation ≈c is preserved by the operators of CCS, that is, if P ≈c Q then α.P ≈c α.Q for each action α;
+P + R ≈c Q + R and R + P ≈c R + Q for each process R; P | R ≈c Q | R and R | P ≈c R | Q for each process R;
+
+
+3.5. Gamecharacterizationofbisimilarity 65
+P [f ] ≈c Q[f ] for each relabelling f ; and P \ L ≈c Q \ L for each set of labels L.
+3. Argue that ≈c is included in weak bisimilarity. 4. Find an example of two weakly bisimilar processes that are not related with respect to ≈c.
+Which τ -law from Exercise 3.26 holds with respect to ≈c? !
+3.5 Game characterization of bisimilarity
+We can naturally ask ourselves the following question:
+What techniques do we have to show that two states are not bisimilar?
+In order to prove that for two given states s and t it is the case that s )∼ t, by Definition 3.2 we should enumerate all binary relations over the set of states and for each of them show that if it contains the pair (s, t) then it is not a strong bisimulation. For the transition system from Example 3.1 in Section 3.3 this translates into investigating 225 different candidates and, in general, for a transition system with
+n states one would have to go through 2n2 different binary relations. (Can you see why?) In what follows, we will introduce a game characterization of strong bisimilarity that will enable us to determine in a much more perspicuous way whether two states are strongly bisimilar. The idea is that there are two players in the bisimulation game, called ‘attacker’ and ‘defender’. The attacker is trying to show that two given states are not bisimilar while the defender aims to show the opposite. The formal definition follows.
+Definition 3.5 (Strong bisimulation game) Let (Proc, Act, { α → | α ∈ Act}) be an LTS. A strong bisimulation game starting from the pair of states (s1, t1) ∈ Proc × Proc is a two-player game with an ‘attacker’ and a ‘defender’. The game is played in rounds, and configurationsof the game are pairs of states from Proc × Proc. In every round exactly one configuration is called current; initially the configuration (s1, t1) is the current one. In each round the players change the current configuration (s, t) according to the following rules.
+1. The attacker chooses either the left- or the right-hand side of the current configuration (s, t) and an action α from Act.
+! If the attacker chooses left then he has to perform a transition s α → s′ for some state s′ ∈ Proc.
+
+
+66 Behaviouralequivalences
+! If the attacker chooses right then he has to perform a transition t α → t′ for some state t′ ∈ Proc. 2. In this step the defender must provide an answer to the attack made in the previous step. ! If the attacker chose left then the defender plays on the right-hand side and
+has to respond by making a transition t α → t′ for some t′ ∈ Proc.
+! If the attacker chose right then the defender plays on the left-hand side and
+has to respond by making a transition s α → s′ for some s′ ∈ Proc. 3. The configuration (s′, t′) becomes the current configuration and the game continues for another round according to the rules described above.
+!
+A play of the game is a maximal sequence of configurations formed by the players according to the rules described above and starting from the initial configuration (s1, t1). (A sequence of configurations is maximal if it cannot be extended while following the rules of the game.) Note that a bisimulation game can have many different plays according to the choices made by the attacker and the defender. The attacker can choose a side, an action and a transition. The defender’s only choice is in selecting one of the available transitions labelled with the same action as that picked by the attacker. We shall now define when a play is winning for the attacker and when for the defender. A finite play is lost by the player who is stuck and cannot make a move from the current configuration (s, t) according to the rules of the game. Note that the attacker loses a finite play only if both s ! and t !, i.e. there is no transition from either the left- or the right-hand side of the configuration. The defender loses a finite play if he has (on his side of the configuration) no available transition under the action selected by the attacker. It can also be the case that neither player is stuck in any configuration and the play is infinite. In this situation the defender is the winner of the play. Intuitively, this is a natural choice of outcome because if the play is infinite then the attacker has been unable to find a ‘difference’ in the behaviour of the two systems, which will turn out to be bisimilar. A given play is always winning either for the attacker or the defender and it cannot be winning for both at the same time. The following proposition relates strong bisimilarity to the corresponding game characterization (see, e.g. Stirling (1995) or Thomas (1993)).
+Proposition 3.3 States s1 and t1 of an LTS are strongly bisimilar iff the defender has a universal winning strategy in the strong bisimulation game starting from
+
+
+3.5. Gamecharacterizationofbisimilarity 67
+configuration (s1, t1). The states s1 and t1 are not strongly bisimilar iff the attacker has a universal winning strategy.
+By a universal winning strategy we mean that the player with that strategy can always win the game, regardless of how the other player selects his moves. If the opponent has more than one choice of how to continue from the current configuration, all these possibilities have to be considered. The notion of a universal winning strategy is best explained by means of an example.
+Example 3.5 Let us recall the transition system from Example 3.1 in Section 3.3:
+s
+a
+!!!!!!!!!!!!!!
+a
+"""""""""""""" t
+a
+#
+s1 b $ s2
+b
+% t1
+b
+&
+We will show that the defender has a universal winning strategy from the configuration (s, t) and hence, in the light of Proposition 3.3, that s ∼ t. In order to do so, we have to consider all possible moves of the attacker from this configuration and define the defender’s response to each of them. The attacker can make three different moves from (s, t), as follows.
+1. Attacker selects right-hand side, action a and makes the move t →a t1,
+2. Attacker selects left-hand side, action a and makes the move s a→ s2.
+3. Attacker selects left-hand side, action a and makes the move s a→ s1.
+The defender’s answertoattack 1 is to play s a→ s2. (Even though there are more possibilities it is sufficient to provide only one suitable answer.) The current con
+figuration becomes (s2, t1). The defender’s answer to attack 2 is to play t a→ t1. The current configuration again becomes (s2, t1). The defender’s answertoattack
+3 is to play t a→ t1. The current configuration becomes (s1, t1). Now it remains to show that the defender has a universal winning strategy from the configurations (s2, t1) and (s1, t1). From (s2, t1) it is easy to see that any continuation of the game will always go through the same current configuration (s2, t1) and hence the game will be necessarily infinite. According to the definition of a winning play, the defender is the winner in this case. From (s1, t1) the attacker has two possible moves. Either s1
+→b s2 or t1
+→b t1.
+In the former case the defender answers by t1
+→b t1 and in the latter case by
+
+
+68 Behaviouralequivalences
+s1
+→b s2. The next configuration is in both cases (s2, t1), and we already know that the defender has a winning strategy from this configuration. Hence we have shown that the defender has a universal winning strategy from the configuration (s, t) and, according to Proposition 3.3, this means that s ∼ t. !
+The game characterization of bisimilarity introduced above is simple yet powerful. It provides an intuitive understanding of this notion. It can be used to show that two states are strongly bisimilar and to show that they are not. The technique is particularly useful for showing the non-bisimilarity of two states. This is demonstrated by the following examples.
+Example 3.6 Let us consider the following transition system (we provide only its graphical representation).
+s
+a
+#
+t
+a
+:''''''''''
+a
+((((((((((;
+s1
+b
+:''''''''''
+c
+((((((((((; t1
+b
+#
+t2
+c
+#
+s2 s3 t3 t4
+We will show that s )∼ t by describing a universal winning strategy for the attacker in the bisimulation game starting from (s, t). We will in fact show two different strategies (but of course finding one is sufficient for proving non-bisimilarity).
+! In the first strategy, the attacker selects the left-hand side, action a and the tran
+sition s a→ s1. The defender can answer with t a→ t1 or t →a t2. This means that we will have to consider two different configurations in the next round, namely (s1, t1) and (s1, t2). From (s1, t1) the attacker wins by playing the transition
+s1
+c→ s3 on the left-hand side, and the defender cannot answer as there is no c-transition from t1. From (s1, t2) the attacker wins by playing s1
+→b s2 and the defender has again no answer from t2. As we have analysed all possibilities for the defender and in every one the attacker wins, we have found a universal winning strategy for the attacker. Hence s and t are not bisimilar.
+! Now we provide another strategy, which is easier to describe and involves the switching of sides. Starting from (s, t) the attacker plays on the right-hand side
+according to the transition t a→ t1 and the defender can only answer by s →a s1 on the left-hand side (no more configurations need to be examined as this is the only possibility for the defender). The current configuration hence becomes
+
+
+3.5. Gamecharacterizationofbisimilarity 69
+(s1, t1). In the next round the attacker plays s1
+c→ s3 and wins the game as
+t1
+c!.
+!
+Example 3.7 Let us consider a slightly more complex transition system:
+s
+a
+))))))))))
+a
+*********( t
+a
+********(
+s1
+b
+))))))))))
+s2
+b
+< t1
+b <
+b
+********(
+s3 t2
+We will define the attacker’s universal winning strategy from (s, t) and hence show that s )∼ t.
+In the first round the attacker plays on the left-hand side the move s a→ s1 and
+the defender can only answer with t →a t1. The current configuration becomes (s1, t1). In the second round the attacker plays on the right-hand side according
+to the transition t1
+→b t1 and the defender can only answer with s1
+b→ s3. The current configuration becomes (s3, t1). Now the attacker wins by playing again
+the transition t1
+→b t1 (or t1
+→b t2) and the defender loses because s3 !. !
+Exercise 3.37 Consider the following LTS:
+s
+a
+s#1
+b
+s#2
+b
+=
+a
+>t
+a
+t#1
+b
+#
+b?
+t2
+a
+>u
+a
+u# 1
+b
+#
+u2 b
+@
+a
+>***********
+u3
+a
+/
+b
+)))))))))))/
+v
+a
+v#1
+b
+#
+b $ v2
+a
+>"""""""""""
+v3
+b
+!!!!!!!!!!/
+b
+=
+Decide whether s ∼ t, s ∼ u and s ∼ v. Support your claims by giving a universal winning strategy either for the attacker (in the negative case) or the defender (in the positive case). In the positive case you should also define a strong bisimulation relating the pair of processes in question. !
+
+
+70 Behaviouralequivalences
+Exercise 3.38 (For the theoretically minded) Prove Proposition 3.3. Hint: Argue that, using the universal winning strategy for the defender you can find a strong bisimulation and, conversely, that given a strong bisimulation you can define a universal winning strategy for the defender. !
+Exercise 3.39 (For the theoretically minded) Recall from Exercise 3.17 that a binary relation R over the set of states of an LTS is a simulation iff, whenever s1 R s2 and a is an action,
+if s1
+a→ s′1 then there is a transition s2
+a→ s′2 such that s′1 R s′2.
+A binary relation R over the set of states of an LTS is a 2-nestedsimulation iff R is a simulation and moreover R−1 ⊆ R. Two states s and s′ are in simulation preorder (respectively in 2-nested simulation preorder) iff there is a simulation (respectively a 2-nested simulation) that relates them. Modify the rules of the strong bisimulation game in such a way that it characterizes the simulation preorder and the 2-nested simulation preorder. !
+Exercise 3.40 (For the theoretically minded) Can you change the rules of the strong bisimulation game in such a way that it characterizes the ready-simulation preorder introduced in Exercise 3.18? !
+3.5.1 Weak bisimulation games
+We shall now introduce the notion of a weak bisimulation game, which can be used to characterize weak bisimilarity as introduced in Definition 3.4, Section 3.4. Recall that the main idea is that weak bisimilarity abstracts away from the internal behaviour of systems, which is modelled by the silent action τ , and that to prove that two states in an LTS are weakly bisimilar it suffices to exhibit a weak bisimulation that relates them. As was the case for strong bisimilarity, showing that two states are not weakly bisimilar is more difficult and means that, using directly the definition of weak bisimilarity, we have to enumerate all binary relations on states and verify that none of them is a weak bisimulation and at the same time contains the pair of states that we test for equivalence. Fortunately, the rules of the strong bisimulation game as defined in the previous section need be only slightly modified in order to achieve a characterization of weak bisimilarity in terms of weak bisimulation games.
+Definition 3.6 (Weak bisimulation game) A weakbisimulationgame is defined in the same way as the strong bisimulation game in Definition 3.5, the only difference
+
+
+3.5. Gamecharacterizationofbisimilarity 71
+being that the defender can also answer using the weak transition relation α ⇒, rather
+that just α → as in the strong bisimulation game. The attacker is still only allowed to
+use the α → moves. !
+The definitions of play and winning strategy are exactly as before and we have a similar proposition as for the strong bisimulation game.
+Proposition 3.4 Two states s1 and t1 of an LTS are weakly bisimilar iff the defender has a universal winning strategy in the weak bisimulation game starting from the configuration (s1, t1). The states s1 and t1 are not weakly bisimilar iff the attacker has a universal winning strategy.
+We remind the reader of the fact that, in the weak bisimulation game from the current configuration (s, t), if the attacker chooses a move under the silent action
+τ , let us say s τ→ s′, then the defender can (as one possibility) simply answer by
+doing ‘nothing’, i.e. by idling in the state t, since we always have t τ⇒ t. In this case, the current configuration becomes (s′, t). Again, the notions of play and universal winning strategy in the weak bisimulation game are best explained by means of an example.
+Example 3.8 Consider the following transition system:
+s
+a #
+t
+τ
+#
+s1
+b
++++++++++A
+a #
+t1
+a
+9,,,,,,,,, a
++++++++++A
+s2 s3 t2
+a #
+t3
+τ
+B
+b #
+t4 t5
+We will show that s )≈ t by defining a universal winning strategy for the attacker in the weak bisimulation game from (s, t). In the first round, the attacker selects the left-hand side and action a and plays
+the move s a→ s1. The defender has three possible moves to answer: (i) t ⇒a t2 via
+t1, (ii) t ⇒a t2 via t1 and t3 and (iii) t a⇒ t3 via t1. In cases (i) and (ii) the current configuration becomes (s1, t2) and in case (iii) it becomes (s1, t3).
+From the configuration (s1, t2) the attacker wins by playing s1
+→b s3, and the
+defender loses because t2
+"b .
+
+
+72 Behaviouralequivalences
+From the configuration (s1, t3) the attacker plays the τ -move from the righthand side: t3
+τ→ t2. The defender’s only answer from s1 is s1
+τ⇒ s1 because no τ -actions are enabled from s1. The current configuration becomes (s1, t2) and, as argued above, the attacker has a winning strategy from this pair. This concludes the proof and shows that s )≈ t because we have found a universal winning strategy for the attacker. !
+Exercise 3.41 In the weak bisimulation game the attacker is allowed to use only
+a→ moves for the attacks, but the defender can also use a⇒ moves in response. Argue that if we modify the rules of the game so that the attacker too can use moves of the
+form a⇒ then this does not provide any additional power for the attacker. Conclude that both versions of the game provide the same answer regarding the bisimilarity or non-bisimilarity of the two processes. !
+3.6 Further results on equivalence checking
+In the following few paragraphs we shall provide an overview of a number of interesting results achieved within concurrency theory in the area of equivalence checking. We shall also provide pointers to selected references in the literature that the interested reader may wish to consult for further study. The first class of systems we consider is that generated by CCS processes which have finitely many reachable states and finitely many transitions only. Such systems, usually called regular, can simply be viewed an LTSs with a finite set of states and finitely many transitions. For an LTS with n states and m transitions, strong bisimilarity between any two given states is decidable in deterministic polynomial time, more precisely in O(nm) time (Kanellakis and Smolka, 1990). This result of Kanellakis and Smolka was subsequently improved upon by Paige and Tarjan, who devised an algorithm that runs in O(m log n) time (Paige and Tarjan, 1987). This is in strong contrast with the complexity of deciding language equivalence, where the problem is known to be PSPACE-complete (Hunt, Rosenkrantz and Szymanski, 1976). By way of further comparison, we recall that deciding strong bisimilarity between finite LTSs is P-complete (Balca ́zar, Gabarro ́ and Santha, 1992); this means that it is one of the ‘hardest problems’ in the class P of problems solvable in polynomial time. (P-complete problems are of interest because they appear to lack highly parallel solutions. See, for instance, the book Greenlaw, Hoover and Ruzzo (1995).) We remind the reader that the above-mentioned complexity-results for finite LTSs are valid if the size of the input problem is measured as the number of states plus the number of transitions in the input LTS. If we assume that the size of the
+
+
+3.6. Furtherresultsonequivalencechecking 73
+input is the length of the CCS equations that describe a finite transition system, then we face the so-called state explosion problem because relatively short CCS definitions can generate exponentially large LTSs. (For example, you should be able to convince yourself that the LTS associated with the CCS expression
+a1.0 | a2.0 | · · · | an.0
+has 2n states.) In this case the strong-bisimilarity checking problem becomes EXPTIME-complete (Laroussinie and Schnoebelen, 2000); this means that it is one of the ‘hardest problems’ in the class EXPTIME of problems solvable in exponential time using deterministic algorithms. The problem of checking observational equivalence (weak bisimilarity) over finite LTSs can be reduced to that of checking for strong bisimilarity, using a technique called saturation. Intuitively, saturation amounts to
+1. first pre-computing the weak transition relation and then 2. constructing a new pair of finite processes whose original transitions are replaced by the weak transitions.
+The question whether two states are weakly bisimilar now amounts to checking strong bisimilarity over the saturated systems. Since the computation of the weak transition relation can be carried out in polynomial time, the problem of checking for weak bisimilarity can also be decided in polynomial time. This means that both strong and weak bisimilarity can be decided on finite-state transition systems faster than can many other equivalences. This story repeats itself also when we consider more general classes of transition systems. Let us consider a class called BPP for basic parallel processes, first studied by Christensen in his Ph.D. thesis (Christensen, 1993). This is a class of infinite-state transition systems generated by a subclass of CCS expressions containing action prefixing, bounded nondeterminism and a pure-parallel composition, with neither restriction nor communication. In the case of BPP the difference between equivalence checking with respect to strong bisimilarity and other notions of equivalence is even more striking. On the one hand, it is known that language equivalence (Hirshfeld, 1994) as well as essentially any other notion of equivalence except for bisimilarity is undecidable (Hu ̈ttel, 1994). On the other hand, a surprising result by Christensen, Hirshfeld and Moller (1993) shows that strong bisimilarity is decidable in general, and Hirshfeld, Jerrum and Moller (1996b) showed that it is decidable in polynomial time for its subclass containing normed processes only. (A BPP process is normed iff from any of its reachable states it is possible to reach a situation where all actions are disabled.) Recently, the general bisimilarity problem for BPP has been shown to be PSPACE-complete (Jancˇar, 2003, Srba, 2002a).
+
+
+74 Behaviouralequivalences
+If we want to go even further up (with respect to expressive power), we can consider the class of Petri nets (Petri, 1962, Reisig, 1985), a very well studied model of concurrent computation that strictly includes that of BPP processes. In fact, BPP is a subclass of Petri nets in which every transition has exactly one input place. (This is also called the communication-free subclass of Petri nets.) The problem of whether two marked Petri nets are bisimilar, as well as a number of other problems, is undecidable, as shown by Jancˇar (1995). Researchers have also considered a sequential analogue to the BPP class, called BPA for basic process algebra, introduced by Bergstra and Klop (1982). Here, instead of the parallel operator we have a full sequential composition operator. (Action prefixing in CCS enables only a limited way of expressing sequential composition, whereas in BPA one is allowed to write down processes such as E.F where both E and F can have a rather complicated behaviour.) This class also corresponds to context-free grammars in Greibach normal form, where only left-most derivations are allowed. Bar-Hillel, Perles, and Shamir (1961) showed that language equivalence for languages generated by BPA is undecidable. In fact, most studied equivalences (apart from bisimilarity, again!) are undecidable for this class of processes (Huynh and Tian, 1995, Groote and Hu ̈ttel, 1994). However, Baeten, Bergstra, and Klop showed that strong bisimilarity is decidable for normed BPA processes (Baeten, Bergstra and Klop, 1993) and there is even a polynomial-time algorithm for checking strong bisimilarity over this subclass of BPA processes, published by Hirshfeld, Jerrum and Moller (1996a). Christensen, Hu ̈ttel, and Stirling (1995) proved that strong bisimilarity remains decidable for arbitrary (unnormed) BPA processes, but the precise complexity of the problem has not been determined yet. The problem is known to be PSPACEhard (Srba, 2002b), yet no worse than doubly exponential (Burkart, Caucal and Steffen, 1995). The positive-decidability trend is preserved even for a superclass of BPA called PDA, for pushdown automata. Even though BPA and PDA coincide with respect to language equivalence (they both generate the class of context-free languages), PDA is strictly more expressive when bisimilarity is considered as the notion of equivalence. Celebrated results of Se ́nizergues (1998) and Stirling (2000) both show the decidability of bisimulation equivalence over the class of pushdown automata. However, the problem of checking for weak bisimilarity over PDA is already known to be undecidable (Srba, 2002c). There are still some open problems left in the theory, mainly concerning the decidability of weak bisimilarity. We refer the reader to an up-to-date overview in (Srba, 2004) and also to a more thorough introduction to the area available in, for instance, Burkart et al. (2001) or Mayr (2000).
+
+
+4
+Theory of fixed points and bisimulation equivalence
+The aim of this chapter is to collect under one roof all the mathematical notions from the theory of partially ordered sets and lattices needed to introduce Tarski’s classic fixed point theorem. You might think that this detour into some exotic looking mathematics is unwarranted in this textbook. However, we shall then put these possible doubts of yours to rest by using this fixed point theorem to give an alternative definition of strong bisimulation equivalence. This reformulation of the notion of strong bisimulation equivalence is not just mathematically pleasing but also yields an algorithm for computing the largest strong bisimulation over finite labelled transition systems (LTSs), i.e. labelled transition systems with only finitely many states, actions and transitions. This is an illustrative example of how apparently very abstract mathematical notions turn out to have algorithmic content and, possibly unexpected, applications in computer science. As you will see, we shall also put Tarski’s fixed point theorem to good use in Chapter 6, where the theory developed in this chapter will allow us to understand the meaning of recursively defined properties of reactive systems.
+4.1 Posets and complete lattices
+We start our technical developments in this chapter by introducing the notion of a partially ordered set (also known as a poset) and some useful classes of such structures that will find application in what follows. As you will see, many examples of posets that we shall mention in this chapter are familiar.
+Definition 4.1 (Partially ordered sets) A partiallyorderedset(often abbreviated to poset) is a pair (D, 0), where D is a set and 0 is a binary relation over D (i.e. a subset of D × D), such that:
+75
+
+
+76 Theoryoffixedpoints
+0 is reflexive, i.e. d 0 d for all d ∈ D; 0 is antisymmetric, i.e. d 0 e and e 0 d imply d = e for all d, e ∈ D; 0 is transitive, i.e. d 0 e 0 d′ implies d 0 d′ for all d, d′, e ∈ D.
+We say moreover that (D, 0) is a totally ordered set if, for all d, e ∈ D, either d 0 e or e 0 d holds. !
+Example 4.1 The following are examples of posets.
+! (N, ≤), where N denotes the set of natural numbers and ≤ denotes the standard
+ordering over N, is a poset.
+! (R, ≤), where R denotes the set of real numbers and ≤ denotes the standard
+ordering over R, is a poset.
+! (A∗, ≤) is a poset, where A∗ is the set of strings over alphabet A and ≤ denotes the prefix ordering between strings, that is for all s, t ∈ A∗, we have s ≤ t iff there exists w ∈ A∗ such that sw = t. (Check that this is indeed a poset!)
+! Let (A, ≤) be a finite totally ordered set. Then (A∗, ≺), the set of strings in A∗ ordered lexicographically, is a poset. Recall that, for all s, t ∈ A∗, the relation s ≺ t holds with respect to the lexicographic order if one of the following conditions applies.
+1. The length of s is smaller than that of t. 2. s and t have equal length, and either s = ε or there are strings u, v, z ∈ A∗ and letters a, b ∈ A such that s = uav, t = ubz and a ≤ b.
+! Let (D, 0) be a poset and S be a set. Then the collection of functions from S to D is also a poset when equipped with an ordering relation defined thus:
+f 0 g iff f (s) 0 g(s), for each s ∈ S.
+We encourage you to think of other examples of posets with which you are familiar. !
+Exercise 4.1 Convince yourself that the structures mentioned in the above example are indeed posets. Which of the above posets is a totally ordered set? !
+As witnessed by the list of structures in Example 4.1 and by the many other examples encountered in discrete mathematics courses, posets are abundant in mathematics. Another example of a poset that will play an important role in the developments to follow is the structure (2S, ⊆), where S is a set, 2S stands for the set of all subsets of S and ⊆ denotes set inclusion. For instance, the structure (2Proc, ⊆) is a poset for each set of states Proc in an LTS.
+Exercise 4.2 Is the poset (2S, ⊆) totally ordered? !
+
+
+4.1. Posetsandcompletelattices 77
+Definition 4.2 (Least upper bounds and greatest lower bounds) Let (D, 0) be a poset, and take X ⊆ D.
+! We say that d ∈ D is an upperboundfor X iff x 0 d for all x ∈ X. We say that
+d is the leastupperbound(lub) of X, notation F X, iff
+d is an upper bound for X and, moreover, d 0 d′ for every d′ ∈ D that is an upper bound for X.
+! We say that d ∈ D is a lowerbound for X iff d 0 x for all x ∈ X. We say that
+d is the greatestlowerbound(glb) of X, notation ! X, iff
+d is a lower bound for X and, moreover, d′ 0 d for every d′ ∈ D that is a lower bound for X. !
+In the poset (N, ≤), all finite subsets of N have least upper bounds. Indeed, the least upper bound of such a set is its largest element. However, no infinite subset of N has an upper bound. All subsets of N have a least element, which is their greatest lower bound.
+In (2S, ⊆), every subset X of 2S has an lub and a glb, given by S X and T X respectively. For example, consider the poset (2N, ⊆), consisting of the family of subsets of the set of natural numbers N ordered by inclusion. Take X to be the
+collection of finite sets of even numbers. Then S X is the set of even numbers and
+T X is the empty set. (Can you see why?)
+Exercise 4.3 (Strongly recommended) Let (D, 0) be a poset, and take X ⊆ D. Prove that the lub and the glb of X are unique, if they exist. !
+Exercise 4.4
+1. Prove that the lub and the glb of a subset X of 2S are indeed S X and T X respectively. 2. Give examples of subsets of {a, b}∗ that have upper bounds in the poset ({a, b}∗, ≤), where ≤ is the prefix ordering over strings defined in the third bullet of Example 4.1. Find examples of subsets of {a, b}∗ that do not have upper bounds in that poset. !
+As you have seen already, a poset such as (2S, ⊆) has the pleasing property that each of its subsets has both a least upper bound and a greatest lower bound. Posets with this property will play a crucial role in what follows, and we now introduce them formally.
+Definition 4.3 (Complete lattices) A poset (D, 0) is a complete lattice iff F X
+and ! X exist for every subset X of D. !
+
+
+78 Theoryoffixedpoints
+Note that a complete lattice (D, 0) has a least element ⊥ = ! D, often called
+the bottom element, and a top element 3 = F D. For example, the bottom element of the poset (2S, ⊆) is the empty set, and the top element is S. (Why?) By Exercise 4.3 the least and top elements of a complete lattice are unique.
+Exercise 4.5 Let (D, 0) be a complete lattice. What are F ∅ and ! ∅? Hint: Each element of D is both a lower bound and an upper bound for ∅. Why? !
+Example 4.2
+! The poset (N, ≤) is not a complete lattice because, as remarked previously, it does not have least upper bounds for its infinite subsets. ! The poset (N ∪ {∞}, 0), obtained by adding a largest element ∞ to (N, ≤), is, however, a complete lattice and can be pictured as follows:
+∞...
+↑ 2
+↑ 1
+↑ 0
+Here ≤ is the reflexive and transitive closure of the ↑ relation.
+! (2S, ⊆) is a complete lattice.
+Of course, you should convince yourself of these claims! !
+4.2 Tarski’s fixed point theorem
+Now that we have some familiarity with posets and complete lattices, we are in a position to state and prove Tarski’s fixed point theorem, Theorem 4.1. As you will see in due course, this apparently very abstract result plays a key role in computer science because it is a general tool that allows us to make sense of recursively defined objects. If you are interested in the uses of the theorem rather than in the reason why it holds, you can safely skip the proof of Theorem 4.1 on a first reading. None of the future applications of that result in this textbook depend on its proof, and you should feel free to use it as a ‘black box’. In the statement of Tarski’s fixed point theorem, and in the applications to follow, the collection of monotonic functions will play an important role. We now proceed to define this type of function for the sake of completeness.
+
+
+4.2. Tarski’sfixedpointtheorem 79
+Definition 4.4 (Monotonic functions and fixed points) Let (D, 0) be a poset. A function f : D → D is monotonic iff d 0 d′ implies that f (d) 0 f (d′) for all d, d′ ∈ D.
+An element d ∈ D is called a fixedpoint of f iff d = f (d). !
+For example, the function f : 2N → 2N defined, for each X ⊆ N, by
+f (X) = X ∪ {1, 2}
+is monotonic. The set {1, 2} is a fixed point of f because
+f ({1, 2}) = {1, 2} ∪ {1, 2} = {1, 2}.
+Exercise 4.6 Can you give another example of a fixed point of f ? Can you characterize all the fixed points of that function? Argue for your answers. !
+Exercise 4.7 Consider the function that is the same as f above except that it maps the set {2} to {1, 2, 3}. Is such a function monotonic? !
+As another example, consider the poset
+3
+0
+------------C 1
+D............
+⊥
+------------C
+D............
+The identity function over {⊥, 0, 1, 3} is monotonic but the function mapping ⊥ to 0 and acting like the identity function on all other elements is not. (Why?) Note that both the posets mentioned above are in fact complete lattices. Intuitively, if we view the partial-order relation in a poset (D, 0) as an ‘information order’ – that is, if we view d 0 d′ as meaning that ‘d′ has at least as much information as d’ – then monotonic functions have the property that providing more information in the input will offer at least as much information as we had before in the output. (Our somewhat imprecise, but hopefully suggestive, slogan during lectures on this topic is that a monotonic function is one with the property that ‘the more you put in, the more you get out!’) The following important theorem is due to Tarski (1955). It had been proved for the special case of lattices of sets by Knaster (1928).
+
+
+80 Theoryoffixedpoints
+Theorem 4.1 (Tarski’s fixed point theorem) Let (D, 0) be a complete lattice, and let f : D → D be monotonic. Then f has a largest fixed point zmax and a least fixed point zmin given by
+zmax = G
+{x ∈ D | x 0 f (x)},
+zmin = "
+{x ∈ D | f (x) 0 x}.
+Proof. First we shall prove that zmax is the largest fixed point of f . This involves proving the following two statements:
+1. zmax is a fixed point of f , i.e. zmax = f (zmax); and 2. for every d ∈ D that is a fixed point of f , it holds that d 0 zmax.
+In what follows we will prove each statement separately. In the rest of the proof we let
+A = {x ∈ D | x 0 f (x)}.
+Proof of 1. Since 0 is antisymmetric, to prove that zmax is a fixed point of f it is sufficient to show that
+zmax 0 f (zmax) (4.1) and
+f (zmax) 0 zmax. (4.2)
+First of all, we shall show that (4.1) holds. By definition, we have that
+zmax = G
+A.
+Thus, for every x ∈ A, it holds that x 0 zmax. As f is monotonic, x 0 zmax implies that f (x) 0 f (zmax). It follows that, for every x ∈ A,
+x 0 f (x) 0 f (zmax).
+Thus f (zmax) is an upper bound for the set A. By definition, zmax is the least upperbound of A. Thus zmax 0 f (zmax), and we have shown (4.1). To prove that (4.2) holds, note that, from (4.1) and the monotonicity of f , we have that f (zmax) 0 f (f (zmax)). This implies that f (zmax) ∈ A. Therefore f (zmax) 0 zmax, as zmax is an upper bound for A. From (4.1) and (4.2), we have that zmax 0 f (zmax) 0 zmax. By antisymmetry, it follows that zmax = f (zmax), i.e. zmax is a fixed point of f . Proof of 2. We now show that zmax is the largest fixed point of f . Let d be any fixed point of f . Then, in particular, we have that d 0 f (d). This implies that
+d ∈ A and therefore that d 0 F A = zmax.
+
+
+4.2. Tarski’sfixedpointtheorem 81
+We have thus shown that zmax is the largest fixed point of f . To show that zmin is the least fixed point of f , the second part of the theorem, we proceed in a similar fashion by proving the following two statements:
+3. zmin is a fixed point of f , i.e. zmin = f (zmin); and 4. zmin 0 d, for every d ∈ D that is a fixed point of f .
+To prove that zmin is a fixed point of f , it is sufficient to show that
+f (zmin) 0 zmin (4.3)
+and
+zmin 0 f (zmin). (4.4)
+Claim (4.3) can be shown by following the proof for (4.1), and claim (4.4) can be shown by following the proof for (4.2). The details are left as an exercise for the reader. Having shown that zmin is a fixed point of f , it is a simple matter to prove that it is indeed the least fixed point of f . (Do this as an exercise). !
+Now consider, for example, a complete lattice of the form (2S, ⊆), where S is a set, and a monotonic function f : S → S. If we instantiate the statement of the above theorem in this setting, the largest and least fixed points for f can be characterized thus:
+zmax = [
+{X ⊆ S | X ⊆ f (X)},
+zmin = \
+{X ⊆ S | f (X) ⊆ X}.
+For instance, the largest fixed point of the function f : 2N → 2N defined by f (X) = X ∪ {1, 2} is
+[
+{X ⊆ N | X ⊆ X ∪ {1, 2}} = N.
+However, the least fixed point of f is
+\
+{X ⊆ N | X ∪ {1, 2} ⊆ X} = {1, 2}.
+This follows because X ∪ {1, 2} ⊆ X means that X already contains 1 and 2, and the smallest set with this property is {1, 2}. The following important theorem gives a characterization of the largest and least fixed points for monotonic functions over finite complete lattices. We shall see in due course how this result gives an algorithm for computing the fixed points that will find application in equivalence checking and in the developments in Chapter 6.
+
+
+82 Theoryoffixedpoints
+Definition 4.5 Let D be a set, d ∈ D, and f : D → D. For each natural number n, we define f n(d) as follows:
+f 0(d) = d f n+1(d) = f (f n(d)).
+!
+Theorem 4.2 Let (D, 0) be a finite complete lattice and let f : D → D be monotonic. Then the least fixed point for f is obtained as
+zmin = f m(⊥),
+for some natural number m. Furthermore the largest fixed point for f is obtained as
+zmax = f M (3),
+for some natural number M .
+Proof. We will prove only the first statement since the proof for the second is similar. As f is monotonic we have the following non-decreasing sequence of elements of D:
+⊥ 0 f (⊥) 0 f 2(⊥) 0 · · · 0 f i(⊥) 0 f i+1(⊥) 0 · · ·
+As D is finite, the sequence must be eventually constant, i.e. there is an m such that f k(⊥) = f m(⊥) for all k ≥ m. In particular,
+f (f m(⊥)) = f m+1(⊥) = f m(⊥),
+which is the same as saying that f m(⊥) is a fixed point for f . To prove that f m(⊥) is the least fixed point for f , assume that d is another fixed point for f . Then we have that ⊥ 0 d and therefore, as f is monotonic, that f (⊥) 0 f (d) = d. By repeating this reasoning m − 1 more times, we get that f m(⊥) 0 d. We can therefore conclude that f m(⊥) is the least fixed point for f . The proof of the statement that characterizes largest fixed points is similar, and is left as an exercise for the reader. !
+Exercise 4.8 (For the theoretically minded) Fill in the details in the proof of the above theorem. !
+Example 4.3 Consider the function f : 2{0,1} → 2{0,1} defined by
+f (X) = X ∪ {0}.
+This function is monotonic, and 2{0,1} is a complete lattice when ordered using set inclusion with the empty set as least element and {0, 1} as largest element. The
+
+
+4.2. Tarski’sfixedpointtheorem 83
+above theorem gives an algorithm for computing the least and largest fixed points of f . To compute the least fixed point, we begin by applying f to the empty set. The result is {0}. Since we have added 0 to the input of f , we have not found our least fixed point yet. Therefore we proceed by applying f to {0}. We have that
+f ({0}) = {0} ∪ {0} = {0}.
+It follows that, not surprisingly, {0} is the least fixed point of the function f . To compute the largest fixed point of f , we begin by applying f to the top element in our lattice, namely the set {0, 1}. Observe that
+f ({0, 1}) = {0, 1} ∪ {0} = {0, 1}.
+Therefore {0, 1} is the largest fixed point of the function f . !
+Exercise 4.9 Consider the function g : 2{0,1,2} → 2{0,1,2} defined by
+g(X) = (X ∩ {1}) ∪ {2}.
+Use Theorem 4.2 to compute the least and largest fixed points of g. !
+Exercise 4.10 (For the theoretically minded) This exercise is for those that enjoy the mathematics of partially ordered sets. It has no direct bearing on the theory of reactive systems covered in the rest of the textbook.
+1. Let (D, 0) be a poset. An ω-chain in (D, 0) is a sequence di (i ≥ 0) of elements of D such that di 0 di+1 for each i ≥ 0. We say that (D, 0) is a complete partial order (cpo) if each ω-chain
+d0 0 d1 0 d2 0 · · ·
+in (D, 0) has a least upper bound (written F
+i≥0 di). A function f : D → D is
+continuous (see, for instance, Nielson and Nielson (1992), p. 103) if
+f
+0
+@G
+i≥0
+di
+1
+A= G
+i≥0
+f (di),
+for each ω-chain di (i ≥ 0). Prove that if (D, 0) is a cpo and f : D → D is continuous then the poset
+({x ∈ D | f (x) = x}, 0),
+which consists of the set of fixed points of f , is itself a cpo. 2. Give an example of a complete lattice (D, 0) and of a monotonic function f : D → D such that there exist x, y ∈ D that are fixed points of f but for which
+F{x, y} is not a fixed point. Hint: Consider the complete lattice D pictured

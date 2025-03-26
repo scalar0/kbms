@@ -1,0 +1,3582 @@
+The ́ore`mes limites : du microscopique au macroscopique
+Alexandre Richard1
+25 janvier 2025
+1. Universit ́e Paris-Saclay, CentraleSup ́elec, alexandre.richard@centralesupelec.fr.
+
+
+Table des matie`res
+1 Exemples introductifs 3 1.1 Changement d’ ́echelle pour les chaıˆnes de Markov . . . . . . . . . . . . . . . 3 1.1.1 The ́ore`me de Donsker . . . . . . . . . . . . . . . . . . . . . . . . . . 4 1.1.2 The ́orie de Stroock-Varadhan sur l’approximation des diffusions . . . 5 1.2 Limites champ moyen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6 1.2.1 Particules d ́eterministes et  ́equation de Vlasov . . . . . . . . . . . . 6 1.2.2 Particules stochastiques et  ́equations de McKean-Vlasov . . . . . . . 9 1.2.3 Propagation du chaos . . . . . . . . . . . . . . . . . . . . . . . . . . 10 1.3 Limites hydrodynamiques . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+2 Convergence des mesures de probabilite ́ 12 2.1 Rappels sur la convergence des variables al ́eatoires . . . . . . . . . . . . . . 12 2.2 Convergence en loi : cas des variables ale ́atoires dans un espace euclidien . . 14 2.3 Convergence  ́etroite des mesures de probabilite ́ sur un espace m ́etrique . . . 15 2.3.1 Propri ́et ́es des mesures . . . . . . . . . . . . . . . . . . . . . . . . . . 15 2.3.2 Convergence  ́etroite des mesures . . . . . . . . . . . . . . . . . . . . 17 2.3.3 Espaces polonais et propri ́et ́es topologiques de P(E) . . . . . . . . . 20 2.4 Compacit ́e dans P(E) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 23
+3 Convergence des processus continus (et un peu ca`dla`g) 27 3.1 Convergence  ́etroite dans l’espace des fonctions continues sur un compact . 27 3.1.1 L’espace C . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27 3.1.2 Cylindres et lois finies-dimensionnelles . . . . . . . . . . . . . . . . . 29 3.1.3 Convergence  ́etroite dans P(C) . . . . . . . . . . . . . . . . . . . . . 31 3.1.4 Tension dans P(C) . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32 3.2 Convergence  ́etroite dans l’espace des fonctions continues sur R+ . . . . . . 35 3.3 Th ́eor`eme de Donsker . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36 3.4 Bref aper ̧cu de la tension dans l’espace des fonctions c`adl`ag . . . . . . . . . 39
+4 Th ́eorie de Stroock-Varadhan de l’approximation des diffusions 42 4.1 Rappels sur les processus de Markov et les martingales . . . . . . . . . . . . 42 4.2 Compl ́ements sur les  ́equations diff ́erentielles stochastiques et les g ́en ́erateurs 44 4.3 Probl`emes de martingales . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46 4.4 R ́esultat principal . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47 4.5 L’exemple de l’urne d’Ehrenfest . . . . . . . . . . . . . . . . . . . . . . . . . 52
+1
+
+
+5 Particules diffusives en interaction et propagation du chaos 54 5.1 Couplage entre le syste`me de particules et l’ ́equation de McKean-Vlasov . . 54 5.2 Propagation du chaos . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 60 5.2.1 Propri ́et ́es g ́en ́erales . . . . . . . . . . . . . . . . . . . . . . . . . . . 60 5.2.2 Applications aux syst`emes de particules `a coefficients Lipschitz . . . 64 5.3 Consid ́erations diverses sur les interactions singuli`eres . . . . . . . . . . . . 65
+A R ́esultats divers 66 A.1 Topologie et analyse fonctionnelle . . . . . . . . . . . . . . . . . . . . . . . . 66
+2
+
+
+Chapitre 1
+Exemples introductifs
+Les premiers th ́eor`emes limites qu’on apprend g ́en ́eralement en probabilit ́es sont la loi des grands nombres et le th ́eor`eme central limit. L’objectif de ce cours est de pr ́esenter quelques re ́sultats classiques qui e ́tendent en quelque sorte ces th ́eore`mes au cas ou` les variables al ́eatoires sont `a valeurs dans des espaces de dimension infinie, typiquement des espaces fonctionnels.
+1.1 Changement d’e ́chelle pour les chaıˆnes de Markov
+Th ́eor`eme 1.1 (Loi forte des grands nombres de Kolmogorov 1). Soit (Ω, F, P) un espace de probabilit ́es et (Xn)n∈N une suite de variables ale ́atoires r ́eelles i.i.d.. Alors on a e ́quivalence entre :
+(i) 1
+n
+n
+∑
+i=1
+Xi −→
+n→+∞ μ p.s. ;
+(ii) Xn ∈ L1(P).
+Dans le cas ou` l’une de ces propri ́et ́es est ve ́rifi ́ee, μ = EXn.
+Remarque 1.2. Des g ́en ́eralisations de la LGN en dimension infinie existent (voir e.g. Kuelbs-Zinn, Ann. Probab. ’79). Cependant, ces g ́en ́eralisations ne couvrent pas les cas qui nous inte ́resseront, soit parce que les espaces fonctionnels sont trop restrictifs, soit parce que nos variables ne seront plus ind ́ependantes.
+Rappel sur le CLT : on a de la convergence pour des v.a. r ́eelles, iid , et de variance finie. On va e ́tudier des situations plus complexes, ou` les variables ale ́atoires sont dans des espaces fonctionnels et/ou interagissent entre elles (i.e. elles sont corr ́el ́ees). Le TCL fournit une vitesse de convergence dans la loi des grands nombres.
+Th ́eor`eme 1.3 (Th ́eor`eme Central Limit). Soit (Ω, F, P) un espace de probabilite ́s et (Xn)n∈N une suite de variables al ́eatoires re ́elles i.i.d. ayant une variance σ2 finie. Alors
+√n
+1 n
+∑n
+i=1 (Xi − EXi)
+σ
+(d)
+−→
+n→+∞ N (0, 1).
+1. Math ́ematicien russe, 1903-1987. C ́el`ebre pour sa formalisation des fondements de la the ́orie des probabilite ́s, les Grundbegriffe der Wahrscheinlichkeitsrechnung parus en 1933. D’importantes contributions e ́galement en th ́eorie de la turbulence.
+3
+
+
+On observe ici une premier ph ́enom`ene dit “d’universalit ́e” : quelque soit la loi des Xn (de second moment fini), la loi limite dans le TCL est une gaussienne. Nous en rencontrerons d’autres.
+1.1.1 Th ́eore`me de Donsker
+Soit (Xn)n∈N une suite de variables al ́eatoires i.i.d. telles que P(Xn = 1) = P(Xn = −1) =
+1
+2 . La suite
+Sn =
+n
+∑
+i=0
+Xi, n ∈ N,
+est une marche al ́eatoire simple sur Z.
+Figure 1 – Marche al ́eatoire sur Z.
+Consid ́erons une extension en temps continu de {Sn}n∈N. Ainsi, on notera
+W ̃(1)
+t = Sbtc , t ∈ R+,
+W (1)
+t = Sbtc + (t − btc) Xbtc+1 , t ∈ R+.
+On a W (1) ∈ C(R+) et W ̃(1) ∈ D(R+), l’espace des fonctions c`adl`ag 2. On voit que c’est W (1) qui est repr ́esent ́ee dans la Figure 1. R ́ealisons d ́esormais l’exp ́erience suivante : Acc ́el ́erons le temps d’un facteur n dans le processus W ̃(1). A t > 0 fix ́e, si on laisse tendre n → +∞, on sait par la LGN que
+1 n
+W ̃(1)
+nt → 0 p.s. et que √1n W ̃(1)
+nt
+(→d) N (0, √t) par le TCL.
+Ainsi, si on souhaite observer de loin une marche ale ́atoire, le bon changement d’ ́echelle
+doit se faire `a la vitesse √n sur l’axe des ordonn ́ees lorsque l’acc ́el ́eration est en n en temps. C’est le “bon” changement, au sens ou` tout autre vitesse induirait une limite d ́eg ́en ́er ́ee (+∞ si on va trop vite, 0 sinon). On notera d ́esormais
+W (n)
+t = √1n W (1)
+nt , t ∈ R+,
+W ̃(n)
+t = √1n
+W ̃(1)
+nt , t ∈ R+.
+2. continues a` droite avec une limite a` gauche en chaque point.
+4
+
+
+Pour des temps 0 ≤ t1 < t2 < . . . tk, une g ́en ́eralisation multidimensionnelle du TCL entraıˆne que
+(
+W ̃(n)
+t1 , . . . , W ̃(n)
+tk
+) (→d) (N1, . . . , N1 + · · · + Nk) ,
+ou` N1, . . . , Nk sont des des gaussiennes centr ́ees ind ́ependantes de variance respectives t1, t2 − t1, . . . , tk − tk−1.
+Bien qu’int ́eressante, cette limite ne permet n ́eanmoins pas d’approcher des fonction
+nelles telles que supt∈[0,1] W (∞)
+t , ou` W (∞) repr ́esente une  ́eventuelle limite de W (n).
+Le th ́eor`eme de Donsker va un cran plus loin, puisqu’il ne consid`ere pas des limites de variables al ́eatoires comme e ́voque ́es pr ́ec ́edemment avec le TCL, mais donne la conver
+gence des processus {W (n)
+t }t∈R+ et {W ̃(n)
+t }t∈R+ .
+Th ́eor`eme 1.4 (Donsker). Soit (Ω, F , P) un espace de probabilit ́es et (Xn)n∈N une suite de variables ale ́atoires r ́eelles i.i.d. centr ́ees ayant une variance σ2 finie. Alors
+La suite de processus ( 1
+σ
+W ̃(n))n∈N converge en loi dans l’espace D(R+) vers le mouvement brownien standard ;
+La suite de processus ( 1
+σ W (n))n∈N converge en loi dans l’espace C(R+) vers le mouvement brownien standard.
+Ce th ́eor`eme se g ́en ́eralise assez naturellement dans Rd. La limite est alors un mouvement brownien de Rd, c’est-`a-dire un processus `a valeurs dans Rd dont les composantes sont des browniens inde ́pendants. On verra que la preuve repose sur un argument de compacite ́ dans P(C(R+)) (resp. P(D(R+))), l’espace des mesures de probabilit ́e sur C(R+) (resp. D(R+)).
+1.1.2 Th ́eorie de Stroock-Varadhan sur l’approximation des diffusions
+Au-del`a de la convergence de la marche al ́eatoire simple vers le MB, on peut s’int ́eresser `a la convergence de chaıˆnes de Markov renormalise ́es vers des processus de diffusions. Nous prenons l’exemple ici de l’urne d’Ehrenfest 3. L’exp ́erience est la suivante : on consid`ere deux urnes A et B reli ́ees entre elles par un  ́etroit tunnel et remplies de N mol ́ecules de gaz. A chaque instant (discret), on tire al ́eatoirement une mol ́ecule et on la change d’urne. Notons YnN le nombre de mol ́ecules dans l’urne A au temps n ∈ N. Y N est une chaıˆne de Markov `a valeurs dans {0, . . . , N } dont les probabilit ́es de transition sont donn ́ees par :
+{
+P
+(YnN+1 = m + 1 | YnN = m) = N−m
+N
+P
+(YnN+1 = m − 1 | YnN = m) = m
+N
+, n ∈ N, m ∈ {0, . . . , N }.
+On devine assez facilement que lorsque N et n sont grands, 1
+N Y N devrait tendre vers 1
+2
+par une sorte de loi des grands nombres. On peut ˆetre plus pr ́ecis que cela en consid ́erant,
+3. Physicien autrichien, 1880-1933. Etudiant de Ludwig Boltzmann. A propos de ces deux-la`, et en guise d’avertissement, voici une citation de D.L. Goodstein au d ́ebut de son livre “States of Matter” :
+Boltzmann, who spent much of his life studying statistical mechanics, died in 1906, by his own hand. Paul Ehrenfest, carrying on the work, died similarly in 1933. Now it is our turn to study statistical mechanics. Perhaps it will be wise to approach the subject cautiously.
+5
+
+
+Figure 2 – Mod`ele d’urne d’Ehrenfest.
+comme pour la marche al ́eatoire dans la section pr ́ece ́dente, un processus change ́ de temps et renormalise ́. Soit donc {XtN }t∈[0,1] d ́efini pour tout N ∈ N∗ par
+XN
+t=
+YN
+bNtc − N/2
+√N , t ∈ [0, 1].
+Th ́eor`eme 1.5. La suite de processus (XN )N∈N∗ converge en loi dans l’espace D([0, 1]) vers le processus d’Ornstein-Uhlenbeck, solution de l’EDS :
+dXt = −Xt dt + dWt.
+Ainsi le processus d’Ornstein-Uhlenbeck d ́ecrit les fluctuations autour de la moyenne (∼ N
+2 ) du nombre de mole ́cules dans l’urne A lorsque N est grand et le temps est acc ́el ́er ́e d’un facteur N . Le th ́eor`eme pr ́ec ́edent sera  ́enonc ́e et prouv ́e de fa ̧con plus g ́en ́erale pour diverses chaıˆnes de Markov et nous identifierons `a chaque fois la limite comme solution d’une  ́equation diff ́erentielle stochastique (EDS). Nous verrons que la preuve repose `a nouveau sur un argument de compacite ́. Il faudra ensuite montrer que toute-suite qui converge, converge vers le mˆeme objet. Pour identifier cette objet, nous aurons recours `a ce qu’on appelle un probl`eme de martingales. Comme son nom l’indique, cette the ́orie est issue des travaux de Stroock et Varadhan (voir notamment le chapitre 11 de [18]).
+1.2 Limites champ moyen
+1.2.1 Particules de ́terministes et e ́quation de Vlasov
+Consid ́erons un ensemble de particules ponctuelles toutes charge ́es n ́egativement, par exemple des  ́electrons. Les lois fondamentales de la dynamique donnent pour le mouvement de ces  ́electrons, le syst`eme d’ ́equations suivant, ou` Xti repr ́esente la position de la particule i: d2
+dt2 Xi
+t=
+N
+∑
+j=1
+F 0(Xi
+t − Xj
+t ), i = 1 . . . N, t > 0, (1.1)
+6
+
+
+avec F 0(x) = ∇V (x) pour tout x ∈ R3 et V le potentiel coulombien V (x) = α 1
+|x| , α ∈ R.
+En introduisant Vti = d
+dt Xti, on obtient le syste`me d’EDO d’ordre 1 suivant :
+
+  
+  
+d
+dt Xti = Vti
+d
+dt Vti =
+N
+∑
+j=1
+F 0(Xi
+t − Xj
+t ) , i = 1 . . . N, t > 0. (1.2)
+Quitte `a changer l ́eg`erement le formalisme du probl`eme, posons z = (x, v), z′ = (x′, v′) ∈ R6,
+F 0(z, z′) =
+(v
+F 0(x − x′)
+)
+∈ R6,
+avec x repr ́esentant la coordonn ́ee de position, v la coordonn ́ee de vitesse. En posant
+Zti =
+( Xti
+Vti
+)
+, le probl`eme s’ ́ecrit alors
+d
+dt Zi
+t=
+N
+∑
+j=1
+F 0(Zi
+t, Zj
+t ) , i = 1 . . . N, t > 0. (1.3)
+On consid ́erera donc des  ́equations sous cette forme plutoˆt que sous la forme cin ́etique (1.1)-(1.2). Suivant la nature du noyau d’interaction F 0, les the ́ore`mes de Cauchy-Lipschitz donneront l’existence et l’unicit ́e globale ou locale d’une solution de (1.3). Ainsi, la solution n’est que locale dans le cas du potentiel de Coulomb. Par ailleurs, le temps T ∗ d’existence de la solution d ́epend a priori du nombre N de particules...
+Remise a` l’ ́echelle du probl`eme.
+Lorsque le syst`eme est compos ́e d’un grand nombre de particules, il est naturel de consid ́erer la limite N → +∞. Mais au pr ́ealable, il est n ́ecessaire de s’interroger sur l’ordre de grandeur de la somme dans l’ ́equation (1.3). A priori, on aimerait que cette somme reste un O(1) lorsque N → +∞.
+Premi`ere solution, acc ́el ́erer le temps d’un facteur √N dans l’e ́quation (1.1) pour obtenir une  ́equation satisfaite par X ̃ti := Xi√Nt :
+d2
+dt2 X ̃ i
+t= 1
+N
+N
+∑
+j=1
+F 0(X ̃ i
+t − X ̃ j
+t ) , i = 1 . . . N, t > 0.
+La justification physique d’un tel changement d’e ́chelle n’apparaıˆt pas forc ́ement  ́evidente. Deuxi`eme solution, on consid`ere le syst`eme de N particules `a “masse” totale constante  ́egale `a 1. Alors il faut tenir compte de la masse 1/N de chaque particule quand on  ́ecrit le principe fondamental de la dynamique (1.1), de meˆme qu’il faut tenir compte des caract ́eristiques “physiques” de la force F 0. Ainsi, pour F 0 une force de type gravitationnelle, le produit des masses des deux particules intervient dans chaque terme F 0(Xti − Xj
+t ). Par
+cons ́equent, F 0(Xti − Xj
+t ) =: 1
+N2 Fˇ0(Xti − Xj
+t ), o`u on consid`ere que Fˇ0 ne de ́pend plus de
+N , contrairement `a F 0. Alors
+d2
+dt2 Xi
+t= 1
+N
+N
+∑
+j=1
+Fˇ 0(X ̃ i
+t − X ̃ j
+t ) , i = 1 . . . N, t > 0,
+7
+
+
+ce qu’on r ́esume de la fac ̧on suivante :
+d
+dt Zi
+t= 1
+N
+N
+∑
+j=1
+F (Zi
+t, Zj
+t ) , i = 1 . . . N, t > 0. (1.4)
+Limite N → +∞. Ce type de limite est tre`s  ́etudi ́ee en th ́eorie cin ́etique des gaz, et constitue un bon mode`le pour les plasmas. On consid`ere d ́esormais uniquement l’ ́equation (1.4) avec des particules a` valeurs dans Rd. Le bon objet `a consid ́erer pour e ́tudier la limite N → +∞ est la mesure empirique du syst`eme, donne ́e par :
+μN
+t =1
+N
+N
+∑
+i=1
+δZti .
+Si F est de classe C1, cette mesure est solution au sens des distributions de l’e ́quation
+de Vlasov 4 ([20, Prop. 4]) :
+∂μ
+∂t + ∇ · (μ F [μ]) = 0, (1.5)
+ou`
+F [μ](x) =
+∫
+Rd
+F (x, y) μ(dy).
+On observe ici que la condition initiale est donn ́ee par la position des particules. La question qui se pose est donc la suivante :
+En supposant que pour une mesure μ0 donne ́e on a μ0N
+∗⇀ μ0, peut-on en
+d ́eduire que μtN
+∗⇀ μt pour tout t > 0, ou` {μt}t≥0 est solution de l’e ́quation de Vlasov (1.5) partant de μ0 ?
+Strat ́egie #1. Un strat ́egie tre`s g ́en ́erale consiste `a montrer que la famille (μN ) est compacte dans P (C(R+; Rd)). Pour cela on utilisera le the ́ore`me de Prokhorov (voir Chapitre 2) qui donne un crite`re de compacit ́e dans les espaces de mesures. Puisque toute sous-suite de μN qui converge, converge vers une solution de (1.5), il reste `a d ́emontrer l’unicite ́ dans cette  ́equation (chose qu’on ne fera pas dans ce cours). Ainsi, de toute sous-suite on peut extraire une sous-suite qui converge vers l’unique solution μ
+de l’e ́quation de Vlasov, donc μN ⇀∗ μ.
+Strat ́egie #2. On introduira dans les prochains chapitres certaines distances, dites de Wasserstein, sur les mesures. L’in ́egalit ́e suivante, obtenue inde ́pendamment par Braun and Hepp [4] et Dobruˇsin [5] `a la fin des ann ́ees 70, permet ais ́ement de r ́epondre `a la question pr ́ece ́dente.
+Th ́eor`eme 1.6. Soit μ0, ν0 ∈ P(Rd). Soit {μt}t≥0 une solution de (1.5) associ ́ee `a la CI μ0, et soit {νt}t≥0 une solution de (1.5) associ ́ee `a la CI ν0. Alors
+W1 (μt, νt) ≤ e2(1∨‖F ‖Lip)t W1 (μ0, ν0) , ∀t > 0.
+On note qu’un tel th ́eor`eme donne directement l’unicit ́e des solutions (au sens des distributions) dans l’e ́quation de Vlasov.
+4. Physicien russe, 1908-1975. Connu pour ses travaux en me ́canique statistique et en physique des plasmas.
+8
+
+
+Remarque 1.7. Tout ce qui pr ́ec`ede ne fonctionne que pour des noyaux d’interaction r ́eguliers. Divers progr`es ont eu lieu depuis les anne ́es 70 pour traiter de noyaux moins r ́eguliers. Une avance ́e majeure a  ́et ́e re ́alise ́e r ́ecemment par Serfaty [17] qui a introduit une nouvelle m ́ethode permettant de traiter des noyaux d’interaction coulombiens re ́pulsifs.
+1.2.2 Particules stochastiques et e ́quations de McKean-Vlasov
+On consid`ere d ́esormais un syste`me de particules bruit ́ees. Soient W 1, . . . , W N des Rd-mouvements browniens ind ́ependants. L’analogue stochastique de l’e ́quation (1.4) est
+dX i
+t= 1
+N
+N
+∑
+j=1
+F (Xi
+t − Xj
+t ) dt + dW i
+t , i = 1, . . . , N, t > 0. (1.6)
+Cette fois-ci, la mesure empirique ne peut ˆetre solution d’une EDP pour au moins deux raisons : d’une part, cette mesure est a priori al ́eatoire du fait de la pr ́esence des browniens, il y a donc peu de chances qu’elle puisse r ́esoudre une EDP. D’autre part, on peut s’attendre `a ce que l’e ́quivalent de l’e ́quation de Vlasov dans ce cadre fasse intervenir un laplacien, et donc s’ ́ecrive : ∂μ
+∂t + ∇ · (μ F [μ]) = 1
+2 ∆μ. (1.7)
+Or par r ́egularisation parabolique, la solution d’un telle  ́equation ne peut ˆetre une somme de Dirac, μN n’est donc certainement pas solution de (1.7). On reparlera de cette  ́equation dans la sous-section suivante. Remarquons pour l’instant qu’en notant μtN la mesure empirique de (1.6), on peut r ́e ́ecrire ce syst`eme comme suit :
+dX i
+t = μN
+t ∗ F (Xi
+t ) dt + dW i
+t , i = 1, . . . , N, t > 0.
+Un candidat naturel au passage `a la limite est donc
+{
+dXt = μt ∗ F (Xt) dt + dWt
+L(Xt) = μt
+, t ≥ 0. (1.8)
+C’est l’EDS dite de McKean-Vlasov, et on nomme souvent la solution “processus nonlin ́eaire”. On verra comment r ́esoudre cette e ́quation par un argument de point fixe. La question qui se pose est de savoir si lorsque N est grand, les trajectoires des particules (1.6) ressemblent `a la solution de l’ ́equation de McKean-Vlasov. Pour r ́epondre, plac ̧ons-nous sur un espace de probabilit ́e (Ω, F, P) sur lequel est d ́efinie une famille de browniens (W i)i∈N ainsi que des variables al ́eatoires int ́egrables (X0i)i∈N. On consid`ere le syst`eme de particules (1.6) dirig ́ees par cette familles de browniens et dont la condition initiale est donn ́ee par les X0i. De ́finissons  ́egalement X ̃i la solution de
+l’ ́equation (1.8) issue de X0i et dirig ́ee par le brownien W i. Par un argument de couplage que nous verrons par la suite, l’in ́egalit ́e suivante est v ́erifi ́ee (toujours sous l’hypoth`ese que F est Lipschitz) :
+E
+[
+sup
+t∈[0,T ]
+|X i
+t − X ̃ i
+t|
+]
+≤ √CN , ∀N ∈ N∗.
+Une r ́ef ́erence classique pour ces questions ainsi que les notions de propagation du chaos de la sous-section suivante est le cours de Sznitman [19].
+9
+
+
+1.2.3 Propagation du chaos
+Lorsque nous avons introduit le processus nonline ́aire au paragraphe pr ́ec ́edent, nous sommes finalement rest ́es au niveau microscopique lors du passage `a la limite N → +∞. Pour passer au niveau macroscopique, et donc au niveau des EDP, regardons la loi des particules. Elles satisfont un syst`eme d’EDP de Fokker-Planck (lin ́eaire, obtenues classiquement par application de la formule d’Itoˆ). Nous allons de ́sormais faire une premi`ere hypoth`ese tr`es importante sur la loi des particules : supposons qu’initialement, les particules sont  ́echangeables, c’est-`a-dire que pour tout N , la loi de (X01, . . . , X0N ) est invariante par permutation de l’ordre de ces variables al ́eatoires. Alors en tout temps t > 0, les particules sont encore e ́changeables. On pourrait alors essayer de chercher une e ́quation satisfaite par μtN en l’ ́evaluant contre des fonctions test, mais on aboutirait a` une EDS de grande dimension. A la place, consid ́erons une fonction test φ et observons que sous l’hypothe`se d’ ́echangeabilit ́e, on a
+E〈μN
+t , φ〉 = Eφ(X1
+t ).
+La loi de μtN se ram`ene donc `a celle de Xt1, or pour la loi de Xt1 on trouve par le calcul
+(par la formule d’Itˆo) que μt = L(Xt1) ve ́rifie
+∂
+∂t μt(x) = 1
+2 ∆μt(x) − ∇ ·
+(∫
+Rd
+F (x − y) μt(x, dy)
+)
+,
+ou` μt = L(Xt1, Xt2). Cette  ́equation n’est donc pas ferm ́ee. Observons n ́eanmoins que si les particules e ́taient inde ́pendantes, on aurait μt =
+L(Xt1) ⊗ L(Xt2) et l’ ́equation pr ́ec ́edente donnerait pr ́ecis ́ement l’EDP de McKean-Vlasov (1.7). En supposant que les particules sont initialement ind ́ependantes, i.e. pour tout N ∈ N,
+L(X 1
+0 , . . . , XN
+0 ) = L(X1
+0 ) ⊗ · · · ⊗ L(XN
+0 ),
+on dira qu’un syst`eme propage le chaos si pour tout k ∈ N∗, et pour tout t > 0,
+L(X 1,N
+t , . . . , Xk,N
+t ) −→
+N →∞L(X 1,∞
+t ) ⊗ · · · ⊗ L(Xk,∞
+t)
+= L(Xt)⊗k.
+On pourra alors de ́montrer la convergence (en un sens `a pr ́eciser) de la mesure empirique (al ́eatoire) vers la solution de l’EDP (1.7).
+L’id ́ee de propagation du chaos  ́etait d ́ej`a pre ́sente dans les travaux de Boltzmann 5. Il utilisait la notion de chaos mol ́eculaire pour de ́crire le fait qu’un tr`es grand nombre de particules se comportent statistiquement comme des particules ind ́ependantes. La notion de propagation du chaos a  ́et ́e formalis ́ee par Kac [8] 6.
+5. Physicien autrichien, 1844-1906. Pe`re fondateur de la physique statistique et de la the ́orie cin ́etique des gaz. 6. Math ́ematicien ame ́ricain, 1914-1984.
+10
+
+
+1.3 Limites hydrodynamiques
+Mentionnons une derni`ere classe de mod`eles tr`es int ́eressants, que nous n’ ́etudierons pas davantage dans ce cours. Il s’agit de mode`les de syst`emes de particules sur un espace discret (souvent fini, typiquement Td
+N ), dont on observe la dynamique par changement d’ ́echelle. Nous allons pr ́esenter le processus d’exclusion sur TN = {1, . . . , N }. Dans ce mod`ele, chaque site dispose d’une horloge poissonienne et ne peut ˆetre occup ́e au plus que par une particule. Lorsqu’une horloge sonne et que le site est occup ́e, la particule se d ́eplace d’un site ale ́atoirement vers sa droite ou sa gauche, si le site est libre.
+Figure 3 – Processus d’exclusion.
+Ce syst`eme de particules est un processus de Markov {η(t)}t≥0 `a valeurs dans {0, 1}TN . Supposons que la loi de Poisson des horloges est de param`etre 1 et que la probabilite ́ pour une particule de se de ́placer vers la gauche ou la droite est 1
+2 . Alors le g ́en ́erateur infinit ́esimal de ce processus s’ ́ecrit :
+LN f (η) = 1
+2
+∑
+|x−y|=1
+(f (ηx,y) − f (η)) , ∀η ∈ {0, 1}TN ,
+pour une fonction f : {0, 1}TN → R, ou`
+(ηx,y)z =
+
+ 
+ 
+ηy si z = x
+ηx si z = y
+ηz si z ∈/ {x, y}
+.
+Correctement renormalis ́ee, la mesure empirique de ce syst`eme converge vers la solution de l’ ́equation de la chaleur. C’est ce qu’on appelle une limite hydrodynamique. On peut aussi s’int ́eresser aux fluctuations autour de la limite, et montrer qu’elles convergent vers une EDP stochastique. Compar ́e aux syst`emes de particules de la section pre ́c ́edente, on observe que toutes les particules n’interagissent pas les unes avec les autres, mais uniquement avec les particules voisines. Processus de contact (long-range ou pas), processus de vote, processus d’exclusion faiblement asyme ́trique sont autant de variantes de cette dynamique. Le dernier mentionne ́ fait l’objet de nombreuses attentions ces derniers temps, car ses fluctuations convergent par changement d’ ́echelle vers l’EDPS de Kardar-Parisi-Zhang :
+∂th = ∂2
+xxh + λ (∂xh)2 − ∞ + ξ,
+ou` ξ est un bruit blanc espace-temps. Une r ́ef ́erence classique pour ce type de probl`emes est le livre de Kipnis and Landim [10].
+11
+
+
+Chapitre 2
+Convergence des mesures de
+probabilite ́
+Ce chapitre est essentiellement inspir ́e du premier chapitre du livre de Billingsley [2]. Certains  ́el ́ements proviennent  ́egalement du tr`es riche monographe de Bogachev [3]. On pourra aussi consulter les notes de cours de Miermont [14] et M ́eliot [13].
+2.1 Rappels sur la convergence des variables ale ́atoires
+On rappelle brie`vement les diff ́erentes notions de convergences pour les suites de variables al ́eatoires. Sauf mention contraire, on munira tout espace topologique de sa tribu de Borel. Sur un tel espace (E, τ ), on notera Cb(E) l’espace des fonctions continues et born ́ees de E dans R.
+Convergence presque sure : Soit (E, τ ) un espace topologique et (Ω, F, P) un espace de probabilit ́es. Une suite de variables al ́eatoires (Xn)n∈N `a valeurs dans (E, τ ) (toutes de ́finies sur Ω) converge p.s. vers une variable ale ́atoire X : (Ω, F) → (E, τ ) si P (Xn −→ X) = 1.
+Convergence en norme Lp : Soit (E, ‖ · ‖) un espace de Banach et (Ω, F, P) un espace de probabilit ́es. Pour p ≥ 1, on construit Lp(Ω; E) en comple ́tant l’espace des fonctions  ́etag ́ees `a valeurs dans E. Une suite de variables al ́eatoires (Xn)n∈N `a valeurs dans (E, ‖ · ‖) (toutes d ́efinies sur Ω) converge en norme Lp(Ω; E), p ≥ 1, vers une variable al ́eatoire X : (Ω, F) → (E, ‖ · ‖) si
+lim
+n→+∞ E [‖Xn − X‖p] = 0.
+Convergence en probabilite ́ : Soit (S, d) un espace m ́etrique et (Ω, F, P) un espace de probabilit ́es. Une suite de variables al ́eatoires (Xn)n∈N `a valeurs dans (S, d) (toutes d ́efinies sur Ω) converge en probabilit ́e vers une variable al ́eatoire X : (Ω, F) → (S, d) si
+∀ε > 0, lim
+n→+∞ P (d(Xn, X) > ε) = 0,
+ou de mani`ere  ́equivalente si
+lim
+n→+∞ E [1 ∧ d(Xn, X)] = 0.
+12
+
+
+Convergence en loi : Soit (E, τ ) un espace topologique, qu’on munit de sa tribu de Borel. Une suite de variables al ́eatoires (Xn)n∈N `a valeurs dans (E, τ ) converge en loi vers une variable al ́eatoire X si pour tout φ ∈ Cb(E),
+lim
+n→+∞ E[φ(Xn)] = E[φ(X)].
+Quelques remarques :
+Remarque 2.1. Les implications et contre-exemples entre les diffe ́rentes notions de convergence ont e ́te ́ vue en premie`re ann ́ee, nous ne reviendrons pas dessus.
+Remarque 2.2. Observez que ces notions ne ne ́cessitent pas toutes le mˆeme niveau d’information sur l’espace d’arriv ́ee des variables al ́eatoires. En outre, les variables ale ́atoires n’ont meˆme pas besoin d’eˆtre de ́finies sur le meˆme espace de probabilit ́es pour la convergence en loi.
+Remarque 2.3. En termes de loi des variables ale ́atoires (i.e. de mesures), on peut r ́eexprimer la convergence en loi ainsi : si pour tout φ ∈ Cb(E),
+lim
+n→+∞
+∫
+E
+φ(x) PXn(dx) =
+∫
+E
+φ(x) PX (dx),
+on dira dans la prochaine section que (PXn)n∈N convergence  ́etroitement vers PX . On aura fr ́equemment recours `a plusieurs notations e ́quivalentes pour les inte ́grales ci-dessus : pour μ une mesure et φ ∈ L1(μ), on notera μ(φ) ≡ 〈μ, φ〉 ≡ ∫
+E φ dμ.
+Enfin, rappelons un r ́esultat classique qui permet de passer d’estim ́ees sur la loi d’une suite d’ ́ev`enements (An)n∈N `a une information presque sure concernant la r ́ealisation de lim sup An = ⋂
+n∈N
+⋃
+k≥n Ak = {An infiniment souvent}.
+Lemme 2.4 (Borel-Cantelli). Soit (Ω, F , P) un espace de probabilite ́ et (An)n∈N une suite d’ ́ev`enements. On a
+(i) si
+∑
+n∈N
+P(An) < ∞, alors P
+
+
+⋂
+n∈N
+⋃
+k≥n
+Ak
+
+ = 0;
+(ii) (loi de Borel du 0-1) si on suppose en plus que les (An)n∈N sont ind ́ependants, alors
+P
+
+
+⋂
+n∈N
+⋃
+k≥n
+Ak
+
+ vaut 0 ou 1 suivant que
+∑
+n∈N
+P(An) < ∞ ou
+∑
+n∈N
+P(An) = ∞.
+D ́emonstration. Exercice.
+Exercice 2.5. On consid`ere la suite de v.a. `a valeur dans R d ́efinie sur (Ω, F, P) par
+P(Xn = n) = P(Xn = −n) = 1
+2n log(n + 1) et P(Xn = 0) = 1 − 1
+n log(n + 1) .
+Soit Yn = 1
+n
+∑n
+k=0 Xk. Montrer que Yn converge en probabilit ́e mais ne converge pas p.s.
+Exercice 2.6. Montrer que si une suite (Xn)n∈N `a valeurs dans un espace de Banach converge en probabilit ́e vers X, on peut en extraire une sous-suite qui converge p.s.
+13
+
+
+Remarque 2.7. La convergence p.s. et en probabilit ́e sont des notions topologiques. C’est e ́vident pour la convergence p.s.,  ̧ca l’est un peu moins pour la convergence en probabilit ́es : cela signifie que si d et d′ sont deux distances d ́efinissant la mˆeme topologie, alors la suite converge pour la distance d si et seulement si elle converge pour d′ (utiliser l’exercice 2.6). En conse ́quence, on peut d ́efinir la convergence en probabilit ́e sur des espaces me ́trisables.
+2.2 Convergence en loi : cas des variables ale ́atoires dans un
+espace euclidien
+Vous avez d ́ej`a rencontre ́ plusieurs caract ́erisations de la convergence en loi pour les v.a. `a valeurs dans R ou dans Rd. Ainsi, le th ́eor`eme de convergence de L ́evy donne une caract ́erisation par les fonctions caracte ́ristiques (voir Exercice 2.9). Int ́eressons-nous plus particuli`erement `a une caract ́erisation d ́ej`a rencontr ́ee en premi`ere ann ́ee pour les variables ale ́atoires `a valeurs dans R. On a l’ ́equivalence suivante :
+Xn (→d) X ;
+Pour tout x tel que PX ({x}) = 0, PXn((−∞, x]) → PX ((−∞, x]).
+Nous n’allons pas d ́emontrer ce r ́esultat imm ́ediatement (admis en premi`ere ann ́ee), mais il fera partie d’un th ́eor`eme plus g ́en ́eral sur les espaces m ́etriques que nous traiterons dans la prochaine section.
+Exemple 2.8. Soit Xk ∼ B(p) des variables al ́eatoires de Bernoulli iid. Par le TCL, on a que
+Sn := √n
+1 n
+∑n
+k=1 Xk − p
+√p(1 − p)
+(d)
+−→ N (0, 1).
+Consid ́erons l’ensemble
+A=
+{
+√n
+k
+n −p
+√p(1 − p) , n ∈ N∗, k ∈ {0, . . . , n}
+}
+,
+alors P(Sn ∈ A) = 1 pour tout n, et pourtant P(N (0, 1) ∈ A) = 0. Cependant, cela ne contredit pas la convergence de Sn vers N (0, 1). Nous verrons en effet que P(Sn ∈ A) → P(N (0, 1) ∈ A) lorsque P(N (0, 1) ∈ ∂A) = 0, ce qui n’est pas le cas ici puisque P(N (0, 1) ∈ ∂A) = P(N (0, 1) ∈ R) = 1.
+Exercice 2.9. Le but de cet exercice est de de ́montrer le Th ́eor`eme de Le ́vy, dont on rappelle l’e ́nonce ́ :
+Soit (Xn)n∈N une suite de variables al ́eatoires `a valeurs dans Rd telles que : (i) pour tout t ∈ Rd, E[ei〈t,Xn〉] converge vers une limite note ́e L(t) ; (ii) la fonction t 7→ L(t) est continue en 0.
+Alors il existe une variable al ́eatoire X telle que L(t) = E[ei〈t,X〉] et Xn
+(→d) X.
+Montrons le re ́sultat dans le cas d = 1.
+14
+
+
+1) Montrer qu’il existe C > 0 telle que pour toute mesure de probabilit ́e μ sur R et pour tout K > 0,
+μ (R \ [−K, K]) ≤ C K
+∫
+[− 1
+K, 1
+K]
+(1 − Re (Eμ[eitX ])) dt.
+2) En utilisant la question pre ́ce ́dente, montrer que pour tout ε > 0, il existe K > 0 tel que
+sup
+n∈N
+PXn(R \ [−K, K]) ≤ ε.
+On verra plus tard que cette proprie ́te ́ donne de la compacit ́e et implique qu’il existe une sous-suite (Xφ(n))n∈N qui converge en loi vers une certaine variable al ́eatoire X. On admet ce r ́esultat pour l’instant. 3) Conclure.
+On voit que la preuve repose sur un sch ́ema classique : existence de sous-suites convergentes par un argument de compacite ́, puis identification de la limite grˆace `a une forme d’unicit ́e.
+Dans la suite, on va s’int ́eresser aux propri ́et ́es des mesures sur un espace me ́trique, et `a leur convergence. Un des objectifs sera d’obtenir la me ́trisabilit ́e de la convergence  ́etroite. Une telle proprie ́te ́ nous permettra par la suite d’avoir des caract ́erisations s ́equentielles sur l’espace des mesures de probabilit ́e, ce qui sera bien utile quand on mettra en place (`a plusieurs reprises) la strate ́gie suivante pour prouver la convergence : existence de soussuites convergentes par compacit ́e, puis identification de la limite.
+2.3 Convergence e ́troite des mesures de probabilite ́ sur un
+espace me ́trique
+2.3.1 Propri ́ete ́s des mesures
+D ́efinition 2.10. Soit (E, τ ) un espace topologique. On note B(E) la tribu de Borel, i.e. la plus petite tribu contenant les ouverts (B(E) = σ(τ )). On appelle
+(i) Mesure de Borel, toute mesure d ́efinie sur (E, B(E)) ;
+(ii) Mesure re ́gulie`re, toute mesure de Borel μ telle que pour tout A ∈ B(E),
+μ(A) = sup{μ(F ) : F ferm ́e inclus dans A}
+= inf{μ(U ) : U ouvert contenant A} ;
+(iii) Mesure de Radon finie, toute mesure de Borel μ finie telle que pour tout A ∈ B(E) et tout ε > 0, il existe un compact Kε ⊂ A tel que μ(A \ Kε) < ε.
+Sauf mention contraire, on ne conside ́rera par la suite que des mesures de probabilit ́e. On notera P(E) l’ensemble des mesures de probabilit ́e de Borel, donc sur (E, B(E)).
+Proposition 2.11. Soit (E, τ ) un espace me ́trisable.
+1) Toute mesure μ ∈ P(E) est r ́egulie`re.
+2) Soit d une distance qui me ́trise la topologie de E. Alors, toute mesure μ ∈ P(E) est caract ́erise ́e par les valeurs de μ(f ) ≡ ∫
+E f dμ, pour f ∈ Lip(E, d), l’ensemble des fonctions lipschitziennes pour d.
+15
+
+
+D ́emonstration. Commen ̧cons par la premie`re assertion. Soit d une distance qui m ́etrise la topologie de E. Si A est ferm ́e, on peut prendre F = A et U = Aδ := {x : d(x, A) < δ} pour un δ > 0 suffisamment petit. En effet, on rappelle que par d ́efinition des mesures, μ(Aδ) de ́croıˆt vers μ(A). Consid ́erons l’ensemble E des  ́el ́ements de B(E) qui v ́erifie la propri ́et ́e d ́esir ́ee. Puisque E contient les ferm ́es, il nous suffit de montrer que E est une tribu. On commence par remarquer que ∅ ∈ E. De plus, E est stable par passage au compl ́ementaire. En effet, si A ∈ E alors pour tout ε > 0, il existe F ⊂ A ⊂ U avec F ferm ́e et U ouvert tels que μ(U \F ) < ε. On a  ́egalement par passage au comple ́mentaire que E\U ⊂ E\A ⊂ E\F et μ ((E \ F ) \ (E \ U )) = μ(U \ F ) < ε. Donc E \ A ∈ E. Soit (An)n∈N une suite de E. Soit ε > 0 et soient (Fn)n∈N une suite de ferm ́es et (Un)n∈N une suite d’ouverts tels que pour tout n, Fn ⊂ An ⊂ Un et μ (Un \ Fn) < ε
+2n+1 .
+Notons U = ⋃
+n∈N Un et F = ⋃
+n≤N Fn, o`u N est tel que μ (⋃
+n∈N Fn \ F ) < ε
+2 . On a alors
+F ⊂⋃
+n∈N An ⊂ U et
+μ(U \ F ) ≤ μ
+(
+U\
+⋃
+n∈N
+Fn
+)
++μ
+(
+⋃
+n∈N
+Fn \ F
+)
+≤
+∑
+n∈N
+μ(Un \
+⋃
+n∈N
+Fn) + ε
+2
+≤
+∑
+n∈N
+μ(Un \ Fn) + ε
+2
+< ε.
+Donc E est stable par union d ́enombrable, donc c’est une tribu. Puisqu’elle contient tous les ferme ́s, elle contient B(E).
+Montrons maintenant la deuxi`eme partie de cette proposition. Nous venons de voir que μ est d ́etermin ́ee par ses valeurs sur les ferm ́es (ou sur les ouverts). Il suffit donc de montrer que pour tout ferm ́e F , l’indicatrice 1F peut eˆtre approch ́ee par des fonctions lipschitziennes. Pour ε > 0, posons
+fε,F (x) = max (0, 1 − ε−1 d(x, F )) . (2.1)
+x
+fε,F
+εF
+1
+Figure 1 – “J’ai montre ́ mon chef-d’oeuvre aux grandes personnes et je leur ai demand ́e si mon dessin leur faisait peur.”
+Alors cette fonction est ε−1-lipschitzienne, born ́ee par 1, et converge (ponctuellement) en d ́ecroissant vers 1F quand ε → 0. Par le th ́eor`eme de convergence domin ́ee, en en d ́eduit que μ(1F ) = μ(F ) = εli→m0 μ (fε,F ) .
+16
+
+
+Ainsi, les inte ́grales des fonctions lipschitzienne contre μ caract ́erisent bien les valeurs de μ sur les ferm ́es, et donc caract ́erisent μ.
+Proposition 2.12. Soit (E, d) un espace m ́etrique complet et se ́parable. Toute mesure de Borel finie est de Radon.
+D ́emonstration. Soit μ une mesure de Borel finie. Soit ε > 0. Par s ́eparabilit ́e de E, on
+peut, pour tout n ∈ N∗, recouvrir E par une famille de boules ouvertes (Uj,n)j∈N de rayon
+1
+n . Par σ-additivit ́e de μ, on peut trouver une suite mn ∈ N telle que
+μ
+
+E \
+mn
+⋃
+j=0
+Uj,n
+
+< ε
+2n .
+Ainsi, l’ensemble K := ⋂
+n∈N∗
+⋃
+j≤mn Uj,n v ́erifie
+μ (E \ K) ≤
+∑
+n∈N∗
+μ
+
+E \
+mn
+⋃
+j=0
+Uj,n
+
+ < ε.
+Enfin, on remarque que K est pre ́compact 1, et est donc compact puisque E est complet (voir Lemme A.1). Donc μ(E \ K) < ε et μ est de Radon.
+2.3.2 Convergence e ́troite des mesures
+Comme mentionne ́ pre ́ce ́demment, la convergence e ́troite est l’analogue pour les mesures de la convergence en loi des variables al ́eatoires. Cette notion n’est pas restreinte aux seules mesures de probabilit ́e. Toutefois, dans le cadre de ce cours, nous ne travaillerons d ́esormais qu’avec des mesures de probabilit ́e.
+D ́efinition 2.13. Soit (μn)n∈N ⊂ P(E) et μ ∈ P(E). On dit que (μn)n∈N converge
+ ́etroitement vers μ, not ́e μn
+(e→) μ ou μn ⇒ μ, si pour tout φ ∈ Cb(E), on a
+μn(φ) n−→→∞ μ(φ).
+Remarque 2.14 (Petits rappels d’analyse fonctionnelle). On munit Cb(E) de la topologie de la convergence uniforme sur les compacts, ce qui en fait un espace de Fr ́echet. On note Cb(E)′ le dual topologique de Cb(E), i.e. l’ensemble des applications lin ́eaires continues de Cb(E) → R.
+La topologie faible-∗ sur Cb(E)′ est la topologie la moins fine rendant continues les formes lin ́eaires L ∈ Cb(E)′ 7→ L(φ), pour tout φ ∈ Cb(E). Ainsi, une suite (Ln)n∈N ⊂ Cb(E)′ converge faiblement-∗ vers L ∈ Cb(E)′ si Ln(φ) → L(φ), pour tout φ ∈ Cb(E). Remarquons qu’`a toute mesure μ ∈ P(E), on peut associer une forme lin ́eaire de la fa ̧con suivante :
+Lμ : φ ∈ Cb(E) 7→ μ(φ) =
+∫
+E
+φ dμ,
+cette application e ́tant continue puisque |Lμ(φ)| ≤ ‖φ‖∞ μ(E) = ‖φ‖∞. Ceci justifie l’abus de langage qui consiste parfois `a consid ́erer une mesure finie comme e ́le ́ment de Cb(E)′, et a` noter μn
+∗⇀ μ pour la convergence  ́etroite.
+1. i.e. pour tout ε > 0, on peut recouvrir K par un nombre fini de boules de rayon ε.
+17
+
+
+Remarque 2.15. Un des int ́erˆets majeurs des topologies faibles est d’avoir plus de compacts, comme par exemple les boules ferm ́ees en dimension infinie. Cependant, la topologie faible(-∗) n’est pas me ́trisable pour les Banach de dimension infinie ( cf. cours de Distributions et Op ́erateurs). On verra pourtant que si E est s ́eparable et complet, la topologie de la convergence  ́etroite est me ́trisable (pourquoi n’est-ce pas en contradiction avec l’assertion pr ́ec ́edente ?).
+Exemple 2.16. • Soit (xn)n∈N une suite de re ́els et x ∈ R. Alors xn → x si et seulement
+si δxn
+(e→) δx.
+• La suite de mesures sur [0, 1] d ́efinie pour tout n ∈ N∗ par
+μn = 1
+n+1
+n
+∑
+k=0
+δk
+n
+converge e ́troitement vers la mesure de Lebesgue sur [0, 1].
+En fait, il n’est pas toujours ais ́e de tester une mesure contre toutes les fonctions continues et born ́ees pour obtenir la convergence des mesures. Le th ́eor`eme suivant, dont vous avez d ́ej`a rencontr ́e des applications, donne plusieurs caract ́erisations de la convergence  ́etroite.
+Th ́eor`eme 2.17 (Portmanteau 2). Soit (E, d) un espace m ́etrique. Soit (μn)n∈N ⊂ P(E) et μ ∈ P(E). Les assertions suivantes sont  ́equivalentes :
+(i) μn
+(e→) μ ;
+(ii) pour toute fonction φ born ́ee et uniforme ́ment continue, μn(φ) → μ(φ) ;
+(iii) pour toute fonction φ born ́ee et Lipschitz continue, μn(φ) → μ(φ) ;
+(iv) pour tout ferme ́ F de E, lim supn→∞ μn(F ) ≤ μ(F ) ;
+(v) pour tout ouvert U de E, lim infn→∞ μn(U ) ≥ μ(U ) ;
+(vi) pour tout bore ́lien A ∈ B(E) tel que μ(∂A) = 0, limn→∞ μn(A) = μ(A).
+D ́emonstration. L’implication (i) ⇒ (ii) ⇒ (iii) et l’e ́quivalence (iv) ⇔ (v) sont e ́videntes. Montrons que (iii) ⇒ (iv). Soit F un ferm ́e de E et soit ε > 0. La fonction fε,F d ́efinie en (2.1) est lipschitzienne et v ́erifie 1F ≤ fε,F ≤ 1. Ainsi pour tout n, on a μn(F ) ≤ μn(fε,F ) et par passage `a la limite, lim supn μn(F ) ≤ μ(fε,F ) puisque nous avons suppos ́e (iii). D’autre part, on obtient par convergence domin ́ee que μ(fε,F ) → μ(F ) lorsque ε → 0. Ainsi (iv) est v ́erifi ́e. Montrons que (iv)-(v) ⇒ (vi). Soit A ∈ B(E) tel que μ(∂A) = 0, et donc tel que μ(A) = μ(A) = μ(A◦). En appliquant (iv), on obtient
+μ(A) = μ(A) ≥ lim sup
+n
+μn(A) ≥ lim sup
+n
+μn(A),
+et de mˆeme en appliquant (v), on obtient
+μ(A) = μ(A◦) ≤ lim inf
+n μn(A◦) ≤ lim inf
+n μn(A).
+2. Vraisemblablement dˆu au mathe ́maticien russe Alexandrov, bien que Billingsley l’attribue a` JeanPierre Portmanteau, de l’Universit ́e de Felletin dans la Creuse (∼ 1500 habitants).
+18
+
+
+Ainsi,
+lim sup
+n
+μn(A) ≤ μ(A) ≤ lim inf
+n μn(A),
+et les in ́egalit ́es pr ́ec ́edentes sont donc des  ́egalit ́es. Montrons finalement que (vi) ⇒ (i). Soit φ ∈ Cb(E). Sans perte de g ́en ́eralit ́e, on peut supposer que 0 ≤ φ ≤ 1. En effet, si φ n’est pas positive, on peut la d ́ecomposer en φ = φ+ − φ− et raisonner sur chacun des termes s ́epar ́ement. De plus, on peut toujours se ramener par lin ́earit ́e `a une fonction inf ́erieure `a 1. On a alors
+μn(φ) =
+∫
+E
+∫
+[0,1]
+1[0,φ(x)](y) dy μn(dx).
+Puisque la mesure dy⊗μn(dx) est σ-finie (puisque finie) et l’application (x, y) 7→ 1[0,φ(x)](y) est mesurable et positive, le th ́eor`eme de Fubini-Tonelli donne :
+μn(φ) =
+∫
+[0,1]
+μn ({x ∈ E : φ(x) ≥ y}) dy. (2.2)
+La fonction ψ : y 7→ μ ({x ∈ E : φ(x) ≥ y}) est de ́croissante, donc admet au plus un nombre de ́nombrable de discontinuit ́e (si vous ne connaissez pas cette proprie ́te ́, remarquez qu’il s’agit de l’ensemble {y : μ ({x ∈ E : φ(x) = y}) > 0} et cet ensemble est l’union des {y : μ ({x ∈ E : φ(x) = y}) ≥ 1
+n
+} , n ∈ N∗ et que {y : μ ({x ∈ E : φ(x) = y}) ≥ 1
+n
+}
+contient au plus n points). Soit y un point de continuit ́e de ψ et notons Ny := {φ ≥ y} = φ−1([y, 1]). Etant l’image r ́eciproque d’un ferm ́e par une fonction continue, Ny est ferm ́e. Si x ∈ ∂Ny, alors il existe une suite (xn) de E \ Ny qui converge vers x. Or xn ∈ E \ Ny signifie que φ(xn) < y, et en passant `a la limite, on obtient φ(x) ≤ y, donc φ(x) = y. Ainsi, ∂Ny ⊂ φ−1({y}). Or nous avons suppos ́e que y est un point de continuite ́ de ψ, donc μ (φ−1({y})) = 0, et donc μ(∂Ny) = 0. La proprie ́te ́ (vi) nous donne alors que μn (φ ≥ y) → μ (φ ≥ y). Puisqu’il y au plus un nombre de ́nombrable de discontinuit ́e de ψ, on en d ́eduit que
+μn (φ ≥ ·) → μ (φ ≥ ·) λ − p.p.
+Donc par convergence domine ́e dans l’int ́egrale (2.2), on obtient le r ́esultat.
+Exercice 2.18. Soit (Xn)n∈N une suite de variables al ́eatoires r ́eelles dont les fonctions de r ́epartition sont note ́es FXn, et X une v.a. r ́eelle de fonction de r ́epartition FX . Montrer
+que Xn
+(→d) X si et seulement si FXn(x) → FX (x), en tout point de continuit ́e x de FX .
+Exercice 2.19. Soit (E, τ ) un espace me ́trisable. (i) Soit (xn)n∈N ⊂ E et x ∈ E. On suppose que de toute sous-suite de (xn)n∈N, on peut extraire une sous-suite qui converge vers x. Montrer que (xn)n∈N converge vers x. (ii) On consid`ere maintenant une suite (μn)n∈N de mesures de probabilit ́es de Borel sur E. On suppose que de toute sous-suite de (μn)n∈N, on peut extraire une sous-suite qui converge e ́troitement vers μ ∈ P(E). Montrer que (μn)n∈N converge vers μ. Commenter le r ́esultat obtenu.
+Dans la suite de ce chapitre, l’objectif sera de mettre en  ́evidence des conditions assurant qu’une famille de mesures est relativement compacte, et d’assurer e ́galement que la propri ́et ́e de Bolzano-Weierstrass (qui donne la caracte ́risation s ́equentielle de la compacit ́e) est ve ́rifie ́e sur P(E). Pour garantir cette derni`ere propri ́et ́e, on cherchera `a obtenir la me ́trisabilit ́e de la convergence  ́etroite sur P(E).
+19
+
+
+Exercice 2.20. Soit (E, τ ) un espace topologique me ́trisable. Montrer que Cb(E) est s ́eparable si et seulement si E est compact.
+On rappelle que Cb(E) est se ́parable si et seulement si la topologie faible-∗ sur la boule unit ́e de Cb(E)′ est me ́trisable (cf. [16, Thm 3.16]). Notons τ ∗ cette topologie. L’exercice pr ́ec ́edent indique donc que
+τ ∗ est me ́trisable ⇐⇒ E est compact.
+On verra pourtant dans la sous-section suivante des conditions beaucoup moins restrictives assurant la m ́etrisabilit ́e de la convergence  ́etroite des mesures de probabilit ́e sur E.
+2.3.3 Espaces polonais et proprie ́te ́s topologiques de P(E)
+Espaces polonais
+D ́efinition 2.21. On dit qu’un espace topologique (E, τ ) est un espace polonais s’il est s ́eparable et s’il existe une distance d sur E qui m ́etrise la topologie τ et pour laquelle (E, d) est complet.
+Remarque 2.22. On a souvent acc`es directement `a un espace m ́etrique ( i.e. la distance est fournie avec l’espace), mais ce n’est pas toujours le cas. De plus, il n’est pas toujours int ́eressant de fixer une distance plus qu’une autre, et on peut meˆme ne pas avoir besoin d’une distance en particulier. Par exemple, il peut nous suffire de tester contre des fonctions pour caract ́eriser telle ou telle convergence, plutˆot que de tenter de contrˆoler une distance qui n’est pas toujours simple `a exprimer. En revanche, il est tre`s utile de savoir qu’un espace est m ́etrisable, car cela nous donne acce`s `a plusieurs caracte ́risations s ́equentielles : de la continuite ́ des fonctions, de la compacite ́ par la proprie ́te ́ de Bolzano-Weierstrass, etc. Enfin, une remarque importante qui justifie `a nouveau de parler d’espace me ́trisable plutˆot que d’espace me ́trique : deux distances e ́quivalentes (i.e. qui engendrent la meˆme topologie) peuvent donner ou non la compl ́etude de l’espace. Par exemple R muni de sa topologie usuel est e ́videmment polonais. Or on peut munir R de la distance d(x, y) = | arctan(x) − arctan(y)| qui est  ́equivalente `a la distance usuelle. Pourtant (R, d) n’est pas complet. N ́eanmoins l’espace m ́etrique (R, d) est polonais !
+Distance sur l’espace des mesures
+Un certain nombre de distances sont connues pour me ́triser la convergence  ́etroite. La distance de L ́evy-Prokhorov en fait partie et on verra qu’elle a en plus l’avantage de rendre P(E) complet.
+Lemme 2.23. Soit (E, d) un espace m ́etrique. On rappelle la notation Aε = {x ∈ E : d(x, A) < ε} pour toute partie A de E et tout ε > 0 (notez que Aε est un ouvert, donc mesurable). L’application dLP : P(E) × P(E) → R+ d ́efinie par :
+dLP (μ, ν) := inf {ε > 0 : ∀A ∈ B(E), μ(A) ≤ ν(Aε) + ε et ν(A) ≤ μ(Aε) + ε} ,
+est une distance sur P(E), appel ́ee distance de L ́evy-Prokhorov.
+20
+
+
+D ́emonstration. L’application dLP : P(E) × P(E) → R+ est sym ́etrique et l’in ́egalit ́e tri
+angulaire s’obtient grˆace `a la relation (Aε)η ⊂ Aε+η. Il reste `a montrer que dLP (μ, ν) = 0 si et seulement si μ = ν. Grˆace `a la Proposition 2.11, il suffit de v ́erifier l’ ́egalit ́e sur les ferm ́es de E. Or si A est un ferm ́e de E, on a A = ⋂
+ε>0 Aε. Comme μ(A) ≤ ν(Aε) + ε pour tout ε > 0 (puisque dLP (μ, ν) = 0), on obtient par passage a` la limite que μ(A) ≤ ν(A). De manie`re sym ́etrique, on obtient que μ(A) = ν(A). On a donc bien une distance. Au passage, remarquons que dLP est de ́finie plus simplement par :
+dLP (μ, ν) := inf {ε > 0 : ∀A ∈ B(E), μ(A) ≤ ν(Aε) + ε} . (2.3)
+En effet, soit ε > 0 tel que μ(A) ≤ ν(Aε) + ε. Commenc ̧ons par remarquer que pour toute partie A de E et tout ε > 0, on a
+((Aε)c)ε ⊂ Ac.
+Par cons ́equent,
+ν(A) = 1 − ν(Ac) ≤ 1 − ν (((Aε)c)ε)
+≤ 1 − μ ((Aε)c) + ε = μ (Aε) + ε,
+ce qui montre bien l’e ́galite ́ entre les deux d ́efinitions.
+Premi`eres propri ́et ́es topologiques
+Proposition 2.24. Soit (E, τ ) un espace me ́trisable et se ́parable. Alors P(E) muni de la topologie de la convergence e ́troite est m ́etrisable.
+D ́emonstration. Soit d une distance sur E qui m ́etrise τ . Montrons que dLP (construite `a partir de d) m ́etrise la convergence  ́etroite sur P(E). On prend pour cela une suite (μn)n∈N ⊂ P(E) telle que dLP (μn, μ) → 0. Soit A un ferm ́e et ε > 0. Ainsi il existe N ∈ N tel que
+∀n ≥ N, μn(A) ≤ μ(Aε) + ε.
+On a donc lim supn μn(A) ≤ μ(Aε)+ε. Puisque cette in ́egalit ́e est valable ∀ε > 0, et que Aε d ́ecroıˆt vers ⋂
+ε>0 Aε = A (car A ferm ́e), la σ-additivit ́e de μ implique que μ(Aε) → μ(A), et donc
+lim sup
+n
+μn(A) ≤ μ(A).
+D’apr`es le th ́eor`eme Portmanteau, on a donc que μn
+(e→) μ.
+R ́eciproquement, supposons qu’on dispose d’une suite (μn)n∈N telle que μn
+(e→) μ, et montrons que dLP (μn, μ) → 0. Soit ε > 0. Puisque E est s ́eparable, il existe une suite de boules ouvertes de rayon ε > 0 recouvrant E. Par σ-additivit ́e de μ, on peut trouver un nombre fini de telles boules A1, . . . , AN telles que
+μ
+(
+E\
+N
+⋃
+k=1
+Ak
+)
+≤ ε. (2.4)
+Soit A ∈ B(E). On note
+UA :=
+⋃
+k≤N : A∩Ak6=∅
+Ak
+21
+
+
+et on recouvre alors A comme suit :
+A ⊂ UA
+⋃
+(A \ UA).
+Or UA est ouvert donc par le th ́eor`eme Portmanteau, lim infn μn(UA) ≥ μ(UA). De plus on remarque que le cardinal de l’ensemble {UA : A ∈ B(E)} est fini, ainsi il existe N0 tel que pour tout n ≥ N0 et pour tout A ∈ B(E), μn(UA) ≥ μ(UA) − ε, de sorte que
+∀A ∈ B(E), μ(A) ≤ μn(UA) + ε + μ (A \ UA) .
+De plus, UA ⊂ A2ε et A \ UA ⊂ E \ ⋃N
+k=1 Ak, donc
+μ(A) ≤ μn(A2ε) + 2ε.
+Par la caract ́erisation non sym ́etrique (2.3) de la distance de L ́evy-Prokhorov, on en d ́eduit que pour tout n ≥ N0, dLP (μn, μ) ≤ 2ε, ce qui donne la convergence au sens de la distance de Le ́vy-Prokhorov.
+Toujours `a l’aide de la distance de Le ́vy-Prokhorov, nous allons montrer qu’il existe une famille d ́enombrable de mesures discre`tes (i.e. des sommes finies de Dirac) telle que toute mesure de P peut ˆetre approche ́e par une mesure de cette famille.
+Proposition 2.25. Soit (E, τ ) un espace me ́trisable et se ́parable. Alors P(E) muni de la topologie de la convergence e ́troite est s ́eparable.
+D ́emonstration. Soit (xn)n∈N une suite dense de E. Consid ́erons le sous-ensemble de P(E) donn ́e par
+{N ∑
+k=1
+rk δxk ; N ∈ N, r1, . . . , rN ∈ Q+ tels que
+N
+∑
+k=1
+rk = 1
+}
+,
+qui est clairement d ́enombrable. Montrons qu’il est dense dans P(E). Soit ε > 0 et μ ∈ P(E). Comme dans la preuve pr ́ec ́edente, on consid`ere N boules ouvertes A1, . . . , AN de rayon ε > 0 et centre ́es en x1, . . . , xN telles que (2.4) soit v ́erifi ́e. A partir de ces N boules, on construit N bor ́eliens disjoints A′1, . . . A′
+N (en prenant des
+intersections des boules) tels que xk ∈ A′
+k pour tout k ∈ {1, . . . , N } et ⋃N
+k=1 A′
+k = ⋃N
+k=1 Ak.
+On choisit alors des rationnels r1, . . . , rN tels que
+N
+∑
+k=1
+|rk − μ(A′
+k)| < ε,
+et on utilisera la mesure suivante pour approcher μ :
+ν :=
+N
+∑
+k=1
+rk δxk .
+Alors, pour A ∈ B(E), on d ́efinit UA = ⋃
+k≤N : A∩A′
+k6=∅ A′
+k (notez que l’union est disjointe
+cette fois-ci, et que UA ∈ B(E)) et on obtient
+μ(A) ≤ μ(UA) + μ(A \ UA) ≤ μ(UA) + ε.
+22
+
+
+Or
+|μ(UA) − ν(UA)| ≤
+∑
+k≤N : A∩A′
+k 6=∅
+|μ(A′
+k) − rk| < ε.
+Donc μ(A) ≤ ν(UA) + 2ε.
+Enfin, il reste `a remarquer que UA ⊂ A2ε pour conclure que dLP (μ, ν) ≤ 2ε.
+On verra plus tard, une fois que nous aurons  ́etabli le th ́eor`eme de Prokhorov, que dLP rend P(E) complet, en faisant donc un espace polonais.
+2.4 Compacite ́ dans P(E)
+D’abord, observons une premi`ere situation ou` P(E) est compact :
+Proposition 2.26. Soit (E, τ ) un espace topologique me ́trisable. L’ensemble P(E) muni de la topologie de la convergence  ́etroite est compact si et seulement si E est compact. Dans ce cas, P(E) est  ́egalement me ́trisable.
+D’un point de vue pratique, ce r ́esultat nous dit que si E est compact, on peut extraire de toute suite de mesures de probabilit ́e sur E une sous-suite qui converge. Nous ne ferons pas la preuve dans ce cours (voir les r ́ef ́erences cit ́ees en de ́but de chapitre). On notera n ́eanmoins que le sens re ́ciproque repose sur un int ́eressant th ́eor`eme de Riesz, qui stipule que lorsque (E, d) est compact, les formes lin ́eaires positives sur C(E) qui valent 1 pour la fonction constante  ́egale `a 1, sont pr ́ecis ́ement de la forme f 7→ μ(f ), pour μ ∈ P(E).
+Int ́eressons-nous d ́esormais `a un crit`ere plus g ́en ́eral, qui ne ne ́cessite pas de supposer que E est compact. Nous allons voir que les parties relativement compactes de P(E) seront donn ́ees par les familles tendues de mesures :
+D ́efinition 2.27. Une famille M ⊂ P(E) de mesures est tendue si pour tout ε > 0, il existe un compact Kε de E tel que
+sup
+μ∈M
+μ (E \ Kε) ≤ ε.
+Exemple 2.28. Si E est un espace me ́trique complet et se ́parable, et M est r ́eduit `a une seule mesure μ ∈ P(E), alors puisque μ est de Radon (Proposition 2.12), M est tendue.
+Si E = R, alors la famille M = {δn, n ∈ Z} n’est pas tendue.
+Venons-en d ́esormais `a un r ́esultat important de ce cours.
+Th ́eor`eme 2.29 (Prokhorov). Soit (E, τ ) un espace polonais et P(E) muni de la topologie de la convergence  ́etroite. Soit M ⊂ P(E) une famille de mesures. Alors M est relativement compacte si et seulement si M est tendue.
+Remarque 2.30. Une d ́emonstration de ce th ́eore`me (une version le ́ge`rement plus g ́en ́erale) est disponible sous forme de probl`eme sur l’espace en ligne du cours. La preuve repose sur une approche analyse fonctionnelle, et est accessible `a partir des connaissances du cours de 2A “Distributions et Op ́erateurs”.
+23
+
+
+On comprend d ́esormais mieux la fin de la d ́emonstration du th ́eor`eme de L ́evy (cf Exercice 2.9).
+En pratique, on utilisera plus souvent le sens re ́ciproque.
+D ́emonstration. Commen ̧cons par le sens direct (on remarquera que la deuxi`eme partie de l’argument est tr`es similaire `a la preuve de la Proposition 2.12). Soit M une famille relativement compacte. Quitte `a conside ́rer M `a la place de M, on peut supposer M compacte. En effet, si M est tendue, alors M l’est e ́galement. Soit (Un)n∈N une suite croissante d’ouverts tels que ⋃
+n∈N Un = E. Dans un premier temps, montrons que pour tout ε > 0, il existe N ∈ N tel que infμ∈M μ(UN ) ≥ 1 − ε. Par l’absurde, si ce n’ ́etait pas le cas, il existerait un ε > 0 et une suite (μn)n∈N de M tels que pour tout n ∈ N, μn(Un) < 1 − ε. Or par hypoth`ese, E est polonais, donc P(E) est m ́etrisable par la Proposition 2.24. De plus M est compacte, donc il existe μ ∈ P(E) et
+une sous-suite de (μn) telle que μφ(n)
+(→e) μ. D’apr`es le the ́ore`me Portmanteau, on a donc pour tout n ∈ N,
+lim inf
+m→∞ μφ(m)(Uφ(m)) ≥ lim inf
+m→∞ μφ(m)(Uφ(n)) ≥ μ(Uφ(n)),
+ou` la premi`ere ine ́galite ́ r ́esulte de la croissance des Un. Donc μ(Uφ(n)) ≤ 1 − ε pour tout n ∈ N, ce qui est absurde puisque μ(E) = 1. Soit d une distance rendant E complet. Soit ε > 0 et (xn)n∈N une suite dense de E. D’apr`es le paragraphe pre ́ce ́dent, on a que pour tout n ≥ 1, il existe un entier Nn tel que
+inf
+μ∈M μ
+( Nn
+⋃
+k=1
+Bd(xk, 1
+n)
+)
+≥1− ε
+2n .
+Alors en posant
+K=
+⋂
+n≥1
+Nn
+⋃
+k=1
+Bd(xk, 1
+n ),
+on a que K est ferme ́ et pr ́ecompact, donc compact (puisque (E, d) est complet). De plus
+sup
+μ∈M
+μ(E \ K) ≤
+∞
+∑
+n=1
+μ
+(
+E\
+Nn
+⋃
+k=1
+Bd(xk, 1
+n)
+)
+≤ ε.
+Donc M est tendu.
+R ́eciproquement, supposons que M est tendue. Puisque P(E) est m ́etrisable (Proposition 2.24), la pr ́ecompacit ́e est donn ́ee par la caracte ́risation se ́quentielle suivante : il suffit de montrer que de toute suite de M, on peut extraire une sous-suite qui converge (avec une limite pas n ́ecessairement dans M). Le but ici va ˆetre de se ramener au cadre compact de la Proposition 2.26. On utilise un lemme de topologie (voir Lemme A.2 en Annexe) : il existe une distance d ̃ telle que (E, d ̃) est pr ́ecompact. Soit E ̃ le compl ́et ́e de E pour la distance d ̃ (voir Annexe). Alors (
+E ̃, d ̃) est compact, et nous allons d ́esormais travailler sur cet espace. Ainsi, toute mesure μ ∈ P(E) s’e ́tend en une mesure μ ̃ sur (E ̃, B(E ̃)) de la fac ̧on suivante :
+∀A ∈ B(E ̃), μ ̃(A) = μ(A ∩ E).
+24
+
+
+Vous pourrez ve ́rifier que B(E) = {A ∩ E : A ∈ B(E ̃)} et que μ ̃ ainsi de ́finie est bien une mesure de probabilit ́e. Soit (μn)n∈N ⊂ M. La suite associ ́ee (μ ̃n)n∈N est un sous-ensemble de P(E ̃) qui est compact d’apr`es la Proposition 2.26. Donc il existe μ ̃∞ ∈ P(E ̃) et une extraction φ telle
+que μ ̃φ(n)
+(e→) μ ̃∞.
+Notez qu’on n’a pas utilis ́e la tension jusqu’ici, cette propri ́et ́e va nous servir `a montrer que le support de μ ̃∞ est dans E, et on pourra alors construire la restriction de μ ̃∞ `a une mesure μ∞ ∈ P(E). Grˆace `a la tension, on a que pour tout ε > 0, il existe Kε ⊂ E compact tel que infn μn(Kε) ≥ 1 − ε. Comme Kε est ferm ́e, la proprie ́te ́ (iv) du Th ́eor`eme Portmanteau nous donne que
+μ ̃∞(Kε) ≥ lim sup
+n
+μ ̃n(Kε) ≥ 1 − ε.
+Ainsi l’ensemble K := ⋃
+n∈N∗ K1/n est un bor ́elien de E (pas n ́ecessairement compact) et v ́erifie
+μ ̃∞(K) = lim
+N→∞ μ ̃∞
+(N ⋃
+n=1
+K1/n
+)
+= 1.
+Donc μ ̃∞ peut ˆetre consid ́er ́ee comme une mesure sur E puisque pour tout A ∈ B(E ̃), on a
+μ ̃∞(A) = μ ̃∞(A ∩ K) = μ ̃∞(A ∩ E)
+et A ∩ E ∈ B(E). On notera μ∞ ∈ P(E). Enfin, on a μn
+(→e) μ∞. En effet, soit f une fonction uniform ́ement continue et born ́ee sur (E, d ̃). Cette fonction se prolonge de mani`ere unique (voir Lemme A.3) en une fonction uniform ́ement continue sur (E ̃, d ̃). On note f ̃ ce prolongement. Alors, puisque le support de μ ̃n et μ ̃∞ est dans E,
+μφ(n)(f ) = μ ̃φ(n)(f ̃) → μ ̃∞(f ̃) = μ(f ),
+ce qui fournit la convergence recherche ́e, et la relative compacit ́e de M.
+Remarque 2.31. Nous n’avons pas utilise ́ la comple ́tude dans le sens r ́eciproque. Ce sens reste d’ailleurs vrai dans un cadre beaucoup plus g ́en ́eral (voir [3]), contrairement au sens direct.
+En cons ́equence du th ́eor`eme de Prokhorov, on obtient la compl ́etude de (P(E), dLP ), ce qui est toujours une information particuli`erement utile.
+Th ́eor`eme 2.32. Soit (E, τ ) un espace polonais. Alors P(E) muni de la topologie de la convergence e ́troite est polonais.
+D ́emonstration. Grˆace aux r ́esultats des Propositions 2.24 et 2.25, il ne reste plus qu’`a d ́emontrer que la distance dLP rend P(E) complet. Soit (μn)n∈N une suite de Cauchy pour la distance dLP . La preuve repose sur le principe suivant : il suffit d’avoir la convergence d’une sous-suite pour que (μn)n∈N converge, et par le th ́eor`eme de Prokhorov, il suffit de montrer que (μn)n∈N est tendue pour avoir la convergence d’une sous-suite. Montrons donc la tension de (μn)n∈N. Soit ε > 0. Par la proprie ́te ́ de Cauchy, on a que pour tout n ∈ N, il existe φ(n) ∈ N tel que pour tout p ≥ φ(n),
+dLP (μp, μφ(n)) ≤ εn+1, (2.5)
+25
+
+
+ou` on note, pour tout n ∈ N, εn := ε
+2n . Remarquons que quelque soit n, l’ensemble {μ1, . . . , μφ(n)} est (relativement) compact, donc tendu d’apr`es Prokhorov. Ainsi, il existe Kn ⊂ E un compact tel que max1≤k≤φ(n) μk(E \ Kn) ≤ εn+1. Par (2.5) et ce qui pr ́ec`ede, il s’ensuit que pour tout p ≥ φ(n),
+μp (Knεn ) ≥ μφ(n)(Kn) − εn+1 ≥ 1 − εn
+et pour tout p ∈ {1, . . . , φ(n)}, la mˆeme propri ́et ́e est v ́erifi ́ee par construction.
+On pose alors K = ⋂
+n∈N K εn+1
+n . On remarque que Kn est pr ́ecompact, donc il existe N et des points x1, . . . xN de E tels que Kn ⊂ ∪N
+k=1B(xk, εn+1). Par cons ́equent, Kεn+1
+n⊂ ∪N
+k=1B(xk, εn) et donc K est pr ́ecompact. Ainsi K est ferm ́e et pre ́compact dans un complet, donc compact. On a alors que
+μp(E \ K) ≤
+∑
+n∈N
+μp (E \ Kεn+1
+n ) ≤ ε.
+Donc (μn)n∈N est bien tendue.
+Th ́eor`eme 2.33 (Repr ́esentation de Skorokhod). Soit (Xn)n∈N et X des variables al ́eatoires
+`a valeurs dans un espace polonais (E, τ ), telles que Xn
+(e→) X.
+Alors il existe un espace de probabilite ́ (Ω, F , P) et des variables ale ́atoires (X ̃n)n∈N et X ̃ d ́efinies de cet espace vers (E, τ ) telles que
+X ̃n
+(=d) Xn, ∀n ∈ N ;
+X ̃n → X ̃ p.s. .
+Nous ne d ́emontrerons pas ce the ́ore`me, la preuve  ́etant assez longue et technique (mais n ́eanmoins faisable). Cependant, ce r ́esultat est souvent tre`s utile, ce qui justifiait de l’e ́noncer. En voici un exemple d’application.
+Exercice 2.34. Montrer qu’une suite de variables ale ́atoires `a valeurs re ́elles (Xn)n∈N qui converge en loi et qui est uniform ́ement inte ́grable v ́erifie EXn → EX.
+[On rappelle la d ́efinition de l’uniforme inte ́grabilite ́ : lim
+A→+∞ sup
+n∈N
+E[|Xn| 1|Xn|≥A] = 0.]
+26
+
+
+Chapitre 3
+Convergence des processus
+continus (et un peu ca`dl`ag)
+Dans ce chapitre, nous allons nous int ́eresser `a des processus stochastiques, c’est-`a-dire des variables al ́eatoires `a valeurs dans un espace de fonction. On traitera essentiellement de processus continus, avec dans un premier temps des processus d’un espace m ́etrique compact (K, dK) vers un espace polonais E. Cet ensemble C(K, E) sera not ́e de fa ̧con plus concise C, et sera muni de la distance uniforme. Dans un second temps, on traitera plus g ́en ́eralement de fonctions C(R+, E) d ́efinies sur tout R+. Enfin, on  ́evoquera le cas de processus discontinus, mais ayant en tout point une limite `a gauche et  ́etant continus `a droite (Section 3.4).
+3.1 Convergence e ́troite dans l’espace des fonctions conti
+nues sur un compact
+3.1.1 L’espace C
+On munit C de la topologie de la convergence uniforme : pour une distance d m ́etrisant la topologie de E et le rendant complet,
+d∞(f, g) = sup
+t∈K
+d(f (t), g(t)), ∀f, g ∈ C.
+Il est clair que la d ́efinition de d∞ d ́epend du choix de d, mais on peut ve ́rifier que la topologie sur C n’en d ́epend pas. Introduisons les notions de module de continuit ́e d’une fonction et d’e ́quicontinuite ́ d’une famille de fonctions, qui nous seront utiles dans la preuve du th ́eor`eme suivant et dans la suite de ce chapitre.
+D ́efinition 3.1. Soit (X, dX ) et (Y, dY ) des espaces me ́triques. On de ́finit :
+le module de continuit ́e de f ∈ C(X, Y ) par
+ω(f, η) = sup {dY (f (x), f (y)) : x, y ∈ X, dX (x, y) ≤ η} , ∀η > 0;
+l’ ́equicontinuit ́e d’une famille A ⊂ C(X, Y ) par la proprie ́te ́
+∀ε > 0, ∃η > 0 tel que sup
+f ∈A
+ω(f, η) ≤ ε.
+27
+
+
+Th ́eor`eme 3.2. Soit E un espace polonais. Alors l’espace C = C(K, E) est polonais.
+D ́emonstration. La comple ́tude est un r ́esultat classique qui d ́ecoule de la compl ́etude de (E, d). Montrons la s ́eparabilit ́e. Pour tous m, n ∈ N∗, posons
+Cm,n =
+{
+f ∈ C : ω(f, 1
+m) < 1
+n
+}
+.
+Par compacit ́e de K, il existe pour tout m ∈ N∗ un ensemble fini de points Km = {x1, . . . xNm} tels que
+K⊂
+Nm
+⋃
+j=1
+B(xj, 1
+m ).
+De plus, il existe un ensemble d ́enombrable Dn,m ⊂ Cn,m tel que pour tout f ∈ Cn,m, pour tout ε > 0, il existe g ∈ Dn,m tel que pour tout x ∈ Km, d(f (x), g(x)) < ε. En effet, la s ́eparabilit ́e de E assure que pour tout p ∈ N∗, on peut recouvrir E par un nombre d ́enombrable de boules de rayon 1
+p , not ́ees (Bp
+l )l∈N. Pour tout Nm-uplet (l1, . . . , lNm) d’entiers strictement positifs, on conside`re le sous-ensemble de Cn,m suivant :
+Cn,m,p,l1,...,lNm :=
+{
+f ∈ Cn,m : f (xj) ∈ Bp
+lj , ∀j = 1, . . . , Nm
+}
+.
+Si Cn,m,p,l1,...,lNm 6= ∅, on choisit un unique  ́el ́ement de cet ensemble qu’on note cn,m,p,l1,...,lNm et on d ́efinit
+Dn,m =
+⋃
+p∈N∗
+⋃
+(l1,...,lNm )∈(N∗)Nm
+{cn,m,p,l1,...,lNm }.
+Alors nous allons montrer que l’ensemble d ́enombrable suivant
+D :=
+⋃
+n,m∈N∗
+Dn,m
+est dense dans C. Pour cela, soit ε > 0 et f ∈ C. Soit un entier n > 3
+ε . Puisque f est
+uniform ́ement continue (par le th ́eor`eme de Heine), il existe m ∈ N∗ tel que f ∈ Cn,m. Soit g ∈ Dn,m tel que d(f (x), g(x)) < 1
+n pour tout x ∈ Km. Pour x quelconque dans K,
+soit y ∈ Km tel que dK (x, y) < 1
+m . Alors
+d(f (x), g(x)) ≤ d(f (x), f (y)) + d(f (y), g(y)) + d(g(y), g(x))
+<3
+n < ε.
+Rappelons, sans le d ́emontrer 1, un re ́sultat classique d’analyse fonctionnelle caract ́erisant les sous-ensembles relativement compacts de C.
+Th ́eor`eme 3.3 (Arzel`a-Ascoli). Soit K compact et E m ́etrique. On se donne une famille de fonctions A ⊂ C(K, E). Pour K0 un sous-ensemble de ́nombrable dense de K, on a l’ ́equivalence suivante :
+A est relativement compacte ;
+1. cf. cours de Distributions et Op ́erateurs en 2A, ou [14, The ́ore`me 2.1].
+28
+
+
+A est  ́equicontinue et pour tout x ∈ K0, {f (x), f ∈ A} est relativement compact dans E.
+Lorsque les boules ferme ́es de E sont compactes, on peut simplifier le deuxi`eme point de l’assertion pr ́ec ́edente.
+Corollaire 3.4. Soit K compact connexe et E m ́etrique dont les boules ferm ́ees sont compactes. On conside`re une famille A ⊂ C(K, E). On a l’e ́quivalence suivante :
+A est relativement compacte ;
+A est  ́equicontinue et il existe un x0 ∈ K tel que {f (x0), f ∈ A} est relativement compact dans E.
+D ́emonstration. Supposons que A est  ́equicontinue et qu’il existe un x0 ∈ K tel que {f (x0), f ∈ A} est relativement compact dans E. Montrons que pour tout x ∈ K, {f (x), f ∈ A} est relativement compact dans E. Par  ́equicontinuit ́e, il existe η > 0 tel que ω(f, η) ≤ 1 pour tout f ∈ A. Par compacit ́e
+de K, il existe un nombre fini Nη de points x1, . . . , xNη tels que K ⊂ ⋃Nη
+j=1 B(xj, η/2). Ainsi, pour tout x ∈ K, il existe N ≤ Nη points {y1, . . . , yN } ⊂ {x1, . . . , xNη } tels que d(x0, y1) < η, d(yj, yj+1) < η pour 1 ≤ j ≤ N − 1 et d(yN , x) < η. On a donc, pour tout f ∈ A,
+d(f (x0), f (x)) ≤ d(f (x0), f (y1)) +
+N −1
+∑
+j=1
+d(f (yj), f (yj+1)) + d(f (yN ), f (x))
+≤ N + 1 ≤ Nη + 1.
+Puisque {f (x0), f ∈ A} est borne ́, on en de ́duit que {f (x), f ∈ A} est borne ́ aussi, et donc relativement compact.
+3.1.2 Cylindres et lois finies-dimensionnelles
+Etant donn ́e un espace de probabilit ́e (Ω, F, P) et T un ensemble quelconque, on appelle processus stochastique une famille de variables ale ́atoires (Xt)t∈T d ́efinies sur cet espace et `a valeurs dans E. On va voir que de manie`re  ́equivalente, un processus stochastique est une application mesurable de (Ω, F) vers l’ensemble de fonctions ET , muni d’une tribu ad ́equate.
+D ́efinition 3.5. Soit T un ensemble quelconque et E un espace polonais. On appelle tribu produit et on note E⊗T la plus petite tribu sur ET qui rend mesurables les applications coordonn ́ees :
+π(E)
+t : ET → E
+f 7→ f (t) , t ∈ T .
+En conse ́quence, les cylindres, c’est-`a-dire les ensembles de la forme
+{f ∈ ET : f (t1) ∈ A1, . . . , f (tn) ∈ An
+} = (π(E)
+t1 )−1(A1) ∩ · · · ∩ (π(E)
+tn )−1(An),
+sont mesurables pour tous t1, . . . tn ∈ T , A1, . . . An ∈ B(E), et n ∈ N∗. On peut aussi exprimer simplement la mesurabilit ́e d’une application de (Ω, F) → (ET , E⊗T ) : ainsi, on dira que X est une v.a. `a valeurs dans ET si c’est une application mesurable, ce qui est  ́equivalent vue la d ́efinition pr ́ec ́edente `a supposer que pour tout t ∈ T , X(t) est une variable al ́eatoire de (Ω, F) vers (E, B(E)).
+29
+
+
+D ́efinition 3.6. Soit μ ∈ P(ET ). Pour tout n ∈ N∗ et tout (t1, . . . , tn) ∈ T n, on note μt1,...,tn la mesure image de μ par la projection sur les coordonn ́ees
+π(E)
+t1,...,tn : ET → En
+f 7→ (f (t1), . . . , f (tn)) .
+Il s’agit donc d’une mesure sur En, appele ́e marginale de μ. L’ensemble des marginales
+{μt1,...,tn : (t1, . . . , tn) ∈ T n, n ∈ N∗}
+est appel ́ee ensemble des marginales finies-dimensionnelles de μ.
+Dans le vocabulaire des probabilit ́es, si X est une v.a. `a valeurs dans ET de loi μ, μt1,...,tn est la loi de (X(t1), . . . , X(tn)) et on appelle loi finie-dimensionnelle une telle marginale.
+Proposition 3.7. Toute mesure μ ∈ P(ET ) est caract ́eris ́ee par ses marginales finiesdimensionnelles.
+D ́emonstration. Supposons que μ et ν ont les mˆemes marginales finies-dimensionnelles. Alors elles sont  ́egales sur tous les cylindres. Or ces ensembles forment un π-syst`eme (ensemble stable par intersections finies) et engendrent la tribu produit. Comme μ et ν sont des mesures finies, un corollaire du lemme de classe monotone [11, Corollaire 1.4.2] indique que μ = ν.
+On pourrait continuer ainsi `a travailler sur (ET , E⊗T ), construire des processus grˆace au Th ́eor`eme d’extension de Kolmogorov 2 (qui nous donnerait l’existence de processus de Markov ou du mouvement brownien dans RR+), mais remarquons que ET n’est pas polonais en g ́en ́eral. Ce cadre n’est donc pas adapt ́e `a l’e ́tude de la convergence  ́etroite, ce qui justifie de consid ́erer un espace plus petit que ET . On pourrait aussi l ́egitimement se demander si les trajectoires t 7→ Xt(ω) sont continues pour presque tout ω ∈ Ω.
+Remarque 3.8. L’ensemble C(K, E) n’appartient pas en ge ́ne ́ral a` la tribu produit E⊗K. Ce re ́sultat est laiss ́e en exercice (on pourra consid ́erer le processus d ́efini sur [0, 1] par X(t) = 1U=t, U ∼ Unif ([0, 1]), calculer ses lois finies-dimensionnelles et chercher une contradiction).
+Rappelons que C est muni de la topologie de la convergence uniforme (possible ici car K est suppos ́e compact), et notons C la tribu bor ́elienne associe ́e. Un processus stochastique continu est une variable ale ́atoire d’un espace de probabilite ́ (Ω, F, P) vers (C, C ).
+D ́efinition 3.9. On note ΠC la tribu des cylindres sur C, c’est-a`-dire la trace de la tribu E⊗K sur C : ΠC = σ ({A ∩ C : A ∈ E⊗K }). On a encore que ΠC est la plus petite tribu qui rend mesurables les applications coordonn ́ees :
+πt : C → E
+f 7→ f (t) , t ∈ K.
+Proposition 3.10. Les deux tribus que nous avons de ́finies sur C coı ̈ncident : ΠC = C .
+2. cf. cours de Probabilite ́s Avanc ́ees en 2A ou [9, Theorem 5.16].
+30
+
+
+D ́emonstration. Commen ̧cons par montrer que ΠC ⊂ C . L’application πt d ́efinie pr ́ec ́edemment de (C, d∞) vers (E, d) est continue, donc mesurable pour la tribu bor ́elienne. Donc ΠC ⊂ C . Montrons maintenant l’inclusion re ́ciproque. Il suffit de prouver que toute boule ferme ́e de C est dans ΠC . En effet, la tribu engendr ́ee par les boules ferm ́ees est  ́egale `a la tribu bor ́elienne. Soit donc f ∈ C et r > 0. L’ensemble K est compact, il est donc en particulier s ́eparable. Soit (xn)n∈N une suite dense de K, alors
+Bd∞(f, r) = {g ∈ C : d(f (x), g(x)) ≤ r, ∀x ∈ (xn)n∈N}
+=
+⋂
+x∈(xn )n∈N
+π−1
+x
+(Bd(f (x), r)) .
+Il s’agit d’une intersection de ́nombrable, donc Bd∞(f, r) ∈ ΠC .
+3.1.3 Convergence e ́troite dans P(C)
+On cherche dans cette partie et la suivante a` mettre en  ́evidence des crit`eres de convergence  ́etroite dans P(C), plus simples que la d ́efinition de base qui consiste a` tester la convergence de μn(f ) pour tout f ∈ Cb(C).
+D ́efinition 3.11. On dit qu’une suite (μn)n∈N ⊂ P(C) converge au sens des lois finiesdimensionnelles vers μ ∈ P(C) si pour tout j ∈ N∗ et tous (t1, . . . , tj) ∈ Kj, on a
+(μn)t1,...,tj
+(e→) μt1,...,tj .
+On note μn
+(f d)
+→ μ cette convergence. De manie`re  ́equivalente pour une suite de processus continus (Xn)n∈N, on a la convergence des lois finies-dimensionnelles si pour tout j ∈ N∗ et tous (t1, . . . , tj) ∈ Kj,
+(Xn(t1), . . . , Xn(tj)) (→d) (X(t1), . . . , X(tj)).
+Remarque 3.12. La convergence e ́troite implique la convergence f d, puisque les projections πt1,...,tj sont continues. En revanche, la r ́eciproque est fausse, comme l’illustre l’exemple classique suivant : Consid ́erons K = [0, 1], U une variable al ́eatoire uniforme et pour tout n ∈ N, Xn(t) = max (0, 1 − n|U − t|), t ∈ [0, 1], une suite de processus continus.
+Exercice : Ve ́rifiez que Xn
+(f d)
+→ 0 (le processus constant e ́gal a` 0), mais que Xn ne converge pas en loi vers le processus nul.
+La convergence au sens des finies-dimensionnelles est donc plus faible, mais le r ́esultat suivant permet de mieux comprendre en quoi cette convergence va nous ˆetre utile.
+Proposition 3.13. Soit (μn)n∈N ⊂ P(C) et μ ∈ P(C). Alors les deux propri ́ete ́s suivantes sont  ́equivalentes :
+μn
+(e→) μ ;
+μn
+(f d)
+→ μ et (μn)n∈N est tendue.
+31
+
+
+D ́emonstration. Si (μn)n∈N converge  ́etroitement, alors {μn}n∈N ∪ {μ} est compact, donc tendu d’apr`es le Th ́eor`eme de Prokhorov. Par ailleurs, nous avons vu dans la remarque pr ́ec ́edente que la convergence  ́etroite implique la convergence des finies-dimensionnelles. Etudions maintenant le sens re ́ciproque. Puisque (μn)n∈N est tendue, elle est relativement compacte d’apr`es le Th ́eor`eme de Prokhorov (on rappelle que C est bien un espace polonais d’apr`es le Th ́eor`eme 3.2). Conside ́rons donc (μφ(n))n∈N une sous-suite qui
+converge  ́etroitement et ν ∈ P(C) sa limite. Par hypoth`ese, μφ(n)
+(f d)
+→ μ, donc μ et ν ont les mˆemes marginales. Donc la Proposition 3.7 implique que μ = ν. Ainsi nous avons montr ́e que toute sous-suite de (μn)n∈N qui converge, converge vers μ. Donc (μn)n∈N converge vers μ (cf. Exercice 2.19).
+Ce r ́esultat simple nous sera extrˆemement utile lorsqu’on voudra par exemple d ́emontrer le th ́eor`eme de Donsker. Nous allons d ́esormais chercher des crite`res rendant (μn)n∈N tendue. Pour cela, utilisons les compacts de C identifi ́es dans la Section 3.1.1.
+3.1.4 Tension dans P(C)
+Proposition 3.14. Un sous-ensemble M ⊂ P(C) est tendu si et seulement si
+(i) pour tout t ∈ K, l’ensemble {μt : μ ∈ M} est tendu ;
+(ii) pour tous ε > 0, η > 0, il existe δ > 0 tel que
+sup
+μ∈M
+μ ({f ∈ C : ω(f, δ) ≥ η}) ≤ ε.
+Lorsque les boules ferme ́es de E sont compactes, il suffit de trouver un t ∈ K tel que {μt : μ ∈ M} soit tendu.
+D ́emonstration. Supposons que (i) et (ii) sont v ́erifi ́es et montrons la tension (la r ́eciproque est laiss ́ee en exercice). Soit ε > 0 et (tn)n∈N une suite d ́enombrable dense de K. Pour tout n ∈ N, on peut grˆace `a (i) trouver un compact KnE ⊂ E tel que
+sup
+μ∈M
+μtn
+(E \ KE
+n
+)≤ ε
+2n+2 .
+Et grˆace `a (ii), pour tout m ∈ N, il existe δm > 0 tel que
+sup
+μ∈M
+μ
+({
+f : ω(f, δm) > 1
+2m
+})
+≤ε
+2m+2 .
+On d ́efinit alors Kε = {f ∈ C : ∀n ∈ N, f (tn) ∈ KnE et ∀m ∈ N, ω(f, δm) ≤ 1
+2m
+}. D’apr`es le The ́ore`me 3.3 (Arzel`a-Ascoli), Kε est relativement compact. On observe aussi que Kε est une intersection de ferme ́s (comme images re ́ciproques de ferm ́es par des fonctions continues), ainsi Kε est ferme ́, et donc compact. Enfin, on a
+sup
+μ∈M
+μ (C \ Kε) ≤
+∑
+n∈N
+ε
+2n+2 +
+∑
+m∈N
+ε
+2m+2 = ε.
+Donc M est tendu.
+Remarque 3.15. La convergence des marginales finies-dimensionnelles implique le (i) de la proposition pre ́ce ́dente.
+32
+
+
+On peut transposer la proposition pr ́ec ́edente pour des suites de processus stochastiques, en remplac ̧ant notamment le supM par une lim supn→+∞.
+On dira qu’une suite de processus (Xn)n∈N `a valeurs dans C est tendue si ses lois le sont, i.e. si la suite des mesures de probabilit ́e (PXn)n∈N (parfois aussi not ́ee (L(Xn))n∈N) est tendue.
+Corollaire 3.16. Soit (Xn)n∈N une suite de v.a. `a valeurs dans C. Alors cette suite est tendue si et seulement si
+(i) pour tout t ∈ K, la suite (Xn(t))n∈N est tendue ;
+(ii) pour tous ε > 0, η > 0, il existe δ > 0 tel que
+lim sup
+n→+∞
+P (ω(Xn, δ) ≥ η) ≤ ε.
+Lorsque les boules ferme ́es de E sont compactes, il suffit de trouver un t ∈ K tel que (Xn(t))n∈N soit tendue.
+D ́emonstration. Il suffit de montrer que si pour tous ε > 0, η > 0, il existe δ > 0 tel que
+lim sup
+n→+∞
+P (ω(Xn, δ) ≥ η) ≤ ε, alors il existe δ′ > 0 tel que sup
+n∈N
+P
+(ω(Xn, δ′) ≥ η) ≤ ε.
+Soit δ > 0 tel que lim sup
+n→+∞
+P (ω(Xn, δ) ≥ η) ≤ ε/2. Ainsi il existe un rang N tel que
+sup
+n≥N
+P (ω(Xn, δ) ≥ η) ≤ ε. Quitte `a choisir δ plus petit, on a  ́egalement
+sup
+n<N
+P (ω(Xn, δ) ≥ η) ≤ ε.
+D’ou` le r ́esultat.
+Exemple 3.17. Reprenons l’exemple de la remarque 3.12. Le crite`re (ii) n’est pas ve ́rifie ́ pour la suite de processus (Xn), donc elle n’est pas tendue.
+Bien que le corollaire pr ́ec ́edent simplifie consid ́erablement l’ ́etude de la convergence en loi des processus continus, le module de continuit ́e n’est pas toujours facile a` contrˆoler, notamment car il faut contrˆoler la loi de toute la trajectoire d’un processus. Nous allons voir qu’on peut se ramener `a l’e ́tude de deux marginales grˆace au crit`ere de Kolmogorov. On  ́etudie ici des processus index ́es par un compact de R, disons [0, 1] sans perte de g ́en ́eralit ́e. On note C = C([0, 1], E). Nous admettrons le lemme technique suivant, dont la preuve n’est pas d’une grande difficult ́e mais n’est pas non plus d’un inte ́reˆt essentiel dans ce cours (vous trouverez cette preuve dans [14, Lemme 2.2]). En revanche il est int ́eressant de noter que ce lemme me`ne  ́egalement au th ́eor`eme de continuit ́e de Kolmogorov (voir Remarque 3.20).
+Lemme 3.18. Soit une fonction f : [0, 1] → E. On note Dn = { k
+2n , 0 ≤ k ≤ 2n}
+l’ensemble des dyadiques d’ordre n, et D = ⋃
+n∈N Dn l’ensemble des dyadiques. On suppose qu’il existe C, α > 0 tels que pour tout n ∈ N, pour tous dyadiques s, t ∈ Dn cons ́ecutifs, on ait d(f (s), f (t)) ≤ C|s − t|α. Alors pour tous s, t ∈ D,
+d(f (s), f (t)) ≤ 2C
+1 − 2−α |s − t|α.
+33
+
+
+Th ́eor`eme 3.19 (Crit`ere de tension de Kolmogorov). Soit (Xn)n∈N une suite de v.a. `a valeurs dans C. Supposons que
+pour tout t ∈ [0, 1], (Xn(t))n∈N est tendue ;
+il existe p, β > 0 et C > 0 tels que
+sup
+n∈N
+E [d(Xn(s), Xn(t))p] ≤ C|s − t|1+β, ∀s, t ∈ [0, 1].
+Alors (Xn)n∈N est tendue. On a meˆme plus pr ́ecis ́ement que pour tout α ∈ (0, β
+p ) et tout ε > 0, il existe un M > 0 tel que
+sup
+n∈N
+P
+(
+sup
+s,t∈[0,1],s6=t
+d(Xn(s), Xn(t))
+|s − t|α ≥ M
+)
+≤ ε.
+Lorsque les boules ferme ́es de E sont compactes, il suffit de trouver un t ∈ [0, 1] tel que (Xn(t))n∈N soit tendue.
+D ́emonstration. Notons
+[f ]α = sup
+s,t∈[0,1], s6=t
+d(f (s), f (t))
+|s − t|α
+la seminorme H ̈older de parame`tre α, et remarquons que si f ∈ C,
+sup
+s,t∈D, s6=t
+d(f (s), f (t))
+|s − t|α = [f ]α.
+Ainsi, par le Lemme 3.18, on a pour tout n ∈ N et pour tout M > 0,
+P
+(
+[Xn]α > 2M
+1 − 2−α
+)
+≤ P (∃m ∈ N, ∃k ∈ {0, . . . , 2m − 1}, d (Xn(k2−m), Xn((k + 1)2−m)) > M 2−mα) .
+On obtient donc
+P
+(
+[Xn]α > 2M
+1 − 2−α
+)
+≤
+∑
+m∈N
+2m max
+k∈{0,...,2m−1} P (d (Xn(k2−m), Xn((k + 1)2−m)) > M 2−mα)
+≤
+∑
+m∈N
+2m max
+k∈{0,...,2m−1}
+E
+[d (Xn(k2−m), Xn((k + 1)2−m))p]
+M p2−pmα ,
+en appliquant l’in ́egalit ́e de Markov `a la deuxi`eme ligne. Par hypoth`ese, il vient donc
+P
+(
+[Xn]α > 2M
+1 − 2−α
+)
+≤C
+Mp
+∑
+m∈N
+2m−m(1+β)+pmα,
+et on s’assure que cette somme est finie en choisissant α ∈ (0, β
+p ). De la sorte, il existe
+C′ > 0 (qui d ́epend uniquement de α, β, p et C) telle que
+P
+(
+[Xn]α > 2M
+1 − 2−α
+)
+≤ C′
+M p . (3.1)
+Enfin, il suffit de remarquer que pour tout δ > 0, ω(Xn, δ) ≤ [Xn]α δα. On d ́eduit de cette in ́egalit ́e et de (3.1) que pour ε > 0 et η > 0 fixe ́s, on a
+P (ω(Xn, δ) ≥ η) ≤ P ([Xn]α ≥ ηδ−α) ≤ 2p C′ δαp
+(1 − 2−α)pηp
+≤ε
+en choisissant δ suffisamment petit. Donc par la Proposition 3.14, on conclut que (Xn) est tendue.
+34
+
+
+Remarque 3.20. On peut d ́eduire du Lemme 3.18 et d’un calcul similaire `a la preuve pr ́ec ́edente le Th ́eor`eme de continuit ́e de Kolmogorov. Notons
+[f ]∼
+α = sup
+s,t∈D, s6=t
+d(f (s), f (t))
+|s − t|α .
+On va travailler avec un processus X `a valeurs dans E[0,1] (on ne le suppose donc pas continu), qui ve ́rifie
+E [d(X(s), X(t))p] ≤ C|s − t|1+β, ∀s, t ∈ [0, 1]. (3.2)
+En reproduisant la preuve pre ́ce ́dente jusqu’`a (3.1), on obtient que pour α ∈ (0, β
+p ),
+P
+(
+[X ]∼
+α > 2M
+1 − 2−α
+)
+≤ C′
+Mp.
+Ceci implique (v ́erifiez-le !) que pour tout q ∈ (0, p), E [([X]α∼)q] < ∞. Ainsi sur un en
+semble Ω0 ∈ F de probabilite ́ 1, [X]α∼ < ∞, ce qui revient `a dire que ∀ω ∈ Ω0, X(ω) est α-H ̈older continu sur D. On appelle X ̃(ω) le prolongement par continuite ́ de X(ω) `a tout l’intervalle [0, 1]. Nous allons ve ́rifier que pour tout t ∈ [0, 1], P(X ̃t = Xt) = 1. Le the ́ore`me de Kolmogorov stipule donc que si X v ́erifie (3.2), alors X admet une modification H ̈older continue. Montrons donc que pour tout t ∈ [0, 1], P(X ̃t = Xt) = 1. Soit t ∈ [0, 1] et (tn)n∈N ⊂ D telle que tn → t. Alors (3.2) et l’in ́egalit ́e de Markov impliquent que Xtn → Xt en probabilit ́e. D’autre part, la construction meˆme de X ̃ indique que Xtn → X ̃t presque surement. D’ou` le re ́sultat.
+3.2 Convergence e ́troite dans l’espace des fonctions conti
+nues sur R+
+Les processus que nous  ́etudierons par la suite seront souvent indice ́s par R+ plutˆot que par un compact. Ceci pose quelques proble`mes techniques : en premier lieu, la “distance” uniforme n’est pas n ́ecessairement a` valeurs dans R+ (elle peut eˆtre infinie, par exemple si E = R, ce n’est donc plus une distance) ; en outre, l’espace C(R+; E) n’est pas se ́parable, donc a fortiori pas polonais.
+On munit en fait l’espace C(R+; E) d’une distance de Fre ́chet, induite par les distances sur C([0, N ]; E), N > 0 :
+d∞(f, g) =
+∑
+N ∈N∗
+2−N
+(
+1 ∧ sup
+t∈[0,N ]
+d(f (t), g(t))
+)
+, ∀f, g ∈ C(R+; E).
+Cette distance engendre la topologie dite de la convergence uniforme sur les compactes, ou topologie compacte-ouverte. On peut v ́erifier que si E est polonais, C(R+; E) muni de cette distance l’est  ́egalement (exercice). En pratique, on peut montrer que v ́erifier la tension dans C(R+; E) revient `a v ́erifier la tension dans chacun des espaces C([0, N ]; E), N ∈ N∗ :
+Proposition 3.21. Soit (Xn)n∈N une suite de variables al ́eatoires `a valeurs dans C(R+; E). Alors on a l’ ́equivalence suivante :
+35
+
+
+(Xn)n∈N est tendue dans C(R+; E) ;
+pour tout N ∈ N∗, la suite des restrictions ({Xn(t), t ∈ [0, N ]})n∈N est tendue dans C([0, N ]; E).
+3.3 Th ́eore`me de Donsker
+On dispose de ́sormais de tous les outils et notions n ́ecessaires pour d ́emontrer le th ́eor`eme de Donsker, que nous avions pre ́sent ́e dans la partie 1.1.1. Sur un espace de probabilite ́ (Ω, F, P), on se donne une suite de variables al ́eatoires (Xk)k∈N i.i.d. et `a valeurs dans Rd, de moyenne nulle et de matrice de covariance l’identit ́e.
+On d ́efinit la marche al ́eatoire (Sn)n∈N par S0 = 0 et pour tout n ≥ 1, Sn = ∑n
+k=1 Xk.
+On d ́efinit alors le processus continu (W (1)
+t )t∈R+, qui  ́etend la marche al ́eatoire, par
+W (1)
+t = Sbtc + (t − btc)Xbtc+1.
+Le processus chang ́e d’ ́echelle est alors, pour tout n ≥ 1,
+W (n)
+t = √1n W (1)
+nt , t ≥ 0,
+et on a clairement W (n) ∈ C(R+; Rd).
+Th ́eor`eme 3.22. Soit (Xk)k∈N une suite de variables al ́eatoires i.i.d. `a valeurs dans Rd, admettant un moment d’ordre 2. On suppose que les Xk sont de moyenne nulle et de matrice de covariance l’identit ́e. Alors la suite de processus (W (n))n∈N∗ d ́efinie ci-dessus converge en loi dans C(R+; Rd) vers un processus (Wt)t∈R+, appel ́e mouvement brownien standard (de dimension d). Ce processus est caract ́erise ́e par la proprie ́te ́ que pour tous 0 ≤ t1 ≤ · · · ≤ tl, les v.a. Wtk+1 − Wtk , 1 ≤ k ≤ l −1 sont des gaussiennes ind ́ependantes, centr ́ees et de variances respectives (tk+1 − tk) Id.
+D ́emonstration. Nous allons d ́emontrer ce r ́esultat sous des hypoth`eses plus restrictives que celles annonc ́ees : nous supposons que les Xk ont des moments d’ordre 4 finis. La tension dans le cadre ge ́ne ́rale demande un peu plus de travail. Vous pouvez consulter cette preuve dans [2, 13, 14]. Le sch ́ema de preuve repose sur la caract ́erisation de la convergence en loi des processus `a valeurs dans C donn ́ee dans la Proposition 3.13 : nous allons donc montrer la convergence des lois finies-dimensionnelles (ce qui nous donnera au passage les lois finiesdimensionnelles de la loi limite), puis la tension.
+Premi`ere  ́etape : convergence des lois finies-dimensionnelles. Soit l ∈ N∗ et 0 ≤ t1 ≤ · · · ≤ tl. Il est clair que les variables al ́eatoires Sbntk+1c − Sbntkc, 1 ≤ k ≤ l, sont ind ́ependantes, centre ́es et de variances respectives (bntk+1c − bntkc) Id. Ainsi, d’apr`es le Th ́eor`eme central limit multidimensionnel 3, on a
+( √1n (Sbnt2c − Sbnt1c), . . . , √1n (Sbntlc − Sbntl−1c)
+)
+(d)
+n−→→∞ (N1, . . . , Nl) ,
+3. on peut aussi de ́montrer cette convergence “a` la main”, en utilisant l’inde ́pendance et la caracte ́risation de la convergence en loi par le The ́ore`me de L ́evy.
+36
+
+
+ou` N1, . . . , Nl sont des gaussiennes ind ́ependantes, centr ́ees et de variances respectives (tk+1 − tk) Id. On en d ́eduit par transformation continue que
+( √1n Sbnt1c, √1n Sbnt2c, . . . , √1n Sbntlc
+)
+(d)
+n−→→∞ (N1, N2, . . . , N1 + · · · + Nl) .
+Pour passer `a la convergence des finies-dimensionnelles de W (n), observons que
+∣ ∣ ∣ ∣
+W (n)
+t − √1n Sbntc
+∣ ∣ ∣ ∣
+≤ |Xbntc+1|
+√n
+converge p.s. vers 0 (et donc aussi en probabilit ́e). Donc par le Lemme de Slutsky (voir DM), il vient que
+(
+W (n)
+t1 , . . . , W (n)
+tl
+) (d)
+n−→→∞ (N1, N2, . . . , N1 + · · · + Nl) .
+Deuxi`eme  ́etape : tension. On a vu dans la Proposition 3.21 qu’il suffit de montrer la
+tension de la restriction ({W (n)
+t , t ∈ [0, N ]})n∈N pour tout N ∈ N∗. Nous allons consid ́erer uniquement le cas N = 1 afin d’all ́eger les notations, mais vous pouvez v ́erifier que cela n’engendre aucune perte de g ́en ́eralit ́e. Nous allons chercher `a appliquer le crit`ere de tension de Kolmogorov (Th ́eor`eme 3.19). Soient s < t ∈ [0, 1]. On commence par supposer que ns ∈ N et nt ∈ N. On a alors deux
+cas. Premier cas : si n(t − s) > 1, alors en notant X(1)
+k , . . . X(d)
+k les composantes du vecteur al ́eatoire Xk, on obtient
+E
+[
+|W (n)
+s − W (n)
+t |4]
+=1
+n2 E [|Sns − Snt|4] = 1
+n2 E [|Sn(t−s)|4]
+=1
+n2
+∑
+1≤j1,j2≤d
+E
+
+
+∑
+1≤k1,k2≤n(t−s)
+X (j1)
+k1 X (j1)
+k2
+∑
+1≤l1,l2≤n(t−s)
+X (j2)
+l1 X (j2)
+l2
+
+.
+Simplifions cette somme en tenant compte des covariances nulles entre coordonn ́ees d’un mˆeme vecteur et de l’ind ́ependance entre vecteurs diff ́erents (on rappelle que les vecteurs sont d’esp ́erance nulle). On obtient alors
+E
+[
+|W (n)
+s − W (n)
+t |4]
+=1
+n2
+∑
+j16=j2
+∑
+1≤k1,k2≤n(t−s)
+E
+[
+X (j1)
+k1 X (j1)
+k2
+]∑
+1≤l1,l2≤n(t−s)
+E
+[
+X (j2)
+l1 X (j2)
+l2
+]
++1
+n2
+∑
+1≤j≤d
+∑
+1≤k1,k2,k3,k4≤n(t−s)
+E
+[
+X (j )
+k1 X (j)
+k2 X (j)
+k3 X (j)
+k4
+]
+=1
+n2
+∑
+j16=j2
+∑
+1≤k≤n(t−s)
+E
+[
+(X (j1 )
+k )2] ∑
+1≤l≤n(t−s)
+E
+[
+(X (j2 )
+l )2]
++1
+n2
+∑
+1≤j≤d
+
+
+
+∑
+1≤k≤n(t−s)
+E
+[
+(X (j )
+k )4]
++
+∑
+k16=k2
+E
+[
+(X (j )
+k1 )2]
+E
+[
+(X (j )
+k2 )2]
+
+
+
+=1
+n2
+d(d − 1)
+2 (n(t − s))2 + 1
+n2
+(
+M4 + d (n(t − s))(n(t − s) − 1)
+2
+)
+,
+ou` on a note ́ M4 la somme (en j et en k) des moments d’ordre 4. Or cette quantite ́
+est clairement major ́ee par n(t − s) d max1≤j≤d E[(X(j)
+k )4], ou` le max ne de ́pend pas de k
+37
+
+
+(puisqu’on a suppos ́e que les Xk sont i.i.d.). Par cons ́equent, il existe une constante C > 0 qui ne d ́epend que de d et des moments d’ordre 4 de Xk (pas de n), telle que
+E
+[
+|W (n)
+s − W (n)
+t |4]
+≤ d(d − 1) + d
+2 (t − s)2 + dE[(X(j)
+k )4]
+n (t − s)
+≤ C (t − s)2, (3.3)
+en utilisant dans la derni`ere ine ́galite ́ l’hypoth`ese de ce premier cas, `a savoir n(t − s) > 1. On a maintenant un deuxi`eme cas, avec n(t − s) ≤ 1. Comme on suppose toujours que n(t − s) est entier, la seule possibilit ́e est n(t − s) = 1. On a alors
+E
+[
+|W (n)
+s − W (n)
+t |4]
+=E
+[1
+n2 |Xnt|4
+]
+=1
+n E[|Xi|4] = C(t − s)2,
+avec C = E[|Xi|4]. Ainsi dans les deux cas consid ́er ́es, E
+[
+|W (n)
+s − W (n)
+t |4]
+≤ C(t − s)2,
+quelque soit s < t avec ns et nt entiers. Consid ́erons maintenant le cas ou` ns et nt ne sont plus n ́ecessairement entiers. Si
+bnsc = bntc, alors W (n)
+t − W (n)
+s = √n(t − s)Xbntc+1, et donc
+E
+[
+|W (n)
+s − W (n)
+t |4]
+= n2(t − s)4 E[|X1|4] ≤ C (t − s)2,
+en utilisant le fait que t − s ≤ 1/n. Si bnsc < bntc, alors on  ́ecrit
+√n|W (n)
+s − W (n)
+t | ≤ |W (1)
+ns − W (1)
+bnsc+1| + |W (1)
+bnsc+1 − W (1)
+bntc| + |W (1)
+bntc − W (1)
+nt |.
+Par l’ine ́galite ́ de Minkowski et les deux r ́esultats pr ́ec ́edents, on a alors
+E
+[
+|W (n)
+s − W (n)
+t |4] 1
+4 ≤ C1
+4
+(
+|bnsc + 1 − ns| 1
+2 + |bntc − bnsc − 1| 1
+2 + |nt − bntc| 1
+2
+)
+≤ 3C1
+4 |t − s| 1
+2.
+Nous pouvons maintenant conclure grˆace aux deux  ́etapes pr ́ec ́edentes et la Proposition 3.13. La loi limite est caracte ́rise ́e ses lois finies-dimensionnelles (Proposition 3.7), d ́ecrites ici dans l’ ́enonc ́e du th ́eor`eme. On appelle une telle loi la mesure de Wiener.
+Remarque 3.23. On voit que c’est l’application du crit`ere de Kolmogorov qui n ́ecessite des moments d’ordre strictement sup ́erieur `a 2 pour les Xk afin d’obtenir une borne en (t − s)1+β, β > 0, dans l’ine ́galite ́ (3.3).
+Grˆace au the ́ore`me de Donsker, on peut passer d’une information sur la loi du mouvement brownien `a une information sur la loi de la marche al ́eatoire simple, et vice versa. C’est ce qu’illustrent les deux exercices suivants.
+Exercice 3.24. Soit (Xk)k∈N des v.a. re ́elles i.i.d. centre ́es et de variance σ2 > 0. Montrer
+que la suite de v.a. ( max1≤k≤n Sk
+σ√n )n∈N∗ converge en loi vers une variable al ́eatoire de fonction
+de re ́partition donne ́e par F (x) = 2 ∫ x
+0
+e−y2 /2
+√2π dy [on pourra utiliser le principe de r ́eflexion
+pour le brownien, i.e. supt∈[0,1] |Wt| (=d) |W1|]. Notez qu’un tel r ́esultat n’aurait pu ˆetre obtenu par simple application du TCL.
+38
+
+
+Exercice 3.25. Loi de l’arcsinus : le but de l’exercice est de de ́montrer que si (Wt)t∈[0,1] est un mouvement brownien standard et que R = sup{t ∈ [0, 1] : Wt = 0} est le dernier temps de passage en 0 du brownien, alors la loi de R est donn ́ee par P(R ≤ t) = 2
+π arcsin(√t), t ∈ [0, 1].
+Soit (Xk)k∈N une suite de v.a. i.i.d. de loi donne ́e par P(Xk = 1) = P(Xk = −1) = 1
+2.
+On note Sn = ∑n
+k=1 Xk la marche ale ́atoire associ ́ee (S0 = 0). Soit Rn = max{k ∈ {1, . . . , n} : Sk = 0}.
+1) Le but de cette question est de montrer que pour tout n ≥ 1, P (S1 6= 0, . . . , S2n 6= 0) = P(S2n = 0).
+a) Exprimer P (S1 6= 0, . . . , S2n 6= 0) en fonction de P (S1 > 0, . . . , S2n > 0).
+b) Montrer que P (S1 > 0, . . . , S2n > 0) = 1
+2 P (S1 ≥ 0, . . . , S2n−1 ≥ 0).
+c) En d ́eduire que P (S1 6= 0, . . . , S2n 6= 0) = P (S1 ≥ 0, . . . , S2n ≥ 0).
+d) D ́eduire de la question pr ́ec ́edente que P (S1 6= 0, . . . , S2n 6= 0) = P(S2n = 0).
+On cherchera pour cela `a  ́etablir une transformation bijective entre les chemins {Sk}1≤k≤2n tels que S2n = 0, et les chemins qui restent positifs (i.e. Sk ≥ 0 pour tout k ∈ {1, . . . , 2n}). On pourra utiliser le premier temps ou` le minimum de la marche (celle qui ve ́rifie S2n = 0) atteint son minimum.
+2) a) D ́eduire de la question 1) un lien entre P(R2n = 2k) d’une part, et P(S2j = 0) et P(S2(n−k) = 0) d’autre part.
+b) Montrer que limk→+∞
+√πk P(S2k = 0) = 1.
+c) En d ́eduire que pour tout x ∈ (0, 1), lim
+n→+∞ nπ√x(1 − x) P(R2n = 2bxnc) = 1.
+3) On veut maintenant utiliser le the ́ore`me de Donsker pour de ́montrer la loi de l’arcsinus.
+a) On note Φ : f 7→ sup{t ∈ [0, 1] : f (t) = 0}. L’application Φ est-elle continue de C([0, 1]; R) vers R ?
+b) On admettra la propri ́ete ́ suivante du brownien : presque surement, le brownien prend des valeurs positives et n ́egatives dans tout voisinage de ses z ́eros, et W1 6= 0. En d ́eduire que W est p.s. un point de continuite ́ de Φ.
+c) Conclure.
+3.4 Bref aper ̧cu de la tension dans l’espace des fonctions
+c`adla`g
+Reprenons l’exemple de la convergence de la marche al ́eatoire par changement d’ ́echelle dans le the ́ore`me de Donsker. On peut eˆtre tent ́e de ne pas interpoler lin ́eairement ce processus 4 et de consid ́erer plus simplement
+W ̃(1)
+t = Sbtc et W ̃(n)
+t = √1n
+W ̃(1)
+nt , n ∈ N∗, t ≥ 0.
+Cependant la suite de processus (W ̃(n))n∈N n’est pas dans C(R+, Rd) car ses  ́el ́ements sont discontinus. Les crite`res de tension  ́etablis dans les parties 3.1.4 et 3.2 ne sont donc pas
+4. ce qui sera le cas dans le prochain chapitre.
+39
+
+
+applicables. Le bon espace pour travailler est plutˆot D(R+; Rd), l’espace des fonctions dites c`adl`ag, c’est-`a-dire continue `a droite avec une limite `a gauche en tout point (composante par composante). Grˆace au th ́eor`eme de Donsker, on peut montrer la convergence suivante :
+Exercice 3.26. Montrer que sous les hypothe`ses du Th ́eor`eme 3.22, on a pour tout T > 0 et tout ε > 0,
+nli→m∞ P
+(
+sup
+t∈[0,T ]
+|
+W ̃(n)
+t − W (n)
+t |≥ε
+)
+= 0.
+En de ́duire que la suite de processus (W ̃(n))n∈N converge en loi dans l’espace D(R+; Rd), muni de la topologie de la convergence uniforme sur les compacts, vers le mouvement brownien.
+Cependant l’espace D(R+; Rd) n’est pas se ́parable si on le munit de la topologie de la convergence uniforme sur les compacts ; penser par exemple aux fonctions fy = 1[y,1] d ́efinies sur [0, 1] pour tout y ∈ (0, 1), qui v ́erifient ‖fy − fz‖∞ = 1 d`es que y 6= z. On peut munir cet espace d’une topologie qui le rend polonais, et nous pr ́esentons ici succinctement la topologie J1 qui est une des quatre topologies de Skorokhod. Comme pour l’espace des fonctions continues, on se restreint dans un premier temps `a un intervalle de temps compact, disons [0, T ], T > 0.
+D ́efinition 3.27 (Topologie de Skorokhod). On dit qu’une suite de fonctions (fn)n∈N ⊂ D([0, T ]; Rd) converge vers f ∈ D([0, T ]; Rd) pour la topologie de Skorokhod s’il existe une suite de fonctions φn : [0, T ] → [0, T ] strictement croissantes telle que
+‖fn ◦ φn − f ‖∞ n−→→∞ 0 et ‖φn − Id‖∞ n−→→∞ 0.
+La distance associe ́e `a cette notion de convergence est donne ́e ainsi : pour f, g ∈ D([0, 1]; Rd), on d ́efinit
+dS(f, g) = inf
+φ∈Homeo+
+max (‖f − g ◦ φ‖∞, ‖Id − φ‖∞) ,
+ou` Homeo+ est l’ensemble des home ́omorphismes croissant de [0, 1] vers [0, 1]. On peut v ́erifier que la restriction de cette distance a` l’espace des fonctions continues engendre la topologie uniforme.
+Exercice 3.28. Pour n ≥ 3, soient fn = 1[ 1
+2− 1
+n ,1] et gn = 1[ 1
+2+ 1
+n ,1]. Montrer que ces deux
+suites convergent vers la fonction h = 1[ 1
+2 ,1] pour la topologie de Skorokhod.
+A l’aide de cette exemple, de ́duire que D([0, 1]; R), muni de la topologie de Skorokhod, n’est pas un espace vectoriel topologique ( !).
+La distance dS d ́efinie ci-dessus rend D([0, 1]; Rd) s ́eparable mais pas complet. N ́eanmoins on peut trouver une distance (qu’on n’ ́ecrira pas, voir par exemple [2]) qui engendre la mˆeme topologie et qui rend D([0, 1]; Rd) complet. Ainsi D([0, 1]; Rd) est polonais. Il est ensuite possible d’ ́etudier des crit`eres de tension sur D([0, 1]; Rd) comme nous l’avons fait pour les fonctions continues, en remplac ̧ant le module de continuit ́e par un module adapt ́e aux discontinuit ́es des fonctions c`adl`ag. Nous n’entrerons pas dans les d ́etails et renvoyons le lecteur `a [2], nous contentant ici du crit`ere  ́enonc ́e dans le prochain paragraphe.
+40
+
+
+Dans le chapitre suivant, nous approcherons des diffusions par des chaıˆnes de Markov. Comme pour le Th ́eor`eme de Donsker, la question se posera de savoir comment on  ́etend les chaıˆnes de Markov (temps discret) `a des processus en temps continu. On penchera pour
+l’extension en des trajectoires constantes par morceaux, comme pour W ̃ ci-dessus, afin de pr ́eserver la propri ́et ́e de Markov, qui sera essentielle pour identifier la limite. Cependant, les objets limites auront des trajectoires continues, et dans ce contexte, on pourra utiliser le crite`re de tension suivant.
+Th ́eor`eme 3.29. Soit (Xn)n∈N une suite de variables al ́eatoires `a valeurs dans D(R+; E). On a l’e ́quivalence suivante :
+(Xn)n∈N est tendue pour la topologie de Skorokhod et toutes ses valeurs d’adhe ́rence sont des v.a. `a valeurs dans C(R+; E) (ou de mani`ere e ́quivalente, les valeurs d’adh ́erence des lois de (Xn) sont des mesures de probabilite ́s chargeant l’espace C(R+; E)) ;
+pour tout N ∈ N∗, tout ε > 0 et tout η > 0, il existe n0 ∈ N∗ et A > 0 tels que
+si n ≥ n0, alors P
+(
+sup
+t∈[0,N ]
+|Xn(t)| > A
+)
+≤ ε;
+et il existe en plus δ > 0 tel que
+si n ≥ n0, alors P
+(
+ω( Xn|[0,N] , δ) > η
+)
+≤ ε.
+Lorsque les boules ferme ́es de E sont compactes, il suffit d’avoir que P (|Xn(0)| > A) ≤ ε pour que la premi`ere condition soit v ́erifi ́ee.
+D ́emonstration. Voir Proposition 3.26, chapitre VI de [7].
+41
+
+
+Chapitre 4
+Th ́eorie de Stroock-Varadhan de
+l’approximation des diffusions
+Dans cette partie des notes, nous pre ́sentons une introduction a` la the ́orie de StroockVaradhan de l’approximation des diffusions, comple ́tant ainsi l’exemple de l’urne d’Ehrenfest expos ́e dans l’introduction du cours. Ces notes s’inspirent du cours de Berestycki [1] et du livre de Durrett [6]. Pour un traitement plus exhaustif, on pourra se r ́ef ́erer au chapitre 11 du livre de Stroock et Varadhan [18].
+Partant d’une suite de chaıˆnes de Markov {(Y (n)
+k )k∈N, n ∈ N}, on consid`ere pour tout n ∈ N l’extension en temps continu dilat ́ee d’un facteur n en temps :
+X (n)
+t = Y (n)
+bntc, t ≥ 0. (4.1)
+On s’int ́eresse `a la convergence de la suite de processus c`adl`ag (X(n))n∈N vers une diffusion. On pr ́ef`erera travailler avec les extensions c`adl`ag plutˆot que continues car les premi`eres pr ́eservent la propri ́et ́e de Markov, qui sera essentielle pour identifier la limite. A titre d’exemple d’une telle suite de chaıˆnes de Markov, on a avec les notations de la section
+pr ́ec ́edente que la marche al ́eatoire simple renormalis ́ee √1n Sk correspond `a Y (n)
+k et le
+processus W ̃(n) correspond ici `a X(n). Rappelons l’approche g ́en ́erale pre ́sent ́ee dans ce cours pour obtenir des passages `a la limite d’une suite :
+(i) Montrer une forme de compacit ́e de la suite, en l’occurrence la tension de la suite de chaıˆnes de Markov renormalis ́ees.
+(ii) Identifier la limite : montrer que toute sous-suite admet une sous-suite qui converge, et que la limite est toujours la meˆme.
+4.1 Rappels sur les processus de Markov et les martingales
+Dans cette partie et la suivante, on travaillera sur des espaces de probabilit ́e filtr ́es, c’est-`a-dire (Ω, F , (Ft)t∈R+, P) satisfaisant les conditions usuelles : la tribu F est P-compl`ete (si A est un sous-ensemble de B ∈ F et P(B) = 0, alors A ∈ F) et la filtration est continue `a droite :
+Ft =
+⋂
+s>t
+Fs, ∀t ∈ R+.
+42
+
+
+D ́efinition 4.1. Soit (Ω, F , (Ft)t∈R+, P) un espace de probabilite ́ filtre ́. On appelle martingale locale tout processus stochastique M : Ω × R+ → Rd qui est (Ft)-adapt ́e et pour lequel il existe une suite de temps d’arrˆet (Tn)n∈N tels que
+pour tout n ∈ N, Tn ≤ Tn+1 p.s. et limn→+∞ Tn = +∞ p.s. ;
+pour tout n ∈ N, le processus arrˆet ́e M Tn := (Mt∧Tn)t∈R+ est une vraie martingale.
+On notera Mc,loc l’espace des martingales locales continues.
+On rappelle la d ́efinition et l’existence du crochet de martingales, donn ́e par la proposition suivante.
+Proposition 4.2. Soient (Ω, F , (Ft)t∈R+, P) un espace de probabilite ́ filtre ́ et M, N ∈ Mc,loc des (Ft)-martingales locales. Alors il existe un unique 1 processus not ́e [M, N ] qui est (Ft)-adapt ́e, continu, et tel que M N − [M, N ] soit une martingale locale partant de 0. En outre, si on d ́efinit pour tout n ∈ N et pour tout t ≥ 0 le processus
+[M, N ](n)
+t=
+b2ntc−1
+∑
+k=0
+(M(k+1)2−n − Mk2−n
+) (N(k+1)2−n − Nk2−n
+),
+alors [M, N ](n) converge uniforme ́ment sur les compacts en probabilite ́ vers [M, N ].
+Enfin, la notion de chaıˆne de Markov sera centrale dans ce chapitre.
+D ́efinition 4.3. Soient (E, E) un espace mesurable, (Ω, F, P) un espace de probabilite ́ et (Fn)n∈N une filtration discr`ete. On appelle chaıˆne de Markov tout processus X : Ω × N → (E, E) qui est (Fn)-adapt ́e et ve ́rifie
+P (Xn+1 ∈ A | Fn) = P (Xn+1 ∈ A | Xn) , ∀n ∈ N, ∀A ∈ E.
+On rappelle qu’une chaıˆne de Markov est homog`ene 2 si pour tout n ∈ N, la loi de Xn+1 conditionnellement `a Xn ne de ́pend pas de n. La loi d’une chaıˆne de Markov peut eˆtre de ́crite par la donne ́e d’une loi initial μ ∈ P(E) et d’un noyau de transition. On rappelle qu’un noyau de transition est une application Q : E × E → [0, 1] telle que
+pour tout A ∈ E, x 7→ Q(x, A) est mesurable ;
+pour tout x ∈ E, A 7→ Q(x, A) est une mesure de probabilit ́e.
+Ainsi,  ́etant donne ́s μ et Q, on peut construire une chaıˆne de Markov telle que P(X1 ∈ A) = μQ(A) = ∫
+E Q(x, A) μ(dx).
+A l’inverse, pour une chaıˆne de Markov donn ́ee, P(X1 ∈ A | X0) =: Q(X0, A) fournit un noyau de transition.
+D ́efinition 4.4. On appelle mouvement brownien standard un processus stochastique continu `a valeurs dans Rd qui ve ́rifie : (i) W0 = 0 p.s. ; (ii) pour tous 0 ≤ t1 ≤ · · · ≤ tl, les v.a. Wtk+1 − Wtk , 1 ≤ k ≤ l − 1 sont des gaussiennes inde ́pendantes, centr ́ees et de variances respectives (tk+1 − tk) Id. Soit (Ω, F , (Ft)t∈R+, P) un espace de probabilite ́ filtr ́e. On appelle Ft-mouvement brownien tout mouvement brownien adapte ́ `a (Ft) tel que pour tout t ∈ R+, (Wt+s − Wt)s∈R+ est ind ́ependant de Ft.
+Le the ́ore`me de Donsker assure l’existence du mouvement brownien.
+1. a` indistinguabilite ́ pre`s. 2. sauf mention contraire, toutes les chaˆınes de Markov seront suppose ́es homoge`nes, on ne pr ́ecisera donc plus qu’elles le sont.
+43
+
+
+4.2 Compl ́ements sur les e ́quations diffe ́rentielles stochas
+tiques et les ge ́ne ́rateurs
+Dans tout ce chapitre, nous noterons Rd×d l’espace des matrices carr ́ees de taille d. On consid ́erera σ : Rd → Rd×d et b : Rd → Rd des applications mesurables. Par la suite, nous allons travailler avec des  ́equations diff ́erentielles stochastiques (EDS) de la forme suivante : pour W un mouvement brownien standard de Rd,
+Xt = X0 +
+∫t
+0
+b(Xs) ds +
+∫t
+0
+σ(Xs) dWs, t ≥ 0, (4.2)
+ce qui peut se lire composante par composante de la fa ̧con suivante :
+Xi
+t = Xi
+0+
+∫t
+0
+bi(Xs) ds +
+d
+∑
+j=1
+∫t
+0
+σij(Xs) dW j
+s , t ≥ 0, i ∈ {1, . . . , d}.
+D ́efinition 4.5 (Solution d’une EDS). Une solution de l’EDS pr ́ece ́dente consiste en la donne ́e des e ́le ́ments suivants :
+(i) un espace de probabilite ́ filtre ́ (Ω, F , (Ft)t∈R+, P) satisfaisant les conditions usuelles ;
+(ii) un (Ft)t≥0-mouvement brownien (Wt)t≥0 `a valeurs dans Rd ;
+(iii) un processus continu (Xt)t≥0, (Ft)t≥0-adapt ́e, v ́erifiant l’e ́quation (4.2).
+Pour X0 = x ∈ Rd fix ́e, on parle d’EDS partant de x et on note (Ex) le proble`me correspondant.
+Pour (4.2), on a les notions suivantes d’existence et d’unicit ́e.
+D ́efinition 4.6. Pour l’ ́equation (4.2), on dit qu’il y a :
+existence faible si pour tout x ∈ Rd, il existe une solution au proble`me (Ex) ;
+unicit ́e en loi si pour tout x ∈ Rd, toutes les solutions de (Ex) ont la meˆme loi ;
+unicit ́e trajectorielle si sur un meˆme espace de probabilit ́e filtr ́e (Ω, F , (Ft)t∈R+, P) et pour un mˆeme (Ft)t≥0-mouvement brownien W sur cet espace, deux solutions X et X′ telles que X0 = X′0 p.s. sont indistinguables.
+Une solution X de (Ex) est dite solution forte si X est adapte ́ `a la filtration naturelle de W .
+Plusieurs re ́sultats importants relient ces d ́efinitions. Sans entrer dans les d ́etails, si toute solution est forte, alors il y a unicit ́e trajectorielle pour l’EDS. Par ailleurs, s’il existe des solutions et qu’il y a unicit ́e trajectorielle, alors il y a aussi unicit ́e en loi. Dans ce cas, l’unique solution est une solution forte, c’est le th ́eor`eme de Yamada-Watanabe. On pourra se r ́ef ́erer au Chapitre IX de [15] pour plus de d ́etails. On rappelle que si les coefficients b et σ sont Lipschitz continus, alors il existe une solution forte `a l’EDS qui est trajectoriellement unique.
+Dans la preuve du th ́eor`eme 4.13 (partie unicit ́e), nous aurons besoin de la notion de g ́en ́erateur infinite ́simal d’un processus de Markov. Nous nous restreignons ici `a la d ́efinition pour une solution X de (4.2). Cette d ́efinition permettra  ́egalement de motiver l’introduction des notions de ge ́ne ́rateur discret et de probl`emes de martingales qui apparaıˆtront dans les deux prochaines sections.
+44
+
+
+D ́efinition 4.7. Soit C0(Rd; R) l’espace des fonctions continues de Rd → R qui tendent vers 0 `a l’infini. Pour tout x ∈ Rd, on note Xx une solution de (Ex) et on pose
+D(L) =
+{
+f ∈ C0(Rd; R) : Ef (Xtx) − f (x)
+t converge uniforme ́ment lorsque t → 0
+}
+.
+Pour tout f ∈ D(L), on de ́finit alors le g ́en ́erateur infinit ́esimal L de X par
+Lf (x) = tli↘m0
+Ef (Xtx) − f (x)
+t.
+Exercice 4.8.
+D ́eterminer le ge ́ne ́rateur L (et le domaine D(L)) pour un mouvement brownien standard.
+On suppose que b et σ sont continus borne ́s et qu’il existe une solution faible `a l’EDS (4.2), unique en loi. De ́terminer le ge ́ne ́rateur L de X pour f ∈ Cc2(Rd; R)
+(les fonctions C2 `a support compact).
+Sous les meˆmes hypoth`eses, montrer que pour tout f ∈ D(L), le processus
+{
+f (Xt) −
+∫t
+0
+Lf (Xs) ds
+}
+t≥0
+est une (Ft)t≥0-martingale locale.
+Revenons de ́sormais aux processus discrets, et consid ́erons plus sp ́ecifiquement la marche al ́eatoire simple renormalis ́ee, `a savoir le processus W ̃(n) rencontr ́e dans le chapitre pr ́ec ́edent. Pour ce processus, on peut d ́efinir le g ́en ́erateur discret L(n) comme suit. Pour f : Rd → R mesurable born ́ee, x ∈ Rd,
+L(n)f (x) =
+E
+[
+f (W ̃(n)
+1 n
+) − f (W ̃(n)
+0 ) | W ̃(n)
+0 =x
+]
+1/n .
+En notant μ la loi des accroissements de Sk (l’accroissement de la marche al ́eatoire simple), un simple calcul permet d’ ́ecrire
+L(n)f (x) = n
+∫
+Rd
+(
+f (x + √yn ) − f (x)
+)
+μ(dy). (4.3)
+Exercice 4.9.
+Montrer que le processus {f (W ̃(n)
+k n
+)− 1
+n
+∑k−1
+j=0 L(n)f (W ̃(n)
+j n
+)}k∈N est une martingale
+pour la filtration Fk = σ(Xj, j ≤ k).
+Calculer L(n)f pour f1 : x 7→ x et f2 : x 7→ x xT .
+En dimension d = 1 et pour une mesure μ d’esp ́erance nulle et de variance 1, observons `a partir de (4.3) que pour f ∈ C02,
+L(n)f (x) = nf ′(x)
+∫
+R
+√yn μ(dy) + n
+2 f ′′(x)
+∫
+R
+y2
+n μ(dy) + on→∞(1)
+=1
+2 f ′′(x) + on→∞(1).
+45
+
+
+On observe que L(n)f converge uniform ́ement vers 1
+2 f ′′ = Lf , avec L qui n’est autre que le g ́en ́erateur infinit ́esimal du mouvement brownien standard. On verra dans la preuve du th ́eor`eme 4.13 que la convergence du g ́en ́erateur infinit ́esimal suffit `a caracte ́riser la loi limite de la diffusion, lorsque la chaıˆne de Markov renormalise ́e qu’on e ́tudie est tendue. Cette approche fournit une preuve alternative a` la preuve du th ́eor`eme de Donsker vue pr ́ec ́edemment, qui ne n ́ecessite pas l’utilisation du TCL.
+4.3 Probl`emes de martingales
+Les probl`emes de martingales permettent entre autres de r ́esoudre des  ́equations diff ́erentielles stochastiques. Ils nous permettront  ́egalement d’identifier les lois limites de chaıˆnes de Markov. Dans toute la suite du chapitre, on notera a = σ σT . Bien qu’on puisse formuler la d ́efinition de probl`eme de martingale plus g ́en ́eralement `a l’aide des ge ́ne ́rateurs, on se restreint ici `a la formulation suivante, en lien avec les EDS dirig ́ees par un mouvement brownien standard.
+D ́efinition 4.10 (Probl`eme de martingale). Un processus continu X `a valeurs dans Rd et un espace de probabilite ́ filtr ́e (Ω, F , (Ft)t∈R+, P) forment une solution du probl`eme de martingale M(a, b) si les processus
+Y=
+(
+Xt −
+∫t
+0
+b(Xs) ds
+)
+t∈R+
+et (
+Yt Y T
+t−
+∫t
+0
+a(Xs) ds
+)
+t∈R+
+sont des Ft-martingales locales. Puisqu’on s’int ́eresse uniquement au processus X, on supposera que Ft = σ(Xs, s ≤ t).
+Exercice 4.11. Montrer que si b et σ sont des coefficients Lipschitz, alors il existe une EDS dont la solution produit une solution au probl`eme de martingale M(σσT , b).
+La proposition suivante montre que la re ́ciproque est e ́galement vraie. Toute solution d’un probl`eme de martingale donne une solution (faible) d’EDS.
+Proposition 4.12. Soient b et σ des fonctions mesurables. On suppose qu’il existe (Ω, F , (Ft)t∈R+, P) et X solution du proble`me M(a, b) avec a = σσT . Alors il existe un Ft-mouvement brownien (Wt)t∈R+, possiblement de ́fini sur un espace de probabilite ́ e ́largi, tel que X soit solution de l’EDS (4.2).
+D ́emonstration. On ne fait la preuve que dans le cas o`u pour tout x ∈ Rd, la matrice σ(x) est inversible, et x 7→ σ(x)−1 est localement born ́ee. Dans ce cas, il n’est pas n ́ecessaire d’ ́elargir l’espace de probabilit ́e et la filtration. Pour le cas g ́en ́eral, voir [15, Theorem 2.7, p.299]. En particulier, la n ́ecessite ́ d’e ́largir la filtration est expliqu ́ee apre`s [15, Prop. 3.8, p.202-203]. Par hypoth`ese, Yti := Xti − ∫ t
+0 bi(Xs) ds et YtiY j
+t −∫t
+0 σi,j(Xs) ds sont des martingales
+locales, pour tous i, j. Donc par la proposition 4.2, [Y i, Y j]t = ∫ t
+0 σi,j(Xs) ds. Puisque le
+46
+
+
+processus X est continu et σ−1 est localement born ́ee, on a que le processus σ(X)−1 est localement born ́e et pr ́evisible pour la filtration (Ft). Ainsi on peut d ́efinir
+Wi
+t=
+d
+∑
+k=1
+∫t
+0
+(σ−1)i,k(Xs) dY k
+s , t ≥ 0,
+qui est une martingale locale continue. Calculons la variation quadratique de W :
+[W i, W j]t =
+d
+∑
+k,l=1
+∫t
+0
+(σ−1)i,k(Xs) (σ−1)j,l(Xs) ak,l(Xs) ds
+=
+∫t
+0
+δi,j ds = δi,j t.
+Par le th ́eor`eme de caracte ́risation de L ́evy 3, W est un mouvement brownien standard `a valeurs dans Rd. On a alors, par la formule de composition des int ́egrales stochastiques (H · (K · M ) = (HK) · M ) :
+∫t
+0
+σ(Xs) dWs = Yt − Y0 = Xt −
+∫t
+0
+b(Xs) ds.
+Donc X est solution de l’EDS.
+On d ́eduit notamment de la proposition pr ́ec ́edente que s’il y a unicit ́e faible de l’EDS (4.2) (i.e. toutes les solutions partant d’une mˆeme condition initiale ont mˆeme loi), alors il y a unicit ́e dans le probl`eme de martingale associ ́e, au sens ou` pour tout x ∈ Rd, deux solutions de M(a, b) partant de x ont la mˆeme loi (sur l’espace des fonctions continues). C’est par exemple le cas lorsque b et σ sont Lipschitz.
+4.4 R ́esultat principal
+Reprenons les notations du d ́ebut de ce chapitre. On se donne une suite de chaıˆnes
+de Markov {(Y (n)
+k )k∈N, n ∈ N} et l’extension en temps continu X(n) ∈ D(R+; Rd), dilat ́ee
+d’une facteur n (voir  ́equation (4.1)). On appelle Q0n la matrice de transition de Y (n) et on note
+Qn(x, A) = n Q0
+n(x, A), ∀x ∈ Rd, ∀A ∈ B(Rd).
+Le ge ́ne ́rateur discret de Xn est ici donn ́e par
+L(n)f (x) = n
+∫
+Rd
+(f (y) − f (x)) Q0
+n(x, dy) =
+∫
+Rd
+(f (y) − f (x)) Qn(x, dy). (4.4)
+On note B(x, r) la boule euclidienne de centre x et de rayon r > 0. En  ́evaluant l’expression pre ́ce ́dente pour les fonctions f2(x) = x xT et f1(x) = x, on obtient les op ́erateurs (tronqu ́es) de covariance et de moyenne associ ́es `a Qn (et donc `a X(n)) :
+a(n)
+i,j (x) =
+∫
+B(x,1)
+(yi − xi) (yj − xj) Qn(x, dy), ∀x ∈ Rd,
+b(n)
+i (x) =
+∫
+B(x,1)
+(yi − xi) Qn(x, dy), ∀x ∈ Rd.
+3. on rappelle qu’une martingale locale (M 1, . . . , M d) qui est continue est un mouvement brownien standard a` valeurs dans Rd si et seulement si [M i, M j]t = δi,jt.
+47
+
+
+On note enfin, pour tout ε > 0,
+∆(n)
+ε (x) = Qn(x, B(x, ε)c), x ∈ Rd,
+qui correspond `a la probabilit ́e de faire un saut de taille ≥ ε.
+Th ́eor`eme 4.13. Supposons qu’il existe des fonctions continues a : Rd → Rd×d et b : Rd → Rd et que les conditions suivantes sont ve ́rifie ́es :
+(i) le proble`me de martingale M(a, b) admet une unique solution ;
+(ii) pour tous i, j, tout R > 0, lim
+n→+∞ sup
+x∈B(0,R)
+|ai,j (x) − a(n)
+i,j (x)| = 0 ;
+(iii) pour tout i, tout R > 0, lim
+n→+∞ sup
+x∈B(0,R)
+|bi(x) − b(n)
+i (x)| = 0 ;
+(iv) pour tous R, ε > 0, lim
+n→+∞ sup
+x∈B(0,R)
+∆(n)
+ε (x) = 0 ;
+(v) la condition initiale X(n)
+0 est d ́eterministe et tend vers x.
+Alors X(n) (→d) X dans l’espace D(R+; Rd) 4, ou` X est la solution du proble`me M(a, b) partant de x.
+Remarque 4.14. Toutes les conditions sont assez naturelles et intuitives, et on insistera sur la condition (iv) qui assure que les sauts disparaissent a` la limite. Cela nous permettra notamment d’utiliser le crite`re de tension du th ́eor`eme 3.29.
+Le reste de cette section est consacre ́ `a la preuve de ce th ́eor`eme.
+D ́emonstration. Par un argument de localisation qu’on ne de ́crira pas (voir les d ́etails dans [6, p.304]), on peut se ramener `a des coefficients v ́erifiant :
+(ii′) pour tous i, j, lim
+n→+∞ sup
+x∈Rd
+|ai,j (x) − a(n)
+i,j (x)| = 0 ;
+(iii′) pour tout i, lim
+n→+∞ sup
+x∈Rd
+|bi(x) − b(n)
+i (x)| = 0 ;
+(iv′) pour tout ε > 0, lim
+n→+∞ sup
+x∈Rd
+∆(n)
+ε (x) = 0 ;
+(vi) les fonctions a(n), b(n) et ∆(n)
+ε sont uniforme ́ment born ́ees en n et en x.
+ ́Etape 1 : Tension.
+L’objectif est de pouvoir appliquer le crit`ere de tension du th ́eor`eme 3.29. En particulier, il suffit de montrer la tension sur tout intervalle de temps de la forme [0, T ], T > 0. Sans perte de g ́en ́eralit ́e, nous le ferons pour T = 1. Dans le cas pr ́esent, l’espace polonais E n’est autre que Rd. En particulier ses boules ferm ́ees sont compactes, donc le premier point
+`a ve ́rifier est que pour tout ε > 0, il existe A > 0 et n0 ∈ N tels que P(|X(n)
+0 | > A) ≤ ε pour tout n ≥ n0. C’est trivial ici puisqu’on a suppos ́e que la suite des conditions initiales est de ́terministe et converge.
+4. pour la topologie de Skorokhod. Cette convergence implique la convergence X(n) (d →) X dans C, ou` X(n) sont les interpol ́ees line ́aires.
+48
+
+
+Nous allons donc de ́montrer le deuxie`me point, c’est-`a-dire contrˆoler les oscillations de X(n). Pour cela, consid ́erons les variables al ́eatoires suivantes : pour tout ∈ N∗,
+τ0 = 0, τ (n)
+k = inf{t ≥ τ (n)
+k−1 : |X(n)
+t − X(n)
+τk−1 | ≥ ε
+4 },
+N (n) = min{k : τ (n)
+k > 1},
+∆τ (n) = min{τ (n)
+k − τ (n)
+k−1 : 1 ≤ k ≤ N (n)},
+∆X(n) = max{|X(n)
+t − X(n)
+t− | : t ∈ (0, 1]}.
+On va alors montrer la propri ́et ́e suivante : pour tous ε > 0, δ > 0,
+Si ∆τ (n) > δ et ∆X(n) ≤ ε
+4 , alors ω(X(n), δ) ≤ ε. (4.5)
+Ainsi, il suffira de montrer qu’il existe n0 ∈ N tel que
+P
+(
+∆X(n) > ε
+4
+)
+≤ε
+2 , ∀n ≥ n0, (4.6)
+et qu’il existe δ > 0 tel que
+P
+(
+∆τ (n) ≤ δ
+)
+≤ε
+2 , ∀n ≥ n0, (4.7)
+pour obtenir grˆace `a (4.5), (4.6) et (4.7) que
+P
+(
+ω(X(n), δ) > ε
+)
+≤P
+(
+∆X(n) > ε
+4
+)
++P
+(
+∆τ (n) ≤ δ
+)
+≤ ε, ∀n ≥ n0, (4.8)
+soit le crit`ere n ́ecessaire pour conclure que (X(n)) est tendue grˆace au th ́eor`eme 3.29.
+Montrons pour commencer la propri ́et ́e (4.5). Soient s, t ∈ R+ tels que |s − t| < δ, et
+donc |s − t| < ∆τ (n). Il y a donc deux possibilit ́es (sans perte de g ́en ́eralit ́e, on suppose que s < t) :
+il existe k tel que τk−1 ≤ s < t < τk. Alors
+|X (n)
+s − X(n)
+t | ≤ |X(n)
+s − X(n)
+τk−1 | + |X (n)
+t − X(n)
+τk−1 | < ε
+2;
+il existe k tel que τk−1 ≤ s < τk ≤ t < τk+1. Alors
+|X (n)
+s − X(n)
+t | ≤ |X(n)
+s − X(n)
+τk−1 | + |X (n)
+τk−1 − X (n)
+τ−
+k
+| + |X(n)
+τ−
+k
+− X(n)
+τk | + |X(n)
+τk − X (n)
+t | ≤ ε.
+Montrons maintenant (4.6), ce qui assez imm ́ediat. En effet, le processus X(n) a au plus n sauts sur l’intervalle de temps [0, 1], donc
+P
+(
+∆X(n) > ε
+4
+)
+≤
+∑
+|X (n)
+t −X(n)
+t− |>0
+P
+(
+|X (n)
+t − X(n)
+t− | > ε
+4
+)
+≤ n sup
+x∈Rd
+Q0
+n
+(
+x, B(x, ε
+4 )c)
+= sup
+x∈Rd
+∆(n)
+ε 4
+(x) −→
+n→+∞ 0,
+grˆace `a l’hypoth`ese (iv′).
+49
+
+
+Enfin, montrons (4.7), ce qui va nous demander significativement plus d’efforts. Commen ̧cons par observer que pour tout k ∈ N,
+Px
+(
+∆τ (n) ≤ δ
+)
+≤ Px
+(
+il existe 1 ≤ j ≤ k tel que τ (n)
+j − τ (n)
+j−1 ≤ δ ou N (n) > k
+)
+≤
+k
+∑
+j=1
+Px(τ (n)
+j − τ (n)
+j−1 ≤ δ) + Px(N (n) > k)
+≤ k sup
+y∈Rd
+Py(τ (n)
+1 ≤ δ) + Px(N (n) > k), (4.9)
+en utilisant la propri ́et ́e de Markov forte `a la derni`ere ligne.
+On va donc chercher dans un premier temps a` estimer P(τ (n)
+1 ≤ η), η > 0. Pour le g ́en ́erateur de ́fini en (4.4), on montre, comme a` l’exercice 4.9, on a que pour tout n, le
+processus
+
+
+
+f (X(n)
+k/n) − 1
+n
+k−1
+∑
+j=0
+L(n)f (X(n)
+j/n)
+
+
+
+k∈N
+(4.10)
+est une martingale pour la filtration naturelle de {Y (n)
+k }k∈N. Par ailleurs, si φ : R+ → [0, 1]
+est une fonction de classe C2 telle que φ(0) = 1 et φ(x) = 0, ∀x ≥ 1, on de ́finit pour tout ε>0:
+fε,y(x) = φ
+( |x − y|2 ε2
+)
+, x, y ∈ Rd.
+Alors on a qu’il existe Cε qui ne d ́epend que de ε tel que
+sup
+x∈Rd
+|L(n)fε,y(x)| ≤ Cε. (4.11)
+La preuve de (4.11) est purement analytique et repose sur l’hypoth`ese (vi). Elle est laiss ́ee en exercice.
+En conse ́quence des propri ́et ́es (4.10) et (4.11), on a que pour tout n,
+{
+fε
+4 ,y(X (n)
+k/n) + k
+nCε
+4
+}
+k∈N est une sous-martingale.
+On notera τ1 ≡ τ (n)
+1 . On remarque que τ1 est un multiple (al ́eatoire) de 1
+n et donc pour
+η ̃ = 1
+n bnηc, on a X(n)
+τ1∧η ̃ = X (n)
+τ1∧η. Ainsi, d’apre`s le th ́eor`eme d’arrˆet,
+Ey
+(
+fy, ε
+4 (X(n)
+τ1∧η) + (τ1 ∧ η)C ε
+4
+)
+= Ey
+(
+fy, ε
+4 (X(n)
+τ1∧η ̃) + (τ1 ∧ η)C ε
+4
+)
+≥ Ey
+(
+fy, ε
+4 (X(n)
+τ1∧η ̃) + (τ1 ∧ η ̃)C ε
+4
+)
+≥ Ey
+(
+fy, ε
+4 (X(n)
+0 )+ 0
+nCε
+4
+)
+= 1.
+On en d ́eduit d’une part que
+Ey
+(
+1 − fy, ε
+4 (X(n)
+τ1 ∧η )
+)
+≤ Ey
+(
+(τ1 ∧ η)C ε
+4
+)
+≤ ηCε
+4.
+D’autre part, on remarque que si τ1 ≤ η alors |X(n)
+τ1∧η − X (n)
+0 | = |X(n)
+τ1 − X (n)
+0 |≥ ε
+4 et donc
+sous Py, fy, ε
+4 (X(n)
+τ1∧η) = 0. Ainsi
+Py (τ1 ≤ η) = Ey
+(
+1{τ1≤η}(1 − fy, ε
+4 (X(n)
+τ1 ∧η ))
+)
+≤ ηCε
+4 . (4.12)
+50
+
+
+Revenons `a l’ ́equation (4.9) : il nous reste a` contrˆoler Px(N (n) > k). En utilisant l’in ́egalit ́e de Markov, il vient
+Px
+(
+N (n) > k
+)
+= Px
+(
+τ (n)
+k ≤1
+)
+≤ e−1Ex
+(
+e−τ (n)
+k
+)
+. (4.13)
+On a
+Ex
+(e−τ1 ) ≤ Px (τ1 ≤ η) + e−ηPx (τ1 > η)
+≤ ηCε
+4 + e−η (
+1 − ηCε
+4
+)
+=: pη < 1.
+Remarquons particuli`erement que pη ne d ́epend pas de x. Les temps τ (n)
+1 , . . . , τ (n)
+k  ́etant des temps d’arrˆet (qu’on note ci-dessous τ1, . . . , τk), on a en utilisant la propri ́et ́e de Markov forte que
+Ex
+(e−τk ) = Ex
+(Ex
+[e−τk | Fτk−1
+]) = Ex
+(
+e−τk−1 Ex
+[
+e−(τk−τk−1) | Fτk−1
+])
+= Ex
+(
+e−τk−1 EXτk−1 [e−τ1 ]
+)
+≤ pη Ex
+(e−τk−1 ) ,
+et donc en it ́erant, on obtient
+Ex
+(e−τk ) ≤ pk
+η.
+En utilisant l’in ́egalit ́e pr ́ec ́edente dans (4.13), on obtient donc
+Px
+(
+N (n) > k
+)
+≤ e−1pk
+η. (4.14)
+Ainsi, en utilisant (4.12) et (4.14) dans l’ ́equation (4.9), on a
+Px
+(
+∆τ (n) ≤ δ
+)
+≤ Cε
+4 kδ + e−1pk
+η,
+(η ∈ (0, 1) est quelconque, ind ́ependant de δ). Ainsi en choisissant k suffisamment grand de sorte que e−1pηk ≤ ε
+4 et ensuite δ suffisamment petit de sorte que C ε
+4 kδ ≤ ε
+4 , on obtient bien le r ́esultat souhait ́e (4.7).
+E ́tape 2 : Unicit ́e de la limite pour les sous-suites convergeantes.
+Montrons de ́sormais que toute sous-suite qui converge, converge vers la solution du probl`eme de martingale M(a, b) (qui est unique par hypoth`ese). On va faire appel pour cela au g ́en ́erateur infinit ́esimal L de l’EDS (4.2). On sait (voir exercice 4.8) que L est l’op ́erateur diff ́erentiel associe ́ `a M(a, b) donn ́e pour toute f ∈ C02(Rd) par
+Lf (x) = 1
+2
+d
+∑
+i,j=1
+ai,j(x)∂i∂jf (x) +
+d
+∑
+i=1
+bi(x)∂if (x), ∀x ∈ Rd.
+On a la convergence suivante (exercice, on utilise ici les hypoth`eses (ii′), (iii′) et (iv′)) : pour toute fonction f ∈ C02(Rd),
+‖L(n)f − Lf ‖∞ −→
+n→+∞ 0. (4.15)
+51
+
+
+Quitte `a renommer la suite, on suppose que X(n) converge en loi dans D(R+; Rd) vers un processus qu’on note X. Soient s < t ∈ R+, et notons kn = bsnc+1 et ln = btnc+1. Soit F : D(R+; Rd) → R une application born ́ee et mesurable par rapport `a la tribu Fs := σ (πu−1(A); A ∈ B(Rd), u ≤ s).
+En utilisant la propri ́et ́e de martingale (discr`ete) e ́nonce ́e en (4.10), on a pour f ∈ C02(Rd),
+E
+
+F (X(n))
+
+f (X(n)
+ln/n ) − f (X(n)
+kn/n ) − 1
+n
+ln−1
+∑
+j=kn
+L(n)f (X(n)
+j/n)
+
+
+
+ = 0. (4.16)
+Utilisons maintenant le th ́eor`eme de repr ́esentation de Skorokhod (the ́ore`me 2.33) : il existe un espace de probabilit ́e et des variables al ́eatoires Z(n) d ́efinies sur cet espace et `a
+valeurs dans D(R+; Rd) telles que pour tout n, Z(n) (d=) X(n) et Z(n) → X p.s. Alors par le th ́eor`eme de convergence domine ́e, on d ́eduit de (4.16) appliqu ́e `a Z(n), de la convergence uniforme de L(n)f ( ́eq. (4.15)) et de la convergence des sommes de Riemann (remarquez que L(n)f est une suite de fonctions continues born ́ees) que
+E
+[
+F (X)
+(
+f (Xt) − f (Xs) −
+∫t
+s
+Lf (Xu) du
+)]
+= 0.
+Puisque cette  ́egalit ́e est valable pour toute fonction F qui est Fs-mesurable born ́ee, on en
+d ́eduit que {f (Xt) − ∫ t
+0 Lf (Xu) du}t∈R+ est une martingale. Il ne reste plus qu’a` appliquer cette propri ́et ́e aux fonctions f1(x) = xi et f2(x) = xixj pour obtenir que X est solution du probl`eme de martingale M(a, b).
+Exercice 4.15. Montrer l’ine ́galite ́ (4.11) et la convergence (4.15).
+Exercice 4.16. A la fin de la preuve, on a que {f (Xt) − ∫ t
+0 Lf (Xu) du}t∈R+ est une
+martingale pour tout f ∈ C02(Rd). Or on applique ce re ́sultat aux fonctions f1 et f2 qui ne tendent pas vers 0 `a l’infini. En approchant f1 et f2 par des fonctions qui tendent vers 0 `a
+l’infini, justifier que {f1(Xt) − ∫ t
+0 Lf1(Xu) du}t∈R+ et {f2(Xt) − ∫ t
+0 Lf2(Xu) du}t∈R+ sont des martingales locales.
+4.5 L’exemple de l’urne d’Ehrenfest
+Reprenons l’exemple de l’urne d’Ehrenfest pr ́esente ́ au de ́but de ce cours dans la section 1.1.2. Pour tout n ∈ N∗, on dispose d’une chaˆıne de Markov homog`ene (Y n
+k )k∈N `a
+valeurs dans {0, . . . , n} qui donne le nombre de mole ́cules dans l’urne A au temps (dis
+cret) k. On d ́efinit alors la chaıˆne renormalis ́ee Y (n)
+k = √1n/2 (Y n
+k −n
+2 ) dont la matrice de
+transition est donn ́ee, pour tout x ∈ { √j2n ; −n ≤ j ≤ n}, par
+Q0
+n
+(
+x, x + 1
+√n/2
+)
+= n − x√2n
+2n et Q0
+n
+(
+x, x − 1
+√n/2
+)
+= n + x√2n
+2n .
+A nouveau, on d ́efinit le processus c`adl`ag X(n) par X(n)
+t = Y (n)
+bntc, pour tout t ≥ 0.
+Th ́eor`eme 4.17. La suite de processus (X(n))n∈N converge en loi dans D(R+; R) vers un processus d’Ornstein-Uhlenbeck, solution de l’EDS :
+dXt = −Xt dt + dWt.
+52
+
+
+D ́emonstration. Remarquons que ∆(n)
+ε (x) = n Q0n(x, B(x, ε)c) = 0 de`s que n > ε−2. Ensuite, on d ́efinit les coefficients de drift et variance infinit ́esimaux (non tronqu ́es) :
+a ̃(n)(x) =
+∫
+R
+(x − y)2 n Q0
+n(x, dy) = n
+2
+(
+2
+n
+n − x√2n
+2n + 2
+n
+n + x√2n
+2n
+)
+=1
+b ̃(n)(x) =
+∫
+R
+(x − y) n Q0
+n(x, dy) = n
+2
+(
+1
+√n/2
+n − x√2n
+2n − 1
+√n/2
+n + x√2n
+2n
+)
+= −x,
+et on v ́erifie (exercice) que les coefficients tronqu ́es an et bn convergent uniforme ́ment sur les compacts vers, respectivement, a(x) = 1 et b(x) = −x. Ces deux fonctions sont Lipschitz, donc le probl`eme de martingale M(a, b) est bien pos ́e. On conclut donc grˆace au the ́ore`me 4.13.
+53
+
+
+Chapitre 5
+Particules diffusives en interaction
+et propagation du chaos
+Ce dernier chapitre pr ́esente quelques propri ́et ́es des syst`emes d’EDS en interaction, couramment appel ́es syst`emes de particules en interaction. Notons qu’il s’agit bien ici de particules stochastiques, le pendant d ́eterministe faisant  ́egalement l’objet d’intenses recherches. La plupart des notions expos ́ees dans les pages qui suivent (limite champ moyen, propagation du chaos) sont d ́evelopp ́ees dans le cours de recherche de Sznitman [19]. On trouvera  ́egalement d’int ́eressants de ́veloppements dans les notes de Me ́le ́ard [12] pour des particules admettant des sauts, avec des applications `a l’e ́quation de Boltzmann.
+5.1 Couplage entre le syste`me de particules et l’e ́quation de
+McKean-Vlasov
+Consid ́erons le syst`eme de particules suivant :
+dX i
+t= 1
+N
+N
+∑
+j=1
+b(X i
+t, Xj
+t ) dt + dW i
+t , i = 1, . . . , N, t > 0, (5.1)
+ou` les (W i)i∈{1,...,N} sont des mouvements browniens standard `a valeurs dans Rd qui sont ind ́ependants, et les particules ont pour condition initiale des variables al ́eatoires (X0i)i∈{1,...,N} suppos ́ees pour l’instant quelconques. Formulons quelques remarques :
+Hormis dans la section 5.3, on supposera tout le temps que b : Rd × Rd → Rd est une fonction Lipschitz born ́ee. Cette fonction mod ́elise `a la fois les interactions entre particules et une possible de ́rive de Xi en fonction de la position des autres particules. Par exemple, b(x, y) = V (x) − (x − y) ∧ 1 avec V une fonction Lipschitz born ́ee (ici (x − y) ∧ 1 est le terme d’interaction).
+On ne traite pas du cas ou` le coefficient b d ́epend de i (peut mener `a quelques complications int ́eressantes) ni de coefficients de diffusion non-constants pour simplifier les calculs. Dans le cas de particules interagissent via la diffusion, les re ́sultats qui suivent restent globalement vrais. On pourra se r ́ef ́erer `a [12] pour un traitement plus global.
+Avant d’ ́enoncer un th ́eor`eme de convergence, introduisons la particule “typique” qui sera la candidate `a la limite en loi de chaque particule du syst`eme.
+54
+
+
+Th ́eor`eme 5.1. Soit (Ω, F , (Ft)t∈R+, P) un espace de probabilit ́e filtre ́ et (Wt)t∈R+ un Ft-mouvement brownien. Soit ξ une v.a. F0-mesurable. Alors l’e ́quation :
+dXt =
+(∫
+Rd
+b(Xt, y) μt(dy)
+)
+dt + dWt
+X0 = ξ, Xt
+(=d) μt,
+(5.2)
+admet une solution qui est unique trajectoriellement et en loi.
+Avant de commencer la preuve de ce th ́eor`eme, rappelons la de ́finition de la distance de Wasserstein, qui fait l’objet d’une  ́etude dans le DM. Pour tout T > 0, on utilise ici la distance de Wasserstein-1 sur l’espace m ́etrique complet et s ́eparable CT ≡ C([0, T ]; Rd) muni de la topologie de la convergence uniforme. Plutˆot que la distance issue de la norme uniforme, on travaillera avec la distance topologiquement  ́equivalente suivante :
+dT (x, y) = ( sup
+s∈[0,T ]
+‖x(t) − y(t)‖) ∧ 1.
+La distance de Wasserstein-1 sur CT est alors donn ́ee par
+WT (μ, ν) = inf
+π∈ΠT (μ,ν)
+∫
+CT ×CT
+dT (x, y) π(dx, dy),
+ou` ΠT (μ, ν) est l’ensemble des couplages entre μ ∈ P(CT ) et ν ∈ P(CT ), i.e. π ∈ ΠT (μ, ν) si la premi`ere marginale de π est μ et la seconde est ν. Les r ́esultats du DM tiennent toujours pour WT , `a savoir que WT est une distance sur P(CT ) qui rend cet espace complet et se ́parable, et qui implique la convergence  ́etroite.
+D ́emonstration. On va introduire une transformation Φ sur l’espace P(CT ) qui est Lipschitz continue et dont les ite ́re ́es sont contractantes. Grˆace `a Φ, on montrera l’existence d’une solution `a l’ ́equation (5.2) par un argument de point fixe/contraction, et l’unicit ́e grˆace au lemme de Gr ̈onwall. Soit T > 0. Pour toute mesure ν ∈ P(CT ) (on rappelle que νt est la marginale au temps t), on consid`ere l’ ́equation
+Xν
+t = X0 +
+∫t
+0
+(∫
+Rd
+b(X ν
+s , y) νs(dy)
+)
+ds + Wt. (5.3)
+Par un argument de point fixe (b  ́etant Lipschitz), on montre (exercice) que cette  ́equation admet une solution forte, et par une application du lemme de Gr ̈onwall, cette solution est trajectoriellement unique. Il y a donc aussi unicit ́e en loi 1, et on note Pν la loi de cette solution sur CT . Conside ́rons l’application
+Φ : P(CT ) −→ P(CT )
+ν 7−→ Pν .
+Remarquons que si X est solution de (5.2), alors sa loi est un point fixe de Φ. Re ́ciproquement, si ν est un point fixe de Φ, la solution Xν de (5.3) est solution de (5.2).
+1. par un re ́sultat classique mais non trivial de Yamada et Watanabe, voir e.g. [15, Th. 1.7, p.368].
+55
+
+
+Montrons que Φ est Lipschitz pour la distance de Wasserstein. Consid ́erons donc deux mesures ν1, ν2, et Xν1, Xν2 les deux processus associ ́es solutions de l’ ́equation (5.3) avec le meˆme brownien W . Alors pour tout t ∈ [0, T ], on a
+sup
+s≤t
+∣ ∣
+∣X ν 1
+s − Xν2
+s
+∣
+∣
+∣≤
+∫t
+0
+∣ ∣ ∣ ∣
+∫
+Rd
+b(X ν 1
+u , y) ν1
+u(dy) −
+∫
+Rd
+b(X ν 2
+u , z) ν2
+u(dz)
+∣ ∣ ∣ ∣
+du
+=
+∫t
+0
+∣ ∣ ∣ ∣
+∫
+Rd×Rd
+(
+b(X ν 1
+u , y) − b(Xν2
+u , z)
+)
+νu(dy, dz)
+∣ ∣ ∣ ∣
+du
+ou` ν est un couplage quelconque de ν1, ν2. Par hypoth`ese sur b, il existe M tel que
+|b(x1, y) − b(x2, z)| ≤ M (1 ∧ |x1 − x2| + 1 ∧ |y − z|) .
+Ainsi,
+sup
+s≤t
+∣ ∣
+∣X ν 1
+s − Xν2
+s
+∣ ∣
+∣≤M
+∫t
+0
+(
+|X ν 1
+u − Xν2
+u |∧1+
+∫
+Rd
+(|y − z| ∧ 1) νu(dy, dz)
+)
+du,
+et donc
+sup
+s≤t
+∣ ∣
+∣X ν 1
+s − Xν2
+s
+∣ ∣
+∣∧1≤M
+∫t
+0
+( sup
+s≤u
+|X ν 1
+s − Xν2
+s | ∧ 1) du + M
+∫t
+0
+Wu(ν1, ν2) du.
+Donc par le lemme de Gr ̈onwall,
+sup
+s≤t
+∣ ∣
+∣X ν 1
+s − Xν2
+s
+∣ ∣
+∣ ∧ 1 ≤ M etM
+∫t
+0
+Wu(ν1, ν2) du.
+Or Wt(Φ(ν1), Φ(ν2)) ≤ E[ sups≤t
+∣ ∣
+∣X ν 1
+s − Xν2
+s
+∣ ∣
+∣ ∧ 1], puisque la loi du couple (Xν1, Xν2)
+fournit un couplage (dit “parall`ele”) entre ν1 et ν2. On obtient donc finalement, pour tout t ∈ [0, T ] :
+Wt
+(Φ(ν1), Φ(ν2)) ≤ M eMT
+∫t
+0
+Wu(ν1, ν2) du, ∀ν1, ν2 ∈ P(CT ). (5.4)
+Notons Φk, k ∈ N∗, les ite ́re ́es de Φ. Pour une mesure ν ∈ P(CT ), montrons que la suite (Φk(ν))k∈N∗ est de Cauchy pour la distance de Wasserstein. D’apre`s (5.4),
+WT (Φk+1(ν), Φk(ν)) ≤ M eMT
+∫T
+0
+Wu1 (Φk(ν), Φk−1(ν)) du1
+≤ M kekMT
+∫T
+0
+∫ u1
+0
+...
+∫ uk−1
+0
+Wuk (Φ(ν), ν) duk . . . du1
+≤ (M T )kekMT
+k! WT (Φ(ν), ν).
+Donc (Φk(ν))k∈N∗ est bien de Cauchy, et converge puisque P(CT ) est complet. La limite fournit une mesure qui, plac ́ee dans l’e ́quation (5.2), donne une solution forte a` l’e ́quation (5.2). L’unicit ́e trajectorielle (et donc en loi) s’obtient par un calcul direct (exercice) grˆace au caract`ere Lipschitz de b. Notons μ(T ) la loi de la solution de (5.2) construite sur [0, T ]. Si t ∈ (0, T ), alors la solution construite sur [0, T ] donne  ́egalement la solution sur [0, t], donc μ(t) est la restriction de μ(T ) `a [0, t], et la famille de mesure (μ(T ))T ∈R+ est consistante. Il existe donc une mesure μ sur C(R+; Rd) qui fournit la solution de (5.2) sur tout R+.
+56
+
+
+Exercice 5.2. Montrer que les marginales (μt)t∈R+ de la solution de l’ ́equation de McKeanVlasov (5.2) satisfont au sens faible l’EDP non-lin ́eaire suivante :
+∂tμt = 1
+2 ∆μt − ∇ ·
+(∫
+Rd
+b(·, y)μt(dy) μt
+)
+, t > 0,
+μ0 = L(ξ0).
+(5.5)
+Sur l’espace de probabilite ́ filtr ́e (Ω, F , (Ft)t∈R+, P) muni d’une famille de Ft-mouvements browniens ind ́ependants (W i)i∈N, on consid`ere pour tout N ∈ N∗ l’unique solution forte (Xi)1≤i≤N du syst`eme de particules (5.1) (exercice : justifier cette assertion concer
+nant (Xi)1≤i≤N ). Sur le mˆeme espace, on consid`ere e ́galement les processus (Xi)1≤i≤N d ́efinis par
+Xi
+t = Xi
+0+
+∫t
+0
+(∫
+Rd
+b(X i
+s, y) μs(dy)
+)
+ds + W i
+t,
+Xi
+t
+(=d) μt,
+dont l’existence et l’unicite ́ sont justifi ́ees par le th ́eor`eme 5.1. On souhaite comparer
+les particules (Xi,N )i≤N aux particules McKean-Vlasov (Xi)i≤N . Pour ce faire, il semble
+raisonnable, au moins pour une comparaison trajectorielle, de faire partir Xi,N et Xi du mˆeme point de de ́part X0i et de les doter du mˆeme brownien W i. On observe que si les
+variables (X0i)i≤N sont ind ́ependantes, alors les processus (Xi)i≤N sont ind ́ependants, mais
+pas les particules (Xi,N )i≤N . En fait sous ces conditions, ces derni`eres sont  ́echangeables, dans le sens donn ́e par la d ́efinition suivante.
+D ́efinition 5.3. On dit que les variables ale ́atoires (X0i)i≤N sont e ́changeables si pour toute permutation σ : {1, . . . , N } → {1, . . . , N } on a
+(X 1
+0 , . . . , XN
+0 ) (=d) (Xσ(1)
+0 , . . . , Xσ(N)
+0 ).
+Par exemple, si (X0i)i≤N est une famille de v.a. ind ́ependantes et identiquement dis
+tribu ́ees, alors les (X0i)i≤N sont  ́echangeables.
+Exercice 5.4. En supposant que les particules donn ́ees par le syst`eme (5.1) sont initialement  ́echangeables, montrer qu’elles le restent en tout temps t > 0.
+Ainsi, cette propri ́et ́e d’ ́echangeabilite ́ est pre ́serv ́ee par la dynamique du syst`eme de particules, contrairement `a la propri ́et ́e d’ind ́ependance.
+Th ́eor`eme 5.5. On suppose que les hypothe`ses formul ́ees pre ́ce ́demment sont v ́erifi ́ees, en particulier que pour tout N ∈ N∗, (X0i)i≤N est une famille e ́changeable et que les particules du syst`eme (5.1) et celles donne ́es par l’e ́quation de McKean-Vlasov sont dirige ́es par les mˆemes browniens et ont les mˆemes CI (X0i)i≤N . Pour tout T > 0, il existe CT ∈ (0, +∞) tel que
+E
+(
+sup
+s∈[0,T ]
+|X i,N
+s − Xi
+s|
+)
+≤ CT
+√N , ∀N ∈ N∗, ∀i ∈ {1, . . . , N }.
+57
+
+
+D ́emonstration.
+Xi
+t − Xi
+t=
+∫t
+0
+(1
+N
+N
+∑
+j=1
+b(X i
+s, Xj
+s) −
+∫
+Rd
+b(X i
+s, y) μi
+s(dy)
+)
+ds
+=
+∫t
+0
+1
+N
+N
+∑
+j=1
+(
+b(X i
+s, Xj
+s ) − b(Xi
+s, Xj
+s)
++ b(Xi
+s, Xj
+s ) − b(Xi
+s, Xj
+s)
++ b(Xi
+s, Xj
+s) −
+∫
+Rd
+b(X i
+s, y) μi
+s(dy)
+)
+ds.
+On adopte la notation bs(x, y) = b(x, y) − ∫
+Rd b(x, z) μs(dz), de sorte qu’avec b Lipschitz
+et la propri ́et ́e d’ ́echangeabilit ́e (Xsi, Xi
+s) (=d) (Xsj , Xj
+s), on obtient
+E
+(
+sup
+s∈[0,T ]
+|X i
+s − Xi
+s|
+)
+≤M
+∫T
+0
+
+E
+(
+|X i
+s − Xi
+s|
+)
++1
+N
+N
+∑
+j=1
+E
+(
+|X j
+s − Xj
+s|
+)
++E
+
+| 1
+N
+N
+∑
+j=1
+bs (X i
+s, Xj
+s)|
+
+
+
+ ds
+≤M
+∫T
+0
+
+2E
+(
+|X i
+s − Xi
+s|
+)
++E
+
+| 1
+N
+N
+∑
+j=1
+bs (X i
+s, Xj
+s)|
+
+
+
+ ds.
+Donc en appliquant le lemme de Gr ̈onwall, on trouve :
+E
+(
+sup
+s∈[0,T ]
+|X i
+s − Xi
+s|
+)
+≤ 2M e2MT
+∫T
+0
+E
+
+| 1
+N
+N
+∑
+j=1
+bs (X i
+s, Xj
+s)|
+
+ ds.
+Par l’ine ́galite ́ de Cauchy-Schwarz,
+
+E| 1
+N
+N
+∑
+j=1
+bs (X i
+s, Xj
+s)|
+
+
+2
+≤E
+
+| 1
+N
+N
+∑
+j=1
+bs (X i
+s, Xj
+s)|2
+
+
+=1
+N2
+N
+∑
+j,k=1
+E
+(
+bs (X i
+s, Xj
+s) · bs(Xi
+s, Xk
+s)
+)
+.
+A partir d’ici, on suppose que les (X0i)i≤N sont iid (voir exercice 5.6 pour les hypoth`eses g ́en ́erales). On calcule alors, pour j 6= k,
+E
+(
+bs (X i
+s, Xj
+s) · bs(Xi
+s, Xk
+s)
+)
+=E
+(
+b(X i
+s, Xj
+s) · b(Xi
+s, Xk
+s)
+)
+−
+∫
+Rd
+E
+(
+b(X i
+s, z) · b(Xi
+s, Xk
+s)
+)
+μs(dz)
+−
+∫
+Rd
+E
+(
+b(X i
+s, z) · b(Xi
+s, Xj
+s)
+)
+μs(dz)
++
+∫
+Rd
+∫
+Rd
+E
+(
+b(X i
+s, z) · b(Xi
+s, z′)
+)
+μs(dz) μs(dz′). (5.6)
+Or E
+(
+b(X i
+s, Xj
+s) · b(Xi
+s, Xk
+s)
+)
+=
+∫
+(Rd)3 b(z, z′) · b(z, z′′) μs⊗3(dz, dz′, dz′′) par ind ́ependance
+de Xi
+s, Xj
+s et Xk
+s . En proce ́dant ainsi pour tous les termes ci-dessus, on trouve
+E
+(
+bs (X i
+s, Xj
+s) · bs(Xi
+s, Xk
+s)
+)
+= 0.
+58
+
+
+On a finalement
+E
+(
+sup
+s∈[0,T ]
+|X i
+s − Xi
+s|
+)
+≤ 2M e2MT
+∫T
+0
+1
+N
+
+
+N
+∑
+j=1
+E
+(
+|bs (X i
+s, Xj
+s)|2)
+
+
+1 2
+ds
+= √1N 2M e2MT
+∫T
+0
+( ∫
+(Rd)2
+|b(z, z′)|2 μ⊗2
+s (dz, dz′)
+)1
+2
+ds,
+d’ou` le r ́esultat.
+Exercice 5.6. Reprendre la preuve pr ́ec ́edente a` partir de l’ ́equation (5.6), lorsque nous avons suppos ́e que les CI  ́etaient iid. Faire la de ́monstration dans le cas ge ́ne ́ral de l’e ́nonce ́, `a savoir lorsque les CI sont e ́changeables et non iid. On pourra observer que dans le terme
+de gauche de (5.6), conditionnellement `a X0i, Xj
+0, X0k, les variables Xi
+s, Xj
+s et Xk
+s sont ind ́ependantes.
+Le th ́eor`eme pre ́c ́edent d ́ecrit le comportement d’une seule particule lorsque N → +∞, mais ne d ́ecrit pas le comportement global du syst`eme de particules. Pour cela, on peut par exemple s’int ́eresser `a la loi LN de (X1, . . . , XN ) sur l’espace C(R+, RdN ). Notons LN
+k
+la loi de k des N particules. En supposant que les particules sont e ́changeables 2, on a
+WT (LN
+k , μ⊗k) ≤ E
+(
+sup
+s∈[0,T ]
+∣ ∣
+∣(X 1
+s , . . . , Xk
+s ) − (X1
+s, . . . , Xk
+s)
+∣ ∣ ∣
+)
+≤ k max
+1≤i≤k E
+(
+sup
+s∈[0,T ]
+|X i,N
+s − Xi
+s|
+)
+≤ kCT
+√N .
+Remarquons que le facteur k ci-dessus n’est pas optimal (en travaillant en Wasserstein
+2 et par extension du th ́eor`eme 5.5, on aurait plutˆot √k). On retiendra n ́eanmois que la m ́ethode qui consiste `a passer par le th ́eor`eme 5.5 est propre aux interactions lipschitzienne et ne s’ ́etend pas au cadre non-lipschitzien.
+Une alternative au calcul ci-dessus consiste `a consid ́erer la mesure empirique du syst`eme de particules. On verra dans la section suivante que ce probl`eme est  ́equivalent au pr ́ec ́edent (convergence de LN
+k ). Profitons-en pour faire une remarque importante concernant la convergence des mesures al ́eatoires. Par le th ́eor`eme Portmanteau, montrer la convergence en loi de μN vers μ 3 revient `a montrer que pour toute fonction Lipschitz born ́ee Φ : (P(CT ), dLP ) → R, on a EΦ(μN ) −→
+N→+∞ EΦ(μ).
+Le lemme suivant va nous permettre de simplifier consid ́erablement cette caract ́erisation de la convergence en loi des mesures al ́eatoires, lorsque la limite μ est d ́eterministe.
+Lemme 5.7. Soit E un espace polonais, soit μ ∈ P(E) une mesure d ́eterministe et soit (μN )N∈N une suite de variables al ́eatoires a` valeurs dans P(E). Si pour tout φ ∈ Cb(E), on a
+E
+∣
+∣〈μN , φ〉 − 〈μ, φ〉∣
+∣ −→
+N→+∞ 0,
+alors μN (d)
+−→ μ.
+2. ce qui est le cas d`es qu’on choisit une loi initiale sym ́etrique, cf Exercice 5.4. 3. c’est-a`-dire la convergence e ́troite de la loi de μN dans l’espace P(P(CT )).
+59
+
+
+D ́emonstration. Soit Φ ∈ Cb(P(E)) et notons M = supν∈P(E) |Φ(ν)|. Sans perte de g ́en ́eralit ́e,
+supposons que Φ(μ) = 0. On veut donc montrer que EΦ(μN ) → 0. Soit ε > 0. Par continuite ́ de Φ, il existe un ouvert U de P(E) qui contient μ tel que pour tout ν ∈ U , |Φ(ν)| < ε. On rappelle que la convergence  ́etroite des mesures est un cas particulier de la convergence faible sur Cb(E)∗. Or par d ́efinition de la topologie faible, il existe un nombre fini de fonctions f1, . . . , fn ∈ Cb(E) et un δ > 0 tels que si
+max
+1≤i≤n
+∣ ∣ ∣ ∣
+∫
+E
+fi dν −
+∫
+E
+fi dμ
+∣ ∣ ∣ ∣
+< δ,
+alors ν ∈ U . Or par l’in ́egalit ́e de Markov et l’hypoth`ese du lemme, on a qu’il existe N0 ∈ N tel que pour tout N ≥ N0,
+P
+(∣
+∣〈μN , fi〉 − 〈μ, fi〉∣
+∣ ≥ δ) ≤ ε
+n,
+de sorte que
+P
+(n ⋃
+i=1
+{∣
+∣〈μN , fi〉 − 〈μ, fi〉∣
+∣ ≥ δ}
+)
+≤ ε.
+Autrement dit, P (μN ∈/ U ) ≤ ε, pour tout N ≥ N0. Par cons ́equent, puisque Φ est born ́e par ε sur U et que Φ est born ́e globalement par M , on obtient
+|EΦ(μN )| ≤ |E(Φ(μN )1{μN ∈U}
+)| + |E(Φ(μN )1{μN ∈/U}
+)|
+≤ ε + M P (μN ∈/ U )
+≤ ε(1 + M ),
+d’ou` le r ́esultat.
+Remarque 5.8. Ce re ́sultat n ́ecessite que la limite μ soit de ́terministe. Ou` cette proprie ́te ́ est-elle utilis ́ee dans la preuve ?
+5.2 Propagation du chaos
+L’objectif de cette section est de pr ́esenter quelques propri ́et ́es fondamentales li ́ees aux syst`emes chaotiques, proprie ́te ́s que nous appliquerons au syst`eme de particules `a interaction lipshitzienne rencontr ́e dans la section pr ́ece ́dente.
+5.2.1 Propri ́ete ́s g ́ene ́rales
+D ́efinition 5.9. Soit E un espace polonais. On dit qu’une mesure LN ∈ P(EN ) est sym ́etrique si pour toute permutation π de {1, . . . , N }, on a pour tous A1, . . . , AN ∈ B(E) :
+LN (A1 × · · · × AN ) = LN (Aπ(1) × · · · × Aπ(N)
+).
+Si LN est la loi de (X1, . . . , XN ), on dit que ces v.a. sont  ́echangeables 4.
+4. cette de ́finition est coh ́erente avec celle vue pre ́ce ́demment, cf. d ́efinition 5.3.
+60
+
+
+D ́efinition 5.10. Soit E un espace polonais. Soit L ∈ P(E) et soit (LN )N∈N une suite de mesures ou` pour tout N ≥ 1, LN ∈ P(EN ) est syme ́trique. On dit que (LN )N∈N est L-chaotique si pour tout k ≥ 1, pour tout φ1, . . . , φk ∈ Cb(E),
+∫
+EN
+φ1(x1) . . . φk(xk) LN (dx1, . . . , dxk, . . . , dxN ) −→
+N →+∞
+k
+∏
+i=1
+∫
+E
+φi dL. (5.7)
+Dans le cas d’un syst`eme de particules  ́echangeables (i.e. la loi du syst`eme est syme ́trique), on dit qu’il y a propagation du chaos si la suite de lois du syst`eme (LN ) est L-chaotique pour une certaine mesure L ∈ P(E). Comme le montre le r ́esultat suivant, la propagation du chaos pour un syst`eme de particules  ́echangeables est e ́quivalente `a la convergence en loi de la mesure empirique de ce syst`eme vers la mesure (d ́eterministe) L. C’est d’une certaine manie`re une loi des grands nombres.
+Th ́eor`eme 5.11. Soit E un espace polonais et pour tout N ∈ N∗, soit LN une mesure syme ́trique sur EN . Pour tout N ≥ 1, on peut introduire une variable ale ́atoire (X1,N , . . . , XN,N ) de loi LN , dont on note alors μN = 1
+N
+∑N
+k=1 δXk,N la mesure empirique. Soit μ ∈ P(E). Les assertions suivantes sont  ́equivalentes :
+(i) (LN )N∈N∗ est μ-chaotique ;
+(ii) (μN )N∈N∗ converge en loi vers μ ;
+(iii) la convergence (5.7) est v ́erifi ́ee pour k = 2.
+Le prochain re ́sultat donnera un crit`ere de tension pour la mesure empirique. On retrouve ainsi le sch ́ema de preuve ge ́ne ́ral pre ́sent ́e dans ce cours pour d ́emontrer la convergence d’une suite de variables al ́eatoires : 1) e ́tablir la tension ; 2) identifier la limite. Remarquons qu’en g ́en ́eral pour les syst`emes de particules, le deuxie`me point consistera `a montrer que toute valeur d’adh ́erence de (μN )N∈N∗ est solution d’un probl`eme de martingale non-lin ́eaire. Par exemple dans le cas du syst`eme de particules (5.1), on peut montrer que si X est le processus canonique sur C, alors pour tout φ ∈ C2
+b,
+φ(Xt) − φ(X0) −
+∫t
+0
+(1
+2 ∆φ +
+∫
+b(·, y)μs(dy) · ∇φ
+)
+(Xs) ds
+est une μ-martingale. En appliquant l’esp ́erance, on en d ́eduit alors que μ est solution faible de l’EDP (5.5).
+D ́emonstration. Dans toute la preuve, on notera Xi pour Xi,N , mais gardez bien en teˆte que la loi de Xi d ́epend implicitement de N . Montrons que (iii) implique (ii). Soit φ ∈ Cb(E), alors
+E
+[
+(〈μN , φ〉 − 〈μ, φ〉)2]
+=1
+N2
+N
+∑
+i,j=1
+E
+(φ(Xi) φ(Xj)) − 2
+N 〈μ, φ〉
+N
+∑
+i=1
+Eφ(Xi) + 〈μ, φ〉2
+=1
+N2
+N
+∑
+i=1
+E
+(φ(Xi)2) + 1
+N2
+∑
+i6=j
+E
+(φ(Xi) φ(Xj)) − 2
+N 〈μ, φ〉
+N
+∑
+i=1
+Eφ(Xi) + 〈μ, φ〉2,
+ce qui donne, en utilisant l’ ́echangeabilit ́e et la propri ́ete ́ de convergence (5.7) avec k = 1 et k = 2 :
+E
+[
+(〈μN , φ〉 − 〈μ, φ〉)2]
+=1
+N E (φ(X1)2) + N − 1
+N E (φ(X1)φ(X2)) − 2〈μ, φ〉 Eφ(X1) + 〈μ, φ〉2
+−→
+N→+∞ 0 + 〈μ, φ〉2 − 2〈μ, φ〉2 + 〈μ, φ〉2 = 0.
+61
+
+
+D’apr`es le lemme 5.7, on en d ́eduit que μN (→d) μ.
+Montrons maintenant que (ii) ⇒ (i). Soient k ≥ 1 et φ1, . . . , φk ∈ Cb(E), alors pour N ≥ k,
+∣ ∣ ∣ ∣
+∫
+EN
+φ1(x1) . . . φk(xk) LN (dx1, . . . , dxN ) −
+k
+∏
+i=1
+∫
+E
+φi dL
+∣ ∣ ∣ ∣
+≤
+∣ ∣ ∣ ∣ ∣
+∫
+EN
+φ1(x1) . . . φk(xk) LN (dx1, . . . , dxN ) − E
+(k ∏
+i=1
+〈μN , φi〉
+)∣ ∣ ∣ ∣ ∣
+(5.8)
++
+∣ ∣ ∣ ∣ ∣
+E
+(k ∏
+i=1
+〈μN , φi〉
+)
+−
+k
+∏
+i=1
+∫
+E
+φi dL
+∣ ∣ ∣ ∣ ∣
+. (5.9)
+Par hypoth`ese (μN (→d) μ), le terme (5.9) tend vers 0. Par sym ́etrie, le premier terme (5.8) vaut quant `a lui
+∣ ∣ ∣ ∣ ∣
+E
+(k ∏
+i=1
+φi (X i )
+)
+−E
+(k ∏
+i=1
+〈μN , φi〉
+)∣ ∣ ∣ ∣ ∣
+=
+∣ ∣ ∣ ∣ ∣ ∣
+E
+
+
+1
+N!
+∑
+π∈SN
+k
+∏
+i=1
+φi(Xπ(i)) −
+k
+∏
+i=1
+1
+N
+N
+∑
+j=1
+φi (X j )
+
+
+∣ ∣ ∣ ∣ ∣ ∣
+,
+ou` on a not ́e SN le groupe des permutations de taille N . On va majorer ponctuellement le contenu de cette derni`ere esp ́erance, c’est-`a-dire
+∣ ∣ ∣ ∣ ∣
+E
+(k ∏
+i=1
+φi (X i )
+)
+−E
+(k ∏
+i=1
+〈μN , φi〉
+)∣ ∣ ∣ ∣ ∣
+≤ sup
+(x1,...,xN )∈EN
+∣ ∣ ∣ ∣ ∣ ∣
+1
+N!
+∑
+π∈SN
+k
+∏
+i=1
+φi(xπ(i)) −
+k
+∏
+i=1
+1
+N
+N
+∑
+j=1
+φi (xj )
+∣ ∣ ∣ ∣ ∣ ∣
+.
+On remarque que le deuxi`eme produit se d ́ecompose de la fac ̧on suivante :
+k
+∏
+i=1
+1
+N
+N
+∑
+j=1
+φi(xj) = 1
+Nk
+N
+∑
+j1 ,...,jk =1
+k
+∏
+i=1
+φi(xji )
+=1
+Nk
+∑
+J ∈Ik,N
+k
+∏
+i=1
+φi(xJ(i)) + 1
+Nk
+∑
+J ∈/Ik,N
+k
+∏
+i=1
+φi (xJ (i) ),
+ou` Ik,N est l’ensemble des injections de {1, . . . , k} vers {1, . . . , N }. Par ailleurs, pour une
+injection J ∈ Ik,N donn ́ee, on retrouve le terme ∏k
+i=1 φi(xJ(i)) (N − k)!-fois dans la somme
+∑
+π∈SN
+∏k
+i=1 φi(xπ(i)), donc en regroupant ces termes, on obtient :
+∣ ∣ ∣ ∣ ∣ ∣
+1
+N!
+∑
+π∈SN
+k
+∏
+i=1
+φi(xπ(i)) −
+k
+∏
+i=1
+1
+N
+N
+∑
+j=1
+φi (xj )
+∣ ∣ ∣ ∣ ∣ ∣
+=
+∣ ∣ ∣ ∣ ∣ ∣
+(N − k)!
+N!
+∑
+J ∈Ik,N
+k
+∏
+i=1
+φi(xJ(i)) − 1
+Nk
+∑
+J ∈Ik,N
+k
+∏
+i=1
+φi(xJ(i)) − 1
+Nk
+∑
+J ∈/Ik,N
+k
+∏
+i=1
+φi (xJ (i) )
+∣ ∣ ∣ ∣ ∣ ∣
+=
+∣ ∣ ∣ ∣ ∣ ∣
+( (N − k)!
+N! − 1
+Nk
+) ∑
+J ∈Ik,N
+k
+∏
+i=1
+φi(xJ(i)) − 1
+Nk
+∑
+J ∈/Ik,N
+k
+∏
+i=1
+φi (xJ (i) )
+∣ ∣ ∣ ∣ ∣ ∣
+.
+62
+
+
+On utilise maintenant le fait que les φi sont born ́es (on note M = max ‖φi‖∞) et que le cardinal de Ik,N vaut N!
+(N −k)! :
+∣ ∣ ∣ ∣ ∣ ∣
+1
+N!
+∑
+π∈SN
+k
+∏
+i=1
+φi(xπ(i)) −
+k
+∏
+i=1
+1
+N
+N
+∑
+j=1
+φi (xj )
+∣ ∣ ∣ ∣ ∣ ∣
+≤ Mk
+(( (N − k)!
+N! − 1
+Nk
+) N!
+(N − k)! + 1
+Nk
+(
+Nk − N!
+(N − k)!
+))
+= 2M k
+(
+1 − N!
+N k(N − k)!
+)
+.
+Ainsi
+∣ ∣ ∣ ∣ ∣
+E
+(k ∏
+i=1
+φi (X i )
+)
+−E
+(k ∏
+i=1
+〈μN , φi〉
+)∣ ∣ ∣ ∣ ∣
+≤ 2M k
+(
+1 − N!
+N k(N − k)!
+)
+,
+et on v ́erifie que le terme de droite tend vers 0 lorsque N → +∞. On a donc montr ́e que le terme (5.8) tend vers 0, d’ou` la propagation du chaos.
+Enfin, on a bien suˆr que (i) ⇒ (iii), d’ou` l’e ́quivalence des trois propositions.
+Enonc ̧ons maintenant un crit`ere de tension.
+Th ́eor`eme 5.12. On reprend les mˆemes hypoth`eses et notations qu’au th ́eor`eme 5.11. On note L1N la premie`re marginale de LN , c’est-`a-dire la loi de X1 (et par sym ́etrie de
+n’importe quel Xk) dans le syste`me de N particules. Alors (μN )N∈N est tendue 5 si et seulement si la suite (L1N )N∈N est tendue.
+Remarque 5.13. Attention, il ne faut pas confondre avec le r ́esultat que vous deviez d ́emontrer en DM. Dans le DM, on dispose d’une suite de variables (Xk)k∈N et on utilise la tension de la loi de X1 seule pour de ́montrer que ( 1
+N
+∑N
+k=1 δXk )N∈N∗ est tendue. Alors
+qu’ici on a pour tout N ∈ N∗, des variables (X1, . . . , XN ) ou` la loi de X1 d ́epend de N .
+D ́emonstration. On commence par introduire la notion d’intensit ́e d’une mesure : pour ν ∈ P(P(E)) 6, l’intensit ́e de ν, not ́ee I(ν) est une mesure de probabilit ́e sur E d ́efinie par
+〈I(ν), f 〉 =
+∫
+P (E )
+〈m, f 〉 ν(dm), ∀f ∈ L∞(E).
+On peut en fait d ́emontrer que si (νn) est une famille de mesures de P(P(E)), (νn) est tendue si et seulement si la famille (I(νn)) est tendue dans P(E) (voir preuve de la Proposition 2.2 (ii) de [19]). Ainsi, on remarque que par sym ́etrie, la mesure d’intensite ́ de la loi de μN n’est autre que la loi L1N (exercice), d’ou` le r ́esultat souhait ́e.
+5. on rappelle que cela signifie que pour tout ε > 0, il existe un compact K de P(P(E)) tel que infN P(μN ∈ K) ≥ 1 − ε. 6. on rappelle que graˆce au the ́ore`me 2.32, P(P(E)) est un espace polonais.
+63
+
+
+5.2.2 Applications aux syste`mes de particules a` coefficients Lipschitz
+On reprend ici les notations du paragraphe 5.1 et les hypoth`eses du th ́eor`eme 5.5, en particulier on suppose que pour tout N ∈ N∗, (X0i)i≤N est une famille  ́echangeable et que les particules du syste`me (5.1) et celles donne ́es par l’e ́quation de McKean-Vlasov sont dirig ́ees par les mˆemes browniens et ont les meˆmes CI (X0i)i≤N . En utilisant le lemme 5.7, on va montrer la convergence en loi de la mesure empirique sur l’espace des trajectoires : pour φ ∈ Cb(CT ), en utilisant l’ ́echangeabilit ́e des particules
+∣
+∣E (〈μN , φ〉 − 〈μ, φ〉)∣
+∣≤
+∣
+∣
+∣E
+(
+〈μN , φ〉 − 1
+N
+N
+∑
+j=1
+φ(X i )
+)∣ ∣
+∣+E
+(∣ ∣
+1
+N
+N
+∑
+j=1
+φ(Xi) − 〈μ, φ〉∣
+∣
+)
+≤
+∣
+∣E(φ(X1,N ) − φ(X1))∣
+∣+E
+(∣ ∣
+1
+N
+N
+∑
+j=1
+φ(Xi) − 〈μ, φ〉∣
+∣
+)
+Pour le dernier terme, on a l’identit ́e g ́en ́erale suivante : si (Yk)k∈N est une famille de variables al ́eatoires iid, centr ́ees et de second moment fini, alors
+E
+
+
+(
+1
+N
+N
+∑
+k=1
+Yk
+)2
+= 1
+N E ((Y1)2) .
+Ainsi
+E
+(∣ ∣
+1
+N
+N
+∑
+j=1
+φ(Xi) − 〈μ, φ〉∣
+∣
+)
+≤
+(E(φ(Xi) − 〈μ, φ〉)2)1/2
+√N −→
+N→∞ 0. (5.10)
+Pour le terme E(φ(X1,N )−φ(X1)), on a simplement qu’il tend vers 0. En effet, cela est
+ ́equivalent `a la convergence en loi de X1 vers X1 dans CT . Par le the ́ore`me Portmanteau,
+il suffit de montrer que E(ψ(X1,N ) − ψ(X1)) tend vers 0 pour toute fonction Lipschitz ψ : CT → R. Or pour une telle fonction, on sait d’apr`es le th ́eor`eme 5.5 que
+∣
+∣E(ψ(X1,N ) − ψ(X1))∣
+∣ ≤ CT
+√N ‖ψ‖Lip. (5.11)
+Ainsi E(φ(X1,N ) − φ(X1)) tend vers 0, pour tout φ ∈ Cb(CT ), ce qui combin ́e avec (5.10)
+implique que
+∣
+∣E (〈μN , φ〉 − 〈μ, φ〉)∣
+∣ −→
+N→∞ 0.
+D’apr`es le lemme 5.7, on a donc que (μN )N∈N converge en loi vers μ dans l’espace P(CT ). Grˆace au th ́eor`eme 5.11, on a donc propagation du chaos pour ce syst`eme de particules.
+Mˆeme si cela ne caract ́erise pas la convergence en loi, on peut noter graˆce `a (5.10) et (5.11) que pour tout φ ∈ Lip(CT ),
+∣
+∣E (〈μN , φ〉 − 〈μ, φ〉)∣
+∣ ≤ √CN .
+5.3 Conside ́rations diverses sur les interactions singulie`res
+Equation de Burgers, en dimension 1, mod`ele de m ́ecanique des fluides, b(x, y) = cδ0(x − y) :
+∂tu = 1
+2∂2
+xxu − c ∂xu2.
+64
+
+
+Noyau de Biot-Savart dans R2, b(x, y) = b0(x − y) avec b0(x) = 1
+π
+x⊥
+|x|2 , alors si u est
+la vorticite ́ de v (u = rot v), solution de l’e ́quation de Navier-Stokes en 2d, u est solution de l’ ́equation
+∂tu = 1
+2 ∆u − ∇ (u b0 ∗ u) .
+Keller-Segel (parabolique-elliptique), mode`le chimiotaxie. Dans R2, b(x, y) = b0(x − y) avec b0(x) = −χ x
+|x|2 , χ > 0.
+Noyaux de Riesz pour les plasmas (...).
+Interactions de Lennard-Jones (noyau attractif-r ́epulsif, dynamique mol ́eculaire).
+On voit qu’il s’agit d’EDP non-line ́aires dans tous les cas.
+65
+
+
+Annexe A
+R ́esultats divers
+A.1 Topologie et analyse fonctionnelle
+Lemme A.1. Soit (E, d) un espace m ́etrique. Alors E est compact si et seulement si il est pr ́ecompact et complet.
+D ́emonstration. Exercice.
+Lemme A.2. Soit (E, d) un espace m ́etrique s ́eparable. Alors il existe une distance d ̃ e ́quivalente `a d (i.e. qui induit la mˆeme topologie) et telle que (E, d ̃) est pr ́ecompact.
+D ́emonstration. Voir Lemme 1.2 de [14].
+Compl ́et ́e d’un espace m ́etrique. Soit (E, d) un espace me ́trique. Soit ̂E l’ensemble des suites de Cauchy sur E. On consid`ere la relation d’ ́equivalence suivante : pour u, v ∈ ̂E, u ∼ v si et seulement si d(un, vn) → 0 lorsque n → ∞. On d ́efinit alors le compl ́et ́e de E comme  ́etant l’ensemble E ̃ donn ́e par
+E ̃ = ̂E/∼ =
+{
+[u] : u ∈ ̂E
+}
+,
+ou` [u] de ́signe la classe d’ ́equivalence de u pour ∼. On consid ́erera toujours que E est un sous-ensemble de E ̃ grˆace `a l’injection canonique
+E → E ̃
+x 7→ [x] ,
+ou` [x] d ́esigne la classe d’ ́equivalence de la suite constante e ́gale `a x (qui est bien de Cauchy). Par ailleurs, on d ́efinit une distance sur E ̃, toujours note ́e d par simplicit ́e, par
+d([u], [v]) = lim
+n→+∞ d(un, vn), ∀[u], [v] ∈ E ̃.
+(On v ́erifiera que le membre de droite ne d ́epend pas du choix du repr ́esentant, que la limite existe et qu’ils s’agit bien d’une distance sur E ̃). Cette distance  ́etend naturellement la distance d de E, `a nouveau en consid ́erant les suites constantes : d(x, y) = d([x], [y]), ∀x, y ∈ E. (E ̃, d) est donc un espace m ́etrique. Montrons que E est dense dans E ̃, ce qui nous sera utile ensuite pour montrer que E ̃ est complet. Soit [x] ∈ E ̃ et ε > 0. Soit (xn)n∈N une suite de Cauchy de E dans la classe
+66
+
+
+d’ ́equivalence de [x]. Il existe N ∈ N tel que pour tous m, n ≥ N , d(xm, xn) < ε/2. On a alors d([xN ], [x]) = lim
+n→+∞ d(xN , xn) ≤ ε/2 < ε.
+D’ou` la densit ́e de E dans E ̃. Montrons que toute suite de Cauchy de (E, d) converge dans (E ̃, d). Soit (xn)n∈N une suite de Cauchy de E et notons x = [(xn)n∈N]. On rappelle que [xn] ∈ E ̃ d ́esigne la classe d’ ́equivalence de la suite constante e ́gale `a xn. Alors pour tout m ∈ N,
+d([xm], [x]) = lim
+n→+∞ d(xm, xn),
+et comme (xn) est de Cauchy, la limite pr ́ece ́dente est aussi petite qu’on veut pour m suffisamment grand. Donc limm→+∞ d([xm], [x]) = 0 et la proprie ́te ́ est d ́emontre ́e. Puisque E est dense dans E ̃, on pourra v ́erifier que le fait que toute suite de Cauchy de (E, d) converge dans (E ̃, d) implique que (E ̃, d) est complet.
+Lemme A.3. Soit E et F deux espaces me ́triques avec F complet. Soit E0 une partie dense de E et f une application uniforme ́ment continue de E0 vers F . Alors f se prolonge de mani`ere unique en une fonction uniforme ́ment continue de E vers F .
+67
+
+
+Bibliographie
+[1] Nathana ̈el Berestycki. Stochastic calculus. https://homepage.univie.ac.at/ nathanael.berestycki/teach/StoCal/sc3.pdf, 2010. Cambridge, Part III Lecture notes.
+[2] Patrick Billingsley. Convergence of probability measures. Wiley Series in Probability and Statistics : Probability and Statistics. John Wiley & Sons, Inc., New York, second edition, 1999. A Wiley-Interscience Publication.
+[3] V. I. Bogachev. Measure theory. Vol. I, II. Springer-Verlag, Berlin, 2007.
+[4] W. Braun and K. Hepp. The Vlasov dynamics and its fluctuations in the 1/N limit of interacting classical particles. Comm. Math. Phys., 56(2) :101–113, 1977.
+[5] R. L. Dobruˇsin. Vlasov equations. Funktsional. Anal. i Prilozhen., 13(2) :48–58, 96, 1979.
+[6] Richard Durrett. Stochastic calculus. Probability and Stochastics Series. CRC Press, Boca Raton, FL, 1996. A practical introduction.
+[7] Jean Jacod and Albert N. Shiryaev. Limit theorems for stochastic processes, volume 288 of Grundlehren der Mathematischen Wissenschaften [Fundamental Principles of Mathematical Sciences]. Springer-Verlag, Berlin, second edition, 2003.
+[8] M. Kac. Foundations of kinetic theory. In Proceedings of the Third Berkeley Symposium on Mathematical Statistics and Probability, 1954–1955, vol. III, pages 171–197. University of California Press, Berkeley and Los Angeles, 1956.
+[9] Olav Kallenberg. Foundations of modern probability. Probability and its Applications (New York). Springer-Verlag, New York, 1997.
+[10] Claude Kipnis and Claudio Landim. Scaling limits of interacting particle systems, volume 320 of Grundlehren der Mathematischen Wissenschaften [Fundamental Principles of Mathematical Sciences]. Springer-Verlag, Berlin, 1999.
+[11] Jean-Franc ̧ois Le Gall. Int ́egration, probabilit ́es et processus al ́eatoires. https://www. imo.universite-paris-saclay.fr/~jflegall/IPPA2.pdf, 2006. Notes de cours, ENS.
+[12] Sylvie M ́el ́eard. Asymptotic behaviour of some interacting particle systems ; McKeanVlasov and Boltzmann models. In Probabilistic models for nonlinear partial differential equations (Montecatini Terme, 1995), volume 1627 of Lecture Notes in Math., pages 42–95. Springer, Berlin, 1996.
+68
+
+
+[13] Pierre-Loı ̈c Me ́liot. Convergence de mesures, processus de poisson et processus de le ́vy. https://www.imo.universite-paris-saclay.fr/~meliot/master/ poisson.pdf, 2016. Notes de cours de M2, Orsay.
+[14] Gr ́egory Miermont. The ́ore`mes limites et processus de poisson. http://perso. ens-lyon.fr/gregory.miermont/thlim.pdf, 2011-2012. Notes de cours de M2, Orsay.
+[15] Daniel Revuz and Marc Yor. Continuous martingales and Brownian motion, volume 293 of Grundlehren der Mathematischen Wissenschaften [Fundamental Principles of Mathematical Sciences]. Springer-Verlag, Berlin, third edition, 1999.
+[16] Walter Rudin. Functional analysis. International Series in Pure and Applied Mathematics. McGraw-Hill, Inc., New York, second edition, 1991.
+[17] Sylvia Serfaty. Mean field limit for Coulomb-type flows. Duke Math. J., 169(15) : 2887–2935, 2020.
+[18] Daniel W. Stroock and S. R. Srinivasa Varadhan. Multidimensional diffusion processes. Classics in Mathematics. Springer-Verlag, Berlin, 2006.
+[19] Alain-Sol Sznitman. Topics in propagation of chaos. In E ́cole d’E ́t ́e de Probabilit ́es de Saint-Flour XIX—1989, volume 1464 of Lecture Notes in Math., pages 165–251. Springer, Berlin, 1991.
+[20] C ́edric Villani. Limite de champ moyen. https://cedricvillani.org/sites/dev/ files/old_images/2013/03/champ-moyen.pdf, 2001-2002. Notes de cours de DEA de l’ENS Lyon.
+69

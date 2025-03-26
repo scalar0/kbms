@@ -1,0 +1,6395 @@
+Partie II
+Analyse Complexe
+François DE MARÇAY
+Département de Mathématiques d’Orsay Université Paris-Sud, France
+
+
+2
+Table des matières
+V. Fonctions entières et produits infinis . . . . . . . . . . . . . . . . . . . . . . . 4
+1. Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+2. Formule de Jensen . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+3. Produits infinis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+4. Formule de produit d’Euler pour la fonction sinus . . . . . . . . . . . . . . . . 15
+5. Formule produit d’Euler pour les nombres premiers . . . . . . . . . . . . . 18
+6. Produits infinis de Weierstrass . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+7. Théorème de factorisation de Hadamard . . . . . . . . . . . . . . . . . . . . . . . . . 23
+8. Démonstration du lemme-clé . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 27
+9. Exercices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 31
+VI. Fonction Gamma d’Euler et fonction zêta de Riemann . . . . . 32
+1. Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+2. La fonction Γ(z) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 32
+3. La fonction ζ(s) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 41
+4. Exercices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+VII. Théorème des nombres premiers . . . . . . . . . . . . . . . . . . . . . . . . . 46
+1. Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+2. Sept lemmes capitaux . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+3. Démonstration du théorème analytique . . . . . . . . . . . . . . . . . . . . . . . . . . 52
+4. Exercices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 55
+XII. Théorème de l’application conforme de Riemann . . . . . . . . . 56
+1. Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 56
+2. Théorèmes d’inversion locale et globale dans R2 . . . . . . . . . . . . . . . . . . 56
+3. Inversion holomorphe . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
+4. Forme normale locale d’une fonction holomorphe . . . . . . . . . . . . . . . . 61
+5. Multiplicités locales et théorème de l’application ouverte . . . . . . . . . 62
+6. Fonctions holomorphes injectives : théorème fondamental . . . . . . . . 64
+7. Équivalence entre le disque unité D et le demi-plan supérieur H . . . 65
+8. Lemme de Schwarz . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67
+
+
+3
+9. Automorphismes du disque unité . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 68
+10. Présentation du théorème de Riemann . . . . . . . . . . . . . . . . . . . . . . . . . . . 70
+11. Théorème de Montel pour les familles uniformément bornées et continues . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+72
+12. Démonstration du Théorème de Montel . . . . . . . . . . . . . . . . . . . . . . . . . . 74
+13. Préservation de l’injectivité à la limite . . . . . . . . . . . . . . . . . . . . . . . . . . . 80
+14. Démonstration du théorème de Riemann . . . . . . . . . . . . . . . . . . . . . . . . . 82
+15. Exercices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 87
+XIII. Examens corrigés . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 88
+3. Examen 2. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 88
+4. Corrigé de l’examen 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 93
+
+
+4 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Fonctions entières et produits infinis
+François DE MARÇAY
+Département de Mathématiques d’Orsay Université Paris-Sud, France
+1. Introduction
+Dans ce chapitre, nous étudions les fonctions holomorphes entières, à savoir celles qui sont définies sur l’ouvert Ω = C consistant en le plan complexe tout entier. D’après le principe des zéros isolés, toute f ∈ O(C) non identiquement nulle ne peut s’annuler que sur une collection de points n’ayant aucun point d’accumulation dans C. Par conséquent, si l’ensemble :
+Z(f ) := {a ∈ C : f (a) = 0},
+est de cardinal infini, il consiste nécessairement en une suite {an}∞
+n=1 = Z(f ) de points tendant vers :
+∞ = nli→m∞ |an|.
+Inversement, étant donné une suite quelconque {an}∞
+n=1 de points dans C, existe-t-il une fonction f ∈ O(C) qui s’annule en ces points et nulle part ailleurs ? Le théorème de Weierstrass affirme que la réponse est oui, à condition de corriger le produit naïf :
+(z − a1
+) (z − a2
+) (z − a3
+) ···
+par des facteurs appropriés afin de le rendre convergent. Autre question : comment les fonctions holomorphes entières croissent-elles à l’infini ? Ici, la théorie va illustrer un principe général important : plus la croissance est grande, plus il peut y avoir de zéros. D’ailleurs, ce principe se manifeste déjà clairement dans le cas simple des polynômes :
+P (z) = a0zd + a1zd−1 + · · · + ad (a0 6= 0),
+de croissance à l’infini :
+max
+|z|=R
+∣
+∣P (z)∣
+∣∼
+R → ∞ |a0| Rd,
+et qui possèdent un nombre de zéros (comptés avec multiplicité) gouverné par cette croissance, d’après le théorème fondamental de l’algèbre. Pour les fonctions entières générales (non nécessairement polynomiales), c’est la formule de Jensen, par laquelle nous allons commencer, qui va ouvrir un accès à des informations sur leurs zéros.
+
+
+2. Formule de Jensen 5
+2. Formule de Jensen
+Un court préliminaire s’impose. Soit DR(z0) un disque de rayon R > 0 centré en un point z0 ∈ C, et soit h ∈ O(DR(z0)). Pour tout rayon intermédiaire 0 < r < R, la formule de Cauchy donne :
+h(z0) = 1
+2iπ
+∫
+Cr (z0 )
+h(ζ )
+ζ − z0
+dζ ,
+d’où en paramétrant ζ = z0 + r eiθ :
+h(z0) = 1
+2π
+∫ 2π
+0
+h
+(z0 + r eiθ) dθ,
+ce qui veut dire que la valeur au centre est égale à la moyenne sur (tout) le cercle Cr(z0). En prenant la partie réelle, on obtient une formule de la moyenne :
+Re h(z0) = 1
+2π
+∫ 2π
+0
+(2.1) Re h(z0 + r eiθ) dθ.
+Choisissons maintenant z0 := 0, et abrégeons DR := DR(0) ainsi que CR := CR(0). Le résultat suivant relie les zéros d’une fonction holomorphe à ce qu’on connaît d’elle au bord.
+Théorème 2.2. [Formule de Jensen] Soit une fonction holomorphe f ∈ O(Ω) dans un ouvert Ω ⊃ DR ∪ CR satisfaisant :
+f (0) 6= 0 et f ∣
+∣CR
+6= 0.
+Si z1, . . . , zL avec L > 0 entier, sont les zéros de f dans DR, comptés (répétés) avec multiplicités, alors :
+log
+∣
+∣f (0)∣
+∣=
+L
+∑
+`=1
+log |z`|
+R +1
+2π
+∫ 2π
+0
+log
+∣
+∣f (
+R eiθ)∣
+∣ dθ.
+En fait, le principe des zéros isolés assure que ce nombre de zéros 0 6 L < ∞ est fini — il peut être nul ! —, et une autre manière d’exprimer cela est d’introduire les zéros distincts de f :
+w1, . . . , wK de multiplicités m1, . . . , mK > 1,
+avec L = m1 + · · · + mK, de telle sorte qu’après renumérotation éventuelle :
+z1 = · · · = zm1 = w1,
+························
+zL−mK+1 = · · · = zL = wK,
+ce qui veut dire que dans la liste z1, . . . , zL, on répète chaque zéro autant de fois que sa multiplicité. Puisque z1, . . . , zL ∈ DR sont les zéros de f ∣
+∣DR∪CR , on a :
+0 6= f (z) (∀ z ∈ DR ∪ CR \ {z1,...,zL}).
+Démonstration. Observons que si f1 et f2 sont deux fonctions satisfaisant les hypothèses et la conclusion du théorème, alors leur produit f := f1f2 satisfait aussi les hypothèses, donc en utilisant log (x1 x2
+) = log x1 + log x2 pour x1, x2 ∈ R∗
++, une simple addition des deux formules de Jensen pour f1 et pour f2 donne la formule désirée pour f .
+
+
+6 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Introduisons alors la fonction :
+g(z) := f (z)
+(z − z1) · · · (z − zL)
+= f (z)
+(z − w1)m1 · · · (z − wK)mK
+,
+définie et holomorphe dans Ω∖{z1, . . . , zL} = Ω∖{w1, . . . , wK}. Mais comme on a au voisinage de chaque zéro :
+f (z) = (z − wk
+)mk [αk + O(z − w)]
+(1 6 k 6 K),
+avec αk 6= 0, il est clair que g n’a que des singularités illusoires en les wk, donc :
+g ∈ O(Ω) avec g(z1) 6= 0, . . . , g(zL) 6= 0,
+et comme ni le numérateur de g, ni son dénominateur ne s’annulent ailleurs, nous déduisons que :
+g
+∣
+∣DR ∪CR
+6= 0 (partout).
+Grâce à l’observation préliminaire, en récrivant :
+f (z) = g(z) (z − z1
+) · · · (z − zL
+),
+il suffit d’établir la formule pour deux types de fonctions.
+Assertion 2.3. Si une fonction g, holomorphe dans un voisinage ouvert de DR ∪ CR, ne s’annule jamais, alors :
+log
+∣
+∣g(0)∣
+∣ = 0+ 1
+2π
+∫ 2π
+0
+log
+∣
+∣g(
+R eiθ)∣
+∣ dθ.
+Démonstration. Soit R′ > R assez proche avec DR′ ⊃ DR ∪ CR et avec g ∈ O(DR′
+)
+jamais nulle dans DR′. Puisque DR′ est simplement connexe, un théorème déjà vu fournit un « logarithme » de g, à savoir une fonction h ∈ O(DR′
+) telle que :
+g(z) = eh(z).
+Il vient :
+∣
+∣g(z)∣
+∣ = eRe h(z),
+puis :
+log
+∣
+∣g(z)∣
+∣ = Re h(z),
+et la formule de la moyenne (2.1) conclut.
+Assertion 2.4. Pour w ∈ DR quelconque, la fonction f (z) := z − w satisfait :
+log |w| = log |w|
+R +1
+2π
+∫ 2π
+0
+log
+∣
+∣R eiθ − w∣
+∣ dθ.
+Notons que le membre de gauche est bien log |f (0)| ici.
+Démonstration. Écrivons à droite R
+(eiθ − w
+R
+):
+log |w| =? log |w| − log R + log R + 1
+2π
+∫ 2π
+0
+log
+∣ ∣
+∣eiθ − w
+R
+∣ ∣
+∣ dθ,
+
+
+2. Formule de Jensen 7
+simplifions, et renommons a := w
+R pour demander si on a bien :
+0 =? 1
+2π
+∫ 2π
+0
+log
+∣
+∣eiθ − a∣
+∣ dθ
+[|eiθ| = 1] = 1
+2π
+∫ 2π
+0
+log
+∣
+∣1 − a e−iθ∣
+∣ dθ
+[θ 7−→ − θ] = 1
+2π
+∫ 2π
+0
+log
+∣
+∣1 − a eiθ∣
+∣ dθ (∀ |a| < 1)?
+Mais oui ! Car la fonction holomorphe :
+g(z) := 1 − a z,
+jamais nulle dans {|z| 6 1}, satisfait les hypothèses de l’Assertion précédente, où R = 1, avec log |g(0)| = log 1 = 0.
+Ceci conclut la démonstration du Théorème 2.2.
+Maintenant, toujours dans un disque DR = DR(0) de rayon 0 < R < ∞, sur tout sousdisque ouvert 0 ∈ Dr ⊂ DR de rayon intermédiaire 0 < r < R, introduisons une notation pour toute f ∈ O(DR) avec f 6≡ 0 :
+nf (r) := nombre de zéros de f dans Dr
+comptés avec multiplicité.
+De manière dynamique, il faut s’imaginer que les disques Dr ⊂ DR croissent, et voir r 7−→ nf (r) comme une fonction à valeurs dans N.
+Observation 2.5. La fonction r 7−→ nf (r) est croissante.
+En termes de fonctions indicatrices, lorsque R < ∞, en supposant comme dans le Théorème 2.2 que f n’a qu’un nombre fini L > 0 de zéros z1, . . . , zL ∈ DR, on a :
+nf (r) =
+L
+∑
+`=1 |z` |<r
+1=
+L
+∑
+`=1
+(2.6) 1]|z`|,∞[(r),
+et donc nous pouvons transformer comme suit la somme dans le membre de droite de la formule de Jensen (affectée d’un signe moins) :
+L
+∑
+`=1
+log R
+|z`| =
+L
+∑
+`=1
+∫R
+|z`|
+dr
+r
+=
+L
+∑
+`=1
+∫R
+0
+1]|z`|,∞[(r) dr
+r
+=
+∫R
+0
+(L ∑
+`=1
+1]|z`|,∞[(r)
+) dr
+r
+[Reconnaître (2.6)] =
+∫R
+0
+nf (r) dr
+r.
+
+
+8 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Théorème 2.7. [Réexpression de Jensen] Pour f ∈ O(Ω ⊃ DR ∪ CR
+) avec f (0) 6= 0 et f
+∣
+∣CR
+6= 0, on a :
+∫R
+0
+nf (r) dr
+r=1
+2π
+∫ 2π
+0
+log
+∣
+∣f (
+R eiθ)∣
+∣ dθ − log |f (0)|.
+Intuitivement, pour f ∈ O(C) holomorphe entière, en considérant que la constante terminale − log |f (0)| devient négligeable, lorsque R −→ ∞, cette égalité s’interprète comme établissant une relation entre le nombre de zéros, à gauche, et la « croissance », à droite. Afin de préciser ce qu’on peut entendre par croissance, voici un concept — parmi d’autres.
+Définition 2.8. On dit qu’une fonction f ∈ O(C) a un ordre de croissance 6 ρ, avec ρ ∈ R+ ∪ {∞}, s’il existe deux constantes 0 6 A, B < ∞ telles que :
+∣
+∣f (z)∣
+∣ 6 A eB |z|ρ
+(∀ z ∈ C).
+L’ordre de croissance ρf de f est alors le plus petit de ces ρ :
+ρf := inf ρ.
+Il peut être infini — penser à eez —, mais nous n’étudierons que les cas où ρf < ρ < ∞. Par exemple, ez est d’ordre 1 (exercice), et ez2 d’ordre 2 (exercice). Le premier résultat intéressant de la théorie majore le nombre de zéros en termes de la croissance.
+Théorème 2.9. Si f ∈ O(C) a un ordre de croissance 6 ρ < ∞, alors il existe une constante 0 6 C < ∞ telle que :
+nf (r) 6 C rρ (∀ r > 1).
+De plus, si z1, z2, z3, . . . sont tous les zéros non nuls de f , alors pour tout ρ′ > ρ :
+∞
+∑
+`=1
+1
+|z`|ρ′ < ∞.
+Le cas où f n’a qu’un nombre fini de zéros, voire n’a aucun zéro, est inclus dans cet énoncé, mais devient trivial. De plus, un zéro éventuel de f à l’origine ne perturbe rien, puisque l’objet d’étude est le comportement de f sur Dr quand r −→ ∞.
+Démonstration. Soit ν := νf (0) l’ordre de f à l’origine, d’où :
+f (z) = zν (α + O(z)),
+avec α 6= 0. Si nous introduisons la fonction :
+F (z) := f (z)
+zν α ,
+il vient :
+nF (r) = nf (r) − ν,
+décalage par une constante devenant invisible quand r −→ ∞, quitte à augmenter la constante C de la majoration du théorème. Nous pouvons donc supposer que :
+f (0) = 1.
+
+
+3. Produits infinis 9
+L’idée-clé est d’écrire la formule de Jensen — au centre ! — pour R = 2 r :
+nf (r) log 2 = nf (r) [log (2 r) − log(r)]
+= nf (r)
+∫ 2r
+r
+ds
+s
+[Croissance] 6
+∫ 2r
+r
+nf (s) ds
+s
+[Jensen] 6
+∫ 2r
+0
+nf (s) ds
+s + log |f (0)|◦ = 1
+2π
+∫ 2π
+0
+log
+∣
+∣f (2reiθ)∣
+∣ dθ
+[Hypothèse] 6 1
+2π
+∫ 2π
+0
+log
+∣
+∣A eB |2r|ρ ∣
+∣ dθ
+= 2π
+2π
+(
+log A + B 2ρ rρ)
+[∀ r > 1] 6 constante · rρ,
+et l’inégalité entre membres extrêmes donne bien nf (r) 6 C rρ.
+Ensuite, puisque tous les zéros z`, ` = 1, 2, 3, . . . de f sont non nuls, avec ρ′ > ρ qui garantit :
+2ρ′−ρ > 1,
+l’idée-clé est de décomposer {|z| > 1} en anneaux dyadiques successifs afin de majorer pour conclure :
+∞
+∑
+`=1
+1
+|z`|ρ′ 6
+∞
+∑
+j=0
+( ∑
+2j 6|z`|<2j+1
+1
+|z`|ρ′
+)
+6
+∞
+∑
+j=0
+nf
+(2j+1) 1
+(2j )ρ′
+6
+∞
+∑
+j=0
+C 2(j+1)ρ 1
+2jρ′
+= C 2ρ
+∞
+∑
+j=0
+1
+(2ρ′−ρ)j
+= C 2ρ 1
+1− 1
+2ρ′ −ρ
+< ∞.
+3. Produits infinis
+Soit {an}∞
+n=1 une suite quelconque de nombres complexes an ∈ C. Dans l’étude des
+séries infinies ∑∞
+n=1 an, il est bien connu que la convergence nécessite que an n−→→∞ ∞,
+parfois rapidement. De manière analogue, si on souhaite élaborer une théorie des produits
+infinis convergents :
+∞
+∏
+n=1
+bn,
+
+
+10 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+on s’attend à ce que les bn tendent (rapidement) vers 1 — sinon le produit divergera ! C’est pourquoi on écrira dorénavant bn = 1 + an, en ayant en tête que an n−→→∞ 0.
+Définition 3.1. Si la limite :
+lim
+N→∞
+N
+∏
+n=1
+(1 + an
+) =: `,
+existe dans C, on dit que le produit infini des 1 + an converge, et on le note :
+∞
+∏
+n=1
+(1 + an
+).
+Les propriétés spéciales du nombre 0 relativement à la multiplication entraînent pour les produits infinis quelques particularités qui n’ont pas de contrepartie pour les séries : si 1 + an = 0 pour un certain n, on a ∏N
+n=1 (1 + an) = 0 dès que N > n, d’où la convergence
+triviale ∏∞
+n=1 (1 + an) = 0. Ensuite, en abrégeant :
+BN :=
+N
+∏
+n=1
+(1 + an
+)
+(N > 1),
+lorsque le produit infini ∏∞
+n=1(1 + an) = ` ∈ C∗ converge vers une limite non nulle, il est clair que :
+1 + aN = BN
+BN−1
+−→
+N→∞
+`
+` = 1,
+et ainsi, une condition nécessaire pour la convergence dans C∗ est que :
+nli→m∞ an = 0.
+Comme la fonction logarithme transforme un produit en une somme, et comme log (1 + z) ≈ z pour z ∈ C petit :
+log
+∞
+∏
+n=1
+(1 + an
+)=
+∞
+∑
+n=1
+log (1 + an
+)
+≈
+∞
+∑
+n=1
+an,
+on pourrait croire que la convergence d’un produit infini ∏∞
+n=1(1+an) équivaut à la conver
+gence de la série infinie ∑∞
+n=1 an, mais l’Exercice 1 montre qu’il n’en est rien :
+∞
+∑
+n=1
+an converge 6=⇒
+∞
+∏
+n=1
+(1 + an
+) converge.
+De plus, dans la théorie des produits infinis, on souhaite absolument préserver la propriété suivante des produits finis :
+« Pour qu’un produit de nombres complexes soit nul, il faut et il suffit que l’un de ses facteurs soit nul. »
+Cependant, l’exemple des facteurs tous différents de zéro :
+1 + an := 1 − 1
+n+1 = n
+n + 1 (n > 1),
+
+
+3. Produits infinis 11
+montre, par télésco(do ?)page, que :
+BN =
+N
+∏
+n=1
+(1 + an
+)= 1
+2·2
+3 ····· N−1
+N·N
+N+1 = 1
+N + 1 −→
+N → ∞ 0,
+ce qui montre qu’un produit infini ∏∞
+n=1 (1 + an) peut converger, vers zéro, mais sans qu’aucun de ses facteurs soit nul.
+D’ailleurs, ce — mauvais, très mauvais — exemple pour lequel :
+∞
+∑
+n=1
+an = −
+∞
+∑
+n=1
+1
+n + 1 = − ∞,
+montre aussi incidemment que :
+∞
+∑
+n=1
+an converge 6⇐=
+∞
+∏
+n=1
+(1 + an
+) converge,
+et donc aucune implication n’est vraie :
+∞
+∑
+n=1
+an converge 6⇐= 6=⇒
+∞
+∏
+n=1
+(1 + an
+) converge !
+Toutefois, l’intuition qu’un passage par le logarithme permet de ramener l’étude des produits infinis à celle des séries est correcte, à condition d’imposer la convergence absolue, laquelle s’avère être la condition suffisante la plus utile dans toutes les applications.
+Théorème 3.2. Si ∑∞
+n=1 |an| < ∞, alors le produit infini :
+∞
+∏
+n=1
+(1 + an
+) = lim
+N→∞
+N
+∏
+n=1
+(1 + an
+)∈C
+converge vers une valeur finie. De plus :
+∞
+∏
+n=1
+(1 + an
+) = 0 ⇐⇒ ∃ n > 1, 1 + an = 0.
+Démonstration. Comme |an| −→ 0 nécessairement, pour n assez grand, on a |an| 6 1
+2.
+En éliminant les premiers facteurs du produit infini, on peut supposer que |an| 6 1
+2 pour tout n > 1. Puisque seuls ces premiers facteurs pouvaient donc satisfaire 1 + an = 0, nous allons voir que, en fait, la limite :
+lim
+N→∞
+N
+∏
+n=1
+(1 + an
+) ∈ C\{0}
+existe et est non nulle. Autrement dit, un produit infini convergent ne peut valoir 0 que si l’un de ses premiers facteurs est nul. En effet, avec le développement connu en série entière valable pour |z| < 1 :
+log (1 + z) = z − z2
+2 + z3
+3 − z4
+4 + z5
+5 −··· ,
+
+
+12 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+si de plus |z| 6 1
+2 , on peut majorer :
+∣
+∣log (1 + z)∣
+∣ 6 |z|
+(
+1 + |z| + |z|2 + |z|3 + |z|4 + · · ·
+)
+6 |z|
+(
+1+ 1
+2+ 1
+22 + 1
+23 + 1
+24 + · · ·
+)
+(3.3)
+= 2 |z|,
+pour assurer la convergence de la série :
+∣ ∣ ∣ ∣
+∞
+∑
+n=1
+log (1 + an
+)
+∣ ∣ ∣ ∣
+6
+∞
+∑
+n=1
+∣
+∣log (1 + an)∣
+∣
+62
+∞
+∑
+n=1
+|an|
+[Hypothèse] < ∞,
+vers un nombre que l’on note :
+lim
+N→∞
+N
+∑
+n=1
+log (1 + an
+) =: `,
+et comme l’exponentielle est continue :
+N
+∏
+n=1
+(1 + an
+)=
+N
+∏
+n=1
+e log (1+an)
+=e
+∑N
+n=1 log(1+an)
+−→
+N → ∞ e` 6= 0,
+ceci montre bien la convergence des produits partiels vers un nombre qui est effectivement non nul, parce qu’il est exponentielle d’un nombre complexe.
+Ce critère de convergence absolue ∑ |an| < ∞ est en effet approprié, car la plupart du temps, dans la théorie des fonctions holomorphes, on est en mesure, au moyen d’estimations souvent élémentaires, de garantir une convergence normale — donc uniforme — des séries de fonctions, ce qui préserve le caractère holomorphe de la limite.
+Théorème 3.4. Dans un ouvert Ω ⊂ C, soit {Fn}∞
+n=1 une suite de fonctions holomorphes Fn ∈ O(Ω). S’il existe des constantes cn > 0 majorant dans Ω :
+∣
+∣Fn(z) − 1∣
+∣ 6 cn telles que
+∞
+∑
+n=1
+cn < ∞,
+alors les trois propriétés suivantes sont satisfaites.
+(1) Le produit infini de fonctions holomorphes ∏∞
+n=1 Fn(z) converge uniformément dans Ω vers une fonction holomorphe :
+F (z) := lim
+N→∞
+N
+∏
+n=1
+Fn(z).
+(2) En un point w ∈ Ω, on a F (w) = 0 si et seulement si il existe n = nw > 1 avec Fn(w) = 0.
+
+
+3. Produits infinis 13
+(3) Si toutes les Fn 6= 0 ne s’annulent nulle part dans Ω, alors F 6= 0 aussi partout dans Ω, et de plus :
+F ′(z)
+F (z) =
+∞
+∑
+n=1
+F′
+n(z)
+Fn(z) .
+Démonstration. Puisque cn −→ 0 nécessairement, il existe un entier M > 1 assez grand pour que :
+n > M + 1 =⇒ cn 6 1
+2.
+En décomposant alors :
+∞
+∏
+n=1
+Fn(z) =
+M
+∏
+n=1
+Fn(z)
+∞
+∏
+n=M+1
+Fn(z),
+nous allons constater que le deuxième produit-reste ne s’annule en aucun point de Ω, et donc les zéros de la fonction-limite ne peuvent être présents que dans les premiers facteurs :
+{w ∈ Ω : F (w) = 0} =
+⋃
+16n6M
+{w ∈ Ω : Fn(w) = 0}.
+En éliminant ces premiers facteurs, ce qui ne change rien à (1), (2), (3), nous nous ramenons à cn 6 1
+2 pour tout n > 1. Maintenant, en homologie avec les notations précédentes, récrivons :
+Fn(z) =: 1 + an(z).
+Puisque |an(z)| 6 cn 6 1
+2 dans Ω, l’hypothèse ∑ cn < ∞, suivie de l’estimation de convergence normale-uniforme :
+∣ ∣ ∣ ∣
+∞
+∑
+n=1
+log (1 + an(z))
+∣ ∣ ∣ ∣
+6
+∞
+∑
+n=1
+∣ ∣
+∣log (1 + an(z))
+∣ ∣ ∣
+[(3.3)] 6 2
+∞
+∑
+n=1
+∣
+∣an(z)∣
+∣
+62
+∞
+∑
+n=1
+cn < ∞,
+associée à un théorème connu (spectaculaire) de Cauchy offre l’holomorphie de la fonctionsérie : ∞
+∑
+n=1
+log (1 + an(z)) ∈ O(Ω),
+donc :
+F (z) =
+∞
+∏
+n=1
+(1 + an(z)) = e
+∑∞
+n=1 log(1+an(z)) ∈ O (Ω),
+et cette fonction holomorphe ne s’annule en aucun point de Ω — car c’est une exponentielle ! —, ce qui conclut (1).
+Pour l’équivalence (2), on a ici :
+∅ = {w ∈ Ω : F (w) = 0},
+
+
+14 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+ce qui est cohérent avec le fait que nous nous sommes ramenés à cn 6 1
+2 pour tout n > 1,
+de telle sorte que les inégalités ∣
+∣Fn(z) − 1∣
+∣6 1
+2 forçaient, à l’avance aussi :
+∅=
+∞
+⋃
+n=1
+{w ∈ Ω : Fn(w) = 0}.
+Pour (3), en notant :
+GN(z) :=
+N
+∏
+n=1
+Fn(z) uniformément
+−→
+N → ∞ F (z) (dans Ω),
+un théorème connu (encore plus spectaculaire) de Cauchy offre la convergence des dérivées en tout point :
+G′
+N(z) −→
+N → ∞ F ′(z) (∀ z ∈ Ω).
+Mais les GN sont uniformément minorées dans Ω, car ∣
+∣FN(z) − 1∣
+∣ 6 cn 6 1
+2 donne :
+∣
+∣GN(z)∣
+∣=
+N
+∏
+n=1
+∣
+∣Fn(z)∣
+∣
+>
+N
+∏
+n=1
+(1 − cn
+)
+>
+∞
+∏
+n=1
+(1 − cn
+)
+[Théorème 3.2] > 0,
+donc on a aussi en tout point convergence :
+1
+F (z) ←−
+∞←N
+1
+GN(z) ,
+d’où la conclusion de (3) :
+F ′(z)
+F (z) ←−
+∞←N
+G′
+N(z)
+GN(z)
+=
+(F1(z) · · · FN(z))′
+F1(z) · · · FN(z) = F ′
+1(z)
+F1(z) + · · · + F ′
+N(z)
+FN(z) .
+Ainsi, la bonne condition suffisante pour la convergence d’un produit infini
+∏∞
+n=1 Fn(z), c’est la convergence normale de la série de fonctions holomorphes
+∑∞ n=1
+(Fn(z) − 1).
+Conceptualisons cela, quitte à nous restreindre à des compacts.
+Définition 3.5. Un produit infini ∏∞
+n=1 Fn(z) de fonctions holomorphes Fn ∈ O(Ω) est dit normalement convergent sur les compacts de Ω si, pour tout sous-ensemble compact K ⊂ Ω, il existe une suite {cn}∞
+n=1 de nombres positifs cn = cn(K) > 0 avec ∑∞
+n=1 cn < ∞
+tels que :
+∣
+∣Fn(z) − 1∣
+∣ 6 cn (∀ z ∈ K, ∀ n > 1).
+On généralise alors aisément le théorème précédent.
+
+
+4. Formule produit d’Euler pour la fonction sinus 15
+Théorème 3.6. Dans un ouvert Ω ⊂ C, si une suite {Fn}∞
+n=1 de fonctions holomorphes Fn ∈ O(Ω) converge uniformément sur les compacts de Ω, alors :
+(1) le produit infini ∏∞
+n=1 Fn(z) définit une fonction holomorphe dans Ω :
+F (z) := lim
+N→∞
+N
+∏
+n=1
+Fn(z);
+(2) en un point w ∈ Ω, on a F (w) = 0 si et seulement si il existe n = nw > 1 avec Fn(w) = 0 ;
+(3) si toutes les Fn 6= 0 ne s’annulent nulle part dans Ω, alors F 6= 0 aussi partout dans Ω, et de plus :
+F ′(z)
+F (z) =
+∞
+∑
+n=1
+F′
+n(z)
+Fn(z) .
+4. Formule de produit d’Euler pour la fonction sinus
+Avant de continuer à développer la théorie générale des produits de Weierstrass, établissons une formule de produit infini pour la fonction sinus, due à Euler :
+sin πz
+π =z
+∞
+∏
+n=1
+(
+1 − z2
+n2
+)
+,
+qui est valable pour tout z ∈ C. Cette identité sera déduite de la représentation suivante de la fonction cotangente comme série de fractions rationelles :
+π cotan πz = π cos πz
+sin πz
+=
+∞
+∑
+n=−∞
+1
+z+n
+= lim
+N→∞
+∑
+|n|6N
+1
+z+n
+=1
+z+
+∞
+∑
+n=1
+2z
+z2 − n2 ,
+qui sera valable pour z ∈ C\Z. En fait, la somme ∑∞
+n=−∞ doit être entendue comme limite, lorsque N −→ ∞, de la somme symétrique ∑N
+n=−N, parce que aucune moitié
+somme ∑0
+n=−∞ et ∑∞
+n=0 ne converge, à cause de ∑ 1
+n = ∞.
+Heureusement, quand on interprète la somme de manière symétrique, des compensations réalisées dans la dernière formule écrite ci-dessus vont assurer la convergence.
+Théorème 4.1. Pour tout z ∈ C\Z :
+π cotan πz = 1
+z+
+∞
+∑
+n=1
+2z
+z2 − n2 .
+
+
+16 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Démonstration. L’idée est d’exploiter le fait que cette série et la fonction π cotan πz ont les mêmes propriétés structurales. Notamment, avec n ∈ Z entier, et z = n + w proche mais différent de n, donc avec w 6= 0 petit, comme on a :
+π cos πz
+sin πz = π cos (πn + πw)
+sin (πn + πw) = π (−1)n cos πw
+(−1)n sin πw
+= π 1 + O(w2)
+πw + O(w3) = 1
+z − n + reste holomorphe,
+il est clair que les deux propriétés suivantes sont satisfaites :
+(1) π cos π(z+1)
+sin π(z+1) = π cos πz
+sin πz pour tout z ∈ C\Z ;
+(2) π cos πz
+sin πz possède des pôles simples en tous les entiers z = n ∈ Z, avec des résidus tous égaux à 1, et est holomorphe dans C\Z.
+Alors nous affirmons que la série :
+∞
+∑
+n=−∞
+1
+z + n = lim
+N→∞
+∑
+|n|6N
+1
+z+n
+satisfait aussi exactement ces deux mêmes propriétés.
+En effet, (1) revient simplement à observer que le passage de z à z +1 décale d’une unité les termes de la somme infinie :
+∑
+|n|6N
+1
+z+1+n = − 1
+z−N +
+∑
+|n|6N
+1
+z+n + 1
+z + N + 1,
+et en faisant N −→ ∞, les termes d’erreur parasites s’évanouissent :
+lim
+N→∞
+∑
+|n|6N
+1
+z + 1 + N = lim
+N→∞
+∑
+|n|6N
+1
+z + n.
+Par conséquent, la fonction-différence :
+∆(z) := π cotan πz −
+∞
+∑
+n=−∞
+1
+z+n
+satisfait, via (1), la périodicité ∆(z + 1) = ∆(z), mais surtout, grâce à (2), nous constatons que toutes les singularités de ∆(z) en les entiers z = n ∈ Z sont illusoires, ce qui implique :
+∆ ∈ O(C).
+Enfin, on vérifie l’imparité :
+∆(−z) = − ∆(z) (∀ z∈ C).
+Afin d’établir la formule du théorème, qui équivaut à ∆(z) ≡ 0, commençons par une
+Assertion 4.2. La fonction ∆ ∈ O(C) est bornée dans le plan comlexe tout entier.
+Preuve. Grâce à la 1-périodicité, il suffit de faire voir que ∆ est bornée dans la bande infinie verticale :
+{|x| 6 1
+2
+}
+(z = x + iy),
+et grâce à l’imparité, il suffit de le faire dans le rectangle infini :
+{|x| 6 1
+2 , y > 0}.
+
+
+4. Formule produit d’Euler pour la fonction sinus 17
+Comme ∆ est partout holomorphe, elle est bornée sur le carré {|x| 6 1
+2 , 0 6 y 6 1}, donc on peut supposer y > 1, et alors on majore premièrement :
+∣
+∣π cotan πz∣
+∣=
+∣ ∣ ∣ ∣
+π i eiπz + e−iπz
+eiπz − e−iπz
+∣ ∣ ∣ ∣
+=π
+∣ ∣ ∣ ∣
+e−2πy + e−2iπx
+e−2πy − e−2iπx
+∣ ∣ ∣ ∣
+[1
+|a−b| 6 1
+−|a|+|b| quand |b| > |a|] 6 π e−2πy + 1
+−e−2πy + 1
+6 π e−2π + 1
+−e−2π + 1 < ∞.
+Deuxièmement, toujours avec y > 1 et avec |x| 6 1
+2:
+∣ ∣ ∣ ∣
+1
+z+
+∞
+∑
+n=1
+2z
+z2 − n2
+∣ ∣ ∣ ∣
+6
+∣ ∣ ∣ ∣
+1
+x + iy
+∣ ∣ ∣ ∣
++
+∞
+∑
+n=1
+∣ ∣ ∣ ∣
+2 (x + iy)
+x2 − y2 − n2 + 2i xy
+∣ ∣ ∣ ∣
+61
+y+
+∞
+∑
+n=1
+2y
+y2 + n2 − x2
+6 1+2
+∞
+∑
+n=1
+y
+y2 + n2 − 1
+4
+[u > 1 =⇒ 1
+u− 1
+4
+<2
+u] 6 1 + 2 · 2
+∞
+∑
+n=1
+y
+y2 + n2 .
+Or comme la fonction x 7−→ y
+y2+x2 est décroissante, cette dernière somme est majorée par une intégrale finie indépendante de y :
+∞
+∑
+n=1
+y
+y2 + n2 6
+∫∞
+0
+y
+y2 + x2 dx
+[x = yt] =
+∫∞
+0
+y
+y2 + y2t2 y dt
+=
+∫∞
+0
+dt
+1 + t2 .
+Ainsi, les deux constituants de la fonction-différence ∆ sont bel et bien bornés.
+Pour terminer, le théorème de Liouville force ∆ ≡ C à être constante, et puisqu’elle est impaire, C = 0, ce qui conclut :
+0 ≡ π cotan πz −
+∞
+∑
+n=−∞
+1
+z + n.
+Comme promis, nous pouvons maintenant établir le célèbre :
+
+
+18 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Théorème 4.3. [Euler] Pour tout z ∈ C, on a la représentation par un produit infini convergent :
+sin πz = πz
+∞
+∏
+n=1
+(
+1 − z2
+n2
+)
+.
+Démonstration. Abrégeons :
+G(z) := sin πz
+π et P (z) := z
+∞
+∏
+n=1
+(
+1 − z2
+n2
+)
+.
+Comme ∑ 1
+n2 < ∞, le Théorème 3.4 montre que ce produit infini converge pour tout z ∈ C, et que en-dehors de l’ensemble Z ⊂ C :
+P ′(z)
+P (z) = 1
+z+
+∞
+∑
+n=1
+2z
+z2 − n2 .
+Mais comme G′(z)
+G(z) = π cotan πz, le développement en série rationnelle de la fonction cotangente que nous venons d’obtenir montre l’annulation identique :
+( P (z)
+G(z)
+)′
+= P (z)
+G(z)
+[ P ′(z)
+P (z) − G′(z)
+G(z)
+]
+≡ 0,
+et donc P (z) = c G(z) pour une certaine constante c ∈ C. Enfin, puisque P (z) = z+O(z2) et G(z) = πz
+π + O(z3), il est clair que c = 1.
+5. Formule produit d’Euler pour les nombres premiers
+La fonction zêta de Riemann est définie, pour s > 1 réel, par la série :
+ζ(s) :=
+∞
+∑
+n=1
+1
+ns ,
+convergente d’après un critère connu, et elle se prolonge au domaine complexe.
+Lemme 5.1. Cette série ζ(s) = ∑∞
+n=1
+1
+ns converge normalement sur tout demi-plan complexe :
+{s ∈ C : Re s > 1 + δ},
+avec δ > 0 quelconque, et définit une fonction holomorphe dans {Re s > 1}.
+Démonstration. Comme Rieman, écrivons le nombre complexe s sous la forme :
+s = σ + it,
+
+
+5. Formule produit d’Euler pour les nombres premiers 19
+avec σ, t ∈ R, d’où en supposant σ > 1 + δ :
+∣
+∣ζ (s)∣
+∣=
+∣ ∣ ∣ ∣
+∞
+∑
+n=1
+1
+ns
+∣ ∣ ∣ ∣
+6
+∞
+∑
+n=1
+1
+|ns|
+6
+∞
+∑
+n=1
+1
+|es log n|
+=
+∞
+∑
+n=1
+1
+eσ log n =
+∞
+∑
+n=1
+1
+nσ
+6
+∞
+∑
+n=1
+1
+n1+δ < ∞,
+ce qui établit la convergence normale, dans {Re s > 1 + δ}, de cette série de fonctions holomorphes. Le théorème de Cauchy garantit alors que s 7−→ ζ(s) est holomorphe dans tout demi-plan {Re s > 1 + δ}, donc dans {Re s > 1}, puisque δ > 0 peut être choisi arbitrairement petit.
+Une application célèbre de la théorie des produits infinis est due à Euler. Elle établit un lien extrêmement profond avec la théorie des nombres. Notons :
+P := {p > 2 entiers premiers} = {2, 3, 5, 7, 11, 13, 17, 19, . . . }.
+Théorème 5.2. [Euler] Pour s ∈ C avec Re s > 1, on a :
+∞
+∑
+n=1
+1
+ns =
+∏
+p∈P
+1
+1− 1
+ps
+,
+où le produit infini est normalement convergent dans tout demi-plan {Re s > 1 + δ} avec δ > 0 quelconque.
+Démonstration. Commençons par justifier la convergence de ce produit infini. Avec z :=
+1
+ps qui vérifie 0 < |z| < 1
+2 car p > 2, en utilisant :
+∣ ∣ ∣
+1
+1−z
+∣ ∣
+∣6 1
+1 − |z| 6 1 + 2 |z|,
+majorons le produit infini par :
+∣ ∣ ∣ ∣
+∏
+p∈P
+1
+1− 1
+ps
+∣ ∣ ∣ ∣
+6
+∏
+p∈P
+(
+1+ 2
+|ps|
+) <? ∞,
+et constatons que le critère suffisant du Théorème 3.4 pour la convergence des produits infinis s’applique grâce à :
+∑
+p∈P
+2
+|ps| = 2
+∑
+p∈P
+1
+p Re s 6 2
+∞
+∑
+n=1
+1
+nRe s < ∞.
+Ensuite, soient deux (grands) entiers 1 6 N 6 M. Puisque d’après le théorème fondamental de l’arithmétique, tout entier n 6 N s’écrit de manière unique n = pα1
+1 · · · pμαμ avec p1, . . . , pμ ∈ P, avec α1, . . . , αμ > 1, et avec :
+p1, . . . , pμ 6 N, α1, . . . , αμ 6 N 6 M,
+
+
+20 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+un développement du produit à droite de la première ligne ci-dessous donne une majoration : N
+∑
+n=1
+1
+ns 6
+∏
+p∈P p6N
+(
+1+ 1
+ps + · · · + 1
+pMs
+)
+6
+∏
+p∈P p6N
+(
+1+ 1
+ps + · · · + 1
+pMs + · · ·
+)
+=
+∏
+p∈P p6N
+1
+1− 1
+ps
+6
+∏
+p∈P
+1
+1− 1
+ps
+.
+En faisant N −→ ∞, il vient :
+ζ(s) 6
+∏
+p∈P
+1
+1− 1
+ps
+.
+Pour l’inégalité inverse, à nouveau d’après le théorème fondamental de l’arithmétique, un développement du produit à gauche montre qu’on n’obtient pas tous les 1
+ns :
+∏
+p∈P p6N
+(
+1+ 1
+ps + 1
+p2s + · · · + 1
+pMs
+)
+6
+∞
+∑
+n=1
+1
+ns ,
+d’où en faisant M −→ ∞ :
+∏
+p∈P p6N
+1
+1− 1
+ps
+6 ζ(s),
+et enfin via N −→ ∞ :
+∏
+p∈P
+1
+1− 1
+ps
+6 ζ(s).
+6. Produits infinis de Weierstrass
+Rappelons que si une fonction holomorphe non identiquement nulle f (z) s’annule en un point z = a, la multiplicité νf (z) =: ν est l’unique entier tel que l’on puisse factoriser :
+f (z) = (z − a)ν g(z),
+avec une fonction-reste holomorphe g(z) satisfaisant g(a) 6= 0. On voit cela instantanément en factorisant la puissance maximale de z − a dans le développement en série entière de f au point a. Maintenant, si {an}∞
+n=1 est une suite quelconque (infinie) de points dans C, existe-til une fonction holomorphe entière f ∈ O(C) ayant exactement ces an comme zéros, et non nulle ailleurs ? À cause du principe des zéros isolés, il est nécessaire de supposer que {an}∞
+n=1 n’a pas de point d’accumulation à distance finie, et donc que |an| −→ ∞ quand n −→ ∞. Après réordonnancement, on pourrait supposer que |an| 6 |an+1| pour tout n > 1, mais cela n’est pas nécessaire. Rappelons que nous autorisons des répétitions dans les suites de zéros, et donc il revient au même de se donner une suite {bn}∞
+n=1 de points mutuellement distincts avec |bn| −→ ∞,
+
+
+6. Produits infinis de Weierstrass 21
+des multiplicités νn > 1, et de demander s’il existe f ∈ O(C) ayant ces bn comme zéros d’ordres νn, et jamais nulle sur C\{b1, b2, b3, . . .}. Cette question est triviale pour un nombre fini de zéros prescrits, et pour un nombre infini, la réponse est toujours positive, aussi.
+Théorème 6.1. [Weierstrass] Pour toute suite {an}∞
+n=1 de nombres complexes an ∈ C satisfaisant |an| −→ ∞ quand n −→ ∞, il existe f (z) ∈ O(C) holomorphe entière s’annulant en tous les z = an, et non nulle ailleurs. Toute autre fonction f ̃(z) ∈ O(C) satisfaisant cela est de la forme :
+f ̃(z) = f (z) eg(z),
+avec g(z) ∈ O(C) holomorphe entière.
+Démonstration. En effet, si an est un zéro prescrit, disons d’ordre 1 pour fixer les idées, alors au voisinage de z = an, on peut écrire :
+f (z) = (z − an
+)
+[
+α + O(z − an
+)
+]
+(α 6= 0),
+f ̃(z) = (z − an
+)
+[
+α ̃ + O(z − an
+)
+]
+(
+α ̃ 6= 0),
+d’où il découle que z = an est une singularité illusoire du quotient :
+f ̃(z)
+f (z) = (z − an) [
+α ̃ + O(z − an)]
+(z − an) [α + O(z − an)] = α ̃
+α + O(z − an
+),
+accompagné du fait que f ̃(z)
+f(z) ne s’annule pas au voisinage de z = an. Le cas où an est répété un nombre m > 1 de fois est similaire, donc :
+f ̃(z)
+f (z) ∈ O(C, C∗)
+est holomorphe entière, et ne s’annule jamais. Comme C est simplement connexe, un théorème connu montre qu’il existe bien une fonction holomorphe entière g ∈ O(C) représentant :
+f ̃(z)
+f (z) = eg(z).
+Ainsi, nous devons construire une fonction qui s’annule précisément en tous les z = an. La proposition naïve, suggérée par la formule de produit d’Euler :
+f (z) : ?=
+∞
+∏
+n=1
+(
+1− z
+an
+)
+,
+se heurte à un problème de convergence, notamment lorsque ∑ 1
+|an| = ∞. Afin d’y remédier, Weierstrass a eu l’idée d’insérer des facteurs exponentiels — jamais nuls accélérant la convergence sans introduire de nouveaux zéros. Pour chaque entier k > 0, introduisons en effet les facteurs canoniques de Weierstrass :
+E0(z) := 1 − z,
+Ek(z) := (1 − z) e z+ z2
+2 +···+ zk
+k (k > 1).
+
+
+22 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+En localisant autour d’un zéro à prescrire z = an, nous serons intéressés par l’étude de ces Ek(z) dans le disque {|z| 6 1
+2
+}.
+Lemme 6.2. Il existe une constante universelle 0 < c < ∞ telle que, pour tout k > 0 :
+∣
+∣1 − Ek(z)∣
+∣ 6 c |z|k+1 (∀ |z| 6 1
+2 ).
+On peut prendre c = 2 e1, qui est indépendante de k.
+Preuve. Pour |z| 6 1
+2 , le logarithme log (1 − z) est défini par la série connue − ∑∞
+n=1
+zn
+n,
+donc comme on peut écrire 1 − z = e log (1−z), il vient :
+Ek(z) = e log(1−z)+z+ z2
+2 +···+ zk
+k
+=: ew,
+en posant :
+w := −
+∞
+∑
+n=k+1
+zn
+n.
+Mais puisque |z| 6 1
+2 , nous pouvons majorer de manière élémentaire :
+|w| 6 |z|k+1 ( 1
+k + 1 + |z|
+k + 2 + |z|2
+k+3 +···
+)
+6 |z|k+1 (
+1+ 1
+2+ 1
+22 + · · ·
+)
+= 2 |z|k+1.
+La formule des accroissements finis appliquée à la fonction h(t) := e tw de la variable réelle 0 6 t 6 1 ayant pour dérivée h′(t) = w etw conclut :
+∣
+∣1 − Ek(z)∣
+∣=∣
+∣1 − ew∣
+∣=∣
+∣h(0) − h(1)∣
+∣
+= 1 · max
+06t61
+∣
+∣h′(t)∣
+∣
+6 max
+06t61 |w| et|w|
+6 2 |z|k+1 e|w|
+[|w| 6 1] 6 2 e1 |z|k+1.
+Supposons dorénavant qu’un zéro d’ordre ν > 0 est prescrit en z = 0, et que les zéros a1, a2, a3, . . . sont tous non nuls. Définissons alors le produit de Weierstrass par :
+f (z) := zν
+∞
+∏
+n=1
+En
+(z an
+)
+= zν
+∞
+∏
+n=1
+(1 − z) e z
+an + 1
+2( z
+an )2+···+ 1
+n( z
+an )n
+,
+et vérifions qu’il remplit toutes les conditions, à savoir que f ∈ O(C) est holomorphe entière avec un zéro d’ordre ν en z = 0, avec des zéros en chaque an, et que f est non nulle ailleurs. Fixons R > 0, supposons z ∈ DR, et démontrons que toutes ces propriétés sont satisfaites dans DR. Comme R est arbitraire, cela terminera la démonstration.
+
+
+7. Théorème de factorisation de Hadamard 23
+Décomposons le produit en deux morceaux :
+f (z) = zν ∏
+|an|62R
+En
+(z an
+)∏
+|an|>2R
+En
+(z an
+).
+Puisque |an| −→ ∞, il n’y a qu’un nombre fini de facteurs dans le premier produit, lequel s’annule clairement en tous les z = an avec |an| < R, mais nulle part ailleurs dans D
+R, ce qu’on voulait. Dans le deuxième morceau qui est un produit infini, on a, toujours pour |z| < R :
+∣ ∣ ∣
+z
+an
+∣ ∣
+∣6 R
+2R = 1
+2,
+et donc le Lemme 6.2 offre une estimation :
+∣ ∣ ∣ ∣
+1 − En
+(z
+an
+)
+∣ ∣ ∣ ∣
+6c
+∣ ∣ ∣
+z
+an
+∣ ∣ ∣
+n+1
+6c 1
+2n+1 ,
+montrant, puisque ∑ 1
+2n+1 < ∞, en appliquant le Théorème 3.4, que le produit infini :
+∏
+|an|>2R
+En
+(z an
+)
+∣ ∣ ∣
+∣DR
+converge normalement dans le disque DR et y définit une fonction holomorphe ne s’annulant jamais. Au final, f possède toutes les propriétés voulues dans DR avec R > 0 arbitraire, donc dans C.
+7. Théorème de factorisation de Hadamard
+Étant donné une fonction holomorphe entière f ∈ O(C) non identiquement nulle qui possède ν := νf (0) zéros à l’origine suivis d’un nombre infini de zéros {an}∞
+n=1, le Théorème 6.1 de Weierstrass construit un produit infini convergent :
+E(z) := zν
+∞
+∏
+n=1
+En
+(z an
+)
+= zν
+∞
+∏
+n=1
+(1 − z) e z
+an + 1
+2( z
+an )2+···+ 1
+n( z
+an )n
+qui a exactement les mêmes zéros que f , sans s’annuler ailleurs, et par conséquent, le quotient :
+f (z)
+E(z)
+n’a que des singularités illusoires, car si w est un zéro, w = 0 ou w = an, et si m est la multiplicité de ce zéro, m = ν ou m = nombre de fois que an est répété, au voisinage de w, on peut écrire :
+f (z) = (z − w)m [α + O(z − w)]
+(α 6= 0),
+E(z) = (z − w)m [β + O(z − w)]
+(β 6= 0),
+
+
+24 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+d’où la compensation au numérateur et au dénominateur :
+f (z)
+E(z) = (z − w)m [α + O(z − w)]
+(z − w)m [β + O(z − w)]
+=α
+β + O(z − w) ( α
+β 6= 0),
+montrant que f(z)
+E(z) est holomorphe, jamais égale à zéro, au voisinage de z = w. Comme
+f (z) 6= 0 6= E(z) partout ailleurs, ce quotient ne s’annule donc en aucun point de C, et comme C est simplement connexe, un théorème connu permet de représenter ce quotient comme exponentielle :
+f (z)
+E(z) = eg(z),
+d’une certaine fonction g ∈ O(C) unique.
+Corollaire 7.1. [Weierstrass] Toute f ∈ O(C) ayant un zéro d’ordre ν > 0 à l’origine et une infinité de zéros {an}∞
+n=1 non nuls s’écrit de manière unique avec g ∈ O(C) :
+f (z) = eg(z) zν
+∞
+∏
+n=1
+(1 − z
+an
+)e z
+an + 1
+2( z
+an )2+···+ 1
+n( z
+an )n
+.
+Or quand n −→ ∞, dans l’exponentielle, le degré n du polynôme en z
+an est non borné. Hadamard s’est posé la question de savoir si on peut raffiner ce théorème de représentation de Weierstrass lorsque f ∈ O(C) est supposée être d’ordre de croissance fini 6 ρ < ∞ :
+∣
+∣f (z)∣
+∣ 6 A eB |z|ρ
+(∀ z ∈ C),
+en s’assurant que les deux fonctions g(z) et Q( z
+an ) dans les exponentielles soient elles aussi
+bornées par C |z|ρ, voire éventuellement par C |z|ρ′ avec ρ < ρ′ < ∞. Ici, rappelons que ρf = inf ρ est l’ordre de f , mais qu’il est souvent plus aisé de travailler avec un ρ > ρf , éventuellement arbitrairement proche de ρf . Rappelons aussi que nous avons démontré à l’avance deux résultats qui vont s’avérer utiles, la borne supérieure :
+nf (r) = nombre de zéros de f dans Dr
+6 C rρ (∀ r > 1),
+ainsi que la convergence :
+∞
+∑
+n=1
+1
+(7.2) |an|ρ < ∞,
+quel que soit ρ > ρf .
+Terminologie 7.3. Pour k > 0 entier, on appelle facteur canonique de degré k la fonction :
+Ek(z) := (1 − z) e z+ z2
+2 +···+ zk
+k.
+Rappelons que l’intérêt de ces Ek(z) est qu’ils ont le même zéro que 1 − z, tout en collant davantage à 1 pour |z| 6 1
+2 petit, comme l’exprime l’estimée déjà vue ∣
+∣1 − Ek (z )∣
+∣6
+c |z|k+1.
+La réponse à la question, positive, s’exprime comme suit.
+
+
+7. Théorème de factorisation de Hadamard 25
+Théorème 7.4. [Hadamard] Toute f ∈ O(C) avec f 6≡ 0 d’ordre fini ρf < ∞ ayant un zéro d’ordre ν > 0 à l’origine et une infinité de zéros {an}∞
+n=1 non nuls s’écrit de manière unique comme produit infini convergent :
+f (z) = eP (z) zν
+∞
+∏
+n=1
+Ek
+(z an
+)
+= ep0+p1z+···+pkzk zν
+∞
+∏
+n=1
+(1 − z
+an
+)e z
+an + 1
+2( z
+an )2+···+ 1
+k( z
+an )k
+,
+où P (z) est un polynôme de degré 6 k, avec des facteurs canoniques de degrés constants k, où k est l’unique entier satisfaisant :
+k 6 ρf < k + 1.
+Le travail le plus exigent, dans l’argumentation, sera d’établir que le facteur eg(z) est une exponentielle-polynôme de degré contrôlé.
+Démonstration. Introduisons :
+E(z) := zν
+∞
+∏
+n=1
+Ek
+(z an
+).
+Grâce au Lemme 6.2, pour tous les n > N 1 assez grands afin que ∣
+∣z
+an
+∣
+∣6 1
+2 , on a la majoration :
+∣
+∣1 − Ek
+(z an
+)∣
+∣ 6 c∣
+∣z
+an
+∣ ∣
+k+1
+(n > N).
+Quitte à augmenter N, on peut supposer |an| > 1 lorsque n > N. En intercalant alors un ρ avec ρf < ρ < k + 1, nous constatons que le critère suffisant du Théorème 3.4 pour la
+convergence du produit infini ∏∞
+n=N est vérifié :
+∞
+∑
+n=N
+∣
+∣1 − Ek
+(z an
+)∣
+∣ 6 c |z|k+1
+∞
+∑
+n=N
+1
+|an|k+1
+6 c |z|k+1
+∞
+∑
+n=N
+1
+|an|ρ
+[(7.2)] < ∞.
+Clairement, E(z) possède exactement les mêmes zéros que f , et donc, le quotient ne s’annulant jamais :
+f (z)
+E(z) = eg(z),
+est l’exponentielle d’une certaine fonction holomorphe entière, puisque C est simplement connexe. Comment parvenir à démontrer que g(z) = P (z) ∈ C[z] est un polynôme de degré 6 k?
+Le point délicat, ici, est qu’on divise par E(z), ce qui peut perturber la croissance |f (z)| 6 A eB |z|ρ, voire la détruire, notamment lorsque z ≈ an est proche d’un zéro de E(z) !
+
+
+26 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+L’idée-clé de Hadamard a été d’établir des minorations de |E(z)| d’où découlent des majorations de 1
+|E(z)| , au moins sur des suites de cercles :
+{|z| = rm
+}
+(m = 1, 2, 3, ... ),
+de rayons :
+1 6 rm−1 < rm −→
+m → ∞ ∞,
+ne contenant aucun zéro an, cercles qui soient « assez éloignés », en un certain sens, de ces an.
+Lemme-clé 7.5. [Hadamard] Il existe une suite de cercles Crm(0) centrés à l’origine de rayons 1 6 rm−1 < rm −→ ∞ tendant vers l’infini en restriction auxquels :
+∣ ∣ ∣ ∣
+∞
+∏
+n=1
+Ek
+(z an
+)
+∣ ∣ ∣ ∣
+> e−c |z|ρ
+(∀ z ∈ Crm , ∀ m > 1),
+où ρf < ρ < k + 1 est arbitrairement proche de ρf , pour une constante 0 < c < ∞ dépendant seulement de f .
+La démonstration, technique, étant repoussée à la Section 8 suivante, achevons l’argumentation. Ainsi, sur tous ces cercles {|z| = rm
+}, m = 1, 2, 3, . . . , il vient :
+∣ ∣ ∣
+f (z)
+E(z)
+∣ ∣
+∣ 6 A eB |z|ρ
+e−c |z|ρ ,
+c’est-à-dire :
+eRe g(z) 6 ec |z|ρ
+(∀ |z| = rm, ∀ m = 1, 2, 3, ... ).
+On sait qu’une fonction holomorphe satisfaisant |g(z)| 6 c |z|ρ pour |z| grand doit être un polynôme de degré (entier) 6 ρ′, et cela reste vrai si on a cette inégalité pour sa partie réelle seulement sur une suite de cercles grandissant indéfiniment.
+Lemme 7.6. Si une fonction entière g ∈ O(C) satisfait :
+Re g(z) 6 c rρ (∀ |z| = rm),
+sur une suite de cercles de rayons 1 6 rm−1 < rm −→ ∞, alors g est un polynôme de degré 6 ρ.
+Démonstration. Développons g à l’origine en série entière normalement convergente sur les compacts de C :
+g(z) =
+∞
+∑
+n=0
+bn zn.
+Comme ∫ 2π
+0 ei`θ dθ = 0 pour tout ` ∈ Z\{0}, nous savons que pour un rayon r > 0 arbitraire :
+1
+2π
+∫ 2π
+0
+g
+(r eiθ) e−inθ dθ =
+{ bn rn lorsque n > 0,
+0 lorsque n 6 −1.
+Le cas n = 0, dont on prend la double partie réelle, donne :
+2 Re b0 = 1
+2π
+∫ 2π
+0
+2 Re g(r eiθ) dθ.
+
+
+8. Démonstration du lemme-clé 27
+Ensuite, prenons la conjuguée de la deuxième ligne :
+1
+2π
+∫ 2π
+0
+g
+(r eiθ) e−inθ dθ = 0 (∀ n > 1),
+d’où en additionnant avec la première ligne pour faire apparaître 2 Re g = g + g :
+bn rn = 1
+2π
+∫ 2π
+0
+2 Re g(r eiθ) dθ (∀ n > 1).
+Ensuite, comme 0 = ∫ 2π
+0 e−inθ dθ pour n > 1, insérons un terme nul :
+bn rn = 1
+π
+∫ 2π
+0
+[ Re g(r eiθ) − c rρ
+} {{ }
+6 0 quand r = rm
+] e−inθ dθ,
+et en restriction à la famille intéressante de cercles, déduisons une majoration :
+∣
+∣bn
+∣
+∣6 1
+π (rm)n
+∫ 2π
+0
+[ − Re g(rm eiθ) + c (rm)ρ] 1 dθ
+61
+π (rm)n
+[
+− 2π Re b0 + 2π c (rm)ρ]
+,
+pour constater que le membre de droite converge vers zéro lorsque rm −→ ∞ dès que n > ρ, d’où bn = 0 pour tous les n > ρ, ce qui montre bien la polynomialité de g(z) =
+∑
+n6ρ bn zn.
+En conclusion, la fonction entière g(z) du facteur f (z) = eg(z) E(z) est bien un polynôme de degré 6 ρ < k + 1, donc de degré 6 k, ce qui termine la démonstration du Théorème 7.4, sous réserve du Lemme-Clé 7.5.
+8. Démonstration du lemme-clé
+Ainsi, l’objectif est d’établir une minoration :
+∣ ∣ ∣ ∣
+zν
+∞
+∏
+n=1
+Ek
+(z an
+)
+∣ ∣ ∣ ∣
+> e−c |z|ρ ,
+pour z ∈ Crm appartenant à une suite de cercles de rayons :
+1 6 rm−1 < rm −→
+m → ∞ ∞.
+Convention 8.1. Les lettres c, C désigneront des constantes positives finies, variables, dépendant du contexte.
+Lemme 8.2. Les produits canoniques Ek(z) satisfont :
+∣
+∣Ek(z)∣
+∣ > e−c |z|k+1
+(∀ |z| 6 1
+2 ),
+ainsi que :
+∣
+∣Ek(z)∣
+∣ > |1 − z| e−c |z|k
+(∀ |z| > 1
+2 ).
+La première constante c, ici, est universelle ; la seconde dépend de k, qui est de toute façon fixé.
+
+
+28 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Démonstration. Lorsque |z| 6 1
+2 , nous pouvons utiliser la série entière qui définit le logarithme de 1 − z pour écrire :
+Ek(z) = e log(1−z)+z+ z2
+2 +···+ zk
+k
+= e− ∑∞
+n=k+1
+zk k
+=: ew.
+Comme |ew| > e−|w|, et comme, grâce au Lemme 6.2, on a |w| 6 c |z|k dès que |z| 6 1
+2 , la première minoration tombe :
+∣
+∣Ek(z)∣
+∣=∣
+∣ew∣
+∣ > e−|w|
+> e−c |z|k+1 .
+Pour la seconde, avec |z| > 1
+2 , qui équivaut à 1 6 2 |z|, comme pour tout entier 1 6 ` 6 k, on a :
+1k−` · |z|` 6 2k−` |z|k−` |z|`,
+nous pouvons minorer et conclure :
+∣
+∣Ek(z)∣
+∣ > |1 − z|
+∣ ∣
+∣e z+ z2
+2 +···+ zk
+k
+∣ ∣ ∣
+> |1 − z| e − |z|
+1 − |z|2
+2 −···− |z|k
+k
+> |1 − z| e −|z|k ( 2k−1
+1 + 2k−2
+2 +···+ 20
+k
+)
+=: |1 − z| e−c |z|k .
+Le point-clé est d’obtenir une minoration du produit infini des facteurs canoniques
+∏∞
+n=1 Ek
+(z an
+) dans des lieux où z est assez éloigné des zéros an. Le facteur zν n’intervient pas, car il est de toute façon > 1 en module quand |z| = rm > 1. La première estimée, quelque peu subtile, a lieu hors d’une réunion de disques centrés en les an et de rayons quantitativement assez petits, égaux à 1
+|an|k+1 .
+Lemme 8.3. Pour tout ρ avec ρf < ρ < k + 1, on a une minoration :
+∣ ∣ ∣ ∣
+∞
+∏
+n=1
+Ek
+(z an
+)
+∣ ∣ ∣ ∣
+> e−c |z|ρ ,
+valable pour tout :
+z∈C
+∖∞ ⋃
+n=1
+D
+1
+|an |k+1
+(an
+).
+Démonstration. Fixons z hors de ces disques, décomposons en deux types de facteurs, et minorons grâce au Lemme 8.2 :
+∣ ∣ ∣ ∣
+∞
+∏
+n=1
+Ek
+(z an
+)
+∣ ∣ ∣ ∣
+=
+∏
+|an|62|z|
+Ek
+(z an
+)∏
+|an|>2|z|
+Ek
+(z an
+)
+>
+∏
+|an|62|z|
+∣ ∣
+∣1 − z
+an
+∣ ∣ ∣
+∏
+|an|62|z|
+e−c | z
+an |k ∏
+|an|>2|z|
+e−c | z
+an |k+1
+
+
+8. Démonstration du lemme-clé 29
+C’est l’estimation du premier de ces trois produits qui requiert la restriction que z ne soit pas trop proche des an. En effet, en supposant donc que |z − an| > 1
+|an|k+1 , minorons :
+∏
+|an|62|z|
+∣ ∣ ∣
+an − z
+an
+∣
+∣
+∣>
+∏
+|an|62|z|
+1
+|an|k+2
+= e−(k+2) ∑
+|an|62|z| log|an|.
+Or le contrôle par le Théorème 2.9 du nombre de zéros de f dans le disque D2|z| permet, pour tout ρf < ρ′ < ρ, de majorer :
+(k + 2)
+∑
+|an|62|z|
+log |an| 6 (k + 2) nf
+(2 |z|) log (2 |z|)
+6 c |z|ρ′ log (2 |z|)
+[c change] 6 c |z|ρ,
+d’où, toujours pour |z − an| > 1
+|an|k+1 quel que soit n > 1 :
+∏
+|an|62|z|
+∣ ∣
+∣1 − z
+an
+∣ ∣
+∣ > e−c |z|ρ .
+Il reste à traiter deux produits, et pour chacun d’entre eux, nous allons obtenir une minoration valable sans restriction, pour tout z ∈ C. En effet, comme |an| 6 2 |z| dans le deuxième produit (fini), et comme k < ρ < k + 1, il vient :
+∣
+∣an
+∣ ∣
+ρ−k 6 2ρ−k |an|ρ−k 6 21 |z|ρ−k,
+d’où :
+1
+|an|k = 1
+|an|ρ
+∣
+∣an
+∣ ∣
+ρ−k 6 1
+|an|ρ 2 |z|ρ−k,
+ce qui permet, en utilisant (7.2), de minorer comme annoncé :
+∏
+|an|62|z|
+e−c |z|k
+|an|k = e−c |z|k ∑
+|an |62|z|
+1 |an |k
+> e−c |z|k 2 |z|ρ−k ∑
+|an|62|z| 1
+|an |ρ
+[c change] > e−c |z|ρ ∑∞
+n=1
+1
+|an |ρ
+[c change] = e−c |z|ρ .
+Le troisième, et dernier, produit (infini) se traite de manière analogue, en partant de |an| > 2 |z| qui entraîne 1
+|an| < 1
+2
+1
+|z| , d’où en tenant compte de k < ρ < k + 1 :
+1
+|an|k+1−ρ < 1
+2k+1−ρ
+1
+|z|k+1−ρ
+< 1 · |z|−k−1+ρ,
+
+
+30 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+puis :
+1
+|an|k+1 = 1
+|an|k+1−ρ
+1
+|an|ρ
+6 |z|−k−1+ρ 1
+|an|ρ ,
+ce qui permet, en utilisant à nouveau (7.2), de minorer comme annoncé :
+∏
+|an|>2|z|
+e−c |z|k+1
+|an|k+1 = e−c |z|k+1 ∑
+|an |>2|z|
+1
+|an |k+1
+> e−c |z|k+1 |z|−k−1+ρ ∑
+|an |>2|z|
+1
+|an |ρ
+> e−c |z|ρ ∑∞
+n=1
+1
+|an |ρ
+[c change] = e−c |z|ρ .
+Intuitivement, les rayons 1
+|an|k+1 de ces disques centrés en les an tendent suffisamment
+vite vers zéro, grâce à ∑∞
+n=1
+1
+|an|k+1 < ∞, pour que l’on puisse s’imaginer que leur réunion devienne négligeable, pour n > N 1 grand, de manière à faire passer des grands cercles de rayons rm qui ne rencontrent aucun de ces petits disques.
+D
+R
+R R+1 R+2
+0
+Prenons en effet N 1 assez grand pour que :
+∞
+∑
+n=N+1
+1
+|an|k+1 6 1
+3,
+ainsi qu’un rayon R 1 assez grand pour que :
+D
+1
+|a1 |k+1
+(a1
+) ∪ ··· ∪D 1
+|aN |k+1
+(aN
+) ⊂ DR;
+il n’est pas exclu que certains autres an avec n > N + 1 appartiennent aussi à DR. Insérons les disques restants dans les anneaux d’épaisseur 1
+|an|k+1 qu’ils balayent en tournant autour de l’origine :
+∞
+⋃
+n=N+1
+{
+z ∈ C : |z−an| < 1
+|an |k+1
+}
+⊂
+∞
+⋃
+n=N+1
+{
+w ∈ C : |an|− 1
+|an|k+1 < |w| < |an|+ 1
+|an |k+1
+}
+.
+
+
+9. Exercices 31
+Comme la réunion de ces anneaux est d’épaisseur 6 2
+3 , pour chaque entier m = 1, 2, 3, . . . , elle ne peut couvrir complètement chaque anneau-unité :
+{
+R + m − 1 < |w| < R + m},
+d’épaisseur 1 > 2
+3 . Par conséquent, il existe bien une suite de cercles Crm centrés à l’origine de rayons :
+R + m − 1 < rm < R + m,
+d’où rm−1 < rm −→ ∞, qui ne rencontrent aucun de ces anneaux, donc aucun disque D
+1
+|an |k+1
+(an
+), y compris pour 1 6 n 6 N, par construction.
+Ainsi s’achève la démonstration du Lemme-clé 7.5.
+9. Exercices
+Exercice 1. (a) Avec, pour m > 1 entier :
+a2m−1 := − √1m et a2m := √1m + 1
+m,
+montrer que le produit infini :
+∞
+∏
+n=1
+(1 + an
+) ∈ C\{0}
+converge vers un nombre complexe non nul, bien que la série de terme général an ne soit pas convergente.
+(b) Trouver un exemple de suite {an}n∞=1 de nombres réels telle que ∑∞
+n=1 an converge sans que ∏∞
+n=1 (1+ an) converge.
+(c) Montrer, pour une suite {an}n∞=1 de nombres an ∈ C, que si ∑∞
+n=1 |an|2 < ∞, et si an 6= −1 pour tout n, alors : ∞
+∑
+n=1
+an converge ⇐⇒
+∞
+∏
+n=1
+(1 + an
+) converge.
+Exercice 2. EE
+—————
+
+
+32 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Fonction Gamma d’Euler et fonction zêta de Riemann
+François DE MARÇAY
+Département de Mathématiques d’Orsay Université Paris-Sud, France
+1. Introduction
+2. La fonction Γ(z)
+Existe-t-il une manière naturelle d’interpoler la fonction factorielle N 3 n 7−→ n! entre deux entiers n et n + 1 quelconques ? La réponse est oui ! Pour x > 0 réel, la fonction Gamma est définie par :
+Γ(x) :=
+∫∞
+0
+e−t tx−1 dt.
+Cette intégrale converge près de t = 0, puisque la fonction tx−1 y est intégrable d’après le critère de Riemann, et elle converge aussi pour t −→ ∞, simplement parce que la décroissance de e−t neutralise toute croissance polynomiale. En intégrant par parties, le lecteur pourra vérifier que l’on a Γ(n + 1) = n! pour tout entier n ∈ N, mais il peut s’en dispenser, puisque nous allons aussi faire ce calcul dans un instant. Sans attendre, décollons vers l’imaginaire ! Quelques observations simples permettent en effet d’étendre le domaine de définition.
+Théorème 2.1. La fonction R∗
++ 3 x 7−→ Γ(x) se prolonge comme fonction holomorphe dans le demi-plan droit {z ∈ C : Re z > 0}, par la formule :
+Γ(z) :=
+∫∞
+0
+e−t tz−1 dt (Re z > 0).
+Évidemment, on note :
+z = x + i y.
+Démonstration. Commençons par observer que :
+∣
+∣e−t tz−1∣
+∣ = e−t ∣
+∣e(z−1) log t∣
+∣ = et e(x−1) log t = e−t tx−1,
+de telle sorte que cette intégrale complexe converge effectivement lorsque Re z = x > 0, puisqu’elle est majorée par :
+∣
+∣Γ(z)∣
+∣=
+∣ ∣ ∣ ∣
+∫∞
+0
+e−t tz−1 dt
+∣ ∣ ∣ ∣
+6
+∫∞
+0
+∣
+∣e−t tz−1∣
+∣ dt
+=
+∫∞
+0
+e−t tx−1 dt = Γ(x) < ∞.
+Mais pourquoi l’application z 7−→ Γ(z) serait-elle de surcroît holomorphe ?
+
+
+2. La fonction Γ(z) 33
+Il suffit de faire voir, pour tous nombres positifs 0 < δ < M < ∞, que cette intégrale définit une fonction qui est holomorphe dans la bande verticale :
+Bδ,M := {z ∈ C : δ < Re z < M
+}.
+Puisqu’elle peut être envisagée comme limε→> 0
+∫ 1/ε
+ε , introduisons :
+Φε(z) :=
+∫ 1/ε
+ε
+e−t e(z−1) log t dt.
+D’après un théorème connu, puisque l’intégrande est visiblement holomorphe par rapport à z, cette fonction z 7−→ Φε(z) est holomorphe dans la bande Bδ,M. En prenant ε := 1
+n,
+il suffit alors de montrer que la suite (Φ 1
+n (z))∞
+n=1 de fonctions holomorphes dans Bδ,M
+converge uniformément vers Γ(z), car un théorème connu de Cauchy garantira alors que la limite y est holomorphe. À cette fin, estimons :
+∣
+∣Γ(z) − Φε(z)∣
+∣6
+∫ε
+0
+e−t tx−1 dt +
+∫∞
+1/ε
+e−t tx−1 dt (z ∈ Bδ,M).
+La première intégrale converge uniformément vers 0 lorsque ε −→ 0, puisqu’on peut la majorer par :
+∫ε
+0
+e−t tx−1 dt 6 1 ·
+∫ε
+0
+tx−1 dt =
+[
+1
+x tx]ε
+0
+= εx
+x 6 εδ
+δ.
+Quant à la seconde :
+∣ ∣ ∣ ∣
+∫∞
+1/ε
+e−t tx−1 dt
+∣ ∣ ∣ ∣
+6
+∫∞
+1/ε
+e−t tM−1 dt 6 constante
+∫∞
+1/ε
+e−t/2 dt ε−→→0 0.
+Malgré le fait que l’intégrale qui définit Γ(z) n’est pas absolument convergente pour les valeurs de z telles que Re z 6 0, nous allons pouvoir prolonger méromorphiquement Γ au plan complexe C tout entier, avec peu de pôles, seulement aux point entiers négatifs z = 0, −1, −2, −3, . . . . L’unicité de ce prolongement méromorphe sera alors garantie par le principe d’unicité pour les fonctions holomorhes, en-dehors de cet ensemble discret de pôles. Nous continuerons à noter Γ ∈ M (C) ce prolongement méromorphe. L’existence de pôles aux points entiers négatifs provient en fait d’une identité fonctionnelle importante.
+Lemme 2.2. Pour tout z ∈ C avec x = Re z > 0, on a :
+Γ(z + 1) = z Γ(z),
+et :
+Γ(n + 1) = n! (∀ n ∈ N).
+Démonstration. Une simple intégration par parties dans le domaine de convergence {Re z > 0} explique l’identité :
+z Γ(z) =
+∫∞
+0
+e−t z tz−1 dt
+=
+[
+e−t tz]∞
+0◦
+−
+∫∞
+0
+− e−t tz dt
+= 0 + Γ(z + 1),
+
+
+34 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+et comme :
+Γ(1) =
+∫∞
+0
+e−t dt =
+[
+− e−t]∞
+0
+= 1,
+une récurrence instantanée donne Γ(n + 1) = n! — point d’exclamation de plaisir !
+C’est la division nécessaire par le facteur z dans la formule quasi-équivalente Γ(z) =
+1
+z Γ(z + 1) qui va introduire des pôles — heureusement simples !
+Théorème 2.3. La fonction Γ(z), initialement définie dans {Re z > 0}, bénéficie d’un prolongement méromorphe au plan complexe C tout entier dont les seules singularités sont des pôles simples aux entiers négatifs z = 0, −1, −2, −3, . . . , où elle a pour résidus :
+resz=−n Γ = (−1)n
+n! (∀ n ∈ N).
+Démonstration. Il suffit de prolonger Γ à tout demi-plan de la forme {Re z > −m} avec un entier m > 1 quelconque. Pour Re z > −1, définissons :
+Φ1(z) := Γ(z + 1)
+z.
+Puisque Γ(z + 1) est holomorphe dans {Re z > −1}, il est clair que Φ1 est méromorphe dans ce demi-plan, et qu’elle y a une unique singularité, un pôle d’ordre 1 en z = 0.
+Comme Γ(1) = 1, son résidu y vaut 1 = (−1)0
+0 ! . De plus, dans le sous-demi-plan {Re z > 0} ⊂ {Re z > −1}, l’identité fondamentale montre que cette fonction :
+Φ1(z) = Γ(z + 1)
+z = Γ(z)
+coïncide bien avec la fonction à prolonger. Pour un entier m > 1 quelconque, définissons dans le demi-plan {Re z > −m} la fonction :
+Φm(z) := Γ(z + m)
+(z + m − 1) · · · (z + n + 1)(z + n)(z + n − 1) · · · (z + 1)z .
+Visiblement, cette fonction est méromorphe avec des pôles simples en z = −m + 1, . . . , −1, 0, et en un point entier négatif z = − n avec 0 6 n 6 m − 1 quelconque, elle y a pour résidu :
+resz=−n Φm(z) = Γ(−n + m)
+(−n + m − 1) · · · (1) (−1)(−2) · · · (−n)
+= (m − n + 1) !
+(m − n + 1) ! (−1)n n!
+= (−1)n
+n! .
+De plus, dans le sous-demi-plan {Re z > 0} ⊂ {Re z > −m}, une itération de l’identité fondamentale du Lemme 2.2 :
+Γ(z + m) = (z + m − 1) · · · (z + 1)z Γ(z)
+montre aussitôt que Φm(z) = Γ(z) coïncide bien avec la fonction à prolonger. D’ailleurs, le principe d’identité garantit aussi que Φm = Φn pour tous entiers 1 6 n 6 m, dans {Re z > −n}∖Z−.
+
+
+2. La fonction Γ(z) 35
+L’identité fondamentale Γ(z + 1) = z Γ(z) continue d’être satisfaite (exercice mental) dans C∖Z− — c’est-à-dire en-dehors des pôles — parce que (solution) les deux côtés de cette formule coïncident dans {Re z > 0}. On peut même se convaincre (exercice) qu’en un entier négatif quelconque z = −n avec n > 1, les deux membres de l’identité Γ(z + 1) = z Γ(z) sont infinis, et que :
+resz=−n Γ(z + 1) = (−n) resz=−n Γ(z).
+Enfin, en z = 0, notons que :
+Γ(1) = zli→m0 z Γ(z).
+Voici une démonstration alternative du Théorème 2.3, encore plus éclairante, dont les idées se recontreront aussi plus tard. Elle consiste à décomposer l’intégrale qui définit Γ(z) pour Re z > 0 en deux morceaux :
+Γ(z) =
+∫1
+0
+e−t tz−1 dt +
+∫∞
+1
+e−t tz−1 dt.
+Grâce à la décroissance forte de e−t, le deuxième définit une fonction holomorphe entière, définie sur C. Quant au premier morceau, développons-y en série entière l’exponentielle, justifions la convergence normale (exercice), et intégrons terme à terme :
+∫1
+0
+e−t tz−1 dt =
+∞
+∑
+n=0
+∫1
+0
+(−t)n
+n! tz−1 dt =
+∞
+∑
+n=0
+(−1)n
+n ! (n + z).
+Ceci nous permet d’écrire formellement :
+Γ(z) =
+∞
+∑
+n=0
+(−1)n
+n ! (n + z) +
+∫∞
+1
+e−t tz−1 dt (Re z > 0).
+Assertion 2.4. Cette série infinie ∑∞
+n=0
+(−1)n
+n ! (n+z) définit une fonction méromorphe dans C ayant pour seules singularités des pôles simples aux entiers négatifs z = −n où elle a pour résidus (−1)n
+n! .
+Démonstration. Pour un grand rayon R 1, et pour un entier N > 2 R, décomposons-la en : ∞
+∑
+n=0
+(−1)n
+n ! (n + z) =
+N
+∑
+n=0
+(−1)n
+n ! (n + z) +
+∞
+∑
+n=N+1
+(−1)n
+n ! (n + z).
+La première somme, qui est finie, définit une fonction méromorphe dans le disque {|z| < R} avec les pôles et les résidus annoncés, tout à fait en accord avec ce que la première démonstration a déjà fait voir. Pour ce qui est de la deuxième somme portant sur des entiers n > N > 2 R, toujours pour |z| < R, comme |n + z| > R implique :
+∣ ∣ ∣ ∣
+(−1)n
+n ! (n + z)
+∣ ∣ ∣ ∣
+61
+n ! R,
+nous voyons instantanément qu’elle converge normalement sur le disque {|z| < R}, donc y définit une fonction holomorphe grâce à un théorème déjà connu. Comme R 1 pouvait être choisi arbitrairement grand, tout ceci montre que la représentation de Γ(z) sous la forme d’une série méromorphe infinie suivie d’une intégrale est valable dans C\Z− tout entier.
+
+
+36 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+En définitive, nous avons pour tout z ∈ C\Z− :
+Γ(z) =
+∞
+∑
+n=0
+(−1)n
+n ! (n + z) +
+∫∞
+1
+(2.5) e−t tz−1 dt.
+Présentons maintenant d’autres propriétés de la fonction Γ. Voici une identité qui dévoile une symétrie fondamentale de Γ par rapport à la droite {Re z = 1
+2 }.
+Théorème 2.6. [Formule des compléments] En tout z ∈ C :
+Γ(z) Γ(1 − z) = π
+sin π z .
+Observons que Γ(1 − z) a des pôles simples aux entiers naturels z = 1, 2, 3, . . . , de telle sorte que le produit Γ(z) Γ(1 − z), une fonction méromorphe sur C, possède des pôles simples en tous les entiers relatifs ∈ Z, tout aussi bien que la fonction π
+sin π z .
+Démonstration. Il suffit d’établir cette identité en des points réels 0 < x < 1, car alors le principe d’identité garantira aussitôt qu’elle est vraie dans tout C\Z−.
+Lemme 2.7. Pour un paramètre réel 0 < a < 1 quelconque, on a :
+∫∞
+0
+va−1
+1 + v dv = π
+sin π a .
+Démonstration. Il suffit d’effectuer le changement de variable v = ex et de se souvenir de
+l’intégration, déjà vue, de la fonction f (z) = eaz
+1+ez le long de rectangles de sommets − R, R, R + 2iπ, −R + 2iπ avec R −→ ∞, pour calculer l’intégrale qui apparaît :
+∫∞
+0
+va−1
+1 + v dv =
+∫∞
+−∞
+eax
+1 + ex dx = π
+sin π a .
+Pour établir le théorème, avec un paramètre t > 0 quelconque, en effectuant le changement de variable v t = u, préparons :
+Γ(1 − x) =
+∫∞
+0
+e−u u−x du = t
+∫∞
+0
+e−vt (v t)−x dv,
+et grâce à cette astuce, calculons, puis concluons :
+Γ(1 − x) Γ(x) =
+∫∞
+0
+e−t tx−1 Γ(1 − x) dt
+=
+∫∞
+0
+e−t tx−1
+(
+t
+∫∞
+0
+e−vt (v t)−x dv
+)
+dt
+=
+∫∞
+0
+v−x
+(∫ ∞
+0
+e−t (1+v) dt
+)
+dv
+=
+∫∞
+0
+v−x
+[ e−t (1+v)
+−1 − v
+]∞
+0
+dv
+=
+∫∞
+0
+v−x
+1 + v dv
+=π
+sin π (1 − x)
+=π
+sin π x .
+
+
+2. La fonction Γ(z) 37
+En particulier, au point z = 1
+2 , en observant que Γ(x) > 0 quand x ∈ R∗
++, nous trouvons la valeur spéciale :
+Γ
+(1 2
+) = √π.
+Poursuivons notre étude de la fonction Gamma en regardant son inverse, fonction qui devient entière et à croissance contrôlée.
+Théorème 2.8. La fonction z 7−→ Γ(z) d’Euler jouit des propriétés suivantes.
+(1) 1
+Γ(z) ∈ O(C) est holomorphe entière, avec des zéros simples aux entiers négatifs z = 0, −1, −2, . . . , et aucun zéro ailleurs.
+(2) 1
+Γ(z) a pour croissance :
+∣ ∣ ∣ ∣
+1
+Γ(z)
+∣ ∣ ∣ ∣
+6 c1 ec2 |z| log |z| (∀ z ∈ C),
+où 0 < c1, c2 < ∞ sont des constantes universelles.
+Une telle inégalité doit en fait s’interpréter quand |z| −→ ∞. On dit alors que 1
+Γ(z) est
+d’ordre 6 1, au sens où, pour tout ε > 0, il existe une constante 0 < c1,ε < ∞ telle que :
+∣ ∣ ∣ ∣
+1
+Γ(z)
+∣ ∣ ∣ ∣
+6 c1,ε ec2 |z|1+ε .
+L’Exercice 1 montre que l’on ne peut pas ici se dispenser d’un ε > 0 dans la puissance |z|1+ε.
+Démonstration. Grâce au Théorème 2.6 qui précède, nous pouvons écrire :
+1
+Γ(z) = sin πz
+π Γ(1 − z),
+et à droite, les pôles simples de Γ(1 − z) situés aux entiers z = 1, 2, 3, . . . sont annihilés par les zéros simples de sin πz, donc 1
+Γ(z) est holomorphe entière avec des zéros simples
+aux zéros restants de sin πz, c’est-à-dire en z = 0, −1, −2, . . . . De plus, 1
+Γ(z) 6= 0 ailleurs, car les seuls zéros de sin πz sont en z ∈ N. Pour établir l’estimée de croissance, avec un réel x > 0 quelconque, et avec l’entier positif unique x 6 n 6 x + 1, commençons par :
+∫∞
+1
+e−t tx dt 6
+∫∞
+0
+e−t tn dt
+= n!
+6 nn
+= en log n
+6 e(x+1) log (x+1).
+En revenant à l’identité (2.5) écrite pour Γ(1 − z) :
+1
+Γ(z) = sin πz
+π
+∞
+∑
+n=0
+(−1)n
+n ! (n + 1 − z) + sin πz
+π
+∫∞
+1
+e−t t−z dt,
+nous pouvons alors en utilisant ∣
+∣ew∣
+∣ 6 e|w| ainsi que pour t > 0 :
+∣
+∣t−z ∣
+∣=∣
+∣e−z log t∣
+∣ = e−Re z log t 6 e|Re z| log t 6 e|z| log t = t|z|,
+
+
+38 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+estimer la croissance du deuxième terme :
+∣ ∣ ∣ ∣
+eiπz − e−iπz
+2i π
+∣ ∣ ∣ ∣
+∣ ∣ ∣ ∣
+∫∞
+1
+e−t t−z dt
+∣ ∣ ∣ ∣
+6 eπ|z|
+π
+∫∞
+1
+e−t t|z| dt
+6 eπ|z|
+π e(|z|+1) log (|z|+1)
+6 c1 ec2 |z| log |z|.
+Quant au premier terme :
+sin πz
+π
+∞
+∑
+n=0
+(−1)n
+n ! (n + 1 − z),
+dans un premier cas où |Im z| > 1, puisqu’on a alors pour tout entier n > 0 :
+∣
+∣n + 1 − z∣
+∣ > 1,
+il se majore aisément :
+∣ ∣ ∣ ∣
+sin π z
+π
+∣ ∣ ∣ ∣
+∣ ∣ ∣ ∣
+∞
+∑
+n=0
+(−1)n
+n ! (n + 1 − z)
+∣ ∣ ∣ ∣
+6 eπ|z|
+π
+∞
+∑
+n=0
+1
+n!·1
+= eπ|z|+1
+π.
+Dans l’autre cas où |Im z| < 1, introduisons l’unique entier k = kz avec k − 1
+2 6 Re z <
+k+ 1
+2 , et distinguons deux sous-cas. Lorsque k > 1, mettons en exergue, dans la somme infinie, le terme n = k − 1 :
+sin πz
+π
+∞
+∑
+n=0
+(−1)n
+n ! (n + 1 − z) = sin πz
+π
+(−1)k−1
+(k − 1) ! (k − z) + sin πz
+π
+∑
+n6=k−1
+(−1)n
+n ! (n + 1 − z),
+et démontrons que les deux expressions à droite sont bornées. Pour la première expression, avec la constante :
+max
+|w|63/2
+∣ ∣ ∣ ∣
+sin πw
+πw
+∣ ∣ ∣ ∣
+=: c < ∞,
+finie parce que w 7−→ sin πw
+π w est holomorphe sur C car en 0 on a sin πw = πw + O(w2), estimons la par cette constante :
+∣ ∣ ∣ ∣
+sin πz
+π
+(−1)k−1
+(k − 1) ! (k − z)
+∣ ∣ ∣ ∣
+=
+∣ ∣ ∣ ∣
+sin π (k − z)
+π (k − z)
+∣ ∣ ∣ ∣
+1
+(k − 1)!
+[w := k − z] 6 max
+|w|63/2
+∣ ∣ ∣ ∣
+sin πw
+πw
+∣ ∣ ∣ ∣
+= c,
+sachant que l’on a ici :
+|w| = ∣
+∣k − z∣
+∣6
+∣
+∣k − Re z∣
+∣ + |Im z| 6 1
+2 + 1.
+
+
+2. La fonction Γ(z) 39
+Ensuite, grâce à :
+n 6 k − 2 =⇒ |n + 1 − z| > |n + 1 − Re z| = Re z − n − 1
+> k−1
+2 −n−1
+>1
+2,
+n > k =⇒ |n + 1 − z| > |n + 1 − Re z| = n + 1 − Re z
+> n+1−k− 1
+2 >1
+2,
+constatons que le second terme est lui aussi borné :
+∣ ∣ ∣ ∣
+sin πz
+π
+∑
+n6=k−1
+(−1)n
+n ! (n + 1 − z)
+∣ ∣ ∣ ∣
+6
+∣ ∣ ∣ ∣
+eiπx−πy − e−iπx+πy
+2iπ
+∣ ∣ ∣ ∣
+∑
+n6=k−1
+1
+n!· 1
+2
+6 eπ|y|
+π 2 e1
+62
+π eπ+1.
+Enfin, lorsque k 6 0, d’où Re z < 1
+2 d’après notre supposition, il devient inutile de mettre un terme en exergue, car alors on a toujours :
+∣
+∣n + 1 − z∣
+∣ > n + 1 − Re z > n + 1 − 1
+2>1
+2 (∀ n ∈ N),
+d’où similairement :
+∣ ∣ ∣ ∣
+sin πz
+π
+∞
+∑
+n=0
+(−1)n
+n ! (n + 1 − z)
+∣ ∣ ∣ ∣
+6 eπ|y|
+π
+∞
+∑
+n=0
+1
+n! 1
+2
+62
+π eπ+1.
+Le fait que 1
+Γ satisfasse une condition du type qui a été discuté dans un chapitre précédent conduit naturellement à une factorisation de Hadamard. Rappelons auparavant que la constante d’Euler :
+γ := lim
+N→∞
+N
+∑
+n=1
+1
+n − log N,
+est bien définie, car :
+N
+∑
+n=1
+1
+n − log N =
+N−1
+∑
+n=1
+∫ n+1
+n
+1
+n dx + 1
+N−
+∫N
+1
+1
+x dx
+=
+N−1
+∑
+n=1
+∫ n+1
+n
+(1
+n−1
+x
+)
+dx + 1
+N,
+avec, lorsque n 6 x 6 n + 1 :
+06 1
+n−1
+x = x−n
+xn 6 1
+n2 ,
+
+
+40 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+donc :
+N
+∑
+n=1
+1
+n − log N =
+N−1
+∑
+n=1
+an + 1
+N,
+avec 0 < an 6 1
+n2 , ce qui fait voir la convergence, grâce à ∑ 1
+n2 < ∞.
+Théorème 2.9. Pour tout z ∈ C :
+1
+Γ(z) = eγz z
+∞
+∏
+n=1
+(
+1+ z
+n
+)
+e− z
+n.
+Démonstration. Grâce au théorème de factorisation de Hadamard, et au fait que 1
+Γ est en
+tière d’ordre 6 1, avec des zéros simples en z = 0, −1, −2, . . . , nous pouvons représenter
+1
+Γ sous la forme d’un produit de Weierstrass :
+1
+Γ(z) = eAz+B z
+∞
+∏
+n=1
+(
+1+ z
+n
+)
+e− z
+n,
+dans lequel il reste à déterminer les deux constantes A, B ∈ C. Mais si nous nous souvenons que z Γ(z) −→ 1 quand z −→ 0, nous trouvons B = 0, ou n’importe quel multiple entier de 2iπ, ce qui ne change rien. Ensuite, assignons z := 1 et utilisons Γ(1) = 1 :
+e−A =
+∞
+∏
+n=1
+(
+1+ 1
+n
+)
+e− 1
+n
+= lim
+N→∞
+N
+∏
+n=1
+(
+1+ 1
+n
+)
+e−1
+n
+= lim
+N→∞ e
+∑N
+n=1[ log (1+1/n)−1/n ]
+= lim
+N→∞ e
+∑N
+n=1[ log (n+1)−log n ]−∑N
+n=1 1/n
+= lim
+N→∞ e log (N+1)−∑N
+n=1 1/n
+= lim
+N→∞ e log (1+1/N)+log N−∑N
+n=1 1/N
+= e− γ.
+Ainsi, A = γ + 2ikπ pour un entier k ∈ Z, mais comme Γ(x) est réelle pour x > 0 réel, il faut k = 0, ce qui conclut.
+Ces arguments montrent que 1
+Γ est essentiellement caractérisée, à des constantes normalisatrices près, comme la fonction holomorphe entière :
+• qui a des zéros simples en z = 0, −1, −2, . . . et ne s’annule nulle part ailleurs ;
+• est d’ordre de croissance 6 1.
+Observons que sin πz a des propriétés analogues, excepté le fait qu’elle s’annule en tous les entiers z = k ∈ Z. Cependant, tandis que sin πz jouit d’une propriété de croissance de la forme sin πz = O(ec |z|), l’Exercice 1 montre que tel n’est pas le cas pour 1
+Γ(z) .
+
+
+3. La fonction ζ(s) 41
+3. La fonction ζ(s)
+La fonction zêta de Riemann est définie, pour s ∈ C complexe avec Re s > 1, par la série :
+ζ(s) :=
+∞
+∑
+n=1
+1
+ns ,
+convergente et définit, comme nous l’avons déjà vu, une fonction holomorphe dans le demiplan complexe {Re s > 1}. Comme la fonction Γ(z) d’Euler, cette fonction ζ(s) de Riemann peut être prolongée méromorphiquement au plan complexe tout entier, avec un unique pôle, simple, en s = 1. En fait, il existe de nombreuses démonstrations de ce prolongement, et nous en présentons une qui dévoile une équation fonctionnelle importante satisfaite par ζ(s). Toutefois, le prolongement de ζ(s) au plan complexe C tout entier est plus délicat que celui de la fonction Γ(z). La voie argumentative que nous choisissons relie ζ et Γ à une autre fonction importante en théorie analytique des nombres. Commençons par quelques préliminaires. D’après le cours d’Analyse de Fourier, on sait que la fonction x 7−→ e−πx2 — qui appartient à l’espace de Schwartz S (R) des fonctions à décroissance (très) rapide à l’infini — coïncide avec sa transformée de Fourier :
+∫∞
+−∞
+e−πx2 e−2iπξx dx = e−πξ2 .
+Avec un paramètre réel t > 0, le changement de variable dans cette intégrale :
+x 7−→ √xt
+donne que la transformée de Fourier de la fonction f (x) := e−πtx2 est ̂f (ξ) = √1t e− πξ2
+t.
+Rappelons aussi la formule sommatoire de Poisson, valable pour toute f ∈ S (R) :
+∞
+∑
+n=−∞
+f (n) =
+∞
+∑
+n=−∞
+̂f (n),
+qui donne ici :
+∞
+∑
+n=−∞
+e−πtn2 = √1t
+∞
+∑
+n=−∞
+e− πn2
+t.
+Si donc nous introduisons la fonction θ définie, pour t > 0 réel, par :
+θ(t) :=
+∞
+∑
+n=−∞
+e−πn2t,
+nous voyons qu’elle satisfait l’équation fonctionnelle :
+θ(t) = √1t θ( 1
+t
+(3.1) ).
+L’information dont nous aurons besoin concerne la décroissance exponentielle de cette fonction :
+θ(t) = 1 + 2
+∞
+∑
+n=1
+e−πn2t,
+lorsque t −→ ∞, ainsi que son comportement singulier quand t −>→ 0.
+
+
+42 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Lemme 3.2. Il existe une constante universelle 0 < C < ∞ telle que :
+(0 6) θ(t) − 1 6 C e−t (∀ t > 1),
+et :
+θ(t) 6 C √1t (∀ 0 < t 6 1).
+Démonstration. Comme {n2 : n > 1} ⊃ {m > 1}, on a :
+θ(t) − 1 = 2
+∞
+∑
+n=1
+e−πn2t 6 2
+∞
+∑
+m=1
+e−πmt
+= 2 e−πt [
+1 + e−πt + e−2πt + e−3πt + · · ·
+]
+= 2 e−πt 1
+1 − e−πt ,
+et pour t > 1, puisque e−πt 6 e−π, nous obtenons bien :
+θ(t) − 1 6 2 e−π
+1 − e−π .
+Ensuite, grâce à l’équation fonctionnelle (3.1), pour 0 < t 6 1, d’où 1 6 1
+t < ∞, en recyclant ce que nous venons de faire :
+θ(t) = √1t θ
+(1
+t
+)
+= √1t
+(
+1+2
+∞
+∑
+n=1
+e−πn2 1
+t
+)
+6 √1t
+(
+1 + 2 e−π 1
+t
+1 − e−π 1
+t
+)
+6 √1t
+(
+1 + 2 e−π
+1 − e−π
+)
+.
+Tout ceci montre qu’on peut prendre comme constante universelle C := 1+2 e−π
+1−e−π .
+Nous sommes maintenant en position d’établir une relation importante entre les trois fonctions ζ, Γ, θ.
+Théorème 3.3. Pour tout s ∈ C avec Re s > 1, on a :
+∫∞
+0
+us
+2 −1 [ θ(u) − 1
+2
+]
+du = 1
+πs
+2
+Γ
+(s 2
+) ζ(s).
+Démonstration. Comme θ(u)−1
+2 consiste en la sommation des termes e−πn2u pour n = 1, . . . , ∞, calculons les intégrales suivantes dans lesquelles nous effectuons le changement de variable u = 1
+πn2 t :
+∫∞
+0
+us
+2 −1 e−πn2u du =
+∫∞
+0
+πn2
+◦
+(πn2) s
+2
+ts
+2 −1 e−t dt
+πn2◦
+=1
+π
+s 2
+1
+ns
+∫∞
+0
+t
+s
+2 −1 e−t dt
+[Reconnaître Γ] = 1
+π
+s 2
+1
+ns Γ( s
+2
+).
+
+
+3. La fonction ζ(s) 43
+Les estimées du Lemme 3.2 justifient alors l’interversion entre sommation infinie et intégration dans le calcul conclusif suivant :
+∫∞
+0
+us
+2 −1 [ θ(u) − 1
+2
+]
+du =
+∫∞
+0
+us
+2 −1
+(∞ ∑
+n=1
+e−πn2u
+)
+du
+=
+∞
+∑
+n=1
+∫∞
+0
+us
+2 −1 e−πn2u du
+=
+∞
+∑
+n=1
+1
+πs
+2
+1
+ns Γ( s
+2
+)
+=1
+πs
+2
+ζ(s) Γ( s
+2
+)
+Au vu de cela, introduisons une certaine modification de la fonction ζ, appelée fonction xi, définie pour Re s > 1 comme étant le résultat que nous venons d’obtenir :
+ξ(s) := 1
+πs
+2
+Γ
+(s 2
+) ζ(s),
+et qui met en lumière une symétrie fondamentale.
+Théorème 3.4. Cette fonction ξ(s) est holomorphe dans {Re s > 1} et possède un prolongement méromorphe à C tout entier, holomorphe dans C\{0, 1}, avec deux pôles simples en s = 0 et en s = 1. De plus, pour tout s ∈ C :
+ξ(s) = ξ(1 − s).
+Bien entendu, en s = 0 et 1, on a ξ(0) = ∞ = ξ(1).
+Démonstration. Soit la fonction auxiliaire ψ(u) := θ(u)−1
+2 , déjà considérée plus haut.
+L’équation fonctionnelle θ(u) = √1u θ( 1
+u
+) se transmet à ψ :
+2 ψ(u) + 1 = √1u
+[
+2ψ
+(1
+u
+)
++1
+]
+,
+c’est-à-dire :
+ψ(u) = √1u ψ
+(1
+u
+)
++1
+2 √u − 1
+2.
+
+
+44 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+En partant du Théorème 3.3, découpons l’intégrale, insérons, changeons de variable, transformons, et calculons (patiemment) pour Re s > 1 :
+1
+πs
+2
+Γ
+(s
+2
+)
+ζ(s) =
+∫∞
+0
+us
+2 −1 ψ(u) du
+=
+∫1
+0
+us
+2 −1 ψ(u) du +
+∫∞
+1
+us
+2 −1 ψ(u) du
+=
+∫1
+0
+us
+2 −1 [ √1u ψ
+(1
+u
+)
++1
+2 √u − 1
+2
+]
+du +
+∫∞
+1
+us
+2 −1 ψ(u) du
+=
+∫1
+0
+us
+2
+u √u ψ
+(1
+u
+)
+du + 1
+2
+∫1
+0
+(
+us
+2−3
+2 − us
+2 −1)
+du +
+∫∞
+1
+us
+2 −1 ψ(u) du
+[u = 1
+v] =
+∫∞
+1
+v− s
+2−1
+2 ψ(v) dv + 1
+2
+[ us
+2−1
+2
+s
+2−1
+2
+− us
+2
+s 2
+]1
+0
++
+∫∞
+1
+us
+2 −1 ψ(u) du
+=1
+s−1− 1
+s+
+∫∞
+1
+(
+u− s
+2−1
+2 + us
+2 −1)
+ψ(u) du.
+Autrement dit :
+ξ(s) = 1
+s−1− 1
+s+
+∫∞
+1
+(
+u− s
+2−1
+2 + us
+2 −1)
+ψ(u) du.
+Or puisque la fonction ψ décroît exponentiellement à l’infini, cette dernière intégrale à paramètre définit une fonction holomorphe entière, ce qui fait clairement voir que :
+ξ ∈ M (C) ∩ O(C\{0, 1}),
+avec deux pôles simples en s = 0 et en s = 1. De plus, il est visible que 1
+s−1 − 1
+s est invariant lorsqu’on remplace s 7−→ 1 − s, et on se convainc aisément que l’intégrale est aussi invariante à travers s 7−→ 1 − s. En définitive, on a bien ξ(s) = ξ(1 − s).
+Grâce à cette identité qui montre la symétrie de ξ(s) à travers la réflexion d’axe {Re s =
+1 2
+}, nous pouvons facilement déduire les propriétés de la fonction zêta de Riemann : son prolongement méromorphe à C, ainsi que son équation fonctionnelle.
+Théorème 3.5. La fonction ζ(s) possède un prolongement méromorphe à C, avec un unique pôle simple en s = 1 de résidu égal à 1, et elle satisfait l’équation fonctionnelle :
+ζ(s) = 2s πs−1 sin ( 1
+2 π s) Γ(1 − s) ζ(1 − s).
+Démonstration. Le prolongement méromorphe de ζ(s) est fournit instantanément par la formule :
+ζ(s) = π s
+2 ξ(s)
+Γ( s
+2).
+Mais comme 1
+Γ( s
+2 ) est holomorphe entière, d’après le Théorème 2.8, avec des zéros
+simples en s = 0, −2, −4, . . . , le pôle simple de ξ(s) en s = 0 est annihilé par le zéro correspondant de 1
+Γ( s
+2 ) . Par conséquent, il ne reste, comme singularité pour ζ(s), que le
+pôle simple de ξ en s = 1. Ensuite, l’équation fonctionnelle pour ξ(s) :
+π− s
+2 Γ( s
+2
+) ζ(s) = ξ(s) = ξ(1 − s) = π −1+s
+2 Γ( 1−s
+2
+) ζ(1 − s),
+
+
+4. Exercices 45
+donne :
+ζ(s) = πs− 1
+2
+Γ
+( 1−s 2
+)
+Γ
+(s 2
+) ζ(1 − s),
+et il nous faut encore remplacer ici Γ( 1−s
+2
+). Or avec z := 1−s
+2 , la formule de l’Exercice 3 :
+Γ(z) = π 1
+2 21−2z Γ(2 z)
+Γ
+(z + 1
+2
+)
+devient :
+Γ
+( 1−s 2
+) = π1
+2 2s Γ(1 − s)
+Γ
+(1 − s
+2
+).
+Nous pouvons donc remplacer, réorganiser et appliquer au final la formule des compléments :
+ζ(s) = πs− 1
+2 π1
+2 2s Γ(1 − s)
+Γ
+(s 2
+) Γ(1 − s
+2
+) ζ(1 − s)
+= 2s πs−1 π
+Γ
+(s 2
+) Γ(1 − s
+2
+) Γ(1 − s) ζ(1 − s)
+[Théorème 2.6] = 2s πs−1 sin (π s
+2
+) Γ(1 − s) ζ(1 − s).
+4. Exercices
+Exercice 1. (a) Montrer qu’il n’existe pas de constantes 0 < c1, c2 < ∞ telles que :
+∣ ∣ ∣ ∣
+1 Γ(z)
+∣ ∣ ∣ ∣
+6 c1 ec2|z| (∀ z ∈ C).
+Indication: Aux points z = − k − 1
+2 avec k > 1 entier, constater que :
+∣ ∣ ∣ ∣
+1
+Γ(−k − 1
+2)
+∣ ∣ ∣ ∣
+> k!
+π.
+(b) Montrer qu’il n’existe pas de fonction holomorphe entière F ∈ O(C) de croissance |F (z)| 6 c1ec2|z| ayant des zéros simples aux entiers négatifs z = 0, −1, −2, . . . , et qui ne s’annule nulle part ailleurs.
+Exercice 2. Montrer que la fonction Gamma (réelle) d’Euler :
+Γ(x) :=
+∫∞
+0
+tx−1 e−t dt (x > 0),
+est logarithmiquement convexe, c’est-à-dire satisfait :
+Γ′(x) Γ′(x) 6 Γ(x) Γ′′(x) (∀ x > 0).
+Exercice 3. (a) Montrer que la formule classique de Wallis peut s’écrire sous la forme :
+√π
+2 = nli→m∞
+22n (n!)2 (2n + 1)!
+(2n + 1)1/2.
+(b) En déduire l’identité satisfaite par la fonction méromorphe Gamma :
+Γ(z) Γ(z + 1
+2
+) = π1
+2 21−2z Γ(2 z)
+(∀ z ∈ C).
+Exercice 4. EE
+Exercice 5. EE
+—————
+
+
+46 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Théorème des nombres premiers
+François DE MARÇAY
+Département de Mathématiques d’Orsay Université Paris-Sud, France
+1. Introduction
+On note :
+P := {2, 3, 5, 7, 11, 13, 17, 19, 23, . . . }
+l’ensemble des nombres entiers positifs premiers. Pour x > 1 réel, soit :
+π(x) := Card {p ∈ P : 1 6 p 6 x}.
+L’objectif de ce chapitre est d’établir le
+Théorème 1.1. [des nombres premiers] Asymptotiquement lorsque x −→ ∞ :
+π(x) ∼ x
+log x .
+La démonstration s’organise en une série de 7 lemmes ‘capitaux’, accompagnés d’un théorème de type ‘taubérien’ dû à D.J. Newman, montrant qu’une certaine intégrale dépendant d’un paramètre réel 0 6 T < ∞ a une limite quand T −→ ∞.
+Convention 1.2. La lettre p désignera toujours un nombre premier.
+2. Sept lemmes capitaux
+Les 7 lemmes dévoilent progressivement des propriétés de 3 fonctions, la fonction zêta de Riemann :
+ζ(s) :=
+∞
+∑
+n=1
+1
+ns ,
+holomorphe en s ∈ C avec Re s > 1, puis la fonction dérivée :
+Φ(s) := − d
+ds
+( ∑
+p∈P
+1
+ps
+)
+=
+∑
+p∈P
+log p
+ps ,
+elle aussi holomorphe dans {Re s > 1}, et enfin la fonction, positive et croissante par sauts, d’un réel x > 1 :
+θ(x) :=
+∑
+p∈P p6x
+log p.
+
+
+2. Sept lemmes capitaux 47
+En effet, on se convainc aisément (exercice de révision) que les séries définissant ζ(s) et Φ(s) sont normalement, donc uniformément, convergentes sur les demi-plans fermés {Re s > 1 + δ}, quel que soit δ > 0, d’où leur holomorphie.
+Lemme 2.1. [Euler] Pour Re s > 1, on a la formule de produit d’Euler :
+ζ(s) =
+∏
+p∈P
+1
+1− 1
+ps
+.
+Démonstration. La factorisation unique des entiers n > 1, et la convergence justifient le calcul formel :
+ζ(s) =
+∑
+r2,r3,r5,···>0
+1
+(2r2 3r3 5r5 · · · )s =
+∏
+p∈P
+( ∑
+r>0
+1
+prs
+)
+=
+∏
+p∈P
+1
+1− 1
+ps
+,
+les détails étant laissés au lecteur — qui n’a pas l’interdiction de s’aider du fait que ces détails ont déjà été fournis dans un chapitre qui précède !
+En s = 1, il y a divergence de ζ(1) = ∑∞
+n=1
+1
+n = ∞, mais après soustraction d’un pôle simple :
+Lemme 2.2. La fonction ζ(s) − 1
+s−1 se prolonge holomorphiquement à {Re s > 0}.
+Démonstration. En effet, avec Re s > 1, il apparaît dans la différence une série :
+ζ(s) − 1
+s−1 =
+∞
+∑
+n=1
+1
+ns −
+∫∞
+1
+1
+xs dx =
+∞
+∑
+n=1
+∫ n+1
+n
+dx
+(1
+ns − 1
+xs
+)
+} {{ }
+=: an(s)
+de fonctions holomorphes qui sont majorables grâce à l’inégalité de la moyenne :
+∣
+∣an(s)∣
+∣=
+∣ ∣ ∣ ∣
+∫ n+1
+n
+dx
+∫x
+n
+s du
+us+1
+∣ ∣ ∣ ∣
+6 1 · max
+n6u6n+1
+∣ ∣ ∣
+s
+us+1
+∣ ∣ ∣
+= |s|
+n1+Re s ,
+ce qui montre la convergence uniforme sur {Re s > 0} vers une fonction-limite holomorphe.
+Lemme 2.3. Il existe une constante universelle C < ∞ telle que, pour tout x > 1 :
+(0 6) θ(x) =
+∑
+p∈P p6x
+log p 6 C x.
+Démonstration. Pour n > 1 entier, il est clair que :
+4n = (1 + 1)2n =
+(2n
+0
+)
++···+
+(2n
+n
+)
++···+
+(2n
+2n
+)
+>
+(2n
+n
+)
+>
+∏
+n<p62n
+p
+= eθ(2n)−θ(n),
+puisque les nombres premiers n < p 6 2n au numérateur de (n+1)···(n+n)
+1···n ne peuvent être effacés par le dénominateur.
+
+
+48 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Ainsi :
+n log 4 > θ(2n) − θ(n).
+Or une sommation téléscopique :
+θ
+(2k+1) − θ(2k) 6 2k log 4,
+························
+θ(4) − θ(2) 6 21 log 4,
+θ(2) − θ(1)◦ 6 20 log 4,
+donne :
+θ
+(2k+1)
+6 2k+1 log 4,
+et comme pour tout x > 1 réel, il existe un unique entier kx > 1 encadrant :
+2kx 6 x < 2kx+1,
+il vient par croissance de θ :
+θ(x) 6 θ(2kx+1)
+6 2kx 2 log 4 6 x 4 log 2.
+La formule d’Euler ζ(s) = ∏
+p
+(1 − 1
+ps
+)−1 garantit, grâce aux propriétés générales
+des produits infinis convergents de fonctions holomorphes, que ζ(s) 6= 0, quel que soit Re s > 1. L’énoncé suivant est un point-clé.
+Lemme 2.4. Hors du pôle {s = 1}, la fonction ζ, holomorphe dans {Re s > 0}\{1}, ne s’annule jamais sur {Re s = 1} :
+ζ
+(1 + it) 6= 0 (∀ t ∈ R∗).
+Rappelons que :
+Φ(s) :=
+∑
+p∈P
+log p
+ps (Re s > 1).
+Démonstration. Pour Re s > 1, une dérivée logarithmique du produit ζ(s) = ∏
+p∈P (1 − p−s)−1 donne :
+− ζ′(s)
+ζ(s) =
+∑
+p∈P
+(
+log (1 − e−s log p)
+)′
+=
+∑
+p∈P
+p−s log p
+1 − p−s
+= Φ(s) +
+∑
+p∈P
+log p
+(2.5) ps(ps − 1) .
+Pour tout c > 1
+2 , cette dernière somme converge normalement-uniformément sur {Re s >
+c}, donc définit une fonction-reste holomorphe dans {Re s > 1
+2 }.
+Dans l’éventualité où ζ(s) a un zéro en un point s0 = 1 + it0 avec t0 6= 0 :
+ζ(s) = (s − s0)μ0 η(s),
+avec μ0 > 1 entier, et avec η(s) holomorphe au voisinage de s0 satisfaisant η(s0) 6= 0, il
+vient :
+− ζ′(s)
+ζ(s) = − μ0
+s − s0
++ reste holomorphe (s ∼ s0).
+
+
+2. Sept lemmes capitaux 49
+Par conséquent, Φ(s) se prolonge méromorphiquement à un voisinage ouvert de {Re s > 1}, avec des pôles d’ordre 1 en tous les zéros de ζ sur {Re s = 1}\{1}, et aussi un pôle
+d’ordre 1 en s = 1, puisque ζ(s) ∼ 1
+s−1 , d’où − ζ′(s)
+ζ(s) ∼ 1
+s−1 .
+Re s
+C Im s
+1 2
+01
+1 + 2it0
+1 + it0
+1 − it0
+1 − 2it0
+Pour aboutir à une contradiction, un raisonnement particulièrement astucieux consiste à regarder aussi le point 1 + 2it0, en lequel ζ a un certain ordre d’annulation ν0 > 0. Puisque la relation ζ(s) = ζ(s), valable pour Re s > 1, est héritée par continuité via le Lemme 2.2 sur la droite épointée {Re s = 1}\{1}, la fonction ζ a les mêmes ordres d’annulation en 1 + it et en 1 − it, quel que soit t 6= 0. Ainsi :
+1 = εli↘m0 ε
+(
+− ζ′(1 + ε)
+ζ(1 + ε)
+)
+, − μ0 = εli↘m0 ε
+(
+− ζ′(1 + ε ± it0)
+ζ(1 + ε ± it0)
+)
+,
+− ν0 = εli↘m0 ε
+(
+− ζ′(1 + ε ± 2it0)
+ζ(1 + ε ± 2it0)
+)
+,
+d’où par holomorphie du reste dans (2.5) :
+1 = εli↘m0 ε Φ(1 + ε), − μ0 = εli↘m0 ε Φ(1 + ε ± it0
+),
+− ν0 = εli↘m0 ε Φ(1 + ε ± 2it0
+).
+Le point-clé de l’astuce est alors la reconstitution algébrique d’une puissance quatrième positive :
+∑
+−26l62
+(4
+2+l
+)
+Φ
+(1 + ε + ilt0
+)=
+∑
+−26l62
+(4
+2+l
+) ∑
+p∈P
+log p
+p1+ε+ilt0
+=
+∑
+p∈P
+log p
+p1+ε
+∑
+−26l62
+(4
+2+l
+)( 1
+pit0/2
+)l+2 ( 1
+p−it0/2
+)−l+2
+=
+∑
+p∈P
+log p
+p1+ε
+(
+pit0/2 + p−it0/2)4
+> 0,
+car en appliquant alors εli↘m0 (·) à cette inégalité :
+− ν0 − 4 μ0 + 6 − 4 μ0 − ν0 > 0,
+
+
+50 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+on déduit que μ0 = 0 nécessairement (exercice visuel). En définitive, ζ(1 + it) 6= 0 pour tout t ∈ R∗.
+La formule produit du Lemme 2.1 garantit que ζ(s) n’a aucun zéro dans {Re s > 1}. Avec le Lemme 2.4 qui précède, nous déduisons que ζ n’a aucun zéro dans un voisinage ouvert du demi-plan fermé {Re s > 1}.
+Lemme 2.6. La fonction :
+Φ(s) − 1
+s − 1 :=
+∑
+p∈P
+log p
+ps − 1
+s−1
+est holomorphe dans un voisinage ouvert de {Re s > 1}.
+Démonstration. En revenant à (2.5), cela est clair par construction, puisque ζ n’a aucun
+zéro sur {Re s = 1}\{1}, et puisque − ζ′(s)
+ζ(s) ∼ 1
+s−1 en s ∼ 1.
+Attention ! Dès que ζ(s0) = 0 possède un zéro de partie réelle 0 < Re s0 < 1 éventuel
+lement très proche de 1, la fonction − ζ′(s)
+ζ(s) possède un pôle en s = s0, donc le Lemme 2.1
+ne donne aucun contrôle explicite sur le voisinage ouvert de {Re s > 1} dans lequel Φ(s) est holomorphe via (2.5).
+Lemme 2.7. L’intégrale :
+∫∞
+1
+θ(x) − x
+x2 dx = lim
+T→∞
+∫T
+1
+θ(x) − x
+x2 dx
+converge.
+Démonstration. Pour Re s > 1, une intégration par parties dans l’intégrale de RiemannStieltjes donne :
+Φ(s) =
+∑
+p∈P
+log p
+ps =
+∫∞
+1
+dθ(x)
+xs
+[Lemme 2.3] =
+[ θ(x)
+xs
+]∞
+1◦
++s
+∫∞
+1
+θ(x)
+xs+1 dx
+[x = et] = 0 + s
+∫∞
+0
+e−st θ(et) dt.
+Introduisons la fonction :
+f (t) := θ(et)
+et − 1 (t ∈ R+),
+constante par morceaux, donc localement intégrable, et bornée en vertu du Lemme 2.3 :
+f ∈ L1
+loc(R+) ∩ L∞(R+).
+Introduisons aussi, pour Re z > 0 :
+g(z) := Φ(z + 1)
+z+1 − 1
+z.
+
+
+2. Sept lemmes capitaux 51
+Le Lemme 2.6 garantit que g se prolonge holomorphiquement à un voisinage ouvert dans C de {Re z > 0}. De plus, un calcul simple fait voir, pour Re z > 0, que :
+g(z) = Φ(z + 1)
+z+1 − 1
+z=
+∫∞
+0
+e− (z+1) t θ(et) dt −
+∫∞
+0
+e−zt dt
+=
+∫∞
+0
+(
+θ
+(et) e−t − 1
+)
+e−zt dt
+=
+∫∞
+0
+f (t) e−zt dt.
+Ainsi, toutes les hypothèses du théorème suivant, dont la démonstration est repoussée à une section ultérieure, sont vérifiées.
+Théorème 2.8. Sur [0, ∞[, soit f ∈ L1
+loc(R+) ∩ L∞(R+). Si la fonction :
+g(z) :=
+∫∞
+0
+f (t) e−zt dt,
+holomorphe dans {Re z > 0}, se prolonge holomorphiquement à un voisinage ouvert dans C du demi-plan fermé {Re z > 0}, alors limT→∞
+∫T
+0 f (t) dt existe et vaut :
+g(0) =
+∫∞
+0
+f (t) dt.
+On conclut alors bien que l’intégrale :
+g(0) =
+∫∞
+0
+f (t) dt =
+∫∞
+0
+(
+θ
+(et) e−t − 1
+)
+dt
+=
+∫∞
+1
+θ(x) − x
+x2 dx.
+existe.
+Le septième et dernier lemme capital précise ce que cachait la constante C du Lemme 2.3.
+Lemme 2.9. Asymptotiquement quand x −→ ∞, on a :
+θ(x) ∼ x.
+Démonstration. Supposons par l’absurde que pour un λ > 1, il existe une suite (xn)∞
+n=1
+avec xn −→ ∞ telle que :
+θ(xn) > λ xn (∀ n > 1).
+Comme θ croît, pour tout t > xn, on a θ(t) > θ(xn) > λ xn, ce qui conduit à un jeu contradictoire d’inégalités :
+0 ←−
+∞←n
+} {{ }
+Lemme 2.7
+∫ λ xn
+xn
+θ(t) − t
+t2 dt >
+∫ λ xn
+xn
+λ xn − t
+t2 dt =
+∫λ
+1
+λ−u
+u2 du > 0.
+De manière similaire, si pour un λ < 1, avec xn −→ ∞, on avait θ(xn) 6 λ xn quel que soit n > 1, d’où θ(t) 6 θ(xn) 6 λ xn pour t 6 xn, ceci impliquerait aussi contradiction :
+0 ←−
+∞←n
+} {{ }
+Lemme 2.7
+∫ xn
+λ xn
+θ(t) − t
+t2 dt 6
+∫ xn
+λ xn
+λ xn − t
+t2 dt =
+∫1
+λ
+λ−u
+u2 du < 0.
+
+
+52 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Fin de la démonstration du Théorème 1.1. En partant de l’inégalité (non fine) :
+θ(x) =
+∑
+p∈P p6x
+log p 6
+∑
+p∈P p6x
+log x = π(x) log x,
+il vient premièrement grâce à l’information cruciale x ∼ θ(x) du Lemme 2.9 :
+x
+log x ∼ θ(x)
+log x 6 π(x).
+Pour l’inégalité inverse, avec ε > 0 arbitrairement petit :
+θ(x) >
+∑
+x1−ε<p6x
+log p >
+∑
+x1−ε<p6x
+log x1−ε
+=
+[
+π(x) − π(x1−ε)
+]
+(1 − ε) log x
+[− π(y) > −y] >
+[
+π(x) − x1−ε]
+(1 − ε) log x,
+et donc deuxièmement :
+x
+log x ∼ θ(x)
+log x > (1 − ε)
+[
+π(x) − x1−ε]
+,
+et comme x1−ε est négligeable devant x
+log x lorsque x −→ ∞, ceci conclut.
+3. Démonstration du théorème analytique
+Il ne reste plus qu’à démontrer le Théorème 2.8, dont nous recopions l’énoncé.
+Théorème 3.1. Sur [0, ∞[, soit f ∈ L1
+loc(R+) ∩ L∞(R+). Si la fonction :
+g(z) :=
+∫∞
+0
+f (t) e−zt dt,
+holomorphe dans {Re z > 0}, se prolonge holomorphiquement à un voisinage ouvert dans C du demi-plan fermé {Re z > 0}, alors limT→∞
+∫T
+0 f (t) dt existe et vaut :
+g(0) =
+∫∞
+0
+f (t) dt.
+Démonstration. Pour T > 0, la fonction :
+gT(z) :=
+∫T
+0
+f (t) e−zt dt
+est clairement holomorphe entière en z ∈ C. On doit montrer que limT→∞ gT(0) existe, et vaut g(0).
+
+
+3. Démonstration du théorème analytique 53
+ΩR
+0
+−δR
+ER
+ER
+Im z
+D−
+R
+C+
+R
+C+
+R
+C−
+R
+C−
+R
+Im z
+R 0
+R Re z
+Re z
+D−
+R
+Soit un rayon R 1, et soit l’ouvert :
+ΩR := {z ∈ C : |z| < R, Re z > −δR
+},
+où δR > 0 est choisi assez petit pour que g soit holomorphe au voisinage de sa fermeture ΩR. Sa frontière ∂ΩR = D−
+R ∪ ER ∪ C+
+R se décompose en :
+D−
+R := {|z| 6 R, Re z = −δR
+},
+ER := {|z| = R, −δR 6 Re z 6 0},
+C+
+R := {|z| = R, Re z > 0}.
+Avec le poids astucieux utile plus tard ezT (1 + z2
+R2
+) sans pôle, le théorème des résidus de Cauchy donne :
+g(0) − gT(0) = 1
+2iπ
+∫
+∂ΩR
+(g(z) − gT(z)) ezT
+(
+1 + z2
+R2
+) dz
+z
+=1
+2iπ
+(∫
+D−
+R
++
+∫
+ER
++
+∫
+C+
+R
+)
+.
+Il s’agit de démontrer que ces trois intégrales tendent vers 0 quand T −→ ∞.
+Lemme 3.2. Sur le demi-cercle C+
+R 3 z, l’intégrande est borné par :
+∣ ∣ ∣ ∣
+(g(z) − gT(z)) ezT
+(
+1 + z2
+R2
+)1
+z
+∣ ∣ ∣ ∣
+6 2 ||f ||L∞
+RR .
+Démonstration. En tout point z ∈ C+
+R avec Re z > 0 :
+∣
+∣g(z) − gT(z)∣
+∣=
+∣ ∣ ∣ ∣
+∫∞
+T
+f (t) e−zt dt
+∣ ∣ ∣ ∣
+6 ||f ||L∞
+∫∞
+T
+e−t Re z dt
+= ||f ||L∞
+e−T Re z
+Re z .
+Ensuite, comme z
+R = eiθ avec − π
+2 <θ< π
+2:
+∣ ∣ ∣ ∣
+ezT
+(
+1 + z2
+R2
+)1
+z
+∣ ∣ ∣ ∣
+=
+∣
+∣ezT∣
+∣·
+∣ ∣
+∣1 + e2iθ
+∣ ∣
+∣· 1
+R = eT Re z
+∣ ∣
+∣e−iθ + eiθ
+∣ ∣ ∣
+1
+R = eT Re z
+∣ ∣
+∣2 Re z
+R
+∣ ∣ ∣
+1
+R
+6 2 eT Re z Re z
+RR .
+
+
+54 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Une multiplication de ces deux majorations conclut.
+Grâce à cela, avec ∫
+C+
+R
+|dz| = π R, on majore la troisième intégrale par une quantité qui tend vers zéro :
+∣ ∣ ∣ ∣
+1
+2iπ
+∫
+C+
+R
+∣ ∣ ∣ ∣
+61
+2π π R 2 ||f ||L∞
+RR
+= ||f ||L∞
+R −→
+(3.3) R → ∞ 0.
+Maintenant, pour les deux intégrales sur D−
+R et sur ER, on traite g(z) et gT(z) séparément
+dans (g(z) − gT(z)).
+Puisque gT(z) = ∫ T
+0 f (t) e−zt dt est holomorphe entière, grâce à Cauchy, le contour
+d’intégration D−
+R ∪ ER peut être remplacé par le demi-cercle :
+C−
+R := {|z| = R, Re z 6 0},
+à savoir : 1
+2iπ
+∫
+D−
+R ∪ER
+( − gT(z)) ezT
+(
+1 + z2
+R2
+)1
+z dz = 1
+2iπ
+∫
+C−
+R
+(même intégrande).
+Or pour Re z < 0, on a :
+∣
+∣gT(z)∣
+∣ 6 ||f ||L∞
+∫T
+0
+e−t Re z dt 6 ||f ||L∞
+∫T
+−∞
+e−t Re z dt
+= ||f ||L∞
+e−T Re z
+|Re z| ,
+et alors exactement la même estimée qu’à l’instant donne :
+∣ ∣ ∣ ∣
+1
+2iπ
+∫
+C−
+R
+( − gT(z)) ezT
+(
+1 + z2
+R2
+) dz
+z
+∣ ∣ ∣ ∣
+61
+2π ||f ||L∞
+∫
+C−
+R
+e−T Re z
+|Re z|
+2 eT Re z |Re z|
+R R |dz|
+=1
+2π ||f ||L∞
+2
+RR πR
+= ||f ||L∞
+R −→
+(3.4) R → ∞ 0.
+Il reste à contrôler :
+1
+2iπ
+∫
+D−
+R ∪ER
+(g(z)) ezT
+(
+1 + z2
+R2
+) dz
+z.
+Il y a ici le produit d’une fonction indépendante de T, holomorphe au voisinage de D−
+R ∪ER,
+donc intégrable, par la fonction ezT dépendant de T, de module 6 1, et satisfaisant :
+∣
+∣ezT∣
+∣ 6 eT Re z −→
+T → ∞ 0 (∀ Re z < 0),
+donc le théorème de convergence dominée de Lebesgue donne :
+0 = lim
+T→∞
+∫
+D−
+R ∪ER
+(g(z)) ezT
+(
+1 + z2
+R2
+) dz
+(3.5) z .
+Au total, ces trois majorations (3.3), (3.4), (3.5) offrent :
+lim sup
+T→∞
+∣
+∣g(0) − gT(0)∣
+∣ 6 ||f ||L∞
+R + ||f ||L∞
+R + 0,
+
+
+4. Exercices 55
+et comme R 1 pouvait être choisi arbitrairement grand, c’est terminé !
+4. Exercices
+Exercice 1. EE
+Exercice 2. EE
+—————
+
+
+56 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Théorème de l’application conforme de Riemann
+François DE MARÇAY
+Département de Mathématiques d’Orsay Université Paris-Sud, France
+1. Introduction
+2. Théorèmes d’inversion locale et globale dans R2
+Dans deux plans euclidiens distincts pour lesquels on notifie des coordonnées courantes R2 3 (x, y) et R2 3 (u, v), soit un ouvert Ω ⊂ R2 à gauche et soit un ouvert ω ⊂ R2 à droite.
+Ω
+R2 R2
+Ω0
+p0 G
+F
+q0
+ω0
+ω
+Soit un entier k > 1, et soit une application de classe C k :
+F : Ω −→ ω.
+Soit un point fixé p0 = (x0, y0) ∈ Ω, et soit q0 := F (p0) =: (u0, v0) le point-image. Si nous écrivons les deux composantes de F comme :
+F (x, y) =: (U (x, y), V (x, y)),
+la matrice jacobienne de F en un point quelconque (x, y) ∈ Ω est :
+JacF (x, y) :=
+( ∂U ∂x
+∂U ∂y ∂V ∂x
+∂V ∂y
+)
+(x, y).
+Les résultats de cette section, présentés ici à titre de rappel et par souci de complétude dans la pensée, seront considérés comme provenant d’un autre cours de mathématiques, et par conséquent, nous nous dispenserons de les redémontrer. Puisqu’il importe au plus haut point d’en comprendre le contenu géométrique sous-jacent, nous tracerons des figures afin d’éveiller l’intuition du lecteur au sujet de la nature des transformations ponctuelles entre ouverts de R2. Il faut s’imaginer des taches d’huile extensibles et compressibles, se déformant sans déchirement dans le plan.
+
+
+3. Inversion holomorphe 57
+Théorème 2.1. [d’inversion locale dans R2] Si det JacF (p0) 6= 0, à savoir si :
+0 6=
+∣ ∣ ∣ ∣
+Ux Uy
+Vx Vy
+∣ ∣ ∣ ∣
+(p0),
+alors il existe un voisinage ouvert p0 ∈ Ω0 ⊂ Ω en restriction auquel :
+F
+∣
+∣Ω0 : Ω0
+−∼→ F (Ω0) =: ω0,
+est bijective, homéomorphe sur son image, et d’application inverse :
+Ω0
+←∼− ω0 : G,
+elle aussi de classe C k et de déterminant jacobien non nul :
+0 6= det JacG(q0).
+Principalement, l’argument repose sur un théorème itératif de type « point fixe à la Picard ». Si la condition de non-annulation du déterminant jacobien est satisfaite en tout point, le résultat se globalise.
+ω
+Ω
+F
+G
+F (Ω)
+Théorème 2.2. [d’inversion globale dans R2] Si F : Ω −→ ω est une application de classe C k>1 entre deux ouverts Ω ⊂ R2 et ω ⊂ R2 qui est injective et satisfait :
+0 6= det JacF (x, y) (∀ (x,y) ∈ Ω),
+alors F est un homéomorphisme Ω −∼→ F (Ω) ⊂ ω sur son image, d’inverse :
+Ω ←∼− F (Ω) : G,
+aussi de classe C k, ayant aussi un déterminant jacobien non nul :
+0 6= det JacG(u, v),
+en tout point (u, v) ∈ F (Ω).
+On dit alors que F : Ω −∼→ ω est un C k-difféomorphisme de Ω sur ω.
+
+
+58 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+3. Inversion holomorphe
+Maintenant, quand F = f ∈ O(Ω) est une application réelle entre ouverts de R2 induite par une fonction holomorphe, décomposée en parties réelle et imaginaire sous la forme :
+f (z) = u(x, y) + i v(x, y),
+les équations de Cauchy-Riemann :
+∂u
+∂x = ∂v
+∂y en abrégé ux = vy,
+∂u
+∂y = − ∂v
+∂x en abrégé uy = − vx,
+permettent d’écrire une expression de la dérivée de f :
+f ′(z) = uz + i vz = 1
+2 ux − i
+2 uy + i
+2 vx + 1
+2 vy = ux + i vy,
+et impliquent, comme nous l’avons déjà vu, que le déterminant jacobien de la transformation réelle associée F (x, y) := (u(x, y), v(x, y)) prend une forme simplifiée agréable :
+det JacF = ux vy − uy vx
+=
+(ux
+)2 + (uy
+)2
+=
+∣
+∣f ′(z)∣
+∣
+2.
+Rappelons que les fonctions holomorphes sont C ∞, donc les deux Théorèmes 2.1 et 2.2 s’appliquent aux fonctions holomorphes f = F , vues comme applications réelles à deux variables. Mais naturellement, la question de pose de savoir si l’inverse réel local ou global G dont nous venons de rappeler l’existence correspond à une fonction holomorphe. La réponse est positive, et elle nécessite un auxiliaire technique.
+Lemme 3.1. Soient trois ouverts Ω, ω, $ ⊂ R2 et soient deux applications C ∞ composables :
+ΩF
+−−−−−−→ ω G
+−−−−−−→ $
+(x, y) 7−→ F (x, y)
+(u, v) 7−→ G(u, v).
+Alors leurs dérivées partielles complexes par rapport aux variables z = x + i y de Ω et w = u + i v de ω satisfont :
+(G ◦ F )
+z = Gw · Fz + Gw · F z,
+(G ◦ F )
+z = Gw · Fz + Gw · F z.
+Bien entendu, la classe de différentiabilité C 1 suffit pour que l’énoncé soit vrai.
+Démonstration. Pour traiter la première ligne, notons parties réelle et imaginaire de F comme ci-dessus :
+F (x, y) = U (x, y) + i V (x, y),
+
+
+3. Inversion holomorphe 59
+et dérivons la composée G ◦ F par rapport à z :
+∂
+∂z
+[
+G ◦ F (x, y)
+]
+=1
+2
+(∂
+∂x − i ∂
+∂y
+)
+G
+(U (x, y), V (x, y))
+=1
+2
+[
+Gu Ux + Gv Vx − i Gu Uy − i Gv Vy
+]
+.
+Ensuite, utilisons :
+∂u = ∂w + ∂w, ∂x = ∂z + ∂z,
+∂v = i ∂w − i ∂w, ∂y = i ∂z − i ∂z,
+pour remplacer puis calculer de manière détaillée :
+(G ◦ F )
+z=1
+2
+[
+(Gw + Gw
+)(Uz + Uz
+) + (i Gw − i Gw
+)(Vz + Vz
+)−
+− i (Gw + Gw
+)(i Uz − i Uz
+) − i (i Gw − i Gw
+)(i Vz − i Vz
+)
+]
+=1
+2
+[
+Gw Uz + Gw Uz◦ + Gw Uz + Gw Uz◦ + i Gw Vz + i Gw Vz◦ − i Gw Vz − i Gw Vz◦ +
++ Gw Uz − Gw Uz◦ + Gw Uz − Gw Uz◦ + i Gw Vz − i Gw Vz◦ − i Gw Vz + i Gw Vz◦
+]
+= Gw Uz + Gw Uz + i Gw Vz − i Gw Vz
+= Gw
+(Uz + i Vz
+) + Gw
+(Uz − i Vz
+)
+= Gw Fz + Gw F z.
+Le traitement de la deuxième ligne est évidemment en tous points analogue.
+Maintenant, en revenant à l’inversion (locale ou globale), écrivons l’identité :
+z ≡ G(f (z)),
+qui exprime, que la fonction holomorphe f ∈ O(Ω), vue comme application réelle, admet un difféomorphisme inverse réel :
+Ω ←∼− f (Ω) : G,
+et appliquons ce lemme auxiliaire pour dériver cette identité par rapport à z :
+0 ≡ Gw · fz◦ + Gw f z
+≡ 0 + Gw f z.
+Or comme les fonctions holomorphes sont localement des séries entières ∑ an (z − z0)n pour lesquelles conjugaison et dérivation commutent, on reconnaît :
+f z = fz 6= 0 (hypothèse),
+et donc :
+0 ≡ Gw (∀ w ∈ f(Ω)),
+ce qui montre que l’inverse G de la fonction holomorphe f est bel est bien holomorphe lui aussi ! Énonçons ce résultat avec cette information supplémentaire agréable.
+
+
+60 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Théorème 3.2. [d’inversion holomorphe locale et globale] Soit f : Ω −→ C une fonction holomorphe définie dans un ouvert Ω ⊂ C.
+(1) En tout point z0 ∈ Ω où f ′(z0) 6= 0, il existe un (petit) voisinage ouvert z0 ∈ Ω0 ⊂ Ω en restriction auquel f |Ω0 : Ω0
+−∼→ f (Ω0) établit un C ∞-difféomorphisme sur son image f (Ω0), qui a pour inverse :
+Ω0
+←∼− f (Ω0
+) : g,
+une application C ∞ holomorphe dans f (Ω0) satisfaisant g′(w0) 6= 0 au point-image w0 := f (z0).
+(2) Si f ′(z) 6= 0 en tout point z ∈ Ω et si de plus f est globalement injective, alors f établit un C ∞-difféomorphisme Ω −∼→ f (Ω) sur son image, et admet pour inverse une fonction holomorphe :
+Ω ←∼− f (Ω) : g,
+qui satisfait aussi :
+0 6= g′(w) (∀ w ∈ f(Ω)).
+Ces faits conduisent naturellement à une conceptualisation nouvelle.
+Définition 3.3. Un biholomorphisme :
+f : Ω −∼→ ω
+entre deux ouverts Ω ⊂ C et ω ⊂ C est une application satisfaisant :
+(1) f : Ω −→ C est holomorphe et établit une bijection Ω −∼→ ω ;
+(2) f ′(z) 6= 0 quel que soit z ∈ Ω ;
+(3) l’application inverse Ω ←∼− ω : f −1 est aussi holomorphe est vérifie aussi (f −1)′(w) 6= 0 quel que soit w ∈ ω.
+Nous venons d’observer ci-dessus que la condition (3) est conséquence de (2). Par ailleurs, puisque dans un cadre réel pour un difféomorphisme F : Ω −→ R2, les deux conditions : (1) F injective,
+(2) det JacF 6= 0,
+sont indépendantes et nécessaires pour que le Théorème 2.2 soit vrai — exercice : trouver un exemple ! —, on pourrait croire que les deux conditions ci-dessus :
+(1) f injective,
+(2) f ′ 6= 0,
+sont elles aussi simultanément nécessaires pour avoir un biholomorphisme, mais il n’en est rien ! Un des objectifs de ce qui va suivre est en effet de démontrer qu’on peut se passer de (2) dans cette définition ! À nouveau, la prestidigitation holomorphe va escamoter une hypothèse :
+f holomorphe injective =⇒ f ′ 6= 0.
+Mais avant de lever la baguette magique, un préliminaire s’impose.
+
+
+4. Forme normale locale d’une fonction holomorphe 61
+4. Forme normale locale d’une fonction holomorphe
+Quand on développe en série entière convergente une fonction holomorphe non identiquement nulle au voisinage de l’origine :
+aν zν + aν+1 zν+1 + aν+2 zν+2 + · · · (aν 6= 0),
+il y a toujours un premier monôme non nul, suivi en général d’une infinité de puissances supérieures de z. Le résultat paradoxal suivant montre qu’on peut toujours les « engloutir » toutes dans la première puissance, grâce à un changement de coordonnée holomorphe, c’est-à-dire grâce à un biholomorphisme.
+Ω
+C
+ν tours
+f
+w 7−→ wν g
+h
+0 w
+h(Dr )
+Ds
+Dr
+g(Ds )
+0z 0
+Théorème 4.1. [Normalisation locale] Dans un ouvert 0 ∈ Ω ⊂ C contenant l’origine, soit une fonction holomorphe f ∈ O(Ω) avec f (0) = 0 et f 6≡ 0 près de 0, et soit 1 6 ν < ∞ son ordre d’annulation en 0 :
+ν := νf (0).
+Alors il existe un rayon s > 0 et un biholomorphisme fixant 0 :
+g : Ds(0) −∼→ g(Ds(0)) ⊂ Ω,
+tels que :
+f
+(g(w)) ≡ wν (∀ w ∈ Ds(0)).
+Autrement dit, après un changement de coordonnée holomorphe locale, en notant à nouveau z la coordonnée (au lieu de w), toute fonction holomorphe non identiquement nulle s’annulant en 0 s’écrit sous la forme normale simple :
+f (z) = zν (ν = νf (0) > 1),
+dans laquelle tous les termes d’ordre supérieur de la série entière ont disparu, engloutis !
+
+
+62 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Démonstration. Factorisons le développement en série entière par la puissance minimale de z :
+f (z) =
+∞
+∑
+n=ν
+an zn (aν 6= 0)
+= zν(aν + O(z))
+=: zν F (z) (F (0) 6= 0).
+Choisissons un rayon r > 0 assez petit pour que F 6= 0 sur Dr, ce qui est possible par continuité, car F (0) = aν 6= 0. Donc une fonction log F (z) holomorphe dans Dr (simplement connexe) existe, et on peut écrire au moyen d’une nouvelle fonction holomorphe h ∈ O(Dr) :
+f (z) =
+(
+ze1
+ν log F (z))ν
+=: (h(z))ν.
+Puisque h(0) = (aν) 1
+ν 6= 0, pour un choix de racine ν-ième cohérent avec le choix du logarithme, il est clair que :
+d
+dz h(z)
+∣ ∣
+∣z=0
+= e1
+ν log F (0) = (aν
+)1
+ν 6= 0,
+et le Théorème 3.2 assure qu’en diminuant r > 0, la fonction h : Dr
+−∼→ h(Dr
+) établit un biholomorphisme. Comme sur la figure, soit alors s > 0 assez petit pour que Ds(0) ⊂ h(Dr
+). En notant :
+g := h−1∣
+∣Ds ,
+l’équation :
+f (z) = (h(z))ν
+(∀ z ∈ Dr),
+dans laquelle on remplace z = g(w) avec w ∈ Ds(0) offre la conclusion :
+f
+(g(w)) =
+(
+h
+(g(w))
+)ν
+≡ wν.
+5. Multiplicités locales et théorème de l’application ouverte
+Étant donné une fonction holomorphe quelconque f ∈ O(Ω), définie dans un ouvert Ω ⊂ C ne contenant pas forcément 0, le théorème précédent s’applique en localisant l’étude au voisinage de tout point z0 ∈ Ω, à condition de translater z0 pour qu’il devienne l’origine et de soustraire f (z0) :
+f (z + z0) − f (z0).
+Puisque cette fonction holomorphe s’annule en z = 0, on peut parler de son ordre d’annulation en z = 0.
+Définition 5.1. La multiplicité locale d’une fonction holomorphe f ∈ O(Ω) en un point quelconque z0 ∈ Ω au voisinage duquel elle n’est pas constante est l’entier :
+μf (z0) := νf−f(z0)(z0).
+
+
+5. Multiplicités locales et théorème de l’application ouverte 63
+On a donc toujours :
+1 6 μf (z0) < ∞.
+Observons au passage que :
+(
+0 6= f ′(z0) ⇐⇒ μf (z0) = 1
+)
+=⇒ 0 6= f ′(z) pour z proche de z0
+=⇒ μf (z) = 1 pour z proche de z0,
+grâce à une lecture du développement :
+f (z) − f (z0) =
+∞
+∑
+n=μf (z0)
+1
+n! f (n)(z0) (z − z0
+)n.
+f
+C
+z0
+Ds (z0 )
+g
+g(Ds (z0 ))
+z0
+Ω
+μf (z0) tours
+w 7−→ f (z0) + (w − z0)μf (z0)
+f (z0)
+Théorème 5.2. Dans un ouvert connexe Ω ⊂ C, soit une fonction holomorphe non constante f ∈ O(Ω). Alors en tout point z0 ∈ Ω, la multiplicité locale de f est finie :
+1 6 μf (z0) < ∞,
+et elle se lit dans le développement en série entière :
+f (z) − f (z0) = (z − z0
+)μf (z0) [
+a0 + a1
+(z − z0
+)+···
+]
+(a0 6= 0).
+De plus, il existe un rayon s > 0 petit et un biholomorphisme fixant z0 :
+g : Ds(z0) −∼→ g(Ds(z0)) ⊂ Ω
+tels que :
+f
+(g(w)) ≡ f (z0) + (w − z0
+)μf (z0)
+(∀ w ∈ Ds(z0)).
+Autrement dit, après un changement de coordonnée holomorphe locale au voisinage de z0, en notant à nouveau z la coordonnée (au lieu de w), on peut voir la fonction f comme étant simplement de la forme :
+f (z) = f (z0) + (z − z0
+)μf (z0),
+sans aucun terme d’ordre supérieur.
+
+
+64 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Preuve. La fonction translatée :
+φ(z) := f (z + z0) − f (z0)
+satisfait φ(0) = 0 et νφ(0) = μf (z0). Le Théorème 4.1 qui précède fournit alors un biholo
+morphisme local ψ : Ds(0) −∼→ ψ(Ds(0)) tel que :
+f
+(ψ(ζ) + z0
+) − f (z0) = φ(ψ(ζ)) = ζμf (z0) (∀ ζ ∈ Ds(0)).
+Translatons à présent la variable :
+ζ =: w − z0,
+et abrégeons :
+ψ
+(w − z0
+) + z0 =: g(w),
+pour obtenir comme annoncé :
+f
+(g(w)) − f (z0) = (w − z0
+)μf (z0).
+Juste pour le plaisir, voici un dernier corollaire de la normalisabilité locale des fonctions holomorphes. Rappelons qu’une application τ : X −→ Y entre espaces topologiques est dite ouverte si l’image par τ de tout ouvert de X est encore un ouvert de Y . On montre (exercice de révision) qu’il suffit que cela soit satisfait localement au voisinage de chaque point x ∈ X.
+Théorème 5.3. [de l’application ouverte] Une application holomorphe non constante f ∈ O(Ω) dans un ouvert connexe Ω ⊂ C est toujours ouverte.
+Preuve. D’après ce qui précède, cela revient à vérifier que chaque application normalisée :
+z 7−→ zμ,
+où μ > 1 est un entier, est ouverte en 0, ce qui est manifestement vrai, puisqu’un (petit) disque centré en 0 de rayon r > 0 est envoyé surjectivement sur le disque ouvert de rayon strictement positif rμ > 0.
+6. Fonctions holomorphes injectives : théorème fondamental
+Tout le décor est en place, maintenant, pour lever le rideau sur un phénomène exceptionnel : l’injectivité, dans l’univers holomorphe, implique la non-annulation de la dérivée, ce qui est faux dans le monde réel, comme le montre l’exemple simple de R 3 x 7−→ x3 ∈ R.
+Théorème 6.1. Soit une fonction f ∈ O(Ω) holomorphe dans un ouvert Ω ⊂ C. Si f est localement injective en un point z0 ∈ Ω au sens où il existe un voisinage ouvert z0 ∈ Ω0 ⊂
+Ω en restriction auquel f ∣
+∣Ω0 est injective, alors μf (z0) = 1, c’est-à-dire f ′(z0) 6= 0.
+Démonstration. On sait que 1 6 μf (z0) < ∞. Supposons par l’absurde que 2 6 μf (z0). Alors un changement biholomorphe (donc bijectif) de coordonnée locale que fournit le Théorème 5.2 normalise :
+f
+(g(w)) = f (z0) + (w − z0
+)μf (z0).
+Mais pour μ > 2, l’application w − z0 7−→ (w − z0
+)μ n’est jamais injective, comme on le voit en passant aux coordonnées polaires w = z0 + r eiθ avec r > 0 petit et avec 0 6 θ < 2π, puisque c’est :
+r eiθ 7−→ rμ eiμθ,
+
+
+7. Équivalence entre le disque unité D et le demi-plan supérieur H 65
+et l’application θ 7−→ μ θ du cercle unité R/2πZ dans lui-même est non injective, puisque tout point possède exactement μ > 2 préimages.
+Être globalement injectif implique être localement injectif, donc un corollaire direct et spectaculaire ! — est le :
+Théorème 6.2. Si une fonction holomorphe f : Ω −→ C, définie dans un ouvert Ω ⊂ C, est globalement injective, alors :
+f ′(z) 6= 0 (∀ z ∈ Ω).
+Preuve. Le théorème qui précède donne μf (z) = 1, en tout point, et nous avons vu plus haut que ceci équivaut à f ′(z) 6= 0.
+Si nous revenons à la Définition 3.3, nous constatons — enfin ! que la condition (2) peut être éliminée. Voici ce qu’il faut retenir.
+Théorème 6.3. [Fondamental] Si une fonction holomorphe f : Ω −→ C définie dans un ouvert Ω ⊂ C est injective, alors elle établit un biholomorphisme global sur son image :
+f : Ω −∼→ f (Ω).
+7. Équivalence entre le disque unité D et le demi-plan supérieur H
+Le demi-plan de Poincaré consiste en les points du plan complexe dont la partie imaginaire est strictement positive :
+H := {z ∈ C : Im z > 0}.
+Un fait mathématique remarquable et surprenant est que H est biholomorphe au disque unité D, grâce à des formules explicites simples. Introduisons en effet les deux applications rationnelles :
+F (z) := i − z
+i + z et G(w) := i 1 − w
+1 + w.
+0
+H
+−i
+F
+G
+D
+z
+G(0) = i
+F (z)
+0 = F (i)
+Théorème 7.1. L’application F : H −∼→ D établit un biholomorphisme entre D et H d’in
+verse H ←∼− D : G.
+
+
+66 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Démonstration. Commençons par observer (visuellement) que F et G sont holomorphes dans H et D, puisque leurs pôles i 6∈ H et −i 6∈ D n’y appartiennent pas. Comme la figure l’indique, un point quelconque z ∈ H est toujours plus proche de i que de −i, donc on a une inégalité :
+∣
+∣F (z)∣
+∣ = |i − z|
+|i + z| < 1,
+qui fait voir géométriquement que F envoie H dans D. Pour voir que G envoie inversement D dans H, en notant w = u + i v ∈ D, vérifions par un calcul la positivité de :
+Im G(w) = Re 1 − u − i v
+1+u+iv = Re (1 − u − i v)(1 + u − i v)
+(1 + u)2 + v2
+= 1 − u2 − v2
+(1 + u)2 + v2
+[u + i v ∈ D] > 0.
+Enfin, vérifions que F ◦ G = Id D et que G ◦ F = Id H, ce qui établira la bijectivité et conclura :
+F
+(G(w)) = i − i 1−w
+1+w
+i + i 1−w
+1+w
+= 1+w−1+w
+1 + w + 1 − w = w,
+G
+(F (z)) = i 1 − i−z
+i+z 1 + i−z
+i+z
+= ii+z−i+z
+i + z + i − z = z.
+x
+0
+i
+H
+∞
+−i
+∞
+F
+G
+−1 0
+F (x)
+D
+F (0) = 1
+Analysons maintenant le comportement de F au bord R = ∂H du demi-plan supérieur. Comme la seule singularité de F est z = −i, sa restriction F ∣
+∣R est continue, et même C ∞.
+
+
+8. Lemme de Schwarz 67
+À présent, les distances à +i et à −i d’un point réel quelconque x ∈ R sont égales, donc :
+∣
+∣F (x)∣
+∣ = |i − x|
+|i + x| = 1,
+ce qui fait voir géométriquement que F envoie ∂H dans le cercle unité ∂D. Mais son image ne recouvre pas tout ! En effet, écrivons :
+F (x) = i − x
+i + x = 1 − x2
+1 + x2 + i 2 x
+1 + x2 ,
+et paramétrons la droite réelle avec t ∈ ] − π
+2, π
+2 [ par :
+x := tan t.
+Des réminiscences trigonométriques :
+sin 2t = 2 sin t cos t = 2 sin t
+cos t cos2t = 2 tan t
+1 + tan2t = 2 x
+1 + x2 ,
+cos 2t = cos2t − sin2t =
+(
+1 − sin2t
+cos2t
+)
+cos2t = 1 − tan2t
+1 + tan2t = 1 − x2
+1 + x2 ,
+permettent alors de représenter :
+F (x) = cos 2t + i sin 2t = e2it (− π
+2 <t< π
+2 ),
+sous une forme qui montre clairement que l’image F (R) recouvre le cercle unité excepté le seul point {−1} — qui correspondrait à t = ± π
+2 — et que F établit un C ∞difféomorphisme :
+F : R −∼→ ∂D∖{−1}.
+Intuitivement, la préimage de ce point manquant −1 devrait être un certain « point à l’infini » de R, car :
+− 1 = lim
+|x|→∞
+i−x
+i + x.
+Pour terminer, observons que lorsque x croît de −∞ à +∞, l’image F (x) voyage dans le sens trigonométrique le long de ∂D.
+8. Lemme de Schwarz
+Rappelons qu’une rotation de C fixant l’origine est une transformation de la forme :
+z 7−→ eiθ z,
+avec une constante θ ∈ R, appelée angle de rotation, et définie à un multiple entier de 2π près. L’énonciation et la démonstration du résultat suivant sont simples, mais les conséquences auront une grande portée.
+Lemme 8.1. [de Schwarz] Soit une fonction holomorphe f : D −→ D du disque unité à valeurs dans lui-même. Si f (0) = 0, alors :
+(1) ∣
+∣f (z)∣
+∣ 6 |z| pour tout z ∈ D ;
+(2) si ∣
+∣f (z0)∣
+∣ = |z0| en un z0 ∈ D avec z0 6= 0, alors f (z) = eiθ z est une rotation ;
+(3) ∣
+∣f ′(0)∣
+∣ 6 1, et s’il y a égalité ∣
+∣f ′(0)∣
+∣ = 1, alors f (z) = eiθ z est encore une rotation.
+
+
+68 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Démonstration. (1) Développons f à l’origine en série entière convergeant dans D :
+f (z) = a0 + a1z + a2z2 + · · · .
+Puisque f (0) = 0, on a a0 = 0, et par conséquent f(z)
+z est holomorphe dans D, puisqu’elle a une singularité éliminable en z = 0. Ensuite, pour un rayon 0 < r < 1 fixé arbitrairement près de 1, comme |f (z)| < 1 par hypothèse dans D, il vient sur le cercle Cr :
+∣ ∣
+f (z) z
+∣
+∣< 1
+r (∀ |z| = r),
+donc le principe du maximum offre la même inégalité dans Dr :
+∣ ∣
+f (z) z
+∣
+∣< 1
+r (∀ |z| 6 r),
+et en faisant r −<→ 1, nous obtenons bien |f (z)| 6 |z| dans D.
+(2) Maintenant, si cette fonction holomorphe ∣
+∣
+f (z) z
+∣
+∣ 6 1 atteint son maximum ∣
+∣
+f (z0) z0
+∣
+∣=
+1 en un point intérieur non nul z0 ∈ D\{0}, le principe du maximum la force à être constante, disons f (z) = c z avec c ∈ C, puis |z0| = |f (z0)| = |c| |z0| force |c| = 1, donc f (z) = eiθz est une rotation.
+(3) Abrégeons f(z)
+z =: g(z), fonction holomorphe qui satisfait donc |g(z)| 6 1 dans D, et aussi :
+g(0) = zli6→=m0
+f (z)−f (0)
+z = f ′(0),
+d’où toujours |f ′(0)| 6 1. Pour terminer, si |f ′(0)| = 1 = |g(0)|, le principe du maximum — encore lui ! — force g à être constante, d’où à nouveau par le même raisonnement f (z) = eiθz.
+9. Automorphismes du disque unité
+Étudions maintenant les biholomorphismes d’un domaine Ω ⊂ C sur lui-même ω := Ω.
+Définition 9.1. Une application biholomorphe f : Ω −∼→ Ω d’un ouvert Ω ⊂ C sur luimême est appelée un automorphisme holomorphe de Ω. Leur collection sera notée :
+Aut hol(Ω) := {f : Ω −∼→ Ω biholomorphe}.
+Elle forme un groupe — abstrait ! En effet, l’identité z 7−→ z de C se restreint en une identité de Ω, la composition est transitive et préserve le caractère biholomorphe, et
+enfin l’inverse — pour la structure de groupe — de f : Ω −∼→ Ω est tout simplement le
+biholomorphisme réciproque Ω ←∼− Ω : f −1.
+Peut-on décrire Aut hol(D) ?
+Visiblement, toute rotation z 7−→ eiθz d’angle θ ∈ R fixé est un automorphisme de D, d’inverse la rotation z 7−→ e−iθz d’angle opposé. D’autres automorphismes existent, qui ont une grande utilité dans de nombreux chapitres de l’Analyse Complexe.
+Lemme 9.2. Pour tout α ∈ C avec |α| < 1, l’application :
+ψα : z 7−→ α − z
+1 − αz
+constitue un automorphisme holomorphe du disque unité D.
+
+
+9. Automorphismes du disque unité 69
+Démonstration. L’unique pôle 1
+α de ψα(z) étant de module ∣
+∣1
+α
+∣
+∣ > 1, l’application ψα est
+holomorphe dans D, et même holomorphe dans le voisinage ouvert D 1
+|α| ⊃ D du disque
+unité fermé. Sur le bord, pour z = eiθ, récrivons :
+ψα
+(eiθ) = 1
+eiθ
+α − eiθ
+e−iθ − α
+=: − 1
+eiθ
+w
+w,
+pour faire voir que ∣
+∣ψα(eiθ)∣
+∣ ≡ 1, puis déduire grâce au principe du maximum que :
+∣
+∣ψα(z)∣
+∣ < 1 (∀ z ∈ D).
+Dα
+0
+ψα
+Dα
+ψα−1 = ψα
+0
+Enfin, pour vérifier la bijectivité de ψα : D −∼→ D, calculons la composition de ψα avec elle-même :
+(ψα ◦ ψα
+)(z) = α − α−z
+1−αz
+1 − α α−z
+1−αz
+= α − αα z − α + z
+1 − αz − αα + αz = (1 − αα) z
+1 − αα = z,
+pour constater que ψα est sa propre inverse !
+Voici une dernière constatation simple qui présente un grand intérêt géométrique.
+Observation 9.3. L’automorphisme ψα(z) = α−z
+1−αz du disque unité D avec |α| < 1 échange 0 et α :
+ψα(0) = α et ψα(α) = 0.
+Le résultat principal de cette section dévoile, grâce au Lemme 8.1 de Schwarz, que la combinaison des rotations et des applications ψα fournit tous les automorphismes holomorphes du disque unité.
+Théorème 9.4. Si f ∈ Aut hol(D) est un automorphisme holomorphe de D, il existe θ ∈ R et α ∈ D tels que :
+f (z) = eiθ α − z
+1 − αz = eiθ ψα(z).
+
+
+70 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Démonstration. Puisque f : D −∼→ D est bijective, il existe une unique préimage α ∈ D de 0 = f (α). Introduisons alors l’automorphisme composé :
+g := f ◦ ψα,
+qui satisfait maintenant g(0) = 0. Le Lemme 8.1 de Schwarz s’applique donc, et donne :
+∣
+∣g(z)∣
+∣ 6 |z| (∀ z ∈ D).
+Mais il s’applique aussi à l’inverse D ←∼− D : g−1 satisfaisant g−1(0) = 0, pour donner de même :
+∣
+∣g−1(w)∣
+∣ 6 |w| (∀ w ∈ D),
+et si nous y remplaçons bêtement w = g(z), nous obtenons une inégalité :
+∣ ∣
+∣g−1(g(z))
+∣ ∣
+∣ = |z| 6
+∣
+∣g(z)∣
+∣ (∀ w ∈ D),
+inverse de celle qui précède, ce qui force |g(z)| = |z| partout ! La partie (2) du Lemme 8.1 de Schwarz offre alors que g(z) = eiθz est une rotation, c’est-à-dire :
+f
+(ψα(z)) = eiθ z.
+Pour terminer, en substituant là-dedans z := ψα(z) et en nous souvenant que ψα ◦ ψα = Id, nous concluons :
+f (z) = f (ψα(ψα(z))) = eiθ ψα(z).
+Il est clair qu’un tel automorphisme z 7−→ eiθ z−α
+1−αz ne fixe l’origine que lorsque α = 0.
+Corollaire 9.5. Les seuls automorphismes holomorphes de D qui fixent l’origine 0 ∈ D sont les rotations z 7−→ eiθz.
+Enfin, étant donné deux points quelconques α, β ∈ D, on peut envoyer α 7−→ 0 au moyen de ψα, puis 0 7−→ β au moyen de ψβ, et donc la composition ψβ ◦ ψα ∈ Aut hol(D) envoie α sur β : passer par Paris pour aller de Marseille à Toulouse, il fallait y penser !
+Corollaire 9.6. Le groupe Aut hol(D) est transitif.
+10. Présentation du théorème de Riemann
+Une question se pose de savoir si un ouvert connexe non vide Ω ⊂ C peut être « normalisé » au sens où il soit biholomorphiquement équivalent au disque unité D ⊂ C.
+Ω
+D
+C
+∼= ?
+Dans le cas où Ω = C, la réponse est négative, à cause du théorème de Liouville qui force toute application holomorphe F : Ω −→ D, donc bornée, à être constante.
+
+
+10. Présentation du théorème de Riemann 71
+∼=
+∼=
+C
+D
+A D
+Ensuite, l’existence d’un biholomorphisme F : Ω −∼→ D permet de transférer les homotopies entre courbes dans D comme homotopies entre courbes dans Ω. Puisque D est simplement connexe, car convexe, Ω doit nécessairement être aussi simplement connexe. Ainsi, aucun anneau A n’est équivalent à D. Il est absolument remarquable que ces deux conditions nécessaires aient été découvertes comme aussi suffisantes par Riemann, dans sa thèse soutenue en 1851 à l’âge de 21 ans.
+Théorème 10.1. [de l’application conforme de Riemann] Tout ouvert non vide Ω $ C distinct de C, i.e. avec C\Ω 6= ∅, qui est connexe et simplement connexe, est biholomorphe au disque unité D. De plus, pour tout z0 ∈ Ω fixé, il existe un unique biholomorphisme :
+F : Ω −∼→ D
+satisfaisant les conditions de normalisation :
+F (z0) = 0,
+F ′(z0) ∈ R et F ′(z0) > 0.
+Comme il n’y a qu’un seul « modèle », D, et que les biholomorphismes peuvent être composés et inversés, il en découle un
+Corollaire 10.2. Deux ouverts connexes et simplement connexes quelconques Ω1, Ω2 $ C sont toujours biholomorphes.
+Ω
+D
+F
+G
+H := F ◦ G−1
+Preuve de l’unicité. Étant donné deux biholomorphismes normalisés :
+F, G : Ω −∼→ D,
+la composition H := F ◦ G−1 devient un biholomorphisme de D fixant l’origine :
+H(0) = F (G−1(0)) = F (z0) = 0.
+Puisque Aut hol(D) = {z 7−→ eiθ α−z
+1−αz
+}, on sait par le Corollaire 9.5 que de tels biholo
+morphismes sont nécessairement de la forme H(z) = eiθz.
+
+
+72 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Mais la formule de dérivation composée et l’hypothèse de normalisation :
+eiθ = H′(0) = F ′(G−1(0)) · (G−1)′(0)
+= F ′(z0) 1
+G′(z0) ∈ R∗
++,
+force eiθ = 1, d’où H = Id, c’est-à-dire G = F .
+La partie difficile, et profonde, de la démonstration du Théorème 10.1 de l’application conforme de Riemann concerne l’existence. À grands traits, en voici les idées. Introduisons l’ensemble :
+R := {f : Ω −→ D holomorphe : f (z0) = 0 et f injective}.
+Nous avons déjà démontré dans le Théorème 6.3 fondamental que la seule injectivité de f assure qu’on a toujours un biholomorphisme de f sur son image :
+f : Ω −∼→ f (Ω) ⊂ D.
+Puisqu’on cherche un biholomorphisme Ω −∼→ D, il est naturel de maximiser l’image f (Ω) ⊂ D, c’est-à-dire de « remplir » D. Pour des raisons qui seront comprises ultérieurement, il s’avère que maximiser f (Ω) ⊂ D est possible en se contentant de maximiser seulement |f ′(z0)|, cela, en choisissant une certaine fonction appropriée fmax ∈ R. Évidemment, on peut toujours trouver une suite maximisante {fn}∞
+n=1 de fonctions fn ∈ R satisfaisant :
+nli→m∞
+∣
+∣f ′
+n(z0)∣
+∣ = sup
+g∈R
+∣
+∣g′(z0)∣
+∣,
+mais on n’a alors aucune garantie que ces fn convergeront vers une fonction holomorphe dans Ω, et qui plus est, une fonction injective, de manière à réellement trouver une fonction intéressante fmax ∈ R. C’est ici que gît la difficulté principale, et pour la surmonter, commençons à déployer des concepts nouveaux concernant la convergence de suites {fn}∞
+n=1
+de fonctions holomorphes fn ∈ O(Ω).
+11. Théorème de Montel pour les familles uniformément bornées et continues
+Dans notre cas, les fn : Ω −→ D sont à valeurs dans D, donc elles sont toutes bornées (par 1), mais énonçons plus généralement une
+Définition 11.1. Une famille F ⊂ O(Ω) de fonctions holomorphes est dite uniformément bornée sur les compacts de Ω si :
+∀ K ⊂ Ω compact ∃ 0 6 MK < ∞ telle que
+∣
+∣f (z)∣
+∣ 6 MK (∀ z ∈ K, ∀ f ∈ F ).
+Une fonction holomorphe individuelle est bien entendu bornée sur un compact, mais on demande ici l’uniformité par rapport à la famille F . Le concept-clé apparaît maintenant.
+Définition 11.2. Une famille F ⊂ O(Ω) de fonctions holomorphes est dite uniformément équicontinue sur les compacts de Ω si :
+∀ K ⊂ Ω compact ∀ ε > 0 ∃ δ = δ(K, ε) > 0 tel que
+(
+z, w ∈ K avec |z − w| 6 δ
+)
+=⇒
+(∣
+∣f (z) − f (w)∣
+∣ 6 ε ∀f ∈ F
+)
+.
+
+
+12. Démonstration du Théorème de Montel 73
+Cette condition est très forte : non seulement on a continuité spatiale uniforme — ce qui, d’après Heine-Borel, est automatique pour des fonctions continues sur un compact —, mais encore, on a uniformité par rapport à la famille F .
+Exemple 11.3. Sur le segment fermé [0, 1], soit la famille (suite) :
+{fn(x) := xn}∞
+n=1,
+uniformément bornée (par 1). Elle n’est pas uniformément équicontinue, car pour tout x0 < 1 fixé arbitrairement proche de 1, on a :
+∣
+∣fn(1) − fn(x0)∣
+∣ = 1 − xn
+0 −→
+n → ∞ 1,
+quantité qui ne peut pas être rendue uniformément arbitrairement petite 6 ε, quelle que soit la proximité 1 − x0 6 δ.
+Toutefois, cette famille {xn}∞
+n=1 est uniformément équicontinue sur les compacts du segment semi-ouvert [0, 1[, car c’est une suite qui converge uniformément vers 0 sur tout segment [0, x0] avec 0 6 x0 < 1.
+Exemple 11.4. Un meilleur contre-exemple dans le monde réel est, sur le même segment semi-ouvert [0, 1[ :
+{gn(x) := sin (2π nx)}∞
+n=1
+Cette famille (suite) y est uniformément bornée (par 1), mais elle n’est uniformément équicontinue sur aucun segment compact [a, b] ⊂ [0, 1[ d’intérieur non vide, i.e. avec 0 6 a < b < 1, puisque (exercice), ses dérivées 2πn cos(2π nx) y sont non bornées.
+Dans le monde holomorphe, nous le savons, la magie domine. En voici une nouvelle illustration spectaculaire.
+Théorème 11.5. [de Montel] Soit une famille F ⊂ O(Ω) de fonctions uniformément bornées sur les compacts de Ω. Alors :
+(1) F est uniformément équicontinue sur les compacts K ⊂ Ω ;
+(2) F est une famille normale.
+Voici l’explicitation de ce dernier concept.
+Définition 11.6. Une famille F ⊂ O(Ω) est dite normale si pour toute suite {fn}∞
+n=1 de
+fonctions fn ∈ F , il existe au moins une sous-suite {fnk
+}∞
+k=1 qui converge uniformément
+sur les compacts de Ω :
+fnk k−→→∞ g ∈ O(Ω).
+Rappelons qu’un théorème de Cauchy montre que la fonction-limite g est non seulement continue, mais aussi holomorphe. Il importe de faire remarquer qu’on ne demande pas que g ∈ F ici.
+Plus haut, la suite de fonctions réelles {sin (2πnx)}∞
+n=1 sur [0, 1[ n’est pas normale
+(exercice). Mais la suite {xn}∞
+n=1 l’est sur les compacts de [0, 1[, comme restriction à
+[0, 1[ ⊂ D de la suite de fonctions holomorphes {zn}∞
+n=1 définies sur D et donc à laquelle ce Théorème 11.5 s’applique !
+
+
+74 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+12. Démonstration du Théorème de Montel
+Démonstration du Théorème 11.5 (1). Commençons par établir le « miracle » (1) :
+O(Ω) ⊃ F uniformément bornée magie
+=⇒ F uniformément équicontinue
+(sur les compacts) (sur les compacts).
+C
+Ω
+D2r (w)
+ζ
+ζ
+ζ
+L
+K
+wz
+Dr (w)
+Soit donc K ⊂ Ω un compact quelconque. Choisissons r > 0 assez petit pour que 3 r < dist (K, C\Ω). Alors pour un point quelconque w ∈ K, on a D2r(w) ⊂ Ω, et même mieux :
+D2r(w) ⊂ {ζ ∈ Ω : dist (ζ, K) 6 2 r}
+=: L.
+Puisque ce nouvel ensemble L est un compact de Ω, l’hypothèse que F est uniformément bornée fournit ML < ∞ satisfaisant :
+∣
+∣f (ζ)∣
+∣ 6 ML (∀ ζ ∈ L, ∀ f ∈ F ).
+Comme sur la figure, soit enfin un point quelconque z ∈ Dr(w). La formule de Cauchy appliquée deux fois sur le cercle de rayon 2 r centré en w :
+f (z) = 1
+2iπ
+∫
+C2r (w)
+f (ζ)
+ζ − z dζ,
+f (w) = 1
+2iπ
+∫
+C2r (w)
+f (ζ)
+ζ − w dζ,
+donne, après soustraction :
+f (z) − f (w) = 1
+2iπ
+∫
+C2r (w)
+f (ζ)
+[1
+ζ−z − 1
+ζ −w
+]
+dζ ,
+
+
+12. Démonstration du Théorème de Montel 75
+et afin de faire voir la petitesse de |f (z) − f (w)|, il est avisé d’estimer celle de l’expression entre crochets :
+∣ ∣ ∣
+1
+ζ−z − 1
+ζ −w
+∣ ∣
+∣ = |z − w|
+|ζ − z| · |ζ − w|
+= |z − w|
+|ζ − z| · 2 r
+[z ∈ Dr(w) et ζ ∈ C2r(w) =⇒ |ζ − z| > r] 6 |z − w|
+r·2r .
+En conclusion, nous obtenons bien une inégalité valable pour z, w ∈ K avec |z − w| 6 δ 6 r qui fait voir comment choisir δ > 0 pour obtenir l’équicontinuité uniforme :
+∣
+∣f (z) − f (w)∣
+∣6 1
+2π ML
+|z − w|
+r · 2 r 2π r = constante · |z − w|
+6 constante · δ
+6 ε.
+Démonstration du Théorème 11.5 (2). Cette deuxième partie de l’énoncé ne doit rien à l’holomorphie :
+{ F uniformément bornée
+F uniformément équicontinue
+}
+=⇒ F normale,
+elle est valable en remplaçant Ω ⊂ C par un espace métrique quelconque (E, d(·, ·)). En effet, pour un compact arbitraire K ⊂ E, munissons l’espace :
+C (K) := {f : K −→ K continue},
+de la topologie de la convergence uniforme :
+∣
+∣f − g∣
+∣C (K) := max
+x∈K
+∣
+∣f (x) − g(x)∣
+∣.
+Définition 12.1. [Analogue] Une famille F ⊂ C (K) est dite :
+• uniformément bornée s’il existe 0 6 M < ∞ telle que :
+∣
+∣f (x)∣
+∣ 6 M (∀ x ∈ K, ∀ f ∈ F );
+• uniformément équicontinue si :
+∀ ε > 0 ∃ δ = δ(ε) > 0 tel que
+(
+x, y ∈ K avec d(x, y) 6 δ
+)
+=⇒
+(∣
+∣f (x) − f (y)∣
+∣ 6 ε ∀f ∈ F
+)
+;
+• relativement compacte si pour toute suite {fn}∞
+n=1 de fonctions fn ∈ F , il existe au
+moins une sous-suite {fnk
+}∞
+k=1 qui converge vers une certaine fonction continue g ∈ C (K) — mais n’appartenant pas forcément à F — :
+0 = nli→m∞
+∣
+∣fn − g∣
+∣C (K).
+
+
+76 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Ici, dans un cadre topologique métrique, le terme de « famille normale », généralement réservé au monde holomorphe, est remplacé par « famille relativement compacte », ce qui
+correspond bien à la conception que l’adhérence F |·|C(K) de F ⊂ C (K), pour la topologie de la norme uniforme | · |C (K) est un compact contenu dans C (K).
+Théorème 12.2. [Ascoli] Pour toute sous-famille F ⊂ C (K) de l’espace des fonctions réelles continues sur un compact K ⊂ (E, d) d’un espace métrique, on a l’équivalence :
+{ F uniformément bornée
+F uniformément équicontinue
+}
+⇐⇒ F normale.
+Plutôt que de basculer dans le monde réel, revenons plutôt au monde imaginaire (holomorphe), et démontrons l’implication =⇒, dont le lecteur avisé constatera qu’elle se généralise presque sans modification pour obtenir ce théorème d’Ascoli ; la réciproque, moins intéressante, est aussi laissée en exercice.
+Soit donc une suite quelconque {fn}∞
+n=1 de fonctions holomorphes fn ∈ F dans une famille F ⊂ O(Ω) uniformément bornée et uniformément équicontinue. L’objectif est de sélectionner une sous-suite qui est uniformément convergente sur les compacts de Ω. Deux idées interviennent.
+La première idée consiste à faire converger une sous-suite {gν}∞
+ν=1 de {fn}∞
+n=1 sur une
+collection dénombrable dense {wj}∞
+j=1 de points wj ∈ Ω. La seconde consiste à constater que l’équicontinuité uniforme est la bonne hypothèse suffisante pour « juguler la sauvagerie éventuelle » (non-convergence) des suites numé
+riques {gν(ζ)}∞
+ν=1 en d’autres points ζ ∈ Ω∖{wj}∞
+j=1.
+Premièrement, il est clair par densité et dénombrabilité de Q ⊂ R que le sous-ensemble :
+Ω ∩ (Q + √−1 Q) =: {wj
+}∞
+j=1
+est dense et dénombrable, donc représentable comme une certaine suite.
+Au point w1, les valeurs {fn(w1)}∞
+n=1 restent bornées. Extrayons alors une sous-suite de {fn}, notée :
+{f 1
+n1
+}∞
+n1=1,
+convergeant en w1 :
+f1
+n1(w1) −→
+n1 → ∞ φ1 ∈ C.
+Dire que c’est une sous-suite revient à dire qu’il y a une application n1 7−→ n(n1) strictement croissante telle que :
+f1
+n1 := fn(n1) avec n(n1) > n1 (n1 > 1).
+Au point w2, les valeurs {fn1(w2)}∞
+n1=1 restent aussi bornées, donc ré-extrayons :
+f2
+n2 := f 1
+n1(n2) = fn(n1(n2)) avec n1(n2) > n2 (n2 > 1),
+afin que :
+f2
+n2(w2) −→
+n2 → ∞ φ2 ∈ C.
+Mais alors, au point w1, la convergence est conservée grâce à n1(n2) > n2 :
+f2
+n2(w1) = f 1
+n1(n2)(w1) −→
+n2 → ∞ φ1.
+
+
+12. Démonstration du Théorème de Montel 77
+Diagrammatisons cela :
+f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12 f13 f14 f15 f16 f17
+f1
+1 f1
+2 f1
+3 f1
+4 f1
+5 f1
+6 f1
+7 f1
+8 f1
+9 f1
+10 f 1
+11
+f2
+1 f2
+2 f2
+3 f2
+4 f2
+5 f2
+6 f2
+7 f2
+8
+f3
+1 f3
+2 f3
+3 f3
+4 f3
+5 f3
+6
+f4
+1 f4
+2 f4
+3 f4
+4
+Continuons cela au point w3 :
+f3
+n3 := f 2
+n2(n3) = f 1
+n1(n2(n3)) = fn(n1(n2(n3)) (n3 > 1),
+pour avoir :
+f3
+n3(w3) −→
+n3 → ∞ φ3,
+tout en conservant aux deux points précédents w2, w1 :
+f3
+n3(w2) = f 2
+n2(n3)(w2) −→
+n3 → ∞ φ2,
+f3
+n3(w1) = f 1
+n1(n2(n3))(w1) −→
+n3 → ∞ φ1,
+parce que :
+n2(n3) > n3,
+n1
+(n2(n3))
+> n2(n3) > n3.
+Généralement, après avoir extrait j − 1 fois :
+f1
+n1(w1) −→
+n1 → ∞ φ1, . . . . . . . . . , f j−1
+nj−1 (wj−1) −→
+nj−1 → ∞ φj−1,
+extrayons une j-ème fois :
+fj
+nj := f j−1
+nj−1(nj ) = f j−2
+nj−2(nj−1(nj)) = · · · · · · · · · = f 1
+n1(···(nj−2(nj−1(nj )))··· ),
+afin que :
+fj
+nj (wj) −→
+nj → ∞ φj ∈ C,
+avec par construction des inégalités mémorisant les extractions successives :
+nj−1(nj) > nj,
+nj−2
+(nj−1 (nj ))
+> nj−1(nj) > nj,
+················································
+n1
+( · · · (nj2
+(nj−1(nj))) · · · )
+> · · · · · · · · · · · · · · · > nj−1(nj) > nj,
+et qui permettent de constater qu’aux points précédents wj−1, wj−2, . . ., w1, les convergences sont conservées :
+fj
+nj (wj) = f j−1
+nj−1(nj )
+(wj−1
+) −−−−→
+nj → ∞ φj−1 (car nj−1(nj ) > nj ),
+fj
+nj (wj−2) = f j−2
+nj−2(nj−1(nj ))
+(wj−2
+) −−−−→
+nj → ∞ φj−2 (car nj−2(nj−1(nj )) > nj ),
+············································································
+fj
+nj (w1) = f 1
+n1(···(nj−2(nj−1(nj )))··· )
+(w1
+) −−−−→
+nj → ∞ φ1 (car n1(···(nj−2(nj−1(nj )))··· ) > nj )).
+
+
+78 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Ainsi, nous sommes parvenus à garantir une convergence sur un nombre fini j > 1 quelconque de points w1, . . . , wj ∈ Ω. Contrairement à une intuition d’impossibilité éventuelle, il est en fait possible de construire une sous-suite qui converge en tous les points infinis dénombrables {wj}∞
+j=1.
+Voici le diagramme qui donne l’idée :
+f1
+1 f1
+2 f1
+3 f1
+4 f1
+5
+f2
+1 f2
+2 f2
+3 f2
+4 f2
+5
+f3
+1 f3
+2 f3
+3 f3
+4 f3
+5
+f4
+1 f4
+2 f4
+3 f4
+4 f4
+5
+f5
+1 f5
+2 f5
+3 f5
+4 f5
+5
+En effet, l’astuce est d’effectuer ce qu’on appelle une extraction diagonale, en introduisant la sous-suite :
+gν := f ν
+ν (ν > 1),
+c’est-à-dire que gν est le ν-ème terme de la sous-suite extraite.
+Assertion 12.3. En tout point wj ∈ Ω ∩ (Q + √−1 Q), on a convergence :
+gν
+(wj
+) −−−−→
+nj → ∞ φj (∀ j > 1).
+Preuve. En effet, dès que ν > j, toutes les fonctions gν appartiennent à la suite {f j
+nj
+}∞
+nj =1,
+dont on vient de voir qu’elle converge en les points w1, . . . , wj.
+Comme annoncé, la deuxième idée exploite l’hypothèse d’équicontinuité uniforme des éléments de F , donc des éléments de la suite {gν = f ν
+ν
+}∞
+ν=1.
+Proposition 12.4. Sur un compact quelconque non vide K ⊂ Ω, la suite extraite diagonale {gν = f ν
+ν
+} converge uniformément.
+Démonstration. Soit ε > 0 arbitrairement petit. En abrégeant :
+c := min {1, 1
+2 dist (K, C\Ω)},
+qui satisfait 0 < c < ∞, introduisons le sous-ensemble compact de Ω qui « élargit » K :
+L := {ζ ∈ Ω : dist (ζ, K) 6 c},
+ainsi que l’ouvert naturel que ce plus gros compact contient :
+U := {ζ ∈ Ω : dist (ζ, K) < c}
+⊂ L.
+
+
+12. Démonstration du Théorème de Montel 79
+C
+Ω
+Dδ (wjλ )
+K
+L
+wjλ
+Comme F ∣
+∣L est uniformément équicontinue, il en va de même pour {gν|L
+}∞
+ν=1, donc il existe δ = δ(L, ε) > 0 assez petit pour que :
+(
+z, w ∈ L avec |z − w| 6 δ
+)
+=⇒
+(∣
+∣gν(z) − gν(w)∣
+∣ 6 ε ∀ν > 1
+)
+.
+Si nécessaire, nous pouvons diminuer δ de façon à ce que :
+0<δ< c
+2.
+Du recouvrement ouvert trivial :
+K⊂Ω ⊂
+∞
+⋃
+j=1
+Dδ (wj ),
+Borel et Lebesgue extraient pour nous un recouvrement fini :
+K ⊂ Dδ
+(wj1
+) ∪ · · · ∪ Dδ
+(wjκ
+),
+avec certains indices 1 6 j1 < · · · < jκ. Quitte à en supprimer quelques uns qui sont inutiles, nous pouvons supposer que :
+∅ 6= K ∩ Dδ
+(wjλ
+)
+(∀ 1 6 λ 6 κ).
+Assertion 12.5. Alors tous ces disques sont contenus dans le compact élargi :
+Dδ
+(wjλ
+) ⊂ L (∀ 1 6 λ 6 κ).
+En particulier, leurs centres :
+wj1, . . . , wjκ ∈ L.
+
+
+80 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+ζ
+zλ
+K
+L
+Dδ (wjλ )
+wjλ
+Preuve. En effet, pour 1 6 λ 6 κ fixé, il existe au moins un point zλ ∈ K ∩ Dδ
+(wjλ
+), mais alors pour tout autre point arbitraire ζ ∈ Dδ
+(wjλ
+), il vient :
+∣
+∣ζ − zλ
+∣
+∣6
+∣
+∣ζ − wjλ
+∣
+∣+∣
+∣wjλ − zλ
+∣ ∣
+< δ+δ
+< c,
+ce qui signifie bien que z ∈ U .
+Maintenant, comme on a convergence ponctuelle en la collection finie wj1, . . . , wjκ des centres de ces disques recouvrant K, toujours avec le même ε > 0 arbitrairement petit, il existe N 1 assez grand pour que :
+ν, ν′ > N =⇒
+(∣
+∣gν
+(wjλ
+) − gν′
+(wjλ
+)∣
+∣ 6 ε (∀ 16λ6κ)
+)
+.
+Alors en un autre point quelconque z ∈ K ⊂ L, d’où z ∈ Dδ
+(wjλ
+) pour au moins un indice 1 6 λ(z) 6 κ, l’équicontinuité uniforme sur le compact auquel appartiennent les deux points z et wjλ(z) permet de majorer pour tous ν, ν′ > N grâce à une inégalité triangulaire :
+∣
+∣gν(z) − gν′(z)∣
+∣6
+∣
+∣gν(z) − gν
+(wjλ(z)
+)∣
+∣+∣
+∣gν
+(wjλ(z)
+) − gν′
+(wjλ(z)
+)∣
+∣+∣
+∣gν′
+(wjλ(z)
+) − gν′(z)∣
+∣
+6 ε + ε + ε.
+Ici, la majoration des termes délicats 1 et 3 utilise crucialement en effet l’équicontinuité uniforme, laquelle vient de « forcer » la convergence uniforme en tous les points z assez proches d’un point wjλ(z) en lequel la convergence ponctuelle a été arrangée à l’avance.
+En conclusion, {gν = f ν
+ν
+}∞
+ν=1 converge bien uniformément sur tous les compacts K ⊂
+Ω vers une certaine fonction-limite holomorphe dans Ω.
+13. Préservation de l’injectivité à la limite
+Un dernier ingrédient essentiel est nécessaire avant d’entamer la démonstration proprement dite du Théorème 10.1 de l’application conforme de Riemann. À nouveau, il s’agit d’un phénomène typiquement holomorphe, n’ayant aucun analogue vrai dans le monde réel.
+
+
+14. Démonstration du théorème de Riemann 81
+Proposition 13.1. Dans un ouvert non vide connexe Ω ⊂ C, soit une suite {fn
+}∞
+n=1 de
+fonctions holomorphes fn ∈ O(Ω) toutes injectives. Si {fn} converge uniformément sur les compacts de Ω vers une f ∈ O(Ω), alors :
+f est
+{ ou bien injective,
+ou bien constante.
+Démonstration. Supposons f non injective, à savoir, il existe z1 6= z2 ∈ Ω distincts avec f (z1) = f (z2). Le but est de faire voir que f est constante. À cet effet, introduisons les fonctions :
+gn(z) := fn(z) − fn(z1) (n > 1),
+qui ont pour seul zéro z = z1. Si donc r > 0 est assez petit pour que r < 1
+2 |z2 − z1|, d’où
+gn
+∣
+∣Dr(z2) 6= 0, une formule connue comptant le nombre de zéros donne :
+0= 1
+2iπ
+∫
+Cr (z2 )
+g′
+n (ζ )
+gn(ζ) dζ (n > 1).
+Par hypothèse :
+gn(z) −−−→
+n → ∞ f (z) − f (z1)
+=: g(z).
+Observons que g(z2) = 0.
+Assertion 13.2. On a g ≡ 0.
+Preuve. Sinon, si g 6≡ 0, comme Ω est connexe, l’autre zéro z2 de g doit être isolé, donc quitte à réduire r > 0, on a non-annulation :
+g
+∣
+∣Dr(z2)\{z2} 6= 0,
+puis la même formule exprime l’ordre, fini, d’annulation de g en z2 :
+νg(z2) = 1
+2iπ
+∫
+Cr (z2 )
+g′ (ζ )
+g(ζ) dζ.
+Sur le cercle Cr(z2), la non-annulation g∣
+∣Cr(z2) 6= 0 et un théorème de Cauchy offrent
+les deux convergences uniformes :
+1
+gn
+−−−→
+n→∞
+1
+g et g′
+n −−−→
+n → ∞ g (sur Cr(z2)).
+Mais alors ces deux convergences uniformes permettent d’intervertir limite et intégration pour aboutir à une contradiction :
+16 1
+2iπ
+∫
+Cr (z2 )
+g′ (ζ )
+g(ζ) dζ
+= nli→m∞
+1
+2iπ
+∫
+Cr (z2 )
+g′
+n (ζ )
+gn(ζ) dζ
+= nli→m∞ 0.
+En définitive, 0 ≡ g(z) = f (z) − f (z1) montre bien que f était constante.
+
+
+82 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+14. Démonstration du théorème de Riemann
+L’argumentation se déroule en trois étapes, la seconde étant la plus essentielle.
+Étape 1. D’une manière qui pourrait paraître surprenante, le fait que l’ouvert Ω ⊂ C soit distinct de C est une hypothèse impliquant que Ω n’est en fait pas « gros », comme le dévoile le
+Lemme 14.1. Tout ouvert connexe et simplement connexe non vide ∅ 6= Ω $ C distinct de C est biholomorphe :
+f : Ω −∼→ ω
+à un ouvert (non vide) ω ⊂ D contenu dans le disque unité avec 0 ∈ ω.
+CΩ
+Dr (β )
+C
+Re
+z0
+α
+`(z) = log(z − α) `(Ω)
+β
+`(z0) Im
+Démonstration. Soit donc un point α ∈ Ω\C. Comme Ω est simplement connexe et comme z − α 6= 0 dans Ω, il existe une fonction logarithme :
+`(z) := log (z − α),
+holomorphe pour z ∈ Ω, ce qui revient à écrire :
+e`(z) = z − α (∀ z ∈ Ω).
+Or ceci implique que ` est injective, car si `(z1) = `(z2), il vient z1 − α = z2 − α. Fixons un point z0 ∈ Ω, et translatons son image `(z0) verticalement d’une hauteur 2π :
+β := `(z0) + 2iπ.
+Assertion 14.2. Il existe r > 0 assez petit pour que l’image complète de Ω par `(z) évite le disque fermé de rayon r centré en β :
+log (Ω − α) ⊂ C∖Dr(β).
+Preuve. Sinon, il existerait une suite {zn}∞
+n=1 de points zn ∈ Ω tels que :
+`(zn) −−−→
+n → ∞ `(z0) + 2iπ
+⇓
+zn − α = e`(zn) −−−→
+n → ∞ e`(z0)+2iπ = z0 − α,
+ce qui impliquerait zn −→ z0, donc `(zn) −→ `(z0) par continuité — contradiction avec le point de départ !
+
+
+14. Démonstration du théorème de Riemann 83
+Ainsi :
+∣
+∣`(z) − β∣
+∣ > r (∀ z ∈ Ω).
+Effectuons une inversion (renormalisée) centrée au point β, afin d’échanger l’intérieur du cercle Cr(β) avec son extérieur :
+g(w) := r
+w − β,
+ce qui donne par composition :
+g
+(`(z)) = r
+log (z − α) − β .
+Comme ` et g sont injectives, leur composition g ◦ ` l’est aussi. Le Théorème 6.2 fondamental garantit alors que :
+g ◦ ` : Ω −∼→ g ◦ ` (Ω),
+est un biholomorphisme. En particulier, g ◦ `(Ω) est un ouvert de C.
+Assertion 14.3. On a g ◦ `(Ω) ⊂ D.
+Preuve. En effet :
+∣
+∣g ◦ `(z)∣
+∣6 r
+|`(z) − β|
+<r
+r = 1.
+C
+`(Ω)
+`(z0)
+β
+g(`(Ω))
+Dr(β) g
+γ
+0
+φγ (g(`(Ω)))
+D
+φγ
+0
+Toutefois, cet ouvert g ◦ `(Ω) ⊂ D ne contient pas forcément l’origine. Qu’à cela ne tienne, puisqu’il contient le point g(`(z0)) =: γ, nous n’avons qu’à le composer avec l’automorphisme φγ(w) = γ−w
+1−γw du disque unité qui envoie γ sur 0 ∈ D, pour obtenir en conclusion :
+f := φγ ◦ g ◦ ` avec ω := φγ
+(g(`(Ω))) 3 0.
+Étape 2. Grâce à ce qui précède, on peut dorénavant supposer que :
+0 ∈ Ω ⊂ D.
+
+
+84 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Ω
+Dr
+0
+D
+f 0
+D f (Ω)
+Comme promis, introduisons alors l’espace fonctionnel :
+R := {f : Ω −→ D holomorphe : f (0) = 0 et f injective},
+qui est non vide, puisqu’il contient l’identité z 7−→ z. Souvenons-nous qu’alors toutes ces
+f : Ω −∼→ f (Ω) sont des biholomorphismes. Cette famille R est uniformément bornée — sans avoir besoin de se cantonner à des compacts ! —, car |f (z)| < 1 pour tout z ∈ Ω. Le Théorème 11.5 de Montel affirme alors que R est uniformément équicontinue et normale. Ensuite, soit r > 0 assez petit pour que Dr(0) ⊂ Ω. De la formule de Cauchy pour g ∈ R quelconque :
+g′(0) = 1
+2iπ
+∫
+Cr
+g(ζ )
+ζ2 dζ,
+découle une majoration :
+∣
+∣g′(0)∣
+∣6 1
+2π · max
+|ζ|=r
+|g| · 1
+r2 · 2πr
+6 1· 1
+r < ∞,
+bornant uniformément les modules des dérivées en 0, ce qui garantit la finitude de :
+s := sup
+g∈R
+∣
+∣g′(0)∣
+∣ < ∞.
+Avec l’identité g(z) = z ∈ R, on voit que :
+1 6 s.
+Proposition 14.4. [Principale] Il existe une fonction f ∈ R — c’est-à-dire holomorphe injective Ω −→ D avec f (0) = 0 — qui réalise ce supremum :
+s=∣
+∣f ′(0)∣
+∣ ( < ∞).
+Démonstration. Prenons une suite {fn}∞
+n=1 de fonctions fn ∈ R maximisante :
+∣
+∣f ′
+n(0)∣
+∣ −−−→
+n → ∞ s.
+Tout notre programme se réalise précisément maintenant, parce que le Théorème 11.5 de Montel nous offre une sous-suite, que nous noterons encore {fn}∞
+n=1 pour simplifier, qui converge, uniformément sur les compacts de D, vers une certaine fonction holomorphe :
+f ∈ O(D).
+
+
+14. Démonstration du théorème de Riemann 85
+Un théorème de Cauchy donne la convergence des dérivées f ′
+n −→ f ′, donc |f ′(0)| = s. Rappelons que dans la Définition 11.6 du concept de famille normale R ⊂ O(Ω), nous n’avons pas demandé que les fonctions-limites appartiennent encore à la famille R, et donc ici, il reste à argumenter que :
+f ∈? R.
+C’est facile ! Premièrement, fn(0) = 0 pour tout n > 1 offre f (0) = 0 sans effort. Deuxièmement, puisque les fn sont toutes injectives, et puisque f est non constante car |f ′(0)| = s > 1 —, la Proposition 13.1 offre l’injectivité de f . Ainsi, les deux conditions pour que f ∈ R sont satisfaites.
+Étape 3. Dans cette dernière étape, nous établissons que cette fonction f ∈ R réalisant le
+supremum de la dérivée en 0 constitue un biholomorphisme f : Ω −∼→ D. Comme on sait
+que f : Ω −∼→ f (Ω) en est déjà un par injectivité, il ne reste plus qu’à traiter la surjectivité.
+Affirmation 14.5. La fonction f ∈ R satisfaisant |f ′(0)| = sup
+g∈R
+|g′(0)| est surjective
+f : Ω D.
+Démonstration. Par l’absurde, supposons l’existence d’un :
+α ∈ D∖f (Ω).
+Pour aboutir à une contradiction, nous allons construire une autre fonction F ∈ R de dérivée strictement supérieure ∣
+∣F ′(0)∣
+∣ > |f ′(0)| à l’origine.
+
+
+86 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+F := ψg(α) ◦ g ◦ ψα ◦ f
+G := ψα−1 ◦ h ◦ ψ−1
+g(α)
+f (Ω)
+Ω
+ψα 0
+f
+D
+0
+α
+D
+ψα(f (Ω))
+α
+0
+h = (·)2
+D g(ψα(f (Ω))) √α
+0
+ψg(α)
+√α
+0
+g = √·
+Considérons l’automorphisme ψα de D qui échange 0 et α :
+ψα(z) = α − z
+1 − αz .
+Comme Ω est simplement connexe, l’ouvert ψα(Ω) l’est aussi, et il ne contient pas ψα(α) = 0. Nous pouvons donc définir une fonction racine carrée :
+g(w) := √w := e 1
+2 log w,
+holomorphe dans ψα ◦ g(Ω), et en composant avec g, on divise essentiellement par 2 l’« écartement angulaire » de ψα ◦ f (Ω) dans D, comme tente de l’illustrer la figure. Enfin, pour ramener le point g ◦ ψα ◦ f (0) = g ◦ ψα(0) = g(α) à être l’origine, introduisons la composition :
+F := ψg(α) ◦ g ◦ ψα ◦ f.
+Assertion 14.6. On a F ∈ R.
+
+
+15. Exercices 87
+Preuve. On vient de faire F (0) = 0. Ensuite, F envoie Ω dans D, puisque ψα, g, ψg(α) envoient D dans D. Enfin, f est injective par hypothèse, ψα est un automorphisme, g(w) =
+√w est injective, ψg(α) est un automorphisme, donc la composition F = ψg(α) ◦ g ◦ ψα ◦ f est aussi injective.
+En notant h(w) := w2 la fonction réciproque, il vient :
+f = ψ−1
+α ◦ h ◦ ψ−1
+g(α)
+} {{ }
+=: G
+◦F.
+Cette nouvelle fonction composée G envoie D dans D et fixe l’origine :
+G(0) = ψ−1
+α
+(h(ψ−1
+g(α)(0))) = ψ−1
+α
+(h(g(α))) = ψ−1
+α
+((√α)2) = ψα(α) = 0,
+mais G : D −→ D n’est pas injective, car h(w) = w2 ne l’est clairement pas. Par conséquent, la partie (3) du Lemme 8.1 de Schwarz implique :
+∣
+∣G′(0)∣
+∣ < 1 (strictement).
+Une dérivation à l’origine de f = G ◦ F donne :
+f ′(0) = G′(F (0)) F ′(0) = G′(0) F ′(0),
+et par conséquent :
+|f ′(0)| < ∣
+∣F ′(0)∣
+∣,
+en contradiction déflagrationnelle et libératrice 1 avec l’hypothèse de maximalité de |f ′(0)| dans la famille R.
+Pour terminer complètement l’argumentation du Théorème 10.1, il ne reste plus qu’à multiplier f par un nombre complexe approprié de module 1 pour avoir f ′(0) ∈ R avec f ′(0) > 1.
+15. Exercices
+Exercice 1. EE
+—————
+1. Chapitre de 25 pages tapé intégralement (hors figures) en LATEX-non-stop le Dimanche 7 Mai 2018, de 08h15 à 18h05.
+
+
+88 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Examens corrigés
+François DE MARÇAY
+Département de Mathématiques d’Orsay Université Paris-Sud, France
+1. Examen 2
+Exercice 1. Soit D := {ζ ∈ C : |ζ| < 1} le disque unité dans C, soit w ∈ D fixé, et soit :
+φw(z) := z − w
+1 − wz .
+(a) Montrer que φw ∈ O(D) ∩ C 0(D).
+(b) Montrer que ∣
+∣φw(z)∣
+∣ = 1 pour tout |z| = 1, puis que ∣
+∣φw(z)∣
+∣ 6 1 pour tout z ∈ D, et enfin que ∣
+∣φw(z)∣
+∣ < 1 pour tout z ∈ D.
+(c) Soit une suite infinie {zn
+}∞
+n=1 de points non nuls zn ∈ D\{0} satisfaisant :
+∞
+∑
+n=1
+(1 − |zn|) < ∞.
+On pose :
+Fn(z) := |zn|
+zn
+zn − z
+1 − znz (z ∈ D).
+Pour z ∈ D fixé, montrer que :
+∣
+∣Fn(z) − 1∣
+∣ 6 1 + |z|
+1 − |z|
+(1 − |zn|).
+Indication: Utiliser, après l’avoir justifiée, l’inégalité 1
+|1−znz| 6 1
+1−|z| .
+(d) Montrer que le produit infini F (z) := ∏∞
+n=1 Fn(z) converge normalement sur les com
+pacts de D. Indication: On rappelle qu’un produit infini ∏∞
+n=1 Fn(z) est dit normalement
+convergent sur un compact K ⊂ D si la série ∑∞
+n=1
+(Fn(z) − 1) est normalement convergente sur K.
+(e) Montrer que ∣
+∣F (z)∣
+∣ 6 1 pour tout z ∈ D.
+(f) Quel problème la fonction F (z) résout-elle ?
+
+
+1. Examen 2 89
+(g) Maintenant, soit une fonction holomorphe f : D −→ D non constante, avec f (0) = 0. Pour w ∈ D∖{0} non nul, on note :
+f −1(w) := {z ∈ D : f (z) = w}.
+On suppose Card f −1(w) = ∞. Justifier que l’on peut écrire :
+f −1(w) = {zn
+}∞
+n=1,
+avec zn ∈ D et :
+1 = nli→m∞ |zn|.
+(h) On pose :
+g(z) := φw
+(f (z)),
+en rappelant que φw(z) := z−w
+1−wz . Montrer que g(D) ⊂ D.
+(i) Pour N > 1 entier, on pose :
+BN(z) :=
+N
+∏
+n=1
+z − zn
+1 − znz .
+Montrer qu’il existe hN ∈ O(D) telle que :
+g(z) = BN(z) hN(z) (∀ z ∈ D).
+(j) Montrer que pour tout 0 < ε < 1 (censé être arbitrairement proche de 0), il existe un rayon 0 < rε < 1 (censé être proche de 1) tel que :
+∣
+∣BN(z)∣
+∣ > 1 − ε (∀ |z| = rε).
+(k) Montrer que ∣
+∣hN(0)∣
+∣ 6 1.
+(l) On introduit maintenant la fonction de comptage de Nevanlinna :
+Nf (w) :=
+∑
+z∈f −1(w)
+log 1
+|z|
+=
+∞
+∑
+n=1
+log 1
+|zn| .
+Montrer que :
+∞
+∑
+n=1
+log 1
+|zn| 6 log 1
+|w| .
+(m) Montrer que :
+∞
+∑
+n=1
+(1 − |zn|) < ∞.
+(n) Soit maintenant F ∈ O(D), bornée ∣
+∣F (z)∣
+∣ 6 M < ∞ pour tout z ∈ D, et non
+identiquement nulle F 6≡ 0. Soient {zn
+}∞
+n=1 ses zéros, supposés en nombre infini. On suppose temporairement que M = 1 et que F (0) 6= 0.
+
+
+90 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Montrer que ∑∞
+n=1
+(1 − |zn|) < ∞. Indication: Introduire :
+f (z) := F (z) − F (0)
+1 − F (0) F (z).
+(o) Montrer que cela se généralise sans supposer M = 1 et F (0) 6= 0.
+(p) Interpréter le résultat obtenu en l’énonçant sous la forme d’un théorème synthétique.
+Exercice 2. (a) Montrer que la fonction ζ(s) = ∑∞
+n=1
+1
+ns de Riemann satisfait, pour s ∈ R avec s > 1 :
+log ζ(s) =
+∑
+p∈P
+∞
+∑
+m=1
+1
+m
+1
+pms .
+Indication: Penser à la formule de produit infini d’Euler, vue en cours.
+(b) Justifier que ζ(s) 6= 0 pour tout z ∈ C avec Re s > 1, puis justifier l’existence et l’holomorphie d’une fonction s 7−→ log ζ(s) définie dans {Re s > 1} et prenant des valeurs réelles sur ]1, ∞[.
+(c) Montrer que pour tout s ∈ C avec Re s > 1, on a encore :
+log ζ(s) =
+∑
+p∈P
+∞
+∑
+m=1
+1
+m
+1
+pms .
+Indication: Penser au principe d’unicité pour les fonctions holomorphes qui coïncident sur un ensemble ayant un point d’accumulation.
+(d) Toujours pour Re s > 1, montrer que :
+− ζ′(s)
+ζ(s) =
+∞
+∑
+n=1
+Λ(n)
+ns ,
+où Λ est la fonction de von Mangoldt :
+Λ(n) :=
+{ log p lorsque n = pα avec p ∈ P et α > 1,
+0 autrement.
+(e) Pour c > 1 fixé, en notant comme Riemann s = σ + it, on considère la droite réelle verticale {c + it : − ∞ < t < ∞} orientée du bas vers le haut. Soit l’intégrale dépendant du paramètre a > 0 :
+I(a) := 1
+2iπ
+∫ c+i∞
+c−i∞
+as
+s (s + 1) ds.
+Montrer qu’elle converge. Indication:
+∣
+∣as∣
+∣ = ac.
+(f) On suppose dorénavant, jusqu’à la Question (j) ci-dessous, que a > 1. Soit la fonction méromorphe sur C :
+f (s) := as
+s(s + 1) .
+Calculer Resf (0), puis Resf (−1).
+(g) Avec un rayon R > 1 + c (qui tendra vers l’infini), on considère le contour orienté Γ−
+R consistant en le segment vertical [c − iR, c + iR
+] parcouru du bas vers le haut, suivi du demi-cercle C−
+R centré en c de rayon R situé à gauche de l’axe vertical {Re s = c}. Dessiner
+Γ−
+R avec tous les détails possibles.
+
+
+1. Examen 2 91
+(h) Trouver la valeur de :
+1
+2iπ
+∫
+Γ−
+R
+f (s) ds = ?.
+(i) Montrer que :
+0 = lim
+R→∞
+∫
+C−
+R
+f (s) ds.
+Indication: Utiliser, après l’avoir justifiée, l’inégalité valable pour tous rayons R > Rc 1 assez grands :
+∣
+∣s (s + 1)∣
+∣> 1
+2 R2.
+(j) Toujours avec c > 1 fixé, montrer que :
+1
+2iπ
+∫ c+i∞
+c−i∞
+as
+s (s + 1) ds =
+{
+1− 1
+a quand 1 6 a,
+0 quand 0 < a 6 1.
+Indication: Changer de demi-cercle, et faire d’abord une figure (notée !).
+(k) On introduit maintenant la fonction psi de Tchebychev :
+ψ(x) :=
+∑
+16n6x
+Λ(n),
+puis :
+ψ1(x) :=
+∫x
+1
+ψ(u) du.
+Montrer que :
+ψ1(x) =
+∞
+∑
+n=1
+∫x
+1
+Λ(n) 1[n,∞[(u) du.
+(l) Montrer que :
+ψ1(x) =
+∑
+16n6x
+Λ(n) · (x − n).
+(m) Montrer que pour tout δ > 0, la série ∑∞
+n=1
+Λ(n)
+ns converge normalement dans {Re s >
+1 + δ}.
+(n) Montrer que :
+ψ1(x) = 1
+2iπ
+∫ c+i∞
+c−i∞
+(
+− ζ′(s)
+ζ (s)
+) xs+1
+s (s + 1) ds.
+Exercice 3. Soit τ ∈ C fixé avec Im τ > 0.
+(a) Montrer que la fonction Thêta de Jacobi définie par :
+Θτ (z) :=
+∞
+∑
+n=−∞
+eiπn2τ e2iπnz (z ∈ C),
+est une fonction holomorphe entière. Indication: Poser t := Im τ > 0, et observer que pour
+4 |z|
+t 6 |n|, on a −n2t + 2 |n| |z| 6 −n2 t
+2.
+(b) Montrer qu’il existe deux constantes 0 < A, B < ∞ telles que :
+∣
+∣Θτ (z)∣
+∣ 6 A eB |z|2
+(∀ z ∈ C).
+
+
+92 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+(c) Montrer que la fonction :
+f (z) := z +
+∑
+n∈Z∗
+eiπn2τ e2iπnz
+2iπn
+est une fonction holomorphe entière non constante. Indication: Observer que f (x) −→ ∞ lorsque R 3 x −→ ∞.
+(d) Montrer que Θτ n’est pas identiquement nulle sur C. Indication: Vérifier que f ′ = Θτ .
+(e) Montrer que Θτ
+(z + mτ ) = e−iπm2τ e−2iπmz Θτ (z), pour tout z ∈ C et tout m ∈ Z.
+(f) Montrer que Θτ est une fonction holomorphe entière d’ordre exactement égal à 2.
+—————
+
+
+2. Corrigé de l’examen 2 93
+2. Corrigé de l’examen 2
+Exercice 1. (a) Le pôle unique au dénominateur 1
+w est de module 1
+|w| > 1, puisque w ∈ D, donc :
+φw ∈ O
+(
+D
+1
+|w| (0) ⊃ D
+)
+,
+ce qui montre un peu mieux : φw est holomorphe (donc continue) dans un voisinage ouvert de D.
+(b) Avec zz = 1, on calcule :
+∣
+∣1 − w z∣
+∣=∣
+∣1 − w z∣
+∣
+=
+∣
+∣z (1 − w z)∣
+∣
+= |z − w|,
+d’où en divisant ∣
+∣φw(z)∣
+∣ = 1. Enfin, comme φw est holomorphe dans D et continue jusqu’au bord, le principe du maximum donne :
+∣
+∣φw(z)∣
+∣ 6 max
+ζ∈∂D
+∣
+∣φw (ζ )∣
+∣ = 1 (∀ |z|61),
+et comme φw n’est pas constante :
+∣
+∣φw(z)∣
+∣ < 1 (∀ |z| < 1).
+(c) Comme ∣
+∣zn
+∣
+∣ < 1, l’inégalité standard |1 − a| > 1 − |a| valable pour a ∈ C avec |a| < 1
+donne :
+∣
+∣1 − znz∣
+∣ > 1−∣
+∣zn
+∣
+∣ |z|
+> 1 − |z|,
+puis en inversant :
+1
+|1 − znz| 6 1
+1 − |z|.
+Ensuite, avec z ∈ D fixé, calculons et simplifions la différence :
+Fn(z) − 1 = |zn|
+zn
+zn − z
+1 − znz − 1
+= |zn| (zn − z) − zn (1 − znz)
+zn (1 − znz)
+= zn (|zn| − 1) + z (|zn|2 − |zn|)
+zn (1 − znz)
+=
+(|zn| − 1) zn + z |zn|
+zn (1 − znz) ,
+
+
+94 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+puis majorons-la en utilisant le préliminaire :
+∣
+∣Fn(z) − 1∣
+∣6
+(1 − |zn|) |zn| (1 + |z|)
+|zn| |1 − znz|
+6
+(1 − |zn|) 1 + |z|
+1 − |z|.
+(d) Si K ⊂ D est un compact, il existe 0 6 r < 1 avec K ⊂ Dr, et alors pour tout z ∈ K, ce qui précède permet de majorer :
+∣
+∣Fn(z) − 1∣
+∣6
+(1 − |zn|) 1 + r
+1 − r (∀ z ∈ K, ∀ n > 1),
+au moyen d’une série par hypothèse convergente :
+∞
+∑
+n=1
+(1 − |zn|) 1 + r
+1 − r < ∞,
+donc un théorème du cours offre la convergence du produit infini vers une certaine fonction holomorphe dans le disque unité :
+∞
+∏
+n=1
+Fn(z) =: F (z) ∈ O(D).
+(e) Grâce à la Question (b), en observant que :
+Fn(z) = |zn|
+zn
+zn − z
+1 − znz = − |zn|
+zn
+φzn (z ),
+on a unimodularité au bord :
+∣
+∣Fn(z)∣
+∣ = 1 (∀ |z| = 1),
+et comme Fn est holomorphe dans D continue sur D, le principe du maximum donne :
+∣
+∣Fn(z)∣
+∣ 6 1 (∀ |z| 6 1).
+Tout produit fini F1(z) · · · FN(z) satisfait aussi cela, donc à la limite quand N −→ ∞ :
+∣
+∣F (z)∣
+∣ 6 1 (∀ |z| = 1).
+(f) Comme chaque Fn(z) s’annule précisément en l’unique point z = zn, le théorème fondamental sur les produits infinis garantit que :
+{w ∈ D : F (w) = 0} = {zn
+}∞
+n=1.
+Ainsi, nous venons de démontrer l’existence d’une fonction holomorphe bornée F ∈ O(D) ∩ L∞(D) qui s’annule précisément sur une suite infinie {zn}∞
+n=1 de points zn ∈ D\{0}, sous l’hypothèse cruciale que :
+∞
+∑
+n=1
+(1 − |zn|) < ∞.
+(g) La fonction holomorphe z 7−→ f (z) − w dans D non identiquement nulle (puisque f est non constante) doit avoir, d’après le principe des zéros isolés, une collection {zn}∞
+n=1
+de zéros qui est discrète dans D, c’est-à-dire sans point d’accumulation dans D, et donc, si
+
+
+2. Corrigé de l’examen 2 95
+cette collection est infinie comme on l’a supposé, nécessairement, elle s’évade vers le bord ∂D :
+0 = nli→m∞ dist (zn, ∂D).
+(h) La question (b) a fait voir que φw : D −→ D, donc par composition φw ◦ f : D −→ D.
+(i) Cette fonction composée :
+g(z) = φw
+(f (z)) = f (z) − w
+1 − w f (z),
+s’annule aux points de la suite {zn}∞
+n=1, car :
+g(zn) = f (zn) − w
+1 − w f (zn) = 0 (∀ n > 1).
+Or le produit fini BN(z) s’annule exactement aux points z1, . . . , zN, et nulle part ailleurs. Par conséquent, le quotient :
+g(z)
+BN(z) =: hN(z) ∈ O(D)
+n’a que des singularités illusoires en z1, . . . , zN, donc définit bien une fonction holomorphe dans D.
+(j) Quel que soit |z| = 1, on sait que :
+∣
+∣BN(z)∣
+∣=∣
+∣φz1 (z )∣
+∣···∣
+∣φzN (z)∣
+∣ = 1 · · · 1 = 1,
+donc le résultat tombe par continuité.
+(k) Toujours sur les cercles {|z| = rε
+}, comme |g(z)| < 1 grâce à la Question (h), on majore :
+∣
+∣hN(z)∣
+∣ 6 |g(z)|
+|BN(z)|
+61
+1 − ε (∀ |z| = rε),
+d’où en appliquant le principe du maximum sur Drε :
+∣
+∣hN(0)∣
+∣6 1
+1 − ε,
+et enfin, en laissant ε −>→ 0 :
+∣
+∣hN(0)∣
+∣ 6 1.
+(l) Ce qui précède implique :
+0 < |w| = |g(0)|
+=
+∣
+∣BN(0) hN(0)∣
+∣
+6
+∣
+∣BN(0)∣
+∣·1
+= |z1| · · · |zN|,
+et en inversant puis en appliquant la fonction logarithme :
+log 1
+|w| >
+N
+∑
+n=1
+log 1
+|zn| .
+
+
+96 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Enfin, laissons N −→ ∞ pour obtenir la réponse :
+log 1
+|w| >
+∞
+∑
+n=1
+log 1
+|zn| .
+(m) Ainsi, nous venons d’obtenir la convergence de la série à termes positifs :
+∞
+∑
+n=1
+log 1
+|zn| 6 log 1
+|w| < ∞.
+Comme |zn| n→∞
+−→ 1 avec |zn| < 1 d’après la Question (g), on a pour tous n > 1 :
+0 < |zn| < 1 (∀ n > 1).
+Vérifions, pour tout x réel avec 0 < x 6 1, que :
+1 − x 6 log 1
+x.
+En effet, la fonction auxiliaire λ(x) := −1+x+log 1
+x admet, sur ]0, 1[, une dérivée négative :
+λ′(x) = 1 − 1
+x < 0,
+et comme λ(1) = 0, elle doit avoir des valeurs strictement positives sur ]0, 1[, décroissant jusqu’à λ(1) = 0. Grâce à cela : ∞
+∑
+n=1
+(1 − |zn|)
+6
+∞
+∑
+n=1
+log 1
+|zn| < ∞.
+(n) Cette fonction auxiliaire f (z) satisfait f (0) = 0. En les zéros zn de F , on a :
+F (zn) = 0 =⇒ f (zn) = 0 − F (0)
+1 − F (0) 0 = − F (0) =: w ∈ D\{0},
+De plus, f (z) = w s’écrit :
+F (z) − F (0)
+1 − F (0) F (z) = − F (0) =⇒ F (z) = 0,
+donc f −1(w) = {F = 0} = {zn}∞
+n=1, et ainsi, tout ce qui précède s’applique !
+(o) En divisant F (z) par M, on se ramène à M = 1. Si F (z) = zν · G(z) avec G(0) 6= 0 et ν > 1, on peut appliquer ce qui précède à G(z).
+(p) Le résultat obtenu donne une condition nécessaire et suffisante pour qu’une suite infinie {zn}∞
+n=1 de points zn ∈ D discrète dans D soit l’ensemble des zéros d’une fonction holomorphe bornée dans D, ce qui rappelle le théorème de Weierstrass, mais avec une hypothèse supplémentaire inévitable, et explicite.
+Théorème. Soit {zn}∞
+n=1 une suite de points dans D telle que ∑∞
+n=1
+(1 − |zn|) < ∞ — ce qui implique sa discrétion dans D. Alors il existe une fonction :
+B ∈ O(D) ∩ H∞(D)
+holomorphe dans D et bornée 6 1 ayant exactement ces zn comme zéros, et non nulle partout ailleurs.
+
+
+2. Corrigé de l’examen 2 97
+Inversement, si une fonction holomorphe bornée :
+F ∈ O(D) ∩ H∞(D)
+est non identiquement nulle, et si elle a une infinité de zéros {zn
+}∞
+n=1 répétés avec multipli
+cités, alors ∑∞
+n=1
+(1 − |zn|) < ∞.
+Dans la première partie de l’énoncé, par rapport aux Questions (c) à (f) où on a supposé tous les zn 6= 0 non nuls, il faut factoriser à l’avance par zν avec ν > 0 entier pour tenir compte de l’existence éventuelle de zéros à l’origine, ce qui se généralise sans peine.
+Exercice 2. (a) D’après Euler, on a la représentation par un produit normalement convergent sur {Re s > 1 + δ} quel que soit δ > 0 :
+ζ(s) =
+∏
+p∈P
+1
+1− 1
+ps
+.
+Avec s ∈ R réel, s > 1, en prenant le logarithme et en utilisant le développement en série
+entière − log (1 − t) = ∑∞
+m=1
+tm
+m , nous obtenons bien :
+log ζ(s) =
+∑
+p∈P
+− log
+(
+1− 1
+ps
+)
+=
+∑
+p∈P
+∞
+∑
+m=1
+1
+m
+1
+pms .
+(b) Dans le produit infini ∏
+p∈P
+1 1− 1
+ps dont tous les facteurs 1
+1− 1
+ps 6= 0 ne s’annulent jamais
+dans {Re s > 1}, puisque ∣
+∣ps∣
+∣ = p Re s > 1, un théorème du cours assure que :
+ζ(s) =
+∏
+p∈P
+1
+1− 1
+ps
+6= 0 (∀ Re s > 1).
+Ensuite, comme le demi-plan {Re s > 1} est simplement connexe, un théorème du cours montre l’existence de s 7−→ log ζ(s), holomorphe, avec log ζ(s) ∈ R quand ζ(s) ∈ R, notamment pour s ∈ ]1, ∞[.
+(c) Comme s 7−→ log ζ(s) et la fonction :
+s 7−→
+∑
+p∈P
+∞
+∑
+m=1
+1
+m
+1
+pms ,
+sont toutes deux holomorphes dans {Re s > 1}, et comme elles coïncident, d’après la Question (a), sur le segment :
+]1, ∞[ ⊂ {Re s > 1},
+qui a des points d’accumulation dans l’ouvert {Re s > 1}, le principe d’unicité garantit qu’elles coïncident partout.
+(d) Comme ζ(s) est holomorphe et 6= 0 dans {Re s > 1} d’après le cours, on peut dériver terme à terme la série double normalement convergente qui précède en utilisant :
+(p−ms)′ = (e−ms log p)′ = − m log p e−ms log p = − m log p · p−ms,
+
+
+98 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+ce qui donne :
+− ζ′(s)
+ζ(s) = −
+∑
+p∈P
+∞
+∑
+m=1
+1
+m
+( − m log p) 1
+pms
+=
+∑
+p∈P
+∞
+∑
+m=1
+log p
+pms
+[Reconnaître Λ] =
+∞
+∑
+n=1
+Λ(n)
+ns .
+(e) En effet, grâce à ∣
+∣as∣
+∣ = aRe s = ac sur cette droite, majorons :
+∣
+∣I (a)∣
+∣6 1
+2π
+∫∞
+−∞
+ac
+|c + it| · |c + 1 + it|
+∣
+∣idt∣
+∣,
+puis en utilisant :
+1
+|c + it| = 1
+(c2 + t2)1/2 ,
+1
+|c + 1 + it| = 1
+((c + 1)2 + t2)1/2 6 1
+(c2 + t2)1/2 ,
+constatons la finitude :
+∣
+∣I (a)∣
+∣ 6 ac
+2π
+∫∞
+−∞
+dt
+c2 + t2
+< ∞.
+(f) Élémentaire, mon cher Merker :
+Resf (0) = sli→m0 s · as
+s(s + 1) = 1,
+Resf (−1) = s l→im−1 (s + 1) · as
+s(s + 1) = a−1
+−1 = − 1
+a.
+(g) Voici un dessin complet, qui incorpore axes, flèches, et points remarquables.
+
+
+2. Corrigé de l’examen 2 99
+σ
+t
+Γ−
+R,int
+0
+−1
+C−
+R
+c−iR
+c+iR
+Γ−
+R
+1c
+(h) Comme les deux (seules) singularités s = 0 et s = 1 de f (s) = as
+s(s+1) se trouvent à
+l’intérieur Γ−
+R,int de ce contour, puisque R > 1 + c, le théorème des résidus donne, grâce à la Question (f) :
+1
+2iπ
+∫
+Γ−
+R
+f (s) ds = Resf (0) + Resf (−1)
+= 1− 1
+a.
+(i) En paramétrant C−
+R par s = c + R eiθ avec π
+2 6 θ 6 3π
+2 , on transforme :
+s (s + 1) = (c + R eiθ) (c + 1 + R eiθ)
+= e2iθ (c e−iθ + R
+) ((c + 1) e−iθ + R
+),
+d’où :
+∣
+∣s (s + 1)∣
+∣> 1
+2 R2 (∀ R > Rc 1).
+Ensuite, comme on a Re s 6 c quel que soit s ∈ C−
+R , d’où découle puisque a > 1 :
+∣
+∣as∣
+∣ = a Re s 6 ac (∀ s ∈ C−
+R ),
+nous pouvons majorer et conclure :
+∣ ∣ ∣ ∣
+1
+2iπ
+∫
+C−
+R
+as
+s (s + 1) ds
+∣ ∣ ∣ ∣
+6 ac
+2π
+∫
+C−
+R
+|ds|
+|s (s + 1)|
+6 ac
+2π
+πR
+1
+2 R2
+−→
+R → ∞ 0.
+
+
+100 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+(j) Tout d’abord, pour le premier cas où 1 6 a, en faisant R −→ ∞ dans la formule des résidus obtenue à la Question (h) :
+1
+2iπ
+∫
+[c−iR,c+iR]
+as
+s (s + 1) ds + 1
+2iπ
+∫
+C−
+R
+as
+s (s + 1) ds
+} {{ }
+−→
+R → ∞0
+= 1− 1
+a,
+nous obtenons bien grâce à la Question (i) qui précède :
+1
+2iπ
+∫ c+i∞
+c−i∞
+as
+s (s + 1) ds = 1 − 1
+a.
+σ 0
+−1
+Γ−
+R
+1c
+c−iR
+t
+c+iR
+Γ+
+R,int
+C+
+R
+Supposons maintenant que 0 < a 6 1. Si nous prenons le demi-cercle C+
+R centré en c
+mais situé à droite de la verticale {Re s = c}, et si Γ+
+R est le contour analogue contenant le
+segment [c + iR, c − iR] parcouru cette fois-ci du haut vers le bas, la fonction s 7−→ as
+s(s+1)
+n’a plus aucun pôle dans l’intérieur Γ+
+R,int, donc le théorème des résidus donne :
+0= 1
+2iπ
+∫
+Γ+
+R
+as
+s (s + 1) ds
+=1
+2iπ
+∫
+[c+iR,c−iR]
+as
+s (s + 1) ds + 1
+2iπ
+∫
+C+
+R
+as
+s (s + 1) ds
+} {{ }
+−→
+R→ 0
+,
+et une estimation analogue à celle conduite par la Question (i) en tenant compte du fait que Re s > c pour tout s ∈ C+
+R implique toujours |as| = e Re s 6 ac car maintenant 0 < a 6 1, donne bien ce qui était demandé :
+0= 1
+2iπ
+∫ c+i∞
+c−i∞
+as
+s (s + 1) ds.

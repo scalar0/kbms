@@ -1,0 +1,1759 @@
+INTRODUCTION AUX ÉQUATIONS AUX DÉRIVÉES PARTIELLES STOCHASTIQUES
+LUDOVIC GOUDENÈGE
+Résumé. Le but de ce polycopié de cours donné entre 2016 et 2019 à CentraleSupélec est relativement simple, il s’agit de montrer comment aborder les équations aux dérivées partielles en tant qu’objet infini-dimensionnel dérivant d’un système d’équations différentielles stochastiques. Il n’a pas la prétention d’être exhaustif sur le domaine, ni même novateur, mais simplement de donner les premières idées nécessaires à la manipulation des objets impliqués, sans demander non plus trop de pré-requis. Certaines démonstrations ou points techniques sont donc laissés de côté afin de ne pas perturber le fil conducteur. Le lecteur intéressé pourra s’orienter vers les cours de Pardoux, Hairer, ou encore les livres de Da Prato et Zabczyk. Je remercie particulièrement Charles-Edouard Bréhier pour les notes personnelles de son propre cours qui m’ont grandement aidé.
+Je remercie les élèves de CentraleSupélec auxquels j’ai donné ce cours. Ils ont été attentifs et vigilants, m’aidant à corriger plusieurs des erreurs ou imprécisions rencontrées durant les heures passées en classe.
+1
+
+
+2 L. GOUDENÈGE
+Table des matières
+1. Quelques problèmes liés au monde aléatoire 3 1.1. Introduction et définitions 3 1.2. Exercices sur le chapitre 1 6 2. Intégrale d’Itô 7 2.1. Processus représentant le bruit 7 2.2. Construction de l’intégrale d’Itô 7 2.3. Propriétés de l’intégrale d’Itô 7 2.4. Formule d’Itô 8 2.5. Exercices sur le chapitre 2 9 3. Équations différentielles stochastiques 11 3.1. Définition des solutions 11 3.2. Existence et unicité 11 3.3. Exercices sur le chapitre 3 11 4. Processus de Wiener cylindrique 13 4.1. Processus Gaussien isonormal 13 4.2. Bruit blanc espace-temps 15 4.3. Intégrale stochastique contre un bruit blanc espace-temps 17 5. Équations aux dérivées partielles stochastiques linéaires dirigées par un bruit blanc espace-temps 19 5.1. Semi-groupe pour les équations aux dérivées partielles linéaires 19 5.2. Semi-groupe pour les équations aux dérivées partielles stochastiques linéaires dirigées par un bruit blanc espace-temps 21 5.3. L’équation de la chaleur stochastique en domaine borné avec des conditions de Dirichlet homogènes dirigée par un bruit blanc espace-temps 22 6. Équations aux dérivées partielles stochastiques linéaires dirigées par un bruit blanc en temps et à trace finie en espace 23 6.1. Intégrale stochastique contre une martingale dans un espace de Hilbert 23 6.2. Approche variationnelle des équations aux dérivées partielles linéaires 26 6.3. Équations aux dérivées partielles stochastiques non linéaires 28
+
+
+INTRODUCTION AUX ÉQUATIONS AUX DÉRIVÉES PARTIELLES STOCHASTIQUES 3
+1. Quelques problèmes liés au monde aléatoire
+1.1. Introduction et définitions. On cherche à donner un sens à des équations impliquant une notion de bruit. Un exemple simple basé sur un modèle de croissance de population mène à une équation de la forme suivante :
+dN (t)
+dt = r(t)N (t), N (0) = N0,
+où N (t) est la taille de la population à l’instant t et N0 une taille initiale. Le taux de croissance r est sujet à des fluctuations qui suggèrent de l’écrire sous la forme :
+r(t) = r ̄(t) + “bruit”,
+où r ̄ représente la partie sans fluctuations aléatoires.
+Étant donné un espace de probabilité (Ω, F, P), on peut modéliser ce bruit à l’aide d’une famille {W (t, ω)}t∈R+,ω∈Ω et on cherche à construire une famille {N (t, ω)}t∈R+,ω∈Ω qui vérifierait :
+(1) dN (t, ω)
+dt = (r ̄(t) + W (t, ω))N (t, ω), N (0, ω) = N0(ω),
+avec N0 une variable aléatoire.
+La première difficulté consiste en la mesurabilité de la famille {N (t, ω)}t∈R+,ω∈Ω. On rappelle deux notions essentielles de la mesurabilité.
+Définition 1.1. Soit un espace de probabilité (Ω, F, P) et Y une variable aléatoire à valeurs dans (Rd, B(Rd)). On dit que Y est F -mesurable si pour tout ouvert U ⊂ Rd
+Y −1(U ) := {ω ∈ Ω : Y (ω) ∈ U } ∈ F .
+L’ensemble HY := {Y −1(U ) ∈ P(Ω) : U ∈ B(Rd)} est en réalité la plus petite tribu rendant Y mesurable, on l’appelle la tribu engendrée par Y .
+De cette définition suit un principe essentiel parfois appelé le lemme de Doob-Dynkin.
+Lemme 1.2. Soient X et Y deux variables aléatoires définies sur un espace de probabilité (Ω, F, P), alors que Y est HX -mesurable si et seulement s’il existe une fonction borélienne g telle que Y = g(X).
+La mesurabilité est donc stable par transformation borélienne, et si on considère une quantité finie d’instants (t1, . . . , tk) ∈ T d, on peut tout à fait parler de la mesurabilité de la famille {N (t, ω)}t∈[t1,...,tk],ω∈Ω. Mais comme on souhaite introduire la dérivée de N par rapport à la variable t, il nous faut une collection infinie d’instants. On ne parle alors non plus d’une variable aléatoire mais d’un processus stochastique.
+Définition 1.3. Un processus stochastique X est la donnée d’une famille de variables aléatoires à valeurs dans (Rd, B(Rd)) définies sur un espace de probabilité (Ω, F , P) indexées sur un ensemble T . On le note
+X := {Xt}t∈T .
+En règle générale et dans ce cours, l’ensemble T est un intervalle de la forme [0, T ] ou [S, T ] avec 0 < S < T ou encore R+. À chaque t fixé, on a donc une variable aléatoire Xt : ω 7→ Xt(ω). Et pour chaque ω ∈ Ω fixé, on a accès à une fonction réelle t 7→ Xt(ω) qu’on appelle une trajectoire du processus. Il est assez intuitif de considérer t comme le temps, et ω comme un évènement ou une particule. À un processus stochastique X pour T = R+, on peut bien sûr associer la famille doublement indexée
+{X(t, ω)}t∈R+,ω∈Ω
+
+
+4 L. GOUDENÈGE
+telle que X(t, ω) = Xt(ω). Les deux notations coexistent dans la littérature, mais on réserve parfois l’usage de l’une ou l’autre suivant la mesurabilité attendue. Dans toute la suite de ce cours, on considère que l’espace de probabilité (Ω, F, P) est complété, c’est-à-dire que la tribu F contient tous les négligeables. Précisément si P? est la mesure extérieure, on suppose que F contient tous les sous-ensembles G de Ω tels que
+P?(G) := inf{P(F ) ∈ R : F ∈ F , G ⊂ F } = 0.
+Remarque 1.4. Tout espace de probabilité (Ω, F, P) peut-être complété, en ajoutant dans F les ensembles négligeables, et en étendant la définition de P à cette nouvelle tribu générée.
+Définition 1.5. On appelle les lois finies-dimensionnelles du processus stochastique X la donnée des mesures μt1,...,tk sur (Rd)k, pour tout k ∈ N∗ pour tout k-uplets (t1, . . . , tk) ∈ T k telle que
+μt1,...,tk (F1 × · · · × Fk) = P[Xt1 ∈ F1, · · · , Xtk ∈ Fk],
+où les {Fi}i=1,...,k sont des boréliens quelconques de Rd.
+Il est important de comprendre que la donnée des lois finies-dimensionnelles du processus stochastique permet de déterminer certaines propriétés de X, mais qu’il n’y a pas unicité (voir exercice 1.4). Toutefois, étant donnée une famille de mesures satisfaisant certaines propriétés évidentes de compatibilité, on peut prouver l’existence d’un processus stochastique X possédant cette famille comme lois finies-dimensionnelles. C’est un théorème fondamental du à Kolmogorov (Voir []).
+Théorème 1.6. Soit une famille de mesures νt1,...,tk sur (Rd)k, définie pour tout k ∈ N∗ pour tout k-uplets (t1, . . . , tk) ∈ T k telle que
+νtσ(1),...,tσ(k) (F1 × · · · × Fk) = νt1,...,tk (Fσ−1(1) × · · · × Fσ−1(k))
+pour toute permutation σ sur {1, . . . , k} et
+νt1,...,tk (F1 × · · · × Fk) = νt1,...,tk,tk+1,...,tk+m (F1 × · · · × Fk × Rd × · · · × Rd
+} {{ }
+m f ois
+)
+pour tout m ∈ N. Alors il existe un espace de probabilité (Ω, F, P) et un processus stochastique X tels que la famille de mesures ν représente les lois finies-dimensionnelles de X i.e.
+νt1,...,tk (F1 × · · · × Fk) = P[Xt1 ∈ F1, · · · , Xtk ∈ Fk],
+où les {Fi}i=1,...,k sont des boréliens quelconques de Rd.
+Le premier exemple fondamental de processus stochastique est le mouvement Brownien. Il existe de multiples manières de le définir, mais de notre point de vue, il suffira d’en donner les lois finies-dimensionnelles pour l’exhiber à l’aide du théorème 1.6. On pose pour tout t ∈ R+, (x, y) ∈ (Rd)2 la fonction gaussienne
+p(t, x, y) = (2π)−d/2 exp
+(
+− ‖x − y‖2
+2t
+)
+.
+On peut alors définir une famille de mesures νt1,...,tk sur (Rd)k pour tout k ∈ N∗ et tout k-uplets (t1, . . . , tk) ∈ (R+)k tels que 0 ≤ t1 ≤ · · · ≤ tk
+νt1,...,tk (F1 × · · · × Fk) :=
+∫
+F 1×···×Fk
+p(t1, x, y1) · · · p(tk − tk−1, yk−1, yk)dy1 · · · dyk.
+On étend ensuite la définition de la famille de mesures à tout k-uplets (t1, . . . , tk) ∈ (R+)k (donc sans la condition de croissance des instants) par compatibilité sur les permutations.
+Et puisque
+∫
+Rd
+p(t, x, y)dy = 1 pour tout t ∈ R+ et pour tout x ∈ Rd, on a bien la
+
+
+INTRODUCTION AUX ÉQUATIONS AUX DÉRIVÉES PARTIELLES STOCHASTIQUES 5
+deuxième relation de compatibilité. Fixons x ∈ Rd, par le théorème 1.6 on a l’existence d’un espace de probabilité (Ω(x), F (x), P(x)) et d’un processus stochastique B(x) dont les lois finies-dimensionnelles sont données par
+P(x)(B(x)
+t1 ∈ F1, . . . , B(x)
+tk ∈ Fk) =
+∫
+F 1×···×Fk
+p(t1, x, y1) · · · p(tk − tk−1, yk−1, yk)dy1 · · · dyk.
+Définition 1.7. On appelle mouvement brownien démarrant en x un processus stochastique défini par la formule précédente sur ses lois finies-dimensionnelles.
+Il est clair qu’il n’y a pas unicité dans cette définition, mais on peut toutefois travailler avec de tels processus. En particulier ce sont des processus Gaussiens, c’est-à-dire que,
+notant G la variable aléatoire
+(
+B(x)
+t1 , . . . , B(x)
+tk
+)
+sur Rdk, cette variable G est un vecteur
+Gaussien de moyenne (x1, . . . , xn, x1, . . . , xn, . . . , x1, . . . , xn) ∈ Rdk et de matrice de covariance de taille dk × dk définie par blocs
+
+   
+t1Id t1Id . . . t1Id t1Id t2Id . . . t2Id
+... ... . . . ...
+t1Id t2Id . . . tkId
+
+   
+où Id est la matrice identité de taille d × d. On retrouve alors les propriétés classiques à savoir
+E(x)[B(x)
+t ] = x, E(x)[‖B(x)
+t − x‖2] = d t, ∀t ∈ R+
+et
+E(x)[〈B(x)
+t − x, B(x)
+s − x〉] = d min(s, t), ∀(s, t) ∈ (R+)2,
+d’où on tire
+E(x)[‖B(x)
+t − B(x)
+s ‖2] = d |t − s|, ∀(s, t) ∈ (R+)2.
+On obtient également que les incréments B(x)
+t1 , B(x)
+t2 − B(x)
+t1 , . . . , B(x)
+tk − B(x)
+tk−1 sont indépendants (en tant que vecteur Gaussien, il suffit de voir qu’ils sont non-corrélés). En effet pour k 6= i
+E(x)[〈Bx
+tk+1 − Btk , Bx
+ti+1 − Bti 〉] = 0.
+En particulier pour (t, s) ∈ (R+)2, la variable B(x)
+t − B(x)
+s est indépendante de la tribu F (x)
+s
+engendrée par la variable B(x)
+s dès que t > s.
+Enfin, et pour conclure cette introduction, on peut montrer qu’il existe une modification (on parle aussi de version) du mouvement Brownien qui est continue à l’aide d’un autre théorème du à Kolmogorov. Dans la suite de ce cours, on considèrera la modification continue du mouvement Brownien et lorsqu’on construira des objets, on s’attardera à vérifier qu’ils possèdent une modification continue, afin de toujours travailler dans l’espace des processus à trajectoires continues.
+Définition 1.8. Pour deux processus stochastiques X et Y définis sur l’espace (Ω, F, P), on dit que Y est une modification (ou une version) de X si
+P({ω ∈ Ω : Xt(ω) = Yt(ω)}) = 1, ∀t ∈ R+.
+Ils ont alors les mêmes lois finies-dimensionnelles, mais pas forcément les mêmes trajectoires (voir exercice 1.4).
+Cette propriété de continuité est en réalité un atout essentiel pour éviter des problèmes de mesurabilité jointe. En effet on a la proposition suivante :
+
+
+6 L. GOUDENÈGE
+Proposition 1.9. Soit X un processus stochastique à valeur dans Rd défini sur l’espace de probabilité (Ω, F, P) indexé par R+. Supposons que X est à trajectoires continues, i.e. pour tout ω ∈ Ω, t 7→ Xt(ω) est continue, alors
+Y : (R+ × Ω, B(R+) ⊗ F ) → (Rd, B(Rd))
+(t, ω) 7→ Xt(ω),
+est mesurable (par rapport au couple (t, ω) de ses deux variables, et non plus par rapport à ω à t fixé en tant que variable aléatoire), c’est-à-dire
+∀B ∈ B(Rd), Y −1(B) ∈ B(R+) ⊗ F .
+Démonstration. On note Xn : (t, ω) 7→ X k
+2n (ω) si t ∈
+[k
+2n , k + 1
+2n
+[
+pour k ∈ N ou encore
+Xn(t, ω) =
++∞
+∑
+k=0
+Xk
+2n (ω)1[ k
+2n , k+1
+2n [(t),
+qui est mesurable comme somme et produit dénombrable de variables aléatoires. Le processus X étant à trajectoires continues, on a bien pour tout t ∈ R+, en posant tn =
+[2nt]
+2n −→
+n→+∞ t la variable Xn(t, ·) = Xtn(·) = Y (tn, ·) qui converge presque sûrement vers
+Xt quand n → +∞. La limite simple de fonctions mesurables étant mesurable, on a la mesurabilité de Y .
+Remarque 1.10. L’ensemble à t fixé sur lequel la convergence a lieu presque sûrement ne dépend pas de t. S’il en dépendait, on pourrait encore s’en sortir en ne considérant que les instants t rationnels.
+Partant de ce constat, on note désormais indifféremment {Xt}t∈T := {ω 7→ Xt(ω)}t∈T ou {X(t, ω)}t∈T ,ω∈Ω la donnée d’un processus stochastique. On notera même de manière synthétique X la donnée d’un tel processus.
+1.2. Exercices sur le chapitre 1.
+Exercice 1.1. Montrer que la loi de B(0)
+t en dimension d = 1 pour t > 0 est donnée par la densité
+p(x) = √21πt exp
+(
+− x2
+2t
+)
+.
+Quelle est la loi de (B(0)
+t )2 pour t > 0 ?
+Exercice 1.2. Montrer que pour tout u ∈ R, on a en dimension d = 1
+E
+[
+exp(iuB(0)
+t)
+]
+= exp
+(
+−1
+2 u2t
+)
+.
+Exercice 1.3. Vérifier qu’en dimension d = 1 pour k ∈ N on a
+E
+[
+(B(0)
+t )2k]
+= (2k)!
+2k k! tk.
+Exercice 1.4. Soit (Ω, F , P) = (R+, B(R+), μ) où μ est une mesure de probabilité sur R+ qui ne charge pas les singletons. On définit les processus X et Y par leurs trajectoires pour t ∈ R+ tel que pour tout ω ∈ R+
+Xt(ω) =
+{ 1 si t = ω,
+0 sinon, et Yt(ω) = 0.
+Montrer que les lois finies-dimensionnelles de X et Y sont les mêmes, en montrant que X et Y sont versions l’un de l’autre.
+
+
+INTRODUCTION AUX ÉQUATIONS AUX DÉRIVÉES PARTIELLES STOCHASTIQUES 7
+2. Intégrale d’Itô
+2.1. Processus représentant le bruit. Partant de l’équation (1), on se pose la question de l’existence d’un processus stochastique X et d’un processus W tels que
+dXt
+dt = b(t, Xt) + σ(t, Xt) · Wt
+avec b et σ des fonctions régulières sous les propriétés ad hoc : (i) t 6= s ⇒ Wt est indépendant de Ws, (ii) la loi de Wt est stationnaire, (a fortiori la loi de Wt+r est indépendante de r). (iii) E[Wt] = 0. Le problème est qu’il n’existe aucun processus raisonnable qui satisfasse ces propriétés. Si de plus on demande l’existence d’un moment d’ordre 2, on peut même perdre la mesurabilité de W par rapport à la tribu B × F, la fonction (t, ω) 7→ W (t, ω) n’étant alors pas mesurable. Le lecteur intéressé par la recherche et la construction de ces processus pourra lire []. Formellement on remarque toutefois que W semble proche d’une dérivée du mouvement Brownien, i.e. les conditions sur les instants de W se transposant sur les incréments de B : (i) t 6= s ⇒ Bt − Bs est indépendant de Bs − B0, (ii) la loi de Bt − Bs est stationnaire, (ici la loi de Bt+r − Bs+r est indépendante de r), (iii) E[Bt − Bs] = 0. Partant de ce constat, on cherche à écrire l’équation en temps discret suggérant une équation sur les incréments de X
+Xtk+1 − Xtk
+tk+1 − tk
+= b(tk, Xtk ) + σ(tk, Xtk )Wtk .
+Le processus W n’étant pas raisonnable, on peut le remplacer par un incrément de B dans la version discrète sous la forme
+Xtk+1 − Xtk
+tk+1 − tk
+= b(tk, Xtk ) + σ(tk, Xtk ) Btk+1 − Btk
+tk+1 − tk
+,
+et on est ramené à
+Xtk+1 − Xtk = b(tk, Xtk )(tk+1 − tk) + σ(tk, Xtk )(Btk+1 − Btk ).
+On peut alors penser cette équation en version intégrale
+Xt − X0 =
+∫t
+0
+b(s, Xs)ds +
+∫t
+0
+σ(s, Xs)dBs.
+ou en version différentielle
+dXt = b(t, Xt)dt + σ(t, Xt)dBt.
+L’intégrale d’Itô est justement l’objet impliquant les incréments de B et la notation
+∫t
+0
+σ(s, Xs)dBs
+ne se réfère pas à une intégrale classique de type Stieljes (voir exercice ??). La version différentielle est simplement une notation simplifiée de la version intégrale, et on l’utilisera en connaissance de cause, parfois avec des règles pratiques de calcul. Notez qu’on rencontre généralement l’assertion suivante : “Le bruit blanc W est la dérivée du mouvement Brownien B”. Cet objet W sera abordé au chapitre 4.
+2.2. Construction de l’intégrale d’Itô.
+2.3. Propriétés de l’intégrale d’Itô.
+
+
+8 L. GOUDENÈGE
+2.4. Formule d’Itô. La formule d’Itô est à la base du calcul stochastique car elle exprime la stabilité d’une certaine classe de processus à travers des transformations régulières. Elle fournit d’ailleurs des règles de calculs permettant de représenter le nouveau processus obtenu après transformation. C’est pour cette raison qu’on parle de “Formule d’Itô”.
+Définition 2.1. Soient S et T deux instants de R. On note V(S, T ) l’ensemble des processus stochastiques f définis sur un espace de probabilité (Ω, F, P) muni d’une filtration Ft, à valeurs dans R, indexés par [S, T ], satisfaisant les propriétés suivantes : — (t, ω) → f (t, ω) est B([S, T ]) × F mesurable. — f (t, ·) est Ft adaptée.
+—E
+[∫ T
+S
+f (t, ·)2dt
+]
+< +∞.
+Définition 2.2. On note également WH(S, T ) l’ensemble des processus stochastiques f définis sur un espace de probabilité (Ω, F, P) muni d’une filtration Ht, à valeurs dans R, indexés par [S, T ], satisfaisant les propriétés suivantes : — (t, ω) → f (t, ω) est B([S, T ]) × F mesurable. — Bt est une martingale pour Ht et f (t, ·) est Ht adaptée.
+—P
+[∫ T
+S
+f (t, ·)2dt < +∞
+]
+=1
+On notera WH = ∩T >0WH(0, T ).
+Définition 2.3. Un processus d’Ito est un processus stochastique définis sur un espace de probabilité (Ω, F , P) muni d’une filtration Ft, à valeurs dans R, indexés par R+, pouvant s’écrire de la manière suivante :
+(2) Xt = X0 +
+∫t
+0
+u(s, ·)ds +
+∫t
+0
+v(s, ·)dBs,
+Avec v ∈ WH et P
+[∫ t
+0
+|u(s, ·)|ds < +∞, ∀t ≥ 0
+]
+= 1. On le notera synthétiquement
+dXt = u dt + v dBt avec pour donnée initiale X0.
+Théorème 2.4 (Formule d’Itô 1-dimensionnelle). Soit X un processus d’Itô donné par :
+(3) dXt = u dt + v dBt
+Soit g ∈ C2(R+ × R). Alors le processus stochastique Yt = g(t, Xt) est encore un processus d’Itô et l’on a :
+(4) dYt = ∂g
+∂t (t, Xt)dt + ∂g
+∂x (t, Xt)dXt + 1
+2
+∂2g
+∂x2 (t, Xt)v2dt
+Cette formule se généralise au cas multidimensionnel où B est de dimension m ∈ N, un processus d’Ito de dimension d s’écrit encore :
+(5) dXt = u dt + v dBt
+Où u = (ui)1≤i≤d est un vecteur dont les coordonnées vérifient les conditions de la définition 2.1 , il en va de même pour les coordonnées de la matrice v = (vi,j)1≤i≤d,1≤j≤m.
+Théorème 2.5 (Forumle d’Itô multidimensionnelle). Soit X un processus multidimensionnel définit en équation (5), g ∈ C2(R+ × Rd, Rp) (i.e. g(t, x) = (g1(t, x), · · · , gp(t, x))). Alors le processus Y défini par Y (t, ω) = g(t, X(t, ω)) est encore un processus d’Itô dont la k-ième composante est donnée par :
+(6) dY k
+t = ∂gk
+∂t (t, Xt)dt +
+d
+∑
+i=1
+∂gk
+∂xi
+(t, Xt)dXi
+t+1
+2
+d
+∑
+i=1
+d
+∑
+j=1
+∂2gk
+∂xi∂xj
+(t, Xt)(vT v)i,jd〈Bi, Bj〉t.
+
+
+INTRODUCTION AUX ÉQUATIONS AUX DÉRIVÉES PARTIELLES STOCHASTIQUES 9
+2.5. Exercices sur le chapitre 2.
+Exercice 2.1. Vérifier si les processus (Xt)t∈R+ suivants sont des Ft martingales. a) Xt = Bt + 4t, b) Xt = B2
+t,
+c) Xt = t2Bt − 2
+∫t
+0
+sBsds.
+Exercice 2.2. Montrer que les processus Xt suivants sont bien définis dans l’espace considéré en tant que processus d’Itô. C’est-à-dire montrer qu’il existe deux processus u et v
+vérifiant les conditions habituelles tels que Xt = X0 +
+∫t
+0
+u(s, ·)ds +
+∫t
+0
+v(s, ·)dWs, où W
+est un mouvement Brownien multi-dimensionnel à préciser.
+a) Dans R, Xt = B4
+t − B2
+t−
+∫t
+0
+√|Bs|dBs, pour t ∈ R.
+b) Dans R, Xt = tBt −
+∫t
+0
+sdBs, pour t ∈ R.
+c) Dans R, Xt = cos(Bt), pour t ∈ R.
+d) Dans Rd, Xt =
+d
+∑
+k=1
+∫t
+0
+Bk+1
+s dBk
+s uk pour tout t ∈ R.
+e) Dans Rd, Xt =
+d
+∑
+k=1
+(∫ t
+0
+Bk
+s dBk
+s − (Bk
+t )2
+)
+uk pour tout t ∈ R.
+Exercice 2.3 (Théorème de représentation d’Itô). Soit V un processus de L2(Ω) sur [0, T ] qui soit une martingale par rapport à (Ft)0≤t≤T . On veut montrer qu’il existe un processus v ∈ V tel que
+(?) VT (ω) = E[V0] +
+∫T
+0
+v(t, ω)dBt pour presque tout ω ∈ Ω.
+a) Supposons que VT = exp
+(∫ T
+0
+f (t)dBt − 1
+2
+∫T
+0
+f 2(t)dt
+)
+pour une fonction f dans
+L2(0, T ). Montrer que (?) est vérifiée.
+On peut montrer que la limite simple d’une suite (gn)n∈N de fonctions de V qui soit de
+Cauchy dans L2(Ω × [0, T ]) admet une sous-suite qui soit convergente dans V.
+b) Supposons qu’il existe une séquence de processus (Vn)n∈N de la forme décrite en ques
+tion a) telle que (Vn)n∈N converge vers V dans L2(Ω). Montrer que
+VT = E[V ] +
+∫T
+0
+lim
+n→+∞ fn(t)dBt
+où (fn)n∈N est de Cauchy dans L2(Ω × [0, T ]). c) En déduire le théorème de représentation (i.e. la décomposition (?)) pour un tel processus V . d) Montrer l’unicité du processus v représentant V dans (?).
+Exercice 2.4 (Intégrale de Stratonovich). Soit f ∈ V. Supposons que t 7→ f (t, ω) soit continue pour presque tout ω. On sait que
+∫T
+0
+f (t, ω)dBt(ω) = ∆lit→ m0
+∑
+j∈N
+f (tj, ω)(Btj+1 − Btj ) dans L2(P).
+
+
+10 L. GOUDENÈGE
+De manière similaire, on peut définir l’intégrale de Stratonovich avec t∗
+j=1
+2 (tj + tj+1) par
+∫T
+0
+f (t, ω) ◦ dBt(ω) = ∆lit→ m0
+∑
+j∈N
+f (t∗
+j , ω)(Btj+1 − Btj ) dans L2(P),
+Comparer
+∫T
+0
+Bt ◦ dBt et
+∫T
+0
+BtdBt.
+
+
+INTRODUCTION AUX ÉQUATIONS AUX DÉRIVÉES PARTIELLES STOCHASTIQUES 11
+3. Équations différentielles stochastiques
+On note E(b, σ, x) l’équation différentielle stochastique définie par
+dXt = b(t, Xt)dt + σ(t, Xt)dBt
+sous la condition X0 = x.
+3.1. Définition des solutions.
+Définition 3.1. Il existe plusieurs notions d’existence de solution aux équations différentielles stochastiques. — On dit qu’il y a existence faible si pout toute donnée initiale x, il existe une solution de E(b, σ, x).
+— On dit qu’il y a existence et unicité faibles si pour tout x, les solutions de E(b, σ, x) ont toutes la même loi. — On dit qu’il y a unicité trajectorielle si pour tout x, deux solutions X et X ̃ de E(b, σ, x) sont indistingables l’une de l’autre, c’est-à-dire P(Xt = X ̃t, ∀ t ∈ R+) = 1. — On dit qu’une solution faible X est solution forte si X est adapté à la filtration engendrée par B.
+Théorème 3.2 (Yamada-Watanabe). S’il y a existence faible et unicité trajectorielle, alors il y a existence et unicité faibles. De plus, pour tout choix de l’espace filtré (Ω, F , P, (Ft)t∈R+) et du mouvement Brownien B qui soit (Ft)t∈R+ adapté, pour tout donnée initiale x, il existe une solution forte de E(b, σ, x).
+3.2. Existence et unicité.
+Théorème 3.3. Supposons que
+H1 : Les fonctions b et σ sont continues. H2 : Les fonctions b et σ sont lipschitziennes par rapport à leur seconde variable uniformément en la variable t, c’est-à-dire ∃ L ≤ 0, tel que ∀ t ∈ R+, ∀ x, y ∈ Rd on ait
+|b(t, x) − b(t, y)| + |σ(t, x) − σ(t, y)| ≤ L|x − y|,
+alors il y a existence faible et unicité trajectorielle de l’équation E(b, σ, x) (donc existence forte par le théorème de Yamada-Watanabe).
+3.3. Exercices sur le chapitre 3.
+Exercice 3.1. Soient b et σ deux fonctions régulières telles que toutes les intégrales suivantes existent. Si pour tout t ∈ [0, T ], le processus Xt est la solution de
+Xt = X0 +
+∫t
+0
+b(s, Xs).s +
+∫t
+0
+σ(s, Xs) ◦ dBs
+alors Xt est le processus d’Itô solution de
+Xt = X0 +
+∫t
+0
+b(s, Xs)ds + 1
+2
+∫t
+0
+∂xσ(s, Xs)σ(x, Xs)ds +
+∫t
+0
+σ(s, Xs)dBs.
+Transformer les équations différentielles stochastiques au sens de Stratonovich en équations différentielles stochastiques au sens d’Itô et inversement. a) dXt = γXtdt + αXt ◦ dBt
+b) dXt = sin(Xt) cos(Xt)dt + (t2 + cos(Xt)) ◦ dBt c) dXt = δXtdt + βXtdBt
+d) dXt = 2 exp(−Xt)dt + X2
+t dBt où α, β, γ et δ sont des constantes.
+
+
+12 L. GOUDENÈGE
+Exercice 3.2. Calculer les solutions des équations différentielles suivantes où α, β et γ sont des constantes.
+a) dXt = αXtdt + βdBt et X0 = 1,
+b) dXt = 1
+2 γ2Xtdt + γXtdBt et X0 = 1,
+c) dXt = − Xt
+1 + t dt + 1
+1 + t dBt et X0 = 0.
+Exercice 3.3. Que dire de l’existence de solutions aux équations différentielles stochastiques suivantes ?
+a) dXt = (sin(Bt)2 − Xt)dt − 2 sin(Bt) cos(Bt)dBt et X0 = 1,
+b) dXt = 1
+3 X1/3
+t dt + X2/3
+t dBt et X0 = 1,
+c) dXt = 3 Xt
+Bt
+dBt + 3 Xt
+Bt2
+dt et X0 = 0,
+où α, β et γ sont des constantes. Exhiber une solution. Discuter de l’unicité des solutions.
+Exercice 3.4. Soit f ∈ V. On définit un processus tel que
+Xt = exp
+(∫ t
+0
+f (s, ω)dBs − 1
+2
+∫t
+0
+f (s, ω)2ds
+)
+.
+et on suppose que Xtf (t, ·) ∈ V. a) Montrer que le processus Xt vérifie l’équation différentielle stochastique
+dXt = Xtf (t, ·)dBt
+b) En déduire que Xt est une martingale par rapport à la filtration (Ft)t≥0 sur [0, T ] .
+Exercice 3.5. On se place sur l’espace des fonctions C2([0, 1]; R) avec les conditions aux bords de Dirichlet homogènes. On pose ∆ le Laplacien défini par la réalisation de l’opérateur de dérivée seconde sur cet espace. Cet opérateur possède alors une famille dénombrable de valeurs propres données par (k2π2)k∈N de vecteurs propres associés (sin(kπ))k∈N. On se place sur l’espace de dimension d engendré par (sin(kπ)k∈[1...d]. Sur cet espace le Laplacien est représenté par une matrice A diagonale. On cherche alors à résoudre l’équation différentielle stochastique suivante :
+dXt = AXtdt + IdBt
+où B est un mouvement Brownien en dimension d et I est la matrice identité. Montrer que la solution de l’équation différentielle stochastique E(A, I, x) est donnée par
+Xt = exp(tA)x +
+∫t
+0
+exp((t − s)A)dBs.
+
+
+INTRODUCTION AUX ÉQUATIONS AUX DÉRIVÉES PARTIELLES STOCHASTIQUES 13
+4. Processus de Wiener cylindrique
+Le formalisme obtenu en dimension finie semble naturellement s’adapter à la dimension infinie en passant à la limite sur la dimension d de l’espace Rd engendré par la base canonique (ek)k=1...d. De fait l’extension semble simple sur un espace possédant une “base” dénombrable. Les espaces de Hilbert séparables semblent alors être le cadre idéal. Surtout lorsqu’on pense aux espaces de Sobolev W n,p qui étaient déjà le cadre adapté aux approches variationnelles des équations aux dérivées partielles. On a donc une table d’extension :
+(ek)k=1...d → (ek)k∈N
+(7)
+Xt =
+∑
+k=1...d
+Xk
+t ek → Xt = lim
+d→+∞
+d
+∑
+k=1
+Xk
+t ek
+(8)
+Xt = (X1
+t , X2
+t ,...,Xd
+(9) t ) → Xt ∈ H
+AXt =
+∑
+k=1...d
+Xk
+t Aek =
+∑
+k=1...d
+Xk
+t (kπ)2ek → AXt = lim
+d→+∞
+d
+∑
+k=1
+Xk
+t (kπ)2ek
+(10)
+Bt = (B1
+t , B2
+t , . . . , Bd
+t ) → lim
+d→+∞
+d
+∑
+k=1
+Bk
+t ek
+(11)
+De cette table, on remarque premièrement que si la série (8) converge, il n’est rien de sûr vis-à-vis de la série (10), mais ce n’est pas le problème fondamental. Par contre la série (11) semble problématique. Si on se fixe ω ∈ Ω, alors la série converge dans H (l’espace de Hilbert engendré par la base hilbertienne orthonormée) si et seulement si
+lim
+d→+∞
+d
+∑
+k=1
+(Bk
+t (ω))2 < +∞
+pour un instant t ∈ [0, T ]. Or il est clair que E
+[d ∑
+k=1
+(Bk
+t (ω))2
+]
+=V
+[d ∑
+k=1
+Bk
+t (ω)
+]
+=
+d
+∑
+k=1
+E
+[
+(Bk
+t (ω))2]
+=
+d
+∑
+k=1
+t = d × t. Cette quantité est donc infinie lorsque d → +∞. Et
+par la loi forte des grands nombres, lorsque d → +∞ on a presque sûrement
+d
+∑
+k=1
+(Bk
+t (ω))2 ∼ d × t
+qui diverge, et la série n’a donc pas de sens dans H. Dans la suite de ce chapitre, on va introduire une manière de se représenter cette série qui porte le nom de processus de Wiener cylindrique dans H.
+4.1. Processus Gaussien isonormal. On se donne un espace de probabilité (Ω, F, P) et un espace de Hilbert séparable H doté d’un produit scalaire 〈·, ·〉H et d’une norme associée | · |H. On note (ek)k∈N une famille orthonormée complète dans H, c’est-à-dire une
+base hilbertienne orthonormée de H. On note également L2(Ω) l’ensemble des variables aléatoires réelles de carré intégrable. C’est un espace de Hilbert.
+Définition 4.1. On appelle processus Gaussien isonormal sur H la donnée d’une fonction
+W : H → L2(Ω).
+(qu’on peut voir comme un processus indexé sur H) tel que : — Pour tout n ∈ N∗, et tout (h1, . . . , hn) ∈ Hn, le vecteur de variables aléatoires (W(h1), . . . , W(hn)) est un vecteur Gaussien centré.
+
+
+14 L. GOUDENÈGE
+— Pour tout h1, h2 ∈ H, la covariance de W(h1) et W(h2) est donnée par
+E[W(h1)W(h2)] = 〈h1, h2〉H.
+Un processus Gaussien de ce type est entièrement caractérisé par sa fonction moyenne (ici identiquement nulle) et sa fonction de covariance. On parle de bruit blanc car la covariance est représentée par l’opérateur identité sur H. Voici une manière de construire un processus Gaussien isonormal sur H.
+Proposition 4.2. Soit (βk)k∈N une suite de variables aléatoires indépendantes identiquement distribuées sous la loi normale centrée réduite N (0, 1). Soit (ek)k∈N une base hilbertienne de H. On construit la fonction W sur cette base par la formule W(ek) = βk qu’on étend ensuite par linéarité à toute fonction h ∈ H par
+W:
+H → L2(Ω)
+h 7→
+∑
+k∈N
+〈h, ek〉βk.
+Alors W défini un processus Gaussien isonormal.
+Démonstration. Il est clair que la sérié tronquée est Gaussienne, et qu’il suffit de montrer que ce caractère Gaussien passe à la limite dans L2(Ω). Il est clair aussi que la moyenne de W est nulle pour tout h ∈ H car toutes les variables aléatoires sont centrées. Il reste donc à vérifier la fonction de covariance. Par polarisation, il suffit de faire le calcul de E[W(h)W(h)]. On obtient
+E[W(h)2] = E lim
+N →+∞
+∑
+1≤k,l≤N
+hkhlηkηl = lim
+N→+∞ E
+∑
+1≤k,l≤N
+hk hl ηk ηl
+= lim
+N →+∞
+∑
+1≤k,l≤N
+hk hl E[ηk ηl ]
+= lim
+N →+∞
+∑
+1≤k≤N
+(hk)2 = |h|2
+H.
+On comprend le lien fort entre un processus Gaussien isonormal et la série divergente du début du chapitre. Par exemple, à t = 1 fixé, la famille (Bk
+1 )k∈N permet de définir un processus Gaussien isonormal. Inversement, on peut construire le mouvement Brownien grâce aux processus Gaussien isonormaux de la manière suivante.
+Proposition 4.3. Soit W un processus Gaussien isonormal sur L2([0, T ]). On pose Bt = W(1[0,t]). Alors (il existe une version telle que) B = (Bt)t∈[0,T ] est un mouvement Brownien.
+Démonstration. B est évidemment Gaussien avec B(0) = 0. Il possède des incréments stationnaires et la loi de Bt est N (0, t). L’indépendance des incréments est assurée par le caractère Gaussien dès lors que la covariance des incréments est nulle. Il suffit donc de calculer sa covariance pour conclure, or
+E[BtBs] = E[W(1[0,t])W(1[0,s])] = 〈1[0,t], 1[0,s]〉L2([0,T ]) =
+∫ s∧t
+0
+du = s ∧ t.
+Cette construction est celle due à Paul Levy. On peut remarquer qu’il est naturel de définir une intégrale stochastique sous la forme
+∫T
+0
+h(t)dBt := W(h)
+
+
+INTRODUCTION AUX ÉQUATIONS AUX DÉRIVÉES PARTIELLES STOCHASTIQUES 15
+définie pour toute fonction (déterministe) h ∈ L2([0, T ]). Cette intégrale est une variable aléatoire Gaussienne qui satisfait une isométrie d’Itô sous la forme
+E
+[∣ ∣ ∣ ∣
+∫T
+0
+h(t)dBt
+∣ ∣ ∣ ∣
+2
+]
+=
+∫T
+0
+h(t)2dt.
+4.2. Bruit blanc espace-temps.
+Définition 4.4. Soit W un processus Gaussien isonormal sur H = L2([0, T ] × D). On définit
+W : [0, T ] × L2(D) → L2(Ω)
+(t, f ) 7→ W(1[0,t] ⊗ f ).
+Alors pour tout t ∈ [0, T ] fixé, √1t W (t, ·) est un processus Gaussien isonormal sur L2(D).
+On parle alors de bruit blanc en espace à t fixé.
+Proposition 4.5. Soit (ek)k∈N une base hilbertienne orthonormée de L2(D). Pour tout k ∈ N, on définit βk : t ∈ [0, T ] 7→ W (t, ek). Alors : — Les processus (βk)k∈N sont des mouvements Browniens indépendants.
+— Pour tout f =
+∑
+k∈N
+fkek ∈ L2(D), on a (presque sûrement)
+W (t, f ) =
+∑
+k∈N
+βk(t)fk.
+Démonstration. Il est clair que les βk sont des processus Gaussiens centrés car
+βk(t) = W(1[0,t] ⊗ ek)
+est Gaussienne par définition de W. Puis on a la formule de covariance espace-temps suivante. Soient k, m ∈ N et s, t ∈ [0, T ] alors
+E[βk(t)βm(s)] = E[W(1[0,t] ⊗ ek)W(1[0,s] ⊗ em)]
+= 〈1[0,t] ⊗ ek, 1[0,s] ⊗ em〉L2([0,T ]×D)
+= (t ∧ s)〈ek, em〉2
+L2(D) = (t ∧ s)δk,m.
+Par le caractère Gaussien, l’indépendance entre βk(s) et βm(t) pour k 6= m est immédiate. Il s’en suit que les processus sont indépendants. Enfin pour k = m le calcul de covariance en temps prouve que les processus sont des mouvements browniens. Sur le sousespace V ect(e1, · · · , ed) l’égalité est immédiate par linéarité de W (t, ·). On passe alors à la limite quand d → +∞ et la convergence de la série a lieu dans L2(Ω).
+On cherche toujours à construire un objet infini-dimensionnel qui serait l’extension de
+la série
+d
+∑
+k=1
+βk(t)ek lorsque d → +∞. Pour le moment on sait construire un objet à valeur
+dans L2(Ω), mais on aimerait qu’il soit à valeurs dans L2(Ω × D).
+Définition 4.6. Soit W un bruit blanc en espace sur [0, T ] × L2(D). On définit
+W (t) :=
+∑
+k∈N
+W (t, ek)ek
+le processus de Wiener sur H.
+
+
+16 L. GOUDENÈGE
+Il est clair que si l’espace L2(D) était remplacé Rd ou V ect(e1, · · · , ed). Tous les objets sont bien définis, et la série précédente converge dans l’espace. On obtient tout simplement un mouvement Brownien en dimension d, d’où encore l’appellation cylindrique. Toutefois, en dimension infinie, la série précédente est formelle car il n’y a pas convergence dans L2(D) de la série. Cette singularité peut-être levée en remarquant que la série est convergente dans n’importe quel autre espace de Hilbert  ̄H telle que l’injection i : H → H ̃ est Hilbert-Schmidt.
+Définition 4.7 (Opérateurs Hilbert-Schmidt). Soit H et H ̃ deux espace de Hilbert séparables, et L ∈ L(H, H ̃ ) un opérateur linéaire borné. On dit que L est Hilbert-Schmidt s’il existe une base hilbertienne orthonormée (ek)k∈I of H, où I ⊂ N, telle que
+∑
+k∈I
+|Lek |2
+ ̃H < +∞.
+Dans ce cas, la valeur précédente est finie pour n’importe quelle autre base hilbertienne orthonormée, et elle ne dépend pas du choix de cette base. On la note alors
+‖L‖2
+L2(H,H ̃ ) =
+∑
+k∈I
+|Lek |2
+H ̃ ,
+car elle définie une norme sur le sous espace vectoriel des opérateurs HIlbert-Schmidt noté L2(H, H ̃ ) qui en fait un espace de Hilbert.
+Les opérateurs de Hilbert-Schmidt sont fortement reliés aux opérateurs de trace finie qui jouent un rôle central dans la théorie. En effet L est Hilbert-Schmidt si et seulement si LL∗ ou L∗L sont des opérateurs de trace finie.
+Définition 4.8 (Opérateurs de trace finie). Soit T ∈ L(H, H) un opérateur linéaire. On dit qu’il est à trace finie si la quantité
+T r(T ) =
+∑
+k∈I
+〈T ek, ek〉H
+est finie. Dans ce cas, la valeur précédente est finie pour n’importe quelle autre base hilbertienne orthonormée, et elle ne dépend pas du choix de cette base.
+Le lien entre les opérateurs de trace finie, et les opérateurs de Hilbert-Schmidt est fait à travers la formule
+‖L‖2
+L2(H,H ̃ ) =
+∑
+k∈I
+|Lek |2
+H ̃ =
+∑
+n∈I
+〈Lek, Lek〉  ̃H =
+∑
+k∈I
+〈L∗Lek, ek〉H = T r(L∗L).
+En fait la trace définie un produit scalaire sur les opérateurs de trace finie, et le complété pour la norme associée est l’espace des opérateurs de Hilbert-Schmidt.
+Exemple 4.9. L’injection i : L2(D) → H−s(D) est Hilbert-Schmidt pour s > d/2.
+La série formelle définissant le bruit blanc espace W a en réalité un sens à travers un opérateur Hilbert-Schmidt. Effectivement, on peut définir l’action de cet opérateur sur le bruit blanc espace W de la manière suivante.
+Proposition 4.10. Soit L ∈ L2(H, H ̃ ), alors
+LW (t) =
+∑
+k∈I
+βk(t)Lek
+est bien définie dans L2(Ω; H ̃ ) l’ensemble des variables aléatoires de carré intégrable à valeur dans H ̃ . De plus cette quantité ne dépend pas de la base hilbertienne orthonormée choisie pour construire W .
+
+
+INTRODUCTION AUX ÉQUATIONS AUX DÉRIVÉES PARTIELLES STOCHASTIQUES 17
+Exemple 4.11. Soit h ∈ H définissant la forme linéaire
+〈h, ·〉 : H → R.
+Alors cette forme linéaire est Hilbert-Schmidt, et sa norme d’opérateur Hilbert-Schmidt est égale à ‖〈h, ·〉‖L2(H,R) = |h|H. Par suite 〈h, W (t)〉 est une variable aléatoire réelle de carré intégrable. On a l’égalité 〈h, W (t)〉 = W(t, h), et le processus de Wiener W est fortement relié au bruit blanc en espace W.
+Exemple 4.12. Soient H ⊂  ̃H telle que l’injection i : H → H ̃ soit un opérateur linéaire Hilbert-Schmidt. Alors à t fixé W (t) peut-être identifié avec i(W (t)) ∈ H ̃ , qui est bien défini par une série convergente dans H ̃ . De plus les propriétés de cet objet ne dépendent pas du choix de  ̃H et de l’injection i. Enfin, étant donné H un espace de Hilbert séparable de base hilbertienne orthonormée (ek)k∈I , il existe toujours  ̃H un espace de Hilbert séparable de base hilbertienne orthonormée (e ̃k)k∈I tel que l’injection i : H → H ̃ définie par linéarité
+avec i(ek) = 1
+k e ̃k est Hilbert-Schmidt.
+4.3. Intégrale stochastique contre un bruit blanc espace-temps. Comme on a pu le faire pour les intégrales classiques d’Itô, ou les intégrales définies pour un processus Gaussien isonormal sur L2([0, T ]), il suffit de définir une intégrale contre des processus élémentaires, et de passer ensuite à la limite à l’aide de l’isométrie.
+Proposition 4.13. Soit L : t ∈ [0, T ] 7→ L(H,  ̃H) une fonction indexée par le temps à valeur dans les opérateurs linéaires et W un processus de Wiener cylindrique sur H. Supposons que
+∫T
+0
+‖L(t)‖2
+L2(H,H ̃ )dt < +∞
+(qui est une intégrale classique au sens de Lebesgue sur R+ ∪ +∞) alors on peut définir
+∫T
+0
+L(t)dWt :=
+∑
+m∈I  ̃H
+∑
+k∈IH
+∫T
+0
+〈L(t)ek, e ̃m〉H ̃ dβk(t)e ̃m,
+où (ek)k∈IH and (e ̃k)k∈IH sont respectivement des bases hibertiennes orthonormées de H et
+ ̃H. Dans ce cas cette quantité ne dépend pas du choix des bases hilbertiennes orthonormées choisies. De plus on a l’isométrie d’Itô
+E
+[∣ ∣ ∣ ∣
+∫T
+0
+L(t)dWt
+∣ ∣ ∣ ∣
+2
+H ̃
+]
+=
+∫T
+0
+‖L(t)‖2
+L2(H,H ̃ )dt,
+ce qui prouve par l’hypothèse sur la finitude de cette quantité que l’intégrale est bien un objet à valeurs dans L2(Ω; H ̃ ).
+Démonstration. L’objet défini par la série n’implique que des quantités classiques. La série est convergente dans H ̃ . Reste à vérifier l’isométrie d’Itô en utilisant l’isométrie d’Itô contre
+
+
+18 L. GOUDENÈGE
+un mouvement Brownien en dimension 1.
+E
+[∣ ∣ ∣ ∣
+∫T
+0
+L(t)dWt
+∣ ∣ ∣ ∣
+2
+ ̃H
+]
+=
+∑
+m∈I  ̃H
+E
+
+
+∣ ∣ ∣ ∣ ∣ ∣
+∑
+k∈IH
+∫T
+0
+〈L(t)ek, e ̃m〉dβk(t)
+∣ ∣ ∣ ∣ ∣ ∣
+2
+
+
+=
+∑
+m∈I  ̃H
+∑
+k∈IH
+E
+[∣ ∣ ∣ ∣
+∫T
+0
+〈L(t)ek, e ̃m〉dβk(t)
+∣ ∣ ∣ ∣
+2
+]
+=
+∑
+m∈I  ̃H
+∑
+k∈IH
+∫T
+0
+|〈L(t)ek, e ̃m〉|2 dt
+=
+∑
+k∈IH
+∫T
+0
+|L(t)ek|2
+ ̃Hdt
+=
+∫T
+0
+‖L(t)‖2
+L2(H,  ̃H)dt.
+
+
+INTRODUCTION AUX ÉQUATIONS AUX DÉRIVÉES PARTIELLES STOCHASTIQUES 19
+5. Équations aux dérivées partielles stochastiques linéaires dirigées par un bruit blanc espace-temps
+5.1. Semi-groupe pour les équations aux dérivées partielles linéaires. Dans un cadre purement déterministe, la théorie des opérateurs permet d’établir un résultat d’existence et d’unicité de solution d’une équations aux dérivées partielles à travers des propriétés de dissipation d’énergie. Techniquement on souhaite relier la solution d’une équation aux dérivées partielles de la forme
+(12)
+{
+X′(t) = AX(t)
+X(0) = x ∈ K.
+où A est un opérateur linéaire d’un espace de Banach K, à l’existence d’un flot (S(t))t∈R+ tel que X(t) = S(t)x.
+Définition 5.1. Soit K un espace de Banach, on dit que la famille d’opérateurs (S(t))t∈R+ forme un semi-groupe fortement continu si — Pour tout t ∈ R+, S(t) ∈ L(K, K), — S(0) = IdL(K,K),
+— Pour tout s et t ∈ R+, S(t + s) = S(t)S(s), — Pour tout x ∈ K, tli→m0 S(t)x = x.
+On dit qu’il est “de contraction” lorsque ‖S(t)‖L(K,K) ≤ 1.
+D’un semi-groupe, on peut extraire un opérateur linéaire A défini sur un sous-ensemble D(A) de K qu’on appelle le domaine de l’opérateur A. C’est ce qu’on appelle le générateur infinitésimal de (S(t))t∈R+.
+Définition 5.2. Soit K un espace de Banach et (S(t))t∈R+ un semi-groupe fortement continu. On appelle générateur infinitésimal du semi-groupe, la donnée du couple (A, D(A)) telle que
+D(A) :=
+{
+x ∈ K : tli→m0
+S(t)x − x
+t existe
+}
+et
+A:
+D(A) → K
+x 7→ tli→m0
+S(t)x − x
+t
+Remarque 5.3. Lorsque A ∈ L(K, K) est donné et est tel que la série exp(tA) existe et forme un semi-groupe fortement continu, tel que D(A) = K alors le générateur infinitésimal du semi-groupe est donné par (A, D(A)). Pour cette raison, abusivement on note parfois S(t) = exp(tA).
+Théorème 5.4 (Régularité du semi-groupe). Soit K un espace de Banach et (S(t))t∈R+ un semi-groupe fortement continu de contraction avec (A, D(A)) son générateur infinitésimal, alors — Pour tout x ∈ K, le flot t 7→ S(t)x appartient à C0(R+; K). — Pour tout x ∈ D(A), le flot X : t 7→ S(t)x appartient à C1(R+; D(A)) et vérifie
+X′(t) = (S(t)x)′ = AX(t) = AS(t)x.
+Théorème 5.5 (Existence et Unicité des solutions). Soit A : D(A) ⊂ K → K un opérateur linéaire, on a l’équivalence — (A, D(A)) est le générateur infinitésimal d’un semi-groupe fortement continu, qui est de contraction. — D(A) est dense et pour toute condition initiale x ∈ D(A), il existe une unique solution X : t 7→ X(t) ∈ C1(R+; K) de l’équation (12).
+
+
+20 L. GOUDENÈGE
+De plus dans ce cas, on a X ∈ C1(R+; D(A)) et cette solution vérifie
+‖X(t)‖K ≤ ‖x‖K et ‖X′(t)‖K ≤ ‖AX(t)‖K ≤ ‖Ax‖K.
+Définition 5.6 (Opérateurs maximaux dissipatifs). Un opérateur A sur un domaine D(A) ⊂ K est dissipatif si pour tout x ∈ D(A), pour tout λ > 0, ‖x − λAx‖K ≥ ‖x‖K. S’il vérifie de plus que pour tout λ > 0, l’opérateur IdK − λA est surjectif, on dit qu’il est maximal dissipatif.
+On peut montrer plusieurs résultats associés aux opérateurs dissipatifs.
+Proposition 5.7. Soit (A, D(A)) un opérateur dissipatif, — alors pour tout λ > 0, l’opérateur IdK − λA est injectif. — S’il existe λ0 > 0, tel que l’opérateur IdK − λ0A est surjectif alors (A, D(A)) est maximal dissipatif. — Si K est un espace de Hilbert, alors c’est équivalent de montrer que pour tout x ∈ D(A), <(〈Ax, x〉) ≤ 0.
+— Si (A, D(A)) est maximal dissipatif alors IdK−λA est un isomorphisme dans L(D(A), K). On note Jλ = (IdK − λA)−1 la résolvante de A.
+Théorème 5.8 (Hille-Yosida). Soit K un espace de Banach et A ∈ L(K, K) défini sur D(A). On a l’équivalence entre — (A, D(A)) est le générateur infinitésimal d’un semi-groupe fortement continu qui est de contraction. — (A, D(A)) est maximal dissipatif à domaine D(A) dense dans K. Si K est un espace de Hilbert, la condition de densité peut être relaxée.
+On obtient directement une caractérisation des solutions d’une équation aux dérivées partielles si l’espace de Banach K est un espace de Hilbert noté H. Dès que (A, D(A)) est maximal dissipatif, alors par le théorème 5.8, il est le générateur infinitésimal d’un semigroupe de contraction. Ainsi par le théorème 5.5 pour toute condition initiale x ∈ D(A) (qui est bien dense dans H) il existe une unique solution X : t 7→ X(t) ∈ C1(R+; H) de l’équation (12). Et par le théorème 5.4 on peut l’écrire sous la forme X : t 7→ S(t)x. Cette forme s’étend naturellement à l’espace H tout entier par continuité et densité, ce qui pourrait permettre de définir une forme de solution, a priori non dérivable. Il existe également une forme de solution qu’on appelle faible et qui utilise l’adjoint de l’opérateur A.
+Définition 5.9 (Opérateur Adjoint). Soit (A, D(A)) un opérateur de L(K, K) tel que D(A) est dense dans K. On appelle opérateur adjoint la donnée du couple (A∗, D(A∗)) telle que
+D(A∗) := {ξ ∈ K′ : ∃ Cξ ∈ R+ : ∀ x ∈ D(A), 〈ξ, Ax〉K′,K ≤ Cξ‖x‖K
+}
+et
+A∗ :
+D(A∗) → K′
+ξ 7→ A∗ξ :=
+{K → R
+x 7→ 〈ξ, Ax〉K′,K
+Remarque 5.10. Notez bien que pour que cette définition soit valide, la forme linéaire A∗ξ doit bien être définie sur K tout entier. Mais pourtant l’opérateur A n’agissant que sur D(A), sa définition n’est valide que sur le sous-ensemble D(A) de K. On peut tout à fait prolonger sa définition sur K tout entier (par exemple en mettant la valeur 0 sur K \ D(A), mais on n’obtiendrait pas un prolongement adéquat). Par la définition de D(A∗) on sait que la forme linéaire A∗ξ est continue de norme Cξ, et donc on veut prolonger
+A∗ξ par continuité. C’est la condition de densité de D(A) dans K qui permet de définir un prolongement continu de A∗ξ sur K tout entier. On note abusivement ce prolongement A∗ξ et la définition devient valide.
+
+
+INTRODUCTION AUX ÉQUATIONS AUX DÉRIVÉES PARTIELLES STOCHASTIQUES 21
+On peut alors transposer l’équation (12) sous une forme faible.
+Définition 5.11 (Solution faible). Soit (A, D(A)) un opérateur de L(K, K) tel que D(A) est dense dans K. Soit X une fonction de [0, T ] à valeurs dans un espace de Banach K. On dit que X est une solution faible de l’équation (12) si pour tout instant t ∈ [0, T ] et pour tout ξ ∈ D(A∗) on a
+〈ξ, X(t)〉K′,K = 〈ξ, x〉K′,K +
+∫t
+0
+〈A∗ξ, X(s)〉K′,Kds.
+Proposition 5.12. Soit (A, D(A)) un opérateur maximal dissipatif à domaine D(A) dense dans K, et X l’unique solution régulière de l’équation (12) pour la donnée initiale x ∈ D(A). Alors X est une solution faible de l’équation (12).
+5.2. Semi-groupe pour les équations aux dérivées partielles stochastiques linéaires dirigées par un bruit blanc espace-temps. On souhaite résoudre l’équation aux dérivées partielles dans un espace de Hilbert H. Elle pourrait s’écrire sous la forme abstraite
+(13) dXt = AXtdt + dWt,
+avec une condition initiale X0 ∈ H, (W (t))t∈[0,T ] un processus de Wiener cylindrique sur H et A : D(A) ⊂ H → H un opérateur linéaire. On va supposer que A génère un semi-groupe fortement continu (S(t))t∈[0,T ], ou que l’opérateur A est maximal dissipatif. L’existence de solutions semble assurée si on sait transposer le flot des solutions avec une méthode de variation de la constante. On a la proposition suivante, qui est également une définition de la convolution stochastique.
+Proposition 5.13. Soit A : D(A) ⊂ H → H un opérateur linéaire qui génère un semigroupe fortement continu (S(t))t∈[0,T ] tel que
+(14)
+∫T
+0
+‖S(t)‖2
+L2(H,H)dt < +∞.
+alors pour tout t ∈ [0, T ] l’objet
+∫t
+0
+S(t − s)dWs
+existe dans L2(Ω; H) et est appelé convolution stochastique entre S et W , souvent noté WA.
+La proposition 5.13 semble indiquer qu’une solution existe via une méthode de variation de la constante, mais sous une forme impliquant une intégrale en temps. En effet on a la définition suivante :
+Définition 5.14 (Solution mild). Soit A : D(A) ⊂ H → H un opérateur linéaire qui génère un semi-groupe fortement continu (S(t))t∈[0,T ] tel que l’équation (14) est vérifiée. On appelle “solution mild” le processus stochastique dans H indexé par [0, T ] tel que
+Xmild :
+[0, T ] → L2(Ω; H)
+t 7→ S(t)x +
+∫t
+0
+S(t − s)dWs.
+Le terme de “solution mild” se réfère à une notion de solution un peu plus forte que la notion de solution faible classique, dont voici la définition. En français, on parle de solution intégrale ou de solution douce, mais le terme anglais “mild” est beaucoup plus usité.
+Définition 5.15 (Solution faible). Soit T ∈ R+ et (X(t))t∈[0,T ] un processus stochastique à valeur dans H, on dit que X est une solution faible de l’équation (13) si pour tout instant t ∈ [0, T ] et pour tout ξ ∈ D(A∗) on a
+〈ξ, X(t)〉 = 〈ξ, x〉 +
+∫t
+0
+〈A∗ξ, X(s)〉ds + 〈ξ, W (t)〉.
+
+
+22 L. GOUDENÈGE
+Proposition 5.16. Soit (A, D(A)) un opérateur maximal dissipatif à domaine D(A) dense dans H, et Xmild la “solution mild” de donnée initiale x ∈ D(A). Alors Xmild est aussi une solution faible de l’équation (13). De plus
+∀ t ∈ [0, T ], E‖X(t)‖2
+H=
+∫t
+0
+‖S(s)‖2
+L2(H,H)ds.
+5.3. L’équation de la chaleur stochastique en domaine borné avec des conditions de Dirichlet homogènes dirigée par un bruit blanc espace-temps. Soit D ⊂ Rn un domaine régulier (ici au moins de classe C2). On pose A la réalisation de l’opérateur Laplacien ∆ dans ce domaine avec des conditions de Dirichlet homogènes sur la frontière ∂D. On sait que A est un opérateur non borné, fermé, auto-adjoint, négatif, d’inverse compact. En particulier il existe (ek)k∈N une base hilbertienne orthonormée de l’espace de
+Hilbert L2(D), et une famille (λk)k∈N de réels positifs tels que Aek = −λkek, c’est-à-dire que pour tout k ∈ N, −λk est une valeur propre de l’opérateur A associée au vecteur propre
+ek. Le domaine de l’opérateur A est D(A) := H2(D) ∩ H1
+0(D). L’opérateur A est maximal
+dissipatif et son domaine est dense dans L2(D). En effet on a
+〈Ax, x〉 =
+∫
+D
+∆x x = −
+∫
+D
+∇x · ∇x ≤ 0
+et pour tout λ > 0 et pour tout f ∈ L2(D) il existe une unique solution dans D(A) à l’équation
+x − λAx = f
+par application du théorème de Lax-Milgram. Par le théorème 5.8, (A, D(A)) est le générateur infinitésimal d’un semi-groupe fortement continu qui est de contraction et qu’on note (S(t))t∈R+. Pour tout t ∈]0, T ] ce semi-groupe est Hilbert-Schmidt. S’il vérifie l’équation (14) alors on pourra définir la convolution stochastique entre S et W un processus de Wiener cylindrique sur L2(D). Or A = A∗ d’où S(t) = S(t)∗, ce qui amène
+∫T
+0
+‖S(t)‖2
+L2(L2(D),L2(D))dt =
+∫T
+0
+Tr(S(t)S(t)∗)dt
+=
+∫T
+0
++∞
+∑
+k=0
+exp(−2λkt)dt =
++∞
+∑
+k=0
+1 − exp(−2λkT )
+2λk
+.
+Mais on peut obtenir un équivalent des valeurs propres du Laplacien en dimension n. Cet équivalent est donné par λk ∼ Ck2/n. De fait la série précédente n’est convergente que lorsque la dimension n = 1. C’est en réalité une condition nécessaire et on a le théorème suivant
+Théorème 5.17. L’équation de la chaleur linéaire, sur un domaine borné régulier D ⊂ Rn, avec des conditions de Dirichlet homogènes sur la frontière ∂D, perturbée par un bruit blanc espace-temps additif caractérisé par un processus de Wiener cylindrique, admet une unique solution mild dans L2(D) si et seulement si la dimension de l’espace D est n = 1.
+Remarque 5.18. Lorsque la dimension n > 1, on peut plonger les solutions dans des espaces de Sobolev d’ordre négatif, via la théorie des distributions. Mais cette extension se généralise mal au cas non-linéaire.
+
+
+INTRODUCTION AUX ÉQUATIONS AUX DÉRIVÉES PARTIELLES STOCHASTIQUES 23
+6. Équations aux dérivées partielles stochastiques linéaires dirigées par un bruit blanc en temps et à trace finie en espace
+6.1. Intégrale stochastique contre une martingale dans un espace de Hilbert.
+Définition 6.1 (Crochet de martingale). Soit (Ω, F, P) un espace de probabilité équipé d’une filtration (Ft)t∈R+. Soit H un espace de Hilbert et (Mt)t∈[0,T ] une martingale conti
+nue à valeurs dans H telle que sup
+t∈[0,T ]
+E[‖Mt‖2
+H] < +∞. Alors (‖Mt‖2)t∈[0,T ] est une sous
+martingale continue et il existe un unique processus croissant continu Ft adapté à valeurs
+réelles noté (〈M 〉t)t∈[0,T ] tel que (‖Mt‖2 − 〈M 〉t)t∈[0,T ] soit une martingale. On appelle cet objet le crochet de la martingale.
+Définition 6.2 (Crochet L1). Soit (Ω, F, P) un espace de probabilité équipé d’une filtration (Ft)t∈R+. Soit H un espace de Hilbert et (Mt)t∈[0,T ] une martingale continue à valeurs dans
+H telle que sup
+t∈[0,T ]
+E[‖Mt‖2
+H] < +∞. Alors on définit Mt ⊗ Mt l’opérateur linéaire
+Mt ⊗ Mt :
+H→H
+h 7→ j−1
+(H → R
+k 7→ 〈Mt, h〉〈Mt, k〉
+)
+où j est l’isométrie depuis une réalisation du dual de H (réalisation identifiée avec H), c’est-à-dire l’application qui identifie un élément de H comme une forme linéaire sur H.
+Théorème 6.3 (Métivier-Pistone). Soit (Ω, F, P) un espace de probabilité équipé d’une filtration (Ft)t∈R+. Soit H un espace de Hilbert et (Mt)t∈[0,T ] une martingale continue
+à valeurs dans H telle que sup
+t∈[0,T ]
+E[‖Mt‖2
+H] < +∞. Alors il existe un unique processus
+croissant continu Ft adapté à valeurs dans les opérateurs linéaires de H auto-adjoints semidéfini positifs de trace finie, noté (〈〈M 〉〉t)t∈[0,T ] tel que (Mt ⊗ Mt − 〈〈M 〉〉t)t∈[0,T ] soit une martingale. De plus il existe un unique processus prévisible à valeurs dans les opérateurs linéaires de H auto-adjoints semi-défini positifs de trace finie, noté (Qt)t∈[0,T ] tel que pour tout 0 ≤ t ≤ T , on a
+〈〈M 〉〉t =
+∫t
+0
+Qsd〈M 〉s.
+Enfin T r(Qt) = 1 pour presque tout 0 ≤ t ≤ T , presque sûrement.
+Le théorème précédent permet de faire le lien entre le carré des martingales et une forme de carré d’opérateur (Mt ⊗Mt) à trace finie. En effet si on calcule la trace de ces opérateurs sur (ei)i∈N une base hilbertienne orthonormée de H, on obtient que
+T r(Mt ⊗ Mt − 〈〈M 〉〉t) =
+∑
+i∈N
+〈(Mt ⊗ Mt)ei, ei〉 − T r(〈〈M 〉〉t)
+=
+∑
+i∈N
+〈j ((Mt ⊗ Mt)ei) , ei〉H′×H − T r(〈〈M 〉〉t)
+=
+∑
+i∈N
+〈Mt, ei〉〈Mt, ei〉 − T r(〈〈M 〉〉t)
+=
+∑
+i∈N
+|〈Mt, ei〉|2 − T r(〈〈M 〉〉t)
+= ‖Mt‖2
+H − T r(〈〈M 〉〉t)
+est une martingale réelle. De fait par unicité du crochet de la martingale (Mt)t∈[0,T ] on a l’identité
+T r(〈〈M 〉〉t) = 〈M 〉t
+
+
+24 L. GOUDENÈGE
+pour tout t ∈ [0, T ] d’où l’égalité des processus
+〈M 〉t =
+∫t
+0
+T r(Qs)d〈M 〉s ou encore
+∫t
+0
+(T r(Qs) − 1)d〈M 〉s = 0,
+ce qui force bien la condition T r(Qt) = 1 pour presque tout 0 ≤ t ≤ T . Grâce à cette représentation du crochet dans L1, on peut définir une intégrale stochastique à valeurs dans H qui soit une martingale.
+Définition 6.4. Soit (Ω, F , P) un espace de probabilité équipé d’une filtration (Ft)t∈R+. Soit H un espace de Hilbert et (Mt)t∈[0,T ] une martingale continue à valeurs dans H telle
+que sup
+t∈[0,T ]
+E[‖Mt‖2
+H] < +∞. Soit (Qt)0≤t≤T son crochet L1. Soit (φt)0≤t≤T un processus
+prévisible à valeurs dans H tel que
+P
+[∫ T
+0
+〈Qtφt, φt〉d〈M 〉t < +∞
+]
+= 1,
+alors on peut définir l’intégrale stochastique de φ contre M pour tout 0 ≤ t ≤ T par la formule suivante,
+∫t
+0
+〈φs, dMs〉 := ∆lit→ m0
+∑
+j∈N
+〈
+1
+∆t
+∫ tj
+tj−1
+φsds, Mtj+1∧t − Mtj∧t
+〉
+où la limite est une limite en probabilité.
+Cette intégrale stochastique n’est encore une fois définie que comme une limite en probabilité, et elle n’est a priori pas de carré intégrable. On a la proposition suivante :
+Proposition 6.5. Soit (Ω, F , P) un espace de probabilité équipé d’une filtration (Ft)t∈R+. Soit H un espace de Hilbert et (Mt)t∈[0,T ] une martingale continue à valeurs dans H telle
+que sup
+t∈[0,T ]
+E[‖Mt‖2
+H] < +∞. Soit (Qt)0≤t≤T son crochet L1. Soit (φt)0≤t≤T un processus
+adapté à valeurs dans H tel que
+P
+[∫ T
+0
+〈Qtφt, φt〉d〈M 〉t < +∞
+]
+= 1.
+Alors le processus
+(∫ t
+0
+〈φs, dMs〉
+)
+t∈[0,T ]
+est bien défini en tant que martingale locale réelle
+continue dont le crochet vérifie
+〈∫ ·
+0
+〈φs, dMs〉
+〉
+t
+=
+∫t
+0
+〈Qsφs, φs〉d〈M 〉s.
+De plus si son crochet est intégrable, c’est-à-dire si
+E
+[∫ t
+0
+〈Qsφs, φs〉d〈M 〉s
+]
+< +∞,
+alors le processus
+(∫ t
+0
+〈φs, dMs〉
+)
+t∈[0,T ]
+est une vraie martingale qui est de carré intégrable.
+Remarque 6.6. Lorsque la martingale M n’est pas à valeur dans H mais est un processus de Wiener cylindrique sur H, alors on peut définir formellement toutes ces quantités avec l’identification formelle Q = Id, où l’opérateur identité Id n’est évidemment pas un opérateur à trace finie dans H. Les exercices de fin de chapitre mettent en lumière cette relation.
+Maintenant qu’on sait définir une intégrale stochastique, l’étape suivante concerne l’élaboration d’une formule d’itô. On a le résultat suivant :
+
+
+INTRODUCTION AUX ÉQUATIONS AUX DÉRIVÉES PARTIELLES STOCHASTIQUES 25
+Théorème 6.7 (Formule d’Itô dans H). Soit (Ω, F, P) un espace de probabilité équipé d’une filtration (Ft)t∈R+. Soit H un espace de Hilbert et (Mt)t∈[0,T ] une martingale continue
+à valeurs dans H telle que sup
+t∈[0,T ]
+E[‖Mt‖2
+H] < +∞. Soit (Qt)0≤t≤T son crochet L1. Soit
+(Xt)t∈[0,T ] un processus d’Itô à valeur dans H donné par
+Xt = X0 +
+∫t
+0
+u(s, ·)ds + Mt.
+Soit g ∈ C2(H, R) telle que pour tout opérateur Q ∈ L1 l’application
+TQ,g := H → R
+h 7→ T r(D2g[h]Q)
+soit continue, où D2g[h] est la Hessienne de g dans la direction h ∈ H, alors le processus stochastique Yt = g(Xt) est un processus d’Itô et l’on a pour tout t ∈ [0, T ] :
+Yt = Y0 +
+∫t
+0
+Dg[Xs](u(s, ·))ds +
+∫t
+0
+〈j−1(Dg[Xs]), dMs〉 + 1
+2
+∫t
+0
+T r(D2g[Xs]Qs)d〈M 〉s,
+où j est l’isométrie depuis une réalisation du dual de H (réalisation identifiée avec H), c’est-à-dire l’application qui identifie un élément de H comme une forme linéaire sur H.
+Il existe un exemple fondamental en prenant pour g la norme ‖ · ‖2
+H sur H. Dans ce cas, on obtient
+‖Xt‖2
+H = ‖X0‖2
+H+2
+∫t
+0
+〈Xs, u(s, ·)〉ds + 2
+∫t
+0
+〈Xs, dMs〉 + 〈M 〉t
+car on a bien D2g[h] = 2 Id pour tout h ∈ H, T r(Id Qs) = 1 pour tout s ∈ [0, t] pour tout t ∈ [0, T ], Dg[Xs] = (h 7→ 2〈Xs, h〉) et la condition
+∫T
+0
+〈Qtj−1(Dg[Xt]), j−1(Dg[Xt])〉 d〈M 〉t =
+∫T
+0
+〈Qt2Xt, 2Xt〉 d〈M 〉t
+=4
+∫T
+0
+〈
+Qt
+Xt ‖Xt‖H
+, Xt
+‖Xt‖H
+〉
+‖Xt‖2
+Hd〈M 〉t
+≤4
+∫T
+0
+T r(Qt)‖Xt‖2
+Hd〈M 〉t
+=4
+∫T
+0
+‖Xt‖2
+Hd〈M 〉t < +∞
+est bien vérifiée en probabilité dès que le processus (Xt)t∈[0,T ] est de carré intégrable contre le crochet de (Mt)t∈[0,T ] (attention, toutes les quantités sont bien positives ici).
+Exercice 6.1. Soit Q un opérateur linéaire auto-adjoint semi-défini positif de trace finie. Montrer que le processus défini pour tout t ∈ R+ par
+Wt =
+∑
+k∈N
+Bk
+t Q1/2ek
+est une martingale de carré intégrable dont le crochet est 〈W 〉T = T r(Q)×t, et Qt = Q
+T r(Q) .
+Exercice 6.2. Montrer que le processus de Wiener cylindrique
+Wt =
+∑
+i∈N
+Bi
+t ei
+possède formellement un crochet L1 qui est 〈〈W 〉〉T = Id × t, mais l’opérateur Id n’est pas de trace finie sur H.
+
+
+26 L. GOUDENÈGE
+Exercice 6.3. Soit (Ω, F , P) un espace de probabilité équipé d’une filtration (Ft)t∈R+. Soit H un espace de Hilbert et (Wt)t∈[0,T ] un processus de Wiener cylinrique dans H. Soit (φt)0≤t≤T un processus prévisible à valeurs dans H tel que
+P
+[∫ T
+0
+〈φt, φt〉dt < +∞
+]
+= 1.
+Montrer qu’on peut définir une intégrale stochastique de φ contre W pour tout 0 ≤ t ≤ T par la formule suivante,
+(φ · W )t :=
+(∫ t
+0
+〈φs, dWs〉
+)
+:= ∆lit→ m0
+∑
+j∈N
+〈
+1
+∆t
+∫ tj
+tj−1
+φsds, Btj+1∧t − Btj∧t
+〉
+= ∆lit→ m0
+∑
+j∈N
+lim
+d→+∞
+d
+∑
+i=1
+1
+∆t
+∫ tj
+tj−1
+〈φs, ei〉ds(Bi
+tj+1∧t − Bi
+tj ∧t)
+= lim
+d→+∞
+d
+∑
+i=1
+∫t
+0
+〈φs, ei〉dBi
+s
+où la limite est une limite en probabilité.
+6.2. Approche variationnelle des équations aux dérivées partielles linéaires. Soit A un opérateur non borné. Normalement on considère l’espace D(A) sur lequel l’opérateur est bien défini dont on suppose souvent qu’il est dense dans H . Mais ici on va utiliser une extension développée entre autres par Jacques Louis Lions. On considère un triplet de Gelfand (V, H, V ′) où V est un sous-espace de H qui est de Banach avec une inclusion continue, et V ′ son espace topologique dual. Dans ce contexte, H est alors identifié avec son dual, et on a la relation
+V ⊂ H ∼ H′ ⊂ V ′
+On considère alors l’opérateur A sur V défini par extension depuis D(A). On pose les normes associés à ces espaces sous les notations ‖ · ‖H, ‖ · ‖V et
+‖v‖V′ := sup
+u∈V,‖u‖V ≤1
+〈v, u〉V,V ′ , ∀v ∈ V ′
+On peut considérer sans perte de généralité que
+‖u‖V′ ≤ ‖u‖H ≤ ‖u‖V ∀u ∈ V
+On suppose que A vérifie l’hypothèse de coercivité suivante :
+Hypothèse 6.8 (Coercivité). ∃λ, α > 0 tels que pour tout u ∈ V
+2〈Au, u〉 + α‖u‖2
+V ≤ λ‖u‖2
+H.
+Alors on a le théorème suivant :
+Théorème 6.9. Soit A un opérateur dans Lc(V, V ′) vérifiant l’hypothèse , u0 ∈ H une donnée initiale et f ∈ L2([0, T ]; V ′). Alors l’équation
+du(t)
+dt = Au(t) + f (t)
+u(0) = u0
+admet une unique solution u ∈ L2([0, T ]; V ) qui est également dans C([0, T ], H).
+Démonstration. Pour démontrer ce théorème on va avoir besoin d’un lemme d’interpolation qui est le suivant :
+
+
+INTRODUCTION AUX ÉQUATIONS AUX DÉRIVÉES PARTIELLES STOCHASTIQUES 27
+Lemme 6.10. Si u ∈ L2([0, T ]; V ) est absolument continue à valeurs dans V ′ telle que du
+dt
+(sa “dérivée”) est également dans L2([0, T ], V ′), alors u ∈ C([0, T ]; H) et pour presque tout t ∈ [0, T ] on a
+d‖u(t)‖2
+H
+dt = 2
+〈 du(t)
+dt , u(t)
+〉
+Démontrons en premier l’unicité dans le théorème. Considérons deux solutions u1 et u2, et posons w = u1 − u2 qui vérifie l’équation
+dw(t)
+dt = Aw(t)
+w(0) = 0
+alors par le lemme d’interpolation, on a
+‖w(t)‖H =
+∫t
+0
+d‖w(s)‖2
+H
+dt ds = 2
+∫t
+0
+〈 dw(s)
+dt , w(s)
+〉
+ds
+=2
+∫t
+0
+〈Au(s) − Av(s), u(s) − v(s)〉 ds
+≤λ
+∫t
+0
+‖u(s) − v(s)‖Hds = λ
+∫t
+0
+‖w(s)‖Hds
+Le lemme de Gronwall permet de conclure que w(t) = 0 pour tout t ∈ [0, T ]. Pour l’existence, on va se ramener en dimension finie par la méthode de Galerkin. On pose (ek)k∈N une base orthonormée dans H qui est composée d’éléments de V . On définit pour tout n ∈ N le sous-espace Vn de dimension finie engendré par la famille (ek)k=1...n. Il est clair qu’en tant que système d’équations différentielles ordinaires il existe une fonction un ∈ C([0, T ], Vn) telle que pour tout k ∈ [1, n]
+d
+dt 〈un(t), ek〉 = 〈Aun(t), ek〉 + 〈f (t), ek〉
+avec 〈un(0), ek〉 = 〈u0, ek〉. Il est clair qu’on a la relation
+‖un(t)‖2
+H=
+n
+∑
+k=1
+〈u0, ek〉2 + 2
+∫t
+0
+〈Aun(s) + f (s), un(s)〉ds
+Donc on déduit par coercivité et inégalité de Young
+‖un(t)‖2
+H+ α
+2
+∫t
+0
+‖un‖V ds ≤ ‖u0‖2
+H+ 1
+α
+∫T
+0
+‖f (s)‖2
+V′ +λ
+∫t
+0
+‖un(s)‖2
+Hds
+Le lemme de Gronwall nous donne l’estimation suivante pour une certaine constante R ∈ R+ qui dépend de T, α, λ, f .
+sup
+n∈N
+[
+sup
+0≤t≤T
+‖un(t)‖2 +
+∫T
+0
+‖un(t)‖2
+V dt
+]
+≤ R < +∞
+La suite des fonctions est donc bornée uniformément et on peut en extraire une sous-suite qui converge faiblement dans L2([0, T ], V ) vers une fonction u. Puisque A est continu de V dans V ′, alors il est également continue pour la topologie faible et Aun converge faiblement vers Au. Donc u est bien solution de l’équation au sens faible. Le lemme d’interpolation assure la continuité dans H.
+
+
+28 L. GOUDENÈGE
+Remarque 6.11. Il existe un moyen de considérer des opérateurs nonlinéaires, mais il faut ajouter des hypothèses en plus de la coercivité. La première approche considère un opérateur dit monotone vérifiant la relation suivante pour une certaine constante Λ
+〈A(u) − A(v), u − v〉 ≤ Λ‖u − v‖2
+H.
+L’autre approche suppose que l’injection de V dans H est compacte, permettant d’extraire une sous-suite fortement convergente dans H.
+6.3. Équations aux dérivées partielles stochastiques non linéaires. On va suivre l’approche développée dans la section précédente dans le cas des équations aux dérivées partielles stochastiques perturbées par des martingales de carré intégrables. Comme dans le cas déterministe on va demander des hypothèses sur l’opérateur A, mais également sur les opérateurs devant le bruit qui pourraient être non-linéaires.
+Hypothèses 6.12 (Contrôle). Soit A un opérateur de V dans V ′ possiblement non linéaire. Soit (Bk)k∈N une suite d’opérateurs de V dans H possiblement non linéaires. On dit que (A, B) vérifie les hypothèses de contrôle si les opérateurs A et B vérifient les hypothèses suivantes.
+Hypothèse 6.13 (Coercivité). ∃λ, ν, α > 0 tels que pour tout u ∈ V
+2〈A(u), u〉 + ‖B(u)‖H + α‖u‖2
+V ≤ λ‖u‖2
+H+ν
+où
+‖B(u)‖H :=
+∑
+k∈N
+‖Bk(u)‖2
+H.
+Hypothèse 6.14 (Monotonie). ∃μ > 0 tel que pour tout u, v ∈ V .
+2〈A(u) − A(v), u − v〉 + ‖B(u) − B(v)‖H ≤ μ‖u − v‖2
+H
+Hypothèse 6.15 (Sous-linéarité). ∃c > 0 tel que pour tout u ∈ V
+‖A(u)‖V ′ ≤ c(1 + ‖u‖V )
+Hypothèse 6.16 (Continuité faible). Pour tout u, v, w ∈ V , la fonction Θ réelle à valeurs réelles telle que Θ(θ) : θ 7→ 〈A(u + θv), w〉 est continue.
+On souhaite résoudre l’équation aux dérivées partielles stochastiques suivante
+du = A(u)dt + B(u)dWt
+avec la donnée initiale u(0) = u0 ∈ H. Soit (Ω, F, P) un espace de probabilité équipé d’une filtration (Ft)t∈R+. Soit Q un opérateur linéaire auto-adjoint semi-défini positif de trace finie. On se donne (W k)k∈N une famille de mouvements browniens indépendants et on construit la martingale continue de carré intégrable à valeurs dans H telle que
+Mt =
+∑
+k∈N
+Wk
+t Q1/2ek
+ou par exemple un processus de Wiener cylindrique sur H. Comme on recherche des solutions dont les trajectoires sont dans L2([0, T ], V ), alors A(u) est dans L2([0, T ], V ′) ce qui permet d’utiliser une forme faible et Bk(u) est dans H ce qui permet de définir une forme linéaire Hilbert-Schmidt. On peut donc comprendre l’équation sous la forme suivante valable pour tout v ∈ V
+〈u(t), v, 〉V ′,V = 〈u0, v, 〉V ′,V +
+∫t
+0
+〈A(u(s)), v〉ds +
+∑
+k∈N
+∫t
+0
+〈Bk(u(s)), v〉dW k
+s.
+
+
+INTRODUCTION AUX ÉQUATIONS AUX DÉRIVÉES PARTIELLES STOCHASTIQUES 29
+Remarque 6.17. On peut remarquer que puisque A est à croissance sous-linéaire, la coercivité implique que B est aussi à croissance sous-linéaire. De plus, on pourrait se ramener
+au cas Λ := max(λ, μ) = 0 par la transformation exp(−Λt/2)A(exp(−Λt/2·) − Λ
+2 Id et
+exp(−Λt/2)B(exp(−Λt/2·) dont v := exp(−Λt/2)u est solution.
+Théorème 6.18. Soit (Ω, F , P) un espace de probabilité équipé d’une filtration (Ft)t∈R+. . Soit (A, B) satisfaisant les hypothèses de contrôle. Soit u0 ∈ H. Alors il existe une unique solution faible {u(t)}t∈[0,T ] qui soit un processus stochastique adapté à la filtration Ft et
+dont les trajectoires sont presque sûrement dans L2([0, T ]; V ) ∩ C([0, T ]; H).
+Démonstration. Comme dans le cas déterministe, on fait appel au lemme d’interpolation suivant :
+Lemme 6.19. Soient u0 ∈ H, et {u(t)}t∈[0,T ] et {v(t)}t∈[0,T ] deux processus adapté à la
+filtration Ft dont les trajectoires sont respectivement dans L2([0, T ]; V ) et L2([0, T ]; V ′). Soit Mt une martingale locale à valeurs dans H telle que
+u(t) = u0 +
+∫t
+0
+v(s)ds + Mt
+pour presque tout t ∈ [0, T ] alors u ∈ C([0, T ]; H) presque sûrement et on a la relation suivante presque sûrement
+‖u(t)‖2
+H = ‖u0‖2
+H+2
+∫t
+0
+〈v(s), u(s)〉ds + 2
+∫t
+0
+〈u(s), dMs〉 + 〈M 〉t
+La démonstration du lemme est quelque peu technique et sa démonstration n’est pas rappelée ici, mais il est le socle de la formule d’Itô. Démontrons maintenant l’unicité. Soient u1 et u2 deux solutions adaptées. On définit le temps d’arrêt pour tout n ∈ N
+τn := inf{tin[0, T ] : ‖u1(t)‖2
+H ∨ ‖u2(t)‖2
+H∨
+∫t
+0
+(‖u1(s)‖2
+V + ‖u2(s)‖2
+V )ds ≥ n}
+qui diverge vers +∞ lorsque n → +∞. On remarque que w(t) := u1(t) − u2(t) satisfait dans V ′
+w(t) =
+∫t
+0
+A(u1(s)) − A(u2(s))ds +
+∫t
+0
+(B(u1(s)) − B(u2(s)))dWs.
+Le dernier terme est une martingale locale notée Mt et son crochet est 〈M 〉t =
+∫t
+0
+‖B(u1(s))−
+B(u2(s))‖2
+Hds. Si on arrête la martingale au temps τn alors c’est une vrai martingale d’espérance nulle. On peut appliquer le lemme d’interpolation sur w, et prendre l’espérance pour obtenir
+E‖w(t ∧ τn)‖2
+H = 2E
+∫ τn
+0
+〈A(u1(s)) − A(u2(s)), u1(s) − u2(s)〉ds
++0+E
+∫ τn
+0
+‖B(u1(s)) − B(u2(s))‖2
+Hds.
+On applique l’hypothèse de coercivité pour obtenir
+E‖w(t ∧ τn)‖2
+H≤λ
+∫ t∧τn
+0
+‖u1(s) − u2(s)‖2
+Hds ≤ λ
+∫t
+0
+‖u1(s ∧ τn) − u2(s ∧ τn)‖2
+Hds.
+Le lemme de Gronwall assure alors l’unicité presque sûrement. On s’interroge maintenant sur l’existence en considérant la famille (ek)k∈N base orthonormée dans H composée d’éléments de V . On pose alors pour tout n ∈ N l’unique processus adapté un(t) ∈ C([O, T ]; Vn)
+
+
+30 L. GOUDENÈGE
+presque sûrement tel que
+〈un(t), ek〉 = 〈u0, ek〉 +
+∫t
+0
+〈A(un(s)), ek〉ds +
+n
+∑
+i=1
+∫t
+0
+〈Bi(u(s)), ek〉dW i
+s.
+et par la formule d’Itô, on obtient pour tout n ∈ N, pour tout k ∈ [1, n]
+〈un(t), ek〉2 = 〈u0, ek〉2 + 2
+∫t
+0
+〈A(un(s)), ek〉〈un(s), ek〉ds +
+n
+∑
+i=1
+∫t
+0
+〈Bi(u(s)), ek〉2dW i
+s
++2
+n
+∑
+i=1
+∫t
+0
+〈un(s), ek〉〈Bi(un(s)), ek〉dW i
+s.
+En sommant les équations sur l’indice k on obtient une estimation de la norme de un par la formule
+‖un(t)‖2
+H ≤ ‖u0‖2
+H+2
+∫t
+0
+〈A(un(s)), un(s)〉ds +
+n
+∑
+k=1
+n
+∑
+i=1
+∫t
+0
+〈Bi(u(s)), ek〉2dW i
+s
++2
+n
+∑
+i=1
+∫t
+0
+〈Bi(un(s)), un(s)〉dW i
+s
+≤ ‖u0‖2
+H+2
+∫t
+0
+〈A(un(s)), un(s)〉ds + 2
+n
+∑
+i=1
+∫t
+0
+〈Bi(un(s)), un(s)〉dW i
+s
++
+∫t
+0
+‖B(un(s))‖2
+Hds
+En prenant l’espérance, le terme d’intégrale stochastique disparaît et on obtient
+E‖un(t)‖2
+H ≤ E‖u0‖2
+H + 2E
+∫t
+0
+〈A(un(s)), un(s)〉ds + E
+∫t
+0
+‖B(un(s))‖2
+Hds
+ce qui fournit par l’isométrie d’Itô et par l’hypothèse de coercivité l’inégalité suivante
+E
+[
+‖un(t)‖2
+H+α
+∫t
+0
+‖un(s)‖2
+V ds
+]
+≤ E‖u0‖2
+H + λE
+∫t
+0
+‖un(s)‖2
+Hds + νt.
+Le lemme de Gronwall permet d’obtenir qu’il existe une constante R ∈ R+ dépendant de u0, λ, T, ν telle que
+sup
+n∈N
+sup
+0≤t≤T
+E‖un(t)‖2
+H ≤ R < +∞
+Et par cette première estimation, on obtient qu’il existe une constante R ∈ R+ dépendant de u0, λ, T, ν telle que
+sup
+n∈N
+E
+∫T
+0
+‖un(t)‖2
+H ≤ R < +∞
+Dans cette majoration l’espérance est mal positionnée dans la première inégalité pour obtenir des convergences ponctuelles de un qui seront nécessaire par la suite. Toutefois, partant de l’inégalité
+‖un(t)‖2
+H ≤ ‖u0‖2
+H+2
+∫t
+0
+〈A(un(s)), un(s)〉ds + 2
+n
+∑
+i=1
+∫t
+0
+〈Bi(un(s)), un(s)〉dW i
+s
++
+∫t
+0
+‖B(un(s))‖2
+Hds,
+
+
+INTRODUCTION AUX ÉQUATIONS AUX DÉRIVÉES PARTIELLES STOCHASTIQUES 31
+on peut prendre la valeur absolue et la borne supérieure en temps pour obtenir
+sup
+0≤t≤T
+‖un(t)‖2
+H ≤ ‖u0‖2
+H+2
+∫T
+0
+|〈A(un(s)), un(s)〉| ds
++ 2 sup
+0≤t≤T
+∣ ∣ ∣ ∣ ∣
+n
+∑
+i=1
+∫t
+0
+〈Bi(un(s)), un(s)〉dW i
+s
+∣ ∣ ∣ ∣ ∣
++
+∫T
+0
+‖B(un(s))‖2
+Hds
+On utilise l’inégalité de Davis-Burkholder-Gundy sur les martingales pour obtenir qu’il existe une constante c ∈ R+ telle que
+E
+[
+2 sup
+0≤t≤T
+∣ ∣ ∣ ∣ ∣
+n
+∑
+i=1
+∫t
+0
+〈Bi(un(s)), un(s)〉dW i
+s
+∣ ∣ ∣ ∣ ∣
+]
+≤ cE
+
+
+√ √ √ √
+n
+∑
+i=1
+∫T
+0
+〈Bi(un(s)), un(s)〉2ds
+
+
+≤ cE
+
+ sup
+0≤t≤T
+‖un(t)‖H
+√
+∫T
+0
+‖B(un(s))‖2ds
+
+
+≤1
+2E
+[
+sup
+0≤t≤T
+‖un(t)‖2
+H
+]
++ c2
+2E
+[∫ T
+0
+‖B(un(s))‖2ds
+]
+On obtient donc par l’hypothèse de coercivité et de croissance sous linéaire qu’il existe une constante c ∈ R+ telle que
+1
+2E
+[
+sup
+0≤t≤T
+‖un(t)‖2
+H+α
+∫T
+0
+‖un(s)‖2
+V ds
+]
+≤ ‖u0‖2
+H + cE
+[∫ T
+0
+‖un(s)‖2
+Hds
+]
++c
+≤ ‖u0‖2
+H + cR + c < +∞
+La suite un est alors bornée dans L2(Ω; C([0, T ]; H)) ∩ L2(Ω; L2([0, T ]; V )) donc les suites A(un) et B(un sont également bornées respectivement dans L2(Ω; L2([0, T ]; V ′)) et L2(Ω; L2([0, T ]; H)). On peut donc extraire par un procédé diagonal une suite un telle que
+un ⇀ u dans L2(Ω; L2([0, T ]; V )) A(un) ⇀ ξ dans L2(Ω; L2([0, T ]; V ′)) B(un) ⇀ η dans L2(Ω; L2([0, T ]; H))
+on a également que un ⇀∗ u dans L2(Ω; L∞([0, T ]; H)). Chaque terme de l’équation sous forme faible converge vers une limite, il reste donc à identifier A(u) avec ξ et B(u) avec η. On fait ici l’hypothèse que Λ = max(λ, μ) = 0 pou simplifier la démonstration. Alors on obtient pour tout v ∈ L2(Ω; L2([0, T ]; V )) et tout n ∈ N
+2E
+∫T
+0
+〈A(un(t)) − A(v(t)), un(t) − v(t)〉dt + E
+∫T
+0
+‖B(un(t)) − B(v(t))‖2
+Hdt ≤ 0
+La convergence faible assure que tous les termes ont une limite identifiable, sauf deux termes qui vérifient en réalité l’inégalité suivante
+2E
+∫T
+0
+〈ξ(t), u(t)〉dt+E
+∫T
+0
+‖η‖2
+Hdt ≤ lim inf 2E
+∫T
+0
+〈A(un(t)), un(t)〉dt+E
+∫T
+0
+‖B(un(t))‖2
+Hdt.
+Remarque 6.20. La démonstration de cette inégalité résulte de la convexité de la norme et d’une convergence ponctuelle de un(T ) vers u(T ).
+De ces deux inégalités, on obtient la majoration valable pour tout v ∈ L2(Ω; L2([0, T ]; V ))
+2E
+∫T
+0
+〈ξ − A(v(t)), u(t) − v(t)〉dt + E
+∫T
+0
+‖η − B(v(t))‖2
+Hdt ≤ 0
+
+
+32 L. GOUDENÈGE
+En choisissant v = u, on obtient directement que η = B(u). Puis en posant v(t) = u(t) − θw(t) avec θ > 0 et w ∈ L2(Ω; L2([0, T ]; V )), on obtient
+E
+∫T
+0
+〈ξ − A(u(t) − θw(t)), w(t)〉dt ≤ 0.
+Et par l’hypothèse de continuité de Θ, on déduit que
+E
+∫T
+0
+〈ξ − A(u(t)), w(t)〉dt ≤ 0
+pour tout w ∈ L2(Ω; L2([0, T ]; V )), ce qui impose ξ = A(u).
+Fédération de Mathématiques de CentraleSupélec, Saclay, France E-mail address: goudenege@math.cnrs.fr

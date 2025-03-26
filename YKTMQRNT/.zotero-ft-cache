@@ -1,0 +1,5627 @@
+Analyse Complexe : Partie I
+François DE MARÇAY
+Département de Mathématiques d’Orsay Université Paris-Sud, France
+« Celui qui enseigne une chose la connaît rarement à fond, car s’il l’étudiait à fond afin de l’enseigner, il n’aurait alors plus assez de temps disponible pour l’enseigner. »
+Jacques-Henri D’AGUESSEAU.
+z2
+v′
+2
+Ωδ′ ,ε′
+z+
+Ω′
+1
+v′
+1
+Ω′
+2
+z1
+w
+u′
+2 u′
+1
+z0
+Ω′
+0 Ω′
+0
+Ω′
+0
+z−
+Ωδ,ε
+z2
+v′
+2
+Ωδ′ ,ε′
+z+
+Ω′
+1
+v′
+1
+Ω′
+2
+z1
+w
+u′
+2 u′
+1
+z0
+Ω′
+0 Ω′
+0
+Ω′
+0
+z−
+Ωδ,ε
+
+
+Méthodologie de travail
+François DE MARÇAY
+Département de Mathématiques d’Orsay Université Paris-Sud, France
+• Polycopié de cours. Des chapitres constituant un polycopié en cours d’élaboration sont distribués régulièrement. Chaque étudiant est invité à collecter les fautes typographiques et autres défauts, puis à les présenter à l’enseignant après l’examen terminal. De nombreux exercices d’assimilation sont inclus.
+• Lecture régulière du polycopié. Afin de réussir sa formation au métier merveilleux de mathématicien — métier qui exige une grande capacité de lire, en solitaire, des textes mathématiques écrits —, chaque étudiant doit lire et étudier le polycopié. Le travail de lecture peut s’effectuer occasionnellement, même sur des courtes périodes d’une dizaine de minutes, à la maison, à la bibliothèque ou dans les transports en commun. C’est en lisant qu’on devient vraiment intelligent, car on absorbe les intelligences variées d’autres personnes sans rester confiné en soi-même, voire infiniment pire : confiné à l’abrutissement total du tripotage crétinisant de smartphone ! Tous les mathématiciens professionnels sont de grands lecteurs et savent mettre à distance la technologie ludique envahissante.
+• Assiduité au cours. Il est vrai que lire des mathématiques peut s’avérer ardu, d’autant plus que d’assez nombreux textes écrits sous-entendent beaucoup de choses et ne parviennent pas véritablement à transmettre les intuitions fondamentales. Or c’est principalement le cours oral au tableau qui permet de transmettre les idées informelles et les intuitions importantes. Aussi, lecture du polycopié et présence au cours sont-elles deux activités complémentaires et indispensables pour une préparation optimale au métier de mathématicien. De plus, on lit beaucoup plus facilement le polycopié après avoir écouté le professeur. De toute façon, une bonne prise de notes manuscrites personnelles a plus de valeur que le polycopié.
+• Prise de notes pendant les séances de cours. L’existence d’un polycopié ne dispense absolument pas de prendre des notes manuscrites complètes et soignées, car ces notes, relatives au cours intuitif, viendront compléter la lecture du polycopié écrit. Au tableau apparaîtront de nombreuses figures qui seront absentes du polycopié. Il faut donc être très respectueux des figures, qui sont de la pensée intuitive très élaborée.
+—————
+
+
+3
+Table des matières
+I. Fonctions holomorphes, Fonctions analytiques . . . . . . . . . . . . . . 5
+1. Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+2. Nombres complexes et similitudes complexes . . . . . . . . . . . . . . . . . . . . . 6
+3. Convergence . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+4. Sous-ensembles du plan complexe C . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+5. Exhaustion d’ouverts de C par des compacts . . . . . . . . . . . . . . . . . . . . . 14
+6. Fonctions holomorphes dans le plan complexe C . . . . . . . . . . . . . . . . . . 17
+7. Fonctions holomorphes comme applications R2 −→ R2 . . . . . . . . . . . 21
+8. Géométrie infinitésimale de l’holomorphie . . . . . . . . . . . . . . . . . . . . . . . 27
+9. Séries entières . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+10. Fonctions analytiques et fonctions holomorphes . . . . . . . . . . . . . . . . . . 38
+11. Principe des zéros isolés pour les fonctions analytiques . . . . . . . . . . . . 39
+12. Intégration le long de courbes γ ⊂ C . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 42
+13. Pathologies « réelles » . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47
+14. Exercices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 48
+II. Théorèmes de Cauchy et applications . . . . . . . . . . . . . . . . . . . . . . 58
+1. Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58
+2. Théorème de Goursat . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 59
+3. Existence locale de primitives et théorèmes de Cauchy dans des disques . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+63
+4. Contours élémentaires . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65
+5. Exemples de calculs d’intégrales réelles par la méthode complexe . 71
+6. Formule de représentation intégrale de Cauchy . . . . . . . . . . . . . . . . . . 74
+7. Analyticité des fonctions holomorphes et principe d’unicité . . . . . . . 77
+8. Inégalités de Cauchy et principes du maximum . . . . . . . . . . . . . . . . . . . 81
+9. Théorème de Morera et convergence uniforme sur des compacts . . 88
+10. Principe de symétrie de Schwarz . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 92
+11. Exercices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 94
+III. Homotopies, Séries de Laurent, Fonctions méromorphes . . . 101
+
+
+4
+1. Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 101
+2. Carré . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 101
+3. Concept d’homotopie . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 108
+4. Zoologie singulière . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 111
+5. Fonctions méromorphes locales . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 112
+6. Théorèmes de Laurent . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 115
+7. Singularités illusoires, polaires, essentielles . . . . . . . . . . . . . . . . . . . . . . . 119
+8. Fonctions méromorphes globales . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 123
+9. Ouverts simplement connexes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 127
+10. Exponentielle complexe et logarithme complexe . . . . . . . . . . . . . . . . . . 128
+11. Exercices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 133
+IV. Théorème des résidus et applications . . . . . . . . . . . . . . . . . . . . . . 136
+1. Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 136
+2. Raison d’être des résidus . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 136
+3. Calculs pratiques de résidus : recettes diverses . . . . . . . . . . . . . . . . . . . 138
+4. Théorème des résidus pour les contours de Jordan . . . . . . . . . . . . . . . 140
+5. Exemples de calculs d’intégrales par la méthode des résidus . . . . . . 143
+6. Indices de courbes par rapport à un point . . . . . . . . . . . . . . . . . . . . . . . . 146
+7. Théorème des résidus homologique . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 149
+8. Théorème des résidus sans connexité simple . . . . . . . . . . . . . . . . . . . . . . 152
+9. Dénombrement de zéros et de pôles . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 155
+10. Exercices . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 159
+XIII. Examens corrigés . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 160
+1. Examen 1. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 160
+2. Corrigé de l’examen 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 164
+3. Examen 2. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 172
+4. Corrigé de l’examen 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 176
+
+
+2. Nombres complexes et similitudes complexes 5
+Fonctions holomorphes, Fonctions analytiques
+Intégration le long de courbes
+François DE MARÇAY
+Département de Mathématiques d’Orsay Université Paris-Sud, France
+1. Introduction
+Ce chapitre commence par un survol rapide des propriétés algébriques élémentaires des nombres complexes, avant de présenter les concepts topologiques fondamentaux concer
+nant les sous-ensembles du plan complexe C ∼= R2. Ensuite, on définit précisément la notion-clé de fonction C-différentiable ou holomorphe, qui est l’analogue complexe de la notion de fonction réelle R-différentiable. On caractérise alors l’holomorphie par les équations dites de Cauchy-Riemann, et on démontre que les séries entières convergentes :
+∞
+∑
+n=0
+an zn (an ∈ C)
+en la variable complexe z = x + i y ∈ C sont toujours C-différentiables, i.e. holomorphes. Enfin, on définit la notion d’intégration d’une fonction le long d’une courbe γ : [0, 1] −→ C tracée dans le plan complexe C. En particulier, on démontre un premier résultat important de la théorie d’après lequel, si une fonction f = f (z) holomorphe par rapport à variable z = x + iy admet une primitive, à savoir une fonction F = F (z) dont la C-dérivée par rapport à z est exactement f , alors pour toute courbe fermée σ ⊂ C, on a :
+0=
+∫
+σ
+f (z) dz.
+Ainsi s’effectuera le tout premier pas vers la théorie magique de Cauchy, laquelle joue un rôle absolument central dans la toute belle Analyse Complexe.
+
+
+6 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+2. Nombres complexes et similitudes complexes
+Un nombre complexe prend la forme :
+z = x + i y,
+où x et y sont deux nombres réels et où i est un nombre (abstrait) satisfaisant :
+i2 = −1,
+que les mathématiciens asiatiques préfèrent noter systématiquement :
+√−1,
+mais il s’agit d’un autre continent, où l’on ne craint aucun caractère. Classiquement, on note :
+C
+l’ensemble de ces nombres.
+On appelle x la partie réelle de z et y la partie imaginaire de z :
+x = Re z,
+y = Im z.
+Les nombres réels sont donc précisément les nombres complexes dont la partie imaginaire est nulle, et les nombres purement imaginaires :
+{i y : y ∈ R},
+ceux dont la partie réelle est nulle.
+Grâce à Argand et à Gauss, on peut visualiser les nombres complexes dans le plan euclidien usuel R2 en identifiant :
+C 3 x + i y ←→ (x, y) ∈ R2.
+Par exemple, 0 ∈ C correspond à l’origine (0, 0) ∈ R2, et le nombre i = √−1 correspond au point (0, 1) ∈ R2. Naturellement, l’axe des x est appelé l’axe réel, tandis que l’axe des y est appelé l’axe imaginaire.
+z = x + i y = (x, y)
+0
+axe imaginaire
+i
+y
+1x
+axe réel
+Les règles pour additionner et pour soustraire les nombres complexes sont naturelles : il suffit de conserver en mémoire que i2 = −1. Par exemple, étant donné deux nombres complexes :
+z1 = x1 + i y1 et z2 = x2 + i y2,
+leur somme vaut :
+z1 + z2 = (x1 + x2) + i (y1 + y2),
+
+
+2. Nombres complexes et similitudes complexes 7
+et leur produit vaut :
+z1z2 = (x1 + i y1) (x2 + i y2)
+= x1x2 + i x1y2 + i y1 x2 + i2 y1y2
+= (x1x2 − y1y2) + i (x1y2 + y1x2).
+Si l’on prend ces deux expressions pour définitions de l’addition et de la multiplication, il est facile de vérifier les trois propriétés suivantes.
+• Commutativité : z1 + z2 = z2 + z1 et z1z2 = z2z1 pour tous z1, z2 ∈ C.
+• Associativité : (z1 + z2) + z3 = z1 + (z2 + z3) et (z1z2)z3 = z1(z2z3) pour tous z1, z2, z3 ∈ C.
+• Distributivité : z1(z2 + z3) = z1z2 + z1z3 pour tous z1, z2, z3 ∈ C.
+z2
+z1
+0
+z2 − z1
+z1 + z2
+Géométriquement, l’addition des nombres complexes correspond à l’addition des vecteurs dans le plan R2. La multiplication quant à elle consiste en une rotation suivie d’une dilatation, un fait qui devient intuitivement transparent une fois qu’on a introduit la forme polaire d’un nombre complexe (voir ci-dessous). À ce stade, observons au moins que la multiplication par i correspond à une rotation d’angle π
+2.
+La notion de valeur absolue d’un nombre complexe est identique à la norme euclidienne des vecteurs dans R2.
+Définition 2.1. La valeur absolue ou le module d’un nombre complexe z = x + i y est la quantité positive :
+|z| := (x2 + y2) 1
+2,
+de telle sorte que |z| est précisément la distance euclidienne entre l’origine (0, 0) et le point (x, y) ∈ R2.
+Re
+|z|
+Im
+z
+0
+Bien entendu, |z| = 0 si et seulement si z = 0, et l’inégalité du triangle est tout aussi valable :
+|z + w| 6 |z| + |w| (z, w ∈ C).
+
+
+8 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+D’autres inégalités seront aussi utiles. Pour tout z ∈ C, on a :
+∣
+∣Re z| 6 |z|,
+∣
+∣Im z| 6 |z|,
+et pour tous z, w ∈ C, on a :
+∣
+∣|z| − |w|∣
+∣ 6 |z − w|,
+ce qui découle par soustraction de l’inégalité du triangle, puisque :
+|z| 6 |z − w| + |w| et |w| 6 |z − w| + |z|.
+Définition 2.2. Le conjugué d’un nombre complexe z = x + i y est le nombre :
+z = x − i y,
+que l’on obtient géométriquement en appliquant la symétrie le long de l’axe réel du plan complexe.
+0
+z
+z
+Re
+Im
+Évidemment, un nombre complexe z est réel si et seulement si :
+z = z,
+et il est imaginaire pur si et seulement si :
+z = − z.
+On vérifie aussi sans difficulté que :
+Re z = z + z
+2,
+Im z = z − z
+2i .
+De plus :
+|z|2 = z z,
+et aussi :
+1
+z= z
+|z|2 (z 6= 0).
+Définition 2.3. Un nombre complexe quelconque z ∈ C\{0} non nul peut toujours s’écrire sous forme polaire :
+z = r ei θ,
+avec r > 0 réel égal au module |z| et θ ∈ R appelé l’argument de z, qui est défini à un multiple entier ∈ Z de 2π près, traditionellement noté :
+θ = arg z,
+
+
+3. Convergence 9
+sachant que :
+ei θ = cos θ + i sin θ,
+ei(θ+2kπ) = cos(θ + 2kπ) + i sin(θ + 2kπ)
+= cos θ + i sin θ,
+pour tout entier k ∈ Z en effet.
+Puisque |ei θ| = 1, le nombre θ est l’angle que fait la demi-droite 0z avec l’axe des réels positifs.
+0
+r
+z = r ei θ
+θ
+Enfin, notons que la multiplication entre deux nombres complexes z = r ei θ et w = s ei φ donne :
+z w = rs ei(θ+φ),
+de telle sorte que la multiplication complexe consiste toujours, géométriquement, en une homothétie composée (commutativement) avec une rotation.
+3. Convergence
+Les notions-clés de convergence et de limite permettent maintenant d’effectuer une transition appropriée.
+Définition 3.1. Une suite de nombres complexes :
+{z1, z2, z3, . . . . . . }
+est dite convergente vers un nombre complexe z∞ ∈ C lorsque :
+0 = lim
+n→∞
+∣
+∣zn − z∞
+∣
+∣.
+Cette notion de convergence n’a rien de nouveau, puisque la valeur absolue dans C s’identifie à la norme euclidienne dans R2. Ainsi, la suite de points zn = xn + i yn du plan converge vers le point z∞ = x∞ + i y∞. On vérifie en effet (exercice mental) que :
+z∞ = lim
+n → ∞ zn ⇐⇒
+(
+x∞ = lim
+n → ∞ xn et y∞ = lim
+n → ∞ yn
+)
+.
+Comme il n’est pas toujours possible de réellement identifier explicitement la limite d’une suite, comme par exemple le nombre réel fini ζ(3) = limN→∞
+∑∞ n=1
+1
+n3 dont on sait seulement qu’il est irrationnel (Apéry 1978), il est nécessaire de posséder un critère qui assure la convergence d’une suite.
+Définition 3.2. Une suite {zn}∞
+n=1 est dite être une suite de Cauchy lorsque :
+0 = lim
+n1, n2 → ∞
+∣
+∣zn2 − zn1
+∣
+∣,
+
+
+10 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+à savoir plus précisément lorsque :
+∀ ε > 0 ∃ N = N (ε) 1
+(
+n1, n2 > N =⇒ ∣
+∣zn2 − zn1
+∣
+∣6ε
+)
+.
+Une propriété fondamentale du corps R des nombres réels est qu’il est complet : toute suite de Cauchy de nombres réels admet une (unique) limite qui est un nombre réel. C’est d’ailleurs pour assurer l’existence de limites, souvent inexistantes dans le corps Q des nombres rationnels, que l’on construit R comme étant la complétion de Q, soit en idéalisant les limites de toutes les suites de Cauchy possibles, soit en utilisant la notion de coupure au sens de Dedekind.
+Bien entendu, la complétude de R est héritée par R2 =∼ C (exercice mental).
+Théorème 3.3. Le corps C des nombres complexes est complet.
+4. Sous-ensembles du plan complexe C
+Tournons maintenant notre attention vers des considérations topologiques élémentaires qui seront nécessaires à notre étude ultérieure des fonctions.
+Définition 4.1. Si z0 ∈ C est un point, pour r > 0, le disque ouvert Dr(z0) de centre z0 et de rayon r est l’ensemble :
+Dr(z0) := {z ∈ C : |z − z0| < r},
+et c’est précisément le disque géométrique euclidien (ouvert) dans R2 de centre (Re z0, Im z0) et de rayon r.
+Le disque fermé Dr(z0) de centre z0 et de rayon r > 0 est quant à lui l’ensemble :
+Dr(z0) := {z ∈ C : |z − z0| 6 r}.
+Enfin, le bord géométrique commun de deux tels disques ouvert ou fermé de rayon r > 0 est bien entendu le cercle de centre z0 et de rayon r :
+Cr(z0) := {z ∈ C : |z − z0| = r}
+= ∂ Dr(z0)
+= ∂ Dr(z0).
+Dans la théorie des fonctions holomorphes que nous allons développer et découvrir ensemble, le disque unité, à savoir le disque de rayon 1 centré à l’origine, va jouer un rôle particulièrement important, et on le notera :
+D := {z ∈ C : |z| < 1}.
+Définition 4.2. Étant donné un sous-ensemble quelconque E ⊂ C, un point z0 ∈ E est dit être un point intérieur s’il existe un disque ouvert de rayon r > 0 assez petit centré en z0 qui est contenu dans E :
+Dr(z0) ⊂ E.
+L’intérieur Int E de E est la réunion de tous les points intérieurs de E. Un sous-ensemble Ω ⊂ C est dit ouvert lorsque chacun de ses points est un point intérieur :
+∀ z0 ∈ Ω ∃ r > 0 Dr(z0) ⊂ Ω,
+ou, de manière équivalente, lorsque :
+Int Ω = Ω.
+
+
+4. Sous-ensembles du plan complexe C 11
+On se convainc aisément (exercice de compréhension) que cette définition munit C d’une topologie, ne serait-ce que parce que cette topologie coïncide avec la topologie standard de R2.
+Définition 4.3. Un sous-ensemble F ⊂ C est dit fermé lorsque son complémentaire :
+C
+∖F
+est ouvert.
+Cette notion d’ensemble fermé peut être reformulée et comprise en termes d’adhérence.
+Définition 4.4. Un point z ∈ C est dit être un point adhérent à un sous-ensemble E ⊂ C lorsqu’il existe une suite de points zn ∈ E telle que :
+lim
+n → ∞ zn = z.
+L’adhérence E de E est la réunion de E avec tous les points qui lui sont adhérents.
+On vérifie (exercice) qu’un sous-ensemble F ⊂ C est fermé si et seulement si tout point adhérent à F appartient encore à F , ou de manière équivalente, si et seulement si :
+F = F.
+Définition 4.5. Dans un ouvert Ω ⊂ C, un sous-ensemble E ⊂ Ω est dit discret lorsque :
+∀ z ∈ E ∃ Dr(z) avec r > 0 et Dr(z) ⊂ Ω
+tel que Dr(z) ∩ E = {z}.
+Définition 4.6. Le bord ∂E d’un ensemble E est le complémentaire de son intérieur dans son adhérence :
+∂E := E ∖Int E.
+Ainsi, w ∈ ∂E s’il existe deux suites {zn}∞
+n=1 avec zn ∈ E et {ζn}∞
+n=1 avec ζn ∈ C\E telles que :
+nli→m∞ zn = w = nli→m∞ ζn,
+ce qui veut dire, intuitivement, que ∂E consiste en les points qui ‘hésitent’ entre E et son complémentaire C\E.
+Définition 4.7. Un sous-ensemble E ⊂ C est dit borné s’il existe un rayon R > 0 assez grand pour que :
+E ⊂ {|z| 6 R},
+à savoir si E est contenu dans un disque fermé assez grand. Lorsque E est borné, son diamètre est défini par :
+diam E := sup
+z, w ∈ E
+|z − w|.
+Définition 4.8. Un sous-ensemble E ⊂ C est dit compact lorsqu’il est fermé et borné.
+Théorème 4.9. (Exercice de révision) Un sous-ensemble E ⊂ C est compact si et seulement si tout suite {zn}∞
+n=1 de points zn ∈ E possède une sous-suite {znk
+}∞
+k=1 qui converge
+vers un point de E.
+
+
+12 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Définition 4.10. Un recouvrement ouvert d’un sous-ensemble E ⊂ C est une famille d’ouverts (Uα
+)
+α∈A indexée par un ensemble A éventuellement quelconque dont la réunion
+contient E :
+E⊂
+⋃
+α∈A
+Uα.
+Puisque C ∼= R2, on a le :
+Théorème 4.11. [Heine-Borel] Un sous-ensemble E ⊂ C est compact si et seulement si, partant d’un recouvrement ouvert quelconque de E, on peut extraire un nombre fini d’ouverts dont la réunion recouvre encore E.
+Un autre concept intéressant est celui de suite d’ensembles emboîtés :
+E1 ⊃ E2 ⊃ E3 ⊃ · · · ,
+que nous utiliserons au début du développement de la théorie des fonctions holomorphes dans le Chapitre 2, à savoir dans la démonstration du Théorème dit de Goursat.
+Proposition 4.12. Étant donné une suite d’ensembles emboîtés compacts non vides dans C:
+K1 ⊃ K2 ⊃ K3 ⊃ · · · ,
+dont le diamètre tend vers zéro :
+0 = lim
+n → ∞ diam Kn,
+il existe un unique point z ∈ C qui appartient à tous les Kn, ou, de manière équivalente, l’intersection complète de tous les Kn se réduit à un seul point :
+{z} =
+∞
+⋂
+n=1
+Kn.
+Démonstration. Bien qu’intuitivement immédiat et connu par ailleurs, cet énoncé mérite quelques explications. Pour tout n, prenons un point au hasard zn ∈ Kn. Alors la condition de rétrécissement des diamètres assure (exercice de vérification) que toute telle suite {zn}∞
+n=1 est de Cauchy. Comme C est complet, elle admet un point-limite :
+z = lim
+n → ∞ zn,
+lequel point z appartient par construction à tous les Kn. Puisqu’une intersection quelconque de fermés reste fermée, ∩∞
+n=1 Kn est fermé, et (exercice de vérification) :
+z∈
+∞
+⋂
+n=1
+Kn.
+Maintenant, nous affirmons que le point z ainsi trouvé est forcément l’unique point satisfaisant cette propriété. En effet, si pour un autre point z′ 6= z, on avait aussi :
+z′ ∈
+∞
+⋂
+n=1
+Kn,
+alors on déduirait :
+0 < |z′ − z|
+6 diam Kn [remarquer que z ∈ Kn et que z′ ∈ Kn],
+
+
+5. Exhaustion d’ouverts de C par des compacts 13
+ce qui contredirait l’hypothèse principale.
+Définition 4.13. Étant donné un sous-ensemble E ⊂ Ω d’un ouvert Ω ⊂ C, un point z0 ∈ C est dit point d’accumulation de E lorsqu’il existe une suite {zn}∞
+n=1 d’éléments zn ∈ E distincts deux à deux qui converge vers z0.
+On démontre aisément (exercice mental) que tout point d’accumulation de E appartient à l’adhérence E de E dans C. Toutefois, l’exemple :
+E := {|z| 6 1} ⋃
+{2}
+montre qu’un point — ici 2 — peut être un point adhérent sans être un point d’accumulation.
+Définition 4.14. Un sous-ensemble quelconque E ⊂ C hérite une topologie induite par celle de C dont les ouverts sont de la forme :
+{E ∩ Ω : Ω ⊂ C ouvert},
+et dont les fermés sont de la forme :
+{E ∩ (C\Ω) : Ω ⊂ C ouvert}.
+Définition 4.15. Dans un ouvert Ω ⊂ C, étant donné un sous-ensemble quelconque E ⊂ Ω, la fermeture pour la topologie induite est :
+EΩ := EC ∩ Ω.
+Dans l’Exercice 13, on démontre que tout point adhérent à un ouvert est aussi point d’accumulation.
+Définition 4.16. Un sous-ensemble ouvert Ω ⊂ C est dit connexe lorsqu’il n’est jamais possible de le décomposer en deux sous-ensembles ouverts, disjoints et non vides :
+Ω = Ω1 ∪ Ω2.
+De manière similaire, un sous-ensemble fermé F ⊂ C est dit connexe lorsqu’il n’est jamais possible de le décomposer en deux sous-ensembles fermés, disjoints et non vides :
+F = F1 ∪ F2.
+Terminologie 4.17. Un sous-ensemble Ω ⊂ C qui est à la fois ouvert et connexe sera constamment appelé un domaine.
+Définition 4.18. Un sous-ensemble E ⊂ C est connexe par arcs lorsque deux points quelconque z1, z2 ∈ E sont toujours connectés par une courbe continue, à savoir, il existe une application continue :
+γ : [0, 1] −→ E
+telle que :
+γ(0) = z1 et γ(1) = z2.
+Dans l’Exercice 14, on démontre la :
+Proposition 4.19. Un sous-ensemble ouvert Ω ⊂ C est connexe si et seulement si il est connexe par arcs.
+
+
+14 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+5. Exhaustion d’ouverts de C par des compacts
+Soit Ω ⊂ C un ouvert arbitraire, non supposé connexe ou borné. Dans ce paragraphe, qui peut être ignoré en première lecture, nous construisons des « approximations » de Ω par des sous-ensembles emboîtés de plus en plus gros. Elles seront utiles dans certaines circonstances nécessitant de la finitude. Rappelons que la distance entre deux sous-ensembles E, F ⊂ C est le nombre appartenant à R ∪ {∞} :
+dist (E, F ) := inf
+z∈E, w∈F
+∣
+∣z − w∣
+∣.
+K`+1
+K`
+`+1 `
+0
+Ω
+C
+Théorème 5.1. Dans un ouvert Ω ⊂ C, la famille, paramétrée par un entier ` > 1, de sous-ensembles :
+K` := {z ∈ Ω : |z| 6 ` et dist (z, C\Ω)
+>1
+`
+}
+satisfait, quel que soit ` > 1 :
+(1) K` est compact ;
+(2) K` ⊂ K`+1 ;
+(3)
+Ω=
+∞
+⋃
+`=1
+K` ;
+(4) L’intérieur de K` est :
+Int K` = {z ∈ Ω : |z| < ` et dist (z, C\Ω) > 1
+`
+};
+(5) K` ⊂ Int K`+1.
+Notons que les premiers K` pour ` = 1, 2, . . . petit peuvent être vides.
+Démonstration. (1) Fixons ` > 1. La compacité de K` est une propriété intrinsèque. D’après une caractérisation connue, il s’agit de faire voir que K`, envisagé comme sousensemble de C, est borné et fermé. Comme K` ⊂ Dr(0), il est borné. Soit maintenant {zn}∞
+n=1 une suite quelconque de points zn ∈ K` qui est de Cauchy dans C, donc converge vers un certain point z∞ ∈ C. Ainsi, |zn| 6 `, puis par continuité de la norme |zn| n−→→∞ |z∞|, donc |z∞| 6 ` aussi.
+
+
+5. Exhaustion d’ouverts de C par des compacts 15
+Ensuite, pour un point w ∈ C\Ω quelconque, avec ε > 0 petit, estimons |z∞ − w| en intercalant un zn satisfaisant :
+∣
+∣z∞ − zn
+∣
+∣6ε 1
+`,
+grâce à l’inégalité triangulaire :
+∣
+∣z∞ − w∣
+∣=∣
+∣z∞ − zn + zn − w∣
+∣ > −∣
+∣z∞ − zn
+∣
+∣+∣
+∣zn − w∣
+∣
+> − ε + dist (zn, C\Ω)
+[zn ∈ K`] > − ε + 1
+`,
+et comme on peut rendre ε > 0 arbitrairement petit, il vient :
+∣
+∣z∞ − w∣
+∣> 1
+`,
+d’où puisque w ∈ C\Ω était quelconque :
+dist (z∞, C\Ω)
+>1
+`,
+ce qui donne z∞ ∈ K`, et finit de montrer que K` est fermé.
+(2) Si z ∈ K`, à savoir si |z| 6 ` et dist (z, C\Ω) > 1
+` , puisque ` < ` + 1 et 1
+`> 1
+`+1 , il
+est évidemment trivial que |z| 6 ` + 1 et que dist (z, C\Ω) > 1
+`+1 , donc z ∈ K`+1.
+(3) L’inclusion ∪`>1 K` ⊂ Ω est triviale. Inversement, soit z ∈ Ω quelconque. Tout d’abord, nous affirmons que dist (z, C\Ω) > 0. Sinon, il existerait une suite {wn}∞
+n=1 de points wn ∈ C\Ω avec :
+0 = nli→m∞
+∣
+∣z − wn
+∣
+∣,
+ce qui voudrait dire wn n−→→∞ z, et comme C\Ω est fermé, ceci impliquerait z ∈ C\Ω,
+contradiction. Alors dès qu’un entier ` > 1 est choisi assez grand pour qu’on ait simultanémenent :
+` > |z| et 1
+` 6 dist (z, C\Ω),
+on obtient z ∈ K`, ce qui établit l’inclusion inverse Ω ⊂ ∪`>1 K`.
+(4) Notons :
+ω` := {z ∈ Ω : |z| < ` et dist (z, C\Ω) > 1
+`
+}.
+On peut se convaincre que ω` est ouvert, mais cela n’est pas nécessaire.
+Assertion 5.2. ω` ⊂ Int K`.
+Preuve. Si |z| < ` et dist (z, C\Ω) > 1
+` , on peut choisir ε > 0 assez petit tel que :
+ε + |z| < ` et dist (z, C\Ω) − ε > 1
+`.
+Alors chaque point ζ du disque ouvert Dε = {ζ ∈ C : |ζ − z| < ε} satisfait :
+|ζ| 6 |ζ − z| + |z| 6 ε + |z| 6 `,
+ainsi que :
+dist (ζ, C\Ω)
+> dist (z, C\Ω) − |z − ζ|
+> dist (z, C\Ω) − ε
+>1
+`,
+ce qui veut dire que Dε(z) ⊂ K`, donc z ∈ Int K`.
+
+
+16 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+K`
+Ω
+C
+z
+z ζ w∞
+Dε (z )
+Assertion 5.3. Int K` ⊂ ω`.
+Preuve. Soit donc z ∈ Int K`. Il s’agit de faire voir deux inégalités :
+|z| <? ` et dist (z, C\Ω) >? 1
+`.
+Il existe ε > 0 assez petit tel que Dε(z) ⊂ K`, c’est-à-dire :
+∣
+∣ζ − z∣
+∣ < ε =⇒
+{ |ζ| 6 `,
+dist (ζ, C\Ω)
+>1
+`.
+(5.4)
+Traitons la première inégalité en question. Si z = 0, puisque ` > 1, on a trivialement |0| < 1. Si z 6= 0, avec δ > 0 assez petit pour que |δ z| < ε, et avec ζ := z + δ z, il vient :
+∣
+∣z + δ z∣
+∣ = (1 + δ) |z| 6 ` =⇒ |z| 6 `
+1+δ < `.
+Traitons ensuite la deuxième inégalité. Comme z ∈ K`, on sait que dist (z, C\Ω) > 1
+`.
+Supposons par l’absurde que dist (z, C\Ω) = 1
+` , c’est-à-dire qu’il existe une suite {wn}∞
+n=1
+de points wn ∈ C\Ω avec :
+∣
+∣z − wn
+∣
+∣ n−→→∞
+1
+`.
+Alors cette suite est bornée, donc après extraction d’une sous-suite, sans changer de notation, on peut supposer sa convergence :
+wn n−→→∞ w∞ ∈ C\Ω,
+vers un point qui appartient encore au fermé C\Ω. Par conséquent :
+∣
+∣z − w∞
+∣
+∣= 1
+`.
+Mais sur le segment ]z, w∞], il existe des points ζ proches et distincts de z avec |ζ −z| <
+ε, d’où :
+∣
+∣ζ − w∞
+∣
+∣= 1
+` −∣
+∣z − ζ∣
+∣,
+donc :
+dist (ζ, C\Ω) < 1
+`,
+en contradiction avec (5.4).
+(5) Grâce à la représentation de Int K` = ω` qui précède, il devient clair comme pour (2) que K` ⊂ Int K`+1.
+
+
+6. Fonctions holomorphes dans le plan complexe C 17
+6. Fonctions holomorphes dans le plan complexe C
+Prenant pour acquis qu’on sait parfaitement bien ce qu’est une fonction f = f (x) d’une variable réelle x, la question naïve originaire dont est issue la théorie des fonctions holomorphes s’exprime comme suit :
+Qu’est-ce que pourrait être une fonction de la variable complexe z ∈ C ?
+Tout d’abord, si l’on voit z = x + iy comme le point (x, y) ∈ R2 du plan, on peut commencer par une :
+Définition 6.1. Soit f : E −→ C une fonction définie sur un sous-ensemble E ⊂ C, et soit z0 = x0 + i y0 ∈ E. On dit que f est continue en z0 si, pour tout ε > 0, il existe un δ > 0 tel que :
+(
+z ∈ E et ∣
+∣(x, y) − (x0, y0)∣
+∣6δ
+)
+=⇒
+(∣
+∣f (x, y) − f (x0, y0)∣
+∣6ε
+)
+.
+De manière équivalente (exercice), f est continue en z0 si pour toute suite
+{zn
+}∞
+n=1 = {xn + i yn
+}∞
+n=1
+de points zn ∈ E telle que zn −→ z0 quand n −→ ∞, on a aussi :
+f (x0, y0) = lim
+n → ∞ f (xn, yn).
+Définition 6.2. Une fonction f : E −→ C est dite continue sur E lorsqu’elle est continue en tout point z0 ∈ E.
+On vérifie (exercice de révision) que les sommes et les produits de fonctions continues sont toujours encore continues.
+Puisque les notions de convergence dans C et dans R2 coïncident, observons que nous avons compris — et c’est important — qu’une fonction :
+f = f (x, y)
+est continue si elle l’est en tant que fonction de ses deux arguments réels (x, y) ∈ E ⊂ R2. D’une certaine manière, donc, dans l’écriture et dans la définition d’une fonction continue :
+f = f (z) = f (x + i y),
+il faut bien avoir à l’esprit que la fonction f ne dépend pas « de z », mais bien des deux variables réelles (x, y).
+Qui plus est, comme la fonction f est supposée être aussi à valeurs dans C ∼= R2, elle possède en fait tout aussi bien une partie réelle et une partie imaginaire :
+f = u + i v,
+de telle sorte que la fonction doit être plus rigoureusement représentée par :
+f : R2 ⊃ E −→ C ∼= R2
+(x, y) 7−→ (u(x, y), v(x, y)).
+Grâce à l’inégalité du triangle, on vérifie immédiatement que si f est continue, alors la fonction :
+(x, y) 7−→ ∣
+∣f (x, y)∣
+∣
+est elle aussi continue, puisque en effet il s’agit de :
+(x, y) 7−→ √u(x, y)2 + v(x, y)2.
+
+
+18 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Définition 6.3. On dit qu’une fonction :
+f : E −→ C
+atteint un maximum en un point (x+, y+) ∈ E si :
+|f (x, y)| 6 |f (x+, y+)|,
+pour tout (x, y) ∈ E. De même, elle atteint un minimum en un point (x−, y−) ∈ E si :
+|f (x, y)| > |f (x−, y−)|,
+pour tout (x, y) ∈ E.
+Un cas particulier d’un théorème connu de topologie générale valable par exemple dans les espaces métriques est le :
+Théorème 6.4. Une fonction continue sur un sous-ensemble compact K ⊂ C est toujours bornée et elle atteint toujours un maximum sur K, ainsi qu’un minimum sur K.
+Maintenant, puisque la notion de fonction continue de (x, y) ne répond visiblement pas à la question : « qu’est-ce qu’une fonction de z ? », présentons enfin la définition absolument fondamentale dont part toute la théorie, définition qui formule, en analogie complète avec la notion de dérivabilité sur R, un concept (nouveau) de fonction dérivable par rapport à z. À partir de maintenant, on s’autorisera à écrire :
+f (z) = f (x + i y) = f (x, y),
+pour représenter une fonction des deux variables réelles (x, y), de différentiabilités variées C 0, C 1, C 2, . . ., C ∞.
+Définition 6.5. Soit Ω ⊂ C un sous-ensemble ouvert, soit :
+f : Ω −→ C
+une fonction continue et soit un point z0 ∈ Ω. On dit que f est holomorphe en z0 si le quotient :
+f (z0 + h) − f (z0)
+h
+converge vers une limite lorsque le nombre complexe h ∈ C∗ est non nul et tend vers 0.
+0h
+Ici, la subtilité encore invisible — à suivre . . . suspense ! —, c’est que h ∈ C varie dans un ensemble 2-dimensionnel de type disque (épointé) autour de 0. Bien entendu, on a z0 + h ∈ Ω pour h assez petit puisque Ω est ouvert. Lorsqu’elle existe, la limite de ces quotients est alors notée :
+f ′(z0) := hli→m0
+f (z0 + h) − f (z0)
+h
+
+
+6. Fonctions holomorphes dans le plan complexe C 19
+Exemple 6.6. Bien que continue, la fonction f (z) = z, ou plus précisément, la fonction :
+(x, y) 7−→ x − i y
+n’est pas holomorphe, puisque en effet si on représente h = ε eiθ avec ε > 0 petit :
+f (z0 + h) − f (z0)
+h = z0◦ + h − z0◦
+h
+=h
+h
+= ε e−i θ
+ε ei θ = e−2i θ,
+et il est manifeste que les nombres complexes e−2i θ, tous de module 1, n’ont pas de limite lorsque h, à savoir lorsque ε = |h|, tend vers 0 !
+Ce (contre-) exemple montre à merveille, donc, que la condition h −→ 0 est de nature 2-dimensionnelle : le module de h tend vers 0, mais h peut aussi tourner, spiraler, vriller autour de 0.
+Exemple 6.7. La fonction ‘identité’ f (z) = z est quant à elle holomorphe :
+f (z0 + h) − f (z0)
+h = z0◦ + h − z0◦
+h =h
+h = 1,
+de dérivée identiquement égale à 1, heureusement !
+Définition 6.8. Une fonction continue f : Ω −→ C définie sur un ouvert Ω ⊂ C est dite holomorphe dans Ω lorsqu’elle est holomorphe en tout point z0 ∈ Ω.
+Notation 6.9. L’ensemble des fonctions holomorphes dans Ω sera noté :
+O (Ω).
+Ainsi, la définition de fonction holomorphe imite celle de fonction réelle dérivable, en remplaçant simplement la variable réelle x par la variable complexe z = x + i y. Il y a donc là une ressemblance initiale qui semblerait faire croire que les deux théories sont très proches l’une de l’autre, mais tel n’est absolument pas le cas ! En fait, les fonctions holomorphes vont satisfaire des propriétés beaucoup plus harmonieuses que les fonctions dérivables, quasiment ‘féériques’, Par exemple, on va démontrer que les fonctions holomorphes sont en fait indéfiniment dérivables : une seule dérivée entraîne l’existence de toutes les autres dérivées d’ordre 2, 3, 4, 5, etc. ! Mais la magie de l’holomorphie ne s’arrête pas là. On démontrera même — au début de la théorie, et avec des arguments simples ! — que toute fonction holomorphe est en fait analytique, c’est-à-dire développable sous forme d’une série entière :
+f (z) =
+∞
+∑
+n=0
+f (n)(z0)
+n!
+(z − z0
+)n,
+qui converge — par exemple grâce au critère de Cauchy — pour tout z ∈ Dr(z0) appartenant à un disque ouvert non vide assez petit Dr(z0) ⊂ Ω. Une telle propriété de développement en série de Taylor convergente contraste alors de manière spectaculaire avec les fonctions réelles f = f (x) de classe C 1, puisqu’il existe
+
+
+20 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+bien sûr de telles fonctions qui n’admettent pas de dérivée continue d’ordre 2 — penser à une primitive de x 7−→ |x|. On démontre aussi qu’il existe des fonctions réelles f = f (x) de classe C ∞ qui ne sont développables en série entière convergente autour d’aucun point x0 : l’Exercice 45 traite le cas d’un seul tel mauvais point x0.
+Exemple 6.10. Tout polynôme :
+p(z) = a0 + a1 z + · · · + an zn (ak ∈ C)
+est holomorphe sur C tout entier. En effet, il suffit par linéarité d’examiner si pour k ∈ N la fonction :
+z 7−→ zk
+admet des dérivées en des z0 ∈ C quelconques, mais la formule du binôme de Newton fait voir que le numérateur est multiple de h :
+(z0 + h)k − zk
+0
+h=
+(z0)k
+◦+ k
+1 (z0)k−1 h + k(k−1)
+1·2 (z0)k−2 h2 + · · · + hk − (z0)k
+◦
+h = k (z0)k−1 h◦ + O(h2)
+h◦
+= k (z0)k−1 + O(h),
+ce qui donne comme valeur de la dérivée :
+k (z0)k−1.
+Une autre famille importante d’exemples de fonctions holomorphes est constituée des séries entières convergentes :
+∞
+∑
+n=0
+an
+(z − z0
+)n.
+Cette famille contient les fonctions trigonométriques classiques dans lesquelles on a remplacé la variable réelle x par z :
+ez =
+∞
+∑
+n=0
+1
+n! zn,
+sin z =
+∞
+∑
+n=0
+(−1)n 1
+(2n + 1)! z2n+1,
+cos z =
+∞
+∑
+n=0
+(−1)n 1
+(2n)! z2n,
+fonctions qui jouent un rôle crucial dans la théorie.
+En revenant maintenant à la définition fondamentale, il est clair qu’une fonction f est holomorphe en un point z0 ∈ Ω si et seulement si il existe un nombre complexe a ∈ C tel que :
+f (z0 + h) − f (z0) − a h = h o(h),
+où o(h) est une fonction-reste satisfaisant :
+0 = hli→m0 o(h).
+
+
+7. Fonctions holomorphes comme applications R2 −→ R2 21
+Bien entendu, on a ici :
+a = f ′(z0).
+Par là, il suit que toute fonction holomorphe en un point z0 est continue en ce point. On laisse au lecteur le soin de mettre au point une démonstration de l’énoncé élémentaire suivant, tout à fait analogue à celui qui lui correspond dans la théorie des fonctions réelles.
+Proposition 6.11. Si f ∈ O(Ω) et g ∈ O(Ω) sont deux fonctions holomorphes dans un ouvert Ω ⊂ C, alors :
+(i) leur somme f + g est aussi holomorphe dans Ω avec :
+(f + g)′ = f ′ + g′;
+(ii) leur produit f g est holomorphe dans Ω avec :
+(f g)′ = f ′ g + f g′;
+(iii) lorsque g(z0) 6= 0, le quotient f /g est holomorphe en z0 avec :
+(f
+g
+)′
+= f′ g − f g′
+g2 ;
+(iv) lorsque, de plus, ces deux fonctions peuvent être composées, à savoir lorsque :
+f : Ω −→ Ω1,
+g : Ω1 −→ C,
+la composition g ◦ f est holomorphe en tout point z ∈ Ω avec :
+(g ◦ f )′(z) = g′(f (z)) f ′(z).
+Par exemple, la fonction :
+C∗ 3 z 7−→ 1
+z ∈ C∗
+est holomorphe.
+7. Fonctions holomorphes comme applications R2 −→ R2
+Il est grand temps de mieux approfondir les relations entre la dérivée complexe dont jouissent les fonctions holomorphes, et leurs dérivées partielles au sens réel comme applications de R2 à valeurs dans R2. En fait, on a déjà mis en exergue (pour anticipation théorique alléchante. . .) le fait que la notion de différentiabilité au sens complexe diffère de manière très significative de la notion de différentiabilité au sens réel. L’exemple de la fonction simple :
+z 7−→ z,
+à savoir de l’application :
+(x, y) 7−→ (x, − y)
+fait voir tout le paradoxe, puisqu’elle est visiblement affine, donc C 1, donc C ∞, mais pas holomorphe ! Ce (contre-) exemple montre alors que l’existence de dérivées partielles par rapport à x et par rapport à y ne garantit pas que f soit holomorphe, et en fait, nous allons voir dans un instant que les fonctions holomorphes ont des relations très spéciales entre leurs dérivées partielles.
+
+
+22 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Définition 7.1. Rappelons pour commencer qu’une fonction de R2 dans R2 :
+F (x, y) = (u(x, y), v(x, y))
+est dite différentiable en un point P0 = (x0, y0) ∈ R2 lorsqu’il existe une application linéaire :
+J : R2 −→ R2
+telle que :
+0 = Hli→m0
+(∣
+∣F (P0 + H) − F (P0) − J(H)∣
+∣
+|H |
+)
+,
+la notation | · | désignant la norme euclidienne standard dans R2.
+De manière équivalente, on peut écrire :
+F (P0 + H) − F (P0) = J(H) + |H| o(H),
+où o(H) est une fonction-reste qui tend vers zéro (en norme) lorsque H −→ 0. L’application linéaire J est alors unique (exercice de révision), et elle est appelée la différentielle de F au point P0.
+On se rappelle alors que l’on démontre en cours de calcul différentiel que les deux dérivées partielles des deux composantes (u, v) = F par rapport aux variables x, y existent au point (x0, y0), et que la transformation linéaire J est décrite dans la base standard de R2 par la matrice jacobienne de F :
+J = JacF (x0, y0) =
+( ∂u ∂x
+∂u ∂y
+∂v ∂x
+∂v ∂y
+)
+(x0, y0).
+Ainsi la différence est-elle de taille : dans le cas d’une fonction holomorphe, la dérivée est un nombre complexe f ′(z0), tandis que dans le cas d’une application différentiable R2 −→ R2, la différentielle est une matrice 2 × 2.
+Toutefois, il y a un lien fort entre ces deux notions, lequel consiste en des relations spéciales qui sont satisfaites par la matrice jacobienne associée à une fonction holomorphe f : C −→ C lorsqu’on la voit comme application R2 −→ R2. Afin de trouver ces relations, posons :
+h := h1 + i h2,
+et dans le quotient f(z0+h)−f(z0)
+h qu’on doit examiner pour tester l’holomorphie, posons aussi :
+f := f (x, y),
+z0 := x0 + i y0,
+et observons sans effort qu’en prenant h := h1 (avec h2 = 0), si la fonction est holomorphe en z0, alors nécessairement :
+f ′(z0) = lim
+h1 → 0
+f (x0 + h1, y0) − f (x0, y0)
+h1
+= ∂f
+∂x (x0, y0) [par définition !].
+
+
+7. Fonctions holomorphes comme applications R2 −→ R2 23
+Mais puisqu’il n’y a aucune raison de prendre h réel dans la limite, prenons aussi h = i h2 (avec h1 = 0), ce qui donne :
+f ′(z0) = lim
+h2 → 0
+f (x0, y0 + h2) − f (x0, y0)
+i h2
+=1
+i
+∂f
+∂y (x0, y0) [à nouveau par définition !].
+Ces deux expressions étant égales, on obtient :
+∂f
+∂x (x0, y0) = − i ∂f
+∂y (x0, y0).
+Maintenant, en décomposant f = u + iv en parties réelle et imaginaire, cette dernière équation dit précisément que :
+∂u
+∂x + i ∂v
+∂x = − i
+(∂u
+∂y + i ∂v
+∂y
+)
+,
+puis en identifiant les parties réelle et imaginaire, nous obtenons un résultat fondamental.
+Théorème 7.2. Sur un ouvert Ω ⊂ C, les deux conditions suivantes sont équivalentes :
+(i) une fonction f : Ω −→ C de classe C 1 est holomorphe ;
+(ii) les parties réelle u et imaginaire v de :
+f (x, y) = u(x, y) + i v(x, y)
+sont de classe C 1 et satisfont les équations dites de Cauchy-Riemann :
+∂u
+∂x = ∂v
+∂y , ∂u
+∂y = − ∂v
+∂x.
+Démonstration. Le sens direct venant d’être vu, supposons réciproquement que ces deux équations aux dérivées partielles sont effectivement satisfaites par u et v. En un point quelconque (x, y) ∈ Ω, pour h = h1 + i h2 petit, écrivons à cette fin :
+u
+(x + h1, y + h2
+) − u(x, y) = ∂u
+∂x h1 + ∂u
+∂y h2 + o(h),
+v
+(x + h1, y + h2
+) − v(x, y) = ∂v
+∂x h1 + ∂v
+∂y h2 + o(h),
+
+
+24 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+où o(h) est une fonction-reste qui satisfait 0 = limh→0
+o(h)
+h . Grâce aux équations de CauchyRiemann, on peut alors transformer :
+f (z + h) − f (z) = u(z + h) − u(z) + i [v(z + h) − v(z)]
+= u(x + h1, y + h2
+) − u(x, y) + i
+[
+v
+(x + h1, y + h2
+) − v(x, y)
+]
+= ∂u
+∂x h1 + ∂u
+∂y h2 + i
+[∂v
+∂x h1 + ∂v
+∂y h2
+]
++ o(h)
+= ∂u
+∂x h1 + ∂u
+∂y h2 + i
+[
+− ∂u
+∂y h1 + ∂u
+∂x h2
+]
++ o(h)
+=
+(∂u
+∂x − i ∂u
+∂y
+)
+[h1 + i h2
+] + o(h),
+et cette dernière expression montre que f est holomorphe au point z = x + i y avec une dérivée complexe égale à ce qu’il faut :
+hli→m0
+f (z + h) − f (z)
+h = hli→m0
+{ ( ∂u
+∂x − i ∂u
+∂y
+)[h1 + i h2
+] + o(h)
+h1 + i h2
+}
+= ∂u
+∂x − i ∂u
+∂y [La limite existe donc bel et bien !]
+=: f ′(z).
+Une application supplémentaire des équations de Cauchy-Riemann fournit aussi de manière analogue :
+i
+[∂v
+∂x − i ∂v
+∂y
+]
+= ∂u
+∂x − i ∂u
+∂y
+= f ′(z),
+d’où en prenant la demi-somme de ces deux expressions égales :
+f ′(z) = 1
+2
+{∂u
+∂x − i ∂u
+∂y + i
+[∂v
+∂x − i ∂v
+∂y
+]}
+=1
+2
+(∂
+∂x − i ∂
+∂y
+)
+[u + i v].
+C’est précisément dans un tel calcul naturel qu’on voit donc apparaître un opérateur de différentiation qui est central dans toute la théorie.
+Définition 7.3. L’opérateur de différentiation par rapport à z est défini formellement par :
+∂
+∂z := 1
+2
+(∂
+∂x − i ∂
+∂y
+)
+,
+et l’opérateur conjugué de différentiation par rapport à la variable complexe conjuguée z est défini par :
+∂
+∂z := 1
+2
+(∂
+∂x + i ∂
+∂y
+)
+.
+
+
+7. Fonctions holomorphes comme applications R2 −→ R2 25
+Ainsi avec ces notations, le résultat qui précède s’interprète en disant que pour une fonction holomorphe en un point z0, la quantité f ′(z0) n’est autre que la dérivée de f par rapport à z au point z0 :
+f ′(z0) = ∂f
+∂z (z0).
+Théorème 7.4. Sur un ouvert Ω ⊂ C, une fonction f de classe C 1 est holomorphe si et seulement si sa dérivée par rapport à z est identiquement nulle :
+∂f
+∂z ≡ 0.
+Démonstration. En effet, si l’on passe aux parties réelle et imaginaire, l’équation :
+0≡ 1
+2
+(∂
+∂x + i ∂
+∂y
+)
+[u + i v]
+équivaut (exercice visuel) aux équations de Cauchy-Riemann.
+Ainsi, les fonctions holomorphes sont-elles celles qui ne dépendent pas de z. Plus rigoureusement, toute fonction des deux variables (x, y) :
+f = f (x, y)
+=f
+(z + z
+2 , z−z
+2i
+)
+peut naturellement être aussi vue comme une fonction des deux variables :
+(z, z).
+Fonctions holomorphes = Fonctions indépendantes de z.
+Proposition 7.5. Toujours pour une fonction holomorphe quelconque :
+f : Ω −→ C,
+si on note de manière abrégée l’application sous-jacente Ω −→ R2 :
+F (x, y) := (u(x, y), i v(x, y)),
+ayant pour matrice jacobienne :
+JacF (x, y) =
+( ∂u ∂x
+∂u ∂y
+∂v ∂x
+∂v ∂y
+)
+.
+alors le déterminant jacobien de F vaut en tout point z ∈ Ω :
+det JacF (x, y) = ∣
+∣f ′(z)∣
+∣
+2.
+Démonstration. En utilisant les équations de Cauchy-Riemann, on obtient que l’action de la matrice jacobienne sur un (petit) vecteur :
+H :=
+( h1
+h2
+)
+
+
+26 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+vaut :
+JacF (H) =
+( ∂u ∂x
+∂u ∂y
+∂v ∂x
+∂v ∂y
+)
+( h1
+h2
+)
+=
+(∂u
+∂x h1 + ∂u
+∂y h2, ∂v
+∂x h1 + ∂v
+∂y h2
+)
+=
+(∂u
+∂x − i ∂u
+∂y
+)
+[h1 + i h2
+]
+= f ′(z) h.
+Une deuxième et dernière application des équations de Cauchy-Riemann permet de calculer :
+det JacF = det
+( ∂u ∂x
+∂u ∂y
+∂v ∂x
+∂v ∂y
+)
+= ∂u
+∂x
+∂v
+∂y − ∂u
+∂y
+∂v
+∂x
+=
+(∂u
+∂x
+)2
++
+(∂u
+∂y
+)2
+=
+∣ ∣ ∣ ∣
+2 ∂u
+∂z
+∣ ∣ ∣ ∣
+2
+=
+∣
+∣f ′(z0)∣
+∣
+2.
+Quand nous écrivons f (z) pour une fonction définie dans un ouvert Ω ⊂ C, l’écriture n’est réellement rigoureuse que lorsque f est holomorphe, auquel cas f est bien une fonction de z, et en général, pour une fonction qui n’est que de classe C 1 dans Ω, la rigueur notationnelle exigerait d’écrire f (x, y). Toutefois, nous admettrons parfois l’écriture abusive f (z) dans le cas où f n’est pas holomorphe.
+Proposition 7.6. Étant donné une application γ : [a, b] −→ Ω de classe C 1 définie sur un segment réel avec −∞ < a < b < ∞, décomposée en γ(t) = γ1(t) + i γ2(t), à valeurs dans un ouvert Ω ⊂ C, pour toute fonction f : Ω −→ C de classe C 1, la composée :
+f
+(γ(t)) = f (γ1(t), γ2(t))
+a pour dérivée :
+d
+dt
+[f (γ(t))] = ∂f
+∂z
+(γ(t)) γ′(t) + ∂f
+∂z
+(γ(t)) γ′(t).
+En particulier, quand f est holomorphe :
+d
+dt
+[f (γ(t))] = f ′(γ(t)) γ′(t).
+
+
+8. Géométrie infinitésimale de l’holomorphie 27
+Preuve. En effet, en remplaçant bêtement ∂
+∂x = ∂
+∂z + ∂
+∂z ainsi que ∂
+∂y = i ( ∂
+∂z − ∂
+∂z
+), nous obtenons bien : d
+dt
+[f (γ(t))] = ∂f
+∂x
+(γ(t)) γ′
+1(t) + ∂f
+∂y
+(γ(t)) γ′
+2(t)
+=
+[∂f
+∂z
+(γ(t)) + ∂f
+∂z
+(γ(t))
+]
+γ′
+1(t) + i
+[∂f
+∂z
+(γ(t)) − ∂f
+∂z
+(γ(t))
+]
+γ′
+1(t)
+= ∂f
+∂z
+(γ(t)) [γ′
+1(t) + i γ′
+2(t)] + ∂f
+∂z
+(γ(t)) [γ′
+1(t) − i γ′
+2(t)].
+8. Géométrie infinitésimale de l’holomorphie
+Localement, dans un voisinage infinitésimal d’un point de référence, toute application différentiable est bien approximée par son application tangente, c’est-à-dire par son développement de Taylor à l’ordre 1. Pour des applications R2 −→ R2 de classe C 1, on a alors affaire à des applications linéaires (x, y) ∈ R2 −→ R2 3 (x′, y′) de la forme :
+x′ = a x + b y,
+y′ = c x + d y,
+avec 4 constantes réelles arbitraires a, b, c, d ∈ R. Or de telles applications sont très différentes des applications C-linéaires z ∈ C −→ C 3 z′, qui sont de la forme :
+z′ = α z,
+avec 1 constante complexe arbitraire α = a + ib ∈ C, puisqu’en écriture réelle :
+x′ + i y′ = (a + ib) (x + iy) = ax − by + i (bx + ay),
+cela revient à avoir une matrice 2 × 2 spéciale incorporant seulement 2 constantes réelles
+arbitraires :
+x′ = a x − b y,
+y′ = b x + a y.
+Rappelons qu’en coordonnées polaires, avec α = s eiφ, s ∈ R∗
++, φ ∈ R, et en représentant z = r eiθ, la multiplication complexe :
+z′ = s eiφ r eiθ = s r ei(φ+θ)
+fait voir que la transformation géométrique consiste en une homothétie de rapport positif s = |α| suivie d’une rotation d’angle φ = arg α, ces deux transformations étant d’ailleurs commutatives. De telles transformations avec α 6= 0 sont appelées similitudes directes puisqu’elles préservent l’orientation.
+Ω
+z0 +h
+I
+Dr (z0 )
+z0
+f (·)
+z0 +r
+φ
+f (z0 +r)
+f (z0)+f ′(z0)I
+f
+(Dr (z0))
+f (z0)
+f (z0 +h) f (z0)+f ′(z0)·
+C
+D|f ′(z0)|r
+(f (z0))
+
+
+28 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Si donc nous reformulons la C-dérivabilité en un point z0 ∈ Ω d’une fonction f : Ω −→ C comme :
+f (z0 + h) = f (z0) + f ′(z0) h + o(h),
+où o(h) désigne une fonction-reste à valeurs dans C satisfaisant 0 = limh→0
+o(h)
+h , alors nous devons nous imaginer que pour r > 0 assez petit et pour tout |h| < r, la fonction f est bien approximée par son développement à l’ordre 1 :
+f (z0 + h) ≈ f (z0) + f ′(z0) h,
+lequel est une fonction complexe-affine de h ayant pour partie linéaire la simple similitude :
+h 7−→ f ′(z0) h.
+L’image par cette similitude du disque ‘infinitésimal’ centré en z0 :
+Dr(z0) := {h ∈ C : |h − z0| < r}
+est donc le disque ‘infinitésimal’ centré en f (z0) de rayon |f ′(z0)| r :
+D|f ′(z0)| r
+(f (z0)) := {k ∈ C : |k − f (z0)| < |f ′(z0)| r},
+lequel approxime bien l’image véritable f (Dr(z0)).
+θ
+Ω
+γ′(0) f
+γ f′
+z0
+χ
+χ′ (0)
+f ′(z0)γ′(0)
+f (z0)
+θ
+f ◦χ
+f ′(z0)χ′(0)
+f ◦γ
+C
+Comme les similitudes, les fonctions holomorphes conservent les angles entre paires de courbes.
+Observation 8.1. Si une fonction f ∈ O(Ω) est holomorphe dans un ouvert Ω ⊂ C, alors en tout point z0 ∈ Ω où f ′(z0) 6= 0 et pour toute paire de courbes C 1 locales passant par z0 et de vecteurs tangents non nuls :
+γ : [−1, 1] −→ Ω, γ(0) = z0, γ′(0) 6= 0,
+χ : [−1, 1] −→ Ω, χ(0) = z0, χ′(0) 6= 0,
+on a :
+Angle (γ′(0), χ′(0)) = Angle ((f ◦ γ)′(0), (f ◦ χ)′(0)).
+Démonstration. En effet, la formule de dérivation composée de la Proposition 7.6 puis la similitude h 7−→ f ′(z0) h donnent bien :
+Angle ((f ◦ γ)′(0), (f ◦ χ)′(0)) = Angle (f ′(z0) γ′(0), f ′(z0) χ′(0))
+= Angle (γ′(0), χ′(0)).
+
+
+9. Séries entières 29
+On appelle conformes de telles applications R2 −→ R2 qui sont infinitésimalement des similitudes. On démontre aisément que ce sont nécessairement des fonctions holomorphes de dérivées jamais nulles, et nous les étudierons en détail ultérieurement.
+9. Séries entières
+L’exemple paradigmatique de série entière est la fonction exponentielle de la variable complexe z ∈ C qui est définie par :
+ez :=
+∞
+∑
+n=0
+zn
+n! .
+Lorsque z = x ∈ R est réel, cette définition coïncide bien entendu avec la définition usuelle de l’exponentielle. En fait, même lorsque z ∈ C, cette série converge absolument et normalement pour tout z ∈ C, parce que :
+∣ ∣ ∣ ∣
+zn
+n!
+∣ ∣ ∣ ∣
+= |z|n
+n! ,
+de telle sorte que :
+∣
+∣ez ∣
+∣=
+∣ ∣ ∣ ∣
+∞
+∑
+n=0
+zn
+n!
+∣ ∣ ∣ ∣
+6
+∞
+∑
+n=0
+|z|n
+n!
+= e|z|
+< ∞.
+Cette inégalité permet (exercice de révision) de démontrer rigoureusement que la série
+∑
+n
+zn
+n! est uniformément convergente sur tout disque fermé DR de rayon R > 0 quelconque. Dans cette Section 9, nous allons démontrer que ez est holomorphe sur C tout entier.
+Terminologie 9.1. Les fonctions qui sont holomorphes sur C tout entier sont appelées fonctions holomorphes entières.
+Nous allons aussi démontrer que les dérivées de ez par rapport à z peuvent être calculées en dérivant terme à terme la série qui la définit :
+(ez)′ =
+∞
+∑
+n=1
+n zn−1
+n!
+=
+∞
+∑
+m=0
+zm
+m!
+= ez.
+Ainsi comme lorsque z = x est réel, la dérivée de la fonction exponentielle reste égale à
+elle-même :
+d
+dz
+(ez) = ez.
+
+
+30 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Par contraste, la série géométrique :
+∞
+∑
+n=0
+zn = 1 + z + z2 + z3 + z4 + z5 + · · ·
+converge absolument seulement dans le disque unité :
+D = {z ∈ C : |z| < 1}.
+On se convainc aisément que sa somme vaut :
+1
+1 − z,
+fonction qui est en fait holomorphe (exercice d’application du cours) dans l’ouvert C\{1}. Résolvons rapidement cet exercice en raisonnant exactement comme dans le cas où z = x ∈ R est réel. Rappelons que pour tout entier N > 0 :
+N
+∑
+n=0
+zn = 1 − zN+1
+1−z .
+Il suffit alors de noter que pour lorsque |z| < 1, on a 0 = limN→∞ zN+1.
+Définition 9.2. Une série entière en la variable z ∈ C est une somme infinie de la forme :
+∞
+∑
+n=0
+an zn,
+où les an ∈ C sont des coefficients complexes.
+Afin de tester la convergence absolue d’une telle série, on doit examiner la série majorante évidente : ∞
+∑
+n=0
+|an| |z|n.
+On observe alors sans effort que si cette série majorante à termes tous positifs converge
+pour une valeur z0 ∈ C :
+∞
+∑
+n=0
+|an| |z0|n < ∞,
+alors elle converge aussi (absolument) pour tout z ∈ C avec |z| 6 |z0|, simplement parce que :
+|z|n 6 |z0|n,
+pour tout n ∈ N, d’où :
+∣ ∣ ∣ ∣
+∞
+∑
+n=0
+an zn
+∣ ∣ ∣ ∣
+6
+∞
+∑
+n=0
+|an| |z|n
+6
+∞
+∑
+n=0
+|an| |z0|n
+< ∞.
+Nous pouvons maintenant énoncer et démontrer qu’il existe toujours un certain disque ouvert (peut-être vide) dans lequel une série entière convgerge.
+
+
+9. Séries entières 31
+Théorème 9.3. Étant donné une série entière quelconque :
+∞
+∑
+n=0
+an zn,
+il existe toujours un rayon :
+06R6∞
+tel que :
+• la série converge absolument lorsque |z| < R ;
+• la série diverge absolument lorsque |z| > R.
+De plus, en admettant la convention que :
+1
+0 = ∞ et 1
+∞ = 0,
+ce rayon R est donné par la formule :
+1
+R = lim sup
+n→∞
+n √|an|.
+Définition 9.4. Ce nombre R est appelé rayon de convergence de la série entière, et le disque DR disque de convergence.
+Pour ∑∞
+n=0
+zn
+n! , le rayon de convergence vaut R = ∞ ; pour ∑∞
+n=0 zn, il vaut R = 1.
+Démonstration. Soit donc premièrement z ∈ C avec :
+|z| < 1 lim sup
+n→∞
+n √|an|
+= R.
+De manière équivalente :
+1
+R |z| < 1.
+Il existe donc un ε > 0 assez petit pour que l’on ait encore :
+(1
+R +ε
+)
+|z|
+} {{ }
+=: q
+< 1,
+quantité positive que l’on note q < 1. Maintenant, par définition de la limite supérieure d’une suite de nombres réels, il existe un entier N = N (ε) 1 assez grand pour que :
+(
+n > N (ε)
+)
+=⇒
+(
+n √|an| 6 1
+R +ε
+)
+.
+Par exponentiation n-ème, on déduit :
+|an| |z|n 6
+(1
+R +ε
+)n
+|z|n
+= qn,
+
+
+32 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+et puisque la série géométrique ∑ qn converge, on majore sans peine :
+∞
+∑
+n=0
+|an| |z|n 6
+N (ε)−1
+∑
+n=0
+|an| |z|n
+} {{ }
+quantité finie
++
+∞
+∑
+n=N (ε)
+qn
+} {{ } = qN
+1−q < ∞
+,
+ce qui montre bien que la série converge absolument pour |z| < R fixé.
+Deuxièmement, avec |z| > R, la divergence repose (exercice laissé au lecteur) sur la divergence de ∑ qn lorsque q > 1.
+Pour z appartenant au bord {z ∈ C : |z| = R} du disque, la situation concernant la convergence ou la divergence de ∑
+n an zn est en général beaucoup plus délicate. L’Exercice 36 donne des exemples. On établit aisément (exercice) que les fonctions trigonométriques standard définies plus haut :
+ez =
+∞
+∑
+n=0
+1
+n! zn,
+sin z =
+∞
+∑
+n=0
+(−1)n 1
+(2n + 1)! z2n+1,
+cos z =
+∞
+∑
+n=0
+(−1)n 1
+(2n)! z2n,
+ont toutes un rayon de convergence R = ∞, à savoir ce sont des fonctions holomorhes entières. Un calcul simple montre la connexion entre ces trois fonctions et fournit les célèbres formules d’Euler :
+cos z = ei z + e− i z
+2 et sin z = ei z − e− i z
+2i .
+Les séries entières constituent une classe très importante de fonctions holomorphes qu’il est particulièrement aisé de manipuler.
+Théorème 9.5. Toute série entière :
+f (z) =
+∞
+∑
+n=0
+an zn
+définit une fonction holomorphe dans son disque de convergence. La dérivée de f est aussi une série entière que l’on obtient simplement en différentiant terme à terme la série de f , à savoir :
+f ′(z) =
+∞
+∑
+n=1
+n an zn−1,
+et de plus, cette série dérivée a le même rayon de convergence que ∑ an zn.
+Démonstration. L’assertion concernant le rayon de convergence découle du fait connu que :
+1 = lim
+n→∞
+n √n + 1,
+
+
+9. Séries entières 33
+puisqu’alors en effet, si le rayon de convergence de ∑ an zn vaut par définition :
+1
+R = lim sup
+n→∞
+n √|an|,
+le rayon de convergence de la série dérivée, que l’on ré-écrit de manière appropriée comme :
+∞
+∑
+n=0
+(n + 1) an+1 zn
+vaut alors, par la même définition :
+1
+R1
+= lim sup
+n→∞
+n √|(n + 1) an+1|
+=1
+R.
+Ensuite, on doit montrer que la série dérivée terme à terme en question :
+g(z) :=
+∞
+∑
+n=0
+(n + 1) an+1 zn
+n’est autre que la limite :
+hli→m0
+f (z + h) − f (z)
+h
+=? g(z),
+mais il s’agit de dériver une fonction qui contient une infinité de termes. Dans ce but, soit encore R le rayon de convergence de f = ∑ an zn et fixons un point z0 avec :
+|z0| < r < R,
+pour un certain autre rayon de sécurité r < R. Avec un grand entier N 1 qui sera choisi ultérieurement, décomposons notre série :
+∞
+∑
+n=0
+an zn =
+N
+∑
+n=0
+an zn
+} {{ }
+=: SN (z)
++
+∞
+∑
+n=N +1
+an zn
+} {{ }
+=: ResteN (z)
+,
+ce qui s’abrège en :
+f (z) = SN (z) + ResteN (z).
+Si nous restreignons maintenant les h ∈ C à être assez petits pour que :
+|z0 + h| < r,
+on peut alors regarder :
+f (z0 + h) − f (z0)
+h − g(z0) = SN (z0 + h) + ResteN (z0 + h) − SN (z0) − ResteN (z0)
+h − g(z0)
+= SN (z0 + h) − SN (z0)
+h + ResteN (z0 + h) − ResteN (z0)
+h − g(z0).
+
+
+34 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+L’expression SN (z) étant un polynôme, elle est partout holomorphe, i.e. C-dérivable. Insérons alors −S′
+N (z0) + S′
+N (z0), ce qui donne trois termes :
+f (z0 + h) − f (z0)
+h − g(z0) = SN (z0 + h) − SN (z0)
+h − S′
+N (z0)+
++ S′
+N (z0) − g(z0)+
++ ResteN (z0 + h) − ResteN (z0)
+h.
+Pour estimer la dernière ligne-reste, en utilisant :
+an − bn = (a − b)(an−1 + an−2 b + · · · + a bn−2 + bn−1),
+nous pouvons majorer :
+∣ ∣ ∣ ∣
+ResteN (z0 + h) − ResteN (z0)
+h
+∣ ∣ ∣ ∣
+6
+∞
+∑
+n=N +1
+|an|
+∣ ∣ ∣ ∣
+(z0 + h)n − zn
+0
+h
+∣ ∣ ∣ ∣
+6
+∞
+∑
+n=N +1
+|an|
+∣ ∣ ∣ ∣
+h◦
+((z0 + h)n−1 + · · · + zn−1
+0
+)
+h◦
+∣ ∣ ∣ ∣
+6
+∞
+∑
+n=N +1
+|an|
+(
+|z0 + h|n−1 + |z0 + h|n−2 |z0| + · · · + |z0|n−1)
+6
+∞
+∑
+n=N +1
+|an| n rn−1,
+grâce à |z0 + h| < r et à |z0| < r. Or l’expression majorante ainsi obtenue :
+∞
+∑
+n=N +1
+|an| n rn−1
+est convergente, puisque r < R et puisqu’on sait déjà que le rayon de convergence de g(z) = ∑ an n zn−1 est aussi égal à R. Par conséquent, pour tout ε > 0, on est assuré qu’il existe N1 = N1(ε) 1 assez grand pour que :
+(
+N > N1(ε)
+)
+=⇒
+(∣ ∣ ∣ ∣
+ResteN (z0 + h) − ResteN (z0)
+h
+∣ ∣ ∣ ∣
+6ε
+)
+.
+Par ailleurs, puisque l’on a la convergence :
+lim
+N →∞ S′
+N (z0) = g(z0),
+il existe aussi un autre entier N2 1 assez grand pour que :
+(
+N > N2(ε)
+)
+=⇒
+(
+∣
+∣S′
+N (z0) − g(z0)∣
+∣6ε
+)
+.
+Enfin, si nous choisissons un entier :
+N > max (N1, N2
+),
+
+
+9. Séries entières 35
+puisque le polynôme SN (z) est manifestement C-différentiable, il existe δ = δ(ε) > 0 assez petit pour que :
+(
+|h| 6 δ
+)
+=⇒
+(∣ ∣ ∣ ∣
+SN (z0 + h) − SN (z0)
+h − S′
+N (z0)
+∣ ∣ ∣ ∣
+6ε
+)
+.
+En revenant aux trois lignes laissées en chemin plus haut, la synthèse de ces trois inégalités :
+∣ ∣ ∣ ∣
+f (z0 + h) − f (z0)
+h − g(z0)
+∣ ∣ ∣ ∣
+6
+∣ ∣ ∣ ∣
+SN (z0 + h) − SN (z0)
+h − S′
+N (z0)
+∣ ∣ ∣ ∣
++
++
+∣
+∣S′
+N (z0) − g(z0)∣
+∣+
++
+∣ ∣ ∣ ∣
+ResteN (z0 + h) − ResteN (z0)
+h
+∣ ∣ ∣ ∣
+6 3 ε,
+montre bien que pour |h| 6 δ, on peut rendre arbitrairement petite la différence entre le
+quotient différentiel f(z0+h)−f(z0)
+h et la série dérivée terme à terme g(z0).
+Des applications successives de ce théorème donnent sans effort le :
+Corollaire 9.6. Une série entière :
+f (z) =
+∞
+∑
+n=0
+an zn
+est C-différentiable une infinité de fois dans son disque de convergence, et pour tout entier k ∈ N, sa dérivée k-ème s’obtient en la dérivant terme à terme k fois :
+f (k)(z) =
+∞
+∑
+n=0
+an+k (n + k) · · · (n + 1) zn.
+Jusqu’à présent, nous n’avons eu affaire qu’à des séries entières centrées à l’origine. Plus généralement, une série entière centrée en un point z0 ∈ C est une expression de la forme :
+f (z) =
+∞
+∑
+n=0
+an (z − z0)n.
+Le disque de convergence de f est maintenant centré en z0, et son rayon est encore donné par la même formule :
+1
+R = lim sup
+n→∞
+n √|an|.
+En effet, si l’on pose :
+g(w) :=
+∞
+∑
+n=0
+an wn,
+alors f est simplement obtenue en translatant g, à savoir avec :
+w := z − z0,
+on a :
+f (z) = g(w).
+
+
+36 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Par conséquent, tout ce qui vaut pour g vaut aussi pour f , après translation. En particulier, les dérivées de f et de g sont liées par :
+f ′(z) = g′(w) =
+∞
+∑
+n=0
+n an
+(z − z0
+)n−1.
+En un point du disque de convergence d’une série entière — donc indéfiniment Cdifférentiable grâce au Corollaire 9.6 —, on peut former une série de Taylor infinie. Le résultat suivant montre que le rayon de convergence de cette série entière de Taylor est toujours minoré d’une manière géométrique naturelle.
+R
+z0
+0
+R − |z0|
+Théorème 9.7. Soit une série entière :
+f (z) =
+∞
+∑
+n=0
+an zn
+dont le rayon de convergence :
+0<R6∞
+n’est pas nul. En tout point z0 appartenant à l’intérieur du disque de convergence :
+|z0| < R,
+si l’on forme la série de Taylor de f :
+g(w) :=
+∞
+∑
+k=0
+f (k)(z0)
+k ! wn,
+alors cette série entière possède toujours un rayon de convergence strictement positif au moins égal à :
+R − |z0|,
+et l’on a de plus :
+f (z) =
+∞
+∑
+n=0
+f (n)(z0)
+n!
+(z − z0
+)n,
+pour tout z dans le sous-disque :
+∣
+∣z − z0
+∣
+∣ < R − |z0|.
+
+
+9. Séries entières 37
+Démonstration. Posons donc :
+w := z − z0.
+Pour estimer le rayon de convergence de :
+g(w) =
+∞
+∑
+n=0
+f (k)(z0)
+k ! wk,
+il faut contrôler la croissance des coefficients, et notamment de :
+f (k)(z0) =
+∞
+∑
+n=0
+(n + k)!
+n! ak+n (z0)n,
+par exemple via l’inégalité triangulaire :
+∣
+∣f (k)(z0)∣
+∣6
+∞
+∑
+n=0
+(n + k)!
+n!
+∣
+∣an+k
+∣
+∣ |z0|n.
+R
+z0
+0r
+Comme sur la figure, prenons un rayon r intermédiaire de sécurité :
+|z0| < r < R,
+éventuellement arbitrairement proche de R. En supposant :
+|w| 6 r − |z0|,
+nous pouvons maintenant majorer :
+∣
+∣g(w)∣
+∣6
+∞
+∑
+k=0
+∣
+∣f (k)(z0)∣
+∣
+k!
+(r − |z0|)k 6
+∞
+∑
+k=0
+∞
+∑
+n=0
+(n + k)!
+n!k!
+∣
+∣ak+n
+∣
+∣ |z0|n (r − |z0|)k.
+∑
+k
+∑
+n
+k
+n
+∑
+k
+k
+n m=k+n
+∑
+k+n=m
+Dans cette double somme, posons :
+k + n =: m,
+
+
+38 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+d’où n = m − k, afin de la transformer en :
+∞
+∑
+k=0
+∞
+∑
+n=0
+Expression(k, n) =
+∞
+∑
+m=0
+∑
+06k6m
+Expression(k, m − k),
+ce qui donne ici :
+∞
+∑
+k=0
+∣
+∣f (k)(z0)∣
+∣
+k!
+(r − |z0|)k 6
+∞
+∑
+m=0
+|am|
+( ∑
+06k6m
+m!
+(m − k)! k! |z0|m−k (r − |z0|)k
+} {{ }
+reconnaître (|z0|+r−|z0|)m
+)
+6
+∞
+∑
+m=0
+|am| rm
+< ∞,
+puisque r < R. La finitude de cette somme montre donc que le rayon de convergence de g(w) est au moins égal à r − |z0|. Mais comme r < R pouvait être choisi arbitrairement proche de R, c’est que ledit rayon de convergence de g(w) est toujours au moins égal à :
+R − |z0|,
+comme annoncé. Il reste seulement à vérifier que :
+f (z) ?=
+∞
+∑
+k=0
+∞
+∑
+n=0
+(n + k)!
+n ! k ! ak+n (z0)n (z − z0
+)k
+=
+∞
+∑
+m=0
+am
+( ∑
+06k6m
+m!
+(m − k)! k! (z0)m−k (z − z0
+)k
+)
+=
+∞
+∑
+m=0
+am
+(z0 + z − z0
+)m
+=
+∞
+∑
+m=0
+am zm,
+ce qui est bien le cas, grâce au même calcul formel, les interversions de sommations étant justifiées par la convergence absolue des séries majorantes que l’on vient de manipuler.
+10. Fonctions analytiques et fonctions holomorphes
+Dans la suite, nous travaillerons la plupart du temps dans des ouverts quelconques Ω ⊂ C. Avant d’étudier réellement l’espace proprement dit O(Ω) des fonctions holomorphes dans Ω, nous allons commencer par étudier l’espace des fonctions analytiques dans Ω, car les séries entières sont aisément manipulables, comme nous venons de le voir dans ce qui précède.
+
+
+11. Principe des zéros isolés pour les fonctions analytiques 39
+Notation 10.1. Dans un ouvert Ω ⊂ C, l’ensemble des fonctions localement développables en série entière convergente sera noté :
+A (Ω) :=
+{
+f : Ω −→ C : ∀ z0 ∈ Ω ∃ r > 0 avec Dr(z0) ⊂ Ω
+il existe une série entière
+∞
+∑
+n=0
+an
+(z − z0
+)n convergeant dans Dr(z0)
+telle que f (z) =
+∞
+∑
+n=0
+an
+(z − z0
+)n ∀ z ∈ Dr(z0)
+}
+.
+Comme les ouverts Ω ⊂ C peuvent avoir des formes très diverses, on demande donc seulement que la fonction soit, au voisinage de chaque point z0 ∈ Ω, égale à une série
+entière convergente en les puissances de z − z0, et alors an = f(n)(z0)
+n ! pour tout entier n ∈ N. On vérifie (exercice) que A (Ω) est un anneau commutatif. D’après le Théorème 9.5 qui précède, toute fonction analytique dans un ouvert Ω est aussi holomorphe dans Ω :
+A (Ω) ⊂ O(Ω).
+Un théorème profond de l’Analyse Complexe que nous établirons dans le chapitre suivant affirme que la réciproque est vraie : toute fonction holomorphe dans un ouvert Ω est aussi analytique dans Ω, à savoir développable en série entière convergente autour de chaque point de Ω :
+A (Ω) = O(Ω).
+Pour cette raison, de nombreux auteurs s’autorisent à utiliser parfois les deux termes ‘holomorphe’ et ‘analytique’ de façon interchangeable. Mais pour l’instant dévoilons quelques propriétés des fonctions analytiques.
+11. Principe des zéros isolés pour les fonctions analytiques
+Localement au voisinage d’un point autour duquel elles convergent, les séries entières se comportent comme de simples polynômes, et en particullier, leurs zéros sont séparés les uns des autres, on dit : isolés.
+Proposition 11.1. Soit f (z) = ∑ an zn une série entière convergente centrée à l’origine dont le rayon de convergence est R > 0. Si au moins un des coefficients an 6= 0 est non nul, i.e. si f 6≡ 0, alors il existe un rayon 0 < r < R assez petit avec pour que :
+lorsque a0 = 0 :
+(
+|z| < r et f (z) = 0
+)
+=⇒ z = 0,
+lorsque a0 6= 0 : |z| < r =⇒ f (z) 6= 0.
+Démonstration. Si en effet k est le plus petit entier tel que ak 6= 0, on peut factoriser :
+f (z) = ak zk + ak+1 zk+1 + ak+2 zk+2 + · · ·
+= zk(
+ak + ak+1 z + ak+2 z2 + · · ·
+} {{ }
+nouvelle série entière g(z)
+)
+.
+Comme :
+g(0) = ak 6= 0,
+par continuité, cette série entière g ne s’annule alors pas dans un certain voisinage de 0.
+
+
+40 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Corollaire 11.2. Une fonction analytique f définie dans un ouvert Ω ⊂ C possède toujours un unique développement en série entière convergente au voisinage de tout point z0 ∈ C.
+Démonstration. Sinon, on aurait :
+f (z) =
+∞
+∑
+n=0
+an
+(z − z0
+)n,
+f (z) =
+∞
+∑
+n=0
+a ̃n
+(z − z0
+)n,
+d’où par soustraction :
+0≡
+∞
+∑
+n=0
+[an − a ̃n
+]
+} {{ }
+=: bn
+(z − z0
+)n,
+mais grâce à la proposition qui précède, si un seul de ces coefficients bn était non nul, la série à droite serait certainement non nulle pour z 6= 0 proche de l’origine, contradiction.
+Théorème 11.3. [Principe du prolongement analytique] Soit Ω ⊂ C un ouvert connexe et soient f , g deux fonctions analytiques dans Ω. Si f et g ont les mêmes valeurs sur un sous-ensemble E ⊂ Ω qui a un point d’accumulation dans Ω, alors ces deux fonctions coïncident :
+f ≡ g,
+dans Ω tout entier.
+Dr (z∞ )
+Ω
+z∞
+(zn
+)
+n>1
+Démonstration. Soit z∞ ∈ Ω un point d’accumulation de E, et soit Dr(z∞) un disque de rayon r > 0 assez petit pour être contenu dans Ω et pour que f et g soient développables en séries entières convergentes dans ce disque. Par hypothèse, la différence f − g admet une suite infinie de zéros distincts deux à deux z1, z2, z3, . . . qui sont tous contenus dans Dr(z0) à partir d’un certain rang, puisque zn −→ z∞. La contraposée de la Proposition 11.1 qui précède implique alors (exercice mental) que :
+0 = (f − g)∣
+∣Dr (z∞ ) .
+Maintenant, il s’agit de montrer que cette identité f ≡ g valable sur le disque Dr(z∞) se propage à l’ouvert Ω tout entier, et c’est la connexité de Ω qui va garantir cela. Introduisons en effet l’ensemble :
+W := {w ∈ Ω : f ≡ g dans un voisinage ouvert de w}.
+Cet ensemble W est ouvert (exercice mental). Il contient aussi Dr(z∞), donc il n’est pas vide. Notre but étant de démontrer que W = Ω, il suffit de faire voir que W est aussi fermé,
+
+
+11. Principe des zéros isolés pour les fonctions analytiques 41
+puisque le seul sous-ensemble non vide d’un ouvert connexe qui est à la fois ouvert et fermé, c’est l’ouvert tout entier ! Soit donc w∞ un point appartenant à l’adhérence W de W pour la topologie induite, à savoir plus précisément :
+w∞ ∈ WΩ = WC ∩ Ω.
+w∞
+(wn
+)
+n>1
+Dr (w∞ )
+Ω
+W
+Comme w∞ ∈ Ω, il existe un disque Dr(w∞) de rayon r > 0 assez petit pour que Dr(w∞) ⊂ Ω. D’après l’Exercice 13, tout point adhérent à un ouvert est aussi point d’accumulation, donc il existe une suite {wn}∞
+n=1 de points wn ∈ W distincts deux à deux telle que :
+w∞ = lim
+n → ∞ wn.
+Puisque f = g sur W, en tous ces points, on a coïncidence :
+f (wn) = g(wn).
+Alors la contraposée de la Proposition 11.1 qui précède implique que w∞ ∈ W. Ceci montre que W est fermé, et achève la démonstration.
+Théorème 11.4. Soit f une fonction analytique dans un ouvert Ω ⊂ C qui est connexe. Si f 6≡ 0 n’est pas identiquement nulle, alors tous les zéros de f sont isolés :
+(
+∀ z ∈ Ω, f (z) = 0
+)
+=⇒
+(
+∃ r = r(z) > 0 tel que Dr(z) ⊂ Ω
+et f (w) 6= 0 pour tout w ∈ Dr(z)∖{z}
+)
+.
+Démonstration. En effet, le théorème précédent s’applique à f = f et à g = 0.
+De manière équivalente, l’ensemble des zéros d’une fonction f 6≡ 0 holomorphe dans un ouvert Ω est toujours un sous-ensemble discret de Ω.
+Théorème 11.5. Soit f une fonction analytique dans un ouvert Ω ⊂ C qui est connexe. S’il existe un point z0 ∈ Ω en lequel toutes les dérivées de f s’annulent :
+0 = f ′(z0) = f ′′(z0) = f ′′′(z0) = · · · ,
+alors f ≡ 0 est identiquement nulle dans Ω entier.
+Démonstration. En effet, la série entière de f :
+f (z) =
+∞
+∑
+n=0
+f (n)(z0)
+n!
+(z − z0
+)n
+converge par hypothèse dans un certain disque Dr(z0) de rayon r > 0 assez petit, mais elle est identiquement nulle ! Donc la restriction :
+f
+∣
+∣Dr(z0) ≡ 0
+
+
+42 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+est identiquement nulle, et les théorèmes précédents propagent alors instantanément la zéro-ité de f à tout l’ouvert connexe Ω.
+12. Intégration le long de courbes γ ⊂ C
+Dans la définition d’une courbe, on doit faire la différence entre l’objet géométrique 1-dimensionnel contenu dans le plan (lui-même muni d’une certaine orientation), et une paramétrisation de la courbe, qui est une application définie dans un intervalle fermé et à
+valeurs dans C ∼= R2. La paramétrisation n’est jamais définie de manière unique, bien que l’image géométrique de la courbe le soit.
+Définition 12.1. Une courbe paramétrée est une fonction z = z(t) qui envoie un intervalle
+fermé borné [a, b] ⊂ R avec −∞ < a < b < ∞ dans le plan complexe C ∼= R2 :
+z : [a, b] −→ C
+t 7−→ z(t).
+En fait, il ne coûte (presque) rien d’imposer des conditions de régularité sur les paramétrisations, eu égard aux applications désirées à l’Analyse Complexe.
+Définition 12.2. La courbe paramétrée sera dite de classe C 1 lorsque la dérivée z′(t) existe et est continue pour tout t ∈ [a, b], avec de plus :
+z′(t) 6= 0 (∀ t ∈ [a,b]).
+Aux points-extrémités t = a et t = b, les dérivées z′(a) et z′(b) doivent être interprétées comme dérivées à droite et à gauche, précisément définies par :
+z′(a) := hli→m0
+h>0
+z(a + h) − z(a)
+h et z′(b) := hli→m0
+h<0
+z(b + h) − z(b)
+h.
+Définition 12.3. On dit qu’une courbe paramétrée continue :
+z : [a, b] −→ R2
+est C 1 par morceaux lorsqu’il existe des points :
+a = a0 < a1 < · · · < an = b,
+tels que t 7−→ z(t) est C 1 sur chaque intervalle [ak, ak+1], pour tout k = 0, 1, . . . , n − 1.
+On notera que les dérivées à droite et à gauche en chacun des points a1, . . . , an−1 ne sont pas censées être égales.
+Définition 12.4. Deux paramétrisations :
+z : [a, b] −→ C et z ̃: [c, d] −→ C
+sont dites équivalentes lorsqu’il existe une bijection de classe C 1 :
+[c, d] −→ [a, b]
+s 7−→ t(s),
+satisfaisant t′(s) > 0 telle que :
+z ̃(s) = z(t(s)),
+pour tout s ∈ [c, d].
+
+
+12. Intégration le long de courbes γ ⊂ C 43
+La condition t′(s) > 0 dit précisément que l’orientation est préservée : lorsque s augmente continûment de c à d, il en va de même pour t(s), qui augmente aussi continûment de a à b.
+Définition 12.5. La famille de toutes les paramétrisations qui sont équivalentes à une paramétrisation z(t) détermine une unique courbe C 1 par morceaux :
+γ ⊂ C,
+à savoir l’image :
+γ := z([a, b])
+d’une quelconque paramétrisation, toutes ces images étant égales.
+La courbe hérite de l’orientation canonique du segment [a, b].
+Définition 12.6. Étant donné une courbe γ, la courbe inverse γ− est celle qu’on obtient en renversant les orientations de b vers a.
+Clairement, la courbe γ− consiste en les mêmes points de C. Bien entendu, si z : [a, b] −→ R2 est une paramétrisation de γ, on peut prendre pour paramétrisation de γ− l’application :
+[a, b] −→ R2
+t 7−→ z(b + a − t)
+=: z−(t).
+Évidemment, une courbe C 1 par morceaux est l’image d’une courbe paramétrée par morceaux, indépendamment de toute paramétrisation.
+Terminologie 12.7. Les deux points z(a) et z(b) sont appelés points-extrémités de la courbe.
+Puisque γ porte une orientation, il est naturel de dire que γ part de a, et aboutit en b.
+Définition 12.8. Une courbe C 1 ou C 1 par morceaux est dite simple lorsqu’elle n’a aucune auto-intersection, c’est-à-dire lorsque :
+(s 6= t) =⇒
+(
+z(s) 6= z(t)
+)
+.
+Lorsque la courbe est fermée :
+z(b) = z(a),
+il est naturel de requérir seulement que :
+(
+z(s) = z(t) et s < t
+)
+=⇒ (s = a et t = b).
+L’exemple canonique de courbe est celui d’un cercle :
+Cr(z0) := {z ∈ C : |z − z0| = r}.
+de centre z0 ∈ C et de rayon r > 0.
+Définition 12.9. L’orientation trigonométrique — contraire au sens des aiguilles d’une montre — est celle qui est donnée par la paramétrisation standard :
+z(t) = z0 + r ei t (t ∈ [0, 2 π]),
+
+
+44 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+tandis que l’orientation négative est donnée par :
+z(t) = z0 + r e− i t (t ∈ [0, 2 π]).
+L’intégration le long de courbes tracées dans le plan complexe est un outil important pour l’étude des fonctions holomorphes. Un théorème-clé en analyse complexe énonce que si une fonction est holomorphe dans l’intérieur topologique — notion plus délicate qu’il n’y paraît et qui doit être soigneusement précisée — d’une courbe fermée γ ⊂ C, alors :
+0=
+∫
+γ
+f (z) dz.
+Dans le chapitre qui suit, nous démontrerons ce résultat, appelé Théorème de Cauchy. Pour l’instant, nous nous contenterons de définitions initiales et de propriétés élémentaires.
+Définition 12.10. Étant donné une courbe γ = z([a, b]) de classe C 1 par morceaux dans C paramétrée par z : [a, b] −→ C, et étant donné une fonction f continue sur γ, on définit l’intégrale de f le long de γ par :
+∫
+γ
+f (z) dz :=
+∫b
+a
+f
+(z(t)) z′(t) dt.
+Afin de s’assurer qu’une telle définition a un sens rigoureux, il faut vérifier que le membre de droite est indépendant de la paramétrisation choisie par γ. Soit donc z ̃ une autre paramétrisation quelconque, comme décrite ci-dessus. Alors c’est la formule classique de changement de variable dans une intégrale qui va rendre tout cohé
+rent :
+∫b
+a
+f
+(z(t)) z′(t) dt =
+∫d
+c
+f
+(z(t(s))) z′(t(s)) t′(s) ds
+=
+∫d
+c
+f
+(
+z ̃(s))
+z ̃′(s) ds.
+Ainsi l’intégrale est bien indépendante de la paramétrisation. Lorsque γ est continue par morceaux, l’intégrale de f sur γ est alors simplement définie comme la somme des intégrales de f sur les morceaux lisses de la courbe. Autrement dit, dans les notations qui précèdent :
+∫
+γ
+f (z) dz :=
+n−1
+∑
+k=0
+∫ ak+1
+ak
+f
+(z(t)) z′(t) dt.
+Définition 12.11. La longueur d’une courbe lisse γ est :
+longueur(γ) :=
+∫b
+a
+∣
+∣z′(t)∣
+∣ dt.
+En raisonnant comme nous venons de le faire, on se convainc aisément que cette définition est elle aussi indépendante de la paramétrisation de la courbe. Évidemment, lorsque la courbe est lisse par morceaux, sa longueur est la somme (finie) des longueurs de ses morceaux lisses.
+Proposition 12.12. L’intégration des fonctions continues sur les courbes jouit des propriétés suivantes :
+
+
+12. Intégration le long de courbes γ ⊂ C 45
+(i) elle est linéaire, à savoir :
+∫
+γ
+(α f (z) + β g(z)) dz = α
+∫
+γ
+f (z) dz + β
+∫
+γ
+g(z) dz;
+(ii) si γ− est la courbe γ inverse, alors :
+∫
+γ−
+f (z) dz = −
+∫
+γ
+f (z) dz;
+(iii) l’inégalité suivante est satisfaite :
+∣ ∣ ∣ ∣
+∫
+γ
+f (z) dz
+∣ ∣ ∣ ∣
+6 sup
+z∈γ
+∣
+∣f (z)∣
+∣ · longueur(γ).
+Démonstration. La première propriété découle directement de la définition et de la linéarité de l’intégrale (de Riemann, ou de Lebesgue). La seconde propriété est laissée en exercice au lecteur-étudiant. Pour ce qui est de la troisième, on majore (très) aisément :
+∣ ∣ ∣ ∣
+∫
+γ
+f (z) dz
+∣ ∣ ∣ ∣
+6 sup
+t ∈ [a,b]
+∣
+∣f (z(t))∣
+∣
+∫b
+a
+∣
+∣z′(t)∣
+∣ dt
+= sup
+z∈γ
+∣
+∣f (z)∣
+∣ · longueur(γ).
+Comme nous l’avons dit par anticipation destinée à éveiller la curiosité, le théorème de Cauchy qui sera démontré ultérieurement énonce que pour des courbes γ ⊂ C appropriées contenue dans un ouvert Ω ⊂ C sur lequel f est holomorphe, on a :
+0=
+∫
+γ
+f (z) dz.
+L’existence de primitives exhibe une première manifestation de ce phénomène remarquable.
+Définition 12.13. Une primitive (holomorphe) pour une fonction holomorphe f ∈ O(Ω) définie dans un ouvert Ω ⊂ C est une fonction F , elle aussi holomorphe dans Ω, telle que :
+F ′(z) = f (z),
+pour tout z ∈ Ω.
+En fait, on peut parler de primitive holomorphe de toute fonction continue f ∈ C 0(Ω), mais nous démontrerons dans le prochain chapitre que f est alors aussi holomorphe.
+Théorème 12.14. Si une fonction f holomorphe dans un ouvert Ω ⊂ C admet une primitive holomorphe F , alors pour toute courbe γ ⊂ Ω contenue dans l’ouvert qui part d’un point w1 ∈ Ω et aboutit à un autre point w2 ∈ Ω, on a :
+∫
+γ
+f (z) dz = F (w2) − F (w1).
+Démonstration. Lorsque γ est lisse, l’argument repose sur une simple application de la règle de différentiation des fonctions composées et sur une application du théorème fondamental de l’intégration. En effet, si :
+z(t) : [a, b] −→ C
+
+
+46 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+est une paramétrisation de γ, avec bien entendu z(a) = w1 et z(b) = w2, alors on calcule (très) aisément :
+∫
+γ
+f (z) dz =
+∫b
+a
+f
+(z(t)) z′(t) dt
+=
+∫b
+a
+F ′(z(t)) z′(t) dt
+[Proposition 7.6] =
+∫b
+a
+d
+dt F (z(t)) dt
+= F (z(b)) − F (z(a)).
+Ensuite, lorsque γ n’est que lisse par morceaux, il en va de même grâce à une somme téléscopique :
+∫
+γ
+f (z) dz =
+n−1
+∑
+k=0
+[
+F
+(z(ak+1)) − F (z(ak))
+]
+= F (z(an)) − F (z(a0))
+= F (z(b)) − F (z(a)).
+Corollaire 12.15. Si γ est une courbe fermée lisse par morceaux dans un ouvert Ω ⊂ C et si f est une fonction continue qui admet une primitive F holomorphe dans Ω, alors :
+∫
+γ
+f (z) dz = 0.
+Démonstration. En effet, on voit bien que lorsque z(b) = z(a), la différence F (z(b)) − F
+(z(a)) se réduit à 0 !
+Par (contre-)exemple, la fonction f (z) = 1/z n’a pas de primitive dans l’ouvert C\{0}, puisque, en paramétrant le cercle unité C = ∂D par z(t) = ei t, avec 0 6 t 6 2 π, on
+calcule :
+∫
+C
+f (z) dz =
+∫ 2π
+0
+i ei t
+ei t dt = 2iπ 6= 0,
+quantité qui n’est pas nulle, contrairement à ce que le dernier corollaire stipule. Dans les chapitres qui vont suivre, nous allons voir que ce calcul d’apparence innocente gît au cœur le plus profond et le plus intime de toute la théorie.
+Corollaire 12.16. Si une fonction f holomorphe dans un domaine, i.e. dans un ouvert connexe, Ω ⊂ C, a une dérivée identiquement nulle f ′ ≡ 0, alors f est identiquement égale à une certaine constante (et réciproquement, de manière triviale).
+Démonstration. Fixons un point w0 ∈ Ω. Il suffit de montrer que f (w) = f (w0) pour tout w ∈ Ω.
+Puisque l’ouvert Ω est connexe, il est aussi connexe par arcs en vertu de l’Exercice 14, donc il existe une courbe γ de classe C 1 qui joint w0 à w. Puisque f est trivialement une
+primitive de f ′, on a :
+∫
+γ
+f ′(z) dz = f (w) − f (w0).
+Or par hypothèse, f ′ ≡ 0, donc l’intégrale à gauche est égale à 0, et on conclut que f (w) = f (w0), comme désiré.
+
+
+13. Pathologies-reelles 47
+13. Pathologies « réelles »
+Avant de dévoiler les propriétés prodigieuses des fonctions holomorphes, rappelons quelles sont les « pathologies » dont les fonctions réelles peuvent souffrir. Tout d’abord, la dérivée f ′ d’une fonction dérivable en tout point peut s’avérer être assez « incontrôlable », en tout cas au moins être non continue, comme le montre :
+f (x) :=
+{
+x2 sin 1
+x lorsque x 6= 0,
+0 pour x = 0,
+dérivable en tout point qui a (exercice) pour fonction dérivée :
+f (x) :=
+{
+2 x sin 1
+x − cos 1
+x lorsque x 6= 0,
+0 pour x = 0,
+prenant les valeurs oscillantes ne convergeant pas vers 0 = f ′(0) :
+f′( 1
+nπ
+) = − (−1)n (∀ n ∈ N∗).
+Autre exemple, une dérivée f ′ peut être continue tandis que (f ′)′ n’existe en aucun point, comme le montre (exercice) :
+f (x) :=
+∞
+∑
+n=0
+sin (2n x)
+4n .
+Volterra a trouvé des fonctions dérivables en tout point qui ne sont pas intégrables au sens de Riemann. Un premier exemple simple est (noter le changement d’exposant) :
+f (x) :=
+{
+x2 sin 1
+x2 lorsque x 6= 0,
+0 pour x = 0,
+dont la dérivée a pour valeurs spéciales divergentes (exercice) :
+f′
+(1
+√(2n + 1) π
+)
+= 2 √(2n + 1) π (∀ n ∈ N),
+donc f ′ est non bornée, donc f ′ ne peut de facto pas être Riemann-intégrable — être bornée, c’est la tenue minimale exigée chez Riemann ! Toutefois, puisqu’il existe une théorie des intégrales généralisées au sens de Riemann, et puisque pour ε > 0 petit tendant vers 0, on a clairement existence de la limite de :
+∫
+√
+2/π
+ε
+f ′(x) dx =
+[
+x2 sin 1
+x2
+]
+√
+2/π
+ε
+=2
+π · 1 − ε2 sin 1
+ε2 ε−→>→0
+2
+π,
+cette fonction n’est pas un vrai contre-exemple, il faut trouver mieux ! En recollant-renormalisant de telles fonctions, Volterra est parvenu à construire une fonction F : ]0, 1[ −→ R dérivable en tout point, de dérivée bornée |f ′(x)| 6 3 sur ]0, 1[, qui est discontinue en tout point d’un ensemble de Cantor « gras », c’est-à-dire de mesure de Lebesgue 1-dimensionnelle strictement positive, et donc, d’après un théorème connu, la fonction bornée f ′ ne peut pas être Riemann-intégrable. Ça, c’est un vrai contre-exemple ! Un raffinement de la construction de Volterra permet même de construire une fonction f dérivable et de dérivé bornée qui n’est Riemann-intégrable sur aucun intervalle ouvert non vide contenu dans ]0, 1[.
+
+
+48 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Auparavant dans l’histoire des mathématiques, Riemann proposa en 1854 la fonction :
+f (x) :=
+∞
+∑
+n=1
+sin n2x
+n2 ,
+comme fonction-candidate à n’être dérivable en aucun point x ∈ R. Hardy démontra en 1916 que cette fonction n’est effectivement pas dérivable aux points de la forme :
+x = ξ π,
+avec :
+ξ ∈ R\Q ou ξ =
+{ 2 a+1
+2 b ∈ Q,
+2 a+1
+4 b+1 ∈ Q,
+ce qui ne traitait pas tous les points ! Gerver termina le travail en 1970, et contredisant toute attente, il fit voir que la série de Riemann est dérivable de dérivée égale à − 1
+2 aux points de la forme :
+x = 2a+1
+2 b + 1 π,
+et enfin des fins, qu’elle n’est pas (non plus) dérivable aux points x = 2 a
+2 b+1 π.
+Tous ces phénomènes « pathologique » ne se produiront pas dans le pays des merveilles holomorphes, comme va commencer à le dévoiler le prochain chapitre.
+14. Exercices
+Exercice 1. Décrire géométriquement les différents lieux des points z ∈ C définis par les relations suivantes.
+(a) |z − z1| = |z − z2| pour z1, z2 ∈ C fixés.
+(b) 1/z = z.
+(c) Re z = 3.
+(d) Re z > c puis Re z > c, avec c ∈ R fixé.
+(e) Re (az + b) > 0 avec a, b ∈ C fixés.
+(f) |z| = Re z + 1.
+(g) Im z = c avec c ∈ R fixé.
+Exercice 2. Soit 〈·, ·〉 le produit scalaire euclidien usuel sur R2, défini pour Z = (x1, y1) et W = (x2, y2) par :
+〈Z, W 〉 := x1x2 + y1y2.
+Soit aussi (·, ·) le produit scalaire hermitien usuel sur C défini par :
+(z, w) := zw.
+Le terme hermitien notifie le fait que (·, ·) n’est pas symétrique, mais satisfait quand même la relation :
+(w, z) = (z, w).
+Vérifier que l’on a :
+〈z, w〉 = 1
+2
+[(z, w) + (w, z)]
+= Re (z, w),
+lorsqu’on écrit z = x + i y et w = u + i v avec (x, y) ∈ R2 et (u, v) ∈ R2.
+Exercice 3. Pour ω = s ei φ fixé avec s > 0 et φ ∈ R, résoudre l’équation zn = ω d’inconnue z ∈ C, où n ∈ N.
+
+
+14. Exercices 49
+Exercice 4. Soit pour z ∈ C :
+cos z := ei z + e−i z
+2 et sin z := ei z − e−i z
+2i . Montrer :
+ei z = cos z + i sin z,
+puis :
+1 ≡ cos2 z + sin2 z,
+et enfin :
+cos′(z) = − sin z et sin′(z) = cos z
+Exercice 5. Soit pour z ∈ C :
+cosh z := ez + e−z
+2 et sinh z := ez − e−z
+2.
+Montrer :
+cosh′(z) = sinh z et sinh′(z) = cosh z,
+puis :
+1 ≡ cosh2(z) − sinh2(z),
+et terminer en donnant les développement en séries entières de cosh z et de sinh z.
+Exercice 6. Montrer que pour tout z ∈ C tel que sin(z/2) 6= 0, on a :
+1
+2 + cos z + · · · + cos (nz) = sin(n + z
+2
+)
+2 sin z
+2
+.
+Exercice 7. Le but est de démontrer que contrairement à R, le corps C des nombres complexes ne peut pas être muni d’un ordre total qui soit compatible avec l’addition et la soustraction. Plus précisément, montrer qu’il n’existe pas de relation ≺ entre les nombres complexes qui jouit des trois propriétés suivantes :
+(i) pour tous z, w ∈ C, on a ou bien z ≺ w, ou bien w ≺ z ou bien z = w, de manière exclusive ;
+(ii) pour z1, z2, z3 ∈ C arbitraires, si z1 ≺ z2, alors z1 + z3 ≺ z2 + z3 ;
+(iii) pour z1, z2, z3 ∈ C arbitraires, si z1 ≺ z2 et si 0 ≺ z3, alors z1z3 ≺ z2z3.
+Indication: Tester tout d’abord si 0 ≺ i est possible.
+Exercice 8. Montrer qu’une application R-linéaire Λ : C −→ C est C-linéaire si et seulement si elle commute avec la multiplication par i, et lorsque tel est le cas, montrer que Λ(z) = Λ(1) z.
+Exercice 9. Montrer que les quatre fonctions suivantes sont holomorphes dans leur domaine de définition et qu’elles satisfont les équations de Cauchy-Riemann :
+z3, 1
+z + 1 , ez
+z5 , z7
+z2 + 1.
+Exercice 10. Déterminer si les cinq fonctions suivantes sont C-dérivables en tout point de C :
+x5y4 + i xy3,
+y2 sin x + i (y3 + 2 x2),
+sin2(x + y) + i cos2(x + y),
+ex cos y − 2xy + i (ex sin y + x2 − y2),
+(2 − 2i) y3 − 6 (cos x + i sin y) + 15 (y2 + 2 y).
+Exercice 11. Soit un polynôme P = P (x, y) ∈ C[x, y].
+(a) Montrer qu’il existe un autre polynôme Q = Q(z, z) ∈ C[z, z] tel que P (x, y) ≡ Q(z, z).
+(a) Donner une condition nécessaire et suffisante pour que P soit une fonction holomorphe.
+
+
+50 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Exercice 12. Pour les deux fonctions réelle suivantes u : R2 −→ R :
+u(x, y) := 2 x3 − 6 xy2 + x2 − y2,
+u(x, y) := x2 − y2 + e−y sin x − e−y cos x,
+trouver une fonction réelle v : R2 −→ R telle que u + iv : C −→ C soit holomorphe.
+Exercice 13. Soit Ω ⊂ C un ouvert, et soit un point z∞ ∈ Ω appartenant à son adhérence, à savoir il existe une suite {zn}n∞=1 de points zn ∈ Ω telle que :
+z∞ = lim
+n → ∞ zn.
+Montrer que z∞ est aussi un point d’accumulation de Ω. Indication: Perturber légèrement la suite {zn}n∞=1
+comme une nouvelle suite {z′n}n∞=1 en assurant, par récurrence, que z′n+1 est distinct de z′1, . . . , z′n.
+Exercice 14. Le but de cet exercice est d’établir l’équivalence entre la connexité et la connexité par arcs des ensembles ouverts Ω ⊂ C.
+(a) On suppose d’abord que Ω est ouvert et connexe par arcs, mais qu’il peut s’écrire Ω = Ω1 ∪ Ω2 avec Ω1, Ω2 ouverts disjoints non vides, en raisonnant donc par l’absurde. On choisit deux points quelconques w1 ∈ Ω1 et w2 ∈ Ω2. Soit z : [a, b] −→ Ω une courbe continue joignant w1 = γ(a) à γ(b) = w2. En introduisant :
+t∗
+1 := sup {t ∈ [a, b] : z(s) ∈ Ω1 pour tous a 6 s 6 t},
+parvenir à une contradiction.
+(b) Réciproquement, on suppose que Ω est ouvert et connexe, le but étant d’établir qu’il est connexe par arcs. On fixe un point w ∈ Ω. Soit Ω1 ⊂ Ω l’ensemble de tous les points qui peuvent être joints à w au moyen d’une courbe continue contenue dans Ω. Aussi, soit Ω2 ⊂ Ω l’ensemble de tous les points qui ne peuvent pas être joints à w par une courbe continue contenue dans Ω. Montrer que Ω1 et Ω2 sont tous deux ouverts et connexes, qu’ils sont disjoints, et que leur réunion est Ω. Conclure.
+Exercice 15. Soit Ω un sous-ensemble ouvert de C et soit un point z ∈ Ω. La composante connexe de Ω contenant z est l’ensemble Cz de tous les points w ∈ Ω qui peuvent être joints à z par une courbe continue entièrement contenue dans Ω.
+(a) Montrer tout d’abord que Cz est ouvert et connexe. Montrer ensuite que w ∈ Cz définit une relation d’équivalence, à savoir que z ∈ Cz, puis que w ∈ Cz ⇐⇒ z ∈ Cw et enfin que :
+(
+w ∈ Cz et z ∈ Cζ
+)
+=⇒
+(
+w ∈ Cζ
+)
+.
+(b) Montrer que Ω a un nombre au plus dénombrable de composantes connexes distinctes. Indication: Si, au contraire, il existait un nombre non dénombrable de telles composantes, obtenir un nombre non dénombrable de disques ouverts disjoints, et penser aux points de C ⊃ Q + i Q à coordonnées rationnelles.
+(c) Montrer que si Ω = C\K est le complémentaire d’un sous-ensemble compact K ⊂ C, alors Ω possède une et une seule composante connexe non bornée, à savoir une composante connexe dont l’adhérence n’est pas compacte. Indication: Penser au complémentaire d’un grand disque ouvert contenant K.
+Exercice 16. La famille d’applications introduites ici joue un rôle important dans l’Analyse Complexe. Ces applications, dites de Blaschke, réapparaîtront notamment lorsqu’on étudiera les applications dites conformes de C (à suivre. . .).
+(a) Soient deux nombres complexes z, w ∈ C tels que z w 6= 1. Montrer que :
+∣ ∣ ∣ ∣
+w−z 1−zw
+∣ ∣ ∣ ∣
+< 1, lorsque de plus |z| < 1 et |w| < 1,
+et aussi que :
+∣ ∣ ∣ ∣
+w−z 1−zw
+∣ ∣ ∣ ∣
+= 1, lorsque |z| = 1 ou |w| = 1,
+Indication: Justifier qu’on peut supposer que z ∈ R est réel. Ensuite, se ramener à montrer que :
+(r − w) (r − w) 6 (1 − rw) (1 − r w),
+avec une égalité = au lieu d’une inégalité 6 pour r et |w| appropriés.
+
+
+14. Exercices 51
+(b) Montrer que pour w ∈ D fixé dans le disque unité, à savoir satisfaisant |w| < 1, l’application :
+F : z 7−→ w − z
+1−zw
+jouit des quatre propriétés :
+(i) F : D −→ D envoie le disque unité D dans lui-même, et est holomorphe ;
+(ii) F échange 0 et w, à savoir F (0) = w et F (w) = 0 ;
+(iii) |F (z)| = 1 pour tout z ∈ ∂D sur le cercle unité, i.e. tout z avec |z| = 1 ;
+(iv) F : D −→ D est bijective. Indication: Calculer F ◦ F .
+Exercice 17. Soient U ⊂ C et V ⊂ C deux sous-ensembles ouverts du plan complexe. Soient les deux opérateurs :
+∂
+∂z := 1
+2
+(∂
+∂x − i ∂
+∂y
+)
+et ∂
+∂z := 1
+2
+(∂
+∂x + i ∂
+∂y
+)
+.
+Montrer que si f : U −→ V et g : V −→ C sont deux fonctions de classe C 2, c’est-à-dire différentiables au sens réel par rapport aux deux variables (x, y) jusqu’à l’ordre 2 avec des dérivées toutes continues, la composition :
+h := g ◦ f
+satisfait, en termes de ces deux opérateurs, les règles suivantes de différentiation composée :
+∂h
+∂z = ∂g
+∂z
+∂f
+∂z + ∂g
+∂z
+∂f
+∂z ,
+∂h
+∂z = ∂g
+∂z
+∂f
+∂z + ∂g
+∂z
+∂f
+∂z .
+Exercice 18. (a) Montrer qu’en coordonnées polaires z = r ei θ, les équations de Cauchy-Riemann prennent
+la forme :
+∂u
+∂r = 1
+r
+∂v
+∂θ , 1 r
+∂u
+∂θ = − ∂v
+∂r . Indication: Vérifier d’abord les formules : ∂
+∂x = cos θ ∂
+∂r − sin θ
+r
+∂
+∂θ , ∂
+∂y = sin θ ∂
+∂r + cos θ
+r
+∂
+∂θ .
+(b) Utiliser ces équations pour faire voir que la fonction logarithme définie par :
+log z = log r + i θ,
+pour z = r ei θ avec r > 0 et − π < θ < π, est holomorphe.
+Exercice 19. Montrer que :
+4∂
+∂z
+∂
+∂z = 4 ∂
+∂z
+∂
+∂z = ∆,
+ou ∆ est le laplacien :
+∆ := ∂2
+∂x2 + ∂2
+∂y2 .
+Exercice 20. Utiliser l’Exercice 19 pour montrer que si une fonction f est holomorphe dans un ouvert Ω ⊂ C, alors sa partie réelle Re f et sa partie imaginaire Im f satisfont :
+0 = ∆(Re f )
+= ∆(Im f ).
+(Les solutions u ∈ C 2(Ω, R) de l’équation de Laplace ∆u = 0 sont appelées fonctions harmoniques.)
+
+
+52 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Exercice 21. Soit la fonction :
+f (x + i y) := √|x| |y|,
+définie pour tous (x, y) ∈ R2. Montrer que f satisfait les équations de Cauchy-Riemann en (0, 0) ∈ R2, mais qu’elle n’est pas C-différentiable en 0 ∈ C.
+Exercice 22. Soit f une fonction holomorphe dans un ouvert Ω ⊂ C. Montrer que f est constante dans l’une (au moins) des trois circonstances suivantes :
+• Re f est constante ;
+• Im f est constante ;
+• |f | est constante.
+Exercice 23. (a) Montrer que la fonction z 7−→ 1/z n’est holomorphe en aucun point de C\{0}.
+(b) Montrer qu’elle conserve les angles infinitésimaux non orientés entre paires de courbes.
+(c) Soit Ω ⊂ C un ouvert non vide invariant par conjugaison complexe, c’est-à-dire satisfaisant z ∈ Ω implique z ∈ Ω. Pour toute fonction holomorphe f ∈ O(Ω), montrer que la fonction :
+g(z) := f (z) (z ∈ Ω)
+est holomorphe dans Ω.
+(d) On suppose maintenant f ∈ O(Ω) non constante. Parmi les cinq fonctions suivantes :
+f
+(z), f (z), Re f (z), Im f (z), ∣
+∣f (z)∣
+∣,
+lesquelles sont holomorphes ?
+Exercice 24. Soient deux suites finies de nombres complexes :
+{an
+}
+16n6N et {bn
+}
+16n6N ,
+avec N > 2. Pour 1 6 k 6 N , on note :
+Bk := b1 + · · · + bk.
+Établir la formule de sommation par parties :
+N
+∑
+n=M
+an bn = aN BN − aM BM−1 −
+N −1
+∑
+n=M
+(an+1 − an
+) Bn,
+valable pour tout 1 6 M 6 N − 1.
+Exercice 25. En utilisant l’Exercice 24, démontrer le Théorème d’Abel : si une série numérique ∑∞
+n=1 an
+converge (an ∈ C), alors :
+rli→m1
+r<1
+∞
+∑
+n=1
+rn an =
+∞
+∑
+n=1
+an.
+Exercice 26. Montrer que si {an}n∞=1 est une suite de nombres complexes tous non nuls an ∈ C∗ telle que :
+lim
+n→∞
+|an+1|
+|an| = L,
+avec 0 6 L 6 ∞, alors on a aussi :
+L = lim
+n → ∞ |an|1/n.
+Ainsi, lorsqu’il est applicable, le critère de Hadamard peut être utilisé (au lieu du critère de Cauchy), pour déterminer un rayon de convergence.
+Exercice 27. (a) Montrer que la fonction :
+f (z) := 1
+1 − z − z2 est holomorphe dans un voisinage ouvert de 0 dans C.
+(b) Montrer que les coefficients de son développement en série entière à l’origine f (z) = ∑∞
+n=0 an zn
+satisfont la relation de récurrence de Fibonacci :
+a0 = a1 = 1, an = an−1 + an−2 (∀ n > 2).
+
+
+14. Exercices 53
+(c) Déterminer le rayon de convergence exact de cette série entière.
+Exercice 28. Déterminer les rayons de convergence des séries entières suivantes :
+∞
+∑
+n=1
+(log n)2 zn,
+∞
+∑
+n=1
+n! zn,
+∞
+∑
+n=1
+n2
+4n + 3 n zn, zn,
+∞
+∑
+n=1
+n!
+nn zn,
+∞
+∑
+n=1
+(n!)3
+(3 n)! zn.
+Indication: Utiliser l’asymptotique de Stirling n! ∼ ( n
+e
+)n √2πn quand n −→ ∞.
+Exercice 29. Déterminer les rayons de convergence des séries entières suivantes :
+∞
+∑
+n=1
+1
+2n zn,
+∞
+∑
+n=1
+1
+n zn,
+∞
+∑
+n=1
+1
+n2 zn,
+∞
+∑
+n=1
+qn2 zn,
+où q > 0.
+Exercice 30. Soient deux séries entières centrées à l’origine :
+f (z) =
+∞
+∑
+n=0
+an zn et g(z) =
+∞
+∑
+n=0
+bn zn,
+dont les rayons de convergence respectifs R > 0 et S > 0 sont strictement positifs. Montrer que les séries somme et produit :
+∞
+∑
+n=0
+(an + bn
+) zn et
+∞
+∑
+n=0
+(a0 bn + · · · + an b0
+) zn
+ont un rayon de convergence au moins égal à :
+min (R, S),
+et fournissent les valeurs de f (z) + g(z) et de f (z) g(z) dans le disque associé.
+Exercice 31. Soient α, β, γ ∈ C avec γ 6= 0, −1, −2, −3, . . . . Trouver le rayon de convergence de la série hypergéométrique :
+F
+(α, β, γ; z) := 1 +
+∞
+∑
+n=1
+α(α + 1) · · · (α + n − 1) β(β + 1) · · · (β + n − 1)
+n! γ(γ + 1) · · · (γ + n − 1) zn.
+Montrer que F (α, β, γ; z) est une solution de l’équation différentielle dite hypergéométrique d’inconnue y:
+0 = z (1 − z) y′′ + [c − (1 + a + b) z] y′ − ab y.
+Exercice 32. Soit ∑∞
+n=1 an zn une série entière ayant un rayon de convergence R > 0. Montrer que les séries suivantes ont le même rayon de convergence R :
+∞
+∑
+n=1
+n an zn,
+∞
+∑
+n=1
+n2 an zn,
+∞
+∑
+n=1
+n an zn−1.
+Exercice 33. Soit un entier r > 1. Trouver le rayon de convergence de la fonction de Bessel d’ordre r :
+Jr(z) :=
+(z
+2
+)r ∞
+∑
+n=0
+(−1)n n! (n + r)!
+(z
+2
+)2n
+.
+Exercice 34. Quel est le rayon de convergence de la série entière :
+f (z) =
+∞
+∑
+n=0
+z2n
+(n!)2 ?
+Montrer qu’elle est solution de l’équation différentielle d’inconnue y :
+0 = z y′′ + y′ − 4 z y.
+
+
+54 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Exercice 35. Montrer qu’il existe des nombres dits de Bernouilli tels que :
+z
+ez − 1 =
+∞
+∑
+n=0
+Bn
+n ! zn.
+Montrer que |Bn| −→ ∞ quand n −→ ∞. Montrer que :
+B0
+n! 0! + B1
+(n − 1)! 1! + · · · + Bn−1
+1! (n − 1)! =
+{ 1 lorsque n = 1,
+0 lorsque n > 2.
+En déduire que Bn ∈ Q. Calculer B0, B1, B2, B3, B4, B5. Montrer que B2n+1 = 0 pour n > 1. Montrer :
+z 2
+ez/2 + e−z/2
+ez/2 − e−z/2 =
+∞
+∑
+n=0
+B2n
+(2n)! z2n,
+et en déduire :
+π z cotan(π z) =
+∞
+∑
+n=0
+(−1)n (2π)2n
+(2 n)! B2n z2n.
+Exercice 36. Établir les énoncés suivants.
+(a) La série entière ∑ n zn ne converge en aucun point du cercle unité.
+(b) La série entière ∑ 1
+n2 zn converge en tous les points du cercle unité.
+(c) La série entière ∑ 1
+n zn converge en tous les points du cercle unité, excepté le point 1. Indication: utiliser la sommation par parties.
+Exercice 37. Soit m > 1 un entier. Développer (1 − z)−m en puissances de z. Montrer que les coefficients obtenus :
+1
+(1 − z)m =
+∞
+∑
+n=0
+an zn,
+satisfont l’estimée asymptotique suivante :
+an n →∼∞
+1
+(m − 1)! nm−1.
+Exercice 38. Montrer que pour tout |z| < 1, on a :
+z
+1 − z2 + z2
+1 − z4 + · · · + z2n
+1 − z2n+1 + · · · = z
+1−z,
+et aussi :
+z
+1 + z + 2 z2
+1 + z2 + · · · + 2k z2k
+1 + z2k + · · · = z
+1−z.
+Montrer que ces deux sommes infinies convergent commutativement. Indication: utiliser le développement dyadique d’un entier et le fait que 2k+1 − 1 = 1 + 2 + 22 + · · · + 2k.
+Exercice 39. Un sous-ensemble S ⊂ {1, 2, 3, . . .} de N∗ est dit être en progression arithmétique lorsqu’il est de la forme :
+S = {a, a + d, a + 2 d, a + 3 d, . . . . . . },
+où a, d > 1 sont des entiers. Ici, d est appelé le pas de la progression arithmétique. Montrer que N∗ ne peut pas être partitionné en un nombre fini de sous-ensembles S1, . . . , Sk qui sont en progressions arithmétiques de pas d1, . . . , dk tous distincts deux à deux (excepté dans le cas trivial a = d =
+1). Indication: Écrire ∑∞
+n=1 zn comme somme de termes du type za
+1−zd .
+Exercice 40. Montrer que l’anneau des fonctions analytiques dans un ouvert Ω est un anneau intègre si et seulement si Ω est connexe.
+Exercice 41. Montrer que l’algèbre des fonctions continues sur un ouvert Ω ⊂ C n’est jamais intègre, et décrire précisément les diviseurs de 0.
+
+
+14. Exercices 55
+Exercice 42. Existe-t-il une fonction analytique f définie sur un ouvert connexe Ω contenant 0 ∈ C et satisfaisant :
+• soit pour tout entier n > 1 tel que 1
+n ∈Ω:
+f
+(1
+n
+)
+=f
+(1
+2n+1
+)
+=1
+n;
+• soit pour tout entier n > 1 tel que 1
+n ∈Ω:
+f
+(1
+n
+)
+=f
+(
+−1
+n
+)
+=1
+n2 ;
+Exercice 43. Soit f (z) = sin π
+1−z . Montrer que f est analytique sur le disque ouvert {|z| < 1}. Déterminer les zéros de f . A-t-on une contradiction avec le principe des zéros isolés ?
+Exercice 44. Dans un ouvert Ω ⊂ C, soit une fonction f ∈ O(Ω\{z0}) holomorphe en-dehors d’un certain point z0 ∈ Ω. On suppose que f est localement bornée au voisinage de z0, à savoir qu’il existe un rayon r > 0 et une constante 0 6 M < ∞ tels que :
+∣
+∣f (z)∣
+∣ 6 M (∀ z ∈ Dr(z0) \ {z0}).
+(a) Montrer que la fonction définie par :
+g(z) :=
+{
+(z − z0)2f (z) lorsque z ∈ Ω\{z0},
+0 pour z = z0,
+est C-dérivable en tout point de Ω.
+(b) En admettant la coïncidence O(Ω) = A (Ω) entre fonctions holomorphes et fonctions analytiques, mon
+trer qu’il existe une série entière unique φ(z − z0) = ∑∞
+n=0 cn (z − z0)n convergeant au voisinage de z0 telle que :
+g(z) = (z − z0
+)2 φ(z − z0) (∀ z près de z0).
+(c) Montrer qu’il existe une unique fonction holomorphe f ̃ ∈ O(Ω) telle que :
+f ̃∣
+∣Ω\{z0} = f.
+Exercice 45. Considérer la fonction f définie sur R par :
+f (x) =
+{ 0 lorsque x 6 0,
+e− 1
+x2 lorsque x > 0.
+Montrer que f est indéfiniment différentiable, i.e. montrer que f est de classe C ∞. Montrer que f (n)(0) = 0 pour tout n > 0. Montrer que f ne peut être représentée, dans aucun intervalle ouvert non vide centré à
+l’origine, sous forme d’une série entière convergente ∑∞
+n=0 an xn.
+Exercice 46. Calculer : ∫
+[0,1+i]
+x dz,
+∫π
+0
+y d(
+R eiθ)
+(R > 0).
+Exercice 47. Sur le cercle Cr(z0) := {z ∈ C : |z − z0| = r} de rayon r > 0 centré en z0 ∈ C, calculer pour tout entier n ∈ Z : ∫
+Cr (z0)
+(z − z0
+)n dz.
+Exercice 48. Avec R > 0, soit C+
+R le demi-cercle de diamètre [−R, R] ⊂ R ⊂ C parcouru dans le sens trigonométrique. Vérifier que :
+∫
+C+
+R
+ez dz =
+∫R
+−R
+ex dx.
+Exercice 49. Sur l’ellipse E de demi-axes 0 < a 6 b paramétrée par θ 7−→ a cos θ + i b sin θ avec 0 6 θ 6 2π, calculer : ∫
+E
+|z|2 dz.
+
+
+56 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Exercice 50. Pour toute fonction continue g sur le cercle unité C paramétré par θ 7−→ eiθ, montrer que :
+∫
+C
+g(z) dz = −
+∫
+C
+g(z) dz
+z2 .
+Exercice 51. Montrer que la fonction f (z) := 1
+z2−z n’a pas de primitive dans l’ouvert :
+Ω := {z ∈ C : 0 < |z − 1| < 1}.
+Exercice 52. Soit γ une courbe lisse dans C paramétrée par z(t) : [a, b] −→ C. Soit γ− la courbe orientée dans le sens inverse. Montrer que pour toute fonction continue f sur γ, on a :
+∫
+γ−
+f (z) dz = −
+∫
+γ
+f (z) dz.
+Exercice 53. Cet exercice a pour objectif de faire pénétrer plus avant dans la substance essentielle du théorème de Cauchy, qui sera traité en détail dans le chapitre suivant.
+(a) Soit γ un cercle quelconque centré à l’origine 0 ∈ C, muni de l’orientation trigonométrique. Pour n ∈ Z
+entier relatif, évaluer l’intégrale :
+∫
+γ
+zn dz.
+(b) Traiter la même question, mais pour un cercle γ dont l’intérieur ne contient pas l’origine 0 ∈ C.
+(c) Soit Cr le cercle de centre 0 ∈ C et rayon r > 0, orienté dans le sens trigonométrique. Montrer que pour |a| < r < |b|, on a :
+∫
+γ
+1
+(z − a)(z − b) dz = 2iπ
+a − b.
+Exercice 54. Soit f une fonction continue dans un ouvert connexe Ω ⊂ C. Montrer que deux primitives quelconques de f (s’il en existe) diffèrent toujours par une constante.
+Exercice 55. Soit un rayon R > 0, soit le disque ouvert DR = {z ∈ C : |z| < R} centré en l’origine, et soit f : DR −→ C une fonction de classe C 1 qui est holomorphe. Ainsi, la dérivée complexe z 7−→ f ′(z) est ici supposée continue. Pour 0 < r < R, dans le sous-disque Dr ⊂ DR, pour z ∈ Dr quelconque fixé, i.e. pour |z| < r, on introduit les intégrales suivantes dépendant d’un paramètre réel 0 6 λ 6 1 :
+I(λ) :=
+∫ 2π
+0
+f
+((1 − λ) z + λ r eiθ) − f (z)
+r eiθ − z r eiθdθ.
+(a) Justifier que λ 7−→ I(λ) est continue sur [0, 1].
+(b) Trouver I(0).
+(c) Justifier que pour tout 0 < λ 6 1, la dérivée I′(λ) existe.
+(d) Calculer I′(λ) sur ]0, 1].
+(e) Montrer que :
+∫ 2π
+0
+f (reiθ) − f (z)
+r eiθ − z r eiθ dθ = 0.
+(f) Montrer que :
+∫ 2π
+0
+r eiθ
+r eiθ − z dθ = 2π.
+Indication: Développer en série entière 1/(1 − z
+r eiθ
+).
+(g) Démontrer et justifier la formule suivante :
+2π f (z) =
+∞
+∑
+n=0
+zn
+rn
+∫ 2π
+0
+f
+(r eiθ) e−inθ dθ.
+Indication: En appelant cn le coefficient de zn
+rn ci-dessus, vérifier que :
+|cn| 6 2π sup
+|ζ|=r
+∣
+∣f (ζ)∣
+∣.
+
+
+14. Exercices 57
+(h) Montrer que toute fonction holomorphe f ∈ O(∆) et C 1 dans un disque ∆ := DR(z0) = {z ∈ C : |z − z0| < R} est développable en série entière convergente :
+f (z) =
+∞
+∑
+n=0
+an
+(z − z0
+)n (∀ |z−z0| < R),
+avec des coefficients complexes donnés par :
+an := 1
+2π
+∫ 2π
+0
+f
+(z0 + r eiθ) e−inθ dθ (n > 0).
+(i) Obtenir la formule de Cauchy valable pour tous r et z avec |z − z0| < r < R :
+f (z) = 1
+2π
+∫ 2π
+0
+f (z0 + r eiθ)
+z0 + r eiθ − z r eiθ dθ.
+—————
+
+
+58 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Théorèmes de Cauchy et applications
+François DE MARÇAY
+Département de Mathématiques d’Orsay Université Paris-Sud, France
+1. Introduction
+Dans le chapitre précédent, nous avons présenté les concepts de base pour la topologie sur C, nous avons défini les fonctions holomorphes et nous avons montré comment les intégrer le long de courbes C 1. Le premier résultat remarquable de la Théorie de Cauchy exhibe des connexions profondes entre ces notions. En effet, le Théorème de Cauchy énonce que si une fonction f ∈ O(Ω) est holomorphe dans un ouvert Ω ⊂ C, et si γ ⊂ Ω est une courbe fermée simple dont la région intérieure
+est contenue dans Ω, alors :
+∫
+γ
+f (z) dz = 0.
+De très nombreux résultats découleront de cette formule, et notamment la clé de voûte de tout l’édifice, le Théorème des résidus — véritable magie de l’holomorphie ! — qui va nous inviter à sa pêche interstellaire miraculeuse, nous, glaneurs de belles singularités résiduelles . . . Un théorème célèbre de Jordan stipule en effet que le complémentaire C\γ consiste en exactement deux composantes connexes ouvertes γint et γext avec la décomposition disjointe :
+C = γint ∪ γ ∪ γext,
+celle qu’on nomme intérieure étant la seule dont l’adhérence dans C est compacte. Le théorème de Cauchy suppose donc, et c’est important, que cette adhérence compacte est entièrement contenue dans le domaine de définition :
+γint ∪ γ ⊂ Ω.
+Toutefois, puisque la visualisation intuitive instantanée du théorème de Jordan est en décalage complet avec sa démonstration mathématique rigoureuse complète, laquelle est passablement longue et difficile, nous en admettrons l’énoncé, et ne le démontrerons que dans un appendice spécialement dédié. En tout cas, pour toutes les courbes auxquelles nous aurons affaire dans ce chapitre, la détermination de l’intérieur et de l’extérieur de γ ne poseront aucun problème. Une version initiale élémentaire de ce théorème de Cauchy suppose que la fonction possède une primitive dans Ω, au sens où cela a été défini dans le chapitre précédent. En fait, nous démontrerons que pour des contours élémentaires γ dont l’intérieur est contenu dans
+
+
+2. Théorème de Goursat 59
+Ω, les fonctions holomorphes ont des primitives, et alors le théorème de Cauchy deviendra tout aussi translucide que la formule fondamentale du calcul intégral réel :
+∫1
+0
+g′(x) dx = g(1) − g(0).
+Dans la Nature (mathématique !), le contour essentiellement le plus simple possible est celui qui borde un triangle fermé T ⊂ Ω ⊂ C. L’existence de primitives pour les fonctions holomorphes découlera du Théorème de Goursat, lequel énonce que pour toute fonction holomorphe f ∈ O(Ω), on a l’annulation :
+0=
+∫
+∂T
+f (z) dz.
+Il est absolument remarquable que ce sous-cas du théorème de Cauchy est le germe de tous les autres résultats plus avancés de la théorie de Cauchy. En plaçant des triangles orientés blottis les uns à côté des autres, nous allons en déduire, à la manière de carreleurs, l’existence de primitives dans un voisinage de γint, ainsi qu’une démonstration directe du théorème fondamental de Cauchy susmentionné. Toutes ces idées séduisantes vont nous conduire par la main au résultat central de ce chapitre, la Formule intégrale de Cauchy. Sa version prototypique énonce que si une fonction f ∈ O(Ω) est holomorphe dans un ouvert Ω ⊂ C, alors pour tout disque fermé ∆ ⊂ Ω, on retrouve les valeurs de la fonction en chaque point intérieur z ∈ ∆ par l’intégration :
+f (z) = 1
+2iπ
+∫
+∂∆
+f (ζ)
+ζ − z dζ.
+Ensuite, des différentiations successives de cette identité nous fourniront une collection infinie de formules intégrales, dont découlera un théorème absolument fantastique montrant que les fonctions holomorphes sont indéfiniment différentiables — alors qu’elles n’étaient supposées qu’une seule fois C-différentiables en tout point, même pas C 1 au départ ! Ah oui certes, pour les fonctions de variable réelle, l’énoncé analogue est radicalement faux ! Pourquoi, alors, tout est si vrai, si beau, et si bon, dans le monde holomorphe ? Parce que la Magie, c’est, en Mathématique, l’Unité : tout, dans la théorie des fonctions holomorphes, s’entrelace : Analyse, Géométrie, Topologie, Algèbre, Calcul !
+2. Théorème de Goursat
+À la fin du chapitre précédent, nous avons démontré que si une fonction holomorphe f dans un ouvert Ω ⊂ C y admet une primitive F , à savoir une fonction F telle que F ′ = f , alors :
+0=
+∫
+γ
+f (z) dz,
+pour toute courbe fermée γ ⊂ Ω. Réciproquement, si de telles annulations sont toujours satisfaites, une primitive existe pour f , car il suffit en effet de fixer un point z0 ∈ Ω, et de définir :
+Fσ(z) :=
+∫
+σ : z0→z
+f (z) dz,
+cette intégrale étant prise le long de n’importe quelle courbe C 1 par morceaux σ : z0 −→ z contenue dans Ω, puisque la valeur ne dépend alors pas de la courbe !
+
+
+60 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+σ−
+2
+z0
+σ1
+z0
+σ2
+z
+σ1
+z
+Effectivement, la différence entre deux valeurs :
+Fσ2(z) − Fσ1(z) =
+∫
+σ1 : z0→z
+f (z) dz −
+∫
+σ2 : z0→z
+f (z) dz
+=
+∫
+σ1 σ−
+2
+f (z) dz
+=
+∫
+courbe fermée
+f (z) dz
+= 0,
+s’annule par hypothèse ! Notre point de départ sera le théorème suivant, dans lequel on ne suppose pas l’existence d’une primitive, mais où l’on se restreint d’abord à des figures géométriques simples. Classiquement, on note O(Ω) l’algèbre des fonctions holomorphes dans un ouvert Ω ⊂ C.
+Ω
+T = T0
+Théorème 2.1. [de Goursat] Si Ω ⊂ C est un sous-ensemble ouvert, et si T = T ⊂ Ω est un triangle euclidien fermé 2-dimensionnel entièrement contenu dans Ω dont le bord ∂T est constitué de trois segments orientés, alors :
+0=
+∫
+∂T
+f (z) dz,
+pour toute fonction holomorphe f ∈ O(Ω).
+Constamment, nous choisirons l’orientation trigonométrique directe.
+Démonstration. Appelons T0 := T notre triangle. Lorsqu’il est aplati, l’énoncé est trivial — pourquoi ? Lorsqu’il n’est pas aplati, nous allons le disséquer indéfiniment — oui, sans pitié ! Notons d0 le diamètre de T0 et p0 son périmètre. Relions les trois milieux de ses trois côtés.
+
+
+2. Théorème de Goursat 61
+T1,1
+T1,3
+T1,4
+T1,2
+Quatre triangles en similitude apparaissent — notons-les T1,1, T1,2, T1,3, T1,4. Orientonsles dans le sens trigonométrique direct. Deux côtés adjacents appartenant à deux triangles distincts sont orientés de manière opposée. Par conséquent, des annihilations d’intégrales sur paires de segments orientés inverses permettent d’écrire (exercice) :
+∫
+∂T0
+f (z) dz =
+∫
+∂T1,1
+f (z) dz +
+∫
+∂T1,2
+f (z) dz +
+∫
+∂T1,3
+f (z) dz +
+∫
+∂T1,4
+f (z) dz.
+Affirmation 2.2. Il existe un indice 1 6 i 6 4 tel que :
+∣ ∣ ∣ ∣
+∫
+∂T0
+f (z) dz
+∣ ∣ ∣ ∣
+64
+∣ ∣ ∣ ∣
+∫
+∂T1,i
+f (z) dz
+∣ ∣ ∣ ∣
+.
+Preuve. Sinon, si on avait pour tous i = 1, 2, 3, 4 :
+1
+4
+∣ ∣ ∣ ∣
+∫
+∂T0
+f (z) dz
+∣ ∣ ∣ ∣
+>
+∣ ∣ ∣ ∣
+∫
+∂T1,i
+f (z) dz
+∣ ∣ ∣ ∣
+,
+une inégalité triangulaire à 4 termes conduirait à l’absurdité 1
+4+1
+4+1
+4+1
+4 > 1.
+Sélectionnons un triangle qui satisfait cette inégalité, puis renommons-le T1. Puisqu’il est homothétique de rapport 1
+2 à partir de T0, son diamètre d1 et son périmètre p1 valent :
+d1 = 1
+2 d0 et p1 = 1
+2 p0.
+Itérons ce procédé en décomposant T1 en quatre triangles T2,1, T2,2, T2,3, T2,4, sélectionnons un d’entre eux, redécomposons-le, resélectionnons, et ainsi de suite. Nous construisons ainsi une suite infinie de triangles fermés emboîtés les uns dans les autres :
+T0 ⊃ T1 ⊃ · · · ⊃ Tn ⊃ · · ·
+de diamètres et de périmètres tendant vers 0 comme :
+dn = 1
+2n d0 et pn = 1
+2n p0,
+de telle sorte qu’ils satisfont les inégalités :
+∣ ∣ ∣ ∣
+∫
+∂T0
+f (z) dz
+∣ ∣ ∣ ∣
+6 4n
+∣ ∣ ∣ ∣
+∫
+∂Tn
+f (z) dz
+∣ ∣ ∣ ∣
+.
+Alors d’après un théorème connu de topologie, cette suite de compacts emboîtés Tn ⊂ C de diamètres tendant vers 0 converge vers un unique point du plan :
+z0 := n∩>0 Tn.
+Maintenant — enfin vient l’hypothèse principale ! —, comme f est holomorphe en z0, nous pouvons écrire :
+f (z) = f (z0) + f ′(z0) (z − z0
+) + ψ(z) (z − z0
+),
+
+
+62 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+avec une fonction-reste satisfaisant ψ(z) −→ 0 lorsque z −→ z0. Or comme les premiers termes affines f (z0) + f ′(z0) (z − z0) possèdent la primitive holomorphe évidente :
+f (z0) (z − z0
+)+ 1
+2 f ′(z0) (z − z0
+)2,
+un énoncé vu au chapitre précédent et rappelé dans l’introduction nous offre, pour tout n > 0, l’annulation de leur intégrale sur ∂Tn, donc il ne reste plus que :
+∫
+∂Tn
+f (z) dz =
+∫
+∂Tn
+ψ(z) (z − z0
+) dz (n > 0).
+Dans ces intégrales, z0 appartient à Tn et z se promène sur ∂Tn, d’où :
+∣
+∣z − z0
+∣
+∣ 6 dn = 1
+2n d0.
+Comme le diamètre de Tn tend vers zéro :
+εn := sup
+z∈Tn
+∣
+∣ψ(z)∣
+∣ n−→→∞ 0.
+Toutes ces estimations nous permettent enfin d’exprimer la synthèse terminale sous la forme d’un calcul vertical conclusif :
+∣ ∣ ∣ ∣
+∫
+∂T0
+f (z) dz
+∣ ∣ ∣ ∣
+6 4n
+∣ ∣ ∣ ∣
+∫
+∂Tn
+f (z) dz
+∣ ∣ ∣ ∣
+= 4n
+∣ ∣ ∣ ∣
+∫
+∂Tn
+ψ(z) (z − z0
+) dz
+∣ ∣ ∣ ∣
+6 4n εn dn pn
+= 4n εn d0
+2n
+p0 2n
+= εn d0 p0 −→
+n→∞ 0.
+T1
+T2
+R
+Corollaire 2.3. Si une fonction f ∈ O(Ω) est holomorphe dans un ouvert Ω ⊂ C qui contient un rectangle fermé R = R ⊂ Ω, alors :
+0=
+∫
+∂R
+f (z) dz.
+Preuve. C’est immédiat, puisque nous pouvons découper en deux triangles ce rectangle le long d’une de ses diagonales, et constater que :
+∫
+∂R
+f (z) dz =
+∫
+∂T1
+f (z) dz +
+∫
+∂T2
+f (z) dz = 0 + 0.
+
+
+3. Existence locale de primitives et théorèmes de Cauchy dans des disques 63
+3. Existence locale de primitives et théorèmes de Cauchy dans des disques
+Une première conséquence du théorème de Goursat est l’existence de primitives dans la situation géométrique la plus simple possible.
+Théorème 3.1. [Cauchy 1] Une fonction f ∈ O(∆) holomorphe dans un disque ouvert ∆ ⊂ C y possède toujours une primitive holomorphe F ∈ O(∆) avec F ′ = f .
+Démonstration. Après une translation, nous pouvons supposer que ce disque ∆ 3 0 est centré à l’origine.
+z
+z+h
+0
+z
+0
+z
+z+h
+0
+z
+z+h γ
+Pour z ∈ ∆ quelconque, en notant [0, z] le segment fermé allant de 0 à z, lequel est visiblement contenu dans ∆, intégrons :
+F (z) :=
+∫
+[0,z]
+f (ζ) dζ,
+pour définir de manière inambiguë une fonction F : ∆ −→ C, et vérifions que F est Cdifférentiable en tout point, de dérivée F ′ = f . Avec h ∈ C assez petit pour que z + h ∈ ∆, exprimons donc la différence :
+F (z + h) − F (z) =
+∫
+[0,z+h]
+f (ζ) dζ −
+∫
+[0,z]
+f (ζ) dζ.
+Mais n’y aurait-il pas un triangle à la Goursat pour simplifier tout cela ? Oui, car par convexité de ∆, le troisième segment [z, z + h] est contenu dans ∆, tout aussi bien que le triangle fermé de sommets 0, z, z + h, et alors grâce à Goursat (exercice visuel) :
+F (z + h) − F (z) =
+∫
+γ
+f (ζ) dζ,
+où l’on a, pour désalourdir, abrégé γ := [z, z + h]. Or puisque f ∈ O(Ω) est C-différentiable, donc continue, nous pouvons écrire :
+f (ζ) = f (z) + ψ(ζ),
+avec une fonction-reste ψ(ζ) −→ 0 lorsque ζ −→ z. Ainsi :
+F (z + h) − F (z) =
+∫
+γ
+f (z) dζ +
+∫
+γ
+ψ(ζ) dζ
+= f (z)
+∫
+γ
+1 dζ +
+∫
+γ
+ψ(ζ) dζ
+= f (z) h +
+∫
+γ
+ψ(ζ) dζ,
+
+
+64 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+et comme la fonction constante 1 possède la primitive holomorphe évidente ζ, un théorème vu au chapitre qui précéde montre que la première intégrale vaut h. Mais alors en majorant le deuxième terme par :
+∣ ∣ ∣ ∣
+∫
+γ
+ψ(ζ) dζ
+∣ ∣ ∣ ∣
+6 sup
+ζ∈γ
+∣
+∣ψ(ζ )∣
+∣ |h|,
+nous concluons sans effort :
+hli→m0
+F (z + h) − F (z)
+h = f (z) + hli→m0 sup
+γ
+∣
+∣ψ(ζ )∣
+∣
+= f (z).
+Ce Théorème 3.1 implique donc que les fonctions holomorphes dans un ouvert quelconque Ω ⊂ C possèdent toujours des primitives locales, c’est-à-dire définies dans des disques ∆ ⊂ Ω. La suite des événements mathématiques va montrer que ce théorème est non seulement vrai pour des disques, mais aussi pour beaucoup de régions ayant d’autres formes, et c’est là que Géométrie et Topologie vont s’inviter sans prévenir chez Dame Analyse.
+Théorème 3.2. [Cauchy 2] Si une fonction f ∈ O(∆) est holomorphe dans un disque ouvert ∆ ⊂ C, alors :
+0=
+∫
+γ
+f (ζ) dζ,
+pour toute courbe fermée γ ⊂ ∆.
+Preuve. Puisque f possède une primitive, un théorème du chapitre qui précède mobilisation mentale ! — s’applique directement.
+Ω
+∆
+∆′
+Théorème 3.3. [Cauchy 3] Si une fonction f ∈ O(Ω) est holomorphe dans un ouvert Ω ⊃ C ∪ ∆ contenant un cercle C ainsi que son disque intérieur ∆, alors :
+0=
+∫
+C
+f (ζ) dζ.
+Preuve. Puisqu’il existe un disque ouvert intercalé :
+C ∪ ∆ = ∆ ⊂ ∆′ ⊂ Ω,
+le théorème précédent s’applique immédiatement à la courbe γ := C — trop facile !
+
+
+4. Contours élémentaires 65
+4. Contours élémentaires
+Au-delà des cercles, nous commençons à avoir l’intuition que pour des fonctions holomorphes f ∈ O(Ω) définies dans des voisinages ouverts de contours élémentaires fermés simples Γ :
+Ω ⊃ Γ ∪ Γint,
+lesquels bordent un ouvert borné Γint d’après le théorème de Jordan (admis temporairement), on doit encore avoir :
+0=
+∫
+Γ
+f (ζ) dζ.
+Mais attention ! Il est important de supposer que :
+• Γ est une courbe fermée simple (au moins C 1 par morceaux) ;
+• Ω ⊃ Γ ∪ Γint ;
+car sinon, l’intégrale en question peut être non nulle, à cause de singularités éventuelles de f dans Γint.
+Exemple 4.1. En revenant à un exemple discuté à la fin du chapitre précédent, soit la fonction f (z) := 1
+z , holomorphe dans C\{0}, soit le disque unité D := {z ∈ C : |z| < 1}
+à bord le cercle unité ∂D := {|z| = 1}. Ici évidemment, [∂D]
+int = D, mais f n’est pas
+holomorphe dans un voisinage ouvert de D = D ∪ ∂D, et d’ailleurs, son intégrale sur ∂D ne vaut pas zéro :
+0 6= 2iπ =
+∫ 2π
+0
+1
+eiθ i eiθ dθ =
+∫
+∂D
+1
+z dz =
+∫
+∂D
+f (z) dz.
+Ainsi, dans le théorème de Cauchy, il est crucial que Γint ne contienne aucune singularité de f . À l’avance, énonçons-en une version très générale, que nous ne démontrerons qu’à la fin du cours, dans un appendice spécialement dédié. Rappelons que l’image d’un compact par une application continue est toujours un compact, donc une courbe de la forme Γ = z
+([0, 1]) avec z : [0, 1] −→ C continue, est toujours compacte.
+Théorème 4.2. [Jordan, Cauchy 4] Si Γ ⊂ C est une courbe fermée simple C 1
+pm, alors :
+C\Γ = Γint ∪ Γext consiste en exactement deux composantes connexes ouvertes ;
+Γint = Γint ∪ Γ = compact = fermé-borné ;
+Γext = Γext ∪ Γ = non compact.
+De plus, pour toute fonction f ∈ O(Ω) holomorphe dans un ouvert Ω ⊃ Γint ∪ Γ qui contient l’adhérence de la composante compacte, on a :
+0=
+∫
+Γ
+f (ζ) dζ.
+Contentons-nous, ici, de vérifier ce théorème pour des contours élémentaires, « peu compliqués » sur le plan géométrique.
+Définition 4.3. Un ouvert Ω ⊂ C est dit étoilé en l’un de ses points z0 ∈ Ω si, pour tout point z ∈ Ω, le segment [z0, z] ⊂ Ω est contenu en lui. On dira que Ω est étoilé s’il est étoilé en au moins un point.
+
+
+66 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Dans ce cas, la topologie est assez simple. Donnons trois exemples d’ouverts étoilés, qui sont en fait convexes.
+Définition 4.4. Un ouvert Ω ⊂ C est dit convexe si, pour tous z1, z2 ∈ Ω, le segment [z1, z2] ⊂ Ω est contenu en lui.
+On vérifie (exercice) qu’un ouvert convexe est étoilé en chacun de ses points.
+Théorème 4.5. [Cauchy étoilé] Dans un ouvert étoilé Ω ⊂ C, les deux propriétés suivantes sont vraies.
+(1) Toute fonction holomorphe f ∈ O(Ω) possède une primitive holomorphe F ∈ O(Ω), c’est-à-dire avec F ′ = f .
+(2) Pour toute courbe fermée γ ⊂ Ω qui est C 1
+pm, on a :
+0=
+∫
+γ
+f (ζ) dζ (∀ f ∈ O(Ω)).
+En particulier, si Γ ⊂ Ω est un contour fermé simple C 1
+pm avec Γint ⊂ Ω, alors 0 =
+∫
+Γ f (ζ) dζ.
+Démonstration. En un point quelconque z ∈ Ω, définissons en intégrant sur un segment :
+F (z) :=
+∫
+[z0,z]
+f (ζ) dζ,
+cette intégrale ayant un sens, puisque [z0, z] ⊂ Ω. Fixons z ∈ Ω, prenons r > 0 assez petit pour que Dr(z) ⊂ Ω, et regardons les quotients différentiels :
+F (z + h) − F (z)
+h,
+pour z + h ∈ Dr(z), c’est-à-dire pour |h| < r.
+Ω
+z0
+z+h
+z
+Dr (z)
+Comme Ω est étoilé, [z0, z + h] ⊂ Ω, et même, le triangle fermé tout entier de sommets z0, z, z + h est contenu dans Ω (exercice mental). Le théorème de Goursat donne alors :
+F (z + h) − F (z)
+h =1
+h
+∫
+[z,z+h]
+f (ζ) dζ,
+
+
+4. Contours élémentaires 67
+et ensuite, le même argument que dans la démonstration du Théorème 3.1 montre l’existence de :
+hli→m0
+F (z + h) − F (z)
+h = f (z).
+Enfin, nous avons déjà vu que l’existence d’une primitive donnait gratuitement (2).
+Le plan complexe épointé C\{0} n’est étoilé en aucun de ses points, sinon, s’il l’était, le Théorème 4.5 précédent, appliqué à la fonction f (ζ) := 1
+ζ sur le cercle unité z(t) := e2iπt serait contredit par l’Exemple 4.1. Mieux encore, il est préférable de se convaincre visuellement que ni C\{0}, ni D\{0} ne sont étoilés. Pour les rendre étoilés, il faut en fait retrancher plus qu’un seul point.
+D\{0}
+0
+z0
+∆
+w
+z−
+z+
+Exemple 4.6. Soit ∆ ⊂ C un disque ouvert non vide, soit un diamètre :
+[z−, z+
+] ⊂ ∆,
+avec z−, z+ ∈ ∂∆, et soit un point quelconque :
+w ∈ ]z−, z+
+[.
+Alors l’ouvert :
+Ω := ∆∖[w, z+
+[,
+est étoilé (exercice visuel) en chaque point :
+z0 ∈ ]z−, w[,
+et n’est étoilé en aucun autre point (exercice supplémentaire).
+Dans la suite, nous aurons besoin d’une version-clé du théorème de Cauchy :
+0=
+∫
+Γδ,ε
+f (ζ) dζ,
+pour une sorte d’« épaississement » d’un tel segment [w, z+[ ⊂ ∆, le long d’un contour Γδ,ε qui ressemble à la section d’un trou de serrure, que nous allons commencer à définir comme suit. Soit donc ∆ ⊂ C un disque ouvert non vide, soit un point quelconque w ∈ ∆, et soit le diamètre unique ]z−, z+[ 3 w de ∆ avec z−, z+ ∈ ∂∆ qui est contenu dans la droite (0, w), à moins que w = 0, auquel cas, on choisit un diamètre quelconque de ∆. Soient aussi deux nombres réels :
+0 < δ < ε rayon(∆).
+
+
+68 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+∆w
+z−
+z+
+w
+z−
+δ
+ε
+Ωδ,ε
+w
+Ωδ,ε
+z+ z+
+z−
+Ωδ′ ,ε′
+z0
+Comme sur la figure, soit Dε(w) le disque ouvert de rayon ε > 0 centré en w, et soit le tunnel ou canal de largeur étroite 2 δ autour du segment [w, z+[. Nous construisons ainsi un certain ouvert Ωδ,ε qui est l’intérieur de Jordan évident de son bord :
+Γδ,ε := ∂Ωδε,
+lequel consiste en une courbe fermée simple C 1
+pm. Pour la suite, il ne sera pas nécessaire de préciser explicitement une paramétrisation de cette courbe Γδ,ε, donc nous nous en dispenserons. Ensuite, soit Ω ⊃ Ωδ,ε un ouvert quelconque, non dessiné. Comme sur la figure, nous pouvons « épaissir légèrement » l’ouvert Ωδ,ε en un sur-ouvert toujours contenu dans Ω :
+Ω ⊃ Ωδ′,ε′ ⊃ Ωδ′,ε′ ⊃ Ωδ,ε ⊃ Ωδ,ε,
+associé, par exemple, à des quantités toujours très petites :
+0 < δ′ < δ < ε′ < ε rayon(∆),
+avec δ′ ≈ δ très proche de δ, et avec ε′ ≈ ε également.
+z2
+v′
+2
+Ωδ′ ,ε′
+z+
+Ω′
+1
+v′
+1
+Ω′
+2
+z1
+w
+u′
+2 u′
+1
+z0
+Ω′
+0 Ω′
+0
+Ω′
+0
+z−
+Ωδ,ε
+z2
+v′
+2
+Ωδ′ ,ε′
+z+
+Ω′
+1
+v′
+1
+Ω′
+2
+z1
+w
+u′
+2 u′
+1
+z0
+Ω′
+0 Ω′
+0
+Ω′
+0
+z−
+Ωδ,ε
+Théorème 4.7. [Cauchy 5, Trou de Serrure, Clé du Ciel] Pour toute fonction holomorphe f ∈ O(Ω) dans un ouvert Ω ⊃ Ωδ,ε, on a :
+0=
+∫
+∂Ωδ,ε
+f (ζ) dζ.
+
+
+4. Contours élémentaires 69
+En première lecture, il est conseillé d’admettre cet énoncé, et de passer directement à la Section 5 suivante.
+Démonstration. Il suffit de trouver une primitive holomorphe F ′ = f dans Ωδ′,ε′ ⊃ ∂Ωδ,ε. Ainsi, choisissons un léger épaississement Ωδ′,ε′ de Ωδ,ε. Prenons un point :
+z0 ∈ ]z−, w[ ∖ Dε(w),
+proche du milieu de ce segment. À cause du disque excisé autour de w, l’ouvert Ωδ,ε n’est pas étoilé en z0, mais soyons astucieux ! Soit le sous-disque fermé Dε′(w) ⊂ Dε(w). En partant de z0, traçons les deux demidroites qui lui sont tangentes, et pointons les deux points de tangence :
+u′
+1 ∈ ∂Dε′(w) et u′
+2 ∈ ∂Dε′(w),
+ainsi que les deux points d’intersection avec le bord de l’ouvert trou de serrure épaissi, qui sont situés au-delà :
+v′
+1 ∈ ∂Ωδ′,ε′ et v′
+2 ∈ ∂Ωδ′,ε′ .
+Les deux segments ouverts correspondants sont alors contenus dans cet ouvert :
+]u′
+1, v′
+1
+[ ⊂ Ωδ′,ε′ et ]u′
+2, v′
+2
+[ ⊂ Ωδ′,ε′ .
+Prenons aussi deux points :
+z1 ∈ ]u′
+1, v′
+1
+[ et z2 ∈ ]u′
+2, v′
+2
+[,
+proches des milieux de ces segments. Visiblement, ces deux segments décomposent Ωδ′,ε′ en trois composantes connexes ouvertes :
+Ω′
+0 3 z0, Ω′
+1 3 z1, Ω′
+2 3 z2,
+à savoir :
+Ωδ′,ε′ = Ω′
+0 ∪ Ω′
+1 ∪ Ω′
+2 ∪ ]u′
+1, v′
+1
+[ ∪ ]u′
+2, v′
+2
+[.
+Maintenant, définissons les valeurs de la primitive recherchée F de f en tous les points z ∈ Ωδ′,ε′, donc en particulier, en tous les points z ∈ Γδ,ε ⊂ Ωδ′,ε′ du contour d’intégration qui nous intéresse, comme suit.
+• Pour z ∈ Ω′
+0 ∪ ]u′
+1, v′
+1[ ∪ ]u′
+2, v′
+2[, intégrons simplement le long d’un segment droit :
+F (z) :=
+∫
+[z0,z]
+f (ζ) dζ.
+Observons que pour z ∈ ]u′
+1, v′
+1[ ou pour z ∈ ]u′
+2, v′
+2[, le segment sur lequel on intègre passe
+par le point u′
+1 6∈ Ωδ′,ε′ ou par le point u′
+2 6∈ Ωδ′,ε′, mais en ces points, f est quand même définie, puisque Ω ⊃ Ωδ′,ε′, par hypothèse. Observons aussi que Ω′
+0 est, intentionnellement, étoilé en z0.
+• Pour z ∈ Ω′
+1, passons d’abord par z1 :
+F (z) :=
+∫
+[z0,z1]
+f (ζ) dζ +
+∫
+[z1,z]
+f (ζ) dζ.
+Observons que pour tout z ∈ Ω′
+1, le segment ]z1, z] ⊂ Ω′
+1 est contenu dans Ω′
+1, puisque z1 n’a pas été choisi trop proche du disque Dε′(w).
+
+
+70 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+• Symétriquement, pour z ∈ Ω′
+2, passons d’abord par z2 :
+F (z) :=
+∫
+[z0,z2]
+f (ζ) dζ +
+∫
+[z2,z]
+f (ζ) dζ.
+Ainsi, F est définie partout dans Ωδ′,ε′, uniquement et sans ambiguïté.
+z2 z1
+z0
+z1
+u′
+1
+z0
+z+h
+z
+z+h
+z
+z2
+z z+h
+z+h
+z
+Assertion 4.8. En tout point z ∈ Ωδ′,ε′, on a pour tous h ∈ C assez petits avec [z, z + h] ⊂
+Ωδ′,ε′ :
+F (z + h) − F (z) =
+∫
+[z,z+h]
+f (ζ) dζ.
+Démonstration. Quand z ∈ Ω′
+0, pour tout h ∈ C suffisamment petit, i.e. pour |h| < r avec
+r > 0 petit, on a z + h ∈ Ω′
+0, et même, tout le triangle fermé de sommets z0, z, z + h est
+contenu dans Ω′
+0, donc le Théorème 2.1 de Goursat donne bien :
+F (z + h) − F (z) =
+∫
+[z0,z+h]
+f (ζ) dζ −
+∫
+[z0,z]
+f (ζ) dζ =
+∫
+[z,z+h]
+f (ζ) dζ.
+Quand z ∈ Ω′
+1 — et symétriquement aussi quand z ∈ Ω′
+2 —, pour |h| < r avec r > 0
+assez petit, d’où z + h ∈ Ω′
+1 encore, on calcule :
+F (z + h) − F (z) =
+∫
+[z0,z1]
+f (ζ) dζ
+◦
++
+∫
+[z1,z+h]
+f (ζ) dζ −
+∫
+[z0,z1]
+f (ζ) dζ
+◦
+−
+∫
+[z1,z]
+f (ζ) dζ
+[Goursat !] =
+∫
+[z,z+h]
+f (ζ) dζ,
+puisque le triangle de sommets z1, z, z + h est toujours contenu dans Ω′
+1 ∪ {z1}.
+Mais que se passe-t-il lorsque z ∈ ]u′
+1, v′
+1[ — et symétriquement aussi lorsque z ∈
+]u′
+2, v′
+2[ — ?
+Visiblement, z + h peut se trouver de l’un, ou de l’autre côté de la « frontière rouge » (mexicaine ?).
+
+
+5. Exemples de calculs d’intégrales réelles par la méthode complexe 71
+• Premier cas : si z + h ∈ Ω′
+0 ∪ ]u′
+2, v′
+2[ avec |h| < r petit, alors le triangle fermé de sommets z0, z, z + h est encore contenu dans Ωδ′,ε′ ⊂ Ω où f est holomorphe, donc :
+F (z + h) − F (z) =
+∫
+[z0,z+h]
+f (ζ) dζ −
+∫
+[z0,z]
+f (ζ) dζ
+[Goursat !] =
+∫
+[z,z+h]
+f (ζ) dζ.
+• Deuxième cas : si z + h ∈ Ω′
+1 avec |h| < r petit, alors on calcule :
+F (z + h) − F (z) =
+∫
+[z0,z1]
+f (ζ) dζ +
+∫
+[z1,z+h]
+f (ζ) dζ −
+∫
+[z0,z]
+f (ζ) dζ
+=
+∫
+[z0,z]
+f (ζ) dζ
+◦
++
+∫
+[z,z1]
+f (ζ) dζ +
+∫
+[z1,z+h]
+f (ζ) dζ −
+∫
+[z0,z]
+f (ζ) dζ
+◦
+=
+∫
+[z,z1]
+f (ζ) dζ +
+∫
+[z1,z+h]
+f (ζ) dζ
+[Goursat !] =
+∫
+[z,z+h]
+f (ζ) dζ,
+parce que le triangle fermé de sommets z, z1, z + h est toujours contenu dans Ω′
+1 ∪ ]u′
+1, v′
+1[ où f est holomorphe.
+Grâce à cette formule intégrale pour la différence, nous concluons comme précédemment que :
+hli→m0
+F (z + h) − F (z)
+h = f (z).
+Avant d’appliquer ce Théorème 4.7, illustrons la méthode de calcul d’intégrales complexes dans quelques cas spectaculaires.
+5. Exemples de calculs d’intégrales réelles par la méthode complexe
+Commençons par démontrer la formule sympathique :
+e−π ξ2 =
+∫∞
+−∞
+e−πx2 e−2iπξx dx,
+valable pour tout nombre réel ξ ∈ R. Ceci nous fournira une nouvelle démonstration du fait remarquable, déjà vu dans le cours d’Analyse de Fourier, que la fonction gaussienne e−πx2 est égale à sa transformée de Fourier. Pour ξ = 0, cette formule est précisément l’intégrale connue :
+1=
+∫∞
+−∞
+e−πx2 dx,
+
+
+72 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+qui se démontre fort astucieusement en en prenant le carré et en passant aux coordonnées polaires :
+(∫ ∞
+−∞
+e−πx2 dx
+)2
+=
+(∫ ∞
+−∞
+e−πx2 dx
+)(∫ ∞
+−∞
+e−πy2 dy
+)
+=
+∫∞
+−∞
+∫∞
+−∞
+e−π(x2+y2) dx dy
+=
+∫ 2π
+0
+∫∞
+0
+e−πr2 r dr dθ
+=
+∫∞
+0
+2π e−π r2 r dr
+=
+[
+− e−π r2
+]∞
+0
+= 1.
+Pour fixer les idées, supposons maintenant que ξ > 0, et introduisons la fonction de variable complexe :
+f (z) := e−πz2,
+qui est holomorphe entière, c’est-à-dire holomorphe dans le plan complexe C tout entier.
+−R
+−R + iξ
+0R
+R + iξ
+En particulier, pour tout R > 0, cette fonction est holomorphe dans le voisinage ouvert C du rectangle fermé ayant pour quatre sommets − R, R, R + i ξ, − R + i ξ. Notons γR son bord, orienté dans le sens trigonométrique direct. Le Théorème 4.5 de Cauchy étoilé donne :
+0=
+∫
+γR
+f (z) dz.
+Des quatre morceaux en lesquels se découpe cette intégrale, le premier est simplement :
+∫R
+−R
+e−πx2 dx,
+et il converge donc vers 1 lorsque R −→ ∞. Le deuxième morceau est l’intégrale sur le segment vertical à droite :
+IR :=
+∫ξ
+0
+f
+(
+R + i y) i dy =
+∫ξ
+0
+e−π(R2+2i Ry−y2) i dy.
+Or par chance cette intégrale tend vers 0 lorsque R −→ ∞, puisque nous pouvons l’estimer (exercice visuel) par :
+∣
+∣IR
+∣
+∣ 6 ξ e−πR2+πξ2 ,
+
+
+5. Exemples de calculs d’intégrales réelles par la méthode complexe 73
+sachant que ξ, ici, est fixé. De manière similaire, l’intégrale sur le segment vertical à gauche tend aussi vers 0 lorsque R −→ ∞. Enfin, l’intégrale sur le segment horizontal surelevé ressemble fort à celle qui nous intéresse :
+∫ −R
+R
+e−π(x+iξ)2 dx = − eπξ2
+∫R
+−R
+e−πx2 e−2iπξx dx.
+Finalement, en prenant donc la limite pour R −→ ∞ dans l’identité de Cauchy écrite plus haut, nous obtenons :
+0 = 1 + 0 − eπξ2
+∫∞
+−∞
+e−πx2 e−2iπξx dx + 0,
+ce qui est la formule annoncée dans le cas où ξ > 0 — évidemment, le cas ξ < 0 se traite de la même manière avec des rectangles situés en-dessous de l’axe des abscisses.
+Cette technique de déplacement et de création de contours qui tendent en partie vers l’infini possède de très nombreuses applications. Observons que nous avons surélevé, dans le plan complexe, le lieu d’intégration réelle ] − ∞, ∞[, utilisé ensuite le théorème de Cauchy, et fait voir que certaines contributions s’évanouissaient. Les plus beaux exercices d’Analyse Complexe font découvrir de multiples exemples d’intégrales qu’il semble impossible de calculer en recherchant des changements de variables astucieux, mais qui deviennent simples et transparentes quand on s’autorise à prendre son envol vers l’imaginaire.
+Voici alors un autre exemple, classique :
+∫∞
+0
+1 − cos x
+x2 dx = π
+2.
+−R ε
+0
+−ε R
+C+
+R
+cε−
+Pour atteindre cette formule, introduisons la fonction de variable complexe holomorphe sur C\{0} :
+f (z) := 1 − eiz
+z2 ,
+et intégrons-la sur le bord d’un grand demi-disque posé à plat sur l’axe des abscisses, tout en le perforant un peu en son centre afin d’éviter la singularité z = 0 de f (z). Notons donc c−
+ε le petit demi-cercle de rayon ε > 0 orienté négativement, ainsi que C+
+R celui de grand rayon R > 0 orienté positivement.
+
+
+74 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Dans ce contexte, une adaptation du Théorème 4.7 de Cauchy discuté dans les précédents paragraphes offre alors aussi l’annulation de l’intégrale de f le long de ce contour :
+0=
+∫ −ε
+−R
+1 − eix
+x2 dx +
+∫
+cε−
+1 − eiz
+z2 dz +
+∫R
+ε
+1 − eix
+x2 dx +
+∫
+C+
+R
+1 − eiz
+z2 dz
+} {{ }
+−→
+R → ∞0
+.
+Commençons ici, via l’estimée :
+∣ ∣ ∣ ∣
+1 − eiz
+z2
+∣ ∣ ∣ ∣
+62
+|z|2 ,
+par observer que la dernière intégrale, majorée en module par 2
+R2 πR, s’évanouit lorsque R −→ ∞. Par conséquent :
+∫ −ε
+−∞
+1 − eix
+x2 dx +
+∫∞
+ε
+1 − eix
+x2 dx = −
+∫
+cε−
+1 − eiz
+z2 dz.
+Ensuite par développement limité, nous avons :
+f (z) = −i
+z + g(z),
+avec une fonction-reste g(z) lisse, donc bornée près de l’origine. Paramétrons ensuite c−
+ε
+par z = ε eiθ avec θ décroissant de π vers 0, prenons la différentielle dz = ε i eiθ dθ, calculons :
+∫
+cε−
+1 − eiz
+z2 dz =
+∫0
+π
+−i
+ε eiθ i ε eiθ dθ +
+∫0
+π
+g
+(ε eiθ) i ε eiθ dθ
+= − π + O(ε) ε−→→0 − π,
+et revenons à l’identité abandonnée en chemin plus haut :
+∫0
+−∞
+1 − eix
+x2 dx +
+∫∞
+0
+1 − eix
+x2 dx = π.
+Un exercice visuel (ou un calcul à la sauvette, autorisé !) convainc que cette somme d’intégrale est en fait réelle et vaut :
+∫∞
+−∞
+1 − cos x
+x2 dx = π.
+Par parité de la fonction réelle intégrée ici, nous atteignons la formule annoncée.
+6. Formule de représentation intégrale de Cauchy
+Les formules de représentation intégrale jouent un rôle important en mathématiques, car elles permettent de retrouver les valeurs d’une fonction sur un grand ensemble, souvent ouvert, à partir de la seule connaissance de ces valeurs sur un plus petit ensemble, en général le bord de l’ouvert. Dans le cours d’Analyse de Fourier, nous avons vu que le noyau de Poisson sur le cercle unité était un bon noyau qui approxime l’identité pour la convolution. Ce noyau de Poisson est aussi intimement lié aux fonctions holomorphes, comme le montrent l’Exercice 17 et l’Exercice 18.
+
+
+6. Formule de représentation intégrale de Cauchy 75
+Ω
+C
+∆
+Théorème 6.1. [Formule de Cauchy 6] Soit f ∈ O(Ω) une fonction holomorphe dans un ouvert Ω ⊂ C. Alors pour tout disque fermé ∆ ⊂ Ω qui est contenu dans l’ouvert, les valeurs de f dans ∆ s’expriment par l’intégrale suivante sur le cercle-bord C := ∂∆ :
+f (z) = 1
+2iπ
+∫
+C
+f (ζ)
+ζ − z dζ (∀ z ∈ ∆).
+La fonction-poids ζ 7−→ 1
+ζ−z qui dépend du point z en lequel on souhaite retrouver la valeur de f , est souvent appelée noyau de Cauchy. Le Théorème 4.7 un peu « technique » a été préparé à l’avance pour obtenir cette formule.
+Démonstration. Fixons z ∈ ∆ et introduisons, pour 0 < δ < ε petits, le contour suivant Γδ,ε, en forme de trou de serrure.
+Γδ,ε
+∆
+z
+δ
+ε
+C
+z
+C
+cε
+Ici, δ est la largeur d’un couloir tracé en direction de z, et ε est le rayon d’un cercle centré en z. Puisque la fonction ζ 7−→ f(ζ)
+ζ−z est holomorphe en-dehors du point ζ = z, la formule Cauchy discutée dans la Section 4 — voir le Théorème 4.7 spécialement préparé à cette fin — donne l’annulation :
+0=
+∫
+Γδ,ε
+f (ζ)
+ζ −z.
+
+
+76 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Maintenant, faisons δ −→ 0, ce qui écrase le couloir jusqu’à ce que ses deux murs coïncident, et en utilisant la continuité de f(ζ)
+ζ−z , nous voyons que la somme des intégrales sur les deux murs égaux s’annule puisque l’orientation est opposée, et donc il ne reste plus que :
+0 = δli→m0
+∫
+Γδ,ε
+f (ζ)
+ζ − z dζ
+=
+∫
+C
+f (ζ)
+ζ − z dζ −
+∫
+cε
+f (ζ)
+ζ − z dζ,
+où cε est le tout petit cercle de centre z et de rayon ε > 0, orienté positivement. Ensuite, écrivons :
+f (ζ) = f (ζ) − f (z) + f (z),
+et prenons — juste pour le plaisir des yeux ! — la limite de tout cela lorsque ε −→ 0 :
+0=
+∫
+C
+f (ζ)
+ζ − z dζ − εli→m0
+∫
+cε
+f (ζ) − f (z)
+ζ − z dζ − f (z) εli→m0
+∫
+cε
+dζ
+ζ −z.
+Or comme f est holomorphe au point z, ce quotient différentiel, qui possède donc une limite, reste nécessairement borné :
+∣ ∣ ∣ ∣
+f (ζ) − f (z)
+ζ −z
+∣ ∣ ∣ ∣
+6 M (∃ M < ∞),
+donc la deuxième intégrale au centre tend vers 0 lorsque ε −→ 0, simplement parce qu’elle est majorée par M 2π ε ! Pour terminer la démonstration, il ne reste plus qu’à calculer la troisième intégrale. À cette fin, paramétrons le petit cercle cε par ζ = z + ε eit avec 0 6 t 6 2π, d’où dζ = − iεe−it, ce qui offre la formule annoncée :
+0=
+∫
+C
+f (ζ)
+ζ − z dζ − 0 − f (z) εli→m0
+∫ 2π
+0
+i ε eit
+ε eit dt
+=
+∫
+C
+f (ζ)
+ζ − z dζ − f (z) i 2π.
+Rz
+Cette formule de Cauchy dans un disque fermé se généralise aisément au cas d’un rectangle fermé R ⊂ Ω, avec des points z à l’intérieur R du rectangle en intégrant sur le bord ∂R du rectangle, car il suffit de percer un trou de serrure similaire dans le rectangle :
+f (z) = 1
+2iπ
+∫
+∂R
+f (ζ)
+ζ − z dζ.
+
+
+7. Analyticité des fonctions holomorphes et principe d’unicité 77
+Eu égard au Théorème 4.2 non encore démontré, énonçons le résultat analogue qui constitue la forme la plus générale du théorème de représentation intégrale de Cauchy.
+Théorème 6.2. [Jordan, Cauchy] Si Γ ⊂ C est une courbe fermée simple C 1
+pm, et si Ω ⊂ Γint ∪ Γ est un ouvert contenant son intérieur de Jordan, alors pour toute fonction holomorphe f ∈ O(Ω), on a en tout point intérieur :
+f (z) = 1
+2iπ
+∫
+Γ
+f (ζ)
+ζ − z dζ (∀ z ∈ Γint),
+tandis que pour les points extérieurs :
+0= 1
+2iπ
+∫
+Γ
+f (ζ)
+ζ − z dζ (∀ z ∈ Ω \ (Γ ∪ Γint)).
+Ce dernier cas où z 6∈ Γint est en fait un corollaire direct dudit Théorème 4.2, puisqu’alors la fonction ζ 7−→ f(ζ)
+ζ−z est holomorphe dans un certain voisinage ouvert ω ⊃ Γint assez ‘resserré’ pour que z 6∈ ω. Nous démontrerons ce résultat ultérieurement.
+Corollaire 6.3. Pour tout disque fermé ou rectangle fermé contenu dans un ouvert du plan complexe ∆, R ⊂ Ω ⊂ C, et pour tout point extérieur z ∈ Ω\∆, R, on a :
+0= 1
+2iπ
+∫
+∂∆
+f (ζ)
+ζ − z dζ = 1
+2iπ
+∫
+∂R
+f (ζ)
+ζ − z dζ.
+7. Analyticité des fonctions holomorphes et principe d’unicité
+Comme conséquence de la formule intégrale de Cauchy, nous parvenons à une des caractéristiques les plus frappantes des fonctions holomorphes, à savoir qu’elle sont indéfiniment dérivables, alors que leur définition requérait seulement une dérivée (complexe) d’ordre 1, sans même demander la continuité de la dérivée, d’ailleurs.
+Théorème 7.1. [de régularité, Cauchy 7] Les fonctions holomorphes f ∈ O(Ω) dans un ouvert Ω ⊂ C possèdent toujours une infinité de dérivées complexes. De plus, pour tout disque fermé ∆ ⊂ Ω contenu dans l’ouvert de bord le cercle C := ∂∆, on a en tout point intérieur z ∈ ∆ :
+f (n)(z) = n!
+2iπ
+∫
+C
+f (ζ)
+(ζ − z)n+1 dζ (∀ n ∈ N).
+Rappelons que nous orientons toujours les courbes — telles que le cercle C ici — dans le sens trigonométrique direct, c’est-à-dire que l’intérieur ∆ de la courbe C doit se situer du côté de la main gauche quand on se promène.
+Démonstration. Pour n = 0, c’est la formule de Cauchy que nous venons d’établir. Avec n > 1 quelconque, supposons donc par récurrence que la formule est vraie pour une dérivée complexe d’ordre (n − 1) :
+f (n−1)(z) = (n − 1)!
+2iπ
+∫
+C
+f (ζ)
+(ζ − z)n dζ.
+Pour h ∈ C petit, nous devons alors estimer le quotient différentiel infinitésimal de f (n−1)(z) et montrer qu’il possède une limite lorsque h −→ 0. Avec A := 1
+ζ−z−h et B := 1
+ζ−z , en utilisant la factorisation élémentaire :
+An − Bn = (A − B) [An−1 + An−2 B + · · · + A Bn−2 + Bn−1],
+
+
+78 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+nous pouvons calculer en éliminant h au dénominateur :
+f (n−1)(z + h) − f (n−1)(z)
+h = (n − 1)!
+2iπ
+∫
+C
+f (ζ) 1
+h
+[1
+(ζ − z − h)n − 1
+(ζ − z)n
+]
+dζ
+= (n − 1)!
+2π
+∫
+C
+f (ζ) 1
+h
+[1
+ζ−z−h − 1
+ζ −h
+](
+∑
+06 i6 n−1
+1
+(ζ − z − h)n−1−i
+1
+(ζ − z)i
+)
+dζ
+= (n − 1)!
+2π
+∫
+C
+f (ζ) 1
+(ζ − z − h)(ζ − z)
+( ∑
+06 i6 n−1
+1
+(ζ − z − h)n−1−i
+1
+(ζ − z)i
+)
+dζ ,
+et donc, lorsque h −→ 0, nous obtenons bien :
+hli→m0
+f (n−1)(z + h) − f (n−1)(z)
+h = (n − 1)!
+2iπ
+∫
+C
+f (ζ) 1
+(ζ − z)2
+(n
+(ζ − z)n−1
+)
+dζ
+= n!
+2iπ
+∫
+C
+f (ζ)
+(ζ − z)n+1 dζ.
+Dans la suite, nous appellerons les formules de représentation que nous venons d’obtenir formules intégrales de Cauchy.
+La conséquence la plus frappante de la formule intégrale de Cauchy est l’équivalence entre le fait d’être holomorphe, et le fait d’être localement développable en série entière convergente, équivalence promise dans le chapitre qui précède.
+Théorème 7.2. [d’analyticité, Cauchy 8] Si f ∈ O(Ω) est une fonction holomorphe dans un ouvert Ω ⊂ C, alors en tout point z0 ∈ Ω et pour tout rayon r > 0 tel que :
+Dr(z0) ⊂ Ω,
+la fonction f possède un développement en série infinie de Taylor entière :
+f (z) =
+∞
+∑
+n=0
+f (n)(z0)
+n!
+(z − z0
+)n,
+qui converge en tout point z ∈ Dr(z0).
+Si donc nous introduisons la distance de z0 au complémentaire { Ω := C\Ω de l’ouvert :
+dist (z0, { Ω) := inf {|z0 − w| : w ∈ C\Ω},
+la convergence a lieu quel que soit :
+0 < r < dist (z0, { Ω),
+autrement dit, dans le plus grand disque (ouvert) centré en z0 et contenu dans Ω.
+Démonstration. Fixons z ∈ Dr(z0), et rappelons que Cr(z0) désigne le cercle de centre z0 de rayon r > 0. La formule intégrale de Cauchy donne :
+f (z) = 1
+2iπ
+∫
+Cr (z0 )
+f (ζ)
+ζ − z dζ.
+L’idée est d’écrire pour |ζ − z0| = r :
+1
+ζ−z = 1
+ζ − z0 − (z − z0)
+=1
+ζ − z0
+1
+1 − z−z0
+ζ −z0
+.
+
+
+7. Analyticité des fonctions holomorphes et principe d’unicité 79
+Comme |z − z0| < r est constant, on a une majoration uniforme :
+∣ ∣ ∣ ∣
+z − z0
+ζ − z0
+∣ ∣ ∣ ∣
+< 1 (∀ ζ ∈ Cr(z0)),
+qui nous permet de développer en série convergeant normalement :
+1
+1 − z−z0
+ζ −z0
+=
+∞
+∑
+n=0
+( z − z0
+ζ − z0
+)n
+,
+donc uniformément, quel que soit ζ ∈ Cr(z0). En revenant alors à la formule de Cauchy, cette convergence contrôlée nous autorise à intervertir intégration et sommation infinie :
+f (z) = 1
+2iπ
+∫
+Cr (z0 )
+f (ζ)
+ζ − z0
+(∞ ∑
+n=0
+( z − z0
+ζ − z0
+)n)
+dζ
+=
+∞
+∑
+n=0
+(1
+2iπ
+∫
+Cr (z0 )
+f (ζ)
+(ζ − z0)n+1 dζ
+} {{ }
+reconnaître f(n)(z0)
+n!
+)
+(z − z0
+)n,
+tout en reconnaissant la formule du Théorème 7.1 pour f(n)(z0)
+n! .
+Observons que puisque nous avons déjà démontré qu’une série entière ∑∞
+n=0 an zn est indéfiniment dérivable, ce théorème confirme le fait qu’une fonction holomorphe est indéfiniment dérivable.
+Dans le chapitre précédent, nous avons formulé et démontré le Principe du prolongement analytique ainsi que le Principe d’unicité pour les fonctions localement développables en série entière convergente, et ces résultats s’appliquent dorénavant à toutes les fonctions holomorphes. Par souci de complétude théorique, reformulons-les.
+Théorème 7.3. [Principes d’unicité] Dans un ouvert connexe Ω ⊂ C, si une fonction holomorphe f ∈ O(Ω) satisfait l’une des trois conditions suivantes :
+• il existe z0 ∈ Ω en lequel f (n)(z0) = 0 pour tout n ∈ N ;
+• il existe z0 ∈ Ω au voisinage duquel f ≡ 0 ;
+• il existe une suite (wν)∞
+ν=1 de points distincts deux à deux convergeant vers un point w∞ = limν→∞ wν ∈ Ω dans l’ouvert en lesquels f (wν) = 0 pour tout ν ∈ N ;
+alors f ≡ 0 est identiquement nulle dans Ω.
+Souvent, ce principe d’unicité est appliqué à la différence f = g − h de deux fonctions holomorphes.
+Démonstration. Redémontrons seulement le premier cas, d’une manière légèrement différente. Grâce au Théorème 7.2 d’analyticité, pour tout rayon r avec 0 6 r < dist (z0, { Ω), on a en tout point z avec |z − z0| < r une représentation :
+f (z) =
+∞
+∑
+n=0
+f (n)(z0)◦
+(z − z0
+)n,
+qui montre que f ≡ 0 dans Dr(z0), et donc, l’ensemble :
+W := {w ∈ Ω : il existe ω 3 w ouvert avec f ∣
+∣ω ≡ 0}
+
+
+80 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+est non vide. Pour conclure, il nous faudrait avoir W = Ω. En tout cas, W est clairement ouvert (exercice mental).
+Assertion 7.4. Cet ensemble W est aussi fermé, relativement dans Ω.
+Démonstration. Étant donné une suite (wν)∞
+ν=1 quelconque de points wν ∈ W ⊂ Ω qui converge vers un point limν→∞ wν =: w∞ ∈ Ω dans l’ouvert, l’objectif est de faire voir que w∞ ∈ W .
+∂Ω
+Ω
+wν
+w∗
+w∞
+Dε (w∞ )
+D2ε(w∗)
+{Ω
+Avec ε > 0 satisfaisant :
+4 ε < dist (w∞, { Ω),
+prenons un ν 1 assez grand pour que |wν − w∞| 6 ε, fixons ce point, et notons-le :
+wν =: w∗ ∈ W .
+Premièrement, nous avons D2ε(w∗) ⊂ Ω, car l’inégalité |z − w∗| 6 2 ε entraîne :
+|z − w∞| 6 |z − w∗| + |w∗ − w∞| 6 2 ε + ε < 4 ε.
+Par conséquent, le Théorème 7.2 d’analyticité s’applique et donne, puisque f ≡ 0 au voisinage de w∗, l’annulation :
+f (z) =
+∞
+∑
+n=0
+f (n)(w∗)◦
+(z − w∗)n
+n ! = 0 (∀ z ∈ D2ε(w∗)).
+Deuxièmement, ce disque d’annulation contient un voisinage de w∞, à savoir plus précisément on a D2ε(w∗) ⊃ Dε(w∞), car |z − w∞| < ε entraîne :
+|z − w∗| 6 |z − w∞| + |w∞ − w∗| 6 |z − w∞| + ε < ε + ε.
+Donc f (z) ≡ 0 dans le voisinage ouvert Dε(w∞), ce qui montre bien w∞ ∈ W .
+En conclusion, le sous-ensemble non vide W ⊂ Ω, ouvert et fermé, ne peut que coïncider avec Ω, puisque ce dernier a été supposé connexe.
+Corollaire 7.5. Dans un ouvert non vide connexe Ω ⊂ C, l’anneau O(Ω) des fonctions holomorphes est intègre.
+Démonstration. En effet, si deux fonctions f, g ∈ O(Ω) satisfont f g ≡ 0 et si l’une d’entre elle, disons g(z0) 6= 0, ne s’annule pas en un point z0 ∈ Ω, alors par continuité, il existe un disque ouvert non vide Dr(z0) ⊂ Ω en restriction auquel g 6= 0, donc f |Dr(z0) ≡ 0, et ensuite, grâce au principe d’unicité, f = 0 partout dans Ω.
+
+
+8. Inégalités de Cauchy et principes du maximum 81
+8. Inégalités de Cauchy et principes du maximum
+Pour z0 ∈ C et pour un rayon R > 0, rappelons que nous notons les disques ouverts et fermés de centre z0 et de rayon R comme suit :
+D
+R(z0) := {z ∈ C : |z − z0| < R
+},
+D
+R(z0) := {z ∈ C : |z − z0| 6 R
+}.
+Nous noterons aussi le cercle de rayon R > 0 centré en z0 :
+CR(z0) := {z ∈ C : |z − z0| = R
+}.
+Ω
+Théorème 8.1. [Inégalités de Cauchy 9] Si f ∈ O(Ω) est une fonction holomorphe dans un ouvert Ω ⊂ C, alors en tout point z0 ∈ Ω, et pour tout rayon R > 0 tel que :
+D
+R(z0) ⊂ Ω,
+on a les inégalités :
+∣
+∣f (n)(z0)∣
+∣ 6 n!
+Rn sup
+|z−z0|=R
+∣
+∣f (z)∣
+∣ (∀ n > 0).
+Ici, l’intérêt est souvent de faire R le plus grand possible de manière à rendre le majorant à droite le plus petit possible, et donc, de faire « gonfler » les disques centrés en z0 jusqu’à ce qu’ils « touchent » le bord de Ω.
+Démonstration. Il suffit d’appliquer la formule intégrale de Cauchy pour f (n)(z0) et de majorer :
+∣
+∣f (n)(z0)∣
+∣=
+∣ ∣ ∣ ∣
+n!
+2iπ
+∫
+CR (z0 )
+f (ζ)
+(ζ − z0)n+1 dζ
+∣ ∣ ∣ ∣
+= n!
+2π
+∣ ∣ ∣ ∣
+∫ 2π
+0
+f (z0 + R eiθ)
+(R eiθ)n+1 R i eiθ dθ
+∣ ∣ ∣ ∣
+6 n!
+2π
+sup
+θ∈R
+∣
+∣f (z0 + R eiθ)∣
+∣
+Rn+1 R 2π
+= n!
+Rn sup
+z ∈CR (z0 )
+|f (z)|.
+Théorème 8.2. [Liouville] Si f ∈ O(C) est holomorphe entière définie sur l’intégralité du plan complexe et bornée :
+∃M <∞ ∣
+∣f (z)∣
+∣ 6 M (∀ z ∈ C),
+
+
+82 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+alors f = constante.
+Démonstration. Il suffit de faire voir que f ′ ≡ 0, car sur C qui est connexe, un corollaire du chapitre qui précède donnera f = constante. En tout point z0 ∈ C, pour tout rayon R > 0, les inégalités de Cauchy donnent sans effort :
+∣
+∣f ′(z0)∣
+∣ 6 1!
+R sup
+|z−z0|=R
+∣
+∣f (z)∣
+∣
+6M
+R −→
+R → ∞ 0.
+Une autre application merveilleuse de la théorie des fonctions holomorphes est une preuve extrêmement simple du théorème fondamentale de l’algèbre.
+Théorème 8.3. [D’Alembert-Gauss] Tout polynôme non constant P (z) = anzn + an−1zn−1 + · · · + a1z + a0 à coefficients complexes ai ∈ C possède toujours au moins une racine z0 ∈ C avec P (z0) = 0.
+Démonstration. Par l’absurde, supposons que P (z) 6= 0 en tout point z ∈ C. Sans perte de généralité, an 6= 0. Alors 1
+P (z) est holomorphe entière sur C. Écrivons :
+P (z)
+zn = an +
+( an−1
+z + · · · + a1
+zn−1 + a0
+zn
+)
+.
+Quand |z| −→ ∞, les termes entre parenthèses s’évanouissent. Par conséquent, il existe R > 1 assez grand pour que :
+|z| > R =⇒ |P (z)|
+|z|n > |an|
+2.
+En particulier, |P (z)| est borné inférieurement par la constante strictement positive
+|an|
+2 Rn > 0, et de plus :
+1
+|P (z)| 6 2
+|an|
+1
+|z|n −→
+|z| → ∞
+0.
+Par ailleurs, comme P ne s’annule en aucun point du compact {|z| 6 R
+}, il existe une constante c > 0 strictement positive elle aussi telle que :
+∣
+∣P (z)∣
+∣ > c (∀ |z| 6 R).
+Ainsi, dans C tout entier, |P (z)| est borné inférieurement :
+∣
+∣P (z)∣
+∣ > min (c, |an|
+2 Rn) > 0,
+donc 1
+P (z) est une fonction holomorphe bornée sur C tout entier, mais le Théorème 8.2 de
+Liouville la force à être constante, donc P (z) est constant, en contradiction flagrante avec l’hypothèse à son sujet !
+Théorème 8.4. Tout polynôme P (z) = anzn + an−1zn−1 + · · · + a1z + a0 à coefficients ai ∈ C, an 6= 0, de degré n > 1 admet exactement n racines complexes α1, . . . , αn ∈ C, comptées avec multiplicité, et se factorise comme :
+P (z) = an
+(z − α1
+) · · · (z − αn
+).
+
+
+8. Inégalités de Cauchy et principes du maximum 83
+Preuve. Grâce au théorème qui précède, P possède au moins une racine dans C, disons α1 ∈ C. Comme soustraire par 0 = P (α1) ne change rien, écrivons, factorisons, et réorganisons :
+P (z) = P (z) − P (α1)
+= an
+(zn − αn
+1
+) + an−1
+(zn−1 − αn−1
+1
+) + · · · + a1
+(z − α1
+) + a0 − a0◦
+=
+(z − α1
+)
+[
+an
+(zn−1 + · · · + αn−1
+1
+) + an−1
+(zn−2 + · · · + αn−2
+1
+) + · · · + a1
+]
+=
+(z − α1
+)
+[
+an zn−1 + (an α1 + an−1
+) zn−2 + · · · + (anαn−1
+1 + an−1αn−2
+1 + · · · + a1)
+]
+=: (z − α1
+) Q(z),
+avec un nouveau polynôme Q(z) ∈ C[z] à coefficients complexes et de degré n−1, puisque an 6= 0.
+Une récurrence élémentaire sur le degré n des polynômes offre à la fin, pour un certain nombre complexe b ∈ C, une factorisation de type conclusif :
+P (z) = (z − α1
+) · · · (z − αn−1
+)[an z + b]
+=: an
+(z − α1
+) · · · (z − αn−1
+)(z − αn
+).
+Revenons maintenant aux inégalités de Cauchy, afin de généraliser le Théorème 8.1 à des situations plus sophistiquées que des disques. Tout d’abord, un exercice de topologie générale convainc de la véracité du critère suivant.
+Ω
+KΩ
+Critère de compacité 8.5. Un sous-ensemble K ⊂ Ω d’un ouvert Ω ⊂ C est compact si et seulement si :
+¿ K est borné dans C ;
+¡ K est fermé dans Ω, i.e. tous les points-limites de suites de Cauchy d’éléments de K qui convergent dans Ω appartiennent encore à K ;
+¬ dist (K, ∂Ω) > 0.
+Soit donc K ⊂ Ω un compact contenu dans un ouvert Ω ⊂ C. La distance à K d’un point quelconque w ∈ C est :
+dist (w, K) := inf
+z∈K
+∣
+∣w − z∣
+∣,
+
+
+84 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+et puisque K est compact, en raisonnant avec une suite minimisante puis convergente après extraction de sous-suite, cette distance est atteinte en au moins un point zw ∈ K, c’est-àdire :
+dist (w, K) = ∣
+∣w − zw
+∣
+∣.
+Ensuite, pour ε > 0, introduisons le ε-épaississement de K :
+Kε := {w ∈ C : dist (w, K) 6 ε}
+=
+{w ∈ C : ∃ z ∈ K, |w − z| 6 ε} ⊃ K.
+Pour ε > 0 assez petit, on est certain grâce au critère qui précède que Kε ⊂ Ω. La version générale des inégalités de Cauchy s’applique à des compacts quelconques, et elle permet de contrôler toutes les dérivées des fonctions holomorphes par leur norme du supremum — sans aucune dérivée ! — sur un compact légèrement plus grand.
+Théorème 8.6. Soit K ⊂ L ⊂ Ω une paire emboîtée de sous-ensembles compacts d’un ouvert Ω ⊂ C, avec :
+K ⊂ Int L.
+Alors pour tout entier n > 0, il existe une constante positive C = CK,L,n < ∞ telle que :
+max
+z∈K
+∣
+∣f (n)(z)∣
+∣ 6 C max
+w∈L
+∣
+∣f (w)∣
+∣ (∀ f ∈ O(Ω)).
+Démonstration. Choisissons ε > 0 assez petit pour que :
+K ⊂ Kε ⊂ L,
+d’où ε = εK,L. Alors en un point quelconque z ∈ K et pour toute f ∈ O(Ω), le Théorème 8.1 donne un contrôle sur le disque (ou le cercle) correspondant :
+∣
+∣f (n)(z)∣
+∣ 6 n!
+εn max
+|w−z|6ε
+∣
+∣f (w)∣
+∣
+6 n!
+εn max
+w∈Kε
+∣
+∣f (w)∣
+∣
+6 CK,L,n max
+w∈L
+∣
+∣f (w)∣
+∣,
+et il suffit de prendre à gauche le maximum sur K pour conclure.
+Par ailleurs, les inégalités originales de Cauchy dans un disque fournies par le Théorème 8.1 admettent une version beaucoup plus précise qui prend la forme d’une égalité.
+Théorème 8.7. Si DR(z0) ⊂ Ω est un disque fermé de rayon R > 0 centré en un point z0 ∈ Ω d’un ouvert Ω ⊂ C, alors :
+∞
+∑
+n=0
+∣ ∣ ∣
+1
+n! f (n)(z0)
+∣ ∣ ∣
+2
+R2n = 1
+2π
+∫ 2π
+0
+∣
+∣f (z0 + R eiθ)∣
+∣
+2 dθ (∀ f ∈ O(Ω)).
+En effet, tous les termes à gauche étant positifs, chacun d’entre eux est inférieur ou égal à leur somme infinie, d’où on re-déduit le Théorème 8.1 :
+∣ ∣ ∣
+1
+n! f (n)(z0)
+∣ ∣ ∣
+2
+R2n 6
+∞
+∑
+m=0
+∣ ∣ ∣
+1
+m! f (m)(z0)
+∣ ∣ ∣
+2
+R2m = 1
+2π
+∫ 2π
+0
+∣
+∣f (z0 + R eiθ)∣
+∣
+2 dθ
+6 max
+θ∈R
+∣
+∣f (z0 + R eiθ)∣
+∣
+2
+(∀ n > 0).
+
+
+8. Inégalités de Cauchy et principes du maximum 85
+Démonstration. Comme DR(z0) ⊂ Ω, le Théorème 7.2 assure que le rayon de convergence de la série de Taylor infinie de f en z0 est > R, donc cette série converge normalement sur le cercle de rayon R :
+f
+(z0 + R eiθ) =
+∞
+∑
+n=0
+1
+n! f (n)(z0) Rn einθ.
+Lorsqu’on prend le module au carré de cela, on a encore convergence normale, ce qui permet d’écrire :
+∣
+∣f (z0 + R eiθ)∣
+∣
+2=
+(∞ ∑
+n=0
+1
+n! f (n)(z0) Rn einθ
+)( ∞ ∑
+m=0
+1
+m! f (m)(z0) Rn eimθ
+)
+=
+∞
+∑
+n=0
+∞
+∑
+m=0
+1
+n!
+1
+m! f (n)(z0) f (m)(z0) Rn Rn einθ e−imθ.
+Pour intégrer tout ce beau monde, utilisons (exercice) :
+1
+2π
+∫ 2π
+0
+ei(n−m)θ dθ =
+{ 1 lorsque n = m,
+0 lorsque n 6= m,
+ce qui élimine énormément de prétendants et nous conduit en douceur à la conclusion :
+1
+2π
+∫ 2π
+0
+∣
+∣f (z0 + R eiθ)∣
+∣
+2 dθ =
+∞
+∑
+n=0
+1
+n!
+1
+n! f (n)(z0) f (n)(z0) Rn Rn · 1.
+Voici une autre conséquence remarquable des inégalités de Cauchy : si le module |f | d’une fonction holomorphe admet un maximum global, ou même local, en un point intérieur d’un ouvert connexe Ω, alors elle est partout constante.
+Théorème 8.8. [Principe du maximum, 1] Soit f ∈ O(Ω) avec Ω ⊂ C ouvert connexe. S’il existe un point a ∈ Ω et r > 0 avec Dr(a) ⊂ Ω tels que :
+∣
+∣f (a)∣
+∣>
+∣
+∣f (z)∣
+∣ (∀ z ∈ Dr(a)),
+alors f ≡ f (a) est constante dans Ω.
+Démonstration. En revenant au paragraphe qui suit le Théorème 8.7 mais en conservant deux termes à gauche au lieu d’un, pour tout entier n > 1 fixé, nous construisons un jeu d’inégalités oppressantes :
+∣
+∣f (a)∣
+∣
+2+
+∣ ∣ ∣
+1
+n! f (n)(a)
+∣ ∣ ∣
+2
+r2n 6
+∞
+∑
+m=0
+∣ ∣ ∣
+1
+m! f (m)(a)
+∣ ∣ ∣
+2
+r2m 6 max
+θ∈R
+∣
+∣f (a + r eiθ)∣
+∣
+2
+6 max
+|z−a|6r
+∣
+∣f (z)∣
+∣
+2
+[Hypothèse !] 6
+∣
+∣f (a)∣
+∣
+2
+qui forcent l’annulation f (n)(a) = 0 de toutes ces dérivées, donc le Principe d’unicité 7.3 appliqué à f − f (a) conclut.
+
+
+86 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Puisque les fonctions holomorphes f ∈ O(Ω) sont définies dans un espace 2dimensionnel réel et prennent aussi leurs valeurs dans un espace 2-dimensionnel, et puisque 2 + 2 = 4 (certes !), il n’est pas vraiment aisé de représenter ou de visualiser leurs graphes :
+Graphe(f ) := {(z, f (z)) ∈ R2 × R2 : z ∈ Ω}.
+C’est pourquoi on se contente souvent de représenter le graphe de leurs modules, vu dans un demi-espace 3-dimensionnel :
+Graphe(|f |) := {(z, |f (z)|) ∈ R2 × R+ : z ∈ Ω},
+et là par chance, tout semble devenir visualisable. Si donc nous appelons paysage analytique de f le graphe de |f dans l’espace à trois dimensions — comme s’il était constitué de montagnes et de vallées photographiables —, alors le principe du maximum affirme qu’il n’y a aucun sommet intérieur, et donc, que les points les plus hauts sont à rechercher au bord.
+Une conséquence plus importante des inégalités de Cauchy demande donc d’examiner le comportement au bord des fonctions holomorphes. L’ouvert n’étant pas forcément borné, on doit tenir compte aussi de ce qui se passe quand on s’évade vers l’infini.
+Théorème 8.9. [Principe du Maximum, 2] Si une fonction f ∈ O(Ω) holomorphe dans un ouvert connexe Ω ⊂ C satisfait, pour une constante finie 0 6 M < ∞, les inégalités en tout point ζ ∈ ∂Ω = Ω\Ω du bord :
+lim sup
+z∈Ω z→ζ
+∣
+∣f (z)∣
+∣ 6 M,
+ainsi que l’inégalité à l’infini :
+lim sup
+z∈Ω |z| → ∞
+∣
+∣f (z)∣
+∣ 6 M,
+alors la même inégalité est satisfaite partout dans Ω :
+sup
+z∈Ω
+∣
+∣f (z)∣
+∣ 6 M.
+Quand Ω ⊂ C est borné, c’est-à-dire contenu dans un disque assez grand, la deuxième condition à l’infini n’est évidemment pas requise. Inversement, quand Ω = C, d’où ∂Ω = ∅, c’est la première condition qui saute ! Par ailleurs, l’hypothèse concernant la limite supérieure quand |z| −→ ∞ est essentielle, comme le montre l’exemple f (z) = ez sur Ω := {Re z > 0} avec |f (i y)| = |eiy| = 1 sur ∂Ω = {x = 0}, tandis que f (x) = ex −→ ∞ est non bornée sur R+ ⊂ Ω.
+Démonstration. Donnons-nous M′ > M arbitrairement proche de M, et introduisons l’ensemble :
+KM′ := {z ∈ Ω : |f (z)| > M′}.
+Comme f est continue, KM′ est relativement fermé dans Ω. Les deux hypothèses garantissent aussi (exercice) que KM′ possède une fermeture dans C ne rencontrant pas Ω\Ω, et qu’il est borné dans C. Le Critère de compacité 8.5 assure alors que KM′ est un compact.
+Assertion 8.10. En fait, KM′ = ∅.
+
+
+9. Théorème de Morera et convergence uniforme sur des compacts 87
+Preuve. Si KM′ 6= ∅ était non vide, la borne supérieure de |f | sur KM′ serait atteinte en un certain point a ∈ KM′ de ce compact :
+∣
+∣f (z)∣
+∣6
+∣
+∣f (a)∣
+∣ (∀ z ∈ KM′ ),
+mais par ailleurs, comme |f (a)| > M′, on aurait en tout autre point z ∈ Ω\KM′ :
+∣
+∣f (z)∣
+∣ < M′ 6
+∣
+∣f (a)∣
+∣,
+et donc l’inégalité serait satisfaite partout :
+|f (z)| 6
+∣
+∣f (a)∣
+∣ (∀ z ∈ Ω).
+Par conséquent, |f | atteindrait son maximum sur Ω au point intérieur a, donc f ≡ f (a) serait constante dans Ω à cause du Principe du Maximum 8.8, et comme |f (a)| > M′, cela contredirait l’hypothèse que |f | est 6 M au bord et à l’infini.
+Puisque Ω\KM′ = Ω, nous avons donc :
+∣
+∣f (z)∣
+∣ < M′ (∀ z ∈ Ω),
+et comme M′ > M pouvait être choisi arbitrairement proche de M, c’est terminé !
+Ce théorème général admet une variante simplifiée mais plus utile dans de nombreuses circonstances.
+Théorème 8.11. [Principe du Maximum, 3] Sur la fermeture Ω = Ω ∪ ∂Ω d’un ouvert connexe borné Ω ⊂ C, si une fonction continue :
+f ∈ O(Ω) ∩ C 0(Ω ∪ ∂Ω),
+est holomorphe à l’intérieur, alors :
+∣
+∣f (z)∣
+∣ 6 sup
+ζ∈∂Ω
+∣
+∣f (ζ)∣
+∣ < ∞ (∀ z ∈ Ω).
+Autrement dit, sur le compact Ω = Ω ∪ ∂Ω, le maximum du module est toujours atteint au bord.
+Démonstration. S’il existait un point z ∈ Ω en lequel :
+∣
+∣f (z)∣
+∣ > sup
+ζ∈∂Ω
+∣
+∣f (ζ)∣
+(8.12) ∣,
+le maximum du module de f , atteint sur le compact Ω = Ω ∪ ∂Ω, le serait alors en un certain point a ∈ Ω devant satisfaire :
+∣
+∣f (a)∣
+∣>
+∣
+∣f (z)∣
+∣ > sup
+ζ∈∂Ω
+∣
+∣f (ζ)∣
+∣,
+donc a ∈ Ω devrait être à l’intérieur, ce qui forcerait f à être constante, en contradiction affligeante avec (8.12).
+
+
+88 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+9. Théorème de Morera et convergence uniforme sur des compacts
+Une application directe de ce qui précède offre une réciproque particulièrement utile du théorème de Cauchy.
+Théorème 9.1. [de Morera] Si une fonction f ∈ C 0(∆) continue dans un disque ouvert non vide ∆ ⊂ C satisfait, pour tout triangle fermé T = T ⊂ ∆ :
+0=
+∫
+∂T
+f (z) dz,
+alors f ∈ O(∆) est holomorphe.
+Démonstration. Notons z0 le centre de ∆. Une répétition de la preuve du Théorème 3.1 convainc que la fonction :
+F (z) :=
+∫
+[z0,z]
+f (ζ) dζ (z ∈ ∆)
+est C-dérivable, de dérivée F ′ = f . Maintenant, grâce au Théorème 7.1 de régularité, F est indéfiniment C-dérivable, donc f ′ = (F ′)′ existe, i.e. f ∈ O(∆).
+Prochain théorème « magique » : Si une suite de fonctions holomorphes converge uniformément sur (tous) les compacts d’un ouvert, alors la fonction-limite est non seulement continue — théorème classique —, mais aussi holomorphe, donc lisse. On dirait de la prestidigitation ! Contraste déroutant avec la théorie des fonctions de variables réelles ! Par exemple, le cours d’Analyse de Fourier a fait voir que la fonction de Weierstrass :
+∞
+∑
+n=0
+an cos (2πbn x)
+avec 0 < a < 1 et ab > 1, est continue mais n’est dérivable en aucun point : dans le monde réel la convergence uniforme n’assure nullement la dérivabilité, mais dans le monde imaginaire, si !
+Théorème 9.2. [Cauchy 10] Dans un ouvert Ω ⊂ C, soit une suite {fn}∞
+n=1 de fonctions holomorphes fn ∈ O(Ω) qui converge en tout point vers une certaine fonction-limite f : Ω −→ C, uniformément sur chaque compact de Ω :
+0 = nli→m∞ max
+z∈K
+∣
+∣fn(z) − f (z)∣
+∣ (∀ K ⊂ compact).
+Alors la fonction-limite f ∈ O(Ω) est holomorphe.
+Démonstration. L’idée, splendide, consiste à déduire cela du Théorème 9.1 de Morera. Soit ∆ un disque ouvert non vide quelconque avec ∆ ⊂ Ω. Pour vérifier que f est holomorphe dans ∆, soit T = T ⊂ ∆ un triangle fermé quelconque. Comme les fn ∈ O(∆) y sont holomorphes, Goursat offre :
+∫
+∂T
+fn(z) dz = 0 (∀ n > 1).
+
+
+9. Théorème de Morera et convergence uniforme sur des compacts 89
+Comme fn n−→→∞ f uniformément sur ∆, donc sur ∂T , nous avons le droit d’intervertir
+lim ∫ fn = ∫ lim fn, ce qui nous donne :
+∫
+∂T
+f (z) dz = 0,
+et comme cela est vrai pour tous les triangles fermés contenus dans ∆, Morera nous garantit que f ∈ O(∆). Enfin, f ∈ O(Ω), car l’holomorphie est une condition locale, et en tout point z0 ∈ Ω, on peut centrer un disque ∆ 3 z0 avec ∆ ⊂ Ω.
+Maintenant, qu’en est-il de la suite des fonctions dérivées {f ′
+n}∞
+n=1 ? Dans le monde réel, tout le monde sait que la convergence uniforme n’entraîne presque jamais celle des fonctions dérivées. Et dans le monde holomorphe ? En fait, étant donné une série entière f (z) = ∑∞
+ν=0 aν zν ayant un rayon de convergence
+R > 0, nous avons déjà vu dans le chapitre précédent que la série dérivé terme à terme
+∑∞
+ν=0 (ν + 1) aν+1 zν a même rayon de convergence R > 0, et par conséquent, les sommes partielles :
+fn(z) :=
+∑
+06ν6n
+aν zν de dérivées f ′
+n(z) =
+∑
+06ν6n−1
+(ν + 1) aν+1 zν,
+satisfont simultanément la convergence uniforme sur tout sous-disque fermé Dr ⊂ DR avec 0<r<R:
+0 = nli→m∞ max
+|z|6r
+∣
+∣fn(z) − f (z)∣
+∣ = nli→m∞ max
+|z|6r
+∣
+∣f ′
+n(z) − f ′(z)∣
+∣.
+Le théorème suivant montre que ceci reste vrai dans la situation la plus générale possible.
+Théorème 9.3. [Cauchy 11] Dans un ouvert Ω ⊂ C, si une suite {fn}∞
+n=1 de fonctions holomorphes fn ∈ O(Ω) converge, uniformément sur chaque compact de Ω, vers une fonction-limite f : Ω −→ C — holomorphe d’après le Théorème 9.2 —, alors il en va de même pour la suite {f ′
+n}∞
+n=1 de ses dérivées :
+0 = nli→m∞ max
+z∈K
+∣
+∣f ′
+n(z) − f ′(z)∣
+∣ (∀ K ⊂ Ω compact).
+Le même Théorème 9.2 refait voir que f ′ ∈ O(Ω), ce que l’on savait déjà.
+Démonstration. Soit donc K ⊂ Ω un compact quelconque. Pour δ > 0 assez petit, l’ensemble :
+Kδ := {z ∈ Ω : dist (z, K) 6 δ}
+est aussi compact, avec (exercice de topologie) :
+K ⊂ Int Kδ ⊂ Kδ ⊂ Ω.
+La version générale des inégalités de Cauchy du Théorème 8.6 appliquée à une seule dérivée de la suite {fn − f }∞
+n=1 et au compact élargi L := Kδ, fournit alors une constante positive C = CK,δ < ∞ qui contrôle la convergence uniforme sur K :
+max
+z∈K
+∣
+∣(fn − f )′(z)∣
+∣ 6 C max
+w∈Kδ
+∣
+∣(fn − f )(z)∣
+∣
+n−→→∞ 0.
+
+
+90 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Évidemment, ce que nous venons de faire pour une seule dérivée fonctionne pour les dérivées de tous ordres, soit en itérant (sans retenue !) l’énoncé par pure logique directe, soit en nous souvenant que le Théorème 8.6 était profilé pour des dérivées d’ordre quelconque.
+Théorème 9.4. Sous les mêmes hypothèses :
+0 = nli→m∞ max
+z∈K
+∣
+∣f (κ)
+n (z) − f (κ)(z)∣
+∣ (∀ κ > 1, ∀ K ⊂ Ω compact).
+En pratique, on utilise ces théorèmes de convergence uniforme pour construire certaines fonctions holomorphes nouvelles qui jouissent de propriétés intéressantes, très souvent définies commes séries infinies :
+f (z) =
+∞
+∑
+n=1
+fn(z),
+de fonctions holomorphes fn ∈ O(Ω) dans une région donnée Ω ⊂ C. La plupart du temps, il est assez facile de vérifier qu’il y a convergence uniforme, et donc, les théorèmes qui précèdent garantissent que cette somme infinie est elle-même holomorphe, et qu’on peut la dériver terme à terme indéfiniment — ce qui est fort pratique ! Par exemple, de nombreuses fonctions spéciales sont définies sous forme de série infinie d’une variable réelle x ; on remplace alors x par une variable complexe z, et on recherche les lieux où il y a convergence (uniforme). Spécifiquement, nous étudierons dans un chapitre ultérieur la célèbre fonction zêta de Riemann :
+ζ(z) :=
+∞
+∑
+n=0
+1
+nz .
+Une variante des séries de fonctions holomorphes, tout aussi fréquente et utile, consiste en les fonctions qui sont définies par des intégrales du type :
+f (z) :=
+∫b
+a
+F (z, s) ds,
+ou encore, des limites de telles intégrales. Ici, la fonction F est supposée holomorphe en son premier argument, et continue en son second. Pour simplifier, l’intégrale est prise au sens de Riemann sur l’intervalle borné [a, b]. Le problème est d’établir que f est holomorphe. Par exemple, nous étudierons dans un prochain chapitre la fonction Gamma d’Euler, définie pour z ∈ C avec Re z > 0 par :
+Γ(z) :=
+∫∞
+0
+e−t tz−1 dt.
+Dans le théorème qui suit, nous imposons une condition suffisante sur F qui est souvent vérifiée en pratique, et qui implique facilement que f est holomorphe. Après un changement affine de variable réelle, nous pouvons supposer que a = 0 et b = 1.
+Théorème 9.5. Soit F = F (z, s) une fonction définie pour (z, s) ∈ Ω × [0, 1], où Ω ⊂ C est un ouvert, qui satisfait les deux propriétés suivantes :
+• F (z, s) est holomorphe en z pour tout s ∈ [0, 1] fixé ;
+• F est continue sur Ω × [0, 1].
+Alors la fonction définie dans Ω par :
+f (z) :=
+∫1
+0
+F (z, s) ds,
+
+
+10. Principe de symétrie de Schwarz 91
+est holomorphe dans Ω.
+La continuité supposée est une continuité par rapport aux trois variables (x, y, s) avec x + i y ∈ Ω et s ∈ [0, 1].
+Démonstration. Pour obtenir ce résultat fondamental, il suffit de montrer que f est holomorphe dans tout disque ouvert ∆ avec ∆ ⊂ Ω, et grâce au Théorème 9.1 de Morera, il suffit même de faire voir que pour tout triangle fermé T = T ⊂ ∆, on a :
+0=
+∫
+∂T
+∫1
+0
+F (z, s) ds dz.
+Ici, un simple échange de l’ordre d’intégration conduirait au résultat, puisque F est holomorphe en z, donc satisfait la condition de Morera. Le théorème de type Fubini dans la théorie de l’intégration de Riemann justifie d’ailleurs immédiatement cela (exercice de révision). Toutefois, nous pouvons contourner l’emploi du théorème de Fubini, en approximant l’intégrale par des sommes de Riemann :
+fn(z) := 1
+n
+n
+∑
+k=1
+F
+(z, k
+n
+)
+(n > 1).
+Ici, toutes ces sommes finies fn ∈ O(Ω) de fonctions holomorphes sont holomorphes.
+Affirmation 9.6. Sur tout disque ∆ ⊂ Ω, les fn convergent uniformément vers f (z) =
+∫1
+0 F (z, s) ds.
+Preuve. La fonction F étant continue sur le compact ∆ × [0, 1], elle y est uniformément continue :
+∀ ε > 0 ∃ δ = δ(ε) > 0
+(
+|s1 − s2| 6 δ =⇒ max
+z∈∆
+∣
+∣F (z, s1) − F (z, s2)∣
+∣6ε
+)
+.
+Maintenant, en choisissant n > 1
+δ assez grand, nous pouvons effectuer une estimation
+uniforme valable pour tout z ∈ ∆ qui prouve l’affirmation :
+∣
+∣fn(z) − f (z)∣
+∣=
+∣ ∣ ∣ ∣
+n
+∑
+k=1
+∫k
+n
+(k−1) n
+(
+F
+(z, k
+n
+) − F (z, s)
+)
+ds
+∣ ∣ ∣ ∣
+6
+n
+∑
+k=1
+∫k
+n
+(k−1) n
+∣ ∣
+∣F (z, k
+n
+) − F (z, s)
+∣ ∣
+∣ ds
+6
+n
+∑
+k=1
+∫k
+n
+(k−1) n
+ε ds
+= ε.
+Ainsi, on a convergence uniforme fn n−→→∞ f sur le disque fermé ∆ ⊂ Ω, et le Théo
+rème 9.2 conclut que f ∈ O(∆).
+
+
+92 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+10. Principe de symétrie de Schwarz
+En Analyse réelle, il se produit de nombreuses circonstances où l’on désire étendre à un domaine plus grand des fonctions initialement définies dans une certaine région bien visible. Des techniques diverses existent afin de produire de telles extensions, notamment pour des fonctions qui sont continues ou qui jouissent de propriétés de différentiabilité variées. Bien entendu, les difficultés s’accroissent avec les exigences de lissité, mais tant qu’on reste dans l’univers des fonctions non développables en série entière, l’existence e.g. de fonctions-plateau — vues dans le cours d’Analyse de Fourier — permet de jouer avec elles presque comme avec de la pâte à modeler. À l’inverse, la situation est très différente pour les fonctions holomorphes, car non seulement ces fonctions sont indéfiniment différentiables dans leur région initiale de définition, mais aussi, elles sont localement développables en série entière convergente, ce qui est une rigidité additionnelle vraiment caractéristique et limitante. Par exemple, il existe des fonctions holomorphes dans un disque ouvert qui sont continues dans la fermeture de ce disque, mais qu’il est impossible de prolonger holomorphiquement au-delà du cercle-bord, comme le montre l’Exercice 29. Une autre contrainte à respecter quand on cherche à prolonger des fonctions holomorphes est le principe d’identité : une fonction holomorphe devient identiquement nulle si elle vaut zéro sur un sous-ouvert non vide, ou même sur un segment réel non réduit à un point. Ainsi, les fonctions-plateau, nulles en-dehors d’un compact, sont à proscrire ! Nonobstant ces obstacles, cette section présente un phénomène de prolongement assez simple et très utile dans les applications à la théorie des applications conformes : le Principe de réflexion de Schwarz. Sa démonstration consiste en deux parties : définir le prolongement, puis vérifier qu’il est holomorphe. Commençons par le second point.
+Soit Ω ⊂ C un ouvert qui est symétrique par conjugaison complexe, à savoir qui satisfait :
+z ∈ Ω ⇐⇒ z ∈ Ω.
+C
+z
+I
+z
+Ω+
+Ω−
+R
+Soit Ω+ la partie de Ω située au-dessus de l’axe réel, et soit Ω− celle en-dessous. Aussi, soit I := Ω ∩ R, de telle sorte que :
+Ω− ∪ I ∪ Ω+ = Ω.
+On suppose implicitement que I 6= ∅, sinon, le théorème suivant n’a pas d’intérêt.
+
+
+10. Principe de symétrie de Schwarz 93
+Théorème 10.1. [Principe de symétrie] Si f − ∈ O(Ω−) et f + ∈ O(Ω+) sont deux fonctions holomorphes qui se prolongent continûment à I :
+f − ∈ C 0(Ω− ∪ I) et f + ∈ C 0(Ω+ ∪ I),
+avec des valeurs coïncidantes :
+f −(x) = f +(x) (∀ x ∈ I),
+alors la fonction continue définie dans Ω tout entier par :
+f (z) :=
+
+ 
+ 
+f −(z) lorsque z ∈ Ω−,
+f −(z) = f +(z) lorsque z ∈ I,
+f +(z) lorsque z ∈ Ω+,
+est holomorphe dans Ω.
+Démonstration. Effectivement, on vérifie (exercice) que f est continue dans Ω. Pour établir l’holomorphie, faisons appel à Morera. Soit ∆ un disque centré en un point de I avec ∆ ⊂ Ω. Soit T = T ⊂ ∆ un triangle plein fermé contenu dans le disque. Quand T n’intersecte pas I, on a gratuitement :
+0=
+∫
+∂T
+f (z) dz,
+puisque f est supposée holomorphe dans Ω− ∪ Ω+.
+T
+Ω+ Ω+
+Tε
+Ensuite, supposons premièrement qu’un côté ou un sommet de T rencontre I, tandis que le reste se trouve entièrement, disons, dans le demi-plan supérieur :
+T ⊂ I ∪ Ω+.
+Dans ce cas, le triangle Tε := T + i ε poussé vers le haut d’une hauteur ‘infinitésimale’ ε > 0 est entièrerement contenu dans la zone où f = f + est holomorphe, donc on a :
+0=
+∫
+∂Tε
+f (z) dz,
+et en faisant tendre ε −>→ 0, la continuité de f donne bien 0 = ∫
+∂T f (z) dz. Le cas où
+T ⊂ I ∪ Ω− est similaire.
+Ω+
+T
+T2 T3
+T1 I ∩ T
+
+
+94 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Enfin, supposons deuxièmement que le triangle T en question intersecte I en son intérieur. Une découpe de T en trois triangles T1, T2, T3 par le couteau I ∩ T nous ramène à la situation que nous venons de traiter.
+Nous pouvons maintenant énoncer le
+Théorème 10.2. [Principe de réflexion de Schwarz] Si Ω ⊂ C est un ouvert invariant par conjugaison complexe z 7−→ z tel que l’intersection I := Ω ∩ R 6= ∅ soit non vide, et si :
+Ω− := Ω ∩ {Im z < 0}, Ω+ := Ω ∩ {Im z > 0},
+alors toute fonction holomorphe définie au-dessus et continue jusqu’à I :
+f + ∈ O(Ω+) ∩ C 0(I ∩ Ω+),
+et qui prend des valeurs réelles sur I :
+f +(x) ∈ R (∀ x ∈ I),
+admet un prolongement holomorphe f ∈ O(Ω) unique à Ω = Ω− ∪I ∪Ω+, dont les valeurs sont définies en-dessous par :
+f −(z) := f +(z) (∀ z ∈ Ω−).
+Démonstration. Au voisinage d’un point z0 ∈ Ω−, disons dans un disque Dr(z0) de rayon r > 0 assez petit pour que Dr(z0) ⊂ Ω−, les valeurs z pour z ∈ Dr(z0) appartiennent au symétrique de ce disque, donc sont contenues dans Ω+ où f + est holomorphe :
+f +(z) =
+∞
+∑
+n=0
+an
+(z − z0
+)n,
+avec an := 1
+n! (f +)(n)(z0) et un rayon de convergence > r. Une simple conjugaison :
+f +(z) =
+∞
+∑
+n=0
+an
+(z − z0
+)n,
+— qui n’altère en rien le rayon de convergence ! — montre clairement le caractère holomorphe de f − dans Dr(z0), donc partout dans Ω−. Ensuite, en un point x0 ∈ I, puisque f +(x) ∈ R pour x ∈ I proche de x0, la continuité de f + sur I ∪ Ω+ garantit, pour la fonction f − ainsi définie, que f −(x0 + h) −→ f +(x0) quand h ∈ C avec Im h < 0 tend vers 0, donc le prolongement f est continu partout dans Ω− ∪ I ∪ Ω+.
+Enfin, en notant que f −(x) = f +(x) pour tout x ∈ I, le Principe de symétrie 10.1, spécialement concocté à l’avance, conclut en beauté l’argumentation.
+11. Exercices
+Exercice 1. En interprétant ∫ ∞
+0 comme limR→∞
+∫R
+0 , trouver la valeur des intégrales de Fresnel :
+∫∞
+0
+sin (x2) dx =
+∫∞
+0
+cos (x2) dx =
+√π
+2 √2 .
+
+
+11. Exercices 95
+R ei π
+4
+R
+0
+Indication: Intégrer la fonction e−z2 sur le contour représenté, en utilisant ∫ ∞
+−∞ e−x2 dx = √π.
+Exercice 2. Montrer que π
+2 =∫∞
+0
+sin x
+x dx. Indication: Écrire l’intégrale comme 1
+2i
+∫∞ −∞
+eix −1
+x dx et effectuer une intégration complexe sur le bord d’un certain demi-disque édenté.
+Exercice 3. Pour deux réels a > 0 et b, calculer les deux intégrales :
+∫∞
+0
+e−ax cos (bx) dx et
+∫∞
+0
+e−ax sin (bx) dx.
+Indication: Intégrer e−z√a2+b2 sur le bord d’un secteur angulaire approprié d’angle ω satisfaisant cos ω =
+a
+√a2+b2 .
+Exercice 4. Montrer qu’on a pour tout ξ ∈ C (pas seulement pour ξ réel) la formule :
+e−πξ2 =
+∫∞
+−∞
+e−πx2 e2iπξx dx.
+Exercice 5. Pour chacun des 5 ouverts suivants, déterminer s’il est étoilé (ou non) par rapport à l’un de ses points :
+C
+∖R−, C∖[2, 5], C∖(i R ∪ {−i}), C∖(R+ ∪ i R+
+), C∖{|z| 6 1}.
+Exercice 6. (a) Pour r, s > 0 réels, on considère le rectangle :
+R := {z ∈ C : − r < x < r, −s < y < z},
+parcouru dans le sens trigonométrique. Calculer les deux intégrales :
+∫
+∂R
+dz
+z,
+∫
+∂R
+dz
+z2 .
+(b) Pour confirmer que Re z n’est pas holomorphe, calculer, sur le bord du carré 2 de côtés 0, 1, 1 + i, i :
+∫
+∂2
+Re z dz.
+Exercice 7. Pour un ouvert connexe Ω ⊂ C, montrer que l’ensemble :
+E = {z ∈ Ω : Ω est étoilé en z}
+est convexe.
+Exercice 8. Soit Ω ⊃ D un ouvert de C contenant le disque unité fermé D = {|z| 6 1} de bord le cercle unité C = {|z| = 1}, paramétré par θ 7−→ eiθ.
+(a) Pour toute fonction holomorphe f ∈ O(Ω), calculer les deux intégrales :
+∫
+C
+(
+2+z+ 1
+z
+) f (z)
+z dz,
+∫
+C
+(
+2−z− 1
+z
+) f (z)
+z dz.
+(b) En déduire que :
+2 π
+∫ 2π
+0
+cos2 θ
+2 f (eiθ) dθ = 2 f (0) + f ′(0).
+
+
+96 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+(c) De manière similaire, déterminer la valeur de :
+2 π
+∫ 2π
+0
+sin2 θ
+2 f (eiθ) dθ.
+Exercice 9. Dans un ouvert Ω ⊂ C, soit une fonction holomorphe f qui est continûment différentiable, i.e. (x, y) 7−→ ∂f
+∂x (x, y) et (x, y) 7−→ ∂f
+∂y (x, y) sont continues — ce qui n’est pas demandé dans la définition de
+l’holomorphie. Soit aussi T = T ⊂ Ω un triangle fermé non aplati.
+(a) Pour deux fonctions réelles P, Q ∈ C 1(Ω, R), montrer que l’intégrale suivante sur le bord du triangle est égale à une intégrale dans l’intérieur :
+∫
+∂T
+(
+P dx + Q dy
+)
+=
+∫
+T
+(
+− ∂P
+∂y + ∂Q
+∂x
+)
+dxdy.
+Indication: Étudier d’abord ce cas spécial du théorème général de Riemann-Green en supposant Q ≡ 0 :
+∫
+∂G
+(
+P dx
+)
+=
+∫
+G
+(
+− ∂P
+∂y
+)
+dxdy,
+et en supposant le domaine G où l’on intègre de la forme-sandwich entre deux graphes :
+G := {(x, y) ∈ R2 : a 6 x 6 b, f−(x) < y < f+(x)},
+avec −∞ < a < b < ∞, avec deux fonctions f−, f+ continues Cp1m définies sur [a, b] satisfaisant f− < f+ sur ]a, b[.
+(b) Ré-obtenir le théorème de Goursat :
+0=
+∫
+∂T
+f (z) dz,
+avec cette hypothèse supplémentaire que f ∈ C 1(Ω, C).
+Exercice 10. Soit ∆ ⊂ C un disque ouvert non vide. Montrer que pour tout z ∈ ∆, on a :
+2iπ =
+∫
+∂∆
+dζ
+ζ −z.
+Indication: Supposer ∆ = Dr(0) avec r > 0 centré à l’origine, puis, pour 0 6 t 6 1 réel, étudier la fonction :
+Φ(t) :=
+∫ 2π
+0
+r i eiθ
+r eiθ − t z dθ.
+Exercice 11. Soit T = T ⊂ Ω ⊂ C un triangle fermé contenu dans un ouvert du plan complexe, et soit f : Ω −→ C une fonction qui est C-différentiable excepté en unique point z∗ ∈ T . Montrer que si f est bornée au voisinage de z∗, alors le théorème de Goursat est encore vrai :
+0=
+∫
+∂T
+f (z) dz.
+Exercice 12. Soit un ouvert Ω ⊂ C, soit z0 ∈ Ω, soit r > 0 avec ∆ := Dr(z0) ⊂ Ω, soit z ∈ ∆ à l’intérieur, et soit f ∈ O(Ω). Avec 0 < δ < ε rayon(∆), soit le contour « trou de serrure » Γδ,ε = ∂Ωδ,ε évitant z qui a été utilisé dans la démonstration du Théorème 6.1.
+(a) Montrer que :
+0=
+∫
+Γδ,ε
+f (ζ) − f (z)
+ζ − z dζ.
+Indication: Vérifier que ζ 7−→ f(ζ)−f(z)
+ζ−z est holomorphe dans C\{z} et continue dans C, pour pouvoir appliquer le résultat de l’Exercice 11.
+(b) Soit le grand cercle C := ∂∆ et soit le petit cercle cε := {ζ ∈ C : |ζ − z| = ε}, tous deux orientés dans le sens trigonométrique. Montrer que :
+∫
+C
+f (ζ)
+ζ − z dζ −
+∫
+cε
+f (ζ)
+ζ − z dζ = f (z)
+{∫
+C
+dζ
+ζ−z −
+∫
+cε
+dζ ζ −z
+}
+.
+
+
+11. Exercices 97
+(c) En utilisant le résultat de l’Exercice 10, démontrer la formule de représentation intégrale de Cauchy :
+f (z) = 1
+2iπ
+∫
+∂∆
+f (ζ)
+ζ − z dζ (∀ z ∈ ∆).
+Exercice 13. Soit une fonction holomorphe f : D −→ C définie dans le disque unité D = {|z| < 1}.
+(a) Montrer que le diamètre de son image :
+diam f (D) := sup
+z,w∈D
+∣
+∣f (z) − f (w)∣
+∣
+est minoré par :
+2
+∣
+∣f ′(0)∣
+∣ 6 diam f (D).
+Indication: Pour 0 < r < 1 arbitrairement proche de 1, utiliser, après l’avoir justifiée, la formule :
+2 f ′(0) = 1
+2iπ
+∫
+|ζ|=r
+f (ζ) − f (−ζ)
+ζ2 dζ.
+(b) Montrer que l’inégalité est une égalité précisément lorsque f (z) = az + b est affine.
+Exercice 14. Si f ∈ O(Ω) est une fonction holomorphe dans la bande ouverte Ω := {x + √−1 y : − 1 < y < 1} qui satisfait, pour deux constantes C > 0 et κ ∈ R :
+∣
+∣f (z)∣
+∣ 6 C (1 + |z|)κ (∀ z ∈ Ω),
+montrer que pour tout entier n > 0, il existe une constante Cn > 0 telle que :
+∣
+∣f (n)(x)∣
+∣ 6 Cn
+(1 + |x|)κ (∀ x ∈ R).
+Exercice 15. Soit Ω ⊂ C un ouvert borné, et soit φ : Ω −→ Ω une fonction holomorphe à valeurs dans Ω lui-même. S’il existe un point z0 ∈ Ω en lequel :
+φ(z0) = z0 et φ′(z0) = 1,
+montrer que φ(z) ≡ z est l’identité. Indication: Se ramener à z0 = 0, écrire φ(z) = z + an zn + O(zn+1), composer un nombre k > 1 arbitraire de fois :
+φ◦k := φ ◦ · · · ◦ φ,
+vérifier que φ◦k(z) = z + k an zn + O(zn+1), et appliquer les inégalités de Cauchy.
+Exercice 16. Un théorème de Weierstrass énonce qu’une fonction continue sur [0, 1] peut être uniformément approximée à volonté par des polynômes réels. Montrer que les fonctions continues sur le disque unité fermé D ne sont pas toutes uniformément approximables par des polynômes holomorphes P (z) ∈ C[z].
+Exercice 17. Soit f une fonction holomorphe dans un voisinage ouvert de d’un disque fermé DR = DR(0) centré à l’origine de rayon R > 0.
+(a) Montrer que pour tout rayon intermédiaire 0 < r 6 R, pour tout |z| < r, on a la représentation intégrale :
+f (z) = 1
+2π
+∫ 2π
+0
+f
+(r eiφ) Re
+( r eiφ + z r eiφ − z
+)
+dt.
+Indication: En prenant w := R2
+z , observer que l’intégrale de f(ζ)
+ζ−w sur le cercle de rayon R vaut 0, puis utiliser la formule de Cauchy.
+(b) Vérifier, pour 0 < s < r et φ ∈ R, que :
+Re
+( r eiφ + s r eiφ − s
+)
+= r2 − s2
+r2 − 2rs cos φ + s2 .
+Exercice 18. Soit u : D −→ R une fonction réelle définie dans le disque unité ouvert D = {|z| < 1} qui est de classe C 2. On dit que u est harmonique si elle est annulée par l’opérateur de Laplace :
+∆u(x, y) := ∂2u
+∂x2 (x, y) + ∂2u
+∂y2 (x, y) = 0 (∀ (x,y) ∈ D).
+(a) Montrer qu’il existe une fonction holomorphe f ∈ O(D) telle que :
+Re f = u.
+
+
+98 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+Indication: Si f existe, vérifier que l’on doit avoir f ′(z) = 2 ∂u
+∂z . Montrer alors que la fonction g(z) := 2 ∂u
+∂z
+est holomorphe, puis en trouver une primitive F ′(z) = g(z), et enfin, montrer que Re F − u = constante.
+(b) Montrer que la partie imaginaire de f est déterminée de manière unique, à l’addition près d’une constante (réelle).
+(c) Dans C\{0}, montrer que la fonction log |z| est harmonique, mais n’est la partie réelle d’aucune fonction holomorphe.
+(d) En utilisant l’Exercice 17, en déduire la formule intégrale de Poisson, qui s’énonce comme suit. Si une fonction C 2 sur le disque unité fermé u ∈ Harm(D) ∩ C 2(D) est harmonique dans le disque unité ouvert, alors sa valeur en un point intérieur quelconque z = r eiθ ∈ D avec 0 6 r < 1 est donnée par l’intégrale de convolution :
+u(z) = 1
+2π
+∫ 2π
+0
+Pr
+(θ − φ) u(eiφ) dφ,
+avec le noyau de Poisson :
+Pr(γ) := 1 − r2
+1 − 2r cos γ + r2 (γ ∈ R).
+Exercice 19. Si une fonction f ∈ O(C) holomorphe entière a la propriété qu’en tout point z0 ∈ C, son développement en série entière :
+f (z) =
+∞
+∑
+n=0
+f (n)(z0) n!
+(z − z0
+)n
+possède au moins un coefficient nul f nz0 (z0) = 0, montrer que f est un polynôme. Indication: Employer un argument de dénombrabilité.
+Exercice 20. Soit ∑∞
+n=0 an zn une série entière à coefficients an ∈ C dont le rayon de convergence R > 0 est strictement positif. Son étoile de Mittag-Leffler est le plus grand ouvert Ω 3 0 étoilé en 0 tel qu’il existe
+une fonction holomorphe f : Ω −→ C avec f(n)(0)
+n! = an pour tout n > 0. Déterminer l’étoile de Mittag-Leffler des trois séries entières suivantes :
+∞
+∑
+n=0
+zn
+n! ,
+∞
+∑
+n=0
+zn,
+∞
+∑
+n=0
+(−1)n z3n.
+Exercice 21. Soit f une fonction continue sur le disque unité fermé D qui est holomorphe dans D et prend la valeur 0 en tout point du demi-cercle unité supérieur :
+∂+D := {z ∈ ∂D : |z| = 1, Im z > 0}.
+Montrer que f est identiquement nulle dans D. Indication: Construire une fonction qui est holomorphe dans un voisinage ouvert de {|z| = 1, Im z > 0}.
+Exercice 22. Soit f ∈ O(DR) une fonction holomorphe dans le disque ouvert DR = DR(0). Pour 0 6 r < R, on introduit :
+Mf (r) := sup
+|z|=r
+∣
+∣f (z)∣
+∣.
+(a) Montrer que r 7−→ Mf (r) est une fonction continue et croissante sur [0, R[.
+(b) Montrer qu’elle est strictement croissante si et seulement si f n’est pas constante.
+Exercice 23. Soit f ∈ O(C) une fonction holomorphe entière telle qu’il existe des constantes réelles
+A, B, a > 0 avec :
+∣
+∣f (z)∣
+∣ 6 A + B |z|a (∀ z ∈ C).
+Montrer que f est un polynôme.
+Exercice 24. (a) Montrer que l’application :
+z −→ z
+√1 − |z|2
+établit un difféomorphisme C ∞ du disque unité D sur C.
+(b) Montrer qu’il n’existe pas de biholomorphisme de D sur C, à savoir un difféomorphisme holomorphe dont l’inverse est aussi holomorphe.
+
+
+11. Exercices 99
+Exercice 25. Soit Ω ⊃ D un ouvert de C contenant le disque unité fermé, et soit une fonction holomorphe f ∈ O(Ω). Si f (0) = 1 tandis que |f (z)| > 1 pour tout |z| = 1, montrer que f s’annule en au moins un point de D.
+Exercice 26. Soit f ∈ O(Ω) une fonction holomorphe entière non bornée. Montrer que son image f (C) ⊂ C est un sous-ensemble dense de C. Indication: S’il existe un disque ouvert Ds0 (w0) de rayon s0 > 0 centré en un point w0 ∈ C ne rencontrant pas f (C), regarder la fonction 1/(f (z) − w0).
+Exercice 27. Soit Ω := ] − 1, 1[ × ] − 1, 1[ le carré unité ouvert dans C. On note ses 4 côtés orientés :
+γ1 := {1} × [−1, 1], γ2 := [1, −1] × {1}, γ3 := {−1} × [1, −1], γ4 := [−1, 1] × {−1}.
+On suppose que f ∈ O(Ω) ∩ C 0(Ω) vérifie, pour des constantes 0 6 ci < ∞ :
+∣
+∣f (ζ)∣
+∣ 6 ci (∀ ζ ∈ γi, ∀ 1 6 i 6 4).
+Montrer que :
+|f (0)| 6 4 √c1 c2 c3 c4.
+Indication: Introduire g(z) := f (z) f (iz) f (−z) f (−i z).
+Exercice 28. Pour une fonction holomorphe entière f ∈ O(C), à savoir une série entière f (z) =
+∑∞ n=0
+f (n)(0)
+n! zn de rayon de convergence infini, on introduit comme dans l’Exercice 22 :
+Mf (r) := max
+|z|=r
+∣
+∣f (z)∣
+∣ (r ∈ R∗
++).
+(a) Montrer que r 7−→ Mf (r) est une fonction croissante.
+(b) Soit P = P (z) ∈ C[z] un polynôme de degré n > 1, et soit Q le polynôme réciproque défini par Q(z) := zn P ( 1
+z
+). Montrer que :
+MQ(r) := rn MP
+(1 r
+)
+(∀ r > 0).
+(c) Montrer que la fonction r 7−→ 1
+rn MP (r) est décroissante.
+(d) Pour toute paire de rayons 0 < r < R, établir l’inégalité de Bernstein-Walsh :
+max
+|z|=R
+∣
+∣P (z)∣
+∣6
+(R
+r
+)n
+max
+|z|=R
+∣
+∣Q(z)∣
+∣.
+Exercice 29. Une fonction f ∈ O(D) holomorphe dans le disque unité D = {z ∈ C : |z| < 1} est dite prolongeable holomorphiquement en un point ζ ∈ ∂D du cercle-bord unité s’il existe une fonction holomorphe g ∈ O(Dε(ζ)) définie dans un disque de rayon ε > 0 telle que :
+g
+∣
+∣D ∩ Dε(ζ) = f ∣
+∣D ∩ Dε(ζ).
+(a) Montrer que si une série entière f (z) = ∑∞
+n=0 anzn a un rayon de convergence R > 0, alors il existe au moins un point ζ∗ ∈ DR(0) en lequel f n’est pas prolongeable holomorphiquement :
+∀ ε > 0 6 ∃ g ∈ O(Dε(ζ∗)) g∣
+∣DR(0)∩Dε(ζ∗) = f ∣
+∣DR (0)∩Dε (ζ∗ ) .
+Indication: Raisonner par l’absurde, et utiliser la compacité de ∂DR.
+(b) Vérifier que le rayon de convergence de la série lacunaire :
+f (z) :=
+∞
+∑
+n=0
+z2n
+vaut 1.
+(c) Montrer que f (z) n’est prolongeable holomorphiquement en aucun point du bord ζ ∈ ∂D. Indication: Pour des angles de la forme θ := 2π p
+2k où p > 1 et k > 1 sont entiers, montrer que :
+∞ = rli< →m1
+∣ ∣
+∣f (r ei 2πp
+2k )
+∣
+∣
+∣.
+(d) Pour un paramètre réel quelconque 0 < α < ∞, montrer plus généralement que la fonction holomorphe :
+f (z) :=
+∞
+∑
+n=0
+1
+2nα z2n
+(|z| < 1)
+
+
+100 François DE MARÇAY, Département de Mathématiques d’Orsay, Université Paris-Sud
+n’est prolongeable holomorphiquement en aucun point ζ ∈ ∂D. Indication: Le cours d’Analyse de Fourier a fait voir que la fonction de variable réelle :
+g(θ) :=
+∞
+∑
+n=0
+1
+2nα ei 2n θ,
+est continue, mais n’admet de dérivée en aucun point θ0 ∈ R.
+Exercice 30. On note d(n) le nombre de diviseurs d’un entier n > 1. Soit la série entière :
+f (z) =
+∞
+∑
+n=1
+d(n) zn.
+(a) Vérifier que son rayon de convergence vaut 1.
+(b) Montrer l’identité : ∞
+∑
+n=1
+d(z) zn =
+∞
+∑
+n=1
+zn
+1 − zn .
+(c) Montrer, pour z = r réel avec 0 < r < 1 proche de 1, qu’il y a une minoration :
+∣
+∣f (r)∣
+∣>c 1
+1 − r log
+(1
+1−r
+)
+au moyen d’une certaine constante 0 < c < ∞.
+(d) Plus généralement, pour z = r ei 2πp
+q avec 0 < r < 1 proche de 1 et avec p, q > 1 entiers, montrer qu’il y a une minoration :
+∣
+∣f (r ei 2πp
+q
+)∣
+∣ > cp,q
+1
+1 − r log
+(1
+1−r
+)
+au moyen d’une certaine constante 0 < cp,q < ∞.
+(e) Montrer que f n’est prolongeable holomorphiquement (cf. l’Exercice 29) en aucun point du bord ζ ∈ ∂D du disque unité.
+—————

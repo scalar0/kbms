@@ -1,0 +1,541 @@
+LARGE SCALE GRAPH MINING
+PRELIMINARIES
+Nacéra Seghouani
+Computer Science Department, CentraleSupélec Laboratoire Interdisciplinaire des Sciences du Numérique, LISN nacera.seghouani@centralesupelec.fr
+2024-2025
+1/30
+
+
+GRAPH THEORY PRELIMINARIES
+2/30
+
+
+Graph Typology
++ G (V , E), V set of vertices, E = {(vi , vj )|vi , vj ∈ V } set of edges, |V | = n, |E| = m X Undirected - edge: symmetric pair of vertices - Directed - edge: asymmetric pair of vertices X weighted vertice wv : V → R or edge we : E → R X labeled vertice wv : V → L or edge we : E → L X Bipartite - V = V1 ∪ V2, E = {(vi , vj )|vi ∈ V1, vj ∈ V2} - Generalization to k -partite X Multigraph or Multidigraph - r : E → vi , vj ∈ V where r assigns to each e ∈ E a pair of vertices X Hypergraph - edge: relates a subset of vertices X Complete graph: ∀(vi , vj ) ∈ VxV , (vi , vj ) ∈ E
+Figure: weighted graph
+Figure: bipartite graph
+Figure: multigraph Figure: hypergraph
+3/30
+
+
+Graph Properties
++ Let G (V , E) a directed graph, d+
+i ,d−
+i denote resp. the number of edges coming out and coming to vi . The degree of vi :
+di = d +
+i +d−
+i
++ N+
+i ,N −
+i denote resp. the set of the successors and predecessors of vi . The set of the neighbors of vi :
+Ni = N +
+i ∪N −
+i
++ A (directed) path (vi vj ) is a sequence of vertices in the graph (vi , vk , .., vj ) where each consecutive vertices pair ∈ E
++ A (directed) cycle is (vi vj = vi )
++ The length of a path (vi vj ) is the number of the edges in (vi vj ).
++ A distance between (vi , vj ) is the shortest path length between (vi , vj )
+dist(vi , vj ) = Minvi vj length(vi vj )
+4/30
+
+
+Graph Properties
++ The eccentricity ecc of v : the greatest distance between v and any other vertex;
+ecc(v ) = max
+s∈V dist(v , s)
++ The diameter of G is max
+v,s∈V dist(v , s)
+It is also the maximum eccentricity of any v in G
++ The radius of G is the minimum eccentricity of any vertex
+vm∈iVn ecc(v )
++ The center of a graph is the set of all vertices of minimum eccentricity, equal to the graph’s radius.
+5/30
+
+
+Graph Properties
+Examples:
+6/30
+
+
+Graph Properties
++ G ′(V , E′ ⊂ E) is a partial graph of G (V , E)
++ G ′(V ′ ⊂ V , E′ ⊂ E) is a subgraph of G (V , E)
++ G (V , E) is a connected graph ⇐⇒ ∀(vi , vj ) ∈ V ∃(vi vj )
++ (strongly) connected component of G (V , E) is a subgraph - Gcc (Vcc , Ecc ) where ∃(vi vj ), a (directed) path between each vi and vj ∈ Vcc ,
++ G (V , E) is a tree ⇔ G is a connected graph without cycle ⇒ graph with m = n − 1 edges
++ G (V , E) is a forest ⇐⇒ each connected component is a tree
+7/30
+
+
+Breadth First Search (BFS)
++ Queue data structure: an element first added in the list first removed out the list FIFO (First In First Out)
+1: procedure BFS(G (V , E), r ) 2: Q ← 0/ , enqueue(Q, r ), 3: r .label = true 4: while Q 6= /0 do
+5: v ← dequeue(Q) 6: for w ∈ Nv do
+7: if ¬w.label then 8: enqueue(Q, w) 9: w.label = true 10: end if 11: end for 12: end while 13: end procedure
+8/30
+
+
+Breadth First Search (BFS)
+9/30
+
+
+Depth First Search (DFS)
++ Recursive DFS 1: procedure DFS*(G (V , E), r ) 2: r .label = true 3: for v ∈ N do
+4: if ¬v.label then
+5: DFS*(G (V , E), v) 6: end if 7: end for 8: end procedure
+10/30
+
+
+Breadth First Search (BFS)
+11/30
+
+
+Graph Representation using Matrices
++ G (E, V ) with n vertices and m edges can be encoded using:
+X Adjacency Matrix A(n × n), n = |V |
+Aij =
+{ 1 if (vi , vj ) ∈ E, 0 otherwise
+Symmetric matrix if G is an undirected (without loops) X Adjacency list L each vertex holds a list of its neighbours
+∀vi ∈ V , Li = {vj |(vi , vj ) ∈ E}
+If G is directed the choice of the direction depends on analytic needs X Incidence matrix B, n × m
+Bij =
+{ 1 if ej = (vi , vk ) ∈ E, 0 otherwise
+12/30
+
+
+Matrix Multiplication & Power
+1) Give the different representations of these graphs.
+2) Compute A2, A3. What Ar
+ij represents?
+3) What is the complexity of Ar , Is it possible to reduce it?
+13/30
+
+
+Matrix Multiplication & Power
+Using the adjacency matrix A, the number of r - length paths:
+Ar = AxAr−1∀r > 1
+Ar
+ij = ∑k Ar −1
+ik Akj , the number of r -length paths between nodes i and j Computing Ar is O(rn3): requires r multiplications, each one O(n3).
+If r is pair Ar = (A
+r
+2 )2, otherwise Ar = A(A
+r −1
+2 )2. Computing Ar requires O(log2(r ))n3 multiplications.
+The distance between vi and vj is the smallest d such that Ad
+ij 6= 0 Useful to compute shortest paths, triangles, ...
+14/30
+
+
+LINEAR ALGEBRA PRELIMINARIES
+15/30
+
+
+Vector Norms
++ A function f that measures the size of a vector is called a norm.
++ A vector norm has to satisfy the following:
+f (x) = 0 → x = 0
+f (x + y) ≤ f (x) + f (y) triangle inequality
+∀α ∈ R f (αx) = |α|f (x)
++ The general form of vector norm: ||x||p = p √
+∑i |xi |p
++ The most commonly used is euclidian norm ||x||2 = √
+∑i |xi |2
+16/30
+
+
+Dot and Cross Vector Product
++ A dot product or scalar product of two vectors is a scalar quantity - algebraic formula: ||x||2||y||2cos(θ) or ∑i xi yi - how much two vectors points in same directions. The dot product of two orthogonal vectors is 0.
+- A cross or vector product of two vectors is a vector orthogonal to to both the vectors. - algebraic formula: ||x||2||y||2sin(θ)1 or use cofactor matrix - how much two vectors points in different directions. The cross product of two linear vectors is 0.
+17/30
+
+
+Vectors and Matrices
++ Let xi i ∈ [1..m] be m vectors of n elements: x1 = [x11 x21 ... xn1
+], x2 = [x12 x22 ... xn2
+], ... xm = [x1m x2m ... xnm
+]
++ Matrix representation of size n × m, as a row vector or column vector (transpose)
+
+  
+x11 x12 ... x1m x21 x22 ... x2m ... ... ... ... xn1 xn2 ... xnm
+
+  
+=
+[x1 x2 ... xm
+]=
+
+  
+x1 x2 ... xm
+
+  
+T
++ Each xi∈[1..m] is n-dimensional point
+18/30
+
+
+Matrix Transpose
++ Transpose of a n × m matrix X is a m × n matrix XT: xT
+ij = xji
+[1 2]T =
+[1
+2
+]
+;
+[1 2 34
+]T
+=
+[1 3 24
+]
+;
+
+
+12 34 56
+
+
+T
+=
+[1 3 5 246
+]
+;
+
+
+123 214 345
+
+
+T
+=
+
+
+123 214 345
+
+
++ If X is symmetric xij = xji ⇔ X = XT
++ Let X and Y be matrices and c be a scalar, some properties:
+(XT)T = X ; (X + Y)T = XT + YT ; (XY)T = YTXT ; (cX)T = cXT
+19/30
+
+
+Matrix Determinant
++ Let a 2 × 2 square matrix [x y] =
+[x1 y1 x2 y2
+]
+, its determinant is a scalar value which characterises
+some properties of what (x, y) represents.
+det
+[x1 y1 x2 y2
+]
+or
+∣ ∣ ∣ ∣
+x1 y1 x2 y2
+∣ ∣ ∣ ∣
+= x1y2 −y1x2 = ‖x‖·‖y‖·sin θ
+X The absolute value of the determinant is equal to the area of the parallelogram defined by x, y
+X The determinant is = 0 if and only if x, y are co-linear (line-parallelogram)
++ In the case of 3 × 3 matrix (x, y, z). The absolute value of the determinant is the volume of the parallelogram defined by x, y, z = 0 if they are on the same plan (plat parallelogram)
+det [x, y, z] =
+∣ ∣ ∣ ∣ ∣ ∣
+x1 y1 z1 x2 y2 z2 x3 y3 z3
+∣ ∣ ∣ ∣ ∣ ∣
+= x1
+∣ ∣ ∣ ∣
+y2 z2 y3 z3
+∣ ∣ ∣ ∣
+− y1
+∣ ∣ ∣ ∣
+x2 z2 x3 z3
+∣ ∣ ∣ ∣
++ z1
+∣ ∣ ∣ ∣
+x2 y2 x3 y3
+∣ ∣ ∣ ∣
++ Generalisation to vectorial space of dimension n on R where the vectors define a parallelotope.
+20/30
+
+
+Matrix Determinant
++ Many uses of matrix determinant for ex.:
+X Coefficients in a system of linear equations Y = AX, can be used to solve these equations (Cramer’s rule), other methods computationally much more efficient. X Characteristic polynomial of X, whose roots are the eigenvalues.
++ Some properties:
+∣
+∣I∣
+∣ = 1 where I identity matrix (1 on the diagonal and 0 elsewhere);
+If ∣
+∣X∣
+∣ = 0 X is a singular matrix;
+∣
+∣XY∣
+∣=∣
+∣X∣
+∣
+∣
+∣Y∣
+∣;∣
+∣XT∣
+∣=∣
+∣X∣
+∣;∣
+∣An∣
+∣=∣
+∣A∣
+∣
+n
+21/30
+
+
+Invertible Matrix
++ A square matrix X is invertible (non-singular or non-degenerate), its inverse denoted X−1, if ∃Y such that XY = YX = I ⇔ Its vectors are linearly independent. ⇔
+∣
+∣X∣
+∣ 6= 0
+⇔ XT is invertible ⇔ 0 is not an eigenvalue (see next) + Other properties:
+(X−1)−1 = X ; (XT)−1 = (X−1)T ; (XY)−1 = Y−1X−1 ; (cX)−1 = 1
+c X−1 with c 6= 0 ; ∣
+∣X−1 ∣
+∣= 1
+∣
+∣X∣
+∣
+;
+∣
+∣XT∣
+∣=∣
+∣X∣
+∣
++ Analytic inversion of 3 × 3 matrix using the comatrix transpose
+X−1 =
+
+
+abc def ghi
+
+
+−1
+=1
+∣
+∣X∣
+∣
+
+
+ABC DEF GH I
+
+
+T
+=1
+∣
+∣X∣
+∣
+
+
+ADG BEH CF I
+
+
+A = (ei − fh) B = −(di − fg) C = (dh − eg) D = −(bi − ch) E = (ai − cg)
+F = −(ah − bg) G = (bf − ce) H = −(af − cd) I = (ae − bd)
++ Different methods of matrix inversion: Gaussian elimination, Newton’s method, Cayley–Hamilton method Cholesky decomposition and also Eigen decomposition
+22/30
+
+
+Eigenvectors and eigenvalues
++
+An eigenvector (or characteristic vector) of a linear transformation T is a nonzero vector that changes at most by a scalar factor λ (eigenvalue): T (v) = λv.
++ There is a direct correspondence between n × n square matrices and linear transformations of an n-dimensional vector space into itself, given any vector space basis. The T representation of A n × n matrix: Av = λv.
++ Finding all eigenvalues: Solving a polynomial function of λ called the characteristic polynomial of A: (A − λI)v = 0 has a nonzero solution v iff ∣
+∣A − λI∣
+∣=0
++ Example: A =
+[2 1 12
+]
+; |A − λI| =
+∣ ∣ ∣ ∣
+2−λ 1 1 2−λ
+∣ ∣ ∣ ∣
+= 3 − 4λ + λ2 = (λ − 1)(λ − 3) = 0
+v1 + v2 = 0 if λ1 = 1 and − v1 + v2 = 0 if λ2 = 3
+The eigenvectors define eigenSpace(λ1) and eigenSpace(λ2) (t ∈ R∗): vλ1 =
+[1
+−1
+]
+t, vλ2 =
+[1
+1
+]
+t
++ An infinity of collinear eigenvectors (cross product null) for λ1 and also for λ2. Digression: Strictly speaking, we talk about the eigenvector associated with one given eigenvalue Note that not all matrices have eigenvalues.
+23/30
+
+
+Eigenvectors and eigenvalues
++ Algebraic multiplicity ti of eigenvalue λi
+(λ − λ1)t1 (λ − λ2)t2 ...(λ − λk )tk = 0
+∑i ti = n where ti ∈ N∗ satisfying the algebraic multiplicity of λi
++ A can have at most n distinct eigenvalues (complex or real).
++ If eigenvalues of A are distinct values, then the corresponding eigenvectors are linearly independent (non collinear).
+24/30
+
+
+Eigenvectors and eigenvalues
++ Example:
+
+
+−1 1 0 −4 3 0 1 02
+
+
+(λ − 1)2(λ − 2) = 0 has two eigenvalues: λ1 = 1 and λ2 = −2 with algebraic multiplicities 2 and 1, resp. and vλ1 is defined by −2v1 + v2 = 0 and v1 + v3 = 0
+the eigenSpace(λ1) is vλ1 =
+
+
+−t −2t t
+
+ ∀t ∈ R∗. This set has dimension 1.
++ Example:
+
+
+4 60 −3 −5 0 −3 −6 1
+
+ (λ − 1)2(λ + 2) = 0
+
+
+2t −t u
+
+ ∀(t, u) ∈ R∗ eigenSpace(λ = 1) dimension 2.
+
+
+−t t t
+
+ ∀t ∈ R∗ eigenSpace(λ = −2) dimension 1.
++ The dimension of eigenSpace(λi ) is referred to as the geometric multiplicity of λi . The geometric multiplicity of an eigenvalue is at most its algebraic multiplicity.
+25/30
+
+
+Eigen Decomposition
++ Another representation of eigenvalues and eigenvectors
+AX = XΛ
+where X = [x1x2...xn
+] (each xi is an eigenvector) and Λ =
+
+  
+Λ1 Λ2 ... Λn
+
+  
+=
+
+
+λ11 0 ... 0 0 λ22 ... 0 0 0 ... λnn
+
+ a diagonal
+matrix (each λii is an eigenvalue).
++ A matrix A is diagonalizable if there exist n linearly independent eigenvectors, i.e., if the matrix X is invertible:
+X−1AX = Λ
++ Leading to the eigen-decomposition of the matrix
+A = XΛX−1
+26/30
+
+
+Orthogonal Matrix
++ A real matrix U is orthogonal UTU = UTU = I
+⇔ UT is orthogonal ⇔ UT = U−1 ⇔
+∣
+∣U∣
+∣ = +1 or − 1 ⇔U ’s eigenvectors are orthogonal, the pairwise dot product is 0), with a norm = 1 ⇔ U is diagonalizable ...
++ Example
+I ( is orthogonal ), 1
+3
+
+
+122 2 1 −2 −2 2 −1
+
+;
+
+  
+0001 0010 1000 0100
+
+  
+; (Permutation of coordinates),
+[cos θ − sin θ sin θ cos θ
+]
+(rotation),
+[cos θ sin θ sin θ − cos θ
+]
+(reflection)
++ For complex square matrix we talk about unitary matrix (and conjugate transpose)
+27/30
+
+
+Positive (semi-)definite matrices
++ A is said to be positive semi-definite when it can be obtained as the product of a matrix by its transpose: A = XXT.
++ A positive semi-definite matrix is always symmetric AT = (XXT)T = A. A symmetric matrix A is said positive semi-definite if all its eigenvalues are non negative.
++ A positive semi-definite matrix implies: ⇒ 0 ≤ λ1 ≤ λ2.. ≤ λn , and its eigenvectors are pairwise orthogonal when their eigenvalues are different. ⇒The eigenvectors are also composed of real values.
++ Because eigenvectors are orthogonal, it is possible to store all the eigenvectors in an orthogonal matrix. This implies U-1 = UT where UTU = I are the normalized eigenvectors ; if they are not normalized then it is a diagonal matrix.
++ Therefore, the eigen-decomposition of a positive semi-definite matrix A could be: A = UΛUT
++ Example:
+[3 1 13
+]
+=
+
+
+√
+1 2
+√
+1 2
+√
+1
+2−
+√
+1 2
+
+
+[4 0 02
+]
+
+
+√
+1 2
+√
+1 2
+√
+1
+2−
+√
+1 2
+
+
++ As a consequence, the eigen-decomposition of a positive semi-definite matrix is often referred to as its diagonalization. Λ = UAUT
+28/30
+
+
+Positive (semi-)definite matrices - Another definition
++ A matrix A is said to be positive semi-definite if we observe the following relationship for any non-zero vector x: xTAx ≥ 0 ∀x. When > 0 the matrix is positive definite. When ≤ 0 the matrix is negative semi-definite.
++ A matrix rank is the dimension of the vector space generated (or spanned) by its columns. This corresponds to the maximal number of linearly independent columns of A. A matrix whose rank is equal to its size is called a full rank matrix. Only full rank matrices have an inverse.
++ The sum of the eigenvalues of a matrix is the sum of the elements of its main diagonal
++ The product of the eigenvalues is equal to the determinant of the matrix.
+29/30
+
+
+Laplacian Matrix
++ Laplacian Matrix for undirected graph :
+Lij =
+
+ 
+ 
+−1, (vi , vj ) ∈ E
+0, (vi , vj ) 6∈ E
+di , i = j
+or equivalently L = D − A where D is the degree matrix of A where where Dii = ∑j Aij
+
+     
+200000 030000 002000 000300 000030 000001
+
+     
+−
+
+     
+010010 101010 010100 001011 110100 000100
+
+     
+=
+
+     
+2 −1 0 0 −1 0 −1 3 −1 0 −1 0 0 −1 2 −1 0 0 0 0 −1 3 −1 −1 −1 −1 0 −1 3 0 0 0 0 −1 0 1
+
+     
+30/30

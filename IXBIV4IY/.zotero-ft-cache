@@ -1,0 +1,184 @@
+LE THÉORÈME DE RECOUVREMENT DE VITALI « 5R »
+Dans ces notes, on fixe n ⩾ 1 un entier et on travaille dans l’espace euclidien Rn muni de sa norme euclidienne notée j j. Dans l’ensemble de ce texte, une boule (fermée, non dégénérée), est un ensemble de la forme :
+B[x, r] = fy 2 Rn : jy xj ⩽ rg,
+où x 2 Rn et r > 0 sont donnés ; on appelle x le centre de B et r son rayon. Étant donné une boule B, on note r(B) son rayon. Si B = B[x, r] est une boule (avec x 2 Rn et r > 0), on note Bˆ := B[x, 5r] la boule de même centre que B et de rayon égal au quintuple de celui de B.
+1. Le théorème de recouvrement de Vitali
+Les lemmes suivants nous seront utiles.
+Lemme 1. — Si B est une collection de boules deux à deux disjointes telle que leur réunion [B soit bornée et que l’on ait :
+inf
+B2B r(B) > 0,
+alors B est finie.
+Démonstration. — Supposons que B soit infinie ; il existe dès lors une suite fBk : k 2 Ng de boules distinctes issues de B. Pour chaque k 2 N, notons xk le centre de Bk. Posons aussi δ := infB2B r(B) > 0. On a évidemment r(Bk) ⩾ δ pour tout k 2 N. Puisque les boules Bk, k 2 N sont deux à deux disjointes, on trouve par ailleurs xj 2/ Bk = B[xk, r(Bk)], c’est-à-dire jxj xkj > r(Bk) pour tous j, k 2 N vérifiant j ̸= k. On a donc aussi jxj xkj ⩾ δ pour tous j, k 2 N vérifiant j ̸= k. Mais alors la suite (xk)k2N, qui est bornée par hypothèse, ne peut admettre aucune sous-suite de Cauchy, et donc aucune sous-suite convergente. Ceci contredit la propriété de Bolzano-Weierstrass, et achève le démonstration. ■
+Lemme 2. — Soient B une collection de boules, E Rn un ensemble et R > 0. Si on a infB2B r(B) > 0, alors il existe une famille finie maximale B′ B constituée de boules deux à deux disjointes, disjointes de E et contenues dans B[0, R].
+Remarque 1. — Dans l’affirmation précédente, on entend que B′ est maximale au sens suivant : il n’existe aucune famille B′′ B vérifiant B′′ ⊋ B′ qui soit constituée de boules contenues dans B[0, R], deux à deux disjointes et disjointes de E.
+
+
+LE THÉORÈME DE VITALI 2
+Démonstration. — Il n’y a évidemment rien à démontrer si B est vide. Sinon, posons 0 < δ := infB2B r(B) < +1. S’il n’existe aucune boule de B disjointe de E et contenue dans B[0, R], on pose B′ := ∅. Dans le cas contraire, on choisit B0 une telle boule. S’il n’existe aucune boule de B disjointe de E, de B0 et contenue dans B[0, R], on pose B′ := fB0g. Dans le cas contraire, on choisit B1 une telle boule. De proche en proche, on choisit tant que possible, des boules B0, B1,... de la façon suivante. Si B0, ..., Bk ont été construites pour k 2 N, de deux choses l’une : soit il n’existe aucune boule de B qui soit à la fois contenue dans B[0, R] et disjointe de E et de Bj pour tout 0 ⩽ j ⩽ k, et on pose B′ := fB0, . . . , Bkg, soit un telle boule existe, auquel cas on en choisit une notée Bk+1. Si ce processus se poursuivait indéfiniment, la famille fBk : k 2 Ng vérifierait les hypothèses du Lemme 1 ; ce serait absurde puisque cette famille est infinie. Ce procédé s’achève donc après un nombre fini d’étapes, et permet de définir une collection finie B′ B de boules deux à deux disjointes, disjointes de E et contenues dans B[0, R]. Elle est maximale par construction. ■
+Lemme 3. — Soient B une collection de boules, E Rn un ensemble. Si on a infB2B r(B) > 0, alors il existe une famille au plus dénombrable maximale B′ B constituée de boules deux à deux disjointes et disjointes de E.
+Remarque 2. — Dans l’affirmation précédente, dire que B′ est maximale signifie qu’il n’existe aucune famille B′′ B vérifiant B′′ ⊋ B′ qui soit constituée de boules deux à deux disjointes et disjointes de E.
+Démonstration. — Il n’y a évidemment rien à démontrer si B est vide. Sinon, posons 0 < δ := infB2B r(B) < +1 et construisons des familles finies B′
+k B, k 2 N par récurrence sur k 2 N.
+On commence par choisir, en vertu du Lemme 2, une famille finie maximale B′0 B de boules
+deux à deux disjointes, disjointes de E et contenues dans B[0, 1]. Si B′0,...,B′
+k ont été construites
+pour k 2 N, on utilise le Lemme 2 pour former une famille finie maximale B′
+k+1 B de boules
+contenues dans B[0, 2k+1], deux à deux disjointes et disjointes de E [ ∪k
+j=0 [B′j. On pose alors
+B′ := ∪
+k2N B′
+k. Cette famille, qui est évidemment au plus dénombrable, convient.
+Pour le voir, supposons qu’au contraire il existe une famille B′′ B vérifiant B′′ ⊋ B′, constituée de boules deux à deux disjointes et disjointes de E. Soit alors B 2 B′′ n B ; il existe un entier k 2 N assez grand pour que l’on ait B B[0, 2k]. Mais alors la famille B′
+k [ fBg
+serait constituée de boules deux à deux disjointes, disjointes de E et contenues dans B[0, 2k], ce qui contredirait la maximalité de B′
+k. ■
+Remarque 3. — Le lemme de Zorn (voir le Théorème 4 ci-dessous) permet de démontrer que le lemme précédent reste valide même sans l’hypothèse d’après laquelle infB2B r(B) > 0.
+Plus précisément, si B est une famille quelconque de boules (fermées, non dégénérées), et si E Rn est un ensemble, il existe une famille maximale B′ B constituée de boules deux à deux disjointes et disjointes de E ; en outre, B′ est au plus dénombrable. Pour le voir, observons que ce résultat est immédiat s’il n’y a aucune boule dans B qui soit disjointe de E. Dans le cas contraire, notons B l’ensemble des collections C B constituées de boules deux à deux disjointes et disjointes de E. Par hypothèse, B est non vide. Muni de l’inclusion, (B, ) est par ailleurs un ensemble partiellement ordonné inductif (voir la Définition 3 ci-dessous) : si C B est totalement ordonnée par l’inclusion, alors [C 2 B est une borne supérieure pour C. Le lemme de Zorn assure dès lors que B admet un élément maximal. Si B′ 2 B est un tel élément maximal, alors il est clair que B′ B est une famille maximale constituée de boules deux à deux disjointes et disjointes de E. Puisque les boules de B′ sont non dégénérées, on peut associer à chaque boule B 2 B′ un point xB 2 B \ Qn à coordonnées rationnelles issu de B ; mais puisque les boules de B′ sont deux à deux disjointes, l’application B′ ! Qn, B 7! xB est injective ; il en résulte que B′ est au plus dénombrable.
+
+
+LE THÉORÈME DE VITALI 3
+On peut à présent énoncer et démontrer le théorème de recouvrement de Vitali (démontré en dimension 1 par G. Vitali).
+Théorème 1 (Vitali). — Soit B une famille de boules (fermées, non dégénérées) vérifiant :
+sup
+B2B
+r(B) < +1.
+Dans ces conditions, il existe une famille au plus dénombrable B′ B constituée de boules deux à deux disjointes et telle que l’on ait :
+[B ∪
+B2B′
+Bˆ .
+Démonstration. — Si B est vide, il n’y a rien à démontrer. Sinon, on pose 0 < M := supB2B r(B) < +1 et, pour k 2 N :
+Bk := fB 2 B : 2 k 1M ⩽ r(B) ⩽ 2 kM g.
+On a alors B = ∪
+k2N Bk.
+On construit des familles B′
+k Bk, k 2 N par récurrence sur k 2 N. On note pour commencer
+B′0 B0 une famille (au plus dénombrable) maximale de boules deux à deux disjointes issues
+de B0 (une telle famille existe en vertu du Lemme 3). Si B′0,...,B′
+k ont été construites pour k 2 N, alors on utilise le Lemme 3 pour construire une famille (au plus dénombrable) maximale B′
+k+1 Bk+1 constituée de boules deux à deux disjointes et disjointes de ∪k
+j=0 [Bj. On forme
+finalement B′ := ∪
+k2N B′
+k. Il est clair que B′ est au plus dénombrable.
+Pour achever la démonstration, fixons B 2 B et montrons qu’il existe B′ 2 B′ telle que l’on ait B Bˆ′. À cet effet, commençons par choisir un entier k 2 N tel que l’on ait B 2 Bk. Puisque l’on a B 2/ B′, et donc aussi B 2/ B′
+k, on a B 2 Bk n B′
+k ; ia maximalité de B′
+k assure dès lors que B rencontre soit une boule de la collection B′
+k, soit l’ensemble ∪k 1
+j=0 [B′j (ce second volet de l’alternative ne se présentant évidemment pas lorsque k = 0). Il existe donc toujours une boule
+B′ 2 ∪k
+j=0 B′j telle que l’on ait B \ B′ ̸= ∅. Puisque l’on a B′ 2 B′j Bj pour un 0 ⩽ j ⩽ k, on a en particulier r(B′) ⩾ 2 j 1M ⩾ 2 k 1M . Or on a r(B) ⩽ 2 kM puisque B est issue de Bk. Il vient donc :
+r(B′) ⩾ 1
+2 r(B). (1)
+Fixons à présent x 2 B, notons y 2 B \ B′ un point commun à B et B′ et soit finalement z le centre de la boule B′. Il vient :
+jx zj ⩽ jx yj + jy zj.
+En notant c le centre de B, on calcule d’une part jx yj ⩽ jx cj + jc yj ⩽ 2r(B) puisque l’on a x, y 2 B. Comme d’autre part on a y 2 B′, il vient aussi jy zj ⩽ r(B′). On trouve donc finalement, en utilisant (1) :
+jx zj ⩽ 2r(B) + r(B′) ⩽ 4r(B′) + r(B′) = 5r(B′),
+c’est-à-dire que l’on a x 2 Bˆ′. La démonstration est complète. ■
+
+
+LE THÉORÈME DE VITALI 4
+2. Complément : le lemme de Zorn
+Commençons par préciser les notations et les définitions d’ensemble ordonné. Rappelons qu’étant donné un ensemble X, on note P(X) l’ensemble des parties de X, c’est-à-dire l’ensemble de tous les sousensembles de X. On utilise ici indifféremment le terme « collection » ou « ensemble ».
+Définition 1. — Soit X un ensemble muni d’une relation binaire ≼. On dit que ≼ est un ordre partiel sur X si ≼ est une relation réflexive et transitive, i.e. si les conditions suivantes sont remplies :
+1. (8x 2 X) : x ≼ x;
+2. (8x 2 X)(8y 2 X)(8z 2 X) : x ≼ y et y ≼ z implique x ≼ z.
+On dit alors que (X, ≼) est un ensemble partiellement ordonné.
+On dit que ≼ est un ordre total sur X si ≼ est un ordre partiel sur X et si en outre on a
+(8x 2 X)(8y 2 X) : x ≼ y ou y ≼ x.
+On dit alors que (X, ≼) est un ensemble totalement ordonné.
+Soit (X, ≼) un ensemble partiellement ordonné et soit Y X. On dit que x 2 X est une borne supérieure pour Y si on a :
+(8y 2 Y ) : y ≼ x.
+Une borne supérieure x pour Y est dite minimale si toute borne supérieure x ̃ pour Y vérifie x ≼ x ̃. Soit (X, ≼) un ensemble partiellement ordonné. Un élément x 2 X est dit maximal si on a :
+(8y 2 X) : x ≼ y implique y ≼ x.
+Exemple 1. — Soit X un ensemble. Le couple (P(X), ) est un ensemble partiellement ordonné. La rélexivité et la transitivité de l’inclusion sont claires. Soit A P(X). Si Y X est une borne supérieure pour A , on doit avoir Z Y pour tout Z 2 A . En conséquence, on doit avoir :
+[A Y.
+Réciproquement, si Y X contient [A , on a pour tout Z 2 A :
+Z [A Y,
+et Y est une borne supérieure pour A . Il résulte de ceci que [A est la seule borne supérieure minimale pour A P(X). Le seul élément maximal de (P(X), ) est X. S’il en était autrement, il existerait Y ⊊ X maximal. On pourrait alors trouver x 2 X n Y . Cela entraînerait
+Y Y [ fxg et non (Y [ fxg Y ) ,
+qui contredit l’hypothèse de maximalité faite sur Y . Contradiction.
+On a alors le théorème suivant.
+Théorème 2. — Soient (X, ≼) un ensemble partiellement ordonné et f : X ! X une application telle que l’on ait :
+(8x 2 X) : x ≼ f (x).
+Si, en outre, les conditions suivantes sont satisfaites :
+(i) (8x 2 X)(8y 2 X) : x ≼ y et y ≼ x implique x = y;
+(ii) toute partie Y X totalement ordonnée par ≼ possède une borne supérieure minimale.
+Alors, il existe z 2 X tel que f (z) = z.
+Démonstration. — Commençons par remarquer que tous les singletons sont totalement ordonnés par ≼. L’ensemble des parties totalement ordonnées de X n’est donc pas vide. Fixons a 2 X. Une partie Y X de X sera dite admissible si elle satisfait les conditions suivantes :
+
+
+LE THÉORÈME DE VITALI 5
+(a) a 2 Y ; (b) f (Y ) Y ; (c) toute borne supérieure minimale d’une partie totalement ordonnée de Y appartient à Y .
+Il est clair que X est admissible. Formons alors les ensembles non vides :
+A = fY 2 P(X) : Y est admissibleg ,
+et B = fY 2 P(X) : X n Y est admissibleg .
+Considérons aussi l’ensemble :
+A=
+∩
+Y 2A
+Y = X n [B.
+Il vient que A est admissible, et que tout ensemble admissible contient A.
+Remarquons que l’ensemble
+Y1 = fx 2 X : a ≼ xg
+est admissible. En effet, a 2 A par réflexivité de ≼. De plus, si x 2 Y1, alors on a :
+a ≼ x ≼ f (x),
+et dès lors f (Y1) Y1. Enfin, soit x1 une borne supérieure minimale de Z1 X totalement ordonné par ≼. Soit alors z1 2 Z1. On a
+a ≼ z1 ≼ x1,
+et la transitivité de ≼ donne x1 2 Y1. Par définition de A, on a A Y1, d’où l’on tire :
+(8x 2 A) : a ≼ x. (2)
+Posons
+P = fx 2 A : (8y 2 A) : y ≺ x implique f (y) ≼ xg,
+où l’on a noté (y ≺ x) pour (y ≼ x et non x = y). On va montrer :
+(8x 2 P )(8z 2 A) : z ≼ x ou f (x) ≼ z. (3)
+Pour cela, fixons x 2 P . Définissons
+B = fz 2 A : z ≼ x ou f (x) ≼ zg A.
+La condition (2) implique que l’on a a 2 B. Montrons qu’on a f (B) B. Si z 2 A, alors on a f (z) 2 f (A) A. Si z 2 A est tel que f (x) ≼ z, alors f (x) ≼ z ≼ f (z) et donc f (z) 2 B. Si z 2 A est tel que z = x, alors f (x) = f (z) et dès lors f (z) 2 B. Si z 2 A est tel que z ≺ x, alors, on obtient puisque x 2 P :
+f (z) ≼ x,
+d’où il suit que f (z) 2 B. Soit Z2 B une partie totalement ordonnée et soit x2 une borne supérieure minimale pour Z2. Si on a z ≼ x pour tout z 2 Z2, alors x est une borne supérieure pour Z2 et donc x2 ≼ x, d’où l’on tire x2 2 B. Si par contre il existe z 2 Z2 tel que f (x) ≼ z, alors on obtient
+f (x) ≼ z ≼ x2,
+et x2 2 B. De cela, on déduit que B est admissible. Comme B A, et que toute partie admissible contient A, il vient B = A, et la formule (3) est prouvée.
+Montrons maintenant que P est admissible. On a bien a 2 P . En effet, a 2 A et la condition y ≺ a n’est jamais satisfaite pour y 2 a.
+
+
+LE THÉORÈME DE VITALI 6
+Montrons maintenant que f (P ) P . Soit x 2 P et montrons que si z 2 A vérifie z ≺ f (x), alors on a f (z) ≼ f (x). Par (3), on sait que l’on a soit z ≼ x, soit f (x) ≼ z. En conséquence, l’hypothèse z ≺ f (x) implique z ≼ x. Si z ≺ x, alors f (z) ≼ x ≼ f (x) et f (z) ≼ f (x). Si z = x, alors f (z) = f (x). Dans tous les cas, on a donc f (z) ≼ f (x). Pour finir, montrons que si x3 est une borne supérieure minimale de Z3 P totalement ordonné par ≼, alors x3 2 P . Si x3 2 Z3, il est clair que l’on a x3 2 P . Dans le cas contraire, soit z 2 Z3 tel que z ≺ x3. On déduit de (3) que tout élément x 2 Z3 vérifie
+z ≼ x ou f (x) ≼ z.
+Si f (x) ≼ z était valable pour tout x 2 Z3, on aurait pour ces mêmes x :
+x ≼ f (x) ≼ z ≺ x3,
+et x3 ne serait pas une borne supérieure minimale pour Z3 ! Par conséquent, il existe x 2 Z3 tel que z ≼ x. Si z ≺ x, alors, par définition de P , on a f (z) ≼ x ≼ x3, et x3 2 P . Si z = x, alors z ̸= x3 implique l’existence d’un y 2 Z3 avec z ≺ y. Alors, par définition de P , on obtient
+f (z) ≼ y ≼ x3,
+et x3 2 P . De tout ce qui précède, on déduit que P est admissible, et donc P = A. On peut réécrire (3) :
+(8x 2 A)(8y 2 A) : x ≼ y ou f (y) ≼ x.
+Comme on a toujours y ≼ f (y), on en tire :
+(8x 2 A)(8y 2 A) : x ≼ y ou y ≼ x,
+c’est-à-dire que A est totalement ordonné. Soit z une borne supérieure minimale pour A. Alors, il vient f (z) 2 A et donc aussi :
+z ≼ f (z) ≼ z,
+ce qui achève la démonstration. ■
+De cela, déduisons que tout ensemble partiellement ordonné possède un sous-ensemble totalement ordonné maximal pour l’inclusion. Plus précisément, introduisons la définition suivante.
+Définition 2. — Soit (X, ≼) un ensemble partiellement ordonné. Un sous-ensemble Y X est dit totalement ordonné si l’ordre induit sur Y par celui de X fait de Y un ensemble totalement ordonné. Un sous-ensemble totalement ordonné de (X, ≼) est dit maximal si c’est un élément maximal de l’ensemble partiellement ordonné (X , ), où X est l’ensemble des parties totalement ordonnées de X.
+Rappelons ici une version de l’axiome du choix.
+Axiome. — Étant donné (Xα)α2I une collection d’ensembles non vides, il existe une fonction f : I !
+∪
+α2I Xα vérifiant f (α) 2 Xα pour tout α 2 I. On dit qu’une telle fonction f est une fonction de choix pour la collection (Xα)i2I .
+On démontre alors le principe de maximalité de Hausdorff.
+Théorème 3 (Haussdorf). — Tout ensemble partiellement ordonné contient un sous-ensemble totalement ordonné maximal.
+Démonstration. — Soit (X, ≼) l’ensemble partiellement ordonné dont il est question et soit X l’ensemble des parties totalement ordonnées (par ≼) de X. Supposons que X n’ait pas d’élément maximal pour l’inclusion. On a dans ce cas, par négation de la définition d’élément maximal :
+(8Y 2 X )(9Z 2 X ) : non(Z Y ) et Y Z.
+On en déduit
+(8Y 2 X )(9Z 2 X ) : Y ⊊ Z.
+
+
+LE THÉORÈME DE VITALI 7
+Pour chaque Y 2 X , l’ensemble
+ZY = fZ 2 X : Y ⊊ Zg est donc non vide.
+Soit f : X ! ∪
+Y 2X ZY une fonction de choix associée à la collection (ZY )Y 2X (l’existence d’une
+telle fonction de choix est assurée par l’axiome du choix) ; on a donc f (Y ) 2 ZY pour tout Y 2 X . Par définition de ZY , on a donc Y ⊊ f (Y ) pour chaque Y 2 X . Le Théorème 2 est alors contredit puisque f n’a aucun point fixe. ■
+Définition 3. — Un ensemble partiellement ordonné (X, ≼) est dit inductif si tout sous-ensemble totalement ordonné de X admet une borne supérieure.
+Démontrons à présent le lemme de Zorn.
+Théorème 4 (Lemme de Zorn). — Tout ensemble partiellement ordonné inductif admet un élément maximal.
+Démonstration. — Soit x une borne supérieure de (X0, ≼), sous-ensemble totalement ordonné maximal de l’ensemble partiellement ordonné (X, ≼). Supposons que y 2 X vérifie x ≼ y. Si y 2/ X0, alors X0 [ fyg est un sous-ensemble totalement ordonné de X contenant strictement X0, ce qui est impossible. En conséquence, on a y 2 X0, d’où y ≼ x, et x est maximal. ■
+Le 16 octobre 2024
+E-mail : Laurent.Moonens@centralesupelec.fr

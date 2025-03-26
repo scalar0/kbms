@@ -1,0 +1,241 @@
+FONCTION MAXIMALE ET DÉRIVATION DYADIQUES
+LES DÉCOMPOSITIONS DE CALDERÓN-ZYGMUND
+Les intervalles dyadiques sont très utiles en analyse.
+1. Intervalles dyadiques et intervalles dyadiques maximaux
+Définition 1. — Un intervalle dyadique de génération k ∈ Z est un intervalle I ⊆ R de la forme :
+I = [j2k, (j + 1)2k[,
+pour un entier j ∈ Z ; on note Dk la collection des intervalles dyadiques de génération k. On pose aussi D ∶= ⋃k∈Z Dk et on appelle intervalle dyadique tout élément de D. Étant donné I ∈ D, on note gen(I) ∈ Z l’unique entier k ∈ Z pour lequel on a I ∈ Dk (on l’appelle la génération de I) ; il vient évidemment ∣I∣ = 2gen(I) pout tout I ∈ D. Finalement, si I ∈ D est donné, on note Iˆ l’unique intervalle dyadique de génération gen(I) + 1 tel que l’on ait I ⊆ Iˆ; on l’appelle le parent de I.
+Remarque 1. — Si I, J ∈ D sont deux intervalles dyadiques, on a soit I ⊆ J, soit J ⊆ I, soit I ∩ J = ∅.
+En outre, si I, J ∈ D vérifient I ⊊ J, on a nécessairement ∣J∣ ≥ 2∣I∣.
+Isoler, dans une collection d’intervalles dyadiques, les éléments maximaux est un outil clef en analyse réelle.
+Lemme 1. — Si C ⊆ D est une collection d’intervalles dyadiques et que l’on a :
+sup
+I ∈C
+∣I∣ < +∞,
+alors il existe une famille au plus dénombrable C ∗ ⊆ C vérifiant ∪C ∗ = ∪C , constituée d’intervalles deux à deux disjoints et maximaux (pour l’inclusion) dans C au sens suivant : si I ∈ C ∗ et J ∈ C vérifient I ⊆ J, on a nécessairement I = J.
+Démonstration. — Commençons par observer que l’hypothèse se récrit supI∈C gen(I) < +∞. Il
+existe donc un entier k0 ∈ Z tel que l’on ait C ⊆ ⋃k0
+k=−∞ Dk. Par conséquent C admet des éléments
+maximaux pour l’inclusion. Pour le voir, on peut observer, par exemple, que C muni de l’inclusion est un ensemble ordonné inductif (en montrant que si E ⊆ C est totalement ordonné par l’inclusion, alors ∪E est un intervalle dyadique qui contient tous les éléments de E ) et appliquer le lemme de Zorn, ou raisonner par l’absurde comme suit. Supposons que C n’admette aucun élément maximal et fixons I0 ∈ C . Comme I0 n’est pas maximal, il existe I1 ∈ C vérifiant I1 ⊋ I0 ; mais alors on
+
+
+FONCTION MAXIMALE ET DÉRIVATION DYADIQUES LES DÉCOMPOSITIONS DE CALDERÓN-ZYGMUND 2
+a ∣I1∣ ≥ 2∣I0∣ en vertu de la Remarque 1. De proche en proche, on construit une suite (Ik)k∈N ⊆ C d’intervalles dyadiques vérifiant Ik ⊊ Ik+1 pour tout k ∈ N et ∣Ik∣ ≥ 2k∣I0∣. C’est impossible puisqu’il viendrait alors supI∈C ∣I∣ ≥ supk∈N ∣Ik∣ = +∞. Notons à présent C∗ la collection des éléments maximaux de C pour l’inclusion. Pour commencer, montrons que C∗ est constituée d’intervalles deux à deux disjoints. À cet effet, fixons I, J ∈ C avec I ≠ J. On sait que l’on a soit I ⊆ J, soit J ⊆ I, soit I ∩ J = ∅. Les deux premières possibilités conduisant à avoir I = J par maximalité de I et J, il vient nécessairement I ∩ J = ∅. Il en résulte aussitôt que C∗ est dénombrable puisque chaque élément de C∗ contient un rationnel et que l’on peut ainsi définir (puisque les éléments de C∗ sont deux à deux disjoints) une injection de C∗ dans Q. Pour montrer à présent que l’on a ∪C∗ = ∪C , fixons I ∈ C ∖ C∗ et montrons que l’on a I ⊆ ∪C∗. Puisque I n’est pas maximal dans C pour l’inclusion, il existe donc I0 ∈ C vérifiant I0 ⊋ I. Si on a I0 ∈ C∗, alors on a I ⊊ I0 ⊆ ∪C∗ et l’inclusion souhaitée est démontrée. Sinon, on construit de proche en proche, tant que l’on a Ik ∈ C ∖ C∗, un intervalle dyadique Ik+1 ∈ C vérifiant Ik+1 ⊋ Ik pour tout k et ∣Ik+1∣ ≥ 2k+1∣I0∣. Cette procédure ne peut continuer indéfiniment, sans quoi on aurait à nouveau supI∈C ∣I∣ ≥ supk∈N ∣Ik∣ = +∞. Il existe donc un entier k0 ∈ N tel que l’on ait Ik0+1 ∈ C∗, d’où il résulte que l’on a I ⊆ Ik0+1 ⊆ ∪C∗. La démonstration est complète. ∎
+2. La fonction maximale dyadique et le théorème de dérivation de Lebesgue “dyadique”
+La fonction maximale dyadique rappelle la fonction maximale de Hardy-Littlewood.
+Définition 2. — Si f ∶ R → R est localement intégrable, on définit la fonction maximale dyadique M∆f de f en posant, pour x ∈ R :
+M∆f (x) ∶= sup
+II∈∋Dx
+⨏I
+∣f ∣ = sup
+II∈∋Dx
+1
+∣I∣ ∫I
+∣f ∣.
+Comme la fonction maximale de Hardy-Littlewood, la fonction maximale dyadique vérifie une inégalité faible ; il n’est toutefois pas nécessaire, avec la fonction maximale dyadique, d’introduire une constante 5 dans cette inégalité.
+Proposition 1. — Étant donné u ∈ L1(R) et λ > 0, on a :
+∣{x ∈ R ∶ M∆u(x) > λ}∣ ≤ 1
+λ ∥u∥1.
+Démonstration. — Fixons u ∈ L1(R) et λ > 0 et posons Eλ ∶= {x ∈ R ∶ M∆u(x) > λ}. Commençons par observer que si I ∈ D est un intervalle dyadique, alors on a :
+⨏I
+∣u∣ = 1
+∣I∣ ∫I
+∣u∣ ≤ 1
+∣I∣ ∫R
+∣u∣ = ∥u∥1
+∣I∣ .
+Si I ∈ D vérifie ∣I∣ ≥ ∥u∥1/λ, il viendra dès lors ⨏I ∣u∣ ≤ λ. Posons à présent :
+C ∶= {I ∈ D ∶ ⨏I
+∣u∣ > λ} .
+Par ce que nous venons d’observer, il est clair que l’on a :
+sup
+I ∈C
+∣I∣ < ∥u∥1
+λ < +∞.
+
+
+FONCTION MAXIMALE ET DÉRIVATION DYADIQUES LES DÉCOMPOSITIONS DE CALDERÓN-ZYGMUND 3
+Le Lemme 1 fournit dès lors une famille au plus dénombrable C∗ ⊆ C vérifiant ∪C∗ = ∪C , constituée d’intervalles deux à deux disjoints et maximaux pour l’inclusion dans C . Observons que l’on a Eλ = ∪C . Si, en effet, x ∈ Eλ est donné, alors on a M∆u(x) > λ et il existe donc par définition un intervalle dyadique I ∈ D tel que l’on ait ⨏I ∣u∣ > λ, d’où l’on tire I ∈ C et
+donc aussi x ∈ I ⊆ ∪C . Réciproquement, si I ∈ C est donné, alors on a ⨏I ∣u∣ > λ et donc il vient
+M∆u(x) ≥ ⨏I ∣u∣ > λ pour tout x ∈ I, c’est-à-dire I ⊆ Eλ. Il vient donc, puisque l’on a ∪C∗ = ∪C
+et que les intervalles de C∗ sont deux à deux disjoints :
+∣Eλ∣ = ∣ ∪ C ∣ = ∣ ∪ C∗∣ = ∑
+I ∈C∗
+∣I∣ ≤ 1
+λ∑
+I ∈C∗
+∫I
+∣u∣ < 1
+λ ∥u∥1,
+où l’on a utilisé que les éléments de C∗ ⊆ C vérifient 1
+∣I∣ ∫I ∣u∣ = ⨏I ∣u∣ > λ. C’est l’inégalité annoncée. ∎
+L’inégalité maximale précédente a une conséquence qui rappelle le théorème de dérivation de Lebesgue.
+Proposition 2. — Étant donné u ∈ L1(R), on a, pour presque tout x ∈ R :
+u(x) = lim
+x∈I ∈D
+∣I ∣→0
+⨏I
+u. (1)
+Remarque 2. — Dans l’énoncé de la proposition précédente, (1) signifie que, pour tout ε > 0, il existe un δ > 0 tel que si I ∈ D vérifie I ∋ x et ∣I∣ ≤ δ, alors on a ∣u(x) − ⨏I u∣ ≤ ε.
+Démonstration. — Pour f ∈ L1(R) et δ > 0, on pose pour x ∈ R :
+ωf (x, δ) ∶= sup {∣f (x) − ⨏I
+f ∣ ∶ I ∈ D, I ∋ x, ∣I∣ ≤ δ} .
+Il est clair que l’on a, pour tous f ∈ L1(R), δ > 0 et x ∈ R :
+ωf (x, δ) ≤ ∣f (x)∣ + sup {⨏I
+∣f ∣ ∶ I ∈ D, I ∋ x, ∣I∣ ≤ δ} ≤ ∣f (x)∣ + M∆f (x).
+On pose finalement, pour f ∈ L1(R) et x ∈ R :
+ωf (x) ∶= iδn>0f ωf (x, δ) = lδi→>m0
+ωf (x, δ).
+Il suit de ce qui précède que l’on a ωf ≤ ∣f ∣ + M∆f partout sur R. Il est par ailleurs facile de voir que l’on a ωg = 0 partout sur R pour tout g ∈ K(R) et que, pour tous f, g ∈ L1(R) on a ωf+g ≤ ωf + ωg sur R. Il vient donc, sur R, pour f ∈ L1(R) et g ∈ K(R) :
+ωf = ωf−g+g ≤ ωf−g + ωg = ωf−g et ωf−g ≤ ωf + ω−g = ωf ,
+puisque l’on a ωg = 0 partout sur R ; on a donc, sur R, ωf = ωf−g. Fixons à présent u ∈ L1(R). On va montrer que l’on a ωu = 0 presque partout sur R, ce qui suffira à conclure. À cette fin, commençons par fixer λ > 0 et montrons que l’on a ∣{x ∈ R ∶ ωu(x) > λ}∣ = 0. À cet effet, posons Eλ ∶= {x ∈ R ∶ ωu(x) > λ}, fixons ε > 0 et choisissons, par densité de K(R) dans L1(R), une fonction v ∈ K(R) vérifiant ∥u − v∥1 ≤ ε. On vient de voir que l’on a ωu = ωu−v sur R. Si x ∈ Eλ est donné, alors on a, puisque l’on a ωu−v ≤ ∣u − v∣ + M∆(u − v) sur R :
+M∆(u − v)(x) + ∣(u − v)(x)∣ ≥ ωu−vf (x) = ωf (x) > λ.
+
+
+FONCTION MAXIMALE ET DÉRIVATION DYADIQUES LES DÉCOMPOSITIONS DE CALDERÓN-ZYGMUND 4
+Il vient donc nécessairement soit M∆(u − v)(x) > λ/2, soit ∣(u − v)(x)∣ > λ/2 (sans quoi on aurait ∣(u − v)(x)∣ + M∆(u − v)(x) ≤ λ/2 + λ/2 = λ). Autrement dit, on a :
+Eλ ⊆ {x ∈ R ∶ M∆(u − v)(x) > λ
+2 } ∪ {x ∈ R ∶ ∣(u − v)(x)∣ > λ
+2}.
+Il vient donc en particulier :
+∣Eλ∣ ≤ ∣{x ∈ R ∶ M∆(u − v)(x) > λ
+2 }∣ + ∣{x ∈ R ∶ ∣(u − v)(x)∣ > λ
+2 }∣ .
+Or la Proposition 1 assure que l’on a d’une part :
+∣{x ∈ R ∶ M∆(u − v)(x) > λ
+2 }∣ ≤ 2
+λ ∥u − v∥1 ≤ 2ε
+λ,
+tandis qu’il résulte de l’inégalité de Markov que l’on a :
+∣{x ∈ R ∶ ∣(u − v)(x)∣ > λ
+2 }∣ ≤ 2
+λ ∥u − v∥1 ≤ 2ε
+λ.
+Il vient donc finalement :
+∣Eλ∣ ≤ ε ⋅ 4
+λ.
+Comme ε > 0 est arbitraire dans l’inégalité précédente, on trouve par conséquent ∣Eλ∣ = 0. Il vient finalement :
+{x ∈ R ∶ ωu(x) > 0} = ⋃
+k∈N
+{x ∈ R ∶ ωu(x) > 2−k} = ⋃
+n∈N
+E2−k .
+La sous-additivité de la mesure extérieure de Lebesgue assure dès lors que l’on a :
+∣{x ∈ R ∶ ωu(x) > 0}∣ ≤
+∞
+∑
+k=0
+∣E2−k ∣ = 0,
+c’est-à-dire que l’on a ωu = 0 hors d’un sous-ensemble négligeable de R. C’est ce qu’il nous fallait démontrer. ∎
+3. Décompositions de Calderón-Zygmund
+Les décompositions de Calderón-Zygmund sont un outil fondamental en analyse harmonique ; nous les utiliserons, dans la section suivante, pour démontrer un théorème de convergence presque partout de sous-suites universelles d’une approximation de l’identité positive dans L1(R).
+Théorème 1 (Décomposition de Calderón-Zygmund). — Soient u ∈ L1(R) et λ > 0. Il existe v ∈ L1(R) ∩ L∞(R), une famille au plus dénombrable B ⊆ D d’intervalles dyadiques deux à deux disjoints et, pour chaque I ∈ B, une fonction bI ∈ L1(R) tels que l’on ait :
+u=v+ ∑
+I ∈B
+bI
+presque partout sur R, ainsi que les propriétés suivantes :
+(i) ∥v∥∞ ≤ λ ;
+(ii) pour tout I ∈ B, on a bI = 0 hors de I ; (iii) pour tout I ∈ B, on a ∥bI∥1 ≤ λ∣I∣ ; (iv) pour tout I ∈ B, on a ∫R bI = 0 ;
+(v) ∑I∈B ∣I∣ ≤ 4
+λ ∥u∥1.
+
+
+FONCTION MAXIMALE ET DÉRIVATION DYADIQUES LES DÉCOMPOSITIONS DE CALDERÓN-ZYGMUND 5
+Démonstration. — Remarquons pour commencer, comme dans la preuve de la Proposition 1, que l’on aura ⨏I ∣u∣ ≤ λ/4 dès que I ∈ D vérifie ∣I∣ ≥ 4∥u∥1/λ. Posons à présent :
+C ∶= {I ∈ D ∶ ⨏I
+∣u∣ > λ
+4}.
+Nous venons d’observer que l’on doit avoir :
+sup
+I ∈C
+∣I∣ < 4∥u∥1
+λ < +∞.
+Il existe donc, en vertu du Lemme 1, une famille au plus dénombrable B ⊆ C vérifiant ∪B = ∪C , constituée d’intervalles deux à deux disjoints et maximaux pour l’inclusion dans C . On définit alors des fonctions Lebesgue-mesurables v ∶ R → R et, pour tout I ∈ B, bI ∶ R → R en posant pour x ∈ R :
+v(x) ∶= {u(x) si x ∉ ∪B,
+⨏I u si x ∈ I ∈ B.
+et, pour I ∈ B :
+bI(x) ∶= {u(x) − v(x) = u(x) − ⨏I u si x ∈ I,
+0 sinon.
+Il est clair que l’on a u = v + ∑I∈B bI sur R.
+Pour prouver (i), commençons par noter N ⊆ R un ensemble Lebesgue-négligeable tel que, pour tout x ∈ R ∖ N , on ait :
+∣u(x)∣ = lim
+x∈I ∈D
+∣I ∣→0
+⨏I
+∣u∣.
+Si x ∈ ∪B est donné, alors il ne peut exister aucun intervalle dyadique I ∈ D contenant x qui vérifie ⨏I ∣u∣ > λ
+4 : si un tel intervalle dyadique I ∈ D existait, il viendrait I ∈ C et on aurait dès
+lors x ∈ I ⊆ ∪C = ∪B, ce qui est absurde. Par conséquent, il vient ⨏I ∣u∣ ≤ λ
+4 pour tout intervalle
+dyadique I ∈ D contenant x. Si, en outre, on a x ∉ N , alors on trouvera par conséquent :
+∣v(x)∣ = ∣u(x)∣ = lim
+x∈I ∈D
+∣I ∣→0
+⨏I
+∣u∣ ≤ λ
+4.
+Il vient donc ∣v∣ ≤ λ/4 presque partout sur R ∖ ∪B. Si x ∈ I ∈ B est donné, alors on calcule :
+∣v(x)∣ = ∣⨏I
+u∣ ≤ 1
+I ∫I
+∣u∣ ≤ 1
+∣I∣ ∫I^
+∣u∣ = ∣Iˆ∣
+∣I∣ ⨏I^
+∣u∣ = 2 ⨏I^
+∣u∣,
+où Iˆ ∈ Dgen(I)+1 est le parent de I (voir la Définition 1 ci-dessus). Or comme I est maximal pour
+l’inclusion dans C et que l’on a I ⊊ Iˆ, il vient nécessairement Iˆ ∉ C , c’est-à-dire ⨏I^ ∣u∣ ≤ λ
+4. L’inégalité ci-dessus donne alors :
+∣v(x)∣ ≤ 2 ⨏I^
+∣u∣ ≤ λ
+2.
+Il vient donc ∣v∣ ≤ λ/2 partout sur ∪B. La propriété (i) s’ensuit aussitôt puisque l’on a montré l’inégalité ∣v∣ ≤ λ (et même ∣v∣ ≤ λ/2) presque partout sur R. Il vient en particulier v ∈ L∞(R).
+
+
+FONCTION MAXIMALE ET DÉRIVATION DYADIQUES LES DÉCOMPOSITIONS DE CALDERÓN-ZYGMUND 6
+Fixons I ∈ B. Il est clair, par définition, que l’on a bI = 0 hors de I (ce qui établit (ii)). Il vient dès lors :
+∫R
+bI = ∫I
+(u − ⨏I
+u) = ∫I
+u − ∣I∣ ⨏I
+u = ∫I
+u − ∫I
+u = 0,
+ce qui démontre (iv). Mais on calcule aussi :
+∥bI ∥1 = ∫I
+∣u − ⨏I
+u∣ ≤ ∫I
+∣u∣ + ∣I∣ ∣⨏I
+u∣ ≤ ∫I
+∣u∣ + ∫I
+∣u∣
+= 2 ∫I
+∣u∣ ≤ 2 ∫I^
+∣u∣ = 2∣Iˆ∣ ⨏I^
+∣u∣ ≤ 4∣I∣ ⋅ λ
+4 = λ∣I∣,
+puisque l’on a à nouveau Iˆ ∉ C et donc ⨏I^ ∣u∣ ≤ λ/4. Le point (iii) est ainsi vérifié.
+Finalement, puisque l’on a B ⊆ C et qu’il vient donc ⨏I ∣u∣ > λ/4, c’est-à-dire ∣I∣ ≤ 4
+λ ∫I ∣u∣ pour
+tout I ∈ B, on écrit :
+∑
+I ∈B
+∣I∣ ≤ 4
+λ∑
+I ∈B
+∫I
+∣u∣ ≤ 4
+λ ∫R
+∣u∣ = 4
+λ ∥u∥1,
+puisque les intervalles de B sont deux à deux disjoints. La propriété (v) est ainsi vérifiée à son tour. Comme il résulte par ailleurs de (iv) et (v) que l’on a :
+∑
+I ∈B
+∥bI ∥1 ≤ λ ∑
+I ∈B
+∣I∣ ≤ 4∥u∥1,
+on voit que la fonction b définie sur R par b ∶= ∑I∈B bI, vérifie b ∈ L1(R), et on a donc aussi v = u − b ∈ L1(R). La démonstration est complète. ∎
+Le 16 octobre 2024
+● E-mail : Laurent.Moonens@centralesupelec.fr

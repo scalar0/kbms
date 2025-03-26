@@ -1,0 +1,3352 @@
+REAL AND COMPLEX ANALYSIS
+
+
+
+
+REAL AND COMPLEX ANALYSIS
+Third Edition
+Walter Rudin
+Professor of Mathematics
+University of Wisconsin, Madison
+)
+McGraw-Hill Book Company
+New York St. Louis San Francisco Auckland Bogota Hamburg London Madrid Mexico Milan Montreal New Delhi Panama Paris Sao Paulo Singapore Sydney Tokyo Toronto
+
+
+REAL AND COMPLEX ANALYSIS
+INTERNATIONAL EDITION 1987
+Exclusive rights by McGraw-Hill Book Co., Singapore
+for manufacture and export. This book cannot be re-exported
+from the country to which it is consigned by McGraw-Hill.
+0123 45678920BJE9876
+Copyright © 1987, 1974, 1966 by McGraw-Hill, Inc.
+All rights reserved. No part of this publication may be
+reproduced or distributed in any form or by any means,
+or stored in a data base or a retrieval system, without
+the prior written permission of the publisher.
+This book was set in Times Roman.
+The editor was Peter R. Devine.
+The p roduction supervisor was Diane Renda.
+Library of Congress Cataloging-in-Publication Data
+Rudin, Walter, 1921 
+Real and complex analysis.
+Bibliography: p.
+Includes index.
+1. Mathematical analysis. I. Title.
+QA300.R82 1987 515 86-7
+ISBN 0-07-054234-1
+When ordering this title use ISBN 0-07-100276-6
+Printed in Singapore
+
+
+ABOUT THE AUTHOR
+Walter Rudin is the author of three textbooks, Principles of Mathematical
+Analysis, Real and Complex Analysis, and Functional Analysis, whose widespread
+use is illustrated by the fact that they have been translated into a total of 1 3
+languages. He wrote the first of these while he was a C.L.E. Moore Instructor at
+M.I.T., just two years after receiving his Ph.D. at Duke University in 1 949. Later
+he taught at the University of Rochester, and is now a Vilas Research Professor
+at the University of Wisconsin-Madison, where he has been since 1 959.
+He has spent leaves at Yale University, at the University of California in La
+Jolla, and at the University of Hawaii.
+His research has dealt mainly with harmonic analysis and with complex vari
+ables. He has written three research monographs on these topics, Fourier
+Analysis on Groups, Function Theory in Polydiscs, and Function Theory in the
+Unit Ball ofC0•
+
+
+
+
+CONTENTS
+Preface Xlll
+Prologue: The Exponential Function 1
+Chapter 1 Abstract Integration
+Set-theoretic notations and terminology
+The concept of measurability
+Simple functions
+Elementary properties of measures
+Arithmetic in [0, oo]
+Integration of positive functions
+Integration of complex functions
+The role played by sets of measure zero
+Exercises
+Chapter 2 Positive Borel Measures
+Vector spaces
+Topological preliminaries
+The Riesz representation theorem
+Regularity properties of Borel measures
+Lebesgue measure
+Continuity properties of measurable functions
+Exercises
+Chapter 3 LP-Spaces
+Convex functions and inequalities
+The LP-spaces
+Approximation by continuous functions
+Exercises
+5
+6
+8
+15
+16
+18
+19
+24
+27
+31
+33
+33
+3
+5
+40
+47
+49
+55
+57
+61
+61
+65
+69
+71
+vii
+
+
+viii CONTENTS
+Chapter 4 Elementary Hilbert Space Theory
+Inner products and linear functionals
+Orthonormal sets
+Trigonometric series
+Exercises
+Chapter 5 Examples of Banach Space Techniques
+Banach spaces
+Consequences of Baire's theorem
+Fourier series of continuous functions
+Fourier coefficients of L 1-functions
+The Hahn-Banaeh theorem
+An abstract ap6roach to the Poisson integral
+Exercises
+Chapter 6 Complex Measures
+Total variation
+Absolute continuity
+Consequences of the Radon-Nikodym theorem
+Bounded linear functionals on LP
+The Riesz representation theorem
+Exercises
+Chapter 7 Differentiation
+Derivatives of measures
+The fundamental theorem of Calculus
+Differentiable transformations
+Exercises
+Chapter 8 Integration on Product Spaces
+Measurability on cartesian products
+Product measures
+The Fubini theorem
+Completion of product measures
+Convolutions
+Distribution functions
+Exercises
+Chapter 9 Fourier Transforms
+Formal properties
+The inversion theorem
+The Plancherel theorem
+The Banach algebra L 1
+Exercises
+76
+76
+82
+88
+92
+9
+59
+5 9
+7
+1 00
+1 03
+1 04
+1 08
+112
+116
+116
+1 20
+124
+126
+129
+1 32
+135
+1 35
+1 44
+1 50
+1 56
+160
+160
+1 63
+1 64
+1 67
+1 70
+1 72
+1 74
+1 78
+178
+1 80
+185
+1 90
+1 93
+
+
+Chapter 10 Elementary Properties of Holomorphic
+Functions
+Complex differentiation
+Integration over paths
+The local Cauchy theorem
+The power series representation
+The open mapping theorem
+The global Cauchy theorem
+The calculus of residues
+Exercises
+Chapter 1 1 Harmonic Functions
+The Cauchy- Riemann equations
+The Poisson integral
+The mean value property
+Boundary behavior of Poisson integrals
+Representation theorems
+Exercises
+Chapter 12 The Maximum Modulus Principle
+Introduction
+The Schwarz lemma
+The Phragmen-Lindelof method
+An interpolation theorem
+A converse of the maximum modulus theorem
+Exercises
+Chapter 13 Approximation by Rational Functions
+Preparation
+Runge's theotem
+The Mittag-Leffler theorem
+Simply connected regions
+Exercises
+Chapter 14 Conformal Mapping
+Preservation of angles
+Linear fractional transformations
+Normal families
+The Riemann mapping theorem
+The class f/
+Continuity at the boundary
+Conformal mapping of an annulus
+Exercises
+CONTENTS ix
+1 96
+1 96
+200
+204
+208
+21 4
+21 7
+224
+227
+231
+231
+233
+237
+239
+245
+249
+253
+253
+254
+256
+260
+262
+264
+266
+266
+270
+273
+274
+276
+278
+278
+279
+281
+282
+285
+289
+291
+293
+
+
+X CONTENTS
+Chapter 15 Zeros of Holomorphic Functions
+Infinite products
+The Weierstrass factorization theorem
+An interpolation problem
+Jensen's formula
+Blaschke products
+The Mtintz-Szasz theorem
+Exercises
+Chapter 16 Analytic Continuation
+Regular points and singular points
+Continuation along curves
+The monodro�y theorem
+Construction of a modular function
+The Picard theorem
+Exercises
+Chapter 17 HP-Spaces
+Subharmonic functions
+The spaces HP and N
+The theorem of F. and M. Riesz
+Factorization "theorems
+The shift operator
+Conjugate functions
+Exercises
+Chapter 18 Elementary Theory of Banach Algebras
+Introduction
+The invertible elements
+Ideals and homomorphisms
+Applications
+Exercises
+Chapter 19 Holomorphic Fourier Transforms
+Introduction
+Two theorems of Paley and Wiener
+Quasi-analytic classes
+The Denjoy-Carleman theorem
+Exercises
+Chapter 20 Uniform Approximation by Polynomials
+Introduction
+Some lemmas
+Mergelyan's theorem
+Exercises
+298
+298
+301
+304
+307
+31 0
+31 2
+31 5
+31 9
+319
+323
+326
+328
+331
+332
+335
+335
+337
+341
+3
+4
+2
+3
+4
+6
+350
+3
+5
+2
+356
+356
+357
+362
+365
+369
+371
+371
+372
+377
+380
+383
+386
+386
+387
+390
+394
+
+
+CONTENTS xi
+Appendix: Hausdorff's Maximality Theorem 395
+Notes and Comments 397
+Bibliography 405
+List of Special Symbols 407
+Index
+4
+0
+9
+
+
+
+
+PREFACE
+This book contains a first-year graduate course in ·which the basic techniques and theorems of analysis are presented in such a way that the intimate connections between its various branches are strongly emphasized. The traditionally separate subjects of " real analysis " and " complex analysis " are thus united ; some of the basic ideas from functional a�alysis are also included. Here are some examples of the way in which these connections are demon strated and exploited. The Riesz representation theorem and the Hahn-Banach theorem allow one to " guess " the Poisson integral formula. They team up in the proof of Runge's theorem. They combine with Blaschke's theorem on the zeros of bounded holomorphic functions to give a proof of the Miintz-Szasz theorem, which concerns approximation on an interval. The fact that 13 is a Hilbert space is used in the proof of the Radon-Nikodym theorem, which leads to the theorem about differentiation of indefinite integrals, which in turn yields the existence of radial limits of bounded harmonic functions. The theorems of Plancherel and Cauchy combined give a theorem of Paley and Wiener which, in turn, is used in the Denjoy-Carleman theorem about infinitely differentiable functions on the real line. The maximum modulus theorem gives information about linear transform ations on I!-spaces. Since most of the results presented here are quite classical (the novelty lies in the arrangement, and some of the proofs are new), I have not attempted to docu ment the source of every item. References are gathered at the end, in Notes and Comments. They are not always to the original sources, but more often to more recent works where further references can be found. In no case does the absence of a reference imply any claim to originality on my part. The prerequisite for this book is a good course in advanced calculus (settheoretic manipulations, metric spaces, uniform continuity, and uniform convergence). The first seven chapters of my earlier book " Principles of Mathe matical Analysis " furnish sufficient preparation.
+xiii
+
+
+xiv PREFACE
+Experience with the first edition shows that fir·st-year graduate students can study the first 1 5 chapters in two semesters, plus some topics from 1 or 2 of the remaining 5. These latter are quite independent of each other. The first 1 5 should be taken up in the order in which they are presented, except for Chapter 9, which can be postponed. The most important difference between this third edition and the previous ones is the entirely new chapter on differentiation. The basic facts about differen tiation are now derived fro� the existence of Lebesgue points, which in turn is an easy consequence of the so-called " weak type " inequality that is satisfied by the maximal functions of measures on euclidean spaces. This approach yields strong theorems with minimal effort. Even more important is that it familiarizes stu dents with maximal functions,· since these have become increasingly useful in several areas of analysis. One of these is the study of the boundary behavior of Poisson integrals. A related one concerns HP-spaces. Accordingly, large parts of Chapters 1 1 and 17 were rewritten and, I hope, simplified in the process. I have also made several smaller changes in order to improve certain details : For example, parts of Chapter 4 have been simplified ; the notions of equi continuity and weak convergence are presented in more detail ; the boundary behavior of conformal maps is studied by means of Lindelof's theorem about asymptotic valued of bounded holomorphic functions in a disc. Over the last 20 years, numerous students and colleagues have offered com ments and criticisms concerning the content of this book. I sincerely appreciated all of these, and have tried to follow some of them. As regards the present edition, my thanks go to Richard Rochberg for some useful last-minute suggestions, and I especially thank Robert Burckel for the meticulous care with which he examined the entire manuscript.
+Walter Rudin
+
+
+PROLOGUE
+THE EXPONENTIAL FUNCTION
+This is the most important function in mathematics. It is defined, for every com plex number z, by the formula
+00 zn
+exp (z) = L --,.
+n=O n. (1)
+The series (1) converges absolutely. for every z and converges uniformly on every bounded subset of the complex plane. Thus exp is a continuous function. The absolute convergence of ( 1) shows that the computation
+00 ak 00 bm 00 1 n n! 00 (a + b)n
+L -k, L -, = L -, L kl( k)l akbn -k = L I
+k=O • m=O m. n=O n. k=O • n- · n=O n.
+is correct. It gives the important addition formula
+exp (a) exp (b) = exp (a + b),
+valid for all complex numbers a and b.
+(2)
+We define the number e to be exp (1), and shall usually replace exp (z) by the
+customary shorter expression ez. Note that e0 = exp (0) = 1, by (1).
+Theorem
+(a) For every complex z we have ez #= 0.
+(b) exp is its own derivative: exp' (z) = exp (z).
+1
+
+
+2 REAL AND COMPLEX ANALYSIS
+(c) The restriction ofexp to the real axis is a monotonically increasing positive
+function, and
+ex � 0 as x � - 00.
+(d) There exists a positive number n such that e1ti/l = i and such that ez = 1 if
+and only ifz/(2ni) is an integer.
+(e) exp is a periodicfunction, with period 2ni.
+(f) The mapping t� eit maps thereal axis onto the unit circle.
+(g) Jfw is a complex number and w # 0, then w = ezfor some z.
+PROOF By (2), ez . e-z = ez-z = e0 = 1. This implies (a). Next,
+, ( ) 1. exp (z + h) - exp (z) ( ) 1. exp (h) - 1 ( )
+exp z = tm h = exp z tm h = exp z .
+h�o h� o
+The first of the above equalities is a matter of definition, the second follows from (2), and the third from (1), and (b) is proved.
+That exp is monotonically increasing on the positive real axis, and that ex � oo as x � oo, is clear from (1). The other assertions of (c) are conse
+quences of ex . e-x = 1.
+For any real number t, (1) shows that e- it is the complex conjugate of eit.
+Thus
+or
+(t real). (3)
+In other words, if t is real, eit lies on the unit circle. We define cos t, sin t to
+be the real and imaginary parts of eit :
+cos t = Re [eit],
+If we differentiate both sides of Euler's identity
+eit = cos t + i sin t,
+which is equivalent to (4), and if we apply (b), we obtain
+(t real).
+cos' t + i sin' t = ieit = - sin t + i cos t,
+so that
+cos' = - sin, sin' = cos.
+The power series (1 ) yields the representation
+t2 t4 t6
+cos t = 1 - - + - - - + . . .
+2! 4! 6! .
+(4)
+(5)
+(6)
+(7)
+
+
+PROLOGUE: THE EXPONENTIAL FUNCTION 3
+Take t=2. The terms of the series (7) then decrease in absolute value (except for the first one) and their signs alternate. Hence cos 2 is less than the sum of the first three terms of (7), with t= 2 ; thus cos 2 < - �. Since cos 0=1 and cos is a continuous real function on the real axis, we conclude that there is a smallest positive number t0 for which cos t0=0. We define
+n=2t0 • (8)
+It follows from (3) and (5). that sin t0 = + 1 . Since
+sin' (t)=cos t > 0
+on the segment (0, t0) and since sin 0=0, we have sin t0 > 0, hence sin t0 = 1, and therefore
+e1ti/2= i.
+(
+9
+)
+It follows that
+e
+1ti
+=
+i
+2
+=
+
+1
+,
+e
+2
+1ti
+=
+(
+
+1
+)
+2
+=
+1
+,
+a
+n
+d
+t
+h
+e
+n
+e
+2 1t
+i
+n
+=
+1
+fo
+r
+every integer n. Also, (e) follows immediately :
+( 1 0)
+If z=X + iy, X and y real, then ez=exeiY; hence I ez I=ex. If ez=1 , we there fore must have ex= 1, so that x=0; to prove that y/2n must be an integer, it is enough to show that eiy # 1 if 0 < y < 2n, by (10). Suppose 0 < y < 2n, and
+eiY/4= u + iv (u and v real). ( 1 1 )
+Since 0 < y/4 < n/2, we have u > 0 and v > 0. Also
+eiy=(u + iv)4 = u4 - 6u2v2 + v4 + 4iuv(u2 - v2). ( 1 2)
+The right side of ( 1 2) is real only if u2= v2 ; since u2 + v2=1, this happens only when u2=v2=�, and then ( 1 2) shows that
+eiy= - 1 # 1.
+This completes the proof of (d). We already know that t � eit maps the real axis into the unit circle. To
+prove (f), fix w so that I w I = 1 ; we shall show that w= eit for some real t. Write w=u + iv, u and v real, and suppose first that u > 0 and v > 0. Since u < 1, the definition of n shows that there exists a t, 0 < t < n/2, such that cos t=u ; then sin2 t =+= 1 - u2=v2, and since sin t > 0 if 0 < t < n/2, we have sin t=v. Thus w=eit. If u < 0 and v > 0, the preceding conditions are satisfied by - iw. Hence -- iw=eit for some real t, and w=ei<t+1tl2>. Finally, if v < 0, the preceding two cases show that - w=eit for some real t, hence w=ei<t+1t>. This com
+pletes the proof of (f).
+If w # 0, put a.=w/ I w 1. Then w= I w I a.. By (c), there is a real x such
+that I w I=ex. Since I a. I= 1, (f) shows that a.=eiy for some real y. Hence w=ex+iy. This proves (g) and completes the theorem. /Ill
+
+
+4 REAL AND COMPLEX ANALYSIS
+We shall encounter the integral of ( 1 + x2) - 1 over the real line. To evaluate it, put <p(t) = sin tjcos t in ( - n/2, n/2). By (6), <p' = 1 + <p2• Hence <pis a mono tonically increasing mapping of ( - n/2, n/2) onto ( - oo, oo), and we obtain
+J
+oo dx Jn/2 <p'(t) dt Jn/2
+2 = 2 = dt = n.
+-oo 1 + X
+
+n
+/
+2
+1
++
+(/)
+(
+t)
+
+n
+/
+2
+
+
+CHAPTER
+ONE
+ABS�fRACT INTEGRATION
+Toward the end of the nineteenth century it became clear to many mathemati cians that the Riemann integral (about which one learns in calculus courses) should be replaced by some other type of integral, more general and more flex ible, better suited for dealing with limit processes. Among the attempts made in this direction, the most notable ones were due to Jordan, Borel, W. H. Young, and Lebesgue. It was Lebesgue's construction which turned out to be the most successful. In brief outline, here is the main idea : The Riemann integral of a function f over an interval [a, b] can be approximated by sums of the form
+n
+L f(ti)m(Ei)
+i= 1
+where E1 , • • • , En are disjoint intervals whose union is [a, b], m(Ei) denotes the
+length of Ei , and ti E Ei for i = 1 , . . . , n. Lebesgue discovered that _a completely satisfactory theory of integration results if the sets Ei in the above sum are allowed to belong to a larger class of subsets of the line, the so-called " measurable sets," and if the class of functions under consideration is enlarged to what he called " measvrable functions." The crucial set-theoretic properties involved are the following : The union and the intersection of any countable family of measurable sets are measurable ; so is the complement of every measur able set ; and, most important, the notion of·" length " (now called " measure ") can be extended to them in such a way that
+s
+
+
+6 REAL AND COMPLEX ANALYSIS
+for every countable collection {Ei} of pairwise disjoint measurable sets. This pro
+perty of m is called countable additivity.
+The passage from Riemann's theory of integration to that of Lebesque is a process of completion (in a sense which will appear more precisely later). It is of the same fundamental importance in analysis as is the construction of the real number system from the rationals. The above-mentioned measure m is of course intimately related to the geometry of the real line. In this chapter we shall present an abstract (axiomatic) version of the Lebesgue integral, relative to any countably additive measure on
+any set. (The precise definitions follow.) This abstract theory is not in any way
+more difficult than the special case of the real line ; it shows that a large part of integration theory is independent of any geometry (or topology) of the underlying space ; and, of course, it gives us a tool of much wider applicability. The existence of a large class of measures, among them that of Lebesgue, will be established in Chap. 2.
+Set-Theoretic Notations and Terminology
+1.1 Some sets can be described by listing their members. Thus {xh . . . , xn} is the set whose members are x1, • • • , xn ; and {x} is the set whose only member is x. More often, sets are described by properties. We write
+{x: P}
+for the set of all elements x which have the property P. The symbol 0 denotes the empty set. The words collection, family, and class will be used synonymously
+with set.
+We write x e A if x is a member of the set A; otherwise x ¢ A. If B is a subset
+of A, i.e., if x e B implies x e A, we write· B c A. If B c A and A c B, then
+A = B. If B c A and A =F B, B is a proper subset of A. Note that 0 c A for every
+set A. A u B and A n B are the union and intersection of A and B, respectively. If
+{A«} is a collection of sets, where a, runs through some index set I, we write
+for the union and intersection of {A«}:
+U A«= {x : x e A« for at least one a, e I}
+cxel
+n A«= {x: X E A« for every a, E I}.
+ael
+If I is the set of all positive integers, the customary notations are
+n= l n= l
+
+
+ABSTRACT INTEGRATION 7
+If no two members of {Acx} have an element in common, then {Acx} is a
+disjoint collection ofsets:
+We write A- B= {x : x e A, x � B}, and denote the complement of A by Ac whenever it is clear from the context with respect to which larger set the com plement is taken. The cartesian product A1 x · · · x An of the sets A1, • • . , An is the set of all
+ordered n-tuples (a1, • • • , an) where a; e A; for i = 1, . . . , n.
+The real line (or real number system) is R1, and
+Rk= R 1 X ... X R 1 ( k factors).
+The extended real number system is R1 with two symbols, oo and - oo, adjoined,
+and with the obvious ordering. If - oo < a < b < oo, the interval [a, b] and the
+segment (a, b) are defined to be
+[a, b]= {x: a < x < b}, (a, b)= {x: a < x < b}.
+We also write
+[a, b)= {x: a < x < b}, (a, b]= {x: a < x < b}.
+If E c [ - oo, oo] and E # 0, the least upper bound (supremum) and great
+est lower bound (infimum) of E exist in [ - oo, oo] and are denoted by sup E and
+inf E. Sometimes (but only when sup E e E) we write max E for sup E. The symbol
+f: X � Y
+means thatfis afunction (or mapping or transformation) of the set X into the set
+Y; i.e., f assigns to each x e X an element f(x) e Y. If A c X and B c Y, the
+image ofA and the inverse image (or pre-image) of B are
+f(A)= {y: y =f(x) for some x e A},
+f - 1(B)= {x : f(x) e B}.
+Note that/ - 1(B) may be empty even when B =1= 0. The domain offis X. The range offisf(X).
+lff(X) = Y,fis said to map X onto Y.
+We write f - 1(y), instead off - 1({y}), for every y e Y. Iff - 1(y) consists of at
+most one point, for each y e Y, f is said to be one-to-one. Iff is one-to-one, then
+f - 1 is a function with domainf(X) and range X.
+Iff: X � [ - oo, oo] and E c X, it is customary to write supx e E f(x) rather
+than sup f(E). Iff: X� Y and g : Y � Z, the composite function g o f: X � Z is defined by
+the formula
+(g of)(x)= g(f(x)) (x e X).
+
+
+8 REAL AND COMPLEX ANALYSIS
+If the range off lies in the real line (or in the complex plane), then f is said to
+be a realfunction (or a complexfunction). For a complex function/, the statement
+"! > 0 " means that all values f(x) off are nonnegative real numbers.
+The Con�ept of Measurability
+The class of measurable functions plays a fundamental role in integration theory. It has some basic properties in common with another most important class of functions, namely, the continuous ones. It is helpful to keep these similarities in mind. Our presentation is therefore organized in such a way that the analogies
+between the concepts topological space, open set, and continuousfunction, on the
+one hand, and measurable space, measurable set, and measurablefunction, on the
+other, are strongly emphasized. It seems that the relations between these concepts emerge most clearly when the setting is quite abstract, and this (rather than a desire for mere generality) motivates our approach to the subject.
+1.2 Definition
+(a) A collection r of subsets of a set X is said to be a topology in X if r has
+the following three properties :
+(i) 0 E r and X E r. (ii) If � E r f0r i = 1 ' . . . ' n, then v l n v2 n . . . n v,. E r.
+(iii) If { �} is an arbitrary collection of members of r (finite, countable, or
+uncountable), then Ua � E r.
+(b) If r is a topology in X, then X is called a topological space, and the
+members of r are called the open sets in X.
+(c) I f X and Y are topological spaces and iff is a mapping of X into Y, then
+f is said to be continuous provided that f - 1( V) is an open set in X for
+every open set V in Y.
+1 .3 Definition
+(a) A collection 9J1 of subsets of a set X is said to be a a-algebra in X if 9J1
+has the following properties :
+(i) X E 9J1. (ii) If A E 9J1, then Ac E IDl, where Ac is the complement of A relative to X.
+(iii) If A = U�= 1 An and if An E 9J1 for n = 1, 2, 3, . . . , then A E IDl.
+(b) If 9J1 is a a-algebra in X, then X is called a measurable space, and the
+members of 9J1 are called the measurable sets in X. .
+(c) If X is a measurable s pace, Y is a topological space, and f is a mapping
+of X into Y, then f is said to be measurable provided that f - 1(V) is a
+measurable set in X for every open set V in Y.
+
+
+ABSTRACT INTEGRATION 9
+It would perhaps be more satisfactory to apply the term " measurable space" to the ordered pair (X, 9Jl), rather than to X. After all, X is a set, and X has not been changed in any way by the fact that we now also have a a-algebra of its subsets in mind. Similarly, a topological space is an ordered pair (X, rf. B ut if this sort of thing were systematically done in all mathematics, the terminology would become awfully cumbersome. We shall discuss this again at somewhat greater length in Sec. 1.21.
+1.4 Comments on Definition 1.2 The most familiar topological spaces are the metric spaces. We shall assume some familiarity with metric spaces but shall give
+the basic definitions, for the sake of completeness.
+A metric space is a set X in which a distancefunction (or metric) p is defined,
+with the following properties :
+(a) 0 < p(x, y) < oo for all x and y E X.
+(b) p(x, y) = 0 if and only if x = y.
+(c) p(x, y) = p(y, x) for all x and y E X.
+(
+d
+)
+p(x, y) < p(x, z) + p(z, y) for all x, y, and z E X.
+Property (d) is called the triangle inequality.
+If x E X and r > 0, the open ball with center at x and radius r is the set
+{y E X: p(x, y) < r}.
+If X is a metric space and if r is the collection of all sets E c X which are arbitrary unions of open balls, then r is a topology in X. This is not hard to verify ; the intersection property depends on the fact that if x E B1 n B2 , where B1 and B2 are open balls, then x is the center of an open ball B c B1 n B2 • We leave this as an exercise. For instance, in the real line R 1 a set is open if and only if it is a union of open segments (a, b). In the plane R2, the open sets are those which are unions of
+open circular discs. Another topological space, which we shall encounter frequently, is the extended real line [ - oo, oo]; its topology is defined by declaring the following
+sets to be open: (a, b), [ - oo, a), (a, oo], and any union of segments of this type.
+The definition of continuity given in Sec. 1.2(c) is a global one. Frequently it
+is desirable to define continuity locally : A mapping f of X into Y is said to be
+continuous at the point x0 E X if to every neighborhood V off(x0) there corre
+sponds a neighborhood W of x0 such that f( W) c V.
+(A neighborhood of a point x i� , by definition, an open set which contains x.)
+When X and Y are metric spaces, this local definition is of course the same as the usual epsilon-delta definition, and is equivalent to the requirement that
+lim f(xn) = f(x0) in Y whenever lim xn = x0 in X.
+The following easy proposition relates the local and global definitions of con tinuity in the expected manner:
+1.5 Proposition Let X and Y be topological spaces. A mappingfofX into Y is
+continuous ifand only iffis continuous at every point ofX.
+
+
+1 0 REAL AND COMPLEX ANALYSIS
+PROOF If f is continuous and x0 E X, then f - 1 ( V) is a neighborhood of x0 ,
+for every neighborhood V off(x0). Since /(/-1(V)) c V, it follows that f is continuous at x0 • Iff is continuous at every point of X and if V is open in Y, every point x E f - 1( V) has a neighborhood � such that f( Wx) c V. Therefore � c f - 1 ( V). It follows that f - 1(V) is the union of the open sets�' so f - 1( V) is itself open. Thusf is continuous. /Ill
+1.6 Comments on Definition 1.3 Let 9Jl be a a-algebra in a set X. Referring to Properties (i) to (iii) of Definition 1.3(a), we immediately derive the following facts.
+(a) Since 0 = xc, (i) and (ii) imply that 0 E IDl.
+(b) Taking An + l = An +l = · · · = 0 in (iii), we see that A1 u A2 u · · · u An
+E 9Jl if Ai E 9Jl for i = 1, . . . , n.
+(c) Since
+9Jl is closed under the formation of countable (and also finite) intersec tions. (d) Since A - B =Be n A, we have A - B E 9Jl if A E 9Jl and B E IDl.
+The prefix u refers to the fact that (iii) is required to hold for all countable
+unions of members of IDl. If (iii) is required for finite unions only, then 9Jl is called an algebra of sets.
+1.7 Theorem Let Y and Z be topological spaces, and let g: Y� Z be contin
+uous.
+(a) IfX is a topological space, iff: X� Y is continuous, and ifh =g of, then
+h: X� Z is continuous.
+(b) IfX is a measurable space, iff: X� Y is measurable, and ifh =g of, then
+h: X� Z is measurable.
+Stated informally, continuous functions of continuous functions are contin uous ; continuous functions of measurable functions are measurable.
+PROOF If V is open in Z, then g - 1 ( V) is open in Y, and
+If/is continuous, it follows that h - 1(V) is open, proving (a).
+Iffis measurable, it follows that h - 1(V) is measurable, proving (b). /Ill
+
+
+ABSTRACT INTEGRATION 1 1
+1.8 Theorem Let u and v be real measurablefunctions on a measurable space
+X, let <I> be a continuous mapping of the plane into a topological space Y, and
+define
+h(x) = <l>(u(x), v(x))
+for x E X. Then h: X� Y is measurable.
+PROOF Putf(x) = (u(x), v(x)). Thenfmaps X into the plane. Since h = <I> o f,
+Theorem 1 .7 shows that it is enough to prove the measurability off
+If R is any open rectangle in. the plane, with sides parallel to the axes, then R is the cartesian product of two segments I 1 and I 2 , and
+which is measurable, by our assumption on u and v. Every open set V in the
+plane is a countable union of such rectangles Ri , and since
+f -1(V) is measurable. /Ill
+1.9 Let X be a measurable space. The following propositions are corollaries of
+Theorems 1.7 and 1.8 :
+(a) Iff= u +iv, where u and v are real measurable functions on X, then f is a
+complex measurablefunction on X.
+This follows from Theorem 1.8, with <l>(z) = z.
+(b) Iff= u +iv is a complex measurablefunction on X, then u, v, and IfI are real
+measurablefunctions on X.
+This follows from Theorem 1.7, with g(z) = Re (z), Im (z), and I z 1 .
+(c) Iffand g are complex measurablefunctions on X, then so aref+g andfg.
+For real/and g this foll�ws from Theorem 1.8, with
+<I>(s' t) = s +t
+and <l>(s, t) = st. The complex case then follows from (a) and (b).
+(d) IfE is a measurable set in X an.d if
+then XE is a measurablefunction.
+if X E E
+if X ¢ E
+This is obvious. We call XE the characteristic function of the set E. The
+letter x will be reserved for characteristic functions throughout this book.
+(e) Iff is a complex measurable function on X,- there is a complex measurable
+function C( on X such that I C(I = 1 andf= C( Ifl.
+
+
+1 2 REA L AND COMPLEX ANALYSIS
+PROOF Let E = {x : f(x) = 0}, let Y be the complex plane with the origin
+removed, define qJ(z) = zj I z I for z e Y, and put
+cx(x) = <p(f(x) +XE(x)) (x E X).
+If x E E, cx(x) = 1; if x ¢ E, cx(x) = f(x)j I f(x) 1 . Since <p is continuous on Y
+and since E is measurable (why?), the measurability of ex follows from (c), (d),
+and Theorem 1 .7. ////
+We now show that a-algebras exist in great profusion.
+1.10 Theorem If ff is any collection of subsets of X, there exists a smallest
+a-algebra IDl* in X such that ff c IDl*.
+This IDl* is sometimes called the a-algebra generated by ff.
+PROOF Let Q be the family of all a-algebras 9Jl in X which contain ff. Since the collection of all subsets of X is such a a-algebra, Q is not empty. Let IDl* be the intersection of all 9Jl E Q. It is clear that ff c IDl* and that IDl* lies in every a-algebra in X which contains ff. To complete the proof, we have to show that IDl* is itself a a-algebra.
+If An E IDl* for n = 1, 2, 3, . . . , and if 9Jl E Q, then An E IDl, so U An E IDl,
+since 9Jl is a a-algebra. Since U An E 9Jl for every 9Jl e Q, we conclude that
+U An e IDl*. The other two defining properties of a a-algebra are verified in the same manner. ////
+1.1 1 Borel Sets Let X be a topological space. By Theorem 1 . 10, there exists a smallest a-algebra � in X such that every open set in X belongs to �. The members of� are called the Borel sets of X.
+In particular, closed sets are Borel sets (being, by definition, the complements of open sets), and so are all countable unions of closed sets and all countable intersections of open sets. These last two are called Fa's and G,'s, respectively, and play a considerable role. The notation is due to Hausdorff. The letters F and G were used for closed and open sets, respectively, and a refers to union (Summe),
+b to int�rsection (Durchschnitt). For example, every half-open interval [a, b) is a
+G, and an Fa in R 1. Since 81 is a a-algebra, we may now regard X as a measurable space, with the Borel sets playing the role of the measurable sets ; more concisely, we consider the measurable space (X, P1). Iff: X -4 Y is a continuous mapping of X, where Y is any topological space, then it is evident from the definitions that f - 1( V) E 81 for
+every open set V in Y. In other words, every continuous mapping of X is Borel
+\
+measurable.
+Borel measurable mappings are often called Borel mappings, or Borel func
+tions.
+
+
+ABSTRACT INTEGRATION 1 3
+1.12 Theorem Suppose 9Jl is a a-algebra in X, and Y is a topological space.
+Letfmap X into Y.
+(a) IfQ is the collection of all sers E c Y such thatf-1(£) E IDl, then Q is a
+a-algebra in Y.
+(b) Iffis measurable and E is a Borel set in Y, thenf-1(E) E IDl.
+(c) If Y = [- oo, oo] and f- 1((cx, oo]) E 9Jl for every real ex, then f is measur
+able.
+(d) Iff is measurable, if Z is a topological space, if g: Y� Z is a Borel
+mapping, and ifh = g of, then h: X� Z is measurable.
+Part (c) is a frequently used criterion for the measurability of real-valued
+functions. (See also Exercise 3.) Note that (d) generalizes Theorem 1.7(b).
+PROOF (a) follows from the relations
+f - 1( Y) = X,
+f - 1( Y - A) = X -f - 1(A),
+and f - 1(A1 uA2 u· · ·) = f - 1(A1) uf - 1(A2) u· · · .
+To prove (b), let n be as in (a) ; the measurability of f implies that Q
+contains all open sets in Y, and since Q is a a-algebra, Q contains all Borel sets in Y. To prove (c), let Q be the collection of all E c [ - oo, oo] such that
+f - 1(E) E IDl. Choose a real number cx, and choose cxn < cx so that cxn � cx as
+n
+� oo. Since (cxn , oo] E Q for each n, since
+0000
+[ - oo , cx) = U [ - oo , cxnJ = U (cxn , oo]c,
+n = 1 n =l
+and since (a) shows that Q is a a-algebra, we see that [ - oo , cx) E Q. The same
+is then true of
+(ex, fJ) = [ - oo, fJ) n (cx, oo].
+Since every open set in [ - oo, oo] is a countable union of segments of the above types, Q contains every open set. Thusfis measurable. To prove (d), let V c Z be open. Then g - 1(V) is a Borel set of Y, and
+stnce
+h- 1(V) = f - 1(g- 1(V)),
+(b) shows that h - 1( V) E IDl. /Ill
+1.13 Definition Let {an} be a sequence in [ - oo, oo], and put
+( k = 1, 2, 3, . . .) (1)
+
+
+14 REAL AND COMPLEX ANALYSIS
+and
+fJ = inf {bh b2 , b3, . . .}. (2)
+We call fJ the upper limit of {an}, and write
+fJ = lim sup an . (3)
+The following properties are easily verified : First, b1 > b2 > b3 > · · ·, so
+that bk----+ fJ as k----+ oo ; secondly, there is a subsequence {an J of {an} such that
+an i----+ {3 as i ----+ oo, and fJ is the largest number with this property.
+The lower limit is defined analogously: simply interchange sup and inf in
+(1) and (2). Note that
+lim inf an = -lim sup (- an>· (4)
+If {an} converges, then evidently
+lim sup an = lim inf an = lim an . (5)
+Suppose {fn} is a sequence of extended-real functions on a set X. Then
+sup fn and lim sup fn are the functions defined on X by
+If
+(
+s�pfn}x) = s�p (f,(x)),
+(
+ti�...�Pfn)<x) = li�...�P (fn(x)).
+f(x) = lim f,.(x),
+(6)
+(7)
+(8)
+the limit being assumed to exist at every x e X, then we call f the pointwise
+limit of the sequence {fn}.
+1.14 Theorem Iffn: X----+ [- oo, oo] is measurable,for n = 1, 2, 3, . . . , and
+h = lim sup fn ,
+then g and h are measurable.
+PROOF g - 1((C(, 00]) = u:= 1 f; 1((C(, 00]). Hence Theorem 1.12(c) implies that
+g is measurable. The same result holds of course with inf in place of sup, and st. nce
+h = inf {sup_h},
+k�l i�k
+it follows that h is measurable. /Ill
+
+
+ABSTRACT INTEGRATION 15
+Corollaries
+(a) The limit of every pointwise convergent sequence of complex measurable
+functions is measurable.
+(b) Iffand g are measurable (with range in [-oo, oo]), then so are max {f, g}
+and min {f, g}. In particular, this is true ofthefunctions
+f+ = max {f, 0} and f- = -min {f, 0}.
+1.15 The above functionsf + andf - are called the positive and negative parts off.
+We have Il l = ! + + f - and ! = ! + - f - , a standard representation of f as a
+difference of two nonnegative functions, with a certain minimality property:
+Proposition Iff= g - h, g > 0, and h > 0, then!+ < g andf- < h.
+PROOF f < g and 0 < g clearly implies max {f, 0} < g. Ill/
+Simple Functions
+1.16 Definition A complex function s on a measurable space X whose range
+consists of only finitely many points will be called a simple function. Among
+these are the nonnegative simple functions, whose range is a finite subset of [0, oo). Note that we explicitly exclude oo from the values of a simple func
+tion. If (X1, . . • , (Xn are the distinct values of a simple function s, and if we set
+Ai= {x : s(x) = (Xi}, then clearly
+n
+s = L (Xi XAi'
+i= 1
+where XAi is the characteristic function of Ai, as defined in Sec. 1.9(d).
+It is also clear that s is measurable if and only if each of the sets Ai is
+measurable.
+1.17 Theorem Let f: X----+ [0, oo] be measurable. There exist simple measur
+ablefunctions sn on X such that (a) 0 < s1 < s2 < · · · <f.
+(b) sn(x)----+f(x) as n----+ oo,for every x e X.
+PROOF Put �n = 2 -n. To each positive integer n and each real number t cor
+responds a unique integer k = kn(t) that satisfies k�n < t < (k + 1)�n . Define
+ifOSt<n (1)
+
+if n S t S oo.
+
+
+16 REAL AND COMPLEX ANAJ...YSIS
+Each CfJn is then a Borel function on [0, oo],
+if O < t < n, (2)
+0 < cp1 < cp2 < · · · < t, and CfJn(t)--+ t as n--+ oo, for every t e [0, oo]. It
+follows that the functions
+satisfy (a) and (b) ; they are measurable, by Theorem 1 . 1 2(d).
+Elementary Properties of Measures
+1.18 Definition
+(3)
+Ill/
+(a) A positive measure is a function Jl, defined on a a-algebra9Jl, whose range
+is in [0, oo] and which is countably additive. This means that if {A;} is a
+disjoint countable collection of members of9Jl, then
+(1)
+To avoid trivialities, we shall also assume that Jl(A) < oo for at least one A E 9Jl.
+(b) A measure space is a measurable space which has a positive measure
+defined on the a-algebra of its measurable sets. (c) A complex measure is a complex-valued countably additive function
+defined on a a-algebra.
+Note: What we have called a positive measure is frequently just called a
+measure; we add the word " positive" for emphasis. If J.l(E) = 0 for every E e 9Jl,
+then Jl is a positive measure, by our definition. The value oo is admissible for a positive measure ; but when we talk of a complex measure Jl, it is understood that
+Jl(E) is a complex number, for every E e9Jl. The real measures form a subclass of
+the complex ones, of course.
+1.19 Theorem Let Jl be a positive measure on a a-algebra 9Jl. Then
+(a) J.l(0) = 0.
+(b) Jl(A1 u · · · u An) = Jl(A1) + · · · + Jl(An) ifA1, • • • , An are pairwise disjoint
+members of9Jl.
+(c) A c B implies Jl(A) < Jl(B) ifA e9Jl, B e 9Jl.
+(d) Jl(An)--+ Jl(A) as n--+ oo ifA = U:'= 1 An , An e9Jl, and
+and Jl(A1) isfinite.
+
+
+ABSTRACT INTEGRATION 1 7
+As the proof will show, these properties, with the exception of (c), also hold
+for complex measures; (b) is calledfinite additivity; (c) is called monotonicity.
+PROOF
+(a) Take A e 9Jl so that Jl(A) < oo, and take A1= A and A2= A3= · · ·=
+0 in 1.18(1). (b) Take An+1= An+l= · · ·= 0 in 1 . 18(1).
+(c) Since B=A u (B-A) and A n (B-A)=0, we see that (b) implies
+Jl(B)= Jl(A) + Jl(B-A)> Jl(A). (d) Put B1=A1, and put Bn=An-An-1 for n= 2, 3, 4, . . . . Then Bn E IDl,
+B; n Bi= 0 if i :f=j, An= B1 u · · · u Bn, and A= U?::1 B;. Hence
+n
+oo
+Jl(An)= L Jl(B; ) and Jl(A)= L Jl(B;).
+i=1 i=1
+Now (d) follows, by the definition of the sum of an infinite series. (e) Put en=A1-An. Then e1 c: e2 c: e3 c: · · ·,
+A1-A= U en, and so (d) shows that
+Jl(A1)-Jl(A)= Jl(A1-A)= lim Jl(en)= Jl(A1 )- lim Jl(An ).
+n-+ oo n-+ oo
+This implies (e). Ill/
+1.20 Examples The construction of interesting measure spaces requires some labor, as we shall see. However, a few simple-minded examples can be given immediately :
+(a) For any E c: X, where X is any set, define Jl(E)= oo if E is an infinite set,
+and let Jl(E) be the number of points in E if E is finite. This Jl is called the
+counting measure on X.
+(b) Fix x0 e X, define Jl(E )= 1 if x0 e E 'and Jl(E)= 0 if x0 ¢ E, for any
+E c: X. This Jl may be called the unit mass concentrated at x0 •
+(c) Let Jl be the counting measure on the set { 1, 2, 3, ...}, let An= {n, n + 1,
+n + 2, . . .}. Then n An= 0 but Jl(AJ= oo for n= 1, 2, 3, . . .. This
+shows that the hypothesis
+is not superfluous in Theorem 1 . 19(e).
+1.21 A Comment on Terminology One frequently sees measure spaces referred to as " ordered triples" (X, IDl, Jl) where X is a set, IDl is a a-algebra in X, and Jl is a measure defined on IDl. Similarly, measurable spaces are " ord.et;eq� p��r$f'-� (X, IDl).
+
+
+1 8 REAL AND COMPLEX ANALYSIS
+This is logically all right, and often convenient, though somewhat redundant. For instance, in (X,9Jl) the set X is merely the largest member of9Jl, so if we know9Jl
+we also know X. Similarly, every measure has a a-algebra for its domain, by definition, so if we know a measure J1 we also know the a-algebra9Jl on which J1
+is defined and we know the set X in which9Jl is a a-algebra.
+It is therefore perfectly legitimate to use expressions like " Let J1 be a measure " or, if we wish to emphasize the a-algebra or the set in question, to say " Let J1 be a measure on9Jl " or " Let J1 be a measure on X."
+What is logically rather meaningless but customary (and we shall often follow mathematical custom rather than logic) is to say " Let X be a measure space " ; the emphasis should not be on the set, but on the measure. Of course, when this wording is used, it is tacitly understood that there is a measure defined on some a-algebra in X and that it is this measure which is really under dis
+.
+CUS S I On.
+Similarly, a topological space is an ordered pair (X, r), where r is a topology in the set X, and the significant data are contained in r, not in X, but " the topological space X " is what one talks about. This sort of tacit convention is used throughout mathematics. Most mathe matical systems are sets with some class of distinguished subsets or some binary operations or some relations (which are required to have certain properties), and one can list these and then describe the system as an ordered pair, triple, etc., depending on what is needed. For instance, the real line may be described as a
+quadruple (R 1, +, ·, < ), where +, ·, and < satisfy the axioms of a complete
+archimedean ordered field. But it is a safe bet that very few mathematicians think of the real field as an ordered quadr\lple.
+Arithmetic in [0, oo]
+1.22 Throughout mtegration theory, one inevitably encounters oo. One reason is
+that one wants to be able to integrate over sets of infinite measure ; after all, the real line has infinite length. Another reason is that even if one is primarily inter ested in real-valued functions, the lim sup of a sequence of positive real functions or the sum of a sequence of positive real functions may well be oo at some points,
+and much of the elegance of theorems like 1.26 and 1 .27 would be lost if one had to niake some special provisions whenever this occurs.
+Let us define a + oo = oo +a = oo if 0 < a < oo, and
+a · oo = oo · a = {: ifO < a < oo
+if a = 0;
+sums and products of real numbers are of course defined in the usual way. It may seem strange to define 0 · oo = 0. Howe-ver, one verifies without diffi
+culty that with this definition the commutative, associative, and distributive laws
+hold in [0, oo] without any restriction.
+
+
+ABSTRACT INTEGRATION 1 9
+The cancellation laws have to be treated with some care : a + b = a + c
+implies b = c only when a < oo, and ab = ac implies b = c only when 0 < a < oo.
+Observe that the following useful proposition holds :
+If we combine this with Theorems 1 . 1 7 and 1.14, we see that sums and pro
+ducts ofmeasurablefunctions into [0, oo] are measurable.
+Integration of Positive Functions
+In this section,9Jl will be a a-algebra in a set X and J1 will be a positive measure
+on 9Jl.
+1.23 Definition If s : X � [0, oo) is a measurable simple function, of the form
+n
+s = L (Xi XAi'
+i=1 (1)
+where rx1, • • • , rxn are the distinct values of s (compare Definition 1 . 1 6), and if
+E E m, we define
+(2)
+The convention 0 · oo = 0 is used here ; it may happen that rxi = 0 for some i
+and that Jl(Ai n E) = oo . Iff: X � [0, oo] is measurable, and E E9Jl, we define
+LfdJ1. = sup Ls dJ1., (3)
+the supremum being taken over all simple measurable functions s such that
+O < s <f
+The left member of (3) is called the Lebesgue integral off over E, with
+respect to the measure Jl. It is a number in [0, oo].
+Observe that we apparently have two definitions for JE f dJ1 iff is simple,
+namely, (2) and (3). However, these assign the same value to the integral, since f is, in this case, the largest of the functions s which occur on the right
+of (3).
+1.24 The following propositions are immediate consequences of the definitions. The functions and sets occurring in them are assumed to be measurable :
+(a) IfO <f< g, then JE fdJ1 < JE g dJ1.
+(b) IfA c B andf> 0, then JA fdJ1 < JB fdJ1.
+
+
+20 REAL AND COMPLEX ANALYSIS
+(c) Iff> 0 and c is a constant, 0 < c < oo, then
+(d) Iff(x) = Ofor all x E E, then'JE fdJ1 = 0, even ifJ1(E) = oo.
+(e) IfJ1(E) = 0, then JE f dJ1 = 0, even iff(x) = oofor every x E E.
+(f) Iff> 0, then JE fdJ1 = Jx XEfdJ1.
+This last result shows that we could have restricted our definition of integra tion to integrals over all of X, without losing any generality. If we wanted to integrate over subsets, we could then use (f) as the definition. It is purely a
+matter of taste which definition is preferred. One may also remark here that every measurable subset E of a measure space X is again a· measure space, in a perfectly natural way : The new measur able sets are simply those measurable subsets of X which lie in E, and the measure is unchanged, except that its domain is restricted. This shows again that as soon as we have integration defined over every measure space, we automati cally have it defined over every measurable subset of every measure space.
+1.25 Proposition Let s and t be nonnegative measurable simplefunctions on X.
+For E E IDl, define
+(1)
+Then <p is a measure on IDl. Also
+(2)
+(This proposition contains provisional forms of Theorems 1.27 and 1.29.)
+PROOF If s is as in Definition 1.23, and if E1, E2, • • • are disjoint members of
+9Jl whose union is E, the countable additivity of J1 shows that
+n noo
+<p(E) = L �i Jl(Ai n E) = L �i L ,u(Ai n Er)
+i= 1 i= 1 r=1
+oon oo
+= L L �i Jl(Ai n Er) = L qJ(Er).
+r= 1 i= 1 r=1
+Also, ({J(0) = 0, so that <p is not identically oo .
+
+
+ABSTRACT INTEGRATION 2 1
+Next, let s be as before, let {31, • • • , 13m be the distinct values of t, and let
+Bi= {x : t(x)= Pi}. If Eii= Ai n Bi, then
+and
+L? + t) dJl.= (cxi + {Ji)Jl(Eii)
+L
+,js
+d
+J1.
++
+1
+. /
+d
+J1.
+=
+cx
+i
+Jl.
+(Eii)
++
+{J
+i
+Jl.
+(E
+ii).
+Thus (2) holds with Eii in place of X. Since X is the disjoint union of the sets Eii (1 < i < n, 1 < j < m), the first half of our proposition implies that (2)
+holds. IIII
+We now come to the interesting part of the theory. One of its most remark able features is the ease with which it handles limit operations.
+1.26 Lebesgue's Monotone Convergence Theorem Let {fn} be a sequence of
+measurablefunctions on X, and suppose that"
+(a) 0 <f1(x) <f2(x) < · · · < oofor every x E X,
+(b) fn(x)�f(x) as n� oo,for every x E X.
+Thenfis measurable, and
+as n� oo.
+PROOF Since J fn < J fn + h there exists an a. E [0, oo] such that
+l.r.. dJ1.-. ex as n� oo. (1)
+By Theorem 1 . 14, f is measurable. Since fn </, we have J fn < J f for every n,
+so (1) implies
+(2)
+Let s be any simple measurable function such that 0 < s < f, let c be a
+constant, 0 < c < 1, and define
+(n= 1, 2, 3, . . .). (3)
+Each En is measurable, E 1 c E2 c E3 c · · · , and X= U En. To see this
+equality, consider some x E X. If f(x)= 0, then x E E1; if f(x) > 0, then
+cs(x) <f(x), since c < 1; hence x E En for some n. Also
+r fn djl. > r f.. djl. > c r s djl.
+Jx JEn JEn (n= 1, 2, 3, . . .). (4)
+
+
+22 REAL AND COMPLEX ANALYSIS
+Let n � oo, applying Proposition 1.25 and Theorem 1.19(d) to the last inte
+gral in (4). The result is
+Since (5) holds for every c < 1, we have
+ex > Is dJJ.
+for every simple measurable s satisfying 0 < s < f, so that
+ex > IfdJJ..
+The theorem follows from (1), (2), and (7).
+1.27 Theorem Iff,.: X� [0, oo] is measurable,for n = 1, 2, 3, . . . , and
+00
+f(x) = L fn(x) (x E X),
+n=l
+then IfdjJ. = n�l If, djJ..
+(5)
+(6)
+(
+7
+)
+Ill/
+(1)
+(2)
+PROOF First, there are sequences {sa' {s�'} of simple measurable functions
+such that s��f1 and s�'�/2 , as in Theorem 1.17. If si = s� + s�', then
+si �f1 +/2 , and the monotone convergence theorem, combined with Propo
+sition 1.25, shows that
+(3)
+Next, put gN = /1 + · · · + fN . The sequence {gN } converges monotoni
+cally tof, and if we apply induction to (3) we see that
+(4)
+Applying the monotone convergence theorem once more, we obtain (2), and the proof is complete. /Ill
+If we let J1 be the counting measure on a countable set, Theorem 1.27 is a statement about double series of nonnegative real numbers (which can of course be proved by more elementary means) :
+
+
+ABSTRACT INTEGRATION 23
+Corollary Ifaii > 0for i andj = 1, 2, 3, . . . , then
+0000 0000
+L L aij = L L aij .
+i = l j =l j = l i =l
+1.28 Fatoo's Lemma Iffn: X� [0, oo] is measurable,for each positive integer
+n, then i (lim inffn) dp, < lim inf l fn dp,.
+X
+n-oo n-oo X
+Strict inequality can occur in (1) ; see Exercise 8.
+PROOF Put
+gk(x) = inf };(x)
+Then gk <fk , so that
+i
+� k (k = 1, 2, 3, . . . ; X E X).
+1gk dp. < lit dp. (k = 1, 2, 3, . . .).
+(1)
+(2)
+(3)
+Also, 0 < g1 < g2 < · · · , each gk is measurable, by Theorem 1.14, and
+gk(x) � lim inffn(x) as k � oo, by Definition 1.13. The monotone convergence
+theorem shows therefore that the left side of (3) tends to the left side of (1), as
+k � oo. Hence (1) follows from (3). /Ill
+1.29 Theorem Supposef: X-� [0, oo] is measurable, and
+l{J(E) = 1� dp.
+(E
+e
+9Jl
+).
+(1)
+Then cp is a measure on 9Jl, and
+(2)
+for every measurable g on X with range in [0, oo].
+PROOF Let E1, E 2, E3, Observe that
+be disjoint members of IDl whose union is E .
+and that
+00
+XEf= L XEjf
+j =1 (3)
+(4)
+
+
+24 REA L AND COMPLEX ANALYSIS
+It now follows from Theorem 1.27 that
+00
+qJ(E) = L qJ(Ej). (5)
+j= l
+Since ({J(0) = 0, (5) proves that qJ is a measure.
+Next, ( 1 ) shows that (2) holds whenever g = XE for some E e 9Jl. Hence
+(2) holds for every simple measurable function g, and the general case follows
+from the monotone convergence theorem. /Ill
+Remark The second assertion of Theorem 1 .29 is sometimes written in the form
+dqJ =fdjJ.. (6)
+We assign no independent meaning to the symbols dqJ and djJ. ; (6) merely
+means that (2) holds for every measurable g > 0.
+Theorem 1 .29 has a very important converse, the Radon-Nikodym theorem, which will be proved in Chap. 6.
+Integration of Complex Functions
+As before, J.l will in this section be a positive measure on an arbitrary measurable space X.
+1.30 Definition We define L1(JJ.) to be the collection of all complex measur
+able functions / on X for which
+11 !1 dJl < 00.
+Note that the measurability offimplies that of I f I , as we saw in Propo
+sition 1.9(b); hence the above integral is defined.
+The members of L1(JJ.) are called Lebesgue integrable functions (with
+respect to JJ.) or summable functions. The significance of the exponent 1 will
+become clear in Chap. 3.
+1.31 Definition Iff = u + iv, where u and v are real measurable functions on
+X, and iff E L1(JJ.), we define
+ifdJl = iu+ dJl - Lu- dJl +i iv+ dJl - i iv- dJl
+(
+1
+)
+for every measurable set E . Here u + and u- are the positive and negative parts of u, as defined in
+Sec. 1 . 1 5 ; v + and v - are similarly obtained from v. These four functions are
+measurable, real, and nonnegative ; hence the four integrals on the right of ( 1) exist, by Definition 1.23. Furthermore, we have u + < I u I < I f I , etc., so that
+
+
+ABSTRACT INTEGRATION 25
+each of these four integrals is finite. Thus (1) defines the integral on the left as
+a complex number. Occasionally it is desirable to define the integral of a measurable func tion/with range in [ - oo, oo] to be
+(2)
+provided that at least one of the integrals on the right of (2) is finite. The left
+side of (2) is then a number in [ - oo, oo].
+1.32 Theorem Supposefand g E L1(J.t) and C( and P are complex numbers. Then
+C(f + pg E L1(J.t), and
+(1)
+PROOF The measurability of C(f + pg follows from Proposition 1.9(c). By Sec.
+1.24 and Theorem 1.27,
+l
+l ocf + pg I dJl < l( l oc I I f I + I P I I g I ) dJl
+= l oc l l l / 1 d11 + I P i l l g l dJl < oo.
+Thus C(f + pg E I!(J.l).
+To prove (1), it is clearly sufficient to prove
+fxu+g) d11 = fx!d11 +fxg d11
+and l(ocf) dJl = oc IfdJl,
+and the general case of (2) will follow if we prove (2) for realfand g in L1(J.t).
+Assuming this, and setting h = f + g, we have
+or
+By Theorem 1.27,
+h+ - h- =!+ -f- +g+ - g
+and since each of these integrals is finite, we may transpose and obtain (2).
+(2)
+(3)
+(4)
+(5)
+
+
+26 REAL AND COMPLEX ANALYSIS
+That (3) holds if C( > 0 follows from Proposition 1.24(c). It is easy to
+verify that (3) holds if C( = - 1, using relations like ( - u) + = u - . The case
+C( = i is also easy: Iff= u + iv, then
+fan = f(iu - v) = f (-v) + i fu = - f v + i fu = {f u + i fv)
+=iff
+Combining these cases with (2), we obtain (3) for any complex C(. /Ill
+1.33 Theorem Iff E L1(Jl), then
+fxtdJ.L < ll/1 dJ.L.
+PROOF Put z = Jx f dJl. Since z is a complex number, there is a complex
+number C(, with I C( I = 1, such that C(Z = I z 1 . Let u be the real part of C(f Then
+u < I C(f I = I f I . Hence
+IfdJl = oc IfdJl = LocfdJ.L = lu dJl < l1fI dJl.
+The third of the above equalities holds since the preceding ones show that J C(fdJl is real. /Ill
+We conclude this section with another important convergence theorem.
+1.34 Lebesgue's Dominated Convergence Theorem Suppose {fn} is a sequence
+ofcomplex measurablefunctions on X such that f(x) = lim fn(x)
+existsfor every x E X. Ifthere is afunction g E L1(Jl) such that
+and
+I fn(x) I < g(x) (n = 1, 2, 3, . . . ; x E X),
+lim I I f. -f l d11 = o,
+n-00 Jx
+l
+i
+m
+r
+f.
+d
+J.L
+=
+r
+f
+d
+Jl
+.
+n- oo Jx Jx
+(1)
+(2)
+(3)
+(4)
+
+
+ABSTRACT INTEGRATION 27
+PROOF Since I f I < g and f is measurable, f E L1(J1.). Since I fn -f I < 2g,
+Fatou's lemma applies to the functions 2g - I fn - f I and yields
+I
+2g
+d
+p.
+<
+l
+i
+m
+i
+n
+f
+I
+(
+2
+g
+
+I
+f
+n
+
+f
+I
+)
+d
+J1.
+Jx n - oo Jx
+=
+I
+2
+9
+d
+p.
++
+l
+i
+m
+i
+n
+f
+(
+
+I
+I
+!
+.
+
+!
+I
+dJi.
+)
+Jx n - oo Jx
+= I 2g dp. - lim sup I I f. -! I dJi..
+Jx n - oo Jx
+Since J 2g dJl is finite, we may subtract it and obtain
+lim sup I 1 /. - / I dJi. < o.
+n- 00 Jx (5)
+If a sequence of nonnegative real numbers fails to converge to 0, then its upper limit is positive. Thus (5) implies (3). By Theorem 1.33, applied to
+fn - f, (3) implies (4). ////
+The Role Played by Sets of Measure Zero
+1.35 Definition Let P be a property which a point x may or may not have.
+For instance, P might be the property "f(x) > 0 " iff is a given function, or it
+might be " {fn(x)} converges " if {In} is a given sequence of functions.
+If Jl is a measure on a a-algebra 9Jl and if E E 9Jl, the statement " P holds
+almost everywhere on E " (abbreviated to " P holds a.e. on E ") means that there exists an N E 9Jl such that Jl(N) = 0, N c E, and P holds at every point
+of E - N. This concept of a.e. depends of course very strongly on the given
+measure, and we shall write " a.e. [Jl.] " whenever clarity requires that the rneasure be indicated. For example, iffand g are measurable functions and if
+.
+J.l({X:f(X) # g(X)}) = 0, (1)
+we say that / = g a.e. [Jl.] on X, and we may write/ "' g. This is easily seen to
+be an equivalence relation. The transitivity (/ "' g and g "' h implies f "' h)
+is a consequence of the fact that the union of two sets of measure 0 has measure 0. Note that iff "' g, then, for every E E IDl,
+(
+2
+)
+To see this, let N be the set which appears in (1) ; then E is the union of the
+disjoint sets E - N and E n N ; on E - N,f = g, and J.l(E n N) = 0.
+
+
+28 REA L AND COMPLEX ANALYSIS
+Thus, generally speaking, sets of measure 0 are negligible in integration. It ought to be true that every subset of a negligible set is negligible. But it
+may happen that some set N E 9Jl with J.l(N) = 0 has a subset E which is not
+a member of IDl. Of course we can define J.l(E) = 0 in this case. But will this
+extension of J.l still be a measure, i.e., will it still be defined on a a-algebra? It is a pleasant fact that the answer is affirmative :
+1.36 Theorem Let (X, 9Jl, J.l) be a measure space, let IDl* be the collection ofall
+E
+c X for which there exist sets A and B E 9Jl such that A c E c B and
+J1(B - A) = 0, and define J.l(E) = Jl(A) in this situation. Then 9Jl* is a a-algebra,
+and J.l is a measure on 9Jl*.
+This extended measure J.l is called complete, since all subsets of sets of
+measure 0 are now measurable ; the a-algebra IDl* is called the Jl-completion of IDl.
+The theorem says that every measure can be completed, so, whenever it is conve nient, we may assume that any given measure is complete ; this just gives us more measurable sets, hence more measurable functions. Most measures that one meets in the ordinary course of events are already complete, but there are excep tions ; one of these will occur in the proof of Fubini's theorem in Chap. 8.
+PROOF We begin by checking that J.l is well defined for every E E IDl*.
+Suppose A c E c B, A1 c E c B1 , and J.l(B - A) = J.l(B1-A1) = 0. (The
+letters A and B will denote members of 9Jl throughout this proof.) Since
+A-A1 c E-A1 c B1-A1
+we have J.l(A-A1) = 0, hence J.l(A) = J.l(A n A1 ). For the same reason,
+J.l(A1) = J.l(A 1 n A). We conclude that indeed J1(A1) = J.l(A).
+Next, let us verify that IDl* has the three defining properties of a a algebra.
+(i) X E IDl*, because X E 9Jl and 9Jl c IDl*. (ii) If A c E c B then Be c Ee c Ae. Thus E E IDl* implies Ee E IDl*, because
+Ae-Be :._ Ae n B = B-A .
+(iii) If Ai c Ei c Bi , E = U Ei, A = U Ai, B = U Bi , then A c E c B and
+0000
+B-A = U (Bi-A ) c U (Bi-Ai).
+11
+Since countable unions of sets of measure zero have measure zero, it follows
+that E E IDl* if Ei e IDl* for i = 1, 2, 3, . . . .
+Finally, if the sets Ei are disjoint in step (iii), the same is true of the sets Ai, and we conclude that
+0000
+J.l(E) = J.l(A) = L J.l(Ai) = L J.l(Ei).
+11
+This proves that J.l is countably additive on IDl*. Ill/
+
+
+ABSTRACT INTEGRATION 29
+1.37 The fact that functions which are equal a.e. are indistinguishable as far as integration is concerned suggests that our definition of measurable function might profitably be enlarged. Let us call a function f defined on a set E E 9Jl
+measurable on X if Jl(Ec) = 0 and if/ - 1( V) n E is measurable for every open set
+V. If we define f(x) = 0 for x E Ec, we obtain a measurable function on X, in the
+old sense. If our measure happens to be complete, we can define f on E c in a
+perfectly arbitrary manner, and we still get a measurable function. The integral of f over any set A E 9Jl is independent of the definition of f on Ec; therefore this
+definition need not even be specified at all. There are many situations where this occurs naturally. For instance, a func tion f on the real line may be differentiable only almost everywhere (with respect
+to Lebesgue measure), but under certain conditions it is still true that f is the
+integral of its derivative ; this will be discussed in Chap. 7. Or a sequence {In} of
+measurable functions on X may converge only almost everywhere ; with our new definition of measurability, the limit is still a measurable function on X, and we do not have to cut down to the set on which convergence actually occurs. To illustrate, let us state a corollary of Lebesgue's dominated convergence theorem in a form in which exceptional sets of measure zero are admitted :
+1.38 Theorem Suppose {fn} is a sequence of �omplex measurable functions
+defined a.e. on X such that
+Then the series
+00
+f(x) = L fn(x)
+n=l convergesfor almost all x,fE L1(J1,), and
+r tdjl = f r t. djl.
+Jx n = 1 Jx
+(1)
+(2)
+(3)
+PROOF Let Sn be the set on which fn is defined, so that Jl(S�) = 0. Put <p(x) =
+L I fn(x) I ' for X E s = n sn . Then Jl(Sc) = 0. By (1) and Theorem 1.27,
+f.<p djl < 00. (4)
+If E = {x E S : <p(x) < oo}, it follows from (4) that Jl(Ec) = 0. The series (2)
+converges absolutely for every x E E, and iff(x) is defined by (2) for x E E,
+then I f(x) I < <p(x) on E, so that f E L1(J1,) on E, by (4). If gn =/1 + · · · +fn ,
+then I gn I < <p, gn(x) �f(x) for all x E E, and Theorem 1.34 gives (3) with E in
+place of X. This is equivalent to (3), since Jl(Ec) = 0. /Ill
+
+
+30 REAL AND COMPLEX ANALYSIS
+Note that even if thefn were defined at every point of X, (1) would only imply
+that (2) converges almost everywhere. Here are some other situations in which we
+can draw conclusions only almost everywhere :
+1.39 Theorem
+(a) Supposef: X� [0, oo] is measurable, E e IDl, and JE fdJ1 = 0. Thenf= 0
+a.e. on E.
+(b) Supposefe L1(J1) and JE fdJ1 = Ofor every E e IDl. Thenf= 0 a.e. on X.
+(c) SupposefE IJ(J.l) and
+Then there is a constant rx such that rxf= IfI a.e. on X.
+Note that (c) describes the condition under which equality holds in Theorem
+1.33.
+PROOF
+(a) If An = {x E E:f(x) > 1/n}, n = 1, 2, 3, . . . , then
+!
+.u(A.> < i 1 d,u < r 1 d,u = o,
+n
+An JE
+so that Jl(An) = 0. Since {x E E:f(x) > 0} = U An , (a) follows.
+(b) Put f-= u + iv, let E = {x: u(x) > 0}. The real part of JE fdJ1 is then
+JE u+ dJ1. Hence JE u+ dJ1 = 0, and (a) implies that u+ = 0 a.e. We con
+clude similarly that
+- + -0
+U = V = V = a.e.
+(c) Examine the proof of Theorem 1.33. Our present assumption implies that
+the last inequality in the proof of Theorem 1.33 must actually be an
+equality. Hence J ( I f I - u) dJ1 = 0. Since I f I - u > 0, (a) shows that
+I f I = u a.e. This says that the real part of rxf is equal to I rxf I a.e., hence
+rxf = I rxf I = I f I a.e., which is the desired conclusion. /Ill
+1.40 Theorem Suppose J1(X) < oo, fe L1(J1), S is a closed set in the complex
+plane, and the averages
+lie in Sfor every E E9Jl with J1(E) > 0. Thenf(x) e Sfor almost all x E X.
+
+
+ABSTRACT INTEGRATION 31
+PROOF Let � be a closed circular disc (with center at C( and radius r > 0, say) in the complement of S. Since sc is the union of countably many such discs, it
+is enough to prove that Jl.(E) = 0, where E = f -1(�).
+If we had Jl.(E) > 0, then
+I AJ.f) - ex I = Jl(� i(/- ex) dJl < Jl(� iI!- C( I dJi. < r,
+which is impossible, since AJf) E S. Hence Jl.(E) = 0. Ill/
+1.41 Theorem Let {Ek} be a sequence ofmeasurable sets in X, such that
+(1)
+Then almost all x e X lie in at mostfinitely many ofthe sets Ek.
+PROOF If A is the set of all x which lie in infinitely many Ek , we have to
+prove that J.l(A) = 0. Put
+00
+g(x) = L XEk(x) (x E X). (2)
+k=l
+For each x, each term in this series is either 0 or 1. Hence x e A if and only if
+g(x) = oo. By Theorem 1.27, the integral of g over X is equal to the sum in
+(1). Thus g e L1(J1.), and so g(x) < oo a.e. /Ill
+Exercises
+1 Does there exist an infinite a-algebra which has only countably many members ?
+l Prove an analogue of Theorem 1 .8 for n functions.
+3 Prove that iff is a real function on a measurable space X such that {x : f(x) > r} is measurable for every rational r, then f is measurable.
+4 Let {a,.} and {b,.} be sequences in [ - oo , oo], and prove the following assertions :
+(a) lim sup ( - a,.) = - lim inf a,. .
+n-+ oo n-+ oo
+(b) lim sup (a,. + b,.) < lim sup a,. + lim sup b,.
+provided none of the sums is of the form oo - oo .
+(c) I f a,. � b,. for all n, then
+n-+oo
+lim inf a,. < lim inf b,. .
+n-+oo n-+oo
+Show by an example that strict inequality can hold in (b).
+n-+oo
+
+
+32 REAL AND COMPLEX ANALYSIS
+5 (a) Supposef: X � [ - oo, oo] and g : X � [ - oo , oo] are measurable. Prove that the sets
+{x : f(x) < g(x)}, {x : f(x) = g(x)}
+are measurable. (b) Prove that the set of points at which a sequence of measurable real-valued functions con verges (to a finite limit) is measurable.
+6 Let X be an uncountable set, let 9Jl be the collection of all sets E c: X such that either E or Ec is at most countable, and define JJ.(E) = 0 in the first case, JJ.(E) = 1 in the second. Prove that 9Jl is a a-algebra in X and that Jl is a measure on 9Jl. Describe the corresponding measurable functions and their integrals.
+7 Suppose !, : X � [0, oo] is measurable for n = 1, 2, 3, . . . , /1 > /2 > /3 > · · · > 0, f,(x) �f(x) as
+n � oo, for every x e X, and /1 e L1(JJ.). Prove that then
+lim r !, djJ. = r f djl
+n-+ oo Jx Jx
+and show that this conclusion does not follow if the condition "/1 e L1(Jl) " is omitted.
+8 Put !, = XE if n is odd, !, = 1 - XE if n is even. What is the relevance of this example to Fatou's lemma?
+9 Suppose Jl is a positive measure on X, f: X � [0, oo] is measurable, Jx f dJl = c, where 0 < c < oo, and IX is a constant. Prove that
+00
+lim r n log [ 1 + (f/n)«] djJ. = c
+n-+ oo Jx 0
+if 0 < IX < 1,
+if IX = 1,
+if 1 < IX < 00.
+Hint : If IX > 1, the integrands are dominated by IXj. If IX < 1, Fatou's lemma can be applied.
+10 Suppose JJ.(X) < oo, {!,} is a sequence of bounded complex measurable functions on X, and !, � f uniformly on X. Prove that
+I
+lim r !, dJl = r f djl,
+n= oo Jx Jx
+and show that the hypothesis " JJ.(X) < oo " cannot be omitted.
+1 1 Show that
+0000
+A = n U Ek
+n= 1 k=n
+in Theorem 1 .4 1 , and hence prove the theorem without any reference t o integration.
+1 2 Suppose f e E(JJ.). Prove that to each E > 0 there exists a {J > 0 such that JE I f I dJl < E whenever Jl(E) < b.
+13 Show that proposition 1.24(c) is also true when c = oo .
+
+
+C H A PT E R
+TWO
+POSITIVE BOREL MEASURES
+Vector Spaces
+2.1 Definition A complex vector space (or a vector space over the complex
+field) is a set V, whose elements are called vectors and in which two oper
+ations, called addition and scalar multiplication, are defined, with the follow
+ing familiar algebraic properties : To every pair of vectors x and y there corresponds a vector x + y, in
+such a way that x + y = y + x and x + (y + z) = (x + y) + z; V contains a
+unique vector 0 (the zero vector or origin of V) such that x + 0 = x for every
+x
+E V; and to each x E V there corresponds a unique vector - x such that
+x + (-x) = O.
+To each pair (C(, x), where x E V and C( is a scalar (in this context, the
+word scalar means complex number), there is associated a vector C(X E V, in
+such a way that lx = x, C((f3x) = (C(f3)x, and such that the two distributive
+laws
+C((X + y) = C(X + C(y, (C( + {3)x = C(X + {3x (1)
+hold. , A linear transformation of a vector space V into a vector space V1 is a
+mapping A of V into V1 such that
+A(C(X + {3y) = C(AX + {3Ay (2)
+for all x and y E V and for all scalars rx and {3. In the special case in which V1
+is the field of scalars (this is the simplest example of a vector space, except for the trivial one consisting of 0 alone), A is called a linear functional. A linear
+functional is thus a complex function on V which satisfies (2).
+Note that one often writes Ax, rather than A(x), if A is linear.
+33
+
+
+34 REAL AND COMPLEX ANALYSIS
+The preceding definitions can of course be made equally well with any field whatsoever in place of the complex field. Unless the contrary is explicitly stated, however, all vector spaces occurring in this book will be complex, with one
+notable exception : the euclidean spaces Rk are vector spaces over the real field.
+2.2 Integration as a Linear Functional Analysis is full of vector spaces and linear transformations, and there is an especially close relationship between integration on the one hand and linear functionals on the other. For instance, Theorem 1 .32 shows that L1(f.l) is a vector space, for any posi
+tive measure f.l, and that the mapping
+(1)
+is a linear functional on L1(J1.). Similarly, if g is any bounded measurable function, the mapping
+t- lfg djJ (2)
+is a linear functional on L1(J1.) ; we shall see in Chap. 6 that the functionals (2) are,
+in a sense, the only interesting ones on L1(f.l).
+For another example, let C be the set of all continuous complex functions on the unit interval I = [0, 1]. The sum of the two continuous functions is contin
+uous, and so is any scalar multiple of a continuous function. Hence C is a vector space, and if
+Af= rf(x) dx (fE C), (3)
+the integral being the ordinary Riemann integral, then A is clearly a linear func
+tional on C; A has an additional interesting property: it is a positive linear func
+tional. This means that Af > 0 wheneverf > 0.
+One of the tasks which is still ahead of us is the construction of the Lebesgue measure. The construction can be based on the linear functional (3), by the fol lowing observation : Consider a segment (a, b) c I and consider the class of all
+f e C such that 0 <! < 1 on I and f(x) = 0 for all x not in (a, b). We have
+Af < b - a for all such f, but we can choose f so that Af is as close to b - a as
+desired. Thus the length (or measure) of (a, b) is intimately related to the values of
+the functional A.
+The preceding observation, when looked at from a more general point of view, leads to a remarkable and extremely important theorem of F. Riesz :
+To every positive linearfunctional A on C corresponds afinite positive Borel
+measure f.l on I such that
+(f E C).
+(
+4
+)
+
+
+POSITIVE BOREL MEASURES 35
+[The converse is obvious : if J1 is a finite positive Borel measure on I and if A is
+defined by (4), then A is a positive linear functional on C.]
+It is clearly of interest to replace the bounded interval I by R 1• We can do
+this by restricting attention to those continuous functions on R 1 which vanish
+outside some bounded interval. (These functions are Riemann integrable, for instance.) Next, functions of several variables occur frequently in analysis. Thus
+we ought to move from R 1 to R". It turns out that the proof of the Riesz theorem
+still goes through, with hardly any changes. Moreover, it turns out that the euclidean properties of R" (coordinates, orthogonality, etc.) play no role in the
+proof; in fact, if one thinks of thetn too much they just get in the way. Essential to the proof are certain topological properties of R". (Naturally. We are now
+dealing with continuous functions.) The crucial property is that of local com
+pactness : Each point of R" has a neighborhood whose closure is compact.
+We shall therefore establish the Riesz theorem in a very general setting (Theorem 2. 14). The existence of Lebesgue measure follows then as a special case.
+Those who wish to concentrate on a more concrete situation may skip lightly over the following section on topological preliminaries (Urysohn's lemma is the item of greatest interest there ; see Exercise 3) and may replace locally compact
+Hausdorff spaces by locally compact metric spaces, or even by euclidean spaces, without missing any of the principal ideas. It should also be mentioned that there are situations, especially in probability theory, where measures occur naturally on spaces without topology, or on topo logical spaces that are not locally compact. An example is the so-called Wiener measure which assigns numbers to certain sets of continuous functions and which is a basic tool in the study of Brownian motion. These topics will not be dis cussed in this book.
+Topological Preliminaries
+2.3 Definitions Let X be a topological space, as defined in Sec. 1.2.
+(a) A set E c X is closed if its complement Ec is open. (Hence 0 and X are
+closed, finite unions of closed sets are closed, and arbitrary intersections of closed sets are closed.) (b) The closure E of a set E c X is the smallest closed set in X which con
+tains E . (The following argument proves the existence of E : The collec tion Q of all closed subsets of X which contain E is not empty, since
+X e Q ; let E be the intersection of all members of Q.)
+(c) A set K c X is compact if every open cover of K contains a finite sub
+cover. More explicitly, the requirement is that if { �} is a collection of
+open sets whose union contains K, then the union of some finite sub
+collection of { Ya} also contains K.
+In particular, if X is itself compact, then X is called a compact space.
+(d) A neighborhood of a point p e X is any open subset of X which contains
+p. (The use of this term is not quite standardized ; some use
+
+
+36 REAL AND COMPLEX ANALYSIS
+" neighborhood of p " for any set which contains an open set containing
+p.)
+(e) X is a Hausdorffspace if the following is true: If p E X, q E X, and p =I= q,
+then p has a neighborhood U and q has a neighborhood V such that
+U n V = 0.
+(f) X is locally compact if every point of X has a neighborhood whose
+closure is compact.
+Obviously, every compact space is locally compact.
+We recall the Heine-Borel theorem: The compact subsets ofa euclidean space
+R" are precisely those that are closed and bounded ([26],t Theorem 2.41). From
+this it follows easily that R" is a locally compact Hausdorff space. Also, every metric space is a Hausdorff space.
+2.4 Theorem Suppose K is compact and F is closed, in a topological space X.
+IfF c K, then F is compact.
+PROOF If { �} is an open cover of F and W = Fe, then W u Ua � covers X;
+hence there is a finite collection { �J such that
+K
+c W u �1 u · · · u V«n .
+Then F c �1 u · · · U �n • Ill/
+Corollary IfA c B and ifB has compact closure, so does A.
+2.5 Theorem Suppose X is a Hausdorff space, K c X, K is compact, and
+p
+E Kc. Then there are open sets U and W such that p E U, K c W, and
+U n W = 0.
+PROOF If q E K, the Hausdorff separation axiom implies the existence of dis
+joint open sets Uq and � , such that p E Uq and q E � . Since K is compact,
+there are points qb . . . , qn E K such that
+K
+c �1 u · · · u Vq" .
+Our requirements are then satisfied by the sets
+Corollaries
+U = Uq1 n · · · n Uq" and W = �1 U · · · u Vqn · ////
+(a) Compact subsets ofHausdorffspaces are closed.
+(b) If F is closed and K is compact in a Hausdorff space, then F n K zs
+compact.
+Corollary (b) follows from (a) and Theorem 2.4.
+t Numbers in brackets refer to the Bibliography.
+
+
+POSITIVE BOREL MEASURES 37
+2.6 Theorem If {Ka} is a collection of compact subsets of a Hausdorff space
+and ifna Ka = 0, then somefinite subcollection of{Ka} also has empty inter
+section.
+PROOF Put � = K� . Fix a member K1 of {Ka}· Since no point of K1 belongs
+to every Ka , { �} is an open cover of K1. Hence K1 c �� u · · · u �" for
+some finite collection { �J. This implies that
+Ill/
+2.7 Theorem Suppose U is open in a locally compact Hausdorff space X,
+K
+c U, and K is compact. Then there is an open set V with compact closure
+such that
+K c V c V c U.
+PROOF Since every point of K has a neighborhood with compact closure,
+and since K is covered by the union of finitely many of these neighborhoods,
+K lies in an open set G with compact closure. If U = X, take V = G.
+Otherwise, let C be the complement of U. Theorem 2.5 shows tha!_!o
+each p E C there corresponds an open set W, such that K c W, and p ¢ WP .
+Hence {C n G n W,}, where p ranges over C, is a collection of compact sets
+with empty intersection. By Theorem 2.6 there are points Pb . . . , Pn E C such that
+The set
+V=GnW n···nW
+Pl Pn
+then has the required properties, since
+V
+C G (\ WPl (\ • • • (\ WPn • Ill/
+2.8 Definition Let f be a real (or extended-real) function on a topological
+space. If
+{x:f(x) > ex}
+is open for every real ex,fis said to be lower semicontinuous. If
+{x:f(x) < ex}
+is open for every real ex,fis said to be upper semicontinuous.
+A real function is obviously continuous if and only if it is both upper and lower semicontinuous. The simplest examples of semicontinuity are furnished by characteristic func tions :
+
+
+38 REAL AND COMPLEX ANALYSIS
+(a) Characteristic functions of open sets are lower semicontinuous.
+(b) Characteristic functions of closed sets are upper semicontinuous.
+The following property is an almost immediate consequence of the defini tions :
+(c) The supremum of any collection of lower semicontinuous functions is lower
+semicontinuous. The infimum of any collection of upper semicontinuous func
+tions is upper semicontinuous.
+2.9 Definition The support of a complex function f on a topological space X
+is the closure of the set
+{x:f(x) =F 0}.
+The collection of all continuous complex functions on X whose support is
+compact is denoted by Cc(X).
+Observe that Cc(X) is a vector space. This is due to two facts:
+(a) The support off + g lies in the union of the support off and the support
+of g, and any finite union of compact sets is compact.
+(b) The sum of two continuous complex functions is continuous, as are
+scalar multiples of continuous functions.
+(Statement and proof of Theorem 1.8 hold verbatim if " measurable function " is
+replaced by " continuous function," " measurable space " by " topological space " ;
+take q,(s, t) = s + t, or �s, t) = st, to prove that sums and products of contin
+uous functions are continuous.)
+2.10 Theorem Let X and Y be topological spaces, and letf: X---+ Y be contin
+uous. IfK is a compact subset ofX, thenf(K) is compact.
+PROOF If { �} is an open cover off(K), then {f - 1(�)} is an open cover of K,
+hence K c f - 1( �1) u · · · u f - t(�J for some cx1, . . • , cxn , and therefore
+f(K) c �1 u · · · u �" . IIII
+Corollary The range of any fe Cc(X) is a compact subset of the complex
+plane.
+In fact, if K is the support off e Cc(X), then f(X) c f(K) u {0}. If X is not
+compact, then 0 e f(X), but 0 need not lie inf(K), as is seen by easy examples.
+2.1 1 Notation In this chapter the following conventions will be used. The notation
+K <.f (1)
+
+
+POSITIVE BOREL MEASURES 39
+will mean that K is a compact subset of X, that / E Cc(X), that 0 <f(x) < 1
+for all x E X, and thatf(x) = 1 for all x E K. The notation
+!« v (2)
+will mean that V is open, that / E Cc(X), 0 < ! < 1, and that the support off
+lies in V. The notation
+K «f� V (3)
+will be used to indicate that both (1) and (2) hold.
+2.12 Urysohn's Lemma Suppose X is a locally compact Hausdorffspace, V is
+open in X, K c V, and K is compact. Then there exists anfE Cc(X),such that
+K «fc:< V. (1)
+In terms of characteristic functions, the conclusion asserts the existence of a continuous function f which satisfies the inequalities XK <f < Xv . Note that it is
+easy to find semicontinuous functions which do this ; examples are XK and Xv .
+PROOF Put r1 = 0, r2 = 1 , and let r3 , r4 , r5 , • • • be an enumeration of the
+rationals in (0, 1). By Theorem 2.7, we can find open sets V0 and then V1 such
+that V0 is compact and
+(2)
+Suppose n > 2 and V,.1 , • • • , V,." have been chosen in such a manner that
+ri < ri implies -v,.i c V,.i . Then one of the numbers rb . . . , rn , say ri , will be the
+largest one which is smaller than rn + 1 , and another, say ri , will be the smal
+lest one larger than rn + 1. Using Theorem 2.7 again, we can find V,."+ 1 so that
+-v,.j C V,.n+ 1 C -v,.n + 1 C V,.i •
+Continuing, we obtain a collection { V,.} of open sets, one for every
+rational r E [0, 1], with the following properties : K c Vb V0 c V, each -v,. is
+compact, and
+Define
+fr(x) = {� .
+and
+s > r implies � c V,..
+if X E V,. ,
+otherwise,
+f = sup /,. ,
+r
+g.(x) = {!
+s
+if X E � '
+otherwise,
+(3)
+(4)
+(5)
+The remarks following Definition 2.8 show that f is lower semi
+continuous and that g is upper semicontinuous. It is clear that 0 < ! < 1 , that
+
+
+40 REAL AND COMPLEX ANA LYSIS
+f(x) = 1 if x e K, and that f has its support in V0 . The proof will be com
+pleted by showing thatf = g.
+The inequality fr(x) > gs(x) is possible only if r > s, x e V,. , and x ¢ � .
+But r > s implies V,. c � . Hence/,. < gs for all r and s, sof < g.
+Suppose f(x) < g(x) for some x. Then there are rationals r and s such
+that f(x) < r < s < g(x). Since f(x) < r, we have x ¢ V,.; since g(x) > s, we
+have x e � . By (3), this is a contradiction. Hencef = g. /Ill
+2.13 Theorem Suppose Vb . . . , V, are open subsets ofa locally compact Haus
+dorffspace X, K is compact, and
+K c V1 u · · · u Vn .
+Then there existfunctions hi � f!i (i = 1, ..., n) such that (x E K). (1)
+Because of (1), the collection {hb . . . , hn} is called a partition of unity on K,
+subordinate to the cover { V1, • • • , V,}.
+PROOF By Theorem 2.7, each x e K has a neighborhood � with compact
+closure � c V; for some i (depending on x). There are points xb . . . , xm such
+that �1 u · · · u �m :::J K. If 1 < i < n, let Hi be the union of those
+Wxi which lie in V; . By Urysohn's lemma, there are functions gi such that
+Hi � gi � V;. Define
+h1 = g1
+h2 = (1 - g1)g2
+hn = (1 - g1)(1 - g2) · · · (1 - gn-l)gn·
+Then hi � V; . It is easily verified, by induction, that
+(2)
+h1 + h2 + · · · + hn = 1 - (1 - g1)(1 - g2) • • • (1 - gn)• (3)
+Since K c H1 u · · · u Hn , at least one gi(x) = 1 at each point x e K ; hence
+(3) shows that (1) holds. IIII
+The Riesz Representation Theorem
+2.14 Theorem Let X be a locally compact Hausdorff space, and let A be a
+positive linearfunctional on Cc(X). Then there exists a a-algebra 9Jl in X which
+contains all Borel sets in X, and there exists a unique positive measure J.l on 9Jl
+which represents A in the sense that
+(a) Af= JxfdJ.lfor everyfE Cc(X),
+and which has thefollowing additional properties:
+
+
+POSITIVE BOREL MEASURES 4 1
+(b) Jl(K) < oofor every compact set K c X.
+(c) For every E E9Jl, we have
+Jl(E) = inf {!1(V): E c V, V open}. (d) The relation
+11(E) = sup {Jl(K): K c E, K compact}
+holdsfor every open set E, andfor every E e9Jl with Jl(E) < oo.
+(e) IfE E9Jl, A c E, and Jl(E) = 0, then A e IDl.
+For the sake of clarity, let us be more explicit about the meaning of the word " positive " in the hypothesis : A is assumed to be a linear functional on the complex vector space Cc(X), with the additional property that Afis a nonnegative
+real number for every f whose range consists of nonnegative real numbers.
+Briefly, iff(X) c [0, oo) then Afe [0, oo).
+Property (a) is of course the one of greatest interest. After we define9Jl and Jl,
+(b) to (d) will be established in the course of proving that9Jl is a a-algebra and
+that 11 is countably additive. We shall see later (Theorem 2. 1 8) that in " reasonable " spaces X every Borel measure which satisfies (b) also satisfies (c)
+and (d) and that (d) actually holds for every E E9Jl, in those cases. Property (e)
+merely says that (X,9Jl, 11) is a complete measure space, in the sense of Theorem
+1.36.Throughout the proof of this theorem, the letter K will stand for a compact
+subset of X, and V will denote an open set in X.
+Let us begin by proving the uniqueness of Jl. If 11 satisfies (c) and (d), it is clear
+that 11 is determined on 9Jl by its values on compact sets. Hence it suffices to
+prove that /11(K) = Jl2(K) for all K, whenever 111 and 112 are measures for which
+the theorem holds. So, fix K and E > 0. By (b) and (c), there exists a V :::J K with
+Jl2(V) < Jl2(K) + E; by Urysohn's lemma, there exists an f so that K -<..f-<.. V;
+hence
+Jll(K) = I XK dJ11 < IfdJ11 = Af= If dJ12
+< I Xv dJ12 = J12(V) < J12(K) + E.
+Thus /11(K) < Jl2(K). If we interchange the roles of 111 and 112 , the opposite
+inequality is obtained, and the uniqueness of 11 is proved. Incidentally, the above computation shows that (a) forces (b).
+Construction of11 and9Jl
+For every open set V in X, define
+Jl(V) = sup {Af: f-<.. V}. (1)
+
+
+42 REAL AND COMPLEX ANALYSIS
+If V1 c V2 , it is clear that (1) implies Jl(Vd < Jl(V2). Hence
+Jl(E) = inf {Jl(V): E c V, V open}, (2)
+if E is an open set, and it is consistent with (1) to define Jl(E) by (2), for every
+E
+c X.
+Note that although we have defined Jl(E) for every E c X, the countable
+additivity of Jl will be proved only on a certain a-algebra 9Jl in X.
+Let IDlF be the class of all E c X which satisfy two conditions : Jl(E) < oo, and
+Jl(E) = sup {Jl(K): K c E, K compact}. (3)
+Finally, let 9Jl be the class of all E c X such that E n K e IDlF for every compact
+K.
+Proofthat Jl and 9Jl have the required properties
+It is evident that Jl is monotone, i.e., that Jl(A) < Jl(B) if A c B and that
+Jl(E) = 0 implies E e IDlF and E e IDl. Thus (e) holds, and so does (c), by defini
+tion. Since the proof of the other assertions is rather long, it will be convenient to divide it into several steps. Observe that the positivity of A implies that A is monotone : f < g implies
+Af < Ag. This is clear, since Ag = Af+ A(g -f) and g -f> 0. This monot
+onicity will be used in Steps II and X.
+STEP I IfE1, E2 , E3 , • • • are arbitrary subsets ofX, then
+(4)
+PROOF We first show that
+(5)
+if V1 and V2 are open. Choose g � V1 u V2 • By Theorem 2. 13 there are func
+tions h1 and h2 such that hi � V; and h1(x) + h2(x) = 1 for all x in the
+support of g. Hence hig � V; , g = h1g + h2 g, and so
+(6)
+Since (6) holds for every g � V1 u V2 , (5) follows.
+If Jl(Ei) = oo for some i, then (4) is trivially true. Suppose therefore that
+Jl(Ei) < oo for every i. Choose E > 0. By (2) there are open sets V; => Ei such
+that
+(i = 1' 2, 3' . . .).
+
+
+POSITIVE BOREL MEASURES 43
+Put V = Uf � , and choose /� V. Since f has compact support, we see that
+f� V1 u · · · u V,. for some n. Applying induction to (5), we therefore obtain
+00
+Af
+< ,u(v1 u . . . u Vn) < ,u(v1) + . . . + ,u(Vn) < L ,u(Ei) + E.
+i=1
+Since this holds for every f� V, and since U Ei c V, it follows that
+.u(91 E) < ,u(V) < J/(Ei) + E,
+which proves (4), since E was arbitrary. /Ill
+STEP II IfK is compact, then K e 9RF and ,u(K) = inf {Af: K �f}.
+(
+7
+)
+This implies assertion (b) of the theorem.
+PROOF If K �� and 0 < rx < 1, let � = {x: f(x) > rx}. Then K c �, and
+rxg <fwhenever g � � . Hence
+JJ(K) < Jl(�) = sup {Ag: g � �} < rx-1Af
+Let rx � 1, to conclude that
+Jl(K) < Af. (8)
+Thus Jl(K) < oo. Since K evidently satisfies (3), K e 9RF .
+If E > 0, there exists V :::J K with Jl(V) < Jl(K) + E. By Urysohn's lemma,
+K ��� V for somef Thus
+Af< Jl(V) < Jl(K) + E,
+which, combined with (8), gives (7). Ill/
+STEP III Every open set satisfies (3). Hence 9RF contains every open set V with
+Jl(V) < oo.
+PROOF Let rx be a real "number such that rx < Jl(V). There exists anf� V with
+rx
+< Af If W is any open set which contains the support K off, then f� W,
+hence Af < Jl(W). Thus Af < Jl(K). This exhibits a compact K c V with
+rx
+< JJ(K), so that (3) holds for V. /Ill
+STEP IV Suppose E = u�1 Ei, where E1, E2' E3' ... are'pairwise disjoint members
+of9RF. Then
+(
+9
+)
+i=1
+If, in addition, Jl(E) < oo, then also E e 9RF.
+
+
+44 REAL AND COMPLEX ANALYSIS
+PROOF We first show that
+( 1 0)
+if K1 and K2 are disjoint compact sets. Choose E > 0. By Urysohn's lemma,
+there exists fE Cc(X) such that f(x) = 1 on K1, f(x) = 0 on K2 , and
+0 <f < 1. By Step II there exists g such that
+K1 u K2 -< g and Ag < Jl(K1 u K2) + E.
+Note that K1 -<fg and K2 -< (1 -f)g. Since A is linear, it follows from (8)
+that
+Since E was arbitrary, (10) follows now from Step I.
+If J1(E) = oo, (9) follows from Step I. Assume therefore that J1(E) < oo,
+and choose E > 0. Since Ei E IDlF , there are compact sets Hi c Ei with
+(i = 1, 2, 3, . . .).
+Putting Kn = H1 u · · · u Hn and using induction on (10), we obtain
+nn
+Jl(E) > J1(Kn) = L J1(Hi) > L J1(Ei) - E.
+i=1 i=l
+(1 1)
+( 1 2)
+Since (12) holds for every n and every E > 0, the left side of (9) is not smaller
+than the right side, and so (9) follows from Step I.
+But ifJ1(E) < oo and E > 0, (9) shows that
+N
+J1(E) < L J1(Ei) + E (13)
+i=1
+for some N. By (12), it follows that Jl(E) < J1(KN) + 2E, and this shows that E
+satisfies (3) ; hence E E IDlF . IIII
+STEP v If E E IDlF and E > 0, there is a compact K and an open V such that
+K
+c E c V and J1(V - K) < E.
+PROOF Our definitions show that there exist K c E and V :::J E so that
+EE
+J1(V) - 2 < Jl(E) < J1(K) + 2.
+Since V - K is open, V - K E IDlF , by Step III. Hence Step IV implies that
+J1(K) + J1(V - K) = J1(V) < J1(K) + E. /Ill
+STEP VI IfA E IDlF and B E IDlF, then A - B, A u B, and A n B belong to IDlF.
+
+
+POSITIVE BOREL MEASURES 45
+PROOF If E > 0, Step V shows that there are sets Ki and- V; such that
+K1 c A c V1, K2 c B c V2 , and ,u( V; - Ki) < E, for i = 1, 2. Since
+A - B c V1 - K2 c ( V1 - K 1) u (K 1 - V2) u ( V2 - K2),
+Step I shows that
+(14)
+Since K 1 - V2 is a compact subset of A - B, (14) shows that A - B satisfies (3), so that A - B E IDlF .
+Since A u B = (A - B) u B, an application of Step IV shows that
+A u B E IDlp . Since A n B = A - (A - B), we also have A n B E IDlp . /Ill
+STEP vn 9Jl is a a-algebra in X which contains all Borel sets.
+PROOF Let K be an arbitrary compact set in X.
+If A E IDl, then Ac n K = K - (A n K), so that Ac n K is a difference of two members of JtF . Hence Ac n K E IDlF , and we conclude : A E 9Jl implies
+Ac E 9Jl.
+Next, suppose A = U 'f Ai , where each Ai E IDl. Put B1 = A 1 n K, and
+(n = 2, 3, 4, . . .). (15)
+Then {Bn} is a disjoint sequence of members of IDlF , by Step VI, and
+A n K = U 'f Bn . It follows from Step IV that A n K E IDlF . Hence A E IDl.
+Finally, if C is closed, then C n K is compact, hence C n K E IDlF , so
+C E IDl. In particular, X E IDl.
+We have thus proved that 9Jl is a a-algebra in X which contains all
+closed subsets of X. Hence 9Jl contains all Borel sets in X. /Ill
+STEP VIII IDlF consists ofprecisely those sets E E 9Jlfor which J.l(E) < oo.
+This implies assertion (d) of the theorem.
+PROOF If E E IDlF , Steps II and VI imply that E n K E IDlF for every compact K, hence E E IDl. Conversely, suppose E E 9Jl and ,u(E) < oo, and choose E > 0. There is an
+open set V :::::> E with ,u( V) < oo ; by III and V, there is a compact K c V with
+,u( V - K) < E. Since E n K E IDlp , there is a compact set H c E n K with
+,u(E n K) < ,u(H) + E.
+Since E c (E n K) u ( V - K), it follows that
+,u(E) < J.l(E n K) + ,u(V - K) < J.l(H) + 2E,
+which implies that E E IDlF . Ill/
+STEP IX ,u is a measure on IDl.
+
+
+46 REA L AND COMPLEX ANALYSIS
+PROOF The countable additivity of J.l on 9Jl follows immediately from Steps
+IV and VIII. IIII
+STEP X For everyfE Cc(X), Af= Jx fdj.J,.
+This proves (a), and completes the theorem.
+PROOF Clearly, it is enough to prove this for real f Also, it is enough· to
+prove the inequality
+(16)
+for every real f E Cc(X). For once (16) is establi��hed, the linearity of A shows
+that
+-Af= A(-f) < l(-/) dJ.l = - lfdp.,
+which, together with (16), shows that equality holds in (16).
+Let K be the support of a real f E Cc(X), let [a, b] be an interval which
+contains the range off (note the Corollary to Theorem 2. 10), choose E > 0,
+and choose Yi , for i = 0, 1, . . . , n, so that Yi - Yi- 1 < E and
+Yo < a < Y1 < · · · < Yn = b. (17)
+Put
+Ei = {x: Yi- 1 <f(x) < Yi} n K (i = 1, . . . , n). (18)
+Since f is continuous, f is Borel measurable, and the sets Ei are therefore
+disjoint Borel sets whose union is K. There are open sets V; => Ei such that
+(i = 1, ..., n) (19)
+and such that f(x) < Yi + E for all x E V; . By Theorem 2. 1 3, there are func
+tions hi � V; such that L hi = 1 on K. Hence f = L hi f, and Step II shows
+that
+
+
+POSITIVE BOREL MEASURES 47
+Since h;f< (Y; + e)h; , and since Y; - E <f(x) on E; , we have
+nn
+Af= L A(h;f) < L (Y; + e)Ah;
+i= 1 i= l
+nn
+= L(IaI + Y; + e)Ah; - IaI L Ah;
+i= l i= l
+n
+< L (I aI + Y; + e)[JJ(E;) + eln] - I aIJJ(K)
+i= 1
+n €n
+= L (y; - e)JJ(E;) + 2eJJ(K) + - L (I aI + Yi + e)
+i= l n i= 1
+< LfdJt + E[2�t(K) + I aI + b + E].
+Since e was arbitrary, ( 1 6) is established, and the proof of the theorem is
+complete. IIII
+Regularity Properties of Borel Measures
+2.15 Definition A measure Jl defined on the a--algebra of all Borel sets in a locally compact Hausdorff space X is called a Borel measure on X. If Jl is
+positive, a Borel set E c X is outer regular or inner regular, respectively, if E
+has property (c) or (d) of Theorem 2. 14. If every Borel set in X is both outer
+and inner regular, Jl is called regular.
+In our proof of the Riesz theorem, outer regularity of every set E was
+built into the construction, but inner regularity was proved only for the open sets and for those E e IDl for which JJ(E) < oo. It turns out that this flaw is in
+the nature of things. One cannot prove regularity of JJ under the hypothesis of Theorem 2..14; an example is described in Exercise 17.
+However, a slight strengthening of the hypotheses does give us a regular measure. Theorem 2. 1 7 shows this. And if we specialize a little more,
+Theorem 2. 1 8 shows that all regularity problems neatly disappear. .
+2.16 Definition A set E in a topological space is called u-compact if E is a
+countable union of compact sets. A set E in a measure space (with measure JJ) is said to have u-finite
+measure if E is a countable union of sets E; with JJ(E;) < oo.
+For example, in the situation described in Theorem 2. 14, every a- compact set has a--finite measure. Also, it is easy to see that if E e IDl and E
+has u-finite measure, then E is inner regular.
+
+
+48 REAL AND COMPLEX ANALYSIS
+2.17 Theorem Suppose X is a locally compact, a-compact Hausdorffspace. If
+9J1 and J1 are as described in the statement ofTheorem 2.14, then 9Jl and J1 have
+thefollowing properties:
+(a) If E E 9Jl and E > 0, there is a closed set F and an open set V such that
+F
+c E c V and Jl(V - F) < E.
+(b) J1 is a regular Borelmeasure on X.
+(c) If E E 9Jl, there are sets A and B such that A zs an Fa, B is a GtS,
+A
+c E c B, and J1(B - A) = 0.
+As a corollary of (c) we see that every E E9Jl is the union of an Fa and a set
+of measure 0.
+PROOF Let X = K1 u K2 u K3 u · · · , where each Kn is compact. If E E9Jl
+and E > 0, then Jl(Kn n E) < oo, and there are open sets V, :::J Kn n E such
+that
+(n = 1, 2, 3, ...). (1)
+If V = U V, , then V - E c U (V, - (Kn n E)), so that
+E
+J1(
+V
+
+E
+)
+<
+2
+.
+Apply this to Ec in place of E: There is an open set W :::J Ec such that
+J1(W - Ec) < E/2. If F = we, then F c E, and E - F = W - Ec. Now (a)
+follows. Every closed set F c X is a-compact, because F = U (F n Kn). Hence
+(a) implies that every set E E 9Jl is inner regular. This proves (b).
+If we apply (a) with E = 1/j U = 1, 2, 3, . . .), we obtain closed sets Fi and
+open sets l-j such that Fi c E c l-j and Jl( l-} - Fi) < 1/j. Put A = U Fi and
+B = n l-j . Then A c E c B, A is an Fa , B is a GtS , and J1(B - A) = 0 since
+B - A c l-j - Fi forj = 1, 2, 3, . . . . This proves (c). /Ill
+2.18 Theorem Let X be a locally compact Hausdorffspace in which every open
+set is a-compact. Let A be any positive Borel measure on X such that A(K) < oo
+for every compact set K. Then A is regular.
+Note that every euclidean space Rk satisfies the present hypothesis, since
+every open set in Rk is a countabie union of closed balls.
+
+
+POSITIVE BOREL MEASURES 49
+PROOF Put Af= Jx f dA., forfe Cc(X). Since A.(K) < oo for every compact K,
+A is a positive linear functional on Cc(X), and there is a regular measure Jl,
+satisfying the conclusions of Theorem 2. 17, such that
+(1)
+We will show that A. = Jl.
+Let V be open in X. Then V = U Ki , where Ki is compact,
+i = 1, 2, 3, . . . . By Urysohn's lemma we can choose_h so that Ki <...h <.. V. Let
+9n = max (/b . . . , fn). Then 9n E Cc(X) and 9n(x) increases to Xv(x) at every
+point x e X. Hence (1) and the monotone convergence theorem imply
+A(V) = lim f 9n dA = lim f 9n dp. = p.(V) .
+n- oo Jx n- oo Jx (2)
+Now let E be a Borel set in X, and choose E > 0. Since J.l satisfies Theo
+rem 2. 17, there is a closed set F and an open set V such that F c E c V and
+Jl(V - F) < E. Hence Jl(V) < Jl(F) + E < Jl(E) + E.
+Since V - F is open, (2) shows that A.(V - · F) < E, hence A.(V) � A.(E) + E.
+Consequently
+and
+A.(E) < A.(V) = Jl(V) < Jl(E) + E
+Jl(E) < Jl(V) = A.(V) < A.(E) + E '
+so that I A.(E) - Jl(E) I < E for every E > 0. Hence A.(E) = JL(E). /Ill
+In Exercise 1 8 a compact Hausdorff space is described in which the com
+plement of a certain point fails to be a-compact and in which the conclusion of the preceding theorem is not true.
+Lebesgue Measure
+2.19 Euclidean Spaces Euclidean k-dimensional space Rk is the set of all points
+x = (� 1, . . 0 , �k) whose coordinates �i are real numbers, with the following alge
+braic and topological structure : If x = (�1, • . . , �k), y = (171, . . . , 11k), and ex is a real number, x + y and cxx are
+defined by
+(1)
+This makes Rk into a real vector space. If x · y = L �; 1'/; and I x I = (x · x)112, the
+Schwarz inequality I x 0 y I < I x I I y ! leads to the triangle inequality
+lx - yl < lx - zl + lz - yl ; (2)
+hence we obtain a metric by setting p(x, y) = I x - y 1 . We assume that these facts
+are familiar and shall prove them in greater generality in Chap. 4.
+
+
+50 REA L AND COMPLEX ANALYSIS
+If E c Rk and x e Rk, the translate ofE by x is the set
+E + X = {y + x: y E E}.
+A set of the form
+W = {X: (Xi < �i < {3i, 1 < i < k},
+(3)
+(4)
+or any set obtained by replacing any or all of the < signs in (4) by < , is called a
+k-cell; its volume is defined to be
+k
+vol (W) = fl (f3i - rxi). (5)
+i=1
+If a e Rk and b > 0, we shall call the set
+Q(a; b) = {x: rxi < �i < rxi + b, 1 < i < k} (6)
+the b-box with corner at a. Here a = (rxb . . . , rxk).
+For n = 1, 2, 3, . . . , we let Pn be the set of all x e Rk whose coordinates are
+integral multiples of 2 -n, and we let nn be the collection of all 2 - n boxes with
+corners at points of Pn . We shall need the following four properties of {!ln}· The
+first three are obvious by inspection.
+(a) Ifn isfixed, each x e Rk lies in one and only one member of!ln.
+(b) IfQ' E nn ' Q" E Qr' and r < n, then either Q' c Q" or Q' n Q" = 0.
+(c) If Q E nr, then vol (Q) = 2-rk; and if n > r, the set pn has exactly 2(n-r)k
+points in Q.
+(d) Every nonempty open set in Rk is a countable union ofdisjoint boxes belonging
+to 01 u 02 u 03 u · · · .
+PROOF OF (d) If V is open, every x e V lies in an open ball which lies in V ;
+hence x E Q c V for some Q belonging to some Qn . In other words, V is the
+union of all boxes which lie in V and which belong to some Qn . From this
+collection of boxes, select those which belong to Qb and remove those in 02 ,
+03 , . . . which lie in any of the selected boxes. From the remaining collection,
+select those boxes of 02 which lie in V, and remove those in 03 , 04 , • • •
+which lie in any of the selected boxes. If we proceed in this way, (a) and (b)
+show that (d) holds. /Ill
+2.20 Theorem There exists a positive complete measure m defined on a u
+algebra 9Jl in Rk, with thefollowing properties:
+(a) m(W) = vol (W)for every k-cell W.
+(b) 9Jl contains all Borel sets in Rk; more precisely, E e 9Jl ifand only ifthere
+are sets A and B c Rk such that A c E c B, A is an Fa, B is a G�, and
+m(B - A) = 0. Also, m is regular.
+
+
+POSITIVE BOREL MEASURES 5 1
+(c) m is translation-invariant, i.e.,
+m(E + x) = m(E)
+for every E e9Jl and every x e Rk.
+(d) If J1 is any positive translation-invariant Borel measure on Rk such that
+J1(K) < oo for every compact set K, then there is a constant c such that
+J1(E) = cm(E)for all Borel sets E c Rk.
+(e) To every linear transformation T ofRk into Rk corresponds a real number
+A(T) such that
+m(T(E)) = A(T)m(E)
+for every E e IDl. In particular, m(T(E)) = m(E) when T is a rotation.
+The members of9Jl are the Lebesgue measurable sets in Rk; m is the Lebesgue
+measure on Rk. When clarity requires it, we shall write mk in place of m.
+PROOF Iffis any complex function on Rk, with compact support, define
+An f= 2-nk L f(x) (n = 1, 2, 3, .. .), (1)
+x e Pn
+where Pn is as in Sec. 2. 19.
+Now suppose f e Cc(Rk), f is real, W is an open k-cell which contains the
+support of f, and E > 0. The uniform continuity of f([26], Theorem 4. 19)
+shows that there is �n integer N and that there are functions g and h with
+support in W, such that (i) g and h are constant on each box belonging to
+QN , (ii) g <f< h, and (iii) h - g < E. If n > N, Property 2.19(c) shows that
+(2)
+Thus the upper and lower limits of {An /} differ by at most E vol (W), and
+since E was arbitrary, we have proved the existence of
+Af= lim Anf (3)
+It is immediate that A is a positive linear functional on Cc(Rk). (In fact, Af
+is precisely the Riemann integral offover Rk. We went through the preceding
+construction in order not to have to rely on any theorems about Riemann
+integrals in several variables.)
+We define m and9Jl to be the measure and a-algebra associated with this A
+as in Theorem 2.14.
+Since Theorem 2.14 gives us a complete measure and since Rk is u
+compact, Theorem 2. 17 implies assertion (b) of Theorem 2.20.
+
+
+52 REAL AND COMPLEX ANALYSIS
+To prove (a), let W be the open cell 2. 19(4), let Er be the union of those
+boxes belonging to Qr
+w
+h
+o
+s
+e
+c
+l
+o
+s
+u
+r
+e
+s
+l
+i
+e
+i
+n
+W
+,
+c
+h
+o
+o
+s
+e
+/,.
+s
+o
+t
+h
+a
+t
+E
+r
+-<
+/,. -< W, and put gr = max {/1, • . . ,!,.}. Our construction of A shows that
+(4)
+As r� oo, vol (Er) � vol (W), and
+Ag, = Ig, dm---+ m(W) (5)
+by the monotone convergence theorem, since gr(x) � Xw(x) for all x e Rk.
+Thus m(W) = vol (W) for every open cell W, and since every k-cell is the
+intersection of a decreasing sequence of open k-cells, we obtain (a). The proofs of (c), (d), and (e) will use the following observation : If A. is a
+positive Borel measure on Rk and A.(E) = m(E) for all boxes E, then the same
+equality holds for all open sets E, by property 2. 19(d), and therefore for all
+Borel sets E, since A. and m are regular (Theorem 2.1 8).
+To prove (c), fix x e Rk and define A.(E) = m(E + x). It is clear that A. is
+then a measure; by (a), A.(E) = m(E) for all boxes, hence m(E + x) = m(E) for
+all Borel sets E. The same equality holds for every E e IDl, because of (b).
+Suppose next that J1 satisfies the hypotheses of (d). Let Q0 be a 1-box, put c = J1(Q0). Since Q0 is the union of 2nk disjoint 2 -n boxes that are translates
+of each other, we have
+2"kJ1(Q) = J1(Q0) = cm(Q0) = c · 2nkm(Q)
+for every 2 -"-box Q. Property 2.19(d) implies now that J1(E) = em(E) for all
+open sets E c Rk. This proves (d).
+To prove (e), let T : Rk � Rk be linear. If the range of T is a subspace Y
+of lower dimension, then m( Y) = 0 and the desired conclusion holds with
+A(T) = 0. In the other case, elementary linear algebra tells us that T is a
+one-to-one map of Rk onto Rk whose inverse is also linear. Thus T is a
+homeomorphism of Rk onto Rk, so that T(E) is a Borel set for every Borel set
+E, and we can therefore define a positive Borel measure J1 on Rk by
+J1(E) = m(T(E)).
+The linearity of T, combined with the translation-invariance of m, gives
+J1(E + x) = m(T(E + x)) = m(T(E) + Tx) = m(T(E)) = J1(E).
+Thus J1 is translation-invariant, and the first assertion of (e) follows from
+(d), first for Borel sets E, then for all E e IDl by (b).
+To find A(T), we merely need to know m(T(E))/m(E) for one set E with
+0
+< m(E) < oo. If T is a rotation, let E be the unit ball of Rk ; then T(E) = E,
+and A(T) = 1. ////
+
+
+POSITIVE BOREL MEASURES 53
+2.21 Remarks If m is the Lebesgue measure on Rk, it is customary to write L1(Rk)
+in place of L1(m). If E is a Lebesgue measurable subset of Rk, and if m is restricted
+to the measurable subsets of E, a new measure space is obtained in an obvious
+fashion. The phrase "f E L1 on E " or "f e L1(E) " is used to indicate that f is
+integrable on this measure space.
+If k = 1, if I is any of the sets (a, b), (a, b], [a, b), [a, b], and iffe L1(I), it is
+customary to write
+rf(x) dx in place of ifdm.
+Since the Lebesgue measure of any single point is 0, it makes no difference over
+which of these four sets the integral is extended. Everything learned about integration in elementary Calculus courses is still
+useful in the present context, for iff is a continuous complex function on [a, b],
+then the Riemann integral offand the Lebesgue integral offover [a, b] coincide.
+This is obvious from our construction iff(a) = f(b) = 0 and iff(x) is defined to be
+0 for x < a and for x > b. The general case follows without difficulty. Actually
+the same thing is true for every Riemann integrable f on [a, b]. Since we shall
+have no occasion to discuss Riemann integrable functions in the sequel, we omit the proof and refer to Theorem 1 1.33 of [26].
+Two natural questions may have occurred to some readers by now : Is every Lebesgue measurable set a Borel set ? Is every subset of Rk Lebesgue measurable?
+The answer is negative in both cases, even when k = 1.
+The first question can be settled by a cardinality argument which we sketch briefly. Let c be the cardinality of the continuum (the real line or, equivalently, the collection of all sets of integers). We know that Rk has a countable base (open
+balls with rational radii and with centers in some countable dense subset of Rk),
+and that &lk (the collection of all Borel sets of Rk) is the �-algebra generated by this base. It follows from this (we omit the proof) that PAk has cardinality c. On
+the other hand, there exist Cantor sets E c R1 with m(E) = 0. (Exercise 5.) The
+completeness of m implies that each of the 2c subsets of E is Lebesgue measur
+able. Since 2c > c, most subsets of E are not Borel sets.
+The following theorem answers the second question.
+2.22 Theorem If A c R1 and every subset of A is Lebesgue measurable then
+m(A) = 0.
+Corollary Every set ofpositive measure has nonmeasurable subsets.
+PROOF We shall use the fact that R1 is a group, relative to addition. Let Q be
+the subgroup that consists of the rational numbers, and let E be a set that
+contains exactly one point from each coset of Q in R1. (The assertion that
+
+
+54 REAL AND COMPLEX ANALYSIS
+there is such a set is a direct application of the axiom of choice.) Then E has
+the following two properties.
+(a) (E + r) n (E + s) = 0 ifr e Q, s e Q, r =1= s.
+(b) Every x e R1 lies in E + r for some r e Q.
+To prove (a), suppose x e (E + r) n (E + s). Then x = y + r = z + s for
+some y e E, z e E, y =1= z. But y - z = s - r e Q, so that y and z lie in the
+same coset of Q, a contradiction.
+To prove (b), let y be the point of E that lies in the same coset as x, put
+r = x - y.
+Fix t e Q, for the moment, and put At = A n (E + t). By hypothesis, At
+is measurable. Let K c At be compact, let H be the union of the translates
+K + r, where r ranges over Q n [0, 1]. Then H is bounded, hence m(H) < oo.
+Since K c E + t, (a) shows that the sets K + r are pairwise disjoint. Thus
+m(H) = Lr m(K + r). But m(K + r) = m(K). It follows that m(K) = 0. This
+holds for every compact K c At . Hence m(At) = 0.
+Finally, (b) shows that A = U At , where t ranges over Q. Since Q is
+countable, we conclude that m(A) = 0. /Ill
+2.23 Determinants The scale factors �(T) that occur in Theorem 2.20(e) can be
+interpreted algebraically by means of determinants. Let {e1, • • . , ek} be the standard basis for Rk : the ith coordinate of ei is 1 if
+i = j, 0 if i =1= j. If T: Rk � Rk is linear and
+k
+Te . = """ rx. . e.
+J � l) l
+i= 1 (1 < j < k) (1)
+then det T is, by definition, the determinant of the matrix [T] that has rxii in row
+i and column j.
+We claim that
+A(T) = I det T I . (2)
+If T = T1 T2 , it is clear that �(T) = �(T1)�(T2). The multiplication theorem
+for determinants shows therefore that if (2) holds for T1 and T2 , then (2) also
+holds for T. Since every linear operator on Rk is a product of finitely many linear
+operators of the following three types, it suffices to establish (2) for each of these :
+(I) {Te1, . . . , Tek} is a permutation of {e1, . . • , ek}·
+(II) Te1 = rxe1, Tei = e; for i = 2, . . . , k.
+(III) Te1 = e1 + e2 , Te; = e; for i = 2, . . . , k.
+Let Q be the cube consisting of all x = (�1, . . . , �k) with 0 < �; < 1 for
+i = 1, . . . ' k.
+If T is of type (1), then [T] has exactly one 1 in each row and each column
+and has 0 in all other places. So det T = + 1. Also, T(Q) = Q. So
+A(T) = 1 = l det T l .
+
+
+POSITIVE BOREL MEASURES 55
+If T is of type (II), then clearly A(T) = I r:t. l = I det T 1.
+If T is of type (III), then det T = 1 and T(Q) is the set of all points L �i ei
+whose coordinates satisfy
+�1 < �2 < �1 + 1, 0 < �i < 1 if i =1= 2. (3)
+If S1 is the set of points in T(Q) that have �2 < 1 and if S2 is the rest of T(Q), then
+(4) and S1 n (S2 - e2) is empty. Hence A(T) = m(S1 u S2) = m(S1) + m(S2 - e2) =
+m(Q) = 1, so that we again have A(T) = I det T 1 .
+Continuity Properties of Measurable Functions
+Since the continuous functions played such a prominent role in our construction of Borel measures, and of Lebesgue measure in particular, it seems reasonable to expect that there are some interesting relations between continuous functions and measurable functions. In this section we shall give two theorems of this kind.
+We shall assume, in both of them, that J1 is a measure on a locally compact
+I-Iausdorffspace X which has the properties stated in Theorem 2.14. In particular,
+J1 could be Lebesgue measure on some Rk.
+2.24 Lusin's Theorem Suppose f is a complex measurable function on X,
+Jl(A) < oo,f(x) = 0 ifx ¢ A, and E > 0. Then there exists a g E Cc(X) such that
+Jl({X :f(X) # g(X)}) < €. (1)
+Furthermore, we may arrange it so that
+sup I g(x) I < sup I f(x) 1 . (2)
+xeX xeX
+PROOF Assume first that 0 < f < 1 and that A is compact. Attach a sequence
+{sn} to f, as in the proof of Theorem 1.17, and put t1 = s1 and tn = sn - sn- l
+for n = 2, 3, 4, . . . . Then 2ntn is the characteristic function of a set T, .c A, and
+00
+f(x) = L tn(x) (x E X). (3)
+n=1
+Fix an open set V such that A c V and V is compact. There are compact
+sets Kn and open sets V,. such that Kn c T, c V,. c V and J1(V,. - Kn) < 2-n€.
+By Urysohn's lemma, there are functions hn such that Kn -< hn -< V, . Define
+00
+g(x) = L 2-nhn(x) (x E X). (4)
+n=1
+This series converges uniformly on X, so g is continuous. Also, the support of
+g lies in V. Since 2-nhn(x) = tn(x) except in V,. - Kn , we have g(x) =f(x)
+
+
+56 REAL AND COMPLEX ANALYSIS
+except in U (V,. - Kn), and this latter set has measure less than E. Thus (1)
+holds if A is compact and 0 <! < 1.
+It follows that (1) holds if A is compact and f is a bounded measurable
+function. The compactness of A is easily removed, for if Jl(A) < oo then A
+contains a compact set K with Jl(A - K) smaller than any preassigned posi
+tive number. Next, if f is a complex measurable function and if Bn =
+{x: I f(x) I > n}, then n Bn = 0, so Jl(Bn)� 0, by Theorem 1.19(e). Since f
+coincides with the bounded function (1 - XB) · f except on Bn , (1) follows in
+the general case. Finally, let R = sup { I f(x) I : x E X}, and define <p(z) = z if I z I < R,
+<p(z) = Rzj lz I if I z I > R. Then <p is a continuous mapping of the complex
+plane onto the disc of radius R. If g satisfies (1) and g1 = <p o g, then g1
+satisfies (1) and (2). /Ill
+Corollary Assume that the hypotheses ofLusin's theorem are satisfied and that
+IfI < 1. Then there is a sequence {gn} such that gn E Cc(X), IgnI < 1,and
+f(x) = lim gn(x) a.e. (5)
+PROOF The theorem implies that to each n there corresponds a gn E Cc(X),
+with I gn I < 1, such that Jl(En) < 2-n, where En is the set of all x at which
+f(x) =I= gn(x). For almost every x it is then true that x lies in at most finitely
+many of the sets En (Theorem 1.41). For any such x, it follows that f(x) =
+gn(x) for all large enough n. This gives (5). /Ill
+2.25 The Vitali-Caratheodory Theorem Suppose f E L1(Jl), f is real-valued, and
+E > 0. Then there existfunctions u and v on X such that u <f< v, u is upper
+semicontinuous and bounded above, v is lower semicontinuous and bounded
+below, and
+1(v - u) dJl < E. (1)
+PROOF Assume first that f > 0 and that f is not identically 0. Since f is the
+pointwise limit of an increasing sequence of simple functions sn , f is the sum
+Of the simple functions tn = Sn - Sn _ 1 (taking So = 0), and since tn is a linear
+combination of characteristic functions, we see that there are measurable sets Ei (not necessarily disjoint) and constants ci > 0 such that
+00
+f(x) = L ciXE;(x) (x E X). (2)
+i=1
+
+
+POSITIVE BOREL MEASURES 57
+Since
+(3)
+the series in (3) converges. There are compact sets Ki and open sets V; such
+that Ki c Ei c V; and
+Put
+00
+v = L CiXVi'
+i=1
+(i = 1, 2, 3, . . .).
+N
+u = L ciXKi'
+i=1
+where N is chosen so that
+Then v is lower semicontinuous, u is upper semicontinuous, u < f < v, and
+Noo
+v - u = L ci(Xvi - XKi) + L ciXvi
+i=l N+l
+0000
+< L ci(Xvi - XKi) + L ciXEi
+i=1 N+1
+so that (4) and (6) imply (1).
+(4)
+(5)
+(6)
+In the general case, write f = f + - ! - , attach u1 and v1 to f + , attach u2
+and v2 to f - , as above, and put u = u1 - v2 , v = v1 - u2 • Since - v2 is upper semicontinuous and since the sum of two upper semicontinuous functions is upper semicontinuous (similarly for lower semicontinuous ; we leave the proof of this as an exercise), u and v have the desired properties. IIII
+Exercises
+1 Let {fn} be a sequence of real nonnegative functions on R 1 , and consider the following four state ments : (a) If/1 and /2 are upper semicontinuous, then /1 + /2 is upper semicontinuous. (b) lf/1 and /2 are lower semicontinuous, then f1 + /2 is lower semicontinuous. (c) If each fn is upper semicontinuous, then Lf fn is upper semicontinuous. (d) If each /,. is lower semicontinuous, then Lf f.. is lower semicontinuous. Show that three of these are true and that one is false. What happens if the word " nonnegative " is omitted ? Js the truth of the statements affected if R 1 is replaced by a general topological space?
+2 Let fbe an arbitrary complex function on R 1 , and define
+q>(x, b) = sup { I f(s) -f(t) I : s, t e (x - b, x + b)},
+q>(x) = inf {q>(x, b) : b > 0}.
+Prove that q> is upper semicontinuous, that f is continuous at a point x if and only if q>(x) = 0, and hence that the set of points of continuity of an arbitrary complex function is a G6 • Formulate and prove an analogous statement for general topological spaces in place of R 1 •
+
+
+58 REAL AND COMPLEX ANALYSIS
+3 Let X be a metric space, with metric p. For any nonempty E c X, define
+pJ.x) = inf {p(x, y) : y e E}.
+Show that PE is a uniformly continuous function on X. If A and B are disjoint nonempty closed subsets of X, examine the relevance of the function
+to· Urysohn's lemma.
+f(x) =
+PA(x)
+PA(x) + pa(x)
+4 Examine the proof of the Riesz theorem and prove the following two statements :
+(a) If E1 c V1 and E2 c V2 , where V1 and V2 are disjoint open sets, then JJ.(E1 u E2) =
+f.l(Ed + J.t(E2), even if E1 and E2 are not in IDl
+(b) If E e IDlF , then E = N u K 1 u K 2 u · · · , where {K;} is a disjoint countable collection of
+compact sets and J.J.(N) = 0.
+.
+In Exercises 5 to 8, m stands for Lebesgue measure on R 1 •
+S Let E be Cantor's familiar " middle thirds " set. Show that m(E) = 0, even though E and R 1 have the same cardinality.
+6 Construct a totally disconnected compact set K c R 1 such that m(K) > 0. (K is to have no con nected subset consisting of more than one point.) If v is lower semicontinuous and v < XK , show that actually v < 0. Hence XK cannot be approx imated from below by lower semicontinuous functions, in the sense of the Vitali-Caratheodory theorem.
+7 If 0 < E < 1, construct an open set E c [0, 1] which is dense in [0, 1], such that m(E) = E. (To say that A is dense in B means that the closure of A contains B.)
+8 Construct a Borel set E c R 1 such that
+0 < m(E n J) < m(I)
+for every nonempty segment I. Is it possible to have m(E) < oo for such a set ?
+9 Construct a sequence of continuous function /,. on [0, 1] such that 0 < !, < 1 , such that
+lim 11
+/,.(x) dx = 0,
+n -+ CX> Jo
+but such that the sequence {fix)} converges for no x e [0, 1].
+10 If {fn} is a sequence of continuous functions on [0, 1 ] such that 0 < f.. < 1 and such that f..(x) -+ 0 as n -+ oo , for every x e [0, 1], then
+lim r l f,(x) dx = 0.
+n ..... CX> Jo
+Try to prove this without using any measure theory or any theorems about Lebesgue integration. (This is to impress you with the power of the Lebesgue integral. A nice proof was given by W. F. Eberlein in Communications on Pure and Applied Mathematics, vol. X, pp. 357-360, 1957.)
+1 1 Let J1. be a regular Borel measure on a compact Hausdorff space X ; assume J.J.(X) = 1 . Prove that
+there is a compact set K c X (the carrier or support of f.l) such that J.J.(K) = 1 but Jl(H) < 1 for every
+proper compact subset H of K. Hint : Let K be the intersection of all compact K« with J.J.(K«) = 1 ;
+show that every open set V which contains K also contains some K« . Regularity of J1. is needed ;
+compare Exercise 1 8. Show that Kc is the largest open set in X whose measure is 0.
+12 Show that every compact subset of R 1 is the support of a Borel measure.
+
+
+POSITIVE BOREL MEASURES 59
+13 Is it true that every compact subset of R 1 is the support of a continuous function ? If not, can you describe the class of all compact sets in R 1 which are supports of continuous functions ? Is your description valid in other topological spaces ?
+14 Let f be a real-valued Lebesgue measurable function on Rk. Prove that there exist Borel functions g and h such that g(x) = h(x) a.e. [m], and g(x) < f(x) < h(x) for every x E Rk.
+IS It is easy to guess the limits of
+as n ---+ oo. Prove that your guesses are correct.
+16 Why is m( Y) = 0 in the proof of Theorem 2.20(e) ?
+17 Define the distance between points (x 1, y1) and (x2 , y2) in the plane to be
+Show that this is indeed a metric, and that the resulting metric space X is locally compact.
+Iff e Cc(X), let x 1 , • • • , xn be those values of x for which f(x, y) =1- 0 for at least one y (there are only finitely many such x !), and define
+Let f.J. be the measure associated with this A by Theorem 2. 14. If E is the x-axis, show that f.J.(E) = oo although f.J.(K) = 0 for every compact K c E.
+18 This exercise requires more set-theoretic skill than the preceding ones. Let X be a well-ordered uncountable set which has a last element wb such that every predecessor of w 1 has at most countably many predecessors. (" Construction " : Take any well-ordered set which has elements with uncountably many predecessors, and let w1 be the first of these ; w 1 is called the first uncountable ordinal.) For IX E X, let P«[S«] be the set of all predecessors (successors) of IX, and call a subset of X open if it is a P« or an Sp or a P« n Sp or a union of such sets. Prove that X is then a compact Hausdorff space. (Hint : No well-ordered set contains an infinite decreasing sequence.) Prove that the complement of the point w1 is an open set which is not u-compact. Prove that to everyf E C(X) there corresponds an IX =1- w 1 such that fis constant on S« . Prove that the intersection of every countable collection {Kn} of uncountable compact subsets of X is uncountable. (Hint : Consider limits of increasing countable sequences in X which intersect each Kn in infinitely many points.) Let 9Jl be the collection of all E c X such that either E u {w1 } or Ec u {w1 } contains an uncountable compact set ; in the first case, define A.(E) = 1 ; in the second case, define A.(E) = 0. Prove that 9Jl is a u-algebra which contains all Borel sets in X, that A. is a measure on 9Jl which is not regular (every neighborhood of w1 has measure 1), and that
+for every f E C(X). Describe the regular f.J. which Theorem 2. 14 associates with this linear functional.
+19 Go through the proof of Theorem 2. 14, assuming X to be compact (or even compact metric) rather than just locally compact, and see what simplifications you can find.
+20 Find continuous functions /, : [0, 1] ---+ [0, oo) such that fn(x) ---+ 0 for all x E [0, 1] as n ---+ oo ,
+J� fn(x) dx ---+ 0, but sup" !, is not in I.J . (This shows that the conclusion of the dominated convergence theorem may hold even when part of its hypothesis is violated.)
+21 If X is compact and f: X ---+ ( - oo, oo) is upper semicontinuous, prove that f attains its maximum at some point of X.
+
+
+60 REAL AND COMPLEX ANALYSIS
+22 Suppose that X is a metric space, with metric d, and that f: X ---+ [0, oo] is lower semicontinuous, f(p) < oo for at least one p E X. For n = 1, 2, 3, . . . , x E X, define
+and prove that
+(i) I gn(x) - giy) I < nd(x, y), (ii) 0 < g 1 < g2 < . . . < f,
+gix) = inf {f(p) + nd(x, p) : p E X}
+(iii) gix) ---+f(x) as n ---+ oo, for all x E X.
+Thus f is the pointwise limit of an increasing sequence of continuous functions. (Note that the con verse is almost trivial.)
+23 Suppose V is open in Rk and J1 is a finite positive Borel measure on Rk. Is the function that sends x to p( V + x) necessarily continuous ? lower semicontinuous ? upper semicontinuous ?
+24 A step function is, by definition, a finite linear combination of characteristic functions of bounded intervals in R 1 • Assumef E lJ(R1), and prove that there is a sequence {gn} of step functions so that
+��': L: I f(x) - g.(x) I dx = 0.
+25 (i) Find the smallest constant c such that
+(ii) Does
+log ( 1 + e1) < c + t (0 < t < oo).
+lim - log { 1 + e"f<x>} dx
+1 11
+n ..... CX> n 0
+exist for every real f E L1 ? If it exists, what is it ?
+
+
+CH A PTER
+THREE
+LP- SPAC E S
+Convex Functions and Inequalities
+Many of the most common inequalities in analysis have their origin in the notion of convexity.
+3.1 Definition A real function qJ defined on a segment (a, b), where
+
+oo < a < b < oo, is called convex if the inequality
+({J((1 - A)x + Ay) < (1 - A)qJ(x) + AqJ(y) (1)
+holds whenever a < x < b, a < y < b, and 0 < A < 1.
+Graphically, the condition is that if x < t < y, then the point (t, qJ(t))
+should lie below or on the line connecting the points (x, qJ(x)) and (y, qJ(y)) in
+the plane. Also, (1) is equivalent to the requirement that
+({J(� - qJ(� ({J(U) - ({J(�
+---- < ----
+whenever a < s < t < u < b.
+t - s - u - t (2)
+The mean value theorem for differentiation, combined with (2), shows imme
+diately that a real differentiable function qJ is convex in (a, b) if and only if
+a < s < t < b implies qJ'(s) < qJ'(t), i.e., if and only if the derivative qJ' is a mono
+tonically increasing function. For example, the exponential function is convex on ( - oo, oo).
+3.2 Theorem IfqJ is convex on (a, b) then qJ is continuous on (a, b).
+61
+
+
+62 REAL AND COMPLEX ANALYSIS
+PROOF The idea of the proof is most easily conveyed in geometric language. Those who may worry that this is not " rigorous " are invited to transcribe it in terms of epsilons and deltas. Suppose a < s < x < y < t < b. Write S for the point (s, qJ(s)) in the
+plane, and deal similarly with x, y, and t. Then X is on or below the line S Y,
+hence Y is on or above the line through S and X; also, Y is on or below XT.
+As y� x, it follows that Y � X, i.e., qJ(y) � qJ(x). Left-hand limits are handled
+in the same manner, and the continuity of <p follows. IIII
+Note that this theorem depends on the fact that we are working on an open
+segment. For instance, if <p(x) = 0 on [0, 1) and qJ(1) = 1, then (/) satisfies 3. 1(1) on
+[0� 1] without being continuous.
+3.3 Theorem (Jensen's Inequality) Let J1 be a positive measure on a a-algebra
+9Jl in a set Q, so that ,u(Q) = 1. Iffis a realfunction in IJ(J1), ifa <f(x) < bfor
+all x e n, and if<p is convex on (a, b), then
+(1)
+Note : The cases a = - oo and b = oo are not excluded. It may happen that (/) o f
+is not in L1(,u) ; in that case, as the proof will show, the integral of (/) o f exists in
+the extended sense described in Sec. 1.3 1, and its value is + oo.
+PROOF Put t =fn f dJ1. Then a < t < b. If P is the supremum of the quotients
+on the left of 3. 1(2), where a < s < t, then p is no larger than any of the
+quotients on the right of 3. 1(2), for any u e (t, b). It follows that
+<p(s) > <p(t) + p(s - t) (a < s < b). (2)
+Hence
+qJ(f(x)) - <p(t) - P(f(x) - t) > 0 (3)
+for every x e n. Since <p is continuous, (/) o f is measurable. If we integrate
+both sides of (3) with respect to J1, (1) follows from our choice of t and the
+assumption ,u(Q) = 1. 1111
+To give an example, take qJ(x) = ex. Then (1) becomes
+If Q is a finite set, consisting of points p1, • • • , Pn , say, and if
+(
+4
+)
+
+
+If-SPACES 63
+(4) becomes
+exp {! (x1 + · · · + x,)} < ! (ex' + · · · + ex•), (5)
+for real xi . Putting Yi = exi, we obtain the familiar inequality between the arith
+metic and geometric means of n positive numbers :
+(6)
+Going back from this to (4), it should become clear why the left and right sides of
+exp {ilog g dJ1.} < Lg dJ1. (7)
+are often called the geometric and arithmetic means, respectively, of the positive function g.
+If we take Jl({pi}) = rxi > 0, where L rxi = 1, then we obtain
+Ylltyll2 . . . yCXn < (X y + (X y + . . . + (X y
+1 2 n - 1 1 2 2 n n (8)
+in place of (6). These are just a few samples of what is contained in Theorem 3.3.
+For a converse, see Exercise 20.
+3.4 Definition If p and q are positive real numbers such that p + q = pq, or
+equivalently
+11
+- + - = 1,
+p q (1)
+then we call p and q a pair of conjugate exponents. It is clear that (1) implies
+1 < p < oo and 1 < q < oo. An important special case is p = q = 2.
+As p -+ 1, (1) forces q -+ oo. Consequently 1 and oo are also regarded as a pair of conjugate exponents. Many analysts denote the exponent conjugate to p by p', often without saying so explicitly.
+3.5 Theorem Let p and q be conjugate exponents, 1 < p < oo. Let X be a
+measure space, with measure Jl. Letfand g be measurablefunctions on X, with
+range in [0, oo]. Then
+(1)
+and
+(2)
+The inequality (1) is Holder's ; (2) is Minkowski's. If p = q = 2, (1) is known as the Schwarz inequality.
+
+
+64 REAL AND COMPLEX ANALYSIS
+PROOF Let A and B be the two factors on the right of (1). If A = 0, thenf = 0
+a.e. (by Theorem 1.39); hencefg = 0 a.e., so (1) holds. If A > 0 and B = oo, (1)
+is again trivial. So we need consider only the case 0 < A < oo, 0 < B < oo.
+Put
+This gives
+f
+F=A'
+lFP dJl = lGq dJl = 1.
+(3)
+(4)
+If x e X is such that 0 < F(x) < oo and 0 < G(x) < oo, there are real
+numbers s and t such that F(x) = �IP, G(x) = etfq. Since 1/p + ljq = 1, the
+convexity of the exponential function implies that
+(5)
+It follows that
+(6)
+for every x e X. Integration of (6) yields ·
+lFG dJl < p- 1 + q- 1 = 1, (7)
+by (4); inserting (3) into (7), we obtain (1).
+Note that (6) could also have been obtained as a special case of the
+inequality 3.3(8). To prove (2), we write
+(f+ g)P =f . (f+ g)p-1 + g . (f+ g)P-1. (8)
+Holder's inequality gives
+If . (f+ g)p- 1 < {ffPriP{f (f+ g)(p-l)qr'q. (9)
+Let (9') be the inequality (9) with f and g interchanged. Since (p - 1)q = p,
+addition of (9) and (9') gives
+Clearly, it is enough to prove (2) in the case that the left side is greater
+than 0 and the right side is less than oo. The convexity of the function tP for
+0
+< t < oo shows that
+
+
+I!'-SPACES 65
+Hence the left side of (2) is less than oo, and (2) follows from (10) if we divide
+by the first factor on the right of (10), bearing in mind that 1 - 11q = 1lp.
+This completes the proof. IIII
+It is sometimes useful to know the conditions under which equality can hold in an inequality. In many cases this information may be obtained by examining the proof of the inequality. For instance, equality holds in (7) if and only if equality holds in (6) for
+almost every x. In (5), equality holds if and only if s = t. Hence " FP = Gq a.e." is
+a necessary and sufficient condition for equality in (7), if (4) is assumed. In terms
+of the original functionsf and g, the following result is then obtained :
+Assuming A < oo and B < oo, equality holds in (1) if and only if there are
+constants C( and {3, not both 0, such that C(fP = {3gq a.e.
+We leave the analogous discussion of equality in (2) as an exercise.
+The I!-spaces
+In this section, X will be an arbitrary measure space with a positive measure JL
+3.6 Definition If 0 < p < oo and iff is a complex measurable function on X,
+define
+Jl/llp = {f) f iP djJ.}lfp
+and let IJ'(J1) consist of allffor which
+We call II f li P the IJ'-norm off
+11 / ll p < 00.
+(1)
+(2)
+If J1 is Lebesgue measure on Rk, we write IJ'(Rk) instead of IJ'(J1), as in Sec. 2.21. If J1 is the counting measure on a set A, it is customary to denote
+the corresponding I!-space by tP(A), or simply by tP, if A is countable. An
+element of tP may be regarded as a complex sequence x = {�n}, and
+3.7 Definition Suppose g : X � [0, oo] is measurable. Let S be the set of all
+real C( such that
+Jl(g-1((C(, 00])) = 0. (1)
+If S = 0, put {3 = oo. If S =1= 0, put {3 = inf S. Since
+g-l((p, oo]) = n91 g-l((P + !• oo]} (2)
+
+
+66 REAL AND COMPLEX ANALYSIS
+and since the union of a countable collection of sets of measure 0 has
+measure 0, we see that {3 e S. We call {3 the essential supremum ofg.
+Iff is a complex measurable function on X, we define ll f ll oo to be the
+essential supremum of I f I , and we let L00(J1) consist of all f for which
+IIfII oo < oo. The members of L00(J1) are sometimes called essentially bounded
+measurable functions on X.
+Itfollowsfrom this definition that the inequality If(x)I < A holdsfor almost all
+x
+if
+a
+n
+d
+o
+n
+l
+y
+if
+A
+>
+l
+l
+f
+l
+l
+oo
+.
+As in Definition 3.6, L00(Rk) denotes the class of all essentially bounded (with
+respect to Lebesgue measure) functions on Rk, and t00(A) is the class of all
+bounded functions on A. (Here bounded means the same as essentially bounded,
+since every nonempty set has positive measure ! )
+3.8 Theorem If p and q are conjugate exponents, 1 < p < oo, and iffe l!(J1)
+and g e /J(J1), thenfg e L1(J1), and (1)
+PROOF For 1 < p < oo, (1) is simply Holder's inequality, applied to I f I and
+l g l . lf p = oo, note that
+If(x)g(x)I < IIfIIoo I g(x)I (2)
+for almost all x; integrating (2), we obtain (1). If p = 1, then q = oo, and the
+same argument applies. ////
+3.9 Theorem Suppose 1 < p < oo, and fe l!(J1), g E I!(J1). Then f+ g E I!(J1),
+and
+(1)
+PROOF For 1 < p < oo, this follows from Minkowski's inequality, since
+For p = 1 or p = oo, (1) is a trivial consequence of the inequality
+1/+ gl < l/l + lgl . /Ill
+3.10 Remarks Fix p, 1 < p < oo. Iff e I!'(J1) and a. is a complex number, it is
+clear that a.fe I!(J1). In fact,
+IIa.f IIp = I a. I ll f II p • (1)
+In conjunction with Theorem 3.9, this shows that I!(J1) is a complex vector
+space.
+
+
+I!-SPACES 67
+Suppose f, g, and h are in I!(J1). Replacing f by f- g and g by g - h in
+Theorem 3.9, we obtain
+11/- hllp < 11/- gllp + llg - hllp· (2)
+This suggests that a metric may be introduced in I!(J1) by defining the dis
+tance between f and g to be II f - g II P . Call this distance d(f, g) for the
+moment. Then 0 < d(f, g) < oo, d(f, f) = 0, d(f, g) = d(g, f), and (2) shows
+that the triangle inequality d(f, h) < d(f, g) + d(g, h) is satisfied. The only
+other property which d should· have to define a metric space is that
+d(f, g) = 0 should imply that f = g. In our present situation this need not be
+so; we have d(f, g) = 0 precisely whenf(x) = g(x)for almost all x.
+Let us write f� g if and only if d(f, g) = 0. It is clear that this is an
+equivalence relation in I!(J1) which partitions I!(J1) into equivalence classes;
+each class consists of all functions which are equivalent to a given one. If F and G are two equivalence classes, choose f e F and g e G, and define
+d(F, G) = d(f, g); note that/�/1 and g � g1 implies
+d(f, g) = d(fl, gl),
+so that d(F, G) is well defined.
+With this definition, the set of equivalence classes is now a metric space. Note that it is also a vector space, since f �/1 and g � g1 implies f + g �
+!1 + g1 and rxf� rxft·
+When I!(J1) is regarded as a metric space, then the space which is really
+under consideration is therefore not a space whose elements arefunctions, but
+a space whose elements are equivalence classes offunctions. For the sake of
+simplicity of language, it is, however, customary to relegate this distinction to the status of a tacit understanding and to continue to speak of I!(J1) as a
+space of functions. We shall follow this custom. If {fn} is a sequence in I!(J1), iff e I!(J1), and if limn-+ oo 11/, -fliP = 0, we
+say that {In} converges tofin l!(J1) (or that {In} converges to fin the mean of
+order p, or that {In} is /!-convergent to f). If to every E > 0 there corre
+sponds an integer N such that 11 /n -fmllp < E as soon as n > N and m > N,
+we call {In} a Cauchy sequence in I!(J1). These definitions are exactly as in any
+metric space. It is a very important fact that I!(J.l) is a complete metric space, i.e., that
+every Cauchy sequence in I!(J1) converges to an element of I!(J1):
+3.11 Theorem I!(J1) is a complete metric space, for 1 < p < oo and for every
+positive measure Jl.
+PROOF Assume first that 1 < p < oo. Let {In} be a Cauchy sequence in I!(J1).
+There is a subsequence {fnJ, n1 < n2 < · · · , such that
+(i = 1, 2, 3, .. .). (1)
+
+
+68 REAL AND COMPLEX ANALYSIS
+Put
+k
+gk = L I fni+1 -fni I '
+i=1 00
+g = L l fni+l -fni 1 . (2)
+i=1
+Since (1) holds, the Minkowski inequality shows that llgkiiP < 1 for k = 1,
+2, 3, . . . . Hence an application of Fatou's lemma to {gf} gives llgiiP < 1. In
+particular, g(x) < oo a.e., so that the series
+00
+fnt(x) + L (fni+ 1(x) -fni(x))
+i=1 (3)
+converges absolutely for almost every x E X. Denote the sum of (3) by f(x),
+for those x at which (3) converges ; put f(x) = 0 on the remaining set of
+measure zero. Since
+k-1
+fnt + L (fni+ l -fni) =/,.k '
+(4)
+i=1
+we see that
+f(x) = lim fnJx) a.e. (5)
+i- oo
+Having found a function f which is the pointwise limit a.e. of {fnJ, we now have to prove that this f is the I!'-limit of {In}. Choose E > 0. There
+exists an N such that 11 /n -fm liP < E if n > N and m > N. For every m > N,
+Fatou's lemma shows therefore that
+(6)
+We conclude from (6) that f -fm E I!'(Jl.), hence that / E I!'(Jl.) [since f =
+(f -fm) +fm], and finally that 11/-/m liP� 0 as m � oo. This completes the
+proof for the case 1 < p < oo.
+In L00(J1.) the proof is much easier. Suppose {in} is a Cauchy sequence in
+L00(J1.), let Ak and Bm, n be the sets where I fk(x) I > 11/k II oo and where
+I fn(x) - fm(x) I > II /,. - fm II oo , and let E be the union of these sets, for k, m,
+n = 1, 2, 3, . . . . Then J.l(E) = 0, and on the complement of E the sequence {In}
+converges uniformly to a bounded function! Definef(x) = 0 for x E E. Then
+fE L00(J1.), and 11/n -/II00� 0 as n� oo. ////
+The preceding proof contains a result which is interesting enough to be stated separately :
+3.12 Theorem If 1 < p < oo and if {fn} is a Cauchy sequence in I!'(J.l), with
+limitf, then {fn} has a subsequence which converges pointwise almost every
+where tof(x).
+
+
+I!-SPACES 69
+The simple functions play an interesting role in I!(Jl) :
+3.13 Theorem Let S be the class ofall complex, measurable, simplefunctions
+on X such that
+Jl({X: s(X) # 0}) < 00. (1)
+If1 < p < oo, then S is dense in I!(p,).
+PROOF First, it is clear that S c I!(Jl). Supposef > 0,f e I!(p,), and let {sn} be
+as in Theorem 1.17. Since 0 < sn <f, we have Sn E I!(p,), hence sn E S. Since
+I f- sn JP <fP, the dominated convergence theorem shows that
+II ! - sn li P� 0 as n � oo. Thus f is in the I!-closure of S. The general case
+(fcomplex) follows from this. /Ill
+Approximation by Continuous Functions
+So far we have considered I!(p,) on any measure space. Now let X be a locally
+compact Hausdorff space, and let J1 be a measure on a a-algebra 9Jl in X, with
+the properties stated in Theorem 2.14. For example, X might be R\ and J1 might
+be Lebesgue measure on Rk.
+Under these circumstances, we· have the following analogue of Theorem 3. 1 3 :
+3.14 Theorem For 1 < p < oo, Cc(X) is dense in l!(J1).
+PROOF Define S as in Theorem 3.13. If s e S and E > 0, there exists a g e
+Cc(X) such that g(x) = s(x) except on a set of measure < E, and l g l < llsll oo
+(Lusin's theorem). Hence
+Since S is dense in I!(Jl), this completes the proof.
+(1)
+Ill/
+3.15 Remarks Let us discuss the relations between the spaces I!(Rk) (the I! spaces in which the underlying measure is Lebesgue measure on Rk) and the
+space Cc(Rk) in some detail. We consider a fixed dimension k.
+For every p E [1, oo] we have a metric on Cc(Rk); the distance between /
+and g is 11 /- g llp · Note that this is a genuine metric, and that we do not
+have to pass to equivalence classes. The point is that if two continuous func tions on Rk are not identical, then they differ on some nonempty open set V,
+and m( V) > 0, since V contains a k-cell. Thus if two members of Cc(Rk) are
+equal a.e., they are equal. It is also of interest to note that in Cc(Rk) the
+essential supremum is the same as the actual supremum : for f e Cc(Rk)
+11/11 oo = sup I f(x) f . (1)
+x e Rk
+
+
+70 REAL AND COMPLEX ANALYSIS
+If 1 < p < oo, Theorem 3.14 says that Cc(Rk) is dense in I!(Rk), and
+Theorem 3.1 1 shows that I!'(Rk) is complete. Thus I!'(Rk) is the completion of
+the metric space which is obtained by endowing Cc(Rk)with the 1!-metric.
+The cases p = 1 and p = 2 are the ones of greatest interest. Let us state
+once more, in different words, what the preceding result says if p = 1 and
+k = 1 ; the statement shows that the Lebesgue integral is indeed the " right "
+generalization of the Riemann integral :
+If the distance between two continuous functions f and g, with compact
+supports in R1, is defined to beL:lf(t) - g(t)I dt, (2)
+the completion ofthe resulting metric space consists precisely ofthe Lebesgue
+integrablefunctions on R1, provided we identify any two that are equal almost
+everywhere.
+Of course, every metric space S has a completion S* whose elements may be
+viewed abstractly as equivalence classes of Cauchy sequences in S (see [26],
+p. 82). The important point in the present situation is that the various I!'
+completions of Cc(Rk) again turn out to be spaces of functions on Rk.
+The case p = oo differs from the cases p < oo. The L00-completion ofCc(Rk) is
+not L00(Rk), but is C0(Rk), the space ofall continuousfunctions on Rk which "vanish
+at infinity," a concept which will be defined in Sec. 3.16. Since (1) shows that the
+L00-norm coincides with the supremum norm on Cc(Rk), the above assertion
+about C0(Rk) is a special case of Theorem 3.17.
+3.16 Definition A complex function f on a locally compact Hausdorff space
+X is said to vanish at infinity if to every E > 0 there exists a compact set
+K
+c X such that I f(x) I < E for all x not in K.
+The class of all continuous f on X which vanish at infinity is called
+C0(X).
+It is clear that Cc(X) c C0(X), and that the two classes coincide if X is
+compact. In that case we write C(X) for either of them.
+3.17 Theorem If X is a locally compact Hausdorff space, then C0(X) is the
+completion ofCc(X),relative to the metricdefined by the supremum norm
+11/11 = sup I f(x) 1 . (1)
+x_e X
+PROOF An elementary verification shows that C0(X) satisfies the axioms of a
+metric space if the distance between / and g is taken to be II ! - gil - We have
+to show that (a) Cc(X) is dense in C0(X) and (b) C0(X) is a complete metric
+space.
+
+
+1!-SPACES 71
+Given f e C0(X) and E > 0, there is a compact set K so that I f(x) I < e
+outside K. Urysohn's lemma gives us a function g e Cc(X) such that
+0 < g < 1 and g(x) = 1 on K. Put h = fg. Then h e Cc(X) and 11 /- hll < E.
+This proves (a).
+To prove (b), let {In} be a Cauchy sequence in C0(X), i.e., assume that
+{In} converges uniformly. Then its pointwise limit function f is continuous.
+Given e > 0, there exists an n so that 11 /n - / II < E/2 and there is a compact
+set K so that I fn(x) I < e/2 outside K. Hence I f(x) I < E outside K, and we
+have proved that/vanishes at infinity. Thus C0(X) is complete. · /Ill
+Exercises
+1 Prove that the supremum of any collection of convex functions on (a, b) is convex on (a, b) (if it is finite) and that pointwise limits of sequences of convex functions are convex. What can you say about upper and lower limits of sequences of convex functions ?
+2 If cp is convex on (a, b) and if t/1 is convex and nondecreasing on the range of cp, prove that t/1 o cp is
+convex on (a, b). For cp > 0, show that the convexity of log cp implies the convexity of cp, but not vice versa.
+3 Assume that cp is a continuous real function on (a, b) such that
+�jx + y) . 1 1
+'\ 2 < 2 cp(x) + 2 cp(y)
+for all x and y E (a, b). Prove that cp is convex. (The conclusion does not follow if continuity is omitted from the hypotheses.)
+4 Suppose/ is a complex measurable function on X, J1 is a positive measure on X, and
+q>(p) = ll f iP dJl = ��� �� � (0 < p < oo).
+Let E = {p : cp(p) < oo }. Assume ll f ll oo > 0.
+(a) If r < p < s, r E E, and s E E, prove that p E E.
+(b) Prove that log cp is convex in the interior of E and that cp is continuous on E. (c) By (a), E is connected. Is E necessarily open ? Closed ? Can E consist of a single point ? Can E be any connected subset of (0, oo)?
+(d) If r < p < s, prove that II / Il P < max ( ll f ll r , II I IIs). Show that this implies the inclusion
+�(11) n e(11) c I!'(Jl).
+(e) Assume that ll f ll r < oo for some r < oo and prove that
+II / IlP -+ ll f ll oo as p -+ oo.
+S Assume, in addition to the hypotheses of Exercise 4, that
+p(X) = 1.
+(a) Prove that ll f ll r < II f il s if 0 < r < s < oo . (b) Under what conditions does it happen that 0 < r < s < oo and ll f ll r = ll f lls < oo ?
+(c) Prove that �(p) => e(p) if 0 < r < s. Under what conditions do these two spaces contain the
+same functions ? (d) Assume that ll f ll r < oo for some r > 0, and prove that
+if exp { - oo } is defined to be 0.
+lim II f li P = exp { [ log I f I dp}
+p ..... o Jx
+
+
+72 REAL AND COMPLEX ANALYSIS
+6 Let m be Lebesgue measure on [0, 1 ], and define II f II P with respect to m. Find all functions ci> on
+[0, oo) such that the relation
+<l>(lim 11 / ll p) = f \ci> o f) dm
+p..... o Jo
+holds for every bounded, measurable, positivef Show first that
+(x > 0, 0 < c < 1).
+Compare with Exercise 5(d).
+7 For some measures, the relation r < s implies e(JJ.) c l.!(JJ.) ; for others, the inclusion is reversed ; and there are some for which e(JJ.) does not contain l.!(JJ.) if r =1- s. Give examples of these situations, and find conditions on J1. under which these situations will occur.
+8 If g is a positive function on (0, 1) such that g(x) ---+ oo as x ---+ 0, then there is a convex function h on (0, 1) such that h < g and h(x) ---+ oo as x ---+ 0. True or false? Is the problem changed if (0, 1 ) is replaced by (0, oo) and x ---+ 0 is replaced by x ---+ oo ?
+9 Suppose f is Lebesgue measurable on (0, 1), and not essentially bounded. By Exercise 4(e), 11 / II P ---+ oo as p ---+ oo . Can 11 / II P tend to oo arbitrarily slowly ? More precisely, is it true that to every
+positive function ci> on (0, oo) such that Cl>(p) ---+ oo as p ---+ oo one can find an f such that II f II P ---+ oo as
+p
+---+ oo , but II f II P < Cl>(p) for all sufficiently large p ?
+1 0 Suppose fn E IJ'(JJ.), for n = 1 , 2, 3, . . . , and II !, - f I IP ---+ 0 and !, ---+ g a.e., as n ---+ oo . What relation exists betweenfand g? ·
+1 1 Suppose JJ.(!l) = 1 , and suppose f and g are positive measurable functions on n such that fg > 1 . Prove that
+12 Suppose JJ.(!l) = 1 and h : 0 ---+ [0, oo] is measurable. If
+prove that
+If J1. is Lebesgue measure on [0, 1] and if h is continuous, h = f', the above inequalities have a simple geometric interpretation. From this, conjecture (for general Q) under what conditions on h equality can hold in either of the above inequalities, and prove your conjecture.
+13 Under what conditions on f and g does equality hold in the conclusions of Theorems 3.8 and 3.9 ? You may have to treat the cases p = 1 and p = oo separately.
+14 Suppose 1 < p < oo, f E lJ' = IJ'((O, oo)), relative to Lebesgue measure, and
+1 ix
+F(x) = - f(t) dt
+X0
+(0 < x < oo).
+(a) Prove Hardy's inequality
+which shows that the mapping/---+ F carries lJ' into IJ'.
+
+
+(b) Prove that equality holds only iff = 0 a.e. (c) Prove that the constant p/(p - 1) cannot be replaced by a smaller one. (d) Iff > 0 andf E I1, prove that F ¢ L1 •
+/!-SPACES 73
+Suggestions : (a) Assume first thatf > 0 and f E Cc((O, oo)). Integration by parts gives
+f"FP(x) dx = -p f"FP- 1(x)xF'(x) dx.
+Note that xF' = f - F, and apply Holder's inequality to J FP- 1f Then derive the general case. (c)
+Takef(x) = x - t tp on [ 1 , A],f(x) = 0 elsewhere, for large A. See also Exercise 14, Chap. 8.
+15 Suppose {an} is a sequence of positive numbers. Prove that
+oo ( 1 N )p ( p )p oo
+L - L an < L a:
+N=1 N n=1 P - 1 n=1
+if 1 < p < oo . Hint : If an > an + 1 , the result can be made to follow from Exercise 14. This special case implies the general one.
+16 Prove Egoroff's theorem : If J.l.(X) < oo, if {fn} is a sequence of complex measurable functions which converges pointwise at every point of X, and if E > 0, there is a measurable set E c X, with
+J.l.(X - E) < E, such that {fn} converges uniformly on E. (The conclusion is that by redefining the/, on a set of arbitrarily small measure we can convert a pointwise convergent sequence to a uniformly convergent one ; note the similarity with Lusin's theorem.)
+Hint : Put
+S(n, k) = . (I {x : I f.{xJ -f,{x) I < �}'
+r, J > n k
+show that J.l.(S(n, k)) ___. Jl(X) as n ______. oo, for each k, and hence that there is a suitably increasing
+sequence {nk} such that E = n S(nk , k) has the desired property. Show that the theorem does not extend to a-finite spaces. Show that the theorem does extend, with e�sentially the same proof, to the situation in which the
+sequence {fn} is replaced by a family {ft}, where t ranges over the positive reals ; the assumptions are now that, for all x E X, (i) lim ft(x) = f(x) and
+t-+ 00
+(ii) t ______.ft(x) is continuous.
+17 (a) If 0 < p < oo, put Yp = max (1, 2P - 1), and show that
+for arbitrary complex numbers IX and p. (b) Suppose Jl is a positive measure on X, 0 < p < oo , f E l!(J.l.), !,. E l!(Jl), f,(x) ______.f(x) a.e., and
+11 /,. IIP ___. II ! li P as n ___. oo. Show that then lim II ! - fn li P = 0, by completing the two proofs that are sketched below. (i) By Egoroff's theorem, X = A u B in such a way that JA I f IP < E, Jl(B) < oo, and fn ______.f uniformly on B. Fatou's lemma, applied to J8 I !,. IP, leads to
+lim sup f... I f.. IP dJl < E.
+(ii) Put hn = yp( I f IP + I !,. IP) - I f - !, IP, and use Fatou's lemma as in the proof of Theorem 1 .34. (c) Show that the conclusion of (b) is false if the hypothesis ll fn ll p ___. 11 / II P is omitted, even if J.l.(X) < oo .
+
+
+74 REAL AND COMPLEX ANALYSIS
+18 Let Jl be a positive measure on X. A sequence {/,.} of complex measurable functions on X is said to converge in measure to the measurable function/if to every E > 0 there corresponds an N such that
+Jl({X : I /,.(X) - f(X) I > E}) < E
+for all n > N. (This notion is of importance in probability theory.) Assume JL(X) < oo and prove the following statements : (a) If!,(x) -4f(x) a.e., then !, -4f in measure. (b) Iff, E l!(JL) and II /,. - ! II P -4 0, then f,. -4f in measure ; here 1 < p < oo. (c) Iff, -4f in measure, then { !,} has a subsequence which converges tofa.e.
+Investigate the converses of (a) and (b). What happens to (a), (b), and (c) if J,J.(X) = oo, for instance, if Jl is Lebesgue measure on R1 ?
+19 Define the essential range of a function f E L00(JL) to be the set R1 consisting of all complex numbers w such that
+JL({x : I f(x) - w I < E}) > 0
+for every E > 0. Prove that R1 is compact. What relation exists between the set R1 and the number
+11 / ll ooL?et A1 be the set of all averages
+where E E 9Jl and JL(E) > 0. What relations exist between A1 and R1? Is A1 always closed ? Are there measures Jl such that A1 is convex for every f E L00(Jl)? Are there measures Jl such that A1 fails to be convex for somef E L00(JL) ? How are these results affected if L00(f.J.) is replaced by I.J(f.J.), for instance?
+20 Suppose cp is a real function on R 1 such that
+for every real bounded measurablef Prove that cp is then convex.
+21 Call a metric space Y a completion of a metric space X if X is dense in Y and Y is complete. In Sec. 3. 1 5 reference was made to " the " completion of a metric space. State and prove a uniqueness theorem which justifies this terminology.
+22 Suppose X is a metric space in which every Cauchy sequence has a convergent subsequence. Does it follow that X is complete ? (See the proof of Theorem 3. 1 1 .)
+23 Suppose Jl is a positive measure on X, f.J.(X) < oo,f E L00(Jl), II f II oo > 0, and
+(n = 1 , 2, 3, . . .).
+Prove that
+24 Suppose Jl is a positive measure, / E lJ'(f.J.), g E lJ'(f.J.). (a) If 0 < p < 1, prove that
+that ll(f, g) = J I f - g IP df.J. defines a metric on lJ'(f.J.), and that the resulting metric space is complete.
+
+
+(b) If 1 < p < oo and II/ Il P < R, ll g ii P < R, prove that
+f
+l i f l" - l g i• j dJl < 2pR"- 1 1if - g il • .
+Hint : Prove first, for x > 0, y > 0, that
+if 0 < p < 1,
+if 1 < p < 00.
+I!'-SPACES 75
+Note that (a) and (b) establish the continuity of the mapping/-+ I f IP that carries l!(JJ.) into L1(JJ.).
+25 Suppose J1. is a positive measure on X and f: X ---+ (0, oo) satisfies Jx f dJJ. = 1. Prove, for every E
+c: X with 0 < JJ.(E) < oo, that
+and, when 0 < p < 1,
+i
+(log f) dJJ. < JJ.(E) log -1
+E JJ.(E)
+i
+f• dJl < Jl(E)t - •.
+26 Ifjis a positive measurable function on [0, 1], which is larger,
+f
+f(x) log f(x) dx or f f(s) ds flog f(t) dt?
+
+
+CH A PTER
+FOUR
+ELEMENTARY HILBERT SPACE THEORY
+Inner Products and Linear Functionals
+76
+4.1 Definition A complex vector space H is called an inner product space (or
+unitary space) if to each ordered pair of vectors x and y e H there is associ
+ated a complex number (x, y), the so-called " inner product " (or " scalar
+product ") of x and y, such that the following rules hold :
+(
+a
+)
+(y, x) = (x, y). (The bar denotes complex conjugation.)
+(b) (x + y, z) = (x, z) + (y, z) ifx, y, and z e H.
+(c) (C(X, y) = C((X, y) ifx and y e H and C( is a scalar.
+(d) (X, X) > 0 for all X E H.
+(e) (x, x) = 0 only ifx = 0.
+(f)
+Let us list some immediate consequences of these axioms :
+(c) implies that (0, y) = 0 for all y E H.
+(b) and (c) may be combined into the statement: For every y e H, the
+mapping x� (x, y) is a linearfunctional on H.
+(a) and (c) show that (x, C(y) = a(x, y).
+(a) and (b) imply the second distributive law :
+(z, x + y) = (z, x) + (z, y).
+By (d), we may define llxll, the norm of the vector x E H, to be the non
+negative square root of (x, x). Thus
+llxll2 = (x, x).
+
+
+ELEMENTARY HILBERT SPACE THEORY 77
+4.2 The Schwarz Inequality The properties 4.1 (a) to (d) imply that
+I(x, y)I < llxll IIYII for all x and y E H.
+PROOF Put A = llxll2, B = l (x, y) l , and C = IIYII2• There is a complex
+number C( such that I C( I = 1 and C((y, x) = B. For any real r, we then have
+(x - rC(y, x - rC(y) = (x, x) - rC((y, x) - r&(x, y) + r2(y, y). (1)
+The expression on the left is real and not negative. Hence
+A - 2Br + Cr2 > 0 (2)
+for every real r. If C = 0, we must have B = 0; otherwise (2) is false for large
+positive r. If C > 0, take r = B/C in (2), and obtain B2 < AC. /Ill
+4.3 The Triangle Inequality For x and y E H, we have
+llx + Yll < llxll + IIYII
+PROOF By the Schwarz inequality,
+llx + Yll2 = (x + y, x + y) = (x, x) + (x, y) + (y, x) + (y, y)
+< llxll2 + 2llxii iiYII + IIYII2 = (llxll + llyll)2• Ill/
+4.4 Definition It follows from the triangle inequality that
+llx - zll < llx - Yll + IIY - zll (x, y, z E H). (1)
+If we define the distance between x and y to be ll x - yll , all the axioms for a
+.metric space are satisfied ; here, for the first time, we use part (e) of Definition
+4.1.
+Thus H is now a metric space. If this metric space is complete, i.e., if every
+Cauchy sequence converges in H, then H is called a Hilbert space.
+Throughout the rest of this chapter, the letter H will denote a Hilbert space.
+4.5 Examples
+(a) For any fixed n, the set C" of all n-tuples
+x = (e1, • • . , �,),
+where �b . . . , e, are complex numbers, is a Hilbert space if addition and scalar multiplication are defined componentwise, as usual, and if
+n
+(x, y) = L �iiji
+j= 1
+
+
+78 REAL AND COMPLEX ANALYSIS
+(b) If J1 is any positive measure, I3(J1) is a Hilbert space, with inner product
+(f, g) = Lf{j djJ..
+The integrand on the right is in L1(J1), by Theorem 3.8, so that (f, g) is
+well defined. Note that
+11 !11 = (f./)112
+=
+{
+L
+I
+/
+1
+2
+d
+J1.
+r
+1
+2
+=
+l
+l
+f
+l
+l
+2
+·
+The completeness of I3(J1) (Theorem 3.1 1) shows that /J(J1) is indeed a
+Hilbert space. [We recall that L2(J1) should be regarded as a space of
+equivalence classes of functions; compare the discussion in Sec. 3.10.]
+For H = I3(J1), the inequalities 4.2 and 4.3 turn out to be special
+cases of the inequalities of Holder and Minkowski. Note that Example (a) is a special case of (b). What is the measure in
+(a)?
+(c) The vector space of all continuous compiex functions on [0, 1] is an
+inner product space if
+(
+f,
+g
+)
+=
+r
+f
+(
+t
+)
+g
+(
+t)
+d
+t
+but is not a Hilbert space.
+4.6 Theorem For anyfixed y e H, the mappings x---+ (x, y), x---+ (y, x), x---+ llxll are continuousfunctions on H.
+PROOF The Schwarz inequality implies that
+I (xt, y) - (x2, y)I = I (xl - x2, y)I < llx1 - x2II IIYII,
+which proves that x---+ (x, y) is, in fact, uniformly continuous, and the same is
+true for x---+ (y, x). The triangle inequality IIx1 11 < IIx1 - x2ll + IIx21� yields
+llxtll - llx2ll <·llxt - x2ll,
+and if we interchange x1 and x2 we see that
+l llxtll - llx2ll I < llxt - x2ll
+for all x1 and x2 e H. thus X --+ ll xll is also uniformly continuous. /Ill
+4.7 Subspaces A subset M of a vector space V is called a subspace of V if M is
+itself a vector space, relative to the addition and scalar multiplication ·which are defined in V. A necessary and sufficient condition for a set M c V to be a sub
+space is that x + y e M and C(X e M whenever x and y e M and C( is a scalar.
+
+
+ELEMENTARY HILBERT SPACE THEORY 79
+In the vector space context, the word " subspace " will always have this meaning. Sometimes, for emphasis, we may use the term " linear subspace " in place of subspace. For example, if V is the vector space of all complex functions on a set S, the set of all bounded complex functions on S is a subspace of V, but the set of all
+f
+e V with I f(x) I < 1 for all x e S is not. The real vector space R3 has the follow
+ing subspaces, and no others: (a) R3, (b) all planes through the origin 0, (c) all
+straight lines through 0� and (d) {0}.
+A closed subspace of H is a subspace that is a closed set relative to the topol
+ogy induced by the metric of H.
+Note that ifM is a subspace ofH, so is its closure M. To see this, pick x and y
+in M and let (X be a scalar. There are sequences {xn} and {Yn} in M that converge
+to x and y, respectively. It is then easy to verify that xn + Yn and (XXn converge to
+x + y and (XX, respectively. Thus x + y e M and (XX e M.
+4.8 Convex Sets A set E in a vector space V is said to be convex if it has the
+following geometric property : Whenever x e E, y e E, and 0 < t < 1, the point
+zt = (1 - t)x + ty
+also lies in E. As t runs from 0 to 1, one may visualize zt as describing a straight
+line segment in V, from x to y. Convexity requires that E contain the segments
+between any two of its points. It is clear that every subspace of V is convex. Also, if E is convex, so is each of its translates
+E + X = {y + x: y E E}.
+4.9 Orthogonality If (x, y) = 0 for some x and y e H, we say that x is orthogonal
+to y, and sometimes write x l_ y. Since (x, y) = 0 implies (y, x) = 0, the relation l_
+is symmetric. Let x.l denote the set of all y e H which are orthogonal to x; and if M is a
+subspace of H, let M.l be the set of all y e H which are orthogonal to every
+X E M.
+Note that xj_ is a subspace of H, since x l_ y and x l. y' implies x _i (y + y')
+and x _i (Xy. Also, xJ. is precisely the set of points where the continuous function
+y---+ (x, y) is 0. Hence x.l is a closed subspace of H. Since
+M
+J. is an intersection of closed subspaces, and it follows that MJ. is a closed
+subspace ofH.
+4.10 Theorem Every nonempty, closed, convex set E in a Hilbert space H con
+tains a unique element ofsmalle$t norm.
+
+
+80 REAL AND COMPLEX ANALYSIS
+In other words, there is one and only one x0 E E such that ll x0 ll < ll x ll for
+every x E E.
+PROOF An easy computation, using only the properties listed in Definition
+4.1, establishes the identity
+(x and y E H). (1)
+This is known as the parallelogram law : If we interpret llx ll to be the length
+of the vector x, (1) says that the sum of the squares of the diagonals of a
+parallelogram is equal to the sum of the squares of its sides, a familiar propo sition in plane geometry.
+Let � = inf{ llxll : x E E}. For any x and y E E, we apply (1) to �x and �y
+and obtain
+X+y 2
+lllx - Yll 2 = �llxll2 + �IIYII 2 - 2
+Since E is convex, (x + y)/2 E E. Hence
+llx - Y ll 2 < 2 11xll 2 + 2 11YII 2 - 4�2 (x and y E E).
+(2)
+(3)
+If also llx ll = IIYII = �' then (3) implies x = y, and we have proved the unique
+ness assertion of the theorem.
+The definition of � shows that there is a sequence {Yn} in E so' that
+llYnII � � as n � oo. Replace x and y in (3) by Yn and Ym . Then, as n� oo and
+m� oo, the right side of (3) will tend to 0. This shows that {Yn} is a Cauchy
+sequence. Since H is complete, there exists an x0 E H so that Yn � x0 , i.e.,
+ll Yn - x0 ll � 0, as n � oo. Since Yn E E and E is closed, x0 E E. Since the
+norm is a continuous function on H (Theorem 4.6), it follows that
+llxo ll = lim IIYn ll = �
+n-+oo
+4.11 Theorem Let M be a closed subspace ofa Hilbert space H.
+(a) Every x E H has then a unique decomposition
+x = Px + Qx
+into a sum ofPx E M and Qx E M1..
+(b) Px and Qx are the nearest points to x in M and in M1., respectively.
+(c) The mappings P: H� M and Q: H� M.l. are linear.
+(d) ll x ll 2 = II Px ll 2 + 11 Qx ll 2•
+.Corollary IfM "# H, then there exists y E H, y "# 0, such that y _i M.
+P and Q are called the orthogonal projections of H onto M and M1..
+Ill/
+
+
+ELEMENTARY HILBERT SPACE THEORY 81
+PROOF As regards the uniqueness in (a), suppose that x' + y' = x" + y" for
+some vectors x', x" in M and y', y" in Ml.. Then
+x' - x" = y" - y'.
+_Since x' - x" e M, y" - y' e M1., and M n M.l = {0} [an immediate conse
+quence of the fact that (x, x) = 0 implies x = 0], we have x" = x', y" = y'.
+To prove the existence of the decomposition, note that the set
+x
++ M = {x + y: y e M}
+is closed and convex. Define Qx to be the element of smallest norm tn
+x + M; this exists, by Theorem 4.10. Define Px = x - Qx.
+Since Qx e x + M, it is clear that Px e M. Thus P maps H into M.
+To prove that Q maps H into Ml. we show that (Qx, y) = 0 for all y e M.
+Assume IIYII = 1, without loss of generality, and put z = Qx. The minimizing
+property of Qx shows that
+(z, z) = llzll2 < liz - flYII2 = (z - fly, z - fly)
+for every scalar fl. This simplifies to
+0 < -fl(y, z) - ti(z, y) + flti. With fX = (z, y), this gives 0 < - I (z, y) 12, so that (z, y) = 0. Thus Qx e M1..
+We have already seen that Px e M. If y E M, it follows that
+llx - Yll2 = IIQx + (Px - y)ll2 = 11Qxll2 + IIPx - Yll2
+which is obviously minimized when y = Px.
+We have now proved (a) and (b). If we apply (a) to x, to y, and to
+fXX + py, we obtain
+P(fXX + py) - fXPX - pPy = fXQX + PQy - Q(fXX + py).
+The left side is in M, the right side in M1.. Hence both are 0, so P and Q are
+linear. Since Px _i Qx, (d) follows from (a).
+To prove the corollary, take x e H, x ¢ M, and put y = Qx. Since
+Px e M, x =I= Px, hence y = x - Px =I= 0. /Ill
+We have already observed that x� (x, y) is, for each y e H, a continuous
+linear functional on H. It is a very important fact that all continuous linear
+functionals on H are of this type.
+4.12 Theorem If L is a continuous linear functional on H, then there is a
+unique y e H such that Lx = (x, y) (x E H). (1)
+
+
+82 REAL AND COMPLEX ANALYSIS
+PROOF If Lx = 0 for all x, take y = 0. Otherwise, define
+M = {x: Lx = 0}. (2)
+The linearity of L shows that M is a subspace. The continuity of L shows
+that M is closed. Since Lx =1= 0 for some x e H, Theorem 4. 1 1 shows that M.L
+does not consist of 0 alone.
+Hence there exists z e M.L, with lizII = 1. Put
+u = (Lx)z - (Lz)x.
+(
+3
+)
+Since Lu = (Lx)(Lz) - (Lz)(Lx) = 0, we have u e M. Thus (u, z) = 0. This
+g
+t
+v
+e
+s
+Lx = (Lx)(z, z) = (Lz)(x, z).
+(4)
+Thus (1) holds with y = rxz, where (X = Lz.
+The uniqueness of y is easily proved, for if (x, y) = (x, y') for all x e H, set
+z = y - y' ; then (x, z) = 0 for all x e H; in particular, (z, z) = 0, hence z = 0.
+/Ill
+Orthonormal Sets
+4.13 Definitions If V is a vector space, if xb . . . , xk E V, and if c1, . . . , ck are
+scalars, then c1x1 + · · · + ckxk is called a linear combination of x1, . . . , xk .
+The set {x1, . . . , xk} is called independent if c1x1 + · · · + ck xk = 0 implies that
+c
+1 = · · · = ck = 0. A set S c V is independent if every finite subset of S is
+independent. The set [S] of all linear combinations of all finite subsets of S (also called the set of all finite linear combinations of members of S) is clearly
+a vector space; [S] is the smallest subspace of V which contains S; [S] is
+called the span of S, or the space spanned by S.
+A set of vectors ua in a Hilbert space H, where rx runs through some
+index set A, is called orthonormal if it satisfies the orthogonality relations
+(ua , up) = 0 for all rx =1= {3, rx e A, and {3 e A, and if it is normalized so that
+ll uall = 1 for each rx e A. In other words, {ua} is orthonormal provided that
+{
+1 if (X = {3,
+(u..' up) = 0 if a ¥= {J. (1)
+If {ua : rx e A} is orthonormal, we associate with each x e H a complex
+function x on the index set A, defined by
+(rx E A). (�)
+One sometimes calls the numbers .X(rx) the Fourier coefficients of x, relative to
+the set {ua}.
+We begin with some simple facts aboutfinite orthonormal sets.
+
+
+ELEMENTARY HILBERT SPACE THEORY 83
+4.14 Theorem Suppose that {ua: C( e A} is an orthonormal set in H and that F
+is afinite subset ofA. Let MF be the span of{ua: C( e F}.
+(a) If <p is a complex function on A that is 0 outside F, then there is a
+vector y e MF, namely (1)
+that has y(C() = <p(C()for every C( E A. Also, IIYII2 = L l qJ(C()I2• (2)
+aeF (b) Ifx e H and sp(x) = L X(C()Ua (3)
+aeF
+then llx - sp(x)ll < llx - sll (4) for every s e MF, exceptfor s = sp(x), and L IX(C()12 < llxll2•
+(
+5
+)
+aeF
+PROOF Part (a) is an immediate consequence of the orthogonality relations
+4.13(1).
+In the proof of (b), let us write sF in place of sp(x), and note that sp(C() =
+x(C() for all C( e F. This says that (x - sF) j_ ua if C( e F, hence (x - sp) j_
+(sF - s) for every s E MF , and therefore
+llx - sll2 = ll(x - Sp) + (sF - s)ll2 = llx - sFII2 + llsF - sll2• (6)
+This gives (4). With s = 0, (6) gives llsFII 2 < llxll 2, which is the same as (5),
+because of (2). ////
+The inequality (4) states that the " partial sum " sp(x) of the " Fourier series "
+L x(C()Ua of x is the unique best approximation to x in MF , relative to the metric
+defined by the Hilbert space norm.
+4.15 We want to drop the finiteness condition that appears in Theorem 4. 14
+(thus obtaining Theorems 4.17 and 4. 18) without even restricting ourselves to sets
+that are necessarily countable. For this reason it seems advisable to clarify the meaning of the symbol. La e 4 qJ(C() when C( ranges over an arbitrary set A.
+Assume 0 < <p(C() < oo for each C( e A. Then
+L qJ<C(> (1)
+aeA
+denotes the supremum of the set of all finite sums qJ(C(1) + · · · + qJ(C(n), where
+C(1, . . . , C(n are distinct members of A.
+
+
+84 REAL AND COMPLEX ANALYSIS
+A moment's consideration will show that the sum (1) is thus precisely the
+Lebesgue integral ofqJ relative to the counting measure J1 on A.
+In this context one usually writes tP(A) for l!(J1). A complex function qJ with
+domain A is thus in t2(A) if and only if
+(2)
+Example 4.5(b) shows that t2(A) is a Hilbert space, with inner product
+((/J, t/1> = L ({J(rx)t/1(Ct). (3)
+cxeA
+Here, again, the sum over A stands for the integral of qJtfr with respect to the
+counting measure ; note that qJtfr e t1(A) because qJ and t/J are in t2(A).
+Theorem 3.13 shows that thefunctions qJ that are zero except on somefinite
+subset ofA are dense in t2(A).
+Moreover, if qJ E t2(A), then {rx e A : qJ(rx) =1= 0} is at most countable. For if An
+is the set of all (J. where I qJ(rx) I > 1/n, then the number of elements of A is at most
+ex E An cx e A
+Each An (n = 1, 2, 3, . . .) is thus a finite set.
+The following lemma about complete metric spaces will make it easy to pass from finite orthonormal sets to infinite ones.
+4.16 Lemma Suppose that
+(a) X and Y are metric spaces, X is complete,
+(b) f: X� Y is continuous,
+(c) X has a dense subset X0 on whichfis an isometry, and
+(d) f(X0) is dense in Y.
+Thenfis an isometry ofX onto Y.
+The most important part of the conclusion is thatj'maps X onto all of Y.
+Recall that an isometry is simply a mapping that preserves distances. Thus, by assumption, the distance betweenf(x1) andf(x2) in Y is equal to that between
+x 1 and x2 in X, for all points x 1 , x2 in X0 .
+PROOF The fact that f is an isometry on X is an immediate consequence of the continuity off, since X0 is dense in X.
+Pick y e Y. Since f(X0) is dense in Y, there is a sequence {xn} in X0 such
+thatf(xn) � y as n � oo. Thus {f(xn)} is a Cauchy sequence in Y. Sincefis an
+isometry on X0 , it follows that {xn} is also a Cauchy sequence. The com
+pleteness of X implies now that {xn} converges to some x e X, and the con
+tinuity 9ffshows that f(x) = lim f(xn) = y. ////
+
+
+ELEMENTARY HILBERT SPACE THEORY 85
+4.17 Theorem Let {ua: a. e A} be an orthonormal set in H, and let P be the
+space ofallfinite linear combinations ofthe vectors ua.
+The inequality
+L I x(a.)12 < llxll2 (1)
+aeA
+holds thenfor every x e H, and x�x is a continuous linear mapping ofH onto
+t2(A) whose restriction to the closure P ofP is an isometry ofPonto t2(A).
+PROOF Since the inequality 4.14(5) holds for every finite set F c A, we have
+(1), the so-called Bessel inequality.
+Define f on H by f(x) = x. Then (1) shows explicitly that f maps H into
+t2(A). The linearity offis obvious. If we apply (1) to x - y we see that
+llf(y) -f(x)ll2 = II.Y - xll2 < IIY - xll.
+Thus f is continuous. Theorem 4.14(a) shows that f is an isometry of P onto
+the dense subspace of t2(A) consisting �f those functions whose support is a
+finite set F c A. The theorem follows therefore from Lemma 4.16, applied
+with X = P, X0 = P, Y = t2(A); note that P, being a closed subset of the
+complete metric spate H, is itself complete. /Ill
+The fact that the mapping x� x carries H onto t2(A) is known as the Riesz
+Fischer theorem.
+4.18 Theorem Let {ua: a. e A} be an orthonormal set in H. Each ofthefollow
+ingfour conditions on {ua} implies the other three:
+(i) {ua} is a maximal orthonormal set in H.
+(ii) The set P ofallfinite linear combinations ofmembers of{ua} is dense in H.
+(iii) The equality
+holdsfor every x e H.
+(iv) The equality
+L I x(a.) 12 = llxll2
+aeA
+L x(a.).Y(a.) = (x, y)
+aeA
+holdsfor all x e H and y e H.
+The last formula is known as Parseval's identity. Observe that x and y are in
+t2(A), hence xy is in t1(A), so that the sum in (iv) is well defined. Of course, (iii) is
+the special case x = y of (iv).
+Maximal orthonormal sets are often called complete orthonbrmal sets or
+orthonormal bases.

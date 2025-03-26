@@ -1,0 +1,179 @@
+Large Scale Graph Mining
+MULTI-RELATIONAL GRAPH EMBEDDING APPROACHES
+Nacéra Seghouani
+Computer Science Department, CentraleSupélec Laboratoire Interdisciplinaire des Sciences du Numérique, LISN nacera.seghouani@centralesupelec.fr
+2024-2025
+1/19
+
+
+Multi-relational and Knowledge Graphs
++ Multi-relational graph refers to a directed graph G (E, R) whose nodes are entities ∈ E and edges are relationships between entities ∈ R.
++ G could be represented as a set of triples of head h, tail t and their relationship r
+{(h, r , t)|h, t ∈ E and r ∈ R}
+2/19
+
+
+Multi-relational and Knowledge Graphs
++ Examples of multi-relational data: → Social network (Facebook, LinkedIn) , Recommender systems (Amazon Product Graph), . . . → Knowledge graphs: DBPedia, Google Knowledge Graph, IBM Watson, Microsoft Satori, Freebase, Wikidata, Yago, Nell or GeneOntology Some of them are publicly available (linked open data)
++ Knowledge graph is a multi-relational graph where the semantics underlying the entities and their relationships (Abox) are formally described in a terminological box (Tbox) → reasoning capabilities based on logical facts (axioms and rules) → W3C languages for representation and querying such graphs → Some examples: classes of entities, subclassOf between classes, domain/range of properties, subproperty between properties ...
+3/19
+
+
+Multi-relational and Knowledge Graphs
++ Knowledge graph is a multi-relational graph where the semantics underlying the entities and their relationships (Abox) are formally described in a terminological box (Tbox) → reasoning capabilities based on logical facts (axioms and rules) → W3C languages for representation and querying such graphs → Some examples: classes of entities, subclassOf between classes, domain/range of properties, subproperty between properties ...
+4/19
+
+
+Multi-relational and Knowledge Graphs
++ Examples of multi-relational data: → Social networks (Facebook, LinkedIn) , Recommender systems (Amazon Product Graph), . . . → Knowledge graphs: DBPedia, Google Knowledge Graph, IBM Watson, Microsoft Satori, Freebase, Wikidata, Yago, Nell or GeneOntology Some of them are publicly available (linked open data)
++ Applications: Question answering/conversational agents, recommendation systems, search engines, . . .
++ Common characteristics: massive, noisy and incomplete
++ Problem: how to embed entities and relationships of multi-relational data in low-dimensional vector spaces. How to define similar entities using triples?
+5/19
+
+
+Multi-relational Graph Embedding: TransE
++ Translational methods (also shallow embedding) such as TansE, TransH, TransR, . . . and many others DistMult, ComplEx, and RotatE, TransOWL
++ TransE (Bordes et al. ) canonical model which is easy to train, contains a reduced number of parameters and can scale up to very large databases.
++ TransE represents both entities and relations as vectors in the same space, Rd , d is a hyperparameter. X Given (h ∈ E, r ∈ R, t ∈ E), the relation embedding r is interpreted as a translation vector from head embedding h to tail embedding t st. t ≈ h + r
+X For (AlfredHitchcock, DirectorOf , Psycho), (JamesCameron, DirectorOf , Avatar ) the intuition is to capture regularities such that (Psycho − AlfredHitchcock ≈ Avatar − JamesCameron) through this relation we can get AlfredHitchcock + DirectorOf ≈ Psycho and JamesCameron + DirectorOf ≈ Avatar .
+6/19
+
+
+Multi-relational Graph Embedding: TransE
++ TransE represents both entities and relations as vectors in the same space, Rd , d is a hyperparameter.
++ The loss function computes the similarity score between h translated by r and t, using the norm L2.
+fr (h, t) = −||h + r − t||2
+X expected to be large if (h, r , t) holds.
+7/19
+
+
+Multi-relational Graph Embedding: TransE
++ Contrastive loss: favors lower distance (or higher score) for valid triplets, high distance (or lower score) for corrupted ones
++ Given a training set S + of triples (h ∈ E, r ∈ R, t ∈ E), and the set S − of corrupted triples constructed according to:
+S−
+(h,r,t) = {(h′, r , t)|h′ ∈ E} ∪ {(h, r , t′)|t′ ∈ E}
+with either the head or tail replaced by a random entity (but not both at the same time).
++ To learn such embeddings, a loss function, a margin-based ranking over the training set:
+L= ∑
+(h,r ,t)∈S + ∑
+(h′,r ,t′)∈S −
+(h,r ,t)
+[
+γ + fr (h, t) − fr (h′, t′)]
+X γ > 0 is a margin hyperparameter. The loss f favors lower values of the energy for training triplets than for corrupted triplets. X Note that for a given entity, its embedding vector is the same when the entity appears as the head or as the tail of a triplet. X The optimization is carried out by SGD, with constraints that the L2 -norm of the embeddings of the entities is 1, to prevent to trivially minimize L by artificially increasing entity embeddings norms.
+8/19
+
+
+Multi-relational Graph Embedding: TransE
+input: S + = {(h, r , t)}, E, R, dimension d, margin γ output: Embedding vectors e, r initialization: Embedding vectors e, r are randomly uniformly initialized, and normalised r ← uniform( √−d6 , √6d ), r ← r
+||r|| r ∈ R, r ∈ R|R|
+e ← uniform( √−d6 , √6d ), e ∈ E while stop condition do e← e
+||e|| , e ∈ R|E| /*entity embedding norm is 1, to prevent to trivially minimize L by artificially increasing entity embeddings norms.*/
+Sbatch ← sample(S +, b) /*From the training set randomly sample a batch of size b*/ for each (h, r , t) ∈ Sbatch do
+(h′, r , t ′) ← sample(S −) /*sample a corrupted fact of triple*/
+Tbatch ← Tbatch ∪ {((h, r , t), (h′, r , t′))} end for
+Update embeddings by minimizing the loss function using GDS end while
+9/19
+
+
+Multi-relational Graph Embedding: TransE
+X What is the behavior of TransE given the properties of the relations? Is TransE expressive enough to model these relations?
++ Symmetry: (h, r , t) ∈ G ⇒ (t, r , h) ∈ G . Examples of r : roommate, brother, ...
++ Inverse: (h, r1, t) ∈ G ⇒ (t, r2, h) ∈ G . Examples of r1 and r2: advisor and advisee, parent and child, husband and wife ...
++ Composition: (h, r1, th), (th, r2, t) ∈ G and ⇒ (h, r3, t) ∈ G . Cases where r1 = r2 or r3
++ Transitive: (h, r , th), (th, r , t) ∈ G and ⇒ (h, r , t) ∈ G . Examples of r : sibling, ..
++ 1-to-N: (h, r , t1) ∈ G ⇒ ∃(h, r , t2) ∈ G . Examples of r : mother, father ..
++ Antisymmetry: (h, r , t) ∈ G ⇒6 ∃(t, r , h) ∈ G . Ex. : parent, ...
+10/19
+
+
+Multi-relational Graph Embedding: TransE
+⇒ The representation of an entity is the same when involved in any relations, ignoring distributed representations.
+11/19
+
+
+Multi-relational Graph Embedding: TranH
++ Despite its simplicity and efficiency, TransE has flaws in dealing with 1−to−N or N−to−N relations. For DirectorOf relation TransE might learn very similar vector representations for Psycho, Rebecca and RearWindow which are all related to AlfredHitchock even though they are totally different entities.
++ To overcome the disadvantages: an entity have different representations when involved in different relations. TransH introduced relation-specific hyperplanes .
+fr (h, t) = −||h⊥ + r − t⊥||2
+2 with h⊥ = h − wT
+r hwr and t⊥ = t − wT
+r twr
+where each r is a vector on a hyperplane with wr is the projection normal vector
+12/19
+
+
+Multi-relational Graph Embedding: TranH
++ Despite its simplicity and efficiency, TransE has flaws in dealing with 1−to−N or N−to−N relations. For DirectorOf relation TransE might learn very similar vector representations for Psycho, Rebecca and RearWindow which are all related to AlfredHitchock even though they are totally different entities.
++ To overcome the disadvantages: an entity have different representations when involved in different relations. TransH introduced relation-specific hyperplanes .
+fr (h, t) = −||h⊥ + r − t⊥||2
+2 with h⊥ = h − wT
+r hwr and t⊥ = t − wT
+r twr
+where each r is a vector on a hyperplane with wr is the projection normal vector
+⇒ Show how TransH represent relation properties presented before?
+13/19
+
+
+Multi-relational Graph Embedding: TransR
++ TransR shares a very similar idea with TransH but introduces a relation specific spaces . In TransR, entities are represented as vectors in an entity space Rd , and each relation is associated with a specific space Rk and modeled as a translation vector in that space.
++ Powerful in modelling complex relations. it introduces a projection matrix for each relation O(dk) parameters for each relation whereas TransE and TransH require O(d) per relation.
+fr (h, t) = −||h⊥ + r − t⊥||2
+2 with h⊥ = Mr h, t⊥ = Mr t
+where each Mr ∈ Rk x d is a projection matrix from the entity space to the relation space of r .
+14/19
+
+
+Multi-relational Graph Embedding: TransR
++ Show how TransR represent symmetry, inverse, transitive and one-to-many properties?
++ Note that Mr 6= M−r and Mr1 6= Mr2
++ Transitive (h, r , th), (th, r , t) ∈ G and ⇒ (h, r , t) ∈ G : need to know if Mr3 exists given Mr1 and
+Mr2
++ What about reflexive relation in TransE, TransH and TransR?
+15/19
+
+
+Multi-relational Graph Embedding
+Method Entity Relation scoring function Regularisation # parameters
+TransE h, t ∈ Rd r ∈ Rd −||h + r − t||2 ||h||2 = 1, ||t||2 = 1 O(d(|E| + |R|)) TransH h, t ∈ Rd r, wr ∈ Rd −||h − wrT hwr + r − t − wrT twr ||2
+2 ||h||2 ≤ 1, ||t||2 ≤ 1 O(d(|E| + 2|R|))
+|wrT h|/||r ||2 ≤ ε, ||wr ||2 ≤ 1 TransR h, t ∈ Rd r ∈ Rk , −||Mr h + r − Mr t||2
+2 ||h||2 ≤ 1, ||t||2 ≤, ||r||2 ≤ 1 O(d(|E| + k|R|))
+||Mr h||2 ≤ 1, Mr ∈ Rk x d ||Mr t||2 ≤ 1
++ Translation-based models translate the head entity embedding by summing with the relation embedding vector, measuring the distance (based on L1 or L2) between the translated images of head entity and the tail entity embedding, under strong assumptions about the relation embedding and the entities embedding into a relation-specific space before translation.
++ TransE (on reflexive/one-to-many/many-to-one/many-to- many relations) was the first, many extensions such as TransR , TransH , and TransA . These models are generally simple and efficient.
+16/19
+
+
+Multi-relational Graph Embedding: DistMult
++ Bilinear-product-based models compute their scores by using bilinear product between head, tail, and relation embeddings, DistMult the simplest one in this category and ComplEx,
+fr (h, t) = i∑
+hi ri ti
++ The intuition behind is to compute the cosine similarity between h × r and t
+17/19
+
+
+Multi-relational Graph Embedding:
+Neural-network-based
++ These models use a nonlinear neural network to compute the matching score for a triple:
+fr (h, t) = NN(h, r, t)
++ One of the simplest NN neural-network-based model is ER-MLP which concatenates the input embedding vectors and uses a multi-layer perceptron neural network to compute the matching score.
++ These models are complicated because of their use of neural networks as a black-box universal approximator, which usually make them difficult to understand and expensive to use.
+18/19
+
+
+Multi-relational Graph Embedding: Model perfomances
+Task Example Response
+Link Prediction
+Triple classification (Joseph Fourrier, occupation, physicist) ? (yes, 95%) Tail classification (Joseph Fourrier, occupation, ?) (1, physicist, 95%) (2, chemist, 93%) Head classification (?, occupation, physicist) (1, Albert Einstein, 91%), (2, Stephan Hawking, 89%) Relation prediction (Joseph Fourrier, ?, physicist) (1, occupation, 95%) Entity classification (Joseph Fourrier, isTypeOf, ?) (1, Person, 95%) (1, Scientist, 99%)
++ Performance indicators are often used to measure the embedding quality of a model. Their simplicity makes them very suitable for evaluating the performance of an embedding algorithm even on a large scale. Given Q as the set of all ranked predictions of a model:
++ Hits@K or H@K = |{q∈Q:q<k}|
+|Q| ∈ [0, 1] measures the probability to find the correct prediction in the first top K model predictions. Usually, used for k = 10, it reflects the accuracy of an embedding model to predict the relation between two given triples correctly. Larger values mean better predictive performances.
++ Mean rank is the average ranking position of the triples predicted correctly by the model among all the possible triples. MR = 1
+|Q | ∑q∈Q q
+The smaller the value, the better the model.
++ Mean reciprocal rank measures the number of triples predicted correctly. MRR = 1
+|Q | ∑q∈Q 1
+q ∈ [0, 1] The larger the value, the better the model.
+19/19

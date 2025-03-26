@@ -1,0 +1,1250 @@
+Support de cours – Vari ́ete ́s diffe ́rentielles
+Philippe Bouafia
+10 novembre 2024
+Table des matie`res
+1 Vari ́et ́es diff ́erentielles 1 1.1 D ́efinition ge ́ne ́rale . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 1.2 Partitions de l’unit ́e . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4 1.3 Espace tangent, application tangente . . . . . . . . . . . . . . . . . . . . . . . . . 4 1.4 Immersions et submersions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10 1.5 Sous-vari ́et ́es . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11 1.6 Champs de vecteurs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+2 Int ́egration des formes diff ́erentielles 16 2.1 Tenseurs et champs tensoriels . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16 2.2 Tenseurs altern ́es et formes diffe ́rentielles . . . . . . . . . . . . . . . . . . . . . . 20 2.3 D ́eriv ́ee ext ́erieure d’une forme diffe ́rentielle . . . . . . . . . . . . . . . . . . . . . 23 2.4 Orientations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28 2.5 Formule de Stokes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 30
+1 Varie ́te ́s diffe ́rentielles
+1.1 De ́finition ge ́ne ́rale
+1.1 (Conventions d’Einstein). — Dans ce cours, nous utiliserons les conventions d’Einstein, que nous expliquons ici informellement. Lorsqu’une famille de vecteurs est index ́ee, on place les indices en bas. Par exemple, la base canonique de Rn est E1, . . . , En. En revanche, les
+coordonn ́ees d’un vecteur sont not ́ees en haut. On  ́ecrira donc x = ∑n
+i=1 xiEi. Lorsqu’un mˆeme indice apparaıˆt `a la fois en haut et en bas, les conventions de sommation d’Einstein rendent la sommation implicite. On  ́ecrira donc plus simplement x = xiEi. Pour des formes line ́aires, qui sont des objets d’un autre type que les vecteurs, les conventions sont invers ́ees. La base duale de Rn sera note ́e ε1, . . . , εn, avec
+εi(Ej) = δi
+j=
+{
+1 si i = j
+0 sinon
+et les coordonn ́ees d’une forme line ́aire sont not ́ees en bas φ = φiεi. De sorte, tout est coh ́erent, puisque xi = εi(x). Par ailleurs, quand on rencontre une d ́eriv ́ee partielle ∂
+∂xi , il faut compter l’indice i comme  ́etant en bas .
+1
+
+
+Pour le moment, il faut suspendre sa cr ́edibilit ́e et admettre que les conventions d’Einstein sont un moyen formidable de d ́etecter des expressions qui n’ont pas de sens intrinse`que sur une varie ́te ́ diff ́erentielle. Par exemple, le gradient d’une fonction f
+∇f = ∂f
+∂xi Ei
+viole les conventions d’Einstein. On peut en revanche de ́finir la diff ́erentielle
+df = ∂f
+∂xi εi
+(on note aussi εi = dxi). Si l’on veut donner un sens au gradient, il faut une structure additionnelle, pour respecter les conventions d’Einstein, on e ́crit
+∇f = gij ∂f
+∂xi Ej (1)
+avec gij = 1 ou 0 selon que i = j ou non. Les gij sont les coordonn ́ees d’un 2-tenseur particulier, le tenseur m ́etrique (qui a un sens sur les vari ́et ́es riemanniennes). L’expression de gij que l’on a donn ́ee n’est en v ́erit ́e valable que pour certains syst`emes de coordonne ́es (par exemple les coordonn ́ees cart ́esiennes de Rn), et justement, les tenseurs sont re ́gis par des formules de changement de variable qui rendent (1) valable quel que soit le syst`eme de coordonne ́es.
+1.2 (Vari ́et ́e topologique). — On appelle vari ́et ́e topologique de dimension n un espace topologique M s ́epar ́e `a base d ́enombrable qui est localement hom ́eomorphe `a Rn. De manie`re  ́equivalente, on peut remplacer Rn par un ouvert de Rn. On  ́ecrit dim M = n. Les conditions topologiques s ́epar ́e et `a base d ́enombrable sont essentiellement techniques et servent `a  ́eliminer des cas pathologiques. Nous reviendrons en d ́etail sur ces conditions (et sur leurs cons ́equences) dans le premier DM. On rappelle qu’un espace topologique M est dit `a base d ́enombrable lorsqu’il existe une collection de ́nombrable d’ouverts (Ui)i∈I telle que tout ouvert de M s’ ́ecrit comme union ⋃
+i∈J Ui avec J ⊆ I. On fait remarquer cependant que
+ces deux propri ́et ́es sont stables par passage au sous-espace, et qu’elles sont ve ́rifie ́es pour Rn. Il est bon de savoir que, chez les espaces me ́triques, ˆetre `a base d ́enombrable et ˆetre s ́eparable sont des conditions  ́equivalentes. S’il on veut pouvoir plonger une vari ́et ́e topologique dans un espace Rn, il faut donc imposer ces conditions topologiques a priori, car elles ne sont pas automatiques, comme le montrent les contre-exemples : — la droite avec origine d ́edoubl ́ee, voir [1, Problem 1.1] (qui n’est pas se ́par ́ee). — M un ensemble ind ́enombrable, muni de la topologie discr`ete (qui n’est pas `a base d ́enombrable). On appelle syst`eme de coordonne ́es un couple (U, φ), ou` U est un ouvert de M et φ : U → φ(U ) est un hom ́eomorphisme de U vers φ(U ). On dit aussi que (U, φ) est une carte locale. Les fonctions coordonn ́ees de φ = (x1, . . . , xn). C’est un point de vue assez nouveau et fe ́cond, les coordonn ́ees sont maintenant des fonctions, d ́ependant d’un point abstrait p d’une vari ́et ́e. Il faut interpr ́eter la fonction r ́eciproque φ−1 : φ(U ) → U comme une parame ́trisation euclidienne d’un petit bout de M . L’ ́etude des vari ́et ́es topologiques n’est pas l’objet de ce cours. Afin de pouvoir introduire les outils de calcul diffe ́rentiel sur une vari ́et ́e, il faut introduire une structure additionnelle.
+1.3 (Vari ́et ́e diff ́erentielle). — Une structure diff ́erentielle sur une vari ́et ́e topologique est une collection A = {(Uα, φα) : α ∈ A} de syste`mes de coordonn ́ees tels que (A) les domaines Uα (α ∈ A) des cartes recouvrent la varie ́te ́ M ;
+2
+
+
+(B) Pour tous α, β ∈ A, l’application (dite de changement de cartes)
+φβ ◦ φ−1
+α : φα(Uα ∩ Uβ) → φβ(Uα ∩ Uβ)
+est un C∞-diff ́eomorphisme. (C) Si (U, φ) est une carte compatible avec toutes les cartes de A , au sens ou` φα ◦ φ−1 est un diff ́eomorphisme pour tout α ∈ A, alors (U, φ) ∈ A . Une collection v ́erifiant (A) et (B) est po ́etiquement appel ́ee atlas. Lorsque (C) est v ́erifi ́ee, on parle d’atlas maximal. Tout atlas d ́etermine unique atlas maximal, il suffit de lui rajouter toutes les cartes qui lui sont compatibles. On appelle vari ́et ́e diffe ́rentielle la donn ́ee (M, A ) d’une vari ́et ́e topologique M et d’une structure diff ́erentielle.
+1.4 (Exemples). — (A) Structure diff ́erentielle standard de Rn : on choisit l’atlas maximal contenant la carte (Rn, id). Plus g ́en ́eralement, si E est un espace vectoriel de dimension n, la structure diff ́erentielle standard est l’atlas maximal contenant les (E, φ), ou` φ : E → Rn est line ́aire. (B) Si (M, A ) est une vari ́et ́e diffe ́rentielle et U un ouvert de M , on peut munir U de la structure diffe ́rentielle compos ́ee des cartes (U ∩ Uα : φα|U∩Uα), ou` α ∈ A. (C) Par les deux points pre ́ce ́dents, GLn(R) est une varie ́te ́ diff ́erentielle. (D) La sph`ere
+Sn =
+{
+(x1, . . . , xn+1) ∈ Rn+1 :
+n+1
+∑
+i=1
+(xi)2 = 1
+}
+peut ˆetre munie d’une structure de vari ́et ́e diff ́erentielle, voir [1, Example 1.31] et [1, Problem 1.7]. Comme la sph`ere est compacte, elle n’est hom ́eomorphe `a aucun ouvert de Rn. Il faut donc ici au mieux deux cartes pour recouvrir Sn. (E) L’espace projectif, voir [1, Example 1.33]. (F) Vari ́et ́es produits : si M et N sont des vari ́et ́es, munis d’atlas {(Uα, φα) : α ∈ A} et {(Vβ, ψβ) : β ∈ B}, on donne `a M ×N l’atlas maximal contenant les cartes (Uα ×Vβ, φα × ψβ), ou` (α, β) parcourt A × B. Ici φα × ψβ d ́esigne l’application (p, q) 7→ (φα(p), ψβ(q)).
+1.5 (Applications lisses). — Soient F : M → N une application continue entre deux varie ́te ́s M et N . On dit que F est lisse (ou C∞) lorsque, pour toutes cartes (U, φ) et (V, ψ) au de ́part et `a l’arriv ́ee, l’application
+Fˆ = ψ ◦ F ◦ φ−1 : φ(U ∩ F −1(V )) → ψ(V )
+est de classe C∞. On appelle parfois Fˆ l’application F lue dans les cartes . Les vari ́et ́es diff ́erentielles et les applications lisses sont un exemple de cat ́egorie.
+1.6 (Langage cate ́gorique). — Une cat ́egorie C consiste en la donn ́ee
+(A) d’une classe d’objets ob(C) ;
+(B) pour tous objets X, Y ∈ ob(C), d’un ensemble Hom(X, Y ), dont les  ́el ́ements sont appel ́es morphismes (ou fl`eches) de X vers Y ;
+(C) pour tous objets X, Y, Z ∈ ob(C), d’une ope ́ration de composition
+◦ : Hom(X, Y ) × Hom(Y, Z) → Hom(X, Z) : (g, f ) 7→ f ◦ g
+v ́erifiant les axiomes suivants
+(A) Associativit ́e : (f ◦g)◦h = f ◦(g ◦h) pour toutes fl`eches f, g, h aux domaines compatibles.
+(B) Existence de l’identite ́ : pour tout objet X, il existe une fl`eche (ne ́cessairement unique) idX telle que idY ◦f = f = f ◦ idX pour toute fle`che f : X → Y .
+3
+
+
+Pour eˆtre enti`erement pr ́ecis, il faudrait rajouter un axiome 0 : pour tous couples d’objets (X, Y ) 6= (X′, Y ′), les ensembles de morphismes Hom(X, Y ) et Hom(X′, Y ′) sont disjoints. Autrement dit, chaque morphisme a un domaine de d ́epart et d’arrive ́e bien d ́etermin ́e. V ́erifier que les axiomes de cat ́egorie sont bien v ́erifi ́ees pour Diff, la cate ́gorie des vari ́ete ́s diff ́erentielles avec applications lisses (essentiellement, il reste `a v ́erifier que la compos ́ee d’applications lisses est lisse). Un exercice possible : v ́erifier que les applications projection π1 : M ×N → M et π2 : M × N → N sont lisses ; consulter la d ́efinition d’objet produit dans une cat ́egorie ; et ve ́rifier que la donne ́e de M × N et des morphismes π1 et π2 d ́efinissent bien le produit au sens cat ́egorique de M et N .  ́Etudier la notion duale de coproduit et montrer que les coproduits d ́enombrables existent dans Diff. Dans une cat ́egorie donne ́e, on appelle isomorphisme une fl`eche f : X → Y qui est inversible, c’est-`a-dire pour laquelle il existe un inverse (ne ́cessairement unique) f −1 : Y → X tel que f −1 ◦ f = idX et f ◦ f −1 = idY . Une fois qu’on a d ́efini une cat ́egorie, on peut se poser la question, en g ́en ́eral tr`es difficile, de la classification de ses objets a` isomorphisme pr`es. Les isomorphismes de Diff s’appellent bien entendu diff ́eomorphismes. Voici un exemple de r ́esultat de classification : les seules vari ́et ́es connexes de dimension 1 sont la droite r ́eelle et le cercle, `a diff ́eomorphisme pr`es.
+1.2 Partitions de l’unite ́
+1.7. — Les r ́esultats de cette partie sont d ́emontr ́es dans le premier DM. Les partitions de l’unit ́e sont un outil de base pour passer du local au global . Voici la de ́finition. Soit {Ui : i ∈ I} un recouvrement ouvert d’une vari ́et ́e M . On appelle partition de l’unite ́ subordonn ́ee au recouvrement {Ui : i ∈ I} une collection {φi : i ∈ I} de fonctions C∞ sur M v ́erifiant
+(A) 0 6 φi 6 1 pour tout i ∈ I ;
+(B) supp φi ⊆ Ui pour tout i ∈ I ;
+(C) la famille (supp φi)i∈I est localement finie : tout point de M admet un voisinage qui n’intersecte qu’un nombre fini des supp φi ;
+(D) ∑
+i∈I φi(p) = 1 pour tout p ∈ M .
+Le r ́esultat principal de cette section est l’existence de partitions de l’unit ́e. C’est un r ́esultat de topologie,
+1.8 Th ́eore`me. — Tout recouvrement ouvert d’une vari ́et ́e admet une partition de l’unit ́e qui lui est subordonne ́e.
+Comme application importante, nous en d ́eduisons l’existence de fonctions dites bump , dont le support est localis ́ee dans une r ́egion d’inte ́reˆt de la vari ́et ́e.
+1.9 Corollaire. — Soient M une vari ́et ́e, A un ferm ́e de M et U un ouvert de M contenant A. Il existe une application lisse φ : M → R qui vaut 1 sur A et `a support contenu dans U .
+Une cons ́equence tre`s importante de ce corollaire, que nous utiliserons souvent implicitement dans la suite, est que toute fonction C∞ d ́efinie au voisinage de p coı ̈ncide sur un voisinage (peut-ˆetre plus petit) de p avec une fonction C∞ d ́efinie sur toute la vari ́et ́e.
+1.3 Espace tangent, application tangente
+1.10. — Il existe trois  ́echelles diff ́erentes `a laquelle on peut consid ́erer une vari ́ete ́ : l’e ́chelle globale, au niveau de toute la vari ́et ́e, l’ ́echelle locale, au niveau des cartes, et enfin l’ ́echelle infinit ́esimale, au niveau de l’espace tangent en un point, que nous allons d ́efinir dans cette section.
+4
+
+
+La d ́efinition de vecteur tangent est assez d ́elicate, dans la mesure ou` les varie ́te ́s qui nous manipulons ne sont pas plong ́ees dans un espace vectoriel ambient. Il existe plusieurs constructions  ́equivalentes de l’espace tangent en un point p d’une vari ́et ́e M . Celle que nous pr ́esentons est assez abstraite, mais permet une d ́efinition claire qui ne fasse appel aux cartes locales. L’interpr ́etation est la suivante : un vecteur, c’est une direction dans laquelle on peut d ́eriver les fonctions d ́efinies sur la vari ́et ́e, et qui ont donc un sens intrins`eque. Cela revient `a identifier vecteurs et op ́erateurs de d ́erivation, ce qui est `a la base de la d ́efinition suivante. On appelle d ́erivation en p, ou vecteur tangent en p une application line ́aire v : C∞(M ) → R qui v ́erifie la r`egle de Leibniz
+v(f g) = f (p)v(g) + g(p)v(f ) pour tous f, g ∈ C∞(M ).
+L’espace des vecteurs tangents en p est appel ́e espace tangent en p ; il est note ́ TpM . Voyons quelques propri ́et ́es des d ́erivations en p : (A) Les fonctions constantes sont envoye ́es sur 0. C’est parce que
+v(1) = v(1 × 1) = v(1) + v(1)
+et donc v(1) = 0 puis par line ́arite ́ v(λ) = 0 pour tout λ ∈ R. (B) L’espace tangent TpM est clairement un espace vectoriel. C’est la force de cette d ́efinition par rapport `a d’autres. Par contre, il n’est pas encore  ́evident que TpM soit de dimension finie (de mˆeme dimension que M ). (C) Si f, g ∈ C∞(M ) sont nulles en p, alors le produit f g est nul `a l’ordre 2 en p et est envoy ́e sur 0. En effet, v(f g) = f (p)v(g) + g(p)v(f ) = 0.
+(D) Les d ́erivations sont locales au sens o`u v(f ) = v(g) si f = g sur un voisinage de p. Il s’agit de montrer que v(h) = 0, o`u h = f − g est nul sur un voisinage U de p. Le corollaire 1.9 permet d’obtenir une fonction bump χ : M → R, valant 1 sur un voisinage de p, `a support dans U . La fonction χh est alors identiquement nulle, ce qui implique
+0 = v(χh) = χ(p)v(h) + h(p)v(χ) = v(h)
+et termine donc la preuve de notre affirmation. Le point (D) nous ame`ne `a introduire la notion de germe en p d’une fonction de C∞(M ). On introduit la relation d’ ́equivalence
+f ∼ g ⇐⇒ f = g sur un voisinage de p.
+Les classes d’ ́equivalence pour cette relation sont appel ́ees les germes de fonctions en p. Comme la relation ∼ est compatible avec les ope ́rations alg ́ebriques, l’ensemble Cp∞(M ) des germes en p est une R-alg`ebre. Du fait du point (D), on n’he ́sitera pas `a e ́crire v(f ) dans le cas ou` f est une fonction C∞ d ́efinie au voisinage de p, voire lorsque f est le germe d’une fonction en p, avec le sens  ́evident que peut avoir v(f ). On note Jp l’id ́eal de Cp∞(M ) des germes de fonctions nulles en p. La proposition suivante
+donne une construction alternative de l’espace tangent. Au passage, l’espace vectoriel Jp/J2p, qui semble ˆetre un objet plus fondamental, est appel ́e (naturellement isomorphe a`) l’espace cotangent.
+1.11 Proposition. — L’espace tangent TpM est isomorphe `a (Jp/J2p)∗.
+5
+
+
+D ́emonstration. Prenons une de ́rivation v. Le point (D) dit qu’on peut factoriser v de la manie`re suivante.
+C∞(M ) Cp∞(M ) R
+projection v ̃
+On restreint maintenant v ̃ `a Jp. Par le point (C), v ̃ est nulle sur J2p. En passant au quotient, cela de ́finit une application
+` : (Jp/J2
+p)∗ → R.
+L’application v 7→ ` de TpM → (Jp/J2p)∗ que nous venons de d ́efinir est bien suˆr lin ́eaire. Montrons qu’elle admet un inverse. Si ` est donne ́, on construit
+v : f 7→ `([f − f (p)])
+ou` [f − f (p)] d ́esigne l’ ́el ́ement de Jp/J2p obtenu `a partir de f − f (p). Le seul point de ́licat `a
+v ́erifier est que v v ́erifie la r`egle de Leibniz. Pour f, g ∈ C∞(M ), on a
+v(f g) = `([f g − f (p)g(p)])
+= ` ([(f − f (p))(g − g(p)) + f (p)(g − g(p)) + g(p)(f − f (p))])
+= f (p)`([g − g(p)]) + g(p)`([f − f (p)])
+= f (p)v(g) + g(p)v(f ).
+On laisse au lecteur le soin de ve ́rifier que les applications v 7→ ` et ` 7→ v sont r ́eciproques.
+1.12. — Soit (U, (x1, . . . , xn)) une carte locale autour d’un point p. Elle permet de de ́finir les vecteurs ∂
+∂x1
+∣ ∣ ∣ ∣p
+,..., ∂
+∂xn
+∣ ∣ ∣ ∣p
+∈ TpM
+par la formule
+∂
+∂xi
+∣ ∣ ∣ ∣p
+f = ∂(f ◦ φ−1)
+∂xi (φ(p)) pour f ∈ C∞(M )
+On va montrer que ces e ́le ́ment forment une base de TpM .
+1.13 Proposition. — Soit (U, (x1, . . . , xn)) une carte autour d’un point p ∈ M . Alors
+∂
+∂x1
+∣ ∣ ∣ ∣p
+,..., ∂
+∂xn
+∣ ∣ ∣ ∣p
+∈ TpM
+est une base de TpM et pour tout v ∈ TpM ,
+v(f ) = v(xi) ∂f
+∂xi
+∣ ∣ ∣ ∣p
+En particulier, dim TpM = n.
+D ́emonstration. Tout d’abord, le fait que
+∂xj
+∂xi
+∣ ∣ ∣ ∣p
+= δj
+i=
+{
+0 si i 6= j
+1 si i = j
+implique que la famille en question est libre.
+6
+
+
+On va utiliser la formule de Taylor avec reste int ́egral
+g(1) = g(0) + g′(0) +
+∫1
+0
+(1 − t)g′′(t) dt
+valable pour une fonction g de classe C2 sur [0, 1]. Quitte `a restreindre U , on va supposer φ(U ) convexe. On prend f ∈ C∞(M ) et q ∈ U . On applique la formule de Taylor `a t 7→ f ◦ φ−1(φ(p) + t(φ(q) − φ(p))).
+f (q) = f (p) + (xi(q) − xi(p)) ∂f
+∂xi
+∣ ∣ ∣ ∣p
++ (xi(q) − xi(p))(xj(q) − xj(p))
+∫1
+0
+(1 − t) ∂2(f ◦ φ−1)
+∂xi∂xj (φ(p) + t(φ(q) − φ(p))) dt
+Par les th ́eor`emes standard, le reste int ́egral est une fonction C∞ de q. En appliquant une d ́erivation v ∈ TpM , et en prenant en compte les points (A) et (C) de 1.10, on obtient
+v(f ) = v(xi) ∂f
+∂xi
+∣ ∣ ∣ ∣p
+1.14 (Changement de variables). — Si (V, (y1, . . . , yn)) est une deuxie`me carte autour de p,
+alors
+∂
+∂yj
+∣ ∣ ∣ ∣p
+= ∂xi
+∂yj (p) ∂
+∂xi
+∣ ∣ ∣ ∣p
+1.15 (Application tangente). — Soit F : M → N une application lisse et p ∈ M . On de ́finit l’application tangente en p
+T Fp : TpM → TF (p)N
+par T Fp(v)(f ) = v(f ◦ F ). Il faut v ́erifier que T Fp(v) est une d ́erivation en F (p). La lin ́earit ́e est claire, et la re`gle de Leibniz est assur ́ee par le calcul suivant.
+T Fp(v)(f g) = v((f g) ◦ F )
+= v((f ◦ F )(g ◦ F ))
+= f ◦ F (p)v(g ◦ F ) + g ◦ F (p)v(f ◦ F )
+= f (F (p))T Fp(v)(g) + g(F (p))T Fp(v)(f )
+1.16 Proposition. — Soient F : M → N et G : N → P des applications lisses et p ∈ M . On a
+(A) T Fp : TpM → TF (p)N est lin ́eaire.
+(B) T (G ◦ F )p = T GF (p) ◦ T Fp.
+(C) T (idM )p = idTpM .
+(D) Si F est un diffe ́omorphisme, alors T Fp est un isomorphisme et (T Fp)−1 = T (F −1)F (p).
+(E) Si M est connexe et T Fp = 0 en tout point p, alors F est constante.
+1.17 (Vecteur vitesse). — Si γ : I → M est une courbe param ́etr ́ee C∞, d ́efinie sur un intervalle ouvert I ⊆ R, on d ́efinit pour t ∈ I,
+γ′(t) = T γ
+(d
+dt
+∣ ∣ ∣ ∣t
+)
+∈ Tγ(t)M
+7
+
+
+1.18 (Espace cotangent). — On appelle espace cotangent `a p le dual de Tp∗M de TpM . Voici
+par exemple des e ́le ́ments de l’espace cotangent. Si f est une fonction C∞ d ́efinie au voisinage de p, on appelle diff ́erentielle de f au point p la forme lin ́eaire df|p ∈ Tp∗M d ́efinie par
+df|p(v) = v(f ).
+La proposition 1.13 ne fait qu’exprimer que, pour une carte locale (U, (x1, . . . , xn)), les diff ́erentielles dx1
+|p, . . . , dxn
+|p forment la base duale de ∂
+∂x1
+∣
+∣p , . . . , ∂
+∂xn
+∣
+∣p. De plus, on r ́ecup`ere une formule bien
+connue de calcul diff ́erentielle
+df|p = ∂f
+∂xi
+∣ ∣ ∣ ∣p
+dxi
+|p
+L’application adjointe de l’application tangente en p de F : M → N est note ́e
+F∗: T∗
+F (p)N → T ∗
+p M : ω 7→ ω ◦ T Fp
+On v ́erifie en particulier que
+(A) F ∗ df|F (p) = d(f ◦ F )|p ;
+(B) d(f g)|p = f (p) dg|p + g(p) df|p.
+Le point (A) d ́ecoule du calcul suivant
+F ∗ df|F (p)(v) = (df|F (p) ◦ T Fp)(v)
+= dfF (p)(T Fp(v))
+= T Fp(v)(f )
+= v(f ◦ F )
+= d(f ◦ F )|p(v)
+valable pour tout v ∈ TpM , tandis que le point (B) est une conse ́quence de la r`egle de Leibniz pour les de ́rivations. Il est tr`es important ici de remarquer que la diff ́erentielle d’une fonction en p est le bon objet pour mesurer les variations locales de f . Surtout, il n’existe pas de notion bien d ́efinie de gradient sur une varie ́te ́ diff ́erentielle, qui ressemblerait a`
+∇fp =
+n
+∑
+i=1
+∂f
+∂xi
+∣ ∣ ∣ ∣p
+∂
+∂xi
+∣ ∣ ∣ ∣p
+On voit d’une part qu’une telle d ́efinition violerait les conventions d’Einstein, mais surtout qu’elle n’est pas invariante par changement de cartes. Sur R2 \ {0}, on a
+∂f
+∂x
+∣ ∣ ∣ ∣p
+∂
+∂x
+∣ ∣ ∣ ∣p
++ ∂f
+∂y
+∣ ∣ ∣ ∣p
+∂
+∂y
+∣ ∣ ∣ ∣p
+6= ∂f
+∂r
+∣ ∣ ∣ ∣p
+∂
+∂r
+∣ ∣ ∣ ∣p
++ ∂f
+∂θ
+∣ ∣ ∣ ∣p
+∂
+∂θ
+∣ ∣ ∣ ∣p
+1.19 (Fibr ́es tangents). — Ensemblistement, le fibr ́e tangent de M est l’union disjointe
+TM =
+∐
+p∈M
+TpM
+Il faut s’entendre sur ce que signifie l’union disjointe ici. Les ensembles TpM ne sont pas disjoints (ils contiennent tous par exemple la de ́rivation nulle). On construit l’union disjointe comme
+∐
+p∈M
+TpM = {(p, v) : p ∈ M et v ∈ TpM } .
+8
+
+
+D’une certaine mani`ere, on force chaque vecteur tangent `a avoir une origine. On notera un point de T M sous la forme (p, v) ou v|p. On appelle π : T M → M l’application qui envoie un vecteur sur son point de base. On va munir T M d’une structure diffe ́rentielle, de dimension 2n. Notons {(Uα, φα) : α ∈ A} l’atlas maximal de M . Pour tout α ∈ A, on d ́efinit U ̃α = π−1(Uα) et φ ̃α : U ̃α → φα(Uα) × Rn l’application
+φ ̃α : (p, v) 7→ (x1(p), . . . , xn(p), v(x1), . . . , v(xn)).
+Autrement, on concate`ne les coordoone ́es de p avec celles de v dans la base ∂
+∂x1
+∣
+∣p , · · · , ∂
+∂xn
+∣
+∣p.
+Ici, on est dans une situation o`u l’on souhaite donner T M une structure de vari ́et ́e diffe ́rentielle, alors qu’a priori, aucune topologie n’est donne ́e. On utilisera le lemme 1.20 plus bas. A` toute application lisse F : M → N , on associe l’application T F : T M → T N , dont la restriction aux fibres TpM est T Fp. On laisse plusieurs points a` v ́erifier :
+(A) T F est lisse ;
+(B) si G : N → P est lisse, alors T (G ◦ F ) = T G ◦ T F .
+1.20 Lemme. — Soient M un ensemble et {(Uα, φα) : α ∈ A} une collection, ou` les Uα sont des sous-ensembles de M , et φα sont des fonctions Uα → Rn, telle que (A) Pour tout α, la fonction φα est une bijection de Uα vers un ouvert φα(Uα) de Rn ; (B) Pour tous α, β, les ensembles φα(Uα ∩ Uβ) et φβ(Uα ∩ Uβ) sont ouverts, et l’application de transition
+φβ ◦ φ−1
+α : φα(Uα ∩ Uβ) → φβ(Uα ∩ Uβ)
+est de classe C∞. (C) M est recouvert par un nombre de ́nombrable de Uα ; (D) Pour tous points distincts p, q ∈ M , soit il existe α tel que p, q ∈ Uα, ou alors il existe deux ensembles disjoints Uα, Uβ tels que p ∈ Uα et q ∈ Uβ. Alors M admet une unique structure de varie ́te ́ diffe ́rentielle qui fait de chaque (Uα, φα) une carte.
+1.21 (Foncteurs). —  ́Etant donn ́ees deux cat ́egories C et D, on appelle foncteur covariant F : C → D la donn ́ee, pour chaque objet X de C, d’un objet F (X) de D, et pour chaque fl`eche f : X → Y de C d’une fl`eche F (f ) : F (X) → F (Y ) de D, de telle sorte que
+(A) pour tout X ∈ ob(C), on a F (idX ) = idF (X) ;
+(B) pour tous f : X → Y et g : Y → Z, on a F (g ◦ f ) = F (g) ◦ F (f ).
+A` l’oppose ́, on parle de foncteur contravariant lorsque le sens des fl`eches est invers ́e : un foncteur contravariant envoie f ∈ Hom(X, Y ) vers F (f ) ∈ Hom(F (Y ), F (X)), et la propri ́ete ́ (B) est remplac ́ee par
+(B’) pour tous f : X → Y et g : Y → Z, on a F (g ◦ f ) = F (f ) ◦ F (g).
+Le langage des vari ́et ́es diff ́erentielles regorge de foncteurs. Par exemple, le foncteur T , covariant, de Diff dans Diff. Un exemple de foncteur contravariant est C∞, qui va de Diff vers la cat ́egorie des R-alg`ebres, associe `a une vari ́et ́e M l’alg`ebre des fonctions C∞(M ) et `a une application lisse F : M → N le morphisme de R-alg`ebres :
+F ∗ : C∞(N ) → C∞(M ) : f 7→ F ∗f = f ◦ F.
+On a vu implicitement ce foncteur apparaıˆtre dans la d ́efinition des applications tangentes.
+9
+
+
+1.4 Immersions et submersions
+On rappelle le the ́ore`me d’inversion locale. Tous les r ́esultats de cette section en seront des cons ́equences, dans le langage des varie ́te ́s. Ce th ́eor`eme exprimant un r ́esultat local, il est imm ́ediatement suivi de sa traduction dans les vari ́et ́es.
+1.22 Th ́eor`eme (Inversion locale). — Soit F une application C∞ entre deux ouverts U et V de Rn. Si la diff ́erentielle de F en un point p ∈ U est un isomorphisme, alors il existe un voisinage ouvert U ′ ⊆ U de p tel que F (U ′) soit ouvert et F soit un diffe ́omorphisme de U ′ sur F (U ′).
+1.23 Corollaire. — Soit F une application C∞ entre deux vari ́et ́es M et N de mˆeme dimension. Si T Fp est un isomorphisme en un point p ∈ M , alors il existe un voisinage ouvert U de p tel que F (U ) soit ouvert et F soit un diffe ́omorphisme de U sur F (U ).
+1.24. — Le re ́sultat pr ́ec ́edent permet un passage de l’ ́echelle infinit ́esimale `a l’ ́echelle locale. D’autres questions se posent imm ́ediatement : si T Fp est injective (resp. surjective), est-ce que F est localement injective (resp. surjective) ? Nous allons y r ́epondre affirmativement. Introduisons quelques points de vocabulaire. Pour une application F : M → N entre vari ́et ́es, on dit que (A) F est une immersion si T Fp est injective en tout point p ∈ M ; (B) F est une submersion si T Fp est une surjection en tout point p ∈ M ; (C) F est un diff ́eomorphisme local lorsque F est `a la fois une immersion et submersion. La terminologie du point (C) vient  ́evidemment du the ́ore`me d’inverse locale. Notons qu’un diff ́ermorphisme local n’est pas n ́ecessairement injectif, c’est le cas par exemple de la fonction z 7→ z2 de C \ {0} dans lui-meˆme.
+1.25 Lemme. — Soient M une varie ́te ́ de dimension n, et x1, . . . , xn des applications C∞ d ́efinies dans un voisinage U de p. Si les diff ́erentielles dx1
+|p, . . . , dxn
+|p forment une base de Tp∗M ,
+alors il existe un ouvert U ′ ⊆ U contenant p tel que (U ′, (x1, . . . , xn)) soit une carte locale.
+D ́emonstration. Notons φ : U → Rn l’application p 7→ (x1(p), . . . , xn(p)), qui est de classe C∞. On consid`ere l’application ψp∗ induite sur les espaces cotangents. Notons yi : Rn → R la projection sur la i-`eme coordonn ́ee. On sait que (voir 1.18)
+φ∗
+p(dyi
+|φ(p)) = d(yi ◦ φ)|p = dxi
+|p
+Il suit que φ∗p est surjective, c’est donc un isomorphisme, et il en va de mˆeme pour l’application tangente T φp. On conclut avec le corollaire 1.23.
+1.26 The ́or`eme ( ́Ecriture locale des immersions et submersions). — Soit F : M → N une application C∞ entre deux varie ́te ́s de dimensions respectives m et n. Soit p ∈ M .
+(A) Si T Fp est injective, il existe des cartes, au d ́epart et `a l’arriv ́ee, centre ́es en p et F (p), dans lesquelles F se lit
+(x1, . . . , xm) 7→ (x1, . . . , xm, 0, . . . , 0)
+(B) Si T Fp est surjective, il existe des cartes, au d ́epart et `a l’arriv ́ee, centr ́ees en p et F (p), dans lesquelles F se lit
+(x1, . . . , xm) 7→ (x1, . . . , xn)
+D ́emonstration. On commence par le point (B), l ́eg`erement plus simple. Soit (U, (y1, . . . , ym)) une carte centr ́ee en p et (V, (x1, . . . , xn)) une carte centr ́ee en F (p). L’application Fp∗ entre espaces cotangents est l’adjointe d’une surjection, elle est donc injective. Elle envoie donc les dxi
+|F (p) (1 6 i 6 n) sur la famille libre constitue ́e des Fp∗(dxi
+|F (p)) = d(xi ◦ F )|p. Comme par
+10
+
+
+ailleurs les dy1
+|p, . . . , dym
+|p forment une base de Tp∗M , quitte `a permuter les yi, on peut supposer que
+d(x1 ◦ F )|p, . . . , d(xm ◦ F )|p, dy1
+|p, . . . , dym−n
+|p
+est une base de Tp∗M . Par le lemme 1.25, on peut choisir U ′ ⊆ U ∩ F −1(V ) tel que (U ′, (x1 ◦
+F, . . . , xm◦F, y1, . . . , ym−n)) soit une carte. En utilisant cette carte au d ́epart, et (V, (x1, . . . , xm)) `a l’arriv ́ee, F se lit comme souhait ́e. Pour le point (A), on d ́emarre avec une carte (V, ψ) centr ́ee en F (p), et l’on note ψ = (x1, . . . , xn)). Cette fois, la base dxi
+|F (p) est envoy ́ee par Fp∗ sur la famille d(xi ◦ F )|p, g ́en ́eratrice
+de Tp∗M . Quitte `a permuter les coordonn ́ees, on peut donc supposer que les m premiers e ́le ́ments
+d(xi ◦F )p (1 6 i 6 m) forment une base de Tp∗M . Ainsi, par le lemme 1.25, il existe un voisinage
+ouvert U ⊆ F −1(V ) de p tel que (U, φ), avec φ = (x1 ◦ F, . . . , xm ◦ F ), soit une carte locale. Pour le moment, entre les cartes de domaine U et V , l’application F se lit
+(x1, . . . , xm) 7→ (x1, . . . , xm, g1(x1, . . . , xm), . . . , gn−m(x1, . . . , xm))
+ou` les gi ∈ C∞(φ(U )). On va mettre `a z ́ero des derni`eres coordonn ́ees en effectuant un changement de cartes `a l’arriv ́ee. On laisse au lecteur le soin de v ́erifier que qu’on peut appliquer en 0 le the ́ore`me d’inversion locale `a l’application φ(U ) × Rn−m → Rn
+(x1, . . . , xn) 7→ (x1, . . . , xm, xm+1 − g1(x1, . . . , xm), · · · , xn − gn−m(x1, . . . , xm))
+et qu’on obtient ainsi un diff ́eomorphisme entre θ : W → θ(W ) entre deux ouverts contenant 0. L’application F se lit comme il faut entre les cartes (U, φ) et (V ∩ ψ−1(W ), θ ◦ ψ).
+1.5 Sous-varie ́t ́es
+1.27 (Sous-varie ́te ́s immerg ́ees). — La situation est assez compliqu ́ee, car il existe plusieurs notions de sous-varie ́te ́s. On commence par la plus g ́en ́erale. Soit M une vari ́et ́e. On appelle sous-vari ́et ́e immerg ́ee de M la donn ́ee de (S, ι), ou` S est une vari ́et ́e et ι : S → M est une immersion injective. Comme ι est injective, on obtient une bijection entre S et ι(S), et on pourrait transporter la structure diffe ́rentielle de S vers ι(S). En d’autres termes, on peut toujours imaginer que S ⊆ M . Mais attention, la topologie de S n’est pas celle induite de M . Elle peut eˆtre plus fine.
+1.28 (Exemple). — Quatre mani`eres d’immerger R dans R2.
+1.29. — On dit qu’une application F : M → N est un plongement lorsque F : M → F (M ) est un hom ́eomorphisme (F (M ) a ici la topologie induite) et F : M → N est une immersion. La notion de plongement est extrˆemement proche de celle de sous-vari ́et ́e re ́gulie`re. On appelle sous-vari ́et ́e re ́guli`ere de M un sous-ensemble S, muni d’une structure de vari ́et ́e C∞, telle que l’application d’inclusion ι : S → M soit un plongement. N ́ecessairement, la topologie de S doit ˆetre celle induite de M , et on verra bientˆot que la structure diff ́erentielle `a rajouter pardessus est unique. En d’autres termes, le sous-ensemble S d ́etermine totalement la sous-vari ́et ́e r ́eguli`ere S.
+1.30 Th ́eore`me. — Soient F : M → N une application lisse et (S, ι) une sous-varie ́te ́ immerg ́ee de N telle que F (M ) ⊆ ι(S). Il existe alors une unique application G telle que F = ι◦G.
+MN
+S
+F
+Gι
+11
+
+
+(A) Si G est continue, alors elle est lisse. (B) Si ι est un plongement, alors G est continue, et donc lisse.
+D ́emonstration. (A). Soit p ∈ M . On appelle q le point de S tel que ι(q) = F (p). Par le th ́eor`eme 1.26, il existe des cartes (U, φ) et (V, ψ) centr ́ee en q et F (p) respectivement, avec ι(U ) ⊆ V , dans lesquelles ι se lit
+ιˆ: φ(U ) → ψ(V ) : (x1, . . . , xn) 7→ (x1, . . . , xn, 0, . . . , 0)
+Comme G est continue, il existe une carte (W, θ) centr ́ee en p telle que G(W ) ⊆ U . S’il on note Fˆ et Gˆ les lectures de F et G, on a Fˆ = ιˆ◦ Gˆ, ce qui force Gˆ `a eˆtre C∞. Pour le point (B), la continuit ́e est  ́evidente, puis on applique (A).
+1.31 Corollaire. — Soient M une vari ́et ́e, S ⊆ M un sous-ensemble et ι : S → M l’application d’inclusion. (A) S’il on fixe une topologie sur S, il n’y a au plus qu’une seule structure diff ́erence sur S faisant de (S, ι) une sous-vari ́ete ́ immerg ́ee. (B) Il n’y a au plus qu’une seule structure de sous-vari ́et ́e re ́gulie`re sur S.
+1.6 Champs de vecteurs
+1.32. — On appelle champ de vecteurs sur une vari ́et ́e M une application X : M → T M telle que π ◦ X = idX , autrement dit Xp ∈ TpM en tout point p. On notera X (M ) l’ensemble des champs de vecteurs de classe C∞. Il nous arrivera aussi de consid ́erer aussi des champs de vecteurs d ́efinis localement, `a savoir des applications X : U → T M d’un ouvert U , v ́erifiant Xp ∈ TpM pour tout p. Par exemple, si (U, (x1, . . . , xn)) est une carte locale, alors ∂
+∂xi sont des champs de vecteurs d ́efinis sur U . Si X : M → T M est un champ de vecteurs et f ∈ C∞(U ) (avec U ⊆ M ouvert), on appelle Xf : U → R la fonction qui envoie p sur Xpf (on rappelle que Xp est une d ́erivation en p).
+1.33 Proposition. — Soit X un champ de vecteurs sur M . Alors X est lisse si et seulement si l’une des conditions  ́equivalentes suivantes est v ́erifi ́ee (A) sur chaque carte locale (U, (x1, . . . , xn)), le champ de vecteurs X s’ ́ecrit
+X = Xi ∂
+∂xi , avec Xi ∈ C∞(U )
+(B) Pour tout ouvert U et f ∈ C∞(U ), on a Xf ∈ C∞(U ) ; (C) Pour tout f ∈ C∞(M ), on a Xf ∈ C∞(M ).
+D ́emonstration. On montre d’abord l’e ́quivalence entre (A) et X ∈ X (M ). On rappelle que le fibr ́e tangent est recouvert par des cartes de la forme (π−1(U ), φ ̃), construites `a partir d’une carte (U, φ) de M , avec
+φ ̃ : (p, v) 7→ (x1(p), . . . , xn(p), v(x1), . . . , v(xn))
+ou` φ = (x1, . . . , xn). Entre les cartes (U, φ) et (π−1(U ), φ ̃), le champ de vecteur X se lit
+(x1, . . . , xn) 7→ (x1, . . . , xn, X1 ◦ φ−1(x1, . . . , xn), . . . , Xn ◦ φ−1(x1, . . . , xn))
+et le caract`ere C∞ de cette application est e ́quivalent `a celui des Xi. On montre maintenant (A) =⇒ (B). Comme (B) est un e ́nonce ́ local, on peut supposer que U est le domaine d’une carte. Mais alors (B) est cons ́equence de
+Xf = Xi ∂f
+∂xi
+12
+
+
+L’implication r ́eciproque (B) =⇒ (A) utilise simplement la formule Xi = Xxi. Pour terminer, l’ ́equivalence (B) ⇐⇒ (C) provient de la nature locale des de ́rivations ((Xf )|U = X(f|U ) pour tout ouvert U ).
+1.34 (D ́erivations). — Le point (C) de la proposition pr ́ec ́edente montrent en particulier que les e ́le ́ments de X (M ) sont en correspondance avec les d ́erivations, `a savoir les applications lin ́eaires D : C∞(M ) → C∞(M ) v ́erifiant la r`egle de Leibniz D(f g) = f Dg + gDf pour tous f, g ∈ C∞(M ).
+1.35 (Op ́erations sur X (M )). — La somme de deux champs de vecteurs est bien d ́efinie (X + Y )p = Xp + Yp, et il est facile de v ́erifier que X + Y est lisse si X, Y le sont. De mˆeme, on peut multiplier un champ de vecteurs X ∈ X (M ) par une fonction f ∈ C∞(M ), par (f X)p = f (p)Xp. Le re ́sultat f X est lisse. Ces op ́erations font de X (M ) un module sur l’anneau C∞(M ). Ces op ́erations sont plus ou moins claires. Une op ́eration tout `a fait nouvelle est le crochet de Lie de deux champs de vecteurs X, Y de classe C∞, de ́fini par [X, Y ] = XY − Y X. Ici, X et Y sont vues comme des d ́erivations, et on ve ́rifie de mani`ere purement alg`ebrique que [X, Y ] v ́erifie la r`egle de Leibniz. En effet, pour f, g ∈ C∞(M ), on a
+[X, Y ](f g) = XY (f g) − Y X(f g)
+= X(f Y g + gY f ) − Y (f Xg + gXf )
+= Xf Y g + f XY g + XgY f + gXY f − (Y f Xg + f Y Xg + Y gXf + gY Xf )
+= f (XY g − Y Xg) + g(XY f − Y Xf )
+= f [X, Y ]g + g[X, Y ]f.
+L’une des motivations de ce cours sera de donner un sens ge ́om ́etrique au crochet de Lie. Pour
+le moment, constatons que, si (U, (x1, . . . , xn)) est une carte locale, alors les champs de vecteurs
+∂
+∂xi commutent pour le crochet de Lie (c’est le th ́eor`eme de Schwarz). En un sens, le crochet de Lie mesure le de ́faut qu’a un rep`ere local `a donner naissance `a une carte locale. Par exemple,
+dans R2, on v ́erifie que
+[∂
+∂x + y ∂
+∂y, ∂
+∂y
+]
+=− ∂
+∂y
+Le crochet de Lie ve ́rifie les identit ́es suivantes (A) si f, g ∈ C∞(M ), alors [f X, gY ] = f g[X, Y ] + f (Xg)Y − g(Y f )X ; (B) [X, Y ] = −[Y, X] ; (C) (Identit ́e de Jacobi) [[X, Y ], Z] + [[Y, Z], X] + [[Z, X], Y ] = 0. Un espace vectoriel V muni d’une op ́eration bilin ́eaire [·, ·] : V × V → V v ́erifiant (B) et (C) s’appelle alg`ebre de Lie.
+1.36. — Si F : M → N est une application C∞, il n’est pas possible de pousser en avant, ou tirer en arri`ere des champs de vecteurs par F . En revanche, si F est un diff ́eomorphisme local, on peut associer `a un champ Y ∈ X (N ) le champ F ∗Y ∈ X (M ) d ́efini par
+(F ∗Y )p = (T Fp)−1YF (p).
+Lorsque F est un diffe ́omorphisme et X ∈ X (M ), on de ́finit F∗X = (F −1)∗X ∈ X (N ), c’est-`a-dire (F∗X)p = T FF −1(p)XF −1(p). Dans le cas g ́en ́eral ou` F est seulement C∞, on dit que deux champs X ∈ X (M ) et Y ∈ X (N ) sont F -reli ́es lorsque T Fp(Xp) = YF (p) pour tout p (par d ́efinition de T , cela revient `a demander que X(f ◦ F ) = (Y f ) ◦ F pour tout f ∈ C∞(N )), mais il peut exister plusieurs (et meˆme aucun) champs Y qui soient F -reli ́es `a X. La proposition suivante exprime
+13
+
+
+la naturalite ́ du crochet de Lie, et implique en particulier que F∗[X, Y ] = [F∗X, F∗Y ] pour tout diff ́eomorphisme F .
+1.37 Proposition. — Soient F : M → N une application lisse, X, Y ∈ X (M ) et X′, Y ′ ∈ Y (N ). Si X, X′ d’une part et Y, Y ′ d’autre part sont F -reli ́es, alors [X, Y ] et [X′, Y ′] sont F -reli ́es.
+D ́emonstration. Soit f ∈ C∞(N ). On a
+[X, Y ](f ◦ F ) = XY (f ◦ F ) − Y X(f ◦ F )
+= X((Y ′f ) ◦ F ) − Y ((X′f ) ◦ F )
+= (X′Y ′f ) ◦ F − (Y ′X′f ) ◦ F
+= ([X′, Y ′]f ) ◦ F
+1.38 (Courbes int ́egrales). — Soit X ∈ X (M ). On appelle courbe int ́egrale de X une courbe param ́etr ́ee γ : I → M (I  ́etant un intervalle ouvert non vide de R) v ́erifiant γ′(t) = Xγ(t) en tout t ∈ I. L’existence, au moins pour des temps courts, d’une courbe int ́egrale passant par un point p ∈ M , c’est-`a-dire d’une solution de
+{γ′(t) = Xγ(t)
+γ(0) = p
+sur un intervalle ]−ε, ε[, est garantie par le th ́eor`eme de Cauchy-Lipschitz (local), en passant en coordonn ́ees locales. On appelle solution maximale du probl`eme de Cauchy ci-dessus une solution qui n’admet pas de prolongement (autre qu’elle-mˆeme). Les re ́sultats bien connus concernant les EDO impliquent que deux solutions coı ̈ncident sur l’intersection de leurs domaines, et donc qu’il existe une unique solution maximale, obtenue en recollant toutes les solutions locales.
+1.39 (Flot d’un champ de vecteurs). — On va enrichir le ́ge`rement notre point de vue, en prenant en compte la d ́ependance en la condition initiale. Pour un temps t et un point p ∈ M , on appelle θ(t, p) la valeur au temps t de la courbe int ́egrale (maximale) passant par p au temps 0. L’application θ s’appelle le flot (maximal) de X, car elle de ́crit l’ ́ecoulement le long de X. Bien suˆr, une grande difficulte ́ ici vient du fait que les courbes int ́egrales n’ont qu’une existence locale, si bien que θ n’est pas n ́ecessairement de ́fini que sur une partie D ⊆ R × M . A` pr ́esent, on sait que, pour tout p ∈ M ,
+D(p) = {t ∈ R : (t, p) ∈ D}
+est un intervalle ouvert contenant 0. Mais on va montrer beaucoup mieux. Pour un temps t, on note e ́galement
+Mt = {p ∈ M : (t, p) ∈ D}
+Pour tout t, on note θt l’application partielle p 7→ θ(t, p), d ́efinie sur Mt. Alors Les propri ́et ́es suivantes d ́ecoulent assez facilement de la d ́efinition du flot.
+(A) M0 = M et θ0 = idM ;
+(B) pour tout (s, p) ∈ D , on a D (θ(s,p)) = D (p) − s ;
+(C) pour tous (s, p) ∈ D et t ∈ D(θ(s,p)), on a θ(t, θ(s, p)) = θ(t + s, p) ;
+(D) θt est une bijection de Mt vers M−t, d’inverse θ−t.
+Le point (E) ci-dessous ne ́cessite un th ́eor`eme plus puissant que le th ́eor`eme de Cauchy-Lipschitz, `a savoir le the ́ore`me du flot local.
+14
+
+
+(F) D est ouvert et θ : D → M est C∞ ;
+(G) En conse ́quence, θt est un diff ́eomorphisme Mt → M−t.
+La situation est grandement simplifie ́e lorsque D = R × M . Auquel cas, on dit que le champ de vecteurs X est complet. Alors (θt)t∈R est un groupe param ́etr ́e de diff ́eomorphismes de M . Un exemple de champ de vecteurs qui n’est pas complet est d
+dt dans R \ {0}. On laisse au lecteur le soin de d ́emontrer que tout champ `a support compact est complet.
+1.40 (D ́eriv ́ee de Lie). — La d ́eriv ́ee de Lie d ́ecrit la variation d’une quantit ́e le long des courbes int ́egrales d’un champ de vecteurs. Plus tard dans le cours, nous serons capable de d ́efinir la d ́eriv ́ee de Lie de tout champ tensoriel. Ici, nous regardons la d ́eriv ́ee de Lie d’un champ Y ∈ X (M ) par rapport `a un champ X ∈ X (M ) dont le flot est not ́e θ. C’est le champ d ́efini par
+(LX Y )p = tli→m0
+(Tθ−t )θt(p)Yθt(p) − Y (p)
+t =d
+dt
+∣ ∣ ∣
+∣t=0
+((Tθ−t )θt(p)Yθt(p)
+)
+La proposition suivante montre que l’on obtient ainsi le crochet de Lie. La preuve montre au passage l’existence de la limite ci-dessus.
+1.41 Proposition. — LX Y = [X, Y ].
+D ́emonstration. Nous proposons ici la preuve la plus laide qui soit, `a savoir faire les calculs dans une carte. Localement, on e ́crit
+X = Xi ∂
+∂xi , Y = Y i ∂
+∂xi
+Et on a, pour t petit,
+(Tθ−t )θt(p)Yθt(p) = (Tθ−t )θt(p)
+(
+Y i(θ(t, p)) ∂
+∂xi
+∣ ∣ ∣
+∣θt(p)
+)
+= Y i(θ(t, p)) ∂θj
+∂xi (−t, θt(p)) ∂
+∂xj
+∣ ∣ ∣ ∣p
+(avec θj = xj ◦θ). Il ne reste plus qu’`a d ́eriver par rapport au temps. Coordonn ́ee par coordonn ́ee, cela donne
+d
+dt
+(
+Y i(θ(t, p)) ∂θj
+∂xi (−t, θt(p))
+)
+= ∂Y i
+∂xk (θ(t, p)) ∂θk
+∂t (t, p) ∂θj
+∂xi (−t, θt(p))
+− Y i(θ(t, p)) ∂2θj
+∂xi∂t (−t, θt(p)) + Yi(θ(t, p)) ∂2θj
+∂xi∂xk (−t, θt(p)) ∂θk
+∂t (t, p)
+On va  ́evaluer au temps t = 0. On rappelle que θ(0, ·) = idM , si bien que
+∂θj
+∂xi (0, ·) = δj
+i , ∂2θj
+∂xi∂xk (0, ·) = 0, ∂θj
+∂xi∂t (0, ·) = ∂Xj
+∂xi
+(la derni`ere  ́egalit ́e demande une petite v ́erification). Il reste donc
+d
+dt
+(
+Y i(θ(t, p)) ∂θj
+∂xi (−t, θt(p))
+)
+|t=0
+= ∂Y j
+∂xk Xk − Y i ∂Xj
+∂xi
+ ́evalu ́e en p. Ainsi (LX Y )p existe et vaut
+(LX Y )p =
+(∂Y j
+∂xi (p)Xi(p) − Y i(p) ∂Xj
+∂xi (p)
+)∂
+∂xj
+∣ ∣ ∣ ∣p
+Cela coı ̈ncide avec [X, Y ]p, comme on peut le montrer simplement en appliquant 1.35(A).
+15
+
+
+2 Inte ́gration des formes diffe ́rentielles
+2.1 Tenseurs et champs tensoriels
+2.1 (Formes multilin ́eaires). — Soient V1, . . . , Vk des R-espaces vectoriels. On dit qu’une application V1 × · · · × Vk → R est multilin ́eaire lorsqu’elle est lin ́eaire en chacune de ses variables. On note L(V1, . . . , Vk) l’espace vectoriel des formes multilin ́eaires. Le produit tensoriel de deux formes multilin ́eaires α ∈ L(V1, . . . , Vk) et β ∈ L(W1, . . . , W`) est la forme multilin ́eaire α ⊗ β ∈ L(V1, . . . , Vk, W1, . . . , W`) de ́finie par
+α ⊗ β(v1, . . . , vk, w1, . . . , w`) = α(v1, . . . , vk) ⊗ β(w1, . . . , w`).
+2.2 (Tenseurs). — Nous nous int ́eresserons qu’`a une partie des formes multilin ́eaires. Nous fixons un espace vectoriel V de dimension finie, que l’on notera n. On appelle tenseur covariant de rang k (avec k > 1) sur V une forme m-multilin ́eaire sur V k. On note T k(V ∗) l’espace des tenseurs covariants de rang k sur V . Cette notation se justifie par le fait que T 1(V ∗) = V ∗. On adoptera la convention que T 0(V ∗) = R, les 0-tenseurs sont les nombres r ́eels. On doit  ́egalement de ́finir le produit tensoriel d’un 0-tenseur λ ∈ R avec un k-tenseur α, c’est tout simplement λα ∈ T k(V ∗). Il existe aussi une notion de tenseur contravariant, qui jouera un rˆole un peu moins important. Un tenseur contravariant de rang ` (` > 1) est une forme `-multilin ́eaire sur (V ∗)`, et cette fois, on note T `(V ) l’espace vectoriel form ́e par ces tenseurs. Comme pr ́ec ́edemment, les 0tenseurs contravariants sont par convention les nombres r ́eels. En particulier on note qu’on peut identifier T 1(V ) = V ∗∗ `a V (les e ́le ́ments de V sont les seuls 1-tenseurs que l’on consid ́erera). Enfin, on peut  ́egalement d ́efinir une notion de tenseur mixte, covariant en certaines variables et contravariants en d’autres, c’est-`a-dire, des formes multilin ́eaires de la forme
+V ×V∗ ×V ×···×V → R
+(ou` V et V ∗ peuvent ˆetre situ ́es en n’importe quelle position). Les endomorphismes V → V sont des exemples de tenseurs mixtes, puisqu’ils s’identifient naturellement aux formes multilin ́eaires V × V ∗ → R. En g ́eom ́etrie riemannienne, le tenseur de courbure est un exemple de tenseur mixte. Nous n’en aurons pas besoin.
+2.3 (Coordonn ́ees d’un tenseur). — On peut cr ́eer, `a partir d’une base E1, . . . , En, une base de T k(V ∗). Notons en effet ε1, . . . , εn la base duale de V ∗. On pr ́etend que tout k-tenseur covariant se de ́compose de mani`ere unique
+ω = ωi1,...,ik εi1 ⊗ · · · ⊗ εik
+ou` les coordonn ́ees v ́erifient ωi1,...,ik = ω(Ei1, . . . , Eik ). Une propri ́et ́e similaire est valable aux
+tenseurs contravariants α ∈ T k(V )
+α = αi1,...,ik Ei1 ⊗ · · · ⊗ Eik
+ou` αi1,...,ik = α(εi1, . . . , εik ). (Ici, les vecteurs Ej sont vus comme appartenant a` V ∗∗). On en
+d ́eduit au passage que T k(V ∗) et T k(V ) sont de dimension nk.
+2.4 (Fibr ́e des k-tenseurs covariants). — Cette fois, on fixe une vari ́et ́e M de dimension n. Un k-tenseur covariant en p est simplement un e ́le ́ment de T k(Tp∗M ), comme dans les paragraphes pr ́ec ́edents, o`u l’espace de base est V = TpM . Lorsque p varie, on peut amalgamer tous ces espaces vectoriels dans le fibr ́e des k-tenseurs covariants, dont la construction est analogue `a celle du fibr ́e tangent. On construit tout d’abord l’ensemble
+T k(T ∗M ) =
+∐
+p∈M
+T k(T ∗
+pM) =
+{
+(p, ω) : p ∈ M et ω ∈ T k(T ∗
+p M)
+}
+16
+
+
+et on note π : T k(T ∗M ) → M la projection (p, ω) 7→ p sur la vari ́et ́e de base. Si {(Uα, φa) : α ∈ A} d ́esigne l’atlas maximal de M , on peut cr ́eer `a partir de la carte (Uα, φα) sur M une carte
+(U ̃α, φ ̃α) sur le fibr ́e, ou` U ̃α = π−1(Uα) et φ ̃α : U ̃α → φα(Uα) × Rnk est l’application
+(p, ω) 7→ (φα(p), (ωi1,...,ik )16i1,...,ik6n)
+ou` ω = ωi1,...,ik dxi1
+|p ⊗ · · · ⊗ dxik
+|p (de sorte que la lecture de (p, ω) dans la carte corresponde `a
+la concat ́enation des coordonn ́ees de p et de celles de ω). Pour bien v ́erifier que T k(T ∗M ) soit une vari ́et ́e, il faut appliquer le lemme 1.20. De mani`ere analogue, on peut construire le fibr ́e des k-tenseurs contravariants (le fibr ́e tangent en est un exemple !).
+2.5 (Champs k-tensoriels). — Un champ k-tensoriel covariant est une section du fibr ́e T k(T ∗M ), c’est-`a-dire une application ω : M → Tk(T ∗M ) qui v ́erifie ω|p ∈ Tk(Tp∗M ) pour tout p ∈ M (ou`,
+de mani`ere  ́equivalente π ◦ ω = idM ). Ils forment un ensemble que l’on note Γ(T k(T ∗M )). On d ́efinit de mani`ere analogue l’ensemble des champs k-tensoriels contravariants Γ(T k(T M )). Plusieurs op ́erations sont d ́efinies, toutes ont un sens ponctuels : (A) la somme de deux champs k-tensoriels ω + η : p 7→ ω|p + η|p ; (B) le produit entre une fonction f ∈ C∞(M ) et un champ k-tensoriel ω, d ́efini par f ω : p 7→ f (p)ω|p ;
+(C) le produit tensoriel d’un champ k-tensoriel et d’un champ `-tensoriel ω⊗η : p 7→ ω|p⊗η|p. (D) Si X1, . . . , Xk sont des champs de vecteurs, alors A(X1, . . . , Xk) est la fonction d ́efinie par
+p 7→ A|p(X1|p, . . . , Xk|p)
+(On laisse au lecteur le soin de ve ́rifier le caract`ere lisse des objets construits). Les points (A) et (B) font des Γ(T k(T ∗M )) (resp. Γ(T k(T M ))) un C∞(M )-module.
+2.6 (Diff ́erentielle d’une fonction). — Si f ∈ C∞(M ), nous avons d ́ej`a d ́efini, pour tout p ∈ M , le covecteur df|p ∈ Tp∗M . Lorsque nous laissons la variable p varier, nous obtenons ainsi un champ 1-tensoriel covariant p 7→ df|p, not ́e plus simplement df . (Nous verrons plus tard que les champs 1-tensoriels covariants sont appel ́es 1-formes diffe ́rentielles, et cette appellation est plus naturelle). Le lecteur pourra montrer que df est bien lisse, en utilisant la proposition venant juste apr`es. Remarquons cependant, que si (U, (x1, . . . , xn)) est une carte, alors les champs dx1, . . . , dxn (d ́efinis localement) sont bien lisses, par construction mˆeme de l’atlas de T 1(T ∗M ). On montre
+(A) d(f g) = f dg + g df pour f, g ∈ C∞(M ) ;
+(B) En coordonn ́ees locales,
+df = ∂f
+∂xi dxi
+La proposition suivante caract ́erise les champs tensoriels lisses. Elle est  ́enonc ́ee pour les champs covariants, mais une variante facile `a trouver existe pour les champs contravariants. Elle se d ́emontre de mani`ere analogue `a la proposition 1.33.
+2.7 Proposition. — Soit ω un champ k-tensoriel covariant sur M , suppos ́e a priori non lisse. Alors ω est lisse si et seulement si l’une des conditions e ́quivalentes suivantes est ve ́rifie ́e
+(A) sur chaque carte locale (U, (x1, . . . , xn)), le champ tensoriel ω s’ ́ecrit
+ω = ωi1,...,ik dxi1 ⊗ · · · ⊗ dxik
+ou` les fonctions ωi1,...,ik sont dans C∞(U ) ;
+(B) Pour tout ouvert U et X1, . . . , Xk ∈ X (U ), on a A(X1, . . . , Xk) ∈ C∞(U ) ;
+17
+
+
+(C) Pour tout X1, . . . , Xk ∈ X (M ), on a A(X1, . . . , Xk) ∈ C∞(M )
+2.8. — En particulier, par le point (C) de la proposition pre ́ce ́dente, tout champ k-tensoriel contravariant (lisse) A d ́efinit une application
+X (M ) × · · · × X (M ) → C∞(M ), (X1, . . . , Xk) 7→ A(X1, . . . , Xk)
+qui est C∞(M )-multilin ́eaire. On la note  ́egalement A. Le lemme suivant, important, fait le lien entre la tensorialit ́e et la C∞(M )-multilin ́earit ́e.
+2.9 Lemme. — Toute application C∞(M )-multilin ́eaire X (M ) × · · · × X (M ) → C∞(M ) provient d’un champ k-tensoriel covariant.
+D ́emonstration. Soit p ∈ M . Dans un premier temps, on souhaite montrer que
+A(X1, . . . , Xk)(p) = A(X ̃1, . . . , X ̃k)(p) (2)
+lorsque les champs de vecteurs Xi et X ̃i coı ̈ncident en p, pour tout 1 6 i 6 k. Comme, par multilin ́earit ́e,
+A(X1, . . . , Xk) − A(X ̃1, . . . , X ̃k) = A(X1 − X ̃1, X2, . . . , Xk)
++ A(X ̃1, X2 − X ̃2, X3, . . . , Xk) + · · · + A(X ̃1, . . . , X ̃k−1, Xk − X ̃k)
+il suffit de montrer le r ́esultat suivant : si Y1, . . . , Yk ∈ X (M ) et Yi|p = 0, alors A(Y1, . . . , Yk)(p) = 0. On ne perd pas grand chose `a supposer que i = 1, ce que l’on fait par la suite. On montre d’abord le r ́esultat sous la condition plus forte que Y1 = 0 sur un voisinage de p. Il existe alors une fonction φ ∈ C∞(M ) telle que φ(p) = 1 et φY1 = 0. Par multilin ́earit ́e,
+φA(Y1, . . . , Yk) = A(φY1, Y2, . . . , Yk) = 0
+On obtient le r ́esultat souhaite ́ en  ́evaluant au point p. Maintenant, on suppose seulement que Y1,|p = 0. Notons (U, (x1, . . . , xn)) une carte locale autour de p, ou`, Y1 s’ ́ecrit
+Y1 = Y i
+1
+∂
+∂xi
+Soient Y ̃1i (pour 1 6 i 6 n) des fonctions de C∞(M ) et Z1, . . . , Zn ∈ X (M ) des champs tels que
+Y ̃ i
+1 =Yi
+1 et Zi = ∂
+∂xi au voisinage de p
+Alors, par ce qui pr ́ec`ede, on a
+A(Y1, . . . , Yk)(p) = A
+(
+Y ̃ i
+1
+∂
+∂xi , Y2, . . . , Yk
+)
+(p)
+= Y ̃ i
+1 (p)A
+(∂
+∂xi , Y2, . . . , Yk
+)
+(p) = 0
+ce qui finit la preuve de (2). On peut donc d ́efinir une application A|p : (TpM )k → R par
+A|p(v1, . . . , vk) = A(X1, . . . , Xk)(p)
+ou` X1, . . . , Xk sont des champs de vecteurs qui en p valent v1, . . . , vk. Il est clair que A|p est un k-tenseur, et que l’application p 7→ A|p v ́erifie le crit`ere (C) de la proposition 2.7.
+18
+
+
+2.10 (Contre-exemple). — `A titre d’exemple, le crochet de Lie n’est pas C∞(M )-multilin ́eaire, puisqu’il v ́erifie l’identit ́e de Leibniz
+[X, f Y ] = (Xf )Y + f [X, Y ]
+Ce n’est donc pas un tenseur (mixte). On se souvient que [X, Y ] est la d ́eriv ́ee de Lie de Y par rapport au flot de X. Sa valeur en un point p n ́ecessite de connaıˆtre Y sur tout un voisinage de p, et non seulement en p. On a vu qu’on pouvait associer `a une fonction f ∈ C∞(M ) un champ 1-tensoriel covariant df d ́efini par df (X) = Xf
+La C∞(M )-lin ́earit ́e par rapport `a X est ici claire. Plus int ́eressant, si ω est un champ 1-tensoriel covariant, on de ́finit sa diff ́erentielle dω, un champ 2-tensoriel covariant, par
+dω(X, Y ) = Xω(Y ) − Y ω(X) − ω([X, Y ])
+Pour le moment, nous cherchons simplement a` illustrer le lemme 2.9, nous essaierons de donner `a un sens `a dω plus tard dans le cours. Pour ve ́rifier que dω est un champ tensoriel, on doit  ́etablir la C∞(M )-multilin ́earit ́e. Comme dω v ́erifie la propri ́et ́e d’antisym ́etrie dω(Y, X) = − dω(X, Y ), il suffit de montrer la C∞(M )-lin ́earit ́e `a droite. Comme l’additivit ́e est claire, il reste seulement `a montrer que dω(X, f Y ) = f dω(X, Y ). Or
+dω(X, f Y ) = Xω(f Y ) − f Y ω(X) − ω([X, f Y ])
+= X(f ω(Y )) − f Y ω(X) − ω(Xf Y + f [X, Y ])
+= Xf · ω(Y ) + f Xω(Y ) − f (Y )ω(X) − Xf · ω(Y ) − f ω([X, Y ])
+= f (Xω(Y ) − Y ω(X) − ω([X, Y ]))
+= f dω(X, Y )
+2.11 (Pullback). — Soit F : M → N une application lisse. A` tout champ k-tensoriel covariant A d ́efini sur la vari ́et ́e N , on peut associer un pullback (ou bien un tir ́e en arrie`re) F ∗A, qui est un champ sur la varie ́t ́e de d ́epart M . Cette construction est sp ́ecifique aux champs covariants. On d ́efinit en effet
+(F ∗A)|p(v1, . . . , vk) = A|F (p)(T Fp(v1), . . . , T Fp(vk))
+pour p ∈ M et v1, . . . , vk ∈ TpM . Dans le cas particulier k = 0, les champs 0-tensoriels s’identifient aux fonctions f ∈ C∞(N ). On a alors F ∗f = f ◦ F . Les proprie ́te ́s suivantes sont facilement v ́erifi ́ees.
+(A) F ∗(A + B) = F ∗A + F ∗B ;
+(B) F ∗(A ⊗ B) = F ∗A ⊗ F ∗B ;
+(C) F ∗(f A) = F ∗f F ∗A ;
+(D) F ∗(df ) = d(F ∗f )
+Elles permettent notamment de montrer que le pullback d’un champ tensoriel reste lisse, comme attendu, en passant par les  ́ecritures locales.
+19
+
+
+2.2 Tenseurs alterne ́s et formes diff ́erentielles
+2.12 (Tenseurs altern ́es). — Parmi les k-tenseurs covariants ω sur un espace vectoriel V , ceux v ́erifiant la propri ́et ́e
+ω(vσ(1), . . . , vσ(k)) = (sgn σ)ω(v1, . . . , vk)
+pour toute permutation σ ∈ Sk et tous v1, . . . , vk ∈ V sont dits altern ́es. L’espace vectoriel des k-tenseurs (covariants) alterne ́s est not ́e Λk(V ∗). Il forme un sous-espace vectoriel de T k(V ∗).
+2.13 (Une base de Λk(V ∗)). — Fixons `a nouveau une base E1, . . . , En de V . On appelle multiindice (de taille k) une famille I = (i1, . . . , ik) ordonn ́ee d’indices entre 1 et n. La famille I peut contenir des r ́ep ́etitions. On de ́finit le k-tenseur εI par
+εI (v1, . . . , vk) = det
+
+   
+εi1 (v1) εi1 (v2) . . . εi1 (vk) εi2 (v1) εi2 (v2) εi2 (vk)
+... . . . ...
+εik (v1) εik (v2) . . . εik (vk)
+
+   
+Par les propri ́et ́es du d ́eterminant, il est clair que εI est altern ́e. On v ́erifie tout aussi facilement que
+(A) εI = 0 si I contient une r ́ep ́etition ;
+(B) Si σ ∈ Sk, en notant Iσ = (iσ(1), . . . , iσ(k)) le multi-indice permut ́e, on a εIσ = (sgn σ)εI ;
+(C) Si J = (j1, . . . , jk) est un multi-indice de taille k, alors
+εI (Ej1 , . . . , Ejk ) =
+{
+sgn σ si I est sans r ́ep ́etition et si J = Iσ pour σ ∈ Sk
+0 sinon
+Les points pre ́ce ́dents montrent que, si l’on se restreint aux multi-indices croissants sans r ́ep ́etition, les εI forment une base de T k(V ∗), et de plus
+ω = ωI εI avec ωI = ω(Ei1, . . . , Eik ) pour I = (i1, . . . , ik)
+(ou` la somme court sur les multi-indices croissants de taille k sans r ́ep ́etition, ce que nous supposerons implicitement par la suite chaque fois que ce sera approprie ́). On en d ́eduit que
+dim Λk(V ∗) =
+(n
+k
+)
+.
+2.14. — Si α ∈ T k(V ∗), on lui associe le tenseur Alt(α) ∈ T k(V ∗) de ́fini par
+Alt(α)(v1, . . . , vk) =
+∑
+σ∈Sk
+(sgn σ)α(vσ(1), . . . , vσ(k))
+On laisse au lecteur le soin de montrer que Alt : Tk(V ∗) → Tk(V ∗) est une projection (Alt ◦ Alt = Alt) sur Λk(V ∗).
+2.15. — Le produit tensoriel d’un tenseur ω ∈ Λk(V ∗) et d’un autre η ∈ Λ`(V ∗) n’est pas n ́ecessairement altern ́e. Pour pallier cet inconv ́enient, on introduit le produit exte ́rieur
+ω ∧ η = (k + `)!
+k!`! Alt(ω ⊗ η)
+Le facteur de normalisation peut paraıˆtre  ́etonnant. Il se justifie par le r ́esultat suivant.
+20
+
+
+2.16 Proposition. — Soient I = (i1, . . . , ik) et J = (j1, . . . , j`) deux multi-indices. Alors
+εI ∧ εJ = εIJ
+ou` IJ = (i1, . . . , ik, j1, . . . , j`) d ́esigne la concate ́nation de I et J.
+D ́emonstration. Si I ou J admet une r ́ep ́etition, alors il en va de mˆeme pour IJ, et donc εI ∧ εJ = εIJ = 0. Nous supposons donc par la suite I et J sans r ́ep ́etition. Par multilin ́earit ́e, il suffit de montrer
+εI ∧ εJ (Ep1 , . . . , Epk+` ) = εIJ (Ep1 , . . . , Epk+` ) (3)
+pour tout multi-indice P = (p1, . . . , pk+`) de taille k + `. Si P admet une re ́pe ́tition, alors les deux membres de part et d’autre de l’ ́egalit ́e de (3) sont nuls, aussi nous supposerons P sans r ́ep ́etition. Nous s ́eparons la preuve en plusieurs cas. — Si le multi-indice P poss`ede un indice n’apparaissant ni dans I ni dans J, alors clairement le second membre de (3) est nul, et par ailleurs, tous les termes de la somme
+εI ∧ εJ (Ep1 , . . . , Epk+` )
+=1
+k!`!
+∑
+σ∈Sk+`
+(sgn σ)εI (Epσ(1) , . . . , Epσ(k) )εJ (Epσ(k+1) , . . . , Epσ(k+`) ) (4)
+sont nuls. — Dans le cas contraire, supposons que tous les indices de P apparaissent soit dans I, soit dans J. Comme P est suppos ́e sans r ́ep ́etition (et que les tailles de I, J et P sont respectivement k, ` et k + `), cela impose que I et J n’aient pas d’indice commun. Quitte `a permuter les indices de P (ce qui revient `a multiplier chaque membre de part et d’autre de l’e ́galite ́ (3) par la mˆeme quantit ́e ±1), on peut supposer
+(p1, . . . , pk) = (i1, . . . , ik) et (pk+1, . . . , pk+`) = (j1, . . . , j`)
+Le membre de droite dans (3) vaut a` pr ́esent 1, et celui de gauche est `a nouveau donn ́e par (4), sauf que cette fois, les seuls termes (potentiellement) non nuls de la somme sont dus aux permutations σ qui stabilisent {1, 2, . . . , k} et {k + 1, . . . , k + `}, c’est-`a-dire les permutations de la forme
+σ(i) =
+{
+σ1(i) si 1 6 i 6 k
+k + σ2(i − k) si k + 1 6 i 6 k + `
+ou` σ1 ∈ Sk et σ2 ∈ S`. Pour une telle permutation, on a sgn σ = (sgn σ1)(sgn σ2). On a donc
+εI ∧ εJ (Ep1 , . . . , Epk+` )
+=1
+k!`!
+∑
+σ1,σ2
+(sgn σ1)(sgn σ2)εI (Eiσ1(1) , . . . , Eiσ1(k) )εJ (Ejσ2(1) , . . . , Ejσ2(`) )
+=
+
+
+1
+k!
+∑
+σ1∈Sk
+(sgn σ1)εI (Eiσ1(1) , . . . , Eiσ1(k) )
+
+
+
+
+1
+`!
+∑
+σ2∈S`
+(sgn σ2)εJ (Ejσ2(1) , . . . , Ejσ2(`) )
+
+
+= εI (Ei1 , . . . , Eik )εJ (Ej1 , . . . , Ej` )
+= 1.
+21
+
+
+2.17. — Les propri ́et ́es suivantes de ∧ peuvent ˆetre d ́eduites de la proposition pr ́ec ́edente. Par bilin ́earit ́e de ∧, on les prouve typiquement en raisonnant sur des tenseurs du type εI .
+(A) ∧ est associatif : (ω ∧ η) ∧ θ = ω ∧ (η ∧ θ) ;
+(B) ∧ est anticommutatif, au sens ou`
+η ∧ ω = (−1)k`ω ∧ η
+si ω ∈ Λk(V ∗) et η ∈ Λ`(V ∗).
+(C) Si ω1, . . . , ωk ∈ V ∗ sont des covecteurs, le produit ext ́erieur se calcule plus facilement par la formule
+ω1 ∧ · · · ∧ ωk(v1, . . . , vk) = det
+
+   
+ω1(v1) ω1(v2) . . . ω1(vk) ω2(v1) ω2(v2) ω2(vk)
+... . . . ...
+ωk(v1) ωk(v2) . . . ωk(vk)
+
+   
+lorsque v1, . . . , vk ∈ V .
+En particulier, l’anticommutativit ́e implique que ω2 = ω ∧ ω = 0 si ω est un tenseur altern ́e de rang impair.
+Avant d’introduire les formes diff ́erentielles, nous introduisons le re ́sultat suivant sur les tenseurs alterne ́s de rang n sur un espace de dimension n.
+2.18 Lemme. — Soient ω ∈ Λn(V ∗) et T : V → V un endomorphisme. Alors
+ω(T (v1), . . . , T (vn)) = (det T )ω(v1, . . . , vn)
+pour tout v1, . . . , vn ∈ V .
+D ́emonstration. On  ́evacue le cas trivial ou` ω = 0. Il est clair que l’application (v1, . . . , vn) 7→ ω(T (v1), . . . , T (vn)) appartient `a la droite vectorielle Λn(V ∗). Il existe donc un scalaire λ tel que
+ω(T (v1), . . . , T (vn)) = λω(v1, . . . , vn)
+pour tout v1, . . . , vn ∈ V . Et il reste a` d ́emontrer que λ = det T . Pour cela, on fixe une base E1, . . . , En de V . Alors T (Ej) = T i
+j Ei, ou` T j
+i sont les coefficients de la matrice repr ́esentative de T . Ainsi
+ω(T (E1), . . . , T (En)) =
+∑
+16i1,...,in6n
+T i1
+1 · · · Tnin ω(Ei1 , . . . , Ein ) (5)
+Or ω(Ei1, . . . , Ein) = 0 d`es que deux indices sont e ́gaux. On peut donc se restreindre a` sommer sur les permutations dans (5)
+ω(T (E1), . . . , T (En)) =
+∑
+σ∈Sn
+T σ(1)
+1 · · · T σ(n)
+n ω(Eσ(1), . . . , Eσ(n))
+=
+∑
+σ∈Sn
+(sgn σ)T σ(1)
+1 · · · T σ(n)
+n ω(E1, . . . , En)
+= (det T )ω(E1, . . . , En)
+ce qui finit la preuve.
+22
+
+
+2.19 (Formes diffe ́rentielles). — Le fibr ́e des k-tenseurs covariants altern ́es sur une vari ́et ́e M se construit de mani`ere similaire aux autres fibr ́es rencontr ́es dans ce cours. On d ́efinit l’ensemble
+ΛkT ∗M =
+∐
+p∈M
+Λk(T ∗
+pM) =
+{
+(p, ω) : p ∈ M et ω ∈ Λk(T ∗
+p M)
+}
+On note π : ΛkT ∗M → M la projection sur la vari ́et ́e de base. A` partir de toute carte (U, φ) de
+M , on peut construire la carte (π−1(U ), φ ̃) de ΛkT ∗M , ou` φ ̃ : π−1(U ) → φ(U ) × R(n
+k) est de ́finie par φ ̃(p, ω) = (φ(p), (ωI )I )
+ou` ω = ωI dxI
+|p.
+Une k-forme diff ́erentielle est une section lisse du fibr ́e ΛkT ∗M .  ́Etant donn ́e leur importance, on note Ωk(M ) l’ensemble qu’elles forment (au lieu de Γ(ΛkT ∗M )).
+2.20 (Pullback d’une forme diff ́erentielle). — Il est clair que le pullback d’une forme diff ́erentielle reste une forme diff ́erentielle, et que F ∗(ω ∧ η) = F ∗ω ∧ F ∗η si ω ∈ Ωk(N ) et η ∈ Ω`(N ) (o`u F : M → N ) est lisse. Cette formule, et celles du paragraphe 2.11 rendent ais ́ee la manipulation des formes diff ́erentielles. A` titre d’exemple, nous calculons le pullback de la forme dx ∧ dy par l’application F : R+∗ × ]−π, π[ → R2
+F (r, θ) = (r cos θ, r sin θ)
+On a
+F ∗(dx ∧ dy) = F ∗ dx ∧ F ∗ dy
+= d(x ◦ F ) ∧ d(y ◦ F )
+= d(r cos θ) ∧ d(r sin θ)
+= (cos θ dr − r sin θ dθ) ∧ (sin θ dr + r cos θ dθ)
+= r cos2 θ dr ∧ dθ − r sin2 θ dθ ∧ dr
+= r(cos2 θ + sin2 θ) dr ∧ dθ
+= r dr ∧ dθ
+2.3 De ́rive ́e ext ́erieure d’une forme diffe ́rentielle
+2.21. — On rappelle qu’une 0-forme sur une vari ́ete ́ M est juste une fonction f ∈ C∞(M ). On peut se demander `a quelles conditions une 1-forme ω est exacte, c’est-`a-dire qu’elle d ́ecoule d’une fonction f ∈ C∞(M ) au sens ou` ω = df . Comme en coordonn ́ees locales, on aurait
+ωi dxi = ∂f
+∂xi dxi
+une condition ne ́cessaire serait que
+∂ωi
+∂xj = ∂ωj
+∂xi pour tous i, j (6)
+dans toutes les cartes de M . Si tel est le cas, on dit que la forme ω est ferm ́ee. Cette de ́finition fait intervenir les cartes. Le premier re ́sultat que nous donnons montre qu’on peut d ́efinir de mani`ere intrinse`que les formes ferm ́ees.
+2.22 Proposition. — Soit ω ∈ Ω1(M ). Les trois propri ́et ́es suivantes sont  ́equivalentes :
+23
+
+
+(A) ω est ferm ́e ;
+(B) La relation (6) est v ́erifie ́e par un ensemble de cartes dont les domaines recouvrent M .
+(C) Pour tout X, Y ∈ X (M ), on a
+Xω(Y ) − Y ω(X) − ω([X, Y ]) = 0.
+D ́emonstration. L’implication (A) =⇒ (B) est triviale. Supposons (B) et montrons (C). Nous avons d ́ej`a v ́erifi ́e que
+A : (X, Y ) 7→ Xω(Y ) − Y ω(X) − ω([X, Y ])
+est un tenseur au paragraphe 2.10. Cela justifie les calculs locaux que nous allons faire. Comme localement (c’est-`a-dire sur une carte (U, (x1, . . . , xn)) prises parmi celles de l’hypoth`ese (B)), tout champ vectoriel est une combinaison C∞(U )-lin ́eaire de ∂
+∂x1 , . . . , ∂
+∂xn , il suffit de v ́erifier le
+r ́esultat pour X = ∂
+∂xi et Y = ∂
+∂xj , mais alors
+A
+(∂
+∂xi , ∂
+∂xj
+)
+= ∂ωi
+∂xj − ∂ωj
+∂xi = 0.
+L’implication (C) =⇒ (A) se prouve en r ́eutilisant le caract`ere tensoriel de A (qui permet d’appliquer A `a des champs locaux) et en choisissant X et Y comme pre ́ce ́demment, cette fois dans une carte quelconque de M .
+2.23 (Diff ́erentielle d’une 1-forme). — Au regard de la proposition pr ́ec ́edente, il semble naturel d’appeler dω le tenseur
+dω(X, Y ) = Xω(Y ) − Y ω(X) − ω([X, Y ])
+et de l’interpr ́eter (au moins temporairement) comme mesurant le d ́efaut de ω `a ˆetre ferm ́e. D’ores et d ́ej`a, nous remarquons que d ◦ d = 0, ce qui exprime que toute 1-forme exacte est ferm ́ee. Dans le cas g ́en ́eral, la construction de la d ́eriv ́ee exte ́rieure est donne ́e par le r ́esultat suivant.
+2.24 Th ́eore`me. — Soit M une varie ́te ́. Il existe une unique famille d’applications d : Ωk(M ) → Ωk+1(M ) (ou` k > 0 parcourt les entiers) telle que
+(A) les applications d : Ωk(M ) → Ωk+1(M ) sont lin ́eaires ;
+(B) pour tout ω ∈ Ωk(M ) et η ∈ Ω`(M ), on a
+d(ω ∧ η) = dω ∧ η + (−1)kω ∧ dη.
+(C) pour tout ω ∈ Ωk(M ), on a d(dω) = 0.
+(D) la de ́rive ́e exte ́rieure d’une 0-forme (c’est-`a-dire d’une fonction C∞) est sa diff ́erentielle (d ́efinie au paragraphe 2.6).
+De plus, la d ́erive ́e exte ́rieure d’une 1-forme coı ̈ncide avec celle de ́finie au paragraphe 2.23. Par ailleurs, la de ́rive ́e ext ́erieure commute avec les pullbacks, c’est-`a-dire
+F ∗(dω) = dF ∗ω
+pour tout ω ∈ Ωk(M ) et toute application lisse F : N → M .
+24
+
+
+D ́emonstration. On affirme qu’une d ́erivation exte ́rieure (si elle existe) est locale au sens suivant : si ω, ω′ sont deux k-formes telles que ω = ω′ sur un ouvert U de M , alors dω = dω′ sur U . En effet, en tout point p ∈ M , il existe une fonction lisse f  ́egale `a 1 sur un voisinage de p et `a support dans U . Comme f (ω − ω′) = 0, on a, par lin ́earit ́e et par la r`egle d’antide ́rivation (B),
+f (dω − dω′) + df ∧ (ω − ω′) = 0
+En  ́evaluant en p, on obtient (dω)|p = (dω′)|p, ce qui montre notre premier r ́esultat interme ́diaire.
+Montrons maintenant l’unicit ́e. Consid ́erons ω ∈ Ωk(M ), un point p ∈ M et une carte locale (U, (x1, . . . , xn)) autour de p. Sur U , la forme ω s’ ́ecrit
+ω = ωi1,...,ik dxi1 ∧ · · · ∧ dxik (7)
+Consid ́erons comme pr ́ec ́edemment une fonction f  ́egale `a 1 sur un voisinage V de p, et `a support dans U . Alors, on a ω = ωi1,...,ik d(f xi1 ) ∧ · · · ∧ d(f xik ) sur V
+Mais la diff ́erence avec (7) est que, cette fois, le membre de droite est d ́efinie sur toute la vari ́et ́e M . Par la localit ́e de d, ainsi que les propri ́et ́es (B) et (D), on a
+dω = dωi1,...,ik ∧ d(f xi1 ) ∧ · · · ∧ d(f xik ) sur V
+ce qui impose les valeurs prises par dω au voisinage de p. Ceci finit la preuve de l’unicit ́e. Pour montrer l’existence, on consid`ere d’abord le cas ou` M = U est un ouvert de Rn. Pour une k-forme
+ω = ωi1,...,ik dxi1 ∧ · · · ∧ dxik
+on d ́efinit
+dω = dωi1,...,ik ∧ dxi1 ∧ · · · ∧ dxik = ∂ωi1,...,ik
+∂xi dxi ∧ dxi1 ∧ · · · ∧ dxik .
+Les points (A) et (D) sont clairement v ́erifi ́ees. Montrons le point (B). Par multilin ́earit ́e, il suffit de consid ́erer le cas ω = f dxi1 ∧ · · · ∧ dxik = f dxI et η = g dxj1 ∧ · · · ∧ dxj` = g dxJ . On a alors
+ω ∧ η = f g dxI ∧ dxJ
+On a alors
+d(ω ∧ η) = d(f g) dxI ∧ dxJ
+= (f dg + g df ) dxI ∧ dxJ
+= df ∧ dxI ∧ (g dxJ ) + f dg ∧ dxI ∧ dxJ
+= dω ∧ η + (−1)kf dxI ∧ dg ∧ dxJ
+= dω ∧ η + (−1)kω ∧ dη
+Enfin, pour le point (C), on a
+dω = ∂f
+∂xi dxi ∧ dxI
+puis en d ́erivant `a nouveau
+d(dω) = ∂2f
+∂xi∂xj dxj ∧ dxi ∧ dxI
+=
+∑
+I
+∑
+i<j
+( ∂2f
+∂xi∂xj − ∂2f
+∂ xj ∂ xi
+)
+dxj ∧ dxi ∧ dxI
+=0
+25
+
+
+par le lemme de Schwartz. Montrons de plus que d commute avec les pullbacks F ∗ par des applications lisses F : V → U entre ouverts de Rn, un r ́esultat dont on aura besoin par la suite. Ce r ́esultat est d ́ej`a connu pour la diff ́erentielle des fonctions, voir 2.11(D). Comme de plus, F ∗ respecte le produit exte ́rieur, on a
+dF ∗ω = d(f ◦ F d(xi1 ◦ F ) ∧ · · · ∧ d(xin ◦ F )) = d(f ◦ F ) ∧ d(xi1 ◦ F ) ∧ · · · ∧ d(xin ◦ F )
+D’autre part
+F ∗ dω = F ∗ (df ∧ dxi1 ∧ · · · ∧ dxin) = d(f ◦ F ) ∧ d(xi1 ◦ F ) ∧ · · · ∧ d(xin ◦ F )
+d’ou` l’ ́egalit ́e. On repasse `a pr ́esent au cas ge ́ne ́ral d’une vari ́et ́e M . Si ω ∈ Ωk(M ) et (U, φ) est une carte, on note ω|U ∈ Ωk(U ) la restriction de ω `a U et on d ́efinit une (k + 1)-forme dω telle que, sur U , on a dω = φ∗ d ((φ−1)∗ω|U
+)
+Pour que l’objet dω soit bien d ́efini, il faut ve ́rifier que si (V, ψ) est une autre carte, alors
+φ∗ d ((φ−1)∗ω|U
+) = ψ∗ d ((ψ−1)∗ω|V
+) sur U ∩ V (8)
+Comme ψ ◦ φ−1 est un C∞-diff ́eomorphisme entre les ouverts φ(U ∩ V ) et ψ(U ∩ V ) de Rn, par ce que l’on a e ́tabli pr ́ec ́edemment, l’ ́egalit ́e suivante
+d
+((φ−1)∗ω|U
+) = d ((ψ ◦ φ−1)∗(ψ−1)∗ω|V
+) = (ψ ◦ φ−1)∗ d ((ψ−1)∗ω|V
+)
+est valable sur φ(U ∩ V ). En appliquant le pullback φ∗, on obtient donc (8). Et les points (A), (B), (C) et (D), que l’on sait vrais lorsque M est un ouvert de Rn, se transportent assez facilement au cas ge ́ne ́ral. Montrons que, lorsque F : N → M est une application lisse, que F ∗ dω = dF ∗ω. Soient p ∈ N et (V, ψ) une carte locale autour de p et (U, φ) une carte locale autour de F (p), telles que F (U ) ⊆ V . Alors, sur V , on a
+F ∗ dω = F ∗φ∗ d ((φ−1)∗ω|U
+)
+tandis que
+dF ∗ω = ψ∗ d ((ψ−1)∗(F ∗ω)|V
+)
+= ψ∗ d ((ψ−1)∗F ∗ω|U
+)
+= ψ∗ d ((F ◦ ψ−1)∗ω|U
+)
+= ψ∗ d ((φ ◦ F ◦ ψ−1)∗(φ−1)∗ω|U
+)
+= ψ∗(φ ◦ F ◦ ψ−1)∗ d ((φ−1)∗ω|U
+)
+= F ∗φ∗ d ((φ−1)∗ω|U
+).
+Le dernier point `a d ́emontrer (que la d ́eriv ́ee exte ́rieure d’une 1-forme est  ́egalement celle d ́efinie au paragraphe 2.23) est laiss ́e au lecteur.
+2.25 (D ́eriv ́ees exte ́rieures des formes dans R3). — On fixe ici un ouvert U de R3. On sait que toute 0-forme est une fonction de C∞(U ). Toute 1-forme s’ ́ecrit
+ω = f dx + g dy + h dz
+26
+
+
+Elle peut donc s’identifier au champ de vecteurs (f, g, h) : U → R3. Le r ́esultat pr ́ec ́edent permet de calculer la d ́eriv ́ee exte ́rieure de ω
+dω = df ∧ dx + dg ∧ dy + dh ∧ dz
+Le premier terme donne
+df ∧ dx =
+(∂f
+∂x dx + ∂f
+∂y dy + ∂f
+∂z dz
+)
+∧ dx = − ∂f
+∂y dx ∧ dy + ∂f
+∂z dz ∧ dx
+En calculant de mani`ere analogue les autres termes, on trouve
+dω =
+(∂h
+∂y − ∂g
+∂z
+)
+dy ∧ dz +
+(∂f
+∂z − ∂h
+∂x
+)
+dz ∧ dx +
+( ∂g
+∂x − ∂f
+∂y
+)
+dx ∧ dy
+Par ailleurs, si cette fois, ω est une 2-forme, elle est  ́egalement de ́termine ́e par trois fonctions U → R, et on peut donc l’identifier `a un champ de vecteurs
+ω = f dy ∧ dz + g dz ∧ dx + h dx ∧ dy
+Cette fois on calcule
+dω =
+(∂f
+∂x + ∂g
+∂y + ∂h
+∂z
+)
+dx ∧ dy ∧ dz
+Modulo les identifications de Ωk(U ) avec des espaces de fonctions ou de champs de vecteurs, on reconnaıˆt donc que d est le gradient, le rotationnel ou bien la divergence. Plus pre ́cis ́ement, on a le diagramme commutatif suivant
+Ω0(U ) Ω1(U ) Ω2(U ) Ω3(U )
+C∞(U ) C∞(U ; R3) C∞(U ; R3) C∞(U )
+dd
+∼
+d
+∼∼
+grad rot div
+2.26 (Formes ferm ́ees et exactes). — La terminologie introduite pour les 1-formes s’e ́tend `a toutes les k-formes. Pour k > 0, on dit que ω ∈ Ωk(M ) est ferm ́ee lorsque dω = 0. Si k 6= 0, on dit que ω est exacte s’il existe η ∈ Ωk−1(M ) telle que ω = dη. Par convention, on consid ́erera que la seule 0-forme exacte est la fonction nulle. L’ ́egalit ́e d ◦ d exprime que toutes les formes exactes sont ferm ́ees.
+2.27 (Int ́egration d’une n-forme sur un ouvert de Rn). — On fixe U est un ouvert de Rn. Toute n-forme ω ∈ Ωn(U ) s’e ́crit ω = f dx1 ∧ · · · ∧ dxn, ou` f est une fonction C∞. On peut alors d ́efinir l’int ́egrale de ω sur un bor ́elien B ⊆ U , d`es lors que f est inte ́grale sur B (pour la mesure de Lebesgue de Rn), par la formule
+∫
+B
+ω=
+∫
+B
+f
+l’int ́egrale de droite  ́etant une int ́egrale de Lebesgue. Le r ́esultat suivant indique comme cette notion d’inte ́grale interagit avec les pullbacks par des diffe ́omorphismes.
+2.28 Proposition. — Soit F : U → V un C∞-diff ́eomorphisme entre deux ouverts de Rn, dont le jacobien a un signe constant ±. Si ω = f dx1 ∧ · · · ∧ dxn est une norme sur V et B ⊆ V est un bore ́lien tel que f soit int ́egrable sur B, alors on peut int ́egrer F ∗ω sur F −1(B) et
+∫
+F −1(B)
+F∗ω = ±
+∫
+B
+ω
+27
+
+
+D ́emonstration. Par d ́efinition, et par la formule de changement de variables pour l’int ́egrale de
+Lebesgue, on a
+∫
+B
+ω=
+∫
+B
+f=
+∫
+F −1(B)
+f ◦ F |JF |
+ou` JF : U → R d ́esigne le (d ́eterminant) jacobien de F . Par ailleurs,
+F ∗ω = f ◦ F F ∗(dx1 ∧ · · · ∧ dxn) = f ◦ F J F dx1 ∧ · · · ∧ dxn
+Ce re ́sultat d ́ecoule de la d ́efinition de F ∗ et du lemme 2.18. En int ́egrant F ∗ω sur F −1(B) on trouve le r ́esultat attendu.
+Ainsi, la notion d’int ́egrale de formes diffe ́rentielles que nous avons introduite n’est pas invariante par diff ́eomorphisme. Il y a une ind ́etermination sur le signe, due `a des probl`emes d’orientation. Pour pouvoir transporter cette int ́egrale sur des vari ́et ́es quelconques, il va falloir les munir (et introduire les notions ad ́equates) d’une orientation, ce qui est entrepris dans la sous-section suivante.
+2.4 Orientations
+2.29 (Cas d’un espace vectoriel de dimension finie). — Soit V un espace vectoriel de dimension n > 1. On dit que deux bases B et B′ ont la mˆeme orientation lorsque l’application line ́aire qui envoie B sur B′ a un de ́terminant > 0. On de ́finit ainsi une relation d’ ́equivalence entre les bases de V , et on se convainc qu’il n’existe que deux classes d’e ́quivalences. Une orientation est le choix d’une de ces deux classes. Les bases appartenant `a l’orientation sont dites positivement orient ́ees, et les autres n ́egativement orient ́ees.
+On traite `a part le cas V = {0} d’un espace de dimension 0, qui a comme unique base la famille vide ∅. Ici, une orientation de V est le choix d’un signe + ou − (et la base ∅ sera consid ́er ́ee positivement ou n ́egativement orient ́ee selon le signe choisi). L’espace Rn a une orientation canonique, celle qui fait de la base canonique une base positivement orient ́ee. Si ω ∈ Λn(V ∗) est un n-tenseur alterne ́ non nul (o`u n > 1), le lemme 2.18 a comme cons ́equence que, pour toutes bases (E1, . . . , En) et (E′1, . . . , E′n) de V , les r ́eels ω(E1, . . . , En)
+et ω(E′1, . . . , E′n) ont meˆme signe si et seulement si (E1, . . . , En) et (E′1, . . . , E′n) ont la mˆeme
+orientation. Il suit de cela que tout ω ∈ Λn(V ∗) d ́etermine une orientation, a` savoir la classe d’ ́equivalence
+{(E1, . . . , En) base de V : ω(E1, . . . , En) > 0}
+R ́eciproquement, deux tenseurs ω, ω′ ∈ Λn(V ∗) d ́eterminent la mˆeme orientation si et seulement s’ils sont positivement coline ́aires. Lorsque n = 0, on rappelle que, par convention Λ0(V ∗) = R. Un e ́l ́ement ω ∈ Λ0(V ∗) \ {0} d ́etermine donc lui aussi une orientation (donn ́ee par le signe de ω).
+2.30. — On dit qu’un isomorphisme T : V → V pr ́eserve (resp. renverse) l’orientation lorsque det T > 0 (resp. det T < 0). D ́esignons maintenant par U et V deux ouverts de Rn, et soit F : U → V un diff ́eomorphisme. On dit que F pr ́eserve (resp. renverse) l’orientation lorsque le jacobien JF est strictement positif (resp. strictement n ́egatif) en tout point de U .
+2.31 (Orientation d’une varie ́te ́). — Intuitivement, une orientation d’une vari ́et ́e M de dimension n est le choix, en tout point p, d’une orientation de l’espace tangent TpM , qui varie continument avec p.
+28
+
+
+Le cas n = 0 doit l`a aussi ˆetre trait ́e `a part. Une vari ́et ́e M de dimension 0 consiste en des points isol ́es, ainsi la de ́finition intuitive plus haut peut eˆtre reprise telle quelle : une orientation de M est tout simplement une fonction ε : M → {−1, 1}. Dans le cas n > 1, on dit qu’un sous-atlas (de la structure diff ́erentielle) est orient ́e lorsque les applications de changement de cartes pr ́eservent l’orientation. On appelle orientation de M un sous-atlas orient ́e maximal. Une carte sera dite orient ́ee lorsqu’elle appartient `a ce sous-atlas. Enfin, une vari ́et ́e orient ́ee est une vari ́et ́e munie d’une orientation. Une fois la vari ́et ́e M munie d’une orientation, chaque espace tangent TpM h ́erite d’une orientation. Le cas n = 0 est clair, l’orientation de TpM est le signe de ε(p). Dans le cas o`u la dimension n de M est non nulle, on proc`ede de la manie`re suivante : on choisit une carte orient ́ee (U, (x1, . . . , xn)) autour de p, et on donne `a TpM l’orientation qui fait de la base
+∂
+∂x1 |p
+,..., ∂
+∂xn |p
+une base positivement oriente ́e. Cette orientation ne d ́epend pas du choix de la carte orient ́ee. On dit qu’un diffe ́omorphisme F : M → N entre deux vari ́et ́es orient ́ees pr ́eserve l’orientation lorsque l’application tangente T Fp : TpM → TF (p)N pr ́eserve l’orientation (ou de mani`ere
+ ́equivalente, si l’application F , lue dans des cartes orient ́ees de M et N , pr ́eserve l’orientation). `A titre d’exemple, si (U, φ) est une carte orient ́ee de M , alors φ : U → φ(U ) pr ́eserve l’orientation.
+2.32 Th ́eor`eme. — Soit M une varie ́te ́ oriente ́e de dimension n et B ⊆ M un bore ́lien. Il existe une unique forme lin ́eaire
+∫
+B
+: {ω ∈ Ωn(M ) : supp(1Bω) est compact} → R
+telle que pour toute carte oriente ́e (U, φ) et pour tout ω ∈ Ωn(M ) telle que supp(1Bω) ⊆ U , on a ∫
+B
+ω=
+∫
+φ(U ∩B)
+(φ−1)∗ω
+D ́emonstration. On montre d’abord l’unicit ́e. On va pour cela  ́etablir que la valeur de ∫
+B ω est impos ́ee. Tout d’abord, il est clair que si ω = 0 sur B (c’est-`a-dire 1Bω = 0), alors ∫
+B ω = 0. Soit A = {(Uα, φα) : α ∈ A} un atlas orient ́e de M . On appelle (ψα)α∈A une partition de l’unit ́e subordonn ́ee au recouvrement (Uα)α∈A. Alors
+1Bω =
+∑
+α∈A
+1B ψα ω
+et en r ́ealit ́e, la somme de droite ne contient qu’un nombre fini de termes non nuls (exercice). Notons A′ = {α ∈ A : 1Bψαω 6= 0} les indices correspondants. On d ́ecompose donc ω en
+ω=
+∑
+α∈A′
+ψαω + ω′
+ou` ω′ est nulle sur B. On doit donc avoir
+∫
+B
+ω=
+∑
+α∈A′
+∫
+B
+ψαω
+=
+∑
+α∈A′
+∫
+φα(Uα∩B)
+(φ−1
+α )∗(ψαω)
+=
+∑
+α∈A
+∫
+φα(Uα∩B)
+(φ−1
+α )∗(ψαω)
+29
+
+
+ce qui impose l’unicit ́e. Passons `a l’existence. On pose, pour tout ω tel que supp(1Bω) soit compact,
+∫
+B
+ω=
+∑
+α∈A
+∫
+φα(Uα∩B)
+(φ−1
+α )∗(ψαω) (9)
+La somme `a droite est bien finie, par ce qui pr ́ec`ede. Supposons maintenant que supp(1Bω) ⊆ U ou` (U, φ) est une carte oriente ́e. Alors, en utilisant que les applications de changement de cartes φα ◦ φ−1 pr ́eservent l’orientation, ainsi que la proposition 2.28,
+∫
+B
+ω=
+∑
+α∈A
+∫
+φα(Uα∩B)
+(φ−1
+α )∗(ψαω)
+=
+∑
+α∈A
+∫
+φα(U ∩Uα∩B)
+(φ−1
+α )∗(ψαω)
+=
+∑
+α∈A
+∫
+φ(U ∩Uα∩B)
+(φα ◦ φ−1)∗(φ−1
+α )∗(ψαω)
+=
+∑
+α∈A
+∫
+φ(U ∩Uα∩B)
+(φ−1)∗(ψαω)
+=
+∫
+φ(U ∩B)
+(φ−1)∗ω
+2.5 Formule de Stokes
+2.33 (Domaine r ́egulier). — Soit M une vari ́et ́e de dimension n > 1. Un domaine r ́egulier est un sous-ensemble S de M tel que pour tout point p ∈ M , il existe une carte locale (U, φ) autour de p pour laquelle φ(S ∩ U ) = φ(U ) ∩ (R− × Rn−1) (10)
+Nous appellerons une carte (U, φ) ve ́rifiant (10) applatissante pour S (cette terminologie n’est pas standard). (A) S est ferme ́. En effet, le compl ́ementaire M \ S s’ ́ecrit
+M \S =
+⋃
+(U,φ)
+φ−1 (R+∗ × Rn−1)
+ou` l’union porte sur les cartes applatissantes pour S. (B) La frontie`re ∂S est une sous-vari ́et ́e re ́gulie`re de dimension n − 1. Pour cela, nous allons construire un atlas de ∂S. Remarquons tout d’abord qu’un point p est dans ∂S si et seulement si, dans toute carte (U, φ) autour de p applatissante pour S, on a φ(p) ∈ {0} × Rn−1. Notons π : Rn → Rn−1 la projection sur les n − 1 dernie`res coordonn ́ees. A` partir d’une carte (U, φ) applatissante pour S, on construit la carte (U ̃ , φ ̃) de ∂S, o`u U ̃ = ∂S ∩U et φ ̃ : U ̃ → π(φ(U )) est la fonction π ◦ φ. Une application du lemme 1.20 permet de conclure que ∂S est bien une vari ́et ́e diffe ́rentielle, pour la topologie de ∂S induite par celle de M . Une lecture dans les cartes permet de se convaincre que l’application d’inclusion ∂S → M est bien un plongement.
+2.34 (Orientation du bord d’un domaine r ́egulier). — Si M est une vari ́et ́e orient ́ee de dimension n > 1 et S un domaine re ́gulier de M , alors l’orientation de M induit une orientation sur la sous-varie ́te ́ ∂S.
+30
+
+
+On commence par traiter le cas n > 2. On remarque, qu’au voisinage de chaque point p ∈ ∂S, on peut toujours trouver une carte (U, φ) autour de p qui soit `a la fois orient ́ee et qui applatisse S, c’est-`a-dire φ(U ∩ S) = φ(U ) ∩ (R− × Rn−1). En effet, on consid`ere pour cela une carte (U, φ) telle que dans la de ́finition de S. Si elle est orient ́ee, on la conserve. Sinon, on la modifie en composant φ `a droite avec l’application
+(x1, x2, x3, . . . , xn) 7→ (x1, −x2, x3, . . . , xn)
+qui renverse l’orientation et stabilise R− × Rn−1. Il est donc possible de constituer un atlas oriente ́ de M compos ́e de cartes applatissantes (U, φ) pour S. Les cartes (U ̃ , φ ̃) associ ́ees forment alors un atlas orient ́e de ∂S. Ainsi, si (U, φ) est une carte orient ́ee applatissante autour de p ∈ ∂S, les bases suivantes
+∂
+∂x1 |p
+,..., ∂
+∂xn |p
+∈ TpM, ∂
+∂x2 |p
+,..., ∂
+∂xn |p
+∈ Tp∂S
+sont positivement orient ́ees pour TpM et Tp∂S ⊆ TpM . Remarquez que le vecteur ∂
+∂x1 |p est
+sortant , ce qui fait que ∂S est orient ́e par la direction sortante. `A titre d’exemple, si S est un domaine r ́egulier de R2 orient ́e canoniquement, alors ∂S est orient ́e dans le sens trigonom ́etrique. Enfin, on montre comment orienter ∂S dans le cas o`u M est de dimension n = 1. Si (U, φ) est une carte applatissante autour de p ∈ ∂S, on pose ε(p) = 1 si (U, φ) est orient ́ee, et ε(p) = −1 dans le cas contraire. La valeur de ε(p) ne d ́epend pas du choix de la carte (U, φ). La fonction ε : ∂S → {−1, 1} est l’orientation de ∂S.
+2.35 The ́or`eme (Formule de Stokes). — Soit M une vari ́et ́e oriente ́e et S ⊆ M un domaine r ́egulier. Pour tout ω ∈ Ωn−1(M ) tel que supp(1Sω) soit compact, on a
+∫
+S
+dω =
+∫
+∂S
+ω
+Le membre de droite est un abus de notation, courant, car ω n’est pas une forme sur ∂S, mais sur M . Il faut le comprendre comme ∫
+∂S ι∗ω, ou` ι : ∂S → M est l’application d’inclusion.
+D ́emonstration. On v ́erifie tout d’abord que supp(1S dω) est inclus dans supp(1Sω), ce qui garantit sa compacit ́e. Pour cela, il suffit de remarquer que si (U, φ) est une carte locale applatissante telle que 1Sω = 0 sur U , alors 1S dω = 0 sur U . On commence par le cas o`u S = R− × Rn−1 et M = Rn. Nous allons d ́emontrer la formule dans le cas n > 2, en laissant au lecteur le soin d’adapter la preuve dans le cas n = 1. La forme ω s’ ́ecrit
+ω=
+n
+∑
+i=1
+(−1)i+1fi dx1 ∧ · · · ∧ ̂dxi ∧ · · · ∧ dxn
+de sorte que
+dω =
+(n ∑
+i=1
+∂fi
+∂xi
+)
+dx1 ∧ · · · ∧ dxn
+On a donc
+∫
+S
+dω =
+n
+∑
+i=1
+∫
+R− ×Rn−1
+∂fi
+∂xi λ(n)(dx1, . . . , dxn)
+Le the ́ore`me de Fubini donne
+∫
+R− ×Rn−1
+∂f1
+∂x1 λ(n)(dx1, . . . , dxn) =
+∫
+Rn−1
+(∫ 0
+−∞
+f1(x1, . . . , xn) dx1
+)
+dx2 · · · dxn
+=
+∫
+Rn−1
+f1(0, x2, . . . , xn) dx2 · · · dxn
+31
+
+
+De meˆme, lorsque i > 2, on a
+∫
+R− ×Rn−1
+∂fi
+∂xi λ(n)(dx1, . . . , dxn) = 0
+Cela montre que
+∫
+S
+dω =
+∫
+Rn−1
+f1(0, x2, . . . , xn) dx2 · · · dxn
+Enfin, si l’on d ́efinit la fonction φ : ∂S → Rn−1
+φ(0, x2, . . . , xn) = (x2, . . . , xn)
+alors (∂S, φ) est une carte globale orient ́ee de ∂S. Par cons ́equent,
+∫
+∂S
+ι∗ω =
+∫
+Rn−1
+(φ−1)∗ι∗ω =
+∫
+Rn−1
+(ι ◦ φ−1)∗ω
+En notant x2, . . . , xn les coordonn ́ees de Rn−1, on a
+(ι ◦ φ−1)∗ω = f (0, x2, . . . , xn) dx2 ∧ · · · ∧ dxn
+Ceci montre la formule de Stokes dans le cas pr ́esent. On traite maintenant le cas g ́en ́eral (toujours pour n > 2). On note A = {(Uα, ψα) : α ∈ A} un atlas de cartes oriente ́es applatissantes pour S. Soit (ψα)α∈A une partition de l’unit ́e subordonn ́ee au recouvrement ouvert (Uα)α∈A. Pour tout α, on a, par ce qui pr ́ec`ede
+∫
+S
+d(ψαω) =
+∫
+φα(Uα∩S)
+(φ−1
+α )∗ d(ψαω)
+=
+∫
+φα (Uα )∩R− ×Rn−1
+d
+((φ−1
+α )∗ψαω)
+=
+∫
+φα(Uα)∩{0}×Rn−1
+(φ−1
+α )∗ψαω
+=
+∫
+∂S
+ψαω
+Il ne reste plus qu’`a sommer sur α et a` appliquer (9).
+R ́efe ́rences
+[1] J. M. Lee, Introduction to Smooth Manifolds, Graduate Texts in Mathematics, Springer, 2003.
+32

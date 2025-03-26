@@ -1,0 +1,512 @@
+Large Scale Graph Mining
+COMMUNITY DETECTION APPROACHES
+Nacéra Seghouani
+Computer Science Department, CentraleSupélec Laboratoire Interdisciplinaire des Sciences du Numérique, LISN nacera.seghouani@centralesupelec.fr
+2024-2025
+1/45
+
+
+Outline
++ k -Clique and Maximal Cliques
+→ Bron-Kerbosch Algorithm
++ k -Core Subgraphs Decomposition (Relaxation of a clique: k -core)
+→ k -Core Subgraphs Decomposition
++ Community Detection Problem
+→ Clique-based approach → Modularity maximisation approach → Random walk-based approach → Edge betweenness separation-based approach
+2/45
+
+
+Typical large network structure: k -Clique
++ A clique is a complete subgraph. + k -clique is a complete subgraph with k nodes + Brute force algorithm finds all k-cliques: Cnk combinations for completeness. + A maximal clique cannot be extended by including one more adjacent vertex. + A maximum clique is a clique, such that there is no clique with more vertices.
+Figure: C74 4-cliques
+3/45
+
+
+Typical large network structure: k -Clique
++ Different formulations of clique problem (listing maximal cliques, or k -cliques, ....).
+X Clique decision problem is NP-Complete: input is an undirected graph and a number k ; output is true if the graph contains a k -clique, false otherwise.
++ Common problem formulation: finding maximal cliques, i.e. cliques with the largest number of nodes.
+X Many algorithms: Bron–Kerbosch algorithm to find all maximal cliques (different
+variants, O(3 n
+3 ) in the worst case), Tarjan & Trojanowski algorithm and more recently Janez Konc algorithm. X Many algorithms with better theoretical complexity to fin all maximal cliques, Bron–Kerbosch (and improvements) are more efficient.
+4/45
+
+
+Bron-Kerbosch Algorithm: All Maximal Cliques
++ Basic form of Bron–Kerbosch algorithm: ***R: nodes of a potential clique; P: nodes to be added to a potential clique (neighbours of the current v ); X : nodes already processed or already belong to a maximale clique***
+P = V , X = 0/ , R = /0 Function BronKerbosch(R, P, X ) if P = /0 and X = 0/ then R is a maximal clique end if for v ∈ P do
+BronKerbosch(R ∪ {v }, P ∩ Nv , X ∩ Nv ) P ← P \ {v} X ← X ∪ {v} end for
+it makes a recursive call for every clique, maximal or not.
+5/45
+
+
+Bron-Kerbosch Algorithm: All Maximal Cliques 
+Example
+6/45
+
+
+Bron-Kerbosch Algorithm: All Maximal Cliques 
+Exercise
+7/45
+
+
+Bron-Kerbosch Algorithm: All Maximal Cliques
++ Bron and Kerbosch also introduced an optimization with pivot to decrease the number of recursive calls and therefore enable faster backtracking.
+X Any pivot u chosen ∈ P or later from P ∪ X , then neighbors of u are not recursively tested. Any maximal clique potentially found in neighbors of u would also be found when testing u or one of its non-neighbors.
++ The degeneracy of G is the smallest degree d s.t. each subgraph of G has a vertex with degree ≤ d. A degeneracy ordering of vertices may be determined in linear time (seen later).
+X Bron–Kerbosch algorithm loops through a degeneracy ordering, P of candidate vertices in each call (the neighbors of v that are later in the ordering) will be guaranteed to have size at most d.
+8/45
+
+
+Typical large network structure: k -Core
++ Core-periphery structure of a network: internal core where a lot of nodes are connected and peripherical nodes called whiskers (Leskovec et al, 2009).
++ k -core of a graph G is a maximal connected subgraph of G where vertices have at least k -degree. Also called k-degenerate.
+9/45
+
+
+Typical large network structure: k -Core
++ k-core decomposition: Given a graph G (V , E), delete recursively all vertices, and edges connecting them, of degree less than k to extract the k -core graph such that:
+X Each vi in a k -core graph has di ≥ k X (k + 1)-core is a subgraph of a k -core graph
++ Matula & Beck, 1983; 1: procedure KCORE(G (V , E) )
+2: L[ ]; d [ ]; D[ {}]; dmax = maxvi ∈V dvi
+3: ** L list of ranked k by node, d list of degrees by node, D list of set of nodes by degree 4: for vi ∈ V do
+5: d[i] ← dvi ; D[d[i]].insert(vi ) 6: end for
+7: for k ← 0 to dmax do
+8: while D[k].notempty() do 9: i ← D[k].remove(); L[i] ← k 10: for vj ∈ Nvi do
+11: if d[j] > k then
+12: D[d[j]].remove(j); D[d[j] − 1].insert(j); d[j] − − 13: end if 14: end for 15: end while 16: end for 17: end procedure
+10/45
+
+
+Typical large network structure: k -Core
+11/45
+
+
+Typical large network structure: k -Core
+12/45
+
+
+Typical large network structure: k -Core
+13/45
+
+
+Typical large network structure: k -Core
+14/45
+
+
+Typical large network structure: k -Core
+15/45
+
+
+Typical large network structure: k -Core
+16/45
+
+
+Typical large network structure: k -Core
+17/45
+
+
+Community Detection Problem
++ Community in network science refers to the occurrence of clusters (groups) of nodes in a network that are more densely connected internally than with the other nodes
++ Two cases:
+X Non-overlapping community: divides into clusters of nodes with dense connections internally and sparser connections between clusters. Each node assigned to one community. X Overlapping community: assumes that pairs of nodes are more likely to be connected if they are both members of the same communities, and less likely to be connected if they do not share any community.
+18/45
+
+
+Non-overlapping Example
+19/45
+
+
+Overlapping Example
+20/45
+
+
+Community Detection Problem
+X Mutuality of ties: every node in the group has ties to one another
+X Compactness: closeness or reachability of group members
+X Density of edges: high number of edges within a group
+X Separation higher frequency of ties among group members compared to non members
+X Usual metrics: Graph density, internal and external density, graph cut, modularity score
+21/45
+
+
+Community Detection Problem
++ Combinatorial optimisation problem, according to some metrics. Exact solution NP-hard
++ Many approaches by greedy or approximate heuristics for community detection in the literature: agglomerative/hierarchical (ex. Dendogram) or partitioning (Newman-Girvan 2004 )
+X Clique-based approach X Modularity maximisation approach X Random walk-based approach X Edge betweenness separation-based approach
+22/45
+
+
+k -Clique Community
+X Palla et al. 2005
++ A k−clique community is the union of all k−cliques that can be reached from one to the other through a sequence of adjacent k -cliques.
++ Two k−cliques are adjacent if they share k − 1 nodes.
+23/45
+
+
+k -Clique Community
++ Blue community {A, B, C, D} is adjacent to green community {B, C, D,F }
++ Green community {C, D, F ,B} is adjacent to orange community {C, D, F ,E}
++ Purple community is adjacent {F , H, I,J} to yellow community {F , H, I,G}
+24/45
+
+
+Clique Percolation Method: Algorithm
+X Find all maximal cliques, sorting them based on degrees. X Create clique overlap matrix at a given k − 1 how many nodes are overlapping. X Communities are connected components: blue+red+yellow and brown.
+25/45
+
+
+Clique Percolation Method:
+26/45
+
+
+Community Detection: Louvain Algorithm
+X Louvain: The most popular community detection based on modularity measure. Widely used for large networks: efficient (fast convergence), high dense communities (Blondel et al, 2008) . X Greedy algorithm with O(nlogn) in time X Supports weighted graphs X Provides hierarchical communities
+27/45
+
+
+Community Detection: Modularity
+X In network science, the configuration model is a method for generating random networks from a given degree sequence. + Widely used as a reference model for social networks, it allows the modeler to incorporate arbitrary degree distributions. + Assign a degree kv to each node v . Each degree is a half-link or stub. The sum of stubs must be even to be able to build a graph ∑v∈V dv = 2m. + Choose two stubs uniformly at random and connect them by a link. Choose another pair from the remaining 2m − 2 stubs and connect them. Continue until you run out of stubs. + The resulting network keeps the same degrees but randomly pair up nodes. X A realization might include cycles, self-loops or multi-links. The uniform distribution of the matching must be kept. This why it does not exclude self-loops or multi-links. Their expected number goes to zero for large networks. X The probability of a stub of v being connected to one of w stubs is dw
+2m−1 . Since node v has
+dv stubs, the probability of v being connected to w is dv dw
+2m−1 ≈ dv dw
+2m for large m
+28/45
+
+
+Community Detection: Modularity
+X Modularity (M. Newman, 2004) measures the relative density of links inside communities with respect to links outside communities.
+X The basic idea is to compare the number of links within communities with the number expected on the basis of chance. The generated network has less links between nodes of the same community and more between nodes of different communities.
+Q= 1
+2m i∑ j∑
+[
+Aij − ki kj
+2m
+]
+δ(ci , cj ) or Q =
+[∑ i
+∑ j
+Aij
+2m −
+∑ i
+ki ∑ j
+kj
+(2m)2
+]
+δ(ci , cj )
+where ki and kj are resp. the sum of weights of vi and vj links (degree if unweighted graph), and ci and cj are resp. the communities of vi and vj . Kronecker function δ: 1 if ci = cj ; 0 otherwise. −1 ≤ Q ≤ 1. Q > 0: when links within communities > links within communities in a randomly rewired network.
+29/45
+
+
+Community Detection: Modularity
+Compare fraction of edges within a community to expected edges were distributed at random. ki kj
+2m is the random distribution of a link on the original graph. For the entire graph we sum the modularities over all communities.
+δ: 1 if ci = cj ; 0 otherwise
+A11 − k1k1
+2∗5 =
+(
+0− 2∗2
+2∗5
+)
+∗1 = − 2
+5 ; A33 − k3k3
+2∗5 =
+(
+0− 2∗2
+2∗5
+)
+∗1 = − 2
+5 ; A44 − k4k4
+2∗5 =
+(
+0− 2∗2
+2∗5
+)
+∗1 = − 2
+5
+A13 − k1k3
+2∗5 =
+(
+1− 2∗2
+2∗5
+)
+∗1= 3
+5 ; A14 − k1k4
+2∗5 =
+(
+0− 2∗2
+2∗5
+)
+∗1 = − 2
+5 ; A34 − k1k3
+2∗5 =
+(
+1− 2∗2
+2∗5
+)
+∗1= 3
+5
+A55 − k5k5
+2∗5 =
+(
+0− 2∗2
+2∗5
+)
+∗1 = − 2
+5 ; A22 − k2k2
+2∗5 =
+(
+0− 2∗2
+2∗5
+)
+∗1 = − 2
+5 ; A25 − k5k2
+2∗5 =
+(
+1− 2∗2
+2∗5
+)
+∗1= 3
+5;
+Q= 1
+2∗5
+[
+−2
+5−2
+5−2
+5 +2∗ 3
+5 −2∗ 2
+5 +2∗ 3
+5−2
+5−2
+5 +2∗ 3
+5
+]
+=2
+25
+30/45
+
+
+Community Detection: Modularity
+The modularity of a community c:
+Qc =
+∑ i ∈c
+∑ j ∈c
+Aij
+2m −
+∑ i ∈c
+ki ∑ j ∈c
+kj
+(2m)2
+Qc = ∑in
+2m −
+(
+∑in+out 2m
+)2
+where ∑in is the sum of edge weights between nodes within the community c (each edge is considered twice); and ∑in+out is the sum of all edge weights for nodes within the community; including incident ones from the other communities. If the number of communities = 1, Q = 0.
+QCJ = 2 ∗ 2
+2∗5 −
+(2∗2+2 2∗5
+)2
+; QCI = 2 ∗ 1
+2∗5 −
+(2∗1+2 2∗5
+)2
+Q=3
+5 − 9+4
+25 = 2
+25
+31/45
+
+
+Community Detection: Louvain Algorithm
+Compare fraction of edges within a community to expected edges were distributed at random. ki kj
+2m is the random distribution of a link on the original graph. For the entire graph we sum the modularities over all communities.
+32/45
+
+
+Community Detection: Louvain Algorithm
+Compare fraction of edges within a community to expected edges were distributed at random. ki kj
+2m is the random distribution of a link on the original graph. For the entire graph we sum the modularities over all communities.
+33/45
+
+
+Community Detection: Louvain method
+X Louvain method: heuristic method for greedy modularity maximisation in 2 phases:
+X Optimal value of modularity is impractical because it needs to go through all possible iterations of the nodes into groups - Greedy heuristic: first small communities are found by optimizing modularity locally on all nodes, then each small community is grouped into one node and the first step is repeated.
+X Phase 1: Modularity is optimized by allowing only local changes to node communities memberships - Initially each node is assigned its own community.
+X Phase 2: The identified communities are aggregated into super-nodes to build a new network
+X Repeat Phase 1 until 1 super node
+34/45
+
+
+Community Detection: Louvain Algorithm
+Phase 1
+X What is 4Q if we move a node v from CJ to CI : 4QCJ →v→CI = 4QCJ /{v} + 4QCI ∪{v}
+35/45
+
+
+Community Detection: Louvain Algorithm
+4QCJ →v→CI = 4QCJ /{v} + 4QCI ∪{v}
+X How we can derive 4QCI∪{v}? the gain in modularity doesn’t depend on the original community of v . It can easily be computed by moving an isolated node v into CI :
+4QCI ∪{v} = QCI ∪{v} − [QCI + Q{v}]
+4QCI ∪{v} =
+[
+∑in +2kv,in
+2m −
+(
+∑in+out +kv 2m
+)2]
+−
+[
+∑in
+2m −
+(
+∑in+out 2m
+)2
+−
+( kv 2m
+)2]
+4QCJ \{v} = [QCJ \{v} + Q{v}] − QCJ
+4QCJ \{v} =
+[
+∑in −2kv,in
+2m −
+(
+∑in+out −kv 2m
+)2
+−
+( kv 2m
+)2]
+−
+[
+∑in
+2m −
+(
+∑in+out 2m
+)2]
+X The gain computation depends only on kv,in and C
+36/45
+
+
+Community Detection: Louvain Algorithm
+- For each node v : (i) compute modularity gain from removing v from its community and placing it in the community of its neighbor; (ii) place v in the community maximizing 4Q . One iteration is achieved for all the nodes in a sequential manner. 1: procedure LOUVAIN-PHASE1-ONEITERATION(G (V , E , K ), C) 2: for v ∈ V do
+3: cv ← C.get(v ); Cn ← C.get(Nv ) \ cv ; gmax ← −∞; cvmax ← cv 4: for c ∈ Cn do
+5: gain ← 4Q(cv→v→c) 6: if gain > gmax then 7: gmax ← gain; cvmax ← c 8: end if 9: end for 10: if gmax > 0 then
+11: cv ← cv \ {v}; cvmax ← cvmax ∪ {v} 12: end if 13: end for 14: end procedure
+- Repeat the procedure sequentially to all nodes until no more improvement (local max of modularity). The output of this phase depends on the order in which the nodes are considered → studies show that this doesn’t significantly affect the overall modularity.
+37/45
+
+
+Community Detection: Louvain method
+X Phase II
+- Nodes from communities grouped into super nodes
+- Links between nodes of the same community c are represented by self-loops weighted by adding up the links between these nodes: c has a loop edge with weight ∑vi ,vj ∈c Ai,j
+- Links between communities weighted by adding up the links between community’s nodes each (cI , cJ ) has a link with weight ∑vi ∈CI ,vj ∈CJ Ai,j
+38/45
+
+
+Community Detection: Louvain Algorithm
+39/45
+
+
+Community Detection: Louvain Algorithm
+X This figure shows many local nested communities to be easily explored
+40/45
+
+
+Community Detection: Walktrap Approach
+X Based on the random walk (Pons and Latapy, 2006) X Consider random walk on graph at each time step walk moves to neighbors randomly uniformly
+Pij = Aij
+di
+P = D−1A Dii = diag(di )
+Pt
+ij the probability to get from i to j in t steps X The key idea: - Two nodes i and j in the same community have a high Pt
+ij - Two nodes i and j in the same community have similar Pt
+ik ≈ Pt
+kj - Distance (similarity) between two nodes;
+rij (t) =
+√
+n
+k∑=1
+(P t
+ik − Pt
+jk )2
+dk
+= ||D− 1
+2 Pt
+i − D− 1
+2 Pt
+j ||
+41/45
+
+
+Community Detection: Walktrap Approach
+X Based on the random walk
+X Consider random walk on graph, at each time step walk moves to neighbors randomly uniformly
+Pij = Aij
+di
+P = D−1A Dii = diag(di )
+Pt
+ij the probability to get from i to j in t steps
+X The key idea: - Two nodes i and j in the same community have a high Pt
+ij - Two nodes i and j in the same community have similar Pt
+ik ≈ Pt
+kj - Distance (similarity) between two nodes;
+rij (t) =
+√
+n
+k∑=1
+(P t
+ik − Pt
+jk )2
+dk
+= ||D− 1
+2 Pt
+i − D− 1
+2 Pt
+j ||
+X Computation is approximated by:
+Pt
+ik ≈ Nik
+Ni
+Nik the number of times to end up on node k starting from i and Ni is the number of walks starting from i (with t walks).
+42/45
+
+
+Community Detection: Walktrap Approach
+X Assign to each node its own community X Compute the distance between adjacent nodes (rij (t)) X Choose the two closest communities and merge them X Update distance between communities
+rC1C2 (t ) =
+√
+n
+k∑=1
+(P t
+C1k − Pt
+C2k )2 dk
+= ||D− 1
+2 Pt
+C1 − D− 1
+2 Pt
+C2 || Pt
+Ci k = 1
+|Ci | ∑
+j ∈Ci
+Pt
+jk
+X After n steps finish with one community
+43/45
+
+
+Community Detection: Girvan-Newman Approach
+X Edge betweenness of e is the fraction of the number of shortest paths between all nodes s
+and t going through the edge e: ebte = ∑s6=t
+ne
+s,t ns,t
+X Focus on edges that connect communities. Construct communities by progressively removing edges with the highest edge betweenness value.
+- For all e ∈ E compute ebte, remove edge e with the largest ebte - Repeat until all edges left. Stop when it splits in 2 components. The output is a dendrogram.
+44/45
+
+
+Community Detection: Girvan-Newman Approach
+X Community Quality: the higher modularity score the better is the community
+45/45

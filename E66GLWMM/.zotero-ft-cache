@@ -1,0 +1,1479 @@
+Éléments de théorie des graphes
+
+
+Springer
+Paris Berlin Heidelberg New York Hong Kong Londres Milan Tokyo
+
+
+Alain Bretto, Alain Faisant, François Hennecart
+Éléments de théorie
+des graphes
+
+
+Alain Bretto
+Département d’informatique Université de Caen – Campus II Boulevard Maréchal Juin BP 5186, 14032 Caen
+Alain Faisant
+Département de mathématiques Université Jean-Monnet 23, rue du docteur Paul Michelon 42023 Saint-Étienne Cedex 2
+François Hennecart
+Département de mathématiques Université Jean-Monnet 23, rue du docteur Paul Michelon 42023 Saint-Étienne Cedex 2
+ISBN : 978-2-8178-0280-0 Springer Paris Berlin Heidelberg New York
+© Springer-Verlag France, 2012
+Springer-Verlag France est membre du groupe Springer Science + Business Media
+Cet ouvrage est soumis au copyright. Tous droits réservés, notamment la reproduction et la représentation, la traduction, la réimpression, l’exposé, la reproduction des illustrations et des tableaux, la transmission par voie d’enregistrement sonore ou visuel, la reproduction par microfilm ou tout autre moyen ainsi que la conservation des banques de données. La loi française sur le copyright du 9 septembre 1965 dans la version en vigueur n’autorise une reproduction intégrale ou partielle que dans certains cas, et en principe moyennant les paiements des droits. Toute représentation, reproduction, contrefaçon ou conservation dans une banque de données par quelque procédé que ce soit est sanctionnée par la loi pénale sur le copyright. L’utilisation dans cet ouvrage de désignations, dénominations commerciales, marques de fabrique, etc., même sans spécification ne signifie pas que ces termes soient libres de la législation sur les marques de fabrique et la protection des marques et qu’ils puissent être utilisés par chacun. La maison d’édition décline toute responsabilité quant à l’exactitude des indications de dosage et des modes d’emplois. Dans chaque cas il incombe à l’usager de vérifier les informations données par comparaison à la littérature existante.
+Maquette de couverture : Jean-François Montmarché
+Illustration de couverture : Fotolia – connections © adimas
+Mise en page : Nicolas Puech
+
+
+Collection IRIS Dirigée par Nicolas Puech
+Ouvrages parus :
+– Méthodes numériques pour le calcul scientifique. Programmes en Matlab A. Quarteroni, R. Sacco, F. Saleri, Springer-Verlag France 2000
+– Calcul formel avec MuPAD
+F. Maltey, Springer-Verlag France 2002
+– Architecture et micro-architecture des processeurs B. Gnossens, Springer-Verlag France 2002
+– Introduction aux mathématiques discrètes
+J. Matousek, J. Nesetril, Springer-Verlag France 2004
+– Les virus informatiques : théorie, pratique et applications F. Filiol, Springer-Verlag France 2004
+– Computer Viruses: from theory to applications E. Filiol, Springer-Verlag France 2005
+– Introduction pratique aux bases de données relationnelles. (2e éd.) A. Meier, Springer-Verlag France 2006
+– Bio-informatique moléculaire. Une approche algorithmique P. A. Pevzner, Springer-Verlag France 2006
+– Algorithmes d’approximation
+V. Vazirani, Springer-Verlag France 2006
+– Techniques virales avancées
+É. Filiol, Springer-Verlag France 2007
+– Codes et turbocodes
+C. Berrou, Springer-Verlag France 2007
+– Introduction à Scilab. (2e éd.)
+J.P. Chancelier, F. Delebecque, C. Gomez, M. Goursat, R. Nikouhah, S. Steer, Springer-Verlag France 2007
+– Maple : règles et fonctions essentielles N. Puech, Springer-Verlag France 2009
+– Les virus informatiques : théorie, pratique et applications. (2e éd.) É. Filiol, Springer-Verlag France 2009
+– Codes and Turbo Codes
+C. Berrou, Springer-Verlag France 2010
+– Optimisation combinatoire : théorie et algorithmes B. Korte, J.Vygen, Springer-Verlag France 2010
+– Concepts et méthodes en phylogénie moléculaire
+G. Perrière, C. Brochier-Armanet, Springer-Verlag France 2010
+– Enseigner l’informatique
+W. Hartmann, M. Näf, R. Reichert, Springer-Verlag France 2012
+
+
+Avant-propos
+En quelques décennies, la théorie des graphes est devenue l’un des domaines les plus féconds et les plus dynamiques des mathématiques et de l’informatique. Cette évolution constante est sans doute due au large spectre des applications telles que l’électronique, la linguistique, la chimie, la sociologie, les mathématiques, l’informatique. . . Le début a été hésitant : l’histoire veut que la théorie des graphes ait commencé avec l’article du mathématicien suisse Leonhard Euler sur le problème des ponts de Königsberg (voir Solutio problematis ad geometriam situs pertinentis, Commentarii Academiae Scientiarum Imperialis Petropolitanae Vol 8 (1736), 128–140). Néanmoins il faudra attendre deux siècles pour que le premier livre paraisse sur le sujet. Celui-ci a été écrit par Dénes König en 1936 (voir Theorie der Endlichen und Unendlichen Graphen, Teubner, Leipzig, 1936). Le développement de la théorie des graphes est assez similaire au développement de la théorie des probabilités dont beaucoup de résultats sont dus à l’effort de compréhension des jeux de hasard. Les graphes ont d’abord été considérés comme curiosité mathématique et comme outil pour étudier les jeux logiques : on peut citer par exemple le problème du cavalier du jeu d’échec devant visiter chaque case de l’échiquier exactement une fois tout en revenant à la case de départ. Ils sont devenus maintenant incontournables dans diverses activités humaines. À la suite d’Euler, beaucoup de mathématiciens se sont intéressés aux graphes ; citons en quelques-uns : – Edouard Lucas pose le problème des demoiselles : des jeunes filles, en nombre pair, se promènent chaque jour deux par deux. On demande comment il faut disposer les promenades de sorte que chacune d’entre elles se retrouve une et une fois seulement en compagnie de chacune des autres.
+Nous développons au chapitre 8 les outils qui permettent de ré
+
+
+viii Éléments de théorie des graphes
+soudre ce type de problème. – En 1856, William R. Hamilton étudie un problème apparemment aussi simple, celui de trouver un chemin passant une fois et une seule par chaque sommet d’un graphe. Cela donnera naissance au concept de graphe hamiltonien (voir chapitre 2). – Arthur Cayley, James J. Sylvester puis George Polya développent la notion d’arbre (voir chapitre 2). – En 1840, August F. Möbius propose le problème suivant : un roi a cinq fils et souhaite qu’à sa mort son royaume soit divisé en cinq provinces de telle sorte que chaque province ait une frontière commune avec chacune des autres.
+Cela revient à décider si le graphe K5 est planaire. Nous aborderons la notion de graphe planaire au chapitre 5.
+Cette théorie permet de représenter un ensemble complexe d’objets en exprimant les relations entre les éléments ; par exemple réseaux de communication, génétique, circuits électriques, mais également en mathématiques : la classification des groupes simples finis fait appel aux graphes par l’intermédiaire des cartes et des dessins d’enfant (redécouverts en 1984 par Alexandre Grothendieck dans Esquisse d’un programme). Il faudra néanmoins attendre le milieu du xxe siècle pour qu’une étude systématique soit entreprise. Aujourd’hui c’est une théorie « foisonnante » aux frontières de domaines plus classiques tels que la topologie, l’algèbre, la géométrie, l’algorithmique et ses applications. Son langage et ses notations ne sont pas encore stabilisés et sont parfois liés au domaine dans lequel la théorie des graphes est employée.
+Nous avons essayé dans cet ouvrage d’unifier les définitions et les résultats, et de les placer dans le cadre le plus général possible. Cependant il n’est pas facile d’avoir le même langage pour les graphes simples, les multigraphes, les graphes orientés (ou digraphes). . . Le contenu n’est pas standard (bien que beaucoup de chapitres traitent d’éléments classiques) au sens d’une introduction habituelle aux graphes. Nous avons insisté sur l’aspect algébrique et topologique, mais également sur les derniers développements de la théorie (notamment les aspects spectraux, voir chapitre 9). Afin de rendre le lecteur autonome, nous avons volontairement détaillé les preuves et introduit des rappels tout au long de l’ouvrage. Certains chapitres et paragraphes de ce livre ne sont pas faciles et peuvent être omis en première lecture. Néanmoins le but affirmé de ce livre est d’emmener le lecteur au seuil de la recherche.
+
+
+Avant-propos ix
+Dans le premier chapitre, nous introduisons les graphes et le langage de base. Certaines notions élémentaires sur la complexité algorithmique sont également abordées ; les deux derniers paragraphes sont d’un niveau un peu plus élevé et peuvent être ignorés lors d’une première lecture.
+Le deuxième chapitre a pour objet l’introduction de différentes classes de graphes (graphes bipartis, arbres, arborescences. . .). Les derniers paragraphes traitent des graphes eulériens et hamiltoniens.
+Dans le chapitre trois, nous étudions les relations entre les graphes et les structures de données algorithmiques. De manière plus précise, nous montrons que la notion de graphe est fondamentale quand on veut représenter des données informatiques. Des notions telles que les arbres binaires de recherche, les arbres de priorité, les tas. . . sont abordés. Ce chapitre est un cours classique d’algorithmique et de structures de données généralement étudié en première et deuxième années de licence d’informatique.
+Ces trois chapitres n’utilisent aucun concept difficile et peuvent être lus par un étudiant ayant le niveau d’un baccalauréat scientifique : ils nécessitent cependant quelques compléments sur des structures mathématiques généralement abordées en début d’études supérieures, qui sont introduits au cours du texte.
+Le chapitre quatre, qui introduit la connexité et les flots, bien que n’utilisant aucune notion difficile, est un peu plus théorique. Néanmoins il peut être lu par une personne ayant un niveau licence première et deuxième années en mathématiques ou informatique.
+Le chapitre cinq traite de la notion de planarité et ne peut être abordé que par un lecteur ayant de bonnes notions sur la topologie du plan. Nous avons développé en annexe des éléments de cette topologie ; une preuve explicite détaillée du théorème de Jordan, version polygonale, est également donnée.
+Au chapitre six, les aspects algébriques (élémentaires) de la théorie des graphes sont étudiés. Ce chapitre ne présente pas vraiment de difficultés pour un étudiant de licence de mathématiques ou informatique première ou deuxième année.
+Les chapitres sept et huit introduisent les colorations et les couplages de graphes. Certains théorèmes sont assez difficiles et peuvent être négligés lors d’une première lecture.
+Le chapitre neuf aborde la théorie spectrale des graphes (avatar plus récent de la théorie des graphes) et demande des connaissances plus élaborées en algèbre (niveau milieu de licence de mathématiques).
+
+
+x Éléments de théorie des graphes
+Le dernier chapitre n’utilise pas d’outils très profonds mais les concepts manipulés et les résultats démontrés sont assez abstraits. Il est donc conseillé seulement en deuxième lecture. On trouvera une courte liste de textes classiques sur les graphes à la fin de l’ouvrage. Par commodité nous avons mentionné en note de bas de page les quelques références utilisées dans l’exposé.
+Caen, Saint-Étienne le 26 juillet 2011, Alain Bretto, Alain Faisant, François Hennecart.
+
+
+« Essayez de représenter sur du papier les structures de ces intrigues enchevêtrées en figurant chaque personnage par un point se déplaçant à la fois dans l’espace et dans le temps. Vous obtiendrez ainsi des graphes (dans le sens que les mathématiciens Koenigs et Claude Berge donnent à ce terme) assez comparables à ceux qui sont en usage dans les bureaux des compagnies de chemin de fer, et il vous sera aisé de vérifier que, tout en étant très serrés, ils n’impliquent jamais contradiction et ne pourraient jamais engendrer de déraillements ou de collisions. »
+François Le Lionnais (préface au roman Les habits noirs de Paul Féval, coll. Bouquins, t. 2).
+Remerciements
+Les auteurs tiennent à remercier chaleureusement tous ceux qui les ont aidés lors de la préparation de ce livre et particulièrement Thierry Charnois (maître de conférences à l’Université de Caen), François Foucault (maître de conférences à l’Université de Saint-Étienne), Alkis Grecos (professeur à l’Université Libre de Bruxelles), Georges Grekos (maître de conférences à l’Université de Saint-Étienne), Jean-Marie Lebars (maître de conférences à l’Université de Caen), Éric Reyssat (professeur à l’Université de Caen), Philippe Toffin (maître de conférences à l’Université de Caen).
+
+
+À propos des auteurs
+Alain Bretto est professeur à l’Université de Caen Basse-Normandie. Il enseigne également à AgroParisTech et a précédemment enseigné aux États Unis et en Italie. Ses recherches portent sur la théorie des graphes et des hypergraphes, plus précisément sur leurs aspects algébriques et topologiques. Expert reconnu dans ces domaines, Alain Bretto s’intéresse aussi aux applications des mathématiques : analyse d’images, finance, technologie de l’information. Il a écrit une soixantaine d’articles dans des revues et des conférences internationales. Ses travaux lui ont valu plusieurs invitations dans des universités étrangères.
+Alain Faisant est maître de conférence hors classe émérite à l’Université de Saint-Étienne, où s’est déroulée la majeure partie de sa carrière. Ses travaux sont principalement centrés sur la théorie des nombres et il est l’auteur d’un ouvrage qui fait référence sur le sujet : " L’équation diophantienne du second degré" (Hermann 1991). Ses travaux portent aussi sur la théorie des graphes, plus précisément sur leurs aspects algébriques et topologiques. Plus récemment, il s’est intéressé aux mathématiques babyloniennes, ce qui lui a valu une invitation par les autorités kurdes d’Irak.
+François Hennecart est professeur à l’Université de Saint-Étienne depuis 2003. Il y enseigne les mathématiques et y développe ses recherches en théorie des nombres. Il s’intéresse plus particulièrement à des problèmes additifs et combinatoires, domaines où les graphes interviennent fréquemment. Il a publié une trentaine d’articles dans les meilleures revues du domaine. Il a été chercheur invité à l’Institut Rényi de Hongrie ainsi qu’à l’Académie slovaque des Sciences à Bratislava. Anciennement rédacteur en chef du Journal de théorie des nombres de Bordeaux (1997-2003) François Hennecart donne souvent des conférences en France, notamment à l’IHP.
+
+
+Sommaire
+Avant-propos vii
+À propos des auteurs xiii
+1 Concepts fondamentaux 1 1.1 Graphes non orientés . . . . . . . . . . . . . . . . . . . . 1 1.1.1 Degré . . . . . . . . . . . . . . . . . . . . . . . . . 6 1.1.2 Chaîne et cycle . . . . . . . . . . . . . . . . . . . . 7 1.1.3 Sous-graphes . . . . . . . . . . . . . . . . . . . . . 9 1.2 Décomposition connexe . . . . . . . . . . . . . . . . . . . 13 1.3 Graphes orientés . . . . . . . . . . . . . . . . . . . . . . . 14 1.4 Graphes simples . . . . . . . . . . . . . . . . . . . . . . . 17 1.5 Opérations sur les graphes . . . . . . . . . . . . . . . . . 20 1.6 Représentations algorithmiques des graphes . . . . . . . . 20 1.7 Algorithmes et théorie de la complexité . . . . . . . . . . 22 1.7.1 Algorithme . . . . . . . . . . . . . . . . . . . . . . 22 1.7.2 Complexité en temps d’un algorithme . . . . . . . 24 1.7.3 Classes de complexité . . . . . . . . . . . . . . . . 25 1.8 Définition d’un graphe à partir de la fonction d’incidence 26 1.9 Isomorphismes de graphes. Groupes d’automorphismes . . 27 1.10 Compléments : quelques structures de base . . . . . . . . 32
+2 Quelques graphes remarquables 35 2.1 Graphes bipartis . . . . . . . . . . . . . . . . . . . . . . . 35 2.2 Arbres et arborescences . . . . . . . . . . . . . . . . . . . 39 2.2.1 Arbres . . . . . . . . . . . . . . . . . . . . . . . . . 39 2.2.2 Arborescences . . . . . . . . . . . . . . . . . . . . . 45 2.3 Digraphes sans circuit . . . . . . . . . . . . . . . . . . . . 48 2.4 Graphes eulériens et graphes hamiltoniens . . . . . . . . . 50
+
+
+xvi Éléments de théorie des graphes
+2.4.1 Graphes eulériens . . . . . . . . . . . . . . . . . . . 50 2.4.2 Graphes hamiltoniens . . . . . . . . . . . . . . . . 55
+3 (Di)graphes et structures de données 61 3.1 Arbres et arborescences : le retour . . . . . . . . . . . . . 62 3.1.1 Représentation d’un arbre ou d’une arborescence sous forme fils-frère . . . . . . . . . . . . . . . . . . 63 3.1.2 Arbres et arborescences binaires . . . . . . . . . . . 67 3.1.3 Arbres et arborescences binaires de recherche . . . 68 3.1.4 Arbres et arborescences de priorité, les tas . . . . . 74 3.1.5 Arbres AVL . . . . . . . . . . . . . . . . . . . . . . 79 3.1.6 Propriétés des arbres binaires . . . . . . . . . . . . 84 3.2 Complexité en temps des algorithmes sur les arbres binaires 85 3.3 Graphes : le retour . . . . . . . . . . . . . . . . . . . . . . 87 3.3.1 Représentation par matrice d’adjacence . . . . . . 87 3.3.2 Représentation par tableau des listes de successeurs 87 3.3.3 Remarques sur la complexité de ces représentations 88 3.3.4 Parcours d’un (di)graphe . . . . . . . . . . . . . . 88 3.4 Compléments . . . . . . . . . . . . . . . . . . . . . . . . . 91 3.4.1 Types de données simples . . . . . . . . . . . . . . 91 3.4.2 Fonctions . . . . . . . . . . . . . . . . . . . . . . . 92 3.4.3 Passage des paramètres dans une fonction . . . . . 93 3.4.4 Structures linéaires . . . . . . . . . . . . . . . . . . 94
+4 Connexité et flots dans les réseaux 99 4.1 Sommet-connexité et arête-connexité . . . . . . . . . . . . 99 4.2 Graphes 2-sommet-connexes . . . . . . . . . . . . . . . . 103 4.3 Graphes 2-arête-connexes . . . . . . . . . . . . . . . . . . 111 4.4 Flots dans un réseau . . . . . . . . . . . . . . . . . . . . . 113 4.4.1 Définitions . . . . . . . . . . . . . . . . . . . . . . 113 4.4.2 Le théorème de Ford et Fulkerson . . . . . . . 117 4.5 Applications des flots dans un réseau . . . . . . . . . . . 123 4.6 Compléments : lois de Kirchhoff . . . . . . . . . . . . . 128
+5 Graphes planaires 131 5.1 Dessins . . . . . . . . . . . . . . . . . . . . . . . . . . . . 131 5.2 Graphes planaires . . . . . . . . . . . . . . . . . . . . . . 133 5.2.1 Rappels de topologie de Rn . . . . . . . . . . . . . 133 5.2.2 Lignes polygonales . . . . . . . . . . . . . . . . . . 134 5.2.3 Graphes plongés . . . . . . . . . . . . . . . . . . . 144
+
+
+Sommaire xvii
+5.2.4 Faces . . . . . . . . . . . . . . . . . . . . . . . . . . 145 5.2.5 La formule d’Euler . . . . . . . . . . . . . . . . . 148 5.2.6 Graphes planaires 2-connexes . . . . . . . . . . . . 154 5.3 Comparaison des plongements . . . . . . . . . . . . . . . 155 5.4 Le théorème de Kuratowski . . . . . . . . . . . . . . . 158 5.5 Graphe dual . . . . . . . . . . . . . . . . . . . . . . . . . 161 5.6 Croisements, épaisseur et genre d’un graphe . . . . . . . . 165 5.6.1 Croisements et épaisseur . . . . . . . . . . . . . . . 165 5.6.2 Genre d’un graphe . . . . . . . . . . . . . . . . . . 166 5.7 Compléments de topologie et géométrie du plan . . . . . 171 5.7.1 Éléments de topologie . . . . . . . . . . . . . . . . 171 5.7.2 Preuve du théorème de Jordan « polygonal » . . 175
+6 Théorie algébrique 183 6.1 Matrices et graphes . . . . . . . . . . . . . . . . . . . . . 183 6.1.1 Le cas orienté . . . . . . . . . . . . . . . . . . . . . 190 6.1.2 Le cas non orienté . . . . . . . . . . . . . . . . . . 191 6.2 Espaces vectoriels et graphes . . . . . . . . . . . . . . . . 192 6.2.1 Cas des graphes orientés . . . . . . . . . . . . . . . 192 6.2.2 Cas des graphes non orientés . . . . . . . . . . . . 196 6.3 Circulation et algèbre linéaire . . . . . . . . . . . . . . . . 198 6.4 Graphes planaires et algèbre linéaire . . . . . . . . . . . . 202 6.5 Compléments d’algèbre linéaire . . . . . . . . . . . . . . . 206 6.5.1 Espaces vectoriels . . . . . . . . . . . . . . . . . . . 206 6.5.2 Matrices . . . . . . . . . . . . . . . . . . . . . . . . 208 6.5.3 Produits scalaires . . . . . . . . . . . . . . . . . . . 211
+7 Coloration 213 7.1 Coloration des sommets . . . . . . . . . . . . . . . . . . . 214 7.1.1 Propriétés générales . . . . . . . . . . . . . . . . . 214 7.1.2 Le théorème de Brooks . . . . . . . . . . . . . . . 219 7.2 Graphes planaires et cartes . . . . . . . . . . . . . . . . . 222 7.3 Coloration des arêtes . . . . . . . . . . . . . . . . . . . . 227 7.4 Morphismes de graphes . . . . . . . . . . . . . . . . . . . 232 7.4.1 Quotients de graphe . . . . . . . . . . . . . . . . . 235 7.4.2 Morphismes et quotients de graphes simples . . . . 236 7.4.3 Morphismes et coloration . . . . . . . . . . . . . . 236 7.5 Graphes parfaits . . . . . . . . . . . . . . . . . . . . . . . 238 7.6 Coloration par listes . . . . . . . . . . . . . . . . . . . . . 242
+
+
+xviii Éléments de théorie des graphes
+8 Couplage et factorisation 245 8.1 Définitions et premières propriétés . . . . . . . . . . . . . 245 8.2 Couplages dans les graphes bipartis . . . . . . . . . . . . 252 8.2.1 Le théorème de Hall . . . . . . . . . . . . . . . . 252 8.2.2 Réseau associé à un graphe biparti . . . . . . . . . 254 8.2.3 Remarques algorithmiques . . . . . . . . . . . . . . 255 8.3 Couplages dans les graphes quelconques . . . . . . . . . . 256 8.4 Factorisation . . . . . . . . . . . . . . . . . . . . . . . . . 263 8.5 Quelques applications des couplages . . . . . . . . . . . . 266 8.6 Généralisation de la notion de facteur . . . . . . . . . . . 274
+9 Automorphismes – Théorie spectrale 277 9.1 Groupes de permutations . . . . . . . . . . . . . . . . . . 277 9.2 Groupes d’automorphismes d’un graphe et line-graphe . . 279 9.2.1 Automorphismes, automorphismes d’arêtes . . . . 279 9.2.2 Étude de Ker αΓ . . . . . . . . . . . . . . . . . . . 283 9.2.3 Étude de Im αΓ . . . . . . . . . . . . . . . . . . . . 283 9.3 Graphe de Cayley colorié . . . . . . . . . . . . . . . . . 287 9.4 Le problème de König . . . . . . . . . . . . . . . . . . . 290 9.5 Action de groupe . . . . . . . . . . . . . . . . . . . . . . . 294 9.6 Graphes transitifs . . . . . . . . . . . . . . . . . . . . . . 298 9.7 Théorie spectrale des graphes . . . . . . . . . . . . . . . . 300 9.7.1 L’espace hermitien Cn . . . . . . . . . . . . . . . . 301 9.7.2 Spectre d’un graphe . . . . . . . . . . . . . . . . . 304 9.7.3 Laplacien d’un graphe . . . . . . . . . . . . . . . . 313 9.8 Polynôme chromatique . . . . . . . . . . . . . . . . . . . 321
+10 Autres perspectives 327 10.1 Polynômes de Tutte . . . . . . . . . . . . . . . . . . . . 327 10.1.1 Propriétés de base . . . . . . . . . . . . . . . . . . 329 10.1.2 Polynôme de Tutte et polynôme chromatique . . 336 10.1.3 Polynôme de Tutte et arbres de recouvrement . . 338 10.1.4 Polynôme de Tutte et planarité . . . . . . . . . . 339 10.1.5 Autres applications . . . . . . . . . . . . . . . . . . 339 10.2 Théorie de Ramsey . . . . . . . . . . . . . . . . . . . . . 340 10.3 Matroïdes . . . . . . . . . . . . . . . . . . . . . . . . . . . 347 10.4 Hypergraphes . . . . . . . . . . . . . . . . . . . . . . . . . 353
+
+
+Sommaire xix
+Bibliographie 357
+Index 359
+Symboles utilisés 367
+
+
+Chapitre 1
+Concepts fondamentaux
+Nous donnons dans ce chapitre les principales définitions de la théorie des graphes. Celles-ci, bien que formalisées de manière abstraite, sont heureusement très intuitives et donc simples à comprendre. Nous avons également introduit quelques notions sur les algorithmes. En effet, de nombreuses propriétés des graphes peuvent être traduites de manière algorithmique. Certaines propriétés ne sont pas effectives (voir section 1.7.3). D’autres, comme le problème d’isomorphisme de graphes, sont très importantes en théorie de la complexité. Ainsi avons-nous aussi développé à la fin du chapitre quelques éléments sur les classes de complexité.
+1.1 Graphes non orientés
+La notion de graphe est sujette à de nombreuses variations car un graphe « code » deux informations : l’information donnée par les sommets et celle représentée par les arêtes entre deux sommets (voir l’exemple en figure 1.1) ; par conséquent on a besoin de nommer les sommets puis de nommer les arêtes. Cependant cela ne suffit pas car on peut avoir plusieurs arêtes entre deux sommets (voir l’exemple en figure 1.2). On aura donc besoin d’un troisième ensemble pour tenir compte de la multiplicité éventuelle des arêtes. Aussi convient-il de préciser soigneusement les définitions. Voici d’abord une première description, abstraite, des graphes. Nous en donnerons une autre à la fin de ce chapitre. Si V est un ensemble, on note P2(V ) l’ensemble des parties de V à 1 ou 2 éléments ({x} ou {x, y}). Convention : on notera [x, y] pour englober les 2 cas x = y et x = y.
+A, Bretto et al., Éléments de théorie des graphes © Springer-Verlag France 2012
+
+
+2 Éléments de théorie des graphes
+sommet
+sommet sommet
+arête
+arête
+Figure 1.1 – Exemple de graphe : une arête est représentée par une « courbe » entre deux sommets.
+sommet
+sommet sommet
+arête
+arête
+arête
+Figure 1.2 – Exemple de graphe avec une « arête multiple ».
+On a toujours [x, y] = [y, x]. On peut donc voir [x, y] comme un multiensemble comportant deux termes. Un graphe est un triplet Γ = (V ; E, N ) où – V est l’ensemble des sommets du graphe ; il sera commode d’utiliser la notation V (Γ) pour désigner l’ensemble des sommets du graphe Γ ; – N est un ensemble qui sert à étiqueter les arêtes (par exemple N = {1, 2, . . . , p}, N = {bleu, rouge, vert, . . ., violet}, N = N. . .) ; – E ⊂ P2(V ) × N est l’ensemble des arêtes ; notation E = E(Γ). Une arête a ∈ E s’écrit a = ([x, y], n), x, y ∈ V , n ∈ N ; x et y sont les extrémités de a et n son étiquette ; a est incidente à x et y ; x et y sont dits adjacents ; si x = y, l’arête est une boucle. Restriction : dans les graphes que nous considérerons, on supposera que pour tous x, y ∈ V l’ensemble {a ∈ E : x et y incidents à a} est fini. Pour représenter un graphe dans le plan ou dans l’espace, on matérialise généralement les arêtes par des segments ou des courbes. Deux arêtes a et b sont adjacentes si elles ont (au moins) une extrémité commune.
+La fonction d’incidence ε : E −→ P2(V ) est définie par ε(a) = [x, y] si a = ([x, y], n).
+
+
+1. Concepts fondamentaux 3
+Pour x, y fixés dans V l’ensemble {a ∈ E, ε(a) = [x, y]}, de cardinal p ≥ 1, est appelé p-arête ; c’est l’ensemble
+{([x, y], n1), ([x, y], n2), . . . , ([x, y], np)},
+où ni ∈ N , i = 1, . . . , p, sont les étiquettes de la p-arête. Si p = 1, on l’appelle également arête simple et on le note simplement {x, y} ; tandis que si p ≥ 2, on dit que c’est une multi-arête ou une arête multiple. Une p-boucle est une p-arête dont les extrémités coïncident. On prendra garde à bien distinguer la notion d’arête de celle de multiarête, dans le sens où une multi-arête est généralement constituée de plusieurs arêtes.
+Exemple 1.1.1. Considérons le graphe de la figure 1.3. On a :
+V = {x1, x2, x3, . . . , x6}, N = {1, 2, . . . , 9},
+E = {([x1, x2], 1), ([x1, x2], 2), ([x2, x3], 3), ([x2, x3], 1), ([x2, x3], 4),
+([x3, x5], 5), ([x3, x4], 1), ([x4, x5], 6), ([x4, x4], 7), ([x4, x4], 8),
+([x5, x6], 9), ([x5, x6], 5)}.
+On remarque que les étiquettes peuvent être répétées ; ainsi les arêtes ([x1, x2], 1) et ([x2, x3], 1) sont distinguées, non pas par leur étiquette, mais par le fait que x3 = x1. Ce graphe contient une 2-boucle (c’est-à-dire une 2-arête dont les extrémités coïncident), une 3-arête, deux 2-arêtes, les autres sont des arêtes simples.
+x1
+x2
+x3
+x4
+x5
+x6
+1 2
+3 1
+4
+51
+6
+78
+9
+5
+Figure 1.3 – Exemple de graphe comportant des multi-arêtes et une 2-boucle.
+
+
+4 Éléments de théorie des graphes
+Exemple 1.1.2. Les graphes, lorsqu’ils sont associés à une représentation dans le plan ou dans l’espace permettent de modéliser des informations concrètes. C’est le cas du graphe de la figure 1.4 dont on se sert pour représenter des moyens de transport entre différentes villes représentés par un graphe « concret ». On a : N = {avion, route, tgv, train}.
+Caen
+Paris
+Lyon
+Marseille
+Toulouse
+route
+train
+avion avion route avion
+tgv
+avion
+train
+tgv
+route
+avion
+train
+route
+avion
+Figure 1.4 – Un graphe concret.
+Autres exemples de graphes : 1) L’ensemble des sommets est l’ensemble des aéroports du monde ; les étiquettes de N sont l’ensemble des compagnies aériennes : {Airfrance, Americanairlines . . .}. Un élément a ∈ E est une ligne aérienne entre deux aéroports desservis par une compagnie aérienne, par exemple : a = ([Paris, New-York], Airfrance). 2) L’ensemble des sommets est l’ensemble des localités françaises, les étiquettes de N sont l’ensemble des routes départementales, routes nationales, autoroutes. . . Un élément a ∈ E est une voie de circulation entre deux localités, par exemple
+a = ([Paris, Lyon], Autoroute A6).
+Lorsque le graphe Γ n’a pas de boucle et ne possède que des arêtes simples, on dit que Γ est un graphe simple (voir section 1.4). La figure 1.5 montre un graphe simple. Dans ce cas, une arête ayant comme extrémités x et y sera notée simplement a = {x, y}.
+
+
+1. Concepts fondamentaux 5
+L’ordre d’un graphe est son nombre de sommets ; pour un graphe d’ordre fini, le nombre d’arêtes est aussi fini car, par hypothèse, le nombre d’arêtes incidentes en un sommet donné est supposé fini ; si V = ∅, le graphe est appelé graphe nul. La plupart des graphes étudiés dans ce livre ne sont pas nuls !
+Dans de nombreux problèmes impliquant des graphes, il n’est pas nécessaire de désigner explicitement les sommets et les étiquettes des arêtes par des noms, la représentation du graphe se limitant ainsi à des points (les sommets) reliés éventuellement par des segments ou bien des courbes (arêtes).
+Exemple 1.1.3. Nous avons représenté une molécule de propane en figure 1.5. Les sommets sont les atomes de carbone ou d’hydrogène, les arêtes sont les liaisons covalentes entre ces atomes. La molécule de propane C3H8 est d’abord représentée à travers un graphe « concret ». Dans le deuxième schéma, celle-ci est modélisée en ne conservant que la stricte information nécessaire. Ce graphe est simple et son ordre est égal à 11.
+H HH
+HH
+H HH
+CCC
+Figure 1.5 – Graphes représentant la molécule de propane C3H8.
+
+
+6 Éléments de théorie des graphes
+1.1.1 Degré
+Le degré d’un sommet x ∈ V est le nombre d’arêtes incidentes à x : une boucle incidente à x contribue, par définition, deux fois dans le calcul du degré de x. Le degré de x sera noté dΓ(x) ou simplement d(x) et il correspond donc au nombre d’occurrences du sommet x comme extrémité d’arêtes a ∈ E :
+d(x) = |{a ∈ E : ∃ y = x tel que ε(a) = [x, y]}|
++ 2|{a ∈ E : ε(a) = [x, x]}|,
+où |X| désigne le cardinal de X. Lorsque Γ est un graphe simple, le degré d’un sommet x est égal au nombre de sommets adjacents à x. Un sommet de degré 1 est appelé sommet pendant et une arête incidente à un sommet de degré 1 est appelée arête pendante. Le degré minimum d’un graphe Γ est δ(Γ) = min{d(y), y ∈ V }, son degré maximum est Δ(Γ) = max{d(y), y ∈ V }. Son degré moyen est défini, si V = ∅, par le nombre :
+d(Γ) = 1
+|V |
+∑
+x∈V
+d(x).
+Un graphe est régulier si tous ses sommets ont le même degré, c’est-àdire δ(Γ) = Δ(Γ) = k : on dit alors que le graphe est régulier de degré k ou k -régulier.
+La distribution des degrés de Γ est la suite (avec répétition si nécessaire) des degrés rangés dans l’ordre croissant. Un sommet est isolé si son degré est zéro ; une p-boucle d’extrémité x est dite isolée s’il n’existe pas d’autre arête incidente à x. Soit x un sommet d’un graphe Γ ; on note Γ(x) l’ensemble des sommets différents de x adjacents à x ; Γ(x) est appelé le voisinage de x et ses éléments sont les voisins de x. Plus généralement si X ⊂ V , le
+voisinage de X est Γ(X) = ⋃
+x∈X Γ(x) \ X.
+Exemple 1.1.4. Le graphe de la figure 1.6 est de degré maximum Δ(Γ) = 5, de degré minimum δ(Γ) = 3, sa distribution des degrés est (3, 3, 3, 3, 3, 5) ; son degré moyen est égal à 10/3.
+
+
+1. Concepts fondamentaux 7
+1.1.2 Chaîne et cycle
+Soit un graphe Γ = (V ; E, N ) et x, y ∈ V ; une chaîne C de x à y est une succession finie d’arêtes du type
+([x, x1], n0); ([x1, x2], n1); . . . ; ([xi, xi+1], ni); . . . ; ([xk−1, y], nk−1).
+Intuitivement, une chaîne de x à y permet de joindre y à partir de x en parcourant sans saut différentes arêtes de Γ. Les sommets x et y sont les extrémités de la chaîne C. Pour alléger les notations, on pourra écrire simplement
+C = (x, n0, x1, n1, x2, . . . , xk−1, nk−1, y).
+Le nombre k est la longueur de la chaîne C. Il est clair qu’une chaîne de x à y induit une chaîne de y à x. Les arêtes du graphe n’étant pas orientées, on identifiera naturellement ces deux chaînes. On dira que C est une chaîne entre x et y. Soient C1 une chaîne entre x et y et C2 une chaîne entre y et z ; on peut concevoir une opération de « collage » de ces deux chaînes en y qui induit une nouvelle chaîne C3 entre x et z. Cette opération est appelée concaténation. Naturellement la concaténation de deux chaînes ne peut avoir lieu que si les chaînes ont au moins une extrémité commune. Par exemple, en figure 1.4, on part de Toulouse pour se rendre à Caen ; on a une première chaîne, réduite à une arête (Toulouse, avion, Lyon) et une seconde chaîne (Lyon, tgv, Paris, train, Caen), que l’on peut concaténer en une chaîne de
+Toulouse à Caen.
+Figure 1.6 – Différentes notions de degrés dans un graphe (voir exemple 1.1.4).
+
+
+8 Éléments de théorie des graphes
+Une chaîne est simple si elle ne contient pas deux fois une même arête. Elle est élémentaire si elle ne contient pas deux fois un même sommet. Notons que toute chaîne élémentaire est a fortiori simple :
+élémentaire =⇒
+⇐/= simple.
+Une chaîne est dite fermée si ses deux extrémités coïncident. Lorsque c’est le cas, tout sommet de la chaîne peut être considéré comme son extrémité. Un cycle est une chaîne fermée simple ; en fait un cycle n’a « ni queue ni tête », la numérotation est une simple commodité. La longueur d’un cycle est le nombre d’arêtes qui le composent ; une boucle est un cycle de longueur 1. Une corde dans un cycle est une arête reliant deux sommets non consécutifs dans ce cycle. Un graphe sans cycle est aussi appelé acyclique.
+Un graphe est dit connexe si pour toute paire de sommets x, y ∈ V , il existe une chaîne entre x et y : on dit alors que les sommets x et y sont connectés. Les définitions précédentes sont illustrées en figure 1.7.
+Exemple 1.1.5. Dans le graphe de la figure 1.7, on a matérialisé les arêtes ([xi, xj], nk) par des courbes ; ce graphe a deux composantes connexes ; on a la chaîne : (x1, 1, x2, 1, x2, 1, x4, 2, x5, 1, x4, 2, x5, 2, x6) entre x1 et x6. Mais nous avons aussi (x1, 2, x4, 1, x3, 2, x2, 1, x4, 2, x5, 3, x6) qui est une chaîne simple mais non élémentaire. En revanche, la chaîne (x1, 1, x2, 1, x4, 1, x5, 1, x6) est élémentaire donc simple. La chaîne (x7, 1, x8, 3, x9, 2, x8) est simple non élémentaire. Le degré du sommet x2 est égal à 6. La distribution des degrés est (2, 3, 3, 3, 4, 5, 5, 5, 6) et le degré moyen est égal à 36
+9.
+La longueur de la chaîne la plus courte entre x1 et x6 est égale à 3 (on verra au paragraphe suivant que cela signifie que la distance entre x1 et x6 est égale à 3).
+Exercice 1.1. Soit Γ un graphe connexe. Montrer qu’il existe une chaîne entre deux sommets distincts si et seulement s’il existe une chaîne élémentaire entre ces deux sommets. Indication : on raisonnera par récurrence sur le nombre de sommets de la chaîne en considérant l’avant-dernier sommet.
+
+
+1. Concepts fondamentaux 9
+x1 x2
+x3
+x4
+x5 x6
+x7 x8
+x9
+1
+1
+1
+2
+1
+2
+1
+1
+2 1 2
+3
+1
+2
+21
+3
+1
+Figure 1.7 – Exemple de graphe comportant deux composantes connexes.
+Remarque 1.1.6. La relation définie par xRy si et seulement si x = y ou bien il existe une chaîne entre x et y est une relation d’équivalence sur V ; les classes d’équivalences modulo R sont appelées composantes connexes du graphe. Un graphe connexe ne possède donc qu’une composante connexe.
+1.1.3 Sous-graphes
+Les notions suivantes sont illustrées dans les figures 1.8 et 1.9. Un graphe Γ′ = (V ′; E′, N ′) est appelé sous-graphe de Γ si V ′ ⊂ V , E′ ⊂ E (donc nécessairement N ′ ⊂ N ). En fait, ces conditions imposent que E′ ⊂ E ∩ (P2(V ′) × N ′) car Γ′ est un graphe. Lorsque V ′ = V , on dit que Γ′ est un graphe partiel de Γ. Par exemple le graphe Γ privé d’une arête a, noté Γ \a, est un graphe partiel.
+Lorsque E′ = {a ∈ E, ε(a) ∈ P2(V ′)}, c’est-à-dire qu’on a gardé
+toutes les arêtes de Γ entre les sommets de V ′, on dit que Γ′ est le sous-graphe induit par V ′ ou sur V ′, ce que l’on note Γ′ = Γ(V ′). Le contexte permettra de distinguer la notion de voisinage Γ(X) de celle de graphe induit. Pour x ∈ V , Γ − x désigne le sous-graphe induit par V \ {x}.
+Le graphe partiel engendré par E′ est le graphe Γ(E′) = (V ; E′, N ).
+Remarque 1.1.7. La donnée de V ′ et E′ ne suffit pas toujours à faire un sous-graphe : ainsi si V = {x, y}, E = {{x, y}}, N = {1}, V ′ = {x}, alors
+
+
+10 Éléments de théorie des graphes
+le triplet (V ′; E, N ) n’est pas un graphe donc ne correspond a fortiori à aucun sous-graphe de Γ = (V ; E, N ).
+Un graphe simple est dit complet s’il a une arête entre toute paire de sommets. On note Kn le graphe complet d’ordre n. Une clique dans un graphe Γ est un sous-graphe complet de Γ. L’ordre maximal d’une clique dans Γ est noté ω(Γ). Dans un graphe connexe Γ = (V ; E, N ), une arête a est un pont ou un isthme si le graphe Γ \ a n’est plus connexe. Plus généralement a est un isthme de Γ si Γ \ a a au moins une composante connexe de plus que Γ.
+Le graphe sous-jacent à une chaîne est le graphe dont les sommets et les arêtes sont ceux et celles de la chaîne (on ne répète pas les sommets et les arêtes qui seraient traversés plusieurs fois par la chaîne).
+Exemple 1.1.8. Le graphe de la figure 1.8 est simple et connexe ; l’arête {x1; x9} est un isthme. Les sommets x2, x3, x4 forment un triangle, c’està-dire une clique d’ordre 3.
+Exercice 1.2. Montrer qu’en réalité la suppression d’un isthme dans un graphe d’ordre fini augmente le nombre de composantes connexes d’une unité.
+Lemme 1.1.9. Soit Γ = (V ; E, N ) un graphe d’ordre fini.
+i) La somme des degrés est égale à deux fois le nombre d’arêtes :
+∑
+x∈V
+d(x) = 2|E|.
+x1 x2
+x3
+x4
+x5 x6
+x7 x8
+x9
+Figure 1.8 – Isthme et clique dans un graphe (voir exemple 1.1.8).
+
+
+1. Concepts fondamentaux 11
+ii) Le nombre de sommets de degré impair est pair.
+Démonstration. Exercice : raisonner par récurrence sur |E|.
+Le lemme précédent est parfois appelé lemme des poignées de main.
+Exemple 1.1.10. Les sommets de x2 à x9 ainsi que les arêtes en gras forment un sous-graphe du graphe de la figure 1.7. Les sommets de x1 à x9 et les arêtes fines forment un graphe partiel du même graphe.
+x1 x2
+x3
+x4
+x5 x6
+x7 x8
+x9
+1
+1
+1
+2
+1
+2
+1
+1
+2 1 2
+3
+1
+2
+21
+3
+1
+Figure 1.9 – Sous-graphe et graphe partiel.
+Soit Γ = (V ; E, N ) un graphe connexe ; on définit la distance entre deux sommets x et y par : – d(x, y) est la plus petite longueur de chaîne entre x et y si x = y ; – d(x, x) = 0.
+Exercice 1.3. Montrer que (V, d) est un espace métrique (voir § 1.10).
+Il peut être commode de généraliser cette distance à des graphes Γ qui ne sont pas nécessairement connexes en posant d(x, y) = +∞ si x et y ne sont pas dans une même composante connexe de Γ. Le diamètre d’un graphe Γ = (V ; E, N ) est défini par
+diam(Γ) = sup{d(x, y), x, y ∈ V } ∈ N ∪ {+∞}.
+L’excentricité d’un sommet x est :
+ex(x) = sup{d(x, y), y ∈ V } ∈ N ∪ {+∞}.
+
+
+12 Éléments de théorie des graphes
+Un sommet est central dans Γ s’il a une excentricité minimum : ex(x) ≤ ex(y) pour tout y ∈ V . On définit également, pour un graphe simple, la maille μ(Γ) (en anglais girth) comme étant la longueur du plus petit cycle (μ(Γ) = +∞ si le graphe n’a pas de cycle).
+Exemple 1.1.11. Le graphe de la figure 1.10 est simple et connexe, son diamètre est égal à 3 ; sa maille est égale à 4 ; l’excentricité du sommet x est égale à 3.
+x
+Figure 1.10 – Diamètre et excentricité.
+Exemple 1.1.12. Le Rubik’s cube est une illustration spectaculaire du diamètre : on représente le problème par un graphe dont les sommets sont les 8! 3712! 210 (soit environ 4,3 · 1019) configurations du Rubik’s cube ; une arête entre deux configurations x et y signifie qu’on passe de x à y par un « mouvement » ; il y a 18 mouvements ainsi décrits : au centre de chacune des 6 faces se trouve un cube fixe (donnant la couleur de la face) ; il y a 3 rotations de la face autour de ce cube, d’angles π/2, π et 3π/2, d’où 3 × 6 = 18 mouvements : le graphe ainsi construit est régulier de degré 18. Par des considérations algorithmiques sophistiquées, Rokicki, Kociemba, Davidson et Dethridge ont montré (juillet 2010) que le diamètre de ce graphe est 20 : cela signifie qu’à partir de n’importe quelle configuration on peut retrouver le cube ayant chaque face unicolore en au plus 20 mouvements ! Il reste maintenant à trouver une preuve mathématique de ce fait !
+
+
+1. Concepts fondamentaux 13
+Proposition 1.1.13. Soit Γ = (V ; E, N ) un graphe, alors sa maille vérifie :
+μ(Γ) ≤ 2 · diam(Γ) + 1.
+Démonstration. Soit C un cycle de Γ ayant pour longueur μ(Γ). Raisonnons par l’absurde. Si μ(Γ) ≥ 2·diam(Γ)+2 alors C a deux sommets, x, y dont la distance dans le sous-graphe induit par les sommets de C est au moins égale à diam(Γ) + 1. Comme C est un cycle de longueur minimum, la distance de x à y dans Γ est la même que dans C : mais alors d(x, y) > diam(Γ), ce qui est absurde.
+Remarque 1.1.14. On notera l’analogie avec la relation C = πD reliant la circonférence C (correspondant à la maille) au diamètre D d’un cercle.
+Les notions de diamètre, de plus petit cycle, d’excentricité. . . , sont capitales dans l’étude des réseaux. On en trouve des applications notamment dans les réseaux de télécommunications.
+1.2 Décomposition connexe
+Soit Γ = (V ; E, N ) un graphe et soit (Vα)α∈L la famille des composantes connexes de Γ (classes d’équivalence de R, voir section 1.1.2, remarque 1.1.6). On note Γα = (Vα; Eα, Nα) le sous-graphe induit par Vα.
+Lemme 1.2.1. On a
+i) Pour tout α ∈ L, Γα est connexe.
+ii) Si Γ′ = (V ′; E′, N ′) est un sous graphe connexe de Γ, alors il existe α ∈ L tel que V ′ ⊂ Vα.
+iii) Si α, β ∈ L, α = β, alors aucun sommet de Vα n’est adjacent à un sommet de Vβ ; donc E = α∈LEα (où représente l’union disjointe).
+Démonstration. i) Par définition de la connexité. ii) Supposons V ′ = ∅ : soient x ∈ V ′ et Vα la composante connexe contenant x ; pour tout y ∈ V ′, il existe une chaîne entre x et y dans Γ(V ′) et donc a fortiori dans Γα, ce qui entraîne V ′ ⊂ Vα. iii) Soient x ∈ Vα et y ∈ Vβ. Il n’y a pas de chaîne entre x et y, donc a fortiori pas d’arête.
+
+
+14 Éléments de théorie des graphes
+Corollaire 1.2.2. Soient Γi = (Vi; Ei, Ni), i = 1, 2, deux sous-graphes connexes d’un graphe Γ. Si Γ1 et Γ2 se « coupent », en ce sens que V1 ∩ V2 = ∅, alors Γ1 ∪ Γ2 = (V1 ∪ V2; E1 ∪ E2, N1 ∪ N2) est connexe.
+Démonstration. Exercice.
+1.3 Graphes orientés
+Un graphe orienté ou digraphe −Γ→ (ou simplement Γ) est un triplet
+−Γ→ = (V ; −E→, N ) défini de la manière suivante :
+– V est l’ensemble des sommets ; notation V = V (−Γ→) ;
+– −E→ ⊂ V × V × N est l’ensemble des arcs ; notation −E→ = −E→(Γ) ; – N est un ensemble servant à étiqueter les arcs.
+Un arc a ∈ −E→ sera noté a = ((x, y), n) : l’arc va de x vers y.
+Dans la suite, on notera souvent Γ pour −Γ→. On utilise dans ce contexte deux fonctions d’incidence :
+i : −E→ −→ V et t : −E→ −→ V
+définies pour chaque a = ((x, y), n)) par :
+i(a) = x, le sommet initial de a,
+t(a) = y, le sommet terminal de a.
+Comme pour les graphes non orientés, on dit que l’arc a est incident à x et y et que y est adjacent à x. Une boucle est un arc a tel que i(a) = t(a).
+Pour x, y ∈ V fixés, l’ensemble {a ∈ −E→, i(a) = x, t(a) = y} de cardinal p est appelé p-arc ; si p = 1, on parle d’arc simple ; si p ≥ 2, c’est un multi-arc.
+Soit x ∈ V . On définit
+d−(x) = card{a ∈ −E→, t(a) = x}, le degré entrant de x,
+d+(x) = card{a ∈ −E→, i(a) = x}, le degré sortant de x.
+Le degré de x est défini par d(x) := d−(x) + d+(x). Si d(x) = 0, le sommet x est dit isolé. Si d+(x) = 0 et d−(x) > 0, x est un puits. Si d−(x) = 0 et d+(x) > 0, x est une source. S’il existe k ∈ N tel que pour tout sommet x, on ait d+(x) = k, le
+
+
+1. Concepts fondamentaux 15
+digraphe est dit semi-régulier sortant. Si on a la propriété analogue pour les degrés entrants, le digraphe est semi-régulier entrant. Le digraphe est dit régulier s’il est à la fois semi-régulier entrant et semirégulier sortant.
+Lemme 1.3.1. Soit −Γ→ = (V ; −E→, N ) un digraphe d’ordre fini. Alors ∑
+x∈V
+d+(x) = ∑
+x∈V
+d−(x) = |E|.
+Démonstration. Exercice : raisonner par récurrence sur |E|.
+Un chemin C de x à y est une suite finie de la forme :
+C = (x, a0, x1, a1, x2, . . . , xk−1, ak−1, y)
+où k ≥ 1, i(aj) = xj et t(aj) = xj+1, 0 ≤ j ≤ k − 1 (on a convenu que x0 = x et xk = y) ; l’entier k est la longueur du chemin. Comme pour les graphes non orientés, on peut également définir un chemin grâce aux étiquettes de ses arcs :
+C = (x, n0, x1, n1, x2, . . . , xk−1, nk−1, y),
+où ni est tel que ((xi, xi+1), ni) ∈ −E→. S’il existe un chemin de x à y, on dira que y est accessible (à partir) de x. Un chemin est simple s’il ne contient pas deux fois le même arc ; il est élémentaire s’il ne contient pas deux fois le même sommet. Un circuit est un chemin simple dont les extrémités coïncident ; un digraphe est dit sans circuit s’il ne contient pas de circuit. Un digraphe est fortement connexe si pour toute paire de sommets distincts x, y, il existe un chemin de x à y et un chemin de y à x.
+Exemple 1.3.2. Dans le graphe de la figure 1.11, il existe un 2-arc entre x2 et x3 ; le sommet x7 est une source et le sommet x8 un puits. La partie gauche de ce digraphe est une composante fortement connexe, ce qui n’est pas le cas de l’autre partie. On remarquera qu’un digraphe (non nul) contenant une source ou un puits ne peut pas être fortement connexe. Le chemin (x1, n1, x4, n1, x2, n1, x1) est un circuit. Le degré entrant de x2 est égal à 2 et son degré sortant à 4.
+Exercice 1.4. Montrer que dans un digraphe −Γ→ = (V ; −E→, N ), la relation définie par
+x y ⇐⇒ x = y ou il existe un chemin de x à y
+est une relation de préordre sur V .
+
+
+16 Éléments de théorie des graphes
+x1 x2
+x3
+x4
+x5
+x6
+x7 x8
+x9
+1
+2
+1
+2
+1
+1
+1
+2 11
+2
+3
+1
+2
+1
+2
+1
+Figure 1.11 – Exemple de graphe orienté (non connexe).
+Les classes d’équivalence de la relation binaire R associée au préordre :
+xRy ⇐⇒ x y et y x,
+(le lecteur trouvera la définition d’un préordre au § 1.10) sont les com
+posantes fortement connexes du graphe orienté −Γ→.
+Voici un petit tableau comparatif des vocabulaires correspondant aux graphes orientés et aux graphes non orientés :
+Non orienté Orienté Arête Arc Chaîne Chemin Cycle Circuit Connexe Fortement connexe
+Le graphe sous-jacent d’un digraphe est le graphe obtenu en supprimant l’orientation des arcs : chaque arc ((x, y), n) est remplacé par l’arête correspondante ([x, y], n) ; en particulier, si x = y, la transformation donne une boucle. De manière réciproque, sur tout graphe non orienté on peut attribuer une orientation à chaque arête en remplaçant l’arête ([x, y], n) par l’arc ((x, y), n), ou bien par l’arc ((y, x), n). Un graphe connexe Γ = (V ; E; N ) est un graphe orientable, s’il existe une orientation des arêtes de telle sorte que le graphe orienté obtenu, par orientation des arêtes, soit fortement connexe.
+
+
+1. Concepts fondamentaux 17
+Théorème 1.3.3. Un graphe connexe d’ordre fini Γ est orientable si et seulement si chaque arête est contenue dans au moins un cycle.
+Démonstration. La condition est clairement nécessaire. Réciproquement, on peut supposer que le graphe est simple. On note Γ′ un sous-graphe orientable maximal de Γ. On peut donc orienter les arêtes de Γ′ de sorte qu’il soit fortement connexe. Si toutes les arêtes de Γ sont contenues dans Γ′, alors Γ = Γ′ est orientable. Sinon, le graphe étant connexe, on peut trouver une arête a0 incidente à un sommet x0
+de Γ′ ; par hypothèse, cette arête fait partie d’un cycle dans Γ ; il existe donc une chaîne C = (x0, a0, x1, a1, x2, . . . , ak−1, xk) partant de Γ′ en x0
+et revenant pour la première fois sur Γ′ en xk. On oriente cette chaîne « linéairement » (il y a deux façons de le faire) en définissant les arcs (x0, x1), . . . , (xk−1, xk) ; il s’ensuit facilement que Γ′ ∪ C est fortement
+connexe, ce qui contredit la maximalité de Γ′.
+Remarque 1.3.4. Ainsi la présence d’un isthme interdit l’orientabilité.
+De façon analogue aux graphes, on peut définir une sorte de « distance » d(x, y) sur un digraphe en considérant les chemins de plus courte longueur entre chaque couple (x, y) de sommets. Mais la propriété de symétrie habituellement attachée à une distance d(x, y) = d(y, x) n’aura pas forcément lieu.
+Soit Γ = (V ; E, N ) un graphe (respectivement −Γ→ = (V ; −E→, N ) un digraphe) ; on appelle valuation ou poids des arêtes (respectivement des
+arcs) toute application ω : E (respectivement −E→) −→ X de l’ensemble des arêtes (respectivement des arcs) dans un ensemble X (par exemple X = R). Un graphe orienté muni d’une valuation donnera lieu à la notion de réseau (voir chapitre 4).
+1.4 Graphes simples
+Un graphe (respectivement un digraphe) est simple s’il ne contient pas de boucle ni de multi-arête (respectivement de multi-arc). Pour un graphe simple l’ensemble N est inutile, aussi on le note Γ = (V ; E) où
+E ⊂ P2(V ) s’il est non orienté, −Γ→ = (V ; −E→) où −E→ ⊂ V ×V s’il est orienté. On remarquera aussi que pour décrire une chaîne (respectivement un chemin), il suffit de donner la liste (respectivement la liste ordonnée) des sommets traversés.
+
+
+18 Éléments de théorie des graphes
+Exercice 1.5.
+i) Soit Γ = (V ; E) un graphe simple ; montrer que la fonction d’incidence
+ε : E −→ P2(V )
+est injective.
+ii) Soit −Γ→ = (V ; −E→) un graphe simple orienté ; montrer que
+(i, t) : −E→ −→ V × V
+est injective.
+Il est facile de vérifier qu’un graphe simple d’ordre n a au plus n(n−1)
+2=
+(n 2
+) arêtes et qu’un digraphe simple d’ordre n a au plus n(n − 1) arcs (on
+note (n
+k
+) = n!
+(n−k)!k! , 0 ≤ k ≤ n, les coefficients binomiaux).
+Exercice 1.6.
+i) Soit Γ = (V ; E) un graphe simple d’ordre fini ; montrer que Γ est connexe si et seulement si pour toute partition de l’ensemble des sommets V = V1 ∪ V2, V1 ∩ V2 = ∅, il existe une arête a telle que ε(a) ∩ Vi = ∅, i = 1, 2.
+ii) Énoncer et démontrer un résultat analogue pour les graphes orientés.
+Soit Γ = (V ; E) un graphe simple (non orienté) ; le complémentaire du graphe Γ est le graphe Γ = (V , E) où V = V et E = P2(V ) \ E.
+Exercice 1.7. Soit Γ = (V ; E) un graphe simple. Démontrer que soit Γ est connexe, soit Γ est connexe.
+Exemple 1.4.1. Dans la figure 1.12 figure la représentation d’un graphe et de son complémentaire.
+Proposition 1.4.2. Soit Γ = (V ; E) (respectivement −Γ→ = (V ; −E→)) un graphe (respectivement un digraphe) simple d’ordre n. Si Γ (respective
+ment −Γ→) est connexe (respectivement fortement connexe), alors il a au moins n − 1 arêtes (respectivement arcs). Le résultat est a fortiori vrai si
+Γ (respectivement −Γ→) n’est pas simple.
+Démonstration. On considère le cas des graphes. On raisonne par récurrence sur n ; si n = 1 ou n = 2, le résultat est trivial.
+
+
+1. Concepts fondamentaux 19
+Supposons que l’assertion soit vraie jusqu’à n−1 ; soit Γ un graphe simple connexe d’ordre n et soit Γ′ le sous-graphe induit obtenu en supprimant un sommet quelconque x. On considère les composantes connexes Γ′1, . . . , Γ′k de Γ′ ; pour chaque i = 1, . . . , k, le sous-graphe Γ′i admet ni sommets et on a n1 + n2 + · · · + nk = n − 1.
+Par hypothèse de récurrence Γ′i a au moins ni − 1 arêtes. Puisque Γ est connexe, le sommet x est nécessairement connecté à toutes les composantes connexes Γ′i, par conséquent Γ contient au moins
+n1 − 1 + n2 − 1 + · · · + nk − 1 + k = n − 1 arêtes.
+Le cas des digraphes se démontre de la même façon.
+Proposition 1.4.3. Tout graphe Γ = (V ; E) acyclique d’ordre n admet au plus n − 1 arêtes.
+Démonstration. On raisonne par récurrence sur n ; si n = 1, on a E = ∅ ; si n = 2, il y a au plus une arête. Supposons le résultat vrai jusqu’à n − 1 et soit Γ = (V ; E) un graphe acyclique d’ordre n ; on fixe une arête a = {x, y} et on considère le graphe partiel Γ′ = (V ; F ) où F = E \ {a} ; Γ′ n’est pas connexe (car sinon on aurait une chaîne entre x et y dans Γ′ ce qui fournirait naturellement un cycle dans Γ en refermant la chaîne avec l’arête a). Donc Γ′ se décompose en k ≥ 2 sous-graphes connexes (non nuls) Γ′i = (Vi, Fi), 1 ≤ i ≤ k. Par hypothèse de récurrence, puisque |Fi| < n, on a |Fi| ≤ |Vi| − 1, 1 ≤ i ≤ k, d’où (k ≥ 2)
+|E| = 1 +
+k ∑
+i=1
+|Fi| ≤ 1 +
+k ∑
+i=1
+(|Vi| − 1) = 1 + n − k ≤ n − 1.
+Figure 1.12 – Un graphe et son complémentaire.
+
+
+20 Éléments de théorie des graphes
+1.5 Opérations sur les graphes
+Soient Γ1 = (V1; E1, N1) et Γ2 = (V2; E2, N2) deux graphes, on suppose que 2 arêtes distinctes de E1 ∪ E2 ont des étiquettes distinctes. On définit l’union de ces deux graphes par
+Γ1 ∪ Γ2 = (V1 ∪ V2; E1 ∪ E2, N1 ∪ N2).
+On notera Γ1 + Γ2 l’union disjointe des graphes Γi, i = 1, 2. Elle correspond au graphe (V1 V2; E1 E2, N1 N2) (réunions disjointes) : cela signifie ici que les sommets et les arêtes de Γ1 et Γ2 sont considérés comme distincts. Par exemple, lorsqu’on considère toutes les composantes connexes Ci, 1 ≤ i ≤ k, d’un graphe Γ ayant un nombre fini de composantes connexes, on a naturellement Γ = C1 + C2 + · · · + Ck. On définit l’intersection des deux graphes Γ1 et Γ2 par
+Γ1 ∩ Γ2 = (V1 ∩ V2; E1 ∩ E2, N1 ∩ N2),
+et la différence par
+Γ1 \ Γ2 = (V1 \ V2; E1 \ E2, N1 \ N2).
+On peut facilement étendre ces concepts aux digraphes.
+1.6 Représentations algorithmiques des graphes
+Soit Γ = (V ; E, N ) un graphe (respectivement soit −Γ→ = (V ; −E→, N ) un digraphe) d’ordre fini, avec V = {x1, x2, x3, . . . , xn}.
+Liste d’arêtes (respectivement liste d’arcs). On peut décrire Γ
+(respectivement −Γ→) par n, son nombre de sommets, et ses arêtes (respectivement arcs) de la manière suivante : pour chaque paire (respectivement pour chaque couple) de sommets entre lesquels il y au moins une arête (respectivement un arc), on liste les étiquettes de ces arêtes (respectivement ces arcs). Une p-arête (respectivement un p-arc) entre xi et xj sera désignée par (xi, xj; ni1, ni2 , . . . , nip) si nij est l’étiquette de l’arête aij , (respectivement de l’arc) entre xi et xj (respectivement de xi vers xj). On regroupe dans Axi toutes les multi-arêtes (respectivement tous les multi-arcs) issues de xi et écrites sous la forme précédente. On obtiendra donc la liste : Ax1 ; Ax2 ; Ax3 ; . . . ; Axn (voir l’exemple 1.6.1 et la figure 1.13).
+
+
+1. Concepts fondamentaux 21
+Liste de multiplicité. On peut aussi caractériser Γ (respectivement
+−Γ→) d’une part par son nombre de sommets n et d’autre part par une liste d’ensembles Ax1 ; Ax2 ; Ax3 ; . . . ; Axn de couples du type (xj, p) où la première coordonnée d’un couple de Axi est un sommet xj adjacent à xi, la deuxième étant la multiplicité p de la multi-arête (respectivement du multi-arc) ayant pour extrémités xi et xj. On remarquera qu’à travers ces deux représentations, certaines arêtes (respectivement certains arcs) sont répétées : cela peut être intéressant pour certaines applications. On peut cependant facilement supprimer les redondances.
+Matrice d’adjacence. Soit Γ = (V ; E, N ) un graphe (respectivement
+−Γ→ = (V ; −E→, N ) un digraphe) d’ordre fini, avec V = {x1, x2, x3, . . . , xn}. On peut représenter ce (di)graphe par une matrice carrée d’ordre n, A = (αi,j), à coefficients dans N, où αi,j est le nombre d’arêtes (ou d’arcs) entre xi et xj. Cette matrice est appelée matrice d’adjacence
+du graphe Γ (respectivement du digraphe −Γ→).
+Matrice d’incidence. Soit Γ = (V ; E, N ) un graphe d’ordre fini. Si |V | = n, avec V = {x1, x2, . . . , xn}, et |E| = m, avec E = {a1, . . . , am}, la matrice d’incidence de Γ est une matrice n × m, M = (αi,j), à coefficients dans {0, 1}, définie par αi,j = 1 ou 0 selon que le sommet
+xi est incident ou non à l’arête aj. Dans le cas d’un digraphe −Γ→ =
+(V ; −E→, N ), la matrice d’incidence est une matrice n × m, M = (αi,j) à coefficients dans {−1, 0, 1}, définie par αi,j = −1 si xi est le sommet initial de l’arc aj, αi,j = 1 si xi est le sommet terminal de l’arc aj, αi,j = 0 si xi n’est pas incident à aj.
+Exemple 1.6.1. On considère le graphe Γ représenté en figure 1.13. Représentation de Γ par liste d’arêtes : – le nombre de sommets est 6 ;
+– Ax1 = {(x1, x2 ; n1, n2) ; (x1, x4 ; n7) ; (x1, x5 ; n6)} ; – Ax2 = {(x2, x3 ; n3, n4, n5) ; (x2, x1 ; n1, n2)} ; – Ax3 = {(x3, x2 ; n3, n4, n5) ; (x3, x5 ; n9) ; (x3, x6 ; n11)} ; – Ax4 = {(x4, x1 ; n7) ; (x4, x5 ; n8)} ; – Ax5 = {(x5, x1 ; n6) ; (x5, x3 ; n9) ; (x5, x4 ; n8) ; (x5, x6 ; n10)} ; – Ax5 = {(x6, x3 ; n11) ; (x6, x5 ; n10)}.
+Représentation Γ par liste de multiplicités : – le nombre de sommets est 6 ;
+
+
+22 Éléments de théorie des graphes
+– Ax1 = {(x2, 2) ; (x4, 1) ; (x5, 1)} ; – Ax2 = {(x1, 2) ; (x3, 3)} ; – Ax3 = {(x2, 3) ; (x5, 1) ; (x6, 1)} ; – Ax4 = {(x1, 1) ; (x5, 1)} ; – Ax5 = {(x1, 1) ; (x3, 1) ; (x4, 1) ; (x6, 1)} ; – Ax6 = {x3, 1) ; (x5, 1)}.
+x1 x2
+x3
+x4
+x5
+x6
+n1
+n2
+n3 n4 n5
+n6 n7
+n8
+n9
+n10 n11
+Figure 1.13 – Représentation d’un graphe par liste d’arêtes et par liste de multiplicités.
+Exercice 1.8. Donner la matrice d’adjacence du graphe de la figure 1.13.
+1.7 Algorithmes et théorie de la complexité
+1.7.1 Algorithme
+Un algorithme est une suite finie d’instructions finies. On trouve plusieurs types d’instructions.
+Les affectations. On affecte une valeur aux variables et aux constantes par le symbole « = ». Exemples : A = ∅, b = true.
+Les comparaisons. Pour comparer deux variables ou constantes, on utilise le symbole « == ».
+Les conditionnels. Les conditionnels se présentent comme une structure bloc :
+Si A Faire
+B1; B2; B3; . . . ; Bk ;
+
+
+1. Concepts fondamentaux 23
+Sinon Faire
+C1; C2; C3; . . . ; Ck ; Fin Si
+Interprétation : si la condition A est vraie, les opérations B1, B2, . . ., Bk sont exécutées. Si A est faux, ce sont les instructions C1, C2, . . ., Ck qui le sont. On peut également avoir un conditionnel sans alternative : Si A Faire
+B1; B2; B3; . . . ; Bk ; Fin Si
+Interprétation : si la condition A n’est pas satisfaite, l’ensemble du bloc des instructions est sauté.
+Les boucles. Une boucle se présente de la manière suivante : Pour tout i de 1 à n Faire B1; B2; B3; . . . ; Bk ; Fin Pour
+Interprétation : pour toutes les valeurs entières de i comprises entre 1 et n, les opérations B1; B2; B3; . . . ; Bk sont successivement effectuées. Cette boucle est incrémentale, c’est-à-dire que i part de la plus petite valeur 1 pour aller vers la plus grande n. On peut également construire une boucle décrémentale, c’est-à-dire que i part de la plus grande valeur n pour aller vers la plus petite 1.
+Les itérations. On dispose de plusieurs types d’itérateurs : Tant que A Faire
+B1; B2; B3; . . . ; Bk ; Fin Tant
+Interprétation : tant que la condition A est vérifiée, les opérations B1; B2; B3; . . . ; Bk sont successivement effectuées.
+On dispose également de : Faire B1; B2; B3; . . . ; Bk ; Tant que A Fin Faire
+Interprétation : cette structure d’instructions permet l’exécution des opérations B1; B2; B3; . . . ; Bk une première fois avant de tester la condition A, même si celle-ci n’est pas vérifiée. Enfin le dernier bloc itératif d’instructions que nous considérerons est une forme spécifique de boucle :
+
+
+24 Éléments de théorie des graphes
+Pour a ∈ A Faire
+B1; B2; B3; . . . ; Bk ; Fin Pour
+Interprétation : les opérations B1; B2; B3; . . . ; Bk sont effectuées pour chaque a dans A. Cela sous-entend que A est un ensemble fini ordonné d’une certaine façon.
+1.7.2 Complexité en temps d’un algorithme
+La complexité d’un algorithme en temps est le temps de calcul dont l’algorithme a besoin pour résoudre un problème. Généralement ce temps de calcul dépend de la taille des données d’entrée. Il existe plusieurs types de complexité : – la complexité dans le pire des cas ; – la complexité moyenne ; – la complexité dans le meilleur des cas. Dans cet ouvrage, on ne s’intéressera qu’à la complexité dans le pire des cas. On peut donc maintenant définir de manière plus précise la complexité en temps d’un algorithme A. C’est une fonction f , où f (n) est le maximum de pas de calculs (à chaque instruction ou opération élémentaire est associé un coût appelé pas de calcul) dont A a besoin pour résoudre un problème ayant une entrée de longueur n. Pour formaliser correctement la complexité, nous avons besoin de la définition suivante : soient f et g deux fonctions N −→ R+. La fonction f est dite majorée par g si :
+∃c ∈ R, c > 0, ∃n0 ∈ N, tels que (n > n0 =⇒ f (n) ≤ c · g(n)).
+Cela veut dire qu’à partir d’une certaine valeur la fonction f est toujours plus petite ou égale à constante fois la fonction g. On dira alors que la fonction f appartient à la classe O(g). Par abus de langage, on écrira f = O(g) là où on devrait écrire f ∈ O(g). Par exemple, on a n3 + 4n2 + 13n + 3456 = O(n3).
+Exercice 1.9. Montrer que :
+– g = O(g) et que cO(g) = O(g) ;
+– O(g) + O(g) = O(g) et que O(g1) + O(g2) = O(max(g1, g2)) ; – O(O(g)) = O(g).
+Pour calculer la complexité d’un algorithme, on doit évaluer la complexité de chaque instruction. Dans la plupart des cas, une affectation,
+
+
+1. Concepts fondamentaux 25
+une comparaison, possèdent une complexité constante, noté O(t), t étant une constante. Pour les blocs d’instructions, on calcule le nombre de passages maximums dans le corps du bloc.
+Exemple 1.7.1. On considère la boucle suivante : Pour tout i de 1 à n Faire B1; B2; B3; . . . ; Bk ; Fin Pour
+Supposons que le temps de calcul de B1 soit O(t1), que le temps de calcul B2 soit O(t2),. . . , que le temps de calcul Bk soit O(tk), les ti, i ∈ {1, 2, 3, . . . , k} étant indépendants de n. Ainsi le temps de calcul du corps de la boucle est : O(max(t1, t2, . . . , tk)) (voir exercice 1.9). Le nombre de passages dans la boucle est n, ainsi on effectue chacune des instructions B1; B2; B3; . . . ; Bk n fois. Par conséquent la complexité d’une boucle Pour est O(max(t1, t2, . . . tk) · n) = O(t · n) = O(n) où t = max(t1, t2, . . . , tk).
+On peut naturellement imbriquer des blocs d’instructions : Pour tout i de 1 à n Faire Pour tout j de 1 à m Faire B1; B2; B3; . . . ; Bk ; Fin Pour Fin Pour
+Dans ce cas, on part du corps d’instructions le plus « profond » dans les boucles et on « remonte ». Ici, les instructions B1; B2; B3; . . . ; Bk ont une complexité en O(max(t1, t2, . . . , tk)) = O(t). La première boucle rencontrée a une complexité en m, la seconde a une complexité en n, par conséquent ce bloc a une complexité en O(n · m · t) = O(n · m).
+Exercice 1.10. Calculer la complexité des autres blocs d’instructions définis ci-dessus.
+1.7.3 Classes de complexité
+La théorie de la complexité est sans doute une des parties de l’informatique théorique les plus importantes. Cette théorie est fortement liée à la notion de mathématique effective : de manière non formelle on peut dire qu’un problème mathématique est effectif si on peut le résoudre avec un algorithme. Par exemple, calculer les racines d’une équation de second degré, calculer les valeurs propres d’une matrice. . . sont des problèmes effectifs.
+
+
+26 Éléments de théorie des graphes
+On dit qu’un algorithme est efficace pour résoudre un problème si le nombre de pas de calculs pour donner une solution au problème est une fonction (de la taille des entrées) qui croît au plus comme un polynôme. Dans ce cas on dit que le problème est dans la classe P (pour polynomiale). Pour beaucoup de problèmes, on ignore s’ils appartiennent à cette classe. Nous avons besoin de définir d’autres classes.
+Un problème de décision (ceux qui ont une solution oui/non) est dans la classe N P (pour non déterministe polynomiale) si on peut vérifier une solution de ce problème en un temps polynomial (on verra des exemples plus loin). Une question vient tout de suite à l’esprit : si je peux vérifier en un temps polynomial une solution, cette solution est-elle en temps polynomial ? En d’autres termes, a-t-on P = N P ?
+Cette question, somme toute relativement simple, est un des défis majeurs pour le mathématicien (et naturellement pour l’informaticien digne de ce nom !). Ce problème est le premier des huit problèmes de la liste Clay : problèmes pour le xxie siècle.
+Clairement on a P ⊆ N P. C’est l’autre inclusion qui pose difficulté. Soient P1 et P2 deux problèmes. On dit que P1 est polynomialement réductible à P2 s’il existe un algorithme pour résoudre P2 pouvant être transformé en temps polynomial en un algorithme pour résoudre P1.
+On peut maintenant définir une autre classe de complexité importante : c’est la classe N P-complète ou classe N PC. C’est un sous-ensemble de N P défini de la manière suivante : un problème P de décision est dans la classe N PC si P ∈ N P et si tout problème de la classe N P est polynomialement réductible à P . Naturellement, si on donne une solution en temps polynomial à un problème quelconque de N PC, on a nécessairement P = N P.
+1.8 Définition d’un graphe à partir de la fonction
+d’incidence
+La fonction d’incidence ε permet de donner une définition équivalente de la notion de graphe : c’est un triplet Γ = (V ; A, ε) où ε : A −→ P2(V ). En effet, à partir d’un graphe Γ = (V ; E, N ), on pose A = E et ε comme indiqué en section 1.1.
+Réciproquement soit Γ = (V ; A, ε) ; pour x, y ∈ V fixés, posons Tx,y = {a ∈ A : (a) = [x, y]} fini. Pour tous x, y tels que Tx,y = ∅,
+
+
+1. Concepts fondamentaux 27
+une p-arête entre x et y est définie par :
+Ex,y = {([x, y], 1), ([x, y], 2), . . . , ([x, y], p)}
+avec p = |Tx,y|, le cardinal de Tx,y. Dans ce cas Nx,y = {1, 2, 3, . . . , |Tx,y|}, ainsi
+N= ⋃
+x,y∈V, Tx,y =∅
+Nx,y et E = ⊔
+x,y∈V, Tx,y=∅
+Ex,y .
+Il s’ensuit que Γ = (V ; E, N ) est un graphe au sens du paragraphe 1.1. Pour quelle raison avons-nous introduit l’ensemble « auxiliaire » A ? La description du graphe Γ par le triplet (V ; A, ε) avec A = E possède un avantage lorsque A peut être réalisé concrètement par des objets divers, c’est donc une réalisation concrète du graphe. On ne confond pas une arête qui est un triplet avec l’objet qu’elle représente. Par exemple, l’ensemble des sommets est un ensemble de points du plan, les étiquettes (éléments de N ) sont des entiers naturels. Un élément a ∈ A est une courbe entre deux points du plan que l’on étiquette par un entier naturel. Maintenant nous pouvons nous permettre d’identifier A avec E : A est une réalisation de E. De façon analogue, un digraphe peut aussi bien être décrit avec les
+fonctions d’incidence i, t : Γ = (V ; −E→, i, t) où i, t : −E→ −→ V .
+1.9 Isomorphismes de graphes. Groupes d’auto
+morphismes
+Comme pour toute structure mathématique, il est intéressant de pouvoir comparer deux (di)graphes entre eux. C’est la notion d’isomorphisme qui permet d’exprimer formellement cette idée. Soient Γ = (V ; E, N ) et Γ′ = (V ′, E′, N ′) deux graphes. Un isomorphisme entre ces deux graphes est une bijection f :
+f : V E −→ V ′ E′ (V E désigne la réunion disjointe),
+vérifiant : – f |V : V −→ V ′ est bijective ; – f |E : E −→ E′ est bijective ; – pour toute arête a = ([x, y], n) ∈ E, il existe n′ ∈ N ′ tel que f |E(a) = ([f |V (x), f |V (y)], n′).
+
+
+28 Éléments de théorie des graphes
+Exemple 1.9.1. On considère les deux graphes de la figure 1.14 : 1 s’envoie sur c, 4 sur d, 3 sur b et 2 sur a. L’arête ([1; 4], l3) s’envoie sur l’arête ([d; c], t4) ; l’arête ([1; 4], l2) s’envoie sur l’arête ([d; c], t3) ; l’arête ([1; 3], l1) s’envoie sur l’arête ([b; c], t2) ; l’arête ([2; 3], l4) s’envoie sur l’arête ([a; b], t1) ; et l’arête ([2; 4], l5) s’envoie sur l’arête ([a; d], t5).
+12
+3 4d c
+ab
+l1 l2
+l3
+l4
+l5
+t1
+t2
+t3
+t4
+t5
+Figure 1.14 – Deux graphes isomorphes.
+On a alors la propriété d’incidence : soient ε, ε′ les fonctions d’incidence respectives des graphes Γ et Γ′ :
+[I] ∀a ∈ E : f (ε(a)) = ε′(f (a)).
+La propriété d’incidence se traduit par le diagramme commutatif (c’est-à-dire f ◦ ε = ε′ ◦ f ) suivant :
+E
+f
+ε P2(V )
+f
+E′ ε′ P2(V ′)
+où il est entendu que si A ∈ P2(V ), f (A) = {f (x), x ∈ A} ∈ P2(V ′).
+On note f : Γ −→ Γ′ un tel isomorphisme. Lorsque Γ et Γ′ sont définis par leurs fonctions d’incidence
+Γ = (V ; E, ε), Γ = (V ′; E′, ε′),
+il revient au même de définir l’isomorphisme f : Γ −→ Γ′ par – f |V : V −→ V ′ bijective ; – f |E : E −→ E′ bijective ; – f ◦ ε = ε′ ◦ f .
+Remarque 1.9.2. Lorsque les graphes sont simples, la donnée de f |V détermine f |E, grâce à la propriété d’incidence [I]. Nous reviendrons sur ce point au § 7.4.1.
+
+
+1. Concepts fondamentaux 29
+Pour un isomorphisme de digraphes la définition est la même, les arcs s’écrivent a = ((x, y), n) ; la propriété d’incidence devient :
+[−I→] ∀a ∈ −E→ : f (i(a)) = i′(f (a)) et f (t(a)) = t′(f (a)).
+où i, i′, t, t′ sont les fonctions d’incidence des graphes −→Γ = (V ; −E→, N ) et
+Γ−→′ = (V ′; E−→′, N ′).
+Exercice 1.11. i) Soient Γ = (V ; E, N ) et Γ′ = (V ′; E′, N ′) deux graphes isomorphes, d’ordre fini. Montrer que ces deux graphes ont : – le même nombre de sommets ; – le même nombre d’arêtes ; – la même distribution des degrés ; – le même nombre de composantes connexes.
+ii) Adapter cet énoncé pour des graphes orientés.
+Comme la figure 1.15 et l’exemple suivant le montrent, les conditions de l’exercice ci-dessus sont nécessaires mais pas suffisantes.
+Exemple 1.9.3. Les deux graphes de la figure 1.15 ont le même nombre d’arêtes et le même nombre de sommets. Ils ont également la même distribution des degrés ; néanmoins, ils ne sont pas isomorphes. En effet dans le premier graphe le sommet x3 est de degré 3, donc celui-ci doit s’envoyer sur le sommet y2 qui est le seul de degré 3 ; or x3 a deux voisins de degré 2, un voisin de degré 1, alors que y2 a un voisin de degré 2 et deux voisins de degré 1.
+x1 x2 x3 x4 x5
+x6
+y1 y2 y3 y4 y5
+y6
+Figure 1.15 – Deux graphes non isomorphes.
+
+
+30 Éléments de théorie des graphes
+Un automorphisme est un isomorphisme d’un graphe dans lui-même.
+Exercice 1.12. Soit Γ = (V ; E, N ) un graphe ; montrer que l’ensemble des automorphismes de Γ muni de la loi de composition des applications forme un groupe (voir § 1.10) : l’élément neutre IdΓ est l’application
+identique de V E et l’inverse de f est f −1. On notera ce groupe Aut(Γ).
+La notion de groupe est sans doute l’une des plus simples et fécondes des mathématiques. On retrouve cette théorie, certes en mathématiques, mais également en physique, en chimie, en sciences de l’ingénieur. . . De manière simple, le groupe des automorphismes d’un objet permet de « mesurer » les symétries de cet objet. Dans notre cas, si le cardinal de Aut(Γ) est grand le graphe a beaucoup de « symétries ». De manière plus explicite, beaucoup de sommets, d’arêtes (ou arcs) jouent un rôle identique. Le problème d’isomorphisme entre deux graphes, noté GI, est un des plus importants problèmes de la théorie de la complexité. Ce problème, relativement vieux, n’est toujours pas résolu. De manière plus précise on ne sait pas dans quelle classe de complexité il se trouve : existe-t-il un algorithme ayant une complexité polynomiale permettant de décider si deux graphes donnés sont isomorphes ? On peut montrer facilement que ce problème est dans la classe N P. En effet, supposons que nous ayons un isomorphisme f entre deux graphes. Vérifier si f est une bijection qui préserve l’adjacence se fait en temps polynomial. Néanmoins on ne sait pas si ce problème est dans la classe P ou s’il est dans la classe N PC. Il semblerait 1 que l’isomorphisme de graphes ne soit ni dans l’une ni dans l’autre classe. Cela voudrait dire que GI serait entre ces deux classes. Si tel était le cas, on aurait nécessairement P = N P. Un autre problème non résolu consiste en la détermination du cardinal du groupe d’automorphismes d’un graphe d’ordre fini. En fait ce problème et le précédent sont liés.
+Théorème 1.9.4. Soient Γ1 = (V1; E1) et Γ2 = (V2; E2) deux graphes simples connexes. On considère l’union disjointe : Γ = (V ; E) = Γ1 + Γ2.
+i) L’application
+j : Aut(Γ1) × Aut(Γ2) −→ Aut(Γ)
+définie par j(f1, f2) = g, où g(x) = f1(x) si x ∈ V1 et g(x) = f2(x) si x ∈ V2, est un morphisme de groupes injectif.
+1. Voir J. Köbler, U. Schöning & J. Turan. The Graph Isomorphism Problem: its Structural Complexity, Birkhäuser, 1993.
+
+
+1. Concepts fondamentaux 31
+ii) j est surjectif si et seulement si Γ1 n’est pas isomorphe à Γ2 ; donc dans ce cas, si les graphes sont d’ordre fini, on a :
+| Aut(Γ)| = | Aut(Γ1)| × | Aut(Γ2)|.
+Démonstration. i) est immédiat car f1 et f2 agissent séparément sur V1 et V2. ii) Supposons que Γ1 ne soit pas isomorphe à Γ2 ; par construction Γ = Γ1 + Γ2 est la décomposition connexe de Γ. Soit f ∈ Aut(Γ) ; f (Γ1) est clairement un sous-graphe connexe de Γ, donc d’après le lemme 1.2.1, on a f (V1) ⊂ V2 ou f (V1) ⊂ V1 (idem pour f (V2)) : – ou bien f (V1) ⊂ V2 ; alors f (V1) = V2 : en effet sinon V2 \f (V1) = ∅ et V2 \ f (V1) ⊂ f (V2) ; f (V2) est connexe et d’après le lemme 1.2.1 on a : f (V2) ⊂ V2. De là : f (V1) ∪ f (V2) = f (V1 ∪ V2) ⊂ V2, mais f (V1 ∪ V2) = V1 ∪ V2, contradiction. Comme les graphes sont simples, de f (V1) = V2 on déduit que f (E1) = E2 ; il s’ensuit que
+f |Γ1 : Γ1 −→ Γ2
+est un isomorphisme, ce qui est contradictoire ; – ou alors f (V1) ⊂ V1 ; d’où f (V1) = V1, f (V2) = V2 (pour les mêmes raisons que ci-dessus) et les graphes étant simples, f (E1) = E1, f (E2) = E2 ; donc f = j(f1, f2) où f1 = f |Γ1, f2 = f |Γ2. Par conséquent pour tout f ∈ Aut(Γ) il existe (f1, f2) ∈ Aut(Γ1) × Aut(Γ2) tel que j(f1, f2) = f .
+Supposons que φ : Γ1 −→ Γ2 soit un isomorphisme ; on construit
+ψ ∈ Aut(Γ) par : ψ(x) = φ(x) si x ∈ V1, ψ(x) = φ−1(x) si x ∈ V2 (car l’inverse d’un isomorphisme est un isomorphisme). Il est clair que ψ ∈ Im(j).
+Lorsque les graphes Γ1 et Γ2 sont isomorphes, le groupe Aut(Γ1 + Γ2) est plus compliqué ; nous étudierons cette question au § 9.2.1. Ainsi le problème de l’isomorphisme de graphes peut se ramener au problème du calcul de l’ordre (cardinal) du groupe d’automorphismes d’un graphe : s’il existe un algorithme capable de calculer l’ordre du groupe d’automorphismes d’un graphe en un temps polynomial, alors GI est dans la classe P. Si on montre qu’un tel algorithme n’existe pas, on a gagné 1 million de dollars (prix de la fondation Clay pour ce problème) car dans ce cas cela impliquerait l’inclusion stricte P N P !
+
+
+32 Éléments de théorie des graphes
+1.10 Compléments : quelques structures de base
+Une distance sur un ensemble X est une application
+d : X × X −→ R
+vérifiant les propriétés suivantes, pour tous x, y, z ∈ X : i) d(x, y) ≥ 0 et d(x, y) = 0 si et seulement si x = y, ii) d(x, y) = d(y, x), iii) d(x, z) ≤ d(x, y) + d(y, z).
+(X, d) est alors appelé espace métrique. Les espaces métriques sont des cas particuliers d’espaces topologiques, pour lesquels nous pouvons définir naturellement certaines notions importantes comme celle de limites ou celle de boules ouvertes
+Bd(x, r) = {y ∈ E : d(x, y) < r} (r > 0)
+qui jouent un rôle fondamental. On remarquera que si d est la distance attachée à un graphe (définie au § 1.1.3), alors pour 1 < r < 2, on a Bd(x, r) = {x} ∪ Γ(x).
+Une relation d’équivalence sur un ensemble E est une relation binaire R vérifiant : i) xRx pour tout x ∈ E (réflexivité), ii) ∀x, y ∈ E, xRy ⇒ yRx (symétrie), ii) ∀x, y, z ∈ E, xRy et yRz ⇒ x ≤ z (transitivité). Pour x ∈ E, R(x) = {y ∈ X : xRy} est appelée classe de x modulo R et on a une partition de E : E = x∈ER(x), où E est un ensemble de représentants des classes modulo R. Réciproquement il est facile de montrer que toute partition de E fournit une relation d’équivalence. Un préordre sur un ensemble E est une relation binaire ≤ sur E vérifiant : i) x ≤ x pour tout x ∈ E (réflexivité), ii) ∀x, y, z ∈ E, x ≤ y et y ≤ z ⇒ x ≤ z (transitivité). On dit alors que (E, ≤) est un ensemble préordonné. Au préordre ≤, on associe une relation binaire R définie par :
+xRy si et seulement si x ≤ y et y ≤ x.
+Alors R est une relation d’équivalence dite équivalence associée au préordre ≤.
+Lorsque de plus
+
+
+1. Concepts fondamentaux 33
+iii) x ≤ y et y ≤ x ⇒ x = y (antisymétrie), on dit que ≤ est une relation d’ordre ou un ordre sur E. Si l’ordre ≤ vérifie : iv) ∀x, y ∈ E : x ≤ y ou y ≤ x (tous les éléments sont comparables), on dit que ≤ est un ordre total.
+Soit (E, ≤) un ensemble ordonné et soit A ⊂ E. On dit que x ∈ E est un majorant de A si pour tout a ∈ A, on a ≤ x (si A = ∅ tout x ∈ E est majorant de A !). Si x est majorant de A et x ∈ A, on dit que x est le plus grand élément de A ; cet élément (évidemment unique) est noté max(A). De même on dit que x ∈ E est un minorant de A si pour tout a ∈ A, on a x ≤ a (si A = ∅, tout x ∈ E est minorant de A !). Si x est minorant de A et x ∈ A, on dit que x est le plus petit élément de A ; cet élément (évidemment unique) est noté min(A).
+Lorsque l’ensemble des majorants de A admet un plus petit élément s, on dit que s est la borne supérieure de A et on la note s = sup(A). De la même façon la borne inférieure inf(A) de A est le plus grand (s’il existe) des minorants de A.
+Un élément m ∈ A est dit élément maximal de A si
+x ∈ A et m ≤ x =⇒ x = m.
+De même un élément m ∈ A est dit élément minimal de A si
+x ∈ A et x ≤ m =⇒ x = m.
+Dans un ensemble ordonné fini, toute partie non vide admet (au moins) un élément maximal et un élément minimal. Il peut y avoir plusieurs éléments minimaux ou maximaux.
+Un groupe G est un ensemble muni d’une loi de composition interne
+G × G −→ G (a, b) −→ a · b
+telle que – pour tous a, b, c ∈ G, a · (b · c) = (a · b) · c = a · b · c ; la loi est dite associative ;
+– il existe e ∈ G tel que pour tout élément a de G, e · a = a · e = a ; cet élément (nécessairement unique) s’appelle l’élément neutre ;
+
+
+34 Éléments de théorie des graphes
+– pour tout élément a ∈ G il existe x ∈ G tel que a · x = x · a = e ; cet élément (unique) est appelé inverse de a et on le note a−1. Si de plus pour tous x, y ∈ G on a : x · y = y · x on dit que le groupe est commutatif ou abélien ; dans ce cas la loi est souvent notée additivement : x + y.
+♣
+
+
+Chapitre 2
+Quelques graphes
+remarquables
+Dans la grande flore des graphes, nous étudions ici quelques espèces, utilisées dans de nombreux domaines comme les réseaux de télécommunications, la recherche opérationnelle et l’ordonnancement ou l’informatique parallèle. Les premiers graphes étudiés sont les graphes bipartis. La deuxième partie est consacrée aux arbres et aux arborescences. La partie suivante traite des graphes sans circuit. Finalement, les (di)graphes eulériens et hamiltoniens sont abordés. Pour illustrer le caractère effectif des résultats, nous développons quelques algorithmes. Nous avons volontairement omis dans ce chapitre les graphes planaires : ceux-ci seront étudiés au chapitre 5.
+2.1 Graphes bipartis
+Soit k ≥ 1 un entier. Un graphe simple Γ = (V ; E) est dit k -parti s’il existe une partition de l’ensemble de ses sommets V = V1 · · · Vk de telle sorte qu’aucun des sous-graphes induits Γ(Vi), i = 1, . . . , k, ne contienne d’arête. Un graphe 1-parti est donc simplement un graphe sans arête. Les parties Vi, i = 1, . . . , k, forment ce que l’on appelle une k -partition, associée au graphe k-parti Γ. Un graphe k-parti est dit complet si
+∀i, j ∈ {1, . . . , k}, i = j, ∀x ∈ Vi, ∀y ∈ Vj, on a {x, y} ∈ E.
+Lorsque |Vi| = ni, 1 ≤ i ≤ k, on notera Kn1,n2,...,nk un « modèle » du
+A, Bretto et al., Éléments de théorie des graphes © Springer-Verlag France 2012
+
+
+36 Éléments de théorie des graphes
+graphe k-parti complet correspondant. Le graphe K1,n est appelé étoile. Pour k = 2, nous obtenons une classe importante de graphes, les graphes bipartis.
+Exemple 2.1.1. Les graphes montrés en figure 2.1 sont 3-partis, les parties des 3-partitions sont visualisées en pointillé. Le second est plus précisément k-parti complet : K2,2,3.
+Figure 2.1 – Deux graphes 3-partis.
+Les graphes bipartis sont caractérisés par le théorème suivant.
+Théorème 2.1.2. Soit Γ = (V ; E) un graphe simple d’ordre fini. Γ est biparti si et seulement s’il ne contient pas de cycle de longueur impaire.
+Démonstration. Un graphe est biparti si et seulement si toutes ses composantes connexes sont biparties. On peut donc supposer que Γ est connexe. Nécessité : supposons que Γ = (V ; E) soit biparti : V = V1 V2. Soit C = (x0, a1, x1, a2 . . . , ak−1, xk) un cycle (chaîne fermée simple) avec xk = x0. On peut supposer par exemple que x0 ∈ V1 ; comme V1 est sans arête, on a nécessairement x1 ∈ V2 ; de même V2 est sans arête, donc x2 ∈ V1 ; par récurrence, on établit que xi ∈ V1 si i est pair et xi ∈ V2 si i est impair. Il s’ensuit donc, puisque xk = x0 est dans V1, que k est pair. Suffisance : supposons réciproquement que Γ ne contienne pas de cycle impair. Soit x un sommet de Γ choisi arbitrairement. Soit d la distance du graphe Γ considéré comme espace métrique (voir § 1.1.3 ) ; on définit V1 = {y ∈ V : d(x, y) est pair} et V2 = {y ∈ V : d(x, y) est impair} de sorte que V = V1 V2 et x ∈ V1. Montrons qu’il n’y a aucune arête entre
+
+
+2. Quelques graphes remarquables 37
+les sommets de V1, entre les sommets de V2. Pour cela on raisonne par l’absurde : – s’il existe une arête a = {u, v} avec u, v ∈ V1 ; le graphe étant connexe, il existe Cu et Cv deux chaînes élémentaires de longueur minimum reliant d’une part x à u et d’autre part x à v ; par définition de V1, d(x, u) et d(x, v) sont pairs, donc Cu et Cv ont des longueurs paires ; les chaînes Cu et Cv ont éventuellement des sommets communs : partant de x, il existe un dernier sommet z commun à Cu et Cv. Par minimalité, les longueurs des sous-chaînes de Cu et Cv allant de x à z sont toutes deux égales à d(x, z) et ont en particulier même parité. Il s’ensuit que les longueurs des sous-chaînes de Cu et Cv joignant z à u et z à v, qui sont de longueurs respectives égales à d(z, u) et d(z, v) (à nouveau par minimalité), ont même parité. Ainsi la chaîne obtenue en allant de z à u en suivant Cu, puis de u à v selon {u, v}, puis de v à z suivant Cv est de longueur d(z, u) + 1 + d(v, z) impaire : contradiction. – s’il existe une arête a = {u, v} avec u, v ∈ V2, le graphe étant connexe, il existe Cu et Cv deux chaînes élémentaires de longueur minimum reliant d’une part x à u, d’autre part x à v ; par définition de V2, d(x, u) et d(x, v) sont impairs, donc Cu et Cv ont des longueurs impaires ; comme dans le cas précédent, il existe un sommet z commun à Cu et Cv tel que la chaîne obtenue en allant de z à u en suivant Cu, puis de u à v selon {u, v}, puis de v à z suivant Cv est alors un cycle de longueur impaire : contradiction.
+Un exemple important de graphe biparti est fourni par les k -cubes, appelés également hypercubes, notés Qk, avec k ≥ 1 : un k-cube est un graphe simple dont l’ensemble des sommets est V = {0, 1}k ; l’ensemble E des arêtes est défini ainsi : si x = (x1, . . . , xk) et y = (y1, . . . , yk) sont dans V , alors {x, y} ∈ E si et seulement si xi = yi pour tout sauf exactement un indice i0, 1 ≤ i0 ≤ k. Ainsi Q1 est formé de 2 sommets reliés par une arête, Q2 est un carré. Le 3-cube est montré en figure 2.2.
+Exercice 2.1. Montrer qu’un cube Qk est un graphe biparti régulier de degré k ayant 2k sommets.
+Considérons l’algorithme suivant (le graphe est connu à travers les listes Ay des sommets adjacents à y, y ∈ V ) :
+GrapheBiparti
+Entrée : un graphe Γ = (V ; E), un sommet x ; Sortie : biparti (booléen vrai ou faux), V1 et V2 (le cas échéant) ; Initialisation : L = ∅ ; (liste intermédiaire initialisée au vide)
+
+
+38 Éléments de théorie des graphes
+100 101
+000 001
+110 111
+010 011
+Figure 2.2 – Un modèle du 3-cube.
+Initialisation : d(x) = 0 ; (distance de x à x fixée à 0) Initialisation : biparti = vrai, V1 = ∅ ; (variable booléenne, première partie de la partition des sommets) Ajouter x à L ;
+Tant que L n’est pas vide Et que biparti == vrai Faire Enlever le premier sommet y de L ; Pour Tout u ∈ Ay Faire
+Si d(u) n’est pas initialisée Alors d(u) = d(y) + 1 ; Ajouter u à L ; Sinon Si d(u) == d(y) Alors biparti = faux ; Fin Si Fin Pour Fin Tant
+Si biparti == vrai Alors
+Pour Tout x ∈ V Faire
+Si d(x) ≡ 0 (mod 2) Alors V1 = V1 ∪ {x} ; Fin Si Fin Pour V2 = V \ V1 ; Fin Si Fin
+
+
+2. Quelques graphes remarquables 39
+Théorème 2.1.3. L’algorithme GrapheBiparti détermine si un graphe simple d’ordre fini est biparti ou non. Si c’est le cas, il donne une 2partition avec une complexité en O(|E|).
+Démonstration. Cette preuve est laissée à titre d’exercice. Indication : utiliser le fait que |E| = O(|V |2).
+Proposition 2.1.4. Soit Γ = (V ; E) un graphe connexe biparti, d’ordre fini ou non ; alors la bipartition V = V1 V2 est unique.
+Démonstration. Fixons un sommet quelconque x et posons, comme dans le théorème 2.1.2, V1 = {y ∈ V : d(x, y) est pair} et V2 = {y ∈ V : d(x, y) est impair} de sorte que V = V1 V2 et x ∈ V1. Soit alors V = W1 W2 une bipartition quelconque de V et supposons par exemple que x ∈ W1 ; pour tout y ∈ V , soit
+Cy = (x, a1, x1, . . . , xn−1, an, y)
+une chaîne élémentaire de longueur minimum n = ny = d(x, y) entre x et y (on convient que xn = y). Par minimalité de Cy, on a d(x, xk) = k, k ≥ 1, donc xk ∈ V1 ou V2 selon que k est pair ou non. De même, comme V = W1 W2 est une bipartition, on a aussi xk ∈ W1 ou W2 selon que k est pair ou non. On a – W1 ⊂ V1 : en effet soit y ∈ W1 ; comme x ∈ W1, la longueur de Cy est paire, d’où y ∈ V1. – W2 ⊂ V2 : soit y ∈ W2 ; comme x ∈ W1, ny est impair donc y ∈ V2. Comme V = V1 V2 = W1 W2, il en résulte que W1 = V1 et W2 = V2.
+On remarquera que la proposition est fausse sans l’hypothèse de connexité.
+2.2 Arbres et arborescences
+2.2.1 Arbres
+Les arbres généalogiques sont l’exemple type. La théorie darwinienne de l’évolution représente aussi les espèces selon un arbre, mais les mécanismes de fusion évolutive (endosymbiose, hybridation et transfert de gènes) laissent plutôt penser à un modèle voisin du réseau. Un arbre est un graphe connexe sans cycle. Ainsi un arbre est nécessairement simple. Il existe plusieurs caractérisations agréables des arbres.
+
+
+40 Éléments de théorie des graphes
+Théorème 2.2.1. Soit Γ = (V ; E) un graphe simple. Les assertions suivantes sont équivalentes :
+i) Γ est un arbre.
+ii) Γ est connexe et chaque arête est un isthme.
+iii) Deux sommets distincts sont connectés par exactement une chaîne élémentaire.
+iv) Γ est sans cycle et l’ajout d’une nouvelle arête crée exactement un cycle élémentaire.
+Si de plus Γ est d’ordre fini, ces assertions sont aussi équivalentes à chacune des assertions :
+v) Γ est sans cycle et |E| = |V | − 1.
+vi) Γ est connexe et |E| = |V | − 1.
+Démonstration. i)=⇒ii) : ôtons l’arête a = {x, y} ; si le sous-graphe obtenu est connexe, alors il y a une chaîne C et donc une chaîne élémentaire (voir exercice 1.1) entre x et y n’empruntant pas l’arête a. Ainsi, en concaténant C et a, on obtient un cycle dans Γ empruntant l’arête a. Contradiction. ii)=⇒iii) : le graphe étant connexe, chaque paire de sommets est connectée par au moins une chaîne élémentaire. S’il existe dans le graphe une paire de sommets {x, y} connectés par deux chaînes élémentaires distinctes C1 et C2, il y a une arête de l’une de ces chaînes, disons a ∈ C2, telle que a ∈/ C1. On va alors mettre en évidence un cycle : partant de x, on considère le premier sommet z en lequel la chaîne élémentaire C2 se
+sépare de C1. Puis on désigne par z′ le premier sommet venant « après »
+z où la chaîne C2 rejoint C1 : on ne peut avoir z′ = z car C2 est élémen
+taire ; cela induit deux sous-chaînes allant de z à z′ disjointes et formant naturellement un cycle élémentaire par concaténation. Les arêtes de ce cycle ne sont évidemment pas des isthmes. iii)=⇒iv) : si on ajoute une arête a = {x, y}, x et y sont par hypothèse déjà connectées par exactement une chaîne élémentaire, d’après iii) ; on obtient par concaténation avec a un cycle élémentaire. Si un deuxième cycle élémentaire était créé par adjonction de a, on aurait une deuxième chaîne élémentaire entre x et y : contradiction. iv)=⇒i) : si Γ1 et Γ2 étaient deux composantes connexes de Γ, en ajoutant une arête entre Γ1 et Γ2, on ne créerait pas de cycles. i)=⇒v) : d’après les propositions 1.4.2 et 1.4.3. v)=⇒vi) : soit Γ = Γ1 + · · · + Γk la décomposition connexe de Γ (voir
+
+
+2. Quelques graphes remarquables 41
+§ 1.5) ; chaque Γi = (Vi; Ei) est connexe, donc (voir proposition 1.4.2 i)) possède |Ei| ≥ |Vi| − 1 arêtes, et sans cycle donc (voir proposition 1.4.3) |Ei| ≤ |Vi| − 1, d’où |Ei| = |Vi| − 1. Alors
+|E| = ∑
+1≤i≤k
+|Ei| = ∑
+1≤i≤k
+(|Vi| − 1) = |V | − k ;
+comme par hypothèse |E| = |V | − 1, on déduit k = 1, c’est-à-dire Γ est connexe. vi)=⇒ii) : si on supprime une arête, on a |E| = |V | − 2 ; le graphe obtenu n’est plus connexe d’après la proposition 1.4.2.
+Exemple 2.2.2. Le degré de parenté dans un arbre généalogique est la distance dans l’arbre correspondant entre les différents sommets ; pour le calculer, on remonte au premier ancêtre commun.
+Une forêt est un graphe sans cycle (donc nécessairement simple) : ainsi les composantes connexes d’une forêt sont des arbres. La figure 2.3 montre des arbres et des forêts. Une feuille dans une forêt est un sommet de degré égal à 1.
+Figure 2.3 – Forêt comportant trois arbres et onze feuilles.
+
+
+42 Éléments de théorie des graphes
+Corollaire 2.2.3. Soit Γ une forêt ayant n sommets et k composantes connexes. Alors Γ possède n − k arêtes.
+Démonstration. Il suffit d’appliquer le vi) du théorème 2.2.1 à chacune des k composantes connexes de Γ.
+Corollaire 2.2.4. Soit Γ = (V ; E) un graphe simple d’ordre fini ayant k composantes connexes. Le graphe est sans cycle si et seulement si |E| = |V | − k.
+Démonstration. Si Γ est sans cycle, c’est une forêt et on a |E| = |V | − k d’après le corollaire 2.2.3. Réciproquement si |E| = |V | − k, soient (Γi)1≤i≤k, Γi = (Vi; Ei), les composantes connexes de Γ ; d’après la proposition 1.4.2, |Ei| ≥ |Vi| − 1 pour tout i ; il s’ensuit que |E| ≥ |V | − k ; mais comme par hypothèse |E| = |V | − k, on a forcément |Ei| = |Vi| − 1 pour chaque i. Or Γi est connexe, donc par le vi) du théorème 2.2.1, Γi est un arbre, donc n’a pas de cycle ; d’où Γ est sans cycle.
+Proposition 2.2.5. Un arbre Γ = (V ; E) ayant |V | ≥ 2 sommets admet au moins deux feuilles.
+Démonstration. La somme des degrés dans un graphe est égale à deux fois le nombre d’arêtes (voir lemme 1.1.9). On a |E| = n − 1 et :
+2n − 2 = ∑
+x∈V
+d(x).
+Soit alors t le nombre de sommets de degré 1 ; il y a donc (n−t) sommets de degré ≥ 2 et :
+2n − 2 = ∑
+x∈V
+d(x) = t + ∑
+x∈V, d(x)≥2
+d(x) ≥ t + 2(n − t)
+d’où il résulte que t ≥ 2.
+Proposition 2.2.6. Un graphe Γ = (V ; E, N ) d’ordre fini admet un arbre Γ′ = (V ; E′, N ′) comme graphe partiel si et seulement s’il est connexe.
+Démonstration. Un graphe qui admet un graphe partiel connexe est connexe. Réciproquement, supposons que Γ est connexe : si c’est un arbre on a fini ; sinon, d’après le théorème 2.2.1, il contient une arête a
+
+
+2. Quelques graphes remarquables 43
+qui n’est pas un isthme ; si le graphe Γ \ a, qui est connexe, est un arbre on a fini ; sinon on réitère le processus (un nombre fini de fois car |E| est fini) jusqu’à obtenir un graphe connexe dont toutes les arêtes sont des isthmes. C’est donc un arbre par le ii) du théorème 2.2.1.
+Un graphe partiel de Γ qui est un arbre est appelé arbre de recouvrement de Γ. Voici un exemple important : il s’agit de minimiser la longueur des réseaux qui connectent un ensemble de points du plan. Soit n ≥ 1 un entier ; on appelle arbre de Steiner un arbre dont les sommets sont n points x1, x2, . . . , xn du plan euclidien R2 à coordonnées entières, appelés points de Steiner, reliés entre eux de sorte que la somme des distances ‖xi−xj‖, 1 ≤ i < j ≤ n, soit minimum. Le problème de déterminer un arbre de Steiner de longueur minimum (pour la distance usuelle dans R2) est appelé problème euclidien de Steiner. Il a été intensivement étudié par de nombreux auteurs 1. On peut montrer que ce problème est dans la classe N PC 2. Soit Γ = (V ; E) un graphe connexe, muni d’un poids (ou valuation) sur les arêtes :
+ω : E −→ R+.
+L’algorithme très simple suivant est dû à Kruskal (1956). Il donne un
+arbre A de recouvrement de poids ∑
+a∈E(A) ω(a) minimum. On suppose que les arêtes sont triées par ordre de poids croissant : E = {a1, a2, . . . , am} avec ω(a1) ≤ ω(a2) ≤ · · · ≤ ω(am).
+Algorithme de Kruskal Entrée : Γ, ω ; Sortie : T ; T = ∅ ; (arbre initialisé)
+Pour Tout i de 1 à m Faire
+Si ai ne forme pas un cycle avec des arêtes de T Alors Adjoindre ai à T ; Fin Si Fin Pour Fin
+Théorème 2.2.7. Soit Γ = (V ; E) un graphe simple connexe ayant au moins une arête. Alors l’algorithme de Kruskal construit un arbre de recouvrement T de poids minimum avec une complexité de O(|E| log(|E|)).
+1. E.N. Gilbert & H.O. Pollak. Steiner minimal trees, SIAM Journal of Applied Mathematics 16 (1968), 1–19. 2. M.R. Garey & D.S. Johnson. Computers and Intractability : a Guide to the Theory of N P-Completeness, Freeman, New York, 1979.
+
+
+44 Éléments de théorie des graphes
+Démonstration. L’algorithme produit un arbre T par adjonctions successives d’arêtes ai, i = 1, . . . , k. On pose E′ = {a1, . . . ak} ; T est le
+sous-graphe induit T = Γ(E′). – L’arbre T est un arbre de recouvrement : s’il existait un sommet x de Γ incident à T et n’étant pas dans V (T ), il y aurait une arête a = {x, y}, y ∈ V (T ), telle que a ∈ E(T ) = E′ ; par construction E′ ∪ {a} contiendrait un cycle, donc x serait élément de V (T ). – T est un arbre de poids minimum : soit T1 un arbre de recouvrement quelconque et soit ai la première arête produite par l’algorithme qui n’est pas dans T1 ; donc a1, a2, . . . , ai−1 ∈ T ∩ T1. Comme T1 est un arbre de recouvrement, si on ajoute ai à T1 on obtient un cycle C ; ce cycle contient une arête a ∈ T1 qui n’est pas dans T (sinon T contiendrait un cycle). Remplaçons dans T1 l’arête a par l’arête ai : on obtient un nouvel arbre
+de recouvrement T2. En effet s’il y avait un cycle (élémentaire) C′ dans T2, d’une part ce cycle devrait contenir ai (sinon ce serait un cycle de T1)
+et d’autre part C′ \ai serait une chaîne de T1 entre x et y, où ai = {x, y} ;
+puisque a n’est pas sur C′, on formerait alors un cycle de T1 en suivant C
+de x à y, passant par a, puis en empruntant C′ de y à x (voir figure 2.4). Notons que T2 a une arête de plus en commun avec T que T1. De plus ω(ai) ≤ ω(a) : sinon ω(a) < ω(ai) ; comme a n’a pas été choisie à l’étape i par l’algorithme, cela veut dire qu’elle forme un cycle C′ avec les arêtes de {a1, . . . , ai−1} ; mais a est une arête de T1, ainsi que
+a1, . . . , ai−1, donc C′ serait un cycle de T1 : absurde. Cela entraîne que ω(T2) ≤ ω(T1).
+On peut répéter cette construction à partir de T2, puis ainsi de suite jusqu’à l’arrêt du processus qui fournit l’arbre Tr = T . On a donc transformé T1 en T en remplaçant les arêtes une par une de telle sorte que le poids total à chaque étape ne soit pas augmenté. Par conséquent ω(T ) ≤ ω(T1).
+Calcul de la complexité : nous avons besoin d’un tableau compconnexe qui va nous donner le numéro de la composante connexe auquel appartient le sommet courant (c’est-à-dire le sommet qui est en train d’être examiné). Soit V = {1, 2, 3, . . . , n}. On commence par initialiser :
+compconnexe[i] ← i où i est le numéro du sommet xi. Soit e = {i, j} l’arête courante (c’est-à-dire l’arête qui est en train d’être examinée).
+Si compconnexe[i] < compconnexe[j] alors le tableau compconnexe est modifié en remplaçant toutes les entrées égales à compconnexe[j] par compconnexe[i] ; à la fin on a compconnexe[i] = 1 pour tout i car tout sommet doit appartenir à la même composante connexe.
+
+
+2. Quelques graphes remarquables 45
+Il est bien connu que trier une liste de taille |E| peut se faire en O(|E| log(|E|)) opérations élémentaires. Dans le pire des cas on obtient un arbre quand on adjoint la mie`me arête. Pour chaque arête {i, j} ajoutée, on compare compconnexe[i] à compconnexe[j] et on met à jour le tableau compconnexe selon la règle décrite ci-dessus. On a donc au pire |V | comparaisons et les mises à jour relatives au suivi des composantes connexes requièrent O(|V | log |V |) opérations tout au long de l’algorithme. Comme Γ est connexe, |V | = O(|E|) et on obtient une complexité en O(|E| log(|E|)).
+a
+ai
+xy
+C′
+C
+Figure 2.4 – Illustration dans la preuve de l’algorithme de Kruskal.
+Remarque 2.2.8. L’algorithme de Kruskal peut fournir plusieurs arbres de recouvrement de poids minimum, lorsqu’on modifie l’ordre des arêtes de même poids. Cependant tous ces arbres de recouvrement auront le même poids (minimum).
+2.2.2 Arborescences
+Une arborescence est un digraphe simple −Γ→ = (V ; −E→) vérifiant les conditions suivantes : – le graphe sous-jacent est un arbre ; – il existe un sommet de degré entrant 0 et tout autre sommet a un degré entrant égal à 1. Le sommet qui a un degré entrant égal à 0 est appelé la racine de l’arborescence.
+
+
+46 Éléments de théorie des graphes
+Soit Γ = (V ; −E→) un digraphe dont le graphe sous-jacent a k ≥ 1 com
+posantes connexes. Le digraphe Γ = (V ; −E→) est une forêt orientée si les composantes connexes du graphe sous-jacent sont des arborescences. Un digraphe partiel d’un digraphe Γ = (V ; E) qui est une arborescence est appelé arborescence recouvrante.
+Proposition 2.2.9. Soit Γ = (V ; E) un arbre d’ordre fini : pour tout sommet r de Γ, il existe une orientation telle que Γ soit une arborescence de racine r.
+Démonstration. Raisonnons par récurrence sur le nombre d’arêtes. Si |E| = 0 la propriété est triviale. Si |E| = 1, l’arbre a une arête a = {r, y} : on peut orienter cette arête de telle sorte que r soit la racine. Supposons la propriété vraie pour tout arbre ayant m − 1 arêtes. Soit Γ = (V ; E) un arbre ayant m arêtes ; le sommet r n’étant pas isolé, il existe une arête a = {r, y} incidente à r ; si on retire a, on obtient deux composantes connexes (voir le ii du théorème 2.2.1) qui sont des arbres Γr et Γy.
+On peut appliquer l’hypothèse de récurrence à chacun de ces deux arbres. on peut donc orienter Γr et Γy de telle sorte que leurs racines respectives soient r et y. Ensuite, on oriente l’arête a de r vers y : on obtient une arborescence de racine r car tous les sommets de Γ ont un degré entrant égal à 1 à l’exception de r qui a un degré entrant égal à 0.
+Nous disposons aussi de la propriété suivante :
+Proposition 2.2.10. Soit Γ = (V ; −E→) une arborescence et x un sommet. le sous-digraphe Γx induit par
+Vx = {y ∈ V : il existe un chemin de x à y}
+est une arborescence.
+Démonstration. Il est clair que le graphe sous-jacent à Γx est un arbre. Par définition tous les sommets, à l’exception de x, sont de degré entrant égal à 1 ; d−(x) = 0. D’où le résultat.
+L’arborescence Γx est appelée arborescence attachée à x.
+Soit Γ = (V ; −E→) une arborescence de racine r : si a = (x, y) ∈ −E→ on dit que x est père de y et que y est fils de x ; deux sommets ayant même père sont des frères. Un sommet ayant au moins un fils est dit
+
+
+2. Quelques graphes remarquables 47
+interne ; une branche de x ∈ V est un chemin partant de x et allant jusqu’à une feuille. La hauteur d’un sommet x est la longueur du plus grand chemin partant de x et allant à une feuille ; la hauteur d’une arborescence est la hauteur de sa racine ; la profondeur d’un sommet x est la longueur de l’unique chemin de la racine à x : d’après le théorème 2.1.2, il existe une unique chaîne entre r et xn = x :
+C = (r, a0, x1, a1, x2, . . . , an−1, xn).
+Comme Γ est une arborescence, le degré entrant de x1 est égal à 1, donc l’arête orientée correspondant à a0 va de r à x1 et de même pour les autres ai ; ainsi C fournit en réalité un chemin de r à x. Un niveau dans une arborescence est l’ensemble de tous les sommets qui sont à une même profondeur. Une arborescence ordonnée est une arborescence dans laquelle on a ordonné totalement l’ensemble des fils de chaque sommet : on peut la dessiner sur un plan en ordonnant les fils d’un sommet de gauche à droite (voir figure 2.5). Une arborescence ordonnée est une arborescence binaire complète si tout sommet a soit deux fils soit aucun.
+Exercice 2.2. Montrer que le nombre de sommets dans une arborescence binaire complète est impair.
+Une arborescence binaire complète est parfaite si toutes les feuilles sont à une même profondeur et si tout sommet qui n’est pas une feuille a exactement deux fils.
+Proposition 2.2.11. Une arborescence binaire parfaite de hauteur h possède 2h+1 − 1 sommets.
+Démonstration. On raisonne par récurrence sur la hauteur. Si h = 0, on a n = 1.
+Supposons la propriété vraie pour toute arborescence binaire parfaite de hauteur h. Soit T une arborescence binaire parfaite de hauteur h + 1. En supprimant la racine, on obtient deux arborescences (d’après la proposition 2.2.10). De plus, celles-ci sont parfaites. Elles ont toutes deux une hauteur égale à h et, par conséquent, elles possèdent chacune 2h+1−1 sommets. Nous avons donc dans T exactement 2(2h+1 −1)+1 = 2h+2 −1 sommets.
+
+
+48 Éléments de théorie des graphes
+x1
+x2 x3
+x4 x5 x6 x7
+x8 x9 x10 x11 x12
+Figure 2.5 – Arbre ordonné.
+Cette arborescence n’est pas parfaite car, par exemple, le sommet x4 n’a qu’un fils. La hauteur de l’arborescence est égale à 3.
+2.3 Digraphes sans circuit
+Les digraphes sans circuit sont très importants dans les applications à l’ordonnancement. Par exemple on les retrouve dans la planification de travaux.
+Soit −Γ→ = (V ; −E→) un digraphe simple sans circuit ; un tri topologique est une injection f de V dans R telle que si a = (x, y) est un arc alors f (x) < f (y) ; lorsque Γ est d’ordre fini cela revient à donner un ordre total sur les sommets x1 < x2 < · · · < xn satisfaisant à
+(xi, xj) ∈ −E→ =⇒ i < j.
+Lemme 2.3.1. Soit Γ = (V ; −E→) un digraphe simple d’ordre fini sans circuit ; alors Γ contient au moins un sommet x de degré entrant égal à 0, c’est-à-dire d−(x) = 0.
+Démonstration. Soit x1 un élément de V . Si d−(x1) = 0, c’est fini. Sinon
+il existe un sommet x2 tel que (x2, x1) soit un arc. Si d−(x2) = 0, c’est fini. Sinon il existe x3 tel que (x3, x2) soit un arc et ainsi de suite. Le digraphe étant fini et celui-ci n’ayant pas de circuit, on obtient de cette manière nécessairement un sommet xk tel d−(xk) = 0.
+Proposition 2.3.2. Soit Γ = (V ; −E→) un digraphe simple d’ordre fini. Il est sans circuit si et seulement si l’ensemble de ses sommets admet un tri topologique.
+Démonstration. Nécessité : soit Γ un digraphe simple sans circuit ; raisonnons par récurrence sur le nombre de sommets. Si |V | = 1 c’est trivial.
+
+
+2. Quelques graphes remarquables 49
+Supposons le résultat vrai jusqu’au rang n. Soit Γ tel que |V (Γ)| = n + 1 ; d’après le lemme 2.3.1, le digraphe admet un sommet u tel que d−(u) = 0 ; supprimons ce sommet : le digraphe Γu induit sur V \ {u} étant sans circuit et d’ordre n, il admet un tri topologique : x1 < x2 < · · · < xn. Le sommet u ayant un degré entrant égal à 0, on obtient un tri topologique sur V en posant u < x1 < x2 < · · · < xn (les seuls arcs où intervient u étant du type (u, xi)).
+Suffisance : supposons réciproquement que Γ admette un tri topologique f et que ce digraphe ait un circuit
+(x0, a0, x1, a1, x2, . . . , xt, at, x0)
+Alors nous avons : f (x0) < f (x1) < · · · < f (xt) < f (x0), absurde.
+Soit Γ = (V ; −E→) un digraphe simple avec |V | = n. La procédure suivante vérifie si le digraphe est avec ou sans circuit et détermine un tri topologique sur ses sommets.
+Tri topologique
+Entrée : Γ ; Ax1, Ax2, . . . , Axn ; (un graphe et une liste d’arcs) Sortie : s ; (variable booléenne indiquant si Γ est sans circuit ou non) Sortie : entrd(x), listopo(y) ; (degré entrant du sommet x, numéro du sommet dans le tri topologique). Initialisation : V = 1 ; (nombre de sommets traités) Initialisation : L = ∅ ; (liste de sommets ayant d−(x) = 0) Pour Tout i de 1 à n Faire entrd(xi) = 0 ; Fin Pour Pour Tout i de 1 à n Faire Pour Tout, xj ∈ Axj Faire entrd(xj) = entrd(xj) + 1 ; Fin Pour Fin Pour Pour Tout i de 1 à n Faire Si entrd(xi) == 0 Alors Ajouter xi à L ; Fin Si Fin Pour
+Tant que L n’est pas vide Faire Enlever le premier sommet y de L ; listopo(y) = V ;
+
+
+50 Éléments de théorie des graphes
+V = V +1;
+Pour Tout u ∈ Ay Faire entrd(u) = entrd(u) − 1 ; Si entrd(u) == 0 Alors Ajouter u à L ; Fin Si Fin Pour Fin Tant Si V == n + 1 Alors s = vrai ; Sinon
+s = faux ; fin Si Fin
+Théorème 2.3.3. L’algorithme Tri topologique détermine si un di
+graphe simple Γ = (V ; −E→) est sans circuit ou non. Il construit un tri
+topologique sur les sommets en O(|V | + |−E→|), si le graphe sous-jacent à Γ est connexe.
+Démonstration. Il est clair que cet algorithme teste si le digraphe Γ est sans circuit tout en donnant la liste des sommets triés « de manière topologique ». La première boucle d’initialisation Pour se fait en O(|V |) et la deu
+xième se fait en O(|−E→|) car le digraphe est représenté par une liste d’arcs qui est parcourue exactement une fois. La construction de L se fait égale
+ment en O(|V |). Par conséquent ces initialisations se font en O(|V |+|−E→|). Dans la boucle Tant que tous les arcs seront parcourus au plus une fois.
+Donc la complexité de cet algorithme est en O(|V | + |−E→|).
+2.4 Graphes eulériens et graphes hamiltoniens
+2.4.1 Graphes eulériens
+Quand on étudie la théorie des graphes, il y a au moins une histoire à laquelle on ne peut pas échapper. Ce livre ne coupera pas à la tradition. Si un jour vous vous promenez à Kaliningrad (anciennement Königsberg en Prusse), peut-être remarquerez vous que cette ville possède sept ponts. Peut-être également vous poserez-vous la question suivante : est-ce que je peux partir d’un quartier de la ville, traverser exactement
+
+
+2. Quelques graphes remarquables 51
+une fois tous les ponts et revenir à mon point de départ ? Si c’est le cas sachez qu’un célèbre mathématicien du xviiie siècle s’est déjà posé cette question : il s’agit de Leonhard Euler (1707–1783). Vous trouverez la réponse ci-dessous. Soit Γ = (V ; E, N ) un graphe connexe d’ordre fini ; un cycle de Γ est dit eulérien s’il passe par toutes les arêtes de Γ exactement une fois ; le graphe Γ est eulérien s’il contient un cycle eulérien ; par exemple, la figure 2.6 montre un graphe eulérien.
+Figure 2.6 – Un graphe eulérien.
+Une chaîne est eulérienne si elle est simple et si elle contient toutes les arêtes de Γ ; le graphe est semi-eulérien s’il contient une chaîne eulérienne. Il existe une caractérisation très simple des graphes eulériens et semieulériens qui repose sur des propriétés de parité des degrés des sommets. Rappelons que (voir § 1.1.3) le graphe sous-jacent à une chaîne C du graphe Γ désigne le sous-graphe dont les sommets et les arêtes sont ceux et celles apparaissant dans C.
+Lemme 2.4.1. Soient Γ = (V ; E, N ) un graphe d’ordre fini et C une chaîne simple de Γ. Alors dans le graphe sous-jacent à C, tous les sommets sont de degré pair, sauf les extrémités de C (quand elles sont distinctes) qui sont de degré impair.
+Démonstration. Ce résultat semble intuitivement évident, mais la preuve est un peu plus compliquée. On raisonne par récurrence sur le nombre
+
+
+52 Éléments de théorie des graphes
+n d’arêtes de la chaîne. Pour n = 1, on a soit une boucle : 1 sommet de degré 2, soit une arête simple : 2 sommets de degré 1. Supposons le résultat vrai jusqu’à n et soit C une chaîne à n + 1 arêtes :
+C = (x0, a0, x1, . . . , xn, an, xn+1) ;
+on enlève an et xn+1 de C, induisant une chaîne C′ à n arêtes. Nous distinguons deux cas et utilisons l’hypothèse de récurrence : i) si xn = x0 alors dC′ (x0), dC′ (xn) sont impairs et les dC′ (xi), 1 ≤ i ≤
+n − 1 sont pairs (dC′ désigne le degré dans le sous-graphe C′) : – si xn+1 ∈ {x0, . . . , xn}, alors dC (xn) devient pair, dC (xn+1) vaut 1 et dC (xi) = dC′ (xi) pour les autres sommets, – si xn+1 = xj pour un j = 0, alors dC (xj) devient impair, dC (xn) devient pair, les autres degrés sont inchangés, – si xn+1 = x0, tous les sommets de la chaîne C sont de degré pair ;
+ii) si xn = x0 alors tous les sommets de la chaîne C′ sont de degré pair : – si xn+1 ∈ {x0, . . . , xn} alors dC (x0) devient impair, dC (xn+1) = 1, les autres degrés ne changent pas, – si xn+1 = xj, pour un certain 0 ≤ j ≤ n, alors dC (xn+1) = dC′ (xi) + 1 est impair, dC (xn) = dC′ (xn) + 1 est pair, les autres degrés sont inchangés. Dans tous les cas on constate que la condition de parité pour les degrés des sommets de C est satisfaite.
+Théorème 2.4.2 (Euler, 1736). Un graphe connexe d’ordre fini Γ = (V ; E, N ) est eulérien si et seulement si tous ses sommets sont de degré pair.
+Démonstration. Nécessité : si le graphe est eulérien, les degrés sont pairs d’après le lemme 2.4.1. Suffisance : supposons que les degrés des sommets du graphe soient pairs. On considère l’ensemble S des chaînes simples
+C = (x0, a0, x1, a1, x2, . . . , xk−1, ak−1, xk)
+ordonnées de façon naturelle : C ≤ C′ si C est un sous-graphe de C′ ; comme S est fini, il possède au moins un élément maximal (voir § 1.10) C′′ :
+C′′ = (x0, a0, x1, a1, x2, . . . , xn, an, xn+1).
+Le degré de xn+1 est pair par hypothèse et non nul (an est incidente à xn+1) donc il existe une autre arête a incidente à xn+1 ; on a nécessairement a ∈ {a0, a1, . . . , an−1} car sinon, on contredirait la maximalité de
+
+
+2. Quelques graphes remarquables 53
+C′′ en ajoutant a à la chaîne ; pour cette même raison toutes les arêtes incidentes à xn+1 sont dans {a0, a1, . . . , an}, donc le degré de xn+1 dans
+le graphe sous-jacent à C′′ est le même que dans le graphe Γ et ce degré est pair. Par conséquent, d’après le lemme 2.4.1, on a : xn+1 = x0 et
+C′′ est un cycle. Ce cycle est eulérien, car sinon il existerait une autre arête a ∈ {a0, . . . , an} incidente à un sommet du cycle (car le graphe est connexe) : a = ([y, xi], k). Mais alors la chaîne
+(y, a, xi, ai, . . . , xn, an, xn+1, x0, a0, x1, a1, . . . , xi−1, ai−1, xi)
+est une chaîne simple et elle est plus grande que C′′, contradiction.
+Ainsi le graphe biparti Kn,n est eulérien si et seulement si n est pair.
+Corollaire 2.4.3. Le graphe Γ est semi-eulérien si et seulement s’il n’a aucun sommet de degré impair ou bien deux sommets de degré impair.
+Démonstration. Nécessité : si le graphe est semi-eulérien, le lemme 2.4.1 donne le résultat. Suffisance : s’il a zéro sommet de degré impair, d’après le théorème 2.4.2 le graphe est eulérien. S’il a 2 sommets x et y de degré impair, on rajoute une arête a entre x et y auquel cas le degré de x et celui de y deviennent pairs. Le graphe Γ′ obtenu a tous ses sommets de degré pair, donc est eulérien d’après le théorème 2.4.2 ; il existe un cycle eulérien de Γ′ que l’on peut écrire :
+(x, a0, x1, . . . , xn−1, an−1, y, a, x)
+Par conséquent, C passe exactement une et une seule fois par toutes les arêtes du graphe Γ′. Maintenant on retire a de ce cycle, on obtient une chaîne simple
+(x, a0, x1, . . . , xn−1, an−1, y)
+qui passe exactement une et une seule fois par toutes les arêtes de Γ. Cette chaîne entre x et y est donc eulérienne dans Γ qui est donc semieulérien.
+Nous aurons besoin du lemme suivant.
+Lemme 2.4.4. Tout cycle C dans un graphe Γ = (V ; E, N ) d’ordre fini peut se décomposer en cycles élémentaires C1, . . . , Ck arête-disjoints :
+E(C) = ⊔k
+i=1 E(Ci).
+
+
+54 Éléments de théorie des graphes
+Démonstration. On procède par récurrence sur la longueur du cycle. Si le cycle est une boucle, c’est un cycle élémentaire. Supposons que tout cycle de longueur inférieure ou égale à n − 1 se décompose en cycles élémentaires arête-disjoints. Soit C un cycle de longueur n. Si aucun sommet de C n’est répété, C est élémentaire et le résultat est prouvé. Sinon, considérons xi le premier sommet de C traversé au moins deux fois par C. On pose j = min{k > i : xk = xi}. Les deux cycles C1 et C2 inscrits dans C allant pour le premier de xi à xj (deuxième occurrence de xi comme sommet de C) et de xj à xi pour le second sont de longueur strictement inférieure à n. L’hypothèse de récurrence permet de décomposer ces deux cycles en cycles élémentaires arête-disjoints. C1 et C2 sont sans arête commune, car C est simple. La réunion des décompositions de C1 et C2 en cycles élémentaires arête-disjoints forme donc une décomposition de C en cycles élémentaires arête-disjoints.
+Dans un cycle eulérien il peut y avoir des multi-arêtes. Cependant on montre le corollaire suivant.
+Corollaire 2.4.5. Un graphe Γ = (V ; E, N ) connexe d’ordre fini est eulérien si et seulement si l’ensemble de ses arêtes peut être partitionné en cycles élémentaires arête-disjoints.
+Démonstration. Si le graphe est eulérien, il a un cycle élémentaire C : E(C) = E ; par le lemme 2.4.4, on a le résultat. Réciproquement, soit C un cycle élémentaire de la partition ; si C contient toutes les arêtes, c’est fini. Sinon il existe un autre cycle C′ ayant un sommet x en commun avec C (le graphe étant connexe). Mais alors, C et C′ étant arête-disjoints, la concaténation de C et C′ forme un cycle C′′. Si C′′ contient toutes les arêtes, c’est fini, sinon on recommence autant de fois que nécessaire jusqu’à épuisement des cycles élémentaires.
+Un digraphe eulérien est un digraphe contenant un circuit eulérien, c’est-à-dire un circuit passant par tous les arcs exactement une fois. Un digraphe semi-eulérien est un digraphe contenant un chemin semieulérien, c’est-à-dire un chemin passant par tous les arcs exactement une
+fois. Un digraphe Γ = (V ; −E→) est pseudo-symétrique si pour tout sommet x ∈ V on a :
+d−(x) = d+(x).
+On établit le théorème suivant :
+
+
+2. Quelques graphes remarquables 55
+Théorème 2.4.6. Soit Γ = (V ; −E→) un digraphe dont le graphe sousjacent est connexe. Alors Γ est eulérien si et seulement s’il est pseudosymétrique.
+Démonstration. Elle est laissée au lecteur à titre d’exercice : il faut aménager le lemme 2.4.1 en précisant les degrés entrants et sortants dans un chemin ; ensuite la preuve est semblable à celle du théorème 2.4.2.
+2.4.2 Graphes hamiltoniens
+Nous avons étudié les graphes possédant un cycle eulérien. Le problème « dual » est de savoir si un graphe d’ordre fini contient un cycle élémentaire passant par tous les sommets (et pas forcément par toutes les arêtes). Un tel cycle est appelé cycle hamiltonien. Sir William Hamilton a proposé en 1859 le jeu suivant. On considère un dodécaèdre. Les sommets de celui-ci sont des villes du monde. L’objectif du jeu, appelé Autour du monde, est de partir d’une ville, de visiter exactement une fois toutes les autres villes en suivant les arêtes du dodécaèdre et de revenir à la ville de départ. Cela revient à trouver un cycle hamiltonien dans un graphe. On dira donc qu’un graphe est hamiltonien s’il possède un cycle hamiltonien ; par exemple Kn et Cn.
+De même, un graphe (d’ordre fini) est semi-hamiltonien s’il existe une chaîne élémentaire passant par tous les sommets du graphe. Cette chaîne est appelée chaîne hamiltonienne. Il est étrange de constater que trouver un cycle hamiltonien ou une chaîne hamiltonienne (problèmes très proches des problèmes eulériens) est beaucoup plus difficile ! Actuellement il n’existe pas de caractérisation simple des graphes hamiltoniens. En fait ce problème appartient à la classe N PC. Le problème de la marche d’un cavalier sur un échiquier, proposé par Euler, consiste à trouver un cycle hamiltonien sur le graphe Γ = (V ; E) où V est l’ensemble des 8 × 8 = 64 cases de l’échiquier et où les voisins d’un sommet v ∈ V sont les 8 cases de la « rosace » du cavalier (réduite lorsque v est proche du bord de l’échiquier) ; Euler a lui-même indiqué une stratégie pour obtenir un tel cycle : on part d’un coin de l’échiquier et on parcourt avec le cavalier le plus possible de cases en restant près du bord puis on va petit à petit vers le centre ; lorsqu’on ne peut plus jouer, il reste quelques cases à atteindre ; Euler donne un procédé (parcours inversé) pour modifier le trajet et atteindre une case manquante et ainsi par tâtonnement on finit par obtenir un cycle hamiltonien.
+
+
+56 Éléments de théorie des graphes
+Il est naturel de penser que plus le nombre d’arêtes est grand par rapport au nombre de sommets, plus le graphe a de chances d’être hamiltonien : c’est un peu le sens des résultats suivants. Soit Γ = (V ; E, N ) un graphe d’ordre fini ; on appellera clôture de Γ, notée Cl(Γ), le graphe ayant les même sommets que Γ : V (Cl(Γ)) = V (Γ) ; les arêtes sont ainsi définies : posons n = |V | ; on souhaite que Cl(Γ) vérifie la propriété suivante :
+si x, y ∈ V (Cl(Γ)) = V (Γ) ne sont pas adjacents, alors d(x) + d(y) < n ;
+pour cela on considère toutes les paires {x, y} de sommets non adjacents pour lesquels d(x)+ d(y) ≥ n et on ajoute une arête a = ({x, y}, 1). Pour distinguer les arêtes ajoutées on suppose que 1 ∈ N .
+Proposition 2.4.7. Soit Γ = (V ; E, N ) un graphe connexe sans boucle avec |V | = n ≥ 3. Le graphe Γ est hamiltonien si et seulement si Cl(Γ) est hamiltonien.
+Démonstration. Il est clair que si Γ est hamiltonien alors Cl(Γ) est également hamiltonien (on a rajouté des arêtes, pas de sommet). Supposons maintenant que Cl(Γ) soit hamiltonien : Cl(Γ) est obtenu en ajoutant m′ arêtes simples, que l’on peut noter ek = ({xk, yk}, 1), 1 ≤ k ≤ m′, fournissant des graphes successifs
+Γk = (V ; Ek, N ∪ {1}), Ek = Ek−1 ∪ {ek}, 1 ≤ k ≤ m′,
+E = E0 ⊂ E1 · · · ⊂ Ek ⊂ · · · ⊂ Em′ et Γm′ = Cl(Γ).
+Soit C un cycle hamiltonien de Cl(Γ) ; il emprunte l’arête em′, on peut donc l’écrire
+C = (t0, a0, t1, a1, . . . , an−2, tn−1, an−1, tn) avec tn = t0,
+où V = {t0, t1, . . . , tn−1}, xm′ = t0, ym′ = tn−1, an−1 = em′ = {xm′ , ym′}. Par construction, dans Γm′−1, les sommets xm′ et ym′ ne sont pas adjacents, donc d(xm′ ) + d(ym′ ) ≥ n. Considérons les ensembles d’indices
+I = {i : ti adjacent à xm′ dans Γm′−1},
+J = {j : tj−1 adjacent à ym′ dans Γm′−1}.
+Comme le graphe est sans boucle, on a 0 ∈ I. Comme xm′ n’est pas adjacent à ym′ = tn−1 dans Γm′−1, on a I ⊂ {1, . . . , n − 2} et J ⊂ {2, . . . , n − 1} (se rappeler que n ≥ 3), de sorte que l’on a
+
+
+2. Quelques graphes remarquables 57
+– I ∪ J ⊂ {1, . . . , n − 1}, donc |I ∪ J| ≤ n − 1, – |I| + |J | = d(xm′ ) + d(ym′ ) ≥ n.
+Il en résulte que I ∩ J = ∅. Soit l ∈ I ∩ J ; tl−1 est adjacent à ym′, tl est adjacent à xm′ (dans Γm−1) et {tl−1, tl} est une arête de C. Alors le cycle
+C′ = (t0, a0, t1, . . . , al−2, tl−1, {tl−1, ym′ }, ym′ , an−2, tn−2, . . .
+. . . , al+1, tl+1, al, tl, {tl, xm′ })
+avec xm′ = t0, est hamiltonien dans Γm′−1 (voir figure 2.7). On applique la construction précédente à partir de Γm′−1 ; on obtient de manière analogue que Γm′−2 contient un cycle hamiltonien. De proche en proche, on obtient finalement un cycle hamiltonien dans Γ.
+t0 = xm′
+t1
+t2 t3 t4 tl−1 tl
+tl+1
+tn−2
+tn−1 = ym′
+Figure 2.7 – Représentation du cycle obtenu dans la preuve de la proposition 2.4.7.
+On a a0 = {t0, t1}, . . . , al−1 = {tl−1, tl}, . . . , an−2 = {tn−2, tn−1}.
+On en déduit le théorème suivant, démontré par Ø. Ore.
+Théorème 2.4.8 (Ore, 1961). Soit Γ = (V ; E) un graphe connexe avec |V | = n ≥ 3. Si pour toute paire de sommets non adjacents, on a d(x) + d(y) ≥ n, alors le graphe est hamiltonien.
+Démonstration. D’après les hypothèses, la clôture Cl(Γ) de Γ est un graphe complet, donc elle est hamiltonienne. En appliquant la proposition 2.4.7, on obtient le résultat.
+Ce théorème généralise le résultat antérieur, dû à G.A. Dirac.
+Corollaire 2.4.9 (Dirac, 1952). Soit Γ = (V ; E) un graphe connexe avec |V | = n ≥ 3. Si d(x) ≥ n/2 pour tout sommet x, alors le graphe est hamiltonien.
+
+
+58 Éléments de théorie des graphes
+Démonstration. En effet si d(x) ≥ n/2 pour tout x ∈ V , alors pour toute paire de sommets (adjacents ou non), on a d(x) + d(y) ≥ n ; d’après le théorème 2.4.8, cela implique que le graphe est hamiltonien.
+Il est malheureusement en général très difficile de décider si la clôture d’un graphe est hamiltonienne ! Il existe également une notion de digraphe hamiltonien. Un digraphe hamiltonien est un digraphe contenant un circuit hamiltonien, c’està-dire un circuit qui passe exactement une fois par chaque sommet. Un digraphe semi-hamiltonien est un digraphe contenant un chemin hamiltonien, c’est-à-dire un chemin qui passe exactement une fois par chaque sommet. Il existe des conditions suffisantes sous lesquelles un digraphe est hamiltonien (respectivement semi-hamiltonien). Voici un résultat dans le même esprit que celui de Dirac ci-dessus.
+Théorème 2.4.10 (Woodall, 1972). Soit Γ = (V ; −E→, N ) un digraphe d’ordre fini dont le graphe sous-jacent est connexe avec |V | = n. Si d−(x) ≥ n/2 et d+(x) ≥ n/2 pour tout sommet x ∈ V , alors le digraphe est hamiltonien.
+La preuve de ce résultat est admise ; elle est longue 3 et difficile. On notera que le théorème 2.4.10 contient le résultat de Dirac.
+Exercice 2.3. Montrer qu’un graphe Γ = (V ; E) ayant n sommets et m arêtes où
+m≥ 1
+2 (n − 1)(n − 2) + 2
+est hamiltonien. Indication : on supposera que le graphe n’est pas hamiltonien et on appliquera le théorème 2.4.8 ; on rappelle que dans un graphe simple le nombre d’arêtes est au plus n(n − 1)/2.
+Soit Γ = (V ; E) un graphe simple. Le line-graphe ou graphe représentatif de Γ est le graphe simple L(Γ) = (V ′; E′) défini ainsi : – V ′ = E : les sommets de L(Γ) sont les arêtes de Γ ; – si a, b ∈ V ′, alors {a, b} ∈ E′ si et seulement si les arêtes a et b sont incidentes.
+Exercice 2.4. Montrer que si un graphe simple Γ = (V ; E) est eulérien, alors son line-graphe est eulérien et hamiltonien.
+3. Voir D.R. Woodall. Sufficient conditions for circuits in graphs, Proc. London Math. Soc. 24 (1972), 739–755.
+
+
+2. Quelques graphes remarquables 59
+Comme application des graphes hamiltoniens, citons le célèbre problème du voyageur de commerce.
+Un voyageur de commerce doit visiter plusieurs villes et revenir à sa ville de départ en un nombre minimum de kilomètres. Ce problème peut se formuler en terme de réseau. En effet, soit Γ = (V ; E) un graphe dont les sommets sont les villes à visiter, chaque arête étant une route entre deux villes. On définit une valuation ω sur les arêtes de Γ qui donne la distance entre deux villes. Le problème revient à trouver un cycle hamiltonien de plus petit poids possible.
+Petit lexique français – anglais
+sommet vertex arête edge maille girth boucle loop graphe induit induced subgraph graphe partiel spanning subgraph arbre tree graphe orienté directed graph line-graphe line-graph racine root arc arc chemin path
+♣♣
+
+
+Chapitre 3
+(Di)graphes et structures de
+données
+L’algorithmique a pour objet la conception, l’évaluation et l’optimisation de méthodes de calcul permettant de trouver une solution à un problème donné. L’essentiel des traitements informatiques consiste à manipuler des données. Il est donc indispensable de les organiser de manière efficace. Les structures de données provenant des (di)graphes permettent le développement d’algorithmes simples et élégants.
+Les listes et les piles sont des structures dynamiques unidimensionnelles qui sont vues comme des graphes particuliers : chaque élément a un seul fils (éventuellement vide). En généralisant ces structures dynamiques au cas multidimensionnel, on obtient des arbres et des arborescences qui sont très pratiques pour structurer les données :
+– un livre est élaboré en chapitres qui sont eux-mêmes décomposés en sections, elles-mêmes structurées en paragraphes ; – une expression arithmétique peut être vue comme un arbre : les feuilles sont les variables et les autres sommets sont les opérateurs ; – l’organigramme d’une entreprise est généralement arborescente ; – l’organisation des fichiers Unix ou Linux présente une structure d’arbre...
+La plupart des définitions et des algorithmes reposant sur une représentation arborescente s’écrivent efficacement et naturellement de manière récursive.
+Ce chapitre est consacré aux structures de données arborées et arborescentes. On supposera les graphes simples et finis.
+A, Bretto et al., Éléments de théorie des graphes © Springer-Verlag France 2012
+
+
+62 Éléments de théorie des graphes
+3.1 Arbres et arborescences : le retour
+Les structures d’arbres et d’arborescences permettent de réaliser des opérations dynamiques, comme la recherche de prédécesseur, de successeur, d’un minimum ou d’un maximum. Elles permettent également de réaliser la suppression et l’insertion en un temps proportionnel à la hauteur. Ce sont donc des représentations de données efficaces en informatique. Dans ce chapitre, les arbres et les arborescences sont supposés ordonnés (voir chapitre 2) et on utilisera indifféremment les termes « arbre » et « arborescence », sauf si on a besoin de distinguer les deux structures ; on confondra un sommet et sa valeur (sa valuation) et on supposera aussi que tous les paramètres sont passés par référence.
+La plupart des langages de programmation, comme C, C++ ou Java, sont des langages typés : cela signifie que le type de chacune des variables utilisées est déclaré au préalable. Par exemple entier : n ; réel : m ; caractère : a ; chaîne de caractères : u ; tableau (respectivement chaînes, listes) : T [max]. Les noms des variables déclarées permettent de stocker leurs valeurs dans différents emplacements de la mémoire de la machine en fonction de leur type. Une structure permet de définir de nouveaux types de variables en regroupant sous un même nom plusieurs données, appelées champs, de types éventuellement distincts. La déclaration se fait de la manière suivante :
+structure nom de la structure { type de champ1 : champ1 type de champ2 : champ2 type de champ3 : champ3
+.... . .
+}
+Exemple 3.1.1. On définit la structure « étudiant » comportant quatre champs différents :
+structure étudiant { chaîne de caractères : nom chaîne de caractères : prénom entier : âge
+chaîne de caractères : numéro-carte-étudiant }
+
+
+3. (Di)graphes et structures de données 63
+Voici comment déclarer une variable de type étudiant :
+étudiant : E
+et voici comment initialiser les champs :
+E.nom = “martin” E.prénom = “marcel” E.âge = 20 E.numéro-carte-étudiant = 1234
+et comment afficher les contenus des différents champs de la variable E :
+afficher E.prénom, E.nom, E.âge, E.numéro-carte-étudiant.
+Donnons maintenant une nouvelle définition des arborescences : une arborescence est définie récursivement de la façon suivante : – soit elle est vide ; – soit elle est composée d’un sommet nommé racine et d’une suite (éventuellement vide) d’arborescences non vides. L’orientation est donnée en partant de la racine (voir § 2.2.2) ; cette orientation peut être omise et par suite un arbre est simplement une arborescence non orientée. On peut vérifier que cette définition est compatible avec celle donnée au chapitre 2.
+3.1.1 Représentation d’un arbre ou d’une arborescence sous forme fils-frère
+Chaque sommet a un lien vers son premier fils et un lien vers son frère situé immédiatement après lui. On remarque que le sommet racine peut avoir un frère (leur père est le vide !) et on peut donc de cette manière représenter une forêt (c’est-à-dire un ensemble d’arbres).
+structure sommet { entier ou réel ou chaîne de caractères : valeur sommet : fils sommet : frère }
+structure arborescence (ou arbre) { sommet : racine }
+Observons qu’un arbre ou une arborescence est caractérisé (récursivement) par sa racine. Lorsqu’on appliquera la commande Retourner
+
+
+64 Éléments de théorie des graphes
+à un arbre, le résultat obtenu sera l’arbre fabriqué à partir de sa racine. Rappelons qu’une feuille est un sommet de degré égal à 1. La hauteur d’un sommet x est la longueur du plus grand chemin (ou chaîne) partant de x et allant à une feuille ; la hauteur d’une arborescence ou d’un arbre est la hauteur de sa racine ; la profondeur d’un sommet x est la longueur de l’unique chemin de la racine à x.
+Hauteur d’un arbre
+Pour illustrer la notion d’arbre, voici une fonction qui calcule la hauteur d’une arborescence (ou d’un arbre) puis qui affiche la valeur des sommets d’un arbre :
+entier : hauteurArborescence(arborescence : A) Début Retourner hauteurSommet(A.racine) ; Fin
+entier : hauteurSommet(sommet : cour) entier : hauteurfils, hauteurfrère ; Début
+Si cour == null Alors Retourner −1 ; Sinon
+hauteurfils = hauteurSommet(cour.fils) ; hauteurfrère = hauteurSommet(cour.frère) ; Retourner max(1 + hauteurfils , hauteurfrère) ; FinSi Fin
+affichageArborescence(arborescence : A) Début affichageSommet(A.racine) ; Fin
+
+
+3. (Di)graphes et structures de données 65
+affichageSommet(sommet : cour) Début
+Si cour <> null Alors afficher cour.valeur ;
+affichageSommet(cour.fils) ; affichageSommet(cour.frère) ; FinSi Fin
+Cette procédure suit un ordre préfixé : le traitement de chaque sommet s’effectue à la première visite. On suit un ordre postfixé lorsque le traitement de chaque sommet a lieu lors de la dernière visite.
+Exercice 3.1. Écrire une procédure d’affichage de sommets affichageauxiliaire qui suive l’ordre postfixé.
+Feuilles d’un arbre
+On peut compter les feuilles d’un arbre de la manière suivante :
+entier : compterFeuillesArbre(Arbre : A) Début Retourner compterFeuilles(A.racine) ; Fin
+On s’appuie sur la fonction auxiliaire suivante qui détermine si un sommet est une feuille :
+booléen : estFeuille(sommet : n) Début
+Si n.fils == null et n.frere == null Alors Retourner vrai ; Sinon Retourner faux ; FinSi Fin
+et sur la fonction suivante qui compte les feuilles situées sous un sommet :
+
+
+66 Éléments de théorie des graphes
+entier : compterFeuilles(sommet : cour) Début
+Si cour == null Alors Retourner 0 ; Sinon Si estFeuille(cour) == vrai Alors Retourner 1 ; Sinon Retourner compterFeuilles(cour.fils) + compterFeuilles(cour.frère) ; FinSi FinSi Fin
+Copie d’un arbre
+La procédure suivante est très utile puisqu’elle permet la copie d’une arborescence ou d’un arbre :
+arbre : copieArbre(arbre : A) arbre : temporaire ; Début
+temporaire = nouvelarbre() ; (création d’un nouvel arbre) temporaire.racine = copieSommet(A.racine) ; Retourner temporaire ; Fin
+sommet : copieSommet(sommet : cour) sommet : n ; Début
+Si cour == null Alors Retourner null ; Sinon
+n = nouveausommet() ; (création d’un nouveau sommet ) n.valeur = cour.valeur ; n.fils = copieSommet(cour.fils) ; n.frère = copieSommet(cour.frère) ; Retourner n ; FinSi Fin
+
+
+3. (Di)graphes et structures de données 67
+3.1.2 Arbres et arborescences binaires
+Les arbres ou arborescences binaires sont des structures particulièrement intéressantes pour représenter un problème de décision ou pour stocker des données de manière efficace. Un arbre binaire est – soit vide ; – soit composé d’une racine et de deux sous-arbres : le sous-arbre gauche et le sous-arbre droit. Dans la pratique on utilise la structure suivante :
+structure sommet { entier ou réel ou chaîne de caractères : valeur sommet : gauche (fils gauche) sommet : droit (fils droit) }
+structure arborescencebinaire (ou arbrebinaire) { sommet : racine }
+Un niveau dans une arborescence binaire est rempli lorsque tous les sommets de ce niveau ont exactement deux fils. Deux arborescences binaires A1 et A2 sont isomorphes lorsque : – soit A1 et A2 sont vides ; – soit le sous-arbre gauche de A1 est isomorphe au sous-arbre gauche de A2 et le sous-arbre droit de A1 est isomorphe au sous-arbre droit de A2.
+−−
+××
+ab a b
+cc
+Figure 3.1 – Deux arbres binaires non isomorphes. Ces deux arbres sont cependant isomorphes selon la définition introduite au § 1.9.
+Cette définition permet, par exemple, de faire la différence entre les deux expressions a × b − c et c − a × b qui sont représentées en figure 3.1 par deux arbres binaires non isomorphes au sens de notre définition.
+
+
+68 Éléments de théorie des graphes
+Isomorphisme
+booléen : iso(sommet : n1, sommet : n2) Début
+Si n1 == null ou n2 == null Alors
+Retourner n1 == n2 ; (retourne la valeur de la comparaison) Sinon
+Si n1 <> null et n2 <> null Alors Retourner iso(n1.gauche,n2.gauche) et iso(n1.droit,n2.droit) ; Sinon Retourner faux ; FinSi FinSi Fin
+booléen : iso(arborescencebinaire : A1, arborescencebinaire : A2) Début
+Retourner iso(A1.racine,A2.racine) ; Fin
+Exercice 3.2. Traduire les procédures vues pour les arborescences générales dans le cas des arborescences binaires.
+3.1.3 Arbres et arborescences binaires de recherche
+Les arbres binaires sont des structures efficaces pour représenter les données. Néanmoins, pour un arbre binaire quelconque, certaines opérations comme la suppression ou l’insertion d’un élément ne sont pas faciles à effectuer. On introduit, pour améliorer ces opérations, des arbres binaires particuliers. Pour ce faire on va ajouter un ordre sur les sommets. Un arbre binaire de recherche est un arbre binaire dont les valeurs des sommets sont ordonnées par un ordre partiel vérifiant la propriété suivante : pour chaque sommet x : – tous les sommets du sous-arbre gauche de x ont une valeur strictement inférieure à la valuation de x ; – tous les sommets du sous-arbre droit de x ont une valeur strictement supérieure à la valuation de x. Trois opérations sont particulièrement pertinentes sur les arbres binaires de recherche : la recherche d’un élément, l’insertion d’un élément et la suppression d’un élément. Un élément désigne ici la valeur que peut
+
+
+3. (Di)graphes et structures de données 69
+34
+17 37
+10 19 35 41
+12 36 44
+11
+Figure 3.2 – Exemple d’arbre binaire de recherche.
+prendre un sommet à savoir généralement un entier, un réel ou encore une chaîne de caractères.
+Recherche d’un élément
+sommet : rechercheElémentArbre(arbre : A, élément : x) (retourne l’adresse du sommet contenant l’élément x ) Début Retourner rechercheElémentSommet(A.racine,x) ; Fin
+sommet : rechercheElémentSommet(sommet : cour, élément : x) Début
+Si cour == null ou cour.valeur == x Alors Retourner cour ; FinSi
+Si cour.valeur > x Alors
+Retourner rechercheElémentSommet(cour.gauche,x) ; Sinon Retourner rechercheElémentSommet(cour.droit,x) ; FinSi Fin
+
+
+70 Éléments de théorie des graphes
+Insertion d’un élément
+Les fonctions qui suivent ont pour objet l’insertion d’une nouvelle feuille x dans un arbre binaire de recherche.
+arbre : insérer(arbre : A, élément : x) Début insérerSommet(A.racine,x) ; Retourner A ;
+(retourne le nouvel arbre après insertion de x ) Fin
+insérerSommet(sommet : cour, élément : x) Début
+Si cour.valeur > x Alors Si cour.gauche == null Alors cour.gauche = nouveausommet() ; (création d’un nouveau sommet ) cour.gauche.valeur = x ; cour.gauche.gauche = null ; cour.gauche.droit = null ; Sinon
+insérerSommet(cour.gauche,x) ; FinSi Sinon
+Si cour.droit == null Alors cour.droit = nouveausommet() ; cour.droit.valeur = x ; cour.droit.gauche = null ; cour.droit.droit = null ; Sinon
+insérerSommet(cour.droit,x) ; FinSi FinSi Fin
+On peut également insérer un élément x à la racine d’un arbre binaire de recherche A de racine r.
+Méthode
+Pour cela on coupe l’arbre A en deux sous-arbres A1 et A2 et on construit
+un nouvel arbre A′ ou x est la racine de A′, A1 est le sous-arbre gauche
+
+
+3. (Di)graphes et structures de données 71
+de A′ et A2 est le sous-arbre droit de A′. La coupure se fait de la manière suivante :
+1. Si x est strictement inférieur à la valeur de la racine de A, alors on coupe le sous-arbre gauche de A en deux sous-arbres A11 et A12 de telle sorte que toutes les valeurs des sommets de A11 soient inférieures ou égales à x et toutes les valeurs des sommets de A12 soient supérieures à x.
+– On prend comme sous-arbre gauche de A′, A1 = A11. C’est donc la coupure gauche du fils gauche de A. – On prend comme sous-arbre droit de A′ l’arbre ayant comme racine r, comme sous-arbre gauche A12 et comme sous-arbre droit le sous-arbre droit de A.
+2. Si x est supérieur ou égal à la valeur de la racine de A, alors on coupe le sous-arbre droit de A en deux sous-arbres A21 et A22 de telle sorte que toutes les valeurs des sommets de A21 soient inférieures ou égales à x et toutes les valeurs des sommets de A22 soient supérieures à x. – On prend comme sous-arbre gauche de A′ l’arbre ayant comme racine r, comme sous-arbre gauche le sous-arbre gauche de A et comme sous-arbre droit le sous-arbre A21.
+– On prend comme sous-arbre droit de A′, A2 = A22. C’est donc la coupure droite du fils droit de A.
+Exercice 3.3. Montrer que la méthode ci-dessus génère une arborescence binaire de recherche.
+Algorithme
+coupure(sommet : a, sommet : a1, sommet : a2, élément : x) Début
+Si a == null Alors a1 = null ; a2 = null ; Sinon
+Si x < a.valeur Alors a2 = a ; coupure(a.gauche,a1,a2.gauche,x) ; Sinon
+a1 = a ; coupure(a.droit,a1.droit,a2,x) ; FinSi FinSi Fin
+
+
+72 Éléments de théorie des graphes
+Exemple 3.1.2. La figure 3.3 montre un exemple de coupure.
+A11
+A11
+A12 A12
+A2 A2
+16
+34
+34
+17
+17 35
+35 10
+10 19
+19 38 38
+13
+13 37
+37
+39
+39
+Figure 3.3 – Exemple de coupure : insertion de la valeur 16 à la racine de l’arbre résultat. Comme la valeur 16 est inférieure à la valeur de la racine (34) de l’arbre initial, on coupe le sous-arbre gauche de l’arbre initial en deux sous-arbres : le sous-arbre dont les valeurs sont inférieures ou égales à 16 et le sous-arbre dont les valeurs sont supérieures à 16. On insère 16 à la racine d’un nouvel arbre qui a comme sous-arbre gauche et sous-arbre droit les sous-arbres obtenus selon la méthode décrite plus haut.
+La suppression d’un élément est une opération tout aussi importante. Supposons que le sommet n de valeur x existe, alors : – soit n est une feuille et sa suppression ne nécessite aucune réorganisation ; – soit n n’a qu’un seul fils, alors on remplace n par ce fils ; – soit n a deux fils, alors supprimer le sommet t de valeur maximum du sous-arbre gauche de racine n, le mettre à la place de n et remplacer le sommet t par la racine de son sous-arbre gauche.
+Exercice 3.4. Montrer que la méthode ci-dessus génère une arborescence binaire de recherche.
+Pour appliquer cette méthode, on a besoin de trouver et de supprimer le sommet de valeur maximum dans un arbre binaire de recherche (on suppose que la valeur à supprimer est dans l’arbre).
+Suppression
+La version qui suit est itérative ; elle est simple à mettre en œuvre.
+
+
+3. (Di)graphes et structures de données 73
+élément : supprimerMaxArbre(arbre : A) (renvoie le max de l’arbre A et le supprime)
+sommet : tmp, prec ; élément : max ; Début Si estFeuille(A.racine) Alors max = A.racine.valeur ; A.racine = null ; Sinon
+Si A.racine.droit == null Alors max = A.racine.valeur ; A.racine = A.racine.gauche ; Sinon
+tmp = A.racine ; Tant que tmp.droit <> null Faire prec = tmp ; tmp = tmp.droit ; FinTant
+max = tmp.valeur ; prec.droit = tmp.gauche ; FinSi FinSi Retourner max ; Fin
+La fonction suivante supprime un élément v dans l’arbre A.
+supprimerSommet(arbre : A, élément : v) sommet : cour ; élément : max ; arbre : tmp ; Début
+Si A.racine <> null Alors cour = A.racine ; Tant que cour.valeur <> v faire Si v < cour.valeur Alors cour = cour.gauche ; Sinon
+cour = cour.droit ; FinSi FinTant
+
+
+74 Éléments de théorie des graphes
+Si estFeuille(cour) Alors cour = null ; Sinon
+Si cour.gauche == null (il y a un seul fils, le droit ) Alors cour.valeur = cour.droit.valeur ; cour.gauche = cour.droit.gauche ; cour.droit = cour.droit.droit ;
+(on peut également simplifier ces trois affectations en utilisant : cour = nouveausommet(cour.droit) ;) Sinon
+Si cour.droit == null (il y a un seul fils, le gauche) Alors cour = nouveausommet(cour.gauche) ;
+Sinon (le sommet à supprimer a 2 fils non nuls) tmp.racine = cour.gauche ;
+max = supprimerMaxArbre(tmp) ; cour.valeur = max ;
+(on a remplacé la valeur à supprimer par le max du sous-arbre gauche) FinSi FinSi FinSi FinSi Fin
+3.1.4 Arbres et arborescences de priorité, les tas
+Un arbre de priorité est un arbre binaire particulier utilisé pour implémenter un type de donnée appelé file de priorité. Ces structures sont particulièrement intéressantes dans le cas d’une file d’attente pour un ensemble de processus auxquels sont associées des priorités. Dans un arbre binaire, la profondeur d’un sommet x est la longueur de l’unique chemin de la racine à x et qu’un niveau dans une arborescence est l’ensemble de tous les sommets qui sont à une même profondeur. Un niveau à une hauteur h est rempli s’il contient 2h sommets. Un arbre binaire de hauteur h est dit quasi parfait à gauche s’il vérifie les propriétés suivantes : tous les niveaux sauf éventuellement le dernier sont remplis et dans ce cas les feuilles du dernier niveau sont « tassées » à gauche. Un arbre de priorité est un arbre binaire quasi parfait à gauche dont les sommets ont une valuation qui est un ordre partiel appelée
+
+
+3. (Di)graphes et structures de données 75
+priorité et vérifiant la propriété suivante : aucun sommet n’a une valeur supérieure à celle de son père. La figure 3.4 donne un exemple d’arbre de priorité.
+34
+27 29
+15 19 4 7
+12 13 2 1 3
+Figure 3.4 – Arbre de priorité. Une même valeur peut apparaître plusieurs fois dans un arbre de priorité.
+Le codage d’un arbre quasi parfait à gauche se fait sur un tableau indexé à partir de 0. La taille du tableau « max » est un entier fixé à l’avance assez grand pour permettre les manipulations éventuelles à venir sur ce tableau.
+structure arbrequasiparfaitgauche {
+entier : taille (nombre de sommets de l’arbre) tableau d’éléments : tab[max] }
+Les indices du tableau sont calculés de la manière suivante : – la racine est à l’indice 0 ; – si un sommet est à l’indice i alors : ∗ son fils gauche est à l’indice 2i + 1, ∗ son fils droit est à l’indice 2i + 2, ∗ son père est à l’indice i−1
+2 (la racine n’a pas de père) ;
+– si n est le nombre de sommets de l’arbre et si i > n−1
+2 alors i est une feuille.
+
+
+76 Éléments de théorie des graphes
+Un arbre de priorité dont les sommets sont indexés comme ci-dessus s’appelle un tas. La déclaration de la structure relative à un tas est identique à celle d’un arbre quasi parfait à gauche.
+Exemple 3.1.3. Le tableau T = [35, 13, 9, 1, 7, 6] correspond à l’arbre de la figure 3.5.
+35
+13 9
+1
+76
+Figure 3.5 – Codage d’un tableau par un arbre.
+Insertion-suppression
+Naturellement on doit pouvoir ajouter ou supprimer des éléments d’un tas de telle sorte que la structure reste un tas. La procédure suivante ajoute la valeur « v » au tas « T » afin que l’ensemble conserve la structure de tas.
+tas : ajouterElémentTas(tas : T, élément : v) entier : i ; Début
+T.taille = T.taille + 1 ; i = T.taille − 1 ; Tant que i ≥ 1 et v > T.tab[ i−1
+2 ] Faire
+T.tab[i] = T.tab[ i−1
+2 ];
+i = i−1
+2; FinTant
+T.tab[i] = v ;
+Retourner T ; Fin
+
+
+3. (Di)graphes et structures de données 77
+Suppression du maximum
+Méthode
+On enlève T.tab[0]
+On enlève x = T.tab[T.taille − 1] (valeur de la feuille la plus à droite) taille = taille − 1 i=0 Tant que T.tab[i] a un ou deux fils dont la valeur est supérieure à x : suivant = indice des fils de i qui a la plus grande valeur T.tab[i] = T.tab[suivant] i = suivant T.tab[i] = x
+entier : supprimerMaxTas(tas : T) élément : x ;
+entier : max, suivant, i, n ; booléen : fini ; Début
+max = T.tab[0] ; T.taille = T.taille − 1 ; n = T.taille ; x = T.tab[n] ; suivant = 0 ; i = 0; fini = faux ;
+Tant que fini == faux Faire Si i > n−1
+2 Alors fini = vrai ; Sinon Si i = n−1
+2 ou T.tab[2i + 1] > T.tab[2i + 2] Alors suivant = 2i + 1 ; Sinon
+suivant = 2i + 2 ; FinSi FinSi
+Si T.tab[suivant] > x Alors T.tab[i] = T.tab[suivant] ; i = suivant ; Sinon
+fini = vrai ;
+
+
+78 Éléments de théorie des graphes
+FinSi FinTant
+T.tab[i] = x ;
+Retourner max ; Fin
+Le tri par tas
+On peut trier un tableau T grâce à la notion de tas.
+tas : créerTas(tableau d’éléments : T) (génère un tas à partir d’un tableau )
+entier : n = T.taille ; tableau : T1[n] ;
+tas : A = nouveautas(n,T1) ; (crée un tas de taille n et de tableau T1 )
+Début Pour tout i, i de 0 à n − 1, Faire A = ajouterElémentTas(A,T[i]) ; FinPour Retourner A ; Fin
+On peut maintenant trier le tableau T en utilisant la procédure supprimerMaxTas.
+tableau : trierTableau(tableau d’éléments : T) tableau : tabtrier ;
+entier : tailletab, max ; tas : A = nouveautas(T) ; Début
+tailletab = A.taille ;
+Pour tout i, i de 0 à tailletab − 1, Faire max = supprimerMaxTas(A) ; tabtrier[i] = max ; FinPour Retourner tabtrier ; Fin
+
+
+3. (Di)graphes et structures de données 79
+3.1.5 Arbres AVL
+Un arbre binaire de recherche est un AVL pour Adelson-Velskii et Landis s’il vérifie la propriété suivante, dite propriété d’équilibre : en tout sommet, les hauteurs du sous-arbre gauche et du sous-arbre droit diffèrent d’au plus 1.
+On représente un arbre AVL comme un arbre binaire de recherche en rajoutant à la structure sommet un champ supplémentaire qui contient la hauteur du sous-arbre ayant pour racine ce sommet :
+structure sommet { entier ou réel ou chaîne de caractères : valeur sommet : gauche sommet : droit entier : hauteur }
+structure AVL { sommet : racine }
+Un exemple d’arbre AVL est donné en figure 3.6.
+Exercice 3.5. Donner un algorithme récursif qui teste si un arbre binaire de recherche est un AVL.
+L’intérêt de cette structure réside dans le fait qu’elle évite les cas dégénérés (sous-arbres gauches et sous-arbres droits ayant une différence de profondeur importante). Mais l’ajout ou la suppression d’éléments dans un AVL peut déséquilibrer l’arbre. Ainsi il sera nécessaire de le rééquilibrer. À cet effet, on appliquera des rotations à des arbres non vides.
+Exercice 3.6. Que ce passe-t-il si, dans la figure 3.8, le sommet C se retrouve sous l’arbre Bd ?
+Les rotations
+Soit A un arbre, Ag et Ad ses sous-arbres gauche et droit respectifs. Supposons qu’il y ait un déséquilibre entre Ag et Ad, c’est-à-dire que |A.racine.gauche.hauteur − A.racine.droit.hauteur| = 2. Donnons un algorithme permettant de rééquilibrer l’arbre.
+équilibrerArbre(AVL : A) Début
+
+
+80 Éléments de théorie des graphes
+54
+45 59
+30 47 55 61
+32 46 51 56
+52
+Figure 3.6 – Exemple d’AVL.
+équilibrerSousArbre(A.racine) ; Fin
+équilibrerSousArbre(sommet : v) Début
+Si v.gauche.hauteur − v.droit.hauteur == 2 Alors Si v.gauche.gauche.hauteur < v.gauche.droit.hauteur Alors rotationGaucheSommet(v.gauche) ; rotationDroiteSommet(v) ; Sinon rotationDroiteSommet(v) ; FinSi Sinon
+Si v.gauche.hauteur − v.droit.hauteur == −2 Alors Si v.droit.droit.hauteur < v.droit.gauche.hauteur Alors rotationDroiteSommet(v.droit) ; rotationGaucheSommet(v) ; Sinon rotationGaucheSommet(v) ; FinSi
+
+
+3. (Di)graphes et structures de données 81
+FinSi FinSi Fin
+Donnons par exemple l’algorithme de rotation gauche correspondant à la figure 3.7.
+A
+A
+B
+B Ad
+Ad
+Bg
+Bg Bd
+Bd
+C
+C
+Figure 3.7 – Rotation droite. Dans l’arbre situé à gauche de la figure, les sousarbres Ag, Bd et Bg sont de hauteur h. Donc l’arbre binaire sans le sommet C est un AVL. La présence de C crée un déséquilibre dans les hauteurs. On rééquilibre les hauteurs de l’arbre en effectuant une rotation droite.
+A
+A
+Ag
+Ag
+B
+B
+Bg
+Bg
+Bd
+Bd
+C
+C
+Figure 3.8 – Rotation gauche.
+
+
+82 Éléments de théorie des graphes
+rotationGauche(AVL : A) Début rotationGaucheSommet(A.racine) ; Fin
+rotationGaucheSommet(sommet : v) Début
+b = nouveausommet() ; b = v.droit ; v.droit = b.gauche ; b.gauche = v ; v = b; Fin
+Insertions
+Il s’agit d’insérer un sommet dans un AVL de telle sorte que l’ensemble reste un AVL :
+A
+BA
+B Ad
+Ad
+Bg
+Bg
+C
+C
+Cg
+Cg
+Cd
+Cd
+D
+D
+Figure 3.9 – Rotation gauche du sous-arbre gauche suivie d’une rotation droite. Dans la figure de gauche, les sous-arbres Bg et Ad sont de hauteur h et les sousarbres Cg et Cd sont de hauteur h − 1. Par conséquent, l’arbre sans le sommet D est un AVL. En ajoutant D, on crée un déséquilibre dans les hauteurs. On rééquilibre l’arbre afin d’obtenir la figure de droite.
+
+
+3. (Di)graphes et structures de données 83
+AVL : insérer(sommet : u, AVL : A) Début insérerSommet(u,A.racine) ; Retourner équilibrerArbre(A) ; Fin
+insérerSommet(sommet : v, sommet : w) Début
+Si w == null Alors w = nouveausommet() ; w.valeur = v.valeur ; w.hauteur = 0 ; w.gauche = v.gauche ; w.droit = v.droit ; Sinon
+Si v.valeur < w.valeur Alors
+insérerSommet(v,w.gauche) ; Sinon insérerSommet(v,w.droit) ; FinSi FinSi Fin
+A
+A
+Ag
+Ag
+B
+B
+C
+C Bd
+Bd Cg
+Cg
+Cd
+Cd
+D
+D
+Figure 3.10 – Rotation droite du sous-arbre droit suivie d’une rotation gauche de l’ensemble.
+
+
+84 Éléments de théorie des graphes
+Exercice 3.7. Donner un algorithme qui supprime sur un AVL un sommet ayant une valeur donnée.
+3.1.6 Propriétés des arbres binaires
+Dans la suite on supposera que tout arbre a au moins un sommet. Nous avons déjà vu qu’une arborescence binaire parfaite de hauteur h possède 2h+1−1 sommets. Ainsi pour tout arbre binaire on a n ≤ 2h+1−1.
+Proposition 3.1.4. Soit A un arbre binaire de hauteur h et ayant n sommets alors log2(n + 1) − 1 ≤ h ≤ n − 1.
+Démonstration. Nous savons que pour un arbre le nombre d’arêtes m vaut m = n − 1. Par conséquent h ≤ n − 1. De plus n ≤ 2h+1 − 1, donc log2(n + 1) ≤ h + 1 soit log2(n + 1) − 1 ≤ h.
+Corollaire 3.1.5. Soit A un arbre binaire de hauteur h et ayant n sommets. On a h ≤ n ≤ 2h+1 − 1.
+Proposition 3.1.6. Soit A un arbre binaire ayant n sommets et f feuilles. On a f ≤ n+1
+2.
+Démonstration. On raisonne par récurrence sur le nombre n de sommets. C’est vrai pour n = 1. Supposons la propriété vraie pour un arbre binaire ayant au plus n − 1 sommets. Soit A un arbre binaire ayant n sommets. Alors par définition, A peutêtre décomposé de la manière suivante A =< r, Ag, Ad >, où r est la racine de A et Ag (respectivement Ad) est le sous-arbre gauche (respectivement le sous-arbre droit) de A. Donc le nombre de sommets de Ag est n1 < n et le nombre de sommets de Ad est n2 < n. Par hypothèse de
+récurrence le nombre de feuilles de Ag est f1 ≤ n1+1
+2 et celui de de Ad
+est f2 ≤ n2+1
+2 . Mais f = f1 + f2 ≤ n1+1
+2 + n2+1
+2 . Or n = n1 + n2 + 1, de
+là f ≤ n1+n2+1
+2 = n+1
+2.
+Proposition 3.1.7. Soit A un arbre binaire ayant n sommets, f feuilles et de hauteur h alors log2(f ) ≤ h.
+Exercice 3.8. Faire la preuve de cette proposition.
+Théorème 3.1.8. Soit A un AVL ayant n sommets et de hauteur h alors
+(∗) log2(n + 1) ≤ h + 1 ≤ α log2(n + 2),
+
+
+3. (Di)graphes et structures de données 85
+où α = (log2(φ))−1 et φ = 1+√5
+2 , le nombre d’or.
+Démonstration. On a toujours n ≤ 2h+1 − 1, donc log2(n + 1) ≤ h + 1. Notons f (h) le nombre de sommets minimum d’un AVL. Alors f (h) = 1 + f (h − 1) + f (h − 2). En effet, l’AVL a un nombre minimum de sommets donc la différence entre l’arbre gauche et l’arbre droit est de 1 (voir figure 3.11). La suite définie par F (h) = f (h) + 1 est une suite de Fibonacci : F (0) = 2, F (1) = 3, F (2) = 5, . . . et F (h) = √15 (φh+3 −
+φ−(h+3)), h ≥ 0. D’où n + 1 ≥ F (h) > √15 (φh+3 − 1) et ainsi h + 3 <
+logφ(√5(n + 2)) < log2(n+2)
+log2(φ) + 2.
+Corollaire 3.1.9. Pour un AVL, on a h = O(log2(n)).
+h−2
+h−1
+Figure 3.11 – Structure d’un AVL ayant un nombre minimum de sommets.
+3.2 Complexité en temps des algorithmes sur les
+arbres binaires
+La plupart des opérations classiques sur les arbres binaires de recherche tournent autour de la recherche, de l’insertion ou de la suppression d’un élément. Les algorithmes décrits dans les sections précédentes descendent dans l’arbre en suivant les pères et les fils droits ou

@@ -1,0 +1,233 @@
+LARGE SCALE GRAPH MINING
+CENTRALITY MEASURES
+Nacéra Seghouani
+Computer Science Department, CentraleSupélec Laboratoire Interdisciplinaire des Sciences du Numérique, LISN nacera.seghouani@centralesupelec.fr
+2024-2025
+1/21
+
+
+CENTRALITY MEASURES
+2/21
+
+
+Centrality Measures
++ Centrality indices are answers to the question "What characterizes an important vertex?" Need to define a real-valued function on the vertices of a graph, to provide a ranking which identifies the most important nodes.
++ Centrality has a wide number of meanings, leading to different definitions of centrality: → cohesiveness, ability to transfer information across the network, to affect/influence the others, to control information flow, . . .
++ Many centrality measures count the number of paths (or walks) through a given vertex; the measures differ in how the relevant walks are defined and counted: from walks of length one (degree centrality) to infinite walks (eigenvector centrality).
++ Other centrality measures, such as betweenness centrality focus not just on overall connectedness but occupying positions that are pivotal to the network’s connectivity. → Influencers in social networks, vehicles for disease spreading, hubs in road networks, key infrastructures on the Internet, ...
+3/21
+
+
+Degree Centrality
++ More neighbors (connections) a node has high potential communication activity, more important it is!
++ The matrix form: c = A1 where is the all one vector
+
+     
+010010 101010 010100 001011 110100 000100
+
+     
+
+     
+1 1 1 1 1 1
+
+     
+=
+
+     
+2 3 2 3 3 1
+
+     
++ Very likely that more than one vertex has the same degree → difficult to uniquely rank the vertices
+4/21
+
+
+Neighborhood connectivity
++ The average degree of v ’s neighbors, more this average is high for a node more it is important
+cv = ∑u∈Nv du
+dv
+c = D−1A1
+5/21
+
+
+Eigenvector centrality
++ A natural extension of degree centrality is eigenvector centrality X Eigenvector centrality measures a node’s importance while giving consideration to the importance of its neighbors. A high eigenvector score means that a node is connected to many nodes which themselves have high scores.
++ The eigenvector centrality cvi of vi is the sum of the centralities of its neighbors:
+cvi = 1
+λ ∑vj ∈Ni Aij cvj
+Ac = λc
++ Introduced by the sociologist Bonacich (1972) suggested that the eigenvector of the largest eigenvalue of an adjacency matrix could make a good network centrality measure
++ The eigenvector c must be non-negative, according to P-F theorem only the largest λmax , the dominant value, results in the desired centrality measure.
++ Example: A =
+[2 1 12
+]
+; |A − λI| =
+∣ ∣ ∣ ∣
+2−λ 1 1 2−λ
+∣ ∣ ∣ ∣
+= 3 − 4λ + λ2 = 0
+Eλ=3 =
+[1
+1
+]
+6/21
+
+
+Eigenvector Centrality versus Degree centrality
+Figure: from "purple","blue","green","yellow","orange","red"
+7/21
+
+
+Eigenvector centrality
++ Power method c(k+1) = Ac(k). Initially the centralilty of each node is 1.
+8/21
+
+
+Eigenvector centrality
++ Power method c(k+1) = Ac(k) 4, 6, 2, 5, 3, 1
+9/21
+
+
+Eigenvector centrality
++ Power method c(k+1) = Ac(k). Initially the centralilty of each node is 1.
+10/21
+
+
+Katz Centrality
++ The main problem with eigenvector centrality is that it works well only if the graph is (strongly) connected. Real networks, especially directed networks, do not. The vertices that are not in (strongly) connected components have zero eigenvector (null) centrality.
++ A way to work around this problem has been proposed by Leo Katz (1953). Give each node a minimum, positive amount of centrality that it can transfer to other nodes.
+cvi = α j∑
+Aij cvj + β
+cvi denotes Katz centrality of a node vi , where β is a vector whose elements are all equal a given positive constant (generally 1) and α ∈ (0, 1).
+c = αAc + 1
+11/21
+
+
+PageRank Centrality
++ Google’s PageRank is a variant of the eigenvector centrality. PageRank uses in-degree to award one centrality point (popularity) for every link a node receives.
+Pij =
+{1
+di + , if vj ∈ N +
+i
+0, otherwise ;
+1
+di+ represents the probability for a surfer to jump randomly from page vi to a page vj (independent events). P is a row stochastic ∑j Pij = 1.
++ The matrix form is defined as follows:
+λc = cP with λ = 1
+c = (D+)−1A
+12/21
+
+
+PageRank Centrality
++ We use power iteration method:c(k+1) = c(k)P ; c(k) = cPk with c = [ 1
+n
+1
+n ... 1
+n
+]
+P=
+
+    
+01
+2 00 1
+2
+00100 01
+201
+20 01000
+1 3
+1 3
+1
+3 00
+
+    
+and c = [ 1
+5
+1 5
+1 5
+1 5
+1 5
+]
+c10 = [0 0.4 0.4 0.2 0]
+13/21
+
+
+PageRank Centrality
++ PageRank algorithm holds that a surfer who is randomly clicking on links will eventually stop clicking. The probability, at any step, that the surfer will continue is a damping factor α Damping factor d
+c = [ (1−α)
+n
+(1−α)
+n . . . (1−α)
+n
+] + αcP
+14/21
+
+
+Clustering Coefficient Centrality
++ Triadic Closure: If two people in a social network have a friend in common, then there is an increased likelihood that they will become friends themselves.
++ The probability that two randomly selected friends of node A are friends with each other: X Figure (a) = 1
+6 because there is only the single (C, D) edge among the six pairs of (B, C), (B, D),
+(B, E), (C, D), (C, E), and (D, E) increased to 1
+2 in Figure (b) three edges (B, C), (C, D), and(D, E) among the same six pairs.
+15/21
+
+
+Clustering Coefficient Centrality
++ Clustering Coefficient ccv captures how the neighbors of v are linked to each other.
+cv = |{(v, u), (u, w), (w, v) ∈ E}|
+1
+2 dv (dv − 1) where 1
+2 dv (dv − 1) is the total number of links between neighbors
+|{(v , u), (u, w), (w, v ) ∈ E}| is the number of all triangles involving v and v ’s neighbors
++ The more densely interconnected v ’s neighborhood, the higher is its clustering coefficient. cv = 0 v ’s neighborhood are not connected, cv = 1 v ’s neighborhood are all connected.
+16/21
+
+
+Closeness centrality
++ Closeness centrality is a measure of how close a network is, on average, to the rest of the nodes in terms of shortest paths. It measures the average distance between a node v and all other nodes in the network. Thus, the more central a node is, the closer it is to all other nodes.
+cv = 1
+∑r6=v dist(v , r )
+it can be normalised by ∑r dist(v,r)
+|V |−1
++ Harmonic centrality: cv = ∑ r 6=v
+1
+dist(v , r ) . The inverse distance to an unreachable vertex is
+considered to be zero 1
+dist(v,r ) = 0
+17/21
+
+
+Betweenness centrality
++ A family of betweenness measures are defined to capture a node’s importance as a conduit of information flow in a network
++ Wide applications in network theory: in a telecommunications network, a node with higher betweenness centrality would have more control over the network, because more information will pass through that node.
++ The most well known measures the number of times a node is on a shortest path between two nodes.
+cv = ∑ s6=v 6=t
+σs,t (v )
+σs,t
+where σs,t : number of shortest paths between source node s and target node t, while σs,t (v ): number of shortest paths between source s and target t nodes that pass through v node.
++ It may be normalised by the number of ordered pairs of vertices not including v (combination of 2 over (n − 1)).
+X for directed graphs cv = 1
+(n−1)(n−2) ∑s6=v6=t
+σs,t (v ) σs,t
+X for undirected graphs cv = 2
+(n−1)(n−2) ∑s6=v6=t
+σs,t (v ) σs,t
+18/21
+
+
+Betweenness centrality
++ undirected star graph, the center vertex has a betweenness of 1, while the leaves have a betweenness of 0.
++ What about the following graphs?
+19/21
+
+
+Betweenness centrality
++ This graph shows the node betweenness, from red nodes to blue nodes = max,
++ Betweeness assumes that information flow is through the shortest path. In a transport, the traffic will likely go through alternatives paths. Also in the case of rumours or infection.
++ Katz centrality takes into account all paths of length k
++ PageRank centrality takes into account the most probable walks.
+20/21
+
+
+1st Mini-Project
++ Study/analyse the different centralities on different kind of graphs ( )
++ Other centralities such as Hyperlink-Induced Topic Search (HITS).
+21/21
