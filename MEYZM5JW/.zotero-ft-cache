@@ -1,0 +1,1447 @@
+i
+To Hella; Guro and Idunn; Emil and Tiril
+To: Nicolas; Penelope and Garance
+
+
+ii
+
+
+iii
+Contents
+Preface ix References xiii
+1 Introduction 1
+1.1 What is Reliability? 1 1.2 The Importance of Reliability 3 1.3 Basic Reliability Concepts 5 1.4 Reliability Metrics 10 1.5 Approaches to Reliability Analysis 11 1.6 Reliability Engineering 14 1.7 Objectives, Scope, and Delimitations of the Book 16 1.8 Trends and Challenges 17 1.9 Standards and Guidelines 18 1.10 History of System Reliability 18 1.11 Problems 23 References 24
+2 The Study Object and its Functions 27 2.1 Introduction 27 2.2 System and System Elements 27 2.3 Boundary Conditions 29 2.4 Operating Context 30 2.5 Functions and Performance Requirements 31 2.6 System Analysis 36 2.7 Simple, Complicated, and Complex Systems 36 2.8 System Structure Modeling 38 2.9 Problems 45 References 46
+3 Failures and Faults 49 3.1 Introduction 49 3.2 Failures 51 3.3 Faults 54
+
+
+iv
+3.4 Failure Modes 54 3.5 Failure Causes and Effects 55 3.6 Classification of Failures and Failure Modes 57 3.7 Failure/Fault Analysis 65 3.8 Problems 68 References 69
+4 Qualitative System Reliability Analysis 73 4.1 Introduction 73 4.2 FMEA / FMECA 74 4.3 Fault Tree Analysis 81 4.4 Event Tree Analysis 94 4.5 Fault Trees Versus Reliability Block Diagrams 100 4.6 Structure Function 102 4.7 System Structure Analysis 106 4.8 Bayesian Networks 118 4.9 Problems 121 References 126
+5 Probability Distributions in Reliability Analysis 131 5.1 Introduction 131 5.2 A Dataset 133 5.3 General Characteristics of Time-to-Failure Distributions 135 5.4 Some Time-to-Failure Distributions 150 5.5 Extreme Value Distributions 175 5.6 Time-to-Failure Models With Covariates 180 5.7 Additional Continuous Distributions 185 5.8 Discrete Distributions 187 5.9 Classes of Time-to-Failure Distributions 192 5.10 Summary of Time-to-Failure Distributions 196 5.11 Problems 196 References 204
+6 System Reliability Analysis 207 6.1 Introduction 207 6.2 System Reliability 208 6.3 Nonrepairable Systems 214 6.4 Standby Redundancy 223 6.5 Single Repairable Items 228 6.6 Availability of Repairable Systems 238 6.7 Quantitative Fault Tree Analysis 247 6.8 Event Tree Analysis 259 6.9 Bayesian Networks 261 6.10 Monte Carlo Simulation 268 6.11 Problems 273
+
+
+v
+References 278
+7 Reliability Importance Metrics 281 7.1 Introduction 281 7.2 Critical Components 284 7.3 Birnbaum’s Metric for Structural Importance 286 7.4 Birnbaum’s Metric of Reliability Importance 287 7.5 Improvement Potential 294 7.6 Criticality Importance 296 7.7 Fussell-Vesely’s Metric 298 7.8 Differential Importance Metric 303 7.9 Importance Metrics for Safety Features 306 7.10 Barlow-Proschan’s Metric 310 7.11 Problems 313 References 314
+8 Dependent Failures 317 8.1 Introduction 317 8.2 Types of Dependence 320 8.3 Cascading Failures 320 8.4 Common-Cause Failures 322 8.5 CCF Models and Analysis 326 8.6 Basic Parameter Model 329 8.7 Beta-Factor Model 332 8.8 Multi-Parameter Models 339 8.9 Problems 345 References 346
+9 Maintenance and Maintenance Strategies 349 9.1 Introduction 349 9.2 Maintainability 351 9.3 Maintenance Categories 352 9.4 Maintenance Downtime 355 9.5 Reliability Centered Maintenance 359 9.6 Total Productive Maintenance 372 9.7 Problems 374 References 374
+10 Counting Processes 377 10.1 Introduction 377 10.2 Homogeneous Poisson Processes 385 10.3 Renewal Processes 392 10.4 Nonhomogeneous Poisson Processes 421 10.5 Imperfect Repair Processes 429 10.6 Model Selection 436
+
+
+vi
+10.7 Problems 439 References 441
+11 Markov Analysis 445 11.1 Introduction 445 11.2 Markov Processes 448 11.3 Asymptotic Solution 458 11.4 Parallel and Series Structures 466 11.5 Mean Time to First System Failure 472 11.6 Systems with Dependent Components 478 11.7 Standby Systems 482 11.8 Markov Analysis in Fault Tree Analysis 489 11.9 Time-Dependent Solution 491 11.10 Semi-Markov Processes 494 11.11 Multiphase Markov Processes 495 11.12 Piecewise Deterministic Markov Processes 498 11.13 Simulation of a Markov Process 501 11.14 Problems 505 References 510
+12 Preventive Maintenance 513 12.1 Introduction 513 12.2 Terminology and Cost Function 515 12.3 Time-Based Preventive Maintenance 516 12.4 Degradation Models 531 12.5 Condition-Based Maintenance 540 12.6 Maintenance of Multi-Item Systems 553 12.7 Problems 559 References 564
+13 Reliability of Safety Systems 569 13.1 Introduction 569 13.2 Safety-Instrumented Systems 570 13.3 Probability of Failure on Demand 575 13.4 Safety Unavailability 585 13.5 Common Cause Failures 590 13.6 CCFs Between Groups and Subsystems 594 13.7 IEC 61508 595 13.8 The PDS Method 601 13.9 Markov Approach 601 13.10 Problems 606 References 613
+14 Reliability Data Analysis 617 14.1 Introduction 617
+
+
+vii
+14.2 Some Basic Concepts 618 14.3 Exploratory Data Analysis 625 14.4 Parameter Estimation 634 14.5 The Kaplan-Meier Estimate 655 14.6 Cumulative Failure Rate Plots 659 14.7 Total-Time-on-Test Plotting 665 14.8 Survival Analysis with Covariates 679 14.9 Problems 685 References 690
+15 Bayesian Reliability Analysis 693 15.1 Introduction 693 15.2 Bayesian Data Analysis 696 15.3 Selection of Prior Distribution 702 15.4 Bayesian Estimation 711 15.5 Predictive Distribution 713 15.6 Models With Multiple Parameters 715 15.7 Bayesian Analysis with R 715 15.8 Problems 716 References 718
+16 Reliability Data: Sources and Quality 721 16.1 Introduction 721 16.2 Generic Reliability Databases 723 16.3 Reliability Prediction 728 16.4 Common Cause Failure Data 731 16.5 Data Analysis and Data Quality 733 16.6 Data Dossier 738 References 738
+A Acronyms 743
+B Laplace Transforms 747
+Author Index 751
+Subject Index 755
+
+
+viii
+
+
+ix
+Preface
+This book provides a basic, but rather comprehensive introduction to system reliability theory and the main methods used in reliability analyses. System reliability theory is used in many application areas. Some of these are illustrated in the book as examples and problems.
+Main Changes From the Second Edition
+Readers who are familiar with the second edition (Rausand and Høyland, 2004) will find that the third edition is a major update and that most chapters have been totally rewritten. The most significant changes include:
+• A new Chapter 2 defining the study object and its functions and operating context is included. System modeling by reliability block diagrams is introduced and the concept of complexity is discussed. • A new Chapter 3 defining and discussing the concepts of failure and fault, together with several associated concepts is added. Two failure analysis techniques are presented. • New component importance measures are included. • The treatment of dependent failures is significantly extended. • The section on complex systems is removed from the chapter on Markov analysis where several new models are added. • A new Chapter 12 on preventive maintenance is added. This chapter merges aspects from the previous edition with new models and methods. The presentation is supplemented by a number of Python scripts that are found on the
+book companion site.
+• The chapters on reliability data analysis and Bayesian reliability analysis are totally rewritten. The statistical program system R is extensively used in the presentation. • The old chapter on accelerated life testing has been removed, but parts of the chapter are moved to the chapter on reliability data analysis. • The end of chapter problems have been revised and new problems are added. • Most of the Appendices are removed. The content is partly integrated in the text and partly obsolete because of the use of R.
+
+
+x
+• An author index is provided.
+Supplementary Information on the Internet
+An immense amount of relevant information is today available on the Internet, and many of the topics in this book may be found as books, reports, lecture notes, or slides written by lecturers from many different universities. The quality of this information is varying and ranging from very high to rather low, the terminology is often not consistent, and it may sometimes be a challenge to read some of these Internet resources. The reader is encouraged to search the Internet for alternative presentations and compare with the book. This way, new ideas and increased insight may spring up. With the abundance of free information on the Internet, it is pertinent to ask whether a traditional book is really needed. We strongly believe that a book may provide a more coherent knowledge and we have tried to write the book with this in mind.
+Intended Audience
+The book is written primarily for engineers and engineering students and the examples and applications are related to technical systems. There are three groups that constitute our primary audience:
+• The book was originally written as a textbook for university courses in system reliability at the Norwegian University of Science and Technology (NTNU) in Trondheim. This third edition is based on experience gained from use of the first two editions, at NTNU and many other universities, and also from using the book in a wide range of short courses for industry. • The second is to be a guide for engineers and consultants who carry out practical system reliability analyses of technical systems. • The third is to be a guide for engineers and consultants in areas where reliability is an important aspect. Such areas include risk assessment, systems engineering, maintenance planning and optimization, logistics, warranty engineering and management, life cycle costing, quality engineering, and several more. It may be noted that several of the methods used in artificial intelligence and machine learning are treated in this book.
+Readers should have a basic course in probability theory. If not, you should get hold of an introductory textbook in probability and statistics to study in parallel with reading this book. A multitude of relevant lecture notes, slides, and reports are also available on the Internet. Brief guidance to relevant sources is provided on the
+book companion site.
+
+
+xi
+Aims and Delimitation
+The book is intended to give a thorough introduction to system reliability. Detailed objectives and associated delimitations may be found in Section 1.8. The study object may range from a single component up to a rather complicated technical system. The study object is delimited to items that are mainly based on mechanical, electrical, or electronic technology. An increasing number of modern items have a lot of embedded software. Functions that earlier were carried out by mechanical and electromechanical technology are today software-based functions. A family car that was built when the second edition was published is, for example, very different from a modern car, which is sometimes characterized as a “computer on wheels.” Software reliability is different from hardware reliability in many ways and we, therefore, consider pure software reliability to be outside the scope of the book. Many softwarebased functions may, however, be treated with the methods presented. Many modern systems are getting more and more complex. Chapter 2 introduces three categories of systems: simple, complicated, and complex systems. Complex systems are here defined to be systems that do not meet all the requirements of the Newtonian-Cartesian paradigm and therefore cannot be adequately analyzed with traditional methods. The complexity theory and the approaches to study complex systems is considered to be outside the scope of the book. The objective of this book is to make the reader understand the basic theory of system reliability and become familiar with the most commonly used analytical methods. We have focused on producing reliability results by hand-calculation, sometimes assisted by simple R and Python programs. When you carry out practical reliability analyses of large systems, you usually need some special computer programs, such as fault tree analysis programs and simulation programs. A high number of programs are available on the market. We do not present any of these special programs in the book, but supply a list of the main vendors of such programs on the book companion site. To use a specific program, you need to study the user manual. This book should help you understand the content of such manuals and the sources of uncertainty of the results produced. A wide range of theories and methods have been developed for system reliability analysis. All these cannot be covered in an introductory text. The objective of the book is to present theory, methods, and knowledge that will be useful for you as a reliability analyst. When selecting material to cover, we have focused on methods that :
+• Are commonly used in industry or in other relevant application areas • Give the analyst insights that increase her understanding of the system (such that system weaknesses can be identified at an early stage of the analysis) • Provide the analyst with genuine insight into system behavior • Can be used for hand-calculation (at least for small systems) • Can be explained rather easily to, and be understood by non-reliability engineers and managers.
+The authors have mainly been engaged in applications related to the offshore oil
+
+
+xii
+and gas industry and many examples therefore come from this industry. The methods described and many of the examples are equally suitable for other industries and application areas.
+Authors
+The first edition of the book (Høyland and Rausand, 1994) was written with joint efforts from Arnljot Høyland and Marvin Rausand. Arnljot sorrily passed away in 2002. The second edition (Rausand and Høyland, 2004), was therefore prepared by Marvin alone and represented a major update of the first edition. Marvin retired from his professorship at NTNU in 2015 and when Wiley wanted an updated version, he asked Anne Barros to help preparing this third edition. Due to unforeseen practical constraints, Anne could not devote as much time to this project as she wanted. Anne’s contribution to this edition is mainly related to Chapters 11 and 12, the end of chapter problems, in addition to reviewing and proposing improvements to other chapters.
+Acknowledgments
+First of all, we express our deepest thanks to Professor Arnljot Høyland. Professor Høyland passed away in December 2002, 78 years old, and could not participate in writing any further editions of the book. We hope that he would have approved and appreciated the changes and additions we have made. The authors sincerely thank a high number of students at NTNU, and lecturers and students at many other universities around the world for comments to the previous edition and for suggesting improvements. We have done our best to implement these suggestions. Many definitions used in the book are from, or are inspired by, the International Electrotechnical Vocabulary (IEV) http://www.electropedia.org. We appreciate the initiative of the International Electrotechnical Commission (IEC) to make this vocabulary freely available. References to the vocabulary are given in the text as the IEV ref. number (e.g., IEV 192-01-24 for the term reliability). Last, but not least, we are grateful to the editorial and production staff at John Wiley & Sons for their careful, effective, and professional work. (Names may be included later: Sarah Keegan, ?,?)
+Book Companion Site
+To be written by Wiley
+
+
+xiii
+Trondheim, 2020 Marvin Rausand and Anne Barros
+
+
+xiv
+
+
+xv
+References
+Høyland, A. and Rausand, M. (1994) System Reliability Theory; Models and Statistical Methods, Wiley, Hoboken, NJ. Rausand, M. and Høyland, A. (2004) System
+Reliability Theory: Models, Statistical Methods, and Applications, Wiley, Hoboken, NJ, 2nd edn..
+
+
+xvi
+
+
+1
+1
+Introduction
+The scope of the book is delimited to the theory and methods of reliability studies by using the system approach. The main concepts and metrics used in system reliability studies are defined and discussed. A brief introduction to reliability engineering – how reliability theory and reliability studies can be integrated into the design and development of a new item – is presented and some main future challenges of reliability engineering are indicated. The role of a reliability engineer is described. The chapter ends with an account of the history of system reliability theory.
+1.1 What is Reliability?
+Nowadays, nearly all of us depend on a wide range of technical products and services in our everyday life. We expect our electrical appliances, cars, computers, mobile phones, and so on, to function when we need them, and to be reliable for a rather long time. We expect services, such as electricity, computer networks, and transport to be supplied without disruptions or delays. When a product, machinery, or service fails, the consequences may sometimes be catastrophic. More often, product flaws and service outages lead to customer dissatisfaction and expenses for the supplier through warranty costs and product recalls. For many suppliers, reliability has become a matter of survival.
+There is no generally accepted definition of the reliability of a technical product. The definition and interpretation of the term vary from industry to industry and from user to user. For the purpose of this book, we choose a rather wide definition of the reliability of a technical item.
+Definition 1.1 (Reliability)
+The ability of an item to perform as required in a stated operating context and for a stated period of time. ◽
+The term item is used to designate any technical system, subsystem, or component. The items studied in this book are built of hardware parts, and to an increasing degree of software. When relevant, the user interface is part of the item, but operators and
+
+
+2
+Required performance
+Predicted performance
+Compare
+The item is reliable
+The item is not reliable
+Laws and regulations Standards Customer requirements Customer expectations Supplier requirements
+Operating context Time period
+}
+Does the predicted performance meet the required performance?
+No Yes
+=
+Figure 1.1 The reliability concept.
+other humans are not part of the items studied here. The reliability concept is illustrated in Figure 1.1. The required performance is determined by laws, regulations and standards, customer requirements and expectations, and supplier requirements, and is usually stated in a specification document, where delimitations of the operating context are stated. As long as the predicted performance at least fulfills the required performance, the item is reliable – when it is used in the same operating context and for the period of time stated in the required performance. By operating context we mean the environmental conditions the item is used in, the usage patterns, and the loads it is subjected to, and how the item is serviced and maintained. Definition 1.1 is not new and is not created by us. Several authors and organizations have used this, or a very similar definition of reliability, at least since the 1980s. A more thorough discussion of reliability and related concepts is given in Section 1.3.
+1.1.1
+Service Reliability
+A service is provided by a person, an organization, or a technical item to a person or a technical item. The entity providing the service is called a service provider, and the entity receiving the service is called a customer. Services can be provided on a (i) continuous basis (e.g., electric power, computer networks), (ii) according to a timetable (e.g., bus, rail, and air transport), or (iii) on demand (e.g., payment by debit cards). Many services are provided by a single service provider to a high number of customers. A customer considers the service to be reliable when she receives the service (e.g., electric power) with sufficient quality without outages. We define service reliability as:
+Definition 1.2 (Service reliability)
+The ability of the service to meet its supply function with the required quality under stated conditions for a specified period of time. ◽
+
+
+3
+The need for reliability
+Safety issues
+Environental requirements
+Market
+pressure Customer
+requirements
+Laws and regulations
+Maintenance costs
+Warranty costs
+Security issues
+Competition
+Figure 1.2 Main drivers for high reliability.
+Several quantitative service reliability metrics have been defined, but they vary between the different types of services.
+1.1.2
+Past and Future Reliability
+In our daily language, the term reliability is used to describe both past and future behavior. We may, for example, say that (i) “my previous car was very reliable” and (ii) “I believe that my new car will be very reliable.” These two statements are quite different. The first statement is based on experience with the car over a certain period, whereas the second statement is a prediction of what will happen in the future. We distinguish them by using two different terms.
+Reliability (single word) is always used to describe the future performance of an item. Because we cannot predict the future with certainty, we need to use probabilistic statements when assessing the reliability. Achieved reliability is used to describe the item’s past performance, which is assumed to be known to the analyst. No probabilistic statements are therefore involved. The achieved reliability is also called observed reliability.
+The focus of this book is on reliability and the future performance. The achieved reliability is most relevant in Chapter 14, where analysis of observed failure data is discussed.
+1.2 The Importance of Reliability
+Several producers of technical items have struggled and even collapsed because of item flaws and failures. To build a reputation for reliability is a long term project, but it may take a short time to lose this reputation. The main drivers for high reliability are listed in Figure 1.2. Over the years, the reliability has improved for almost all types of items, but at the same time, customers expect a higher and higher reliability
+
+
+4
+Initiating event
+Causal analysis
+Consequence analysis
+Methods
+- Checklists - Preliminary hazard analysis - FMECA* - HAZOP
+- Event data sources
+- Fault tree analysis* - Reliability block diagrams* - Bayesian networks* - FMECA*
+- Reliability data sources*
+- Event tree analysis* - Consequence models - Reliability assessment* - Evacuation models - Simulation
+(b) (a) (c)
+Figure 1.3 Main steps of risk analysis, with main methods. The methods covered in this book are marked with ∗.
+of the new items they buy. Current customers further expect that possible failures in the warranty period are rectified without any cost to the customer. To be attractive in the market, the suppliers have to offer a longer and longer warranty period. If items have flaws that affect safety, safety regulations may require all the flawed items to be recalled for repair or modification. Such recalls are rather frequent in the car industry, but are also common in many other industries. In addition to excessive warranty costs and item recalls, flawed items lead to dissatisfied and non-returning customers.
+1.2.1
+Related Applications
+Reliability considerations and reliability studies are important inputs to a number of related applications. Several of these applications have adopted the basic terminology from reliability. Among the relevant applications are:
+Risk analysis. The main steps of a quantitative risk analysis (QRA) are: (a) identification and description of potential initiating events that may lead to unwanted consequences, (b) identification of the main causes of each initiating event and quantification of the frequency of the initiating events, and (c) identification of the potential consequences of the initiating events and quantification of the probabilities of each consequence. The three steps are shown in the bow-tie model in Figure 1.3, where the main methods are indicated. The methods that are covered in this book are marked with an ∗. Maintenance planning. Maintenance and reliability are closely interlinked. High quality maintenance improves the operational reliability and high reliability gives few failures and low maintenance cost. The close link is also visible in the popular
+
+
+5
+approach reliability centered maintenance (RCM), which is discussed in Chapter 9. Quality. Quality management is increasingly focused, stimulated by the ISO 9000 series of standards. The concepts of quality and reliability are closely connected. Reliability may in some respects be considered to be a quality characteristic. Life cycle costing. The life cycle cost (LCC) may be split into three types: (i) capital expenditure (CAPEX), (ii) operational expenditure (OPEX), and (iii) risk expenditure (RISKEX). The main links to reliability are with types (ii) and (iii). The OPEX is influenced by how regular the function/service is and the cost of maintenance. The RISKEX covers the cost related to accidents, system failures, and insurance. LCC is also called total ownership cost. Production assurance. Failures in a production system lead to downtime and reduced production. To assure a regular production, the production system must have a high reliability. Production assurance is treated in the international standard ISO 20815 and discussed in Chapter 6. Warranty planning. A warranty is a formal commitment to deliver reliable items. If failures and malfunctions are detected during a specified warranty period, the supplier has to repair and/or compensate the failure. Unreliable items may incur a high cost for the supplier. Systems engineering. Reliability is one of the most important quality attributes of many technical systems. Reliability assurance is therefore an important topic during the systems engineering process. This is especially the case within the nuclear power, the aviation, the aerospace, the car, and the process industries. Environmental protection. Reliability studies are used to improve the design and operational availability of many types of environmental protection systems. Many industries have realized that a main part of the pollution from their plants is caused by production irregularities and that consequently the reliability of the plant is an important factor in order to reduce pollution. Environmental risk analyses are carried out according to the procedure shown in Figure 1.3. Technology qualification. Many customers require the producer of technical items to verify that the item satisfies the agreed requirements. The verification is carried out by following a technology qualification program (TQP) based on analysis and testing. This is especially the case within the aerospace, defense, and petroleum industries (e.g., see DNV-RP-A203, 2011).
+Applications related to reliability are illustrated in Figure 1.4.
+1.3 Basic Reliability Concepts
+The main concept of this book is reliability as defined in Definition 1.1. The aim of this section is to discuss and clarify this definition and to define related terms, such as maintainability and maintenance, availability, quality, and dependability. It is important that all main words are defined in an unambiguous way. We fully agree with Kaplan (1990) who states: “When the words are used sloppily, concepts
+
+
+6
+Reliability
+Life cycle cost (LCC)
+Maintenance planning
+Warranty planning
+Environmental protection
+Production assurance
+Risk analysis
+System engineering
+Technology qualification
+Figure 1.4 Reliability as basis of other applications.
+become fuzzy, thinking is muddled, communication is ambiguous, and decisions and actions are suboptimal.”
+1.3.1
+Reliability
+Definition 1.1 says that reliability expresses “the ability of an item to perform as required in a stated operating context and for a stated period of time.” We start by clarifying the main words in this definition.
+1) Reliability is defined by using the word ability, which is not directly measurable. A quantitative evaluation of the item’s ability to perform must therefore be based on one or more metrics, called reliability metrics. Several probabilistic reliability metrics are defined and discussed in Section 1.4. 2) Some authors use the word capability instead of ability in the definition of reliability and claim that the term capability is more embracing, covering both ability and capacity. Most dictionaries list ability and capability as synonyms. We prefer the word ability because this is the word most commonly used. 3) The statement perform as required means that the item must be able to perform one or more specified functions according to the performance criteria for these function(s). Functions and performance criteria are discussed in Section 2.5. 4) Many items can perform a high number of functions. To assess the reliability (e.g., of a car), we must specify the required function(s) that are considered. 5) To be reliable, the item must do more than meet an initial factory performance or quality specification – it must operate satisfactorily for a specified period of time in the actual operating context. 6) The stated period of time may be a delimited time period, such as a mission time, the time of ownership, and several more. 7) The time may be measured by many different time concepts, such as calendar time, time in operation, number of work cycles, and so on. For vehicles, the time is often measured as the number of kilometers driven. For items that are not operated continuously in the same mode, a more complicated time concept may be needed.
+
+
+7
+Inherent and Actual Reliability
+It may be useful to qualify the reliability of an item by adding a word, such as inherent or actual. The inherent reliability is defined as:
+Definition 1.3 (Inherent reliability)
+The reliability of the item as designed and manufactured, which excludes effects of operation, environment, and support conditions other than those assumed and stated in the item requirements and specification. ◽
+The inherent reliability is therefore the reliability of a brand new item that will be used and maintained exactly according to the conditions described in the item specification document or implicitly assumed. The inherent reliability is sometimes called built reliability or built-in reliability of the item.
+The design and development team always attempts to adapt the item to the actual operating context, but it is difficult, if not impossible, to account for all the aspects in practical use. The actual reliability may consequently be different from the inherent reliability that was determined before the item was put into use. The actual reliability of an item is defined as:
+Definition 1.4 (Actual reliability)
+The reliability of the item in an actual operating context. ◽
+The actual reliability is sometimes called operational reliability or functional reliability.
+Software Reliability
+Software reliability is different from hardware reliability. Hardware items generally deteriorate due to wear or other mechanisms and failures occur as a random process. Software, on the other hand, does not deteriorate and faults or bugs remain dormant and undetected until the software is modified or a specific condition or trigger activates the bug – leading to item failure. Software bugs are manifestations of mistakes done in specification, design, and/or implementation. Reliability analysis of a software program is done by checking the code syntax according to specific rules and by testing (debugging) the software for a variety of input data. This process is not discussed further in this book. Interested readers may consult ISO 25010.
+1.3.2
+Maintainability and Maintenance
+Many items have to be maintained to perform as required. Two different concepts are important, maintainability and maintenance. Maintainability is a design feature of the item and indicates how easy it is to get access to the parts that are to be maintained and how fast a specific maintenance task can be done. Maintenance describes the actual work that is done to maintain an item. Maintainability is defined as:
+Definition 1.5 (Maintainability)
+The ability of an item, under stated conditions of use, to be retained in, or restored
+
+
+8
+to, a state in which it can perform as required, when maintenance is performed under stated conditions and using prescribed procedures and resources. ◽
+Maintainability is further discussed in Chapter 9. Maintenance is defined as:
+Definition 1.6 (Maintenance)
+The combination of all technical and management actions during the life cycle of an item intended to retain the item in, or restore it to, a state in which it can perform as required (IEV 192-06-01). ◽
+Hardware maintenance is discussed in more detail in Chapters 9 and 12. Software maintenance is not treated in this book.
+1.3.3
+Availability
+Availability measures the degree to which an item is able to operate at some future time t or during a future time interval (t1, t2), and is in this book regarded as a reliability metric. The availability of an item depends on the reliability, recoverability, and maintainability of the item, and also on the maintenance support performance. Recoverability is the item’s ability to recover from a failure, without repair. Maintenance support are the resources that are available for maintenance, such as workshops, qualified personnel, and tools. Availability is discussed in Chapters 6, 11, and 13.
+1.3.4
+Quality
+The term quality is closely related to reliability and is defined as:
+Definition 1.7 (Quality)
+The totality of features and characteristics of a product or service that bear on its ability to satisfy stated or implied needs. ◽
+Quality is sometimes defined as conformity to specifications and a quality defect is referred to as a nonconformity. According to common usage, quality denotes the conformity of the item to its specification as manufactured, whereas reliability denotes its ability to continue to comply with its specification over its useful life. With this interpretation, reliability may be considered an extension of quality into the time domain.
+1.3.5
+Dependability
+Dependability is a more recent concept that embraces the concepts of reliability, maintainability, and availability, and in some cases also safety and security. Dependability has, especially, become known through the important series of standards IEC 60300 “Dependability management.” The IEV defines dependability as:
+
+
+9
+Definition 1.8 (Dependability)
+The ability (of an item) to perform as and when required (IEV 192-01-01). ◽
+Another commonly used definition is: “Trustworthiness of a system such that reliance can justifiably be placed on the service it delivers” (Laprie, 1992).
+Remark 1.1 (Translating the word dependability)
+Many languages, such as Norwegian and Chinese, do not have words that can distinguish reliability and dependability, and reliability and dependability are therefore translated to the same word. ◽
+1.3.6
+Safety and Security
+General safety is outside the scope of this book, and we deal only with the safety aspects of a specified technical item and define safety as:
+Definition 1.9 (Safety)
+Freedom from unacceptable risk caused by the technical item. ◽
+This definition is a rephrasing of definition IEV 351-57-05. The concept safety is mainly used related to random hazards, whereas the concept security is used related to deliberate hostile actions. We define security as:
+Definition 1.10 (Security)
+Dependability with respect to prevention of deliberate hostile actions. ◽
+The deliberate hostile action can be a physical attack (e.g., arson, sabotage, and theft) or a cyberattack. The generic categories of attacks are called threats and the entity using a threat is called a threat actor, a threat agent, or an adversary. Arson is therefore a threat, and an arsonist is a threat actor. The threat actor may be a disgruntled employee, a single criminal, a competitor, a group, or even a country. When a threat actor attacks, he seeks to exploit some weaknesses of the item. Such a weakness is called a vulnerability of the item.
+Remark 1.2 (Natural threats)
+The word threat is also used for natural events, such as avalanche, earthquake, flooding, landslide, lightning, tsunami, and volcano eruption. We may, for example, say that earthquake is a threat to our item. Threat actors are not involved for this type of threats. ◽
+1.3.7
+RAM and RAMS
+RAM, as an acronym for reliability, availability, and maintainability, is often used, for example, in the annual RAM Symposium.1) RAM is sometimes extended to RAMS where S is added to denote safety and/or security. The RAMS acronym is, for example, used in the railway standard IEC 62278.
+1) RAM Symposium: www.rams.org.
+
+
+10
+Remark 1.3 (Broad interpretation of reliability)
+In this book, the term reliability is used quite broadly, rather similar to RAM as defined above. The same interpretation is used by Birolini (2014). ◽
+1.4 Reliability Metrics
+Throughout this book, it is assumed that the time-to-failure and the repair time of an item are random variables with probability distributions that describe the future behavior of the item. The future behavior may be evaluated based on one or more reliability metrics. A reliability metric is a “quantity” that is derived from the reliability model and is, as such, not directly measurable. When performance data become available, we may estimate or predict quantitative values for each reliability metric. A single reliability metric is not able to tell the whole truth. Sometimes, we need to use several reliability metrics to get a sufficiently clear picture of how reliable an item is.
+1.4.1
+Reliability Metrics for a Technical Item
+Common reliability metrics for an item include:
+1) The mean time-to-failure (MTTF) 2) The number of failures per time unit (failure frequency) 3) The probability that the item does not fail in a time interval (0, t] (survivor probability)
+4) The probability that the item is able to function at time t (availability at time t)
+These and several other reliability metrics are given a mathematical precise definition in Chapter 5, and are discussed and exemplified in the subsequent chapters.
+Example 1.1 (Average availability and downtime)
+Consider the electricity supply, which is supposed to be available at any time. The achieved average availability Aav of the supply is quantified as
+Aav = Uptime
+Total time = 1 − Downtime
+Total time
+If we consider a period of one year, the total time is approximately 8760 hours. The downtime is the time, during the specified time period, the service is not available. The relationship between the average availability and the length of the downtime may be summarized in tabular form as:
+
+
+11
+Availability Downtime (per year)
+90% 36.5 days 99% 3.65 days 99.9% 8.76 hours 99.99% 52 minutes 99.999% 5 minutes
+◽
+1.4.2
+Reliability Metrics for a Service
+A wide range of service reliability metrics have been defined, but these vary significantly between the application areas. The most detailed metrics are available for electric power supply (e.g., see IEEE Std. 1366, 2012).
+Example 1.2 (Airline reliability and availability)
+Airline passengers are mainly concerned about whether the journey will be safe and whether the aircraft will take off and land on the scheduled times. The second concern is, by airlines, expressed by the dispatch reliability, which is defined as the probability that a scheduled departure takes place within a specified time after the scheduled departure time. Many airlines use a 15-minutes margin between actual and scheduled departure time for a flight to be considered as having departed on time. The achieved dispatch reliability indicator for a (past) period is reported as the percentage of all departures that departed on time.
+Dispatch reliability = No. of departures on time
+No. of departures + cancellations
+For technical items, the airlines are mainly using the reliability metrics listed in Section 1.4.1 ◽
+1.5 Approaches to Reliability Analysis
+Three main branches of reliability can be distinguished:
+• Hardware reliability • Software reliability • Human reliability
+The present book is concerned with hardware items (existing or in design) that may or may not have embedded software. Within hardware reliability, two different approaches may be used: the physical approach and/or the systems approach.
+
+
+12
+0
+Strength distribution
+Load distribution
+"Failure area"
+Figure 1.5 Load and the strength distributions at a specified time t.
+Failure
+Time t
+0
+Strength, S(t)
+Load, L(t)
+Time to failure, T
+Figure 1.6 Possible realization of the load and the strength of an item.
+1.5.1
+The Physical Approach to Reliability
+In the physical approach, the strength of a technical item is modeled as a random variable S. The item is exposed to a load L that is also modeled as a random variable. The distributions of the strength and the load at a specific time t are shown in Figure 1.5. A failure will occur as soon as the load is higher than the strength. The survival probability R of the item is defined as the probability that the strength is greater than the load,
+R = Pr(S > L)
+where Pr(A) is the probability of event A. The load may vary with time and be modeled as a time-dependent variable L(t). The item may deteriorate with time, due to failure mechanisms, such as, corrosion, erosion, and fatigue. The strength of the item will therefore also be a function of time, S(t). A possible realization of S(t) and L(t) is shown in Figure 1.6. The timeto-failure T of the item is the (shortest) time until S(t) < L(t),
+T = min{t; S(t) < L(t)}
+and the survivor probability R(t) of the item may be defined as
+R(t) = Pr(T > t)
+The physical approach is mainly used for reliability analyses of structural elements, such as beams and bridges. The approach is therefore often called structural reliability analysis (Melchers, 1999). A structural element, such as a leg on an offshore platform, may be exposed to loads from waves, current, and wind. The loads may
+
+
+13
+come from different directions, and the load must therefore be modeled as a vector L(t). In the same way, the strength will also depend on the direction and has to be modeled as a vector S(t). The models and the analysis therefore become complicated. The physical approach is not pursued further in this book.
+1.5.2
+Systems Approach to Reliability
+By the systems approach, all our information about the operational loads and the strength of an item is incorporated in its probability distribution function F(t) of the time-to-failure T. No explicit modeling of the loads and the strength is carried out. Reliability metrics, such as the survivor probability and the mean time-to-failure are deduced directly from the probability distribution function F(t). Various approaches can be used to model the reliability of systems of several components and to include maintenance and replacement of components. When several components are combined into a system, the analysis is called a system reliability analysis. Quantitative results are based on information about the reliability of the components. Such information come from statistical data on past experience with the same or similar components, laboratory testing, or from expert judgments. This approach has similarities to actuarial assessments and the systems approach to reliability is, therefore, sometimes referred to as an actuarial approach. This book is concerned with the systems approach to reliability.
+System Models
+In reliability studies of technical systems, we always have to work with models of the systems. These models may be graphical (networks of different types) or mathematical. A mathematical model is necessary in order to be able to bring in data and use mathematical and statistical methods to estimate reliability parameters. For such models, two conflicting interests always apply:
+1) The model should be sufficiently simple to be handled by available mathematical and statistical methods. 2) The model should be sufficiently “realistic” such that the deducted results are of practical relevance.
+We should always bear in mind that we are working with an idealized, simplified model of the system. Furthermore, the results we derive are, strictly speaking, valid only for the model, and are accordingly only “correct” to the extent that the model is realistic. The modeling situation is illustrated in Figure 1.7. Before we start developing a model, we should clearly understand what type of decision the results from our analysis should provide input to, and also the required format of the input to the decision. To estimate the system reliability from a model, we need input data. The data will usually come from generic data sources, as discussed in Chapter 16. The generic data may not be fully relevant for our system and may have to be adjusted by expert judgment. This is especially the case when we are introducing new technology.
+
+
+14
+Study object
+Rest of the world Generic data
+System model Data
+for the analysis
+Results Input to decisions
+&
+Decisions
+Other inputs to decisions
+Other inputs to decisions
+Simplification limitations
+Relevance? uncertainty Relevance?
+Figure 1.7 The system reliability analysis process.
+Feasibility and concept study
+Design phase
+Development phase
+Manufacturing phase
+Installation, commissioning phase
+Operation and maintenance phase
+Removal and disposal phase
+Figure 1.8 The phases of a system development project (example).
+Some data may also come from the specific system. When establishing the system model, we have to consider the type, amount, and quality of the available input data. It has limited value to establish a very detailed model of the system if we cannot find the required input data.
+1.6 Reliability Engineering
+Engineering deals with the design, building, and use of technical items. Reliability engineering is an engineering discipline that provides support to the engineering process. To be successful, reliability engineering must be integrated in the engineering process and the reliability engineer(s) must take full part in the engineering team. An item development project is split into a number of phases. The number and the title of these phases vary from industry to industry and also between companies in the same industry. A typical set of phases is shown in Figure 1.8. The phases in Figure 1.8 are arranged as a time axis, but iterations are usually required, for example, to make a redesign after a defect has been revealed in a later phase. Each phase is usually divided into stages and many manufacturers have procedures describing in detail which reliability analyses to carry out in each stage
+
+
+15
+together with procedures for the data flow. Reliability engineering has its most important role in the three first phases in Figure 1.8, but should be integrated in all phases.
+1.6.1
+Roles of the Reliability Engineer
+The objective of reliability engineering is to identify, analyze, and mitigate failures and operational problems during all phases of an item’s life cycle. The reliability engineer has an important role in all these phases. Below, the roles of the reliability engineer are listed briefly in the design and development phases and in the operational phase.
+Roles in Design and Development
+A reliability engineer has her most important role in the specification, design, and development phases of a new item. In these phases, the reliability engineer helps the development team to:
+1) Identify potential failures of suggested component and module concepts such that failures may be designed out. 2) Quantify the reliability of suggested system concepts. 3) Provide input to decisions about modularization, stacking, and system layout. 4) Make tradeoffs between factors such as cost, functions, performance, reliability, time to market, safety, and security. 5) Identify weaknesses of the system design such that they can be corrected before the system goes to manufacturing or to the customers. 6) Clarify benefits and drawbacks related to redundancy of components and modules. 7) Identify causes and effects of possible failure modes. 8) Compare the life cycle cost of design alternatives. 9) Evaluate the cost of suggested warranty policies. 10) Calculate the reliability of system options as input to choice between these. 11) Plan and perform reliability acceptance or qualification testing (e.g., in a TQP framework).
+Roles in Normal Operation
+The main role of the reliability engineer in normal operation is to track items causing abnormally high maintenance cost and production losses or service outages, then find ways to reduce these losses or high costs. The role of a reliability engineer may vary from company to company but the overall goal is always the same: reduce maintenance costs as much as possible without interrupting system operation. Another main role of the reliability engineer in this phase is to collect, analyze, and present reliability data. This topic is treated in detail in Chapter 14.
+Reliability has to be designed and manufactured into an item. It is too late and too costly to wait until the item is produced. Reliability considerations must be integrated
+
+
+16
+into all steps of the development process. This book presents the main theory and many of the required methods and tools for reliability engineering, but reliability engineering also requires a number of methods that are outside the scope of this book. When to carry out an analysis, which data are available at this stage, and how to update and use the results are central questions in reliability engineering that are not covered in this book.
+1.6.2
+Timing of Reliability Studies
+Reliability studies are carried out to provide input to decision-making related to an item. The objectives and the scope of the reliability study are dependent on the type of decision to be made. Before starting a reliability study, it is essential to have a clear understanding of the decision and the data needed as input to the decision-making. A reliability study to provide input to decisions on warranties may, for example, be quite different from a reliability study to provide input to decisions on safety barriers in a risk assessment. It is very important that the reliability studies are planned and executed such that the required results are available before the decision-making takes place!
+1.7 Objectives, Scope, and Delimitations of the Book
+The overall objective of this book is to give a thorough introduction to component and system reliability analysis by the system reliability approach. More detailed objectives are:
+1) To present and discuss the terminology and the main models used in system reliability studies. 2) To present the main analytical methods used in reliability engineering and management. 3) To present and discuss basic theory of maintenance and preventive maintenance modeling and illustrate how these can be applied. 4) To present the main theory and a selection of methods for reliability data analysis, which is also called survival analysis. 5) To give an introduction to Bayesian probability and Bayesian data analysis.
+The book does not specifically deal with how to engineer and manage a reliable system. The main topics of the book are connected to how to define and quantify reliability metrics and to predict the reliability of a system. Our aim is that the book will be a valuable source as:
+(a) A textbook for system reliability courses at university level. (b) A handbook for reliability engineers in industry and consulting companies. (c) A reference book for scientists and engineers in related disciplines.
+
+
+17
+The following delimitations apply:
+• The study object is built of hardware parts based on mechanical, electrical, or electronic technology, and may or may not have embedded software and communication to/from the outside. In most cases, the study object has a human/operator interface. Operators and third party personnel are outside the scope of the book. This means that human reliability, as such, is not covered. The prime focus of the book is on hardware items. • The reliability of purely software items is outside the scope of this book. • Structural reliability issues are not covered in this book. • The focus of the book is on components and rather simple systems. The theory and methods presented may also be useful for analyzing complex systems, but we have to realize that they may not be sufficient. • Failures caused by deliberate hostile actions is covered rather rudimentarily. • In the main part of the book, we assume that each item can have only two states, functioning or failed. Multi-state reliability is not covered properly. • A general introduction to maintenance is not provided. The presentation is delimited to aspects of maintenance that are directly relevant for system reliability. • The book provides a thorough introduction to system reliability analysis, but does not cover reliability engineering and reliability management in a sufficient way.
+1.8 Trends and Challenges
+System reliability has been around since the 1940s. The relevance of reliability has increased steadily and we clearly see trends and challenges that will increase the relevance in the years to come. In this section, we briefly mention some of these trends and challenges. An overall trend is that customers expect new items to be better, faster, and cheaper than the items they replace. More specific challenges include:
+1) Items get more and more complicated with a lot of embedded software. Hardware functions are replaced with software-based functions. Because the software-based functions are relatively cheap, many items are loaded with “nice-to-have” function that may also fail. 2) Most producers meet fierce international competition. To survive, this requires reduced development costs, shorter time to market, and less time spent on analyses and testing. New items have to be sufficiently reliable in the first concept version. 3) Customers require more and more of the items they purchase, related to functions, quality, and reliability. The requirements are often changing rapidly. Factors influencing item requirements are shown in Figure 1.9. 4) There is an increasing focus on safety and environmental friendliness and an increasing risk of item call-back if the items should have safety-related defects. 5) New items are increasingly made up of elements from a variety of subcontractors from many different countries, making it difficult for the main producer to verify
+
+
+18
+More functions
+Increased product liability
+Reduced development costs
+Better performance
+Longer warranty period
+Environmental friendly
+Shorter development time
+More safe and secure
+Product requirements
+Figure 1.9 Factors that influence item requirements.
+the item reliability. 6) For some items, high speed operation reduces the tolerance of deviations and increases the consequences of failures, should they happen. 7) There is an increasing focus on warranty. Companies have disappeared because of excessive warranty costs. 8) An increasing number of items are now connected to a cyber network and are vulnerable to cyberattacks. Current challenges are related to the rapid developments of smart homes, smart cities, smart transport systems, the Internet of things (IoT), cyber-physical systems, systems of systems, and Industry 4.0. Within few years, we expect to see many more new initiatives of similar nature. This will make reliability analyses even more challenging.
+1.9 Standards and Guidelines
+A range of standards and guidelines stating requirements to reliability and safety have been issued. Any reliability engineer needs to be familiar with the standards and guidelines that are applicable within her subject areas.
+1.10 History of System Reliability
+This section highlights some achievements in the history of system reliability starting from the 1930s. We realize that our presentation is biased because we put too much focus on activities in Europe and in the United States. In addition, we have included mainly events and books that have influenced our own learning and understanding of system reliability. The development of reliability theory has been strongly influenced by a series of accidents and catastrophic failures. Some of these are mentioned, but you may find that we have missed many important accidents. Some of the achievements mentioned in this section may be difficult to comprehend
+
+
+19
+fully at this stage and it may therefore be wise to postpone the reading of this section until you have delved deeper into the subject.
+1930s
+At the beginning of the 1930s, Walter Shewhart, Harold F. Dodge, and Harry G. Romig laid down the theoretical basis for utilizing statistical methods in quality control of industrial products, but such methods were not used to any great extent until the beginning of World War II. Products that were composed of a large number of parts often failed, despite the fact that they were made of individual high-quality components. An important achievement was made in the 1930s by the Swedish professor Waloddi Weibull (1887-1979) during his studies of the strength of materials. In Weibull (1939), he laid the basis for one of the most important probability distributions in reliability theory, the Weibull distribution (Weibull, 1951).
+1940s
+It is often claimed that the first quantitative system reliability assessment can be attributed to Robert Lusser (1899-1969). He was a German engineer and aircraft designer who took part in several well-known Messerschmitt and Heinkel designs during World War II. During the war, a group in Germany was working under Wernher von Braun developing the V-1 missile, but the ten first V-1 missiles were all fiascos. In spite of attempts to provide high-quality parts and careful attention to details, all the first missiles either exploded on the launching pad or landed “too soon” (in the English Channel). Robert Lusser was called in as a consultant. His task was to analyze the missile system, and he quickly derived the product probability law of series components saying that the reliability of series system is equal to the product of the reliabilities of the individual components that make up the system. If the system comprises a large number of components, the system reliability may therefore be low, even though the individual components have high reliabilities. A young mathematician, Erich Pieruschka, assisted Wernher von Braun and may have been as important as Lusser in developing Lusser’s law. Some authors prefer to refer to Pieruschka’s law instead of Lusser’s law. An important contribution to the subsequent reliability theory was made by the Russian mathematician Boris V. Gnedenko (1912-1995) in his 1943 paper “On the limiting distribution of the maximum term in a random series.”2) In this paper, Gnedenko provided rigorous proofs and formulated three classes of limit distributions, one of which was the Weibull distribution. Gnedenko was not the first to define the three limit distribution classes, but the first to provide proofs. The classes had earlier been defined by Fisher and Tippett (1928). The extreme value theorem proved by Gnedenko is often referred to as the Fisher-Tippett-Gnedenko theorem. In the United States, attempts were made to compensate a low system reliability by improving the quality of the individual components. Better raw materials and better designs for the products were demanded. A higher system reliability was obtained,
+2) For a discussion of Gnedenko’s contribution, see Smith (1992).
+
+
+20
+but extensive systematic analysis of the problem was probably not carried out at that time. After World War II, the development continued throughout the world as increasingly more complicated products were produced, composed of an ever-increasing number of components (e.g., television sets and electronic computers). With automation, the need for complicated control and safety systems also became steadily more pressing. Several attempts to test and quantify the reliability of electronic components began in the 1940s during World War II. The war activities clearly revealed that electron (vacuum) tubes were the most failure-prone components in electronic systems (Denson, 1998). Several groups tried to identify ways to improve the reliability of electronic systems and it was suggested that the reliability of the components needed to be verified by testing before full-scale production. In 1945, Milton A. Miner formulated the important Miner’s rule for fatigue failures (Miner, 1945). A similar rule was suggested by the Swedish engineer Nils Arvid Palmgren (1890-1971) already in 1924 while studying the life length of roller bearings. The rule is therefore also called the Palmgren-Miner’s rule and the MinerPalmgren’s rule. In 1949, the Institute of Electrical and Electronic Engineers (IEEE) formed a professional group on quality control as part of its Institute of Radio Engineers. The group got more and more focused on reliability issues and changed name several times. In 1979 the group got its current name, IEEE Reliability Society. The first guideline on failure modes and effects analysis (FMEA) was issued in 1949 (MIL-P-1629, 1949). This guideline was later developed into the military standard MIL-STD-1629A.
+1950s
+The Advisory Group on Reliability of Electronic Equipment (AGREE) was established in 1950 to survey the field and identify and promote actions that could provide more reliable electronic equipment. A big step forward was made by the report AGREE (1957). The 1950s saw much pioneering work in the reliability discipline. The Weibull distribution was properly defined (Weibull, 1951) and soon became popular and several U.S. military handbooks were issued. The statistical branch of reliability theory was strongly enhanced by the paper “Life testing" (Epstein and Sobel, 1953) and some years later by the Kaplan-Meier estimate (Kaplan and Meier, 1958). The United Kingdom Atomic Energy Authority (UKAEA) was formed in 1954. It soon got involved in performing safety and reliability assessments for outside bodies, due to its competence in such work in the nuclear field. In the middle of the 1950s, Bell Telephone Laboratories started to develop the fault tree approach describing the possible causes of an undesired event, using Boolean algebra.
+
+
+21
+1960s
+Reliability theory was significantly enhanced during the 1960s and several important books were published, among which are Bazovsky (1961); Lloyd and Lipow (1962); Barlow and Proschan (1965); Shooman (1968). In 1960, the first edition of the U.S. military handbook MIL-HDBK-217F was released, outlining an approach for reliability prediction of electronic equipment. In 1962, the Bell Telephone Laboratories published a report on the safety of the launch control system for the Minuteman intercontinental ballistic missile using fault tree analysis. This report is considered to be the birth of fault tree analysis. The same year, David R. Cox published his seminal book on renewal theory (Cox, 1962). In 1964, the “Reliability Engineering” handbook was published by Aeronautical Radio, Incorporated (ARINC). This book (ARINC, 1964) was one of the first books describing engineering aspects of reliability theory. Another book on reliability engineering was Ireson (1966). In 1968, the Air Transport Association (ATA) issued a document titled “Maintenance Evaluation and Program Development.” This document gave rise to the approach “maintenance steering group” (MSG). The first version, called MSG-1, was used to ensure the safety of the new Boeing 747-100 aircraft. The MSG-1 process used FMECA and a decision logic to develop scheduled maintenance. MSG-1 was later developed into MSG-2 and MSG-3, which is the current version. The Reliability Analysis Center (RAC) was established in 1968 as a technical information center for the U.S. Department of Defense, and soon played a very important role in the development of reliability theory and practice. The RAC journal was widely distributed, presenting updated information about new developments. The military standard “Reliability program for systems and equipment” was published in 1969 (MIL-STD-785A, 1969). One of the most influential researchers on reliability theory in the 1960s was Zygmunt Wilhelm Birnbaum (1903-2000). He introduced a new importance metric of component reliability (Birnbaum, 1969), made a probabilistic version of Miner’s rule for fatigue life (Birnbaum and Saunders, 1968), and made many other significant contributions.
+1970s
+A most important event for reliability in the 1970s was the release of the report from the Reactor Safety Study in 1975 (NUREG-75/014). The study was made by a group of experts lead by professor Norman Rasmussen of MIT. A high number of important methods were developed as part of – or inspired by – the Reactor Safety Study. The U.S. Nuclear Regulatory Commission (NRC) was established the same year (in 1975) and soon started to issue NRC Regulations, called NUREG. The nuclear accident at Three Mile Island (TMI) near Harrisburg, PA occurred in 1979. In light of the recent Reactor Safety Study, it had a great impact of the development of system reliability theory. In the early 1970s, several important results on network reliability were developed in Russia (e.g., see Lomonosov and Polesskii, 1971). Many new books on system reliability were published. Among these are Green and Bourne (1972); Barlow and
+
+
+22
+Proschan (1975); Kapur and Lamberson (1977). Analysis of reliability and lifetime data grew more important and the new book Mann et al. (1974) provided help on theory and methods. An even more important publication in this area was David R. Cox’s paper “Regression models and life tables (with discussions)” (Cox, 1972). Based on the ideas of the MSG-approach (see 1960s), a new maintenance planning approach called “reliability-centered maintenance” (RCM) was introduced in 1978 (Nowlan and Heap, 1978). The RCM approach was initially developed for the defense industry, but is today used in many other applications and a high number of standards and guidelines have been issued. In Norway, the first major accident in the offshore oil and gas industry occurred in 1977, the Bravo blowout in the Ekofisk field in the North Sea. This was a shock for the Norwegian industry and the government. As a consequence of this accident, a large research program, called “Safety Offshore” was launched by the Norwegian Research Council. A high number of safety and reliability projects were sponsored by the oil and gas industry. The first author of this book started lecturing a course in system reliability at the Norwegian University of Science and Technology (NTNU) in 1978. The UKAEA Safety and Reliability Directorate (SRD), established in 1977, became a very active unit with a strong influence on the development of reliability theory, especially in Europe.
+1980s
+The 1980s started with a new journal Reliability Engineering, which had a great influence on the further development of reliability theory. The first editor of the journal was Frank R. Farmer (1914-2001), who made significant contributions in both risk and reliability theory. The title of the journal was later changed to Reliability Engineering and System Safety.
+The Offshore Reliability Data (OREDA) project was initiated in 1981 and the first OREDA handbook was published in 1984. The same year another important reliability data handbook, IEEE Std. 500 (1984) also entered the market. Reliability data analysis became more important and several books on this topic were published in the early 1980s, the most influential may be Kalbfleisch and Prentice (1980); Lawless (1982); Nelson (1982); Cox and Oakes (1984). Fault tree analysis got more standardized through the Fault Tree Handbook that was published by the U.S. NRC in 1981 (NUREG-0492). Bayesian probability entered into the field of reliability promoted by the book Martz and Waller (1982). To strengthen the U.S. semiconductor industry, the organization SEMATECH was established in 1987. SEMATECH prepared and made available a range of highquality reliability guidelines that were studied far beyond the semiconductor industry. Several universities established education programs in safety and reliability during the 1980s. Most notable were perhaps the programs provided by the Center of Risk and Reliability at the University of Maryland and the Norwegian University of Science and Technology (NTNU). Several catastrophic accidents occurred in the 1980s and clearly showed the im
+
+
+23
+portance of risk and reliability. Among these were the capsizing of the Alexander Kielland offshore platform in 1980, the gas disaster in Bhopal, India in 1984, the fire and chemical spill at the Sandoz warehouse in Basel, Switzerland in 1986, the Challenger space shuttle accident in 1986, and the explosion on the offshore platform Piper Alpha in 1988. Several of these accidents prompted changes in legislation, new requirements to risk and reliability analyses, and initiated a range of research projects.
+After 1990
+The developments mentioned above continued and were strengthened in the years after 1990. The topic of system reliability got more and more popular and a range of new journals, new books, new education programs, new computer programs, new organizations, and a variety of reliability conferences emerged. The first edition of the current book was published in 1994, based on experience from reliability courses at NTNU. The industry started to integrate reliability in their system development processes, often as part of a systems engineering framework. The topics of reliability qualification and technology readiness became more and more important and requirements were integrated in contracts of specialized products. The first edition of the important standard IEC 61508 “Functional safety of electrical/electronic/programmable electronic safety-related systems” came in 1997 and required producers and users of safety-instrumented systems (SIS) to perform detailed reliability assessments. During this period, more and more software has been introduced in almost all types of systems. Software quality and reliability are now an important part of most system reliability assessments. More recently, security aspects have also entered the scene. The current survey has highlighted some few fragments of the history of system reliability. A more thorough treatment of the history is given by Coppola (1984); Denson (1998); Knight (1991) and National Research Council (2015, Annex D). A lot of valuable information may also be found by searching the Internet.
+1.11 Problems
+1.1 Discuss the main similarities and differences between the concepts of quality and reliability. 1.2 List some of the services you make use of in your daily life. Which factors do you consider relevant in order to describe the reliability of each of these services? 1.3 Section 1.2 lists several application areas that are related to, and use terminology from reliability theory. Can you suggest some more application areas? 1.4 Discuss the main differences between hardware reliability and software reliability. Do you consider the term “software quality” to be more or less relevant than “software reliability”? 1.5 A stakeholder may be defined as a “person or organization that can affect, be af
+
+
+24
+fected by, or perceive themselves to be affected by a decision or activity.” Choose a specific item/system (e.g., a dangerous installation) and list the main stakeholders of a system reliability analysis of this item/system. 1.6 Evaluate the maintainability of a modern mobile phone. Can you suggest any design changes of the phone that will improve its maintainability? 1.7 List some technical items for which you consider it beneficial to use the physical (i.e., load-strength) approach to reliability analysis.
+
+
+25
+References
+AGREE (1957) Reliability of military electronic equipment, Tech. Rep., Advisory Group on Reliability of Electronic Equipment, U.S. Department of Defense, Washington, DC.
+ARINC (1964) Reliability Engineering, Prentice-Hall, Englewood Cliffs, NJ. Barlow, R.E. and Proschan, F. (1965)
+Mathematical Theory of Reliability, Wiley, New York. Barlow, R.E. and Proschan, F. (1975) Statistical Theory of Reliability and Life Testing, Probability Models, Holt, Rinehart, and Winston, New York.
+Bazovsky, I. (1961) Reliability Theory and Practice, Prentice-Hall, Englewood Cliffs, NJ. Birnbaum, Z.W. (1969) On the importance of different components in a multicomponent system, in Multivariate Analysis II (ed. P.R. Krishnaiah), Academic Press, New York, pp. 581–592. Birnbaum, Z.W. and Saunders, S.C. (1968) A probabilistic interpretation of Miner’s rule. SIAM Journal of Applied Mathematics, 16, 637–652.
+Birolini, A. (2014) Reliability Engineering: Theory and Practice, Springer, Heidelberg, Germany, 7th edn.. Coppola, A. (1984) Reliability engineering of electronic equipment: A historic perspective. IEEE Transactions on Reliability, 33, 29–35.
+Cox, D.R. (1962) Renewal Theory, Methuen, London. Cox, D.R. (1972) Regression models and life tables (with discussion). Journal of the Royal Statistical Society, B 21, 411–421. Cox, D.R. and Oakes, D. (1984) Analysis of
+Survival Data, Chapman and Hall, London. Denson, W. (1998) The history of reliability prediction. IEEE Transactions on Reliability, 47 (3), 321–328. DNV-RP-A203 (2011) Qualification procedures for new technology, Recommended practice, DNV GL, Høvik, Norway. Epstein, B. and Sobel, M. (1953) Life testing. Journal of the American Statistical Association, 48 (263), 486–502. Fisher, R.A. and Tippett, L.H.C. (1928) Limiting forms of the frequency distributions of the largest or smallest of a sample. Proceedings of the Cambridge Philosophical Society, 24, 180–190.
+Green, A.E. and Bourne, A.J. (1972) Reliability Technology, Wiley, Chichester, UK. IEC 62278 (2002) Railway applications specification and demonstration of reliability, availability, maintainability and safety (RAMS), International standard,
+International Electrotechnical Commission, Geneva. IEEE Std. 1366 (2012) IEEE guide for electric power distribution reliability indices, Standard, Institute of Electrical and Electronics Engineers, New York. IEEE Std. 500 (1984) IEEE guide for the collection and presentation of electrical, electronic, sensing component, and mechanical equipment reliability data for nuclear power generating stations, Standard, Institute of Electrical and Electronics Engineers, New York. Ireson, W.G. (ed.) (1966) Reliability Handbook, McGraw-Hill, New York. ISO 20815 (2018) Petroleum, petrochemical, and natural gas industries: Production assurance and reliability management,
+
+
+26
+International standard, International
+Organization for Standardization, Geneva. ISO 25010 (2011) Systems and software engineering – systems and software quality requirements and evaluation (SQuaRE) system and software quality models, International standard, International
+Organization for Standardization, Geneva. ISO 9000 (2015) Quality management systems – fundamentals and vocabulary, Standard ISO 9000, International Organization for Standardization, Geneva. Kalbfleisch, J.D. and Prentice, R.L. (1980) The Statistical Analysis of Failure Time Data, Wiley, Hoboken, NJ. Kaplan, E.L. and Meier, P. (1958) Nonparametric estimation from incomplete observations. Journal of the American Statistical Association, 53 (282), 457–481. Kaplan, S. (1990) Bayes is for eagles. IEEE Transactions on Reliability, 39, 130–131. Kapur, K.C. and Lamberson, L.R. (1977)
+Reliability in Engineering Design, Wiley, Hoboken, NJ. Knight, C.R. (1991) Four decades of reliability progress, in Annual Reliability and Maintainability Symposium, IEEE, pp. 156–160.
+Laprie, J.C. (1992) Dependability : Basic Concepts and Terminology, Springer, Berlin. Lawless, J.F. (1982) Statistical Models and Methods for Lifetime Data, Wiley, Hoboken, NJ. Lloyd, D.K. and Lipow, M. (1962) Reliability: Management, Methods, and Mathematics, Prentice-Hall, Englewood Cliffs, NJ. Lomonosov, M.V. and Polesskii, V.P. (1971) A lower bound for network reliability.
+Problems of Information Transmission, 7 (4), 118–123. Mann, N.R., Schafer, R.E., and Singpurwalla, N.D. (1974) Methods for Statistical Analysis of Reliability and Lifetime Data, Wiley, Hoboken, NJ. Martz, H.F. and Waller, R.A. (1982) Bayesian Reliability Analysis, Wiley, New York. Melchers, R.E. (1999) Structural Reliability Analysis and Prediction, Wiley, Hoboken, NJ, 2nd edn.. MIL-HDBK-217F (1995) Reliability prediction
+of electronic equipment, Military handbook, U. S. Department of Defense, Washington, DC. MIL-P-1629 (1949) Procedures for performing a failure modes, effects, and criticality analysis, Military procedure, U.S.
+Department of Defense, Washington, DC. MIL-STD-1629A (1980) Procedures for performing a failure mode, effects, and criticality analysis, Military standard, U.S. Department of Defense, Washington, DC. MIL-STD-785A (1969) Reliability program for systems and equipment development and production, Military standard, U.S.
+Department of Defense, Washington, DC. Miner, M.A. (1945) Cumulative damage in fatigue. Journal of Applied mechanics, 12, A159–A164. National Research Council (2015) Reliability Growth: Enhancing Defense System
+Reliability, The National Academies Press, Washington, DC.
+Nelson, W. (1982) Applied Life Data Analysis, Wiley, New York. Nowlan, F.S. and Heap, H.F. (1978) Reliability-centered maintenance, Tech. Rep. A066-579, United Airlines, San Francisco. NUREG-0492 (1981) Fault tree handbook, Handbook NUREG-0492, U.S. Nuclear
+Regulatory Commission, Washington, DC. NUREG-75/014 (1975) Reactor safety: An assessment of accident risk in u.s. commercial nuclear power plants, Report NUREG-75/014, U.S. Nuclear Regulatory Commission, Washington, DC. Shooman, M.L. (1968) Probabilistic
+Reliability: An Engineering Approach, McGraw-Hill, New York. Smith, R.L. (1992) Introduction to Gnedenko (1943) On the limiting distribution of the maximum term in a random series, in
+Breakthroughs in Statistics (eds S. Kotz and N.L. Johnson), Springer, New York. Weibull, W. (1939) A statistical theory of the strength of materials, Report 151, Royal Swedish Institute for Engineering Research, Stockholm, Sweden. Weibull, W. (1951) A statistical distribution function of wide applicability. Journal of Applied mechanics, 18, 293–297.
+
+
+27
+2
+The Study Object and its Functions
+The study object is defined and described in terms of its functions and its structure. The concept of function is defined and system functions are illustrated as function trees and SADT / IDEF 0 diagrams. The structure of each function of the study object is modeled by a reliability block diagram that presents a deterministic and binary representation of a specified function of the study object. The study object is considered a system comprising subsystems and components. All systems in this book are technical systems that are built of at least some hardware components. The concepts of simple, complicated, and complex systems are introduced briefly.
+2.1 Introduction
+Our study object is usually a technical system, but can also be a single technical component. A component is an item that is not broken down into its constituent parts in a reliability analysis. This is contrary to a technical system, which is always broken down into its constituent parts, be it subsystems, modules, or components. This chapter defines, delimits, and classifies the study object. The system boundary and its operating context are defined. The concepts of system functions and their performance criteria are defined and discussed, and some simple approaches to functional modeling and analysis are presented. This is followed by a brief introduction to the Newtonian-Cartesian paradigm and its implications for system analysis. Systems are classified as simple, complicated, or complex, and it is argued why complex systems are outside the scope of this book. The chapters ends with an introduction to system structure modeling by reliability block diagrams.
+2.2 System and System Elements
+A (technical) system may be defined as:
+
+
+28
+System
+Subsystem 1
+Component 1.1 Component 1.2 Component 2.1 Component 2.2
+Subsystem 2
+Indenture level 1:
+Indenture level 2:
+Indenture level 3:
+Figure 2.1 System breakdown structure (simplified).
+Definition 2.1 (System)
+A set of interrelated elements that are organized to achieve one or more stated purposes. ◽
+The term system is derived from the Greek word systema, which means an organized relationship among functioning items. Aslaksen (2013) considers a system as the combination of three related sets: (i) a set of elements E, (ii) a set RI of internal interactions between elements, and (iii) a set RE of external interactions between one or more elements and the external world (i.e., interactions that can be observed from outside the system). For the purpose of a reliability study, the system elements are usually classified as subsystems, sub-subsystems, and so on, down to the component level. The system elements may be organized by a system breakdown structure as shown (simplified) in Figure 2.1. The levels of the hierarchy are called indenture levels, where the first level is called indenture level 1, the next indenture level 2, and so on.1) The number of levels required depends on the size of the system and the objectives of the reliability study. The various subsystems may have different numbers of levels. The lowest level in the system breakdown structure – and in the reliability study – is called component. A component may itself be a system with many parts, but is considered a black box in the study. A black box is an element that is viewed in terms of its inputs and outputs, without concern about its internal structure and functions. When investigating the causes of a component failure, we sometimes need to study the states and conditions of the various parts of the component. Subsystems are also referred to as modules. In system maintenance, terms such as maintanable item and least replaceable unit (LRU) are often used. A maintainable item is the lowest level in the system hierarchy that is specified for maintenance. A plethora of notions is used in the literature. Among these are: apparatus, component, element, equipment, instrument, item, module, part, product, system, and subsystem.
+1) IEV defines indenture level as the “level of subdivision within a system hierarchy” (IEV 192-01-05).
+
+
+29
+2.2.1 Item
+To simplify the notation, the element we are currently studying is referred to as the item, whether it is a system, a subsystem, or a component. An item is defined as
+Definition 2.2 (Item)
+An entity that is able to perform at least one function of its own, under specified operational and environmental conditions and when the required energy and controls are available. ◽
+We use the term item, unless when it is important to stress that we study a system consisting of subsystems, sub-subsystems, and so on.
+2.2.2
+Embedded Item
+Embedded software is computer software that is written to control the technical item. An embedded item is a combination of hardware and software that together form a part of a larger item. An example of an embedded item is a microprocessor that controls a car engine. An embedded item is designed to run on its own without human intervention, and may be required to respond to events in real time. Today, we find embedded items in almost all our electric household units, such as refrigerators, washing machines, and ovens.
+2.3 Boundary Conditions
+A reliability study is always based on a range of assumptions and boundary conditions. The most notable is the system boundary that specifies which items are included in the study object and which are not. All systems are used in some sort of environment that may influence and be influenced by the system. To delimit the study object, a system boundary is drawn between the study object and its environment. The inputs to and outputs from the study object are drawn up, as shown in Figure 2.2. A slightly more detailed definition of the term system boundary is:
+Definition 2.3 (System boundary)
+A system boundary is a boundary that separates the internal components and processes of a system from external entities. Internal to its boundary, the system has some degree of integrity, meaning the parts are working together and this integrity gives the system a degree of autonomy.2) ◽
+All assumptions and boundary conditions should be clearly stated in the documentation of the reliability study. Examples include answers to questions, such as:
+2) Source: https://complexitylabs.io/system-boundary/
+
+
+30
+Study object (with components)
+Inputs Outputs
+Environment System boundary: - physical - operational - other conditions
+Operational conditions
+Figure 2.2 A study object (system) and its boundary.
+• What are the objectives of the study? • What level of detail is required? • What are the environmental conditions for the system? • How is the system operated? • Which operational phases are to be included in the study (e.g., start-up, steady state, maintenance, disposal)? • Which external stresses should be considered (e.g., earthquakes, lightning strikes, sabotage)?
+2.3.1
+Closed and Open Systems
+The study object may be a closed or an open system. A closed system may be defined as:
+Definition 2.4 (Closed system)
+A system where the interface to the environment is static and always according to the assumptions specified. ◽
+In a closed system, the required inputs are always available and random disturbances in the environment that may influence the study object are non-existing. Most of the study objects considered in this book are closed systems. An open system is defined as:
+Definition 2.5 (Open system)
+A system where disturbances in the environment may influence the study object and where required system inputs and outputs may fluctuate or even be blocked. ◽
+Open system are generally much more difficult to analyze than closed systems. Some open systems allow users to manipulate the system structure.
+2.4 Operating Context
+Items are generally designed and built for an intended operating context that should be clearly stated in the item specification and in the user documentation. The operat
+
+
+31
+Inputs
+Resources
+Controls
+Outputs
+Function
+A1
+Figure 2.3 A function illustrated as a functional block.
+ing context specifies how the item is to be operated and maintained, limits to inputs, usage, and loads, and also which environmental conditions the item is supposed to work in and to tolerate. The user manual of a washing machine may, for example, specify intervals for the voltage and frequency of the power supply, the pressure and temperature of the water supply, the type and weight of laundry (e.g., clothes, carpets) put into the machine, the temperature in the room where the machine is located, and the surface on which the machine is placed. The operating context of the item is defined as:
+Definition 2.6 (Operating context)
+The environmental and operating conditions under which the item is (or is expected to be) operating. ◽
+In some applications, the concept of operations (CONOPS) document describes the operating context of the item.
+2.5 Functions and Performance Requirements
+To be able to identify all potential item failures, the reliability engineer needs to have a thorough understanding of the various functions of the item, and the performance criteria related to each function.
+2.5.1
+Functions
+A function is a duty or an action the item has been designed to perform. A function requires one or more inputs to provide an output. The function is performed by technical and other resources and will usually also require some control (e.g., start signals). A function and its inputs and outputs are shown in Figure 2.3. The function and its elements are illustrated in Example 2.1.
+Example 2.1 (Flashlight)
+Consider a simple flashlight. The main function of the flashlight is to produce light. The required input is electric power coming from a battery. The resource is the flash
+
+
+32
+light with battery. The function is controlled by switching on/off the flashlight. ◽
+A function may be defined as:
+Definition 2.7 (Function)
+An activity, process, or transformation stated by a verb and a noun that describes what must be accomplished. ◽
+A function is an intended effect of an item, and should be described such that each function has a single definite purpose. It is recommended to give the functions names that have a declarative structure, and say “what” is to be done rather than “how.” The functions should preferably be expressed as a statement comprising a verb plus a noun; for example, provide light, close flow, contain fluid, pump fluid, and transmit signal. In practice, it is often difficult to specify a function with only two words, and additional words may need to be added.
+2.5.2
+Performance Requirements
+New products and systems are developed to fulfill a set of requirements. These requirements are usually written into a requirement document. The requirements may be based on (i) identified customer needs (ii) manufacturer’s ideas to make the product more competitive, and (iii) requirements in standards, laws, and regulations. The IEV defines the term requirement as follows:
+Definition 2.8 (Requirement)
+Need or expectation that is stated, generally implied or obligatory (IEV 192-01-13).◽
+A performance requirement is a specification of the performance criteria related to a function. If, for example, the function is “pump water,” a performance requirement may be that the output of water must be between 100 and 110 liters per minute. Some functions may have several performance requirements. Performance requirements are also referred to as functional requirements or performance standards.
+2.5.3
+Classification of Functions
+A complicated item may have a high number of required functions. All functions are not equally important, and a classification may therefore be an aid for identification and analysis purposes. One way of classifying functions is as follows:
+Essential functions: These are the functions required to fulfill the intended purpose of the item. The essential functions are simply the reasons for installing or using the item. The essential function is sometimes reflected in the name of the item. An essential function of a pump is, for example, to “pump fluid.” Auxiliary functions: These are the functions that are required to support the essential functions. The auxiliary functions are usually less obvious than the essential
+
+
+33
+functions, but may in many cases be as important as the essential functions. Failure of an auxiliary function may in many cases be more safety-critical than a failure of an essential function. An auxiliary function of a pump is, for example, to “contain fluid.” Protective functions: These functions are intended to protect people, equipment, and the environment from damage and injury. The protective functions may be classified as:
+(a) Safety functions (i.e., to prevent hazardous events and/or to reduce consequences to people, material assets, and the environment) (b) Security functions (i.e., to prevent vulnerabilities, physical attacks, and cyberattacks) (c) Environment functions (e.g., anti-pollution functions) (d) Hygiene functions (e.g., for items used in food production or in hospitals)
+Information functions: These functions cover condition monitoring, various gauges and alarms, communication monitoring, and so forth. Interface functions: These functions apply to the interfaces between the item in question and other items. The interfaces may be active or passive. A passive interface is, for example, present when the item is a support or a base for another item. Superfluous functions: These functions are never used and are often found in electronic equipment that have a wide range of “nice to have” functions that are not really necessary. Superfluous functions may further be found in systems that have been modified several times. Superfluous functions may also be present when the item has been designed for an operating context that is different from the actual operating context. In some cases, failure of a superfluous function may cause failure of other functions.
+Some functions may belong to more than one class. For some applications, it may further be relevant to classify functions as:
+1) On-line functions: These functions are operated either continuously or so often that the user has current knowledge about their status. The termination of an online function is called an evident or detected failure. 2) Off-line functions: These functions are used intermittently or so infrequently that their availability is not known by the user without some special check or test. Some off-line functions are not possible to test without damaging the item. An example of an off-line function is the essential function of the airbag system of a car. Many protective functions are off-line functions. The termination of the ability to perform an off-line function is called a hidden or undetected failure.
+2.5.4
+Functional Modeling and Analysis
+The objectives of a functional analysis are to:
+1) Identify all the functions of the item
+
+
+34
+System function 1
+Function 1.1 Function 1.2
+Function 1.1.2
+Function 1.1.1
+Function 1.1.3
+Function 1.1.1.1
+Function 1.1.2.2
+More level 3 functions
+More level 4 functions
+Function 1.2.1
+Function 1.2.2
+More level 3 functions
+Function 1.2.1.1
+Function 1.2.1.2
+More level 4 functions
+Level of intendure
+More level 1 functions
+More level 2 functions
+Figure 2.4 Function tree (generic).
+2) Identify the functions required in the various operating modes of the item 3) Provide a hierarchical decomposition of the item functions (see Section 2.5.5) 4) Describe how each function is realized and provide the associated performance requirements 5) Identify the interrelationships between the functions 6) Identify interfaces with other systems and with the environment
+Functional analysis is an important step in systems engineering (Blanchard and Fabrycky, 2011) and several analytical techniques have been developed. We briefly mention two of these techniques: Function trees and SADT / IDEF 0.
+2.5.5
+Function Trees
+For complicated systems it is sometimes beneficial to illustrate the various functions as a tree structure, called a function tree. A function tree is a hierarchical functional breakdown structure starting with a system function or a system mission and illustrating the corresponding necessary functions on lower levels of indenture. The function tree is created by asking how an already established function is accomplished. This is repeated until functions on the lowest level are reached. The diagram may also be developed in the opposite direction by asking why a function is necessary. This is repeated until functions on the system level are reached. Function trees may be represented in many different ways. An example is shown in Figure 2.4. A lower level function may be required by a number of main functions and may therefore appear several places in the function tree.
+2.5.6
+SADT and IDEF 0
+A widely used approach to functional modeling was introduced by Douglas T. Ross of Sof Tech Inc. in 1973, called the structured analysis and design technique (SADT).
+
+
+35
+Unstimulated oil flow
+Control valves
+A1
+Measure and control
+A2
+Operation
+A3
+Injection of flow stimulation fluids
+A4
+Stimulation of flow
+A5
+Measure and control
+Sensor information
+Topside control
+Operating signals
+Hydraulic power
+Injection fluids
+Stimulated oil flow
+Produced oil flow Sensor information
+Pressure and temperature sensors
+Tubes (production wing block)
+Valves and tubes (Annular wing block)
+Subsea control module
+Pressure and temperature sensors and downhole pressure transmitter
+Stimulation fluid
+Hydraulic power
+Unstimulated oil flow
+Figure 2.5 SADT diagram for subsea oil and gas stimulation.
+The SADT approach is described, for example, in Lambert et al. (1999); Marca and McGowan (2006). In the SADT diagram each functional block is modeled according to a structure of five main elements, as shown in Figure 2.3
+Function: Definition of the function to be performed. Inputs: The energy, materials, and information necessary to perform the function. Controls: The controls and other elements that constrain or govern how the function is carried out. Resources: The people, systems, facilities, or equipment necessary to carry out the function. Outputs: The result of the function. The outputs are sometimes split in two parts; the wanted outputs from the function, and unwanted outputs.
+The output of a functional block may be the input to another functional block, or may act as a control of another functional block. This way, the functional blocks can be linked to become a functional block diagram. An illustration of an SADT diagram for subsea oil and gas stimulation is shown in Figure 2.5. The diagram was developed as part of a student project at NTNU (Ødegaard, 2002). When constructing an SADT model we use a top-down approach as shown in Figure 2.6. The top level represents a required system function. The functions necessary to fulfill the system function are established as an SADT diagram at the next level. Each function on this level is then broken down to lower level functions, and so on, until the desired level of decomposition has been reached. The hierarchy is maintained via a numbering system that organizes parent and child diagrams. The functional block in Figure 2.3 is also used in the Integrated definition language (IDEF), which is based on SADT and developed for the U.S. Air Force. IDEF is divided into several modules. The module for modeling of system functions is called IDEF 0 (e.g., see U.S. Air Force, 1981; U.S. DoD, 2001; Marca and McGowan, 2006). For new systems, SADT and IDEF 0 may be used to define the requirements and specify the functions, and as a basis for suggesting a solution that meets the require
+
+
+36
+System
+2
+1 3
+3.2
+3.1 3.3
+Figure 2.6 Top-down approach to establish an SADT model.
+ments and performs the functions. For existing systems, SADT and IDEF 0 can be used to analyze the functions the system performs and to record the mechanisms (means) by which these functions are accomplished.
+2.6 System Analysis
+The term analysis means to break down – or decompose – a system or problem into its constituent components in order to get a better understanding of it. In a system analysis, all the constituent components are studied individually. The word analysis comes from an ancient Greek word that means “breaking up.” To be able to analyze a system, the system must comply with the Newtonian-Cartesian paradigm (see box).
+Synthesis
+A synthesis is an opposite process of an analysis and is concerned with the combination of components and their properties to form a connected whole (i.e., a system). In a system reliability study, we usually need to apply both analysis and synthesis to obtain a sufficient understanding of the system and its reliability. The processes of system analysis and synthesis are illustrated in Figure 2.7.
+2.7 Simple, Complicated, and Complex Systems
+Most modern books on reliability theory and analysis seem to be concerned with “complex systems” but (almost) none of them define what they mean by the term complex. In our understanding, we may classify a system into one out of three categories:
+Simple systems. A simple system is easy to understand and can be analyzed by following a defined procedure or algorithm. Most simple systems have a rather small
+
+
+37
+The Newtonian-Cartesian paradigm
+A paradigm is a worldview underlying the theories and methodologies of a scientific subject. For system reliability, the Newtonian-Cartesian paradigm has been, and still is, the most essential. The basis for this paradigm was made by the French philosopher and scientist Réne Descartes (1596-1650) and the English mathematician and physicist Sir Isaac Newton (1642-1726). The paradigm is based on Newton’s three laws of forces and motion, his theories on universal gravitation, and the unifying theory that is called Newtonian mechanics. Another important basis for the paradigm is Descartes’ theory of reductionism and his division between mind and matter, between mental and physical processes. Reductionism implies that any system (or problem) can be adequately understood by reducing it, or decomposing it, to a set of its constituent components and by carefully and individually studying each component. When all the components on the lowest level have been carefully studied, a synthesis process can be started. By combining the knowledge about the components that feed into a module on the upper, next level, the paradigm implies that all important properties of this module can be deduced from the properties of its constituent components. This is then continued until the system level is reached (see Figure 2.7). The Newtonian-Cartesian paradigm sees the world as a number of discrete, unchanging objects in an empty space. These objects interact in a linear, cause and effect manner. The time is linear and universal and not affected by speed or gravitation. The system behavior is deterministic, such that a particular cause leads to a unique effect. The paradigm supports the analysis of systems with a finite number of (mainly) independent parts that interact in a well-defined manner with relatively few interconnections. The Newtonian-Cartesian paradigm is also called the Newtonian paradigm and the mechanistic paradigm.
+The Newtonian-Cartesian paradigm has had an enormous success and most of our current knowledge about physical systems are based on this paradigm. Much more information about the Newtonian-Cartesian paradigm can be found by visiting a good library or searching the Internet.
+number of components. Simple systems can generally be modeled by a seriesparallel RBD (see Section 2.8). Complicated systems. A complicated system has a high number of components with a fair degree of interrelationships and interdependencies between the components. By using current knowledge (e.g., by involving subject experts) we are able to understand the relevant system properties and to analyze it. Complex systems. In a complex system, the behavior of at least some of the components or the interactions between them do not comply with the requirements of the Newtonian-Cartesian paradigm. A complex system cannot be adequately understood and analyzed by traditional approaches because the system is something more that a sum of its components.
+An emergent property is a system property that cannot be deduced from the properties of the system components. In many cases, emergent properties lead to unexpected system behavior that may be dangerous. A system is usually not designed or built to be complex, but may develop into a complex system through changes, coupling, and emergence. There is a considerable disagreement about how to delimit the concept of emer
+
+
+38
+System
+Components
+Analysis
+Synthesis
+Figure 2.7 System analysis and synthesis.
+gence. Some authors interpret emergence very widely and say that “properties” such as reliability, quality, and safety are emergent properties of a system. Simple and complicated systems can be studied based on the Newtonian-Cartesian paradigm, whereas complex systems cannot be adequately studied within this paradigm. A new worldview called the complexity paradigm is therefore being developed. All the examples in this book are related to simple systems, but the theory and methods presented may also be applied to complicated systems and many aspects of complex systems. Complex systems as such are not studied in this book.
+Remark 2.1 (Classical methods -⇒ waste of time?)
+Finally, you may wonder if the effort you make to learn the theory and methods described in this book is a waste of time when your study object is complex. According to Einstein and Infeld (1938), the development of new theory may be compared with climbing a mountain. When you have come to a certain height, you get a better overview, but you may realize that you need another strategy to reach the summit. To have reached the present height is an achievement that gives a good understanding of the further climbing efforts. ◽
+2.8 System Structure Modeling
+An early step of a system reliability study is to establish a model of the system structure. The model defines the system boundary and the elements of the system (i.e., inside the system boundary) and the interactions between these elements. We also make assumptions about how the system is operated and the environmental conditions and constraints that may affect the system elements and their behavior. A range of system modeling techniques are presented in later chapters. Here, we delimit the
+
+
+39
+(a) i (b)
+Figure 2.8 Component function i shown as a block.
+(a) (b)
+SDV1
+Valve is able to
+close and stop
+the flow
+Label
+Figure 2.9 Alternative representation of the the block in Figure 2.8
+presentation to a rather simple approach – reliability block diagrams.
+2.8.1
+Reliability Block Diagram
+This section describes how a system function (SF) can be modeled by a reliability block diagram (RBD). An RBD is a success-oriented graph with a single source (a) and a single terminal (b). The nodes of the RBD are called blocks or functional blocks. Each block represents a component function (or a combination of two or more functions). We assume that the blocks are numbered 1, 2, ... , n, where n is known. This numbering is for convenience. In practical applications, a combination of letters and digits are often used to identify component functions. An RBD with n blocks is called an RBD of order n. Each block is either functioning or failed, but the terms up and down are also used. Intermediate states are not allowed. To block i (for i = 1, 2, ... , n) is connected a binary state variable xi, defined as:
+xi = T 1 if block i is functioning (up)
+0 if block i is failed (down) (2.1)
+Observe that xi = 1 means that the specified function of block i is up. It does not mean that all the functions of the component associated with block i are up. Blocks are drawn as squares or rectangles, as shown is Figure 2.8 for component function i. Connection between the end points (a) and (b) in Figure 2.8 means that block i is functioning (i.e., xi = 1). It is possible to enter more information into the block, and include a brief description of the required component function. An example is shown in Figure 2.9, where the component is a safety shutdown valve that is installed in a pipeline. A label is used to identify the block. An RBD with three blocks representing a system function, SF, is shown in Figure 2.10. The system function, SF, is up if block 1 is functioning and either block 2, block 3, or both are functioning. The the blocks in Figure 2.10 are connected by arcs. Arcs are also called edges. The arcs are not directed, but directed arcs may sometimes be used to clarify the logic of the diagram. The system function SF, is up if there exists a path from (a)
+
+
+40
+2
+3
+1
+(a) (b)
+Figure 2.10 A simple reliability block diagram with three blocks.
+2
+3 1
+(a) (b)
+Figure 2.11 An alternative, and identical, version of the RBD in Figure 2.10.
+to (b) through functioning blocks, otherwise, it is down. The RBD in Figure 2.10 is seen to have two paths {1, 2} and {1, 3}.
+System Structure
+The RBD is not a physical layout diagram of the system, but a logic diagram that shows how and when the system function, SF, is up. The sequence of failures is not important and the RBD in Figure 2.10 is therefore equivalent to the RBD in Figure 2.11. The RBD shows the structure of the system with respect to a specified system function, SF. When discussing RBD, we talk about the structure instead of the system. Separate RBDs have to be established for each system function.
+Boolean Representation
+Arranging several components along a path means connecting them by an andoperation and arranging several components in parallel paths represents and oroperation. In essence, a RBD is a graphical representation of a Boolean expression. Boolean expressions are discussed further in Section 4.6. The system function SF in Figure 2.10 is seen to be up if block 1 is up and block 2 or block 3 is up.
+2.8.2
+Series Structure
+A series structure is functioning if and only if all the n blocks are functioning. This means that the structure fails as soon as one block fails. The RBD of a series structure of n blocks is shown in Figure 2.12. A path is seen to be available between the end points (a) and (b) – and the system is functioning – if and only if all the n blocks are functioning. The system function can be represented by the Boolean expression: The series structure is functioning if block 1 and block 2 and ⋯ and block n are all functioning. As mentioned above, the sequence of the blocks in Figure 2.12 is not important and we might have drawn the RBD with the n blocks in any sequence.
+
+
+41
+123 n
+(a) (b)
+Figure 2.12 RBD for a series structure.
+1
+(a) (b)
+2
+n
+Figure 2.13 Parallel structure.
+2.8.3
+Parallel Structure
+A parallel structure is functioning as long as at least one of its n blocks is able to function. The RBD of a parallel structure is shown in Figure 2.13. For this structure, there are n different paths between the end points (a) and (b). The structure is functioning if any one of these n paths is functioning. This means that the structure is functioning if at least one of the n blocks is functioning. The parallel structure can be represented by the Boolean expression: The parallel structure is functioning if block 1 or block 2 ⋯ or block n is functioning.
+2.8.4
+Redundancy
+Redundancy is a means to improve the reliability of a structure. Redundancy may be defined as:
+Definition 2.9 (Redundancy)
+The provision of more than one means or parallel paths in a structure for performing a given function such that all means must fail before causing system failure. ◽
+The parallel structure in Figure 2.13 has redundancy, because all the n blocks have to fail to cause the specified system failure, SF. Because n blocks have to fail, the system is said to have redundancy of order n. Parallel or redundant paths can be installed for a single block, for a selection of blocks, or for the entire system function, SF. For hardware, redundancy may be achieved by installing one or more extra hardware items in parallel with the initial item. The redundant items may be identical or diverse. Adding redundancy increases the cost and makes the system more complicated, but if the cost of failure is high, redundancy is often an attractive option.
+
+
+42
+2/3
+1
+2
+3
+1
+1
+2
+2
+3
+3
+(a) (b) (a) (b)
+Figure 2.14 Voted structure 2oo3, (a) a physical diagram and (b) an RBD.
+2.8.5
+Voted Structure
+A k-out-of-n (koon) voted structure is functioning as long as at least k of its n blocks are functioning (k ≤ n). Observe that an noon voted structure is a series structure and a 1oon structure is a parallel structure. A 2oo3 voted structure is shown in Figure 2.14. Two different diagrams are shown. The diagram to the left is a physical diagram that shows the 2oo3 logic, whereas the RBD to the right is a series-parallel structure. In the RBD we see that the system is functioning when block 1 and block 2 are functioning or block 1 and block 3 are functioning or block 2 and block 3 are functioning. Observe that each block appears in two different places in this RBD. This shows that an RBD is not a physical layout diagram, but a logical graph illustrating the specified function of the system.
+2.8.6
+Standby Structure
+Redundancy may either be active, in which case the redundant items operate simultaneously in performing the same function (as for the parallel structure), or standby, such that the redundant items are only activated when the primary item fails. With standby redundancy, the standby items may be in cold standby or in partly loaded standby. With cold standby, the redundant item is considered to be as-good-as-new when activated. With partly loaded standby, the item may be failed or worn when activated. A simple standby structure with two blocks is shown in Figure 2.15. Initially, block 1 is functioning. When block 1 fails, a signal is sent to the switch S to activate block 2 and a repair action of block 1 may be started. The switch S may be automatic, or a manual action to connect and start block 2. Depending on the operating rules, block 1 may be activated again as soon as the repair action is completed, or block 2 may run until it fails.
+
+
+43
+1
+2
+(a) S (b)
+Figure 2.15 Standby structure.
+2
+24
+4
+15
+6
+3
+3
+7
+8
+9 10 11
+(a) (b)
+Figure 2.16 RBD for a series-parallel structure.
+2.8.7
+More Complicated Structures
+Many of the structures we study in this book can be represented by a series-parallel RBD. A simple example of such a structure is shown in Figure 2.16.
+Remark 2.2 (Series-parallel structures)
+The term series-parallel structure is not used in the same way by all authors. Some authors use the term to describe a series structure, where one or more of the blocks have added redundancy, that is, have parallel paths. The same authors use the term parallel-series structure to describe a parallel structure where two or more blocks appear in at least one of the parallel paths. In this book, we use the term series-parallel structure to describe a structure where the blocks are arranged in any combination of series and parallel structures (as indicated in Figure 2.16). ◽
+2.8.8
+Two Different System Functions
+The fact that different system functions give rise to different RBDs is illustrated in Example 2.2.
+Example 2.2 (Pipeline with safety valves)
+Consider a pipeline with two independent safety valves V1 and V2 that are physically installed in series, as shown in Figure 2.17(a). The valves are supplied with a spring loaded fail-safe-close hydraulic actuator. The valves are opened and held open by hydraulic pressure, and is closed automatically by spring force whenever the hydraulic pressure is removed or lost. In normal operation, both valves are held open. The essential function of the valve system is to act as a safety barrier, that is, to close and “stop flow” in the pipeline in case of an emergency.
+
+
+44
+1
+2
+12
+(a)
+(b) (c)
+Figure 2.17 Two safety valves in a pipeline a) Physical layout, b) RBD for the safety barrier function, and c) RBD for spurious closure.
+The two blocks in Figure 2.17(b) represent the valve function “stop flow” for valve 1 and 2, respectively. This means that each valve is able to close and stop the flow in the pipeline. To achieve the system function “stop flow,” it is sufficient that at least one of the individual valves can “stop flow.” The associated RBD is therefore a parallel structure with respect to the system function “stop flow.” The valves may close spuriously, that is, without a control signal, and stop the flow in the pipeline. The two blocks in Figure 2.17(c) represent the valve function “maintain flow” in the pipeline, for valve 1 and 2, respectively. Because the flow in the pipeline stops when one of the valves closes, the system function “maintain flow” is fulfilled only when both valves function with respect to the valve function “maintain flow”. The associated RBD is therefore a series structure for the system function “maintain flow.” ◽
+Example 2.2 shows that two different functions of a single system give rise to two different RBD. Observe also that the blocks in the two RBDs represent different component functions in (b) and (c).
+Remark 2.3 (Terminology problem)
+Many authors use the term component instead of block. There is nothing wrong with this terminology – and we also use it later in this book – but we have to be very careful when, for example, saying that “component i is functioning.” In cases, when it is not fully obvious, we should always add “with respect to the specified function.” ◽
+2.8.9
+Practical Construction of RBDs
+A specific system function, SF, usually requires a long range of subfunctions. For the essential function of a car, for example, we need the functions of the engine, the brakes, the steering, the ventilation, and many more. The RBD for the SF is then a long series structure of the required subsystem functions, as shown in Figure 2.18. Each of the required subfunctions may again need sub-subfunctions How many levels are required depend on how complicated the system function is and the objectives of the analysis. RBDs are further discussed in Chapters 4. Chapter 6 deals with quantitative reliability analysis based on RBDs.
+
+
+45
+2.1 2.2 2.3
+(a) (b)
+123 45
+(a) (b)
+Specified system function
+Specified subsystem function
+Specified sub-subsystem function
+2.3.2
+2.3.3
+2.3.1
+(a) (b)
+Level 1
+Level 2
+Level 3
+Figure 2.18 Construction of the RBD in levels.
+2.9 Problems
+2.1 Identify and describe briefly the main subsystems of a family car and establish a system breakdown structure for the car. 2.2 Establish a function tree for a (domestic) refrigerator. 2.3 List the environmental, operating, and maintenance factors that should be considered when defining the operating context of a family car. 2.4 List some information functions that are available in a modern car. 2.5 Identify the main functions of a family car and establish a function tree for the car. 2.6 List some safety functions of a modern car. Are the identified functions on-line or off-line functions? 2.7 Identify and describe the functions of the front door of a house. 2.8 Describe the functions of a vacuum flask (thermos) and suggest relevant performance criteria. 2.9 Describe briefly a system you consider to be complex. 2.10 Refer to the SADT functional block (see Figure 2.3) and list all the inputs, controls, and resources you need to bake a pizza. The output from the function is the newbaked pizza. How would you set up the performance criteria for your pizza? 2.11 Based on an Internet search, explain what is meant by a CONOPS and list its main elements. 2.12 Based on an Internet search, list the main elements that are typically included in a system requirements document (or a system requirements specification). 2.13 Establish an RBD of the braking system of a family car.3) 2.14 Consider a voted koon structure. The voting can be specified in two different ways:
+3) You may need to search the Internet to find technical information on the braking system.
+
+
+46
+- As the number k out of the n components that need to function for the system to function. - As the number k of the n components that need to fail to cause system failure.
+In the first case, we often write koon:G (for “good”) and in the second case, we write koon:F (for failed).
+(a) Determine the number x such that a 2oo4:G structure corresponds to a xoo4:F structure. (b) Determine the number x such that a koon:G structure corresponds to a xoon:F structure.
+2.15 Are there any examples of standby redundancy in a family car? Justify your answer.
+
+
+47
+References
+Aslaksen, E.W. (2013) The System Concept and Its Application to Engineering, Springer, Heidelberg, Germany. Blanchard, B.S. and Fabrycky, W.J. (2011)
+Systems Engineering and Analysis, Pearson, Boston, 5th edn.. Einstein, A. and Infeld, L. (1938) The Evolution of Physics, Cambridge University Press. Lambert, M., Riera, B., and Martel, G. (1999) Application of functional analysis techniques to supervisory systems.
+Reliability Engineering and System Safety, 64 (2), 209–224. Marca, D.A. and McGowan, C.L. (2006) IDEF0 and SADT: A Modeler’s Guide,
+OpenProcess, Auburndale, MA.
+Ødegaard, S. (2002) Reliability assessment of a subsea production tree, Project thesis, Norwegian University of Science and Technology, Trondheim, Norway. U.S. Air Force (1981) Integrated computer aided manufacturing (ICAM) architecture. part II. volume IV, functional modeling manual (IDEF 0), Technical report AFB AFWAL-TR-81-4023, Air Force Materials Laboratory, Wright Patterson Air Force Base, Ohio.
+U.S. DoD (2001) Systems Engineering Fundamentals, Defense Acquisition University Press, Fort Belvoir, Virginia.
+
+
+48
+
+
+49
+3
+Failures and Faults
+A failure occurs when an item loses its ability to perform a required function. Whereas failure is an event, a fault is a state that lasts for a certain time. A fault may be the result of a failure, but may also be dormant in the item without any preceding failure. A failure or fault is manifested by a failure mode, which is an important concept in reliability analyses. Failure causes and effects are discussed and we delve into the concept of root causes. Several ways of classifying failures and failure modes are presented and discussed. The chapter ends with a discussion of methods for analyzing failures that have already occurred with focus on cause and effect analysis and root cause analysis.
+3.1 Introduction
+Failure is the most important concept in any reliability study, where typical questions addressed include:
+• How long time will the item, on the average, be able to operate until the first failure occurs? • What will the frequency of failures be? How many failures per year should we expect? • What is the probability that the item will operate without failure during a specified time interval? • If an item is demanded, what is the probability that it will fail to perform as required?
+If we do not have a clear understanding of what a failure is, the reliability study may be of limited value. The term failure is used frequently in our daily language with many different interpretations and we also use a plethora of terms with similar meaning. Among these terms are blunder, breakdown, bug, collapse, defect, deficiency, error, fault, flaw, impairment, malfunction, mishap, mistake, and nonconformance. How the term failure is interpreted varies between professional disciplines. Engineers working with quality, maintenance, warranty, safety, and reliability may have quite different opinions about whether or not a particular event constitutes a failure.
+
+
+50
+Closing
+Opening
+Open Closed
+Figure 3.1 States and transitions for a safety valve.
+To perform a reliability study, it is important to understand thoroughly what is meant by the term failure in the context of reliability. Several definitions of failure have been proposed. IEV 192-03-01, for example, defines failure as “loss of the ability to perform as required.” This chapter is concerned with failures of single items only. Aspects related to interactions between several items in a system are treated in Chapter 4. Before continuing the discussion of failures, the concepts of states, transitions, and operational modes need to be introduced.
+3.1.1
+States and Transitions
+At a given time, an item may be in one out of several states. The functions performed in one state may be different from the functions performed in other states. The item changes state by a transition. The transition may be automatic or manual and may occur at a random time or as a result of a command. Complicated items may have a high number of states and transitions.
+Example 3.1 (Safety valve)
+Consider a safety valve with a hydraulic fail-safe-close actuator. The valve is held open by hydraulic pressure during normal operation. When a specific critical situation occurs, a closing signal is sent to the safety valve and the valve closes by the force of the fail-safe actuator. The valve has two functioning states: open and closed. Transitions between these two states are facilitated by the actuator. The states and transitions are shown in Figure 3.1. The essential function in state “open” is to provide a conduct for the medium/fluid through the valve, and the essential function in state “closed” is to stop the flow through the valve. An auxiliary function for both states is to contain the fluid and thereby to prevent leakage to the environment. ◽
+Remark 3.1 (States and transition)
+The difference between states and transitions is clear and intuitive for many items, but may be confusing for some items. The concepts of states and transition should therefore be used with care. ◽
+
+
+51
+3.1.2
+Operational Modes
+A complicated item may have many operational modes, and one or more functions for each operational mode. Operational modes may include normal operating modes, test modes, transition modes, and contingency modes induced by failures or operator errors. The establishment of the different operational modes is recommended for two reasons:
+1) It reveals functions that might be overlooked when focusing too much on the essential functions. 2) It provides a structured basis for identifying failure modes that are connected to, and dependent on, the given operational mode.
+Operational modes are therefore an aid in identifying both functions and failure modes. Failure modes are discussed in Section 3.4.
+3.2 Failures
+Even if we are able to identify all the required functions of an item, we may not be able to identify all the potential failures. This is because each function may fail in several different ways. No formal procedure seems to exist that help us to identify and classify all the potential failures. In this section, we consider a specific item within its boundary in its intended operating context. Failure is, in many applications, a complicated and confusing concept. We try to shed some light on this concept and start by defining failure of an item as:
+Definition 3.1 (Failure of an item)
+The termination of the ability of an item to perform as required. ◽
+The following comments to Definition 3.1 may be given:
+(a) Definition 3.1 is mainly a rephrasing of IEV’s definition of a failure: “loss of ability to perform as required” (IEV 192-03-01), but the expression “loss of ” is replaced with the expression “the termination of” to make it even more clear that a failure is an event that takes place at a certain point in time (e.g., at time t0). (b) In the context of reliability, the expression “ability to perform as required" does not imply that all aspects of the item are perfect, but that the item must be able to perform the functions that are required for a given purpose. (c) The item may deteriorate as a slow process. Failure occurs when a required function no longer fulfills its performance requirements, and it may not be any significant change in performance when the threshold is passed, as shown in Example 3.2. (d) One user may interpret “as required” different from another user. A failure that is important (and costly) in a warranty context may, for example, be irrelevant in a risk assessment context.
+
+
+52
+Functioning state
+Failed state
+Failure
+Figure 3.2 Failure as a transition from a functioning state to a failed state.
+The performance requirements for an item are usually available in the item specification document and partly in the user’s manuals, but users seldom read the specifications and the complete user’s manual. (e) We use the verb fail to express that a failure occurs. When a failure occurs at time t0, the item fails at time t0.
+A failure may be interpreted as a transition from a functioning state to a failed state, as shown in Figure 3.2. Example 3.2 illustrates that we may not always be able to observe the failure event and the time t0 of the failure.
+Example 3.2 (Car tires)
+When a car is used, the tires wear and the tire tread depth is continuously reduced and thereby the performance of the tires is degrading. When the depth becomes smaller than a certain legal limit d0 (may be different in the different countries), the tires have to be replaced. A failure occurs when the tread depth passes d0. In this case, it is not possible to determine exactly the time of failure and there is no dramatic change of performance when the failure occurs, but the risk of water planning and of puncture is considered to be unacceptable with a smaller depth than d0. ◽
+3.2.1
+Failures in a State
+It is sometimes useful to distinguish between failures that occur in a state from failures that occur during a transition. The types of failures occurring in a state are illustrated in Examples 3.3, 3.4, and 3.5.
+Example 3.3 (Water pump)
+Consider an electric driven water pump. The essential function of the pump is to pump water at a certain rate. Assume that the target rate is 100 liters per minute, with performance criterion saying that the rate need to be between 95 and 105 liters per minute. In case of internal fouling, the pumping rate may decrease such that the performance criterion is no longer met. When the rate passes the lower threshold rate, a pump failure occurs and the pump has to be stopped. The pump remains in this state until it has been cleaned/repaired. This process is illustrated in Figure 3.3.◽
+Example 3.4 (Light bulb – continuously “on”)
+Consider a light bulb that is always switched on. The function of the bulb is to provide light. When the light bulb fails, the failure occurs in an operating state. If someone
+
+
+53
+Performance
+Target value
+Time
+Acceptable deviation
+Failure (event) Fault (state)
+Actual performance
+Figure 3.3 Illustration of the difference between failure and fault for a degrading item.
+is present and can observe the loss of light event, the precise time of the failure can be recorded. ◽
+Example 3.5 (Light bulb – “on” only on demand)
+Reconsider a light bulb, similar to the one in Example 3.4, but assume that the light bulb is very seldom switched on and that it each time is energized for a short time period. The bulb may also fail in passive state (e.g., due to vibrations). A failure in passive state is not observable and leaves a hidden fault. The hidden fault is not revealed until the light bulb is switched on next time. The time t0 of the occurrence of the failure is unknown. When we try to switch on the light and observe that it has failed, we only know that the failure occurred in the time interval since the preceding use of the light bulb. (In this example, we assume that the switch is functioning without failure.) ◽
+3.2.2
+Failures During Transition
+A failure during transition may either be caused by an existing hidden fault or an erroneously performed transition, as illustrated in Examples 3.6 and 3.7.
+Example 3.6 (Lawn mower)
+Consider a lawn mower with a petrol engine that is started by pulling a rope. To start the lawn mower involves a transition from a passive to an active state of the mower. A failure during this transition may be caused by an internal defect (e.g., corrosion, or contaminated petrol), but may also be due to incorrect starting procedure. ◽
+Example 3.7 (Safety valve)
+Reconsider the safety valve in Example 3.1 and assume that the valve is in fully open state when an emergency occurs on the downstream side of the valve. The valve receives a signal to close and the transition is initiated. Due to debris in the valve cavity, the movement is stopped before the valve reaches the closed state. ◽
+
+
+54
+3.3 Faults
+The term fault was mentioned in the previous section, but without a proper definition. We define a fault as:
+Definition 3.2 (Fault of an item)
+A state of an item, where the item is not able to perform as required. ◽
+The duration of the fault may range from negligible to permanent. There are two main types of faults.
+Type 1 fault is a fault that occurs as a consequence of a failure. The failure causes a transition from a functioning state into a fault, which is also called a failed state. In Example 3.4, the failure of the light bulb left the bulb in a state where it cannot give light. In this example, the bulb has to be replaced to function again. Type 2 fault is a fault that is introduced in the item due to human error or misjudgment in the specification, design, manufacture, transportation, installation, operation, or maintenance of the item. This type of fault enters the item without any preceding item failure and is a dormant fault that remains hidden until the item is activated or inspected. A type 2 fault is also called a systematic fault. A software bug is a typical example of such a fault. Another example is faults caused by design errors or installation errors.
+3.4 Failure Modes
+We define a failure mode of an item as:
+Definition 3.3 (Failure mode)
+The manner in which a failure occurs, independent of the cause of the failure. ◽
+A failure mode is a description of how a failure occurs but does not say anything about why the failure occurred. Example 3.8 illustrates how the failure mode concept is usually interpreted.
+Example 3.8 (Failure modes of a sink faucet)
+Consider a sink faucet used in a bathroom. The main functions of the faucet are to open/close the water supply, to contain the water, and to regulate the water temperature and flow. We consider only the faucet (the item) and assume that cold and hot water are available. The faucet may have a number of failure modes. Among these are:
+1) Fail to open (on demand) and supply water 2) Fail to close (on demand) and stop the flow of water 3) Leakage through the faucet (i.e., dripping) 4) Leakage out (from faucet seals)
+
+
+55
+-+
+Battery
+Pushbutton Switch Solenoid
+Clapper
+Bell
+Figure 3.4 Doorbell and associated circuitry.
+Failure cause
+Failure mode
+Failure effect
+Results in
+Leads to
+Caused by
+Figure 3.5 Relation between failure causes, failure modes, and failure effects.
+5) Fail to regulate water flow 6) Fail to regulate temperature
+The faucet has two main states, closed and open. The first two failures (1 and 2) occur during intended transitions between these states. The two next failure modes (3 and 4) occur in a state. For these failure modes, the faucet is in a state where it is leaking and not able to perform as required. The two last failure modes (5 and 6) may be interpreted to be somewhere between the two other types. ◽
+Example 3.9 shows that a failure mode sometimes describes the “manner by which a failure occurs” and sometimes the “manner by which a fault is present.”
+Example 3.9 (Electric doorbell)
+A simple doorbell system is shown in Figure 3.4. The pushbutton activates a switch that closes a circuit from a battery to a solenoid that activates a clapper, that again makes sound by hammering on a bell. When your finger is lifted from the pushbutton, the switch should open, cut the circuit, and thereby stop the doorbell sound. The following failure modes may be defined:
+1) No sound when the pushbutton is activated (by a finger) 2) Doorbell sound does not stop when finger is lifted from pushbutton 3) Doorbell sounds without activating the pushbutton
+A similar doorbell system is analyzed in NASA (2002). ◽
+3.5 Failure Causes and Effects
+A failure mode is generally caused by one or more failure causes and may result in a failure effect, as shown in Figure 3.5.
+
+
+56
+3.5.1
+Failure Causes
+All failures have at least one cause. We define failure cause as follows.
+Definition 3.4 (Failure cause)
+Set of circumstances that leads to failure. ◽
+The failure cause may originate during specification, design, manufacture, installation, operation, or maintenance of an item (IEV 192-03-11). The failure cause may be an action, an event, a condition, a factor, a state, or a process that is – at least partly – responsible for the occurrence of a failure. To be responsible for a failure, the cause must be present before the failure occurs, and the presence of the cause should increase the likelihood of the failure. When studying several similar failures, we should see a positive correlation between the presence of the cause and the occurrence of the failure(s), but positive correlation is not a sufficient condition for claiming that something is a cause of a failure. It is very easy to find correlated factors that are totally unrelated. The correlation may, for example, be that the two factors are both caused by the same third factor. Causality is a complicated philosophical subject. A lot more information may be found by searching the Internet. The authors especially recommend consulting Pearl (2009). Several failure analysis techniques have been developed to identify the causes of a failure that has occurred. Among these are cause and effect analysis and root cause analysis that are described in Section 3.7.
+3.5.2
+Proximate Causes and Root Causes
+The term root cause is often used in analyses of failures that have occurred. The term is defined in several standards and each standard seems to have its own particular definition. Before giving our preferred definition, we define the term proximate cause, which is an immediately and (often) readily seen cause of a failure.
+Definition 3.5 (Proximate cause)
+An event that occurred, or a condition that existed immediately before the failure occurred, and, if eliminated or modified, would have prevented the failure. ◽
+A proximate cause is also known as a direct cause. A proximate cause is often not the real (or root) cause of a failure, as illustrated in Example 3.10.
+Example 3.10 (Flashlight)
+A flashlight is part of the safety equipment in a plant. During an emergency, the flashlight is switched on, but does not give any light. A proximate (or direct) cause is that the battery is dead. If we have access to the flashlight and the battery after the emergency is over, it is straightforward to verify whether or not this was the true proximate cause.
+
+
+57
+Any battery will sooner or later go dead and if the flashlight is an essential safety equipment, it is part of the maintenance duties to test and, if necessary, replace batteries at regular intervals. “The battery has not been tested/replaced at prescribed intervals” is therefore a cause of the proximate cause. By asking “why?” this happened several times, we may get to the root cause of the failure. ◽
+For the purpose of this book, we define a root cause as:
+Definition 3.6 (Root cause)
+One of multiple factors (events, conditions, or organizational factors) that contributed to or created the proximate cause and subsequent failure and, if eliminated, or modified would have prevented the failure. ◽
+For some failure modes, it may be possible to identify a single root cause, but most failure modes will have several contributing causes. All too often, failures are attributed to a proximate cause, such as human error or technical failure. These are often merely symptoms, and not the root causes of the failure. Very often, the root causes turn out to be much more, such as (i) process or program deficiencies, (i) system or organization deficiencies, (iii) inadequate or ambiguous work instructions, and/or (iv) inadequate training. To identify root causes of failures and to rectify these, is important for any system in the operational phase. It does not help only to correct the proximate causes (such as to replace the battery of the flashlight in Example 3.10) when a failure has occurred. This way, the same failure may recur many times. If, on the other hand, the root cause is rectified, the failure may never recur. Root cause analysis is briefly discussed in Section 3.7.
+3.5.3
+Hierarchy of Causes
+The functions of a system may usually be split into subfunctions. Failure modes at one level in the hierarchy may be caused by failure modes on the next lower level. It is important to link failure modes on lower levels to the main top level responses, in order to provide traceability to the essential system responses as the functional structure is refined. This is shown in Figure 3.6 for a hardware structure breakdown. Figure 3.6 is further discussed in Section 3.6.5.
+3.6 Classification of Failures and Failure Modes
+It is important to realize that a failure mode is a manifestation of the failure as seen from the outside, that is, the nonfulfillment of one or more functions. “Internal leakage” is thus a failure mode of a shutdown valve, because the valve loses its required function to “close flow,” whereas wear of the valve seal represents a cause of failure and is hence not a failure mode of the valve.
+
+
+58
+Direct failure cause
+Failure mode
+Failure effect
+Direct failure cause
+Failure mode
+Failure effect
+Direct failure cause
+Failure mode
+Failure effect
+System level:
+Subystem level:
+Component level:
+Figure 3.6 Relationship between failure cause, failure mode and failure effect.
+Failures and failure modes may be classified according to many different criteria. We briefly mention some of these classifications.
+3.6.1
+Classification According to Local Consequence
+Blache and Shrivastava (1994) classify failures according to the completeness of the failure.
+1) Intermittent failure: Failure that results in the loss of a required function only for a very short period of time. The item reverts to its fully operational standard immediately after the failure. 2) Extended failure: Failure that results in the loss of a required function that will continue until some part of the item is replaced or repaired. An extended failure may be further classified as:
+(a) Complete failure: Failure that causes complete loss of a required function. (b) Partial failure: Failure that leads to a deviation from accepted item performance but do not cause a complete loss of the required function.
+Both the complete failures and the partial failures may be further classified as:
+(a) Sudden failure: Failure that could not be forecast by prior testing or examination. (b) Gradual failure: Failure that could be forecast by testing or examination. A gradual failure represents a gradual “drifting out” of the specified range of performance values. The recognition of a gradual failure requires comparison of actual item performance with a performance requirement, and may in some cases be a difficult task.
+Extended failures may be split into four categories; two of these are given specific names:
+(a) Catastrophic failures: A failure that is both sudden and complete. (b) Degraded failure: A failure that is both partial and gradual (such as the wear of the tires on a car).
+The failure classification described above is shown in Figure 3.7, which is adapted from (Blache and Shrivastava, 1994).
+
+
+59
+Failure
+Intermittent failure
+Complete failure
+Extended failure
+Partial failure
+Sudden failure
+Gradual failure
+Gradual failure
+Sudden failure
+Catastrophic failure
+Degraded failure
+Figure 3.7 Failure classification (adapted from Blache and Shrivastava, 1994).
+3.6.2
+Classification According to Cause
+Failures may be classified according to their causes as follows.
+Primary Failures
+A primary failure, also called a random hardware failure IEC 61508, occurs when the item is used in its intended operating context. In most cases, the primary failure results in an item fault and a repair action is usually necessary to return the item to a functioning state. Primary failures are generally random failures, where the cause of failure can be attributed to aging and the properties of the item itself. A primary failure is illustrated in Figure 3.8. Primary failures are the only category of failures that we justifiably can claim compensation for under warranty. Primary failures are not relevant for software.
+Primary failure
+Item fault
+State Leads to
+Random event
+Figure 3.8 A primary failure leading to an item fault.
+Secondary Failures
+A secondary failure, also called overstress or overload failure, is a failure caused by excessive stresses outside the intended operating context of the item. Typical stresses include shocks from thermal, mechanical, electrical, chemical, magnetic, or radioactive energy sources, or erroneous operating procedures. The stresses may be caused by neighboring items, the environment, or by users/system operators/plant personnel. Environmental stresses, such as lightning, earthquake, and falling object, are sometimes called threats to the item. We may, for example, say that lightning is a threat to a computer system and that heavy snowfall and storm are threats to
+
+
+60
+an electric power grid. The overstress event leads to a secondary failure with some probability p that depends on the stress level and on the vulnerability of the item. Overloads of software systems may also be classified as secondary failures. A secondary failure usually leads to an item fault, and a repair action is usually necessary to return the item to a functioning state. The structure of a secondary failure is shown in Figure 3.9. Secondary failures are generally random events, but it is the overstress event that is the main contributor to the randomness.
+Secondary failure
+Item fault
+State Leads to
+Forced event
+Overstress event
+May lead to
+Random event
+Figure 3.9 A secondary failure, caused by an overstress event, leading to an item fault.
+Systematic Failures
+A systematic failure is a failure due to a systematic cause that may be attributed to a human error or misjudgment in the specification, design, manufacture, installation, operation, or maintenance of the item. A software bug is a typical example of a systematic fault. After the error is made, the systematic cause remains dormant and hidden in the item. Examples of systematic causes are given in Example 3.12. A systematic failure occurs when a certain trigger or activation condition occurs. The trigger can be a transient event that activates the systematic cause, but can also be a long-lasting state such as environmental conditions, as illustrated in Example 3.14. The trigger event is often a random event, but may also be deterministic. A systematic failure can be reproduced by deliberately applying the same trigger. The term systematic means that the same failure will occur whenever the identified trigger or activation condition is present and for all identical copies of the item. A systematic cause can only be eliminated by a modification of the design or of the manufacturing process, operational procedures, or other relevant factors (IEC 61508, 2010). A systematic fault leading to a systematic failure by the “help” of a trigger is shown in Figure 3.10. Systematic failures are often, but not always, random events, but it is the trigger that is random, whereas the item failure is a consequence of the trigger event.
+Leads to
+Forced event Systematic failure
+Systematic fault
+Item fault
+Trigger event State State
+&
+Figure 3.10 A systematic fault leading to a systematic failure.
+Example 3.11 (Airbag system in a car)
+A new car model was launched and a person driving such a car crashed into another car. The airbags did not operate as intended and the driver was critically injured. After the accident, it was found that the airbag system was not correctly installed. Later,
+
+
+61
+it was found that the same error was made for all cars of the same type. The airbag failure was due to a systematic cause and all the cars of the same type had the same systematic fault. All these cars had to be recalled for repair and modification. There was nothing wrong with the airbag system as such and the airbag system manufacturer could not be blamed for the accident (unless the installation instructions were misleading or ambiguous). The car manufacturer had to cover the consequences of the failure. For drivers and passengers, the cause of the failure does not matter. A systematic failure has the same consequences as a primary (random hardware) failure. ◽
+Example 3.12 (Failure causes of a gas detection system)
+A heavy (i.e., heavier than air) and dangerous gas is used in a chemical process. If a gas leakage occurs, it is important to raise an alarm and shut down the process as fast as possible. For this purpose, a safety-instrumented system (SIS) is installed, with one or more gas detectors. The SIS has three main parts (i) gas detectors, (ii) a logic solver that receives, interprets, and transmits signals, and (iii) a set of actuating items (e.g., alarms, shutdown valves, door closing mechanisms). The purpose of the SIS is to give an automatic and rapid response to a gas leakage. Many more details about SIS may be found in Chapter 13. Assume that a gas leak has occurred without any response from the SIS. Possible causes of the failure may include:
+• A primary (i.e., random hardware) failure of the SIS • The installed gas detectors are not sensitive to this particular type of gas, or have been mis-calibrated • The gas detectors have been installed high up on walls or in the ceiling (remember, the gas is heavier than air) • The gas detectors have been installed close to a fan (no gas will reach them) • The gas detectors have been inhibited during maintenance (and the inhibits have not been removed) • The gas detector does not raise alarm due to a software bug. (Most modern gas detectors have software-based self-testing features) • The gas detector is damaged by, for example, sand-blasting. (Has happened several times in the offshore oil and gas industry) ◽
+Security Failures
+A security failure is a failure caused by a deliberate human action. Many systems are exposed to a number of threats. The threats may be related to physical actions or cyberattacks. Physical threats include arson, sabotage, theft, and many more. A cyberattack is only relevant for systems that are connected to a cyber network (e.g., internet, or mobile phone network). A threat may be used by a threat actor to attack the system. The system may have a number of vulnerabilities (i.e., weaknesses) that may be exploited by the threat actor to make a “successful” attack. With the development of new technologies, such as cyber-physical systems, the Internet of Things (IoT), smart-grids, smart cities, remote operation and maintenance,
+
+
+62
+and many more, cyberattacks come more frequently and we can now hardly open a newspaper without articles about cyber attacks. Many of these attacks are directed toward critical infrastructure and industrial control and safety systems. The structure of a security failure is illustrated in Figure 3.11. A threat, a threat actor, and a vulnerability are required “inputs” for a security failure. The threat actor uses a threat to attack the system, and the threat inspires the threat actor. The attack can only be successful if the system has one or more vulnerabilities. A security failure is not a random event, but the consequence of a deliberate action made by the threat actor. To reduce the likelihood of security failures, vulnerabilities should be identified and removed during system design.
+Threat
+Vulnerability
+Threat actor
+Item fault
+State Security failure
+Exploits a vulnerability
+Forced event
+Leads to
+&
+Figure 3.11 The structure of a security failure.
+Additional Types of Failures
+When an item fails, the failure is often claimed to be caused by the control of the item, the input/output to/from the item, or misuse of the item. These causes are usually outside the boundary of the item and not something the manufacturer of the item can be responsible for.
+Control failures. A control failure is an item failure caused by an improper control signal or noise, that is, due to factors outside the boundary of the item. A repair action may or may not be required to return the item to a functioning state. Failures caused by inadequate, or not followed operating procedures may also be classified as control failures. Input/output failures. An input/output failure is a failure caused by inadequate or lacking item inputs or outputs, that is, due to factors outside the boundary of the item. For a washing machine, the washing service is stopped due to inadequate or lacking supply of electricity, water, or detergent, or due to inadequacies of the drainage system. Input/output failures will stop the service provided by the item but will usually not leave the item in a failed state. The item may not need any repair after an input/output failure. Input/output failures tell very little about the reliability of the item as such. Misuse/mishandling failure. A misuse/mishandling failure is a failure that occurs because the item is used for a purpose that it was not designed for, or is mishandled. The mishandling may be due to a human error or a deliberate action such as sabotage. Some laws and standards (e.g., EU-2006/42/EC, 2006) require that foreseeable misuse shall be considered and compensated for in the design and development of the item, and be covered in the operating context of the item.
+
+
+63
+Failure causes Failure mechanisms
+Figure 3.12 Failure causes and mechanisms. A failure mechanism is a specific type of failure cause.
+The categories of failures listed above are not fully mutually exclusive. Some control failures may, for example, also be due to systematic causes.
+Remark 3.2 (Functionally unavailable)
+The U.S. Nuclear Regulatory Commission (NRC) introduces the term functionally unavailable for an item that is capable of operation, but where the function normally provided by the item is unavailable due to lack of proper input, lack of support function from a source outside the component (i.e., motive power, actuation signal), maintenance, testing, the improper interference of a person, and so on. The NRC-term is seen to cover failures/faults of several of the categories above, most notably input/output and control failures. ◽
+Failures Named According to the Cause of Failure
+Failures are sometimes named according to (i) the main cause of the failure, such as corrosion failure, fatigue failure, aging failure, calibration failure, systematic failure, and so forth, (ii) the type of technology that fails, such as mechanical failure, electrical failure, interface failure, and software bug, and (iii) the life cycle phase in which the failure cause originates, such as design failure, manufacturing failure, and maintenance failure. When using this type of labeling, we should remember that the failure description does not tell how the failure is manifested, that is, which failure mode that occurs. The same failure mode may occur due to many different failure causes.
+3.6.3
+Failure Mechanisms
+A failure mechanism is a physical, chemical, logical, or other process or mechanism that may lead to failure. Examples of failure mechanisms include wear, corrosion, fatigue, hardening, swelling, pitting, and oxidation. Failure mechanisms are hence specific failure causes as shown in Figure 3.12. Each mechanism can have its root in different stages of the item’s life cycle. Wear can, for instance, be a result of wrong material specification (design failure), usage outside specification limits (misuse failure), poor maintenance, inadequate lubrication (mishandling failure), and so on. A failure mechanism may be seen as a process that leads to a failure cause.
+
+
+64
+3.6.4
+Software Faults
+An increasing number of item functions are being replaced by software-based functions and a fair proportion of item failures are caused by software bugs. IEV defines a software fault/bug as:
+Definition 3.7 (Software fault/bug)
+State of a software item that prevents it from performing as required (IEV 192-0402). ◽
+Combined with a particular demand or trigger, the software bug may lead to item failure. Such a failure is a systematic failure and is sometimes called a software failure (see Figure 3.10). If the trigger is a random event, the software failure is random. Software bugs are difficult to reveal and software development projects therefore include a detailed process for finding and correcting bugs. This process is called debugging.
+Software does not deteriorate and software bugs do not occur at random in the operational phase. They have been programmed into the software and remain until the software is modified. New software bugs are often introduced when new patches or new versions of the software are installed to remove known bugs. The same software failure occurs each time the same activation condition or trigger occurs. If relevant activating conditions or triggers do not occur, the software bug remains undetected. Installations of the same software may show very different frequencies of software failures, because the failure frequency is proportional to the frequency of the occurrence of activating conditions or triggers.
+3.6.5
+Failure Effects
+Failure effect is an undesired consequence of a failure mode. Failure effects may be categorized as:
+1) Injuries or damage to personnel or to the public 2) Damage to the environment 3) Damage to the system where the failure occurred 4) Material or financial loss 5) Interruptions of the system operation (e.g., loss of production, cancelled or delayed transport means, interruptions of electric or water supply, interruption of computer/telephone network service)
+A failure mode may lead to many different failure effects, on the item where the failure occurred, and on other items. Failure effects are classified as local effects, next higher effects, and end effects. These effects are illustrated in Example 3.13.
+Example 3.13 (Failure effects of brake pad failure)
+Consider a (total) wear-out failure of a brake pad on the left front wheel of a car. The local effect is that the braking effect on the left front wheel is strongly reduced and
+
+
+65
+that the brake disc may be damaged. The next higher effect is that the braking effect of the car is uneven and not adequate. The end effect is that the car cannot provide a safe drive and must be stopped. ◽
+A general picture of the relationship between cause and effect is that each failure mode can be caused by several different failure causes, leading to several different failure effects. To get a broader understanding of the relationship between these terms, the level of indenture being analyzed should be brought into account. This is shown in Figure 3.6. Figure 3.6 shows that a failure mode on the lowest level of indenture is one of the failure causes on the next higher level of indenture, and the failure effect on the lowest level equals the failure mode on the next higher level. The failure mode “leakage from sealing” for the seal component is, for example, one of the possible failure causes for the failure mode “internal leakage” for the pump, and the failure effect (on the next higher level) “internal leakage” resulting from “leakage from sealing” is the same as the failure mode “internal leakage” of the pump. Failure effects are often classified according to their criticality as discussed in Chapter 4.
+3.7 Failure/Fault Analysis
+A failure or fault analysis is a systematic investigation of a failure or a fault that has occurred, in order to identify the root causes of the failure/fault and to propose corrective actions needed to prevent future failures/faults of the same, or similar, types. This section gives an introduction to two commonly used failure/fault analysis techniques (i) cause and effect analysis and (ii) root cause analysis. Both techniques are primarily used to analyze real failures/faults that have occurred, but may also be used to analyze potential failures or faults.
+3.7.1
+Cause and Effect Analysis
+Cause and effect analyses are frequently used in quality engineering to identify and illustrate possible causes of quality problems. The same approach may also be used in reliability engineering to find the potential causes for system failures or faults. The cause and effect analysis is documented in a cause and effect diagram. The cause and effect diagram, also called Ishikawa diagram (Ishikawa, 1986), was developed in 1943 by the Japanese professor Kaoru Ishikawa (1915-1989). The diagram is used to identify and describe all the potential causes (or events) that may result in a specified failure. Causes are arranged in a tree structure that resembles the skeleton of a fish with the main causal categories drawn as bones attached to the spine of the fish. The cause and effect diagram is therefore also known as a fishbone
+
+
+66
+Car will not start
+Materials Methods Manpower
+Milieu Machines
+Lack of training
+Lack of servicing
+Battery cables corroded
+Engine overheated
+Battery dead
+Starter failed Too cold
+Out of fuel Not pressing
+accelerator
+Too humid
+Figure 3.13 Cause and effect diagram for the event “car will not start.”
+diagram. To construct a cause and effect diagram, we start with an item failure. The item failure is briefly described, enclosed in a box and placed at the right end of the diagram, as the “head of the fish.” The analysis is carried out by a team, using an idea-generating technique, such as brainstorming. Failure causes are suggested by the team and organized under headings such as
+1) Manpower 2) Methods 3) Materials 4) Machinery 5) Milieu (environment)
+This is a common classification for failure/fault analysis and is referred to as the 5M approach, but other categories may also be used. The main structure of a 5M cause and effect diagram is shown in Figure 3.13. When the team members agree that an adequate amount of detail has been provided under each major category, they analyze the diagram, and group the causes. An important part of this analysis is to eliminate irrelevant causes from the diagram and tidy it up. One should especially look for causes that appear in more than one category. For those items identified as the “most likely causes”, the team should reach consensus on listing those causes in priority order with the first cause being the “most likely cause.” Some cause and effect analyses also include an evaluation of how easy it is to verify each of the identified causes in the diagram. Three classes are sometimes used: (a) very easy, (b) somewhat easy, and (c) not easy. A final step to propose actions to rectify the identified causes, may or may not be included in the analysis. The cause and effects diagram cannot be used for quantitative analyses, but is generally considered to be an excellent aid for problem solving, and to illustrate the potential causes of an item failure/fault. Cause and effect analysis is also a recommended step in a more comprehensive root cause analysis (see below).
+
+
+67
+Example 3.14 (Car will not start)
+Consider a car that will not start after having been idle for a period. The causes suggested by the team are shown in the cause and effect diagram in Figure 3.14. A number of similar cause and event diagrams may be found on the Internet. ◽
+3.7.2
+Root Cause Analysis
+A root cause analysis may be defined as:
+Definition 3.8 (Root cause analysis)
+A systematic investigation of a failure or a fault to identify its likely root causes, such that they can be removed by design, process, or procedure changes. ◽
+The root cause analysis is reactive, starting with (i) a failure that has happened, or (ii) a potential failure that has been identified. The root cause analysis should continue until organizational factors have been identified, or until data are exhausted. Root cause analysis may be used to investigate a wide range of undesired events, not only failures and faults, but our description is delimited to failure/fault analysis. The main steps of a root cause (failure) analysis are:
+1) Clearly define the failure or fault. Explain clearly what went wrong. 2) Gather data/evidence. The evidence should provide answers to the following questions:
+• When did the failure occur? • Where did it occur? • What conditions were present prior to its occurrence? • What controls or barriers could have prevented its occurrence but did not? • What are the potential causes? (Make a preliminary list of likely causes). • Which actions can prevent recurrence?
+3) Ask why and identify the true root cause associated with the defined failure/fault. 4) Check the logic and eliminate items that are not causes. 5) Identify corrective action(s) that will prevent recurrence of the failure/fault – and that address both proximate and root causes. 6) Implement the corrective action(s). 7) Observe the corrective actions to ensure effectiveness. 8) If necessary, reexamine the root cause analysis.
+The root cause analysis is done by a team using idea generation techniques, such as brainstorming, and is often started by a cause and effect analysis (see above). To identify root causes, it is usually recommended to ask “why?" at least five times for each main cause identified. The five whys are illustrated in Figure 3.14. The root causes must be thoroughly understood before corrective actions are proposed. By correcting root causes it is hoped that the likelihood of failure recurrence is minimized.
+
+
+68
+Cause
+Root
+Cause Failure
+Why?
+Cause Why?
+Cause Why?
+Why? Cause Why?
+5 4 32 1
+Figure 3.14 Repeatedly asking why?
+Example 3.15 (Car will not start)
+Reconsider the car that will not start in Example 3.14. The following sequence of five questions and answers may illustrate the analysis process.
+1) Why will not the car start? Cause: The engine will not turn over. 2) Why will the engine not turn over? Cause: The battery is dead. 3) Why is the battery dead? Cause: The alternator is not functioning. 4) Why is the alternator not functioning? Cause: The belt is broken. 5) Why is the alternator belt broken? Cause: The belt was not replaced according to the manufacturer’s maintenance schedule.
+This example is strongly influenced by the presentation “Corrective action and root cause analysis” by David S. Korcal (found on the Internet). ◽
+Careful studies of failures that occur should add to our “lessons learned” and we therefore end this chapter optimistically by quoting s Henry Ford (1863-1947):
+Failure is the opportunity to begin again more intelligently.
+3.8 Problems
+3.1 Consider the exterior door of a family house. The door is locked/unlocked by using a standard key.
+(a) List all relevant functions of the door (including lock). (b) List all relevant failure modes of the door. (c) Classify the failure modes by using the classification system outlined in this chapter. (d) Do you consider it relevant to include misuse failures? If “yes,” provide examples.
+3.2 Consider a filter coffee maker/brewer that you are familiar with.
+(a) List all potential failure modes of the coffee brewer. (b) Identify potential causes of each failure mode. (c) Identify potential effects of each failure mode.
+
+
+69
+3.3 Identify and describe possible failure modes of a (domestic) refrigerator. 3.4 Assume that your mobile phone is “dead.” Illustrate the possible causes of this fault by a cause and effect diagram. 3.5 Consider a smoke detector used in a private home and list possible causes of systematic faults of this detector. 3.6 Explain the differences between the terms failure and fault. Illustrate you explanation by practical examples. 3.7 Consider a domestic washing machine.
+(a) Identify as many causes of potential failures as possible. (b) Define categories of failure causes. (c) Use these categories to classify the identified failure causes.
+3.8 Suggest a technical system that can be divided into several levels of indenture. If you cannot propose anything better, you may use a family car. Assume that a specific component failure mode occurs in the system and exemplify the relationships that are illustrated in Figure 3.6. 3.9 Reconsider the coffee maker in Problem 3.2. When you press the on/off switch, no coffee is supplied.
+(a) Analyze the “failure” by using a cause and effect diagram. (b) Analyze the same “failure” by a root cause analysis
+
+
+70
+
+
+71
+References
+Blache, K.M. and Shrivastava, A.B. (1994) Defining failure of manufacturing machinery and equipment, in Proceedings Annual Reliability and Maintainability Symposium, pp. 69–75.
+EU-2006/42/EC (2006) Council Directive
+2006/42/EC of 17 May 2006 on machinery, Official Journal of the European Union, L 157/24 (2006), Brussels. IEC 61508 (2010) Functional safety of electrical/electronic/programmable electronic safety-related systems. Parts 1-7,
+International standard, International Electrotechnical Commission, Geneva.
+Ishikawa, K. (1986) Guide to Quality Control, Asian Productivity Organization – Quality Resources, White Plains, NY. NASA (2002) Fault tree handbook with aerospace applications, Handbook, U.S. National Aeronautics and Space Administration, Washington, DC.
+Pearl, J. (2009) Causality: Models, Reasoning, and Inference, Cambridge University Press, Cambridge, UK, 2nd edn..
+
+
+72
+
+
+73
+4
+Qualitative System Reliability Analysis
+Several approaches are available for modeling and qualitative analysis of system reliability. Five commonly used approaches are presented: failure modes, effects, and criticality analysis, fault tree analysis, event tree analysis, reliability block diagrams, and Bayesian networks. The last four approaches produce a model suitable for quantitative system reliability analysis, a topic dealt with in Chapter 6.
+4.1 Introduction
+This chapter presents five different approaches/methods for qualitative system reliability analysis.
+1) Failure modes, effects, and criticality analysis (FMECA): This is a common approach to identify the potential failure modes of system components and subsystems, to identify the causes of each failure mode, and to study the effects these failure modes might have on the system. FMECA was developed as a tool for designers, but is frequently used as a basis for more detailed reliability analyses, and for maintenance planning. 2) Fault tree analysis: A fault tree illustrates all possible combinations of potential failures and events that may cause a specified system failure. Fault tree construction is a deductive approach where we start with the specified system failure and ask “what are the causes for this failure”? Failures and events are combined through logic gates in a binary approach. The fault tree may be evaluated quantitatively if we have access to probability estimates for the basic events. Quantitative fault tree analysis is discussed in Chapter 6. 3) Event tree analysis: Event tree analysis is an inductive method that starts with a system deviation and identifies how this deviation may develop. The possible events following the deviation will usually depend on the various barriers and safety functions that are designed into the system. Quantitative event tree analysis is discussed briefly in Chapter 6. 4) Reliability block diagrams: Reliability block diagrams (RBDs) were introduced
+
+
+74
+Fault or deviation
+Causes Consequences
+Deductive analysis
+Inductive analysis
+Look backward
+Look forward
+Figure 4.1 Deductive versus inductive analysis of a fault or deviation in the study object.
+in Section 2.8. In this chapter, the structure of the reliability block diagram is described mathematically by structure functions. Structure functions are used in the following chapters to calculate system reliability indices. Further quantitative RBD analysis is discussed in Chapter 6. 5) Bayesian networks (BN): A BN is a directed acyclic graph that can replace and extend traditional fault trees and event trees and accommodate causal dependencies between items. Quantitative BN analysis is discussed in Chapter 6.
+4.1.1
+Deductive Versus Inductive Analysis
+The methods in this chapter start with a defined fault or deviation in the study object. With this starting point, we may look backwards and try to identify the causes of the fault or deviation. This is done by a deductive analysis that backwardly deduces the causes of the fault or deviation. Alternatively, we may start with the same fault or deviation and look forward and try to figure out the potential consequences of the fault or deviation. This is done by an inductive analysis that forwardly induces the consequences. The two approaches are illustrated schematically in Figure 4.1. Some of the five methods listed above are deductive, others are inductive, and some have elements (∆) of both, as indicated in Table 4.1.
+Table 4.1 Deductive versus inductive methods.
+Model/method Deductive Inductive
+FMECA ∆ ∆ Fault tree analysis X Event tree analysis – X Reliability block diagrams X Bayesian networks X X
+4.2 FMEA / FMECA
+The first Failure mode and effects analysis (FMEA) guideline was published as early as 1949 (see Section ??) and FMEA is still the most commonly used method for
+
+
+75
+potential failure analysis. FMEA reviews components, assemblies, and subsystems to identify potential failure modes, their causes, and effects. For each component, the failure modes and their resulting effects on the rest of the system are recorded in a specific FMEA worksheet. There are numerous variants of such worksheets. A typical example is shown in Figure 4.4.
+An FMEA becomes a failure mode, effects, and criticality analysis (FMECA) if criticality or priority is assigned to each failure mode effect. In the following, we do not distinguish between FMEA and FMECA, and use the term FMECA for both. More detailed information on how to conduct FMECA may be found in several standards, such as IEC 60812; MIL-STD-1629A; SAE ARP 5580; SAE J1739.
+4.2.1
+Types of FMECA
+FMECAs come in many flavors, depending on the study object and in which phase of its life cycle the analysis is performed. The following four types are, for example, used in the automotive industry (SAE J1739, 2009):
+1) Concept FMECA analyzes new product concepts in the concept and early design phases. 2) Design FMECA analyzes products before they are released to production. 3) Machinery FMECA analyzes special machinery (equipment and tools) that allows for customized selection of component parts, machine structure, tooling, bearings, coolants, and so on. 4) Process FMECA analyzes manufacturing and assembly processes.
+Additional Variants of FMECA
+Several new variants of FMECA have been developed for specific purposes:
+• Interface FMECA analyzes potential problems related to the interfaces between components or subsystems. • Software FMECA identifies and prevents potential bugs in software (e.g., see Haapanen and Helminen, 2002). • FMEDA analyzes systems that have built-in diagnostic testing and is especially applied to safety-instrumented systems (e.g., see Goble and Brombacher, 1999). • FMVEA (failure modes, vulnerabilities, and effects analysis) identifies and prevents system vulnerabilities that may be exploited by threat actors (e.g., see Schmittner et al., 2014). • CyberFMECA has a similar purpose as FMVEA.
+A timeline of the development of FMECA and the additional variants listed above is shown in Figure 4.2.
+Hardware Versus Functional Approach
+Two main approaches may be chosen for FMECA of technical items. These are:
+
+
+76
+FMEA FMECA
+FMEDA
+S-FME(C)A
+CyberFMECA
+FMVEA
+Added criticality
+(1949)
+FMEA for software
+FMEA for cyber systems/vulnerability
+Added diagnostics
+Figure 4.2 Timeline of the development of FMECA variants (not in scale).
+Hardware FMECA is used to analyze existing systems and system concepts. The individual components on the lowest level in the system hierarchy are analyzed to identify potential failure modes, their causes and effects. When the components on the lowest level are analyzed, we move to the next upper level in the hierarchy, and so on. Hardware FMECA is said to be carried out as a bottom-up approach. Functional FMECA is mainly used in the early design phases of a system. The analysis starts with a top-level system function and we ask: How can this function conceivably fail, what could the causes be, and what could the consequences be? The same procedure is followed for each functional failure. Functional FMECA is said to be carried out as a top-down approach.
+The rest of this section is delimited to presenting hardware FMECA used for design analysis. Other applications are similar and the reader should be able to make the appropriate adjustments.
+4.2.2
+Objectives of FMECA
+The objectives of a hardware FMECA in the design phase are (IEEE Std. 352):
+1) Assist in selecting design alternatives with high reliability and high safety potential during the early design phase. 2) Ensure that all conceivable failure modes and their effects on operational success of the system have been considered. 3) List potential failures and identify the magnitude of their effects. 4) Develop early criteria for test planning and the design of the test and checkout systems. 5) Provide a basis for quantitative reliability and availability analyses. 6) Provide historical documentation for future reference to aid in analysis of field failures and consideration of design changes. 7) Provide input data for tradeoff studies. 8) Provide basis for establishing corrective action priorities.
+
+
+77
+What are the functions and performance standards for the item?
+How can the item fail to perform its function(s)?
+What can be done to prevent each failure?
+What are the causes for each failure?
+How can each failure be detected?
+In what way does each failure matter?
+What happens when each failure occurs?
+Figure 4.3 The mains steps of FMECA.
+Ref. no Function
+Operational mode
+Failure mode
+Failure cause or mechanism
+Detection of failure
+On the subsystem
+On the system function
+Failure rate
+Severity ranking
+Risk reducing measures Comments
+Description of unit Description of failure Effect of failure
+System:
+Ref. drawing no.:
+Performed by:
+Date: Page: of
+(1) (2) (3) (4) (5) (6) (7) (8) (9) (10) (11) (12)
+Figure 4.4 Example of an FMECA worksheet.
+9) Assist in the objective evaluation of design requirements related to redundancy, failure detection systems, fail-safe characteristics, and automatic and manual override.
+FMECA is mainly a qualitative analysis, and should be carried out by the designers during the design phase of a system. The purpose is to identify design areas where improvements are needed to meet reliability requirements. An updated FMECA is an important basis for design reviews and inspections, and also for maintenance planning.
+4.2.3
+FMECA Procedure
+FMECA does not require any advanced analytical skills, but the analysts need to be familiar with and understand the purpose of the study object, and the constraints under which it has to operate. FMECA is carried out as a sequence of seven main steps, as shown in Figure 4.3. The number and content of the steps depend on the application and the delimitations of the analysis. Further details for FMECA in the automobile industry may be found in Ford (2004). The various entries in the FMECA worksheet are best illustrated by going through a specific worksheet column by column. We use the FMECA worksheet in Figure 4.4 as an example.
+
+
+78
+Table 4.2 Occurrence rating (example).
+Frequent Once per month or more often Probable Once per year Occasional Once per 10 years Remote Once per 100 years Very unlikely Once per 1.000 years or more seldom
+1) Reference. The name/tag of the item or reference to a drawing is given in the first column. 2) Function. The function(s) of the item is (are) described in this column. 3) Operational mode. The item may have various operational modes, for example, running or standby. Operational modes for an airplane include, for example, taxi, take-off, climb, cruise, descent, approach, flare-out and roll. In applications where it is not relevant to distinguish between operational modes, this column may be omitted. 4) Failure mode. For each component’s function and operational mode all the failure modes are identified and recorded. Observe that the failure modes should be defined as nonfulfillment of the functional requirements of the functions specified in column 2. 5) Failure causes and mechanisms. The possible failure mechanisms (corrosion, erosion, fatigue, etc.) that may produce the identified failure modes, are recorded in this column. Other failure causes should also be recorded. To identify all potential failure causes, it may be useful to remember the interfaces shown in Figure 2.2. 6) Detection of failure. The way to detect each failure mode is then recorded. Options include alarms, testing, human perception, and so forth. The ability to detect a failure mode is sometimes rated.
+7) Effects on other components in the same subsystem. All the main effects of the identified failure modes on other components in the subsystem are recorded. 8) Effects on the function of the system. All the main effects of the identified failure mode on the function of the system are then recorded. The resulting operational status of the system after the failure may also be recorded, that is, whether the system is functioning or not, or is switched over to another operational mode.
+Remark 4.1 (Safety and availability)
+In some applications, it may be relevant to replace columns 7 and 8 by, for example, Effect on safety and Effect on availability. ◽
+9) Failure rate. Failure rates for each failure mode are then recorded. In many cases, it is more suitable to classify the failure rate in classes, such as shown in Table 4.2.
+Observe that the failure rate with respect to a failure mode might be different for the various operational modes. The failure mode “Leakage to the environment” for a
+
+
+79
+Table 4.3 Severity rating (example).
+Catastrophic Any failure that could result in deaths or injuries or prevent performance of the intended mission.
+Critical Any failure that will degrade the system beyond acceptable limits and create a safety hazard (cause death or injury if corrective action is not immediately taken)
+Major Any failure that will degrade the system beyond acceptable limits but can be adequately counteracted or controlled by alternate means
+Minor Any failure that does not degrade the overall performance beyond acceptable limits – one of the nuisance variety
+Failure rate
+Frequent
+Probable
+Occasional
+Remote
+Very unlikely
+Minor Major Critical Catastrophic
+Severity group
+(x)
+(x)
+(x)
+(x)
+Figure 4.5 Risk matrix of the different failure modes.
+valve may, as an example, be more likely when the valve is closed and pressurized, than when the valve is open. 10) Severity. The severity of a failure mode is the potential consequence of the failure, determined by the degree of injury, property damage, or system damage that could ultimately occur. The ranking categories in Table 4.3 are sometimes used. 11) Risk reduction measures. Possible actions to correct the failure and restore the function or prevent serious consequences, are recorded. Actions that are likely to reduce the frequency of the failure modes may also be recorded. 12) Comments. This column may be used to record pertinent information not included in the other columns.
+By combining the failure rate (column 9) and the severity (column 10), the criticality of the different failure modes may be ranked. This ranking is shown in Figure 4.5 as a risk matrix. In this example, the failure rate is classified into five classes and the severity is classified into four classes. The most critical failure modes are represented by (x) in the upper right corner of the risk matrix, whereas the least critical failure modes get (x) in the lower left corner of the risk matrix. In practical analyses, (x) is replaced by an abbreviated indicator for the actual failure mode.
+
+
+80
+Risk Priority Number
+In some application areas, for example in the automobile industry, it is common to present the “risk” related to a failure mode as a risk priority number (RPN). The RPN is calculated on the as the product of the severity (S), occurrence (O), and detection (D) ratings.
+RPN = S × O × D (4.1)
+The ratings are given as:
+Severity, S. The severity rating is a numerical value, subjectively chosen as an integer between 1 and 10, that assesses how severe the customer perceives the effect of the failure. Occurrence rate, O. The occurrence rating is a numerical value, subjectively chosen as an integer between 1 and 10, that estimates the probability that the failure mode will occur during the lifetime of the item. Detection, D. The detection rating is a numerical value, subjectively chosen as an integer between 1 and 10, that assesses the effectiveness of the controls to prevent or detect the the failure before the failure reaches the customer.
+The RPN, as such, does not have any specific meaning, but the RPN (between 1 and 1000) may be used to rank the concerns in the design. In many applications, however, the severity should have higher priority than the RPN. RPNs are used only to prioritize potential design weaknesses for consideration of possible design actions to reduce criticality and/or to make the design less sensitive to manufacturing variation.
+4.2.4
+Applications
+Many industries require FMECA to be integrated in the design process of technical systems, and that FMECA worksheets be part of the system documentation. This is, for example, a common practice for suppliers to the defense, the aerospace, and the automobile industry. The same requirements are becoming more and more usual within the offshore oil and gas industry. FMECA gives the highest value when carried out during the design phase of a system. The main objective of the analysis is to reveal weaknesses and potential failures at an early stage, to enable the designer to incorporate corrections and barriers in the design. The results from FMECA may also be useful during modifications of the system and for maintenance planning. Designers are trained to think in terms of functions; how to design the system to meet specified functional requirements. Through FMECA, designers are also “forced” to consider potential failures. By early awareness of potential failures, many failures may be designed-out of the system. Many industries are introducing a reliability-centered maintenance (RCM) program for maintenance planning. FMECA is one of the basic tools of RCM and is further discussed in Chapter 9. Because all failure modes, failure mechanisms, and symptoms are documented in FMECA, this provides valuable information as a basis for fault diagnostic procedures
+
+
+81
+and for a repairman’s checklists. FMECA is very effective when applied to a system where system failures most likely are the results of single component failures. During the analysis, each failure is considered individually as an independent occurrence with no relation to other failures in the system. FMECA is not suitable for analysis of systems with a fair degree of redundancy. For such systems, fault tree analysis is a much better alternative. An introduction to fault tree analysis is given in Section 4.3. In addition, FMECA is not well suited for analyzing systems where common cause failures are considered to be a significant problem. Common cause failures are discussed in Chapter 8. A limitation of FMECA is further the inadequate attention generally given to human errors. This is mainly due to the concentration on hardware failures. Perhaps the worst drawback is that all component failures are examined and documented, including those that do not have any significant consequences. For large systems, especially systems with a high degree of redundancy, the amount of unnecessary documentation work is a major disadvantage.
+4.3 Fault Tree Analysis
+Fault tree analysis (FTA) was introduced in 1962 at Bell Telephone Laboratories (see Section ??). Today, FTA is one of the most commonly used techniques for risk and reliability studies. In particular, FTA has been used with success to analyze safety systems in nuclear power stations, such as in the Reactor Safety Study (NUREG75/014, 1975). A fault tree is a logic diagram that displays the relationships between a potential system fault and the causes of this fault. In risk analysis, the system fault is often a potential accident. The causes may be environmental conditions, human errors, normal events (events that are expected to occur during the life span of the system), and specific component failures. Observe that the potential system fault may, or may not, occur some time in the future. FTA may be qualitative, quantitative or both, depending on the objectives of the analysis. Possible results from the analysis may, for example, be:
+• A listing of the possible combinations of environmental factors, human errors, normal events, and component faults that may result in the system fault. • The probability that the system fault will occur at a specified time or during a specified time interval.
+Only qualitative FTA is covered in this chapter. Quantitative FTA is discussed in Chapter 6. FTA is thoroughly described in standards and guidelines (e.g., see IEC 61025, 2006; NUREG-0492, 1981; NASA, 2002).
+
+
+82
+TOP
+a1,1 a3,1 a3,2
+a1,2
+a2
+A1
+A1,1 A3,1 A3,2
+A1,2
+A2 A3
+TOP event
+Logic OR-gate
+Logic OR-gate Logic AND-gate
+Intermediate event
+Basic events
+Basic event
+Labels
+Figure 4.6 A simple fault tree.
+4.3.1
+Fault Tree Symbols and Elements
+FTA is a deductive method, based on a top-down approach starting with a specified system fault. The system fault is called the TOP event of the fault tree. The analysis is started by assuming that the potential system fault has occurred (i.e., exists). The immediate causal events A1, A2, ... that, either alone or in combination, lead to the TOP event are identified and connected to the TOP event through a logic gate. Next, we identify all potential causal events Ai,1, Ai,2, ... that may lead to event Ai for i = 1, 2, .... These events are connected to event Ai through a logic gate. This procedure is continued deductively (i.e., backwards in the causal chain) until we reach a suitable level of detail. The events on the lowest level are called the basic events of the fault tree. Basic events may include component faults, human errors, environmental conditions, and normal events. A simple fault tree is shown in Figure 4.6. The main symbols used in the fault tree are shown and explained in Table 4.4. The fault tree in Figure 4.6 shows that the TOP event occurs when one of the events A1, A2, or A3 occurs. These three events are connected to the TOP event by a logic or-gate. We may also read this as “TOP event occurs if event A1 occurs, or event A2 occurs, or event A3 occurs.” Event A1 and event A3 are called intermediate events because they are developed further by logic gates. Event A2 is a basic event. The symbol in the circle is a label that uniquely identifies the basic event in the fault tree. Event A1 is connected to its causal events A1,1 and A1,2 by an or-gate and we say that “event A1 occurs if event A1,1 or event A1,2 occurs.” Event A3 is connected to its causes, event A3,1 and event A3,2 by an and-gate and we say that “event A3 occurs if event A3,1 and event A3,2 occur at the same time.”
+Remark 4.2 (Terminology)
+Observe that the method is called fault tree analysis and not failure tree analysis, and recall from Chapter 3 that fault is a state whereas failure is an event. Also observe that the fault tree construction is started by a potential (i.e., future) system failure that we imagine has occurred. This means that we start with a system fault and we
+
+
+83
+ask “what could the causes be for this state to exist?” The fault state exists, so the causes are also states, even though the term event is used to describe them (TOP event, intermediate event, and basic event) ◽
+FTA is a binary analysis. All events are assumed either to occur, or not to occur; there are no intermediate states. In the basic version, the fault tree is static and cannot accommodate any dynamic effects. The graphical layouts of the fault tree symbols depend on what standard we follow. Table 4.4 shows the most commonly used fault tree symbols together with a brief description. A number of more advanced fault tree symbols are available, but are not covered in this book. A thorough description may be found in (e.g., see NUREG0492, 1981; NASA, 2002). Observe that the fault tree symbols used in IEC 61025 (2006) are different from the symbols in Table 4.4, but the meaning of the corresponding symbols are the same. An FTA is normally carried out in five steps:1)
+1) Definition of the problem and the boundary conditions 2) Construction of the fault tree 3) Identification of minimal cut and/or path sets 4) Qualitative analysis of the fault tree 5) Quantitative analysis of the fault tree
+Steps 1–4 are covered in this section and step 5 is discussed in Chapter 6.
+4.3.2
+Definition of the Problem and the Boundary Conditions
+The first activity of FTA has two substeps:
+• Definition of the TOP event to be analyzed. • Definition of the boundary conditions for the analysis (see also Chapter 2).
+It is important that the TOP event is given a clear and unambiguous definition. If not, the analysis is often of limited value. As an example, the event description “system breakdown” is far too general and vague. The description of the TOP event should always give answer to the questions what, where and when:
+What: Describes the potential system failure that is to be studied, together with a clear system failure mode description. Where: Describes where the system failure mode may occur. When: Describes when the system failure occurs (e.g., during normal operation).
+To get a consistent analysis, it is important that the boundary conditions for the analysis are carefully defined. General boundary conditions were discussed in Chapter 2. Specific boundary conditions for the fault tree construction include:
+1) The procedure described below is influenced by CCPS (2008).
+
+
+84
+Table 4.4 Fault tree symbols.
+Symbol Description
+Logic gates or-gate
+A
+E1 E2 E3
+The or-gate indicates that the output event A occurs if any of the input events Ei occur
+and-gate
+A
+E1 E2 E3
+The and-gate indicates that the output event A occurs only when all the input events Ei occur at the same time
+Input events Basic event
+The Basic event represents a basic equipment failure that requires no further development of failure causes
+Undeveloped event The Undeveloped event represents an event that is not examined further because information is unavailable or because its consequence is insignificant Description Comment rectangle
+The Comment rectangle is for supplementary information
+Transfer symbols Transfer-out The Transfer-out symbol indicates that the fault tree is developed further at the occurrence of the corresponding Transfer-in symbol Transfer-in

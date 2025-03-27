@@ -1,0 +1,315 @@
+A Methodology for Architecting Collaborative Product Service System of Systems
+Andreas M. Hein Laboratoire Genie Industriel, CentraleSupélec, Université Paris-Saclay Gif-sur-Yvette, France Andreas-makoto.hein@centralesupelec.fr
+Yann Chazal Renault SA France yann.chazal@renault.com
+Samuel Boutin Knowledge Inside Versailles, France sbo@k-inside.com
+Marija Jankovic Laboratoire Genie Industriel, CentraleSupélec, Université Paris-Saclay Gif-sur-Yvette, France Marija.jankovic@centralesupelec.fr
+Abstract—Product service systems (PSS) can be understood as an innovation / business strategy that includes a set of products and services that are realized by an actor network. More recently, PSS that comprise System of Systems (SoS) have been of increasing interest, notably in the transportation (autonomous vehicle infrastructures, multi-modal transportation) and energy sector (smart grids). Architecting such PSS-SoS goes beyond classic SoS engineering, as they are often driven by new technology, without an a priori client and actor network, and thus, a much larger number of potential architectures. However, it seems that neither the existing PSS nor SoS literature provides solutions to how to architect such PSS. This paper presents a methodology for architecting PSS-SoS that are driven by technological innovation. The objective is to design PSS-SoS architectures together with their value proposition and business model from an initial technology impact assessment. For this purpose, we adapt approaches from the strategic management, business modeling, PSS and SoS architecting literature. We illustrate the methodology by applying it to the case of an automobile PSS.
+Keywords—PSS, system of systems, system architecture, collaborative services, service engineering, business model, value proposition
+I. INTRODUCTION
+Classic system of systems (SoS) engineering in a defense and aerospace context is typically characterized by a governmental agency that defines the capabilities of the system of systems (see for example [1]–[4]). The main task of engineering the system of systems then consists of how these capabilities can be implemented by a (often given) set of actors and (existing or new) systems [3], [5]–[10]. More recently, systems of systems engineering has extended to areas such as transportation [10], [11] and energy [12] that have different characteristics than classic system of systems: There is no clear client a priori who sets the desired capabilities and
+the actors that participate in the system of systems are not yet identified. In addition, these actors have not collaborated with each other before. The challenge from a systems of systems engineering perspective is that this situation vastly increases the number of SoS alternatives. Furthermore, proper incentive structures and value propositions need to be in place for encouraging actors to participate in the SoS. The existing SoS literature which deals with this type of SoS rather deals with an already given architecture or a predefined design space. For example, [13]–[15] analyze the resilience of an existing energy infrastructure architecture. [16] and [10] focus on the analysis of SoS transportation architectures, where the architecture alternatives are already given. Hence, the design of the SoS architecture itself does not seem to be sufficiently addressed, with a few exceptions [7], [17], [18]. Apart from the SoS domain, a distinct stream of literature deals with systems that consist of a set of product(s) and services, realized by a network of actors and a supporting infrastructure [19]–[22]. Such systems are called product service systems (PSS). More precisely, a PSS is a “system of products, services, networks of ‘players’ and supporting infrastructure that continuously strives to be competitive, satisfy customer needs and have a lower environmental impact than traditional business models.” [23] PSS can be understood as an element of an innovation / business strategy that aims at tapping new revenue streams from existing markets and delivering environmentally sustainable solutions [21], [24], [20]. Although a few publications have pointed at the obvious connection between PSS and SoS [25], [26], neither the PSS nor the SoS literature seems to have dealt in depth with PSSSoS. Hein et al. [19] define a PSS-SoS as “a set of products, services, infrastructures, and networks where its constituent elements exhibit operational and managerial independence”, referring to the two key characteristics of SoS of operational and managerial independence in Maier [27]. Real-world PSS
+978-1-5386-4876-6/2018/$31.00 c©2018 IEEE
+53
+
+
+SoS usually have some of the following characteristics, as presented in [19] and as illustrated in Figure 1: • Multiple actors providing lower-level services that are combined into a higher-level service via collaborations. • Collaboration between actors from industries that have no track-record of collaborating becomes important, for example, the collaboration between car manufacturers and energy suppliers in vehicle-to-grid applications [28]–[30]. • Addressing societal concerns such as pollution reduction, quality of life, and job creation become crucial for getting approval from public stakeholders. • Governance and management of the combined service and physical products becomes a key issue, e.g. one central actor has oversight vs. no single actor is responsible for the overall system, which is a typical topic in the SoS literature [31]. • New technologies often trigger its development such as autonomous driving, electric vehicles, and smart grid [28]–[30].
+Such PSS-SoS have the potential to address some of society’s most pressing challenges, but little is known about how to design them. Neither the existing PSS literature nor the existing SoS literature seems to provide sufficient guidance on designing PSS SoS [19].
+Figure 1: Collaborative product service system
+In the following, we propose a methodology for architecting PSS-SoS at an early stage, focusing on SoS that are, according to Maier’s SoS taxonomy [27] directed or collaborative, and are technology innovation-driven (technology push) [32].
+II. A METHODOLOGY FOR ARCHITECTING COLLABORATIVE
+PSS
+This research was conducted in the context of the French automotive company Renault, in an effort to systematize the development of PSS-SoS. For simplicity, we abbreviate PSSSoS by PSS in the following.
+A. Methodology Requirements
+In order to understand the requirements of a PSS
+architecting approach at Renault, the authors have engaged in
+discussions and collaborations with different internal
+stakeholders (R&D, product, service, business). These
+interactions took place in regular workshops for developing
+PSS concepts, team meetings, outreach meetings, and one-to
+one conversations during a period of one year (2017-2018).
+From these interactions, a set of requirements for a PSS
+engineering methodology were elicited:
+• Support the identification of potential impact of the
+PSS on societal factors,
+• Support the exploration of different PSS concepts
+with regards to business development objectives,
+• Support the identification of potential collaborations,
+• Support the identification of value propositions (pains
+and gains / pain relievers and gain creators),
+• Support the development of a business model canvas
+like representation around a PSS concept, and,
+• Support the development of PSS architectures that
+provide sufficient detail for the technical domain for
+deriving high-level requirements.
+B. Methodology Process Steps, Inputs and Outputs
+The principal objective of the methodology is to derive PSS
+architectures together with their value propositions and
+business models. The focus is on technologies, which are
+expected to have a large societal impact. The main inputs and
+outputs of the methodology are shown in Figure 2. As inputs,
+the technology under consideration is required. A technology is
+understood as a combination of an artifact and its underlying
+competencies that allow for its development, production, and
+operation as defined in the technology maturity literature [33]
+[35]. In addition, the field of interest is a set of domains such as
+an area of economic activity (e.g. energy, insurance) for which
+the potential impact of the technology is of interest. The
+outputs address the previously defined requirements. The PSS
+architecture provides a starting point for stakeholders in the
+technical domain refine the architecture. Stakeholders from the
+business domain are mainly interested in the resulting value
+proposition and business model.
+54
+
+
+Figure 2: Methodology inputs and outputs
+The methodology comprises two main steps, as shown in
+Figure 3. The first step essentially addresses the technology
+push case where the impact of a set of technologies on specific
+domains are assessed. This step was introduced, as we
+observed that technology push seems to be a common mode in
+the Renault context and the automotive industry in general. The
+main question in the technology push case is, what potential impact the technology has on its context and how adequate PSS
+value propositions and PSS concepts can be developed that use
+the technology.
+In the second step, starting from the outputs of the first step
+(PSS stakeholder network, PSS concept and value proposition
+alternatives), the PSS architecture and PSS business model
+alternatives are developed. The rationale behind the second
+step is to provide system architects with a sufficiently detailed
+description of the PSS architecture that allows them to start
+working on their specific product or service architecture.
+Analogously, the resulting business model intends to provide
+business developers with a sufficient description to start
+working on a more detailed description of the business model.
+Figure 3: Main methodology steps
+C. Collaborative PSS concept and Value Proposition Development
+The main purpose of this step is to generate alternatives for
+PSS concepts and value propositions starting from a
+technology and fields of interest, as shown in Figure 4.
+Figure 4: PSS concept and value proposition development step
+It starts with the elicitation of potential impacts of a
+technology on one or more fields of interest, as shown in
+Figure 5. The technology and fields of interest can stay generic
+and little detail is required. For example, artificial intelligence
+could impact the field of logistics, medicine etc. Autonomous
+driving can impact urban areas, transportation, and energy.
+However, it is often difficult to articulate the impact on a field
+of interest, as technologies at low maturity levels lack
+sufficient detail to relate them to impacts. Two concepts are
+introduced to support impact identification. First, we introduce
+capabilities, i.e. what the technology allows for. For example,
+autonomous driving can lead to the capabilities of driver-less
+operation of a vehicle in all conditions. For artificial
+intelligence, a capability could be image recognition or
+automated translation.
+Figure 5: Technology impact assessment
+Second, each field of interest contains key performance
+indicators. These are indicators that are of general concern for
+various stakeholders in a field of interest. For example, within
+the field of interest “energy”, energy price is a key indicator
+among others. For transportation, availability, cost, and
+reliability are important indicators. The reason we introduce
+key performance indicators is that it is often easier to identify technology impacts with respect to a key performance
+55
+
+
+indicator. For example, autonomous driving could lead to a
+decrease in transportation cost, as no driver is required. Once a
+potential impact has been identified, it is documented,
+including the rationale why this impact is expected, e.g.
+transportation cost decrease due to omission of a driver.
+Furthermore, as is common for scenario analysis and
+strategic forecasting, time horizons for the field of interest need
+to be defined. This is particularly important with regards to the
+technology under evaluation. For example, we can look at the
+field of interest of transportation in 2025, when level 5
+autonomous driving is expected to exist.
+This helps to prioritize the potential impacts, not only in terms
+of the importance of the impact, but also in terms of the
+associated uncertainties. These prioritized potential impacts are
+used in the next step.
+Although technology impacts have been identified in the
+previous step, it is still unclear how specific stakeholders
+perceive these impacts. Hence, in the second step, stakeholder
+pains and gains with respect to the potential impacts are
+identified. We draw from the business model literature and
+adapt the notion of “pains” and “gains”, as used in Osterwalder
+et al. [36] to express pains and gains of a stakeholder with
+respect to a technology impact. As the autonomous driving
+example shows, the potential impact on a key performance
+indicator comes without a value judgement. Autonomous
+driving has the potential to decrease transportation cost.
+However, this potential impact will be perceived very
+differently by different stakeholders. For example, professional
+drivers are likely to oppose transportation cost reduction, in
+case their salary diminishes. On the other hand, passengers are
+likely to welcome a decrease in transportation cost. Figure 6
+shows the pains and gains for two autonomous driving impacts
+on the domain of transportation.
+Figure 6: Sample stakeholder pains and gains for an autonomous driving case
+Once the pains and gains of stakeholders have been
+identified, they are used for developing the PSS concept and
+value proposition. For this purpose, we adapt the value
+proposition design from Osterwalder et al. [36]. They introduce
+a representation of value proposition which is based on a
+customer segment’s pains and gains on the one hand and pain
+relievers and gain creators associated with a set of products and
+services on the other. The task of the value proposition
+designer is to find adequate matches between the pain relievers
+and gain creators and the pains and gains.
+As collaborative PSSs involve a network of actors, value
+proposition from Osterwalder et al. needs to be adapted. First,
+we replace customer by stakeholder, as the notion of customer
+would be too narrow in the case of collaborative PSSs.
+Furthermore, we do not only consider pains and gains of
+stakeholders with respect to their activities but we also take
+pains and gains with respect to the technology under
+consideration into account. In Figure 7, the technology impact
+along with the pain relievers / gain creators to clients, shop
+owners, and the local government are shown. As in
+Osterwalder et al.’s value proposition design [36], the left hand
+side consists of the products and services. The products and
+services are not limited to those products and services that are
+based on the technology under consideration. Here,
+autonomous driving is infused into a vehicle, resulting in a robo vehicle. In addition to the robo vehicle, the service of a
+contextualized advertisement feed is added. It takes
+advertisements from local shops and feeds them to passengers.
+The capability of this service is added to the “capabilities” box
+and supports the “increased sales” gain creator for shops. The
+set of products and services along with their capabilities are
+called “PSS concept”. The notion of “concept” in this context
+has been borrowed from [37], where a concept comprises a
+system or product, eventually its components, along with its
+main function.
+Figure 7: PSS value proposition
+This adapted value proposition representation allows for a
+systematic reasoning over PSS alternatives and how they
+impact stakeholders. Note that at this point only the capabilities
+that generate / support pain relievers and gain creators are
+considered. Furthermore, contributors to the PSS such as
+service providers are not represented. A more detailed
+description of the PSS that includes these elements is
+developed in the subsequent step.
+D. Collaborative PSS Business Model and Architecture Development
+In order to evaluate the feasibility of the PSS concept and
+value proposition, two additional steps performed: One with
+respect to business model development and the second with
+respect to the development of the PSS architecture. In the first
+step, the business model for the value proposition is developed,
+including key partners, activities, resources, sources of
+revenue, and costs. Based on the business model, the PSS
+56
+
+
+architecture is developed, where actors are linked to the
+products and services. The two steps are shown in Figure 8.
+Figure 8: PSS business model and architecture
+development step
+The business model is developed around the PSS value
+proposition, shown in Figure 7. The pain relievers and gain
+creators are directly adopted, together with the stakeholders.
+However, the business model canvas from [38] provides the
+possibility to display more elements that comprise a business
+model, as shown in Figure 9. We use the canvas, as it is well
+known in the business domain and provides a shared vocabulary that translates between the technical and business
+domain.
+Figure 9: Targeted advertisement and transportation
+PSS business model canvas
+First, for delivering the value propositions, certain key
+activities and key resources are required. In this case, the robo
+vehicle and advertisement service need to be operated.
+Furthermore, these activities require resources such as robo
+vehicles, contextual data, and a service platform. These
+activities and resources are provided by a set of stakeholders
+called key partners. For collaborative PSS, some of the stakeholders can be at the same time customers and partners,
+such as local shops. Contrary to the classic business model
+canvas, the canvas developed here is not from a specific
+organization’s perspective. It rather displays how a set of
+stakeholders provides activities and resources to support value
+propositions. It has therefore similarities with the RCOV
+framework from [39]. Finally, cost structure and revenue
+streams are identified such as the cost of transporting
+passengers, cost of data collection and analysis, and the
+revenues generated by the service via additional sales.
+The business model canvas provides important information
+for the subsequent architecture generation step, such as the
+underlying resources and the set of partners that contribute to
+the PSS. Figure 10 shows a sample PSS architecture which
+includes the key partners from the business model canvas and
+some of the key resources. In addition, the constituent services
+of the PSS are defined. For example, for realizing the value
+proposition “Price reduction for clients using service”, some
+form of traceability is required, in order to verify that
+customers have actually used the robo vehicle service. The constituent service “customer tracing” is based on a customer
+card. Of course, alternatives exist. Furthermore, a key resource
+is the service platform that allows for exchanging data between
+resources used in the services. In addition, the contribution of
+key partners to the constituent services and products / resources
+are explicitly defined. Collaborating actors are shown at the
+bottom of the figure, where the ad service provider and the
+robo vehicle service operator jointly operate the service
+platform.
+Figure 10: Targeted advertisement and transportation
+PSS architecture
+Using the PSS architecture description, a first architecture
+specification is provided to system architects who are working
+on the architecture of a constituent product or service. For
+example, the definition of the service platform in Figure 10
+specifies that it will be used for running three services and it is developed and / or operated in collaboration with the
+advertisement service provider and the robo vehicle service
+operator. It is easy to imagine alternatives to this constellation,
+e.g. the services are operated on different platforms. This PSS
+architecture description addresses the gaps of existing PSS and
+SoS approaches for representing PSS-SoS architectures as
+described in [19]: different service / product configurations,
+actor / stakeholder collaborations, supporting networks and
+infrastructure, and roles of actors (ownership, operation).
+57
+
+
+III. CONCLUSIONS
+This paper presents an approach that is currently under
+development at Renault focusing on architecting product
+service systems (PSS) that comprise of a system of systems and
+one or more new technologies that may trigger its
+development. The basic steps of the methodology are shown,
+using a running example of a service based on autonomous
+vehicles. Starting from the autonomous driving technology, its
+impact on the field of local commerce, the value proposition,
+business model, and PSS architecture are developed. The
+technology impact assessment and PSS concept development
+have so far been applied to several PSS projects at Renault.
+For future work, the methodology needs to be further
+matured via its application to industry case studies. For this
+purpose, the methodology is going to be implemented in the
+arKItectTM tool. In addition, a promising area of future work is
+the representation of the value network that forms the basis for
+collaborations between actors.
+ACKNOWLEDGEMENTS
+The authors would like to thank Isabelle Paulin-Jardel
+(Renault), Christophe Dominiak (Renault), Richard Pankanin
+(Renault), Alain Dauron (Renault), the members of the
+CT3SAI working group of the French INCOSE Chapter AFIS,
+Philippe Toussaint and Jerome Vettese of Knowledge Inside.
+REFERENCES
+[1] E. Silva, T. Batista, F. O.-S. of S. Engineering, and undefined 2015, “A mission-oriented approach for designing system-of-systems,” ieeexplore.ieee.org.
+[2] W. Owens, “The emerging US system-of-systems,” 1996. [3] J. Boardman and B. Sauser, “System of Systems-the meaning of of,” in IEEE/SMC International Conference on System of Systems Engineering, 2006, p. 6.
+[4] R. K. Garrett, S. Anderson, N. T. Baron, and J. D. Moreland, “Managing the interstitials, a System of Systems framework suited for the Ballistic Missile Defense System,” Systems Engineering, vol. 14, no. 1, pp. 87–109, Mar. 2011. [5] M. DiMario, J. Boardman, B. S.-I. S. Journal, and undefined 2009, “System of systems collaborative formation,” ieeexplore.ieee.org. [6] W. Baldwin, B. Sauser, and J. Boardman, “Revisiting ‘The Meaning of Of’ as a Theory for Collaborative System of Systems,” IEEE Systems Journal, vol. 11, no. 4, pp. 2215–2226, 2015. [7] D. Chattopadhyay, A. M. Ross, and D. H. Rhodes, “Demonstration of system of systems multi-attribute tradespace exploration on a multi-concept surveillance architecture,” in 7th Conference on Systems Engineering Research, 2009.
+[8] R. Valerdi, A. Ross, D. R.- CrossTalk, and undefined 2007, “A framework for evolving system of systems engineering,” arizona.pure.elsevier.com.
+[9] D. H. Rhodes, A. M. Ross, and D. J. Nightingale, “Architecting the system of systems enterprise: Enabling constructs and methods from the field of engineering systems,” in 3rd Annual IEEE Systems Conference, 2009, pp. 190–195. [10] N. B. Shah, J. M. Sussman, D. H. Rhodes, and D. E. Hastings, “Influence strategies for systems of systems,” in 7th International Conference on System of Systems Engineering (SoSE), 2012, pp. 471–478. [11] D. DeLaurentis, “Understanding transportation as a system-of
+systems design problem,” 43rd AIAA Aerospace Sciences Meeting and Exhibit, 2005.
+[12] M. S. Mahmoud, F. M. A.L.-Sunni, and M. Saif Ur Rahman, “Review of microgrid architectures – a system of systems perspective,” IET Renewable Power Generation, vol. 9, no. 8, pp.
+1064–1078, Nov. 2015. [13] S. Thacker, R. Pant, and J. W. Hall, “System-of-systems formulation and disruption analysis for multi-scale critical national infrastructures,” Reliability Engineering & System Safety, vol. 167, pp. 30–41, 2017. [14] A. Kargarian, Y. Fu, and H. Wu, “Chance-constrained system of systems based operation of power systems,” IEEE Transactions on Power Systems, vol. 31, no. 5, pp. 3404–3413, 2016. [15] I. Eusgeld, C. Nan, and S. Dietz, “‘System-of-systems’ approach for interdependent critical infrastructures,” Reliability Engineering & System Safety, vol. 96, no. 6, p. 6, 2011. [16] D. DeLaurentis, “Understanding Transportation as a System-ofSystems Design Problem,” in 43rd AIAA Aerospace Sciences Meeting and Exhibit, 2005.
+[17] D. Chattopadhyay, A. M. Ross, and D. H. Rhodes, “Combining Attributes for Systems of Systems in Multi-Attribute Tradespace Exploration,” INSIGHT, vol. 13, no. 2, pp. 31–38, Jul. 2010. [18] D. Chattopadhyay, A. M. Ross, and D. H. Rhodes, “A framework for tradespace exploration of systems of systems,” in 6th Conference on Systems Engineering Research, 2008.
+[19] A. M. Hein, B. Poulain, M. Jankovic, Y. Chazal, and S. Fakhfakh, “Product Service System Design in a System of Systems Context: A Literature Survey,” in 15th International Design Conference Design 2018, 2018. [20] V. K. Velamuri, A.-K. Neyer, and K. M. Möslein, “Hybrid value creation: a systematic review of an evolving research area,” Journal für Betriebswirtschaft, vol. 61, no. 1, pp. 3–35, Mar. 2011. [21] R. Haase, D. Pigosso, and T. McAloone, “Product/Service-System Origins and Trajectories: A Systematic Literature Review of PSS Definitions and their Characteristics,” Procedia CIRP, 2017. [22] F. Mahut, J. Daaboul, M. Bricogne, and B. Eynard, “ProductService Systems for servitization of the automotive industry: a literature review,” International Journal of Production Research, vol. 55, no. 7, pp. 2102–2120, Apr. 2017. [23] M. J. Goedkoop, C. J. G. van Halen, H. R. M. te Riele, and P. J. M. Rommens, “Product Service systems, Ecological and Economic Basics,” 1999. [24] A. Tukker, “Eight types of product–service system: eight ways to sustainability? Experiences from SusProNet,” Business strategy and the environment, 2004.
+[25] A. Bertoni and M. Bertoni, “Assessing the value of product service systems alternatives: A conceptual framework,” Design Principles and Practices, vol. 5, no. 5, pp. 655–672, 2011. [26] O. Bankole, R. Roy, and E. Shehab, “Product–service system affordability in defence and aerospace industries: state-of-the-art and current industrial practice,” International Journal of, 2012. [27] M. W. Maier, “Architecting Principles for Systems-of-Systems,” INCOSE International Symposium, vol. 6, no. 1, pp. 565–573, Jul. 1996. [28] W. Kempton, J. T.-J. of power sources, and undefined 2005, “Vehicle-to-grid power implementation: From stabilizing the grid to supporting large-scale renewable energy,” Elsevier. [29] W. Kempton, J. T.-J. of power sources, and undefined 2005, “Vehicle-to-grid power fundamentals: Calculating capacity and net revenue,” Elsevier. [30] C. Guille, G. G.-E. policy, and undefined 2009, “A conceptual framework for the vehicle-to-grid (V2G) implementation,” Elsevier. [31] M. Maier, “Architecting principles for systems‐of‐systems,” INCOSE International Symposium, 1996.
+[32] S. Cook, J. P.-S. of S. Engineering, and undefined 2016, “Typology dimensions for classifying SoSE problem spaces,” ieeexplore.ieee.org.
+[33] J. Mankins, “Technology readiness levels,” Advanced Concepts Office Office of Space Access and Technology NASA, 1995. [34] ESA, Technology Readiness Levels Handbook for Space Applications. European Space Agency TEC-SHS, 2008. [35] A. Hein, “Heritage Technologies in Space Programs - Assessment Methodology and Statistical Analysis,” PhD thesis, Technical University of Munich, 2016. [36] A. Osterwalder, Y. Pigneur, G. Bernarda, and A. Smith, “Value proposition design: How to create products and services customers want,” 2014.
+58
+
+
+[37] E. Crawley, B. Cameron, and D. Selva, Systems Architecture:
+Strategy and Product Development for Complex Systems. Prentice Hall Press, 2015. [38] A. Osterwalder and Y. Pigneur, “Business model generation: a
+handbook for visionaries, game changers, and challengers,” 2010. [39] B. Demil and X. Lecocq, “Business model evolution: in search of dynamic consistency,” Long range planning, 2010.
+59
